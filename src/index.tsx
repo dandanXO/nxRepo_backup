@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./style.scss";
+import App from "./App";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -8,6 +8,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <React.StrictMode>
-        <div className="text-rose-50 bg-indigo-300">DLH-Frontend</div>        
+        <App/>
     </React.StrictMode>
 );
