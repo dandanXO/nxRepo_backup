@@ -1,1 +1,4 @@
 node_modules
+/task/openapi-typescript-codegen/generated/
+/task/openapi-typescript/generated/
+/.idea/
