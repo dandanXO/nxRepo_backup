@@ -6,15 +6,26 @@ const ListItemStyled = styled.div<propsStyles>`
     ${flexCreator("row", "space-between", "center")};
     width: 100%;
     margin: 5px;
-    .itemText{
-        color:${(props) => props.textColor ? props.theme.color[props.textColor] : props.theme.color.black};
+    .itemTitle {
+        > div {
+            display: flex;
+            img {
+                margin: 0 6px;
+            }
+        }
+    }
+    .itemText {
+        color: ${(props) =>
+            props.textColor
+                ? props.theme.color[props.textColor]
+                : props.theme.color.black};
     }
     font-size: ${({ theme }) => theme.fontSize[16]};
 `;
 
 type ItemProps = {
-    title: string;
-    text: string;
+    title: string | React.ReactElement;
+    text: string | React.ReactElement | number;
 } & propsStyles;
 
 interface propsStyles {

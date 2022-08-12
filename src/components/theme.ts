@@ -1,6 +1,6 @@
 
 const basicFontSize = 16;
-const fontSizeList = [12, 14, 16, 18, 20, 24, 28, 30, 32, 36, 38];
+const fontSizeList = [12, 14, 16, 18, 20, 24, 26, 28, 30, 32, 36, 38];
 const fontSizeListToRem = fontSizeList.reduce((prev, curr) => {
     return { ...prev, ...{ [curr]: curr / basicFontSize + "rem" } };
 }, {});
@@ -15,6 +15,7 @@ const ThemeColors = {
     lightOrange: "#FFF0DE",
     yellow: "#FFD800",
     lightYellow: "#FFD8004D",
+    blue:"#0091de",
     gray100: "#F9FAFC",
     gray200: "#E5E5E5",
     gray300: "#00000021",

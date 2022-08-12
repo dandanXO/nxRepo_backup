@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import {flexCreator} from "../utils/index";;
+import {flexCreator} from "../utils/index";
 
 const CardStyled = styled.div`
     box-shadow: ${({ theme }) => theme.boxShadow};
@@ -8,6 +8,8 @@ const CardStyled = styled.div`
     position: relative;
     border-radius: 8px;
     padding: 12px;
+    margin-bottom: 20px;
+    background: ${({ theme }) => theme.color.white};
     ${flexCreator("column", '', '')}
     .hotTagText {
         position: absolute;

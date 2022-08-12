@@ -9,11 +9,11 @@ const sizeProps: {
 }
 interface buttonPropsStyle {
     styleType?: string,
-    size?:string
+    size?: string
 }
 export default styled.button<buttonPropsStyle>`
     color: ${(props) => props.styleType ? props.theme[props.styleType].text : props.theme.color.white};
-    background: ${(props) => props.styleType ? props.theme[props.styleType].main : props.theme.primary};
+    background: ${(props) => props.styleType ? props.theme[props.styleType].main : props.theme.primary.main};
     padding: ${(props) => props.styleType === 'link' ? 0 : sizeProps[props.size ? props.size : 'large']};
     border:none;
     border-radius: 8px;

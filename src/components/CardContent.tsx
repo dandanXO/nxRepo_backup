@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { flexCreator } from "../utils/index";
+import LoanBrand from "./LoanBrand";
 import ListItem from "./ListItem";
 import Button from "./Button";
 import Divider from "./Divider"
@@ -62,7 +63,7 @@ const CardContent = (props: CardContentProps) => {
     return (
         <CardContentStyled>
             <CardHeaderStyled>
-                <div className={"title"}><img src={icon} alt="logo" />{'productName'}</div>
+                <LoanBrand iconUrl={icon} productName={'productName'}/>
                 <div className={"text"}>{'balance'}</div>
             </CardHeaderStyled>
             {contentItems.map((item) => (
