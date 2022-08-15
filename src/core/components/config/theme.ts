@@ -25,6 +25,10 @@ const ThemeColors = {
 
 export default {
     color: ThemeColors,
+    boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.13)",
+    fontSize: fontSizeListToRem,
+    // NOTE:
+    background: ThemeColors.gray100,
     primary: {
         main: ThemeColors.orange,
         text: ThemeColors.white,
@@ -38,8 +42,6 @@ export default {
         text: ThemeColors.gray500,
     },
     error: ThemeColors.red,
-    background: ThemeColors.gray100,
     info: ThemeColors.gray500,
-    boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.13)",
-    fontSize: fontSizeListToRem,
+
 };

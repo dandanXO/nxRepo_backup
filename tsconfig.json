@@ -8,5 +8,13 @@
         "jsx": "react-jsx",
         "moduleResolution": "Node"
     },
+    "include": [
+        "src/**/**.ts",
+        "src/**/**.tsx",
+        "src/core/types/**/**.d.ts"
+    ],
+    "exclude": [
+        "src/**/**.stories.tsx"
+    ],
     "files": ["src/index.tsx"]
 }
