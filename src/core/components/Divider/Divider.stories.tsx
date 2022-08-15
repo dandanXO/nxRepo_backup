@@ -4,7 +4,7 @@ import {AppThemeProvider} from "../index";
 
 export default {
     title: "Component/Divider",
-    component: Divider
+    component: Divider,
 } as ComponentMeta<typeof Divider>
 
 const Template: ComponentStory<typeof Divider> = args => (

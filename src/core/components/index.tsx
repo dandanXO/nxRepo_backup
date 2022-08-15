@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "./config/theme";
 
 interface IAppThemeProvider {
-    children: React.ReactElement;
+    children: JSX.Element | JSX.Element[];
 }
 
 export const AppThemeProvider = (props: IAppThemeProvider) => {
