@@ -56,7 +56,7 @@ const contentItems=[
     {title:'dddd',text:'4444'},
 ]
 
-const icon= require("./images/logo.jpg")
+import icon from "./images/logo.jpg";
 
 const CardContent = (props: CardContentProps) => {
     // const { loanStatus, icon, productName, balance,contentItems } = props;
