@@ -1,7 +1,8 @@
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import ExtendDetailsPage from "../pages/ExtendDetailsPage";
+import IndexPage from "../pages/IndexPage";
+import DemoPage from "../pages/DemoPage";
 import LoanDetailsPage from "../pages/LoanDetailsPage";
-import IndexPage from "../pages/IndexPage/IndexPage";
+import ExtendDetailsPage from "../pages/ExtendDetailsPage";
 
 // NOTE:
 // https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris
@@ -10,10 +11,12 @@ export const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<IndexPage/>}></Route>
-                <Route path="/extend-details" element={<ExtendDetailsPage/>}/>
-                {/*/loan-details?token=xxxxxxxx&orderNo=xxxxxxxx*/}
+                <Route path="/" element={<IndexPage/>}/>
+                <Route path="/demo" element={<DemoPage/>}/>
+                {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
                 <Route path="/loan-details" element={<LoanDetailsPage/>}/>
+                {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
+                <Route path="/extend-details" element={<ExtendDetailsPage/>}/>
                 <Route path="*" element={<div>Not Found</div>}/>
             </Routes>
         </BrowserRouter>
