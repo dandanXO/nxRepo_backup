@@ -1,9 +1,15 @@
-import { AppThemeProvider } from "./components/index";
+import {Provider} from "react-redux";
+import {AppThemeProvider } from "./components";
+import {appStore} from "./store";
 import {AppRouter} from "./Router";
+import "./api/index";
+
 export default function App() {
     return (
-        <AppThemeProvider>
-            <AppRouter/>
-        </AppThemeProvider>
+        <Provider store={appStore}>
+            <AppThemeProvider>
+                <AppRouter/>
+            </AppThemeProvider>
+        </Provider>
     )
 }

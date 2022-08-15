@@ -8,6 +8,8 @@ const isProduction = process.env.NODE_ENV == "production";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
+const mockAPIResponse = require("../src/api/demo/mockApi.json");
+
 const config = {
     entry: "./src/index.tsx",
     output: {
@@ -18,6 +20,15 @@ const config = {
         host: "localhost",
         port: 9000,
         historyApiFallback: true,
+        onBeforeSetupMiddleware: function (devServer) {
+            if (!devServer) {
+                throw new Error('webpack-dev-server is not defined');
+            }
+            // NOTICE: demo
+            devServer.app.get('/open-api/zh-tw/Attractions/All', (req, res) => {
+                res.json(mockAPIResponse)
+            })
+        },
     },
     plugins: [
         new HtmlWebpackPlugin({

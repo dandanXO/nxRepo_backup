@@ -1,3 +1,4 @@
+// [TypeScript style guide](https://ts.dev/style/#identifiers)
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
