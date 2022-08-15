@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { getLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
+import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
 import Tag from "../../components/Tag";
 import Card from "../../components/Card";
 import ListItem from "../../components/ListItem";

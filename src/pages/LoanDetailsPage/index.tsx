@@ -7,7 +7,7 @@ import React from "react";
 import Card from "../../components/Card";
 import CardContent from "../../components/CardContent";
 import LoanInfo from "../components/LoanInfo";
-import { getLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
+import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
 
 const LoanDetailsPageStyled = styled.div`
     padding: 18px;
@@ -23,7 +23,7 @@ const LoanDetailsPage = () => {
             <Card isHot={true}>
                 <CardContent />
             </Card>
-            <LoanInfo {...getLoanDetailResponse}/>
+            <LoanInfo {...mockGetLoanDetailResponse}/>
         </LoanDetailsPageStyled>
     );
 }

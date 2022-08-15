@@ -73,7 +73,7 @@ export interface GetLoanDetailApproveRecords {
 };
 
 
-export const getLoanDetailResponse:GetLoanDetailResponse = {
+export const mockGetLoanDetailResponse:GetLoanDetailResponse = {
     applyDate: "",
     /** @description 審核紀錄 */
     approveRecords: [
