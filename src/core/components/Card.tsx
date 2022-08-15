@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import {flexCreator} from "../utils/index";
+import {flexCreator} from "./utils";
 
 const CardStyled = styled.div`
     box-shadow: ${({ theme }) => theme.boxShadow};

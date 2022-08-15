@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { flexCreator } from "../utils/index";
+import { flexCreator } from "./utils";
 
 const LoanBrandStyled = styled.div<propsStyles>`
     ${flexCreator("row", "flex-start", "center")};

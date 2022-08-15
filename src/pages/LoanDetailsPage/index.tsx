@@ -4,8 +4,8 @@
 
 import styled from "styled-components";
 import React from "react";
-import Card from "../../components/Card";
-import CardContent from "../../components/CardContent";
+import Card from "../../core/components/Card";
+import CardContent from "../../core/components/CardContent";
 import LoanInfo from "../components/LoanInfo";
 import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
 

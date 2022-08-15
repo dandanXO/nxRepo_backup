@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { flexCreator } from "../utils/index";
+import { flexCreator } from "./utils";
 import LoanBrand from "./LoanBrand";
 import ListItem from "./ListItem";
 import Button from "./Button";

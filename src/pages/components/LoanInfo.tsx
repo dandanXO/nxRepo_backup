@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import React from "react";
 import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
-import Tag from "../../components/Tag";
-import Card from "../../components/Card";
-import ListItem from "../../components/ListItem";
-import Button from "../../components/Button";
-import LoanBrand from "../../components/LoanBrand";
+import Tag from "../../core/components/Tag";
+import Card from "../../core/components/Card";
+import ListItem from "../../core/components/ListItem";
+import Button from "../../core/components/Button";
+import LoanBrand from "../../core/components/LoanBrand";
 
 const LoanInfoStyled = styled.div`
     text-align: center;
@@ -55,7 +55,7 @@ const LoanInfoStyled = styled.div`
 
 type LoanInfoProps = Pick<GetLoanDetailResponse, "iconUrl" |"productName" |"status" | "paidAmount" | "balance">;
 
-const fileIcon = require("../../components/images/fileIcon.jpg");
+const fileIcon = require("../../core/components/images/fileIcon.jpg");
 const LoanInfo = (props: LoanInfoProps) => {
     const { status, paidAmount, balance, iconUrl, productName } = props;
     return (
