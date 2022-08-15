@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { flexCreator } from "./utils";
+import { flexCreator } from "../utils";
 
 const ListItemStyled = styled.div<propsStyles>`
     ${flexCreator("row", "space-between", "center")};

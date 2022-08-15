@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import React from "react";
-import { flexCreator } from "./utils";
-import LoanBrand from "./LoanBrand";
-import ListItem from "./ListItem";
-import Button from "./Button";
-import Divider from "./Divider"
+import { flexCreator } from "../utils";
+import LoanBrand from "../LoanBrand";
+import ListItem from "../ListItem";
+import Button from "../Button";
+import Divider from "../Divider"
 
 const FlexRowItem = styled.div`
     ${flexCreator("row", "space-between", "center")};
@@ -56,7 +56,7 @@ const contentItems=[
     {title:'dddd',text:'4444'},
 ]
 
-import icon from "./images/logo.jpg";
+import icon from "../images/logo.jpg";
 
 const CardContent = (props: CardContentProps) => {
     // const { loanStatus, icon, productName, balance,contentItems } = props;
