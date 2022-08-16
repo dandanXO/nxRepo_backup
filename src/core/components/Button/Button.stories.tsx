@@ -12,10 +12,39 @@ export default {
         // theme,
     },
     argTypes: {
-
+        styleType: {
+            // name: "styleType",
+            type: {
+                name: 'string',
+                required: false,
+            },
+            defaultValue: "primary",
+            description: "樣式類型",
+            table: {
+                type: {
+                    summary: 'string',
+                    detail: '指定限定的字串類型'
+                },
+                defaultValue: { summary: 'primary' },
+            },
+            options: ['primary', 'secondary'],
+            control: {
+                type: 'radio',
+            },
+        },
+        size: {
+            control: 'radio',
+            options: ["small", "large"],
+            description: "尺寸",
+            defaultValue: "small",
+        }
     },
     parameters: {
-
+        docs: {
+            description: {
+                component: '按鈕',
+            },
+        },
     }
 
 } as ComponentMeta<typeof Button>;
@@ -23,27 +52,13 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Button> = (args) => (
     <AppThemeProvider>
-        <Button styleType="primary">Confirm</Button>
-        <Button styleType="secondary">Confirm</Button>
-        <Button styleType="link">Confirm</Button>
+        <Button {...args}>Confirm</Button>
     </AppThemeProvider>
 );
 
-export const StyleType = Template.bind({});
+export const Description = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-StyleType.args = {
+Description.args = {
+    styleType: "primary",
     size: "small",
-};
-
-const SizeTemplate: ComponentStory<typeof Button> = (args) => (
-    <AppThemeProvider>
-        <Button styleType="primary" size="10">Confirm</Button>
-        <Button styleType="secondary" size="20">Confirm</Button>
-        <Button styleType="link" size="30">Confirm</Button>
-    </AppThemeProvider>
-);
-
-export const Size = SizeTemplate.bind({});
-Size.args = {
-
 };
