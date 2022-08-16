@@ -4,6 +4,10 @@ interface PopupProps {
     width?: number;
 }
 const Popup = styled("div")<PopupProps>`
+    /* Display */
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
     /* Center */
     position: absolute;
     top: 50%;
@@ -14,11 +18,12 @@ const Popup = styled("div")<PopupProps>`
     /* Border */
     border-radius: 5px;
     /* Background */
-    background: rgba(45, 59, 88, 0.85);
-    /* Padding */
+    /* background: rgba(45, 59, 88, 0.85); */
+    background: ${(props) => props.theme.custom.background.primary};
+    /* Padding */   
     /* Content */
     /* NOTICE: */
-    min-width: 370px;
+    min-width: 320px;
     min-height: 300px;
     /* Text */
     color: #fff;

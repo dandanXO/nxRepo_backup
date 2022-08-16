@@ -43,5 +43,43 @@ export default {
     },
     error: ThemeColors.red,
     info: ThemeColors.gray500,
+    // NOTICE: Custom
+    custom: {
+        background: {
+            primary: "#fff"
+        },
+        text: {
+            primary: "rgb(0,0,0,0.85)",
+            secondary: "#aaaaaa",
+        },
+        fontfamily: "Rubik",
+        font: {
+
+        },
+        button: {
+            primary: {
+                background: "#f58b10",
+                text: "f58b10",
+            },
+            secondary: {
+                background: "",
+                text: "",
+            },
+            alert: {
+                background: "#f58b10",
+                text: "f58b10",
+            }
+        },
+        horizontal: {
+            color: "#e5e5e5"
+        }
+    },
+
 
 };
+
+const defaultTheme = {
+    background: {
+        primary: "rgba(45, 59, 88, 0.85)"
+    }
+}

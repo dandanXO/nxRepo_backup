@@ -76,50 +76,55 @@ interface StyledlessButtonProps {
     color?: string;
 }
 const StyledlessButton = (props: StyledlessButtonProps) => (
-    <span className={props.className} onClick={props.onClick}>
+    <div className={props.className} onClick={props.onClick}>
         {props.children}
-    </span>
+    </div>
 );
 
 interface ButtonProps extends StyledlessButtonProps {}
 
+/*${getButtonAllColorStyle("red")};*/
 const ConfirmButton = styled(StyledlessButton)<ButtonProps>`
-    /* Display */
-    display: inline-block;
-
+    /* Display */   
+    flex: 1;
+  
     /* Margin */
-    margin-right: 5px;
+    //margin-right: 5px;
 
     /* Border */
-    border-radius: 5px;
+    border-radius: 10px;
 
-    width: 113px;
-    height: 35px;
+    //width: 113px;
+    height: 48px;
 
     /* Text */
-    line-height: 35px;
+    line-height: 48px;
     text-align: center;
-
+    font-weight: 600;
+    font-family: ${(props) => props.theme.custom.fontfamily};
     /* Other */
     cursor: pointer;
-
-    ${getButtonAllColorStyle("red")};
+    /*background: ${(props) => props.theme.custom.button.primary.text};*/
 `;
+
 ConfirmButton.displayName = "ConfirmButton";
 
+//${getButtonAllColorStyle("green")};
 const NotificationButton = styled(ConfirmButton)<ButtonProps>`
-    ${getButtonAllColorStyle("green")};
+  background: ${(props) => props.theme.custom.button.alert.background};
     /* width: 113px; */
 `;
 NotificationButton.displayName = "NotificationButton";
 
 const CancelButton = styled(ConfirmButton)<ButtonProps>`
-    ${getButtonAllColorStyle("gray")};
+    // ${getButtonAllColorStyle("gray")};
 `;
 CancelButton.displayName = "CancelButton";
 
 const CustomColorButton = styled(ConfirmButton)<ButtonProps>`
-    ${props => getButtonAllColorStyle(props.color)};
+    // ${props => getButtonAllColorStyle(props.color)};
 `;
 
 export { ConfirmButton, NotificationButton, CancelButton, CustomColorButton };
+
+

@@ -9,6 +9,7 @@ import ControlGroup from "./ControlGroup";
 import MainIcon from "./MainIcon";
 import { NotificationButton, ConfirmButton, CancelButton, CustomColorButton } from "./DefaultButtons";
 import AppContext from "../AppContext";
+import Horizontal from "./Horizontal";
 
 type ModalContentFunction<T> = () => T;
 
@@ -28,6 +29,9 @@ interface IModalProps {
     customButtons?: React.ReactElement;
     width?: number;
     maskClosable?: boolean;
+    enableClose?: boolean;
+    enableIcon?: boolean;
+    enableTitleHorizontal?: boolean;
 }
 interface ModalState {
     show: boolean;
@@ -46,6 +50,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
         onCancel: PropTypes.func,
         customButtons: PropTypes.element,
         maskClosable: PropTypes.bool,
+
     };
     static defaultProps = {
         show: false,
@@ -55,6 +60,8 @@ class Modal extends React.Component<IModalProps, ModalState> {
         confirmText: "确认",
         cancelText: "取消",
         maskClosable: true,
+        enableClose: true,
+        enableIcon: true,
     };
     constructor(props: IModalProps) {
         super(props);
@@ -91,14 +98,25 @@ class Modal extends React.Component<IModalProps, ModalState> {
                     // }}
                 >
                     <Popup width={this.props.width}>
-                        <CloseButton
-                            onClose={() => {
-                                this.hidden();
-                                this.props.onCancel && this.props.onCancel();
-                            }}
-                        ></CloseButton>
-                        <MainIcon type={this.props.type}></MainIcon>
-                        <Title>{this.props.title}</Title>
+                        {this.props.enableClose && (
+                            <div>
+                                <CloseButton
+                                    onClose={() => {
+                                        this.hidden();
+                                        this.props.onCancel && this.props.onCancel();
+                                    }}
+                                ></CloseButton>
+                            </div>
+                        )}
+                        {this.props.enableIcon && (
+                            <MainIcon type={this.props.type}></MainIcon>
+                        )}
+                        <div>
+                            <Title>{this.props.title}</Title>
+                            {this.props.enableTitleHorizontal && (
+                                <Horizontal/>
+                            )}
+                        </div>
                         <Content>
                             {typeof this.props.content === "string" ? (
                                 <div
@@ -115,6 +133,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                             )}
                         </Content>
                         <ControlGroup>
+                            {/* NOTE: 預設模式*/}
                             {(typeof this.props.mode === "undefined" ||
                                 this.props.mode === null ||
                                 this.props.mode === "alert") &&

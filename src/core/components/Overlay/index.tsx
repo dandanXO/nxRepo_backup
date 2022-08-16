@@ -2,23 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ModalPortal from "./ModalPortal";
 import Modal, { IModalProps } from "./Modal";
-import CustomModal from "./CustomModal";
 import AppContext from "../AppContext";
-import {AppThemeProvider} from "../index";
 
 interface IModalWrapperProps {
     custom?: boolean;
     content: (hide: () => void) => React.ReactElement;
     show: boolean;
-
-    mask: true,
-    title?: string;
-    confirmText?: string;
-    onConfirm?: () => {},
 }
 type ModalWrapperProps = IModalWrapperProps & IModalProps;
 
-class ModalWrapper extends React.Component<ModalWrapperProps> {
+class Overlay extends React.Component<ModalWrapperProps> {
     static IDENTIFIER: string = "uni-modal-container";
     static modal: any[] = [];
     static actionsRef: any = React.createRef();
@@ -30,11 +23,7 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
         AppContext.dev && console.log("[ModalWrapper] this.props", this.props);
         return (
             <ModalPortal>
-                {!this.props.custom ? (
-                    <Modal {...this.props}></Modal>
-                ) : (
-                    <CustomModal call={false} show={this.props.show} mask={this.props.mask} content={this.props.content} />
-                )}
+                <Modal {...this.props}></Modal>
             </ModalPortal>
         );
     }
@@ -58,27 +47,21 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
                 // actionsRef={ModalWrapper.actionsRef}
                 container={replacedModalContainer}
             >
-                {mode !== "custom" ? (
-                    <AppThemeProvider theme={props.theme}>
-                        <Modal show={true} mode={mode} {...props}></Modal>
-                    </AppThemeProvider>
-                ) : (
-                    <CustomModal call={true} mask={props.mask} content={props.content}></CustomModal>
-                )}
+                <Modal show={true} mode={mode} {...props}></Modal>
             </ModalPortal>,
             replacedModalContainer
         );
     }
     static alert(props: ModalWrapperProps) {
-        ModalWrapper.renderModalWrapperDOM(props, "alert");
+        Overlay.renderModalWrapperDOM(props, "alert");
     }
     static confirm(props: ModalWrapperProps) {
-        ModalWrapper.renderModalWrapperDOM(props, "confirm");
+        Overlay.renderModalWrapperDOM(props, "confirm");
     }
     // Only one component all the time.
     static show(props: ModalWrapperProps) {
         console.log("[Modal] props", props);
-        ModalWrapper.renderModalWrapperDOM(props, "custom");
+        Overlay.renderModalWrapperDOM(props, "custom");
     }
     // NOTICE: For non close window
     // static close() {
@@ -89,4 +72,4 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
     // }
 }
 
-export default ModalWrapper;
+export default Overlay;
