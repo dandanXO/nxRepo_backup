@@ -7,7 +7,9 @@ interface IAppThemeProvider {
     children: JSX.Element | JSX.Element[];
 }
 const GlobalStyle = createGlobalStyle`  
-  font-family: "Rubik";
+  body {
+    font-family: Rubik
+  }
 `
 export const AppThemeProvider = (props: IAppThemeProvider) => {
     return (
