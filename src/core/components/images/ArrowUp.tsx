@@ -1,5 +1,5 @@
 export default (props: { fill?: string, width?: string, height?: string }) => {
-    const { fill, width, height } = props
+    const { fill = "#aaa", width = "12px", height = "12px" } = props;
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -11,8 +11,8 @@ export default (props: { fill?: string, width?: string, height?: string }) => {
             <defs>
                 <clipPath id="a">
                     <rect
-                        width="12"
-                        height="12"
+                        width={width}
+                        height={height}
                         fill="none"
                         stroke="#707070"
                         stroke-width="1"

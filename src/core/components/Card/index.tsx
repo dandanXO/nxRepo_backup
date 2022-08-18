@@ -10,7 +10,7 @@ const CardStyled = styled.div`
     padding: 14px;
     margin-bottom: 20px;
     background: ${({ theme }) => theme.color.white};
-    ${flexCreator("column", '', '')}
+    ${flexCreator("column", "", "")}
     .hotTagText {
         position: absolute;
         top: 3px;
@@ -20,18 +20,30 @@ const CardStyled = styled.div`
     }
 `;
 
-const HotTag = styled.div`
-    position: absolute;
-    top: -30px;
-    right: -30px;
-    width: 0;
-    height: 0;
-    border: 30px solid ${({ theme }) => theme.color.yellow};
-    border-bottom-color: transparent;
-    border-top-color: transparent;
-    border-left-color: transparent;
-    border-top-right-radius: 8px;
-    transform: rotateZ(135deg);
+const triangle = styled.div`
+     position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 20px;
+        height: 20px;
+        border-top-right-radius: 30%; // 圆角弧度
+        background: ${({ theme }) => theme.color.yellow};
+        transform: rotate(-60edg) skewX(-30edg) scale(1, 0.866);
+`;
+const HotTag = styled(triangle)`
+    :before,:after {
+        content: "";
+        position: absolute;
+        background-color: inherit;
+        width: 20px;
+        height: 20px;
+    }
+    :before {
+        transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707) translate(0, -50%);
+    }
+    :after {
+        transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414) translate(50%);
+    }
 `;
 
 

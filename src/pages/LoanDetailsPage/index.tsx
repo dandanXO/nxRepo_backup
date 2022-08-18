@@ -9,7 +9,9 @@ import CardContent from "../../core/components/CardContent";
 import LoanInfo from "../components/LoanInfo";
 
 import LoanDetail from "../components/LoanDetail";
+import Advertisment from "../components/Advertisment"
 import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
+
 
 
 const LoanDetailsPageStyled = styled.div`
@@ -19,15 +21,18 @@ const LoanDetailsPageStyled = styled.div`
 
 type LoanInfoProps = GetLoanDetailResponse;
 
+
+   
+
 const LoanDetailsPage = () => {
  
     return (
         <LoanDetailsPageStyled>
-            {/* <Card isHot={true}>
-                <CardContent />
-            </Card> */}
+
+
             <LoanInfo {...mockGetLoanDetailResponse}/>
             <LoanDetail {...mockGetLoanDetailResponse}/>
+            <Advertisment/>
         </LoanDetailsPageStyled>
     );
 }

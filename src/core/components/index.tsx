@@ -8,7 +8,10 @@ interface IAppThemeProvider {
 }
 const GlobalStyle = createGlobalStyle`  
   body {
-    font-family: Rubik
+    font-family: Rubik;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 `
 export const AppThemeProvider = (props: IAppThemeProvider) => {

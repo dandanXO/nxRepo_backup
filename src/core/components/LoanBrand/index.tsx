@@ -5,6 +5,7 @@ import { flexCreator } from "../utils";
 const LoanBrandStyled = styled.div<propsStyles>`
     ${flexCreator("row", "flex-start", "center")};
     font-size: ${({ theme }) => theme.fontSize[16]};
+    font-weight: bold;
     img {
         width: ${(props) => props.sizeType === 'small' ? props.theme.fontSize[24] : props.theme.fontSize[38]};
         margin-right: 12px;

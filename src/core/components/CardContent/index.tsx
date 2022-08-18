@@ -4,31 +4,22 @@ import { flexCreator } from "../utils";
 import LoanBrand from "../LoanBrand";
 import ListItem from "../ListItem";
 import Button from "../Button";
-import Divider from "../Divider"
+import Divider from "../Divider";
+import {ArrowUp, ArrowDown, ArrowRight} from "../images";
+import nextIcon_gray from "../images/next_icon_gray.svg"
+import nextIcon from "../images/next_icon.svg"
 
 const FlexRowItem = styled.div`
     ${flexCreator("row", "space-between", "center")};
     width: 100%;
-
 `;
 
 const CardContentStyled = styled.div`
     ${flexCreator("column", "space-between", "center")};
     width: 100%;
-    font-weight: bold;
 `;
 
 const CardHeaderStyled = styled(FlexRowItem)`
-    .title {
-        display: flex;
-        align-items: center;
-        font-size: ${({ theme }) => theme.fontSize[16]};
-        img {
-            width: ${({ theme }) => theme.fontSize[38]};
-            margin-right: 12px;
-            border-radius: 8px;
-        }
-    }
     .text {
         font-size: ${({ theme }) => theme.fontSize[18]};
     }
@@ -37,46 +28,41 @@ const CardHeaderStyled = styled(FlexRowItem)`
 const CardFooterStyled = styled(FlexRowItem)`
     padding-top: 8px;
     margin-bottom: -6px;
-    .linkButton{
+    > button {
+        img {
+            margin-left: 3px;
+        }
+        ${flexCreator("row", "space-between", "center")};
+    }
+    .linkButton {
         font-size: ${({ theme }) => theme.fontSize[12]};
+    }
+    .applyButton {
+        background-color: ${({ theme }) => theme.color.black};
     }
 `;
 
 type CardContentProps = {
-    // loanStatus: object;
-    // icon:string,
-    // productName:string,
-    // balance:string,
-    // contentItems:[]
+    icon: string,
+    productName: string,
+    balance: string,
+    contentItems: React.ReactElement | React.ReactElement[]
 };
-const contentItems=[
-    {title:'aaaa',text:'1111'},
-    {title:'bbbb',text:'2222'},
-    {title:'cccc',text:'3333'},
-    {title:'dddd',text:'4444'},
-]
 
-import icon from "../images/logo.jpg";
 
 const CardContent = (props: CardContentProps) => {
-    // const { loanStatus, icon, productName, balance,contentItems } = props;
+    const { icon, productName, balance, contentItems } = props;
     return (
         <CardContentStyled>
             <CardHeaderStyled>
-                <LoanBrand iconUrl={icon} productName={'productName'}/>
-                <div className={"text"}>{'balance'}</div>
+                <LoanBrand iconUrl={icon} productName={productName} />
+                <div className={"text"}>{balance}</div>
             </CardHeaderStyled>
-            {contentItems.map((item) => (
-                <ListItem
-                    title={item.title}
-                    text={item.text}
-                    textColor={"gray500"}
-                />
-            ))}
-            <Divider/>
+            {contentItems}
+            <Divider styleType="narrow" />
             <CardFooterStyled>
-                <Button className={'linkButton'} styleType={'link'} >{'view details >'}</Button>
-                <Button styleType={'primary'} size={'small'}>{'apply now >'}</Button>
+                <Button className={'linkButton'} styleType={'link'} >{'view details'}<img src={nextIcon_gray} /></Button>
+                <Button className={'applyButton'} styleType={'primary'} size={'small'}>{'Apply now'} <img src={nextIcon} /></Button>
             </CardFooterStyled>
         </CardContentStyled>
     );
