@@ -12,6 +12,7 @@ import {CancelButton, NotificationButton} from "../../core/components/Modal/Defa
 import {AppThemeProvider} from "../../core/components";
 import Overlay from "../../core/components/Overlay";
 import Radio from "../../core/components/Radio";
+import {RepayICON} from "../../core/components/Icon/Icon";
 
 const RepaymentModal = styled.div`
       color: #101010;
@@ -41,7 +42,10 @@ const SectionButton2 = styled.div`
 `
 
 const RepayAndApplyButton = styled(NotificationButton)`
-    color: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #FFF;
 `;
 
 const RepaymentCancelButton = styled(NotificationButton)`
@@ -64,7 +68,7 @@ storiesOf("Page/RepaymentModal", module)
           color: #aaaaaa;
           line-height: 16px;
         `;
-        const [value, setValue] = useState("balance");
+        const [value, setValue] = useState("₹ 8,500");
         return (
             <AppThemeProvider>
                 <div>
@@ -80,7 +84,7 @@ storiesOf("Page/RepaymentModal", module)
                                     <Horizontal/>
 
                                     <SectionBalance>
-                                        <ListItem title="Balance" text="8500"/>
+                                        <ListItem title="Balance" text="₹ 8,500"/>
                                     </SectionBalance>
 
                                     <Horizontal/>
@@ -133,7 +137,9 @@ storiesOf("Page/RepaymentModal", module)
                                             </Paragraph>
                                         </SectionParagraph>
                                         <SectionButton>
-                                            <RepayAndApplyButton>Repay and Apply Again</RepayAndApplyButton>
+                                            <RepayAndApplyButton>
+                                                <RepayICON/> Repay and Apply Again
+                                            </RepayAndApplyButton>
                                         </SectionButton>
                                         <SectionButton2>
                                             <RepaymentCancelButton>Cancel</RepaymentCancelButton>
