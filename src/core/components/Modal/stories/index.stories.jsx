@@ -32,6 +32,7 @@ import RenderAndCallMethodModal from "./RenderAndCallMethodModal";
 import {AppThemeProvider} from "../../index";
 import styled from "styled-components";
 
+
 const unistarTheme = {
     custom: {
         text: {
