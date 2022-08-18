@@ -7,7 +7,7 @@ import {InputContainer} from "./template/InputContainer";
 import {StyledInput2, StyledLabel, StyledTopInput} from "./atom/StyledInput";
 import {InputStatus, InputValidStatus} from "./type";
 import {useForceUpdate} from "../useForceUpdate";
-import {UpperDefaultLabel, UpperOtherLabel} from "./atom/UpperLabel";
+import {UpperDefaultLabel, UpperDefaultLabel2, UpperOtherLabel} from "./atom/UpperLabel";
 import styled from "styled-components";
 
 const InputAndMessageContainer = styled.div`
@@ -221,7 +221,7 @@ const Input: InputInterface = ({
         upperLabelType = true;
         if(!isEdit) {
             if(value.length > 0) {
-                LabelComponentElement = <UpperDefaultLabel for={labelID}></UpperDefaultLabel>
+                LabelComponentElement = ""
             } else {
                 LabelComponentElement = <UpperDefaultLabel for={labelID}>{label}</UpperDefaultLabel>
             }
@@ -244,7 +244,10 @@ const Input: InputInterface = ({
                 onBlur={() => {
                     setEdit(false);
                 }}
-                ref={selectRef} width={width} upperLabelType={upperLabelType} isFocus={isEdit}>
+                ref={selectRef} width={width}
+                upperLabelType={upperLabelType}
+                isFocus={isEdit}
+            >
                 {LabelComponentElement}
                 <CustomInput
                     // NOTICE: labelID

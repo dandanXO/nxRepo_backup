@@ -14,6 +14,10 @@ export const UpperDefaultLabel = styled.label<Label>`
   height: 22px;
 `;
 
+export const UpperDefaultLabel2 = styled.label<Label>`
+  height: 22px;
+`;
+
 export const UpperOtherLabel = styled.label<Label>`
   font-weight: 300;
   //position: absolute;

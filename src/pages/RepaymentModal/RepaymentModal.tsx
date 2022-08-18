@@ -66,7 +66,8 @@ const RepaymentButton = styled(RepayAndApplyButton)`
 `
 
 const RepaymentModal = () => {
-    const [value, setValue] = useState("balance");
+    const [radioValue, setRadioValue] = useState("balance");
+    const [value, setValue] = useState();
     return (
         <div>
             <Overlay
@@ -86,10 +87,10 @@ const RepaymentModal = () => {
 
                             <SectionOptions>
                                 <Radio.Group
-                                    value={value}
+                                    value={radioValue}
                                     onCheck={(value: any) => {
                                         console.log("Radio.Group.onCheck.value", value);
-                                        setValue(value);
+                                        setRadioValue(value);
                                     }}
                                 >
                                     <Radio value="balance">Balance</Radio>
@@ -97,7 +98,6 @@ const RepaymentModal = () => {
                                 </Radio.Group>
 
                                 <Input
-                                    placeholder="text"
                                     label="Amount"
                                     value={value}
                                     onChange={event => {

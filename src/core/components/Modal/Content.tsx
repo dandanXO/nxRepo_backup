@@ -4,7 +4,7 @@ const Content = styled.div`
     /* Display */
     //display: table;
     /* Margin */
-    margin: 10px auto 20px auto;
+    margin: 10px;
     /* NOTICE: 最大尺寸 */
     max-width: 320px;
     //height: 80px;

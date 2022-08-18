@@ -21,6 +21,19 @@ const upperLabelType = (labelType: boolean) => {
         `
     }
 }
+const isFocus = (isFocus: boolean) => {
+    if(isFocus) {
+        return `
+        
+        `;
+    } else {
+        return `
+            justify-content: center;
+            height: 42.5px;
+        `;
+    }
+
+}
 export const InputContainer = styled.label<InputContainerProps>`   
     position: relative;
     //width: ${props => props.width ?? "auto" }px;
@@ -30,5 +43,6 @@ export const InputContainer = styled.label<InputContainerProps>`
     padding-left: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-  ${(props) => upperLabelType(props.upperLabelType)}
+    ${(props) => upperLabelType(props.upperLabelType)}
+    ${(props) => isFocus(props.isFocus)};
 `;
