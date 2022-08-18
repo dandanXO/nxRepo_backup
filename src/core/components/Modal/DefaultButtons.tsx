@@ -101,10 +101,11 @@ const ConfirmButton = styled(StyledlessButton)<ButtonProps>`
     line-height: 48px;
     text-align: center;
     font-weight: 600;
-    font-family: ${(props) => props.theme.custom.fontfamily};
+    // font-family: ${(props) => props.theme.custom.fontfamily};
     /* Other */
     cursor: pointer;
     /*background: ${(props) => props.theme.custom.button.primary.text};*/
+    padding: 0 20px;
 `;
 
 ConfirmButton.displayName = "ConfirmButton";

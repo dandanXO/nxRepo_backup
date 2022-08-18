@@ -11,7 +11,7 @@ import { NotificationButton, ConfirmButton, CancelButton, CustomColorButton } fr
 import AppContext from "../AppContext";
 import Horizontal from "./Horizontal";
 
-type ModalContentFunction<T> = () => T;
+type ModalContentFunction<T> = (args: any) => T;
 
 interface IModalProps {
     show?: boolean;
@@ -69,7 +69,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
             show: props.show,
         };
     }
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: IModalProps, prevState: ModalState) {
         if (prevProps != this.props) {
             this.setState({
                 show: this.props.show,

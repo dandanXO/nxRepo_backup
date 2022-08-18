@@ -6,15 +6,18 @@ import CustomModal from "./CustomModal";
 import AppContext from "../AppContext";
 import {AppThemeProvider} from "../index";
 
+type ModalContentFunction<T> = (args: any) => T;
 interface IModalWrapperProps {
     custom?: boolean;
-    content: (hide: () => void) => React.ReactElement;
+    // content: (hide: () => void) => React.ReactElement;
+    content?: string | ModalContentFunction<any>;
     show: boolean;
 
     mask: true,
     title?: string;
     confirmText?: string;
     onConfirm?: () => {},
+    theme?: any;
 }
 type ModalWrapperProps = IModalWrapperProps & IModalProps;
 

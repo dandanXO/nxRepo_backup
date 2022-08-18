@@ -62,7 +62,7 @@ const unistarTheme = {
     }
 }
 storiesOf("Modal", module)
-    .add("特製版", () => {
+    .add("Special", () => {
         const Paragraph = styled.div`
             margin-bottom: 10px;
         `;

@@ -7,14 +7,23 @@ import CloseButton from "../Modal/CloseButton";
 import Title from "../Modal/Title";
 import Content from "../Modal/Content";
 import Horizontal from "../Modal/Horizontal";
+import styled from "styled-components";
 
+const ModalPopup = styled(Popup)`
+  justify-content: flex-start;
+`;
+const ModalContent = styled(Content)`
+  margin: 0;
+`
 
+type ModalContentFunction<T> = (args: any) => T;
 interface IModalProps {
     show?: boolean;
     mask?: boolean;
     type?: string;
     title?: string;
-    content?: JSX.Element
+    // content?: JSX.Element
+    content?: string | ModalContentFunction<any>;
     width?: number;
     maskClosable?: boolean;
     enableClose?: boolean;
@@ -46,7 +55,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
             show: props.show,
         };
     }
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: IModalProps, prevState: ModalState) {
         if (prevProps != this.props) {
             this.setState({
                 show: this.props.show,
@@ -74,29 +83,30 @@ class Modal extends React.Component<IModalProps, ModalState> {
                     //     }
                     // }}
                 >
-                    <Popup width={this.props.width}>
-                        {this.props.enableClose && (
-                            <div>
-                                <CloseButton
-                                    onClose={() => {
-                                        this.hidden();
-                                        this.props.onCancel && this.props.onCancel();
-                                    }}
-                                ></CloseButton>
-                            </div>
-                        )}
-                        <div>
-                            <Title>{this.props.title}</Title>
-                            {this.props.enableTitleHorizontal && (
-                                <Horizontal/>
-                            )}
-                        </div>
-                        <Content>
-                            {this.props.content && (
+                    <ModalPopup width={this.props.width}>
+                        {/*{this.props.enableClose && (*/}
+                        {/*    <div>*/}
+                        {/*        <CloseButton*/}
+                        {/*            onClose={() => {*/}
+                        {/*                this.hidden();*/}
+                        {/*                this.props.onCancel && this.props.onCancel();*/}
+                        {/*            }}*/}
+                        {/*        ></CloseButton>*/}
+                        {/*    </div>*/}
+                        {/*)}*/}
+                        {/*<div>*/}
+                        {/*    <Title>{this.props.title}</Title>*/}
+                        {/*    {this.props.enableTitleHorizontal && (*/}
+                        {/*        <Horizontal/>*/}
+                        {/*    )}*/}
+                        {/*</div>*/}
+                        <ModalContent>
+                            {this.props.content && typeof this.props.content === "string" && (
                                 this.props.content
                             )}
-                        </Content>
-                    </Popup>
+                            {this.props.content && typeof this.props.content === "function" && this.props.content(this.hidden)}
+                        </ModalContent>
+                    </ModalPopup>
                 </Overlay>
             </div>
         );

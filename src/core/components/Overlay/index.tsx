@@ -4,9 +4,11 @@ import ModalPortal from "./ModalPortal";
 import Modal, { IModalProps } from "./Modal";
 import AppContext from "../AppContext";
 
+type ModalContentFunction<T> = (args: any) => T;
 interface IModalWrapperProps {
     custom?: boolean;
     content: (hide: () => void) => React.ReactElement;
+    // content?: string | ModalContentFunction<any>;
     show: boolean;
 }
 type ModalWrapperProps = IModalWrapperProps & IModalProps;
@@ -23,7 +25,7 @@ class Overlay extends React.Component<ModalWrapperProps> {
         AppContext.dev && console.log("[ModalWrapper] this.props", this.props);
         return (
             <ModalPortal>
-                <Modal {...this.props}></Modal>
+                <Modal {...this.props}/>
             </ModalPortal>
         );
     }
@@ -47,7 +49,7 @@ class Overlay extends React.Component<ModalWrapperProps> {
                 // actionsRef={ModalWrapper.actionsRef}
                 container={replacedModalContainer}
             >
-                <Modal show={true} mode={mode} {...props}></Modal>
+                <Modal show={true} {...props}></Modal>
             </ModalPortal>,
             replacedModalContainer
         );

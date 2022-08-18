@@ -30,10 +30,14 @@ const CustomPopupContainer = styled.div`
 // CustomModal.Popup = Popup;
 
 export { CustomPopupContainer };
+type ModalContentFunction<T> = (args: any) => T;
+
+
 interface CustomModalProp {
     mask: boolean;
     // content: React.ReactElement;
-    content: (hide: () => void) => React.ReactElement;
+    // content: (hide: () => void) => React.ReactElement;
+    content?: string | ModalContentFunction<any>;
     call: boolean;
     // For JSX Component, Not Directly Call
     show?: boolean;
@@ -45,7 +49,7 @@ class CustomModal extends React.Component<CustomModalProp, CustomModalState> {
     static defaultProps = {
         mask: true,
     };
-    constructor(props) {
+    constructor(props: CustomModalProp) {
         super(props);
         console.log("props", props);
         this.state = {
@@ -83,7 +87,7 @@ class CustomModal extends React.Component<CustomModalProp, CustomModalState> {
                         {/* {this.props.content} */}
                         {/*// FIXME: this.props.content */}
                         {!this.props.call && this.props.content && this.props.content}
-                        {this.props.call && this.props.content && this.props.content(this.hide)}
+                        {this.props.call && this.props.content && typeof this.props.content ==="function" && this.props.content(this.hide)}
                     </CustomPopupContainer>
                 </Overlay>
             </div>

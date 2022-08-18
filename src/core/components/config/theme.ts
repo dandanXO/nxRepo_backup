@@ -23,23 +23,23 @@ const ThemeColors = {
     gray500: "#AAAAAA",
 }
 
-export default {
+const theme = {
     color: ThemeColors,
     boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.13)",
     fontSize: fontSizeListToRem,
     // NOTE:
     background: ThemeColors.gray100,
     primary: {
-        main: ThemeColors.orange,
+    main: ThemeColors.orange,
         text: ThemeColors.white,
     },
     secondary: {
         main: ThemeColors.lightOrange,
-        text: ThemeColors.orange,
+            text: ThemeColors.orange,
     },
     link: {
         main: "none",
-        text: ThemeColors.gray500,
+            text: ThemeColors.gray500,
     },
     error: ThemeColors.red,
     info: ThemeColors.gray500,
@@ -50,24 +50,30 @@ export default {
         },
         text: {
             primary: "rgb(0,0,0,0.85)",
-            secondary: "#aaaaaa",
+                secondary: "#aaaaaa",
         },
         fontfamily: "Rubik",
-        font: {
+            font: {
 
         },
+        // NOTE: Radio
+        radio: {
+            primary: "#f58b10",
+            secondary: "#aaaaaa",
+        },
+        // NOTE:
         button: {
             primary: {
                 background: "#f58b10",
-                text: "f58b10",
+                    text: "f58b10",
             },
             secondary: {
                 background: "",
-                text: "",
+                    text: "",
             },
             alert: {
                 background: "#f58b10",
-                text: "f58b10",
+                    text: "f58b10",
             }
         },
         horizontal: {
@@ -75,8 +81,8 @@ export default {
         }
     },
 
-
 };
+export default theme;
 
 const defaultTheme = {
     background: {
