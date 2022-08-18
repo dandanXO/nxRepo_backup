@@ -10,7 +10,11 @@ interface IModalWrapperProps {
     content: (hide: () => void) => React.ReactElement;
     // content?: string | ModalContentFunction<any>;
     show: boolean;
+    title?: string
+    enableTitleHorizontal?: boolean;
+
 }
+
 type ModalWrapperProps = IModalWrapperProps & IModalProps;
 
 class Overlay extends React.Component<ModalWrapperProps> {
