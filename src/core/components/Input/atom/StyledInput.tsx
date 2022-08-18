@@ -218,6 +218,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
     }
 
     ${(props) => {
+        return ""
       // getStatusColor(
       //         props.prevValidStatus === "ReadyForValid" ? "ReadyForValid" : props.validStatus,
       //         props.keyStatus,

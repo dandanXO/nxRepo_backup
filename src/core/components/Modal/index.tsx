@@ -10,7 +10,8 @@ type ModalContentFunction<T> = (args: any) => T;
 interface IModalWrapperProps {
     custom?: boolean;
     // content: (hide: () => void) => React.ReactElement;
-    content?: string | ModalContentFunction<any>;
+    // content?: string | ModalContentFunction<any>;
+    content?: any;
     show: boolean;
 
     mask: true,

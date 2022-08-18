@@ -10,6 +10,7 @@ const RepaymentNoticeModal = () => {
     return (
         <div>
             <Modal
+                mask={true}
                 show={true}
                 mode="alert"
                 type="confirm"

@@ -28,7 +28,7 @@ export interface RadioOuterProps {
     changeRadio?: (checked: boolean) => void;
     size?: "small" | "big";
     checked?: boolean;
-    children?: JSX.Element;
+    children?: any;
 }
 
 // interface RadioDotProps {

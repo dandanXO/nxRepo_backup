@@ -213,7 +213,7 @@ const Input: InputInterface = ({
     let labelID = id || label;
     const [isEdit, setEdit] = useState(false)
 
-    let CustomInput
+    let CustomInput: any
     let LabelComponentElement;
     let upperLabelType
     if(labelType === "top") {
@@ -249,7 +249,7 @@ const Input: InputInterface = ({
                 <CustomInput
                     // NOTICE: labelID
                     id={labelID}
-                    isFocus={value.length > 0 && !isEdit}
+                    // isFocus={value.length > 0 && !isEdit}
                     ref={targetRef}
                     // Modal - Display
                     disabled={disabled}
@@ -263,13 +263,13 @@ const Input: InputInterface = ({
                     placeholder={placeholder}
                     // placement={placement}
                     // Modal - Status
-                    keyStatus={statusRef.current}
+                    // keyStatus={statusRef.current}
                     // Modal - Validation
-                    runValid={typeof valid !== "undefined"}
-                    prevValidStatus={preValid}
-                    validStatus={typeof valid !== "undefined" ? valid : "ReadyForValid"}
+                    // runValid={typeof valid !== "undefined"}
+                    // prevValidStatus={preValid}
+                    // validStatus={typeof valid !== "undefined" ? valid : "ReadyForValid"}
                     // Modal - Event Handler
-                    onClick={event => {
+                    onClick={(event: any) => {
                         console.log("onClick")
                         onClick && onClick(event);
                         // statusRef.current = "Focus";
@@ -295,7 +295,7 @@ const Input: InputInterface = ({
                     // onSelect={event => {
                     //     props.onSelect && props.onSelect(event);
                     // }}
-                    onFocus={event => {
+                    onFocus={(event: any) => {
                         console.log("onFocus");
                         // FIXME: 這段起初的意義
                         // if (statusRef.current === "Hover") {
@@ -314,7 +314,7 @@ const Input: InputInterface = ({
                         // Outer Interface
                         onFocus && onFocus(event);
                     }}
-                    onBlur={event => {
+                    onBlur={(event: any) => {
                         console.log("onBlur");
                         // if (statusRef.current === "Focus" || statusRef.current === "KeyDown") {
                         statusRef.current = "Idle";
@@ -329,7 +329,7 @@ const Input: InputInterface = ({
                         // Outer Interface
                         onBlur && onBlur(event);
                     }}
-                    onChange={event => {
+                    onChange={(event: any) => {
                         console.log("onChange");
                         // console.log("event", event.target.value);
                         // if(customType === "number") {
@@ -367,7 +367,7 @@ const Input: InputInterface = ({
                     //     props.onSubmit && props.onSubmit(event);
                     // }}
                     // [Keyboard Events]
-                    onKeyDown={event => {
+                    onKeyDown={(event: any) => {
                         // setRunValidAction(false);
                         statusRef.current = "KeyDown";
                         forceUpdate();
@@ -396,8 +396,8 @@ const Input: InputInterface = ({
                     // onPressEnter
                     // allowClear
                     // suffix
-                    isThemeControlledByComponent={isThemeControlledByComponent}
-                    themeType={themeType}
+                    // isThemeControlledByComponent={isThemeControlledByComponent}
+                    // themeType={themeType}
                 />
                 {/*<StyledLabel />*/}
                 {/*FIXME:*/}

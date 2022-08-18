@@ -6,7 +6,7 @@ interface InputContainerProps {
     isFocus?: boolean;
 }
 
-const upperLabelType = (labelType: boolean, isFocus: boolean = false) => {
+const upperLabelType = (labelType: boolean) => {
     if(labelType) {
         return `
             flex-direction: column;
@@ -30,5 +30,5 @@ export const InputContainer = styled.label<InputContainerProps>`
     padding-left: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-  ${(props) => upperLabelType(props.upperLabelType, props.isFocus)}
+  ${(props) => upperLabelType(props.upperLabelType)}
 `;
