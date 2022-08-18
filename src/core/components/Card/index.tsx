@@ -7,7 +7,7 @@ const CardStyled = styled.div`
     font-size: ${({ theme }) => theme.fontSize[16]};
     position: relative;
     border-radius: 8px;
-    padding: 12px;
+    padding: 14px;
     margin-bottom: 20px;
     background: ${({ theme }) => theme.color.white};
     ${flexCreator("column", '', '')}
@@ -51,9 +51,16 @@ const Card = (props: CardProps) => {
                     <span className={"hotTagText"}>Hot</span>
                 </div>
             )}
+ 
             {children}
+
+          
         </CardStyled>
     );
 }
 
-export default Card
+export default Card;
+
+
+
+

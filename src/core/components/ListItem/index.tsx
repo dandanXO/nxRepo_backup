@@ -5,7 +5,7 @@ import { flexCreator } from "../utils";
 const ListItemStyled = styled.div<propsStyles>`
     ${flexCreator("row", "space-between", "center")};
     width: 100%;
-    margin: 5px;
+    margin: 8px 0;
     .itemTitle {
         > div {
             display: flex;

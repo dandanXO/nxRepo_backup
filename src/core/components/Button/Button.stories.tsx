@@ -27,7 +27,7 @@ export default {
                 },
                 defaultValue: { summary: 'primary' },
             },
-            options: ['primary', 'secondary'],
+            options: ['primary', 'secondary','link'],
             control: {
                 type: 'radio',
             },

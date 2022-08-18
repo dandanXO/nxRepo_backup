@@ -30,6 +30,9 @@ const LoanInfoStyled = styled.div`
         margin-bottom: 10px;
         text-align: left;
     }
+    .loanInfo-Card-list{
+        width: 100%;
+    }
     .relatedRepayment {
         width: 100%;
         text-align: right;
@@ -71,6 +74,7 @@ const LoanInfo = (props: LoanInfoProps) => {
             </div>
             <Card isHot={false}>
                 <div className={"loanInfo-Card-Title"}>Gernal</div>
+                <div className={"loanInfo-Card-list"}>
                 <ListItem title={"State"} text={<Tag status={status}>{status}</Tag>} />
                 <ListItem
                     title={
@@ -82,6 +86,8 @@ const LoanInfo = (props: LoanInfoProps) => {
                     text={`₹ ${paidAmount}`}
                 />
                 <ListItem title={"Balance"} text={`₹ ${balance}`} />
+                </div>
+                
                 <div className={"relatedRepayment"} ><Button styleType={'link'}>{'Related repayment >'}</Button></div>
             </Card>
             {

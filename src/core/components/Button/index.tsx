@@ -8,7 +8,7 @@ const sizeProps: {
 
 }
 interface buttonPropsStyle {
-    styleType?: string,
+    styleType?: "primary" | "secondary" | "link",
     size?: string
 }
 export default styled.button<buttonPropsStyle>`

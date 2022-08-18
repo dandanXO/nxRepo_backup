@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import theme from "./config/theme"
+import theme from "../config/theme";
 
-const { color } = theme
+const { color } = theme;
 
-const statusProps: {
+const tagStatusProps: {
     [key: string]: object
 } = {
     EXTEND: {
@@ -29,14 +29,12 @@ const statusProps: {
     },
 }
 interface tagPropsStyle {
-    status: string,
+    status: "EXTEND" | "OVERDUE" | "PAY_OFF" | "PROCESSING" | "UNPAID",
 }
 export default styled.div<tagPropsStyle>`
 
     padding: 2px 12px;
     font-size: ${({ theme }) => theme.fontSize[12]};
-    ${(props) => {
-        return { ...statusProps[props.status] }
-    }}
+    ${(props) => ({ ...tagStatusProps[props.status] })}
 `;
 
