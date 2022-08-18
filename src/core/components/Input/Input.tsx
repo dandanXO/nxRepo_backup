@@ -15,7 +15,7 @@ const InputAndMessageContainer = styled.div`
 const ErrorMessageSection = styled.div`
     color: #f82626;
     margin-left: 20px;   
-    padding-top: 10px;
+    padding-top: 5px;
 `;
 export type InputType =
     | "text"

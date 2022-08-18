@@ -6,7 +6,7 @@ import {NotificationButton} from "../../core/components/Modal/DefaultButtons";
 const Page = styled.div`
     background: #f9fafc;
     .mb {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 `
 const Paragraph = styled.p`

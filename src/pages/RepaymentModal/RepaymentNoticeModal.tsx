@@ -9,8 +9,6 @@ const Paragraph = styled.div`
 const RepaymentNoticeModal = () => {
     return (
         <div>
-            <div>Property: confirmText, cancelText</div>
-            <div>Value: string</div>
             <Modal
                 show={true}
                 mode="alert"
