@@ -96,6 +96,7 @@ export interface StyledInputProps {
     runValid: boolean;
     isThemeControlledByComponent?: boolean;
     themeType?: "early" | "night";
+    isFocus?: boolean
 }
 
 export const StyledTopInput = styled.input<StyledInputProps>`
@@ -134,7 +135,8 @@ export const StyledTopInput = styled.input<StyledInputProps>`
     
     // NOTICE:
     border: 1px solid #aaaaaa;
-    background: #ffffff;
+    //background: #ffffff;
+    background: inherit;
     font-weight: 600;
     font-size: 16px;
     color: #101010;
@@ -215,31 +217,40 @@ export const StyledTopInput = styled.input<StyledInputProps>`
         outline: none;
     }
 
-    ${props =>
-        getStatusColor(
-            props.prevValidStatus === "ReadyForValid" ? "ReadyForValid" : props.validStatus,
-            props.keyStatus,
-            props.prevValidStatus,
-            props.runValid,
-            props.theme.mode,
-            props.isThemeControlledByComponent,
-            props.themeType
-        )}
-
+    ${(props) => {
+      // getStatusColor(
+      //         props.prevValidStatus === "ReadyForValid" ? "ReadyForValid" : props.validStatus,
+      //         props.keyStatus,
+      //         props.prevValidStatus,
+      //         props.runValid,
+      //         props.theme.mode,
+      //         props.isThemeControlledByComponent,
+      //         props.themeType
+      // )
+    }};
     border: 0;
+    ${(props: StyledInputProps) => isFocus(props.isFocus)}
 `;
 
-export const StyledInput2 = styled(StyledTopInput)`
+function isFocus(isFocus: boolean) {
+    if(isFocus) {
+        return `
+        position: relative;
+        bottom: 11px;
+    `
+    } else {
+        return ``;
+    }
+
+
+}
+export const StyledInput2 = styled(StyledTopInput)<StyledInputProps>`
     padding: 15px;
-    font-weight: 400;
-    
+    font-weight: 400;   
     text-align: right;
     color: #101010;
-
-
 `;
 // In firefox, disabled input won't fire click event, so add a mask here.
 export const StyledLabel = styled.label`
     display: none;
 `;
-// ${props => getStatusColor(props.prevValidStatus === "" ? "ReadyForValid" : props.validStatus, props.keyStatus, props.prevValidStatus, props.runValid)}

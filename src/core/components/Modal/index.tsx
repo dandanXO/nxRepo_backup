@@ -16,7 +16,7 @@ interface IModalWrapperProps {
     mask: true,
     title?: string;
     confirmText?: string;
-    onConfirm?: () => {},
+    onConfirm?: () => void,
     theme?: any;
 }
 type ModalWrapperProps = IModalWrapperProps & IModalProps;

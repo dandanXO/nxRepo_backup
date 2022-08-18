@@ -1,6 +1,20 @@
 import styled from "styled-components";
+import React from "react";
 
-export const UpperLabel = styled.span`
+interface Label { for?: string }
+export const UpperDefaultLabel = styled.label<Label>`
+  font-weight: 300;
+  //position: absolute;
+  //top: -20px;
+  //left: 20px;
+  color: #aaaaaa;
+  //line-height: 22px;
+  position: relative;
+  top: 10px;
+  height: 22px;
+`;
+
+export const UpperOtherLabel = styled.label<Label>`
   font-weight: 300;
   //position: absolute;
   //top: -20px;
@@ -8,3 +22,7 @@ export const UpperLabel = styled.span`
   color: #aaaaaa;
   line-height: 22px;
 `;
+
+
+
+
