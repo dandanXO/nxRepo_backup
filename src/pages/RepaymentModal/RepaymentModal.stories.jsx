@@ -1,18 +1,17 @@
-
 import React, {useState} from "react";
-import {
-    Overlay,
-} from "./index";
 
 import { storiesOf } from "@storybook/react";
-import {AppThemeProvider} from "../../index";
+
 import styled from "styled-components";
-import ListItem from "../../ListItem";
-import Horizontal from "../../Modal/Horizontal";
-import Title from "../../Modal/Title";
-import Radio from "../../Radio";
-import {Input} from "../../Input";
-import {CancelButton, NotificationButton} from "../../Modal/DefaultButtons";
+import ListItem from "../../core/components/ListItem";
+import Horizontal from "../../core/components/Modal/Horizontal";
+import Title from "../../core/components/Modal/Title";
+
+import {Input} from "../../core/components/Input";
+import {CancelButton, NotificationButton} from "../../core/components/Modal/DefaultButtons";
+import {AppThemeProvider} from "../../core/components";
+import Overlay from "../../core/components/Overlay";
+import Radio from "../../core/components/Radio";
 
 const RepaymentModal = styled.div`
       color: #101010;
@@ -58,8 +57,8 @@ const RepaymentButton = styled(RepayAndApplyButton)`
   //flex-basis: 60%;
   background: #fcc76e;
 `
-storiesOf("Page/Repayment", module)
-    .add("Repayment", () => {
+storiesOf("Page/RepaymentModal", module)
+    .add("RepaymentModal", () => {
         const Paragraph = styled.div`
           text-align: left;
           color: #aaaaaa;
