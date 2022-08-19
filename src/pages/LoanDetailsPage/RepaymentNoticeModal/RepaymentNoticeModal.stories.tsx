@@ -1,6 +1,6 @@
 import * as React from "react";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import {AppThemeProvider} from "../../core/components";
+import {AppThemeProvider} from "../../../core/components";
 import RepaymentNoticeModal from "./RepaymentNoticeModal";
 
 export default {
