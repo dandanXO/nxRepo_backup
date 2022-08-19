@@ -4,7 +4,7 @@ const Content = styled.div`
     /* Display */
     //display: table;
     /* Margin */
-    margin: 10px;
+    //margin: 10px;
     /* NOTICE: 最大尺寸 */
     max-width: 320px;
     //height: 80px;
@@ -20,6 +20,7 @@ const Content = styled.div`
     /* Text - Content */
     word-break: break-all;
     line-height: 25px;
+    
     
 `;
 Content.displayName = "Content";
