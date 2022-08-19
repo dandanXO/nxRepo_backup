@@ -22,6 +22,8 @@ const Popup = styled("div")<PopupProps>`
     background: ${(props) => props.theme.custom.background.primary};
     /* Padding */   
     /* Content */
+    max-height: 90vh;
+    overflow: scroll;
     /* NOTICE: */
     min-width: 320px;
     min-height: 300px;
