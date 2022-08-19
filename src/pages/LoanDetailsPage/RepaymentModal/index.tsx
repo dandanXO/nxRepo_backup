@@ -67,7 +67,6 @@ const RepaymentModal = (props: RepaymentModalProps) => {
     return (
         <div>
             <Overlay
-                enableClose={true}
                 show={true}
                 content={(hide: () => void) => {
                     return (

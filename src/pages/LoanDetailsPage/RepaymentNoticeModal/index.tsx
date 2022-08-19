@@ -31,7 +31,6 @@ const RepaymentNoticeModal = () => {
                     alert("cancel")
                 }}
                 // NOTE: 特製版
-                enableClose={false}
                 enableIcon={false}
                 enableTitleHorizontal={true}
             ></Modal>

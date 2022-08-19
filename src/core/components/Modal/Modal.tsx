@@ -60,7 +60,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
         confirmText: "确认",
         cancelText: "取消",
         maskClosable: true,
-        enableClose: true,
+        enableClose: false,
         enableIcon: true,
     };
     constructor(props: IModalProps) {
