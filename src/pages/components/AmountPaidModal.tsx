@@ -53,6 +53,7 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
         <div>
             <Overlay
                 show={true}
+                enableClose={true}
                 title="Notice"
                 content={(hide: () => void) => {
                     return (<div>
