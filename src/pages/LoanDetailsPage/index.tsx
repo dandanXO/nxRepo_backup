@@ -15,7 +15,7 @@ const LoanDetailsPageStyled = styled.div`
 `;
 
 const LoanDetailsPage = () => {
-    const { currentData, isSuccess } = useGetLoanDetailQuery("no-3632791101642108");
+    const { currentData, isSuccess } = useGetLoanDetailQuery({ orderNo: "no-3632791101642108"});
     const [showExtensionModal, setShowExtensionModal] = useState(false);
 
     console.log("currentData", currentData);
