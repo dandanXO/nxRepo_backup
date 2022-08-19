@@ -84,16 +84,16 @@ class Modal extends React.Component<IModalProps, ModalState> {
                     // }}
                 >
                     <ModalPopup width={this.props.width}>
-                        {/*{this.props.enableClose && (*/}
-                        {/*    <div>*/}
-                        {/*        <CloseButton*/}
-                        {/*            onClose={() => {*/}
-                        {/*                this.hidden();*/}
-                        {/*                this.props.onCancel && this.props.onCancel();*/}
-                        {/*            }}*/}
-                        {/*        ></CloseButton>*/}
-                        {/*    </div>*/}
-                        {/*)}*/}
+                        {this.props.enableClose && (
+                            <div>
+                                <CloseButton
+                                    onClose={() => {
+                                        this.hidden();
+                                        this.props.onCancel && this.props.onCancel();
+                                    }}
+                                ></CloseButton>
+                            </div>
+                        )}
                         {/*<div>*/}
                         {/*    <Title>{this.props.title}</Title>*/}
                         {/*    {this.props.enableTitleHorizontal && (*/}

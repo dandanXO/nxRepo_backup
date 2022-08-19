@@ -7,7 +7,7 @@ import {InputContainer} from "./template/InputContainer";
 import {StyledInput2, StyledLabel, StyledTopInput} from "./atom/StyledInput";
 import {InputStatus, InputValidStatus} from "./type";
 import {useForceUpdate} from "../useForceUpdate";
-import {UpperDefaultLabel, UpperDefaultLabel2, UpperOtherLabel} from "./atom/UpperLabel";
+import {RightDefaultLabel, UpperDefaultLabel, UpperFilledLabel} from "./atom/UpperLabel";
 import styled from "styled-components";
 
 const InputAndMessageContainer = styled.div`
@@ -16,6 +16,7 @@ const ErrorMessageSection = styled.div`
     color: #f82626;
     margin-left: 20px;   
     padding-top: 5px;
+    text-align: left;
 `;
 export type InputType =
     | "text"
@@ -215,21 +216,24 @@ const Input: InputInterface = ({
 
     let CustomInput: any
     let LabelComponentElement;
-    let upperLabelType
+    let upperLabelType = false;
     if(labelType === "top") {
         CustomInput = StyledTopInput;
         upperLabelType = true;
+
         if(!isEdit) {
-            if(value.length > 0) {
+            if(String(value).length > 0) {
                 LabelComponentElement = ""
             } else {
-                LabelComponentElement = <UpperDefaultLabel for={labelID}>{label}</UpperDefaultLabel>
+                LabelComponentElement = <UpperFilledLabel for={labelID}>{label}</UpperFilledLabel>
             }
         } else {
-            LabelComponentElement = <UpperOtherLabel for={labelID}>{label}</UpperOtherLabel>
+            LabelComponentElement = <UpperDefaultLabel for={labelID}>{label}</UpperDefaultLabel>
         }
         // }
     } else {
+        // right
+        LabelComponentElement = <RightDefaultLabel for={labelID}>{label}</RightDefaultLabel>
         CustomInput = StyledInput2;
         upperLabelType = false;
     }

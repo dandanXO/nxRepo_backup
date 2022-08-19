@@ -30,11 +30,6 @@ const SectionParagraph = styled.div`
       margin-bottom: 10px;
 `
 
-const ErrorMessage = styled.div`
-      color: #ff0000;
-      text-align: left;
-`
-
 const SectionButton = styled.div`
       margin-bottom: 10px;
 `
@@ -65,12 +60,17 @@ const RepaymentButton = styled(RepayAndApplyButton)`
   background: #fcc76e;
 `
 
-const RepaymentModal = () => {
+interface RepaymentModalProps {
+    balance: number,
+}
+const RepaymentModal = (props: RepaymentModalProps) => {
+    const balance = props.balance;
+    const [balanceValue, setBalanceValue] = useState(String("₹" + balance));
     const [radioValue, setRadioValue] = useState("balance");
-    const [value, setValue] = useState();
     return (
         <div>
             <Overlay
+                enableClose={true}
                 show={true}
                 content={(hide: () => void) => {
                     return (
@@ -79,7 +79,7 @@ const RepaymentModal = () => {
                             <Horizontal/>
 
                             <SectionBalance>
-                                <ListItem title="Balance" text="₹ 8,500"/>
+                                <ListItem title="Balance" text={`₹ ${balance}`}/>
                             </SectionBalance>
 
                             <Horizontal/>
@@ -98,25 +98,14 @@ const RepaymentModal = () => {
 
                                 <Input
                                     label="Amount"
-                                    value={value}
+                                    labelType="right"
+                                    value={balanceValue}
                                     onChange={(event: any) => {
-                                        console.log("event", event.target.value);
-                                        setValue(event.target.value);
+                                        const value = event.target.value.replaceAll("₹", "");
+                                        setBalanceValue("₹" + value);
                                     }}
-                                    onFocus={() => {
-                                        console.log("onFocus");
-                                    }}
-                                    onBlur={() => {
-                                        console.log("onBlur");
-                                    }}
-                                    onKeyDown={event => {
-                                        console.log("onKeyDown", event.target.value);
-                                    }}
-                                    onKeyUp={event => {
-                                        console.log("onKeyUp", event.target.value);
-                                    }}
+                                    errorMessage="Error message"
                                 />
-                                <ErrorMessage>error message</ErrorMessage>
                                 <SectionParagraph>
                                     <Paragraph>Attention:</Paragraph>
                                     <Paragraph>

@@ -12,24 +12,21 @@ const upperLabelType = (labelType: boolean) => {
             flex-direction: column;
             align-items: flex-start;
         `
-
     } else {
         return `        
-            flex-direction: row;
+            // flex-direction: row;
             align-items: center;     
-            justify-content: space-between;               
+            // justify-content: space-between;               
         `
     }
 }
 const isFocus = (isFocus: boolean) => {
     if(isFocus) {
-        return `
-        
+        return `        
         `;
     } else {
         return `
-            justify-content: center;
-            height: 42.5px;
+            justify-content: center;            
         `;
     }
 
@@ -43,6 +40,7 @@ export const InputContainer = styled.label<InputContainerProps>`
     padding-left: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
+    height: 42.5px;
     ${(props) => upperLabelType(props.upperLabelType)}
     ${(props) => isFocus(props.isFocus)};
 `;

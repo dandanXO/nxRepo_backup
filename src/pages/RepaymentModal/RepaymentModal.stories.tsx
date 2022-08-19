@@ -11,7 +11,7 @@ export default {
 export const Prototype: ComponentStory<typeof RepaymentModal> = (args) => {
     return (
         <AppThemeProvider>
-            <RepaymentModal/>
+            <RepaymentModal balance={8500}/>
         </AppThemeProvider>
     )
 }
