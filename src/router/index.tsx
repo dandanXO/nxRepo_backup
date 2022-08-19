@@ -4,6 +4,7 @@ import DemoPage from "../pages/DemoPage";
 import LoanDetailsPage from "../pages/LoanDetailsPage";
 import ExtendDetailsPage from "../pages/ExtendDetailsPage";
 import UploadPaymentReceiptPage from "../pages/UploadPaymentReceiptPage";
+import BankAccountPage from "../pages/BankAccountPage";
 
 // NOTE:
 // https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris
@@ -18,7 +19,7 @@ export const AppRouter = () => {
                 <Route path="/loan-details" element={<LoanDetailsPage/>}/>
                 {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
                 <Route path="/extend-details" element={<ExtendDetailsPage/>}/>
-                <Route path="/bank-bink" element={<UploadPaymentReceiptPage/>}/>
+                <Route path="/bank-bind" element={<BankAccountPage/>}/>
                 <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage/>}/>
                 <Route path="*" element={<div>Not Found</div>}/>
             </Routes>

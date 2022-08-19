@@ -14,7 +14,7 @@ export default () => {
                 <Link to="/extend-details">extendDetailsPage</Link>
             </div>
             <div>
-                <Link to="/bank-bink">UploadPaymentReceiptPage</Link>
+                <Link to="/bank-bind">bank-bind</Link>
             </div>
             <div>
                 <Link to="/upload-payment-receipt">UploadPaymentReceiptPage</Link>
