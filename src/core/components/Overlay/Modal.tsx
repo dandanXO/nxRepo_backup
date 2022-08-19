@@ -85,13 +85,12 @@ class Modal extends React.Component<IModalProps, ModalState> {
                 >
                     <ModalPopup width={this.props.width}>
                         {this.props.enableClose && (
-                            <div>
-                                <CloseButton
-                                    onClick={() => {
-                                        this.hidden();
-                                        this.props.onCancel && this.props.onCancel();
-                                    }}
-                                ></CloseButton>
+                            <div onClick={() => {
+                                console.log("close")
+                                this.hidden();
+                                this.props.onCancel && this.props.onCancel();
+                            }}>
+                                <CloseButton/>
                             </div>
                         )}
                         {/*<div>*/}
