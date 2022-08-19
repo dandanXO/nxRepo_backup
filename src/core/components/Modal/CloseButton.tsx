@@ -20,7 +20,7 @@ const CloseButton = styled(StyledlessCloseButton)`
     /* Margin */
     margin: 11px 11px 0 0;
     /* Background */
-    background: url(${CloseICON}) no-repeat -3px -4px;
+    background: url(${CloseICON}) no-repeat -3px -66px;
     width: 12px;
     height: 12px;
     /* Text */

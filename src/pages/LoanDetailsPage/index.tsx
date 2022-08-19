@@ -1,10 +1,13 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import LoanInfo from "../components/LoanInfo";
 import LoanDetail from "../components/LoanDetail";
 import Advertisment from "../components/Advertisment"
 
-import {useGetLoanDetailQuery} from "../../api";
+
+
+import { useGetLoanDetailQuery } from "../../api";
+import ExtensionDetailModal from "../ExtensionDetailModal";
 
 const LoanDetailsPageStyled = styled.div`
     padding: 18px;
@@ -13,12 +16,15 @@ const LoanDetailsPageStyled = styled.div`
 
 const LoanDetailsPage = () => {
     const { currentData, isSuccess } = useGetLoanDetailQuery("no-3632791101642108");
+    const [showExtensionModal, setShowExtensionModal] = useState(false);
+
     console.log("currentData", currentData);
     return (
         <LoanDetailsPageStyled>
-            <LoanInfo {...currentData}/>
-            <LoanDetail {...currentData}/>
-            <Advertisment/>
+            {showExtensionModal && <ExtensionDetailModal />}
+            <LoanInfo {...currentData} setShowExtensionModal={setShowExtensionModal} />
+            <LoanDetail {...currentData} />
+            <Advertisment />
         </LoanDetailsPageStyled>
     );
 }

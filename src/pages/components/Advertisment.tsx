@@ -36,7 +36,10 @@ const BannerWithCardStyled = styled.div`
     .bannerHide {
         width: 100%;
         border-radius: 8px;
-        margin-bottom: -40%;
+        height: 50px; 
+        object-fit: cover;
+        object-position: left top;
+        margin-bottom: -20px;
     }
 `;
 
