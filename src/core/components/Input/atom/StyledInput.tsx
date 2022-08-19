@@ -246,7 +246,7 @@ function isFocus(isFocus: boolean) {
 
 }
 export const StyledInput2 = styled(StyledTopInput)<StyledInputProps>`
-    padding: 15px;
+    //padding: 15px;
     font-weight: 400;   
     text-align: right;
     color: #101010;

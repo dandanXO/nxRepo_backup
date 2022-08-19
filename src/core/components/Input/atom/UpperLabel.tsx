@@ -27,6 +27,6 @@ export const UpperDefaultLabel = styled.label<Label>`
 
 // NOTICE: RightInputStyle
 export const RightDefaultLabel = styled.label<Label>`
-    flex: 1;
+    flex: 1 0 auto;
     font-size: 17px;
 `;

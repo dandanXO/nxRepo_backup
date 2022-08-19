@@ -38,6 +38,7 @@ export const InputContainer = styled.label<InputContainerProps>`
     border: 1px solid #aaaaaa;
     border-radius: 9px;
     padding-left: 20px;
+    padding-right: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     height: 42.5px;
