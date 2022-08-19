@@ -16,6 +16,7 @@ const config = {
         path: path.resolve(__dirname, "../dist"),
     },
     devServer: {
+        hot: true,
         open: true,
         host: "localhost",
         port: 9000,
@@ -29,6 +30,13 @@ const config = {
                 res.json(mockAPIResponse)
             })
         },
+        proxy: { //设置代理
+            "/api": {
+                target: "https://app.india-api-dev.com",
+                secure: false, // 協議是https的時候必須要寫
+                changeOrigin: true
+            }
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({

@@ -1,37 +1,23 @@
-// export default () => {
-//     return <div>LoanDetailsPage</div>
-// }
-
 import styled from "styled-components";
 import React from "react";
-import Card from "../../core/components/Card";
-import CardContent from "../../core/components/CardContent";
 import LoanInfo from "../components/LoanInfo";
-
 import LoanDetail from "../components/LoanDetail";
 import Advertisment from "../components/Advertisment"
-import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
 
-
+import {useGetLoanDetailQuery} from "../../api";
 
 const LoanDetailsPageStyled = styled.div`
     padding: 18px;
     background: ${({ theme }) => theme.color.gray100};
 `;
 
-type LoanInfoProps = GetLoanDetailResponse;
-
-
-   
-
 const LoanDetailsPage = () => {
- 
+    const { currentData, isSuccess } = useGetLoanDetailQuery("no-3632791101642108");
+    console.log("currentData", currentData);
     return (
         <LoanDetailsPageStyled>
-
-
-            <LoanInfo {...mockGetLoanDetailResponse}/>
-            <LoanDetail {...mockGetLoanDetailResponse}/>
+            <LoanInfo {...currentData}/>
+            <LoanDetail {...currentData}/>
             <Advertisment/>
         </LoanDetailsPageStyled>
     );
