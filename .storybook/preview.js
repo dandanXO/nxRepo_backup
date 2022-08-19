@@ -1,5 +1,5 @@
 const customViewports = {
-  xs: {
+  "360x640": {
     name: "XS",
     styles: {
       width: "360px",
@@ -17,6 +17,7 @@ export const parameters = {
     },
   },
   viewport: {
+    defaultViewport: '360x640',
     viewports: {
       ...customViewports,
     },
