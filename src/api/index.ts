@@ -31,7 +31,7 @@ export const API = createApi({
             query: (arg: GetAttractionsALLRequestQueryArg) => `/${arg.lang}/Attractions/All?page=1`,
         }),
         getLoanDetail: builder.query({
-            query: (orderNo: GetLoanDetailRequestQuery) => `/loan/detail?orderNo=${orderNo}`,
+            query: (query: GetLoanDetailRequestQuery) => `/loan/detail?orderNo=${query.orderNo}`,
         })
     })
 });
