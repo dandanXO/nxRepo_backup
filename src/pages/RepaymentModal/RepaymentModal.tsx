@@ -100,7 +100,7 @@ const RepaymentModal = () => {
                                 <Input
                                     label="Amount"
                                     value={value}
-                                    onChange={event => {
+                                    onChange={(event: any) => {
                                         console.log("event", event.target.value);
                                         setValue(event.target.value);
                                     }}
