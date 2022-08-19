@@ -1,5 +1,5 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import BankAccountPage from "./BankAccountPage";
+import BankAccountPage from "./index";
 import {AppThemeProvider} from "../../core/components";
 
 export default {
@@ -7,7 +7,7 @@ export default {
     component: BankAccountPage,
 } as ComponentMeta<typeof BankAccountPage>
 
-export const Prototype: ComponentStory<typeof BankAccountPage> = (args) => {
+export const Page: ComponentStory<typeof BankAccountPage> = (args) => {
     return (
         <AppThemeProvider>
             <BankAccountPage/>
