@@ -2,6 +2,7 @@ import queryString from "query-string";
 
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData } from "./demo/getAttractionsALL";
+import {GetLoanDetailRequestQuery} from "./getLoanDetail";
 export {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData }
 
 const parsedQueryString = queryString.parse(location.search);
@@ -30,7 +31,7 @@ export const API = createApi({
             query: (arg: GetAttractionsALLRequestQueryArg) => `/${arg.lang}/Attractions/All?page=1`,
         }),
         getLoanDetail: builder.query({
-            query: (orderNo) => `/loan/detail?orderNo=${orderNo}`,
+            query: (orderNo: GetLoanDetailRequestQuery) => `/loan/detail?orderNo=${orderNo}`,
         })
     })
 });
