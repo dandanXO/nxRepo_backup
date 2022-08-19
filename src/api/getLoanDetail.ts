@@ -25,6 +25,8 @@ export interface GetLoanDetailResponse {
     extendDate?: string;
     /** @description 是否可展期 */
     extendable?: boolean;
+    /** @description 是否为展期订单 */
+    extended?: boolean;
     /** @description 展期費用(status=EXTEND才會有) */
     extensionFee?: number;
     /** @description Icon url */
@@ -37,6 +39,8 @@ export interface GetLoanDetailResponse {
     originalDueDate?: string;
     /** @description 已還金額 */
     paidAmount?: number;
+    /** @展期来源订单号 已還金額 */
+    parentOrderNo?:	string;
     /** @description 罰金金額 */
     penaltyInterest?: number;
     /** @description 產品名稱 */
@@ -83,9 +87,15 @@ export const mockGetLoanDetailResponse:GetLoanDetailResponse = {
     "productName": "ZZ LOAN",
     "orderNo": "no-3632791101642108",
     "loanAmount": 3000.00,
-    "paidAmount": 0,
-    "repayRecords": [],
-    "balance": 3000.00,
+    "paidAmount": 1380.00,
+    "repayRecords": [
+        {
+            "repayDate": "2022-06-25",
+            "repayAmount": 1380.00,
+            "balance": 0.00
+        }
+    ],
+    "balance": 1620.00,
     "extensionFee": null,
     "status": "EXTEND",
     "serviceCharge": 1380.00,
@@ -101,5 +111,7 @@ export const mockGetLoanDetailResponse:GetLoanDetailResponse = {
     "customerServiceEmail": "csemail@test.copm",
     "iconUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/ad_logo/ad-logo-822352090585600.png",
     "repayUrl": "https://site.india-api-dev.com/api/v2/repay/create",
-    "extendable": false
+    "extendable": false,
+    "extended": true,
+    "parentOrderNo": null
 }
