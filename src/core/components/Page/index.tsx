@@ -1,14 +1,8 @@
 import styled from "styled-components";
 import React from "react";
 
-const StyledPage = styled.div`
+const Page = styled.div`
   padding: 18px;
   background: ${({ theme }) => theme.color.gray100};
 `
-interface PageProps {
-    children?: React.ReactNode;
-}
-const Page = (props: PageProps) => {
-    return <StyledPage>{props.children}</StyledPage>
-}
 export default Page;

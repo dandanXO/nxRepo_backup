@@ -56,7 +56,10 @@ const CloseSVGIcon = (props: CloseSVGIconProps) => {
 //     :visited {
 //     }
 // `;
-const CloseButton = styled(CloseSVGIcon)`
+interface CloseButtonProps {
+    onClick?: any;
+}
+const CloseButton = styled(CloseSVGIcon)<CloseButtonProps>`
     float: right;
     /* Margin */
     margin: 11px 11px 0 0;
@@ -84,7 +87,4 @@ const CloseButton = styled(CloseSVGIcon)`
     :visited {
     }
 `;
-CloseButton.displayName = "CloseButton";
-
-export default (props: any) => <CloseButton/>
-// export default CloseSVGIcon;
+export default CloseButton;
