@@ -6,13 +6,9 @@ import AppContext from "../AppContext";
 
 type ModalContentFunction<T> = (args: any) => T;
 interface IModalWrapperProps {
-    custom?: boolean;
     content: (hide: () => void) => React.ReactElement;
     // content?: string | ModalContentFunction<any>;
     show: boolean;
-    title?: string
-    enableTitleHorizontal?: boolean;
-
 }
 
 type ModalWrapperProps = IModalWrapperProps & IModalProps;

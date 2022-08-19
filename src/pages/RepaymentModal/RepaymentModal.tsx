@@ -72,7 +72,6 @@ const RepaymentModal = () => {
         <div>
             <Overlay
                 show={true}
-                title="Notice"
                 content={(hide: () => void) => {
                     return (
                         <RepaymentModalContainer>
@@ -138,7 +137,7 @@ const RepaymentModal = () => {
                                     </RepayAndApplyButton>
                                 </SectionButton>
                                 <SectionButton2>
-                                    <RepaymentCancelButton>Cancel</RepaymentCancelButton>
+                                    <RepaymentCancelButton onClick={() => hide()}>Cancel</RepaymentCancelButton>
                                     <RepaymentButton>Repayment</RepaymentButton>
                                 </SectionButton2>
                             </SectionOptions>
@@ -147,7 +146,6 @@ const RepaymentModal = () => {
                         </RepaymentModalContainer>
                     )
                 }}
-                enableTitleHorizontal={true}
             ></Overlay>
         </div>
     )
