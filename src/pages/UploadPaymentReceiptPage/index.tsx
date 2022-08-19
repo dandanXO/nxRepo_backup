@@ -1,6 +1,8 @@
+import Page from "../components/Page";
+
 const UploadPaymentReceiptPage = () => {
     return (
-        <div>UploadPaymentReceiptPage</div>
+        <Page>UploadPaymentReceiptPage</Page>
     )
 }
 

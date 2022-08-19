@@ -1,5 +1,6 @@
 import {GetAttractionsALLResponseData, useGetAttractionsAllQuery} from "../../api";
 import React from "react";
+import Page from "../components/Page";
 
 export default () => {
     const { currentData, error, isLoading, isError, isFetching} = useGetAttractionsAllQuery({
@@ -22,7 +23,7 @@ export default () => {
     if (isFetching && !currentData) return (<div>isFetching</div>)
 
     return (
-        <div className={isFetching ? 'posts--disabled' : ''}>
+        <Page className={isFetching ? 'posts--disabled' : ''}>
             {currentData
                 ? currentData.data.map((data: GetAttractionsALLResponseData) => (
                     <div>
@@ -31,7 +32,7 @@ export default () => {
                     </div>
                 ))
                 : 'No data available'}
-        </div>
+        </Page>
 
     )
 }

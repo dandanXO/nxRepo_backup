@@ -1,8 +1,9 @@
 import {Link} from "react-router-dom";
+import Page from "../components/Page";
 
 export default () => {
     return (
-        <div>
+        <Page>
             <div>
                 <Link to="/demo">demoPage</Link>
             </div>
@@ -12,6 +13,6 @@ export default () => {
             <div>
                 <Link to="/extend-details">extendDetailsPage</Link>
             </div>
-        </div>
+        </Page>
     )
 }

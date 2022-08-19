@@ -5,11 +5,8 @@ import LoanDetail from "../components/LoanDetail";
 import Advertisment from "../components/Advertisment"
 import { useGetLoanDetailQuery } from "../../api";
 import ExtensionDetailModal from "../ExtensionDetailModal";
+import Page from "../components/Page";
 
-const LoanDetailsPageStyled = styled.div`
-    padding: 18px;
-    background: ${({ theme }) => theme.color.gray100};
-`;
 
 const LoanDetailsPage = () => {
     const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({ orderNo: "no-3632791101642108"});
@@ -18,12 +15,12 @@ const LoanDetailsPage = () => {
     // if(isLoading) return <div>isLoading</div>
     // if(isFetching) return <div>isFetching</div>
     return (
-        <LoanDetailsPageStyled>
+        <Page>
             {showExtensionModal && <ExtensionDetailModal />}
             <LoanInfo {...currentData} setShowExtensionModal={setShowExtensionModal} />
             <LoanDetail {...currentData} />
             <Advertisment />
-        </LoanDetailsPageStyled>
+        </Page>
     );
 }
 
