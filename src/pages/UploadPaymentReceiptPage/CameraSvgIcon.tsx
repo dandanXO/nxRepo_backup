@@ -3,10 +3,10 @@ interface CameraSvgIconProps {
 }
 const CameraSvgIcon = ({ fill = "#fff"}: CameraSvgIconProps) => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
             <defs>
                 <clipPath id="a">
-                    <rect width="50" height="50" transform="translate(2527 886)" fill="none" stroke= stroke-width="1"/></clipPath>
+                    <rect width="50" height="50" transform="translate(2527 886)" fill="none" stroke="#707070" stroke-width="1"/></clipPath>
             </defs>
             <g transform="translate(-2527 -886)" clip-path="url(#a)">
                 <g transform="translate(2535 897)">
