@@ -1,14 +1,14 @@
-import Modal from "../../core/components/Modal";
-import Overlay from "../../core/components/Overlay";
+import Modal from "../../../../core/components/Modal";
+import Overlay from "../../../../core/components/Overlay";
 import React from "react";
 import styled from "styled-components";
-import LoanBrand from "../../core/components/LoanBrand";
-import Divider from "../../core/components/Divider";
-import ListItem from "../../core/components/ListItem";
-import Tag from "../../core/components/Tag";
-import AmountPaidIcon from "../../core/components/images/amount_paid_icon.svg";
-import Logo from "../../core/components/images/logo.jpg";
-import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
+import LoanBrand from "../../../../core/components/LoanBrand";
+import Divider from "../../../../core/components/Divider";
+import ListItem from "../../../../core/components/ListItem";
+import Tag from "../../../../core/components/Tag";
+import AmountPaidIcon from "../../../../core/components/images/amount_paid_icon.svg";
+import Logo from "../../../../core/components/images/logo.jpg";
+import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../../../api/getLoanDetail";
 
 
 const ExtesionDetailStyled = styled.div`
