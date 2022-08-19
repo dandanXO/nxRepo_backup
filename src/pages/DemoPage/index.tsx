@@ -23,7 +23,7 @@ export default () => {
     if (isFetching && !currentData) return (<div>isFetching</div>)
 
     return (
-        <Page className={isFetching ? 'posts--disabled' : ''}>
+        <Page>
             {currentData
                 ? currentData.data.map((data: GetAttractionsALLResponseData) => (
                     <div>

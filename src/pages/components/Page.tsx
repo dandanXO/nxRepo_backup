@@ -5,7 +5,10 @@ const StyledPage = styled.div`
   padding: 18px;
   background: ${({ theme }) => theme.color.gray100};
 `
-const Page = (props: any) => {
-    return <StyledPage {...props}>{props.children}</StyledPage>
+interface PageProps {
+    children?: React.ReactNode;
+}
+const Page = (props: PageProps) => {
+    return <StyledPage>{props.children}</StyledPage>
 }
 export default Page;
