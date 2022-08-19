@@ -1,5 +1,5 @@
 // GetLoanDetail
-export interface GetLoanDetailRequestQuery {
+export interface GetLoanDetailRequestQuerystring {
     /** 訂單號 */
     orderNo?: string;
 };
