@@ -1,9 +1,9 @@
 import {Link} from "react-router-dom";
-import Index from "../../core/components/Page";
+import Page from "../../core/components/Page";
 
 export default () => {
     return (
-        <Index>
+        <Page>
             <div>
                 <Link to="/demo">demoPage</Link>
             </div>
@@ -13,6 +13,6 @@ export default () => {
             <div>
                 <Link to="/extend-details">extendDetailsPage</Link>
             </div>
-        </Index>
+        </Page>
     )
 }

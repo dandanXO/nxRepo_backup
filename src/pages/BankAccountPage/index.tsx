@@ -15,7 +15,7 @@ const Paragraph = styled.p`
 const SubmitButton = styled(NotificationButton)`
     color: #fff;
 `
-const Index = () => {
+const BankAccountPage = () => {
     const [value, setValue] = useState("");
     const [value2, setValue2] = useState("");
     const [value3, setValue3] = useState("");
@@ -89,4 +89,4 @@ const Index = () => {
     )
 }
 
-export default Index;
+export default BankAccountPage;
