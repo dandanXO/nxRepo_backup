@@ -57,11 +57,11 @@ const LoanInfoStyled = styled.div`
     }
 `;
 
-type LoanInfoProps = Pick<GetLoanDetailResponse, "iconUrl" |"productName" |"status" | "paidAmount" | "balance"> 
+type LoanInfoProps = Pick<GetLoanDetailResponse, "iconUrl" |"productName" |"status" | "paidAmount" | "balance"|"extended"> 
 & {setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>};
 
 const LoanInfo = (props: LoanInfoProps) => {
-    const { status, paidAmount, balance, iconUrl, productName ,setShowExtensionModal} = props;
+    const { status, paidAmount, balance, iconUrl, productName,extended ,setShowExtensionModal} = props;
     return (
         <LoanInfoStyled>
             <LoanBrand iconUrl={iconUrl} productName={productName} sizeType={'small'}/>
@@ -76,20 +76,19 @@ const LoanInfo = (props: LoanInfoProps) => {
             <Card isHot={false}>
                 <div className={"loanInfo-Card-Title"}>Gernal</div>
                 <div className={"loanInfo-Card-list"}>
-                <ListItem title={"State"} text={<Tag status={status}>{status}</Tag>} />
-                <ListItem
-                    title={
-                        <div>
-                            <div>Amount Paid</div>
-                            <div><img src={AmountPaidIcon} /></div>
-                        </div>
-                    }
-                    text={`₹ ${paidAmount}`}
-                />
-                <ListItem title={"Balance"} text={`₹ ${balance}`} />
+                    <ListItem title={"State"} text={<Tag status={status}>{status}</Tag>} />
+                    {extended && <ListItem
+                        title={
+                            <div>
+                                <div>Amount Paid</div>
+                                <div><img src={AmountPaidIcon} /></div>
+                            </div>
+                        }
+                        text={`₹ ${paidAmount}`}
+                    />}
+                    <ListItem title={"Balance"} text={`₹ ${balance}`} />
                 </div>
-                
-                <div className={"relatedRepayment"} ><Button onClick={()=>setShowExtensionModal(true)} styleType={'link'}>{'Related repayment >'}</Button></div>
+                <div className={"relatedRepayment"} ><Button onClick={() => setShowExtensionModal(true)} styleType={'link'}>{'Related repayment >'}</Button></div>
             </Card>
             {
                 (status === "UNPAID" || status === "OVERDUE") &&

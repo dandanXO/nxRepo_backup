@@ -68,7 +68,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
         <ExtesionDetailStyled>
             <div className="loanBrand"><LoanBrand iconUrl={iconUrl} productName={productName} sizeType={'small'} /></div>
             <div className="totalTitle">Amount Paid with Extension</div>
-            <div className="totalText">₹ {balance}123132123</div>
+            <div className="totalText">₹ {balance}</div>
 
             <Divider />
             <div className={"loanInfo-Card-Title"}>Gernal</div>
