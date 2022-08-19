@@ -1,17 +1,17 @@
 import * as React from "react";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import RepaymentModal from "./RepaymentModal";
+import Index from "./RepaymentModal";
 import {AppThemeProvider} from "../../../core/components";
 
 export default {
     title: 'Page/RepaymentModal',
-    component: RepaymentModal,
-} as ComponentMeta<typeof RepaymentModal>;
+    component: Index,
+} as ComponentMeta<typeof Index>;
 
-export const Prototype: ComponentStory<typeof RepaymentModal> = (args) => {
+export const Prototype: ComponentStory<typeof Index> = (args) => {
     return (
         <AppThemeProvider>
-            <RepaymentModal balance={8500}/>
+            <Index balance={8500}/>
         </AppThemeProvider>
     )
 }
