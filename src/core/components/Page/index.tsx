@@ -8,7 +8,7 @@ const StyledPage = styled.div`
 interface PageProps {
     children?: React.ReactNode;
 }
-const Index = (props: PageProps) => {
+const Page = (props: PageProps) => {
     return <StyledPage>{props.children}</StyledPage>
 }
-export default Index;
+export default Page;
