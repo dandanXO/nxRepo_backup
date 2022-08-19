@@ -4,11 +4,11 @@ import {AppThemeProvider} from "../../../core/components";
 import RepaymentNoticeModal from "./index";
 
 export default {
-    title: 'Page/RepaymentNoticeModal',
+    title: 'Page/LoanDetailsPage',
     component: RepaymentNoticeModal,
 } as ComponentMeta<typeof RepaymentNoticeModal>;
 
-export const Prototype: ComponentStory<typeof RepaymentNoticeModal> = (args) => {
+export const ModalRepaymentNotice: ComponentStory<typeof RepaymentNoticeModal> = (args) => {
     return (
         <AppThemeProvider>
             <RepaymentNoticeModal/>
