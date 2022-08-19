@@ -1,6 +1,6 @@
 import * as React from "react";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import Index from "./RepaymentModal";
+import Index from "./index";
 import {AppThemeProvider} from "../../../core/components";
 
 export default {
