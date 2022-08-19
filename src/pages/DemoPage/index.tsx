@@ -1,6 +1,6 @@
 import {GetAttractionsALLResponseData, useGetAttractionsAllQuery} from "../../api";
 import React from "react";
-import Page from "../components/Page";
+import Index from "../../core/components/Page";
 
 export default () => {
     const { currentData, error, isLoading, isError, isFetching} = useGetAttractionsAllQuery({
@@ -23,7 +23,7 @@ export default () => {
     if (isFetching && !currentData) return (<div>isFetching</div>)
 
     return (
-        <Page>
+        <Index>
             {currentData
                 ? currentData.data.map((data: GetAttractionsALLResponseData) => (
                     <div>
@@ -32,7 +32,7 @@ export default () => {
                     </div>
                 ))
                 : 'No data available'}
-        </Page>
+        </Index>
 
     )
 }

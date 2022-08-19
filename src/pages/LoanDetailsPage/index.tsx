@@ -5,7 +5,7 @@ import LoanDetail from "../components/LoanDetail";
 import Advertisment from "../components/Advertisment"
 import { useGetLoanDetailQuery } from "../../api";
 import ExtensionDetailModal from "../ExtensionDetailModal";
-import Page from "../components/Page";
+import Index from "../../core/components/Page";
 
 
 const LoanDetailsPage = () => {
@@ -15,12 +15,12 @@ const LoanDetailsPage = () => {
     // if(isLoading) return <div>isLoading</div>
     // if(isFetching) return <div>isFetching</div>
     return (
-        <Page>
+        <Index>
             {showExtensionModal && <ExtensionDetailModal />}
             <LoanInfo {...currentData} setShowExtensionModal={setShowExtensionModal} />
             <LoanDetail {...currentData} />
             <Advertisment />
-        </Page>
+        </Index>
     );
 }
 

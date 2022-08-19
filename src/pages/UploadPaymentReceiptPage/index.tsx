@@ -1,8 +1,8 @@
-import Page from "../components/Page";
+import Index from "../../core/components/Page";
 
 const UploadPaymentReceiptPage = () => {
     return (
-        <Page>UploadPaymentReceiptPage</Page>
+        <Index>UploadPaymentReceiptPage</Index>
     )
 }
 
