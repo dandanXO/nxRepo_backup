@@ -1,4 +1,4 @@
-import Modal from "../../../core/components/Modal";
+import Modal from "../../../../core/components/Modal";
 import React from "react";
 import styled from "styled-components";
 
