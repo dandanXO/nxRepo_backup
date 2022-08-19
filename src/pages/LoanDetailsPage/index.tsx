@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import LoanInfo from "../components/LoanInfo";
 import LoanDetail from "../components/LoanDetail";
 import Advertisment from "../components/Advertisment"
-import AmountPaidModal from "../components/Modal/AmountPaidModal";
+import AmountPaidModal from "../components/modal/AmountPaidModal";
 import { useGetLoanDetailQuery } from "../../api";
 import ExtensionDetailModal from "./modal/ExtensionDetailModal";
 import Page from "../../core/components/Page";
