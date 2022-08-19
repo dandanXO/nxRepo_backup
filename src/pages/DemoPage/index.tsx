@@ -1,4 +1,5 @@
 import {GetAttractionsALLResponseData, useGetAttractionsAllQuery} from "../../api";
+import React from "react";
 
 export default () => {
     const { currentData, error, isLoading, isError, isFetching} = useGetAttractionsAllQuery({
@@ -13,6 +14,9 @@ export default () => {
     //     lang: "zh-tw",
     //     page: 1
     // });
+
+    // if(isLoading) return <div>isLoading</div>
+    // if(isFetching) return <div>isFetching</div>
 
     if (isError) return (<div>An error has occurred!</div>)
     if (isFetching && !currentData) return (<div>isFetching</div>)

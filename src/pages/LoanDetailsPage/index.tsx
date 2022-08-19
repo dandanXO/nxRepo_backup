@@ -12,9 +12,11 @@ const LoanDetailsPageStyled = styled.div`
 `;
 
 const LoanDetailsPage = () => {
-    const { currentData, isSuccess } = useGetLoanDetailQuery({ orderNo: "no-3632791101642108"});
+    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({ orderNo: "no-3632791101642108"});
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     console.log("currentData", currentData);
+    // if(isLoading) return <div>isLoading</div>
+    // if(isFetching) return <div>isFetching</div>
     return (
         <LoanDetailsPageStyled>
             {showExtensionModal && <ExtensionDetailModal />}
