@@ -11,7 +11,7 @@ export default {
 export const ModalRepaymentNotice: ComponentStory<typeof RepaymentNoticeModal> = (args) => {
     return (
         <AppThemeProvider>
-            <RepaymentNoticeModal/>
+            <RepaymentNoticeModal setShowRepaymentNoticeModal={{} as any}/>
         </AppThemeProvider>
     )
 }

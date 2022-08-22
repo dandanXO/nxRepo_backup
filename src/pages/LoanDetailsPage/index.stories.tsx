@@ -1,16 +1,17 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import LoanDetailsPage from "./index";
+import {PureLoanDetailsPage} from "./index";
 import {AppThemeProvider} from "../../core/components";
+import {mockGetLoanDetailResponse} from "../../api/getLoanDetail";
 
 export default {
     title: "Page/LoanDetailsPage",
-    component: LoanDetailsPage,
-} as ComponentMeta<typeof LoanDetailsPage>
+    component: PureLoanDetailsPage,
+} as ComponentMeta<typeof PureLoanDetailsPage>
 
-export const Page:ComponentStory<typeof LoanDetailsPage> = () => {
+export const Page:ComponentStory<typeof PureLoanDetailsPage> = () => {
     return (
         <AppThemeProvider>
-            <LoanDetailsPage/>
+            <PureLoanDetailsPage currentData={mockGetLoanDetailResponse} />
         </AppThemeProvider>
     )
 }

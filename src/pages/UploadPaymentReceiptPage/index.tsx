@@ -4,7 +4,6 @@ import {useCallback, useState} from "react";
 import styled from "styled-components";
 import CameraSvgIcon from "./CameraSvgIcon";
 import Button from "../../core/components/Button";
-import ExampleUploadedImage from "../../core/components/images/banner.jpg"
 import {usePostRepayReceiptMutation} from "../../api";
 import {PostRepayReceiptResponse} from "../../api/postRepayReceipt";
 import {useNavigate} from "react-router-dom";
@@ -28,7 +27,7 @@ const UploadSection = styled.label.attrs<{ for: string; }>(props => ({
     htmlFor: 'file'
 }))`
     height: 183px;
-    background-color: gray;
+    background-color: #919191;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,7 +63,9 @@ const CameraSvgIconWrapper = styled.div`
 `
 
 interface PureUploadPaymentReceiptPageProps {
-    postRepayReceiptRequest: any;
+    postRepayReceiptRequest: (props: PostRepayReceiptRequestProps) => void;
+    token: string;
+    orderNo: string;
 }
 export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPageProps) => {
     const [isUploading, setIsUploading] = useState(false);
@@ -73,7 +74,12 @@ export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPage
 
     const confirm = useCallback(() => {
         setIsUploading(true);
-        props.postRepayReceiptRequest();
+        props.postRepayReceiptRequest({
+            formFile: formFile,
+            orderNo: props.orderNo,
+            receipt: utr,
+            setIsUploading,
+        });
     }, [utr, formFile]);
 
     const [imageSrc, setImageSrc] = useState<string>();
@@ -155,7 +161,7 @@ const UploadPaymentReceiptPage = () => {
     }, []);
 
     return (
-        <PureUploadPaymentReceiptPage postRepayReceiptRequest={postRepayReceiptRequest}/>
+        <PureUploadPaymentReceiptPage postRepayReceiptRequest={postRepayReceiptRequest} token={pageQueryString.token} orderNo={pageQueryString.orderNo}/>
     )
 }
 export default UploadPaymentReceiptPage;

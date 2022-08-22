@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useCallback} from "react";
 import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
 import Tag from "../../core/components/Tag";
 import Card from "../../core/components/Card";
@@ -62,12 +62,12 @@ const LoanInfoStyled = styled.div`
 type LoanInfoProps = Pick<GetLoanDetailResponse, "iconUrl" | "productName" | "totalDueAmount" | "status" | "paidAmount" | "balance" | "extended"> & {
     setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowAmountPaidModal: React.Dispatch<React.SetStateAction<boolean>>;
+    navigateToUploadPaymentReceiptPage: () => void;
 };
 
 const LoanInfo = (props: LoanInfoProps) => {
     const { iconUrl, productName, totalDueAmount, status, paidAmount, balance, extended, setShowExtensionModal, setShowAmountPaidModal } = props;
-    const pageQueryString = useLocationOrderQueryString();
-    const navigate = useNavigate();
+
     return (
         <LoanInfoStyled>
             <LoanBrand iconUrl={iconUrl} productName={productName} sizeType={'small'}/>
@@ -99,9 +99,7 @@ const LoanInfo = (props: LoanInfoProps) => {
             {
                 (status === "UNPAID" || status === "OVERDUE") &&
                 <div>
-                    <div className={"uploadButton"} onClick={() => {
-                        navigate(`/upload-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`)
-                    }}><Button>Upload Receipt</Button></div>
+                    <div className={"uploadButton"} onClick={props.navigateToUploadPaymentReceiptPage}><Button>Upload Receipt</Button></div>
                     <div className={"noticeText"}>After completing the repayment, take a screenshot and uploadyour repayment receipt here.</div>
                 </div>
             }

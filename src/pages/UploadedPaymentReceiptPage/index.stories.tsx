@@ -10,7 +10,7 @@ export default {
 export const Page:ComponentStory<typeof PureUploadedPaymentReceiptPage> = (args) => {
     return (
         <AppThemeProvider>
-            <PureUploadedPaymentReceiptPage navigateToLoanDetails={() => {}}/>
+            <PureUploadedPaymentReceiptPage navigateToLoanDetails={{} as any}/>
         </AppThemeProvider>
     )
 }

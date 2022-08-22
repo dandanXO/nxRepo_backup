@@ -9,7 +9,7 @@ export default {
 export const Page: ComponentStory<any> = () => {
     return (
         <AppThemeProvider>
-            <PureUploadPaymentReceiptPage/>
+            <PureUploadPaymentReceiptPage postRepayReceiptRequest={{} as any} token={{} as any} orderNo="123"/>
         </AppThemeProvider>
     )
 }

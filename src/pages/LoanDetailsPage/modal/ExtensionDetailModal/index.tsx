@@ -1,4 +1,3 @@
-import Modal from "../../../../core/components/Modal";
 import Overlay from "../../../../core/components/Overlay";
 import React from "react";
 import styled from "styled-components";
@@ -7,9 +6,8 @@ import Divider from "../../../../core/components/Divider";
 import ListItem from "../../../../core/components/ListItem";
 import Tag from "../../../../core/components/Tag";
 import AmountPaidIcon from "../../../../core/components/images/amount_paid_icon.svg";
-import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../../../api/getLoanDetail";
+import { GetLoanDetailResponse } from "../../../../api/getLoanDetail";
 import { useGetLoanDetailQuery } from "../../../../api";
-
 
 const ExtesionDetailStyled = styled.div`
     text-align: center;
