@@ -14,15 +14,14 @@ import RepaymentNoticeModal from "./modal/RepaymentNoticeModal";
 
 const LoanDetailsPage = () => {
     const [showExtendModal, setShowExtendModal] = useState(false);
-    const pageQueryString = useLocationOrderQueryString();
-    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({ orderNo: pageQueryString.orderNo });
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     const [showAmountPaidModal, setShowAmountPaidModal] = useState(false);
     const [showRepaymentModal, setShowRepaymentModal] = useState(false);
     const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] = useState(false);
-    // console.log("currentData", currentData);
-    // if(isLoading) return <div>isLoading</div>
-    // if(isFetching) return <div>isFetching</div>
+
+    const pageQueryString = useLocationOrderQueryString();
+    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({ orderNo: pageQueryString.orderNo });
+
     return (
         <Page>
             {showExtendModal&&<ExtendModal setShowExtendModal={setShowExtendModal} {...currentData} />}
@@ -36,5 +35,7 @@ const LoanDetailsPage = () => {
         </Page>
     );
 }
+
+
 
 export default LoanDetailsPage;

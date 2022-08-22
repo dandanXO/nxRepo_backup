@@ -4,6 +4,7 @@ import {SuccessICON} from "../../core/components/Icon/Icon";
 import Button from "../../core/components/Button";
 import {useNavigate} from "react-router-dom";
 import useLocationOrderQueryString from "../../core/useLocationOrderQueryString";
+import {useCallback} from "react";
 const CustomPage = styled(Page)`
     display: flex;
     flex-direction: column;
@@ -34,9 +35,13 @@ const ControlSection = styled.div`
     flex-direction: column;
     width: 100%;
 `
+
 const UploadedPaymentReceiptPage = () => {
     const navigate = useNavigate();
     const pageQueryString = useLocationOrderQueryString();
+    const navigateToLoanDetails = useCallback(() => {
+        navigate(`/loan-details?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
+    }, [pageQueryString.token, pageQueryString.orderNo]);
     return (
         <CustomPage>
             <Content>
@@ -45,9 +50,7 @@ const UploadedPaymentReceiptPage = () => {
                 <Description>Thank you. Your receipt has been uploaded successfully.</Description>
             </Content>
             <ControlSection>
-                <Button onClick={() => {
-                    navigate(`/loan-details?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
-                }}>Done</Button>
+                <Button onClick={() => navigateToLoanDetails()}>Done</Button>
             </ControlSection>
         </CustomPage>
     )

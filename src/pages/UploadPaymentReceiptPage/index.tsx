@@ -91,6 +91,19 @@ const UploadPaymentReceiptPage = () => {
 
     const [imageSrc, setImageSrc] = useState<string>();
 
+    const onFileChange = useCallback((event:any) => {
+        const formFileValue = event.target.files[0];
+        console.log("formFileValue: ", formFileValue);
+
+        setFormFile(formFileValue as any);
+
+        let reader = new FileReader();
+        reader.onload = function(event) {
+            setImageSrc(event.target.result as any);
+        };
+        reader.readAsDataURL(formFileValue as any);
+    }, []);
+
     return (
         <CustomPage>
             {isUploading && <UploadingFileModal/>}
@@ -116,26 +129,12 @@ const UploadPaymentReceiptPage = () => {
                             <CameraSvgIcon fill="#f58b10"/>
                         </CameraSvgIconWrapper>
                         <UploadSectionTitle>Upload from Photo Album</UploadSectionTitle>
-                        {/*<input id="file" type="file" style={{ display: "none" }} />*/}
-                        <Input type="file" id="file" style={{ display: "none" }} value={formFile} onChange={(event) => {
-                            // console.log("event: ", event);
-                            const formFileValue = event.target.files[0];
-                            console.log("formFileValue: ", formFileValue);
-
-                            setFormFile(formFileValue as any);
-
-                            let reader = new FileReader();
-                            reader.onload = function(event) {
-                                setImageSrc(event.target.result as any);
-                            };
-                            reader.readAsDataURL(formFileValue as any);
-                        }} />
+                        <Input type="file" id="file" style={{ display: "none" }} value={formFile} onChange={(event) => onFileChange(event)} />
                     </div>
                 ): (
                     <UploadSectionImg imageURL={imageSrc}/>
                 )}
             </UploadSection>
-
             <Button onClick={() => confirm()}>Confirm</Button>
         </CustomPage>
     )
