@@ -5,10 +5,8 @@ import styled from "styled-components";
 
 const Container = styled.div`
     padding: 8px;
-    font-size: 16px
-;
+    font-size: 16px;
 `;
-
 
 const ProgressBar = styled.div`
     
@@ -16,7 +14,6 @@ const ProgressBar = styled.div`
 const Percent = styled.div`
     text-align: right;
 `
-
 const Title = styled.div`
   text-align: left;
   color: black;

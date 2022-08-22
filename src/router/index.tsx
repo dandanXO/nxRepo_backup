@@ -1,6 +1,5 @@
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import IndexPage from "../pages/IndexPage";
-import DemoPage from "../pages/DemoPage";
 import LoanDetailsPage from "../pages/LoanDetailsPage";
 import ExtendDetailsPage from "../pages/ExtendDetailsPage";
 import UploadPaymentReceiptPage from "../pages/UploadPaymentReceiptPage";
@@ -15,7 +14,6 @@ export const AppRouter = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<IndexPage/>}/>
-                <Route path="/demo" element={<DemoPage/>}/>
                 {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
                 <Route path="/loan-details" element={<LoanDetailsPage/>}/>
                 {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
