@@ -19,6 +19,9 @@ export default () => {
             <div>
                 <Link to="/upload-payment-receipt">UploadPaymentReceiptPage</Link>
             </div>
+            <div>
+                <Link to="/uploaded-payment-receipt">UploadedPaymentReceiptPage</Link>
+            </div>
         </Page>
     )
 }
