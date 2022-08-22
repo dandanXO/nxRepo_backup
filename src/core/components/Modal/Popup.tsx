@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface PopupProps {
     width?: number;
+    height?: number;
 }
 const Popup = styled("div")<PopupProps>`
     /* Display */
@@ -26,7 +27,8 @@ const Popup = styled("div")<PopupProps>`
     overflow: scroll;
     /* NOTICE: */
     min-width: 320px;
-    min-height: 300px;
+    //min-height: 300px;
+    // height: ${(props) => props.height + "px" || "auto"};
     /* Text */
     color: #fff;
     font-size: 14px;

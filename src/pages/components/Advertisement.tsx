@@ -15,7 +15,7 @@ import Divider from "../../core/components/Divider";
 import Logo from "../../core/components/images/logo.jpg";
 import Banner from "../../core/components/images/banner.jpg";
 
-const AdvertismentStyled = styled.div`
+const AdvertisementStyled = styled.div`
     margin-top:32px;
     .infoTitle {
         color: ${({ theme }) => theme.color.gray500};
@@ -96,13 +96,13 @@ const BannerWithCard = (props: AdCardProps) => {
     )
 }
 
-const Advertisment = () => {
+const Advertisement = () => {
     return (
-        <AdvertismentStyled>
+        <AdvertisementStyled>
             <div className={'infoTitle'}>More Recommend Loan</div>
             {data.map(ad => <BannerWithCard {...ad} />)}
-        </AdvertismentStyled>
+        </AdvertisementStyled>
     );
 };
 
-export default Advertisment;
+export default Advertisement;

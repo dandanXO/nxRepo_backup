@@ -14,10 +14,13 @@ export default () => {
                 <Link to="/extend-details">extendDetailsPage</Link>
             </div>
             <div>
-                <Link to="/bank-bink">UploadPaymentReceiptPage</Link>
+                <Link to="/bank-bind">bank-bind</Link>
             </div>
             <div>
-                <Link to="/upload-payment-receipt">UploadPaymentReceiptPage</Link>
+                <Link to="/upload-payment-receipt?token=b5f2db2c45e24edcbc49540bae862fbd">UploadPaymentReceiptPage</Link>
+            </div>
+            <div>
+                <Link to="/uploaded-payment-receipt">UploadedPaymentReceiptPage</Link>
             </div>
         </Page>
     )
