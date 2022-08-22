@@ -10,7 +10,11 @@ import MainIcon from "./MainIcon";
 import { NotificationButton, ConfirmButton, CancelButton, CustomColorButton } from "./DefaultButtons";
 import AppContext from "../AppContext";
 import Horizontal from "./Horizontal";
+import styled from "styled-components";
 
+const Header = styled.div`
+    padding: 0 12px;
+`
 type ModalContentFunction<T> = (args: any) => T;
 
 interface IModalProps {
@@ -111,12 +115,12 @@ class Modal extends React.Component<IModalProps, ModalState> {
                         {this.props.enableIcon && (
                             <MainIcon type={this.props.type}></MainIcon>
                         )}
-                        <div>
+                        <Header>
                             <Title>{this.props.title}</Title>
                             {this.props.enableTitleHorizontal && (
                                 <Horizontal/>
                             )}
-                        </div>
+                        </Header>
                         <Content>
                             {typeof this.props.content === "string" ? (
                                 <div
