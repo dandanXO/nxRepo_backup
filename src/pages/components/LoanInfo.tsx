@@ -7,6 +7,8 @@ import ListItem from "../../core/components/ListItem";
 import Button from "../../core/components/Button";
 import LoanBrand from "../../core/components/LoanBrand";
 import AmountPaidIcon from "../../core/components/images/amount_paid_icon.svg";
+import {useNavigate} from "react-router-dom";
+import useLocationOrderQueryString from "../../core/useLocationOrderQueryString";
 
 const LoanInfoStyled = styled.div`
     text-align: center;
@@ -64,6 +66,8 @@ type LoanInfoProps = Pick<GetLoanDetailResponse, "iconUrl" | "productName" | "to
 
 const LoanInfo = (props: LoanInfoProps) => {
     const { iconUrl, productName, totalDueAmount, status, paidAmount, balance, extended, setShowExtensionModal, setShowAmountPaidModal } = props;
+    const pageQueryString = useLocationOrderQueryString();
+    const navigate = useNavigate();
     return (
         <LoanInfoStyled>
             <LoanBrand iconUrl={iconUrl} productName={productName} sizeType={'small'}/>
@@ -95,7 +99,9 @@ const LoanInfo = (props: LoanInfoProps) => {
             {
                 (status === "UNPAID" || status === "OVERDUE") &&
                 <div>
-                    <div className={"uploadButton"}><Button>Upload Receipt</Button></div>
+                    <div className={"uploadButton"} onClick={() => {
+                        navigate(`/upload-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`)
+                    }}><Button>Upload Receipt</Button></div>
                     <div className={"noticeText"}>After completing the repayment, take a screenshot and uploadyour repayment receipt here.</div>
                 </div>
             }
