@@ -2,6 +2,7 @@ import {BaseQueryFn} from "@reduxjs/toolkit/query";
 import type { AxiosRequestConfig, AxiosError } from 'axios'
 import axios from "axios";
 import queryString from "query-string";
+import Modal from "../core/components/Modal";
 
 
 let percent = 0;
@@ -41,7 +42,7 @@ const axiosBaseQuery =
                         ...headers,
                     },
                     onUploadProgress: (progressEvent) => {
-
+                        console.log({ progressEvent });
                         if(progressEvent.lengthComputable) {
                             var complete = ((progressEvent.loaded / progressEvent.total) * 100 | 0)
                             percent = complete;
@@ -51,12 +52,31 @@ const axiosBaseQuery =
                             console.log("baseUrl + url: ", baseUrl + url);
                             console.log("percent", percent);
                         }
-                    }
+                    },
+                    onDownloadProgress: function (progressEvent) {
+                        // 對原生進度事件的處理
+                        let num = progressEvent.loaded / progressEvent.total * 100 // 計算進度
+                        const loadingText = '進度：' + num + '%'
+                    },
                 })
-                return { data: result.data, percent,  }
+                return { data: result.data, percent, }
             } catch (axiosError) {
                 let err = axiosError as AxiosError
-                console.log("err", err);
+                const error = JSON.parse(JSON.stringify(err.response?.data)) as {
+                    code: number;
+                    message: string;
+                }
+                console.log(err.response?.data);
+                Modal.alert({
+                    show: true,
+                    mask: true,
+                    title: "Error",
+                    content: error.message,
+                    confirmText: "Confirm",
+                    maskClosable: true,
+                    enableClose: false,
+                    enableIcon: false,
+                });
                 return {
                     error: {
                         status: err.response?.status,

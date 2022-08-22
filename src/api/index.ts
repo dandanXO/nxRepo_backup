@@ -47,20 +47,24 @@ export const API = createApi({
                 method: "get",
             }),
         })),
-        postRepayReceipt: builder.mutation<PostRepayReceiptResponse, PostRepayReceiptRequestBody>({
-            query: (query: PostRepayReceiptRequestBody) => ({
+        postRepayReceipt: builder.mutation<PostRepayReceiptResponse, FormData>({
+            query: (query: FormData) => ({
                 url: `/repay/receipt`,
                 method: 'post',
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    // "Content-Type": "multipart/form-data",
+                    // https://www.it145.com/9/182527.html
+                    'Content-Type': 'multipart/form-data;boundary=' + new Date().getTime()
                 },
-                data: {
-                    file: query.file,
-                    orderNo: query.orderNo,
-                    receipt: query.receipt,
-                }
+                data: query,
+                // data: {
+                //     file: query.file,
+                //     orderNo: query.orderNo,
+                //     receipt: query.receipt,
+                // }
             }),
         }),
+
         // postRepayCreate: builder.mutation<null, null>({
         //     query: (query: PostRepayReceiptRequestBody) => ({
         //         url: `/repay/create`,

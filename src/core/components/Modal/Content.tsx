@@ -18,7 +18,7 @@ const Content = styled.div`
     font-size: 14px;
     font-weight: 300;
     /* Text - Content */
-    word-break: break-all;
+    word-break: break-word;
     line-height: 25px;
     
     
