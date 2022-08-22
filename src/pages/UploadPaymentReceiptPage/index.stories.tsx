@@ -1,15 +1,15 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import UploadPaymentReceiptPage from "./index";
+import {PureUploadPaymentReceiptPage} from "./index";
 import {AppThemeProvider} from "../../core/components";
 export default {
     title: 'Page/UploadPaymentReceiptPage',
-    component: UploadPaymentReceiptPage,
+    component: PureUploadPaymentReceiptPage,
 } as ComponentMeta<any>
 
 export const Page: ComponentStory<any> = () => {
     return (
         <AppThemeProvider>
-            <UploadPaymentReceiptPage/>
+            <PureUploadPaymentReceiptPage/>
         </AppThemeProvider>
     )
 }

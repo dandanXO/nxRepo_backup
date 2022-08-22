@@ -35,7 +35,7 @@ const UploadSection = styled.label.attrs<{ for: string; }>(props => ({
     align-content: center;
     text-align: center;
     border-radius: 8px;
-    border: 2px solid #101010;   
+    border: 2px solid #555;   
     margin-bottom: 20px;
     width: 100%;
 `;
@@ -63,37 +63,24 @@ const CameraSvgIconWrapper = styled.div`
     height: 50px;   
 `
 
-const UploadPaymentReceiptPage = () => {
+interface PureUploadPaymentReceiptPageProps {
+    postRepayReceiptRequest: any;
+}
+export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPageProps) => {
     const [isUploading, setIsUploading] = useState(false);
     const [utr, setURT] = useState<string>();
     const [formFile, setFormFile] = useState<string>();
-    const [postRepayReceipt, { isLoading } ] = usePostRepayReceiptMutation();
-
-    const navigate = useNavigate();
-    const pageQueryString = useLocationOrderQueryString();
 
     const confirm = useCallback(() => {
         setIsUploading(true);
-
-        const formData = new FormData();
-        formData.append("file", formFile);
-        formData.append("orderNo", "no-3632791101642108");
-        formData.append("receipt", utr);
-        postRepayReceipt(formData).unwrap().then((data: PostRepayReceiptResponse) => {
-            navigate(`/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
-        }).catch(({ error }) => {
-            console.log(error)
-        }).finally(() => {
-            setIsUploading(false);
-        });
-
+        props.postRepayReceiptRequest();
     }, [utr, formFile]);
 
     const [imageSrc, setImageSrc] = useState<string>();
 
     const onFileChange = useCallback((event:any) => {
         const formFileValue = event.target.files[0];
-        console.log("formFileValue: ", formFileValue);
+        // console.log("formFileValue: ", formFileValue);
 
         setFormFile(formFileValue as any);
 
@@ -140,4 +127,35 @@ const UploadPaymentReceiptPage = () => {
     )
 }
 
+interface PostRepayReceiptRequestProps {
+    formFile: any;
+    orderNo: string;
+    receipt: string;
+    setIsUploading: any;
+}
+const UploadPaymentReceiptPage = () => {
+    const [postRepayReceipt, { isLoading } ] = usePostRepayReceiptMutation();
+    const navigate = useNavigate();
+    const pageQueryString = useLocationOrderQueryString();
+
+    const postRepayReceiptRequest = useCallback((props: PostRepayReceiptRequestProps) => {
+        // NOTICE: impure
+        const formData = new FormData();
+        formData.append("file", props.formFile);
+        formData.append("orderNo", props.orderNo);
+        formData.append("receipt", props.receipt);
+
+        postRepayReceipt(formData).unwrap().then((data: PostRepayReceiptResponse) => {
+            navigate(`/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
+        }).catch(({ error }) => {
+            console.log(error)
+        }).finally(() => {
+            props.setIsUploading(false);
+        });
+    }, []);
+
+    return (
+        <PureUploadPaymentReceiptPage postRepayReceiptRequest={postRepayReceiptRequest}/>
+    )
+}
 export default UploadPaymentReceiptPage;
