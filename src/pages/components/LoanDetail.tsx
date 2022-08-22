@@ -1,14 +1,8 @@
-
-
 import styled from "styled-components";
 import React from "react";
 import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
-
-import Tag from "../../core/components/Tag";
-import Card from "../../core/components/Card";
 import ListItem from "../../core/components/ListItem";
 import Button from "../../core/components/Button";
-import LoanBrand from "../../core/components/LoanBrand";
 import Accordion from "../../core/components/Accordion";
 import Divider from "../../core/components/Divider";
 
@@ -47,9 +41,8 @@ const LoanDetailStyled = styled.div`
 
 type LoanDetailProps = Pick<GetLoanDetailResponse, "loanAmount" |"serviceCharge" |"dailyFee" | "reductionAmount" | "penaltyInterest"|"applyDate"|"dueDate"|"bankCardNo"> & {
     setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
-;
-
 
 const renderDetailContent = (props: LoanDetailProps) => {
     const { loanAmount, serviceCharge, dailyFee, reductionAmount, penaltyInterest, applyDate, dueDate, bankCardNo } = props;
@@ -71,7 +64,7 @@ const renderDetailContent = (props: LoanDetailProps) => {
 }
 
 const LoanDetail = (props: LoanDetailProps) => {
-    const {setShowExtendModal}=props
+    const {setShowExtendModal, setShowRepaymentModal}=props
     return (
         <LoanDetailStyled>
             <Accordion title={"Details"} isCollapse={true}>
@@ -95,7 +88,7 @@ const LoanDetail = (props: LoanDetailProps) => {
             </div>
             <div className={"payButtons"}>
                 <Button onClick={()=>setShowExtendModal(true)} className={"extendButton"} styleType="secondary">Extend</Button>
-                <Button className={"repayButton"} styleType="primary">Repay</Button>
+                <Button onClick={()=>setShowRepaymentModal(true)} className={"repayButton"} styleType="primary">Repay</Button>
             </div>
         </LoanDetailStyled>
     );
