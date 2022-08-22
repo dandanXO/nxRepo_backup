@@ -7,6 +7,9 @@ import Button from "../../core/components/Button";
 import ExampleUploadedImage from "../../core/components/images/banner.jpg"
 import {usePostRepayReceiptMutation} from "../../api";
 import {PostRepayReceiptResponse} from "../../api/postRepayReceipt";
+import {useNavigate} from "react-router-dom";
+import UploadingFileModal from "./modal/UploadingFileModal";
+import useLocationOrderQueryString from "../../core/useLocationOrderQueryString";
 const Section = styled.div`
       margin-bottom: 100px;
 `;
@@ -34,10 +37,18 @@ const UploadSection = styled.label.attrs<{ for: string; }>(props => ({
     border-radius: 8px;
     border: 2px solid #101010;   
     margin-bottom: 20px;
+    width: 100%;
 `;
 
-const UploadSectionImg = styled.img`
-    width: 100%;   
+const UploadSectionImg = styled.div<{
+    imageURL: string;
+}>`
+  width: 100%;   
+  background-image: ${(props) => `url(${props.imageURL})`};
+  background-repeat: no-repeat;
+  height: 100%;
+  background-position: center;
+  background-size: contain;
 `
 
 const UploadSectionTitle = styled.div`
@@ -52,40 +63,37 @@ const CameraSvgIconWrapper = styled.div`
     height: 50px;   
 `
 
-interface UploadPaymentReceiptPageProps {
-    // orderNo: string;
-}
-
-const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
-    const [utr, setURT] = useState<string>("888888888888");
+const UploadPaymentReceiptPage = () => {
+    const [isUploading, setIsUploading] = useState(false);
+    const [utr, setURT] = useState<string>();
     const [formFile, setFormFile] = useState<string>();
-    // const [isUploaded, setIsUploaded] = useState(false);
-
     const [postRepayReceipt, { isLoading } ] = usePostRepayReceiptMutation();
 
+    const navigate = useNavigate();
+    const pageQueryString = useLocationOrderQueryString();
+
     const confirm = useCallback(() => {
-        postRepayReceipt({
-            file: formFile,
-            orderNo: "no-3632791101642108", //props.orderNo,
-            receipt: utr,
-        }).then((response: { data: PostRepayReceiptResponse }) => {
-            console.log(response.data.receipt)
-            console.log(response.data.previewUrl)
+        setIsUploading(true);
+
+        const formData = new FormData();
+        formData.append("file", formFile);
+        formData.append("orderNo", "no-3632791101642108");
+        formData.append("receipt", utr);
+        postRepayReceipt(formData).unwrap().then((data: PostRepayReceiptResponse) => {
+            navigate(`/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
         }).catch(({ error }) => {
             console.log(error)
-        })
-    }, []);
+        }).finally(() => {
+            setIsUploading(false);
+        });
 
-    const [imageSrc, setImageSrc] = useState();
-    // const fileUploadInputChange = useCallback((e) =>{
-    //     let reader = new FileReader();
-    //     reader.onload = function(e) {
-    //         setImageSrc({uploadedImage: e.target.result});
-    //     };
-    //
-    // }, []);
+    }, [utr, formFile]);
+
+    const [imageSrc, setImageSrc] = useState<string>();
+
     return (
         <CustomPage>
+            {isUploading && <UploadingFileModal/>}
             <Section>
                 <Input
                     className="mb"
@@ -110,21 +118,21 @@ const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
                         <UploadSectionTitle>Upload from Photo Album</UploadSectionTitle>
                         {/*<input id="file" type="file" style={{ display: "none" }} />*/}
                         <Input type="file" id="file" style={{ display: "none" }} value={formFile} onChange={(event) => {
-                            console.log("event: ", event);
-                            const formFileValue = event.target.value;
+                            // console.log("event: ", event);
+                            const formFileValue = event.target.files[0];
                             console.log("formFileValue: ", formFileValue);
-                            setFormFile(formFileValue);
 
+                            setFormFile(formFileValue as any);
 
-                            // let reader = new FileReader();
-                            // reader.onload = function(e) {
-                            //     setImageSrc({formFileValue});
-                            // };
-                            // reader.readAsDataURL(formFileValue);
+                            let reader = new FileReader();
+                            reader.onload = function(event) {
+                                setImageSrc(event.target.result as any);
+                            };
+                            reader.readAsDataURL(formFileValue as any);
                         }} />
                     </div>
                 ): (
-                    <UploadSectionImg src={imageSrc}/>
+                    <UploadSectionImg imageURL={imageSrc}/>
                 )}
             </UploadSection>
 
