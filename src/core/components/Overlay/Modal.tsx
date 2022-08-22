@@ -4,9 +4,7 @@ import AppContext from "../AppContext";
 import Overlay from "../Modal/Overlay";
 import Popup from "../Modal/Popup";
 import CloseButton from "../Modal/CloseButton";
-import Title from "../Modal/Title";
 import Content from "../Modal/Content";
-import Horizontal from "../Modal/Horizontal";
 import styled from "styled-components";
 
 const ModalPopup = styled(Popup)`
@@ -25,6 +23,7 @@ interface IModalProps {
     // content?: JSX.Element
     content?: string | ModalContentFunction<any>;
     width?: number;
+    height?: number
     maskClosable?: boolean;
     enableClose?: boolean;
     enableTitleHorizontal?: boolean;
@@ -83,7 +82,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                     //     }
                     // }}
                 >
-                    <ModalPopup width={this.props.width}>
+                    <ModalPopup width={this.props.width} height={this.props.height}>
                         {this.props.enableClose && (
                             <div onClick={() => {
                                 console.log("close")

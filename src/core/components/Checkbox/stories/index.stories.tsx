@@ -1,9 +1,10 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import styled from "styled-components";
-import Checkbox from "./index";
-import Body from "../../Global/Body";
+import Checkbox from "../index";
 
+const Body = styled.div`
+`;
 const Container = styled.div`
     background: pink;
     height: 300px;
