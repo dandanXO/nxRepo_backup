@@ -8,7 +8,7 @@ import Button from "../../core/components/Button";
 import LoanBrand from "../../core/components/LoanBrand";
 import AmountPaidIcon from "../../core/components/images/amount_paid_icon.svg";
 import {useNavigate} from "react-router-dom";
-import useLocationOrderQueryString from "../../core/useLocationOrderQueryString";
+import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
 
 const LoanInfoStyled = styled.div`
     text-align: center;

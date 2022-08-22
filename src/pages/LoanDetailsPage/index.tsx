@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from "react";
 import { useGetLoanDetailQuery } from "../../api";
 import Page from "../../core/components/Page";
-import useLocationOrderQueryString from "../../core/useLocationOrderQueryString";
+import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
 import LoanInfo from "../components/LoanInfo";
 import LoanDetail from "../components/LoanDetail";
 import Advertisement from "../components/Advertisement";

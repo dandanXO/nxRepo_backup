@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {SuccessICON} from "../../core/components/Icon/Icon";
 import Button from "../../core/components/Button";
 import {useNavigate} from "react-router-dom";
-import useLocationOrderQueryString from "../../core/useLocationOrderQueryString";
+import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
 import {useCallback} from "react";
 const CustomPage = styled(Page)`
     display: flex;

@@ -8,7 +8,7 @@ import {usePostRepayReceiptMutation} from "../../api";
 import {PostRepayReceiptResponse} from "../../api/postRepayReceipt";
 import {useNavigate} from "react-router-dom";
 import UploadingFileModal from "./modal/UploadingFileModal";
-import useLocationOrderQueryString from "../../core/useLocationOrderQueryString";
+import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
 const Section = styled.div`
       margin-bottom: 100px;
 `;
