@@ -9,13 +9,15 @@ const Paragraph = styled.div`
     margin-bottom: 10px;
 `;
 
-const RepaymentNoticeModal = () => {
+interface RepaymentNoticeModalProps {
+    setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
     return (
         <div>
             <Modal
                 mask={true}
                 show={true}
-                mode="alert"
                 type="confirm"
                 title="Notice"
                 content={(
@@ -27,11 +29,7 @@ const RepaymentNoticeModal = () => {
                 )}
                 confirmText="Repay"
                 onConfirm={() => {
-                    alert("confirm")
-                }}
-                cancelText="你決定就好"
-                onCancel={() => {
-                    alert("cancel")
+                    props.setShowRepaymentNoticeModal(false);
                 }}
                 // NOTE: 特製版
                 enableIcon={false}

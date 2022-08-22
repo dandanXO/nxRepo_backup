@@ -10,6 +10,7 @@ import AmountPaidModal from "../components/modal/AmountPaidModal/AmountPaidModal
 import ExtendModal from "../components/modal/ExtendModal/ExtendModal";
 import ExtensionDetailModal from "./modal/ExtensionDetailModal";
 import RepaymentModal from "./modal/RepaymentModal";
+import RepaymentNoticeModal from "./modal/RepaymentNoticeModal";
 
 const LoanDetailsPage = () => {
     const [showExtendModal, setShowExtendModal] = useState(false);
@@ -18,6 +19,7 @@ const LoanDetailsPage = () => {
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     const [showAmountPaidModal, setShowAmountPaidModal] = useState(false);
     const [showRepaymentModal, setShowRepaymentModal] = useState(false);
+    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] = useState(false);
     // console.log("currentData", currentData);
     // if(isLoading) return <div>isLoading</div>
     // if(isFetching) return <div>isFetching</div>
@@ -26,7 +28,8 @@ const LoanDetailsPage = () => {
             {showExtendModal&&<ExtendModal setShowExtendModal={setShowExtendModal} {...currentData} />}
             {showExtensionModal && <ExtensionDetailModal setShowExtensionModal={setShowExtensionModal}/>}
             {currentData && showAmountPaidModal && <AmountPaidModal {...currentData} setShowAmountPaidModal={setShowAmountPaidModal}/>}
-            {showRepaymentModal && <RepaymentModal balance={2000}/>}
+            {showRepaymentModal && <RepaymentModal balance={2000} setShowRepaymentModal={setShowRepaymentModal} setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}/>}
+            {showRepaymentNoticeModal && <RepaymentNoticeModal setShowRepaymentNoticeModal={setShowRepaymentNoticeModal} />}
             <LoanInfo {...currentData} setShowExtensionModal={setShowExtensionModal} setShowAmountPaidModal={setShowAmountPaidModal}/>
             <LoanDetail {...currentData} setShowExtendModal={setShowExtendModal} setShowRepaymentModal={setShowRepaymentModal}/>
             <Advertisment />

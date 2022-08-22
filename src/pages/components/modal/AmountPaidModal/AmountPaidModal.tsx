@@ -1,4 +1,3 @@
-import Modal from "../../../../core/components/Modal";
 import Overlay from "../../../../core/components/Overlay"
 import React from "react";
 import styled from "styled-components";

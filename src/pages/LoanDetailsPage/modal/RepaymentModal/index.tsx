@@ -59,6 +59,8 @@ const RepaymentButton = styled(RepayAndApplyButton)`
 
 interface RepaymentModalProps {
     balance: number,
+    setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const RepaymentModal = (props: RepaymentModalProps) => {
     const balance = props.balance;
@@ -117,13 +119,16 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     </Paragraph>
                                 </SectionParagraph>
                                 <SectionButton>
-                                    <RepayAndApplyButton>
+                                    <RepayAndApplyButton onClick={() => {
+                                        props.setShowRepaymentModal(false);
+                                        props.setShowRepaymentNoticeModal(true);
+                                    }}>
                                         <RepayICON/> Repay and Apply Again
                                     </RepayAndApplyButton>
                                 </SectionButton>
                                 <SectionButton2>
-                                    <RepaymentCancelButton onClick={() => hide()}>Cancel</RepaymentCancelButton>
-                                    <RepaymentButton>Repayment</RepaymentButton>
+                                    <RepaymentCancelButton onClick={() => props.setShowRepaymentModal(false)}>Cancel</RepaymentCancelButton>
+                                    <RepaymentButton onClick={() => props.setShowRepaymentModal(false)}>Repayment</RepaymentButton>
                                 </SectionButton2>
                             </SectionOptions>
 
