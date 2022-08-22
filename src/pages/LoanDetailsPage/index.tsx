@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import LoanInfo from "../components/LoanInfo";
 import LoanDetail from "../components/LoanDetail";
-import Advertisment from "../components/Advertisment"
+import Advertisement from "../components/Advertisement"
 import AmountPaidModal from "../components/modal/AmountPaidModal";
 import { useGetLoanDetailQuery } from "../../api";
 import ExtensionDetailModal from "./modal/ExtensionDetailModal";
@@ -22,7 +22,7 @@ const LoanDetailsPage = () => {
             {currentData && <AmountPaidModal {...currentData}/>}
             <LoanInfo {...currentData} setShowExtensionModal={setShowExtensionModal} />
             <LoanDetail {...currentData} />
-            <Advertisment />
+            <Advertisement />
         </Page>
     );
 }
