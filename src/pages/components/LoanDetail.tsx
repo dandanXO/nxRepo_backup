@@ -45,7 +45,10 @@ const LoanDetailStyled = styled.div`
     }
 `;
 
-type LoanDetailProps = Pick<GetLoanDetailResponse, "loanAmount" |"serviceCharge" |"dailyFee" | "reductionAmount" | "penaltyInterest"|"applyDate"|"dueDate"|"bankCardNo">;
+type LoanDetailProps = Pick<GetLoanDetailResponse, "loanAmount" |"serviceCharge" |"dailyFee" | "reductionAmount" | "penaltyInterest"|"applyDate"|"dueDate"|"bankCardNo"> & {
+    setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+;
 
 
 const renderDetailContent = (props: LoanDetailProps) => {
@@ -68,6 +71,7 @@ const renderDetailContent = (props: LoanDetailProps) => {
 }
 
 const LoanDetail = (props: LoanDetailProps) => {
+    const {setShowExtendModal}=props
     return (
         <LoanDetailStyled>
             <Accordion title={"Details"} isCollapse={true}>
@@ -90,7 +94,7 @@ const LoanDetail = (props: LoanDetailProps) => {
                 </p>
             </div>
             <div className={"payButtons"}>
-                <Button className={"extendButton"} styleType="secondary">Extend</Button>
+                <Button onClick={()=>setShowExtendModal(true)} className={"extendButton"} styleType="secondary">Extend</Button>
                 <Button className={"repayButton"} styleType="primary">Repay</Button>
             </div>
         </LoanDetailStyled>

@@ -13,6 +13,8 @@ export interface GetLoanDetailResponse {
     balance?: number;
     /** @description 銀行卡號 */
     bankCardNo?: string;
+    /** @description chargeFeeDetail */
+    chargeFeeDetail?: GetLoanDetailChargeFeeDetail;
     /** @description 客服Email */
     customerServiceEmail?: string;
     /** @description 客服服務時間 */
@@ -47,11 +49,11 @@ export interface GetLoanDetailResponse {
     productName?: string;
     /** @description 減免金額 */
     reductionAmount?: number;
+    /** @description repayConfirmDetail */
+    repayConfirmDetail?: GetLoanDetailRepayConfirmDetail;
     /** @description 還款紀錄 */
     repayRecords?: GetLoanDetailRepayRecords[];
-    /** @description 创建还款订单API URL Method: POST */
-    repayUrl?:	string;
-
+ 
     /** @description 服務費金額 */
     serviceCharge?: number;
     /**
@@ -59,7 +61,41 @@ export interface GetLoanDetailResponse {
      * @enum {string}
      */
     status?: "EXTEND" | "OVERDUE" | "PAY_OFF" | "PROCESSING" | "UNPAID";
+    /** @description 訂單總應還金额 */
+    totalDueAmount?: number;
 };
+
+
+/** chargeFeeDetail */
+export interface GetLoanDetailChargeFeeDetail {
+    items: GetLoanDetailChargeFeeDetailItems[];
+    title: string;
+}
+
+export interface GetLoanDetailChargeFeeDetailItems {
+    fieldType: string,
+    itemName: "CURRENCY" | "TEXT",
+    key: "DAILY_FEE" | "LOAN_AMOUNT" | "PENALTY_INTEREST" | "REDUCTION_AMOUNT" | "SERVICE_CHARGE",
+    value: string
+}
+
+/** repayConfirmDetail */
+export interface GetLoanDetailRepayConfirmDetail {
+    /** @description 剩餘應還金額 */
+    balance?: number;
+    /** @description 展期日期 */
+    extendDate?: string;
+    /** @description 展期費用 (+) */
+    extensionFee?: number;
+    /** @description 展期應付金額 */
+    extensionPayAmount?: number;
+    /** @description 已還金額 (-) */
+    paidAmount?: number;
+    /** @description 罰金金額 (+) */
+    penaltyInterest?: number;
+    /** @description 減免金額 (-) */
+    reductionAmount?: number;
+}
 
 
 /** 還款紀錄 */
@@ -110,7 +146,7 @@ export const mockGetLoanDetailResponse:GetLoanDetailResponse = {
     "customerServiceTime": "08:00AM ~ 12:00PM",
     "customerServiceEmail": "csemail@test.copm",
     "iconUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/ad_logo/ad-logo-822352090585600.png",
-    "repayUrl": "https://site.india-api-dev.com/api/v2/repay/create",
+ 
     "extendable": false,
     "extended": true,
     "parentOrderNo": null

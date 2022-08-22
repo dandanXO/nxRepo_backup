@@ -57,16 +57,18 @@ const LoanInfoStyled = styled.div`
     }
 `;
 
-type LoanInfoProps = Pick<GetLoanDetailResponse, "iconUrl" |"productName" |"status" | "paidAmount" | "balance"|"extended"> 
-& {setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>};
+type LoanInfoProps = Pick<GetLoanDetailResponse, "iconUrl" | "productName" | "totalDueAmount" | "status" | "paidAmount" | "balance" | "extended"> & {
+    setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowAmountPaidModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const LoanInfo = (props: LoanInfoProps) => {
-    const { status, paidAmount, balance, iconUrl, productName,extended ,setShowExtensionModal} = props;
+    const { iconUrl, productName, totalDueAmount, status, paidAmount, balance, extended, setShowExtensionModal, setShowAmountPaidModal } = props;
     return (
         <LoanInfoStyled>
             <LoanBrand iconUrl={iconUrl} productName={productName} sizeType={'small'}/>
             <div className="totalTitle">Total Due</div>
-            <div className="totalText">₹ {balance}</div>
+            <div className="totalText">₹ {totalDueAmount}</div>
             <div className={"errorText"}>
                 {`Your payment is now N days overdue. 
                   We kindly request that you immediately satisfy the 
@@ -81,7 +83,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                         title={
                             <div>
                                 <div>Amount Paid</div>
-                                <div><img src={AmountPaidIcon} /></div>
+                                <div onClick={()=>setShowAmountPaidModal(true)}><img src={AmountPaidIcon} /></div>
                             </div>
                         }
                         text={`₹ ${paidAmount}`}

@@ -7,8 +7,8 @@ import Divider from "../../../../core/components/Divider";
 import ListItem from "../../../../core/components/ListItem";
 import Tag from "../../../../core/components/Tag";
 import AmountPaidIcon from "../../../../core/components/images/amount_paid_icon.svg";
-import Logo from "../../../../core/components/images/logo.jpg";
 import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../../../api/getLoanDetail";
+import { useGetLoanDetailQuery } from "../../../../api";
 
 
 const ExtesionDetailStyled = styled.div`
@@ -61,9 +61,11 @@ const ExtesionDetailStyled = styled.div`
         padding: 18px 12px;
     }
 `;
-type ExtesionDetailProps = GetLoanDetailResponse;
+type ExtesionDetailProps = GetLoanDetailResponse& {
+    setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
+};;
 const renderExtesionDetail = (props: ExtesionDetailProps) => {
-    const { iconUrl = Logo, status, paidAmount, balance, productName, loanAmount, serviceCharge, dailyFee, reductionAmount, penaltyInterest, extensionFee, originalDueDate, extendDate, dueDate, bankCardNo } = props;
+    const { iconUrl, status, paidAmount, balance, productName, loanAmount, serviceCharge, dailyFee, reductionAmount, penaltyInterest, extensionFee, originalDueDate, extendDate, dueDate, bankCardNo } = props;
     return (
         <ExtesionDetailStyled>
             <div className="loanBrand"><LoanBrand iconUrl={iconUrl} productName={productName} sizeType={'small'} /></div>
@@ -101,20 +103,25 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             <Divider />
             <div className={"loanInfo-Card-Title"}>Link account</div>
             <ListItem title={'Bank card'} text={bankCardNo} />
-
         </ExtesionDetailStyled>
     )
 
 }
 
+
 const ExtensionDetailModal = (props: ExtesionDetailProps) => {
+    const { setShowExtensionModal, parentOrderNo } = props
+    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({ orderNo: "no-7864747613693247"});
+
     return (
         <div>
             <Overlay
                 show={true}
                 title="Notice"
-                content={(hide: () => void) => renderExtesionDetail(props)}
+                content={(hide: () => void) => renderExtesionDetail(currentData)}
                 enableTitleHorizontal={true}
+                enableClose={true}
+                onCancel={() => setShowExtensionModal(false)}
             ></Overlay>
         </div>
     );

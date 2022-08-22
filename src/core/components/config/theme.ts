@@ -10,6 +10,7 @@ const ThemeColors = {
     lightBlack: "#000000D9",
     white: "#FFFFFF",
     red: "#FF0000",
+    red100: "#F82626",
     orange: "#F58B10",
     mediumOrange: "#FCC76E",
     lightOrange: "#FFF0DE",
