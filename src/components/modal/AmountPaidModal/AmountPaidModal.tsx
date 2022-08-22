@@ -1,12 +1,12 @@
-import Overlay from "../../../../core/components/Overlay"
+import Overlay from "../../../core/components/Overlay"
 import React from "react";
 import styled from "styled-components";
-import ListItem from "../../../../core/components/ListItem";
-import { GetLoanDetailResponse } from "../../../../api/getLoanDetail";
-import { flexCreator } from "../../../../core/components/utils";
-import Title from "../../../../core/components/Modal/Title";
-import Divider from "../../../../core/components/Divider";
-import theme from "../../../../core/components/config/theme";
+import ListItem from "../../../core/components/ListItem";
+import { GetLoanDetailResponse } from "../../../api/getLoanDetail";
+import { flexCreator } from "../../../core/components/utils";
+import Title from "../../../core/components/Modal/Title";
+import Divider from "../../../core/components/Divider";
+import theme from "../../../core/components/config/theme";
 
 const ModalContentStyled = styled.div`
     padding:0 12px;

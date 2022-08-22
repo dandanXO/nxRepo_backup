@@ -1,7 +1,7 @@
 import * as React from "react";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import AmountPaidModal from "./AmountPaidModal";
-import {AppThemeProvider} from "../../../../core/components";
+import {AppThemeProvider} from "../../../core/components";
 
 export default {
     title: 'Page/AmountPaidModal',

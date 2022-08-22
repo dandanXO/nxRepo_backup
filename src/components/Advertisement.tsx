@@ -2,17 +2,17 @@
 
 import styled from "styled-components";
 import React, { useState } from "react";
-import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
+import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../api/getLoanDetail";
 
-import Tag from "../../core/components/Tag";
-import Card from "../../core/components/Card";
-import CardContent from "../../core/components/CardContent";
-import ListItem from "../../core/components/ListItem";
-import Button from "../../core/components/Button";
-import LoanBrand from "../../core/components/LoanBrand";
-import Accordion from "../../core/components/Accordion";
-import Divider from "../../core/components/Divider";
-import {Logo,Banner} from "../../core/components/images"
+import Tag from "../core/components/Tag";
+import Card from "../core/components/Card";
+import CardContent from "../core/components/CardContent";
+import ListItem from "../core/components/ListItem";
+import Button from "../core/components/Button";
+import LoanBrand from "../core/components/LoanBrand";
+import Accordion from "../core/components/Accordion";
+import Divider from "../core/components/Divider";
+import {Logo,Banner} from "../core/components/images"
 // import {Banner} from "../../core/components/images/banner.jpg";
 
 const AdvertisementStyled = styled.div`

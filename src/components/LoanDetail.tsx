@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import React from "react";
-import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../../api/getLoanDetail";
-import ListItem from "../../core/components/ListItem";
-import Button from "../../core/components/Button";
-import Accordion from "../../core/components/Accordion";
-import Divider from "../../core/components/Divider";
+import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../api/getLoanDetail";
+import ListItem from "../core/components/ListItem";
+import Button from "../core/components/Button";
+import Accordion from "../core/components/Accordion";
+import Divider from "../core/components/Divider";
 
 const LoanDetailStyled = styled.div`
     text-align: center;
