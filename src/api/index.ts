@@ -2,40 +2,78 @@ import queryString from "query-string";
 
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData } from "./demo/getAttractionsALL";
-import {GetLoanDetailRequestQuerystring} from "./getLoanDetail";
+import {GetLoanDetailRequestQuerystring, GetLoanDetailResponse} from "./getLoanDetail";
+import axiosBaseQuery from "./axiosBaseQuery";
+import * as url from "url";
+import {GetRepayReceiptRequestQuerystring, GetRepayReceiptResponse} from "./getRepayReceipt";
+import {PostRepayReceiptRequestBody, PostRepayReceiptResponse} from "./postRepayReceipt";
 export {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData }
 
-const parsedQueryString = queryString.parse(location.search);
-console.log("parsedQueryString", parsedQueryString);
-const TOKEN = parsedQueryString.token ? parsedQueryString.token as string: undefined;
-if(!TOKEN) {
-    console.log("error");
-}
 // const baseUrl = "3.111.118.247";
 // const baseUrl = "https://www.travel.taipei/open-api";
-const baseUrl = "http://localhost/api/v2"
+const baseUrl = "/api/v2"
 export const API = createApi({
     reducerPath: "api",
-    baseQuery: fetchBaseQuery({
+    baseQuery: axiosBaseQuery({
         baseUrl,
-        prepareHeaders: (headers, api) => {
-            headers.set("accept", "application/json");
-            // headers.set("Authorization", "b5f2db2c45e24edcbc49540bae862fbd");
-            headers.set("Authorization", TOKEN);
-            return headers;
-        }
     }),
     endpoints: (builder) => ({
         // NOTICE: demo
+        // getAttractionsAll: builder.query<GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg>({
+        //     query: (arg: GetAttractionsALLRequestQueryArg) => `/${arg.lang}/Attractions/All?page=1`,
+        // }),
+        // getLoanDetail: builder.query({
+        //     query: (query: GetLoanDetailRequestQuerystring) => `/loan/detail?orderNo=${query.orderNo}`,
+        // })
         getAttractionsAll: builder.query<GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg>({
-            query: (arg: GetAttractionsALLRequestQueryArg) => `/${arg.lang}/Attractions/All?page=1`,
+            query: (arg: GetAttractionsALLRequestQueryArg) => ({
+                url: `/${arg.lang}/Attractions/All?page=1`,
+                method: "get",
+            })
         }),
-        getLoanDetail: builder.query({
-            query: (query: GetLoanDetailRequestQuerystring) => `/loan/detail?orderNo=${query.orderNo}`,
-        })
+        getLoanDetail: builder.query<GetLoanDetailResponse, GetLoanDetailRequestQuerystring>({
+            query: (query: GetLoanDetailRequestQuerystring) => ({
+                url: `/loan/detail`,
+                params: {
+                    orderNo: query.orderNo,
+                },
+                method: "get",
+            }),
+        }),
+        getRepayReceipt: builder.query<GetRepayReceiptResponse, GetRepayReceiptRequestQuerystring>(({
+            query: (query: GetRepayReceiptRequestQuerystring) => ({
+                url: `/repay/receipt`,
+                params: {
+                    orderNo: query.orderNo,
+                },
+                method: "get",
+            }),
+        })),
+        postRepayReceipt: builder.mutation<PostRepayReceiptResponse, null>({
+            query: (query: PostRepayReceiptRequestBody) => ({
+                url: `/repay/receipt`,
+                method: 'post',
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                data: {
+                    file: query.file,
+                    orderNo: query.orderNo,
+                    receipt: query.receipt,
+                }
+            }),
+        }),
+        // postRepayCreate: builder.mutation<null, null>({
+        //     query: (query: PostRepayReceiptRequestBody) => ({
+        //         url: `/repay/create`,
+        //         method: 'post',
+        //     }),
+        // }),
     })
 });
 export const {
     useGetAttractionsAllQuery,
     useGetLoanDetailQuery,
+    useGetRepayReceiptQuery,
+    usePostRepayReceiptMutation,
 } = API
