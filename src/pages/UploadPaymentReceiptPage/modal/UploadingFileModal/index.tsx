@@ -24,7 +24,7 @@ const Title = styled.div`
 `
 const ProgressBarContainer = styled.div`
     background: #e5e5e5;
-    height: 10px;
+    height: 5px;
 `
 interface ProgressBarIndexProps {
     width: string;
@@ -32,7 +32,7 @@ interface ProgressBarIndexProps {
 const ProgressBarWater = styled.div<ProgressBarIndexProps>`
     background: #aaaaaa;
     width: ${(props) => props.width};
-    height: 10px;
+    height: 5px;
 `;
 const UploadingFileModal = () => {
     return (
