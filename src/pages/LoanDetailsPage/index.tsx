@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import LoanInfo from "../components/LoanInfo";
 import LoanDetail from "../components/LoanDetail";
-import Advertisment from "../components/Advertisment"
+import Advertisment from "../components/Advertisement";
 import AmountPaidModal from "../components/modal/AmountPaidModal/AmountPaidModal";
 import ExtendModal from "../components/modal/ExtendModal/ExtendModal";
 import { useGetLoanDetailQuery } from "../../api";

@@ -61,9 +61,9 @@ const ExtesionDetailStyled = styled.div`
         padding: 18px 12px;
     }
 `;
-type ExtesionDetailProps = GetLoanDetailResponse& {
-    setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
-};;
+type ExtesionDetailProps = GetLoanDetailResponse & {
+    setShowExtensionModal?: React.Dispatch<React.SetStateAction<boolean>>
+};
 const renderExtesionDetail = (props: ExtesionDetailProps) => {
     const { iconUrl, status, paidAmount, balance, productName, loanAmount, serviceCharge, dailyFee, reductionAmount, penaltyInterest, extensionFee, originalDueDate, extendDate, dueDate, bankCardNo } = props;
     return (
@@ -110,7 +110,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
 
 
 const ExtensionDetailModal = (props: ExtesionDetailProps) => {
-    const { setShowExtensionModal, parentOrderNo } = props
+    const { setShowExtensionModal, parentOrderNo } = props;
     const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({ orderNo: "no-7864747613693247"});
 
     return (

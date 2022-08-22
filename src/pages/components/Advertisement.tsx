@@ -12,8 +12,8 @@ import Button from "../../core/components/Button";
 import LoanBrand from "../../core/components/LoanBrand";
 import Accordion from "../../core/components/Accordion";
 import Divider from "../../core/components/Divider";
-import Logo from "../../core/components/images/logo.jpg";
-import Banner from "../../core/components/images/banner.jpg";
+import {Logo,Banner} from "../../core/components/images"
+// import {Banner} from "../../core/components/images/banner.jpg";
 
 const AdvertisementStyled = styled.div`
     margin-top:32px;
