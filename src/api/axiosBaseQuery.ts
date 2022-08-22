@@ -3,13 +3,6 @@ import type { AxiosRequestConfig, AxiosError } from 'axios'
 import axios from "axios";
 import queryString from "query-string";
 
-const parsedQueryString = queryString.parse(location.search);
-// console.log("parsedQueryString", parsedQueryString);
-
-const TOKEN = parsedQueryString.token ? parsedQueryString.token as string: undefined;
-if(!TOKEN) {
-    console.log("error");
-}
 
 let percent = 0;
 const axiosBaseQuery =
@@ -27,6 +20,14 @@ const axiosBaseQuery =
         unknown
         > =>
         async ({ url, method, data, params, headers }) => {
+            const getToken = () => {
+                const parsedQueryString = queryString.parse(location.search);
+                const TOKEN = parsedQueryString.token ? parsedQueryString.token as string: undefined;
+                if(!TOKEN) {
+                    console.log("error");
+                }
+                return TOKEN
+            };
             try {
                 const result = await axios({
                     url: baseUrl + url,
@@ -35,7 +36,8 @@ const axiosBaseQuery =
                     params,
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': TOKEN,
+                        // 'Authorization': TOKEN,
+                        'Authorization': getToken(),
                         ...headers,
                     },
                     onUploadProgress: (progressEvent) => {
@@ -54,6 +56,7 @@ const axiosBaseQuery =
                 return { data: result.data, percent,  }
             } catch (axiosError) {
                 let err = axiosError as AxiosError
+                console.log("err", err);
                 return {
                     error: {
                         status: err.response?.status,

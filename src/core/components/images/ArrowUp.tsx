@@ -15,7 +15,7 @@ export default (props: { fill?: string, width?: string, height?: string }) => {
                         height={height}
                         fill="none"
                         stroke="#707070"
-                        stroke-width="1"
+                        strokeWidth="1"
                     />
                 </clipPath>
             </defs>

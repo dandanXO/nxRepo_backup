@@ -73,6 +73,7 @@ export interface InputProps {
     // label type
     label?: string;
     labelType?: string;
+    style?: any;
 }
 
 // NOTICE: 實際產出元件的 dot 特性
@@ -111,7 +112,8 @@ const Input: InputInterface = ({
     themeType,
     width,
     label,
-    labelType = "top"
+    labelType = "top",
+    style,
 }: InputProps) => {
     const forceUpdate = useForceUpdate();
 
@@ -225,22 +227,22 @@ const Input: InputInterface = ({
             if(String(value).length > 0) {
                 LabelComponentElement = ""
             } else {
-                LabelComponentElement = <UpperFilledLabel for={labelID}>{label}</UpperFilledLabel>
+                LabelComponentElement = <UpperFilledLabel htmlFor={labelID}>{label}</UpperFilledLabel>
             }
         } else {
-            LabelComponentElement = <UpperDefaultLabel for={labelID}>{label}</UpperDefaultLabel>
+            LabelComponentElement = <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
         }
         // }
     } else {
         // right
-        LabelComponentElement = <RightDefaultLabel for={labelID}>{label}</RightDefaultLabel>
+        LabelComponentElement = <RightDefaultLabel htmlFor={labelID}>{label}</RightDefaultLabel>
         CustomInput = StyledInput2;
         upperLabelType = false;
     }
     // let isFocus = statusRef.current === "Focus" || statusRef.current === "KeyDown" ;
 
     return (
-        <InputAndMessageContainer className={className}>
+        <InputAndMessageContainer className={className} style={style}>
             <InputContainer
                 onFocus={() => {
                     setEdit(true);

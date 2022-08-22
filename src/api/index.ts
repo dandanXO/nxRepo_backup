@@ -9,8 +9,6 @@ import {GetRepayReceiptRequestQuerystring, GetRepayReceiptResponse} from "./getR
 import {PostRepayReceiptRequestBody, PostRepayReceiptResponse} from "./postRepayReceipt";
 export {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData }
 
-// const baseUrl = "3.111.118.247";
-// const baseUrl = "https://www.travel.taipei/open-api";
 const baseUrl = "/api/v2"
 export const API = createApi({
     reducerPath: "api",
@@ -49,7 +47,7 @@ export const API = createApi({
                 method: "get",
             }),
         })),
-        postRepayReceipt: builder.mutation<PostRepayReceiptResponse, null>({
+        postRepayReceipt: builder.mutation<PostRepayReceiptResponse, PostRepayReceiptRequestBody>({
             query: (query: PostRepayReceiptRequestBody) => ({
                 url: `/repay/receipt`,
                 method: 'post',
