@@ -15,7 +15,8 @@
         "fetch:test2": "openapi --input ./task/openapi-typescript-codegen/openapi.json --output ./task/openapi-typescript-codegen/generated --client fetch",
         "fetch:test3": "npx @rtk-query/codegen-openapi ./task/rtk-query-codegen-openapi/openapi-config.ts",
         "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook"
+        "build-storybook": "build-storybook",
+        "prepare": "husky install",
     },
     "author": "",
     "license": "ISC",
@@ -47,7 +48,8 @@
         "typescript": "^4.7.4",
         "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
-        "webpack-dev-server": "^4.9.3"
+        "webpack-dev-server": "^4.9.3",
+        "husky": "^8.0.0"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.8.4",
@@ -69,5 +71,10 @@
     },
     "engines": {
         "node": "16.6"
+    },
+    "husky" : {
+        "hooks": {
+            "pre-push": "npm run format"
+        }
     }
 }
