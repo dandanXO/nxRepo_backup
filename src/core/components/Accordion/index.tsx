@@ -1,5 +1,4 @@
-import React, { useState, useEffect, Children } from "react";
-import Card from '../Card';
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { flexCreator } from "../utils/index";
 import { ArrowUp, ArrowDown } from "../images";
@@ -14,11 +13,14 @@ export const Accordion = (props: { isCollapse: boolean, title: string, children:
         setCollapse(isCollapse);
     }, [isCollapse]);
 
+    const AccordStyled=styled.div`
+         padding:0 20px;
+         width: 100%;
+    `
 
     const AccordionHeaderStyled = styled.div`
         ${flexCreator("row", "space-between", "center")};
         width: 100%;
-        padding:0 20px;
         
         .accordionTitle{
             color:${({ theme }) => theme.color.gray500};
@@ -29,17 +31,16 @@ export const Accordion = (props: { isCollapse: boolean, title: string, children:
     const AccordionContentStyled = styled.div`
         margin-top: 10px;
         width: 100%;
-        padding:0 20px;
     `;   
 
     return (
-        <Card isHot={false}>
+        <AccordStyled>
             <AccordionHeaderStyled onClick={handleCollapse}>
                 <div className={'accordionTitle'} >{title}</div>
                 <div>{collapse ? <ArrowUp fill={theme.color.gray500} /> : <ArrowDown fill={theme.color.gray500} />}</div>
             </AccordionHeaderStyled>
             {collapse && <AccordionContentStyled>{children}</AccordionContentStyled>}
-        </Card>
+        </AccordStyled>
     );
 
 }

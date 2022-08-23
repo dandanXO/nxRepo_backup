@@ -5,6 +5,7 @@ import ListItem from "../core/components/ListItem";
 import Button from "../core/components/Button";
 import Accordion from "../core/components/Accordion";
 import Divider from "../core/components/Divider";
+import Card from "../core/components/Card"
 
 const LoanDetailStyled = styled.div`
     text-align: center;
@@ -67,9 +68,11 @@ const LoanDetail = (props: LoanDetailProps) => {
     const {setShowExtendModal, setShowRepaymentModal}=props
     return (
         <LoanDetailStyled>
-            <Accordion title={"Details"} isCollapse={true}>
-                {renderDetailContent(props)}
-            </Accordion>
+            <Card isHot={false}>
+                <Accordion title={"Details"} isCollapse={true}>
+                    {renderDetailContent(props)}
+                </Accordion>
+            </Card>
             <div className={"noticeText"}>
                 <p> Attention： </p>
                 <p>

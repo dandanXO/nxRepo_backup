@@ -69,20 +69,11 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             <div className="loanBrand"><LoanBrand iconUrl={iconUrl} productName={productName} sizeType={'small'} /></div>
             <div className="totalTitle">Amount Paid with Extension</div>
             <div className="totalText">₹ {balance}</div>
-
             <Divider />
             <div className={"loanInfo-Card-Title"}>Gernal</div>
             <div className={"loanInfo-Card-list"}>
                 <ListItem title={"State"} text={<Tag status={status}>{status}</Tag>} />
-                <ListItem
-                    title={
-                        <div>
-                            <div>Amount Paid</div>
-                            <div><img src={AmountPaidIcon} /></div>
-                        </div>
-                    }
-                    text={`₹ ${paidAmount}`}
-                />
+                <ListItem title={"Amount Paid"} text={`₹ ${paidAmount}`}/>
                 <ListItem title={"Balance"} text={`₹ ${balance}`} />
             </div>
             <Divider />
@@ -116,7 +107,7 @@ const ExtensionDetailModal = (props: ExtesionDetailProps) => {
             <Overlay
                 show={true}
                 title="Notice"
-                content={(hide: () => void) => renderExtesionDetail(currentData)}
+                content={(hide: () => void) => renderExtesionDetail(isLoading?{}:currentData)}
                 enableTitleHorizontal={true}
                 enableClose={true}
                 onCancel={() => setShowExtensionModal(false)}

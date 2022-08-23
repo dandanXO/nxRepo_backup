@@ -103,7 +103,7 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
                 title="Notice"
                 content={(hide: () => void) => {
                     return <div>
-                        <Title>Amoun Paid record</Title>
+                        <Title>Amount Paid Record</Title>
                         <Divider styleType="narrow" />
                         {repayRecords.length === 0 ? <NoData /> : <ModalContentStyled>{renderRecordList(props)}</ModalContentStyled>}
                     </div>
