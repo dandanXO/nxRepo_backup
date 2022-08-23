@@ -92,6 +92,9 @@ export const PureBindBankAccountPage = (props: PureBindBankAccountPageProps) => 
                 maskClosable: true,
                 enableClose: false,
                 enableIcon: false,
+                onConfirm: () => {
+                    location.href = "innerh5";
+                }
             });
         }).catch((error: any) => {
             console.log("error:", error);
