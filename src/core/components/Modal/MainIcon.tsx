@@ -32,7 +32,7 @@ interface MainIconProps {
 }
 const MainIcon = styled("h2")<MainIconProps>`
     margin: 0 auto;
-    background: ${props => getIconBackground(props.type)};
+    background: ${(props) => getIconBackground(props.type)};
     width: 43px;
     height: 43px;
     /* Float */
@@ -40,6 +40,12 @@ const MainIcon = styled("h2")<MainIconProps>`
 `;
 MainIcon.displayName = "HeaderICON";
 MainIcon.propTypes = {
-    type: PropTypes.oneOf(["confirm", "notification", "error", "question", "money"]),
+    type: PropTypes.oneOf([
+        "confirm",
+        "notification",
+        "error",
+        "question",
+        "money",
+    ]),
 };
 export default MainIcon;

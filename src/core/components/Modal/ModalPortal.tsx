@@ -56,7 +56,10 @@ class ModalPortal extends React.Component<IModalPortal> {
     }
     render() {
         if (this.props.container) {
-            return ReactDOM.createPortal(this.props.children, this.props.container);
+            return ReactDOM.createPortal(
+                this.props.children,
+                this.props.container
+            );
         } else {
             return ReactDOM.createPortal(this.props.children, this.container);
         }

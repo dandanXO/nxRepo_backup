@@ -7,14 +7,19 @@ import Title from "./Title";
 import Content from "./Content";
 import ControlGroup from "./ControlGroup";
 import MainIcon from "./MainIcon";
-import { NotificationButton, ConfirmButton, CancelButton, CustomColorButton } from "./DefaultButtons";
+import {
+    NotificationButton,
+    ConfirmButton,
+    CancelButton,
+    CustomColorButton,
+} from "./DefaultButtons";
 import AppContext from "../AppContext";
 import Horizontal from "./Horizontal";
 import styled from "styled-components";
 
 const Header = styled.div`
     padding: 0 12px;
-`
+`;
 type ModalContentFunction<T> = (args: any) => T;
 
 interface IModalProps {
@@ -54,7 +59,6 @@ class Modal extends React.Component<IModalProps, ModalState> {
         onCancel: PropTypes.func,
         customButtons: PropTypes.element,
         maskClosable: PropTypes.bool,
-
     };
     static defaultProps = {
         show: false,
@@ -103,13 +107,14 @@ class Modal extends React.Component<IModalProps, ModalState> {
                 >
                     <Popup width={this.props.width}>
                         {this.props.enableClose && (
-                            <div onClick={() => {
-                                this.hidden();
-                                this.props.onCancel && this.props.onCancel();
-                            }}>
-                                <CloseButton
-
-                                ></CloseButton>
+                            <div
+                                onClick={() => {
+                                    this.hidden();
+                                    this.props.onCancel &&
+                                        this.props.onCancel();
+                                }}
+                            >
+                                <CloseButton></CloseButton>
                             </div>
                         )}
                         {this.props.enableIcon && (
@@ -117,9 +122,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                         )}
                         <Header>
                             <Title>{this.props.title}</Title>
-                            {this.props.enableTitleHorizontal && (
-                                <Horizontal/>
-                            )}
+                            {this.props.enableTitleHorizontal && <Horizontal />}
                         </Header>
                         <Content>
                             {typeof this.props.content === "string" ? (
@@ -133,7 +136,8 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                     }}
                                 ></div>
                             ) : (
-                                typeof this.props.content === "object" && this.props.content
+                                typeof this.props.content === "object" &&
+                                this.props.content
                             )}
                         </Content>
                         <ControlGroup>
@@ -141,12 +145,15 @@ class Modal extends React.Component<IModalProps, ModalState> {
                             {(typeof this.props.mode === "undefined" ||
                                 this.props.mode === null ||
                                 this.props.mode === "alert") &&
-                                (typeof this.props.confirmColor !== "undefined" && this.props.confirmColor !== null ? (
+                                (typeof this.props.confirmColor !==
+                                    "undefined" &&
+                                this.props.confirmColor !== null ? (
                                     <CustomColorButton
                                         color={this.props.confirmColor}
                                         onClick={() => {
                                             this.hidden();
-                                            this.props.onConfirm && this.props.onConfirm();
+                                            this.props.onConfirm &&
+                                                this.props.onConfirm();
                                         }}
                                     >
                                         {this.props.confirmText}
@@ -155,7 +162,8 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                     <NotificationButton
                                         onClick={() => {
                                             this.hidden();
-                                            this.props.onConfirm && this.props.onConfirm();
+                                            this.props.onConfirm &&
+                                                this.props.onConfirm();
                                         }}
                                     >
                                         {this.props.confirmText}
@@ -165,13 +173,15 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                 <React.Fragment>
                                     {/* Custom Confirm */}
                                     {this.props.mode === "confirm" &&
-                                    typeof this.props.confirmColor !== "undefined" &&
+                                    typeof this.props.confirmColor !==
+                                        "undefined" &&
                                     this.props.confirmColor !== null ? (
                                         <CustomColorButton
                                             color={this.props.confirmColor}
                                             onClick={() => {
                                                 this.hidden();
-                                                this.props.onConfirm && this.props.onConfirm();
+                                                this.props.onConfirm &&
+                                                    this.props.onConfirm();
                                             }}
                                         >
                                             {this.props.confirmText}
@@ -180,7 +190,8 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                         <ConfirmButton
                                             onClick={() => {
                                                 this.hidden();
-                                                this.props.onConfirm && this.props.onConfirm();
+                                                this.props.onConfirm &&
+                                                    this.props.onConfirm();
                                             }}
                                         >
                                             {this.props.confirmText}
@@ -188,13 +199,15 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                     )}
                                     {/* Custom Cancel */}
                                     {this.props.mode === "confirm" &&
-                                    typeof this.props.cancelColor !== "undefined" &&
+                                    typeof this.props.cancelColor !==
+                                        "undefined" &&
                                     this.props.cancelColor !== null ? (
                                         <CustomColorButton
                                             color={this.props.cancelColor}
                                             onClick={() => {
                                                 this.hidden();
-                                                this.props.onConfirm && this.props.onCancel();
+                                                this.props.onConfirm &&
+                                                    this.props.onCancel();
                                             }}
                                         >
                                             {this.props.cancelText}
@@ -203,7 +216,8 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                         <CancelButton
                                             onClick={() => {
                                                 this.hidden();
-                                                this.props.onCancel && this.props.onCancel();
+                                                this.props.onCancel &&
+                                                    this.props.onCancel();
                                             }}
                                         >
                                             {this.props.cancelText}
@@ -211,15 +225,18 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                     )}
                                     {/* Default Confirm, Cancel */}
                                     {this.props.mode === "confirm" &&
-                                        typeof this.props.confirmColor === "undefined" &&
+                                        typeof this.props.confirmColor ===
+                                            "undefined" &&
                                         this.props.confirmColor === null &&
-                                        typeof this.props.cancelColor === "undefined" &&
+                                        typeof this.props.cancelColor ===
+                                            "undefined" &&
                                         this.props.cancelColor === null && (
                                             <>
                                                 <ConfirmButton
                                                     onClick={() => {
                                                         this.hidden();
-                                                        this.props.onConfirm && this.props.onConfirm();
+                                                        this.props.onConfirm &&
+                                                            this.props.onConfirm();
                                                     }}
                                                 >
                                                     {this.props.confirmText}
@@ -227,7 +244,8 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                                 <CancelButton
                                                     onClick={() => {
                                                         this.hidden();
-                                                        this.props.onCancel && this.props.onCancel();
+                                                        this.props.onCancel &&
+                                                            this.props.onCancel();
                                                     }}
                                                 >
                                                     {this.props.cancelText}

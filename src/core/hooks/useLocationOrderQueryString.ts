@@ -1,5 +1,5 @@
-import {useLocation} from "react-router-dom";
-import {useMemo} from "react";
+import { useLocation } from "react-router-dom";
+import { useMemo } from "react";
 import queryString from "query-string";
 
 const useLocationOrderQueryString = () => {
@@ -14,9 +14,9 @@ const useLocationOrderQueryString = () => {
             token: parsedQueryString.token,
             orderNo: parsedQueryString.orderNo,
             cardholderName: parsedQueryString.cardholderName,
-        }
+        };
     }, [location]);
     return pageQueryString;
-}
+};
 
 export default useLocationOrderQueryString;

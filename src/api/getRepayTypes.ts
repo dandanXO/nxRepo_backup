@@ -9,10 +9,9 @@ interface GetRepayTypesResponseObject {
 }
 export type GetRepayTypesResponse = GetRepayTypesResponseObject[];
 
-export interface GetRepayTypesPayPlats{
+export interface GetRepayTypesPayPlats {
     /** platClass */
     platClass?: string;
     /** 平台名稱 */
     platName?: string;
 }
-

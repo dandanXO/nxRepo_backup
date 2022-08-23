@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import {
@@ -7,62 +6,66 @@ import {
     htmlContnet,
     content,
     longContent,
-
     Button,
     HelloButton,
     LinkedButton,
-    
     Popover,
     // Modal
     Modal,
 } from "./index";
 
-const AllCallMethodModal = () => {    
-    const onButtonClick = useCallback(() => {        
+const AllCallMethodModal = () => {
+    const onButtonClick = useCallback(() => {
         setTimeout(() => {
-            Modal.alert({                        
+            Modal.alert({
                 mask: true,
                 title: "A Modal",
                 content: "Content",
-                confirmText: "Confirm",                                
+                confirmText: "Confirm",
             });
-        }, 1000)
+        }, 1000);
         setTimeout(() => {
-            Modal.confirm({            
+            Modal.confirm({
                 mask: true,
                 title: "B Modal",
                 content: "Content",
                 confirmText: "Confirm",
-                cancelText: "Cancel",            
+                cancelText: "Cancel",
             });
-        }, 2000)
+        }, 2000);
         setTimeout(() => {
-            Modal.confirm({            
+            Modal.confirm({
                 mask: true,
                 title: "C Modal",
                 content: "Content",
                 confirmText: "Confirm",
-                cancelText: "Cancel",            
+                cancelText: "Cancel",
             });
-        }, 3000)
+        }, 3000);
         setTimeout(() => {
-            Modal.show({            
-                mask: true,                
+            Modal.show({
+                mask: true,
                 content: (hide) => {
                     return (
                         <Popover>
-                            <Button onClick={() => { hide(); }}>Close</Button>
+                            <Button
+                                onClick={() => {
+                                    hide();
+                                }}
+                            >
+                                Close
+                            </Button>
                         </Popover>
-                    )
-                },                
-            })
-        }, 4000)        
-    })
+                    );
+                },
+            });
+        }, 4000);
+    });
     return (
-        <div>            
+        <div>
             <Button onClick={onButtonClick}>Click to generate 4 modals</Button>
-        </div>            
-    )
-}
+        </div>
+    );
+};
 
 export default AllCallMethodModal;

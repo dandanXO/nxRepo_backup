@@ -1,20 +1,23 @@
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import SuccessInputIcon from "./atom/SuccessInputIcon";
 import ErrorInputIcon from "./atom/ErrorInputIcon";
-import {InputLintContent} from "./atom/InputLintContent";
-import {StatusIconContainer} from "./template/StatusIconContainer";
-import {InputContainer} from "./template/InputContainer";
-import {StyledInput2, StyledLabel, StyledTopInput} from "./atom/StyledInput";
-import {InputStatus, InputValidStatus} from "./type";
-import {useForceUpdate} from "../useForceUpdate";
-import {RightDefaultLabel, UpperDefaultLabel, UpperFilledLabel} from "./atom/UpperLabel";
+import { InputLintContent } from "./atom/InputLintContent";
+import { StatusIconContainer } from "./template/StatusIconContainer";
+import { InputContainer } from "./template/InputContainer";
+import { StyledInput2, StyledLabel, StyledTopInput } from "./atom/StyledInput";
+import { InputStatus, InputValidStatus } from "./type";
+import { useForceUpdate } from "../useForceUpdate";
+import {
+    RightDefaultLabel,
+    UpperDefaultLabel,
+    UpperFilledLabel,
+} from "./atom/UpperLabel";
 import styled from "styled-components";
 
-const InputAndMessageContainer = styled.div`
-`;
+const InputAndMessageContainer = styled.div``;
 const ErrorMessageSection = styled.div`
     color: #f82626;
-    margin-left: 20px;   
+    margin-left: 20px;
     padding-top: 5px;
     text-align: left;
 `;
@@ -85,8 +88,8 @@ interface InputDotComponentProps<T> {
 }
 
 // 實際產出元件
-export type InputInterface = React.FunctionComponent<InputProps> & InputDotComponentProps<InputProps>;
-
+export type InputInterface = React.FunctionComponent<InputProps> &
+    InputDotComponentProps<InputProps>;
 
 const Input: InputInterface = ({
     ref,
@@ -136,7 +139,8 @@ const Input: InputInterface = ({
 
     const [showHintMessage, setShowHintMessage] = useState(false);
 
-    (typeof errorMessage === "string" || React.isValidElement(errorMessage)) && disabled
+    (typeof errorMessage === "string" || React.isValidElement(errorMessage)) &&
+    disabled
         ? hintMessage
         : (validMessage = errorMessage);
 
@@ -145,7 +149,10 @@ const Input: InputInterface = ({
     const showToolTip = (() => {
         let showToolTip = false;
         if (!valid) {
-            if (statusRef.current === "Focus" || statusRef.current === "KeyDown") {
+            if (
+                statusRef.current === "Focus" ||
+                statusRef.current === "KeyDown"
+            ) {
                 showToolTip = true;
             }
         }
@@ -183,14 +190,15 @@ const Input: InputInterface = ({
             if (componentRef.current && componentRef.current.contains(target)) {
                 return true;
             }
-            const hasOtherClass = otherClass.map(componentClass => {
+            const hasOtherClass = otherClass.map((componentClass) => {
                 if ((target as Element).closest(componentClass)) {
                     return true;
                 }
             });
             // REFACTORING
             // FIXME: input-tooltip-block-click 為 className 的區域不會被關閉
-            if ((target as Element).closest(".input-tooltip-block-click")) return true;
+            if ((target as Element).closest(".input-tooltip-block-click"))
+                return true;
 
             return hasOtherClass.indexOf(true) > -1;
         };
@@ -198,7 +206,10 @@ const Input: InputInterface = ({
         const handleClickOutside = (event: MouseEvent) => {
             // console.log("handleClickOutside", event.target);
             const target = event.target;
-            if (event.target instanceof Node && !checkComponentSelfContent(selectRef, target, otherRegionClass)) {
+            if (
+                event.target instanceof Node &&
+                !checkComponentSelfContent(selectRef, target, otherRegionClass)
+            ) {
                 // TODO: 不在區域內的話，執行相關函式
                 setShowHintMessage(false);
                 onClickOutsideSelf && onClickOutsideSelf();
@@ -216,35 +227,43 @@ const Input: InputInterface = ({
 
     // NOTICE:
     let labelID = id || label;
-    const [isEdit, setEdit] = useState(false)
+    const [isEdit, setEdit] = useState(false);
 
-    let CustomInput: any
+    let CustomInput: any;
     let LabelComponentElement;
     let upperLabelType = false;
-    if(labelType === "top") {
+    if (labelType === "top") {
         CustomInput = StyledTopInput;
         upperLabelType = true;
 
-        if(!isEdit) {
-            if(String(value).length > 0) {
-                LabelComponentElement = ""
+        if (!isEdit) {
+            if (String(value).length > 0) {
+                LabelComponentElement = "";
             } else {
-                LabelComponentElement = <UpperFilledLabel htmlFor={labelID}>{label}</UpperFilledLabel>
+                LabelComponentElement = (
+                    <UpperFilledLabel htmlFor={labelID}>
+                        {label}
+                    </UpperFilledLabel>
+                );
             }
         } else {
-            LabelComponentElement = <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
+            LabelComponentElement = (
+                <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
+            );
         }
         // }
     } else {
         // right
-        LabelComponentElement = <RightDefaultLabel htmlFor={labelID}>{label}</RightDefaultLabel>
+        LabelComponentElement = (
+            <RightDefaultLabel htmlFor={labelID}>{label}</RightDefaultLabel>
+        );
         CustomInput = StyledInput2;
         upperLabelType = false;
     }
     // let isFocus = statusRef.current === "Focus" || statusRef.current === "KeyDown" ;
     return (
         <div ref={ref}>
-            <InputAndMessageContainer className={className} style={style} >
+            <InputAndMessageContainer className={className} style={style}>
                 <InputContainer
                     onFocus={() => {
                         setEdit(true);
@@ -252,7 +271,8 @@ const Input: InputInterface = ({
                     onBlur={() => {
                         setEdit(false);
                     }}
-                    ref={selectRef} width={width}
+                    ref={selectRef}
+                    width={width}
                     upperLabelType={upperLabelType}
                     isFocus={isEdit}
                 >
@@ -297,7 +317,10 @@ const Input: InputInterface = ({
                         // }}
                         onMouseOut={() => {
                             // console.log("onMouseOut");
-                            if (statusRef.current !== "Focus" && statusRef.current !== "KeyDown") {
+                            if (
+                                statusRef.current !== "Focus" &&
+                                statusRef.current !== "KeyDown"
+                            ) {
                                 statusRef.current = "Idle";
                                 forceUpdate();
                             }
@@ -412,19 +435,24 @@ const Input: InputInterface = ({
                     {/*<StyledLabel />*/}
                     {/*FIXME:*/}
                     {inputBefore && typeof valid === "boolean" && (
-                        <StatusIconContainer>{valid ? <SuccessInputIcon /> : <ErrorInputIcon />}</StatusIconContainer>
+                        <StatusIconContainer>
+                            {valid ? <SuccessInputIcon /> : <ErrorInputIcon />}
+                        </StatusIconContainer>
                     )}
-                    {valid === false && validMessage !== "" && (statusRef.current === "Focus" || statusRef.current === "KeyDown") && (
-                        // <Tooltip
-                        //     target={targetRef}
-                        //     placement={placement ? placement : "right"}
-                        //     show={showToolTip}
-                        //     customStyle
-                        //     zIndex={toolTipZindex}
-                        // >
-                        <InputLintContent>{validMessage}</InputLintContent>
-                        // </Tooltip>
-                    )}
+                    {valid === false &&
+                        validMessage !== "" &&
+                        (statusRef.current === "Focus" ||
+                            statusRef.current === "KeyDown") && (
+                            // <Tooltip
+                            //     target={targetRef}
+                            //     placement={placement ? placement : "right"}
+                            //     show={showToolTip}
+                            //     customStyle
+                            //     zIndex={toolTipZindex}
+                            // >
+                            <InputLintContent>{validMessage}</InputLintContent>
+                            // </Tooltip>
+                        )}
                     {/*Disable - Tooltip*/}
                     {/*{showHintMessage && disabled === true && (*/}
                     {/*    <Tooltip target={targetRef} placement={placement ? placement : "right"} show={showHintToolTip} customStyle>*/}
@@ -438,7 +466,6 @@ const Input: InputInterface = ({
                 <ErrorMessageSection>{errorMessage}</ErrorMessageSection>
             </InputAndMessageContainer>
         </div>
-
     );
 };
 

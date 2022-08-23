@@ -1,4 +1,4 @@
-export default (props: { fill?: string, width?: string, height?: string }) => {
+export default (props: { fill?: string; width?: string; height?: string }) => {
     const { fill = "#aaa", width = "12px", height = "12px" } = props;
     return (
         <svg

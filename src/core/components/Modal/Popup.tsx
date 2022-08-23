@@ -21,7 +21,7 @@ const Popup = styled("div")<PopupProps>`
     /* Background */
     /* background: rgba(45, 59, 88, 0.85); */
     background: ${(props) => props.theme.custom.background.primary};
-    /* Padding */   
+    /* Padding */
     /* Content */
     max-height: 90vh;
     overflow: scroll;

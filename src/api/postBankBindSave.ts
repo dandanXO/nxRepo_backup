@@ -9,8 +9,4 @@ export interface PostBankBindSaveRequest {
     upiId: string;
 }
 
-export interface PostBankBindSaveResponse {
-
-}
-
-
+export interface PostBankBindSaveResponse {}

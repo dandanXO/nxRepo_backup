@@ -1,5 +1,5 @@
 import React from "react";
-import Radio, {StyledRadioBox} from "./Radio";
+import Radio, { StyledRadioBox } from "./Radio";
 import styled from "styled-components";
 
 export interface GroupProps {
@@ -85,18 +85,29 @@ class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
         const size = this.props.size ? this.props.size : "small";
         return (
             <StyledGroup style={this.props.style ? this.props.style : {}}>
-                {React.Children.map<React.ReactNode, React.ReactElement<any>>(this.props.children, (radioChild, index) => {
-                    if (radioChild && radioChild.type === Radio) {
-                        return React.cloneElement(radioChild, {
-                            size,
-                            label: radioChild.props.label,
-                            value: radioChild.props.value,
-                            checked: radioChild.props.value === this.state.groupValue,
-                            changeRadio: (checked: boolean) => this.onRadioChange(radioChild.props.value, checked),
-                            disabled: this.props.disabled ? this.props.disabled : radioChild.props.disabled,
-                        });
+                {React.Children.map<React.ReactNode, React.ReactElement<any>>(
+                    this.props.children,
+                    (radioChild, index) => {
+                        if (radioChild && radioChild.type === Radio) {
+                            return React.cloneElement(radioChild, {
+                                size,
+                                label: radioChild.props.label,
+                                value: radioChild.props.value,
+                                checked:
+                                    radioChild.props.value ===
+                                    this.state.groupValue,
+                                changeRadio: (checked: boolean) =>
+                                    this.onRadioChange(
+                                        radioChild.props.value,
+                                        checked
+                                    ),
+                                disabled: this.props.disabled
+                                    ? this.props.disabled
+                                    : radioChild.props.disabled,
+                            });
+                        }
                     }
-                })}
+                )}
             </StyledGroup>
         );
     }

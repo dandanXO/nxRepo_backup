@@ -1,5 +1,5 @@
 import React from "react";
-import {InputIconProps} from "../type";
+import { InputIconProps } from "../type";
 
 const ErrorInputIcon = (props: InputIconProps) => {
     const color = props.color ? props.color : "#FF5243";

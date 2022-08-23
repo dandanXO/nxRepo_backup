@@ -1,7 +1,11 @@
 import React from "react";
-import {CommonRegularSVGICON} from "../../SVGIcon";
-import {RadioCheckSVGICON, RadioDisabledTrueSVGICON, RadioDisableFalseSVGICON} from "./RadioICON";
-import {useTheme, withTheme} from "styled-components";
+import { CommonRegularSVGICON } from "../../SVGIcon";
+import {
+    RadioCheckSVGICON,
+    RadioDisabledTrueSVGICON,
+    RadioDisableFalseSVGICON,
+} from "./RadioICON";
+import { useTheme, withTheme } from "styled-components";
 
 //NOTICE:
 // const primaryColor = "#f58b10";
@@ -17,7 +21,13 @@ interface RadioICONProps {
     // };
 }
 
-const RadioICON: React.FC<RadioICONProps> = ({checked, defaultChecked, hover, size, disabled}) => {
+const RadioICON: React.FC<RadioICONProps> = ({
+    checked,
+    defaultChecked,
+    hover,
+    size,
+    disabled,
+}) => {
     const theme = useTheme();
     const primaryColor = (theme as any).custom.radio.primary;
     const secondary = (theme as any).custom.radio.secondary;
@@ -58,7 +68,11 @@ const RadioICON: React.FC<RadioICONProps> = ({checked, defaultChecked, hover, si
             // NOTE: 沒有點擊/有禁用
             return (
                 <RadioDisableFalseSVGICON
-                    fill={lightTheme ? "rgba(0, 0, 0, 0.7)" : "rgba(254, 253, 253, 0.8)"}
+                    fill={
+                        lightTheme
+                            ? "rgba(0, 0, 0, 0.7)"
+                            : "rgba(254, 253, 253, 0.8)"
+                    }
                     size={finalSize}
                     style={{
                         cursor: finalDisabled,
@@ -71,8 +85,14 @@ const RadioICON: React.FC<RadioICONProps> = ({checked, defaultChecked, hover, si
         if (disabled) {
             return (
                 <RadioDisabledTrueSVGICON
-                    radioFill={lightTheme ? "#c1c6cd" : "rgba(253, 252, 254, 0.1)"}
-                    fill={lightTheme ? "rgba(0, 0, 0, 0.7)" : "rgba(254, 253, 253, 0.8)"}
+                    radioFill={
+                        lightTheme ? "#c1c6cd" : "rgba(253, 252, 254, 0.1)"
+                    }
+                    fill={
+                        lightTheme
+                            ? "rgba(0, 0, 0, 0.7)"
+                            : "rgba(254, 253, 253, 0.8)"
+                    }
                     size={finalSize}
                     style={{
                         cursor: finalDisabled,
@@ -96,4 +116,4 @@ const RadioICON: React.FC<RadioICONProps> = ({checked, defaultChecked, hover, si
 };
 // const WithThemeRadioICON = withTheme();
 // export default WithThemeRadioICON;
-export default RadioICON
+export default RadioICON;

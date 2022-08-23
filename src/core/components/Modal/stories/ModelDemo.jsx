@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import {
@@ -7,11 +6,9 @@ import {
     htmlContnet,
     content,
     longContent,
-
     Button,
     HelloButton,
     LinkedButton,
-    
     Popover,
     // Modal
     Modal,
@@ -21,42 +18,42 @@ class ModelDemo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: true
-        }
+            show: true,
+        };
     }
     hidden = () => {
         this.setState({
-            show: false
-        })
-    }
+            show: false,
+        });
+    };
     render() {
         return (
-            <Modal 
-                show={this.state.show}                
+            <Modal
+                show={this.state.show}
                 mode="custom"
-                customButtons={(
+                customButtons={
                     <>
-                        <HelloButton 
+                        <HelloButton
                             onClick={() => {
                                 this.hidden();
                             }}
                         >
                             确认
                         </HelloButton>
-                        <LinkedButton 
+                        <LinkedButton
                             onClick={() => {
                                 this.hidden();
                             }}
                         >
                             遇到问题，联系客服
-                        </LinkedButton>                                
+                        </LinkedButton>
                     </>
-                )}    
+                }
                 type="money"
                 title="金額"
-                content={content}          
+                content={content}
             ></Modal>
-        )
+        );
     }
 }
 export default ModelDemo;

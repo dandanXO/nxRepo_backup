@@ -4,7 +4,7 @@ import ModalPortal from "./ModalPortal";
 import Modal, { IModalProps } from "./Modal";
 import CustomModal from "./CustomModal";
 import AppContext from "../AppContext";
-import {AppThemeProvider} from "../index";
+import { AppThemeProvider } from "../index";
 
 type ModalContentFunction<T> = (args: any) => T;
 interface IModalWrapperProps {
@@ -14,10 +14,10 @@ interface IModalWrapperProps {
     content?: any;
     show: boolean;
 
-    mask: true,
+    mask: true;
     title?: string;
     confirmText?: string;
-    onConfirm?: () => void,
+    onConfirm?: () => void;
     theme?: any;
 }
 type ModalWrapperProps = IModalWrapperProps & IModalProps;
@@ -37,7 +37,12 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
                 {!this.props.custom ? (
                     <Modal {...this.props}></Modal>
                 ) : (
-                    <CustomModal call={false} show={this.props.show} mask={this.props.mask} content={this.props.content} />
+                    <CustomModal
+                        call={false}
+                        show={this.props.show}
+                        mask={this.props.mask}
+                        content={this.props.content}
+                    />
                 )}
             </ModalPortal>
         );
@@ -54,7 +59,10 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
         // NOTE: Portal Container
         const replacedModalContainer = document.createElement("div");
         replacedModalContainer.className = "uni-portal-container";
-        replacedModalContainer.setAttribute("uni-id", "uni-portal-container-" + Date.now());
+        replacedModalContainer.setAttribute(
+            "uni-id",
+            "uni-portal-container-" + Date.now()
+        );
         // NOTE:  Modal List Append Portal Container
         modalRoot.appendChild(replacedModalContainer);
         ReactDOM.render(
@@ -67,7 +75,11 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
                         <Modal show={true} mode={mode} {...props}></Modal>
                     </AppThemeProvider>
                 ) : (
-                    <CustomModal call={true} mask={props.mask} content={props.content}></CustomModal>
+                    <CustomModal
+                        call={true}
+                        mask={props.mask}
+                        content={props.content}
+                    ></CustomModal>
                 )}
             </ModalPortal>,
             replacedModalContainer

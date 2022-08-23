@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import {
@@ -7,11 +6,9 @@ import {
     htmlContnet,
     content,
     longContent,
-
     Button,
     HelloButton,
     LinkedButton,
-    
     Popover,
     // Modal
     Modal,
@@ -21,6 +18,6 @@ const CustomModal = (props) => (
         <Button onClick={() => props.hide()}>Close</Button>
         <div>Show</div>
     </Popover>
-)
+);
 
 export default CustomModal;

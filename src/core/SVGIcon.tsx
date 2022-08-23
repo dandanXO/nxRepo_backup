@@ -8,7 +8,7 @@ import styled from "styled-components";
 interface ICommonRegularSVGICON {
     fill: string;
     size: number;
-    style: {cursor: string};
+    style: { cursor: string };
 }
 
 export const RegularSVGICON = styled.div`
@@ -17,13 +17,11 @@ export const RegularSVGICON = styled.div`
     //background: red;
     border-radius: 100px;
     border: 1px #aaaaaa solid;
-`
+`;
 
 const CommonRegularSVGICON = (props: ICommonRegularSVGICON) => {
-    const {size = 19, fill = "#A8A8A8"} = props;
-    return (
-        <RegularSVGICON/>
-    )
+    const { size = 19, fill = "#A8A8A8" } = props;
+    return <RegularSVGICON />;
     // return (
     //     <svg
     //         version="1.1"
@@ -50,8 +48,8 @@ const CommonRegularSVGICON = (props: ICommonRegularSVGICON) => {
     //         <path
     //             fill={fill}
     //             d="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M256.5,489
-	// C128.075,489,23,383.925,23,255.5C23,127.076,128.075,22,256.5,22C384.924,22,490,127.076,490,255.5
-	// C490,383.925,384.924,489,256.5,489z"
+    // C128.075,489,23,383.925,23,255.5C23,127.076,128.075,22,256.5,22C384.924,22,490,127.076,490,255.5
+    // C490,383.925,384.924,489,256.5,489z"
     //         />
     //     </svg>
     // );
@@ -64,7 +62,7 @@ interface ICommonDisabledFalseSVGICON {
 }
 
 const CommonDisabledFalseSVGICON = (props: ICommonDisabledFalseSVGICON) => {
-    const {size = 19, fillOpacity = "0.07", fill = "#A8A8A8"} = props;
+    const { size = 19, fillOpacity = "0.07", fill = "#A8A8A8" } = props;
     return (
         <svg
             version="1.1"
@@ -98,7 +96,7 @@ interface SVGICON {
 }
 
 const SVGICON = (props: SVGICON) => {
-    const {size = 16} = props;
+    const { size = 16 } = props;
     return (
         <svg
             version="1.1"
@@ -144,9 +142,14 @@ interface IQuestionIcon {
     height: number;
 }
 const QuestionIcon = (props: IQuestionIcon) => {
-    const {width, height} = props;
+    const { width, height } = props;
     return (
-        <svg height={`${height}px`} viewBox="0 0 512 512" width={`${width}px`} xmlns="http://www.w3.org/2000/svg">
+        <svg
+            height={`${height}px`}
+            viewBox="0 0 512 512"
+            width={`${width}px`}
+            xmlns="http://www.w3.org/2000/svg"
+        >
             <path
                 fill="currentColor"
                 d="m277.332031 384c0 11.78125-9.550781 21.332031-21.332031 21.332031s-21.332031-9.550781-21.332031-21.332031 9.550781-21.332031 21.332031-21.332031 21.332031 9.550781 21.332031 21.332031zm0 0"

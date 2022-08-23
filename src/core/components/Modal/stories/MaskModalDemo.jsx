@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import {
@@ -7,11 +6,9 @@ import {
     htmlContnet,
     content,
     longContent,
-
     Button,
     HelloButton,
     LinkedButton,
-    
     Popover,
     // Modal
     Modal,
@@ -29,39 +26,41 @@ const MaskModalDemo = () => {
             <br></br>
 
             <div>
-                <Button 
+                <Button
                     onClick={() => {
                         setMask(true);
                         setShow((show) => {
-                            return !show
-                        })
-                    }}>
-                        Show Mask Modal
+                            return !show;
+                        });
+                    }}
+                >
+                    Show Mask Modal
                 </Button>
-                <Button 
+                <Button
                     onClick={() => {
                         setMask(false);
                         setShow((show) => {
-                            return !show
-                        })
-                    }}>
-                        Show Modal
-                </Button>                
-            </div>            
-            <Modal 
+                            return !show;
+                        });
+                    }}
+                >
+                    Show Modal
+                </Button>
+            </div>
+            <Modal
                 show={show}
                 mask={mask}
                 title="预设"
-                content={content}                            
-                onConfirm={() => {                    
+                content={content}
+                onConfirm={() => {
                     setShow(false);
                 }}
                 onCancel={() => {
                     setShow(false);
-                }}                
+                }}
             ></Modal>
         </div>
-    )
-}
+    );
+};
 
 export default MaskModalDemo;

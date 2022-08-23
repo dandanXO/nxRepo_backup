@@ -7,10 +7,20 @@ interface CloseSVGIconProps {
     className?: string;
 }
 const CloseSVGIcon = (props: CloseSVGIconProps) => {
-    const {fill = "#A8A8A8"} = props;
+    const { fill = "#A8A8A8" } = props;
     return (
-        <svg className={props.className} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
-            <path d="M75.595,74l-4.08-4.08,4.08-4.08A1.124,1.124,0,0,0,74,64.255l-4.08,4.08-4.08-4.08a1.124,1.124,0,0,0-1.59,1.59l4.08,4.08L64.255,74a1.124,1.124,0,0,0,1.59,1.59l4.08-4.08L74,75.595A1.124,1.124,0,0,0,75.595,74Z" transform="translate(-63.925 -63.925)" fill={fill}/>
+        <svg
+            className={props.className}
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+        >
+            <path
+                d="M75.595,74l-4.08-4.08,4.08-4.08A1.124,1.124,0,0,0,74,64.255l-4.08,4.08-4.08-4.08a1.124,1.124,0,0,0-1.59,1.59l4.08,4.08L64.255,74a1.124,1.124,0,0,0,1.59,1.59l4.08-4.08L74,75.595A1.124,1.124,0,0,0,75.595,74Z"
+                transform="translate(-63.925 -63.925)"
+                fill={fill}
+            />
         </svg>
     );
 };

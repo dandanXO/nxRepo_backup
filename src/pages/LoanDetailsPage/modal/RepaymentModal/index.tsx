@@ -1,13 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ListItem from "../../../../core/components/ListItem";
 import Horizontal from "../../../../core/components/Modal/Horizontal";
 import Title from "../../../../core/components/Modal/Title";
-import {Input} from "../../../../core/components/Input";
-import {NotificationButton} from "../../../../core/components/Modal/DefaultButtons";
+import { Input } from "../../../../core/components/Input";
+import { NotificationButton } from "../../../../core/components/Modal/DefaultButtons";
 import Overlay from "../../../../core/components/Overlay";
 import Radio from "../../../../core/components/Radio";
-import {RepayICON} from "../../../../core/components/Icon/Icon";
+import { RepayICON } from "../../../../core/components/Icon/Icon";
 
 const Paragraph = styled.div`
     text-align: left;
@@ -56,21 +56,24 @@ const RepaymentButton = styled(RepayAndApplyButton)`
 `;
 
 interface RepaymentModalProps {
-    balance: number,
-    setRepayBalance:React.Dispatch<React.SetStateAction<number>>;
+    balance: number;
+    setRepayBalance: React.Dispatch<React.SetStateAction<number>>;
     setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
-    handlePostRepayCreate:any;
-    
+    handlePostRepayCreate: any;
 }
 const RepaymentModal = (props: RepaymentModalProps) => {
     const balance = props.balance;
     const [balanceValue, setBalanceValue] = useState(String("₹" + balance));
     const [radioValue, setRadioValue] = useState("balance");
-    const handleConfirm=()=>{
-        props.handlePostRepayCreate(false,false,Number(balanceValue.replace("₹","")));
-        props.setShowRepaymentModal(false)
-    }
+    const handleConfirm = () => {
+        props.handlePostRepayCreate(
+            false,
+            false,
+            Number(balanceValue.replace("₹", ""))
+        );
+        props.setShowRepaymentModal(false);
+    };
     return (
         <div>
             <Overlay
@@ -79,21 +82,24 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                     return (
                         <RepaymentModalContainer>
                             <Title>Repayment</Title>
-                            <Horizontal/>
+                            <Horizontal />
 
                             <SectionBalance>
-                                <ListItem title="Balance" text={`₹ ${balance}`}/>
+                                <ListItem
+                                    title="Balance"
+                                    text={`₹ ${balance}`}
+                                />
                             </SectionBalance>
 
-                            <Horizontal/>
+                            <Horizontal />
 
                             <SectionOptions>
                                 <Radio.Group
                                     value={radioValue}
                                     onCheck={(value: any) => {
                                         setRadioValue(value);
-                                        if(value==="balance"){
-                                            setBalanceValue("₹" + balance)
+                                        if (value === "balance") {
+                                            setBalanceValue("₹" + balance);
                                         }
                                     }}
                                 >
@@ -107,7 +113,11 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     value={balanceValue}
                                     onChange={(event: any) => {
                                         if (radioValue === "balance") return;
-                                        const value = event.target.value.replaceAll("₹", "");
+                                        const value =
+                                            event.target.value.replaceAll(
+                                                "₹",
+                                                ""
+                                            );
                                         setBalanceValue("₹" + value);
                                         props.setRepayBalance(value);
                                     }}
@@ -116,38 +126,50 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                 <SectionParagraph>
                                     <Paragraph>Attention:</Paragraph>
                                     <Paragraph>
-                                        1. Before repayment, please make sure that youhave
-                                        enough  balance on your bank account.
+                                        1. Before repayment, please make sure
+                                        that youhave enough balance on your bank
+                                        account.
                                     </Paragraph>
                                     <Paragraph>
-                                        2. In order to protect your rights, we strongly
-                                        recommend you take a screenshot and upload
-                                        your UTR number after completing the repayment
-                                        and return to the APP to upload your repayment
+                                        2. In order to protect your rights, we
+                                        strongly recommend you take a screenshot
+                                        and upload your UTR number after
+                                        completing the repayment and return to
+                                        the APP to upload your repayment
                                         receipt.
                                     </Paragraph>
                                 </SectionParagraph>
                                 <SectionButton>
-                                    <RepayAndApplyButton onClick={() => {
-                                        props.setShowRepaymentModal(false);
-                                        props.setShowRepaymentNoticeModal(true);
-                                    }}>
-                                        <RepayICON/> Repay and Apply Again
+                                    <RepayAndApplyButton
+                                        onClick={() => {
+                                            props.setShowRepaymentModal(false);
+                                            props.setShowRepaymentNoticeModal(
+                                                true
+                                            );
+                                        }}
+                                    >
+                                        <RepayICON /> Repay and Apply Again
                                     </RepayAndApplyButton>
                                 </SectionButton>
                                 <SectionButton2>
-                                    <RepaymentCancelButton onClick={() => props.setShowRepaymentModal(false)}>Cancel</RepaymentCancelButton>
-                                    <RepaymentButton onClick={handleConfirm}>Repayment</RepaymentButton>
+                                    <RepaymentCancelButton
+                                        onClick={() =>
+                                            props.setShowRepaymentModal(false)
+                                        }
+                                    >
+                                        Cancel
+                                    </RepaymentCancelButton>
+                                    <RepaymentButton onClick={handleConfirm}>
+                                        Repayment
+                                    </RepaymentButton>
                                 </SectionButton2>
                             </SectionOptions>
-
-
                         </RepaymentModalContainer>
-                    )
+                    );
                 }}
             ></Overlay>
         </div>
-    )
-}
+    );
+};
 
 export default RepaymentModal;

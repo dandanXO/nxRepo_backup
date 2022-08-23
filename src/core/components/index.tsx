@@ -14,12 +14,12 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     background: #f9fafc;
   }
-`
+`;
 export const AppThemeProvider = (props: IAppThemeProvider) => {
     return (
         <ThemeProvider theme={props.theme ? props.theme : theme}>
-            <GlobalStyle/>
+            <GlobalStyle />
             {props.children}
         </ThemeProvider>
-    )
-}
+    );
+};

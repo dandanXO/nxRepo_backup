@@ -1,8 +1,9 @@
-
-
 import styled from "styled-components";
 import React, { useState } from "react";
-import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../api/getLoanDetail";
+import {
+    mockGetLoanDetailResponse,
+    GetLoanDetailResponse,
+} from "../api/getLoanDetail";
 
 import Tag from "../core/components/Tag";
 import Card from "../core/components/Card";
@@ -12,18 +13,17 @@ import Button from "../core/components/Button";
 import LoanBrand from "../core/components/LoanBrand";
 import Accordion from "../core/components/Accordion";
 import Divider from "../core/components/Divider";
-import {Logo,Banner} from "../core/components/images"
+import { Logo, Banner } from "../core/components/images";
 // import {Banner} from "../../core/components/images/banner.jpg";
 
 const AdvertisementStyled = styled.div`
-    margin-top:32px;
+    margin-top: 32px;
     .infoTitle {
         color: ${({ theme }) => theme.color.gray500};
         font-size: ${({ theme }) => theme.fontSize[14]};
         margin-bottom: 10px;
         text-align: left;
     }
-    
 `;
 
 const BannerWithCardStyled = styled.div`
@@ -36,21 +36,31 @@ const BannerWithCardStyled = styled.div`
     .bannerHide {
         width: 100%;
         border-radius: 8px;
-        height: 50px; 
+        height: 50px;
         object-fit: cover;
         object-position: left top;
         margin-bottom: -20px;
     }
 `;
 
-type LoanDetailProps = Pick<GetLoanDetailResponse, "loanAmount" |"serviceCharge" |"dailyFee" | "reductionAmount" | "penaltyInterest"|"applyDate"|"dueDate"|"bankCardNo">;
+type LoanDetailProps = Pick<
+    GetLoanDetailResponse,
+    | "loanAmount"
+    | "serviceCharge"
+    | "dailyFee"
+    | "reductionAmount"
+    | "penaltyInterest"
+    | "applyDate"
+    | "dueDate"
+    | "bankCardNo"
+>;
 type AdCardProps = {
-    productName: string,
-    balance: string,
-    interest: string,
-    terms: string,
-    icon: string,
-    banner: string
+    productName: string;
+    balance: string;
+    interest: string;
+    terms: string;
+    icon: string;
+    banner: string;
 };
 const data = [
     {
@@ -58,27 +68,29 @@ const data = [
         balance: "₹ 10,000",
         interest: "1.8%",
         terms: "91 days",
-        icon:Logo,
-        banner:Banner
+        icon: Logo,
+        banner: Banner,
     },
     {
         productName: "POLAR LENDS",
         balance: "₹ 10,000",
         interest: "1.8%",
         terms: "91 days",
-        icon:Logo,
-        banner:Banner
-    }
-]
+        icon: Logo,
+        banner: Banner,
+    },
+];
 
 const BannerWithCard = (props: AdCardProps) => {
-
-    const { productName, balance, interest, terms, icon, banner } = props
+    const { productName, balance, interest, terms, icon, banner } = props;
 
     const [isCollapse, setIsCollapse] = useState(true);
     return (
-        <BannerWithCardStyled onClick={()=>setIsCollapse(!isCollapse)}>
-            <img className={` ${isCollapse?'banner':'bannerHide'}` } src={banner} />
+        <BannerWithCardStyled onClick={() => setIsCollapse(!isCollapse)}>
+            <img
+                className={` ${isCollapse ? "banner" : "bannerHide"}`}
+                src={banner}
+            />
             <Card isHot={true}>
                 <CardContent
                     icon={icon}
@@ -93,14 +105,16 @@ const BannerWithCard = (props: AdCardProps) => {
                 />
             </Card>
         </BannerWithCardStyled>
-    )
-}
+    );
+};
 
 const Advertisement = () => {
     return (
         <AdvertisementStyled>
-            <div className={'infoTitle'}>More Recommend Loan</div>
-            {data.map(ad => <BannerWithCard {...ad} />)}
+            <div className={"infoTitle"}>More Recommend Loan</div>
+            {data.map((ad) => (
+                <BannerWithCard {...ad} />
+            ))}
         </AdvertisementStyled>
     );
 };

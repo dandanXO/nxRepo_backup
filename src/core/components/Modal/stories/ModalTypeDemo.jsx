@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import {
@@ -7,11 +6,9 @@ import {
     htmlContnet,
     content,
     longContent,
-
     Button,
     HelloButton,
     LinkedButton,
-    
     Popover,
     // Modal
     Modal,
@@ -20,51 +17,43 @@ import {
 const ModalTypeDemo = () => {
     const [show, setShow] = useState(false);
     const [iconType, setIconType] = useState("confirm");
-    const clickHandler = useCallback((type) => {
-        setIconType(type)
-        setShow((show) => {
-            return !show
-        })
-    }, [show, iconType])
+    const clickHandler = useCallback(
+        (type) => {
+            setIconType(type);
+            setShow((show) => {
+                return !show;
+            });
+        },
+        [show, iconType]
+    );
     return (
         <div>
             <div>
-                <Button 
-                    onClick={() => clickHandler("confirm")}>
-                        confirm
+                <Button onClick={() => clickHandler("confirm")}>confirm</Button>
+                <Button onClick={() => clickHandler("notification")}>
+                    notification
                 </Button>
-                <Button 
-                    onClick={() => clickHandler("notification")}>
-                        notification
+                <Button onClick={() => clickHandler("error")}>error</Button>
+                <Button onClick={() => clickHandler("question")}>
+                    question
                 </Button>
-                <Button 
-                    onClick={() => clickHandler("error")}>
-                        error
-                </Button>
-                <Button 
-                    onClick={() => clickHandler("question")}>
-                        question
-                </Button>
-                <Button 
-                    onClick={() => clickHandler("money")}>
-                        money
-                </Button>
+                <Button onClick={() => clickHandler("money")}>money</Button>
             </div>
-            <Modal             
-                show={show}            
-                mode="alert"                              
+            <Modal
+                show={show}
+                mode="alert"
                 type={iconType}
                 title="确认"
                 content={content}
                 onConfirm={() => {
-                    setShow(false);                    
+                    setShow(false);
                 }}
                 onCancel={() => {
                     setShow(false);
                 }}
             ></Modal>
         </div>
-    )    
-}
+    );
+};
 
 export default ModalTypeDemo;

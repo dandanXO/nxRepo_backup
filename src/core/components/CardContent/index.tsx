@@ -5,9 +5,9 @@ import LoanBrand from "../LoanBrand";
 import ListItem from "../ListItem";
 import Button from "../Button";
 import Divider from "../Divider";
-import {ArrowUp, ArrowDown, ArrowRight} from "../images";
-import nextIcon_gray from "../images/next_icon_gray.svg"
-import nextIcon from "../images/next_icon.svg"
+import { ArrowUp, ArrowDown, ArrowRight } from "../images";
+import nextIcon_gray from "../images/next_icon_gray.svg";
+import nextIcon from "../images/next_icon.svg";
 
 const FlexRowItem = styled.div`
     ${flexCreator("row", "space-between", "center")};
@@ -43,12 +43,11 @@ const CardFooterStyled = styled(FlexRowItem)`
 `;
 
 type CardContentProps = {
-    icon: string,
-    productName: string,
-    balance: string,
-    contentItems: React.ReactElement | React.ReactElement[]
+    icon: string;
+    productName: string;
+    balance: string;
+    contentItems: React.ReactElement | React.ReactElement[];
 };
-
 
 const CardContent = (props: CardContentProps) => {
     const { icon, productName, balance, contentItems } = props;
@@ -61,8 +60,17 @@ const CardContent = (props: CardContentProps) => {
             {contentItems}
             <Divider styleType="narrow" />
             <CardFooterStyled>
-                <Button className={'linkButton'} styleType={'link'} >{'view details'}<img src={nextIcon_gray} /></Button>
-                <Button className={'applyButton'} styleType={'primary'} size={'small'}>{'Apply now'} <img src={nextIcon} /></Button>
+                <Button className={"linkButton"} styleType={"link"}>
+                    {"view details"}
+                    <img src={nextIcon_gray} />
+                </Button>
+                <Button
+                    className={"applyButton"}
+                    styleType={"primary"}
+                    size={"small"}
+                >
+                    {"Apply now"} <img src={nextIcon} />
+                </Button>
             </CardFooterStyled>
         </CardContentStyled>
     );

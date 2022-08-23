@@ -8,11 +8,11 @@ import Content from "../Modal/Content";
 import styled from "styled-components";
 
 const ModalPopup = styled(Popup)`
-  justify-content: flex-start;
+    justify-content: flex-start;
 `;
 const ModalContent = styled(Content)`
-  margin: 0;
-`
+    margin: 0;
+`;
 
 type ModalContentFunction<T> = (args: any) => T;
 interface IModalProps {
@@ -23,7 +23,7 @@ interface IModalProps {
     // content?: JSX.Element
     content?: string | ModalContentFunction<any>;
     width?: number;
-    height?: number
+    height?: number;
     maskClosable?: boolean;
     enableClose?: boolean;
     enableTitleHorizontal?: boolean;
@@ -82,14 +82,20 @@ class Modal extends React.Component<IModalProps, ModalState> {
                     //     }
                     // }}
                 >
-                    <ModalPopup width={this.props.width} height={this.props.height}>
+                    <ModalPopup
+                        width={this.props.width}
+                        height={this.props.height}
+                    >
                         {this.props.enableClose && (
-                            <div onClick={() => {
-                                console.log("close")
-                                this.hidden();
-                                this.props.onCancel && this.props.onCancel();
-                            }}>
-                                <CloseButton/>
+                            <div
+                                onClick={() => {
+                                    console.log("close");
+                                    this.hidden();
+                                    this.props.onCancel &&
+                                        this.props.onCancel();
+                                }}
+                            >
+                                <CloseButton />
                             </div>
                         )}
                         {/*<div>*/}
@@ -99,10 +105,12 @@ class Modal extends React.Component<IModalProps, ModalState> {
                         {/*    )}*/}
                         {/*</div>*/}
                         <ModalContent>
-                            {this.props.content && typeof this.props.content === "string" && (
-                                this.props.content
-                            )}
-                            {this.props.content && typeof this.props.content === "function" && this.props.content(this.hidden)}
+                            {this.props.content &&
+                                typeof this.props.content === "string" &&
+                                this.props.content}
+                            {this.props.content &&
+                                typeof this.props.content === "function" &&
+                                this.props.content(this.hidden)}
                         </ModalContent>
                     </ModalPopup>
                 </Overlay>

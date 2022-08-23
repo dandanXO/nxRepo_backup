@@ -1,7 +1,11 @@
 import React from "react";
-import {CommonRegularSVGICON} from "../../SVGIcon";
-import {CheckboxCheckSVGICON, CheckboxDisableFalseSVGICON, CheckboxDisableTureSVGICON} from "./CheckboxICON";
-import {withTheme} from "styled-components";
+import { CommonRegularSVGICON } from "../../SVGIcon";
+import {
+    CheckboxCheckSVGICON,
+    CheckboxDisableFalseSVGICON,
+    CheckboxDisableTureSVGICON,
+} from "./CheckboxICON";
+import { withTheme } from "styled-components";
 
 interface CheckboxSVGICONProps {
     size?: string;
@@ -14,12 +18,12 @@ interface CheckboxSVGICONProps {
     };
 }
 
-const CheckboxSVGICON: React.FC<CheckboxSVGICONProps> = props => {
-    const {size, check, hover, disabled} = props;
+const CheckboxSVGICON: React.FC<CheckboxSVGICONProps> = (props) => {
+    const { size, check, hover, disabled } = props;
     const finalSize = size !== "big" ? 19 : 28;
     const finalDisabled = disabled ? "pointer" : "not-allowed";
 
-    const lightTheme = props.theme && props.theme.mode === "early" || true;
+    const lightTheme = (props.theme && props.theme.mode === "early") || true;
 
     // 沒有點擊
     if (!check) {
@@ -66,8 +70,14 @@ const CheckboxSVGICON: React.FC<CheckboxSVGICONProps> = props => {
         if (disabled) {
             return (
                 <CheckboxDisableTureSVGICON
-                    checkFill={lightTheme ? "#a9b1b7" : "rgba(253, 252, 254, 0.1)"}
-                    fill={lightTheme ? "rgba(0, 0, 0, 0.7)" : "rgba(254, 253, 253, 0.8)"}
+                    checkFill={
+                        lightTheme ? "#a9b1b7" : "rgba(253, 252, 254, 0.1)"
+                    }
+                    fill={
+                        lightTheme
+                            ? "rgba(0, 0, 0, 0.7)"
+                            : "rgba(254, 253, 253, 0.8)"
+                    }
                     size={finalSize}
                     style={{
                         cursor: finalDisabled,

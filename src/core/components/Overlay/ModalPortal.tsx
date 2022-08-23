@@ -39,7 +39,9 @@ class ModalPortal extends React.Component<IModalPortal> {
         this.containerRootRemoveContainer();
     }
     containerRootRemoveContainer() {
-        const containerRoot = document.querySelector(`.${this.CONTAINER_IDENTIFIER}`);
+        const containerRoot = document.querySelector(
+            `.${this.CONTAINER_IDENTIFIER}`
+        );
         if (this.props.container) {
             containerRoot.removeChild(this.props.container);
         } else {
@@ -47,7 +49,9 @@ class ModalPortal extends React.Component<IModalPortal> {
         }
     }
     containerRootAddContainer() {
-        const containerRoot = document.querySelector(`.${this.CONTAINER_IDENTIFIER}`);
+        const containerRoot = document.querySelector(
+            `.${this.CONTAINER_IDENTIFIER}`
+        );
         if (this.props.container) {
             containerRoot.appendChild(this.props.container);
         } else {
@@ -56,7 +60,10 @@ class ModalPortal extends React.Component<IModalPortal> {
     }
     render() {
         if (this.props.container) {
-            return ReactDOM.createPortal(this.props.children, this.props.container);
+            return ReactDOM.createPortal(
+                this.props.children,
+                this.props.container
+            );
         } else {
             return ReactDOM.createPortal(this.props.children, this.container);
         }

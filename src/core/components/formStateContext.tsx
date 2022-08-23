@@ -8,9 +8,11 @@ interface formStateContextInterface {
 
 const formStateContextValue: formStateContextInterface = {
     size: "small",
-    onCheck: () => {}
+    onCheck: () => {},
 };
 
-const formStateContext = React.createContext<formStateContextInterface>(formStateContextValue);
+const formStateContext = React.createContext<formStateContextInterface>(
+    formStateContextValue
+);
 
 export default formStateContext;

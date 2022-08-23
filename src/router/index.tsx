@@ -1,4 +1,4 @@
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import IndexPage from "../pages/IndexPage";
 import LoanDetailsPage from "../pages/LoanDetailsPage";
 import ExtendDetailsPage from "../pages/ExtendDetailsPage";
@@ -13,16 +13,22 @@ export const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<IndexPage/>}/>
+                <Route path="/" element={<IndexPage />} />
                 {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-                <Route path="/loan-details" element={<LoanDetailsPage/>}/>
+                <Route path="/loan-details" element={<LoanDetailsPage />} />
                 {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-                <Route path="/extend-details" element={<ExtendDetailsPage/>}/>
-                <Route path="/bank-bind" element={<BindBankAccountPage/>}/>
-                <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage/>}/>
-                <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage/>}/>
-                <Route path="*" element={<div>Not Found</div>}/>
+                <Route path="/extend-details" element={<ExtendDetailsPage />} />
+                <Route path="/bank-bind" element={<BindBankAccountPage />} />
+                <Route
+                    path="/upload-payment-receipt"
+                    element={<UploadPaymentReceiptPage />}
+                />
+                <Route
+                    path="/uploaded-payment-receipt"
+                    element={<UploadedPaymentReceiptPage />}
+                />
+                <Route path="*" element={<div>Not Found</div>} />
             </Routes>
         </BrowserRouter>
-    )
-}
+    );
+};

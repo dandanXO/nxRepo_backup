@@ -85,9 +85,9 @@ interface ButtonProps extends StyledlessButtonProps {}
 
 /*${getButtonAllColorStyle("red")};*/
 const ConfirmButton = styled(StyledlessButton)<ButtonProps>`
-    /* Display */   
+    /* Display */
     flex: 1;
-  
+
     /* Margin */
     //margin-right: 5px;
 
@@ -112,7 +112,7 @@ ConfirmButton.displayName = "ConfirmButton";
 
 //${getButtonAllColorStyle("green")};
 const NotificationButton = styled(ConfirmButton)<ButtonProps>`
-  background: ${(props) => props.theme.custom.button.alert.background};
+    background: ${(props) => props.theme.custom.button.alert.background};
     /* width: 113px; */
 `;
 NotificationButton.displayName = "NotificationButton";
@@ -123,9 +123,7 @@ const CancelButton = styled(ConfirmButton)<ButtonProps>`
 CancelButton.displayName = "CancelButton";
 
 const CustomColorButton = styled(ConfirmButton)<ButtonProps>`
-    // ${props => getButtonAllColorStyle(props.color)};
+    // ${(props) => getButtonAllColorStyle(props.color)};
 `;
 
 export { ConfirmButton, NotificationButton, CancelButton, CustomColorButton };
-
-

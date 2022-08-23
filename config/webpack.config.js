@@ -23,20 +23,21 @@ const config = {
         historyApiFallback: true,
         onBeforeSetupMiddleware: function (devServer) {
             if (!devServer) {
-                throw new Error('webpack-dev-server is not defined');
+                throw new Error("webpack-dev-server is not defined");
             }
             // NOTICE: demo
-            devServer.app.get('/open-api/zh-tw/Attractions/All', (req, res) => {
-                res.json(mockAPIResponse)
-            })
+            devServer.app.get("/open-api/zh-tw/Attractions/All", (req, res) => {
+                res.json(mockAPIResponse);
+            });
         },
-        proxy: { //设置代理
+        proxy: {
+            //设置代理
             "/api": {
                 target: "https://app.india-api-dev.com",
                 secure: false, // 協議是https的時候必須要寫
-                changeOrigin: true
-            }
-        }
+                changeOrigin: true,
+            },
+        },
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -55,9 +56,8 @@ const config = {
                 loader: "ts-loader",
                 exclude: ["/node_modules/"],
                 options: {
-                    configFile: path.resolve(__dirname, "../tsconfig.json")
-                }
-
+                    configFile: path.resolve(__dirname, "../tsconfig.json"),
+                },
             },
             {
                 test: /\.s[ac]ss$/i,

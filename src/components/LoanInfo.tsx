@@ -1,13 +1,16 @@
 import styled from "styled-components";
-import React, {useCallback} from "react";
-import { mockGetLoanDetailResponse, GetLoanDetailResponse } from "../api/getLoanDetail";
+import React, { useCallback } from "react";
+import {
+    mockGetLoanDetailResponse,
+    GetLoanDetailResponse,
+} from "../api/getLoanDetail";
 import Tag from "../core/components/Tag";
 import Card from "../core/components/Card";
 import ListItem from "../core/components/ListItem";
 import Button from "../core/components/Button";
 import LoanBrand from "../core/components/LoanBrand";
 import AmountPaidIcon from "../core/components/images/amount_paid_icon.svg";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useLocationOrderQueryString from "../core/hooks/useLocationOrderQueryString";
 
 const LoanInfoStyled = styled.div`
@@ -33,7 +36,7 @@ const LoanInfoStyled = styled.div`
         margin-bottom: 10px;
         text-align: left;
     }
-    .loanInfo-Card-list{
+    .loanInfo-Card-list {
         width: 100%;
     }
     .relatedRepayment {
@@ -59,18 +62,41 @@ const LoanInfoStyled = styled.div`
     }
 `;
 
-type LoanInfoProps = Pick<GetLoanDetailResponse, "iconUrl" | "productName" | "totalDueAmount" | "status" | "paidAmount" | "balance" | "extended"> & {
+type LoanInfoProps = Pick<
+    GetLoanDetailResponse,
+    | "iconUrl"
+    | "productName"
+    | "totalDueAmount"
+    | "status"
+    | "paidAmount"
+    | "balance"
+    | "extended"
+> & {
     setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowAmountPaidModal: React.Dispatch<React.SetStateAction<boolean>>;
     navigateToUploadPaymentReceiptPage: () => void;
 };
 
 const LoanInfo = (props: LoanInfoProps) => {
-    const { iconUrl, productName, totalDueAmount, status, paidAmount, balance, extended, setShowExtensionModal, setShowAmountPaidModal } = props;
+    const {
+        iconUrl,
+        productName,
+        totalDueAmount,
+        status,
+        paidAmount,
+        balance,
+        extended,
+        setShowExtensionModal,
+        setShowAmountPaidModal,
+    } = props;
 
     return (
         <LoanInfoStyled>
-            <LoanBrand iconUrl={iconUrl} productName={productName} sizeType={'small'}/>
+            <LoanBrand
+                iconUrl={iconUrl}
+                productName={productName}
+                sizeType={"small"}
+            />
             <div className="totalTitle">Total Due</div>
             <div className="totalText">₹ {totalDueAmount}</div>
             <div className={"errorText"}>
@@ -82,28 +108,50 @@ const LoanInfo = (props: LoanInfoProps) => {
             <Card isHot={false}>
                 <div className={"loanInfo-Card-Title"}>Gernal</div>
                 <div className={"loanInfo-Card-list"}>
-                    <ListItem title={"State"} text={<Tag status={status}>{status}</Tag>} />
-                   <ListItem
+                    <ListItem
+                        title={"State"}
+                        text={<Tag status={status}>{status}</Tag>}
+                    />
+                    <ListItem
                         title={
                             <div>
                                 <div>Amount Paid</div>
-                                 <div onClick={()=>setShowAmountPaidModal(true)}><img src={AmountPaidIcon} /></div>
+                                <div
+                                    onClick={() => setShowAmountPaidModal(true)}
+                                >
+                                    <img src={AmountPaidIcon} />
+                                </div>
                             </div>
                         }
                         text={`₹ ${paidAmount}`}
                     />
                     <ListItem title={"Balance"} text={`₹ ${balance}`} />
                 </div>
-                {extended && <div className={"relatedRepayment"} ><Button onClick={() => setShowExtensionModal(true)} styleType={'link'}>{'Related repayment >'}</Button></div>}
+                {extended && (
+                    <div className={"relatedRepayment"}>
+                        <Button
+                            onClick={() => setShowExtensionModal(true)}
+                            styleType={"link"}
+                        >
+                            {"Related repayment >"}
+                        </Button>
+                    </div>
+                )}
             </Card>
-            {
-                (status === "UNPAID" || status === "OVERDUE") &&
+            {(status === "UNPAID" || status === "OVERDUE") && (
                 <div>
-                    <div className={"uploadButton"} onClick={props.navigateToUploadPaymentReceiptPage}><Button>Upload Receipt</Button></div>
-                    <div className={"noticeText"}>After completing the repayment, take a screenshot and uploadyour repayment receipt here.</div>
+                    <div
+                        className={"uploadButton"}
+                        onClick={props.navigateToUploadPaymentReceiptPage}
+                    >
+                        <Button>Upload Receipt</Button>
+                    </div>
+                    <div className={"noticeText"}>
+                        After completing the repayment, take a screenshot and
+                        uploadyour repayment receipt here.
+                    </div>
                 </div>
-            }
-            
+            )}
         </LoanInfoStyled>
     );
 };

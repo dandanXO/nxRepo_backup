@@ -1,6 +1,10 @@
 // 沒點擊，禁用
 import React from "react";
-import {CommonDisabledFalseSVGICON, CommonRegularSVGICON, RegularSVGICON} from "../../SVGIcon";
+import {
+    CommonDisabledFalseSVGICON,
+    CommonRegularSVGICON,
+    RegularSVGICON,
+} from "../../SVGIcon";
 import styled from "styled-components";
 
 // NOTE: 有點擊，沒有禁用
@@ -20,16 +24,16 @@ const RadioCheck = styled(RegularSVGICON)`
     position: relative;
     top: 3px;
     left: 3px;
-`
-const RadioCheckSVGICON: React.FC<RadioCheckSVGICONProps> = props => {
+`;
+const RadioCheckSVGICON: React.FC<RadioCheckSVGICONProps> = (props) => {
     const size = props.size;
     const fill = props.fill ? props.fill : "#36A9FB";
     const radioFill = props.radioFill ? props.radioFill : "#36a9fb";
     return (
         <RegularSVGICON>
-            <RadioCheck/>
+            <RadioCheck />
         </RegularSVGICON>
-    )
+    );
     // return (
     //     <svg
     //         version="1.1"
@@ -75,10 +79,11 @@ interface RadioDisableFalseSVGICONProps {
     };
 }
 
-const RadioDisableFalseSVGICON: React.FC<RadioDisableFalseSVGICONProps> = props => {
+const RadioDisableFalseSVGICON: React.FC<RadioDisableFalseSVGICONProps> = (
+    props
+) => {
     return <CommonDisabledFalseSVGICON {...props} />;
 };
-
 
 // NOTE: 禁用，有點擊
 interface RadioDisabledTrueSVGICONProps {
@@ -90,7 +95,9 @@ interface RadioDisabledTrueSVGICONProps {
     };
 }
 
-const RadioDisabledTrueSVGICON: React.FC<RadioDisabledTrueSVGICONProps> = props => {
+const RadioDisabledTrueSVGICON: React.FC<RadioDisabledTrueSVGICONProps> = (
+    props
+) => {
     const size = props.size;
     const radioFill = props.radioFill ? props.radioFill : "#A9B1B7";
     const fill = props.fill ? props.fill : "gray";
@@ -127,8 +134,6 @@ const RadioDisabledTrueSVGICON: React.FC<RadioDisabledTrueSVGICONProps> = props 
         </svg>
     );
 };
-
-
 
 export {
     // NOTE: Idle 使用共用

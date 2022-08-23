@@ -1,21 +1,19 @@
 import * as React from "react";
-import {ComponentMeta, ComponentStory} from "@storybook/react";
-import {AppThemeProvider} from "../../../../core/components";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { AppThemeProvider } from "../../../../core/components";
 import RepaymentNoticeModal from "./index";
 
 export default {
-    title: 'Page/LoanDetailsPage',
+    title: "Page/LoanDetailsPage",
     component: RepaymentNoticeModal,
 } as ComponentMeta<typeof RepaymentNoticeModal>;
 
-export const ModalRepaymentNotice: ComponentStory<typeof RepaymentNoticeModal> = (args) => {
+export const ModalRepaymentNotice: ComponentStory<
+    typeof RepaymentNoticeModal
+> = (args) => {
     return (
         <AppThemeProvider>
-            <RepaymentNoticeModal setShowRepaymentNoticeModal={{} as any}/>
+            <RepaymentNoticeModal setShowRepaymentNoticeModal={{} as any} />
         </AppThemeProvider>
-    )
-}
-
-
-
-
+    );
+};

@@ -2,7 +2,7 @@
 export interface GetLoanDetailRequestQuerystring {
     /** 訂單號 */
     orderNo?: string;
-};
+}
 
 export interface GetLoanDetailResponse {
     /** @description 申請日期 */
@@ -42,7 +42,7 @@ export interface GetLoanDetailResponse {
     /** @description 已還金額 */
     paidAmount?: number;
     /** @展期来源订单号 已還金額 */
-    parentOrderNo?:	string;
+    parentOrderNo?: string;
     /** @description 罰金金額 */
     penaltyInterest?: number;
     /** @description 產品名稱 */
@@ -53,7 +53,7 @@ export interface GetLoanDetailResponse {
     repayConfirmDetail?: GetLoanDetailRepayConfirmDetail;
     /** @description 還款紀錄 */
     repayRecords?: GetLoanDetailRepayRecords[];
- 
+
     /** @description 服務費金額 */
     serviceCharge?: number;
     /**
@@ -63,8 +63,7 @@ export interface GetLoanDetailResponse {
     status?: "EXTEND" | "OVERDUE" | "PAY_OFF" | "PROCESSING" | "UNPAID";
     /** @description 訂單總應還金额 */
     totalDueAmount?: number;
-};
-
+}
 
 /** chargeFeeDetail */
 export interface GetLoanDetailChargeFeeDetail {
@@ -73,10 +72,15 @@ export interface GetLoanDetailChargeFeeDetail {
 }
 
 export interface GetLoanDetailChargeFeeDetailItems {
-    fieldType: string,
-    itemName: "CURRENCY" | "TEXT",
-    key: "DAILY_FEE" | "LOAN_AMOUNT" | "PENALTY_INTEREST" | "REDUCTION_AMOUNT" | "SERVICE_CHARGE",
-    value: string
+    fieldType: string;
+    itemName: "CURRENCY" | "TEXT";
+    key:
+        | "DAILY_FEE"
+        | "LOAN_AMOUNT"
+        | "PENALTY_INTEREST"
+        | "REDUCTION_AMOUNT"
+        | "SERVICE_CHARGE";
+    value: string;
 }
 
 /** repayConfirmDetail */
@@ -97,7 +101,6 @@ export interface GetLoanDetailRepayConfirmDetail {
     reductionAmount?: number;
 }
 
-
 /** 還款紀錄 */
 export interface GetLoanDetailRepayRecords {
     /** @description 待還金額 */
@@ -106,7 +109,7 @@ export interface GetLoanDetailRepayRecords {
     repayAmount?: number;
     /** @description 還款日期 */
     repayDate?: string;
-};
+}
 
 /** 審核紀錄 */
 export interface GetLoanDetailApproveRecords {
@@ -116,38 +119,38 @@ export interface GetLoanDetailApproveRecords {
     createTime?: string;
     /** @description 標題 */
     title?: string;
-};
-
-
-export const mockGetLoanDetailResponse:GetLoanDetailResponse = {
-    "productName": "ZZ LOAN",
-    "orderNo": "no-3632791101642108",
-    "loanAmount": 3000.00,
-    "paidAmount": 1380.00,
-    "repayRecords": [
-        {
-            "repayDate": "2022-06-25",
-            "repayAmount": 1380.00,
-            "balance": 0.00
-        }
-    ],
-    "balance": 1620.00,
-    "extensionFee": null,
-    "status": "EXTEND",
-    "serviceCharge": 1380.00,
-    "dailyFee": 0,
-    "reductionAmount": 0,
-    "penaltyInterest": 0,
-    "applyDate": "2022-06-20",
-    "dueDate": "2022-06-26",
-    "originalDueDate": "2022-06-26",
-    "extendDate": "2022-06-20",
-    "bankCardNo": "60159710853",
-    "customerServiceTime": "08:00AM ~ 12:00PM",
-    "customerServiceEmail": "csemail@test.copm",
-    "iconUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/ad_logo/ad-logo-822352090585600.png",
- 
-    "extendable": false,
-    "extended": true,
-    "parentOrderNo": null
 }
+
+export const mockGetLoanDetailResponse: GetLoanDetailResponse = {
+    productName: "ZZ LOAN",
+    orderNo: "no-3632791101642108",
+    loanAmount: 3000.0,
+    paidAmount: 1380.0,
+    repayRecords: [
+        {
+            repayDate: "2022-06-25",
+            repayAmount: 1380.0,
+            balance: 0.0,
+        },
+    ],
+    balance: 1620.0,
+    extensionFee: null,
+    status: "EXTEND",
+    serviceCharge: 1380.0,
+    dailyFee: 0,
+    reductionAmount: 0,
+    penaltyInterest: 0,
+    applyDate: "2022-06-20",
+    dueDate: "2022-06-26",
+    originalDueDate: "2022-06-26",
+    extendDate: "2022-06-20",
+    bankCardNo: "60159710853",
+    customerServiceTime: "08:00AM ~ 12:00PM",
+    customerServiceEmail: "csemail@test.copm",
+    iconUrl:
+        "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/ad_logo/ad-logo-822352090585600.png",
+
+    extendable: false,
+    extended: true,
+    parentOrderNo: null,
+};

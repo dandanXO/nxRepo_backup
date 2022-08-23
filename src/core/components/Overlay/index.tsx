@@ -25,7 +25,7 @@ class Overlay extends React.Component<ModalWrapperProps> {
         AppContext.dev && console.log("[ModalWrapper] this.props", this.props);
         return (
             <ModalPortal>
-                <Modal {...this.props}/>
+                <Modal {...this.props} />
             </ModalPortal>
         );
     }
@@ -41,7 +41,10 @@ class Overlay extends React.Component<ModalWrapperProps> {
         // NOTE: Portal Container
         const replacedModalContainer = document.createElement("div");
         replacedModalContainer.className = "uni-portal-container";
-        replacedModalContainer.setAttribute("uni-id", "uni-portal-container-" + Date.now());
+        replacedModalContainer.setAttribute(
+            "uni-id",
+            "uni-portal-container-" + Date.now()
+        );
         // NOTE:  Modal List Append Portal Container
         modalRoot.appendChild(replacedModalContainer);
         ReactDOM.render(

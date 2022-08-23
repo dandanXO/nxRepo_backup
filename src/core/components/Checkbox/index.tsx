@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import {v4} from "uuid";
+import { v4 } from "uuid";
 import WithThemeCheckboxSVGICON from "./WithThemeCheckboxSVGICON";
 import formStateContext from "../formStateContext";
 
@@ -13,7 +13,7 @@ const StyledCheckBoxInput = styled.div<StyledCheckBoxInputProps>`
     justify-content: flex-start;
     align-items: center;
     box-sizing: content-box;
-    cursor: ${props => (!props.disabled ? "pointer" : "not-allowed")};
+    cursor: ${(props) => (!props.disabled ? "pointer" : "not-allowed")};
     position: relative;
 `;
 
@@ -28,17 +28,19 @@ interface CheckboxInputProps {
 }
 
 // NOTE: Can listen self event handler
-const CheckboxInput: React.FC<CheckboxInputProps> = styled.input.attrs(props => ({
-    type: "checkbox",
-}))<CheckboxInputProps>`
+const CheckboxInput: React.FC<CheckboxInputProps> = styled.input.attrs(
+    (props) => ({
+        type: "checkbox",
+    })
+)<CheckboxInputProps>`
     padding: 0;
     margin: 0;
     display: inline-block;
     position: absolute;
     opacity: 0;
-    cursor: ${props => (!props.disabled ? "pointer" : "not-allowed")};
-    height: ${props => (props.size === "big" ? "28px" : "18px")};
-    width: ${props => (props.size === "big" ? "28px" : "18px")};
+    cursor: ${(props) => (!props.disabled ? "pointer" : "not-allowed")};
+    height: ${(props) => (props.size === "big" ? "28px" : "18px")};
+    width: ${(props) => (props.size === "big" ? "28px" : "18px")};
 `;
 
 export interface CheckboxProps {
@@ -90,7 +92,12 @@ const CheckBox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
 
     return (
         <React.Fragment>
-            <StyledCheckBoxInput className={props.className} disabled={props.disabled} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+            <StyledCheckBoxInput
+                className={props.className}
+                disabled={props.disabled}
+                onMouseOver={onMouseOver}
+                onMouseOut={onMouseOut}
+            >
                 <CheckboxInput
                     size={valueOfFormState.size}
                     // onClick={onInputClick}
@@ -105,7 +112,12 @@ const CheckBox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
                         margin: "0 4px 0 0",
                     }}
                 >
-                    <WithThemeCheckboxSVGICON check={check} size={valueOfFormState.size} disabled={props.disabled} hover={over} />
+                    <WithThemeCheckboxSVGICON
+                        check={check}
+                        size={valueOfFormState.size}
+                        disabled={props.disabled}
+                        hover={over}
+                    />
                 </span>
             </StyledCheckBoxInput>
         </React.Fragment>

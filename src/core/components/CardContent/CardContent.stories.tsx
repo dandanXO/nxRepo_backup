@@ -1,16 +1,16 @@
-import {ComponentMeta, ComponentStory} from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import CardContent from "./index";
-import {AppThemeProvider} from "../index";
+import { AppThemeProvider } from "../index";
 
 export default {
     title: "Business Component/CardContent",
-    component: CardContent
-} as ComponentMeta<typeof CardContent>
+    component: CardContent,
+} as ComponentMeta<typeof CardContent>;
 
 const Template: ComponentStory<typeof CardContent> = (args) => (
     <AppThemeProvider>
-        <CardContent {...args}/>
+        <CardContent {...args} />
     </AppThemeProvider>
 );
 
-export const Normal = Template.bind({})
+export const Normal = Template.bind({});

@@ -1,15 +1,17 @@
 // 有點擊，禁用
 import React from "react";
-import {CommonDisabledFalseSVGICON} from "../../SVGIcon";
+import { CommonDisabledFalseSVGICON } from "../../SVGIcon";
 
 interface CheckboxDisableTureSVGICONProps {
     size: number;
     checkFill: string;
     fill: string;
-    style: {cursor: string};
+    style: { cursor: string };
 }
 
-const CheckboxDisableTureSVGICON: React.FC<CheckboxDisableTureSVGICONProps> = (props: CheckboxDisableTureSVGICONProps) => {
+const CheckboxDisableTureSVGICON: React.FC<CheckboxDisableTureSVGICONProps> = (
+    props: CheckboxDisableTureSVGICONProps
+) => {
     const size = props.size ? props.size : 18;
     const checkFill = props.checkFill ? props.checkFill : "#A9B1B7";
     const fill = props.fill ? props.fill : "gray";
@@ -51,21 +53,25 @@ const CheckboxDisableTureSVGICON: React.FC<CheckboxDisableTureSVGICONProps> = (p
 interface CheckboxDisableFalseSVGICONProps {
     fill: string;
     size: number;
-    style: {cursor: string};
+    style: { cursor: string };
     fillOpacity: string;
 }
 
-const CheckboxDisableFalseSVGICON: React.FC<CheckboxDisableFalseSVGICONProps> = (props: CheckboxDisableFalseSVGICONProps) => {
+const CheckboxDisableFalseSVGICON: React.FC<
+    CheckboxDisableFalseSVGICONProps
+> = (props: CheckboxDisableFalseSVGICONProps) => {
     return <CommonDisabledFalseSVGICON {...props}></CommonDisabledFalseSVGICON>;
 };
 
 interface CheckboxCheckSVGICONProps {
     size: number;
     fill: string;
-    style: {cursor: string};
+    style: { cursor: string };
 }
 
-const CheckboxCheckSVGICON: React.FC<CheckboxCheckSVGICONProps> = (props: CheckboxCheckSVGICONProps) => {
+const CheckboxCheckSVGICON: React.FC<CheckboxCheckSVGICONProps> = (
+    props: CheckboxCheckSVGICONProps
+) => {
     const size = props.size ? props.size : 19;
     return (
         <svg

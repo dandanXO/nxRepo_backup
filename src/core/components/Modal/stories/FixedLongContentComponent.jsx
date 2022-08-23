@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import {
@@ -7,11 +6,9 @@ import {
     htmlContnet,
     content,
     longContent,
-
     Button,
     HelloButton,
     LinkedButton,
-    
     Popover,
     // Modal
     Modal,
@@ -21,8 +18,8 @@ const FixedLongContentComponent = () => {
     return (
         <div style={{ width: "1000px", padding: "0px 20px" }}>
             {longTextContent}
-        </div> 
-    )
-}
+        </div>
+    );
+};
 
-export default FixedLongContentComponent
+export default FixedLongContentComponent;

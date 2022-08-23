@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import RadioGroup, {RadioGroupProps, RadioGroupState} from "./RadioGroup";
+import RadioGroup, { RadioGroupProps, RadioGroupState } from "./RadioGroup";
 import WithThemeRadioICON from "./WithThemeRadioICON";
 import formStateContext from "../formStateContext";
-
 
 interface StyledRadioBoxProps {
     disabled?: boolean;
@@ -16,7 +15,7 @@ const StyledRadioBox = styled.div<StyledRadioBoxProps>`
     align-items: center;
     margin: 2px;
     padding: 2px;
-    cursor: ${props => (!props.disabled ? "pointer" : "not-allowed")};
+    cursor: ${(props) => (!props.disabled ? "pointer" : "not-allowed")};
 `;
 
 // NOTE: Can listen self event handler
@@ -58,7 +57,11 @@ class Radio extends React.Component<RadioProps, RadioState> {
         });
     }
 
-    componentDidUpdate(prevProps: Readonly<RadioProps>, prevState: Readonly<RadioState>, snapshot?: any) {
+    componentDidUpdate(
+        prevProps: Readonly<RadioProps>,
+        prevState: Readonly<RadioState>,
+        snapshot?: any
+    ) {
         if (this.props.checked !== this.state.check) {
             this.setState({
                 check: this.props.checked ? this.props.checked : false,
@@ -72,7 +75,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
             this.props.changeRadio(!this.state.check);
         }
         this.setState(
-            state => {
+            (state) => {
                 return {
                     check: !state.check,
                 };
@@ -83,7 +86,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
 
     onMouseOver = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         this.setState(
-            state => {
+            (state) => {
                 return {
                     hover: true,
                 };
@@ -93,7 +96,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
     };
     onMouseOut = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         this.setState(
-            state => {
+            (state) => {
                 return {
                     hover: false,
                 };
@@ -127,5 +130,5 @@ class Radio extends React.Component<RadioProps, RadioState> {
 
 Radio.contextType = formStateContext;
 
-export {StyledRadioBox};
+export { StyledRadioBox };
 export default Radio;

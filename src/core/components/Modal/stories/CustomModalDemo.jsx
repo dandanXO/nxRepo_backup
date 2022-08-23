@@ -1,5 +1,4 @@
-
-import React, {useState, useCallback, useEffect} from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import {
     textContent,
@@ -7,11 +6,9 @@ import {
     htmlContnet,
     content,
     longContent,
-
     Button,
     HelloButton,
     LinkedButton,
-
     Popover,
     // Modal
     Modal,
@@ -27,13 +24,13 @@ const ModalModeDemo = () => {
     }, [show]);
     useEffect(() => {
         const timerID = setTimeout(() => {
-            console.log("hide")
+            console.log("hide");
             setShow(false);
-        }, 4000)
+        }, 4000);
         return () => {
             clearTimeout(timerID);
         };
-    })
+    });
     return (
         <div>
             <div>屬性: custom</div>
@@ -47,7 +44,9 @@ const ModalModeDemo = () => {
             <div>說明: 嵌入客製化的 React 元素</div>
             <br></br>
 
-            <Button onClick={() => clickHandler()}>Show Custom and hide after 4 seconds</Button>
+            <Button onClick={() => clickHandler()}>
+                Show Custom and hide after 4 seconds
+            </Button>
             <Modal
                 custom
                 show={show}
@@ -58,7 +57,7 @@ const ModalModeDemo = () => {
                 }
             />
         </div>
-    )
-}
+    );
+};
 
 export default ModalModeDemo;

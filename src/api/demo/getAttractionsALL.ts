@@ -6,32 +6,32 @@ export interface GetAttractionsALLResponse {
     data: GetAttractionsALLResponseData[];
 }
 export interface GetAttractionsALLResponseData {
-    id: number,
-    name:string;
-    name_zh:null;
-    open_status:number;
-    introduction:string;
-    open_time:string;
-    zipcode:string;
-    distric:string;
-    address:string;
-    tel:string;
-    fax:string;
-    email:string;
-    months:string;
-    nlat:number;
-    elong:number;
-    official_site:string;
-    facebook:string;
-    ticket:string;
-    remind:string;
-    staytime:string;
-    modified:string;
-    url:string;
+    id: number;
+    name: string;
+    name_zh: null;
+    open_status: number;
+    introduction: string;
+    open_time: string;
+    zipcode: string;
+    distric: string;
+    address: string;
+    tel: string;
+    fax: string;
+    email: string;
+    months: string;
+    nlat: number;
+    elong: number;
+    official_site: string;
+    facebook: string;
+    ticket: string;
+    remind: string;
+    staytime: string;
+    modified: string;
+    url: string;
     category: GetAttractionsALLResponseCategoryData[];
-    target: [],
+    target: [];
     service: GetAttractionsALLResponseServiceData[];
-    friendly:[];
+    friendly: [];
     images: GetAttractionsALLResponseImageData;
     files: [];
     links: [];
@@ -43,10 +43,9 @@ export interface GetAttractionsALLResponseImageData {
 }
 export interface GetAttractionsALLResponseCategoryData {
     id: number;
-    name: string
+    name: string;
 }
 export interface GetAttractionsALLResponseServiceData {
     id: number;
     name: string;
 }
-

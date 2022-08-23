@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Radio from "../";
-import {AppThemeProvider} from "../../index";
+import { AppThemeProvider } from "../../index";
 // import Body from "../../../Global/Body";
 const Body = styled.div``;
 const ContainerBase = styled.div`
@@ -25,7 +25,7 @@ storiesOf("Radio", module)
                 <Radio.Group
                     // size="small"
                     value={value}
-                    onCheck={value => {
+                    onCheck={(value) => {
                         console.log("Radio.Group.onCheck.value", value);
                         setValue(value);
                     }}
@@ -36,7 +36,7 @@ storiesOf("Radio", module)
                     <Radio value={4}>Radio 4</Radio>
                 </Radio.Group>
             </AppThemeProvider>
-        )
+        );
     })
     // .add("Normal", () => {
     //     const [value, setValue] = useState(4);
@@ -64,7 +64,7 @@ storiesOf("Radio", module)
             <AppThemeProvider>
                 <Radio.Group
                     value={value}
-                    onCheck={value => {
+                    onCheck={(value) => {
                         console.log("Radio.Group.onCheck.value", value);
                         setValue(value);
                     }}
@@ -79,41 +79,41 @@ storiesOf("Radio", module)
                     <Radio value={4}>Radio 4</Radio>
                 </Radio.Group>
             </AppThemeProvider>
-        )
-    })
+        );
+    });
 
-    // .add("Size", () => (
-    //     <div>
-    //         <div>Radio - Size: default</div>
-    //         <Container>
-    //             <Radio.Group
-    //                 value={2}
-    //                 onCheck={value => {
-    //                     console.log("Radio.Group.onCheck.value", value);
-    //                 }}
-    //             >
-    //                 <Radio value={1}>Radio 1</Radio>
-    //                 <Radio value={2}>Radio 2</Radio>
-    //                 <Radio value={3}>Radio 3</Radio>
-    //             </Radio.Group>
-    //         </Container>
-    //
-    //         <div>Radio - Size: Big</div>
-    //         <Container>
-    //             <Radio.Group
-    //                 size="big"
-    //                 value={2}
-    //                 onCheck={value => {
-    //                     console.log("Radio.Group.onCheck.value", value);
-    //                 }}
-    //             >
-    //                 <Radio value={1}>Radio 1</Radio>
-    //                 <Radio value={2}>Radio 2</Radio>
-    //                 <Radio value={3}>Radio 3</Radio>
-    //             </Radio.Group>
-    //         </Container>
-    //     </div>
-    // ));
+// .add("Size", () => (
+//     <div>
+//         <div>Radio - Size: default</div>
+//         <Container>
+//             <Radio.Group
+//                 value={2}
+//                 onCheck={value => {
+//                     console.log("Radio.Group.onCheck.value", value);
+//                 }}
+//             >
+//                 <Radio value={1}>Radio 1</Radio>
+//                 <Radio value={2}>Radio 2</Radio>
+//                 <Radio value={3}>Radio 3</Radio>
+//             </Radio.Group>
+//         </Container>
+//
+//         <div>Radio - Size: Big</div>
+//         <Container>
+//             <Radio.Group
+//                 size="big"
+//                 value={2}
+//                 onCheck={value => {
+//                     console.log("Radio.Group.onCheck.value", value);
+//                 }}
+//             >
+//                 <Radio value={1}>Radio 1</Radio>
+//                 <Radio value={2}>Radio 2</Radio>
+//                 <Radio value={3}>Radio 3</Radio>
+//             </Radio.Group>
+//         </Container>
+//     </div>
+// ));
 // .add("DEMO-Layout", () => (
 //     <div>
 //         <div>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {InputStatus, InputValidStatus} from "../type";
+import { InputStatus, InputValidStatus } from "../type";
 
 const getStatusColor = (
     validStatus: InputValidStatus,
@@ -15,7 +15,9 @@ const getStatusColor = (
         // 沒有驗證
         if (keyStatus === "Idle") {
             return `
-                // border-color: ${skinType === "early" ? "#c3c3c3" : "#8d8f99"};
+                // border-color: ${
+                    skinType === "early" ? "#c3c3c3" : "#8d8f99"
+                };
             `;
         } else if (keyStatus === "Hover") {
             return `                                
@@ -53,7 +55,11 @@ const getStatusColor = (
                 `;
             }
         } else if (validStatus) {
-            const getValidColor = (theme: string, isThemeControlledByComponent?: boolean, themeType?: string) => {
+            const getValidColor = (
+                theme: string,
+                isThemeControlledByComponent?: boolean,
+                themeType?: string
+            ) => {
                 return isThemeControlledByComponent
                     ? themeType === "early"
                         ? "#439a02"
@@ -62,14 +68,22 @@ const getStatusColor = (
                     ? "#439a02"
                     : "#75cd2d";
             };
-            const validColor = getValidColor(skinType, isThemeControlledByComponent, themeType);
+            const validColor = getValidColor(
+                skinType,
+                isThemeControlledByComponent,
+                themeType
+            );
             // 驗證成功
             if (keyStatus === "Idle") {
                 return `                  
                     // color: ${validColor};
                     // border-color: ${validColor}
                 `;
-            } else if (keyStatus === "Hover" || keyStatus === "Focus" || keyStatus === "KeyDown") {
+            } else if (
+                keyStatus === "Hover" ||
+                keyStatus === "Focus" ||
+                keyStatus === "KeyDown"
+            ) {
                 return `                  
                     // color: ${validColor};
                     // border-color: ${validColor}
@@ -96,7 +110,7 @@ export interface StyledInputProps {
     runValid: boolean;
     isThemeControlledByComponent?: boolean;
     themeType?: "early" | "night";
-    isFocus?: boolean
+    isFocus?: boolean;
 }
 
 export const StyledTopInput = styled.input<StyledInputProps>`
@@ -110,7 +124,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
     //border-style: solid;
     border-radius: 9px;
 
-    background: ${props =>
+    background: ${(props) =>
         props.isThemeControlledByComponent
             ? props.themeType === "early"
                 ? "rgba(255, 255, 255, 0.5)"
@@ -121,18 +135,19 @@ export const StyledTopInput = styled.input<StyledInputProps>`
 
     //padding: 2px 14px;
     // Append icon
-    //padding: ${props => (!props.runValid ? "2px 14px 2px 14px" : "2px 34px 2px 14px")};
+    //padding: ${(props) =>
+        !props.runValid ? "2px 14px 2px 14px" : "2px 34px 2px 14px"};
 
     //padding: 40px 20px 20px 20px;
-  
+
     //min-height: 28px;
     //height: 49px;
     //width: 100%;
-  
+
     //font-size: 15px;
     //line-height: 28px;
     cursor: text;
-    
+
     // NOTICE:
     border: 1px solid #aaaaaa;
     //background: #ffffff;
@@ -140,10 +155,10 @@ export const StyledTopInput = styled.input<StyledInputProps>`
     font-weight: 600;
     font-size: 16px;
     color: #101010;
-  
-  // normal
+
+    // normal
     /*
-    color: ${props =>
+    color: ${(props) =>
         props.isThemeControlledByComponent
             ? props.themeType === "early"
                 ? "#5e5e5e"
@@ -152,8 +167,8 @@ export const StyledTopInput = styled.input<StyledInputProps>`
             ? "#5e5e5e"
             : "#e2e2e2"};
     */
-  
-  &[type="search"] {
+
+    &[type="search"] {
         box-sizing: border-box;
         appearance: none;
         -webkit-appearance: none;
@@ -161,7 +176,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
 
     //NOTICE: Disabled 統一在這控制
     :disabled {
-        background-color: ${props =>
+        background-color: ${(props) =>
             props.isThemeControlledByComponent
                 ? props.themeType === "early"
                     ? "rgba(191, 191, 191, 0.34)"
@@ -170,8 +185,8 @@ export const StyledTopInput = styled.input<StyledInputProps>`
                 ? "rgba(191, 191, 191, 0.34)"
                 : "rgba(192, 192, 192, 0.35)"};
 
-      /*
-        border-color: ${props =>
+        /*
+        border-color: ${(props) =>
             props.isThemeControlledByComponent
                 ? props.themeType === "early"
                     ? "rgba(191, 191, 191, 0.34)"
@@ -180,7 +195,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
                 ? "rgba(191, 191, 191, 0.34)"
                 : "rgba(192, 192, 192, 0)"};
       */
-      
+
         cursor: not-allowed;
 
         :hover {
@@ -191,7 +206,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
             border-color: #d2d2d2;
         }
 
-        color: ${props =>
+        color: ${(props) =>
             props.isThemeControlledByComponent
                 ? props.themeType === "early"
                     ? "#999999"
@@ -218,36 +233,34 @@ export const StyledTopInput = styled.input<StyledInputProps>`
     }
 
     ${(props) => {
-        return ""
-      // getStatusColor(
-      //         props.prevValidStatus === "ReadyForValid" ? "ReadyForValid" : props.validStatus,
-      //         props.keyStatus,
-      //         props.prevValidStatus,
-      //         props.runValid,
-      //         props.theme.mode,
-      //         props.isThemeControlledByComponent,
-      //         props.themeType
-      // )
+        return "";
+        // getStatusColor(
+        //         props.prevValidStatus === "ReadyForValid" ? "ReadyForValid" : props.validStatus,
+        //         props.keyStatus,
+        //         props.prevValidStatus,
+        //         props.runValid,
+        //         props.theme.mode,
+        //         props.isThemeControlledByComponent,
+        //         props.themeType
+        // )
     }};
     border: 0;
     ${(props: StyledInputProps) => isFocus(props.isFocus)}
 `;
 
 function isFocus(isFocus: boolean) {
-    if(isFocus) {
+    if (isFocus) {
         return `
         position: relative;
         bottom: 11px;
-    `
+    `;
     } else {
         return ``;
     }
-
-
 }
 export const StyledInput2 = styled(StyledTopInput)<StyledInputProps>`
     //padding: 15px;
-    font-weight: 400;   
+    font-weight: 400;
     text-align: right;
     color: #101010;
 `;

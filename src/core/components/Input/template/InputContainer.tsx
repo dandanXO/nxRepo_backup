@@ -7,21 +7,21 @@ interface InputContainerProps {
 }
 
 const upperLabelType = (labelType: boolean) => {
-    if(labelType) {
+    if (labelType) {
         return `
             flex-direction: column;
             align-items: flex-start;
-        `
+        `;
     } else {
         return `        
             // flex-direction: row;
             align-items: center;     
             // justify-content: space-between;               
-        `
+        `;
     }
-}
+};
 const isFocus = (isFocus: boolean) => {
-    if(isFocus) {
+    if (isFocus) {
         return `        
         `;
     } else {
@@ -29,11 +29,10 @@ const isFocus = (isFocus: boolean) => {
             justify-content: center;            
         `;
     }
-
-}
-export const InputContainer = styled.label<InputContainerProps>`   
+};
+export const InputContainer = styled.label<InputContainerProps>`
     position: relative;
-    //width: ${props => props.width ?? "auto" }px;
+    //width: ${(props) => props.width ?? "auto"}px;
     display: flex;
     border: 1px solid #aaaaaa;
     border-radius: 9px;

@@ -1,4 +1,6 @@
 # Modal
+
 # TODO
-* 點擊 Modal Mask 能控制 Modal 是否 Hide
-* 需與 Zeplin 同步樣式
+
+-   點擊 Modal Mask 能控制 Modal 是否 Hide
+-   需與 Zeplin 同步樣式

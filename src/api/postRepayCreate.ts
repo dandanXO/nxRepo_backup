@@ -7,9 +7,9 @@ export interface PostRepayCreateRequestBody {
     /** 是否展期 */
     extend?: Boolean;
     /** 客戶選擇的還款金額 */
-    repayAmount?:number;
+    repayAmount?: number;
     /** 还款结清后是否自动下单 */
-    forceApplyAfterRepay?:boolean;
+    forceApplyAfterRepay?: boolean;
 }
 
 export interface PostRepayCreateResponse {
@@ -29,7 +29,6 @@ export interface PostRepayCreateResponse {
     repayAmount: number;
     /** 下一步跳轉網址 */
     nextUrl: string;
- 
 }
 
 // export const mockPostRepayReceiptResponse: PostRepayCreateResponse = {
