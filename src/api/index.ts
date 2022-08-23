@@ -9,6 +9,7 @@ import {GetRepayReceiptRequestQuerystring, GetRepayReceiptResponse} from "./getR
 import {PostRepayReceiptRequestBody, PostRepayReceiptResponse} from "./postRepayReceipt";
 import { GetRepayTypesResponse } from "./GetRepayTypes";
 import { PostRepayCreateRequestBody, PostRepayCreateResponse } from "./postRepayCreate";
+import {PostBankBindSaveRequest} from "./postBankBindSave";
 export {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData }
 
 const baseUrl = "/api/v2"
@@ -50,7 +51,7 @@ export const API = createApi({
             }),
         })),
         postRepayReceipt: builder.mutation<PostRepayReceiptResponse, FormData>({
-            query: (query: FormData) => ({
+            query: (requestBody: FormData) => ({
                 url: `/repay/receipt`,
                 method: 'post',
                 headers: {
@@ -58,7 +59,7 @@ export const API = createApi({
                     // https://www.it145.com/9/182527.html
                     'Content-Type': 'multipart/form-data;boundary=' + new Date().getTime()
                 },
-                data: query,
+                data: requestBody,
                 // data: {
                 //     file: query.file,
                 //     orderNo: query.orderNo,
@@ -79,6 +80,13 @@ export const API = createApi({
                 data: query
             }),
         }),
+        postBankBindSave: builder.mutation<{}, PostBankBindSaveRequest>({
+           query: ((requestBody: PostBankBindSaveRequest ) => ({
+               url: `/bank-bind/save`,
+               method: 'post',
+               data: requestBody
+           })),
+        }),
     })
 });
 export const {
@@ -87,5 +95,6 @@ export const {
     useGetRepayReceiptQuery,
     usePostRepayReceiptMutation,
     useGetRepayTypesQuery,
-    usePostRepayCreateMutation
+    usePostRepayCreateMutation,
+    usePostBankBindSaveMutation,
 } = API

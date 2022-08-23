@@ -11,7 +11,7 @@ export default {
 export const Page:ComponentStory<typeof PureLoanDetailsPage> = () => {
     return (
         <AppThemeProvider>
-            <PureLoanDetailsPage currentData={mockGetLoanDetailResponse} />
+            <PureLoanDetailsPage currentData={mockGetLoanDetailResponse} navigateToUploadPaymentReceiptPage={{} as any}/>
         </AppThemeProvider>
     )
 }

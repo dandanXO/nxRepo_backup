@@ -4,6 +4,9 @@ import styled from "styled-components";
 import Page from "../../core/components/Page";
 import Button from "../../core/components/Button";
 import type {InputValue} from "../../core/types/InputValue";
+import {usePostBankBindSaveMutation} from "../../api";
+import {PostBankBindSaveRequest} from "../../api/postBankBindSave";
+import Modal from "../../core/components/Modal";
 
 const CustomPage = styled(Page)`
     display: flex;
@@ -21,7 +24,10 @@ const Paragraph = styled.p`
     color: #101010;
 `
 
-const BindBankAccountPage = () => {
+interface PureBindBankAccountPageProps {
+    postBankBindSave: (requestBody: PostBankBindSaveRequest) => any;
+}
+export const PureBindBankAccountPage = (props: PureBindBankAccountPageProps) => {
 
     const [value, setValue] = useState<InputValue<string>>({
         data: "",
@@ -49,6 +55,15 @@ const BindBankAccountPage = () => {
         errorMessage: "",
     });
 
+    const checkValue3and4 = useCallback(() => {
+        if(value3.data !== value4.data) {
+            setValue4({
+                ...value4,
+                errorMessage: "Please make sure your account number match.",
+            })
+            return;
+        }
+    }, [value3.data, value4.data]);
     // NOTICE: reuse me
     const confirm = useCallback(() => {
         onInputBlur(value.data, setValue);
@@ -58,8 +73,31 @@ const BindBankAccountPage = () => {
         onInputBlur(value5.data, setValue5);
 
         if(!(value.isValidation && value2.isValidation && value3.isValidation && value4.isValidation && value5.isValidation)) return;
+        checkValue3and4();
+
         // alert("confirm")
-    }, [value.isValidation, value2.isValidation, value3.isValidation, value4.isValidation, value5.isValidation]);
+        props.postBankBindSave({
+            bankAccount: value3.data,
+            ifscCode: value2.data,
+            upiId: value5.data,
+        }).unwrap().then((data: any) => {
+            console.log("data:", data);
+            // Notice: bind account successfully
+            Modal.alert({
+                show: true,
+                mask: true,
+                title: "Notice",
+                content: "Success!",
+                confirmText: "Confirm",
+                maskClosable: true,
+                enableClose: false,
+                enableIcon: false,
+            });
+        }).catch((error: any) => {
+            console.log("error:", error);
+        });
+    }, [value.data, value2.data, value3.data, value4.data, value5.data,
+        value.isValidation, value2.isValidation, value3.isValidation, value4.isValidation, value5.isValidation]);
 
     // NOTICE: reuse me
     const onInputBlur = useCallback((data: boolean | string | number, setValue: React.Dispatch<InputValue<any>>) => {
@@ -72,7 +110,7 @@ const BindBankAccountPage = () => {
         } else {
             setValue({ data, isValidation: false, errorMessage: "This field cannot be left blank"});
         }
-    }, [value]);
+    }, []);
 
     return (
         <CustomPage>
@@ -123,6 +161,7 @@ const BindBankAccountPage = () => {
                     }}
                     onBlur={(event) => {
                         onInputBlur(value3.data, setValue3);
+                        checkValue3and4();
                     }}
                     errorMessage={value3.errorMessage}
                 />
@@ -138,6 +177,7 @@ const BindBankAccountPage = () => {
                     }}
                     onBlur={(event) => {
                         onInputBlur(value4.data, setValue4);
+                        checkValue3and4();
                     }}
                     errorMessage={value4.errorMessage}
                 />
@@ -166,4 +206,8 @@ const BindBankAccountPage = () => {
     )
 }
 
+const BindBankAccountPage = () => {
+    const [postBankBindSave] = usePostBankBindSaveMutation();
+    return <PureBindBankAccountPage postBankBindSave={postBankBindSave}/>
+}
 export default BindBankAccountPage;
