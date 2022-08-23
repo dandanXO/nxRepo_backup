@@ -107,7 +107,7 @@ export const PureBindBankAccountPage = (
                     enableClose: false,
                     enableIcon: false,
                     onConfirm: () => {
-                        location.href = "http://innerh5";
+                        location.href = "innerh5://127.0.0.1";
                     },
                 });
             })
