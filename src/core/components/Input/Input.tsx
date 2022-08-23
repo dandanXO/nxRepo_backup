@@ -74,6 +74,7 @@ export interface InputProps {
     label?: string;
     labelType?: string;
     style?: any;
+    ref?: any;
 }
 
 // NOTICE: 實際產出元件的 dot 特性
@@ -88,6 +89,7 @@ export type InputInterface = React.FunctionComponent<InputProps> & InputDotCompo
 
 
 const Input: InputInterface = ({
+    ref,
     className,
     id,
     type,
@@ -241,201 +243,208 @@ const Input: InputInterface = ({
     }
     // let isFocus = statusRef.current === "Focus" || statusRef.current === "KeyDown" ;
     return (
-        <InputAndMessageContainer className={className} style={style}>
-            <InputContainer
-                onFocus={() => {
-                    setEdit(true);
-                }}
-                onBlur={() => {
-                    setEdit(false);
-                }}
-                ref={selectRef} width={width}
-                upperLabelType={upperLabelType}
-                isFocus={isEdit}
-            >
-                {LabelComponentElement}
-                <CustomInput
-                    // NOTICE: labelID
-                    id={labelID}
-                    // isFocus={value.length > 0 && !isEdit}
-                    ref={targetRef}
-                    // Modal - Display
-                    disabled={disabled}
-                    // style={prefix(props.style)}
-                    // Modal - Type
-                    type={type}
-                    // Modal - Data
-                    minLength={minLength}
-                    maxLength={maxLength}
-                    value={value}
-                    placeholder={placeholder}
-                    // placement={placement}
-                    // Modal - Status
-                    // keyStatus={statusRef.current}
-                    // Modal - Validation
-                    // runValid={typeof valid !== "undefined"}
-                    // prevValidStatus={preValid}
-                    // validStatus={typeof valid !== "undefined" ? valid : "ReadyForValid"}
-                    // Modal - Event Handler
-                    onClick={(event: any) => {
-                        // console.log("onClick")
-                        onClick && onClick(event);
-                        // statusRef.current = "Focus";
-                        // forceUpdate();
+        <div ref={ref}>
+            <InputAndMessageContainer className={className} style={style} >
+                <InputContainer
+                    onFocus={() => {
+                        setEdit(true);
                     }}
-                    // [Mouse Events]
-                    // onMouseOver={() => {
-                    //     console.log("onMouseOver");
-                    //     // if (keyStatus === "Idle") setKeyState("Hover");
-                    //     if (statusRef.current === "Idle") {
-                    //         statusRef.current = "Hover";
-                    //         forceUpdate();
-                    //     }
-                    // }}
-                    onMouseOut={() => {
-                        // console.log("onMouseOut");
-                        if (statusRef.current !== "Focus" && statusRef.current !== "KeyDown") {
+                    onBlur={() => {
+                        setEdit(false);
+                    }}
+                    ref={selectRef} width={width}
+                    upperLabelType={upperLabelType}
+                    isFocus={isEdit}
+                >
+                    {LabelComponentElement}
+                    <CustomInput
+                        // NOTICE: labelID
+                        id={labelID}
+                        // isFocus={value.length > 0 && !isEdit}
+                        ref={targetRef}
+                        // Modal - Display
+                        disabled={disabled}
+                        // style={prefix(props.style)}
+                        // Modal - Type
+                        type={type}
+                        // Modal - Data
+                        minLength={minLength}
+                        maxLength={maxLength}
+                        value={value}
+                        placeholder={placeholder}
+                        // placement={placement}
+                        // Modal - Status
+                        // keyStatus={statusRef.current}
+                        // Modal - Validation
+                        // runValid={typeof valid !== "undefined"}
+                        // prevValidStatus={preValid}
+                        // validStatus={typeof valid !== "undefined" ? valid : "ReadyForValid"}
+                        // Modal - Event Handler
+                        onClick={(event: any) => {
+                            // console.log("onClick")
+                            onClick && onClick(event);
+                            // statusRef.current = "Focus";
+                            // forceUpdate();
+                        }}
+                        // [Mouse Events]
+                        // onMouseOver={() => {
+                        //     console.log("onMouseOver");
+                        //     // if (keyStatus === "Idle") setKeyState("Hover");
+                        //     if (statusRef.current === "Idle") {
+                        //         statusRef.current = "Hover";
+                        //         forceUpdate();
+                        //     }
+                        // }}
+                        onMouseOut={() => {
+                            // console.log("onMouseOut");
+                            if (statusRef.current !== "Focus" && statusRef.current !== "KeyDown") {
+                                statusRef.current = "Idle";
+                                forceUpdate();
+                            }
+                        }}
+                        // [Form Events]
+                        // onSelect={event => {
+                        //     props.onSelect && props.onSelect(event);
+                        // }}
+                        onFocus={(event: any) => {
+                            // console.log("onFocus");
+                            // FIXME: 這段起初的意義
+                            // if (statusRef.current === "Hover") {
+                            //     // NOTE: 註解這段解決有紅色小點點問題
+                            statusRef.current = "Focus";
+                            forceUpdate();
+                            // }
+
+                            // if (!inputBefore) {
+                            //     setInputBefore(true);
+                            // }
+
+                            // if (props.valid) {
+                            //     setRunValidAction(false);
+                            // }
+                            // Outer Interface
+                            onFocus && onFocus(event);
+                        }}
+                        onBlur={(event: any) => {
+                            // console.log("onBlur");
+                            // if (statusRef.current === "Focus" || statusRef.current === "KeyDown") {
                             statusRef.current = "Idle";
                             forceUpdate();
-                        }
-                    }}
-                    // [Form Events]
-                    // onSelect={event => {
-                    //     props.onSelect && props.onSelect(event);
-                    // }}
-                    onFocus={(event: any) => {
-                        // console.log("onFocus");
-                        // FIXME: 這段起初的意義
-                        // if (statusRef.current === "Hover") {
-                        //     // NOTE: 註解這段解決有紅色小點點問題
-                        statusRef.current = "Focus";
-                        forceUpdate();
-                        // }
+                            // }
+                            // NOTICE: 輸入過之後並且 Blur 就開啟判斷機制
+                            // setRunValidAction(true);
+                            // if (preValid == false && props.valid === true) {
+                            //     setPreValid(true);
+                            // }
 
-                        // if (!inputBefore) {
-                        //     setInputBefore(true);
-                        // }
+                            // Outer Interface
+                            onBlur && onBlur(event);
+                        }}
+                        onChange={(event: any) => {
+                            // console.log("onChange");
+                            // console.log("event", event.target.value);
+                            // if(customType === "number") {
+                            //     const reg: RegExp = new RegExp(/^\d{0,19}[.]?\d{0,2}$/);
+                            //     if (!reg.test(event.target.value)) return;
+                            // }
+                            if (!inputBefore) {
+                                setInputBefore(true);
+                                forceUpdate();
+                            }
 
-                        // if (props.valid) {
-                        //     setRunValidAction(false);
-                        // }
-                        // Outer Interface
-                        onFocus && onFocus(event);
-                    }}
-                    onBlur={(event: any) => {
-                        // console.log("onBlur");
-                        // if (statusRef.current === "Focus" || statusRef.current === "KeyDown") {
-                        statusRef.current = "Idle";
-                        forceUpdate();
-                        // }
-                        // NOTICE: 輸入過之後並且 Blur 就開啟判斷機制
-                        // setRunValidAction(true);
-                        // if (preValid == false && props.valid === true) {
-                        //     setPreValid(true);
-                        // }
+                            // NOTE: 並不幫忙更新值
+                            // SetValue(event.target.value);
+                            onChange && onChange(event);
 
-                        // Outer Interface
-                        onBlur && onBlur(event);
-                    }}
-                    onChange={(event: any) => {
-                        // console.log("onChange");
-                        // console.log("event", event.target.value);
-                        // if(customType === "number") {
-                        //     const reg: RegExp = new RegExp(/^\d{0,19}[.]?\d{0,2}$/);
-                        //     if (!reg.test(event.target.value)) return;
-                        // }
-                        if (!inputBefore) {
-                            setInputBefore(true);
+                            // NOTICE: broke outer code
+                            // props.onChange && props.onChange(event.target.value);
+                        }}
+                        // onInput={event => {
+                        //     props.onInput && props.onInput(event);
+                        // }}
+                        // onInvalid={event => {
+                        //     props.onInvalid && props.onInvalid(event);
+                        // }}
+                        // Form - button
+                        // onReset={event => {
+                        //     props.onReset && props.onReset(event);
+                        // }}
+                        // NOTICE: [Not supported] Pure Javascript Not supported IE nad not supported React
+                        // onSearch={event => {
+                        //     props.onSearch && props.onSearch(event);
+                        // }}
+                        // Form - button
+                        // onSubmit={event => {
+                        //     props.onSubmit && props.onSubmit(event);
+                        // }}
+                        // [Keyboard Events]
+                        onKeyDown={(event: any) => {
+                            // setRunValidAction(false);
+                            statusRef.current = "KeyDown";
                             forceUpdate();
-                        }
+                            // Outer Interface
+                            // props.onKeyDown && props.onKeyDown(event);
+                            // props.onChange && props.onChange(event);
+                        }}
+                        // onKeyPress={event => {
+                        //     props.onKeyPress && props.onKeyPress(event);
+                        // }}
+                        // onKeyUp={event => {
+                        //     props.onKeyUp && props.onKeyUp(event);
+                        // }}
+                        // [Clipboard Events]
+                        // onCopy={event => {
+                        //     props.onCopy && props.onCopy(event);
+                        // }}
+                        // onCut={event => {
+                        //     props.onCut && props.onCut(event);
+                        // }}
+                        // onPaste={event => {
+                        //     props.onPaste && props.onPaste(event);
+                        // }}
+                        // NOTE:
+                        // onPressEnter
+                        // allowClear
+                        // suffix
+                        // isThemeControlledByComponent={isThemeControlledByComponent}
+                        // themeType={themeType}
+                    />
+                    {/*<StyledLabel />*/}
+                    {/*FIXME:*/}
+                    {inputBefore && typeof valid === "boolean" && (
+                        <StatusIconContainer>{valid ? <SuccessInputIcon /> : <ErrorInputIcon />}</StatusIconContainer>
+                    )}
+                    {valid === false && validMessage !== "" && (statusRef.current === "Focus" || statusRef.current === "KeyDown") && (
+                        // <Tooltip
+                        //     target={targetRef}
+                        //     placement={placement ? placement : "right"}
+                        //     show={showToolTip}
+                        //     customStyle
+                        //     zIndex={toolTipZindex}
+                        // >
+                        <InputLintContent>{validMessage}</InputLintContent>
+                        // </Tooltip>
+                    )}
+                    {/*Disable - Tooltip*/}
+                    {/*{showHintMessage && disabled === true && (*/}
+                    {/*    <Tooltip target={targetRef} placement={placement ? placement : "right"} show={showHintToolTip} customStyle>*/}
+                    {/*        <InputLintContent>{hintMessage}</InputLintContent>*/}
+                    {/*    </Tooltip>*/}
+                    {/*)}*/}
+                    {showHintMessage && disabled === true && (
+                        <InputLintContent>{hintMessage}</InputLintContent>
+                    )}
+                </InputContainer>
+                <ErrorMessageSection>{errorMessage}</ErrorMessageSection>
+            </InputAndMessageContainer>
+        </div>
 
-                        // NOTE: 並不幫忙更新值
-                        // SetValue(event.target.value);
-                        onChange && onChange(event);
-
-                        // NOTICE: broke outer code
-                        // props.onChange && props.onChange(event.target.value);
-                    }}
-                    // onInput={event => {
-                    //     props.onInput && props.onInput(event);
-                    // }}
-                    // onInvalid={event => {
-                    //     props.onInvalid && props.onInvalid(event);
-                    // }}
-                    // Form - button
-                    // onReset={event => {
-                    //     props.onReset && props.onReset(event);
-                    // }}
-                    // NOTICE: [Not supported] Pure Javascript Not supported IE nad not supported React
-                    // onSearch={event => {
-                    //     props.onSearch && props.onSearch(event);
-                    // }}
-                    // Form - button
-                    // onSubmit={event => {
-                    //     props.onSubmit && props.onSubmit(event);
-                    // }}
-                    // [Keyboard Events]
-                    onKeyDown={(event: any) => {
-                        // setRunValidAction(false);
-                        statusRef.current = "KeyDown";
-                        forceUpdate();
-                        // Outer Interface
-                        // props.onKeyDown && props.onKeyDown(event);
-                        // props.onChange && props.onChange(event);
-                    }}
-                    // onKeyPress={event => {
-                    //     props.onKeyPress && props.onKeyPress(event);
-                    // }}
-                    // onKeyUp={event => {
-                    //     props.onKeyUp && props.onKeyUp(event);
-                    // }}
-                    // [Clipboard Events]
-                    // onCopy={event => {
-                    //     props.onCopy && props.onCopy(event);
-                    // }}
-                    // onCut={event => {
-                    //     props.onCut && props.onCut(event);
-                    // }}
-                    // onPaste={event => {
-                    //     props.onPaste && props.onPaste(event);
-                    // }}
-                    // NOTE:
-                    // onPressEnter
-                    // allowClear
-                    // suffix
-                    // isThemeControlledByComponent={isThemeControlledByComponent}
-                    // themeType={themeType}
-                />
-                {/*<StyledLabel />*/}
-                {/*FIXME:*/}
-                {inputBefore && typeof valid === "boolean" && (
-                    <StatusIconContainer>{valid ? <SuccessInputIcon /> : <ErrorInputIcon />}</StatusIconContainer>
-                )}
-                {valid === false && validMessage !== "" && (statusRef.current === "Focus" || statusRef.current === "KeyDown") && (
-                    // <Tooltip
-                    //     target={targetRef}
-                    //     placement={placement ? placement : "right"}
-                    //     show={showToolTip}
-                    //     customStyle
-                    //     zIndex={toolTipZindex}
-                    // >
-                    <InputLintContent>{validMessage}</InputLintContent>
-                    // </Tooltip>
-                )}
-                {/*Disable - Tooltip*/}
-                {/*{showHintMessage && disabled === true && (*/}
-                {/*    <Tooltip target={targetRef} placement={placement ? placement : "right"} show={showHintToolTip} customStyle>*/}
-                {/*        <InputLintContent>{hintMessage}</InputLintContent>*/}
-                {/*    </Tooltip>*/}
-                {/*)}*/}
-                {showHintMessage && disabled === true && (
-                    <InputLintContent>{hintMessage}</InputLintContent>
-                )}
-            </InputContainer>
-            <ErrorMessageSection>{errorMessage}</ErrorMessageSection>
-        </InputAndMessageContainer>
     );
 };
+
+// const InputForwardRef = React.forwardRef((props: InputInterface, ref) => (
+//     <Input ref={ref} {...props} />
+// ))
 
 function Text(props: InputProps) {
     return <Input type="text" {...props} />;

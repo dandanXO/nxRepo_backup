@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useRef, useState} from "react";
 import {Input} from "../../core/components/Input";
 import styled from "styled-components";
 import Page from "../../core/components/Page";
@@ -22,6 +22,7 @@ const Paragraph = styled.p`
 `
 
 const BindBankAccountPage = () => {
+
     const [value, setValue] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
@@ -50,8 +51,14 @@ const BindBankAccountPage = () => {
 
     // NOTICE: reuse me
     const confirm = useCallback(() => {
+        onInputBlur(value.data, setValue);
+        onInputBlur(value2.data, setValue2);
+        onInputBlur(value3.data, setValue3);
+        onInputBlur(value4.data, setValue4);
+        onInputBlur(value5.data, setValue5);
+
         if(!(value.isValidation && value2.isValidation && value3.isValidation && value4.isValidation && value5.isValidation)) return;
-        alert("confirm")
+        // alert("confirm")
     }, [value.isValidation, value2.isValidation, value3.isValidation, value4.isValidation, value5.isValidation]);
 
     // NOTICE: reuse me
