@@ -9,6 +9,8 @@ import {PostRepayReceiptResponse} from "../../api/postRepayReceipt";
 import {useNavigate} from "react-router-dom";
 import UploadingFileModal from "./modal/UploadingFileModal";
 import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
+import {InputValue} from "../../core/types/InputValue";
+
 const Section = styled.div`
       margin-bottom: 100px;
 `;
@@ -68,26 +70,22 @@ interface PureUploadPaymentReceiptPageProps {
     orderNo: string;
 }
 export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPageProps) => {
-    const [isUploading, setIsUploading] = useState(false);
-    const [utr, setURT] = useState<string>();
+
+    // NOTE: input 1/2
+    const [utr, setURT] = useState<InputValue<string>>({
+        data: "",
+        isValidation: false,
+        errorMessage: "",
+    });
+    // const [isUtrValidated, setIsUtrValidated] = useState<boolean>(false);
+    // const [utrErrorMessage, setUtrErrorMessage] = useState<string>("");
+
+
+    // NOTE: input 2/2 (optional)
     const [formFile, setFormFile] = useState<string>();
-
-    const confirm = useCallback(() => {
-        setIsUploading(true);
-        props.postRepayReceiptRequest({
-            formFile: formFile,
-            orderNo: props.orderNo,
-            receipt: utr,
-            setIsUploading,
-        });
-    }, [utr, formFile]);
-
-    const [imageSrc, setImageSrc] = useState<string>();
-
     const onFileChange = useCallback((event:any) => {
         const formFileValue = event.target.files[0];
         // console.log("formFileValue: ", formFileValue);
-
         setFormFile(formFileValue as any);
 
         let reader = new FileReader();
@@ -96,6 +94,21 @@ export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPage
         };
         reader.readAsDataURL(formFileValue as any);
     }, []);
+
+    const [imageSrc, setImageSrc] = useState<string>();
+
+    const confirm = useCallback(() => {
+        if (!utr.isValidation) return;
+        setIsUploading(true);
+        props.postRepayReceiptRequest({
+            orderNo: props.orderNo,
+            receipt: utr.data,
+            formFile: formFile,
+            setIsUploading,
+        });
+    }, [utr.isValidation, utr, formFile]);
+
+    const [isUploading, setIsUploading] = useState(false);
 
     return (
         <CustomPage>
@@ -107,9 +120,35 @@ export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPage
                     labelType="right"
                     label="UTR"
                     onChange={(event) => {
-                        setURT(event.target.value);
+                        setURT({
+                            ...utr,
+                            data: event.target.value,
+                        });
                     }}
-                    errorMessage="error message"
+                    onBlur={() => {
+                        if(String(utr).length > 0) {
+                            if(String(utr).length > 12) {
+                                setURT({
+                                    ...utr,
+                                    isValidation: false,
+                                    errorMessage: "digits only, 12 numbers max",
+                                })
+                            } else {
+                                setURT({
+                                    ...utr,
+                                    isValidation: true,
+                                    errorMessage: "",
+                                })
+                            }
+                        } else {
+                            setURT({
+                                ...utr,
+                                isValidation: false,
+                                errorMessage: "This field cannot be left blank",
+                            })
+                        }
+                    }}
+                    errorMessage={utr.errorMessage}
                 />
             </Section>
 
@@ -143,7 +182,9 @@ const UploadPaymentReceiptPage = () => {
     const [postRepayReceipt, { isLoading } ] = usePostRepayReceiptMutation();
     const navigate = useNavigate();
     const pageQueryString = useLocationOrderQueryString();
-
+    const goToUploadedPaymentReceiptPage = useCallback(() => {
+        navigate(`/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
+    }, [pageQueryString.token, pageQueryString.orderNo]);
     const postRepayReceiptRequest = useCallback((props: PostRepayReceiptRequestProps) => {
         // NOTICE: impure
         const formData = new FormData();
@@ -152,7 +193,7 @@ const UploadPaymentReceiptPage = () => {
         formData.append("receipt", props.receipt);
 
         postRepayReceipt(formData).unwrap().then((data: PostRepayReceiptResponse) => {
-            navigate(`/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
+            goToUploadedPaymentReceiptPage();
         }).catch(({ error }) => {
             console.log(error)
         }).finally(() => {

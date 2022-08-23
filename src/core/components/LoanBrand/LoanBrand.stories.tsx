@@ -1,7 +1,7 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import LoanBrand from "./index";
 import {AppThemeProvider} from "../index";
-import React from "react";
+import * as React from "react";
 
 export default {
     title: "Business Component/LoanBrand",

@@ -1,16 +1,16 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import BindBankAccountPage from "./index";
+import {PureBindBankAccountPage} from "./index";
 import {AppThemeProvider} from "../../core/components";
 
 export default {
     title: "Page/BindBankAccountPage",
-    component: BindBankAccountPage,
-} as ComponentMeta<typeof BindBankAccountPage>
+    component: PureBindBankAccountPage,
+} as ComponentMeta<typeof PureBindBankAccountPage>
 
-export const Page: ComponentStory<typeof BindBankAccountPage> = (args) => {
+export const Page: ComponentStory<typeof PureBindBankAccountPage> = (args) => {
     return (
         <AppThemeProvider>
-            <BindBankAccountPage/>
+            <PureBindBankAccountPage postBankBindSave={{} as any}/>
         </AppThemeProvider>
     )
 }
