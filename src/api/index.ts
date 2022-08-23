@@ -1,10 +1,7 @@
-import queryString from "query-string";
-
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {createApi} from "@reduxjs/toolkit/query/react";
 import {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData } from "./demo/getAttractionsALL";
 import {GetLoanDetailRequestQuerystring, GetLoanDetailResponse} from "./getLoanDetail";
 import axiosBaseQuery from "./axiosBaseQuery";
-import * as url from "url";
 import {GetRepayReceiptRequestQuerystring, GetRepayReceiptResponse} from "./getRepayReceipt";
 import {PostRepayReceiptRequestBody, PostRepayReceiptResponse} from "./postRepayReceipt";
 import { GetRepayTypesResponse } from "./GetRepayTypes";
