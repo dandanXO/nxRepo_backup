@@ -240,7 +240,6 @@ const Input: InputInterface = ({
         upperLabelType = false;
     }
     // let isFocus = statusRef.current === "Focus" || statusRef.current === "KeyDown" ;
-
     return (
         <InputAndMessageContainer className={className} style={style}>
             <InputContainer
@@ -400,7 +399,6 @@ const Input: InputInterface = ({
                     // onPaste={event => {
                     //     props.onPaste && props.onPaste(event);
                     // }}
-
                     // NOTE:
                     // onPressEnter
                     // allowClear

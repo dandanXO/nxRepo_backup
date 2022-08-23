@@ -163,7 +163,9 @@ const UploadPaymentReceiptPage = () => {
     const [postRepayReceipt, { isLoading } ] = usePostRepayReceiptMutation();
     const navigate = useNavigate();
     const pageQueryString = useLocationOrderQueryString();
-
+    const goToUploadedPaymentReceiptPage = useCallback(() => {
+        navigate(`/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
+    }, [pageQueryString.token, pageQueryString.orderNo]);
     const postRepayReceiptRequest = useCallback((props: PostRepayReceiptRequestProps) => {
         // NOTICE: impure
         const formData = new FormData();
@@ -172,7 +174,7 @@ const UploadPaymentReceiptPage = () => {
         formData.append("receipt", props.receipt);
 
         postRepayReceipt(formData).unwrap().then((data: PostRepayReceiptResponse) => {
-            navigate(`/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
+            goToUploadedPaymentReceiptPage();
         }).catch(({ error }) => {
             console.log(error)
         }).finally(() => {
