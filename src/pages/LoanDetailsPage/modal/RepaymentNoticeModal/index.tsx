@@ -11,8 +11,15 @@ const Paragraph = styled.div`
 
 interface RepaymentNoticeModalProps {
     setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
+    handlePostRepayCreate: any;
+    balance: number;
 }
 const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
+    const handleConfirm = () => {
+        console.log(props.balance)
+        props.handlePostRepayCreate(false, true, props.balance);
+        props.setShowRepaymentNoticeModal(false);
+    }
     return (
         <div>
             <Modal
@@ -28,9 +35,7 @@ const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
                     </Container>
                 )}
                 confirmText="Repay"
-                onConfirm={() => {
-                    props.setShowRepaymentNoticeModal(false);
-                }}
+                onConfirm={handleConfirm}
                 // NOTE: 特製版
                 enableIcon={false}
                 enableTitleHorizontal={true}

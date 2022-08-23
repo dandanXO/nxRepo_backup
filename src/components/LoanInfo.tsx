@@ -83,18 +83,18 @@ const LoanInfo = (props: LoanInfoProps) => {
                 <div className={"loanInfo-Card-Title"}>Gernal</div>
                 <div className={"loanInfo-Card-list"}>
                     <ListItem title={"State"} text={<Tag status={status}>{status}</Tag>} />
-                    {extended && <ListItem
+                   <ListItem
                         title={
                             <div>
                                 <div>Amount Paid</div>
-                                <div onClick={()=>setShowAmountPaidModal(true)}><img src={AmountPaidIcon} /></div>
+                                 <div onClick={()=>setShowAmountPaidModal(true)}><img src={AmountPaidIcon} /></div>
                             </div>
                         }
                         text={`₹ ${paidAmount}`}
-                    />}
+                    />
                     <ListItem title={"Balance"} text={`₹ ${balance}`} />
                 </div>
-                <div className={"relatedRepayment"} ><Button onClick={() => setShowExtensionModal(true)} styleType={'link'}>{'Related repayment >'}</Button></div>
+                {extended && <div className={"relatedRepayment"} ><Button onClick={() => setShowExtensionModal(true)} styleType={'link'}>{'Related repayment >'}</Button></div>}
             </Card>
             {
                 (status === "UNPAID" || status === "OVERDUE") &&

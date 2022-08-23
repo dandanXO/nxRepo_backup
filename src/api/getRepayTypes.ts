@@ -1,5 +1,5 @@
 // GetRepayPayPlats
-export interface GetRepayTypesResponse {
+interface GetRepayTypesResponseObject {
     /** 支付平台 */
     payPlats?: GetRepayTypesPayPlats[];
     /** 支付类型名称 */
@@ -7,6 +7,7 @@ export interface GetRepayTypesResponse {
     /** 支付类型别名 */
     payTypeAlias?: string;
 }
+export type GetRepayTypesResponse = GetRepayTypesResponseObject[];
 
 export interface GetRepayTypesPayPlats{
     /** platClass */

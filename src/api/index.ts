@@ -66,7 +66,7 @@ export const API = createApi({
                 // }
             }),
         }),
-        getRepayTypes:builder.query<GetRepayTypesResponse,"">({
+        getRepayTypes:builder.query<GetRepayTypesResponse, {}>({
             query:()=>({
                 url: `/repay/types`,
                 method:'get'
