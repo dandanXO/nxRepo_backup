@@ -4,7 +4,7 @@ import {GetLoanDetailRequestQuerystring, GetLoanDetailResponse} from "./getLoanD
 import axiosBaseQuery from "./axiosBaseQuery";
 import {GetRepayReceiptRequestQuerystring, GetRepayReceiptResponse} from "./getRepayReceipt";
 import {PostRepayReceiptRequestBody, PostRepayReceiptResponse} from "./postRepayReceipt";
-import { GetRepayTypesResponse } from "./GetRepayTypes";
+import { GetRepayTypesResponse } from "./getRepayTypes";
 import { PostRepayCreateRequestBody, PostRepayCreateResponse } from "./postRepayCreate";
 import {PostBankBindSaveRequest} from "./postBankBindSave";
 export {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData }
