@@ -4,6 +4,8 @@ import Page from "../../core/components/Page";
 const getToken = () => `token=b5f2db2c45e24edcbc49540bae862fbd`
 const getOrderNo = () => `orderNo=no-7864747613693247`
 const queryString = () => `${getToken()}&${getOrderNo()}`;
+const getCardholderName = () => `cardholderName=C I Riyaz Ur Rahaman`;
+
 export default () => {
     return (
         <Page>
@@ -17,7 +19,7 @@ export default () => {
                 <Link to="/extend-details">extendDetailsPage</Link>
             </div>
             <div>
-                <Link to={"/bank-bind?" + getToken()}>bank-bind</Link>
+                <Link to={"/bank-bind?" + getToken() + "&" + getCardholderName()}>bank-bind</Link>
             </div>
             <div>
                 <Link to={"/upload-payment-receipt?" + queryString()}>UploadPaymentReceiptPage</Link>

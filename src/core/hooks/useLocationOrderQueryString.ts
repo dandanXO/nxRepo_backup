@@ -8,10 +8,12 @@ const useLocationOrderQueryString = () => {
         const parsedQueryString: {
             token?: string;
             orderNo?: string;
+            cardholderName?: string;
         } = queryString.parse(location.search);
         return {
             token: parsedQueryString.token,
             orderNo: parsedQueryString.orderNo,
+            cardholderName: parsedQueryString.cardholderName,
         }
     }, [location]);
     return pageQueryString;

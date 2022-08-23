@@ -7,6 +7,7 @@ import type {InputValue} from "../../core/types/InputValue";
 import {usePostBankBindSaveMutation} from "../../api";
 import {PostBankBindSaveRequest} from "../../api/postBankBindSave";
 import Modal from "../../core/components/Modal";
+import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
 
 const CustomPage = styled(Page)`
     display: flex;
@@ -26,6 +27,7 @@ const Paragraph = styled.p`
 
 interface PureBindBankAccountPageProps {
     postBankBindSave: (requestBody: PostBankBindSaveRequest) => any;
+    cardholderName: string;
 }
 export const PureBindBankAccountPage = (props: PureBindBankAccountPageProps) => {
 
@@ -66,13 +68,13 @@ export const PureBindBankAccountPage = (props: PureBindBankAccountPageProps) => 
     }, [value3.data, value4.data]);
     // NOTICE: reuse me
     const confirm = useCallback(() => {
-        onInputBlur(value.data, setValue);
+        // onInputBlur(value.data, setValue);
         onInputBlur(value2.data, setValue2);
         onInputBlur(value3.data, setValue3);
         onInputBlur(value4.data, setValue4);
         onInputBlur(value5.data, setValue5);
 
-        if(!(value.isValidation && value2.isValidation && value3.isValidation && value4.isValidation && value5.isValidation)) return;
+        if(!(value2.isValidation && value3.isValidation && value4.isValidation && value5.isValidation)) return;
         checkValue3and4();
 
         // alert("confirm")
@@ -98,9 +100,19 @@ export const PureBindBankAccountPage = (props: PureBindBankAccountPageProps) => 
             });
         }).catch((error: any) => {
             console.log("error:", error);
+            Modal.alert({
+                show: true,
+                mask: true,
+                title: "Error",
+                content: error.data,
+                confirmText: "Confirm",
+                maskClosable: true,
+                enableClose: false,
+                enableIcon: false,
+            });
         });
-    }, [value.data, value2.data, value3.data, value4.data, value5.data,
-        value.isValidation, value2.isValidation, value3.isValidation, value4.isValidation, value5.isValidation]);
+    }, [value2.data, value3.data, value4.data, value5.data,
+        ,value2.isValidation, value3.isValidation, value4.isValidation, value5.isValidation]);
 
     // NOTICE: reuse me
     const onInputBlur = useCallback((data: boolean | string | number, setValue: React.Dispatch<InputValue<any>>) => {
@@ -120,17 +132,17 @@ export const PureBindBankAccountPage = (props: PureBindBankAccountPageProps) => 
             <Form>
                 <Input
                     label="Cardholder Name"
-                    value={value.data}
-                    onChange={event => {
-                        setValue({
-                            ...value,
-                            data: event.target.value,
-                        });
-                    }}
-                    onBlur={(event) => {
-                        onInputBlur(value.data, setValue);
-                    }}
-                    errorMessage={value.errorMessage}
+                    value={props.cardholderName}
+                    // onChange={event => {
+                    //     setValue({
+                    //         ...value,
+                    //         data: event.target.value,
+                    //     });
+                    // }}
+                    // onBlur={(event) => {
+                    //     onInputBlur(value.data, setValue);
+                    // }}
+                    // errorMessage={value.errorMessage}
                 />
 
                 <Paragraph>
@@ -211,6 +223,8 @@ export const PureBindBankAccountPage = (props: PureBindBankAccountPageProps) => 
 
 const BindBankAccountPage = () => {
     const [postBankBindSave] = usePostBankBindSaveMutation();
-    return <PureBindBankAccountPage postBankBindSave={postBankBindSave}/>
+    const pageQueryString = useLocationOrderQueryString();
+    const cardholderName = pageQueryString.cardholderName;
+    return <PureBindBankAccountPage postBankBindSave={postBankBindSave} cardholderName={cardholderName}/>
 }
 export default BindBankAccountPage;
