@@ -279,7 +279,7 @@ const Input: InputInterface = ({
                     // validStatus={typeof valid !== "undefined" ? valid : "ReadyForValid"}
                     // Modal - Event Handler
                     onClick={(event: any) => {
-                        console.log("onClick")
+                        // console.log("onClick")
                         onClick && onClick(event);
                         // statusRef.current = "Focus";
                         // forceUpdate();
@@ -294,7 +294,7 @@ const Input: InputInterface = ({
                     //     }
                     // }}
                     onMouseOut={() => {
-                        console.log("onMouseOut");
+                        // console.log("onMouseOut");
                         if (statusRef.current !== "Focus" && statusRef.current !== "KeyDown") {
                             statusRef.current = "Idle";
                             forceUpdate();
@@ -305,7 +305,7 @@ const Input: InputInterface = ({
                     //     props.onSelect && props.onSelect(event);
                     // }}
                     onFocus={(event: any) => {
-                        console.log("onFocus");
+                        // console.log("onFocus");
                         // FIXME: 這段起初的意義
                         // if (statusRef.current === "Hover") {
                         //     // NOTE: 註解這段解決有紅色小點點問題
@@ -324,7 +324,7 @@ const Input: InputInterface = ({
                         onFocus && onFocus(event);
                     }}
                     onBlur={(event: any) => {
-                        console.log("onBlur");
+                        // console.log("onBlur");
                         // if (statusRef.current === "Focus" || statusRef.current === "KeyDown") {
                         statusRef.current = "Idle";
                         forceUpdate();
@@ -339,7 +339,7 @@ const Input: InputInterface = ({
                         onBlur && onBlur(event);
                     }}
                     onChange={(event: any) => {
-                        console.log("onChange");
+                        // console.log("onChange");
                         // console.log("event", event.target.value);
                         // if(customType === "number") {
                         //     const reg: RegExp = new RegExp(/^\d{0,19}[.]?\d{0,2}$/);
