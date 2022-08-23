@@ -24,27 +24,27 @@ const Paragraph = styled.p`
 const BindBankAccountPage = () => {
     const [value, setValue] = useState<InputValue<string>>({
         data: "",
-        isValidation: true,
+        isValidation: false,
         errorMessage: "",
     });
     const [value2, setValue2] = useState<InputValue<string>>({
         data: "",
-        isValidation: true,
+        isValidation: false,
         errorMessage: "",
     });
     const [value3, setValue3] = useState<InputValue<string>>({
         data: "",
-        isValidation: true,
+        isValidation: false,
         errorMessage: "",
     });
     const [value4, setValue4] = useState<InputValue<string>>({
         data: "",
-        isValidation: true,
+        isValidation: false,
         errorMessage: "",
     });
     const [value5, setValue5] = useState<InputValue<string>>({
         data: "",
-        isValidation: true,
+        isValidation: false,
         errorMessage: "",
     });
 
@@ -52,7 +52,7 @@ const BindBankAccountPage = () => {
     const confirm = useCallback(() => {
         if(!(value.isValidation && value2.isValidation && value3.isValidation && value4.isValidation && value5.isValidation)) return;
         alert("confirm")
-    }, []);
+    }, [value.isValidation, value2.isValidation, value3.isValidation, value4.isValidation, value5.isValidation]);
 
     // NOTICE: reuse me
     const onInputBlur = useCallback((data: boolean | string | number, setValue: React.Dispatch<InputValue<any>>) => {
@@ -63,7 +63,7 @@ const BindBankAccountPage = () => {
         } else if(typeof data === "number" && String(data).length > 0) {
             setValue({ data, isValidation: true, errorMessage: ""});
         } else {
-            setValue({ data, isValidation: true, errorMessage: "This field cannot be left blank"});
+            setValue({ data, isValidation: false, errorMessage: "This field cannot be left blank"});
         }
     }, [value]);
 
