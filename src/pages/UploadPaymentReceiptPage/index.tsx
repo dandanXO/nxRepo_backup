@@ -9,6 +9,8 @@ import {PostRepayReceiptResponse} from "../../api/postRepayReceipt";
 import {useNavigate} from "react-router-dom";
 import UploadingFileModal from "./modal/UploadingFileModal";
 import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
+import {InputValue} from "../../core/types/InputValue";
+
 const Section = styled.div`
       margin-bottom: 100px;
 `;
@@ -70,9 +72,14 @@ interface PureUploadPaymentReceiptPageProps {
 export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPageProps) => {
 
     // NOTE: input 1/2
-    const [utr, setURT] = useState<string>("");
-    const [isUtrValidated, setIsUtrValidated] = useState<boolean>(false);
-    const [utrErrorMessage, setUtrErrorMessage] = useState<string>("");
+    const [utr, setURT] = useState<InputValue<string>>({
+        data: "",
+        isValidation: false,
+        errorMessage: "",
+    });
+    // const [isUtrValidated, setIsUtrValidated] = useState<boolean>(false);
+    // const [utrErrorMessage, setUtrErrorMessage] = useState<string>("");
+
 
     // NOTE: input 2/2 (optional)
     const [formFile, setFormFile] = useState<string>();
@@ -91,15 +98,15 @@ export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPage
     const [imageSrc, setImageSrc] = useState<string>();
 
     const confirm = useCallback(() => {
-        if (!isUtrValidated) return;
+        if (!utr.isValidation) return;
         setIsUploading(true);
         props.postRepayReceiptRequest({
             orderNo: props.orderNo,
-            receipt: utr,
+            receipt: utr.data,
             formFile: formFile,
             setIsUploading,
         });
-    }, [isUtrValidated, utr, formFile]);
+    }, [utr.isValidation, utr, formFile]);
 
     const [isUploading, setIsUploading] = useState(false);
 
@@ -113,23 +120,35 @@ export const PureUploadPaymentReceiptPage = (props: PureUploadPaymentReceiptPage
                     labelType="right"
                     label="UTR"
                     onChange={(event) => {
-                        setURT(event.target.value);
+                        setURT({
+                            ...utr,
+                            data: event.target.value,
+                        });
                     }}
                     onBlur={() => {
                         if(String(utr).length > 0) {
                             if(String(utr).length > 12) {
-                                setIsUtrValidated(false);
-                                setUtrErrorMessage("digits only, 12 numbers max")
+                                setURT({
+                                    ...utr,
+                                    isValidation: false,
+                                    errorMessage: "digits only, 12 numbers max",
+                                })
                             } else {
-                                setIsUtrValidated(true);
-                                setUtrErrorMessage("")
+                                setURT({
+                                    ...utr,
+                                    isValidation: true,
+                                    errorMessage: "",
+                                })
                             }
                         } else {
-                            setIsUtrValidated(false);
-                            setUtrErrorMessage("This field cannot be left blank")
+                            setURT({
+                                ...utr,
+                                isValidation: false,
+                                errorMessage: "This field cannot be left blank",
+                            })
                         }
                     }}
-                    errorMessage={utrErrorMessage}
+                    errorMessage={utr.errorMessage}
                 />
             </Section>
 

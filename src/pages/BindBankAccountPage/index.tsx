@@ -75,6 +75,7 @@ const BindBankAccountPage = () => {
                     value={value.data}
                     onChange={event => {
                         setValue({
+                            ...value,
                             data: event.target.value,
                         });
                     }}
@@ -94,6 +95,7 @@ const BindBankAccountPage = () => {
                     value={value2.data}
                     onChange={event => {
                         setValue2({
+                            ...value2,
                             data: event.target.value
                         });
                     }}
@@ -108,6 +110,7 @@ const BindBankAccountPage = () => {
                     value={value3.data}
                     onChange={event => {
                         setValue3({
+                            ...value3,
                             data: event.target.value
                         });
                     }}
@@ -122,6 +125,7 @@ const BindBankAccountPage = () => {
                     value={value4.data}
                     onChange={event => {
                         setValue4({
+                            ...value4,
                             data: event.target.value
                         });
                     }}
@@ -136,6 +140,7 @@ const BindBankAccountPage = () => {
                     value={value5.data}
                     onChange={event => {
                         setValue5({
+                            ...value,
                             data: event.target.value
                         });
                     }}
