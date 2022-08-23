@@ -95,7 +95,7 @@ export const PureBindBankAccountPage = (props: PureBindBankAccountPageProps) => 
                 enableClose: false,
                 enableIcon: false,
                 onConfirm: () => {
-                    location.href = "innerh5";
+                    location.href = "http://innerh5";
                 }
             });
         }).catch((error: any) => {
