@@ -7,6 +7,8 @@ import axiosBaseQuery from "./axiosBaseQuery";
 import * as url from "url";
 import {GetRepayReceiptRequestQuerystring, GetRepayReceiptResponse} from "./getRepayReceipt";
 import {PostRepayReceiptRequestBody, PostRepayReceiptResponse} from "./postRepayReceipt";
+import { GetRepayTypesResponse } from "./GetRepayTypes";
+import { PostRepayCreateRequestBody, PostRepayCreateResponse } from "./postRepayCreate";
 export {GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg, GetAttractionsALLResponseData }
 
 const baseUrl = "/api/v2"
@@ -64,13 +66,19 @@ export const API = createApi({
                 // }
             }),
         }),
-
-        // postRepayCreate: builder.mutation<null, null>({
-        //     query: (query: PostRepayReceiptRequestBody) => ({
-        //         url: `/repay/create`,
-        //         method: 'post',
-        //     }),
-        // }),
+        getRepayTypes:builder.query<GetRepayTypesResponse,"">({
+            query:()=>({
+                url: `/repay/types`,
+                method:'get'
+            })
+        }),
+        postRepayCreate: builder.mutation<PostRepayCreateResponse, PostRepayCreateRequestBody>({
+            query: (query: PostRepayCreateRequestBody) => ({
+                url: `/repay/create`,
+                method: 'post',
+                data: query
+            }),
+        }),
     })
 });
 export const {
@@ -78,4 +86,6 @@ export const {
     useGetLoanDetailQuery,
     useGetRepayReceiptQuery,
     usePostRepayReceiptMutation,
+    useGetRepayTypesQuery,
+    usePostRepayCreateMutation
 } = API
