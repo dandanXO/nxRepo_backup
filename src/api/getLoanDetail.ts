@@ -39,6 +39,8 @@ export interface GetLoanDetailResponse {
     orderNo?: string;
     /** @description 原始到期日期(status=EXTEND才會有) */
     originalDueDate?: string;
+    /** @description 是否逾期 */
+    overdue?: boolean;
     /** @description 已還金額 */
     paidAmount?: number;
     /** @展期来源订单号 已還金額 */
@@ -70,18 +72,23 @@ export interface GetLoanDetailResponse {
 /** chargeFeeDetail */
 export interface GetLoanDetailChargeFeeDetail {
     items: GetLoanDetailChargeFeeDetailItems[];
+    /** @description 标题 */
     title: string;
+    /** @description 列舉結算金額 */
+    totalSum: number;
 }
 
 export interface GetLoanDetailChargeFeeDetailItems {
-    fieldType: string;
-    itemName: "CURRENCY" | "TEXT";
+    fieldType: "CURRENCY" | "TEXT";
+    itemName: string;
     key:
         | "DAILY_FEE"
+        | "GST"
         | "LOAN_AMOUNT"
+        | "LOAN_INTEREST"
         | "PENALTY_INTEREST"
         | "REDUCTION_AMOUNT"
-        | "SERVICE_CHARGE";
+        | "SERVICE_FEE";
     value: string;
 }
 
@@ -165,34 +172,176 @@ export interface GetLoanDetailRecommendProducts {
 
 export const mockGetLoanDetailResponse: GetLoanDetailResponse = {
     productName: "ZZ LOAN",
-    orderNo: "no-3632791101642108",
-    loanAmount: 3000.0,
-    paidAmount: 1380.0,
-    repayRecords: [
-        {
-            repayDate: "2022-06-25",
-            repayAmount: 1380.0,
-            repayType: "partial",
-        },
-    ],
-    balance: 1620.0,
-    extensionFee: null,
+    orderNo: "no-3632791101642108-9",
+    loanAmount: 3000,
+    paidAmount: 0,
+    repayRecords: [],
+    totalDueAmount: 6300,
+    balance: 0,
+    extensionFee: 1350,
     status: "EXTEND",
-    serviceCharge: 1380.0,
-    dailyFee: 0,
+    serviceCharge: 300,
+    dailyFee: 1620,
     reductionAmount: 0,
     penaltyInterest: 0,
     applyDate: "2022-06-20",
-    dueDate: "2022-06-26",
+    dueDate: "2022-08-02",
+    overdue: true,
     originalDueDate: "2022-06-26",
-    extendDate: "2022-06-20",
+    extendDate: "2022-07-28",
     bankCardNo: "60159710853",
     customerServiceTime: "08:00AM ~ 12:00PM",
     customerServiceEmail: "csemail@test.copm",
     iconUrl:
         "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/ad_logo/ad-logo-822352090585600.png",
-
     extendable: false,
     extended: true,
-    parentOrderNo: null,
+    parentOrderNo: "no-3632791101642108",
+    chargeFeeDetail: {
+        title: "detail",
+        totalSum: 4920,
+        items: [
+            {
+                itemName: "Loan Amount",
+                key: "LOAN_AMOUNT",
+                value: "3000",
+                fieldType: "CURRENCY",
+            },
+            {
+                itemName: "Daily Fee",
+                key: "DAILY_FEE",
+                value: "1620",
+                fieldType: "CURRENCY",
+            },
+            {
+                itemName: "Service Fee",
+                key: "SERVICE_FEE",
+                value: "261",
+                fieldType: "CURRENCY",
+            },
+            {
+                itemName: "GST",
+                key: "GST",
+                value: "18",
+                fieldType: "CURRENCY",
+            },
+            {
+                itemName: "Loan Interest",
+                key: "LOAN_INTEREST",
+                value: "21",
+                fieldType: "CURRENCY",
+            },
+            {
+                itemName: "Reduction Amount",
+                key: "REDUCTION_AMOUNT",
+                value: "0",
+                fieldType: "CURRENCY",
+            },
+            {
+                itemName: "Penalty Interest",
+                key: "PENALTY_INTEREST",
+                value: "0",
+                fieldType: "CURRENCY",
+            },
+        ],
+    },
+    repayConfirmDetail: null,
+    recommendProducts: [
+        {
+            productId: 3,
+            logoUrl:
+                "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+            productName: "AA LOAN",
+            loanQuota: "160-9000",
+            term: "10Days",
+            interestRate: "10~40%",
+            approvedRate: "70 ~ 95%",
+            approvedTime: "< 3 Min",
+            tags: ["best", " hot", " lower rate"],
+            csTime: "08:00AM ~ 7:00PM",
+            csEmail: "csemail@test.copm",
+            privacyUrl: "https://site.india-api-dev.com/api/v2/html/privacy",
+            termUrl: "https://site.india-api-dev.com/api/v2/html/agreement",
+            disclosureUrl:
+                "https://site.india-api-dev.com/api/v2/html/disclosure",
+            agreementUrl:
+                "https://site.india-api-dev.com/api/v2/html/agreement",
+            top: true,
+            sort: 0,
+            backgroundUrl:
+                "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/bg1.jpg",
+        },
+        {
+            productId: 4,
+            logoUrl:
+                "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+            productName: "BB LOAN",
+            loanQuota: "150-4500",
+            term: "9Days",
+            interestRate: "20~30%",
+            approvedRate: "40~80%",
+            approvedTime: "< 4 Min",
+            tags: ["blah blah", " richpapa", " best of best"],
+            csTime: "08:00AM ~ 7:00PM",
+            csEmail: "csemail@test.copm",
+            privacyUrl: "https://site.india-api-dev.com/api/v2/html/privacy",
+            termUrl: "https://site.india-api-dev.com/api/v2/html/agreement",
+            disclosureUrl:
+                "https://site.india-api-dev.com/api/v2/html/disclosure",
+            agreementUrl:
+                "https://site.india-api-dev.com/api/v2/html/agreement",
+            top: true,
+            sort: 1,
+            backgroundUrl:
+                "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/bg1.jpg",
+        },
+        {
+            productId: 5,
+            logoUrl:
+                "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285116.png",
+            productName: "CC LOAN",
+            loanQuota: "200-3000",
+            term: "81Days",
+            interestRate: "40~50%",
+            approvedRate: "50-70%",
+            approvedTime: "< 6 Min",
+            tags: ["good", " greate", " fatest"],
+            csTime: "08:00AM ~ 7:00PM",
+            csEmail: "csemail@test.copm",
+            privacyUrl: "https://site.india-api-dev.com/api/v2/html/privacy",
+            termUrl: "https://site.india-api-dev.com/api/v2/html/agreement",
+            disclosureUrl:
+                "https://site.india-api-dev.com/api/v2/html/disclosure",
+            agreementUrl:
+                "https://site.india-api-dev.com/api/v2/html/agreement",
+            top: false,
+            sort: 2,
+            backgroundUrl:
+                "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/bg1.jpg",
+        },
+        {
+            productId: 6,
+            logoUrl:
+                "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+            productName: "EE LOAN",
+            loanQuota: "3000 up",
+            term: "2Weeks",
+            interestRate: "30-45%",
+            approvedRate: "15-50%",
+            approvedTime: "< 2 Min",
+            tags: ["haha", " jojo", " coco"],
+            csTime: "08:00AM ~ 7:00PM",
+            csEmail: "csemail@test.copm",
+            privacyUrl: "https://site.india-api-dev.com/api/v2/html/privacy",
+            termUrl: "https://site.india-api-dev.com/api/v2/html/agreement",
+            disclosureUrl:
+                "https://site.india-api-dev.com/api/v2/html/disclosure",
+            agreementUrl:
+                "https://site.india-api-dev.com/api/v2/html/agreement",
+            top: false,
+            sort: 3,
+            backgroundUrl:
+                "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/bg1.jpg",
+        },
+    ],
 };
