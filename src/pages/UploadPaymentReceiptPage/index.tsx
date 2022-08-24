@@ -114,7 +114,7 @@ export const PureUploadPaymentReceiptPage = (
             <Section>
                 <Input
                     className="mb"
-                    value={utr}
+                    value={utr.data}
                     labelType="right"
                     label="UTR"
                     onChange={(event) => {
