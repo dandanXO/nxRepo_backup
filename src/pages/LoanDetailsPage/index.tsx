@@ -29,13 +29,17 @@ export const PureLoanDetailsPage = (props: PureLoanDetailsPageProps) => {
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     const [showAmountPaidModal, setShowAmountPaidModal] = useState(false);
     const [showRepaymentModal, setShowRepaymentModal] = useState(false);
-    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] = useState(false);
-    const [repayBalance, setRepayBalance] = useState(props?.currentData?.balance);
-    const [recommendProducts, setRecommendProducts] = useState(props?.currentData?.recommendProducts);
+    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] =
+        useState(false);
+    const [repayBalance, setRepayBalance] = useState(
+        props?.currentData?.balance
+    );
+    const [recommendProducts, setRecommendProducts] = useState(
+        props?.currentData?.recommendProducts
+    );
 
     useEffect(() => {
         setRepayBalance(props?.currentData?.balance);
-        
     }, [props.currentData]);
     return (
         <Page>

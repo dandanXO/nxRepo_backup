@@ -57,14 +57,14 @@ type LoanDetailProps = Pick<
     | "applyDate"
     | "dueDate"
     | "bankCardNo"
->  &{
+> & {
     setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const renderDetailContent = (props: GetLoanDetailChargeFeeDetail) => {
     const {
-        items=[]
+        items = [],
         // chargeFeeDetail={items:[]},
         // loanAmount,
         // serviceCharge,
@@ -74,8 +74,8 @@ const renderDetailContent = (props: GetLoanDetailChargeFeeDetail) => {
         // applyDate,
         // dueDate,
         // bankCardNo,
-    } = props||{};
-    console.log('props',items)
+    } = props || {};
+    console.log("props", items);
     return (
         <div className={"detailsContent"}>
             {/* <ListItem title={"Loan Amount"} text={loanAmount} />
@@ -94,8 +94,8 @@ const renderDetailContent = (props: GetLoanDetailChargeFeeDetail) => {
 };
 
 const LoanDetail = (props: LoanDetailProps) => {
-   
-    const {chargeFeeDetail, setShowExtendModal, setShowRepaymentModal } = props;
+    const { chargeFeeDetail, setShowExtendModal, setShowRepaymentModal } =
+        props;
     return (
         <LoanDetailStyled>
             <Card isHot={false}>
