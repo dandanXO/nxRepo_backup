@@ -66,12 +66,15 @@ const renderDetailContent = (props: GetLoanDetailChargeFeeDetail) => {
     const { items = [] } = props || {};
     return (
         <div className={"detailsContent"}>
-            {
-                items.map(item => {
-                    const fieldType = item.fieldType === "CURRENCY" ? " ₹ " : "";
-                    return <ListItem title={item.itemName} text={`${fieldType}${item.value}`} />
-                })
-            }
+            {items.map((item) => {
+                const fieldType = item.fieldType === "CURRENCY" ? " ₹ " : "";
+                return (
+                    <ListItem
+                        title={item.itemName}
+                        text={`${fieldType}${item.value}`}
+                    />
+                );
+            })}
         </div>
     );
 };
