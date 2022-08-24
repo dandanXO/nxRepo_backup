@@ -265,24 +265,28 @@ const Input: InputInterface = ({
             <InputAndMessageContainer className={className} style={style}>
                 <InputContainer
                     onFocus={() => {
+                        if(disabled) return
                         setEdit(true);
                     }}
                     onBlur={() => {
+                        if(disabled) return
                         setEdit(false);
                     }}
                     ref={selectRef}
                     width={width}
                     upperLabelType={upperLabelType}
                     isFocus={isEdit}
+                    disabled={disabled}
                 >
                     {LabelComponentElement}
                     <CustomInput
                         // NOTICE: labelID
+                        disabled={disabled}
                         id={labelID}
                         // isFocus={value.length > 0 && !isEdit}
                         ref={targetRef}
                         // Modal - Display
-                        disabled={disabled}
+                        // disabled={disabled}
                         // style={prefix(props.style)}
                         // Modal - Type
                         type={type}
@@ -300,6 +304,7 @@ const Input: InputInterface = ({
                         // validStatus={typeof valid !== "undefined" ? valid : "ReadyForValid"}
                         // Modal - Event Handler
                         onClick={(event: any) => {
+                            if(disabled) return
                             // console.log("onClick")
                             onClick && onClick(event);
                             // statusRef.current = "Focus";
@@ -316,6 +321,7 @@ const Input: InputInterface = ({
                         // }}
                         onMouseOut={() => {
                             // console.log("onMouseOut");
+                            if(disabled) return
                             if (
                                 statusRef.current !== "Focus" &&
                                 statusRef.current !== "KeyDown"
@@ -329,6 +335,7 @@ const Input: InputInterface = ({
                         //     props.onSelect && props.onSelect(event);
                         // }}
                         onFocus={(event: any) => {
+                            if(disabled) return
                             // console.log("onFocus");
                             // FIXME: 這段起初的意義
                             // if (statusRef.current === "Hover") {
@@ -348,6 +355,7 @@ const Input: InputInterface = ({
                             onFocus && onFocus(event);
                         }}
                         onBlur={(event: any) => {
+                            if(disabled) return
                             // console.log("onBlur");
                             // if (statusRef.current === "Focus" || statusRef.current === "KeyDown") {
                             statusRef.current = "Idle";
@@ -363,6 +371,7 @@ const Input: InputInterface = ({
                             onBlur && onBlur(event);
                         }}
                         onChange={(event: any) => {
+                            if(disabled) return
                             // console.log("onChange");
                             // console.log("event", event.target.value);
                             // if(customType === "number") {
@@ -401,6 +410,7 @@ const Input: InputInterface = ({
                         // }}
                         // [Keyboard Events]
                         onKeyDown={(event: any) => {
+                            if(disabled) return
                             // setRunValidAction(false);
                             statusRef.current = "KeyDown";
                             forceUpdate();

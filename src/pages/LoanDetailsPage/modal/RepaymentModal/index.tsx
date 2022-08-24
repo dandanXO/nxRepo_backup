@@ -111,8 +111,8 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     label="Amount"
                                     labelType="right"
                                     value={balanceValue}
+                                    disabled={radioValue === "balance"}
                                     onChange={(event: any) => {
-                                        if (radioValue === "balance") return;
                                         const value =
                                             event.target.value.replaceAll(
                                                 "₹",

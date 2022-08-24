@@ -4,6 +4,7 @@ interface InputContainerProps {
     width?: number;
     upperLabelType: boolean;
     isFocus?: boolean;
+    disabled?: boolean;
 }
 
 const upperLabelType = (upperLabelType: boolean) => {
@@ -11,6 +12,7 @@ const upperLabelType = (upperLabelType: boolean) => {
         return `
             flex-direction: column;
             align-items: flex-start;
+            justify-content: center;
         `;
     } else {
         return `        
@@ -45,4 +47,5 @@ export const InputContainer = styled.label<InputContainerProps>`
     //
     ${(props) => upperLabelType(props.upperLabelType)}
     ${(props) => isFocus(props.isFocus ? props.isFocus : false)};
+    // ${(props) => props.disabled ? "background: gray" : ""};
 `;

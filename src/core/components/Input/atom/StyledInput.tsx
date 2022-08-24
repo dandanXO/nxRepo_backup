@@ -113,6 +113,7 @@ export interface StyledInputProps {
     isFocus?: boolean;
 }
 
+// Input
 export const StyledTopInput = styled.input<StyledInputProps>`
     /* self */
     box-sizing: border-box;
@@ -176,6 +177,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
 
     //NOTICE: Disabled 統一在這控制
     :disabled {
+      /*
         background-color: ${(props) =>
             props.isThemeControlledByComponent
                 ? props.themeType === "early"
@@ -184,7 +186,8 @@ export const StyledTopInput = styled.input<StyledInputProps>`
                 : props.theme.mode === "early"
                 ? "rgba(191, 191, 191, 0.34)"
                 : "rgba(192, 192, 192, 0.35)"};
-
+      */
+      
         /*
         border-color: ${(props) =>
             props.isThemeControlledByComponent
@@ -258,6 +261,7 @@ function isFocus(isFocus: boolean = false) {
         return ``;
     }
 }
+// input
 export const StyledInput2 = styled(StyledTopInput)<StyledInputProps>`
     //padding: 15px;
     font-weight: 400;

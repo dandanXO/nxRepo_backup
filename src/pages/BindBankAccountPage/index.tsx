@@ -165,6 +165,7 @@ export const PureBindBankAccountPage = (
                 <Input
                     label="Cardholder Name"
                     value={props.cardholderName}
+                    disabled
                     // onChange={event => {
                     //     setValue({
                     //         ...value,
