@@ -4,16 +4,17 @@ import axios from "axios";
 import queryString from "query-string";
 import Modal from "../../core/components/Modal";
 
-const alertModal = (message: string) => Modal.alert({
-    show: true,
-    mask: true,
-    title: "App Error",
-    content: message,
-    confirmText: "Confirm",
-    maskClosable: true,
-    enableClose: false,
-    enableIcon: false,
-});
+const alertModal = (message: string) =>
+    Modal.alert({
+        show: true,
+        mask: true,
+        title: "App Error",
+        content: message,
+        confirmText: "Confirm",
+        maskClosable: true,
+        enableClose: false,
+        enableIcon: false,
+    });
 
 let percent = 0;
 const axiosBaseQuery =
@@ -73,6 +74,7 @@ const axiosBaseQuery =
                     let num =
                         (progressEvent.loaded / progressEvent.total) * 100; // 計算進度
                     const loadingText = "進度：" + num + "%";
+                    console.log(loadingText);
                 },
             });
             return { data: result.data, percent };
@@ -85,7 +87,7 @@ const axiosBaseQuery =
                     msg?: string;
                 };
             };
-            const errorMessage = error?.data?.msg || error.message
+            const errorMessage = error?.data?.msg || error.message;
             console.log(err);
             console.log(error);
             alertModal(errorMessage);
