@@ -41,23 +41,22 @@ const ModalContentStyled = styled.div`
 // }
 export interface PureExtendModalProps {
     repayConfirmDetail?: GetLoanDetailRepayConfirmDetail;
-    setShowExtendModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
     handlePostRepayCreate?: any;
 }
 export const PureExtendModal = (props: PureExtendModalProps) => {
-    const { repayConfirmDetail, setShowExtendModal, handlePostRepayCreate } =
+    const { repayConfirmDetail = {
+        extendDate: "",
+        extensionFee: "",
+        extensionPayAmount: "",
+        paidAmount: "",
+        penaltyInterest: "",
+        reductionAmount: "",
+    } , setShowExtendModal, handlePostRepayCreate } =
         props;
-    const {
-        extendDate,
-        extensionFee,
-        extensionPayAmount,
-        paidAmount,
-        penaltyInterest,
-        reductionAmount,
-    } = repayConfirmDetail;
 
     const handleConfirm = () => {
-        handlePostRepayCreate(true, false, extensionPayAmount);
+        handlePostRepayCreate(true, false, repayConfirmDetail.extensionPayAmount);
         setShowExtendModal(false);
     };
     return (
@@ -72,35 +71,35 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             <Divider />
                             <ListItem
                                 title={"Extension Fee"}
-                                text={`₹ ${extensionFee ? extensionFee : ""}`}
+                                text={`₹ ${repayConfirmDetail.extensionFee}`}
                             />
                             <ListItem
                                 title={"Amount Paid"}
-                                text={`- ₹ ${paidAmount ? paidAmount : ""}`}
+                                text={`- ₹ ${repayConfirmDetail.paidAmount}`}
                             />
                             <ListItem
                                 title={"Penalty Interest"}
                                 text={`₹ ${
-                                    penaltyInterest ? penaltyInterest : ""
+                                    repayConfirmDetail.penaltyInterest
                                 }`}
                             />
                             <ListItem
                                 title={"Reduction Amount"}
                                 text={`₹ ${
-                                    reductionAmount ? reductionAmount : ""
+                                    repayConfirmDetail.reductionAmount
                                 }`}
                             />
                             <ListItem
                                 title={"Total Amount"}
                                 text={`₹ ${
-                                    extensionPayAmount ? extensionPayAmount : ""
+                                    repayConfirmDetail.extensionPayAmount
                                 }`}
                             />
                             <Divider />
                             <div className={"hintText"}>
                                 <ListItem
                                     title={"Extension due date"}
-                                    text={extendDate ? extendDate : ""}
+                                    text={String(repayConfirmDetail.extendDate)}
                                 />
                             </div>
                             <div className={"sectionButtons"}>
@@ -136,9 +135,9 @@ type ExtendModalProps = Pick<GetLoanDetailResponse, "repayConfirmDetail"> & {
 const ExtendModal = (props: ExtendModalProps) => {
     return (
         <PureExtendModal
-            // currentProps={...props}
-            {...props}
+            repayConfirmDetail={props?.repayConfirmDetail}
             handlePostRepayCreate={props.handlePostRepayCreate}
+            setShowExtendModal={props.setShowExtendModal}
         />
     );
 };
