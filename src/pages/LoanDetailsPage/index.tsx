@@ -20,7 +20,6 @@ import {
 
 interface PureLoanDetailsPageProps {
     currentData: any;
-    // repayTypes: any;
     navigateToUploadPaymentReceiptPage: any;
     handlePostRepayCreate: any;
 }
@@ -86,7 +85,7 @@ export const PureLoanDetailsPage = (props: PureLoanDetailsPageProps) => {
                 setShowExtendModal={setShowExtendModal}
                 setShowRepaymentModal={setShowRepaymentModal}
             />
-            <Advertisement />
+            <Advertisement recommendProducts={props.currentData.recommendProducts}/>
         </Page>
     );
 };

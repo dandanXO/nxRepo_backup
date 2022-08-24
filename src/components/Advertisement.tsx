@@ -1,20 +1,10 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import {
-    mockGetLoanDetailResponse,
-    GetLoanDetailResponse,
-} from "../api/getLoanDetail";
-
-import Tag from "../core/components/Tag";
+import { GetLoanDetailRecommendProducts } from "../api/getLoanDetail";
 import Card from "../core/components/Card";
 import CardContent from "../core/components/CardContent";
 import ListItem from "../core/components/ListItem";
-import Button from "../core/components/Button";
-import LoanBrand from "../core/components/LoanBrand";
-import Accordion from "../core/components/Accordion";
-import Divider from "../core/components/Divider";
-import { Logo, Banner } from "../core/components/images";
-// import {Banner} from "../../core/components/images/banner.jpg";
+
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;
@@ -43,63 +33,23 @@ const BannerWithCardStyled = styled.div`
     }
 `;
 
-type LoanDetailProps = Pick<
-    GetLoanDetailResponse,
-    | "loanAmount"
-    | "serviceCharge"
-    | "dailyFee"
-    | "reductionAmount"
-    | "penaltyInterest"
-    | "applyDate"
-    | "dueDate"
-    | "bankCardNo"
->;
-type AdCardProps = {
-    productName: string;
-    balance: string;
-    interest: string;
-    terms: string;
-    icon: string;
-    banner: string;
-};
-const data = [
-    {
-        productName: "ACTING CASH",
-        balance: "₹ 10,000",
-        interest: "1.8%",
-        terms: "91 days",
-        icon: Logo,
-        banner: Banner,
-    },
-    {
-        productName: "POLAR LENDS",
-        balance: "₹ 10,000",
-        interest: "1.8%",
-        terms: "91 days",
-        icon: Logo,
-        banner: Banner,
-    },
-];
 
-const BannerWithCard = (props: AdCardProps) => {
-    const { productName, balance, interest, terms, icon, banner } = props;
+const BannerWithCard = (props: { adProps: GetLoanDetailRecommendProducts }) => {
+    const { backgroundUrl, logoUrl, productName, loanQuota, interestRate, term } = props.adProps;
 
     const [isCollapse, setIsCollapse] = useState(true);
     return (
         <BannerWithCardStyled onClick={() => setIsCollapse(!isCollapse)}>
-            <img
-                className={` ${isCollapse ? "banner" : "bannerHide"}`}
-                src={banner}
-            />
+            <img className={` ${isCollapse ? "banner" : "bannerHide"}`} src={backgroundUrl}/>
             <Card isHot={true}>
                 <CardContent
-                    icon={icon}
+                    icon={logoUrl}
                     productName={productName}
-                    balance={balance}
+                    balance={loanQuota}
                     contentItems={
                         <>
-                            <ListItem title={"interest"} text={interest} />
-                            <ListItem title={"terms"} text={terms} />
+                            <ListItem title={"interest"} text={interestRate} />
+                            <ListItem title={"terms"} text={term} />
                         </>
                     }
                 />
@@ -108,12 +58,13 @@ const BannerWithCard = (props: AdCardProps) => {
     );
 };
 
-const Advertisement = () => {
+const Advertisement = (props: { recommendProducts: [] }) => {
+    const { recommendProducts = [] } = props;
     return (
         <AdvertisementStyled>
             <div className={"infoTitle"}>More Recommend Loan</div>
-            {data.map((ad) => (
-                <BannerWithCard {...ad} />
+            {recommendProducts.map((ad) => (
+                <BannerWithCard adProps={ad} />
             ))}
         </AdvertisementStyled>
     );
