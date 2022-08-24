@@ -2,7 +2,18 @@ import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosRequestConfig, AxiosError } from "axios";
 import axios from "axios";
 import queryString from "query-string";
-import Modal from "../core/components/Modal";
+import Modal from "../../core/components/Modal";
+
+const alertModal = (message: string) => Modal.alert({
+    show: true,
+    mask: true,
+    title: "App Error",
+    content: message,
+    confirmText: "Confirm",
+    maskClosable: true,
+    enableClose: false,
+    enableIcon: false,
+});
 
 let percent = 0;
 const axiosBaseQuery =
@@ -70,18 +81,16 @@ const axiosBaseQuery =
             const error = JSON.parse(JSON.stringify(err.response?.data)) as {
                 code: number;
                 message: string;
+                data?: {
+                    msg?: string;
+                };
             };
-            console.log(err.response?.data);
-            Modal.alert({
-                show: true,
-                mask: true,
-                title: "App Error",
-                content: error.message,
-                confirmText: "Confirm",
-                maskClosable: true,
-                enableClose: false,
-                enableIcon: false,
-            });
+            const errorMessage = error?.data?.msg || error.message
+            console.log(err);
+            console.log(error);
+            alertModal(errorMessage);
+            // alertModal(err.message);
+
             return {
                 error: {
                     status: err.response?.status,

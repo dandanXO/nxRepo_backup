@@ -8,7 +8,7 @@ import {
     GetLoanDetailRequestQuerystring,
     GetLoanDetailResponse,
 } from "./getLoanDetail";
-import axiosBaseQuery from "./axiosBaseQuery";
+import axiosBaseQuery from "./base/axiosBaseQuery";
 import {
     GetRepayReceiptRequestQuerystring,
     GetRepayReceiptResponse,
