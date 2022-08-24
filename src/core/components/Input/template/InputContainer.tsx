@@ -13,12 +13,11 @@ const upperLabelType = (upperLabelType: boolean) => {
             align-items: flex-start;
         `;
     } else {
-        console.log("!!!");
         return `        
             // flex-direction: row;
             align-items: center;     
             // justify-content: space-between;       
-            justify-content: space-between;                  
+            justify-content: space-between;                                
         `;
     }
 };
