@@ -46,14 +46,14 @@ export interface PureExtendModalProps {
 }
 export const PureExtendModal = (props: PureExtendModalProps) => {
     const {
-        repayConfirmDetail = {
-            extendDate: "",
-            extensionFee: "",
-            extensionPayAmount: "",
-            paidAmount: "",
-            penaltyInterest: "",
-            reductionAmount: "",
-        },
+        // repayConfirmDetail = {
+        //     extendDate: "",
+        //     extensionFee: "",
+        //     extensionPayAmount: "",
+        //     paidAmount: "",
+        //     penaltyInterest: "",
+        //     reductionAmount: "",
+        // },
         setShowExtendModal,
         handlePostRepayCreate,
     } = props;
@@ -62,7 +62,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
         handlePostRepayCreate(
             true,
             false,
-            repayConfirmDetail.extensionPayAmount
+            props.repayConfirmDetail && props.repayConfirmDetail.extensionPayAmount ? props.repayConfirmDetail.extensionPayAmount : ""
         );
         setShowExtendModal(false);
     };
@@ -78,29 +78,34 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             <Divider />
                             <ListItem
                                 title={"Extension Fee"}
-                                text={`₹ ${repayConfirmDetail.extensionFee}`}
+                                text={`₹ ${props.repayConfirmDetail && props.repayConfirmDetail.extensionFee ? props.repayConfirmDetail.extensionFee : ""}`}
                             />
                             <ListItem
                                 title={"Amount Paid"}
-                                text={`- ₹ ${repayConfirmDetail.paidAmount}`}
+                                // text={`- ₹ ${repayConfirmDetail.paidAmount}`}
+                                text={`₹ ${props.repayConfirmDetail && props.repayConfirmDetail.paidAmount ? props.repayConfirmDetail.paidAmount : ""}`}
                             />
                             <ListItem
                                 title={"Penalty Interest"}
-                                text={`₹ ${repayConfirmDetail.penaltyInterest}`}
+                                // text={`₹ ${repayConfirmDetail.penaltyInterest}`}
+                                text={`₹ ${props.repayConfirmDetail && props.repayConfirmDetail.penaltyInterest ? props.repayConfirmDetail.penaltyInterest : ""}`}
                             />
                             <ListItem
                                 title={"Reduction Amount"}
-                                text={`₹ ${repayConfirmDetail.reductionAmount}`}
+                                // text={`₹ ${repayConfirmDetail.reductionAmount}`}
+                                text={`₹ ${props.repayConfirmDetail && props.repayConfirmDetail.reductionAmount ? props.repayConfirmDetail.reductionAmount : ""}`}
                             />
                             <ListItem
                                 title={"Total Amount"}
-                                text={`₹ ${repayConfirmDetail.extensionPayAmount}`}
+                                // text={`₹ ${repayConfirmDetail.extensionPayAmount}`}
+                                text={`₹ ${props.repayConfirmDetail && props.repayConfirmDetail.extensionPayAmount ? props.repayConfirmDetail.extensionPayAmount : ""}`}
                             />
                             <Divider />
                             <div className={"hintText"}>
                                 <ListItem
                                     title={"Extension due date"}
-                                    text={String(repayConfirmDetail.extendDate)}
+                                    // text={String(repayConfirmDetail.extendDate)}
+                                    text={`₹ ${props.repayConfirmDetail && props.repayConfirmDetail.extendDate ? props.repayConfirmDetail.extendDate : ""}`}
                                 />
                             </div>
                             <div className={"sectionButtons"}>
