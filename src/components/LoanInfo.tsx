@@ -131,16 +131,18 @@ const LoanInfo = (props: LoanInfoProps) => {
                     />
                     <ListItem title={"Balance"} text={`₹ ${balance}`} />
                 </div>
-                {extended && (
-                    <div className={"relatedRepayment"}>
-                        <Button
-                            onClick={() => setShowExtensionModal(true)}
-                            styleType={"link"}
-                        >
-                            {"Related repayment >"}
-                        </Button>
-                    </div>
-                )}
+                <React.Fragment>
+                    {extended && (
+                        <div className={"relatedRepayment"}>
+                            <Button
+                                onClick={() => setShowExtensionModal(true)}
+                                styleType={"link"}
+                            >
+                                {"Related repayment >"}
+                            </Button>
+                        </div>
+                    )}
+                </React.Fragment>
             </Card>
             {(status === "UNPAID" || status === "OVERDUE") && (
                 <div>

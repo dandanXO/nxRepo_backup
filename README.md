@@ -13,3 +13,7 @@ yarn build
 ```
 
 to bundle your application
+
+# Typescript 
+"skipLibCheck": true
+https://bobbyhadz.com/blog/typescript-disable-type-checking-node-modules

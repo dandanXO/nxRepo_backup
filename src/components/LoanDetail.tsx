@@ -58,11 +58,11 @@ type LoanDetailProps = Pick<
     | "dueDate"
     | "bankCardNo"
 > & {
-    setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
-    setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowExtendModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowRepaymentModal?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const renderDetailContent = (props: GetLoanDetailChargeFeeDetail) => {
+const renderDetailContent = (props?: GetLoanDetailChargeFeeDetail) => {
     const { items = [] } = props || {};
     return (
         <div className={"detailsContent"}>
@@ -85,7 +85,7 @@ const LoanDetail = (props: LoanDetailProps) => {
     return (
         <LoanDetailStyled>
             <Card isHot={false}>
-                <Accordion title={chargeFeeDetail?.title} isCollapse={true}>
+                <Accordion title={chargeFeeDetail && chargeFeeDetail.title ? chargeFeeDetail.title : ""} isCollapse={true}>
                     {renderDetailContent(props.chargeFeeDetail)}
                 </Accordion>
             </Card>
@@ -107,14 +107,14 @@ const LoanDetail = (props: LoanDetailProps) => {
             </div>
             <div className={"payButtons"}>
                 <Button
-                    onClick={() => setShowExtendModal(true)}
+                    onClick={() => setShowExtendModal && setShowExtendModal(true)}
                     className={"extendButton"}
                     styleType="secondary"
                 >
                     Extend
                 </Button>
                 <Button
-                    onClick={() => setShowRepaymentModal(true)}
+                    onClick={() => setShowRepaymentModal && setShowRepaymentModal(true)}
                     className={"repayButton"}
                     styleType="primary"
                 >
