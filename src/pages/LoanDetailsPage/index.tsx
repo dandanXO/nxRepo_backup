@@ -34,10 +34,6 @@ export const PureLoanDetailsPage = (props: PureLoanDetailsPageProps) => {
     const [repayBalance, setRepayBalance] = useState(
         props?.currentData?.balance
     );
-    const [recommendProducts, setRecommendProducts] = useState(
-        props?.currentData?.recommendProducts
-    );
-
     useEffect(() => {
         setRepayBalance(props?.currentData?.balance);
     }, [props.currentData]);
