@@ -262,7 +262,7 @@ export const StyledInput2 = styled(StyledTopInput)<StyledInputProps>`
     //padding: 15px;
     font-weight: 400;
     text-align: right;
-    flex: 0 1 50%;  
+    flex: 0 0 50%;  
     color: #101010;
 `;
 // In firefox, disabled input won't fire click event, so add a mask here.
