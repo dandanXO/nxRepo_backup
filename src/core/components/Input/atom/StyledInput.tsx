@@ -177,7 +177,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
 
     //NOTICE: Disabled 統一在這控制
     :disabled {
-      /*
+        /*
         background-color: ${(props) =>
             props.isThemeControlledByComponent
                 ? props.themeType === "early"
@@ -187,7 +187,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
                 ? "rgba(191, 191, 191, 0.34)"
                 : "rgba(192, 192, 192, 0.35)"};
       */
-      
+
         /*
         border-color: ${(props) =>
             props.isThemeControlledByComponent

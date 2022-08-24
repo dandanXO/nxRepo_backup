@@ -47,5 +47,5 @@ export const InputContainer = styled.label<InputContainerProps>`
     //
     ${(props) => upperLabelType(props.upperLabelType)}
     ${(props) => isFocus(props.isFocus ? props.isFocus : false)};
-    // ${(props) => props.disabled ? "background: gray" : ""};
+    // ${(props) => (props.disabled ? "background: gray" : "")};
 `;
