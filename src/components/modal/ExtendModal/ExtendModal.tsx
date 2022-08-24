@@ -45,18 +45,25 @@ export interface PureExtendModalProps {
     handlePostRepayCreate?: any;
 }
 export const PureExtendModal = (props: PureExtendModalProps) => {
-    const { repayConfirmDetail = {
-        extendDate: "",
-        extensionFee: "",
-        extensionPayAmount: "",
-        paidAmount: "",
-        penaltyInterest: "",
-        reductionAmount: "",
-    } , setShowExtendModal, handlePostRepayCreate } =
-        props;
+    const {
+        repayConfirmDetail = {
+            extendDate: "",
+            extensionFee: "",
+            extensionPayAmount: "",
+            paidAmount: "",
+            penaltyInterest: "",
+            reductionAmount: "",
+        },
+        setShowExtendModal,
+        handlePostRepayCreate,
+    } = props;
 
     const handleConfirm = () => {
-        handlePostRepayCreate(true, false, repayConfirmDetail.extensionPayAmount);
+        handlePostRepayCreate(
+            true,
+            false,
+            repayConfirmDetail.extensionPayAmount
+        );
         setShowExtendModal(false);
     };
     return (
@@ -79,21 +86,15 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             />
                             <ListItem
                                 title={"Penalty Interest"}
-                                text={`₹ ${
-                                    repayConfirmDetail.penaltyInterest
-                                }`}
+                                text={`₹ ${repayConfirmDetail.penaltyInterest}`}
                             />
                             <ListItem
                                 title={"Reduction Amount"}
-                                text={`₹ ${
-                                    repayConfirmDetail.reductionAmount
-                                }`}
+                                text={`₹ ${repayConfirmDetail.reductionAmount}`}
                             />
                             <ListItem
                                 title={"Total Amount"}
-                                text={`₹ ${
-                                    repayConfirmDetail.extensionPayAmount
-                                }`}
+                                text={`₹ ${repayConfirmDetail.extensionPayAmount}`}
                             />
                             <Divider />
                             <div className={"hintText"}>

@@ -33,16 +33,17 @@ const axiosBaseQuery =
     async ({ url, method, data, params, headers }) => {
         let onUploadPercent = 0;
         let onDownloadPercent = 0;
-        const getToken = () => {
+        const getToken = ():string => {
             const parsedQueryString = queryString.parse(location.search);
             const TOKEN = parsedQueryString.token
                 ? (parsedQueryString.token as string)
-                : undefined;
+                : "";
             if (!TOKEN) {
                 console.log("error");
             }
             return TOKEN;
         };
+        const token = getToken();
         try {
             const result = await axios({
                 url: baseUrl + url,
@@ -51,8 +52,7 @@ const axiosBaseQuery =
                 params,
                 headers: {
                     "Content-Type": "application/json",
-                    // 'Authorization': TOKEN,
-                    Authorization: getToken(),
+                    "Authorization": token,
                     ...headers,
                 },
                 onUploadProgress: (progressEvent) => {
