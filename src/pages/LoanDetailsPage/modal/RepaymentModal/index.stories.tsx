@@ -11,7 +11,13 @@ export default {
 export const ModalRepayment: ComponentStory<typeof RepaymentModal> = (args) => {
     return (
         <AppThemeProvider>
-            <RepaymentModal balance={8500} setRepayBalance={() => {}} setShowRepaymentModal={() => {}} setShowRepaymentNoticeModal={() => {}} handlePostRepayCreate={() => {}}/>
+            <RepaymentModal
+                balance={8500}
+                setRepayBalance={() => {}}
+                setShowRepaymentModal={() => {}}
+                setShowRepaymentNoticeModal={() => {}}
+                handlePostRepayCreate={() => {}}
+            />
         </AppThemeProvider>
     );
 };
