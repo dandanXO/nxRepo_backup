@@ -6,50 +6,22 @@ import { GetLoanDetailResponse } from "../../../api/getLoanDetail";
 import { flexCreator } from "../../../core/components/utils";
 import Title from "../../../core/components/Modal/Title";
 import Divider from "../../../core/components/Divider";
-import theme from "../../../core/components/config/theme";
+import recordStatusStyleProps from "../../recordStatusColorMapper";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
 `;
-
-const { color } = theme;
-
-const statusStyleProps: {
-    [key: string]: object;
-} = {
-    extend: {
-        color: color.blue,
-    },
-    "pay off": {
-        color: color.gray500,
-        fontWeight: "bold",
-    },
-    partial: {
-        color: color.gray500,
-    },
-    "overdue / pay off": {
-        color: color.red100,
-        fontWeight: "bold",
-    },
-    "overdue / partial": {
-        color: color.red100,
-    },
-    "reduction repayment": {
-        color: color.blue,
-        fontWeight: "bold",
-    },
-};
 
 const RecordStyled = styled.div<RecordStyledProps>`
     ${flexCreator("column", "center", "center")};
     padding-top: 7px;
     .recordStatus {
         width: 100%;
-        ${flexCreator("row", "space-between", "center")};
-        ${(props) => ({ ...statusStyleProps[props.status] })}
-        /* color:${({ theme }) => theme.color.gray500}; */
-    margin-top: -12px;
+        ${flexCreator("row", "flex-end", "center")};
+        ${(props) => ({ ...recordStatusStyleProps[props.status] })}
+        margin-top: -12px;
         padding-bottom: 12px;
+        text-align: right;
     }
 `;
 
@@ -68,14 +40,14 @@ interface RecordStyledProps {
 const Record = (props: {
     repayDate: string;
     repayAmount: number;
-    balance: number;
+    repayType: string;
 }) => {
-    const { repayDate, repayAmount, balance } = props;
+    const { repayDate, repayAmount, repayType } = props;
     return (
-        <RecordStyled status={balance.toString()}>
+        <RecordStyled status={repayType}>
             <ListItem title={repayDate} text={repayAmount} />
             <div className={`recordStatus`}>
-                <div>{balance}</div>
+                <div>{repayType}</div>
             </div>
             <Divider styleType="narrow" />
         </RecordStyled>
@@ -87,18 +59,11 @@ const renderRecordList = (props: AmountPaidRecordsProps) => {
         <Record
             repayDate={i.repayDate}
             repayAmount={i.repayAmount}
-            balance={i.balance}
+            repayType={i.repayType}
         />
     ));
 };
 
-const NoData = () => {
-    return (
-        <NoDataStyled>
-            <div>No paid records yet</div>
-        </NoDataStyled>
-    );
-};
 const AmountPaidModal = (props: AmountPaidRecordsProps) => {
     const { repayRecords, setShowAmountPaidModal } = props;
     return (
@@ -113,7 +78,7 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
                             <Title>Amount Paid Record</Title>
                             <Divider styleType="narrow" />
                             {repayRecords.length === 0 ? (
-                                <NoData />
+                                <NoDataStyled>No paid records yet</NoDataStyled>
                             ) : (
                                 <ModalContentStyled>
                                     {renderRecordList(props)}

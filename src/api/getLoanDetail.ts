@@ -103,8 +103,8 @@ export interface GetLoanDetailRepayConfirmDetail {
 
 /** 還款紀錄 */
 export interface GetLoanDetailRepayRecords {
-    /** @description 待還金額 */
-    balance?: number;
+    /** @description 還款類型 */
+    repayType?: string;
     /** @description 還款金額 */
     repayAmount?: number;
     /** @description 還款日期 */
@@ -130,7 +130,7 @@ export const mockGetLoanDetailResponse: GetLoanDetailResponse = {
         {
             repayDate: "2022-06-25",
             repayAmount: 1380.0,
-            balance: 0.0,
+            repayType: "partial",
         },
     ],
     balance: 1620.0,

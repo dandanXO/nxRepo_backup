@@ -5,25 +5,28 @@ import LoanBrand from "../../../../core/components/LoanBrand";
 import Divider from "../../../../core/components/Divider";
 import ListItem from "../../../../core/components/ListItem";
 import Tag from "../../../../core/components/Tag";
-import AmountPaidIcon from "../../../../core/components/images/amount_paid_icon.svg";
+import Accordion from "../../../../core/components/Accordion";
 import { GetLoanDetailResponse } from "../../../../api/getLoanDetail";
 import { useGetLoanDetailQuery } from "../../../../api";
+import recordStatusStyleProps from "../../../../components/recordStatusColorMapper";
 
 const ExtesionDetailStyled = styled.div`
     text-align: center;
     color: ${({ theme }) => theme.color.black};
-
-    .loanBrand {
+   
+    .loanBrand{
+      
     }
     .totalTitle {
         margin: 8px 0;
         font-size: ${({ theme }) => theme.fontSize[14]};
+       
     }
     .totalText {
         font-size: ${({ theme }) => theme.fontSize[26]};
         font-weight: bold;
     }
-
+   
     .loanInfo-Card-Title {
         color: ${({ theme }) => theme.color.gray500};
         font-size: ${({ theme }) => theme.fontSize[12]};
@@ -31,7 +34,7 @@ const ExtesionDetailStyled = styled.div`
         margin-bottom: 10px;
         text-align: left;
     }
-    .loanInfo-Card-list {
+    .loanInfo-Card-list{
         width: 100%;
     }
     .relatedRepayment {
@@ -56,27 +59,38 @@ const ExtesionDetailStyled = styled.div`
         padding: 18px 12px;
     }
 `;
+const RepayRecordStyled = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: ${({ theme }) => theme.color.gray200};
+    padding: 10px 14px;
+    .itemTitle,
+    .itemText {
+        font-size: ${({ theme }) => theme.fontSize[12]};
+    }
+`;
+
+interface RepayTypeStyledProps {
+    status: string;
+}
+const RepayTypeStyled = styled.div<RepayTypeStyledProps>`
+    margin-left: 12px;
+    ${(props) => ({ ...recordStatusStyleProps[props.status] })}
+`;
+const NoDataStyled = styled.div`
+    padding: 10px 0 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({ theme }) => theme.color.gray500};
+`;
+
 type ExtesionDetailProps = GetLoanDetailResponse & {
-    setShowExtensionModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowExtensionModal?: React.Dispatch<React.SetStateAction<boolean>>
 };
 const renderExtesionDetail = (props: ExtesionDetailProps) => {
-    const {
-        iconUrl,
-        status,
-        paidAmount,
-        balance,
-        productName,
-        loanAmount,
-        serviceCharge,
-        dailyFee,
-        reductionAmount,
-        penaltyInterest,
-        extensionFee,
-        originalDueDate,
-        extendDate,
-        dueDate,
-        bankCardNo,
-    } = props;
+    const { iconUrl, status, paidAmount, repayRecords=[], balance, productName, loanAmount, serviceCharge, dailyFee, reductionAmount, penaltyInterest, extensionFee, originalDueDate, extendDate, dueDate, bankCardNo } = props;
     return (
         <ExtesionDetailStyled>
             <div className="loanBrand">
@@ -91,11 +105,27 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             <Divider />
             <div className={"loanInfo-Card-Title"}>Gernal</div>
             <div className={"loanInfo-Card-list"}>
-                <ListItem
-                    title={"State"}
-                    text={<Tag status={status}>{status}</Tag>}
-                />
+                <ListItem title={"State"} text={<Tag status={status}>{status}</Tag>}/>
                 <ListItem title={"Amount Paid"} text={`₹ ${paidAmount}`} />
+                <RepayRecordStyled>
+                    <Accordion title={"Amount Paid Record"} isCollapse={true}>
+                        {repayRecords.length === 0 ? (<NoDataStyled>No paid records yet</NoDataStyled>)
+                            : (repayRecords.map((record) => {
+                                return (
+                                    <ListItem
+                                        title={
+                                            <div>
+                                                <div>{record.repayDate}</div>
+                                                <RepayTypeStyled status={record.repayType}>{record.repayType}</RepayTypeStyled>
+                                            </div>
+                                        }
+                                        text={`₹ ${record.repayAmount}`}
+                                    />
+                                );
+                            })
+                        )}
+                    </Accordion>
+                </RepayRecordStyled>
                 <ListItem title={"Balance"} text={`₹ ${balance}`} />
             </div>
             <Divider />
@@ -116,27 +146,25 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             <ListItem title={"Bank card"} text={bankCardNo} />
         </ExtesionDetailStyled>
     );
-};
+
+}
+
 
 const ExtensionDetailModal = (props: ExtesionDetailProps) => {
     const { setShowExtensionModal, parentOrderNo } = props;
-    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({
-        orderNo: "no-7864747613693247",
-    });
+    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({ orderNo: "no-7864747613693247" });
 
     return (
         <div>
             <Overlay
                 show={true}
                 title="Notice"
-                content={(hide: () => void) =>
-                    renderExtesionDetail(isLoading ? {} : currentData)
-                }
+                content={(hide: () => void) => renderExtesionDetail(isLoading ? {} : currentData)}
                 enableTitleHorizontal={true}
                 enableClose={true}
                 onCancel={() => setShowExtensionModal(false)}
             ></Overlay>
         </div>
     );
-};
+}
 export default ExtensionDetailModal;

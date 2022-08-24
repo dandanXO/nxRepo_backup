@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { flexCreator } from "../utils/index";
-import { ArrowUp, ArrowDown } from "../images";
+import { UpArrow, DownArrow  } from "../images";
 import theme from "../config/theme";
 export const Accordion = (props: {
     isCollapse: boolean;
@@ -18,7 +18,6 @@ export const Accordion = (props: {
     }, [isCollapse]);
 
     const AccordStyled = styled.div`
-        padding: 0 20px;
         width: 100%;
     `;
 
@@ -29,6 +28,9 @@ export const Accordion = (props: {
         .accordionTitle {
             color: ${({ theme }) => theme.color.gray500};
             font-size: ${({ theme }) => theme.fontSize[12]};
+        }
+        .collapseIcon{
+            ${flexCreator("row", "center", "center")};
         }
     `;
 
@@ -41,11 +43,11 @@ export const Accordion = (props: {
         <AccordStyled>
             <AccordionHeaderStyled onClick={handleCollapse}>
                 <div className={"accordionTitle"}>{title}</div>
-                <div>
+                <div className={"collapseIcon"}>
                     {collapse ? (
-                        <ArrowUp fill={theme.color.gray500} />
+                        <img src={UpArrow} alt="^"/>
                     ) : (
-                        <ArrowDown fill={theme.color.gray500} />
+                        <img src={DownArrow} alt="v"/>
                     )}
                 </div>
             </AccordionHeaderStyled>
