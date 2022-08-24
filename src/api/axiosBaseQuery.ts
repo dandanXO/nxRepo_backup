@@ -75,7 +75,7 @@ const axiosBaseQuery =
             Modal.alert({
                 show: true,
                 mask: true,
-                title: "Error",
+                title: "App Error",
                 content: error.message,
                 confirmText: "Confirm",
                 maskClosable: true,
