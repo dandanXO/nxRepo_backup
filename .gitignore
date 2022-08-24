@@ -3,3 +3,4 @@ node_modules
 /task/openapi-typescript/generated/
 /.idea/
 /dist/
+/**/*/.DS_Store

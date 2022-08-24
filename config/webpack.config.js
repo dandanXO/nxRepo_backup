@@ -9,11 +9,13 @@ const isProduction = process.env.NODE_ENV == "production";
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const mockAPIResponse = require("../src/api/demo/mockApi.json");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const config = {
     entry: "./src/index.tsx",
     output: {
         path: path.resolve(__dirname, "../dist"),
+        filename: "main.[hash].js",
     },
     devServer: {
         hot: true,
@@ -89,6 +91,9 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = "production";
+        config.plugins.push(new CleanWebpackPlugin({
+            verbose: true,
+        }),)
     } else {
         config.mode = "development";
     }

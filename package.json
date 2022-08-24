@@ -15,7 +15,8 @@
         "fetch:test2": "openapi --input ./task/openapi-typescript-codegen/openapi.json --output ./task/openapi-typescript-codegen/generated --client fetch",
         "fetch:test3": "npx @rtk-query/codegen-openapi ./task/rtk-query-codegen-openapi/openapi-config.ts",
         "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook"
+        "build-storybook": "build-storybook",
+        "prepare": "husky install"
     },
     "author": "",
     "license": "ISC",
@@ -33,8 +34,10 @@
         "@webpack-cli/generators": "^2.5.0",
         "autoprefixer": "^10.4.8",
         "babel-loader": "^8.2.5",
+        "clean-webpack-plugin": "^4.0.0",
         "css-loader": "^6.7.1",
         "html-webpack-plugin": "^5.5.0",
+        "husky": "^8.0.0",
         "mini-css-extract-plugin": "^2.6.1",
         "openapi-typescript-codegen": "^0.23.0",
         "postcss": "^8.4.16",
