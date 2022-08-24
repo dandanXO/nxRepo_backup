@@ -13,7 +13,7 @@ const upperLabelType = (upperLabelType: boolean) => {
             align-items: flex-start;
         `;
     } else {
-        console.log("!!!")
+        console.log("!!!");
         return `        
             // flex-direction: row;
             align-items: center;     

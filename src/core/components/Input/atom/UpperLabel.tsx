@@ -30,6 +30,5 @@ export const UpperDefaultLabel = styled.label<Label>`
 export const RightDefaultLabel = styled.label<Label>`
     //flex: 1 0 auto; //default
     flex: 0 0 auto;
-    font-size: 17px;      
-  
+    font-size: 17px;
 `;
