@@ -25,7 +25,9 @@ export default () => {
                 </Link>
             </div>
             <div>
-                <Link to="/extend-details">extendDetailsPage</Link>
+                <Link to={"/extend-details?" + queryString()}>
+                    extendDetailsPage
+                </Link>
             </div>
             <div>
                 <Link to={"/upload-payment-receipt?" + queryString()}>
