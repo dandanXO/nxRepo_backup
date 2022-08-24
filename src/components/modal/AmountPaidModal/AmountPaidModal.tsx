@@ -55,11 +55,11 @@ const Record = (props: {
 };
 const renderRecordList = (props: AmountPaidRecordsProps) => {
     const { repayRecords } = props;
-    return repayRecords.map((i) => (
+    return repayRecords?.map((i) => (
         <Record
-            repayDate={i.repayDate}
-            repayAmount={i.repayAmount}
-            repayType={i.repayType}
+            repayDate={i.repayDate ? i.repayDate : ""}
+            repayAmount={i.repayAmount ? i.repayAmount : 0}
+            repayType={i.repayType ? i.repayType : ""}
         />
     ));
 };
@@ -77,7 +77,7 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
                         <div>
                             <Title>Amount Paid Record</Title>
                             <Divider styleType="narrow" />
-                            {repayRecords.length === 0 ? (
+                            {repayRecords?.length === 0 ? (
                                 <NoDataStyled>No paid records yet</NoDataStyled>
                             ) : (
                                 <ModalContentStyled>

@@ -41,17 +41,17 @@ class ModalPortal extends React.Component<IModalPortal> {
     containerRootRemoveContainer() {
         const containerRoot = document.querySelector(`.uni-modal-list`);
         if (this.props.container) {
-            containerRoot.removeChild(this.props.container);
+            containerRoot?.removeChild(this.props.container);
         } else {
-            containerRoot.removeChild(this.container);
+            containerRoot?.removeChild(this.container);
         }
     }
     containerRootAddContainer() {
         const containerRoot = document.querySelector(`.uni-modal-list`);
         if (this.props.container) {
-            containerRoot.appendChild(this.props.container);
+            containerRoot?.appendChild(this.props.container);
         } else {
-            containerRoot.appendChild(this.container);
+            containerRoot?.appendChild(this.container);
         }
     }
     render() {

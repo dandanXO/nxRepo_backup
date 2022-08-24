@@ -51,13 +51,13 @@ const BannerWithCard = (props: { adProps: GetLoanDetailRecommendProducts }) => {
             />
             <Card isHot={true}>
                 <CardContent
-                    icon={logoUrl}
-                    productName={productName}
-                    balance={loanQuota}
+                    icon={logoUrl ? logoUrl : ""}
+                    productName={productName ? productName : ""}
+                    balance={loanQuota ? loanQuota : ""}
                     contentItems={
                         <>
-                            <ListItem title={"interest"} text={interestRate} />
-                            <ListItem title={"terms"} text={term} />
+                            <ListItem title={"interest"} text={interestRate ? interestRate : ""} />
+                            <ListItem title={"terms"} text={term ? term : ""} />
                         </>
                     }
                 />

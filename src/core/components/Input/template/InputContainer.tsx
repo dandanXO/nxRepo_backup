@@ -44,5 +44,5 @@ export const InputContainer = styled.label<InputContainerProps>`
     height: 42.5px;
     //
     ${(props) => upperLabelType(props.upperLabelType)}
-    ${(props) => isFocus(props.isFocus)};
+    ${(props) => isFocus(props.isFocus ? props.isFocus : false)};
 `;

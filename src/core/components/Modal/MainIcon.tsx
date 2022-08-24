@@ -38,14 +38,14 @@ const MainIcon = styled("h2")<MainIconProps>`
     /* Float */
     clear: both;
 `;
-MainIcon.displayName = "HeaderICON";
-MainIcon.propTypes = {
-    type: PropTypes.oneOf([
-        "confirm",
-        "notification",
-        "error",
-        "question",
-        "money",
-    ]),
-};
+// MainIcon.displayName = "HeaderICON";
+// MainIcon.propTypes = {
+//     type: PropTypes.oneOf([
+//         "confirm",
+//         "notification",
+//         "error",
+//         "question",
+//         "money",
+//     ]),
+// };
 export default MainIcon;

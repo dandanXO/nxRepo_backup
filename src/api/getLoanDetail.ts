@@ -245,7 +245,7 @@ export const mockGetLoanDetailResponse: GetLoanDetailResponse = {
             },
         ],
     },
-    repayConfirmDetail: null,
+    repayConfirmDetail: undefined,
     recommendProducts: [
         {
             productId: 3,

@@ -93,8 +93,8 @@ const LoanInfo = (props: LoanInfoProps) => {
     return (
         <LoanInfoStyled>
             <LoanBrand
-                iconUrl={iconUrl}
-                productName={productName}
+                iconUrl={iconUrl ? iconUrl : ""}
+                productName={productName ? productName : ""}
                 sizeType={"small"}
             />
             <div className="totalTitle">Total Due</div>
@@ -110,7 +110,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                 <div className={"loanInfo-Card-list"}>
                     <ListItem
                         title={"State"}
-                        text={<Tag status={status}>{status}</Tag>}
+                        text={<Tag status={status ? status : "EXTEND"}>{status}</Tag>}
                     />
                     <ListItem
                         title={

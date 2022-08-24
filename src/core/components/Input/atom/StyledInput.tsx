@@ -248,7 +248,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
     ${(props: StyledInputProps) => isFocus(props.isFocus)}
 `;
 
-function isFocus(isFocus: boolean) {
+function isFocus(isFocus: boolean = false) {
     if (isFocus) {
         return `
         position: relative;

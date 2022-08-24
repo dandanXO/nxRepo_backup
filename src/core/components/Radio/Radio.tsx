@@ -53,7 +53,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
     };
     componentDidMount() {
         this.setState({
-            check: this.props.checked,
+            check: this.props.checked ? this.props.checked : false,
         });
     }
 

@@ -88,7 +88,7 @@ export const PureUploadPaymentReceiptPage = (
 
         let reader = new FileReader();
         reader.onload = function (event) {
-            setImageSrc(event.target.result as any);
+            setImageSrc(event?.target?.result as any);
         };
         reader.readAsDataURL(formFileValue as any);
     }, []);
@@ -170,7 +170,7 @@ export const PureUploadPaymentReceiptPage = (
                         />
                     </div>
                 ) : (
-                    <UploadSectionImg imageURL={imageSrc} />
+                    <UploadSectionImg imageURL={imageSrc ? imageSrc : ""} />
                 )}
             </UploadSection>
             <Button onClick={() => confirm()}>Confirm</Button>
@@ -219,8 +219,8 @@ const UploadPaymentReceiptPage = () => {
     return (
         <PureUploadPaymentReceiptPage
             postRepayReceiptRequest={postRepayReceiptRequest}
-            token={pageQueryString.token}
-            orderNo={pageQueryString.orderNo}
+            token={pageQueryString.token ? pageQueryString.token : ""}
+            orderNo={pageQueryString.orderNo ? pageQueryString.orderNo : ""}
         />
     );
 };

@@ -258,7 +258,7 @@ const BindBankAccountPage = () => {
     return (
         <PureBindBankAccountPage
             postBankBindSave={postBankBindSave}
-            cardholderName={cardholderName}
+            cardholderName={cardholderName ? cardholderName : ""}
         />
     );
 };

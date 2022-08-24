@@ -51,13 +51,13 @@ class Modal extends React.Component<IModalProps, ModalState> {
     constructor(props: IModalProps) {
         super(props);
         this.state = {
-            show: props.show,
+            show: props.show ? props.show : false,
         };
     }
     componentDidUpdate(prevProps: IModalProps, prevState: ModalState) {
         if (prevProps != this.props) {
             this.setState({
-                show: this.props.show,
+                show: this.props.show ? this.props.show : false,
             });
         }
     }
@@ -72,7 +72,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
         return (
             <div className="uni-modal">
                 <Overlay
-                    mask={this.props.mask}
+                    mask={this.props.mask ? this.props.mask : false}
                     // onClick={(event) => {
                     //     event.stopPropagation();
                     //     console.log("Overlay click")

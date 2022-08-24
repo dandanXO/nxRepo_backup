@@ -52,7 +52,7 @@ class CustomModal extends React.Component<CustomModalProp, CustomModalState> {
         super(props);
         console.log("props", props);
         this.state = {
-            show: !props.call ? props.show : true,
+            show: props.show ? props.show : true,
         };
     }
     componentWillUnmount() {

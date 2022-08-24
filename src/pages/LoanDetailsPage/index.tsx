@@ -110,14 +110,14 @@ const LoanDetailsPage = () => {
     } = useGetRepayTypesQuery({});
     const orderNo = pageQueryString.orderNo;
     const token = pageQueryString.token;
-    const [payType, setPayType] = useState("");
+    const [payType, setPayType] = useState<string>("");
     const navigateToUploadPaymentReceiptPage = useCallback(() => {
         navigate(`/upload-payment-receipt?token=${token}&orderNo=${orderNo}`);
     }, [token, orderNo]);
 
     useEffect(() => {
         if (!isRepayTypesLoading) {
-            setPayType(repayTypes[0].payType);
+            setPayType(repayTypes && repayTypes[0] && repayTypes[0].payType ? repayTypes[0].payType : "");
         }
     }, [isRepayTypesLoading]);
     const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =

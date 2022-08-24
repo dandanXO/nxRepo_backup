@@ -85,7 +85,7 @@ const NoDataStyled = styled.div`
 `;
 
 type ExtesionDetailProps = GetLoanDetailResponse & {
-    setShowExtensionModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const renderExtesionDetail = (props: ExtesionDetailProps) => {
     const {
@@ -110,8 +110,8 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
         <ExtesionDetailStyled>
             <div className="loanBrand">
                 <LoanBrand
-                    iconUrl={iconUrl}
-                    productName={productName}
+                    iconUrl={iconUrl ? iconUrl : ""}
+                    productName={productName ? productName : ""}
                     sizeType={"small"}
                 />
             </div>
@@ -122,7 +122,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             <div className={"loanInfo-Card-list"}>
                 <ListItem
                     title={"State"}
-                    text={<Tag status={status}>{status}</Tag>}
+                    text={<Tag status={status ? status : "EXTEND"}>{status}</Tag>}
                 />
                 <ListItem title={"Amount Paid"} text={`₹ ${paidAmount}`} />
                 <RepayRecordStyled>
@@ -137,7 +137,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                                             <div>
                                                 <div>{record.repayDate}</div>
                                                 <RepayTypeStyled
-                                                    status={record.repayType}
+                                                    status={record.repayType ? record.repayType : "EXTEND"}
                                                 >
                                                     {record.repayType}
                                                 </RepayTypeStyled>
@@ -154,20 +154,20 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             </div>
             <Divider />
             <div className={"loanInfo-Card-Title"}>Details</div>
-            <ListItem title={"Loan Amount"} text={loanAmount} />
-            <ListItem title={"Service Charge"} text={serviceCharge} />
-            <ListItem title={"Daily fee"} text={dailyFee} />
-            <ListItem title={"Reduction Amount"} text={reductionAmount} />
-            <ListItem title={"Penalty Interest"} text={penaltyInterest} />
+            <ListItem title={"Loan Amount"} text={loanAmount ? loanAmount : ""} />
+            <ListItem title={"Service Charge"} text={serviceCharge ? serviceCharge : ""} />
+            <ListItem title={"Daily fee"} text={dailyFee ? dailyFee : ""} />
+            <ListItem title={"Reduction Amount"} text={reductionAmount ? reductionAmount : ""} />
+            <ListItem title={"Penalty Interest"} text={penaltyInterest ? penaltyInterest : ""} />
             <div className={"loanInfo-Card-Title"}>Extension</div>
-            <ListItem title={"Extension fee"} text={extensionFee} />
+            <ListItem title={"Extension fee"} text={extensionFee ? extensionFee : ""} />
             <Divider />
-            <ListItem title={"Original due date"} text={originalDueDate} />
-            <ListItem title={"Extension Date"} text={extendDate} />
-            <ListItem title={"Due Date"} text={dueDate} />
+            <ListItem title={"Original due date"} text={originalDueDate ? originalDueDate : ""} />
+            <ListItem title={"Extension Date"} text={extendDate ? extendDate : ""} />
+            <ListItem title={"Due Date"} text={dueDate ? dueDate : ""} />
             <Divider />
             <div className={"loanInfo-Card-Title"}>Link account</div>
-            <ListItem title={"Bank card"} text={bankCardNo} />
+            <ListItem title={"Bank card"} text={bankCardNo ? bankCardNo : ""} />
         </ExtesionDetailStyled>
     );
 };
@@ -184,7 +184,7 @@ const ExtensionDetailModal = (props: ExtesionDetailProps) => {
                 show={true}
                 title="Notice"
                 content={(hide: () => void) =>
-                    renderExtesionDetail(isLoading ? {} : currentData)
+                    renderExtesionDetail({...currentData, setShowExtensionModal})
                 }
                 enableTitleHorizontal={true}
                 enableClose={true}

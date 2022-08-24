@@ -12,6 +12,6 @@ export interface GetRepayReceiptResponse {
 }
 
 export const mockGetRepayReceiptResponse: GetRepayReceiptResponse = {
-    receipt: null,
-    previewUrl: null,
+    receipt: "",
+    previewUrl: "",
 };
