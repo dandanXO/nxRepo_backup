@@ -85,7 +85,9 @@ export const PureLoanDetailsPage = (props: PureLoanDetailsPageProps) => {
                 setShowExtendModal={setShowExtendModal}
                 setShowRepaymentModal={setShowRepaymentModal}
             />
-            <Advertisement recommendProducts={props.currentData.recommendProducts}/>
+            <Advertisement
+                recommendProducts={props.currentData.recommendProducts}
+            />
         </Page>
     );
 };

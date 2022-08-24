@@ -5,7 +5,6 @@ import Card from "../core/components/Card";
 import CardContent from "../core/components/CardContent";
 import ListItem from "../core/components/ListItem";
 
-
 const AdvertisementStyled = styled.div`
     margin-top: 32px;
     .infoTitle {
@@ -33,14 +32,23 @@ const BannerWithCardStyled = styled.div`
     }
 `;
 
-
 const BannerWithCard = (props: { adProps: GetLoanDetailRecommendProducts }) => {
-    const { backgroundUrl, logoUrl, productName, loanQuota, interestRate, term } = props.adProps;
+    const {
+        backgroundUrl,
+        logoUrl,
+        productName,
+        loanQuota,
+        interestRate,
+        term,
+    } = props.adProps;
 
     const [isCollapse, setIsCollapse] = useState(true);
     return (
         <BannerWithCardStyled onClick={() => setIsCollapse(!isCollapse)}>
-            <img className={` ${isCollapse ? "banner" : "bannerHide"}`} src={backgroundUrl}/>
+            <img
+                className={` ${isCollapse ? "banner" : "bannerHide"}`}
+                src={backgroundUrl}
+            />
             <Card isHot={true}>
                 <CardContent
                     icon={logoUrl}
