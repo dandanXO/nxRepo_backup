@@ -63,32 +63,15 @@ type LoanDetailProps = Pick<
 };
 
 const renderDetailContent = (props: GetLoanDetailChargeFeeDetail) => {
-    const {
-        items = [],
-        // chargeFeeDetail={items:[]},
-        // loanAmount,
-        // serviceCharge,
-        // dailyFee,
-        // reductionAmount,
-        // penaltyInterest,
-        // applyDate,
-        // dueDate,
-        // bankCardNo,
-    } = props || {};
-    console.log("props", items);
+    const { items = [] } = props || {};
     return (
         <div className={"detailsContent"}>
-            {/* <ListItem title={"Loan Amount"} text={loanAmount} />
-            <ListItem title={"Service Charge"} text={serviceCharge} />
-            <ListItem title={"Daily fee"} text={dailyFee} />
-            <ListItem title={"Reduction Amount"} text={reductionAmount} />
-            <ListItem title={"Penalty Interest"} text={penaltyInterest} />
-            <Divider />
-            <ListItem title={"Apply Date"} text={applyDate} />
-            <ListItem title={"Due Date"} text={dueDate} />
-            <Divider />
-            <div className={"textTitle"}>Link account</div>
-            <ListItem title={"Bank card"} text={bankCardNo} /> */}
+            {
+                items.map(item => {
+                    const fieldType = item.fieldType === "CURRENCY" ? " ₹ " : "";
+                    return <ListItem title={item.itemName} text={`${fieldType}${item.value}`} />
+                })
+            }
         </div>
     );
 };
