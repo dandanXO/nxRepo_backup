@@ -72,7 +72,7 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
             >
                 {mode !== "custom" ? (
                     <AppThemeProvider theme={props.theme}>
-                        <Modal mode={mode} {...props} show={true} ></Modal>
+                        <Modal mode={mode} {...props} show={true}></Modal>
                     </AppThemeProvider>
                 ) : (
                     <CustomModal

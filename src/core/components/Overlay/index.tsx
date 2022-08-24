@@ -52,7 +52,7 @@ class Overlay extends React.Component<ModalWrapperProps> {
                 // actionsRef={ModalWrapper.actionsRef}
                 container={replacedModalContainer}
             >
-                <Modal {...props} show={true} ></Modal>
+                <Modal {...props} show={true}></Modal>
             </ModalPortal>,
             replacedModalContainer
         );

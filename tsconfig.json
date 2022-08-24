@@ -9,7 +9,8 @@
         "moduleResolution": "Node"
     },
     "include": ["src/**/**.ts", "src/**/**.tsx", "src/core/types/**/**.d.ts"],
-    "exclude": ["src/**/**.stories.tsx",
+    "exclude": [
+        "src/**/**.stories.tsx",
         "node_modules",
         "./node_modules",
         "./node_modules/*",

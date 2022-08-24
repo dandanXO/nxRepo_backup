@@ -117,7 +117,11 @@ const LoanDetailsPage = () => {
 
     useEffect(() => {
         if (!isRepayTypesLoading) {
-            setPayType(repayTypes && repayTypes[0] && repayTypes[0].payType ? repayTypes[0].payType : "");
+            setPayType(
+                repayTypes && repayTypes[0] && repayTypes[0].payType
+                    ? repayTypes[0].payType
+                    : ""
+            );
         }
     }, [isRepayTypesLoading]);
     const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =

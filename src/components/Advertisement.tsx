@@ -56,7 +56,10 @@ const BannerWithCard = (props: { adProps: GetLoanDetailRecommendProducts }) => {
                     balance={loanQuota ? loanQuota : ""}
                     contentItems={
                         <>
-                            <ListItem title={"interest"} text={interestRate ? interestRate : ""} />
+                            <ListItem
+                                title={"interest"}
+                                text={interestRate ? interestRate : ""}
+                            />
                             <ListItem title={"terms"} text={term ? term : ""} />
                         </>
                     }

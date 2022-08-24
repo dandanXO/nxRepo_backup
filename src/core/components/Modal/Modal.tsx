@@ -118,7 +118,13 @@ class Modal extends React.Component<IModalProps, ModalState> {
                             </div>
                         )}
                         {this.props.enableIcon && (
-                            <MainIcon type={this.props.type ? this.props.type : "confirm"}></MainIcon>
+                            <MainIcon
+                                type={
+                                    this.props.type
+                                        ? this.props.type
+                                        : "confirm"
+                                }
+                            ></MainIcon>
                         )}
                         <Header>
                             <Title>{this.props.title}</Title>
@@ -206,7 +212,8 @@ class Modal extends React.Component<IModalProps, ModalState> {
                                             color={this.props.cancelColor}
                                             onClick={() => {
                                                 this.hidden();
-                                                this.props.onCancel && this.props.onCancel();
+                                                this.props.onCancel &&
+                                                    this.props.onCancel();
                                             }}
                                         >
                                             {this.props.cancelText}

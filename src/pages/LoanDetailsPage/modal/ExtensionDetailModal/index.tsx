@@ -122,7 +122,9 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             <div className={"loanInfo-Card-list"}>
                 <ListItem
                     title={"State"}
-                    text={<Tag status={status ? status : "EXTEND"}>{status}</Tag>}
+                    text={
+                        <Tag status={status ? status : "EXTEND"}>{status}</Tag>
+                    }
                 />
                 <ListItem title={"Amount Paid"} text={`₹ ${paidAmount}`} />
                 <RepayRecordStyled>
@@ -137,7 +139,11 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                                             <div>
                                                 <div>{record.repayDate}</div>
                                                 <RepayTypeStyled
-                                                    status={record.repayType ? record.repayType : "EXTEND"}
+                                                    status={
+                                                        record.repayType
+                                                            ? record.repayType
+                                                            : "EXTEND"
+                                                    }
                                                 >
                                                     {record.repayType}
                                                 </RepayTypeStyled>
@@ -154,16 +160,37 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             </div>
             <Divider />
             <div className={"loanInfo-Card-Title"}>Details</div>
-            <ListItem title={"Loan Amount"} text={loanAmount ? loanAmount : ""} />
-            <ListItem title={"Service Charge"} text={serviceCharge ? serviceCharge : ""} />
+            <ListItem
+                title={"Loan Amount"}
+                text={loanAmount ? loanAmount : ""}
+            />
+            <ListItem
+                title={"Service Charge"}
+                text={serviceCharge ? serviceCharge : ""}
+            />
             <ListItem title={"Daily fee"} text={dailyFee ? dailyFee : ""} />
-            <ListItem title={"Reduction Amount"} text={reductionAmount ? reductionAmount : ""} />
-            <ListItem title={"Penalty Interest"} text={penaltyInterest ? penaltyInterest : ""} />
+            <ListItem
+                title={"Reduction Amount"}
+                text={reductionAmount ? reductionAmount : ""}
+            />
+            <ListItem
+                title={"Penalty Interest"}
+                text={penaltyInterest ? penaltyInterest : ""}
+            />
             <div className={"loanInfo-Card-Title"}>Extension</div>
-            <ListItem title={"Extension fee"} text={extensionFee ? extensionFee : ""} />
+            <ListItem
+                title={"Extension fee"}
+                text={extensionFee ? extensionFee : ""}
+            />
             <Divider />
-            <ListItem title={"Original due date"} text={originalDueDate ? originalDueDate : ""} />
-            <ListItem title={"Extension Date"} text={extendDate ? extendDate : ""} />
+            <ListItem
+                title={"Original due date"}
+                text={originalDueDate ? originalDueDate : ""}
+            />
+            <ListItem
+                title={"Extension Date"}
+                text={extendDate ? extendDate : ""}
+            />
             <ListItem title={"Due Date"} text={dueDate ? dueDate : ""} />
             <Divider />
             <div className={"loanInfo-Card-Title"}>Link account</div>
@@ -184,7 +211,10 @@ const ExtensionDetailModal = (props: ExtesionDetailProps) => {
                 show={true}
                 title="Notice"
                 content={(hide: () => void) =>
-                    renderExtesionDetail({...currentData, setShowExtensionModal})
+                    renderExtesionDetail({
+                        ...currentData,
+                        setShowExtensionModal,
+                    })
                 }
                 enableTitleHorizontal={true}
                 enableClose={true}

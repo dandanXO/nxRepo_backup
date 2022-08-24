@@ -110,7 +110,11 @@ const LoanInfo = (props: LoanInfoProps) => {
                 <div className={"loanInfo-Card-list"}>
                     <ListItem
                         title={"State"}
-                        text={<Tag status={status ? status : "EXTEND"}>{status}</Tag>}
+                        text={
+                            <Tag status={status ? status : "EXTEND"}>
+                                {status}
+                            </Tag>
+                        }
                     />
                     <ListItem
                         title={
