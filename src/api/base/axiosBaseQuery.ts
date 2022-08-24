@@ -33,7 +33,7 @@ const axiosBaseQuery =
     async ({ url, method, data, params, headers }) => {
         let onUploadPercent = 0;
         let onDownloadPercent = 0;
-        const getToken = ():string => {
+        const getToken = (): string => {
             const parsedQueryString = queryString.parse(location.search);
             const TOKEN = parsedQueryString.token
                 ? (parsedQueryString.token as string)
@@ -52,7 +52,7 @@ const axiosBaseQuery =
                 params,
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": token,
+                    Authorization: token,
                     ...headers,
                 },
                 onUploadProgress: (progressEvent) => {
