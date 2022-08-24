@@ -13,7 +13,7 @@ export const ModalRepaymentNotice: ComponentStory<
 > = (args) => {
     return (
         <AppThemeProvider>
-            <RepaymentNoticeModal setShowRepaymentNoticeModal={{} as any} />
+            <RepaymentNoticeModal setShowRepaymentNoticeModal={() => {}} handlePostRepayCreate={() => {}} balance="1000"/>
         </AppThemeProvider>
     );
 };

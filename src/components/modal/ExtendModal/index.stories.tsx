@@ -1,8 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PureExtendModal } from "./ExtendModal";
 import { AppThemeProvider } from "../../../core/components";
-import { mockGetLoanDetailResponse } from "../../../api/getLoanDetail";
+import {mockGetLoanDetailResponse} from "../../../api/getLoanDetail";
 import * as React from "react";
+import {mockGetRepayReceiptResponse} from "../../../api/getRepayReceipt";
 
 export default {
     title: "Page/ExtendModal",
@@ -13,8 +14,9 @@ export const Page: ComponentStory<typeof PureExtendModal> = () => {
     return (
         <AppThemeProvider>
             <PureExtendModal
-                currentProps={data}
-                handlePostRepayCreate={{} as any}
+                repayConfirmDetail={mockGetLoanDetailResponse}
+                setShowExtendModal={() => {}}
+                handlePostRepayCreate={() => {}}
             />
         </AppThemeProvider>
     );

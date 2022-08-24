@@ -1,7 +1,7 @@
 // postRepayReceipt
 export interface PostRepayReceiptRequestBody {
     /** 照片(optional) */
-    file?: any;
+    file?: string;
     /** 訂單號 */
     orderNo?: string;
     /** 明細 */

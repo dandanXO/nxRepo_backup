@@ -10,7 +10,7 @@ export default {
 export const Page: ComponentStory<typeof PureBindBankAccountPage> = (args) => {
     return (
         <AppThemeProvider>
-            <PureBindBankAccountPage postBankBindSave={{} as any} />
+            <PureBindBankAccountPage postBankBindSave={() => {}} cardholderName="cardholderName"/>
         </AppThemeProvider>
     );
 };

@@ -4,14 +4,14 @@ import { AppThemeProvider } from "../../core/components";
 export default {
     title: "Page/UploadPaymentReceiptPage",
     component: PureUploadPaymentReceiptPage,
-} as ComponentMeta<any>;
+} as ComponentMeta<typeof PureUploadPaymentReceiptPage>;
 
-export const Page: ComponentStory<any> = () => {
+export const Page: ComponentStory<typeof PureUploadPaymentReceiptPage> = () => {
     return (
         <AppThemeProvider>
             <PureUploadPaymentReceiptPage
-                postRepayReceiptRequest={{} as any}
-                token={{} as any}
+                postRepayReceiptRequest={() => {}}
+                token={""}
                 orderNo="123"
             />
         </AppThemeProvider>

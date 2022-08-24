@@ -19,7 +19,7 @@ export const ModalAmountPaid: ComponentStory<typeof AmountPaidModal> = (
         <AppThemeProvider>
             <AmountPaidModal
                 repayRecords={[data]}
-                setShowAmountPaidModal={{} as any}
+                setShowAmountPaidModal={() => {}}
             />
         </AppThemeProvider>
     );

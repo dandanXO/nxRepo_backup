@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import cls from "classnames";
 
-const Loading = (props: any) => (
+interface LoadingProps {
+    className?: string;
+}
+const Loading = (props: LoadingProps) => (
     <div
         className={cls("loadingio-spinner-spinner-e19blwp8l9", props.className)}
     >

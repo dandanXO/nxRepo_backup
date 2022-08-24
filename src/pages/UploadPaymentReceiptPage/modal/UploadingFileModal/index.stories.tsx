@@ -5,9 +5,9 @@ import { AppThemeProvider } from "../../../../core/components";
 export default {
     title: "Page/UploadPaymentReceiptPage",
     component: UploadingFileModal,
-} as ComponentMeta<any>;
+} as ComponentMeta<typeof UploadingFileModal>;
 
-export const ModalUploadingFile: ComponentStory<any> = () => {
+export const ModalUploadingFile: ComponentStory<typeof UploadingFileModal> = () => {
     return (
         <AppThemeProvider>
             <UploadingFileModal />
