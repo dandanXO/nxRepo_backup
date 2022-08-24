@@ -37,6 +37,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
             )}
             {showExtensionModal && (
                 <ExtensionDetailModal
+                    parentOrderNo={props.currentData.parentOrderNo}
                     setShowExtensionModal={setShowExtensionModal}
                 />
             )}

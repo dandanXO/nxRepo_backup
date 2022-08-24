@@ -91,20 +91,16 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
     const {
         iconUrl,
         status,
-        paidAmount,
+        paidAmount="",
         repayRecords = [],
-        balance,
+        balance="",
         productName,
-        loanAmount,
-        serviceCharge,
-        dailyFee,
-        reductionAmount,
-        penaltyInterest,
         extensionFee,
         originalDueDate,
         extendDate,
         dueDate,
         bankCardNo,
+        chargeFeeDetail
     } = props;
     return (
         <ExtesionDetailStyled>
@@ -159,24 +155,16 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                 <ListItem title={"Balance"} text={`₹ ${balance}`} />
             </div>
             <Divider />
-            <div className={"loanInfo-Card-Title"}>Details</div>
-            <ListItem
-                title={"Loan Amount"}
-                text={loanAmount ? loanAmount : ""}
-            />
-            <ListItem
-                title={"Service Charge"}
-                text={serviceCharge ? serviceCharge : ""}
-            />
-            <ListItem title={"Daily fee"} text={dailyFee ? dailyFee : ""} />
-            <ListItem
-                title={"Reduction Amount"}
-                text={reductionAmount ? reductionAmount : ""}
-            />
-            <ListItem
-                title={"Penalty Interest"}
-                text={penaltyInterest ? penaltyInterest : ""}
-            />
+            <div className={"loanInfo-Card-Title"}>{chargeFeeDetail?.title}</div>
+            {chargeFeeDetail?.items.map((item) => {
+                const fieldType = item.fieldType === "CURRENCY" ? " ₹ " : "";
+                return (
+                    <ListItem
+                        title={item.itemName}
+                        text={`${fieldType}${item.value}`}
+                    />
+                );
+            })}
             <div className={"loanInfo-Card-Title"}>Extension</div>
             <ListItem
                 title={"Extension fee"}
@@ -201,9 +189,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
 
 const ExtensionDetailModal = (props: ExtesionDetailProps) => {
     const { setShowExtensionModal, parentOrderNo } = props;
-    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({
-        orderNo: "no-7864747613693247",
-    });
+    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({orderNo: parentOrderNo});
 
     return (
         <div>
