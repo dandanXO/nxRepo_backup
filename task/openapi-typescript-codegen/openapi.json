@@ -5,8 +5,8 @@
     "basePath": "/",
     "tags": [
         { "name": "APP:GLOBAL", "description": "Index Controller" },
-        { "name": "APP:V1", "description": "Ocr Controller" },
         { "name": "APP:V2", "description": "Kyc Identity Controller V 2" },
+        { "name": "APP:V2:元丁", "description": "Gct Kyc Controller V 2" },
         {
             "name": "admin-advertise-action",
             "description": "Admin Advertise Action"
@@ -210,295 +210,6 @@
                 }
             }
         },
-        "/api/v1/ocr/id-card/iqc": {
-            "post": {
-                "tags": ["APP:V1"],
-                "summary": "AADHR身份证扫描提交 (IQC)",
-                "operationId": "idCardIQCScanUsingPOST_1",
-                "consumes": ["application/json"],
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    },
-                    {
-                        "in": "body",
-                        "name": "request",
-                        "description": "request",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/IDCardIQCScanRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": { "description": "OK" },
-                    "201": { "description": "Created" },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
-        "/api/v1/ocr/id-card/review": {
-            "get": {
-                "tags": ["APP:V1"],
-                "summary": "AADHAR身份证扫描结果确认",
-                "description": "AADHAR身份证扫描结果确认",
-                "operationId": "idCardOcrReviewUsingGET_1",
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ID Card OCR扫描结果确认"
-                        }
-                    },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
-        "/api/v1/ocr/id-card/scan": {
-            "post": {
-                "tags": ["APP:V1"],
-                "summary": "AADHR身份证扫描提交",
-                "description": "AADHAR身份证扫描提交",
-                "operationId": "idCardUploadScanUsingPOST_1",
-                "consumes": ["application/json"],
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    },
-                    {
-                        "name": "files",
-                        "in": "query",
-                        "required": false,
-                        "type": "array",
-                        "items": { "type": "file" },
-                        "collectionFormat": "multi"
-                    },
-                    {
-                        "name": "ocrType",
-                        "in": "query",
-                        "required": false,
-                        "type": "string",
-                        "enum": ["advance", "gct", "mobi"]
-                    }
-                ],
-                "responses": {
-                    "200": { "description": "OK" },
-                    "201": { "description": "Created" },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
-        "/api/v1/ocr/id-card/submit": {
-            "post": {
-                "tags": ["APP:V1"],
-                "summary": "AADHAR身份证扫描提交结果确认",
-                "description": "AADHAR身份证扫描提交结果确认",
-                "operationId": "idCardOcrSubmitUsingPOST_1",
-                "consumes": ["application/json"],
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    },
-                    {
-                        "in": "body",
-                        "name": "request",
-                        "description": "request",
-                        "required": true,
-                        "schema": { "$ref": "#/definitions/IDCard提交结果" }
-                    }
-                ],
-                "responses": {
-                    "200": { "description": "OK" },
-                    "201": { "description": "Created" },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
-        "/api/v1/ocr/license": {
-            "post": {
-                "tags": ["APP:V1"],
-                "summary": "OCR授權密鑰",
-                "operationId": "getLicenseUsingPOST_1",
-                "consumes": ["application/json"],
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": { "$ref": "#/definitions/OcrLicenseResponse" }
-                    },
-                    "201": { "description": "Created" },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
-        "/api/v1/ocr/pan-card/iqc": {
-            "post": {
-                "tags": ["APP:V1"],
-                "summary": "Pan税卡扫描提交(IQC)",
-                "operationId": "panCardIQCScanUsingPOST_1",
-                "consumes": ["application/json"],
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    },
-                    {
-                        "in": "body",
-                        "name": "request",
-                        "description": "request",
-                        "required": true,
-                        "schema": { "$ref": "#/definitions/PanIQCScanRequest" }
-                    }
-                ],
-                "responses": {
-                    "200": { "description": "OK" },
-                    "201": { "description": "Created" },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
-        "/api/v1/ocr/pan-card/review": {
-            "get": {
-                "tags": ["APP:V1"],
-                "summary": "Pan税卡扫描结果确认",
-                "description": "Pan税卡扫描结果确认",
-                "operationId": "panCardOcrReviewUsingGET_1",
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/PAN Card OCR扫描结果确认"
-                        }
-                    },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
-        "/api/v1/ocr/pan-card/scan": {
-            "post": {
-                "tags": ["APP:V1"],
-                "summary": "Pan税卡扫描提交",
-                "description": "Pan税卡扫描提交",
-                "operationId": "panCardUploadScanUsingPOST",
-                "consumes": ["application/json"],
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    },
-                    {
-                        "name": "files",
-                        "in": "query",
-                        "required": false,
-                        "type": "file"
-                    },
-                    {
-                        "name": "ocrType",
-                        "in": "query",
-                        "required": false,
-                        "type": "string",
-                        "enum": ["advance", "gct", "mobi"]
-                    }
-                ],
-                "responses": {
-                    "200": { "description": "OK" },
-                    "201": { "description": "Created" },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
-        "/api/v1/ocr/pan-card/submit": {
-            "post": {
-                "tags": ["APP:V1"],
-                "summary": "Pan税卡扫描结果确认",
-                "description": "Pan税卡扫描结果确认",
-                "operationId": "panCardOcrSubmitUsingPOST_1",
-                "consumes": ["application/json"],
-                "produces": ["*/*"],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "description": "token",
-                        "required": true,
-                        "schema": { "type": "string" }
-                    },
-                    {
-                        "in": "body",
-                        "name": "request",
-                        "description": "request",
-                        "required": true,
-                        "schema": { "$ref": "#/definitions/PanCard提交结果" }
-                    }
-                ],
-                "responses": {
-                    "200": { "description": "OK" },
-                    "201": { "description": "Created" },
-                    "401": { "description": "Unauthorized" },
-                    "403": { "description": "Forbidden" },
-                    "404": { "description": "Not Found" }
-                }
-            }
-        },
         "/api/v1/usage-charge/adv/iqa": {
             "post": {
                 "tags": ["APP:GLOBAL"],
@@ -610,32 +321,31 @@
                 }
             }
         },
-        "/api/v2/bank-card/bind": {
-            "get": {
+        "/api/v2/bank-bind/save": {
+            "post": {
                 "tags": ["APP:V2"],
-                "summary": "绑卡页",
-                "description": "绑卡页",
-                "operationId": "bindBankCardUsingGET",
+                "summary": "绑定银行主卡",
+                "operationId": "saveBindBankCardUsingPOST",
+                "consumes": ["application/json"],
                 "produces": ["*/*"],
                 "parameters": [
                     {
-                        "name": "appName",
-                        "in": "query",
-                        "required": false,
-                        "type": "string"
+                        "name": "Authorization",
+                        "description": "token",
+                        "required": true,
+                        "schema": { "type": "string" }
                     },
                     {
-                        "name": "token",
-                        "in": "query",
-                        "required": false,
-                        "type": "string"
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/绑订银行账户(卡)" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": { "type": "string" }
-                    },
+                    "200": { "description": "OK" },
+                    "201": { "description": "Created" },
                     "401": { "description": "Unauthorized" },
                     "403": { "description": "Forbidden" },
                     "404": { "description": "Not Found" }
@@ -764,7 +474,7 @@
                         "description": "request",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/BindBandCardRequest"
+                            "$ref": "#/definitions/SwitchBandCardMainRequest"
                         }
                     }
                 ],
@@ -1228,7 +938,7 @@
         },
         "/api/v2/kyc/gct/aadhaar/success": {
             "post": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "提交aadhaar卡报告",
                 "operationId": "aadhaarSuccessUsingPOST",
                 "consumes": ["application/json"],
@@ -1259,7 +969,7 @@
         },
         "/api/v2/kyc/gct/callback/aadhaar": {
             "post": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "A卡认证报告回调",
                 "operationId": "aadhaarVerifyCallbackUsingPOST",
                 "consumes": ["application/json"],
@@ -1286,7 +996,7 @@
         },
         "/api/v2/kyc/gct/callback/aadhaar-cross-pan": {
             "post": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "活体认证报告回调",
                 "operationId": "aadhaarCrossPanVerifyCallbackUsingPOST",
                 "consumes": ["application/json"],
@@ -1313,7 +1023,7 @@
         },
         "/api/v2/kyc/gct/callback/liveness": {
             "post": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "活体认证报告回调",
                 "operationId": "livenessCallbackUsingPOST",
                 "consumes": ["application/json"],
@@ -1338,7 +1048,7 @@
         },
         "/api/v2/kyc/gct/callback/pan": {
             "post": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "P卡认证报告回调",
                 "operationId": "panVerifyCallbackUsingPOST",
                 "consumes": ["application/json"],
@@ -1363,7 +1073,7 @@
         },
         "/api/v2/kyc/gct/config": {
             "get": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "配置",
                 "operationId": "getConfigUsingGET",
                 "produces": ["*/*"],
@@ -1380,7 +1090,7 @@
         },
         "/api/v2/kyc/gct/liveness/success": {
             "post": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "提交活体报告",
                 "operationId": "livenessSuccessUsingPOST",
                 "consumes": ["application/json"],
@@ -1411,7 +1121,7 @@
         },
         "/api/v2/kyc/gct/pan/success": {
             "post": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "提交pan卡报告",
                 "operationId": "panSuccessUsingPOST",
                 "consumes": ["application/json"],
@@ -1442,7 +1152,7 @@
         },
         "/api/v2/kyc/gct/uid": {
             "get": {
-                "tags": ["APP:V2"],
+                "tags": ["APP:V2:元丁"],
                 "summary": "关联KYC认证uid用户",
                 "operationId": "uidUsingGET",
                 "produces": ["*/*"],
@@ -1943,7 +1653,9 @@
                         "in": "query",
                         "description": "產品ID",
                         "required": true,
-                        "type": "string"
+                        "type": "integer",
+                        "default": 0,
+                        "format": "int32"
                     }
                 ],
                 "responses": {
@@ -1960,7 +1672,7 @@
         "/api/v2/loan/detail": {
             "get": {
                 "tags": ["APP:V2"],
-                "summary": "待款訂單詳情",
+                "summary": "貸款訂單詳情",
                 "operationId": "getLoanDetailUsingGET",
                 "produces": ["*/*"],
                 "parameters": [
@@ -1981,7 +1693,7 @@
                 "responses": {
                     "200": {
                         "description": "OK",
-                        "schema": { "$ref": "#/definitions/貸款紀錄" }
+                        "schema": { "$ref": "#/definitions/借貸訂單詳情" }
                     },
                     "401": { "description": "Unauthorized" },
                     "403": { "description": "Forbidden" },
@@ -2026,6 +1738,7 @@
                         "type": "string",
                         "enum": [
                             "PROCESSING",
+                            "REJECTED",
                             "UNPAID",
                             "EXTEND",
                             "OVERDUE",
@@ -2053,6 +1766,12 @@
                 "produces": ["*/*"],
                 "parameters": [
                     {
+                        "name": "Authorization",
+                        "description": "token",
+                        "required": true,
+                        "schema": { "type": "string" }
+                    },
+                    {
                         "in": "body",
                         "name": "request",
                         "description": "request",
@@ -2063,7 +1782,12 @@
                     }
                 ],
                 "responses": {
-                    "200": { "description": "OK" },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubmitOrderLoanResponse"
+                        }
+                    },
                     "201": { "description": "Created" },
                     "401": { "description": "Unauthorized" },
                     "403": { "description": "Forbidden" },
@@ -2097,7 +1821,7 @@
                 }
             }
         },
-        "/api/v2/login/opt-code": {
+        "/api/v2/login/otp-code": {
             "post": {
                 "tags": ["APP:V2"],
                 "summary": "直接发送短信验证码接口",
@@ -2180,55 +1904,36 @@
                 }
             }
         },
-        "/api/v2/payment/refund": {
-            "get": {
+        "/api/v2/repay/create": {
+            "post": {
                 "tags": ["APP:V2"],
-                "summary": "还款页",
-                "description": "还款页",
-                "operationId": "refundUsingGET",
+                "summary": "創建還款訂單",
+                "operationId": "createRepayUsingPOST",
+                "consumes": ["application/json"],
                 "produces": ["*/*"],
                 "parameters": [
                     {
-                        "name": "appName",
-                        "in": "query",
-                        "description": "appName",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "isLeng",
-                        "in": "query",
-                        "description": "isLeng",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "orderNo",
-                        "in": "query",
-                        "description": "orderNo",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "token",
-                        "in": "query",
+                        "name": "Authorization",
                         "description": "token",
-                        "required": false,
-                        "type": "string"
+                        "required": true,
+                        "schema": { "type": "string" }
                     },
                     {
-                        "name": "version",
-                        "in": "query",
-                        "description": "version",
-                        "required": false,
-                        "type": "string"
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/創建還款訂單" }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
-                        "schema": { "type": "string" }
+                        "schema": {
+                            "$ref": "#/definitions/CreateRepayResponse"
+                        }
                     },
+                    "201": { "description": "Created" },
                     "401": { "description": "Unauthorized" },
                     "403": { "description": "Forbidden" },
                     "404": { "description": "Not Found" }
@@ -2311,6 +2016,26 @@
                         }
                     },
                     "201": { "description": "Created" },
+                    "401": { "description": "Unauthorized" },
+                    "403": { "description": "Forbidden" },
+                    "404": { "description": "Not Found" }
+                }
+            }
+        },
+        "/api/v2/repay/types": {
+            "get": {
+                "tags": ["APP:V2"],
+                "summary": "可用付款方式",
+                "operationId": "getRepayTypesUsingGET",
+                "produces": ["*/*"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": { "$ref": "#/definitions/可用支付方式" }
+                        }
+                    },
                     "401": { "description": "Unauthorized" },
                     "403": { "description": "Forbidden" },
                     "404": { "description": "Not Found" }
@@ -12080,7 +11805,7 @@
         },
         "/hs/api/v1/callBack/commPhoneCheck": {
             "post": {
-                "tags": ["APP:V1"],
+                "tags": ["APP:GLOBAL"],
                 "summary": "常用號碼檢測回調",
                 "description": "常用號碼檢測回調",
                 "operationId": "commPhoneCheckCallBackUsingPOST",
@@ -13149,11 +12874,6 @@
             },
             "title": "Battery"
         },
-        "BindBandCardRequest": {
-            "type": "object",
-            "properties": { "bankCardNo": { "type": "string" } },
-            "title": "BindBandCardRequest"
-        },
         "Bluetooth": {
             "type": "object",
             "properties": {
@@ -13209,6 +12929,45 @@
                 "uv": { "type": "integer", "format": "int32" }
             },
             "title": "ChannelVisitorResponse"
+        },
+        "ChargeFeeDetail": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "列举项目",
+                    "items": { "$ref": "#/definitions/ChargeFeeItem" }
+                },
+                "title": { "type": "string", "description": "标题" },
+                "totalSum": { "type": "number", "description": "列舉結算金額" }
+            },
+            "title": "ChargeFeeDetail"
+        },
+        "ChargeFeeItem": {
+            "type": "object",
+            "properties": {
+                "fieldType": {
+                    "type": "string",
+                    "description": "展示类型 纯文字 | 金额",
+                    "enum": ["CURRENCY", "TEXT"]
+                },
+                "itemName": { "type": "string", "description": "项目展示名称" },
+                "key": {
+                    "type": "string",
+                    "description": "项目对应key值",
+                    "enum": [
+                        "DAILY_FEE",
+                        "GST",
+                        "LOAN_AMOUNT",
+                        "LOAN_INTEREST",
+                        "PENALTY_INTEREST",
+                        "REDUCTION_AMOUNT",
+                        "SERVICE_FEE"
+                    ]
+                },
+                "value": { "type": "string", "description": "展示值" }
+            },
+            "title": "ChargeFeeItem"
         },
         "CollectTeamReportResponse": {
             "type": "object",
@@ -13364,6 +13123,39 @@
                 "type": { "type": "string" }
             },
             "title": "Cpu"
+        },
+        "CreateRepayResponse": {
+            "type": "object",
+            "properties": {
+                "nextStep": {
+                    "type": "string",
+                    "description": "下一步跳轉方式",
+                    "enum": ["html", "jumpUrl"]
+                },
+                "nextUrl": {
+                    "type": "string",
+                    "description": "下一步跳轉網址"
+                },
+                "orderNo": { "type": "string", "description": "產品訂單號" },
+                "payType": { "type": "string", "description": "支付类型" },
+                "payload": { "type": "object", "description": "業務參數" },
+                "pcOrderNo": {
+                    "type": "string",
+                    "description": "支付中心單號"
+                },
+                "phoneNo": { "type": "string", "description": "手機號" },
+                "platOrderId": {
+                    "type": "string",
+                    "description": "支付商平台流水号"
+                },
+                "repayAmount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "支付訂單金額"
+                },
+                "username": { "type": "string", "description": "用户姓名" }
+            },
+            "title": "CreateRepayResponse"
         },
         "Data": {
             "type": "object",
@@ -14020,6 +13812,14 @@
         "LoanApplyDetail": {
             "type": "object",
             "properties": {
+                "approveRate": {
+                    "type": "string",
+                    "description": "廣告通過率"
+                },
+                "approveTime": {
+                    "type": "string",
+                    "description": "廣告通過時間"
+                },
                 "bankAccounts": {
                     "type": "array",
                     "description": "已綁定銀行帳戶",
@@ -14027,47 +13827,30 @@
                 },
                 "csEmail": { "type": "string", "description": "產品客服郵件" },
                 "csTime": { "type": "string", "description": "產品客服時間" },
-                "dailyFee": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "日利息"
-                },
-                "dueDate": {
-                    "type": "string",
-                    "description": "訂單到期日 yyyy-MM-dd"
-                },
                 "loanAmount": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "借款金額"
+                    "type": "string",
+                    "description": "廣告預期借款金額"
                 },
                 "logoUrl": { "type": "string", "description": "logo" },
-                "payableAmount": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "應還金額 (Total Amount)"
-                },
                 "productId": {
                     "type": "integer",
                     "format": "int32",
                     "description": "產品流水號"
                 },
                 "productName": { "type": "string", "description": "產品名稱" },
-                "serviceCharge": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "服務費"
-                },
-                "taxFee": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "稅額"
+                "serviceRate": {
+                    "type": "string",
+                    "description": "interest 廣告利率"
                 },
                 "templateType": {
                     "type": "integer",
                     "format": "int32",
                     "description": "借款詳情模板  1: 借款金額 = 到手金額  2: 借款金額 = 應還金額",
                     "enum": [1, 2]
+                },
+                "terms": {
+                    "type": "string",
+                    "description": "Terms 廣告借款週期"
                 }
             },
             "title": "LoanApplyDetail"
@@ -14141,6 +13924,10 @@
                 "demoAccount": {
                     "type": "boolean",
                     "description": "google review account"
+                },
+                "needUpdateKyc": {
+                    "type": "boolean",
+                    "description": "是否需要更新kyc资讯"
                 },
                 "oldUser": { "type": "boolean", "description": "是否為老客" },
                 "status": {
@@ -15570,6 +15357,33 @@
             },
             "title": "QuestionnaireItem"
         },
+        "QuotaInfo": {
+            "type": "object",
+            "properties": {
+                "principal": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "到手本金"
+                },
+                "quota": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "借款额度"
+                },
+                "serviceFee": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "服务费"
+                },
+                "taxFee": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "税额(展示用)"
+                },
+                "term": { "type": "string", "description": "借款周期" }
+            },
+            "title": "QuotaInfo"
+        },
         "RadioValue": {
             "type": "object",
             "properties": {
@@ -15717,6 +15531,34 @@
             },
             "title": "RemoveUserByIdRequest"
         },
+        "RepayConfirmDetail": {
+            "type": "object",
+            "properties": {
+                "balance": { "type": "number", "description": "剩餘應還金額" },
+                "extendDate": { "type": "string", "description": "展期日期" },
+                "extensionFee": {
+                    "type": "number",
+                    "description": "展期費用 (+)"
+                },
+                "extensionPayAmount": {
+                    "type": "number",
+                    "description": "展期應付金額"
+                },
+                "paidAmount": {
+                    "type": "number",
+                    "description": "已還金額 (-)"
+                },
+                "penaltyInterest": {
+                    "type": "number",
+                    "description": "罰金金額 (+)"
+                },
+                "reductionAmount": {
+                    "type": "number",
+                    "description": "減免金額 (-)"
+                }
+            },
+            "title": "RepayConfirmDetail"
+        },
         "RiskControlModelListVo": {
             "type": "object",
             "properties": {
@@ -15733,6 +15575,7 @@
                     "enum": [
                         "BATEI",
                         "BLUE_RAY",
+                        "BLUE_RAY_API",
                         "DESTINY",
                         "DUMMY",
                         "HX",
@@ -15763,6 +15606,7 @@
                     "enum": [
                         "BATEI",
                         "BLUE_RAY",
+                        "BLUE_RAY_API",
                         "DESTINY",
                         "DUMMY",
                         "HX",
@@ -15946,10 +15790,10 @@
             "required": [
                 "appName",
                 "deviceCode",
+                "deviceModel",
                 "imei",
                 "productId",
-                "systemVersion",
-                "token"
+                "systemVersion"
             ],
             "properties": {
                 "appName": { "type": "string", "description": "包名" },
@@ -15959,23 +15803,34 @@
                     "description": "銀行帳戶流水號 (optional 沒指定預設主卡)"
                 },
                 "deviceCode": { "type": "string", "description": "装置码" },
-                "deviceModel": {
-                    "type": "string",
-                    "description": "装置机型, required = true"
-                },
+                "deviceModel": { "type": "string", "description": "装置机型" },
                 "imei": { "type": "string", "description": "IMEI" },
                 "productId": {
                     "type": "integer",
                     "format": "int32",
                     "description": "產品ID"
                 },
-                "systemVersion": {
-                    "type": "string",
-                    "description": "安卓版本"
-                },
-                "token": { "type": "string", "description": "密钥" }
+                "systemVersion": { "type": "string", "description": "安卓版本" }
             },
             "title": "SubmitOrderLoanRequest"
+        },
+        "SubmitOrderLoanResponse": {
+            "type": "object",
+            "required": ["orderNo"],
+            "properties": {
+                "orderNo": {
+                    "type": "string",
+                    "description": "申请订单号 (强下可能1笔以上)"
+                }
+            },
+            "title": "SubmitOrderLoanResponse"
+        },
+        "SwitchBandCardMainRequest": {
+            "type": "object",
+            "properties": {
+                "bankId": { "type": "integer", "format": "int32" }
+            },
+            "title": "SwitchBandCardMainRequest"
         },
         "SystemConfigGroupResponse": {
             "type": "object",
@@ -16349,6 +16204,107 @@
             },
             "title": "借款总览"
         },
+        "借貸訂單詳情": {
+            "type": "object",
+            "properties": {
+                "applyDate": { "type": "string", "description": "申請日期" },
+                "balance": {
+                    "type": "number",
+                    "description": "待還金額 (status=UNPAID, OVERDUE才會有)"
+                },
+                "bankCardNo": { "type": "string", "description": "銀行卡號" },
+                "chargeFeeDetail": {
+                    "description": "费用收取明细",
+                    "$ref": "#/definitions/ChargeFeeDetail"
+                },
+                "customerServiceEmail": {
+                    "type": "string",
+                    "description": "客服Email"
+                },
+                "customerServiceTime": {
+                    "type": "string",
+                    "description": "客服服務時間"
+                },
+                "dailyFee": { "type": "number", "description": "日息金額" },
+                "dueDate": { "type": "string", "description": "到期日期" },
+                "extendDate": {
+                    "type": "string",
+                    "description": "展期日期(status=EXTEND才會有)"
+                },
+                "extendable": {
+                    "type": "boolean",
+                    "description": "该订单是否可展期"
+                },
+                "extended": {
+                    "type": "boolean",
+                    "description": "是否为展期订单"
+                },
+                "extensionFee": {
+                    "type": "number",
+                    "description": "展期費用(status=EXTEND才會有)"
+                },
+                "iconUrl": { "type": "string", "description": "Icon url" },
+                "loanAmount": {
+                    "type": "number",
+                    "description": "借款金额(合同金額)"
+                },
+                "orderNo": { "type": "string", "description": "單號" },
+                "originalDueDate": {
+                    "type": "string",
+                    "description": "原始到期日期(status=EXTEND才會有)"
+                },
+                "overdue": { "type": "boolean", "description": "是否逾期" },
+                "paidAmount": { "type": "number", "description": "已還金額" },
+                "parentOrderNo": {
+                    "type": "string",
+                    "description": "展期来源订单号"
+                },
+                "penaltyInterest": {
+                    "type": "number",
+                    "description": "罰金金額"
+                },
+                "productName": { "type": "string", "description": "產品名稱" },
+                "recommendProducts": {
+                    "type": "array",
+                    "description": "推薦產品列表",
+                    "items": { "$ref": "#/definitions/產品推薦列表" }
+                },
+                "reductionAmount": {
+                    "type": "number",
+                    "description": "減免金額"
+                },
+                "repayConfirmDetail": {
+                    "description": "確認付款詳情 (status=UNPAID, OVERDUE才會有)",
+                    "$ref": "#/definitions/RepayConfirmDetail"
+                },
+                "repayRecords": {
+                    "type": "array",
+                    "description": "還款紀錄",
+                    "items": { "$ref": "#/definitions/還款紀錄" }
+                },
+                "serviceCharge": {
+                    "type": "number",
+                    "description": "服務費金額"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "狀態",
+                    "enum": [
+                        "EXTEND",
+                        "OVERDUE",
+                        "PAY_OFF",
+                        "PROCESSING",
+                        "REJECTED",
+                        "UNPAID"
+                    ]
+                },
+                "totalDueAmount": {
+                    "type": "number",
+                    "description": "訂單總應還金额 (status=UNPAID, OVERDUE才會有)"
+                }
+            },
+            "title": "借貸訂單詳情"
+        },
         "催收团队": {
             "type": "object",
             "properties": {
@@ -16433,6 +16389,43 @@
                 }
             },
             "title": "催收组别"
+        },
+        "創建還款訂單": {
+            "type": "object",
+            "required": ["orderNo", "payType"],
+            "properties": {
+                "extend": { "type": "boolean", "description": "是否展期" },
+                "forceApplyAfterRepay": {
+                    "type": "boolean",
+                    "description": "还款结清后是否自动下单"
+                },
+                "orderNo": { "type": "string", "description": "訂單號" },
+                "payType": {
+                    "type": "string",
+                    "description": "客戶選擇的付款方式"
+                },
+                "repayAmount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "客戶選擇的還款金額"
+                }
+            },
+            "title": "創建還款訂單"
+        },
+        "可用支付方式": {
+            "type": "object",
+            "properties": {
+                "payPlats": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/支付平台" }
+                },
+                "payType": { "type": "string", "description": "支付类型名称" },
+                "payTypeAlias": {
+                    "type": "string",
+                    "description": "支付类型别名"
+                }
+            },
+            "title": "可用支付方式"
         },
         "問券表單": {
             "type": "object",
@@ -16548,6 +16541,7 @@
                     "type": "string",
                     "description": "訂單到期日  yyyy/MM/dd"
                 },
+                "overdue": { "type": "boolean", "description": "是否逾期" },
                 "payableAmount": {
                     "type": "integer",
                     "format": "int32",
@@ -16566,32 +16560,16 @@
             },
             "title": "提交报告结果"
         },
-        "放款额度": {
+        "支付平台": {
             "type": "object",
             "properties": {
-                "principal": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "到手本金"
+                "platClass": {
+                    "type": "string",
+                    "description": "支付平台类名"
                 },
-                "quota": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "借款额度"
-                },
-                "serviceFee": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "服务费"
-                },
-                "taxFee": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "税额(展示用)"
-                },
-                "term": { "type": "string", "description": "借款周期" }
+                "platName": { "type": "string", "description": "支付平台名称" }
             },
-            "title": "放款额度"
+            "title": "支付平台"
         },
         "活体收费请求": {
             "type": "object",
@@ -16616,11 +16594,27 @@
                     "type": "string",
                     "description": "借款合約書"
                 },
+                "approvedRate": {
+                    "type": "string",
+                    "description": "广告通过率"
+                },
+                "approvedTime": {
+                    "type": "string",
+                    "description": "广告通过时间"
+                },
+                "backgroundUrl": {
+                    "type": "string",
+                    "description": "background image"
+                },
                 "csEmail": { "type": "string", "description": "產品客服郵件" },
                 "csTime": { "type": "string", "description": "產品客服時間" },
                 "disclosureUrl": {
                     "type": "string",
                     "description": "揭露聲明"
+                },
+                "interestRate": {
+                    "type": "string",
+                    "description": "广告借款服务费率"
                 },
                 "loanQuota": { "type": "string", "description": "广告额度" },
                 "logoUrl": { "type": "string", "description": "Logo icon" },
@@ -16631,9 +16625,10 @@
                     "description": "產品流水號"
                 },
                 "productName": { "type": "string", "description": "產品名稱" },
-                "serviceFee": {
-                    "type": "string",
-                    "description": "广告借款服务费"
+                "sort": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "排序 (预设从小到大)"
                 },
                 "tags": {
                     "type": "array",
@@ -16641,7 +16636,8 @@
                     "items": { "type": "string" }
                 },
                 "term": { "type": "string", "description": "广告借款周期" },
-                "termUrl": { "type": "string", "description": "服務條款" }
+                "termUrl": { "type": "string", "description": "服務條款" },
+                "top": { "type": "boolean", "description": "置顶" }
             },
             "title": "產品推薦列表"
         },
@@ -16663,6 +16659,11 @@
             "type": "object",
             "properties": {
                 "bankAccount": { "type": "string", "description": "銀行帳戶" },
+                "bankId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "銀行帳戶流水號"
+                },
                 "bankName": { "type": "string", "description": "銀行名稱" },
                 "holderName": { "type": "string", "description": "持有人姓名" },
                 "main": { "type": "boolean", "description": "是否為主卡" }
@@ -16720,6 +16721,18 @@
             "properties": { "uid": { "type": "string" } },
             "title": "绑定kyc认证用户关联"
         },
+        "绑订银行账户(卡)": {
+            "type": "object",
+            "properties": {
+                "bankAccount": { "type": "string", "description": "銀行帳戶" },
+                "ifscCode": {
+                    "type": "string",
+                    "description": "印度 银行代号"
+                },
+                "upiId": { "type": "string", "description": "印度 UPI number" }
+            },
+            "title": "绑订银行账户(卡)"
+        },
         "貸款紀錄": {
             "type": "object",
             "properties": {
@@ -16729,8 +16742,15 @@
                     "description": "審核紀錄",
                     "items": { "$ref": "#/definitions/審核紀錄" }
                 },
-                "balance": { "type": "number", "description": "待還金額" },
+                "balance": {
+                    "type": "number",
+                    "description": "待還金額 (status=UNPAID, OVERDUE才會有)"
+                },
                 "bankCardNo": { "type": "string", "description": "銀行卡號" },
+                "chargeFeeDetail": {
+                    "description": "费用收取明细",
+                    "$ref": "#/definitions/ChargeFeeDetail"
+                },
                 "customerServiceEmail": {
                     "type": "string",
                     "description": "客服Email"
@@ -16740,6 +16760,10 @@
                     "description": "客服服務時間"
                 },
                 "dailyFee": { "type": "number", "description": "日息金額" },
+                "detailH5lUrl": {
+                    "type": "string",
+                    "description": "Loan Detail H5 URL"
+                },
                 "dueDate": { "type": "string", "description": "到期日期" },
                 "extendDate": {
                     "type": "string",
@@ -16756,6 +16780,7 @@
                     "type": "string",
                     "description": "原始到期日期(status=EXTEND才會有)"
                 },
+                "overdue": { "type": "boolean", "description": "是否逾期" },
                 "paidAmount": { "type": "number", "description": "已還金額" },
                 "penaltyInterest": {
                     "type": "number",
@@ -16773,7 +16798,7 @@
                 },
                 "serviceCharge": {
                     "type": "number",
-                    "description": "服務費金額"
+                    "description": "服務費金額 (砍頭金)"
                 },
                 "status": {
                     "type": "string",
@@ -16783,8 +16808,13 @@
                         "OVERDUE",
                         "PAY_OFF",
                         "PROCESSING",
+                        "REJECTED",
                         "UNPAID"
                     ]
+                },
+                "totalDueAmount": {
+                    "type": "number",
+                    "description": "訂單總應還金额 (status=UNPAID, OVERDUE才會有)"
                 }
             },
             "title": "貸款紀錄"
@@ -16792,15 +16822,19 @@
         "還款紀錄": {
             "type": "object",
             "properties": {
-                "balance": { "type": "number", "description": "待還金額" },
                 "repayAmount": { "type": "number", "description": "還款金額" },
-                "repayDate": { "type": "string", "description": "還款日期" }
+                "repayDate": { "type": "string", "description": "還款日期" },
+                "repayType": { "type": "string", "description": "還款類型" }
             },
             "title": "還款紀錄"
         },
         "首页资讯": {
             "type": "object",
             "properties": {
+                "bankBindH5url": {
+                    "type": "string",
+                    "description": "银行绑卡H5 url"
+                },
                 "crossRegionIp": {
                     "type": "boolean",
                     "description": "跨区域请求"
@@ -16818,7 +16852,11 @@
                 "marquee": { "type": "string", "description": "跑馬燈文字" },
                 "oldUserForceApply": {
                     "type": "boolean",
-                    "description": "開關: 老客客強下"
+                    "description": "開關: 老客強下"
+                },
+                "popupUrl": {
+                    "type": "string",
+                    "description": "提醒弹跳H5页面 or 图片 (若后台没设定参数回传null)"
                 },
                 "products": {
                     "type": "array",
@@ -16827,7 +16865,7 @@
                 },
                 "quotaInfo": {
                     "description": "放款额度(FOR 單包測試帳號)",
-                    "$ref": "#/definitions/放款额度"
+                    "$ref": "#/definitions/QuotaInfo"
                 }
             },
             "title": "首页资讯"

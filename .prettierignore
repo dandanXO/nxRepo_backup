@@ -5,4 +5,6 @@ coverage
 public
 .gitignore
 package-lock.json
-task
+task/openapi-typescript
+task/openapi-typescript-codegen/generated
+task/rtk-query-codegen-openapi/
