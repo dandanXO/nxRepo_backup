@@ -19,7 +19,7 @@ import {
 } from "../../api/postRepayCreate";
 
 interface PureLoanDetailsPageProps {
-    currentData: any;
+    currentData?: any;
     navigateToUploadPaymentReceiptPage: any;
     handlePostRepayCreate: any;
 }
@@ -29,12 +29,13 @@ export const PureLoanDetailsPage = (props: PureLoanDetailsPageProps) => {
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     const [showAmountPaidModal, setShowAmountPaidModal] = useState(false);
     const [showRepaymentModal, setShowRepaymentModal] = useState(false);
-    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] =
-        useState(false);
-    const [repayBalance, setRepayBalance] = useState(props.currentData.balance);
+    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] = useState(false);
+    const [repayBalance, setRepayBalance] = useState(props?.currentData?.balance);
+    const [recommendProducts, setRecommendProducts] = useState(props?.currentData?.recommendProducts);
 
     useEffect(() => {
-        setRepayBalance(props.currentData.balance);
+        setRepayBalance(props?.currentData?.balance);
+        
     }, [props.currentData]);
     return (
         <Page>
@@ -86,7 +87,7 @@ export const PureLoanDetailsPage = (props: PureLoanDetailsPageProps) => {
                 setShowRepaymentModal={setShowRepaymentModal}
             />
             <Advertisement
-                recommendProducts={props.currentData.recommendProducts}
+                recommendProducts={props?.currentData?.recommendProducts}
             />
         </Page>
     );
@@ -150,7 +151,7 @@ const LoanDetailsPage = () => {
 
     return (
         <PureLoanDetailsPage
-            currentData={isLoading ? {} : mockGetLoanDetailResponse}
+            currentData={currentData}
             navigateToUploadPaymentReceiptPage={
                 navigateToUploadPaymentReceiptPage
             }

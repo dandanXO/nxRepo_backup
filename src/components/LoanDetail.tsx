@@ -2,6 +2,8 @@ import styled from "styled-components";
 import React from "react";
 import {
     mockGetLoanDetailResponse,
+    GetLoanDetailChargeFeeDetail,
+    GetLoanDetailChargeFeeDetailItems,
     GetLoanDetailResponse,
 } from "../api/getLoanDetail";
 import ListItem from "../core/components/ListItem";
@@ -9,6 +11,7 @@ import Button from "../core/components/Button";
 import Accordion from "../core/components/Accordion";
 import Divider from "../core/components/Divider";
 import Card from "../core/components/Card";
+import { convertCompilerOptionsFromJson } from "typescript";
 
 const LoanDetailStyled = styled.div`
     text-align: center;
@@ -45,6 +48,7 @@ const LoanDetailStyled = styled.div`
 
 type LoanDetailProps = Pick<
     GetLoanDetailResponse,
+    | "chargeFeeDetail"
     | "loanAmount"
     | "serviceCharge"
     | "dailyFee"
@@ -53,25 +57,28 @@ type LoanDetailProps = Pick<
     | "applyDate"
     | "dueDate"
     | "bankCardNo"
-> & {
+>  &{
     setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const renderDetailContent = (props: LoanDetailProps) => {
+const renderDetailContent = (props: GetLoanDetailChargeFeeDetail) => {
     const {
-        loanAmount,
-        serviceCharge,
-        dailyFee,
-        reductionAmount,
-        penaltyInterest,
-        applyDate,
-        dueDate,
-        bankCardNo,
-    } = props;
+        items=[]
+        // chargeFeeDetail={items:[]},
+        // loanAmount,
+        // serviceCharge,
+        // dailyFee,
+        // reductionAmount,
+        // penaltyInterest,
+        // applyDate,
+        // dueDate,
+        // bankCardNo,
+    } = props||{};
+    console.log('props',items)
     return (
         <div className={"detailsContent"}>
-            <ListItem title={"Loan Amount"} text={loanAmount} />
+            {/* <ListItem title={"Loan Amount"} text={loanAmount} />
             <ListItem title={"Service Charge"} text={serviceCharge} />
             <ListItem title={"Daily fee"} text={dailyFee} />
             <ListItem title={"Reduction Amount"} text={reductionAmount} />
@@ -81,18 +88,19 @@ const renderDetailContent = (props: LoanDetailProps) => {
             <ListItem title={"Due Date"} text={dueDate} />
             <Divider />
             <div className={"textTitle"}>Link account</div>
-            <ListItem title={"Bank card"} text={bankCardNo} />
+            <ListItem title={"Bank card"} text={bankCardNo} /> */}
         </div>
     );
 };
 
 const LoanDetail = (props: LoanDetailProps) => {
-    const { setShowExtendModal, setShowRepaymentModal } = props;
+   
+    const {chargeFeeDetail, setShowExtendModal, setShowRepaymentModal } = props;
     return (
         <LoanDetailStyled>
             <Card isHot={false}>
-                <Accordion title={"Details"} isCollapse={true}>
-                    {renderDetailContent(props)}
+                <Accordion title={chargeFeeDetail?.title} isCollapse={true}>
+                    {renderDetailContent(props.chargeFeeDetail)}
                 </Accordion>
             </Card>
             <div className={"noticeText"}>
