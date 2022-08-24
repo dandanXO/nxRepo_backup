@@ -16,7 +16,7 @@ const alertModal = (message: string) =>
         enableIcon: false,
     });
 
-let percent = 0;
+
 const axiosBaseQuery =
     (
         { baseUrl }: { baseUrl: string } = { baseUrl: "" }
@@ -32,6 +32,8 @@ const axiosBaseQuery =
         unknown
     > =>
     async ({ url, method, data, params, headers }) => {
+        let onUploadPercent = 0;
+        let onDownloadPercent = 0;
         const getToken = () => {
             const parsedQueryString = queryString.parse(location.search);
             const TOKEN = parsedQueryString.token
@@ -61,23 +63,23 @@ const axiosBaseQuery =
                             ((progressEvent.loaded / progressEvent.total) *
                                 100) |
                             0;
-                        percent = complete;
+                        onUploadPercent = complete;
                         if (complete >= 100) {
-                            percent = 0;
+                            onUploadPercent = 0;
                         }
                         console.log("baseUrl + url: ", baseUrl + url);
-                        console.log("percent", percent);
+                        console.log("percent", onUploadPercent);
                     }
                 },
                 onDownloadProgress: function (progressEvent) {
                     // 對原生進度事件的處理
-                    let num =
+                    onDownloadPercent =
                         (progressEvent.loaded / progressEvent.total) * 100; // 計算進度
-                    const loadingText = "進度：" + num + "%";
+                    const loadingText = "進度：" + onDownloadPercent + "%";
                     console.log(loadingText);
                 },
             });
-            return { data: result.data, percent };
+            return { data: result.data, onUploadProgress: onUploadPercent, onDownloadProgress: onDownloadPercent};
         } catch (axiosError) {
             let err = axiosError as AxiosError;
             const error = JSON.parse(JSON.stringify(err.response?.data)) as {
@@ -92,7 +94,6 @@ const axiosBaseQuery =
             console.log(error);
             alertModal(errorMessage);
             // alertModal(err.message);
-
             return {
                 error: {
                     status: err.response?.status,
