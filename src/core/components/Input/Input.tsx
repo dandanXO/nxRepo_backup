@@ -235,7 +235,6 @@ const Input: InputInterface = ({
     if (labelType === "top") {
         CustomInput = StyledTopInput;
         upperLabelType = true;
-
         if (!isEdit) {
             if (String(value).length > 0) {
                 LabelComponentElement = "";

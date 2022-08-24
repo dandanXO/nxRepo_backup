@@ -121,7 +121,6 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                         setBalanceValue("₹" + value);
                                         props.setRepayBalance(value);
                                     }}
-                                    errorMessage="Error message"
                                 />
                                 <SectionParagraph>
                                     <Paragraph>Attention:</Paragraph>
