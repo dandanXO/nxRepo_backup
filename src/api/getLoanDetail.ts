@@ -47,8 +47,8 @@ export interface GetLoanDetailResponse {
     penaltyInterest?: number;
     /** @description 產品名稱 */
     productName?: string;
-     /** @description 推薦產品列表 */
-     recommendProducts?: GetLoanDetailRecommendProducts[];
+    /** @description 推薦產品列表 */
+    recommendProducts?: GetLoanDetailRecommendProducts[];
     /** @description 減免金額 */
     reductionAmount?: number;
     /** @description repayConfirmDetail */
@@ -154,7 +154,7 @@ export interface GetLoanDetailRecommendProducts {
     /** @description 排序 (预设从小到大) */
     sort?: number;
     /** @description [...] */
-    tags?:string[];
+    tags?: string[];
     /** @description 广告借款周期 */
     term?: string;
     /** @description 服務條款 */
