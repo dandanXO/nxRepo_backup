@@ -2,7 +2,10 @@ import Overlay from "../../../core/components/Overlay";
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import ListItem from "../../../core/components/ListItem";
-import { GetLoanDetailResponse,GetLoanDetailRepayConfirmDetail } from "../../../api/getLoanDetail";
+import {
+    GetLoanDetailResponse,
+    GetLoanDetailRepayConfirmDetail,
+} from "../../../api/getLoanDetail";
 import { flexCreator } from "../../../core/components/utils";
 import Title from "../../../core/components/Modal/Title";
 import Divider from "../../../core/components/Divider";
@@ -37,12 +40,13 @@ const ModalContentStyled = styled.div`
 //     handlePostRepayCreate: any;
 // }
 export interface PureExtendModalProps {
-    repayConfirmDetail?: GetLoanDetailRepayConfirmDetail
+    repayConfirmDetail?: GetLoanDetailRepayConfirmDetail;
     setShowExtendModal?: React.Dispatch<React.SetStateAction<boolean>>;
     handlePostRepayCreate?: any;
 }
 export const PureExtendModal = (props: PureExtendModalProps) => {
-    const { repayConfirmDetail, setShowExtendModal, handlePostRepayCreate } = props;
+    const { repayConfirmDetail, setShowExtendModal, handlePostRepayCreate } =
+        props;
     const {
         extendDate,
         extensionFee,
@@ -68,29 +72,35 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             <Divider />
                             <ListItem
                                 title={"Extension Fee"}
-                                text={`₹ ${extensionFee?extensionFee:""}`}
+                                text={`₹ ${extensionFee ? extensionFee : ""}`}
                             />
                             <ListItem
                                 title={"Amount Paid"}
-                                text={`- ₹ ${paidAmount?paidAmount:""}`}
+                                text={`- ₹ ${paidAmount ? paidAmount : ""}`}
                             />
                             <ListItem
                                 title={"Penalty Interest"}
-                                text={`₹ ${penaltyInterest?penaltyInterest:""}`}
+                                text={`₹ ${
+                                    penaltyInterest ? penaltyInterest : ""
+                                }`}
                             />
                             <ListItem
                                 title={"Reduction Amount"}
-                                text={`₹ ${reductionAmount?reductionAmount:""}`}
+                                text={`₹ ${
+                                    reductionAmount ? reductionAmount : ""
+                                }`}
                             />
                             <ListItem
                                 title={"Total Amount"}
-                                text={`₹ ${extensionPayAmount?extensionPayAmount:""}`}
+                                text={`₹ ${
+                                    extensionPayAmount ? extensionPayAmount : ""
+                                }`}
                             />
                             <Divider />
                             <div className={"hintText"}>
                                 <ListItem
                                     title={"Extension due date"}
-                                    text={extendDate?extendDate:""}
+                                    text={extendDate ? extendDate : ""}
                                 />
                             </div>
                             <div className={"sectionButtons"}>
