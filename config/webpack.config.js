@@ -14,6 +14,7 @@ const config = {
     entry: "./src/index.tsx",
     output: {
         path: path.resolve(__dirname, "../dist"),
+        filename: 'main.[hash].js',
     },
     devServer: {
         hot: true,
