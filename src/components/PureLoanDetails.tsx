@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ExtendModal from "./modal/ExtendModal/ExtendModal";
 import ExtensionDetailModal from "../pages/LoanDetailsPage/modal/ExtensionDetailModal";
 import AmountPaidModal from "./modal/AmountPaidModal/AmountPaidModal";
@@ -75,7 +75,6 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
                 setShowExtendModal={setShowExtendModal}
                 setShowRepaymentModal={setShowRepaymentModal}
             />
-
         </React.Fragment>
     );
 };

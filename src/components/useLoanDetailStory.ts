@@ -1,8 +1,15 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useLocationOrderQueryString from "../core/hooks/useLocationOrderQueryString";
-import {useGetLoanDetailQuery, useGetRepayTypesQuery, usePostRepayCreateMutation} from "../api";
-import {useCallback, useEffect, useState} from "react";
-import {PostRepayCreateRequestBody, PostRepayCreateResponse} from "../api/postRepayCreate";
+import {
+    useGetLoanDetailQuery,
+    useGetRepayTypesQuery,
+    usePostRepayCreateMutation,
+} from "../api";
+import { useCallback, useEffect, useState } from "react";
+import {
+    PostRepayCreateRequestBody,
+    PostRepayCreateResponse,
+} from "../api/postRepayCreate";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();
@@ -66,7 +73,7 @@ const useLoanDetailStory = () => {
     return {
         currentData,
         navigateToUploadPaymentReceiptPage,
-        handlePostRepayCreate
-    }
-}
+        handlePostRepayCreate,
+    };
+};
 export default useLoanDetailStory;
