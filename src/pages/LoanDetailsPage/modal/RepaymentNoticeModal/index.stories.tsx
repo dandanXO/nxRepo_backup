@@ -16,7 +16,7 @@ export const ModalRepaymentNotice: ComponentStory<
             <RepaymentNoticeModal
                 setShowRepaymentNoticeModal={() => {}}
                 handlePostRepayCreate={() => {}}
-                balance="1000"
+                balance={1010}
             />
         </AppThemeProvider>
     );

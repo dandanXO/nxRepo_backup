@@ -10,9 +10,6 @@ export default () => {
     return (
         <Page>
             <div>
-                <Link to="/demo">demoPage</Link>
-            </div>
-            <div>
                 <Link
                     to={"/bank-bind?" + getToken() + "&" + getCardholderName()}
                 >
