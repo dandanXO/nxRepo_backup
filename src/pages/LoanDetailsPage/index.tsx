@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useGetLoanDetailQuery, useGetRepayTypesQuery } from "../../api";
-import {mockGetLoanDetailResponse} from "../../api/getLoanDetail";
+import { mockGetLoanDetailResponse } from "../../api/getLoanDetail";
 import Page from "../../core/components/Page";
 import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
 import LoanInfo from "../../components/LoanInfo";
@@ -13,7 +13,10 @@ import RepaymentModal from "./modal/RepaymentModal";
 import RepaymentNoticeModal from "./modal/RepaymentNoticeModal";
 import { useNavigate } from "react-router-dom";
 import { usePostRepayCreateMutation } from "../../api";
-import { PostRepayCreateRequestBody,PostRepayCreateResponse,} from "../../api/postRepayCreate";
+import {
+    PostRepayCreateRequestBody,
+    PostRepayCreateResponse,
+} from "../../api/postRepayCreate";
 
 interface PureLoanDetailsPageProps {
     currentData: any;

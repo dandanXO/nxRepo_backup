@@ -4,14 +4,14 @@ const { color } = theme;
 const recordStatusStyleProps: {
     [key: string]: object;
 } = {
-    "extend": {
+    extend: {
         color: color.blue,
     },
     "pay off": {
         color: color.gray500,
         fontWeight: "bold",
     },
-    "partial": {
+    partial: {
         color: color.gray500,
     },
     "overdue / pay off": {

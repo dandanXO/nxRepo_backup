@@ -16,7 +16,6 @@ const alertModal = (message: string) =>
         enableIcon: false,
     });
 
-
 const axiosBaseQuery =
     (
         { baseUrl }: { baseUrl: string } = { baseUrl: "" }
@@ -79,7 +78,11 @@ const axiosBaseQuery =
                     console.log(loadingText);
                 },
             });
-            return { data: result.data, onUploadProgress: onUploadPercent, onDownloadProgress: onDownloadPercent};
+            return {
+                data: result.data,
+                onUploadProgress: onUploadPercent,
+                onDownloadProgress: onDownloadPercent,
+            };
         } catch (axiosError) {
             let err = axiosError as AxiosError;
             const error = JSON.parse(JSON.stringify(err.response?.data)) as {

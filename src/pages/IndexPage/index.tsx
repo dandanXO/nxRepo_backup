@@ -13,19 +13,19 @@ export default () => {
                 <Link to="/demo">demoPage</Link>
             </div>
             <div>
+                <Link
+                    to={"/bank-bind?" + getToken() + "&" + getCardholderName()}
+                >
+                    bank-bind
+                </Link>
+            </div>
+            <div>
                 <Link to={"/loan-details?" + queryString()}>
                     loanDetailsPage
                 </Link>
             </div>
             <div>
                 <Link to="/extend-details">extendDetailsPage</Link>
-            </div>
-            <div>
-                <Link
-                    to={"/bank-bind?" + getToken() + "&" + getCardholderName()}
-                >
-                    bank-bind
-                </Link>
             </div>
             <div>
                 <Link to={"/upload-payment-receipt?" + queryString()}>

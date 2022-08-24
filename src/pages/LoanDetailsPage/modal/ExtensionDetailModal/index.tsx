@@ -13,20 +13,18 @@ import recordStatusStyleProps from "../../../../components/recordStatusColorMapp
 const ExtesionDetailStyled = styled.div`
     text-align: center;
     color: ${({ theme }) => theme.color.black};
-   
-    .loanBrand{
-      
+
+    .loanBrand {
     }
     .totalTitle {
         margin: 8px 0;
         font-size: ${({ theme }) => theme.fontSize[14]};
-       
     }
     .totalText {
         font-size: ${({ theme }) => theme.fontSize[26]};
         font-weight: bold;
     }
-   
+
     .loanInfo-Card-Title {
         color: ${({ theme }) => theme.color.gray500};
         font-size: ${({ theme }) => theme.fontSize[12]};
@@ -34,7 +32,7 @@ const ExtesionDetailStyled = styled.div`
         margin-bottom: 10px;
         text-align: left;
     }
-    .loanInfo-Card-list{
+    .loanInfo-Card-list {
         width: 100%;
     }
     .relatedRepayment {
@@ -87,10 +85,27 @@ const NoDataStyled = styled.div`
 `;
 
 type ExtesionDetailProps = GetLoanDetailResponse & {
-    setShowExtensionModal?: React.Dispatch<React.SetStateAction<boolean>>
+    setShowExtensionModal?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const renderExtesionDetail = (props: ExtesionDetailProps) => {
-    const { iconUrl, status, paidAmount, repayRecords=[], balance, productName, loanAmount, serviceCharge, dailyFee, reductionAmount, penaltyInterest, extensionFee, originalDueDate, extendDate, dueDate, bankCardNo } = props;
+    const {
+        iconUrl,
+        status,
+        paidAmount,
+        repayRecords = [],
+        balance,
+        productName,
+        loanAmount,
+        serviceCharge,
+        dailyFee,
+        reductionAmount,
+        penaltyInterest,
+        extensionFee,
+        originalDueDate,
+        extendDate,
+        dueDate,
+        bankCardNo,
+    } = props;
     return (
         <ExtesionDetailStyled>
             <div className="loanBrand">
@@ -105,18 +120,27 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             <Divider />
             <div className={"loanInfo-Card-Title"}>Gernal</div>
             <div className={"loanInfo-Card-list"}>
-                <ListItem title={"State"} text={<Tag status={status}>{status}</Tag>}/>
+                <ListItem
+                    title={"State"}
+                    text={<Tag status={status}>{status}</Tag>}
+                />
                 <ListItem title={"Amount Paid"} text={`₹ ${paidAmount}`} />
                 <RepayRecordStyled>
                     <Accordion title={"Amount Paid Record"} isCollapse={true}>
-                        {repayRecords.length === 0 ? (<NoDataStyled>No paid records yet</NoDataStyled>)
-                            : (repayRecords.map((record) => {
+                        {repayRecords.length === 0 ? (
+                            <NoDataStyled>No paid records yet</NoDataStyled>
+                        ) : (
+                            repayRecords.map((record) => {
                                 return (
                                     <ListItem
                                         title={
                                             <div>
                                                 <div>{record.repayDate}</div>
-                                                <RepayTypeStyled status={record.repayType}>{record.repayType}</RepayTypeStyled>
+                                                <RepayTypeStyled
+                                                    status={record.repayType}
+                                                >
+                                                    {record.repayType}
+                                                </RepayTypeStyled>
                                             </div>
                                         }
                                         text={`₹ ${record.repayAmount}`}
@@ -146,25 +170,27 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             <ListItem title={"Bank card"} text={bankCardNo} />
         </ExtesionDetailStyled>
     );
-
-}
-
+};
 
 const ExtensionDetailModal = (props: ExtesionDetailProps) => {
     const { setShowExtensionModal, parentOrderNo } = props;
-    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({ orderNo: "no-7864747613693247" });
+    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({
+        orderNo: "no-7864747613693247",
+    });
 
     return (
         <div>
             <Overlay
                 show={true}
                 title="Notice"
-                content={(hide: () => void) => renderExtesionDetail(isLoading ? {} : currentData)}
+                content={(hide: () => void) =>
+                    renderExtesionDetail(isLoading ? {} : currentData)
+                }
                 enableTitleHorizontal={true}
                 enableClose={true}
                 onCancel={() => setShowExtensionModal(false)}
             ></Overlay>
         </div>
     );
-}
+};
 export default ExtensionDetailModal;
