@@ -35,11 +35,6 @@ export const validationInfo = {
 export const PureBindBankAccountPage = (
     props: PureBindBankAccountPageProps
 ) => {
-    const [value, setValue] = useState<InputValue<string>>({
-        data: "",
-        isValidation: false,
-        errorMessage: "",
-    });
     const [value2, setValue2] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
@@ -263,7 +258,7 @@ export const PureBindBankAccountPage = (
                     value={value5.data}
                     onChange={(event) => {
                         setValue5({
-                            ...value,
+                            ...value5,
                             data: event.target.value,
                         });
                     }}
