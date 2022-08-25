@@ -8,7 +8,7 @@ const alertModal = (message: string) =>
     Modal.alert({
         show: true,
         mask: true,
-        title: "App Error",
+        title: "Error",
         content: message,
         confirmText: "Confirm",
         maskClosable: true,
@@ -93,8 +93,8 @@ const axiosBaseQuery =
                 };
             };
             const errorMessage = error?.data?.msg || error.message;
-            console.log(err);
-            console.log(error);
+            // console.log(err);
+            // console.log(error);
             alertModal(errorMessage);
             // alertModal(err.message);
             return {

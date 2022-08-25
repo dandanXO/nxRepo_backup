@@ -177,19 +177,6 @@ export const PureBindBankAccountPage = (
                     },
                 });
             })
-            .catch((error: any) => {
-                console.log("error:", error);
-                Modal.alert({
-                    show: true,
-                    mask: true,
-                    title: "Error",
-                    content: error.data,
-                    confirmText: "Confirm",
-                    maskClosable: true,
-                    enableClose: false,
-                    enableIcon: false,
-                });
-            });
     }, [
         ifscData.data,
         bankcardNoData.data,

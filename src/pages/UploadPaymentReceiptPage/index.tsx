@@ -217,9 +217,6 @@ const UploadPaymentReceiptPage = () => {
                 .then((data: PostRepayReceiptResponse) => {
                     goToUploadedPaymentReceiptPage();
                 })
-                .catch(({ error }) => {
-                    console.log(error);
-                })
                 .finally(() => {
                     props.setIsUploading(false);
                 });
