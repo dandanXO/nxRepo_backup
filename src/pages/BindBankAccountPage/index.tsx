@@ -1,7 +1,7 @@
 import React from "react";
-import {usePostBankBindSaveMutation} from "../../api";
+import { usePostBankBindSaveMutation } from "../../api";
 import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
-import {PureBindBankAccountPage} from "./PureBindBankAccountPage";
+import { PureBindBankAccountPage } from "./PureBindBankAccountPage";
 
 const BindBankAccountPage = () => {
     const [postBankBindSave] = usePostBankBindSaveMutation();

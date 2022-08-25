@@ -1,12 +1,12 @@
-import React, {useCallback, useState} from "react";
-import {Input} from "../../core/components/Input";
+import React, { useCallback, useState } from "react";
+import { Input } from "../../core/components/Input";
 import styled from "styled-components";
 import Page from "../../core/components/Page";
 import Button from "../../core/components/Button";
-import type {InputValue} from "../../core/types/InputValue";
-import {PostBankBindSaveRequest} from "../../api/postBankBindSave";
+import type { InputValue } from "../../core/types/InputValue";
+import { PostBankBindSaveRequest } from "../../api/postBankBindSave";
 import Modal from "../../core/components/Modal";
-import {z} from "zod";
+import { z } from "zod";
 
 const CustomPage = styled(Page)`
     display: flex;
@@ -31,98 +31,109 @@ interface PureBindBankAccountPageProps {
 
 export const validationInfo = {
     min1: "This field cannot be left blank",
-}
+};
 export const PureBindBankAccountPage = (
     props: PureBindBankAccountPageProps
 ) => {
-    const [value2, setValue2] = useState<InputValue<string>>({
+    const [ifscData, setIFSCData] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
         errorMessage: "",
     });
     const validateIFSC = useCallback(() => {
-        const ifscScheme = z.string()
+        const ifscScheme = z
+            .string()
             .min(1, validationInfo.min1)
-            .length(11, "Please enter the correct IFSC code.")
-        const result = ifscScheme.safeParse(value2.data);
-        if(!result.success) {
+            .length(11, "Please enter the correct IFSC code.");
+        const result = ifscScheme.safeParse(ifscData.data);
+        if (!result.success) {
             const firstError = result.error.format();
             const errorMessage = firstError._errors[0];
-            setValue2({
-                ...value2,
+            setIFSCData({
+                ...ifscData,
                 isValidation: false,
                 errorMessage,
-            })
-        }else {
-            setValue2({
-                ...value2,
+            });
+        } else {
+            setIFSCData({
+                ...ifscData,
                 isValidation: true,
-                errorMessage: ""
-            })
+                errorMessage: "",
+            });
         }
-    }, [value2.data]);
+    }, [ifscData.data]);
 
-    const [value3, setValue3] = useState<InputValue<string>>({
+    const [bankcardNoData, setBankcardNoData] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
         errorMessage: "",
     });
 
-    const [value4, setValue4] = useState<InputValue<string>>({
+    const [confirmedBankcardNoData, setConfirmedBankcardNoData] = useState<
+        InputValue<string>
+    >({
         data: "",
         isValidation: false,
         errorMessage: "",
     });
 
     const validateBankcardNo = useCallback(() => {
-        const bankCardNoScheme = z.string()
+        const bankCardNoScheme = z
+            .string()
             .min(1, validationInfo.min1)
             .min(9, "Account number must be between from 9 to 18 digits only.")
-            .max(18, "Account number must be between from 9 to 18 digits only.")
-        const result = bankCardNoScheme.safeParse(value3.data);
-        if(!result.success) {
+            .max(
+                18,
+                "Account number must be between from 9 to 18 digits only."
+            );
+        const result = bankCardNoScheme.safeParse(bankcardNoData.data);
+        if (!result.success) {
             const firstError = result.error.format();
             const errorMessage = firstError._errors[0];
-            setValue3({
-                ...value3,
+            setBankcardNoData({
+                ...bankcardNoData,
                 isValidation: false,
                 errorMessage,
-            })
-        }else {
-            setValue3({
-                ...value3,
+            });
+        } else {
+            setBankcardNoData({
+                ...bankcardNoData,
                 isValidation: true,
-                errorMessage: ""
-            })
+                errorMessage: "",
+            });
         }
-    }, [value3.data])
+    }, [bankcardNoData.data]);
 
     const validateConfirmedBankcardNo = useCallback(() => {
-        const confirmedBankcardNo = value4.data;
-        const bankcardNo = value3.data;
-        const confirmedBankCardNoScheme = z.string()
-            .refine((confirmedBankcardNo) => confirmedBankcardNo === bankcardNo, {
-                message: "Please make sure your account number match.",
-            })
+        const confirmedBankcardNo = confirmedBankcardNoData.data;
+        const bankcardNo = bankcardNoData.data;
+        const confirmedBankCardNoScheme = z
+            .string()
+            .refine(
+                (confirmedBankcardNo) => confirmedBankcardNo === bankcardNo,
+                {
+                    message: "Please make sure your account number match.",
+                }
+            );
         const result = confirmedBankCardNoScheme.safeParse(confirmedBankcardNo);
-        if(!result.success) {
+        if (!result.success) {
             const firstError = result.error.format();
             const errorMessage = firstError._errors[0];
-            setValue4({
-                ...value4,
+            setConfirmedBankcardNoData({
+                ...confirmedBankcardNoData,
                 isValidation: false,
                 errorMessage,
-            })
-        }else {
-            setValue4({
-                ...value4,
+            });
+        } else {
+            setConfirmedBankcardNoData({
+                ...confirmedBankcardNoData,
                 isValidation: true,
-                errorMessage: ""
-            })
+                errorMessage: "",
+            });
         }
-    }, [value4.data, value3.data])
+    }, [confirmedBankcardNoData.data, bankcardNoData.data]);
 
-    const [value5, setValue5] = useState<InputValue<string>>({
+    const [upiData, setUpiData] = useState<InputValue<string>>({
         data: "",
         // isValidation: false,
         // errorMessage: "",
@@ -135,18 +146,18 @@ export const PureBindBankAccountPage = (
         validateConfirmedBankcardNo();
         if (
             !(
-                value2.isValidation &&
-                value3.isValidation &&
-                value4.isValidation
+                ifscData.isValidation &&
+                bankcardNoData.isValidation &&
+                confirmedBankcardNoData.isValidation
             )
         )
             return;
 
         props
             .postBankBindSave({
-                bankAccount: value3.data,
-                ifscCode: value2.data,
-                upiId: value5.data,
+                bankAccount: bankcardNoData.data,
+                ifscCode: ifscData.data,
+                upiId: upiData.data,
             })
             .unwrap()
             .then((data: any) => {
@@ -180,14 +191,13 @@ export const PureBindBankAccountPage = (
                 });
             });
     }, [
-        value2.data,
-        value3.data,
-        value4.data,
-        value5.data,
-        ,
-        value2.isValidation,
-        value3.isValidation,
-        value4.isValidation,
+        ifscData.data,
+        bankcardNoData.data,
+        confirmedBankcardNoData.data,
+        upiData.data,
+        ifscData.isValidation,
+        bankcardNoData.isValidation,
+        confirmedBankcardNoData.isValidation,
     ]);
 
     return (
@@ -207,58 +217,58 @@ export const PureBindBankAccountPage = (
                 <Input
                     className="mb"
                     label="IFSC Code"
-                    value={value2.data}
+                    value={ifscData.data}
                     onChange={(event) => {
-                        setValue2({
-                            ...value2,
+                        setIFSCData({
+                            ...ifscData,
                             data: event.target.value,
                         });
                     }}
                     onBlur={() => {
                         validateIFSC();
                     }}
-                    errorMessage={value2.errorMessage}
+                    errorMessage={ifscData.errorMessage}
                 />
                 <Input
                     className="mb"
                     label="Account Number"
-                    value={value3.data}
+                    value={bankcardNoData.data}
                     onChange={(event) => {
-                        setValue3({
-                            ...value3,
+                        setBankcardNoData({
+                            ...bankcardNoData,
                             data: event.target.value,
                         });
                     }}
                     onBlur={() => {
                         validateBankcardNo();
-                        if(String(value4.data).length > 0) {
+                        if (String(confirmedBankcardNoData.data).length > 0) {
                             validateConfirmedBankcardNo();
                         }
                     }}
-                    errorMessage={value3.errorMessage}
+                    errorMessage={bankcardNoData.errorMessage}
                 />
                 <Input
                     className="mb"
                     label="Confirm Account Number"
-                    value={value4.data}
+                    value={confirmedBankcardNoData.data}
                     onChange={(event) => {
-                        setValue4({
-                            ...value4,
+                        setConfirmedBankcardNoData({
+                            ...confirmedBankcardNoData,
                             data: event.target.value,
                         });
                     }}
                     onBlur={() => {
                         validateConfirmedBankcardNo();
                     }}
-                    errorMessage={value4.errorMessage}
+                    errorMessage={confirmedBankcardNoData.errorMessage}
                 />
                 <Input
                     className="mb"
                     label="UPI ID"
-                    value={value5.data}
+                    value={upiData.data}
                     onChange={(event) => {
-                        setValue5({
-                            ...value5,
+                        setUpiData({
+                            ...upiData,
                             data: event.target.value,
                         });
                     }}
