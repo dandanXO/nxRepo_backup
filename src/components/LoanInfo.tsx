@@ -22,6 +22,7 @@ const LoanInfoStyled = styled.div`
     .totalText {
         font-size: ${({ theme }) => theme.fontSize[26]};
         font-weight: bold;
+        margin: 18px 12px;
     }
     .errorText {
         color: ${({ theme }) => theme.color.red};
@@ -99,12 +100,14 @@ const LoanInfo = (props: LoanInfoProps) => {
             />
             <div className="totalTitle">Total Due</div>
             <div className="totalText">₹ {totalDueAmount}</div>
-            <div className={"errorText"}>
-                {`Your payment is now N days overdue. 
+            {status !== "PAY_OFF" && (
+                <div className={"errorText"}>
+                    {`Your payment is now N days overdue. 
                   We kindly request that you immediately satisfy the 
                   balance in order to maintain a good loan relationship 
                   without affecting your loan credit.`}
-            </div>
+                </div>
+            )}
             <Card isHot={false}>
                 <div className={"loanInfo-Card-Title"}>Gernal</div>
                 <div className={"loanInfo-Card-list"}>
@@ -129,7 +132,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                         }
                         text={`₹ ${paidAmount}`}
                     />
-                    <ListItem title={"Balance"} text={`₹ ${balance}`} />
+                    {status !== "PAY_OFF" && <ListItem title={"Balance"} text={`₹ ${balance}`} />}
                 </div>
                 <React.Fragment>
                     {extended && (
