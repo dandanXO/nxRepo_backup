@@ -44,7 +44,7 @@ export const PureBindBankAccountPage = (
         const ifscScheme = z
             .string()
             .min(1, validationInfo.min1)
-            .length(11, "Please enter the correct IFSC code.");
+            .length(11, "IFSC must be 11 digits only.");
         const result = ifscScheme.safeParse(ifscData.data);
         if (!result.success) {
             const firstError = result.error.format();
