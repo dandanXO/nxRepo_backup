@@ -1,11 +1,11 @@
-import Overlay from "../../../../core/components/Overlay";
-import React, { useCallback, useEffect, useState } from "react";
+import Overlay from "../../../core/components/Overlay";
+import React from "react";
 import styled from "styled-components";
-import ListItem from "../../../../core/components/ListItem";
-import { GetLoanDetailRecommendProducts } from "../../../../api/getLoanDetail";
-import LoanBrand from "../../../../core/components/LoanBrand";
-import Title from "../../../../core/components/Modal/Title";
-import Divider from "../../../../core/components/Divider";
+import ListItem from "../../../core/components/ListItem";
+import { GetLoanDetailRecommendProducts } from "../../../api/getLoanDetail";
+import LoanBrand from "../../../core/components/LoanBrand";
+import Title from "../../../core/components/Modal/Title";
+import Divider from "../../../core/components/Divider";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

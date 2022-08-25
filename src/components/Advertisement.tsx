@@ -1,9 +1,14 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState ,useCallback} from "react";
 import { GetLoanDetailRecommendProducts } from "../api/getLoanDetail";
 import Card from "../core/components/Card";
 import CardContent from "../core/components/CardContent";
 import ListItem from "../core/components/ListItem";
+import ProductDetailModal from "./modal/ProductDetailModal";
+import SubmitOrderModal from "./modal/SubmitOrderModal";
+import SubmitOrderSuccessModal from "./modal/SubmitOrderSuccessModal";
+import { usePostLoanSubmitOrderMutation } from "../api";
+import { PostLoanSubmitOrderRequestBody } from "../api/postLoanSubmitOrder";
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;
@@ -36,6 +41,7 @@ export interface BannerWithCardProps {
     adProps: GetLoanDetailRecommendProducts;
     setProductDetails: React.Dispatch<React.SetStateAction<object>>;
     setShowProductDetailModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowSubmitOrdereModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BannerWithCard = (props: BannerWithCardProps) => {
@@ -54,7 +60,10 @@ const BannerWithCard = (props: BannerWithCardProps) => {
         props.setShowProductDetailModal(true);
     };
 
-    const handleApplyNow = () => {};
+    const handleApplyNow = (detail: GetLoanDetailRecommendProducts) => {
+        props.setProductDetails(detail);
+        props.setShowSubmitOrdereModal(true)
+    };
     return (
         <BannerWithCardStyled>
             <img
@@ -77,7 +86,7 @@ const BannerWithCard = (props: BannerWithCardProps) => {
                         </>
                     }
                     handleViewDetail={() => handleViewDetail(props.adProps)}
-                    handleApplyNow={handleApplyNow}
+                    handleApplyNow={() => handleApplyNow(props.adProps)}
                 />
             </Card>
         </BannerWithCardStyled>
@@ -85,19 +94,75 @@ const BannerWithCard = (props: BannerWithCardProps) => {
 };
 export interface AdvertisementProps {
     recommendProducts: [];
-    setProductDetails: React.Dispatch<React.SetStateAction<object>>;
-    setShowProductDetailModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const Advertisement = (props: AdvertisementProps) => {
     const { recommendProducts = [] } = props;
+    const [productDetails, setProductDetails] = useState({});
+    const [showProductDetailModal, setShowProductDetailModal] = useState(false);
+    const [showSubmitOrdereModal, setShowSubmitOrdereModal] = useState(false);
+    const [showSubmitOrderSuccessModal,setShowSubmitOrderSuccessModal]=useState(false);
+
+    const [postLoanSubmitOrder, { isLoading }] = usePostLoanSubmitOrderMutation();
+    const postLoanSubmitOrderRequest = useCallback(
+        (props: PostLoanSubmitOrderRequestBody) => {
+            postLoanSubmitOrder(props)
+                .unwrap()
+                .then((data: Object) => {
+                    setShowSubmitOrdereModal(false) 
+                    setShowSubmitOrderSuccessModal(true)
+                })
+                .catch(({ error }) => {
+                    setShowSubmitOrdereModal(false) 
+                })
+                .finally(() => { });
+        },[]);
+
+    const handleLoanSubmitOrder = useCallback((productId:number) => {
+            postLoanSubmitOrderRequest({
+                productId:productId
+            });
+        },[]);
     return (
-        <AdvertisementStyled>
-            <div className={"infoTitle"}>More Recommend Loan</div>
-            {recommendProducts.map((ad) => (
-                <BannerWithCard key={ad["productId"]} adProps={ad} {...props} />
-            ))}
-        </AdvertisementStyled>
+        <div>
+            <AdvertisementStyled>
+                <div className={"infoTitle"}>More Recommend Loan</div>
+                {recommendProducts.map((ad) => (
+                    <BannerWithCard
+                        key={ad["productId"]}
+                        adProps={ad}
+                        setShowProductDetailModal={setShowProductDetailModal}
+                        setProductDetails={setProductDetails}
+                        setShowSubmitOrdereModal={
+                            setShowSubmitOrdereModal
+                        }
+                    />
+                ))}
+            </AdvertisementStyled>
+            {showProductDetailModal && productDetails && (
+                <ProductDetailModal
+                    recommendProducts={productDetails}
+                    setShowProductDetailModal={setShowProductDetailModal}
+                />
+            )}
+            {showSubmitOrdereModal && (
+                <SubmitOrderModal
+                    productDetails={productDetails}
+                    setShowSubmitOrdereModal={
+                        setShowSubmitOrdereModal
+                    }
+                    handleLoanSubmitOrder={handleLoanSubmitOrder}
+                />
+            )}
+            {showSubmitOrderSuccessModal && (
+                <SubmitOrderSuccessModal
+                    setShowSubmitOrderSuccessModal={
+                        setShowSubmitOrderSuccessModal
+                    }
+                />
+            )}
+        </div>
     );
 };
+
 
 export default Advertisement;

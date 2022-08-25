@@ -23,6 +23,7 @@ import {
     PostRepayCreateResponse,
 } from "./postRepayCreate";
 import { PostBankBindSaveRequest } from "./postBankBindSave";
+import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
 export {
     GetAttractionsALLResponse,
     GetAttractionsALLRequestQueryArg,
@@ -117,6 +118,13 @@ export const API = createApi({
                 data: requestBody,
             }),
         }),
+        postLoanSubmitOrder: builder.mutation<{}, PostLoanSubmitOrderRequestBody>({
+            query: (requestBody: PostLoanSubmitOrderRequestBody) => ({
+                url: `/loan/submit-order`,
+                method: "post",
+                data: requestBody,
+            }),
+        }),
     }),
 });
 export const {
@@ -127,4 +135,5 @@ export const {
     useGetRepayTypesQuery,
     usePostRepayCreateMutation,
     usePostBankBindSaveMutation,
+    usePostLoanSubmitOrderMutation,
 } = API;
