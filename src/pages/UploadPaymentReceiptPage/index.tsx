@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import UploadingFileModal from "./modal/UploadingFileModal";
 import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
 import { InputValue } from "../../core/types/InputValue";
+import { z } from "zod";
 
 const Section = styled.div`
     margin-bottom: 100px;
@@ -108,6 +109,36 @@ export const PureUploadPaymentReceiptPage = (
 
     const [isUploading, setIsUploading] = useState(false);
 
+    const validateUtr = useCallback(() => {
+        // NOTE: Scheme
+        const utrScheme = z
+            .string({
+                invalid_type_error: "This filed need to be string",
+            })
+            .min(1, "This field cannot be left blank")
+            .length(12, {
+                message: "digits only, 12 numbers max",
+            });
+        // NOTE: Parse scheme
+        const result = utrScheme.safeParse(utr.data);
+        // NOTE: Parsed result
+        if (!result.success) {
+            const firstError = result.error.format();
+            const errorMessage = firstError._errors[0];
+            setURT({
+                ...utr,
+                isValidation: false,
+                errorMessage,
+            });
+        } else {
+            setURT({
+                ...utr,
+                isValidation: true,
+                errorMessage: "",
+            });
+        }
+    }, [utr.data]);
+
     return (
         <CustomPage>
             {isUploading && <UploadingFileModal />}
@@ -124,27 +155,7 @@ export const PureUploadPaymentReceiptPage = (
                         });
                     }}
                     onBlur={() => {
-                        if (String(utr).length > 0) {
-                            if (String(utr).length > 12) {
-                                setURT({
-                                    ...utr,
-                                    isValidation: false,
-                                    errorMessage: "digits only, 12 numbers max",
-                                });
-                            } else {
-                                setURT({
-                                    ...utr,
-                                    isValidation: true,
-                                    errorMessage: "",
-                                });
-                            }
-                        } else {
-                            setURT({
-                                ...utr,
-                                isValidation: false,
-                                errorMessage: "This field cannot be left blank",
-                            });
-                        }
+                        validateUtr();
                     }}
                     errorMessage={utr.errorMessage}
                 />
