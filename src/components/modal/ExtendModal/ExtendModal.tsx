@@ -82,35 +82,35 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             <ListItem
                                 title={"Extension Fee"}
                                 text={`₹ ${
-                                    props?.repayConfirmDetail?.extensionFee ||
+                                    props?.repayConfirmDetail?.extensionFee ??
                                     ""
                                 }`}
                             />
                             <ListItem
                                 title={"Amount Paid"}
                                 text={`₹ ${
-                                    props?.repayConfirmDetail?.paidAmount || ""
+                                    props?.repayConfirmDetail?.paidAmount ?? ""
                                 }`}
                             />
                             <ListItem
                                 title={"Penalty Interest"}
                                 text={`₹ ${
                                     props?.repayConfirmDetail
-                                        ?.penaltyInterest || ""
+                                        ?.penaltyInterest ?? ""
                                 }`}
                             />
                             <ListItem
                                 title={"Reduction Amount"}
                                 text={`₹ ${
                                     props?.repayConfirmDetail
-                                        ?.reductionAmount || ""
+                                        ?.reductionAmount ?? ""
                                 }`}
                             />
                             <ListItem
                                 title={"Total Amount"}
                                 text={`₹ ${
                                     props?.repayConfirmDetail
-                                        ?.extensionPayAmount || ""
+                                        ?.extensionPayAmount ?? ""
                                 }`}
                             />
                             <Divider />
@@ -118,7 +118,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                                 <ListItem
                                     title={"Extension due date"}
                                     text={`₹ ${
-                                        props?.repayConfirmDetail?.extendDate ||
+                                        props?.repayConfirmDetail?.extendDate ??
                                         ""
                                     }`}
                                 />
