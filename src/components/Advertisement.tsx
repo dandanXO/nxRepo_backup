@@ -36,7 +36,7 @@ export interface BannerWithCardProps {
     adProps: GetLoanDetailRecommendProducts;
     setProductDetails: React.Dispatch<React.SetStateAction<object>>;
     setShowProductDetailModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 const BannerWithCard = (props: BannerWithCardProps) => {
     const {
@@ -51,14 +51,12 @@ const BannerWithCard = (props: BannerWithCardProps) => {
     const [isCollapse, setIsCollapse] = useState(true);
     const handleViewDetail = (detail: GetLoanDetailRecommendProducts) => {
         props.setProductDetails(detail);
-        props.setShowProductDetailModal(true)
-    }
+        props.setShowProductDetailModal(true);
+    };
 
-    const handleApplyNow=()=>{
- 
-    }
+    const handleApplyNow = () => {};
     return (
-        <BannerWithCardStyled >
+        <BannerWithCardStyled>
             <img
                 onClick={() => setIsCollapse(!isCollapse)}
                 className={` ${isCollapse ? "banner" : "bannerHide"}`}
@@ -78,7 +76,7 @@ const BannerWithCard = (props: BannerWithCardProps) => {
                             <ListItem title={"terms"} text={term ? term : ""} />
                         </>
                     }
-                    handleViewDetail={()=>handleViewDetail(props.adProps)}
+                    handleViewDetail={() => handleViewDetail(props.adProps)}
                     handleApplyNow={handleApplyNow}
                 />
             </Card>
@@ -89,15 +87,14 @@ export interface AdvertisementProps {
     recommendProducts: [];
     setProductDetails: React.Dispatch<React.SetStateAction<object>>;
     setShowProductDetailModal: React.Dispatch<React.SetStateAction<boolean>>;
-
-};
+}
 const Advertisement = (props: AdvertisementProps) => {
     const { recommendProducts = [] } = props;
     return (
         <AdvertisementStyled>
             <div className={"infoTitle"}>More Recommend Loan</div>
             {recommendProducts.map((ad) => (
-                <BannerWithCard key={ad['productId']} adProps={ad} {...props}/>
+                <BannerWithCard key={ad["productId"]} adProps={ad} {...props} />
             ))}
         </AdvertisementStyled>
     );

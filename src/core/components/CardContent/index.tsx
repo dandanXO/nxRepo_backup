@@ -52,7 +52,14 @@ type CardContentProps = {
 };
 
 const CardContent = (props: CardContentProps) => {
-    const { icon, productName, balance, contentItems, handleViewDetail, handleApplyNow } = props;
+    const {
+        icon,
+        productName,
+        balance,
+        contentItems,
+        handleViewDetail,
+        handleApplyNow,
+    } = props;
     return (
         <CardContentStyled>
             <CardHeaderStyled>
@@ -62,7 +69,11 @@ const CardContent = (props: CardContentProps) => {
             {contentItems}
             <Divider styleType="narrow" />
             <CardFooterStyled>
-                <Button className={"linkButton"} styleType={"link"} onClick={handleViewDetail}>
+                <Button
+                    className={"linkButton"}
+                    styleType={"link"}
+                    onClick={handleViewDetail}
+                >
                     {"view details"}
                     <img src={nextIcon_gray} />
                 </Button>

@@ -13,7 +13,7 @@ import recordStatusStyleProps from "../../../../components/recordStatusColorMapp
 const ExtesionDetailStyled = styled.div`
     text-align: center;
     color: ${({ theme }) => theme.color.black};
-    
+
     .totalTitle {
         margin: 8px 0;
         font-size: ${({ theme }) => theme.fontSize[14]};

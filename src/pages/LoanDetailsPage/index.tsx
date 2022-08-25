@@ -5,13 +5,15 @@ import PureLoanDetails, {
     PureLoanDetailsPageProps,
 } from "../../components/PureLoanDetails";
 import useLoanDetailStory from "../../components/useLoanDetailStory";
-import ProductDetailModal from "./modal/ProductDetailModal"
+import ProductDetailModal from "./modal/ProductDetailModal";
 
 type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps;
 
-export const PureLoanDetailsAdvertisementPage = (props: PureLoanDetailsAdvertisementPage) => {
+export const PureLoanDetailsAdvertisementPage = (
+    props: PureLoanDetailsAdvertisementPage
+) => {
     const [productDetails, setProductDetails] = useState({});
-    const [showProductDetailModal,setShowProductDetailModal]= useState(false);
+    const [showProductDetailModal, setShowProductDetailModal] = useState(false);
     return (
         <Page>
             <PureLoanDetails
