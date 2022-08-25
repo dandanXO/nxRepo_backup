@@ -82,66 +82,44 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             <ListItem
                                 title={"Extension Fee"}
                                 text={`₹ ${
-                                    props.repayConfirmDetail &&
-                                    props.repayConfirmDetail.extensionFee
-                                        ? props.repayConfirmDetail.extensionFee
-                                        : ""
+                                    props?.repayConfirmDetail?.extensionFee ||
+                                    ""
                                 }`}
                             />
                             <ListItem
                                 title={"Amount Paid"}
-                                // text={`- ₹ ${repayConfirmDetail.paidAmount}`}
                                 text={`₹ ${
-                                    props.repayConfirmDetail &&
-                                    props.repayConfirmDetail.paidAmount
-                                        ? props.repayConfirmDetail.paidAmount
-                                        : ""
+                                    props?.repayConfirmDetail?.paidAmount || ""
                                 }`}
                             />
                             <ListItem
                                 title={"Penalty Interest"}
-                                // text={`₹ ${repayConfirmDetail.penaltyInterest}`}
                                 text={`₹ ${
-                                    props.repayConfirmDetail &&
-                                    props.repayConfirmDetail.penaltyInterest
-                                        ? props.repayConfirmDetail
-                                              .penaltyInterest
-                                        : ""
+                                    props?.repayConfirmDetail
+                                        ?.penaltyInterest || ""
                                 }`}
                             />
                             <ListItem
                                 title={"Reduction Amount"}
-                                // text={`₹ ${repayConfirmDetail.reductionAmount}`}
                                 text={`₹ ${
-                                    props.repayConfirmDetail &&
-                                    props.repayConfirmDetail.reductionAmount
-                                        ? props.repayConfirmDetail
-                                              .reductionAmount
-                                        : ""
+                                    props?.repayConfirmDetail
+                                        ?.reductionAmount || ""
                                 }`}
                             />
                             <ListItem
                                 title={"Total Amount"}
-                                // text={`₹ ${repayConfirmDetail.extensionPayAmount}`}
                                 text={`₹ ${
-                                    props.repayConfirmDetail &&
-                                    props.repayConfirmDetail.extensionPayAmount
-                                        ? props.repayConfirmDetail
-                                              .extensionPayAmount
-                                        : ""
+                                    props?.repayConfirmDetail
+                                        ?.extensionPayAmount || ""
                                 }`}
                             />
                             <Divider />
                             <div className={"hintText"}>
                                 <ListItem
                                     title={"Extension due date"}
-                                    // text={String(repayConfirmDetail.extendDate)}
                                     text={`₹ ${
-                                        props.repayConfirmDetail &&
-                                        props.repayConfirmDetail.extendDate
-                                            ? props.repayConfirmDetail
-                                                  .extendDate
-                                            : ""
+                                        props?.repayConfirmDetail?.extendDate ||
+                                        ""
                                     }`}
                                 />
                             </div>
