@@ -176,7 +176,7 @@ export const PureBindBankAccountPage = (
                         location.href = "innerh5://127.0.0.1";
                     },
                 });
-            })
+            });
     }, [
         ifscData.data,
         bankcardNoData.data,
