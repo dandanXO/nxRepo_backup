@@ -32,7 +32,13 @@ const BannerWithCardStyled = styled.div`
     }
 `;
 
-const BannerWithCard = (props: { adProps: GetLoanDetailRecommendProducts }) => {
+export interface BannerWithCardProps {
+    adProps: GetLoanDetailRecommendProducts;
+    setProductDetails: React.Dispatch<React.SetStateAction<object>>;
+    setShowProductDetailModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const BannerWithCard = (props: BannerWithCardProps) => {
     const {
         backgroundUrl,
         logoUrl,
@@ -43,9 +49,18 @@ const BannerWithCard = (props: { adProps: GetLoanDetailRecommendProducts }) => {
     } = props.adProps;
 
     const [isCollapse, setIsCollapse] = useState(true);
+    const handleViewDetail = (detail: GetLoanDetailRecommendProducts) => {
+        props.setProductDetails(detail);
+        props.setShowProductDetailModal(true)
+    }
+
+    const handleApplyNow=()=>{
+ 
+    }
     return (
-        <BannerWithCardStyled onClick={() => setIsCollapse(!isCollapse)}>
+        <BannerWithCardStyled >
             <img
+                onClick={() => setIsCollapse(!isCollapse)}
                 className={` ${isCollapse ? "banner" : "bannerHide"}`}
                 src={backgroundUrl}
             />
@@ -63,19 +78,26 @@ const BannerWithCard = (props: { adProps: GetLoanDetailRecommendProducts }) => {
                             <ListItem title={"terms"} text={term ? term : ""} />
                         </>
                     }
+                    handleViewDetail={()=>handleViewDetail(props.adProps)}
+                    handleApplyNow={handleApplyNow}
                 />
             </Card>
         </BannerWithCardStyled>
     );
 };
+export interface AdvertisementProps {
+    recommendProducts: [];
+    setProductDetails: React.Dispatch<React.SetStateAction<object>>;
+    setShowProductDetailModal: React.Dispatch<React.SetStateAction<boolean>>;
 
-const Advertisement = (props: { recommendProducts: [] }) => {
+};
+const Advertisement = (props: AdvertisementProps) => {
     const { recommendProducts = [] } = props;
     return (
         <AdvertisementStyled>
             <div className={"infoTitle"}>More Recommend Loan</div>
             {recommendProducts.map((ad) => (
-                <BannerWithCard adProps={ad} />
+                <BannerWithCard key={ad['productId']} adProps={ad} {...props}/>
             ))}
         </AdvertisementStyled>
     );

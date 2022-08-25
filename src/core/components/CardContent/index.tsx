@@ -47,10 +47,12 @@ type CardContentProps = {
     productName: string;
     balance: string;
     contentItems: React.ReactElement | React.ReactElement[];
+    handleViewDetail: () => void;
+    handleApplyNow: () => void;
 };
 
 const CardContent = (props: CardContentProps) => {
-    const { icon, productName, balance, contentItems } = props;
+    const { icon, productName, balance, contentItems, handleViewDetail, handleApplyNow } = props;
     return (
         <CardContentStyled>
             <CardHeaderStyled>
@@ -60,7 +62,7 @@ const CardContent = (props: CardContentProps) => {
             {contentItems}
             <Divider styleType="narrow" />
             <CardFooterStyled>
-                <Button className={"linkButton"} styleType={"link"}>
+                <Button className={"linkButton"} styleType={"link"} onClick={handleViewDetail}>
                     {"view details"}
                     <img src={nextIcon_gray} />
                 </Button>
@@ -68,6 +70,7 @@ const CardContent = (props: CardContentProps) => {
                     className={"applyButton"}
                     styleType={"primary"}
                     size={"small"}
+                    onClick={handleApplyNow}
                 >
                     {"Apply now"} <img src={nextIcon} />
                 </Button>
