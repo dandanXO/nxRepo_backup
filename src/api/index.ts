@@ -118,7 +118,10 @@ export const API = createApi({
                 data: requestBody,
             }),
         }),
-        postLoanSubmitOrder: builder.mutation<{}, PostLoanSubmitOrderRequestBody>({
+        postLoanSubmitOrder: builder.mutation<
+            {},
+            PostLoanSubmitOrderRequestBody
+        >({
             query: (requestBody: PostLoanSubmitOrderRequestBody) => ({
                 url: `/loan/submit-order`,
                 method: "post",

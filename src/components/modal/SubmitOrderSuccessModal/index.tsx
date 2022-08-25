@@ -10,11 +10,11 @@ const Paragraph = styled.div`
 `;
 
 interface RepaymentNoticeModalProps {
-    setShowSubmitOrderSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
-
+    setShowSubmitOrderSuccessModal: React.Dispatch<
+        React.SetStateAction<boolean>
+    >;
 }
 const SubmitOrderSuccessModal = (props: RepaymentNoticeModalProps) => {
-    
     return (
         <div>
             <Modal
@@ -31,12 +31,13 @@ const SubmitOrderSuccessModal = (props: RepaymentNoticeModalProps) => {
                             Please wait while the loan is being reviewed.
                         </Paragraph>
                         <Paragraph>
-                            You can check all the loan history on the Loan Record page later.
+                            You can check all the loan history on the Loan
+                            Record page later.
                         </Paragraph>
                     </Container>
                 }
                 confirmText="Repay"
-                onConfirm={()=>props.setShowSubmitOrderSuccessModal(false)}
+                onConfirm={() => props.setShowSubmitOrderSuccessModal(false)}
                 // NOTE: 特製版
                 enableIcon={false}
                 enableTitleHorizontal={true}

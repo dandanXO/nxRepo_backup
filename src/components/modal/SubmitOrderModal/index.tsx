@@ -9,11 +9,10 @@ import Button from "../../../core/components/Button";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
     .productName {
-      font-weight:bold;
-      font-size: ${({ theme }) => theme.fontSize[18]};
-      color: ${({ theme }) => theme.color.black};
-      margin-bottom: 24px;
-
+        font-weight: bold;
+        font-size: ${({ theme }) => theme.fontSize[18]};
+        color: ${({ theme }) => theme.color.black};
+        margin-bottom: 24px;
     }
 
     .sectionButtons {
@@ -35,16 +34,16 @@ const Paragraph = styled.div`
 
 export interface PureSubmitOrderModalProps {
     productDetails?: GetLoanDetailRecommendProducts;
-    setShowSubmitOrdereModal:React.Dispatch<React.SetStateAction<boolean>>;
-    handleLoanSubmitOrder:(productId:number)=>void;
+    setShowSubmitOrdereModal: React.Dispatch<React.SetStateAction<boolean>>;
+    handleLoanSubmitOrder: (productId: number) => void;
 }
 export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
-
     const handleConfirm = () => {
-        props.handleLoanSubmitOrder(props.productDetails &&
-            props.productDetails.productId
-            ? props.productDetails.productId
-            : 0)
+        props.handleLoanSubmitOrder(
+            props.productDetails && props.productDetails.productId
+                ? props.productDetails.productId
+                : 0
+        );
     };
     return (
         <div>
@@ -57,16 +56,22 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
                             <Title>Loan Application</Title>
                             <Divider />
                             Selected product
-                            <div className="productName">{props?.productDetails?.productName ?? ""}</div>
+                            <div className="productName">
+                                {props?.productDetails?.productName ?? ""}
+                            </div>
                             <Paragraph>
-                                Are you sure you want to submit this loan application?
+                                Are you sure you want to submit this loan
+                                application?
                             </Paragraph>
                             <Paragraph>
-                                The loan amount you can borrow based on the application information you submitted
+                                The loan amount you can borrow based on the
+                                application information you submitted
                             </Paragraph>
                             <div className={"sectionButtons"}>
                                 <Button
-                                    onClick={()=>props.setShowSubmitOrdereModal(false)}
+                                    onClick={() =>
+                                        props.setShowSubmitOrdereModal(false)
+                                    }
                                     className={"cancelButton"}
                                     styleType="secondary"
                                 >
@@ -89,8 +94,6 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
     );
 };
 
-
-
 const SubmitOrderModal = (props: PureSubmitOrderModalProps) => {
     return (
         <PureSubmitOrderModal
@@ -102,4 +105,3 @@ const SubmitOrderModal = (props: PureSubmitOrderModalProps) => {
 };
 
 export default SubmitOrderModal;
-

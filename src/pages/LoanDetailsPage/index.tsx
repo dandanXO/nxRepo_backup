@@ -23,7 +23,6 @@ export const PureLoanDetailsAdvertisementPage = (
             <Advertisement
                 recommendProducts={props?.currentData?.recommendProducts}
             />
-         
         </Page>
     );
 };

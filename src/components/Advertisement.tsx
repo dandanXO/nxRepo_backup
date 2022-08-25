@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useEffect, useState ,useCallback} from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { GetLoanDetailRecommendProducts } from "../api/getLoanDetail";
 import Card from "../core/components/Card";
 import CardContent from "../core/components/CardContent";
@@ -62,7 +62,7 @@ const BannerWithCard = (props: BannerWithCardProps) => {
 
     const handleApplyNow = (detail: GetLoanDetailRecommendProducts) => {
         props.setProductDetails(detail);
-        props.setShowSubmitOrdereModal(true)
+        props.setShowSubmitOrdereModal(true);
     };
     return (
         <BannerWithCardStyled>
@@ -100,28 +100,32 @@ const Advertisement = (props: AdvertisementProps) => {
     const [productDetails, setProductDetails] = useState({});
     const [showProductDetailModal, setShowProductDetailModal] = useState(false);
     const [showSubmitOrdereModal, setShowSubmitOrdereModal] = useState(false);
-    const [showSubmitOrderSuccessModal,setShowSubmitOrderSuccessModal]=useState(false);
+    const [showSubmitOrderSuccessModal, setShowSubmitOrderSuccessModal] =
+        useState(false);
 
-    const [postLoanSubmitOrder, { isLoading }] = usePostLoanSubmitOrderMutation();
+    const [postLoanSubmitOrder, { isLoading }] =
+        usePostLoanSubmitOrderMutation();
     const postLoanSubmitOrderRequest = useCallback(
         (props: PostLoanSubmitOrderRequestBody) => {
             postLoanSubmitOrder(props)
                 .unwrap()
                 .then((data: Object) => {
-                    setShowSubmitOrdereModal(false) 
-                    setShowSubmitOrderSuccessModal(true)
+                    setShowSubmitOrdereModal(false);
+                    setShowSubmitOrderSuccessModal(true);
                 })
                 .catch(({ error }) => {
-                    setShowSubmitOrdereModal(false) 
+                    setShowSubmitOrdereModal(false);
                 })
-                .finally(() => { });
-        },[]);
+                .finally(() => {});
+        },
+        []
+    );
 
-    const handleLoanSubmitOrder = useCallback((productId:number) => {
-            postLoanSubmitOrderRequest({
-                productId:productId
-            });
-        },[]);
+    const handleLoanSubmitOrder = useCallback((productId: number) => {
+        postLoanSubmitOrderRequest({
+            productId: productId,
+        });
+    }, []);
     return (
         <div>
             <AdvertisementStyled>
@@ -132,9 +136,7 @@ const Advertisement = (props: AdvertisementProps) => {
                         adProps={ad}
                         setShowProductDetailModal={setShowProductDetailModal}
                         setProductDetails={setProductDetails}
-                        setShowSubmitOrdereModal={
-                            setShowSubmitOrdereModal
-                        }
+                        setShowSubmitOrdereModal={setShowSubmitOrdereModal}
                     />
                 ))}
             </AdvertisementStyled>
@@ -147,9 +149,7 @@ const Advertisement = (props: AdvertisementProps) => {
             {showSubmitOrdereModal && (
                 <SubmitOrderModal
                     productDetails={productDetails}
-                    setShowSubmitOrdereModal={
-                        setShowSubmitOrdereModal
-                    }
+                    setShowSubmitOrdereModal={setShowSubmitOrdereModal}
                     handleLoanSubmitOrder={handleLoanSubmitOrder}
                 />
             )}
@@ -163,6 +163,5 @@ const Advertisement = (props: AdvertisementProps) => {
         </div>
     );
 };
-
 
 export default Advertisement;
