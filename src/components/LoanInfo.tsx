@@ -132,7 +132,9 @@ const LoanInfo = (props: LoanInfoProps) => {
                         }
                         text={`₹ ${paidAmount}`}
                     />
-                    {status !== "PAY_OFF" && <ListItem title={"Balance"} text={`₹ ${balance}`} />}
+                    {status !== "PAY_OFF" && (
+                        <ListItem title={"Balance"} text={`₹ ${balance}`} />
+                    )}
                 </div>
                 <React.Fragment>
                     {extended && (
