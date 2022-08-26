@@ -139,8 +139,11 @@ export const PureBindBankAccountPage = (
         // errorMessage: "",
     });
 
+    const [isFormPending, setIsFormPending] = useState<boolean>(false);
+
     // NOTICE: reuse me
     const confirm = useCallback(() => {
+        setIsFormPending(true);
         validateIFSC();
         validateBankcardNo();
         validateConfirmedBankcardNo();
@@ -176,7 +179,10 @@ export const PureBindBankAccountPage = (
                         location.href = "innerh5://127.0.0.1";
                     },
                 });
-            });
+            })
+            .finally(() => {
+                setIsFormPending(false);
+            })
     }, [
         ifscData.data,
         bankcardNoData.data,
@@ -262,7 +268,7 @@ export const PureBindBankAccountPage = (
                 />
             </Form>
 
-            <Button onClick={() => confirm()}>Submit</Button>
+            <Button onClick={() => !isFormPending && confirm()}>Submit</Button>
         </CustomPage>
     );
 };
