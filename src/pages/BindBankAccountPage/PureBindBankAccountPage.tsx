@@ -182,7 +182,7 @@ export const PureBindBankAccountPage = (
             })
             .finally(() => {
                 setIsFormPending(false);
-            })
+            });
     }, [
         ifscData.data,
         bankcardNoData.data,
