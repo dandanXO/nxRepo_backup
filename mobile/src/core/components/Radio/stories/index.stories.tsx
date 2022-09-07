@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React, { useState } from "react";
 import styled from "styled-components";
-import Radio from "../";
+import Radio from "../index";
 import { AppThemeProvider } from "../../index";
 // import Body from "../../../Global/Body";
 const Body = styled.div``;

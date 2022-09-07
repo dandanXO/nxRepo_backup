@@ -8,7 +8,7 @@ export default {
     component: LoanBrand,
 } as ComponentMeta<typeof LoanBrand>;
 
-const fileIcon = require("../../../core/components/images/fileIcon.jpg");
+const fileIcon = require("../images/fileIcon.jpg");
 
 const Template: ComponentStory<typeof LoanBrand> = (args) => (
     <AppThemeProvider>

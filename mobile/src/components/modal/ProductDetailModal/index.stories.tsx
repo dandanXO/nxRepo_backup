@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PureProductDetailModal } from ".";
+import { PureProductDetailModal } from "./index";
 import { AppThemeProvider } from "../../../core/components";
 import { mockGetLoanDetailResponse } from "../../../api/getLoanDetail";
 import * as React from "react";

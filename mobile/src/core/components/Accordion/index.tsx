@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { flexCreator } from "../utils/index";
+import { flexCreator } from "../utils";
 import { UpArrow, DownArrow } from "../images";
 import theme from "../config/theme";
 export const Accordion = (props: {

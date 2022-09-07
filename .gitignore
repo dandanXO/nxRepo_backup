@@ -1,6 +1,7 @@
-node_modules
-/task/openapi-typescript-codegen/generated/
+../node_modules
+/mobile/task/openapi-typescript-codegen/generated/
 /task/openapi-typescript/generated/
 /.idea/
 /dist/
 /**/*/.DS_Store
+/mobile/.husky/_/husky.sh
