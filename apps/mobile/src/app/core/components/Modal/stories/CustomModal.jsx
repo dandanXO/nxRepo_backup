@@ -1,18 +1,6 @@
-import React, { useState, useCallback } from "react";
-import styled from "styled-components";
-import {
-    textContent,
-    longTextContent,
-    htmlContnet,
-    content,
-    longContent,
-    Button,
-    HelloButton,
-    LinkedButton,
-    Popover,
-    // Modal
-    Modal,
-} from "./index";
+import React from "react";
+import { Button, Popover } from "./index";
+
 const CustomModal = (props) => (
     <Popover>
         <Button onClick={() => props.hide()}>Close</Button>

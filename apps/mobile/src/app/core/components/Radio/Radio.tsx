@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import RadioGroup, { RadioGroupProps, RadioGroupState } from "./RadioGroup";
+import RadioGroup from "./RadioGroup";
 import WithThemeRadioICON from "./WithThemeRadioICON";
 import formStateContext from "../formStateContext";
 
@@ -49,20 +49,20 @@ class Radio extends React.Component<RadioProps, RadioState> {
     // static Group: React.ReactNode = RadioGroup;
     static Group: any = RadioGroup;
     constructor(props: RadioProps) {
-      super(props);
-      this.state = {
-        check: false,
-        hover: false,
-      };
+        super(props);
+        this.state = {
+            check: false,
+            hover: false,
+        };
     }
 
-  override componentDidMount(): void {
+    override componentDidMount(): void {
         this.setState({
             check: this.props.checked ? this.props.checked : false,
         });
     }
 
-  override componentDidUpdate(
+    override componentDidUpdate(
         prevProps: Readonly<RadioProps>,
         prevState: Readonly<RadioState>,
         snapshot?: any
@@ -113,19 +113,19 @@ class Radio extends React.Component<RadioProps, RadioState> {
     override render() {
         return (
             <div
-                // onClick={this.onCheck}
-                // onMouseOver={this.onMouseOver}
-                // onMouseOut={this.onMouseOut}
-                // disabled={this.props.disabled}
+            // onClick={this.onCheck}
+            // onMouseOver={this.onMouseOver}
+            // onMouseOut={this.onMouseOut}
+            // disabled={this.props.disabled}
             >
                 <WithThemeRadioICON
-                        checked={this.state.check}
-                        defaultChecked={this.props.defaultChecked}
-                        hover={this.state.hover}
-                        size={this.props.size ?? "small"}
-                        disabled={this.props.disabled}
-                    />
-                    <StyledRadioText>{this.props.children}</StyledRadioText>
+                    checked={this.state.check}
+                    defaultChecked={this.props.defaultChecked}
+                    hover={this.state.hover}
+                    size={this.props.size ?? "small"}
+                    disabled={this.props.disabled}
+                />
+                <StyledRadioText>{this.props.children}</StyledRadioText>
             </div>
         );
     }

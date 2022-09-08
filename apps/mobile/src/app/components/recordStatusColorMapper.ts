@@ -1,4 +1,5 @@
 import theme from "../core/components/config/theme";
+
 const { color } = theme;
 
 const recordStatusStyleProps: {

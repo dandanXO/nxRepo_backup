@@ -1,10 +1,6 @@
 // 沒點擊，禁用
 import React from "react";
-import {
-    CommonDisabledFalseSVGICON,
-    CommonRegularSVGICON,
-    RegularSVGICON,
-} from "../../SVGIcon";
+import { CommonDisabledFalseSVGICON, RegularSVGICON } from "../../SVGIcon";
 import styled from "styled-components";
 
 // NOTE: 有點擊，沒有禁用

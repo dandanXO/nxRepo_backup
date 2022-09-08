@@ -8,7 +8,9 @@ export default {
     component: PureLoanDetailsAdvertisementPage,
 } as ComponentMeta<typeof PureLoanDetailsAdvertisementPage>;
 
-export const Page: ComponentStory<typeof PureLoanDetailsAdvertisementPage> = () => {
+export const Page: ComponentStory<
+    typeof PureLoanDetailsAdvertisementPage
+> = () => {
     return (
         <AppThemeProvider>
             <PureLoanDetailsAdvertisementPage

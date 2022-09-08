@@ -1,33 +1,6 @@
-import React, { useState, useCallback } from "react";
-import {
-    textContent,
-    longTextContent,
-    htmlContnet,
-    content,
-    longContent,
-    Button,
-    HelloButton,
-    LinkedButton,
-    Popover,
-    // Modal
-    Modal,
-} from "./index";
+import React from "react";
 
 import { storiesOf } from "@storybook/react";
-
-import CustomModal from "./CustomModal";
-import CustomComponent from "./CustomComponent";
-import FixedLongContentComponent from "./FixedLongContentComponent";
-import ModalModeDemo from "./ModalModeDemo";
-import CustomModalDemo from "./CustomModalDemo";
-import ModalTypeDemo from "./ModalTypeDemo";
-import DefaultModalDemo from "./DefaultModalDemo";
-import ModelDemo from "./ModelDemo";
-import MaskModalDemo from "./MaskModalDemo";
-import AllCallMethodModal from "./AllCallMethodModal";
-import RenderAndCallMethodModal from "./RenderAndCallMethodModal";
-import { AppThemeProvider } from "../../index";
-import styled from "styled-components";
 
 const unistarTheme = {
     custom: {

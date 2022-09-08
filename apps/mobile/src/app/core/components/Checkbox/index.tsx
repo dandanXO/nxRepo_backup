@@ -92,33 +92,33 @@ const CheckBox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
 
     return (
         <StyledCheckBoxInput
-                className={props.className}
+            className={props.className}
+            disabled={props.disabled}
+            onMouseOver={onMouseOver}
+            onMouseOut={onMouseOut}
+        >
+            <CheckboxInput
+                size={valueOfFormState.size}
+                // onClick={onInputClick}
+                id={inputIdRef.current}
+                checked={check}
+                onChange={inputChecked}
                 disabled={props.disabled}
-                onMouseOver={onMouseOver}
-                onMouseOut={onMouseOut}
+                value={props.value}
+            />
+            <span
+                style={{
+                    margin: "0 4px 0 0",
+                }}
             >
-                <CheckboxInput
+                <WithThemeCheckboxSVGICON
+                    check={check}
                     size={valueOfFormState.size}
-                    // onClick={onInputClick}
-                    id={inputIdRef.current}
-                    checked={check}
-                    onChange={inputChecked}
                     disabled={props.disabled}
-                    value={props.value}
+                    hover={over}
                 />
-                <span
-                    style={{
-                        margin: "0 4px 0 0",
-                    }}
-                >
-                    <WithThemeCheckboxSVGICON
-                        check={check}
-                        size={valueOfFormState.size}
-                        disabled={props.disabled}
-                        hover={over}
-                    />
-                </span>
-            </StyledCheckBoxInput>
+            </span>
+        </StyledCheckBoxInput>
     );
 };
 

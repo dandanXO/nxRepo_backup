@@ -1,6 +1,7 @@
 import repay_icon from "./SVG/repay_icon.svg";
 import success_icon from "./SVG/success_icon.svg";
 import styled from "styled-components";
+
 const StyledlessRepayICON = (props: any) => (
     <img className={props.className} src={repay_icon} />
 );

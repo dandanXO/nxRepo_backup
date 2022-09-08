@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { flexCreator } from "../utils";
-import { UpArrow, DownArrow } from "../images";
-import theme from "../config/theme";
+import { DownArrow, UpArrow } from "../images";
+
 export const Accordion = (props: {
     isCollapse: boolean;
     title: string;

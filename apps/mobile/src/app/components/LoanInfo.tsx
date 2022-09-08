@@ -1,17 +1,12 @@
 import styled from "styled-components";
-import React, { useCallback } from "react";
-import {
-    mockGetLoanDetailResponse,
-    GetLoanDetailResponse,
-} from "../api/getLoanDetail";
+import React from "react";
+import { GetLoanDetailResponse } from "../api/getLoanDetail";
 import Tag from "../core/components/Tag";
 import Card from "../core/components/Card";
 import ListItem from "../core/components/ListItem";
 import Button from "../core/components/Button";
 import LoanBrand from "../core/components/LoanBrand";
 import AmountPaidIcon from "../core/components/images/amount_paid_icon.svg";
-import { useNavigate } from "react-router-dom";
-import useLocationOrderQueryString from "../core/hooks/useLocationOrderQueryString";
 
 const LoanInfoStyled = styled.div`
     text-align: center;
@@ -102,9 +97,9 @@ const LoanInfo = (props: LoanInfoProps) => {
             <div className="totalText">₹ {totalDueAmount}</div>
             {status !== "PAY_OFF" && (
                 <div className={"errorText"}>
-                    {`Your payment is now N days overdue. 
-                  We kindly request that you immediately satisfy the 
-                  balance in order to maintain a good loan relationship 
+                    {`Your payment is now N days overdue.
+                  We kindly request that you immediately satisfy the
+                  balance in order to maintain a good loan relationship
                   without affecting your loan credit.`}
                 </div>
             )}

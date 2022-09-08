@@ -1,12 +1,11 @@
 import Overlay from "../../../core/components/Overlay";
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 import ListItem from "../../../core/components/ListItem";
 import {
-    GetLoanDetailResponse,
     GetLoanDetailRepayConfirmDetail,
+    GetLoanDetailResponse,
 } from "../../../api/getLoanDetail";
-import { flexCreator } from "../../../core/components/utils";
 import Title from "../../../core/components/Modal/Title";
 import Divider from "../../../core/components/Divider";
 import Button from "../../../core/components/Button";

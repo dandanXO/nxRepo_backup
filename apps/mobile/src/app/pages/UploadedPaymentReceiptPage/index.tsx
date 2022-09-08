@@ -5,6 +5,7 @@ import Button from "../../core/components/Button";
 import { useNavigate } from "react-router-dom";
 import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
 import { useCallback } from "react";
+
 const CustomPage = styled(Page)`
     display: flex;
     flex-direction: column;

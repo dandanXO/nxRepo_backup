@@ -1,6 +1,6 @@
 import React from "react";
 import useLoanDetailStory from "../../components/useLoanDetailStory";
-import {PureLoanDetailsAdvertisementPage} from "./PureLoanDetailsAdvertisementPage";
+import { PureLoanDetailsAdvertisementPage } from "./PureLoanDetailsAdvertisementPage";
 
 const LoanDetailsPage = () => {
     const {

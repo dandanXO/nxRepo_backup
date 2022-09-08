@@ -1,18 +1,4 @@
-import React, { useState, useCallback } from "react";
-import styled from "styled-components";
-import {
-    textContent,
-    longTextContent,
-    htmlContnet,
-    content,
-    longContent,
-    Button,
-    HelloButton,
-    LinkedButton,
-    Popover,
-    // Modal
-    Modal,
-} from "./index";
+import React from "react";
 
 const CustomComponent = (props) => {
     return (

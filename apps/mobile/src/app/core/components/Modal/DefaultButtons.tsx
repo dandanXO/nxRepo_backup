@@ -81,7 +81,7 @@ const StyledlessButton = (props: StyledlessButtonProps) => (
     </div>
 );
 
-type ButtonProps = StyledlessButtonProps
+type ButtonProps = StyledlessButtonProps;
 
 /*${getButtonAllColorStyle("red")};*/
 const ConfirmButton = styled(StyledlessButton)<ButtonProps>`

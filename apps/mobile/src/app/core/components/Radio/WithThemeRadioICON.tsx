@@ -5,7 +5,7 @@ import {
     RadioDisabledTrueSVGICON,
     RadioDisableFalseSVGICON,
 } from "./RadioICON";
-import { useTheme, withTheme } from "styled-components";
+import { useTheme } from "styled-components";
 
 //NOTICE:
 // const primaryColor = "#f58b10";
