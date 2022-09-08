@@ -91,8 +91,7 @@ const CheckBox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
     };
 
     return (
-        <React.Fragment>
-            <StyledCheckBoxInput
+        <StyledCheckBoxInput
                 className={props.className}
                 disabled={props.disabled}
                 onMouseOver={onMouseOver}
@@ -120,7 +119,6 @@ const CheckBox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
                     />
                 </span>
             </StyledCheckBoxInput>
-        </React.Fragment>
     );
 };
 

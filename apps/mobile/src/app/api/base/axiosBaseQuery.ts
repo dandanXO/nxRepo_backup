@@ -58,7 +58,7 @@ const axiosBaseQuery =
                 onUploadProgress: (progressEvent) => {
                     console.log({ progressEvent });
                     if (progressEvent.lengthComputable) {
-                        var complete =
+                        const complete =
                             ((progressEvent.loaded / progressEvent.total) *
                                 100) |
                             0;
@@ -84,7 +84,7 @@ const axiosBaseQuery =
                 onDownloadProgress: onDownloadPercent,
             };
         } catch (axiosError) {
-            let err = axiosError as AxiosError;
+            const err = axiosError as AxiosError;
             const error = JSON.parse(JSON.stringify(err.response?.data)) as {
                 code: number;
                 message: string;

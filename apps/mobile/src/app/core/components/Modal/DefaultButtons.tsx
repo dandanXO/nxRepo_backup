@@ -8,16 +8,16 @@ const getButtonAllColorStyle = (colorName: string) => {
         case "green":
             css = `
                 border-color: #5ee030;
-                background-color: #52d344;    
-            
+                background-color: #52d344;
+
                 /* Status */
                 :hover {
                     border-color: #4abb3e;
-                    background-color: #4abb3e;                            
+                    background-color: #4abb3e;
                 }
                 :active {
                     border-color: #43e9a3;
-                    background-color: #44a939;                            
+                    background-color: #44a939;
                 }
             `;
             break;
@@ -25,7 +25,7 @@ const getButtonAllColorStyle = (colorName: string) => {
             css = `
                 /* Border */
                 border: 1px solid #f03e2e;
-            
+
 
                 /* Background */
                 background-color: #ff5243;
@@ -35,27 +35,27 @@ const getButtonAllColorStyle = (colorName: string) => {
                 }
                 :active {
                     border: 1px solid #af3025;
-                    background-color: #bd1204;        
+                    background-color: #bd1204;
                 }
             `;
             break;
         case "gray":
             css = `
                 /* Border */
-                border: 1px solid #657189;    
-            
+                border: 1px solid #657189;
+
                 /* Background */
                 background-color: #fff;
-                
+
                 :hover {
-                    border-color: #3ebdf0;        
+                    border-color: #3ebdf0;
                     background-color: #3ac0f8;
                     /* Text */
                     color: #fff;
                 }
-            
+
                 :active {
-                    border-color: #30b3e9;        
+                    border-color: #30b3e9;
                     background-color: #30b3e9;
                     /* Text */
                     color: #fff;
@@ -81,7 +81,7 @@ const StyledlessButton = (props: StyledlessButtonProps) => (
     </div>
 );
 
-interface ButtonProps extends StyledlessButtonProps {}
+type ButtonProps = StyledlessButtonProps
 
 /*${getButtonAllColorStyle("red")};*/
 const ConfirmButton = styled(StyledlessButton)<ButtonProps>`

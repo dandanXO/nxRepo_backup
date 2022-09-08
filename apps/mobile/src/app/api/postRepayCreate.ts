@@ -5,7 +5,7 @@ export interface PostRepayCreateRequestBody {
     /** 支付类型 */
     payType?: string;
     /** 是否展期 */
-    extend?: Boolean;
+    extend?: boolean;
     /** 客戶選擇的還款金額 */
     repayAmount?: number;
     /** 还款结清后是否自动下单 */

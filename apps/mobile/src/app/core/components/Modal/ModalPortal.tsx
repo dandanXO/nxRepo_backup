@@ -9,7 +9,7 @@ interface IModalPortal {
 class ModalPortal extends React.Component<IModalPortal> {
     // modalContainer: HTMLDivElement;
     container: HTMLDivElement;
-    CONTAINER_IDENTIFIER: string = "uni-modal-list";
+    CONTAINER_IDENTIFIER = "uni-modal-list";
     constructor(props: IModalPortal) {
         super(props);
         this.createContainerRoot();

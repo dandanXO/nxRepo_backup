@@ -87,7 +87,7 @@ export const PureUploadPaymentReceiptPage = (
         // console.log("formFileValue: ", formFileValue);
         setFormFile(formFileValue as any);
 
-        let reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = function (event) {
             setImageSrc(event?.target?.result as any);
         };

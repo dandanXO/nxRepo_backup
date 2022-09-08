@@ -118,8 +118,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
                 // onMouseOut={this.onMouseOut}
                 // disabled={this.props.disabled}
             >
-                <React.Fragment>
-                    <WithThemeRadioICON
+                <WithThemeRadioICON
                         checked={this.state.check}
                         defaultChecked={this.props.defaultChecked}
                         hover={this.state.hover}
@@ -127,7 +126,6 @@ class Radio extends React.Component<RadioProps, RadioState> {
                         disabled={this.props.disabled}
                     />
                     <StyledRadioText>{this.props.children}</StyledRadioText>
-                </React.Fragment>
             </div>
         );
     }

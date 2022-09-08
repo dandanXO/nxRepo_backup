@@ -14,7 +14,7 @@ interface IModalWrapperProps {
 type ModalWrapperProps = IModalWrapperProps & IModalProps;
 
 class Overlay extends React.Component<ModalWrapperProps> {
-    static IDENTIFIER: string = "uni-modal-container";
+    static IDENTIFIER = "uni-modal-container";
     static modal: any[] = [];
     static actionsRef: any = React.createRef();
     constructor(props: ModalWrapperProps) {

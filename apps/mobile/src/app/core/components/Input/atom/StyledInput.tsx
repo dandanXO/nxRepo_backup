@@ -20,16 +20,16 @@ const getStatusColor = (
                 };
             `;
         } else if (keyStatus === "Hover") {
-            return `                                
+            return `
                 // border-color: #52c8f9;
             `;
         } else if (keyStatus === "Focus") {
-            return `                                
-                // border-color: #52c8f9;                
+            return `
+                // border-color: #52c8f9;
             `;
         } else if (keyStatus === "KeyDown") {
-            return `                                
-                // border-color: #52c8f9;                
+            return `
+                // border-color: #52c8f9;
             `;
         }
     } else {
@@ -42,11 +42,11 @@ const getStatusColor = (
         if (validStatus === "ReadyForValid") {
             // 準備要驗證
             if (keyStatus === "Focus") {
-                return `                    
+                return `
                     // border-color: #52c8f9;
                 `;
             } else if (keyStatus === "Hover") {
-                return `                                                                                    
+                return `
                     // border-color: #52c8f9;
                 `;
             } else if (keyStatus === "Idle") {
@@ -75,7 +75,7 @@ const getStatusColor = (
             );
             // 驗證成功
             if (keyStatus === "Idle") {
-                return `                  
+                return `
                     // color: ${validColor};
                     // border-color: ${validColor}
                 `;
@@ -84,7 +84,7 @@ const getStatusColor = (
                 keyStatus === "Focus" ||
                 keyStatus === "KeyDown"
             ) {
-                return `                  
+                return `
                     // color: ${validColor};
                     // border-color: ${validColor}
                 `;
@@ -251,7 +251,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
     ${(props: StyledInputProps) => isFocus(props.isFocus)}
 `;
 
-function isFocus(isFocus: boolean = false) {
+function isFocus(isFocus = false) {
     if (isFocus) {
         return `
         position: relative;
