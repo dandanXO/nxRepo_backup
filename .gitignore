@@ -40,7 +40,7 @@ Thumbs.db
 
 ## custom
 /.vscode
-/mobile/task/openapi-typescript-codegen/generated/
+/deprecated/task/openapi-typescript-codegen/generated/
 /task/openapi-typescript/generated/
 /.husky/_/husky.sh
 
