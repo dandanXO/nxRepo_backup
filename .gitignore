@@ -46,3 +46,4 @@ Thumbs.db
 
 # Next.js
 .next
+/deprecated/task/openapi-typescript-codegen/generated/
