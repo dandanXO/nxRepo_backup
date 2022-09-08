@@ -11,7 +11,9 @@ export const Page: ComponentStory<typeof PureUploadPaymentReceiptPage> = () => {
     return (
         <AppThemeProvider>
             <PureUploadPaymentReceiptPage
-                postRepayReceiptRequest={() => {}}
+                postRepayReceiptRequest={() => {
+                  // do nothing.
+                }}
                 token={""}
                 orderNo="123"
             />
