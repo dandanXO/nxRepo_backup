@@ -85,7 +85,9 @@ class Radio extends React.Component<RadioProps, RadioState> {
                     check: !state.check,
                 };
             },
-            () => {}
+            () => {
+              // do nothing.
+            }
         );
     };
 
@@ -96,7 +98,9 @@ class Radio extends React.Component<RadioProps, RadioState> {
                     hover: true,
                 };
             },
-            () => {}
+            () => {
+              // do nothing.
+            }
         );
     };
     onMouseOut = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -106,7 +110,9 @@ class Radio extends React.Component<RadioProps, RadioState> {
                     hover: false,
                 };
             },
-            () => {}
+            () => {
+              // do nothing.
+            }
         );
     };
 
