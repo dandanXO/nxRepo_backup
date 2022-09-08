@@ -43,3 +43,6 @@ Thumbs.db
 /mobile/task/openapi-typescript-codegen/generated/
 /task/openapi-typescript/generated/
 /.husky/_/husky.sh
+
+# Next.js
+.next
