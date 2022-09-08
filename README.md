@@ -56,6 +56,20 @@ nx storybook mobile
 nx storybook admin
 ```
 
+
+#### Lint
+
+```shell
+# Lint
+# nx lint [APP Name]
+
+# Lint mobile app
+nx lint mobile
+
+# Lint admin app
+nx lint admin
+```
+
 ### Build
 
 ```shell
