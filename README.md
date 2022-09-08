@@ -24,6 +24,7 @@ pnpm install
 pnpm add -g nx
 ```
 ### Development
+#### HMR
 ```shell
 # Run App
 # nx serve [APP Name]
@@ -33,6 +34,17 @@ nx serve mobile
 
 # Run admin app
 nx serve admin
+```
+#### Storybook
+```shell
+# Storybook
+# nx storybook [APP Name]
+
+# Storybook mobile app
+nx storybook mobile
+
+# Storybook admin app
+nx storybook admin
 ```
 
 ### Build 
