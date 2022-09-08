@@ -51,7 +51,6 @@ specifiers:
   next: 12.2.5
   nx: 14.6.5
   prettier: ^2.6.2
-  prop-types: ^15.8.1
   query-string: ^7.1.1
   react: 18.2.0
   react-dom: 18.2.0
@@ -80,7 +79,6 @@ dependencies:
   classnames: 2.3.1
   core-js: 3.25.1
   next: 12.2.5_a7mipu7kvrstgwvi56qu2qyzhe
-  prop-types: 15.8.1
   query-string: 7.1.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -4615,7 +4613,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@babel/core': 7.19.0
+      '@babel/core': 7.12.13
       '@storybook/addons': 6.5.10_biqbaboplfbrettd7655fr4n2y
       '@storybook/api': 6.5.10_biqbaboplfbrettd7655fr4n2y
       '@storybook/channel-postmessage': 6.5.10
@@ -4632,7 +4630,7 @@ packages:
       '@storybook/store': 6.5.10_biqbaboplfbrettd7655fr4n2y
       '@storybook/theming': 6.5.10_biqbaboplfbrettd7655fr4n2y
       '@types/node': 16.11.7
-      babel-loader: 8.1.0_z22tmofudeh3tyeifpjvwjl5ei
+      babel-loader: 8.1.0_lukgjotbtgi5hbk5mr6dk7stee
       babel-plugin-named-exports-order: 0.0.2
       browser-assert: 1.2.1
       case-sensitive-paths-webpack-plugin: 2.4.0
@@ -14003,6 +14001,7 @@ packages:
   /object-assign/4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /object-copy/0.1.0:
     resolution: {integrity: sha512-79LYn6VAb63zgtmAteVOWo9Vdj71ZVBy3Pbse+VqxDpEP83XuujMrGqHIwAXJ5I/aM0zU7dIyIAhifVTPrNItQ==}
@@ -15234,6 +15233,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
+    dev: true
 
   /property-information/5.6.0:
     resolution: {integrity: sha512-YUHSPk+A30YPv+0Qf8i9Mbfe/C0hdPXk1s1jPVToV8pk8BQtpw10ct89Eo7OWkutrwqvT0eicAxlOg3dOAu8JA==}
