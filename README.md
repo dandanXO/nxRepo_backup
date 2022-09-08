@@ -9,10 +9,17 @@
 
 ## Development
 
-### Install Package Management Tool
+### Install Packages Management Tool
 [pnpm](https://pnpm.io/zh-TW/installation)
 
+### Install Packages
+```shell
+pnpm install
+```
+
 ### Install Build System
+[nx](https://nx.app/)
+
 ```shell
 pnpm add -g nx
 ```
