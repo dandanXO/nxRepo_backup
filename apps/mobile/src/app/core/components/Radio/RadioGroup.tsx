@@ -1,5 +1,5 @@
 import React from "react";
-import Radio, { StyledRadioBox } from "./Radio";
+import Radio from "./Radio";
 import styled from "styled-components";
 
 export interface GroupProps {
@@ -81,7 +81,7 @@ class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
     override render() {
         const size = this.props.size ? this.props.size : "small";
 
-      return (
+        return (
             <StyledGroup style={this.props.style ? this.props.style : {}}>
                 {React.Children.map<React.ReactNode, React.ReactElement<any>>(
                     this.props.children,

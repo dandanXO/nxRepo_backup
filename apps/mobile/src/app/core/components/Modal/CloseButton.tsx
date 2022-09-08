@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 const CloseICON = require("../Icon/SVG/ic_close_icon.svg");
 
 interface CloseSVGIconProps {

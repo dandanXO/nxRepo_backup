@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import {
-    GetAttractionsALLResponse,
     GetAttractionsALLRequestQueryArg,
+    GetAttractionsALLResponse,
     GetAttractionsALLResponseData,
 } from "./demo/getAttractionsALL";
 import {
@@ -13,10 +13,7 @@ import {
     GetRepayReceiptRequestQuerystring,
     GetRepayReceiptResponse,
 } from "./getRepayReceipt";
-import {
-    PostRepayReceiptRequestBody,
-    PostRepayReceiptResponse,
-} from "./postRepayReceipt";
+import { PostRepayReceiptResponse } from "./postRepayReceipt";
 import { GetRepayTypesResponse } from "./getRepayTypes";
 import {
     PostRepayCreateRequestBody,
@@ -24,6 +21,7 @@ import {
 } from "./postRepayCreate";
 import { PostBankBindSaveRequest } from "./postBankBindSave";
 import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
+
 export {
     GetAttractionsALLResponse,
     GetAttractionsALLRequestQueryArg,

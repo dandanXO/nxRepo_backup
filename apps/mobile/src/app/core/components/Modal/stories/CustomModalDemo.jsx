@@ -1,19 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
-import styled from "styled-components";
-import {
-    textContent,
-    longTextContent,
-    htmlContnet,
-    content,
-    longContent,
-    Button,
-    HelloButton,
-    LinkedButton,
-    Popover,
-    // Modal
-    Modal,
-} from "./index";
-import CustomPopupContainer from "../CustomModal";
+import React, { useCallback, useEffect, useState } from "react";
+import { Button, Modal, Popover } from "./index";
 
 const ModalModeDemo = () => {
     const [show, setShow] = useState(false);

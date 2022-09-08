@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { GetLoanDetailRecommendProducts } from "../api/getLoanDetail";
 import Card from "../core/components/Card";
 import CardContent from "../core/components/CardContent";

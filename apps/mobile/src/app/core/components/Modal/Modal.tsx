@@ -7,10 +7,10 @@ import Content from "./Content";
 import ControlGroup from "./ControlGroup";
 import MainIcon from "./MainIcon";
 import {
-    NotificationButton,
-    ConfirmButton,
     CancelButton,
+    ConfirmButton,
     CustomColorButton,
+    NotificationButton,
 } from "./DefaultButtons";
 import AppContext from "../AppContext";
 import Horizontal from "./Horizontal";

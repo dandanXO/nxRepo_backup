@@ -31,7 +31,14 @@ Normal.args = {
 export const ContentTemplate: ComponentStory<typeof Card> = (args) => (
     <AppThemeProvider>
         <Card {...args}>
-            <CardContent  balance={"1000"} contentItems={{} as any} handleApplyNow={{} as any} handleViewDetail={{} as any} icon={{} as any} productName={{} as any}/>
+            <CardContent
+                balance={"1000"}
+                contentItems={{} as any}
+                handleApplyNow={{} as any}
+                handleViewDetail={{} as any}
+                icon={{} as any}
+                productName={{} as any}
+            />
         </Card>
     </AppThemeProvider>
 );

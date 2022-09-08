@@ -2,10 +2,8 @@ import styled from "styled-components";
 import React from "react";
 import { flexCreator } from "../utils";
 import LoanBrand from "../LoanBrand";
-import ListItem from "../ListItem";
 import Button from "../Button";
 import Divider from "../Divider";
-import { ArrowUp, ArrowDown, ArrowRight } from "../images";
 import nextIcon_gray from "../images/next_icon_gray.svg";
 import nextIcon from "../images/next_icon.svg";
 

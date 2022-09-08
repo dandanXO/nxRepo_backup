@@ -1,12 +1,12 @@
 import React from "react";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import theme from "./config/theme";
 
 interface IAppThemeProvider {
     theme?: any;
     children: JSX.Element | JSX.Element[];
 }
-const GlobalStyle = createGlobalStyle`  
+const GlobalStyle = createGlobalStyle`
   body {
     font-family: Rubik;
     margin: 0;

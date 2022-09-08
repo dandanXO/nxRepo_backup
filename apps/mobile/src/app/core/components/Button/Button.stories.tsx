@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Button from "./index";
 import { AppThemeProvider } from "../index";
 

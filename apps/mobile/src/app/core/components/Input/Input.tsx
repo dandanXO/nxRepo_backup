@@ -4,7 +4,7 @@ import ErrorInputIcon from "./atom/ErrorInputIcon";
 import { InputLintContent } from "./atom/InputLintContent";
 import { StatusIconContainer } from "./template/StatusIconContainer";
 import { InputContainer } from "./template/InputContainer";
-import { StyledInput2, StyledLabel, StyledTopInput } from "./atom/StyledInput";
+import { StyledInput2, StyledTopInput } from "./atom/StyledInput";
 import { InputStatus, InputValidStatus } from "./type";
 import { useForceUpdate } from "../useForceUpdate";
 import {

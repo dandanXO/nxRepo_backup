@@ -1,8 +1,6 @@
 import React from "react";
 import useLoanDetailStory from "../../components/useLoanDetailStory";
-import PureLoanDetails, {
-    PureLoanDetailsPageProps,
-} from "../../components/PureLoanDetails";
+import PureLoanDetails from "../../components/PureLoanDetails";
 import Page from "../../core/components/Page";
 
 const ExtendDetailsPage = () => {

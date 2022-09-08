@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 interface dividerPropsStyle {
     styleType?: "wide" | "narrow";
 }
