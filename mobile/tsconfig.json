@@ -1,24 +1,16 @@
 {
     "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "noImplicitAny": true,
-        "module": "es6",
-        "target": "es5",
-        "allowJs": true,
-        "jsx": "react-jsx",
-        "moduleResolution": "Node",
-        "strict": true,
-        "skipLibCheck": true
+
     },
     "include": [
-      "mobile/src/**/**.ts",
-      "mobile/src/**/**.tsx",
-      "mobile/src/core/types/**/**.d.ts"
+      "src/**/**.ts",
+      "src/**/**.tsx",
+      "src/core/types/**/**.d.ts"
     ],
     "exclude": [
-      "mobile/src/**/**.stories.tsx"
+      "src/**/**.stories.tsx"
     ],
     "files": [
-      "src/index.tsx"
+      "../apps/mobile/src/main.tsx"
     ]
 }

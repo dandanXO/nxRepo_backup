@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV == "production";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
-const mockAPIResponse = require("../src/api/demo/mockApi.json");
+const mockAPIResponse = require("../../apps/mobile/src/app/api/demo/mockApi.json");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const config = {

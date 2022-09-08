@@ -42,4 +42,4 @@ Thumbs.db
 /.vscode
 /mobile/task/openapi-typescript-codegen/generated/
 /task/openapi-typescript/generated/
-/mobile/.husky/_/husky.sh
+/.husky/_/husky.sh

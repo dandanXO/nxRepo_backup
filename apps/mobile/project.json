@@ -1,0 +1,115 @@
+{
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/mobile/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/web:webpack",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "compiler": "babel",
+                "outputPath": "dist/apps/mobile",
+                "index": "apps/mobile/src/index.html",
+                "baseHref": "/",
+                "main": "apps/mobile/src/main.tsx",
+                "polyfills": "apps/mobile/src/polyfills.ts",
+                "tsConfig": "apps/mobile/tsconfig.app.json",
+                "assets": [
+                    "apps/mobile/src/favicon.ico",
+                    "apps/mobile/src/assets"
+                ],
+                "styles": [],
+                "scripts": [],
+                "webpackConfig": "@nrwl/react/plugins/webpack"
+            },
+            "configurations": {
+                "development": {
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true
+                },
+                "production": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "optimization": true,
+                    "outputHashing": "all",
+                    "sourceMap": false,
+                    "namedChunks": false,
+                    "extractLicenses": true,
+                    "vendorChunk": false
+                }
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/web:dev-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "mobile:build",
+                "hmr": true,
+                "proxyConfig": "apps/mobile/proxy.config.json"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "mobile:build:development"
+                },
+                "production": {
+                    "buildTarget": "mobile:build:production",
+                    "hmr": false
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/mobile/**/*.{ts,tsx,js,jsx}"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/apps/mobile"],
+            "options": {
+                "jestConfig": "apps/mobile/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "storybook": {
+            "executor": "@nrwl/storybook:storybook",
+            "options": {
+                "uiFramework": "@storybook/react",
+                "port": 9000,
+                "config": {
+                    "configFolder": "apps/mobile/.storybook"
+                }
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "build-storybook": {
+            "executor": "@nrwl/storybook:build",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "uiFramework": "@storybook/react",
+                "outputPath": "dist/storybook/mobile",
+                "config": {
+                    "configFolder": "apps/mobile/.storybook"
+                }
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        }
+    },
+    "tags": []
+}

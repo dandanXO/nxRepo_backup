@@ -14,7 +14,7 @@
         "fetch:test1": "npx openapi-typescript http://3.111.118.247:8080/v2/api-docs --output task/openapi-typescript/generated/types.ts",
         "fetch:test2": "npm run fetch:test2-1 && npm run fetch:test2-2",
         "fetch:test2-1": "node task/openapi-typescript-codegen/fetchOpenapi.js",
-        "fetch:test2-2": "../node_modules/.bin/openapi --input ./task/openapi-typescript-codegen/openapi.json --output ./task/openapi-typescript-codegen/generated --client fetch",
+        "fetch:test2-2": "../node_modules/.bin/openapi --input task/openapi-typescript-codegen/openapi.json --output ./task/openapi-typescript-codegen/generated --client fetch",
         "fetch:test3": "npx @rtk-query/codegen-openapi task/rtk-query-codegen-openapi/openapi-config.ts",
         "storybook": "../node_modules/.bin/start-storybook -p 6006",
         "build-storybook": "../node_modules/.bin/build-storybook",
@@ -40,7 +40,6 @@
         "css-loader": "^6.7.1",
         "fetch-openapi": "^12.0.0",
         "html-webpack-plugin": "^5.5.0",
-        "husky": "^8.0.0",
         "mini-css-extract-plugin": "^2.6.1",
         "openapi-typescript-codegen": "^0.23.0",
         "postcss": "^8.4.16",
@@ -56,23 +55,7 @@
         "webpack-dev-server": "^4.9.3"
     },
     "dependencies": {
-        "@reduxjs/toolkit": "^1.8.4",
-        "@types/react": "^18.0.16",
-        "@types/react-dom": "^18.0.6",
-        "@types/styled-components": "^5.1.25",
-        "@types/uuid": "^8.3.4",
-        "axios": "^0.27.2",
-        "classnames": "^2.3.1",
-        "query-string": "^7.1.1",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-redux": "^8.0.2",
-        "react-router-dom": "^6.3.0",
-        "styled-components": "^5.3.5",
-        "tailwindcss": "^3.1.8",
-        "ts-node": "^10.9.1",
-        "uuid": "^8.3.2",
-        "zod": "^3.18.0"
+
     },
     "engines": {
         "node": "16.6"
