@@ -45,11 +45,15 @@ const useLoanDetailStory = () => {
         (props: PostRepayCreateRequestBody) => {
             postRepayCreate(props)
                 .unwrap()
-                .then((data: PostRepayCreateResponse) => {})
+                .then((data: PostRepayCreateResponse) => {
+                  // do nothing.
+                })
                 .catch(({ error }) => {
                     console.log(error);
                 })
-                .finally(() => {});
+                .finally(() => {
+                  // do nothing.
+                });
         },
         []
     );

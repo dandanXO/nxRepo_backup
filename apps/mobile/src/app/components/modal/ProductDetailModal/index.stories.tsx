@@ -13,7 +13,9 @@ export const Page: ComponentStory<typeof PureProductDetailModal> = () => {
         <AppThemeProvider>
             <PureProductDetailModal
                 recommendProducts={data}
-                setShowProductDetailModal={() => {}}
+                setShowProductDetailModal={() => {
+                  // do nothing.
+                }}
             />
         </AppThemeProvider>
     );
