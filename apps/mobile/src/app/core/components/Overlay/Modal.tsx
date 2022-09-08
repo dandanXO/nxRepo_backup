@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AppContext from "../AppContext";
 import Overlay from "../Modal/Overlay";
 import Popup from "../Modal/Popup";
@@ -33,16 +32,16 @@ interface ModalState {
     show: boolean;
 }
 class Modal extends React.Component<IModalProps, ModalState> {
-    static propTypes = {
-        show: PropTypes.bool,
-        mask: PropTypes.bool,
-        type: PropTypes.string,
-        title: PropTypes.string,
-        content: PropTypes.string,
-        maskClosable: PropTypes.bool,
-        enableClose: PropTypes.bool,
-        enableTitleHorizontal: PropTypes.bool,
-    };
+    // static propTypes = {
+    //     show: PropTypes.bool,
+    //     mask: PropTypes.bool,
+    //     type: PropTypes.string,
+    //     title: PropTypes.string,
+    //     content: PropTypes.string,
+    //     maskClosable: PropTypes.bool,
+    //     enableClose: PropTypes.bool,
+    //     enableTitleHorizontal: PropTypes.bool,
+    // };
     static defaultProps = {
         show: false,
         mask: true,
