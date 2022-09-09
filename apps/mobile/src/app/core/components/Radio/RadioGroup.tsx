@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export interface GroupProps {
     className?: string;
-    style: Object;
+    style: React.CSSProperties;
     children: React.ReactNode;
 }
 
@@ -37,11 +37,11 @@ export interface RadioGroupProps {
     className?: string;
     defaultChecked?: boolean;
     disabled?: boolean;
-    changeRadio?: Function;
+    changeRadio?: (checked: boolean) => void;
     value: string;
     check?: boolean;
     size?: "small" | "big";
-    style?: Object;
+    style?: React.CSSProperties;
     children: React.ReactElement<any> | Array<React.ReactElement<any>>;
     onCheck: (value: string | RadioParams, checked: boolean) => void;
 }

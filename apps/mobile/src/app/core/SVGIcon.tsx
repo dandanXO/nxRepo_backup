@@ -20,7 +20,7 @@ export const RegularSVGICON = styled.div`
 `;
 
 const CommonRegularSVGICON = (props: ICommonRegularSVGICON) => {
-    const { size = 19, fill = "#A8A8A8" } = props;
+    // const { size = 19, fill = "#A8A8A8" } = props;
     return <RegularSVGICON />;
     // return (
     //     <svg

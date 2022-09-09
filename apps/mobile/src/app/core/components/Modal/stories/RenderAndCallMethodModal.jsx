@@ -33,7 +33,7 @@ const RenderAndCallMethodModal = () => {
                 ),
             });
         }, 3000);
-    });
+    }, []);
     return (
         <div>
             <Modal

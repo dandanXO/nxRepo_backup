@@ -81,8 +81,8 @@ const theme = {
 };
 export default theme;
 
-const defaultTheme = {
-    background: {
-        primary: "rgba(45, 59, 88, 0.85)",
-    },
-};
+// const defaultTheme = {
+//     background: {
+//         primary: "rgba(45, 59, 88, 0.85)",
+//     },
+// };
