@@ -22,9 +22,9 @@ const RadioCheck = styled(RegularSVGICON)`
     left: 3px;
 `;
 const RadioCheckSVGICON: React.FC<RadioCheckSVGICONProps> = (props) => {
-    const size = props.size;
-    const fill = props.fill ? props.fill : "#36A9FB";
-    const radioFill = props.radioFill ? props.radioFill : "#36a9fb";
+    // const size = props.size;
+    // const fill = props.fill ? props.fill : "#36A9FB";
+    // const radioFill = props.radioFill ? props.radioFill : "#36a9fb";
     return (
         <RegularSVGICON>
             <RadioCheck />

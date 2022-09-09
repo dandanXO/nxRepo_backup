@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { InputStatus, InputValidStatus } from "../type";
 
+/*
 const getStatusColor = (
     validStatus: InputValidStatus,
     keyStatus: InputStatus,
@@ -102,7 +103,7 @@ const getStatusColor = (
         }
     }
 };
-
+*/
 export interface StyledInputProps {
     validStatus: InputValidStatus;
     prevValidStatus: InputValidStatus;
