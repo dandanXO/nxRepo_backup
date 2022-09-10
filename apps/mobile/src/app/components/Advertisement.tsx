@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import React, {useCallback, useState} from "react";
-import {GetLoanDetailRecommendProducts} from "../api/getLoanDetail";
+import React, { useCallback, useState } from "react";
+import { GetLoanDetailRecommendProducts } from "../api/getLoanDetail";
 import ProductDetailModal from "./modal/ProductDetailModal";
 import SubmitOrderModal from "./modal/SubmitOrderModal";
 import SubmitOrderSuccessModal from "./modal/SubmitOrderSuccessModal";
-import {usePostLoanSubmitOrderMutation} from "../api";
-import {PostLoanSubmitOrderRequestBody} from "../api/postLoanSubmitOrder";
-import {Card, CardContent, ListItem} from "@frontend/mobile/shared/ui";
+import { usePostLoanSubmitOrderMutation } from "../api";
+import { PostLoanSubmitOrderRequestBody } from "../api/postLoanSubmitOrder";
+import { Card, CardContent, ListItem } from "@frontend/mobile/shared/ui";
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;

@@ -1,7 +1,14 @@
 import styled from "styled-components";
 import React from "react";
 import { GetLoanDetailResponse } from "../api/getLoanDetail";
-import {Tag, Card, ListItem, Button, LoanBrand, AmountPaidIcon } from "@frontend/mobile/shared/ui";
+import {
+    Tag,
+    Card,
+    ListItem,
+    Button,
+    LoanBrand,
+    AmountPaidIcon,
+} from "@frontend/mobile/shared/ui";
 
 const LoanInfoStyled = styled.div`
     text-align: center;

@@ -5,7 +5,13 @@ import {
     GetLoanDetailResponse,
 } from "../../../api/getLoanDetail";
 
-import { Overlay, Title, Divider, Button, ListItem } from "@frontend/mobile/shared/ui";
+import {
+    Overlay,
+    Title,
+    Divider,
+    Button,
+    ListItem,
+} from "@frontend/mobile/shared/ui";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

@@ -1,7 +1,7 @@
 import { Overlay } from "@frontend/mobile/shared/ui";
 import React from "react";
 import styled from "styled-components";
-import { StyledLoading } from "@frontend/mobile/shared/ui"
+import { StyledLoading } from "@frontend/mobile/shared/ui";
 
 const Container = styled.div`
     padding: 8px;

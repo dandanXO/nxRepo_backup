@@ -1,4 +1,11 @@
-import { Overlay, LoanBrand, ListItem, Divider, Tag, Accordion  } from "@frontend/mobile/shared/ui";
+import {
+    Overlay,
+    LoanBrand,
+    ListItem,
+    Divider,
+    Tag,
+    Accordion,
+} from "@frontend/mobile/shared/ui";
 import React from "react";
 import styled from "styled-components";
 import { GetLoanDetailResponse } from "../../../../api/getLoanDetail";

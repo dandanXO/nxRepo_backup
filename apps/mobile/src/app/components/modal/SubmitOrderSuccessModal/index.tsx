@@ -1,4 +1,4 @@
-import {Modal} from "@frontend/mobile/shared/ui";
+import { Modal } from "@frontend/mobile/shared/ui";
 import React from "react";
 import styled from "styled-components";
 
