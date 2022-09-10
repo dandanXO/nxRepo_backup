@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import { AppThemeProvider } from "./core/components";
+import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import { appStore } from "./store";
 import { AppRouter } from "./router";
 

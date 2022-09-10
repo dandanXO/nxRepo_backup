@@ -1,7 +1,7 @@
 import React from "react";
 import useLoanDetailStory from "../../components/useLoanDetailStory";
 import PureLoanDetails from "../../components/PureLoanDetails";
-import Page from "../../core/components/Page";
+import { Page } from "@frontend/mobile/shared/ui";
 
 const ExtendDetailsPage = () => {
     const {

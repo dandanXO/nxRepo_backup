@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PureLoanDetailsAdvertisementPage } from "./PureLoanDetailsAdvertisementPage";
-import { AppThemeProvider } from "../../core/components";
+import { AppThemeProvider  } from "@frontend/mobile/shared/ui";
 import { mockGetLoanDetailResponse } from "../../api/getLoanDetail";
 
 export default {

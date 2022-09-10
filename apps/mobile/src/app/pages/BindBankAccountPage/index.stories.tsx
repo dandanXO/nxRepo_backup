@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PureBindBankAccountPage } from "./PureBindBankAccountPage";
-import { AppThemeProvider } from "../../core/components";
+import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 
 export default {
     title: "Page/BindBankAccountPage",

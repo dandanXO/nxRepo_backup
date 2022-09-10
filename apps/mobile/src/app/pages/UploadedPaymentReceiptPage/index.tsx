@@ -1,10 +1,10 @@
-import Page from "../../core/components/Page";
+
+
 import styled from "styled-components";
-import { SuccessICON } from "../../core/components/Icon/Icon";
-import Button from "../../core/components/Button";
 import { useNavigate } from "react-router-dom";
-import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
+import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui"
 import { useCallback } from "react";
+import { Page, SuccessICON, Button } from "@frontend/mobile/shared/ui";
 
 const CustomPage = styled(Page)`
     display: flex;

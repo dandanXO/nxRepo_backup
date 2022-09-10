@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import Page from "../../core/components/Page";
-
+import { Page } from "@frontend/mobile/shared/ui";
 const getToken = () => `token=b5f2db2c45e24edcbc49540bae862fbd`;
 const getOrderNo = () => `orderNo=no-3632791101642108-9`;
 const queryString = () => `${getToken()}&${getOrderNo()}`;

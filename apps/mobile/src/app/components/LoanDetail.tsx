@@ -4,11 +4,7 @@ import {
     GetLoanDetailChargeFeeDetail,
     GetLoanDetailResponse,
 } from "../api/getLoanDetail";
-import ListItem from "../core/components/ListItem";
-import Button from "../core/components/Button";
-import Accordion from "../core/components/Accordion";
-import Card from "../core/components/Card";
-
+import { ListItem, Button, Accordion, Card } from "@frontend/mobile/shared/ui";
 const LoanDetailStyled = styled.div`
     text-align: center;
 
