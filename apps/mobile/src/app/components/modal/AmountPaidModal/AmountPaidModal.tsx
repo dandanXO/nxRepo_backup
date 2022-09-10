@@ -1,12 +1,8 @@
-import Overlay from "../../../core/components/Overlay";
 import React from "react";
 import styled from "styled-components";
-import ListItem from "../../../core/components/ListItem";
 import { GetLoanDetailResponse } from "../../../api/getLoanDetail";
-import { flexCreator } from "../../../core/components/utils";
-import Title from "../../../core/components/Modal/Title";
-import Divider from "../../../core/components/Divider";
 import recordStatusStyleProps from "../../recordStatusColorMapper";
+import { Overlay, ListItem, flexCreator, Title, Divider } from "@frontend/mobile/shared/ui";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

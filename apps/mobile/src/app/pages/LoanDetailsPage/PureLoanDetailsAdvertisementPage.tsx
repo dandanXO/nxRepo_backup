@@ -1,5 +1,6 @@
+import { Page } from "@frontend/mobile/shared/ui";
 import React from "react";
-import Page from "../../core/components/Page";
+
 import Advertisement from "../../components/Advertisement";
 import PureLoanDetails, {
     PureLoanDetailsPageProps,

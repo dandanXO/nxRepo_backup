@@ -1,11 +1,7 @@
-import Overlay from "../../../core/components/Overlay";
 import React from "react";
 import styled from "styled-components";
 import { GetLoanDetailRecommendProducts } from "../../../api/getLoanDetail";
-import Title from "../../../core/components/Modal/Title";
-import Divider from "../../../core/components/Divider";
-import Button from "../../../core/components/Button";
-
+import { Overlay, Title, Divider, Button } from "@frontend/mobile/shared/ui";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
     .productName {

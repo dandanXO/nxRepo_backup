@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ListItem from "../../../../core/components/ListItem";
-import Horizontal from "../../../../core/components/Modal/Horizontal";
-import Title from "../../../../core/components/Modal/Title";
-import { Input } from "../../../../core/components/Input";
-import { NotificationButton } from "../../../../core/components/Modal/DefaultButtons";
-import Overlay from "../../../../core/components/Overlay";
-import Radio from "../../../../core/components/Radio";
-import { RepayICON } from "../../../../core/components/Icon/Icon";
-
+import { Horizontal, NotificationButton, RepayICON, ListItem, Title, Overlay, Radio, Input } from "@frontend/mobile/shared/ui";
 const Paragraph = styled.div`
     text-align: left;
     color: #aaaaaa;

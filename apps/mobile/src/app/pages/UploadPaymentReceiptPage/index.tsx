@@ -1,17 +1,14 @@
-import Page from "../../core/components/Page";
-import { Input } from "../../core/components/Input";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 import CameraSvgIcon from "./CameraSvgIcon";
-import Button from "../../core/components/Button";
 import { usePostRepayReceiptMutation } from "../../api";
 import { PostRepayReceiptResponse } from "../../api/postRepayReceipt";
 import { useNavigate } from "react-router-dom";
 import UploadingFileModal from "./modal/UploadingFileModal";
-import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
+import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui"
 import { InputValue } from "../../core/types/InputValue";
 import { z } from "zod";
-
+import { Page, Input, Button } from "@frontend/mobile/shared/ui";
 const Section = styled.div`
     margin-bottom: 100px;
 `;

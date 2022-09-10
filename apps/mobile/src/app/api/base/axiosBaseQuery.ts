@@ -2,8 +2,7 @@ import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosError, AxiosRequestConfig } from "axios";
 import axios from "axios";
 import queryString from "query-string";
-import Modal from "../../core/components/Modal";
-
+import { Modal } from "@frontend/mobile/shared/ui"
 const alertModal = (message: string) =>
     Modal.alert({
         show: true,

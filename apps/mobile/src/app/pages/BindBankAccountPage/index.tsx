@@ -1,6 +1,6 @@
 import React from "react";
 import { usePostBankBindSaveMutation } from "../../api";
-import useLocationOrderQueryString from "../../core/hooks/useLocationOrderQueryString";
+import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui"
 import { PureBindBankAccountPage } from "./PureBindBankAccountPage";
 
 const BindBankAccountPage = () => {

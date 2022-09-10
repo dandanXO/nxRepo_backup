@@ -1,11 +1,9 @@
 import React, { useCallback, useState } from "react";
-import { Input } from "../../core/components/Input";
+
+import { Input, Button, Page, Modal } from "@frontend/mobile/shared/ui";
+import type { InputValue } from "@frontend/mobile/shared/ui";
 import styled from "styled-components";
-import Page from "../../core/components/Page";
-import Button from "../../core/components/Button";
-import type { InputValue } from "../../core/types/InputValue";
 import { PostBankBindSaveRequest } from "../../api/postBankBindSave";
-import Modal from "../../core/components/Modal";
 import { z } from "zod";
 
 const CustomPage = styled(Page)`

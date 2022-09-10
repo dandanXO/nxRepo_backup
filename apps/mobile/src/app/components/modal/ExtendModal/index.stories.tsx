@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PureExtendModal } from "./ExtendModal";
-import { AppThemeProvider } from "../../../core/components";
+import { AppThemeProvider  } from "@frontend/mobile/shared/ui";
 import { mockGetLoanDetailResponse } from "../../../api/getLoanDetail";
 import * as React from "react";
 

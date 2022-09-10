@@ -1,11 +1,6 @@
-import Overlay from "../../../../core/components/Overlay";
+import { Overlay, LoanBrand, ListItem, Divider, Tag, Accordion  } from "@frontend/mobile/shared/ui";
 import React from "react";
 import styled from "styled-components";
-import LoanBrand from "../../../../core/components/LoanBrand";
-import Divider from "../../../../core/components/Divider";
-import ListItem from "../../../../core/components/ListItem";
-import Tag from "../../../../core/components/Tag";
-import Accordion from "../../../../core/components/Accordion";
 import { GetLoanDetailResponse } from "../../../../api/getLoanDetail";
 import { useGetLoanDetailQuery } from "../../../../api";
 import recordStatusStyleProps from "../../../../components/recordStatusColorMapper";

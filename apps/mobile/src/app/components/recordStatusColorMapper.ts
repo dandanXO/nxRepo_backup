@@ -1,4 +1,4 @@
-import theme from "../core/components/config/theme";
+import { theme } from "@frontend/mobile/shared/ui";
 
 const { color } = theme;
 
