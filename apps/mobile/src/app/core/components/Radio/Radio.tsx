@@ -86,7 +86,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
                 };
             },
             () => {
-              // do nothing.
+                // do nothing.
             }
         );
     };
@@ -99,7 +99,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
                 };
             },
             () => {
-              // do nothing.
+                // do nothing.
             }
         );
     };
@@ -111,7 +111,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
                 };
             },
             () => {
-              // do nothing.
+                // do nothing.
             }
         );
     };

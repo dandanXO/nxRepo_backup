@@ -46,13 +46,13 @@ const useLoanDetailStory = () => {
             postRepayCreate(props)
                 .unwrap()
                 .then((data: PostRepayCreateResponse) => {
-                  // do nothing.
+                    // do nothing.
                 })
                 .catch(({ error }) => {
                     console.log(error);
                 })
                 .finally(() => {
-                  // do nothing.
+                    // do nothing.
                 });
         },
         []

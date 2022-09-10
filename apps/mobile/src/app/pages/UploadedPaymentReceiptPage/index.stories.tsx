@@ -12,9 +12,11 @@ export const Page: ComponentStory<typeof PureUploadedPaymentReceiptPage> = (
 ) => {
     return (
         <AppThemeProvider>
-            <PureUploadedPaymentReceiptPage navigateToLoanDetails={() => {
-              // do nothing.
-            }} />
+            <PureUploadedPaymentReceiptPage
+                navigateToLoanDetails={() => {
+                    // do nothing.
+                }}
+            />
         </AppThemeProvider>
     );
 };
