@@ -56,7 +56,6 @@ nx storybook mobile
 nx storybook admin
 ```
 
-
 #### Lint
 
 ```shell
@@ -68,6 +67,24 @@ nx lint mobile
 
 # Lint admin app
 nx lint admin
+```
+
+#### Format
+
+```shell
+# Format
+# nx format
+nx format:check
+nx format:write
+# nx format [APP Name]
+
+# Format mobile app
+nx format:check mobile
+nx format:write mobile
+
+# Format admin app
+nx format:check admin
+nx format:write admin
 ```
 
 ### Build
