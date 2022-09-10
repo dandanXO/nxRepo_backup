@@ -1,35 +1,35 @@
-import React from "react";
+import React from 'react';
 
-import { storiesOf } from "@storybook/react";
+import { storiesOf } from '@storybook/react';
 
 const unistarTheme = {
-    custom: {
-        text: {
-            primary: "#fff",
-            secondary: "#fff",
-        },
-        // fontfamily: "Rubik",
-        font: {},
-        background: {
-            primary: "rgba(45, 59, 88, 0.85)",
-        },
-        button: {
-            primary: {
-                background: "#f58b10",
-                text: "f58b10",
-            },
-            secondary: {
-                background: "",
-                text: "",
-            },
-            alert: {
-                background: "#f58b10",
-                text: "f58b10",
-            },
-        },
+  custom: {
+    text: {
+      primary: '#fff',
+      secondary: '#fff',
     },
+    // fontfamily: "Rubik",
+    font: {},
+    background: {
+      primary: 'rgba(45, 59, 88, 0.85)',
+    },
+    button: {
+      primary: {
+        background: '#f58b10',
+        text: 'f58b10',
+      },
+      secondary: {
+        background: '',
+        text: '',
+      },
+      alert: {
+        background: '#f58b10',
+        text: 'f58b10',
+      },
+    },
+  },
 };
-storiesOf("Modal", module);
+storiesOf('Modal', module);
 // .add("Defalut", () => <AppThemeProvider theme={unistarTheme}><DefaultModalDemo></DefaultModalDemo></AppThemeProvider>)
 // .add("By Call Method", () => (
 //     <AppThemeProvider theme={unistarTheme}>

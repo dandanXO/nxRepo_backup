@@ -1,5 +1,3 @@
-
-
 import Accordion from './lib/components/Accordion';
 import Button from './lib/components/Button';
 import Card from './lib/components/Card';
@@ -22,13 +20,13 @@ import useLocationOrderQueryString from './lib/hooks/useLocationOrderQueryString
 import { flexCreator } from './lib/components/utils';
 import { SuccessICON } from './lib/components/Icon/Icon';
 import { AppThemeProvider } from './lib/components';
-import AmountPaidIcon from "./lib/components/images/amount_paid_icon.svg";
+import AmountPaidIcon from './lib/components/images/amount_paid_icon.svg';
 
-import Horizontal from "./lib/components/Modal/Horizontal";
-import { NotificationButton } from "./lib/components/Modal/DefaultButtons";
-import { RepayICON } from "./lib/components/Icon/Icon";
-import StyledLoading from "./lib/Loading";
-import type { InputValue } from "./lib/types/InputValue";
+import Horizontal from './lib/components/Modal/Horizontal';
+import { NotificationButton } from './lib/components/Modal/DefaultButtons';
+import { RepayICON } from './lib/components/Icon/Icon';
+import StyledLoading from './lib/Loading';
+import type { InputValue } from './lib/types/InputValue';
 
 export {
   StyledLoading,
@@ -56,10 +54,7 @@ export {
   flexCreator,
   SuccessICON,
   AppThemeProvider,
-  AmountPaidIcon
+  AmountPaidIcon,
 };
 
-
-export type {
-  InputValue
-}
+export type { InputValue };

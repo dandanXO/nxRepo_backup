@@ -1,22 +1,22 @@
-import { storiesOf } from "@storybook/react";
-import React from "react";
-import styled from "styled-components";
-import Radio from "../index";
+import { storiesOf } from '@storybook/react';
+import React from 'react';
+import styled from 'styled-components';
+import Radio from '../index';
 // import Body from "../../../Global/Body";
 const Body = styled.div``;
 const ContainerBase = styled.div`
-    /* background-color: #f1e7bc; */
-    //border: 1px solid gray;
-    //margin-bottom: 20px;
+  /* background-color: #f1e7bc; */
+  //border: 1px solid gray;
+  //margin-bottom: 20px;
 `;
 const Container = styled(ContainerBase)`
-    /* width: 100%; */
+  /* width: 100%; */
 `;
 const FitWidthContainer = styled(ContainerBase)`
-    width: 450px;
+  width: 450px;
 `;
 
-storiesOf("Radio", module);
+storiesOf('Radio', module);
 // .add("Special", () => {
 //     const [value, setValue] = useState(4);
 //     return (

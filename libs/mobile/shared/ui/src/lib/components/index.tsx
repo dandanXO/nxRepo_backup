@@ -1,10 +1,10 @@
-import React from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import theme from "./config/theme";
+import React from 'react';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import theme from './config/theme';
 
 interface IAppThemeProvider {
-    theme?: any;
-    children: JSX.Element | JSX.Element[];
+  theme?: any;
+  children: JSX.Element | JSX.Element[];
 }
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,10 +16,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 export const AppThemeProvider = (props: IAppThemeProvider) => {
-    return (
-        <ThemeProvider theme={props.theme ? props.theme : theme}>
-            <GlobalStyle />
-            {props.children}
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider theme={props.theme ? props.theme : theme}>
+      <GlobalStyle />
+      {props.children}
+    </ThemeProvider>
+  );
 };
