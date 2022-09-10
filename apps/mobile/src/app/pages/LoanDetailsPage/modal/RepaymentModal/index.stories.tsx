@@ -14,16 +14,16 @@ export const ModalRepayment: ComponentStory<typeof RepaymentModal> = (args) => {
             <RepaymentModal
                 balance={8500}
                 setRepayBalance={() => {
-                  // do nothing.
+                    // do nothing.
                 }}
                 setShowRepaymentModal={() => {
-                  // do nothing.
+                    // do nothing.
                 }}
                 setShowRepaymentNoticeModal={() => {
-                  // do nothing.
+                    // do nothing.
                 }}
                 handlePostRepayCreate={() => {
-                  // do nothing.
+                    // do nothing.
                 }}
             />
         </AppThemeProvider>

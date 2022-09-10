@@ -16,10 +16,10 @@ export const Page: ComponentStory<
             <PureLoanDetailsAdvertisementPage
                 currentData={mockGetLoanDetailResponse}
                 navigateToUploadPaymentReceiptPage={() => {
-                  // do nothing.
+                    // do nothing.
                 }}
                 handlePostRepayCreate={() => {
-                  // do nothing.
+                    // do nothing.
                 }}
             />
         </AppThemeProvider>

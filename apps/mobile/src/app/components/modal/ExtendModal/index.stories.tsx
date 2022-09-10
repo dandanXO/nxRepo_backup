@@ -15,10 +15,10 @@ export const Page: ComponentStory<typeof PureExtendModal> = () => {
             <PureExtendModal
                 repayConfirmDetail={mockGetLoanDetailResponse}
                 setShowExtendModal={() => {
-                  // do nothing.
+                    // do nothing.
                 }}
                 handlePostRepayCreate={() => {
-                  // do nothing.
+                    // do nothing.
                 }}
             />
         </AppThemeProvider>
