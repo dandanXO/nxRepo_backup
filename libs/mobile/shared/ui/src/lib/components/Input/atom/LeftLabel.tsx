@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface Label {
-    for?: string;
+  for?: string;
 }
 export const LeftLabel = styled.label<Label>`
-    font-weight: 300;
-    color: #aaaaaa;
+  font-weight: 300;
+  color: #aaaaaa;
 `;

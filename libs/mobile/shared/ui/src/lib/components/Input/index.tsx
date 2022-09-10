@@ -1,4 +1,4 @@
-import Input from "./Input";
-import InputGroup from "./InputGroup";
+import Input from './Input';
+import InputGroup from './InputGroup';
 
 export { Input, InputGroup };

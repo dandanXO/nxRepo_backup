@@ -1,73 +1,72 @@
-import styled from "styled-components";
-import React from "react";
-import { flexCreator } from "../utils";
+import styled from 'styled-components';
+import React from 'react';
+import { flexCreator } from '../utils';
 
 const CardStyled = styled.div`
-    box-shadow: ${({ theme }) => theme.boxShadow};
-    font-size: ${({ theme }) => theme.fontSize[16]};
-    position: relative;
-    border-radius: 8px;
-    padding: 14px;
-    margin-bottom: 20px;
-    background: ${({ theme }) => theme.color.white};
-    ${flexCreator("column", "", "")}
-    .hotTagText {
-        position: absolute;
-        top: 3px;
-        right: 3px;
-        font-size: ${({ theme }) => theme.fontSize[12]};
-        font-weight: bold;
-    }
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  font-size: ${({ theme }) => theme.fontSize[16]};
+  position: relative;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 20px;
+  background: ${({ theme }) => theme.color.white};
+  ${flexCreator('column', '', '')}
+  .hotTagText {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    font-size: ${({ theme }) => theme.fontSize[12]};
+    font-weight: bold;
+  }
 `;
 
 const triangle = styled.div`
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 20px;
-    height: 20px;
-    border-top-right-radius: 30%; // 圆角弧度
-    background: ${({ theme }) => theme.color.yellow};
-    transform: rotate(-60edg) skewX(-30edg) scale(1, 0.866);
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 20px;
+  height: 20px;
+  border-top-right-radius: 30%; // 圆角弧度
+  background: ${({ theme }) => theme.color.yellow};
+  transform: rotate(-60edg) skewX(-30edg) scale(1, 0.866);
 `;
 const HotTag = styled(triangle)`
-    :before,
-    :after {
-        content: "";
-        position: absolute;
-        background-color: inherit;
-        width: 20px;
-        height: 20px;
-    }
-    :before {
-        transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707)
-            translate(0, -50%);
-    }
-    :after {
-        transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414)
-            translate(50%);
-    }
+  :before,
+  :after {
+    content: '';
+    position: absolute;
+    background-color: inherit;
+    width: 20px;
+    height: 20px;
+  }
+  :before {
+    transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707)
+      translate(0, -50%);
+  }
+  :after {
+    transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414) translate(50%);
+  }
 `;
 
 type CardProps = {
-    children: React.ReactElement | React.ReactElement[];
-    isHot: boolean;
+  children: React.ReactElement | React.ReactElement[];
+  isHot: boolean;
 };
 
 const Card = (props: CardProps) => {
-    const { children, isHot } = props;
-    return (
-        <CardStyled>
-            {isHot && (
-                <div>
-                    <HotTag />
-                    <span className={"hotTagText"}>Hot</span>
-                </div>
-            )}
+  const { children, isHot } = props;
+  return (
+    <CardStyled>
+      {isHot && (
+        <div>
+          <HotTag />
+          <span className={'hotTagText'}>Hot</span>
+        </div>
+      )}
 
-            {children}
-        </CardStyled>
-    );
+      {children}
+    </CardStyled>
+  );
 };
 
 export default Card;

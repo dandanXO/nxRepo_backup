@@ -1,1 +1,1 @@
-require("./index.stories");
+require('./index.stories');
