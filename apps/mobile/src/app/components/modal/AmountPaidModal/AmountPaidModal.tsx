@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { GetLoanDetailResponse } from "../../../api/getLoanDetail";
 import recordStatusStyleProps from "../../recordStatusColorMapper";
-import { Overlay, ListItem, flexCreator, Title, Divider } from "@frontend/mobile/shared/ui";
+import {
+    Overlay,
+    ListItem,
+    flexCreator,
+    Title,
+    Divider,
+} from "@frontend/mobile/shared/ui";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

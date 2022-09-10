@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PureProductDetailModal } from "./index";
-import { AppThemeProvider  } from "@frontend/mobile/shared/ui";
+import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import * as React from "react";
 
 export default {

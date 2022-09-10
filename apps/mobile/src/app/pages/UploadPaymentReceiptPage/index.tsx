@@ -5,7 +5,7 @@ import { usePostRepayReceiptMutation } from "../../api";
 import { PostRepayReceiptResponse } from "../../api/postRepayReceipt";
 import { useNavigate } from "react-router-dom";
 import UploadingFileModal from "./modal/UploadingFileModal";
-import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui"
+import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 import { InputValue } from "../../core/types/InputValue";
 import { z } from "zod";
 import { Page, Input, Button } from "@frontend/mobile/shared/ui";

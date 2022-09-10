@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Horizontal, NotificationButton, RepayICON, ListItem, Title, Overlay, Radio, Input } from "@frontend/mobile/shared/ui";
+import {
+    Horizontal,
+    NotificationButton,
+    RepayICON,
+    ListItem,
+    Title,
+    Overlay,
+    Radio,
+    Input,
+} from "@frontend/mobile/shared/ui";
 const Paragraph = styled.div`
     text-align: left;
     color: #aaaaaa;

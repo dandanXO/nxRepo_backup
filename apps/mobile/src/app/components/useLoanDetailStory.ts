@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui"
+import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 import {
     useGetLoanDetailQuery,
     useGetRepayTypesQuery,
