@@ -165,4 +165,24 @@ nx g @nrwl/react:library ui --dry-run --directory=mobile/shared --tags=scope:mob
 # run
 nx g @nrwl/react:library ui --directory=mobile/shared --tags=scope:mobile,type:ui
 
+# next.js add page
+nx g @nrwl/next:page demo --project=admin
+
+# next.js add component 
+nx g @nrwl/next:component protable --project=admin
+
 ```
+## issues
+[next-plugin-antd-less](https://www.npmjs.com/package/next-plugin-antd-less)
+
+Module not found: Can't resolve 'null-loader'
+[null-loader](https://www.npmjs.com/package/null-loader)
+
+[Cannot use import statement outside a module](https://stackoverflow.com/questions/66244968/cannot-use-import-statement-outside-a-module-error-when-importing-react-hook-m)
+[next-transpile-modules](https://www.npmjs.com/package/next-transpile-modules)
+
+[style is broken on build but works on dev env](https://github.com/SolidZORO/next-plugin-antd-less/issues/103)
+
+[ReferenceError: document is not defined in Next.js while working with React Aria overlays](https://stackoverflow.com/questions/64614006/referenceerror-document-is-not-defined-in-next-js-while-working-with-react-aria)
+
+[React 18: Hydration failed because the initial UI does not match what was rendered on the server](https://stackoverflow.com/questions/71706064/react-18-hydration-failed-because-the-initial-ui-does-not-match-what-was-render)
