@@ -1,0 +1,77 @@
+﻿<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <title>香蕉船</title>
+    <link rel="stylesheet" href="./css/load.css"/>
+    <script>
+        document.getElementsByTagName('html')[0].style.fontSize=document.documentElement.clientWidth/10+'px';
+    </script>
+    <!--<script src="./js/flexible.js"></script>-->
+    <script src="./js/jquery.js"></script>
+</head>
+<body>
+<div class="root">
+    <div class="ios-lead">
+        <img src="./css/images/ios-lead-01-1209.jpg" />
+        <div class="step-down-btn"></div>
+        <div class="down-tip" style="display:none;font-size: 0.4rem;color:#fff; font-weight: 400;height:1.5rem;line-height:1.5rem;position: fixed;bottom:1.8rem;left:0;right:0;text-align:center;background:#000; filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;">
+                正在安装，请按 Home 键在桌面查看
+                <img src="./css/images/loading.gif" style="height:0.5rem;width:0.5rem;position: relative;top:0.1rem;">
+        </div>
+        <div class="button-float ios-btn">
+            一键下载
+        </div>
+        <div class="button-float android-btn">
+            一键下载
+        </div>
+    </div>
+    <img src="./css/images/weixin-tip.png" style="width:300px;position:absolute; right:0px; top:0px; display:none; z-index:1000" id="weixin1">
+    <div style="background:url(./css/images/weixin-tip.png); width:100%; height:100%; position:absolute; left:0px; top:0px; display:none; background:#000; filter:alpha(Opacity=50);-moz-opacity:0.5;opacity: 0.5;"
+    id="weixin"></div>
+</div>
+
+<script>
+    var u = navigator.userAgent
+              , isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+              , height = document.documentElement.clientHeight
+              , selector = isiOS ? ".ios-btn" : ".android-btn";
+            $(".root-bg").css("minHeight", height + "px"),
+            $("#weixin").css("minHeight", $(".ios-lead").height() + "px"),
+            $(selector).show(),
+            $(".ios-btn").on("click", function() {
+                window.location.href = "itms-services://?action=download-manifest&url=https://apk.iveza.cn/apps/app-ipa-down.plist";
+                setTimeout(function(){
+                    $(".down-tip").show();
+                    },3000);
+            }),
+            $(".step-down-btn").on("click", function() {
+                window.location.href = "itms-services://?action=download-manifest&url=https://apk.iveza.cn/apps/app-ipa-down.plist";
+                setTimeout(function(){
+                    $(".down-tip").show();
+                    },3000);
+            }),
+            $(".android-btn").on("click", function() {
+                window.location.href = "https://apk.iveza.cn/apps/xjc-1.0.apk";
+            });
+    isWeixn();
+
+    function isWeixn() {
+        var u = navigator.userAgent
+              , isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if(!isiOS){
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                document.getElementById("weixin").style.display = "block";
+                document.getElementById("weixin1").style.display = "block";
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.hide {
+    animation: outAnimation 1.2s ease-in;
+}
+
+.show {
+    animation: inAnimation 1.2s ease-out;
+    background-color: #f7fbff ;
+}
+
+.lastColumnsShow{
+    animation: inAnimation 0.5s ease-in-out;
+}
+
+.buttonWrapper{
+    button{
+        margin-right: 1rem;
+    }
+}
+
+@keyframes inAnimation {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes outAnimation {
+    0% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(100%);
+    }
+}

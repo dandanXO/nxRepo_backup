@@ -1,0 +1,104 @@
+.inputItem {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    color: #888;
+
+    :global {
+        .ant-input {
+            width: 300px;
+            margin: 4px 16px;
+        }
+
+        .ant-input-number {
+            margin: 4px 16px;
+            width: 60px;
+        }
+    }
+
+    button {
+        margin-left: 4px;
+    }
+}
+
+.addInputItem {
+    padding: 4px 16px;
+}
+
+.addInputItemTitle {
+    color: #1890ff;
+    padding: 16px;
+}
+
+//FOR EditInput
+.editInput {
+    padding-left: 16px;
+
+    :global {
+        .ant-input {
+            border: none;
+            border-bottom: solid 1px #188fff6b;
+            border-radius: 0px;
+            background: none;
+        }
+
+        .ant-input:focus {
+            font-weight: bold;
+            border-bottom: solid 1px #188fff6b;
+            transition: all 0.3s;
+            box-shadow: none;
+        }
+    }
+}
+
+//FOR ExpandRow
+.expandStyle {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #888;
+    background-color: #f2fbff;
+}
+
+.groupTableStyle {
+    width: 70%;
+    padding: 0 16px;
+
+    :global {
+        .ant-table-thead>tr>th {
+            background-color: #b7e9ff;
+            color: #1890ff;
+        }
+        .ant-table-body > table{
+            border: solid 3px #66b6ff;
+            border-radius: 6px;
+        }
+
+        .ant-input {
+            width: 85%;
+            margin: 6px 0;
+            border: none;
+            background-color: #ffffff;
+        }
+
+        .ant-input-number {
+            margin: 4px 16px;
+            border: none;
+        }
+    }
+}
+
+.dueDays {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonConfirm  {
+    white-space: nowrap;
+    button{
+        margin-right: 5px;
+    }
+    
+}

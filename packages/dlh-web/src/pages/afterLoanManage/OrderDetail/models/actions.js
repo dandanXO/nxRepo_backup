@@ -1,0 +1,25 @@
+export const ORD_GET_ORDER_DETAIL = 'ORD_GET_ORDER_DETAIL';
+export const ORD_SET_ORDER_DETAIL = 'ORD_SET_ORDER_DETAIL';
+export const ORD_CHANGE_MODAL_VISIBLE = 'ORD_CHANGE_MODAL_VISIBLE';
+export const ORD_CHANGE_RECORD_MODAL = 'ORD_CHANGE_RECORD_MODAL';
+export const ORD_LOOK_URGE_RECORD = 'ORD_LOOK_URGE_RECORD';
+export const ORD_ADD_URGE_RECORD = 'ORD_ADD_URGE_RECORD';
+export const ORD_GET_URGE_RECORD = 'ORD_GET_URGE_RECORD';
+export const ORD_SET_URGE_RECORD = 'ORD_SET_URGE_RECORD';
+export const ORD_PARTIAL_REPAYMENT = 'ORD_PARTIAL_REPAYMENT';
+export const ORD_CHANGE_REPAYMENT_MODAL_VISIBLE = 'ORD_CHANGE_REPAYMENT_MODAL_VISIBLE';
+export const ORD_SET_MESSAGE_CONTENT = 'ORD_SET_MESSAGE_CONTENT';
+export const ORD_CHANGE_MESSAGE_MODAL_VISIBLE = 'ORD_CHANGE_MESSAGE_MODAL_VISIBLE';
+
+export const ordGetOrderDetail = (overdueParams, userParams) => ({ type: ORD_GET_ORDER_DETAIL, overdueParams, userParams });
+export const ordSetOrderDetail = (data) => ({ type: ORD_SET_ORDER_DETAIL, data });
+export const ordChangeModalVisible =(option) => ({ type: ORD_CHANGE_MODAL_VISIBLE, option });
+export const ordChangeRrecordModal = (option) => ({ type: ORD_CHANGE_RECORD_MODAL, option });
+export const ordLookUrgeRecord = (params) => ({ type: ORD_LOOK_URGE_RECORD, params });
+export const ordAddUrgeRecord = (params, callback) => ({ type: ORD_ADD_URGE_RECORD, params, callback });
+export const ordGetUrgeRecord = (params) => ({ type: ORD_GET_URGE_RECORD, params });
+export const ordSetUrgeRecord = (data) => ({ type: ORD_SET_URGE_RECORD, data });
+export const ordPartialRepayment = (params) => ({ type: ORD_PARTIAL_REPAYMENT, params });
+export const ordChangeRepaymentModalVisible =(option) => ({ type: ORD_CHANGE_REPAYMENT_MODAL_VISIBLE, option });
+export const ordSetMessageContent = (data) => ({ type: ORD_SET_MESSAGE_CONTENT, data });
+export const ordChangeMessageModalVisible =(option) => ({ type: ORD_CHANGE_MESSAGE_MODAL_VISIBLE, option });

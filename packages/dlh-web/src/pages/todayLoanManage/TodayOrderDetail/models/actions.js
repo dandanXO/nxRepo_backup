@@ -1,0 +1,25 @@
+export const TORD_GET_ORDER_DETAIL = 'TORD_GET_ORDER_DETAIL';
+export const TORD_SET_ORDER_DETAIL = 'TORD_SET_ORDER_DETAIL';
+export const TORD_CHANGE_MODAL_VISIBLE = 'TORD_CHANGE_MODAL_VISIBLE';
+export const TORD_CHANGE_RECORD_MODAL = 'TORD_CHANGE_RECORD_MODAL';
+export const TORD_LOOK_URGE_RECORD = 'TORD_LOOK_URGE_RECORD';
+export const TORD_ADD_URGE_RECORD = 'TORD_ADD_URGE_RECORD';
+export const TORD_GET_URGE_RECORD = 'TORD_GET_URGE_RECORD';
+export const TORD_SET_URGE_RECORD = 'TORD_SET_URGE_RECORD';
+export const TORD_PARTIAL_REPAYMENT = 'TORD_PARTIAL_REPAYMENT';
+export const TORD_CHANGE_REPAYMENT_MODAL_VISIBLE = 'TORD_CHANGE_REPAYMENT_MODAL_VISIBLE';
+export const TORD_SET_MESSAGE_CONTENT = 'TORD_SET_MESSAGE_CONTENT';
+export const TORD_CHANGE_MESSAGE_MODAL_VISIBLE = 'TORD_CHANGE_MESSAGE_MODAL_VISIBLE';
+
+export const tordGetOrderDetail = (overdueParams, userParams) => ({ type: TORD_GET_ORDER_DETAIL, overdueParams, userParams });
+export const tordSetOrderDetail = (data) => ({ type: TORD_SET_ORDER_DETAIL, data });
+export const tordChangeModalVisible =(option) => ({ type: TORD_CHANGE_MODAL_VISIBLE, option });
+export const tordChangeRrecordModal = (option) => ({ type: TORD_CHANGE_RECTORD_MODAL, option });
+export const tordLookUrgeRecord = (params) => ({ type: TORD_LOOK_URGE_RECORD, params });
+export const tordAddUrgeRecord = (params, callback) => ({ type: TORD_ADD_URGE_RECORD, params, callback });
+export const tordGetUrgeRecord = (params) => ({ type: TORD_GET_URGE_RECORD, params });
+export const tordSetUrgeRecord = (data) => ({ type: TORD_SET_URGE_RECORD, data });
+export const torPartialRepayment = (params) => ({ type: TORD_PARTIAL_REPAYMENT, params });
+export const tordChangeRepaymentModalVisible =(option) => ({ type: TORD_CHANGE_REPAYMENT_MODAL_VISIBLE, option });
+export const tordSetMessageContent = (data) => ({ type: TORD_SET_MESSAGE_CONTENT, data });
+export const tordChangeMessageModalVisible =(option) => ({ type: TORD_CHANGE_MESSAGE_MODAL_VISIBLE, option });

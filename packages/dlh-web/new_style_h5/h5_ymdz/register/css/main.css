@@ -1,0 +1,246 @@
+a {
+  text-decoration: none;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+input,
+button {
+  -webkit-appearance: none;
+  border: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+body {
+  margin: 0;
+}
+.root {
+  height: 100%;
+  background-color: #729fe3;
+}
+
+.root-bg .top{
+  padding-top:0.3rem;
+  height: 48%;
+}
+.root-bg .top .logo{
+  height:1.5rem;
+  background: url('./images/logo.png') no-repeat 4% 0;
+  background-size: 25%;
+  /* margin-top: -0.15rem */
+}
+.root-bg .top .tip{
+  height:6rem;
+  background: url('./images/pay.png') no-repeat center;
+  background-size: 60%;
+  /* margin-top:1rem; */
+  /* padding-top: 0.1rem; */
+}
+
+.root-bg {
+  background: url('./images/bg.png') no-repeat;
+  background-size: 100% 100%;
+  padding: 0rem 0 0.53333333rem;
+  box-sizing: border-box;
+}
+.root-ds {
+  /* background: #729fe3 url('./images/llyq-bg-01-0929.png') no-repeat; */
+  background-size: 100% 100%;
+}
+.register {
+  width: 86%;
+  margin: 0 auto;
+  /* background: #fff; */
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-top: 5%;
+}
+.register .register-form .block_1{
+  margin-top: 1%;
+}
+.register .register-form .block_2{
+  margin-top: 1%;
+}
+
+.register .register-form .block_3{
+  margin-top: 1%;
+}
+
+.register .register-form-item {
+  margin: 0.48rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.icon{
+  position: absolute;
+  left: 0.3rem;
+  top: 0.2rem;
+  display: inline-block;
+  height: 0.62rem;
+  width: 0.45rem;
+}
+.register .register-form-item2 {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+.register .register-form-item2 .item2_title{
+  margin-left: 0.2em;
+}
+.register .register-form-item2{
+  font-size: 0.9em;
+  color:#ffffff;
+}
+.register .register-form-item2 a{
+  color:#ffffff;
+}
+.register .register-form-item2 .item2_title2{
+  margin-left: 5%;
+}
+
+.register .register-form-item3 {
+  margin: 0.8rem 0 0 0;
+  position: relative;
+  overflow: hidden;
+}
+.img{
+  display: inline-block;
+  width: 100%;
+  height: 1.06666667rem;
+}
+.register .register-form-item input {
+  /* position: absolute;
+  margin-left: 4em;
+  margin-top: 0.29em; */
+  border: 0px;outline:none;
+  background-color: #ffffff;
+  height: 1.06666667rem;
+  border-radius: 0.13333333rem;
+  width: 100%;
+  text-indent: 0.26666667rem;
+  outline: none;
+  color: #333333;
+  border: 0.03rem solid #E5E5E5;
+  font-size: 0.37333333rem;
+  padding-left: 0.8rem;
+}
+.register .register-form-item input:focus {
+  border: 0px solid #1373ff;
+  border: 0.03rem solid #E5E5E5;
+}
+.register .register-form-item input::-webkit-input-placeholder {
+  color: #999;
+}
+.register .register-form-item3 .register-button {
+  height: 1.2rem;
+  border-radius: 1rem;
+  width: 100%;
+  outline: none;
+  text-align: center;
+  background: #FFC21F; 
+  /* background: url(./images/ds_02_20180925.png) no-repeat; */
+  /* background: url(./images/llyq-reg-button-bg-01.png) no-repeat; */
+
+  background-size: 100% 100%;
+  color: #ffffff;
+  border: none;
+}
+.register .register-form-item:last-child {
+  margin-top: 0.90666667rem;
+  margin-bottom: 0.26666667rem;
+}
+.register .captcha-wrapper .captcha-btn-wrapper {
+  width: 30%;
+  float: right;
+  text-align: right;
+}
+.register .captcha-wrapper .captcha-btn-wrapper .captcha-btn {
+  line-height: 1.06666667rem;
+  border-radius: 0.13333333rem;
+  color: #E54536; 
+  text-align: center;
+  background: #ffffff;
+  font-size: 0.38666667rem;
+  font-weight:500;
+}
+.register .captcha-wrapper .captcha-btn-wrapper .captcha-btn:active {
+  background: #ffc21f;
+}
+.register .captcha-wrapper .captcha-btn-wrapper .disabled-btn {
+  opacity: 0.5;
+}
+.register .captcha-wrapper .captcha-btn-wrapper .disabled-btn:active {
+  background: #ffc21f;
+}
+.register .captcha-wrapper .captcha-left {
+  float: left;
+  width: 65%;
+}
+.toast {
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 40%;
+  max-width: 4rem;
+  transform: translate(-50%, -50%);
+  background: rgba(17, 17, 17, 0.7);
+  text-align: center;
+  border-radius: 0.13333333rem;
+  padding: 0.26666667rem;
+  color: #ffffff;
+  font-size: 0.34666667rem !important;
+}
+.display-none {
+  display: none;
+}
+.protocol {
+  text-align: center;
+  color: #666666;
+}
+.protocol a {
+  color: #DA2514;
+}
+@media screen and (max-width: 321px) {
+  .list,
+  .toast,
+  .protocol {
+    font-size: 14px;
+  }
+  .captcha-btn {
+    font-size: 14px;
+  }
+  .register-button {
+    font-size: 0.5rem;
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 400px) {
+  .list,
+  .toast,
+  .protocol {
+    font-size: 14px;
+  }
+  .captcha-btn {
+    font-size: 16px;
+  }
+  .register-button {
+    font-size: 0.5rem;
+  }
+}
+@media screen and (min-width: 400px) {
+  .list,
+  .toast,
+  .protocol {
+    font-size: 16px;
+  }
+  .captcha-btn {
+    font-size: 18px;
+  }
+  .register-button {
+    font-size: 0.6rem;
+  }
+}

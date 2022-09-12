@@ -1,0 +1,31 @@
+export const PMG_GET_TABLE_DATA = 'PMG_GET_TABLE_DATA';
+export const PMG_SET_TABLE_DATA = 'PMG_SET_TABLE_DATA';
+export const PMG_CHANGE_TABLE_LOADING = 'PMG_CHANGE_TABLE_LOADING';
+export const PMG_CHANGE_MODAL_VISIBLE = 'PMG_CHANGE_MODAL_VISIBLE';
+export const PMG_GET_DEPARTMENT_DATA = 'PMG_GET_DEPARTMENT_DATA';
+export const PMG_SET_DEPARTMENT_DATA = 'PMG_SET_DEPARTMENT_DATA';
+export const PMG_GET_ROLE_DATA = 'PMG_GET_ROLE_DATA';
+export const PMG_SET_ROLE_DATA = 'PMG_SET_ROLE_DATA';
+export const PMG_ADD_PEOPLE_LIST = 'PMG_ADD_PEOPLE_LIST';
+export const PMG_UPDATE_PEOPLE_LIST = 'PMG_UPDATE_PEOPLE_LIST';
+export const PMG_DEL_PEOPLE_LIST = 'PMG_DEL_PEOPLE_LIST';
+export const PMG_GET_COLLECT_TEAM_DATA = 'PMG_GET_COLLECT_TEAM_DATA';
+export const PMG_SET_COLLECT_TEAM_DATA = 'PMG_SET_COLLECT_TEAM_DATA';
+export const PMG_GET_COLLECT_GROUP_DATA = 'PMG_GET_COLLECT_GROUP_DATA';
+export const PMG_SET_COLLECT_GROUP_DATA = 'PMG_SET_COLLECT_GROUP_DATA';
+
+export const pmgGetTableData = (params) => ({ type: PMG_GET_TABLE_DATA, params });
+export const pmgSetTableData = (data) => ({ type: PMG_SET_TABLE_DATA, data });
+export const pmgChangeTableLoading = (option) => ({ type: PMG_CHANGE_TABLE_LOADING, option });
+export const pmgChangeModalVisible = (option) => ({ type: PMG_CHANGE_MODAL_VISIBLE, option });
+export const pmgGetDepartmentData = (params) => ({ type: PMG_GET_DEPARTMENT_DATA, params });
+export const pmgSetDepartmentData = (data) => ({ type: PMG_SET_DEPARTMENT_DATA, data });
+export const pmgGetRoleData = (params) => ({ type: PMG_GET_ROLE_DATA, params });
+export const pmgSetRoleData = (data) => ({ type: PMG_SET_ROLE_DATA, data });
+export const pmgAddPeopleList = (params, callback) => ({ type: PMG_ADD_PEOPLE_LIST, params, callback });
+export const pmgUpdatePeopleList = (params, callback) => ({ type: PMG_UPDATE_PEOPLE_LIST, params, callback });
+export const pmgDelPeopleList = (params, callback) => ({ type: PMG_DEL_PEOPLE_LIST, params, callback });
+export const pmgGetCollectTeams = () => ({ type: PMG_GET_COLLECT_TEAM_DATA });
+export const pmgSetCollectTeams = (data) => ({ type: PMG_SET_COLLECT_TEAM_DATA, data });
+export const pmgGetCollectGroups = (teamId, groupId) => ({ type: PMG_GET_COLLECT_GROUP_DATA, teamId, groupId });
+export const pmgSetCollectGroups = (data) => ({ type: PMG_SET_COLLECT_GROUP_DATA, data })

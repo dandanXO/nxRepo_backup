@@ -1,0 +1,32 @@
+.expandTableStyle {
+  position: relative;
+  :global {
+    .ant-table-thead > tr > th {
+      padding: 12px 6px !important;
+    }
+    .ant-table-tbody > tr > td {
+      padding: 0px;
+    }
+    // .ant-table-expand-icon-th {
+    //   width: 40px;
+    // }
+    // .ant-table-row-expand-icon-cell {
+    //   width: 40px;
+    // }
+    .ant-table-tbody > tr.ant-table-expanded-row > td:nth-child(1) {
+      border-right: none;
+    }
+    .ant-table-tbody > tr.ant-table-expanded-row > td {
+      background-color: #fff;
+    }
+    .ant-table-expanded-row > td {
+      padding: 0px !important;
+    }
+  }
+}
+.expandIcon {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 17px;
+}

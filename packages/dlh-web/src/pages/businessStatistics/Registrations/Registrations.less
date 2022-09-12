@@ -1,0 +1,34 @@
+table{
+    table-layout:fixed;
+    text-align: center !important;
+}
+.tableTop{
+    margin: 20px 0 10px;
+}
+:global{
+    .ant-table-thead > tr > th{
+        text-align: center;
+    }
+
+    .ant-table-thead > tr > th.authorizationTitle,
+    .ant-table-bordered .ant-table-thead > tr:not(:last-child) > th.authorizationTitle{
+
+        background-color: #ffe3b0;
+        border: solid 1px #ffda97;
+    }
+    .ant-table-thead > tr > th.operationTitle,
+    .ant-table-bordered .ant-table-thead > tr:not(:last-child) > th.operationTitle{
+        background-color: #FFEBB2;
+        border: solid 1px #ffe499;
+    }
+
+    .ant-table-thead > tr > th.authorization{
+
+        background-color: #fff4e2;
+        border: 1px solid #ffe5b6;
+    }
+    .ant-table-thead > tr > th.operation {
+        background-color: #fffae7;
+        border: 1px solid #fff2bf;
+    }
+}
