@@ -186,3 +186,5 @@ Module not found: Can't resolve 'null-loader'
 [ReferenceError: document is not defined in Next.js while working with React Aria overlays](https://stackoverflow.com/questions/64614006/referenceerror-document-is-not-defined-in-next-js-while-working-with-react-aria)
 
 [React 18: Hydration failed because the initial UI does not match what was rendered on the server](https://stackoverflow.com/questions/71706064/react-18-hydration-failed-because-the-initial-ui-does-not-match-what-was-render)
+
+[Solve “document is not defined” errors in Next.js](https://www.webtutpro.com/solve-document-is-not-defined-errors-in-next-js-26fea778b868)
