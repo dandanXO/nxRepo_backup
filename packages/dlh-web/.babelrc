@@ -1,0 +1,21 @@
+{
+  "presets": [
+    ["env", {"modules": false}],
+    "stage-2",
+    "react"
+  ],
+  "plugins": [
+    "transform-runtime",
+    [
+      "import-fix",
+      [
+        {
+          "libraryName": "antd",
+          "libraryPath": "antd/lib/${name}/index.js",
+          "namePolicy": "dash",
+          "cssPath": "antd/lib/${name}/style/index.js"
+        }
+      ]
+    ]
+  ]
+}

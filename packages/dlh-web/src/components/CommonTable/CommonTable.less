@@ -1,0 +1,48 @@
+.tableContainer {
+    margin: 20px 0 10px;
+    padding-bottom: 20px;
+    :global {
+        // 部分還款的單以不同顏色標示
+        .ant-table-tbody>tr.partialRepayment>td {
+            color: rgb(245, 106, 0);
+        }
+
+        .ant-table-tbody>tr.partialRepayment:hover>td {
+            background-color: unset !important;
+        }
+
+        .ant-table-tbody>tr.partialRepayment:hover>td {
+            color: rgb(245, 106, 0);
+            background-color: rgb(253, 227, 207) !important;
+        }
+    }
+}
+.smallTable {
+    :global {
+        .ant-table-thead>tr>th {
+            padding: 12px 6px !important;
+        }
+
+        .ant-table-tbody>tr>td {
+            padding: 2px !important;
+        }
+
+        .ant-table-expand-icon-th {
+            width: 40px;
+        }
+
+        .ant-table-row-expand-icon-cell {
+            width: 40px;
+        }
+
+        .ant-table-tbody>tr.ant-table-expanded-row>td:nth-child(1) {
+            border-right: none;
+        }
+
+        .ant-table-tbody>tr.ant-table-expanded-row>td {
+            background-color: #fff;
+        }
+
+        
+    }
+}

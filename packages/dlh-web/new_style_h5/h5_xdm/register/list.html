@@ -1,0 +1,247 @@
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <link rel="stylesheet" href="./css/list/main.css"/>
+    <title>熊大猫</title>
+    <script src="./js/flexible.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script>
+        $(document).ready(function() {
+            var baseUrl = 'http://192.168.1.5:8080';
+            $.ajax({
+                url: baseUrl  ,
+                type: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    if(Number(data.code) === 200) {
+                        var eleData = data.content || [];
+                        var ulWrapper = $('<ul></ul>');
+                        $.each(eleData, function(index,value) {
+                            var num = Math.round(Math.random() * 5000);
+                            var ele = $('<li>' +
+                                '<div class="item-top">' +
+                                    '<div class="img-container"><img src="'+value['logo']+'"></div>' +
+                                    '<div class="product-title">' +
+                                        '<div>' +
+                                            '<span class="product-name">'+value['name']+'</span>' +
+                                            '<span class="product-recommend">新口子</span>' +
+                                        '</div>' +
+                                        '<div class="product-instruction">'+value['title']+'</div>' +
+                                    '</div>' +
+                                    '<div class="apply-num"><span>'+num+'</span>人今日申请</div>' +
+                                '</div>' +
+                                '<div class="item-bottom">' +
+                                    '<div class="list-wrapper">' +
+                                        '<div class="item-bottom-list"><div>额度范围</div><div>参考'+value['rateUnit']+'利率</div><div>下款时间</div></div>' +
+                                        '<div class="item-bottom-list item-list-data">' +
+                                            '<div>'+value['quota']+'</div>' +
+                                            '<div>'+value['rate']+'</div>' +
+                                            '<div>'+value['loanSpeed']+value['loanUnit']+'</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="application-btn"><a href="'+value['url']+'">申请</a></div>' +
+                                '</div>' +
+                                '</li>');
+                            ulWrapper.append(ele);
+                        });
+
+                        $('.product-list').append(ulWrapper);
+
+                    }
+                },
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="root">
+        <div class="header-info">
+            根据您的信用报告，以下产品下款成功率在97%
+        </div>
+        <div class="product-list">
+           <!-- <ul>
+                <li>
+                    <div class="item-top">
+                        <div class="img-container">
+                            <img src="./css/list/images/360.png" alt="img"/>
+                        </div>
+                        <div class="product-title">
+                            <div>
+                                <span class="product-name">360借条</span>
+                                <span class="product-recommend">新口子 </span>
+                            </div>
+                            <div class="product-instruction">0门槛，3分钟审核，极速到账</div>
+                        </div>
+                        <div class="apply-num">
+                            <span>5000</span>人今日申请
+                        </div>
+                    </div>
+                    <div class="item-bottom">
+                        <div class="list-wrapper">
+                            <div class="item-bottom-list">
+                                <div>额度范围</div>
+                                <div>参考日利率</div>
+                                <div>下款时间</div>
+                            </div>
+                            <div class="item-bottom-list item-list-data">
+                                <div>500-20万</div>
+                                <div>0.027%</div>
+                                <div>5分钟</div>
+                            </div>
+                        </div>
+                        <div class="application-btn">
+                            <a href="https://mkt.360jie.com.cn/activity/ch/cndkwjjr/lanmu2">申请</a>
+                        </div>
+
+                    </div>
+                </li>
+
+                <li>
+                        <div class="item-top">
+                            <div class="img-container">
+                                <img src="./css/list/images/jidai.png" alt="img"/>
+                            </div>
+                            <div class="product-title">
+                                <div>
+                                    <span class="product-name">及贷</span>
+                                    <span class="product-recommend">新口子 </span>
+                                </div>
+                                <div class="product-instruction">额度10万，借款就送京东卡</div>
+                            </div>
+                            <div class="apply-num">
+                                <span>5000</span>人今日申请
+                            </div>
+                        </div>
+                        <div class="item-bottom">
+                            <div class="list-wrapper">
+                                <div class="item-bottom-list">
+                                    <div>额度范围</div>
+                                    <div>参考日利率</div>
+                                    <div>下款时间</div>
+                                </div>
+                                <div class="item-bottom-list item-list-data">
+                                    <div>1000-10万</div>
+                                    <div>0.03%</div>
+                                    <div>5分钟</div>
+                                </div>
+                            </div>
+                            <div class="application-btn">
+                                <a href="http://m.haomoney.com/activity/reg/register.html?utm_source=wap_cainiaodaikuan1">申请</a>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li>
+                            <div class="item-top">
+                                <div class="img-container">
+                                    <img src="./css/list/images/51.png" alt="img"/>
+                                </div>
+                                <div class="product-title">
+                                    <div>
+                                        <span class="product-name">51人品贷</span>
+                                        <span class="product-recommend">新口子 </span>
+                                    </div>
+                                    <div class="product-instruction">无抵押、纯信用贷款，最高10万，1小时极速放款</div>
+                                </div>
+                                <div class="apply-num">
+                                    <span>5000</span>人今日申请
+                                </div>
+                            </div>
+                            <div class="item-bottom">
+                                <div class="list-wrapper">
+                                    <div class="item-bottom-list">
+                                        <div>额度范围</div>
+                                        <div>参考月利率</div>
+                                        <div>下款时间</div>
+                                    </div>
+                                    <div class="item-bottom-list item-list-data">
+                                        <div>3000-10万</div>
+                                        <div>0.15%~2.84%</div>
+                                        <div>30分钟</div>
+                                    </div>
+                                </div>
+                                <div class="application-btn">
+                                    <a href="https://web.u51.com/tregister/?id=7&channel=wdpt_cndk2">申请</a>
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                                <div class="item-top">
+                                    <div class="img-container">
+                                        <img src="./css/list/images/baidu.png" alt="img"/>
+                                    </div>
+                                    <div class="product-title">
+                                        <div>
+                                            <span class="product-name">百度有钱花</span>
+                                            <span class="product-recommend">新口子 </span>
+                                        </div>
+                                        <div class="product-instruction">0手续费，全自动秒批，30秒到账200000</div>
+                                    </div>
+                                    <div class="apply-num">
+                                        <span>5000</span>人今日申请
+                                    </div>
+                                </div>
+                                <div class="item-bottom">
+                                    <div class="list-wrapper">
+                                        <div class="item-bottom-list">
+                                            <div>额度范围</div>
+                                            <div>参考月利率</div>
+                                            <div>下款时间</div>
+                                        </div>
+                                        <div class="item-bottom-list item-list-data">
+                                            <div>500-20万</div>
+                                            <div>1.5%</div>
+                                            <div>3分钟</div>
+                                        </div>
+                                    </div>
+                                    <div class="application-btn">
+                                        <a href="https://icash.baidu.com/cloan/operation/activity?activityName=channelBrand&fr=jmall_list29">申请</a>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                            <li>
+                                    <div class="item-top">
+                                        <div class="img-container">
+                                            <img src="./css/list/images/cainiao.png" alt="img"/>
+                                        </div>
+                                        <div class="product-title">
+                                            <div>
+                                                <span class="product-name">财鸟贷款</span>
+                                                <span class="product-recommend">新口子 </span>
+                                            </div>
+                                            <div class="product-instruction">芝麻分500就能下款3000₹</div>
+                                        </div>
+                                        <div class="apply-num">
+                                            <span>5000</span>人今日申请
+                                        </div>
+                                    </div>
+                                    <div class="item-bottom">
+                                        <div class="list-wrapper">
+                                            <div class="item-bottom-list">
+                                                <div>额度范围</div>
+                                                <div>参考日利率</div>
+                                                <div>下款时间</div>
+                                            </div>
+                                            <div class="item-bottom-list item-list-data">
+                                                <div>500-10万</div>
+                                                <div>0.01%</div>
+                                                <div>1分钟</div>
+                                            </div>
+                                        </div>
+                                        <div class="application-btn">
+                                            <a href="https://www.cainiaodk.com/spread/share.html?shareID=587526&partnerID=52">申请</a>
+                                        </div>
+
+                                    </div>
+                                </li>
+            </ul>-->
+        </div>
+    </div>
+</body>
+</html>

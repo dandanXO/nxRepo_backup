@@ -1,0 +1,23 @@
+export const ADM_GET_VIEW_DATA = 'ADM_GET_VIEW_DATA';
+export const ADM_SET_VIEW_DATA = 'ADM_SET_VIEW_DATA';
+export const ADM_GET_AD_RECORD_DATA = 'ADM_GET_AD_RECORD_DATA';
+export const ADM_SET_AD_RECORD_DATA = 'ADM_SET_AD_RECORD_DATA';
+export const ADM_ADD_ITEM = 'ADM_ADD_ITEM';
+export const ADM_UPDATE_ITEM = 'ADM_UPDATE_ITEM';
+export const ADM_DELETE_ITEM = 'ADM_DELETE_ITEM';
+export const ADM_DISPLAY_SWITCH = 'ADM_DISPLAY_SWITCH';
+export const ADM_SET_DISPLAY_SWITCH = 'ADM_SET_DISPLAY_SWITCH';
+export const ADM_ENABLED_SWITCH = 'ADM_ENABLED_SWITCH';
+export const ADM_TABLE_LOADING = 'ADM_TABLE_LOADING';
+
+export const admGetViewData = (params) => ({ type: ADM_GET_VIEW_DATA, params });
+export const admSetViewData = (data) => ({ type: ADM_SET_VIEW_DATA, data });
+export const admGetAdRecordData = (params) => ({ type: ADM_GET_AD_RECORD_DATA, params });
+export const admSetAdRecordData = (data) => ({ type: ADM_SET_AD_RECORD_DATA, data });
+export const admAddItem = (params, callback) => ({ type: ADM_ADD_ITEM, params, callback });
+export const admUpdateItem = (params, callback) => ({ type: ADM_UPDATE_ITEM, params, callback });
+export const admDeleteItem = (params, callback) => ({ type: ADM_DELETE_ITEM, params, callback });
+export const admDisplaySwitch = (params) => ({ type: ADM_DISPLAY_SWITCH, params });
+export const admSetDisplaySwitch = (option) => ({ type: ADM_SET_DISPLAY_SWITCH, option });
+export const admEnabledSwitch = (params, callback) => ({ type: ADM_ENABLED_SWITCH, params, callback });
+export const admTableLoading = (option) => ({ type: ADM_TABLE_LOADING, option });

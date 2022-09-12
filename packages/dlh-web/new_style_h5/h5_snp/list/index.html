@@ -1,0 +1,65 @@
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <link rel="stylesheet" href="./css/main.css"/>
+    <title>鼠年泡</title>
+    <script src="./js/flexible.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script>
+        $(document).ready(function() {
+            var baseUrl = '';
+            $.ajax({
+                url: baseUrl,
+                type: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    if(Number(data.code) === 200) {
+                        var eleData = data.data || [];
+                        var ulWrapper = $('<ul></ul>');
+                        $.each(eleData, function(index,value) {
+                            var num = Math.round(Math.random() * 5000);
+                            var ele = $('<li>' +
+                                '<div class="item-top">' +
+                                '<div class="img-container"><img src="'+value['logo']+'"></div>' +
+                                '<div class="product-title">' +
+                                '<div>' +
+                                '<span class="product-name">'+value['name']+'</span>' +
+                                '<span class="product-recommend">新口子</span>' +
+                                '</div>' +
+                                '<div class="product-instruction">'+value['title']+'</div>' +
+                                '</div>' +
+                                '<div class="apply-num"><span>'+num+'</span>人今日申请</div>' +
+                                '</div>' +
+                                '<div class="item-bottom">' +
+                                '<div class="list-wrapper">' +
+                                '<div class="item-bottom-list"><div>额度范围</div><div>参考'+value['rateUnit']+'利率</div><div>下款时间</div></div>' +
+                                '<div class="item-bottom-list item-list-data">' +
+                                '<div>'+value['quota']+'</div>' +
+                                '<div>'+value['rate']+'</div>' +
+                                '<div>'+value['loanSpeed']+value['loanUnit']+'</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="application-btn"><a href="'+value['url']+'">申请</a></div>' +
+                                '</div>' +
+                                '</li>');
+                            ulWrapper.append(ele);
+                        });
+
+                        $('.product-list').append(ulWrapper);
+
+                    }
+                },
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="root">
+    <div class="header-info">
+    </div>
+    <div class="product-list">
+    </div>
+</div>
+</body>
+</html>

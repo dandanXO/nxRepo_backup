@@ -1,0 +1,39 @@
+.operator{
+  display: flex;
+  text-align: center;
+  width: 80px;
+  margin: 0 auto;
+  >div{
+    width: 50%;
+    cursor: pointer;
+    &:hover{
+      color: #1890ff;
+    }
+  }
+}
+.img{
+  width:44px;
+  height: 44px;
+}
+.wrapper{
+  cursor: move;
+}
+.col{
+  border-left: 1px solid #e8e8e8;
+  border-top: 1px solid #e8e8e8;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:last-child{
+    border-right: 1px solid #e8e8e8;
+  }
+}
+.isLast{
+  .col{
+    border-bottom: 1px solid #e8e8e8;
+  }
+}

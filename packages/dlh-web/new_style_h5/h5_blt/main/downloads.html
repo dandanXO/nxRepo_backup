@@ -1,0 +1,79 @@
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <title>菠萝糖</title>
+    <link rel="stylesheet" href="./css/load.css"/>
+    <script>
+        document.getElementsByTagName('html')[0].style.fontSize=document.documentElement.clientWidth/10+'px';
+    </script>
+    <!--<script src="./js/flexible.js"></script>-->
+    <script src="./js/jquery.js"></script>
+</head>
+<body>
+<div class="root">
+    <div class="root-bg">
+        <div class="top">
+                <!-- <div class="logo"></div> -->
+                <div class="tip"></div>
+        </div>
+        <!-- <div class="info">
+            下载App 立即拿钱
+        </div> -->
+        <div class="cont">
+            <!-- <div class="block">
+                <div class='conte'>急速审核</div>
+                <div class='borde'></div>
+            </div>
+            <div class="block">
+                <div class='conte'>快速放款</div>
+                <div class='borde'></div>
+            </div> -->
+            <!-- <div class="l_b1">
+                <img src="./css/images/loan_b1.png" />
+            </div>
+            <div class="l_b2">
+                <img src="./css/images/loan_b2.png" />
+            </div> -->
+        </div>
+        <div class="btn-wrapper">
+            <div class="register-button ios-btn"></div>
+            <div class="register-button android-btn"></div>
+        </div>
+    </div>
+    <img src="./css/images/weixin-tip.png" style="width:300px;position:absolute; right:0px; top:0px; display:none; z-index:1000" id="weixin1">
+    <div style="background:url(./css/images/weixin-tip.png); width:100%; height:100%; position:absolute; left:0px; top:0px; display:none; background:#000; filter:alpha(Opacity=50);-moz-opacity:0.5;opacity: 0.5;"
+    id="weixin"></div>
+</div>
+
+<script>
+    var u = navigator.userAgent
+              , isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+              , height = document.documentElement.clientHeight
+              , selector = isiOS ? ".ios-btn" : ".android-btn";
+            $(".root-bg").css("minHeight", height + "px"),
+            $(selector).addClass("show-btn"),
+            $(".ios-btn").on("click", function() {
+                window.location.href = "downloads2.html"
+            }),
+            $(".android-btn").on("click", function() {
+                window.location.href = "https://ushemks.oss-cn-shanghai.aliyuncs.com/mlh-321/mlh-1.0.apk"
+            });
+	if(isiOS)window.location.href = "downloads2.html";
+
+    isWeixn();
+
+    function isWeixn() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            document.getElementById("weixin").style.display = "block";
+            document.getElementById("weixin1").style.display = "block";
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

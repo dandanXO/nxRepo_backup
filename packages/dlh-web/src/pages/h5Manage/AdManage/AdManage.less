@@ -1,0 +1,42 @@
+.col{
+  border-left: 1px solid #e8e8e8;
+  border-top: 1px solid #e8e8e8;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+
+  &:last-child{
+    border-right: 1px solid #e8e8e8;
+  }
+}
+.row{
+  &:first-child{
+    .col{
+      background-color: #fafafa;
+    }
+  }
+  &:last-child{
+    .col{
+      border-bottom: 1px solid #e8e8e8;
+    }
+  }
+}
+.active{
+  background-color: #e6f7ff;
+}
+.btnWrapper{
+  margin-bottom: 20px;
+}
+
+.recordWrapper {
+  text-align: center;
+
+  span {
+    margin: 0 10px;
+    cursor: pointer;
+
+    &:hover {
+      color: #1890ff;
+    }
+  }
+}

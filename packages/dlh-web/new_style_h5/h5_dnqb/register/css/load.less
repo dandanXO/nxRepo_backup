@@ -1,0 +1,94 @@
+@scale: 75rem;
+.font(@number) {
+  html[data-dpr='1'] &  {
+    font-size: @number;
+  }
+  html[data-dpr='2'] &  {
+    font-size: @number * 2;
+  }
+  html[data-dpr='3'] &  {
+    font-size: @number * 3;
+  }
+
+}
+a {
+  text-decoration: none;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+input,
+button {
+  -webkit-appearance: none;
+  border: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+body {
+  margin: 0;
+}
+.root {
+  height: 100%;
+}
+.root-bg{
+  background: url('./images/ds_01_20180925.png') no-repeat;
+  background-size: 100% 100%;
+  padding: 509/@scale 0 40/@scale;
+  box-sizing: border-box;
+}
+.register-button{
+  display: none;
+  box-sizing: border-box;
+  // margin: 40/@scale 30/@scale;
+  margin: 0 auto;
+  width: 305/@scale;
+  height: 94/@scale;
+  line-height: 94/@scale;
+  border-radius: 50/@scale;
+  outline: none;
+  text-align: center;
+  background: linear-gradient(to right, #ecc355, #ffc21f);
+  color:#ffffff;
+  //font-size: 20/@scale;
+  border:none;
+  &:active{
+    background: #ffc21f;
+  }
+}
+.show-btn {
+  display: block;
+}
+.info{
+  text-align: center;
+  color: #ffffff;
+  //.font(22px);
+  //font-size: 28/@scale;
+}
+
+@media screen and (max-width:321px){
+  .register-button{
+    font-size: 20px;
+  }
+  .info{
+    font-size: 26px;
+  }
+}
+@media screen and (min-width:321px) and (max-width:400px){
+  .register-button{
+    font-size: 22px;
+  }
+  .info{
+    font-size: 28px;
+  }
+}
+@media screen and (min-width:400px){
+  .register-button{
+    font-size: 22px;
+  }
+  .info{
+    font-size: 28px;
+  }
+}
