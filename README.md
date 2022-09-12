@@ -176,23 +176,42 @@ nx g @nrwl/next:component protable --project=admin
 [Using pnpm with Lerna
 ](https://lerna.js.org/docs/recipes/using-pnpm-with-lerna)
 
+## pnpm workspace
 ```shell
-# 無效
-# pnpx learn init
-npx lerna init
 
+# use pnpm workspace to manage packages
 #Run pnpm import to generate a pnpm-lock.yaml file
-pnpm import
+pnpm import # root path cannot have pnpm-lock.yaml, otherwise cannot generate packages's pnpm-lock.yaml
+# install packages's dependecies in workspace
+pnpm install 
 
-# install 
-pnpm install
-
-# Bootstrapping Projects
-pnpx lerna bootstrap
-#lerna bootstrap --use-workspaces
 ```
 
+## Lerna
+```shell
+# install lerna
+# pnpx learn init # 無效
+pnpx lerna init
 
+# Bootstrapping Projects
+pnpx lerna bootstrap --use-workspaces
+
+```
+
+## nx + lerna
+* [Integrating Nx and Lerna](https://nx.dev/recipe/lerna-and-nx)
+```shell
+# install nx + pnpm workspace's packages
+pnpm install
+
+pnpm nx run build
+
+#pnpx lerna run build --scope=dlh-web 
+#pnpx lerna run build --scope=backstage_system
+
+# install package 
+pnpm -F  backstage_system  add webpack-dev-server@3.11.0 -D 
+```
 
 
 
