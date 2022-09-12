@@ -172,19 +172,41 @@ nx g @nrwl/next:page demo --project=admin
 nx g @nrwl/next:component protable --project=admin
 
 ```
+
+[Using pnpm with Lerna
+](https://lerna.js.org/docs/recipes/using-pnpm-with-lerna)
+
+```shell
+# 無效
+# pnpx learn init
+npx lerna init
+
+#Run pnpm import to generate a pnpm-lock.yaml file
+pnpm import
+
+# install 
+pnpm install
+
+# Bootstrapping Projects
+pnpx lerna bootstrap
+#lerna bootstrap --use-workspaces
+```
+
+
+
+
+
+
 ## issues
-[next-plugin-antd-less](https://www.npmjs.com/package/next-plugin-antd-less)
+* [next-plugin-antd-less](https://www.npmjs.com/package/next-plugin-antd-less)
+* Module not found: Can't resolve 'null-loader'
+  * [null-loader](https://www.npmjs.com/package/null-loader)
+* [Cannot use import statement outside a module](https://stackoverflow.com/questions/66244968/cannot-use-import-statement-outside-a-module-error-when-importing-react-hook-m)
+* [next-transpile-modules](https://www.npmjs.com/package/next-transpile-modules)
+* [style is broken on build but works on dev env](https://github.com/SolidZORO/next-plugin-antd-less/issues/103)
+* [ReferenceError: document is not defined in Next.js while working with React Aria overlays](https://stackoverflow.com/questions/64614006/referenceerror-document-is-not-defined-in-next-js-while-working-with-react-aria)
+* [React 18: Hydration failed because the initial UI does not match what was rendered on the server](https://stackoverflow.com/questions/71706064/react-18-hydration-failed-because-the-initial-ui-does-not-match-what-was-render)
+* [Solve “document is not defined” errors in Next.js](https://www.webtutpro.com/solve-document-is-not-defined-errors-in-next-js-26fea778b868)
 
-Module not found: Can't resolve 'null-loader'
-[null-loader](https://www.npmjs.com/package/null-loader)
-
-[Cannot use import statement outside a module](https://stackoverflow.com/questions/66244968/cannot-use-import-statement-outside-a-module-error-when-importing-react-hook-m)
-[next-transpile-modules](https://www.npmjs.com/package/next-transpile-modules)
-
-[style is broken on build but works on dev env](https://github.com/SolidZORO/next-plugin-antd-less/issues/103)
-
-[ReferenceError: document is not defined in Next.js while working with React Aria overlays](https://stackoverflow.com/questions/64614006/referenceerror-document-is-not-defined-in-next-js-while-working-with-react-aria)
-
-[React 18: Hydration failed because the initial UI does not match what was rendered on the server](https://stackoverflow.com/questions/71706064/react-18-hydration-failed-because-the-initial-ui-does-not-match-what-was-render)
-
-[Solve “document is not defined” errors in Next.js](https://www.webtutpro.com/solve-document-is-not-defined-errors-in-next-js-26fea778b868)
+## TODO
+* [搬移 git commit 紀錄到新的 git repo 上](https://medium.com/@pgtsai/搬移-git-commit-紀錄到新的-git-repo-上-13a6c84cb354)
