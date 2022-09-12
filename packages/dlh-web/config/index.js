@@ -17,6 +17,7 @@ const proxy = {
     '/hs':{
 
         // target: 'http://test.llyq.mayiaf.com',
+        target: "http://65.1.53.136:8080",
         changeOrigin: true
     }
 };

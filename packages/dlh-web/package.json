@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config config/webpack.dev.js --color",
+    "start": "webpack-dev-server --config config/webpack.dev.js --color --env IN",
     "build": "webpack --config config/webpack.prod.js",
     "dll": "webpack --config config/webpack.dll.js",
     "startMock": "node mock/mockfn.js",
