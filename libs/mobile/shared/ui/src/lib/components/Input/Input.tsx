@@ -387,7 +387,7 @@ const Input: InputInterface = ({
               // NOTICE: broke outer code
               // props.onChange && props.onChange(event.target.value);
             }}
-            onInput={event => {
+            onInput={(event: any) => {
                 onInput && onInput(event);
             }}
             // onInvalid={event => {
