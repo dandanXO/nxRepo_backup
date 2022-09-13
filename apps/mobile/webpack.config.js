@@ -61,6 +61,6 @@ module.exports = (config, context) => {
       })
     );
   }
-  console.log("finalConfig", finalConfig);
+  // console.log("finalConfig", finalConfig);
   return finalConfig;
 };
