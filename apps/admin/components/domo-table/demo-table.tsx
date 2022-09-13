@@ -153,8 +153,7 @@ const dropdown_menu = (
     ]}
   />
 );
-
-export default () => {
+const demoTable= () => {
   const actionRef = useRef<ActionType>();
   return (
     <ProTable<GithubIssueItem>
@@ -213,3 +212,4 @@ export default () => {
     />
   );
 };
+export default demoTable;
