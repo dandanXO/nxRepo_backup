@@ -54,11 +54,6 @@ module.exports = (config, context) => {
         }
       ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: "./src/index.html",
-      }),
-    ]
   });
   if(isProduction) {
     finalConfig.plugins.push(
