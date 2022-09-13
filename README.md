@@ -229,3 +229,12 @@ pnpm -F  backstage_system  add webpack-dev-server@3.11.0 -D
 * [Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties](https://github.com/rails/webpacker/issues/3008)
 ## TODO
 * [搬移 git commit 紀錄到新的 git repo 上](https://medium.com/@pgtsai/搬移-git-commit-紀錄到新的-git-repo-上-13a6c84cb354)
+
+## Command
+```shell
+# WARN  Unsupported engine: wanted: {"node":"16.16.0"} (current: {"node":"v16.15.1","pnpm":"7.11.0"})
+rm -rf node_modules
+npm install pnpm --location=global
+pnpm install
+pnpm nx build mobile
+```

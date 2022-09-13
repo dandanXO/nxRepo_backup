@@ -9,7 +9,7 @@ module.exports = (config, context) => {
   const finalConfig = merge(config, {
     output: {
       filename: "[name].[contenthash].js",
-      sourceMapFilename: 'maps/[name].[chunkhash].map.js',
+      // sourceMapFilename: 'maps/[name].[chunkhash].map.js',
     },
     module: {
       rules: [
