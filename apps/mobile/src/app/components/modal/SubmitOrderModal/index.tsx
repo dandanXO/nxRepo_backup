@@ -40,7 +40,9 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
                 ? props.productDetails.productId
                 : 0
         );
-        window?.SyncTask?.doExecuteSyncContactsTask();
+        window["SyncTask"] &&
+        window["SyncTask"]["doExecuteSyncContactsTask"] &&
+        window["SyncTask"]["doExecuteSyncContactsTask"]();
     };
     return (
         <div>
