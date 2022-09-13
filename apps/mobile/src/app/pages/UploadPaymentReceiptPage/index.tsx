@@ -174,7 +174,8 @@ export const PureUploadPaymentReceiptPage = (
                             id="file"
                             style={{ display: "none" }}
                             value={formFile}
-                            onChange={(event) => onFileChange(event)}
+                            // onChange={(event) => onFileChange(event)}
+                            onInput={(event) => onFileChange(event)}
                         />
                     </div>
                 ) : (

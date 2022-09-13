@@ -62,6 +62,7 @@ export interface InputProps {
   onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void;
   onKeyDown?: (event: any) => void;
   onKeyUp?: (event: any) => void;
+  onInput?: (event: any) => void;
   customType?: string;
   otherRegionClass?: string[];
   onClickOutsideSelf?: () => void;
@@ -109,6 +110,7 @@ const Input: InputInterface = ({
   hintMessage,
   onChange,
   onClick,
+  onInput,
   // FIXME:
   otherRegionClass,
   onClickOutsideSelf,
@@ -385,9 +387,9 @@ const Input: InputInterface = ({
               // NOTICE: broke outer code
               // props.onChange && props.onChange(event.target.value);
             }}
-            // onInput={event => {
-            //     props.onInput && props.onInput(event);
-            // }}
+            onInput={event => {
+                onInput && onInput(event);
+            }}
             // onInvalid={event => {
             //     props.onInvalid && props.onInvalid(event);
             // }}
