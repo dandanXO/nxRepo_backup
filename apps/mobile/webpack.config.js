@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge');
 // const webpackConfig = require('@nrwl/react/plugins/webpack');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const isProduction = process.env.NODE_ENV == "production";
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
@@ -53,6 +54,11 @@ module.exports = (config, context) => {
         }
       ],
     },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: "./src/index.html",
+      }),
+    ]
   });
   if(isProduction) {
     finalConfig.plugins.push(
