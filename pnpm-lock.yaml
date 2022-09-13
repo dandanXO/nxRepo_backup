@@ -51,6 +51,7 @@ specifiers:
   eslint-plugin-jsx-a11y: 6.6.1
   eslint-plugin-react: 7.31.1
   eslint-plugin-react-hooks: 4.6.0
+  html-webpack-plugin: ^5.5.0
   husky: ^8.0.0
   jest: 28.1.1
   jest-environment-jsdom: 28.1.1
@@ -120,10 +121,10 @@ devDependencies:
   '@nrwl/eslint-plugin-nx': 14.6.5_67zpo6tmhlag2cf3k7vlr6euku
   '@nrwl/jest': 14.6.5_xdzrqqyiqwx7jdhdsx5izoetzq
   '@nrwl/linter': 14.6.5_fyes7pzdfamzcbggjsvip2w6ii
-  '@nrwl/next': 14.7.4_kedthc5ra3bswer7a5nmiszk4y
-  '@nrwl/react': 14.6.5_rk4hqnskskh3uiqwobzkzcfhnq
+  '@nrwl/next': 14.7.4_pvebdaaopa3znxkrxz4m55qehm
+  '@nrwl/react': 14.6.5_is2uxakw5oe7o5xknk345g3s2a
   '@nrwl/storybook': 14.7.4_4pinn2rt7lln7nhrifhk2ahiwm
-  '@nrwl/web': 14.6.5_hjd6ssfa23eco6hh7gx55rv3jq
+  '@nrwl/web': 14.6.5_t2dnf4uibhtb6fwzhbhar37e6e
   '@nrwl/workspace': 14.6.5_colkvg3hmdr6ejnhexo3p2e7uu
   '@storybook/addon-essentials': 6.5.10_zhluvbbcpupxgl2ms7zh6c6zam
   '@storybook/builder-webpack5': 6.5.10_h3jjsywk3mzbt34ovlns5wil5u
@@ -151,6 +152,7 @@ devDependencies:
   eslint-plugin-jsx-a11y: 6.6.1_eslint@8.15.0
   eslint-plugin-react: 7.31.1_eslint@8.15.0
   eslint-plugin-react-hooks: 4.6.0_eslint@8.15.0
+  html-webpack-plugin: 5.5.0_webpack@5.74.0
   husky: 8.0.1
   jest: 28.1.1_6m7kcbkkzjz4ln6z66tlzx44we
   jest-environment-jsdom: 28.1.1
@@ -4128,7 +4130,7 @@ packages:
       - typescript
     dev: true
 
-  /@nrwl/next/14.7.4_kedthc5ra3bswer7a5nmiszk4y:
+  /@nrwl/next/14.7.4_pvebdaaopa3znxkrxz4m55qehm:
     resolution: {integrity: sha512-VjBzHwTdfhOeRoEhmkC/3b+LwzSqikwKNFGV268HpdipbbkXRBBBUSKPjZXIE2GiwyMdHVJlVZwK2NxVXyu2Xw==}
     peerDependencies:
       next: ^12.1.0
@@ -4138,8 +4140,8 @@ packages:
       '@nrwl/devkit': 14.7.4_nx@14.6.5+typescript@4.7.4
       '@nrwl/jest': 14.7.4_xdzrqqyiqwx7jdhdsx5izoetzq
       '@nrwl/linter': 14.7.4_fyes7pzdfamzcbggjsvip2w6ii
-      '@nrwl/react': 14.7.4_rk4hqnskskh3uiqwobzkzcfhnq
-      '@nrwl/web': 14.7.4_hjd6ssfa23eco6hh7gx55rv3jq
+      '@nrwl/react': 14.7.4_is2uxakw5oe7o5xknk345g3s2a
+      '@nrwl/web': 14.7.4_t2dnf4uibhtb6fwzhbhar37e6e
       '@nrwl/workspace': 14.7.4_colkvg3hmdr6ejnhexo3p2e7uu
       '@svgr/webpack': 6.3.1
       chalk: 4.1.0
@@ -4194,7 +4196,7 @@ packages:
       - webpack-plugin-serve
     dev: true
 
-  /@nrwl/react/14.6.5_rk4hqnskskh3uiqwobzkzcfhnq:
+  /@nrwl/react/14.6.5_is2uxakw5oe7o5xknk345g3s2a:
     resolution: {integrity: sha512-kSAeuWt7JHdysMYiQZH3x6mcy3eIiWiGD98BfguJ+BGy875YM2pVaBb1x65vjbAt8dcAPeNkSs744287vkh2Ig==}
     dependencies:
       '@babel/core': 7.19.0
@@ -4205,7 +4207,7 @@ packages:
       '@nrwl/js': 14.6.5_kogzb5kha33bshply7uqxywcxm
       '@nrwl/linter': 14.6.5_fyes7pzdfamzcbggjsvip2w6ii
       '@nrwl/storybook': 14.6.5_4pinn2rt7lln7nhrifhk2ahiwm
-      '@nrwl/web': 14.6.5_hjd6ssfa23eco6hh7gx55rv3jq
+      '@nrwl/web': 14.6.5_t2dnf4uibhtb6fwzhbhar37e6e
       '@nrwl/workspace': 14.6.5_colkvg3hmdr6ejnhexo3p2e7uu
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_bgbvhssx5jbdjtmrq4m55itcsu
       '@svgr/webpack': 6.3.1
@@ -4260,7 +4262,7 @@ packages:
       - webpack-plugin-serve
     dev: true
 
-  /@nrwl/react/14.7.4_rk4hqnskskh3uiqwobzkzcfhnq:
+  /@nrwl/react/14.7.4_is2uxakw5oe7o5xknk345g3s2a:
     resolution: {integrity: sha512-7afF9b2DmMiXENZ65lPVxgYgCA2CTXgG3ZfA2er5bLTD74WVb1+ft0qDsXvoJGgAzMHc+q/rlobATluR6VhgeA==}
     dependencies:
       '@babel/core': 7.19.0
@@ -4271,7 +4273,7 @@ packages:
       '@nrwl/js': 14.7.4_kogzb5kha33bshply7uqxywcxm
       '@nrwl/linter': 14.7.4_fyes7pzdfamzcbggjsvip2w6ii
       '@nrwl/storybook': 14.7.4_4pinn2rt7lln7nhrifhk2ahiwm
-      '@nrwl/web': 14.7.4_hjd6ssfa23eco6hh7gx55rv3jq
+      '@nrwl/web': 14.7.4_t2dnf4uibhtb6fwzhbhar37e6e
       '@nrwl/workspace': 14.7.4_colkvg3hmdr6ejnhexo3p2e7uu
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_bgbvhssx5jbdjtmrq4m55itcsu
       '@svgr/webpack': 6.3.1
@@ -4408,7 +4410,7 @@ packages:
       - '@swc/core'
     dev: true
 
-  /@nrwl/web/14.6.5_hjd6ssfa23eco6hh7gx55rv3jq:
+  /@nrwl/web/14.6.5_t2dnf4uibhtb6fwzhbhar37e6e:
     resolution: {integrity: sha512-RyJfl/I4Ua8/6zWZ8Y2zAy30tyIbwUra/8tGFfh5YWVog0YGSexTJynTeKmZ0jo7JbqhTXKinzgmqpW9K9AOTQ==}
     dependencies:
       '@babel/core': 7.19.0
@@ -4489,7 +4491,7 @@ packages:
       webpack-dev-server: 4.11.0_webpack@5.74.0
       webpack-merge: 5.8.0
       webpack-sources: 3.2.3
-      webpack-subresource-integrity: 5.1.0_webpack@5.74.0
+      webpack-subresource-integrity: 5.1.0_dseqt6curza6cwqlyc3eowsnru
     transitivePeerDependencies:
       - '@parcel/css'
       - '@swc-node/register'
@@ -4524,7 +4526,7 @@ packages:
       - webpack-plugin-serve
     dev: true
 
-  /@nrwl/web/14.7.4_hjd6ssfa23eco6hh7gx55rv3jq:
+  /@nrwl/web/14.7.4_t2dnf4uibhtb6fwzhbhar37e6e:
     resolution: {integrity: sha512-P5vuMHv0w+TKbW5Ue8jWB1izLh+6pcldW7o8PsAfo2qOOjvV36zbaih8w3QIpwsAq5wKJMY7K3QOHvBFKVPC+A==}
     dependencies:
       '@babel/core': 7.19.0
@@ -4605,7 +4607,7 @@ packages:
       webpack-dev-server: 4.11.0_webpack@5.74.0
       webpack-merge: 5.8.0
       webpack-sources: 3.2.3
-      webpack-subresource-integrity: 5.1.0_webpack@5.74.0
+      webpack-subresource-integrity: 5.1.0_dseqt6curza6cwqlyc3eowsnru
     transitivePeerDependencies:
       - '@parcel/css'
       - '@swc-node/register'
@@ -20027,7 +20029,7 @@ packages:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
 
-  /webpack-subresource-integrity/5.1.0_webpack@5.74.0:
+  /webpack-subresource-integrity/5.1.0_dseqt6curza6cwqlyc3eowsnru:
     resolution: {integrity: sha512-sacXoX+xd8r4WKsy9MvH/q/vBtEHr86cpImXwyg74pFIpERKt6FmB8cXpeuh0ZLgclOlHI4Wcll7+R5L02xk9Q==}
     engines: {node: '>= 12'}
     peerDependencies:
@@ -20037,6 +20039,7 @@ packages:
       html-webpack-plugin:
         optional: true
     dependencies:
+      html-webpack-plugin: 5.5.0_webpack@5.74.0
       typed-assert: 1.0.9
       webpack: 5.74.0
     dev: true
