@@ -176,7 +176,7 @@ nx g @nrwl/next:component protable --project=admin
 [Using pnpm with Lerna
 ](https://lerna.js.org/docs/recipes/using-pnpm-with-lerna)
 
-## pnpm workspace
+## pnpm workspace (未使用)
 ```shell
 
 # use pnpm workspace to manage packages
@@ -187,7 +187,7 @@ pnpm install
 
 ```
 
-## Lerna
+## Lerna (未使用)
 ```shell
 # install lerna
 # pnpx learn init # 無效
@@ -198,7 +198,7 @@ pnpx lerna bootstrap --use-workspaces
 
 ```
 
-## nx + lerna
+## nx + lerna (未使用)
 * [Integrating Nx and Lerna](https://nx.dev/recipe/lerna-and-nx)
 ```shell
 # install nx + pnpm workspace's packages
@@ -227,14 +227,20 @@ pnpm -F  backstage_system  add webpack-dev-server@3.11.0 -D
 * [React 18: Hydration failed because the initial UI does not match what was rendered on the server](https://stackoverflow.com/questions/71706064/react-18-hydration-failed-because-the-initial-ui-does-not-match-what-was-render)
 * [Solve “document is not defined” errors in Next.js](https://www.webtutpro.com/solve-document-is-not-defined-errors-in-next-js-26fea778b868)
 * [Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties](https://github.com/rails/webpacker/issues/3008)
+* [NX Passed 11161 file paths to Git to hash, but received 11148 hashes. #9946](https://github.com/nrwl/nx/issues/9946)
 ## TODO
 * [搬移 git commit 紀錄到新的 git repo 上](https://medium.com/@pgtsai/搬移-git-commit-紀錄到新的-git-repo-上-13a6c84cb354)
 
 ## Command
 ```shell
-# WARN  Unsupported engine: wanted: {"node":"16.16.0"} (current: {"node":"v16.15.1","pnpm":"7.11.0"})
+nvm use 16.16.0
+node -v
 rm -rf node_modules
-npm install pnpm --location=global
+npm uninstall nx --location=global
+npm install nx --location=global
 pnpm install
+npm -v
+nx reset
 pnpm nx build mobile
+pnpm nx serve mobile
 ```
