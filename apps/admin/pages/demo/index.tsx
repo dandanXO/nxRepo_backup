@@ -55,12 +55,12 @@ export default () => {
             ],
           },
         }}
-        footer={[
-          <Button key="3">重置</Button>,
-          <Button key="2" type="primary">
-            提交
-          </Button>,
-        ]}
+        // footer={[
+        //   <Button key="3">重置</Button>,
+        //   <Button key="2" type="primary">
+        //     提交
+        //   </Button>,
+        // ]}
       >
         <DemoTable/>
       </PageContainer>

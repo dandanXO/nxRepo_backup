@@ -10,7 +10,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Welcome to admin!</title>
+        <title>后台管理系统</title>
       </Head>
       <main className="app">
         <Component {...pageProps} />

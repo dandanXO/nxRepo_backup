@@ -18,7 +18,7 @@ import { todayLoanManageRoutes } from '../pages/todayLoanManage';
 import { payAndSettleManageRoutes } from '../pages/payAndSettleManage';
 import { extensionPeriodLoanManageRoutes } from '../pages/extensionPeriodLoanManage';
 import { telSaleManageRoutes } from '../pages/telSaleManage';
-
+import { AdminRoutes } from "../import/AdminModule"
 
 const allRoutes = [].concat(
     userManageRoutes,
@@ -36,7 +36,8 @@ const allRoutes = [].concat(
     todayLoanManageRoutes,
     payAndSettleManageRoutes,
     extensionPeriodLoanManageRoutes,
-    telSaleManageRoutes
+    telSaleManageRoutes,
+    AdminRoutes,
 );
 
 export default class Routes extends React.Component {
