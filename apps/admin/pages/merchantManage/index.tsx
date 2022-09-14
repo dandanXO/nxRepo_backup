@@ -8,36 +8,38 @@ import { Button, Dropdown, Menu, Modal, Form, Input ,Radio } from 'antd';
 
 
 type MerchantListItme={
-    merchantId:number;
-    mchNo:string;
-    name:string;
-    contact:string;
-    enabled:string;
-    // email:string; 多的
-    merchantCreateTime:string; //少了
-    merchantUpdateTime:string; //少了
+    merchantId?: number;
+    mchNo?: string;
+    name?: string;
+    contact?: string;
+    enabled?: boolean;
+    email?: string;
+    merchantCreateTime?: string;
+    merchantUpdateTime?: string;
 }
 
 const MerchantManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const defaultData: MerchantListItme[] = [
         {
-            merchantId:1,
-            mchNo:'1',
-            name:'name1',
-            contact:'123345',
-            enabled:'enable',
-            merchantCreateTime:'2020-1-1',
-            merchantUpdateTime:'2020-1-2',
+            merchantId: 1,
+            mchNo: '1',
+            name: 'name1',
+            contact: '123345',
+            enabled: true,
+            email: 'abc@gmail.com',
+            merchantCreateTime: '2020-1-1',
+            merchantUpdateTime: '2020-1-2',
         },
         {
-            merchantId:2,
-            mchNo:'2',
-            name:'name2',
-            contact:'2222222',
-            enabled:'disable',
-            merchantCreateTime:'2020-2-1',
-            merchantUpdateTime:'2020-2-2',
+            merchantId: 2,
+            mchNo: '2',
+            name: 'name2',
+            contact: '2222222',
+            enabled: false,
+            email: 'abc1@gmail.com',
+            merchantCreateTime: '2020-2-1',
+            merchantUpdateTime: '2020-2-2',
         },
       ]; 
 
@@ -55,11 +57,11 @@ const MerchantManage = () => {
             ],
         },
         { title: '商戶編號', dataIndex: 'merchantId', hideInSearch: true },
-        { title: '商戶名稱', dataIndex: 'merchantName' },
-        { title: '聯繫電話', dataIndex: 'merchantTel' },
-        { title: '狀態', dataIndex: 'merchantStatus', valueType: 'select', valueEnum:{
-            enable: { text: '啟用', status: 'Success'},
-            disable: { text: '禁用',  status: 'Default', },
+        { title: '商戶名稱', dataIndex: 'name' },
+        { title: '聯繫電話', dataIndex: 'contact' },
+        { title: '狀態', dataIndex: 'enabled', valueType: 'select', valueEnum:{
+            true: { text: '啟用', status: 'Success'},
+            false: { text: '禁用',  status: 'Default', },
         }},
         { title: '創建時間', dataIndex: 'merchantCreateTime', hideInSearch: true },
         { title: '更新時間', dataIndex: 'merchantUpdateTime', hideInSearch: true },
@@ -107,6 +109,7 @@ const MerchantManage = () => {
                     total: 2,
                     success: true,
                 })}
+                search={{ labelWidth: 'auto'}}
                 rowKey="id"
                 headerTitle={<Button key="button" icon={"+ "} type="primary" onClick={()=>setAddModalVisible(true)}>新建</Button>}
             />
@@ -121,6 +124,9 @@ const MerchantManage = () => {
                         <Input allowClear />
                     </Form.Item>
                     <Form.Item name="contact" label="聯繫電話" rules={[{ required: true }]}>
+                        <Input allowClear />
+                    </Form.Item>
+                    <Form.Item name="email" label="信箱" rules={[{ required: true }]}>
                         <Input allowClear />
                     </Form.Item>
                     <Form.Item name="enabled" label="狀態" initialValue={"true"}>
