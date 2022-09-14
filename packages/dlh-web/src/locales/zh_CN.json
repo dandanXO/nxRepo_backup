@@ -521,7 +521,7 @@
   "page.table.new.customer.bind.card.verification.qty": "绑卡认证",
   "page.table.new.customer.operator.verification.qty": "新客运营商认证量",
   "page.table.new.customer.application.qty": "订单申请量",
-  "page.table.new.customer.application.rate" : "訂單申請率", 
+  "page.table.new.customer.application.rate" : "訂單申請率",
   "page.table.new.customer.application.conversion.rate": "申请转化率",
   "page.table.new.customer.loan.conversion.rate": "放款转化率",
   "page.table.daily.conversion.rate.statistics.export": "日转化率统计_{expDate}.xlsx",
@@ -1100,7 +1100,7 @@
   "user.status.eighteen": "用户终审中",
   "user.status.nineteen": "用户被拒",
   "user.status.twenty": "用户终审通过",
-  
+
   "record.status.zero": "机审已知异常",
   "record.status.one": "机审通过",
   "record.status.two": "机审拒绝",
@@ -1137,6 +1137,11 @@
   "backListReason.short.signal.too.much": "短号太多",
   "backListReason.address.book.not.know.much": "通讯录不认识过多",
   "backListReason.other": "其他",
+
+  "menu.platform.manage": "產品管理",
+  "menu.merchant.manage": "商戶管理",
+  "menu.product.manage": "產品管理",
+
   "menu.userManage": "客户管理",
   "menu.userInfoManage": "客户信息管理",
   "menu.riskControlExamine": "风控审核",

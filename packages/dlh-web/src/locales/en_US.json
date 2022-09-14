@@ -1150,6 +1150,11 @@
   "backListReason.address.book.not.know.much": "The address book does not know too much",
   "backListReason.other": "Other",
 
+  "menu.platform.manage": "產品管理",
+  "menu.merchant.manage": "商戶管理",
+  "menu.product.manage": "產品管理",
+
+
   "menu.userManage": "User Mgmt",
   "menu.userInfoManage": "User Info Mgmt",
   "menu.riskControlExamine": "Risk Control Exam",

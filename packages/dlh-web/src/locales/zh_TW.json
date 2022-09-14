@@ -30,7 +30,7 @@
     "page.login.phone.empty" : "手機號不能為空",
     "page.login.password" : "請輸入驗證碼",
     "page.login.password.empty" : "驗證碼不能為空",
- 
+
     "page.search.list.reg.time" : "註冊時間",
     "page.search.list.select" : "請選擇",
     "page.search.list.status" : "狀態",
@@ -501,7 +501,7 @@
     "page.table.new.customer.urge. rate" : "新客催回率",
     "page.table.total.principal.repaid" : "總還本金",
     "page.table.total.overdue.fee" : "總逾期費",
-    "page.table.sum.repayment.amount" : "總還款金額", 
+    "page.table.sum.repayment.amount" : "總還款金額",
     "page.table.old.customer.repayment.amount" : "老客還款金額",
     "page.table.new.customer.repayment. amount" : "新客還款金額",
     "page.table.total.repayment.rate" : "總回款率",
@@ -515,8 +515,8 @@
     "page.table.new.customer.emergency.contact.person.verification.qty" : "緊急聯繫人認證",
     "page.table.new.customer.bind.card.verification.qty" : "綁卡認證",
     "page.table.new.customer.operator.verification.qty" : "新客運營商認證量",
-    "page.table.new.customer.application.qty" : "訂單申請量", 
-    "page.table.new.customer.application.rate" : "訂單申請率", 
+    "page.table.new.customer.application.qty" : "訂單申請量",
+    "page.table.new.customer.application.rate" : "訂單申請率",
     "page.table.new.customer.application.conversion.rate" : "申請轉化率",
     "page.table.new.customer.loan.conversion.rate" : "放款轉化率" ,
     "page.table.daily.conversion.rate.statistics.export" : "日轉化率統計_{expDate}.xlsx",
@@ -1069,16 +1069,16 @@
     "status.obj.zero" : "逾期中",
     "status.obj.one" : "已結清",
     "status.obj.three" : "已展期",
-    
+
     "backType.obj.one" : "逾期全款",
     "backType.obj.two" : "逾期展期",
 
     "mon" : "星期一",
-    "tue" : "星期二", 
-    "wed" : "星期三", 
-    "thu" : "星期四", 
+    "tue" : "星期二",
+    "wed" : "星期三",
+    "thu" : "星期四",
     "fri" : "星期五",
-    "sat" : "星期六", 
+    "sat" : "星期六",
     "sun" : "星期日",
 
     "refuseReason.no.answer.turn.off" : "電話多次不接或關機",
@@ -1095,6 +1095,11 @@
     "backListReason.short.signal.too.much" : "短號太多",
     "backListReason.address.book.not.know.much" : "通訊錄不認識過多",
     "backListReason.other" : "其他",
+
+
+    "menu.platform.manage": "產品管理",
+    "menu.merchant.manage": "商戶管理",
+    "menu.product.manage": "產品管理",
 
     "menu.userManage":"客戶管理",
     "menu.userInfoManage":"客戶信息管理",
@@ -1202,7 +1207,7 @@
     "settingTableLarge":"寬版",
     "settingTableSmall":"窄版",
 
-    "prompt.infor" : "提示信息", 
+    "prompt.infor" : "提示信息",
     "system.err" : "系統錯誤",
 
     "menu.risk.exam" : "風控審核",
@@ -1223,11 +1228,11 @@
     "education.master": "碩士",
     "education.doctorate": "博士",
 
-    "position.ordinaryStaff": "Ordinary staff", 
-    "position.executive": "Executive", 
-    "position.supervisor": "Supervisor", 
-    "position.manager": "Manager", 
-    "position.director": "Director", 
+    "position.ordinaryStaff": "Ordinary staff",
+    "position.executive": "Executive",
+    "position.supervisor": "Supervisor",
+    "position.manager": "Manager",
+    "position.director": "Director",
     "position.other": "Other",
     "task.status": "批次任务状态",
     "task.status.running":  "执行中",
