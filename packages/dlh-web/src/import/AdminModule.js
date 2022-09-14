@@ -9,7 +9,7 @@ const Iframe = (props) => {
   console.log("pathname", pathname);
   const url = {
     '/merchant-manage': "/merchantManage",
-    '/product-manage': "/demo"
+    '/product-manage': "/product"
   }[pathname];
   return (
     <iframe style={{ border: 0, width: "100%", height: "100%"}} src={PageURL(url)}/>
