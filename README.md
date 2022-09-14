@@ -135,13 +135,19 @@ pnpm nx build mobile
 pnpm nx serve mobile
 ```
 
-### Admin (old)
+### dlh-web (old admin)
 ```shell
 cd ./packages/dlh-web
 npm install
 npm run [scripts]
 ```
 
+### Admin (new dlh-web)
+```shell
+nx serve admin
+nx build admin 
+nx serve admin --prod 
+```
 
 ## Recipe
 
