@@ -54,6 +54,31 @@ module.exports = (config, context) => {
         }
       ],
     },
+    devServer: {
+      hot: true,
+      open: true,
+      host: "localhost",
+      port: 4003,
+      historyApiFallback: true,
+      onBeforeSetupMiddleware: function (devServer) {
+        if (!devServer) {
+          throw new Error("webpack-dev-server is not defined");
+        }
+        // NOTICE: demo
+        // devServer.app.get("/open-api/zh-tw/Attractions/All", (req, res) => {
+        //   res.json(mockAPIResponse);
+        // });
+      },
+      // NOTICE: replace by @nrwl/web:webpack
+      // proxy: {
+      //   //设置代理
+      //   "/api": {
+      //     target: "https://app.india-api-dev.com",
+      //     secure: false, // 協議是https的時候必須要寫
+      //     changeOrigin: true,
+      //   },
+      // },
+    },
   });
   if(isProduction) {
     finalConfig.plugins.push(
