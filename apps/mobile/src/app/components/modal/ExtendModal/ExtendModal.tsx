@@ -79,7 +79,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                 content={(hide: () => void) => {
                     return (
                         <ModalContentStyled>
-                            <Title>Amoun Paid record</Title>
+                            <Title>Extend</Title>
                             <Divider />
                             <ListItem
                                 title={"Extension Fee"}
