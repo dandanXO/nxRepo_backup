@@ -4,6 +4,7 @@ import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Space, Tag } from 'antd';
 import { useRef } from 'react';
 import request from 'umi-request';
+import {useGetProductManageListQuery, useLazyGetProductManageListQuery} from "../../api";
 
 type GithubIssueItem = {
   url: string;
@@ -154,6 +155,9 @@ const dropdown_menu = (
   />
 );
 const demoTable= () => {
+  const {currentData, isLoading, isFetching} = useGetProductManageListQuery({});
+  console.log(currentData);
+
   const actionRef = useRef<ActionType>();
   return (
     <ProTable<GithubIssueItem>

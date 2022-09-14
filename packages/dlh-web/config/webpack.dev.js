@@ -65,6 +65,7 @@ const devConfig = webpackMerge(webpackBaseConfig, {
         hot: true,
         proxy: config.proxy,
         open: true,
+        disableHostCheck: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

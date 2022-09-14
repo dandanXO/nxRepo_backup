@@ -115,4 +115,4 @@ class Modal extends React.Component<IModalProps, ModalState> {
 }
 
 export default Modal;
-export { IModalProps };
+export type { IModalProps };
