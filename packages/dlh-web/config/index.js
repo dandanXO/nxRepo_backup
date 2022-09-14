@@ -13,13 +13,15 @@ const buildPublicPath = '/';
 
 //代理配置
 const proxy = {
-
-    '/hs':{
-
-        // target: 'http://test.llyq.mayiaf.com',
-        target: "http://65.1.53.136:8080",
-        changeOrigin: true
-    }
+  '/hs':{
+    // NOTE: unknow
+    // target: 'http://test.llyq.mayiaf.com',
+    // NOTE: India 產品後台
+    // target: "http://65.1.53.136:8080",
+    // NOTE: API 產品後台
+    target: "https://app.india-api-dev.com",
+    changeOrigin: true
+  }
 };
 
 module.exports = {
