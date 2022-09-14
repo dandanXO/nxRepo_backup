@@ -64,7 +64,7 @@ const devConfig = webpackMerge(webpackBaseConfig, {
         historyApiFallback: true,
         hot: true,
         proxy: config.proxy,
-
+        open: true,
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
