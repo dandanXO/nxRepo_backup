@@ -57,6 +57,8 @@ export interface GetProductListResponse {
     top?: boolean;
     /** 权重 */
     weight?: number;
+    /** 修改時間 */
+    createTime?:string;
 }
 
 export interface GetProductInterestRatePairs {
