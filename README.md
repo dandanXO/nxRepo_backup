@@ -114,6 +114,35 @@ nx build mobile
 nx build admin
 ```
 
+
+## Projects Command
+
+### Base
+```shell
+nvm use 16.16.0
+node -v
+rm -rf node_modules
+npm uninstall nx --location=global
+npm install nx --location=global
+pnpm install
+npm -v
+nx reset
+```
+
+### Mobile
+```shell
+pnpm nx build mobile
+pnpm nx serve mobile
+```
+
+### Admin (old)
+```shell
+cd ./packages/dlh-web
+npm install
+npm run [scripts]
+```
+
+
 ## Recipe
 
 - Git
@@ -230,17 +259,3 @@ pnpm -F  backstage_system  add webpack-dev-server@3.11.0 -D
 * [NX Passed 11161 file paths to Git to hash, but received 11148 hashes. #9946](https://github.com/nrwl/nx/issues/9946)
 ## TODO
 * [搬移 git commit 紀錄到新的 git repo 上](https://medium.com/@pgtsai/搬移-git-commit-紀錄到新的-git-repo-上-13a6c84cb354)
-
-## Command
-```shell
-nvm use 16.16.0
-node -v
-rm -rf node_modules
-npm uninstall nx --location=global
-npm install nx --location=global
-pnpm install
-npm -v
-nx reset
-pnpm nx build mobile
-pnpm nx serve mobile
-```
