@@ -1,3 +1,6 @@
+export interface PutProductRequestParams {
+    productId: number
+}
 export interface PutProductRequestBody {
     /** 管理者密码 */
     adminPassword?: string;
@@ -67,3 +70,5 @@ export interface PutProductInterestRatePairs {
     /** 前置利率 */
     preInterest?: number;
 }
+
+export type PutProductProps = PutProductRequestBody & PutProductRequestParams;
