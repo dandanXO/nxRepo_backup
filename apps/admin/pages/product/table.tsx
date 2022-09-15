@@ -23,8 +23,8 @@ const columns: ProColumns<GetProductListResponseProduct>[] = [
   { title: '權重', dataIndex: 'weight', hideInSearch: true },
   {
     title: '狀態', dataIndex: 'enabled', valueType: 'select', valueEnum: {
-      enable: { text: '啟用', status: 'Success' },
-      disable: { text: '禁用', status: 'Default', },
+      enable: { text: '上架', status: 'Success' },
+      disable: { text: '下架', status: 'Default', },
     }
   },
   { title: '修改時間', dataIndex: 'createTime', hideInSearch: true },
@@ -105,7 +105,7 @@ const demoTable = () => {
         onChange: (page) => console.log(page),
       }}
       dateFormatter="string"
-      headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary">新建</Button>}
+      headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary">添加</Button>}
     />
   );
 };
