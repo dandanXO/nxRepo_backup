@@ -43,7 +43,7 @@ const demoTable = (props: ProductTable) => {
         refetchOnReconnect: false
     });
 
-  
+
     // const { currentData, refetch} = useGetProductManageListQuery(null, {
     //   skip: false,
     //   pollingInterval: 0,
@@ -143,8 +143,7 @@ const demoTable = (props: ProductTable) => {
                 onChange: (page) => console.log(page),
             }}
             dateFormatter="string"
-            headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary">添加</Button>}
-
+            headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => props.setProductModalVisible(true)}>添加</Button>}
         />
     );
 };
