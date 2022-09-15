@@ -12,7 +12,7 @@ import {
   Select,
   UploadFile, Switch
 } from 'antd';
-import {ProductModalType} from "./index";
+import {ProductModalType} from "../index";
 import {UploadOutlined} from "@ant-design/icons";
 import styled from "styled-components";
 import ProductSettingSection from "./ProductSettingSection";
@@ -47,15 +47,6 @@ const uploadLogoProps: UploadProps = {
 };
 
 
-const fileList: UploadFile[] = [
-  {
-    uid: '-1',
-    name: 'xxx.png',
-    status: 'done',
-    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-  }
-];
 
 const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
 
