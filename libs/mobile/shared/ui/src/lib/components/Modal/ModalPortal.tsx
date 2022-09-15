@@ -32,10 +32,12 @@ class ModalPortal extends React.Component<IModalPortal> {
     container.className = 'uni-portal-container';
     return container;
   }
-  componentDidMount() {
+
+  override componentDidMount() {
     this.containerRootAddContainer();
   }
-  componentWillUnmount() {
+
+  override componentWillUnmount() {
     this.containerRootRemoveContainer();
   }
   containerRootRemoveContainer() {
@@ -54,7 +56,8 @@ class ModalPortal extends React.Component<IModalPortal> {
       containerRoot?.appendChild(this.container);
     }
   }
-  render() {
+
+  override render() {
     if (this.props.container) {
       return ReactDOM.createPortal(this.props.children, this.props.container);
     } else {

@@ -2,7 +2,7 @@ import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Space, Tag } from 'antd';
-import { useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import request from 'umi-request';
 import { useGetProductManageListQuery, useLazyGetProductManageListQuery } from "../../api";
 import { GetProductListResponse } from "../../types/getProductList";
@@ -33,6 +33,40 @@ const columns: ProColumns<GetProductListResponse>[] = [
 const demoTable = () => {
     const { currentData, isLoading, isFetching } = useGetProductManageListQuery({});
     console.log(currentData);
+
+  });
+  const [ triggerGetList, { isLoading, isFetching, isSuccess, isError, isUninitialized} ] = useLazyGetProductManageListQuery({
+    pollingInterval: 0,
+    refetchOnFocus: false,
+    refetchOnReconnect: false
+  });
+  // const { currentData, refetch} = useGetProductManageListQuery(null, {
+  //   skip: false,
+  //   pollingInterval: 0,
+  //   refetchOnMountOrArgChange: false,
+  //   refetchOnFocus: false,
+  //   refetchOnReconnect: false,
+  // });
+  const actionRef = useRef<ActionType>();
+  useEffect(() => {
+    if(window.top == window.self) {
+      // Top level window
+      console.log("[Debug][iframe] i'm master")
+      if(!isLoginSuccess) {
+        triggerLogin({
+          phoneNo: "19888888888",
+          code: "123456"
+        });
+      }
+      if(isLoginSuccess) triggerGetList(null);
+    } else {
+      // Not top level. An iframe, popup or something
+      console.log("[Debug][iframe] inner parent window")
+      triggerGetList(null);
+    }
+
+  }, [triggerLogin, triggerGetList, isLoginSuccess])
+
 
 
     const actionRef = useRef<ActionType>();

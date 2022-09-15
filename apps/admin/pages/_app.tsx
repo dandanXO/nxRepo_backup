@@ -3,12 +3,19 @@ import Head from 'next/head';
 import './styles.css';
 import { Provider } from "react-redux";
 import { appStore } from "../store"
+// import {useEffect, useState} from "react";
 
 // [style is broken on build but works on dev env](https://github.com/SolidZORO/next-plugin-antd-less/issues/103)
 // import 'antd/dist/antd.less';
 require('antd/dist/antd.less');
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  // const [domLoaded, setDomLoaded] = useState(false);
+  // useEffect(() => {
+  //   setDomLoaded(true);
+  //   console.log("window.sessionStorage");
+  //   console.log(window.sessionStorage.getItem("adminUser"))
+  // }, []);
   return (
     <>
       <Provider store={appStore}>

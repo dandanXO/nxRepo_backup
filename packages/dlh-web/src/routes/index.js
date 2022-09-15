@@ -61,7 +61,9 @@ export default class Routes extends React.Component {
             }
         }
         realRoutes = realRoutes.concat(indexStatisticsRoutes);
-        return  realRoutes.map(item => <Route exact={!!item.exact} key={item.path} path={item.path} component={item.component}/>);
+        // FIXME:
+        const BasePath = ""
+        return  realRoutes.map(item => <Route exact={!!item.exact} key={item.path} path={BasePath + item.path} component={item.component}/>);
     }
 
     render() {

@@ -25,7 +25,7 @@ export default () => {
               },
               {
                 path: '',
-                breadcrumbName: '產品管理',
+                breadcrumbName: '產品管理 ',
               },
               {
                 path: '',

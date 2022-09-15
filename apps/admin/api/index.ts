@@ -5,15 +5,34 @@ import {GetProductInterestRatePairs, GetProductListResponse} from "../types/getP
 // const baseUrl = "/api/v2";
 const baseUrl = "/hs/admin";
 
+interface LoginRequest {
+  phoneNo: string;
+  code: string;
+}
+interface LoginResponse {
+  code?: number;
+  data?: unknown;
+  message?: string;
+}
 export const API = createApi({
   reducerPath: "api",
   baseQuery: axiosBaseQuery({
     baseUrl,
   }),
   endpoints: (builder) => ({
+    login: builder.mutation<LoginResponse, LoginRequest>({
+      query: (credentials: LoginRequest) => ({
+        url: "/auth/login",
+        method: "POST",
+        data: {
+          phoneNo: credentials.phoneNo,
+          code: credentials.code,
+        }
+      })
+    }),
     getProductManageList: builder.query<
       GetProductListResponse,
-      {}
+      null
       >({
       query: () => ({
         url: `/product-manage/list`,
@@ -26,5 +45,7 @@ export const API = createApi({
 });
 export const {
   useGetProductManageListQuery,
-  useLazyGetProductManageListQuery
+  useLazyGetProductManageListQuery,
+  useLoginMutation,
+  usePrefetch,
 } = API;

@@ -8,13 +8,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackBaseConfig = require('./webpack.base');
 const config = require('./index');
 
+const publicPath = "/";
+
 const devConfig = webpackMerge(webpackBaseConfig, {
     mode: 'development',
     entry: path.join(config.srcDir, './index.js'),
     output: {
         path: config.distDir,
-        filename: 'main.js',
-        publicPath: '/'
+        // NOTICE:
+        filename: 'static/main.js',
+        publicPath,
     },
     module: {
         rules: [
@@ -59,12 +62,13 @@ const devConfig = webpackMerge(webpackBaseConfig, {
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: config.distDir,
+        contentBase: config.distDir ,
         port: 4001,
         historyApiFallback: true,
         hot: true,
         proxy: config.proxy,
-        open: true,
+        open: false,
+        // FIX: Invalid Host header
         disableHostCheck: true
     },
     plugins: [

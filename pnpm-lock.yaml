@@ -56,6 +56,7 @@ specifiers:
   husky: ^8.0.0
   jest: 28.1.1
   jest-environment-jsdom: 28.1.1
+  js-cookie: ^3.0.1
   less-loader: ^11.0.0
   next: 12.2.5
   next-plugin-antd-less: ^1.8.0
@@ -96,6 +97,7 @@ dependencies:
   axios: 0.27.2
   classnames: 2.3.2
   core-js: 3.25.1
+  js-cookie: 3.0.1
   next: 12.2.5_a7mipu7kvrstgwvi56qu2qyzhe
   next-plugin-antd-less: 1.8.0_webpack@5.74.0
   query-string: 7.1.1
@@ -13805,6 +13807,11 @@ packages:
       - supports-color
       - ts-node
     dev: true
+
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /js-string-escape/1.0.1:
     resolution: {integrity: sha512-Smw4xcfIQ5LVjAOuJCvN/zIodzA/BBSsluuoSykP+lUvScIi4U6RJLfwHet5cxFnCswUjISV8oAXaqaJDY3chg==}
