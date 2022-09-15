@@ -60,43 +60,57 @@ const RateSettingSection = () => {
       </Form.Item>
 
 
-      <Form.List name="users">
-        {(fields, { add, remove }) => (
-          <>
-            {fields.map(({ key, name, ...restField }) => (
-              <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
-                <Form.Item
-                  {...restField}
-                  name={[name, 'first']}
-                  rules={[{ required: true, message: 'Missing first name' }]}
-                >
-                  <Input placeholder="起始期数" />
-                </Form.Item>
-                <Form.Item
-                  {...restField}
-                  name={[name, 'last']}
-                  rules={[{ required: true, message: 'Missing last name' }]}
-                >
-                  <Input placeholder="前置利息" suffix={"%"}/>
-                </Form.Item>
-                <Form.Item
-                  {...restField}
-                  name={[name, 'last']}
-                  rules={[{ required: true, message: 'Missing last name' }]}
-                >
-                  <Input placeholder="后置利息" suffix={"%"}/>
-                </Form.Item>
-                <MinusCircleOutlined onClick={() => remove(name)} />
-              </Space>
-            ))}
-            <Form.Item>
-              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                添加
-              </Button>
-            </Form.Item>
-          </>
-        )}
-      </Form.List>
+      <Form.Item name="amountRange" label="复贷利率" tooltip={
+        <div>
+          <span>例如：</span>
+          <ul>
+            <li>起始期数1，前置利息10%，后置利息15% </li>
+            <li>+起始期数4，前置利息8%，后置利息12%</li>
+            <li>则1~3期费率同起始期数1</li>
+            <li>第4期之后费率同起始期数4</li>
+          </ul>
+        </div>
+      }>
+        <Form.List name="users">
+          {(fields, { add, remove }) => (
+            <>
+              {fields.map(({ key, name, ...restField }) => (
+                <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
+                  <Form.Item
+                    {...restField}
+                    name={[name, 'first']}
+                    rules={[{ required: true, message: 'Missing first name' }]}
+                  >
+                    <Input placeholder="起始期数" />
+                  </Form.Item>
+                  <Form.Item
+                    {...restField}
+                    name={[name, 'last']}
+                    rules={[{ required: true, message: 'Missing last name' }]}
+                  >
+                    <Input placeholder="前置利息" suffix={"%"}/>
+                  </Form.Item>
+                  <Form.Item
+                    {...restField}
+                    name={[name, 'last']}
+                    rules={[{ required: true, message: 'Missing last name' }]}
+                  >
+                    <Input placeholder="后置利息" suffix={"%"}/>
+                  </Form.Item>
+                  <MinusCircleOutlined onClick={() => remove(name)} />
+                </Space>
+              ))}
+              <Form.Item>
+                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                  添加
+                </Button>
+              </Form.Item>
+            </>
+          )}
+        </Form.List>
+      </Form.Item>
+
+
 
 
     </React.Fragment>
