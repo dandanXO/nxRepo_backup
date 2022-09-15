@@ -247,7 +247,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
             <Switch checkedChildren="是" unCheckedChildren="否" />
           </Form.Item>
 
-          <Form.Item name="amountRange" label="熱門產品標籤" extra="至少1筆，至多3筆"  tooltip={
+          <Form.Item name="amountRange" label="熱門產品標籤" extra="至少1筆，至多3筆"  style={{ marginBottom: 0 }} tooltip={
             <div>
               <span>參考文字：</span>
               <ul>
