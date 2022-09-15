@@ -1,7 +1,8 @@
-import {Divider, Form, Input, Typography, Row, Col} from "antd";
+import {Divider, Form, Input, Typography, Row, Col, Space, Button} from "antd";
 const { Paragraph, Text } = Typography;
 
 import React from "react";
+import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 
 const RateSettingSection = () => {
   return (
@@ -57,6 +58,46 @@ const RateSettingSection = () => {
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
+
+
+      <Form.List name="users">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(({ key, name, ...restField }) => (
+              <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
+                <Form.Item
+                  {...restField}
+                  name={[name, 'first']}
+                  rules={[{ required: true, message: 'Missing first name' }]}
+                >
+                  <Input placeholder="起始期数" />
+                </Form.Item>
+                <Form.Item
+                  {...restField}
+                  name={[name, 'last']}
+                  rules={[{ required: true, message: 'Missing last name' }]}
+                >
+                  <Input placeholder="前置利息" suffix={"%"}/>
+                </Form.Item>
+                <Form.Item
+                  {...restField}
+                  name={[name, 'last']}
+                  rules={[{ required: true, message: 'Missing last name' }]}
+                >
+                  <Input placeholder="后置利息" suffix={"%"}/>
+                </Form.Item>
+                <MinusCircleOutlined onClick={() => remove(name)} />
+              </Space>
+            ))}
+            <Form.Item>
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                添加
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
+
 
     </React.Fragment>
   )
