@@ -1,4 +1,8 @@
-export interface GetProductListResponse {
+export interface GetProductListResponse extends Array<GetProductListResponseProduct> {
+  data: GetProductListResponseProduct[];
+}
+
+export interface GetProductListResponseProduct {
     /** 广告放款额度 */
     amountRange?: string;
     /** 广告放款通过率 */
@@ -47,7 +51,7 @@ export interface GetProductListResponse {
     showQuota?: boolean;
     /** 热门标签 */
     tags?: string;
-    /** 申请详情模版类型 (1: 一般 , 2: 合同金額=到手)  
+    /** 申请详情模版类型 (1: 一般 , 2: 合同金額=到手)
         @enum {number}
     */
     templateType?: 1 | 2;

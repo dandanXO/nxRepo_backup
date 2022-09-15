@@ -155,8 +155,8 @@ const dropdown_menu = (
   />
 );
 const demoTable= () => {
-  const {currentData, isLoading, isFetching} = useGetProductManageListQuery({});
-  console.log(currentData);
+  // const {currentData, isLoading, isFetching} = useGetProductManageListQuery();
+  // console.log(currentData);
 
   const actionRef = useRef<ActionType>();
   return (
