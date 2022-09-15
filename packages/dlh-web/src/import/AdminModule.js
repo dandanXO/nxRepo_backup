@@ -1,7 +1,26 @@
 import React from "react";
 import { withRouter } from 'react-router-dom';
 
-const adminURLBase = () => "http://localhost:4200";
+// REFACTOR
+const adminURLBase = () => {
+  if(window.top == window.self) {
+    // Top level window
+    const env = process.env.NODE_ENV
+    if(env == "development"){
+      console.log("[Debug][env development")
+      return "http://localhost:4200";
+    }
+    else if (env == "production"){
+      console.log("[Debug][env] production")
+      return "/new-admin";
+    }
+  } else {
+    // Not top level. An iframe, popup or something
+    return "/new-admin";
+  }
+
+}
+
 const PageURL = (actionUrl) => adminURLBase() + actionUrl;
 
 const Iframe = (props) => {
@@ -11,15 +30,13 @@ const Iframe = (props) => {
     '/merchant-manage': "/merchantManage",
     '/product-manage': "/product"
   }[pathname];
+  // console.log("url", url)
   return (
     <iframe style={{ border: 0, width: "100%", height: "100%"}} src={PageURL(url)}/>
   )
 }
 const IframeWithRouter = withRouter(Iframe);
 
-const SimpleIframe = () => (
-  <iframe style={{ border: 0, width: "100%", height: "100%"}} src={"http://localhost:4200/demo"}/>
-)
 const AdminRoutes = [
   {
     path: '/merchant-manage',

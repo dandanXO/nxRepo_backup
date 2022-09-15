@@ -9,6 +9,7 @@ const distDir = path.join(rootDir, './dist');
 //dll目录
 const dllDir = path.join(rootDir, './dll');
 
+// NOTICE: Production buildPublicPath
 const buildPublicPath = '/';
 
 //代理配置
