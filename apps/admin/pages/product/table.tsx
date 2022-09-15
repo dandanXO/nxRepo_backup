@@ -24,8 +24,8 @@ const columns: ProColumns<GetProductListResponseProduct>[] = [
     {
         title: '狀態', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', valueEnum: {
             all: { text: '全部', status: 'Default' },
-            true: { text: '啟用', status: 'Success' },
-            false: { text: '禁用', status: 'Default' },
+            true: { text: '上架', status: 'Success' },
+            false: { text: '下架', status: 'Default' },
         }
     },
     { title: '修改時間', dataIndex: 'updateTime', hideInSearch: true, valueType: 'dateTime' },
@@ -42,6 +42,8 @@ const demoTable = (props: ProductTable) => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
+
+  
     // const { currentData, refetch} = useGetProductManageListQuery(null, {
     //   skip: false,
     //   pollingInterval: 0,
