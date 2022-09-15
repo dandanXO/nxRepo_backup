@@ -1,11 +1,5 @@
-import { useState, useEffect } from 'react';
-import ReactDOM from "react-dom";
-import { ProForm, ProFormText } from '@ant-design/pro-components';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
-import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
-import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Divider } from 'antd';
-import { ProductModalType } from "./index";
+import {Divider, Form, Input, Modal, Radio} from 'antd';
+import {ProductModalType} from "./index";
 
 
 const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
@@ -59,7 +53,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
                 <Form.Item name="interestRange" label="顯示利息" extra="例如：₹ 3000 - ₹ 10000">
                     <Form.Item name="interestRangeStart" style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}>
                         <Input allowClear /> -
-                    </Form.Item> 
+                    </Form.Item>
                     <Form.Item name="interestRangeEnd" style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}>
                         <Input allowClear />
                     </Form.Item>
