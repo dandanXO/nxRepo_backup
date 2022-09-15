@@ -8,7 +8,7 @@ export interface ProductModalType {
 }
  const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
-  const [productModalVisible, setProductModalVisible] = useState(false);
+  const [productModalVisible, setProductModalVisible] = useState(true);
   useEffect(() => {
     setDomLoaded(true);
   }, []);
