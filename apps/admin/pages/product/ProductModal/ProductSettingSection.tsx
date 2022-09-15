@@ -39,7 +39,7 @@ const ProductSettingSection = () => {
         </Upload>
       </Form.Item>
 
-      <Form.Item name="interestRange" label="顯示額度" style={{ marginBottom: 0}} rules={[{ required: true }]}>
+      <Form.Item name="interestRange" label="顯示額度" style={{ marginBottom: 0}}>
         <Form.Item name="interestRangeStart"  style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}extra="例如：₹ 3000 - ₹ 10000">
           <Input allowClear placeholder={"最低額度"} prefix="₹" />
         </Form.Item>
@@ -49,7 +49,7 @@ const ProductSettingSection = () => {
         </Form.Item>
       </Form.Item>
 
-      <Form.Item name="interestRange" label="顯示利息" extra="至多填寫至小數點後兩位，例如：0.01 - 0.1% / day" rules={[{ required: true }]}>
+      <Form.Item name="interestRange" label="顯示利息" extra="至多填寫至小數點後兩位，例如：0.01 - 0.1% / day">
         <Form.Item name="interestRangeStart" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
           <Input allowClear placeholder={"最低利息"}/>
         </Form.Item>
@@ -60,7 +60,7 @@ const ProductSettingSection = () => {
         <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>天</Form.Item>
       </Form.Item>
 
-      <Form.Item name="interestRange" label="顯示期限" extra="例如：91-365 days" rules={[{ required: true }]}>
+      <Form.Item name="interestRange" label="顯示期限" extra="例如：91-365 days">
         <Form.Item name="interestRangeStart" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
           <Input allowClear placeholder={"最低天數"}/>
         </Form.Item>
