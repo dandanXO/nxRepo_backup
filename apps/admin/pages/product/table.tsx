@@ -36,7 +36,6 @@ interface ProductTable {
 }
 const demoTable = (props: ProductTable) => {
 
-const demoTable = () => {
     const [triggerLogin, { isSuccess: isLoginSuccess }] = useLoginMutation();
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductManageListQuery({
         pollingInterval: 0,
