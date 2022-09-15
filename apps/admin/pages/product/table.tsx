@@ -30,8 +30,11 @@ const columns: ProColumns<GetProductListResponseProduct>[] = [
   { title: '修改時間', dataIndex: 'createTime', hideInSearch: true },
 ];
 
+interface ProductTable {
+  setProductModalVisible
+}
+const demoTable = (props: ProductTable) => {
 
-const demoTable = () => {
   const [triggerLogin, {isSuccess: isLoginSuccess}] = useLoginMutation();
   const [ triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized} ] = useLazyGetProductManageListQuery({
     pollingInterval: 0,
@@ -105,7 +108,7 @@ const demoTable = () => {
         onChange: (page) => console.log(page),
       }}
       dateFormatter="string"
-      headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary">添加</Button>}
+      headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => props.setProductModalVisible(true)}>添加</Button>}
     />
   );
 };
