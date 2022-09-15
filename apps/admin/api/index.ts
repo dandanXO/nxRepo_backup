@@ -45,21 +45,21 @@ export const API = createApi({
         }),
         getAvailableMerchantList: builder.query<GetAvailableMerchantResponse,null>({
             query: () => ({
-                url: `/hs/admin/product-manage/merchant/available`,
+                url: `/product-manage/merchant/available`,
                 // params: {},
                 method: "get",
             }),
         }),
         postProductCreate: builder.mutation<{}, PostProductCreateRequestBody>({
             query: (requestBody: PostProductCreateRequestBody) => ({
-                url: `/hs/admin/product-manage/product`,
+                url: `/product-manage/product`,
                 method: "post",
                 data: requestBody,
             }),
         }),
         putProductEdit: builder.mutation<{}, PutProductProps>({
             query: (requestBody: PutProductProps) => ({
-                url: `/hs/admin/product-manage/product`,
+                url: `/product-manage/product`,
                 method: "put",
                 params: { productId: requestBody.productId },
                 data: requestBody,
