@@ -19,6 +19,8 @@ import ProductSettingSection from "./ProductSettingSection";
 import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import BaseSettingSection from "./BaseSettingSection";
+import React from "react";
+import {UploadSettingSection} from "./UploadSettingSection";
 
 
 const uploadLogoProps: UploadProps = {
@@ -76,6 +78,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
           <ProductSettingSection/>
           <LoanSettingSection/>
           <RateSettingSection/>
+          <UploadSettingSection/>
         </Form>
       </Modal>
     )
