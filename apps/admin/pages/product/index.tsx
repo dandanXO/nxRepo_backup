@@ -39,7 +39,7 @@ export interface ProductModalType {
         }}
       >
         <Table setProductModalVisible={setProductModalVisible}/>
-        {productModalVisible && <ProductModal  setProductModalVisible={setProductModalVisible}/>}
+        {productModalVisible && <ProductModal setProductModalVisible={setProductModalVisible}/>}
       </PageContainer>
 
     </div>
