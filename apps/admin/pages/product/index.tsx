@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import Table from "./table";
 
 import { PageContainer, ProCard } from '@ant-design/pro-components';
-
-export default () => {
+import ProductModal from './ProductModal';
+export interface ProductModalType {
+    setProductModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+ const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
-
+  const [productModalVisible, setProductModalVisible] = useState(false);
   useEffect(() => {
     setDomLoaded(true);
   }, []);
@@ -35,9 +38,11 @@ export default () => {
           },
         }}
       >
-        <Table/>
+        <Table setProductModalVisible={setProductModalVisible}/>
+        {productModalVisible && <ProductModal  setProductModalVisible={setProductModalVisible}/>}
       </PageContainer>
 
     </div>
   ): null;
 };
+export default Product;
