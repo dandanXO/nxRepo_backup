@@ -118,7 +118,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
             <Form.Item name="interestRangeStart"  style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}extra="例如：₹ 3000 - ₹ 10000">
               <Input allowClear placeholder={"最低額度"} prefix="₹" />
             </Form.Item>
-            -
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>-</Form.Item>
             <Form.Item name="interestRangeEnd" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}>
               <Input allowClear placeholder={"最高額度"} prefix="₹" />
             </Form.Item>
@@ -128,29 +128,29 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
             <Form.Item name="interestRangeStart" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
               <Input allowClear placeholder={"最低利息"}/>
             </Form.Item>
-            -
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>-</Form.Item>
             <Form.Item name="interestRangeEnd" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}>
               <Input allowClear placeholder={"最高利息"}/>
             </Form.Item>
-            天
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>天</Form.Item>
           </Form.Item>
 
           <Form.Item name="interestRange" label="顯示期限" extra="例如：91-365 days">
             <Form.Item name="interestRangeStart" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder={"最低天數"}/>
             </Form.Item>
-            -
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>-</Form.Item>
             <Form.Item name="interestRangeEnd" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}>
               <Input allowClear placeholder={"最高天數"}/>
             </Form.Item>
-            天
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>天</Form.Item>
           </Form.Item>
 
           <Form.Item name="amountRange" label="通過率">
             <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder="填寫 1-100 間數字"/>
             </Form.Item>
-            %
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>%</Form.Item>
           </Form.Item>
 
           <Form.Item name="amountRange" label="審核通過時間" extra="例如：5 分鐘">
@@ -185,7 +185,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
             <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder="天數"/>
             </Form.Item>
-            天
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>天</Form.Item>
           </Form.Item>
 
           <Form.Item name="interestRange" label="最高金額上限(選填)">
@@ -200,7 +200,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
             <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder="填寫 1-365 間正整數"/>
             </Form.Item>
-            天後，不得展期
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>天後，不得展期</Form.Item>
           </Form.Item>
 
 
@@ -210,35 +210,35 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
             <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder="填寫 0 - 100 間數字"/>
             </Form.Item>
-            %
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>%</Form.Item>
           </Form.Item>
 
           <Form.Item name="amountRange" label="後置利息">
             <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder="填寫 0 - 100 間數字"/>
             </Form.Item>
-            %
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>%</Form.Item>
           </Form.Item>
 
           <Form.Item name="amountRange" label="日利息" tooltip="以借款金額計">
             <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder="填寫 1-36 間數字"/>
             </Form.Item>
-            %
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>%</Form.Item>
           </Form.Item>
 
           <Form.Item name="amountRange" label="展期利率">
             <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder="填寫 0 - 100 間數字"/>
             </Form.Item>
-            %
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>%</Form.Item>
           </Form.Item>
 
           <Form.Item name="amountRange" label="逾期費率">
             <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
               <Input allowClear placeholder="填寫 0 - 100 間數字"/>
             </Form.Item>
-            %
+            <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>%</Form.Item>
           </Form.Item>
 
           <Divider orientation="left">上架設定</Divider>
