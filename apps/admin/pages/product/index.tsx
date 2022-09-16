@@ -3,12 +3,23 @@ import Table from "./table";
 
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import ProductModal from './ProductModal';
+import ProductEditModal from "./ProductEditModal";
 export interface ProductModalType {
     setProductModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
- const Product=() => {
+
+export interface ProductEditModalVisible {
+  visible: boolean;
+  productID: number;
+}
+
+const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
   const [productModalVisible, setProductModalVisible] = useState(false);
+  const [productEditModalVisible, setProductEditModalVisible] = useState<ProductEditModalVisible>({
+    visible: false,
+    productID: undefined
+  });
   useEffect(() => {
     setDomLoaded(true);
   }, []);
@@ -38,8 +49,9 @@ export interface ProductModalType {
           },
         }}
       >
-        <Table setProductModalVisible={setProductModalVisible}/>
+        <Table setProductModalVisible={setProductModalVisible} setProductEditModalVisible={setProductEditModalVisible}/>
         {productModalVisible && <ProductModal setProductModalVisible={setProductModalVisible}/>}
+        {productEditModalVisible.visible && <ProductEditModal setProductEditModalVisible={setProductEditModalVisible}/>}
       </PageContainer>
 
     </div>

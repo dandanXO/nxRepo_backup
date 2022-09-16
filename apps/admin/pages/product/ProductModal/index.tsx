@@ -35,7 +35,6 @@ const uploadLogoProps: UploadProps = {
 };
 
 
-
 const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
 
     const [form] = Form.useForm();
