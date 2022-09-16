@@ -8,7 +8,7 @@ import React, {useCallback} from "react";
 import {UploadSettingSection} from "./UploadSettingSection";
 import {usePostProductCreateMutation} from "../../../api"
 import {PostProductCreateRequestBody} from "../../../types/postProductCreate"
-import moment from "moment"
+
 const uploadLogoProps: UploadProps = {
   name: 'file',
   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -67,29 +67,31 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
             productName: values.productName,
             adminUsername: values.adminUsername,
             adminPassword: values.adminPassword,
-            logo: values.logo,
-            backgroundImg: values.backgroundImg,
+            // logo: values.logo,
+            // backgroundImg: values.backgroundImg,
+            logo:"https://www.mocky.io/v2/5cc8019d300000980a055e76",
+            backgroundImg:"https://www.mocky.io/v2/5cc8019d300000980a055e76",
             amountRange: `₹ ${values.amountRangeLow} - ₹ ${values.amountRangeHigh}`,
             interestRange: `${values.interestRangeLow} - ${values.interestRangeHigh}% / day`,
             termRange: `${values.termRangeLow}-${values.termRangeHigh} days`,
             approveRate: values.approveRate,
             approveTime: `${values.approveTime} ${values.approveTimeUnit}`,
             csEmail: values.csEmail,
-            csTime: [values.csTime[0].format('HH:mm:ss'), values.csTime[1].format('HH:mm:ss')],
-            loanTerm: values.loanTerm,
-            maxAmount: values.maxAmount,
+            csTime: `${values.csTime[0].format('HH:mm:ss')} ${values.csTime[1].format('HH:mm:ss')}`,
+            loanTerm: Number(values.loanTerm),
+            maxAmount: Number(values.maxAmount),
             extensible: values.extensible,
-            extensibleOverdueDays: values.extensibleOverdueDays,
-            preInterestRate: values.preInterestRate,
-            postInterestRate: values.postInterestRate,
-            dailyRate: values.dailyRate,
-            extensionRate: values.extensionRate,
-            overdueRate: values.overdueRate,
+            extensibleOverdueDays: Number(values.extensibleOverdueDays),
+            preInterestRate: Number(values.preInterestRate),
+            postInterestRate: Number(values.postInterestRate),
+            dailyRate: Number(values.dailyRate),
+            extensionRate: Number(values.extensionRate),
+            overdueRate: Number(values.overdueRate),
             productInterestRatePairs: values.productInterestRatePairs,
             top: values.top,
             tags: values.tags,
             templateType: values.templateType,
-            weight: values.weight,
+            weight: Number(values.weight),
             enabled: values.enabled,
         }
         console.log(creatProductData)
