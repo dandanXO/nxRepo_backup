@@ -86,13 +86,16 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
     return (
       <Modal
         title="添加商戶"
-        visible={true}
+        open={true}
         onCancel={handleCloseModal}
         onOk={form.submit}
         width={'800px'}
         maskClosable={false}
       >
-        <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+        <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} initialValues={{
+          // NOTICE:
+          approveTimeUnit: "mins"
+        }}>
           <BaseSettingSection/>
           <ProductSettingSection/>
           <LoanSettingSection/>
