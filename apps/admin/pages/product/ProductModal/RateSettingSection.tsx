@@ -3,7 +3,7 @@ const { Paragraph, Text } = Typography;
 
 import React from "react";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
-
+import {formItemRule}from "./rules";
 const RateSettingSection = () => {
   return (
     <React.Fragment>
@@ -24,43 +24,43 @@ const RateSettingSection = () => {
       </Paragraph>
 
 
-      <Form.Item name="amountRange" label="前置利息" rules={[{required: true}]}>
-        <Form.Item style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
+      <Form.Item name="preInterestRate" label="前置利息" rules={[{required: true}]}>
+        <Form.Item name="preInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
           <Input allowClear placeholder="填寫 0 - 100 間數字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item name="amountRange" label="後置利息" rules={[{required: true}]}>
-        <Form.Item style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
+      <Form.Item name="postInterestRate" label="後置利息" rules={[{required: true}]}>
+        <Form.Item name="postInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
           <Input allowClear placeholder="填寫 0 - 100 間數字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item name="amountRange" label="日利息" tooltip="以借款金額計" rules={[{required: true}]}>
-        <Form.Item style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
+      <Form.Item name="dailyRate" label="日利息" tooltip="以借款金額計" rules={[{required: true}]}>
+        <Form.Item name="dailyRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
           <Input allowClear placeholder="填寫 1-36 間數字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item name="amountRange" label="展期利率" rules={[{required: true}]}>
-        <Form.Item style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
+      <Form.Item name="extensionRate" label="展期利率" rules={[{required: true}]}>
+        <Form.Item name="extensionRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
           <Input allowClear placeholder="填寫 0 - 100 間數字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item name="amountRange" label="逾期費率" rules={[{required: true}]}>
-        <Form.Item style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
+      <Form.Item name="overdueRate" label="逾期費率" rules={[{required: true}]}>
+        <Form.Item name="overdueRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}>
           <Input allowClear placeholder="填寫 0 - 100 間數字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
 
-      <Form.Item name="amountRange" label="复贷利率" tooltip={
+      <Form.Item name="productInterestRatePairs" label="复贷利率" tooltip={
         <div>
           <span>例如：</span>
           <ul>
@@ -71,29 +71,29 @@ const RateSettingSection = () => {
           </ul>
         </div>
       }>
-        <Form.List name="users">
+        <Form.List name="productInterestRatePairs">
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, ...restField }) => (
                 <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
                   <Form.Item
                     {...restField}
-                    name={[name, 'first']}
-                    rules={[{ required: true, message: 'Missing first name' }]}
+                    name={[name, 'num']}
+                    rules={formItemRule('起始期数')}
                   >
                     <Input placeholder="起始期数" />
                   </Form.Item>
                   <Form.Item
                     {...restField}
-                    name={[name, 'last']}
-                    rules={[{ required: true, message: 'Missing last name' }]}
+                    name={[name, 'preInterest']}
+                    rules={formItemRule('前置利息')}
                   >
                     <Input placeholder="前置利息" suffix={"%"}/>
                   </Form.Item>
                   <Form.Item
                     {...restField}
-                    name={[name, 'last']}
-                    rules={[{ required: true, message: 'Missing last name' }]}
+                    name={[name, 'postInterest']}
+                    rules={formItemRule('后置利息')}
                   >
                     <Input placeholder="后置利息" suffix={"%"}/>
                   </Form.Item>
