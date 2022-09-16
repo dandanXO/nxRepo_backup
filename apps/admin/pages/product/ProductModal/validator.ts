@@ -52,6 +52,7 @@ interface ValidateTag {
   }
 
 const TagValidator = (_, value) => (params: ValidateTag) => {
+  console.log("TagValidator.value", value);
     const scheme = z.string().array()
         .min(1, params.typeErrorMessage)
         .max(3, params.typeErrorMessage);
