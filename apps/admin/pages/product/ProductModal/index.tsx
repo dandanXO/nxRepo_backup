@@ -72,6 +72,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
         onCancel={handleCloseModal}
         onOk={form.submit}
         width={'800px'}
+        maskClosable={false}
       >
         <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
           <BaseSettingSection/>
