@@ -24,7 +24,7 @@ const RateSettingSection = () => {
       </Paragraph>
 
 
-      <Form.Item name="preInterestRate" label="前置利息" required>
+      <Form.Item label="前置利息" required>
         <Form.Item name="preInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
@@ -43,7 +43,7 @@ const RateSettingSection = () => {
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item name="postInterestRate" label="後置利息" required>
+      <Form.Item label="後置利息" required>
         <Form.Item name="postInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
@@ -62,7 +62,7 @@ const RateSettingSection = () => {
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item name="dailyRate" label="日利息" tooltip="以借款金額計" required>
+      <Form.Item label="日利息" tooltip="以借款金額計" required>
         <Form.Item name="dailyRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
@@ -81,7 +81,7 @@ const RateSettingSection = () => {
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item name="extensionRate" label="展期利率" required>
+      <Form.Item label="展期利率" required>
         <Form.Item name="extensionRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
@@ -100,7 +100,7 @@ const RateSettingSection = () => {
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item name="overdueRate" label="逾期費率" required>
+      <Form.Item label="逾期費率" required>
         <Form.Item name="overdueRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
@@ -120,7 +120,7 @@ const RateSettingSection = () => {
       </Form.Item>
 
 
-      <Form.Item name="productInterestRatePairs" label="复贷利率" tooltip={
+      <Form.Item label="复贷利率" tooltip={
         <div>
           <span>例如：</span>
           <ul>

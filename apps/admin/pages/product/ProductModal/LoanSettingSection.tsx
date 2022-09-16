@@ -7,7 +7,7 @@ const LoanSettingSection = () => {
     <React.Fragment>
       <Divider orientation="left">借款設定</Divider>
 
-      <Form.Item name="loanTerm" label="借貸期限" required>
+      <Form.Item label="借貸期限" required>
         <Form.Item name="loanTerm" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
            rules={[
              {
@@ -25,17 +25,17 @@ const LoanSettingSection = () => {
         <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>天</Form.Item>
       </Form.Item>
 
-      <Form.Item name="interestRange" label="最高金額上限(選填)">
-        <Form.Item style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
+      <Form.Item label="最高金額上限(選填)">
+        <Form.Item name="maxAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
           <Input allowClear placeholder={"最高金額上限"} prefix="₹" />
         </Form.Item>
       </Form.Item>
 
       <Form.Item name="extensible" label="支持展期">
-        <Switch checkedChildren="是" unCheckedChildren="否" defaultChecked/>
+        <Switch checkedChildren="是" unCheckedChildren="否"/>
       </Form.Item>
 
-      <Form.Item name="extensibleOverdueDays" label="逾期超過" required>
+      <Form.Item label="逾期超過" required>
         <Form.Item name="extensibleOverdueDays" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
            rules={[
              {
