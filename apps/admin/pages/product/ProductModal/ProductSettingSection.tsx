@@ -1,20 +1,17 @@
 import {Button, Divider, Form, Input, Select, TimePicker, Upload, UploadFile} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
-import React, { useState } from "react";
-import {formItemGroupRule,formItemRule} from "./rules";
+import React  from "react";
 import {EmailValidator, NumberValidator} from "./validator";
 
 const fileList: UploadFile[] = [
-  {
-    uid: '-1',
-    name: 'xxx.png',
-    status: 'done',
-    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-  }
+  // {
+  //   uid: '-1',
+  //   name: 'xxx.png',
+  //   status: 'done',
+  //   url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  //   thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  // }
 ];
-
-
 
 const ProductSettingSection = () => {
   // const [approveTimeUnit, setApproveTimeUnit]=useState("mins")
@@ -26,11 +23,12 @@ const ProductSettingSection = () => {
       <React.Fragment>
           <Divider orientation="left">產品設定</Divider>
 
-          <Form.Item name="logo" label="Logo" rules={[{ required: true }]} >
+          <Form.Item  label="Logo" rules={[{ required: true }]} >
               <Upload
                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                   listType="picture"
-                  defaultFileList={[...fileList]}
+                  // NOTICE: https://segmentfault.com/q/1010000037501973
+                  fileList={[...fileList]}
               >
                   <Button icon={<UploadOutlined />}>點擊上傳圖片</Button>
               </Upload>
@@ -40,7 +38,8 @@ const ProductSettingSection = () => {
               <Upload
                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                   listType="picture"
-                  defaultFileList={[...fileList]}
+                // NOTICE: https://segmentfault.com/q/1010000037501973
+                  fileList={[...fileList]}
               >
                   <Button icon={<UploadOutlined />}>點擊上傳圖片</Button>
               </Upload>
@@ -180,10 +179,10 @@ const ProductSettingSection = () => {
               >
                   <Input allowClear placeholder="填寫數字" />
               </Form.Item>
-              <Form.Item name="approveTimeUnit" style={{ display: 'inline-block', marginBottom: 0 }}>
+              <Form.Item name="approveTimeUnit" style={{ display: 'inline-block', marginBottom: 0 }} >
                   <Select
-                      defaultValue={"mins"}
-                      // onChange={approveTimeUnitChange}
+                    // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
+                    //   defaultValue={"mins"}
                   >
                       <Select.Option value="mins">分鐘</Select.Option>
                       <Select.Option value="hours">小時</Select.Option>

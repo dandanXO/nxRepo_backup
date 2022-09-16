@@ -32,7 +32,7 @@ const LoanSettingSection = () => {
       </Form.Item>
 
       <Form.Item name="extensible" label="支持展期">
-        <Switch checkedChildren="是" unCheckedChildren="否" defaultChecked />
+        <Switch checkedChildren="是" unCheckedChildren="否" defaultChecked/>
       </Form.Item>
 
       <Form.Item name="extensibleOverdueDays" label="逾期超過" required>
