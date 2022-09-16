@@ -33,6 +33,8 @@ export interface PostProductCreateRequestBody {
     logo?: string;
     /** 最高可借金额 */
     maxAmount?: number;
+    /** 商户流水号 */
+    merchantId?: number;
     /** 逾期费率(天) */
     overdueRate?: number;
     /** 后置利率 */
@@ -49,7 +51,7 @@ export interface PostProductCreateRequestBody {
     showQuota?: boolean;
     /** 热门标签 */
     tags?: string;
-    /** 申请详情模版类型 (1: 一般 , 2: 合同金額=到手)  
+    /** 申请详情模版类型 (1: 一般 , 2: 合同金額=到手)
         @enum {number}
     */
     templateType?: 1 | 2;
