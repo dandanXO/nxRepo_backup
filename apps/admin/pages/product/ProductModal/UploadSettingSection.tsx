@@ -1,7 +1,20 @@
-import {Divider, Form, Input, Radio, Switch} from "antd";
-import React from "react";
+import {Divider, Form, Input, Radio, Switch, Select} from "antd";
+const { Option } = Select;
+import React, {useMemo} from "react";
 
 export function UploadSettingSection() {
+  const children = useMemo(() => {
+    const children: React.ReactNode[] = [];
+    for (let i = 10; i < 36; i++) {
+      children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+    }
+    return children;
+  }, []);
+
+
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
   return <>
     <Divider orientation="left">上架設定</Divider>
 
@@ -28,7 +41,9 @@ export function UploadSettingSection() {
         </ul>
       </div>
     }>
-      <Input allowClear placeholder="熱門產品文字標籤"/>
+      <Select mode="tags" style={{ width: '100%' }} placeholder="Tags Mode" onChange={handleChange}>
+        {children}
+      </Select>
     </Form.Item>
 
     <Form.Item name="amountRange" label="借款模板">
