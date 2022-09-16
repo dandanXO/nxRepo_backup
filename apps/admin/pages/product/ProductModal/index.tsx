@@ -1,25 +1,10 @@
-import {
-  Button,
-  Divider,
-  Form,
-  Input,
-  Modal,
-  Radio,
-  Upload,
-  UploadProps,
-  message,
-  TimePicker,
-  Select,
-  UploadFile, Switch
-} from 'antd';
+import {Form, message, Modal, Upload, UploadProps} from 'antd';
 import {ProductModalType} from "../index";
-import {UploadOutlined} from "@ant-design/icons";
-import styled from "styled-components";
 import ProductSettingSection from "./ProductSettingSection";
 import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import BaseSettingSection from "./BaseSettingSection";
-import React,{useCallback} from "react";
+import React, {useCallback} from "react";
 import {UploadSettingSection} from "./UploadSettingSection";
 import {usePostProductCreateMutation} from "../../../api"
 import {PostProductCreateRequestBody} from "../../../types/postProductCreate"
