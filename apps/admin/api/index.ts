@@ -22,6 +22,7 @@ export const API = createApi({
         baseUrl,
     }),
     endpoints: (builder) => ({
+        // NOTE: POST /hs/admin/auth/login
         login: builder.mutation<LoginResponse, LoginRequest>({
             query: (credentials: LoginRequest) => ({
                 url: "/auth/login",
@@ -32,6 +33,15 @@ export const API = createApi({
                 }
             })
         }),
+        // NOTE: GET /hs/admin/product-manage/merchant/available 可用商户
+        getAvailableMerchantList: builder.query<GetAvailableMerchantResponse,null>({
+          query: () => ({
+            url: `/product-manage/merchant/available`,
+            // params: {},
+            method: "get",
+          }),
+        }),
+        // NOTE: GET /hs/admin/product-manage/list 产品管理列表
         getProductManageList: builder.query<
             GetProductListResponse,
             null
@@ -43,13 +53,7 @@ export const API = createApi({
                 method: "get",
             }),
         }),
-        getAvailableMerchantList: builder.query<GetAvailableMerchantResponse,null>({
-            query: () => ({
-                url: `/product-manage/merchant/available`,
-                // params: {},
-                method: "get",
-            }),
-        }),
+        // NOTE: POST /hs/admin/product-manage/product 创建产品
         postProductCreate: builder.mutation<{}, PostProductCreateRequestBody>({
             query: (requestBody: PostProductCreateRequestBody) => ({
                 url: `/product-manage/product`,
@@ -57,6 +61,7 @@ export const API = createApi({
                 data: requestBody,
             }),
         }),
+        // NOTE: PUT /hs/admin/product-manage/product/{productId} 异动产品
         putProductEdit: builder.mutation<{}, PutProductProps>({
             query: (requestBody: PutProductProps) => ({
                 url: `/product-manage/product`,
