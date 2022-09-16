@@ -30,7 +30,7 @@ const ProductSettingSection = () => {
                   // NOTICE: https://segmentfault.com/q/1010000037501973
                   fileList={[...fileList]}
               >
-                  <Button icon={<UploadOutlined />}>點擊上傳圖片</Button>
+                  <Button icon={<UploadOutlined />}>点击上传图片</Button>
               </Upload>
           </Form.Item>
 
@@ -41,7 +41,7 @@ const ProductSettingSection = () => {
                 // NOTICE: https://segmentfault.com/q/1010000037501973
                   fileList={[...fileList]}
               >
-                  <Button icon={<UploadOutlined />}>點擊上傳圖片</Button>
+                  <Button icon={<UploadOutlined />}>点击上传图片</Button>
               </Upload>
           </Form.Item>
 
