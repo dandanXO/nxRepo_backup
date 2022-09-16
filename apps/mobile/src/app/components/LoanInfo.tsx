@@ -97,7 +97,7 @@ const LoanInfo = (props: LoanInfoProps) => {
             />
             <div className="totalTitle">Total Due</div>
             <div className="totalText">₹ {totalDueAmount}</div>
-            {status !== "PAY_OFF" && (
+            {status === "OVERDUE" && (
                 <div className={"errorText"}>
                     {`Your payment is now N days overdue.
                   We kindly request that you immediately satisfy the
