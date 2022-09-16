@@ -31,10 +31,11 @@ const LoanDetailStyled = styled.div`
         padding: 0 14px;
     }
     .extendButton {
-        flex-basis: 30%;
+        flex: 1 0 auto;
+        margin-right: 12px;
     }
     .repayButton {
-        flex-basis: 65%;
+        flex: 3 0 auto;
     }
 `;
 
@@ -49,6 +50,7 @@ type LoanDetailProps = Pick<
     | "applyDate"
     | "dueDate"
     | "bankCardNo"
+    | "extendable"
 > & {
     setShowExtendModal?: React.Dispatch<React.SetStateAction<boolean>>;
     setShowRepaymentModal?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -72,8 +74,7 @@ const renderDetailContent = (props?: GetLoanDetailChargeFeeDetail) => {
 };
 
 const LoanDetail = (props: LoanDetailProps) => {
-    const { chargeFeeDetail, setShowExtendModal, setShowRepaymentModal } =
-        props;
+    const { chargeFeeDetail, extendable, setShowExtendModal, setShowRepaymentModal } = props;
     return (
         <LoanDetailStyled>
             <Card isHot={false}>
@@ -105,19 +106,17 @@ const LoanDetail = (props: LoanDetailProps) => {
                 </p>
             </div>
             <div className={"payButtons"}>
+                {
+                    extendable !== undefined && extendable && <Button
+                        onClick={() => setShowExtendModal && setShowExtendModal(true)}
+                        className={"extendButton"}
+                        styleType="secondary"
+                    >
+                        Extend
+                    </Button>
+                }
                 <Button
-                    onClick={() =>
-                        setShowExtendModal && setShowExtendModal(true)
-                    }
-                    className={"extendButton"}
-                    styleType="secondary"
-                >
-                    Extend
-                </Button>
-                <Button
-                    onClick={() =>
-                        setShowRepaymentModal && setShowRepaymentModal(true)
-                    }
+                    onClick={() => setShowRepaymentModal && setShowRepaymentModal(true)}
                     className={"repayButton"}
                     styleType="primary"
                 >
