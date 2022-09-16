@@ -17,11 +17,11 @@ const fileList: UploadFile[] = [
 
 
 const ProductSettingSection = () => {
-
-    const [approveTimeUnit,setApproveTimeUnit]=useState("mins")
-    const approveTimeUnitChange=(value)=>{
-        setApproveTimeUnit(value)
-    }
+  // const [approveTimeUnit, setApproveTimeUnit]=useState("mins")
+  //
+  // const approveTimeUnitChange=(value)=>{
+  //     setApproveTimeUnit(value)
+  // }
   return (
       <React.Fragment>
           <Divider orientation="left">產品設定</Divider>
@@ -182,11 +182,8 @@ const ProductSettingSection = () => {
               </Form.Item>
               <Form.Item name="approveTimeUnit" style={{ display: 'inline-block', marginBottom: 0 }}>
                   <Select
-                      //   placeholder="分鐘"
-                      onChange={approveTimeUnitChange}
-                      //   allowClear
-                      value={"mins"}
-                      defaultValue={'hours'}
+                      defaultValue={"mins"}
+                      // onChange={approveTimeUnitChange}
                   >
                       <Select.Option value="mins">分鐘</Select.Option>
                       <Select.Option value="hours">小時</Select.Option>
