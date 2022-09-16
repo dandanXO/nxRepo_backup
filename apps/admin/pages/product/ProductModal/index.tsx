@@ -98,7 +98,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
           extensible: false,
           top: false,
           enabled: true,
-          templateType: 2,
+          templateType: 1,
         }}>
           <BaseSettingSection/>
           <ProductSettingSection/>
