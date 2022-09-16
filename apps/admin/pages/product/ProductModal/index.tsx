@@ -8,7 +8,7 @@ import React, {useCallback} from "react";
 import {UploadSettingSection} from "./UploadSettingSection";
 import {usePostProductCreateMutation} from "../../../api"
 import {PostProductCreateRequestBody} from "../../../types/postProductCreate"
-
+import moment from "moment"
 const uploadLogoProps: UploadProps = {
   name: 'file',
   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -58,20 +58,42 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
         }, []);
 
     const handlePostProductCreate = useCallback((values) => {
-        postProductCreateRequest({ ...values });
+        postProductCreateRequest(values);
     }, []);
 
     const onFinish = (values: any) => {
         console.log(values)
         const creatProductData = {
-            ...values,
+            productName: values.productName,
+            adminUsername: values.adminUsername,
+            adminPassword: values.adminPassword,
+            logo: values.logo,
+            backgroundImg: values.backgroundImg,
             amountRange: `₹ ${values.amountRangeLow} - ₹ ${values.amountRangeHigh}`,
             interestRange: `${values.interestRangeLow} - ${values.interestRangeHigh}% / day`,
             termRange: `${values.termRangeLow}-${values.termRangeHigh} days`,
-            approveTime: `${values.approveTime} ${values.approveTimeUnit}`
+            approveRate: values.approveRate,
+            approveTime: `${values.approveTime} ${values.approveTimeUnit}`,
+            csEmail: values.csEmail,
+            csTime: [values.csTime[0].format('HH:mm:ss'), values.csTime[1].format('HH:mm:ss')],
+            loanTerm: values.loanTerm,
+            maxAmount: values.maxAmount,
+            extensible: values.extensible,
+            extensibleOverdueDays: values.extensibleOverdueDays,
+            preInterestRate: values.preInterestRate,
+            postInterestRate: values.postInterestRate,
+            dailyRate: values.dailyRate,
+            extensionRate: values.extensionRate,
+            overdueRate: values.overdueRate,
+            productInterestRatePairs: values.productInterestRatePairs,
+            top: values.top,
+            tags: values.tags,
+            templateType: values.templateType,
+            weight: values.weight,
+            enabled: values.enabled,
         }
         console.log(creatProductData)
-        // handlePostProductCreate(creatProductData);
+        handlePostProductCreate(creatProductData);
     };
 
     const layout = {
