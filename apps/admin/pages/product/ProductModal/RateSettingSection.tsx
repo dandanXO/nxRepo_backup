@@ -3,7 +3,6 @@ const { Paragraph, Text } = Typography;
 
 import React from "react";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
-import {formItemRule}from "./rules";
 import {NumberValidator} from "./validator";
 const RateSettingSection = () => {
   return (
