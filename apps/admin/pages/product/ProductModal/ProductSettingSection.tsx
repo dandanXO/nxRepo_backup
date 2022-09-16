@@ -90,7 +90,7 @@ const ProductSettingSection = () => {
                      },
                    ]}
               >
-                  <Input allowClear placeholder={"最低利息"} />
+                  <Input allowClear placeholder={"最低利息"} suffix={"%"}/>
               </Form.Item>
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>-</Form.Item>
               <Form.Item name="interestRangeHigh" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
@@ -165,7 +165,7 @@ const ProductSettingSection = () => {
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
           </Form.Item>
 
-          <Form.Item label="審核通過時間" extra="例如：5 分鐘" required>
+          <Form.Item label="審核通過時間" extra="例如：5 分钟" required>
               <Form.Item name="approveTime" style={{ display: 'inline-block', width: '180px', marginBottom: 0 }}
                  rules={[
                    {
@@ -184,8 +184,8 @@ const ProductSettingSection = () => {
                     // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
                     //   defaultValue={"mins"}
                   >
-                      <Select.Option value="mins">分鐘</Select.Option>
-                      <Select.Option value="hours">小時</Select.Option>
+                      <Select.Option value="mins">分钟</Select.Option>
+                      <Select.Option value="hours">小时</Select.Option>
                       <Select.Option value="days">天</Select.Option>
                   </Select>
               </Form.Item>
