@@ -19,9 +19,10 @@ import ProductSettingSection from "./ProductSettingSection";
 import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import BaseSettingSection from "./BaseSettingSection";
-import React from "react";
+import React,{useCallback} from "react";
 import {UploadSettingSection} from "./UploadSettingSection";
-
+import {usePostProductCreateMutation} from "../../../api"
+import {PostProductCreateRequestBody} from "../../../types/postProductCreate"
 
 const uploadLogoProps: UploadProps = {
   name: 'file',
@@ -53,9 +54,41 @@ const uploadLogoProps: UploadProps = {
 const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
 
     const [form] = Form.useForm();
+
+    const [postProductCreate, { isLoading }] = usePostProductCreateMutation();
+
+    const postProductCreateRequest = useCallback(
+        (props: PostProductCreateRequestBody) => {
+            postProductCreate(props)
+                .unwrap()
+                .then((data: PostProductCreateRequestBody) => {
+                    // do nothing.
+                })
+                .catch(({ error }) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    // do nothing.
+                });
+        }, []);
+
+    const handlePostProductCreate = useCallback((values) => {
+        postProductCreateRequest({ ...values });
+    }, []);
+
     const onFinish = (values: any) => {
         console.log(values)
+        const creatProductData = {
+            ...values,
+            amountRange: `₹ ${values.amountRangeLow} - ₹ ${values.amountRangeHigh}`,
+            interestRange: `${values.interestRangeLow} - ${values.interestRangeHight}% / day`,
+            termRange: `${values.termRangeLow}-${values.termRangeHigh} days`,
+            approveTime: `${values.approveTime} ${values.approveTimeUnit}`
+        }
+        console.log(creatProductData)
+        // handlePostProductCreate(creatProductData);
     };
+
     const layout = {
         labelCol: { span: 5 },
         wrapperCol: { span: 18 },

@@ -18,11 +18,11 @@ export function UploadSettingSection() {
   return <>
     <Divider orientation="left">上架設定</Divider>
 
-    <Form.Item name="interestRange" label="產品置頂">
+    <Form.Item name="top" label="產品置頂">
       <Switch checkedChildren="是" unCheckedChildren="否"/>
     </Form.Item>
 
-    <Form.Item name="amountRange" label="熱門產品標籤" extra="至少1筆，至多3筆" style={{marginBottom: 0}}
+    <Form.Item name="tags" label="熱門產品標籤" extra="至少1筆，至多3筆" style={{marginBottom: 0}}
                rules={[{required: true}]} tooltip={
       <div>
         <span>參考文字：</span>
@@ -46,7 +46,7 @@ export function UploadSettingSection() {
       </Select>
     </Form.Item>
 
-    <Form.Item name="amountRange" label="借款模板">
+    <Form.Item name="templateType" label="借款模板">
       <Radio.Group defaultValue={1}>
         <Radio value={1}>應還 = 合同金額</Radio>
         <Radio value={2}>到手 = 合同金額</Radio>
@@ -54,7 +54,7 @@ export function UploadSettingSection() {
     </Form.Item>
 
 
-    <Form.Item name="amountRange" label="權重">
+    <Form.Item name="weight" label="權重">
       <Input allowClear placeholder="填寫 1-99 間的數字"/>
     </Form.Item>
 

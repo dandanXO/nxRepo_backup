@@ -1,4 +1,7 @@
-export interface GetAvailableMerchantResponse {
+export interface GetAvailableMerchantResponse extends Array<GetAvailableMerchantResponseList> {
+    data: GetAvailableMerchantResponseList[];
+  }
+export interface GetAvailableMerchantResponseList {
     /** 商户号 */
     mchNo?: string;
 
