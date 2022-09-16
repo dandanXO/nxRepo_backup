@@ -23,7 +23,7 @@ const ProductSettingSection = () => {
       <React.Fragment>
           <Divider orientation="left">產品設定</Divider>
 
-          <Form.Item  label="Logo" rules={[{ required: true }]} >
+          <Form.Item  label="Logo" rules={[{ required: true }]} required>
               <Upload
                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                   listType="picture"
