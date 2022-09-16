@@ -66,7 +66,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
         const creatProductData = {
             ...values,
             amountRange: `₹ ${values.amountRangeLow} - ₹ ${values.amountRangeHigh}`,
-            interestRange: `${values.interestRangeLow} - ${values.interestRangeHight}% / day`,
+            interestRange: `${values.interestRangeLow} - ${values.interestRangeHigh}% / day`,
             termRange: `${values.termRangeLow}-${values.termRangeHigh} days`,
             approveTime: `${values.approveTime} ${values.approveTimeUnit}`
         }
