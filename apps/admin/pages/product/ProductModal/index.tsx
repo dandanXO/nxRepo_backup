@@ -85,7 +85,7 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
 
     return (
       <Modal
-        title="添加商戶"
+        title="添加产品"
         open={true}
         onCancel={handleCloseModal}
         onOk={form.submit}
