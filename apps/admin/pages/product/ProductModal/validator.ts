@@ -44,4 +44,27 @@ const EmailValidator = (_, value) => (params: ValidateEmail) => {
     return Promise.resolve()
   }
 }
-export {NumberValidator, EmailValidator}
+
+interface ValidateTag {
+    typeErrorMessage?: string;
+    required?: boolean,
+    message?: string;
+  }
+
+const TagValidator = (_, value) => (params: ValidateTag) => {
+    const scheme = z.string().array()
+        .min(1, params.typeErrorMessage)
+        .max(3, params.typeErrorMessage);
+
+    const result = scheme.safeParse(value);
+    if (!result.success) {
+        const firstError = result.error.format();
+        const errorMessage = value === undefined ? params.message : firstError._errors[0];
+        return Promise.reject(errorMessage);
+    } else {
+        return Promise.resolve()
+    }
+}
+
+
+export {NumberValidator, EmailValidator,TagValidator}
