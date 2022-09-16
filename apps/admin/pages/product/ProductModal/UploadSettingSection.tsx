@@ -18,9 +18,9 @@ export function UploadSettingSection() {
   return <>
     <Divider orientation="left">上架設定</Divider>
 
-    <Form.Item name="top" label="產品置頂">
-      <Switch checkedChildren="是" unCheckedChildren="否"/>
-    </Form.Item>
+    {/*<Form.Item name="top" label="產品置頂">*/}
+    {/*  <Switch checkedChildren="是" unCheckedChildren="否"/>*/}
+    {/*</Form.Item>*/}
 
     <Form.Item name="tags" label="熱門產品標籤" extra="至少1筆，至多3筆" style={{marginBottom: 0}}
                rules={[{required: true}]} tooltip={
@@ -47,7 +47,7 @@ export function UploadSettingSection() {
     </Form.Item>
 
     <Form.Item name="templateType" label="借款模板">
-      <Radio.Group defaultValue={1}>
+      <Radio.Group>
         <Radio value={1}>應還 = 合同金額</Radio>
         <Radio value={2}>到手 = 合同金額</Radio>
       </Radio.Group>
@@ -58,7 +58,7 @@ export function UploadSettingSection() {
       <Input allowClear placeholder="填寫 1-99 間的數字"/>
     </Form.Item>
 
-    <Form.Item name="enabled" label="狀態" initialValue={"true"}>
+    <Form.Item name="enabled" label="狀態">
       <Switch checkedChildren="上架" unCheckedChildren="下架" defaultChecked/>
     </Form.Item>
   </>;

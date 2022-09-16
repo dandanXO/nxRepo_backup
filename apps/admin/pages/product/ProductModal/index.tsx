@@ -94,7 +94,11 @@ const ProductModal = ({ setProductModalVisible }: ProductModalType) => {
       >
         <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} initialValues={{
           // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
-          approveTimeUnit: "mins"
+          approveTimeUnit: "mins",
+          extensible: false,
+          top: false,
+          enabled: true,
+          templateType: 2,
         }}>
           <BaseSettingSection/>
           <ProductSettingSection/>
