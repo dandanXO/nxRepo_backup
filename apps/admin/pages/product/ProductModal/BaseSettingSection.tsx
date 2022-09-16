@@ -9,9 +9,9 @@ const BaseSettingSection = () => {
 
   return (
     <React.Fragment>
-          <Form.Item name="name" label="商戶ID" rules={[{ required: true }]} >
+          <Form.Item name="merchantId" label="商戶名" rules={[{ required: true }]} >
               <Select
-                  placeholder="商戶ID"
+                  placeholder="商戶名"
                   // onChange={this.onGenderChange}
                   allowClear
               >
