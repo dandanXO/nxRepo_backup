@@ -4,7 +4,7 @@ import { Select } from 'antd'
 import { useGetAvailableMerchantListQuery } from '../../../api/index';
 const { Option } = Select
 const BaseSettingSection = () => {
-    
+
  const { currentData: merchantList=[], isLoading, isFetching } = useGetAvailableMerchantListQuery(null);
 
   return (
@@ -24,7 +24,7 @@ const BaseSettingSection = () => {
       </Form.Item>
 
       <Form.Item name="adminUsername" label="用戶名">
-        <Input allowClear/>
+        <Input allowClear disabled/>
       </Form.Item>
 
       <Form.Item name="adminPassword" label="登入密碼" rules={[{ required: true }]}>
