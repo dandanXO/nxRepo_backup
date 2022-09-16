@@ -1,6 +1,6 @@
 import {Button, Divider, Form, Input, Select, TimePicker, Upload, UploadFile} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
-import React from "react";
+import React, { useState } from "react";
 import {formItemGroupRule,formItemRule} from "./rules";
 import {EmailValidator, NumberValidator} from "./validator";
 
@@ -17,11 +17,16 @@ const fileList: UploadFile[] = [
 
 
 const ProductSettingSection = () => {
+
+    const [approveTimeUnit,setApproveTimeUnit]=useState("mins")
+    const approveTimeUnitChange=(value)=>{
+        setApproveTimeUnit(value)
+    }
   return (
       <React.Fragment>
           <Divider orientation="left">產品設定</Divider>
 
-          <Form.Item label="Logo" rules={[{ required: true }]} >
+          <Form.Item name="logo" label="Logo" rules={[{ required: true }]} >
               <Upload
                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                   listType="picture"
@@ -41,7 +46,7 @@ const ProductSettingSection = () => {
               </Upload>
           </Form.Item>
 
-          <Form.Item name="amountRange" label="顯示額度" style={{ marginBottom: 0 }}>
+          <Form.Item  label="顯示額度" style={{ marginBottom: 0 }} required >
               <Form.Item name="amountRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }} extra="例如：₹ 3000 - ₹ 10000"
                    rules={[
                      {
@@ -72,7 +77,7 @@ const ProductSettingSection = () => {
               </Form.Item>
           </Form.Item>
 
-          <Form.Item name="interestRange" label="顯示利息" extra="至多填寫至小數點後兩位，例如：0.01 - 0.1% / day">
+          <Form.Item label="顯示利息" extra="至多填寫至小數點後兩位，例如：0.01 - 0.1% / day" required>
               <Form.Item name="interestRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                    rules={[
                      {
@@ -107,7 +112,7 @@ const ProductSettingSection = () => {
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
           </Form.Item>
 
-          <Form.Item name="termRange" label="顯示期限" extra="例如：91-365 days">
+          <Form.Item label="顯示期限" extra="例如：91-365 days" required>
               <Form.Item name="termRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                          rules={[
                            {
@@ -142,7 +147,7 @@ const ProductSettingSection = () => {
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
           </Form.Item>
 
-          <Form.Item name="approveRate" label="通過率" rules={formItemGroupRule}>
+          <Form.Item label="通過率" required>
               <Form.Item name="approveRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                  rules={[
                    {
@@ -161,7 +166,7 @@ const ProductSettingSection = () => {
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
           </Form.Item>
 
-          <Form.Item name="approveTime" label="審核通過時間" extra="例如：5 分鐘">
+          <Form.Item label="審核通過時間" extra="例如：5 分鐘" required>
               <Form.Item name="approveTime" style={{ display: 'inline-block', width: '180px', marginBottom: 0 }}
                  rules={[
                    {
@@ -175,11 +180,13 @@ const ProductSettingSection = () => {
               >
                   <Input allowClear placeholder="填寫數字" />
               </Form.Item>
-              <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>
+              <Form.Item name="approveTimeUnit" style={{ display: 'inline-block', marginBottom: 0 }}>
                   <Select
-                      placeholder="分鐘"
-                      // onChange={this.onGenderChange}
-                      allowClear
+                      //   placeholder="分鐘"
+                      onChange={approveTimeUnitChange}
+                      //   allowClear
+                      value={"mins"}
+                      defaultValue={'hours'}
                   >
                       <Select.Option value="mins">分鐘</Select.Option>
                       <Select.Option value="hours">小時</Select.Option>
@@ -197,6 +204,7 @@ const ProductSettingSection = () => {
                  })
                },
              ]}
+             required
           >
               <Input allowClear placeholder="mail@mail.com" />
           </Form.Item>
