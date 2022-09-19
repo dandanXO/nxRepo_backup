@@ -134,8 +134,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
   }, []);
 
   const onFinish = (values: any) => {
+    const productInterestRatePairs = values.productInterestRatePairs.map(i => ({ num: Number(i.num), postInterest: Number(i.postInterest), preInterest: Number(i.preInterest) }))
     console.log(values)
     const creatProductData: PostProductCreateRequestBody = {
+      merchantId: Number(values.merchantId),
       productName: values.productName,
       adminUsername: values.adminUsername,
       adminPassword: values.adminPassword,
@@ -159,7 +161,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       dailyRate: Number(values.dailyRate),
       extensionRate: Number(values.extensionRate),
       overdueRate: Number(values.overdueRate),
-      productInterestRatePairs: values.productInterestRatePairs,
+      productInterestRatePairs: productInterestRatePairs,
       top: values.top,
       tags: values.tags,
       templateType: values.templateType,
