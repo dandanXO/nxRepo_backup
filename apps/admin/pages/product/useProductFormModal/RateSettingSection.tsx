@@ -3,7 +3,7 @@ const { Paragraph, Text } = Typography;
 
 import React from "react";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
-import {NumberValidator} from "../../ProductModal/validator";
+import {NumberValidator} from "./validator";
 const RateSettingSection = () => {
   return (
     <React.Fragment>

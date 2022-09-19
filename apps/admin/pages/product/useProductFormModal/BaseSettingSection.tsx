@@ -1,12 +1,13 @@
 import { Form, Input } from "antd";
 import React from "react";
 import { Select } from 'antd'
-import { useGetAvailableMerchantListQuery } from '../../../../api';
+import {GetAvailableMerchantResponse} from "../../../types/getAvailbaleMerchant";
 const { Option } = Select
-const BaseSettingSection = () => {
 
- const { currentData: merchantList=[], isLoading, isFetching } = useGetAvailableMerchantListQuery(null);
-
+interface BaseSettingSectionProps {
+  merchantList: GetAvailableMerchantResponse;
+}
+const BaseSettingSection = (props: BaseSettingSectionProps) => {
   return (
     <React.Fragment>
           <Form.Item name="merchantId" label="商戶名" rules={[{ required: true }]} >
@@ -15,7 +16,7 @@ const BaseSettingSection = () => {
                   // onChange={this.onGenderChange}
                   allowClear
               >
-                  {merchantList.map((i) => <Option key={i.merchantId} value={i.merchantId}>{i.name}</Option>)}
+                  {props.merchantList.map((i) => <Option key={i.merchantId} value={i.merchantId}>{i.name}</Option>)}
               </Select>
           </Form.Item>
 

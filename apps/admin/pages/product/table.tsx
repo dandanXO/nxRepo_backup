@@ -5,11 +5,10 @@ import { Button, Space } from 'antd';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import { useLazyGetProductManageListQuery, useLoginMutation } from "../../api";
 import { GetProductListResponseProduct } from "../../types/getProductList";
-import {ProductEditModalVisible} from "./index";
+import {ProductFormModal} from "./useProductFormModal";
 
 interface ProductTable {
-  setProductModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setProductEditModalVisible: React.Dispatch<React.SetStateAction<ProductEditModalVisible>>;
+  setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
 }
 const demoTable = (props: ProductTable) => {
 
@@ -19,7 +18,6 @@ const demoTable = (props: ProductTable) => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-
 
     // const { currentData, refetch} = useGetProductManageListQuery(null, {
     //   skip: false,
@@ -64,9 +62,10 @@ const demoTable = (props: ProductTable) => {
           valueType: 'option',
           key: 'option',
           render: (text, record, _, action) => [
-            <a key="editable" onClick={() => props.setProductEditModalVisible({
-              visible: true,
-              productID: record.productId,
+            <a key="editable" onClick={() => props.setProductModalData({
+              show: true,
+              isEdit: true,
+              productId: record.productId,
             })}>修改</a>,
           ],
         },
@@ -98,9 +97,9 @@ const demoTable = (props: ProductTable) => {
             columnsState={{
                 persistenceKey: 'pro-table-singe-demos',
                 persistenceType: 'localStorage',
-                onChange(value) {
-                    console.log('value: ', value);
-                },
+                // onChange(value) {
+                //     console.log('value: ', value);
+                // },
             }}
             rowKey="id"
             search={{
@@ -153,7 +152,10 @@ const demoTable = (props: ProductTable) => {
                 onChange: (page) => console.log(page),
             }}
             dateFormatter="string"
-            headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => props.setProductModalVisible(true)}>添加</Button>}
+            headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => props.setProductModalData({
+              isEdit: false,
+              show: true,
+            })}>添加</Button>}
         />
     );
 };
