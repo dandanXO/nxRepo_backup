@@ -2,24 +2,16 @@ import { useState, useEffect } from 'react';
 import Table from "./table";
 
 import { PageContainer, ProCard } from '@ant-design/pro-components';
-import ProductModal from './ProductModal';
-import ProductEditModal from "./ProductEditModal";
-export interface ProductModalType {
-    setProductModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface ProductEditModalVisible {
-  visible: boolean;
-  productID: number;
-}
+import {useProductFormModal} from "./useProductFormModal";
 
 const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
-  const [productModalVisible, setProductModalVisible] = useState(false);
-  const [productEditModalVisible, setProductEditModalVisible] = useState<ProductEditModalVisible>({
-    visible: false,
-    productID: undefined
+
+  const {ProductFormModal, productModalData, setProductModalData} = useProductFormModal({
+    show: false,
+    isEdit: false,
   });
+
   useEffect(() => {
     setDomLoaded(true);
   }, []);
@@ -49,9 +41,8 @@ const Product=() => {
           },
         }}
       >
-        <Table setProductModalVisible={setProductModalVisible} setProductEditModalVisible={setProductEditModalVisible}/>
-        {productModalVisible && <ProductModal setProductModalVisible={setProductModalVisible}/>}
-        {productEditModalVisible.visible && <ProductEditModal setProductEditModalVisible={setProductEditModalVisible}/>}
+        <Table setProductModalData={setProductModalData}/>
+        {productModalData.show && <ProductFormModal/>}
       </PageContainer>
 
     </div>

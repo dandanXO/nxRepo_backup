@@ -3,6 +3,8 @@ export interface GetProductListResponse extends Array<GetProductListResponseProd
 }
 
 export interface GetProductListResponseProduct {
+    /** 后台管理者账号*/
+     adminUsername?: string;
     /** 广告放款额度 */
     amountRange?: string;
     /** 广告放款通过率 */
@@ -31,6 +33,8 @@ export interface GetProductListResponseProduct {
     loanTerm?: number;
     /** 产品logo url */
     logo?: string;
+    /** 商户流水号 */
+    merchantId?: string;
     /** 最高可借金额 */
     maxAmount?: number;
     /** 逾期费率(天) */

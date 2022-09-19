@@ -4,6 +4,7 @@ import { GetProductListResponse } from "../types/getProductList";
 import { GetAvailableMerchantResponse } from "../types/getAvailbaleMerchant";
 import { PostProductCreateRequestBody } from "../types/postProductCreate";
 import { PutProductProps } from "../types/putProduct"
+import {GetProductRequestQuery, GetProductQueryResponse} from "../types/getProduct";
 // const baseUrl = "/api/v2";
 const baseUrl = "/hs/admin";
 
@@ -61,6 +62,13 @@ export const API = createApi({
                 data: requestBody,
             }),
         }),
+        // NOTE: GET /hs/admin/product-manage/product 產品詳情
+        getProduct: builder.query<GetProductQueryResponse, GetProductRequestQuery>({
+          query: (arg: GetProductRequestQuery) => ({
+            url: `/product-manage/product?productId=${arg.productId}`,
+            method: 'get',
+          })
+        }),
         // NOTE: PUT /hs/admin/product-manage/product/{productId} 异动产品
         putProductEdit: builder.mutation<{}, PutProductProps>({
             query: (requestBody: PutProductProps) => ({
@@ -79,6 +87,8 @@ export const {
   usePrefetch,
   useGetAvailableMerchantListQuery,
   usePostProductCreateMutation,
+  useGetProductQuery,
+  useLazyGetProductQuery,
   usePutProductEditMutation
 
 } = API;
