@@ -82,7 +82,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
       merchantId: currentMerchant?.name,
       productName: productFormData.productName,
       adminUsername: productFormData.adminUsername,
-      adminPassword: "****************",
+      // NOTICE: 後端不回傳真正密碼
+      adminPassword: null,
       // logo: productFormData.logo,
       // backgroundImg: productFormData.backgroundImg,
       amountRangeLow: productFormData.amountRange.split("-")[0],
@@ -205,8 +206,4 @@ export const useProductFormModal = (props: ProductFormModal) => {
   }, [productModalData.show, productModalData.isEdit, productModalData.productId])
 
   return { ProductFormModal, productModalData, setProductModalData }
-
-
-
-  // return {productModalVisible, setProductModalVisible}
 }
