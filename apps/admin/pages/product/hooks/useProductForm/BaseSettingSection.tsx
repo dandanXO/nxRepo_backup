@@ -1,7 +1,7 @@
 import { Form, Input } from "antd";
 import React from "react";
 import { Select } from 'antd'
-import { useGetAvailableMerchantListQuery } from '../../../api/index';
+import { useGetAvailableMerchantListQuery } from '../../../../api';
 const { Option } = Select
 const BaseSettingSection = () => {
 
