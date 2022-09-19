@@ -1,8 +1,8 @@
-import BaseSettingSection from "./BaseSettingSection";
-import ProductSettingSection from "./ProductSettingSection";
-import LoanSettingSection from "./LoanSettingSection";
-import RateSettingSection from "./RateSettingSection";
-import {UploadSettingSection} from "./UploadSettingSection";
+import BaseSettingSection from "./components/BaseSettingSection";
+import ProductSettingSection from "./components/ProductSettingSection";
+import LoanSettingSection from "./components/LoanSettingSection";
+import RateSettingSection from "./components/RateSettingSection";
+import {UploadSettingSection} from "./components/UploadSettingSection";
 import {Form, message, Modal, Upload, UploadProps} from "antd";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {
