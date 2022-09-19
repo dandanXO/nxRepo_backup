@@ -1,7 +1,7 @@
 import {Button, Divider, Form, Input, Select, TimePicker, Upload, UploadFile} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
 import React  from "react";
-import {EmailValidator, NumberValidator} from "./validator";
+import {EmailValidator, NumberValidator} from "../../ProductModal/validator";
 
 const fileList: UploadFile[] = [
 //   {
