@@ -55,19 +55,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     productId: props.productId,
   });
 
-  // useEffect(() => {
-  //   setProductModalData({
-  //     show: props.show,
-  //     isEdit: props.isEdit,
-  //     productId: props.productId,
-  //   })
-  // }, [props.show, props.isEdit, props.productId])
-
   const [form] = Form.useForm();
-  const layout = {
-    labelCol: { span: 5 },
-    wrapperCol: { span: 18 },
-  };
   const [triggerGetList, { currentData: productFormData, isLoading: isGetProductLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductQuery({
 
   })
@@ -179,7 +167,12 @@ export const useProductFormModal = (props: ProductFormModal) => {
     form.resetFields()
   }
   const ProductFormModal = useMemo(() => {
-    const ModalWrapper = () => {
+    const ModalWrapper = () =>
+    {
+      const layout = {
+        labelCol: { span: 5 },
+        wrapperCol: { span: 18 },
+      };
       return (
         <ErrorBoundary errorComponent={<div>Something went wrong.</div>}>
           <Modal
