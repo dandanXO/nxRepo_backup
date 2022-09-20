@@ -152,10 +152,12 @@ const demoTable = (props: ProductTable) => {
                 onChange: (page) => console.log(page),
             }}
             dateFormatter="string"
-            headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => props.setProductModalData({
+            headerTitle={
+              <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => props.setProductModalData({
               isEdit: false,
               show: true,
-            })}>添加</Button>}
+              })}>添加</Button>
+            }
         />
     );
 };
