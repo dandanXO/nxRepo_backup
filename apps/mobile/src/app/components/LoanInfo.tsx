@@ -106,7 +106,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                 </div>
             )}
             <Card isHot={false}>
-                <div className={"loanInfo-Card-Title"}>Gernal</div>
+                <div className={"loanInfo-Card-Title"}>General</div>
                 <div className={"loanInfo-Card-list"}>
                     <ListItem
                         title={"State"}
