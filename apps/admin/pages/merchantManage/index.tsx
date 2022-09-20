@@ -4,149 +4,169 @@ import { ProForm, ProFormText } from '@ant-design/pro-components';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
-import { Button, Dropdown, Menu, Modal, Form, Input, Radio } from 'antd';
+import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Spin,Space } from 'antd';
+import {useLazyGetMerchantManageListQuery ,usePostMerchantCreateMutation,usePutMerchantEditMutation } from "../../api";
+import { GetMerchantListResponseData } from "../../types/getMerchantList";
 
-
-type MerchantListItme = {
-    merchantId?: number;
-    mchNo?: string;
-    name?: string;
-    contact?: string;
-    enabled?: boolean;
-    email?: string;
-    merchantCreateTime?: string;
-    merchantUpdateTime?: string;
-}
 
 const MerchantManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
-    const defaultData: MerchantListItme[] = [
-        {
-            merchantId: 1,
-            mchNo: '1',
-            name: 'name1',
-            contact: '123345',
-            enabled: true,
-            email: 'abc@gmail.com',
-            merchantCreateTime: '2020-1-1',
-            merchantUpdateTime: '2020-1-2',
-        },
-        {
-            merchantId: 2,
-            mchNo: '2',
-            name: 'name2',
-            contact: '2222222',
-            enabled: false,
-            email: 'abc1@gmail.com',
-            merchantCreateTime: '2020-2-1',
-            merchantUpdateTime: '2020-2-2',
-        },
-    ];
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetMerchantManageListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+    const [merchantList, setMerchantList] = useState<GetMerchantListResponseData>(currentData);
+    const [postMerchantCreate, { isLoading: isMerchantCreating, isSuccess: postMerchantSuccess }] = usePostMerchantCreateMutation();
+    const [putMerchantEdit, { isLoading: isMerchantEditing, isSuccess: putMerchantSuccess }] = usePutMerchantEditMutation();
 
 
     useEffect(() => {
         setDomLoaded(true);
-    }, []);
+        triggerGetList(null);
+        setMerchantModalVisible(false)
+    }, [putMerchantSuccess, postMerchantSuccess]);
 
-    const columns: ProColumns<MerchantListItme>[] = [
+    
+    useEffect(() => {
+        setMerchantList(currentData);
+    }, [currentData])
+
+    const columns: ProColumns<GetMerchantListResponseData>[] = [
         {
             title: '操作',
             valueType: 'option',
             key: 'option',
             render: (text, record, _, action) => [
                 <a key="editable" onClick={() => {
-                    setAddModalVisible(true)
+                    setIsEdit(true);
+                    setMerchantModalVisible(true)
                     form.setFieldsValue(record);
-                    // action?.startEditable?.(record.merchantId) 
                 }}>修改</a>,
-                <a key="delete">删除</a>,
             ],
         },
-        { title: '商戶編號', dataIndex: 'merchantId', hideInSearch: true },
-        { title: '商戶名稱', dataIndex: 'name' },
-        { title: '聯繫電話', dataIndex: 'contact' },
+        { title: '商户编号', dataIndex: 'merchantId', key: 'merchantId', hideInSearch: true },
+        { title: '商户名', dataIndex: 'name', key: 'name' , initialValue: ""},
+        { title: '联系电话', dataIndex: 'contact', key: 'contact' , initialValue: ""},
+        { title: '电子邮箱', dataIndex: 'email', key: 'email', hideInSearch: true },
         {
-            title: '狀態', dataIndex: 'enabled', valueType: 'select', valueEnum: {
-                true: { text: '啟用', status: 'Success' },
+            title: '狀態', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', key: 'enabled', valueEnum: {
+                all: { text: '全部', status: 'Default' },
+                true: { text: '启用', status: 'Success' },
                 false: { text: '禁用', status: 'Default', },
             }
         },
-        { title: '創建時間', dataIndex: 'merchantCreateTime', hideInSearch: true },
-        { title: '更新時間', dataIndex: 'merchantUpdateTime', hideInSearch: true },
+        { title: '创建时间', dataIndex: 'createTime', hideInSearch: true, key: 'createTime', valueType: 'dateTime' },
+        { title: '更新時間', dataIndex: 'updateTime', hideInSearch: true, key: 'updateTime', valueType: 'dateTime' },
 
     ]
-    const [addModalVisible, setAddModalVisible] = useState(false);
+    const [merchantModalVisible, setMerchantModalVisible] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
     const [form] = Form.useForm();
+
+
     const onFinish = (values: any) => {
-        console.log(values)
+        isEdit ? putMerchantEdit(values) : postMerchantCreate({ merchantId: values.merchantId, ...values });
+        form.resetFields()
     };
+
     const layout = {
         labelCol: { span: 4 },
         wrapperCol: { span: 16 },
     };
+
     const handleCloseModal = () => {
-        setAddModalVisible(false)
+        setMerchantModalVisible(false)
         form.resetFields()
     }
 
-
     return (
-        domLoaded ? <PageContainer
+        domLoaded  ? <PageContainer
             header={{
                 ghost: true,
                 breadcrumb: {
                     routes: [
-                        {
-                            path: '',
-                            breadcrumbName: '首頁',
-                        },
-                        {
-                            path: '',
-                            breadcrumbName: '產品管理',
-                        },
-                        {
-                            path: '',
-                            breadcrumbName: '商戶管理',
-                        },
+                        { path: '', breadcrumbName: '首頁', },
+                        { path: '', breadcrumbName: '產品管理', },
+                        { path: '', breadcrumbName: '商戶管理', },
                     ],
                 },
             }}
         >
-            <ProTable<MerchantListItme>
+            <ProTable<GetMerchantListResponseData>
                 columns={columns}
-                request={async () => ({
-                    data: defaultData,
-                    total: 2,
-                    success: true,
-                })}
-                search={{ labelWidth: 'auto' }}
+                dataSource={merchantList}
+                loading={isFetching}
                 rowKey="id"
-                headerTitle={<Button key="button" icon={"+ "} type="primary" onClick={() => { setAddModalVisible(true) }}>新建</Button>}
+                headerTitle={<Button key="button" icon={"+ "} type="primary" onClick={() => {
+                    setMerchantModalVisible(true);
+                    setIsEdit(false);
+                }}>添加</Button>}
+                search={{
+                    collapsed: false,
+                    labelWidth: 'auto',
+                    optionRender: ({ searchText, resetText }, { form }) => (
+                        <Space>
+                            <Button onClick={() => {
+                                form.resetFields();
+                                setMerchantList(currentData);
+    
+                            }}>{resetText}</Button>
+                            <Button
+                                type={'primary'}
+                                onClick={() => {
+                                    const { name, contact,enabled } = form.getFieldValue();
+                                    const searchData = currentData
+                                        .filter(i => name === "" ? i : i.name === name)
+                                        .filter(i =>contact === "" ? i : i.contact === contact)
+                                        .filter(i => enabled === "all" ? i : i.enabled.toString()===enabled);
+                                        setMerchantList(searchData);
+                                    form.submit();
+                                }}
+                            >
+                                {searchText}
+                            </Button>
+                        </Space>
+                    ),
+                }}
+                options={{
+                    setting: {
+                        listsHeight: 400,
+                    },
+                    reload:()=>triggerGetList(null)
+                }}
             />
+           
             <Modal
-                title="添加商戶"
-                visible={addModalVisible}
+                title={isEdit ? "编辑商户" : "添加商户"}
+                visible={merchantModalVisible}
                 onCancel={handleCloseModal}
                 onOk={form.submit}
             >
-                <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} >
-                    <Form.Item name="name" label="商戶名稱" rules={[{ required: true }]} >
-                        <Input allowClear />
-                    </Form.Item>
-                    <Form.Item name="contact" label="聯繫電話" rules={[{ required: true }]}>
-                        <Input allowClear />
-                    </Form.Item>
-                    <Form.Item name="email" label="信箱" rules={[{ required: true }]}>
-                        <Input allowClear />
-                    </Form.Item>
-                    <Form.Item name="enabled" label="狀態" initialValue={true}>
-                        <Radio.Group >
-                            <Radio value={true}>啟用</Radio>
-                            <Radio value={false}>禁用</Radio>
-                        </Radio.Group>
-                    </Form.Item>
-                </Form>
+                <Spin spinning={isEdit ? isMerchantEditing : isMerchantCreating}>
+                    <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} >
+                        {isEdit && <Form.Item name="merchantId" label="商户编号" hidden >
+                            <Input allowClear />
+                        </Form.Item>}
+                        <Form.Item name="name" label="商户名" rules={[{ required: true }]} initialValue={""}>
+                            <Input allowClear />
+                        </Form.Item>
+                        <Form.Item name="contact" label="联系电话" initialValue={""}>
+                            <Input allowClear />
+                        </Form.Item>
+                        <Form.Item name="email" label="电子邮箱" initialValue={""}>
+                            <Input allowClear />
+                        </Form.Item>
+                        <Form.Item name="enabled" label="状态" initialValue={true}>
+                            <Radio.Group >
+                                <Radio value={true}>启用</Radio>
+                                <Radio value={false}>禁用</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                    </Form>
+                </Spin>
             </Modal>
+            
         </PageContainer> : null
     )
 }

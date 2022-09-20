@@ -119,7 +119,7 @@ const demoTable = (props: ProductTable) => {
                                 const { productName, enabled } = form.getFieldValue();
                                 const searchData = currentData
                                     .filter(i => productName === "" ? i : i.productName === productName)
-                                    .filter(i => enabled === "all" ? i : i.enabled === enabled);
+                                    .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
                                 setProductList(searchData)
                                 form.submit();
                             }}
