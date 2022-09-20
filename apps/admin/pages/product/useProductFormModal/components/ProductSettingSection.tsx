@@ -1,52 +1,126 @@
-import {Button, Divider, Form, Input, Select, TimePicker, Upload, UploadFile} from "antd";
+import {Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadFile, UploadProps} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
-import React  from "react";
+import React, {useCallback, useState} from "react";
 import {EmailValidator, NumberValidator} from "../validator";
 
-const fileList: UploadFile[] = [
-//   {
-//     uid: '-1',
-//     name: 'xxx.png',
-//     status: 'done',
-//     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-//     thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-//   }
-];
 
-const ProductSettingSection = () => {
-  // const [approveTimeUnit, setApproveTimeUnit]=useState("mins")
-  //
-  // const approveTimeUnitChange=(value)=>{
-  //     setApproveTimeUnit(value)
-  // }
+const uploadLogoProps: UploadProps = {
+  name: 'file',
+  action: '/hs/admin/product-manage/icon/upload',
+  // headers: {
+  //   authorization: 'authorization-text',
+  // },
+  beforeUpload: file => {
+    const isPNG = file.type === 'image/png';
+    if (!isPNG) {
+      message.error(`${file.name} is not a png file`);
+    }
+    return isPNG || Upload.LIST_IGNORE;
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
+
+
+interface ProductSettingSectionProps {
+  logoFileList?: UploadFile[];
+  backgroundImgFileList?: UploadFile[];
+}
+const ProductSettingSection = (props: ProductSettingSectionProps) => {
+
+  const [formFile, setFormFile] = useState<string>();
+  const onFileChange = useCallback((event: any) => {
+    console.log("formFileValue: ", event);
+    const formFileValue = event.file.originFileObj;
+    console.log("formFileValue: ", formFileValue);
+    setFormFile(formFileValue as any);
+
+    // const reader = new FileReader();
+    // reader.onload = function (event) {
+    //   setImageSrc(event?.target?.result as any);
+    // };
+    // reader.readAsDataURL(formFileValue as any);
+  }, []);
+
+  console.log("ProductSettingSection.props", props);
+
+  // const testprops: UploadProps = {
+  //   name: 'file',
+  //   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  //   headers: {
+  //     authorization: 'authorization-text',
+  //   },
+  //   onChange(info) {
+  //     if (info.file.status !== 'uploading') {
+  //       console.log(info.file, info.fileList);
+  //     }
+  //     if (info.file.status === 'done') {
+  //       message.success(`${info.file.name} file uploaded successfully`);
+  //     } else if (info.file.status === 'error') {
+  //       message.error(`${info.file.name} file upload failed.`);
+  //     }
+  //   },
+  // };
+
+
   return (
       <React.Fragment>
           <Divider orientation="left">產品設定</Divider>
 
-          <Form.Item name="logo" label="Logo" rules={[{ required: true }]} required>
-              <Upload
-                //   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  listType="picture"
-                  // NOTICE: https://segmentfault.com/q/1010000037501973
-                //   fileList={[...fileList]}
-              >
-                  <Button icon={<UploadOutlined />}>点击上传图片</Button>
-              </Upload>
-          </Form.Item>
+        {/*<Form.Item  name="test">*/}
+        {/*  <Upload {...testprops}>*/}
+        {/*    <Button icon={<UploadOutlined />}>Click to Upload</Button>*/}
+        {/*  </Upload>*/}
+        {/*</Form.Item>*/}
 
-          <Form.Item name="backgroundImg" label="廣告橫幅(選填)" extra="建議上傳 610x300，若沒有上傳，則由系統隨機配置。">
-              <Upload
-                //   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  listType="picture"
-                // NOTICE: https://segmentfault.com/q/1010000037501973
-                //   fileList={[...fileList]}
-              >
-                  <Button icon={<UploadOutlined />}>点击上传图片</Button>
-              </Upload>
+
+        <Form.Item label="Logo" required>
+          <Form.Item name="logo">
+            <Input allowClear placeholder={""} />
           </Form.Item>
+          <Form.Item style={{ display: 'inline-block', marginBottom: 0 }} >
+            <Upload
+              //   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              listType="picture"
+              // NOTICE: https://segmentfault.com/q/1010000037501973
+              fileList={props.logoFileList}
+              // disabled
+              {...uploadLogoProps}
+              onChange={(e) => onFileChange(e)}
+            >
+              <Button icon={<UploadOutlined />}>点击上传图片</Button>
+            </Upload>
+          </Form.Item>
+        </Form.Item>
+
+        <Form.Item label="廣告橫幅(選填)">
+          <Form.Item name="backgroundImg" extra="建議上傳 610x300，若沒有上傳，則由系統隨機配置。">
+            <Input allowClear placeholder={""} />
+          </Form.Item>
+          <Form.Item style={{ display: 'inline-block', marginBottom: 0 }} >
+            <Upload
+              //   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              listType="picture"
+              // NOTICE: https://segmentfault.com/q/1010000037501973
+              fileList={props.backgroundImgFileList}
+              disabled
+            >
+              <Button icon={<UploadOutlined />}>点击上传图片</Button>
+            </Upload>
+          </Form.Item>
+        </Form.Item>
+
 
           <Form.Item  label="顯示額度" style={{ marginBottom: 0 }} required >
-              <Form.Item name="amountRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }} extra="例如：₹ 3000 - ₹ 10000"
+              <Form.Item name="amountRangeLow" style={{ display: 'inline-block', width: '250px', margin: '0 8px 0 0' }} extra="例如：₹ 3000 - ₹ 10000"
                    rules={[
                      {
                        transform: (value) => Number(value),
@@ -70,7 +144,6 @@ const ProductSettingSection = () => {
                        })
                      },
                    ]}
-
               >
                   <Input allowClear placeholder={"最高額度"} prefix="₹" />
               </Form.Item>

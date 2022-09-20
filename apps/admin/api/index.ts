@@ -5,6 +5,7 @@ import { GetAvailableMerchantResponse } from "../types/getAvailbaleMerchant";
 import { PostProductCreateRequestBody } from "../types/postProductCreate";
 import { PutProductProps } from "../types/putProduct"
 import {GetProductRequestQuery, GetProductQueryResponse} from "../types/getProduct";
+import {PostUploadProductIcon} from "../types/postUploadProductIcon";
 // const baseUrl = "/api/v2";
 const baseUrl = "/hs/admin";
 
@@ -61,6 +62,25 @@ export const API = createApi({
                 method: "post",
                 data: requestBody,
             }),
+        }),
+        // NOTE: POST /hs/admin/product-manage/icon/upload ICON图标上传
+        postUploadProductICON: builder.mutation<PostUploadProductIcon, FormData>({
+          query: (requestBody: FormData) => ({
+            url: `/product-manage/icon/upload`,
+            method: "post",
+            headers: {
+              // "Content-Type": "multipart/form-data",
+              // https://www.it145.com/9/182527.html
+              "Content-Type":
+                "multipart/form-data;boundary=" + new Date().getTime(),
+            },
+            data: requestBody,
+            // data: {
+            //     file: query.file,
+            //     orderNo: query.orderNo,
+            //     receipt: query.receipt,
+            // }
+          }),
         }),
         // NOTE: GET /hs/admin/product-manage/product 產品詳情
         getProduct: builder.query<GetProductQueryResponse, GetProductRequestQuery>({

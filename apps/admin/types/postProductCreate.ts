@@ -42,7 +42,8 @@ export interface PostProductCreateRequestBody {
     /** 前置利率 */
     preInterestRate?: number;
     /** 服务利率提额配置 */
-    productInterestRatePairs?: PostProductInterestRatePairs[]
+    // productInterestRatePairs?: PostProductInterestRatePairs[]
+    productInterestRatePairs?: string;
     /** 产品名称 */
     productName?: string;
     /** 还款链结有效天数 */
