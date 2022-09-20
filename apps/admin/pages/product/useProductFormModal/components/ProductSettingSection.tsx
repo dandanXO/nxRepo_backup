@@ -4,83 +4,68 @@ import React, {useCallback, useState} from "react";
 import {EmailValidator, NumberValidator} from "../validator";
 
 
-const uploadLogoProps: UploadProps = {
-  name: 'file',
-  action: '/hs/admin/product-manage/icon/upload',
-  // headers: {
-  //   authorization: 'authorization-text',
-  // },
-  beforeUpload: file => {
-    const isPNG = file.type === 'image/png';
-    if (!isPNG) {
-      message.error(`${file.name} is not a png file`);
-    }
-    return isPNG || Upload.LIST_IGNORE;
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
 
 
 interface ProductSettingSectionProps {
-  logoFileList?: UploadFile[];
-  backgroundImgFileList?: UploadFile[];
+  setLogo: React.Dispatch<React.SetStateAction<string>>;
+  setBackgroundImg: React.Dispatch<React.SetStateAction<string>>;
 }
 const ProductSettingSection = (props: ProductSettingSectionProps) => {
 
-  const [formFile, setFormFile] = useState<string>();
-  const onFileChange = useCallback((event: any) => {
-    console.log("formFileValue: ", event);
-    const formFileValue = event.file.originFileObj;
-    console.log("formFileValue: ", formFileValue);
-    setFormFile(formFileValue as any);
+  const uploadLogoProps: UploadProps = {
+    name: 'file',
+    action: '/hs/admin/product-manage/icon/upload',
+    beforeUpload: file => {
+      console.log("file", file);
+      const isPNG = file.type === 'image/png';
+      if (!isPNG) {
+        message.error(`${file.name} is not a png file`);
+      }
+      return isPNG || Upload.LIST_IGNORE;
+    },
 
-    // const reader = new FileReader();
-    // reader.onload = function (event) {
-    //   setImageSrc(event?.target?.result as any);
-    // };
-    // reader.readAsDataURL(formFileValue as any);
-  }, []);
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+        console.log("info", info);
+        props.setLogo(info.file.response.url);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
+  const uploadBackgroundImgProps: UploadProps = {
+    name: 'file',
+    action: '/hs/admin/product-manage/icon/upload',
+    beforeUpload: file => {
+      console.log("file", file);
+      const isPNG = file.type === 'image/png';
+      if (!isPNG) {
+        message.error(`${file.name} is not a png file`);
+      }
+      return isPNG || Upload.LIST_IGNORE;
+    },
 
-  console.log("ProductSettingSection.props", props);
-
-  // const testprops: UploadProps = {
-  //   name: 'file',
-  //   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  //   headers: {
-  //     authorization: 'authorization-text',
-  //   },
-  //   onChange(info) {
-  //     if (info.file.status !== 'uploading') {
-  //       console.log(info.file, info.fileList);
-  //     }
-  //     if (info.file.status === 'done') {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //     } else if (info.file.status === 'error') {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
-
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+        console.log("info", info);
+        props.setBackgroundImg(info.file.response.url);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
 
   return (
       <React.Fragment>
-          <Divider orientation="left">產品設定</Divider>
-
-        {/*<Form.Item  name="test">*/}
-        {/*  <Upload {...testprops}>*/}
-        {/*    <Button icon={<UploadOutlined />}>Click to Upload</Button>*/}
-        {/*  </Upload>*/}
-        {/*</Form.Item>*/}
-
+        <Divider orientation="left">產品設定</Divider>
 
         <Form.Item label="Logo" required>
           <Form.Item name="logo">
@@ -88,13 +73,14 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
           </Form.Item>
           <Form.Item style={{ display: 'inline-block', marginBottom: 0 }} >
             <Upload
-              //   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              maxCount={1}
               listType="picture"
               // NOTICE: https://segmentfault.com/q/1010000037501973
-              fileList={props.logoFileList}
+              // NOTICE: 受 Form 控制，不可提供 fileList
+              // fileList={props.backgroundImgFileList}
+              // NOTICE: [Upload file.status is always being uploading](https://github.com/ant-design/ant-design/issues/2423)
               // disabled
               {...uploadLogoProps}
-              onChange={(e) => onFileChange(e)}
             >
               <Button icon={<UploadOutlined />}>点击上传图片</Button>
             </Upload>
@@ -107,11 +93,13 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
           </Form.Item>
           <Form.Item style={{ display: 'inline-block', marginBottom: 0 }} >
             <Upload
+              maxCount={1}
               //   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture"
               // NOTICE: https://segmentfault.com/q/1010000037501973
-              fileList={props.backgroundImgFileList}
-              disabled
+              // fileList={props.backgroundImgFileList}
+              // disabled
+              {...uploadBackgroundImgProps}
             >
               <Button icon={<UploadOutlined />}>点击上传图片</Button>
             </Upload>
