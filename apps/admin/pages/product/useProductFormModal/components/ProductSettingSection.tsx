@@ -16,7 +16,6 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
     name: 'file',
     action: '/hs/admin/product-manage/icon/upload',
     beforeUpload: file => {
-      console.log("file", file);
       const isPNG = file.type === 'image/png';
       if (!isPNG) {
         message.error(`${file.name} is not a png file`);
@@ -26,11 +25,10 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
 
     onChange(info) {
       if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
+        // console.log(info.file, info.fileList);
       }
       if (info.file.status === 'done') {
         message.success(`${info.file.name} file uploaded successfully`);
-        console.log("info", info);
         props.setLogo(info.file.response.url);
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
@@ -41,7 +39,6 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
     name: 'file',
     action: '/hs/admin/product-manage/icon/upload',
     beforeUpload: file => {
-      console.log("file", file);
       const isPNG = file.type === 'image/png';
       if (!isPNG) {
         message.error(`${file.name} is not a png file`);
@@ -51,11 +48,10 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
 
     onChange(info) {
       if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
+        // console.log(info.file, info.fileList);
       }
       if (info.file.status === 'done') {
         message.success(`${info.file.name} file uploaded successfully`);
-        console.log("info", info);
         props.setBackgroundImg(info.file.response.url);
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
@@ -105,7 +101,6 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
             </Upload>
           </Form.Item>
         </Form.Item>
-
 
           <Form.Item  label="顯示額度" style={{ marginBottom: 0 }} required >
               <Form.Item name="amountRangeLow" style={{ display: 'inline-block', width: '250px', margin: '0 8px 0 0' }} extra="例如：₹ 3000 - ₹ 10000"
