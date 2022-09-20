@@ -146,7 +146,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                      },
                    ]}
               >
-                  <Input allowClear placeholder={"最低利息"} suffix={"%"}/>
+                  <Input allowClear placeholder={"最低利息"}/>
               </Form.Item>
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>-</Form.Item>
               <Form.Item name="interestRangeHigh" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
@@ -162,7 +162,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                    },
                  ]}
               >
-                  <Input allowClear placeholder={"最高利息"} />
+                  <Input allowClear placeholder={"最高利息"} suffix={"%"}/>
               </Form.Item>
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
           </Form.Item>
