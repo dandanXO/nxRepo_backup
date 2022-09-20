@@ -118,7 +118,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         interestRangeHigh: productFormData.interestRange.split("~")[1],
         termRangeLow: productFormData.termRange.split("-")[0],
         termRangeHigh: productFormData.termRange.split("-")[1],
-        approveRate: productFormData.approveRate,
+        approveRate: `< ${productFormData.approveRate}`,
         approveTime: productFormData.approveTime,
         // approveTimeUnit: productFormData.backgroundImg,
         csEmail: productFormData.csEmail,
@@ -152,10 +152,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
   }, []);
 
 
+  const strToFloatNumberWithFixed2 = (str: string): number => {
+    return Number((Number(str) * 0.01).toFixed(2));
+  }
   const onFinish = (values: any) => {
     console.log("onFinish.values", JSON.stringify(values));
 
-    const productInterestRatePairs = values.productInterestRatePairs.map(i => ({ num: Number(i.num), postInterest: Number(i.postInterest), preInterest: Number(i.preInterest) }))
+    const productInterestRatePairs = values.productInterestRatePairs.map(i => ({ num: strToFloatNumberWithFixed2(i.num), postInterest: strToFloatNumberWithFixed2(i.postInterest), preInterest: strToFloatNumberWithFixed2(i.preInterest) }))
     const creatProductData: PostProductCreateRequestBody = {
       merchantId: Number(values.merchantId),
       productName: values.productName,
@@ -163,12 +166,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
       adminPassword: values.adminPassword,
       logo: values.logo,
       backgroundImg: values.backgroundImg,
-      amountRange: `${values.amountRangeLow} - ${values.amountRangeHigh}`,
-      // interestRange: `${values.interestRangeLow} - ${values.interestRangeHigh}% / day`,
-      interestRange: `${values.interestRangeLow} - ${values.interestRangeHigh}`,
-      // termRange: `${values.termRangeLow}-${values.termRangeHigh} days`,
-      termRange: `${values.termRangeLow}-${values.termRangeHigh}`,
-      approveRate: values.approveRate,
+      // NOTE: Range 開頭為手機端展示，為了吸引客戶
+      amountRange: `${values.amountRangeLow}-${values.amountRangeHigh}`,
+      interestRange: `${values.interestRangeLow} - ${values.interestRangeHigh}% / day`,
+      termRange: `${values.termRangeLow}-${values.termRangeHigh} days`,
+
+      approveRate: String(strToFloatNumberWithFixed2(values.approveRate)),
+
       approveTime: `${values.approveTime} ${values.approveTimeUnit}`,
       csEmail: values.csEmail,
       csTime: `${values.csTime[0].format('HH:mm:ss')} ${values.csTime[1].format('HH:mm:ss')}`,
@@ -176,12 +180,14 @@ export const useProductFormModal = (props: ProductFormModal) => {
       maxAmount: Number(values.maxAmount),
       extensible: values.extensible,
       extensibleOverdueDays: Number(values.extensibleOverdueDays),
-      preInterestRate: Number(values.preInterestRate),
-      postInterestRate: Number(values.postInterestRate),
-      dailyRate: Number(values.dailyRate),
-      extensionRate: Number(values.extensionRate),
-      overdueRate: Number(values.overdueRate),
-      productInterestRatePairs: JSON.stringify(productInterestRatePairs),
+
+      preInterestRate: strToFloatNumberWithFixed2(values.preInterestRate),
+      postInterestRate: strToFloatNumberWithFixed2(values.postInterestRate),
+      dailyRate: strToFloatNumberWithFixed2(values.dailyRate),
+      extensionRate: strToFloatNumberWithFixed2(values.extensionRate),
+      overdueRate: strToFloatNumberWithFixed2(values.overdueRate),
+      productInterestRatePairs: productInterestRatePairs,
+
       top: values.top,
       tags: values.tags.join(","),
       templateType: values.templateType,
@@ -275,6 +281,17 @@ export const ProductModal = (props: ProductModalProps) =>
     labelCol: { span: 5 },
     wrapperCol: { span: 18 },
   };
+  const setLogo = useCallback((url: string) => {
+    form.setFieldsValue({
+      logo: url
+    });
+  }, [form])
+  const setBackgroundImg = useCallback((url: string) => {
+    form.setFieldsValue({
+      backgroundImg: url
+    });
+  }, [form])
+
   return (
     <ErrorBoundary errorComponent={<div>Something went wrong.</div>}>
       <Modal
@@ -295,7 +312,7 @@ export const ProductModal = (props: ProductModalProps) =>
           templateType: 1,
         }}>
           <BaseSettingSection merchantList={merchantList}/>
-          <ProductSettingSection logoFileList={uploadFiles?.logoFileList} backgroundImgFileList={uploadFiles?.backgroundImgFileList}/>
+          <ProductSettingSection setLogo={setLogo} setBackgroundImg={setBackgroundImg}/>
           <LoanSettingSection/>
           <RateSettingSection/>
           <UploadSettingSection/>
