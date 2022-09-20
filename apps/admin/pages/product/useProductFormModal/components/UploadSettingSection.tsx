@@ -59,7 +59,7 @@ export function UploadSettingSection() {
     </Form.Item>
 
     <Form.Item name="enabled" label="狀態">
-      <Switch checkedChildren="上架" unCheckedChildren="下架" defaultChecked/>
+      <Switch checkedChildren="上架" unCheckedChildren="下架"/>
     </Form.Item>
   </>;
 }
