@@ -91,8 +91,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
   useEffect(() => {
 
-
-
     // if(!productModalData.productId) return;
 
     console.log("productFormData.merchantId", productFormData?.merchantId);
@@ -204,58 +202,11 @@ export const useProductFormModal = (props: ProductFormModal) => {
     })
     form.resetFields()
   }
-  const ProductFormModal = useMemo(() => {
-    // const ModalWrapper = () =>
-    // {
-    //   console.log("[ModalWrapper] render")
-    //   const layout = {
-    //     labelCol: { span: 5 },
-    //     wrapperCol: { span: 18 },
-    //   };
-    //   return (
-    //     <ErrorBoundary errorComponent={<div>Something went wrong.</div>}>
-    //       <Modal
-    //         title={!productModalData.isEdit ? "添加产品" : "編輯產品"}
-    //         open={productModalData.show}
-    //         onCancel={handleCloseModal}
-    //         onOk={form.submit}
-    //         width={'800px'}
-    //         maskClosable={false}
-    //       >
-    //         <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} initialValues={{
-    //           // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
-    //           approveTimeUnit: "mins",
-    //           extensible: false,
-    //           top: false,
-    //           enabled: true,
-    //           templateType: 1,
-    //         }}>
-    //           <BaseSettingSection merchantList={merchantList}/>
-    //           <ProductSettingSection logoFileList={uploadFiles?.logoFileList} backgroundImgFileList={uploadFiles?.backgroundImgFileList}/>
-    //           <LoanSettingSection/>
-    //           <RateSettingSection/>
-    //           <UploadSettingSection/>
-    //         </Form>
-    //       </Modal>
-    //     </ErrorBoundary>
-    //   )
-    // }
-    // return ModalWrapper
-    // return {
-    //   productModalData,
-    //   handleCloseModal,
-    //   onFinish,
-    //   form,
-    //   merchantList,
-    //   uploadFiles,
-    // }
-  }, [productModalData.show, productModalData.isEdit, uploadFiles.logoFileList, uploadFiles.backgroundImgFileList])
 
   return {
-    ProductFormModal,
     productModalData,
+    productFormData,
     setProductModalData,
-
     handleCloseModal,
     onFinish,
     form,
@@ -273,9 +224,10 @@ interface ProductModalProps {
   uploadFiles: any;
   onMockFinish: () => void;
 }
-export const ProductModal = (props: ProductModalProps) =>
+
+const ProductModal = (props: ProductModalProps) =>
 {
-  const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish } = props;
+  const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish, productFormData } = props;
   console.log("[ModalWrapper] render")
   const layout = {
     labelCol: { span: 5 },
@@ -321,3 +273,4 @@ export const ProductModal = (props: ProductModalProps) =>
     </ErrorBoundary>
   )
 }
+export { ProductModal }
