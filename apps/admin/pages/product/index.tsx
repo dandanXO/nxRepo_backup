@@ -1,16 +1,14 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import moment from "moment"
 import Table from "./table";
-import { PageContainer, ProCard } from '@ant-design/pro-components';
-import {ProductFormModal, ProductModal, useProductFormModal} from "./useProductFormModal";
-import {GetAvailableMerchantResponse} from "../../types/getAvailbaleMerchant";
-
+import {PageContainer} from '@ant-design/pro-components';
+import {ProductModal, useProductFormModal} from "./useProductFormModal";
 
 
 const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
 
-  const {ProductFormModal, productModalData, setProductModalData, form, handleCloseModal, merchantList, uploadFiles, onFinish} = useProductFormModal({
+  const {productModalData, setProductModalData, form, handleCloseModal, merchantList, uploadFiles, onFinish} = useProductFormModal({
     show: false,
     isEdit: false,
   });
