@@ -48,21 +48,22 @@ const StyledRadioText = styled.span`
 class Radio extends React.Component<RadioProps, RadioState> {
   // static Group: React.ReactNode = RadioGroup;
   static Group: any = RadioGroup;
-  constructor(props: RadioProps) {
-    super(props);
-    this.state = {
-      check: false,
-      hover: false,
-    };
-  }
-
-  override componentDidMount(): void {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  state = {
+    check: false,
+    hover: false,
+  };
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  componentDidMount() {
     this.setState({
       check: this.props.checked ? this.props.checked : false,
     });
   }
-
-  override componentDidUpdate(
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  componentDidUpdate(
     prevProps: Readonly<RadioProps>,
     prevState: Readonly<RadioState>,
     snapshot?: any
@@ -115,24 +116,27 @@ class Radio extends React.Component<RadioProps, RadioState> {
       }
     );
   };
-
-  override render() {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  render() {
     return (
-      <div
-      // onClick={this.onCheck}
-      // onMouseOver={this.onMouseOver}
-      // onMouseOut={this.onMouseOut}
-      // disabled={this.props.disabled}
+      <StyledRadioBox
+        onClick={this.onCheck}
+        onMouseOver={this.onMouseOver}
+        onMouseOut={this.onMouseOut}
+        disabled={this.props.disabled}
       >
-        <WithThemeRadioICON
-          checked={this.state.check}
-          defaultChecked={this.props.defaultChecked}
-          hover={this.state.hover}
-          size={this.props.size ?? 'small'}
-          disabled={this.props.disabled}
-        />
-        <StyledRadioText>{this.props.children}</StyledRadioText>
-      </div>
+        <React.Fragment>
+          <WithThemeRadioICON
+            checked={this.state.check}
+            defaultChecked={this.props.defaultChecked}
+            hover={this.state.hover}
+            size={this.props.size ?? "small"}
+            disabled={this.props.disabled}
+          />
+          <StyledRadioText>{this.props.children}</StyledRadioText>
+        </React.Fragment>
+      </StyledRadioBox>
     );
   }
 }

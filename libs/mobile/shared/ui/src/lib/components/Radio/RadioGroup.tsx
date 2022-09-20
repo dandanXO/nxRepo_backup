@@ -1,6 +1,6 @@
-import React from 'react';
-import Radio from './Radio';
-import styled from 'styled-components';
+import React from "react";
+import Radio, { StyledRadioBox } from "./Radio";
+import styled from "styled-components";
 
 export interface GroupProps {
   className?: string;
@@ -17,13 +17,16 @@ const Group: React.FC<GroupProps> = (props: GroupProps) => {
 };
 
 const StyledGroup = styled(Group)<GroupProps>`
+  ${StyledRadioBox} {
+    margin: 0 5px 0 0;
+  }
   display: flex;
   /* display: flex;
-    flex-direction: \${props => (typeof props.vertical === "undefined" || props.vertical ? "row" : "column")};
-    \${RadioBoxInput} {
-        margin: 0 5px 0 0;
-        flex: 1;
-    } */
+  flex-direction: \${props => (typeof props.vertical === "undefined" || props.vertical ? "row" : "column")};
+  \${RadioBoxInput} {
+      margin: 0 5px 0 0;
+      flex: 1;
+  } */
 `;
 
 export interface RadioParams {
@@ -37,11 +40,11 @@ export interface RadioGroupProps {
   className?: string;
   defaultChecked?: boolean;
   disabled?: boolean;
-  changeRadio?: (checked: boolean) => void;
+  changeRadio?: Function;
   value: string;
   check?: boolean;
-  size?: 'small' | 'big';
-  style?: React.CSSProperties;
+  size?: "small" | "big";
+  style?: Object;
   children: React.ReactElement<any> | Array<React.ReactElement<any>>;
   onCheck: (value: string | RadioParams, checked: boolean) => void;
 }
@@ -54,19 +57,23 @@ class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
   constructor(props: RadioGroupProps) {
     super(props);
     this.state = {
-      groupValue: this.props.value || '0',
+      groupValue: this.props.value || "0",
     };
   }
-  override componentDidUpdate() {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  componentDidUpdate() {
     if (this.props.value !== this.state.groupValue) {
       this.setState({
         groupValue: this.props.value,
       });
     }
   }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   onRadioChange = (value: string | RadioParams, checked: boolean) => {
     this.props.onCheck && this.props.onCheck(value, checked);
-    const groupValue = typeof value === 'string' ? value : value.value;
+    const groupValue = typeof value === "string" ? value : value.value;
     if (checked) {
       this.setState(
         {
@@ -78,9 +85,10 @@ class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
       );
     }
   };
-  override render() {
-    const size = this.props.size ? this.props.size : 'small';
-
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  render() {
+    const size = this.props.size ? this.props.size : "small";
     return (
       <StyledGroup style={this.props.style ? this.props.style : {}}>
         {React.Children.map<React.ReactNode, React.ReactElement<any>>(
@@ -91,9 +99,14 @@ class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
                 size,
                 label: radioChild.props.label,
                 value: radioChild.props.value,
-                checked: radioChild.props.value === this.state.groupValue,
+                checked:
+                  radioChild.props.value ===
+                  this.state.groupValue,
                 changeRadio: (checked: boolean) =>
-                  this.onRadioChange(radioChild.props.value, checked),
+                  this.onRadioChange(
+                    radioChild.props.value,
+                    checked
+                  ),
                 disabled: this.props.disabled
                   ? this.props.disabled
                   : radioChild.props.disabled,
