@@ -38,7 +38,7 @@ export function UploadSettingSection() {
             <li>loan fast</li>
             <li>low interest</li>
             <li>high approval rates</li>
-            <li>建議使用簡明易懂的詞彙</li>
+            <span>建議使用簡明易懂的詞彙</span>
           </ul>
         </div>
       }
