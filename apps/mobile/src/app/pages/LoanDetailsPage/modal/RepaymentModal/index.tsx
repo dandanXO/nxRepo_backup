@@ -114,13 +114,14 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     value={balanceValue}
                                     disabled={radioValue === "balance"}
                                     onChange={(event: any) => {
-                                        const value =
-                                            event.target.value.replaceAll(
-                                                "₹",
-                                                ""
-                                            );
-                                        setBalanceValue("₹" + value);
-                                        props.setRepayBalance(value);
+                                      let value = event.target.value;
+                                      value = value.replaceAll("₹", "");
+                                      // NOTE: if custom balance exceed max balance then setting max balance
+                                      if(Number(value) > Number(balance)) {
+                                        value = balance;
+                                      }
+                                      setBalanceValue("₹" + value);
+                                      props.setRepayBalance(value);
                                     }}
                                 />
                                 <SectionParagraph>
