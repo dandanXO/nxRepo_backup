@@ -227,7 +227,7 @@ interface ProductModalProps {
 
 const ProductModal = (props: ProductModalProps) =>
 {
-  const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish, productFormData } = props;
+  const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish } = props;
   console.log("[ModalWrapper] render")
   const layout = {
     labelCol: { span: 5 },
