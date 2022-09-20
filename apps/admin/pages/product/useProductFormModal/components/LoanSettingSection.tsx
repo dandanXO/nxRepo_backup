@@ -30,8 +30,8 @@ const LoanSettingSection = () => {
           <Input allowClear placeholder={"最高金額上限"} prefix="₹" />
         </Form.Item>
       </Form.Item>
-
-      <Form.Item name="extensible" label="支持展期">
+      {/* NOTICE: Ant Design 4 的 Switch 组件无法从 Form 里取值 */}
+      <Form.Item name="extensible" label="支持展期" valuePropName="checked">
         <Switch checkedChildren="是" unCheckedChildren="否"/>
       </Form.Item>
 
