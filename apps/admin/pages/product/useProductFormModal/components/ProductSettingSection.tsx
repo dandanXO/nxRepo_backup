@@ -64,7 +64,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
         <Divider orientation="left">產品設定</Divider>
 
         <Form.Item label="Logo" required>
-          <Form.Item name="logo">
+          <Form.Item name="logo" rules={[{ required: true }]}>
             <Input allowClear placeholder={""} />
           </Form.Item>
           <Form.Item style={{ display: 'inline-block', marginBottom: 0 }} >
