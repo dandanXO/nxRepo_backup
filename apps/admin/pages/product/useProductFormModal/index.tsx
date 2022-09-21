@@ -138,8 +138,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
         approveTimeUnit: productFormData.approveTime.split(" ")[1],
         csEmail: productFormData.csEmail,
         csTime: [
-          moment(productFormData.csTime.split(" ")[0], 'h:mm:ss'),
-          moment(productFormData.csTime.split(" ")[1], 'h:mm:ss'),
+          moment(productFormData.csTime.split(" - ")[0], 'h:mm:ss'),
+          moment(productFormData.csTime.split(" - ")[1], 'h:mm:ss'),
         ],
         loanTerm: productFormData.loanTerm,
         maxAmount: productFormData.maxAmount,
@@ -212,7 +212,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
       approveTime: `${values.approveTime} ${values.approveTimeUnit}`,
       csEmail: values.csEmail,
-      csTime: `${values.csTime[0].format('HH:mm:ss')} ${values.csTime[1].format('HH:mm:ss')}`,
+      csTime: `${values.csTime[0].format('HH:mm:ss')} - ${values.csTime[1].format('HH:mm:ss')}`,
       loanTerm: Number(values.loanTerm),
       maxAmount: Number(values.maxAmount),
       extensible: values.extensible,
