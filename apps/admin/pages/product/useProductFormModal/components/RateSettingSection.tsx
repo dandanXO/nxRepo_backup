@@ -157,7 +157,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item label="填写 0 - 100 间数字" required>
+      <Form.Item label="逾期费率" required>
         <Form.Item name="overdueRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
