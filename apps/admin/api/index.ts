@@ -95,18 +95,17 @@ export const API = createApi({
         // NOTE: PUT /hs/admin/product-manage/product/{productId} 异动产品
         putProductEdit: builder.mutation<{}, PutProductProps>({
             query: (requestBody: PutProductProps) => ({
-                url: `/product-manage/product`,
+                url: `/product-manage/product/${requestBody.productId}`,
                 method: "put",
-                params: { productId: requestBody.productId },
                 data: requestBody,
             }),
         }),
-           // NOTE: GET /hs/admin/merchant-manage/list 商戶管理列表
-           getMerchantManageList: builder.query<GetMerchantListResponseData, null>({
+         // NOTE: GET /hs/admin/merchant-manage/list 商戶管理列表
+         getMerchantManageList: builder.query<GetMerchantListResponseData, null>({
             query: () => ({
-                url: `/merchant-manage/list`,
-                params: {},
-                method: "get",
+              url: `/merchant-manage/list`,
+              params: {},
+              method: "get",
             }),
         }),
         // NOTE: POST /hs/admin/merchant-manage/merchant 创建商戶
