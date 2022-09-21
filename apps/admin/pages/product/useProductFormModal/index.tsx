@@ -152,6 +152,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         dailyRate: `${Number(productFormData.dailyRate) * 100}`,
         extensionRate: `${Number(productFormData.extensionRate) * 100}`,
         overdueRate: `${Number(productFormData.overdueRate) * 100}`,
+        productInterestRatePairs:productFormData.productInterestRatePairs,
         // FIXME: 後端回來值 True 顯示異常
         top: productFormData.top,
         tags: productFormData.tags.split(","),
