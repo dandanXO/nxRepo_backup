@@ -189,71 +189,73 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         </div>
       }>
         <Form.List name="productInterestRatePairs">
-          {(fields, { add, remove }) => (
-            <>
-              {fields.map(({ key, name, ...restField }) => (
-                <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'num']}
-                    rules={[
-                      {
-                        transform: (value) => Number(value),
-                        validator: async (_, value) =>NumberValidator(_, value)({
-                          min: 1,
-                          minMessage: "请输入起始期数",
-                        })
-                      },
-                    ]}
-                  >
-                    <Input placeholder="起始期数" />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'preInterest']}
-                    required
-                    rules={[
-                      {
-                        transform: (value) => Number(value),
-                        validator: async (_, value) =>NumberValidator(_, value)({
-                          min: 1,
-                          minMessage: "请输入前置利息",
-                          max: 100,
-                          maxMessage: "请填写1-100间数字"
-                        })
-                      },
-                    ]}
-                  >
-                    <Input placeholder="前置利息" suffix={"%"}/>
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'postInterest']}
-                    required
-                    rules={[
-                      {
-                        transform: (value) => Number(value),
-                        validator: async (_, value) =>NumberValidator(_, value)({
-                          min: 1,
-                          minMessage: "请输入后置利息",
-                          max: 100,
-                          maxMessage: "请填写1-100间数字"
-                        })
-                      },
-                    ]}
-                  >
-                    <Input placeholder="后置利息" suffix={"%"}/>
-                  </Form.Item>
-                  <MinusCircleOutlined onClick={() => remove(name)} />
-                </Space>
-              ))}
-              <Form.Item>
-                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                  添加
-                </Button>
-              </Form.Item>
-            </>
-          )}
+          {(fields, { add, remove }) => {
+            return (
+              <>
+                {fields.map(({ key, name, ...restField }) => (
+                  <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'num']}
+                      rules={[
+                        {
+                          transform: (value) => Number(value),
+                          validator: async (_, value) =>NumberValidator(_, value)({
+                            min: 1,
+                            minMessage: "请输入起始期数",
+                          })
+                        },
+                      ]}
+                    >
+                      <Input placeholder="起始期数" />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'preInterest']}
+                      required
+                      rules={[
+                        {
+                          transform: (value) => Number(value),
+                          validator: async (_, value) =>NumberValidator(_, value)({
+                            min: 1,
+                            minMessage: "请输入前置利息",
+                            max: 100,
+                            maxMessage: "请填写1-100间数字"
+                          })
+                        },
+                      ]}
+                    >
+                      <Input placeholder="前置利息" suffix={"%"}/>
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'postInterest']}
+                      required
+                      rules={[
+                        {
+                          transform: (value) => Number(value),
+                          validator: async (_, value) =>NumberValidator(_, value)({
+                            min: 1,
+                            minMessage: "请输入后置利息",
+                            max: 100,
+                            maxMessage: "请填写1-100间数字"
+                          })
+                        },
+                      ]}
+                    >
+                      <Input placeholder="后置利息" suffix={"%"}/>
+                    </Form.Item>
+                    <MinusCircleOutlined onClick={() => remove(name)} />
+                  </Space>
+                ))}
+                <Form.Item>
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                    添加
+                  </Button>
+                </Form.Item>
+              </>
+            )
+          }}
         </Form.List>
       </Form.Item>
 
