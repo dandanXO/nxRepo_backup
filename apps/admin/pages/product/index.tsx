@@ -28,15 +28,15 @@ const Product=() => {
             routes: [
               {
                 path: '',
-                breadcrumbName: '首頁',
+                breadcrumbName: '首页',
               },
               {
                 path: '',
-                breadcrumbName: '產品管理 ',
+                breadcrumbName: '产品管理 ',
               },
               {
                 path: '',
-                breadcrumbName: '產品管理',
+                breadcrumbName: '产品管理',
               },
             ],
           },

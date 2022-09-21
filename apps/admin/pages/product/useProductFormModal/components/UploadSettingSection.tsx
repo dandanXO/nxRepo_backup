@@ -8,13 +8,13 @@ export function UploadSettingSection() {
     console.log(`selected ${value}`);
   };
   return <>
-    <Divider orientation="left">上架設定</Divider>
+    <Divider orientation="left">上架设定</Divider>
 
-    <Form.Item name="top" label="產品置頂" valuePropName="checked">
+    <Form.Item name="top" label="产品置顶" valuePropName="checked">
       <Switch checkedChildren="是" unCheckedChildren="否"/>
     </Form.Item>
 
-    <Form.Item name="tags" label="熱門產品標籤" extra="至少1筆，至多3筆" style={{marginBottom: 0}}
+    <Form.Item name="tags" label="热门产品标签" extra="至少1笔，至多3笔" style={{marginBottom: 0}}
        rules={[
          {
            validator: async (_, value) => TagValidator(_, value)({
@@ -26,7 +26,7 @@ export function UploadSettingSection() {
        ]}
       tooltip={
         <div>
-          <span>參考文字：</span>
+          <span>参考文字：</span>
           <ul>
             <li>instant disbursal</li>
             <li>paperless process</li>
@@ -39,7 +39,7 @@ export function UploadSettingSection() {
             <li>low interest</li>
             <li>high approval rates</li>
           </ul>
-          <span>建議使用簡明易懂的詞彙</span>
+          <span>建议使用简明易懂的词汇</span>
         </div>
       }
     >
@@ -48,17 +48,17 @@ export function UploadSettingSection() {
 
     <Form.Item name="templateType" label="借款模板">
       <Radio.Group>
-        <Radio value={1}>應還 = 合同金額</Radio>
-        <Radio value={2}>到手 = 合同金額</Radio>
+        <Radio value={1}>应还 = 合同金额</Radio>
+        <Radio value={2}>到手 = 合同金额</Radio>
       </Radio.Group>
     </Form.Item>
 
 
-    <Form.Item name="weight" label="權重">
-      <Input allowClear placeholder="填寫 1-99 間的數字"/>
+    <Form.Item name="weight" label="权重">
+      <Input allowClear placeholder="填写 1-99 间的数字"/>
     </Form.Item>
 
-    <Form.Item name="enabled" label="狀態" valuePropName="checked">
+    <Form.Item name="enabled" label="状态" valuePropName="checked">
       <Switch checkedChildren="上架" unCheckedChildren="下架"/>
     </Form.Item>
   </>;
