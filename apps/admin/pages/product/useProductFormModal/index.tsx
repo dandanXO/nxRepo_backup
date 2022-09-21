@@ -77,8 +77,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
   });
 
   useEffect(() => {
-    // console.log("isSuccess, isLoading, isFetching", isSuccess, isLoading, isFetching)
-    // FIXME: 清除編輯得到的照片
     console.log("productModalData.productId", productModalData.productId);
     if(!productModalData.productId) {
       setUploadFiles({
@@ -145,7 +143,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         ],
         loanTerm: productFormData.loanTerm,
         maxAmount: productFormData.maxAmount,
-        // FIXME: 後端回來值 True 顯示異常
         extensible: productFormData.extensible,
         extensibleOverdueDays: productFormData.extensibleOverdueDays,
         preInterestRate: `${Number(productFormData.preInterestRate) * 100}`,
@@ -153,13 +150,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
         dailyRate: `${Number(productFormData.dailyRate) * 100}`,
         extensionRate: `${Number(productFormData.extensionRate) * 100}`,
         overdueRate: `${Number(productFormData.overdueRate) * 100}`,
-        productInterestRatePairs:productFormData.productInterestRatePairs,
-        // FIXME: 後端回來值 True 顯示異常
         top: productFormData.top,
         tags: productFormData.tags.split(","),
         templateType: productFormData.templateType,
         weight: productFormData.weight,
-        // FIXME: 後端回來值 True 顯示異常
         enabled: productFormData.enabled,
       })
     }
