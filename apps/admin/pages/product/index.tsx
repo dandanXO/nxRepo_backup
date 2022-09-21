@@ -8,7 +8,7 @@ import {ProductModal, useProductFormModal} from "./useProductFormModal";
 const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
 
-  const {productModalData, setProductModalData, form, handleCloseModal, merchantList, uploadFiles, onFinish} = useProductFormModal({
+  const {productModalData, setProductModalData, form, handleCloseModal, merchantList, uploadFiles, onFinish, setCustomAntFormFieldError, customAntFormFieldError, productFormData} = useProductFormModal({
     show: false,
     isEdit: false,
   });
@@ -45,6 +45,8 @@ const Product=() => {
         <Table setProductModalData={setProductModalData}/>
         {/*{productModalData.show && <ProductFormModal/>}*/}
         {productModalData.show && <ProductModal
+          setCustomAntFormFieldError={setCustomAntFormFieldError}
+          customAntFormFieldError={customAntFormFieldError}
           productModalData={productModalData}
           handleCloseModal={handleCloseModal}
           onFinish={onFinish}

@@ -1,13 +1,33 @@
 import {z} from "zod";
 
-interface ValidateNumber {
+interface Validator {
+  name?: string;
+}
+export const PipeValidator = (_, value) => (pipes: Promise<unknown>[]) => {
+  // console.log("_", _)
+  // console.log("value", value)
+  // console.log("pipes", pipes);
+  return Promise.all(pipes).then(values => {
+    console.log(values); // [3, 1337, "foo"]
+    return Promise.resolve();
+  }).catch((error) => {
+    return Promise.reject(error)
+  })
+
+}
+
+export const CustomValidator = (validatorFun) => new Promise((resolve, reject)=> {
+    return validatorFun(resolve, reject)
+})
+
+interface ValidateNumber extends Validator{
   typeErrorMessage?: string
   min?: number;
   minMessage?: string;
   max?: number;
   maxMessage?: string;
 }
-const NumberValidator = (_, value) => (params: ValidateNumber) => {
+export const NewNumberValidatorPromise = (value, params: ValidateNumber): Promise<unknown> => {
   const scheme = z
     .number({
       invalid_type_error: params.typeErrorMessage || "請輸入數字",
@@ -23,12 +43,29 @@ const NumberValidator = (_, value) => (params: ValidateNumber) => {
     return Promise.resolve()
   }
 }
-interface ValidateEmail {
+
+export const NumberValidator = (_, value) => (params: ValidateNumber) => {
+  const scheme = z
+    .number({
+      invalid_type_error: params.typeErrorMessage || "請輸入數字",
+    })
+    .min(params.min, params.minMessage)
+    .max(params.max, params.maxMessage);
+  const result = scheme.safeParse(value);
+  if (!result.success) {
+    const firstError = result.error.format();
+    const errorMessage = firstError._errors[0];
+    return Promise.reject(errorMessage);
+  } else {
+    return Promise.resolve("success")
+  }
+}
+interface ValidateEmail extends Validator {
   typeErrorMessage?: string;
   required?: boolean,
   requiredMessage?: string;
 }
-const EmailValidator = (_, value) => (params: ValidateEmail) => {
+export const EmailValidator = (_, value) => (params: ValidateEmail) => {
   const scheme = z
     .string({})
     .email({ message: params.typeErrorMessage || "请填写正确的邮箱格式" });
@@ -45,13 +82,13 @@ const EmailValidator = (_, value) => (params: ValidateEmail) => {
   }
 }
 
-interface ValidateTag {
+interface ValidateTag extends Validator {
     typeErrorMessage?: string;
     required?: boolean,
     message?: string;
   }
 
-const TagValidator = (_, value) => (params: ValidateTag) => {
+export const TagValidator = (_, value) => (params: ValidateTag) => {
   console.log("TagValidator.value", value);
     const scheme = z.string().array()
         .min(1, params.typeErrorMessage)
@@ -68,4 +105,3 @@ const TagValidator = (_, value) => (params: ValidateTag) => {
 }
 
 
-export {NumberValidator, EmailValidator,TagValidator}

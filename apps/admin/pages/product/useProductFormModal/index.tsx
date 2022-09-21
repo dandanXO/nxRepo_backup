@@ -16,9 +16,15 @@ import {PostProductCreateRequestBody} from "../../../types/postProductCreate";
 import {ErrorBoundary} from "../../../components/ErrorBoundary";
 import {GetAvailableMerchantResponse} from "../../../types/getAvailbaleMerchant";
 import {GetProductListResponseProduct} from "../../../types/getProductList";
+import {ValidateStatus} from "antd/es/form/FormItem";
 
 
-
+export interface CustomAntFormFieldError {
+  [field: string]: {
+    validateStatus?: ValidateStatus;
+    help: string;
+  }
+}
 
 export interface ProductFormModal {
   show: boolean;
@@ -37,6 +43,17 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
   const [form] = Form.useForm();
   const [triggerGetList, { currentData: productFormData, isLoading: isGetProductLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductQuery({
+
+  })
+  const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>({
+    preInterestRate: {
+      validateStatus: "",
+      help: "",
+    },
+    postInterestRate: {
+      validateStatus: "",
+      help: "",
+    },
 
   })
   const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
@@ -146,7 +163,23 @@ export const useProductFormModal = (props: ProductFormModal) => {
   }, [props.show, merchantList, productModalData.productId, isSuccess, isError, merchantList, productFormData?.logo, productFormData?.backgroundImg])
 
   const handlePostProductCreate = useCallback((values) => {
-    postProductCreate(values);
+    postProductCreate(values).unwrap().then((responseData: {code?: number; message?: string})  => {
+      // console.log("responseData", responseData);
+      // console.log(responseData?.message)
+      // console.log(responseData?.code)
+      if(responseData?.code === 200) {
+        setProductModalData({
+          show: false,
+        });
+      } else {
+        Modal.error({
+          title: "Error",
+          content: responseData?.message
+        });
+      }
+    }).catch((error) => {
+      Modal.error(error.error);
+    })
   }, []);
 
 
@@ -212,6 +245,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
     form,
     merchantList,
     uploadFiles,
+    customAntFormFieldError,
+    setCustomAntFormFieldError,
   }
 }
 
@@ -223,11 +258,14 @@ interface ProductModalProps {
   merchantList: GetAvailableMerchantResponse;
   uploadFiles: any;
   onMockFinish: () => void;
+  customAntFormFieldError: CustomAntFormFieldError;
+  setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
 }
 
 const ProductModal = (props: ProductModalProps) =>
 {
-  const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish } = props;
+  const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish, customAntFormFieldError, setCustomAntFormFieldError } = props;
+  console.log("debug.setCustomAntFormFieldError", setCustomAntFormFieldError);
   console.log("[ModalWrapper] render")
   const layout = {
     labelCol: { span: 5 },
@@ -254,19 +292,91 @@ const ProductModal = (props: ProductModalProps) =>
         width={'800px'}
         maskClosable={false}
       >
-        <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} initialValues={{
-          // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
+        <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}
+              onFieldsChange={(changedFields, allFields) =>{
+                // console.log("changedFields", changedFields)
+                // console.log("allFields", allFields)
+                const preInterestRate = allFields.filter(field => field.name.toString() === "preInterestRate")[0]?.value ?? undefined;
+                const postInterestRate = allFields.filter(field => field.name.toString() === "postInterestRate")[0]?.value ?? undefined;
+                let isValidate = true;
+                if(Number(preInterestRate)> 100 || Number(preInterestRate) < 0) {
+                  setCustomAntFormFieldError({
+                    ...customAntFormFieldError,
+                    preInterestRate: {
+                      validateStatus: "error",
+                      help: "请填写1-100间数字",
+                    },
+                  })
+                  isValidate = false;
+                } else if(Number(preInterestRate) >= 0 && Number(preInterestRate)<= 100){
+                  setCustomAntFormFieldError({
+                    ...customAntFormFieldError,
+                    preInterestRate: {
+                      validateStatus: "",
+                      help: "",
+                    },
+                  })
+                }
+                if(Number(postInterestRate)> 100 || Number(postInterestRate) < 0) {
+                  setCustomAntFormFieldError({
+                    ...customAntFormFieldError,
+                    postInterestRate: {
+                      validateStatus: "error",
+                      help: "请填写1-100间数字",
+                    },
+                  })
+                  isValidate = false;
+                } else if(Number(postInterestRate) >= 0 && Number(postInterestRate)<= 100){
+                  setCustomAntFormFieldError({
+                    ...customAntFormFieldError,
+                    postInterestRate: {
+                      validateStatus: "",
+                      help: "",
+                    },
+                  })
+                }
+                if(isValidate) {
+                  if(Number(preInterestRate) + Number(postInterestRate) > 100) {
+                    setCustomAntFormFieldError({
+                      ...customAntFormFieldError,
+                      preInterestRate: {
+                        validateStatus: "error",
+                        help: "前置利息＋后置利息不得超过100%",
+                      },
+                      postInterestRate: {
+                        validateStatus: "error",
+                        help: "前置利息＋后置利息不得超过100%",
+                      }
+                    })
+                  } else {
+                    setCustomAntFormFieldError({
+                      ...customAntFormFieldError,
+                      preInterestRate: {
+                        validateStatus:"",
+                        help: "",
+                      },
+                      postInterestRate: {
+                        validateStatus:"",
+                        help: "",
+                      }
+                    })
+                  }
+                }
+              }}
+              initialValues={{
+                // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
 
-          approveTimeUnit: "mins",
-          extensible: false,
-          top: false,
-          enabled: true,
-          templateType: 1,
-        }}>
+                approveTimeUnit: "mins",
+                extensible: false,
+                top: false,
+                enabled: true,
+                templateType: 1,
+              }}
+        >
           <BaseSettingSection merchantList={merchantList}/>
           <ProductSettingSection setLogo={setLogo} setBackgroundImg={setBackgroundImg}/>
           <LoanSettingSection/>
-          <RateSettingSection/>
+          <RateSettingSection form={form} customAntFormFieldError={customAntFormFieldError}/>
           <UploadSettingSection/>
         </Form>
       </Modal>
