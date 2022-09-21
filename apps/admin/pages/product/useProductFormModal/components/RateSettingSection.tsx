@@ -177,7 +177,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
       </Form.Item>
 
 
-      <Form.Item label="复贷利率" tooltip={
+      <Form.Item label="复贷利率" required tooltip={
         <div>
           <span>例如：</span>
           <ul>

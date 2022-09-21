@@ -55,9 +55,9 @@ const Product=() => {
           uploadFiles={uploadFiles}
           onMockFinish={() => {
             form.setFieldsValue({
-              "merchantId": 2,
-              "productName": "1",
-              "adminUsername": "2",
+              // "merchantId": 2,
+              // "productName": "1",
+              // "adminUsername": "2",
               // "adminPassword": "************",
               // "logo": "https://unsplash.com/s/photos/photo",
               "amountRangeLow": "4",
