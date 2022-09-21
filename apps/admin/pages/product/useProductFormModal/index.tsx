@@ -195,7 +195,11 @@ export const useProductFormModal = (props: ProductFormModal) => {
   const onFinish = (values: any) => {
     console.log("onFinish.values", JSON.stringify(values));
 
-    const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({ num: strToFloatNumberWithFixed2(i.num), postInterest: strToFloatNumberWithFixed2(i.postInterest), preInterest: strToFloatNumberWithFixed2(i.preInterest) }))
+    const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
+      num: strToFloatNumberWithFixed2(i.num),
+      postInterest: strToFloatNumberWithFixed2(i.postInterest),
+      preInterest: strToFloatNumberWithFixed2(i.preInterest) }
+    ))
 
     let creatProductData: PostProductCreateRequestBody = {
       merchantId: Number(values.merchantId),
@@ -242,7 +246,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     }
     console.log(creatProductData)
 
-    handlePostProductCreate(creatProductData);
+    // handlePostProductCreate(creatProductData);
   };
 
   const handleCloseModal = () => {
@@ -387,6 +391,11 @@ const ProductModal = (props: ProductModalProps) =>
                 top: false,
                 enabled: true,
                 templateType: 1,
+                productInterestRatePairs: [{
+                  num: "",
+                  postInterest: "",
+                  preInterest: "",
+                }]
               }}
         >
           <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit}/>
