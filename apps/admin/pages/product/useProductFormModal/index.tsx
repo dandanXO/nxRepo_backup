@@ -10,7 +10,7 @@ import {
   useGetProductManageListQuery,
   useGetProductQuery,
   useLazyGetProductQuery,
-  usePostProductCreateMutation
+  usePostProductCreateMutation, usePutProductEditMutation
 } from "../../../api";
 import {PostProductCreateRequestBody} from "../../../types/postProductCreate";
 import {ErrorBoundary} from "../../../components/ErrorBoundary";
@@ -59,6 +59,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
   })
   const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
   const [postProductCreate, { isLoading }] = usePostProductCreateMutation();
+  const [putProduct, {isSuccess: isPutProductSuccess}] = usePutProductEditMutation();
 
   useEffect(() => {
     if(!productModalData.productId) return;
@@ -167,7 +168,14 @@ export const useProductFormModal = (props: ProductFormModal) => {
   }, [props.show, merchantList, productModalData.productId, isSuccess, isError, merchantList, productFormData?.logo, productFormData?.backgroundImg])
 
   const handlePostProductCreate = useCallback((values) => {
-    postProductCreate(values).unwrap().then((responseData: {code?: number; message?: string})  => {
+    const action = !productModalData.isEdit ? postProductCreate : putProduct;
+    if(productModalData.isEdit) {
+      values = {
+        ...values,
+        productId: productModalData.productId,
+      }
+    }
+    action(values).unwrap().then((responseData: {code?: number; message?: string})  => {
       // console.log("responseData", responseData);
       // console.log(responseData?.message)
       // console.log(responseData?.code)
@@ -184,7 +192,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     }).catch((error) => {
       Modal.error(error.error);
     })
-  }, []);
+  }, [productModalData.isEdit, postProductCreate, putProduct]);
 
 
   const strToFloatNumberWithFixed2 = (str: string): number => {
@@ -194,10 +202,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
     console.log("onFinish.values", JSON.stringify(values));
 
     const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({ num: strToFloatNumberWithFixed2(i.num), postInterest: strToFloatNumberWithFixed2(i.postInterest), preInterest: strToFloatNumberWithFixed2(i.preInterest) }))
+
     let creatProductData: PostProductCreateRequestBody = {
       merchantId: Number(values.merchantId),
       productName: values.productName,
-
       adminPassword: values.adminPassword,
       logo: values.logo,
       backgroundImg: values.backgroundImg,
@@ -229,13 +237,17 @@ export const useProductFormModal = (props: ProductFormModal) => {
       weight: Number(values.weight),
       enabled: values.enabled,
     }
-    if(!props.isEdit) {
+    if(!productModalData.isEdit) {
+      console.log("新增")
       creatProductData = {
         ...creatProductData,
         adminUsername: values.adminUsername,
       }
+    } else {
+      console.log("Edit")
     }
     console.log(creatProductData)
+
     handlePostProductCreate(creatProductData);
   };
 
