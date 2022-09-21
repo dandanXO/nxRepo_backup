@@ -246,7 +246,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     }
     console.log(creatProductData)
 
-    // handlePostProductCreate(creatProductData);
+    handlePostProductCreate(creatProductData);
   };
 
   const handleCloseModal = () => {
