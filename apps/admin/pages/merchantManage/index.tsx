@@ -6,7 +6,7 @@ import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Spin,Space } from 'antd';
 import {useLazyGetMerchantManageListQuery ,usePostMerchantCreateMutation,usePutMerchantEditMutation } from "../../api";
-import { GetMerchantListResponseData } from "../../types/getMerchantList";
+import { GetMerchantListResponse } from "../../types/getMerchantList";
 
 
 const MerchantManage = () => {
@@ -16,7 +16,7 @@ const MerchantManage = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [merchantList, setMerchantList] = useState<GetMerchantListResponseData>(currentData);
+    const [merchantList, setMerchantList] = useState<GetMerchantListResponse[]>(currentData);
     const [postMerchantCreate, { isLoading: isMerchantCreating, isSuccess: postMerchantSuccess }] = usePostMerchantCreateMutation();
     const [putMerchantEdit, { isLoading: isMerchantEditing, isSuccess: putMerchantSuccess }] = usePutMerchantEditMutation();
 
@@ -32,7 +32,7 @@ const MerchantManage = () => {
         setMerchantList(currentData);
     }, [currentData])
 
-    const columns: ProColumns<GetMerchantListResponseData>[] = [
+    const columns: ProColumns<GetMerchantListResponse>[] = [
         {
             title: '操作',
             valueType: 'option',
@@ -86,19 +86,19 @@ const MerchantManage = () => {
                 ghost: true,
                 breadcrumb: {
                     routes: [
-                        { path: '', breadcrumbName: '首頁', },
-                        { path: '', breadcrumbName: '產品管理', },
+                        { path: '', breadcrumbName: '首页', },
+                        { path: '', breadcrumbName: '产品管理', },
                         { path: '', breadcrumbName: '商戶管理', },
                     ],
                 },
             }}
         >
-            <ProTable<GetMerchantListResponseData>
+            <ProTable<GetMerchantListResponse>
                 columns={columns}
                 dataSource={merchantList}
                 loading={isFetching}
                 rowKey="id"
-                headerTitle={<Button key="button" icon={"+ "} type="primary" onClick={() => {
+                headerTitle={<Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => {
                     setMerchantModalVisible(true);
                     setIsEdit(false);
                 }}>添加</Button>}
@@ -115,12 +115,12 @@ const MerchantManage = () => {
                             <Button
                                 type={'primary'}
                                 onClick={() => {
-                                    const { name, contact,enabled } = form.getFieldValue();
+                                    const { name, contact, enabled } = form.getFieldValue();
                                     const searchData = currentData
                                         .filter(i => name === "" ? i : i.name === name)
-                                        .filter(i =>contact === "" ? i : i.contact === contact)
-                                        .filter(i => enabled === "all" ? i : i.enabled.toString()===enabled);
-                                        setMerchantList(searchData);
+                                        .filter(i => contact === "" ? i : i.contact === contact)
+                                        .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
+                                    setMerchantList(searchData);
                                     form.submit();
                                 }}
                             >
@@ -130,34 +130,36 @@ const MerchantManage = () => {
                     ),
                 }}
                 options={{
-                    setting: {
-                        listsHeight: 400,
-                    },
-                    reload:()=>triggerGetList(null)
+                    setting: { listsHeight: 400, },
+                    reload: () => triggerGetList(null)
                 }}
             />
-           
             <Modal
                 title={isEdit ? "编辑商户" : "添加商户"}
-                visible={merchantModalVisible}
+                open={merchantModalVisible}
                 onCancel={handleCloseModal}
                 onOk={form.submit}
             >
                 <Spin spinning={isEdit ? isMerchantEditing : isMerchantCreating}>
-                    <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} >
+                    <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} initialValues={{
+                        name: "",
+                        contact: "",
+                        email: "",
+                        enabled: true
+                    }}>
                         {isEdit && <Form.Item name="merchantId" label="商户编号" hidden >
                             <Input allowClear />
                         </Form.Item>}
-                        <Form.Item name="name" label="商户名" rules={[{ required: true }]} initialValue={""}>
+                        <Form.Item name="name" label="商户名" rules={[{ required: true }]}>
                             <Input allowClear />
                         </Form.Item>
-                        <Form.Item name="contact" label="联系电话" initialValue={""}>
+                        <Form.Item name="contact" label="联系电话">
                             <Input allowClear />
                         </Form.Item>
-                        <Form.Item name="email" label="电子邮箱" initialValue={""}>
+                        <Form.Item name="email" label="电子邮箱">
                             <Input allowClear />
                         </Form.Item>
-                        <Form.Item name="enabled" label="状态" initialValue={true}>
+                        <Form.Item name="enabled" label="状态">
                             <Radio.Group >
                                 <Radio value={true}>启用</Radio>
                                 <Radio value={false}>禁用</Radio>
