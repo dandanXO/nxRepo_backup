@@ -6,6 +6,7 @@ const { Option } = Select
 
 interface BaseSettingSectionProps {
   merchantList?: GetAvailableMerchantResponse;
+  isEdit: boolean;
 }
 const BaseSettingSection = (props: BaseSettingSectionProps) => {
   return (
@@ -25,10 +26,10 @@ const BaseSettingSection = (props: BaseSettingSectionProps) => {
       </Form.Item>
 
       <Form.Item name="adminUsername" label="用户名">
-        <Input allowClear/>
+        <Input allowClear disabled={props.isEdit}/>
       </Form.Item>
 
-      <Form.Item name="adminPassword" label="登入密码" rules={[{ required: true }]}>
+      <Form.Item name="adminPassword" label="登入密码" rules={[{ required: !props.isEdit }]}>
         <Input.Password allowClear placeholder="登入密码"/>
       </Form.Item>
     </React.Fragment>

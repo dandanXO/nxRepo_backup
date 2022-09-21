@@ -17,6 +17,7 @@ import {ErrorBoundary} from "../../../components/ErrorBoundary";
 import {GetAvailableMerchantResponse} from "../../../types/getAvailbaleMerchant";
 import {GetProductListResponseProduct} from "../../../types/getProductList";
 import {ValidateStatus} from "antd/es/form/FormItem";
+import moment from "moment/moment";
 
 
 export interface CustomAntFormFieldError {
@@ -130,15 +131,17 @@ export const useProductFormModal = (props: ProductFormModal) => {
         amountRangeLow: productFormData.amountRange.split("-")[0],
         amountRangeHigh: productFormData.amountRange.split("-")[1],
         interestRangeLow: productFormData.interestRange.split(" - ")[0],
-        interestRangeHigh: productFormData.interestRange.split(" - ")[1].split("% / day")[0],
+        interestRangeHigh: productFormData.interestRange?.split(" - ")[1]?.split("% / day")[0],
         termRangeLow: productFormData.termRange.split("-")[0],
         termRangeHigh: productFormData.termRange.split("-")[1].split(" days")[0],
         approveRate: `${Number(productFormData.approveRate) * 100}`,
-        approveTime: productFormData.approveTime,
-        // approveTimeUnit: productFormData.backgroundImg,
+        approveTime: productFormData.approveTime.split(" ")[0],
+        approveTimeUnit: productFormData.approveTime.split(" ")[1],
         csEmail: productFormData.csEmail,
-        // csTime: `${productFormData.csTime.split(" ")[0]}-${productFormData.csTime.split(" ")[1]}`,
-        // csTime: `${productFormData.csTime.split("~")[0]}-${productFormData.csTime.split("~")[1]}`,
+        csTime: [
+          moment(productFormData.csTime.split(" ")[0], 'h:mm:ss'),
+          moment(productFormData.csTime.split(" ")[1], 'h:mm:ss'),
+        ],
         loanTerm: productFormData.loanTerm,
         maxAmount: productFormData.maxAmount,
         // FIXME: 後端回來值 True 顯示異常
@@ -189,11 +192,11 @@ export const useProductFormModal = (props: ProductFormModal) => {
   const onFinish = (values: any) => {
     console.log("onFinish.values", JSON.stringify(values));
 
-    const productInterestRatePairs = values.productInterestRatePairs.map(i => ({ num: strToFloatNumberWithFixed2(i.num), postInterest: strToFloatNumberWithFixed2(i.postInterest), preInterest: strToFloatNumberWithFixed2(i.preInterest) }))
-    const creatProductData: PostProductCreateRequestBody = {
+    const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({ num: strToFloatNumberWithFixed2(i.num), postInterest: strToFloatNumberWithFixed2(i.postInterest), preInterest: strToFloatNumberWithFixed2(i.preInterest) }))
+    let creatProductData: PostProductCreateRequestBody = {
       merchantId: Number(values.merchantId),
       productName: values.productName,
-      adminUsername: values.adminUsername,
+
       adminPassword: values.adminPassword,
       logo: values.logo,
       backgroundImg: values.backgroundImg,
@@ -224,6 +227,12 @@ export const useProductFormModal = (props: ProductFormModal) => {
       templateType: values.templateType,
       weight: Number(values.weight),
       enabled: values.enabled,
+    }
+    if(!props.isEdit) {
+      creatProductData = {
+        ...creatProductData,
+        adminUsername: values.adminUsername,
+      }
     }
     console.log(creatProductData)
     handlePostProductCreate(creatProductData);
@@ -373,7 +382,7 @@ const ProductModal = (props: ProductModalProps) =>
                 templateType: 1,
               }}
         >
-          <BaseSettingSection merchantList={merchantList}/>
+          <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit}/>
           <ProductSettingSection setLogo={setLogo} setBackgroundImg={setBackgroundImg}/>
           <LoanSettingSection/>
           <RateSettingSection form={form} customAntFormFieldError={customAntFormFieldError}/>
