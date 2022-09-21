@@ -247,7 +247,7 @@ const ProductModal = (props: ProductModalProps) =>
   return (
     <ErrorBoundary errorComponent={<div>Something went wrong.</div>}>
       <Modal
-        title={!productModalData.isEdit ? <span><span style={{ marginRight: 8 }}>添加产品</span> <Button onClick={() => onMockFinish()}>自動填入測試資料</Button></span> : "編輯產品"}
+        title={!productModalData.isEdit ? <span><span style={{ marginRight: 8 }}>添加产品</span> <Button onClick={() => onMockFinish()}>自動填入測試資料</Button></span> : "编辑产品"}
         open={productModalData.show}
         onCancel={handleCloseModal}
         onOk={form.submit}

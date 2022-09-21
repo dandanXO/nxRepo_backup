@@ -61,7 +61,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
 
   return (
       <React.Fragment>
-        <Divider orientation="left">產品設定</Divider>
+        <Divider orientation="left">产品设定</Divider>
 
         <Form.Item label="Logo" required>
           <Form.Item name="logo" rules={[{ required: true }]}>
@@ -83,8 +83,8 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
           </Form.Item>
         </Form.Item>
 
-        <Form.Item label="廣告橫幅(選填)">
-          <Form.Item name="backgroundImg" extra="建議上傳 610x300，若沒有上傳，則由系統隨機配置。">
+        <Form.Item label="广告横幅(选填)">
+          <Form.Item name="backgroundImg" extra="建议上传 610x300，若没有上传，则由系统随机配置。">
             <Input allowClear placeholder={""} />
           </Form.Item>
           <Form.Item style={{ display: 'inline-block', marginBottom: 0 }} >
@@ -102,19 +102,19 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
           </Form.Item>
         </Form.Item>
 
-          <Form.Item  label="顯示額度" style={{ marginBottom: 0 }} required >
+          <Form.Item  label="显示额度" style={{ marginBottom: 0 }} required >
               <Form.Item name="amountRangeLow" style={{ display: 'inline-block', width: '250px', margin: '0 8px 0 0' }} extra="例如：₹ 3000 - ₹ 10000"
                    rules={[
                      {
                        transform: (value) => Number(value),
                        validator: async (_, value) =>NumberValidator(_, value)({
                          min: 1,
-                         minMessage: "请输入最低額度",
+                         minMessage: "请输入最低额度",
                        })
                      },
                    ]}
               >
-                  <Input allowClear placeholder={"最低額度"} prefix="₹" />
+                  <Input allowClear placeholder={"最低额度"} prefix="₹" />
               </Form.Item>
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>-</Form.Item>
               <Form.Item name="amountRangeHigh" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
@@ -123,16 +123,16 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                        transform: (value) => Number(value),
                        validator: async (_, value) =>NumberValidator(_, value)({
                          min: 1,
-                         minMessage: "请输入最高額度",
+                         minMessage: "请输入最高额度",
                        })
                      },
                    ]}
               >
-                  <Input allowClear placeholder={"最高額度"} prefix="₹" />
+                  <Input allowClear placeholder={"最高额度"} prefix="₹" />
               </Form.Item>
           </Form.Item>
 
-          <Form.Item label="顯示利息" extra="至多填寫至小數點後兩位，例如：0.01 - 0.1% / day" required>
+          <Form.Item label="显示利息" extra="至多填写至小数点后两位，例如：0.01 - 0.1% / day" required>
               <Form.Item name="interestRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                    rules={[
                      {
@@ -167,21 +167,21 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
           </Form.Item>
 
-          <Form.Item label="顯示期限" extra="例如：91-365 days" required>
+          <Form.Item label="显示期限" extra="例如：91-365 days" required>
               <Form.Item name="termRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                          rules={[
                            {
                              transform: (value) => Number(value),
                              validator: async (_, value) =>NumberValidator(_, value)({
                                min: 1,
-                               minMessage: "请输入最低天數",
+                               minMessage: "请输入最低天数",
                                max: 365,
                                maxMessage: "请填写1-365间数字%",
                              })
                            },
                          ]}
               >
-                  <Input allowClear placeholder={"最低天數"} />
+                  <Input allowClear placeholder={"最低天数"} />
               </Form.Item>
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>-</Form.Item>
               <Form.Item name="termRangeHigh" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
@@ -190,50 +190,50 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                      transform: (value) => Number(value),
                      validator: async (_, value) =>NumberValidator(_, value)({
                        min: 1,
-                       minMessage: "请输入最高天數",
+                       minMessage: "请输入最高天数",
                        max: 365,
                        maxMessage: "请填写1-365间数字%",
                      })
                    },
                  ]}
               >
-                  <Input allowClear placeholder={"最高天數"} />
+                  <Input allowClear placeholder={"最高天数"} />
               </Form.Item>
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
           </Form.Item>
 
-          <Form.Item label="通過率" required>
+          <Form.Item label="通过率" required>
               <Form.Item name="approveRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                  rules={[
                    {
                      transform: (value) => Number(value),
                      validator: async (_, value) =>NumberValidator(_, value)({
                        min: 1,
-                       minMessage: "请输入通過率",
+                       minMessage: "请输入通过率",
                        max: 100,
                        maxMessage: "请填写1-100间数字",
                      })
                    },
                  ]}
               >
-                  <Input allowClear placeholder="填寫 1-100 間數字" />
+                  <Input allowClear placeholder="填写 1-100 间数字" />
               </Form.Item>
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
           </Form.Item>
 
-          <Form.Item label="審核通過時間" extra="例如：5 分钟" required>
+          <Form.Item label="审核通过时间" extra="例如：5 分钟" required>
               <Form.Item name="approveTime" style={{ display: 'inline-block', width: '180px', marginBottom: 0 }}
                  rules={[
                    {
                      transform: (value) => Number(value),
                      validator: async (_, value) =>NumberValidator(_, value)({
                        min: 1,
-                       minMessage: "请输入審核通過時間",
+                       minMessage: "请输入审核通过时间",
                      })
                    },
                  ]}
               >
-                  <Input allowClear placeholder="填寫數字" />
+                  <Input allowClear placeholder="填写数字" />
               </Form.Item>
               <Form.Item name="approveTimeUnit" style={{ display: 'inline-block', marginBottom: 0 }} >
                   <Select
@@ -247,7 +247,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
               </Form.Item>
           </Form.Item>
 
-          <Form.Item name="csEmail" label="客服郵箱"
+          <Form.Item name="csEmail" label="客服邮箱"
              rules={[
                {
                  transform: (value) => String(value),
@@ -261,7 +261,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
               <Input allowClear placeholder="mail@mail.com" />
           </Form.Item>
 
-          <Form.Item name="csTime" label="客服時間" rules={[{ required: true }]}>
+          <Form.Item name="csTime" label="客服时间" rules={[{ required: true }]}>
               <TimePicker.RangePicker />
           </Form.Item>
       </React.Fragment>

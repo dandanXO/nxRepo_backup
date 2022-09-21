@@ -50,7 +50,7 @@ const MerchantManage = () => {
         { title: '联系电话', dataIndex: 'contact', key: 'contact' , initialValue: ""},
         { title: '电子邮箱', dataIndex: 'email', key: 'email', hideInSearch: true },
         {
-            title: '狀態', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', key: 'enabled', valueEnum: {
+            title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', key: 'enabled', valueEnum: {
                 all: { text: '全部', status: 'Default' },
                 true: { text: '启用', status: 'Success' },
                 false: { text: '禁用', status: 'Default', },

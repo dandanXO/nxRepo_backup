@@ -10,9 +10,9 @@ interface BaseSettingSectionProps {
 const BaseSettingSection = (props: BaseSettingSectionProps) => {
   return (
     <React.Fragment>
-          <Form.Item name="merchantId" label="商戶名" rules={[{ required: true }]} >
+          <Form.Item name="merchantId" label="商户名" rules={[{ required: true }]} >
               <Select
-                  placeholder="商戶名"
+                  placeholder="商户名"
                   // onChange={this.onGenderChange}
                   allowClear
               >
@@ -20,16 +20,16 @@ const BaseSettingSection = (props: BaseSettingSectionProps) => {
               </Select>
           </Form.Item>
 
-      <Form.Item name="productName" label="產品名" rules={[{ required: true }]}>
+      <Form.Item name="productName" label="产品名" rules={[{ required: true }]}>
         <Input allowClear placeholder="A1 Loan"/>
       </Form.Item>
 
-      <Form.Item name="adminUsername" label="用戶名">
+      <Form.Item name="adminUsername" label="用户名">
         <Input allowClear/>
       </Form.Item>
 
-      <Form.Item name="adminPassword" label="登入密碼" rules={[{ required: true }]}>
-        <Input.Password allowClear placeholder="登入密碼"/>
+      <Form.Item name="adminPassword" label="登入密码" rules={[{ required: true }]}>
+        <Input.Password allowClear placeholder="登入密码"/>
       </Form.Item>
     </React.Fragment>
   )
