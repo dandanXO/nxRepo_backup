@@ -60,22 +60,22 @@ const Product=() => {
               // "adminUsername": "2",
               // "adminPassword": "************",
               // "logo": "https://unsplash.com/s/photos/photo",
-              "amountRangeLow": "4",
-              "amountRangeHigh": "5",
+              "amountRangeLow": "4000",
+              "amountRangeHigh": "5000",
               "interestRangeLow": "6",
               "interestRangeHigh": "7",
               "termRangeLow": "8",
               "termRangeHigh": "9",
               "approveRate": "10",
-              "approveTime": "11",
+              "approveTime": "50",
               "approveTimeUnit": "mins",
-              "csEmail": "12@gmail.com",
+              "csEmail": "service@gmail.com",
               "csTime": [
                 moment("2022-09-18T16:00:07.842Z", 'h:mm:ss'),
                 moment("2022-09-18T23:00:00.281Z", 'h:mm:ss'),
               ],
               "loanTerm": "13",
-              "maxAmount": "14",
+              "maxAmount": "140000",
               "extensible": true,
               "extensibleOverdueDays": "15",
               "preInterestRate": "16",
@@ -92,13 +92,13 @@ const Product=() => {
               ],
               "top": false,
               "tags": [
-                "24",
-                "25",
-                "26"
+                "小額",
+                "借貸",
+                "快速"
               ],
-              "templateType": 2,
-              "weight": "25",
-              "enabled": true
+              "templateType": 1,
+              "weight": "1",
+              "enabled": false
             })
           }}
         />}
