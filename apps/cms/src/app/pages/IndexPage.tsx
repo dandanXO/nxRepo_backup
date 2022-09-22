@@ -7,7 +7,7 @@ export function Index() {
         <Link to="/product"><a> product </a></Link>
       </div>
       <div>
-        <Link to="/merchant-manage"><a> merchantManage </a></Link>
+        <Link to="/merchant"><a> merchant </a></Link>
       </div>
     </div>
   );
