@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {initGlobalState, registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start} from "qiankun"
+import {initGlobalState, registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start, addGlobalUncaughtErrorHandler} from "qiankun"
 
 
 
@@ -40,7 +40,11 @@ registerMicroApps(
     ],
   },
 );
-start();
+start({
+  sandbox: {
+    experimentalStyleIsolation: true
+  }
+});
 
 addGlobalUncaughtErrorHandler((event) => console.log("[MainApp] event", event));
 

@@ -1,9 +1,9 @@
 import {Route, Routes, Link, BrowserRouter} from 'react-router-dom';
-import MerchantPage from "../../../../packages/cms/src/pages/MerchantPage"
-import ProductPage from "../../../../packages/cms/src/pages/ProductPage";
-import IndexPage from "../../../../packages/cms/src/pages/IndexPage";
+import MerchantPage from "../../../../packages/cms-webpack4/src/pages/MerchantPage"
+import ProductPage from "../../../../packages/cms-webpack4/src/pages/ProductPage";
+import IndexPage from "../../../../packages/cms-webpack4/src/pages/IndexPage";
 import { Provider } from "react-redux";
-import {appStore} from "../../../../packages/cms/src/store";
+import {appStore} from "../../../../packages/cms-webpack4/src/store";
 
 export function App() {
   return (

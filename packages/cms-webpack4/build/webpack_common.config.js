@@ -36,14 +36,29 @@ const commonRules = [
             {loader: "postcss-loader"}
         ]
     },
+    // {
+    //     test: /\.less$/,
+    //     use:[
+    //         {loader: "style-loader"},
+    //         {loader: 'css-loader'},
+    //         {loader: "postcss-loader"},
+    //         {loader: 'less-loader'}
+    //     ]
+    // },
     {
-        test: /\.less$/,
-        use:[
-            {loader: "style-loader"},
-            {loader: 'css-loader'},
-            {loader: "postcss-loader"},
-            {loader: 'less-loader'}
-        ]
+        test: /(\.less)$/,
+        use: [
+            'style-loader',
+            'css-loader',
+            {
+                loader: 'less-loader',
+                options: {
+                    lessOptions: {
+                        javascriptEnabled: true,
+                    },
+                },
+            },
+        ],
     },
     {
         test: /\.sass$/,

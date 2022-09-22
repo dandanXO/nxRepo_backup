@@ -1,7 +1,7 @@
 import React from 'react';
 // import './App.css';
 import {appStore} from "./store";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Router } from "react-router-dom";
 import IndexPage from "./pages/IndexPage";
 import MerchantPage from "./pages/MerchantPage";
 import ProductPage from "./pages/ProductPage";
@@ -13,23 +13,21 @@ function App() {
   return (
     <Provider store={appStore}>
       {/*<BrowserRouter basename={window["__POWERED_BY_QIANKUN__"] ? '/app-react-history' : '/child/react-history/'}>*/}
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<IndexPage/>}
-          />
-          <Route
-            path="/merchant"
-            element={<MerchantPage/>}
-          />
-          <Route
-            path="/product"
-            element={<ProductPage/>}
-          />
-        </Routes>
-        <div> CMS !!</div>
-      </BrowserRouter>
+      {/*    <div>Hello</div>*/}
+      {/*    <Route*/}
+      {/*      path="/"*/}
+      {/*      component={IndexPage}*/}
+      {/*    />*/}
+      {/*    <Route*/}
+      {/*      path="/merchant"*/}
+      {/*      component={MerchantPage}*/}
+      {/*    />*/}
+      {/*    <Route*/}
+      {/*      path="/product"*/}
+      {/*      component={ProductPage}*/}
+      {/*    />*/}
+      {/*</BrowserRouter>*/}
+        <ProductPage/>
     </Provider>
   );
 }

@@ -32,6 +32,14 @@ module.exports = {
         contentBase: path.join(__dirname, './dist'),
         open: true,
         port: 9005,
+        proxy: {
+            //设置代理
+            "/hs": {
+                target: "https://app.india-api-dev.com",
+                secure: false, // 協議是https的時候必須要寫
+                changeOrigin: true,
+            },
+        },
     },
     devtool: '#eval-source-map',
     module: {

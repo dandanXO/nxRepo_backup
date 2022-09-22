@@ -191,8 +191,8 @@ module.exports = function (webpackEnv) {
     }
     return loaders;
   };
-
-  return {
+  console.log("")
+  const finalConfig =  {
     target: ['browserslist'],
     // Webpack noise constrained to errors and warnings
     stats: 'errors-warnings',
@@ -237,10 +237,11 @@ module.exports = function (webpackEnv) {
 
 
       // NOTICE: MicroApp
-      // chunkLoadingGlobal: `webpackJsonp_${name}`,
-      // globalObject: 'window',
-      // library: `${name}-[name]`,
-      // libraryTarget: 'umd',
+      chunkLoadingGlobal: `webpackJsonp_${name}`,
+      globalObject: 'window',
+      library: `${name}-[name]`,
+      libraryTarget: 'umd',
+      umdNamedDefine: true,
     },
     cache: {
       type: 'filesystem',
@@ -633,7 +634,8 @@ module.exports = function (webpackEnv) {
         Object.assign(
           {},
           {
-            inject: true,
+            // inject: true,
+            inject: "body",
             template: paths.appHtml,
           },
           isEnvProduction
@@ -817,4 +819,7 @@ module.exports = function (webpackEnv) {
     // our own hints via the FileSizeReporter
     performance: false,
   };
+  console.log("paths.publicUrlOrPath", paths.publicUrlOrPath);
+  console.log("finalConfig", finalConfig);
+  return finalConfig;
 };

@@ -303,7 +303,6 @@ const ProductModal = (props: ProductModalProps) =>
   }, [form])
 
   return (
-    <ErrorBoundary errorComponent={<div>Something went wrong.</div>}>
       <Modal
         title={!productModalData.isEdit ? <span><span style={{ marginRight: 8 }}>添加产品</span> <Button onClick={() => onMockFinish()}>自動填入測試資料</Button></span> : "编辑产品"}
         open={productModalData.show}
@@ -405,7 +404,6 @@ const ProductModal = (props: ProductModalProps) =>
           <UploadSettingSection/>
         </Form>
       </Modal>
-    </ErrorBoundary>
   )
 }
 export { ProductModal }
