@@ -1,6 +1,6 @@
 import { Route, Routes, Link } from 'react-router-dom';
-import MerchantManagePage from "./pages/merchantManage"
-import ProductPage from "./pages/product";
+import MerchantPage from "./pages/MerchantPage"
+import ProductPage from "./pages/ProductPage";
 import IndexPage from "./pages/IndexPage";
 import { Provider } from "react-redux";
 import {appStore} from "./store";
@@ -14,8 +14,8 @@ export function App() {
           element={<IndexPage/>}
         />
         <Route
-          path="/merchant-manage"
-          element={<MerchantManagePage/>}
+          path="/merchant"
+          element={<MerchantPage/>}
         />
         <Route
           path="/product"
