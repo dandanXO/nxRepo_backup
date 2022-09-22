@@ -6,13 +6,25 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const {commonRules, commonPlugins} = require('./webpack_common.config');
+
+const { name } = require('../package.json');
+
 module.exports = {
     mode: 'production',
     entry: './src/main.tsx',
     output: {
-        publicPath: './',
+        // publicPath: './',
         path: path.resolve(__dirname, '../', "dist"),
-        filename: "bundle.[hash:8].js"
+        filename: "bundle.[hash:8].js",
+
+        // NOTICE: MicroApp
+        publicPath: "/child/react-history/",
+        // chunkLoadingGlobal: `webpackJsonp_${name}`,
+        jsonpFunction: `webpackJsonp_${name}`,
+        globalObject: 'window',
+        library: `${name}-[name]`,
+        libraryTarget: 'umd',
+        umdNamedDefine: true,
     },
     resolve: {
         extensions: [".ts", ".tsx", '.js', '.jsx', '.css', '.less', '.scss', '.json'],
