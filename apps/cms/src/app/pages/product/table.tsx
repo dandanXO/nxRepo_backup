@@ -105,6 +105,7 @@ const demoTable = (props: ProductTable) => {
             search={{
                 collapsed: false,
                 labelWidth: 'auto',
+                // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
                     <Space>
                         <Button onClick={() => {
@@ -116,7 +117,7 @@ const demoTable = (props: ProductTable) => {
                         <Button
                             type={'primary'}
                             onClick={() => {
-                                const { productName, enabled } = form.getFieldValue();
+                                const { productName, enabled } = form.getFieldsValue();
                                 const searchData = currentData
                                     .filter(i => productName === "" ? i : i.productName === productName)
                                     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
@@ -133,7 +134,7 @@ const demoTable = (props: ProductTable) => {
                 setting: {
                     listsHeight: 400,
                 },
-                reload:()=>triggerGetList({})
+                reload:()=>triggerGetList(null)
             }}
             form={{
                 // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下

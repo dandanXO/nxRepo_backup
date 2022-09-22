@@ -27,7 +27,7 @@ const MerchantManage = () => {
         setMerchantModalVisible(false)
     }, [putMerchantSuccess, postMerchantSuccess]);
 
-    
+
     useEffect(() => {
         setMerchantList(currentData);
     }, [currentData])
@@ -80,7 +80,8 @@ const MerchantManage = () => {
         form.resetFields()
     }
 
-    return (
+
+  return (
         domLoaded  ? <PageContainer
             header={{
                 ghost: true,
@@ -105,16 +106,18 @@ const MerchantManage = () => {
                 search={{
                     collapsed: false,
                     labelWidth: 'auto',
+                  // @ts-ignore
                     optionRender: ({ searchText, resetText }, { form }) => (
                         <Space>
                             <Button onClick={() => {
                                 form.resetFields();
                                 setMerchantList(currentData);
-    
+
                             }}>{resetText}</Button>
                             <Button
                                 type={'primary'}
                                 onClick={() => {
+                                  // @ts-ignore
                                     const { name, contact, enabled } = form.getFieldValue();
                                     const searchData = currentData
                                         .filter(i => name === "" ? i : i.name === name)
@@ -168,7 +171,7 @@ const MerchantManage = () => {
                     </Form>
                 </Spin>
             </Modal>
-            
+
         </PageContainer> : null
     )
 }

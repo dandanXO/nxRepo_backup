@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import { DatePicker } from 'antd';
-import DemoTable from "../../components/domo-table/demo-table";
+import DemoTable from "../../../cms/src/app/components/domo-table/demo-table";
 
 // Module not found: Can't resolve 'ReactDOM'
 import { ProForm, ProFormText } from '@ant-design/pro-components';

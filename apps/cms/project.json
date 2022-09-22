@@ -48,7 +48,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "cms:build",
-        "hmr": true
+        "hmr": true,
+        "proxyConfig": "apps/cms/proxy.config.json"
       },
       "configurations": {
         "development": {

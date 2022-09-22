@@ -4,10 +4,10 @@ export function Index() {
   return (
     <div>
       <div>
-        <Link href="/product"><a> product </a></Link>
+        <Link href="/apps/cms/src/app/pages/product"><a> product </a></Link>
       </div>
       <div>
-        <Link href="/merchantManage"><a> merchantManage </a></Link>
+        <Link href="/apps/cms/src/app/pages/merchantManage"><a> merchantManage </a></Link>
       </div>
     </div>
   );
