@@ -36,7 +36,7 @@ export const NewNumberValidatorPromise = (value, params: ValidateNumber): Promis
     .max(params.max, params.maxMessage);
   const result = scheme.safeParse(value);
   if (!result.success) {
-    const firstError = result.error.format();
+    const firstError = (result as any).error.format();
     const errorMessage = firstError._errors[0];
     return Promise.reject(errorMessage);
   } else {
@@ -53,7 +53,7 @@ export const NumberValidator = (_, value) => (params: ValidateNumber) => {
     .max(params.max, params.maxMessage);
   const result = scheme.safeParse(value);
   if (!result.success) {
-    const firstError = result.error.format();
+    const firstError = (result as any).error.format();
     const errorMessage = firstError._errors[0];
     return Promise.reject(errorMessage);
   } else {
@@ -74,7 +74,7 @@ export const EmailValidator = (_, value) => (params: ValidateEmail) => {
   }
   const result = scheme.safeParse(value);
   if (!result.success) {
-    const firstError = result.error.format();
+    const firstError = (result as any).error.format();
     const errorMessage = firstError._errors[0];
     return Promise.reject(errorMessage);
   } else {
@@ -96,7 +96,7 @@ export const TagValidator = (_, value) => (params: ValidateTag) => {
 
     const result = scheme.safeParse(value);
     if (!result.success) {
-        const firstError = result.error.format();
+        const firstError = (result as any).error.format();
         const errorMessage = value === undefined ? params.message : firstError._errors[0];
         return Promise.reject(errorMessage);
     } else {
