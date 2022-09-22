@@ -44,3 +44,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+# ISSUES
+[create-react-app 配置 less 并模块化](https://zhuanlan.zhihu.com/p/338581934)
+[bezierEasingMixin()； Inline JavaScript is not enabled. Is it set in your options](https://juejin.cn/post/7075971964623388709)

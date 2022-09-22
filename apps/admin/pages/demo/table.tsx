@@ -4,7 +4,7 @@ import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Space, Tag } from 'antd';
 import { useRef } from 'react';
 import request from 'umi-request';
-import {useGetProductManageListQuery, useLazyGetProductManageListQuery} from "../../../cms/src/app/api";
+import {useGetProductManageListQuery, useLazyGetProductManageListQuery} from "../../../../packages/cms/src/api";
 
 type GithubIssueItem = {
   url: string;
