@@ -48,3 +48,5 @@ Thumbs.db
 .next
 /deprecated/task/openapi-typescript-codegen/generated/
 /packages/dlh-web/dist/
+/deprecated/task/openapi-typescript-codegen/generated/
+/packages/dlh-web/dist/
