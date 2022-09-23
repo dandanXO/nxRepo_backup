@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+      "rootDir": ".",
+//      "sourceMap": true,
+      "declaration": false,
+      "moduleResolution": "node",
+      "module": "es6",
+      "target": "es5",
+      "skipLibCheck": true,
+      "skipDefaultLibCheck": true,
+
+      "allowSyntheticDefaultImports": true,
+      "noImplicitAny": false,
+      "allowJs": true,
+      "jsx": "react-jsx",
+      "strict": false
+  },
+  "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.vue",
+      "tests/**/*.ts",
+      "tests/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

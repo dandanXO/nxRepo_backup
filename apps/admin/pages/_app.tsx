@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from "react-redux";
-import { appStore } from "../../cms/src/app/store"
+import { appStore } from "../../../packages/cms-webpack4/src/store"
 
 // [style is broken on build but works on dev env](https://github.com/SolidZORO/next-plugin-antd-less/issues/103)
 // import 'antd/dist/antd.less';

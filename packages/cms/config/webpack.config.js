@@ -50,6 +50,7 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
+// const disableESLintPlugin = true;
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
@@ -71,6 +72,9 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const lessRegex = /\.(less)$/;
+const lessModuleRegex = /\\.module\\.less$/;
+
 
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
@@ -187,8 +191,8 @@ module.exports = function (webpackEnv) {
     }
     return loaders;
   };
-
-  return {
+  console.log("")
+  const finalConfig =  {
     target: ['browserslist'],
     // Webpack noise constrained to errors and warnings
     stats: 'errors-warnings',
@@ -231,10 +235,13 @@ module.exports = function (webpackEnv) {
         : isEnvDevelopment &&
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
 
+
+      // NOTICE: MicroApp
       chunkLoadingGlobal: `webpackJsonp_${name}`,
       globalObject: 'window',
       library: `${name}-[name]`,
       libraryTarget: 'umd',
+      umdNamedDefine: true,
     },
     cache: {
       type: 'filesystem',
@@ -550,6 +557,58 @@ module.exports = function (webpackEnv) {
                 'sass-loader'
               ),
             },
+            {
+              test: /(\.less)$/,
+              use: [
+                'style-loader',
+                'css-loader',
+                {
+                  loader: 'less-loader',
+                  options: {
+                    lessOptions: {
+                      javascriptEnabled: true,
+                    },
+                  },
+                },
+              ],
+            },
+            // 添加 less 相关配置
+            {
+              test: lessRegex,
+              exclude: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: {
+                    // getLocalIdent: getCSSModuleLocalIdent,
+                    localIdentName: '[local]_[hash:base64:5]'
+                  },
+                },
+                'less-loader'
+              ),
+              // Don't consider CSS imports dead code even if the
+              // containing package claims to have no side effects.
+              // Remove this when webpack adds a warning or an error for this.
+              // See <https://github.com/webpack/webpack/issues/6571>
+              sideEffects: true,
+            },
+            // Adds support for CSS Modules, but using LESS
+            // using the extension .module.less or .module.less
+            {
+              test: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: {
+                    // getLocalIdent: getCSSModuleLocalIdent,
+                    localIdentName: '[local]_[hash:base64:5]'
+                  },
+                },
+                'less-loader'
+              ),
+            },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
@@ -575,7 +634,8 @@ module.exports = function (webpackEnv) {
         Object.assign(
           {},
           {
-            inject: true,
+            // inject: true,
+            inject: "body",
             template: paths.appHtml,
           },
           isEnvProduction
@@ -759,4 +819,7 @@ module.exports = function (webpackEnv) {
     // our own hints via the FileSizeReporter
     performance: false,
   };
+  console.log("paths.publicUrlOrPath", paths.publicUrlOrPath);
+  console.log("finalConfig", finalConfig);
+  return finalConfig;
 };

@@ -80,6 +80,7 @@ checkBrowsers(paths.appPath, isInteractive)
     }
 
     const config = configFactory('development');
+    console.log("config", config);
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
 
@@ -111,9 +112,18 @@ checkBrowsers(paths.appPath, isInteractive)
       ...createDevServerConfig(proxyConfig, urls.lanUrlForConfig),
       host: HOST,
       port,
+      proxy: {
+        //设置代理
+        "/hs": {
+          target: "https://app.india-api-dev.com",
+          secure: false, // 協議是https的時候必須要寫
+          changeOrigin: true,
+        },
+      },
     };
     const devServer = new WebpackDevServer(serverConfig, compiler);
     // Launch WebpackDevServer.
+
     devServer.startCallback(() => {
       if (isInteractive) {
         clearConsole();

@@ -1,7 +1,6 @@
-import {Divider, Form, Input, Typography, Row, Col, Space, Button} from "antd";
-const { Paragraph, Text } = Typography;
-
 import React from "react";
+import {Divider, Form, Input, Typography, Row, Col, Space, Button} from "antd";
+
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {
   CustomValidator,
@@ -11,6 +10,7 @@ import {
 } from "../validator";
 import {CustomAntFormFieldError} from "../index";
 
+const { Paragraph, Text } = Typography;
 interface RateSettingSectionProps {
   form: any;
   customAntFormFieldError: CustomAntFormFieldError

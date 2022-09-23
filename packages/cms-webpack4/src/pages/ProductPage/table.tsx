@@ -1,3 +1,4 @@
+// eslint-disable max-classes-per-file
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
@@ -10,7 +11,8 @@ import {ProductFormModal} from "./useProductFormModal";
 interface ProductTable {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
 }
-const demoTable = (props: ProductTable) => {
+const DemoTable = (props: ProductTable) => {
+
 
     const [triggerLogin, { isSuccess: isLoginSuccess }] = useLoginMutation();
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductManageListQuery({
@@ -163,4 +165,4 @@ const demoTable = (props: ProductTable) => {
     );
 };
 
-export default demoTable;
+export default DemoTable;
