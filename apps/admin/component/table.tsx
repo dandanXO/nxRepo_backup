@@ -33,13 +33,13 @@ const DemoTable = (props: ProductTable) => {
         if (window.top == window.self) {
             // Top level window
             console.log("[Debug][iframe] i'm master")
-            if (!isLoginSuccess) {
-                triggerLogin({
-                    phoneNo: "19888888888",
-                    code: "123456"
-                });
-            }
-            if (isLoginSuccess) triggerGetList(null);
+            // if (!isLoginSuccess) {
+            //     triggerLogin({
+            //         phoneNo: "19888888888",
+            //         code: "123456"
+            //     });
+            // }
+            // if (isLoginSuccess) triggerGetList(null);
         } else {
             // Not top level. An iframe, popup or something
             console.log("[Debug][iframe] inner parent window")
