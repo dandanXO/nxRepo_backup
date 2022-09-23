@@ -16,7 +16,7 @@ const devConfig = webpackMerge(webpackBaseConfig, {
     output: {
         path: config.distDir,
         // NOTICE:
-        filename: 'static/main.js',
+        filename: 'main.js',
         publicPath,
     },
     module: {
