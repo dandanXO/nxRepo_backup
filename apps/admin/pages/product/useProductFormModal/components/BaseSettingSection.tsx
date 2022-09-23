@@ -9,6 +9,7 @@ interface BaseSettingSectionProps {
   isEdit: boolean;
 }
 const BaseSettingSection = (props: BaseSettingSectionProps) => {
+  if(!props.merchantList) return null;
   return (
     <React.Fragment>
           <Form.Item name="merchantId" label="商户名" rules={[{ required: true }]} >
@@ -17,7 +18,7 @@ const BaseSettingSection = (props: BaseSettingSectionProps) => {
                   // onChange={this.onGenderChange}
                   allowClear
               >
-                  {props?.merchantList.map((i) => <Option key={i.merchantId} value={i.merchantId}>{i.name}</Option>)}
+                  {props?.merchantList?.map((i) => <Option key={i.merchantId} value={i.merchantId}>{i.name}</Option>)}
               </Select>
           </Form.Item>
 
