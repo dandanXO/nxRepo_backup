@@ -11,10 +11,9 @@ import {
   useGetProductQuery,
   useLazyGetProductQuery,
   usePostProductCreateMutation, usePutProductEditMutation
-} from "../../../api";
-import {PostProductCreateRequestBody} from "../../../types/postProductCreate";
-import {GetAvailableMerchantResponse} from "../../../types/getAvailbaleMerchant";
-import {GetProductListResponseProduct} from "../../../types/getProductList";
+} from "../../api";
+import {PostProductCreateRequestBody} from "../../types/postProductCreate";
+import {GetAvailableMerchantResponse} from "../../types/getAvailbaleMerchant";
 import {ValidateStatus} from "antd/es/form/FormItem";
 import moment from "moment/moment";
 

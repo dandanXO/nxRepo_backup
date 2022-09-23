@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import moment from "moment"
-import Table from "./table";
+import Table from "../../component/table";
 import {PageContainer} from '@ant-design/pro-components';
-import {ProductModal, useProductFormModal} from "./useProductFormModal";
+import {ProductModal, useProductFormModal} from "../../component/useProductFormModal";
 
 
 const Product=() => {
