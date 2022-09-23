@@ -13,7 +13,6 @@ import {
   usePostProductCreateMutation, usePutProductEditMutation
 } from "../../../api";
 import {PostProductCreateRequestBody} from "../../../types/postProductCreate";
-import {ErrorBoundary} from "../../../components/ErrorBoundary";
 import {GetAvailableMerchantResponse} from "../../../types/getAvailbaleMerchant";
 import {GetProductListResponseProduct} from "../../../types/getProductList";
 import {ValidateStatus} from "antd/es/form/FormItem";
