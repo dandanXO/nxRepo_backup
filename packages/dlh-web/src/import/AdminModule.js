@@ -27,7 +27,7 @@ const Iframe = (props) => {
   const { location: { pathname } } = props;
   console.log("pathname", pathname);
   const url = {
-    '/merchant-manage': "/merchantManage",
+    '/merchant-manage': "/merchant",
     '/product-manage': "/product"
   }[pathname];
   // console.log("url", url)

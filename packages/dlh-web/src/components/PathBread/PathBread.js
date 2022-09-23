@@ -3,8 +3,8 @@ import { Breadcrumb } from 'antd';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {FormattedMessage} from "react-intl";
-// import {adminRoutesPath} from "../../import/AdminModule";
-import {adminRoutesPath} from "../../import/CMSModule";
+import {adminRoutesPath} from "../../import/AdminModule";
+// import {adminRoutesPath} from "../../import/CMSModule";
 
 // import list from '../../layouts/LayoutMenu/menuConfig';
 class PathBread extends Component {

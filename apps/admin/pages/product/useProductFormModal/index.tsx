@@ -131,7 +131,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         interestRangeLow: productFormData.interestRange.split(" - ")[0],
         interestRangeHigh: productFormData.interestRange?.split(" - ")[1]?.split("% / day")[0],
         termRangeLow: productFormData.termRange.split("-")[0],
-        termRangeHigh: productFormData.termRange.split("-")[1].split(" days")[0],
+        termRangeHigh: productFormData.termRange.split("-")[1].split("Days")[0],
         approveRate: `${Number(productFormData.approveRate) * 100}`,
         approveTime: productFormData.approveTime.split(" ")[0],
         approveTimeUnit: productFormData.approveTime.split(" ")[1],
@@ -176,12 +176,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
         setProductModalData({
           show: false,
         });
-      } else {
-        Modal.error({
-          title: "Error",
-          content: responseData?.message
-        });
       }
+      // else {
+      //   Modal.error({
+      //     title: "Error",
+      //     content: responseData?.message
+      //   });
+      // }
     }).catch((error) => {
       Modal.error(error.error);
     })
@@ -209,7 +210,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       // NOTE: Range 開頭為手機端展示，為了吸引客戶
       amountRange: `${values.amountRangeLow}-${values.amountRangeHigh}`,
       interestRange: `${values.interestRangeLow} - ${values.interestRangeHigh}% / day`,
-      termRange: `${values.termRangeLow}-${values.termRangeHigh} days`,
+      termRange: `${values.termRangeLow}-${values.termRangeHigh}Days`,
 
       approveRate: String(strToFloatNumberWithFixed2(values.approveRate)),
 

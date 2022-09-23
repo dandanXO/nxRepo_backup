@@ -18,8 +18,8 @@ import { todayLoanManageRoutes } from '../pages/todayLoanManage';
 import { payAndSettleManageRoutes } from '../pages/payAndSettleManage';
 import { extensionPeriodLoanManageRoutes } from '../pages/extensionPeriodLoanManage';
 import { telSaleManageRoutes } from '../pages/telSaleManage';
-// import { AdminRoutes } from "../import/AdminModule"
-import { AdminRoutes } from "../import/CMSModule"
+import { AdminRoutes } from "../import/AdminModule"
+// import { AdminRoutes } from "../import/CMSModule"
 
 const allRoutes = [].concat(
     userManageRoutes,

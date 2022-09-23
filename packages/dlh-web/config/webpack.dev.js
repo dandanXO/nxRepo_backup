@@ -69,7 +69,7 @@ const devConfig = webpackMerge(webpackBaseConfig, {
         proxy: config.proxy,
         open: false,
         // FIX: Invalid Host header
-        disableHostCheck: true
+        disableHostCheck: true,
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
