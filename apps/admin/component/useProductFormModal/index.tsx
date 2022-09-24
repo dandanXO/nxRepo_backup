@@ -171,11 +171,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
       // console.log("responseData", responseData);
       // console.log(responseData?.message)
       // console.log(responseData?.code)
-      if(responseData?.code === 200) {
-        setProductModalData({
-          show: false,
-        });
-      }
+      setProductModalData({
+        show: false,
+      });
       // else {
       //   Modal.error({
       //     title: "Error",
