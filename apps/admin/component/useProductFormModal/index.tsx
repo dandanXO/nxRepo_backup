@@ -195,7 +195,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     console.log("onFinish.values", JSON.stringify(values));
 
     const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
-      num: strToFloatNumberWithFixed2(i.num),
+      num: i.num,
       postInterest: strToFloatNumberWithFixed2(i.postInterest),
       preInterest: strToFloatNumberWithFixed2(i.preInterest) }
     ))
