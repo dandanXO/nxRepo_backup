@@ -6,7 +6,7 @@ import {useProductFormModal} from "../../component/useProductFormModal";
 import {ProductModal} from "../../component/useProductFormModal/ProductModal";
 import {FormInstance} from "antd/es";
 
-const formRef = React.createRef();
+// const formRef = React.createRef();
 
 const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
@@ -23,7 +23,7 @@ const Product=() => {
   } = useProductFormModal({
     show: false,
     isEdit: false,
-    formRef,
+    // formRef,
   });
 
   useEffect(() => {
