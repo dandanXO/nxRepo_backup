@@ -10,21 +10,20 @@ import {ProductFormModal} from "./useProductFormModal";
 
 interface ProductTable {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
-  triggerTableGetList?: any;
+  triggerGetList?: any;
+  productListData?: any;
 }
 const DemoTable = (props: ProductTable) => {
 
 
     const [triggerLogin, { isSuccess: isLoginSuccess }] = useLoginMutation();
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductManageListQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
 
-    useEffect(() => {
-      props.triggerTableGetList(triggerGetList);
-    }, [triggerGetList])
+    // const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductManageListQuery({
+    //     pollingInterval: 0,
+    //     refetchOnFocus: false,
+    //     refetchOnReconnect: false
+    // });
+
 
     // const { currentData, refetch} = useGetProductManageListQuery(null, {
     //   skip: false,
@@ -38,27 +37,27 @@ const DemoTable = (props: ProductTable) => {
         if (window.top == window.self) {
             // Top level window
             console.log("[Debug][iframe] i'm master")
-            // if (!isLoginSuccess) {
-            //     triggerLogin({
-            //         phoneNo: "19888888888",
-            //         code: "123456"
-            //     });
-            // }
-            // if (isLoginSuccess) triggerGetList(null);
+            if (!isLoginSuccess) {
+                triggerLogin({
+                    phoneNo: "19888888888",
+                    code: "123456"
+                });
+            }
+            if (isLoginSuccess) props.triggerGetList(null);
         } else {
             // Not top level. An iframe, popup or something
             console.log("[Debug][iframe] inner parent window")
-            triggerGetList(null);
+          props.triggerGetList(null);
         }
 
-    }, [triggerLogin, triggerGetList, isLoginSuccess])
+    }, [triggerLogin, props.triggerGetList, isLoginSuccess])
 
 
-    const [productList, setProductList] = useState<GetProductListResponseProduct[]>(currentData);
+    const [productList, setProductList] = useState<GetProductListResponseProduct[]>(props.productListData);
 
     useEffect(()=>{
-        setProductList(currentData)
-    },[currentData])
+        setProductList(props.productListData)
+    },[props.productListData])
 
 
     const columns = useMemo(() => {
@@ -118,14 +117,14 @@ const DemoTable = (props: ProductTable) => {
                         <Button onClick={() => {
 
                             form.resetFields();
-                            setProductList(currentData)
+                            setProductList(props.productListData)
 
                         }}>{resetText}</Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
                                 const { productName, enabled } = form.getFieldsValue();
-                                const searchData = currentData
+                                const searchData = props.productListData
                                     .filter(i => productName === "" ? i : i.productName === productName)
                                     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
                                 setProductList(searchData)
@@ -141,7 +140,7 @@ const DemoTable = (props: ProductTable) => {
                 setting: {
                     listsHeight: 400,
                 },
-                reload:()=>triggerGetList(null)
+                reload:()=>props.triggerGetList(null)
             }}
             form={{
                 // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下

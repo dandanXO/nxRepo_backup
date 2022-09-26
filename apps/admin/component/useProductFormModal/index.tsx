@@ -8,7 +8,7 @@ import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {
   useGetAvailableMerchantListQuery,
   useGetProductManageListQuery,
-  useGetProductQuery,
+  useGetProductQuery, useLazyGetProductManageListQuery,
   useLazyGetProductQuery,
   usePostProductCreateMutation, usePutProductEditMutation
 } from "../../api";
@@ -40,11 +40,12 @@ export const useProductFormModal = (props: ProductFormModal) => {
     productId: props.productId,
     triggerTableGetList: props.triggerTableGetList
   });
-  const [triggerFetchTableList, setTriggerFetchTableList] = useState<() => void>();
+  const [triggerFetchTableList, setTriggerFetchTableList] = useState<any>();
   // console.log("productModalData", productModalData);
 
+
   const [form] = Form.useForm();
-  const [triggerGetList, { currentData: productFormData, isLoading: isGetProductLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductQuery({
+  const [triggerGetProduct, { currentData: productFormData, isLoading: isGetProductLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductQuery({
 
   })
   const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>({
@@ -56,18 +57,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
       validateStatus: "",
       help: "",
     },
-
   })
   const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
   const [postProductCreate, { isLoading }] = usePostProductCreateMutation();
   const [putProduct, {isSuccess: isPutProductSuccess}] = usePutProductEditMutation();
-
-  useEffect(() => {
-    if(!productModalData.productId) return;
-    triggerGetList({
-      productId: productModalData.productId,
-    })
-  }, [productModalData.productId])
 
   const [uploadFiles, setUploadFiles] = useState<{
     logoFileList: UploadFile[];
@@ -76,6 +69,19 @@ export const useProductFormModal = (props: ProductFormModal) => {
     logoFileList: null,
     backgroundImgFileList: null,
   });
+
+  useEffect(() => {
+    if(triggerFetchTableList) {
+      console.log("[debug] 3", triggerFetchTableList)
+    }
+  }, [triggerFetchTableList]);
+
+  useEffect(() => {
+    if(!productModalData.productId) return;
+    triggerGetProduct({
+      productId: productModalData.productId,
+    })
+  }, [productModalData.productId])
 
   useEffect(() => {
     console.log("productModalData.productId", productModalData.productId);
@@ -164,6 +170,12 @@ export const useProductFormModal = (props: ProductFormModal) => {
     console.log("productFormData", productFormData);
   }, [props.show, merchantList, productModalData.productId, isSuccess, isError, merchantList, productFormData?.logo, productFormData?.backgroundImg])
 
+  const [triggerGetList, { currentData: productListData }] = useLazyGetProductManageListQuery({
+    pollingInterval: 0,
+    refetchOnFocus: false,
+    refetchOnReconnect: false
+  });
+
   const handlePostProductCreate = useCallback((values) => {
     const action = !productModalData.isEdit ? postProductCreate : putProduct;
     if(productModalData.isEdit) {
@@ -172,8 +184,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
         productId: productModalData.productId,
       }
     }
-    action(values).unwrap().then((responseData: {code?: number; message?: string})  => {
-      // console.log("responseData", responseData);
+    action(values).unwrap().then((responseData) => {
+      console.log("responseData", responseData);
       // console.log(responseData?.message)
       // console.log(responseData?.code)
       setProductModalData({
@@ -185,11 +197,16 @@ export const useProductFormModal = (props: ProductFormModal) => {
       //     content: responseData?.message
       //   });
       // }
-      if(triggerFetchTableList) triggerFetchTableList();
+
+      // if(triggerFetchTableList) {
+      //   return triggerFetchTableList(null)
+      // }
+      triggerGetList(null);
     }).catch((error) => {
+      console.log("error", error);
       Modal.error(error.error);
     })
-  }, [productModalData.isEdit, postProductCreate, putProduct]);
+  }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
 
 
   const strToFloatNumberWithFixed2 = (str: string): number => {
@@ -272,144 +289,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     customAntFormFieldError,
     setCustomAntFormFieldError,
     setTriggerFetchTableList,
-    triggerFetchTableList,
+    triggerGetList,
+    productListData,
   }
 }
-
-interface ProductModalProps {
-  productModalData: ProductFormModal;
-  handleCloseModal: () => void;
-  onFinish: (value: any) => void;
-  form: any;
-  merchantList: GetAvailableMerchantResponse;
-  uploadFiles: any;
-  onMockFinish: () => void;
-  customAntFormFieldError: CustomAntFormFieldError;
-  setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
-}
-
-const ProductModal = (props: ProductModalProps) =>
-{
-  const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish, customAntFormFieldError, setCustomAntFormFieldError } = props;
-  console.log("debug.setCustomAntFormFieldError", setCustomAntFormFieldError);
-  console.log("[ModalWrapper] render")
-  const layout = {
-    labelCol: { span: 5 },
-    wrapperCol: { span: 18 },
-  };
-  const setLogo = useCallback((url: string) => {
-    form.setFieldsValue({
-      logo: url
-    });
-  }, [form])
-  const setBackgroundImg = useCallback((url: string) => {
-    form.setFieldsValue({
-      backgroundImg: url
-    });
-  }, [form])
-
-  return (
-      <Modal
-        title={!productModalData.isEdit ? <span><span style={{ marginRight: 8 }}>添加产品</span> <Button onClick={() => onMockFinish()}>自动填入范本资料</Button></span> : "编辑产品"}
-        open={productModalData.show}
-        onCancel={handleCloseModal}
-        onOk={form.submit}
-        width={'800px'}
-        maskClosable={false}
-      >
-        <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}
-              onFieldsChange={(changedFields, allFields) =>{
-                // console.log("changedFields", changedFields)
-                // console.log("allFields", allFields)
-                const preInterestRate = allFields.filter(field => field.name.toString() === "preInterestRate")[0]?.value ?? undefined;
-                const postInterestRate = allFields.filter(field => field.name.toString() === "postInterestRate")[0]?.value ?? undefined;
-                let isValidate = true;
-                if(Number(preInterestRate)> 100 || Number(preInterestRate) < 0) {
-                  setCustomAntFormFieldError({
-                    ...customAntFormFieldError,
-                    preInterestRate: {
-                      validateStatus: "error",
-                      help: "请填写0-100间数字",
-                    },
-                  })
-                  isValidate = false;
-                } else if(Number(preInterestRate) >= 0 && Number(preInterestRate)<= 100){
-                  setCustomAntFormFieldError({
-                    ...customAntFormFieldError,
-                    preInterestRate: {
-                      validateStatus: "",
-                      help: "",
-                    },
-                  })
-                }
-                if(Number(postInterestRate)> 100 || Number(postInterestRate) < 0) {
-                  setCustomAntFormFieldError({
-                    ...customAntFormFieldError,
-                    postInterestRate: {
-                      validateStatus: "error",
-                      help: "请填写0-100间数字",
-                    },
-                  })
-                  isValidate = false;
-                } else if(Number(postInterestRate) >= 0 && Number(postInterestRate)<= 100){
-                  setCustomAntFormFieldError({
-                    ...customAntFormFieldError,
-                    postInterestRate: {
-                      validateStatus: "",
-                      help: "",
-                    },
-                  })
-                }
-                if(isValidate) {
-                  if(Number(preInterestRate) + Number(postInterestRate) > 100) {
-                    setCustomAntFormFieldError({
-                      ...customAntFormFieldError,
-                      preInterestRate: {
-                        validateStatus: "error",
-                        help: "前置利息＋后置利息不得超过100%",
-                      },
-                      postInterestRate: {
-                        validateStatus: "error",
-                        help: "前置利息＋后置利息不得超过100%",
-                      }
-                    })
-                  } else {
-                    setCustomAntFormFieldError({
-                      ...customAntFormFieldError,
-                      preInterestRate: {
-                        validateStatus:"",
-                        help: "",
-                      },
-                      postInterestRate: {
-                        validateStatus:"",
-                        help: "",
-                      }
-                    })
-                  }
-                }
-              }}
-              initialValues={{
-                // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
-
-                approveTimeUnit: "mins",
-                extensible: false,
-                top: false,
-                enabled: true,
-                templateType: 1,
-                productInterestRatePairs: [{
-                  num: "",
-                  postInterest: "",
-                  preInterest: "",
-                }]
-              }}
-        >
-          <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit}/>
-          <ProductSettingSection setLogo={setLogo} setBackgroundImg={setBackgroundImg}/>
-          <LoanSettingSection/>
-          <RateSettingSection form={form} customAntFormFieldError={customAntFormFieldError}/>
-          <UploadSettingSection/>
-        </Form>
-      </Modal>
-  )
-}
-export { ProductModal }

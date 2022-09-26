@@ -1,15 +1,23 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import moment from "moment"
 import Table from "../../component/table";
 import {PageContainer} from '@ant-design/pro-components';
-import {ProductModal, useProductFormModal} from "../../component/useProductFormModal";
+import {useProductFormModal} from "../../component/useProductFormModal";
+import {ProductModal} from "../../component/useProductFormModal/ProductModal";
 
 
 const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
 
   // const [triggerTableGetList, setTriggerTableGetList] = useState();
-  const {productModalData, setProductModalData, form, handleCloseModal, merchantList, uploadFiles, onFinish, setCustomAntFormFieldError, customAntFormFieldError, productFormData, setTriggerFetchTableList} = useProductFormModal({
+  const {
+    productModalData, setProductModalData,
+    form, handleCloseModal, merchantList,
+    uploadFiles, onFinish, setCustomAntFormFieldError,
+    customAntFormFieldError, productFormData,
+    setTriggerFetchTableList,
+    triggerGetList, productListData
+  } = useProductFormModal({
     show: false,
     isEdit: false,
   });
@@ -17,11 +25,6 @@ const Product=() => {
   useEffect(() => {
     setDomLoaded(true);
   }, []);
-
-  const callbackTriggerTableGetList = (triggerGetList: any) => {
-    // triggerGetList();
-    setTriggerFetchTableList(triggerGetList);
-  }
 
   return domLoaded ? (
     <div>
@@ -48,7 +51,8 @@ const Product=() => {
           },
         }}
       >
-        <Table setProductModalData={setProductModalData} triggerTableGetList={callbackTriggerTableGetList}/>
+        <Table triggerGetList={triggerGetList} productListData={productListData} setProductModalData={setProductModalData} />
+
         {/*{productModalData.show && <ProductFormModal/>}*/}
         {productModalData.show && <ProductModal
           setCustomAntFormFieldError={setCustomAntFormFieldError}
