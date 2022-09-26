@@ -7,7 +7,7 @@ import {
   NewNumberValidatorPromise,
   NumberValidator,
   PipeValidator
-} from "../../utils/validator";
+} from "../../../shared/utils/validator";
 import {CustomAntFormFieldError} from "../../hooks/useProductFormModal";
 
 const { Paragraph, Text } = Typography;

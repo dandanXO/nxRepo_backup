@@ -1,7 +1,7 @@
 import {Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadFile, UploadProps} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
 import React, {useCallback, useState} from "react";
-import {EmailValidator, NumberValidator} from "../../utils/validator";
+import {EmailValidator, NumberValidator} from "../../../shared/utils/validator";
 
 
 interface ProductSettingSectionProps {
