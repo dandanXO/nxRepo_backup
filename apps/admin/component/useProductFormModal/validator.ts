@@ -8,7 +8,7 @@ export const PipeValidator = (_, value) => (pipes: Promise<unknown>[]) => {
   // console.log("value", value)
   // console.log("pipes", pipes);
   return Promise.all(pipes).then(values => {
-    console.log(values); // [3, 1337, "foo"]
+    // console.log(values); // [3, 1337, "foo"]
     return Promise.resolve();
   }).catch((error) => {
     return Promise.reject(error)
@@ -89,7 +89,7 @@ interface ValidateTag extends Validator {
   }
 
 export const TagValidator = (_, value) => (params: ValidateTag) => {
-  console.log("TagValidator.value", value);
+  // console.log("TagValidator.value", value);
     const scheme = z.string().array()
         .min(1, params.typeErrorMessage)
         .max(3, params.typeErrorMessage);

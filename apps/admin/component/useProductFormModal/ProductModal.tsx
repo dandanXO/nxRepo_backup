@@ -28,8 +28,8 @@ interface ProductModalProps {
 const ProductModal = (props: ProductModalProps) =>
 {
   const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish, customAntFormFieldError, setCustomAntFormFieldError } = props;
-  console.log("debug.setCustomAntFormFieldError", setCustomAntFormFieldError);
-  console.log("[ModalWrapper] render")
+  // console.log("debug.setCustomAntFormFieldError", setCustomAntFormFieldError);
+  // console.log("[ModalWrapper] render")
   const layout = {
     labelCol: { span: 5 },
     wrapperCol: { span: 18 },
