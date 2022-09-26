@@ -3,7 +3,6 @@ import axiosBaseQuery from "./axiosBaseQuery";
 import {GetMerchantListResponseData} from "../types/getMerchantList";
 import {PostMerchantCreateRequestBody} from "../types/postMerchantCreate";
 import {PutMerchantProps} from "../types/putMerchant";
-import {LoginRequest, LoginResponse} from "../types/postLogin";
 
 // const baseUrl = "/api/v2";
 const baseUrl = "/hs/admin";
@@ -14,18 +13,6 @@ export const API = createApi({
         baseUrl,
     }),
     endpoints: (builder) => ({
-        // NOTE: POST /hs/admin/auth/login
-        login: builder.mutation<LoginResponse, LoginRequest>({
-            query: (credentials: LoginRequest) => ({
-                url: "/auth/login",
-                method: "POST",
-                data: {
-                    phoneNo: credentials.phoneNo,
-                    code: credentials.code,
-                }
-            })
-        }),
-
          // NOTE: GET /hs/admin/merchant-manage/list 商戶管理列表
          getMerchantManageList: builder.query<GetMerchantListResponseData, null>({
             query: () => ({
@@ -55,7 +42,6 @@ export const API = createApi({
 });
 
 export const {
-  useLoginMutation,
   usePrefetch,
   useGetMerchantManageListQuery,
   useLazyGetMerchantManageListQuery,

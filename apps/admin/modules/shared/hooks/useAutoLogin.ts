@@ -1,4 +1,4 @@
-import {useLoginMutation} from "../../../api";
+import {useLoginMutation} from "../api/SessionApi";
 import {useEffect} from "react";
 
 const useAutoLogin = () => {
