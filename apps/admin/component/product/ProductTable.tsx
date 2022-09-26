@@ -6,7 +6,7 @@ import { Button, Space } from 'antd';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import { useLazyGetProductManageListQuery, useLoginMutation } from "../../api";
 import { GetProductListResponseProduct } from "../../types/getProductList";
-import {ProductFormModal} from "./useProductFormModal";
+import {ProductFormModal} from "./hooks/useProductFormModal";
 
 interface ProductTable {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
