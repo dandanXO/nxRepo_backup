@@ -119,7 +119,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
 
-      <Form.Item label="日利息" tooltip="以借款金额计" required>
+      <Form.Item label="日利息" tooltip="以年利息计" required>
         <Form.Item name="dailyRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
