@@ -8,35 +8,13 @@ import {useLoginMutation} from "../../api";
 import {GetProductListResponseProduct} from "../../types/getProductList";
 import {ProductFormModal} from "./hooks/useProductFormModal";
 
-interface ProductTable {
+interface ProductTableProps {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
   triggerGetList?: any;
   productListData?: any;
 }
-const DemoTable = (props: ProductTable) => {
 
-    const [triggerLogin, { isSuccess: isLoginSuccess }] = useLoginMutation();
-
-    useEffect(() => {
-        if (window.top == window.self) {
-            // Top level window
-            console.log("[Debug][iframe] i'm master")
-            if (!isLoginSuccess) {
-                triggerLogin({
-                    phoneNo: "19888888888",
-                    code: "123456"
-                });
-            }
-            if (isLoginSuccess) props.triggerGetList(null);
-        } else {
-            // Not top level. An iframe, popup or something
-            console.log("[Debug][iframe] inner parent window")
-          props.triggerGetList(null);
-        }
-
-    }, [triggerLogin, props.triggerGetList, isLoginSuccess])
-
-
+const ProductTable = (props: ProductTableProps) => {
     const [productList, setProductList] = useState<GetProductListResponseProduct[]>(props.productListData);
 
     useEffect(()=>{
@@ -152,4 +130,4 @@ const DemoTable = (props: ProductTable) => {
     );
 };
 
-export default DemoTable;
+export default ProductTable;
