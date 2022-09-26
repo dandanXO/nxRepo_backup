@@ -1,13 +1,16 @@
-import {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import moment from "moment"
 import Table from "../../component/table";
 import {PageContainer} from '@ant-design/pro-components';
 import {useProductFormModal} from "../../component/useProductFormModal";
 import {ProductModal} from "../../component/useProductFormModal/ProductModal";
+import {FormInstance} from "antd/es";
 
+const formRef = React.createRef();
 
 const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
+  // const formRef = React.useRef<FormInstance>();
 
   // const [triggerTableGetList, setTriggerTableGetList] = useState();
   const {
@@ -20,11 +23,14 @@ const Product=() => {
   } = useProductFormModal({
     show: false,
     isEdit: false,
+    formRef,
   });
 
   useEffect(() => {
     setDomLoaded(true);
   }, []);
+
+
 
   return domLoaded ? (
     <div>
@@ -55,6 +61,8 @@ const Product=() => {
 
         {/*{productModalData.show && <ProductFormModal/>}*/}
         {productModalData.show && <ProductModal
+          // ref={formRef}
+          show={productModalData.show}
           setCustomAntFormFieldError={setCustomAntFormFieldError}
           customAntFormFieldError={customAntFormFieldError}
           productModalData={productModalData}
