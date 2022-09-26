@@ -10,6 +10,7 @@ import {ProductFormModal} from "./useProductFormModal";
 
 interface ProductTable {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
+  triggerTableGetList?: any;
 }
 const DemoTable = (props: ProductTable) => {
 
@@ -20,6 +21,10 @@ const DemoTable = (props: ProductTable) => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
+
+    useEffect(() => {
+      props.triggerTableGetList(triggerGetList);
+    }, [triggerGetList])
 
     // const { currentData, refetch} = useGetProductManageListQuery(null, {
     //   skip: false,
