@@ -1,17 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-import ReactDOM from "react-dom";
-import { ProForm, ProFormText } from '@ant-design/pro-components';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
-import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
-import { Button, Dropdown, Menu, Modal, Form, Input, Radio, Spin, Space, InputNumber } from 'antd';
-import { useLazyGetMerchantManageListQuery, usePostMerchantCreateMutation,  } from "../../api";
+import {useEffect, useState} from 'react';
+import type {ProColumns} from '@ant-design/pro-components';
+import {PageContainer, ProTable} from '@ant-design/pro-components';
+import {Button, Form, Input, InputNumber, Modal, Radio, Space} from 'antd';
 
-import { GetUserResponse } from "../../types/getUserList";
-
-import { GetAvailableMerchantResponse } from "../../types/getAvailbaleMerchant";
-import moment from 'moment';
+import {GetUserResponse} from "../../types/getUserList";
 import {useGetAvailableMerchantListQuery} from "../../modules/product/api/ProductApi";
+
 const UserManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
@@ -69,8 +63,8 @@ const UserManage = () => {
             valueType: 'option',
             key: 'option',
             render: (text, record, _, action) => record.isBlack ?
-                [<a key="editable" href="/userInfo">查看</a>, <a key="blackList" onClick={() => setShowModal(true)}>黑名单</a>] :
-                [<a key="editable" href="/userInfo">查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
+                [<a key="editable" href="/user-info">查看</a>, <a key="blackList" onClick={() => setShowModal(true)}>黑名单</a>] :
+                [<a key="editable" href="/user-info">查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
             ,
         },
 

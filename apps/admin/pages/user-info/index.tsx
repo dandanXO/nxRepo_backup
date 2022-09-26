@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import moment from "moment"
-import Table from "../../component/table";
-import { PageContainer } from '@ant-design/pro-components';
-import { Tabs } from 'antd';
+import {useEffect, useState} from 'react';
+import {PageContainer} from '@ant-design/pro-components';
+import {Tabs} from 'antd';
 import UserInfo from '../../component/UserInfo';
 import AddressBook from '../../component/AddressBook';
 import SmsMessage from '../../component/SmsMessage';
