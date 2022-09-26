@@ -5,11 +5,13 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Modal, Form, Input, Radio, Spin, Space, InputNumber } from 'antd';
-import { useLazyGetMerchantManageListQuery, usePostMerchantCreateMutation, useGetAvailableMerchantListQuery } from "../../api";
+import { useLazyGetMerchantManageListQuery, usePostMerchantCreateMutation,  } from "../../api";
+
 import { GetUserResponse } from "../../types/getUserList";
 
 import { GetAvailableMerchantResponse } from "../../types/getAvailbaleMerchant";
 import moment from 'moment';
+import {useGetAvailableMerchantListQuery} from "../../modules/product/api/ProductApi";
 const UserManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
