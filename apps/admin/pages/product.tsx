@@ -1,12 +1,10 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import moment from "moment"
+import React, {useEffect, useState} from 'react';
 import ProductTable from "../modules/product/components/ProductTable";
 import {PageContainer} from '@ant-design/pro-components';
 import {useProductFormModal} from "../modules/product/hooks/useProductFormModal";
 import {ProductModal} from "../modules/product/components/ProductModal";
 import ProductForm from "../modules/product/components/ProductForm";
-import useAutoLogin from "../modules/shared/hooks/useAutoLogin";
-
+// import useAutoLogin from "../modules/shared/hooks/useAutoLogin";
 
 const Product=() => {
   // useAutoLogin();
