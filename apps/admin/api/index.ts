@@ -1,5 +1,5 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
-import axiosBaseQuery from "./axiosBaseQuery";
+import axiosBaseQuery from "../modules/shared/api/axiosBaseQuery";
 import {GetMerchantListResponseData} from "../types/getMerchantList";
 import {PostMerchantCreateRequestBody} from "../types/postMerchantCreate";
 import {PutMerchantProps} from "../types/putMerchant";
