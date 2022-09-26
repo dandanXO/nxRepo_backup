@@ -1,19 +1,13 @@
-import BaseSettingSection from "./components/BaseSettingSection";
-import ProductSettingSection from "./components/ProductSettingSection";
-import LoanSettingSection from "./components/LoanSettingSection";
-import RateSettingSection from "./components/RateSettingSection";
-import {UploadSettingSection} from "./components/UploadSettingSection";
-import {Button, Form, message, Modal, Upload, UploadFile, UploadProps} from "antd";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import {Form, Modal, UploadFile} from "antd";
+import React, {useCallback, useEffect, useState} from "react";
 import {
   useGetAvailableMerchantListQuery,
-  useGetProductManageListQuery,
-  useGetProductQuery, useLazyGetProductManageListQuery,
+  useLazyGetProductManageListQuery,
   useLazyGetProductQuery,
-  usePostProductCreateMutation, usePutProductEditMutation
+  usePostProductCreateMutation,
+  usePutProductEditMutation
 } from "../../api";
 import {PostProductCreateRequestBody} from "../../types/postProductCreate";
-import {GetAvailableMerchantResponse} from "../../types/getAvailbaleMerchant";
 import {ValidateStatus} from "antd/es/form/FormItem";
 import moment from "moment/moment";
 
@@ -45,7 +39,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
   // console.log("productModalData", productModalData);
 
 
+  // NOTICE: form
   const [form] = Form.useForm();
+
   const [triggerGetProduct, { currentData: productFormData, isLoading: isGetProductLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductQuery({
 
   })
@@ -77,12 +73,22 @@ export const useProductFormModal = (props: ProductFormModal) => {
     }
   }, [triggerFetchTableList]);
 
+
+  // useEffect(() => {
+  //   console.log("show!!!");
+  //   form.resetFields();
+  //
+  // }, [props.show])
+
   useEffect(() => {
-    if(!productModalData.productId) return;
+    if(!productModalData.productId) {
+      return;
+    }
     triggerGetProduct({
       productId: productModalData.productId,
     })
   }, [productModalData.productId])
+
 
   useEffect(() => {
     console.log("productModalData.productId", productModalData.productId);
@@ -203,8 +209,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
       // console.log("props.formRef", props.formRef);
       // props.formRef.current.resetFields();
+      // console.log()
+      console.log("form", form)
+      form.resetFields();
 
-      // form.resetFields();
       // else {
       //   Modal.error({
       //     title: "Error",
@@ -220,7 +228,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
       console.log("error", error);
       Modal.error(error.error);
     })
-  }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
+  // }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
+  }, [productModalData.isEdit, productModalData.productId, postProductCreate, putProduct, setProductModalData, form, triggerGetList]);
 
 
   const fixedFloatNumberToFixed2 = (number: number): number => {
@@ -288,10 +297,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
   };
 
   const handleCloseModal = () => {
+    form.resetFields()
     setProductModalData({
       show: false,
     })
-    form.resetFields()
   }
 
   return {
