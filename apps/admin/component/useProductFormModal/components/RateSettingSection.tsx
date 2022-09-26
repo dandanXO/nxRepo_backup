@@ -125,10 +125,10 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                      {
                        transform: (value) => Number(value),
                        validator: async (_, value) =>NumberValidator(_, value)({
-                         min: 1,
+                         min: 0,
                          minMessage: "请输入日利息",
                          max: 36,
-                         maxMessage: "请填写1-36间数字"
+                         maxMessage: "请填写0-36间数字"
                        })
                      },
                    ]}
