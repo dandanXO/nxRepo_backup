@@ -1,5 +1,5 @@
 import {CustomAntFormFieldError, ProductFormModal} from "../../hooks/useProductFormModal";
-import {GetAvailableMerchantResponse} from "../../../../types/getAvailbaleMerchant";
+import {GetAvailableMerchantResponse} from "../../api/types/getAvailbaleMerchant";
 import React, {useCallback} from "react";
 import {Form} from "antd";
 import BaseSettingSection from "./BaseSettingSection";

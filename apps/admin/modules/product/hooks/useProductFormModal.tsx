@@ -7,7 +7,7 @@ import {
   usePostProductCreateMutation,
   usePutProductEditMutation
 } from "../api/ProductApi";
-import {PostProductCreateRequestBody} from "../../../types/postProductCreate";
+import {PostProductCreateRequestBody} from "../api/types/postProductCreate";
 import {ValidateStatus} from "antd/es/form/FormItem";
 import moment from "moment/moment";
 
