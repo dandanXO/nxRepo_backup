@@ -30,6 +30,7 @@ export interface ProductFormModal {
   isEdit?: boolean
   productId?: number
   triggerTableGetList?: any;
+  formRef?: any;
 }
 
 export const useProductFormModal = (props: ProductFormModal) => {
@@ -154,10 +155,17 @@ export const useProductFormModal = (props: ProductFormModal) => {
         maxAmount: productFormData.maxAmount,
         extensible: productFormData.extensible,
         extensibleOverdueDays: productFormData.extensibleOverdueDays,
-        preInterestRate: `${Number(productFormData.preInterestRate) * 100}`,
-        postInterestRate: `${Number(productFormData.postInterestRate) * 100}`,
-        dailyRate: `${Number(productFormData.dailyRate) * 100}`,
-        extensionRate: `${Number(productFormData.extensionRate) * 100}`,
+        preInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.preInterestRate) * 100)}`,
+        postInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.postInterestRate) * 100)}`,
+        dailyRate: `${fixedFloatNumberToFixed2(Number(productFormData.dailyRate) * 100)}`,
+        extensionRate: `${fixedFloatNumberToFixed2(Number(productFormData.extensionRate) * 100)}`,
+        productInterestRatePairs: productFormData.productInterestRatePairs.map((ratePair) => {
+          return {
+            num: ratePair.num,
+            preInterest: fixedFloatNumberToFixed2(ratePair.preInterest * 100),
+            postInterest: fixedFloatNumberToFixed2(ratePair.postInterest * 100),
+          }
+        }),
         overdueRate: `${Number(productFormData.overdueRate) * 100}`,
         top: productFormData.top,
         tags: productFormData.tags.split(","),
@@ -190,7 +198,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
       // console.log(responseData?.code)
       setProductModalData({
         show: false,
+        // ...responseData,
       });
+
+      // console.log("props.formRef", props.formRef);
+      // props.formRef.current.resetFields();
+
+      // form.resetFields();
       // else {
       //   Modal.error({
       //     title: "Error",
@@ -209,6 +223,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
   }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
 
 
+  const fixedFloatNumberToFixed2 = (number: number): number => {
+    return Number(number.toFixed(2));
+  }
   const strToFloatNumberWithFixed2 = (str: string): number => {
     return Number((Number(str) * 0.01).toFixed(2));
   }

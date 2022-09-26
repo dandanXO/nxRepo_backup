@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import {Button, Form, Modal} from "antd";
 import BaseSettingSection from "./components/BaseSettingSection";
 import ProductSettingSection from "./components/ProductSettingSection";
@@ -19,9 +19,12 @@ interface ProductModalProps {
   onMockFinish: () => void;
   customAntFormFieldError: CustomAntFormFieldError;
   setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
+  show: boolean;
+  // formRef: any,
+  // ref: any;
 }
 
-
+// ProductModalForwardRefless
 const ProductModal = (props: ProductModalProps) =>
 {
   const { productModalData, handleCloseModal, onFinish, form, merchantList,uploadFiles, onMockFinish, customAntFormFieldError, setCustomAntFormFieldError } = props;
@@ -42,6 +45,20 @@ const ProductModal = (props: ProductModalProps) =>
     });
   }, [form])
 
+  // useEffect(() => {
+  //   console.log("debug reset")
+  //   // form.resetFields();
+  //   formRef.current.resetFields();
+  // }, [props.show])
+
+  // const formRef = React.useRef<FormInstance>();
+
+  // useEffect(() => {
+  //   if (formRef.current !== null) {
+  //     formRef.current.resetFields();
+  //   }
+  // }, [formRef.current])
+
   return (
     <Modal
       title={!productModalData.isEdit ? <span><span style={{ marginRight: 8 }}>添加产品</span> <Button onClick={() => onMockFinish()}>自动填入范本资料</Button></span> : "编辑产品"}
@@ -51,7 +68,9 @@ const ProductModal = (props: ProductModalProps) =>
       width={'800px'}
       maskClosable={false}
     >
-      <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}
+      <Form
+        // ref={props.formRef}
+        {...layout} form={form} name="control-hooks" onFinish={onFinish}
             onFieldsChange={(changedFields, allFields) =>{
               // console.log("changedFields", changedFields)
               // console.log("allFields", allFields)
@@ -146,4 +165,9 @@ const ProductModal = (props: ProductModalProps) =>
     </Modal>
   )
 }
-export { ProductModal }
+
+// const ProductModal = React.forwardRef((props, ref) => (
+//   <ProductModalForwardRefless ref={ref} {...props}>
+// ));
+
+export { ProductModal };
