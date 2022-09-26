@@ -31,53 +31,8 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item name="preInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    validateStatus={props?.customAntFormFieldError?.preInterestRate.validateStatus}
                    help={props?.customAntFormFieldError?.preInterestRate.help}
-                   // rules={[
-                   //   {
-                   //     transform: (value) => Number(value),
-                   //     validator: async (_, value) =>NumberValidator(_, value)({
-                   //       min: 1,
-                   //       minMessage: "请输入前置利息",
-                   //       max: 100,
-                   //       maxMessage: "请填写1-100间数字"
-                   //     })
-                   //     validator: async (_, value) => PipeValidator(_, value)([
-                   //       NewNumberValidatorPromise(value, {
-                   //         min: 1,
-                   //         minMessage: "请输入後置利息",
-                   //         max: 100,
-                   //         maxMessage: "请填写1-100间数字"
-                   //       }),
-                   //       CustomValidator((resolve, reject) => {
-                   //         const preInterestRate = value;
-                   //         const postInterestRate = props.form.getFieldValue("postInterestRate");
-                   //         console.log("preInterestRate", preInterestRate);
-                   //         console.log("postInterestRate", postInterestRate);
-                   //         if(preInterestRate + postInterestRate > 100) {
-                   //           reject("前置利息＋后置利息不得超过100%");
-                   //         }else {
-                   //           resolve();
-                   //         }
-                   //       })
-                   //     ]),
-                   //   },
-                   // ]}
         >
-          <Input allowClear placeholder="填写 0 - 100 间数字"
-                 // onChange={async () => {
-                 //    const preInterestRate = props.form.getFieldValue("preInterestRate");
-                 //    const postInterestRate = props.form.getFieldValue("postInterestRate");
-                 //    console.log("preInterestRate", preInterestRate);
-                 //    console.log("postInterestRate", postInterestRate);
-                 //    if(postInterestRate === "") {
-                 //      return;
-                 //    }
-                 //    if(Number(preInterestRate) + Number(postInterestRate) > 100) {
-                 //      // const values = await props.form.validateFields(['preInterestRate', 'postInterestRate']);
-                 //      // console.log("values", values);
-                 //      alert("> 100");
-                 //    }
-                 //  }}
-          />
+          <Input allowClear placeholder="填写 0 - 100 间数字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
@@ -86,35 +41,8 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item name="postInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    validateStatus={props?.customAntFormFieldError?.postInterestRate.validateStatus}
                    help={props?.customAntFormFieldError?.postInterestRate.help}
-                   // rules={[
-                   //   {
-                   //     transform: (value) => Number(value),
-                   //     validator: async (_, value) =>NumberValidator(_, value)({
-                   //       min: 1,
-                   //       minMessage: "请输入後置利息",
-                   //       max: 100,
-                   //       maxMessage: "请填写1-100间数字"
-                   //     })
-                   //   },
-                   // ]}
         >
-          <Input allowClear placeholder="填写 0 - 100 间数字"
-                 // onChange={async () => {
-                 //    const preInterestRate = props.form.getFieldValue("preInterestRate");
-                 //    const postInterestRate = props.form.getFieldValue("postInterestRate");
-                 //    console.log("preInterestRate", preInterestRate);
-                 //    console.log("postInterestRate", postInterestRate);
-                 //    if(postInterestRate === "") {
-                 //      return;
-                 //    }
-                 //    if(Number(preInterestRate) + Number(postInterestRate) > 100) {
-                 //      // const values = await props.form.validateFields(['preInterestRate', 'postInterestRate']);
-                 //      // console.log("values", values);
-                 //      alert("> 100");
-                 //    }
-                 //
-                 //  }}
-          />
+          <Input allowClear placeholder="填写 0 - 100 间数字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
