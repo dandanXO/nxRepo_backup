@@ -4,8 +4,8 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import { useLazyGetProductManageListQuery, useLoginMutation } from "../api";
-import { GetProductListResponseProduct } from "../types/getProductList";
+import { useLazyGetProductManageListQuery, useLoginMutation } from "../../api";
+import { GetProductListResponseProduct } from "../../types/getProductList";
 import {ProductFormModal} from "./useProductFormModal";
 
 interface ProductTable {
