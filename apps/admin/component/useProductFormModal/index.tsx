@@ -69,7 +69,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
   useEffect(() => {
     if(triggerFetchTableList) {
-      console.log("[debug] 3", triggerFetchTableList)
+      // console.log("[debug] 3", triggerFetchTableList)
     }
   }, [triggerFetchTableList]);
 
@@ -91,7 +91,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
 
   useEffect(() => {
-    console.log("productModalData.productId", productModalData.productId);
+    // console.log("productModalData.productId", productModalData.productId);
     if(!productModalData.productId) {
       setUploadFiles({
         logoFileList: null,
@@ -115,17 +115,17 @@ export const useProductFormModal = (props: ProductFormModal) => {
         ],
       });
     }
-    console.log("productFormData", productFormData);
+    // console.log("productFormData", productFormData);
     // NOTICE: uploadFiles is old
-    console.log("uploadFiles", uploadFiles);
+    // console.log("uploadFiles", uploadFiles);
   }, [productModalData.productId, props.show, productFormData])
 
   useEffect(() => {
 
     // if(!productModalData.productId) return;
 
-    console.log("productFormData.merchantId", productFormData?.merchantId);
-    console.log("merchantList", merchantList);
+    // console.log("productFormData.merchantId", productFormData?.merchantId);
+    // console.log("merchantList", merchantList);
     if(!productFormData) return;
     if(!merchantList) return;
     const currentMerchant = merchantList?.find(merchant => merchant.merchantId === productFormData.merchantId);
@@ -181,7 +181,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       })
     }
 
-    console.log("productFormData", productFormData);
+    // console.log("productFormData", productFormData);
   }, [props.show, merchantList, productModalData.productId, isSuccess, isError, merchantList, productFormData?.logo, productFormData?.backgroundImg])
 
   const [triggerGetList, { currentData: productListData }] = useLazyGetProductManageListQuery({
@@ -199,7 +199,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       }
     }
     action(values).unwrap().then((responseData) => {
-      console.log("responseData", responseData);
+      // console.log("responseData", responseData);
       // console.log(responseData?.message)
       // console.log(responseData?.code)
       setProductModalData({
@@ -210,7 +210,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       // console.log("props.formRef", props.formRef);
       // props.formRef.current.resetFields();
       // console.log()
-      console.log("form", form)
+      // console.log("form", form)
       form.resetFields();
 
       // else {
@@ -225,7 +225,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       // }
       triggerGetList(null);
     }).catch((error) => {
-      console.log("error", error);
+      // console.log("error", error);
       Modal.error(error.error);
     })
   // }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
@@ -239,7 +239,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     return Number((Number(str) * 0.01).toFixed(2));
   }
   const onFinish = (values: any) => {
-    console.log("onFinish.values", JSON.stringify(values));
+    // console.log("onFinish.values", JSON.stringify(values));
 
     const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
       num: i.num,
@@ -283,15 +283,15 @@ export const useProductFormModal = (props: ProductFormModal) => {
       enabled: values.enabled,
     }
     if(!productModalData.isEdit) {
-      console.log("新增")
+      // console.log("新增")
       creatProductData = {
         ...creatProductData,
         // adminUsername: values.adminUsername,
       }
     } else {
-      console.log("Edit")
+      // console.log("Edit")
     }
-    console.log(creatProductData)
+    // console.log(creatProductData)
 
     handlePostProductCreate(creatProductData);
   };
