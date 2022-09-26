@@ -1,10 +1,10 @@
 import {API} from "../../../api";
-import {GetAvailableMerchantResponse} from "../../../types/getAvailbaleMerchant";
-import {GetProductListResponse} from "../../../types/getProductList";
-import {PostProductCreateRequestBody} from "../../../types/postProductCreate";
-import {PostUploadProductIcon} from "../../../types/postUploadProductIcon";
-import {GetProductQueryResponse, GetProductRequestQuery} from "../../../types/getProduct";
-import {PutProductProps} from "../../../types/putProduct";
+import {GetAvailableMerchantResponse} from "./types/getAvailbaleMerchant";
+import {GetProductListResponse} from "./types/getProductList";
+import {PostProductCreateRequestBody} from "./types/postProductCreate";
+import {PostUploadProductIcon} from "./types/postUploadProductIcon";
+import {GetProductQueryResponse, GetProductRequestQuery} from "./types/getProduct";
+import {PutProductProps} from "./types/putProduct";
 
 const ProductApi = API.injectEndpoints({
   overrideExisting: false,
