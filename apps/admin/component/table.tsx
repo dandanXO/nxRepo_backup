@@ -78,8 +78,8 @@ const DemoTable = (props: ProductTable) => {
         { title: '產品名稱', dataIndex: 'productName', initialValue: "" },
         { title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
         { title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
-        { title: '展期利率(%)', dataIndex: 'extensionRate', hideInSearch: true },
-        { title: '逾期費率(%)', dataIndex: 'overdueRate', hideInSearch: true },
+        { title: '展期利率(%)', dataIndex: 'extensionRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
+        { title: '逾期費率(%)', dataIndex: 'overdueRate', hideInSearch: true , render: (text) => Number(Number(text) * 100).toFixed(1) },
         { title: '權重', dataIndex: 'weight', hideInSearch: true },
         {
           title: '狀態', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', valueEnum: {
