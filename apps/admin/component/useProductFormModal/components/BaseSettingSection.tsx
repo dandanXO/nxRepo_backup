@@ -28,13 +28,15 @@ const BaseSettingSection = (props: BaseSettingSectionProps) => {
         <Input allowClear placeholder="A1 Loan"/>
       </Form.Item>
 
-      <Form.Item name="adminUsername" label="用户名">
-        <Input allowClear disabled={props.isEdit}/>
-      </Form.Item>
+      {/*// NOTICE: 後端移除*/}
+      {/*<Form.Item name="adminUsername" label="用户名">*/}
+      {/*  <Input allowClear disabled={props.isEdit}/>*/}
+      {/*</Form.Item>*/}
 
-      <Form.Item name="adminPassword" label="登入密码" rules={[{ required: !props.isEdit }]}>
-        <Input.Password allowClear placeholder="登入密码"/>
-      </Form.Item>
+      {/*// NOTICE: 後端移除*/}
+      {/*<Form.Item name="adminPassword" label="登入密码" rules={[{ required: !props.isEdit }]}>*/}
+      {/*  <Input.Password allowClear placeholder="登入密码"/>*/}
+      {/*</Form.Item>*/}
     </React.Fragment>
   )
 }
