@@ -123,9 +123,11 @@ export const useProductFormModal = (props: ProductFormModal) => {
       form.setFieldsValue({
         merchantId: currentMerchant?.name,
         productName: productFormData.productName,
-        adminUsername: productFormData.adminUsername,
+        // NOTICE: 後端移除
+        // adminUsername: productFormData.adminUsername,
         // NOTICE: 後端不回傳真正密碼
-        adminPassword: null,
+        // NOTICE: 後端移除
+        // adminPassword: null,
         logo: productFormData.logo,
         backgroundImg: productFormData.backgroundImg,
         amountRangeLow: productFormData.amountRange.split("-")[0],
@@ -205,7 +207,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
     let creatProductData: PostProductCreateRequestBody = {
       merchantId: Number(values.merchantId),
       productName: values.productName,
-      adminPassword: values.adminPassword,
+      // NOTICE: 後端移除
+      // adminPassword: values.adminPassword,
       logo: values.logo,
       backgroundImg: values.backgroundImg,
       // NOTE: Range 開頭為手機端展示，為了吸引客戶
@@ -240,7 +243,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       console.log("新增")
       creatProductData = {
         ...creatProductData,
-        adminUsername: values.adminUsername,
+        // adminUsername: values.adminUsername,
       }
     } else {
       console.log("Edit")
