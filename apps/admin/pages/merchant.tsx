@@ -136,6 +136,10 @@ const MerchantManage = () => {
                     setting: { listsHeight: 400, },
                     reload: () => triggerGetList(null)
                 }}
+                pagination={{
+                    showSizeChanger: true,
+                    defaultPageSize: 10
+                }}
             />
             <Modal
                 title={isEdit ? "编辑商户" : "添加商户"}

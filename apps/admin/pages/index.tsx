@@ -9,6 +9,9 @@ export function Index() {
       <div>
         <Link href="/merchant"><a> merchantManage </a></Link>
       </div>
+      <div>
+        <Link href="/user"><a> userManage </a></Link>
+      </div>
     </div>
   );
 }
