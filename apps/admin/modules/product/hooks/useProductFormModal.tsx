@@ -76,7 +76,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
 
   useEffect(() => {
-    console.log("productModalData.show", productModalData.show);
+    // console.log("productModalData.show", productModalData.show);
     form.resetFields();
 
   }, [productModalData.show])
