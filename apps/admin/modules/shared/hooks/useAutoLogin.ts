@@ -1,7 +1,7 @@
 import {useLoginMutation} from "../../../api";
 import {useEffect} from "react";
 
-const useLogin = () => {
+const useAutoLogin = () => {
   const [triggerLogin, { isSuccess: isLoginSuccess }] = useLoginMutation();
 
   useEffect(() => {
@@ -22,3 +22,5 @@ const useLogin = () => {
   }, [triggerLogin, isLoginSuccess])
   return [isLoginSuccess]
 }
+
+export default useAutoLogin;
