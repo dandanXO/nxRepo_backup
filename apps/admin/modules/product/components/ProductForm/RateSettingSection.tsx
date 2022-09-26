@@ -7,8 +7,8 @@ import {
   NewNumberValidatorPromise,
   NumberValidator,
   PipeValidator
-} from "../utils/validator";
-import {CustomAntFormFieldError} from "../hooks/useProductFormModal";
+} from "../../utils/validator";
+import {CustomAntFormFieldError} from "../../hooks/useProductFormModal";
 
 const { Paragraph, Text } = Typography;
 interface RateSettingSectionProps {

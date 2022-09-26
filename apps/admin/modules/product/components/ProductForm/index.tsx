@@ -1,12 +1,12 @@
-import {CustomAntFormFieldError, ProductFormModal} from "./hooks/useProductFormModal";
-import {GetAvailableMerchantResponse} from "../../types/getAvailbaleMerchant";
+import {CustomAntFormFieldError, ProductFormModal} from "../../hooks/useProductFormModal";
+import {GetAvailableMerchantResponse} from "../../../../types/getAvailbaleMerchant";
 import React, {useCallback} from "react";
 import {Form} from "antd";
-import BaseSettingSection from "./components/BaseSettingSection";
-import ProductSettingSection from "./components/ProductSettingSection";
-import LoanSettingSection from "./components/LoanSettingSection";
-import RateSettingSection from "./components/RateSettingSection";
-import {UploadSettingSection} from "./components/UploadSettingSection";
+import BaseSettingSection from "./BaseSettingSection";
+import ProductSettingSection from "./ProductSettingSection";
+import LoanSettingSection from "./LoanSettingSection";
+import RateSettingSection from "./RateSettingSection";
+import {UploadSettingSection} from "./UploadSettingSection";
 
 interface ProductFormProps {
   productModalData: ProductFormModal;
@@ -18,7 +18,7 @@ interface ProductFormProps {
   show: boolean;
 }
 
-const ProductForm = (props: ProductFormProps) => {
+const Index = (props: ProductFormProps) => {
   const { productModalData, onFinish, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
 
   const layout = {
@@ -135,4 +135,4 @@ const ProductForm = (props: ProductFormProps) => {
   )
 }
 
-export default ProductForm;
+export default Index;
