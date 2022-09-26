@@ -1,11 +1,11 @@
 // eslint-disable max-classes-per-file
-import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Space } from 'antd';
+import {PlusOutlined} from '@ant-design/icons';
+import type {ActionType, ProColumns} from '@ant-design/pro-components';
+import {ProTable} from '@ant-design/pro-components';
+import {Button, Space} from 'antd';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import { useLazyGetProductManageListQuery, useLoginMutation } from "../../api";
-import { GetProductListResponseProduct } from "../../types/getProductList";
+import {useLoginMutation} from "../../api";
+import {GetProductListResponseProduct} from "../../types/getProductList";
 import {ProductFormModal} from "./hooks/useProductFormModal";
 
 interface ProductTable {
@@ -16,21 +16,6 @@ interface ProductTable {
 const DemoTable = (props: ProductTable) => {
 
     const [triggerLogin, { isSuccess: isLoginSuccess }] = useLoginMutation();
-
-    // const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductManageListQuery({
-    //     pollingInterval: 0,
-    //     refetchOnFocus: false,
-    //     refetchOnReconnect: false
-    // });
-
-
-    // const { currentData, refetch} = useGetProductManageListQuery(null, {
-    //   skip: false,
-    //   pollingInterval: 0,
-    //   refetchOnMountOrArgChange: false,
-    //   refetchOnFocus: false,
-    //   refetchOnReconnect: false,
-    // });
 
     useEffect(() => {
         if (window.top == window.self) {
@@ -57,7 +42,6 @@ const DemoTable = (props: ProductTable) => {
     useEffect(()=>{
         setProductList(props.productListData)
     },[props.productListData])
-
 
     const columns = useMemo(() => {
 

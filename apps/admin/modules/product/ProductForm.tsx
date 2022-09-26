@@ -8,7 +8,6 @@ import LoanSettingSection from "./components/LoanSettingSection";
 import RateSettingSection from "./components/RateSettingSection";
 import {UploadSettingSection} from "./components/UploadSettingSection";
 
-
 interface ProductFormProps {
   productModalData: ProductFormModal;
   onFinish: (value: any) => void;
