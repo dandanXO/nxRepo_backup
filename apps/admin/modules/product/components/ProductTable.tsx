@@ -116,6 +116,7 @@ const ProductTable = (props: ProductTableProps) => {
             }}
             pagination={{
                 pageSize: 10,
+                showSizeChanger: true,
                 onChange: (page) => console.log(page),
             }}
             dateFormatter="string"
