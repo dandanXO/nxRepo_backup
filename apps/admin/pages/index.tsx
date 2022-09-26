@@ -10,7 +10,7 @@ export function Index() {
         <Link href="/merchant"><a> merchantManage </a></Link>
       </div>
       <div>
-        <Link href="/apps/cms/src/app/pages/UserPage"><a> userManage </a></Link>
+        <Link href="/apps/cms/src/app/pages/user"><a> userManage </a></Link>
       </div>
     </div>
   );
