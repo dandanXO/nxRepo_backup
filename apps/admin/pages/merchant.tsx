@@ -5,8 +5,8 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Spin,Space } from 'antd';
-import {useLazyGetMerchantManageListQuery ,usePostMerchantCreateMutation,usePutMerchantEditMutation } from "../../api";
-import { GetMerchantListResponse } from "../../types/getMerchantList";
+import {useLazyGetMerchantManageListQuery ,usePostMerchantCreateMutation,usePutMerchantEditMutation } from "../api";
+import { GetMerchantListResponse } from "../types/getMerchantList";
 
 
 const MerchantManage = () => {
