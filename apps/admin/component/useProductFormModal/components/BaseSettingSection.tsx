@@ -10,6 +10,8 @@ interface BaseSettingSectionProps {
 }
 const BaseSettingSection = (props: BaseSettingSectionProps) => {
   if(!props.merchantList) return null;
+  // console.log("props.merchantList", props.merchantList);
+
   return (
     <React.Fragment>
           <Form.Item name="merchantId" label="商户名" rules={[{ required: true }]} >

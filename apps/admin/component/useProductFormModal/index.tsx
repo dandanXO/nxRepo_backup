@@ -29,6 +29,7 @@ export interface ProductFormModal {
   show: boolean;
   isEdit?: boolean
   productId?: number
+  triggerTableGetList?: any;
 }
 
 export const useProductFormModal = (props: ProductFormModal) => {
@@ -37,8 +38,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
     show: props.show,
     isEdit: props.isEdit,
     productId: props.productId,
+    triggerTableGetList: props.triggerTableGetList
   });
-  console.log("productModalData", productModalData);
+  const [triggerFetchTableList, setTriggerFetchTableList] = useState<() => void>();
+  // console.log("productModalData", productModalData);
 
   const [form] = Form.useForm();
   const [triggerGetList, { currentData: productFormData, isLoading: isGetProductLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductQuery({
@@ -131,7 +134,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         interestRangeHigh: productFormData.interestRange?.split(" - ")[1]?.split("% / day")[0],
         termRangeLow: productFormData.termRange.split("-")[0],
         termRangeHigh: productFormData.termRange.split("-")[1].split("Days")[0],
-        approveRate: `${Number(productFormData.approveRate) * 100}`,
+        approveRate: `${productFormData.approveRate.split("%")[0]}`,
         approveTime: productFormData.approveTime.split(" ")[0],
         approveTimeUnit: productFormData.approveTime.split(" ")[1],
         csEmail: productFormData.csEmail,
@@ -180,6 +183,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       //     content: responseData?.message
       //   });
       // }
+      if(triggerFetchTableList) triggerFetchTableList();
     }).catch((error) => {
       Modal.error(error.error);
     })
@@ -209,7 +213,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       interestRange: `${values.interestRangeLow} - ${values.interestRangeHigh}% / day`,
       termRange: `${values.termRangeLow}-${values.termRangeHigh}Days`,
 
-      approveRate: String(strToFloatNumberWithFixed2(values.approveRate)),
+      approveRate: `${String(values.approveRate)}%`,
 
       approveTime: `${values.approveTime} ${values.approveTimeUnit}`,
       csEmail: values.csEmail,
@@ -264,6 +268,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
     uploadFiles,
     customAntFormFieldError,
     setCustomAntFormFieldError,
+    setTriggerFetchTableList,
+    triggerFetchTableList,
   }
 }
 
@@ -320,7 +326,7 @@ const ProductModal = (props: ProductModalProps) =>
                     ...customAntFormFieldError,
                     preInterestRate: {
                       validateStatus: "error",
-                      help: "请填写1-100间数字",
+                      help: "请填写0-100间数字",
                     },
                   })
                   isValidate = false;
@@ -338,7 +344,7 @@ const ProductModal = (props: ProductModalProps) =>
                     ...customAntFormFieldError,
                     postInterestRate: {
                       validateStatus: "error",
-                      help: "请填写1-100间数字",
+                      help: "请填写0-100间数字",
                     },
                   })
                   isValidate = false;

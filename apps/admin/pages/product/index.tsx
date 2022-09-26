@@ -8,7 +8,8 @@ import {ProductModal, useProductFormModal} from "../../component/useProductFormM
 const Product=() => {
   const [domLoaded, setDomLoaded] = useState(false);
 
-  const {productModalData, setProductModalData, form, handleCloseModal, merchantList, uploadFiles, onFinish, setCustomAntFormFieldError, customAntFormFieldError, productFormData} = useProductFormModal({
+  // const [triggerTableGetList, setTriggerTableGetList] = useState();
+  const {productModalData, setProductModalData, form, handleCloseModal, merchantList, uploadFiles, onFinish, setCustomAntFormFieldError, customAntFormFieldError, productFormData, setTriggerFetchTableList} = useProductFormModal({
     show: false,
     isEdit: false,
   });
@@ -16,6 +17,11 @@ const Product=() => {
   useEffect(() => {
     setDomLoaded(true);
   }, []);
+
+  const callbackTriggerTableGetList = (triggerGetList: any) => {
+    // triggerGetList();
+    setTriggerFetchTableList(triggerGetList);
+  }
 
   return domLoaded ? (
     <div>
@@ -42,7 +48,7 @@ const Product=() => {
           },
         }}
       >
-        <Table setProductModalData={setProductModalData}/>
+        <Table setProductModalData={setProductModalData} triggerTableGetList={callbackTriggerTableGetList}/>
         {/*{productModalData.show && <ProductFormModal/>}*/}
         {productModalData.show && <ProductModal
           setCustomAntFormFieldError={setCustomAntFormFieldError}
