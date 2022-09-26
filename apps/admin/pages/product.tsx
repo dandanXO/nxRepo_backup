@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import moment from "moment"
 import ProductTable from "../component/product/ProductTable";
 import {PageContainer} from '@ant-design/pro-components';
-import {useProductFormModal} from "../component/product/useProductFormModal";
+import {useProductFormModal} from "../component/product/hooks/useProductFormModal";
 import {ProductModal} from "../component/product/ProductModal";
 import ProductForm from "../component/product/ProductForm";
 
