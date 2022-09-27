@@ -141,6 +141,7 @@ export const PureUploadPaymentReceiptPage = (
             {isUploading && <UploadingFileModal />}
             <Section>
                 <Input
+                    inputWidth={"200px"}
                     className="mb"
                     value={utr.data}
                     labelType="right"
