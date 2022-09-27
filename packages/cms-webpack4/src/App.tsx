@@ -2,9 +2,9 @@ import React from 'react';
 // import './App.css';
 import {appStore} from "./store";
 import {BrowserRouter, Route, Router } from "react-router-dom";
-import IndexPage from "./pages/IndexPage";
-import MerchantPage from "./pages/MerchantPage";
-import ProductPage from "./pages/ProductPage";
+import IndexPage from "./pages/index";
+import MerchantPage from "./pages/merchant";
+import ProductPage from "./pages/product";
 import {Provider} from "react-redux";
 
 require('antd/dist/antd.less');
