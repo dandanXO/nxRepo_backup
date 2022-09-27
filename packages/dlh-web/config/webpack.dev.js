@@ -63,7 +63,7 @@ const devConfig = webpackMerge(webpackBaseConfig, {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: config.distDir ,
-        port: 4001,
+        port: 4100,
         historyApiFallback: true,
         hot: true,
         proxy: config.proxy,
