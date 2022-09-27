@@ -28,7 +28,7 @@ const Product=() => {
 
   useEffect(() => {
     triggerGetList(null);
-  }, []);
+  });
 
   return domLoaded ? (
     <PageContainer
