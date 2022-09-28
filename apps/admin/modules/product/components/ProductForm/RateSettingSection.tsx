@@ -53,7 +53,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                      {
                        transform: (value) => Number(value),
                        validator: async (_, value) =>NumberValidator(_, value)({
-                         min: 1,
+                         min: 0,
                          minMessage: "请输入日利息",
                          max: 36,
                          maxMessage: "请填写0-36间数字"
@@ -61,7 +61,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                      },
                    ]}
         >
-          <Input allowClear placeholder="填写 1-36 间数字"/>
+          <Input allowClear placeholder="填写 0-36 间数字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
