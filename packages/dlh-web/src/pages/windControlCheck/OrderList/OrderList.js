@@ -107,6 +107,13 @@ class OrderList extends Component {
                 render(text) { return <CopyText text={text} /> }
             },
             {
+              title: props.intl.formatMessage({ id: "page.search.list.product.name" }),
+              dataIndex: "productName",
+              key: "productName",
+              width: 180,
+              render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },
+            {
                 title: props.intl.formatMessage({ id: "page.search.list.name" }),
                 dataIndex: "userTrueName",
                 key: "userTrueName",
@@ -152,7 +159,7 @@ class OrderList extends Component {
             //     title: props.intl.formatMessage({id: "page.table.handling.fee"}),
             //     dataIndex: "serviceMoney",
             //     key: "serviceMoney",
-             
+
             //     render(text, record) {
             //         const {deviceMoney, lendMoney} = record;
             //         const res = Number(deviceMoney - lendMoney);
@@ -204,9 +211,9 @@ class OrderList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({ id: "page.table.appName" }), 
-                dataIndex: "appName", 
-                key: "appName", 
+                title: props.intl.formatMessage({ id: "page.table.appName" }),
+                dataIndex: "appName",
+                key: "appName",
                 width: 80,
                 className:styles.smallText,
                 render(text, record) {
@@ -214,9 +221,9 @@ class OrderList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({ id: "page.table.channel.source" }), 
-                dataIndex: "channelName", 
-                key: "channelName", 
+                title: props.intl.formatMessage({ id: "page.table.channel.source" }),
+                dataIndex: "channelName",
+                key: "channelName",
                 width: 70,
                 className:styles.smallText,
                 render(text, record) {
@@ -255,7 +262,7 @@ class OrderList extends Component {
                     return <div className={styles.smallText}>{orderStatus[text]}</div>
                 }
             },
-            
+
         ];
     }
 
