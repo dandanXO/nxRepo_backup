@@ -27,7 +27,6 @@ function App() {
                         <Route path="/merchant" component={MerchantPage}/>
                         {/*// @ts-ignore*/}
                         <Route path="/product" component={ProductPage}/>
-                        {/*<ProductPage/>*/}
                     </Switch>
                 </Router>
             </ConfigProvider>

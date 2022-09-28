@@ -1,20 +1,15 @@
-/*import './service/http';
-import './style/index.css';*/
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App from './app';
-// ReactDOM.render(<App />, document.getElementById('root'));
 
-
-let root
+let root;
 
 function render(props) {
     console.log("props", props)
     // NOTICE: 17
     const { container } = props;
     ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));
-
 
     // const newContainer = document.getElementById('app');
     // const root = ReactDOM.createRoot(newContainer);
@@ -40,36 +35,32 @@ function storeTest(props) {
 }
 
 if (!window["__POWERED_BY_QIANKUN__"]) {
+    console.log("[cms-webpack4] 不在 qiankun 內")
     render({});
+} else {
+    console.log("[cms-webpack4] 在 qiankun 內")
 }
 
 export async function bootstrap() {
-    console.log('[react16] react app bootstraped');
+    console.log('[cms-webpack4] react app bootstraped');
 }
 
 export async function update(props) {
-    console.log('[react16] update props', props)
+    console.log('[cms-webpack4] update props', props)
 }
 
 export async function mount(props) {
-    console.log('[react16] props from main framework', props);
+    console.log('[cms-webpack4] mount props', props);
     storeTest(props);
     render(props);
 }
 
 // [Updates to Client Rendering APIs](https://zh-hant.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-client-rendering-apis)
 export async function unmount(props) {
+    console.log('[cms-webpack4] unmount props', props);
     // NOTICE: 17
     const { container } = props;
     ReactDOM.unmountComponentAtNode(container ? container.querySelector('#root') : document.querySelector('#root'));
 
-
     // root.unmount();
 }
-
-// window["qiankunLifecycle"] = {
-//   bootstrap,
-//   mount,
-//   unmount,
-//   update,
-// };
