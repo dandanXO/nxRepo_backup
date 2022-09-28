@@ -54,6 +54,9 @@ const ProductTable = (props: ProductTableProps) => {
 
     }, []);
     const actionRef = useRef<ActionType>();
+
+
+
     return (
         <ProTable<GetProductListResponseProduct>
             columns={columns}

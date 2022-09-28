@@ -3,6 +3,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { hasLogin, hasGoogleAuth, axios } from 'utils';
 import { Icon, Spin } from 'antd';
 import Cookies from 'js-cookie';
+import {microApp} from "../../index";
 
 class AuthRoute extends Component {
     constructor(props, context) {
@@ -17,7 +18,7 @@ class AuthRoute extends Component {
             url: '/hs/admin/menu/personalList',
             method: 'post'
         }).then((res) => {
-         
+
 
             if(res) {
                 let { data } = res;
@@ -29,13 +30,32 @@ class AuthRoute extends Component {
                     history.push('/login');
                 }
 
-            
+
                 data = [{
                     actionUrl: '/index',
                     iconCss: 'home',
                     name: 'menu.homePage',
                     children: null
                 }].concat(data);
+
+              // FIXME: MicroAPP
+              if(microApp) {
+                console.log("[MainApp][before] menu", data);
+                data = data.map(menuItem => {
+                  if(menuItem.actionUrl === "/platform-manage") {
+                    menuItem.children.map(level2MenuItem => {
+                      if(level2MenuItem.actionUrl === "/merchant-manage") {
+                        level2MenuItem.actionUrl = "/cms/merchant"
+                      } else if(level2MenuItem.actionUrl === "/product-manage") {
+                        level2MenuItem.actionUrl = "/cms/product"
+                      }
+                    })
+                  }
+                  return menuItem;
+                })
+                console.log("[MainApp][after] menu", data);
+              }
+
                 _this.setState({
                     menu: data || []
                 });
@@ -47,9 +67,9 @@ class AuthRoute extends Component {
     render() {
         const { location: { pathname }, children } = this.props;
         const { menu } = this.state;
-       
+
         const isLogin = hasLogin();
-       
+
 
         const antIcon = <Icon type="loading-3-quarters" style={{ fontSize: 50 }} spin />;
 
@@ -61,8 +81,8 @@ class AuthRoute extends Component {
             );
         }
 
-        
-     
+
+
 
         if(pathname === '/') {
             return <Redirect to={'/index'}/>

@@ -8,38 +8,52 @@ import {initGlobalState, registerMicroApps, runAfterFirstMounted, setDefaultMoun
 
 ReactDOM.render(<App/>, document.querySelector('#root'));
 
-const microApp = false;
+export const microApp = false;
+
 if(microApp) {
   registerMicroApps(
     [
       {
-        name: 'cms-react',
-        entry: '/child/react-history/',
+        name: 'cms',
+        entry: '/child/entry-cms-react/',
         container: '#micro-app',
-        activeRule: '/cms-react',
+        activeRule: '/cms',
       },
     ],
     {
       beforeLoad: [
         (app) => {
-          console.log('[LifeCycle] before load %c%s', 'color: green;', app.name);
+          console.log('[MainApp][LifeCycle] before load %c%s', 'color: green;', app.name);
+
         },
       ],
       beforeMount: [
         (app) => {
-          console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name);
+          console.log('[MainApp][LifeCycle] before mount %c%s', 'color: green;', app.name);
+
+          if(app.name === "cms") {
+            const microApp = document.querySelector("#micro-app");
+            microApp.style.display = "block";
+          }
         },
       ],
       afterUnmount: [
         (app) => {
-          console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name);
+          console.log('[MainApp][LifeCycle] after unmount %c%s', 'color: green;', app.name);
+          console.log('[MainApp][LifeCycle] before load %c%s', 'color: green;', app.name);
+
+          if(app.name === "cms") {
+            const microApp = document.querySelector("#micro-app");
+            microApp.style.display = "none";
+          }
         },
       ],
     },
   );
   start({
     sandbox: {
-      experimentalStyleIsolation: true
+      // NOTICE: 會影響 antd4
+      // experimentalStyleIsolation: true
     }
   });
 

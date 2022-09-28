@@ -68,6 +68,7 @@ export interface InputProps {
   onClickOutsideSelf?: () => void;
   toolTipZindex?: number;
   width?: number;
+  inputWidth?: string;
   theme?: {
     mode: 'early' | 'night';
   };
@@ -121,6 +122,7 @@ const Input: InputInterface = ({
   label,
   labelType = 'top',
   style,
+ inputWidth,
 }: InputProps) => {
   const forceUpdate = useForceUpdate();
 
@@ -277,6 +279,8 @@ const Input: InputInterface = ({
         >
           {LabelComponentElement}
           <CustomInput
+
+            inputWidth={inputWidth}
             // NOTICE: labelID
             disabled={disabled}
             id={labelID}

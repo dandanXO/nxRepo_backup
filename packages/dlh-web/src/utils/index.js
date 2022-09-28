@@ -249,7 +249,8 @@ const checkRecordStatus = {
   3: <FormattedMessage id="record.status.three" />,
   4: <FormattedMessage id="record.status.four" />,
   5: <FormattedMessage id="record.status.five" />,
-  6: <FormattedMessage id="record.status.six" />  
+  6: <FormattedMessage id="record.status.six" />,
+  7: <FormattedMessage id="record.status.seven" />  
 };
 
 
