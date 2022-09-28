@@ -4,11 +4,11 @@ import {PageContainer, ProTable} from '@ant-design/pro-components';
 import {Button, Form, Input, InputNumber, Modal, Radio, Space} from 'antd';
 
 import {GetUserResponse} from "../../types/getUserList";
-import {useGetAvailableMerchantListQuery} from "../../modules/product/api/ProductApi";
+// import {useGetAvailableMerchantListQuery} from "../../modules/product/api/ProductApi";
 
 const UserManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
-    const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
+    // const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
     // const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetMerchantManageListQuery({
     //     pollingInterval: 0,
     //     refetchOnFocus: false,
@@ -50,9 +50,9 @@ const UserManage = () => {
 
 
 
-    const addPackageValueEnum = merchantList?.reduce((prev, curr) => {
-        return { ...prev, ...{ [curr.merchantId]: { text: curr.name } } }
-    }, { 0: { text: '不限' } })
+    // const addPackageValueEnum = merchantList?.reduce((prev, curr) => {
+    //     return { ...prev, ...{ [curr.merchantId]: { text: curr.name } } }
+    // }, { 0: { text: '不限' } })
 
 
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
@@ -95,7 +95,7 @@ const UserManage = () => {
         { title: '注册包名', dataIndex: 'addPackage', initialValue: '', key: 'addPackage' },
         {
             title: '注册渠道', dataIndex: 'channelName', valueType: 'select', initialValue: '0', key: 'channelName',
-            valueEnum: addPackageValueEnum
+            // valueEnum: addPackageValueEnum
         },
         { title: '注册时间', dataIndex: 'addTime', valueType: 'dateTime', key: 'addTime', hideInSearch: true },
         {

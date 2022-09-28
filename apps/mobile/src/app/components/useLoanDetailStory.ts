@@ -47,6 +47,7 @@ const useLoanDetailStory = () => {
                 .unwrap()
                 .then((data: PostRepayCreateResponse) => {
                     // do nothing.
+                    window.location.href = data.nextUrl;
                 })
                 .catch(({ error }) => {
                     console.log(error);
