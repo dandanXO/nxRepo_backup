@@ -183,7 +183,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
             postInterest: fixedFloatNumberToFixed2(ratePair.postInterest * 100),
           }
         }),
-        overdueRate: `${Number(productFormData.overdueRate) * 100}`,
+        overdueRate: `${fixedFloatNumberToFixed2(Number(productFormData.overdueRate) * 100)}`,
         top: productFormData.top,
         tags: productFormData.tags.split(","),
         templateType: productFormData.templateType,
