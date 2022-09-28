@@ -15,9 +15,11 @@ module.exports = {
     output: {
         // publicPath: './',
         // path: path.resolve(__dirname, '../', "dist/child/entry-cms-react/"),
-        path: path.resolve(__dirname, '../', "dist/child/entry-cms-react/"),
+        // path: path.resolve(__dirname, '../', "dist/child/entry-cms-react/"),
+        path: path.resolve(__dirname, '../../dlh-web', "dist/child/entry-cms-react/"),
         filename: "bundle.[hash:8].js",
 
+        // NOTE: [webpack5子应用加载失败 #1092](https://github.com/umijs/qiankun/issues/1092)
         // NOTICE: MicroApp
         publicPath: "/child/entry-cms-react/",
         // chunkLoadingGlobal: `webpackJsonp_${name}`,

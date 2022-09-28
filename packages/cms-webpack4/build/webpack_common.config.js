@@ -81,7 +81,7 @@ const commonRules = [
 const commonPlugins = [
     new MiniCssExtractPlugin({
         filename: 'css/[name][hash:8].css',
-        chunkFilename: 'css/[id].css'
+        chunkFilename: 'css/[id][hash:8].css'
     })
 ]
 module.exports = { commonRules, commonPlugins };

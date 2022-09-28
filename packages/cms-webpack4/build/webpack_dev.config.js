@@ -2,11 +2,24 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {commonPlugins, commonRules} = require("./webpack_common.config");
+const {name} = require("../package.json");
 module.exports = {
     entry: './src/main.tsx',
     output: {
-        path: path.resolve(__dirname, '../', "dist"),
-        filename: "bundle.[hash:8].js"
+        // path: path.resolve(__dirname, '../', "dist"),
+        path: path.resolve(__dirname, '../../dlh-web', "dist/child/entry-cms-react/"),
+
+        filename: "bundle.[hash:8].js",
+
+        // NOTICE: MicroApp
+        // publicPath: "/child/entry-cms-react/",
+        publicPath: "/",
+        // chunkLoadingGlobal: `webpackJsonp_${name}`,
+        jsonpFunction: `webpackJsonp_${name}`,
+        globalObject: 'window',
+        library: `${name}-[name]`,
+        libraryTarget: 'umd',
+        umdNamedDefine: true,
     },
     resolve: {
         extensions: [".ts", ".tsx", '.js', '.jsx', '.css', '.less', '.scss', '.json'],
@@ -29,7 +42,19 @@ module.exports = {
 
     ],
     devServer: {
-        contentBase: path.join(__dirname, './dist'),
+        // [Webpack5中devServer配置contentBase报错的问题](https://blog.csdn.net/qq_43048301/article/details/121554459)
+        // contentBase: path.join(__dirname, './dist'),
+        // contentBase: path.resolve(__dirname, '../', "dist/child/entry-cms-react/"),
+        contentBase: path.resolve(__dirname, '../../dlh-web', "dist/child/entry-cms-react/"),
+
+        // static: {
+        //     directory: path.join(__dirname, './dist'),
+        // },
+        headers: {
+            'Access-Control-Allow-Origin': '*', // 允许跨域
+        },
+        // NOTICE: [【解决方案】webpack `Invalid Host/Origin header`问题](https://blog.csdn.net/u013243347/article/details/85223016)
+        disableHostCheck: true,
         open: true,
         port: 9005,
         proxy: {

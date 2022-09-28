@@ -49,7 +49,7 @@ Thumbs.db
 /deprecated/task/openapi-typescript-codegen/generated/
 /packages/dlh-web/dist/
 
-/packages/cms/build
+/packages/cms-webpack5/build
 /packages/react16/build
 /packages/react18/build
 /packages/cms-webpack4/dist
