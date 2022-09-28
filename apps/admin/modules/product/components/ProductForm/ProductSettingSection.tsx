@@ -136,7 +136,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                      {
                        transform: (value) => Number(value),
                        validator: async (_, value) =>NumberValidator(_, value)({
-                         min: 1,
+                         min: 0,
                          minMessage: "请输入最低利息",
                          max: 100,
                          maxMessage: "不可超过100%",
@@ -152,7 +152,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                    {
                      transform: (value) => Number(value),
                      validator: async (_, value) =>NumberValidator(_, value)({
-                       min: 1,
+                       min: 0,
                        minMessage: "请输入最高利息",
                        max: 100,
                        maxMessage: "不可超过100%",

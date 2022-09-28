@@ -25,7 +25,7 @@ const BaseSettingSection = (props: BaseSettingSectionProps) => {
           </Form.Item>
 
       <Form.Item name="productName" label="产品名" rules={[{ required: true }]}>
-        <Input allowClear placeholder="A1 Loan"/>
+        <Input allowClear placeholder="产品名"/>
       </Form.Item>
 
       {/*// NOTICE: 後端移除*/}
