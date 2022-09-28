@@ -40,7 +40,7 @@ class AuthRoute extends Component {
 
               // FIXME: MicroAPP
               if(microApp) {
-                console.log("[MainApp][before] menu", menu);
+                console.log("[MainApp][before] menu", data);
                 data = data.map(menuItem => {
                   if(menuItem.actionUrl === "/platform-manage") {
                     menuItem.children.map(level2MenuItem => {
@@ -53,7 +53,7 @@ class AuthRoute extends Component {
                   }
                   return menuItem;
                 })
-                console.log("[MainApp][after] menu", menu);
+                console.log("[MainApp][after] menu", data);
               }
 
                 _this.setState({
