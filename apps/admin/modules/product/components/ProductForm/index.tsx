@@ -7,6 +7,8 @@ import ProductSettingSection from "./ProductSettingSection";
 import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import { UploadSettingSection } from "./UploadSettingSection";
+import { Cookies } from "next/dist/server/web/spec-extension/cookies";
+import { conversionSubmitValue } from "@ant-design/pro-components";
 
 interface ProductFormProps {
     productModalData: ProductFormModal;
@@ -22,7 +24,7 @@ let isOnChange = false;
 
 const Index = (props: ProductFormProps) => {
     const { productModalData, onFinish, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
-    
+
     const layout = {
         labelCol: { span: 5 },
         wrapperCol: { span: 18 },
@@ -40,7 +42,7 @@ const Index = (props: ProductFormProps) => {
         });
     }, [form])
 
-    const validateRateValue=(rate)=>{
+    const validateRateValue = (rate) => {
         return Number(rate) > 100 || Number(rate) < 0 || rate === '' || isNaN(Number(rate));
     }
 
@@ -56,7 +58,10 @@ const Index = (props: ProductFormProps) => {
                 let isValidate = true;
                 const onChangeField = changedFields[0]?.name[0];
                 const onChangeFieldValue = allFields.filter(field => field.name.toString() === onChangeField)[0]?.value ?? undefined;
+                const unChangeField = onChangeField === "preInterestRate" ? "postInterestRate" : "preInterestRate";
+                const unChangeFieldValue = allFields.filter(field => field.name.toString() === unChangeField)[0]?.value ?? undefined;
                 const validateOnchangeFieldValue = validateRateValue(onChangeFieldValue);
+                const validateUnchangeFieldValue = validateRateValue(unChangeFieldValue);
                 const validatePreInterestRateValue = validateRateValue(preInterestRate);
                 const validatePostInterestRateValue = validateRateValue(postInterestRate);
 
@@ -64,43 +69,37 @@ const Index = (props: ProductFormProps) => {
 
                 if (!isFieldChange && !isOnChange && (onChangeField !== "preInterestRate" || onChangeField !== "postInterestRate")) {
                     isOnChange = true;
+                    console.log("changedFields", changedFields)
                     if (preInterestRate === '' || postInterestRate === '') {
-                        setCustomAntFormFieldError(prev => ({
-                            ...customAntFormFieldError,
-                            ...prev,
-                            preInterestRate: preInterestRate === '' ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
-                            postInterestRate: postInterestRate === '' ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
-                        }))
-                        isValidate = false;
-                    }
-                }
-                if (validateOnchangeFieldValue) {
-                    isValidate = false;
-                }
-                setCustomAntFormFieldError(prev => ({
-                    ...customAntFormFieldError,
-                    ...prev,
-                    [onChangeField]: validateOnchangeFieldValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
-                }))
-
-                if (isValidate) {
-                    if (Number(preInterestRate) + Number(postInterestRate) > 100) {
-                        setCustomAntFormFieldError(prev => ({
-                            ...customAntFormFieldError,
-                            ...prev,
-                            preInterestRate: { validateStatus: "error", help: "前置利息＋后置利息不得超过100%" },
-                            postInterestRate: { validateStatus: "error", help: "前置利息＋后置利息不得超过100%" }
-                        }))
-                    }
-                    else {
                         setCustomAntFormFieldError(prev => ({
                             ...customAntFormFieldError,
                             ...prev,
                             preInterestRate: validatePreInterestRateValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
                             postInterestRate: validatePostInterestRateValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
                         }))
+                        isValidate = false;
                     }
                 }
+                if (validateOnchangeFieldValue) { isValidate = false; }
+                setCustomAntFormFieldError(prev => {
+                    const isError = prev[unChangeField].help;
+                    return {
+                        ...customAntFormFieldError,
+                        ...prev,
+                        [onChangeField]: validateOnchangeFieldValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
+                        [unChangeField]: isError === '' ? { validateStatus: "", help: "" } : validateUnchangeFieldValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
+                    }
+                })
+
+                if (isValidate && Number(preInterestRate) + Number(postInterestRate) > 100) {
+                    setCustomAntFormFieldError(prev => ({
+                        ...customAntFormFieldError,
+                        ...prev,
+                        preInterestRate: { validateStatus: "error", help: "前置利息＋后置利息不得超过100%" },
+                        postInterestRate: { validateStatus: "error", help: "前置利息＋后置利息不得超过100%" }
+                    }))
+                }
+
 
 
             }}
