@@ -14,11 +14,12 @@ module.exports = {
     entry: './src/main.tsx',
     output: {
         // publicPath: './',
-        path: path.resolve(__dirname, '../', "dist"),
+        // path: path.resolve(__dirname, '../', "dist/child/entry-cms-react/"),
+        path: path.resolve(__dirname, '../', "dist/child/entry-cms-react/"),
         filename: "bundle.[hash:8].js",
 
         // NOTICE: MicroApp
-        publicPath: "/child/react-history/",
+        publicPath: "/child/entry-cms-react/",
         // chunkLoadingGlobal: `webpackJsonp_${name}`,
         jsonpFunction: `webpackJsonp_${name}`,
         globalObject: 'window',

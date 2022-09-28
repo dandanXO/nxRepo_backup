@@ -36,25 +36,23 @@ const commonRules = [
             {loader: "postcss-loader"}
         ]
     },
-    // {
-    //     test: /\.less$/,
-    //     use:[
-    //         {loader: "style-loader"},
-    //         {loader: 'css-loader'},
-    //         {loader: "postcss-loader"},
-    //         {loader: 'less-loader'}
-    //     ]
-    // },
     {
         test: /(\.less)$/,
         use: [
-            'style-loader',
+            MiniCssExtractPlugin.loader,
+            // ReferenceError: document is not defined
+            // 'style-loader',
             'css-loader',
+            // {loader: "postcss-loader"},
             {
                 loader: 'less-loader',
                 options: {
                     lessOptions: {
                         javascriptEnabled: true,
+                        modifyVars: {
+                            // 'primary-color': '#1DA57A',
+                            'ant-prefix': 'ant4'
+                        }
                     },
                 },
             },

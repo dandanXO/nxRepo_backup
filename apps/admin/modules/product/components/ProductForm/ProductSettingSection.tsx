@@ -200,20 +200,8 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
           </Form.Item>
 
-          <Form.Item label="通过率" required>
-              <Form.Item name="approveRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
-                 rules={[
-                   {
-                     transform: (value) => Number(value),
-                     validator: async (_, value) =>NumberValidator(_, value)({
-                       min: 1,
-                       minMessage: "请输入通过率",
-                       max: 100,
-                       maxMessage: "请填写1-100间数字",
-                     })
-                   },
-                 ]}
-              >
+          <Form.Item label="通过率" rules={[{ required: true }]} >
+              <Form.Item name="approveRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
                   <Input allowClear placeholder="填写 1-100 间数字" />
               </Form.Item>
               <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
