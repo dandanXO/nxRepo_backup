@@ -117,11 +117,17 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                       let value = event.target.value;
                                       value = value.replaceAll("₹", "");
                                       // NOTE: if custom balance exceed max balance then setting max balance
-                                      if(Number(value) > Number(balance)) {
-                                        value = balance;
+                                      if(String(Number(value)) === "NaN") {
+                                        setBalanceValue("₹1");
+                                        props.setRepayBalance(1);
+                                      } else {
+                                        if(Number(value) > Number(balance)) {
+                                          value = balance;
+                                        }
+                                        setBalanceValue("₹" + value);
+                                        props.setRepayBalance(value);
                                       }
-                                      setBalanceValue("₹" + value);
-                                      props.setRepayBalance(value);
+
                                     }}
                                 />
                                 <SectionParagraph>
