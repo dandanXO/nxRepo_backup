@@ -254,9 +254,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
       num: i.num,
-      postInterest: strToFloatNumberWithFixed2(i.postInterest),
-      preInterest: strToFloatNumberWithFixed2(i.preInterest) }
-    ))
+      postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
+      preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3))
+    }))
 
     let creatProductData: PostProductCreateRequestBody = {
       merchantId: Number(values.merchantId),
