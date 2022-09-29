@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 
 
-export function Index() {
+export function IndexPage() {
   return (
     <div>
       <div>
@@ -20,4 +20,4 @@ export function Index() {
   );
 }
 
-export default Index;
+export default IndexPage;

@@ -5,7 +5,7 @@ require('antd/dist/antd.less');
 import {HashRouter as Router, Route, Switch, useHistory} from "react-router-dom";
 
 import {appStore} from "./store";
-import IndexPage from "./pages/index";
+import IndexPage from "./pages/IndexPage";
 import ProductPage from "./pages/ProductPage";
 import MerchantPage from "./pages/MerchantPage";
 import UserPage from "./pages/UserPage";
