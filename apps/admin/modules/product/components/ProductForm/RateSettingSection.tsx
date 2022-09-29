@@ -51,10 +51,11 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item name="dailyRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
-                       transform: (value) => Number(value),
                        validator: async (_, value) =>NumberValidator(_, value)({
+                         required: true,
+                         requiredErrorMessage: "请输入日利息",
                          min: 0,
-                         minMessage: "请输入日利息",
+                         minMessage: "请填写0-36间数字",
                          max: 36,
                          maxMessage: "请填写0-36间数字"
                        })
