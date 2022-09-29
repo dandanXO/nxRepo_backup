@@ -7,7 +7,6 @@ import ProductSettingSection from "./ProductSettingSection";
 import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import { UploadSettingSection } from "./UploadSettingSection";
-import { Cookies } from "next/dist/server/web/spec-extension/cookies";
 import { conversionSubmitValue } from "@ant-design/pro-components";
 
 interface ProductFormProps {
