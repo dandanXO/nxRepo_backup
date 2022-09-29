@@ -145,8 +145,8 @@ class ChannelList extends Component {
         columns.push(
             {
                 title: <FormattedMessage id="page.search.list.hyperlink"/>,
-                dataIndex: 'encryptUrl',
-                key: 'encryptUrl',
+                dataIndex: 'url',
+                key: 'url',
                 width: '30%',
                 render(text) {
                     return <CopyToLink text={text}/>
