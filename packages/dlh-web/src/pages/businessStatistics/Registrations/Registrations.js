@@ -176,7 +176,8 @@ class Registrations extends Component {
                         title: props.intl.formatMessage({ id: "page.table.new.customer.application.rate" }), dataIndex: 'applyCount', key: 'applyCount', render (text, record) {
                             const { examPassCount } = record;
                             let applicationRate = Number(text) / Number(examPassCount);
-                            return Number(applicationRate) ? Number(applicationRate)+'%' : '0%';
+                            applicationRate = isFinite(applicationRate) ? applicationRate : 0;
+                            return Number(applicationRate).toFixed(2)+'%';
                         }
                     },
                     // 新客放款量
