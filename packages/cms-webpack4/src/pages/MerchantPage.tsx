@@ -4,10 +4,10 @@ import { ProForm, ProFormText } from '@ant-design/pro-components';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
-import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Spin,Space } from 'antd';
-import {useLazyGetMerchantManageListQuery ,usePostMerchantCreateMutation,usePutMerchantEditMutation } from "../api";
+import { Button, Dropdown, Menu, Modal, Form, Input, Radio, Spin, Space } from 'antd';
+import { useLazyGetMerchantManageListQuery, usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../api";
 import { GetMerchantListResponse } from "../types/getMerchantList";
-
+import { MerchantModal } from '../modules/merchant/MerchantModal';
 
 const MerchantManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
@@ -46,8 +46,8 @@ const MerchantManage = () => {
             ],
         },
         { title: '商户编号', dataIndex: 'merchantId', key: 'merchantId', hideInSearch: true },
-        { title: '商户名', dataIndex: 'name', key: 'name' , initialValue: ""},
-        { title: '联系电话', dataIndex: 'contact', key: 'contact' , initialValue: ""},
+        { title: '商户名', dataIndex: 'name', key: 'name', initialValue: "" },
+        { title: '联系电话', dataIndex: 'contact', key: 'contact', initialValue: "" },
         { title: '电子邮箱', dataIndex: 'email', key: 'email', hideInSearch: true },
         {
             title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', key: 'enabled', valueEnum: {
@@ -70,19 +70,14 @@ const MerchantManage = () => {
         form.resetFields()
     };
 
-    const layout = {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 16 },
-    };
-
     const handleCloseModal = () => {
         setMerchantModalVisible(false)
         form.resetFields()
     }
 
 
-  return (
-        domLoaded  ? <PageContainer
+    return (
+        domLoaded ? <PageContainer
             header={{
                 ghost: true,
                 breadcrumb: {
@@ -106,7 +101,7 @@ const MerchantManage = () => {
                 search={{
                     collapsed: false,
                     labelWidth: 'auto',
-                  // @ts-ignore
+                    // @ts-ignore
                     optionRender: ({ searchText, resetText }, { form }) => (
                         <Space>
                             <Button onClick={() => {
@@ -117,7 +112,7 @@ const MerchantManage = () => {
                             <Button
                                 type={'primary'}
                                 onClick={() => {
-                                  // @ts-ignore
+                                    // @ts-ignore
                                     const { name, contact, enabled } = form.getFieldValue();
                                     const searchData = currentData
                                         .filter(i => name === "" ? i : i.name === name)
@@ -141,41 +136,14 @@ const MerchantManage = () => {
                     defaultPageSize: 10
                 }}
             />
-            <Modal
-                title={isEdit ? "编辑商户" : "添加商户"}
-                open={merchantModalVisible}
-                onCancel={handleCloseModal}
-                onOk={form.submit}
-            >
-                <Spin spinning={isEdit ? isMerchantEditing : isMerchantCreating}>
-                    <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} initialValues={{
-                        name: "",
-                        contact: "",
-                        email: "",
-                        enabled: true
-                    }}>
-                        {isEdit && <Form.Item name="merchantId" label="商户编号" hidden >
-                            <Input allowClear />
-                        </Form.Item>}
-                        <Form.Item name="name" label="商户名" rules={[{ required: true }]}>
-                            <Input allowClear />
-                        </Form.Item>
-                        <Form.Item name="contact" label="联系电话">
-                            <Input allowClear />
-                        </Form.Item>
-                        <Form.Item name="email" label="电子邮箱">
-                            <Input allowClear />
-                        </Form.Item>
-                        <Form.Item name="enabled" label="状态">
-                            <Radio.Group >
-                                <Radio value={true}>启用</Radio>
-                                <Radio value={false}>禁用</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-                    </Form>
-                </Spin>
-            </Modal>
-
+            <MerchantModal
+                isEdit={isEdit}
+                isMerchantEditing={isMerchantEditing}
+                isMerchantCreating={isMerchantCreating}
+                merchantModalVisible={merchantModalVisible}
+                handleCloseModal={handleCloseModal}
+                onFinish={onFinish}
+                form={form} />
         </PageContainer> : null
     )
 }
