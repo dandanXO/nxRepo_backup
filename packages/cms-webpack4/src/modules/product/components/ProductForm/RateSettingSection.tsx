@@ -71,12 +71,13 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item name="extensionRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
-                       transform: (value) => Number(value),
                        validator: async (_, value) =>NumberValidator(_, value)({
-                         min: 1,
-                         minMessage: "请输入展期利率",
+                        required: true,
+                        requiredErrorMessage: "请输入展期利率",
+                         min: 0,
+                         minMessage: "请填写0-100间数字",
                          max: 100,
-                         maxMessage: "请填写1-100间数字"
+                         maxMessage: "请填写0-100间数字"
                        })
                      },
                    ]}
@@ -90,12 +91,13 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item name="overdueRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    rules={[
                      {
-                       transform: (value) => Number(value),
                        validator: async (_, value) =>NumberValidator(_, value)({
-                         min: 1,
+                        required: true,
+                        requiredErrorMessage: "请输入逾期费率",
+                         min: 0,
                          minMessage: "请输入逾期费率",
                          max: 100,
-                         maxMessage: "请填写1-100间数字"
+                         maxMessage: "请填写0-100间数字"
                        })
                      },
                    ]}
