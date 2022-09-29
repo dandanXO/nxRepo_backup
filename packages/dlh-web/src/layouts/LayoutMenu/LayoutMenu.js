@@ -43,10 +43,18 @@ class LayoutMenu extends Component {
 
     handleItemClick = ({key, keyPath}) => {
         this.setState({ selectedKeys: [key] });
+        // TODO: for micro app
+        // console.log("menu.key", key)
+        // if(key === "/cws/product") {
+        //   const event = new Event("main-app-hashchange", {
+        //     name: "andy"
+        //   })
+        //   window.dispatchEvent(event)
+        // }
         const { history } = this.props;
         history.push(key);
-       
-       
+
+
     }
 
     handleOpen = (openKeys) => {
@@ -55,17 +63,17 @@ class LayoutMenu extends Component {
             openKeys: latestOpenKey ? [latestOpenKey] : [],
         });
     }
-    
+
     renderItem = (list) => {
         return list.map((item, index) => {
             const subArr = item['children'];
             const itemName = String(item['name']).trim();
 
             if (subArr) {
-              
+
                 return (
-                    <SubMenu 
-                        
+                    <SubMenu
+
                         key={item['actionUrl']}
                         title={<span><Icon type={item['iconCss']}/><span><FormattedMessage id={itemName} /></span></span>}
                     >
@@ -74,10 +82,10 @@ class LayoutMenu extends Component {
                 );
             }
             return (
-                
-                <Menu.Item 
-               
-                key={item['actionUrl']} 
+
+                <Menu.Item
+
+                key={item['actionUrl']}
                 onClick={this.handleOpenMenu}
                 >
                     <Icon type={item['iconCss']}/>

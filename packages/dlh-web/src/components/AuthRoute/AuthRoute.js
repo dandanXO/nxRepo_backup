@@ -45,9 +45,9 @@ class AuthRoute extends Component {
                   if(menuItem.actionUrl === "/platform-manage") {
                     menuItem.children.map(level2MenuItem => {
                       if(level2MenuItem.actionUrl === "/merchant-manage") {
-                        level2MenuItem.actionUrl = "/cms/merchant"
+                        level2MenuItem.actionUrl = "/cms/merchant";
                       } else if(level2MenuItem.actionUrl === "/product-manage") {
-                        level2MenuItem.actionUrl = "/cms/product"
+                        level2MenuItem.actionUrl = "/cms/product";
                       }
                     })
                   }

@@ -20,10 +20,9 @@ store.runSaga(rootSaga);
 var moment = require('moment-timezone');
 moment.tz.setDefault("Asia/Kolkata");
 export default class App extends Component {
-    
-   
+
     render() {
-       
+
         return (
             <Provider store={store}>
                 <IntlProviderWrapper>

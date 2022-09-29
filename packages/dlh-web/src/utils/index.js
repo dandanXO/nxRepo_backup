@@ -1,4 +1,4 @@
-import createHistory from "history/createBrowserHistory";
+import { createHashHistory, createBrowserHistory} from "history";
 import { Modal, message } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -8,6 +8,7 @@ import {intlMsg} from '../locales/api/IntlMsg';
 import * as utilSaga from './saga';
 import * as utilAction from './action';
 import * as utilReducer from './reducer';
+import {microApp} from "../index";
 
 const msgArry ={
   1: <FormattedMessage id='prompt.infor' />
@@ -43,7 +44,7 @@ const showModal = msg => {
 };
 
 //history对象
-export const history = createHistory({ getUserConfirmation });
+export const history = !microApp ? createBrowserHistory({ getUserConfirmation }) : createHashHistory({ getUserConfirmation });
 
 //判断是否登录
 export const hasLogin = () => {
@@ -250,7 +251,7 @@ const checkRecordStatus = {
   4: <FormattedMessage id="record.status.four" />,
   5: <FormattedMessage id="record.status.five" />,
   6: <FormattedMessage id="record.status.six" />,
-  7: <FormattedMessage id="record.status.seven" />  
+  7: <FormattedMessage id="record.status.seven" />
 };
 
 
@@ -277,14 +278,14 @@ const maritalStatus = {
 
 
 /**
- * 
- * {"1": "0-15000", 
+ *
+ * {"1": "0-15000",
  *  "2": "15001-25000",
  *  "3": "25001-35000",
  *  "4": "35001-45000",
- *  "5": "45001-55000", 
+ *  "5": "45001-55000",
  * "6": "55000 above"}
- * 
+ *
  */
 const salaryRange = {
 
@@ -307,11 +308,11 @@ const education = {
 }
 
 const position = {
-  1: <FormattedMessage id="position.ordinaryStaff" />, 
+  1: <FormattedMessage id="position.ordinaryStaff" />,
   2: <FormattedMessage id="position.executive" />,
-  3: <FormattedMessage id="position.supervisor" />, 
-  4: <FormattedMessage id="position.manager" />, 
-  5: <FormattedMessage id="position.director" />, 
+  3: <FormattedMessage id="position.supervisor" />,
+  4: <FormattedMessage id="position.manager" />,
+  5: <FormattedMessage id="position.director" />,
   6: <FormattedMessage id="position.other" />
 }
 

@@ -17,10 +17,30 @@ const ifElseDevelopment = (trueSection, falseSection) => {
   }
 }
 
-export const microApp = false;
+export const microApp = true;
 
 if(microApp) {
+
+  // window.addEventListener('hashchange', function handleHashChanged(event) {
+  //     console.log("[MainApp][hashchange] event.newURL.1", event.newURL);
+  //   }, false
+  // )
+
+  // TODO: for micro app
+  // if ("onhashchange" in window) {
+  //   window.onhashchange = function (event) {
+  //     console.log("[MainApp][hashchange] event.newURL.2", event.newURL);
+  //     if(document.location.hash == '#/PF/charts/patients/419d3081-5e20-4347-a852-52b2c333ce85/summary'){
+  //       //do summary stuff
+  //     }
+  //   }
+  // } else {
+  //   console.log("[MainApp][hashchange] not supported");
+  // }
+
+
   try {
+
     registerMicroApps(
       [
         {
@@ -28,7 +48,7 @@ if(microApp) {
           entry: ifElseDevelopment("//localhost:9005", '/child/entry-cms-react/'),
           container: '#micro-app',
           // NOTE: 不能和微应用的真实访问路径一样
-          activeRule: '/cms',
+          activeRule: '/#/cms',
         },
       ],
       {
