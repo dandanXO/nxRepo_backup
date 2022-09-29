@@ -48,10 +48,10 @@ const showModal = msg => {
 // export const history = microApp ? createHashHistory({ getUserConfirmation }) : createBrowserHistory({ getUserConfirmation });
 
 // NOTICE: Mode: MicroApp
-export const history = createHashHistory({ getUserConfirmation });
+// export const history = createHashHistory({ getUserConfirmation });
 
 // NOTICE: Mode: Single
-// export const history = createBrowserHistory({ getUserConfirmation });
+export const history = createBrowserHistory({ getUserConfirmation });
 
 //判断是否登录
 export const hasLogin = () => {
