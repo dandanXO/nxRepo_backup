@@ -17,7 +17,7 @@ const ifElseDevelopment = (trueSection, falseSection) => {
   }
 }
 
-export const microApp = false;
+export const microApp = true;
 
 if(microApp) {
 
