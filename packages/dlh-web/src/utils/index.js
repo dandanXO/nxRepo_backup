@@ -44,7 +44,14 @@ const showModal = msg => {
 };
 
 //history对象
-export const history = !microApp ? createBrowserHistory({ getUserConfirmation }) : createHashHistory({ getUserConfirmation });
+// NOTICE: not working
+// export const history = microApp ? createHashHistory({ getUserConfirmation }) : createBrowserHistory({ getUserConfirmation });
+
+// NOTICE: Mode: MicroApp
+export const history = createHashHistory({ getUserConfirmation });
+
+// NOTICE: Mode: Single
+// export const history = createBrowserHistory({ getUserConfirmation });
 
 //判断是否登录
 export const hasLogin = () => {
