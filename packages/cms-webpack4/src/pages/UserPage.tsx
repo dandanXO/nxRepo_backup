@@ -3,7 +3,7 @@ import type {ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
 import {Button, Form, Input, InputNumber, Modal, Radio, Space} from 'antd';
 
-import {GetUserResponse} from "../../types/getUserList";
+import {GetUserResponse} from "../types/getUserList";
 // import {useGetAvailableMerchantListQuery} from "../../modules/product/api/ProductApi";
 
 const UserManage = () => {

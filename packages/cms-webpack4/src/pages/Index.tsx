@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 
+
 export function Index() {
   return (
     <div>
@@ -12,7 +13,9 @@ export function Index() {
       <div>
         <Link to="/user"><a> user </a></Link>
       </div>
-    
+        <div>
+            <Link to="/user-info"><a> user info </a></Link>
+        </div>
     </div>
   );
 }

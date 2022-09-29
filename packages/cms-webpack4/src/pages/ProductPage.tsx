@@ -6,8 +6,8 @@ import {ProductModal} from "../modules/product/components/ProductModal";
 import ProductForm from "../modules/product/components/ProductForm";
 import useAutoLogin from "../modules/shared/hooks/useAutoLogin";
 
-const Product=() => {
-    // useAutoLogin();
+const ProductPage=() => {
+
   const [domLoaded, setDomLoaded] = useState(false);
   useEffect(() => {
     setDomLoaded(true);
@@ -29,7 +29,7 @@ const Product=() => {
 
   useEffect(() => {
     triggerGetList(null);
-  },[]);
+  }, []);
 
   return domLoaded ? (
     <PageContainer
@@ -71,4 +71,4 @@ const Product=() => {
     </PageContainer>
   ): null;
 };
-export default Product;
+export default ProductPage;

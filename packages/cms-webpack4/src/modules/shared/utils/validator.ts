@@ -21,6 +21,8 @@ export const CustomValidator = (validatorFun) => new Promise((resolve, reject)=>
 })
 
 interface ValidateNumber extends Validator{
+  required?: boolean;
+  requiredErrorMessage?: string;
   typeErrorMessage?: string
   min?: number;
   minMessage?: string;
@@ -45,13 +47,25 @@ export const NewNumberValidatorPromise = (value, params: ValidateNumber): Promis
 }
 
 export const NumberValidator = (_, value) => (params: ValidateNumber) => {
+    // console.log("value", value);
+    // console.log("params", params);
+    if(params.required) {
+      const stringScheme = z.string().min(1, params && params.requiredErrorMessage ? params.requiredErrorMessage : "請輸入數字")
+      const stringResult = stringScheme.safeParse(String(value));
+      if (!stringResult.success) {
+        const firstError = (stringResult as any).error.format();
+        const errorMessage = firstError._errors[0];
+        return Promise.reject(errorMessage);
+      }
+    }
+
   const scheme = z
     .number({
       invalid_type_error: params.typeErrorMessage || "請輸入數字",
     })
     .min(params.min, params.minMessage)
     .max(params.max, params.maxMessage);
-  const result = scheme.safeParse(value);
+  const result = scheme.safeParse(Number(value));
   if (!result.success) {
     const firstError = (result as any).error.format();
     const errorMessage = firstError._errors[0];

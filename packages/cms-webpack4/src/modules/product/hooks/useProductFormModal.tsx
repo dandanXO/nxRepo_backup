@@ -144,54 +144,52 @@ export const useProductFormModal = (props: ProductFormModal) => {
       form.resetFields();
     } else {
 
-      setTimeout(() => {
-        form.setFieldsValue({
-          merchantId: currentMerchant?.name,
-          productName: productFormData.productName,
-          // NOTICE: 後端移除
-          // adminUsername: productFormData.adminUsername,
-          // NOTICE: 後端不回傳真正密碼
-          // NOTICE: 後端移除
-          // adminPassword: null,
-          logo: productFormData.logo,
-          backgroundImg: productFormData.backgroundImg,
-          amountRangeLow: productFormData.amountRange.split("-")[0],
-          amountRangeHigh: productFormData.amountRange.split("-")[1],
-          interestRangeLow: productFormData.interestRange.split(" - ")[0],
-          interestRangeHigh: productFormData.interestRange?.split(" - ")[1]?.split("% / day")[0],
-          termRangeLow: productFormData.termRange.split("-")[0],
-          termRangeHigh: productFormData.termRange.split("-")[1].split("Days")[0],
-          approveRate: `${productFormData.approveRate.split("%")[0]}`,
-          approveTime: productFormData.approveTime.split(" ")[0],
-          approveTimeUnit: productFormData.approveTime.split(" ")[1],
-          csEmail: productFormData.csEmail,
-          csTime: [
-            moment(productFormData.csTime.split(" - ")[0], 'h:mm:ss'),
-            moment(productFormData.csTime.split(" - ")[1], 'h:mm:ss'),
-          ],
-          loanTerm: productFormData.loanTerm,
-          maxAmount: productFormData.maxAmount,
-          extensible: productFormData.extensible,
-          extensibleOverdueDays: productFormData.extensibleOverdueDays,
-          preInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.preInterestRate) * 100)}`,
-          postInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.postInterestRate) * 100)}`,
-          dailyRate: `${fixedFloatNumberToFixed2(Number(productFormData.dailyRate) * 100)}`,
-          extensionRate: `${fixedFloatNumberToFixed2(Number(productFormData.extensionRate) * 100)}`,
-          productInterestRatePairs: productFormData.productInterestRatePairs.map((ratePair) => {
-            return {
-              num: ratePair.num,
-              preInterest: fixedFloatNumberToFixed2(ratePair.preInterest * 100),
-              postInterest: fixedFloatNumberToFixed2(ratePair.postInterest * 100),
-            }
-          }),
-          overdueRate: `${Number(productFormData.overdueRate) * 100}`,
-          top: productFormData.top,
-          tags: productFormData.tags.split(","),
-          templateType: productFormData.templateType,
-          weight: productFormData.weight,
-          enabled: productFormData.enabled,
-        })
-      }, 4000)
+      form.setFieldsValue({
+        merchantId: currentMerchant?.name,
+        productName: productFormData.productName,
+        // NOTICE: 後端移除
+        // adminUsername: productFormData.adminUsername,
+        // NOTICE: 後端不回傳真正密碼
+        // NOTICE: 後端移除
+        // adminPassword: null,
+        logo: productFormData.logo,
+        backgroundImg: productFormData.backgroundImg,
+        amountRangeLow: productFormData.amountRange.split("-")[0],
+        amountRangeHigh: productFormData.amountRange.split("-")[1],
+        interestRangeLow: productFormData.interestRange.split(" - ")[0],
+        interestRangeHigh: productFormData.interestRange?.split(" - ")[1]?.split("% / day")[0],
+        termRangeLow: productFormData.termRange.split("-")[0],
+        termRangeHigh: productFormData.termRange.split("-")[1].split("Days")[0],
+        approveRate: `${productFormData.approveRate.split("%")[0]}`,
+        approveTime: productFormData.approveTime.split(" ")[0],
+        approveTimeUnit: productFormData.approveTime.split(" ")[1],
+        csEmail: productFormData.csEmail,
+        csTime: [
+          moment(productFormData.csTime.split(" - ")[0], 'h:mm:ss'),
+          moment(productFormData.csTime.split(" - ")[1], 'h:mm:ss'),
+        ],
+        loanTerm: productFormData.loanTerm,
+        maxAmount: productFormData.maxAmount,
+        extensible: productFormData.extensible,
+        extensibleOverdueDays: productFormData.extensibleOverdueDays,
+        preInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.preInterestRate) * 100)}`,
+        postInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.postInterestRate) * 100)}`,
+        dailyRate: `${fixedFloatNumberToFixed2(Number(productFormData.dailyRate) * 100)}`,
+        extensionRate: `${fixedFloatNumberToFixed2(Number(productFormData.extensionRate) * 100)}`,
+        productInterestRatePairs: productFormData.productInterestRatePairs.map((ratePair) => {
+          return {
+            num: ratePair.num,
+            preInterest: fixedFloatNumberToFixed2(ratePair.preInterest * 100),
+            postInterest: fixedFloatNumberToFixed2(ratePair.postInterest * 100),
+          }
+        }),
+        overdueRate: `${fixedFloatNumberToFixed2(Number(productFormData.overdueRate) * 100)}`,
+        top: productFormData.top,
+        tags: productFormData.tags.split(","),
+        templateType: productFormData.templateType,
+        weight: productFormData.weight,
+        enabled: productFormData.enabled,
+      })
     }
 
     // console.log("productFormData", productFormData);
@@ -256,9 +254,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
       num: i.num,
-      postInterest: strToFloatNumberWithFixed2(i.postInterest),
-      preInterest: strToFloatNumberWithFixed2(i.preInterest) }
-    ))
+      postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
+      preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3))
+    }))
 
     let creatProductData: PostProductCreateRequestBody = {
       merchantId: Number(values.merchantId),

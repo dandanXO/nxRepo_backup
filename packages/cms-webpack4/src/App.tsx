@@ -1,19 +1,17 @@
 import React, {useEffect} from 'react';
-// import './App.css';
-import {appStore} from "./store";
-import {HashRouter as Router, Route, Switch, useHistory} from "react-router-dom";
-import IndexPage from "./pages/index";
-import MerchantPage from "./pages/merchant";
-import ProductPage from "./pages/product";
 import {Provider} from "react-redux";
-
-require('antd/dist/antd.less');
-
 import { ConfigProvider } from 'antd';
+require('antd/dist/antd.less');
+import {HashRouter as Router, Route, Switch, useHistory} from "react-router-dom";
+
+import {appStore} from "./store";
+import IndexPage from "./pages/index";
+import ProductPage from "./pages/ProductPage";
+import MerchantPage from "./pages/MerchantPage";
+import UserPage from "./pages/UserPage";
+import UserInfoPage from "./pages/UserInfoPage";
 
 function App() {
-    // <ProductPage/>
-
     useEffect(() => {
         // Listen for the event.
         window.addEventListener('main-app-hashchange', (e) => {
@@ -35,6 +33,10 @@ function App() {
                         <Route path="/merchant" component={MerchantPage}/>
                         {/*// @ts-ignore*/}
                         <Route path="/product" component={ProductPage}/>
+                        {/*// @ts-ignore*/}
+                        <Route path="/user" component={UserPage}/>
+                        {/*// @ts-ignore*/}
+                        <Route path="/user-info" component={UserInfoPage}/>
                     </Switch>
                 </Router>
             </ConfigProvider>

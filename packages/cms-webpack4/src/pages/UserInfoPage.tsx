@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
 import {PageContainer} from '@ant-design/pro-components';
 import {Tabs} from 'antd';
-import UserInfo from '../../component/UserInfo';
-import AddressBook from '../../component/AddressBook';
-import SmsMessage from '../../component/SmsMessage';
-import LoanInfo from '../../component/LoanInfo';
+import UserInfo from '../component/UserInfo';
+import AddressBook from '../component/AddressBook';
+import SmsMessage from '../component/SmsMessage';
+import LoanInfo from '../component/LoanInfo';
 
 
-const Product = () => {
+const UserInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
 
     useEffect(() => {
@@ -44,4 +44,4 @@ const Product = () => {
         </div>
     ) : null;
 };
-export default Product;
+export default UserInfoPage;
