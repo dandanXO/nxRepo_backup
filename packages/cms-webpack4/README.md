@@ -1,4 +1,4 @@
-# cms
+# CMS
 
 ## Development
 ```shell
