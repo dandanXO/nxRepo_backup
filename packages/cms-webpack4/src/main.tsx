@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 import App from './App';
 
+// TODO: 18
 let root;
 
 function render(props) {
@@ -11,6 +12,7 @@ function render(props) {
     const { container } = props;
     ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));
 
+    // TODO: 18
     // const newContainer = document.getElementById('app');
     // const root = ReactDOM.createRoot(newContainer);
     // root.render(<App />);
@@ -61,6 +63,6 @@ export async function unmount(props) {
     // NOTICE: 17
     const { container } = props;
     ReactDOM.unmountComponentAtNode(container ? container.querySelector('#root') : document.querySelector('#root'));
-
+    // TODO: 18
     // root.unmount();
 }
