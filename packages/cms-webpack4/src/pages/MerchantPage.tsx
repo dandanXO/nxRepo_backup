@@ -3,7 +3,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../modules/merchant/api/MerchantApi";
 import { Form } from "antd";
 import MerchantModal from '../modules/merchant/components/MerchantModal';
-import MerchantTable from '../modules/merchant/components/merchantTable';
+import MerchantTable from '../modules/merchant/components/MerchantTable';
 const MerchantManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const [postMerchantCreate, { isLoading: isMerchantCreating, isSuccess: postMerchantSuccess }] = usePostMerchantCreateMutation();
