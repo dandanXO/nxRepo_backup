@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Avatar, Dropdown, Icon, Layout, Menu, message, notification,Switch } from 'antd';
-import {withRouter} from 'react-router-dom';
-import {axios, hasGoogleAuth} from 'utils';
+import React, { Component } from 'react';
+import { Avatar, Dropdown, Icon, Layout, Menu, notification } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { axios, hasGoogleAuth } from 'utils';
 import styles from './LayoutHeader.less';
 import Cookies from 'js-cookie';
-import { injectIntl, FormattedMessage } from "react-intl";
+import { FormattedMessage, injectIntl } from "react-intl";
 import LanguageSwitch from '../../locales/component/LanguageSwitch';
 import { connect } from 'react-redux';
 import { globalSettingAction } from './index';
@@ -12,26 +12,37 @@ import { bindActionCreators } from 'redux';
 
 const {Header} = Layout;
 
-const openNotification = (balance) => {
-    notification.open({
-        message: '余额不足',
-        description:
-            "Currently risk control balance is:" + balance + ",lower than [2000].Please charge immediately,so as not to affect the system operations！",
-        onClick: () => {
-            console.log('Notification Clicked!');
-        },
-    });
+const openBalanceNotification = (balance) => {
+  notification.open({
+    message: '余额不足',
+    description:
+      "Currently risk control balance is:" + balance + ",lower than [2000].Please charge immediately,so as not to affect the system operations！",
+    onClick: () => {
+      console.log('Notification Clicked!');
+    },
+  });
+};
+
+const openNotificationForCollectors = (announcements) => {
+  notification.open({
+    message: 'Announcement',
+    description:
+      announcements.join('\n'),
+    onClick: () => {
+      console.log('Notification Clicked!');
+    },
+  });
 };
 
 class LayoutHeader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            adminInfo: {
-                phoneNo: 'admin'
-            },
-            balance: null,
-            appName: null,
+  constructor(props) {
+    super(props);
+    this.state = {
+      adminInfo: {
+        phoneNo: 'admin'
+      },
+      balance: null,
+      appName: null,
             globalTableSize: JSON.parse(localStorage.getItem('tableSize'))
         };
         this.alertTimer = null;
@@ -41,7 +52,7 @@ class LayoutHeader extends Component {
 
         const { setTableSize } = this.props;
         setTableSize(this.state.globalTableSize);
-        
+
         const _this = this;
         const {history} = _this.props;
         axios({
@@ -89,18 +100,21 @@ class LayoutHeader extends Component {
                                 return;
                             }
                             if (balance < 2000) {// 风控费低于2000，弹窗提示
-                                openNotification(balance);
-                                _this.alertTimer = setInterval(() => {
-                                    openNotification(balance);
-                                }, 60000);
+                              openBalanceNotification(balance);
+                              _this.alertTimer = setInterval(() => {
+                                openBalanceNotification(balance);
+                              }, 60000);
                             }
-                           
+
                         });
                     }
+                  toFreshBalance();
+                  setInterval(() => {
                     toFreshBalance();
-                    setInterval(() => {
-                        toFreshBalance();
-                    }, 10 * 60 * 1000);
+                  }, 10 * 60 * 1000);
+                } else if (res['announcementsForCollectors'] && (data['roleId'] === 14 || data['roleId'] === 15 || data['roleId'] === 21)) {
+                  // openNotificationForCollectors(res['announcementsForCollectors']);
+                  alert(res['announcementsForCollectors'].join('\n'));
                 }
             }
         });
