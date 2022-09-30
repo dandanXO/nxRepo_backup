@@ -19,6 +19,7 @@ export const AppRouter = () => {
                 <Route path="/loan-details" element={<LoanDetailsPage />} />
                 {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
                 <Route path="/extend-details" element={<ExtendDetailsPage />} />
+              <Route path="/repayment-modal-advertisement" element={<div />} />
                 <Route path="/bank-bind" element={<BindBankAccountPage />} />
                 <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />}/>
                 <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />}/>
