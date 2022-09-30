@@ -4,9 +4,6 @@
 ```shell
 # Development
 npm run webpack:dev
-
-# Production
-npm run webpack:build
 ```
 
 ## Production
