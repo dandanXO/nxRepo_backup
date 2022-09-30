@@ -31,8 +31,6 @@ export default class App extends Component {
                             <Route exact path={'/login'} component={Login}/>
                             <Route exact path={'/googleauth'} component={GoogleAuth}/>
                             <AuthRoute>
-                                {/*<Route component={MainLayout}/>*/}
-                                {/*<Route render={({ list }) => <MainLayout list={list}/>}/>*/}
                                 <MainLayout/>
                             </AuthRoute>
 

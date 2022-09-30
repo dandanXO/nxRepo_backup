@@ -16,7 +16,13 @@ class LayoutMenu extends Component {
         super(props);
         const { location: { pathname } } = this.props;
         const pathArr = pathname.split('/');
-        const truePath = '/' + pathArr[1];
+      
+        let truePath = '/' + pathArr[1];
+
+        if(truePath === "/cms") {
+            truePath = '/' + pathArr[1] +'/' + pathArr[2]
+        }
+        
         this.state = {
             openKeys: this.findKeys(truePath),
             selectedKeys: [truePath]
@@ -73,7 +79,6 @@ class LayoutMenu extends Component {
 
                 return (
                     <SubMenu
-
                         key={item['actionUrl']}
                         title={<span><Icon type={item['iconCss']}/><span><FormattedMessage id={itemName} /></span></span>}
                     >
@@ -82,13 +87,11 @@ class LayoutMenu extends Component {
                 );
             }
             return (
-
                 <Menu.Item
-
-                key={item['actionUrl']}
-                onClick={this.handleOpenMenu}
+                    key={item['actionUrl']}
+                    onClick={this.handleOpenMenu}
                 >
-                    <Icon type={item['iconCss']}/>
+                    <Icon type={item['iconCss']} />
                     <span><FormattedMessage id={itemName} /></span>
                 </Menu.Item>
             );
@@ -107,7 +110,12 @@ class LayoutMenu extends Component {
         }
         if(pathname !== PrevPathname) {
             const pathArr = pathname.split('/');
-            const truePath = '/' + pathArr[1];
+            let truePath = '/' + pathArr[1];
+
+            if(truePath === "/cms") {
+                truePath = '/' + pathArr[1] +'/' + pathArr[2]
+            }
+            
             this.setState({
                 openKeys: this.findKeys(truePath),
                 selectedKeys: [truePath]
