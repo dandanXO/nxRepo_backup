@@ -88,7 +88,7 @@ const ProductTable = (props: ProductTableProps) => {
                             onClick={() => {
                                 const { productName, enabled } = form.getFieldsValue();
                                 const searchData = props.productListData
-                                    .filter(i => productName === "" ? i : i.productName === productName)
+                                    .filter(i => productName === "" ? i :  i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
                                     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
                                 setProductList(searchData)
                                 form.submit();
