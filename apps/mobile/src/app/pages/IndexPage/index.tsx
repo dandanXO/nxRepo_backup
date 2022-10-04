@@ -35,6 +35,11 @@ export default () => {
                     UploadedPaymentReceiptPage
                 </Link>
             </div>
+            <div>
+                <Link to={"/product-ad-modal-list?" + getToken()}>
+                    ProductAdModalListPage
+                </Link>
+            </div>
         </Page>
     );
 };
