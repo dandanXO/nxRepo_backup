@@ -69,10 +69,10 @@ const ProductAd = ({ logo, productName, loanQuota, interestRate, term }: Product
 const ProductAdModalListPage = () => {
     const { currentData, isLoading, isFetching } = useGetLoanRecommendQuery({ count: '' });
     useEffect(()=>{
-        if(!isLoading && currentData && currentData?.length===0){
+        if(!isLoading && currentData && currentData?.length>0){
             window["SyncTask"] &&
-            window["SyncTask"]["recommendBannerIsEmpty"] &&
-            window["SyncTask"]["recommendBannerIsEmpty"]();
+            window["SyncTask"]["recommendBannerIsNotEmpty"] &&
+            window["SyncTask"]["recommendBannerIsNotEmpty"]();
         }
     },[isLoading]);
     return (
