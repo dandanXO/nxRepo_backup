@@ -1115,6 +1115,7 @@
   "record.status.four": "Re-exam Rejected",
   "record.status.five": "Re-exam and Blacklisted",
   "record.status.six": "Final Re-exam Passed",
+  "record.status.seven": "Final Review Rejected",
 
   "loan.status.zero": "Loaning",
   "loan.status.one": "Loan successfully",
