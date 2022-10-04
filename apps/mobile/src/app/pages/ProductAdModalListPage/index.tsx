@@ -1,10 +1,42 @@
 import { Page } from "@frontend/mobile/shared/ui";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-
+import { useGetLoanRecommendQuery } from "../../api";
+import HotSvgIcon from "./HotSVGIcon";
 
 const ProductAdStyled = styled.div`
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: solid 1px ${({ theme }) => theme.color.gray200};
+    padding: 22px 16px 16px 16px;
+    .product {
+        display: flex;
+        margin-bottom: 8px;
+        .icon{
+          position: relative;
+        }
+        .hotIcon{
+            position: absolute;
+            top:-30%;
+            left:-30%;
+        }
+        .logoIcon {
+            width: 2.25rem;
+            height: 2.25rem;
+            margin-right: 8px;
+            box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.16);
+        }
+        .productName {
+            font-weight: 500;
+        }
+    }
+    .productInfo {
+        display: flex;
+        justify-content: space-between;
+        color: ${({ theme }) => theme.color.gray500};
+        font-size: ${({ theme }) => theme.fontSize[14]};
+    }
 `;
 
 interface ProductAdProps {
@@ -15,27 +47,46 @@ interface ProductAdProps {
     term?: string;
 }
 
-const ProductAd = ({ logo, productName, loanQuota }: ProductAdProps) => {
+const ProductAd = ({ logo, productName, loanQuota, interestRate, term }: ProductAdProps) => {
     return <ProductAdStyled>
         <div className="product">
-            <div><img src={logo} alt="" /></div>
+            <div className="icon">
+                <div  className="hotIcon"><HotSvgIcon/></div>
+                <img className="logoIcon" src={logo} alt="" /></div>
             <div>
-                <div>{productName ? productName : ""}</div>
-                <div>{loanQuota ? loanQuota : ""}</div>
+                <div className="productName">{productName ? productName : ""}</div>
+                <div>₹ {loanQuota ? loanQuota : ""}</div>
             </div>
         </div>
         <div className="productInfo">
-            <div>{productName ? productName : ""}</div>
-            <div>{loanQuota ? loanQuota : ""}</div>
+            <div>interest : {interestRate ? interestRate : ""}</div>
+            <div>terms : {term ? term : ""}</div>
         </div>
     </ProductAdStyled>
 }
 
 
 const ProductAdModalListPage = () => {
+    const { currentData, isLoading, isFetching } = useGetLoanRecommendQuery({ count: '' });
+    useEffect(()=>{
+        if(!isLoading && currentData && currentData?.length===0){
+            window["SyncTask"] &&
+            window["SyncTask"]["recommendBannerIsEmpty"] &&
+            window["SyncTask"]["recommendBannerIsEmpty"]();
+        }
+    },[isLoading]);
     return (
         <Page>
-            123
+            {!isLoading && currentData?.map((i) => (
+                <ProductAd
+                    key={i.productId}
+                    logo={i.logoUrl}
+                    productName={i.productName}
+                    loanQuota={i.loanQuota}
+                    interestRate={i.interestRate}
+                    term={i.term}
+                />
+            ))}
         </Page>
     );
 };
