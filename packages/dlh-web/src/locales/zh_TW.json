@@ -1061,7 +1061,8 @@
     "record.status.four" : "複審拒絕",
     "record.status.five" : "複審拉黑" ,
     "record.status.six" : "終審通過",
-
+    "record.status.seven": "終審拒絕",
+    
     "loan.status.zero" : "放款中",
     "loan.status.one" : "放款成功",
     "loan.status.four" : "放款失敗",
