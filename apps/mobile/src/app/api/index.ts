@@ -21,7 +21,7 @@ import {
 } from "./postRepayCreate";
 import { PostBankBindSaveRequest } from "./postBankBindSave";
 import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
-
+import { GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring } from "./getLoanRecommend";
 export {
     GetAttractionsALLResponse,
     GetAttractionsALLRequestQueryArg,
@@ -99,10 +99,7 @@ export const API = createApi({
                 method: "get",
             }),
         }),
-        postRepayCreate: builder.mutation<
-            PostRepayCreateResponse,
-            PostRepayCreateRequestBody
-        >({
+        postRepayCreate: builder.mutation<PostRepayCreateResponse,PostRepayCreateRequestBody>({
             query: (query: PostRepayCreateRequestBody) => ({
                 url: `/repay/create`,
                 method: "post",
@@ -116,14 +113,18 @@ export const API = createApi({
                 data: requestBody,
             }),
         }),
-        postLoanSubmitOrder: builder.mutation<
-            {},
-            PostLoanSubmitOrderRequestBody
-        >({
+        postLoanSubmitOrder: builder.mutation<{},PostLoanSubmitOrderRequestBody>({
             query: (requestBody: PostLoanSubmitOrderRequestBody) => ({
                 url: `/loan/submit-order`,
                 method: "post",
                 data: requestBody,
+            }),
+        }),
+        getLoanRecommend: builder.query<GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring>({
+            query: (query: GetLoanRecommendRequestQuerystring) => ({
+                url: `/loan/recommend`,
+                method: "get",
+                params: query
             }),
         }),
     }),
@@ -135,4 +136,5 @@ export const {
     usePostRepayCreateMutation,
     usePostBankBindSaveMutation,
     usePostLoanSubmitOrderMutation,
+    useGetLoanRecommendQuery,
 } = API;
