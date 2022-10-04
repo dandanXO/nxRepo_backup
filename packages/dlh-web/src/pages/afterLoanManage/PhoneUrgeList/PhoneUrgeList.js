@@ -64,6 +64,13 @@ class PhoneUrgeList extends Component {
                 }
             },
             { title: props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', width: 200, render(text) { return <CopyText text={text} /> } },
+            {
+                title: <FormattedMessage id="page.search.list.product.name" />,
+                dataIndex: "productName",
+                key: "productName",
+                width:120,
+                render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },    
             { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', width: 200, render(text) { return <CopyText text={text} /> } },
             { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone', width: 120, render(text) { return <CopyText text={text} /> } },
             { title: props.intl.formatMessage({ id: "page.table.days.overdue" }), dataIndex: 'expireDays', key: 'expireDays', width: 100 },
