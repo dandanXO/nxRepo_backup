@@ -1,7 +1,6 @@
 import "./public-path.ts"
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '../../cms-webpack4/src/index.less';
 import App from '../../cms-webpack4/src/App';
 import reportWebVitals from './reportWebVitals';
 
