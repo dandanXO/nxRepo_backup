@@ -1,6 +1,5 @@
-export interface GetChannelListResponse {
+export interface GetChannelListResponse extends Array<channelList> {
     data: channelList[];
-
 }
 
 export interface channelList {

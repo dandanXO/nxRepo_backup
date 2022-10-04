@@ -1,6 +1,8 @@
 import { API } from "../../../api";
 import { GetUerListProps, GetUserListRequestQuerystring } from "./types/getUserList";
 import { GetChannelListResponse } from "./types/getChannelList";
+import { GetUserInfoRequestQuerystring,GetUserSmsProps  } from "./types/getUserInfo";
+
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
@@ -20,9 +22,18 @@ const UserApi = API.injectEndpoints({
                 method: "get",
             }),
         }),
+        // NOTE: GET /hs/admin/userDetails/find-user-sms-logs 短信记录
+        getUserSMSList: builder.query<GetUserSmsProps, GetUserInfoRequestQuerystring>({
+            query: (requestBody: GetUserInfoRequestQuerystring) => ({
+                url: `/userDetails/find-user-sms-logs`,
+                params: requestBody,
+                method: "get",
+            }),
+        }),
     })
 })
 export const {
     useLazyGetUserManageListQuery,
-    useGetChannelListQuery
+    useGetChannelListQuery,
+    useGetUserSMSListQuery
 } = UserApi;

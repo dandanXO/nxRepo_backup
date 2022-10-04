@@ -6,7 +6,7 @@ export interface GetDataCommonResponse {
     numberOfElements?: number;
     pageable?: pageableResonese;
     size?: number;
-    sort?: sortResponse;
+    sort?: sortResponse[];
     totalElements?: number;
     totalPages?: number;
 }
@@ -16,7 +16,7 @@ export interface pageableResonese {
     pageNumber?: number;
     pageSize?: number;
     paged?: boolean;
-    sort?: sortResponse;
+    sort?: sortResponse[];
     unpaged?: boolean;
 }
 

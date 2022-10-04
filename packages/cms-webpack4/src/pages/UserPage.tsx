@@ -4,13 +4,14 @@ import {PageContainer, ProTable} from '@ant-design/pro-components';
 import {Button, Form, Input, InputNumber, Modal, Radio, Space} from 'antd';
 
 import {GetUerListProps,UserListContent,GetUserListResponse,GetUserListRequestQuerystring,GetUerProps} from "../modules/user/api/types/getUserList";
-import { useLazyGetUserManageListQuery,useGetChannelListQuery } from '../modules/user/api/UserApi';
+import { useLazyGetUserManageListQuery,useGetChannelListQuery ,useGetUserSMSListQuery} from '../modules/user/api/UserApi';
 import useAutoLogin from '../modules/shared/hooks/useAutoLogin';
 // import {useGetAvailableMerchantListQuery} from "../../modules/product/api/ProductApi";
 
 const UserManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const { currentData:channelList, isSuccess: isGetMerchantListSuccess } = useGetChannelListQuery(null);
+    const { currentData:userSmsList } = useGetUserSMSListQuery({userId:1000050, pageNumber:1,pageSize:10});
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -34,8 +35,8 @@ const UserManage = () => {
             idcardNo:"",
             nameTrue:"",
             noLoanAgain:false,
-            noLoanAgainEndDays:0,
-            noLoanAgainStartDays:0,
+            noLoanAgainEndDays:10,
+            noLoanAgainStartDays:1,
             phoneNo:"",
             riskRank:"",
             rnStatus:"",
@@ -43,20 +44,20 @@ const UserManage = () => {
             userStatus:0,
             pageNum:1,
             pageSize:10
-
         })
     }, [])
 
     useEffect(()=>{
         console.log(channelList)
+        console.log(userSmsList)
         // setUserList(currentData);
     },[currentData])
 
 
 
-    // const addPackageValueEnum = merchantList?.reduce((prev, curr) => {
-    //     return { ...prev, ...{ [curr.merchantId]: { text: curr.name } } }
-    // }, { 0: { text: '不限' } })
+    const channelListValueEnum = channelList?.reduce((prev, curr) => {
+        return { ...prev, ...{ [curr.channelId]: { text: curr.name } } }
+    }, { 0: { text: '不限' } })
 
 
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
@@ -97,10 +98,7 @@ const UserManage = () => {
             },
         },
         { title: '注册包名', dataIndex: 'appName', initialValue: '', key: 'appName' },
-        {
-            title: '注册渠道', dataIndex: 'channelName', valueType: 'select', initialValue: '0', key: 'channelName',
-            // valueEnum: addPackageValueEnum
-        },
+        { title: '注册渠道', dataIndex: 'channelName', valueType: 'select', initialValue: '0', key: 'channelName', valueEnum: channelListValueEnum },
         { title: '注册时间', dataIndex: 'addTime', valueType: 'dateTime', key: 'addTime', hideInSearch: true },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
