@@ -86,16 +86,7 @@ class CheckRecord extends React.Component {
                 width: '25%',
                 key: 'remark',
                 render: function (text) {
-
-                    let str;
-                    try {
-                        str = JSON.parse(text);
-                    } catch (e) {
-                        str = text;
-                    }
-
-                    str = typeof str !== 'object' ? str : (str['risk_items'] || []).map(item => item['risk_name']).join(',')
-                    return <CopyToLink text={str} />
+                    return <CopyToLink text={text} />
                 }
             },
             // {
