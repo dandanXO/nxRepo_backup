@@ -93,6 +93,13 @@ class OverdueList extends Component {
                 }
             },
             {title: props.intl.formatMessage({id: "page.search.list.order.no"}), dataIndex: 'orderNo', key: 'orderNo',width:'15%',  render(text) { return <CopyText text={text} /> } },
+            {
+                title: props.intl.formatMessage({ id: "page.search.list.product.name" }),
+                dataIndex: "productName",
+                key: "productName",
+                width:'8%',
+                render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },
             {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName',width:'13%',  render(text) { return <CopyText text={text} isEllispsis={true}/> } },
             // { title: '手机型号', dataIndex: 'deviceModel', key: 'deviceModel' },
             // { title: '手机号', dataIndex: 'userPhone', key: 'userPhone' },

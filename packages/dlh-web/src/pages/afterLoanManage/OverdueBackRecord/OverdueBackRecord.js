@@ -63,6 +63,13 @@ class OverdueBackRecord extends Component {
             }
         },
         { title: <FormattedMessage id="page.search.list.order.no" />, dataIndex: 'orderNo', key: 'orderNo', render(text) { return <CopyText text={text} /> } },
+        {
+            title: <FormattedMessage id="page.search.list.product.name" />,
+            dataIndex: "productName",
+            key: "productName",
+            width:'8%',
+            render(text) { return <CopyText text={text} isEllispsis={true} /> }
+        },
         { title: <FormattedMessage id="page.search.list.name" />, dataIndex: 'userName', key: 'userName', render(text) { return <CopyText text={text} isEllispsis={true} /> } },
         { title: <FormattedMessage id="page.search.list.mobile" />, dataIndex: 'phoneNo', key: 'phoneNo', width: '10%', render(text) { return <CopyText text={text} /> } },
         { title: <FormattedMessage id="windowPage.payment.method" />, dataIndex: 'payName', key: 'payName',  width: '8%', render(text) { return <CopyText text={text} /> } },

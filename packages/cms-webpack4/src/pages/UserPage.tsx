@@ -3,61 +3,66 @@ import type {ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
 import {Button, Form, Input, InputNumber, Modal, Radio, Space} from 'antd';
 
-import {GetUserResponse} from "../types/getUserList";
+import {GetUerListProps,UserListContent,GetUserListResponse,GetUserListRequestQuerystring,GetUerProps} from "../modules/user/api/types/getUserList";
+import { useLazyGetUserManageListQuery,useGetChannelListQuery ,useGetUserSMSListQuery} from '../modules/user/api/UserApi';
+import useAutoLogin from '../modules/shared/hooks/useAutoLogin';
 // import {useGetAvailableMerchantListQuery} from "../../modules/product/api/ProductApi";
 
 const UserManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
-    // const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
-    // const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetMerchantManageListQuery({
-    //     pollingInterval: 0,
-    //     refetchOnFocus: false,
-    //     refetchOnReconnect: false
-    // });
-    const currentDataArr = [{
-        phoneNo: '9641766099',
-        name: 'Swanti Man Tripatih',
-        gender: '男',
-        age: 34,
-        idcardNo: '888899990000',
-        windTag: 'best',
-        isOldUser: true,
-        addPackage: 'com.iron.pocket.android',
-        addTime: '2022-08-19 08:03:12',
-        channelName: 'sample:Google',
-        isBlack: true,
-    },
-    {
-        phoneNo: '964222229',
-        name: 'Swaaaaaaaipatih',
-        gender: '女',
-        age: 24,
-        idcardNo: '822222220000',
-        windTag: 'reject',
-        isOldUser: false,
-        addPackage: 'com.iron.pocket.android2222',
-        addTime: '2022-08-19 08:03:12',
-        channelName: 'sample:Google222',
-        isBlack: false,
-    }]
-    const [userList, setUserList] = useState<GetUserResponse[]>(currentDataArr);
+    const { currentData:channelList, isSuccess: isGetMerchantListSuccess } = useGetChannelListQuery(null);
+    const { currentData:userSmsList } = useGetUserSMSListQuery({userId:1000050, pageNumber:1,pageSize:10});
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
 
+    const [userList, setUserList] = useState<GetUerListProps>({content:[]});
+    const [showModal, setShowModal] = useState(false);
+    const [form] = Form.useForm();
+    useAutoLogin();
     useEffect(() => {
-        setUserList(currentDataArr);
-        setDomLoaded(true);
+       
 
+        setDomLoaded(true);
+        console.log('132',form.getFieldsValue())
+        triggerGetList({
+            addEndTime:"",
+            addStartTime:"",
+            channelId:"",
+            hasOrder:"",
+            idcardNo:"",
+            nameTrue:"",
+            noLoanAgain:false,
+            noLoanAgainEndDays:10,
+            noLoanAgainStartDays:1,
+            phoneNo:"",
+            riskRank:"",
+            rnStatus:"",
+            status:"",
+            userStatus:0,
+            pageNum:1,
+            pageSize:10
+        })
     }, [])
 
+    useEffect(()=>{
+        console.log(channelList)
+        console.log(userSmsList)
+        // setUserList(currentData);
+    },[currentData])
 
 
-    // const addPackageValueEnum = merchantList?.reduce((prev, curr) => {
-    //     return { ...prev, ...{ [curr.merchantId]: { text: curr.name } } }
-    // }, { 0: { text: '不限' } })
+
+    const channelListValueEnum = channelList?.reduce((prev, curr) => {
+        return { ...prev, ...{ [curr.channelId]: { text: curr.name } } }
+    }, { 0: { text: '不限' } })
 
 
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
 
-    const columns: ProColumns<GetUserResponse>[] = [
+    const columns: ProColumns<UserListContent>[] = [
         {
             title: '操作',
             valueType: 'option',
@@ -69,34 +74,31 @@ const UserManage = () => {
         },
 
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: '' },
-        { title: '姓名', dataIndex: 'name', key: 'name', initialValue: '' },
+        { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: '' },
         { title: '性别', dataIndex: 'gender', key: 'gender', hideInSearch: true },
         { title: '年龄', dataIndex: 'age', key: 'age', hideInSearch: true },
         { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: '' },
         {
-            title: '风控标签', dataIndex: 'windTag', valueType: 'select', initialValue: '', key: 'windTag',
+            title: '风控标签', dataIndex: 'riskRank', valueType: 'select', initialValue: '', key: 'riskRank',
             valueEnum: {
                 '': { text: '不限', color: '' },
-                'best': { text: '极好', color: 'green' },
-                'good': { text: '良好', color: 'orange' },
-                'medium': { text: '正常', color: 'blue' },
-                'normal': { text: '普通', color: 'gold' },
-                'reject': { text: '拒绝', color: 'lightGray' },
+                'EXCELLENT': { text: '极好', color: 'green' },
+                'GOOD': { text: '良好', color: 'orange' },
+                'NORMAL': { text: '正常', color: 'blue' },
+                'ORDINARY': { text: '普通', color: 'gold' },
+                'REJECT': { text: '拒绝', color: 'lightGray' },
             },
         },
         {
-            title: '是否新客', dataIndex: 'isOldUser', valueType: 'select', initialValue: '', key: 'isOldUser',
+            title: '是否新客', dataIndex: 'newMember', valueType: 'select', initialValue: '', key: 'isOldUser',
             valueEnum: {
                 '': { text: '不限' },
                 true: { text: '是' },
                 false: { text: '否' },
             },
         },
-        { title: '注册包名', dataIndex: 'addPackage', initialValue: '', key: 'addPackage' },
-        {
-            title: '注册渠道', dataIndex: 'channelName', valueType: 'select', initialValue: '0', key: 'channelName',
-            // valueEnum: addPackageValueEnum
-        },
+        { title: '注册包名', dataIndex: 'appName', initialValue: '', key: 'appName' },
+        { title: '注册渠道', dataIndex: 'channelName', valueType: 'select', initialValue: '0', key: 'channelName', valueEnum: channelListValueEnum },
         { title: '注册时间', dataIndex: 'addTime', valueType: 'dateTime', key: 'addTime', hideInSearch: true },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
@@ -124,12 +126,12 @@ const UserManage = () => {
             renderFormItem: (text, record, _, action) => [
                 <Form key={'formNoLoanAgainDays'} initialValues={{ termRangeLow: 1, termRangeHigh: 10 }} >
                     <Form.Item style={{ whiteSpace: 'nowrap' }} >
-                        <Form.Item name="termRangeLow" style={{ display: 'inline-block', width: '100px', margin: '0 8px 0 0' }}>
-                            <InputNumber min={1} max={10} placeholder={"最低天数"} disabled={!isNoLoanAgain} />
+                        <Form.Item name="noLoanAgainStartDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px 0 0' }}>
+                            <InputNumber min={1} max={10} placeholder={"天"} disabled={!isNoLoanAgain} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>~</Form.Item>
-                        <Form.Item name="termRangeHigh" style={{ display: 'inline-block', width: '100px', margin: '0 8px' }}>
-                            <InputNumber min={1} max={10} placeholder={"最高天数"} disabled={!isNoLoanAgain} />
+                        <Form.Item name="noLoanAgainEndDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px' }}>
+                            <InputNumber min={1} max={10} placeholder={"天"} disabled={!isNoLoanAgain} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
                     </Form.Item>
@@ -138,8 +140,7 @@ const UserManage = () => {
             ],
         },
     ]
-    const [showModal, setShowModal] = useState(false);
-    const [form] = Form.useForm();
+
 
 
     const onFinish = (values: any) => {
@@ -170,9 +171,9 @@ const UserManage = () => {
                 },
             }}
         >
-            <ProTable<GetUserResponse>
+            <ProTable<UserListContent>
                 columns={columns}
-                dataSource={userList}
+                dataSource={userList.content||[]}
                 // loading={isFetching}
                 rowKey="id"
                 headerTitle={
