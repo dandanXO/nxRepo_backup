@@ -19,7 +19,7 @@ const ProductModal = (props: ProductModalProps) =>
           <span style={{ marginRight: 8 }}>添加产品</span>
           <Button onClick={() => props.onMockFinish()}>自动填入范本资料</Button>
         </span>
-      ) : "编辑产品"}
+      ) : "修改产品"}
       open={props.show}
       onCancel={props.handleCloseModal}
       onOk={props.onOk}
