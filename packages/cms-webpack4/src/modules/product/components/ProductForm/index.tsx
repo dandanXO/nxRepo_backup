@@ -1,4 +1,4 @@
-import { CustomAntFormFieldError, ProductFormModal } from "../../hooks/useProductFormModal";
+import {CustomAntFormFieldError, FormUploadFileList, ProductFormModal} from "../../hooks/useProductFormModal";
 import { GetAvailableMerchantResponse } from "../../api/types/getAvailbaleMerchant";
 import React, { useCallback, useEffect } from "react";
 import { Form } from "antd";
@@ -117,7 +117,10 @@ const Index = (props: ProductFormProps) => {
             }}
         >
             <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit} />
-            <ProductSettingSection setLogo={setLogo} setBackgroundImg={setBackgroundImg} />
+            <ProductSettingSection
+                setLogo={setLogo}
+                setBackgroundImg={setBackgroundImg}
+            />
             <LoanSettingSection />
             <RateSettingSection form={form} customAntFormFieldError={customAntFormFieldError} />
             <UploadSettingSection />

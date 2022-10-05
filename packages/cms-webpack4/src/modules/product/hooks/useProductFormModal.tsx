@@ -27,6 +27,17 @@ export interface ProductFormModal {
   formRef?: any;
 }
 
+
+export interface FormUploadFileList {
+    uid: string;
+    name: string;
+    url: string;
+}
+
+export interface ProductFormUploads {
+    logoFileList: UploadFile[];
+    backgroundImgFileList: UploadFile[];
+}
 export const useProductFormModal = (props: ProductFormModal) => {
 
   const [productModalData, setProductModalData] = useState<ProductFormModal>({
@@ -60,14 +71,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
   const [postProductCreate, { isLoading }] = usePostProductCreateMutation();
   const [putProduct, {isSuccess: isPutProductSuccess}] = usePutProductEditMutation();
 
-  const [uploadFiles, setUploadFiles] = useState<{
-    logoFileList: UploadFile[];
-    backgroundImgFileList: UploadFile[];
-  }>({
-    logoFileList: null,
-    backgroundImgFileList: null,
-  });
-
   useEffect(() => {
     if(triggerFetchTableList) {
       // console.log("[debug] 3", triggerFetchTableList)
@@ -91,36 +94,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
   }, [productModalData.productId])
 
 
-  useEffect(() => {
-    // console.log("productModalData.productId", productModalData.productId);
-    if(!productModalData.productId) {
-      setUploadFiles({
-        logoFileList: null,
-        backgroundImgFileList: null,
-      })
-    } else {
-      setUploadFiles({
-        logoFileList: [
-          {
-            uid: '1',
-            name: "",
-            url: productFormData?.logo,
-          }
-        ],
-        backgroundImgFileList: [
-          {
-            uid: '1',
-            name: "",
-            url: productFormData?.backgroundImg,
-          }
-        ],
-      });
-    }
-    // console.log("productFormData", productFormData);
-    // NOTICE: uploadFiles is old
-    // console.log("uploadFiles", uploadFiles);
-  }, [productModalData.productId, props.show, productFormData])
-
   // useEffect(() => {
   //   console.log("isFetching");
   //   form.resetFields();
@@ -130,6 +103,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     // console.log("isFetching");
     form.resetFields();
   }, [props.show])
+    // const [logoUploadFileList, setLogoUploadFileList] = useState<FormUploadFileList>()
 
   useEffect(() => {
     if(isFetching) return;
@@ -143,7 +117,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
     if(!productModalData.productId) {
       form.resetFields();
     } else {
-
       form.setFieldsValue({
         merchantId: currentMerchant?.name,
         productName: productFormData.productName,
@@ -153,7 +126,18 @@ export const useProductFormModal = (props: ProductFormModal) => {
         // NOTICE: 後端移除
         // adminPassword: null,
         logo: productFormData.logo,
+        logoUpload: [{
+            uid: '1',
+            name: productFormData.logo && productFormData.logo.split("/") && productFormData.logo.split("/")[productFormData.logo.length - 1],
+            url: productFormData.logo,
+        }],
         backgroundImg: productFormData.backgroundImg,
+        backgroundImgUpload: [{
+          uid: '1',
+            name: productFormData.backgroundImg && productFormData.backgroundImg.split("/") && productFormData.backgroundImg.split("/")[productFormData.backgroundImg.length - 1],
+          url: productFormData.backgroundImg,
+        }],
+
         amountRangeLow: productFormData.amountRange.split("-")[0],
         amountRangeHigh: productFormData.amountRange.split("-")[1],
         interestRangeLow: productFormData.interestRange.split(" - ")[0],
@@ -376,7 +360,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
     onFinish,
     form,
     merchantList,
-    uploadFiles,
     customAntFormFieldError,
     setCustomAntFormFieldError,
     setTriggerFetchTableList,

@@ -1,15 +1,15 @@
-import {Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadFile, UploadProps} from "antd";
+import {Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadProps} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
-import React, {useCallback, useState} from "react";
+import React from "react";
 import {EmailValidator, NumberValidator} from "../../../shared/utils/validator";
 
-
 interface ProductSettingSectionProps {
-  setLogo: React.Dispatch<React.SetStateAction<string>>;
-  setBackgroundImg: React.Dispatch<React.SetStateAction<string>>;
+    setLogo: React.Dispatch<React.SetStateAction<string>>;
+    setBackgroundImg: React.Dispatch<React.SetStateAction<string>>;
 }
 const ProductSettingSection = (props: ProductSettingSectionProps) => {
 
+    // NOTE: uploadLogoProps
   const uploadLogoProps: UploadProps = {
     name: 'file',
     action: '/hs/admin/product-manage/icon/upload',
@@ -33,6 +33,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
       }
     },
   };
+    // NOTE: uploadBackgroundImgProps
   const uploadBackgroundImgProps: UploadProps = {
     name: 'file',
     action: '/hs/admin/product-manage/icon/upload',
@@ -57,7 +58,15 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
     },
   };
 
-  return (
+    const getValueFromEvent = e => {
+        if (Array.isArray(e)) {
+            return e;
+        }
+        return e && e.fileList;
+    }
+
+
+    return (
       <React.Fragment>
         <Divider orientation="left">产品设定</Divider>
 
@@ -65,19 +74,26 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
           <Form.Item name="logo" rules={[{ required: true }]}>
             <Input allowClear placeholder={""} />
           </Form.Item>
-          <Form.Item style={{ display: 'inline-block', marginBottom: 0 }} >
-            <Upload
-              maxCount={1}
-              listType="picture"
-              // NOTICE: https://segmentfault.com/q/1010000037501973
-              // NOTICE: 受 Form 控制，不可提供 fileList
-              // fileList={props.backgroundImgFileList}
-              // NOTICE: [Upload file.status is always being uploading](https://github.com/ant-design/ant-design/issues/2423)
-              // disabled
-              {...uploadLogoProps}
-            >
-              <Button icon={<UploadOutlined />}>点击上传图片</Button>
-            </Upload>
+          <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}
+                     // NOTICE: [Uncaught TypeError: (fileList || []).forEach is not a function](https://itcn.blog/p/2027269831.html)
+                    // 以下三条是必须的
+                     name="logoUpload"
+                     valuePropName="fileList"
+                     getValueFromEvent={getValueFromEvent}
+          >
+              <Upload
+                  maxCount={1}
+                  listType="picture"
+                  // NOTICE: https://segmentfault.com/q/1010000037501973
+                  // NOTICE: 受 Form 控制，不可提供 fileList
+                  // fileList={[props.logoFileList]}
+                  // fileList={props.uploadFiles.logoFileList}
+                  // NOTICE: [Upload file.status is always being uploading](https://github.com/ant-design/ant-design/issues/2423)
+                  // disabled
+                  {...uploadLogoProps}
+              >
+                  <Button icon={<UploadOutlined />}>点击上传图片</Button>
+              </Upload>
           </Form.Item>
         </Form.Item>
 
@@ -85,13 +101,19 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
           <Form.Item name="backgroundImg" extra="建议上传 610x300，若没有上传，则由系统随机配置。">
             <Input allowClear placeholder={""} />
           </Form.Item>
-          <Form.Item style={{ display: 'inline-block', marginBottom: 0 }} >
+          <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}
+              // 以下三条是必须的
+             name="backgroundImgUpload"
+             valuePropName="fileList"
+             getValueFromEvent={getValueFromEvent}
+          >
             <Upload
               maxCount={1}
               //   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture"
               // NOTICE: https://segmentfault.com/q/1010000037501973
               // fileList={props.backgroundImgFileList}
+              // fileList={props.uploadFiles.backgroundImgFileList}
               // disabled
               {...uploadBackgroundImgProps}
             >
