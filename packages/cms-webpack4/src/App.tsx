@@ -38,9 +38,10 @@ function App() {
                         {/*// @ts-ignore*/}
                         <Route path="/user" component={UserPage}/>
                         {/*// @ts-ignore*/}
-                        <Route path="/user-info" component={UserInfoPage}/>
                         {/*// @ts-ignore*/}
                         <Route path="/risk-setting" component={RiskSettingPage}/>
+                        {/*// @ts-ignore*/}
+                        <Route path="/user-info/:userId" component={UserInfoPage}/>
                     </Switch>
                 </Router>
             </ConfigProvider>

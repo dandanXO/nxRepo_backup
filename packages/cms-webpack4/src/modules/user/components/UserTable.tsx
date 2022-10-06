@@ -38,14 +38,9 @@ const UserTable = ({setShowModal}:UserTableProps) => {
     }, [searchList])
 
     useEffect(() => {
-        console.log('channelList', channelList)
 
-        console.log('currentData', currentData)
-        // const {content=[]}=currentData
-        console.log('isLoading', isLoading)
         if (currentData !== undefined) {
             setUserList(currentData)
-            console.log('currentData', currentData)
 
         }
     }, [currentData])
@@ -64,8 +59,8 @@ const UserTable = ({setShowModal}:UserTableProps) => {
             valueType: 'option',
             key: 'option',
             render: (text, record, _, action) => record.isBlack ?
-                [<a key="editable" href="/user-info">查看</a>, <a key="blackList" onClick={() => setShowModal(true)}>黑名单</a>] :
-                [<a key="editable" href="/user-info">查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
+                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="blackList" onClick={() => setShowModal(true)}>黑名单</a>] :
+                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
             ,
         },
 

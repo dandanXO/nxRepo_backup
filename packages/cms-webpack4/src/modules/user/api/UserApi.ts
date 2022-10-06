@@ -1,7 +1,8 @@
 import { API } from "../../../api";
 import { GetUerListProps, GetUserListRequestQuerystring } from "./types/getUserList";
 import { GetChannelListResponse } from "./types/getChannelList";
-import { GetUserInfoRequestQuerystring,GetUserSmsProps  } from "./types/getUserInfo";
+import { GetUserInfoRequestQuerystring, GetUserSmsProps } from "./types/getUserInfo";
+import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./types/getUserDetail";
 
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
@@ -10,6 +11,14 @@ const UserApi = API.injectEndpoints({
         getUserManageList: builder.query<GetUerListProps, GetUserListRequestQuerystring>({
             query: (requestBody: GetUserListRequestQuerystring) => ({
                 url: `/user-manage/user-list`,
+                params: requestBody,
+                method: "get",
+            }),
+        }),
+        // NOTE: GET /hs/admin/userDetails/user-detail 用戶信息
+        getUserDetail: builder.query<GetUserDetailResponse, GetUserDetailRequestQuerystring>({
+            query: (requestBody: GetUserDetailRequestQuerystring) => ({
+                url: `/userDetails/user-detail`,
                 params: requestBody,
                 method: "get",
             }),
@@ -34,6 +43,7 @@ const UserApi = API.injectEndpoints({
 })
 export const {
     useLazyGetUserManageListQuery,
+    useGetUserDetailQuery,
     useGetChannelListQuery,
     useGetUserSMSListQuery
 } = UserApi;
