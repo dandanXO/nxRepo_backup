@@ -16,6 +16,8 @@ class TodayOrderDistribute extends Component {
         {title: <FormattedMessage id="page.search.list.order.no"/>, dataIndex: 'orderNo', key: 'orderNo'},
         {title: <FormattedMessage id="page.search.list.name"/>, dataIndex: 'userTrueName', key: 'userTrueName'},
         {title: <FormattedMessage id="page.search.list.mobile"/>, dataIndex: 'userPhone', key: 'userPhone'},
+        {title: <FormattedMessage id="page.search.list.product.name"/>, dataIndex: 'productName', key: 'productName' },
+        {title: <FormattedMessage id="page.table.appName"/>, dataIndex: 'appName', key: 'appName' },
         {
             title: <FormattedMessage id="page.table.loan2"/>,
             dataIndex: 'deviceMoney',

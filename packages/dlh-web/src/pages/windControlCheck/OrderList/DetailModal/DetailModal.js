@@ -48,6 +48,8 @@ class DetailModal extends Component {
                                     <Col className={styles.col} lg={12} xl={8}><span className={styles.title}>{intl.formatMessage({id : "windowPage.loan.status"})}：</span><span>{info.loanOption || ''}</span></Col>
                                     <Col className={styles.col} lg={12} xl={8}><span className={styles.title}>{intl.formatMessage({id : "page.table.examiner"})}：</span><span>{info.checkPerson || ''}</span></Col>
                                     <Col className={styles.col} lg={12} xl={8}><span className={styles.title}>{intl.formatMessage({id : "page.table.loan.amount"})}：</span><span>{info.hasGiveMoney || ''}</span></Col>
+                                    <Col className={styles.col} lg={12} xl={8}><span className={styles.title}>{intl.formatMessage({id : "page.search.list.product.name"})}：</span><span>{info.productName || ''}</span></Col>
+                                    <Col className={styles.col} lg={12} xl={8}><span className={styles.title}>{intl.formatMessage({id : "page.table.appName"})}：</span><span>{info.appName || ''}</span></Col>
                                 </Row>
                             </Card>
                         </div>

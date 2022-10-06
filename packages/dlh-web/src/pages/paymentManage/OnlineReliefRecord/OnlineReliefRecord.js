@@ -29,6 +29,8 @@ class OlRefundRecord extends Component {
         { title: this.props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', width: 200, render(text) { return <CopyText text={text} /> } },
         { title: this.props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', width: 200, render(text) { return <CopyText text={text} /> } },
         { title: this.props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone', width: 130, render(text) { return <CopyText text={text} /> } },
+        { title: this.props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName', width: 110 },
+        { title: this.props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName', width: 110 },
         {
             title: this.props.intl.formatMessage({ id: "page.table.loan" }),
             dataIndex: 'deviceMoney',

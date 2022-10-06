@@ -30,6 +30,8 @@ class OverOrderHandleRecord extends Component {
         {title: this.props.intl.formatMessage({id: "page.search.list.order.no"}), dataIndex: 'orderNo', key: 'orderNo'},
         {title: this.props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName'},
         {title: this.props.intl.formatMessage({id: "page.search.list.mobile"}), dataIndex: 'userPhone', key: 'userPhone'},
+        { title: this.props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName' },
+        { title: this.props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName' },
         {
             title: this.props.intl.formatMessage({id: "page.table.loan"}),
             dataIndex: 'deviceMoney',

@@ -30,6 +30,8 @@ class BusinessLastCheck extends Component {
             // {title: '产品类型', dataIndex: 'deviceModel', key: 'deviceModel'},
             { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', width: 180, render(text) { return <CopyText text={text} /> } },
             { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone', width: 130, render(text) { return <CopyText text={text} /> } },
+            { title: props.intl.formatMessage({ id: "page.search.list.product.name" }), dataIndex: 'productName', key: 'productName', width: 130, render(text) { return <CopyText text={text} /> } },
+            { title: props.intl.formatMessage({ id: "page.table.appName" }), dataIndex: 'appName', key: 'appName', width: 130, render(text) { return <CopyText text={text} /> } },
             {
                 title: props.intl.formatMessage({ id: "page.table.old.user" }),
                 dataIndex: 'isOlduser',
