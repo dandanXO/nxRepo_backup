@@ -11,6 +11,7 @@ import ProductPage from "./pages/ProductPage";
 import MerchantPage from "./pages/MerchantPage";
 import UserPage from "./pages/UserPage";
 import UserInfoPage from "./pages/UserInfoPage";
+import RiskSettingPage from "./modules/risk/pages/RiskSettingPage";
 
 function App() {
     useEffect(() => {
@@ -38,6 +39,8 @@ function App() {
                         <Route path="/user" component={UserPage}/>
                         {/*// @ts-ignore*/}
                         <Route path="/user-info" component={UserInfoPage}/>
+                        {/*// @ts-ignore*/}
+                        <Route path="/risk-setting" component={RiskSettingPage}/>
                     </Switch>
                 </Router>
             </ConfigProvider>
