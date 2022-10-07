@@ -35,6 +35,8 @@ export interface AdminTableTemplateProps<TableListItemDataType> {
         }
     },
     modalContent?: (showModalContent: ModalContent, setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>) => React.ReactElement;
+    // Fetch
+    loading: boolean;
     tableHeaderColumns:  ProColumns<TableListItemDataType, "text">[];
     tableDatasource: TableListItemDataType[];
     // Search
@@ -218,7 +220,7 @@ const AdminPageTemplate = <TableListItemDataType,>(props: AdminTableTemplateProp
                 // form={form}
                 // onSubmit={(params: U) => void}
                 // onReset={() => void}
-
+                loading={props.loading}
             />
             {showModalContent && props.modalContent && props.modalContent(showModalContent, setShowModalContent)}
         </PageContainer>

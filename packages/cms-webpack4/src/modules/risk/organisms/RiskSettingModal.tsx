@@ -10,6 +10,9 @@ import RiskSettingForm from "./RiskSettingForm";
 import {FormInstance, Modal} from "antd";
 import {ModalContent} from "../templates/AdminPageTemplate";
 import {Store} from "@reduxjs/toolkit";
+import {message} from "antd/es";
+import useConfirmModal from "../../shared/hooks/useConfirmModal";
+import useErrorModal from "../../shared/hooks/useConfirmModal";
 
 type FormResponseData = GetRiskManageResponse;
 
@@ -23,6 +26,8 @@ interface RiskSettingModelProps {
     // isEdit: boolean;
     editID: number;
 
+    loading: boolean;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
     // onFieldsChange: () => void;
     // onFinish: () => void;
     // onFinishFailed: () => void;
@@ -41,9 +46,15 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
     }, [])
 
     // NOTE: Get Data
-    const [triggerGetRiskMenu, { currentData: currentRiskMenuData }] = useLazyGetRiskModelMenuQuery();
-    const [triggerGetRisk , { currentData: currentFormData, isLoading, isFetching }] = useLazyGetRiskManageQuery();
+    const [triggerGetRiskMenu, { currentData: currentRiskMenuData, isLoading: isRiskMenuLoading }] = useLazyGetRiskModelMenuQuery();
+    const [triggerGetRisk , { currentData: currentFormData, isLoading: isRiskLoading, isFetching }] = useLazyGetRiskManageQuery();
 
+    useEffect(() => {
+        const loading = isRiskMenuLoading || isRiskLoading;
+        props.setLoading(loading);
+    }, [isRiskMenuLoading, isRiskLoading])
+
+    // NOTICE: Loading
     useEffect(() => {
         triggerGetRiskMenu({});
     }, []);
@@ -80,6 +91,10 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
     // NOTE: POST or Put form data
     const [triggerPostRisk, { data: postRiskData, isLoading: isPostRiskLoading , isSuccess: isPostRiskSuccess }] = usePostRiskManageCreateMutation();
     const [triggerPutRisk, { data: putRiskData, isLoading: isPutRiskLoading, isSuccess: isPutRiskSuccess }] = usePutRiskManageCreateMutation();
+
+
+
+
 
     const onFinish = useCallback(() => {
         const fields = props.form.getFieldsValue();
@@ -133,13 +148,40 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
         // }
 
         // triggerAPI(fields);
+
+
+    // const errorModal = useErrorModal("ant4");
+    // console.log("errorModal", errorModal);
         triggerAPI(fields).unwrap().then((responseData) => {
             console.log("responseData", responseData);
             props.form.resetFields();
-        }).catch((error) => {
-            console.log("error", error);
-            Modal.error(error.error);
         })
+        //     .catch((error) => {
+        //     console.log("error");
+        //     Modal.config({
+        //         rootPrefixCls: "ant4"
+        //     })
+        //     errorModal("JI");
+        //     message.config({
+        //         prefixCls: "ant4"
+        //     })
+        //     errorModal("asdf")
+        //     message.error("error.error")
+        //     Modal.error({
+        //         title: "error.error"
+        //     })
+        //     errorModal({
+        //         title: "error.error1"
+        //     })
+        // }).finally(() => {
+        //     console.log("finally");
+        //     errorModal({
+        //         title: "error.error2"
+        //     })
+        //     Modal.error({
+        //         title: "12",
+        //     })
+        // })
 
     }, [props.editID, currentRiskMenuData])
 

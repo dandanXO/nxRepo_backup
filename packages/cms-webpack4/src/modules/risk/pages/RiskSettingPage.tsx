@@ -28,22 +28,14 @@ export type FormResponseData = GetRiskManageResponse;
 const RiskSettingPage = () => {
     // useAutoLogin();
 
+    // NOTE: UI Loading
+    const [loading, setLoading] = useState(false);
+
+    // NOTICE:
     const pageTemplateRef = useRef<AdminTAbleTemplateRef>();
     console.log("pageTemplateRef", pageTemplateRef);
 
-    // hook
-    // const {
-    //     productModalData,
-    //     form, handleCloseModal, merchantList,
-    //     onFinish, setCustomAntFormFieldError,
-    //     customAntFormFieldError,
-    //     triggerGetList, productListData,
-    //     onAutoFinishedForm,
-    //     onFormSubmit
-    // } = useProductFormModal({
-    //     show: false,
-    //     isEdit: false,
-    // });
+    // NOTE: Fetch
     const [triggerGetList, { currentData, isLoading, isFetching }] = useLazyGetRiskManageListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -55,10 +47,14 @@ const RiskSettingPage = () => {
         triggerGetList(null);
     }, []);
 
-    // Edit
+    useEffect(() => {
+        setLoading(isFetching);
+    }, [isFetching])
+
+    // NOTE: Edit
     const [editID, setEditID] = useState<number>();
 
-    // Require
+    // NOTE: Table
     const columns = useMemo(() => {
         const columns: ProColumns<RiskManageList>[] = [
             {
@@ -79,6 +75,7 @@ const RiskSettingPage = () => {
                 }
             },
             {
+                key: 'id',
                 dataIndex: 'id',
                 hideInSearch: true,
                 hideInTable: true,
@@ -93,8 +90,9 @@ const RiskSettingPage = () => {
                 // onFilter: true,
                 // disable: true,
             },
-            { title: '风控名称', dataIndex: 'modelName', initialValue: "" },
+            { key: 'modelName', title: '风控名称', dataIndex: 'modelName', initialValue: "" },
             {
+                key: 'enabled',
                 title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: 'all',
                 valueEnum: {
                     all: { text: '全部', status: 'Default' },
@@ -102,8 +100,8 @@ const RiskSettingPage = () => {
                     false: { text: '停用', status: 'Default' },
                 }
             },
-            { title: '创建时间', dataIndex: 'createTime', valueType: 'dateTime' },
-            { title: '更新时间', dataIndex: 'updateTime', valueType: 'dateTime' },
+            { key: 'createTime', title: '创建时间', dataIndex: 'createTime', valueType: 'dateTime' },
+            { key: 'updateTime', title: '更新时间', dataIndex: 'updateTime', valueType: 'dateTime' },
         ];
         return columns;
 
@@ -144,27 +142,11 @@ const RiskSettingPage = () => {
         form.submit();
     }, [form])
 
-
-    // const isEdit = useMemo(() => {
-        const isEdit = pageTemplateRef.current && pageTemplateRef.current.showModalContent.isEdit;
-        // console.log("isEdit", isEdit);
-        // return isEdit;
-    // }, [pageTemplateRef.current])
-
-
-
-    // const isShow = useMemo(() => {
-        const isShow = pageTemplateRef.current && pageTemplateRef.current.showModalContent.show;
-        // console.log("isShow", isShow);
-        // return isShow;
-    // }, [pageTemplateRef.current])
-
-
-
     // NOTE: Post | PUT Data
     return (
         <AdminPageTemplate<GetProductListResponseProduct>
             ref={pageTemplateRef}
+            loading={loading}
             navigator={{
                 ancestor: {
                     path: "",
@@ -198,6 +180,8 @@ const RiskSettingPage = () => {
                         onOk={onOk}
                         onAutoCompleteTemplate={onAutoCompleteTemplate}
                         editID={editID}
+                        setLoading={setLoading}
+                        loading={loading}
                     />
                 )
             }}
