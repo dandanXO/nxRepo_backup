@@ -1,8 +1,9 @@
 import { API } from "../../../api";
 import { GetUerListProps, GetUserListRequestQuerystring } from "./types/getUserList";
 import { GetChannelListResponse } from "./types/getChannelList";
-import { GetUserInfoRequestQuerystring, GetUserSmsProps,GetUserContactsProps,GetUserOrdersProps } from "./types/getUserInfo";
+import { GetUserInfoRequestQuerystring, GetUserSmsProps, GetUserContactsProps, GetUserOrdersProps } from "./types/getUserInfo";
 import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./types/getUserDetail";
+import { PostBlackListRequestBody } from "./types/postBlackList";
 
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
@@ -39,8 +40,8 @@ const UserApi = API.injectEndpoints({
                 method: "get",
             }),
         }),
-         // NOTE: GET /hs/admin/userDetails/user-contacts 通讯录
-         getUserContactsList: builder.query<GetUserContactsProps, GetUserInfoRequestQuerystring>({
+        // NOTE: GET /hs/admin/userDetails/user-contacts 通讯录
+        getUserContactsList: builder.query<GetUserContactsProps, GetUserInfoRequestQuerystring>({
             query: (requestBody: GetUserInfoRequestQuerystring) => ({
                 url: `/userDetails/user-contacts`,
                 params: requestBody,
@@ -48,11 +49,19 @@ const UserApi = API.injectEndpoints({
             }),
         }),
         // NOTE: GET ​/hs​/admin​/userDetails​/orders 借款信息
-         getUserOrdersList: builder.query<GetUserOrdersProps, GetUserInfoRequestQuerystring>({
+        getUserOrdersList: builder.query<GetUserOrdersProps, GetUserInfoRequestQuerystring>({
             query: (requestBody: GetUserInfoRequestQuerystring) => ({
                 url: `/userDetails/orders`,
                 params: requestBody,
                 method: "get",
+            }),
+        }),
+        // NOTE: POST /hs/admin/user-manage/black-list/add 添加用户至黑名单
+        postBlackListAdd: builder.mutation<{}, PostBlackListRequestBody>({
+            query: (requestBody: PostBlackListRequestBody) => ({
+                url: `/user-manage/black-list/add`,
+                method: "post",
+                data: requestBody,
             }),
         }),
     })
@@ -63,5 +72,6 @@ export const {
     useGetChannelListQuery,
     useGetUserSMSListQuery,
     useGetUserContactsListQuery,
-    useGetUserOrdersListQuery
+    useGetUserOrdersListQuery,
+    usePostBlackListAddMutation
 } = UserApi;

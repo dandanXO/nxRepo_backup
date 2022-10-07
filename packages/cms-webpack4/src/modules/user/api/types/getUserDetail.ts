@@ -24,57 +24,31 @@ export interface UserEmergencyContacts {
 }
 
 export interface UserPersonaInfoVo {
-    // 家庭住址
-    address?: string;
-
-    // 卡号
-    bankCardNo?: string;
-
-    // 开户银行
-    bankName?: string;
-
-    // 预留手机号
-    bankPhone?: string;
-
-    // 注册渠道
-    channelName?: string;
-
-    // 登入渠道
-    currentChannelName?: string;
-
-    // 學歷
-    education?: string;
-
-    // 身份证号码
-    idcardNo?: string;
-
-    // 黑名单状态
-    isBlack?: boolean;
-
-    // 婚姻狀態
-    marriageStatus?: string;
-
-    // 真实姓名
-    nameTrue?: string;
-
-    // 手机号
-    phoneNo?: string;
-
-    // 工作職位
-    position?: string;
-
-    //薪资範圍
-    salaryRange?: string;
-
-    //借款成功次数
-    successCount?: number;
-
-    // 用户id
-    userId?: number;
-
-    //用户来源
-    userSource?: string;
-
+    address?:string;	        // 家庭住址
+    bankCardNo?:string;	        // 卡号
+    bankName?:string;	        // 开户银行
+    bankPhone?:string;	        // 预留手机号
+    birth?:string;	            // 生日
+    channelName?:string;	    // 注册渠道
+    currentChannelName?:string;	// 登入渠道
+    education?:string;	        // 學歷
+    email?:string;	            // 電子郵件
+    fatherName?:string;	        // 父親姓名
+    gender?:string;	            // 性別
+    idcardNo?:string;	        // 身份证号码
+    isBlack?:boolean;	        // 黑名单状态
+    marriageStatus?:string;	    // 婚姻狀態
+    nameTrue?:string;	        // 真实姓名
+    panId?:string;	            // 稅卡ID
+    phoneNo?:string;	        // 手机号
+    position?:string;	        // 工作職位
+    salaryRange?:string;	    // 薪资範圍
+    successCount?:number;	    // 借款成功次数
+    userId?:number;	            // 用户id
+    userSource?:string;	        // 用户来源
+    appName?:string;	 
+    ifscCode?:string;       
+    addTime?:string;
 }
 
 export interface UserDeviceInfo {

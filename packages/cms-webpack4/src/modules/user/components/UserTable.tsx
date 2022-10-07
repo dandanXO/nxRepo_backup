@@ -8,7 +8,7 @@ import { useLazyGetUserManageListQuery, useGetChannelListQuery, useGetUserSMSLis
 
 
 interface UserTableProps {
-    setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
 }
 
 const UserTable = ({ setShowModal }: UserTableProps) => {
@@ -59,8 +59,8 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             valueType: 'option',
             key: 'option',
             render: (text, record, _, action) => record.isBlack ?
-                [<a key="editable" href={`#/user-info/${Number(record.id)}`}>查看</a>, <a key="blackList" onClick={() => setShowModal(true)}>黑名单</a>] :
-                [<a key="editable" href={`#/user-info/${Number(record.id)}`}>查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
+                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="blackList" onClick={() => setShowModal({show:true,userId:record.id})}>黑名单</a>] :
+                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
             ,
         },
 
