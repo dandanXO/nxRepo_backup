@@ -75,7 +75,7 @@ class TodayBackRecord extends Component {
             render(text) { return <CopyText text={text} isEllispsis={true} /> }
         },
         {
-          title: <FormattedMessage id='page.table.ad.appName' />,
+          title: <FormattedMessage id='page.table.appName' />,
           dataIndex: "appName",
           key: "appName",
           width:'10%',
