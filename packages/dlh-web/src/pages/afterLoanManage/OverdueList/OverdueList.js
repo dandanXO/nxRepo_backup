@@ -100,6 +100,13 @@ class OverdueList extends Component {
                 width:'8%',
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
+            {
+                title: <FormattedMessage id='page.table.appName' />,
+                dataIndex: "appName",
+                key: "appName",
+                width:'8%',
+                render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },
             {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName',width:'13%',  render(text) { return <CopyText text={text} isEllispsis={true}/> } },
             // { title: '手机型号', dataIndex: 'deviceModel', key: 'deviceModel' },
             // { title: '手机号', dataIndex: 'userPhone', key: 'userPhone' },

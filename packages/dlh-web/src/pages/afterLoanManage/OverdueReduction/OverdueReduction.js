@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { overdueReductionAction, overdueReductionState } from './index';
 import moment from 'moment';
 import { Tooltip, Icon } from 'antd';
-import { CommonTable } from 'components';
+import { CommonTable ,CopyText} from 'components';
 import styles from './OverdueReduction.less';
 import SearchList from './SearchList/SearchList';
 import ReductionModal from './ReductionModal/Reduction';
@@ -45,12 +45,25 @@ class OverdueReduction extends Component {
                 title: props.intl.formatMessage({ id: "page.table.loan.time" }),
                 dataIndex: 'loanTime',
                 key: 'loanTime',
+                width:'10%',
                 render(text) {
                     return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
                 }
             },
-            { title: props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo' },
-            { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName' },
+            { title: props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', width:'11%',},
+            {
+                title: <FormattedMessage id="page.search.list.product.name" />,
+                dataIndex: "productName",
+                key: "productName",
+                render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },
+            {
+                title: <FormattedMessage id='page.table.appName' />,
+                dataIndex: "appName",
+                key: "appName",
+                render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },
+            { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', width:'10%',},
             { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone' },
             {
                 title: props.intl.formatMessage({ id: "page.table.contract.amount" }),
@@ -72,6 +85,7 @@ class OverdueReduction extends Component {
                 title: props.intl.formatMessage({ id: "page.table.due.time" }),
                 dataIndex: 'expireTime',
                 key: 'expireTime',
+                width:'10%',
                 render(text) {
                     return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
                 }
