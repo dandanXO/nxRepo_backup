@@ -1,5 +1,5 @@
-import React, {useEffect, useMemo, useRef, useState} from "react";
-import AdminPageTemplate, {AdminTAbleTemplateRef} from "../templates/AdminPageTemplate";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import AdminPageTemplate, {AdminTAbleTemplateRef, ModalContent} from "../templates/AdminPageTemplate";
 import {ProColumns} from "@ant-design/pro-components";
 import {GetProductListResponseProduct} from "../../product/api/types/getProductList";
 import {useProductFormModal} from "../../product/hooks/useProductFormModal";
@@ -9,6 +9,21 @@ import {ProductModal} from "../../product/components/ProductModal";
 import AdminFormModalTemplate from "../templates/AdminFormModalTemplate";
 import AdminFormTemplate from "../templates/AdminFormTemplate";
 import RiskSettingForm from "../organisms/RiskSettingForm";
+import {
+    RiskManageList,
+    useLazyGetRiskManageListQuery,
+    useLazyGetRiskManageQuery,
+    useLazyGetRiskModelMenuQuery
+} from "../api/RiskApi";
+import {useLazyGetProductManageListQuery} from "../../product/api/ProductApi";
+import {useForm} from "antd/es/form/Form";
+
+
+import {GetRiskManageResponse, } from "../api/RiskApi";
+import RiskSettingModal from "../organisms/RiskSettingModal";
+import {FormInstance} from "antd";
+
+export type FormResponseData = GetRiskManageResponse;
 
 const RiskSettingPage = () => {
     // useAutoLogin();
@@ -17,17 +32,22 @@ const RiskSettingPage = () => {
     console.log("pageTemplateRef", pageTemplateRef);
 
     // hook
-    const {
-        productModalData,
-        form, handleCloseModal, merchantList,
-        onFinish, setCustomAntFormFieldError,
-        customAntFormFieldError,
-        triggerGetList, productListData,
-        onAutoFinishedForm,
-        onFormSubmit
-    } = useProductFormModal({
-        show: false,
-        isEdit: false,
+    // const {
+    //     productModalData,
+    //     form, handleCloseModal, merchantList,
+    //     onFinish, setCustomAntFormFieldError,
+    //     customAntFormFieldError,
+    //     triggerGetList, productListData,
+    //     onAutoFinishedForm,
+    //     onFormSubmit
+    // } = useProductFormModal({
+    //     show: false,
+    //     isEdit: false,
+    // });
+    const [triggerGetList, { currentData, isLoading, isFetching }] = useLazyGetRiskManageListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
     });
 
     // useHook
@@ -35,23 +55,45 @@ const RiskSettingPage = () => {
         triggerGetList(null);
     }, []);
 
+    // Edit
+    const [editID, setEditID] = useState<number>();
+
     // Require
     const columns = useMemo(() => {
-        const columns: ProColumns<GetProductListResponseProduct>[] = [
+        const columns: ProColumns<RiskManageList>[] = [
             {
                 title: '操作',
                 valueType: 'option',
                 key: 'option',
-                render: (text, record, _, action) => [
-                    <a key="editable" onClick={() => {
-                        pageTemplateRef.current.setShowModalContent({
-                            show: true,
-                            isEdit: true,
-                        })
-                    }}>修改</a>,
-                ],
+                render: (text, record, _, action) => {
+                    return [
+                        <a key="editable" onClick={() => {
+                            console.log("record", record);
+                            setEditID(record.id);
+                            pageTemplateRef.current.setShowModalContent({
+                                show: true,
+                                isEdit: true,
+                            })
+                        }}>修改</a>,
+                    ]
+                }
             },
-            { title: '风控名称', dataIndex: 'productName', initialValue: "" },
+            {
+                dataIndex: 'id',
+                hideInSearch: true,
+                hideInTable: true,
+                // NOTICE:
+                // tooltip: "",
+                // ellipsis: false,
+                // copyable: true,
+                // hideInSearch: false,
+                // hideInTable: false,
+                // hideInForm: false,
+                // hideInDescriptions: false,
+                // onFilter: true,
+                // disable: true,
+            },
+            { title: '风控名称', dataIndex: 'modelName', initialValue: "" },
             {
                 title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: 'all',
                 valueEnum: {
@@ -65,9 +107,61 @@ const RiskSettingPage = () => {
         ];
         return columns;
 
-    }, []);
+    }, [pageTemplateRef.current]);
+
+    // NOTICE: Form
+    const [form] = useForm()
+
+    // NOTICE: Modal
+    // NOTE: autoComplete
+    const onAutoCompleteTemplate = useCallback(() => {
+        const mockRequest = {
+            enabled: true,
+            firstLoan: [
+                {missing: 'A', balance: '4000'},
+                {missing: 'B', balance: '3000'},
+                {missing: 'C', balance: '2000'},
+                {missing: 'D', balance: '1000'},
+                {missing: 'E', balance: '0'}
+            ],
+            modelName: "20221007",
+            remark: "remark",
+            repeatLoan: [
+                {missing: 'A', balance: '8000'},
+                {missing: 'B', balance: '6000'},
+                {missing: 'C', balance: '4000'},
+                {missing: 'D', balance: '2000'},
+                {missing: 'E', balance: '0'},
+            ],
+            riskModelName: 1,
+            useRcQuota: true
+        }
+        form.setFieldsValue(mockRequest)
+    }, [form])
+
+    // NOTE: OK
+    const onOk = useCallback(() => {
+        form.submit();
+    }, [form])
 
 
+    // const isEdit = useMemo(() => {
+        const isEdit = pageTemplateRef.current && pageTemplateRef.current.showModalContent.isEdit;
+        // console.log("isEdit", isEdit);
+        // return isEdit;
+    // }, [pageTemplateRef.current])
+
+
+
+    // const isShow = useMemo(() => {
+        const isShow = pageTemplateRef.current && pageTemplateRef.current.showModalContent.show;
+        // console.log("isShow", isShow);
+        // return isShow;
+    // }, [pageTemplateRef.current])
+
+
+
+    // NOTE: Post | PUT Data
     return (
         <AdminPageTemplate<GetProductListResponseProduct>
             ref={pageTemplateRef}
@@ -86,34 +180,25 @@ const RiskSettingPage = () => {
                 }
             }}
             searchable={false}
-            onSearchClick={(props) => {
-                const {productName, enabled} = props;
-                const searchedListData = productListData
-                    .filter(i => productName === "" ? i :  i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
-                    .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
-                return searchedListData;
+            onSearchClick={(props: RiskManageList) => {
+                // const {productName, enabled} = props;
+                // const searchedListData = productListData
+                //     .filter(i => productName === "" ? i :  i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
+                //     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
+                return [];
             }}
             tableHeaderColumns={columns}
-            tableDatasource={productListData}
-            modalContent={(showModalContent, setShowModalContent) => {
+            tableDatasource={currentData}
+            modalContent={(showModalContent: ModalContent, setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>) => {
                 return (
-                    <AdminFormModalTemplate
-                        show={showModalContent.show}
-                        isEdit={showModalContent.isEdit}
-                        hasAddForm={true}
-                        hasEditForm={true}
-                        addTitle={"添加风控配置"}
-                        editTitle={"修改风控配置"}
-                        handleCloseModal={() => setShowModalContent({
-                            show: false,
-                            isEdit: false,
-                        })}
-                        onOk={onFormSubmit}
-                        // onMockFinish={onAutoFinishedForm}
-
-                    >
-                        <RiskSettingForm/>
-                    </AdminFormModalTemplate>
+                    <RiskSettingModal
+                        showModalContent={showModalContent}
+                        setShowModalContent={setShowModalContent}
+                        form={form}
+                        onOk={onOk}
+                        onAutoCompleteTemplate={onAutoCompleteTemplate}
+                        editID={editID}
+                    />
                 )
             }}
         />

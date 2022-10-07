@@ -17,6 +17,7 @@ export interface ModalContent {
 }
 export interface AdminTAbleTemplateRef {
     setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>
+    showModalContent: ModalContent;
 }
 export interface AdminTableTemplateProps<TableListItemDataType> {
     navigator: {
@@ -132,7 +133,8 @@ const AdminPageTemplate = <TableListItemDataType,>(props: AdminTableTemplateProp
         // NOTICE: [TypeScript + React: Typing Generic forwardRefs](https://fettblog.eu/typescript-react-generic-forward-refs/)
         if(ref) {
             ref.current = {
-                setShowModalContent
+                showModalContent,
+                setShowModalContent,
             }
         }
     })
@@ -186,15 +188,15 @@ const AdminPageTemplate = <TableListItemDataType,>(props: AdminTableTemplateProp
                     },
                     // reload:()=>props.triggerGetList(null)
                 }}
-                dateFormatter="string"
+                // dateFormatter="string"
+                dateFormatter={(value, valueType) => {
+                    console.log('====>', value, valueType);
+                    return value.format('YYYY-MM-DD HH:mm:ss');
+                }}
                 // NOTE: Unknow
                 headerTitle={
                     <Button key="button" icon={<PlusOutlined />} type="primary" onClick={
                         () => {
-                            // props.setProductModalData({
-                            //     isEdit: false,
-                            //     show: true,
-                            // })
                             setShowModalContent({
                                 show: true,
                                 isEdit: false,
@@ -216,6 +218,7 @@ const AdminPageTemplate = <TableListItemDataType,>(props: AdminTableTemplateProp
                 // form={form}
                 // onSubmit={(params: U) => void}
                 // onReset={() => void}
+
             />
             {showModalContent && props.modalContent && props.modalContent(showModalContent, setShowModalContent)}
         </PageContainer>

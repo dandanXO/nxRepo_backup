@@ -12,6 +12,8 @@ interface AdminFormModalTemplateProps{
     hasEditForm: boolean;
     addTitle?: string;
     editTitle?: string;
+    autoComplete?: boolean;
+    onAutoCompleteTemplate?: () => void;
 }
 
 const AdminFormModalTemplate = (props: AdminFormModalTemplateProps = {
@@ -25,13 +27,18 @@ const AdminFormModalTemplate = (props: AdminFormModalTemplateProps = {
             title={!props.isEdit ? (
                     <span>
                       <span style={{ marginRight: 8 }}>{props.addTitle}</span>
-                      {/*<Button onClick={() => {*/}
-                      {/*    props.onMockFinish()*/}
-                      {/*}}>*/}
-                      {/*    自动填入范本资料*/}
-                      {/*</Button>*/}
+                        {props.autoComplete && (
+                            <Button onClick={props.onAutoCompleteTemplate}>自动填入范本资料</Button>
+                        )}
                     </span>
-                ) : props.editTitle
+                ) : (
+                    <span>
+                        <span style={{ marginRight: 8 }}>{props.editTitle}</span>
+                        {props.autoComplete && (
+                            <Button onClick={props.onAutoCompleteTemplate}>自动填入范本资料</Button>
+                        )}
+                    </span>
+                )
             }
             open={props.show}
             onCancel={props.handleCloseModal}
