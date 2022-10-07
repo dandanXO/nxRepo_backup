@@ -83,7 +83,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
 
     const onFinish = useCallback(() => {
         const fields = props.form.getFieldsValue();
-        // console.log("fields.before", fields);
+        // console.log("fields.before", JSON.parse(JSON.stringify(fields)));
         Object.keys(fields).map(key => {
             if(key === "firstLoan" || key === "repeatLoan") {
                 fields[key].map((record, index) => {
@@ -117,6 +117,8 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
                         // 级距类型 0: 首贷, 1: 复借
                     } as MssRiskRankVo
                 })
+            } else if(key === "riskModelName") {
+                fields["riskModelName"] = currentRiskMenuData.filter(menu => menu.id === fields[key])[0].riskModelName
             }
         });
         // console.log("fields.after", fields);
@@ -139,7 +141,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
             Modal.error(error.error);
         })
 
-    }, [props.editID])
+    }, [props.editID, currentRiskMenuData])
 
     const onFinishFailed = useCallback(() => {
         alert("1")
