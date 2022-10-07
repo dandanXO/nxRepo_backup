@@ -42,6 +42,8 @@ class RepeatLoan extends Component {
             { title: props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo',width:'15%' , render(text) { return <CopyText text={text} /> } },
             { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName',width:'20%' , render(text) { return <CopyText text={text} /> } },
             { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone' , render(text) { return <CopyText text={text} /> } },
+            { title: this.props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName', width: '10%' },
+            { title: this.props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName', width: '10%' },
             {
                 title: props.intl.formatMessage({ id: "page.table.application.amount" }),
                 dataIndex: 'deviceMoney',

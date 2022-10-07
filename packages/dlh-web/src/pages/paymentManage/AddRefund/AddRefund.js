@@ -58,6 +58,8 @@ class AddRefund extends Component {
             { title: props.intl.formatMessage({id :"page.search.list.order.no"}), dataIndex: 'orderNo', key: 'orderNo' },
             { title: props.intl.formatMessage({id :"page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName' },
             { title: props.intl.formatMessage({id :"page.search.list.mobile"}), dataIndex: 'userPhone', key: 'userPhone' },
+            { title: props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName' },
+            { title: props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName' },
             {
                 title: props.intl.formatMessage({id :"page.table.contract.amount"}),
                 dataIndex: 'deviceMoney',

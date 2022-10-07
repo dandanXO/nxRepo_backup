@@ -35,20 +35,19 @@ const ProductPage=() => {
     <PageContainer
       // loading
       header={{
-        // title: '页面标题',
-        ghost: true,
         breadcrumb: {
           routes: [
             {
-              path: '',
+                // TODO:
+              path: '/product',
               breadcrumbName: '首页',
             },
             {
-              path: '',
+              path: '/product',
               breadcrumbName: '产品管理 ',
             },
             {
-              path: '',
+              path: '/product',
               breadcrumbName: '产品管理',
             },
           ],

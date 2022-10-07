@@ -49,7 +49,7 @@ class TodayBackRecord extends Component {
             width: '12%',
             render(text) {
                 return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
-               
+
             }
         },
         {
@@ -73,6 +73,13 @@ class TodayBackRecord extends Component {
             key: "productName",
             width:'10%',
             render(text) { return <CopyText text={text} isEllispsis={true} /> }
+        },
+        {
+          title: <FormattedMessage id='page.table.appName' />,
+          dataIndex: "appName",
+          key: "appName",
+          width:'10%',
+          render(text) { return <CopyText text={text} isEllispsis={true} /> }
         },
         {
             title: <FormattedMessage id="page.search.list.name" />, dataIndex: 'userName', key: 'userName',  width: '17%',

@@ -12,7 +12,7 @@ const convertBaseInfo = (obj) => {
     return {
         orderNumber: obj.orderNo,
         userId: obj.userId,
-        productName: obj.deviceModel,
+        productName: obj.productName,
         applicationMoney: obj.deviceMoney,
         applicationTime: moment(Number(obj.applyTime) * 1000).format('YYYY-MM-DD HH:mm:ss'),
         applicationDays: obj.lendDays,
@@ -20,6 +20,7 @@ const convertBaseInfo = (obj) => {
         checkPerson: obj.examiner2Name,
         hasGiveMoney: obj.lendMoney,
         deviceMemory: obj['deviceMemory'],
+        appName: obj.appName,
 
         customerName: user['nameTrue'],
         iphoneNumber: obj['userPhone'],
@@ -51,6 +52,7 @@ const convertBaseInfo = (obj) => {
         modelScore8:obj['modelScore8'],
         userRiskD:userRiskD,
         userRmsRiskX : userRmsRiskX
+
 
     }
 }

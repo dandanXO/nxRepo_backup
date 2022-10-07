@@ -191,8 +191,8 @@ class H5LoanList extends Component {
         const { getTableData } = this.props;
         getTableData({});
 
-        try {      
-            const _this = this;    
+        try {
+            const _this = this;
             axios({
                 url: '/hs/admin/loanPlatform/getUploadImgToken',
                 method: 'post'
@@ -205,7 +205,7 @@ class H5LoanList extends Component {
                 }
             });
         } catch (e) {
-    
+
         }
     }
 
@@ -222,6 +222,7 @@ class H5LoanList extends Component {
                     <Row className={styles.row}>
                         <Col className={styles.col} span={2}><FormattedMessage id="page.search.list.time" /></Col>
                         <Col className={styles.col} span={2}><FormattedMessage id="page.table.product.name" /></Col>
+                      <Col className={styles.col} span={2}><FormattedMessage id="page.table.appName" /></Col>
                         <Col className={styles.col} span={3}><FormattedMessage id="page.table.subtitle" /></Col>
                         <Col className={styles.col} span={2}><FormattedMessage id="page.table.amount.range" /></Col>
                         <Col className={styles.col} span={2}><FormattedMessage id="page.table.interest.rates" /></Col>

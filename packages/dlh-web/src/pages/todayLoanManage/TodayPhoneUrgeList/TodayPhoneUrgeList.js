@@ -94,7 +94,14 @@ class PhoneUrgeList extends Component {
                 dataIndex: "productName",
                 key: "productName",
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
-            },    
+            },
+            {
+              title: <FormattedMessage id='page.table.appName' />,
+              dataIndex: "appName",
+              key: "appName",
+              width:'10%',
+              render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },
             {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName'},
             {title: props.intl.formatMessage({id: "page.search.list.mobile"}), dataIndex: 'userPhone', key: 'userPhone'},
             // { title: '逾期天数', dataIndex: 'expireDays', key: 'expireDays' },

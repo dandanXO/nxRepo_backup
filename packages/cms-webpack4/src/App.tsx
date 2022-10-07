@@ -5,11 +5,13 @@ require('antd/dist/antd.less');
 import {HashRouter as Router, Route, Switch, useHistory} from "react-router-dom";
 
 import {appStore} from "./store";
+import "./styles/app.less";
 import IndexPage from "./pages/IndexPage";
 import ProductPage from "./pages/ProductPage";
 import MerchantPage from "./pages/MerchantPage";
 import UserPage from "./pages/UserPage";
 import UserInfoPage from "./pages/UserInfoPage";
+import RiskSettingPage from "./modules/risk/pages/RiskSettingPage";
 
 function App() {
     useEffect(() => {
@@ -36,7 +38,10 @@ function App() {
                         {/*// @ts-ignore*/}
                         <Route path="/user" component={UserPage}/>
                         {/*// @ts-ignore*/}
-                        <Route path="/user-info" component={UserInfoPage}/>
+                        {/*// @ts-ignore*/}
+                        <Route path="/risk-setting" component={RiskSettingPage}/>
+                        {/*// @ts-ignore*/}
+                        <Route path="/user-info/:userId" component={UserInfoPage}/>
                     </Switch>
                 </Router>
             </ConfigProvider>

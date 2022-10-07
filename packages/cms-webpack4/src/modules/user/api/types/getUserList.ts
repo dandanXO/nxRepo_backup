@@ -19,7 +19,7 @@ export interface GetUserListRequestQuerystring {
     nameTrue?: string;
 
     // 是否为新客
-    newMember?: boolean;
+    newMember?: boolean | string;
 
     // 結清未複借
     noLoanAgain?: boolean;

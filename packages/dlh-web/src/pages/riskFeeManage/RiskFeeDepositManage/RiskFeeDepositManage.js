@@ -4,7 +4,7 @@ import { Button, Icon, Tooltip } from 'antd';
 import { bindActionCreators } from 'redux';
 import SearchList from './SearchList/SearchList';
 import RiskFeeModel from './RiskFeeModel/RiskFeeModel';
-import { CommonTable } from 'components';
+import { CommonTable ,CopyToLink } from 'components';
 import { riskFeeDepositManageAction } from './index';
 import styles from './RiskFeeDepositManage.less';
 import moment from 'moment';
@@ -76,19 +76,8 @@ class RiskFeeDepositManage extends Component{
                 dataIndex: 'remark',
                 key: 'remark',
                 width: '20%',
-                render(text) {
-                    let str;
-                    try {
-                        str = JSON.parse(text);
-                    } catch (e) {
-                        str = text;
-                    }
-
-                    if (typeof str !== 'object') {
-                        return str;
-                    }
-                    let arr = (str['risk_items'] || []).map(item => item['risk_name']);
-                    return arr.join(',');
+                render: function (text) {
+                    return <CopyToLink text={text} />
                 }
             }
         ];

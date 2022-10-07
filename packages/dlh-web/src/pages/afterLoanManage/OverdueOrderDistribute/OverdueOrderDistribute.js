@@ -16,6 +16,18 @@ import { select } from 'redux-saga/effects';
 class OverdueOrderDistribute extends Component {
     columns = [
         { title: this.props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', render(text) { return <CopyText text={text} /> } },
+        {
+            title: <FormattedMessage id="page.search.list.product.name" />,
+            dataIndex: "productName",
+            key: "productName",
+            render(text) { return <CopyText text={text} isEllispsis={true} /> }
+        },
+        {
+            title: <FormattedMessage id='page.table.appName' />,
+            dataIndex: "appName",
+            key: "appName",
+            render(text) { return <CopyText text={text} isEllispsis={true} /> }
+        },
         { title: this.props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', render(text) { return <CopyText text={text} /> } },
         { title: this.props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone', width: '10%', render(text) { return <CopyText text={text} /> } },
         {

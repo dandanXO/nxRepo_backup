@@ -97,6 +97,8 @@ class LoanRecord extends Component {
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone',  width: '7%', },
+            { title: props.intl.formatMessage({ id: "page.search.list.product.name" }), dataIndex: 'productName', key: 'productName',  width: '10%' },
+            { title: props.intl.formatMessage({ id: "page.table.appName" }), dataIndex: 'appName', key: 'appName',  width: '10%' },
             {
                 title: props.intl.formatMessage({ id: "page.search.list.funds.types" }),
                 dataIndex: 'isLeng',

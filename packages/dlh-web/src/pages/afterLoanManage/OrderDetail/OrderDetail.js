@@ -265,6 +265,8 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.name" />：</span><span>{orderInfo.name}</span></Col>
                         <Col style={isOlduserStyle} className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.old.user" />：</span><span>{orderInfo['isOlduser']}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.mobile" />：</span><span>{orderInfo.phoneNo}</span></Col>
+                      <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.product.name" />：</span><span>{orderInfo.productName}</span></Col>
+                      <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.appName" />：</span><span>{orderInfo.appName}</span></Col>
                         {/*<Col className={styles.col} lg={12} xl={8}><span className={styles.title}>手机型号：</span><span>{orderInfo.deviceModel}</span></Col>*/}
                         {/*<Col className={styles.col} lg={12} xl={8}><span className={styles.title}>手机内存：</span><span>{orderInfo.deviceMemory}</span></Col>*/}
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.loan" />：</span><span>{orderInfo.loanMoney}</span></Col>
@@ -327,11 +329,11 @@ class OrderDetail extends Component{
                     </Row>
                 </Card>
 
-                 
+
                 <div className={styles.cardWrapper}>
                     <Card type={'inner'} title={intl.formatMessage({id : "windowPage.emergency.contact"})}>
 
-                    {userInfo.emergencyContactInfos && userInfo.emergencyContactInfos.map((emer, i) => {  
+                    {userInfo.emergencyContactInfos && userInfo.emergencyContactInfos.map((emer, i) => {
                         return (
                         <Row gutter={24}>
                             <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.name" />：</span><span>{emer.name || ''}</span></Col>
@@ -339,7 +341,7 @@ class OrderDetail extends Component{
                             <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.mobile" />：</span><span>{emer.phoneNr || ''}</span></Col>
 
                         </Row>
-                        )   
+                        )
                     })}
                     </Card>
                 </div>
@@ -420,7 +422,7 @@ class OrderDetail extends Component{
         { field: 'partialMoney', label: "windowPage.repayment.amount", require: true, type: 'number', scale: 0, min: 1, max: 999999, placeholder:"windowPage.repayment.amount.enter" },
     ]
 
-  
+
     repaymentHandleOk = (params) => {
         const { match, sendPartialRepayment, intl } = this.props;
         const { partialMoney } = params;
@@ -445,7 +447,7 @@ class OrderDetail extends Component{
         const { setOrderData } = this.props;
         setOrderData({});
     }
-  
+
     formatCopyText = (text) => {
         return text.substring(text.indexOf('[ ') + 1, text.indexOf(' ]'))
     }
