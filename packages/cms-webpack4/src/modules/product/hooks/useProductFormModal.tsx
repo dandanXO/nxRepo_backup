@@ -291,7 +291,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     handlePostProductCreate(creatProductData);
   };
 
-  const handleCloseModal = (e) => {
+  const handleCloseModal = (e:any) => {
     e.stopPropagation();
     form.resetFields()
     setProductModalData({
