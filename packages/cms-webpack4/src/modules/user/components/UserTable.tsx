@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, InputNumber, Modal, Radio, Space,message  } from 'antd';
+import { Button, Form, Input, InputNumber, Modal, Radio, Space, message } from 'antd';
 
 import { GetUerListProps, UserListContent, GetUserListResponse, GetUserListRequestQuerystring, GetUerProps } from "../api/types/getUserList";
 import { useLazyGetUserManageListQuery, useGetChannelListQuery, useGetUserSMSListQuery } from '../api/UserApi';
 
 
-interface UserTableProps{
+interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UserTable = ({setShowModal}:UserTableProps) => {
+const UserTable = ({ setShowModal }: UserTableProps) => {
 
     const { currentData: channelList, isSuccess: isGetMerchantListSuccess } = useGetChannelListQuery(null);
 
@@ -33,7 +33,7 @@ const UserTable = ({setShowModal}:UserTableProps) => {
     const [form] = Form.useForm();
 
     useEffect(() => {
-        console.log('searchList',searchList)
+        console.log('searchList', searchList)
         triggerGetList(searchList)
     }, [searchList])
 
@@ -59,8 +59,8 @@ const UserTable = ({setShowModal}:UserTableProps) => {
             valueType: 'option',
             key: 'option',
             render: (text, record, _, action) => record.isBlack ?
-                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="blackList" onClick={() => setShowModal(true)}>黑名单</a>] :
-                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
+                [<a key="editable" href={`#/user-info/${Number(record.id)}`}>查看</a>, <a key="blackList" onClick={() => setShowModal(true)}>黑名单</a>] :
+                [<a key="editable" href={`#/user-info/${Number(record.id)}`}>查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
             ,
         },
 
@@ -74,7 +74,7 @@ const UserTable = ({setShowModal}:UserTableProps) => {
             valueEnum: {
                 '': { text: '不限', color: '' },
                 'EXCELLENT': { text: '极好', color: 'green' },
-               
+
                 'NORMAL': { text: '正常', color: 'blue' },
                 'ORDINARY': { text: '普通', color: 'gold' },
                 'REJECT': { text: '拒绝', color: 'lightGray' },
@@ -90,7 +90,7 @@ const UserTable = ({setShowModal}:UserTableProps) => {
             },
         },
         { title: '注册包名', dataIndex: 'appName', initialValue: '', key: 'appName' },
-        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select', initialValue: '0', key: 'channelId', valueEnum: channelListValueEnum},
+        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select', initialValue: '0', key: 'channelId', valueEnum: channelListValueEnum },
         { title: '注册时间', dataIndex: 'addTime', valueType: 'dateTime', key: 'addTime', hideInSearch: true },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
@@ -115,8 +115,8 @@ const UserTable = ({setShowModal}:UserTableProps) => {
             key: 'noLoanAgainDays',
             initialValue: '',
             hideInTable: true,
-            renderFormItem: (item,{ },form)=> {
-                return <Form form={form} key={'noLoanAgainDays'}  initialValues={{ noLoanAgainStartDays: 1, noLoanAgainEndDays: 10 }} >
+            renderFormItem: (item, { }, form) => {
+                return <Form form={form} key={'noLoanAgainDays'} initialValues={{ noLoanAgainStartDays: 1, noLoanAgainEndDays: 10 }} >
                     <Form.Item style={{ whiteSpace: 'nowrap' }} >
                         <Form.Item name="noLoanAgainStartDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px 0 0' }}>
                             <InputNumber min={1} max={10} placeholder={"天"} disabled={!isNoLoanAgain} />
@@ -129,9 +129,9 @@ const UserTable = ({setShowModal}:UserTableProps) => {
                     </Form.Item>
                 </Form>
             }
-                
 
-            
+
+
         },
     ]
 
@@ -140,72 +140,71 @@ const UserTable = ({setShowModal}:UserTableProps) => {
     }
 
     return (
-         !isLoading && 
-            <ProTable<UserListContent>
-                columns={columns}
-                dataSource={userList?.content || []}
-                loading={isFetching}
-                rowKey="id"
-                headerTitle={<Button key="button" disabled={!isNoLoanAgain} type="primary" ghost onClick={() => setShowModal(true)}>导入电销</Button>}
-                search={{
-                    collapsed: false,
-                    labelWidth: 'auto',
-                    // @ts-ignore
-                    optionRender: ({ searchText, resetText }, { form }) => (
-                        <Space>
-                            <Button onClick={() => {
-                                form.resetFields();
-                                setSearchList(initSearchList);
-                            }}>{resetText}</Button>
-                            <Button
-                                type={'primary'}
-                                onClick={() => {
-                                    // @ts-ignore
-                                    const { addTimeRange, channelId, idcardNo, nameTrue,newMember, noLoanAgain ,noLoanAgainStartDays,noLoanAgainEndDays,phoneNo,riskRank} = form.getFieldValue();
-                                    // @ts-ignore
+        <ProTable<UserListContent>
+            columns={columns}
+            dataSource={userList?.content || []}
+            loading={isLoading}
+            rowKey="id"
+            headerTitle={<Button key="button" disabled={!isNoLoanAgain} type="primary" ghost onClick={() => setShowModal(true)}>导入电销</Button>}
+            search={{
+                collapsed: false,
+                labelWidth: 'auto',
+                // @ts-ignore
+                optionRender: ({ searchText, resetText }, { form }) => (
+                    <Space>
+                        <Button onClick={() => {
+                            form.resetFields();
+                            setSearchList(initSearchList);
+                        }}>{resetText}</Button>
+                        <Button
+                            type={'primary'}
+                            onClick={() => {
+                                // @ts-ignore
+                                const { addTimeRange, channelId, idcardNo, nameTrue, newMember, noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank } = form.getFieldValue();
+                                // @ts-ignore
 
-                                    console.log('getFieldValue',form.getFieldValue());
+                                console.log('getFieldValue', form.getFieldValue());
 
-                                    if(noLoanAgainStartDays>noLoanAgainEndDays){
-                                        console.log('123')
-                                        message.info('結清未複借終止天數，需大於結清未複借起始天數');
-                                        return;
-                                    }
+                                if (noLoanAgainStartDays > noLoanAgainEndDays) {
+                                    console.log('123')
+                                    message.info('結清未複借終止天數，需大於結清未複借起始天數');
+                                    return;
+                                }
 
-                                    setSearchList({
-                                        ...searchList,
-                                        addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                        addStartTime: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
-                                        channelId: channelId === '0' ? '' : channelId,
-                                        idcardNo: idcardNo,
-                                        nameTrue: nameTrue,
-                                        newMember:Boolean(newMember),
-                                        noLoanAgain: noLoanAgain,
-                                        noLoanAgainEndDays: noLoanAgainEndDays,
-                                        noLoanAgainStartDays: noLoanAgainStartDays,
-                                        phoneNo: phoneNo,
-                                        riskRank: riskRank,
-                                    })
-                                    form.submit();
-                                }}
-                            >
-                                {searchText}
-                            </Button>
-                        </Space>
-                    ),
-                }}
-                options={{
-                    setting: { listsHeight: 400, },
-                    reload: () => triggerGetList(searchList)
-                }}
-                pagination={{
-                    showSizeChanger: true,
-                    defaultPageSize: 10,
-                    onChange: pageOnChange,
-                    total: userList.totalElements,
-                    current: userList.content.length === 0 ? 0 : userList.number + 1,
-                }}
-            />
+                                setSearchList({
+                                    ...searchList,
+                                    addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
+                                    addStartTime: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    channelId: channelId === '0' ? '' : channelId,
+                                    idcardNo: idcardNo,
+                                    nameTrue: nameTrue,
+                                    newMember: Boolean(newMember),
+                                    noLoanAgain: noLoanAgain,
+                                    noLoanAgainEndDays: noLoanAgainEndDays,
+                                    noLoanAgainStartDays: noLoanAgainStartDays,
+                                    phoneNo: phoneNo,
+                                    riskRank: riskRank,
+                                })
+                                form.submit();
+                            }}
+                        >
+                            {searchText}
+                        </Button>
+                    </Space>
+                ),
+            }}
+            options={{
+                setting: { listsHeight: 400, },
+                reload: () => triggerGetList(searchList)
+            }}
+            pagination={{
+                showSizeChanger: true,
+                defaultPageSize: 10,
+                onChange: pageOnChange,
+                total: userList.totalElements,
+                current: userList.content.length === 0 ? 0 : userList.number + 1,
+            }}
+        />
 
     )
 }

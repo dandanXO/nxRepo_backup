@@ -1,5 +1,5 @@
 export interface GetUserId {
-    userId: string
+    userId: number;
 }
 
 

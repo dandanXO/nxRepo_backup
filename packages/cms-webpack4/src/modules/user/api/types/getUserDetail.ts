@@ -1,5 +1,5 @@
 export interface GetUserDetailRequestQuerystring {
-    userId: string
+    userId?: number|string;
 }
 
 export interface GetUserDetailResponse {

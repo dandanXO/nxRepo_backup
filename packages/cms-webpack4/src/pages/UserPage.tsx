@@ -11,7 +11,7 @@ import useAutoLogin from '../modules/shared/hooks/useAutoLogin';
 const UserManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
 
-    const { currentData: userSmsList } = useGetUserSMSListQuery({ userId: 1000050, pageNumber: 1, pageSize: 10 });
+    
 
     const [showModal, setShowModal] = useState(false);
     const [form] = Form.useForm();

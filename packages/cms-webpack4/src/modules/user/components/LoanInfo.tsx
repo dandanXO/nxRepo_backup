@@ -5,64 +5,21 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Spin,Space } from 'antd';
+import {GetUserOrders}from "../api/types/getUserInfo";
+import { GetUserId } from '../api/types/getUserId';
+import { useGetUserOrdersListQuery } from '../api/UserApi';
 
-interface LoanInfoResponse {
-    orderNo?: string;
-    productName?: string;
-    loanAmount?: string;
-    checkAmount?: string;
-    loanTime?: string;
-    status?: string;
-    applyTime?: string;
-    payTime?: string;
-    expirationTime?: string;
-}
+const LoanInfo = ({userId}:GetUserId) => {
 
+    const {currentData,isLoading}=useGetUserOrdersListQuery({ userId, pageNumber: 1, pageSize: 10 });
+ 
 
-const LoanInfo = () => {
-
-    const dataList = [
-      {
-        orderNo: 'no-610833274984176',
-        productName: 'A1 Loan',
-        loanAmount: '3,000',
-        checkAmount: '1,800',
-        loanTime: '2022-08-19 08:03:12',
-        status: '6',
-        applyTime: '2022-08-19 08:03:12',
-        payTime: '2022-08-25 08:03:12',
-        expirationTime: '2022-08-25 08:03:12',
-      },
-      {
-        orderNo: 'no-610833274984176',
-        productName: 'A1 Loan',
-        loanAmount: '3,000',
-        checkAmount: '1,800',
-        loanTime: '2022-08-19 08:03:12',
-        status: '7',
-        applyTime: '2022-08-19 08:03:12',
-        payTime: '2022-08-25 08:03:12',
-        expirationTime: '2022-08-25 08:03:12',
-      },
-      {
-        orderNo: 'no-610833274984176',
-        productName: 'A1 Loan',
-        loanAmount: '3,000',
-        checkAmount: '1,800',
-        loanTime: '2022-08-19 08:03:12',
-        status: '8',
-        applyTime: '2022-08-19 08:03:12',
-        payTime: '2022-08-25 08:03:12',
-        expirationTime: '2022-08-25 08:03:12',
-      },
-    ];
-
-    const columns: ProColumns<LoanInfoResponse>[] = [
+    const columns: ProColumns<GetUserOrders>[] = [
 
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo' },
         { title: '借款产品', dataIndex: 'productName', key: 'productName' },
-        { title: '借款金额', dataIndex: 'loanAmount', key: 'loan' },
-        { title: '到帐金额', dataIndex: 'checkAmount', key: 'loanAmount' },
+        { title: '借款金额', dataIndex: 'deviceMoney', key: 'deviceMoney' },
+        { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney' },
         { title: '放款时间', dataIndex: 'loanTime', key: 'loanTime', valueType: 'dateTime' },
         {
             title: '状态', dataIndex: 'status', key: 'status', valueType: 'select', initialValue: '',
@@ -81,15 +38,15 @@ const LoanInfo = () => {
         },
         { title: '申请时间', dataIndex: 'applyTime', key: 'applyTime', valueType: 'dateTime' },
         { title: '还款时间', dataIndex: 'payTime', key: 'payTime', valueType: 'dateTime' },
-        { title: '到期時間', dataIndex: 'expirationTime', key: 'expirationTime', valueType: 'dateTime' },
+        { title: '到期時間', dataIndex: 'expireTime', key: 'expireTime', valueType: 'dateTime' },
     ]
 
   return (
 
-            <ProTable<LoanInfoResponse>
+            <ProTable<GetUserOrders>
                 columns={columns}
-                dataSource={dataList}
-                // loading={isFetching}
+                dataSource={!isLoading && currentData?.content || []}
+                loading={isLoading}
                 rowKey="id"
                 search={false}
                 pagination={{

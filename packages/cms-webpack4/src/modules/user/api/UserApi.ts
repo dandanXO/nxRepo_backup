@@ -1,7 +1,7 @@
 import { API } from "../../../api";
 import { GetUerListProps, GetUserListRequestQuerystring } from "./types/getUserList";
 import { GetChannelListResponse } from "./types/getChannelList";
-import { GetUserInfoRequestQuerystring, GetUserSmsProps } from "./types/getUserInfo";
+import { GetUserInfoRequestQuerystring, GetUserSmsProps,GetUserContactsProps,GetUserOrdersProps } from "./types/getUserInfo";
 import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./types/getUserDetail";
 
 const UserApi = API.injectEndpoints({
@@ -39,11 +39,29 @@ const UserApi = API.injectEndpoints({
                 method: "get",
             }),
         }),
+         // NOTE: GET /hs/admin/userDetails/user-contacts 通讯录
+         getUserContactsList: builder.query<GetUserContactsProps, GetUserInfoRequestQuerystring>({
+            query: (requestBody: GetUserInfoRequestQuerystring) => ({
+                url: `/userDetails/user-contacts`,
+                params: requestBody,
+                method: "get",
+            }),
+        }),
+        // NOTE: GET ​/hs​/admin​/userDetails​/orders 借款信息
+         getUserOrdersList: builder.query<GetUserOrdersProps, GetUserInfoRequestQuerystring>({
+            query: (requestBody: GetUserInfoRequestQuerystring) => ({
+                url: `/userDetails/orders`,
+                params: requestBody,
+                method: "get",
+            }),
+        }),
     })
 })
 export const {
     useLazyGetUserManageListQuery,
     useGetUserDetailQuery,
     useGetChannelListQuery,
-    useGetUserSMSListQuery
+    useGetUserSMSListQuery,
+    useGetUserContactsListQuery,
+    useGetUserOrdersListQuery
 } = UserApi;
