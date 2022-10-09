@@ -169,13 +169,7 @@ class TodayList extends Component {
                 render(text) {
                     return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
                 }
-            },
-            {
-                title: props.intl.formatMessage({ id: "page.table.appName" }),
-                dataIndex: "appName",
-                key: "appName",
-                width:'7%',
-            },
+            }
 
         ];
     }
