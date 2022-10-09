@@ -11,6 +11,7 @@ import {axios, convertMoneyFormat} from "utils";
 import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
+import CopyText from "../../../components/CopyText/CopyText";
 
 const convertParams = (obj = {}) => {
     const {time = [], orderStatus = '', phoneNo = '', name = '', orderNo = ''} = obj;
