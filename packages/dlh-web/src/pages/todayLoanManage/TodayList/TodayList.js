@@ -88,7 +88,7 @@ class TodayList extends Component {
                 dataIndex: "appName",
                 key: "appName",
                 width:'10%',
-                render(texts) { return <CopyText text={text} isEllispsis={true} /> }
+                render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName', width: '8%', render(text) { return <CopyText text={text} isEllispsis={true}/> } },
             // { title: '手机型号', dataIndex: 'deviceModel', key: 'deviceModel' },
@@ -171,8 +171,8 @@ class TodayList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({ id: "page.table.appName" }), 
-                dataIndex: "appName", 
+                title: props.intl.formatMessage({ id: "page.table.appName" }),
+                dataIndex: "appName",
                 key: "appName",
                 width:'7%',
             },
