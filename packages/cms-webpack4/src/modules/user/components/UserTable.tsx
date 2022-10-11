@@ -4,7 +4,7 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space, message } from 'antd';
 
 import { GetUerListProps, UserListContent, GetUserListResponse, GetUserListRequestQuerystring, GetUerProps } from "../api/types/getUserList";
-import { useLazyGetUserManageListQuery, useGetChannelListQuery, useDeleteUserMutation, usePostUserBanMutation } from '../api/UserApi';
+import { useLazyGetUserManageListQuery, useGetChannelListQuery, useDeleteUserMutation, usePostUserBanMutation ,usePostTelSaleMutation} from '../api/UserApi';
 import moment from 'moment';
 
 interface UserTableProps {
@@ -13,15 +13,16 @@ interface UserTableProps {
 
 const UserTable = ({ setShowModal }: UserTableProps) => {
 
-    const { currentData: channelList, isSuccess: isGetMerchantListSuccess } = useGetChannelListQuery(null);
+    const { currentData: channelList } = useGetChannelListQuery(null);
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [deleteUser] = useDeleteUserMutation();
+    const [deleteUser, { isSuccess: isDeteleUserSuccess, isLoading: isUserDeleting, }] = useDeleteUserMutation();
     const [banUser] = usePostUserBanMutation();
+    const [importTelSale] = usePostTelSaleMutation();
 
     const [userList, setUserList] = useState<GetUerListProps>({ content: [] });
 
@@ -34,11 +35,10 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const [modal, contextHolder] = Modal.useModal();
 
     useEffect(() => {
-        triggerGetList(searchList)
-    }, [searchList])
+        triggerGetList(searchList);
+    }, [searchList, isUserDeleting])
 
     useEffect(() => {
-
         if (currentData !== undefined) {
             setUserList(currentData)
         }
@@ -59,7 +59,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             key: 'option',
             render: (text, record, _, action) => record.isBlack ?
                 [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>] :
-                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>,
+                [<a key="editable" href={`#/user-info/${record.id}`} onClick={()=>console.log('查看')}>查看</a>,
                 <a key="clear" onClick={() => deleteUser({ userId: Number(record.id) })}>清除</a>,
                 <a key="forbidden" onClick={() => banUser({ userId: Number(record.id) })}>禁止</a>]
         },
@@ -137,13 +137,47 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
     }
 
+    const handleImportTelSale=()=>{
+        // console.log({
+        //     addEndTime:searchList.addEndTime,
+        //     addStartTime:searchList.addStartTime,
+        //     appName:searchList.addStartTime,
+        //     channelId:searchList.channelId,
+        //     hasOrder:searchList.hasOrder,
+        //     nameTrue:searchList.nameTrue,
+        //     noLoanAgain:isNoLoanAgain,
+        //     noLoanAgainEndDays:searchList.noLoanAgainEndDays,
+        //     noLoanAgainStartDays:searchList.noLoanAgainStartDays,
+        //     phoneNo:searchList.phoneNo,
+        //     riskRank:searchList.riskRank,
+        //     rnStatus:searchList.rnStatus,
+        //     status:searchList.status,
+        //     userStatus:searchList.userStatus,
+        // })
+        importTelSale({
+            addEndTime:searchList.addEndTime,
+            addStartTime:searchList.addStartTime,
+            appName:searchList.addStartTime,
+            channelId:searchList.channelId,
+            hasOrder:searchList.hasOrder,
+            nameTrue:searchList.nameTrue,
+            noLoanAgain:isNoLoanAgain,
+            noLoanAgainEndDays:searchList.noLoanAgainEndDays,
+            noLoanAgainStartDays:searchList.noLoanAgainStartDays,
+            phoneNo:searchList.phoneNo,
+            riskRank:searchList.riskRank,
+            rnStatus:searchList.rnStatus,
+            status:searchList.status,
+            userStatus:searchList.userStatus,
+        })
+    }
     return (
         <ProTable<UserListContent>
             columns={columns}
             dataSource={userList?.content || []}
-            loading={isLoading}
+            loading={isFetching}
             rowKey="id"
-            headerTitle={<Button key="button" disabled={!isNoLoanAgain} type="primary" ghost onClick={() => setShowModal(true)}>导入电销</Button>}
+            headerTitle={<Button key="button" disabled={!isNoLoanAgain} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
             search={{
                 collapsed: false,
                 labelWidth: 'auto',
@@ -159,11 +193,11 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { addTimeRange, appName, channelId, idcardNo, nameTrue, newMember, noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank } = form.getFieldValue();
+                                const { addTimeRange, appName, channelId, idcardNo, nameTrue, newMember, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank } = form.getFieldValue();
                                 // @ts-ignore
 
                                 console.log('getFieldValue', form.getFieldValue());
-                                if (noLoanAgain && noLoanAgainStartDays > noLoanAgainEndDays) {
+                                if (isNoLoanAgain && noLoanAgainStartDays > noLoanAgainEndDays) {
                                     modal.warning({content:'結清未複借終止天數，需大於結清未複借起始天數'});
                                     return;
                                 }
@@ -177,7 +211,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                                     idcardNo: idcardNo,
                                     nameTrue: nameTrue,
                                     newMember: newMember,
-                                    noLoanAgain: noLoanAgain,
+                                    noLoanAgain: isNoLoanAgain,
                                     noLoanAgainEndDays: noLoanAgainEndDays,
                                     noLoanAgainStartDays: noLoanAgainStartDays,
                                     phoneNo: phoneNo,

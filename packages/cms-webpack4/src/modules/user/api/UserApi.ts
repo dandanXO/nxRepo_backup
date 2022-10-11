@@ -5,6 +5,7 @@ import { GetUserInfoRequestQuerystring, GetUserSmsProps, GetUserContactsProps, G
 import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./types/getUserDetail";
 import { PostBlackListRequestBody } from "./types/postBlackList";
 import { UserId } from "./types/UserId";
+import { PostTelSaleRequestQuerystring } from './types/postTelSale';
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
@@ -80,6 +81,14 @@ const UserApi = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
+        // NOTE: POST ​/hs​/admin​/user-manage​/tel-sale 批次加入到電銷名單
+        postTelSale: builder.mutation<{}, PostTelSaleRequestQuerystring>({
+            query: (requestBody: PostTelSaleRequestQuerystring) => ({
+                url: `/user-manage/tel-sale`,
+                method: "post",
+                data: requestBody,
+            }),
+        }),
     })
 })
 export const {
@@ -91,5 +100,6 @@ export const {
     useGetUserOrdersListQuery,
     usePostBlackListAddMutation,
     useDeleteUserMutation,
-    usePostUserBanMutation
+    usePostUserBanMutation,
+    usePostTelSaleMutation
 } = UserApi;
