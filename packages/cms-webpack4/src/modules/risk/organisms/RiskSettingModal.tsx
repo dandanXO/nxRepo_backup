@@ -49,9 +49,15 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
 
     // NOTE: 2. Get Data
     const [triggerGetRiskMenu, { currentData: currentRiskMenuData, isLoading: isRiskMenuLoading }] = useLazyGetRiskModelMenuQuery();
-    const [triggerGetRisk , { currentData: currentFormData, isLoading: isRiskLoading, isFetching }] = useLazyGetRiskManageQuery();
+    const [triggerGetRisk , { data: previousRiskData, currentData: currentFormData, isLoading: isRiskLoading, isFetching: isRiskFetching, isSuccess: isRiskSuccess }] = useLazyGetRiskManageQuery();
+    console.log("isRiskFetching", isRiskFetching);
     // console.log("currentRiskMenuData", currentRiskMenuData);
-    // console.log("currentFormData", currentFormData);
+    console.log("currentFormData", currentFormData);
+    // console.log("isRiskLoading", isRiskLoading);
+
+    // console.log("isRiskFetching", isRiskSuccess);
+
+
 
     useEffect(() => {
         const loading = isRiskMenuLoading || isRiskLoading;
@@ -64,20 +70,25 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
         triggerGetRiskMenu({});
     }, []);
 
+    useEffect(() => {
+        if(props.showModalContent.isEdit) {
+            triggerGetRisk({
+                modelId: String(props.editID),
+            });
+        }
+    }, [props.showModalContent.isEdit])
+
     // NOTE: 3. Set form fields from data
     useEffect(() => {
         // NOTICE:
         if(!props.showModalContent.isEdit) return;
 
-        triggerGetRisk({
-            modelId: String(props.editID),
-        });
-
         if(!currentFormData) return;
-
+        const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
+        const id = targetMenu && targetMenu[0] && targetMenu[0].id || undefined;
         props.form.setFieldsValue({
             modelName: currentFormData.modelName,
-            riskModelName: currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)[0].id,
+            riskModelName: id,
             firstLoan: currentFormData.firstLoan,
             repeatLoan: currentFormData.repeatLoan,
             useRcQuota: currentFormData.useRcQuota,
@@ -86,6 +97,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
         })
 
     }, [props.showModalContent.isEdit, currentFormData])
+
 
 
     // NOTE: POST or Put form data
@@ -239,6 +251,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
                 currentRiskMenuData={currentRiskMenuData}
                 initialValues={initialValues as Store}
             />
+
         </AdminFormModalTemplate>
     )
 }
