@@ -176,6 +176,26 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                     >
                       <Input placeholder="后置利息" suffix={"%"}/>
                     </Form.Item>
+
+
+                      <Form.Item
+                          {...restField}
+                          name={[name, 'postInterest']}
+                          required
+                          rules={[
+                              {
+                                  transform: (value) => Number(value),
+                                  validator: async (_, value) =>NumberValidator(_, value)({
+                                      min: 0,
+                                      minMessage: "请输入提額金额",
+                                  })
+                              },
+                          ]}
+                      >
+                          <Input placeholder="提額金额"/>
+                      </Form.Item>
+
+
                     <MinusCircleOutlined onClick={() => remove(name)} />
                   </Space>
                 ))}
