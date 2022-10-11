@@ -11,6 +11,9 @@ export interface ProductInterestRatePair{
 
   preInterest?:	number;
   // 前置利率
+
+    /** 借款額度提額 */
+    plusAmount?: number;
 }
 
 export interface GetProductQueryResponse{

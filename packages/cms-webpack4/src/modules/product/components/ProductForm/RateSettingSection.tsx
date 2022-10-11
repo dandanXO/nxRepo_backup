@@ -180,7 +180,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
 
                       <Form.Item
                           {...restField}
-                          name={[name, 'postInterest']}
+                          name={[name, 'plusAmount']}
                           required
                           rules={[
                               {

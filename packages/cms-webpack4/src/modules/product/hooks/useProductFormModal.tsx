@@ -165,6 +165,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
             num: ratePair.num,
             preInterest: fixedFloatNumberToFixed2(ratePair.preInterest * 100),
             postInterest: fixedFloatNumberToFixed2(ratePair.postInterest * 100),
+              plusAmount: ratePair.plusAmount,
           }
         }),
         overdueRate: `${fixedFloatNumberToFixed2(Number(productFormData.overdueRate) * 100)}`,
@@ -239,7 +240,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
     const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
       num: i.num,
       postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
-      preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3))
+      preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3)),
+        plusAmount: Number(i.plusAmount),
     }))
 
     let creatProductData: PostProductCreateRequestBody = {
@@ -334,7 +336,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
         {
           "num": "21",
           "preInterest": "22",
-          "postInterest": "23"
+          "postInterest": "23",
+            "plusAmount": "123"
         }
       ],
       "top": false,
