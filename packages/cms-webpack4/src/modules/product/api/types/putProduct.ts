@@ -50,7 +50,7 @@ export interface PutProductRequestBody {
     showQuota?: boolean;
     /** 热门标签 */
     tags?: string;
-    /** 申请详情模版类型 (1: 一般 , 2: 合同金額=到手)  
+    /** 申请详情模版类型 (1: 一般 , 2: 合同金額=到手)
         @enum {number}
     */
     templateType?: 1 | 2;
@@ -69,6 +69,8 @@ export interface PutProductInterestRatePairs {
     postInterest?: number;
     /** 前置利率 */
     preInterest?: number;
+    /** 借款額度提額 */
+    plusAmount?: number;
 }
 
 export type PutProductProps = PutProductRequestBody & PutProductRequestParams;

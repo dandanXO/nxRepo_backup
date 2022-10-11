@@ -7,7 +7,7 @@ import ProductForm from "../modules/product/components/ProductForm";
 import useAutoLogin from "../modules/shared/hooks/useAutoLogin";
 
 const ProductPage=() => {
-
+useAutoLogin();
   const [domLoaded, setDomLoaded] = useState(false);
   useEffect(() => {
     setDomLoaded(true);
