@@ -1189,8 +1189,12 @@
   "menu.newUserDailyConversionRates": "新客日统计转化率",
   "menu.channelUser": "渠道用户",
   "menu.generalConf": "参数配置",
+
   "menu.riskControlConf": "渠道配置",
+  "menu.risk.model.setting": "风控配置",
+
   "menu.riskControlConfigManage": "风控配置",
+
   "menu.withholdingStats": "代扣统计",
   "menu.currentDayOverdueCall": "当日催收",
   "menu.currentDayOrderAssign": "当日订单分配",

@@ -47,6 +47,10 @@ const RiskSettingPage = () => {
         triggerGetList(null);
     }, []);
 
+    const onFormFinish = useCallback(() => {
+        triggerGetList(null);
+    }, [])
+
     useEffect(() => {
         setLoading(isFetching);
     }, [isFetching])
@@ -116,20 +120,20 @@ const RiskSettingPage = () => {
         const mockRequest = {
             enabled: true,
             firstLoan: [
-                {missing: 'A', balance: '4000'},
-                {missing: 'B', balance: '3000'},
-                {missing: 'C', balance: '2000'},
-                {missing: 'D', balance: '1000'},
-                {missing: 'E', balance: '0'}
+                {providerRank: 'A', balance: '4000'},
+                {providerRank: 'B', balance: '3000'},
+                {providerRank: 'C', balance: '2000'},
+                {providerRank: 'D', balance: '1000'},
+                {providerRank: 'E', balance: '0'}
             ],
-            modelName: "20221007",
+            modelName: String(new Date().getTime()),
             remark: "remark",
             repeatLoan: [
-                {missing: 'A', balance: '8000'},
-                {missing: 'B', balance: '6000'},
-                {missing: 'C', balance: '4000'},
-                {missing: 'D', balance: '2000'},
-                {missing: 'E', balance: '0'},
+                {providerRank: 'A', balance: '8000'},
+                {providerRank: 'B', balance: '6000'},
+                {providerRank: 'C', balance: '4000'},
+                {providerRank: 'D', balance: '2000'},
+                {providerRank: 'E', balance: '0'},
             ],
             riskModelName: 1,
             useRcQuota: true
@@ -142,6 +146,8 @@ const RiskSettingPage = () => {
         form.submit();
     }, [form])
 
+
+
     // NOTE: Post | PUT Data
     return (
         <AdminPageTemplate<GetProductListResponseProduct>
@@ -150,15 +156,15 @@ const RiskSettingPage = () => {
             navigator={{
                 ancestor: {
                     path: "",
-                    breadcrumbName: "首頁",
+                    breadcrumbName: "首页",
                 },
                 parent: {
                     path: "",
-                    breadcrumbName: "風控管理",
+                    breadcrumbName: "风控管理",
                 },
                 self: {
                     path: "",
-                    breadcrumbName:"風控配置"
+                    breadcrumbName:"风控配置"
                 }
             }}
             searchable={false}
@@ -182,6 +188,7 @@ const RiskSettingPage = () => {
                         editID={editID}
                         setLoading={setLoading}
                         loading={loading}
+                        onFormFinish={onFormFinish}
                     />
                 )
             }}

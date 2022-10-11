@@ -30,17 +30,20 @@ export interface MssRiskRankVo {
     balance: number;
     // 可借额度
 
-    id: number;
+    id?: number;
     // 风控评分等级流水号
 
-    max:	number;
+    max?:	number;
     // 终始阀值(exclude)
 
-    min:	number;
+    min?:	number;
     // 起始阀值(include)
 
-    modelId: number;
+    modelId?: number;
     // 风控模组流水号
+
+    providerRank: string;
+    // 风控商等级
 
     rank:	"EXCELLENT" | "GOOD" | "NORMAL" | "ORDINARY" | "REJECT";
     // 风控评分等级
@@ -56,14 +59,14 @@ export interface RiskManageModel {
     enabled: boolean;
     // 状态
 
-    firstLoan: MssRiskRankVo;
+    firstLoan: Array<MssRiskRankVo>;
     modelName:	string;
     // 风控名称
 
     remark:	string;
     // 备注
 
-    repeatLoan: MssRiskRankVo;
+    repeatLoan: Array<MssRiskRankVo>;
     riskModelName: string;
     // 风控模型名称
 
@@ -77,7 +80,9 @@ export type GetRiskManageResponse = RiskManageModel;
 export type PostRiskManageCreateRequest = RiskManageModel;
 
 // NOTE: Put
-export type PutRiskManageCreateRequest = RiskManageModel;
+export type PutRiskManageCreateRequest = RiskManageModel & {
+    modelId: number;
+};
 
 export interface RiskModelMenu {
     id: number;
