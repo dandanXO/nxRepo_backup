@@ -6,10 +6,10 @@ import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Spin,Space } from 'antd';
 import {GetUserOrders}from "../api/types/getUserInfo";
-import { GetUserId } from '../api/types/getUserId';
+import { UserId } from '../api/types/UserId';
 import { useGetUserOrdersListQuery } from '../api/UserApi';
 
-const LoanInfo = ({userId}:GetUserId) => {
+const LoanInfo = ({userId}:UserId) => {
 
     const {currentData,isLoading}=useGetUserOrdersListQuery({ userId, pageNumber: 1, pageSize: 10 });
  

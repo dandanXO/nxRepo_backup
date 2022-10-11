@@ -6,6 +6,9 @@ export interface GetUserListRequestQuerystring {
     // 註冊時間開始
     addStartTime?: string;
 
+    // 注册时的app名称
+    appName?: string;
+
     // 渠道名稱
     channelId?: string;
 
