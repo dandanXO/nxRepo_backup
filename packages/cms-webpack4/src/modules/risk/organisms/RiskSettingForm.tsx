@@ -62,10 +62,15 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                     return (
                         <Form.Item key={index}>
                             <Input.Group compact>
+                                {props.isEdit && (
+                                    <Form.Item name={["firstLoan", index, "id"]}>
+                                        <Input/>
+                                    </Form.Item>
+                                )}
                                 <Form.Item style={{ margin: '0 8px 0 0' }}>
                                     <Input placeholder={levelTag} disabled/>
                                 </Form.Item>
-                                <Form.Item name={["firstLoan", index, "missing"]} style={{ margin: '0 8px 0 0' }}
+                                <Form.Item name={["firstLoan", index, "providerRank"]} style={{ margin: '0 8px 0 0' }}
                                            rules={[{
                                                required: true,
                                                message: "请输入值"
@@ -92,10 +97,15 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                     return (
                         <Form.Item key={index}>
                             <Input.Group compact>
+                                {props.isEdit && (
+                                    <Form.Item name={["repeatLoan", index, "id"]}>
+                                        <Input/>
+                                    </Form.Item>
+                                )}
                                 <Form.Item style={{ margin: '0 8px 0 0' }}>
                                     <Input placeholder={levelTag} disabled/>
                                 </Form.Item>
-                                <Form.Item name={["repeatLoan", index, "missing"]} style={{ margin: '0 8px 0 0' }}
+                                <Form.Item name={["repeatLoan", index, "providerRank"]} style={{ margin: '0 8px 0 0' }}
                                            rules={[{
                                                required: true,
                                                message: "请输入值"

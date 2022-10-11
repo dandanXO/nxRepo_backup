@@ -33,10 +33,11 @@ interface RiskSettingModelProps {
     // onFinishFailed: () => void;
     // onValuesChange: () => void;
     // currentRiskMenuData: Array<RiskModelMenu>;
+    onFormFinish: () => void;
 }
 const RiskSettingModal = (props: RiskSettingModelProps) => {
 
-    // NOTE: Initial Data
+    // NOTE: 1. Initial Data
     const initialValues = useMemo(() => {
         // NOTICE: select and switch need initialValue if you want to select one
         return {
@@ -45,9 +46,11 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
         } as DeepPartial<FormResponseData>;
     }, [])
 
-    // NOTE: Get Data
+    // NOTE: 2. Get Data
     const [triggerGetRiskMenu, { currentData: currentRiskMenuData, isLoading: isRiskMenuLoading }] = useLazyGetRiskModelMenuQuery();
     const [triggerGetRisk , { currentData: currentFormData, isLoading: isRiskLoading, isFetching }] = useLazyGetRiskManageQuery();
+    // console.log("currentRiskMenuData", currentRiskMenuData);
+    // console.log("currentFormData", currentFormData);
 
     useEffect(() => {
         const loading = isRiskMenuLoading || isRiskLoading;
@@ -59,8 +62,9 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
         triggerGetRiskMenu({});
     }, []);
 
-    // NOTE: Set form fields from data
+    // NOTE: 3. Set form fields from data
     useEffect(() => {
+        if(!props.showModalContent.show) return;
         // NOTE: 1
 
         // NOTICE:
@@ -85,42 +89,45 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
             remark: currentFormData.remark,
         } as FormResponseData)
 
-    }, [props.editID, currentFormData])
+    }, [props.showModalContent.show, props.editID, currentFormData])
 
 
     // NOTE: POST or Put form data
     const [triggerPostRisk, { data: postRiskData, isLoading: isPostRiskLoading , isSuccess: isPostRiskSuccess }] = usePostRiskManageCreateMutation();
     const [triggerPutRisk, { data: putRiskData, isLoading: isPutRiskLoading, isSuccess: isPutRiskSuccess }] = usePutRiskManageCreateMutation();
 
-
-
-
-
+    // NOTICE: 4.Form Actions
     const onFinish = useCallback(() => {
         const fields = props.form.getFieldsValue();
+
+        // NOTE: Fetch RiskModel
+        const riskModel = currentRiskMenuData.filter(menu => menu.id === fields["riskModelName"])[0];
+        const riskModelName = riskModel.riskModelName;
+
+
+        // NOTICE: Edit
+        const isEdit = props.showModalContent.isEdit;
+        const modelId = props.editID;
+        console.log("modelId", modelId);
+
         // console.log("fields.before", JSON.parse(JSON.stringify(fields)));
         Object.keys(fields).map(key => {
+
             if(key === "firstLoan" || key === "repeatLoan") {
                 fields[key].map((record, index) => {
                     fields[key][index] = {
-                        balance: record.balance,
+                        balance: Number(record.balance),
                         // 可借额度
 
-                        // NOTE: error
-                        id:  index,
-                        // 风控评分等级流水号
-
                         // NOTE: future
-                        max: 1,
+                        // max: 1,
                         // 终始阀值(exclude)
 
                         // NOTE: future
-                        min: 1,
+                        // min: 1,
                         // 起始阀值(include)
 
-                        // NOTE: future
-                        modelId: 4,
-                        // 风控模组流水号
+                        providerRank: record.providerRank,
 
                         rank: ["EXCELLENT", "GOOD", "NORMAL", "ORDINARY", "REJECT"][index],
                         // 风控评分等级
@@ -128,59 +135,70 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
                         sort: index + 1,
                         // 排序
 
-                        type: fields[key] === "firstLoan" ? 0 : 1 , // 0 | 1
+                        type: key === "firstLoan" ? 0 : 1 , // 0 | 1
                         // 级距类型 0: 首贷, 1: 复借
                     } as MssRiskRankVo
+                    // NOTE: Edit
+                    if(isEdit) {
+                        fields[key][index]["modelId"] = modelId;
+                    }
                 })
             } else if(key === "riskModelName") {
-                fields["riskModelName"] = currentRiskMenuData.filter(menu => menu.id === fields[key])[0].riskModelName
+                fields["riskModelName"] = riskModelName;
             }
         });
+        // NOTE: Edit
+        if(isEdit) {
+            fields["modelId"] = modelId;
+        }
         // console.log("fields.after", fields);
+
+        // NOTE: Create or Edit
         const triggerAPI = !props.showModalContent.isEdit ? triggerPostRisk : triggerPutRisk;
-        console.log("triggerAPI", !props.showModalContent.isEdit ? "triggerPostRisk" : "triggerPutRisk");
-        console.log("fields", fields);
+        // console.log("triggerAPI", !props.showModalContent.isEdit ? "triggerPostRisk" : "triggerPutRisk");
+        // console.log("fields", fields);
 
-        // if(isPostRiskSuccess || isPutRiskSuccess) {
-        //     props.form.resetFields();
-        // } else {
-        //     // const message = postRiskData?.message || putRiskData?.message
-        // }
-
-        // triggerAPI(fields);
 
 
     // const errorModal = useErrorModal("ant4");
     // console.log("errorModal", errorModal);
+
+        // NOTE: Request
         triggerAPI(fields).unwrap().then((responseData) => {
-            console.log("responseData", responseData);
+            // console.log("responseData", responseData);
             props.form.resetFields();
+            props.onFormFinish();
+            props.setShowModalContent({
+                show: false,
+                isEdit: false,
+            })
+
         })
-        //     .catch((error) => {
-        //     console.log("error");
-        //     Modal.config({
-        //         rootPrefixCls: "ant4"
-        //     })
-        //     errorModal("JI");
-        //     message.config({
-        //         prefixCls: "ant4"
-        //     })
-        //     errorModal("asdf")
-        //     message.error("error.error")
-        //     Modal.error({
-        //         title: "error.error"
-        //     })
-        //     errorModal({
-        //         title: "error.error1"
-        //     })
+        // .catch((error) => {
+            // console.log("error");
+            // Modal.config({
+            //     rootPrefixCls: "ant4"
+            // })
+            // errorModal("JI");
+            // message.config({
+            //     prefixCls: "ant4"
+            // })
+            // errorModal("asdf")
+            // message.error("error.error")
+            // Modal.error({
+            //     title: "error.error"
+            // })
+            // errorModal({
+            //     title: "error.error1"
+            // })
         // }).finally(() => {
         //     console.log("finally");
-        //     errorModal({
-        //         title: "error.error2"
-        //     })
-        //     Modal.error({
-        //         title: "12",
-        //     })
+            // errorModal({
+            //     title: "error.error2"
+            // })
+            // Modal.error({
+            //     title: "12",
+            // })
         // })
 
     }, [props.editID, currentRiskMenuData])

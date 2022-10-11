@@ -51,6 +51,13 @@ class AuthRoute extends Component {
                       }
                     })
                   }
+                  if(menuItem.actionUrl === "/riskConfigManage") {
+                    menuItem.children.map(level2MenuItem => {
+                      if(level2MenuItem.actionUrl === "/risk-model-setting") {
+                        level2MenuItem.actionUrl = "/cms/risk-setting";
+                      }
+                    })
+                  }
                   return menuItem;
                 })
                 console.log("[MainApp][after] menu", data);

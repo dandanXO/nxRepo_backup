@@ -4,7 +4,7 @@ import {Button, Modal} from "antd";
 interface ProductModalProps{
   isEdit?: boolean;
   show?: boolean;
-  handleCloseModal: (e: any) => void;
+  handleCloseModal: (event) => void;
   onOk: () => void;
   onMockFinish: () => void;
   children?: React.ReactElement;
