@@ -4,8 +4,8 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space, message } from 'antd';
 
 import { GetUerListProps, UserListContent, GetUserListResponse, GetUserListRequestQuerystring, GetUerProps } from "../api/types/getUserList";
-import { useLazyGetUserManageListQuery, useGetChannelListQuery, useGetUserSMSListQuery } from '../api/UserApi';
-
+import { useLazyGetUserManageListQuery, useGetChannelListQuery, useDeleteUserMutation, usePostUserBanMutation } from '../api/UserApi';
+import moment from 'moment';
 
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
@@ -20,20 +20,20 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
+    const [deleteUser] = useDeleteUserMutation();
+    const [banUser] = usePostUserBanMutation();
 
     const [userList, setUserList] = useState<GetUerListProps>({ content: [] });
 
     const initSearchList: GetUserListRequestQuerystring = {
-        addEndTime: "", addStartTime: "", channelId: "", hasOrder: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
+        addEndTime: "", addStartTime: "", appName:"", channelId: "", hasOrder: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
         noLoanAgainEndDays: 10, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", rnStatus: "", status: "", userStatus: 0,
         pageNum: 1, pageSize: 10
     }
     const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList)
-
-    const [form] = Form.useForm();
+    const [modal, contextHolder] = Modal.useModal();
 
     useEffect(() => {
-        console.log('searchList', searchList)
         triggerGetList(searchList)
     }, [searchList])
 
@@ -41,7 +41,6 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
 
         if (currentData !== undefined) {
             setUserList(currentData)
-
         }
     }, [currentData])
 
@@ -59,11 +58,11 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             valueType: 'option',
             key: 'option',
             render: (text, record, _, action) => record.isBlack ?
-                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="blackList" onClick={() => setShowModal({show:true,userId:record.id})}>黑名单</a>] :
-                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="clear">清除</a>, <a key="forbidden">禁止</a>]
-            ,
+                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>] :
+                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>,
+                <a key="clear" onClick={() => deleteUser({ userId: Number(record.id) })}>清除</a>,
+                <a key="forbidden" onClick={() => banUser({ userId: Number(record.id) })}>禁止</a>]
         },
-
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: '' },
         { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: '' },
         { title: '性别', dataIndex: 'gender', key: 'gender', hideInSearch: true },
@@ -74,7 +73,6 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             valueEnum: {
                 '': { text: '不限', color: '' },
                 'EXCELLENT': { text: '极好', color: 'green' },
-
                 'NORMAL': { text: '正常', color: 'blue' },
                 'ORDINARY': { text: '普通', color: 'gold' },
                 'REJECT': { text: '拒绝', color: 'lightGray' },
@@ -91,7 +89,10 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         },
         { title: '注册包名', dataIndex: 'appName', initialValue: '', key: 'appName' },
         { title: '注册渠道', dataIndex: 'channelId', valueType: 'select', initialValue: '0', key: 'channelId', valueEnum: channelListValueEnum },
-        { title: '注册时间', dataIndex: 'addTime', valueType: 'dateTime', key: 'addTime', hideInSearch: true },
+        {
+            title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true,
+            render: (text) => moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+        },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ''
@@ -129,9 +130,6 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                     </Form.Item>
                 </Form>
             }
-
-
-
         },
     ]
 
@@ -152,6 +150,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
                     <Space>
+                        {contextHolder}
                         <Button onClick={() => {
                             form.resetFields();
                             setSearchList(initSearchList);
@@ -160,14 +159,12 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { addTimeRange, channelId, idcardNo, nameTrue, newMember, noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank } = form.getFieldValue();
+                                const { addTimeRange, appName, channelId, idcardNo, nameTrue, newMember, noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank } = form.getFieldValue();
                                 // @ts-ignore
 
                                 console.log('getFieldValue', form.getFieldValue());
-
-                                if (noLoanAgainStartDays > noLoanAgainEndDays) {
-                                    console.log('123')
-                                    message.info('結清未複借終止天數，需大於結清未複借起始天數');
+                                if (noLoanAgain && noLoanAgainStartDays > noLoanAgainEndDays) {
+                                    modal.warning({content:'結清未複借終止天數，需大於結清未複借起始天數'});
                                     return;
                                 }
 
@@ -175,10 +172,11 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                                     ...searchList,
                                     addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addStartTime: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    appName:appName,
                                     channelId: channelId === '0' ? '' : channelId,
                                     idcardNo: idcardNo,
                                     nameTrue: nameTrue,
-                                    newMember: Boolean(newMember),
+                                    newMember: newMember,
                                     noLoanAgain: noLoanAgain,
                                     noLoanAgainEndDays: noLoanAgainEndDays,
                                     noLoanAgainStartDays: noLoanAgainStartDays,
@@ -191,6 +189,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                             {searchText}
                         </Button>
                     </Space>
+                
                 ),
             }}
             options={{

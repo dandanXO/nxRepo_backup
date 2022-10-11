@@ -47,6 +47,8 @@ class RefundRecord extends Component {
         },
         { title: this.props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', width: '15%',  render(text) { return <CopyText text={text} /> } },
         { title: this.props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userName', key: 'userName', width: '15%', render(text) { return <CopyText text={text} isEllispsis={true} /> } },
+        { title: this.props.intl.formatMessage({ id: "page.search.list.product.name" }), dataIndex: 'productName', key: 'productName', width: '9%' },
+        { title: this.props.intl.formatMessage({ id: "page.table.appName" }), dataIndex: 'appName', key: 'appName', width: '9%' },
         { title: this.props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo',  width: '9%'},
         {
             title: this.props.intl.formatMessage({ id: "page.table.total.repaid" }),

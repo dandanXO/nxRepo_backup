@@ -6,7 +6,7 @@ import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Spin,Space } from 'antd';
 import {useGetUserContactsListQuery} from "../api/UserApi";
-import {GetUserId}from "../api/types/getUserId";
+import {UserId}from "../api/types/UserId";
 import {GetUserContacts} from "../api/types/getUserInfo"
 interface AddressBookResponse{
     name?:string;
@@ -16,7 +16,7 @@ interface AddressBookResponse{
 }
 
 
-const AddressBook = (({userId}:GetUserId) => {
+const AddressBook = (({userId}:UserId) => {
 
    
     const { currentData, isLoading } = useGetUserContactsListQuery({ userId, pageNumber: 1, pageSize: 10 });

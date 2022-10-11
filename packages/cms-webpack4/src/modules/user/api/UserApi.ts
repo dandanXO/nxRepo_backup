@@ -4,7 +4,7 @@ import { GetChannelListResponse } from "./types/getChannelList";
 import { GetUserInfoRequestQuerystring, GetUserSmsProps, GetUserContactsProps, GetUserOrdersProps } from "./types/getUserInfo";
 import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./types/getUserDetail";
 import { PostBlackListRequestBody } from "./types/postBlackList";
-
+import { UserId } from "./types/UserId";
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
@@ -64,6 +64,22 @@ const UserApi = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
+        // NOTE: DELTETE /hs​/admin​/user-manage​/user 根据用户id移除
+        deleteUser: builder.mutation<{}, UserId>({
+            query: (requestBody: UserId) => ({
+                url: `/user-manage/user`,
+                method: "delete",
+                data: requestBody,
+            }),
+        }),
+        // NOTE: POST ​/hs​/admin​/user-manage​/user-ban 根据用户id永久禁止登陆app
+        postUserBan: builder.mutation<{}, UserId>({
+            query: (requestBody: UserId) => ({
+                url: `/user-manage/user-ban`,
+                method: "post",
+                data: requestBody,
+            }),
+        }),
     })
 })
 export const {
@@ -73,5 +89,7 @@ export const {
     useGetUserSMSListQuery,
     useGetUserContactsListQuery,
     useGetUserOrdersListQuery,
-    usePostBlackListAddMutation
+    usePostBlackListAddMutation,
+    useDeleteUserMutation,
+    usePostUserBanMutation
 } = UserApi;
