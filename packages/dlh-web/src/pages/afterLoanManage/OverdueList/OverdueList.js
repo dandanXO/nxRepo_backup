@@ -268,7 +268,10 @@ class OverdueList extends Component {
     //查看详情
     handleLookDetail = (id, userId) => {
         const {history: {push}} = this.props;
-        push(`/overdueList/${id}`, {userId});
+        push({
+            pathname: `/overdueList/${id}`,
+            state: { userId }
+        })
     }
 
 

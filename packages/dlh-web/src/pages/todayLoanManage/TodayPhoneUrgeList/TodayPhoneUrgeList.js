@@ -182,7 +182,10 @@ class PhoneUrgeList extends Component {
     //查看详情
     handleLookDetail = (id, userId) => {
         const {history: {push}} = this.props;
-        push(`/todayPhoneUrgeList/${id}`, {userId});
+        push({
+            pathname: `/todayPhoneUrgeList/${id}`,
+            state: { userId }
+        })
     }
 
     lookDueDetail = (text) => {

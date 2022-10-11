@@ -207,7 +207,10 @@ class TodayList extends Component {
     //查看详情
     handleLookDetail = (id, userId) => {
         const {history: {push}} = this.props;
-        push(`/todayList/${id}`, {userId});
+        push({
+            pathname: `/todayList/${id}`,
+            state: { userId }
+        })
     }
 
 
