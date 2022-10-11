@@ -37,6 +37,7 @@ interface RiskSettingModelProps {
 }
 const RiskSettingModal = (props: RiskSettingModelProps) => {
 
+
     // NOTE: 1. Initial Data
     const initialValues = useMemo(() => {
         // NOTICE: select and switch need initialValue if you want to select one
@@ -57,6 +58,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
         props.setLoading(loading);
     }, [isRiskMenuLoading, isRiskLoading])
 
+
     // NOTICE: Loading
     useEffect(() => {
         triggerGetRiskMenu({});
@@ -64,32 +66,26 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
 
     // NOTE: 3. Set form fields from data
     useEffect(() => {
-        if(!props.showModalContent.show) return;
-        // NOTE: 1
-
         // NOTICE:
-        if(!triggerGetRiskMenu) return;
+        if(!props.showModalContent.isEdit) return;
 
-        // NOTE: 2
-        if(props.showModalContent.isEdit) {
-            triggerGetRisk({
-                modelId: String(props.editID),
-            });
-        }
+        triggerGetRisk({
+            modelId: String(props.editID),
+        });
 
         if(!currentFormData) return;
-        // NOTE: 3
+
         props.form.setFieldsValue({
             modelName: currentFormData.modelName,
-            riskModelName: currentFormData.riskModelName,
+            riskModelName: currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)[0].id,
             firstLoan: currentFormData.firstLoan,
             repeatLoan: currentFormData.repeatLoan,
             useRcQuota: currentFormData.useRcQuota,
             enabled: currentFormData.enabled,
             remark: currentFormData.remark,
-        } as FormResponseData)
+        })
 
-    }, [props.showModalContent.show, props.editID, currentFormData])
+    }, [props.showModalContent.isEdit, currentFormData])
 
 
     // NOTE: POST or Put form data
@@ -99,7 +95,6 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
     // NOTICE: 4.Form Actions
     const onFinish = useCallback(() => {
         const fields = props.form.getFieldsValue();
-
         // NOTE: Fetch RiskModel
         const riskModel = currentRiskMenuData.filter(menu => menu.id === fields["riskModelName"])[0];
         const riskModelName = riskModel.riskModelName;
@@ -108,7 +103,6 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
         // NOTICE: Edit
         const isEdit = props.showModalContent.isEdit;
         const modelId = props.editID;
-        console.log("modelId", modelId);
 
         // console.log("fields.before", JSON.parse(JSON.stringify(fields)));
         Object.keys(fields).map(key => {
@@ -141,6 +135,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
                     // NOTE: Edit
                     if(isEdit) {
                         fields[key][index]["modelId"] = modelId;
+                        fields[key][index]["id"] = record.id;
                     }
                 })
             } else if(key === "riskModelName") {
@@ -223,6 +218,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
             editTitle={"修改风控配置"}
             handleCloseModal={() => {
                 console.log("handleCloseModal")
+                props.form.resetFields();
                 props.setShowModalContent({
                     show: false,
                     isEdit: false,
