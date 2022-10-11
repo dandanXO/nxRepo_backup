@@ -62,9 +62,9 @@ const RiskSettingPage = () => {
     const columns = useMemo(() => {
         const columns: ProColumns<RiskManageList>[] = [
             {
+                key: 'option',
                 title: '操作',
                 valueType: 'option',
-                key: 'option',
                 render: (text, record, _, action) => {
                     return [
                         <a key="editable" onClick={() => {

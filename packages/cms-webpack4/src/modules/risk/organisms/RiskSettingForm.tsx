@@ -63,7 +63,9 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                         <Form.Item key={index}>
                             <Input.Group compact>
                                 {props.isEdit && (
-                                    <Form.Item name={["firstLoan", index, "id"]}/>
+                                    <Form.Item name={["firstLoan", index, "id"]}>
+                                        <Input style={{ display: "none" }}/>
+                                    </Form.Item>
                                 )}
                                 <Form.Item style={{ margin: '0 8px 0 0' }}>
                                     <Input placeholder={levelTag} disabled/>
@@ -96,7 +98,9 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                         <Form.Item key={index}>
                             <Input.Group compact>
                                 {props.isEdit && (
-                                    <Form.Item name={["repeatLoan", index, "id"]}/>
+                                    <Form.Item name={["repeatLoan", index, "id"]}>
+                                        <Input style={{ display: "none" }}/>
+                                    </Form.Item>
                                 )}
                                 <Form.Item style={{ margin: '0 8px 0 0' }}>
                                     <Input placeholder={levelTag} disabled/>
