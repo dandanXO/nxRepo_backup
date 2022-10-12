@@ -14,6 +14,7 @@ interface AdminFormModalTemplateProps{
     editTitle?: string;
     autoComplete?: boolean;
     onAutoCompleteTemplate?: () => void;
+    width?: string;
 }
 
 const AdminFormModalTemplate = (props: AdminFormModalTemplateProps = {
@@ -43,7 +44,7 @@ const AdminFormModalTemplate = (props: AdminFormModalTemplateProps = {
             open={props.show}
             onCancel={props.handleCloseModal}
             onOk={props.onOk}
-            width={'800px'}
+            width={ props.width || '800px'}
             maskClosable={false}
         >
             {props.children}

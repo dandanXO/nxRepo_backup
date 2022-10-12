@@ -211,7 +211,6 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
     }, [props.editID, currentRiskMenuData])
 
     const onFinishFailed = useCallback(() => {
-        alert("1")
     }, [])
 
     const onFieldsChange = useCallback((changedFields, allFields) => {
@@ -222,6 +221,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
 
     return (
         <AdminFormModalTemplate
+            width={"600px"}
             show={props.showModalContent.show}
             isEdit={props.showModalContent.isEdit}
             hasAddForm={true}

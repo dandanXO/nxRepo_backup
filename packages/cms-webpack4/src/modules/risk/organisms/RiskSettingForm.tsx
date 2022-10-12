@@ -1,11 +1,12 @@
 import {Form, FormInstance, Input, Radio, Select, Switch} from "antd";
-import React, {useCallback, useEffect, useMemo} from "react";
+import React, {CSSProperties, useCallback, useEffect, useMemo} from "react";
 import {useForm} from "antd/es/form/Form";
 import TextArea from "antd/es/input/TextArea";
 
 import {RiskManageModel, RiskModelMenu} from "../api/RiskApi";
 import {FormResponseData} from "../pages/RiskSettingPage";
 import {Store} from "@reduxjs/toolkit";
+import {NumberValidator} from "../../shared/utils/validator";
 
 
 interface RiskSettingFormProps {
@@ -22,6 +23,7 @@ interface RiskSettingFormProps {
     currentRiskMenuData: Array<RiskModelMenu>;
 }
 
+const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 178, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>
 const RiskSettingForm = (props: RiskSettingFormProps) => {
 
 
@@ -61,15 +63,23 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
                     return (
                         <Form.Item key={index}>
+                            {index === 0 && (
+                                <div>
+                                    <CustomLabel style={{ width: 76}}>風控標籤</CustomLabel>
+                                    <CustomLabel>風控商等級</CustomLabel>
+                                    <CustomLabel>初始借款額度</CustomLabel>
+                                </div>
+                            )}
                             <Input.Group compact>
                                 {props.isEdit && (
-                                    <Form.Item name={["firstLoan", index, "id"]}>
-                                        <Input style={{ display: "none" }}/>
+                                    <Form.Item name={["firstLoan", index, "id"]}  style={{ display: "none" }}>
+                                        <Input/>
                                     </Form.Item>
                                 )}
-                                <Form.Item style={{ margin: '0 8px 0 0' }}>
+                                <Form.Item style={{ margin: '0 8px 0 0', width: 76 }}>
                                     <Input placeholder={levelTag} disabled/>
                                 </Form.Item>
+
                                 <Form.Item name={["firstLoan", index, "providerRank"]} style={{ margin: '0 8px 0 0' }}
                                            rules={[{
                                                required: true,
@@ -78,11 +88,16 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                                 >
                                     <Input placeholder={"值"}/>
                                 </Form.Item>
+
                                 <Form.Item name={["firstLoan", index, "balance"]} style={{ margin: '0 8px 0 0' }}
-                                           rules={[{
-                                               required: true,
-                                               message: "请输入可借额度"
-                                           }]}
+                                           rules={[
+                                               {
+                                                   validator: async (_, value) =>NumberValidator(_, value)({
+                                                       required: true,
+                                                       requiredErrorMessage: "请输入可借额度",
+                                                   })
+                                               },
+                                           ]}
                                 >
                                     <Input placeholder={"可借额度"}/>
                                 </Form.Item>
@@ -96,15 +111,24 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
                     return (
                         <Form.Item key={index}>
+                            {index === 0 && (
+                                <div>
+                                    <CustomLabel style={{ width: 76}}>風控標籤</CustomLabel>
+                                    <CustomLabel>風控商等級</CustomLabel>
+                                    <CustomLabel>初始借款額度</CustomLabel>
+                                </div>
+                            )}
                             <Input.Group compact>
                                 {props.isEdit && (
-                                    <Form.Item name={["repeatLoan", index, "id"]}>
-                                        <Input style={{ display: "none" }}/>
+                                    <Form.Item name={["repeatLoan", index, "id"]} style={{ display: "none" }}>
+                                        <Input/>
                                     </Form.Item>
                                 )}
-                                <Form.Item style={{ margin: '0 8px 0 0' }}>
+
+                                <Form.Item style={{ margin: '0 8px 0 0', width: 76 }}>
                                     <Input placeholder={levelTag} disabled/>
                                 </Form.Item>
+
                                 <Form.Item name={["repeatLoan", index, "providerRank"]} style={{ margin: '0 8px 0 0' }}
                                            rules={[{
                                                required: true,
@@ -113,14 +137,20 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                                 >
                                     <Input placeholder={"值"}/>
                                 </Form.Item>
+
                                 <Form.Item name={["repeatLoan", index, "balance"]} style={{ margin: '0 8px 0 0' }}
-                                           rules={[{
-                                               required: true,
-                                               message: "请输入可借额度"
-                                           }]}
+                                           rules={[
+                                               {
+                                                   validator: async (_, value) =>NumberValidator(_, value)({
+                                                       required: true,
+                                                       requiredErrorMessage: "请输入可借额度",
+                                                   })
+                                               },
+                                           ]}
                                 >
                                     <Input placeholder={"可借额度"}/>
                                 </Form.Item>
+
                             </Input.Group>
                         </Form.Item>
                     )
@@ -135,7 +165,7 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
             </Form.Item>
 
             <Form.Item label={"状态"} name={"enabled"} valuePropName={"checked"}>
-                <Switch checkedChildren={"启用"} unCheckedChildren={"关闭"}></Switch>
+                <Switch checkedChildren={"启用"} unCheckedChildren={"停用"}></Switch>
             </Form.Item>
 
             <Form.Item label={"备注"} name="remark">
