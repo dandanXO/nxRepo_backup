@@ -53,6 +53,8 @@ const applyColumns = [
         }
     },
     { title: <FormattedMessage id="windowPage.order.no"/>, dataIndex: 'orderNo', key: 'orderNo' },
+    { title: <FormattedMessage id="page.search.list.product.name"/> , dataIndex: 'productName', key: 'productName' },
+    { title: <FormattedMessage id="page.table.appName"/> , dataIndex: 'appName', key: 'appName' },
     { title: <FormattedMessage id="page.table.application.amount"/>, dataIndex: 'deviceMoney', key: 'deviceMoney' },
     { title: <FormattedMessage id="windowPage.appication.period"/>, dataIndex: 'lendDays', key: 'lendDays' },
     {
