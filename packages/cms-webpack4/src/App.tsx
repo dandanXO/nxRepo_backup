@@ -3,6 +3,7 @@ import {Provider} from "react-redux";
 import { ConfigProvider } from 'antd';
 require('antd/dist/antd.less');
 import {HashRouter as Router, Route, Switch, useHistory} from "react-router-dom";
+import {createHashHistory} from "history";
 
 import {appStore} from "./store";
 import "./styles/app.less";
@@ -12,6 +13,18 @@ import MerchantPage from "./pages/MerchantPage";
 import UserPage from "./pages/UserPage";
 import UserInfoPage from "./pages/UserInfoPage";
 import RiskSettingPage from "./modules/risk/pages/RiskSettingPage";
+
+const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
+
+const history = createHashHistory({
+    basename: Basename,
+})
+
+// Listen for changes to the current location.
+const unlisten = history.listen((location, action) => {
+    // location is an object like window.location
+    console.log(action, location.pathname, location.state)
+})
 
 function App() {
     useEffect(() => {
@@ -26,7 +39,7 @@ function App() {
                 {/* NOTICE: [Its instance type 'BrowserRouter' is not a valid JSX element](https://stackoverflow.com/questions/71843747/its-instance-type-browserrouter-is-not-a-valid-jsx-element)*/}
                 {/*<Router basename={window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/'}>*/}
                 {/*// @ts-ignore*/}
-                <Router basename={window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/'}>
+                <Router basename={Basename} history={history}>
                     {/*// @ts-ignore*/}
                     <Switch>
                         {/*// @ts-ignore*/}
