@@ -20,13 +20,21 @@ const history = createHashHistory({
     basename: Basename,
 })
 
-// Listen for changes to the current location.
-const unlisten = history.listen((location, action) => {
-    // location is an object like window.location
-    console.log(action, location.pathname, location.state)
-})
+
 
 function App() {
+    useEffect(() => {
+        // Listen for changes to the current location.
+        const unlisten = history.listen((location, action) => {
+            // location is an object like window.location
+            // const state = appStore.getState();
+            // appStore.dispatch({});
+            console.log(action, location.pathname, location.state)
+        })
+        return () => {
+            unlisten();
+        }
+    })
     useEffect(() => {
         // Listen for the event.
         window.addEventListener('main-app-hashchange', (e) => {
