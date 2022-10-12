@@ -65,9 +65,9 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                         <Form.Item key={index}>
                             {index === 0 && (
                                 <div>
-                                    <CustomLabel style={{ width: 76}}>風控標籤</CustomLabel>
-                                    <CustomLabel>風控商等級</CustomLabel>
-                                    <CustomLabel>初始借款額度</CustomLabel>
+                                    <CustomLabel style={{ width: 76}}>风控标签</CustomLabel>
+                                    <CustomLabel>风控商等级</CustomLabel>
+                                    <CustomLabel>初始借款额度</CustomLabel>
                                 </div>
                             )}
                             <Input.Group compact>
@@ -113,9 +113,9 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                         <Form.Item key={index}>
                             {index === 0 && (
                                 <div>
-                                    <CustomLabel style={{ width: 76}}>風控標籤</CustomLabel>
-                                    <CustomLabel>風控商等級</CustomLabel>
-                                    <CustomLabel>初始借款額度</CustomLabel>
+                                    <CustomLabel style={{ width: 76}}>风控标签</CustomLabel>
+                                    <CustomLabel>风控商等级</CustomLabel>
+                                    <CustomLabel>初始借款额度</CustomLabel>
                                 </div>
                             )}
                             <Input.Group compact>
