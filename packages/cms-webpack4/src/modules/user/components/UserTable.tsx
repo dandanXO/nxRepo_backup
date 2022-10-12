@@ -46,11 +46,12 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
 
 
 
-    const channelListValueEnum = channelList?.reduce((prev, curr) => {
+    const channelListValueEnum = channelList && channelList?.reduce((prev, curr) => {
         return { ...prev, ...{ [curr.channelId]: { text: curr.name } } }
     }, { '0': { text: '不限' } })
 
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
+    const [isImportTelSale, setIsImportTelSale] = useState(false);
 
     const columns: ProColumns<UserListContent>[] = [
         {
@@ -100,14 +101,15 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         {
             title: '结清未复借',
             dataIndex: 'noLoanAgain',
-            initialValue: isNoLoanAgain,
             colSize: 6,
             hideInTable: true,
-            renderFormItem: (text) => {
-                return <Radio.Group value={isNoLoanAgain} onChange={({ target: { value } }) => setIsNoLoanAgain(value)} >
-                    <Radio.Button value={true}>是</Radio.Button>
-                    <Radio.Button value={false}>否</Radio.Button>
-                </Radio.Group>
+            renderFormItem: (text, { }, form) => {
+                return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain: isNoLoanAgain }} >
+                    <Radio.Group value={isNoLoanAgain} onChange={({ target: { value } }) => setIsNoLoanAgain(value)} >
+                        <Radio.Button value={true}>是</Radio.Button>
+                        <Radio.Button value={false}>否</Radio.Button>
+                    </Radio.Group>
+                </Form>
             }
         },
         {
@@ -145,7 +147,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         //     channelId:searchList.channelId,
         //     hasOrder:searchList.hasOrder,
         //     nameTrue:searchList.nameTrue,
-        //     noLoanAgain:isNoLoanAgain,
+        //     noLoanAgain:searchList.noLoanAgain,
         //     noLoanAgainEndDays:searchList.noLoanAgainEndDays,
         //     noLoanAgainStartDays:searchList.noLoanAgainStartDays,
         //     phoneNo:searchList.phoneNo,
@@ -177,7 +179,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             dataSource={userList?.content || []}
             loading={isFetching}
             rowKey="id"
-            headerTitle={<Button key="button" disabled={!isNoLoanAgain} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
+            headerTitle={<Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
             search={{
                 collapsed: false,
                 labelWidth: 'auto',
@@ -188,19 +190,23 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                         <Button onClick={() => {
                             form.resetFields();
                             setSearchList(initSearchList);
+                            setIsImportTelSale(false);
+                            setIsNoLoanAgain(false)
                         }}>{resetText}</Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { addTimeRange, appName, channelId, idcardNo, nameTrue, newMember, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank } = form.getFieldValue();
+                                const { addTimeRange, appName, channelId, idcardNo, nameTrue, newMember,noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank } = form.getFieldValue();
                                 // @ts-ignore
 
                                 console.log('getFieldValue', form.getFieldValue());
-                                if (isNoLoanAgain && noLoanAgainStartDays > noLoanAgainEndDays) {
+                                if (noLoanAgain && noLoanAgainStartDays > noLoanAgainEndDays) {
                                     modal.warning({content:'結清未複借終止天數，需大於結清未複借起始天數'});
                                     return;
                                 }
+
+                                setIsImportTelSale(noLoanAgain === "true" ? true : false)
 
                                 setSearchList({
                                     ...searchList,
@@ -211,7 +217,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                                     idcardNo: idcardNo,
                                     nameTrue: nameTrue,
                                     newMember: newMember,
-                                    noLoanAgain: isNoLoanAgain,
+                                    noLoanAgain: noLoanAgain,
                                     noLoanAgainEndDays: noLoanAgainEndDays,
                                     noLoanAgainStartDays: noLoanAgainStartDays,
                                     phoneNo: phoneNo,
@@ -235,7 +241,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                 defaultPageSize: 10,
                 onChange: pageOnChange,
                 total: userList.totalElements,
-                current: userList.content.length === 0 ? 0 : userList.number + 1,
+                current: userList?.content?.length === 0 ? 0 : userList.number + 1,
             }}
         />
 
