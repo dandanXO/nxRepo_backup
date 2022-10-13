@@ -16,6 +16,7 @@ interface RateSettingSectionProps {
   customAntFormFieldError: CustomAntFormFieldError
 }
 const RateSettingSection = (props: RateSettingSectionProps) => {
+    console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
     <React.Fragment>
       <Divider orientation="left">费率设定</Divider>
@@ -29,8 +30,8 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
 
       <Form.Item label="前置利息" required>
         <Form.Item name="preInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
-                   validateStatus={props?.customAntFormFieldError?.preInterestRate.validateStatus}
-                   help={props?.customAntFormFieldError?.preInterestRate.help}
+                   validateStatus={(props?.customAntFormFieldError?.preInterestRate as any).validateStatus}
+                   help={(props?.customAntFormFieldError?.preInterestRate as any).help}
         >
           <Input allowClear placeholder="填写 0 - 100 间数字"/>
         </Form.Item>
@@ -39,8 +40,8 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
 
       <Form.Item label="后置利息" required>
         <Form.Item name="postInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
-                   validateStatus={props?.customAntFormFieldError?.postInterestRate.validateStatus}
-                   help={props?.customAntFormFieldError?.postInterestRate.help}
+                   validateStatus={(props?.customAntFormFieldError?.postInterestRate as any).validateStatus}
+                   help={(props?.customAntFormFieldError?.postInterestRate as any).help}
         >
           <Input allowClear placeholder="填写 0 - 100 间数字"/>
         </Form.Item>
@@ -123,7 +124,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
           {(fields, { add, remove }) => {
             return (
               <>
-                {fields.map(({ key, name, ...restField }) => (
+                {fields.map(({ key, name, ...restField }, index) => (
                   <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
                     <Form.Item
                       {...restField}
@@ -143,36 +144,16 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                     <Form.Item
                       {...restField}
                       name={[name, 'preInterest']}
-                      required
-                      rules={[
-                        {
-                          transform: (value) => Number(value),
-                          validator: async (_, value) =>NumberValidator(_, value)({
-                            min: 0,
-                            minMessage: "请输入前置利息",
-                            max: 100,
-                            maxMessage: "请填写0-100间数字"
-                          })
-                        },
-                      ]}
+                      validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.validateStatus || ""}
+                      help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.help || ""}
                     >
                       <Input placeholder="前置利息" suffix={"%"}/>
                     </Form.Item>
                     <Form.Item
                       {...restField}
                       name={[name, 'postInterest']}
-                      required
-                      rules={[
-                        {
-                          transform: (value) => Number(value),
-                          validator: async (_, value) =>NumberValidator(_, value)({
-                            min: 0,
-                            minMessage: "请输入后置利息",
-                            max: 100,
-                            maxMessage: "请填写0-100间数字"
-                          })
-                        },
-                      ]}
+                      validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.validateStatus || ""}
+                      help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.help || ""}
                     >
                       <Input placeholder="后置利息" suffix={"%"}/>
                     </Form.Item>
