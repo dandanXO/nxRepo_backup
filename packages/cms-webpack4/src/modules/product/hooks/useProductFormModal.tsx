@@ -11,14 +11,17 @@ import {PostProductCreateRequestBody} from "../api/types/postProductCreate";
 import {ValidateStatus} from "antd/es/form/FormItem";
 import moment from "moment/moment";
 
-
-export interface CustomAntFormFieldError {
-  [field: string]: {
-    validateStatus?: ValidateStatus;
-    help: string;
-  }
+export type CustomAntFormFieldError = {
+    [field: string]: {
+        validateStatus?: ValidateStatus;
+        help: string;
+        value?: string;
+    } | {
+        validateStatus?: ValidateStatus;
+        help: string;
+        value?: string;
+    }[]
 }
-
 export interface ProductFormModal {
   show: boolean;
   isEdit?: boolean
@@ -72,19 +75,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
   const [putProduct, {isSuccess: isPutProductSuccess}] = usePutProductEditMutation();
 
   useEffect(() => {
-    if(triggerFetchTableList) {
-      // console.log("[debug] 3", triggerFetchTableList)
-    }
-  }, [triggerFetchTableList]);
-
-
-  useEffect(() => {
-    // console.log("productModalData.show", productModalData.show);
-    form.resetFields();
-
-  }, [productModalData.show])
-
-  useEffect(() => {
     if(!productModalData.productId) {
       return;
     }
@@ -92,18 +82,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
       productId: productModalData.productId,
     })
   }, [productModalData.productId])
-
-
-  // useEffect(() => {
-  //   console.log("isFetching");
-  //   form.resetFields();
-  // }, [isFetching])
-
-  useEffect(() => {
-    // console.log("isFetching");
-    form.resetFields();
-  }, [props.show])
-    // const [logoUploadFileList, setLogoUploadFileList] = useState<FormUploadFileList>()
 
   useEffect(() => {
     if(isFetching) return;

@@ -7,7 +7,6 @@ import ProductSettingSection from "./ProductSettingSection";
 import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import { UploadSettingSection } from "./UploadSettingSection";
-import { conversionSubmitValue } from "@ant-design/pro-components";
 
 interface ProductFormProps {
     productModalData: ProductFormModal;
@@ -45,59 +44,338 @@ const Index = (props: ProductFormProps) => {
         return Number(rate) > 100 || Number(rate) < 0 || rate === '' || isNaN(Number(rate));
     }
 
+    const getChangedField = (allFields: any[],fieldName: string) => {
+        const field = allFields.filter(field => field.name.toString() === fieldName)[0];
+        return field;
+    }
+
     return (
         <Form
             // ref={props.formRef}
             {...layout} form={form} name="control-hooks" onFinish={onFinish}
             onFieldsChange={(changedFields, allFields) => {
-                // console.log("changedFields", changedFields)
-                // console.log("allFields", allFields)
-                const preInterestRate = allFields.filter(field => field.name.toString() === "preInterestRate")[0]?.value ?? '';
-                const postInterestRate = allFields.filter(field => field.name.toString() === "postInterestRate")[0]?.value ?? '';
-                let isValidate = true;
-                const onChangeField = changedFields[0]?.name[0];
-                const onChangeFieldValue = allFields.filter(field => field.name.toString() === onChangeField)[0]?.value ?? undefined;
-                const unChangeField = onChangeField === "preInterestRate" ? "postInterestRate" : "preInterestRate";
-                const unChangeFieldValue = allFields.filter(field => field.name.toString() === unChangeField)[0]?.value ?? undefined;
-                const validateOnchangeFieldValue = validateRateValue(onChangeFieldValue);
-                const validateUnchangeFieldValue = validateRateValue(unChangeFieldValue);
-                const validatePreInterestRateValue = validateRateValue(preInterestRate);
-                const validatePostInterestRateValue = validateRateValue(postInterestRate);
 
-                const isFieldChange = changedFields[0].touched;
+                console.log("changedFields", changedFields);
+                console.log("allFields", allFields);
 
-                if (!isFieldChange && !isOnChange && (onChangeField !== "preInterestRate" || onChangeField !== "postInterestRate")) {
-                    isOnChange = true;
-                    console.log("changedFields", changedFields)
-                    if (preInterestRate === '' || postInterestRate === '') {
-                        setCustomAntFormFieldError(prev => ({
-                            ...customAntFormFieldError,
-                            ...prev,
-                            preInterestRate: validatePreInterestRateValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
-                            postInterestRate: validatePostInterestRateValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
-                        }))
-                        isValidate = false;
+                function empty(str) {
+                    return str === ""
+                }
+                function equalRangeBelow100(str: string, min:number = 0, max: number = 100) {
+                    return Number(str) < min || Number(str) > max
+                }
+                // NOTICE: preInterestRate
+                let map = {
+
+                }
+                let inValidPreInterestRateUnit = false;
+
+
+                const preInterestRateField = allFields.filter(field => field.name && field.name[0] ==="preInterestRate")
+
+                if(preInterestRateField[0].touched && preInterestRateField[0].name && preInterestRateField[0].name[0] === "preInterestRate") {
+                    if(empty(preInterestRateField[0].value)) {
+                        inValidPreInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            preInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入前置利息",
+                                value: preInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidPreInterestRateUnit && isNaN(preInterestRateField[0].value)) {
+                        inValidPreInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            preInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入數字",
+                                value: preInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidPreInterestRateUnit && equalRangeBelow100(preInterestRateField[0].value)) {
+                        inValidPreInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            preInterestRate: {
+                                validateStatus: "error",
+                                help: "请填写0-100间数字",
+                                value: preInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidPreInterestRateUnit) {
+                        console.log("!")
+                        map = {
+                            ...map,
+                            preInterestRate: {
+                                validateStatus: "",
+                                help: "",
+                                value: preInterestRateField[0].value,
+                            },
+                        }
                     }
                 }
-                if (validateOnchangeFieldValue) { isValidate = false; }
+
+                // console.log("preInterestRate.map", JSON.parse(JSON.stringify(map)));
+
+                const postInterestRateField = allFields.filter(field => field.name && field.name[0] ==="postInterestRate")
+
+                // NOTICE:  inValidPostInterestUnit
+                let inValidPostInterestRateUnit = false;
+                if(postInterestRateField[0].touched && postInterestRateField[0].name && postInterestRateField[0].name[0] === "postInterestRate") {
+                    if(empty(postInterestRateField[0].value)) {
+                        inValidPostInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            postInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入後置利息",
+                                value: postInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidPostInterestRateUnit && isNaN(postInterestRateField[0].value)) {
+                        inValidPostInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            postInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入數字",
+                                value: postInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidPostInterestRateUnit && equalRangeBelow100(postInterestRateField[0].value)) {
+                        inValidPostInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            postInterestRate: {
+                                validateStatus: "error",
+                                help: "请填写0-100间数字",
+                                value: postInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidPostInterestRateUnit) {
+                        map = {
+                            ...map,
+                            postInterestRate: {
+                                validateStatus: "",
+                                help: "",
+                                value: postInterestRateField[0].value,
+                            },
+                        }
+                    }
+                }
+                // console.log("postInterestRate.map", JSON.parse(JSON.stringify(map)));
+
+                if(!inValidPreInterestRateUnit && !inValidPostInterestRateUnit) {
+                    if(Number(getChangedField(allFields, "preInterestRate").value) +
+                        Number(getChangedField(allFields, "postInterestRate").value) > 100) {
+                        map = {
+                            ...map,
+                            preInterestRate: {
+                                validateStatus: "error",
+                                help: "前置利息＋后置利息不得超过100%"
+                            },
+                            postInterestRate: {
+                                validateStatus: "error",
+                                help: "前置利息＋后置利息不得超过100%"
+                            },
+                        }
+                    } else {
+                        map = {
+                            ...map,
+                            preInterestRate: {
+                                validateStatus: "",
+                                help: ""
+                            },
+                            postInterestRate: {
+                                validateStatus: "",
+                                help: ""
+                            },
+                        }
+                    }
+                }
+                // console.log("map", map);
+
+
+
+
+                let productInterestRatePairsValidationMap = {}
+                // NOTICE: productInterestRatePairs
+                if(changedFields[0].name && changedFields[0].name[0] === "productInterestRatePairs") {
+
+                    const productInterestRatePairs = allFields.filter(field => field.name && (field.name as any).length === 3 && field.name[0] ==="productInterestRatePairs")
+                    // console.log("productInterestRatePairs", productInterestRatePairs);
+
+
+                    let recordIndex
+                    productInterestRatePairs.map((row, index) => {
+                        recordIndex = row.name[1] !== recordIndex ? recordIndex = row.name[1] : recordIndex;
+                        // console.log("recordIndex", recordIndex);
+
+                        let inValidPreInterest = false;
+                        let inValidPostInterest = false;
+
+                        if(row.name[1] === recordIndex && row.touched && (row.name[2] as any).indexOf("preInterest") > -1 && empty(row.value)) {
+                            inValidPreInterest = true;
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                preInterest: {
+                                    validateStatus: "error",
+                                    help: "请输入前置利息",
+                                    value: row.value,
+                                },
+                            }
+                        }
+                        if(row.name[1] === recordIndex && row.touched && (row.name[2] as any).indexOf("postInterest") > -1 && empty(row.value)) {
+                            inValidPostInterest = true;
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                postInterest: {
+                                    validateStatus: "error",
+                                    help: "请输入後置利息",
+                                    value: row.value,
+                                },
+                            }
+                        }
+
+                        if(row.name[1] === recordIndex && row.touched && !inValidPreInterest && (row.name[2] as any).indexOf("preInterest") > -1 && isNaN(row.value)) {
+                            inValidPreInterest = true;
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                preInterest: {
+                                    validateStatus: "error",
+                                    help: "请输入數字",
+                                    value: row.value,
+                                },
+                            }
+                        }
+                        if(row.name[1] === recordIndex && row.touched && !inValidPostInterest && (row.name[2] as any).indexOf("postInterest") > -1 && isNaN(row.value)) {
+                            inValidPostInterest = true;
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                postInterest: {
+                                    validateStatus: "error",
+                                    help: "请输入數字",
+                                    value: row.value,
+                                },
+                            }
+                        }
+
+
+                        if(row.name[1] === recordIndex && row.touched && !inValidPreInterest && (row.name[2] as any).indexOf("preInterest") > -1 && equalRangeBelow100(row.value)) {
+                            inValidPreInterest = true;
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                preInterest: {
+                                    validateStatus: "error",
+                                    help: "请填写0-100间数字",
+                                    value: row.value,
+                                },
+                            }
+                        }
+                        if(row.name[1] === recordIndex && row.touched && !inValidPostInterest && (row.name[2] as any).indexOf("postInterest") > -1 && equalRangeBelow100(row.value)) {
+                            inValidPostInterest = true;
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                postInterest: {
+                                    validateStatus: "error",
+                                    help: "请填写0-100间数字",
+                                    value: row.value,
+                                },
+                            }
+                        }
+                        if(row.name[1] === recordIndex && row.touched && !inValidPreInterest && (row.name[2] as any).indexOf("preInterest") > -1 ) {
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                preInterest: {
+                                    validateStatus: "",
+                                    help: "",
+                                    value: row.value,
+                                },
+                            }
+                        }
+                        if(row.name[1] === recordIndex && row.touched && !inValidPostInterest && (row.name[2] as any).indexOf("postInterest") > -1 ) {
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                postInterest: {
+                                    validateStatus: "",
+                                    help: "",
+                                    value: row.value,
+                                },
+                            }
+                        }
+                    })
+
+                    Object.keys(productInterestRatePairsValidationMap).map(recordIndexKey => {
+                        if(
+                            productInterestRatePairsValidationMap[recordIndexKey].preInterest.validateStatus !== "error"  &&
+                            productInterestRatePairsValidationMap[recordIndexKey].postInterest.validateStatus !== "error"
+                        ) {
+                            if(
+                                Number(productInterestRatePairsValidationMap[recordIndexKey].preInterest.value) +
+                                Number(productInterestRatePairsValidationMap[recordIndexKey].postInterest.value) > 100
+                            ) {
+                                productInterestRatePairsValidationMap[recordIndexKey] = {
+                                    preInterest: {
+                                        validateStatus: "error",
+                                        help: "前置利息＋后置利息不得超过100%"
+                                    },
+                                    postInterest: {
+                                        validateStatus: "error",
+                                        help: "前置利息＋后置利息不得超过100%"
+                                    },
+                                }
+                            } else {
+                                productInterestRatePairsValidationMap[recordIndexKey] = {
+                                    preInterest: {
+                                        validateStatus: "",
+                                        help: ""
+                                    },
+                                    postInterest: {
+                                        validateStatus: "",
+                                        help: ""
+                                    },
+                                }
+                            }
+                        }
+
+                    })
+
+
+
+                }
+
+
+
                 setCustomAntFormFieldError(prev => {
-                    const isError = prev[unChangeField].help;
+                    const finalMap = {}
+                    if(prev.productInterestRatePairs) {
+                        Object.keys(prev.productInterestRatePairs).map((key, index) => {
+                            console.log("key", key);
+                            finalMap[key] = prev.productInterestRatePairs[key];
+                        })
+                    }
+                    if(productInterestRatePairsValidationMap) {
+                        Object.keys(productInterestRatePairsValidationMap).map((key, index) => {
+                            finalMap[key] = {
+                                ...finalMap[key],
+                                ...productInterestRatePairsValidationMap[key]
+                            };
+                        })
+                    }
                     return {
-                        ...customAntFormFieldError,
                         ...prev,
-                        [onChangeField]: validateOnchangeFieldValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
-                        [unChangeField]: isError === '' ? { validateStatus: "", help: "" } : validateUnchangeFieldValue ? { validateStatus: "error", help: "请填写0-100间数字" } : { validateStatus: "", help: "" },
+                        ...map,
+                        productInterestRatePairs: finalMap as any,
                     }
                 })
-
-                if (isValidate && Number(preInterestRate) + Number(postInterestRate) > 100) {
-                    setCustomAntFormFieldError(prev => ({
-                        ...customAntFormFieldError,
-                        ...prev,
-                        preInterestRate: { validateStatus: "error", help: "前置利息＋后置利息不得超过100%" },
-                        postInterestRate: { validateStatus: "error", help: "前置利息＋后置利息不得超过100%" }
-                    }))
-                }
 
 
 
@@ -113,6 +391,7 @@ const Index = (props: ProductFormProps) => {
                     num: "",
                     postInterest: "",
                     preInterest: "",
+                    plusAmount: "",
                 }]
             }}
         >
