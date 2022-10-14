@@ -66,8 +66,8 @@ class BusinessLastCheck extends Component {
                 key: "serviceMoney",
                 width: 110,
                 render(text, record) {
-                    const { deviceMoney, lendMoney } = record;
-                    const res = Number(deviceMoney - lendMoney);
+                    const { postInterestFee, preInterestFee } = record;
+                    const res = Number(postInterestFee+preInterestFee);
                     return <CopyText text={convertMoneyFormat(res)} />;
                 }
             },
