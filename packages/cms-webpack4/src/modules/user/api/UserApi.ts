@@ -1,6 +1,5 @@
 import { API } from "../../../api";
 import { GetUerListProps, GetUserListRequestQuerystring } from "./types/getUserList";
-import { GetChannelListResponse } from "./types/getChannelList";
 import { PostBlackListRequestBody } from "./types/postBlackList";
 import { UserId } from "../../../types/UserId";
 import { PostTelSaleRequestQuerystring } from './types/postTelSale';
@@ -12,14 +11,6 @@ const UserApi = API.injectEndpoints({
             query: (requestBody: GetUserListRequestQuerystring) => ({
                 url: `/user-manage/user-list`,
                 params: requestBody,
-                method: "get",
-            }),
-        }),
-        // NOTE: GET /hs/admin/channel/drop-menu 渠道列表下拉選單
-        getChannelList: builder.query<GetChannelListResponse, null>({
-            query: () => ({
-                url: `/channel/drop-menu`,
-                params: {},
                 method: "get",
             }),
         }),
@@ -59,7 +50,6 @@ const UserApi = API.injectEndpoints({
 })
 export const {
     useLazyGetUserManageListQuery,
-    useGetChannelListQuery,
     usePostBlackListAddMutation,
     useDeleteUserMutation,
     usePostUserBanMutation,

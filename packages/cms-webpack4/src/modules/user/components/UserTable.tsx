@@ -2,22 +2,21 @@ import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
-
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../api/types/getUserList";
-import { useLazyGetUserManageListQuery, useGetChannelListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../api/UserApi';
+import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../api/UserApi';
 import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
-
+import useValuesEnums from '../../shared/hooks/useValuesEnums';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
 }
 
 const UserTable = ({ setShowModal }: UserTableProps) => {
    
+    const { channelListEnum, riskRankEnum } = useValuesEnums();
     // api
-    const { currentData: channelList } = useGetChannelListQuery(null);
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -62,10 +61,6 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         }
     }, [currentData])
 
-    const channelListValueEnum = channelList && channelList.reduce((prev, curr) => {
-        return { ...prev, ...{ [curr.channelId]: { text: curr.name } } }
-    }, { '0': { text: '不限' } })
-
     const handleToUserDetail=(userId)=>{
         dispatch(setPathname({pathname:'/user-info',previousPathname:'/user'}));
         dispatch(setSearchParams(searchList));
@@ -108,17 +103,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         { title: '性别', dataIndex: 'gender', key: 'gender', hideInSearch: true },
         { title: '年龄', dataIndex: 'age', key: 'age', hideInSearch: true },
         { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: searchParams.idcardNo || "" },
-        {
-            title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank',initialValue: searchParams.riskRank || "" ,
-            valueEnum: {
-                '': { text: '不限', color: '' },
-                'EXCELLENT': { text: '极好', color: 'green' },
-                'NORMAL': { text: '正常', color: 'blue' },
-                'ORDINARY': { text: '普通', color: 'gold' },
-                'REJECT': { text: '拒绝', color: 'lightGray' },
-                'GOOD': { text: '良好', color: 'orange' },
-            },
-        },
+        { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
         {
             title: '是否新客', dataIndex: 'newMember', valueType: 'select', key: 'newMember', initialValue: searchParams.newMember || "" ,
             valueEnum: {
@@ -140,7 +125,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             },
         },
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
-        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListValueEnum, initialValue:searchParams.channelId || '0'},
+        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListEnum, initialValue:searchParams.channelId || '0'},
         {
             title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true,
             render: (text) => moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
