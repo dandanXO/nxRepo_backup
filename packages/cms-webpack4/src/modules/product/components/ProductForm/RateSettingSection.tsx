@@ -85,7 +85,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                      },
                    ]}
         >
-          <Input allowClear placeholder="填寫 0 - 100 間數字"/>
+          <Input allowClear placeholder="填寫 0 - 100 间數字"/>
         </Form.Item>
         <Form.Item style={{display: 'inline-block', marginBottom: 0}}>%</Form.Item>
       </Form.Item>
