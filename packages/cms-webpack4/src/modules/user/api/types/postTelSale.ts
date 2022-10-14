@@ -11,9 +11,6 @@ export interface PostTelSaleRequestQuerystring {
     // 渠道名稱
     channelId?: string;
 
-    // 是否提單
-    hasOrder?: string;
-
     // 姓名
     nameTrue?: string;
 
@@ -32,13 +29,7 @@ export interface PostTelSaleRequestQuerystring {
     // 用户风控等级
     riskRank?: ""|"REJECT" | "ORDINARY" | "NORMAL" | "GOOD" | "EXCELLENT";
 
-    // 是否實名
-    rnStatus?: string;
-
     // 狀態
-    status?: string;
-
-    // 用戶審核狀態
-    userStatus?: number;
+    status?: number | string;
 
 }

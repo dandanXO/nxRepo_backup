@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, InputNumber, Modal, Radio, Space, message } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
 
-import { GetUerListProps, UserListContent, GetUserListResponse, GetUserListRequestQuerystring, GetUerProps } from "../api/types/getUserList";
-import { useLazyGetUserManageListQuery, useGetChannelListQuery, useDeleteUserMutation, usePostUserBanMutation ,usePostTelSaleMutation} from '../api/UserApi';
+import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../api/types/getUserList";
+import { useLazyGetUserManageListQuery, useGetChannelListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../api/UserApi';
 import moment from 'moment';
+import { setSearchParams, setPathname, selectSearchParams } from '../../shared/utils/searchParamsSlice';
+import { useDispatch, useSelector } from "react-redux"
+import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
 }
 
 const UserTable = ({ setShowModal }: UserTableProps) => {
-
+   
+    // api
     const { currentData: channelList } = useGetChannelListQuery(null);
-
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -24,15 +27,30 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const [banUser] = usePostUserBanMutation();
     const [importTelSale] = usePostTelSaleMutation();
 
-    const [userList, setUserList] = useState<GetUerListProps>({ content: [] });
-
     const initSearchList: GetUserListRequestQuerystring = {
-        addEndTime: "", addStartTime: "", appName:"", channelId: "", hasOrder: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
-        noLoanAgainEndDays: 10, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", rnStatus: "", status: "", userStatus: 0,
-        pageNum: 1, pageSize: 10
+        addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
+        noLoanAgainEndDays: 10, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", status: "", pageNum: 1, pageSize: 10
     }
-    const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList)
+
+    // state
+    const [userList, setUserList] = useState<GetUerListProps>({ content: [] });
+    const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
+    const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
+    const [isImportTelSale, setIsImportTelSale] = useState(false);
     const [modal, contextHolder] = Modal.useModal();
+
+
+    // redux
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const { searchParams } = useSelector(selectSearchParams);
+
+
+    useEffect(() => {
+        if (Object.keys(searchParams).length > 0) {
+            setSearchList(searchParams);
+        }
+    }, [])
 
     useEffect(() => {
         triggerGetList(searchList);
@@ -44,33 +62,54 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         }
     }, [currentData])
 
-
-
-    const channelListValueEnum = channelList && channelList?.reduce((prev, curr) => {
+    const channelListValueEnum = channelList && channelList.reduce((prev, curr) => {
         return { ...prev, ...{ [curr.channelId]: { text: curr.name } } }
     }, { '0': { text: '不限' } })
 
-    const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
-    const [isImportTelSale, setIsImportTelSale] = useState(false);
+    const handleToUserDetail=(userId)=>{
+        dispatch(setPathname({pathname:'/user-info',previousPathname:'/user'}));
+        dispatch(setSearchParams(searchList));
+        history.push(`user-info/${userId}`);
+    }
 
+    const pageOnChange = (current, pageSize) => {
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
+    }
+
+    const handleImportTelSale=()=>{
+        importTelSale({
+            addEndTime:searchList.addEndTime,
+            addStartTime:searchList.addStartTime,
+            appName:searchList.addStartTime,
+            channelId:searchList.channelId,
+            nameTrue:searchList.nameTrue,
+            noLoanAgain:searchList.noLoanAgain,
+            noLoanAgainEndDays:searchList.noLoanAgainEndDays,
+            noLoanAgainStartDays:searchList.noLoanAgainStartDays,
+            phoneNo:searchList.phoneNo,
+            riskRank:searchList.riskRank,
+            status:searchList.status,
+        })
+    }
+   
     const columns: ProColumns<UserListContent>[] = [
         {
             title: '操作',
             valueType: 'option',
             key: 'option',
             render: (text, record, _, action) => record.isBlack ?
-                [<a key="editable" href={`#/user-info/${record.id}`}>查看</a>, <a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>] :
-                [<a key="editable" href={`#/user-info/${record.id}`} onClick={()=>console.log('查看')}>查看</a>,
+                [<a key="editable" onClick={()=>handleToUserDetail(record.id)} >查看</a>, <a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>] :
+                [<a key="editable" type="link" onClick={()=>handleToUserDetail(record.id)} >查看</a>,
                 <a key="clear" onClick={() => deleteUser({ userId: Number(record.id) })}>清除</a>,
                 <a key="forbidden" onClick={() => banUser({ userId: Number(record.id) })}>禁止</a>]
         },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: '' },
-        { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: '' },
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || ""},
+        { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: searchParams.nameTrue || ""  },
         { title: '性别', dataIndex: 'gender', key: 'gender', hideInSearch: true },
         { title: '年龄', dataIndex: 'age', key: 'age', hideInSearch: true },
-        { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: '' },
+        { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: searchParams.idcardNo || "" },
         {
-            title: '风控标签', dataIndex: 'riskRank', valueType: 'select', initialValue: '', key: 'riskRank',
+            title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank',initialValue: searchParams.riskRank || "" ,
             valueEnum: {
                 '': { text: '不限', color: '' },
                 'EXCELLENT': { text: '极好', color: 'green' },
@@ -81,22 +120,35 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             },
         },
         {
-            title: '是否新客', dataIndex: 'newMember', valueType: 'select', initialValue: '', key: 'newMember',
+            title: '是否新客', dataIndex: 'newMember', valueType: 'select', key: 'newMember', initialValue: searchParams.newMember || "" ,
             valueEnum: {
                 '': { text: '不限' },
                 true: { text: '是' },
                 false: { text: '否' },
             },
         },
-        { title: '注册包名', dataIndex: 'appName', initialValue: '', key: 'appName' },
-        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select', initialValue: '0', key: 'channelId', valueEnum: channelListValueEnum },
+        {
+            title: '用户状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
+            valueEnum: {
+                '': { text: '不限' },
+                '0': { text: '未提交' },
+                '4': { text: '黑名单' },
+                '14': { text: '认证通过' },
+                '18': { text: '终审中' },
+                '19': { text: '审核拒绝' },
+                '20': { text: '审核通过' },
+            },
+        },
+        { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
+        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListValueEnum, initialValue:searchParams.channelId || '0'},
         {
             title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true,
             render: (text) => moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
         },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
-            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ''
+            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
+            initialValue: (searchParams.addStartTime === undefined || searchParams.addStartTime ==="" )? "" : [moment(searchParams.addStartTime), moment(searchParams.addEndTime)]
         },
         {
             title: '结清未复借',
@@ -104,7 +156,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             colSize: 6,
             hideInTable: true,
             renderFormItem: (text, { }, form) => {
-                return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain: isNoLoanAgain }} >
+                return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain:searchParams.noLoanAgain || isNoLoanAgain }} >
                     <Radio.Group value={isNoLoanAgain} onChange={({ target: { value } }) => setIsNoLoanAgain(value)} >
                         <Radio.Button value={true}>是</Radio.Button>
                         <Radio.Button value={false}>否</Radio.Button>
@@ -119,7 +171,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             initialValue: '',
             hideInTable: true,
             renderFormItem: (item, { }, form) => {
-                return <Form form={form} key={'noLoanAgainDays'} initialValues={{ noLoanAgainStartDays: 1, noLoanAgainEndDays: 10 }} >
+                return <Form form={form} key={'noLoanAgainDays'} initialValues={{ noLoanAgainStartDays: searchParams.noLoanAgainStartDays ||1, noLoanAgainEndDays:searchParams.noLoanAgainEndDays || 10 }} >
                     <Form.Item style={{ whiteSpace: 'nowrap' }} >
                         <Form.Item name="noLoanAgainStartDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px 0 0' }}>
                             <InputNumber min={1} max={10} placeholder={"天"} disabled={!isNoLoanAgain} />
@@ -135,44 +187,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         },
     ]
 
-    const pageOnChange = (current, pageSize) => {
-        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
-    }
 
-    const handleImportTelSale=()=>{
-        // console.log({
-        //     addEndTime:searchList.addEndTime,
-        //     addStartTime:searchList.addStartTime,
-        //     appName:searchList.addStartTime,
-        //     channelId:searchList.channelId,
-        //     hasOrder:searchList.hasOrder,
-        //     nameTrue:searchList.nameTrue,
-        //     noLoanAgain:searchList.noLoanAgain,
-        //     noLoanAgainEndDays:searchList.noLoanAgainEndDays,
-        //     noLoanAgainStartDays:searchList.noLoanAgainStartDays,
-        //     phoneNo:searchList.phoneNo,
-        //     riskRank:searchList.riskRank,
-        //     rnStatus:searchList.rnStatus,
-        //     status:searchList.status,
-        //     userStatus:searchList.userStatus,
-        // })
-        importTelSale({
-            addEndTime:searchList.addEndTime,
-            addStartTime:searchList.addStartTime,
-            appName:searchList.addStartTime,
-            channelId:searchList.channelId,
-            hasOrder:searchList.hasOrder,
-            nameTrue:searchList.nameTrue,
-            noLoanAgain:isNoLoanAgain,
-            noLoanAgainEndDays:searchList.noLoanAgainEndDays,
-            noLoanAgainStartDays:searchList.noLoanAgainStartDays,
-            phoneNo:searchList.phoneNo,
-            riskRank:searchList.riskRank,
-            rnStatus:searchList.rnStatus,
-            status:searchList.status,
-            userStatus:searchList.userStatus,
-        })
-    }
     return (
         <ProTable<UserListContent>
             columns={columns}
@@ -188,26 +203,27 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                     <Space>
                         {contextHolder}
                         <Button onClick={() => {
-                            form.resetFields();
+                            //  form.resetFields();
+                            // @ts-ignore
+                            form.setFieldsValue({...initSearchList,addTimeRange:''})
                             setSearchList(initSearchList);
                             setIsImportTelSale(false);
-                            setIsNoLoanAgain(false)
+                            setIsNoLoanAgain(false);
+
                         }}>{resetText}</Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { addTimeRange, appName, channelId, idcardNo, nameTrue, newMember,noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank } = form.getFieldValue();
-                                // @ts-ignore
+                                const { addTimeRange, appName, channelId, idcardNo, nameTrue, newMember,noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank,status } = form.getFieldValue();
 
-                                console.log('getFieldValue', form.getFieldValue());
                                 if (noLoanAgain && noLoanAgainStartDays > noLoanAgainEndDays) {
                                     modal.warning({content:'結清未複借終止天數，需大於結清未複借起始天數'});
                                     return;
                                 }
-
+                            
                                 setIsImportTelSale(noLoanAgain === "true" ? true : false)
-
+              
                                 setSearchList({
                                     ...searchList,
                                     addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
@@ -222,6 +238,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                                     noLoanAgainStartDays: noLoanAgainStartDays,
                                     phoneNo: phoneNo,
                                     riskRank: riskRank,
+                                    status:status
                                 })
                                 form.submit();
                             }}
@@ -229,7 +246,6 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                             {searchText}
                         </Button>
                     </Space>
-                
                 ),
             }}
             options={{
