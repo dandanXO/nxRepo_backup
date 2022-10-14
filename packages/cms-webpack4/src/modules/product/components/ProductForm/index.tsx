@@ -109,7 +109,6 @@ const Index = (props: ProductFormProps) => {
                     }
 
                     if(!inValidPreInterestRateUnit) {
-                        console.log("!")
                         map = {
                             ...map,
                             preInterestRate: {

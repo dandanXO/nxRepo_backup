@@ -1,4 +1,4 @@
-import React from "react";
+import React, {CSSProperties} from "react";
 import {Divider, Form, Input, Typography, Row, Col, Space, Button} from "antd";
 
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
@@ -15,6 +15,8 @@ interface RateSettingSectionProps {
   form: any;
   customAntFormFieldError: CustomAntFormFieldError
 }
+export const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>
+
 const RateSettingSection = (props: RateSettingSectionProps) => {
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
@@ -125,60 +127,73 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
             return (
               <>
                 {fields.map(({ key, name, ...restField }, index) => (
-                  <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
-                    <Form.Item
-                      {...restField}
-                      name={[name, 'num']}
-                      rules={[
-                        {
-                          transform: (value) => Number(value),
-                          validator: async (_, value) =>NumberValidator(_, value)({
-                            min: 1,
-                            minMessage: "请输入起始期数",
-                          })
-                        },
-                      ]}
-                    >
-                      <Input placeholder="起始期数" />
-                    </Form.Item>
-                    <Form.Item
-                      {...restField}
-                      name={[name, 'preInterest']}
-                      validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.validateStatus || ""}
-                      help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.help || ""}
-                    >
-                      <Input placeholder="前置利息" suffix={"%"}/>
-                    </Form.Item>
-                    <Form.Item
-                      {...restField}
-                      name={[name, 'postInterest']}
-                      validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.validateStatus || ""}
-                      help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.help || ""}
-                    >
-                      <Input placeholder="后置利息" suffix={"%"}/>
-                    </Form.Item>
+                    <>
+                        {index === 0 && (
+                            <Input.Group compact>
+                                <div>
+                                    <CustomLabel>起始期数</CustomLabel>
+                                    <CustomLabel style={{ width: 135 }}>前置利息</CustomLabel>
+                                    <CustomLabel style={{ width: 135 }}>后置利息</CustomLabel>
+                                    <CustomLabel>提額金额</CustomLabel>
+                                </div>
+                            </Input.Group>
+                        )}
 
-
-                      <Form.Item
+                      <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
+                        <Form.Item
                           {...restField}
-                          name={[name, 'plusAmount']}
-                          required
+                          name={[name, 'num']}
                           rules={[
-                              {
-                                  transform: (value) => Number(value),
-                                  validator: async (_, value) =>NumberValidator(_, value)({
-                                      min: 0,
-                                      minMessage: "请输入提額金额",
-                                  })
-                              },
+                            {
+                              transform: (value) => Number(value),
+                              validator: async (_, value) =>NumberValidator(_, value)({
+                                min: 1,
+                                minMessage: "请输入起始期数",
+                              })
+                            },
                           ]}
-                      >
-                          <Input placeholder="提額金额"/>
-                      </Form.Item>
+                        >
+                          <Input placeholder="起始期数" />
+                        </Form.Item>
+                        <Form.Item
+                          {...restField}
+                          name={[name, 'preInterest']}
+                          validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.validateStatus || ""}
+                          help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.help || ""}
+                        >
+                          <Input placeholder="前置利息" suffix={"%"}/>
+                        </Form.Item>
+                        <Form.Item
+                          {...restField}
+                          name={[name, 'postInterest']}
+                          validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.validateStatus || ""}
+                          help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.help || ""}
+                        >
+                          <Input placeholder="后置利息" suffix={"%"}/>
+                        </Form.Item>
 
 
-                    <MinusCircleOutlined onClick={() => remove(name)} />
-                  </Space>
+                          <Form.Item
+                              {...restField}
+                              name={[name, 'plusAmount']}
+                              required
+                              rules={[
+                                  {
+                                      transform: (value) => Number(value),
+                                      validator: async (_, value) =>NumberValidator(_, value)({
+                                          min: 0,
+                                          minMessage: "请输入提額金额",
+                                      })
+                                  },
+                              ]}
+                          >
+                              <Input placeholder="提額金额"/>
+                          </Form.Item>
+
+
+                        <MinusCircleOutlined onClick={() => remove(name)} />
+                      </Space>
+                    </>
                 ))}
                 <Form.Item>
                   <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
