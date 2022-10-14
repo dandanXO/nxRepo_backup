@@ -62,13 +62,11 @@ class BusinessLastCheck extends Component {
             { title: props.intl.formatMessage({ id: "page.table.loan.period" }), dataIndex: "lendDays", key: "lendDays", width: 110 },
             {
                 title: props.intl.formatMessage({ id: "page.table.handling.fee" }),
-                dataIndex: "serviceMoney",
-                key: "serviceMoney",
+                dataIndex: "serviceCharge",
+                key: "serviceCharge",
                 width: 110,
                 render(text, record) {
-                    const { postInterestFee, preInterestFee } = record;
-                    const res = Number(postInterestFee+preInterestFee);
-                    return <CopyText text={convertMoneyFormat(res)} />;
+                    return <CopyText text={convertMoneyFormat(text)} />;
                 }
             },
             {
