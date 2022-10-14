@@ -1,7 +1,4 @@
-export interface GetChannelListResponse extends Array<channelList> {
-    data: channelList[];
-}
-
+export type GetChannelListResponse =  channelList[]
 export interface channelList {
     // 渠道Id
     channelId?: number;

@@ -41,6 +41,10 @@ const axiosBaseQuery =
             ...headers,
           },
         });
+
+        if(result.data.code === 400) {
+            result.data = undefined
+        }
         return {
           data: result.data,
         };
