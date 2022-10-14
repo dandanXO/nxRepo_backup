@@ -107,6 +107,7 @@ const Index = (props: ProductFormProps) => {
                             },
                         }
                     }
+
                     if(!inValidPreInterestRateUnit) {
                         console.log("!")
                         map = {
@@ -208,10 +209,10 @@ const Index = (props: ProductFormProps) => {
 
                 let productInterestRatePairsValidationMap = {}
                 // NOTICE: productInterestRatePairs
-                if(changedFields[0].name && changedFields[0].name[0] === "productInterestRatePairs") {
+                if(changedFields[0].touched && changedFields[0].name && changedFields[0].name[0] === "productInterestRatePairs") {
 
                     const productInterestRatePairs = allFields.filter(field => field.name && (field.name as any).length === 3 && field.name[0] ==="productInterestRatePairs")
-                    // console.log("productInterestRatePairs", productInterestRatePairs);
+                    console.log("productInterestRatePairs", productInterestRatePairs);
 
 
                     let recordIndex
