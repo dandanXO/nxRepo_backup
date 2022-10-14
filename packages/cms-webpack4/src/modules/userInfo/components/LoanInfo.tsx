@@ -1,13 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import ReactDOM from "react-dom";
-import { ProForm, ProFormText } from '@ant-design/pro-components';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
-import { PageContainer, ProCard, ProTable } from '@ant-design/pro-components';
-import { Button, Dropdown, Menu, Modal, Form, Input, Radio,Spin,Space } from 'antd';
-import {GetUserOrders}from "../api/types/getUserInfo";
-import { UserId } from '../api/types/UserId';
-import { useGetUserOrdersListQuery } from '../api/UserApi';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { GetUserOrders } from "../api/types/getUserOrders";
+import { UserId } from "../../../types/UserId";
+import { useGetUserOrdersListQuery } from '../api/UserInfoApi';
 
 const LoanInfo = ({userId}:UserId) => {
 

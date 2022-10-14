@@ -4,7 +4,6 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
 import UserTable from '../modules/user/components/UserTable';
 import AddBlackListModal from '../modules/user/components/AddBlackListModal';
-import { GetUerListProps, UserListContent, GetUserListResponse, GetUserListRequestQuerystring, GetUerProps } from "../modules/user/api/types/getUserList";
 import { usePostBlackListAddMutation } from '../modules/user/api/UserApi';
 import useAutoLogin from '../modules/shared/hooks/useAutoLogin';
 
@@ -14,14 +13,13 @@ const UserManage = () => {
     const [showModal, setShowModal] = useState({show:false,userId:''});
     const [form] = Form.useForm();
     const [postBlackListAdd, { isLoading, isSuccess }] = usePostBlackListAddMutation();
-    useAutoLogin();
+    // useAutoLogin();
     useEffect(() => {
         setDomLoaded(true);
     }, [])
 
 
     const onFinish = (values: any) => {
-        console.log( values,showModal)
         postBlackListAdd({ ...values, userId: showModal.userId });
         form.resetFields();
         setShowModal({ show: false, userId: "" })
