@@ -16,7 +16,7 @@ interface RateSettingSectionProps {
   customAntFormFieldError: CustomAntFormFieldError
 }
 const RateSettingSection = (props: RateSettingSectionProps) => {
-    console.log("customAntFormFieldError", props.customAntFormFieldError);
+    // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
     <React.Fragment>
       <Divider orientation="left">费率设定</Divider>

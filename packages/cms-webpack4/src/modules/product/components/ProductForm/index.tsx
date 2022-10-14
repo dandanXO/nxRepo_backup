@@ -55,8 +55,8 @@ const Index = (props: ProductFormProps) => {
             {...layout} form={form} name="control-hooks" onFinish={onFinish}
             onFieldsChange={(changedFields, allFields) => {
 
-                console.log("changedFields", changedFields);
-                console.log("allFields", allFields);
+                // console.log("changedFields", changedFields);
+                // console.log("allFields", allFields);
 
                 function empty(str) {
                     return str === ""
@@ -205,14 +205,12 @@ const Index = (props: ProductFormProps) => {
                 // console.log("map", map);
 
 
-
-
                 let productInterestRatePairsValidationMap = {}
                 // NOTICE: productInterestRatePairs
                 if(changedFields[0].touched && changedFields[0].name && changedFields[0].name[0] === "productInterestRatePairs") {
 
                     const productInterestRatePairs = allFields.filter(field => field.name && (field.name as any).length === 3 && field.name[0] ==="productInterestRatePairs")
-                    console.log("productInterestRatePairs", productInterestRatePairs);
+                    // console.log("productInterestRatePairs", productInterestRatePairs);
 
 
                     let recordIndex
@@ -220,8 +218,8 @@ const Index = (props: ProductFormProps) => {
                         recordIndex = row.name[1] !== recordIndex ? recordIndex = row.name[1] : recordIndex;
                         // console.log("recordIndex", recordIndex);
 
+                        // NOTE: 前置利息
                         let inValidPreInterest = false;
-                        let inValidPostInterest = false;
 
                         if(row.name[1] === recordIndex && row.touched && (row.name[2] as any).indexOf("preInterest") > -1 && empty(row.value)) {
                             inValidPreInterest = true;
@@ -234,34 +232,12 @@ const Index = (props: ProductFormProps) => {
                                 },
                             }
                         }
-                        if(row.name[1] === recordIndex && row.touched && (row.name[2] as any).indexOf("postInterest") > -1 && empty(row.value)) {
-                            inValidPostInterest = true;
-                            productInterestRatePairsValidationMap[recordIndex] = {
-                                ...productInterestRatePairsValidationMap[recordIndex],
-                                postInterest: {
-                                    validateStatus: "error",
-                                    help: "请输入後置利息",
-                                    value: row.value,
-                                },
-                            }
-                        }
 
                         if(row.name[1] === recordIndex && row.touched && !inValidPreInterest && (row.name[2] as any).indexOf("preInterest") > -1 && isNaN(row.value)) {
                             inValidPreInterest = true;
                             productInterestRatePairsValidationMap[recordIndex] = {
                                 ...productInterestRatePairsValidationMap[recordIndex],
                                 preInterest: {
-                                    validateStatus: "error",
-                                    help: "请输入數字",
-                                    value: row.value,
-                                },
-                            }
-                        }
-                        if(row.name[1] === recordIndex && row.touched && !inValidPostInterest && (row.name[2] as any).indexOf("postInterest") > -1 && isNaN(row.value)) {
-                            inValidPostInterest = true;
-                            productInterestRatePairsValidationMap[recordIndex] = {
-                                ...productInterestRatePairsValidationMap[recordIndex],
-                                postInterest: {
                                     validateStatus: "error",
                                     help: "请输入數字",
                                     value: row.value,
@@ -281,6 +257,44 @@ const Index = (props: ProductFormProps) => {
                                 },
                             }
                         }
+
+                        if(row.name[1] === recordIndex && row.touched && !inValidPreInterest && (row.name[2] as any).indexOf("preInterest") > -1 ) {
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                preInterest: {
+                                    validateStatus: "",
+                                    help: "",
+                                    value: row.value,
+                                },
+                            }
+                        }
+
+                        // NOTE: 後置利息
+                        let inValidPostInterest = false;
+
+                        if(row.name[1] === recordIndex && row.touched && (row.name[2] as any).indexOf("postInterest") > -1 && empty(row.value)) {
+                            inValidPostInterest = true;
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                postInterest: {
+                                    validateStatus: "error",
+                                    help: "请输入後置利息",
+                                    value: row.value,
+                                },
+                            }
+                        }
+
+                        if(row.name[1] === recordIndex && row.touched && !inValidPostInterest && (row.name[2] as any).indexOf("postInterest") > -1 && isNaN(row.value)) {
+                            inValidPostInterest = true;
+                            productInterestRatePairsValidationMap[recordIndex] = {
+                                ...productInterestRatePairsValidationMap[recordIndex],
+                                postInterest: {
+                                    validateStatus: "error",
+                                    help: "请输入數字",
+                                    value: row.value,
+                                },
+                            }
+                        }
                         if(row.name[1] === recordIndex && row.touched && !inValidPostInterest && (row.name[2] as any).indexOf("postInterest") > -1 && equalRangeBelow100(row.value)) {
                             inValidPostInterest = true;
                             productInterestRatePairsValidationMap[recordIndex] = {
@@ -288,16 +302,6 @@ const Index = (props: ProductFormProps) => {
                                 postInterest: {
                                     validateStatus: "error",
                                     help: "请填写0-100间数字",
-                                    value: row.value,
-                                },
-                            }
-                        }
-                        if(row.name[1] === recordIndex && row.touched && !inValidPreInterest && (row.name[2] as any).indexOf("preInterest") > -1 ) {
-                            productInterestRatePairsValidationMap[recordIndex] = {
-                                ...productInterestRatePairsValidationMap[recordIndex],
-                                preInterest: {
-                                    validateStatus: "",
-                                    help: "",
                                     value: row.value,
                                 },
                             }
@@ -314,10 +318,11 @@ const Index = (props: ProductFormProps) => {
                         }
                     })
 
+
                     Object.keys(productInterestRatePairsValidationMap).map(recordIndexKey => {
                         if(
-                            productInterestRatePairsValidationMap[recordIndexKey].preInterest.validateStatus !== "error"  &&
-                            productInterestRatePairsValidationMap[recordIndexKey].postInterest.validateStatus !== "error"
+                            productInterestRatePairsValidationMap[recordIndexKey]?.preInterest?.validateStatus !== "error"  &&
+                            productInterestRatePairsValidationMap[recordIndexKey]?.postInterest?.validateStatus !== "error"
                         ) {
                             if(
                                 Number(productInterestRatePairsValidationMap[recordIndexKey].preInterest.value) +
@@ -353,13 +358,15 @@ const Index = (props: ProductFormProps) => {
 
                 }
 
+                // console.log("productInterestRatePairsValidationMap.1", productInterestRatePairsValidationMap);
+
 
 
                 setCustomAntFormFieldError(prev => {
                     const finalMap = {}
                     if(prev.productInterestRatePairs) {
                         Object.keys(prev.productInterestRatePairs).map((key, index) => {
-                            console.log("key", key);
+                            // console.log("key", key);
                             finalMap[key] = prev.productInterestRatePairs[key];
                         })
                     }
@@ -371,6 +378,9 @@ const Index = (props: ProductFormProps) => {
                             };
                         })
                     }
+
+                    // console.log("productInterestRatePairsValidationMap.2", productInterestRatePairsValidationMap);
+
                     return {
                         ...prev,
                         ...map,
