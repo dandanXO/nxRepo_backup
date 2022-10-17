@@ -2,7 +2,8 @@ import {Button, Space} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 import React, {useEffect, useMemo, useState} from "react";
-import {ModalContent} from "./AdminPage";
+import {ModalContent} from "../../risk/pages/RiskSettingPage";
+
 
 
 export enum ButtonsText {

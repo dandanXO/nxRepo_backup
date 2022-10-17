@@ -3,21 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Route} from "antd/es/breadcrumb/Breadcrumb";
 import {AdminTable} from "./AdminTable";
 
-// Redecalare forwardRef
-declare module "react" {
-    function forwardRef<T, P = {}>(
-        render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
-    ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
-}
 
-export interface ModalContent {
-    show: boolean;
-    isEdit: boolean;
-}
-export interface AdminTAbleTemplateRef {
-    setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>
-    showModalContent: ModalContent;
-}
 export interface AdminTableTemplateProps<TableListItemDataType> {
     navigator: {
         parent: {
@@ -33,20 +19,22 @@ export interface AdminTableTemplateProps<TableListItemDataType> {
             breadcrumbName: string;
         }
     },
-    modalContent?: (showModalContent: ModalContent, setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>) => React.ReactElement;
+    // modalContent?: (showModalContent: ModalContent, setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>) => React.ReactElement;
     // Fetch
-    loading: boolean;
-    tableHeaderColumns:  ProColumns<TableListItemDataType, "text">[];
-    tableDatasource: TableListItemDataType[];
+    // loading: boolean;
+    // tableDatasource: TableListItemDataType[];
     // Search
-    searchable?: boolean;
-    onSearchClick?: (props: any) => TableListItemDataType[];
+    // searchable?: boolean;
+    // onSearchClick?: (props: any) => TableListItemDataType[];
     // hideInSearchColumnNames?: Array<string>;
 
+    // setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>
+    // showModalContent: ModalContent;
+    children: React.ReactElement;
 }
 
 // NOTICE: [TypeScript + React: Typing Generic forwardRefs](https://fettblog.eu/typescript-react-generic-forward-refs/)
-const AdminPage = <TableListItemDataType,>(props: AdminTableTemplateProps<TableListItemDataType>, ref?: React.MutableRefObject<AdminTAbleTemplateRef> ) => {
+const AdminPage = <TableListItemDataType,>(props: AdminTableTemplateProps<TableListItemDataType>) => {
 
     // NOTE: breadcrumb
     const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
@@ -58,26 +46,15 @@ const AdminPage = <TableListItemDataType,>(props: AdminTableTemplateProps<TableL
         );
     }
 
-    // NOTE: Modal
-    const [showModalContent, setShowModalContent] = useState<ModalContent>({
-        show: false,
-        isEdit: false,
-    });
-
-    // NOTE: ref
-    useEffect(() => {
-        // NOTICE: [TypeScript + React: Typing Generic forwardRefs](https://fettblog.eu/typescript-react-generic-forward-refs/)
-        if(ref) {
-            ref.current = {
-                showModalContent,
-                setShowModalContent,
-            }
-        }
-    })
+    // // NOTE: Modal
+    // const [showModalContent, setShowModalContent] = useState<ModalContent>({
+    //     show: false,
+    //     isEdit: false,
+    // });
 
     return(
         <PageContainer
-            // loading
+            // loading={props.loading}
             header={{
                 ghost: true,
                 breadcrumb: {
@@ -99,18 +76,9 @@ const AdminPage = <TableListItemDataType,>(props: AdminTableTemplateProps<TableL
                 },
             }}
         >
-         <AdminTable
-             tableHeaderColumns={props.tableHeaderColumns}
-             loading={props.loading}
-             tableDatasource={props.tableDatasource}
-             onSearchClick={props.onSearchClick}
-             setShowModalContent={setShowModalContent}
-         />
-            {showModalContent && props.modalContent && props.modalContent(showModalContent, setShowModalContent)}
+            {props.children}
         </PageContainer>
     )
 }
 
-const ForwardRefAdminPageTemplate = React.forwardRef(AdminPage);
-
-export default ForwardRefAdminPageTemplate;
+export default AdminPage;

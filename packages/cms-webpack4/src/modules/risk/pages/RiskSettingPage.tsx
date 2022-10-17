@@ -1,29 +1,29 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import AdminPage, {AdminTAbleTemplateRef, ModalContent} from "../templates/AdminPage";
+import AdminPage from "../../shared/components/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
 import {GetProductListResponseProduct} from "../../product/api/types/getProductList";
-import {useProductFormModal} from "../../product/hooks/useProductFormModal";
-import useAutoLogin from "../../shared/hooks/useAutoLogin";
-import ProductForm from "../../product/components/ProductForm";
-import {ProductModal} from "../../product/components/ProductModal";
-import AdminFormModal from "../templates/AdminFormModal";
-import AdminFormTemplate from "../templates/AdminForm";
 import RiskSettingForm from "../organisms/RiskSettingForm";
 import {
+    GetRiskManageResponse,
+    MssRiskRankVo,
     RiskManageList,
     useLazyGetRiskManageListQuery,
     useLazyGetRiskManageQuery,
-    useLazyGetRiskModelMenuQuery
+    useLazyGetRiskModelMenuQuery,
+    usePostRiskManageCreateMutation,
+    usePutRiskManageCreateMutation
 } from "../api/RiskApi";
-import {useLazyGetProductManageListQuery} from "../../product/api/ProductApi";
 import {useForm} from "antd/es/form/Form";
-
-
-import {GetRiskManageResponse, } from "../api/RiskApi";
 import RiskSettingModal from "../organisms/RiskSettingModal";
-import {FormInstance} from "antd";
+import {Store} from "@reduxjs/toolkit";
+import {AdminTable} from "../../shared/components/AdminTable";
 
 export type FormResponseData = GetRiskManageResponse;
+
+export interface ModalContent {
+    show: boolean;
+    isEdit: boolean;
+}
 
 const RiskSettingPage = () => {
     // useAutoLogin();
@@ -31,9 +31,6 @@ const RiskSettingPage = () => {
     // NOTE: UI Loading
     const [loading, setLoading] = useState(false);
 
-    // NOTICE:
-    const pageTemplateRef = useRef<AdminTAbleTemplateRef>();
-    console.log("pageTemplateRef", pageTemplateRef);
 
     // NOTE: Fetch
     const [triggerGetList, { currentData, isLoading, isFetching }] = useLazyGetRiskManageListQuery({
@@ -70,7 +67,7 @@ const RiskSettingPage = () => {
                         <a key="editable" onClick={() => {
                             console.log("record", record);
                             setEditID(record.id);
-                            pageTemplateRef.current.setShowModalContent({
+                            setShowModalContent({
                                 show: true,
                                 isEdit: true,
                             })
@@ -109,7 +106,7 @@ const RiskSettingPage = () => {
         ];
         return columns;
 
-    }, [pageTemplateRef.current]);
+    }, []);
 
     // NOTICE: Form
     const [form] = useForm()
@@ -146,13 +143,202 @@ const RiskSettingPage = () => {
         form.submit();
     }, [form])
 
+    // NOTICE: Modal
+    const [showModalContent, setShowModalContent] = useState<ModalContent>({
+        show: false,
+        isEdit: false,
+    });
+
+    // NOTICE: Form
+
+    // NOTE: 1. Initial Data
+    const initialValues = useMemo(() => {
+        // NOTICE: select and switch need initialValue if you want to select one
+        return {
+            useRcQuota: true,
+            enabled: true,
+        } as DeepPartial<FormResponseData>;
+    }, [])
+
+    // NOTE: 2. Get Data
+    // NOTE: 2.1 Menus
+    const [triggerGetRiskMenu, { currentData: currentRiskMenuData, isLoading: isRiskMenuLoading }] = useLazyGetRiskModelMenuQuery();
+
+    // NOTICE: Loading
+    useEffect(() => {
+        triggerGetRiskMenu({});
+    }, []);
+
+
+    // NOTE: 2.2 Risks
+    const [triggerGetRisk , { data: previousRiskData, currentData: currentFormData, isLoading: isRiskLoading, isFetching: isRiskFetching, isSuccess: isRiskSuccess }] = useLazyGetRiskManageQuery();
+    // console.log("isRiskFetching", isRiskFetching);
+    // console.log("currentRiskMenuData", currentRiskMenuData);
+    // console.log("currentFormData", currentFormData);
+    // console.log("isRiskLoading", isRiskLoading);
+    // console.log("isRiskFetching", isRiskSuccess);
+
+
+    useEffect(() => {
+        const loading = isRiskMenuLoading || isRiskLoading;
+        setLoading(loading);
+    }, [isRiskMenuLoading, isRiskLoading])
+
+
+
+    useEffect(() => {
+        if(showModalContent.isEdit) {
+            triggerGetRisk({
+                modelId: String(editID),
+            });
+        }
+    }, [showModalContent.isEdit])
+
+
+    // NOTE: 3. Set form fields from data
+    useEffect(() => {
+        // NOTICE:
+        if(!showModalContent.isEdit) return;
+
+        if(!currentFormData) return;
+        const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
+        const id = targetMenu && targetMenu[0] && targetMenu[0].id || undefined;
+        form.setFieldsValue({
+            modelName: currentFormData.modelName,
+            riskModelName: id,
+            firstLoan: currentFormData.firstLoan,
+            repeatLoan: currentFormData.repeatLoan,
+            useRcQuota: currentFormData.useRcQuota,
+            enabled: currentFormData.enabled,
+            remark: currentFormData.remark,
+        })
+
+    }, [showModalContent.isEdit, currentFormData])
+
+
+    // NOTE: POST or Put form data
+    const [triggerPostRisk, { data: postRiskData, isLoading: isPostRiskLoading , isSuccess: isPostRiskSuccess }] = usePostRiskManageCreateMutation();
+    const [triggerPutRisk, { data: putRiskData, isLoading: isPutRiskLoading, isSuccess: isPutRiskSuccess }] = usePutRiskManageCreateMutation();
+
+
+    // NOTICE: 4.Form Actions
+    const onFinish = useCallback(() => {
+        const fields = form.getFieldsValue();
+        // NOTE: Fetch RiskModel
+        const riskModel = currentRiskMenuData.filter(menu => menu.id === fields["riskModelName"])[0];
+        const riskModelName = riskModel.riskModelName;
+
+
+        // NOTICE: Edit
+        const isEdit = showModalContent.isEdit;
+        const modelId = editID;
+
+        // console.log("fields.before", JSON.parse(JSON.stringify(fields)));
+        Object.keys(fields).map(key => {
+
+            if(key === "firstLoan" || key === "repeatLoan") {
+                fields[key].map((record, index) => {
+                    fields[key][index] = {
+                        balance: Number(record.balance),
+                        // 可借额度
+
+                        // NOTE: future
+                        // max: 1,
+                        // 终始阀值(exclude)
+
+                        // NOTE: future
+                        // min: 1,
+                        // 起始阀值(include)
+
+                        providerRank: record.providerRank,
+
+                        rank: ["EXCELLENT", "GOOD", "NORMAL", "ORDINARY", "REJECT"][index],
+                        // 风控评分等级
+
+                        sort: index + 1,
+                        // 排序
+
+                        type: key === "firstLoan" ? 0 : 1 , // 0 | 1
+                        // 级距类型 0: 首贷, 1: 复借
+                    } as MssRiskRankVo
+                    // NOTE: Edit
+                    if(isEdit) {
+                        fields[key][index]["modelId"] = modelId;
+                        fields[key][index]["id"] = record.id;
+                    }
+                })
+            } else if(key === "riskModelName") {
+                fields["riskModelName"] = riskModelName;
+            }
+        });
+        // NOTE: Edit
+        if(isEdit) {
+            fields["modelId"] = modelId;
+        }
+        // console.log("fields.after", fields);
+
+        // NOTE: Create or Edit
+        const triggerAPI = !showModalContent.isEdit ? triggerPostRisk : triggerPutRisk;
+        console.log("triggerAPI", !showModalContent.isEdit ? "triggerPostRisk" : "triggerPutRisk");
+        // console.log("fields", fields);
+
+        // const errorModal = useErrorModal("ant4");
+        // console.log("errorModal", errorModal);
+
+        // NOTE: Request
+        triggerAPI(fields).unwrap().then((responseData) => {
+            // console.log("responseData", responseData);
+            form.resetFields();
+            onFormFinish();
+            setShowModalContent({
+                show: false,
+                isEdit: false,
+            })
+
+        })
+        // .catch((error) => {
+        // console.log("error");
+        // Modal.config({
+        //     rootPrefixCls: "ant4"
+        // })
+        // errorModal("JI");
+        // message.config({
+        //     prefixCls: "ant4"
+        // })
+        // errorModal("asdf")
+        // message.error("error.error")
+        // Modal.error({
+        //     title: "error.error"
+        // })
+        // errorModal({
+        //     title: "error.error1"
+        // })
+        // }).finally(() => {
+        //     console.log("finally");
+        // errorModal({
+        //     title: "error.error2"
+        // })
+        // Modal.error({
+        //     title: "12",
+        // })
+        // })
+
+    }, [editID, currentRiskMenuData])
+
+    const onFinishFailed = useCallback(() => {
+    }, [])
+
+    const onFieldsChange = useCallback((changedFields, allFields) => {
+    }, [])
+
+    const onValuesChange = useCallback((changedFields, allFields) => {
+    }, [])
+
 
 
     // NOTE: Post | PUT Data
     return (
         <AdminPage<GetProductListResponseProduct>
-            ref={pageTemplateRef}
-            loading={loading}
             navigator={{
                 ancestor: {
                     path: "",
@@ -167,32 +353,46 @@ const RiskSettingPage = () => {
                     breadcrumbName:"风控配置"
                 }
             }}
-            searchable={false}
-            onSearchClick={(props: RiskManageList) => {
-                // const {productName, enabled} = props;
-                // const searchedListData = productListData
-                //     .filter(i => productName === "" ? i :  i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
-                //     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
-                return [];
-            }}
-            tableHeaderColumns={columns}
-            tableDatasource={currentData}
-            modalContent={(showModalContent: ModalContent, setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>) => {
-                return (
-                    <RiskSettingModal
-                        showModalContent={showModalContent}
-                        setShowModalContent={setShowModalContent}
+            // searchable={false}
+        >
+            <>
+                <AdminTable
+                    tableHeaderColumns={columns}
+                    tableDatasource={currentData}
+                    loading={loading}
+                    onSearchClick={(props: RiskManageList) => {
+                        // const {productName, enabled} = props;
+                        // const searchedListData = productListData
+                        //     .filter(i => productName === "" ? i :  i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
+                        //     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
+                        return [];
+                    }}
+                    // NOTE: 新增
+                    setShowModalContent={setShowModalContent}
+                />
+
+                <RiskSettingModal
+                    showModalContent={showModalContent}
+                    // 關閉
+                    setShowModalContent={setShowModalContent}
+                    form={form}
+                    onOk={onOk}
+                    onAutoCompleteTemplate={onAutoCompleteTemplate}
+                >
+                    <RiskSettingForm
                         form={form}
-                        onOk={onOk}
-                        onAutoCompleteTemplate={onAutoCompleteTemplate}
-                        editID={editID}
-                        setLoading={setLoading}
-                        loading={loading}
-                        onFormFinish={onFormFinish}
+                        isEdit={showModalContent.isEdit}
+                        id={editID}
+                        onFieldsChange={onFieldsChange}
+                        onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
+                        onValuesChange={onValuesChange}
+                        currentRiskMenuData={currentRiskMenuData}
+                        initialValues={initialValues as Store}
                     />
-                )
-            }}
-        />
+                </RiskSettingModal>
+            </>
+        </AdminPage>
     )
 }
 export default RiskSettingPage;
