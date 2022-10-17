@@ -333,7 +333,7 @@ export const RiskSettingPage = () => {
 
     // NOTE: Post | PUT Data
     return (
-        <AdminPage<GetProductListResponseProduct>
+        <AdminPage
             navigator={{
                 ancestor: {
                     path: "",
@@ -351,7 +351,7 @@ export const RiskSettingPage = () => {
             // searchable={false}
         >
             <>
-                <AdminTable
+                <AdminTable<GetProductListResponseProduct>
                     tableHeaderColumns={columns}
                     tableDatasource={currentData}
                     loading={loading}
