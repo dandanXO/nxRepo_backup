@@ -7,9 +7,10 @@ import IndexPage from "./modules/shared/components/IndexPage";
 import MerchantPage from "./modules/merchant/components/MerchantPage";
 import ProductPage from "./modules/product/components/ProductPage";
 import UserPage from "./modules/user/components/UserPage";
-import RiskSettingPage from "./modules/risk/components/pages/RiskSettingPage";
+import {RiskSettingPage} from "./modules/risk/components/pages/RiskSettingPage";
 import UserInfoPage from "./modules/userInfo/components/UserInfoPage";
 import {createHashHistory} from "history";
+import {RiskSettingTagPage} from "./modules/risk/components/pages/RiskSettingTagPage";
 
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
@@ -51,8 +52,9 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/user" component={UserPage} />
                     {/*// @ts-ignore*/}
-                    {/*// @ts-ignore*/}
                     <Route path="/risk-setting" component={RiskSettingPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/risk-setting-tag" component={RiskSettingTagPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/user-info/:userId" component={UserInfoPage} />
                 </Switch>

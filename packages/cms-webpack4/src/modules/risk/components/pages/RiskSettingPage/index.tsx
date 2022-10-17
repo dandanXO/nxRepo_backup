@@ -20,7 +20,7 @@ import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable
 
 export type FormResponseData = GetRiskManageResponse;
 
-const RiskSettingPage = () => {
+export const RiskSettingPage = () => {
     // useAutoLogin();
 
     // NOTE: UI Loading
@@ -390,4 +390,3 @@ const RiskSettingPage = () => {
         </AdminPage>
     )
 }
-export default RiskSettingPage;
