@@ -5,10 +5,10 @@ import {
     useLazyGetRiskManageQuery,
     useLazyGetRiskModelMenuQuery, usePostRiskManageCreateMutation, usePutRiskManageCreateMutation
 } from "../api/RiskApi";
-import AdminFormModalTemplate from "../templates/AdminFormModalTemplate";
+import AdminFormModal from "../templates/AdminFormModal";
 import RiskSettingForm from "./RiskSettingForm";
 import {FormInstance, Modal} from "antd";
-import {ModalContent} from "../templates/AdminPageTemplate";
+import {ModalContent} from "../templates/AdminPage";
 import {Store} from "@reduxjs/toolkit";
 import {message} from "antd/es";
 import useConfirmModal from "../../shared/hooks/useConfirmModal";
@@ -220,7 +220,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
     }, [])
 
     return (
-        <AdminFormModalTemplate
+        <AdminFormModal
             width={"600px"}
             show={props.showModalContent.show}
             isEdit={props.showModalContent.isEdit}
@@ -252,7 +252,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
                 initialValues={initialValues as Store}
             />
 
-        </AdminFormModalTemplate>
+        </AdminFormModal>
     )
 }
 export default RiskSettingModal;

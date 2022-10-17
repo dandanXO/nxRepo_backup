@@ -1,7 +1,7 @@
 import {PageContainer, ProColumns} from "@ant-design/pro-components";
 import React, {useEffect, useState} from "react";
 import {Route} from "antd/es/breadcrumb/Breadcrumb";
-import {AdminTableTemplate} from "./AdminTableTemplate";
+import {AdminTable} from "./AdminTable";
 
 // Redecalare forwardRef
 declare module "react" {
@@ -46,7 +46,7 @@ export interface AdminTableTemplateProps<TableListItemDataType> {
 }
 
 // NOTICE: [TypeScript + React: Typing Generic forwardRefs](https://fettblog.eu/typescript-react-generic-forward-refs/)
-const AdminPageTemplate = <TableListItemDataType,>(props: AdminTableTemplateProps<TableListItemDataType>, ref?: React.MutableRefObject<AdminTAbleTemplateRef> ) => {
+const AdminPage = <TableListItemDataType,>(props: AdminTableTemplateProps<TableListItemDataType>, ref?: React.MutableRefObject<AdminTAbleTemplateRef> ) => {
 
     // NOTE: breadcrumb
     const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
@@ -99,7 +99,7 @@ const AdminPageTemplate = <TableListItemDataType,>(props: AdminTableTemplateProp
                 },
             }}
         >
-         <AdminTableTemplate
+         <AdminTable
              tableHeaderColumns={props.tableHeaderColumns}
              loading={props.loading}
              tableDatasource={props.tableDatasource}
@@ -111,6 +111,6 @@ const AdminPageTemplate = <TableListItemDataType,>(props: AdminTableTemplateProp
     )
 }
 
-const ForwardRefAdminPageTemplate = React.forwardRef(AdminPageTemplate);
+const ForwardRefAdminPageTemplate = React.forwardRef(AdminPage);
 
 export default ForwardRefAdminPageTemplate;
