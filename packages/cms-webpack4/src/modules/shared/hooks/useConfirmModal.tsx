@@ -1,4 +1,4 @@
-import { Modal, ModalFuncProps } from 'antd';
+import {Modal, ModalFuncProps} from 'antd';
 import {useEffect, useState} from "react";
 
 const { confirm, error } = Modal;

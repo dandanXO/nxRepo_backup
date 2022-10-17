@@ -1,7 +1,6 @@
-import {PageContainer, ProColumns} from "@ant-design/pro-components";
-import React, {useEffect, useState} from "react";
+import {PageContainer} from "@ant-design/pro-components";
+import React from "react";
 import {Route} from "antd/es/breadcrumb/Breadcrumb";
-import {AdminTable} from "./AdminTable";
 
 
 export interface AdminTableTemplateProps<TableListItemDataType> {

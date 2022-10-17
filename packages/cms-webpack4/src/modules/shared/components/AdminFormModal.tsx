@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, message, Modal} from "antd";
+import {Button, Modal} from "antd";
 
 interface AdminFormModalTemplateProps{
     show: boolean;
