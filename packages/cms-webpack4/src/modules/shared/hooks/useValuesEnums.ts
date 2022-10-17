@@ -1,5 +1,5 @@
-import { useGetChannelListQuery } from "../api/channelListApi";
-import { useEffect, useState } from "react";
+import {useGetChannelListQuery} from "../api/channelListApi";
+import {useEffect, useState} from "react";
 
 const useValuesEnums = () => {
 

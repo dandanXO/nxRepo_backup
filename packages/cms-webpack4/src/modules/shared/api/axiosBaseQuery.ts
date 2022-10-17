@@ -1,5 +1,5 @@
-import { BaseQueryFn } from "@reduxjs/toolkit/query";
-import type { AxiosError, AxiosRequestConfig } from "axios";
+import {BaseQueryFn} from "@reduxjs/toolkit/query";
+import type {AxiosError, AxiosRequestConfig} from "axios";
 import axios from "axios";
 // import { Modal } from "@frontend/mobile/shared/ui";
 

@@ -2,8 +2,11 @@ import {Button, Space} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 import React, {useEffect, useMemo, useState} from "react";
-import {ModalContent} from "../../risk/components/RiskSettingPage";
 
+export interface ModalContent {
+    show: boolean;
+    isEdit: boolean;
+}
 
 
 export enum ButtonsText {

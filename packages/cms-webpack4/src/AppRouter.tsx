@@ -7,7 +7,7 @@ import IndexPage from "./modules/shared/components/IndexPage";
 import MerchantPage from "./modules/merchant/components/MerchantPage";
 import ProductPage from "./modules/product/components/ProductPage";
 import UserPage from "./modules/user/components/UserPage";
-import RiskSettingPage from "./modules/risk/components/RiskSettingPage";
+import RiskSettingPage from "./modules/risk/components/pages/RiskSettingPage";
 import UserInfoPage from "./modules/userInfo/components/UserInfoPage";
 import {createHashHistory} from "history";
 

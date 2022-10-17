@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import AdminPage from "../../shared/components/AdminPage";
+import AdminPage from "../../../../shared/components/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
-import {GetProductListResponseProduct} from "../../product/api/types/getProductList";
+import {GetProductListResponseProduct} from "../../../../product/api/types/getProductList";
 import RiskSettingForm from "./RiskSettingForm";
 import {
     GetRiskManageResponse,
@@ -12,18 +12,13 @@ import {
     useLazyGetRiskModelMenuQuery,
     usePostRiskManageCreateMutation,
     usePutRiskManageCreateMutation
-} from "../api/RiskApi";
+} from "../../../api/RiskApi";
 import {useForm} from "antd/es/form/Form";
 import RiskSettingModal from "./RiskSettingModal";
 import {Store} from "@reduxjs/toolkit";
-import {AdminTable} from "../../shared/components/AdminTable";
+import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
 
 export type FormResponseData = GetRiskManageResponse;
-
-export interface ModalContent {
-    show: boolean;
-    isEdit: boolean;
-}
 
 const RiskSettingPage = () => {
     // useAutoLogin();
