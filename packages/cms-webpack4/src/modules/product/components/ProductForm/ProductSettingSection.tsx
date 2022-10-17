@@ -270,7 +270,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
           </Form.Item>
 
           <Form.Item name="csTime" label="客服时间" rules={[{ required: true }]}>
-              <TimePicker.RangePicker />
+              <TimePicker.RangePicker format={'HH:mm'}/>
           </Form.Item>
       </React.Fragment>
   )
