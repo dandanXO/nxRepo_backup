@@ -15,8 +15,8 @@ import {
 import {useForm} from "antd/es/form/Form";
 import {Store} from "@reduxjs/toolkit";
 import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
-import RiskSettingForm from "./components/RiskSettingForm";
-import RiskSettingModal from "./components/RiskSettingModal";
+import RiskSettingForm from "./RiskSettingForm";
+import RiskSettingModal from "./RiskSettingModal";
 
 export type FormResponseData = GetRiskManageResponse;
 
