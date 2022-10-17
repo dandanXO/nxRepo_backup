@@ -20,7 +20,7 @@ export function IndexPage() {
             <Link to="/risk-setting"><a> Risk Setting </a></Link>
         </div>
         <div>
-            <Link to="/channel-tag"><a> Channel Tag</a></Link>
+            <Link to="/channel"><a> Channel</a></Link>
         </div>
     </div>
   );

@@ -3,7 +3,7 @@ import React from "react";
 import {Route} from "antd/es/breadcrumb/Breadcrumb";
 
 
-export interface AdminTableTemplateProps<TableListItemDataType> {
+export interface AdminTableTemplateProps {
     navigator: {
         parent: {
             path: string;
@@ -33,7 +33,7 @@ export interface AdminTableTemplateProps<TableListItemDataType> {
 }
 
 // NOTICE: [TypeScript + React: Typing Generic forwardRefs](https://fettblog.eu/typescript-react-generic-forward-refs/)
-const AdminPage = <TableListItemDataType,>(props: AdminTableTemplateProps<TableListItemDataType>) => {
+const AdminPage = (props: AdminTableTemplateProps) => {
 
     // NOTE: breadcrumb
     const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
