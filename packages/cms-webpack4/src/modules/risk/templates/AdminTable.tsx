@@ -2,7 +2,7 @@ import {Button, Space} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 import React, {useEffect, useMemo, useState} from "react";
-import {ModalContent} from "./AdminPageTemplate";
+import {ModalContent} from "./AdminPage";
 
 
 export enum ButtonsText {
@@ -19,7 +19,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     onSearchClick?: (props: any) => TableListItemDataType[];
     setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>
 }
-export const AdminTableTemplate = <TableListItemDataType,>(props: AdminTableTemplateProps<TableListItemDataType>) => {
+export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProps<TableListItemDataType>) => {
 
     // NOTE: actionRef
     // const actionRef = useRef<ActionType>();

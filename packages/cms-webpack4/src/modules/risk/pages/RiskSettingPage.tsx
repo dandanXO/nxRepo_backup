@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import AdminPageTemplate, {AdminTAbleTemplateRef, ModalContent} from "../templates/AdminPageTemplate";
+import AdminPageTemplate, {AdminTAbleTemplateRef, ModalContent} from "../templates/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
 import {GetProductListResponseProduct} from "../../product/api/types/getProductList";
 import {useProductFormModal} from "../../product/hooks/useProductFormModal";
 import useAutoLogin from "../../shared/hooks/useAutoLogin";
 import ProductForm from "../../product/components/ProductForm";
 import {ProductModal} from "../../product/components/ProductModal";
-import AdminFormModalTemplate from "../templates/AdminFormModalTemplate";
-import AdminFormTemplate from "../templates/AdminFormTemplate";
+import AdminFormModal from "../templates/AdminFormModal";
+import AdminFormTemplate from "../templates/AdminForm";
 import RiskSettingForm from "../organisms/RiskSettingForm";
 import {
     RiskManageList,

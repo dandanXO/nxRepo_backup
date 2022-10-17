@@ -17,7 +17,7 @@ interface AdminFormModalTemplateProps{
     width?: string;
 }
 
-const AdminFormModalTemplate = (props: AdminFormModalTemplateProps = {
+const AdminFormModal = (props: AdminFormModalTemplateProps = {
     show: false,
     isEdit: false,
     hasAddForm: false,
@@ -52,4 +52,4 @@ const AdminFormModalTemplate = (props: AdminFormModalTemplateProps = {
     )
 }
 
-export default AdminFormModalTemplate;
+export default AdminFormModal;

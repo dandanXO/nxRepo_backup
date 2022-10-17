@@ -3,7 +3,7 @@ import {Form} from "antd";
 import {useForm} from "antd/es/form/Form";
 import {Button, message} from "antd/es";
 
-interface AdminFormTemplate {
+interface AdminForm {
     // onFinish?: (value: any) => void;
     // children: React.ReactElement;
     // onFieldsChange: (changedFields: FieldData[], allFields: FieldData[]) => void
