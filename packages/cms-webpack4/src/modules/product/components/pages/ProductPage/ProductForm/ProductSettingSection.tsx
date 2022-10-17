@@ -1,7 +1,7 @@
 import {Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadProps} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
 import React from "react";
-import {EmailValidator, NumberValidator} from "../../../shared/utils/validator";
+import {EmailValidator, NumberValidator} from "../../../../../shared/utils/validator";
 
 interface ProductSettingSectionProps {
     setLogo: React.Dispatch<React.SetStateAction<string>>;

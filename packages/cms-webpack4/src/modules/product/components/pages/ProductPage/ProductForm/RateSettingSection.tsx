@@ -7,9 +7,9 @@ import {
   NewNumberValidatorPromise,
   NumberValidator,
   PipeValidator
-} from "../../../shared/utils/validator";
-import {CustomAntFormFieldError} from "../../hooks/useProductFormModal";
-import {maxOneUnitFloatReplacer} from "../../../shared/utils/maxOneUnitFloatReplacer";
+} from "../../../../../shared/utils/validator";
+import {CustomAntFormFieldError} from "../../../../hooks/useProductFormModal";
+import {maxOneUnitFloatReplacer} from "../../../../../shared/utils/maxOneUnitFloatReplacer";
 
 const { Paragraph, Text } = Typography;
 interface RateSettingSectionProps {

@@ -1,5 +1,5 @@
-import {CustomAntFormFieldError, FormUploadFileList, ProductFormModal} from "../../hooks/useProductFormModal";
-import { GetAvailableMerchantResponse } from "../../api/types/getAvailbaleMerchant";
+import {CustomAntFormFieldError, FormUploadFileList, ProductFormModal} from "../../../../hooks/useProductFormModal";
+import { GetAvailableMerchantResponse } from "../../../../api/types/getAvailbaleMerchant";
 import React, { useCallback, useEffect } from "react";
 import { Form } from "antd";
 import BaseSettingSection from "./BaseSettingSection";

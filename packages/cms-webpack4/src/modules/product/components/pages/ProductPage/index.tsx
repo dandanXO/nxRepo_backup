@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import ProductTable from "./ProductTable";
 import {PageContainer} from '@ant-design/pro-components';
-import {useProductFormModal} from "../hooks/useProductFormModal";
+import {useProductFormModal} from "../../../hooks/useProductFormModal";
 import {ProductModal} from "./ProductModal";
 import ProductForm from "./ProductForm";
-import useAutoLogin from "../../shared/hooks/useAutoLogin";
+import useAutoLogin from "../../../../shared/hooks/useAutoLogin";
 
-const ProductPage=() => {
+export const ProductPage = () => {
 useAutoLogin();
   const [domLoaded, setDomLoaded] = useState(false);
   useEffect(() => {
@@ -70,4 +70,3 @@ useAutoLogin();
     </PageContainer>
   ): null;
 };
-export default ProductPage;
