@@ -11,6 +11,7 @@ import {RiskSettingPage} from "./modules/risk/components/pages/RiskSettingPage";
 import UserInfoPage from "./modules/userInfo/components/UserInfoPage";
 import {createHashHistory} from "history";
 import {RiskSettingTagPage} from "./modules/risk/components/pages/RiskSettingTagPage";
+import {ChannelTagPage} from "./modules/channel/components/pages/ChannelTagPage";
 
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
@@ -54,7 +55,7 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/risk-setting" component={RiskSettingPage} />
                     {/*// @ts-ignore*/}
-                    <Route path="/risk-setting-tag" component={RiskSettingTagPage} />
+                    <Route path="/channel-tag" component={ChannelTagPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/user-info/:userId" component={UserInfoPage} />
                 </Switch>
