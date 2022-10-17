@@ -9,6 +9,7 @@ import {
   PipeValidator
 } from "../../../shared/utils/validator";
 import {CustomAntFormFieldError} from "../../hooks/useProductFormModal";
+import {maxOneUnitFloatReplacer} from "../../../shared/utils/maxOneUnitFloatReplacer";
 
 const { Paragraph, Text } = Typography;
 interface RateSettingSectionProps {
@@ -34,6 +35,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item name="preInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    validateStatus={(props?.customAntFormFieldError?.preInterestRate as any).validateStatus}
                    help={(props?.customAntFormFieldError?.preInterestRate as any).help}
+                   normalize={(value, prevValue, prevValues) => {
+                       return maxOneUnitFloatReplacer(value);
+                   }}
         >
           <Input allowClear placeholder="填写 0 - 100 间数字"/>
         </Form.Item>
@@ -44,6 +48,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
         <Form.Item name="postInterestRate" style={{display: 'inline-block', width: '180px', margin: '0 8px 0 0'}}
                    validateStatus={(props?.customAntFormFieldError?.postInterestRate as any).validateStatus}
                    help={(props?.customAntFormFieldError?.postInterestRate as any).help}
+                   normalize={(value, prevValue, prevValues) => {
+                       return maxOneUnitFloatReplacer(value);
+                   }}
         >
           <Input allowClear placeholder="填写 0 - 100 间数字"/>
         </Form.Item>
@@ -64,6 +71,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                        })
                      },
                    ]}
+                   normalize={(value, prevValue, prevValues) => {
+                       return maxOneUnitFloatReplacer(value);
+                   }}
         >
           <Input allowClear placeholder="填写 0-36 间数字"/>
         </Form.Item>
@@ -84,6 +94,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                        })
                      },
                    ]}
+                   normalize={(value, prevValue, prevValues) => {
+                       return maxOneUnitFloatReplacer(value);
+                   }}
         >
           <Input allowClear placeholder="填寫 0 - 100 间數字"/>
         </Form.Item>
@@ -104,6 +117,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                        })
                      },
                    ]}
+                   normalize={(value, prevValue, prevValues) => {
+                       return maxOneUnitFloatReplacer(value);
+                   }}
         >
           <Input allowClear placeholder="填写 0 - 100 间数字"/>
         </Form.Item>
@@ -160,6 +176,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                           name={[name, 'preInterest']}
                           validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.validateStatus || ""}
                           help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.help || ""}
+                          normalize={(value, prevValue, prevValues) => {
+                              return maxOneUnitFloatReplacer(value);
+                          }}
                         >
                           <Input placeholder="前置利息" suffix={"%"}/>
                         </Form.Item>
@@ -168,6 +187,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                           name={[name, 'postInterest']}
                           validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.validateStatus || ""}
                           help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.help || ""}
+                          normalize={(value, prevValue, prevValues) => {
+                              return maxOneUnitFloatReplacer(value);
+                          }}
                         >
                           <Input placeholder="后置利息" suffix={"%"}/>
                         </Form.Item>
