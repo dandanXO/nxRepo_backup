@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import AdminPageTemplate, {AdminTAbleTemplateRef, ModalContent} from "../templates/AdminPage";
+import AdminPage, {AdminTAbleTemplateRef, ModalContent} from "../templates/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
 import {GetProductListResponseProduct} from "../../product/api/types/getProductList";
 import {useProductFormModal} from "../../product/hooks/useProductFormModal";
@@ -150,7 +150,7 @@ const RiskSettingPage = () => {
 
     // NOTE: Post | PUT Data
     return (
-        <AdminPageTemplate<GetProductListResponseProduct>
+        <AdminPage<GetProductListResponseProduct>
             ref={pageTemplateRef}
             loading={loading}
             navigator={{
