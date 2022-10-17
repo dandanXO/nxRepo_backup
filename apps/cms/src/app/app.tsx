@@ -3,8 +3,8 @@ import MerchantPage from "./pages/MerchantPage"
 import ProductPage from "./pages/ProductPage";
 import IndexPage from "./pages/IndexPage";
 import {Route, Routes, Link, BrowserRouter} from 'react-router-dom';
-import MerchantPage from "../../../../packages/cms-webpack4/src/modules/merchant/components/MerchantPage"
-import ProductPage from "../../../../packages/cms-webpack4/src/modules/product/components/ProductPage";
+import MerchantPage from "../../../../packages/cms-webpack4/src/modules/product/components/pages/MerchantPage"
+import Index from "../../../../packages/cms-webpack4/src/modules/product/components/pages/ProductPage";
 import IndexPage from "../../../../packages/cms-webpack4/src/modules/shared/components/IndexPage";
 import { Provider } from "react-redux";
 import {appStore} from "../../../../packages/cms-webpack4/src/store";
@@ -24,7 +24,7 @@ export function App() {
           />
           <Route
             path="/product"
-            element={<ProductPage/>}
+            element={<Index/>}
           />
         </Routes>
         <div> CMS !!</div>

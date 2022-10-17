@@ -4,8 +4,8 @@ import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
 import {Button, Space} from 'antd';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {GetProductListResponseProduct} from "../api/types/getProductList";
-import {ProductFormModal} from "../hooks/useProductFormModal";
+import {GetProductListResponseProduct} from "../../../api/types/getProductList";
+import {ProductFormModal} from "../../../hooks/useProductFormModal";
 
 interface ProductTableProps {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
