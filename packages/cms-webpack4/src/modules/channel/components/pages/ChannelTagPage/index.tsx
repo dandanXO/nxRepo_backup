@@ -1,4 +1,4 @@
-export const RiskSettingTagPage = () => {
+export const ChannelTagPage = () => {
     return (
         <div>RiskSettingTagPage</div>
     )
