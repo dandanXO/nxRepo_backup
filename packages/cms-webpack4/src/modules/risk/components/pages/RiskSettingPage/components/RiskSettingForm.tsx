@@ -3,9 +3,9 @@ import React, {CSSProperties, useCallback, useEffect, useMemo} from "react";
 import {useForm} from "antd/es/form/Form";
 import TextArea from "antd/es/input/TextArea";
 
-import {RiskManageModel, RiskModelMenu} from "../../../api/RiskApi";
 import {Store} from "@reduxjs/toolkit";
-import {NumberValidator} from "../../../../shared/utils/validator";
+import {NumberValidator} from "../../../../../shared/utils/validator";
+import {RiskModelMenu} from "../../../../api/RiskApi";
 
 
 interface RiskSettingFormProps {

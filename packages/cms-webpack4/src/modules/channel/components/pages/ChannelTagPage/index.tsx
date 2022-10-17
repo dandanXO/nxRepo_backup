@@ -1,5 +1,5 @@
 export const ChannelTagPage = () => {
     return (
-        <div>RiskSettingTagPage</div>
+        <div>ChannelTagPage</div>
     )
 }
