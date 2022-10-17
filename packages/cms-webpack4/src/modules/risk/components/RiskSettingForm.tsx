@@ -4,7 +4,7 @@ import {useForm} from "antd/es/form/Form";
 import TextArea from "antd/es/input/TextArea";
 
 import {RiskManageModel, RiskModelMenu} from "../api/RiskApi";
-import {FormResponseData} from "../pages/RiskSettingPage";
+import {FormResponseData} from "./RiskSettingPage";
 import {Store} from "@reduxjs/toolkit";
 import {NumberValidator} from "../../shared/utils/validator";
 

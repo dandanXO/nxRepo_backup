@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
-import UserTable from '../modules/user/components/UserTable';
-import AddBlackListModal from '../modules/user/components/AddBlackListModal';
-import { usePostBlackListAddMutation } from '../modules/user/api/UserApi';
-import useAutoLogin from '../modules/shared/hooks/useAutoLogin';
+import UserTable from './UserTable';
+import AddBlackListModal from './AddBlackListModal';
+import { usePostBlackListAddMutation } from '../api/UserApi';
+import useAutoLogin from '../../shared/hooks/useAutoLogin';
 
 
 const UserManage = () => {

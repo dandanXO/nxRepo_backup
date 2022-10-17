@@ -3,9 +3,9 @@ import MerchantPage from "./pages/MerchantPage"
 import ProductPage from "./pages/ProductPage";
 import IndexPage from "./pages/IndexPage";
 import {Route, Routes, Link, BrowserRouter} from 'react-router-dom';
-import MerchantPage from "../../../../packages/cms-webpack4/src/pages/MerchantPage"
-import ProductPage from "../../../../packages/cms-webpack4/src/pages/ProductPage";
-import IndexPage from "../../../../packages/cms-webpack4/src/pages/IndexPage";
+import MerchantPage from "../../../../packages/cms-webpack4/src/modules/merchant/components/MerchantPage"
+import ProductPage from "../../../../packages/cms-webpack4/src/modules/product/components/ProductPage";
+import IndexPage from "../../../../packages/cms-webpack4/src/modules/shared/components/IndexPage";
 import { Provider } from "react-redux";
 import {appStore} from "../../../../packages/cms-webpack4/src/store";
 

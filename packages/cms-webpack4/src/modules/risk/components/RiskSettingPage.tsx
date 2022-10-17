@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import AdminPage from "../../shared/components/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
 import {GetProductListResponseProduct} from "../../product/api/types/getProductList";
-import RiskSettingForm from "../organisms/RiskSettingForm";
+import RiskSettingForm from "./RiskSettingForm";
 import {
     GetRiskManageResponse,
     MssRiskRankVo,
@@ -14,7 +14,7 @@ import {
     usePutRiskManageCreateMutation
 } from "../api/RiskApi";
 import {useForm} from "antd/es/form/Form";
-import RiskSettingModal from "../organisms/RiskSettingModal";
+import RiskSettingModal from "./RiskSettingModal";
 import {Store} from "@reduxjs/toolkit";
 import {AdminTable} from "../../shared/components/AdminTable";
 

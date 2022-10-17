@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
-import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../modules/merchant/api/MerchantApi";
+import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../api/MerchantApi";
 import { Form } from "antd";
-import MerchantModal from '../modules/merchant/components/MerchantModal';
-import MerchantTable from '../modules/merchant/components/MerchantTable';
+import MerchantModal from './MerchantModal';
+import MerchantTable from './MerchantTable';
 const MerchantManage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const [postMerchantCreate, { isLoading: isMerchantCreating, isSuccess: postMerchantSuccess }] = usePostMerchantCreateMutation();

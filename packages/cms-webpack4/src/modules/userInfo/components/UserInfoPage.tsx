@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { Tabs } from 'antd';
-import UserInfo from '../modules/userInfo/components/UserInfo';
-import AddressBook from '../modules/userInfo/components/AddressBook';
-import SmsMessage from '../modules/userInfo/components/SmsMessage';
-import LoanInfo from '../modules/userInfo/components/LoanInfo';
+import UserInfo from './UserInfo';
+import AddressBook from './AddressBook';
+import SmsMessage from './SmsMessage';
+import LoanInfo from './LoanInfo';
 import { useParams } from "react-router-dom";
 const UserInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);

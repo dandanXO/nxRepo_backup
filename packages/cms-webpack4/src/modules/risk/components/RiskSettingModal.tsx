@@ -2,7 +2,7 @@ import React from "react";
 
 import AdminFormModal from "../../shared/components/AdminFormModal";
 import {FormInstance} from "antd";
-import {ModalContent} from "../pages/RiskSettingPage";
+import {ModalContent} from "./RiskSettingPage";
 
 interface RiskSettingModelProps {
     showModalContent: ModalContent;
