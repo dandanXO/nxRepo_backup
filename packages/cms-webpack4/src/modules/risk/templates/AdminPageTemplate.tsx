@@ -221,6 +221,8 @@ const AdminPageTemplate = <TableListItemDataType,>(props: AdminTableTemplateProp
                 // onSubmit={(params: U) => void}
                 // onReset={() => void}
                 loading={props.loading}
+                // NOTE:
+                // scroll={{ x: 1000 }}
             />
             {showModalContent && props.modalContent && props.modalContent(showModalContent, setShowModalContent)}
         </PageContainer>
