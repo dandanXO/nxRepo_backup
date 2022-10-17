@@ -19,6 +19,9 @@ export function IndexPage() {
         <div>
             <Link to="/risk-setting"><a> Risk Setting </a></Link>
         </div>
+        <div>
+            <Link to="/risk-setting-tag"><a> Risk Setting Tag</a></Link>
+        </div>
     </div>
   );
 }
