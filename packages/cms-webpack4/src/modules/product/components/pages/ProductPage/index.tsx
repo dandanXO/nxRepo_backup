@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ProductTable from "./ProductTable";
 import {PageContainer} from '@ant-design/pro-components';
-import {useProductFormModal} from "../../../hooks/useProductFormModal";
+import {useProductFormModal} from "../../hooks/useProductFormModal";
 import {ProductModal} from "./ProductModal";
 import ProductForm from "./ProductForm";
 import useAutoLogin from "../../../../shared/hooks/useAutoLogin";

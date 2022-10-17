@@ -6,8 +6,8 @@ import {
   useLazyGetProductQuery,
   usePostProductCreateMutation,
   usePutProductEditMutation
-} from "../api/ProductApi";
-import {PostProductCreateRequestBody} from "../api/types/postProductCreate";
+} from "../../api/ProductApi";
+import {PostProductCreateRequestBody} from "../../api/types/postProductCreate";
 import {ValidateStatus} from "antd/es/form/FormItem";
 import moment from "moment/moment";
 
