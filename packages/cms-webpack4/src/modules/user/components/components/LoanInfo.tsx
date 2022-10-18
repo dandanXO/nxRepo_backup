@@ -2,7 +2,7 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { GetUserOrders } from '../../api/types/userInfoTypes/getUserOrders';
 import { UserId } from '../../../../types/UserId';
-import { useGetUserOrdersListQuery } from '../../api/types/UserInfoApi';
+import { useGetUserOrdersListQuery } from '../../api/UserInfoApi';
 
 const LoanInfo = ({userId}:UserId) => {
 

@@ -3,7 +3,7 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
-import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../../../api/types/UserApi';
+import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../../../api/UserApi';
 import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
