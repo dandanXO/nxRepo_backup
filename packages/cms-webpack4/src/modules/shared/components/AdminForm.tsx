@@ -26,7 +26,7 @@ export const AdminForm = (props: AdminFormProps) => {
     return (
         <Form
             labelCol={{ span: 5 }}
-            wrapperCol={{ span: 18 }}
+            wrapperCol={{ span: 19 }}
             // NOTE: common
             labelAlign={props.labelAlign || "right"}
             labelWrap={props.labelWrap || false}
