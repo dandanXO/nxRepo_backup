@@ -73,7 +73,6 @@ const ProductTable = (props: ProductTableProps) => {
             }}
             rowKey="id"
             search={{
-                collapsed: false,
                 labelWidth: 'auto',
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (

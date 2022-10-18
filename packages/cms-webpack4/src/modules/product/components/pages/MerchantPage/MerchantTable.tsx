@@ -82,7 +82,6 @@ const MerchantTable = ({
                 setIsEdit(false);
             }}>添加</Button>}
             search={{
-                collapsed: false,
                 labelWidth: 'auto',
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
