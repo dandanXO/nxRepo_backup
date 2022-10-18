@@ -13,10 +13,10 @@ import {
     usePutRiskManageCreateMutation
 } from "../../../api/RiskApi";
 import {useForm} from "antd/es/form/Form";
-import {Store} from "@reduxjs/toolkit";
 import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
 import RiskSettingForm from "./RiskSettingForm";
 import RiskSettingModal from "./RiskSettingModal";
+import useAutoLogin from "../../../../shared/hooks/useAutoLogin";
 
 export type FormResponseData = GetRiskManageResponse;
 
@@ -39,9 +39,7 @@ export const RiskSettingPage = () => {
         triggerGetList(null);
     }, []);
 
-    const onFormFinish = useCallback(() => {
-        triggerGetList(null);
-    }, [])
+
 
     useEffect(() => {
         setLoading(isFetching);
@@ -216,7 +214,12 @@ export const RiskSettingPage = () => {
     const [triggerPutRisk, { data: putRiskData, isLoading: isPutRiskLoading, isSuccess: isPutRiskSuccess }] = usePutRiskManageCreateMutation();
 
 
-    // NOTICE: 4.Form Actions
+    // NOTE: onFieldsChange
+    const onFieldsChange = useCallback((changedFields, allFields) => {
+    }, [])
+
+
+    // NOTICE: Form.3 onFinish
     const onFinish = useCallback(() => {
         const fields = form.getFieldsValue();
         // NOTE: Fetch RiskModel
@@ -284,7 +287,9 @@ export const RiskSettingPage = () => {
         triggerAPI(fields).unwrap().then((responseData) => {
             // console.log("responseData", responseData);
             form.resetFields();
-            onFormFinish();
+
+            triggerGetList(null);
+
             setShowModalContent({
                 show: false,
                 isEdit: false,
@@ -320,12 +325,11 @@ export const RiskSettingPage = () => {
 
     }, [editID, currentRiskMenuData])
 
+    // NOTICE: Form.4 onFinishFailed
     const onFinishFailed = useCallback(() => {
     }, [])
 
-    const onFieldsChange = useCallback((changedFields, allFields) => {
-    }, [])
-
+    // NOTICE: Form.5 onValuesChange
     const onValuesChange = useCallback((changedFields, allFields) => {
     }, [])
 
@@ -364,6 +368,8 @@ export const RiskSettingPage = () => {
                     }}
                     // NOTE: 新增
                     setShowModalContent={setShowModalContent}
+                    searchable={false}
+                    hasEditForm={false}
                 />
 
                 <RiskSettingModal
@@ -378,12 +384,12 @@ export const RiskSettingPage = () => {
                         form={form}
                         isEdit={showModalContent.isEdit}
                         id={editID}
+                        initialValues={initialValues}
                         onFieldsChange={onFieldsChange}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
                         onValuesChange={onValuesChange}
                         currentRiskMenuData={currentRiskMenuData}
-                        initialValues={initialValues as Store}
                     />
                 </RiskSettingModal>
             </>
