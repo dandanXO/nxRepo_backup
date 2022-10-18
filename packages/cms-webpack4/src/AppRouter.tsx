@@ -12,7 +12,8 @@ import UserInfoPage from "./modules/user/components/pages/UserInfoPage";
 import {createHashHistory} from "history";
 import {ChannelTagPage} from "./modules/channel/components/pages/ChannelSettingTagPage";
 import {ChannelTabPage} from "./modules/channel/components/pages/ChannelTabPage";
-
+import UserReviewPage from "./modules/user/components/pages/UserReviewPage";
+import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -58,6 +59,10 @@ export const AppRouter = () => {
                     <Route path="/channel" component={ChannelTabPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/user-info/:userId" component={UserInfoPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/user-review" component={UserReviewPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/user-review-info/:userId" component={UserReviewInfoPage} />
                 </Switch>
             </Router>
 
