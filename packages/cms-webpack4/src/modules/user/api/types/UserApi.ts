@@ -1,8 +1,8 @@
-import { API } from "../../../api";
-import { GetUerListProps, GetUserListRequestQuerystring } from "./types/getUserList";
-import { PostBlackListRequestBody } from "./types/postBlackList";
-import { UserId } from "../../../types/UserId";
-import { PostTelSaleRequestQuerystring } from './types/postTelSale';
+import { API } from "../../../../api";
+import { GetUerListProps, GetUserListRequestQuerystring } from "./userTypes/getUserList";
+import { PostBlackListRequestBody } from "./userTypes/postBlackList";
+import { UserId } from "../../../../types/UserId";
+import { PostTelSaleRequestQuerystring } from './userTypes/postTelSale';
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({

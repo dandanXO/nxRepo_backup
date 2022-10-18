@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
-import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../api/types/getUserList";
-import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../api/UserApi';
+import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
+import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../../../api/types/UserApi';
 import moment from 'moment';
-import { setSearchParams, setPathname, selectSearchParams } from '../../shared/utils/searchParamsSlice';
+import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
-import useValuesEnums from '../../shared/hooks/useValuesEnums';
+import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
 }
@@ -125,7 +125,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             },
         },
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
-        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListEnum, initialValue:searchParams.channelId || '0'},
+        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListEnum, initialValue:searchParams.channelId || ''},
         {
             title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true,
             render: (text) => moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
@@ -181,6 +181,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             rowKey="id"
             headerTitle={<Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
             search={{
+                // collapsed:false,
                 labelWidth: 'auto',
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (

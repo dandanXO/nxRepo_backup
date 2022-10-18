@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { Tabs } from 'antd';
-import UserInfo from './UserInfo';
-import AddressBook from './AddressBook';
-import SmsMessage from './SmsMessage';
-import LoanInfo from './LoanInfo';
+import UserInfo from '../../components/UserInfo';
+import AddressBook from '../../components/AddressBook';
+import SmsMessage from '../../components/SmsMessage';
+import LoanInfo from '../../components/LoanInfo';
 import { useParams } from "react-router-dom";
 const UserInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
@@ -32,8 +32,8 @@ const UserInfoPage = () => {
                     breadcrumb: {
                         routes: [
                             { path: '', breadcrumbName: '首页' },
-                            { path: '', breadcrumbName: '产品管理' },
-                            { path: '', breadcrumbName: '产品管理' },
+                            { path: '', breadcrumbName: '用户管理' },
+                            { path: '', breadcrumbName: '用户管理' },
                             { path: '', breadcrumbName: '用户详细信息' },
                         ],
                     },

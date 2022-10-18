@@ -5,11 +5,11 @@ const useValuesEnums = () => {
 
     // 注册渠道
     const { currentData, isSuccess } = useGetChannelListQuery(null);
-    const [channelListEnum, setChannelListEnum] = useState({ '0': { text: '不限' } })
+    const [channelListEnum, setChannelListEnum] = useState(null)
     useEffect(() => {
         const channelList = currentData && currentData?.reduce((prev, curr) => {
             return { ...prev, ...{ [curr.channelId]: { text: curr.name } } }
-        }, channelListEnum);
+        }, { '': { text: '不限' } });
         setChannelListEnum(channelList)
     }, [isSuccess])
 

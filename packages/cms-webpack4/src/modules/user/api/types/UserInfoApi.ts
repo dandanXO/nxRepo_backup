@@ -1,9 +1,9 @@
-import { API } from "../../../api";
-import { GetUserInfoRequestQuerystring } from "./types/getUserInfoRequestString";
-import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./types/getUserDetail";
-import { GetUserSmsProps } from "./types/getUserSms";
-import { GetUserContactsProps } from "./types/getUserContacts";
-import { GetUserOrdersProps } from "./types/getUserOrders";
+import { API } from "../../../../api";
+import { GetUserInfoRequestQuerystring } from "./userInfoTypes/getUserInfoRequestString";
+import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./userInfoTypes/getUserDetail";
+import { GetUserSmsProps } from "./userInfoTypes/getUserSms";
+import { GetUserContactsProps } from "./userInfoTypes/getUserContacts";
+import { GetUserOrdersProps } from "./userInfoTypes/getUserOrders";
 
 
 const UserInfoApi = API.injectEndpoints({

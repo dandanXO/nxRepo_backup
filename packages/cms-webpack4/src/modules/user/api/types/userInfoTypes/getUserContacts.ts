@@ -1,4 +1,4 @@
-import { GetDataCommonResponse } from "../../../../types/commonReponse";
+import { GetDataCommonResponse } from "../../../../../types/commonReponse";
 
 export interface GetUserContactsResponse {
     content:GetUserContacts[]
