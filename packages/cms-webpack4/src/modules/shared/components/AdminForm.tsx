@@ -6,11 +6,6 @@ import {FormInstance} from "antd";
 import React from "react";
 
 export interface AdminFormProps {
-    labelAlign?: FormLabelAlign;
-    labelWrap?: boolean;
-    layout?: FormLayout;
-    preserve?: boolean;
-    scrollToFirstError?: boolean;
     children?: React.ReactElement | React.ReactElement[];
 
     name?: string;
@@ -28,13 +23,13 @@ export const AdminForm = (props: AdminFormProps) => {
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 19 }}
             // NOTE: common
-            labelAlign={props.labelAlign || "right"}
-            labelWrap={props.labelWrap || false}
-            layout={props.layout || "horizontal"}
+            labelAlign={"right"}
+            labelWrap={false}
+            layout={"horizontal"}
             // 当字段被删除时保留字段值
-            preserve={props.preserve || true}
+            preserve={true}
             // 提交失败自动滚动到第一个错误字段
-            scrollToFirstError={props.scrollToFirstError || true}
+            scrollToFirstError={true}
             // NOTE: other
             name={props.name || "control-hooks"}
             form={props.form}
