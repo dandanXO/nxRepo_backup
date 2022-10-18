@@ -181,7 +181,6 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             rowKey="id"
             headerTitle={<Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
             search={{
-                collapsed: false,
                 labelWidth: 'auto',
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
