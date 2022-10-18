@@ -25,3 +25,10 @@ export interface sortResponse {
     sorted?: boolean;
     unsorted?: boolean;
 }
+
+export interface GetPageableResponse {
+    currentPage?: number;
+    pageSize?: number;
+    totalPage?: number;
+    totalRecords?: number;
+}

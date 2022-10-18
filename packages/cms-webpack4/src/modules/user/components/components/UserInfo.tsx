@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Image, Descriptions, Table } from 'antd';
 const { Item } = Descriptions;
-import { useGetUserDetailQuery } from "../../api/types/UserInfoApi";
+import { useGetUserDetailQuery } from "../../api/UserInfoApi";
 import { GetUserDetailResponse } from "../../api/types/userInfoTypes/getUserDetail";
 import { UserId } from "../../../../types/UserId";
 import moment from "moment";

@@ -1,7 +1,7 @@
 
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { useGetUserContactsListQuery } from "../../api/types/UserInfoApi";
+import { useGetUserContactsListQuery } from '../../api/UserInfoApi';
 import { UserId } from "../../../../types/UserId";
 import { GetUserContacts } from "../../api/types/userInfoTypes/getUserContacts"
 

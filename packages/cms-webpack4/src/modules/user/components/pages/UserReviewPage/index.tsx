@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
-
-import { usePostBlackListAddMutation } from '../../../api/types/UserApi';
+import UserReviewTable from './UserReviewTable';
+import { usePostBlackListAddMutation } from '../../../api/UserApi';
 import useAutoLogin from '../../../../shared/hooks/useAutoLogin';
 
 
@@ -45,8 +45,8 @@ const UserReviewPage = () => {
                 },
             }}
         >
-            {/* <UserTable setShowModal={setShowModal} />
-            <AddBlackListModal showModal={showModal.show} handleCloseModal={handleCloseModal} onFinish={onFinish} form={form} /> */}
+            <UserReviewTable setShowModal={setShowModal} />
+            {/* <AddBlackListModal showModal={showModal.show} handleCloseModal={handleCloseModal} onFinish={onFinish} form={form} /> */}
         </PageContainer> : null
     )
 }

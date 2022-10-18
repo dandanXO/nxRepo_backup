@@ -1,6 +1,6 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import {ProTable } from '@ant-design/pro-components';
-import { useGetUserSMSListQuery } from "../../api/types/UserInfoApi";
+import { useGetUserSMSListQuery } from "../../api/UserInfoApi";
 import { GetUserSms } from '../../api/types/userInfoTypes/getUserSms';
 import { UserId } from '../../../../types/UserId';
 
