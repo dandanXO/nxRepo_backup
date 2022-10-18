@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Card, Image, Descriptions, Table } from 'antd';
 const { Item } = Descriptions;
-import { useGetUserDetailQuery } from "../api/UserInfoApi";
-import { GetUserDetailResponse } from '../api/types/getUserDetail';
-import { UserId } from "../../../types/UserId";
+import { useGetUserDetailQuery } from "../../api/types/UserInfoApi";
+import { GetUserDetailResponse } from "../../api/types/userInfoTypes/getUserDetail";
+import { UserId } from "../../../../types/UserId";
 import moment from "moment";
 const CardStyle = (props: { title: string, children }) => {
     const { title, children } = props

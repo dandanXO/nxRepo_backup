@@ -1,8 +1,8 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import {ProTable } from '@ant-design/pro-components';
-import { useGetUserSMSListQuery } from "../api/UserInfoApi";
-import { GetUserSms } from '../api/types/getUserSms';
-import { UserId } from "../../../types/UserId";
+import { useGetUserSMSListQuery } from "../../api/types/UserInfoApi";
+import { GetUserSms } from '../../api/types/userInfoTypes/getUserSms';
+import { UserId } from '../../../../types/UserId';
 
 const SmsMessage = ({userId}:UserId) => {
     const { currentData: userSmsList, isLoading } = useGetUserSMSListQuery({ userId, pageNumber: 1, pageSize: 10 });

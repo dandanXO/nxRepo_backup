@@ -4,8 +4,8 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
 import UserTable from './UserTable';
 import AddBlackListModal from './AddBlackListModal';
-import { usePostBlackListAddMutation } from '../api/UserApi';
-import useAutoLogin from '../../shared/hooks/useAutoLogin';
+import { usePostBlackListAddMutation } from '../../../api/types/UserApi';
+import useAutoLogin from '../../../../shared/hooks/useAutoLogin';
 
 
 const UserManage = () => {
@@ -13,7 +13,7 @@ const UserManage = () => {
     const [showModal, setShowModal] = useState({show:false,userId:''});
     const [form] = Form.useForm();
     const [postBlackListAdd, { isLoading, isSuccess }] = usePostBlackListAddMutation();
-    // useAutoLogin();
+    useAutoLogin();
     useEffect(() => {
         setDomLoaded(true);
     }, [])
@@ -40,7 +40,7 @@ const UserManage = () => {
                     routes: [
                         { path: '', breadcrumbName: '首页', },
                         { path: '', breadcrumbName: '用户管理', },
-                        { path: '', breadcrumbName: '用户管理 ', },
+                        { path: '', breadcrumbName: '用户管理', },
                     ],
                 },
             }}
