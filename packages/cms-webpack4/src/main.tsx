@@ -7,7 +7,7 @@ import App from './App';
 let root;
 
 function render(props) {
-    console.log("props", props)
+    console.log("render.props", props)
     // NOTICE: 17
     const { container } = props;
     ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));

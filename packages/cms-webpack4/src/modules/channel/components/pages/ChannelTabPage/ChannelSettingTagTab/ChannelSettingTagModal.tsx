@@ -1,27 +1,29 @@
 import React from "react";
 import {FormInstance} from "antd";
-import AdminFormModal from "../../../../shared/components/AdminFormModal";
-import {ModalContent} from "../../../../shared/components/AdminTable";
+import AdminFormModal from "../../../../../shared/components/AdminFormModal";
+import {ModalContent} from "../../../../../shared/components/AdminTable";
 
-interface RiskSettingModelProps {
+interface ChannelSettingTagModalProps {
+    // NOTE: Modal
     showModalContent: ModalContent;
     setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>;
-    form: FormInstance;
     onOk: () => void;
     onAutoCompleteTemplate: () => void;
-    children: React.ReactElement;
+    children?: React.ReactElement;
+    // NOTE: Form
+    form: FormInstance;
 }
-const RiskSettingModal = (props: RiskSettingModelProps) => {
+export const ChannelSettingTagModal = (props: ChannelSettingTagModalProps) => {
 
     return (
         <AdminFormModal
             width={"600px"}
+            title={"渠道配置标签"}
             show={props.showModalContent.show}
             isEdit={props.showModalContent.isEdit}
-            addTitle={"添加风控配置"}
-            editTitle={"修改风控配置"}
             handleCloseModal={() => {
                 // console.log("handleCloseModal")
+                // NOTE: Form
                 props.form.resetFields();
                 props.setShowModalContent({
                     show: false,
@@ -33,8 +35,6 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
             onAutoCompleteTemplate={props.onAutoCompleteTemplate}
         >
             {props.children}
-
         </AdminFormModal>
     )
 }
-export default RiskSettingModal;

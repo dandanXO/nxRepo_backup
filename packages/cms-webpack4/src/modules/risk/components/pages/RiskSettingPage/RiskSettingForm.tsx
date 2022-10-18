@@ -1,19 +1,16 @@
 import {Form, FormInstance, Input, Radio, Select, Switch} from "antd";
-import React, {CSSProperties, useCallback, useEffect, useMemo} from "react";
-import {useForm} from "antd/es/form/Form";
+import React, {CSSProperties} from "react";
 import TextArea from "antd/es/input/TextArea";
 
-import {Store} from "@reduxjs/toolkit";
 import {NumberValidator} from "../../../../shared/utils/validator";
 import {RiskModelMenu} from "../../../api/RiskApi";
-
-
+import {AdminForm} from "../../../../shared/components/AdminForm";
+import {Store} from "antd/es/form/interface"
 interface RiskSettingFormProps {
     isEdit: boolean;
     id?: number;
+
     form: FormInstance;
-
-
     initialValues: Store;
     onFieldsChange: (changedFields: any, allFields: any) => void;
     onFinish: () => void;
@@ -23,22 +20,13 @@ interface RiskSettingFormProps {
 }
 
 const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 178, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>
+
 const RiskSettingForm = (props: RiskSettingFormProps) => {
-
-
     // NOTE:
     return (
-        <Form
-            name="control-hooks"
+        <AdminForm
             form={props.form}
             initialValues={props.initialValues}
-            labelAlign={"right"}
-            labelWrap={false}
-            layout={"horizontal"}
-            // 当字段被删除时保留字段值
-            preserve={true}
-            // 提交失败自动滚动到第一个错误字段
-            scrollToFirstError={true}
             onFieldsChange={props.onFieldsChange}
             onFinish={props.onFinish}
             onFinishFailed={props.onFinishFailed}
@@ -170,7 +158,7 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
             <Form.Item label={"备注"} name="remark">
                 <TextArea placeholder={"备注"}/>
             </Form.Item>
-        </Form>
+        </AdminForm>
     )
 }
 

@@ -17,14 +17,17 @@ export enum ButtonsText {
 
 
 interface AdminTableTemplateProps<TableListItemDataType> {
-    tableHeaderColumns:  ProColumns<TableListItemDataType, "text">[];
-    loading: boolean;
-    tableDatasource: TableListItemDataType[];
+    tableHeaderColumns?:  ProColumns<TableListItemDataType, "text">[];
+    loading?: boolean;
+    tableDatasource?: TableListItemDataType[];
     onSearchClick?: (props: any) => TableListItemDataType[];
-    setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>
+    setShowModalContent?: React.Dispatch<React.SetStateAction<ModalContent>>;
+    hasAddForm?: boolean;
+    hasEditForm?: boolean;
+    searchable?: boolean;
+    addText?: string;
 }
-export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProps<TableListItemDataType>) => {
-
+export const AdminTable = <TableListItemDataType,>({tableHeaderColumns, loading, tableDatasource, onSearchClick, setShowModalContent, hasAddForm = true, hasEditForm = true, searchable = true, addText = ButtonsText.AddText}: AdminTableTemplateProps<TableListItemDataType>) => {
     // NOTE: actionRef
     // const actionRef = useRef<ActionType>();
 
@@ -47,8 +50,8 @@ export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProp
     const [cachedDatasource, setCachedDatasource] = useState<Array<TableListItemDataType>>();
 
     useEffect(() => {
-        setCachedDatasource(props.tableDatasource);
-    }, [props.tableDatasource]);
+        setCachedDatasource(tableDatasource);
+    }, [tableDatasource]);
 
     // NOTE: search
     const searchConfig = useMemo(() => {
@@ -64,7 +67,7 @@ export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProp
                 <Space>
                     <Button onClick={() => {
                         form.resetFields();
-                        setCachedDatasource(props.tableDatasource);
+                        setCachedDatasource(tableDatasource);
                     }}>
                         {resetText}
                     </Button>
@@ -72,7 +75,7 @@ export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProp
                         type={'primary'}
                         onClick={() => {
                             const searchInputKeys = form.getFieldsValue();
-                            const searchedDataSource = props.onSearchClick(searchInputKeys);
+                            const searchedDataSource = onSearchClick(searchInputKeys);
                             setCachedDatasource(searchedDataSource);
                             form.submit();
                         }}
@@ -82,7 +85,7 @@ export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProp
                 </Space>
             ),
         }
-    }, [props.tableDatasource, props.onSearchClick]);
+    }, [tableDatasource, onSearchClick]);
 
     return (
         <ProTable<TableListItemDataType>
@@ -90,7 +93,7 @@ export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProp
             // actionRef={actionRef}
             // 可以获取到查询表单的 form 实例，用于一些灵活的配置
             // formRef={formRef}
-            columns={props.tableHeaderColumns}
+            columns={tableHeaderColumns}
             dataSource={cachedDatasource}
             // onDataSourceChange={(dataSource: T[]) => void}
             // editable={{ type: 'multiple', }}
@@ -104,7 +107,7 @@ export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProp
             }}
             // rowKey="id"
             // @ts-ignore
-            search={!props.searchable ? false : searchConfig}
+            search={!searchable ? false : searchConfig}
             options={{
                 setting: {
                     listsHeight: 400,
@@ -118,14 +121,18 @@ export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProp
             }}
             // NOTE: Unknow
             headerTitle={
-                <Button key="button" icon={<PlusOutlined />} type="primary" onClick={
-                    () => {
-                        props.setShowModalContent({
-                            show: true,
-                            isEdit: false,
-                        });
-                    }
-                }>{ButtonsText.AddText}</Button>
+                <>
+                    {hasAddForm && (
+                        <Button key="button" icon={<PlusOutlined />} type="primary" onClick={
+                            () => {
+                                setShowModalContent({
+                                    show: true,
+                                    isEdit: false,
+                                });
+                            }
+                        }>{addText}</Button>
+                    )}
+                </>
             }
             // NOTE: Antd Design
             pagination={{
@@ -141,7 +148,7 @@ export const AdminTable = <TableListItemDataType,>(props: AdminTableTemplateProp
             // form={form}
             // onSubmit={(params: U) => void}
             // onReset={() => void}
-            loading={props.loading}
+            loading={loading}
             // NOTE:
             // scroll={{ x: 1000 }}
         />

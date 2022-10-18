@@ -10,7 +10,6 @@ import UserPage from "./modules/user/components/pages/UserPage";
 import {RiskSettingPage} from "./modules/risk/components/pages/RiskSettingPage";
 import UserInfoPage from "./modules/user/components/pages/UserInfoPage";
 import {createHashHistory} from "history";
-import {ChannelTagPage} from "./modules/channel/components/pages/ChannelSettingTagPage";
 import {ChannelTabPage} from "./modules/channel/components/pages/ChannelTabPage";
 import UserReviewPage from "./modules/user/components/pages/UserReviewPage";
 import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPage";
