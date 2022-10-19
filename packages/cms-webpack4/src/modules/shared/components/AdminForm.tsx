@@ -2,6 +2,7 @@ import {Form} from "antd/es";
 import {Store} from "antd/es/form/interface"
 import {FormInstance} from "antd";
 import React from "react";
+import {CustomAntFormFieldError} from "../utils/validation/CustomAntFormFieldError";
 
 export interface AdminFormProps {
     children?: React.ReactElement | React.ReactElement[];
@@ -11,8 +12,7 @@ export interface AdminFormProps {
     initialValues: Store;
     onFieldsChange: (changedFields: any, allFields: any) => void;
     onFinish: () => void;
-    onFinishFailed: () => void;
-    onValuesChange: (changedFields, allFields) => void;
+    customAntFormFieldError?: CustomAntFormFieldError;
 }
 
 export const AdminForm = (props: AdminFormProps) => {
@@ -34,8 +34,6 @@ export const AdminForm = (props: AdminFormProps) => {
             initialValues={props.initialValues}
             onFieldsChange={props.onFieldsChange}
             onFinish={props.onFinish}
-            onFinishFailed={props.onFinishFailed}
-            onValuesChange={props.onValuesChange}
         >
             {props.children}
         </Form>

@@ -1,0 +1,58 @@
+import {z} from "zod";
+import {SchemaEntity} from "../../../../../../shared/utils/validation/SchemaEntity";
+
+
+// NOTICE: VO Input Schema
+
+// NOTICE: Schema
+// NOTE: message
+const POSITIVE_NUMBER_MESSAGE = "请填写正整数";
+const REQUIRED_MESSAGE = "请输入";
+
+// NOTE: custom rules
+const customZodStringRules = (name: string) => {
+    return z.string({
+        required_error: `${REQUIRED_MESSAGE}${name}`
+    })
+}
+const customZodNumberRules = () => z.number({
+    required_error: POSITIVE_NUMBER_MESSAGE,
+    invalid_type_error: POSITIVE_NUMBER_MESSAGE,
+}).positive(POSITIVE_NUMBER_MESSAGE);
+
+
+export const ChannelTagSchema = z.object({
+    auditAcc: customZodStringRules("测试登录帳號").length(10, "请填写10位数字"),
+    // google audit acc
+
+    auditAccOtpCode: customZodStringRules("测试登录验证码").length(6, "请填写6位数字"),
+    // google audit 登入验证码
+
+    auditLoanAmount: customZodNumberRules(),
+    // 审核的借款金额
+
+    auditQuota: customZodNumberRules(),
+    // 审核的订单额度
+
+    auditServiceFee: customZodNumberRules(),
+    // 审核的服务费
+
+    auditTaxFee: customZodNumberRules(),
+    // 审核的利息
+
+    auditTerm: customZodNumberRules(),
+    // 审核的天数
+
+    name: customZodStringRules("渠道配置标签").min(1, REQUIRED_MESSAGE + "渠道配置标签"),
+    // APP設定名称
+})
+
+// NOTICE: SchemaType
+export type IChannelTagSchema = z.infer<typeof ChannelTagSchema>;
+
+// NOTICE: SchemaEntity
+export class ChannelTagSchemaEntity extends SchemaEntity<IChannelTagSchema> {
+    constructor() {
+        super(ChannelTagSchema);
+    }
+}

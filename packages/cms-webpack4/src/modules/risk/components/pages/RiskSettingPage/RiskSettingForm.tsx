@@ -2,7 +2,7 @@ import {Form, FormInstance, Input, Radio, Select, Switch} from "antd";
 import React, {CSSProperties} from "react";
 import TextArea from "antd/es/input/TextArea";
 
-import {NumberValidator} from "../../../../shared/utils/validator";
+import {NumberValidator} from "../../../../shared/utils/validation/validator";
 import {RiskModelMenu} from "../../../api/RiskApi";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {Store} from "antd/es/form/interface"
@@ -14,8 +14,6 @@ interface RiskSettingFormProps {
     initialValues: Store;
     onFieldsChange: (changedFields: any, allFields: any) => void;
     onFinish: () => void;
-    onFinishFailed: () => void;
-    onValuesChange: (changedFields, allFields) => void;
     currentRiskMenuData: Array<RiskModelMenu>;
 }
 
@@ -29,8 +27,6 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
             initialValues={props.initialValues}
             onFieldsChange={props.onFieldsChange}
             onFinish={props.onFinish}
-            onFinishFailed={props.onFinishFailed}
-            onValuesChange={props.onValuesChange}
         >
             <Form.Item label="风控名称" name="modelName" rules={[{ required: true }]}>
                 <Input placeholder="风控名称"/>

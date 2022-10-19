@@ -1,6 +1,6 @@
 import {Divider, Form, Input, Switch} from "antd";
 import React from "react";
-import {NumberValidator} from "../../../../../shared/utils/validator";
+import {NumberValidator} from "../../../../../shared/utils/validation/validator";
 
 const LoanSettingSection = () => {
   return (
