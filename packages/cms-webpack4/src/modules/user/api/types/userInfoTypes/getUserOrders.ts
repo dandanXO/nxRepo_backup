@@ -1,4 +1,4 @@
-import { GetDataCommonResponse } from "../../../../../types/commonReponse";
+import { GetPageableResponse} from "../../../../../types/commonReponse";
 
 export interface GetUserOrdersResponse {
     content:GetUserOrders[]
@@ -16,4 +16,4 @@ export interface GetUserOrders {
     status?: number;	    // 狀態
 }
 
-export type GetUserOrdersProps = GetUserOrdersResponse & GetDataCommonResponse;
+export type GetUserOrdersProps = GetUserOrdersResponse & GetPageableResponse;

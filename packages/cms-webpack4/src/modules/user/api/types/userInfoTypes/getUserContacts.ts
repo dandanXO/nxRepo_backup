@@ -1,7 +1,7 @@
-import { GetDataCommonResponse } from "../../../../../types/commonReponse";
+import { GetPageableResponse } from "../../../../../types/commonReponse";
 
 export interface GetUserContactsResponse {
-    content:GetUserContacts[]
+    content: GetUserContacts[]
 }
 export interface GetUserContacts {
     lastUpdateTime?: string;
@@ -9,4 +9,4 @@ export interface GetUserContacts {
     phone?: string;
 }
 
-export type GetUserContactsProps = GetUserContactsResponse & GetDataCommonResponse;
+export type GetUserContactsProps = GetUserContactsResponse & GetPageableResponse;

@@ -52,17 +52,11 @@ export interface UserPersonaInfoVo {
 }
 
 export interface UserDeviceInfo {
-    // 客户当前APP版本
-    appVersion?: string; 
-
-    // 装置名称
-    deviceModel?: string; 
-
-    // 装置平台
-    osPlatform?: string; 
-
-    // 装置版本
-    osVersion?: string; 
+   
+    appVersion?: string;   // 客户当前APP版本
+    deviceModel?: string;  // 装置名称
+    osPlatform?: string;   // 装置平台
+    osVersion?: string;    // 装置版本
 }
 
 export interface UserImageVo {
@@ -73,29 +67,15 @@ export interface UserImageVo {
 }
 
 export interface UserKycInfoVo {
-    // 银行卡认证
-    bank?: boolean;
-
-    // 是否上传完成
-    certified?: boolean;
-
-    // 通讯录认证
-    contacts?: boolean;
-
-    // 緊急連絡人認證
-    emergency?: boolean;
-
-    // 实名认证
-    idcard?: boolean;
-
-    // 认证完成时间
-    kycFinishTime?: string;
-
-    // 人脸识别认证
-    liveness?: boolean;
-
-    // 税卡认证
-    pan?: boolean;
+   
+    bank?: boolean;          // 银行卡认证
+    certified?: boolean;     // 是否上传完成
+    contacts?: boolean;      // 通讯录认证
+    emergency?: boolean;     // 緊急連絡人認證
+    idcard?: boolean;        // 实名认证
+    kycFinishTime?: string;  // 认证完成时间
+    liveness?: boolean;      // 人脸识别认证
+    pan?: boolean;           // 税卡认证
 
 }
 

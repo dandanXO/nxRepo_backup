@@ -174,10 +174,7 @@ const UserReviewTable = ({ setShowModal }: UserTableProps) => {
                 defaultPageSize: 10,
                 onChange: pageOnChange,
                 total: userReviewList.totalRecords,
-                current:
-                    userReviewList?.records?.length === 0
-                        ? 0
-                        : userReviewList.currentPage + 1,
+                current: userReviewList?.records?.length === 0 ? 0 : userReviewList.currentPage,
             }}
         />
     );

@@ -9,34 +9,34 @@ import { GetUserOrdersProps } from "./types/userInfoTypes/getUserOrders";
 const UserInfoApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-        // NOTE: GET /hs/admin/userDetails/user-detail 用戶信息
+        // NOTE: GET //hs/admin/user-manage/user-detail 用戶信息
         getUserDetail: builder.query<GetUserDetailResponse, GetUserDetailRequestQuerystring>({
             query: (requestBody: GetUserDetailRequestQuerystring) => ({
-                url: `/userDetails/user-detail`,
+                url: `/user-manage/user-detail`,
                 params: requestBody,
                 method: "get",
             }),
         }),
-        // NOTE: GET /hs/admin/userDetails/find-user-sms-logs 短信记录
+        // NOTE: GET /hs/admin/user-manage/user-sms-logs 短信记录
         getUserSMSList: builder.query<GetUserSmsProps, GetUserInfoRequestQuerystring>({
             query: (requestBody: GetUserInfoRequestQuerystring) => ({
-                url: `/userDetails/find-user-sms-logs`,
+                url: `/user-manage/user-sms-logs`,
                 params: requestBody,
                 method: "get",
             }),
         }),
-        // NOTE: GET /hs/admin/userDetails/user-contacts 通讯录
+        // NOTE: GET /hs/admin/user-manage/user-contacts 通讯录
         getUserContactsList: builder.query<GetUserContactsProps, GetUserInfoRequestQuerystring>({
             query: (requestBody: GetUserInfoRequestQuerystring) => ({
-                url: `/userDetails/user-contacts`,
+                url: `/user-manage/user-contacts`,
                 params: requestBody,
                 method: "get",
             }),
         }),
-        // NOTE: GET ​/hs​/admin​/userDetails​/orders 借款信息
+        // NOTE: GET ​/hs​/admin​/user-manage/orders 借款信息
         getUserOrdersList: builder.query<GetUserOrdersProps, GetUserInfoRequestQuerystring>({
             query: (requestBody: GetUserInfoRequestQuerystring) => ({
-                url: `/userDetails/orders`,
+                url: `/user-manage/orders`,
                 params: requestBody,
                 method: "get",
             }),
