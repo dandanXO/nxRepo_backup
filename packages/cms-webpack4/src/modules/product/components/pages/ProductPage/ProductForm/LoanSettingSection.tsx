@@ -1,8 +1,14 @@
-import {Divider, Form, Input, Switch} from "antd";
+import {Divider, Form, Input, Radio, Switch} from "antd";
 import React from "react";
 import {NumberValidator} from "../../../../../shared/utils/validation/validator";
+import {FormInstance} from "antd/es";
 
-const LoanSettingSection = () => {
+interface LoanSettingSectionProps {
+    form: FormInstance;
+    enableLoanAmount: boolean;
+    enableReLoanAmount: boolean;
+}
+const LoanSettingSection = (props: LoanSettingSectionProps) => {
   return (
     <React.Fragment>
       <Divider orientation="left">借款设定</Divider>
@@ -51,6 +57,39 @@ const LoanSettingSection = () => {
         </Form.Item>
         <Form.Item style={{ display: 'inline-block', marginBottom: 0}}>天后，不得展期</Form.Item>
       </Form.Item>
+
+        <Form.Item label="初贷初始额度">
+
+            <Form.Item name="firstLoanQuotaSwitch" style={{ display: 'inline-block', margin: '0 8px 0 0' }}>
+                <Radio.Group>
+                    <Radio value={1}>依照风控</Radio>
+                    <Radio value={0}>系统规则</Radio>
+                </Radio.Group>
+            </Form.Item>
+
+            <Form.Item name="loanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
+                <Input disabled={!props.enableLoanAmount} allowClear placeholder={"初贷初始额度"} />
+            </Form.Item>
+
+        </Form.Item>
+
+
+        <Form.Item label="复贷初始额度">
+
+            <Form.Item name="reLoanQuotaSwitch" style={{ display: 'inline-block', margin: '0 8px 0 0' }}>
+                <Radio.Group>
+                    <Radio value={1}>依照风控</Radio>
+                    <Radio value={0}>系统规则</Radio>
+                </Radio.Group>
+            </Form.Item>
+
+            <Form.Item name="reLoanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
+                <Input disabled={!props.enableReLoanAmount} allowClear placeholder={"复贷初始额度"} />
+            </Form.Item>
+
+        </Form.Item>
+
+
     </React.Fragment>
   )
 }

@@ -1,6 +1,6 @@
 import {FormUploadFileList, ProductFormModal} from "../../../hooks/useProductFormModal";
 import { GetAvailableMerchantResponse } from "../../../../api/types/getAvailbaleMerchant";
-import React, { useCallback, useEffect } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import { Form } from "antd";
 import BaseSettingSection from "./BaseSettingSection";
 import ProductSettingSection from "./ProductSettingSection";
@@ -17,6 +17,12 @@ interface ProductFormProps {
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     show: boolean;
+
+    enableLoanAmount: boolean;
+    enableReLoanAmount:boolean;
+    setEnableLoanAmount:any;
+        setEnableReLoanAmount: any;
+
 }
 
 let isOnChange = false;
@@ -50,13 +56,24 @@ const Index = (props: ProductFormProps) => {
         return field;
     }
 
+
+
     return (
         <Form
             // ref={props.formRef}
             {...layout} form={form} name="control-hooks" onFinish={onFinish}
             onFieldsChange={(changedFields, allFields) => {
+                if(changedFields[0].name[0] ==="firstLoanQuotaSwitch") {
+                    console.log("changedFields", changedFields[0].value);
+                    props.setEnableLoanAmount(changedFields[0].value === 0)
+                }
 
-                // console.log("changedFields", changedFields);
+                if(changedFields[0].name[0] ==="reLoanQuotaSwitch") {
+                    console.log("changedFields", changedFields[0].value);
+                    props.setEnableReLoanAmount(changedFields[0].value === 0)
+                }
+
+
                 // console.log("allFields", allFields);
 
                 function empty(str) {
@@ -403,7 +420,9 @@ const Index = (props: ProductFormProps) => {
                     postInterest: "",
                     preInterest: "",
                     plusAmount: "",
-                }]
+                }],
+                firstLoanQuotaSwitch: 1,
+                reLoanQuotaSwitch: 1,
             }}
         >
             <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit} />
@@ -411,7 +430,7 @@ const Index = (props: ProductFormProps) => {
                 setLogo={setLogo}
                 setBackgroundImg={setBackgroundImg}
             />
-            <LoanSettingSection />
+            <LoanSettingSection form={form} enableLoanAmount={props.enableLoanAmount} enableReLoanAmount={props.enableReLoanAmount}/>
             <RateSettingSection form={form} customAntFormFieldError={customAntFormFieldError} />
             <UploadSettingSection />
         </Form>

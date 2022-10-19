@@ -20,7 +20,11 @@ useAutoLogin();
     customAntFormFieldError,
     triggerGetList, productListData,
     onAutoFinishedForm,
-    onFormSubmit
+    onFormSubmit,
+      enableLoanAmount,
+      enableReLoanAmount,
+      setEnableLoanAmount,
+      setEnableReLoanAmount,
   } = useProductFormModal({
     show: false,
     isEdit: false,
@@ -64,7 +68,12 @@ useAutoLogin();
           isEdit={productModalData.isEdit}
           onOk={onFormSubmit}
         >
-          <ProductForm productModalData={productModalData} onFinish={onFinish} form={form} merchantList={merchantList} customAntFormFieldError={customAntFormFieldError} setCustomAntFormFieldError={setCustomAntFormFieldError} show={productModalData.show}/>
+          <ProductForm productModalData={productModalData} onFinish={onFinish} form={form} merchantList={merchantList} customAntFormFieldError={customAntFormFieldError} setCustomAntFormFieldError={setCustomAntFormFieldError} show={productModalData.show}
+                       enableLoanAmount={enableLoanAmount}
+                       enableReLoanAmount={enableReLoanAmount}
+                       setEnableLoanAmount={setEnableLoanAmount}
+                       setEnableReLoanAmount={setEnableReLoanAmount}
+            />
         </ProductModal>
       )}
     </PageContainer>

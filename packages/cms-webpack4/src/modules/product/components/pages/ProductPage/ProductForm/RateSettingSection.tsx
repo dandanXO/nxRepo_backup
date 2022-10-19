@@ -10,10 +10,11 @@ import {
 } from "../../../../../shared/utils/validation/validator";
 import {maxOneUnitFloatReplacer} from "../../../../../shared/utils/maxOneUnitFloatReplacer";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import {FormInstance} from "antd/es";
 
 const { Paragraph, Text } = Typography;
 interface RateSettingSectionProps {
-  form: any;
+  form: FormInstance;
   customAntFormFieldError: CustomAntFormFieldError
 }
 export const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>

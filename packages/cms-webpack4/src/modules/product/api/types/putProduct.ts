@@ -26,8 +26,16 @@ export interface PutProductRequestBody {
     extensibleOverdueDays?: number;
     /** 展期费率 */
     extensionRate?: number;
+
+    // 初始贷款额度开关 0: 系统规则 1: 风控返回
+    firstLoanQuotaSwitch?: boolean;
+
     /** 广告放款利率 */
     interestRange?: string;
+
+    // 初始贷款额度
+    loanAmount?: number;
+
     /** 借款周期 */
     loanTerm?: number;
     /** 产品logo url */
@@ -44,6 +52,15 @@ export interface PutProductRequestBody {
     productInterestRatePairs?: PutProductInterestRatePairs[];
     /** 产品名称 */
     productName?: string;
+
+    // 老客贷款额度
+    reLoanAmount?: number;
+
+
+    // 老客贷款额度开关 0: 系统规则 1: 风控返回
+    reLoanQuotaSwitch?: boolean;
+
+
     /** 还款链结有效天数 */
     repayExpiryDays?: number;
     /** 是否显示借款金额 */
