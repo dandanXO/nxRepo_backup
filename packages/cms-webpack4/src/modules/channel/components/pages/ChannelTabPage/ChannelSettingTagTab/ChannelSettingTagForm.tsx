@@ -68,7 +68,7 @@ export const ChannelSettingTagForm = (props: ChannelSettingTagFormProps) => {
                        validateStatus={(props.customAntFormFieldError?.auditTerm as any)?.validateStatus}
                        help={(props.customAntFormFieldError?.auditTerm as any)?.help}
             >
-                <Input placeholder={"天数"}/>
+                <Input placeholder={"天数"} suffix={"days"}/>
             </Form.Item>
 
             <Form.Item label="订单额度" name={"auditQuota"} required
