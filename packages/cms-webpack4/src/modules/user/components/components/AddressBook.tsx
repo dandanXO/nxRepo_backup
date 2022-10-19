@@ -7,7 +7,7 @@ import { GetUserContacts } from "../../api/types/userInfoTypes/getUserContacts"
 
 const AddressBook = (({ userId }: UserId) => {
 
-    const { currentData, isLoading } = useGetUserContactsListQuery({ userId, pageNumber: 1, pageSize: 10 });
+    const { currentData, isLoading } = useGetUserContactsListQuery({ userId, pageNum: 1, pageSize: 10 });
     const columns: ProColumns<GetUserContacts>[] = [
 
         { title: '姓名', dataIndex: 'name', key: 'name' },

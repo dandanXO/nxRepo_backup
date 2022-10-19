@@ -1,12 +1,7 @@
 export interface GetUserInfoRequestQuerystring {
-
-    offset?: number;
-    pageNumber?: number;
+    pageNum?: number;
     pageSize?: number;
-    paged?: boolean;
-    sorted?: boolean;
-    unsorted?: boolean;
-    unpaged?: boolean;
+    sortField?: string;
+    sortOrder?: string;
     userId?: number;
-
 }

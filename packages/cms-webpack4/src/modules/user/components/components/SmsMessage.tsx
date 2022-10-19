@@ -5,7 +5,7 @@ import { GetUserSms } from '../../api/types/userInfoTypes/getUserSms';
 import { UserId } from '../../../../types/UserId';
 
 const SmsMessage = ({userId}:UserId) => {
-    const { currentData: userSmsList, isLoading } = useGetUserSMSListQuery({ userId, pageNumber: 1, pageSize: 10 });
+    const { currentData: userSmsList, isLoading } = useGetUserSMSListQuery({ userId, pageNum: 1, pageSize: 10 });
 
     const columns: ProColumns<GetUserSms>[] = [
 

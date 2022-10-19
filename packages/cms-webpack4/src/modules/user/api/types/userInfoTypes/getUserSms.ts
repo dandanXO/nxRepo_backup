@@ -1,4 +1,4 @@
-import { GetDataCommonResponse } from "../../../../../types/commonReponse";
+import { GetPageableResponse } from "../../../../../types/commonReponse";
 
 export interface GetUserSmsResponse{
     content:GetUserSms[]
@@ -11,4 +11,4 @@ export interface GetUserSms {
     userId?: number;
 }
 
-export type GetUserSmsProps = GetUserSmsResponse & GetDataCommonResponse;
+export type GetUserSmsProps = GetUserSmsResponse & GetPageableResponse;

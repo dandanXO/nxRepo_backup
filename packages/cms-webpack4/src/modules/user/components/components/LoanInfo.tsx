@@ -6,7 +6,7 @@ import { useGetUserOrdersListQuery } from '../../api/UserInfoApi';
 
 const LoanInfo = ({userId}:UserId) => {
 
-    const {currentData,isLoading}=useGetUserOrdersListQuery({ userId, pageNumber: 1, pageSize: 10 });
+    const {currentData,isLoading}=useGetUserOrdersListQuery({ userId, pageNum: 1, pageSize: 10 });
  
 
     const columns: ProColumns<GetUserOrders>[] = [

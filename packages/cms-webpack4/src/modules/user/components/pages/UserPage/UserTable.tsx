@@ -9,6 +9,7 @@ import { setSearchParams, setPathname, selectSearchParams } from '../../../../sh
 import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
+// import usePageable from '../../../../shared/hooks/usePageable';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
 }
@@ -32,7 +33,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     }
 
     // state
-    const [userList, setUserList] = useState<GetUerListProps>({ content: [] });
+    const [userList, setUserList] = useState<GetUerListProps>({ records: [] });
     const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
     const [isImportTelSale, setIsImportTelSale] = useState(false);
@@ -57,7 +58,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
 
     useEffect(() => {
         if (currentData !== undefined) {
-            setUserList(currentData)
+            setUserList(currentData);
         }
     }, [currentData])
 
@@ -67,6 +68,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         history.push(`user-info/${userId}`);
     }
 
+    // const {pageable}=usePageable(userList);
     const pageOnChange = (current, pageSize) => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
     }
@@ -176,12 +178,11 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     return (
         <ProTable<UserListContent>
             columns={columns}
-            dataSource={userList?.content || []}
+            dataSource={userList?.records || []}
             loading={isFetching}
             rowKey="id"
             headerTitle={<Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
             search={{
-                // collapsed:false,
                 labelWidth: 'auto',
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
@@ -241,8 +242,10 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                 showSizeChanger: true,
                 defaultPageSize: 10,
                 onChange: pageOnChange,
-                total: userList.totalElements,
-                current: userList?.content?.length === 0 ? 0 : userList.number + 1,
+                total: userList.totalRecords,
+                current: userList?.records?.length === 0 ? 0 : userList.currentPage,
+                // ...pageable,
+                // onChange: pageOnChange,
             }}
         />
 
