@@ -1,27 +1,16 @@
 import {Form, Modal, UploadFile} from "antd";
 import React, {useCallback, useEffect, useState} from "react";
 import {
-  useGetAvailableMerchantListQuery,
-  useLazyGetProductManageListQuery,
-  useLazyGetProductQuery,
-  usePostProductCreateMutation,
-  usePutProductEditMutation
+    useGetAvailableMerchantListQuery,
+    useLazyGetProductManageListQuery,
+    useLazyGetProductQuery,
+    usePostProductCreateMutation,
+    usePutProductEditMutation
 } from "../../api/ProductApi";
 import {PostProductCreateRequestBody} from "../../api/types/postProductCreate";
-import {ValidateStatus} from "antd/es/form/FormItem";
 import moment from "moment/moment";
+import {CustomAntFormFieldError} from "../../../shared/utils/validation/CustomAntFormFieldError";
 
-export type CustomAntFormFieldError = {
-    [field: string]: {
-        validateStatus?: ValidateStatus;
-        help: string;
-        value?: string;
-    } | {
-        validateStatus?: ValidateStatus;
-        help: string;
-        value?: string;
-    }[]
-}
 export interface ProductFormModal {
   show: boolean;
   isEdit?: boolean

@@ -1,4 +1,4 @@
-import {CustomAntFormFieldError, FormUploadFileList, ProductFormModal} from "../../../hooks/useProductFormModal";
+import {FormUploadFileList, ProductFormModal} from "../../../hooks/useProductFormModal";
 import { GetAvailableMerchantResponse } from "../../../../api/types/getAvailbaleMerchant";
 import React, { useCallback, useEffect } from "react";
 import { Form } from "antd";
@@ -7,6 +7,7 @@ import ProductSettingSection from "./ProductSettingSection";
 import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import { UploadSettingSection } from "./UploadSettingSection";
+import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 
 interface ProductFormProps {
     productModalData: ProductFormModal;

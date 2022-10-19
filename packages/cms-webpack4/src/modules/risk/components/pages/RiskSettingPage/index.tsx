@@ -387,8 +387,6 @@ export const RiskSettingPage = () => {
                         initialValues={initialValues}
                         onFieldsChange={onFieldsChange}
                         onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
-                        onValuesChange={onValuesChange}
                         currentRiskMenuData={currentRiskMenuData}
                     />
                 </RiskSettingModal>

@@ -2,7 +2,6 @@ import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {AdminTable, ModalContent} from "../../../../../shared/components/AdminTable";
 import {
-    ChannelTag,
     useCreateTagMutation, useDeleteTagMutation,
     useLazyGetAllTagQuery,
     useLazyGetTagQuery,
@@ -12,7 +11,43 @@ import {useForm} from "antd/es/form/Form";
 import {ChannelSettingTagModal} from "./ChannelSettingTagModal";
 import {ChannelSettingTagForm} from "./ChannelSettingTagForm";
 import {AdminDeleteModal} from "../../../../../shared/components/AdminDeleteModal";
+import {MockChannelTag, ChannelTagVO, ChannelTagSchemaEntity, IChannelTagSchema} from "./formData";
+import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 
+// NOTICE:
+const channelTagSchemaEntity = new ChannelTagSchemaEntity();
+
+
+const setSource = (sourceData) => {
+    return {
+        auditAcc	:sourceData.auditAcc,
+        // google audit acc
+
+        auditAccOtpCode	:sourceData.auditAccOtpCode,
+        // google audit 登入验证码
+
+        auditLoanAmount	:!isNaN(sourceData.auditLoanAmount) ? Number(sourceData.auditLoanAmount) : sourceData.auditLoanAmount,
+        // 审核的借款金额
+
+        auditQuota	:!isNaN(sourceData.auditQuota) ? Number(sourceData.auditQuota) : sourceData.auditQuota,
+        // 审核的订单额度
+
+        auditServiceFee	:!isNaN(sourceData.auditServiceFee) ? Number(sourceData.auditServiceFee) : sourceData.auditServiceFee,
+        // 审核的服务费
+
+        auditTaxFee	:!isNaN(sourceData.auditTaxFee) ? Number(sourceData.auditTaxFee) : sourceData.auditTaxFee,
+        // 审核的利息
+
+        auditTerm	:!isNaN(sourceData.auditTerm) ? Number(sourceData.auditTerm) : sourceData.auditTerm,
+        // 审核的天数
+
+        name	:sourceData.name,
+        // APP設定名称
+
+        // NOTICE: 要填寫
+        // changedFieldName: changedFieldName,
+    }
+}
 export const ChannelSettingTagTabPage = () => {
     // NOTICE: Restful API
     // NOTE: GET list and item
@@ -35,7 +70,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTE: Table
     const columns = useMemo(() => {
-        const columns: ProColumns<ChannelTag>[] = [
+        const columns: ProColumns<ChannelTagVO>[] = [
             {
                 key: 'option',
                 title: '操作',
@@ -108,6 +143,9 @@ export const ChannelSettingTagTabPage = () => {
     // NOTE: FORM
     const [form] = useForm()
 
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
+    // console.log("customAntFormFieldError", customAntFormFieldError);
+
     // NOTICE: Modal
     // NOTE: OK
     const onOk = useCallback(() => {
@@ -116,33 +154,14 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTE: onAutoCompleteTemplate
     const onAutoCompleteTemplate = useCallback(() => {
-        const mockRequest = {
-            auditAcc: "account001",
-            // google audit acc
+        form.setFieldsValue(MockChannelTag)
+        validateForm();
 
-            auditAccOtpCode: "pas001",
-            // google audit 登入验证码
-
-            auditLoanAmount: "1000",
-            // 审核的借款金额
-
-            auditQuota: "2000",
-            // 审核的订单额度
-
-            auditServiceFee: "100",
-            // 审核的服务费
-
-            auditTaxFee: "1",
-            // 审核的利息
-
-            auditTerm: "2",
-            // 审核的天数
-
-            name: String(new Date().getTime()),
-            // APP設定名称
-        }
-        form.setFieldsValue(mockRequest)
     }, [form])
+
+    const onCloseModal = useCallback(() => {
+        setCustomAntFormFieldError({});
+    }, []);
 
     // NOTICE: Form-2/2
     // NOTE: Form.1 Initial Data
@@ -165,47 +184,81 @@ export const ChannelSettingTagTabPage = () => {
         // const id = targetMenu && targetMenu[0] && targetMenu[0].id || undefined;
 
         // NOTE: form - main data
-        form.setFieldsValue({
-            auditAcc	:currentFormData.auditAcc,
-            // google audit acc
-
-            auditAccOtpCode	:currentFormData.auditAccOtpCode,
-            // google audit 登入验证码
-
-            auditLoanAmount	:currentFormData.auditLoanAmount,
-            // 审核的借款金额
-
-            auditQuota	:currentFormData.auditQuota,
-            // 审核的订单额度
-
-            auditServiceFee	:currentFormData.auditServiceFee,
-            // 审核的服务费
-
-            auditTaxFee	:currentFormData.auditTaxFee,
-            // 审核的利息
-
-            auditTerm	:currentFormData.auditTerm,
-            // 审核的天数
-
-            name:	currentFormData.name,
-            // APP設定名称
-        } as ChannelTag)
+        form.setFieldsValue(currentFormData)
     }, [showModalContent.isEdit, currentFormData])
 
 
     // NOTE: Form.3. onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
+        console.log("changedFields", changedFields)
+        console.log("allFields", allFields)
+        if(changedFields.length === 0) return;
+        // NOTICE: need
+        const changedFieldName = changedFields[0].name[0];
+        // console.log("changedFieldName", changedFieldName);
+
+        // const fields = form.getFieldsValue().filter(value => value !== undefined);
+        // console.log("fields", fields);
+        // NOTICE: need
+        let sourceData: IChannelTagSchema =  {
+            // ...fields,
+            [changedFields[0].name[0]]: changedFields[0].value
+        } as IChannelTagSchema;
+
+        console.log("sourceData", sourceData);
+        // NOTICE: need
+        channelTagSchemaEntity.setProperties(setSource(sourceData))
+        // console.log("channelTagSchemaEntity", channelTagSchemaEntity)
+        // NOTICE: need
+        const validData = channelTagSchemaEntity.validate(changedFieldName);
+        console.log("validData", validData);
+
+        setCustomAntFormFieldError({
+            ...customAntFormFieldError,
+            ...validData.fieldsMessage,
+        });
+
     }, [])
 
+    const validateForm = useCallback(() => {
+        // NOTICE: need
+        const fields = form.getFieldsValue();
+
+        // NOTICE: need to prevent restored validation
+        Object.keys(fields).map(key => {
+            if(fields[key] === undefined) {
+                // fields[key] = ""
+                form.setFieldValue(key, "");
+            }
+        })
+        // channelTagSchemaEntity.setProperties(setSource(sourceData))
+
+        console.log("fields", fields);
+        // NOTICE: need
+        const validData = channelTagSchemaEntity.setProperties(setSource(fields)).validate();
+        setCustomAntFormFieldError({
+            ...customAntFormFieldError,
+            ...validData.fieldsMessage,
+        });
+        console.log("validData", validData);
+
+        return validData.isEntityValid;
+    }, [])
 
     // NOTE: Form.4 onFinish
     const onFinish = useCallback(() => {
+        const isValid = validateForm();
+        if(!isValid) return;
+
+        // NOTICE: need
         const fields = form.getFieldsValue();
+        console.log("finished.fields.1", fields)
 
         // NOTICE: MODE - Edit
         if(showModalContent.isEdit) {
             fields["id"] = editID;
         }
+        console.log("finished.fields.2", fields)
 
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
@@ -228,20 +281,10 @@ export const ChannelSettingTagTabPage = () => {
 
         })
     }, [editID])
-
-    // NOTE: Form.5 onFinishFailed
-    const onFinishFailed = useCallback(() => {
-    }, [])
-
-    // NOTE: Form.6 onValuesChange
-    const onValuesChange = useCallback((changedFields, allFields) => {
-    }, [])
-
-
     return (
         <>
             {/*NOTICE: List Table*/}
-            <AdminTable<ChannelTag>
+            <AdminTable<ChannelTagVO>
                 tableHeaderColumns={columns}
                 tableDatasource={currentData}
                 loading={isGetListFetching}
@@ -259,6 +302,7 @@ export const ChannelSettingTagTabPage = () => {
                 form={form}
                 onOk={onOk}
                 onAutoCompleteTemplate={onAutoCompleteTemplate}
+                onCloseModal={onCloseModal}
             >
                 <ChannelSettingTagForm
                     isEdit={showModalContent.isEdit}
@@ -266,8 +310,7 @@ export const ChannelSettingTagTabPage = () => {
                     initialValues={initialValues}
                     onFieldsChange={onFieldsChange}
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    onValuesChange={onValuesChange}
+                    customAntFormFieldError={customAntFormFieldError}
                 />
             </ChannelSettingTagModal>
 

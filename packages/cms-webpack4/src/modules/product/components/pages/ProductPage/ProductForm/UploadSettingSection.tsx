@@ -1,7 +1,7 @@
 import {Divider, Form, Input, Radio, Switch, Select, FormItemProps} from "antd";
 
 import React, {useMemo} from "react";
-import {TagValidator} from "../../../../../shared/utils/validator";
+import {TagValidator} from "../../../../../shared/utils/validation/validator";
 const { Option } = Select;
 
 export function UploadSettingSection() {
