@@ -72,13 +72,25 @@ export const useProductFormModal = (props: ProductFormModal) => {
     })
   }, [productModalData.productId])
 
-  useEffect(() => {
+
+    const [enableLoanAmount, setEnableLoanAmount] = useState<boolean>(false);
+    const [enableReLoanAmount, setEnableReLoanAmount] = useState<boolean>(false);
+
+
+
+    useEffect(() => {
     if(isFetching) return;
     // if(!productModalData.productId) return;
     // console.log("productFormData.merchantId", productFormData?.merchantId);
     // console.log("merchantList", merchantList);
     if(!productFormData) return;
     if(!merchantList) return;
+
+
+        setEnableLoanAmount(productFormData.firstLoanQuotaSwitch === false)
+        setEnableReLoanAmount(productFormData.reLoanQuotaSwitch === false)
+
+
     const currentMerchant = merchantList?.find(merchant => merchant.merchantId === productFormData.merchantId);
 
     if(!productModalData.productId) {
@@ -123,6 +135,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
         maxAmount: productFormData.maxAmount,
         extensible: productFormData.extensible,
         extensibleOverdueDays: productFormData.extensibleOverdueDays,
+
+        firstLoanQuotaSwitch: productFormData.firstLoanQuotaSwitch === true ? 1 : 0,
+        reLoanQuotaSwitch: productFormData.reLoanQuotaSwitch === true ? 1 : 0,
+          loanAmount:productFormData.loanAmount,
+      reLoanAmount: productFormData.reLoanAmount,
+
+
         preInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.preInterestRate) * 100)}`,
         postInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.postInterestRate) * 100)}`,
         dailyRate: `${fixedFloatNumberToFixed2(Number(productFormData.dailyRate) * 100)}`,
@@ -146,6 +165,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     // console.log("productFormData", productFormData);
   }, [isFetching])
+
 
   const [triggerGetList, { currentData: productListData }] = useLazyGetProductManageListQuery({
     pollingInterval: 0,
@@ -201,6 +221,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
   const strToFloatNumberWithFixed2 = (str: string): number => {
     return Number((Number(str) * 0.01).toFixed(2));
   }
+
+
   const onFinish = (values: any) => {
     // console.log("onFinish.values", JSON.stringify(values));
 
@@ -232,6 +254,12 @@ export const useProductFormModal = (props: ProductFormModal) => {
       maxAmount: Number(values.maxAmount),
       extensible: values.extensible,
       extensibleOverdueDays: Number(values.extensibleOverdueDays),
+
+        firstLoanQuotaSwitch: values.firstLoanQuotaSwitch,
+        reLoanQuotaSwitch: values.reLoanQuotaSwitch,
+        loanAmount:values.loanAmount,
+        reLoanAmount: values.reLoanAmount,
+
 
       preInterestRate: strToFloatNumberWithFixed2(values.preInterestRate),
       postInterestRate: strToFloatNumberWithFixed2(values.postInterestRate),
@@ -294,6 +322,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
       "maxAmount": "140000",
       "extensible": true,
       "extensibleOverdueDays": "15",
+       "firstLoanQuotaSwitch": 0,
+        "loanAmount": "1000",
+        "reLoanQuotaSwitch": 0,
+        "reLoanAmount": "2000",
       "preInterestRate": "16",
       "postInterestRate": "17",
       "dailyRate": "18",
@@ -338,5 +370,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
     productListData,
     onAutoFinishedForm,
     onFormSubmit,
+      enableLoanAmount,
+      enableReLoanAmount,
+      setEnableLoanAmount,
+      setEnableReLoanAmount,
   }
 }

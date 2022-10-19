@@ -56,8 +56,14 @@ export interface GetProductQueryResponse{
   extensionRate?:	number;
   // 展期费率
 
+    firstLoanQuotaSwitch?: boolean;
+    // 初始贷款额度开关 0: 系统规则 1: 风控返回
+
   interestRange?:	string;
   // 广告放款利率
+
+    loanAmount?: number;
+    // 初始贷款额度
 
   loanTerm?: number;
   // 借款周期
@@ -85,6 +91,12 @@ export interface GetProductQueryResponse{
   productInterestRatePairs?: ProductInterestRatePair[];
   productName?:	string;
   // 产品名称
+
+    reLoanAmount?: number;
+    // 老客贷款额度
+
+    reLoanQuotaSwitch?: boolean;
+    // 老客贷款额度开关 0: 系统规则 1: 风控返回
 
   repayExpiryDays?: number;
   // 还款链结有效天数
