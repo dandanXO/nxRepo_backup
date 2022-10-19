@@ -47,7 +47,6 @@ export const ChannelSettingTagTabPage = () => {
                 render: (text, record, _, action) => {
                     return [
                         <a key="editable" onClick={() => {
-                            console.log("record", record);
                             setEditID(record.id);
                             setShowModalContent({
                                 show: true,
@@ -58,7 +57,6 @@ export const ChannelSettingTagTabPage = () => {
                             });
                         }}>修改</a>,
                         <a key="deletable" onClick={() => {
-                            console.log("record", record);
                             setEditID(record.id);
                             setShowDeletedModal(true);
                         }}>刪除</a>,
@@ -88,7 +86,6 @@ export const ChannelSettingTagTabPage = () => {
     const [showDeleteModal, setShowDeletedModal] = useState(false);
 
     const onDeleteModalOK = useCallback(() => {
-        // console.log("editID", editID);
         triggerDelete({
             id: editID,
         }).unwrap().then(() => {
@@ -159,8 +156,6 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTE: Form.3. onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
-        // console.log("changedFields", changedFields)
-        // console.log("allFields", allFields)
         if(changedFields.length === 0) return;
 
         // NOTICE: need
@@ -211,13 +206,11 @@ export const ChannelSettingTagTabPage = () => {
 
         // NOTICE: need
         const fields = form.getFieldsValue();
-        console.log("finished.fields.1", fields)
 
         // NOTICE: MODE - Edit
         if(showModalContent.isEdit) {
             fields["id"] = editID;
         }
-        console.log("finished.fields.2", fields)
 
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
