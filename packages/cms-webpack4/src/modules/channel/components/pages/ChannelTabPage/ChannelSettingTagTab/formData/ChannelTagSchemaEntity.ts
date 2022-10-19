@@ -82,9 +82,6 @@ export class ChannelTagSchemaEntity extends SchemaEntity<IChannelTagSchema> {
 
             name	:sourceData.name,
             // APP設定名称
-
-            // NOTICE: 要填寫
-            // changedFieldName: changedFieldName,
         }
         // return this;
     }
