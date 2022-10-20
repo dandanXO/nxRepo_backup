@@ -27,8 +27,6 @@ export interface GetRiskManageRequest {
 
 // 首贷级距
 export interface MssRiskRankVo {
-    // balance: number;
-    // 可借额度
     loanCount: number;
     // 可借笔数
 
