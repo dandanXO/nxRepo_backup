@@ -1,6 +1,4 @@
 import {API} from "../../../api";
-import {number} from "zod";
-import {NEVER} from "@reduxjs/toolkit/dist/query/fakeBaseQuery";
 
 // NOTE: GET ALL
 export interface RiskManageList {
