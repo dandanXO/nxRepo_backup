@@ -42,6 +42,7 @@ class AuthRoute extends Component {
               if(microApp) {
                 console.log("[MainApp][before] menu", data);
                 data = data.map(menuItem => {
+                  // 用戶管理
                   if(menuItem.actionUrl === "/userManage") {
                     menuItem.children.map(level2MenuItem => {
                       if(level2MenuItem.actionUrl === "/userInfoManage") {
@@ -49,6 +50,15 @@ class AuthRoute extends Component {
                       }
                     })
                   }
+                  // 渠道管理
+                  if(menuItem.actionUrl === "/channelManage") {
+                    menuItem.children.map(level2MenuItem => {
+                      if(level2MenuItem.actionUrl === "/channelList") {
+                        level2MenuItem.actionUrl = "/cms/channel";
+                      }
+                    })
+                  }
+
                   if(menuItem.actionUrl === "/platform-manage") {
                     menuItem.children.map(level2MenuItem => {
                       if(level2MenuItem.actionUrl === "/merchant-manage") {
