@@ -42,6 +42,13 @@ class AuthRoute extends Component {
               if(microApp) {
                 console.log("[MainApp][before] menu", data);
                 data = data.map(menuItem => {
+                  if(menuItem.actionUrl === "/userManage") {
+                    menuItem.children.map(level2MenuItem => {
+                      if(level2MenuItem.actionUrl === "/userInfoManage") {
+                        level2MenuItem.actionUrl = "/cms/user";
+                      }
+                    })
+                  }
                   if(menuItem.actionUrl === "/platform-manage") {
                     menuItem.children.map(level2MenuItem => {
                       if(level2MenuItem.actionUrl === "/merchant-manage") {
