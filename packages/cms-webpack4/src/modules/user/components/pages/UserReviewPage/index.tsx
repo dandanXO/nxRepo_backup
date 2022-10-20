@@ -45,8 +45,9 @@ const UserReviewPage = () => {
                 },
             }}
         >
-            <UserReviewTable setShowModal={setShowModal} />
-            {/* <AddBlackListModal showModal={showModal.show} handleCloseModal={handleCloseModal} onFinish={onFinish} form={form} /> */}
+             <UserReviewTable  />
+            {/* <UserReviewTable setShowModal={setShowModal} /> */}
+           
         </PageContainer> : null
     )
 }

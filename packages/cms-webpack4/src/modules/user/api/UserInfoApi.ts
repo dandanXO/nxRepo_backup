@@ -48,4 +48,8 @@ export const {
     useGetUserSMSListQuery,
     useGetUserContactsListQuery,
     useGetUserOrdersListQuery,
+
+    useLazyGetUserContactsListQuery,
+    useLazyGetUserSMSListQuery,
+    useLazyGetUserOrdersListQuery
 } = UserInfoApi;

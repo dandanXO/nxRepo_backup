@@ -242,7 +242,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                 showSizeChanger: true,
                 defaultPageSize: 10,
                 onChange: pageOnChange,
-                total: userList.totalRecords,
+                total: userList?.totalRecords,
                 current: userList?.records?.length === 0 ? 0 : userList.currentPage,
                 // ...pageable,
                 // onChange: pageOnChange,

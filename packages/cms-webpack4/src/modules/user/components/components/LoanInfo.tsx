@@ -2,13 +2,31 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { GetUserOrders } from '../../api/types/userInfoTypes/getUserOrders';
 import { UserId } from '../../../../types/UserId';
-import { useGetUserOrdersListQuery } from '../../api/UserInfoApi';
-
+import { useLazyGetUserOrdersListQuery } from '../../api/UserInfoApi';
+import { useEffect, useState } from 'react';
 const LoanInfo = ({userId}:UserId) => {
 
-    const {currentData,isLoading}=useGetUserOrdersListQuery({ userId, pageNum: 1, pageSize: 10 });
- 
+    const [triggerGetList, { currentData, isLoading, isFetching,isSuccess }] = useLazyGetUserOrdersListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+    const [pageable,setPagealbe]=useState({ userId,pageNum: 1, pageSize: 10 })
+    const [loanInfo,setLoanInfo]=useState<any>()
+    useEffect(() => {
+        triggerGetList(pageable)
+    }, [pageable]);
 
+    useEffect(()=>{
+        if(currentData!==undefined){
+            setLoanInfo(currentData)
+        }
+    },[currentData])
+
+    
+    const pageOnChange = (current, pageSize) => {
+        setPagealbe({ ...pageable, pageNum: current, pageSize: pageSize })
+    }
     const columns: ProColumns<GetUserOrders>[] = [
 
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo' },
@@ -38,17 +56,20 @@ const LoanInfo = ({userId}:UserId) => {
 
   return (
 
-            <ProTable<GetUserOrders>
-                columns={columns}
-                dataSource={!isLoading && currentData?.content || []}
-                loading={isLoading}
-                rowKey="id"
-                search={false}
-                pagination={{
-                    showSizeChanger: true,
-                    defaultPageSize: 10
-                }}
-            />
+      <ProTable<GetUserOrders>
+          columns={columns}
+          dataSource={!isLoading && loanInfo?.records || []}
+          loading={isLoading}
+          rowKey="id"
+          search={false}
+          pagination={{
+              showSizeChanger: true,
+              defaultPageSize: 10,
+              onChange: pageOnChange,
+              total: loanInfo?.totalRecords,
+              current: loanInfo?.records?.length === 0 ? 0 : loanInfo?.currentPage,
+          }}
+      />
 
     )
 }

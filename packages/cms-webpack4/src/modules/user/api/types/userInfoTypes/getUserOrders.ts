@@ -1,7 +1,7 @@
 import { GetPageableResponse} from "../../../../../types/commonReponse";
 
 export interface GetUserOrdersResponse {
-    content:GetUserOrders[]
+    records:GetUserOrders[]
 }
 export interface GetUserOrders {
     applyTime?: number;	    // 申请时间
