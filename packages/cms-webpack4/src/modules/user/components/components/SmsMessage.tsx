@@ -1,12 +1,15 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import {ProTable } from '@ant-design/pro-components';
-import { useGetUserSMSListQuery } from "../../api/UserInfoApi";
+import { useLazyGetUserSMSListQuery } from "../../api/UserInfoApi";
 import { GetUserSms } from '../../api/types/userInfoTypes/getUserSms';
 import { UserId } from '../../../../types/UserId';
-
+import { useEffect, useState } from 'react';
 const SmsMessage = ({userId}:UserId) => {
-    const { currentData: userSmsList, isLoading } = useGetUserSMSListQuery({ userId, pageNum: 1, pageSize: 10 });
-
+    const [triggerGetList, { currentData, isLoading, isFetching,isSuccess }] = useLazyGetUserSMSListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
     const columns: ProColumns<GetUserSms>[] = [
 
         { title: '发送号码', dataIndex: 'phone', key: 'phone' },
@@ -15,18 +18,38 @@ const SmsMessage = ({userId}:UserId) => {
         { title: '发送时间', dataIndex: 'time', key: 'time', valueType: 'dateTime' },
     ]
 
+    const [pageable,setPagealbe]=useState({ userId,pageNum: 1, pageSize: 10 })
+    const [userSmsList,setUserSmsList]=useState<any>()
+    useEffect(() => {
+        triggerGetList(pageable)
+    }, [pageable]);
+
+    useEffect(()=>{
+        if(currentData!==undefined){
+            setUserSmsList(currentData)
+        }
+    },[currentData])
+
+    
+    const pageOnChange = (current, pageSize) => {
+        setPagealbe({ ...pageable, pageNum: current, pageSize: pageSize })
+    }
+
     return (
 
         <ProTable<GetUserSms>
             columns={columns}
-            dataSource={!isLoading && userSmsList.content || []}
+            dataSource={!isLoading && userSmsList?.records || []}
             loading={isLoading}
             rowKey="id"
             search={false}
             options={false}
             pagination={{
                 showSizeChanger: true,
-                defaultPageSize: 10
+                defaultPageSize: 10,
+                onChange: pageOnChange,
+                total: userSmsList?.totalRecords,
+                current:userSmsList?.records?.length === 0 ? 0 : userSmsList?.currentPage,
             }}
         />
 
