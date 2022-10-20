@@ -27,8 +27,10 @@ export interface GetRiskManageRequest {
 
 // 首贷级距
 export interface MssRiskRankVo {
-    balance: number;
+    // balance: number;
     // 可借额度
+    loanCount: number;
+    // 可借笔数
 
     id?: number;
     // 风控评分等级流水号
@@ -70,8 +72,6 @@ export interface RiskManageModel {
     riskModelName: string;
     // 风控模型名称
 
-    useRcQuota: boolean;
-    // 借款额度使用风控返回结果
 }
 
 export type GetRiskManageResponse = RiskManageModel;
