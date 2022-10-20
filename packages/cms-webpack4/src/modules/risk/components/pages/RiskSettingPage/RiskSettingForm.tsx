@@ -50,7 +50,7 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                                 <div>
                                     <CustomLabel style={{ width: 76}}>风控标签</CustomLabel>
                                     <CustomLabel>风控商等级</CustomLabel>
-                                    <CustomLabel>初始借款额度</CustomLabel>
+                                    <CustomLabel>最高可放款笔数</CustomLabel>
                                 </div>
                             )}
                             <Input.Group compact>
@@ -72,17 +72,17 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                                     <Input placeholder={"值"}/>
                                 </Form.Item>
 
-                                <Form.Item name={["firstLoan", index, "balance"]} style={{ margin: '0 8px 0 0' }}
+                                <Form.Item name={["firstLoan", index, "loanCount"]} style={{ margin: '0 8px 0 0' }}
                                            rules={[
                                                {
                                                    validator: async (_, value) =>NumberValidator(_, value)({
                                                        required: true,
-                                                       requiredErrorMessage: "请输入可借额度",
+                                                       requiredErrorMessage: "请输入笔数",
                                                    })
                                                },
                                            ]}
                                 >
-                                    <Input placeholder={"可借额度"}/>
+                                    <Input placeholder={"笔数"}/>
                                 </Form.Item>
                             </Input.Group>
                         </Form.Item>
@@ -98,7 +98,7 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                                 <div>
                                     <CustomLabel style={{ width: 76}}>风控标签</CustomLabel>
                                     <CustomLabel>风控商等级</CustomLabel>
-                                    <CustomLabel>初始借款额度</CustomLabel>
+                                    <CustomLabel>最高可放款笔数</CustomLabel>
                                 </div>
                             )}
                             <Input.Group compact>
@@ -121,30 +121,23 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                                     <Input placeholder={"值"}/>
                                 </Form.Item>
 
-                                <Form.Item name={["repeatLoan", index, "balance"]} style={{ margin: '0 8px 0 0' }}
+                                <Form.Item name={["repeatLoan", index, "loanCount"]} style={{ margin: '0 8px 0 0' }}
                                            rules={[
                                                {
                                                    validator: async (_, value) =>NumberValidator(_, value)({
                                                        required: true,
-                                                       requiredErrorMessage: "请输入可借额度",
+                                                       requiredErrorMessage: "请输入笔数",
                                                    })
                                                },
                                            ]}
                                 >
-                                    <Input placeholder={"可借额度"}/>
+                                    <Input placeholder={"笔数"}/>
                                 </Form.Item>
 
                             </Input.Group>
                         </Form.Item>
                     )
                 })}
-            </Form.Item>
-
-            <Form.Item label={"借款金额"} name="useRcQuota">
-                <Radio.Group>
-                    <Radio value={false}>风控返回</Radio>
-                    <Radio value={true}>系统规则</Radio>
-                </Radio.Group>
             </Form.Item>
 
             <Form.Item label={"状态"} name={"enabled"} valuePropName={"checked"}>

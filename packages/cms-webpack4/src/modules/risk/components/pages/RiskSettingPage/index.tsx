@@ -21,7 +21,7 @@ import useAutoLogin from "../../../../shared/hooks/useAutoLogin";
 export type FormResponseData = GetRiskManageResponse;
 
 export const RiskSettingPage = () => {
-    // useAutoLogin();
+    useAutoLogin();
 
     // NOTE: UI Loading
     const [loading, setLoading] = useState(false);
@@ -110,23 +110,22 @@ export const RiskSettingPage = () => {
         const mockRequest = {
             enabled: true,
             firstLoan: [
-                {providerRank: 'A', balance: '4000'},
-                {providerRank: 'B', balance: '3000'},
-                {providerRank: 'C', balance: '2000'},
-                {providerRank: 'D', balance: '1000'},
-                {providerRank: 'E', balance: '0'}
+                {providerRank: 'A', loanCount: '4000'},
+                {providerRank: 'B', loanCount: '3000'},
+                {providerRank: 'C', loanCount: '2000'},
+                {providerRank: 'D', loanCount: '1000'},
+                {providerRank: 'E', loanCount: '0'}
             ],
             modelName: String(new Date().getTime()),
             remark: "remark",
             repeatLoan: [
-                {providerRank: 'A', balance: '8000'},
-                {providerRank: 'B', balance: '6000'},
-                {providerRank: 'C', balance: '4000'},
-                {providerRank: 'D', balance: '2000'},
-                {providerRank: 'E', balance: '0'},
+                {providerRank: 'A', loanCount: '8000'},
+                {providerRank: 'B', loanCount: '6000'},
+                {providerRank: 'C', loanCount: '4000'},
+                {providerRank: 'D', loanCount: '2000'},
+                {providerRank: 'E', loanCount: '0'},
             ],
             riskModelName: 1,
-            useRcQuota: true
         }
         form.setFieldsValue(mockRequest)
     }, [form])
@@ -148,7 +147,6 @@ export const RiskSettingPage = () => {
     const initialValues = useMemo(() => {
         // NOTICE: select and switch need initialValue if you want to select one
         return {
-            useRcQuota: true,
             enabled: true,
         } as DeepPartial<FormResponseData>;
     }, [])
@@ -201,7 +199,6 @@ export const RiskSettingPage = () => {
             riskModelName: id,
             firstLoan: currentFormData.firstLoan,
             repeatLoan: currentFormData.repeatLoan,
-            useRcQuota: currentFormData.useRcQuota,
             enabled: currentFormData.enabled,
             remark: currentFormData.remark,
         })
@@ -237,7 +234,7 @@ export const RiskSettingPage = () => {
             if(key === "firstLoan" || key === "repeatLoan") {
                 fields[key].map((record, index) => {
                     fields[key][index] = {
-                        balance: Number(record.balance),
+                        loanCount: Number(record.loanCount),
                         // 可借额度
 
                         // NOTE: future
