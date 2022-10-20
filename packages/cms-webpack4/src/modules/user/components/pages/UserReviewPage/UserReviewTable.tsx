@@ -9,10 +9,9 @@ import { setSearchParams, setPathname, selectSearchParams } from '../../../../sh
 import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
-import { NumberValidator } from '../../../../shared/utils/validator';
 
 const UserReviewTable = () => {
-   
+
     const { channelListEnum, riskRankEnum } = useValuesEnums();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserReviewListQuery({
@@ -70,7 +69,7 @@ const UserReviewTable = () => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
     }
 
- 
+
     const columns: ProColumns<UserReviewListResponse>[] = [
         {
             title: '操作',
@@ -93,7 +92,7 @@ const UserReviewTable = () => {
             initialValue: (searchParams.registerStartTime === undefined || searchParams.registerStartTime === "") ? "" : [moment(searchParams.registerStartTime), moment(searchParams.registerEndTime)]
         },
     ]
- 
+
     const [buttonDisabled,setButtonDisbaled]=useState(true)
     const [randomInputValue,setRandomInputValue]=useState<number|string>("");
 
@@ -156,7 +155,7 @@ const UserReviewTable = () => {
         console.log('selectArray',selectArray)
 
         onSelectChange(selectArray)
-        
+
     }
 
     return (
@@ -229,7 +228,7 @@ const UserReviewTable = () => {
                 current: userReviewList?.records?.length === 0 ? 0 : userReviewList.currentPage,
             }}
         >
-            
+
         </ProTable>
     );
 }
