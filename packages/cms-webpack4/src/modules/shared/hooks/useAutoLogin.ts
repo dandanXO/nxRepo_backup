@@ -20,7 +20,8 @@ const useAutoLogin = () => {
     }
 
   }, [triggerLogin, isLoginSuccess])
-  return [isLoginSuccess]
+
+  return {isLoginSuccess}
 }
 
 export default useAutoLogin;
