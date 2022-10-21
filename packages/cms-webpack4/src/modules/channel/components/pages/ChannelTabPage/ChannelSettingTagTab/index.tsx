@@ -13,11 +13,13 @@ import {ChannelSettingTagForm} from "./ChannelSettingTagForm";
 import {AdminDeleteModal} from "../../../../../shared/components/AdminDeleteModal";
 import {MockChannelTag, ChannelTagVO, ChannelTagSchemaEntity, IChannelTagSchema} from "./formData";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import useAutoLogin from "../../../../../shared/hooks/useAutoLogin";
 
 // NOTICE:
 const channelTagSchemaEntity = new ChannelTagSchemaEntity();
 
 export const ChannelSettingTagTabPage = () => {
+
     // NOTICE: Restful API
     // NOTE: GET list and item
     const [triggerGetList, { currentData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
@@ -27,10 +29,16 @@ export const ChannelSettingTagTabPage = () => {
     });
     const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetTagQuery();
 
+    // const {isLoginSuccess} = useAutoLogin();
+    // useEffect(() => {
+    //     triggerGetList(null);
+    // }, [isLoginSuccess])
+
     // NOTE: POST , PUT and DELETE
     const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateTagMutation();
     const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
     const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteTagMutation();
+
 
     // NOTICE: Action: List
     useEffect(() => {
