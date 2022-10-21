@@ -31,14 +31,14 @@ export const ChannelSettingTagForm = (props: ChannelSettingTagFormProps) => {
                        validateStatus={(props.customAntFormFieldError?.auditAcc as any)?.validateStatus}
                        help={(props.customAntFormFieldError?.auditAcc as any)?.help}
             >
-                <Input placeholder={"测试登录帳號 10 碼"}/>
+                <Input placeholder={"登录帐号为您的电话号码"}/>
             </Form.Item>
 
             <Form.Item label="测试登录验证码" name={"auditAccOtpCode"} required
                        validateStatus={(props.customAntFormFieldError?.auditAccOtpCode as any)?.validateStatus}
                        help={(props.customAntFormFieldError?.auditAccOtpCode as any)?.help}
             >
-                <Input placeholder={"测试登录验证码 6 码"}/>
+                <Input placeholder={"请输入6码验证码"}/>
             </Form.Item>
 
             <Divider orientation="left">广告审核配置</Divider>
@@ -57,11 +57,11 @@ export const ChannelSettingTagForm = (props: ChannelSettingTagFormProps) => {
                 <Input placeholder={"服务费"}/>
             </Form.Item>
 
-            <Form.Item label="利息" name={"auditTaxFee"} required
+            <Form.Item label="税额" name={"auditTaxFee"} required
                        validateStatus={(props.customAntFormFieldError?.auditTaxFee as any)?.validateStatus}
                        help={(props.customAntFormFieldError?.auditTaxFee as any)?.help}
             >
-                <Input placeholder={"利息"}/>
+                <Input placeholder={"税额"}/>
             </Form.Item>
 
             <Form.Item label="天数" name={"auditTerm"} required
