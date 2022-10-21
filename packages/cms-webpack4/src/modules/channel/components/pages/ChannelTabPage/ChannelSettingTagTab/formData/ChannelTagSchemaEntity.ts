@@ -22,7 +22,7 @@ const customZodNumberRules = () => z.number({
 
 
 export const ChannelTagSchema = z.object({
-    auditAcc: customZodStringRules("测试登录帳號").length(10, "请填写10位数字"),
+    auditAcc: customZodStringRules("测试登录帳號"),
     // google audit acc
 
     auditAccOtpCode: customZodStringRules("测试登录验证码").length(6, "请填写6位数字"),
