@@ -6,10 +6,10 @@ import {
     useLazyGetProductQuery,
     usePostProductCreateMutation,
     usePutProductEditMutation
-} from "../../api/ProductApi";
-import {PostProductCreateRequestBody} from "../../api/types/postProductCreate";
+} from "../../../../api/ProductApi";
+import {PostProductCreateRequestBody} from "../../../../api/types/postProductCreate";
 import moment from "moment/moment";
-import {CustomAntFormFieldError} from "../../../shared/utils/validation/CustomAntFormFieldError";
+import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 
 export interface ProductFormModal {
   show: boolean;
@@ -142,19 +142,20 @@ export const useProductFormModal = (props: ProductFormModal) => {
       reLoanAmount: productFormData.reLoanAmount,
 
 
-        preInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.preInterestRate) * 100)}`,
-        postInterestRate: `${fixedFloatNumberToFixed2(Number(productFormData.postInterestRate) * 100)}`,
-        dailyRate: `${fixedFloatNumberToFixed2(Number(productFormData.dailyRate) * 100)}`,
-        extensionRate: `${fixedFloatNumberToFixed2(Number(productFormData.extensionRate) * 100)}`,
+        preInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.preInterestRate) * 100)}`,
+        postInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.postInterestRate) * 100)}`,
+        dailyRate: `${fixedFloatNumberToFixed3(Number(productFormData.dailyRate) * 100)}`,
+        extensionRate: `${fixedFloatNumberToFixed3(Number(productFormData.extensionRate) * 100)}`,
+          overdueRate: `${fixedFloatNumberToFixed3(Number(productFormData.overdueRate) * 100)}`,
         productInterestRatePairs: productFormData.productInterestRatePairs.map((ratePair) => {
           return {
             num: ratePair.num,
-            preInterest: fixedFloatNumberToFixed2(ratePair.preInterest * 100),
-            postInterest: fixedFloatNumberToFixed2(ratePair.postInterest * 100),
+            preInterest: fixedFloatNumberToFixed3(ratePair.preInterest * 100),
+            postInterest: fixedFloatNumberToFixed3(ratePair.postInterest * 100),
               plusAmount: ratePair.plusAmount,
           }
         }),
-        overdueRate: `${fixedFloatNumberToFixed2(Number(productFormData.overdueRate) * 100)}`,
+
         top: productFormData.top,
         tags: productFormData.tags.split(","),
         templateType: productFormData.templateType,
@@ -215,11 +216,11 @@ export const useProductFormModal = (props: ProductFormModal) => {
   }, [productModalData.isEdit, productModalData.productId, postProductCreate, putProduct, setProductModalData, form, triggerGetList]);
 
 
-  const fixedFloatNumberToFixed2 = (number: number): number => {
-    return Number(number.toFixed(2));
+  const fixedFloatNumberToFixed3 = (number: number): number => {
+    return Number(number.toFixed(3));
   }
-  const strToFloatNumberWithFixed2 = (str: string): number => {
-    return Number((Number(str) * 0.01).toFixed(2));
+  const strToFloatNumberWithFixed3 = (str: string): number => {
+    return Number((Number(str) * 0.01).toFixed(3));
   }
 
 
@@ -261,11 +262,12 @@ export const useProductFormModal = (props: ProductFormModal) => {
         reLoanAmount: values.reLoanAmount,
 
 
-      preInterestRate: strToFloatNumberWithFixed2(values.preInterestRate),
-      postInterestRate: strToFloatNumberWithFixed2(values.postInterestRate),
-      dailyRate: strToFloatNumberWithFixed2(values.dailyRate),
-      extensionRate: strToFloatNumberWithFixed2(values.extensionRate),
-      overdueRate: strToFloatNumberWithFixed2(values.overdueRate),
+      preInterestRate: strToFloatNumberWithFixed3(values.preInterestRate),
+      postInterestRate: strToFloatNumberWithFixed3(values.postInterestRate),
+      dailyRate: strToFloatNumberWithFixed3(values.dailyRate),
+      extensionRate: strToFloatNumberWithFixed3(values.extensionRate),
+      overdueRate: strToFloatNumberWithFixed3(values.overdueRate),
+
       productInterestRatePairs: productInterestRatePairs,
 
       top: values.top,

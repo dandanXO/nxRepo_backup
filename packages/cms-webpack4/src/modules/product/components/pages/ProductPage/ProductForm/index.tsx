@@ -1,4 +1,4 @@
-import {FormUploadFileList, ProductFormModal} from "../../../hooks/useProductFormModal";
+import {ProductFormModal} from "../hooks/useProductFormModal";
 import { GetAvailableMerchantResponse } from "../../../../api/types/getAvailbaleMerchant";
 import React, {useCallback, useEffect, useState} from "react";
 import { Form } from "antd";
