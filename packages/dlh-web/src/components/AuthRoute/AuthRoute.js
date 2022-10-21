@@ -51,13 +51,13 @@ class AuthRoute extends Component {
                     })
                   }
                   // 渠道管理
-                  if(menuItem.actionUrl === "/channelManage") {
-                    menuItem.children.map(level2MenuItem => {
-                      if(level2MenuItem.actionUrl === "/channelList") {
-                        level2MenuItem.actionUrl = "/cms/channel";
-                      }
-                    })
-                  }
+                  // if(menuItem.actionUrl === "/channelManage") {
+                  //   menuItem.children.map(level2MenuItem => {
+                  //     if(level2MenuItem.actionUrl === "/channelList") {
+                  //       level2MenuItem.actionUrl = "/cms/channel";
+                  //     }
+                  //   })
+                  // }
 
                   if(menuItem.actionUrl === "/platform-manage") {
                     menuItem.children.map(level2MenuItem => {
