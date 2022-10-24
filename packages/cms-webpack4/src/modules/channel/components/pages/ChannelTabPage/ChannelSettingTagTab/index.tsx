@@ -93,7 +93,7 @@ export const ChannelSettingTagTabPage = () => {
         isEdit: false,
     });
 
-    // NOTE: Action: PUT
+    // NOTICE: Action: PUT
     const [editID, setEditID] = useState<number>();
 
     // NOTICE: Form
