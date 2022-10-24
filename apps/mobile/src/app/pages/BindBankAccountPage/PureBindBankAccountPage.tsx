@@ -210,10 +210,12 @@ export const PureBindBankAccountPage = (
                     label="IFSC Code"
                     value={ifscData.data}
                     onChange={(event) => {
-                        setIFSCData({
-                            ...ifscData,
-                            data: event.target.value,
-                        });
+                      let data = event.target.value;
+                      data = data.replace(/[^0-9]/g, "");
+                      setIFSCData({
+                          ...ifscData,
+                          data,
+                      });
                     }}
                     onBlur={() => {
                         validateIFSC();
