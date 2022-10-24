@@ -20,6 +20,11 @@ const channelTagSchemaEntity = new ChannelTagSchemaEntity();
 
 export const ChannelSettingTagTabPage = () => {
 
+    // const {isLoginSuccess} = useAutoLogin();
+    // useEffect(() => {
+    //     triggerGetList(null);
+    // }, [isLoginSuccess])
+
     // NOTICE: Restful API
     // NOTE: GET list and item
     const [triggerGetList, { currentData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
@@ -29,11 +34,6 @@ export const ChannelSettingTagTabPage = () => {
     });
     const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetTagQuery();
 
-    // const {isLoginSuccess} = useAutoLogin();
-    // useEffect(() => {
-    //     triggerGetList(null);
-    // }, [isLoginSuccess])
-
     // NOTE: POST , PUT and DELETE
     const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateTagMutation();
     const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
@@ -41,10 +41,6 @@ export const ChannelSettingTagTabPage = () => {
 
 
     // NOTICE: Action: List
-    useEffect(() => {
-        triggerGetList(null);
-    }, []);
-
     // NOTE: Table
     const columns = useMemo(() => {
         const columns: ProColumns<ChannelTagVO>[] = [
@@ -85,26 +81,9 @@ export const ChannelSettingTagTabPage = () => {
 
     }, []);
 
-
-    // NOTICE: Action: PUT
-    const [editID, setEditID] = useState<number>();
-
-    // NOTICE: Action: Delete
-    // NOTE: Modal
-    const [showDeleteModal, setShowDeletedModal] = useState(false);
-
-    const onDeleteModalOK = useCallback(() => {
-        triggerDelete({
-            id: editID,
-        }).unwrap().then(() => {
-            setShowDeletedModal(false);
-            triggerGetList(null);
-        })
-    }, [editID])
-
-    const onDeleteModalCancel = useCallback(() => {
-        setShowDeletedModal(false);
-    }, [])
+    useEffect(() => {
+        triggerGetList(null);
+    }, []);
 
 
     // NOTICE: Action: POST or PUT
@@ -114,39 +93,22 @@ export const ChannelSettingTagTabPage = () => {
         isEdit: false,
     });
 
+    // NOTE: Action: PUT
+    const [editID, setEditID] = useState<number>();
+
+    // NOTICE: Form
     // NOTE: FORM
     const [form] = useForm()
 
-    // NOTE: FORM - Validation
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
-
-    // NOTICE: Modal
-    // NOTE: OK
-    const onOk = useCallback(() => {
-        form.submit();
-    }, [form])
-
-    // NOTE: onAutoCompleteTemplate
-    const onAutoCompleteTemplate = useCallback(() => {
-        form.setFieldsValue(MockChannelTag)
-        validateForm();
-
-    }, [form])
-
-    const onCloseModal = useCallback(() => {
-        setCustomAntFormFieldError({});
-    }, []);
-
-    // NOTICE: Form-2/2
-    // NOTE: Form.1 Initial Data
-    const initialValues = useMemo(() => {
-        // NOTICE: select and switch need initialValue if you want to select one
+    // NOTE: Form - Initial Data
+    const formInitialValues = useMemo(() => {
+        // NOTE: select and switch need initialValue if you want to select one
         return {
 
         } as DeepPartial<{}>;
     }, [])
 
-    // NOTE: Form2. Edit Mode, Set form fields from data
+    // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
         // NOTICE: validation
         if(!showModalContent.isEdit) return;
@@ -161,9 +123,8 @@ export const ChannelSettingTagTabPage = () => {
         form.setFieldsValue(currentFormData)
     }, [showModalContent.isEdit, currentFormData])
 
-
-    // NOTE: Form.3. onFieldsChange
-    const onFieldsChange = useCallback((changedFields, allFields) => {
+    // NOTE: Form - onFieldsChange
+    const onFormFieldsChange = useCallback((changedFields, allFields) => {
         if(changedFields.length === 0) return;
 
         // NOTICE: need
@@ -185,6 +146,8 @@ export const ChannelSettingTagTabPage = () => {
 
     }, [])
 
+    // NOTE: Form - Validation
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
     const validateForm = useCallback(() => {
         // NOTICE: need
         const fields = form.getFieldsValue();
@@ -207,8 +170,8 @@ export const ChannelSettingTagTabPage = () => {
         return validData.isEntityValid;
     }, [])
 
-    // NOTE: Form.4 onFinish
-    const onFinish = useCallback(() => {
+    // NOTE: Form - Finish
+    const onFormFinish = useCallback(() => {
         const isValid = validateForm();
         if(!isValid) return;
 
@@ -241,6 +204,44 @@ export const ChannelSettingTagTabPage = () => {
 
         })
     }, [editID])
+
+    // NOTICE: Action - POST, PUT
+    // NOTICE: Modal - POST, PUT
+    // NOTE: Modal - OK
+    const onModalOk = useCallback(() => {
+        form.submit();
+    }, [form])
+
+    // NOTE: Modal - Close
+    const onCloseModal = useCallback(() => {
+        setCustomAntFormFieldError({});
+    }, []);
+
+    // NOTE: Modal - onModalFormAutoCompleteTemplate
+    const onModalFormAutoCompleteTemplate = useCallback(() => {
+        form.setFieldsValue(MockChannelTag)
+        validateForm();
+    }, [form])
+
+
+    // NOTICE: Action - Delete
+    // NOTICE: Modal - Delete
+    const [showDeleteModal, setShowDeletedModal] = useState(false);
+
+    const onDeleteModalOK = useCallback(() => {
+        triggerDelete({
+            id: editID,
+        }).unwrap().then(() => {
+            setShowDeletedModal(false);
+            triggerGetList(null);
+        })
+    }, [editID])
+
+    const onDeleteModalCancel = useCallback(() => {
+        setShowDeletedModal(false);
+    }, [])
+
+
     return (
         <>
             {/*NOTICE: List Table*/}
@@ -260,16 +261,16 @@ export const ChannelSettingTagTabPage = () => {
                 // 關閉
                 setShowModalContent={setShowModalContent}
                 form={form}
-                onOk={onOk}
-                onAutoCompleteTemplate={onAutoCompleteTemplate}
+                onOk={onModalOk}
+                onAutoCompleteTemplate={onModalFormAutoCompleteTemplate}
                 onCloseModal={onCloseModal}
             >
                 <ChannelSettingTagForm
                     isEdit={showModalContent.isEdit}
                     form={form}
-                    initialValues={initialValues}
-                    onFieldsChange={onFieldsChange}
-                    onFinish={onFinish}
+                    initialValues={formInitialValues}
+                    onFieldsChange={onFormFieldsChange}
+                    onFinish={onFormFinish}
                     customAntFormFieldError={customAntFormFieldError}
                 />
             </ChannelSettingTagModal>
