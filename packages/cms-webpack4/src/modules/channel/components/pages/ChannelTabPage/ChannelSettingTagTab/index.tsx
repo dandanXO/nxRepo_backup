@@ -322,8 +322,8 @@ export const ChannelSettingTagTabPage = () => {
                 setShowModalContent={setShowModalContent}
                 form={form}
                 onOk={onModalOk}
-                // onAutoCompleteTemplate={onModalFormAutoCompleteTemplate}
                 onCloseModal={onCloseModal}
+                // onAutoCompleteTemplate={onModalFormAutoCompleteTemplate}
             >
                 <ChannelSettingTagForm
                     isEdit={showModalContent.isEdit}

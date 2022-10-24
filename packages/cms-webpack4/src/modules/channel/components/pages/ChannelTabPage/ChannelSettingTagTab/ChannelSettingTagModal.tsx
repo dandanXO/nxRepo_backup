@@ -13,6 +13,7 @@ interface ChannelSettingTagModalProps {
     // NOTE: Form
     form: FormInstance;
     onCloseModal: () => void;
+    autoComplete?: boolean;
 }
 export const ChannelSettingTagModal = (props: ChannelSettingTagModalProps) => {
 
@@ -33,7 +34,7 @@ export const ChannelSettingTagModal = (props: ChannelSettingTagModalProps) => {
                 props.onCloseModal();
             }}
             onOk={props.onOk}
-            autoComplete={true}
+            autoComplete={props.autoComplete || false}
             onAutoCompleteTemplate={props.onAutoCompleteTemplate}
         >
             {props.children}
