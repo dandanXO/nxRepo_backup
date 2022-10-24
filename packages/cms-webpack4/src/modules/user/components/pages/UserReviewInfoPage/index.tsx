@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
-import { Tabs, Button ,Form } from 'antd';
+import { Tabs, Button ,Form,Modal,List } from 'antd';
 import UserInfo from '../../components/UserInfo';
 import AddressBook from '../../components/AddressBook';
 import SmsMessage from '../../components/SmsMessage';
 import { useParams } from "react-router-dom";
 import UsesrReviewModal from './UserReviewModal';
 import {  useHistory } from "react-router-dom";
+import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
 const UserReviewInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();
     const userId = Number(urlParams.userId)
     const [form] = Form.useForm();
     const [showModal,setShowModal]=useState(false);
-    const history=useHistory();
+    const [postUserReview, { data, isLoading, isSuccess }] = usePostUserReviewMutation();
+    const history = useHistory();
+    const [modal, contextHolder] = Modal.useModal();
     useEffect(() => {
         setDomLoaded(true);
     }, []);
@@ -29,9 +32,36 @@ const UserReviewInfoPage = () => {
         setShowModal(false);
     }
 
-    const onFinish=()=>{
+    useEffect(() => {
+        setShowModal(false);
+        if(data && data.length === 0){
+            history.push('/user-review');
+        }
 
-        console.log(form.getFieldsValue())
+        // 送出審核 - 錯誤訊息提醒
+        if (data && data.length !== 0) {
+            modal.error({
+                title: 'Error',
+                content:
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={data}
+                        renderItem={item => (
+                            <List.Item>
+                                <List.Item.Meta
+                                    title={`用户ID - ${item.userId}`}
+                                    description={item.errorMessage}
+                                />
+                            </List.Item>
+                        )}
+                    />
+            })
+        }
+
+    }, [isSuccess])
+
+    const onFinish=()=>{
+        postUserReview({userIds:[userId],...form.getFieldsValue()})
     }
 
     return domLoaded ? (
@@ -47,7 +77,7 @@ const UserReviewInfoPage = () => {
                     breadcrumb: {
                         routes: [
                             { path: '', breadcrumbName: '首页' },
-                            { path: '', breadcrumbName: '用户管理' },
+                            { path: '/user-review', breadcrumbName: '用户管理' },
                             { path: '', breadcrumbName: '用户终审' },
                         ],
                     },
@@ -59,6 +89,7 @@ const UserReviewInfoPage = () => {
             >
                 <Tabs items={tabs} />
                 <UsesrReviewModal showModal={showModal} handleCloseModal={handleCloseModal} form={form} onFinish={onFinish}/>
+                {contextHolder}
             </PageContainer>
         </div>
     ) : null;
