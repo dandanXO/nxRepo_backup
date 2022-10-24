@@ -94,13 +94,12 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTICE: Use Case
     // NOTE: User login automatically
-    const {isLoginSuccess} = useAutoLogin();
-    const userAutoLogin = useCallback(() => {
-        // triggerGetList(null);
-    }, [])
-    useEffect(() => {
-        userAutoLogin();
-    }, [isLoginSuccess])
+    // const {isLoginSuccess} = useAutoLogin();
+    // const userAutoLogin = useCallback(() => {
+    // }, [])
+    // useEffect(() => {
+    //     userAutoLogin();
+    // }, [isLoginSuccess])
 
     // NOTE: System is initializing ChannelSetting List
     const userInitalizeChannelSettingListUsecase = useCallback(() => {
@@ -154,10 +153,10 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
 
     // NOTE: User use FormAutoComplete
-    const userUseFormAutoCompleteUsecase = useCallback(() => {
-        form.setFieldsValue(MockChannelTag);
-        systemValidateChannelSettingUsecase();
-    }, [form])
+    // const userUseFormAutoCompleteUsecase = useCallback(() => {
+    //     form.setFieldsValue(MockChannelTag);
+    //     systemValidateChannelSettingUsecase();
+    // }, [form])
 
     // NOTE: User browse EditChannelSetting
     const userBrowseEditChannelSettingUsecase = useCallback((record: ChannelTagVO) => {

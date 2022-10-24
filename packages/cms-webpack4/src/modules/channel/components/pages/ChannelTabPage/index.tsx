@@ -5,7 +5,7 @@ import {ChannelSettingTagTabPage} from "./ChannelSettingTagTab";
 
 export const ChannelTabPage = () => {
     const tabs = [
-        // { label: '渠道配置列表', key: 'channel', children: <ChannelSettingTabPage/>},
+        { label: '渠道配置列表', key: 'channel', children: <ChannelSettingTabPage/>},
         { label: '渠道配置标签管理', key: 'channel-tab', children: <ChannelSettingTagTabPage/>},
     ];
     return (
