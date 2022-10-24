@@ -26,8 +26,9 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     hasEditForm?: boolean;
     searchable?: boolean;
     addText?: string;
+    onAddCallback?: () => void;
 }
-export const AdminTable = <TableListItemDataType,>({tableHeaderColumns, loading, tableDatasource, onSearchClick, setShowModalContent, hasAddForm = true, hasEditForm = true, searchable = true, addText = ButtonsText.AddText}: AdminTableTemplateProps<TableListItemDataType>) => {
+export const AdminTable = <TableListItemDataType,>({tableHeaderColumns, loading, tableDatasource, onSearchClick, setShowModalContent, hasAddForm = true, hasEditForm = true, searchable = true, addText = ButtonsText.AddText, onAddCallback}: AdminTableTemplateProps<TableListItemDataType>) => {
     // NOTE: actionRef
     // const actionRef = useRef<ActionType>();
 
@@ -123,14 +124,7 @@ export const AdminTable = <TableListItemDataType,>({tableHeaderColumns, loading,
             headerTitle={
                 <>
                     {hasAddForm && (
-                        <Button key="button" icon={<PlusOutlined />} type="primary" onClick={
-                            () => {
-                                setShowModalContent({
-                                    show: true,
-                                    isEdit: false,
-                                });
-                            }
-                        }>{addText}</Button>
+                        <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback()}>{addText}</Button>
                     )}
                 </>
             }
