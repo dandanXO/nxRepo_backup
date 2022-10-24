@@ -72,14 +72,14 @@ export const ChannelSettingTagTabPage = () => {
     // Modal - onModalFormAutoCompleteTemplate
     const onModalFormAutoCompleteTemplate = useCallback(() => {
         userUseFormAutoComplete();
-    }, [form])
+    }, [])
 
     // NOTICE: Modal - Delete
     const [showDeleteModal, setShowDeletedModal] = useState(false);
 
     const onDeleteModalOK = useCallback(() => {
         userDeleteChannelSetting()
-    }, [editID])
+    }, [])
 
     const onDeleteModalCancel = useCallback(() => {
         setShowDeletedModal(false);
@@ -152,7 +152,7 @@ export const ChannelSettingTagTabPage = () => {
     const userUseFormAutoComplete = useCallback(() => {
         form.setFieldsValue(MockChannelTag);
         systemValidateChannelSetting();
-    }, [])
+    }, [form])
 
     // NOTE: User browse EditChannelSetting
     const userBrowseEditChannelSetting = useCallback((record: ChannelTagVO) => {
