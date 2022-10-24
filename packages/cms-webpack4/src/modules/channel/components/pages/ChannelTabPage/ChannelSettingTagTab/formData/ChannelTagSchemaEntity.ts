@@ -6,8 +6,8 @@ import {SchemaEntity} from "../../../../../../shared/utils/validation/SchemaEnti
 
 // NOTICE: Schema
 // NOTE: message
-const POSITIVE_NUMBER_MESSAGE = "请填写正整数";
 const REQUIRED_MESSAGE = "请输入";
+const POSITIVE_NUMBER_MESSAGE = "请填写正整数";
 
 // NOTE: custom rules
 const customZodStringRules = (name: string) => {
@@ -15,8 +15,8 @@ const customZodStringRules = (name: string) => {
         required_error: `${REQUIRED_MESSAGE}${name}`
     })
 }
-const customZodNumberRules = () => z.number({
-    required_error: POSITIVE_NUMBER_MESSAGE,
+const customZodNumberRules = (name: string) => z.number({
+    required_error: `${REQUIRED_MESSAGE}${name}`,
     invalid_type_error: POSITIVE_NUMBER_MESSAGE,
 }).positive(POSITIVE_NUMBER_MESSAGE);
 
@@ -28,19 +28,19 @@ export const ChannelTagSchema = z.object({
     auditAccOtpCode: customZodStringRules("测试登录验证码").length(6, "请填写6位数字"),
     // google audit 登入验证码
 
-    auditLoanAmount: customZodNumberRules(),
+    auditLoanAmount: customZodNumberRules("本金"),
     // 审核的借款金额
 
-    auditQuota: customZodNumberRules(),
+    auditQuota: customZodNumberRules("订单额度"),
     // 审核的订单额度
 
-    auditServiceFee: customZodNumberRules(),
+    auditServiceFee: customZodNumberRules("服务费"),
     // 审核的服务费
 
-    auditTaxFee: customZodNumberRules(),
+    auditTaxFee: customZodNumberRules("税额"),
     // 审核的利息
 
-    auditTerm: customZodNumberRules(),
+    auditTerm: customZodNumberRules("天数"),
     // 审核的天数
 
     name: customZodStringRules("渠道配置标签").min(1, REQUIRED_MESSAGE + "渠道配置标签"),

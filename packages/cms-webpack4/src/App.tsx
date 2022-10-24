@@ -3,8 +3,8 @@ import {Provider} from "react-redux";
 import {appStore} from "./store";
 import "./styles/app.less";
 import {AppRouter} from "./AppRouter";
-
 require('antd/dist/antd.less');
+import "./i18n"
 
 function App() {
 
