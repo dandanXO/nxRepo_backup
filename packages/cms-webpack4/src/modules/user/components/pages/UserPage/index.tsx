@@ -39,8 +39,8 @@ const UserManage = () => {
                 breadcrumb: {
                     routes: [
                         { path: '', breadcrumbName: '首页', },
-                        { path: '', breadcrumbName: '用户管理', },
-                        { path: '', breadcrumbName: '用户管理', },
+                        { path: '/user', breadcrumbName: '用户管理', },
+                        { path: '/user', breadcrumbName: '用户管理', },
                     ],
                 },
             }}

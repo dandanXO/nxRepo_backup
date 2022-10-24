@@ -47,7 +47,7 @@ const UserInfo = ({ userId }: UserId) => {
                 <Item label="注册渠道">{channelName || ""}</Item>
                 <Item label="注册包名">{appName || ""}</Item>
                 <Item label="手机号">{phoneNo || ""}</Item>
-                <Item label="注册时间">{moment(Number(addTime) * 1000).format("YYYY-MM-DD HH:mm:ss")}</Item>
+                <Item label="注册时间">{addTime}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="身份信息">

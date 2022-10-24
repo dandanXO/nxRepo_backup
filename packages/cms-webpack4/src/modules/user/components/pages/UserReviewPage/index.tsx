@@ -38,9 +38,9 @@ const UserReviewPage = () => {
                 breadcrumb: {
                     routes: [
                         { path: '', breadcrumbName: '首页', },
-                        { path: '', breadcrumbName: '用户管理', },
-                        { path: '', breadcrumbName: '用户终审', },
-                        { path: '', breadcrumbName: '审核', },
+                        { path: '/', breadcrumbName: '用户管理', },
+                        { path: '/user-review', breadcrumbName: '用户终审', },
+                        { path: '/user-review', breadcrumbName: '审核', },
                     ],
                 },
             }}

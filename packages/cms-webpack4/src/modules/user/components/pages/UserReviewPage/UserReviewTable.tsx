@@ -81,10 +81,9 @@ const UserReviewTable = () => {
         { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" },
         { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
         {
-            title: '注册渠道', dataIndex: 'regChannelId', valueType: 'select', key: 'regChannelId', hideInTable: true,
+            title: '注册渠道', dataIndex: 'regChannelId', valueType: 'select', key: 'regChannelId',
             valueEnum: channelListEnum, initialValue: searchParams.regChannelId || ''
         },
-        { title: '注册渠道', dataIndex: 'regChannelName', key: 'regChannelName', hideInSearch: true },
         { title: '注册时间', dataIndex: 'registerTime', key: 'registerTime', hideInSearch: true, valueType: 'dateTime' },
         {
             title: '注册时间', dataIndex: 'registerTimeRange', valueType: 'dateRange', key: 'registerTimeRange',

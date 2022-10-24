@@ -129,8 +129,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
         { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListEnum, initialValue:searchParams.channelId || ''},
         {
-            title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true,
-            render: (text) => moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+            title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true, valueType: 'dateTime'
         },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
