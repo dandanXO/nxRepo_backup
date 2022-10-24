@@ -31,6 +31,10 @@ export const ChannelSettingTagTabPage = () => {
         isEdit: false,
     });
 
+    const onAddChannelTag = useCallback(() => {
+        userAddChannelSetting()
+    }, [])
+
     // NOTICE: Action: Edit
     const [editID, setEditID] = useState<number>();
 
@@ -70,9 +74,9 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
 
     // Modal - onModalFormAutoCompleteTemplate
-    const onModalFormAutoCompleteTemplate = useCallback(() => {
-        userUseFormAutoCompleteUsecase();
-    }, [])
+    // const onModalFormAutoCompleteTemplate = useCallback(() => {
+    //     userUseFormAutoCompleteUsecase();
+    // }, [])
 
     // NOTICE: Modal - Delete
     const [showDeleteModal, setShowDeletedModal] = useState(false);
@@ -186,6 +190,15 @@ export const ChannelSettingTagTabPage = () => {
         }
     }, [showModalContent.isEdit, currentFormData])
 
+    // NOTE: User add ChannelSetting
+    const userAddChannelSetting = useCallback(() => {
+        setEditID(undefined);
+        setShowModalContent({
+            show: true,
+            isEdit: false,
+        });
+    }, []);
+
     // NOTE: User is editing ChannelSetting
     const userEditingChannelSettingUsecase = useCallback((changedFields) => {
         if(changedFields.length === 0) return;
@@ -297,6 +310,7 @@ export const ChannelSettingTagTabPage = () => {
                 loading={isGetListFetching}
                 // NOTE: 新增
                 addText={"添加渠道配置标签"}
+                onAddCallback={onAddChannelTag}
                 setShowModalContent={setShowModalContent}
                 searchable={false}
             />
@@ -308,7 +322,7 @@ export const ChannelSettingTagTabPage = () => {
                 setShowModalContent={setShowModalContent}
                 form={form}
                 onOk={onModalOk}
-                onAutoCompleteTemplate={onModalFormAutoCompleteTemplate}
+                // onAutoCompleteTemplate={onModalFormAutoCompleteTemplate}
                 onCloseModal={onCloseModal}
             >
                 <ChannelSettingTagForm

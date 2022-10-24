@@ -8,7 +8,7 @@ interface ChannelSettingTagModalProps {
     showModalContent: ModalContent;
     setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>;
     onOk: () => void;
-    onAutoCompleteTemplate: () => void;
+    onAutoCompleteTemplate?: () => void;
     children?: React.ReactElement;
     // NOTE: Form
     form: FormInstance;
