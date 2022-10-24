@@ -134,9 +134,9 @@ export const ChannelSettingTagTabPage = () => {
     }, [])
 
     // NOTICE: Use Case
-    const {isLoginSuccess} = useAutoLogin();
 
-    // NOTE: userAutoLogin
+    // NOTE: User login automatically
+    const {isLoginSuccess} = useAutoLogin();
     const userAutoLogin = useCallback(() => {
         triggerGetList(null);
 
@@ -145,7 +145,7 @@ export const ChannelSettingTagTabPage = () => {
         userAutoLogin();
     }, [isLoginSuccess])
 
-    // NOTE: userBrowseAllChannelSettings
+    // NOTE: User browse AllChannelSettings
     const userBrowseAllChannelSettings = useCallback(() => {
         triggerGetList(null);
     }, [])
@@ -154,13 +154,13 @@ export const ChannelSettingTagTabPage = () => {
         userBrowseAllChannelSettings()
     }, []);
 
-    // NOTE: userUseFormAutoComplete
+    // NOTE: User use FormAutoComplete
     const userUseFormAutoComplete = useCallback(() => {
         form.setFieldsValue(MockChannelTag);
         systemValidateChannelSetting();
     }, [])
 
-    // NOTE: userBrowseEditChannelSetting
+    // NOTE: User browse EditChannelSetting
     const userBrowseEditChannelSetting = useCallback((record: ChannelTagVO) => {
         setEditID(record.id);
         setShowModalContent({
@@ -172,7 +172,7 @@ export const ChannelSettingTagTabPage = () => {
         });
     }, []);
 
-    // NOTE: systemReloadEditChannelSetting
+    // NOTE: System reload EditChannelSetting
     const systemReloadEditChannelSetting = useCallback(() => {
         // NOTICE: validation
         if(!showModalContent.isEdit) return;
@@ -192,7 +192,7 @@ export const ChannelSettingTagTabPage = () => {
         systemReloadEditChannelSetting()
     }, [])
 
-    // NOTE: userEditingChannelSetting
+    // NOTE: User is editing ChannelSetting
     const userEditingChannelSetting = useCallback((changedFields) => {
         if(changedFields.length === 0) return;
 
@@ -214,7 +214,7 @@ export const ChannelSettingTagTabPage = () => {
         });
     }, [])
 
-    // NOTE: systemValidateChannelSetting
+    // NOTE: System validate ChannelSetting
     const systemValidateChannelSetting = useCallback(() => {
         // NOTICE: need
         const fields = form.getFieldsValue();
@@ -237,7 +237,7 @@ export const ChannelSettingTagTabPage = () => {
         return validData.isEntityValid;
     }, [])
 
-    // NOTE: userEditedChannelSetting
+    // NOTE: user Edited ChannelSetting
     const userEditedChannelSetting = useCallback(() => {
         const isValid = systemValidateChannelSetting();
         if(!isValid) return;
@@ -272,13 +272,13 @@ export const ChannelSettingTagTabPage = () => {
         })
     }, [])
 
-    // NOTE: userBrowseDeleteChannelSetting
+    // NOTE: User browse DeleteChannelSetting
     const userBrowseDeleteChannelSetting = useCallback((record: ChannelTagVO) => {
         setEditID(record.id);
         setShowDeletedModal(true);
     }, [])
 
-    // NOTE: userDeleteChannelSetting
+    // NOTE: User delete ChannelSetting
     const userDeleteChannelSetting = useCallback(() => {
         // NOTE:
         triggerDelete({
