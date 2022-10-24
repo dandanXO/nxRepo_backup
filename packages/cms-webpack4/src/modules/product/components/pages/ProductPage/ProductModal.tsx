@@ -6,7 +6,7 @@ interface ProductModalProps{
   show?: boolean;
   handleCloseModal: (event) => void;
   onOk: () => void;
-  onMockFinish: () => void;
+  // onMockFinish: () => void;
   children?: React.ReactElement;
 }
 
@@ -17,7 +17,7 @@ const ProductModal = (props: ProductModalProps) =>
       title={!props.isEdit ? (
         <span>
           <span style={{ marginRight: 8 }}>添加产品</span>
-          <Button onClick={() => props.onMockFinish()}>自动填入范本资料</Button>
+          {/*<Button onClick={() => props.onMockFinish()}>自动填入范本资料</Button>*/}
         </span>
       ) : "修改产品"}
       open={props.show}
