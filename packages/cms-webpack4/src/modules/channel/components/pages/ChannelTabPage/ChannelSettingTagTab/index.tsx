@@ -36,36 +36,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTICE: Action: List
     // NOTE: Table
-    const columns = useMemo(() => {
-        const columns: ProColumns<ChannelTagVO>[] = [
-            {
-                key: 'option',
-                title: '操作',
-                valueType: 'option',
-                render: (text, record, _, action) => {
-                    return [
-                        <a key="editable" onClick={() => {
-                            userBrowseEditChannelSetting(record);
-                        }}>修改</a>,
-                        <a key="deletable" onClick={() => {
-                            userBrowseDeleteChannelSetting(record)
-                        }}>刪除</a>,
-                    ]
-                }
-            },
-            {
-                key: 'id',
-                dataIndex: 'id',
-                hideInSearch: true,
-                hideInTable: true,
-            },
-            { key: 'name', title: '渠道配置标签', dataIndex: 'name', initialValue: "" },
-            { key: 'auditAcc', title: '测试帐号', dataIndex: 'auditAcc', initialValue: "" },
-            { key: 'auditAccOtpCode', title: '测试验证码', dataIndex: 'auditAccOtpCode', initialValue: "" },
-        ];
-        return columns;
-
-    }, []);
+    const [columns, setColumns] = useState<ProColumns<ChannelTagVO>[]>()
 
 
     // NOTICE: Action: POST or PUT
@@ -144,6 +115,41 @@ export const ChannelSettingTagTabPage = () => {
     useEffect(() => {
         userAutoLogin();
     }, [isLoginSuccess])
+
+    // NOTE: System is initializing ChannelSetting List
+    const userInitalizeChannelSettingList = useCallback(() => {
+        const columns: ProColumns<ChannelTagVO>[] = [
+            {
+                key: 'option',
+                title: '操作',
+                valueType: 'option',
+                render: (text, record, _, action) => {
+                    return [
+                        <a key="editable" onClick={() => {
+                            userBrowseEditChannelSetting(record);
+                        }}>修改</a>,
+                        <a key="deletable" onClick={() => {
+                            userBrowseDeleteChannelSetting(record)
+                        }}>刪除</a>,
+                    ]
+                }
+            },
+            {
+                key: 'id',
+                dataIndex: 'id',
+                hideInSearch: true,
+                hideInTable: true,
+            },
+            { key: 'name', title: '渠道配置标签', dataIndex: 'name', initialValue: "" },
+            { key: 'auditAcc', title: '测试帐号', dataIndex: 'auditAcc', initialValue: "" },
+            { key: 'auditAccOtpCode', title: '测试验证码', dataIndex: 'auditAccOtpCode', initialValue: "" },
+        ];
+        setColumns(columns);
+    }, []);
+
+    useEffect(() => {
+        userInitalizeChannelSettingList();
+    }, [])
 
     // NOTE: User browse AllChannelSettings
     const userBrowseAllChannelSettings = useCallback(() => {
