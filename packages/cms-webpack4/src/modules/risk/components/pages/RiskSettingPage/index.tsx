@@ -331,6 +331,13 @@ export const RiskSettingPage = () => {
     }, [])
 
 
+    const onAddCallback = useCallback(() => {
+        setShowModalContent({
+            show: true,
+            isEdit: false,
+        });
+    }, [])
+
 
     // NOTE: Post | PUT Data
     return (
@@ -367,6 +374,7 @@ export const RiskSettingPage = () => {
                     setShowModalContent={setShowModalContent}
                     searchable={false}
                     hasEditForm={false}
+                    onAddCallback={onAddCallback}
                 />
 
                 <RiskSettingModal
@@ -375,7 +383,7 @@ export const RiskSettingPage = () => {
                     setShowModalContent={setShowModalContent}
                     form={form}
                     onOk={onOk}
-                    onAutoCompleteTemplate={onAutoCompleteTemplate}
+                    // onAutoCompleteTemplate={onAutoCompleteTemplate}
                 >
                     <RiskSettingForm
                         form={form}
