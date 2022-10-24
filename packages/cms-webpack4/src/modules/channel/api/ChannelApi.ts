@@ -1,5 +1,6 @@
 import {API} from "../../../api";
 import {ChannelTagDTO} from "./dto/ChannelTagDTO";
+import {GetAllChannelQuery, MssChannelListResponse} from "./dto/ChannelDTO";
 
 export type GetAllTagResponse = ChannelTagDTO[];
 
@@ -14,6 +15,7 @@ export interface DeleteTagRequest {
 const ChannelApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
+        // NOTE: 渠道標籤管理
         createTag: builder.mutation<null, ChannelTagDTO>({
             query: (arg: ChannelTagDTO) => ({
                 url: `/app-manage/publish`,
@@ -60,6 +62,16 @@ const ChannelApi = API.injectEndpoints({
                 data: arg,
             }),
         }),
+        // NOTE: 渠道管理
+        getAllChannel: builder.query<MssChannelListResponse,
+            GetAllChannelQuery
+            >({
+            query: (query: GetAllChannelQuery) => ({
+                url: `/channel/all?appName=${query.appName||""}&enabled=${query.enabled||""}&id=${query.id||""}&modelName=${query.modelName||""}&name=${query.name||""}&publishId=${query.publishId||""}`,
+                method: "get",
+                params: {},
+            }),
+        }),
 
     }),
 })
@@ -70,4 +82,6 @@ export const {
     useLazyGetAllTagQuery,
     usePutTagMutation,
     useDeleteTagMutation,
+
+    useLazyGetAllChannelQuery,
 } = ChannelApi;
