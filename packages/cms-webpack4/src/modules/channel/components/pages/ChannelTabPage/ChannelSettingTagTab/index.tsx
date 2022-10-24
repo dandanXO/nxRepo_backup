@@ -20,40 +20,24 @@ const channelTagSchemaEntity = new ChannelTagSchemaEntity();
 
 export const ChannelSettingTagTabPage = () => {
 
-    // NOTICE: Restful API
-    // NOTE: GET list and item
-    const [triggerGetList, { currentData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
-    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetTagQuery();
-
-    // NOTE: POST , PUT and DELETE
-    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateTagMutation();
-    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
-    const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteTagMutation();
-
     // NOTICE: Action: List
     // NOTE: Table
     const [columns, setColumns] = useState<ProColumns<ChannelTagVO>[]>()
 
-
-    // NOTICE: Action: POST or PUT
+    // NOTICE: Action: Create or Edit
     // NOTE: Modal
     const [showModalContent, setShowModalContent] = useState<ModalContent>({
         show: false,
         isEdit: false,
     });
 
-    // NOTICE: Action: PUT
+    // NOTICE: Action: Edit
     const [editID, setEditID] = useState<number>();
 
     // NOTICE: Form
-    // NOTE: FORM
     const [form] = useForm()
 
-    // NOTE: Form - Initial Data
+    // Form - Initial Data
     const formInitialValues = useMemo(() => {
         // NOTE: select and switch need initialValue if you want to select one
         return {
@@ -61,38 +45,35 @@ export const ChannelSettingTagTabPage = () => {
         } as DeepPartial<{}>;
     }, [])
 
-
-    // NOTE: Form - onFieldsChange
+    // Form - onFieldsChange
     const onFormFieldsChange = useCallback((changedFields, allFields) => {
         userEditingChannelSetting(changedFields);
     }, [])
 
-    // NOTE: Form - Validation
+    // Form - Validation
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
 
-    // NOTE: Form - Finish
+    // Form - Finish
     const onFormFinish = useCallback(() => {
         userEditedChannelSetting();
     }, [editID])
 
-    // NOTICE: Action - POST, PUT
-    // NOTICE: Modal - POST, PUT
-    // NOTE: Modal - OK
+    // NOTICE: Modal - Create, Edit
+    // Modal - OK
     const onModalOk = useCallback(() => {
         form.submit();
     }, [form])
 
-    // NOTE: Modal - Close
+    // Modal - Close
     const onCloseModal = useCallback(() => {
         setCustomAntFormFieldError({});
     }, []);
 
-    // NOTE: Modal - onModalFormAutoCompleteTemplate
+    // Modal - onModalFormAutoCompleteTemplate
     const onModalFormAutoCompleteTemplate = useCallback(() => {
         userUseFormAutoComplete();
     }, [form])
 
-    // NOTICE: Action - Delete
     // NOTICE: Modal - Delete
     const [showDeleteModal, setShowDeletedModal] = useState(false);
 
@@ -104,13 +85,13 @@ export const ChannelSettingTagTabPage = () => {
         setShowDeletedModal(false);
     }, [])
 
-    // NOTICE: Use Case
 
+
+    // NOTICE: Use Case
     // NOTE: User login automatically
     const {isLoginSuccess} = useAutoLogin();
     const userAutoLogin = useCallback(() => {
-        triggerGetList(null);
-
+        // triggerGetList(null);
     }, [])
     useEffect(() => {
         userAutoLogin();
@@ -156,6 +137,13 @@ export const ChannelSettingTagTabPage = () => {
         triggerGetList(null);
     }, [])
 
+    // NOTE: GET list and item
+    const [triggerGetList, { currentData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+
     useEffect(() => {
         userBrowseAllChannelSettings()
     }, []);
@@ -177,6 +165,7 @@ export const ChannelSettingTagTabPage = () => {
             id: record.id,
         });
     }, []);
+    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetTagQuery();
 
     // NOTE: System reload EditChannelSetting
     const systemReloadEditChannelSetting = useCallback((currentFormData) => {
@@ -275,6 +264,9 @@ export const ChannelSettingTagTabPage = () => {
 
         })
     }, [showModalContent.isEdit, editID])
+    // NOTE: POST , PUT and DELETE
+    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateTagMutation();
+    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
 
     // NOTE: User browse DeleteChannelSetting
     const userBrowseDeleteChannelSetting = useCallback((record: ChannelTagVO) => {
@@ -292,6 +284,7 @@ export const ChannelSettingTagTabPage = () => {
             triggerGetList(null);
         })
     }, [editID]);
+    const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteTagMutation();
 
     return (
         <>
