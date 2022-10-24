@@ -36,7 +36,7 @@ const SubmitOrderSuccessModal = (props: RepaymentNoticeModalProps) => {
                         </Paragraph>
                     </Container>
                 }
-                confirmText="Repay"
+                confirmText="OK"
                 onConfirm={() => props.setShowSubmitOrderSuccessModal(false)}
                 // NOTE: 特製版
                 enableIcon={false}
