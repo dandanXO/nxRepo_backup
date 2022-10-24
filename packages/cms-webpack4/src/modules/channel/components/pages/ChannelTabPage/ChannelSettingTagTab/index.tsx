@@ -39,7 +39,6 @@ export const ChannelSettingTagTabPage = () => {
     const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
     const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteTagMutation();
 
-
     // NOTICE: Action: List
     // NOTE: Table
     const columns = useMemo(() => {
@@ -51,18 +50,10 @@ export const ChannelSettingTagTabPage = () => {
                 render: (text, record, _, action) => {
                     return [
                         <a key="editable" onClick={() => {
-                            setEditID(record.id);
-                            setShowModalContent({
-                                show: true,
-                                isEdit: true,
-                            })
-                            triggerGet({
-                                id: record.id,
-                            });
+                            userBrowseEditChannelSetting(record);
                         }}>修改</a>,
                         <a key="deletable" onClick={() => {
-                            setEditID(record.id);
-                            setShowDeletedModal(true);
+                            userBrowseDeleteChannelSetting(record)
                         }}>刪除</a>,
                     ]
                 }
@@ -82,7 +73,7 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
 
     useEffect(() => {
-        triggerGetList(null);
+        userBrowseAllChannelSettings()
     }, []);
 
 
@@ -125,13 +116,76 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTE: Form - onFieldsChange
     const onFormFieldsChange = useCallback((changedFields, allFields) => {
+        userEditingChannelSetting(changedFields);
+    }, [])
+
+    // NOTE: Form - Validation
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
+
+    // NOTE: Form - Finish
+    const onFormFinish = useCallback(() => {
+        userEditedChannelSetting();
+    }, [editID])
+
+    // NOTICE: Action - POST, PUT
+    // NOTICE: Modal - POST, PUT
+    // NOTE: Modal - OK
+    const onModalOk = useCallback(() => {
+        form.submit();
+    }, [form])
+
+    // NOTE: Modal - Close
+    const onCloseModal = useCallback(() => {
+        setCustomAntFormFieldError({});
+    }, []);
+
+    // NOTE: Modal - onModalFormAutoCompleteTemplate
+    const onModalFormAutoCompleteTemplate = useCallback(() => {
+        userUseFormAutoComplete();
+    }, [form])
+
+
+    // NOTICE: Action - Delete
+    // NOTICE: Modal - Delete
+    const [showDeleteModal, setShowDeletedModal] = useState(false);
+
+    const onDeleteModalOK = useCallback(() => {
+        userDeleteChannelSetting()
+    }, [editID])
+
+    const onDeleteModalCancel = useCallback(() => {
+        setShowDeletedModal(false);
+    }, [])
+
+    // NOTICE: Use Case
+    const userBrowseAllChannelSettings = useCallback(() => {
+        triggerGetList(null);
+    }, [])
+
+    const userUseFormAutoComplete = useCallback(() => {
+        form.setFieldsValue(MockChannelTag);
+        systemValidateChannelSetting();
+    }, [])
+
+    const userBrowseEditChannelSetting = useCallback((record: ChannelTagVO) => {
+        setEditID(record.id);
+        setShowModalContent({
+            show: true,
+            isEdit: true,
+        })
+        triggerGet({
+            id: record.id,
+        });
+    }, []);
+
+    const userEditingChannelSetting = useCallback((changedFields) => {
         if(changedFields.length === 0) return;
 
         // NOTICE: need
         const changedFieldName = changedFields[0].name[0];
 
         // NOTICE: need
-        let sourceData: IChannelTagSchema =  {
+        const sourceData: IChannelTagSchema =  {
             [changedFields[0].name[0]]: changedFields[0].value
         } as IChannelTagSchema;
 
@@ -143,12 +197,9 @@ export const ChannelSettingTagTabPage = () => {
             ...customAntFormFieldError,
             ...validData.fieldsMessage,
         });
-
     }, [])
 
-    // NOTE: Form - Validation
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
-    const validateForm = useCallback(() => {
+    const systemValidateChannelSetting = useCallback(() => {
         // NOTICE: need
         const fields = form.getFieldsValue();
 
@@ -170,9 +221,8 @@ export const ChannelSettingTagTabPage = () => {
         return validData.isEntityValid;
     }, [])
 
-    // NOTE: Form - Finish
-    const onFormFinish = useCallback(() => {
-        const isValid = validateForm();
+    const userEditedChannelSetting = useCallback(() => {
+        const isValid = systemValidateChannelSetting();
         if(!isValid) return;
 
         // NOTICE: need
@@ -203,32 +253,14 @@ export const ChannelSettingTagTabPage = () => {
             triggerGetList(null);
 
         })
-    }, [editID])
+    }, [])
 
-    // NOTICE: Action - POST, PUT
-    // NOTICE: Modal - POST, PUT
-    // NOTE: Modal - OK
-    const onModalOk = useCallback(() => {
-        form.submit();
-    }, [form])
+    const userBrowseDeleteChannelSetting = useCallback((record: ChannelTagVO) => {
+        setEditID(record.id);
+        setShowDeletedModal(true);
+    }, [])
 
-    // NOTE: Modal - Close
-    const onCloseModal = useCallback(() => {
-        setCustomAntFormFieldError({});
-    }, []);
-
-    // NOTE: Modal - onModalFormAutoCompleteTemplate
-    const onModalFormAutoCompleteTemplate = useCallback(() => {
-        form.setFieldsValue(MockChannelTag)
-        validateForm();
-    }, [form])
-
-
-    // NOTICE: Action - Delete
-    // NOTICE: Modal - Delete
-    const [showDeleteModal, setShowDeletedModal] = useState(false);
-
-    const onDeleteModalOK = useCallback(() => {
+    const userDeleteChannelSetting = useCallback(() => {
         // NOTE:
         triggerDelete({
             id: editID,
@@ -236,12 +268,7 @@ export const ChannelSettingTagTabPage = () => {
             setShowDeletedModal(false);
             triggerGetList(null);
         })
-    }, [editID])
-
-    const onDeleteModalCancel = useCallback(() => {
-        setShowDeletedModal(false);
-    }, [])
-
+    }, [editID]);
 
     return (
         <>
