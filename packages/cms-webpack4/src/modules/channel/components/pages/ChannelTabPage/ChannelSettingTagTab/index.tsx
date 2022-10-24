@@ -142,7 +142,7 @@ export const ChannelSettingTagTabPage = () => {
     }, [])
 
     // NOTE: GET list and item
-    const [triggerGetList, { currentData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
+    const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -305,7 +305,7 @@ export const ChannelSettingTagTabPage = () => {
             {/*NOTICE: List Table*/}
             <AdminTable<ChannelTagVO>
                 tableHeaderColumns={columns}
-                tableDatasource={currentData}
+                tableDatasource={currentItemListData}
                 loading={isGetListFetching}
                 // NOTE: 新增
                 addText={"添加渠道配置标签"}

@@ -1,4 +1,4 @@
-import {Button, Space} from "antd";
+import {Button, FormInstance, Space} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 import React, {useEffect, useMemo, useState} from "react";
@@ -27,8 +27,23 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     searchable?: boolean;
     addText?: string;
     onAddCallback?: () => void;
+    isSearchFromClient?: boolean;
+    onFormSearchCallback?: (form: FormInstance) => void;
 }
-export const AdminTable = <TableListItemDataType,>({tableHeaderColumns, loading, tableDatasource, onSearchClick, setShowModalContent, hasAddForm = true, hasEditForm = true, searchable = true, addText = ButtonsText.AddText, onAddCallback}: AdminTableTemplateProps<TableListItemDataType>) => {
+export const AdminTable = <TableListItemDataType,>({
+                                                       tableHeaderColumns,
+                                                       loading,
+                                                       tableDatasource,
+                                                       onSearchClick,
+                                                       setShowModalContent,
+                                                       hasAddForm = true,
+                                                       hasEditForm = true,
+                                                       searchable = true,
+                                                       addText = ButtonsText.AddText,
+                                                       onAddCallback,
+                                                       isSearchFromClient = true,
+                                                       onFormSearchCallback,
+}: AdminTableTemplateProps<TableListItemDataType>) => {
     // NOTE: actionRef
     // const actionRef = useRef<ActionType>();
 
@@ -59,7 +74,6 @@ export const AdminTable = <TableListItemDataType,>({tableHeaderColumns, loading,
         return {
             searchText: ButtonsText.SearchText,
             resetText: ButtonsText.ResetText,
-            collapsed: false,
             labelWidth: 'auto',
             // 默认是否收起
             defaultCollapsed: false,
@@ -75,10 +89,16 @@ export const AdminTable = <TableListItemDataType,>({tableHeaderColumns, loading,
                     <Button
                         type={'primary'}
                         onClick={() => {
-                            const searchInputKeys = form.getFieldsValue();
-                            const searchedDataSource = onSearchClick(searchInputKeys);
-                            setCachedDatasource(searchedDataSource);
-                            form.submit();
+                            if(onSearchClick && isSearchFromClient) {
+                                const searchInputKeys = form.getFieldsValue();
+                                const searchedDataSource = onSearchClick(searchInputKeys);
+                                setCachedDatasource(searchedDataSource);
+                                form.submit();
+                            }
+                            if(!isSearchFromClient && onFormSearchCallback) {
+                                onFormSearchCallback(form);
+                                form.submit();
+                            }
                         }}
                     >
                         {searchText}
@@ -145,6 +165,16 @@ export const AdminTable = <TableListItemDataType,>({tableHeaderColumns, loading,
             loading={loading}
             // NOTE:
             // scroll={{ x: 1000 }}
+            // 收起按钮的 render
+            // collapseRender={(collapsed: boolean,showCollapseButton?: boolean,) => ReactNode}
+            // 默认是否收起
+            // defaultCollapsed={true}
+            // 是否收起
+            // collapsed={false}
+            // 收起按钮的事件
+            // onCollapse(collapsed: boolean) => void;
+            // 是否显示收起之后显示隐藏个数
+            // showHiddenNum={false}
         />
     )
 }

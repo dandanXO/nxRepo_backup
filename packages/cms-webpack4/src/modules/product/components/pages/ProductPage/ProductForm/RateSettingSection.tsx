@@ -3,10 +3,7 @@ import {Divider, Form, Input, Typography, Row, Col, Space, Button} from "antd";
 
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {
-  CustomValidator,
-  NewNumberValidatorPromise,
   NumberValidator,
-  PipeValidator
 } from "../../../../../shared/utils/validation/validator";
 import {maxOneUnitFloatReplacer} from "../../../../../shared/utils/maxOneUnitFloatReplacer";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
