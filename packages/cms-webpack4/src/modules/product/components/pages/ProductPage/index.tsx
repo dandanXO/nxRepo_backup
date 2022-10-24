@@ -19,7 +19,7 @@ useAutoLogin();
     onFinish, setCustomAntFormFieldError,
     customAntFormFieldError,
     triggerGetList, productListData,
-    onAutoFinishedForm,
+    // onAutoFinishedForm,
     onFormSubmit,
       enableLoanAmount,
       enableReLoanAmount,
@@ -64,7 +64,7 @@ useAutoLogin();
         <ProductModal
           show={productModalData.show}
           handleCloseModal={handleCloseModal}
-          onMockFinish={onAutoFinishedForm}
+          // onMockFinish={onAutoFinishedForm}
           isEdit={productModalData.isEdit}
           onOk={onFormSubmit}
         >
