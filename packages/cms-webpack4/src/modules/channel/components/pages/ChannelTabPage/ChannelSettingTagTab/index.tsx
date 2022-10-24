@@ -179,11 +179,7 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
 
     // NOTE: System reload EditChannelSetting
-    const systemReloadEditChannelSetting = useCallback(() => {
-        // NOTICE: validation
-        if(!showModalContent.isEdit) return;
-        if(!currentFormData) return;
-
+    const systemReloadEditChannelSetting = useCallback((currentFormData) => {
         // NOTICE: form
         // NOTE: form - menu
         // const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
@@ -195,8 +191,10 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
-        systemReloadEditChannelSetting()
-    }, [])
+        if(showModalContent.isEdit && currentFormData) {
+            systemReloadEditChannelSetting(currentFormData)
+        }
+    }, [showModalContent.isEdit, currentFormData])
 
     // NOTE: User is editing ChannelSetting
     const userEditingChannelSetting = useCallback((changedFields) => {
@@ -276,7 +274,7 @@ export const ChannelSettingTagTabPage = () => {
             triggerGetList(null);
 
         })
-    }, [])
+    }, [showModalContent.isEdit, editID])
 
     // NOTE: User browse DeleteChannelSetting
     const userBrowseDeleteChannelSetting = useCallback((record: ChannelTagVO) => {
