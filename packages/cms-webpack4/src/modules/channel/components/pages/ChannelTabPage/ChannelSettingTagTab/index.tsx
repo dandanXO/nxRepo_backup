@@ -47,7 +47,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // Form - onFieldsChange
     const onFormFieldsChange = useCallback((changedFields, allFields) => {
-        userEditingChannelSetting(changedFields);
+        userEditingChannelSettingUsecase(changedFields);
     }, [])
 
     // Form - Validation
@@ -71,15 +71,16 @@ export const ChannelSettingTagTabPage = () => {
 
     // Modal - onModalFormAutoCompleteTemplate
     const onModalFormAutoCompleteTemplate = useCallback(() => {
-        userUseFormAutoComplete();
+        userUseFormAutoCompleteUsecase();
     }, [])
 
     // NOTICE: Modal - Delete
     const [showDeleteModal, setShowDeletedModal] = useState(false);
 
     const onDeleteModalOK = useCallback(() => {
-        userDeleteChannelSetting()
-    }, [])
+        // NOTICE: need dependency array
+        userDeleteChannelSettingUsecase()
+    }, [editID])
 
     const onDeleteModalCancel = useCallback(() => {
         setShowDeletedModal(false);
@@ -98,7 +99,7 @@ export const ChannelSettingTagTabPage = () => {
     }, [isLoginSuccess])
 
     // NOTE: System is initializing ChannelSetting List
-    const userInitalizeChannelSettingList = useCallback(() => {
+    const userInitalizeChannelSettingListUsecase = useCallback(() => {
         const columns: ProColumns<ChannelTagVO>[] = [
             {
                 key: 'option',
@@ -107,10 +108,10 @@ export const ChannelSettingTagTabPage = () => {
                 render: (text, record, _, action) => {
                     return [
                         <a key="editable" onClick={() => {
-                            userBrowseEditChannelSetting(record);
+                            userBrowseEditChannelSettingUsecase(record);
                         }}>修改</a>,
                         <a key="deletable" onClick={() => {
-                            userBrowseDeleteChannelSetting(record)
+                            userBrowseDeleteChannelSettingUsecase(record)
                         }}>刪除</a>,
                     ]
                 }
@@ -129,11 +130,11 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
 
     useEffect(() => {
-        userInitalizeChannelSettingList();
+        userInitalizeChannelSettingListUsecase();
     }, [])
 
     // NOTE: User browse AllChannelSettings
-    const userBrowseAllChannelSettings = useCallback(() => {
+    const userBrowseAllChannelSettingsUsecase = useCallback(() => {
         triggerGetList(null);
     }, [])
 
@@ -145,17 +146,17 @@ export const ChannelSettingTagTabPage = () => {
     });
 
     useEffect(() => {
-        userBrowseAllChannelSettings()
+        userBrowseAllChannelSettingsUsecase()
     }, []);
 
     // NOTE: User use FormAutoComplete
-    const userUseFormAutoComplete = useCallback(() => {
+    const userUseFormAutoCompleteUsecase = useCallback(() => {
         form.setFieldsValue(MockChannelTag);
-        systemValidateChannelSetting();
+        systemValidateChannelSettingUsecase();
     }, [form])
 
     // NOTE: User browse EditChannelSetting
-    const userBrowseEditChannelSetting = useCallback((record: ChannelTagVO) => {
+    const userBrowseEditChannelSettingUsecase = useCallback((record: ChannelTagVO) => {
         setEditID(record.id);
         setShowModalContent({
             show: true,
@@ -168,7 +169,7 @@ export const ChannelSettingTagTabPage = () => {
     const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetTagQuery();
 
     // NOTE: System reload EditChannelSetting
-    const systemReloadEditChannelSetting = useCallback((currentFormData) => {
+    const systemReloadEditChannelSettingUsecase = useCallback((currentFormData) => {
         // NOTICE: form
         // NOTE: form - menu
         // const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
@@ -181,12 +182,12 @@ export const ChannelSettingTagTabPage = () => {
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
         if(showModalContent.isEdit && currentFormData) {
-            systemReloadEditChannelSetting(currentFormData)
+            systemReloadEditChannelSettingUsecase(currentFormData)
         }
     }, [showModalContent.isEdit, currentFormData])
 
     // NOTE: User is editing ChannelSetting
-    const userEditingChannelSetting = useCallback((changedFields) => {
+    const userEditingChannelSettingUsecase = useCallback((changedFields) => {
         if(changedFields.length === 0) return;
 
         // NOTICE: need
@@ -208,7 +209,7 @@ export const ChannelSettingTagTabPage = () => {
     }, [])
 
     // NOTE: System validate ChannelSetting
-    const systemValidateChannelSetting = useCallback(() => {
+    const systemValidateChannelSettingUsecase = useCallback(() => {
         // NOTICE: need
         const fields = form.getFieldsValue();
 
@@ -232,7 +233,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTE: user Edited ChannelSetting
     const userEditedChannelSetting = useCallback(() => {
-        const isValid = systemValidateChannelSetting();
+        const isValid = systemValidateChannelSettingUsecase();
         if(!isValid) return;
 
         // NOTICE: need
@@ -269,13 +270,13 @@ export const ChannelSettingTagTabPage = () => {
     const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
 
     // NOTE: User browse DeleteChannelSetting
-    const userBrowseDeleteChannelSetting = useCallback((record: ChannelTagVO) => {
+    const userBrowseDeleteChannelSettingUsecase = useCallback((record: ChannelTagVO) => {
         setEditID(record.id);
         setShowDeletedModal(true);
     }, [])
 
     // NOTE: User delete ChannelSetting
-    const userDeleteChannelSetting = useCallback(() => {
+    const userDeleteChannelSettingUsecase = useCallback(() => {
         // NOTE:
         triggerDelete({
             id: editID,
@@ -284,6 +285,7 @@ export const ChannelSettingTagTabPage = () => {
             triggerGetList(null);
         })
     }, [editID]);
+
     const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteTagMutation();
 
     return (
