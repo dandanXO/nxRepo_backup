@@ -20,11 +20,6 @@ const channelTagSchemaEntity = new ChannelTagSchemaEntity();
 
 export const ChannelSettingTagTabPage = () => {
 
-    // const {isLoginSuccess} = useAutoLogin();
-    // useEffect(() => {
-    //     triggerGetList(null);
-    // }, [isLoginSuccess])
-
     // NOTICE: Restful API
     // NOTE: GET list and item
     const [triggerGetList, { currentData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
@@ -72,10 +67,6 @@ export const ChannelSettingTagTabPage = () => {
 
     }, []);
 
-    useEffect(() => {
-        userBrowseAllChannelSettings()
-    }, []);
-
 
     // NOTICE: Action: POST or PUT
     // NOTE: Modal
@@ -99,20 +90,6 @@ export const ChannelSettingTagTabPage = () => {
         } as DeepPartial<{}>;
     }, [])
 
-    // NOTE: Form - Mode: edit (Set form fields from data)
-    useEffect(() => {
-        // NOTICE: validation
-        if(!showModalContent.isEdit) return;
-        if(!currentFormData) return;
-
-        // NOTICE: form
-        // NOTE: form - menu
-        // const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
-        // const id = targetMenu && targetMenu[0] && targetMenu[0].id || undefined;
-
-        // NOTE: form - main data
-        form.setFieldsValue(currentFormData)
-    }, [showModalContent.isEdit, currentFormData])
 
     // NOTE: Form - onFieldsChange
     const onFormFieldsChange = useCallback((changedFields, allFields) => {
@@ -144,7 +121,6 @@ export const ChannelSettingTagTabPage = () => {
         userUseFormAutoComplete();
     }, [form])
 
-
     // NOTICE: Action - Delete
     // NOTICE: Modal - Delete
     const [showDeleteModal, setShowDeletedModal] = useState(false);
@@ -158,15 +134,33 @@ export const ChannelSettingTagTabPage = () => {
     }, [])
 
     // NOTICE: Use Case
+    const {isLoginSuccess} = useAutoLogin();
+
+    // NOTE: userAutoLogin
+    const userAutoLogin = useCallback(() => {
+        triggerGetList(null);
+
+    }, [])
+    useEffect(() => {
+        userAutoLogin();
+    }, [isLoginSuccess])
+
+    // NOTE: userBrowseAllChannelSettings
     const userBrowseAllChannelSettings = useCallback(() => {
         triggerGetList(null);
     }, [])
 
+    useEffect(() => {
+        userBrowseAllChannelSettings()
+    }, []);
+
+    // NOTE: userUseFormAutoComplete
     const userUseFormAutoComplete = useCallback(() => {
         form.setFieldsValue(MockChannelTag);
         systemValidateChannelSetting();
     }, [])
 
+    // NOTE: userBrowseEditChannelSetting
     const userBrowseEditChannelSetting = useCallback((record: ChannelTagVO) => {
         setEditID(record.id);
         setShowModalContent({
@@ -178,6 +172,27 @@ export const ChannelSettingTagTabPage = () => {
         });
     }, []);
 
+    // NOTE: systemReloadEditChannelSetting
+    const systemReloadEditChannelSetting = useCallback(() => {
+        // NOTICE: validation
+        if(!showModalContent.isEdit) return;
+        if(!currentFormData) return;
+
+        // NOTICE: form
+        // NOTE: form - menu
+        // const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
+        // const id = targetMenu && targetMenu[0] && targetMenu[0].id || undefined;
+
+        // NOTE: form - main data
+        form.setFieldsValue(currentFormData)
+    }, [showModalContent.isEdit, currentFormData])
+
+    // NOTE: Form - Mode: edit (Set form fields from data)
+    useEffect(() => {
+        systemReloadEditChannelSetting()
+    }, [])
+
+    // NOTE: userEditingChannelSetting
     const userEditingChannelSetting = useCallback((changedFields) => {
         if(changedFields.length === 0) return;
 
@@ -199,6 +214,7 @@ export const ChannelSettingTagTabPage = () => {
         });
     }, [])
 
+    // NOTE: systemValidateChannelSetting
     const systemValidateChannelSetting = useCallback(() => {
         // NOTICE: need
         const fields = form.getFieldsValue();
@@ -221,6 +237,7 @@ export const ChannelSettingTagTabPage = () => {
         return validData.isEntityValid;
     }, [])
 
+    // NOTE: userEditedChannelSetting
     const userEditedChannelSetting = useCallback(() => {
         const isValid = systemValidateChannelSetting();
         if(!isValid) return;
@@ -240,26 +257,28 @@ export const ChannelSettingTagTabPage = () => {
         triggerAPI(fields).unwrap().then((responseData) => {
             // console.log("responseData", responseData);
 
-            // NOTE: Reset Form
+            // Reset Form
             form.resetFields();
 
-            // NOTE: Close Modal
+            // Close Modal
             setShowModalContent({
                 show: false,
                 isEdit: false,
             })
 
-            // NOTE: Reset TableList
+            // Reset TableList
             triggerGetList(null);
 
         })
     }, [])
 
+    // NOTE: userBrowseDeleteChannelSetting
     const userBrowseDeleteChannelSetting = useCallback((record: ChannelTagVO) => {
         setEditID(record.id);
         setShowDeletedModal(true);
     }, [])
 
+    // NOTE: userDeleteChannelSetting
     const userDeleteChannelSetting = useCallback(() => {
         // NOTE:
         triggerDelete({
