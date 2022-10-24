@@ -16,13 +16,13 @@ class LayoutMenu extends Component {
         super(props);
         const { location: { pathname } } = this.props;
         const pathArr = pathname.split('/');
-      
+
         let truePath = '/' + pathArr[1];
 
         if(truePath === "/cms") {
             truePath = '/' + pathArr[1] +'/' + pathArr[2]
         }
-        
+
         this.state = {
             openKeys: this.findKeys(truePath),
             selectedKeys: [truePath]
@@ -112,10 +112,14 @@ class LayoutMenu extends Component {
             const pathArr = pathname.split('/');
             let truePath = '/' + pathArr[1];
 
+            // NOTICE: 用户详细信息歸類在用户管理
+            if(pathArr[2] === "user-info") {
+              pathArr[2] = "user"
+            }
             if(truePath === "/cms") {
                 truePath = '/' + pathArr[1] +'/' + pathArr[2]
             }
-            
+
             this.setState({
                 openKeys: this.findKeys(truePath),
                 selectedKeys: [truePath]
