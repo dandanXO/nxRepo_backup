@@ -211,7 +211,7 @@ export const PureBindBankAccountPage = (
                     value={ifscData.data}
                     onChange={(event) => {
                       let data = event.target.value;
-                      data = data.replace(/[^0-9]/g, "");
+                      data = data.replace(/[^a-zA-Z0-9]/g, "");
                       setIFSCData({
                           ...ifscData,
                           data,
@@ -227,10 +227,12 @@ export const PureBindBankAccountPage = (
                     label="Account Number"
                     value={bankcardNoData.data}
                     onChange={(event) => {
-                        setBankcardNoData({
-                            ...bankcardNoData,
-                            data: event.target.value,
-                        });
+                      let data = event.target.value;
+                      data = data.replace(/[^0-9]/g, "");
+                      setBankcardNoData({
+                          ...bankcardNoData,
+                          data,
+                      });
                     }}
                     onBlur={() => {
                         validateBankcardNo();
@@ -245,10 +247,12 @@ export const PureBindBankAccountPage = (
                     label="Confirm Account Number"
                     value={confirmedBankcardNoData.data}
                     onChange={(event) => {
-                        setConfirmedBankcardNoData({
-                            ...confirmedBankcardNoData,
-                            data: event.target.value,
-                        });
+                      let data = event.target.value;
+                      data = data.replace(/[^0-9]/g, "");
+                      setConfirmedBankcardNoData({
+                          ...confirmedBankcardNoData,
+                          data,
+                      });
                     }}
                     onBlur={() => {
                         validateConfirmedBankcardNo();
