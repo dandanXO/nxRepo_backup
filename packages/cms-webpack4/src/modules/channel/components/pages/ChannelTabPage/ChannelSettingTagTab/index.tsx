@@ -229,6 +229,7 @@ export const ChannelSettingTagTabPage = () => {
     const [showDeleteModal, setShowDeletedModal] = useState(false);
 
     const onDeleteModalOK = useCallback(() => {
+        // NOTE:
         triggerDelete({
             id: editID,
         }).unwrap().then(() => {
