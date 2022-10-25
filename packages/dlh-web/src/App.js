@@ -33,7 +33,6 @@ export default class App extends Component {
                             <AuthRoute>
                                 <MainLayout/>
                             </AuthRoute>
-
                         </Switch>
                     </Router>
                 </IntlProviderWrapper>

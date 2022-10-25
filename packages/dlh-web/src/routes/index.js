@@ -71,6 +71,8 @@ export default class Routes extends React.Component {
         return (
             <Switch>
                 {this.renderRoutes()}
+                {/*NOTICE empty view for new cms*/}
+                <Route key={'/cms'} path="/cms" render={() => <div></div>}/>
                 <Route key={'/noFound'} render={() => <div>no found</div>}/>
             </Switch>
         );
