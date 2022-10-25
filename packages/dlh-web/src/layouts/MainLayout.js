@@ -28,6 +28,13 @@ class MainLayout extends Component {
              collapsed: nextCollapsed,
              isTrigger: nextTrigger
          });
+         if(nextCollapsed) {
+           setTimeout(() => {
+             document.querySelector("#micro-app").style.width = "calc(100vw - 90px)";
+           }, 100)
+         } else {
+           document.querySelector("#micro-app").style.width = "calc(100vw - 220px)";
+         }
     }
     render() {
         const { isTrigger } = this.state;
