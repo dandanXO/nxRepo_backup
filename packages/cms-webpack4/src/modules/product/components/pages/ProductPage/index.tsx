@@ -4,6 +4,7 @@ import {PageContainer} from '@ant-design/pro-components';
 import {useProductFormModal} from "./hooks/useProductFormModal";
 import {ProductModal} from "./ProductModal";
 import ProductForm from "./ProductForm";
+import {itemRender} from "../../../../shared/itemRender";
 
 export const ProductPage = () => {
 
@@ -39,21 +40,22 @@ export const ProductPage = () => {
       // loading
       header={{
         breadcrumb: {
-          routes: [
-            {
-                // TODO:
-              path: '/product',
-              breadcrumbName: '首页',
-            },
-            {
-              path: '/product',
-              breadcrumbName: '产品管理 ',
-            },
-            {
-              path: '/product',
-              breadcrumbName: '产品管理',
-            },
-          ],
+              itemRender: itemRender,
+              routes: [
+                {
+                    // TODO:
+                  path: '/',
+                  breadcrumbName: '首页',
+                },
+                {
+                  path: null,
+                  breadcrumbName: '产品管理 ',
+                },
+                {
+                  path: null,
+                  breadcrumbName: '产品管理',
+                },
+              ],
         },
       }}
     >

@@ -1,6 +1,6 @@
 import {PageContainer} from "@ant-design/pro-components";
 import React from "react";
-import {Route} from "antd/es/breadcrumb/Breadcrumb";
+import {itemRender} from "../itemRender";
 
 
 export interface AdminTableTemplateProps {
@@ -35,16 +35,6 @@ export interface AdminTableTemplateProps {
 // NOTICE: [TypeScript + React: Typing Generic forwardRefs](https://fettblog.eu/typescript-react-generic-forward-refs/)
 const AdminPage = (props: AdminTableTemplateProps) => {
 
-    // NOTE: breadcrumb
-    const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
-        const last = routes.indexOf(route) === routes.length - 1;
-        return last ? (
-            <span>{route.breadcrumbName}</span>
-        ) : (
-            <span>{route.breadcrumbName}</span>
-        );
-    }
-
     // // NOTE: Modal
     // const [showModalContent, setShowModalContent] = useState<ModalContent>({
     //     show: false,
@@ -57,18 +47,19 @@ const AdminPage = (props: AdminTableTemplateProps) => {
             header={{
                 ghost: true,
                 breadcrumb: {
-                    itemRender,
+                    itemRender: itemRender,
                     routes: [
                         {
-                            path: props.navigator.ancestor.path || "/#/",
+                            // path: props.navigator.ancestor.path || "/#/",
+                            path: props.navigator.ancestor.path || "/",
                             breadcrumbName: props.navigator.ancestor.breadcrumbName || '首页',
                         },
                         {
-                            path: props.navigator.parent.path,
+                            path: props.navigator.parent.path || null,
                             breadcrumbName: props.navigator.parent.breadcrumbName,
                         },
                         {
-                            path: props.navigator.self.path,
+                            path: props.navigator.self.path || null,
                             breadcrumbName: props.navigator.self.breadcrumbName,
                         },
                     ],

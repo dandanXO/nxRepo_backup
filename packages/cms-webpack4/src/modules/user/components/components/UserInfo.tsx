@@ -47,7 +47,7 @@ const UserInfo = ({ userId }: UserId) => {
                 <Item label="注册渠道">{channelName || ""}</Item>
                 <Item label="注册包名">{appName || ""}</Item>
                 <Item label="手机号">{phoneNo || ""}</Item>
-                <Item label="注册时间">{addTime}</Item>
+                <Item label="注册时间">{moment(addTime).format('YYYY-MM-DD HH:mm:ss')}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="身份信息">
@@ -66,7 +66,7 @@ const UserInfo = ({ userId }: UserId) => {
                 <Item label="联系人">{emergency ? "是" : "否"}</Item>
                 <Item label="活体">{liveness ? "是" : "否"}</Item>
                 <Item label="银行卡">{bank ? "是" : "否"}</Item>
-                <Item label="认证完成时间">{kycFinishTime || ""}</Item>
+                <Item label="认证完成时间">{moment(kycFinishTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="个人信息">

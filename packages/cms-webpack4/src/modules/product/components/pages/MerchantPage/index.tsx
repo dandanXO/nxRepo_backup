@@ -4,6 +4,7 @@ import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../..
 import { Form } from "antd";
 import MerchantModal from './MerchantModal';
 import MerchantTable from './MerchantTable';
+import {itemRender} from "../../../../shared/itemRender";
 
 export const MerchantPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
@@ -33,10 +34,11 @@ export const MerchantPage = () => {
             header={{
                 ghost: true,
                 breadcrumb: {
+                    itemRender: itemRender,
                     routes: [
-                        { path: '', breadcrumbName: '首页' },
-                        { path: '', breadcrumbName: '产品管理' },
-                        { path: '', breadcrumbName: '商戶管理' },
+                        { path: "/", breadcrumbName: '首页' },
+                        { path: null, breadcrumbName: '产品管理' },
+                        { path: null, breadcrumbName: '商戶管理' },
                     ],
                 },
             }}

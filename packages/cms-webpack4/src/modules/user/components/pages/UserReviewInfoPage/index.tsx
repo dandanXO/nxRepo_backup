@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import UsesrReviewModal from './UserReviewModal';
 import {  useHistory } from "react-router-dom";
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
+import {itemRender} from "../../../../shared/itemRender";
 const UserReviewInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();
@@ -75,10 +76,11 @@ const UserReviewInfoPage = () => {
                     // title: '页面标题',
                     ghost: true,
                     breadcrumb: {
+                        itemRender: itemRender,
                         routes: [
-                            { path: '', breadcrumbName: '首页' },
-                            { path: '/user-review', breadcrumbName: '用户管理' },
-                            { path: '', breadcrumbName: '用户终审' },
+                            { path: "/", breadcrumbName: '首页' },
+                            { path: null, breadcrumbName: '用户管理' },
+                            { path: null, breadcrumbName: '用户终审' },
                         ],
                     },
                 }}

@@ -25,7 +25,7 @@ export const ChannelTagSchema = z.object({
     auditAcc: customZodStringRules("测试登录帳號"),
     // google audit acc
 
-    auditAccOtpCode: customZodStringRules("测试登录验证码").length(6, "请填写6位数字"),
+    auditAccOtpCode: customZodStringRules("测试登录验证码").regex(/^\d{6}$/, "请填写6位数字"),
     // google audit 登入验证码
 
     auditLoanAmount: customZodNumberRules("本金"),
@@ -62,7 +62,7 @@ export class ChannelTagSchemaEntity extends SchemaEntity<IChannelTagSchema> {
             auditAcc	:sourceData.auditAcc,
             // google audit acc
 
-            auditAccOtpCode	:sourceData.auditAccOtpCode,
+            auditAccOtpCode: sourceData.auditAccOtpCode,
             // google audit 登入验证码
 
             auditLoanAmount	:!isNaN(sourceData.auditLoanAmount) ? Number(sourceData.auditLoanAmount) : sourceData.auditLoanAmount,
