@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, Modal, Radio, Space } from 'antd';
+import { Button, Form, Input, Modal, Radio, Space,List } from 'antd';
 import { GetUerReviewListProps,UserReviewListResponse,GetUserReviewListRequestQuerystring } from '../../../api/types/userReviewTypes/getUserReviewList';
 import { useLazyGetUserReviewListQuery } from '../../../api/UserReviewApi';
 import moment from 'moment';
@@ -9,7 +9,7 @@ import { setSearchParams, setPathname, selectSearchParams } from '../../../../sh
 import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
-
+import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
 const UserReviewTable = () => {
 
     const { channelListEnum, riskRankEnum } = useValuesEnums();
@@ -19,7 +19,7 @@ const UserReviewTable = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-
+    const [postUserReview, { data, isSuccess:postUserReviewIsSuccess }] = usePostUserReviewMutation();
 
     const initSearchList: GetUserReviewListRequestQuerystring = {
         phoneNo: "", regChannelId: "", registerEndTime: "", registerStartTime: "", riskRank: "", userName: "",  pageNum: 1, pageSize: 10
@@ -30,34 +30,60 @@ const UserReviewTable = () => {
     const [searchList, setSearchList] = useState<GetUserReviewListRequestQuerystring>(initSearchList);
     const [modal, contextHolder] = Modal.useModal();
     const [selectedRow, setSelectedRow] = useState([]);
-
+    const [errorModal, errorContextHolder] = Modal.useModal();
+    const [buttonDisabled,setButtonDisbaled]=useState(true)
+    const [randomInputValue,setRandomInputValue]=useState<number|string>("");
     // redux
     const history = useHistory();
     const dispatch = useDispatch();
     const { searchParams } = useSelector(selectSearchParams);
 
-
-
     useEffect(() => {
-        console.log(searchParams.searchList)
-        if(searchParams.searchList===undefined)return;
+        if (searchParams.searchList === undefined) return;
         if (Object.keys(searchParams.searchList).length > 0) {
             setSearchList(searchParams.searchList);
         }
         if (searchParams.selectedRow.length > 0) {
             setSelectedRow(searchParams.selectedRow);
+            setButtonDisbaled(false)
         }
     }, [])
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList])
+    }, [searchList,postUserReviewIsSuccess])
 
+    
     useEffect(() => {
         if (currentData !== undefined) {
             setUserList(currentData)
         }
     }, [currentData])
+
+
+    useEffect(() => {
+       
+        // 送出審核 - 錯誤訊息提醒
+        if (data && data.length !== 0) {
+            errorModal.error({
+                title: 'Error',
+                content:
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={data}
+                        renderItem={item => (
+                            <List.Item>
+                                <List.Item.Meta
+                                    title={`用户ID - ${item.userId}`}
+                                    description={item.errorMessage}
+                                />
+                            </List.Item>
+                        )}
+                    />
+            })
+        }
+
+    }, [postUserReviewIsSuccess])
 
     const handleToUserDetail = (userId) => {
         dispatch(setPathname({ pathname: '/user-review-info', previousPathname: '/user-review' }));
@@ -69,50 +95,20 @@ const UserReviewTable = () => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
     }
 
-
-    const columns: ProColumns<UserReviewListResponse>[] = [
-        {
-            title: '操作',
-            valueType: 'option',
-            key: 'option',
-            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId)} >审核</a>]
-        },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" },
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" },
-        { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
-        {
-            title: '注册渠道', dataIndex: 'regChannelId', valueType: 'select', key: 'regChannelId',
-            valueEnum: channelListEnum, initialValue: searchParams.regChannelId || ''
-        },
-        { title: '注册时间', dataIndex: 'registerTime', key: 'registerTime', hideInSearch: true, valueType: 'dateTime' },
-        {
-            title: '注册时间', dataIndex: 'registerTimeRange', valueType: 'dateRange', key: 'registerTimeRange',
-            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
-            initialValue: (searchParams.registerStartTime === undefined || searchParams.registerStartTime === "") ? "" : [moment(searchParams.registerStartTime), moment(searchParams.registerEndTime)]
-        },
-    ]
-
-    const [buttonDisabled,setButtonDisbaled]=useState(true)
-    const [randomInputValue,setRandomInputValue]=useState<number|string>("");
-
     const onSelectChange = (selectedRowKeys) => {
-        console.log('selectedRowKeys',selectedRowKeys)
-        setButtonDisbaled(selectedRowKeys.length===0?true:false)
+        setButtonDisbaled(selectedRowKeys.length === 0 ? true : false)
         setSelectedRow(selectedRowKeys);
-        setRandomInputValue(selectedRowKeys.length===0?"":randomInputValue);
+        setRandomInputValue(selectedRowKeys.length === 0 ? "" : randomInputValue);
     };
-    const rowSelection = {
-        selectedRowKeys: selectedRow,
-        onChange: onSelectChange,
-    };
-
-    const hey = () => {
-        console.log('OK');
-    }
 
     const handleReviewAll = (status) => {
         const confirmText = status === 1 ? '通过' : '拒绝'
-        modal.confirm({ content: `确认全部审核${confirmText}吗？`, onOk() { hey() } });
+        modal.confirm({
+            content: `确认全部审核${confirmText}吗？`,
+            onOk() {
+                postUserReview({ userIds: selectedRow, status: status });
+            }
+        });
     }
 
     const handleRandomInputOnchange = (e) => {
@@ -134,35 +130,56 @@ const UserReviewTable = () => {
         }
     }
 
-    const handleSelectRandomRows=()=>{
-        const userReviewListLength=userReviewList?.records.length;
-        const selectLength=Number(userReviewListLength*Number(randomInputValue)/100).toFixed();
-        console.log('selectLength',selectLength)
-        if(Number(selectLength)===0)return;
-        let selectArray=[]
-        const userIds=userReviewList?.records.map(i=>i.userId);
-        for (let i=0;i<Number(selectLength);i++){
-            let randomSelect=Math.random()*userIds.length | 0;
-            console.log('randomSelect',randomSelect)
-            if(selectArray.includes(userIds[randomSelect])){
+    const handleSelectRandomRows = () => {
+        const userReviewListLength = userReviewList?.records.length;
+        const selectLength = Number(userReviewListLength * Number(randomInputValue) / 100).toFixed();
+        if (Number(selectLength) === 0) return;
+        let selectArray = []
+        const userIds = userReviewList?.records.map(i => i.userId);
+        for (let i = 0; i < Number(selectLength); i++) {
+            let randomSelect = Math.random() * userIds.length | 0;
+            if (selectArray.includes(userIds[randomSelect])) {
                 i--;
-            }else{
+            } else {
                 selectArray.push(userIds[randomSelect]);
             }
         }
-
-        console.log('selectArray',selectArray)
-
         onSelectChange(selectArray)
-
     }
 
+    const columns: ProColumns<UserReviewListResponse>[] = [
+        {
+            title: '操作',
+            valueType: 'option',
+            key: 'option',
+            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId)} >审核</a>]
+        },
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" },
+        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" },
+        { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
+        {
+            title: '注册渠道', dataIndex: 'regChannelId', valueType: 'select', key: 'regChannelId',
+            valueEnum: channelListEnum, initialValue: searchParams.regChannelId || ''
+        },
+        { title: '注册时间', dataIndex: 'registerTime', key: 'registerTime', hideInSearch: true, valueType: 'dateTime' },
+        {
+            title: '注册时间', dataIndex: 'registerTimeRange', valueType: 'dateRange', key: 'registerTimeRange',
+            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
+            initialValue:
+                (searchParams.searchList === undefined || searchParams.searchList.registerStartTime === "")
+                    ? ""
+                    : [moment(searchParams.searchList.registerStartTime), moment(searchParams.searchList.registerEndTime)]
+        },
+    ]
     return (
         <ProTable<UserReviewListResponse>
             columns={columns}
             dataSource={userReviewList?.records || []}
             loading={isFetching}
-            rowSelection={rowSelection}
+            rowSelection={{
+                selectedRowKeys: selectedRow,
+                onChange: onSelectChange,
+            }}
             rowKey={({userId})=>userId}
             headerTitle={
                 <Space>
@@ -181,6 +198,7 @@ const UserReviewTable = () => {
                 optionRender: ({ searchText, resetText }, { form }) => (
                     <Space >
                         {contextHolder}
+                        {errorContextHolder}
                         <Button
                             onClick={() => {
                                 // @ts-ignore
@@ -189,6 +207,7 @@ const UserReviewTable = () => {
                                     registerTimeRange: '',
                                 });
                                 setSearchList(initSearchList);
+                                onSelectChange([]);
                             }}
                         >
                             {resetText}
@@ -207,7 +226,9 @@ const UserReviewTable = () => {
                                     riskRank,
                                     userName
                                 });
+                                onSelectChange([]);
                                 form.submit();
+                                
                             }}
                         >
                             {searchText}
@@ -223,8 +244,8 @@ const UserReviewTable = () => {
                 showSizeChanger: true,
                 defaultPageSize: 10,
                 onChange: pageOnChange,
-                total: userReviewList.totalRecords,
-                current: userReviewList?.records?.length === 0 ? 0 : userReviewList.currentPage,
+                total: userReviewList?.totalRecords,
+                current: userReviewList?.records?.length === 0 ? 0 : userReviewList?.currentPage,
             }}
         >
 

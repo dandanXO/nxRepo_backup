@@ -1,39 +1,24 @@
-import { useEffect, useState } from 'react';
-import type { ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
-import UserReviewTable from './UserReviewTable';
-import { usePostBlackListAddMutation } from '../../../api/UserApi';
 
+import { PageContainer } from '@ant-design/pro-components';
+import UserReviewTable from './UserReviewTable';
+import {Route} from "antd/es/breadcrumb/Breadcrumb";
 
 const UserReviewPage = () => {
-    const [domLoaded, setDomLoaded] = useState(false);
-    const [showModal, setShowModal] = useState({show:false,userId:''});
-    const [form] = Form.useForm();
-    const [postBlackListAdd, { isLoading, isSuccess }] = usePostBlackListAddMutation();
-    useEffect(() => {
-        setDomLoaded(true);
-    }, [])
-
-
-    const onFinish = (values: any) => {
-        postBlackListAdd({ ...values, userId: showModal.userId });
-        form.resetFields();
-        setShowModal({ show: false, userId: "" })
-    };
-
-
-
-    const handleCloseModal = () => {
-        setShowModal({ show: false, userId: "" })
-        form.resetFields()
+    // NOTE: breadcrumb
+    const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
+        const last = routes.indexOf(route) === routes.length - 1;
+        return last ? (
+            <span>{route.breadcrumbName}</span>
+        ) : (
+            <span>{route.breadcrumbName}</span>
+        );
     }
-
     return (
-        domLoaded ? <PageContainer
+        <PageContainer
             header={{
                 ghost: true,
                 breadcrumb: {
+                    itemRender,
                     routes: [
                         { path: '', breadcrumbName: '首页', },
                         { path: '/', breadcrumbName: '用户管理', },
@@ -44,9 +29,7 @@ const UserReviewPage = () => {
             }}
         >
              <UserReviewTable  />
-            {/* <UserReviewTable setShowModal={setShowModal} /> */}
-
-        </PageContainer> : null
+        </PageContainer>
     )
 }
 
