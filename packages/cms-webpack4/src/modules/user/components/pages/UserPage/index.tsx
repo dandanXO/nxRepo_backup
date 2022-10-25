@@ -6,19 +6,13 @@ import UserTable from './UserTable';
 import AddBlackListModal from './AddBlackListModal';
 import { usePostBlackListAddMutation } from '../../../api/UserApi';
 import useAutoLogin from '../../../../shared/hooks/useAutoLogin';
-
-
+import AdminPage from '../../../../shared/components/AdminPage';
 const UserManage = () => {
-    const [domLoaded, setDomLoaded] = useState(false);
     const [showModal, setShowModal] = useState({show:false,userId:''});
     const [form] = Form.useForm();
     const [postBlackListAdd, { isLoading, isSuccess }] = usePostBlackListAddMutation();
     useAutoLogin();
-    useEffect(() => {
-        setDomLoaded(true);
-    }, [])
-
-
+   
     const onFinish = (values: any) => {
         postBlackListAdd({ ...values, userId: showModal.userId });
         form.resetFields();
@@ -33,21 +27,28 @@ const UserManage = () => {
     }
 
     return (
-        domLoaded ? <PageContainer
-            header={{
-                ghost: true,
-                breadcrumb: {
-                    routes: [
-                        { path: '', breadcrumbName: '首页', },
-                        { path: '/user', breadcrumbName: '用户管理', },
-                        { path: '/user', breadcrumbName: '用户管理', },
-                    ],
+        <AdminPage
+            navigator={{
+                ancestor: {
+                    path: "",
+                    breadcrumbName: "首页",
                 },
+                parent: {
+                    path: "",
+                    breadcrumbName: "用户管理",
+                },
+                self: {
+                    path: "",
+                    breadcrumbName: "用户管理"
+                }
             }}
         >
-            <UserTable setShowModal={setShowModal} />
-            <AddBlackListModal showModal={showModal.show} handleCloseModal={handleCloseModal} onFinish={onFinish} form={form} />
-        </PageContainer> : null
+            <>
+                <UserTable setShowModal={setShowModal} />
+                <AddBlackListModal showModal={showModal.show} handleCloseModal={handleCloseModal} onFinish={onFinish} form={form} />
+            </>
+
+        </AdminPage>
     )
 }
 
