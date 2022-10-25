@@ -28,7 +28,15 @@ export const ChannelSettingTabPage = () => {
 
     const onFormSearch = useCallback((form: FormInstance) => {
         const fields = form.getFieldsValue();
-        console.log("form.getFieldsValue()", )
+        // console.log(form.getFieldsValue() )
+
+        // transform enable
+        fields.enabled = {
+            "all": "",
+            "enable": "1",
+            "disable": "0",
+        }[fields.enabled]
+
         userBrowseAllItemsUsecase(fields);
 
     }, [])
@@ -65,11 +73,12 @@ export const ChannelSettingTabPage = () => {
             { key: 'publishId', title: '配置标签', dataIndex: 'publishId', initialValue: "" },
             {
                 key: 'enabled',
-                title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: 'all',
+                title: '状态', dataIndex: 'enabled', valueType: 'select',
+                initialValue: 'all',
                 valueEnum: {
-                    all: { text: '全部', status: 'Default' },
-                    true: { text: '启用', status: 'Success' },
-                    false: { text: '停用', status: 'Default' },
+                    "all": { text: '全部', status: 'Default' },
+                    "enable": { text: '启用', status: 'Success' },
+                    "disable": { text: '停用', status: 'Default' },
                 }
             },
         ];
