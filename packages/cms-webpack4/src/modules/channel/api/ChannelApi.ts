@@ -1,6 +1,11 @@
 import {API} from "../../../api";
 import {ChannelTagDTO} from "./dto/ChannelTagDTO";
-import {GetAllChannelQuery, MssChannelListResponse} from "./dto/ChannelDTO";
+import {
+    CreateChannelRequest,
+    CreateChannelResponse,
+    GetAllChannelQuery,
+    MssChannelListResponse, TagDropMenu
+} from "./dto/ChannelDTO";
 
 export type GetAllTagResponse = ChannelTagDTO[];
 
@@ -63,6 +68,7 @@ const ChannelApi = API.injectEndpoints({
             }),
         }),
         // NOTE: 渠道管理
+        // 取得所有渠道
         getAllChannel: builder.query<MssChannelListResponse,
             GetAllChannelQuery
             >({
@@ -72,6 +78,28 @@ const ChannelApi = API.injectEndpoints({
                 params: {},
             }),
         }),
+        // 取得風控列表
+        // 取得風控配置標籤
+        getAllChannelSettingTagDropMenu: builder.query<TagDropMenu[],
+            {}
+            >({
+            query: () => ({
+                url: `/app-manage/publish/drop-menu`,
+                method: "get",
+                params: {},
+            }),
+        }),
+        // 新增渠道
+        createChannel: builder.mutation<CreateChannelResponse, CreateChannelRequest>({
+            query: (arg: CreateChannelRequest) => ({
+                url: `/channel`,
+                method: "post",
+                data: arg,
+            })
+        }),
+
+
+
 
     }),
 })

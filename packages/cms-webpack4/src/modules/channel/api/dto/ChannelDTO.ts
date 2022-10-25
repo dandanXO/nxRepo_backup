@@ -88,3 +88,17 @@ export interface ChannelDropMenuResponse {
     name: string;
     // 渠道名称
 }
+
+
+export type CreateChannelRequest = MssChannelCreateRequest;
+
+
+export interface CreateChannelResponse {
+
+}
+
+
+export type TagDropMenu = {
+    id: number;
+    name: string;
+}

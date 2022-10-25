@@ -1,10 +1,14 @@
 import {AdminTable, ModalContent} from "../../../../../shared/components/AdminTable";
 import {ChannelTagVO} from "../ChannelSettingTagTab/formData";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useLazyGetAllChannelQuery, useLazyGetAllTagQuery} from "../../../../api/ChannelApi";
 import {MssChannelListItem} from "../../../../api/dto/ChannelDTO";
 import {FormInstance} from "antd";
+import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
+import {useForm} from "antd/es/form/Form";
+import {ChannelSettingForm} from "./ChannelSettingForm";
+import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 
 const i18n = {
     "ChannelSettingTabPage": {
@@ -26,6 +30,7 @@ export const ChannelSettingTabPage = () => {
         isEdit: false,
     });
 
+    // NOTICE: Search
     const onFormSearch = useCallback((form: FormInstance) => {
         const fields = form.getFieldsValue();
         // console.log(form.getFieldsValue() )
@@ -101,7 +106,6 @@ export const ChannelSettingTabPage = () => {
     }, []);
 
 
-
     // NOTE: GET list and item
     const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllChannelQuery({
         pollingInterval: 0,
@@ -122,6 +126,41 @@ export const ChannelSettingTabPage = () => {
         userAddItem()
     }, [])
 
+    // NOTICE: Form
+    const [form] = useForm()
+
+    // NOTICE: Modal - Create, Edit
+    // Modal - OK
+    const onModalOk = useCallback(() => {
+        form.submit();
+    }, [form])
+
+    // Modal - Close
+    const onCloseModal = useCallback(() => {
+        setCustomAntFormFieldError({});
+    }, []);
+
+    // Form - Initial Data
+    const formInitialValues = useMemo(() => {
+        // NOTE: select and switch need initialValue if you want to select one
+        return {
+            enabled: true
+        } as DeepPartial<{}>;
+    }, [])
+
+    // Form - onFieldsChange
+    const onFormFieldsChange = useCallback((changedFields, allFields) => {
+        // userEditingChannelSettingUsecase(changedFields);
+    }, [])
+
+    // Form - Finish
+    const onFormFinish = useCallback(() => {
+        // userEditedChannelSetting();
+    }, [editID])
+
+    // Form - Validation
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
+
     return (
         <>
             {/*NOTICE: List Table*/}
@@ -135,6 +174,24 @@ export const ChannelSettingTabPage = () => {
                 isSearchFromClient={false}
                 onFormSearchCallback={onFormSearch}
             />
+            <AdminFormCustomModal
+                title={"渠道配置"}
+                showModalContent={showModalContent}
+                setShowModalContent={setShowModalContent}
+                form={form}
+                onOk={onModalOk}
+                onCloseModal={onCloseModal}
+            >
+                <ChannelSettingForm
+                    isEdit={showModalContent.isEdit}
+                    form={form}
+                    initialValues={formInitialValues}
+                    onFieldsChange={onFormFieldsChange}
+                    onFinish={onFormFinish}
+                    customAntFormFieldError={customAntFormFieldError}
+                />
+
+            </AdminFormCustomModal>
         </>
     )
 }
