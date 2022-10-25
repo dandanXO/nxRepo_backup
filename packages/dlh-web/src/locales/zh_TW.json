@@ -1103,8 +1103,8 @@
     "menu.merchant.manage": "商戶管理",
     "menu.product.manage": "產品管理",
 
-    "menu.userManage":"客戶管理",
-    "menu.userInfoManage":"客戶管理",
+    "menu.userManage":"用戶管理",
+    "menu.userInfoManage":"用戶管理",
     "menu.riskControlExamine":"風控審核",
     "menu.orderList":"訂單列表",
     "menu.loan.reExamine":"業務複審",
