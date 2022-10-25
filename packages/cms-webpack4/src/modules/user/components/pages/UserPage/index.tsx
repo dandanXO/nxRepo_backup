@@ -29,15 +29,15 @@ const UserManage = () => {
         <AdminPage
             navigator={{
                 ancestor: {
-                    path: "",
+                    path: "/",
                     breadcrumbName: "首页",
                 },
                 parent: {
-                    path: "",
+                    path: null,
                     breadcrumbName: "用户管理",
                 },
                 self: {
-                    path: "",
+                    path: null,
                     breadcrumbName: "用户管理"
                 }
             }}

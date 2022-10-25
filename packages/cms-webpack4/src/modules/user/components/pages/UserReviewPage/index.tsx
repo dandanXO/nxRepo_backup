@@ -1,6 +1,8 @@
 
 import { PageContainer } from '@ant-design/pro-components';
 import UserReviewTable from './UserReviewTable';
+import {itemRender} from "../../../../shared/itemRender";
+
 import {Route} from "antd/es/breadcrumb/Breadcrumb";
 
 const UserReviewPage = () => {
@@ -18,12 +20,12 @@ const UserReviewPage = () => {
             header={{
                 ghost: true,
                 breadcrumb: {
-                    itemRender,
+                    itemRender: itemRender,
                     routes: [
-                        { path: '', breadcrumbName: '首页', },
-                        { path: '/', breadcrumbName: '用户管理', },
-                        { path: '/user-review', breadcrumbName: '用户终审', },
-                        { path: '/user-review', breadcrumbName: '审核', },
+                        { path: '/', breadcrumbName: '首页', },
+                        { path: null, breadcrumbName: '用户管理', },
+                        { path: null, breadcrumbName: '用户终审', },
+                        { path: null, breadcrumbName: '审核', },
                     ],
                 },
             }}

@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import UsesrReviewModal from './UserReviewModal';
 import {  useHistory } from "react-router-dom";
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
-import {Route} from "antd/es/breadcrumb/Breadcrumb";
+import {itemRender} from "../../../../shared/itemRender";
 const UserReviewInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();
@@ -61,18 +61,8 @@ const UserReviewInfoPage = () => {
 
     }, [isSuccess])
 
-    const onFinish = () => {
-        postUserReview({ userIds: [userId], ...form.getFieldsValue() })
-    }
-
-    // NOTE: breadcrumb
-    const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
-        const last = routes.indexOf(route) === routes.length - 1;
-        return last ? (
-            <span>{route.breadcrumbName}</span>
-        ) : (
-            <span>{route.breadcrumbName}</span>
-        );
+    const onFinish=()=>{
+        postUserReview({userIds:[userId],...form.getFieldsValue()})
     }
 
     return domLoaded ? (
@@ -86,11 +76,11 @@ const UserReviewInfoPage = () => {
                     // title: '页面标题',
                     ghost: true,
                     breadcrumb: {
-                        itemRender,
+                        itemRender: itemRender,
                         routes: [
-                            { path: '', breadcrumbName: '首页' },
-                            { path: '/user-review', breadcrumbName: '用户管理' },
-                            { path: '', breadcrumbName: '用户终审' },
+                            { path: "/", breadcrumbName: '首页' },
+                            { path: null, breadcrumbName: '用户管理' },
+                            { path: null, breadcrumbName: '用户终审' },
                         ],
                     },
                 }}
