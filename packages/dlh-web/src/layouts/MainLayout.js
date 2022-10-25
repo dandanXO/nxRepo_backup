@@ -9,7 +9,10 @@ import PropTypes from 'prop-types';
 const { SubMenu } = Menu;
 const {  Sider } = Layout;
 import styles from './MainLayout.less';
-export default class MainLayout extends Component {
+import {withRouter} from 'react-router-dom';
+
+
+class MainLayout extends Component {
 
     constructor(props) {
         super(props);
@@ -30,6 +33,8 @@ export default class MainLayout extends Component {
         const { isTrigger } = this.state;
         const { list } = this.props;
         //console.log(ReactDOM.findDOMNode(this).getElementsByClassName('ant-menu-sub').length)
+        const { location: { pathname } } = this.props;
+        const isNewCMS = pathname.indexOf("/cms") > -1;
         return (
             <Layout className={styles.rootContainer}>
 
@@ -50,16 +55,14 @@ export default class MainLayout extends Component {
                             <Icon style={{fontWeight: 'bold',color:'#BFCBD4'}} type={isTrigger ? 'right' : 'left'}/>
                         </div>
                     </Sider>
-                  
+
 
                     <Layout className={styles.contentWrapper}>
                     <LayoutHeader/>
-                        
-                        <div className={styles.breadContainer}>
-                            <PathBread list={list}/>
-                        </div>
+                        {!isNewCMS && <div className={styles.breadContainer}>
+                          <PathBread list={list}/>
+                        </div>}
                         <LayoutContent list={list}/>
-                       
                     </Layout>
                 </Layout>
             </Layout>
@@ -72,3 +75,5 @@ MainLayout.propTypes = {
 MainLayout.defaultProps = {
     list: []
 };
+
+export default withRouter(MainLayout);
