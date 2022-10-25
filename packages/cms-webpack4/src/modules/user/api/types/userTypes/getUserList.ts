@@ -44,6 +44,7 @@ export interface UserListContent {
     newMember?: boolean;  // 是否为新客
     phoneNo?: string;     // 手机号
     riskRank?: string;    // 风控标签
+    status?:number        // 用戶狀態
 }
 
 export type GetUerListProps = GetUserListResponse & GetPageableResponse;

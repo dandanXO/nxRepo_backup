@@ -102,7 +102,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => record.isBlack ?
+            render: (text, record, _, action) => record.status !== 4 ?
                 [<a key="editable" onClick={()=>handleToUserDetail(record.id)} >查看</a>, <a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>] :
                 [<a key="editable" type="link" onClick={()=>handleToUserDetail(record.id)} >查看</a>,
                 <a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>,
