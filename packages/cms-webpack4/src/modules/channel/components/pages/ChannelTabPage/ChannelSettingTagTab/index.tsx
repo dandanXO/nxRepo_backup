@@ -8,12 +8,11 @@ import {
     usePutTagMutation
 } from "../../../../api/ChannelApi";
 import {useForm} from "antd/es/form/Form";
-import {ChannelSettingTagModal} from "./ChannelSettingTagModal";
 import {ChannelSettingTagForm} from "./ChannelSettingTagForm";
 import {AdminCustomModal} from "../../../../../shared/components/AdminCustomModal";
 import {MockChannelTag, ChannelTagVO, ChannelTagSchemaEntity, IChannelTagSchema} from "./formData";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import useAutoLogin from "../../../../../shared/hooks/useAutoLogin";
+import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
 
 // NOTICE:
 const channelTagSchemaEntity = new ChannelTagSchemaEntity();
@@ -315,7 +314,9 @@ export const ChannelSettingTagTabPage = () => {
             />
 
             {/*NOTICE: Create, Edit Modal*/}
-            <ChannelSettingTagModal
+            <AdminFormCustomModal
+                title={"渠道配置标签"}
+                width={"600px"}
                 showModalContent={showModalContent}
                 // 關閉
                 setShowModalContent={setShowModalContent}
@@ -332,7 +333,7 @@ export const ChannelSettingTagTabPage = () => {
                     onFinish={onFormFinish}
                     customAntFormFieldError={customAntFormFieldError}
                 />
-            </ChannelSettingTagModal>
+            </AdminFormCustomModal>
 
             {/*NOTICE: Delete Modal*/}
             <AdminCustomModal open={showDeleteModal} onOk={onDeleteModalOK} onCancel={onDeleteModalCancel} message={"确认要删除此笔数据吗?"}/>

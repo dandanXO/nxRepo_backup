@@ -14,15 +14,15 @@ const BaseSettingSection = (props: BaseSettingSectionProps) => {
 
   return (
     <React.Fragment>
-          <Form.Item name="merchantId" label="商户名" rules={[{ required: true }]} >
-              <Select
-                  placeholder="商户名"
-                  // onChange={this.onGenderChange}
-                  allowClear
-              >
-                  {props?.merchantList?.map((i) => <Option key={i.merchantId} value={i.merchantId}>{i.name}</Option>)}
-              </Select>
-          </Form.Item>
+      <Form.Item name="merchantId" label="商户名" rules={[{ required: true }]} >
+          <Select
+              placeholder="商户名"
+              // onChange={this.onGenderChange}
+              allowClear
+          >
+              {props?.merchantList?.map((i) => <Option key={i.merchantId} value={i.merchantId}>{i.name}</Option>)}
+          </Select>
+      </Form.Item>
 
       <Form.Item name="productName" label="产品名" rules={[{ required: true }]}>
         <Input allowClear placeholder="产品名"/>

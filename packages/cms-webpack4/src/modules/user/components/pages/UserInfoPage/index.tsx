@@ -6,6 +6,7 @@ import AddressBook from '../../components/AddressBook';
 import SmsMessage from '../../components/SmsMessage';
 import LoanInfo from '../../components/LoanInfo';
 import { useParams } from "react-router-dom";
+import {Route} from "antd/es/breadcrumb/Breadcrumb";
 const UserInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();
@@ -22,14 +23,24 @@ const UserInfoPage = () => {
         { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId}/> },
       ];
 
+      const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
+        const last = routes.indexOf(route) === routes.length - 1;
+        return last ? (
+            <span>{route.breadcrumbName}</span>
+        ) : (
+            <span>{route.breadcrumbName}</span>
+        );
+    }
+
     return domLoaded ? (
         <div>
             <PageContainer
                 // loading
                 header={{
-                    // title: '页面标题',
+                   
                     ghost: true,
                     breadcrumb: {
+                        itemRender,
                         routes: [
                             { path: '', breadcrumbName: '首页' },
                             { path: '/user', breadcrumbName: '用户管理' },

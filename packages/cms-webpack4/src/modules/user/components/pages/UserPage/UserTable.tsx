@@ -88,7 +88,15 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             status:searchList.status,
         })
     }
-   
+
+    const [deleteModal, deleteContextHolder] = Modal.useModal();
+    const [banModal, banContextHolder] = Modal.useModal();
+    const handleDeleteUser=(id)=>{
+        deleteModal.confirm({content:"确认要清除该用户信息吗？", onOk() { deleteUser({ userId: Number(id) }) } });
+    }
+    const handleBanUser=(id)=>{
+        banModal.confirm({content:"确认要禁止该用户登录吗？", onOk() {  banUser({ userId: Number(id) }) } });
+    }
     const columns: ProColumns<UserListContent>[] = [
         {
             title: '操作',
@@ -97,8 +105,8 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             render: (text, record, _, action) => record.isBlack ?
                 [<a key="editable" onClick={()=>handleToUserDetail(record.id)} >查看</a>, <a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>] :
                 [<a key="editable" type="link" onClick={()=>handleToUserDetail(record.id)} >查看</a>,
-                <a key="clear" onClick={() => deleteUser({ userId: Number(record.id) })}>清除</a>,
-                <a key="forbidden" onClick={() => banUser({ userId: Number(record.id) })}>禁止</a>]
+                <a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>,
+                <a key="forbidden" onClick={() => handleBanUser(record.id)}>禁止</a>]
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || ""},
         { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: searchParams.nameTrue || ""  },
@@ -186,6 +194,8 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
                     <Space>
+                        {deleteContextHolder}
+                        {banContextHolder}
                         {contextHolder}
                         <Button onClick={() => {
                             //  form.resetFields();
