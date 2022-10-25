@@ -4,10 +4,9 @@ import {PageContainer} from '@ant-design/pro-components';
 import {useProductFormModal} from "./hooks/useProductFormModal";
 import {ProductModal} from "./ProductModal";
 import ProductForm from "./ProductForm";
-import useAutoLogin from "../../../../shared/hooks/useAutoLogin";
 
 export const ProductPage = () => {
-useAutoLogin();
+
   const [domLoaded, setDomLoaded] = useState(false);
   useEffect(() => {
     setDomLoaded(true);
@@ -68,7 +67,13 @@ useAutoLogin();
           isEdit={productModalData.isEdit}
           onOk={onFormSubmit}
         >
-          <ProductForm productModalData={productModalData} onFinish={onFinish} form={form} merchantList={merchantList} customAntFormFieldError={customAntFormFieldError} setCustomAntFormFieldError={setCustomAntFormFieldError} show={productModalData.show}
+          <ProductForm productModalData={productModalData}
+                       onFinish={onFinish}
+                       form={form}
+                       merchantList={merchantList}
+                       customAntFormFieldError={customAntFormFieldError}
+                       setCustomAntFormFieldError={setCustomAntFormFieldError}
+                       show={productModalData.show}
                        enableLoanAmount={enableLoanAmount}
                        enableReLoanAmount={enableReLoanAmount}
                        setEnableLoanAmount={setEnableLoanAmount}

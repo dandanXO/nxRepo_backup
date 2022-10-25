@@ -8,12 +8,10 @@ import {
     usePutTagMutation
 } from "../../../../api/ChannelApi";
 import {useForm} from "antd/es/form/Form";
-import {ChannelSettingTagModal} from "./ChannelSettingTagModal";
 import {ChannelSettingTagForm} from "./ChannelSettingTagForm";
 import {AdminCustomModal} from "../../../../../shared/components/AdminCustomModal";
 import {MockChannelTag, ChannelTagVO, ChannelTagSchemaEntity, IChannelTagSchema} from "./formData";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import useAutoLogin from "../../../../../shared/hooks/useAutoLogin";
 import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
 
 // NOTICE:

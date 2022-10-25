@@ -5,14 +5,13 @@ import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
 import UserTable from './UserTable';
 import AddBlackListModal from './AddBlackListModal';
 import { usePostBlackListAddMutation } from '../../../api/UserApi';
-import useAutoLogin from '../../../../shared/hooks/useAutoLogin';
+
 import AdminPage from '../../../../shared/components/AdminPage';
 const UserManage = () => {
     const [showModal, setShowModal] = useState({show:false,userId:''});
     const [form] = Form.useForm();
     const [postBlackListAdd, { isLoading, isSuccess }] = usePostBlackListAddMutation();
-    useAutoLogin();
-   
+
     const onFinish = (values: any) => {
         postBlackListAdd({ ...values, userId: showModal.userId });
         form.resetFields();

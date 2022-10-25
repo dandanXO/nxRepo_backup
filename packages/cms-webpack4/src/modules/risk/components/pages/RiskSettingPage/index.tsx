@@ -16,12 +16,10 @@ import {useForm} from "antd/es/form/Form";
 import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
 import RiskSettingForm from "./RiskSettingForm";
 import RiskSettingModal from "./RiskSettingModal";
-import useAutoLogin from "../../../../shared/hooks/useAutoLogin";
 
 export type FormResponseData = GetRiskManageResponse;
 
 export const RiskSettingPage = () => {
-    useAutoLogin();
 
     // NOTE: UI Loading
     const [loading, setLoading] = useState(false);

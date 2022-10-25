@@ -4,7 +4,6 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
 import UserReviewTable from './UserReviewTable';
 import { usePostBlackListAddMutation } from '../../../api/UserApi';
-import useAutoLogin from '../../../../shared/hooks/useAutoLogin';
 
 
 const UserReviewPage = () => {
@@ -12,7 +11,6 @@ const UserReviewPage = () => {
     const [showModal, setShowModal] = useState({show:false,userId:''});
     const [form] = Form.useForm();
     const [postBlackListAdd, { isLoading, isSuccess }] = usePostBlackListAddMutation();
-    useAutoLogin();
     useEffect(() => {
         setDomLoaded(true);
     }, [])
@@ -47,7 +45,7 @@ const UserReviewPage = () => {
         >
              <UserReviewTable  />
             {/* <UserReviewTable setShowModal={setShowModal} /> */}
-           
+
         </PageContainer> : null
     )
 }
