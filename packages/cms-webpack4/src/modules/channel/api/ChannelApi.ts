@@ -29,26 +29,20 @@ const ChannelApi = API.injectEndpoints({
                 data: arg,
             })
         }),
-        getTag: builder.query<ChannelTagDTO,
-            GetTagRequest
-            >({
+        getTag: builder.query<ChannelTagDTO, GetTagRequest>({
             query: (arg: GetTagRequest) => ({
                 url: `/app-manage/publish?id=${arg.id}`,
                 method: "get",
             }),
         }),
-        getAllTag: builder.query<GetAllTagResponse,
-            null
-            >({
+        getAllTag: builder.query<GetAllTagResponse, null>({
             query: () => ({
                 url: `/app-manage/publish/all`,
                 method: "get",
                 params: {},
             }),
         }),
-        putTag: builder.mutation<null,
-            ChannelTagDTO
-            >({
+        putTag: builder.mutation<null, ChannelTagDTO>({
             query: (arg: ChannelTagDTO) => ({
                 url: `/app-manage/publish`,
                 method: "put",
@@ -57,9 +51,7 @@ const ChannelApi = API.injectEndpoints({
 
             }),
         }),
-        deleteTag: builder.mutation<null,
-            DeleteTagRequest
-            >({
+        deleteTag: builder.mutation<null, DeleteTagRequest>({
             query: (arg: DeleteTagRequest) => ({
                 url: `/app-manage/publish`,
                 method: "delete",
@@ -69,9 +61,7 @@ const ChannelApi = API.injectEndpoints({
         }),
         // NOTE: 渠道管理
         // 取得所有渠道
-        getAllChannel: builder.query<MssChannelListResponse,
-            GetAllChannelQuery
-            >({
+        getAllChannel: builder.query<MssChannelListResponse, GetAllChannelQuery>({
             query: (query: GetAllChannelQuery) => ({
                 url: `/channel/all?appName=${query.appName||""}&enabled=${query.enabled||""}&id=${query.id||""}&modelName=${query.modelName||""}&name=${query.name||""}&publishId=${query.publishId||""}`,
                 method: "get",
@@ -80,9 +70,7 @@ const ChannelApi = API.injectEndpoints({
         }),
         // 取得風控列表
         // 取得風控配置標籤
-        getAllChannelSettingTagDropMenu: builder.query<TagDropMenu[],
-            {}
-            >({
+        getAllChannelSettingTagDropMenu: builder.query<TagDropMenu[], {}>({
             query: () => ({
                 url: `/app-manage/publish/drop-menu`,
                 method: "get",
@@ -97,7 +85,6 @@ const ChannelApi = API.injectEndpoints({
                 data: arg,
             })
         }),
-
 
 
 
