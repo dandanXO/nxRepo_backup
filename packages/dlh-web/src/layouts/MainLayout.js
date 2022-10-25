@@ -30,10 +30,10 @@ class MainLayout extends Component {
          });
          if(nextCollapsed) {
            setTimeout(() => {
-             document.querySelector("#micro-app").style.width = "calc(100vw - 90px)";
+             document.querySelector("#micro-app").style.width = "calc(100vw - 90px - 14px)";
            }, 100)
          } else {
-           document.querySelector("#micro-app").style.width = "calc(100vw - 220px)";
+           document.querySelector("#micro-app").style.width = "calc(100vw - 210px - 14px)";
          }
     }
     render() {
