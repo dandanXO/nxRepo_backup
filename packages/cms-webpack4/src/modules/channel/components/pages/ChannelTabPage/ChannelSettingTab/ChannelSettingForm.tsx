@@ -82,8 +82,8 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                 message="启用、停用说明"
                 description={
                     <div>
-                        <div>1. 渠道状态为【停用】时，参数配置>渠道禁止注册配置中<Text strong>增加</Text>本渠道id，<Text strong>限制</Text>渠道注册。</div>
-                        <div>2. 渠道状态为【启用】时，参数配置>渠道禁止注册配置中<Text strong>移除</Text>本渠道id，<Text strong>不限制</Text>渠道注册。</div>
+                        <div>1. 渠道状态为【停用】时，参数配置{'>'}渠道禁止注册配置中<Text strong>增加</Text>本渠道id，<Text strong>限制</Text>渠道注册。</div>
+                        <div>2. 渠道状态为【启用】时，参数配置{'>'}渠道禁止注册配置中<Text strong>移除</Text>本渠道id，<Text strong>不限制</Text>渠道注册。</div>
                         <div>3. 以上功能<Text strong>修改渠道时</Text>才有效。</div>
                     </div>
                 }
