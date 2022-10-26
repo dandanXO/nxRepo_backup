@@ -48,7 +48,7 @@ export const ChannelSettingTabPage = () => {
 
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
-    const userInitalizeListUsecase = useCallback(() => {
+    const systemInitalizeListUsecase = useCallback(() => {
         const columns: ProColumns<MssChannelListItem>[] = [
             {
                 key: 'option',
@@ -91,18 +91,16 @@ export const ChannelSettingTabPage = () => {
     }, []);
 
     useEffect(() => {
-        userInitalizeListUsecase();
+        systemInitalizeListUsecase();
     }, [])
 
     // NOTE: User browse AllItemsUsecase
-    const userBrowseAllItemsUsecase = useCallback((query) => {
+    const userBrowseAndSearchAllItemsUsecase = useCallback((query) => {
         triggerGetList(query);
     }, [])
 
     useEffect(() => {
-        userBrowseAllItemsUsecase({
-
-        })
+        userBrowseAndSearchAllItemsUsecase({})
     }, []);
 
 

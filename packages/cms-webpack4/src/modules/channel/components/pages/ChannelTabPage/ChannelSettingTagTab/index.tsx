@@ -101,7 +101,7 @@ export const ChannelSettingTagTabPage = () => {
     // }, [isLoginSuccess])
 
     // NOTE: System is initializing ChannelSetting List
-    const userInitalizeChannelSettingListUsecase = useCallback(() => {
+    const systemInitalizeChannelSettingListUsecase = useCallback(() => {
         const columns: ProColumns<ChannelTagVO>[] = [
             {
                 key: 'option',
@@ -132,7 +132,7 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
 
     useEffect(() => {
-        userInitalizeChannelSettingListUsecase();
+        systemInitalizeChannelSettingListUsecase();
     }, [])
 
     // NOTE: User browse AllChannelSettings
