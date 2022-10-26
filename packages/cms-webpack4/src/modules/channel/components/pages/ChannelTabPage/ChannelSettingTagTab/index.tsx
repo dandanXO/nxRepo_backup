@@ -82,7 +82,7 @@ export const ChannelSettingTagTabPage = () => {
 
     const onDeleteModalOK = useCallback(() => {
         // NOTICE: need dependency array
-        userDeleteChannelSettingUsecase()
+        userDeleteChannelSettingUseCase()
     }, [editID])
 
     const onDeleteModalCancel = useCallback(() => {
@@ -289,7 +289,7 @@ export const ChannelSettingTagTabPage = () => {
     }, [])
 
     // NOTE: User delete ChannelSetting
-    const userDeleteChannelSettingUsecase = useCallback(() => {
+    const userDeleteChannelSettingUseCase = useCallback(() => {
         // NOTE:
         triggerDelete({
             id: editID,

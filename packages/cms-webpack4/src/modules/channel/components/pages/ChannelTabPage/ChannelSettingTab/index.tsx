@@ -63,9 +63,6 @@ export const ChannelSettingTabPage = () => {
                         <a key="editable" onClick={() => {
                             userBrowseEditChannelSettingUseCase(record);
                         }}>修改</a>,
-                        // <a key="deletable" onClick={() => {
-                        //     userBrowseDeleteChannelSettingUsecase(record)
-                        // }}>刪除</a>,
                     ]
                 }
             },
@@ -244,7 +241,6 @@ export const ChannelSettingTabPage = () => {
         form.setFieldsValue(currentFormData)
     }, [showModalContent.isEdit, currentFormData])
 
-
     return (
         <>
             {/*NOTICE: List Table*/}
@@ -276,7 +272,6 @@ export const ChannelSettingTabPage = () => {
                     dataForAllRiskDropMenuData={allRiskDropMenuData}
                     dataForAllChannelSettingTagDropMenuData={allChannelSettingTagDropMenuData}
                 />
-
             </AdminFormCustomModal>
         </>
     )
