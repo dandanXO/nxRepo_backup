@@ -38,7 +38,7 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                        // help={(props.customAntFormFieldError?.packageId as any)?.help}
                        extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
             >
-                <Input placeholder={"PackgeID"}/>
+                <Input placeholder={"PackgeID"} disabled={props.isEdit}/>
             </Form.Item>
 
             <Form.Item label="渠道链接" name={"url"} rules={[{ required: true }]}
@@ -46,7 +46,7 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                        // help={(props.customAntFormFieldError?.url as any)?.help}
                        extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
             >
-                <Input placeholder={"渠道链接"}/>
+                <Input placeholder={"渠道链接"} disabled={props.isEdit}/>
             </Form.Item>
 
             <Form.Item label="风控方案" name="modelName"  rules={[{ required: true }]} >
@@ -62,13 +62,13 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                        // help={(props.customAntFormFieldError?.appName as any)?.help}
                        extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
             >
-                <Input placeholder={"包名"}/>
+                <Input placeholder={"包名"} disabled={props.isEdit}/>
             </Form.Item>
 
             <Form.Item label="配置标签" name="publishId" rules={[{ required: true }]}
                        extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
             >
-                <Select placeholder="选择">
+                <Select placeholder="选择" disabled={props.isEdit}>
                     {props.dataForAllChannelSettingTagDropMenuData?.map((menuData, index) => {
                         return <Option key={index} value={menuData.id}>{menuData.name}</Option>
                     })}
