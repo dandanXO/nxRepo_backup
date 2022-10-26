@@ -1,15 +1,14 @@
 import {API} from "../../../api";
-import {ChannelTagDTO} from "./dto/ChannelTagDTO";
-import {
-    CreateChannelRequest,
-    CreateChannelResponse,
-    GetAllChannelQuery,
-    MssChannelListResponse,
-} from "./dto/ChannelDTO";
+import {ChannelTag} from "./dto/ChannelTag";
 import {RiskDropMenu} from "./dto/RiskDropMenu";
 import {TagDropMenu} from "./dto/TagDropMenu";
+import {GetAllChannelQuery} from "./GetAllChannelQuery";
+import {ChannelListItem} from "./dto/ChannelListItem";
+import {GetChannelRequest} from "./GetChannelRequest";
+import {CreateChannelRequest} from "./CreateChannelRequest";
+import {UpdateChannelRequest} from "./UpdateChannelRequest";
 
-export type GetAllTagResponse = ChannelTagDTO[];
+export type GetAllTagResponse = ChannelTag[];
 
 export interface GetTagRequest {
     id: number;
@@ -23,15 +22,15 @@ const ChannelApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // NOTE: 渠道標籤管理
-        createTag: builder.mutation<null, ChannelTagDTO>({
-            query: (arg: ChannelTagDTO) => ({
+        createTag: builder.mutation<null, ChannelTag>({
+            query: (arg: ChannelTag) => ({
                 url: `/app-manage/publish`,
                 method: "post",
                 params: {},
                 data: arg,
             })
         }),
-        getTag: builder.query<ChannelTagDTO, GetTagRequest>({
+        getTag: builder.query<ChannelTag, GetTagRequest>({
             query: (arg: GetTagRequest) => ({
                 url: `/app-manage/publish?id=${arg.id}`,
                 method: "get",
@@ -44,8 +43,8 @@ const ChannelApi = API.injectEndpoints({
                 params: {},
             }),
         }),
-        putTag: builder.mutation<null, ChannelTagDTO>({
-            query: (arg: ChannelTagDTO) => ({
+        putTag: builder.mutation<null, ChannelTag>({
+            query: (arg: ChannelTag) => ({
                 url: `/app-manage/publish`,
                 method: "put",
                 params: {},
@@ -63,7 +62,7 @@ const ChannelApi = API.injectEndpoints({
         }),
         // NOTE: 渠道管理
         // 取得所有渠道
-        getAllChannel: builder.query<MssChannelListResponse, GetAllChannelQuery>({
+        getAllChannel: builder.query<ChannelListItem[], GetAllChannelQuery>({
             query: (query: GetAllChannelQuery) => ({
                 url: `/channel/all?appName=${query.appName||""}&enabled=${query.enabled||""}&id=${query.id||""}&modelName=${query.modelName||""}&name=${query.name||""}&publishId=${query.publishId||""}`,
                 method: "get",
@@ -85,10 +84,24 @@ const ChannelApi = API.injectEndpoints({
             }),
         }),
         // 新增渠道
-        createChannel: builder.mutation<CreateChannelResponse, CreateChannelRequest>({
+        createChannel: builder.mutation<{}, CreateChannelRequest>({
             query: (arg: CreateChannelRequest) => ({
                 url: `/channel`,
                 method: "post",
+                data: arg,
+            })
+        }),
+        // 取得渠道資訊
+        getChannel: builder.query<ChannelListItem, {}>({
+            query: (arg: GetChannelRequest) => ({
+                url: `/channel/${arg.id}`,
+                method: "get",
+            }),
+        }),
+        updateChannel: builder.mutation<{}, UpdateChannelRequest>({
+            query: (arg: UpdateChannelRequest) => ({
+                url: `/channel`,
+                method: "put",
                 data: arg,
             })
         }),
@@ -109,4 +122,5 @@ export const {
     useLazyGetAllRiskDropMenuQuery,
     useLazyGetAllChannelSettingTagDropMenuQuery,
     useCreateChannelMutation,
+    useLazyGetChannelQuery,
 } = ChannelApi;

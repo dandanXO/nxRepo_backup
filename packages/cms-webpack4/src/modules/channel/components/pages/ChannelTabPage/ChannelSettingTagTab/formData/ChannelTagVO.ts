@@ -1,4 +1,4 @@
 // NOTICE: VO
-import {ChannelTagDTO} from "../../../../../api/dto/ChannelTagDTO";
+import {ChannelTag} from "../../../../../api/dto/ChannelTag";
 
-export type ChannelTagVO = Omit<ChannelTagDTO, "showPermission" | "showTermAndCondition">
+export type ChannelTagVO = Omit<ChannelTag, "showPermission" | "showTermAndCondition">

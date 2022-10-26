@@ -1,5 +1,5 @@
 // NOTICE: DTO
-export interface ChannelTagDTO {
+export interface ChannelTag {
     auditAcc: string;
     // google audit acc
 

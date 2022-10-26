@@ -110,7 +110,7 @@ export const ChannelSettingTagTabPage = () => {
                 render: (text, record, _, action) => {
                     return [
                         <a key="editable" onClick={() => {
-                            userBrowseEditChannelSettingUsecase(record);
+                            userBrowseEditChannelSettingUseCase(record);
                         }}>修改</a>,
                         <a key="deletable" onClick={() => {
                             userBrowseDeleteChannelSettingUsecase(record)
@@ -158,7 +158,7 @@ export const ChannelSettingTagTabPage = () => {
     // }, [form])
 
     // NOTE: User browse EditChannelSetting
-    const userBrowseEditChannelSettingUsecase = useCallback((record: ChannelTagVO) => {
+    const userBrowseEditChannelSettingUseCase = useCallback((record: ChannelTagVO) => {
         setEditID(record.id);
         setShowModalContent({
             show: true,
@@ -170,8 +170,15 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
     const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetTagQuery();
 
+    // NOTE: Form - Mode: edit (Set form fields from data)
+    useEffect(() => {
+        if(showModalContent.isEdit && currentFormData) {
+            systemReloadEditChannelSettingUseCase(currentFormData)
+        }
+    }, [showModalContent.isEdit, currentFormData])
+
     // NOTE: System reload EditChannelSetting
-    const systemReloadEditChannelSettingUsecase = useCallback((currentFormData) => {
+    const systemReloadEditChannelSettingUseCase = useCallback((currentFormData) => {
         // NOTICE: form
         // NOTE: form - menu
         // const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
@@ -181,12 +188,6 @@ export const ChannelSettingTagTabPage = () => {
         form.setFieldsValue(currentFormData)
     }, [showModalContent.isEdit, currentFormData])
 
-    // NOTE: Form - Mode: edit (Set form fields from data)
-    useEffect(() => {
-        if(showModalContent.isEdit && currentFormData) {
-            systemReloadEditChannelSettingUsecase(currentFormData)
-        }
-    }, [showModalContent.isEdit, currentFormData])
 
     // NOTE: User add ChannelSetting
     const userAddChannelSetting = useCallback(() => {

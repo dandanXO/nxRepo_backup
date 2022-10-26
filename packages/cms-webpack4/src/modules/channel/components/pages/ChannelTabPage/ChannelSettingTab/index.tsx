@@ -3,17 +3,16 @@ import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {
     useCreateChannelMutation,
-    useCreateTagMutation,
     useLazyGetAllChannelQuery, useLazyGetAllChannelSettingTagDropMenuQuery,
     useLazyGetAllRiskDropMenuQuery,
-    useLazyGetAllTagQuery, usePutTagMutation
+    useLazyGetAllTagQuery, useLazyGetChannelQuery, useLazyGetTagQuery, usePutTagMutation
 } from "../../../../api/ChannelApi";
-import {MssChannelListItem} from "../../../../api/dto/ChannelDTO";
 import {FormInstance} from "antd";
 import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
 import {useForm} from "antd/es/form/Form";
 import {ChannelSettingForm} from "./ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import {ChannelListItem} from "../../../../api/dto/ChannelListItem";
 
 const i18n = {
     "ChannelSettingTabPage": {
@@ -23,7 +22,7 @@ const i18n = {
 export const ChannelSettingTabPage = () => {
     // NOTICE: Action: List
     // NOTE: Table
-    const [columns, setColumns] = useState<ProColumns<MssChannelListItem>[]>()
+    const [columns, setColumns] = useState<ProColumns<ChannelListItem>[]>()
 
     // NOTICE: Action: Edit
     const [editID, setEditID] = useState<number>();
@@ -54,16 +53,16 @@ export const ChannelSettingTabPage = () => {
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
     const systemInitalizeListUsecase = useCallback(() => {
-        const columns: ProColumns<MssChannelListItem>[] = [
+        const columns: ProColumns<ChannelListItem>[] = [
             {
                 key: 'option',
                 title: '操作',
                 valueType: 'option',
                 render: (text, record, _, action) => {
                     return [
-                        // <a key="editable" onClick={() => {
-                        //     userBrowseEditChannelSettingUsecase(record);
-                        // }}>修改</a>,
+                        <a key="editable" onClick={() => {
+                            userBrowseEditChannelSettingUseCase(record);
+                        }}>修改</a>,
                         // <a key="deletable" onClick={() => {
                         //     userBrowseDeleteChannelSettingUsecase(record)
                         // }}>刪除</a>,
@@ -219,10 +218,37 @@ export const ChannelSettingTabPage = () => {
     // Form - Validation
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
 
+    // NOTE: User browse EditChannelSetting
+    const userBrowseEditChannelSettingUseCase = useCallback((record: ChannelListItem) => {
+        setEditID(record.id);
+        setShowModalContent({
+            show: true,
+            isEdit: true,
+        })
+        triggerGet({
+            id: record.id,
+        });
+    }, []);
+    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetChannelQuery();
+
+    // NOTE: Form - Mode: edit (Set form fields from data)
+    useEffect(() => {
+        if(showModalContent.isEdit && currentFormData) {
+            systemReloadEditChannelSettingUseCase(currentFormData)
+        }
+    }, [showModalContent.isEdit, currentFormData])
+
+    // NOTE: System reload EditChannelSetting
+    const systemReloadEditChannelSettingUseCase = useCallback((currentFormData) => {
+        // NOTE: form - main data
+        form.setFieldsValue(currentFormData)
+    }, [showModalContent.isEdit, currentFormData])
+
+
     return (
         <>
             {/*NOTICE: List Table*/}
-            <AdminTable<MssChannelListItem>
+            <AdminTable<ChannelListItem>
                 tableHeaderColumns={columns}
                 tableDatasource={currentItemListData}
                 loading={isGetListFetching}
