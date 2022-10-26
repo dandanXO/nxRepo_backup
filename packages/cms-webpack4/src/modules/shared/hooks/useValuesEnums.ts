@@ -9,8 +9,8 @@ const useValuesEnums = () => {
     useEffect(() => {
         const channelList = currentData && currentData?.reduce((prev, curr) => {
             return { ...prev, ...{ [curr.channelId]: { text: curr.name } } }
-        }, { '': { text: '不限' } });
-        setChannelListEnum(channelList)
+        }, {});
+        setChannelListEnum({ ...channelList, '': { text: '不限' } })
     }, [isSuccess])
 
 
