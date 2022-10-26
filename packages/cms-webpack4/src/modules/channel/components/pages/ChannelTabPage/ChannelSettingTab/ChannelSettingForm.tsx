@@ -7,14 +7,14 @@ const { Option } = Select;
 
 import React from "react";
 import {RiskDropMenu} from "../../../../api/dto/RiskDropMenu";
-import {TagDropMenu} from "../../../../api/dto/TagDropMenu";
+import {ChannelTagDropMenu} from "../../../../api/dto/ChannelTagDropMenu";
 
 type ChannelSettingFormProps = {
     isEdit: boolean;
     id?: number;
 } & AdminFormProps & {
     dataForAllRiskDropMenuData: RiskDropMenu[];
-    dataForAllChannelSettingTagDropMenuData: TagDropMenu[];
+    dataForAllChannelSettingTagDropMenuData: ChannelTagDropMenu[];
 };
 
 export const ChannelSettingForm = (props: ChannelSettingFormProps) => {

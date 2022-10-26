@@ -1,5 +1,4 @@
-
-export type TagDropMenu = {
+export type ChannelTagDropMenu = {
     id: number;
     name: string;
 }

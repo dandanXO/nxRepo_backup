@@ -1,7 +1,7 @@
 import {API} from "../../../api";
 import {ChannelTag} from "./dto/ChannelTag";
 import {RiskDropMenu} from "./dto/RiskDropMenu";
-import {TagDropMenu} from "./dto/TagDropMenu";
+import {ChannelTagDropMenu} from "./dto/ChannelTagDropMenu";
 import {GetAllChannelQueryRequest} from "./request/GetAllChannelQueryRequest";
 import {Channel} from "./dto/Channel";
 import {GetChannelRequest} from "./request/GetChannelRequest";
@@ -77,7 +77,7 @@ const ChannelApi = API.injectEndpoints({
             }),
         }),
         // 取得風控配置標籤列表
-        getAllChannelSettingTagDropMenu: builder.query<TagDropMenu[], {}>({
+        getAllChannelSettingTagDropMenu: builder.query<ChannelTagDropMenu[], {}>({
             query: () => ({
                 url: `/app-manage/publish/drop-menu`,
                 method: "get",
