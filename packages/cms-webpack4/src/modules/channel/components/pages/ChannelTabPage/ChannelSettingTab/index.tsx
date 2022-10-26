@@ -14,6 +14,9 @@ import {ChannelSettingForm} from "./ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {ChannelListItem} from "../../../../api/dto/ChannelListItem";
 
+type ChannelListItemVO = ChannelListItem & {
+    enabledTag?: string;
+}
 const i18n = {
     "ChannelSettingTabPage": {
         add: "添加渠道",
@@ -22,7 +25,7 @@ const i18n = {
 export const ChannelSettingTabPage = () => {
     // NOTICE: Action: List
     // NOTE: Table
-    const [columns, setColumns] = useState<ProColumns<ChannelListItem>[]>()
+    const [columns, setColumns] = useState<ProColumns<ChannelListItemVO>[]>()
 
     // NOTICE: Action: Edit
     const [editID, setEditID] = useState<number>();
@@ -44,7 +47,7 @@ export const ChannelSettingTabPage = () => {
             "all": "",
             "enable": "1",
             "disable": "0",
-        }[fields.enabled]
+        }[fields.enabledTag]
 
         userBrowseAndSearchAllItemsUseCase(fields);
 
@@ -53,7 +56,7 @@ export const ChannelSettingTabPage = () => {
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
     const systemInitalizeListUsecase = useCallback(() => {
-        const columns: ProColumns<ChannelListItem>[] = [
+        const columns: ProColumns<ChannelListItemVO>[] = [
             {
                 key: 'option',
                 title: '操作',
@@ -78,8 +81,8 @@ export const ChannelSettingTabPage = () => {
             { key: 'appName', title: '包名', dataIndex: 'appName', initialValue: "" },
             { key: 'publishId', title: '配置标签', dataIndex: 'publishId', initialValue: "" },
             {
-                key: 'enabled',
-                title: '状态', dataIndex: 'enabled', valueType: 'select',
+                key: 'enabledTag',
+                title: '状态', dataIndex: 'enabledTag', valueType: 'select',
                 initialValue: 'all',
                 valueEnum: {
                     "all": { text: '全部', status: 'Default' },
@@ -111,6 +114,17 @@ export const ChannelSettingTabPage = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
+    const [currentTableListData, setCurrentTableListData] = useState<ChannelListItemVO[]>();
+    useEffect(() => {
+        if(!currentItemListData) return;
+        const data = currentItemListData.map(item => {
+            return {
+                ...item,
+                enabledTag: item.enabled === 0 ? "disable" : "enable"
+            }
+        })
+        setCurrentTableListData(data);
+    }, [currentItemListData])
 
     const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData, isLoading: isLoadingAllRiskDropMenuData, isFetching: isFetchingAllRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
         pollingInterval: 0,
@@ -216,7 +230,7 @@ export const ChannelSettingTabPage = () => {
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
 
     // NOTE: User browse EditChannelSetting
-    const userBrowseEditChannelSettingUseCase = useCallback((record: ChannelListItem) => {
+    const userBrowseEditChannelSettingUseCase = useCallback((record: ChannelListItemVO) => {
         setEditID(record.id);
         setShowModalContent({
             show: true,
@@ -244,9 +258,9 @@ export const ChannelSettingTabPage = () => {
     return (
         <>
             {/*NOTICE: List Table*/}
-            <AdminTable<ChannelListItem>
+            <AdminTable<ChannelListItemVO>
                 tableHeaderColumns={columns}
-                tableDatasource={currentItemListData}
+                tableDatasource={currentTableListData}
                 loading={isGetListFetching}
                 addText={i18n.ChannelSettingTabPage.add}
                 onAddCallback={onAddItem}
