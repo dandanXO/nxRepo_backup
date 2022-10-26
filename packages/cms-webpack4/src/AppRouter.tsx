@@ -13,6 +13,7 @@ import {createHashHistory} from "history";
 import {ChannelTabPage} from "./modules/channel/components/pages/ChannelTabPage";
 import UserReviewPage from "./modules/user/components/pages/UserReviewPage";
 import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPage";
+import WhiteListPage from "./modules/user/components/pages/WhiteListPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -62,6 +63,8 @@ export const AppRouter = () => {
                     <Route path="/user-review" component={UserReviewPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/user-review-info/:userId" component={UserReviewInfoPage} />
+                     {/*// @ts-ignore*/}
+                     <Route path="/whitelist" component={WhiteListPage} />
                 </Switch>
             </Router>
 

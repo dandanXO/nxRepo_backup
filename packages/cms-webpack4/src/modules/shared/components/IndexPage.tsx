@@ -28,6 +28,9 @@ export function IndexPage() {
         <div>
             <Link to="/channel"><a> Channel</a></Link>
         </div>
+        <div>
+            <Link to="/whitelist"><a> WhiteList</a></Link>
+        </div>
     </div>
   );
 }
