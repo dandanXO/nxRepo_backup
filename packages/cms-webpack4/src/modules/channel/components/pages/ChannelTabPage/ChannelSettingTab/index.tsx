@@ -42,7 +42,7 @@ export const ChannelSettingTabPage = () => {
             "disable": "0",
         }[fields.enabled]
 
-        userBrowseAllItemsUsecase(fields);
+        userBrowseAndSearchAllItemsUseCase(fields);
 
     }, [])
 
@@ -95,12 +95,12 @@ export const ChannelSettingTabPage = () => {
     }, [])
 
     // NOTE: User browse AllItemsUsecase
-    const userBrowseAndSearchAllItemsUsecase = useCallback((query) => {
+    const userBrowseAndSearchAllItemsUseCase = useCallback((query) => {
         triggerGetList(query);
     }, [])
 
     useEffect(() => {
-        userBrowseAndSearchAllItemsUsecase({})
+        userBrowseAndSearchAllItemsUseCase({})
     }, []);
 
 
@@ -112,7 +112,7 @@ export const ChannelSettingTabPage = () => {
     });
 
     // NOTE: User add Item
-    const userAddItem = useCallback(() => {
+    const userAddItemUseCase = useCallback(() => {
         setEditID(undefined);
         setShowModalContent({
             show: true,
@@ -121,7 +121,7 @@ export const ChannelSettingTabPage = () => {
     }, []);
 
     const onAddItem = useCallback(() => {
-        userAddItem()
+        userAddItemUseCase()
     }, [])
 
     // NOTICE: Form
