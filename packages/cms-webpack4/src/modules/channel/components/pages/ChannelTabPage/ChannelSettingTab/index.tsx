@@ -6,7 +6,7 @@ import {
     useLazyGetAllChannelQuery,
     useLazyGetAllChannelSettingTagDropMenuQuery,
     useLazyGetAllRiskDropMenuQuery,
-    useLazyGetChannelQuery
+    useLazyGetChannelQuery, useUpdateChannelMutation
 } from "../../../../api/ChannelApi";
 import {FormInstance} from "antd";
 import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
@@ -14,6 +14,7 @@ import {useForm} from "antd/es/form/Form";
 import {ChannelSettingForm} from "./ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {Channel} from "../../../../api/dto/Channel";
+import {UpdateChannelRequest} from "../../../../api/request/UpdateChannelRequest";
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;
@@ -80,7 +81,7 @@ export const ChannelSettingTabPage = () => {
             { key: 'downloadLink', title: '链接', dataIndex: 'url', initialValue: "", hideInSearch: true, },
             { key: 'modelName', title: '风控方案', dataIndex: 'modelName', initialValue: "" },
             { key: 'appName', title: '包名', dataIndex: 'appName', initialValue: "" },
-            { key: 'publishId', title: '配置标签', dataIndex: 'publishId', initialValue: "" },
+            { key: 'publishName', title: '配置标签', dataIndex: 'publishName', initialValue: "" },
             {
                 key: 'enabledTag',
                 title: '状态', dataIndex: 'enabledTag', valueType: 'select',
@@ -193,16 +194,21 @@ export const ChannelSettingTabPage = () => {
         // if(!isValid) return;
 
         // NOTICE: need
-        const fields = form.getFieldsValue();
+        let fields = form.getFieldsValue();
 
         // NOTICE: MODE - Edit
         if(showModalContent.isEdit) {
-            fields["id"] = editID;
+            fields = {
+                id: editID,
+                modelId: fields.modelId,
+                name: fields.name,
+            } as UpdateChannelRequest;
         }
+        fields["enabled"] = fields.enabled ? 1 : 0;
 
         // NOTE: Create or Edit
-        // const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
-        const triggerAPI = triggerPost
+        const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
+
 
         // NOTE: Request
         triggerAPI(fields).unwrap().then((responseData) => {
@@ -218,20 +224,23 @@ export const ChannelSettingTabPage = () => {
             })
 
             // Reset TableList
-            triggerGetList(null);
+            triggerGetList({});
 
         })
     }, [showModalContent.isEdit, editID])
 
     // NOTE: POST , PUT and DELETE
     const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateChannelMutation();
-
+    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = useUpdateChannelMutation();
 
     // Form - Validation
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
 
     // NOTE: User browse EditChannelSetting
     const userBrowseEditChannelSettingUseCase = useCallback((record: ChannelListItemVO) => {
+        triggerGetAllRiskDropMenu(null);
+        triggerGetAllChannelSettingTagDropMenu(null);
+
         setEditID(record.id);
         setShowModalContent({
             show: true,

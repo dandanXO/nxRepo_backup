@@ -49,10 +49,10 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                 <Input placeholder={"渠道链接"} disabled={props.isEdit}/>
             </Form.Item>
 
-            <Form.Item label="风控方案" name="modelName"  rules={[{ required: true }]} >
+            <Form.Item label="风控方案" name="modelId"  rules={[{ required: true }]} >
                 <Select placeholder="选择">
                     {props.dataForAllRiskDropMenuData?.map((menuData, index) => {
-                        return <Option key={index} value={menuData.modelName}>{menuData.modelName}</Option>
+                        return <Option key={index} value={menuData.id}>{menuData.modelName}</Option>
                     })}
                 </Select>
             </Form.Item>

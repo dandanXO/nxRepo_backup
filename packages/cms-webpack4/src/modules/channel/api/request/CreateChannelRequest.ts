@@ -5,8 +5,8 @@ export interface CreateChannelRequest {
     enabled: number;
     // 是否启用
 
-    modelName: string;
-    // 风控方案
+    modelId: number;
+    // 风控方案  ID
 
     name: string;
     // minLength: 0

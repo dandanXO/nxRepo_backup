@@ -17,8 +17,8 @@ export interface Channel {
     id: number;
     // 渠道 ID
 
-    modelName: string;
-    // 風控方案
+    modelId: number;
+    // 风控模块名ID
 
     name: string;
     // 渠道名称
@@ -28,8 +28,8 @@ export interface Channel {
     packageId: string;
     // app的 package id, 配置標籤
 
-    publishName: string;
-    // 配置標籤
+    publishId: string;
+    // 配置標籤ID
 
     updateTime: number;
     // 異動时间

@@ -120,4 +120,5 @@ export const {
     useLazyGetAllChannelSettingTagDropMenuQuery,
     useCreateChannelMutation,
     useLazyGetChannelQuery,
+    useUpdateChannelMutation,
 } = ChannelApi;
