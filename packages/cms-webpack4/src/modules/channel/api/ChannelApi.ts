@@ -2,7 +2,7 @@ import {API} from "../../../api";
 import {ChannelTag} from "./dto/ChannelTag";
 import {RiskDropMenu} from "./dto/RiskDropMenu";
 import {ChannelTagDropMenu} from "./dto/ChannelTagDropMenu";
-import {GetAllChannelQueryRequest} from "./request/GetAllChannelQueryRequest";
+import {GetAllChannelRequest} from "./request/GetAllChannelRequest";
 import {Channel} from "./dto/Channel";
 import {GetChannelRequest} from "./request/GetChannelRequest";
 import {CreateChannelRequest} from "./request/CreateChannelRequest";
@@ -62,8 +62,8 @@ const ChannelApi = API.injectEndpoints({
         }),
         // NOTE: 渠道管理
         // 取得所有渠道
-        getAllChannel: builder.query<Channel[], GetAllChannelQueryRequest>({
-            query: (query: GetAllChannelQueryRequest) => ({
+        getAllChannel: builder.query<Channel[], GetAllChannelRequest>({
+            query: (query: GetAllChannelRequest) => ({
                 url: `/channel/all?appName=${query.appName||""}&enabled=${query.enabled||""}&id=${query.id||""}&modelName=${query.modelName||""}&name=${query.name||""}&publishId=${query.publishId||""}`,
                 method: "get",
                 params: {},
