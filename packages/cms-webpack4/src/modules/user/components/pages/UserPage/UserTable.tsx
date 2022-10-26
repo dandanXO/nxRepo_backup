@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
+import { Button, Form, InputNumber, Modal, Radio, Space,Tag } from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
 import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../../../api/UserApi';
 import moment from 'moment';
@@ -97,6 +97,18 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const handleBanUser=(id)=>{
         banModal.confirm({content:"确认要禁止该用户登录吗？", onOk() {  banUser({ userId: Number(id) }) } });
     }
+
+    const statusEnum = {
+        '': { text: '不限' },
+        '0': { text: '未注册', color: 'orange' },
+        '4': { text: '黑名单', color: 'default' },
+        '14': { text: '认证通过', color: 'success' },
+        '18': { text: '终审中', color: 'purple' },
+        '19': { text: '审核拒绝', color: 'error' },
+        '20': { text: '审核通过', color: 'processing' },
+        // '21': { text: '禁止登入', color: 'default' },
+    };
+    
     const columns: ProColumns<UserListContent>[] = [
         {
             title: '操作',
@@ -124,14 +136,10 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         },
         {
             title: '用户状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
-            valueEnum: {
-                '': { text: '不限' },
-                '0': { text: '未提交' },
-                '4': { text: '黑名单' },
-                '14': { text: '认证通过' },
-                '18': { text: '终审中' },
-                '19': { text: '审核拒绝' },
-                '20': { text: '审核通过' },
+            valueEnum:statusEnum,
+            render: (text, { status }) => {
+                const tagStatus = statusEnum[status] || { color: '', text: '' };
+                return <Tag color={tagStatus.color}>{tagStatus.text}</Tag>;
             },
         },
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
