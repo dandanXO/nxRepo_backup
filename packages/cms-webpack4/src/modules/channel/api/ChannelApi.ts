@@ -2,11 +2,11 @@ import {API} from "../../../api";
 import {ChannelTag} from "./dto/ChannelTag";
 import {RiskDropMenu} from "./dto/RiskDropMenu";
 import {TagDropMenu} from "./dto/TagDropMenu";
-import {GetAllChannelQuery} from "./GetAllChannelQuery";
-import {ChannelListItem} from "./dto/ChannelListItem";
-import {GetChannelRequest} from "./GetChannelRequest";
-import {CreateChannelRequest} from "./CreateChannelRequest";
-import {UpdateChannelRequest} from "./UpdateChannelRequest";
+import {GetAllChannelQueryRequest} from "./request/GetAllChannelQueryRequest";
+import {Channel} from "./dto/Channel";
+import {GetChannelRequest} from "./request/GetChannelRequest";
+import {CreateChannelRequest} from "./request/CreateChannelRequest";
+import {UpdateChannelRequest} from "./request/UpdateChannelRequest";
 
 export type GetAllTagResponse = ChannelTag[];
 
@@ -62,8 +62,8 @@ const ChannelApi = API.injectEndpoints({
         }),
         // NOTE: 渠道管理
         // 取得所有渠道
-        getAllChannel: builder.query<ChannelListItem[], GetAllChannelQuery>({
-            query: (query: GetAllChannelQuery) => ({
+        getAllChannel: builder.query<Channel[], GetAllChannelQueryRequest>({
+            query: (query: GetAllChannelQueryRequest) => ({
                 url: `/channel/all?appName=${query.appName||""}&enabled=${query.enabled||""}&id=${query.id||""}&modelName=${query.modelName||""}&name=${query.name||""}&publishId=${query.publishId||""}`,
                 method: "get",
                 params: {},
@@ -92,7 +92,7 @@ const ChannelApi = API.injectEndpoints({
             })
         }),
         // 取得渠道資訊
-        getChannel: builder.query<ChannelListItem, {}>({
+        getChannel: builder.query<Channel, {}>({
             query: (arg: GetChannelRequest) => ({
                 url: `/channel/${arg.id}`,
                 method: "get",

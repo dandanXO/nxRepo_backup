@@ -1,4 +1,4 @@
-export interface GetAllChannelQuery {
+export interface GetAllChannelQueryRequest {
     // 包名
     appName?: string;
     // 狀態 (是否啟用)

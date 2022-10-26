@@ -1,4 +1,4 @@
-export interface ChannelListItem {
+export interface Channel {
     addTime: number;
     // 添加时间
 

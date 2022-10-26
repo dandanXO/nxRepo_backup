@@ -3,18 +3,19 @@ import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {
     useCreateChannelMutation,
-    useLazyGetAllChannelQuery, useLazyGetAllChannelSettingTagDropMenuQuery,
+    useLazyGetAllChannelQuery,
+    useLazyGetAllChannelSettingTagDropMenuQuery,
     useLazyGetAllRiskDropMenuQuery,
-    useLazyGetAllTagQuery, useLazyGetChannelQuery, useLazyGetTagQuery, usePutTagMutation
+    useLazyGetChannelQuery
 } from "../../../../api/ChannelApi";
 import {FormInstance} from "antd";
 import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
 import {useForm} from "antd/es/form/Form";
 import {ChannelSettingForm} from "./ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import {ChannelListItem} from "../../../../api/dto/ChannelListItem";
+import {Channel} from "../../../../api/dto/Channel";
 
-type ChannelListItemVO = ChannelListItem & {
+type ChannelListItemVO = Channel & {
     enabledTag?: string;
 }
 const i18n = {
