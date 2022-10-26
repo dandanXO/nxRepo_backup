@@ -17,7 +17,6 @@ const BaseSettingSection = (props: BaseSettingSectionProps) => {
       <Form.Item name="merchantId" label="商户名" rules={[{ required: true }]} >
           <Select
               placeholder="商户名"
-              // onChange={this.onGenderChange}
               allowClear
           >
               {props?.merchantList?.map((i) => <Option key={i.merchantId} value={i.merchantId}>{i.name}</Option>)}

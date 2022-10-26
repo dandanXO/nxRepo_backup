@@ -4,8 +4,10 @@ import {
     CreateChannelRequest,
     CreateChannelResponse,
     GetAllChannelQuery,
-    MssChannelListResponse, TagDropMenu
+    MssChannelListResponse,
 } from "./dto/ChannelDTO";
+import {RiskDropMenu} from "./dto/RiskDropMenu";
+import {TagDropMenu} from "./dto/TagDropMenu";
 
 export type GetAllTagResponse = ChannelTagDTO[];
 
@@ -68,13 +70,18 @@ const ChannelApi = API.injectEndpoints({
                 params: {},
             }),
         }),
-        // 取得風控列表
-        // 取得風控配置標籤
+        // 取得風控方案列表
+        getAllRiskDropMenu: builder.query<RiskDropMenu[], {}>({
+            query: () => ({
+                url: `/risk-manage/drop-menu`,
+                method: "get",
+            }),
+        }),
+        // 取得風控配置標籤列表
         getAllChannelSettingTagDropMenu: builder.query<TagDropMenu[], {}>({
             query: () => ({
                 url: `/app-manage/publish/drop-menu`,
                 method: "get",
-                params: {},
             }),
         }),
         // 新增渠道
@@ -99,4 +106,7 @@ export const {
     useDeleteTagMutation,
 
     useLazyGetAllChannelQuery,
+    useLazyGetAllRiskDropMenuQuery,
+    useLazyGetAllChannelSettingTagDropMenuQuery,
+    useCreateChannelMutation,
 } = ChannelApi;

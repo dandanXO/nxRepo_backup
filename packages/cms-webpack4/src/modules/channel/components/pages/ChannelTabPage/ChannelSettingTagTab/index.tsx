@@ -58,7 +58,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // Form - Finish
     const onFormFinish = useCallback(() => {
-        userEditedChannelSetting();
+        userEditedChannelSettingUseCase();
     }, [editID])
 
     // NOTICE: Modal - Create, Edit
@@ -243,7 +243,7 @@ export const ChannelSettingTagTabPage = () => {
     }, [])
 
     // NOTE: user Edited ChannelSetting
-    const userEditedChannelSetting = useCallback(() => {
+    const userEditedChannelSettingUseCase = useCallback(() => {
         const isValid = systemValidateChannelSettingUsecase();
         if(!isValid) return;
 
@@ -276,6 +276,7 @@ export const ChannelSettingTagTabPage = () => {
 
         })
     }, [showModalContent.isEdit, editID])
+
     // NOTE: POST , PUT and DELETE
     const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateTagMutation();
     const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();

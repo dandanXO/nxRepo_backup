@@ -1,8 +1,13 @@
 import {AdminTable, ModalContent} from "../../../../../shared/components/AdminTable";
-import {ChannelTagVO} from "../ChannelSettingTagTab/formData";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
-import {useLazyGetAllChannelQuery, useLazyGetAllTagQuery} from "../../../../api/ChannelApi";
+import {
+    useCreateChannelMutation,
+    useCreateTagMutation,
+    useLazyGetAllChannelQuery, useLazyGetAllChannelSettingTagDropMenuQuery,
+    useLazyGetAllRiskDropMenuQuery,
+    useLazyGetAllTagQuery, usePutTagMutation
+} from "../../../../api/ChannelApi";
 import {MssChannelListItem} from "../../../../api/dto/ChannelDTO";
 import {FormInstance} from "antd";
 import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
@@ -111,8 +116,24 @@ export const ChannelSettingTabPage = () => {
         refetchOnReconnect: false
     });
 
+    const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData, isLoading: isLoadingAllRiskDropMenuData, isFetching: isFetchingAllRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+
+    const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData, isLoading: isLoadingAllChannelSettingTagDropMenuData, isFetching: isFetchingAllChannelSettingTagDropMenuData }] = useLazyGetAllChannelSettingTagDropMenuQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+
+
     // NOTE: User add Item
     const userAddItemUseCase = useCallback(() => {
+        triggerGetAllRiskDropMenu(null);
+        triggerGetAllChannelSettingTagDropMenu(null);
+
         setEditID(undefined);
         setShowModalContent({
             show: true,
@@ -153,8 +174,47 @@ export const ChannelSettingTabPage = () => {
 
     // Form - Finish
     const onFormFinish = useCallback(() => {
-        // userEditedChannelSetting();
+        userEditedChannelSettingUseCase();
     }, [editID])
+
+    const userEditedChannelSettingUseCase = useCallback(() => {
+        // const isValid = systemValidateChannelSettingUsecase();
+        // if(!isValid) return;
+
+        // NOTICE: need
+        const fields = form.getFieldsValue();
+
+        // NOTICE: MODE - Edit
+        if(showModalContent.isEdit) {
+            fields["id"] = editID;
+        }
+
+        // NOTE: Create or Edit
+        // const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
+        const triggerAPI = triggerPost
+
+        // NOTE: Request
+        triggerAPI(fields).unwrap().then((responseData) => {
+            // console.log("responseData", responseData);
+
+            // Reset Form
+            form.resetFields();
+
+            // Close Modal
+            setShowModalContent({
+                show: false,
+                isEdit: false,
+            })
+
+            // Reset TableList
+            triggerGetList(null);
+
+        })
+    }, [showModalContent.isEdit, editID])
+
+    // NOTE: POST , PUT and DELETE
+    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateChannelMutation();
+
 
     // Form - Validation
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
@@ -187,6 +247,8 @@ export const ChannelSettingTabPage = () => {
                     onFieldsChange={onFormFieldsChange}
                     onFinish={onFormFinish}
                     customAntFormFieldError={customAntFormFieldError}
+                    dataForAllRiskDropMenuData={allRiskDropMenuData}
+                    dataForAllChannelSettingTagDropMenuData={allChannelSettingTagDropMenuData}
                 />
 
             </AdminFormCustomModal>
