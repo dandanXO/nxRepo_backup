@@ -28,8 +28,10 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
             onFieldsChange={props.onFieldsChange}
             onFinish={props.onFinish}
         >
-            <Form.Item label="风控名称" name="modelName" rules={[{ required: true }]}>
-                <Input placeholder="风控名称"/>
+            <Form.Item label="风控名称" name="modelName" rules={[{ required: true }]}
+                       extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
+            >
+                <Input placeholder="风控名称" disabled={props.isEdit}/>
             </Form.Item>
 
             <Form.Item label={"風控应用"} name="riskModelName" rules={[{ required: true }]}>

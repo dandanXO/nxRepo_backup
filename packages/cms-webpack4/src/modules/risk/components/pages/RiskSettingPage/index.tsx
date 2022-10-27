@@ -270,6 +270,7 @@ export const RiskSettingPage = () => {
         // NOTE: Edit
         if(isEdit) {
             fields["modelId"] = modelId;
+            delete fields.modelName;
         }
         // console.log("fields.after", fields);
 
