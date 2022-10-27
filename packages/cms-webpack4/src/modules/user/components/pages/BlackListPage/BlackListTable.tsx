@@ -2,37 +2,37 @@ import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
-import { GetWhiteListRequestQuerystring, GetWhiteListProps, WhiteListReponse } from '../../../api/types/whiteListTypes/getWhtieList';
-import { useLazyGetWhiteListQuery, useDeleteWhiteListMutation, useDeleteWhiteListAllMutation } from '../../../api/WhiteListApi';
+import { GetBlackListProps,GetBlackListRequestQuerystring,BlackListReponse } from '../../../api/types/blackListTypes/getBlackList';
+import { useLazyGetBlackListQuery } from '../../../api/BlackListApi';
 import { PlusOutlined } from '@ant-design/icons';
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 
 interface BlackLisTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
-    isPostWhiteListSuccess:boolean;
+    isPostBlackListSuccess: boolean;
 }
 
-const BlackListTable = ({ setShowModal,isPostWhiteListSuccess }: BlackLisTableProps) => {
+const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableProps) => {
    
-    const { channelListEnum, riskRankEnum } = useValuesEnums();
+    const { operatorListEnum } = useValuesEnums();
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetWhiteListQuery({
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetBlackListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
 
-    const initSearchList: GetWhiteListRequestQuerystring = {
-        addTimeEnd: "", addTimeStart: "", operatorId: "",  phoneNo: "", pageNum: 1, pageSize: 10
+    const initSearchList: GetBlackListRequestQuerystring = {
+        addTimeEnd: "", addTimeStart: "", idcardNo: "", operatorId: "", phoneNo: "", userNameTrue: "", pageNum: 1, pageSize: 10
     }
 
     // state
-    const [BlackList, setBlackList] = useState<GetWhiteListProps>({ records: [] });
-    const [searchList, setSearchList] = useState<GetWhiteListRequestQuerystring>(initSearchList);
+    const [BlackList, setBlackList] = useState<GetBlackListProps>({ records: [] });
+    const [searchList, setSearchList] = useState<GetBlackListRequestQuerystring>(initSearchList);
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList,isPostWhiteListSuccess])
+    }, [searchList, isPostBlackListSuccess])
 
     useEffect(() => {
         if (currentData !== undefined) {
@@ -45,20 +45,23 @@ const BlackListTable = ({ setShowModal,isPostWhiteListSuccess }: BlackLisTablePr
     }
 
 
-    const columns: ProColumns<WhiteListReponse>[] = [
+    const columns: ProColumns<BlackListReponse>[] = [
         { title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true, valueType: 'dateTime' },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ""
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "" },
-        { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', initialValue: "" },
+        { title: '姓名', dataIndex: 'userTrueName', key: 'userTrueName', initialValue: "" },
+        { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: "" },
+        { title: '备注', dataIndex: 'reason', key: 'reason', hideInSearch: true},
+        { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },
        
     ]
 
 
     return (
-        <ProTable<WhiteListReponse>
+        <ProTable<BlackListReponse>
             columns={columns}
             dataSource={BlackList?.records || []}
             loading={isFetching}
@@ -78,13 +81,17 @@ const BlackListTable = ({ setShowModal,isPostWhiteListSuccess }: BlackLisTablePr
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { addTimeRange, operatorId, phoneNo } = form.getFieldValue();
+                                const { addTimeRange, idcardNo, operatorName, phoneNo, userNameTrue } = form.getFieldValue();
+                                // @ts-ignore
+                                console.log(form.getFieldValue())
                                 setSearchList({
                                     ...searchList,
                                     addTimeEnd: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addTimeStart: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
-                                    operatorId,
+                                    idcardNo,
+                                    operatorId:operatorName,
                                     phoneNo,
+                                    userNameTrue
                                 });
                                 form.submit();
                             }}

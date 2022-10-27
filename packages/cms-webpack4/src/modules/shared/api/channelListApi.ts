@@ -1,7 +1,7 @@
 import {API} from "../../../api";
 import {GetChannelListResponse} from "./types/getChannelList";
 
-const UserApi = API.injectEndpoints({
+const ChannelListApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // NOTE: GET /hs/admin/channel/drop-menu 渠道列表下拉選單
@@ -16,4 +16,4 @@ const UserApi = API.injectEndpoints({
 })
 export const {
     useGetChannelListQuery,
-} = UserApi;
+} = ChannelListApi;

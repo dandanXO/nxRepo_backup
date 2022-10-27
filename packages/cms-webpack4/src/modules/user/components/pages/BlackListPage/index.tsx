@@ -5,16 +5,15 @@ import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
 import AdminPage from '../../../../shared/components/AdminPage';
 import BlackListTable from './BlackListTable';
 import AddBlackListModal from './AddBlackListModal';
-import { usePostWhiteListMutation } from '../../../api/WhiteListApi';
+import { usePostBlackListMutation } from '../../../api/BlackListApi';
 
 const BlackListPage = () => {
     const [showModal, setShowModal] = useState(false);
     const [form] = Form.useForm();
-    const [postWhiteList, { isLoading, isSuccess }] = usePostWhiteListMutation();
+    const [postBlackList, { isLoading, isSuccess }] = usePostBlackListMutation();
 
     const onFinish = (values: any) => {
-        console.log(values)
-        postWhiteList(values);
+        postBlackList(values);
         form.resetFields();
         setShowModal(false)
     };
@@ -37,12 +36,12 @@ const BlackListPage = () => {
                 },
                 self: {
                     path: null,
-                    breadcrumbName: '白名单',
+                    breadcrumbName: '黑名单',
                 },
             }}
         >
             <>
-                <BlackListTable setShowModal={setShowModal} isPostWhiteListSuccess={isSuccess}/>
+                <BlackListTable setShowModal={setShowModal} isPostBlackListSuccess={isSuccess}/>
                 <AddBlackListModal
                     showModal={showModal}
                     handleCloseModal={handleCloseModal}

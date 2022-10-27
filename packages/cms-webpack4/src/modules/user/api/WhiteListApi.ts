@@ -3,7 +3,7 @@ import { GetWhiteListProps ,GetWhiteListRequestQuerystring } from "./types/white
 import { PostWhiteListRequestQuerystring } from "./types/whiteListTypes/postWhiteList";
 import { DeleteWhiteListRequestQuerystring } from "./types/whiteListTypes/deleteWhiteList";
 
-const UserReviewApi = API.injectEndpoints({
+const WhiteListApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // NOTE: GET /hs/admin/whitelist/list 白名單列表
@@ -45,4 +45,4 @@ export const {
     usePostWhiteListMutation,
     useDeleteWhiteListMutation,
     useDeleteWhiteListAllMutation
-} = UserReviewApi;
+} = WhiteListApi;

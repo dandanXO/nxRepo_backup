@@ -14,7 +14,7 @@ interface WhiteLisTableProps {
 
 const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTableProps) => {
    
-    const { channelListEnum, riskRankEnum } = useValuesEnums();
+    const { operatorListEnum } = useValuesEnums();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetWhiteListQuery({
         pollingInterval: 0,
@@ -64,21 +64,27 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ""
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "" },
-        { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', initialValue: "" },
+        { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },
        
     ]
 
     const handleDelete=()=>{
         deleteModal.confirm({
             content:"确认要删除已选取的数据吗？",
-            onOk(){deleteWhiteList({ids:selectedRow})}
+            onOk(){
+                deleteWhiteList({ids:selectedRow});
+                onSelectChange([]);
+            }
         })
     }
 
     const handleDeleteAll=()=>{
         deleteModal.confirm({
             content:"确认要清除所有白名单数据吗？",
-            onOk(){deleteWhiteListAll(null)}
+            onOk(){
+                deleteWhiteListAll(null);
+                onSelectChange([]);
+            }
         })
 
     }
@@ -113,12 +119,12 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { addTimeRange, operatorId, phoneNo } = form.getFieldValue();
+                                const { addTimeRange, operatorName, phoneNo } = form.getFieldValue();
                                 setSearchList({
                                     ...searchList,
                                     addTimeEnd: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addTimeStart: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
-                                    operatorId,
+                                    operatorId:operatorName,
                                     phoneNo,
                                 });
                                 onSelectChange([]);
