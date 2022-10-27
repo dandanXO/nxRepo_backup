@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "../../../../api";
 import { GetMerchantListResponseData } from "./types/getMerchantList";
 import { PostMerchantCreateRequestBody } from "./types/postMerchantCreate";
 import { PutMerchantProps } from "./types/putMerchant";

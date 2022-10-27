@@ -34,6 +34,9 @@ export function IndexPage() {
         <div>
             <Link to="/blacklist"><a> BlackList</a></Link>
         </div>
+        <div>
+            <Link to="/app-manage"><a> App Manage</a></Link>
+        </div>
     </div>
   );
 }

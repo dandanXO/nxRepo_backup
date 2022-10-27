@@ -1,5 +1,5 @@
 import {ProductFormModal} from "../hooks/useProductFormModal";
-import { GetAvailableMerchantResponse } from "../../../../api/types/getAvailbaleMerchant";
+import { GetAvailableMerchantResponse } from "../../../../service/product/types/getAvailbaleMerchant";
 import React, {useCallback, useEffect, useState} from "react";
 import { Form } from "antd";
 import BaseSettingSection from "./BaseSettingSection";

@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import AdminPage from "../../../../shared/components/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
-import {GetProductListResponseProduct} from "../../../../product/api/types/getProductList";
+import {GetProductListResponseProduct} from "../../../../product/service/product/types/getProductList";
 import {
     useLazyGetRiskManageListQuery,
     useLazyGetRiskManageQuery,

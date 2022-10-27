@@ -1,7 +1,7 @@
 import {Form, Input, UploadFile} from "antd";
 import React from "react";
 import { Select } from 'antd'
-import {GetAvailableMerchantResponse} from "../../../../api/types/getAvailbaleMerchant";
+import {GetAvailableMerchantResponse} from "../../../../service/product/types/getAvailbaleMerchant";
 const { Option } = Select
 
 interface BaseSettingSectionProps {

@@ -6,8 +6,8 @@ import {
     useLazyGetProductQuery,
     usePostProductCreateMutation,
     usePutProductEditMutation
-} from "../../../../api/ProductApi";
-import {PostProductCreateRequestBody} from "../../../../api/types/postProductCreate";
+} from "../../../../service/product/ProductApi";
+import {PostProductCreateRequestBody} from "../../../../service/product/types/postProductCreate";
 import moment from "moment/moment";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 

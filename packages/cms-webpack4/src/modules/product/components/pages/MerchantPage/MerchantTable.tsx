@@ -3,8 +3,8 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
-import { useLazyGetMerchantManageListQuery } from "../../../api/MerchantApi";
-import { GetMerchantListResponse } from "../../../api/types/getMerchantList";
+import { useLazyGetMerchantManageListQuery } from "../../../service/product/MerchantApi";
+import { GetMerchantListResponse } from "../../../service/product/types/getMerchantList";
 
 interface MerchantTableProps {
     postMerchantSuccess?: boolean;

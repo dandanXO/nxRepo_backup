@@ -15,6 +15,7 @@ import UserReviewPage from "./modules/user/components/pages/UserReviewPage";
 import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPage";
 import WhiteListPage from "./modules/user/components/pages/WhiteListPage";
 import BlackListPage from "./modules/user/components/pages/BlackListPage";
+import {AppManagePage} from "./modules/product/components/pages/AppManagePage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -68,6 +69,8 @@ export const AppRouter = () => {
                     <Route path="/whitelist" component={WhiteListPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/blacklist" component={BlackListPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/app-manage" component={AppManagePage} />
                 </Switch>
             </Router>
 
