@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { API } from "../api";
-import searchParamsSlice from "../modules/shared/utils/searchParamsSlice";
+import { API } from "../../../api";
+import searchParamsSlice from "../../shared/utils/searchParamsSlice";
 
 export const appStore = configureStore({
     reducer: {

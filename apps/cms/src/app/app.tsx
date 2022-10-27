@@ -7,7 +7,7 @@ import MerchantPage from "../../../../packages/cms-webpack4/src/modules/product/
 import Index from "../../../../packages/cms-webpack4/src/modules/product/components/pages/ProductPage";
 import IndexPage from "../../../../packages/cms-webpack4/src/modules/shared/components/IndexPage";
 import { Provider } from "react-redux";
-import {appStore} from "../../../../packages/cms-webpack4/src/store";
+import {appStore} from "../../../../packages/cms-webpack4/src/modules/core/store";
 
 export function App() {
   return (
