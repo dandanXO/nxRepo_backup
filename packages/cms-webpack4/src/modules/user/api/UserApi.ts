@@ -38,6 +38,14 @@ const UserApi = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
+        // NOTE: POST /hs/admin/user-manage/user-ban/release 解除用戶禁止登入
+        postUserBanRelease: builder.mutation<{}, UserId>({
+            query: (requestBody: UserId) => ({
+                url: `/user-manage/user-ban/release`,
+                method: "post",
+                data: requestBody,
+            }),
+        }),
         // NOTE: POST ​/hs​/admin​/user-manage​/tel-sale 批次加入到電銷名單
         postTelSale: builder.mutation<{}, PostTelSaleRequestQuerystring>({
             query: (requestBody: PostTelSaleRequestQuerystring) => ({
@@ -53,5 +61,6 @@ export const {
     usePostBlackListAddMutation,
     useDeleteUserMutation,
     usePostUserBanMutation,
+    usePostUserBanReleaseMutation,
     usePostTelSaleMutation
 } = UserApi;

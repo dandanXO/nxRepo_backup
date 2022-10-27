@@ -3,7 +3,7 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space,Tag } from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
-import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../../../api/UserApi';
+import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation,usePostUserBanReleaseMutation } from '../../../api/UserApi';
 import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
@@ -24,7 +24,8 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         refetchOnReconnect: false
     });
     const [deleteUser, { isSuccess: isDeteleUserSuccess, isLoading: isUserDeleting, }] = useDeleteUserMutation();
-    const [banUser] = usePostUserBanMutation();
+    const [banUser, { isSuccess: isBanUserSuccess }] = usePostUserBanMutation();
+    const [releaseUser, { isSuccess: isReleaseUserSuccess }] = usePostUserBanReleaseMutation();
     const [importTelSale] = usePostTelSaleMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
@@ -43,9 +44,6 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const [modal, contextHolder] = Modal.useModal();
 
 
-
-
-
     useEffect(() => {
         if (Object.keys(searchParams).length > 0) {
             setSearchList(searchParams);
@@ -56,7 +54,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList, isUserDeleting])
+    }, [searchList, isUserDeleting,isBanUserSuccess,isReleaseUserSuccess])
 
     useEffect(() => {
         if (currentData !== undefined) {
@@ -104,6 +102,14 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         });
     }
 
+    const handleReleaseUser = (id) => {
+        banModal.confirm({
+            title: "确认要解除该用户禁止登入吗？",
+            content: "用户解禁后将回到黑名单状态",
+            onOk() { releaseUser({ userId: Number(id) }) }
+        });
+    }
+
     const statusEnum = {
         '': { text: '不限' },
         '0': { text: '未注册', color: 'orange' },
@@ -120,11 +126,17 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => record.status !== 4 ?
-                [<a key="editable" onClick={()=>handleToUserDetail(record.id)} >查看</a>, <a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>] :
-                [<a key="editable" type="link" onClick={()=>handleToUserDetail(record.id)} >查看</a>,
-                <a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>,
-                <a key="forbidden" onClick={() => handleBanUser(record.id)}>禁止</a>]
+            render: (text, record, _, action) => {
+                const optionCheck = [<a key="editable" onClick={() => handleToUserDetail(record.id)} >查看</a>];
+                const optionClear = [<a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>];
+                const optionRelease = [<a key="forRelease" onClick={() => handleReleaseUser(record.id)}>解禁</a>];
+                const optionBan = [<a key="forbidden" onClick={() => handleBanUser(record.id)}>禁止</a>];
+                const optionBlackList = [<a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>];
+                return record.status === 4 ? [...optionCheck, ...optionClear, ...optionBan] :
+                       record.status === 13 ? [...optionCheck, ...optionClear, ...optionRelease] :
+                       [...optionCheck, ...optionBlackList]
+            }
+
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || ""},
         { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: searchParams.nameTrue || ""  },
