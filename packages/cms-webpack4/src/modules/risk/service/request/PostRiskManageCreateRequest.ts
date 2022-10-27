@@ -1,4 +1,4 @@
 // NOTE: Post
-import {RiskManageModel} from "../dto/RiskManageModel";
+import {RiskManageModel} from "../../domain/vo/RiskManageModel";
 
 export type PostRiskManageCreateRequest = RiskManageModel;

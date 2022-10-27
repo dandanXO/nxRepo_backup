@@ -1,4 +1,4 @@
-import {MssRiskRankVo} from "../vo/MssRiskRankVo";
+import {MssRiskRankVo} from "./MssRiskRankVo";
 
 export interface RiskManageModel {
     enabled: boolean;

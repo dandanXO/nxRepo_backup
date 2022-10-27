@@ -5,7 +5,7 @@ import TextArea from "antd/es/input/TextArea";
 import {NumberValidator} from "../../../../shared/utils/validation/validator";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {Store} from "antd/es/form/interface"
-import {RiskModelMenu} from "../../../api/dto/RiskModelMenu";
+import {RiskModelMenu} from "../../../domain/vo/RiskModelMenu";
 interface RiskSettingFormProps {
     isEdit: boolean;
     id?: number;

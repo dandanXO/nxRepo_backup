@@ -8,14 +8,14 @@ import {
     useLazyGetRiskModelMenuQuery,
     usePostRiskManageCreateMutation,
     usePutRiskManageCreateMutation
-} from "../../../api/RiskApi";
+} from "../../../service/RiskApi";
 import {useForm} from "antd/es/form/Form";
 import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
 import RiskSettingForm from "./RiskSettingForm";
 import RiskSettingModal from "./RiskSettingModal";
-import {GetRiskManageResponse} from "../../../api/response/GetRiskManageResponse";
-import {RiskManageList} from "../../../api/dto/RiskManageList";
-import {MssRiskRankVo} from "../../../api/vo/MssRiskRankVo";
+import {GetRiskManageResponse} from "../../../service/response/GetRiskManageResponse";
+import {RiskManageList} from "../../../domain/vo/RiskManageList";
+import {MssRiskRankVo} from "../../../domain/vo/MssRiskRankVo";
 
 export type FormResponseData = GetRiskManageResponse;
 

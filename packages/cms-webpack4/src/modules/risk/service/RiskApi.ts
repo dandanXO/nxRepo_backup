@@ -4,7 +4,7 @@ import {PutRiskManageCreateRequest} from "./request/PutRiskManageCreateRequest";
 import {PostRiskManageCreateRequest} from "./request/PostRiskManageCreateRequest";
 import {RiskModelMenuResponse} from "./response/RiskModelMenuResponse";
 import {GetRiskManageListResponse} from "./response/GetRiskManageListResponse";
-import {RiskManageModel} from "./dto/RiskManageModel";
+import {RiskManageModel} from "../domain/vo/RiskManageModel";
 
 const ProductApi = API.injectEndpoints({
     overrideExisting: false,

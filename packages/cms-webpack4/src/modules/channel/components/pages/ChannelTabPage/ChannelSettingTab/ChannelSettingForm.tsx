@@ -6,8 +6,8 @@ const { Text } = Typography;
 const { Option } = Select;
 
 import React from "react";
-import {RiskDropMenu} from "../../../../api/dto/RiskDropMenu";
-import {ChannelTagDropMenu} from "../../../../api/dto/ChannelTagDropMenu";
+import {RiskDropMenu} from "../../../../domain/vo/RiskDropMenu";
+import {ChannelTagDropMenu} from "../../../../domain/vo/ChannelTagDropMenu";
 
 type ChannelSettingFormProps = {
     isEdit: boolean;

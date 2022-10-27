@@ -6,13 +6,14 @@ import {
     useLazyGetAllTagQuery,
     useLazyGetTagQuery,
     usePutTagMutation
-} from "../../../../api/ChannelApi";
+} from "../../../../service/ChannelApi";
 import {useForm} from "antd/es/form/Form";
 import {ChannelSettingTagForm} from "./ChannelSettingTagForm";
 import {AdminCustomModal} from "../../../../../shared/components/AdminCustomModal";
-import {MockChannelTag, ChannelTagVO, ChannelTagSchemaEntity, IChannelTagSchema} from "./formData";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
+import {ChannelTagVO} from "../../../../domain/vo/ChannelTagVO";
+import {ChannelTagSchemaEntity, IChannelTagSchema} from "../../../../domain/entity/ChannelTagSchemaEntity";
 
 // NOTICE:
 const channelTagSchemaEntity = new ChannelTagSchemaEntity();

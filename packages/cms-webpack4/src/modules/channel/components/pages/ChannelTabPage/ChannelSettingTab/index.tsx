@@ -7,14 +7,14 @@ import {
     useLazyGetAllChannelSettingTagDropMenuQuery,
     useLazyGetAllRiskDropMenuQuery,
     useLazyGetChannelQuery, useUpdateChannelMutation
-} from "../../../../api/ChannelApi";
+} from "../../../../service/ChannelApi";
 import {FormInstance} from "antd";
 import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
 import {useForm} from "antd/es/form/Form";
 import {ChannelSettingForm} from "./ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import {Channel} from "../../../../api/dto/Channel";
-import {UpdateChannelRequest} from "../../../../api/request/UpdateChannelRequest";
+import {Channel} from "../../../../domain/vo/Channel";
+import {UpdateChannelRequest} from "../../../../service/request/UpdateChannelRequest";
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;
