@@ -14,22 +14,21 @@ import {AdminFormCustomModal} from "../../../../shared/components/AdminFormCusto
 import {useForm} from "antd/es/form/Form";
 import {ChannelSettingForm} from "../../../../channel/components/pages/ChannelTabPage/ChannelSettingTab/ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import {Channel} from "../../../../channel/domain/vo/Channel";
 import {UpdateChannelRequest} from "../../../../channel/service/request/UpdateChannelRequest";
 import AdminPage from "../../../../shared/components/AdminPage";
+import {AppConfigurationListItem} from "../../../service/appManage/domain/AppConfigurationListItem";
+import {useLazyGetAllAppConfigurationQuery} from "../../../service/appManage/AppManageApi";
 
-type ChannelListItemVO = Channel & {
-    enabledTag?: string;
-}
 const i18n = {
-    "ChannelSettingTabPage": {
-        add: "添加渠道",
+    "AppManagePage": {
+        add: "添加",
+        modalTitle: "APP配置",
     }
 }
 export const AppManagePage = () => {
     // NOTICE: Action: List
     // NOTE: Table
-    const [columns, setColumns] = useState<ProColumns<ChannelListItemVO>[]>()
+    const [columns, setColumns] = useState<ProColumns<AppConfigurationListItem>[]>()
 
     // NOTICE: Action: Edit
     const [editID, setEditID] = useState<number>();
@@ -46,13 +45,6 @@ export const AppManagePage = () => {
         const fields = form.getFieldsValue();
         // console.log(form.getFieldsValue() )
 
-        // transform enable
-        fields.enabled = {
-            "all": "",
-            "enable": "1",
-            "disable": "0",
-        }[fields.enabledTag]
-
         userBrowseAndSearchAllItemsUseCase(fields);
 
     }, [])
@@ -64,7 +56,7 @@ export const AppManagePage = () => {
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
     const systemInitalizeListUsecase = useCallback(() => {
-        const columns: ProColumns<ChannelListItemVO>[] = [
+        const columns: ProColumns<AppConfigurationListItem>[] = [
             {
                 key: 'option',
                 title: '操作',
@@ -74,30 +66,16 @@ export const AppManagePage = () => {
                         <a key="editable" onClick={() => {
                             userBrowseEditChannelSettingUseCase(record);
                         }}>修改</a>,
+                        <a key="deletable" onClick={() => {
+                            // userBrowseDeleteChannelSettingUseCase(record)
+                        }}>刪除</a>,
                     ]
                 }
             },
-            {
-                key: 'id',
-                title: '渠道ID',
-                dataIndex: 'id',
-            },
-            { key: 'name', title: '渠道名称', dataIndex: 'name', initialValue: "" },
-            { key: 'packageId', title: 'PackgeID', dataIndex: 'packageId', initialValue: "", hideInSearch: true, },
-            { key: 'downloadLink', title: '渠道链接', dataIndex: 'url', initialValue: "", hideInSearch: true, ellipsis: true, copyable: true},
-            { key: 'modelName', title: '风控方案', dataIndex: 'modelName', initialValue: "" },
-            { key: 'appName', title: '包名', dataIndex: 'appName', initialValue: "" },
-            { key: 'publishName', title: '配置标签', dataIndex: 'publishName', initialValue: "" },
-            {
-                key: 'enabledTag',
-                title: '状态', dataIndex: 'enabledTag', valueType: 'select',
-                initialValue: 'all',
-                valueEnum: {
-                    "all": { text: '全部', status: 'Default' },
-                    "enable": { text: '启用', status: 'Success' },
-                    "disable": { text: '停用', status: 'Default' },
-                }
-            },
+            { key: 'appName', title: 'APP名稱', dataIndex: 'appName', initialValue: "" },
+            { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: "", hideInSearch: true,},
+            { key: 'createTime', title: '创建时间', dataIndex: 'createTime', initialValue: "", hideInSearch: true},
+            { key: 'updateTime', title: '更新时间', dataIndex: 'updateTime', initialValue: "", hideInSearch: true,},
         ];
         setColumns(columns);
     }, []);
@@ -117,40 +95,39 @@ export const AppManagePage = () => {
 
 
     // NOTE: GET list and item
-    const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllChannelQuery({
+    const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllAppConfigurationQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [currentTableListData, setCurrentTableListData] = useState<ChannelListItemVO[]>();
+    const [currentTableListData, setCurrentTableListData] = useState<AppConfigurationListItem[]>();
     useEffect(() => {
         if(!currentItemListData) return;
         const data = currentItemListData.map(item => {
             return {
                 ...item,
-                enabledTag: item.enabled === 0 ? "disable" : "enable"
             }
         })
         setCurrentTableListData(data);
     }, [currentItemListData])
 
-    const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData, isLoading: isLoadingAllRiskDropMenuData, isFetching: isFetchingAllRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
+    // const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData, isLoading: isLoadingAllRiskDropMenuData, isFetching: isFetchingAllRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
+    //     pollingInterval: 0,
+    //     refetchOnFocus: false,
+    //     refetchOnReconnect: false
+    // });
 
-    const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData, isLoading: isLoadingAllChannelSettingTagDropMenuData, isFetching: isFetchingAllChannelSettingTagDropMenuData }] = useLazyGetAllChannelSettingTagDropMenuQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
+    // const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData, isLoading: isLoadingAllChannelSettingTagDropMenuData, isFetching: isFetchingAllChannelSettingTagDropMenuData }] = useLazyGetAllChannelSettingTagDropMenuQuery({
+    //     pollingInterval: 0,
+    //     refetchOnFocus: false,
+    //     refetchOnReconnect: false
+    // });
 
 
     // NOTE: User add Item
     const userAddItemUseCase = useCallback(() => {
-        triggerGetAllRiskDropMenu(null);
-        triggerGetAllChannelSettingTagDropMenu(null);
+        // triggerGetAllRiskDropMenu(null);
+        // triggerGetAllChannelSettingTagDropMenu(null);
 
         setEditID(undefined);
         setShowModalContent({
@@ -245,9 +222,9 @@ export const AppManagePage = () => {
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
 
     // NOTE: User browse EditChannelSetting
-    const userBrowseEditChannelSettingUseCase = useCallback((record: ChannelListItemVO) => {
-        triggerGetAllRiskDropMenu(null);
-        triggerGetAllChannelSettingTagDropMenu(null);
+    const userBrowseEditChannelSettingUseCase = useCallback((record: AppConfigurationListItem) => {
+        // triggerGetAllRiskDropMenu(null);
+        // triggerGetAllChannelSettingTagDropMenu(null);
 
         setEditID(record.id);
         setShowModalContent({
@@ -292,11 +269,11 @@ export const AppManagePage = () => {
         >
             <>
                 {/*NOTICE: List Table*/}
-                <AdminTable<ChannelListItemVO>
+                <AdminTable<AppConfigurationListItem>
                     tableHeaderColumns={columns}
                     tableDatasource={currentTableListData}
                     loading={isGetListFetching}
-                    addText={i18n.ChannelSettingTabPage.add}
+                    addText={i18n.AppManagePage.add}
                     onAddCallback={onAddItem}
                     setShowModalContent={setShowModalContent}
                     isSearchFromClient={false}
@@ -304,23 +281,24 @@ export const AppManagePage = () => {
                     onFormResetCallback={onFormResetCallback}
                 />
                 <AdminFormCustomModal
-                    title={"渠道配置"}
+                    title={i18n.AppManagePage.modalTitle}
                     showModalContent={showModalContent}
                     setShowModalContent={setShowModalContent}
                     onOk={onModalOk}
                     onCloseModal={onCloseModal}
                 >
-                    <ChannelSettingForm
-                        isEdit={showModalContent.isEdit}
-                        form={form}
-                        initialValues={formInitialValues}
-                        onFieldsChange={onFormFieldsChange}
-                        onFinish={onFormFinish}
-                        customAntFormFieldError={customAntFormFieldError}
-                        // NOTE: data
-                        dataForAllRiskDropMenuData={allRiskDropMenuData}
-                        dataForAllChannelSettingTagDropMenuData={allChannelSettingTagDropMenuData}
-                    />
+                    <></>
+                    {/*<ChannelSettingForm*/}
+                    {/*    isEdit={showModalContent.isEdit}*/}
+                    {/*    form={form}*/}
+                    {/*    initialValues={formInitialValues}*/}
+                    {/*    onFieldsChange={onFormFieldsChange}*/}
+                    {/*    onFinish={onFormFinish}*/}
+                    {/*    customAntFormFieldError={customAntFormFieldError}*/}
+                    {/*    // NOTE: data*/}
+                    {/*    // dataForAllRiskDropMenuData={allRiskDropMenuData}*/}
+                    {/*    // dataForAllChannelSettingTagDropMenuData={allChannelSettingTagDropMenuData}*/}
+                    {/*/>*/}
                 </AdminFormCustomModal>
             </>
         </AdminPage>

@@ -8,13 +8,15 @@ interface AdminFormCustomModalProps {
     showModalContent: ModalContent;
     setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>;
     onOk: () => void;
+    onCloseModal: () => void;
+    title: string;
+
     onAutoCompleteTemplate?: () => void;
     children?: React.ReactElement;
-    onCloseModal: () => void;
     autoComplete?: boolean;
     // NOTE: Custom
     width?: string;
-    title: string;
+
 }
 
 export const AdminFormCustomModal = (props: AdminFormCustomModalProps) => {
