@@ -55,6 +55,10 @@ export const ChannelSettingTabPage = () => {
 
     }, [])
 
+    const onFormResetCallback = useCallback(() => {
+        userBrowseAndSearchAllItemsUseCase({});
+    }, [])
+
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
     const systemInitalizeListUsecase = useCallback(() => {
@@ -168,6 +172,7 @@ export const ChannelSettingTabPage = () => {
 
     // Modal - Close
     const onCloseModal = useCallback(() => {
+        form.resetFields();
         setCustomAntFormFieldError({});
     }, []);
 
@@ -278,12 +283,12 @@ export const ChannelSettingTabPage = () => {
                 setShowModalContent={setShowModalContent}
                 isSearchFromClient={false}
                 onFormSearchCallback={onFormSearch}
+                onFormResetCallback={onFormResetCallback}
             />
             <AdminFormCustomModal
                 title={"渠道配置"}
                 showModalContent={showModalContent}
                 setShowModalContent={setShowModalContent}
-                form={form}
                 onOk={onModalOk}
                 onCloseModal={onCloseModal}
             >
@@ -294,6 +299,7 @@ export const ChannelSettingTabPage = () => {
                     onFieldsChange={onFormFieldsChange}
                     onFinish={onFormFinish}
                     customAntFormFieldError={customAntFormFieldError}
+                    // NOTE: data
                     dataForAllRiskDropMenuData={allRiskDropMenuData}
                     dataForAllChannelSettingTagDropMenuData={allChannelSettingTagDropMenuData}
                 />

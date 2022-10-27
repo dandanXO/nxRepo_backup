@@ -65,6 +65,8 @@ if(microApp) {
             if(app.name === "cms") {
               const microApp = document.querySelector("#micro-app");
               microApp.style.display = "block";
+              // NOTICE:
+              document.querySelector("#root").style.overflow = "hidden";
             }
           },
         ],
@@ -76,6 +78,8 @@ if(microApp) {
             if(app.name === "cms") {
               const microApp = document.querySelector("#micro-app");
               microApp.style.display = "none";
+              // NOTICE:
+              document.querySelector("#root").style.overflow = "visible";
             }
           },
         ],

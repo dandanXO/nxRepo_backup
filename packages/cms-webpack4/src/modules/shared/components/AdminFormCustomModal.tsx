@@ -10,8 +10,6 @@ interface AdminFormCustomModalProps {
     onOk: () => void;
     onAutoCompleteTemplate?: () => void;
     children?: React.ReactElement;
-    // NOTE: Form
-    form: FormInstance;
     onCloseModal: () => void;
     autoComplete?: boolean;
     // NOTE: Custom
@@ -31,8 +29,6 @@ export const AdminFormCustomModal = (props: AdminFormCustomModalProps) => {
             isEdit={props.showModalContent.isEdit}
             handleCloseModal={() => {
                 // console.log("handleCloseModal")
-                // NOTE: Form
-                props.form.resetFields();
                 props.setShowModalContent({
                     show: false,
                     isEdit: false,

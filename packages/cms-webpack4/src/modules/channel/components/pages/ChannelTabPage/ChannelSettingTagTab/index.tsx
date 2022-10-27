@@ -51,7 +51,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // Form - onFieldsChange
     const onFormFieldsChange = useCallback((changedFields, allFields) => {
-        userEditingChannelSettingUsecase(changedFields);
+        userEditingChannelSettingUseCase(changedFields);
     }, [])
 
     // Form - Validation
@@ -70,6 +70,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // Modal - Close
     const onCloseModal = useCallback(() => {
+        form.resetFields();
         setCustomAntFormFieldError({});
     }, []);
 
@@ -200,7 +201,7 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
 
     // NOTE: User is editing ChannelSetting
-    const userEditingChannelSettingUsecase = useCallback((changedFields) => {
+    const userEditingChannelSettingUseCase = useCallback((changedFields) => {
         if(changedFields.length === 0) return;
 
         // NOTICE: need
@@ -323,7 +324,6 @@ export const ChannelSettingTagTabPage = () => {
                 showModalContent={showModalContent}
                 // 關閉
                 setShowModalContent={setShowModalContent}
-                form={form}
                 onOk={onModalOk}
                 onCloseModal={onCloseModal}
                 // onAutoCompleteTemplate={onModalFormAutoCompleteTemplate}
