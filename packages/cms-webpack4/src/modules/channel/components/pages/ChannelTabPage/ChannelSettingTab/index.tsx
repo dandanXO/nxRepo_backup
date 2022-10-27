@@ -181,7 +181,7 @@ export const ChannelSettingTabPage = () => {
 
     // Form - onFieldsChange
     const onFormFieldsChange = useCallback((changedFields, allFields) => {
-        // userEditingChannelSettingUsecase(changedFields);
+        // userEditingChannelSettingUseCase(changedFields);
     }, [])
 
     // Form - Finish

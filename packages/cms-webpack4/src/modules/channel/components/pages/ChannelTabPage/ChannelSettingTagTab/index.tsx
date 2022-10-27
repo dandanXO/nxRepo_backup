@@ -75,7 +75,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // Modal - onModalFormAutoCompleteTemplate
     // const onModalFormAutoCompleteTemplate = useCallback(() => {
-    //     userUseFormAutoCompleteUsecase();
+    //     userUseFormAutoCompleteUseCase();
     // }, [])
 
     // NOTICE: Modal - Delete
@@ -114,7 +114,7 @@ export const ChannelSettingTagTabPage = () => {
                             userBrowseEditChannelSettingUseCase(record);
                         }}>修改</a>,
                         <a key="deletable" onClick={() => {
-                            userBrowseDeleteChannelSettingUsecase(record)
+                            userBrowseDeleteChannelSettingUseCase(record)
                         }}>刪除</a>,
                     ]
                 }
@@ -153,9 +153,9 @@ export const ChannelSettingTagTabPage = () => {
     }, []);
 
     // NOTE: User use FormAutoComplete
-    // const userUseFormAutoCompleteUsecase = useCallback(() => {
+    // const userUseFormAutoCompleteUseCase = useCallback(() => {
     //     form.setFieldsValue(MockChannelTag);
-    //     systemValidateChannelSettingUsecase();
+    //     systemValidateChannelSettingUseCase();
     // }, [form])
 
     // NOTE: User browse EditChannelSetting
@@ -222,7 +222,7 @@ export const ChannelSettingTagTabPage = () => {
     }, [])
 
     // NOTE: System validate ChannelSetting
-    const systemValidateChannelSettingUsecase = useCallback(() => {
+    const systemValidateChannelSettingUseCase = useCallback(() => {
         // NOTICE: need
         const fields = form.getFieldsValue();
 
@@ -246,7 +246,7 @@ export const ChannelSettingTagTabPage = () => {
 
     // NOTE: user Edited ChannelSetting
     const userEditedChannelSettingUseCase = useCallback(() => {
-        const isValid = systemValidateChannelSettingUsecase();
+        const isValid = systemValidateChannelSettingUseCase();
         if(!isValid) return;
 
         // NOTICE: need
@@ -284,7 +284,7 @@ export const ChannelSettingTagTabPage = () => {
     const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
 
     // NOTE: User browse DeleteChannelSetting
-    const userBrowseDeleteChannelSettingUsecase = useCallback((record: ChannelTagVO) => {
+    const userBrowseDeleteChannelSettingUseCase = useCallback((record: ChannelTagVO) => {
         setEditID(record.id);
         setShowDeletedModal(true);
     }, [])
