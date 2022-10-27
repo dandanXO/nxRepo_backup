@@ -60,7 +60,7 @@ export const ChannelSettingTagTabPage = () => {
     // Form - Finish
     const onFormFinish = useCallback(() => {
         userEditedChannelSettingUseCase();
-    }, [editID])
+    }, [showModalContent.isEdit, editID])
 
     // NOTICE: Modal - Create, Edit
     // Modal - OK

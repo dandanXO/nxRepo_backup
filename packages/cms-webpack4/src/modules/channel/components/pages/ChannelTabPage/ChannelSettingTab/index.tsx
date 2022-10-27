@@ -187,7 +187,7 @@ export const ChannelSettingTabPage = () => {
     // Form - Finish
     const onFormFinish = useCallback(() => {
         userEditedChannelSettingUseCase();
-    }, [editID])
+    }, [showModalContent.isEdit, editID])
 
     const userEditedChannelSettingUseCase = useCallback(() => {
         // const isValid = systemValidateChannelSettingUsecase();
