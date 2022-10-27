@@ -3,9 +3,9 @@ import React, {CSSProperties} from "react";
 import TextArea from "antd/es/input/TextArea";
 
 import {NumberValidator} from "../../../../shared/utils/validation/validator";
-import {RiskModelMenu} from "../../../api/RiskApi";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {Store} from "antd/es/form/interface"
+import {RiskModelMenu} from "../../../api/dto/RiskModelMenu";
 interface RiskSettingFormProps {
     isEdit: boolean;
     id?: number;

@@ -3,9 +3,6 @@ import AdminPage from "../../../../shared/components/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
 import {GetProductListResponseProduct} from "../../../../product/api/types/getProductList";
 import {
-    GetRiskManageResponse,
-    MssRiskRankVo,
-    RiskManageList,
     useLazyGetRiskManageListQuery,
     useLazyGetRiskManageQuery,
     useLazyGetRiskModelMenuQuery,
@@ -16,6 +13,9 @@ import {useForm} from "antd/es/form/Form";
 import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
 import RiskSettingForm from "./RiskSettingForm";
 import RiskSettingModal from "./RiskSettingModal";
+import {GetRiskManageResponse} from "../../../api/response/GetRiskManageResponse";
+import {RiskManageList} from "../../../api/dto/RiskManageList";
+import {MssRiskRankVo} from "../../../api/vo/MssRiskRankVo";
 
 export type FormResponseData = GetRiskManageResponse;
 

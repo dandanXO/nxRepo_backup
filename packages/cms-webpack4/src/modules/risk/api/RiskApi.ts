@@ -1,94 +1,10 @@
 import {API} from "../../../api";
-
-// NOTE: GET ALL
-export interface RiskManageList {
-    createTime: string;
-    // 创建时间
-
-    enabled: boolean;
-    // 状态
-
-    modelName: string;
-    // 风控名称
-
-    updateTime: string;
-    // 更新时间
-
-    id: number;
-}
-export type GetRiskManageListResponse = RiskManageList[];
-
-// NOTE: GET
-export interface GetRiskManageRequest {
-    modelId: string;
-}
-
-// 首贷级距
-export interface MssRiskRankVo {
-    loanCount: number;
-    // 可借笔数
-
-    id?: number;
-    // 风控评分等级流水号
-
-    max?:	number;
-    // 终始阀值(exclude)
-
-    min?:	number;
-    // 起始阀值(include)
-
-    modelId?: number;
-    // 风控模组流水号
-
-    providerRank: string;
-    // 风控商等级
-
-    rank:	"EXCELLENT" | "GOOD" | "NORMAL" | "ORDINARY" | "REJECT";
-    // 风控评分等级
-
-    sort:	number;
-    // 排序
-
-    type:   0 | 1
-    // 级距类型 0: 首贷, 1: 复借
-}
-
-export interface RiskManageModel {
-    enabled: boolean;
-    // 状态
-
-    firstLoan: Array<MssRiskRankVo>;
-    modelName:	string;
-    // 风控名称
-
-    remark:	string;
-    // 备注
-
-    repeatLoan: Array<MssRiskRankVo>;
-    riskModelName: string;
-    // 风控模型名称
-    useRcQuota: boolean;
-    // 借款额度使用风控返回结果
-
-
-}
-
-export type GetRiskManageResponse = RiskManageModel;
-
-// NOTE: Post
-export type PostRiskManageCreateRequest = RiskManageModel;
-
-// NOTE: Put
-export type PutRiskManageCreateRequest = RiskManageModel & {
-    modelId: number;
-};
-
-export interface RiskModelMenu {
-    id: number;
-    riskModelName: string;
-}
-
-type RiskModelMenuResponse = Array<RiskModelMenu>;
+import {GetRiskManageRequest} from "./request/GetRiskManageRequest";
+import {PutRiskManageCreateRequest} from "./request/PutRiskManageCreateRequest";
+import {PostRiskManageCreateRequest} from "./request/PostRiskManageCreateRequest";
+import {RiskModelMenuResponse} from "./response/RiskModelMenuResponse";
+import {GetRiskManageListResponse} from "./response/GetRiskManageListResponse";
+import {RiskManageModel} from "./dto/RiskManageModel";
 
 const ProductApi = API.injectEndpoints({
     overrideExisting: false,
@@ -108,16 +24,15 @@ const ProductApi = API.injectEndpoints({
 
         // NOTE: GET /hs/admin/risk-manage/risk-model-menu 风控模组下拉选单
         getRiskModelMenu: builder.query<RiskModelMenuResponse, {}>({
-            query: (arg: GetRiskManageRequest) => ({
+            query: () => ({
                 url: `/risk-manage/risk-model-menu`,
                 method: 'get',
             })
         }),
 
-
         // NOTE: POST /hs/admin/risk-manage/model 创建风控模组详情
         postRiskManageCreate: builder.mutation<{}, PostRiskManageCreateRequest>({
-            query: (requestBody: RiskManageModel) => ({
+            query: (requestBody: PostRiskManageCreateRequest) => ({
                 url: `/risk-manage/model`,
                 method: "post",
                 data: requestBody,
@@ -126,7 +41,7 @@ const ProductApi = API.injectEndpoints({
 
         // NOTE: PUT /hs/admin/product-manage/product/{productId} 异动风控模组详情
         putRiskManageCreate: builder.mutation<{}, PutRiskManageCreateRequest>({
-            query: (requestBody: RiskManageModel) => ({
+            query: (requestBody: PutRiskManageCreateRequest) => ({
                 url: `/risk-manage/model`,
                 method: "put",
                 data: requestBody,
@@ -140,8 +55,6 @@ const ProductApi = API.injectEndpoints({
                 method: 'get',
             })
         }),
-
-
 
     })
 })
