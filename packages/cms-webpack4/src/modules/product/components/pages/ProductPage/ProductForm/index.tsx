@@ -64,12 +64,12 @@ const Index = (props: ProductFormProps) => {
             {...layout} form={form} name="control-hooks" onFinish={onFinish}
             onFieldsChange={(changedFields, allFields) => {
                 if(changedFields[0].name[0] ==="firstLoanQuotaSwitch") {
-                    console.log("changedFields", changedFields[0].value);
+                    // console.log("changedFields", changedFields[0].value);
                     props.setEnableLoanAmount(changedFields[0].value === 0)
                 }
 
                 if(changedFields[0].name[0] ==="reLoanQuotaSwitch") {
-                    console.log("changedFields", changedFields[0].value);
+                    // console.log("changedFields", changedFields[0].value);
                     props.setEnableReLoanAmount(changedFields[0].value === 0)
                 }
 

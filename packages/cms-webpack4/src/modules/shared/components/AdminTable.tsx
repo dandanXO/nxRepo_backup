@@ -137,7 +137,7 @@ export const AdminTable = <TableListItemDataType,>({
             }}
             // dateFormatter="string"
             dateFormatter={(value, valueType) => {
-                console.log('====>', value, valueType);
+                // console.log('====>', value, valueType);
                 return value.format('YYYY-MM-DD HH:mm:ss');
             }}
             // NOTE: Unknow
