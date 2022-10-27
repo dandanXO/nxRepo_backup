@@ -67,6 +67,9 @@ export interface RiskManageModel {
     repeatLoan: Array<MssRiskRankVo>;
     riskModelName: string;
     // 风控模型名称
+    useRcQuota: boolean;
+    // 借款额度使用风控返回结果
+
 
 }
 

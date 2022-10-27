@@ -140,6 +140,13 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 })}
             </Form.Item>
 
+            <Form.Item label={"放款笔数"} name="useRcQuota" required>
+                <Radio.Group>
+                    <Radio value={true}>依照风控</Radio>
+                    <Radio value={false}>系统规则</Radio>
+                </Radio.Group>
+            </Form.Item>
+
             <Form.Item label={"状态"} name={"enabled"} valuePropName={"checked"}>
                 <Switch checkedChildren={"启用"} unCheckedChildren={"停用"}></Switch>
             </Form.Item>

@@ -106,7 +106,6 @@ export const RiskSettingPage = () => {
     // NOTE: autoComplete
     const onAutoCompleteTemplate = useCallback(() => {
         const mockRequest = {
-            enabled: true,
             firstLoan: [
                 {providerRank: 'A', loanCount: '4000'},
                 {providerRank: 'B', loanCount: '3000'},
@@ -124,6 +123,8 @@ export const RiskSettingPage = () => {
                 {providerRank: 'E', loanCount: '0'},
             ],
             riskModelName: 1,
+            useRcQuota: true,
+            enabled: true,
         }
         form.setFieldsValue(mockRequest)
     }, [form])
@@ -145,6 +146,7 @@ export const RiskSettingPage = () => {
     const initialValues = useMemo(() => {
         // NOTICE: select and switch need initialValue if you want to select one
         return {
+            useRcQuota: true,
             enabled: true,
         } as DeepPartial<FormResponseData>;
     }, [])
@@ -197,6 +199,7 @@ export const RiskSettingPage = () => {
             riskModelName: id,
             firstLoan: currentFormData.firstLoan,
             repeatLoan: currentFormData.repeatLoan,
+            useRcQuota: currentFormData.useRcQuota,
             enabled: currentFormData.enabled,
             remark: currentFormData.remark,
         })
