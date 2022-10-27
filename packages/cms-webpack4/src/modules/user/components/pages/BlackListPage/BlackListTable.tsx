@@ -52,7 +52,7 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ""
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "" },
-        { title: '姓名', dataIndex: 'userTrueName', key: 'userTrueName', initialValue: "" },
+        { title: '姓名', dataIndex: 'userNameTrue', key: 'userNameTrue', initialValue: "" },
         { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: "" },
         { title: '备注', dataIndex: 'reason', key: 'reason', hideInSearch: true},
         { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },

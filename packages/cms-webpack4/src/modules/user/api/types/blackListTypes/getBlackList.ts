@@ -26,7 +26,7 @@ export interface BlackListReponse {
     phoneNo?: string;       //用户手机
     reason?: string;        //拉黑原因
     userId?: number;        //用户ID
-    userTrueName?: string;  //用户真实姓名
+    userNameTrue?: string;  //用户真实姓名
 }
 
 export type GetBlackListProps = GetBlackListResponse & GetPageableResponse;
