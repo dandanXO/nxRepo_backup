@@ -49,6 +49,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     useEffect(() => {
         if (Object.keys(searchParams).length > 0) {
             setSearchList(searchParams);
+            setIsImportTelSale(searchParams.noLoanAgain);
         }
     }, [])
 
