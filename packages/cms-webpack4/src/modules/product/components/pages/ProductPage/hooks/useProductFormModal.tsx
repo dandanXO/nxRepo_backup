@@ -7,9 +7,9 @@ import {
     usePostProductCreateMutation,
     usePutProductEditMutation
 } from "../../../../service/product/ProductApi";
-import {PostProductCreateRequestBody} from "../../../../service/product/types/postProductCreate";
 import moment from "moment/moment";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import {PostProductCreateRequestBody} from "../../../../service/product/request/postProductCreateRequestBody";
 
 export interface ProductFormModal {
   show: boolean;

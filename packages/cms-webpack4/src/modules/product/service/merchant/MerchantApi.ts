@@ -1,7 +1,7 @@
 import { API } from "../../../../api";
-import { GetMerchantListResponseData } from "./types/getMerchantList";
-import { PostMerchantCreateRequestBody } from "./types/postMerchantCreate";
-import { PutMerchantProps } from "./types/putMerchant";
+import { GetMerchantListResponseData } from "./getMerchantList";
+import { PostMerchantCreateRequestBody } from "./postMerchantCreate";
+import { PutMerchantProps } from "./putMerchant";
 
 const MerchantApi = API.injectEndpoints({
     overrideExisting: false,

@@ -1,5 +1,4 @@
 import {ProductFormModal} from "../hooks/useProductFormModal";
-import { GetAvailableMerchantResponse } from "../../../../service/product/types/getAvailbaleMerchant";
 import React, {useCallback, useEffect, useState} from "react";
 import { Form } from "antd";
 import BaseSettingSection from "./BaseSettingSection";
@@ -8,6 +7,7 @@ import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import { UploadSettingSection } from "./UploadSettingSection";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import {GetAvailableMerchantResponse} from "../../../../service/product/response/getAvailableMerchantResponse";
 
 interface ProductFormProps {
     productModalData: ProductFormModal;

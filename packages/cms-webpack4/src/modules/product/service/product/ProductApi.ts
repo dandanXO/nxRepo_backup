@@ -1,16 +1,12 @@
 import {API} from "../../../../api";
-import {GetAvailableMerchantResponse} from "./types/getAvailbaleMerchant";
-import {GetProductListResponse} from "./types/getProductList";
-import {PostProductCreateRequestBody} from "./types/postProductCreate";
-import {PostUploadProductIcon} from "./types/postUploadProductIcon";
-import {GetProductQueryResponse, GetProductRequestQuery} from "./types/getProduct";
-import {PutProductProps} from "./types/putProduct";
-import {GetAllAppConfigurationResponse} from "../appManage/request/GetAllAppConfigurationResponse";
-import {CreateAppConfigurationRequest} from "../appManage/request/CreateAppConfigurationRequest";
-import {GetAppConfigurationResponse} from "../appManage/response/GetAppConfigurationResponse";
-import {GetAppConfigurationRequest} from "../appManage/request/GetAppConfigurationRequest";
-import {UpdateAppConfigurationRequest} from "../appManage/request/UpdateAppConfigurationRequest";
-import {DeleteAppConfigurationRequest} from "../appManage/request/DeleteAppConfigurationRequest";
+import {PostProductCreateRequestBody} from "./request/postProductCreateRequestBody";
+import {GetProductRequestQuery} from "./request/getProductRequestQuery";
+import {GetAvailableMerchantResponse} from "./response/getAvailableMerchantResponse";
+import {GetProductQueryResponse} from "./response/getProductQueryResponse";
+import {PostUploadProductIcon} from "./response/postUploadProductIcon";
+import {GetProductListResponse} from "./response/getProductListResponse";
+import {PutProductProps} from "./request/putProductProps";
+
 
 const ProductApi = API.injectEndpoints({
   overrideExisting: false,
@@ -72,48 +68,6 @@ const ProductApi = API.injectEndpoints({
         data: requestBody,
       }),
     }),
-
-    // NOTE: APP 參數配置
-    // 查詢 APP 参数配置
-    getAllAppConfiguration: builder.query<GetAllAppConfigurationResponse, {}>({
-        query: () => ({
-            url: `/app-manage/all`,
-            method: "get",
-            params: {},
-        }),
-    }),
-    // 取得 APP 配置
-    getAppConfiguration: builder.query<GetAppConfigurationResponse, {}>({
-      query: (arg: GetAppConfigurationRequest) => ({
-          url: `/app-manage/${arg.id}`,
-          method: "get",
-      }),
-    }),
-    // 新增 APP 配置
-    createAppConfiguration: builder.mutation<{}, CreateAppConfigurationRequest>({
-        query: (arg: CreateAppConfigurationRequest) => ({
-            url: `/app-manage`,
-            method: "post",
-            data: arg,
-        })
-    }),
-    // 更新 APP 配置
-    updateAppConfiguration: builder.mutation<{}, UpdateAppConfigurationRequest>({
-        query: (arg: UpdateAppConfigurationRequest) => ({
-            url: `/app-manage`,
-            method: "put",
-            data: arg,
-        })
-    }),
-    // 刪除 APP 配置
-    deleteAppConfiguration: builder.mutation<null, DeleteAppConfigurationRequest>({
-        query: (arg: DeleteAppConfigurationRequest) => ({
-            url: `/app-manage`,
-            method: "delete",
-            params: {},
-            data: arg,
-        }),
-    }),
   })
 })
 
@@ -123,9 +77,4 @@ export const {
     useLazyGetProductQuery,
     usePostProductCreateMutation,
     usePutProductEditMutation,
-    useLazyGetAllAppConfigurationQuery,
-    useLazyGetAppConfigurationQuery,
-    useCreateAppConfigurationMutation,
-    useUpdateAppConfigurationMutation,
-    useDeleteAppConfigurationMutation,
 } = ProductApi;

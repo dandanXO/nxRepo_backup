@@ -1,4 +1,4 @@
 export interface PostUploadProductIcon {
-  fileName?: string;
-  url?: string;
+    fileName?: string;
+    url?: string;
 }

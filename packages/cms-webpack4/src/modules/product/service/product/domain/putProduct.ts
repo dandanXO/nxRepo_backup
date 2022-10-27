@@ -90,4 +90,3 @@ export interface PutProductInterestRatePairs {
     plusAmount?: number;
 }
 
-export type PutProductProps = PutProductRequestBody & PutProductRequestParams;

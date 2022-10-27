@@ -1,10 +1,8 @@
-export interface GetProductListResponse extends Array<GetProductListResponseProduct> {
-  data: GetProductListResponseProduct[];
-}
-
-export interface GetProductListResponseProduct {
-    /** 后台管理者账号*/
-     adminUsername?: string;
+export interface PostProductCreateRequestBody {
+    /** 管理者密码 */
+    adminPassword?: string;
+    /** 管理者账号 */
+    adminUsername?: string;
     /** 广告放款额度 */
     amountRange?: string;
     /** 广告放款通过率 */
@@ -27,28 +25,44 @@ export interface GetProductListResponseProduct {
     extensibleOverdueDays?: number;
     /** 展期费率 */
     extensionRate?: number;
+
+    // 初始贷款额度开关 0: 系统规则 1: 风控返回
+    firstLoanQuotaSwitch?: boolean;
+
     /** 广告放款利率 */
     interestRange?: string;
+
+    // 初始贷款额度
+    loanAmount?: number;
+
+
     /** 借款周期 */
     loanTerm?: number;
     /** 产品logo url */
     logo?: string;
-    /** 商户流水号 */
-    merchantId?: string;
     /** 最高可借金额 */
     maxAmount?: number;
+    /** 商户流水号 */
+    merchantId?: number;
     /** 逾期费率(天) */
     overdueRate?: number;
     /** 后置利率 */
     postInterestRate?: number;
     /** 前置利率 */
     preInterestRate?: number;
-    /** 产品流水号 */
-    productId?: number;
     /** 服务利率提额配置 */
-    productInterestRatePairs?: GetProductInterestRatePairs[];
+    // productInterestRatePairs?: PostProductInterestRatePairs[]
+    productInterestRatePairs?: string;
     /** 产品名称 */
     productName?: string;
+
+    // 老客贷款额度
+    reLoanAmount?: number;
+
+// 老客贷款额度开关 0: 系统规则 1: 风控返回
+    reLoanQuotaSwitch?: boolean;
+
+
     /** 还款链结有效天数 */
     repayExpiryDays?: number;
     /** 是否显示借款金额 */
@@ -56,8 +70,8 @@ export interface GetProductListResponseProduct {
     /** 热门标签 */
     tags?: string;
     /** 申请详情模版类型 (1: 一般 , 2: 合同金額=到手)
-        @enum {number}
-    */
+     @enum {number}
+     */
     templateType?: 1 | 2;
     /** 广告借款周期 */
     termRange?: string;
@@ -65,17 +79,4 @@ export interface GetProductListResponseProduct {
     top?: boolean;
     /** 权重 */
     weight?: number;
-    /** 创建时间 */
-    createTime?:string;
-    /** 修改时间 */
-    updateTime?:string;
-}
-
-export interface GetProductInterestRatePairs {
-    /** 提额次数 */
-    num?: number;
-    /** 后置利率 */
-    postInterest?: number;
-    /** 前置利率 */
-    preInterest?: number;
 }
