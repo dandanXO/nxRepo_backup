@@ -31,7 +31,10 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
         noLoanAgainEndDays: 10, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", status: "", pageNum: 1, pageSize: 10
     }
-
+    // redux
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const { searchParams } = useSelector(selectSearchParams);
     // state
     const [userList, setUserList] = useState<GetUerListProps>({ records: [] });
     const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
@@ -40,16 +43,14 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const [modal, contextHolder] = Modal.useModal();
 
 
-    // redux
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const { searchParams } = useSelector(selectSearchParams);
+
 
 
     useEffect(() => {
         if (Object.keys(searchParams).length > 0) {
             setSearchList(searchParams);
-            setIsImportTelSale(searchParams.noLoanAgain);
+            setIsNoLoanAgain(searchParams.noLoanAgain === "true" ? true : false);
+            setIsImportTelSale(searchParams.noLoanAgain === "true" ? true : false);
         }
     }, [])
 
@@ -95,19 +96,23 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const handleDeleteUser=(id)=>{
         deleteModal.confirm({content:"确认要清除该用户信息吗？", onOk() { deleteUser({ userId: Number(id) }) } });
     }
-    const handleBanUser=(id)=>{
-        banModal.confirm({content:"确认要禁止该用户登录吗？", onOk() {  banUser({ userId: Number(id) }) } });
+    const handleBanUser = (id) => {
+        banModal.confirm({
+            title: "确认要禁止该用户登入吗？",
+            content: "禁止用户登入后仍可以解禁",
+            onOk() { banUser({ userId: Number(id) }) }
+        });
     }
 
     const statusEnum = {
         '': { text: '不限' },
         '0': { text: '未注册', color: 'orange' },
         '4': { text: '黑名单', color: 'default' },
+        '13': { text: '禁止登入', color: 'default' },
         '14': { text: '认证通过', color: 'success' },
         '18': { text: '终审中', color: 'purple' },
         '19': { text: '审核拒绝', color: 'error' },
         '20': { text: '审核通过', color: 'processing' },
-        // '21': { text: '禁止登入', color: 'default' },
     };
     
     const columns: ProColumns<UserListContent>[] = [
@@ -159,11 +164,13 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             colSize: 6,
             hideInTable: true,
             renderFormItem: (text, { }, form) => {
-                return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain:searchParams.noLoanAgain || isNoLoanAgain }} >
-                    <Radio.Group value={isNoLoanAgain} onChange={({ target: { value } }) => setIsNoLoanAgain(value)} >
-                        <Radio.Button value={true}>是</Radio.Button>
-                        <Radio.Button value={false}>否</Radio.Button>
-                    </Radio.Group>
+                return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain: searchParams.noLoanAgain || isNoLoanAgain }}>
+                    <Form.Item>
+                        <Radio.Group value={isNoLoanAgain} onChange={({ target: { value } }) => setIsNoLoanAgain(value)} >
+                            <Radio.Button value={true}>是</Radio.Button>
+                            <Radio.Button value={false}>否</Radio.Button>
+                        </Radio.Group>
+                    </Form.Item>
                 </Form>
             }
         },
@@ -227,7 +234,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                                 }
                             
                                 setIsImportTelSale(noLoanAgain === "true" ? true : false)
-              
+                                setIsNoLoanAgain(noLoanAgain === "true" ? true : false);
                                 setSearchList({
                                     ...searchList,
                                     addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
