@@ -290,7 +290,7 @@ export const RiskSettingPage = () => {
                 isEdit: false,
             })
         })
-    }, [editID, currentRiskMenuData])
+    }, [showModalContent.isEdit, editID, currentRiskMenuData])
 
     // NOTICE: Form.4 onFinishFailed
     const onFinishFailed = useCallback(() => {
