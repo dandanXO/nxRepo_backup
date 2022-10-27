@@ -33,12 +33,12 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                 <Input placeholder={"渠道名称"}/>
             </Form.Item>
 
-            <Form.Item label="PackgeID" name={"packageId"} rules={[{ required: true }]}
+            <Form.Item label="PackageID" name={"packageId"} rules={[{ required: true }]}
                        // validateStatus={(props.customAntFormFieldError?.packageId as any)?.validateStatus}
                        // help={(props.customAntFormFieldError?.packageId as any)?.help}
                        extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
             >
-                <Input placeholder={"PackgeID"} disabled={props.isEdit}/>
+                <Input placeholder={"PackageID"} disabled={props.isEdit}/>
             </Form.Item>
 
             <Form.Item label="渠道链接" name={"url"} rules={[{ required: true }]}

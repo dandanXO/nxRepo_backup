@@ -81,7 +81,7 @@ export const ChannelSettingTabPage = () => {
                 dataIndex: 'id',
             },
             { key: 'name', title: '渠道名称', dataIndex: 'name', initialValue: "" },
-            { key: 'packageId', title: 'PackgeID', dataIndex: 'packageId', initialValue: "", hideInSearch: true, },
+            { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: "", hideInSearch: true, },
             { key: 'downloadLink', title: '渠道链接', dataIndex: 'url', initialValue: "", hideInSearch: true, ellipsis: true, copyable: true},
             { key: 'modelName', title: '风控方案', dataIndex: 'modelName', initialValue: "" },
             { key: 'appName', title: '包名', dataIndex: 'appName', initialValue: "" },
