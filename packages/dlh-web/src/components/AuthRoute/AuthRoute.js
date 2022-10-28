@@ -48,6 +48,14 @@ class AuthRoute extends Component {
                       if(level2MenuItem.actionUrl === "/userInfoManage") {
                         level2MenuItem.actionUrl = "/cms/user";
                       }
+                      // 黑名單
+                      if(level2MenuItem.actionUrl === "/blackListManage") {
+                        level2MenuItem.actionUrl = "/cms/blacklist";
+                      }
+                      // 白名單
+                      if(level2MenuItem.actionUrl === "/whiteListManage") {
+                        level2MenuItem.actionUrl = "/cms/whitelist";
+                      }
                     })
                   }
                   // 渠道管理
