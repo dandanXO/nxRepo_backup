@@ -2,7 +2,7 @@ import {AdminTable, ModalContent} from "../../../../../shared/components/AdminTa
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {
-    useCreateChannelMutation,
+    useCreateChannelMutation, useCreateTagMutation,
     useLazyGetAllChannelQuery,
     useLazyGetAllChannelSettingTagDropMenuQuery,
     useLazyGetAllRiskDropMenuQuery,
@@ -15,6 +15,8 @@ import {ChannelSettingForm} from "./ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {Channel} from "../../../../domain/vo/Channel";
 import {UpdateChannelRequest} from "../../../../service/request/UpdateChannelRequest";
+import {ChannelSettingTagFormModal} from "../ChannelSettingTagTab/ChannelSettingTagFormModal";
+import {useFormModal} from "../ChannelSettingTagTab/useFormModal";
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;
@@ -271,6 +273,36 @@ export const ChannelSettingTabPage = () => {
         form.setFieldsValue(currentFormData)
     }, [showModalContent.isEdit, currentFormData])
 
+
+
+    // NOTICE: 新增渠道標籤
+    const [showTagModalContent, setShowTagModalContent] = useState<ModalContent>({
+        show: false,
+        isEdit: false,
+    });
+    const [tagForm] = useForm()
+    const [triggerPostTag, { data: postTagData, isLoading: isPostTagLoading , isSuccess: isPostTagSuccess }] = useCreateTagMutation();
+    const {
+        // form
+        formInitialValues: tagFormInitialValues,
+        onFormFieldsChange: onTagFormFieldsChange,
+        onFormFinish: onTagFormFinish,
+        customAntFormFieldError: customAntTagFormFieldError,
+        // modal
+        onModalOk: onTagModalOk,
+        onCloseModal: onCloseTagModal,
+    } = useFormModal({
+        // NOTE: other need
+        showModalContent: showTagModalContent,
+        setShowModalContent: setShowTagModalContent,
+        form: tagForm,
+        //
+        editID: null,
+        triggerGetList: null,
+        triggerPost: triggerPostTag,
+        triggerPut: null,
+    })
+
     return (
         <>
             {/*NOTICE: List Table*/}
@@ -302,8 +334,30 @@ export const ChannelSettingTabPage = () => {
                     // NOTE: data
                     dataForAllRiskDropMenuData={allRiskDropMenuData}
                     dataForAllChannelSettingTagDropMenuData={allChannelSettingTagDropMenuData}
+                    setShowTagModalContent={() => setShowTagModalContent({
+                        show: true,
+                        isEdit: false,
+                    })}
                 />
             </AdminFormCustomModal>
+
+
+            {/*NOTICE: 新增渠道標籤*/}
+            <ChannelSettingTagFormModal
+                // modal
+                showModalContent={showTagModalContent}
+                setShowModalContent={setShowTagModalContent}
+                onModalOk={() => {
+                    onTagModalOk();
+                    triggerGetAllChannelSettingTagDropMenu(null);
+                }}
+                onCloseModal={onCloseTagModal}
+                form={tagForm}
+                formInitialValues={tagFormInitialValues}
+                onFormFieldsChange={onTagFormFieldsChange}
+                onFormFinish={onTagFormFinish}
+                customAntFormFieldError={customAntTagFormFieldError}
+            />
         </>
     )
 }

@@ -1,13 +1,14 @@
 import Form from "antd/es/form";
 import {AdminForm, AdminFormProps} from "../../../../../shared/components/AdminForm";
 import {Input} from "antd/es";
-import {Alert, Divider, Select, Switch, Typography} from "antd";
+import {Alert, Button, Divider, Select, Space, Switch, Typography} from "antd";
 const { Text } = Typography;
 const { Option } = Select;
 
 import React from "react";
 import {RiskDropMenu} from "../../../../domain/vo/RiskDropMenu";
 import {ChannelTagDropMenu} from "../../../../domain/vo/ChannelTagDropMenu";
+import {PlusOutlined} from "@ant-design/icons";
 
 type ChannelSettingFormProps = {
     isEdit: boolean;
@@ -15,6 +16,7 @@ type ChannelSettingFormProps = {
 } & AdminFormProps & {
     dataForAllRiskDropMenuData: RiskDropMenu[];
     dataForAllChannelSettingTagDropMenuData: ChannelTagDropMenu[];
+    setShowTagModalContent: () => void;
 };
 
 export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
@@ -54,6 +56,7 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                     {props.dataForAllRiskDropMenuData?.map((menuData, index) => {
                         return <Option key={index} value={menuData.id}>{menuData.modelName}</Option>
                     })}
+
                 </Select>
             </Form.Item>
 
@@ -68,7 +71,21 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
             <Form.Item label="配置标签" name="publishId" rules={[{ required: true }]}
                        extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
             >
-                <Select placeholder="选择" disabled={props.isEdit}>
+                <Select placeholder="选择" disabled={props.isEdit}
+                        dropdownRender={menu => (
+                            <>
+                                {menu}
+                                <Divider style={{ margin: '8px 0' }} />
+                                <Space style={{ padding: '0 8px 4px' }}>
+                                    <Button type="text" icon={<PlusOutlined />} onClick={() => {
+                                        props.setShowTagModalContent();
+                                    }}>
+                                        Add item
+                                    </Button>
+                                </Space>
+                            </>
+                        )}
+                >
                     {props.dataForAllChannelSettingTagDropMenuData?.map((menuData, index) => {
                         return <Option key={index} value={menuData.id}>{menuData.name}</Option>
                     })}
