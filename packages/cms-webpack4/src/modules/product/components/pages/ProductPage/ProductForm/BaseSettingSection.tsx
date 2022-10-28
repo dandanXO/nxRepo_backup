@@ -5,7 +5,7 @@ import {GetAvailableMerchantResponse} from "../../../../service/product/response
 const { Option } = Select
 
 interface BaseSettingSectionProps {
-  merchantList?: GetAvailableMerchantResponse;
+  merchantList?: GetAvailableMerchantResponse[];
   isEdit: boolean;
 }
 const BaseSettingSection = (props: BaseSettingSectionProps) => {

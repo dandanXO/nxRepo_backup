@@ -12,7 +12,7 @@ const ProductApi = API.injectEndpoints({
   overrideExisting: false,
   endpoints: (builder) => ({
     // NOTE: GET /hs/admin/product-manage/merchant/available 可用商户
-    getAvailableMerchantList: builder.query<GetAvailableMerchantResponse,null>({
+    getAvailableMerchantList: builder.query<GetAvailableMerchantResponse[],null>({
       query: () => ({
         url: `/product-manage/merchant/available`,
         // params: {},

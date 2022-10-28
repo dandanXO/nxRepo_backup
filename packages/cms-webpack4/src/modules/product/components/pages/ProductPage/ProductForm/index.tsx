@@ -13,7 +13,7 @@ interface ProductFormProps {
     productModalData: ProductFormModal;
     onFinish: (value: any) => void;
     form: any;
-    merchantList: GetAvailableMerchantResponse;
+    merchantList: GetAvailableMerchantResponse[];
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     show: boolean;

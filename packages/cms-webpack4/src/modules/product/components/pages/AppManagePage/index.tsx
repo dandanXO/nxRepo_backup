@@ -3,9 +3,6 @@ import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {
     useCreateChannelMutation,
-    useLazyGetAllChannelQuery,
-    useLazyGetAllChannelSettingTagDropMenuQuery,
-    useLazyGetAllRiskDropMenuQuery,
     useLazyGetChannelQuery,
     useUpdateChannelMutation
 } from "../../../../channel/service/ChannelApi";
