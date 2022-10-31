@@ -17,10 +17,17 @@ const DefaultThemeConfig: IThemeConfig = {
       main: Colors.lightOrange,
       text: Colors.orange,
     },
+    info: {
+      main: Colors.mediumOrange,
+      text: Colors.white,
+    },
     link: {
       main: Colors.none,
       text: Colors.gray500,
     },
   },
+  radio: {
+    color: Colors.orange,
+  }
 }
 export default DefaultThemeConfig;

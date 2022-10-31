@@ -56,6 +56,7 @@ const Template: ComponentStory<typeof Button> = (args) => (
       <div>small</div>
       <Button styleType={"primary"} size={"small"}>Confirm</Button>
       <Button styleType={"secondary"} size={"small"}>Confirm</Button>
+      <Button styleType={"info"} size={"small"}>Confirm</Button>
       <Button styleType={"link"} size={"small"}>Confirm</Button>
     </div>
 
@@ -63,6 +64,7 @@ const Template: ComponentStory<typeof Button> = (args) => (
       <div>normal</div>
       <Button styleType={"primary"}>Confirm</Button>
       <Button styleType={"secondary"}>Confirm</Button>
+      <Button styleType={"info"}>Confirm</Button>
       <Button styleType={"link"}>Confirm</Button>
     </div>
 
@@ -70,6 +72,7 @@ const Template: ComponentStory<typeof Button> = (args) => (
       <div>large</div>
       <Button styleType={"primary"} size={"large"}>Confirm</Button>
       <Button styleType={"secondary"} size={"large"}>Confirm</Button>
+      <Button styleType={"info"} size={"large"}>Confirm</Button>
       <Button styleType={"link"} size={"large"}>Confirm</Button>
     </div>
 

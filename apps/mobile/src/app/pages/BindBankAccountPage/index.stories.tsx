@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PureBindBankAccountPage } from "./PureBindBankAccountPage";
-import { AppThemeProvider } from "@frontend/mobile/shared/ui";
+import {AppThemeProvider, GreenThemeConfig} from "@frontend/mobile/shared/ui";
 
 export default {
     title: "Page/BindBankAccountPage",
@@ -9,7 +9,7 @@ export default {
 
 export const Page: ComponentStory<typeof PureBindBankAccountPage> = (args) => {
     return (
-        <AppThemeProvider>
+        <AppThemeProvider theme={GreenThemeConfig}>
             <PureBindBankAccountPage
                 postBankBindSave={() => {}}
                 cardholderName="cardholderName"

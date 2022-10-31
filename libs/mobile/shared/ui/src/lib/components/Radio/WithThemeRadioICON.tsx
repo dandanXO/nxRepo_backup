@@ -29,7 +29,7 @@ const RadioICON: React.FC<RadioICONProps> = ({
   disabled,
 }) => {
   const theme = useTheme();
-  const primaryColor = (theme as any).color.orange;
+  const primaryColor = (theme as any).radio.color;
   const secondary = (theme as any).color.gray500;
   // NOTICE:
   // theme.mode = "early";

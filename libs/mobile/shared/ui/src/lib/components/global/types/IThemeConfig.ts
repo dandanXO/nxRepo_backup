@@ -13,9 +13,16 @@ export interface IThemeConfig {
       main: Colors;
       text: Colors;
     },
+    info: {
+      main: Colors;
+      text: Colors;
+    },
     link: {
       main: Colors;
       text: Colors;
     },
+  },
+  radio: {
+    color: Colors;
   }
 }
