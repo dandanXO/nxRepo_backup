@@ -41,19 +41,20 @@ const RepayAndApplyButton = styled(NotificationButton)`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    color: #fff;
+    color: ${(props) => props.theme.button.primary.text};
 `;
 
 const RepaymentCancelButton = styled(NotificationButton)`
-    background: #fff0de;
-    color: #f58b10;
     flex: 1 0 auto;
     margin-right: 12px;
+    background: ${(props) => props.theme.button.secondary.main};
+    color: ${(props) => props.theme.button.secondary.text};
 `;
 
 const RepaymentButton = styled(RepayAndApplyButton)`
     flex: 3 0 auto;
-    background: #fcc76e;
+    background: ${(props) => props.theme.button.info.main};
+    color: ${(props) => props.theme.button.info.text};
 `;
 
 interface RepaymentModalProps {

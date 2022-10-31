@@ -14,7 +14,7 @@ interface RadioCheckSVGICONProps {
 }
 
 const RadioCheck = styled(RegularSVGICON)`
-  background: #f58b10;
+  background: ${(props) => props.theme.radio.color};
   width: 11px;
   height: 11px;
   position: relative;

@@ -7,18 +7,18 @@ const sizeProps: {
   large: '14px',
 };
 interface buttonPropsStyle {
-  styleType?: 'primary' | 'secondary' | 'link';
+  styleType?: 'primary' | 'secondary' | 'link' | 'info';
   size?: string;
 }
 export default styled.button<buttonPropsStyle>`
   color: ${(props) =>
     props.styleType
-      ? props.theme[props.styleType].text
-      : props.theme.color.white};
+      ? props.theme.button[props.styleType].text
+      : props.theme.button["primary"].text};
   background: ${(props) =>
     props.styleType
-      ? props.theme[props.styleType].main
-      : props.theme.primary.main};
+      ? props.theme.button[props.styleType].main
+      : props.theme.button["primary"].main};
   padding: ${(props) =>
     props.styleType === 'link'
       ? 0

@@ -167,7 +167,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                 ))}
               {this.props.mode === 'confirm' && (
                 <React.Fragment>
-                  {/* Custom Confirm */}
+                  {/* NOTE: Custom Confirm */}
                   {this.props.mode === 'confirm' &&
                   typeof this.props.confirmColor !== 'undefined' &&
                   this.props.confirmColor !== null ? (
@@ -190,7 +190,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                       {this.props.confirmText}
                     </ConfirmButton>
                   )}
-                  {/* Custom Cancel */}
+                  {/* NOTE: Custom Cancel */}
                   {this.props.mode === 'confirm' &&
                   typeof this.props.cancelColor !== 'undefined' &&
                   this.props.cancelColor !== null ? (
@@ -213,7 +213,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                       {this.props.cancelText}
                     </CancelButton>
                   )}
-                  {/* Default Confirm, Cancel */}
+                  {/* NOTE: Default Confirm, Cancel */}
                   {this.props.mode === 'confirm' &&
                     typeof this.props.confirmColor === 'undefined' &&
                     this.props.confirmColor === null &&

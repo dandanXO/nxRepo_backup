@@ -1,23 +1,16 @@
 import React from 'react';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import theme from './config/theme';
+import {ThemeProvider} from 'styled-components';
+import {GlobalStyle} from "./global/globalStyle";
+import DefaultThemeConfig from "./global/DefaultThemeConfig";
+import {GreenThemeConfig, IThemeConfig} from "@frontend/mobile/shared/ui";
 
 interface IAppThemeProvider {
-  theme?: any;
+  theme?: IThemeConfig;
   children: JSX.Element | JSX.Element[];
 }
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: Rubik;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background: #f9fafc;
-  }
-`;
 export const AppThemeProvider = (props: IAppThemeProvider) => {
   return (
-    <ThemeProvider theme={props.theme ? props.theme : theme}>
+    <ThemeProvider theme={props.theme || GreenThemeConfig}>
       <GlobalStyle />
       {props.children}
     </ThemeProvider>

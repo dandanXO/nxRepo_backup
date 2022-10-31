@@ -20,7 +20,7 @@ const Popup = styled('div')<PopupProps>`
   border-radius: 5px;
   /* Background */
   /* background: rgba(45, 59, 88, 0.85); */
-  background: ${(props) => props.theme.custom.background.primary};
+  background: ${(props) => props.theme.color.white};
   /* Padding */
   /* Content */
   max-height: 90vh;

@@ -1,6 +1,6 @@
-import { theme } from "@frontend/mobile/shared/ui";
+import { DefaultThemeConfig } from "@frontend/mobile/shared/ui";
 
-const { color } = theme;
+const { color } = DefaultThemeConfig;
 
 const recordStatusStyleProps: {
     [key: string]: object;

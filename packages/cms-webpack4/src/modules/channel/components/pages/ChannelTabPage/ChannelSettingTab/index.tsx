@@ -20,13 +20,18 @@ import {useFormModal} from "../ChannelSettingTagTab/useFormModal";
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;
+
 }
 const i18n = {
     "ChannelSettingTabPage": {
         add: "添加渠道",
     }
 }
-export const ChannelSettingTabPage = () => {
+interface ChannelSettingTabPageProps {
+    active: boolean;
+}
+export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
+
     // NOTICE: Action: List
     // NOTE: Table
     const [columns, setColumns] = useState<ProColumns<ChannelListItemVO>[]>()
@@ -144,8 +149,11 @@ export const ChannelSettingTabPage = () => {
     }, [])
 
     useEffect(() => {
-        userBrowseAndSearchAllItemsUseCase({})
-    }, []);
+        if(props.active) {
+            triggerGetAllChannelSettingTagDropMenu(null);
+            userBrowseAndSearchAllItemsUseCase({})
+        }
+    }, [props.active]);
 
 
     // NOTE: GET list and item

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import theme from '../config/theme';
+import DefaultThemeConfig from '../global/DefaultThemeConfig';
 
-const { color } = theme;
+const { color } = DefaultThemeConfig;
 
 const tagStatusProps: {
   [key: string]: object;

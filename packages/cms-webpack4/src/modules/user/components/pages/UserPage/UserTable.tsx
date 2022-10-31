@@ -26,7 +26,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const [deleteUser, { isSuccess: isDeteleUserSuccess, isLoading: isUserDeleting, }] = useDeleteUserMutation();
     const [banUser, { isSuccess: isBanUserSuccess }] = usePostUserBanMutation();
     const [releaseUser, { isSuccess: isReleaseUserSuccess }] = usePostUserBanReleaseMutation();
-    const [importTelSale] = usePostTelSaleMutation();
+    const [importTelSale,{isSuccess:isImportTelSaleSuccess}] = usePostTelSaleMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
         addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
@@ -86,7 +86,9 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             phoneNo:searchList.phoneNo,
             riskRank:searchList.riskRank,
             status:searchList.status,
-        })
+        }).unwrap()
+        .then((payload) => modal.success({ title: "您选择的笔数已全数成功导入电销", content: "详情请至电销分配页面查看", okText: "确定" }))
+        .catch((error) => {})
     }
 
     const [deleteModal, deleteContextHolder] = Modal.useModal();
@@ -126,6 +128,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             title: '操作',
             valueType: 'option',
             key: 'option',
+            align: 'left',
             render: (text, record, _, action) => {
                 const optionCheck = [<a key="editable" onClick={() => handleToUserDetail(record.id)} >查看</a>];
                 const optionClear = [<a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>];

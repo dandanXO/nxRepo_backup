@@ -3,7 +3,7 @@ import Button from './lib/components/Button';
 import Card from './lib/components/Card';
 import CardContent from './lib/components/CardContent';
 import Checkbox from './lib/components/Checkbox';
-import theme from './lib/components/config/theme';
+import DefaultThemeConfig from './lib/components/global/DefaultThemeConfig';
 import Divider from './lib/components/Divider';
 import Form from './lib/components/Form';
 
@@ -27,6 +27,10 @@ import { NotificationButton } from './lib/components/Modal/DefaultButtons';
 import { RepayICON } from './lib/components/Icon/Icon';
 import StyledLoading from './lib/Loading';
 import type { InputValue } from './lib/types/InputValue';
+import { IThemeConfig } from './lib/components/global/types/IThemeConfig';
+import { Colors } from './lib/components/global/Colors';
+import { fontSizeListToRem } from './lib/components/global/fontSize';
+import {GreenThemeConfig} from "./lib/components/global/skin/green/GreenThemeConfig";
 
 export {
   StyledLoading,
@@ -38,7 +42,13 @@ export {
   Card,
   CardContent,
   Checkbox,
-  theme,
+  DefaultThemeConfig,
+
+  IThemeConfig,
+  Colors,
+  fontSizeListToRem,
+  GreenThemeConfig,
+
   Divider,
   Form,
   ListItem,
