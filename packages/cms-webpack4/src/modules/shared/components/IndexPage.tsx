@@ -37,6 +37,9 @@ export function IndexPage() {
         <div>
             <Link to="/app-manage"><a> App Manage</a></Link>
         </div>
+        <div>
+            <Link to="/config-manage"><a> Config Manage</a></Link>
+        </div>
     </div>
   );
 }
