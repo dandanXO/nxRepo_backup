@@ -1,12 +1,13 @@
 import {Colors} from "./Colors";
 import {fontSizeListToRem} from "./fontSize";
+import {IThemeConfig} from "./types/IThemeConfig";
 
-const defaultThemeConfig = {
-  // Commons
+const defaultThemeConfig: IThemeConfig = {
+  // NOTE: Commons
   color: Colors,
   fontSize: fontSizeListToRem,
 
-  // Component - button
+  // NOTE: Component - button
   button: {
     primary: {
       main: Colors.orange,
@@ -17,10 +18,9 @@ const defaultThemeConfig = {
       text: Colors.orange,
     },
     link: {
-      main: 'none',
+      main: Colors.none,
       text: Colors.gray500,
     },
   },
-
-};
+}
 export default defaultThemeConfig;
