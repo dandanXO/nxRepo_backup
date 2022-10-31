@@ -14,7 +14,10 @@ import {ChannelTagVO} from "../../../../domain/vo/ChannelTagVO";
 import {useFormModal} from "./useFormModal";
 import {ChannelSettingTagFormModal} from "./ChannelSettingTagFormModal";
 
-export const ChannelSettingTagTabPage = () => {
+interface ChannelSettingTagTabPageProps {
+    active: boolean;
+}
+export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) => {
 
     // NOTICE: Action: List
     // NOTE: Table
@@ -114,8 +117,8 @@ export const ChannelSettingTagTabPage = () => {
     });
 
     useEffect(() => {
-        userBrowseAllChannelSettingsUsecase()
-    }, []);
+        if(props.active) userBrowseAllChannelSettingsUsecase()
+    }, [props.active]);
 
     // NOTE: User use FormAutoComplete
     // const userUseFormAutoCompleteUseCase = useCallback(() => {
