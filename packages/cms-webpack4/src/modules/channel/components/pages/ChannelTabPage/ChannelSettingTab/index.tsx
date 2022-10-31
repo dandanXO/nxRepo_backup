@@ -46,7 +46,7 @@ export const ChannelSettingTabPage = () => {
         const fields = form.getFieldsValue();
         // console.log(form.getFieldsValue() )
 
-        if(fields.publishId === "全部") {
+        if(fields.publishId === "全部" || fields.publishId === "0") {
             fields.publishId = ""
         }
         // transform enable
