@@ -35,12 +35,15 @@ pnpm add -g nx
 ```shell
 # Run App
 # nx serve [APP Name]
-
 # Run mobile app
 nx serve mobile
 
-# Run admin app
-nx serve admin
+# Run Admin app
+cd packages/dlh-web
+npm run start
+
+cd packages/cms-webpack4
+npm run webpack:dev
 ```
 
 #### Storybook
@@ -48,18 +51,20 @@ nx serve admin
 ```shell
 # Generating Storybook Configuration
 nx g @nrwl/react:storybook-configuration [project-name]
+```
 
+```shell
 # Storybook
 # nx storybook [APP Name]
 
 # Storybook mobile app
 nx storybook mobile
 
-# Storybook admin app
-nx storybook admin
-
 # Storybook lib: shared-ui
 nx storybook mobile-shared-ui
+
+# Storybook admin app
+
 ```
 
 #### Lint
