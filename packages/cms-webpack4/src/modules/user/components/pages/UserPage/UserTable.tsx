@@ -128,6 +128,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             title: '操作',
             valueType: 'option',
             key: 'option',
+            align: 'left',
             render: (text, record, _, action) => {
                 const optionCheck = [<a key="editable" onClick={() => handleToUserDetail(record.id)} >查看</a>];
                 const optionClear = [<a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>];
