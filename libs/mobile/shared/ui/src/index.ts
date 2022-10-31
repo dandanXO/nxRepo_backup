@@ -3,7 +3,7 @@ import Button from './lib/components/Button';
 import Card from './lib/components/Card';
 import CardContent from './lib/components/CardContent';
 import Checkbox from './lib/components/Checkbox';
-import theme from './lib/components/config/theme';
+import defaultThemeConfig from './lib/components/global/DefaultThemeConfig';
 import Divider from './lib/components/Divider';
 import Form from './lib/components/Form';
 
@@ -38,7 +38,7 @@ export {
   Card,
   CardContent,
   Checkbox,
-  theme,
+  defaultThemeConfig,
   Divider,
   Form,
   ListItem,

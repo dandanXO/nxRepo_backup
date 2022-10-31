@@ -3,7 +3,7 @@ import React from 'react';
 import { flexCreator } from '../utils';
 
 const CardStyled = styled.div`
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
   font-size: ${({ theme }) => theme.fontSize[16]};
   position: relative;
   border-radius: 8px;

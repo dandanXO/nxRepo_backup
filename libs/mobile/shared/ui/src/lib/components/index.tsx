@@ -1,23 +1,15 @@
 import React from 'react';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import theme from './config/theme';
+import {ThemeProvider} from 'styled-components';
+import defaultThemeConfig from './global/DefaultThemeConfig';
+import {GlobalStyle} from "./global/globalStyle";
 
 interface IAppThemeProvider {
   theme?: any;
   children: JSX.Element | JSX.Element[];
 }
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: Rubik;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background: #f9fafc;
-  }
-`;
 export const AppThemeProvider = (props: IAppThemeProvider) => {
   return (
-    <ThemeProvider theme={props.theme ? props.theme : theme}>
+    <ThemeProvider theme={props.theme ? props.theme : defaultThemeConfig}>
       <GlobalStyle />
       {props.children}
     </ThemeProvider>

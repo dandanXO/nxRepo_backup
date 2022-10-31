@@ -51,7 +51,28 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Button> = (args) => (
   <AppThemeProvider>
-    <Button {...args}>Confirm</Button>
+    {/*<Button {...args}>Confirm</Button>*/}
+    <div>
+      <div>small</div>
+      <Button styleType={"primary"} size={"small"}>Confirm</Button>
+      <Button styleType={"secondary"} size={"small"}>Confirm</Button>
+      <Button styleType={"link"} size={"small"}>Confirm</Button>
+    </div>
+
+    <div>
+      <div>normal</div>
+      <Button styleType={"primary"}>Confirm</Button>
+      <Button styleType={"secondary"}>Confirm</Button>
+      <Button styleType={"link"}>Confirm</Button>
+    </div>
+
+    <div>
+      <div>large</div>
+      <Button styleType={"primary"} size={"large"}>Confirm</Button>
+      <Button styleType={"secondary"} size={"large"}>Confirm</Button>
+      <Button styleType={"link"} size={"large"}>Confirm</Button>
+    </div>
+
   </AppThemeProvider>
 );
 

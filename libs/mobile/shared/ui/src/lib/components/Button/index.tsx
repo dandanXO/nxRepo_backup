@@ -13,12 +13,12 @@ interface buttonPropsStyle {
 export default styled.button<buttonPropsStyle>`
   color: ${(props) =>
     props.styleType
-      ? props.theme[props.styleType].text
+      ? props.theme.button[props.styleType].text
       : props.theme.color.white};
   background: ${(props) =>
     props.styleType
-      ? props.theme[props.styleType].main
-      : props.theme.primary.main};
+      ? props.theme.button[props.styleType].main
+      : props.theme.color.orange};
   padding: ${(props) =>
     props.styleType === 'link'
       ? 0
