@@ -329,6 +329,11 @@ export const ChannelSettingTabPage = () => {
         triggerGetList: null,
         triggerPost: triggerPostTag,
         triggerPut: null,
+        formSuccessCallback: () => {
+            setTimeout(() => {
+                triggerGetAllChannelSettingTagDropMenu(null);
+            }, 2000)
+        }
     })
 
     return (
@@ -377,7 +382,6 @@ export const ChannelSettingTabPage = () => {
                 setShowModalContent={setShowTagModalContent}
                 onModalOk={() => {
                     onTagModalOk();
-                    triggerGetAllChannelSettingTagDropMenu(null);
                 }}
                 onCloseModal={onCloseTagModal}
                 form={tagForm}

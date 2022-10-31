@@ -11,9 +11,10 @@ export interface FormModalHookProps {
     setShowModalContent: (any) => void;
     editID: number;
     form: FormInstance;
-    triggerGetList: (any) => void;
+    triggerGetList?: (any) => void;
     triggerPost: (any) => void;
     triggerPut: (any) => void;
+    formSuccessCallback?: () => void;
 }
 
 export const useFormModal = (props: FormModalHookProps) => {
@@ -92,7 +93,9 @@ export const useFormModal = (props: FormModalHookProps) => {
             })
 
             // Reset TableList
-            props.triggerGetList(null);
+            props.triggerGetList && props.triggerGetList(null);
+
+            props.formSuccessCallback && props.formSuccessCallback();
 
         })
     }, [props.showModalContent.isEdit, props.editID])
