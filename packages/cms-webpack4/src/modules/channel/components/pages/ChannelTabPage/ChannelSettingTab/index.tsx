@@ -46,6 +46,9 @@ export const ChannelSettingTabPage = () => {
         const fields = form.getFieldsValue();
         // console.log(form.getFieldsValue() )
 
+        if(fields.publishId === "全部") {
+            fields.publishId = ""
+        }
         // transform enable
         fields.enabled = {
             "all": "",
@@ -61,9 +64,31 @@ export const ChannelSettingTabPage = () => {
         userBrowseAndSearchAllItemsUseCase({});
     }, [])
 
+    const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData, isLoading: isLoadingAllChannelSettingTagDropMenuData, isFetching: isFetchingAllChannelSettingTagDropMenuData }] = useLazyGetAllChannelSettingTagDropMenuQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+    useEffect(() => {
+        triggerGetAllChannelSettingTagDropMenu(null);
+    }, [])
+
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
-    const systemInitalizeListUsecase = useCallback(() => {
+    const systemInitalizeListUseCase = useCallback(() => {
+        const publishNameTags = {
+            "0": {
+                status: "Default",
+                text: "全部"
+            }
+        }
+        allChannelSettingTagDropMenuData.map((item) => {
+            publishNameTags[item.id] = {
+                status: "Default",
+                text: item.name,
+            }
+        });
+
         const columns: ProColumns<ChannelListItemVO>[] = [
             {
                 key: 'option',
@@ -87,7 +112,14 @@ export const ChannelSettingTabPage = () => {
             { key: 'downloadLink', title: '渠道链接', dataIndex: 'url', initialValue: "", hideInSearch: true, ellipsis: true, copyable: true},
             { key: 'modelName', title: '风控方案', dataIndex: 'modelName', initialValue: "" },
             { key: 'appName', title: '包名', dataIndex: 'appName', initialValue: "" },
-            { key: 'publishName', title: '配置标签', dataIndex: 'publishName', initialValue: "" },
+            { key: 'publishId', title: '配置标签', dataIndex: 'publishId', hideInTable: true,
+                valueType: 'select',
+                initialValue: publishNameTags["0"].text,
+                valueEnum: publishNameTags
+            },
+            {
+                key: 'publishName', title: '配置标签', dataIndex: 'publishName', hideInSearch: true,
+            },
             {
                 key: 'enabledTag',
                 title: '状态', dataIndex: 'enabledTag', valueType: 'select',
@@ -100,11 +132,11 @@ export const ChannelSettingTabPage = () => {
             },
         ];
         setColumns(columns);
-    }, []);
+    }, [allChannelSettingTagDropMenuData]);
 
     useEffect(() => {
-        systemInitalizeListUsecase();
-    }, [])
+        if(allChannelSettingTagDropMenuData) systemInitalizeListUseCase();
+    }, [allChannelSettingTagDropMenuData])
 
     // NOTE: User browse AllItemsUsecase
     const userBrowseAndSearchAllItemsUseCase = useCallback((query) => {
@@ -140,11 +172,7 @@ export const ChannelSettingTabPage = () => {
         refetchOnReconnect: false
     });
 
-    const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData, isLoading: isLoadingAllChannelSettingTagDropMenuData, isFetching: isFetchingAllChannelSettingTagDropMenuData }] = useLazyGetAllChannelSettingTagDropMenuQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
+
 
 
     // NOTE: User add Item
