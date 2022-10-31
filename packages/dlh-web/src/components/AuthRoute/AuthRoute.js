@@ -45,8 +45,13 @@ class AuthRoute extends Component {
                   // 用戶管理
                   if(menuItem.actionUrl === "/userManage") {
                     menuItem.children.map(level2MenuItem => {
+                      // 用戶管理
                       if(level2MenuItem.actionUrl === "/userInfoManage") {
                         level2MenuItem.actionUrl = "/cms/user";
+                      }
+                      // 用戶終審
+                      if(level2MenuItem.actionUrl === "/userLastCheck") {
+                        level2MenuItem.actionUrl = "/cms/user-review";
                       }
                       // 黑名單
                       if(level2MenuItem.actionUrl === "/blackListManage") {
