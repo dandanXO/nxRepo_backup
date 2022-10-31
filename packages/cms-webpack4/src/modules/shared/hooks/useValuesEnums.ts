@@ -1,4 +1,5 @@
 import {useGetChannelListQuery} from "../api/channelListApi";
+import { useGetOperatorListQuery } from "../api/operatorListApi";
 import {useEffect, useState} from "react";
 
 const useValuesEnums = () => {
@@ -9,10 +10,20 @@ const useValuesEnums = () => {
     useEffect(() => {
         const channelList = currentData && currentData?.reduce((prev, curr) => {
             return { ...prev, ...{ [curr.channelId]: { text: curr.name } } }
-        }, { '': { text: '不限' } });
-        setChannelListEnum(channelList)
+        }, {});
+        setChannelListEnum({ ...channelList, '': { text: '不限' } })
     }, [isSuccess])
 
+
+    const { currentData:operatorListData, isSuccess:isOperatorListDataSuccess } = useGetOperatorListQuery(null);
+    const [operatorListEnum, setOperatorListEnum] = useState(null)
+
+    useEffect(() => {
+        const operatorList = operatorListData && operatorListData?.reduce((prev, curr) => {
+            return { ...prev, ...{ [curr.id]: { text: curr.name } } }
+        }, {});
+        setOperatorListEnum({ ...operatorList, '': { text: '不限' } })
+    }, [isOperatorListDataSuccess])
 
     // 风控标签
     const riskRankEnum = {
@@ -25,7 +36,7 @@ const useValuesEnums = () => {
     }
 
 
-    return { channelListEnum, riskRankEnum }
+    return { channelListEnum, riskRankEnum, operatorListEnum }
 }
 
 export default useValuesEnums;

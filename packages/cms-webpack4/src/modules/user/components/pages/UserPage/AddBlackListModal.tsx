@@ -26,8 +26,8 @@ const AddBlackListModal = ((props: AddBlackLisModalProps) => {
         >
             {/* <Spin spinning={isEdit ? isMerchantEditing : isMerchantCreating}> */}
             <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} initialValues={{ refundReason: "" }}>
-                <Form.Item name="refundReason" label="备注" rules={[{ required: true }]} extra="提醒您，备注提交后即不可再修改">
-                    <Input.TextArea allowClear rows={8} />
+                <Form.Item name="refundReason" label="备注" rules={[{ required: true }]} >
+                    <Input.TextArea allowClear rows={8} placeholder="提醒您，备注提交后即不可再修改"/>
                 </Form.Item>
             </Form>
             {/* </Spin> */}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
-import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../../../api/MerchantApi";
+import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../../../service/merchant/MerchantApi";
 import { Form } from "antd";
 import MerchantModal from './MerchantModal';
 import MerchantTable from './MerchantTable';

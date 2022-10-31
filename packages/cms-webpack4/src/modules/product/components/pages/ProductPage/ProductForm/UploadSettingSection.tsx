@@ -6,7 +6,7 @@ const { Option } = Select;
 
 export function UploadSettingSection() {
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
   return <>
     <Divider orientation="left">上架设定</Divider>

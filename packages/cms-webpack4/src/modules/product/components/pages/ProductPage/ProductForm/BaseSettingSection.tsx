@@ -1,11 +1,11 @@
 import {Form, Input, UploadFile} from "antd";
 import React from "react";
 import { Select } from 'antd'
-import {GetAvailableMerchantResponse} from "../../../../api/types/getAvailbaleMerchant";
+import {GetAvailableMerchantResponse} from "../../../../service/product/response/getAvailableMerchantResponse";
 const { Option } = Select
 
 interface BaseSettingSectionProps {
-  merchantList?: GetAvailableMerchantResponse;
+  merchantList?: GetAvailableMerchantResponse[];
   isEdit: boolean;
 }
 const BaseSettingSection = (props: BaseSettingSectionProps) => {
@@ -17,7 +17,6 @@ const BaseSettingSection = (props: BaseSettingSectionProps) => {
       <Form.Item name="merchantId" label="商户名" rules={[{ required: true }]} >
           <Select
               placeholder="商户名"
-              // onChange={this.onGenderChange}
               allowClear
           >
               {props?.merchantList?.map((i) => <Option key={i.merchantId} value={i.merchantId}>{i.name}</Option>)}

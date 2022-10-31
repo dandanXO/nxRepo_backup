@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
+import { Button, Form, InputNumber, Modal, Radio, Space,Tag } from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
-import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation } from '../../../api/UserApi';
+import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation,usePostUserBanReleaseMutation } from '../../../api/UserApi';
 import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
@@ -24,14 +24,18 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         refetchOnReconnect: false
     });
     const [deleteUser, { isSuccess: isDeteleUserSuccess, isLoading: isUserDeleting, }] = useDeleteUserMutation();
-    const [banUser] = usePostUserBanMutation();
+    const [banUser, { isSuccess: isBanUserSuccess }] = usePostUserBanMutation();
+    const [releaseUser, { isSuccess: isReleaseUserSuccess }] = usePostUserBanReleaseMutation();
     const [importTelSale] = usePostTelSaleMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
         addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
         noLoanAgainEndDays: 10, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", status: "", pageNum: 1, pageSize: 10
     }
-
+    // redux
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const { searchParams } = useSelector(selectSearchParams);
     // state
     const [userList, setUserList] = useState<GetUerListProps>({ records: [] });
     const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
@@ -40,21 +44,17 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const [modal, contextHolder] = Modal.useModal();
 
 
-    // redux
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const { searchParams } = useSelector(selectSearchParams);
-
-
     useEffect(() => {
         if (Object.keys(searchParams).length > 0) {
             setSearchList(searchParams);
+            setIsNoLoanAgain(searchParams.noLoanAgain === "true" ? true : false);
+            setIsImportTelSale(searchParams.noLoanAgain === "true" ? true : false);
         }
     }, [])
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList, isUserDeleting])
+    }, [searchList, isUserDeleting,isBanUserSuccess,isReleaseUserSuccess])
 
     useEffect(() => {
         if (currentData !== undefined) {
@@ -94,19 +94,49 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const handleDeleteUser=(id)=>{
         deleteModal.confirm({content:"确认要清除该用户信息吗？", onOk() { deleteUser({ userId: Number(id) }) } });
     }
-    const handleBanUser=(id)=>{
-        banModal.confirm({content:"确认要禁止该用户登录吗？", onOk() {  banUser({ userId: Number(id) }) } });
+    const handleBanUser = (id) => {
+        banModal.confirm({
+            title: "确认要禁止该用户登入吗？",
+            content: "禁止用户登入后仍可以解禁",
+            onOk() { banUser({ userId: Number(id) }) }
+        });
     }
+
+    const handleReleaseUser = (id) => {
+        banModal.confirm({
+            title: "确认要解除该用户禁止登入吗？",
+            content: "用户解禁后将回到黑名单状态",
+            onOk() { releaseUser({ userId: Number(id) }) }
+        });
+    }
+
+    const statusEnum = {
+        '': { text: '不限' },
+        '0': { text: '未注册', color: 'orange' },
+        '4': { text: '黑名单', color: 'default' },
+        '13': { text: '禁止登入', color: 'default' },
+        '14': { text: '认证通过', color: 'success' },
+        '18': { text: '终审中', color: 'purple' },
+        '19': { text: '审核拒绝', color: 'error' },
+        '20': { text: '审核通过', color: 'processing' },
+    };
+    
     const columns: ProColumns<UserListContent>[] = [
         {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => record.status !== 4 ?
-                [<a key="editable" onClick={()=>handleToUserDetail(record.id)} >查看</a>, <a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>] :
-                [<a key="editable" type="link" onClick={()=>handleToUserDetail(record.id)} >查看</a>,
-                <a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>,
-                <a key="forbidden" onClick={() => handleBanUser(record.id)}>禁止</a>]
+            render: (text, record, _, action) => {
+                const optionCheck = [<a key="editable" onClick={() => handleToUserDetail(record.id)} >查看</a>];
+                const optionClear = [<a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>];
+                const optionRelease = [<a key="forRelease" onClick={() => handleReleaseUser(record.id)}>解禁</a>];
+                const optionBan = [<a key="forbidden" onClick={() => handleBanUser(record.id)}>禁止</a>];
+                const optionBlackList = [<a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>];
+                return record.status === 4 ? [...optionCheck, ...optionClear, ...optionBan] :
+                       record.status === 13 ? [...optionCheck, ...optionClear, ...optionRelease] :
+                       [...optionCheck, ...optionBlackList]
+            }
+
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || ""},
         { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: searchParams.nameTrue || ""  },
@@ -124,14 +154,10 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         },
         {
             title: '用户状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
-            valueEnum: {
-                '': { text: '不限' },
-                '0': { text: '未提交' },
-                '4': { text: '黑名单' },
-                '14': { text: '认证通过' },
-                '18': { text: '终审中' },
-                '19': { text: '审核拒绝' },
-                '20': { text: '审核通过' },
+            valueEnum:statusEnum,
+            render: (text, { status }) => {
+                const tagStatus = statusEnum[status] || { color: '', text: '' };
+                return <Tag color={tagStatus.color}>{tagStatus.text}</Tag>;
             },
         },
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
@@ -150,11 +176,13 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             colSize: 6,
             hideInTable: true,
             renderFormItem: (text, { }, form) => {
-                return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain:searchParams.noLoanAgain || isNoLoanAgain }} >
-                    <Radio.Group value={isNoLoanAgain} onChange={({ target: { value } }) => setIsNoLoanAgain(value)} >
-                        <Radio.Button value={true}>是</Radio.Button>
-                        <Radio.Button value={false}>否</Radio.Button>
-                    </Radio.Group>
+                return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain: searchParams.noLoanAgain || isNoLoanAgain }}>
+                    <Form.Item>
+                        <Radio.Group value={isNoLoanAgain} onChange={({ target: { value } }) => setIsNoLoanAgain(value)} >
+                            <Radio.Button value={true}>是</Radio.Button>
+                            <Radio.Button value={false}>否</Radio.Button>
+                        </Radio.Group>
+                    </Form.Item>
                 </Form>
             }
         },
@@ -218,7 +246,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                                 }
                             
                                 setIsImportTelSale(noLoanAgain === "true" ? true : false)
-              
+                                setIsNoLoanAgain(noLoanAgain === "true" ? true : false);
                                 setSearchList({
                                     ...searchList,
                                     addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',

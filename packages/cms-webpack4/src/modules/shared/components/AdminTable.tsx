@@ -29,6 +29,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     onAddCallback?: () => void;
     isSearchFromClient?: boolean;
     onFormSearchCallback?: (form: FormInstance) => void;
+    onFormResetCallback?: () => void;
 }
 export const AdminTable = <TableListItemDataType,>({
                                                        tableHeaderColumns,
@@ -43,6 +44,7 @@ export const AdminTable = <TableListItemDataType,>({
                                                        onAddCallback,
                                                        isSearchFromClient = true,
                                                        onFormSearchCallback,
+                                                       onFormResetCallback,
 }: AdminTableTemplateProps<TableListItemDataType>) => {
     // NOTE: actionRef
     // const actionRef = useRef<ActionType>();
@@ -83,6 +85,7 @@ export const AdminTable = <TableListItemDataType,>({
                     <Button onClick={() => {
                         form.resetFields();
                         setCachedDatasource(tableDatasource);
+                        onFormResetCallback();
                     }}>
                         {resetText}
                     </Button>
@@ -137,7 +140,7 @@ export const AdminTable = <TableListItemDataType,>({
             }}
             // dateFormatter="string"
             dateFormatter={(value, valueType) => {
-                console.log('====>', value, valueType);
+                // console.log('====>', value, valueType);
                 return value.format('YYYY-MM-DD HH:mm:ss');
             }}
             // NOTE: Unknow

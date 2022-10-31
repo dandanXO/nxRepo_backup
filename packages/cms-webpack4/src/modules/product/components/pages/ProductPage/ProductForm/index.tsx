@@ -1,5 +1,4 @@
 import {ProductFormModal} from "../hooks/useProductFormModal";
-import { GetAvailableMerchantResponse } from "../../../../api/types/getAvailbaleMerchant";
 import React, {useCallback, useEffect, useState} from "react";
 import { Form } from "antd";
 import BaseSettingSection from "./BaseSettingSection";
@@ -8,12 +7,13 @@ import LoanSettingSection from "./LoanSettingSection";
 import RateSettingSection from "./RateSettingSection";
 import { UploadSettingSection } from "./UploadSettingSection";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import {GetAvailableMerchantResponse} from "../../../../service/product/response/getAvailableMerchantResponse";
 
 interface ProductFormProps {
     productModalData: ProductFormModal;
     onFinish: (value: any) => void;
     form: any;
-    merchantList: GetAvailableMerchantResponse;
+    merchantList: GetAvailableMerchantResponse[];
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     show: boolean;
@@ -64,12 +64,12 @@ const Index = (props: ProductFormProps) => {
             {...layout} form={form} name="control-hooks" onFinish={onFinish}
             onFieldsChange={(changedFields, allFields) => {
                 if(changedFields[0].name[0] ==="firstLoanQuotaSwitch") {
-                    console.log("changedFields", changedFields[0].value);
+                    // console.log("changedFields", changedFields[0].value);
                     props.setEnableLoanAmount(changedFields[0].value === 0)
                 }
 
                 if(changedFields[0].name[0] ==="reLoanQuotaSwitch") {
-                    console.log("changedFields", changedFields[0].value);
+                    // console.log("changedFields", changedFields[0].value);
                     props.setEnableReLoanAmount(changedFields[0].value === 0)
                 }
 

@@ -28,6 +28,18 @@ export function IndexPage() {
         <div>
             <Link to="/channel"><a> Channel</a></Link>
         </div>
+        <div>
+            <Link to="/whitelist"><a> WhiteList</a></Link>
+        </div>
+        <div>
+            <Link to="/blacklist"><a> BlackList</a></Link>
+        </div>
+        <div>
+            <Link to="/app-manage"><a> App Manage</a></Link>
+        </div>
+        <div>
+            <Link to="/config-manage"><a> Config Manage</a></Link>
+        </div>
     </div>
   );
 }

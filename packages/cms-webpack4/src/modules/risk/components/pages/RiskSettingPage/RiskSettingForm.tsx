@@ -3,9 +3,9 @@ import React, {CSSProperties} from "react";
 import TextArea from "antd/es/input/TextArea";
 
 import {NumberValidator} from "../../../../shared/utils/validation/validator";
-import {RiskModelMenu} from "../../../api/RiskApi";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {Store} from "antd/es/form/interface"
+import {RiskModelMenu} from "../../../domain/vo/RiskModelMenu";
 interface RiskSettingFormProps {
     isEdit: boolean;
     id?: number;
@@ -28,8 +28,10 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
             onFieldsChange={props.onFieldsChange}
             onFinish={props.onFinish}
         >
-            <Form.Item label="风控名称" name="modelName" rules={[{ required: true }]}>
-                <Input placeholder="风控名称"/>
+            <Form.Item label="风控名称" name="modelName" rules={[{ required: true }]}
+                       extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
+            >
+                <Input placeholder="风控名称" disabled={props.isEdit}/>
             </Form.Item>
 
             <Form.Item label={"風控应用"} name="riskModelName" rules={[{ required: true }]}>
@@ -138,6 +140,13 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                         </Form.Item>
                     )
                 })}
+            </Form.Item>
+
+            <Form.Item label={"放款笔数"} name="useRcQuota" required>
+                <Radio.Group>
+                    <Radio value={true}>依照风控</Radio>
+                    <Radio value={false}>系统规则</Radio>
+                </Radio.Group>
             </Form.Item>
 
             <Form.Item label={"状态"} name={"enabled"} valuePropName={"checked"}>

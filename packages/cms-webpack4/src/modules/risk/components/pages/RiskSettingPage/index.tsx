@@ -1,21 +1,21 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import AdminPage from "../../../../shared/components/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
-import {GetProductListResponseProduct} from "../../../../product/api/types/getProductList";
+import {GetProductListResponseProduct} from "../../../../product/service/product/domain/getProductList";
 import {
-    GetRiskManageResponse,
-    MssRiskRankVo,
-    RiskManageList,
     useLazyGetRiskManageListQuery,
     useLazyGetRiskManageQuery,
     useLazyGetRiskModelMenuQuery,
     usePostRiskManageCreateMutation,
     usePutRiskManageCreateMutation
-} from "../../../api/RiskApi";
+} from "../../../service/RiskApi";
 import {useForm} from "antd/es/form/Form";
 import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
 import RiskSettingForm from "./RiskSettingForm";
 import RiskSettingModal from "./RiskSettingModal";
+import {GetRiskManageResponse} from "../../../service/response/GetRiskManageResponse";
+import {RiskManageList} from "../../../domain/vo/RiskManageList";
+import {MssRiskRankVo} from "../../../domain/vo/MssRiskRankVo";
 
 export type FormResponseData = GetRiskManageResponse;
 
@@ -56,7 +56,7 @@ export const RiskSettingPage = () => {
                 render: (text, record, _, action) => {
                     return [
                         <a key="editable" onClick={() => {
-                            console.log("record", record);
+                            // console.log("record", record);
                             setEditID(record.id);
                             setShowModalContent({
                                 show: true,
@@ -106,7 +106,6 @@ export const RiskSettingPage = () => {
     // NOTE: autoComplete
     const onAutoCompleteTemplate = useCallback(() => {
         const mockRequest = {
-            enabled: true,
             firstLoan: [
                 {providerRank: 'A', loanCount: '4000'},
                 {providerRank: 'B', loanCount: '3000'},
@@ -124,6 +123,8 @@ export const RiskSettingPage = () => {
                 {providerRank: 'E', loanCount: '0'},
             ],
             riskModelName: 1,
+            useRcQuota: true,
+            enabled: true,
         }
         form.setFieldsValue(mockRequest)
     }, [form])
@@ -145,6 +146,7 @@ export const RiskSettingPage = () => {
     const initialValues = useMemo(() => {
         // NOTICE: select and switch need initialValue if you want to select one
         return {
+            useRcQuota: true,
             enabled: true,
         } as DeepPartial<FormResponseData>;
     }, [])
@@ -197,6 +199,7 @@ export const RiskSettingPage = () => {
             riskModelName: id,
             firstLoan: currentFormData.firstLoan,
             repeatLoan: currentFormData.repeatLoan,
+            useRcQuota: currentFormData.useRcQuota,
             enabled: currentFormData.enabled,
             remark: currentFormData.remark,
         })
@@ -267,20 +270,17 @@ export const RiskSettingPage = () => {
         // NOTE: Edit
         if(isEdit) {
             fields["modelId"] = modelId;
+            delete fields.modelName;
         }
         // console.log("fields.after", fields);
 
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPostRisk : triggerPutRisk;
-        console.log("triggerAPI", !showModalContent.isEdit ? "triggerPostRisk" : "triggerPutRisk");
+        // console.log("triggerAPI", !showModalContent.isEdit ? "triggerPostRisk" : "triggerPutRisk");
         // console.log("fields", fields);
-
-        // const errorModal = useErrorModal("ant4");
-        // console.log("errorModal", errorModal);
 
         // NOTE: Request
         triggerAPI(fields).unwrap().then((responseData) => {
-            // console.log("responseData", responseData);
             form.resetFields();
 
             triggerGetList(null);
@@ -289,36 +289,8 @@ export const RiskSettingPage = () => {
                 show: false,
                 isEdit: false,
             })
-
         })
-        // .catch((error) => {
-        // console.log("error");
-        // Modal.config({
-        //     rootPrefixCls: "ant4"
-        // })
-        // errorModal("JI");
-        // message.config({
-        //     prefixCls: "ant4"
-        // })
-        // errorModal("asdf")
-        // message.error("error.error")
-        // Modal.error({
-        //     title: "error.error"
-        // })
-        // errorModal({
-        //     title: "error.error1"
-        // })
-        // }).finally(() => {
-        //     console.log("finally");
-        // errorModal({
-        //     title: "error.error2"
-        // })
-        // Modal.error({
-        //     title: "12",
-        // })
-        // })
-
-    }, [editID, currentRiskMenuData])
+    }, [showModalContent.isEdit, editID, currentRiskMenuData])
 
     // NOTICE: Form.4 onFinishFailed
     const onFinishFailed = useCallback(() => {
