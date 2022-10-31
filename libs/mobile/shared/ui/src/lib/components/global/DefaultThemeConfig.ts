@@ -2,7 +2,7 @@ import {Colors} from "./Colors";
 import {fontSizeListToRem} from "./fontSize";
 import {IThemeConfig} from "./types/IThemeConfig";
 
-const defaultThemeConfig: IThemeConfig = {
+const DefaultThemeConfig: IThemeConfig = {
   // NOTE: Commons
   color: Colors,
   fontSize: fontSizeListToRem,
@@ -23,4 +23,4 @@ const defaultThemeConfig: IThemeConfig = {
     },
   },
 }
-export default defaultThemeConfig;
+export default DefaultThemeConfig;
