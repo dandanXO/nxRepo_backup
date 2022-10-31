@@ -101,6 +101,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
         dueDate,
         bankCardNo,
         chargeFeeDetail,
+        orderNo,
     } = props;
     return (
         <ExtesionDetailStyled>
@@ -111,11 +112,12 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                     sizeType={"small"}
                 />
             </div>
-            <div className="totalTitle">Amount Paid with Extension</div>
-            <div className="totalText">₹ {balance}</div>
+            <div className="totalTitle">Extension Fee</div>
+            <div className="totalText">₹ {extensionFee ? extensionFee : ""} </div>
             <Divider />
             <div className={"loanInfo-Card-Title"}>General</div>
             <div className={"loanInfo-Card-list"}>
+                <ListItem title={"No."} text={orderNo ? orderNo : ""} />
                 <ListItem
                     title={"State"}
                     text={
@@ -167,11 +169,11 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                     />
                 );
             })}
-            <div className={"loanInfo-Card-Title"}>Extension</div>
+            {/* <div className={"loanInfo-Card-Title"}>Extension</div>
             <ListItem
                 title={"Extension fee"}
                 text={extensionFee ? extensionFee : ""}
-            />
+            /> */}
             <Divider />
             <ListItem
                 title={"Original due date"}
@@ -181,7 +183,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                 title={"Extension Date"}
                 text={extendDate ? extendDate : ""}
             />
-            <ListItem title={"Due Date"} text={dueDate ? dueDate : ""} />
+            {/* <ListItem title={"Due Date"} text={dueDate ? dueDate : ""} /> */}
             <Divider />
             <div className={"loanInfo-Card-Title"}>Link account</div>
             <ListItem title={"Bank card"} text={bankCardNo ? bankCardNo : ""} />
