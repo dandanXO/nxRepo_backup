@@ -233,30 +233,41 @@ const Input: InputInterface = ({
   let CustomInput: any;
   let LabelComponentElement;
   let upperLabelType = false;
+
+  // NOTE: 版型 TOP
   if (labelType === 'top') {
     CustomInput = StyledTopInput;
     upperLabelType = true;
+
+    // NOTE: 無編輯中
     if (!isEdit) {
-      if (String(value).length > 0) {
-        LabelComponentElement = '';
-      } else {
+      if (String(value).length === 0) {
+        // NOTE: 編輯前
         LabelComponentElement = (
           <UpperFilledLabel htmlFor={labelID}>{label}</UpperFilledLabel>
         );
+      } else {
+        // NOTE: 編輯後
+        LabelComponentElement = (
+          <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
+        );
       }
     } else {
+      // NOTE: 編輯中
       LabelComponentElement = (
         <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
       );
     }
-    // }
+
   } else {
+    // NOTE: 版型 Right
+    CustomInput = StyledInput2;
+    upperLabelType = false;
+
     // right
     LabelComponentElement = (
       <RightDefaultLabel htmlFor={labelID}>{label}</RightDefaultLabel>
     );
-    CustomInput = StyledInput2;
-    upperLabelType = false;
   }
   // let isFocus = statusRef.current === "Focus" || statusRef.current === "KeyDown" ;
   return (
