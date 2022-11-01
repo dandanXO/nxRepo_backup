@@ -4,8 +4,8 @@
 // NOTE: [nx-environment] https://stackoverflow.com/questions/68926271/nx-react-inject-environment-variables-at-runtime
 export const environment = {
   production: false,
-  country: "in",
-  countryName: "india",
+  country: "pk",
+  countryName: "Pakistan",
 };
 
 // NOTE: [Environment Variables](https://nx.dev/reference/environment-variables)

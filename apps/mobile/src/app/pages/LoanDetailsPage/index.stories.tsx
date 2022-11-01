@@ -21,6 +21,7 @@ export const Page: ComponentStory<
                 handlePostRepayCreate={() => {
                     // do nothing.
                 }}
+                postLoanSubmitOrder={() => {}}
             />
         </AppThemeProvider>
     );
