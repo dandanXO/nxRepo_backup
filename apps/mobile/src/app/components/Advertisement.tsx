@@ -4,7 +4,6 @@ import { GetLoanDetailRecommendProducts } from "../api/getLoanDetail";
 import ProductDetailModal from "./modal/ProductDetailModal";
 import SubmitOrderModal from "./modal/SubmitOrderModal";
 import SubmitOrderSuccessModal from "./modal/SubmitOrderSuccessModal";
-import { usePostLoanSubmitOrderMutation } from "../api";
 import { PostLoanSubmitOrderRequestBody } from "../api/postLoanSubmitOrder";
 import { Card, CardContent, ListItem } from "@frontend/mobile/shared/ui";
 
@@ -92,6 +91,7 @@ const BannerWithCard = (props: BannerWithCardProps) => {
 };
 export interface AdvertisementProps {
     recommendProducts: [];
+    postLoanSubmitOrder: (obj: any) => any;
 }
 const Advertisement = (props: AdvertisementProps) => {
     const { recommendProducts = [] } = props;
@@ -101,17 +101,15 @@ const Advertisement = (props: AdvertisementProps) => {
     const [showSubmitOrderSuccessModal, setShowSubmitOrderSuccessModal] =
         useState(false);
 
-    const [postLoanSubmitOrder, { isLoading }] =
-        usePostLoanSubmitOrderMutation();
     const postLoanSubmitOrderRequest = useCallback(
-        (props: PostLoanSubmitOrderRequestBody) => {
-            postLoanSubmitOrder(props)
+        (requestBody: PostLoanSubmitOrderRequestBody) => {
+          props.postLoanSubmitOrder(requestBody)
                 .unwrap()
-                .then((data: Object) => {
+                .then(() => {
                     setShowSubmitOrdereModal(false);
                     setShowSubmitOrderSuccessModal(true);
                 })
-                .catch(({ error }) => {
+                .catch(({ }) => {
                     setShowSubmitOrdereModal(false);
                 })
                 .finally(() => {});
@@ -124,6 +122,7 @@ const Advertisement = (props: AdvertisementProps) => {
             productId: productId,
         });
     }, []);
+
     return (
         <div>
             <AdvertisementStyled>

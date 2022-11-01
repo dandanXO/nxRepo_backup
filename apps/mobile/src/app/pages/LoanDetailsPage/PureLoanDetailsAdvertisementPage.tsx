@@ -6,11 +6,14 @@ import PureLoanDetails, {
     PureLoanDetailsPageProps,
 } from "../../components/PureLoanDetails";
 
-type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps;
+type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps & {
+  postLoanSubmitOrder: (obj: any) => any;
+};
 
 export const PureLoanDetailsAdvertisementPage = (
     props: PureLoanDetailsAdvertisementPage
 ) => {
+
     return (
         <Page>
             <PureLoanDetails
@@ -22,6 +25,7 @@ export const PureLoanDetailsAdvertisementPage = (
             />
             <Advertisement
                 recommendProducts={props?.currentData?.recommendProducts}
+                postLoanSubmitOrder={props.postLoanSubmitOrder}
             />
         </Page>
     );
