@@ -23,7 +23,7 @@ const LoanInfo = ({userId}:UserId) => {
         }
     },[currentData])
 
-    
+
     const pageOnChange = (current, pageSize) => {
         setPagealbe({ ...pageable, pageNum: current, pageSize: pageSize })
     }
@@ -47,6 +47,7 @@ const LoanInfo = ({userId}:UserId) => {
                 '6': { text: '已结清', color: 'orange' },
                 '7': { text: '已展期', color: 'Default' },
             },
+            width: 80,
         },
         { title: '申请时间', dataIndex: 'applyTime', key: 'applyTime', valueType: 'dateTime' },
         { title: '还款时间', dataIndex: 'payTime', key: 'payTime', valueType: 'dateTime' },

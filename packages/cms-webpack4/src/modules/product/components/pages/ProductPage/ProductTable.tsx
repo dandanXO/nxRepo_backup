@@ -34,6 +34,7 @@ const ProductTable = (props: ProductTableProps) => {
               productId: record.productId,
             })}>修改</a>,
           ],
+            width: 80,
         },
         { key: 'productName', title: '產品名稱', dataIndex: 'productName', initialValue: "" },
         { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },

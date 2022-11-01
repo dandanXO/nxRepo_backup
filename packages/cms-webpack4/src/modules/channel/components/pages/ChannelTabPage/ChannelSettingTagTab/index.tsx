@@ -85,7 +85,8 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
                         }}>刪除</a>,
 
                     ]
-                }
+                },
+                width: 100,
             },
             {
                 key: 'id',

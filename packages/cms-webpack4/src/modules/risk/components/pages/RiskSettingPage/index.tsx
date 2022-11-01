@@ -64,7 +64,8 @@ export const RiskSettingPage = () => {
                             })
                         }}>修改</a>,
                     ]
-                }
+                },
+                width: 80,
             },
             {
                 key: 'id',
@@ -90,7 +91,8 @@ export const RiskSettingPage = () => {
                     all: { text: '全部', status: 'Default' },
                     true: { text: '启用', status: 'Success' },
                     false: { text: '停用', status: 'Default' },
-                }
+                },
+                width: 80,
             },
             { key: 'createTime', title: '创建时间', dataIndex: 'createTime', valueType: 'dateTime' },
             { key: 'updateTime', title: '更新时间', dataIndex: 'updateTime', valueType: 'dateTime' },

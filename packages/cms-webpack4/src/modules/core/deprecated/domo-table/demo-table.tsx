@@ -47,6 +47,7 @@ const columns: ProColumns<GithubIssueItem>[] = [
         ]}
       />,
     ],
+    width: 80,
   },
   {
     dataIndex: 'index',
@@ -92,6 +93,7 @@ const columns: ProColumns<GithubIssueItem>[] = [
         status: 'Processing',
       },
     },
+    width: 80,
   },
   {
     disable: true,

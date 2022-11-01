@@ -77,7 +77,7 @@ nx storybook mobile-shared-ui
 nx lint mobile
 
 # Lint admin app
-nx lint admin
+
 ```
 
 #### Format
@@ -116,7 +116,7 @@ nx graph
 nx build mobile
 
 # Build admin app
-nx build admin
+
 ```
 
 
@@ -149,9 +149,8 @@ npm run [scripts]
 
 ### Admin (new dlh-web)
 ```shell
-nx serve admin
-nx build admin 
-nx serve admin --prod 
+cd ./packages/cws-webpack4
+npm run [scripts]
 ```
 
 ## Recipe

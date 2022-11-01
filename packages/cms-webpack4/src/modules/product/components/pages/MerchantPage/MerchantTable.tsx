@@ -52,6 +52,7 @@ const MerchantTable = ({
                     form.setFieldsValue(record);
                 }}>修改</a>,
             ],
+            width: 80,
         },
         { title: '商户编号', dataIndex: 'merchantId', key: 'merchantId', hideInSearch: true },
         { title: '商户名', dataIndex: 'name', key: 'name', initialValue: "" },
@@ -62,7 +63,8 @@ const MerchantTable = ({
                 all: { text: '全部', status: 'Default' },
                 true: { text: '启用', status: 'Success' },
                 false: { text: '禁用', status: 'Default', },
-            }
+            },
+            width: 80,
         },
         { title: '创建时间', dataIndex: 'createTime', hideInSearch: true, key: 'createTime', valueType: 'dateTime' },
         { title: '更新時間', dataIndex: 'updateTime', hideInSearch: true, key: 'updateTime', valueType: 'dateTime' },
