@@ -1,3 +1,13 @@
-import {GreenThemeConfig, IThemeConfig} from "@frontend/mobile/shared/ui";
+import {DefaultThemeConfig, GreenThemeConfig} from "@frontend/mobile/shared/ui";
 
-export const PKThemeConfig: IThemeConfig = GreenThemeConfig;
+
+export const getThemeConfig = (country: string) => {
+  switch (country) {
+    case 'in':
+      return DefaultThemeConfig;
+    case 'pk':
+      return GreenThemeConfig;
+    default:
+      return DefaultThemeConfig;
+  }
+}

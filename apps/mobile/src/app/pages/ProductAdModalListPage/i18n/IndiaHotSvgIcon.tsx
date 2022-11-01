@@ -1,4 +1,4 @@
-const HotSvgIcon = () => {
+const IndiaHotSvgIcon = () => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -44,4 +44,4 @@ const HotSvgIcon = () => {
         </svg>
     );
 };
-export default HotSvgIcon;
+export default IndiaHotSvgIcon;

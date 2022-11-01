@@ -18,7 +18,7 @@ import Tag from './lib/components/Tag';
 import { Input } from './lib/components/Input';
 import useLocationOrderQueryString from './lib/hooks/useLocationOrderQueryString';
 import { flexCreator } from './lib/components/utils';
-import { SuccessICON } from './lib/components/Icon/Icon';
+import { OrangeSuccessICON, GeneralSuccessICON } from './lib/components/Icon/Icon';
 import { AppThemeProvider } from './lib/components';
 import AmountPaidIcon from './lib/components/images/amount_paid_icon.svg';
 
@@ -62,7 +62,8 @@ export {
   Input,
   useLocationOrderQueryString,
   flexCreator,
-  SuccessICON,
+  OrangeSuccessICON,
+  GeneralSuccessICON,
   AppThemeProvider,
   AmountPaidIcon,
 };

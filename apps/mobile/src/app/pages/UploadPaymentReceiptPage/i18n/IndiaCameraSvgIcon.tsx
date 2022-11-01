@@ -1,7 +1,7 @@
 interface CameraSvgIconProps {
     fill?: string;
 }
-const CameraSvgIcon = ({ fill = "#fff" }: CameraSvgIconProps) => {
+const IndiaCameraSvgIcon = ({ fill = "#f58b10" }: CameraSvgIconProps) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,4 +39,4 @@ const CameraSvgIcon = ({ fill = "#fff" }: CameraSvgIconProps) => {
         </svg>
     );
 };
-export default CameraSvgIcon;
+export default IndiaCameraSvgIcon;

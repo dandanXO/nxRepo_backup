@@ -7,7 +7,7 @@ import {usePostRepayReceiptMutation} from "../../api";
 import {PostRepayReceiptResponse} from "../../api/postRepayReceipt";
 import {InputValue} from "../../core/types/InputValue";
 import UploadingFileModal from "./modal/UploadingFileModal";
-import CameraSvgIcon from "./i18n/CameraSvgIcon";
+import {CameraSvgIcon} from "./i18n";
 
 const Section = styled.div`
     margin-bottom: 100px;
@@ -165,7 +165,7 @@ export const PureUploadPaymentReceiptPage = (
                 {!formFile ? (
                     <div>
                         <CameraSvgIconWrapper>
-                            <CameraSvgIcon fill="#f58b10" />
+                            <CameraSvgIcon/>
                         </CameraSvgIconWrapper>
                         <UploadSectionTitle>
                             Upload from Photo Album

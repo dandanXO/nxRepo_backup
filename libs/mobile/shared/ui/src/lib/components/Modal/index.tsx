@@ -70,8 +70,9 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
         // actionsRef={ModalWrapper.actionsRef}
         container={replacedModalContainer}
       >
+        {/*// NOTICE: FIXME: 因為 theme 目前無法由第三方替換*/}
         {mode !== 'custom' ? (
-          <AppThemeProvider theme={props.theme}>
+          <AppThemeProvider theme={window.theme || props.theme}>
             <Modal mode={mode} {...props} show={true}></Modal>
           </AppThemeProvider>
         ) : (
