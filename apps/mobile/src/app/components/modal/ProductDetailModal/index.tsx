@@ -8,6 +8,7 @@ import {
     Title,
     Divider,
 } from "@frontend/mobile/shared/ui";
+import {environment} from "../../../../environments/environment";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
     color: ${({ theme }) => theme.color.black};
@@ -47,7 +48,7 @@ export const PureProductDetailModal = (props: PureProductDetailModalProps) => {
                             />
                             <ListItem
                                 title={"Loanable amount"}
-                                text={`₹ ${
+                                text={`${environment.currency} ${
                                     props?.recommendProducts?.loanQuota ?? ""
                                 }`}
                             />

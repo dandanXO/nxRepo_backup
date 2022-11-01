@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { GetLoanDetailResponse } from "../../../../api/getLoanDetail";
 import { useGetLoanDetailQuery } from "../../../../api";
 import recordStatusStyleProps from "../../../../components/recordStatusColorMapper";
+import {environment} from "../../../../../environments/environment";
 
 const ExtesionDetailStyled = styled.div`
     text-align: center;
@@ -113,7 +114,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                 />
             </div>
             <div className="totalTitle">Extension Fee</div>
-            <div className="totalText">₹ {extensionFee ? extensionFee : ""} </div>
+            <div className="totalText">{environment.currency} {extensionFee ? extensionFee : ""} </div>
             <Divider />
             <div className={"loanInfo-Card-Title"}>General</div>
             <div className={"loanInfo-Card-list"}>
@@ -124,7 +125,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                         <Tag status={status ? status : "EXTEND"}>{status}</Tag>
                     }
                 />
-                <ListItem title={"Amount Paid"} text={`₹ ${paidAmount}`} />
+                <ListItem title={"Amount Paid"} text={`${environment.currency} ${paidAmount}`} />
                 <RepayRecordStyled>
                     <Accordion title={"Amount Paid Record"} isCollapse={true}>
                         {repayRecords.length === 0 ? (
@@ -147,21 +148,21 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                                                 </RepayTypeStyled>
                                             </div>
                                         }
-                                        text={`₹ ${record.repayAmount}`}
+                                        text={`${environment.currency} ${record.repayAmount}`}
                                     />
                                 );
                             })
                         )}
                     </Accordion>
                 </RepayRecordStyled>
-                <ListItem title={"Balance"} text={`₹ ${balance}`} />
+                <ListItem title={"Balance"} text={`${environment.currency} ${balance}`} />
             </div>
             <Divider />
             <div className={"loanInfo-Card-Title"}>
                 {chargeFeeDetail?.title}
             </div>
             {chargeFeeDetail?.items.map((item) => {
-                const fieldType = item.fieldType === "CURRENCY" ? " ₹ " : "";
+                const fieldType = item.fieldType === "CURRENCY" ? ` ${environment.currency} ` : "";
                 return (
                     <ListItem
                         title={item.itemName}

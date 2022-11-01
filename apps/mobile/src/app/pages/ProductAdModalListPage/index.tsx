@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useGetLoanRecommendQuery } from "../../api";
 import {HotSvgIcon} from "./i18n";
+import {environment} from "../../../environments/environment";
 
 const ProductAdStyled = styled.div`
     display: flex;
@@ -55,7 +56,7 @@ const ProductAd = ({ logo, productName, loanQuota, interestRate, term }: Product
                 <img className="logoIcon" src={logo} alt="" /></div>
             <div>
                 <div className="productName">{productName ? productName : ""}</div>
-                <div>₹ {loanQuota ? loanQuota : ""}</div>
+                <div>{environment.currency} {loanQuota ? loanQuota : ""}</div>
             </div>
         </div>
         <div className="productInfo">

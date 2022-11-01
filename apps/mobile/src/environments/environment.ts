@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   country: "pk",
+  // NOTE: just for debuging
   countryName: "Pakistan",
+  currency: "PKR",
 };
 
 // NOTE: [Environment Variables](https://nx.dev/reference/environment-variables)

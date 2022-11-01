@@ -12,6 +12,7 @@ import {
     Button,
     ListItem,
 } from "@frontend/mobile/shared/ui";
+import {environment} from "../../../../environments/environment";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -83,34 +84,34 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             <Divider />
                             <ListItem
                                 title={"Extension Fee"}
-                                text={`₹ ${
+                                text={`${environment.currency} ${
                                     props?.repayConfirmDetail?.extensionFee ??
                                     ""
                                 }`}
                             />
                             <ListItem
                                 title={"Amount Paid"}
-                                text={`₹ ${
+                                text={`${environment.currency} ${
                                     props?.repayConfirmDetail?.paidAmount ?? ""
                                 }`}
                             />
                             <ListItem
                                 title={"Penalty Interest"}
-                                text={`₹ ${
+                                text={`${environment.currency} ${
                                     props?.repayConfirmDetail
                                         ?.penaltyInterest ?? ""
                                 }`}
                             />
                             <ListItem
                                 title={"Reduction Amount"}
-                                text={`₹ ${
+                                text={`${environment.currency} ${
                                     props?.repayConfirmDetail
                                         ?.reductionAmount ?? ""
                                 }`}
                             />
                             <ListItem
                                 title={"Total Amount"}
-                                text={`₹ ${
+                                text={`${environment.currency} ${
                                     props?.repayConfirmDetail
                                         ?.extensionPayAmount ?? ""
                                 }`}
@@ -119,7 +120,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             <div className={"hintText"}>
                                 <ListItem
                                     title={"Extension due date"}
-                                    text={`₹ ${
+                                    text={`${environment.currency} ${
                                         props?.repayConfirmDetail?.extendDate ??
                                         ""
                                     }`}

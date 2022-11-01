@@ -10,6 +10,7 @@ import {
     Radio,
     Input,
 } from "@frontend/mobile/shared/ui";
+import {environment} from "../../../../../environments/environment";
 const Paragraph = styled.div`
     text-align: left;
     color: #aaaaaa;
@@ -66,13 +67,13 @@ interface RepaymentModalProps {
 }
 const RepaymentModal = (props: RepaymentModalProps) => {
     const balance = props.balance;
-    const [balanceValue, setBalanceValue] = useState(String("₹" + balance));
+    const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
     const [radioValue, setRadioValue] = useState("balance");
     const handleConfirm = () => {
         props.handlePostRepayCreate(
             false,
             false,
-            Number(balanceValue.replace("₹", ""))
+            Number(balanceValue.replace(`${environment.currency}`, ""))
         );
         props.setShowRepaymentModal(false);
     };
@@ -89,7 +90,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                             <SectionBalance>
                                 <ListItem
                                     title="Balance"
-                                    text={`₹ ${balance}`}
+                                    text={`${environment.currency} ${balance}`}
                                 />
                             </SectionBalance>
 
@@ -101,7 +102,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     onCheck={(value: any) => {
                                         setRadioValue(value);
                                         if (value === "balance") {
-                                            setBalanceValue("₹" + balance);
+                                            setBalanceValue(`${environment.currency}` + balance);
                                         }
                                     }}
                                 >
@@ -116,16 +117,16 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     disabled={radioValue === "balance"}
                                     onChange={(event: any) => {
                                       let value = event.target.value;
-                                      value = value.replaceAll("₹", "");
+                                      value = value.replaceAll(`${environment.currency}`, "");
                                       // NOTE: if custom balance exceed max balance then setting max balance
                                       if(String(Number(value)) === "NaN") {
-                                        setBalanceValue("₹1");
+                                        setBalanceValue(`${environment.currency}1`);
                                         props.setRepayBalance(1);
                                       } else {
                                         if(Number(value) > Number(balance)) {
                                           value = balance;
                                         }
-                                        setBalanceValue("₹" + value);
+                                        setBalanceValue(`${environment.currency}` + value);
                                         props.setRepayBalance(value);
                                       }
 
