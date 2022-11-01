@@ -111,7 +111,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
 
                                 <Input
                                     label="Amount"
-                                    labelType="right"
+                                    labelType="left"
                                     value={balanceValue}
                                     disabled={radioValue === "balance"}
                                     onChange={(event: any) => {

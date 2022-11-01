@@ -181,11 +181,11 @@ const Template1: ComponentStory<typeof Input> = (args) => {
   )
 }
 
-export const Pattern1 = Template1.bind({});
+export const LabelOnLeft = Template1.bind({});
 
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Pattern1.args = {
+LabelOnLeft.args = {
   // styleType: 'primary',
   // size: 'small',
 };
@@ -297,11 +297,11 @@ const Template2: ComponentStory<typeof Input> = (args) => {
   )
 }
 
-export const Pattern2 = Template2.bind({});
+export const LabelOnTop = Template2.bind({});
 
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Pattern2.args = {
+LabelOnTop.args = {
   // styleType: 'primary',
   // size: 'small',
 };

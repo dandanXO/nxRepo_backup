@@ -144,7 +144,7 @@ export const PureUploadPaymentReceiptPage = (
                     inputWidth={"200px"}
                     className="mb"
                     value={utr.data}
-                    labelType="right"
+                    labelType="left"
                     label="UTR"
                     onChange={(event) => {
                         setURT({
