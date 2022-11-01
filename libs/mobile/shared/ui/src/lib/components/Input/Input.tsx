@@ -8,7 +8,7 @@ import { StyledInput2, StyledTopInput } from './atom/StyledInput';
 import { InputStatus, InputValidStatus } from './type';
 import { useForceUpdate } from '../useForceUpdate';
 import {
-  RightDefaultLabel,
+  LeftDefaultLabel,
   UpperDefaultLabel,
   UpperFilledLabel,
 } from './atom/UpperLabel';
@@ -260,13 +260,13 @@ const Input: InputInterface = ({
     }
 
   } else {
-    // NOTE: 版型 Right
+    // NOTE: 版型 Left
     CustomInput = StyledInput2;
     upperLabelType = false;
 
-    // right
+    // Left
     LabelComponentElement = (
-      <RightDefaultLabel htmlFor={labelID}>{label}</RightDefaultLabel>
+      <LeftDefaultLabel htmlFor={labelID}>{label}</LeftDefaultLabel>
     );
   }
   // let isFocus = statusRef.current === "Focus" || statusRef.current === "KeyDown" ;
