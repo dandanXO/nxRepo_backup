@@ -2,7 +2,7 @@
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
-import {Button, Space} from 'antd';
+import {Button, PaginationProps, Space} from 'antd';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {GetProductListResponseProduct} from "../../../service/product/domain/getProductList";
 import {ProductFormModal} from "./hooks/useProductFormModal";
@@ -57,6 +57,11 @@ const ProductTable = (props: ProductTableProps) => {
     }, []);
     const actionRef = useRef<ActionType>();
 
+    // const onShowSizeChange: PaginationProps['onShowSizeChange'] = (current, pageSize) => {
+    //     console.log(current, pageSize);
+    // };
+
+    const [currentPaginationPageSize, setCurrentPaginationPageSize] = useState(10);
 
 
     return (
@@ -119,9 +124,19 @@ const ProductTable = (props: ProductTableProps) => {
                 // },
             }}
             pagination={{
-                pageSize: 10,
+                // NOTE: Changing Page Size
                 showSizeChanger: true,
-                onChange: (page) => console.log(page),
+                pageSize: currentPaginationPageSize,
+                onShowSizeChange: (current, pageSize) => {
+                    console.log(current, pageSize);
+                    setCurrentPaginationPageSize(pageSize);
+                },
+                // onChange: (page) => {
+                //     console.log("onChange.page", page)
+                // },
+                // defaultCurrent: 0,
+                // total: productList?.length,
+                // current: currentPaginationPage,
             }}
             dateFormatter="string"
             headerTitle={

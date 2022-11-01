@@ -111,6 +111,8 @@ export const AdminTable = <TableListItemDataType,>({
         }
     }, [tableDatasource, onSearchClick]);
 
+    const [currentPaginationPageSize, setCurrentPaginationPageSize] = useState(10);
+    
     return (
         <ProTable<TableListItemDataType>
             // Table action 的引用，便于自定义触发
@@ -153,14 +155,20 @@ export const AdminTable = <TableListItemDataType,>({
             }
             // NOTE: Antd Design
             pagination={{
+                // NOTE: Changing Page Size
                 // 每页条数
-                pageSize: 10,
+                pageSize: currentPaginationPageSize,
                 // 是否展示 pageSize 切换器
                 showSizeChanger: true,
+                // pageSize 变化的回调
+                onShowSizeChange: (current, pageSize) => {
+                    console.log(current, pageSize);
+                    setCurrentPaginationPageSize(pageSize);
+                },
+
                 // 页码或 pageSize 改变的回调，参数是改变后的页码及每页条数
                 // onChange: (page) => console.log(page),
-                // pageSize 变化的回调
-                // onShowSizeChange: (current, size) => console.log(current, size)
+
             }}
             // form={form}
             // onSubmit={(params: U) => void}
