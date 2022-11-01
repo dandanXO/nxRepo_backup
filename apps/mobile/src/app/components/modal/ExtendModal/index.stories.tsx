@@ -5,11 +5,11 @@ import { mockGetLoanDetailResponse } from "../../../api/getLoanDetail";
 import * as React from "react";
 
 export default {
-    title: "Page/ExtendModal",
+    title: "Modal/ExtendModal",
     component: PureExtendModal,
 } as ComponentMeta<typeof PureExtendModal>;
 
-export const Page: ComponentStory<typeof PureExtendModal> = () => {
+export const Template: ComponentStory<typeof PureExtendModal> = () => {
     return (
         <AppThemeProvider>
             <PureExtendModal

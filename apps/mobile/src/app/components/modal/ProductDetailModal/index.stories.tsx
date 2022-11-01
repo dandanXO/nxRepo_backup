@@ -4,11 +4,11 @@ import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import * as React from "react";
 
 export default {
-    title: "Page/ProductDetailModal",
+    title: "Modal/ProductDetailModal",
     component: PureProductDetailModal,
 } as ComponentMeta<typeof PureProductDetailModal>;
 
-export const Page: ComponentStory<typeof PureProductDetailModal> = () => {
+export const Template: ComponentStory<typeof PureProductDetailModal> = () => {
     return (
         <AppThemeProvider>
             <PureProductDetailModal

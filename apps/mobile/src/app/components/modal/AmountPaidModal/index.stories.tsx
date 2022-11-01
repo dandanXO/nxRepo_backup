@@ -4,10 +4,10 @@ import AmountPaidModal from "./AmountPaidModal";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 
 export default {
-    title: "Page/AmountPaidModal",
+    title: "Modal/AmountPaidModal",
     component: AmountPaidModal,
 } as ComponentMeta<typeof AmountPaidModal>;
-export const ModalAmountPaid: ComponentStory<typeof AmountPaidModal> = (
+export const Template: ComponentStory<typeof AmountPaidModal> = (
     args
 ) => {
     const data = {
