@@ -22,7 +22,7 @@ const getListItemStatus = (state: IListItemType) => {
     }
 };
 
-const getXuJieListItemStatus = (state: IListItemType) => {
+const getXuJieListItemStatus = () => {
   // NOTE: xujie
   return `
     color: #aaa;
@@ -30,7 +30,7 @@ const getXuJieListItemStatus = (state: IListItemType) => {
 };
 
 // NOTE: 點擊瞬間的顏色
-const getTapColor = (props) => {
+const getTapColor = () => {
   return `
     &:active {
           background-color: #36a9fb;
@@ -38,7 +38,7 @@ const getTapColor = (props) => {
       }
   `
 }
-const getXuJieTapColor = (props) => {
+const getXuJieTapColor = () => {
   return `
 
   `
@@ -60,9 +60,9 @@ const StyledListItem = styled.li<StyledListItemProps>`
     cursor: pointer;
     color: #ffffff;
     //${props => getListItemStatus(props.state)}
-    ${props => getXuJieListItemStatus(props.state)};
-    //${props => getTapColor(props)};
-    ${props => getXuJieTapColor(props)};
+    ${props => getXuJieListItemStatus()};
+    //${props => getTapColor()};
+    ${props => getXuJieTapColor()};
 `;
 
 const StyledXuJieListItem = styled(StyledListItem)`
