@@ -3,7 +3,7 @@ import Button from './lib/components/Button';
 import Card from './lib/components/Card';
 import CardContent from './lib/components/CardContent';
 import Checkbox from './lib/components/Checkbox';
-import DefaultThemeConfig from './lib/components/global/DefaultThemeConfig';
+import DefaultThemeConfig from './lib/components/global/skin/default/DefaultThemeConfig';
 import Divider from './lib/components/Divider';
 import Form from './lib/components/Form';
 

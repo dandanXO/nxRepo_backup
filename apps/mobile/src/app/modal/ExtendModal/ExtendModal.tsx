@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {
     GetLoanDetailRepayConfirmDetail,
     GetLoanDetailResponse,
-} from "../../../api/getLoanDetail";
+} from "../../api/getLoanDetail";
 
 import {
     Overlay,
@@ -12,7 +12,7 @@ import {
     Button,
     ListItem,
 } from "@frontend/mobile/shared/ui";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../environments/environment";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ExtendModal from "./modal/ExtendModal/ExtendModal";
+import ExtendModal from "../modal/ExtendModal/ExtendModal";
 import ExtensionDetailModal from "../pages/LoanDetailsPage/modal/ExtensionDetailModal";
-import AmountPaidModal from "./modal/AmountPaidModal/AmountPaidModal";
+import AmountPaidModal from "../modal/AmountPaidModal/AmountPaidModal";
 import RepaymentModal from "../pages/LoanDetailsPage/modal/RepaymentModal";
 import RepaymentNoticeModal from "../pages/LoanDetailsPage/modal/RepaymentNoticeModal";
 import LoanInfo from "./LoanInfo";

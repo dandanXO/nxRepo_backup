@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import DefaultThemeConfig from '../global/DefaultThemeConfig';
+import DefaultThemeConfig from '../global/skin/default/DefaultThemeConfig';
 
 const { color } = DefaultThemeConfig;
 

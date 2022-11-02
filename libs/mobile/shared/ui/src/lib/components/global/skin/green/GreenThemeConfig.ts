@@ -6,6 +6,9 @@ import { IThemeConfig } from "../../types/IThemeConfig";
 export const GreenThemeConfig: IThemeConfig = {
   color: Colors,
   fontSize: fontSizeListToRem,
+  page: {
+    bgColor: Colors.superLightGreen,
+  },
   button: {
     primary: {
       main: Colors.green,

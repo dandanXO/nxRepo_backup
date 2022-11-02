@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { GetLoanDetailRecommendProducts } from "../../../api/getLoanDetail";
+import { GetLoanDetailRecommendProducts } from "../../api/getLoanDetail";
 import {
     Overlay,
     ListItem,
@@ -8,7 +8,7 @@ import {
     Title,
     Divider,
 } from "@frontend/mobile/shared/ui";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../environments/environment";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
     color: ${({ theme }) => theme.color.black};

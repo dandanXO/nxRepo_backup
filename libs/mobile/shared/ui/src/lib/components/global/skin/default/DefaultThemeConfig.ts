@@ -1,12 +1,14 @@
-import {Colors} from "./Colors";
-import {fontSizeListToRem} from "./fontSize";
-import {IThemeConfig} from "./types/IThemeConfig";
+import {Colors} from "../../Colors";
+import {fontSizeListToRem} from "../../fontSize";
+import {IThemeConfig} from "../../types/IThemeConfig";
 
 const DefaultThemeConfig: IThemeConfig = {
   // NOTE: Commons
   color: Colors,
   fontSize: fontSizeListToRem,
-
+  page: {
+    bgColor: Colors.white,
+  },
   // NOTE: Component - button
   button: {
     primary: {

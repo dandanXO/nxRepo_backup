@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { GetLoanDetailRecommendProducts } from "../../../api/getLoanDetail";
+import { GetLoanDetailRecommendProducts } from "../../api/getLoanDetail";
 import { Overlay, Title, Divider, Button } from "@frontend/mobile/shared/ui";
 const ModalContentStyled = styled.div`
     padding: 0 12px;

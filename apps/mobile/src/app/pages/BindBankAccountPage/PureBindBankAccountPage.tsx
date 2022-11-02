@@ -1,35 +1,17 @@
-import React, { useCallback, useState } from "react";
-
-import { Input, Button, Page, Modal } from "@frontend/mobile/shared/ui";
-import type { InputValue } from "@frontend/mobile/shared/ui";
-import styled from "styled-components";
-import { PostBankBindSaveRequest } from "../../api/postBankBindSave";
-import { z } from "zod";
-
-const CustomPage = styled(Page)`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 80vh;
-`;
-const Form = styled.div`
-    .mb {
-        margin-bottom: 10px;
-    }
-    margin-bottom: 30px;
-`;
-const Paragraph = styled.p`
-    color: #101010;
-`;
+import React, {useCallback, useState} from "react";
+import type {InputValue} from "@frontend/mobile/shared/ui";
+import {Button, Input, Modal} from "@frontend/mobile/shared/ui";
+import {PostBankBindSaveRequest} from "../../api/postBankBindSave";
+import {z} from "zod";
+import {CustomPage} from "./CustomPage";
+import {Form} from "./Form";
+import {Paragraph} from "./Paragraph";
+import {validationInfo} from "./validationInfo";
 
 interface PureBindBankAccountPageProps {
     postBankBindSave: (requestBody: PostBankBindSaveRequest) => any;
     cardholderName: string;
 }
-
-export const validationInfo = {
-    min1: "This field cannot be left blank",
-};
 export const PureBindBankAccountPage = (
     props: PureBindBankAccountPageProps
 ) => {
@@ -174,7 +156,7 @@ export const PureBindBankAccountPage = (
                     enableClose: false,
                     enableIcon: false,
                     onConfirm: () => {
-                        location.href = "innerh5://127.0.0.1";
+                        window.location.href = "innerh5://127.0.0.1";
                     },
                 });
             })
