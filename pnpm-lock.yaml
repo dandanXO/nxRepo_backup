@@ -27,8 +27,10 @@ specifiers:
   '@storybook/react': 6.5.10
   '@svgr/webpack': 5.4.0
   '@testing-library/react': 13.3.0
+  '@types/dom-helpers': 5.0.1
   '@types/jest': 28.1.1
   '@types/node': 16.11.7
+  '@types/ramda': 0.27.1
   '@types/react': 18.0.16
   '@types/react-dom': 18.0.6
   '@types/react-is': 17.0.3
@@ -47,6 +49,7 @@ specifiers:
   clean-webpack-plugin: 4.0.0
   core-js: 3.6.5
   cypress: 10.2.0
+  dom-helpers: 5.2.1
   eslint: 8.15.0
   eslint-config-next: 12.2.5
   eslint-config-prettier: 8.1.0
@@ -68,8 +71,10 @@ specifiers:
   next-transpile-modules: 9.0.0
   null-loader: 4.0.1
   nx: 14.7.5
+  popper.js: 1.16.1
   prettier: 2.6.2
   query-string: 7.1.1
+  ramda: 0.27.1
   react: 18.2.0
   react-dom: 18.2.0
   react-is: 18.2.0
@@ -96,6 +101,8 @@ dependencies:
   '@ant-design/pro-components': 2.3.7_wrxrvk3knyqzygcx7jjcwdzenq
   '@canyuegongzi/t-cli': 1.2.18
   '@reduxjs/toolkit': 1.8.5_kkwg4cbsojnjnupd3btipussee
+  '@types/dom-helpers': 5.0.1
+  '@types/ramda': 0.27.1
   '@types/react': 18.0.16
   '@types/react-dom': 18.0.6
   '@types/styled-components': 5.1.25
@@ -104,12 +111,15 @@ dependencies:
   axios: 0.27.2
   classnames: 2.3.1
   core-js: 3.6.5
+  dom-helpers: 5.2.1
   g: 2.0.1
   js-cookie: 3.0.1
   moment: 2.29.4
   next: 12.2.5_a7mipu7kvrstgwvi56qu2qyzhe
   next-plugin-antd-less: 1.8.0_webpack@5.74.0
+  popper.js: 1.16.1
   query-string: 7.1.1
+  ramda: 0.27.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-is: 18.2.0
@@ -6956,6 +6966,13 @@ packages:
       '@types/node': 16.11.7
     dev: true
 
+  /@types/dom-helpers/5.0.1:
+    resolution: {integrity: sha512-mtSgR4PmOJyrSP6vXi+gymFI+g4MbHKetxPFktJYa8+jITfTE0Ct+zaXC7Je51NihwQWJxhlGyvqNjgL+2t9xw==}
+    deprecated: This is a stub types definition. dom-helpers provides its own type definitions, so you do not need this installed.
+    dependencies:
+      dom-helpers: 5.2.1
+    dev: false
+
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
@@ -7176,6 +7193,12 @@ packages:
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
+
+  /@types/ramda/0.27.1:
+    resolution: {integrity: sha512-6ZMrTIJdrQVUzSJKRP6ON+GX7oUvNFaKmKHrGhs18uQiTfBtNQkBtlJUUD0k72BImBhCT3w7VxQn5rRMMGnykw==}
+    dependencies:
+      ts-toolbelt: 6.15.5
+    dev: false
 
   /@types/range-parser/1.2.4:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
@@ -10757,6 +10780,13 @@ packages:
     dependencies:
       utila: 0.4.0
     dev: true
+
+  /dom-helpers/5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.19.0
+      csstype: 3.1.1
+    dev: false
 
   /dom-serializer/0.2.2:
     resolution: {integrity: sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g==}
@@ -16674,6 +16704,11 @@ packages:
       '@babel/runtime': 7.19.0
     dev: true
 
+  /popper.js/1.16.1:
+    resolution: {integrity: sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==}
+    deprecated: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
+    dev: false
+
   /portfinder/1.0.32:
     resolution: {integrity: sha512-on2ZJVVDXRADWE6jnQaX0ioEylzgBpQk8r55NE4wjXW1ZxO+BgDlY6DXwj20i0V8eB4SenDQ00WEaxfiIQPcxg==}
     engines: {node: '>= 0.12.0'}
@@ -17463,6 +17498,10 @@ packages:
   /quick-lru/5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
+    dev: false
+
+  /ramda/0.27.1:
+    resolution: {integrity: sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==}
     dev: false
 
   /ramda/0.28.0:
@@ -20366,6 +20405,10 @@ packages:
     dependencies:
       typescript: 4.7.2
     dev: true
+
+  /ts-toolbelt/6.15.5:
+    resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
+    dev: false
 
   /tsconfig-paths-webpack-plugin/3.5.2:
     resolution: {integrity: sha512-EhnfjHbzm5IYI9YPNVIxx1moxMI4bpHD2e0zTXeDNQcwjjRaGepP7IhTHJkyDBG0CAOoxRfe7jCG630Ou+C6Pw==}
