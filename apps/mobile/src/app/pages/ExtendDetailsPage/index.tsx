@@ -9,9 +9,6 @@ const ExtendDetailsPage = () => {
         navigateToUploadPaymentReceiptPage,
         handlePostRepayCreate,
     } = useLoanDetailStory();
-    console.log("currentData", JSON.stringify(currentData));
-    console.log("====")
-
     return (
         <Page>
             <PureLoanDetails
