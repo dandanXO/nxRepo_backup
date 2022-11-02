@@ -173,6 +173,55 @@ export const PureBindBankAccountPage = (
         confirmedBankcardNoData.isValidation,
     ]);
 
+    const onIFSCChange = (event: any) => {
+      let data = event.target.value;
+      data = data.replace(/[^a-zA-Z0-9]/g, "");
+      setIFSCData({
+        ...ifscData,
+        data,
+      });
+    }
+
+    const onIFSCBlur = () => {
+      validateIFSC();
+    }
+
+    const onAccountNumberChange = (event: any) => {
+      let data = event.target.value;
+      data = data.replace(/[^0-9]/g, "");
+      setBankcardNoData({
+        ...bankcardNoData,
+        data,
+      });
+    }
+
+    const onAccountNumberBlur = () => {
+      validateBankcardNo();
+      if (String(confirmedBankcardNoData.data).length > 0) {
+        validateConfirmedBankcardNo();
+      }
+    }
+
+    const onConfirmAccountNumberChange = (event: any) => {
+      let data = event.target.value;
+      data = data.replace(/[^0-9]/g, "");
+      setConfirmedBankcardNoData({
+        ...confirmedBankcardNoData,
+        data,
+      });
+    }
+
+    const onConfirmAccountNumberBlur = () => {
+      validateConfirmedBankcardNo();
+    }
+
+    const onUPIIDChange = (event: any) => {
+      setUpiData({
+        ...upiData,
+        data: event.target.value,
+      });
+    }
+
     return (
         <CustomPage>
             <Form>
@@ -191,66 +240,31 @@ export const PureBindBankAccountPage = (
                     className="mb"
                     label="IFSC Code"
                     value={ifscData.data}
-                    onChange={(event) => {
-                      let data = event.target.value;
-                      data = data.replace(/[^a-zA-Z0-9]/g, "");
-                      setIFSCData({
-                          ...ifscData,
-                          data,
-                      });
-                    }}
-                    onBlur={() => {
-                        validateIFSC();
-                    }}
+                    onChange={onIFSCChange}
+                    onBlur={onIFSCBlur}
                     errorMessage={ifscData.errorMessage}
                 />
                 <Input
                     className="mb"
                     label="Account Number"
                     value={bankcardNoData.data}
-                    onChange={(event) => {
-                      let data = event.target.value;
-                      data = data.replace(/[^0-9]/g, "");
-                      setBankcardNoData({
-                          ...bankcardNoData,
-                          data,
-                      });
-                    }}
-                    onBlur={() => {
-                        validateBankcardNo();
-                        if (String(confirmedBankcardNoData.data).length > 0) {
-                            validateConfirmedBankcardNo();
-                        }
-                    }}
+                    onChange={onAccountNumberChange}
+                    onBlur={onAccountNumberBlur}
                     errorMessage={bankcardNoData.errorMessage}
                 />
                 <Input
                     className="mb"
                     label="Confirm Account Number"
                     value={confirmedBankcardNoData.data}
-                    onChange={(event) => {
-                      let data = event.target.value;
-                      data = data.replace(/[^0-9]/g, "");
-                      setConfirmedBankcardNoData({
-                          ...confirmedBankcardNoData,
-                          data,
-                      });
-                    }}
-                    onBlur={() => {
-                        validateConfirmedBankcardNo();
-                    }}
+                    onChange={onConfirmAccountNumberChange}
+                    onBlur={onConfirmAccountNumberBlur}
                     errorMessage={confirmedBankcardNoData.errorMessage}
                 />
                 <Input
                     className="mb"
                     label="UPI ID"
                     value={upiData.data}
-                    onChange={(event) => {
-                        setUpiData({
-                            ...upiData,
-                            data: event.target.value,
-                        });
-                    }}
+                    onChange={onUPIIDChange}
                 />
             </Form>
 
