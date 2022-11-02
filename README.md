@@ -175,7 +175,7 @@ npm run [scripts]
 
 ## Best Practices
 
-![](./docs/organization.png)
+![](docs/assets/organization.png)
 
 - importants
   - mental model
