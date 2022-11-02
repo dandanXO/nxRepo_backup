@@ -259,6 +259,10 @@ const Input: InputInterface = ({
       );
     }
 
+  } else if(labelType === "none") {
+    //
+    CustomInput = StyledTopInput;
+    upperLabelType = true;
   } else {
     // NOTE: 版型 Left
     CustomInput = StyledInput2;

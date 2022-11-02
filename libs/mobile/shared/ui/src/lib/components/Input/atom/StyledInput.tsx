@@ -237,6 +237,11 @@ export const StyledTopInput = styled.input<StyledInputProps>`
     outline: none;
   }
 
+  // placeholder
+  ::placeholder {
+    color: #aaaaaa;
+  }
+
   ${(props) => {
     return '';
     // getStatusColor(

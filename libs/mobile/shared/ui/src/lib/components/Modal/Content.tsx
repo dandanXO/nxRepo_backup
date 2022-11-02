@@ -13,7 +13,8 @@ const Content = styled.div`
   /* Text */
   text-align: center;
   //text-shadow: 1px 0 4px #191a1b;
-  color: ${(props) => props.theme.color.gray500};
+  // color: ${(props) => props.theme.color.gray500};
+  color: grey;
   font-size: 14px;
   font-weight: 300;
   /* Text - Content */

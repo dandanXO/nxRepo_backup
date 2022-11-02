@@ -45,7 +45,7 @@ export const InputContainer = styled.label<InputContainerProps>`
   // Content
   height: 49px;
   box-sizing: border-box;
-  //
+  background-color: #fff;
   ${(props) => upperLabelType(props.upperLabelType)}
   ${(props) => isFocus(props.isFocus ? props.isFocus : false)};
   // ${(props) => (props.disabled ? 'background: gray' : '')};
