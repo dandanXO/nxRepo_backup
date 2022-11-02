@@ -37,9 +37,8 @@ const UserInfo = ({ userId }: UserId) => {
     const { personaInfoVo, userImage, userKycInfoVo, userDevice, emergencyContacts } = userDetail;
     const { channelName = "", phoneNo = "", appName = "", nameTrue = "", gender = "", idcardNo = "", fatherName = "", birth = "", panId = "", email = "", education = "", marriageStatus = "", position = "", salaryRange = "", address = "", bankCardNo = "", ifscCode = "",addTime="" } = personaInfoVo;
     const { idcardBackPhoto = "", idcardFrontPhoto = "", idcardPortraitPhoto = "", panPhoto = "" } = userImage;
-    const { pan = "", idcard = "", contacts = "", emergency = "", liveness = "", bank = "", kycFinishTime = "" } = userKycInfoVo;
+    const { pan = "", idcard = "", isAuth = "", emergency = "", liveness = "", bank = "", kycFinishTime = "" } = userKycInfoVo;
     const { appVersion, deviceModel, osPlatform, osVersion } = userDevice;
-
     return currentData !== undefined && <div style={{ margin: '16px' }}>
         <CardStyle title="注册信息">
             <Descriptions size="small" bordered >
@@ -62,11 +61,11 @@ const UserInfo = ({ userId }: UserId) => {
             <Descriptions size="small" bordered layout="vertical" column={{ sm: 4, md: 8 }}>
                 <Item label="税卡">{pan ? "是" : "否"}</Item>
                 <Item label="身份证">{idcard ? "是" : "否"}</Item>
-                <Item label="个人信息">{contacts ? "是" : "否"}</Item>
+                <Item label="个人信息">{isAuth ? "是" : "否"}</Item>
                 <Item label="联系人">{emergency ? "是" : "否"}</Item>
                 <Item label="活体">{liveness ? "是" : "否"}</Item>
                 <Item label="银行卡">{bank ? "是" : "否"}</Item>
-                <Item label="认证完成时间">{moment(kycFinishTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
+                <Item label="认证完成时间">{kycFinishTime===null?"":moment(kycFinishTime).format('YYYY-MM-DD HH:mm:ss')}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="个人信息">
