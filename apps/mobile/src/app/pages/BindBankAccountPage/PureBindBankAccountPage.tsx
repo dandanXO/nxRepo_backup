@@ -1,12 +1,11 @@
 import React, {useCallback, useState} from "react";
 import type {InputValue} from "@frontend/mobile/shared/ui";
-import {Button, Input, Modal} from "@frontend/mobile/shared/ui";
+import {Modal} from "@frontend/mobile/shared/ui";
 import {PostBankBindSaveRequest} from "../../api/postBankBindSave";
 import {z} from "zod";
-import {CustomPage} from "./CustomPage";
-import {Form} from "./Form";
-import {Paragraph} from "./Paragraph";
 import {validationInfo} from "./validationInfo";
+import {PageLayoutType1} from "./i18n/PageLayoutType1";
+import {PageLayoutType2} from "./i18n/PageLayoutType2";
 
 interface PureBindBankAccountPageProps {
     postBankBindSave: (requestBody: PostBankBindSaveRequest) => any;
@@ -222,53 +221,7 @@ export const PureBindBankAccountPage = (
       });
     }
 
-    return (
-        <CustomPage>
-            <Form>
-                <Input
-                    label="Cardholder Name"
-                    value={props.cardholderName}
-                    disabled
-                />
+    // return <PageLayoutType1 cardholderName={props.cardholderName} ifscData={ifscData} onIFSCChange={onIFSCChange} onIFSCBlur={onIFSCBlur} bankcardNoData={bankcardNoData} onAccountNumberChange={onAccountNumberChange} onAccountNumberBlur={onAccountNumberBlur} confirmedBankcardNoData={confirmedBankcardNoData} onConfirmAccountNumberChange={onConfirmAccountNumberChange} onConfirmAccountNumberBlur={onConfirmAccountNumberBlur} upiData={upiData} onUPIIDChange={onUPIIDChange} isFormPending={isFormPending} confirm={confirm}/>
+    return <PageLayoutType2 cardholderName={props.cardholderName} ifscData={ifscData} onIFSCChange={onIFSCChange} onIFSCBlur={onIFSCBlur} bankcardNoData={bankcardNoData} onAccountNumberChange={onAccountNumberChange} onAccountNumberBlur={onAccountNumberBlur} confirmedBankcardNoData={confirmedBankcardNoData} onConfirmAccountNumberChange={onConfirmAccountNumberChange} onConfirmAccountNumberBlur={onConfirmAccountNumberBlur} upiData={upiData} onUPIIDChange={onUPIIDChange} isFormPending={isFormPending} confirm={confirm}/>
 
-                <Paragraph>
-                    For KYC, your Cardholder name and Aadhaar name should be
-                    match.
-                </Paragraph>
-
-                <Input
-                    className="mb"
-                    label="IFSC Code"
-                    value={ifscData.data}
-                    onChange={onIFSCChange}
-                    onBlur={onIFSCBlur}
-                    errorMessage={ifscData.errorMessage}
-                />
-                <Input
-                    className="mb"
-                    label="Account Number"
-                    value={bankcardNoData.data}
-                    onChange={onAccountNumberChange}
-                    onBlur={onAccountNumberBlur}
-                    errorMessage={bankcardNoData.errorMessage}
-                />
-                <Input
-                    className="mb"
-                    label="Confirm Account Number"
-                    value={confirmedBankcardNoData.data}
-                    onChange={onConfirmAccountNumberChange}
-                    onBlur={onConfirmAccountNumberBlur}
-                    errorMessage={confirmedBankcardNoData.errorMessage}
-                />
-                <Input
-                    className="mb"
-                    label="UPI ID"
-                    value={upiData.data}
-                    onChange={onUPIIDChange}
-                />
-            </Form>
-
-            <Button onClick={() => !isFormPending && confirm()}>Submit</Button>
-        </CustomPage>
-    );
 };
