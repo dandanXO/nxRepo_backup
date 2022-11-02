@@ -4,7 +4,7 @@ import RepaymentNoticeModal from "./index";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 
 export default {
-    title: "Page/LoanDetailsPage",
+    title: "Page/LoanDetailsPage/Modals",
     component: RepaymentNoticeModal,
 } as ComponentMeta<typeof RepaymentNoticeModal>;
 
