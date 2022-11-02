@@ -15,21 +15,21 @@ const upperLabelType = (upperLabelType: boolean) => {
             justify-content: center;
         `;
   } else {
-    return `        
+    return `
             // flex-direction: row;
-            align-items: center;     
-            // justify-content: space-between;       
-            justify-content: space-between;                                
+            align-items: center;
+            // justify-content: space-between;
+            justify-content: space-between;
         `;
   }
 };
 const isFocus = (isFocus: boolean) => {
   if (isFocus) {
-    return `        
+    return `
         `;
   } else {
     return `
-                        
+
         `;
   }
 };
@@ -43,7 +43,8 @@ export const InputContainer = styled.label<InputContainerProps>`
   // Padding
   padding: 10px 20px;
   // Content
-  height: 42.5px;
+  height: 49px;
+  box-sizing: border-box;
   //
   ${(props) => upperLabelType(props.upperLabelType)}
   ${(props) => isFocus(props.isFocus ? props.isFocus : false)};
