@@ -5,7 +5,7 @@ interface SelectListContainerProps {
     width?: number;
     mode?: string;
 }
-const SelectListContainer = styled.div.attrs({
+const InfiniteScrollContainer = styled.div.attrs({
     className: "scroll-container dropdown-list-body",
 })<SelectListContainerProps>`
     // NOTICE: Didn't need to pass value, depend on child element;
@@ -26,6 +26,10 @@ const SelectListContainer = styled.div.attrs({
 
     // REFACTORING:
     //padding: 8px 0;
+
+   // NOTE: xujie
+   // background: #fff;
+    //color: #000;
 `;
 
-export default SelectListContainer;
+export default InfiniteScrollContainer;

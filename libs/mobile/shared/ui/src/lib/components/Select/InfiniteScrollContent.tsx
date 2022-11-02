@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
-const SelectInfiniteListContent = styled.ul`
+const InfiniteScrollContent = styled.ul`
     //Reset
     margin: 0;
     padding: 0;
     //box-sizing: border-box;
     list-style: none;
     user-select: none;
+
+    // NOTE: xujie
+    color: #000;
 `;
 
-export default SelectInfiniteListContent;
+export default InfiniteScrollContent;

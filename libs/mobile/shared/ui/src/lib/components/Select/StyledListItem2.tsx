@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import React, {useCallback, useEffect, useRef, useState} from "react";
+import {IListItemType} from "./IListItemType";
 
-const getListItemStatus = (state: string) => {
+const getListItemStatus = (state: IListItemType) => {
     if (state === "normal") {
         return `
             background-color: transparent;
@@ -15,13 +16,17 @@ const getListItemStatus = (state: string) => {
         return `
             color: #36a9fb;
         `;
+    } else {
+      return `
+      `
     }
+
 };
 
-export type ListItemType2 = "select" | "normal" | "hover" | "open";
+// export type ListItemType2 = "select" | "normal" | "hover" | "open";
 
 interface StyledListItemProps {
-    state: ListItemType2;
+    state: IListItemType;
     onMouseOver: () => void;
     onMouseOut: () => void;
     onClick: () => void;
@@ -40,10 +45,11 @@ const StyledListItem = styled.li<StyledListItemProps>`
     cursor: pointer;
     color: #ffffff;
     ${props => getListItemStatus(props.state)}
-    &:active {
-        background-color: #36a9fb;
-        color: white;
-    }
+    // NOTICE: 選到的樣式
+    //&:active {
+    //    background-color: #36a9fb;
+    //    color: white;
+    //}
     text-indent: ${props => props.depth * 16}px;
 `;
 
@@ -58,10 +64,11 @@ interface ListItemProps {
     onMouseOverHandler?: (ref: React.RefObject<HTMLLIElement>) => void;
     onMouseOutHandler?: () => void;
 }
+
 const ListItem2 = React.forwardRef((props: ListItemProps, ref: any) => {
     const {depth = 0, select} = props;
     // normal, hover, click, over, out
-    const [uiState, setUiState] = useState<ListItemType2>(select ? "select" : "normal");
+    const [uiState, setUiState] = useState<IListItemType>(select ? "select" : "normal");
     const listRef = useRef<HTMLLIElement>(null);
 
     useEffect(() => {

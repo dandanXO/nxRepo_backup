@@ -745,4 +745,5 @@ const ForwardRefInfiniteScroll = React.forwardRef((props: InfiniteScrollProps, r
     );
 });
 ForwardRefInfiniteScroll.displayName = "InfiniteScroll";
+
 export default withTheme(ForwardRefInfiniteScroll);

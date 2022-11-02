@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import React, {useCallback, useEffect, useState} from "react";
-import {ListItemType} from "./ListItemType";
+import {IListItemType} from "./IListItemType";
 
-const getListItemStatus = (state: string) => {
+// NOTE: 不同狀態的顏色
+const getListItemStatus = (state: IListItemType) => {
     if (state === "normal") {
         return `
             background-color: transparent;
@@ -16,14 +17,38 @@ const getListItemStatus = (state: string) => {
         return `
             color: #52c8f9;
         `;
+    } else {
+      return ``
     }
 };
 
+const getXuJieListItemStatus = (state: IListItemType) => {
+  // NOTE: xujie
+  return `
+    color: #aaa;
+  `
+};
+
+// NOTE: 點擊瞬間的顏色
+const getTapColor = (props) => {
+  return `
+    &:active {
+          background-color: #36a9fb;
+          color: white;
+      }
+  `
+}
+const getXuJieTapColor = (props) => {
+  return `
+
+  `
+}
+
 interface StyledListItemProps {
-    state: ListItemType;
-    onMouseOver: () => void;
-    onMouseOut: () => void;
-    onClick: () => void;
+  state: IListItemType;
+  onMouseOver: () => void;
+  onMouseOut: () => void;
+  onClick: () => void;
 }
 
 const StyledListItem = styled.li<StyledListItemProps>`
@@ -34,12 +59,17 @@ const StyledListItem = styled.li<StyledListItemProps>`
     line-height: 28px;
     cursor: pointer;
     color: #ffffff;
-    ${props => getListItemStatus(props.state)}
-    &:active {
-        background-color: #36a9fb;
-        color: white;
-    }
+    //${props => getListItemStatus(props.state)}
+    ${props => getXuJieListItemStatus(props.state)};
+    //${props => getTapColor(props)};
+    ${props => getXuJieTapColor(props)};
 `;
+
+const StyledXuJieListItem = styled(StyledListItem)`
+  height: 49px;
+  line-height: 49px;
+`
+
 
 interface ListItemProps {
     select: boolean;
@@ -47,9 +77,10 @@ interface ListItemProps {
     index: number;
     children: React.ReactNode;
 }
+
 const ListItem = (props: ListItemProps) => {
     // normal, hover, click, over, out
-    const [uiState, setUiState] = useState<ListItemType>(props.select ? "select" : "normal");
+    const [uiState, setUiState] = useState<IListItemType>(props.select ? "select" : "normal");
 
     useEffect(() => {
         setUiState(props.select ? "select" : "normal");
@@ -78,7 +109,7 @@ const ListItem = (props: ListItemProps) => {
     }, [uiState]);
 
     return (
-        <StyledListItem
+        <StyledXuJieListItem
             onMouseOver={onMouseOver}
             onMouseOut={onMouseOut}
             onClick={onClick}
@@ -86,7 +117,7 @@ const ListItem = (props: ListItemProps) => {
             // state={props.state}
         >
             {props.children}
-        </StyledListItem>
+        </StyledXuJieListItem>
     );
 };
 

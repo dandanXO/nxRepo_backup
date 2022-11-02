@@ -1,38 +1,44 @@
 import styled from "styled-components";
-import {ListItemType} from "./ListItemType";
+import {IListItemType} from "./IListItemType";
 
-const getDropdownButtonColor = (state: ListItemType, disabled: boolean, theme = "early") => {
-    if (disabled)
-        return `
-            border-color: ${theme === "early" ? "rgba(0, 0, 0, 0.13)" : "rgba(255, 255, 255, 0.13)"};
-            color: ${theme === "early" ? "#a3a3a3" : "none"};
-        `;
-    if (state !== "hover" && state !== "open") {
-        // common
-        return `
-            color: #5e5e5e;
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #a8a8a8;
-        `;
-    } else if (state === "hover") {
-        return `
-            //color
-            color: #52c8f9;
-            background-color: rgba(255,255,255,0);
-            border-color: #52c8f9;
-            // box-shadow: 1px 1px 4px #52c8f9, -1px -1px 4px #52c8f9;
-        `;
-    } else if (state === "open") {
-        return `
-            border-color: #35bff8;
-            background-color: #36a9fb;
-            color: #ffffff;
-        `;
-    } else {
-      return `
+const getDropdownButtonColor = (state: IListItemType, disabled: boolean, theme = "early") => {
+    // if (disabled)
+    //     return `
+    //         border-color: ${theme === "early" ? "rgba(0, 0, 0, 0.13)" : "rgba(255, 255, 255, 0.13)"};
+    //         color: ${theme === "early" ? "#a3a3a3" : "none"};
+    //     `;
+    // if (state !== "hover" && state !== "open") {
+    //     // common
+    //     return `
+    //         color: #5e5e5e;
+    //         background: rgba(255, 255, 255, 0.2);
+    //         border-color: #a8a8a8;
+    //     `;
+    // } else if (state === "hover") {
+    //     return `
+    //         //color
+    //         color: #52c8f9;
+    //         background-color: rgba(255,255,255,0);
+    //         border-color: #52c8f9;
+    //         // box-shadow: 1px 1px 4px #52c8f9, -1px -1px 4px #52c8f9;
+    //     `;
+    // } else if (state === "open") {
+    //     return `
+    //         border-color: #35bff8;
+    //         background-color: #36a9fb;
+    //         color: #ffffff;
+    //     `;
+    // } else {
+    //   return `
+    //
+    //     `;
+    // }
 
-        `;
-    }
+    return `
+        color: #aaaaaa;
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #aaaaaa;
+    `
 };
 
 const getWidth = (fixButtonWidth: number) => {
@@ -42,7 +48,7 @@ const getWidth = (fixButtonWidth: number) => {
 
 interface StyledSelectButtonProps {
     fixButtonWidth: number;
-    state: ListItemType;
+    state: IListItemType;
     disabled: boolean;
 }
 
@@ -72,6 +78,14 @@ const StyledSelectButton = styled.div.attrs({
 
     // Disabled
     cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
+
+
 `;
 
-export default StyledSelectButton;
+const XuJieStyledSelectButton = styled(StyledSelectButton)`
+  height: 49px;
+  line-height: 49px;
+  padding: 0px 20px;
+`;
+
+export default XuJieStyledSelectButton;

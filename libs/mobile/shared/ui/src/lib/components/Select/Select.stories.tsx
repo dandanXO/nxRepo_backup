@@ -14,9 +14,10 @@ const Template: Story<DropdownProps> = (args: DropdownProps) => <Select {...args
 
 export const Normal = Template.bind({});
 Normal.args = {
-    dataSource: ["1", "2"],
+    dataSource: ["Easypaisa1", "Easypaisa2", "Easypaisa3", "Easypaisa4"],
     defaultIndex: 0,
-    fixButtonWidth: 120,
+    // NOTE: 修改預設寬度
+    fixButtonWidth: 325,
     theme: {
         // REFACTORING
         mode: ThemeModuleSkinTypeEnum.early,

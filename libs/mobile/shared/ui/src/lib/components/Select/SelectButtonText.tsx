@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import {ThemeModuleSkinType} from "../type/module";
-import {ListItemType} from "./ListItemType";
+import {IListItemType} from "./IListItemType";
 
 interface ButtonTextProps {
   disabled?: boolean;
-  status: ListItemType;
+  status: IListItemType;
 }
-const getTextColor = (disabled = false, skinType: ThemeModuleSkinType, status: ListItemType) => {
+const getTextColor = (disabled = false, skinType: ThemeModuleSkinType, status: IListItemType) => {
   if (!disabled) {
     if (skinType === "early") {
       if (status === "normal") {
@@ -34,9 +34,12 @@ const getTextColor = (disabled = false, skinType: ThemeModuleSkinType, status: L
   }
 };
 
-export const StyledButtonText = styled.div<ButtonTextProps>`
+const SelectButtonText = styled.div<ButtonTextProps>`
     display: block;
     padding: 0 11px 0 0;
     // color: ${props => getTextColor(props.disabled, props.theme.mode, props.status)};
     color: #aaaaaa;
 `;
+
+export default SelectButtonText;
+

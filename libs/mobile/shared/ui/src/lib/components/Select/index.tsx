@@ -6,16 +6,18 @@ import {ThemeModuleSkinType} from "../type/module";
 import SelectTooltip from "../Tooltip";
 import InfiniteScroll from "../InfiniteScroll";
 
-import StyledDropdownContainer from "./StyledDropdownContainer";
+import SelectContainer from "./SelectContainer";
 import SelectButton from "./SelectButton";
+
+import InfiniteScrollContainer from "./InfiniteScrollContainer";
+import InfiniteScrollContent from "./InfiniteScrollContent";
+import {SelectButtonArrowDownSVGICON, SelectButtonArrowRightSVGICON, SelectButtonArrowUpSVGICON} from "./SelectICON";
+import SelectButtonText from "./SelectButtonText";
+import SelectButtonArrow from "./SelectButtonArrow";
+import {IListItemType} from "./IListItemType";
+
 import ListItem from "./StyledListItem";
 import ListItem2 from "./StyledListItem2";
-import SelectListContainer from "./SelectListContainer";
-import SelectInfiniteListContent from "./SelectInfiniteListContent";
-import {ArrowDownSVGICON, ArrowRightSVGICON, ArrowUpSVGICON} from "./SelectICON";
-import {StyledButtonText} from "./StyledButtonText";
-import StyledArrow from "./StyledArrow";
-import {ListItemType} from "./ListItemType";
 
 export type ISelection  = {
     id: number;
@@ -25,17 +27,18 @@ export type ISelection  = {
     [others: string]: any; // fixme: id should support number and string, this place use random attribute to workaround.
 }
 
-const getICONButtonColor = (state: string, disabled: boolean, mode: ThemeModuleSkinType = "early") => {
-    if (disabled) return "#a3a3a3";
-    if (state !== "hover" && state !== "open") {
-        return mode == "early" ? "#5e5e5e" : "#ffffff";
-    } else if (state === "hover") {
-        return "#52c8f9";
-    } else if (state === "open") {
-        return "#ffffff";
-    } else {
-        return "#ffffff";
-    }
+const getArrowICONColor = (state: string, disabled: boolean, mode: ThemeModuleSkinType = "early") => {
+    // if (disabled) return "#a3a3a3";
+    // if (state !== "hover" && state !== "open") {
+    //     return mode == "early" ? "#5e5e5e" : "#ffffff";
+    // } else if (state === "hover") {
+    //     return "#52c8f9";
+    // } else if (state === "open") {
+    //     return "#ffffff";
+    // } else {
+    //     return "#ffffff";
+    // }
+  return "#a3a3a3";
 };
 
 
@@ -68,7 +71,7 @@ interface IRenderTooltip {
 // NOTE: DropdownState
 type DropdownState = {
     show: boolean;
-    status: ListItemType;
+    status: IListItemType;
     currentSelection: React.ReactNode | string;
 };
 
@@ -143,12 +146,15 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         };
     }, []);
 
+    // NOTICE: ITEM_HEIGHT
+    const ITEM_HEIGHT = 49;
+
     const getHeight = useCallback((itemSize: number, maxItemCount = 10) => {
         let height;
         if (itemSize < maxItemCount + 1) {
-            height = itemSize * 28;
+            height = itemSize * ITEM_HEIGHT;
         } else {
-            height = 28 * maxItemCount;
+            height = ITEM_HEIGHT * maxItemCount;
         }
         return height;
     }, []);
@@ -202,7 +208,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         }
         return showComponent ? parentItem.component() : parentItem.name;
     };
-    // ListItemType : "select" | "normal" | "hover" | "open";
+
     const calculateDataSourceLenth = (dataSource: any, isTree = false) => {
         if (isTree) {
             return dataSource.reduce((curr: number, item: any) => {
@@ -213,6 +219,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         }
         return dataSource.length;
     };
+    // NOTICE: renderTooltip
     const renderTooltip = (tooltipProps: IRenderTooltip) => {
         const {
             disabled,
@@ -222,7 +229,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
             dataSource,
             tree,
         } = props;
-        const {listItemComponents, targetDomRef, placement = "bottom", showArrow = true, source} = tooltipProps;
+        const {listItemComponents, targetDomRef, placement = "bottom", showArrow = false, source} = tooltipProps;
         return (
             <SelectTooltip
                 className="select-tooltip"
@@ -236,7 +243,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                 noContentPadding
                 showArrow={showArrow}
             >
-                <SelectListContainer
+                <InfiniteScrollContainer
                     mode={mode}
                     // itemSize={props.dataSource.length}
                     height={getHeight(calculateDataSourceLenth(source ? source : dataSource, tree), maxItemCount)}
@@ -250,9 +257,9 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                         height={getHeight(calculateDataSourceLenth(source ? source : dataSource, tree), maxItemCount) + "px"}
                         barWidth="9px"
                     >
-                        <SelectInfiniteListContent>{listItemComponents}</SelectInfiniteListContent>
+                        <InfiniteScrollContent>{listItemComponents}</InfiniteScrollContent>
                     </InfiniteScroll>
-                </SelectListContainer>
+                </InfiniteScrollContainer>
             </SelectTooltip>
         );
     };
@@ -261,6 +268,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
     const [subChildren, setSubChildren] = useState<ISelection[] | undefined>(undefined);
     const [subRef, setSubRef] = useState<React.RefObject<HTMLLIElement> | null>(null);
     const [parentIndex, setParentIndex] = useState<number | null>(null);
+
     const initArrowListItemState = () => {
         setShowSub(false);
         setSubChildren(undefined);
@@ -300,12 +308,13 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                     }}
                 >
                     {item.component()}
-                    {showArrow && item.subChildren && <ArrowRightSVGICON />}
+                    {showArrow && item.subChildren && <SelectButtonArrowRightSVGICON />}
                 </ListItem2>
             );
         });
     };
 
+    // NOTE: renderSubLayerTooltip
     const renderSubLayerTooltip = (): any => {
         if (showSub && subChildren && subRef?.current) {
             const param = {
@@ -320,11 +329,13 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         return <></>
     };
 
+    // NOTE: renderLayerTooltip
     const renderLayerTooltip = (dataSource: ISelection[], targetDomRef: React.RefObject<HTMLElement>) => {
         const listItemComponents = renderArrowListItem(dataSource, !props.tree);
         return renderTooltip({listItemComponents, targetDomRef, source: dataSource});
     };
 
+    // NOTE: renderTreeList
     const renderTreeList = (dataSource: ISelection[], depth = 0, parentIndex = -1) => {
         return dataSource.map(item => {
             const index = depth === 0 ? item.id : (parentIndex as number);
@@ -359,6 +370,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         const { dataSource, tree } = props;
         const firstItem = dataSource[0];
         if (!firstItem) return;
+        // NOTE: Tree
         if (tree) {
             return renderTreeTooltip(props.dataSource as ISelection[], target);
         } else if (Object.keys(firstItem as ISelection).indexOf("id") > -1) {
@@ -368,7 +380,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         }
     };
     return (
-        <StyledDropdownContainer ref={dropdownRef}>
+        <SelectContainer ref={dropdownRef}>
             <SelectButton
                 ref={target}
                 state={state.status}
@@ -382,30 +394,35 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                 // }}
             >
                 {/*NOTE: 文字按鈕*/}
-                <StyledButtonText disabled={props.disabled} status={state.status}>
+                <SelectButtonText disabled={props.disabled} status={state.status}>
                     {/*{state.currentSelection}*/}
                     <>
                       {props.defaultIndex === -1
                         ? props.placeHolder
                         : getTextButton(props.dataSource, props.defaultIndex, props.subDefaultIndex, props.showComponent)}
                     </>
-                </StyledButtonText>
+                </SelectButtonText>
+
                 {/*NOTE: 下拉式列表箭頭*/}
-                <StyledArrow>
+                <SelectButtonArrow>
                     {!props.disabled && state.show ? (
-                        <ArrowUpSVGICON
-                            fill={getICONButtonColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
+                        <SelectButtonArrowUpSVGICON
+                            fill={getArrowICONColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
                         />
                     ) : (
-                        <ArrowDownSVGICON
-                            fill={getICONButtonColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
+                        <SelectButtonArrowDownSVGICON
+                            fill={getArrowICONColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
                         />
                     )}
-                </StyledArrow>
+                </SelectButtonArrow>
             </SelectButton>
+
+            {/* NOTE: renderMultiLayerTooltip*/}
             {!props.disabled && renderMultiLayerTooltip()}
+
+            {/* NOTE: renderSubLayerTooltip*/}
             {renderSubLayerTooltip()}
-        </StyledDropdownContainer>
+        </SelectContainer>
     );
 };
 

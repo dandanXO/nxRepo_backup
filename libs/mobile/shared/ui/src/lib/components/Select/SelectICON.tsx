@@ -3,7 +3,7 @@ import React from "react";
 interface ArrowSVGICONProps {
     fill?: string;
 }
-const ArrowUpSVGICON = (props: ArrowSVGICONProps) => {
+const SelectButtonArrowUpSVGICON = (props: ArrowSVGICONProps) => {
     const fill = props.fill ? props.fill : "#5E5E5E";
     return (
         <svg
@@ -37,7 +37,7 @@ const ArrowUpSVGICON = (props: ArrowSVGICONProps) => {
     );
 };
 
-const ArrowDownSVGICON = (props: ArrowSVGICONProps) => {
+const SelectButtonArrowDownSVGICON = (props: ArrowSVGICONProps) => {
     const fill = props.fill ? props.fill : "#ffffff";
     return (
         <svg
@@ -71,7 +71,7 @@ const ArrowDownSVGICON = (props: ArrowSVGICONProps) => {
     );
 };
 
-const ArrowRightSVGICON = (props: ArrowSVGICONProps) => {
+const SelectButtonArrowRightSVGICON = (props: ArrowSVGICONProps) => {
     const fill = props.fill ? props.fill : "#fff";
     return (
         <svg
@@ -99,4 +99,4 @@ const ArrowRightSVGICON = (props: ArrowSVGICONProps) => {
     );
 };
 
-export {ArrowUpSVGICON, ArrowDownSVGICON, ArrowRightSVGICON};
+export {SelectButtonArrowUpSVGICON, SelectButtonArrowDownSVGICON, SelectButtonArrowRightSVGICON};
