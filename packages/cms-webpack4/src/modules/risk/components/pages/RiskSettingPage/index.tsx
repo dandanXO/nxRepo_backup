@@ -108,21 +108,35 @@ export const RiskSettingPage = () => {
     // NOTE: autoComplete
     const onAutoCompleteTemplate = useCallback(() => {
         const mockRequest = {
-            firstLoan: [
-                {providerRank: 'A', loanCount: '4000'},
-                {providerRank: 'B', loanCount: '3000'},
-                {providerRank: 'C', loanCount: '2000'},
-                {providerRank: 'D', loanCount: '1000'},
-                {providerRank: 'E', loanCount: '0'}
-            ],
             modelName: String(new Date().getTime()),
             remark: "remark",
+            // firstLoan: [
+            //     {providerRank: 'A', loanCount: '4000'},
+            //     {providerRank: 'B', loanCount: '3000'},
+            //     {providerRank: 'C', loanCount: '2000'},
+            //     {providerRank: 'D', loanCount: '1000'},
+            //     {providerRank: 'E', loanCount: '0'}
+            // ],
+            // repeatLoan: [
+            //     {providerRank: 'A', loanCount: '8000'},
+            //     {providerRank: 'B', loanCount: '6000'},
+            //     {providerRank: 'C', loanCount: '4000'},
+            //     {providerRank: 'D', loanCount: '2000'},
+            //     {providerRank: 'E', loanCount: '0'},
+            // ],
+             firstLoan: [
+                {min: 50,max:58, loanCount: '100', loanAmount: '200'},
+                {min: 47,max:49, loanCount: '100', loanAmount: '200'},
+                {min: 31,max:32, loanCount: '100', loanAmount: '200'},
+                {min: 21,max:22, loanCount: '100', loanAmount: '200'},
+                {min: 1,max:12, loanCount: '100', loanAmount: '200'},
+            ],
             repeatLoan: [
-                {providerRank: 'A', loanCount: '8000'},
-                {providerRank: 'B', loanCount: '6000'},
-                {providerRank: 'C', loanCount: '4000'},
-                {providerRank: 'D', loanCount: '2000'},
-                {providerRank: 'E', loanCount: '0'},
+                {min: 50,max:58, loanCount: '100', loanAmount: '200'},
+                {min: 47,max:49, loanCount: '100', loanAmount: '200'},
+                {min: 31,max:32, loanCount: '100', loanAmount: '200'},
+                {min: 21,max:22, loanCount: '100', loanAmount: '200'},
+                {min: 1,max:12, loanCount: '100', loanAmount: '200'},
             ],
             riskModelName: 1,
             useRcQuota: true,
@@ -216,6 +230,13 @@ export const RiskSettingPage = () => {
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
+       
+        const label=changedFields[0].name[0];
+        const index=changedFields[0].name[1]===0?0:changedFields[0].name[1]-1;
+        const field=changedFields[0].name[2];
+        const preField=allFields.filter(i=>i.name[0]===label && i.name[1]===index&&i.name[2]===field);
+        console.log(changedFields[0]);
+        console.log('preField',preField)
     }, [])
 
 
@@ -258,6 +279,10 @@ export const RiskSettingPage = () => {
 
                         type: key === "firstLoan" ? 0 : 1 , // 0 | 1
                         // 级距类型 0: 首贷, 1: 复借
+
+                        // min:record.min,
+                        // max:record.max,
+                        // loanAmount:record.loanAmount
                     } as MssRiskRankVo
                     // NOTE: Edit
                     if(isEdit) {
@@ -279,19 +304,19 @@ export const RiskSettingPage = () => {
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPostRisk : triggerPutRisk;
         // console.log("triggerAPI", !showModalContent.isEdit ? "triggerPostRisk" : "triggerPutRisk");
-        // console.log("fields", fields);
+        console.log("fields", fields);
 
         // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
-            form.resetFields();
+        // triggerAPI(fields).unwrap().then((responseData) => {
+        //     form.resetFields();
 
-            triggerGetList(null);
+        //     triggerGetList(null);
 
-            setShowModalContent({
-                show: false,
-                isEdit: false,
-            })
-        })
+        //     setShowModalContent({
+        //         show: false,
+        //         isEdit: false,
+        //     })
+        // })
     }, [showModalContent.isEdit, editID, currentRiskMenuData])
 
     // NOTICE: Form.4 onFinishFailed
@@ -355,7 +380,7 @@ export const RiskSettingPage = () => {
                     setShowModalContent={setShowModalContent}
                     form={form}
                     onOk={onOk}
-                    // onAutoCompleteTemplate={onAutoCompleteTemplate}
+                    onAutoCompleteTemplate={onAutoCompleteTemplate}
                 >
                     <RiskSettingForm
                         form={form}
