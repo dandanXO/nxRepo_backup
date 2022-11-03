@@ -1,6 +1,7 @@
 # Serve
 
-## Serve India
+## Application: Mobile
+### Country: India
 ```shell
 # Default India
 nx run-many --target=serve --projects=mobile  --configuration=development
@@ -9,8 +10,12 @@ nx run-many --target=serve --projects=mobile  --configuration=development
 nx run-many --target=serve --projects=mobile  --configuration=development-in
 ```
 
-## Serve Pakistan
+### Country: Pakistan
 ```shell
 # Pakistan
 nx run-many --target=serve --projects=mobile  --configuration=development-pk
 ```
+
+---
+
+## Application: CMS
