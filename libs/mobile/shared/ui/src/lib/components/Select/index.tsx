@@ -6,20 +6,20 @@ import {ThemeModuleSkinType} from "../type/module";
 import SelectTooltip from "../Tooltip";
 import InfiniteScroll from "../InfiniteScroll";
 
-import SelectContainer from "./SelectContainer";
-import SelectButton from "./SelectButton/SelectButton";
+import Container from "./Container";
+import SelectButton from "./Button/SelectButton";
 
 import InfiniteScrollContainer from "./InfiniteScrollContainer";
 import InfiniteScrollContent from "./InfiniteScrollContent";
-import SelectButtonText from "./SelectButtonText";
-import SelectButtonArrow from "./SelectButtonArrow";
+import ButtonText from "./ButtonText";
+import ButtonArrow from "./ButtonArrow";
 import {IListItemType} from "./IListItemType";
 
-import ListItem from "./StyledListItem";
-import ListItem2 from "./StyledListItem2";
-import {SelectButtonArrowUpSVGICON} from "./SelectICON/SelectButtonArrowUpSVGICON";
-import {SelectButtonArrowDownSVGICON} from "./SelectICON/SelectButtonArrowDownSVGICON";
-import {SelectButtonArrowRightSVGICON} from "./SelectICON/SelectButtonArrowRightSVGICON";
+import ListItem from "./ListItem";
+import ListItem2 from "./ListItem2";
+import {SelectButtonArrowUpSVGICON} from "./Icon/SelectButtonArrowUpSVGICON";
+import {SelectButtonArrowDownSVGICON} from "./Icon/SelectButtonArrowDownSVGICON";
+import {SelectButtonArrowRightSVGICON} from "./Icon/SelectButtonArrowRightSVGICON";
 
 export type ISelection  = {
     id: number;
@@ -203,7 +203,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         if (typeof firstItem === "string") {
             return dataSource[defaultIndex];
         }
-        // withdrawapply use element in datasource, refactor it later.
+        // NOTICE: withdrawapply use element in datasource, refactor it later.
         if (firstItem && Object.keys(firstItem).indexOf("type") > -1) {
             return dataSource[defaultIndex];
         }
@@ -386,7 +386,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         }
     };
     return (
-        <SelectContainer ref={dropdownRef}>
+        <Container ref={dropdownRef}>
             <SelectButton
                 ref={target}
                 state={state.status}
@@ -400,17 +400,17 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                 // }}
             >
                 {/*NOTE: 文字按鈕*/}
-                <SelectButtonText disabled={props.disabled} status={state.status}>
+                <ButtonText disabled={props.disabled} status={state.status}>
                     {/*{state.currentSelection}*/}
                     <>
                       {props.defaultIndex === -1
                         ? props.placeHolder
                         : getTextButton(props.dataSource, props.defaultIndex, props.subDefaultIndex, props.showComponent)}
                     </>
-                </SelectButtonText>
+                </ButtonText>
 
                 {/*NOTE: 下拉式列表箭頭*/}
-                <SelectButtonArrow>
+                <ButtonArrow>
                     {!props.disabled && state.show ? (
                         <SelectButtonArrowUpSVGICON
                             fill={getArrowICONColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
@@ -420,7 +420,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                             fill={getArrowICONColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
                         />
                     )}
-                </SelectButtonArrow>
+                </ButtonArrow>
             </SelectButton>
 
             {/* NOTE: renderMultiLayerTooltip*/}
@@ -428,7 +428,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
 
             {/* NOTE: renderSubLayerTooltip*/}
             {renderSubLayerTooltip()}
-        </SelectContainer>
+        </Container>
     );
 };
 

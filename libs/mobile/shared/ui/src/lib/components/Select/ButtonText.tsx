@@ -35,12 +35,12 @@ const getTextColor = (disabled = false, skinType: ThemeModuleSkinType, status: I
   }
 };
 
-const SelectButtonText = styled.div<ButtonTextProps>`
+const ButtonText = styled.div<ButtonTextProps>`
     display: block;
     padding: 0 11px 0 0;
     // color: ${props => getTextColor(props.disabled, props.theme.mode, props.status)};
     color: #aaaaaa;
 `;
 
-export default SelectButtonText;
+export default ButtonText;
 

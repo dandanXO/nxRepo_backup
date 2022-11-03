@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const SelectContainer = styled.div`
+const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     user-select: none;
 `;
 
-export default SelectContainer;
+export default Container;

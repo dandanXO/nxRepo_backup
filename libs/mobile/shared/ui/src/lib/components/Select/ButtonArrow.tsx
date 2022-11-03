@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SelectButtonArrow = styled.div<{theme: string}>`
+const ButtonArrow = styled.div<{theme: string}>`
     // color: ${props => (props.theme == "early" ? "#52c8f9" : "")};
     display: inline-block;
     padding: 0 0 0 0;
@@ -8,4 +8,4 @@ const SelectButtonArrow = styled.div<{theme: string}>`
     right: 7px;
     top: 0;
 `;
-export default SelectButtonArrow;
+export default ButtonArrow;
