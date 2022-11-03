@@ -307,16 +307,16 @@ export const RiskSettingPage = () => {
         console.log("fields", fields);
 
         // NOTE: Request
-        // triggerAPI(fields).unwrap().then((responseData) => {
-        //     form.resetFields();
+        triggerAPI(fields).unwrap().then((responseData) => {
+            form.resetFields();
 
-        //     triggerGetList(null);
+            triggerGetList(null);
 
-        //     setShowModalContent({
-        //         show: false,
-        //         isEdit: false,
-        //     })
-        // })
+            setShowModalContent({
+                show: false,
+                isEdit: false,
+            })
+        })
     }, [showModalContent.isEdit, editID, currentRiskMenuData])
 
     // NOTICE: Form.4 onFinishFailed
