@@ -76,13 +76,14 @@ export interface DropdownProps {
   subDefaultIndex?: number;
   currentSelect?: number;
   disabled?: boolean;
-  fixButtonWidth?: number;
+  fixButtonWidth?: string;
   maxItemCount?: number;
   onSelect?: (index: number, subIndex?: number) => void;
   tree?: boolean;
   theme: {
     mode: ThemeModuleSkinType;
   };
+  className?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
@@ -90,7 +91,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
     const infiniteScrollRef = useRef();
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    const [state, setState] = useState<DropdownState>(initDropdownState);
+    const [state, setState] = useState<DropdownState>(initDropdownState as any);
 
     const onMouseOver = useCallback(() => state.status != "open" && setState({...state, status: "hover"}), [state.status]);
 
@@ -235,7 +236,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                     mode={mode}
                     // itemSize={props.dataSource.length}
                     height={getHeight(calculateDataSourceLength(source ? source : dataSource, tree), maxItemCount)}
-                    width={fixButtonWidth ? fixButtonWidth : 70}
+                    width={fixButtonWidth ? fixButtonWidth : "70"}
                 >
                     {/*TODO: Need to bind Full Window Change Scroll */}
                     <InfiniteScroll
@@ -305,7 +306,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
     // NOTE: renderSubLayerTooltip
     const renderSubLayerTooltip = (): any => {
         const param = {
-            listItemComponents: renderArrowListItem(subChildren, !props.tree, false),
+            listItemComponents: renderArrowListItem(subChildren as any, !props.tree, false),
             targetDomRef: subRef && subRef,
             placement: "right-start" as Placement,
             showArrow: false,
@@ -359,18 +360,20 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         if (tree) {
             return renderTreeTooltip(props.dataSource as ISelection[], target);
         } else if (Object.keys(firstItem as ISelection).indexOf("id") > -1) {
+          // NOTE: index: key
             return renderLayerTooltip(props.dataSource as ISelection[], target);
         } else {
+            // NOTE: index: number
             return renderTooltip({listItemComponents, targetDomRef: target});
         }
     };
     return (
-        <Container ref={dropdownRef}>
+        <Container ref={dropdownRef} className={props.className}>
             <SelectButton
                 ref={target}
                 state={state.status}
                 disabled={props.disabled ? props.disabled : false}
-                fixButtonWidth={props.fixButtonWidth ? props.fixButtonWidth : 10}
+                fixButtonWidth={props.fixButtonWidth ? props.fixButtonWidth : "10px"}
                 onMouseOver={onMouseOver}
                 onMouseOut={onMouseOut}
                 onClick={onClickSelectButton}

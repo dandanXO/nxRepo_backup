@@ -31,6 +31,7 @@ import { Colors } from './lib/components/global/Colors';
 import { fontSizeListToRem } from './lib/components/global/fontSize';
 import {GreenThemeConfig} from "./lib/components/global/skin/green/GreenThemeConfig";
 import DefaultThemeConfig from "./lib/components/global/skin/default/DefaultThemeConfig";
+import { Select } from './lib/components/Select';
 
 export {
   StyledLoading,
@@ -66,6 +67,7 @@ export {
   GeneralSuccessICON,
   AppThemeProvider,
   AmountPaidIcon,
+  Select,
 };
 
 export type { InputValue };

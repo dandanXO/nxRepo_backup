@@ -6,6 +6,7 @@ import RepaymentModal from "../pages/LoanDetailsPage/modal/RepaymentModal";
 import RepaymentNoticeModal from "../pages/LoanDetailsPage/modal/RepaymentNoticeModal";
 import LoanInfo from "./LoanInfo";
 import LoanDetail from "./LoanDetail";
+import {CustomPage} from "../pages/BindBankAccountPage/components/CustomPage";
 
 export interface PureLoanDetailsPageProps {
     currentData?: any;
@@ -27,56 +28,58 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
         setRepayBalance(props?.currentData?.balance);
     }, [props.currentData]);
     return (
+      <CustomPage>
         <React.Fragment>
-            {showExtendModal && (
-                <ExtendModal
-                    setShowExtendModal={setShowExtendModal}
-                    {...props.currentData}
-                    handlePostRepayCreate={props.handlePostRepayCreate}
-                />
-            )}
-            {showExtensionModal && (
-                <ExtensionDetailModal
-                    parentOrderNo={props.currentData.parentOrderNo}
-                    setShowExtensionModal={setShowExtensionModal}
-                />
-            )}
-            {props.currentData && showAmountPaidModal && (
-                <AmountPaidModal
-                    {...props.currentData}
-                    setShowAmountPaidModal={setShowAmountPaidModal}
-                />
-            )}
-            {showRepaymentModal && (
-                <RepaymentModal
-                    balance={props.currentData.balance}
-                    setRepayBalance={setRepayBalance}
-                    setShowRepaymentModal={setShowRepaymentModal}
-                    setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
-                    handlePostRepayCreate={props.handlePostRepayCreate}
-                />
-            )}
-            {showRepaymentNoticeModal && (
-                <RepaymentNoticeModal
-                    balance={repayBalance}
-                    setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
-                    handlePostRepayCreate={props.handlePostRepayCreate}
-                />
-            )}
-            <LoanInfo
-                {...props.currentData}
-                setShowExtensionModal={setShowExtensionModal}
-                setShowAmountPaidModal={setShowAmountPaidModal}
-                navigateToUploadPaymentReceiptPage={
-                    props.navigateToUploadPaymentReceiptPage
-                }
+          {showExtendModal && (
+            <ExtendModal
+              setShowExtendModal={setShowExtendModal}
+              {...props.currentData}
+              handlePostRepayCreate={props.handlePostRepayCreate}
             />
-            <LoanDetail
-                {...props.currentData}
-                setShowExtendModal={setShowExtendModal}
-                setShowRepaymentModal={setShowRepaymentModal}
+          )}
+          {showExtensionModal && (
+            <ExtensionDetailModal
+              parentOrderNo={props.currentData.parentOrderNo}
+              setShowExtensionModal={setShowExtensionModal}
             />
+          )}
+          {props.currentData && showAmountPaidModal && (
+            <AmountPaidModal
+              {...props.currentData}
+              setShowAmountPaidModal={setShowAmountPaidModal}
+            />
+          )}
+          {showRepaymentModal && (
+            <RepaymentModal
+              balance={props.currentData.balance}
+              setRepayBalance={setRepayBalance}
+              setShowRepaymentModal={setShowRepaymentModal}
+              setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
+              handlePostRepayCreate={props.handlePostRepayCreate}
+            />
+          )}
+          {showRepaymentNoticeModal && (
+            <RepaymentNoticeModal
+              balance={repayBalance}
+              setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
+              handlePostRepayCreate={props.handlePostRepayCreate}
+            />
+          )}
+          <LoanInfo
+            {...props.currentData}
+            setShowExtensionModal={setShowExtensionModal}
+            setShowAmountPaidModal={setShowAmountPaidModal}
+            navigateToUploadPaymentReceiptPage={
+              props.navigateToUploadPaymentReceiptPage
+            }
+          />
+          <LoanDetail
+            {...props.currentData}
+            setShowExtendModal={setShowExtendModal}
+            setShowRepaymentModal={setShowRepaymentModal}
+          />
         </React.Fragment>
+      </CustomPage>
     );
 };
 

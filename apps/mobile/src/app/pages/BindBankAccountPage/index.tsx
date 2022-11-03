@@ -4,8 +4,8 @@ import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../environments/environment";
 import {IndiaCountry} from "../../../environments/countries/IndiaCountry";
 import {PakistanCountry} from "../../../environments/countries/PakistanCountry";
-import {IndiaBindBankAccountPage} from "./i18n/pageByCountry/IndiaBindBankAccountPage";
-import {PakistanBindBankAccountPage} from "./i18n/pageByCountry/PakistanBindBankAccountPage";
+import {IndiaBindBankAccountPage} from "./i18n/pageByCountry/india/IndiaBindBankAccountPage";
+import {PakistanBindBankAccountPage} from "./i18n/pageByCountry/pakistan/PakistanBindBankAccountPage";
 
 const BindBankAccountPage = () => {
     const [postBankBindSave] = usePostBankBindSaveMutation();

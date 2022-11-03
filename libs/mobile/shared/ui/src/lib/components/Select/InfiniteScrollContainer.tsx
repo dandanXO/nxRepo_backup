@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface SelectListContainerProps {
     height: number;
-    width?: number;
+    width?: string;
     mode?: string;
 }
 const InfiniteScrollContainer = styled.div.attrs({
@@ -12,7 +12,7 @@ const InfiniteScrollContainer = styled.div.attrs({
     //width: 114px;
     //width: 150px;
     min-width: 70px;
-    width: ${props => (props.width ? props.width + "px" : "auto")};
+    width: ${props => (props.width ? props.width :  "auto")};
     height: ${props => props.height}px;
     //max-height: 220px;
     //min-height: 220px;

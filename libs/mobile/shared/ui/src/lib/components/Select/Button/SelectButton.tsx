@@ -4,7 +4,7 @@ import {getWidth} from "./getWidth";
 import {getDropdownButtonColor} from "./getDropdownButtonColor";
 
 interface StyledSelectButtonProps {
-    fixButtonWidth: number;
+    fixButtonWidth: string;
     state: IListItemType;
     disabled: boolean;
 }

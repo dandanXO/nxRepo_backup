@@ -26,4 +26,5 @@ export default styled.button<buttonPropsStyle>`
   border: none;
   border-radius: 8px;
   font-size: ${({ theme }) => theme.fontSize[16]};
+  width: 100%;
 `;

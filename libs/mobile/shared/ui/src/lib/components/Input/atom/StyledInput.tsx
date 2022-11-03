@@ -276,6 +276,7 @@ export const StyledInput2 = styled(StyledTopInput)<StyledInputProps>`
   //flex: 0 0 50%;
   color: #101010;
   width: ${(props) => props.inputWidth ? props.inputWidth : "100px"};
+  flex: 1;
 `;
 // In firefox, disabled input won't fire click event, so add a mask here.
 export const StyledLabel = styled.label`

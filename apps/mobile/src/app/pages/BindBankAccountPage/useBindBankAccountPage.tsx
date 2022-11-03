@@ -5,7 +5,7 @@ import {z} from "zod";
 import {validationInfo} from "./validationInfo";
 import {PureBindBankAccountPageProps} from "./types/PureBindBankAccountPageProps";
 
-export const PureBindBankAccountPage = (
+export const useBindBankAccountPage = (
     props: PureBindBankAccountPageProps
 ) => {
     const [ifscData, setIFSCData] = useState<InputValue<string>>({
@@ -215,7 +215,35 @@ export const PureBindBankAccountPage = (
       });
     }
 
+    return {
+      ifscData,
+      onIFSCChange,
+      onIFSCBlur,
+      bankcardNoData,
+      onAccountNumberChange,
+      onAccountNumberBlur,
+      confirmedBankcardNoData,
+      onConfirmAccountNumberChange,
+      onConfirmAccountNumberBlur,
+      upiData,
+      onUPIIDChange,
+      isFormPending,
+      confirm,
+    }
     // NOTICE:
-    const PageLayoutType = props.layout as any
-    return <PageLayoutType cardholderName={props.cardholderName} ifscData={ifscData} onIFSCChange={onIFSCChange} onIFSCBlur={onIFSCBlur} bankcardNoData={bankcardNoData} onAccountNumberChange={onAccountNumberChange} onAccountNumberBlur={onAccountNumberBlur} confirmedBankcardNoData={confirmedBankcardNoData} onConfirmAccountNumberChange={onConfirmAccountNumberChange} onConfirmAccountNumberBlur={onConfirmAccountNumberBlur} upiData={upiData} onUPIIDChange={onUPIIDChange} isFormPending={isFormPending} confirm={confirm}/>
+    // const PageLayoutType = props.layout as any
+    // return <PageLayoutType cardholderName={props.cardholderName}
+    //                        ifscData={ifscData}
+    //                        onIFSCChange={onIFSCChange}
+    //                        onIFSCBlur={onIFSCBlur}
+    //                        bankcardNoData={bankcardNoData}
+    //                        onAccountNumberChange={onAccountNumberChange}
+    //                        onAccountNumberBlur={onAccountNumberBlur}
+    //                        confirmedBankcardNoData={confirmedBankcardNoData}
+    //                        onConfirmAccountNumberChange={onConfirmAccountNumberChange}
+    //                        onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
+    //                        upiData={upiData} onUPIIDChange={onUPIIDChange}
+    //                        isFormPending={isFormPending}
+    //                        confirm={confirm}
+    // />
 };

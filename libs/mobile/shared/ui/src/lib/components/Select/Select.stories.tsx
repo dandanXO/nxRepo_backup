@@ -17,7 +17,7 @@ Normal.args = {
     dataSource: ["Easypaisa1", "Easypaisa2", "Easypaisa3", "Easypaisa4"],
     defaultIndex: 0,
     // NOTE: 修改預設寬度
-    fixButtonWidth: 325,
+    fixButtonWidth: "325px",
     theme: {
         // REFACTORING
         mode: ThemeModuleSkinTypeEnum.early,

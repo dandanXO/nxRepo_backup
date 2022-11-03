@@ -77,7 +77,7 @@ export interface InputProps {
   className?: string;
   // label type
   label?: string;
-  labelType?: string;
+  labelType?: "none" | "top" | "left";
   style?: any;
   ref?: any;
 }

@@ -1,4 +1,4 @@
-export const getWidth = (fixButtonWidth: number) => {
+export const getWidth = (fixButtonWidth: string) => {
   if (!fixButtonWidth) return ``;
-  return `width: ${fixButtonWidth}px`;
+  return `width: ${fixButtonWidth}`;
 };

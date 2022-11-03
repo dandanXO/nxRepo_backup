@@ -1,7 +1,7 @@
 import ownerDocument from "dom-helpers/ownerDocument";
 import {useEffect, useState} from "react";
 
-const resolveRef = ref => {
+const resolveRef = (ref: any) => {
     if (typeof document === "undefined") return undefined;
     if (ref == null) return ownerDocument().body;
     if (typeof ref === "function") ref = ref();

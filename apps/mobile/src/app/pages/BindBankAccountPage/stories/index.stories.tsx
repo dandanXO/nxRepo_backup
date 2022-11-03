@@ -1,19 +1,17 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PureBindBankAccountPage } from "../PureBindBankAccountPage";
-import {AppThemeProvider, DefaultThemeConfig, GreenThemeConfig} from "@frontend/mobile/shared/ui";
-import {PageLayoutTemplate1} from "../i18n/pageByLayout/PageLayoutTemplate1";
-import {PageLayoutTemplate2} from "../i18n/pageByLayout/PageLayoutTemplate2";
-import {IndiaBindBankAccountPage} from "../i18n/pageByCountry/IndiaBindBankAccountPage";
 import React from "react";
-import {PakistanBindBankAccountPage} from "../i18n/pageByCountry/PakistanBindBankAccountPage";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import {AppThemeProvider, DefaultThemeConfig, GreenThemeConfig} from "@frontend/mobile/shared/ui";
+import {IndiaBindBankAccountPage} from "../i18n/pageByCountry/india/IndiaBindBankAccountPage";
+
+import {PakistanBindBankAccountPage} from "../i18n/pageByCountry/pakistan/PakistanBindBankAccountPage";
 
 export default {
     title: "Page/BindBankAccountPage",
-    component: PureBindBankAccountPage,
-} as ComponentMeta<typeof PureBindBankAccountPage>;
+    component: IndiaBindBankAccountPage,
+} as ComponentMeta<any>;
 
 // NOTE: Hide me when in India
-export const IndiaPage: ComponentStory<typeof PureBindBankAccountPage> = (args) => {
+export const IndiaPage: ComponentStory<any> = (args) => {
     return (
         <AppThemeProvider theme={DefaultThemeConfig}>
           <IndiaBindBankAccountPage postBankBindSave={() => {}} cardholderName={""}/>
@@ -21,7 +19,7 @@ export const IndiaPage: ComponentStory<typeof PureBindBankAccountPage> = (args) 
     );
 };
 
-export const PakistanPage: ComponentStory<typeof PureBindBankAccountPage> = (args) => {
+export const PakistanPage: ComponentStory<any> = (args) => {
   return (
     <AppThemeProvider theme={GreenThemeConfig}>
       <PakistanBindBankAccountPage postBankBindSave={() => {}} cardholderName={""}/>

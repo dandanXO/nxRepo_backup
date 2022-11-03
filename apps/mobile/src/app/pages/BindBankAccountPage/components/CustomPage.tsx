@@ -7,4 +7,5 @@ export const CustomPage = styled(Page)<{theme: IThemeConfig}>`
     justify-content: space-between;
     // NOTICE: 底色
     background: ${(props) => props.theme.page.bgColor};
+    //height: 100vh;
 `;
