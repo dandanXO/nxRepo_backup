@@ -7,17 +7,19 @@ import SelectTooltip from "../Tooltip";
 import InfiniteScroll from "../InfiniteScroll";
 
 import SelectContainer from "./SelectContainer";
-import SelectButton from "./SelectButton";
+import SelectButton from "./SelectButton/SelectButton";
 
 import InfiniteScrollContainer from "./InfiniteScrollContainer";
 import InfiniteScrollContent from "./InfiniteScrollContent";
-import {SelectButtonArrowDownSVGICON, SelectButtonArrowRightSVGICON, SelectButtonArrowUpSVGICON} from "./SelectICON";
 import SelectButtonText from "./SelectButtonText";
 import SelectButtonArrow from "./SelectButtonArrow";
 import {IListItemType} from "./IListItemType";
 
 import ListItem from "./StyledListItem";
 import ListItem2 from "./StyledListItem2";
+import {SelectButtonArrowUpSVGICON} from "./SelectICON/SelectButtonArrowUpSVGICON";
+import {SelectButtonArrowDownSVGICON} from "./SelectICON/SelectButtonArrowDownSVGICON";
+import {SelectButtonArrowRightSVGICON} from "./SelectICON/SelectButtonArrowRightSVGICON";
 
 export type ISelection  = {
     id: number;
@@ -27,23 +29,29 @@ export type ISelection  = {
     [others: string]: any; // fixme: id should support number and string, this place use random attribute to workaround.
 }
 
+// NOTE: General
 const getArrowICONColor = (state: string, disabled: boolean, mode: ThemeModuleSkinType = "early") => {
-    // if (disabled) return "#a3a3a3";
-    // if (state !== "hover" && state !== "open") {
-    //     return mode == "early" ? "#5e5e5e" : "#ffffff";
-    // } else if (state === "hover") {
-    //     return "#52c8f9";
-    // } else if (state === "open") {
-    //     return "#ffffff";
-    // } else {
-    //     return "#ffffff";
-    // }
+  // return getGeneralArrowICONColor();
+  return getXuJieArrowICONColor(state, disabled, mode);
+};
+
+const getGeneralArrowICONColor = (state: string, disabled: boolean, mode: ThemeModuleSkinType = "early") => {
+  if (disabled) return "#a3a3a3";
+  if (state !== "hover" && state !== "open") {
+    return mode == "early" ? "#5e5e5e" : "#ffffff";
+  } else if (state === "hover") {
+    return "#52c8f9";
+  } else if (state === "open") {
+    return "#ffffff";
+  } else {
+    return "#ffffff";
+  }
+};
+
+const getXuJieArrowICONColor = (state: string, disabled: boolean, mode: ThemeModuleSkinType = "early") => {
   return "#a3a3a3";
 };
 
-
-
-type ButtonTextStatus = "regular" | "hover";
 
 const checkDropdownContent = (dropdownRef: React.MutableRefObject<HTMLDivElement | null>, target: any) => {
     if (dropdownRef.current && dropdownRef.current.contains(target)) {
@@ -57,8 +65,6 @@ const checkDropdownContent = (dropdownRef: React.MutableRefObject<HTMLDivElement
 
     return false;
 };
-
-
 
 interface IRenderTooltip {
   listItemComponents: JSX.Element[];

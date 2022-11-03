@@ -6,6 +6,7 @@ interface ButtonTextProps {
   disabled?: boolean;
   status: IListItemType;
 }
+
 const getTextColor = (disabled = false, skinType: ThemeModuleSkinType, status: IListItemType) => {
   if (!disabled) {
     if (skinType === "early") {

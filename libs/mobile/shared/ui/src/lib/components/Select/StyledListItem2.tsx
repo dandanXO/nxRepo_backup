@@ -20,10 +20,7 @@ const getListItemStatus = (state: IListItemType) => {
       return `
       `
     }
-
 };
-
-// export type ListItemType2 = "select" | "normal" | "hover" | "open";
 
 interface StyledListItemProps {
     state: IListItemType;
