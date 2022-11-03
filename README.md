@@ -129,6 +129,7 @@ node -v
 rm -rf node_modules
 npm uninstall nx --location=global
 npm install nx --location=global
+npm install -g pnpm
 pnpm install
 npm -v
 nx reset
