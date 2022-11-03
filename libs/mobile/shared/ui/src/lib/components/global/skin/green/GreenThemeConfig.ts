@@ -9,6 +9,7 @@ export const GreenThemeConfig: IThemeConfig = {
   fontFamily: "Rubik",
   page: {
     bgColor: Colors.superLightGreen,
+    // bgColor: Colors.mediumGreen,
   },
   button: {
     primary: {

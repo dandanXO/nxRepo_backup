@@ -84,9 +84,9 @@ function FirstAndRepeatLoanFormByRange(props:{isEdit:boolean}) {
                     </Form.Item>
                 )
             })}
-              
+
         </Form.Item>
-     
+
 
         <Form.Item label={"复借分数"} required>
             {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
@@ -165,6 +165,7 @@ function FirstAndRepeatLoanFormByRange(props:{isEdit:boolean}) {
                             >
                                 <Input placeholder={"最高可借总额"} />
                             </Form.Item>
+
                         </Input.Group>
                     </Form.Item>
                 )

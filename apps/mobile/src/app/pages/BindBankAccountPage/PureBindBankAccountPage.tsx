@@ -1,16 +1,10 @@
 import React, {useCallback, useState} from "react";
 import type {InputValue} from "@frontend/mobile/shared/ui";
 import {Modal} from "@frontend/mobile/shared/ui";
-import {PostBankBindSaveRequest} from "../../api/postBankBindSave";
 import {z} from "zod";
 import {validationInfo} from "./validationInfo";
-import {PageLayoutType1} from "./i18n/PageLayoutType1";
-import {PageLayoutType2} from "./i18n/PageLayoutType2";
+import {PureBindBankAccountPageProps} from "./types/PureBindBankAccountPageProps";
 
-interface PureBindBankAccountPageProps {
-    postBankBindSave: (requestBody: PostBankBindSaveRequest) => any;
-    cardholderName: string;
-}
 export const PureBindBankAccountPage = (
     props: PureBindBankAccountPageProps
 ) => {
@@ -221,7 +215,7 @@ export const PureBindBankAccountPage = (
       });
     }
 
-    // return <PageLayoutType1 cardholderName={props.cardholderName} ifscData={ifscData} onIFSCChange={onIFSCChange} onIFSCBlur={onIFSCBlur} bankcardNoData={bankcardNoData} onAccountNumberChange={onAccountNumberChange} onAccountNumberBlur={onAccountNumberBlur} confirmedBankcardNoData={confirmedBankcardNoData} onConfirmAccountNumberChange={onConfirmAccountNumberChange} onConfirmAccountNumberBlur={onConfirmAccountNumberBlur} upiData={upiData} onUPIIDChange={onUPIIDChange} isFormPending={isFormPending} confirm={confirm}/>
-    return <PageLayoutType2 cardholderName={props.cardholderName} ifscData={ifscData} onIFSCChange={onIFSCChange} onIFSCBlur={onIFSCBlur} bankcardNoData={bankcardNoData} onAccountNumberChange={onAccountNumberChange} onAccountNumberBlur={onAccountNumberBlur} confirmedBankcardNoData={confirmedBankcardNoData} onConfirmAccountNumberChange={onConfirmAccountNumberChange} onConfirmAccountNumberBlur={onConfirmAccountNumberBlur} upiData={upiData} onUPIIDChange={onUPIIDChange} isFormPending={isFormPending} confirm={confirm}/>
-
+    // NOTICE:
+    const PageLayoutType = props.layout as any
+    return <PageLayoutType cardholderName={props.cardholderName} ifscData={ifscData} onIFSCChange={onIFSCChange} onIFSCBlur={onIFSCBlur} bankcardNoData={bankcardNoData} onAccountNumberChange={onAccountNumberChange} onAccountNumberBlur={onAccountNumberBlur} confirmedBankcardNoData={confirmedBankcardNoData} onConfirmAccountNumberChange={onConfirmAccountNumberChange} onConfirmAccountNumberBlur={onConfirmAccountNumberBlur} upiData={upiData} onUPIIDChange={onUPIIDChange} isFormPending={isFormPending} confirm={confirm}/>
 };
