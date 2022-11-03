@@ -15,11 +15,12 @@ import ButtonText from "./ButtonText";
 import ButtonArrow from "./ButtonArrow";
 import {IListItemType} from "./IListItemType";
 
-import ListItem from "./ListItem";
+import ListItem from "./ListItem/ListItem";
 import ListItem2 from "./ListItem2";
 import {SelectButtonArrowUpSVGICON} from "./Icon/SelectButtonArrowUpSVGICON";
 import {SelectButtonArrowDownSVGICON} from "./Icon/SelectButtonArrowDownSVGICON";
 import {SelectButtonArrowRightSVGICON} from "./Icon/SelectButtonArrowRightSVGICON";
+import {getArrowIconColor} from "./getArrowIconColor";
 
 export type ISelection  = {
     id: number;
@@ -28,29 +29,6 @@ export type ISelection  = {
     subChildren?: ISelection[]; // for now, only support 2 layer
     [others: string]: any; // fixme: id should support number and string, this place use random attribute to workaround.
 }
-
-// NOTE: General
-const getArrowICONColor = (state: string, disabled: boolean, mode: ThemeModuleSkinType = "early") => {
-  // return getGeneralArrowICONColor();
-  return getXuJieArrowICONColor(state, disabled, mode);
-};
-
-const getGeneralArrowICONColor = (state: string, disabled: boolean, mode: ThemeModuleSkinType = "early") => {
-  if (disabled) return "#a3a3a3";
-  if (state !== "hover" && state !== "open") {
-    return mode == "early" ? "#5e5e5e" : "#ffffff";
-  } else if (state === "hover") {
-    return "#52c8f9";
-  } else if (state === "open") {
-    return "#ffffff";
-  } else {
-    return "#ffffff";
-  }
-};
-
-const getXuJieArrowICONColor = (state: string, disabled: boolean, mode: ThemeModuleSkinType = "early") => {
-  return "#a3a3a3";
-};
 
 
 const checkDropdownContent = (dropdownRef: React.MutableRefObject<HTMLDivElement | null>, target: any) => {
@@ -322,17 +300,14 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
 
     // NOTE: renderSubLayerTooltip
     const renderSubLayerTooltip = (): any => {
-        if (showSub && subChildren && subRef?.current) {
-            const param = {
-                listItemComponents: renderArrowListItem(subChildren, !props.tree, false),
-                targetDomRef: subRef && subRef,
-                placement: "right-start" as Placement,
-                showArrow: false,
-                source: subChildren,
-            };
-            return renderTooltip(param);
-        }
-        return <></>
+        const param = {
+            listItemComponents: renderArrowListItem(subChildren, !props.tree, false),
+            targetDomRef: subRef && subRef,
+            placement: "right-start" as Placement,
+            showArrow: false,
+            source: subChildren,
+        };
+        return renderTooltip(param);
     };
 
     // NOTE: renderLayerTooltip
@@ -413,11 +388,11 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                 <ButtonArrow>
                     {!props.disabled && state.show ? (
                         <SelectButtonArrowUpSVGICON
-                            fill={getArrowICONColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
+                            fill={getArrowIconColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
                         />
                     ) : (
                         <SelectButtonArrowDownSVGICON
-                            fill={getArrowICONColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
+                            fill={getArrowIconColor(state.status, props.disabled ? props.disabled : false, props.theme.mode)}
                         />
                     )}
                 </ButtonArrow>
@@ -427,7 +402,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
             {!props.disabled && renderMultiLayerTooltip()}
 
             {/* NOTE: renderSubLayerTooltip*/}
-            {renderSubLayerTooltip()}
+            {showSub && subChildren && subRef?.current && renderSubLayerTooltip()}
         </Container>
     );
 };

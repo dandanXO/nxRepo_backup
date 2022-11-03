@@ -1,48 +1,9 @@
 import styled from "styled-components";
 import React, {useCallback, useEffect, useState} from "react";
-import {IListItemType} from "./IListItemType";
+import {IListItemType} from "../IListItemType";
+import {getTapColor} from "./getTapColor";
+import {getListItemStatus} from "./getListItemStatus";
 
-// NOTE: 不同狀態的顏色
-const getListItemStatus = (state: IListItemType) => {
-    if (state === "normal") {
-        return `
-            background-color: transparent;
-        `;
-    } else if (state === "hover") {
-        return `
-            background-color: rgba(0, 0, 0, 0.24);
-            color: #52c8f9;
-        `;
-    } else if (state === "select") {
-        return `
-            color: #52c8f9;
-        `;
-    } else {
-      return ``
-    }
-};
-
-const getXuJieListItemStatus = () => {
-  // NOTE: xujie
-  return `
-    color: #aaa;
-  `
-};
-
-// NOTE: 點擊瞬間的顏色
-const getTapColor = () => {
-  return `
-    &:active {
-          background-color: #36a9fb;
-          color: white;
-      }
-  `
-}
-const getXuJieTapColor = () => {
-  return `
-
-  `
-}
 
 interface StyledListItemProps {
   state: IListItemType;
@@ -59,17 +20,15 @@ const StyledListItem = styled.li<StyledListItemProps>`
     line-height: 28px;
     cursor: pointer;
     color: #ffffff;
-    //${props => getListItemStatus(props.state)}
-    ${props => getXuJieListItemStatus()};
-    //${props => getTapColor()};
-    ${props => getXuJieTapColor()};
+    ${props => getListItemStatus(props.state)}
+    ${props => getTapColor()};
 `;
 
+// NOTICE: REFACTOR ME
 const StyledXuJieListItem = styled(StyledListItem)`
   height: 49px;
   line-height: 49px;
 `
-
 
 interface ListItemProps {
     select: boolean;
