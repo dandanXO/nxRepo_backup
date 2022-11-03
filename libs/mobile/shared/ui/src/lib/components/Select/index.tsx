@@ -20,7 +20,7 @@ import {SelectButtonArrowRightSVGICON} from "./Icon/SelectButtonArrowRightSVGICO
 import {getArrowIconColor} from "./getArrowIconColor";
 
 import SelectButton from "./layoutSkin/Button/XuJieStyledSelectButton";
-import ButtonText from "./layout/ButtonText/XujieButtonText";
+import ButtonText from "./layoutSkin/ButtonText/XujieButtonText";
 import {XuJieInfiniteScrollContent} from "./layoutSkin/InfiniteScrollContent/XuJieInfiniteScrollContent";
 
 
