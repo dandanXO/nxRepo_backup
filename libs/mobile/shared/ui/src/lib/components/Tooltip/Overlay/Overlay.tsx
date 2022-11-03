@@ -1,5 +1,5 @@
 import React from "react";
-import BaseOverlay, {OverlayReturn} from "../core/Overlay";
+import BaseOverlay, {OverlayReturn} from "../../core/Overlay";
 import {Placement} from "popper.js";
 
 interface OverlayProps {

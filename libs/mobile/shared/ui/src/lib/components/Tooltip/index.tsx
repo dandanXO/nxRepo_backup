@@ -1,6 +1,6 @@
 // import AppContext from "utils/AppContext";
 import React, {useEffect, useRef, useState} from "react";
-import Overlay from "../Overlay";
+import Overlay from "./Overlay";
 import {Tooltip} from "./Tooltip";
 import {Placement} from "popper.js";
 
