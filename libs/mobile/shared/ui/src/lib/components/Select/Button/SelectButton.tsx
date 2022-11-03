@@ -9,12 +9,13 @@ interface StyledSelectButtonProps {
     disabled: boolean;
 }
 
-const StyledSelectButton = styled.div.attrs({
+export const StyledSelectButton = styled.div.attrs({
     className: "select-button",
 })<StyledSelectButtonProps>`
     display: inline-block;
     position: relative;
-    box-sizing: border-box;
+    //box-sizing: border-box;
+    box-sizing: content-box;
 
     min-width: 90px;
     ${props => getWidth(props.fixButtonWidth)};
@@ -39,10 +40,4 @@ const StyledSelectButton = styled.div.attrs({
     cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
 `;
 
-const XuJieStyledSelectButton = styled(StyledSelectButton)`
-  height: 49px;
-  line-height: 49px;
-  padding: 0px 20px;
-`;
 
-export default XuJieStyledSelectButton;

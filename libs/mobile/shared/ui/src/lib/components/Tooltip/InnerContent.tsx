@@ -14,9 +14,13 @@ const StyledInnerContent = styled.div.attrs({
     /* NOTICE: For custom */
     border-radius: 5px;
     color: ${props => (props.fontColor ? props.fontColor : "#000000")};
-    background-color: ${props => props.backgroundColor};
+    background-color: ${props => props.theme.mode === "early" ? "#2d3b58" : "#2e3e68"}};
     ${props => getBoxShadow(props.borderWidth, props.borderColor)};
 `;
+
+const XuJieStyledInnerContent = styled(StyledInnerContent)`
+  background-color: #fff;
+`
 
 interface InnerContentPropTypes {
     children: React.ReactNode;
@@ -27,7 +31,7 @@ type InnerContentInterface = InnerContentPropTypes & TooltipOverylayCustomDispla
 
 const InnerContent = (props: InnerContentInterface) => {
     return (
-        <StyledInnerContent
+        <XuJieStyledInnerContent
             style={{
                 // NOTE: For customStyle
                 padding: props.customStyle || props.noPadding ? "0px" : "3px 7px",
@@ -44,12 +48,12 @@ const InnerContent = (props: InnerContentInterface) => {
             ) : (
                 props.children
             )}
-        </StyledInnerContent>
+        </XuJieStyledInnerContent>
     );
 };
 export default InnerContent;
 
-function getBoxShadow(size: number = 0, borderColor: string = "black") {
+function getBoxShadow(size = 0, borderColor = "black") {
     if (size === 1) {
         return `
             box-shadow: inset 0px 0px 0px 1px ${borderColor}, 0px 0px 0px 0px ${borderColor};

@@ -4,6 +4,7 @@ import {fontSizeListToRem} from "../fontSize";
 export interface IThemeConfig {
   color: typeof Colors;
   fontSize: typeof fontSizeListToRem;
+  fontFamily: string;
   page: {
     bgColor: Colors;
   },

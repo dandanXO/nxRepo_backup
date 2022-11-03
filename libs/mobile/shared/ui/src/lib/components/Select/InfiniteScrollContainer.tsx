@@ -20,16 +20,10 @@ const InfiniteScrollContainer = styled.div.attrs({
     padding: 8px 0 8px 0;
     //background: #4d5c77;
     //background: pink;
-    background: #2e3e68;
+    //background: #2e3e68;
     border-radius: 4px;
-    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.36);
-
-    // REFACTORING:
-    //padding: 8px 0;
-
-   // NOTE: xujie
-   // background: #fff;
-    //color: #000;
+    border: 1px solid #aaa;
+    //box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.36);
 `;
 
 export default InfiniteScrollContainer;

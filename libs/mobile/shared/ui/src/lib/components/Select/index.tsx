@@ -7,11 +7,8 @@ import SelectTooltip from "../Tooltip";
 import InfiniteScroll from "../InfiniteScroll";
 
 import Container from "./Container";
-import SelectButton from "./Button/SelectButton";
 
 import InfiniteScrollContainer from "./InfiniteScrollContainer";
-import InfiniteScrollContent from "./InfiniteScrollContent";
-import ButtonText from "./ButtonText";
 import ButtonArrow from "./ButtonArrow";
 import {IListItemType} from "./IListItemType";
 
@@ -21,6 +18,11 @@ import {SelectButtonArrowUpSVGICON} from "./Icon/SelectButtonArrowUpSVGICON";
 import {SelectButtonArrowDownSVGICON} from "./Icon/SelectButtonArrowDownSVGICON";
 import {SelectButtonArrowRightSVGICON} from "./Icon/SelectButtonArrowRightSVGICON";
 import {getArrowIconColor} from "./getArrowIconColor";
+
+import SelectButton from "./layoutSkin/Button/XuJieStyledSelectButton";
+import ButtonText from "./layout/ButtonText/XujieButtonText";
+import {XuJieInfiniteScrollContent} from "./layoutSkin/InfiniteScrollContent/XuJieInfiniteScrollContent";
+
 
 export type ISelection  = {
     id: number;
@@ -193,7 +195,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         return showComponent ? parentItem.component() : parentItem.name;
     };
 
-    const calculateDataSourceLenth = (dataSource: any, isTree = false) => {
+    const calculateDataSourceLength = (dataSource: any, isTree = false) => {
         if (isTree) {
             return dataSource.reduce((curr: number, item: any) => {
                 curr++;
@@ -222,7 +224,9 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                 show={!disabled && state.show}
                 placement={placement}
                 // customStyle={true}
-                backgroundColor={mode === "early" ? "#2d3b58" : "#2e3e68"}
+                // backgroundColor={mode === "early" ? "#2d3b58" : "#2e3e68"}
+                // NOTICE: Xujie
+                backgroundColor={"#fff"}
                 borderWidth={0}
                 noContentPadding
                 showArrow={showArrow}
@@ -230,7 +234,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                 <InfiniteScrollContainer
                     mode={mode}
                     // itemSize={props.dataSource.length}
-                    height={getHeight(calculateDataSourceLenth(source ? source : dataSource, tree), maxItemCount)}
+                    height={getHeight(calculateDataSourceLength(source ? source : dataSource, tree), maxItemCount)}
                     width={fixButtonWidth ? fixButtonWidth : 70}
                 >
                     {/*TODO: Need to bind Full Window Change Scroll */}
@@ -238,10 +242,10 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                         ref={infiniteScrollRef}
                         overScroll
                         width="100%"
-                        height={getHeight(calculateDataSourceLenth(source ? source : dataSource, tree), maxItemCount) + "px"}
+                        height={getHeight(calculateDataSourceLength(source ? source : dataSource, tree), maxItemCount) + "px"}
                         barWidth="9px"
                     >
-                        <InfiniteScrollContent>{listItemComponents}</InfiniteScrollContent>
+                        <XuJieInfiniteScrollContent>{listItemComponents}</XuJieInfiniteScrollContent>
                     </InfiniteScroll>
                 </InfiniteScrollContainer>
             </SelectTooltip>

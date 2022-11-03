@@ -6,6 +6,7 @@ const DefaultThemeConfig: IThemeConfig = {
   // NOTE: Commons
   color: Colors,
   fontSize: fontSizeListToRem,
+  fontFamily: "Rubik",
   page: {
     bgColor: Colors.white,
   },

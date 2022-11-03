@@ -1,11 +1,8 @@
 import styled from "styled-components";
 import {ThemeModuleSkinType} from "../type/module";
 import {IListItemType} from "./IListItemType";
+import {IThemeConfig} from "@frontend/mobile/shared/ui";
 
-interface ButtonTextProps {
-  disabled?: boolean;
-  status: IListItemType;
-}
 
 const getTextColor = (disabled = false, skinType: ThemeModuleSkinType, status: IListItemType) => {
   if (!disabled) {
@@ -35,12 +32,17 @@ const getTextColor = (disabled = false, skinType: ThemeModuleSkinType, status: I
   }
 };
 
-const ButtonText = styled.div<ButtonTextProps>`
+interface ButtonTextProps {
+  disabled?: boolean;
+  status: IListItemType;
+  theme: IThemeConfig;
+}
+
+export const ButtonText = styled.div<ButtonTextProps>`
     display: block;
-    padding: 0 11px 0 0;
-    // color: ${props => getTextColor(props.disabled, props.theme.mode, props.status)};
-    color: #aaaaaa;
+    padding: 0 0 0 0;
+    color: ${props => getTextColor(props.disabled, props.theme.mode, props.status)};
 `;
 
-export default ButtonText;
+
 

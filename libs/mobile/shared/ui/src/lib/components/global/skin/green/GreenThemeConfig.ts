@@ -6,6 +6,7 @@ import { IThemeConfig } from "../../types/IThemeConfig";
 export const GreenThemeConfig: IThemeConfig = {
   color: Colors,
   fontSize: fontSizeListToRem,
+  fontFamily: "Rubik",
   page: {
     bgColor: Colors.superLightGreen,
   },

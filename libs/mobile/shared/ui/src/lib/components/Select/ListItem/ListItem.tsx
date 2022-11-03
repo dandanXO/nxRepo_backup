@@ -1,34 +1,7 @@
-import styled from "styled-components";
 import React, {useCallback, useEffect, useState} from "react";
 import {IListItemType} from "../IListItemType";
-import {getTapColor} from "./getTapColor";
-import {getListItemStatus} from "./getListItemStatus";
+import {XuJieStyledListItem} from "../layoutSkin/ListItem/XuJieStyledListItem";
 
-
-interface StyledListItemProps {
-  state: IListItemType;
-  onMouseOver: () => void;
-  onMouseOut: () => void;
-  onClick: () => void;
-}
-
-const StyledListItem = styled.li<StyledListItemProps>`
-    box-sizing: border-box;
-    text-align: left;
-    height: 28px;
-    padding: 0 24px 0 16px;
-    line-height: 28px;
-    cursor: pointer;
-    color: #ffffff;
-    ${props => getListItemStatus(props.state)}
-    ${props => getTapColor()};
-`;
-
-// NOTICE: REFACTOR ME
-const StyledXuJieListItem = styled(StyledListItem)`
-  height: 49px;
-  line-height: 49px;
-`
 
 interface ListItemProps {
     select: boolean;
@@ -68,7 +41,7 @@ const ListItem = (props: ListItemProps) => {
     }, [uiState]);
 
     return (
-        <StyledXuJieListItem
+        <XuJieStyledListItem
             onMouseOver={onMouseOver}
             onMouseOut={onMouseOut}
             onClick={onClick}
@@ -76,7 +49,7 @@ const ListItem = (props: ListItemProps) => {
             // state={props.state}
         >
             {props.children}
-        </StyledXuJieListItem>
+        </XuJieStyledListItem>
     );
 };
 
