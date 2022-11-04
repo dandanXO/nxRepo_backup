@@ -67,8 +67,17 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                 </Radio.Group>
             </Form.Item>
 
-            <Form.Item name="loanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
-                <Input disabled={!props.enableLoanAmount} allowClear placeholder={"初贷初始额度"} />
+            <Form.Item name="loanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                       rules={[
+                           {
+                               validator: async (_, value) =>NumberValidator(_, value)({
+                                   required: true,
+                                   requiredErrorMessage: "请输入初贷初始额度"
+                               })
+                           },
+                       ]}
+            >
+                <Input disabled={!props.enableLoanAmount} placeholder={"初贷初始额度"} />
             </Form.Item>
 
         </Form.Item>
@@ -83,8 +92,17 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                 </Radio.Group>
             </Form.Item>
 
-            <Form.Item name="reLoanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
-                <Input disabled={!props.enableReLoanAmount} allowClear placeholder={"复贷初始额度"} />
+            <Form.Item name="reLoanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                       rules={[
+                           {
+                               validator: async (_, value) =>NumberValidator(_, value)({
+                                   required: true,
+                                   requiredErrorMessage: "请输入复贷初始额度"
+                               })
+                           },
+                       ]}
+            >
+                <Input disabled={!props.enableReLoanAmount} placeholder={"复贷初始额度"} />
             </Form.Item>
 
         </Form.Item>
