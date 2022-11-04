@@ -1,10 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import {
-    GetAttractionsALLRequestQueryArg,
-    GetAttractionsALLResponse,
-    GetAttractionsALLResponseData,
-} from "./demo/getAttractionsALL";
-import {
     GetLoanDetailRequestQuerystring,
     GetLoanDetailResponse,
 } from "./getLoanDetail";
@@ -22,11 +17,6 @@ import {
 import { PostBankBindSaveRequest } from "./postBankBindSave";
 import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
 import { GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring } from "./getLoanRecommend";
-export {
-    GetAttractionsALLResponse,
-    GetAttractionsALLRequestQueryArg,
-    GetAttractionsALLResponseData,
-};
 
 export const API = createApi({
     reducerPath: "api",
