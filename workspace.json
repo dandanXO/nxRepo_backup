@@ -3,7 +3,6 @@
   "version": 2,
   "projects": {
     "admin": "apps/admin",
-    "admin-e2e": "apps/admin-e2e",
     "cms": "apps/cms",
     "cms-e2e": "apps/cms-e2e",
     "mobile": "apps/mobile",

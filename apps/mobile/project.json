@@ -31,52 +31,52 @@
                     "vendorChunk": true
                 },
                 "production": {
-                  "fileReplacements": [
-                    {
-                      "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.prod.ts"
-                    }
-                  ]
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.prod.ts"
+                        }
+                    ]
                 },
                 "development-in": {
-                  "extractLicenses": false,
-                  "optimization": false,
-                  "sourceMap": true,
-                  "vendorChunk": true,
-                  "fileReplacements": [
-                    {
-                      "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.in.dev.ts"
-                    }
-                  ]
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.in.dev.ts"
+                        }
+                    ]
                 },
                 "production-in": {
-                  "fileReplacements": [
-                    {
-                      "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.in.prod.ts"
-                    }
-                  ]
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.in.prod.ts"
+                        }
+                    ]
                 },
                 "development-pk": {
-                  "extractLicenses": false,
-                  "optimization": false,
-                  "sourceMap": true,
-                  "vendorChunk": true,
-                  "fileReplacements": [
-                    {
-                      "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.pk.dev.ts"
-                    }
-                  ]
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.pk.dev.ts"
+                        }
+                    ]
                 },
                 "production-pk": {
-                  "fileReplacements": [
-                    {
-                      "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.pk.prod.ts"
-                    }
-                  ]
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.pk.prod.ts"
+                        }
+                    ]
                 }
             }
         },
