@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import RepaymentModal from "./index";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 export default {
-    title: "Page/LoanDetailsPage",
+    title: "Page/LoanDetailsPage/Modals",
     component: RepaymentModal,
 } as ComponentMeta<typeof RepaymentModal>;
 

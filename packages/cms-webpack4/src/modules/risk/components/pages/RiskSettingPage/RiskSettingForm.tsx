@@ -1,4 +1,5 @@
-import {Form, FormInstance, Input, Radio, Select, Switch} from "antd";
+import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip ,Space} from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 import React, {CSSProperties} from "react";
 import TextArea from "antd/es/input/TextArea";
 
@@ -6,6 +7,8 @@ import {NumberValidator} from "../../../../shared/utils/validation/validator";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {Store} from "antd/es/form/interface"
 import {RiskModelMenu} from "../../../domain/vo/RiskModelMenu";
+import FirstAndRepeatLoanFormByValue from "./FirstAndRepeatLoanFormByValue";
+import FirstAndRepeatLoanFormByRange from "./FirstAndRepeatLoanFormByRange";
 interface RiskSettingFormProps {
     isEdit: boolean;
     id?: number;
@@ -43,104 +46,24 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                     })}
                 </Select>
             </Form.Item>
+            {/* <Form.Item label={"分数类型"} name="riskType" required >
+                <Radio.Group>
+                    <Radio value={'value'}>值</Radio>
+                    <Radio value={'range'}>范围</Radio>
+                    <Radio value={'count'}>
+                        <Space>
+                            依还款笔数
+                            <Tooltip title="依成功还款笔数决定最高可借额度">
+                                <InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} />
+                            </Tooltip>
+                        </Space>
+                    </Radio>
+                </Radio.Group>
+            </Form.Item> */}
 
-            <Form.Item label={"新客分数"} required>
-                {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
-                    return (
-                        <Form.Item key={index}>
-                            {index === 0 && (
-                                <div>
-                                    <CustomLabel style={{ width: 76}}>风控标签</CustomLabel>
-                                    <CustomLabel>风控商等级</CustomLabel>
-                                    <CustomLabel>最高可放款笔数</CustomLabel>
-                                </div>
-                            )}
-                            <Input.Group compact>
-                                {props.isEdit && (
-                                    <Form.Item name={["firstLoan", index, "id"]}  style={{ display: "none" }}>
-                                        <Input/>
-                                    </Form.Item>
-                                )}
-                                <Form.Item style={{ margin: '0 8px 0 0', width: 76 }}>
-                                    <Input placeholder={levelTag} disabled/>
-                                </Form.Item>
-
-                                <Form.Item name={["firstLoan", index, "providerRank"]} style={{ margin: '0 8px 0 0' }}
-                                           rules={[{
-                                               required: true,
-                                               message: "请输入值"
-                                           }]}
-                                >
-                                    <Input placeholder={"值"}/>
-                                </Form.Item>
-
-                                <Form.Item name={["firstLoan", index, "loanCount"]} style={{ margin: '0 8px 0 0' }}
-                                           rules={[
-                                               {
-                                                   validator: async (_, value) =>NumberValidator(_, value)({
-                                                       required: true,
-                                                       requiredErrorMessage: "请输入笔数",
-                                                   })
-                                               },
-                                           ]}
-                                >
-                                    <Input placeholder={"笔数"}/>
-                                </Form.Item>
-                            </Input.Group>
-                        </Form.Item>
-                    )
-                })}
-            </Form.Item>
-
-            <Form.Item label={"复借分数"} required>
-                {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
-                    return (
-                        <Form.Item key={index}>
-                            {index === 0 && (
-                                <div>
-                                    <CustomLabel style={{ width: 76}}>风控标签</CustomLabel>
-                                    <CustomLabel>风控商等级</CustomLabel>
-                                    <CustomLabel>最高可放款笔数</CustomLabel>
-                                </div>
-                            )}
-                            <Input.Group compact>
-                                {props.isEdit && (
-                                    <Form.Item name={["repeatLoan", index, "id"]} style={{ display: "none" }}>
-                                        <Input/>
-                                    </Form.Item>
-                                )}
-
-                                <Form.Item style={{ margin: '0 8px 0 0', width: 76 }}>
-                                    <Input placeholder={levelTag} disabled/>
-                                </Form.Item>
-
-                                <Form.Item name={["repeatLoan", index, "providerRank"]} style={{ margin: '0 8px 0 0' }}
-                                           rules={[{
-                                               required: true,
-                                               message: "请输入值"
-                                           }]}
-                                >
-                                    <Input placeholder={"值"}/>
-                                </Form.Item>
-
-                                <Form.Item name={["repeatLoan", index, "loanCount"]} style={{ margin: '0 8px 0 0' }}
-                                           rules={[
-                                               {
-                                                   validator: async (_, value) =>NumberValidator(_, value)({
-                                                       required: true,
-                                                       requiredErrorMessage: "请输入笔数",
-                                                   })
-                                               },
-                                           ]}
-                                >
-                                    <Input placeholder={"笔数"}/>
-                                </Form.Item>
-
-                            </Input.Group>
-                        </Form.Item>
-                    )
-                })}
-            </Form.Item>
+            <FirstAndRepeatLoanFormByValue isEdit={props.isEdit}/>
+            {/* <FirstAndRepeatLoanFormByRange isEdit={props.isEdit}/> */}
+           
 
             <Form.Item label={"放款笔数"} name="useRcQuota" required>
                 <Radio.Group>

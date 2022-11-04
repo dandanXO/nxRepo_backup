@@ -53,7 +53,7 @@ const UserReviewTable = () => {
         triggerGetList(searchList);
     }, [searchList,postUserReviewIsSuccess])
 
-    
+
     useEffect(() => {
         if (currentData !== undefined) {
             setUserList(currentData)
@@ -62,7 +62,7 @@ const UserReviewTable = () => {
 
 
     useEffect(() => {
-       
+
         // 送出審核 - 錯誤訊息提醒
         if (data && data.length !== 0) {
             errorModal.error({
@@ -152,7 +152,8 @@ const UserReviewTable = () => {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId)} >审核</a>]
+            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId)} >审核</a>],
+            width: 80,
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" },
         { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" },
@@ -228,7 +229,7 @@ const UserReviewTable = () => {
                                 });
                                 onSelectChange([]);
                                 form.submit();
-                                
+
                             }}
                         >
                             {searchText}

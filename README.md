@@ -77,7 +77,7 @@ nx storybook mobile-shared-ui
 nx lint mobile
 
 # Lint admin app
-nx lint admin
+
 ```
 
 #### Format
@@ -116,7 +116,7 @@ nx graph
 nx build mobile
 
 # Build admin app
-nx build admin
+
 ```
 
 
@@ -129,6 +129,7 @@ node -v
 rm -rf node_modules
 npm uninstall nx --location=global
 npm install nx --location=global
+npm install -g pnpm
 pnpm install
 npm -v
 nx reset
@@ -149,9 +150,8 @@ npm run [scripts]
 
 ### Admin (new dlh-web)
 ```shell
-nx serve admin
-nx build admin 
-nx serve admin --prod 
+cd ./packages/cws-webpack4
+npm run [scripts]
 ```
 
 ## Recipe
@@ -176,7 +176,7 @@ nx serve admin --prod
 
 ## Best Practices
 
-![](./docs/organization.png)
+![](docs/assets/organization.png)
 
 - importants
   - mental model

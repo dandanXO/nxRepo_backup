@@ -25,9 +25,10 @@ export const UpperDefaultLabel = styled.label<Label>`
   line-height: 22px;
 `;
 
-// NOTICE: RightInputStyle
-export const RightDefaultLabel = styled.label<Label>`
+// NOTICE: Xujie - RightInputStyle
+export const LeftDefaultLabel = styled.label<Label>`
   //flex: 1 0 auto; //default
   flex: 0 0 auto;
   font-size: 17px;
+  margin-right: 10px;
 `;

@@ -16,7 +16,7 @@ const openBalanceNotification = (balance) => {
   notification.open({
     message: '余额不足',
     description:
-      "Currently risk control balance is:" + balance + ",lower than [2000].Please charge immediately,so as not to affect the system operations！",
+      "Currently risk control balance is:" + balance + ",lower than [300].Please charge immediately,so as not to affect the system operations！",
     onClick: () => {
       console.log('Notification Clicked!');
     },
@@ -99,7 +99,7 @@ class LayoutHeader extends Component {
                                 alert(`Currently risk control balance is: ${balance} ,lower than [0].Please charge immediately,so as not to affect the system operations！`)
                                 return;
                             }
-                            if (balance < 2000) {// 风控费低于2000，弹窗提示
+                            if (balance < 300) {// 风控费低于300，弹窗提示
                               openBalanceNotification(balance);
                               _this.alertTimer = setInterval(() => {
                                 openBalanceNotification(balance);

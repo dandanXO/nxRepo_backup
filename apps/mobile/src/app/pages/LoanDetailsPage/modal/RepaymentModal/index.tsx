@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import AdSVG from "./repayment_banner.svg";
+
 import {
-    Horizontal,
-    NotificationButton,
-    RepayICON,
-    ListItem,
-    Title,
-    Overlay,
-    Radio,
-    Input,
+  Horizontal,
+  NotificationButton,
+  RepayICON,
+  ListItem,
+  Title,
+  Overlay,
+  Radio,
+  Input, Select,
 } from "@frontend/mobile/shared/ui";
+import {environment} from "../../../../../environments/environment";
 const Paragraph = styled.div`
     text-align: left;
     color: #aaaaaa;
@@ -24,8 +27,12 @@ const SectionBalance = styled.div`
 const SectionOptions = styled.div`
     padding: 10px;
 `;
+const MethodContainer = styled.div`
+  margin-bottom: 18px;
+`;
 const SectionParagraph = styled.div`
     margin-bottom: 10px;
+    padding: 10px;
 `;
 
 const SectionButton = styled.div`
@@ -57,6 +64,20 @@ const RepaymentButton = styled(RepayAndApplyButton)`
     color: ${(props) => props.theme.button.info.text};
 `;
 
+const BoldText = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 7px;
+`
+const PaymentMethodContainer = styled.div`
+  margin-bottom: 18px;
+`
+
+const AdvertisementImg = styled.img.attrs(props => ({
+  src: AdSVG
+}))``;
+
 interface RepaymentModalProps {
     balance: number;
     setRepayBalance: React.Dispatch<React.SetStateAction<number>>;
@@ -66,13 +87,15 @@ interface RepaymentModalProps {
 }
 const RepaymentModal = (props: RepaymentModalProps) => {
     const balance = props.balance;
-    const [balanceValue, setBalanceValue] = useState(String("₹" + balance));
+    const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
     const [radioValue, setRadioValue] = useState("balance");
+    const [paymentMethodValue, setPaymentMethodValue] = useState(0);
+
     const handleConfirm = () => {
         props.handlePostRepayCreate(
             false,
             false,
-            Number(balanceValue.replace("₹", ""))
+            Number(balanceValue.replace(`${environment.currency}`, ""))
         );
         props.setShowRepaymentModal(false);
     };
@@ -89,64 +112,86 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                             <SectionBalance>
                                 <ListItem
                                     title="Balance"
-                                    text={`₹ ${balance}`}
+                                    text={`${environment.currency} ${balance}`}
                                 />
                             </SectionBalance>
 
-                            <Horizontal />
 
                             <SectionOptions>
-                                <Radio.Group
+
+                                <MethodContainer>
+                                  <Radio.Group
                                     value={radioValue}
                                     onCheck={(value: any) => {
-                                        setRadioValue(value);
-                                        if (value === "balance") {
-                                            setBalanceValue("₹" + balance);
-                                        }
+                                      setRadioValue(value);
+                                      if (value === "balance") {
+                                        setBalanceValue(`${environment.currency}` + balance);
+                                      }
                                     }}
-                                >
+                                  >
                                     <Radio value="balance">Balance</Radio>
                                     <Radio value="custom">Custom Amount</Radio>
-                                </Radio.Group>
+                                  </Radio.Group>
+                                </MethodContainer>
 
                                 <Input
                                     label="Amount"
-                                    labelType="right"
+                                    labelType="left"
                                     value={balanceValue}
                                     disabled={radioValue === "balance"}
                                     onChange={(event: any) => {
                                       let value = event.target.value;
-                                      value = value.replaceAll("₹", "");
+                                      value = value.replaceAll(`${environment.currency}`, "");
                                       // NOTE: if custom balance exceed max balance then setting max balance
                                       if(String(Number(value)) === "NaN") {
-                                        setBalanceValue("₹1");
+                                        setBalanceValue(`${environment.currency}1`);
                                         props.setRepayBalance(1);
                                       } else {
                                         if(Number(value) > Number(balance)) {
                                           value = balance;
                                         }
-                                        setBalanceValue("₹" + value);
+                                        setBalanceValue(`${environment.currency}` + value);
                                         props.setRepayBalance(value);
                                       }
 
                                     }}
                                 />
-                                <SectionParagraph>
-                                    <Paragraph>Attention:</Paragraph>
-                                    <Paragraph>
-                                        1. Before repayment, please make sure
-                                        that youhave enough balance on your bank
-                                        account.
-                                    </Paragraph>
-                                    <Paragraph>
-                                        2. In order to protect your rights, we
-                                        strongly recommend you take a screenshot
-                                        and upload your UTR number after
-                                        completing the repayment and return to
-                                        the APP to upload your repayment
-                                        receipt.
-                                    </Paragraph>
-                                </SectionParagraph>
+                                <PaymentMethodContainer>
+                                  <BoldText>Payment Method</BoldText>
+
+                                  <Select
+                                    dataSource={[
+                                      "XXXPay (E-Wallet)",
+                                      "XXXPay (E-Wallet)2",
+                                      "XXXPay (E-Wallet)3",
+                                      "XXXPay (E-Wallet)4",
+                                      "XXXPay (E-Wallet)5",
+                                      "XXXPay (E-Wallet)6",
+                                      "XXXPay (E-Wallet)7",
+                                      "XXXPay (E-Wallet)8",
+                                      "XXXPay (E-Wallet)9",
+                                      "XXXPay (E-Wallet)10",
+                                      "XXXPay (E-Wallet)11",
+                                      "XXXPay (E-Wallet)12",
+                                      "XXXPay (E-Wallet)13",
+                                    ]}
+                                    defaultIndex={paymentMethodValue}
+                                    fixButtonWidth={"calc(100vw - 70px)"}
+                                    maxItemCount={4}
+                                    // FIXME: to controlled component
+                                    onSelect={(index:number) => {
+                                      setPaymentMethodValue(index);
+                                    }}
+                                  />
+                                </PaymentMethodContainer>
+
+                                <Horizontal />
+
+
+                                <AdvertisementImg/>
+
+
+
                                 <SectionButton>
                                     <RepayAndApplyButton
                                         onClick={() => {
@@ -171,7 +216,27 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                         Repayment
                                     </RepaymentButton>
                                 </SectionButton2>
+
                             </SectionOptions>
+
+
+                            <SectionParagraph>
+                              <Paragraph>Attention:</Paragraph>
+                              <Paragraph>
+                                1. Before repayment, please make sure
+                                that youhave enough balance on your bank
+                                account.
+                              </Paragraph>
+                              <Paragraph>
+                                2. In order to protect your rights, we
+                                strongly recommend you take a screenshot
+                                and upload your UTR number after
+                                completing the repayment and return to
+                                the APP to upload your repayment
+                                receipt.
+                              </Paragraph>
+                            </SectionParagraph>
+
                         </RepaymentModalContainer>
                     );
                 }}

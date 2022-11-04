@@ -8,7 +8,7 @@ import { StyledInput2, StyledTopInput } from './atom/StyledInput';
 import { InputStatus, InputValidStatus } from './type';
 import { useForceUpdate } from '../useForceUpdate';
 import {
-  RightDefaultLabel,
+  LeftDefaultLabel,
   UpperDefaultLabel,
   UpperFilledLabel,
 } from './atom/UpperLabel';
@@ -77,7 +77,7 @@ export interface InputProps {
   className?: string;
   // label type
   label?: string;
-  labelType?: string;
+  labelType?: "none" | "top" | "left";
   style?: any;
   ref?: any;
 }
@@ -233,30 +233,45 @@ const Input: InputInterface = ({
   let CustomInput: any;
   let LabelComponentElement;
   let upperLabelType = false;
+
+  // NOTE: 版型 TOP
   if (labelType === 'top') {
     CustomInput = StyledTopInput;
     upperLabelType = true;
+
+    // NOTE: 無編輯中
     if (!isEdit) {
-      if (String(value).length > 0) {
-        LabelComponentElement = '';
-      } else {
+      if (String(value).length === 0) {
+        // NOTE: 編輯前
         LabelComponentElement = (
           <UpperFilledLabel htmlFor={labelID}>{label}</UpperFilledLabel>
         );
+      } else {
+        // NOTE: 編輯後
+        LabelComponentElement = (
+          <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
+        );
       }
     } else {
+      // NOTE: 編輯中
       LabelComponentElement = (
         <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
       );
     }
-    // }
+
+  } else if(labelType === "none") {
+    //
+    CustomInput = StyledTopInput;
+    upperLabelType = true;
   } else {
-    // right
-    LabelComponentElement = (
-      <RightDefaultLabel htmlFor={labelID}>{label}</RightDefaultLabel>
-    );
+    // NOTE: 版型 Left
     CustomInput = StyledInput2;
     upperLabelType = false;
+
+    // Left
+    LabelComponentElement = (
+      <LeftDefaultLabel htmlFor={labelID}>{label}</LeftDefaultLabel>
+    );
   }
   // let isFocus = statusRef.current === "Focus" || statusRef.current === "KeyDown" ;
   return (

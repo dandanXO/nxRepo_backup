@@ -3,7 +3,6 @@ import Button from './lib/components/Button';
 import Card from './lib/components/Card';
 import CardContent from './lib/components/CardContent';
 import Checkbox from './lib/components/Checkbox';
-import DefaultThemeConfig from './lib/components/global/DefaultThemeConfig';
 import Divider from './lib/components/Divider';
 import Form from './lib/components/Form';
 
@@ -18,7 +17,7 @@ import Tag from './lib/components/Tag';
 import { Input } from './lib/components/Input';
 import useLocationOrderQueryString from './lib/hooks/useLocationOrderQueryString';
 import { flexCreator } from './lib/components/utils';
-import { SuccessICON } from './lib/components/Icon/Icon';
+import { OrangeSuccessICON, GeneralSuccessICON } from './lib/components/Icon/Icon';
 import { AppThemeProvider } from './lib/components';
 import AmountPaidIcon from './lib/components/images/amount_paid_icon.svg';
 
@@ -31,6 +30,8 @@ import { IThemeConfig } from './lib/components/global/types/IThemeConfig';
 import { Colors } from './lib/components/global/Colors';
 import { fontSizeListToRem } from './lib/components/global/fontSize';
 import {GreenThemeConfig} from "./lib/components/global/skin/green/GreenThemeConfig";
+import DefaultThemeConfig from "./lib/components/global/skin/default/DefaultThemeConfig";
+import { Select } from './lib/components/Select';
 
 export {
   StyledLoading,
@@ -62,9 +63,11 @@ export {
   Input,
   useLocationOrderQueryString,
   flexCreator,
-  SuccessICON,
+  OrangeSuccessICON,
+  GeneralSuccessICON,
   AppThemeProvider,
   AmountPaidIcon,
+  Select,
 };
 
 export type { InputValue };

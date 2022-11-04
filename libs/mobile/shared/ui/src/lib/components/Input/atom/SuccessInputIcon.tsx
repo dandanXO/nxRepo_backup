@@ -1,7 +1,5 @@
 import React from 'react';
 import { InputIconProps } from '../type';
-// import {withTheme} from "styled-components";
-// import {ThemeModuleSkinType} from "../../../../type/module";
 
 type SuccessInputIconInterface = InputIconProps & {
   // theme: {

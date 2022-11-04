@@ -105,7 +105,8 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                             userBrowseEditChannelSettingUseCase(record);
                         }}>修改</a>,
                     ]
-                }
+                },
+                width: 80,
             },
             {
                 key: 'id',
@@ -133,7 +134,8 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                     "all": { text: '全部', status: 'Default' },
                     "enable": { text: '启用', status: 'Success' },
                     "disable": { text: '停用', status: 'Default' },
-                }
+                },
+                width: 80,
             },
         ];
         setColumns(columns);

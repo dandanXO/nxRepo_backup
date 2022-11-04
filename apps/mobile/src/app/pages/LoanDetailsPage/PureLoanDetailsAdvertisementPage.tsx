@@ -5,14 +5,18 @@ import Advertisement from "../../components/Advertisement";
 import PureLoanDetails, {
     PureLoanDetailsPageProps,
 } from "../../components/PureLoanDetails";
+import {CustomPage} from "../BindBankAccountPage/components/CustomPage";
 
-type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps;
+type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps & {
+  postLoanSubmitOrder: (obj: any) => any;
+};
 
 export const PureLoanDetailsAdvertisementPage = (
     props: PureLoanDetailsAdvertisementPage
 ) => {
+
     return (
-        <Page>
+        <CustomPage>
             <PureLoanDetails
                 currentData={props.currentData}
                 navigateToUploadPaymentReceiptPage={
@@ -22,7 +26,8 @@ export const PureLoanDetailsAdvertisementPage = (
             />
             <Advertisement
                 recommendProducts={props?.currentData?.recommendProducts}
+                postLoanSubmitOrder={props.postLoanSubmitOrder}
             />
-        </Page>
+        </CustomPage>
     );
 };

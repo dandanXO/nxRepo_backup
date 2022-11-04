@@ -1,6 +1,7 @@
 import React from "react";
 import useLoanDetailStory from "../../components/useLoanDetailStory";
 import { PureLoanDetailsAdvertisementPage } from "./PureLoanDetailsAdvertisementPage";
+import {usePostLoanSubmitOrderMutation} from "../../api";
 
 const LoanDetailsPage = () => {
     const {
@@ -8,6 +9,10 @@ const LoanDetailsPage = () => {
         navigateToUploadPaymentReceiptPage,
         handlePostRepayCreate,
     } = useLoanDetailStory();
+
+  const [postLoanSubmitOrder, { isLoading }] =
+    usePostLoanSubmitOrderMutation();
+
     return (
         <PureLoanDetailsAdvertisementPage
             currentData={currentData}
@@ -15,6 +20,7 @@ const LoanDetailsPage = () => {
                 navigateToUploadPaymentReceiptPage
             }
             handlePostRepayCreate={handlePostRepayCreate}
+            postLoanSubmitOrder={postLoanSubmitOrder}
         />
     );
 };

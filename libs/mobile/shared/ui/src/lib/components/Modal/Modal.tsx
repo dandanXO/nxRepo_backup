@@ -92,7 +92,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
     if (!this.state.show) return null;
     AppContext.dev && console.log('this.props', this.props);
     return (
-      <div className="uni-modal">
+      <div className= "uni-modal">
         <Overlay
           mask={this.props.mask ? this.props.mask : false}
           // onClick={(event) => {
@@ -213,6 +213,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                       {this.props.cancelText}
                     </CancelButton>
                   )}
+
                   {/* NOTE: Default Confirm, Cancel */}
                   {this.props.mode === 'confirm' &&
                     typeof this.props.confirmColor === 'undefined' &&

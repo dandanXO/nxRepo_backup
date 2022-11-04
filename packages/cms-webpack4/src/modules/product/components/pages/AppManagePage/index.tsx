@@ -67,7 +67,8 @@ export const AppManagePage = () => {
                             // userBrowseDeleteChannelSettingUseCase(record)
                         }}>刪除</a>,
                     ]
-                }
+                },
+                width: 100,
             },
             { key: 'appName', title: 'APP名稱', dataIndex: 'appName', initialValue: "" },
             { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: "", hideInSearch: true,},

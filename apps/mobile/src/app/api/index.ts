@@ -1,10 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import {
-    GetAttractionsALLRequestQueryArg,
-    GetAttractionsALLResponse,
-    GetAttractionsALLResponseData,
-} from "./demo/getAttractionsALL";
-import {
     GetLoanDetailRequestQuerystring,
     GetLoanDetailResponse,
 } from "./getLoanDetail";
@@ -22,63 +17,44 @@ import {
 import { PostBankBindSaveRequest } from "./postBankBindSave";
 import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
 import { GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring } from "./getLoanRecommend";
-export {
-    GetAttractionsALLResponse,
-    GetAttractionsALLRequestQueryArg,
-    GetAttractionsALLResponseData,
-};
 
-const baseUrl = "/api/v2";
 export const API = createApi({
     reducerPath: "api",
     baseQuery: axiosBaseQuery({
-        baseUrl,
+        baseUrl: "/api/v2",
     }),
     endpoints: (builder) => ({
-        // NOTICE: demo
-        // getAttractionsAll: builder.query<GetAttractionsALLResponse, GetAttractionsALLRequestQueryArg>({
-        //     query: (arg: GetAttractionsALLRequestQueryArg) => `/${arg.lang}/Attractions/All?page=1`,
-        // }),
-        // getLoanDetail: builder.query({
-        //     query: (query: GetLoanDetailRequestQuerystring) => `/loan/detail?orderNo=${query.orderNo}`,
-        // })
-        // getAttractionsAll: builder.query<
-        //     GetAttractionsALLResponse,
-        //     GetAttractionsALLRequestQueryArg
-        // >({
-        //     query: (arg: GetAttractionsALLRequestQueryArg) => ({
-        //         url: `/${arg.lang}/Attractions/All?page=1`,
-        //         method: "get",
-        //     }),
-        // }),
+        // NOTE: 取得貸款訂單詳情
         getLoanDetail: builder.query<
             GetLoanDetailResponse,
             GetLoanDetailRequestQuerystring
         >({
             query: (query: GetLoanDetailRequestQuerystring) => ({
+                method: "get",
                 url: `/loan/detail`,
                 params: {
                     orderNo: query.orderNo,
                 },
-                method: "get",
             }),
         }),
+        // NOTE: 上傳還款證明
         getRepayReceipt: builder.query<
             GetRepayReceiptResponse,
             GetRepayReceiptRequestQuerystring
         >({
             query: (query: GetRepayReceiptRequestQuerystring) => ({
+                method: "get",
                 url: `/repay/receipt`,
                 params: {
                     orderNo: query.orderNo,
                 },
-                method: "get",
             }),
         }),
+        // NOTE: 取得還款證明
         postRepayReceipt: builder.mutation<PostRepayReceiptResponse, FormData>({
             query: (requestBody: FormData) => ({
-                url: `/repay/receipt`,
                 method: "post",
+                url: `/repay/receipt`,
                 headers: {
                     // "Content-Type": "multipart/form-data",
                     // https://www.it145.com/9/182527.html
@@ -86,49 +62,50 @@ export const API = createApi({
                         "multipart/form-data;boundary=" + new Date().getTime(),
                 },
                 data: requestBody,
-                // data: {
-                //     file: query.file,
-                //     orderNo: query.orderNo,
-                //     receipt: query.receipt,
-                // }
             }),
         }),
+        // NOTE: 取得可用付款方式
         getRepayTypes: builder.query<GetRepayTypesResponse, {}>({
             query: () => ({
-                url: `/repay/types`,
                 method: "get",
+                url: `/repay/types`,
             }),
         }),
+        // NOTE: 創建還款訂單
         postRepayCreate: builder.mutation<PostRepayCreateResponse,PostRepayCreateRequestBody>({
             query: (query: PostRepayCreateRequestBody) => ({
-                url: `/repay/create`,
                 method: "post",
+                url: `/repay/create`,
                 data: query,
             }),
         }),
+        // NOTE: 绑定银行主卡或是電子錢包
         postBankBindSave: builder.mutation<{}, PostBankBindSaveRequest>({
             query: (requestBody: PostBankBindSaveRequest) => ({
-                url: `/bank-bind/save`,
                 method: "post",
+                url: `/bank-bind/save`,
                 data: requestBody,
             }),
         }),
+        // NOTE: 提交订单
         postLoanSubmitOrder: builder.mutation<{},PostLoanSubmitOrderRequestBody>({
             query: (requestBody: PostLoanSubmitOrderRequestBody) => ({
-                url: `/loan/submit-order`,
                 method: "post",
+                url: `/loan/submit-order`,
                 data: requestBody,
             }),
         }),
+        // NOTE: 借款产品推荐
         getLoanRecommend: builder.query<GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring>({
             query: (query: GetLoanRecommendRequestQuerystring) => ({
-                url: `/loan/recommend`,
                 method: "get",
+                url: `/loan/recommend`,
                 params: query
             }),
         }),
     }),
 });
+
 export const {
     useGetLoanDetailQuery,
     usePostRepayReceiptMutation,

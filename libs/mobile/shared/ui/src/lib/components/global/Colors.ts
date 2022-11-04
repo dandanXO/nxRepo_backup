@@ -17,6 +17,7 @@ export enum Colors {
   gray500 =  '#AAAAAA',
   none = "none",
   green = '#73c106',
+  superLightGreen = '#f5faf4',
   lightGreen = '#bcf270',
   mediumGreen = '#3A7F38',
 }

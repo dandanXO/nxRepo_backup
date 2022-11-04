@@ -76,6 +76,7 @@ export interface UserKycInfoVo {
     kycFinishTime?: string;  // 认证完成时间
     liveness?: boolean;      // 人脸识别认证
     pan?: boolean;           // 税卡认证
+    isAuth?: boolean; 
 
 }
 

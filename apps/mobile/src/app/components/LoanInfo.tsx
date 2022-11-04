@@ -9,6 +9,7 @@ import {
     LoanBrand,
     AmountPaidIcon,
 } from "@frontend/mobile/shared/ui";
+import {environment} from "../../environments/environment";
 
 const LoanInfoStyled = styled.div`
     text-align: center;
@@ -96,7 +97,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                 sizeType={"small"}
             />
             <div className="totalTitle">Total Due</div>
-            <div className="totalText">₹ {totalDueAmount}</div>
+            <div className="totalText">{environment.currency} {totalDueAmount}</div>
             {status === "OVERDUE" && (
                 <div className={"errorText"}>
                     {`Your payment is now N days overdue.
@@ -127,10 +128,10 @@ const LoanInfo = (props: LoanInfoProps) => {
                                 </div>
                             </div>
                         }
-                        text={`₹ ${paidAmount}`}
+                        text={`${environment.currency} ${paidAmount}`}
                     />
                     {status !== "PAY_OFF" && (
-                        <ListItem title={"Balance"} text={`₹ ${balance}`} />
+                        <ListItem title={"Balance"} text={`${environment.currency} ${balance}`} />
                     )}
                 </div>
                 <React.Fragment>

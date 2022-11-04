@@ -1,7 +1,7 @@
 import React from 'react';
 import {ThemeProvider} from 'styled-components';
 import {GlobalStyle} from "./global/globalStyle";
-import DefaultThemeConfig from "./global/DefaultThemeConfig";
+import DefaultThemeConfig from "./global/skin/default/DefaultThemeConfig";
 import {GreenThemeConfig, IThemeConfig} from "@frontend/mobile/shared/ui";
 
 interface IAppThemeProvider {

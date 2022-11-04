@@ -37,6 +37,46 @@
                             "with": "apps/mobile/src/environments/environment.prod.ts"
                         }
                     ]
+                },
+                "development-in": {
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.in.dev.ts"
+                        }
+                    ]
+                },
+                "production-in": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.in.prod.ts"
+                        }
+                    ]
+                },
+                "development-pk": {
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.pk.dev.ts"
+                        }
+                    ]
+                },
+                "production-pk": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.pk.prod.ts"
+                        }
+                    ]
                 }
             }
         },
@@ -54,6 +94,20 @@
                 },
                 "production": {
                     "buildTarget": "mobile:build:production",
+                    "hmr": false
+                },
+                "development-in": {
+                    "buildTarget": "mobile:build:development-in"
+                },
+                "production-in": {
+                    "buildTarget": "mobile:build:production-in",
+                    "hmr": false
+                },
+                "development-pk": {
+                    "buildTarget": "mobile:build:development-pk"
+                },
+                "production-pk": {
+                    "buildTarget": "mobile:build:production-pk",
                     "hmr": false
                 }
             }

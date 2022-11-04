@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
-import { Tabs ,Collapse,List} from 'antd';
+import { Tabs ,Collapse,List,Form,Button,Input} from 'antd';
 import { ConfigResponse,ConfigList } from '../../../api/types/configManageTypes/getConfigList';
 import { useLazyGetConfigListQuery } from '../../../api/types/configManageTypes/configManageApi';
 
-
+import ConfigInput from './components/ConfigInput';
 
 // const { ConfigInput, ConfigSwitch, ConfigTag, ConfigRadio } = ConfigTypes;
 const ConfigManageTab = () => {
@@ -34,7 +34,8 @@ const ConfigManageTab = () => {
                         return (
                             <List.Item>
                             <div  dangerouslySetInnerHTML={{ __html: item.name }}></div>
-                            {item.inputType==="text" && renderConfigTypes(item)}
+                            {/* {item.inputType==="text" && renderConfigTypes(item)} */}
+                            {renderConfigTypes(item)}
                                  
                             </List.Item>
                             
@@ -49,18 +50,20 @@ const ConfigManageTab = () => {
     const saveValue = (key, channelId, value) => {
         // const { updateSystemData } = props;
         // updateSystemData({ key, channelId, value });
+        console.log('123132',key, channelId, value)
     };
-
-
+   
     const renderConfigTypes = (props) => {
-        console.log('props',props)
-        const { inputType, key } = props;
+        console.log('props', props)
+        const { inputType, key, channelId } = props;
         const inputProps = {
             ...props,
-            key: key,
+            // key: key,
             inputKey: key,
             saveValue: saveValue
         }
+
+        return <ConfigInput  {...inputProps} />
         // return inputType === "tag" ? (<ConfigTag  {...inputProps} />) :
         //     inputType === "switch" ? (<ConfigSwitch {...inputProps} />) :
         //         inputType === "radio" ? (<ConfigRadio  {...inputProps} />) :

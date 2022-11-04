@@ -58,6 +58,7 @@ module.exports = (config, context) => {
       hot: true,
       open: true,
       host: "localhost",
+      // NOTE: REFACTOR ME
       port: 4003,
       historyApiFallback: true,
       onBeforeSetupMiddleware: function (devServer) {
@@ -88,5 +89,6 @@ module.exports = (config, context) => {
     );
   }
   // console.log("finalConfig", finalConfig);
+  // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return finalConfig;
 };
