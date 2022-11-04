@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import AdSVG from "./repayment_banner.svg";
+
 import {
-    Horizontal,
-    NotificationButton,
-    RepayICON,
-    ListItem,
-    Title,
-    Overlay,
-    Radio,
-    Input,
+  Horizontal,
+  NotificationButton,
+  RepayICON,
+  ListItem,
+  Title,
+  Overlay,
+  Radio,
+  Input, Select,
 } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../../environments/environment";
 const Paragraph = styled.div`
@@ -30,6 +32,7 @@ const MethodContainer = styled.div`
 `;
 const SectionParagraph = styled.div`
     margin-bottom: 10px;
+    padding: 10px;
 `;
 
 const SectionButton = styled.div`
@@ -61,6 +64,20 @@ const RepaymentButton = styled(RepayAndApplyButton)`
     color: ${(props) => props.theme.button.info.text};
 `;
 
+const BoldText = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 7px;
+`
+const PaymentMethodContainer = styled.div`
+  margin-bottom: 18px;
+`
+
+const AdvertisementImg = styled.img.attrs(props => ({
+  src: AdSVG
+}))``;
+
 interface RepaymentModalProps {
     balance: number;
     setRepayBalance: React.Dispatch<React.SetStateAction<number>>;
@@ -72,6 +89,8 @@ const RepaymentModal = (props: RepaymentModalProps) => {
     const balance = props.balance;
     const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
     const [radioValue, setRadioValue] = useState("balance");
+    const [paymentMethodValue, setPaymentMethodValue] = useState(0);
+
     const handleConfirm = () => {
         props.handlePostRepayCreate(
             false,
@@ -97,7 +116,6 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                 />
                             </SectionBalance>
 
-                            <Horizontal />
 
                             <SectionOptions>
 
@@ -138,22 +156,42 @@ const RepaymentModal = (props: RepaymentModalProps) => {
 
                                     }}
                                 />
-                                <SectionParagraph>
-                                    <Paragraph>Attention:</Paragraph>
-                                    <Paragraph>
-                                        1. Before repayment, please make sure
-                                        that youhave enough balance on your bank
-                                        account.
-                                    </Paragraph>
-                                    <Paragraph>
-                                        2. In order to protect your rights, we
-                                        strongly recommend you take a screenshot
-                                        and upload your UTR number after
-                                        completing the repayment and return to
-                                        the APP to upload your repayment
-                                        receipt.
-                                    </Paragraph>
-                                </SectionParagraph>
+                                <PaymentMethodContainer>
+                                  <BoldText>Payment Method</BoldText>
+
+                                  <Select
+                                    dataSource={[
+                                      "XXXPay (E-Wallet)",
+                                      "XXXPay (E-Wallet)2",
+                                      "XXXPay (E-Wallet)3",
+                                      "XXXPay (E-Wallet)4",
+                                      "XXXPay (E-Wallet)5",
+                                      "XXXPay (E-Wallet)6",
+                                      "XXXPay (E-Wallet)7",
+                                      "XXXPay (E-Wallet)8",
+                                      "XXXPay (E-Wallet)9",
+                                      "XXXPay (E-Wallet)10",
+                                      "XXXPay (E-Wallet)11",
+                                      "XXXPay (E-Wallet)12",
+                                      "XXXPay (E-Wallet)13",
+                                    ]}
+                                    defaultIndex={paymentMethodValue}
+                                    fixButtonWidth={"calc(100vw - 70px)"}
+                                    maxItemCount={4}
+                                    // FIXME: to controlled component
+                                    onSelect={(index:number) => {
+                                      setPaymentMethodValue(index);
+                                    }}
+                                  />
+                                </PaymentMethodContainer>
+
+                                <Horizontal />
+
+
+                                <AdvertisementImg/>
+
+
+
                                 <SectionButton>
                                     <RepayAndApplyButton
                                         onClick={() => {
@@ -178,7 +216,27 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                         Repayment
                                     </RepaymentButton>
                                 </SectionButton2>
+
                             </SectionOptions>
+
+
+                            <SectionParagraph>
+                              <Paragraph>Attention:</Paragraph>
+                              <Paragraph>
+                                1. Before repayment, please make sure
+                                that youhave enough balance on your bank
+                                account.
+                              </Paragraph>
+                              <Paragraph>
+                                2. In order to protect your rights, we
+                                strongly recommend you take a screenshot
+                                and upload your UTR number after
+                                completing the repayment and return to
+                                the APP to upload your repayment
+                                receipt.
+                              </Paragraph>
+                            </SectionParagraph>
+
                         </RepaymentModalContainer>
                     );
                 }}

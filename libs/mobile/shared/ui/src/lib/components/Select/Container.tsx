@@ -7,6 +7,7 @@ const Container = styled.div<{ theme: IThemeConfig}>`
   align-items: center;
   user-select: none;
   background: #fff;
+  text-align: left;
 `;
 
 export default Container;
