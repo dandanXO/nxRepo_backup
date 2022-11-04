@@ -1,7 +1,0 @@
-{
-    "/hs": {
-        "target": "https://app.india-api-dev.com",
-        "secure": true,
-        "changeOrigin": true
-    }
-}
