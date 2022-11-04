@@ -213,6 +213,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                       {this.props.cancelText}
                     </CancelButton>
                   )}
+
                   {/* NOTE: Default Confirm, Cancel */}
                   {this.props.mode === 'confirm' &&
                     typeof this.props.confirmColor === 'undefined' &&

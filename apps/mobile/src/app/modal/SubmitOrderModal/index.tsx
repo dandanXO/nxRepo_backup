@@ -16,11 +16,11 @@ const ModalContentStyled = styled.div`
         justify-content: space-between;
         padding: 12px 0;
         .cancelButton {
-            flex: 1 0 auto;
+            flex: 1 3;
             margin-right: 12px;
         }
         .confirmButton {
-            flex: 3 0 auto;
+            flex: 3 1;
         }
     }
 `;
