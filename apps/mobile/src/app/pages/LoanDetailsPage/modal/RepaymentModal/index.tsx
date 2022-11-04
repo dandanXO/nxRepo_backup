@@ -25,6 +25,9 @@ const SectionBalance = styled.div`
 const SectionOptions = styled.div`
     padding: 10px;
 `;
+const MethodContainer = styled.div`
+  margin-bottom: 18px;
+`;
 const SectionParagraph = styled.div`
     margin-bottom: 10px;
 `;
@@ -97,18 +100,21 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                             <Horizontal />
 
                             <SectionOptions>
-                                <Radio.Group
+
+                                <MethodContainer>
+                                  <Radio.Group
                                     value={radioValue}
                                     onCheck={(value: any) => {
-                                        setRadioValue(value);
-                                        if (value === "balance") {
-                                            setBalanceValue(`${environment.currency}` + balance);
-                                        }
+                                      setRadioValue(value);
+                                      if (value === "balance") {
+                                        setBalanceValue(`${environment.currency}` + balance);
+                                      }
                                     }}
-                                >
+                                  >
                                     <Radio value="balance">Balance</Radio>
                                     <Radio value="custom">Custom Amount</Radio>
-                                </Radio.Group>
+                                  </Radio.Group>
+                                </MethodContainer>
 
                                 <Input
                                     label="Amount"
