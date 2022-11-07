@@ -1,28 +1,45 @@
 import {Form} from "../../../components/Form";
-import {Button, Input, InputValue, Select} from "@frontend/mobile/shared/ui";
-import React, {useState} from "react";
+import {Button, Input, InputValue, Modal, Select} from "@frontend/mobile/shared/ui";
+import React, {useCallback, useEffect, useState} from "react";
 import {Label} from "../../Label";
-import {IForm} from "../../../types/IGeneralPageLayoutTypeProps";
-import styled from "styled-components";
+import {useGetBindCardDropListQuery, usePostBankBindSaveToPKMutation} from "../../../../../api";
+import {z} from "zod";
 
-const Container = styled.div`
-  //display: flex;
-  //flex-direction: column;
-  //justify-content: space-between;
-`;
 
-type IGeneralMobileWalletFormProps = IForm & {
-  //
-}
-export const MobileWalletForm = (props: IGeneralMobileWalletFormProps) => {
+export const MobileWalletForm = () => {
+  // NOTE: 綁定電子錢包
+  const [triggerPostBankBindSaveToPKMutation, { isLoading }] = usePostBankBindSaveToPKMutation();
+
+
+  // NOTE: 取得電子錢包列表
+  const {currentData: bindCardDropListData,
+    isLoading: isBindCardDropListDataLoading,
+    isFetching: isBindCardDropListDataFetching,
+  } = useGetBindCardDropListQuery({});
+
+  // NOTE: 電子錢包列表 Data
+  const [walletDropList, setWalletDropList] = useState<string[]>([]);
+
+  useEffect(() => {
+    if(!bindCardDropListData) return;
+    const walletList = bindCardDropListData && bindCardDropListData.availableWalletVendors && bindCardDropListData.availableWalletVendors.map((wallet) => {
+      return wallet.displayName
+    });
+    setWalletDropList(walletList);
+  }, [bindCardDropListData]);
+
+
+  //NOTE: 選擇的電子錢包
   const [walletValue, setWalletValue] = useState(0);
 
+  // NOTE: 電子錢包帳戶
   const [mobileData, setMobileData] = useState<InputValue<string>>({
     data: "",
     isValidation: false,
     errorMessage: "",
   });
 
+  // NOTE: 電子錢包帳戶 - 只允許數字
   const onMobileDataChange = (event: any) => {
     let data = event.target.value;
     data = data.replace(/[^0-9]/g, "");
@@ -32,34 +49,106 @@ export const MobileWalletForm = (props: IGeneralMobileWalletFormProps) => {
     });
   }
 
+  // NOTE: 電子錢包帳戶 - 驗證
+  const validateMobileWalletAccount = useCallback(() => {
+    const message = "Account number should be 11 digits starting with 0.";
+    const scheme = z
+      .string()
+      .regex(/^0/, message)
+      .length(11, message);
+    const result = scheme.safeParse(mobileData.data);
+    if (!result.success) {
+      const firstError = result.error.format();
+      const errorMessage = firstError._errors[0];
+      setMobileData({
+        ...mobileData,
+        isValidation: false,
+        errorMessage,
+      });
+    } else {
+      setMobileData({
+        ...mobileData,
+        isValidation: true,
+        errorMessage: "",
+      });
+    }
+  }, [mobileData.data]);
+
+  // NOTE: 鎖定表單傳送
+  const [isFormPending, setIsFormPending] = useState<boolean>(false);
+
+  // NOTE: 點擊 Submit
+  const confirmMobileWalletCallback = () => {
+    setIsFormPending(true);
+    validateMobileWalletAccount();
+    // validateBankcardNo();
+    // validateConfirmedBankcardNo();
+    if (
+      !(
+        mobileData.isValidation
+      )
+    )
+      return;
+
+    const mobileWalletAccount = bindCardDropListData && bindCardDropListData.availableWalletVendors[walletValue];
+    // console.log("mobileWalletAccount", mobileWalletAccount);
+
+    triggerPostBankBindSaveToPKMutation({
+      bankAccNr: "",
+      mobileWallet: true,
+      mobileWalletAccount: mobileData.data,
+      walletVendor: mobileWalletAccount && mobileWalletAccount.code || "",
+    })
+      .unwrap()
+      .then((data: any) => {
+        // console.log("data:", data);
+        // Notice: bind account successfully
+        Modal.alert({
+          show: true,
+          mask: true,
+          title: "Notice",
+          content: "Success!",
+          confirmText: "Confirm",
+          maskClosable: true,
+          enableClose: false,
+          enableIcon: false,
+          onConfirm: () => {
+            window.location.href = "innerh5://127.0.0.1";
+          },
+        });
+      })
+      .finally(() => {
+        setIsFormPending(false);
+      });
+
+  };
   return (
-    <Container>
-      <Form>
-        <Label>Please select the of your mobile wallet</Label>
-          <Select
-            className="mb"
-            dataSource={["Easypaisa1", "Easypaisa2", "Easypaisa3", "Easypaisa4"]}
-            defaultIndex={walletValue}
-            fixButtonWidth={"calc(100vw - 36px)"}
-            // FIXME: to controlled component
-            onSelect={(index:number) => {
-              setWalletValue(index);
-            }}
-          />
+    <Form>
+      <Label>Please select the of your mobile wallet</Label>
+      <Select
+        className="mb"
+        fixButtonWidth={"calc(100vw - 36px)"}
+        dataSource={walletDropList}
+        defaultIndex={walletValue}
+        // FIXME: to controlled component
+        onSelect={(index:number) => {
+          setWalletValue(index);
+        }}
+      />
 
-          <Label>Your mobile wallet account</Label>
-          <Input
-            className="mb"
-            labelType={"left"}
-            label={"+92"}
-            placeholder="11111111111"
-            value={mobileData.data}
-            onChange={onMobileDataChange}
-            errorMessage={mobileData.errorMessage}
-          />
-
-        <Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>
-      </Form>
-    </Container>
+      <Label>Your mobile wallet account</Label>
+      <Input
+        className="mb"
+        labelType={"left"}
+        label={"+92"}
+        placeholder="11111111111"
+        value={mobileData.data}
+        onChange={onMobileDataChange}
+        onBlur={validateMobileWalletAccount}
+        errorMessage={mobileData.errorMessage}
+      />
+      {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
+      <Button onClick={() => !isFormPending && confirmMobileWalletCallback()}>Submit</Button>
+    </Form>
   );
 }

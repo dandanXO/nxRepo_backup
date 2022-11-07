@@ -49,7 +49,7 @@ export const BankAccountTemplate1 = (props: IGeneralPageLayoutTypeProps) => {
         />
       </Form>
 
-      <Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>
+      <Button onClick={() => !props.isFormPending && props.confirm && props.confirm()}>Submit</Button>
     </>
   );
 }

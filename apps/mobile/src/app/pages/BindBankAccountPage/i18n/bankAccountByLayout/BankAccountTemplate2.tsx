@@ -5,6 +5,7 @@ import {IGeneralPageLayoutTypeProps} from "../../types/IGeneralPageLayoutTypePro
 import {Label} from "../Label";
 
 export const BankAccountTemplate2 = (props: IGeneralPageLayoutTypeProps) => {
+
   return (
     <>
       <Form>
@@ -61,7 +62,7 @@ export const BankAccountTemplate2 = (props: IGeneralPageLayoutTypeProps) => {
         />
       </Form>
 
-      <Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>
+      <Button onClick={() => !props.isFormPending && props.confirm && props.confirm()}>Submit</Button>
     </>
   );
 }

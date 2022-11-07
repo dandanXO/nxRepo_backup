@@ -31,6 +31,7 @@ const useLoanDetailStory = () => {
 
     useEffect(() => {
         if (!isRepayTypesLoading) {
+            // NOTICE: 印度 API 產品, 預設第一種付款方式
             setPayType(
                 repayTypes && repayTypes[0] && repayTypes[0].payType
                     ? repayTypes[0].payType
