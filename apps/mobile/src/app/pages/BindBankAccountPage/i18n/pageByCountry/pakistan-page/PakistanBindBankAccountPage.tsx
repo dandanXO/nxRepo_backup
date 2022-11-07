@@ -18,9 +18,12 @@ export const PakistanBindBankAccountPage = (props: PureBindBankAccountPageProps)
     <CustomPage>
       <ChooseBindMethod value={chooseBindMethodValue} changeOptionValueCallback={changeOptionValue}/>
       {chooseBindMethodValue === 0 ? (
-        <MobileWalletForm/>
+        <MobileWalletForm bindCardDropListData={props.bindCardDropListData} triggerPostBankBindSaveToPKMutation={props.triggerPostBankBindSaveToPKMutation}/>
         ) : (
-        <BankForm postBankBindSaveToPK={props.postBankBindSaveToPK} cardholderName={props.cardholderName}/>
+        <BankForm
+          postBankBindSaveToPK={props.postBankBindSaveToPK}
+          cardholderName={props.cardholderName}
+        />
       )}
     </CustomPage>
   );

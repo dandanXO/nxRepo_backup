@@ -4,6 +4,7 @@ import {AppThemeProvider, DefaultThemeConfig, GreenThemeConfig} from "@frontend/
 import {IndiaBindBankAccountPage} from "../i18n/pageByCountry/india-page/IndiaBindBankAccountPage";
 
 import {PakistanBindBankAccountPage} from "../i18n/pageByCountry/pakistan-page/PakistanBindBankAccountPage";
+import {WalletVendor} from "../../../api/GetBindCardDropList";
 
 export default {
     title: "Page/BindBankAccountPage",
@@ -22,7 +23,19 @@ export const IndiaPage: ComponentStory<any> = (args) => {
 export const PakistanPage: ComponentStory<any> = (args) => {
   return (
     <AppThemeProvider theme={GreenThemeConfig}>
-      <PakistanBindBankAccountPage postBankBindSave={() => {}} cardholderName={""}/>
+      <PakistanBindBankAccountPage postBankBindSave={() => {}} cardholderName={""} triggerPostBankBindSaveToPKMutation={{} as any} bindCardDropListData={{
+        availableWalletVendors: [
+          {
+            code:	"1",
+            displayName: "wallet1",
+          },
+          {
+            code:	"2",
+            displayName: "wallet2",
+          }
+        ],
+        showBankOption: false,
+      }} />
     </AppThemeProvider>
   );
 };

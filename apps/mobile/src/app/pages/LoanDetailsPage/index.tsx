@@ -8,6 +8,8 @@ const LoanDetailsPage = () => {
         currentData,
         navigateToUploadPaymentReceiptPage,
         handlePostRepayCreate,
+        paymentMethodList,
+        setPayType,
     } = useLoanDetailStory();
 
   const [postLoanSubmitOrder, { isLoading }] =
@@ -21,6 +23,8 @@ const LoanDetailsPage = () => {
             }
             handlePostRepayCreate={handlePostRepayCreate}
             postLoanSubmitOrder={postLoanSubmitOrder}
+            paymentMethodList={paymentMethodList}
+            setPayType={setPayType}
         />
     );
 };

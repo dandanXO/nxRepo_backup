@@ -3,7 +3,7 @@ export interface GetBindCardDropListResponse {
   showBankOption: boolean;
 }
 
-interface WalletVendor {
+export interface WalletVendor {
   code:	string;
   displayName:	string;
 }

@@ -5,10 +5,17 @@ const getToken = () => {
   if(environment.country === "in") {
     return `token=b5f2db2c45e24edcbc49540bae862fbd`
   } else if (environment.country == "pk") {
-    return `token=4fe1f0cbdb054eae9a09e82d7603bf52`
+    return `token=8fcede979cf246258df7ea82a48ad30a`
   }
 };
-const getOrderNo = () => `orderNo=no-3632791101642108-9`;
+const getOrderNo = () => {
+  if(environment.country === "in") {
+    return `orderNo=no-3632791101642108-9`;
+  } else if (environment.country == "pk") {
+    return `orderNo=no-1208588871298485`;
+  }
+}
+
 const queryString = () => `${getToken()}&${getOrderNo()}`;
 const getCardholderName = () => `cardholderName=C I Riyaz Ur Rahaman`;
 
