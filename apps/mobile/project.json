@@ -86,7 +86,7 @@
             "options": {
                 "buildTarget": "mobile:build",
                 "hmr": true,
-                "proxyConfig": "apps/mobile/proxy.config.json"
+                "proxyConfig": "apps/mobile/proxy.config.pk.json"
             },
             "configurations": {
                 "development": {

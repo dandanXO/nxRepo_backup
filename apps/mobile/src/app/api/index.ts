@@ -14,9 +14,10 @@ import {
     PostRepayCreateRequestBody,
     PostRepayCreateResponse,
 } from "./postRepayCreate";
-import { PostBankBindSaveRequest } from "./postBankBindSave";
+import {PostBankBindSaveRequest, PostPKBankBindSaveRequest} from "./postBankBindSave";
 import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
 import { GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring } from "./getLoanRecommend";
+import {GetBindCardDropListResponse} from "./GetBindCardDropList";
 
 export const API = createApi({
     reducerPath: "api",
@@ -79,13 +80,28 @@ export const API = createApi({
                 data: query,
             }),
         }),
+        // NOTICE: PK - 获取绑卡页信息
+        getBindCardDropList: builder.query<GetBindCardDropListResponse, {}>({
+          query: () => ({
+            method: "get",
+            url: `/bank-bind/info`,
+          }),
+        }),
         // NOTE: 绑定银行主卡或是電子錢包
         postBankBindSave: builder.mutation<{}, PostBankBindSaveRequest>({
-            query: (requestBody: PostBankBindSaveRequest) => ({
-                method: "post",
-                url: `/bank-bind/save`,
-                data: requestBody,
-            }),
+          query: (requestBody: PostBankBindSaveRequest) => ({
+            method: "post",
+            url: `/bank-bind/save`,
+            data: requestBody,
+          }),
+        }),
+        // NOTICE: PK - 绑定银行主卡或是電子錢包
+        postBankBindSaveToPK: builder.mutation<{}, PostPKBankBindSaveRequest>({
+          query: (requestBody: PostPKBankBindSaveRequest) => ({
+            method: "post",
+            url: `/bank-bind/save`,
+            data: requestBody,
+          }),
         }),
         // NOTE: 提交订单
         postLoanSubmitOrder: builder.mutation<{},PostLoanSubmitOrderRequestBody>({
@@ -111,7 +127,9 @@ export const {
     usePostRepayReceiptMutation,
     useGetRepayTypesQuery,
     usePostRepayCreateMutation,
+    useGetBindCardDropListQuery,
     usePostBankBindSaveMutation,
+    usePostBankBindSaveToPKMutation,
     usePostLoanSubmitOrderMutation,
     useGetLoanRecommendQuery,
 } = API;

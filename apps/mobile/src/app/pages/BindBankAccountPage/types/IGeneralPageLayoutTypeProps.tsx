@@ -2,8 +2,9 @@ import {InputValue} from "@frontend/mobile/shared/ui";
 import React from "react";
 
 export interface IForm {
-  isFormPending: boolean;
-  confirm: React.EffectCallback;
+  // NOTICE: REFACTOR ME
+  isFormPending?: boolean;
+  confirm?: React.EffectCallback;
 }
 export type IGeneralPageLayoutTypeProps = IForm & {
   cardholderName: string;

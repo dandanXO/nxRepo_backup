@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {PureBindBankAccountPageProps} from "../../../types/PureBindBankAccountPageProps";
 import {useBindBankAccountPage} from "../../../useBindBankAccountPage";
 import {BankAccountTemplate2} from "../../bankAccountByLayout/BankAccountTemplate2";
@@ -7,6 +7,7 @@ import {ChooseBindMethod} from "./ChooseBindMethod/ChooseBindMethod";
 import {MobileWalletForm} from "./MobileWalletForm";
 
 export const PakistanBindBankAccountPage = (props: Omit<PureBindBankAccountPageProps, "layout">) => {
+  // NOTICE: REFACTOR ME
   const {
     ifscData,
     onIFSCChange,
@@ -23,6 +24,7 @@ export const PakistanBindBankAccountPage = (props: Omit<PureBindBankAccountPageP
     confirm
   } = useBindBankAccountPage(props);
 
+  // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0|1>(0);
 
   const changeOptionValue = () => {
@@ -33,7 +35,7 @@ export const PakistanBindBankAccountPage = (props: Omit<PureBindBankAccountPageP
     <CustomPage>
       <ChooseBindMethod value={chooseBindMethodValue} changeOptionValueCallback={changeOptionValue}/>
       {chooseBindMethodValue === 0 ? (
-        <MobileWalletForm confirm={confirm} isFormPending={isFormPending}/>
+        <MobileWalletForm/>
         ) : (
         <BankAccountTemplate2 cardholderName={props.cardholderName}
                               ifscData={ifscData}
