@@ -1,10 +1,10 @@
 import {Form} from "../../components/Form";
 import {Button, Input} from "@frontend/mobile/shared/ui";
 import React from "react";
-import {IGeneralPageLayoutTypeProps} from "../../types/IGeneralPageLayoutTypeProps";
+import {IPakistanPageLayoutTypeProps} from "../../types/IGeneralPageLayoutTypeProps";
 import {Label} from "../Label";
 
-export const BankAccountTemplate2 = (props: IGeneralPageLayoutTypeProps) => {
+export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
 
   return (
     <>
@@ -19,16 +19,16 @@ export const BankAccountTemplate2 = (props: IGeneralPageLayoutTypeProps) => {
           disabled
         />
 
-        <Label>IFSC Code</Label>
-        <Input
-          className="mb"
-          labelType={"none"}
-          placeholder="IFSC Code"
-          value={props.ifscData.data}
-          onChange={props.onIFSCChange}
-          onBlur={props.onIFSCBlur}
-          errorMessage={props.ifscData.errorMessage}
-        />
+        {/*<Label>IFSC Code</Label>*/}
+        {/*<Input*/}
+        {/*  className="mb"*/}
+        {/*  labelType={"none"}*/}
+        {/*  placeholder="IFSC Code"*/}
+        {/*  value={props.ifscData.data}*/}
+        {/*  onChange={props.onIFSCChange}*/}
+        {/*  onBlur={props.onIFSCBlur}*/}
+        {/*  errorMessage={props.ifscData.errorMessage}*/}
+        {/*/>*/}
 
         <Label>Account Number</Label>
         <Input
@@ -52,17 +52,24 @@ export const BankAccountTemplate2 = (props: IGeneralPageLayoutTypeProps) => {
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
 
-        <Label>UPI ID</Label>
-        <Input
-          className="mb"
-          labelType={"none"}
-          placeholder="UPI ID"
-          value={props.upiData.data}
-          onChange={props.onUPIIDChange}
-        />
+        {/*<Label>UPI ID</Label>*/}
+        {/*<Input*/}
+        {/*  className="mb"*/}
+        {/*  labelType={"none"}*/}
+        {/*  placeholder="UPI ID"*/}
+        {/*  value={props.upiData.data}*/}
+        {/*  onChange={props.onUPIIDChange}*/}
+        {/*/>*/}
       </Form>
 
-      <Button onClick={() => !props.isFormPending && props.confirm && props.confirm()}>Submit</Button>
+      <Button onClick={() => {
+        // if(!props.isFormPending && props.confirm) {
+        //   console.log("request")
+        props.confirm && props.confirm()
+        // } else {
+        //   console.log("request2")
+        // }
+      }}>Submit</Button>
     </>
   );
 }

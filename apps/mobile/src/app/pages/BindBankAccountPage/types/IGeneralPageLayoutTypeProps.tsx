@@ -3,11 +3,12 @@ import React from "react";
 
 export interface IForm {
   // NOTICE: REFACTOR ME
-  isFormPending?: boolean;
+  isFormPending: boolean;
   confirm?: React.EffectCallback;
 }
 export type IGeneralPageLayoutTypeProps = IForm & {
   cardholderName: string;
+
   ifscData: InputValue<string>;
   onIFSCChange: (event: any) => void;
   onIFSCBlur: (event: any) => void;
@@ -22,6 +23,16 @@ export type IGeneralPageLayoutTypeProps = IForm & {
 
   upiData: InputValue<string>;
   onUPIIDChange: (event: any) => void;
+}
 
+export type IPakistanPageLayoutTypeProps = IForm & {
+  cardholderName: string;
 
+  bankcardNoData: InputValue<string>;
+  onAccountNumberChange: (event: any) => void;
+  onAccountNumberBlur: (event: any) => void;
+
+  confirmedBankcardNoData: InputValue<string>;
+  onConfirmAccountNumberChange: (event: any) => void;
+  onConfirmAccountNumberBlur: (event: any) => void;
 }

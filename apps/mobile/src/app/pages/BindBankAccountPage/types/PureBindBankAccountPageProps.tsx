@@ -1,8 +1,23 @@
-import {PostBankBindSaveRequest} from "../../../api/postBankBindSave";
-import {IGeneralPageLayoutTypeProps} from "./IGeneralPageLayoutTypeProps";
+import {PostBankBindSaveRequest, PostPKBankBindSaveRequest} from "../../../api/postBankBindSave";
 
-export interface PureBindBankAccountPageProps {
-  postBankBindSave: (requestBody: PostBankBindSaveRequest) => any;
+export type PureBindBankAccountPageProps = {
+  // postBankBindSave: (requestBody: PostBankBindSaveRequest) => any;
   cardholderName: string;
-  // layout: (props: IGeneralPageLayoutTypeProps) => JSX.Element;
+  postBankBindSave?: (requestBody: PostBankBindSaveRequest) => any;
+  postBankBindSaveToPK?: (requestBody: PostPKBankBindSaveRequest) => any;
 }
+
+// export type IndiaPureBindBankAccountPageProps = PureBindBankAccountPageProps & {
+//   india: "india";
+//   postBankBindSave: (requestBody: PostPKBankBindSaveRequest) => any;
+// }
+//
+// export type PKPureBindBankAccountPageProps = PureBindBankAccountPageProps & {
+//   pakistan: "pakistan";
+//   postBankBindSaveToPK: (requestBody: PostPKBankBindSaveRequest) => any;
+// }
+
+// export const isIndia = (p: any): p is IndiaPureBindBankAccountPageProps => !!p.india
+// export const isToggle = (p: any): p is PKPureBindBankAccountPageProps => !!p.pakistan
+
+
