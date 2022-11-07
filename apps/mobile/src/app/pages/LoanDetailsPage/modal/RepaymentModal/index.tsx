@@ -84,6 +84,8 @@ interface RepaymentModalProps {
     setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
     handlePostRepayCreate: any;
+    paymentMethodList: string[];
+    setPayType: React.Dispatch<React.SetStateAction<number>>;
 }
 const RepaymentModal = (props: RepaymentModalProps) => {
     const balance = props.balance;
@@ -160,27 +162,14 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                   <BoldText>Payment Method</BoldText>
 
                                   <Select
-                                    dataSource={[
-                                      "XXXPay (E-Wallet)",
-                                      "XXXPay (E-Wallet)2",
-                                      "XXXPay (E-Wallet)3",
-                                      "XXXPay (E-Wallet)4",
-                                      "XXXPay (E-Wallet)5",
-                                      "XXXPay (E-Wallet)6",
-                                      "XXXPay (E-Wallet)7",
-                                      "XXXPay (E-Wallet)8",
-                                      "XXXPay (E-Wallet)9",
-                                      "XXXPay (E-Wallet)10",
-                                      "XXXPay (E-Wallet)11",
-                                      "XXXPay (E-Wallet)12",
-                                      "XXXPay (E-Wallet)13",
-                                    ]}
+                                    dataSource={props.paymentMethodList}
                                     defaultIndex={paymentMethodValue}
-                                    fixButtonWidth={"calc(100vw - 70px)"}
+                                    fixButtonWidth={"300px"}
                                     maxItemCount={4}
                                     // FIXME: to controlled component
                                     onSelect={(index:number) => {
                                       setPaymentMethodValue(index);
+                                      props.setPayType(index);
                                     }}
                                   />
                                 </PaymentMethodContainer>

@@ -2,31 +2,26 @@ import {Form} from "../../../components/Form";
 import {Button, Input, InputValue, Modal, Select} from "@frontend/mobile/shared/ui";
 import React, {useCallback, useEffect, useState} from "react";
 import {Label} from "../../Label";
-import {useGetBindCardDropListQuery, usePostBankBindSaveToPKMutation} from "../../../../../api";
 import {z} from "zod";
+import {WalletVendor} from "../../../../../api/GetBindCardDropList";
 
+interface IMobileWalletFormProps {
+  triggerPostBankBindSaveToPKMutation: any;
+  bindCardDropListData: any;
+}
 
-export const MobileWalletForm = () => {
-  // NOTE: 綁定電子錢包
-  const [triggerPostBankBindSaveToPKMutation, { isLoading }] = usePostBankBindSaveToPKMutation();
-
-
-  // NOTE: 取得電子錢包列表
-  const {currentData: bindCardDropListData,
-    isLoading: isBindCardDropListDataLoading,
-    isFetching: isBindCardDropListDataFetching,
-  } = useGetBindCardDropListQuery({});
+export const MobileWalletForm = (props: IMobileWalletFormProps) => {
 
   // NOTE: 電子錢包列表 Data
   const [walletDropList, setWalletDropList] = useState<string[]>([]);
 
   useEffect(() => {
-    if(!bindCardDropListData) return;
-    const walletList = bindCardDropListData && bindCardDropListData.availableWalletVendors && bindCardDropListData.availableWalletVendors.map((wallet) => {
+    if(!props.bindCardDropListData) return;
+    const walletList = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors && props.bindCardDropListData.availableWalletVendors.map((wallet: WalletVendor) => {
       return wallet.displayName
     });
     setWalletDropList(walletList);
-  }, [bindCardDropListData]);
+  }, [props.bindCardDropListData]);
 
 
   //NOTE: 選擇的電子錢包
@@ -90,10 +85,10 @@ export const MobileWalletForm = () => {
     )
       return;
 
-    const mobileWalletAccount = bindCardDropListData && bindCardDropListData.availableWalletVendors[walletValue];
+    const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue];
     // console.log("mobileWalletAccount", mobileWalletAccount);
 
-    triggerPostBankBindSaveToPKMutation({
+    props.triggerPostBankBindSaveToPKMutation({
       bankAccNr: "",
       mobileWallet: true,
       mobileWalletAccount: mobileData.data,

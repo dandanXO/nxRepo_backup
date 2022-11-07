@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PureLoanDetailsAdvertisementPage } from "./PureLoanDetailsAdvertisementPage";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import { mockGetLoanDetailResponse } from "../../api/getLoanDetail";
+import React from "react";
 
 export default {
     title: "Page/LoanDetailsPage",
@@ -22,6 +23,8 @@ export const Page: ComponentStory<
                     // do nothing.
                 }}
                 postLoanSubmitOrder={() => {}}
+                paymentMethodList={["type1", "type2"]}
+                setPayType={{} as any}
             />
         </AppThemeProvider>
     );

@@ -24,21 +24,24 @@ const useLoanDetailStory = () => {
     } = useGetRepayTypesQuery({});
     const orderNo = pageQueryString.orderNo;
     const token = pageQueryString.token;
-    const [payType, setPayType] = useState<string>("");
+    const [payType, setPayType] = useState<number>(0);
+
+    // NOTICE:
     const navigateToUploadPaymentReceiptPage = useCallback(() => {
         navigate(`/upload-payment-receipt?token=${token}&orderNo=${orderNo}`);
     }, [token, orderNo]);
 
+    const [paymentMethodList, setPaymentMethodList] = useState<string[]>([]);
+
     useEffect(() => {
-        if (!isRepayTypesLoading) {
-            // NOTICE: 印度 API 產品, 預設第一種付款方式
-            setPayType(
-                repayTypes && repayTypes[0] && repayTypes[0].payType
-                    ? repayTypes[0].payType
-                    : ""
-            );
-        }
-    }, [isRepayTypesLoading]);
+      if(!repayTypes) return;
+      const methods = repayTypes.map(item => {
+        return item.payTypeAlias ? item.payTypeAlias :"";
+      })
+      setPaymentMethodList(methods);
+    }, [repayTypes])
+
+    // NOTICE:
     const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =
         usePostRepayCreateMutation();
 
@@ -47,7 +50,7 @@ const useLoanDetailStory = () => {
             postRepayCreate(props)
                 .unwrap()
                 .then((data: PostRepayCreateResponse) => {
-                    // do nothing.
+                    // NOTICE: 跳轉至付款頁面
                     window.location.href = data.nextUrl;
                 })
                 .catch(({ error }) => {
@@ -64,22 +67,24 @@ const useLoanDetailStory = () => {
         (
             isExtend: boolean,
             isForceApplyAfterRepay: true,
-            repayAmount: number
+            repayAmount: number,
         ) => {
             postRepayCreateRequest({
                 extend: isExtend,
                 forceApplyAfterRepay: isForceApplyAfterRepay,
                 orderNo: orderNo,
-                payType: payType,
+                payType: repayTypes && repayTypes[payType].payType,
                 repayAmount: repayAmount,
             });
         },
-        [orderNo, payType]
+        [orderNo, payType, repayTypes]
     );
     return {
         currentData,
         navigateToUploadPaymentReceiptPage,
         handlePostRepayCreate,
+        paymentMethodList,
+        setPayType,
     };
 };
 export default useLoanDetailStory;

@@ -24,6 +24,8 @@ export const ModalRepayment: ComponentStory<typeof RepaymentModal> = (args) => {
                 handlePostRepayCreate={() => {
                     // do nothing.
                 }}
+                paymentMethodList={["type1", "type2"]}
+                setPayType={{} as any}
             />
         </AppThemeProvider>
     );

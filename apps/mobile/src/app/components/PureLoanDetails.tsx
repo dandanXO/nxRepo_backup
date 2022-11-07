@@ -12,6 +12,8 @@ export interface PureLoanDetailsPageProps {
     currentData?: any;
     navigateToUploadPaymentReceiptPage: any;
     handlePostRepayCreate: any;
+    paymentMethodList: string[];
+    setPayType: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
@@ -56,6 +58,8 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               setShowRepaymentModal={setShowRepaymentModal}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
               handlePostRepayCreate={props.handlePostRepayCreate}
+              paymentMethodList={props.paymentMethodList}
+              setPayType={props.setPayType}
             />
           )}
           {showRepaymentNoticeModal && (

@@ -23,6 +23,8 @@ export const PureLoanDetailsAdvertisementPage = (
                     props.navigateToUploadPaymentReceiptPage
                 }
                 handlePostRepayCreate={props.handlePostRepayCreate}
+                paymentMethodList={props.paymentMethodList}
+                setPayType={props.setPayType}
             />
             <Advertisement
                 recommendProducts={props?.currentData?.recommendProducts}

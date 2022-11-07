@@ -32,11 +32,11 @@ const LoanDetailStyled = styled.div`
         padding: 0 14px;
     }
     .extendButton {
-        flex: 1 0 auto;
+        flex: 1 3;
         margin-right: 12px;
     }
     .repayButton {
-        flex: 3 0 auto;
+        flex: 3 1;
     }
 `;
 
