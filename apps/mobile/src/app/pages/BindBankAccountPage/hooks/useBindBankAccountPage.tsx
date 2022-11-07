@@ -2,17 +2,22 @@ import React, {useCallback, useState} from "react";
 import type {InputValue} from "@frontend/mobile/shared/ui";
 import {Modal} from "@frontend/mobile/shared/ui";
 import {z} from "zod";
-import {validationInfo} from "./validationInfo";
-import {PureBindBankAccountPageProps} from "./types/PureBindBankAccountPageProps";
+import {validationInfo} from "../validationInfo";
+import {
+  PureBindBankAccountPageProps
+} from "../types/PureBindBankAccountPageProps";
 
 export const useBindBankAccountPage = (
     props: PureBindBankAccountPageProps
+  // props: IndiaPureBindBankAccountPageProps | PKPureBindBankAccountPageProps
 ) => {
+    // NOTE: FormInput - ifscData
     const [ifscData, setIFSCData] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
         errorMessage: "",
     });
+
     const validateIFSC = useCallback(() => {
         const ifscScheme = z
             .string()
@@ -36,15 +41,21 @@ export const useBindBankAccountPage = (
         }
     }, [ifscData.data]);
 
-    const [bankcardNoData, setBankcardNoData] = useState<InputValue<string>>({
-        data: "",
-        isValidation: false,
-        errorMessage: "",
-    });
+    const onIFSCChange = (event: any) => {
+      let data = event.target.value;
+      data = data.replace(/[^a-zA-Z0-9]/g, "");
+      setIFSCData({
+        ...ifscData,
+        data,
+      });
+    }
 
-    const [confirmedBankcardNoData, setConfirmedBankcardNoData] = useState<
-        InputValue<string>
-    >({
+    const onIFSCBlur = () => {
+      validateIFSC();
+    }
+
+    // NOTE: FormInput - bankcardNoData
+    const [bankcardNoData, setBankcardNoData] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
         errorMessage: "",
@@ -77,6 +88,30 @@ export const useBindBankAccountPage = (
         }
     }, [bankcardNoData.data]);
 
+    const onAccountNumberChange = (event: any) => {
+      let data = event.target.value;
+      data = data.replace(/[^0-9]/g, "");
+      setBankcardNoData({
+        ...bankcardNoData,
+        data,
+      });
+    }
+
+    const onAccountNumberBlur = () => {
+      validateBankcardNo();
+      if (String(confirmedBankcardNoData.data).length > 0) {
+        validateConfirmedBankcardNo();
+      }
+    }
+
+    // NOTE: FormInput - confirmedBankcardNoData
+    const [confirmedBankcardNoData, setConfirmedBankcardNoData] = useState<
+      InputValue<string>
+      >({
+      data: "",
+      isValidation: false,
+      errorMessage: "",
+    });
     const validateConfirmedBankcardNo = useCallback(() => {
         const confirmedBankcardNo = confirmedBankcardNoData.data;
         const bankcardNo = bankcardNoData.data;
@@ -106,38 +141,96 @@ export const useBindBankAccountPage = (
         }
     }, [confirmedBankcardNoData.data, bankcardNoData.data]);
 
+    const onConfirmAccountNumberChange = (event: any) => {
+      let data = event.target.value;
+      data = data.replace(/[^0-9]/g, "");
+      setConfirmedBankcardNoData({
+        ...confirmedBankcardNoData,
+        data,
+      });
+    }
+
+    const onConfirmAccountNumberBlur = () => {
+      validateConfirmedBankcardNo();
+    }
+
+    // NOTE: FormInput - upiData
     const [upiData, setUpiData] = useState<InputValue<string>>({
         data: "",
         // isValidation: false,
         // errorMessage: "",
     });
 
+    const onUPIIDChange = (event: any) => {
+      setUpiData({
+        ...upiData,
+        data: event.target.value,
+      });
+    }
+
+    // NOTE: Form
     const [isFormPending, setIsFormPending] = useState<boolean>(false);
 
     // NOTICE: reuse me
     const confirm = useCallback(() => {
+        // NOTE: Form
         setIsFormPending(true);
-        validateIFSC();
+
+        // NOTE: FormInput
+        if(props.postBankBindSave) {
+          validateIFSC();
+        }
         validateBankcardNo();
         validateConfirmedBankcardNo();
-        if (
-            !(
-                ifscData.isValidation &&
-                bankcardNoData.isValidation &&
-                confirmedBankcardNoData.isValidation
-            )
-        )
-            return;
 
-        props
+
+        if(props.postBankBindSave) {
+          // NOTE: India
+          if (
+            !(
+              ifscData.isValidation &&
+              bankcardNoData.isValidation &&
+              confirmedBankcardNoData.isValidation
+            )
+          )
+          {
+            return;
+          }
+        } else if(props.postBankBindSaveToPK) {
+          // NOTE: Pakistan
+          if (
+            !(
+              bankcardNoData.isValidation &&
+              confirmedBankcardNoData.isValidation
+            )
+          )
+          {
+            return;
+          }
+        }
+
+        // NOTE: FormRequest
+        let request;
+        if(props.postBankBindSave) {
+          request = props
             .postBankBindSave({
-                bankAccount: bankcardNoData.data,
-                ifscCode: ifscData.data,
-                upiId: upiData.data,
+              bankAccount: bankcardNoData.data,
+              ifscCode: ifscData.data,
+              upiId: upiData.data,
             })
-            .unwrap()
+        } else if(props.postBankBindSaveToPK){
+          request = props
+            .postBankBindSaveToPK({
+              bankAccNr: bankcardNoData.data,
+              mobileWallet: false,
+              mobileWalletAccount: "",
+              walletVendor:	"",
+            })
+        }
+
+            request.unwrap()
             .then((data: any) => {
-                console.log("data:", data);
+                // console.log("data:", data);
                 // Notice: bind account successfully
                 Modal.alert({
                     show: true,
@@ -156,6 +249,7 @@ export const useBindBankAccountPage = (
             .finally(() => {
                 setIsFormPending(false);
             });
+
     }, [
         ifscData.data,
         bankcardNoData.data,
@@ -165,55 +259,6 @@ export const useBindBankAccountPage = (
         bankcardNoData.isValidation,
         confirmedBankcardNoData.isValidation,
     ]);
-
-    const onIFSCChange = (event: any) => {
-      let data = event.target.value;
-      data = data.replace(/[^a-zA-Z0-9]/g, "");
-      setIFSCData({
-        ...ifscData,
-        data,
-      });
-    }
-
-    const onIFSCBlur = () => {
-      validateIFSC();
-    }
-
-    const onAccountNumberChange = (event: any) => {
-      let data = event.target.value;
-      data = data.replace(/[^0-9]/g, "");
-      setBankcardNoData({
-        ...bankcardNoData,
-        data,
-      });
-    }
-
-    const onAccountNumberBlur = () => {
-      validateBankcardNo();
-      if (String(confirmedBankcardNoData.data).length > 0) {
-        validateConfirmedBankcardNo();
-      }
-    }
-
-    const onConfirmAccountNumberChange = (event: any) => {
-      let data = event.target.value;
-      data = data.replace(/[^0-9]/g, "");
-      setConfirmedBankcardNoData({
-        ...confirmedBankcardNoData,
-        data,
-      });
-    }
-
-    const onConfirmAccountNumberBlur = () => {
-      validateConfirmedBankcardNo();
-    }
-
-    const onUPIIDChange = (event: any) => {
-      setUpiData({
-        ...upiData,
-        data: event.target.value,
-      });
-    }
 
     return {
       ifscData,
@@ -230,20 +275,4 @@ export const useBindBankAccountPage = (
       isFormPending,
       confirm,
     }
-    // NOTICE:
-    // const PageLayoutType = props.layout as any
-    // return <PageLayoutType cardholderName={props.cardholderName}
-    //                        ifscData={ifscData}
-    //                        onIFSCChange={onIFSCChange}
-    //                        onIFSCBlur={onIFSCBlur}
-    //                        bankcardNoData={bankcardNoData}
-    //                        onAccountNumberChange={onAccountNumberChange}
-    //                        onAccountNumberBlur={onAccountNumberBlur}
-    //                        confirmedBankcardNoData={confirmedBankcardNoData}
-    //                        onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-    //                        onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
-    //                        upiData={upiData} onUPIIDChange={onUPIIDChange}
-    //                        isFormPending={isFormPending}
-    //                        confirm={confirm}
-    // />
 };
