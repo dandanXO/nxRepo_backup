@@ -16,6 +16,8 @@ import RiskSettingModal from "./RiskSettingModal";
 import {GetRiskManageResponse} from "../../../service/response/GetRiskManageResponse";
 import {RiskManageList} from "../../../domain/vo/RiskManageList";
 import {MssRiskRankVo} from "../../../domain/vo/MssRiskRankVo";
+import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
+
 
 export type FormResponseData = GetRiskManageResponse;
 
@@ -62,6 +64,7 @@ export const RiskSettingPage = () => {
                                 show: true,
                                 isEdit: true,
                             })
+                            setCustomAntFormFieldError({})
                         }}>修改</a>,
                     ]
                 },
@@ -111,11 +114,11 @@ export const RiskSettingPage = () => {
             modelName: String(new Date().getTime()),
             remark: "remark",
             // firstLoan: [
-            //     {providerRank: 'A', loanCount: '4000'},
-            //     {providerRank: 'B', loanCount: '3000'},
-            //     {providerRank: 'C', loanCount: '2000'},
-            //     {providerRank: 'D', loanCount: '1000'},
-            //     {providerRank: 'E', loanCount: '0'}
+             //     {providerRank: 'A', loanCount: '8000'},
+            //     {providerRank: 'B', loanCount: '6000'},
+            //     {providerRank: 'C', loanCount: '4000'},
+            //     {providerRank: 'D', loanCount: '2000'},
+            //     {providerRank: 'E', loanCount: '0'},
             // ],
             // repeatLoan: [
             //     {providerRank: 'A', loanCount: '8000'},
@@ -124,19 +127,19 @@ export const RiskSettingPage = () => {
             //     {providerRank: 'D', loanCount: '2000'},
             //     {providerRank: 'E', loanCount: '0'},
             // ],
-             firstLoan: [
-                {min: 50,max:58, loanCount: '100', loanAmount: '200'},
-                {min: 47,max:49, loanCount: '100', loanAmount: '200'},
-                {min: 31,max:32, loanCount: '100', loanAmount: '200'},
-                {min: 21,max:22, loanCount: '100', loanAmount: '200'},
-                {min: 1,max:12, loanCount: '100', loanAmount: '200'},
+            firstLoan: [
+                { max: 50, min: 58, loanCount: '4000', balance: '200', providerRank: 'A' },
+                { max: 49, min: 39, loanCount: '2000', balance: '99', providerRank: 'B' },
+                { max: 38, min: 32, loanCount: '2000', balance: '88', providerRank: 'C' },
+                { max: 31, min: 22, loanCount: '1000', balance: '77', providerRank: 'D' },
+                { max: 21, min: 12, loanCount: '0', balance: '66', providerRank: 'E' }
             ],
             repeatLoan: [
-                {min: 50,max:58, loanCount: '100', loanAmount: '200'},
-                {min: 47,max:49, loanCount: '100', loanAmount: '200'},
-                {min: 31,max:32, loanCount: '100', loanAmount: '200'},
-                {min: 21,max:22, loanCount: '100', loanAmount: '200'},
-                {min: 1,max:12, loanCount: '100', loanAmount: '200'},
+                { max: 50, min: 58, loanCount: '4000', balance: '200', providerRank: 'A' },
+                { max: 49, min: 39, loanCount: '3000', balance: '99', providerRank: 'B' },
+                { max: 38, min: 32, loanCount: '4000', balance: '88', providerRank: 'C' },
+                { max: 31, min: 22, loanCount: '1000', balance: '77', providerRank: 'D' },
+                { max: 21, min: 12, loanCount: '0', balance: '66', providerRank: 'E' }
             ],
             riskModelName: 1,
             useRcQuota: true,
@@ -227,17 +230,177 @@ export const RiskSettingPage = () => {
     const [triggerPostRisk, { data: postRiskData, isLoading: isPostRiskLoading , isSuccess: isPostRiskSuccess }] = usePostRiskManageCreateMutation();
     const [triggerPutRisk, { data: putRiskData, isLoading: isPutRiskLoading, isSuccess: isPutRiskSuccess }] = usePutRiskManageCreateMutation();
 
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>({})
+
+
+    const compareCount = (index, loanLength, loan, field) => {
+
+        const isFirstField = index === 0;
+        const isLastField = index === loanLength - 1;
+        const prevIndex = isFirstField ? 0 : index - 1;
+        const nextIndex = isLastField ? index - 1 : index + 1;
+
+        const loanCount = Number(loan[index][field]);
+        const prevField = Number(loan[prevIndex][field]);
+        const nextField = Number(loan[nextIndex][field]);
+
+        const comparePrev = isFirstField ? loanCount <= nextField : loanCount >= prevField;
+        const compareNext = isLastField ? loanCount >= nextField : loanCount <= nextField;
+
+        return comparePrev || compareNext;
+
+    }
+
+    const validateByValue = (formType, loan) => {
+        console.log('validateByValue-----------', loan);
+        let formFieldError = {};
+        let isError = false;
+        loan.map((i, index) => {
+            const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount')
+
+            if (isLoanCountError) {
+                isError =true;
+            }
+            formFieldError = {
+                ...formFieldError,
+                ...{
+                    [`${formType}_loanCount_${index}`]: {
+                        validateStatus: isLoanCountError ? "error" : '',
+                    },
+                    [`${formType}_error`]: {
+                        validateStatus: isError ? "error" : '',
+                        help: isError ?
+                            <div>
+                                <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
+                                <div>▪ 所有字段都必须填写。</div>
+                                <div>▪ 最高可放款笔数需由大至小填写大于0的整数。</div>
+                                <div>▪ 各级距数值应小于上一级并大于下一级。</div>
+                            </div> : '',
+                    },
+                }
+            }
+        })
+
+        setCustomAntFormFieldError(prev => ({ ...prev, ...formFieldError }));
+        return isError;
+    }
+
+ 
+
+    const validateByRange=(formType,loan)=>{
+        console.log('validateByRange-----------')
+        let formFieldError = {};
+        let isError = false;
+        loan.map((i, index) => {
+            const isLastField = index === loan.length - 1;
+            const max = Number(i.max);
+            const min = Number(i.min);
+            const compareIndex = isLastField ? index - 1 : index + 1;
+            const compareField = isLastField ? loan[compareIndex].min : loan[compareIndex].max;
+            const isInRange = isLastField ? max !== Number(compareField) - 1 : min !== Number(compareField) + 1;
+
+            const isMinOrMaxError = isLastField ?
+                max <= min || isInRange :
+                max <= min || min <= compareField || isInRange;
+
+            const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount');
+            const isBalanceError = compareCount(index, loan.length, loan, 'balance');
+
+            if (isMinOrMaxError || isLoanCountError || isBalanceError) {
+                isError =true;
+            }
+            formFieldError = {
+                ...formFieldError,
+                ...{
+                    [`${formType}_max_${index}`]: {
+                        validateStatus: isMinOrMaxError ? "error" : '',
+                    },
+                    [`${formType}_loanCount_${index}`]: {
+                        validateStatus: isLoanCountError ? "error" : '',
+                    },
+                    [`${formType}_balance_${index}`]: {
+                        validateStatus: isBalanceError ? "error" : '',
+                    },
+                    [`${formType}_error`]: {
+                        validateStatus: isError? "error" : '',
+                        help: isError?
+                            <div>
+                                <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
+                                <div>▪ 所有字段必须由大至小填写大于0的整数。</div>
+                                <div>▪ 各级距数值需连贯且数值应小于上一级并大于下一级。</div>
+                            </div> : '',
+                    },
+                }
+            }
+
+        })
+        setCustomAntFormFieldError(prev=>({...prev,...formFieldError}));
+        return isError;
+    }
+
+    const validateByCount=(formType, loan)=>{
+        console.log('validateByCount-----------', loan);
+        let formFieldError = {};
+        let isError = false;
+        loan.map((i, index) => {
+            const isCountError = index !== 4 && compareCount(index, loan.length - 1, loan, 'count');
+            const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount');
+            const isBalanceError = compareCount(index, loan.length, loan, 'balance');
+
+            if (isCountError || isLoanCountError || isBalanceError) {
+                isError =true;
+            }
+            formFieldError = {
+                ...formFieldError,
+                ...{
+                    [`${formType}_count_${index}`]: {
+                        validateStatus: isCountError ? "error" : '',
+                    },
+                    [`${formType}_loanCount_${index}`]: {
+                        validateStatus: isLoanCountError ? "error" : '',
+                    },
+                    [`${formType}_balance_${index}`]: {
+                        validateStatus: isBalanceError ? "error" : '',
+                    },
+                    [`${formType}_error`]: {
+                        validateStatus: isError ? "error" : '',
+                        help: isError ?
+                            <div>
+                                <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
+                                <div>▪ 所有字段必须由大至小填写大于0的整数。</div>
+                                <div>▪ 各级距数值应小于上一级并大于下一级。</div>
+                                <div>▪ 超过逾期天数需填写大于0的整数。</div>
+                            </div> : '',
+                    },
+                }
+            }
+        })
+
+        setCustomAntFormFieldError(prev=>({...prev,...formFieldError}));
+        return isError;
+    }
+
+    const validateTypeSelector = (formType) => {
+
+        const { rankStrategy, oldRankStrategy, firstLoan, repeatLoan } = form.getFieldsValue();
+        const validateType = formType === 'firstLoan' ? rankStrategy : oldRankStrategy;
+        const loan = formType === 'firstLoan' ? firstLoan : repeatLoan;
+        const isLoanFormFilled = loan.map(i => Object.values(i).includes(undefined)).includes(true);
+        if (isLoanFormFilled) return;
+        return validateType === 'KEY_VALUE'
+            ? validateByValue(formType, loan) : validateType === 'SCORE'
+            ? validateByRange(formType, loan) : validateByCount(formType, loan);
+
+    }
+
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
        
-        const label=changedFields[0].name[0];
-        const index=changedFields[0].name[1]===0?0:changedFields[0].name[1]-1;
-        const field=changedFields[0].name[2];
-        const preField=allFields.filter(i=>i.name[0]===label && i.name[1]===index&&i.name[2]===field);
-        console.log(changedFields[0]);
-        console.log('preField',preField)
-    }, [])
+        const formType = changedFields[0].name[0];
+        validateTypeSelector(formType)
+       
+    }, [showModalContent.isEdit])
 
 
     // NOTICE: Form.3 onFinish
@@ -251,11 +414,17 @@ export const RiskSettingPage = () => {
         // NOTICE: Edit
         const isEdit = showModalContent.isEdit;
         const modelId = editID;
+       
+        const isFirstLoanError = validateTypeSelector("firstLoan");
+        const isRepeatLoanError = validateTypeSelector("repeatLoan");
+        if (isFirstLoanError || isRepeatLoanError) return;
+        
 
         // console.log("fields.before", JSON.parse(JSON.stringify(fields)));
         Object.keys(fields).map(key => {
 
             if(key === "firstLoan" || key === "repeatLoan") {
+               
                 fields[key].map((record, index) => {
                     fields[key][index] = {
                         loanCount: Number(record.loanCount),
@@ -307,16 +476,16 @@ export const RiskSettingPage = () => {
         console.log("fields", fields);
 
         // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
-            form.resetFields();
+        // triggerAPI(fields).unwrap().then((responseData) => {
+        //     form.resetFields();
 
-            triggerGetList(null);
+        //     triggerGetList(null);
 
-            setShowModalContent({
-                show: false,
-                isEdit: false,
-            })
-        })
+        //     setShowModalContent({
+        //         show: false,
+        //         isEdit: false,
+        //     })
+        // })
     }, [showModalContent.isEdit, editID, currentRiskMenuData])
 
     // NOTICE: Form.4 onFinishFailed
@@ -372,6 +541,7 @@ export const RiskSettingPage = () => {
                     searchable={false}
                     hasEditForm={false}
                     onAddCallback={onAddCallback}
+                  
                 />
 
                 <RiskSettingModal
@@ -390,6 +560,8 @@ export const RiskSettingPage = () => {
                         onFieldsChange={onFieldsChange}
                         onFinish={onFinish}
                         currentRiskMenuData={currentRiskMenuData}
+                        customAntFormFieldError={customAntFormFieldError}
+                        setCustomAntFormFieldError={setCustomAntFormFieldError}
                     />
                 </RiskSettingModal>
             </>
