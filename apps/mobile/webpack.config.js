@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
+    devtool: false,
     output: {
       filename: "[name].[contenthash].js",
       // sourceMapFilename: 'maps/[name].[chunkhash].map.js',
