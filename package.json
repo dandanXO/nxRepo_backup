@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "serve:min": "nx run-many --target=serve --projects=mobile  --configuration=development-in",
+    "serve:mpk": "nx run-many --target=serve --projects=mobile  --configuration=development-pk"
   },
   "private": true,
   "dependencies": {
