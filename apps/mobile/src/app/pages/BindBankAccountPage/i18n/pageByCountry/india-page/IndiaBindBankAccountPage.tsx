@@ -1,10 +1,11 @@
-import {BankAccountTemplate1} from "../../bankAccountByLayout/BankAccountTemplate1";
+
 import React from "react";
 import {
   PureBindBankAccountPageProps
 } from "../../../types/PureBindBankAccountPageProps";
 import {CustomPage} from "../../../components/CustomPage";
 import {useBindBankAccountPage} from "../../../hooks/useBindBankAccountPage";
+import {BankAccountTemplate1} from "./BankAccountTemplate1";
 
 export const IndiaBindBankAccountPage = (props: PureBindBankAccountPageProps) => {
   const {

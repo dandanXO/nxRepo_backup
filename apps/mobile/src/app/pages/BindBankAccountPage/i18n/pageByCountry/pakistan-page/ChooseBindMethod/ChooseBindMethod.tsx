@@ -4,7 +4,7 @@ import BankAccountSVG from "./ic_bank_account_icon.svg";
 import MobileWalletSVG from "./ic_mobile_wallet_icon.svg";
 import unselectedSVG from "./ic_check_disable_icon.svg";
 import selectedSVG from "./ic_check_available_icon.svg";
-import {Label} from "../../../Label";
+import {Label} from "../../../../components/Label";
 
 const Container = styled.div`
   margin-bottom: 20px;
