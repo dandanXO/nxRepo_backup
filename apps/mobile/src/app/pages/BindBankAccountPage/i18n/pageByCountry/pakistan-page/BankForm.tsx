@@ -4,7 +4,7 @@ import {
   PureBindBankAccountPageProps,
 } from "../../../types/PureBindBankAccountPageProps";
 import {useBindBankAccountPage} from "../../../hooks/useBindBankAccountPage";
-import {BankAccountTemplate2} from "../../bankAccountByLayout/BankAccountTemplate2";
+import {BankAccountTemplate2} from "./BankAccountTemplate2";
 
 
 export const BankForm = (props: PureBindBankAccountPageProps) => {

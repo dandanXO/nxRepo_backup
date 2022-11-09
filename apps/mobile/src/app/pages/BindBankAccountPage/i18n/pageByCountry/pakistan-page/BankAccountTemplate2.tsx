@@ -1,9 +1,22 @@
-import {Form} from "../../components/Form";
+import {Form} from "../../../components/Form";
 import {Button, Input} from "@frontend/mobile/shared/ui";
 import React from "react";
-import {IPakistanPageLayoutTypeProps} from "../../types/IGeneralPageLayoutTypeProps";
-import {Label} from "../Label";
+import {IPakistanPageLayoutTypeProps} from "../../../types/IGeneralPageLayoutTypeProps";
+import {Label} from "../../../components/Label";
+import styled from "styled-components";
 
+const Warning = styled.div`
+  margin: 0 auto;
+  width: 284px;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.42;
+  letter-spacing: normal;
+  text-align: center;
+  color: #f82626;
+`;
 export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
 
   return (
@@ -60,6 +73,8 @@ export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
         {/*  value={props.upiData.data}*/}
         {/*  onChange={props.onUPIIDChange}*/}
         {/*/>*/}
+
+        <Warning>Unchangeable after linked, please check before submission.</Warning>
       </Form>
 
       <Button onClick={() => {

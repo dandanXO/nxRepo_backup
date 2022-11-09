@@ -1,7 +1,7 @@
 import {Form} from "../../../components/Form";
 import {Button, Input, InputValue, Modal, Select} from "@frontend/mobile/shared/ui";
 import React, {useCallback, useEffect, useState} from "react";
-import {Label} from "../../Label";
+import {Label} from "../../../components/Label";
 import {z} from "zod";
 import {WalletVendor} from "../../../../../api/GetBindCardDropList";
 

@@ -1,8 +1,8 @@
-import {Form} from "../../components/Form";
 import {Button, Input} from "@frontend/mobile/shared/ui";
-import {Paragraph} from "../../components/Paragraph";
 import React from "react";
-import {IGeneralPageLayoutTypeProps} from "../../types/IGeneralPageLayoutTypeProps";
+import {IGeneralPageLayoutTypeProps} from "../../../types/IGeneralPageLayoutTypeProps";
+import {Form} from "../../../components/Form";
+import { Paragraph } from "../../../components/Paragraph";
 
 export const BankAccountTemplate1 = (props: IGeneralPageLayoutTypeProps) => {
   return (
