@@ -8,7 +8,7 @@ import styled from "styled-components";
 const Warning = styled.div`
   margin: 0 auto;
   width: 284px;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
