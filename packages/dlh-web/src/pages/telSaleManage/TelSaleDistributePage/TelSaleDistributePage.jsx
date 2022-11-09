@@ -38,7 +38,7 @@ function TelSaleDistributePage ({
         }
     }, [searchParams,urgePersonModalVisible]);
 
-   
+
     const columns = [
         { title: intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: "phoneNo", key: "phoneNo", render (text) { return <CopyText text={text} /> }, },
         { title: intl.formatMessage({ id: "page.search.list.status" }), dataIndex: "status", key: "status", },
@@ -97,7 +97,7 @@ function TelSaleDistributePage ({
                 columns={columns}
                 handlePageChange={handlePageChange}
                 dataSource={data}
-                pagination={pagination}
+                pagination={{ ...pagination, pageSizeOptions: ["10", "20", "30", "40", "50", "100", "200", "300", "400", "500", "1000", "2000"] }}
                 loading={loading}
             />
             <UrgePersonModal
@@ -134,7 +134,7 @@ const mapDispatchToProps = (dispatch) => {
         getPersonOrGroupList: telSaleAction.personOrGroupList.get,
         changeUrgePersonModalVisible: telSaleAction.changeUrgePersonModalVisible,
         distributeTelSale: telSaleAction.distributeTelSaleData,
-       
+
     }, dispatch)
 }
 
