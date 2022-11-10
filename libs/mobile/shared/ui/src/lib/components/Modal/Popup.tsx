@@ -24,7 +24,9 @@ const Popup = styled('div')<PopupProps>`
   background: #fff;
   /* Padding */
   /* Content */
-  max-height: 90vh;
+  //NOTICE: Android Compose UI cannot support this value(vh)
+  //max-height: 90vh;
+  max-height: 90%;
   overflow: scroll;
   /* NOTICE: */
   min-width: 320px;
