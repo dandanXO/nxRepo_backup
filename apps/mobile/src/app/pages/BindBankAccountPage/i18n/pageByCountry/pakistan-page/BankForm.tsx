@@ -7,7 +7,9 @@ import {useBindBankAccountPage} from "../../../hooks/useBindBankAccountPage";
 import {BankAccountTemplate2} from "./BankAccountTemplate2";
 
 
-export const BankForm = (props: PureBindBankAccountPageProps) => {
+export const BankForm = (props: PureBindBankAccountPageProps & {
+  disable: boolean;
+}) => {
   // NOTICE: REFACTOR ME
   const {
     // ifscData,

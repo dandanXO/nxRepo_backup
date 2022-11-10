@@ -46,7 +46,8 @@ const Option = styled.div`
 
 export interface IChooseBindMethod {
   value: 0 | 1;
-  changeOptionValueCallback: () => void;
+  changeOptionValueCallback: (option: 0|1) => void;
+  disable: boolean;
 }
 export const ChooseBindMethod = (props: IChooseBindMethod) => {
 
@@ -54,12 +55,16 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
     <Container>
       <Label>Choose the method to receive the money</Label>
       <OptionContainer>
-        <Option onClick={props.changeOptionValueCallback}>
+        <Option onClick={() => props.changeOptionValueCallback(0)}>
           <OptionIcon enable={props.value === 0}/>
           <img src={MobileWalletSVG}/>
           <Label>Mobile wallet</Label>
         </Option>
-        <Option onClick={props.changeOptionValueCallback}>
+        <Option onClick={() => {
+          if(!props.disable) props.changeOptionValueCallback(1)
+        }} style={{
+          background: props.disable ? "#D0D0D0": ""
+        }}>
           <OptionIcon enable={props.value === 1}/>
           <img src={BankAccountSVG}/>
           <Label>Bank account</Label>

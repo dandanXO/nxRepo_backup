@@ -44,6 +44,7 @@ const BindBankAccountPage = () => {
           triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
           bindCardDropListData={bindCardDropListData}
           cardholderName={cardholderName ?? ""}
+
         />
       );
     } else {
