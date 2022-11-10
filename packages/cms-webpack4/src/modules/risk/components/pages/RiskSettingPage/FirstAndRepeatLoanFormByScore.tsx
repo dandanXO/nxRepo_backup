@@ -34,38 +34,35 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                                 <Input placeholder={levelTag} disabled />
                             </Form.Item>
 
-                            <Form.Item  style={{margin: '0 8px 0 0', width: 170 }}
-                                // help={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.help}
-                                // validateStatus={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.validateStatus}
-                            >
+                            <Form.Item  style={{margin: '0 8px 0 0', width: 170 }}>
                                 <Form.Item name={[props.type, index, "max"]} style={{ margin: '0 8px 0 0', width: 72, display: 'inline-block' }}
+                                    validateStatus={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.validateStatus}
                                     rules={[
                                         {
                                             validator: async (_, value) => NumberValidator(_, value)({
                                                 required: true,
                                                 requiredErrorMessage: "请输入值",
                                                 min: 0,
-                                                minMessage: "请输入大于0的整数"
                                             })
                                         },
                                     ]}
-                                    validateStatus={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.validateStatus}
+
                                 >
                                     <Input placeholder={"值"} />
                                 </Form.Item>
                                 <Form.Item style={{ display: 'inline-block', margin: '0 8px 0 0' }}>-</Form.Item>
                                 <Form.Item name={[props.type, index, "min"]} style={{ margin: '0', width: 72, display: 'inline-block' }}
+                                    validateStatus={(props.customAntFormFieldError?.[`${props.type}_min_${index}`] as any)?.validateStatus}
                                     rules={[
                                         {
                                             validator: async (_, value) => NumberValidator(_, value)({
                                                 required: true,
                                                 requiredErrorMessage: "请输入值",
                                                 min: 0,
-                                                minMessage: "请输入大于0的整数"
                                             })
                                         },
                                     ]}
-                                    validateStatus={(props.customAntFormFieldError?.[`${props.type}_min_${index}`] as any)?.validateStatus}
+
                                 >
                                     <Input placeholder={"值"} />
                                 </Form.Item>
@@ -82,7 +79,6 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                                                 required: true,
                                                 requiredErrorMessage: "请输入笔数",
                                                 min: 0,
-                                                minMessage: "请输入大于0的整数"
                                             })
                                         },
                                     ]}
@@ -102,7 +98,6 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                                                 required: true,
                                                 requiredErrorMessage: "请输入最高可借总额",
                                                 min: 0,
-                                                minMessage: "请输入大于0的整数"
                                             })
                                         },
                                     ]}

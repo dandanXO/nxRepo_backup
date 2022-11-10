@@ -44,6 +44,7 @@ function FirstAndRepeatLoanFormByValue(props: FormProps) {
                                     validator: async (_, value) => NumberValidator(_, value)({
                                         required: true,
                                         requiredErrorMessage: "请输入笔数",
+                                        min:0,
                                     })
                                 },
                             ]}

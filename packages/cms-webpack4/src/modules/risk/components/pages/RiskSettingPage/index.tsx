@@ -552,6 +552,7 @@ export const RiskSettingPage = () => {
                     searchable={false}
                     hasEditForm={false}
                     onAddCallback={onAddCallback}
+                    triggerGetList={()=>triggerGetList(null)}
                   
                 />
 

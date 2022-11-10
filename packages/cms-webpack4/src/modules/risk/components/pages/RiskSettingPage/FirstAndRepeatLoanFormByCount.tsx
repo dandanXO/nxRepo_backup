@@ -10,12 +10,9 @@ interface FormProps {
 }
 
 function FirstAndRepeatLoanFormByCount(props: FormProps) {
-    // console.log('customAntFormFieldError',props.customAntFormFieldError)
     return <>
-
         {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
             return (
-
                 <Form.Item key={index} style={{ margin: '0' }}>
                     {index === 0 && (
                         <div>
@@ -53,7 +50,6 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                                             required: true,
                                             requiredErrorMessage: `请输入${index === 4 ? "超過逾期天数" : "笔数"}`,
                                             min: 0,
-                                            minMessage: "请输入大于0的整数"
                                         }),
                                     },
                                 ]}
@@ -73,7 +69,6 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                                             required: true,
                                             requiredErrorMessage: "请输入笔数",
                                             min: 0,
-                                            minMessage: "请输入大于0的整数"
                                         })
                                     },
                                 ]}
@@ -93,7 +88,6 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                                             required: true,
                                             requiredErrorMessage: "请输入最高可借总额",
                                             min: 0,
-                                            minMessage: "请输入大于0的整数"
                                         })
                                     },
                                 ]}
