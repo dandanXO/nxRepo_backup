@@ -145,7 +145,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                       let value = event.target.value;
                                       value = value.replaceAll(`${environment.currency}`, "");
                                       // NOTE: if custom balance exceed max balance then setting max balance
-                                      if(String(Number(value)) === "NaN") {
+                                      if(String(Number(value)) === "NaN" || String(value) === "0") {
                                         setBalanceValue(`${environment.currency}1`);
                                         props.setRepayBalance(1);
                                       } else {
