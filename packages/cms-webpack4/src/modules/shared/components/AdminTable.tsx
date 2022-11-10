@@ -30,6 +30,8 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     isSearchFromClient?: boolean;
     onFormSearchCallback?: (form: FormInstance) => void;
     onFormResetCallback?: () => void;
+    // NOTE: setting
+    triggerGetList?: () => void;
 }
 export const AdminTable = <TableListItemDataType,>({
                                                        tableHeaderColumns,
@@ -45,6 +47,7 @@ export const AdminTable = <TableListItemDataType,>({
                                                        isSearchFromClient = true,
                                                        onFormSearchCallback,
                                                        onFormResetCallback,
+                                                       triggerGetList,
 }: AdminTableTemplateProps<TableListItemDataType>) => {
     // NOTE: actionRef
     // const actionRef = useRef<ActionType>();
@@ -112,7 +115,7 @@ export const AdminTable = <TableListItemDataType,>({
     }, [tableDatasource, onSearchClick]);
 
     const [currentPaginationPageSize, setCurrentPaginationPageSize] = useState(10);
-    
+
     return (
         <ProTable<TableListItemDataType>
             // Table action 的引用，便于自定义触发
@@ -138,7 +141,8 @@ export const AdminTable = <TableListItemDataType,>({
                 setting: {
                     listsHeight: 400,
                 },
-                // reload:()=>props.triggerGetList(null)
+                // NOTICE: refresh icon
+                reload: ()=> triggerGetList(),
             }}
             // dateFormatter="string"
             dateFormatter={(value, valueType) => {
