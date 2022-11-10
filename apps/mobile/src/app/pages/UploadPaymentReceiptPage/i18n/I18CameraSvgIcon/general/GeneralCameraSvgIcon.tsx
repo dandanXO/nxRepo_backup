@@ -1,4 +1,4 @@
-import {CameraSvgIconProps} from "./CameraSvgIconProps";
+import {CameraSvgIconProps} from "../CameraSvgIconProps";
 
 const GeneralCameraSvgIcon = ({ fill = "#000" }: CameraSvgIconProps) => {
   return (

@@ -1,11 +1,7 @@
 import React from "react";
 import {useGetBindCardDropListQuery, usePostBankBindSaveMutation, usePostBankBindSaveToPKMutation} from "../../api";
 import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
-import {environment} from "../../../environments/environment";
-import {IndiaCountry} from "../../../environments/countries/IndiaCountry";
-import {PakistanCountry} from "../../../environments/countries/PakistanCountry";
-import {IndiaBindBankAccountPage} from "./i18n/pageByCountry/india-page/IndiaBindBankAccountPage";
-import {PakistanBindBankAccountPage} from "./i18n/pageByCountry/pakistan-page/PakistanBindBankAccountPage";
+import {I18nBindBankAccountPage} from "./i18n/I18nBindBankAccountPage";
 
 const BindBankAccountPage = () => {
     // NOTICE: India
@@ -27,35 +23,15 @@ const BindBankAccountPage = () => {
     const pageQueryString = useLocationOrderQueryString();
     const cardholderName = pageQueryString.cardholderName;
 
-    // NOTICE:
-    if(environment.country === IndiaCountry.country) {
-      // NOTICE: India
-      return (
-        <IndiaBindBankAccountPage
-          postBankBindSave={postBankBindSave}
-          cardholderName={cardholderName ?? ""}
+    return (
+      <I18nBindBankAccountPage
+        postBankBindSave={postBankBindSave}
+        postBankBindSaveToPK={postBankBindSaveToPK}
+        triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
+        bindCardDropListData={bindCardDropListData}
+        cardholderName={cardholderName ?? ""}
         />
-      );
-    } else if(environment.country === PakistanCountry.country){
-      // NOTICE: Pakistan
-      return (
-        <PakistanBindBankAccountPage
-          postBankBindSaveToPK={postBankBindSaveToPK}
-          triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
-          bindCardDropListData={bindCardDropListData}
-          cardholderName={cardholderName ?? ""}
-
-        />
-      );
-    } else {
-      // NOTICE: India
-      return (
-        <IndiaBindBankAccountPage
-          postBankBindSave={postBankBindSave}
-          cardholderName={cardholderName ?? ""}
-        />
-      );
-    }
+    )
 };
 
 export default BindBankAccountPage;

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 import { useCallback } from "react";
 import { Page, Button } from "@frontend/mobile/shared/ui";
-import { SuccessICON } from "./i18n";
+import { SuccessICON } from "./i18n/SuccessICON";
 
 const CustomPage = styled(Page)`
     display: flex;

@@ -1,5 +1,5 @@
-import IndiaCameraSvgIcon from "./IndiaCameraSvgIcon";
-import GeneralCameraSvgIcon from "./GeneralCameraSvgIcon";
+import IndiaCameraSvgIcon from "./india/IndiaCameraSvgIcon";
+import GeneralCameraSvgIcon from "./general/GeneralCameraSvgIcon";
 import {environment} from "../../../../../environments/environment";
 
 const I18CameraSvgIcon = environment.country === "in" ? IndiaCameraSvgIcon : GeneralCameraSvgIcon;

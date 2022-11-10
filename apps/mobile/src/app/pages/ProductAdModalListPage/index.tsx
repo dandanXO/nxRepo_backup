@@ -2,7 +2,7 @@ import { Page } from "@frontend/mobile/shared/ui";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useGetLoanRecommendQuery } from "../../api";
-import {HotSvgIcon} from "./i18n";
+import {HotSvgIcon} from "./i18n/HotSvgIcon";
 import {environment} from "../../../environments/environment";
 
 const ProductAdStyled = styled.div`
