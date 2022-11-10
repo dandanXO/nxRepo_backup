@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-const RequireNumberMessage = "请输入大于0的整数";
+const RequireNumberMessage = (number = 0) => `请输入大于${number}的整数`;
 interface Validator {
   name?: string;
 }
@@ -33,9 +33,9 @@ interface ValidateNumber extends Validator{
 export const NewNumberValidatorPromise = (value, params: ValidateNumber): Promise<unknown> => {
   const scheme = z
     .number({
-      invalid_type_error: params.typeErrorMessage || RequireNumberMessage,
+      invalid_type_error: params.typeErrorMessage || RequireNumberMessage(),
     })
-    .min(params.min, params.minMessage)
+    .min(params.min, params.minMessage || RequireNumberMessage(params.min))
     .max(params.max, params.maxMessage);
   const result = scheme.safeParse(value);
   if (!result.success) {
@@ -51,7 +51,7 @@ export const NumberValidator = (_, value) => (params: ValidateNumber) => {
     // console.log("value", value);
     // console.log("params", params);
     if(params.required) {
-      const stringScheme = z.string().min(1, params && params.requiredErrorMessage ? params.requiredErrorMessage : RequireNumberMessage)
+      const stringScheme = z.string().min(1, params && params.requiredErrorMessage ? params.requiredErrorMessage : RequireNumberMessage())
       const stringResult = stringScheme.safeParse(String(value));
       if (!stringResult.success) {
         const firstError = (stringResult as any).error.format();
@@ -62,9 +62,9 @@ export const NumberValidator = (_, value) => (params: ValidateNumber) => {
 
   const scheme = z
     .number({
-      invalid_type_error: params.typeErrorMessage || RequireNumberMessage,
+      invalid_type_error: params.typeErrorMessage || RequireNumberMessage(),
     })
-    .min(params.min, params.minMessage)
+    .min(params.min, params.minMessage || RequireNumberMessage(params.min))
     .max(params.max, params.maxMessage);
   const result = scheme.safeParse(Number(value));
   if (!result.success) {
