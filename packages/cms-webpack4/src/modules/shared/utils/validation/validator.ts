@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-const RequireNumberMessage = "请输入数字";
+const RequireNumberMessage = "请输入正整数";
 interface Validator {
   name?: string;
 }
@@ -33,7 +33,7 @@ interface ValidateNumber extends Validator{
 export const NewNumberValidatorPromise = (value, params: ValidateNumber): Promise<unknown> => {
   const scheme = z
     .number({
-      invalid_type_error: params.typeErrorMessage || RequireNumberMessage;
+      invalid_type_error: params.typeErrorMessage || RequireNumberMessage,
     })
     .min(params.min, params.minMessage)
     .max(params.max, params.maxMessage);
