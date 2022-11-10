@@ -30,7 +30,9 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
     const oldRankStratOnChange = (e) => {
         resetErrorMessage();
         const { repeatLoan } = props.form.getFieldsValue();
-        const isLoanFormNotFilled = repeatLoan.map(i => Object.values(i).every(i => i === undefined)).every(i => i === true);
+        const isLoanFormNotFilled = repeatLoan.map(loan => {
+            return Object.keys(loan).filter(field => field !== 'id').every(i => loan[i] === undefined)
+        }).every(i => i === true);
         if (!isLoanFormNotFilled) {
             modal.confirm({
                 title: "切换分数类型将会清空现有的数据，确定仍要切换吗？",

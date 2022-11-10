@@ -263,7 +263,7 @@ export const RiskSettingPage = () => {
         let isError = false;
         loan.map((i, index) => {
             const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount')
-
+            const loanCountValidateError = validateField(i.loanCount, '笔数');
             if (isLoanCountError) {
                 isError = true;
             }
@@ -271,7 +271,8 @@ export const RiskSettingPage = () => {
                 ...formFieldError,
                 ...{
                     [`${formType}_loanCount_${index}`]: {
-                        validateStatus: isLoanCountError ? "error" : '',
+                        validateStatus: loanCountValidateError.isValidateError || isLoanCountError ? "error" : '',
+                        help: loanCountValidateError.errorMessage
                     },
                     [`${formType}_error`]: {
                         validateStatus: isError ? "error" : '',
@@ -290,9 +291,6 @@ export const RiskSettingPage = () => {
         setCustomAntFormFieldError(prev => ({ ...prev, ...formFieldError }));
         return isError;
     }
-
- 
-
     const validateByScore=(formType,loan)=>{
 
         let formFieldError = {};
@@ -307,23 +305,33 @@ export const RiskSettingPage = () => {
             const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount');
             const isBalanceError = compareCount(index, loan.length, loan, 'balance');
 
+            const maxValidate = validateField(i.max, '值');
+            const minValidate = validateField(i.min, '值');
+            const loanCountValidate = validateField(i.loanCount, '笔数');
+            const balanceValidate = validateField(i.balance, '最高可借总额');
+
             if (isMaxError || isMinError || isLoanCountError || isBalanceError) {
                 isError = true;
             }
+
             formFieldError = {
                 ...formFieldError,
                 ...{
                     [`${formType}_max_${index}`]: {
-                        validateStatus: isMaxError ? "error" : '',
+                        validateStatus: maxValidate.isValidateError || isMaxError ? "error" : '',
+                        help: maxValidate.errorMessage
                     },
                     [`${formType}_min_${index}`]: {
-                        validateStatus: isMinError ? "error" : '',
+                        validateStatus: minValidate.isValidateError || isMinError ? "error" : '',
+                        help: minValidate.errorMessage
                     },
                     [`${formType}_loanCount_${index}`]: {
-                        validateStatus: isLoanCountError ? "error" : '',
+                        validateStatus: loanCountValidate.isValidateError|| isLoanCountError  ? "error" : '',
+                        help: loanCountValidate.errorMessage
                     },
                     [`${formType}_balance_${index}`]: {
-                        validateStatus: isBalanceError ? "error" : '',
+                        validateStatus: balanceValidate.isValidateError || isBalanceError ? "error" : '',
+                        help: balanceValidate.errorMessage
                     },
                     [`${formType}_error`]: {
                         validateStatus: isError? "error" : '',
@@ -340,6 +348,7 @@ export const RiskSettingPage = () => {
         setCustomAntFormFieldError(prev=>({...prev,...formFieldError}));
         return isError;
     }
+ 
 
     const validateByCount=(formType, loan)=>{
       
@@ -350,6 +359,14 @@ export const RiskSettingPage = () => {
             const isRepaymentCountError = index !== 4 && compareCount(index, loan.length - 1, loan, 'repaymentCount');
             const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount');
             const isBalanceError = compareCount(index, loan.length, loan, 'balance');
+
+            const repaymentCount = index !== 4 ? i.repaymentCount : i.overdueDaysReject;
+            const repaymentCouuntText = index !== 4 ? "笔数" : "超過逾期天数";
+
+            const repaymentCountValidate = validateField(repaymentCount, repaymentCouuntText);
+            const loanCountValidate = validateField(i.loanCount, '笔数');
+            const balanceValidate = validateField(i.balance, '最高可借总额');
+
             if (isRepaymentCountError || isLoanCountError || isBalanceError) {
                 isError =true;
             }
@@ -357,13 +374,16 @@ export const RiskSettingPage = () => {
                 ...formFieldError,
                 ...{
                     [`${formType}_repaymentCount_${index}`]: {
-                        validateStatus: isRepaymentCountError ? "error" : '',
+                        validateStatus: repaymentCountValidate.isValidateError || isRepaymentCountError ? "error" : '',
+                        help: repaymentCountValidate.errorMessage
                     },
                     [`${formType}_loanCount_${index}`]: {
-                        validateStatus: isLoanCountError ? "error" : '',
+                        validateStatus: loanCountValidate.isValidateError || isLoanCountError ? "error" : '',
+                        help: loanCountValidate.errorMessage
                     },
                     [`${formType}_balance_${index}`]: {
-                        validateStatus: isBalanceError ? "error" : '',
+                        validateStatus: balanceValidate.isValidateError || isBalanceError ? "error" : undefined,
+                        help: balanceValidate.errorMessage
                     },
                     [`${formType}_error`]: {
                         validateStatus: isError ? "error" : '',
@@ -372,7 +392,6 @@ export const RiskSettingPage = () => {
                                 <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
                                 <div>▪ 所有字段必须由大至小填写大于0的整数。</div>
                                 <div>▪ 各级距数值应小于上一级并大于下一级。</div>
-                                <div>▪ 超过逾期天数需填写大于0的整数。</div>
                             </div> : '',
                     },
                 }
@@ -389,20 +408,48 @@ export const RiskSettingPage = () => {
         const validateType = formType === 'firstLoan' ? rankStrategy : oldRankStrategy;
         const loan = formType === 'firstLoan' ? firstLoan : repeatLoan;
         const isLoanFormNotFilled = loan.map(i => Object.values(i).includes(undefined)).includes(true);
-
         if (isLoanFormNotFilled) return;
-
         return validateType === 'KEY_VALUE'
             ? validateByValue(formType, loan) : validateType === 'SCORE'
             ? validateByScore(formType, loan) : validateByCount(formType, loan);
 
     }
-
+    const validateField = (fieldValue,placeholder) => {
+        const isValidateError = fieldValue < 0 || isNaN(fieldValue) || fieldValue === '';
+        const errorMessage = fieldValue < 0 || isNaN(fieldValue) ? '请输入大于0的整数' : (fieldValue === ''||fieldValue === undefined)  ? `请输入${placeholder}` : '';
+        return {
+            isValidateError,
+            errorMessage
+        }
+    }
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
-       
+       console.log(changedFields)
         const formType = changedFields[0].name[0];
+        const index = changedFields[0].name[1];
+        const fieled = changedFields[0].name[2];
+        let formFieldError = {};
+        const errorText={
+            loanCount:'笔数',
+            min:'值',
+            max:'值',
+            balance:'最高可借总额',
+            overdueDaysReject:'超過逾期天数',
+            repaymentCount:'笔数',
+        }
+
+        const fieldError = validateField(changedFields[0].value, errorText[fieled]);
+        formFieldError = {
+            [`${formType}_${fieled}_${index}`]: {
+                validateStatus: fieldError.isValidateError ? "error" : '',
+                help: fieldError.errorMessage
+            }
+        }
+        setCustomAntFormFieldError((prev) => {
+            return { ...prev, ...formFieldError }
+        });
+
         if (formType === 'firstLoan' || formType === 'repeatLoan') {
             validateTypeSelector(formType)
         }
@@ -420,9 +467,10 @@ export const RiskSettingPage = () => {
         // NOTICE: Edit
         const isEdit = showModalContent.isEdit;
         const modelId = editID;
-       
+
         const isFirstLoanError = validateTypeSelector("firstLoan");
         const isRepeatLoanError = validateTypeSelector("repeatLoan");
+     
         if (isFirstLoanError || isRepeatLoanError) return;
         
 
