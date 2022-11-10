@@ -8,7 +8,7 @@ interface FormProps{
     type?:string;
 }
 
-function FirstAndRepeatLoanFormByRange(props:FormProps) {
+function FirstAndRepeatLoanFormByScore(props:FormProps) {
 
     return <>
             {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
@@ -35,8 +35,8 @@ function FirstAndRepeatLoanFormByRange(props:FormProps) {
                             </Form.Item>
 
                             <Form.Item  style={{margin: '0 8px 0 0', width: 170 }}
-                                help={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.help}
-                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.validateStatus}
+                                // help={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.help}
+                                // validateStatus={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.validateStatus}
                             >
                                 <Form.Item name={[props.type, index, "max"]} style={{ margin: '0 8px 0 0', width: 72, display: 'inline-block' }}
                                     rules={[
@@ -65,12 +65,12 @@ function FirstAndRepeatLoanFormByRange(props:FormProps) {
                                             })
                                         },
                                     ]}
-                                    validateStatus={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.validateStatus}
+                                    validateStatus={(props.customAntFormFieldError?.[`${props.type}_min_${index}`] as any)?.validateStatus}
                                 >
                                     <Input placeholder={"值"} />
                                 </Form.Item>
                             </Form.Item>
-                            <Form.Item name={`${props.type}_${index}`} style={{marginRight: '8px', width: 110 }}
+                            <Form.Item  style={{marginRight: '8px', width: 110 }}
                                 help={(props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.help}
                                 validateStatus={(props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.validateStatus}
                             >
@@ -90,7 +90,7 @@ function FirstAndRepeatLoanFormByRange(props:FormProps) {
                                     <Input placeholder={"笔数"} />
                                 </Form.Item>
                             </Form.Item>
-                            <Form.Item name={`${props.type}_${index}`} style={{marginRight: '8px', width: 110 }}
+                            <Form.Item style={{marginRight: '8px', width: 110 }}
                                 help={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.help}
                                 validateStatus={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.validateStatus}
                             >
@@ -119,4 +119,4 @@ function FirstAndRepeatLoanFormByRange(props:FormProps) {
 
 }
 
-export default FirstAndRepeatLoanFormByRange;
+export default FirstAndRepeatLoanFormByScore;

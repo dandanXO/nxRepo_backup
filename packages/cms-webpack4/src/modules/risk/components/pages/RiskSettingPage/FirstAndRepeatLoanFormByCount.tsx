@@ -2,6 +2,7 @@ import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space } from
 import CustomLabel from "./CustomLabel";
 import { NumberValidator } from "../../../../shared/utils/validation/validator";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
+import { InfoCircleOutlined } from "@ant-design/icons";
 interface FormProps {
     isEdit: boolean;
     customAntFormFieldError: CustomAntFormFieldError;
@@ -19,7 +20,13 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                     {index === 0 && (
                         <div>
                             <CustomLabel style={{ width: 76 }}>风控标签</CustomLabel>
-                            <CustomLabel style={{ width: 140 }}>还款笔数</CustomLabel>
+                            <CustomLabel style={{ width: 140 }}>
+                                <Space>还款笔数
+                                    <Tooltip title="「拒绝」等级的校验规则为“最大逾期天数大于n天”时">
+                                        <InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} />
+                                    </Tooltip>
+                                </Space>
+                            </CustomLabel>
                             <CustomLabel style={{ width: 120 }}>最高可放款笔数</CustomLabel>
                             <CustomLabel style={{ width: 110 }}>最高可借总额</CustomLabel>
                         </div>
@@ -36,10 +43,10 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
 
                         <Form.Item style={{ marginRight: '8px' }}
                             help={(props.customAntFormFieldError?.[`${props.type}_${index}`] as any)?.help}
-                            validateStatus={(props.customAntFormFieldError?.[`${props.type}_count_${index}`] as any)?.validateStatus}
+                            validateStatus={(props.customAntFormFieldError?.[`${props.type}_repaymentCount_${index}`] as any)?.validateStatus}
                         >
-                            <Form.Item name={[props.type, index, "count"]} style={{ margin: '0 8px 0 0', width: 130 }}
-                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_count_${index}`] as any)?.validateStatus}
+                            <Form.Item name={[props.type, index, index === 4 ? "overdueDaysReject" : "repaymentCount"]} style={{ margin: '0 8px 0 0', width: 130 }}
+                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_repaymentCount_${index}`] as any)?.validateStatus}
                                 rules={[
                                     {
                                         validator: async (_, value) => NumberValidator(_, value)({
@@ -47,7 +54,7 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                                             requiredErrorMessage: `请输入${index === 4 ? "超過逾期天数" : "笔数"}`,
                                             min: 0,
                                             minMessage: "请输入大于0的整数"
-                                        })
+                                        }),
                                     },
                                 ]}
                             >
@@ -75,11 +82,11 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                             </Form.Item>
                         </Form.Item>
                         <Form.Item style={{ marginRight: '8px' }}
-                            help={(props.customAntFormFieldError?.[`${props.type}_loanAmount_${index}`] as any)?.help}
-                            validateStatus={(props.customAntFormFieldError?.[`${props.type}_loanAmount_${index}`] as any)?.validateStatus}
+                            help={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.help}
+                            validateStatus={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.validateStatus}
                         >
-                            <Form.Item name={[props.type, index, "loanAmount"]} style={{ margin: '0 8px 0 0', width: 110 }}
-                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_loanAmount_${index}`] as any)?.validateStatus}
+                            <Form.Item name={[props.type, index, "balance"]} style={{ margin: '0 8px 0 0', width: 110 }}
+                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.validateStatus}
                                 rules={[
                                     {
                                         validator: async (_, value) => NumberValidator(_, value)({

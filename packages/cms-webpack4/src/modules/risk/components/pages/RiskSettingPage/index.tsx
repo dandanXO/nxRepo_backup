@@ -40,7 +40,6 @@ export const RiskSettingPage = () => {
     }, []);
 
 
-
     useEffect(() => {
         setLoading(isFetching);
     }, [isFetching])
@@ -63,8 +62,8 @@ export const RiskSettingPage = () => {
                             setShowModalContent({
                                 show: true,
                                 isEdit: true,
-                            })
-                            setCustomAntFormFieldError({})
+                            });
+                            setCustomAntFormFieldError({});
                         }}>修改</a>,
                     ]
                 },
@@ -129,17 +128,17 @@ export const RiskSettingPage = () => {
             // ],
             firstLoan: [
                 { max: 50, min: 58, loanCount: '4000', balance: '200', providerRank: 'A' },
-                { max: 49, min: 39, loanCount: '2000', balance: '99', providerRank: 'B' },
-                { max: 38, min: 32, loanCount: '2000', balance: '88', providerRank: 'C' },
-                { max: 31, min: 22, loanCount: '1000', balance: '77', providerRank: 'D' },
-                { max: 21, min: 12, loanCount: '0', balance: '66', providerRank: 'E' }
+                { max: 49, min: 39, loanCount: 3000, balance: '99', providerRank: 'B' },
+                { max: 38, min: 32, loanCount: 2000, balance: '88', providerRank: 'C' },
+                { max: 31, min: 22, loanCount: 1000, balance: '77', providerRank: 'D' },
+                { max: 21, min: 12, loanCount:0, balance: '66', providerRank: 'E' }
             ],
             repeatLoan: [
-                { max: 50, min: 58, loanCount: '4000', balance: '200', providerRank: 'A' },
-                { max: 49, min: 39, loanCount: '3000', balance: '99', providerRank: 'B' },
-                { max: 38, min: 32, loanCount: '4000', balance: '88', providerRank: 'C' },
-                { max: 31, min: 22, loanCount: '1000', balance: '77', providerRank: 'D' },
-                { max: 21, min: 12, loanCount: '0', balance: '66', providerRank: 'E' }
+                { max: 50, min: 58, loanCount: 4000, balance: '200', providerRank: 'A' },
+                { max: 49, min: 39, loanCount: 3000, balance: '99', providerRank: 'B' },
+                { max: 38, min: 32, loanCount: 2000, balance: '88', providerRank: 'C' },
+                { max: 31, min: 22, loanCount: 1000, balance: '77', providerRank: 'D' },
+                { max: 21, min: 12, loanCount: 0, balance: '66', providerRank: 'E' }
             ],
             riskModelName: 1,
             useRcQuota: true,
@@ -159,6 +158,7 @@ export const RiskSettingPage = () => {
         isEdit: false,
     });
 
+    // const [firstLoanType, setFirstLoanType] = useState('KEY_VALUE');
     // NOTICE: Form
 
     // NOTE: 1. Initial Data
@@ -167,6 +167,8 @@ export const RiskSettingPage = () => {
         return {
             useRcQuota: true,
             enabled: true,
+            rankStrategy:'KEY_VALUE',
+            oldRankStrategy:'KEY_VALUE'
         } as DeepPartial<FormResponseData>;
     }, [])
 
@@ -207,6 +209,7 @@ export const RiskSettingPage = () => {
 
     // NOTE: 3. Set form fields from data
     useEffect(() => {
+      
         // NOTICE:
         if(!showModalContent.isEdit) return;
 
@@ -219,8 +222,11 @@ export const RiskSettingPage = () => {
             firstLoan: currentFormData.firstLoan,
             repeatLoan: currentFormData.repeatLoan,
             useRcQuota: currentFormData.useRcQuota,
+            oldUseRcQuota: currentFormData.oldUseRcQuota,
             enabled: currentFormData.enabled,
             remark: currentFormData.remark,
+            oldRankStrategy: currentFormData.oldRankStrategy,
+            rankStrategy: currentFormData.rankStrategy,
         })
 
     }, [showModalContent.isEdit, currentFormData])
@@ -252,14 +258,14 @@ export const RiskSettingPage = () => {
     }
 
     const validateByValue = (formType, loan) => {
-        console.log('validateByValue-----------', loan);
+
         let formFieldError = {};
         let isError = false;
         loan.map((i, index) => {
             const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount')
 
             if (isLoanCountError) {
-                isError =true;
+                isError = true;
             }
             formFieldError = {
                 ...formFieldError,
@@ -287,33 +293,31 @@ export const RiskSettingPage = () => {
 
  
 
-    const validateByRange=(formType,loan)=>{
-        console.log('validateByRange-----------')
+    const validateByScore=(formType,loan)=>{
+
         let formFieldError = {};
         let isError = false;
         loan.map((i, index) => {
+            const isFirstField = index === 0;
             const isLastField = index === loan.length - 1;
             const max = Number(i.max);
             const min = Number(i.min);
-            const compareIndex = isLastField ? index - 1 : index + 1;
-            const compareField = isLastField ? loan[compareIndex].min : loan[compareIndex].max;
-            const isInRange = isLastField ? max !== Number(compareField) - 1 : min !== Number(compareField) + 1;
-
-            const isMinOrMaxError = isLastField ?
-                max <= min || isInRange :
-                max <= min || min <= compareField || isInRange;
-
+            const isMaxError = isFirstField ? max <= min : max <= min || max !== Number(loan[index - 1].min) - 1;
+            const isMinError = isLastField ? max <= min : max <= min || min !== Number(loan[index + 1].max) + 1;
             const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount');
             const isBalanceError = compareCount(index, loan.length, loan, 'balance');
 
-            if (isMinOrMaxError || isLoanCountError || isBalanceError) {
-                isError =true;
+            if (isMaxError || isMinError || isLoanCountError || isBalanceError) {
+                isError = true;
             }
             formFieldError = {
                 ...formFieldError,
                 ...{
                     [`${formType}_max_${index}`]: {
-                        validateStatus: isMinOrMaxError ? "error" : '',
+                        validateStatus: isMaxError ? "error" : '',
+                    },
+                    [`${formType}_min_${index}`]: {
+                        validateStatus: isMinError ? "error" : '',
                     },
                     [`${formType}_loanCount_${index}`]: {
                         validateStatus: isLoanCountError ? "error" : '',
@@ -332,29 +336,28 @@ export const RiskSettingPage = () => {
                     },
                 }
             }
-
         })
         setCustomAntFormFieldError(prev=>({...prev,...formFieldError}));
         return isError;
     }
 
     const validateByCount=(formType, loan)=>{
-        console.log('validateByCount-----------', loan);
+      
         let formFieldError = {};
         let isError = false;
         loan.map((i, index) => {
-            const isCountError = index !== 4 && compareCount(index, loan.length - 1, loan, 'count');
+           
+            const isRepaymentCountError = index !== 4 && compareCount(index, loan.length - 1, loan, 'repaymentCount');
             const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount');
             const isBalanceError = compareCount(index, loan.length, loan, 'balance');
-
-            if (isCountError || isLoanCountError || isBalanceError) {
+            if (isRepaymentCountError || isLoanCountError || isBalanceError) {
                 isError =true;
             }
             formFieldError = {
                 ...formFieldError,
                 ...{
-                    [`${formType}_count_${index}`]: {
-                        validateStatus: isCountError ? "error" : '',
+                    [`${formType}_repaymentCount_${index}`]: {
+                        validateStatus: isRepaymentCountError ? "error" : '',
                     },
                     [`${formType}_loanCount_${index}`]: {
                         validateStatus: isLoanCountError ? "error" : '',
@@ -385,11 +388,13 @@ export const RiskSettingPage = () => {
         const { rankStrategy, oldRankStrategy, firstLoan, repeatLoan } = form.getFieldsValue();
         const validateType = formType === 'firstLoan' ? rankStrategy : oldRankStrategy;
         const loan = formType === 'firstLoan' ? firstLoan : repeatLoan;
-        const isLoanFormFilled = loan.map(i => Object.values(i).includes(undefined)).includes(true);
-        if (isLoanFormFilled) return;
+        const isLoanFormNotFilled = loan.map(i => Object.values(i).includes(undefined)).includes(true);
+
+        if (isLoanFormNotFilled) return;
+
         return validateType === 'KEY_VALUE'
             ? validateByValue(formType, loan) : validateType === 'SCORE'
-            ? validateByRange(formType, loan) : validateByCount(formType, loan);
+            ? validateByScore(formType, loan) : validateByCount(formType, loan);
 
     }
 
@@ -398,9 +403,11 @@ export const RiskSettingPage = () => {
     const onFieldsChange = useCallback((changedFields, allFields) => {
        
         const formType = changedFields[0].name[0];
-        validateTypeSelector(formType)
-       
-    }, [showModalContent.isEdit])
+        if (formType === 'firstLoan' || formType === 'repeatLoan') {
+            validateTypeSelector(formType)
+        }
+
+    }, [])
 
 
     // NOTICE: Form.3 onFinish
@@ -409,8 +416,7 @@ export const RiskSettingPage = () => {
         // NOTE: Fetch RiskModel
         const riskModel = currentRiskMenuData.filter(menu => menu.id === fields["riskModelName"])[0];
         const riskModelName = riskModel.riskModelName;
-
-
+       
         // NOTICE: Edit
         const isEdit = showModalContent.isEdit;
         const modelId = editID;
@@ -424,35 +430,43 @@ export const RiskSettingPage = () => {
         Object.keys(fields).map(key => {
 
             if(key === "firstLoan" || key === "repeatLoan") {
-               
+                const formType = key === "firstLoan" ? fields.rankStrategy : fields.oldRankStrategy;
+                console.log('formType',formType)
                 fields[key].map((record, index) => {
                     fields[key][index] = {
-                        loanCount: Number(record.loanCount),
-                        // 可借额度
-
-                        // NOTE: future
-                        // max: 1,
-                        // 终始阀值(exclude)
-
-                        // NOTE: future
-                        // min: 1,
-                        // 起始阀值(include)
-
-                        providerRank: record.providerRank,
-
-                        rank: ["EXCELLENT", "GOOD", "NORMAL", "ORDINARY", "REJECT"][index],
                         // 风控评分等级
-
-                        sort: index + 1,
+                        rank: ["EXCELLENT", "GOOD", "NORMAL", "ORDINARY", "REJECT"][index],
+                        
                         // 排序
+                        sort: index + 1,
 
-                        type: key === "firstLoan" ? 0 : 1 , // 0 | 1
                         // 级距类型 0: 首贷, 1: 复借
+                        type: key === "firstLoan" ? 0 : 1 , // 0 | 1
+                        
+                        // 对应风控商等级
+                        providerRank: formType === "KEY_VALUE" ? record.providerRank : null,
+                        
+                        // 最高可放款笔数
+                        loanCount: Number(record.loanCount),
 
-                        // min:record.min,
-                        // max:record.max,
-                        // loanAmount:record.loanAmount
+                        // 终始阀值(exclude)
+                        max: formType === "SCORE" ? Number(record.max) : null,
+                        
+                        // 起始阀值(include)
+                        min: formType === "SCORE" ? Number(record.min) : null,
+
+                        // 最高可借金额
+                        balance:formType !== "KEY_VALUE" ? Number(record.balance) : null,
+
+                        // 还款笔数阀值
+                        repaymentCount:formType === "REPAY_COUNT" && index!==4  ? Number(record.repaymentCount) : null,
+
+                        // 逾期天数超过N天拒绝
+                        overdueDaysReject:formType === "REPAY_COUNT" && index===4 ? Number(record.overdueDaysReject) : null,
+
+
                     } as MssRiskRankVo
+                    
                     // NOTE: Edit
                     if(isEdit) {
                         fields[key][index]["modelId"] = modelId;
@@ -473,19 +487,19 @@ export const RiskSettingPage = () => {
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPostRisk : triggerPutRisk;
         // console.log("triggerAPI", !showModalContent.isEdit ? "triggerPostRisk" : "triggerPutRisk");
-        console.log("fields", fields);
+        // console.log("fields", fields);
 
         // NOTE: Request
-        // triggerAPI(fields).unwrap().then((responseData) => {
-        //     form.resetFields();
+        triggerAPI(fields).unwrap().then((responseData) => {
+            form.resetFields();
 
-        //     triggerGetList(null);
+            triggerGetList(null);
 
-        //     setShowModalContent({
-        //         show: false,
-        //         isEdit: false,
-        //     })
-        // })
+            setShowModalContent({
+                show: false,
+                isEdit: false,
+            })
+        })
     }, [showModalContent.isEdit, editID, currentRiskMenuData])
 
     // NOTICE: Form.4 onFinishFailed
@@ -498,6 +512,7 @@ export const RiskSettingPage = () => {
 
 
     const onAddCallback = useCallback(() => {
+        setCustomAntFormFieldError({});
         setShowModalContent({
             show: true,
             isEdit: false,
@@ -530,10 +545,6 @@ export const RiskSettingPage = () => {
                     tableDatasource={currentData}
                     loading={loading}
                     onSearchClick={(props: RiskManageList) => {
-                        // const {productName, enabled} = props;
-                        // const searchedListData = productListData
-                        //     .filter(i => productName === "" ? i :  i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
-                        //     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
                         return [];
                     }}
                     // NOTE: 新增
@@ -550,7 +561,7 @@ export const RiskSettingPage = () => {
                     setShowModalContent={setShowModalContent}
                     form={form}
                     onOk={onOk}
-                    onAutoCompleteTemplate={onAutoCompleteTemplate}
+                    // onAutoCompleteTemplate={onAutoCompleteTemplate}
                 >
                     <RiskSettingForm
                         form={form}

@@ -29,8 +29,8 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
                 })
             }}
             onOk={props.onOk}
-            autoComplete={true}
-            onAutoCompleteTemplate={props.onAutoCompleteTemplate}
+            // autoComplete={true}
+            // onAutoCompleteTemplate={props.onAutoCompleteTemplate}
         >
             {props.children}
 

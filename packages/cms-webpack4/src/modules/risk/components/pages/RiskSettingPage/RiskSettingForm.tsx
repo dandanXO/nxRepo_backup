@@ -16,7 +16,7 @@ interface RiskSettingFormProps {
     onFinish: () => void;
     currentRiskMenuData: Array<RiskModelMenu>;
     customAntFormFieldError: CustomAntFormFieldError;
-    setCustomAntFormFieldError:React.Dispatch<React.SetStateAction<Object>>;
+    setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<Object>>;
 }
 
 const RiskSettingForm = (props: RiskSettingFormProps) => {
@@ -61,6 +61,7 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 customAntFormFieldError={props.customAntFormFieldError}
                 setCustomAntFormFieldError={props.setCustomAntFormFieldError}
                 form={props.form}
+                
             />
             <RepeatLoanSection
                 isEdit={props.isEdit}
@@ -68,8 +69,6 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 setCustomAntFormFieldError={props.setCustomAntFormFieldError}
                 form={props.form}
             />
-
-       
 
             <Form.Item
                 label={'状态'}
