@@ -136,7 +136,7 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
         className="mb"
         labelType={"left"}
         label={"+92"}
-        placeholder="11111111111"
+        placeholder="Wallet Account Number"
         value={mobileData.data}
         onChange={onMobileDataChange}
         onBlur={validateMobileWalletAccount}
