@@ -1,7 +1,6 @@
-interface GeneralCameraSvgIconProps {
-  fill?: string;
-}
-const GeneralCameraSvgIcon = ({ fill = "#000" }: GeneralCameraSvgIconProps) => {
+import {CameraSvgIconProps} from "./CameraSvgIconProps";
+
+const GeneralCameraSvgIcon = ({ fill = "#000" }: CameraSvgIconProps) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" xmlns-xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
       <defs>

@@ -1,6 +1,5 @@
-interface CameraSvgIconProps {
-    fill?: string;
-}
+import {CameraSvgIconProps} from "./CameraSvgIconProps";
+
 const IndiaCameraSvgIcon = ({ fill = "#f58b10" }: CameraSvgIconProps) => {
     return (
         <svg

@@ -1,19 +1,19 @@
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import {
-  PresentationPageProps,
   usePureUploadPaymentReceiptPage
-} from "./pureUploadPaymentReceiptPage";
+} from "./hooks/usePureUploadPaymentReceiptPage";
 import {InputValue} from "../../core/types/InputValue";
 import React from "react";
-import {PresentationUploadPaymentReceiptPage} from "./PresentationUploadPaymentReceiptPage";
+import {IndiaUploadPaymentReceiptPage} from "./i18n/I18UploadPaymentReceiptPage/india/IndiaUploadPaymentReceiptPage";
+import {I18UploadPaymentReceiptPageProps} from "./i18n/I18UploadPaymentReceiptPage/I18UploadPaymentReceiptPageProps";
 
 export default {
     title: "Page/UploadPaymentReceiptPage",
-    component: PresentationUploadPaymentReceiptPage,
-} as ComponentMeta<typeof PresentationUploadPaymentReceiptPage>;
+    component: IndiaUploadPaymentReceiptPage,
+} as ComponentMeta<typeof IndiaUploadPaymentReceiptPage>;
 
-export const Page: ComponentStory<typeof PresentationUploadPaymentReceiptPage> = () => {
+export const Page: ComponentStory<typeof IndiaUploadPaymentReceiptPage> = () => {
   const {
     isUploading,
     utr,
@@ -33,7 +33,7 @@ export const Page: ComponentStory<typeof PresentationUploadPaymentReceiptPage> =
 
     return (
         <AppThemeProvider>
-            <PresentationUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
+            <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
         </AppThemeProvider>
     );
 };

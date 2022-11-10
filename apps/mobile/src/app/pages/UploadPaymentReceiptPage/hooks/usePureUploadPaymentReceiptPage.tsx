@@ -1,9 +1,7 @@
 import React, {useCallback, useState} from "react";
-import {InputValue} from "../../core/types/InputValue";
+import {InputValue} from "../../../core/types/InputValue";
 import {z} from "zod";
-import {Page} from "@frontend/mobile/shared/ui";
-import styled from "styled-components";
-import {PostRepayReceiptRequestProps} from "./index";
+import {PostRepayReceiptRequestProps} from "../index";
 
 
 interface PureUploadPaymentReceiptPageProps {
@@ -94,13 +92,3 @@ export const usePureUploadPaymentReceiptPage = (
   }
 };
 
-export interface PresentationPageProps {
-  isUploading: boolean;
-  utr: InputValue<string>;
-  setURT: React.Dispatch<React.SetStateAction<InputValue<string>>>;
-  validateUtr: () => void;
-  formFile: string | undefined;
-  onFileChange: (obj: any) => void;
-  imageSrc: string | undefined;
-  confirm: () => void;
-}

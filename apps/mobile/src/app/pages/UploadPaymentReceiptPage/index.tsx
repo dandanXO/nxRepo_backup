@@ -1,11 +1,11 @@
 import React, {useCallback} from "react";
-import styled from "styled-components";
-import {Page, useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
+
+import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
 import {useNavigate} from "react-router-dom";
 import {usePostRepayReceiptMutation} from "../../api";
 import {PostRepayReceiptResponse} from "../../api/postRepayReceipt";
-import {usePureUploadPaymentReceiptPage} from "./pureUploadPaymentReceiptPage";
-import {PresentationUploadPaymentReceiptPage} from "./PresentationUploadPaymentReceiptPage";
+import {usePureUploadPaymentReceiptPage} from "./hooks/usePureUploadPaymentReceiptPage";
+import {I18UploadPaymentReceiptPage} from "./i18n/I18UploadPaymentReceiptPage";
 
 
 export interface PostRepayReceiptRequestProps {
@@ -58,7 +58,7 @@ const UploadPaymentReceiptPage = () => {
     orderNo: pageQueryString.orderNo ? pageQueryString.orderNo : "",
   });
     return (
-      <PresentationUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
+      <I18UploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
     );
 };
 export default UploadPaymentReceiptPage;
