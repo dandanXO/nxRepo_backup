@@ -1,5 +1,6 @@
 import {z} from "zod";
 
+const RequireNumberMessage = "请输入数字";
 interface Validator {
   name?: string;
 }
@@ -32,7 +33,7 @@ interface ValidateNumber extends Validator{
 export const NewNumberValidatorPromise = (value, params: ValidateNumber): Promise<unknown> => {
   const scheme = z
     .number({
-      invalid_type_error: params.typeErrorMessage || "請輸入數字",
+      invalid_type_error: params.typeErrorMessage || RequireNumberMessage;
     })
     .min(params.min, params.minMessage)
     .max(params.max, params.maxMessage);
@@ -50,7 +51,7 @@ export const NumberValidator = (_, value) => (params: ValidateNumber) => {
     // console.log("value", value);
     // console.log("params", params);
     if(params.required) {
-      const stringScheme = z.string().min(1, params && params.requiredErrorMessage ? params.requiredErrorMessage : "請輸入數字")
+      const stringScheme = z.string().min(1, params && params.requiredErrorMessage ? params.requiredErrorMessage : RequireNumberMessage)
       const stringResult = stringScheme.safeParse(String(value));
       if (!stringResult.success) {
         const firstError = (stringResult as any).error.format();
@@ -61,7 +62,7 @@ export const NumberValidator = (_, value) => (params: ValidateNumber) => {
 
   const scheme = z
     .number({
-      invalid_type_error: params.typeErrorMessage || "請輸入數字",
+      invalid_type_error: params.typeErrorMessage || RequireNumberMessage,
     })
     .min(params.min, params.minMessage)
     .max(params.max, params.maxMessage);
@@ -84,7 +85,7 @@ export const EmailValidator = (_, value) => (params: ValidateEmail) => {
     .string({})
     .email({ message: params.typeErrorMessage || "请填写正确的邮箱格式" });
   if(params.required) {
-    scheme.min(1, params.requiredMessage || "請輸入Email")
+    scheme.min(1, params.requiredMessage || "请输入Email")
   }
   const result = scheme.safeParse(value);
   if (!result.success) {
