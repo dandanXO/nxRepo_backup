@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-const RequireNumberMessage = "请输入正整数";
+const RequireNumberMessage = "请输入大于0的整数";
 interface Validator {
   name?: string;
 }
@@ -83,7 +83,7 @@ interface ValidateEmail extends Validator {
 export const EmailValidator = (_, value) => (params: ValidateEmail) => {
   const scheme = z
     .string({})
-    .email({ message: params.typeErrorMessage || "请填写正确的邮箱格式" });
+    .email({ message: params.typeErrorMessage || "请输入正确的邮箱格式" });
   if(params.required) {
     scheme.min(1, params.requiredMessage || "请输入Email")
   }

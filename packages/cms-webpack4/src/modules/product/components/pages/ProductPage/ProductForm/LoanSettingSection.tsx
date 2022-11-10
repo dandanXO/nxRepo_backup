@@ -19,7 +19,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
              {
                transform: (value) => Number(value),
                validator: async (_, value) =>NumberValidator(_, value)({
-                 typeErrorMessage: "请填写大于1的正整数",
+                 typeErrorMessage: "请输入大于1的整数",
                  min: 1,
                  minMessage: "请输入借贷期限",
                })
@@ -73,7 +73,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                                validator: async (_, value) =>NumberValidator(_, value)({
                                    required: true,
                                    requiredErrorMessage: "请输入初贷初始额度",
-                                   typeErrorMessage: "请填写大于0的正整数",
+                                   typeErrorMessage: "请输入大于0的整数",
                                })
                            },
                        ]}
@@ -99,7 +99,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                                validator: async (_, value) =>NumberValidator(_, value)({
                                    required: true,
                                    requiredErrorMessage: "请输入复贷初始额度",
-                                   typeErrorMessage: "请填写大于0的正整数",
+                                   typeErrorMessage: "请输入大于0的整数",
                                })
                            },
                        ]}

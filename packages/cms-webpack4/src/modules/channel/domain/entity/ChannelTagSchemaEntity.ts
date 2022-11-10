@@ -7,7 +7,7 @@ import {SchemaEntity} from "../../../shared/utils/validation/SchemaEntity";
 // NOTICE: Schema
 // NOTE: message
 const REQUIRED_MESSAGE = "请输入";
-const POSITIVE_NUMBER_MESSAGE = "请填写正整数";
+const POSITIVE_NUMBER_MESSAGE = "请输入正整数";
 
 // NOTE: custom rules
 const customZodStringRules = (name: string) => {
@@ -25,7 +25,7 @@ export const ChannelTagSchema = z.object({
     auditAcc: customZodStringRules("测试登录帳號"),
     // google audit acc
 
-    auditAccOtpCode: customZodStringRules("测试登录验证码").regex(/^\d{6}$/, "请填写6位数字"),
+    auditAccOtpCode: customZodStringRules("测试登录验证码").regex(/^\d{6}$/, "请输入6位数字"),
     // google audit 登入验证码
 
     auditLoanAmount: customZodNumberRules("本金"),

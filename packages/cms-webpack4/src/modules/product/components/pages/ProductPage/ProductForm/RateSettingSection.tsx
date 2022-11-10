@@ -63,9 +63,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                          required: true,
                          requiredErrorMessage: "请输入日利息",
                          min: 0,
-                         minMessage: "请填写0-36间数字",
+                         minMessage: "请输入0-36间数字",
                          max: 36,
-                         maxMessage: "请填写0-36间数字"
+                         maxMessage: "请输入0-36间数字"
                        })
                      },
                    ]}
@@ -86,9 +86,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                         required: true,
                         requiredErrorMessage: "请输入展期利率",
                          min: 0,
-                         minMessage: "请填写0-100间数字",
+                         minMessage: "请输入0-100间数字",
                          max: 100,
-                         maxMessage: "请填写0-100间数字"
+                         maxMessage: "请输入0-100间数字"
                        })
                      },
                    ]}
@@ -109,9 +109,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                         required: true,
                         requiredErrorMessage: "请输入逾期费率",
                          min: 0,
-                         minMessage: "请输入逾期费率",
+                         minMessage: "请输入0-100间数字",
                          max: 100,
-                         maxMessage: "请填写0-100间数字"
+                         maxMessage: "请输入0-100间数字"
                        })
                      },
                    ]}

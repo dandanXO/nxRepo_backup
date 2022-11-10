@@ -120,7 +120,7 @@ const Index = (props: ProductFormProps) => {
                             ...map,
                             preInterestRate: {
                                 validateStatus: "error",
-                                help: "请填写0-100间数字",
+                                help: "请输入0-100间数字",
                                 value: preInterestRateField[0].value,
                             },
                         }
@@ -173,7 +173,7 @@ const Index = (props: ProductFormProps) => {
                             ...map,
                             postInterestRate: {
                                 validateStatus: "error",
-                                help: "请填写0-100间数字",
+                                help: "请输入0-100间数字",
                                 value: postInterestRateField[0].value,
                             },
                         }
@@ -269,7 +269,7 @@ const Index = (props: ProductFormProps) => {
                                 ...productInterestRatePairsValidationMap[recordIndex],
                                 preInterest: {
                                     validateStatus: "error",
-                                    help: "请填写0-100间数字",
+                                    help: "请输入0-100间数字",
                                     value: row.value,
                                 },
                             }
@@ -318,7 +318,7 @@ const Index = (props: ProductFormProps) => {
                                 ...productInterestRatePairsValidationMap[recordIndex],
                                 postInterest: {
                                     validateStatus: "error",
-                                    help: "请填写0-100间数字",
+                                    help: "请输入0-100间数字",
                                     value: row.value,
                                 },
                             }

@@ -196,7 +196,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                                min: 1,
                                minMessage: "请输入最低天数",
                                max: 365,
-                               maxMessage: "请填写1-365间数字%",
+                               maxMessage: "请输入1-365间数字%",
                              })
                            },
                          ]}
@@ -212,7 +212,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                        min: 1,
                        minMessage: "请输入最高天数",
                        max: 365,
-                       maxMessage: "请填写1-365间数字%",
+                       maxMessage: "请输入1-365间数字%",
                      })
                    },
                  ]}

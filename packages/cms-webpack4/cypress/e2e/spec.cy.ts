@@ -23,7 +23,7 @@ describe('My First Test', () => {
             .should('have.value', '012345678')
 
         // cy.get('.ant4-form-item-explain-error')
-        //     .should('have.value', "请填写10位数字")
+        //     .should('have.value', "请输入10位数字")
 
 
         // 测试登录验证码
