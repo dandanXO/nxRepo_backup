@@ -1,8 +1,8 @@
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import {
-  usePureUploadPaymentReceiptPage
-} from "./hooks/usePureUploadPaymentReceiptPage";
+  useUploadPaymentReceipt
+} from "./hooks/useUploadPaymentReceipt";
 import {InputValue} from "../../core/types/InputValue";
 import React from "react";
 import {IndiaUploadPaymentReceiptPage} from "./i18n/I18UploadPaymentReceiptPage/india/IndiaUploadPaymentReceiptPage";
@@ -23,7 +23,7 @@ export const Page: ComponentStory<typeof IndiaUploadPaymentReceiptPage> = () => 
     onFileChange,
     imageSrc,
     confirm,
-  } = usePureUploadPaymentReceiptPage({
+  } = useUploadPaymentReceipt({
     postRepayReceiptRequest: () => {
       // do nothing.
     },

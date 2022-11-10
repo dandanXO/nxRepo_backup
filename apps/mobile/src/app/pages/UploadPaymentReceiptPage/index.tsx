@@ -4,7 +4,7 @@ import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
 import {useNavigate} from "react-router-dom";
 import {usePostRepayReceiptMutation} from "../../api";
 import {PostRepayReceiptResponse} from "../../api/postRepayReceipt";
-import {usePureUploadPaymentReceiptPage} from "./hooks/usePureUploadPaymentReceiptPage";
+import {useUploadPaymentReceipt} from "./hooks/useUploadPaymentReceipt";
 import {I18UploadPaymentReceiptPage} from "./i18n/I18UploadPaymentReceiptPage";
 
 
@@ -52,7 +52,7 @@ const UploadPaymentReceiptPage = () => {
     onFileChange,
     imageSrc,
     confirm,
-  } = usePureUploadPaymentReceiptPage({
+  } = useUploadPaymentReceipt({
     postRepayReceiptRequest,
     token: pageQueryString.token ? pageQueryString.token : "",
     orderNo: pageQueryString.orderNo ? pageQueryString.orderNo : "",

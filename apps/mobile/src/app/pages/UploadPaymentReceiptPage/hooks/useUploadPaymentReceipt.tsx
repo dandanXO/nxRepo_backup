@@ -9,7 +9,7 @@ interface PureUploadPaymentReceiptPageProps {
   token: string;
   orderNo: string;
 }
-export const usePureUploadPaymentReceiptPage = (
+export const useUploadPaymentReceipt = (
   props: PureUploadPaymentReceiptPageProps
 ) => {
   // NOTE: input 1/2
