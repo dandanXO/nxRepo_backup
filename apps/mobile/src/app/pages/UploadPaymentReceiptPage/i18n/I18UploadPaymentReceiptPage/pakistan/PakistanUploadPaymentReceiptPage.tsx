@@ -5,7 +5,6 @@ import React from "react";
 import {
   CameraSvgIconWrapper,
   CustomPage,
-  Section,
   Title,
   UploadSection,
   UploadSectionImg,
@@ -35,7 +34,6 @@ export const PakistanUploadPaymentReceiptPage = (props: Omit<I18UploadPaymentRec
               id="file"
               style={{display: "none"}}
               value={props.formFile}
-              // onChange={(event) => onFileChange(event)}
               onInput={(event) => props.onFileChange(event)}
             />
           </div>

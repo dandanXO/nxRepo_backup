@@ -55,7 +55,6 @@ export const IndiaUploadPaymentReceiptPage = (props: I18UploadPaymentReceiptPage
               id="file"
               style={{display: "none"}}
               value={props.formFile}
-              // onChange={(event) => onFileChange(event)}
               onInput={(event) => props.onFileChange(event)}
             />
           </div>
