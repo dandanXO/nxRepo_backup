@@ -8,7 +8,7 @@ interface RiskSettingModelProps {
     setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>;
     form: FormInstance;
     onOk: () => void;
-    onAutoCompleteTemplate?: () => void;
+    // onAutoCompleteTemplate?: () => void;
     children: React.ReactElement;
 }
 const RiskSettingModal = (props: RiskSettingModelProps) => {
@@ -29,7 +29,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
                 })
             }}
             onOk={props.onOk}
-            // autoComplete={true}
+            // autoComplete={false}
             // onAutoCompleteTemplate={props.onAutoCompleteTemplate}
         >
             {props.children}
