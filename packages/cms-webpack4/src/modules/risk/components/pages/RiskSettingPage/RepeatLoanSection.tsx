@@ -84,7 +84,7 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
                     'REPAY_COUNT': <FirstAndRepeatLoanFormByCount {...props} type="repeatLoan"/>
                 }[oldRankStrategy]}
             </Form.Item>
-            <Form.Item label={'放款笔数'} name="oldUseRcQuota" required initialValue={true}>
+            <Form.Item label={'复借规则'} name="oldUseRcQuota" required initialValue={true}>
                 <Radio.Group>
                     <Radio value={true}>依照风控</Radio>
                     <Radio value={false}>系统规则</Radio>

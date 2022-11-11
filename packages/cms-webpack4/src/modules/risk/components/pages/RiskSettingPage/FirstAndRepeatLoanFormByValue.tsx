@@ -14,9 +14,10 @@ function FirstAndRepeatLoanFormByValue(props: FormProps) {
                 <Form.Item key={index}>
                     {index === 0 && (
                         <div>
-                            <CustomLabel style={{ margin: '0 14px 0 0', width: 76 }}>风控标签</CustomLabel>
-                            <CustomLabel>风控商等级</CustomLabel>
-                            <CustomLabel>最高可放款笔数</CustomLabel>
+                            <CustomLabel style={{ margin: '0 8px 0 0', width: 76 }}>风控标签</CustomLabel>
+                            <CustomLabel style={{ width: 120 }}>风控商等级</CustomLabel>
+                            <CustomLabel style={{ width: 120 }}>最高可放款笔数</CustomLabel>
+                            <CustomLabel style={{ width: 120 }}>最高可借总额</CustomLabel>
                         </div>
                     )}
                     <Input.Group compact>
@@ -29,7 +30,7 @@ function FirstAndRepeatLoanFormByValue(props: FormProps) {
                             <Input placeholder={levelTag} disabled />
                         </Form.Item>
 
-                        <Form.Item name={[props.type, index, "providerRank"]} style={{ margin: '0 8px 0 0' }}
+                        <Form.Item name={[props.type, index, "providerRank"]} style={{ margin: '0 8px 0 0',width: 120 }}
                             rules={[{
                                 required: true,
                                 message: "请输入值"
@@ -37,12 +38,19 @@ function FirstAndRepeatLoanFormByValue(props: FormProps) {
                         >
                             <Input placeholder={"值"} />
                         </Form.Item>
-                        <Form.Item name={[props.type, index, "loanCount"]} style={{ margin: '0 8px 0 0' }}
+                        <Form.Item name={[props.type, index, "loanCount"]} style={{ margin: '0 8px 0 0', width: 120 }}
                             help={(props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.help}
                             validateStatus={(props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.validateStatus}
-                            rules={[{ required: true, message: "请输入值"}]}
+                            rules={[{ required: true, message: "请输入笔数"}]}
                         >
                             <Input placeholder={"笔数"} />
+                        </Form.Item>
+                        <Form.Item name={[props.type, index, "balance"]} style={{ margin: '0 8px 0 0', width: 120 }}
+                            validateStatus={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.validateStatus}
+                            help={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.help}
+                            rules={[{ required: true, message: "请输入最高可借总额" }]}
+                        >
+                            <Input placeholder={"最高可借总额"} />
                         </Form.Item>
                     </Input.Group>
                 </Form.Item>

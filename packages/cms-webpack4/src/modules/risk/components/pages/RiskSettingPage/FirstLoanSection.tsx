@@ -81,7 +81,7 @@ const FirstLoanSection = (props: FirstLoanSectionProps) => {
                     'SCORE': <FirstAndRepeatLoanFormByScore {...props} type="firstLoan" />,
                 }[rankStrategy]}
             </Form.Item>
-            <Form.Item label={'放款笔数'} name="useRcQuota" required initialValue={true}>
+            <Form.Item label={'新客规则'} name="useRcQuota" required initialValue={true}>
                 <Radio.Group>
                     <Radio value={true}>依照风控</Radio>
                     <Radio value={false}>系统规则</Radio>

@@ -17,7 +17,7 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                     {index === 0 && (
                         <div>
                             <CustomLabel style={{ width: 76 }}>风控标签</CustomLabel>
-                            <CustomLabel style={{ width: 110 }}>
+                            <CustomLabel style={{ width: 130 }}>
                                 <Space>还款笔数
                                     <Tooltip title="「拒绝」等级的校验规则为“最大逾期天数大于n天”时">
                                         <InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} />
@@ -38,7 +38,7 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                             <Input placeholder={levelTag} disabled />
                         </Form.Item>
 
-                        <Form.Item name={[props.type, index, index === 4 ? "overdueDaysReject" : "repaymentCount"]} style={{ margin: '0 8px 0 0', width: 110 }}
+                        <Form.Item name={[props.type, index, index === 4 ? "overdueDaysReject" : "repaymentCount"]} style={{ margin: '0 8px 0 0', width: 130 }}
                             validateStatus={(props.customAntFormFieldError?.[`${props.type}_repaymentCount_${index}`] as any)?.validateStatus}
                             help={(props.customAntFormFieldError?.[`${props.type}_repaymentCount_${index}`] as any)?.help}
                             rules={[{ required: true,message:`请输入${index === 4 ? "超過逾期天数" : "笔数"}` }]}
