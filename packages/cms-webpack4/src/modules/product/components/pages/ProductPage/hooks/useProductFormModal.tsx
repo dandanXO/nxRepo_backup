@@ -126,6 +126,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         approveRate: `${productFormData.approveRate.split("%")[0]}`,
         approveTime: productFormData.approveTime.split(" ")[0],
         approveTimeUnit: productFormData.approveTime.split(" ")[1],
+        csContact: productFormData.csContact,
         csEmail: productFormData.csEmail,
         csTime: [
           moment(productFormData.csTime.split(" - ")[0], 'h:mm'),
@@ -138,15 +139,16 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
         firstLoanQuotaSwitch: productFormData.firstLoanQuotaSwitch === true ? 1 : 0,
         reLoanQuotaSwitch: productFormData.reLoanQuotaSwitch === true ? 1 : 0,
-          loanAmount:productFormData.loanAmount,
-      reLoanAmount: productFormData.reLoanAmount,
+        loanAmount:productFormData.loanAmount,
+        reLoanAmount: productFormData.reLoanAmount,
 
 
         preInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.preInterestRate) * 100)}`,
         postInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.postInterestRate) * 100)}`,
         dailyRate: `${fixedFloatNumberToFixed3(Number(productFormData.dailyRate) * 100)}`,
+        dummy: productFormData.dummy,
         extensionRate: `${fixedFloatNumberToFixed3(Number(productFormData.extensionRate) * 100)}`,
-          overdueRate: `${fixedFloatNumberToFixed3(Number(productFormData.overdueRate) * 100)}`,
+        overdueRate: `${fixedFloatNumberToFixed3(Number(productFormData.overdueRate) * 100)}`,
         productInterestRatePairs: productFormData.productInterestRatePairs.map((ratePair) => {
           return {
             num: ratePair.num,
@@ -249,6 +251,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       approveRate: `${String(values.approveRate)}%`,
 
       approveTime: `${values.approveTime} ${values.approveTimeUnit}`,
+      csContact: values.csContact,
       csEmail: values.csEmail,
       csTime: `${values.csTime[0].format('HH:mm')} - ${values.csTime[1].format('HH:mm')}`,
       loanTerm: Number(values.loanTerm),
@@ -256,11 +259,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
       extensible: values.extensible,
       extensibleOverdueDays: Number(values.extensibleOverdueDays),
 
-        firstLoanQuotaSwitch: values.firstLoanQuotaSwitch,
-        reLoanQuotaSwitch: values.reLoanQuotaSwitch,
-        loanAmount:values.loanAmount,
-        reLoanAmount: values.reLoanAmount,
-
+      firstLoanQuotaSwitch: values.firstLoanQuotaSwitch,
+      reLoanQuotaSwitch: values.reLoanQuotaSwitch,
+      loanAmount:values.loanAmount,
+      reLoanAmount: values.reLoanAmount,
 
       preInterestRate: strToFloatNumberWithFixed3(values.preInterestRate),
       postInterestRate: strToFloatNumberWithFixed3(values.postInterestRate),

@@ -19,6 +19,9 @@ export interface GetProductQueryResponse {
     createTime?: string;
     // 创建时间
 
+    csContact?: string;
+    // 客服電話
+
     csEmail?: string;
     // 客服信箱
 
@@ -27,6 +30,9 @@ export interface GetProductQueryResponse {
 
     dailyRate?: number;
     // 日利息费率(天)
+
+    dummy?: boolean;
+    // 是否為空放產品
 
     enabled?: boolean;
     // 启用/停用

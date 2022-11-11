@@ -430,7 +430,11 @@ const Index = (props: ProductFormProps) => {
                 setLogo={setLogo}
                 setBackgroundImg={setBackgroundImg}
             />
-            <LoanSettingSection form={form} enableLoanAmount={props.enableLoanAmount} enableReLoanAmount={props.enableReLoanAmount}/>
+            <LoanSettingSection form={form}
+                enableLoanAmount={props.enableLoanAmount}
+                enableReLoanAmount={props.enableReLoanAmount}
+                isEdit={productModalData.isEdit}
+            />
             <RateSettingSection form={form} customAntFormFieldError={customAntFormFieldError} />
             <UploadSettingSection />
         </Form>

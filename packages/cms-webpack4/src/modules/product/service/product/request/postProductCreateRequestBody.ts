@@ -11,6 +11,8 @@ export interface PostProductCreateRequestBody {
     approveTime?: string;
     /** 背景圖 */
     backgroundImg?: string;
+    /** 客服電話 */
+    csContact?: string;
     /** 客服信箱 */
     csEmail?: string;
     /** 客服时间 */

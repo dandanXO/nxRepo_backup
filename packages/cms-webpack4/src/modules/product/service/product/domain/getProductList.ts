@@ -11,12 +11,16 @@ export interface GetProductListResponseProduct {
     approveTime?: string;
     /** 背景圖 */
     backgroundImg?: string;
+    /** 客服電話 */
+    csContact?: string;
     /** 客服信箱 */
     csEmail?: string;
     /** 客服时间 */
     csTime?: string;
     /** 日利息费率(天) */
     dailyRate?: number;
+    /** 是否為空放產品 */
+    dummy?: boolean;
     /** 启用/停用 */
     enabled?: boolean;
     /** 是否可展期 */
