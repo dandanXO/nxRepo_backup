@@ -262,6 +262,16 @@ class OrderList extends Component {
                     return <div className={styles.smallText}>{orderStatus[text]}</div>
                 }
             },
+            {
+                title: '空放订单',
+                dataIndex: "dummy",
+                key: "dummy",
+                width: 55,
+                className:styles.smallText,
+                render(text) {
+                    return text?"是":"否"
+                }
+            },
 
         ];
     }
