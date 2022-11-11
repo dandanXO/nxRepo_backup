@@ -141,6 +141,14 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     labelType="left"
                                     value={balanceValue}
                                     disabled={radioValue === "balance"}
+                                    onBlur={(event: any) => {
+                                      let value = event.target.value;
+                                      value = value.replaceAll(`${environment.currency}`, "");
+                                      if(String(value) === "") {
+                                        setBalanceValue(`${environment.currency}1`);
+                                        props.setRepayBalance(1);
+                                      }
+                                    }}
                                     onChange={(event: any) => {
                                       let value = event.target.value;
                                       value = value.replaceAll(`${environment.currency}`, "");
