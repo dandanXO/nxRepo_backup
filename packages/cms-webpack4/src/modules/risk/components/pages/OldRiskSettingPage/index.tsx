@@ -209,7 +209,7 @@ export const RiskSettingPage = () => {
 
     // NOTE: 3. Set form fields from data
     useEffect(() => {
-
+      
         // NOTICE:
         if(!showModalContent.isEdit) return;
 
@@ -257,161 +257,109 @@ export const RiskSettingPage = () => {
 
     }
 
-    const validateByValue = (formType, loan) => {
+    const compareMinAndMax=(index, loanLength, loan, field)=>{
+        const isFirstField = index === 0;
+        const isLastField = index === loan.length - 1;
+        const max = Number(loan[index].max);
+        const min = Number(loan[index].min);
+        const isMaxError = isFirstField ? max <= min : max <= min || max !== Number(loan[index - 1].min) - 1;
+        const isMinError = isLastField ? max <= min : max <= min || min !== Number(loan[index + 1].max) + 1;
+        return field==='max'?isMaxError:isMinError
+     
+    }
+
+    const errorMessage = (validateType) => {
+
+        return validateType === 'KEY_VALUE' ?
+            <div>
+                <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
+                <div>▪ 所有字段都必须填写。</div>
+                <div>▪ 最高可放款笔数需由大至小填写大于0的整数。</div>
+                <div>▪ 各级距数值应小于上一级并大于下一级。</div>
+            </div>
+            : validateType === 'SCORE' ?
+                <div>
+                    <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
+                    <div>▪ 所有字段必须由大至小填写大于0的整数。</div>
+                    <div>▪ 各级距数值需连贯且数值应小于上一级并大于下一级。</div>
+                </div>
+            : <div>
+                    <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
+                    <div>▪ 所有字段必须由大至小填写大于0的整数。</div>
+                    <div>▪ 各级距数值应小于上一级并大于下一级。</div>
+                </div>
+
+    }
+    
+    const validateFirstAndRepeatLoanForm = (formType, loan,validateType) => {
 
         let formFieldError = {};
-        let isError = false;
+        let isFormError = false;
+        const errorText={
+            loanCount:'笔数',
+            min:'值',
+            max:'值',
+            balance:'最高可借总额',
+            overdueDaysReject:'超過逾期天数',
+            repaymentCount:'笔数',
+        }
         loan.map((i, index) => {
-            const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount')
-            const loanCountValidateError = validateField(i.loanCount, '笔数');
-            if (isLoanCountError) {
-                isError = true;
+        
+            const isError = Object.keys(i).map((key) => {
+
+                if (loan.length === 1 && key === 'index') return;
+                if (key === 'providerRank' || key === 'id' || key === "overdueDaysReject") return;
+
+                const loanLength = key === 'repaymentCount' ? loan.length - 1 : loan.length;
+                const compareError = loan.length !== 1
+                    ? key === 'min' || key === 'max'
+                        ? compareMinAndMax(index, loanLength, loan, key)
+                        : compareCount(index, loanLength, loan, key)
+                    : false;
+
+                const fieldIndex = loan.length === 1 ? i['index'] : index;
+                const validateError = validateField(i[key], errorText[key]);
+
+                formFieldError = {
+                    ...formFieldError,
+                    ...{
+                        [`${formType}_${key}_${fieldIndex}`]: {
+                            validateStatus: validateError.isValidateError || compareError ? "error" : '',
+                            help: validateError.errorMessage
+                        },
+                    }
+                }
+                return compareError
+            })
+
+            if (isError.includes(true)) {
+                isFormError = true;
             }
+
             formFieldError = {
                 ...formFieldError,
                 ...{
-                    [`${formType}_loanCount_${index}`]: {
-                        validateStatus: loanCountValidateError.isValidateError || isLoanCountError ? "error" : '',
-                        help: loanCountValidateError.errorMessage
-                    },
                     [`${formType}_error`]: {
-                        validateStatus: isError ? "error" : '',
-                        help: isError ?
-                            <div>
-                                <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
-                                <div>▪ 所有字段都必须填写。</div>
-                                <div>▪ 最高可放款笔数需由大至小填写大于0的整数。</div>
-                                <div>▪ 各级距数值应小于上一级并大于下一级。</div>
-                            </div> : '',
+                        validateStatus: isFormError ? "error" : '',
+                        help: isFormError ? errorMessage(validateType) : '',
                     },
                 }
             }
+
         })
 
         setCustomAntFormFieldError(prev => ({ ...prev, ...formFieldError }));
-        return isError;
+        return isFormError;
     }
-    const validateByScore=(formType,loan)=>{
-
-        let formFieldError = {};
-        let isError = false;
-        loan.map((i, index) => {
-            const isFirstField = index === 0;
-            const isLastField = index === loan.length - 1;
-            const max = Number(i.max);
-            const min = Number(i.min);
-            const isMaxError = isFirstField ? max <= min : max <= min || max !== Number(loan[index - 1].min) - 1;
-            const isMinError = isLastField ? max <= min : max <= min || min !== Number(loan[index + 1].max) + 1;
-            const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount');
-            const isBalanceError = compareCount(index, loan.length, loan, 'balance');
-
-            const maxValidate = validateField(i.max, '值');
-            const minValidate = validateField(i.min, '值');
-            const loanCountValidate = validateField(i.loanCount, '笔数');
-            const balanceValidate = validateField(i.balance, '最高可借总额');
-
-            if (isMaxError || isMinError || isLoanCountError || isBalanceError) {
-                isError = true;
-            }
-
-            formFieldError = {
-                ...formFieldError,
-                ...{
-                    [`${formType}_max_${index}`]: {
-                        validateStatus: maxValidate.isValidateError || isMaxError ? "error" : '',
-                        help: maxValidate.errorMessage
-                    },
-                    [`${formType}_min_${index}`]: {
-                        validateStatus: minValidate.isValidateError || isMinError ? "error" : '',
-                        help: minValidate.errorMessage
-                    },
-                    [`${formType}_loanCount_${index}`]: {
-                        validateStatus: loanCountValidate.isValidateError|| isLoanCountError  ? "error" : '',
-                        help: loanCountValidate.errorMessage
-                    },
-                    [`${formType}_balance_${index}`]: {
-                        validateStatus: balanceValidate.isValidateError || isBalanceError ? "error" : '',
-                        help: balanceValidate.errorMessage
-                    },
-                    [`${formType}_error`]: {
-                        validateStatus: isError? "error" : '',
-                        help: isError?
-                            <div>
-                                <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
-                                <div>▪ 所有字段必须由大至小填写大于0的整数。</div>
-                                <div>▪ 各级距数值需连贯且数值应小于上一级并大于下一级。</div>
-                            </div> : '',
-                    },
-                }
-            }
-        })
-        setCustomAntFormFieldError(prev=>({...prev,...formFieldError}));
-        return isError;
-    }
-
-
-    const validateByCount=(formType, loan)=>{
-
-        let formFieldError = {};
-        let isError = false;
-        loan.map((i, index) => {
-
-            const isRepaymentCountError = index !== 4 && compareCount(index, loan.length - 1, loan, 'repaymentCount');
-            const isLoanCountError = compareCount(index, loan.length, loan, 'loanCount');
-            const isBalanceError = compareCount(index, loan.length, loan, 'balance');
-
-            const repaymentCount = index !== 4 ? i.repaymentCount : i.overdueDaysReject;
-            const repaymentCouuntText = index !== 4 ? "笔数" : "超過逾期天数";
-
-            const repaymentCountValidate = validateField(repaymentCount, repaymentCouuntText);
-            const loanCountValidate = validateField(i.loanCount, '笔数');
-            const balanceValidate = validateField(i.balance, '最高可借总额');
-
-            if (isRepaymentCountError || isLoanCountError || isBalanceError) {
-                isError =true;
-            }
-            formFieldError = {
-                ...formFieldError,
-                ...{
-                    [`${formType}_repaymentCount_${index}`]: {
-                        validateStatus: repaymentCountValidate.isValidateError || isRepaymentCountError ? "error" : '',
-                        help: repaymentCountValidate.errorMessage
-                    },
-                    [`${formType}_loanCount_${index}`]: {
-                        validateStatus: loanCountValidate.isValidateError || isLoanCountError ? "error" : '',
-                        help: loanCountValidate.errorMessage
-                    },
-                    [`${formType}_balance_${index}`]: {
-                        validateStatus: balanceValidate.isValidateError || isBalanceError ? "error" : undefined,
-                        help: balanceValidate.errorMessage
-                    },
-                    [`${formType}_error`]: {
-                        validateStatus: isError ? "error" : '',
-                        help: isError ?
-                            <div>
-                                <div>以上填写格式可能有以下错误，请再次检查并修正：</div>
-                                <div>▪ 所有字段必须由大至小填写大于0的整数。</div>
-                                <div>▪ 各级距数值应小于上一级并大于下一级。</div>
-                            </div> : '',
-                    },
-                }
-            }
-        })
-
-        setCustomAntFormFieldError(prev=>({...prev,...formFieldError}));
-        return isError;
-    }
-
-    const validateTypeSelector = (formType) => {
+    
+    const validateTypeSelector = (formType,changedField) => {
 
         const { rankStrategy, oldRankStrategy, firstLoan, repeatLoan } = form.getFieldsValue();
         const validateType = formType === 'firstLoan' ? rankStrategy : oldRankStrategy;
         const loan = formType === 'firstLoan' ? firstLoan : repeatLoan;
         const isLoanFormNotFilled = loan.map(i => Object.values(i).includes(undefined)).includes(true);
-        if (isLoanFormNotFilled) return;
-        return validateType === 'KEY_VALUE'
-            ? validateByValue(formType, loan) : validateType === 'SCORE'
-            ? validateByScore(formType, loan) : validateByCount(formType, loan);
+        const validateForm = isLoanFormNotFilled ? changedField : loan;
+        return validateFirstAndRepeatLoanForm(formType, validateForm, validateType)
 
     }
     const validateField = (fieldValue,placeholder) => {
@@ -425,33 +373,15 @@ export const RiskSettingPage = () => {
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
-       console.log(changedFields)
+
         const formType = changedFields[0].name[0];
-        const index = changedFields[0].name[1];
-        const fieled = changedFields[0].name[2];
-        let formFieldError = {};
-        const errorText={
-            loanCount:'笔数',
-            min:'值',
-            max:'值',
-            balance:'最高可借总额',
-            overdueDaysReject:'超過逾期天数',
-            repaymentCount:'笔数',
-        }
+        const fieldIndex = changedFields[0].name[1];
+        const field = changedFields[0].name[2];
+        const value = changedFields[0].value;
 
-        const fieldError = validateField(changedFields[0].value, errorText[fieled]);
-        formFieldError = {
-            [`${formType}_${fieled}_${index}`]: {
-                validateStatus: fieldError.isValidateError ? "error" : '',
-                help: fieldError.errorMessage
-            }
-        }
-        setCustomAntFormFieldError((prev) => {
-            return { ...prev, ...formFieldError }
-        });
-
+        const changedField = [{ [field]: value, index: fieldIndex }]
         if (formType === 'firstLoan' || formType === 'repeatLoan') {
-            validateTypeSelector(formType)
+            validateTypeSelector(formType, changedField)
         }
 
     }, [])
@@ -463,16 +393,16 @@ export const RiskSettingPage = () => {
         // NOTE: Fetch RiskModel
         const riskModel = currentRiskMenuData.filter(menu => menu.id === fields["riskModelName"])[0];
         const riskModelName = riskModel.riskModelName;
-
+       
         // NOTICE: Edit
         const isEdit = showModalContent.isEdit;
         const modelId = editID;
 
-        const isFirstLoanError = validateTypeSelector("firstLoan");
-        const isRepeatLoanError = validateTypeSelector("repeatLoan");
-
+        const isFirstLoanError = validateTypeSelector("firstLoan",[]);
+        const isRepeatLoanError = validateTypeSelector("repeatLoan",[]);
+     
         if (isFirstLoanError || isRepeatLoanError) return;
-
+        
 
         // console.log("fields.before", JSON.parse(JSON.stringify(fields)));
         Object.keys(fields).map(key => {
@@ -484,27 +414,27 @@ export const RiskSettingPage = () => {
                     fields[key][index] = {
                         // 风控评分等级
                         rank: ["EXCELLENT", "GOOD", "NORMAL", "ORDINARY", "REJECT"][index],
-
+                        
                         // 排序
                         sort: index + 1,
 
                         // 级距类型 0: 首贷, 1: 复借
                         type: key === "firstLoan" ? 0 : 1 , // 0 | 1
-
+                        
                         // 对应风控商等级
                         providerRank: formType === "KEY_VALUE" ? record.providerRank : null,
-
+                        
                         // 最高可放款笔数
                         loanCount: Number(record.loanCount),
 
                         // 终始阀值(exclude)
                         max: formType === "SCORE" ? Number(record.max) : null,
-
+                        
                         // 起始阀值(include)
                         min: formType === "SCORE" ? Number(record.min) : null,
 
                         // 最高可借金额
-                        balance:formType !== "KEY_VALUE" ? Number(record.balance) : null,
+                        balance: Number(record.balance),
 
                         // 还款笔数阀值
                         repaymentCount:formType === "REPAY_COUNT" && index!==4  ? Number(record.repaymentCount) : null,
@@ -514,7 +444,7 @@ export const RiskSettingPage = () => {
 
 
                     } as MssRiskRankVo
-
+                    
                     // NOTE: Edit
                     if(isEdit) {
                         fields[key][index]["modelId"] = modelId;
@@ -601,7 +531,7 @@ export const RiskSettingPage = () => {
                     hasEditForm={false}
                     onAddCallback={onAddCallback}
                     triggerGetList={()=>triggerGetList(null)}
-
+                  
                 />
 
                 <RiskSettingModal
