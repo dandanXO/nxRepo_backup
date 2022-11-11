@@ -209,7 +209,7 @@ export const RiskSettingPage = () => {
 
     // NOTE: 3. Set form fields from data
     useEffect(() => {
-      
+
         // NOTICE:
         if(!showModalContent.isEdit) return;
 
@@ -265,7 +265,7 @@ export const RiskSettingPage = () => {
         const isMaxError = isFirstField ? max <= min : max <= min || max !== Number(loan[index - 1].min) - 1;
         const isMinError = isLastField ? max <= min : max <= min || min !== Number(loan[index + 1].max) + 1;
         return field==='max'?isMaxError:isMinError
-     
+
     }
 
     const errorMessage = (validateType) => {
@@ -290,7 +290,7 @@ export const RiskSettingPage = () => {
                 </div>
 
     }
-    
+
     const validateFirstAndRepeatLoanForm = (formType, loan,validateType) => {
 
         let formFieldError = {};
@@ -304,7 +304,7 @@ export const RiskSettingPage = () => {
             repaymentCount:'笔数',
         }
         loan.map((i, index) => {
-        
+
             const isError = Object.keys(i).map((key) => {
 
                 if (loan.length === 1 && key === 'index') return;
@@ -351,7 +351,7 @@ export const RiskSettingPage = () => {
         setCustomAntFormFieldError(prev => ({ ...prev, ...formFieldError }));
         return isFormError;
     }
-    
+
     const validateTypeSelector = (formType,changedField) => {
 
         const { rankStrategy, oldRankStrategy, firstLoan, repeatLoan } = form.getFieldsValue();
@@ -393,16 +393,16 @@ export const RiskSettingPage = () => {
         // NOTE: Fetch RiskModel
         const riskModel = currentRiskMenuData.filter(menu => menu.id === fields["riskModelName"])[0];
         const riskModelName = riskModel.riskModelName;
-       
+
         // NOTICE: Edit
         const isEdit = showModalContent.isEdit;
         const modelId = editID;
 
         const isFirstLoanError = validateTypeSelector("firstLoan",[]);
         const isRepeatLoanError = validateTypeSelector("repeatLoan",[]);
-     
+
         if (isFirstLoanError || isRepeatLoanError) return;
-        
+
 
         // console.log("fields.before", JSON.parse(JSON.stringify(fields)));
         Object.keys(fields).map(key => {
@@ -414,22 +414,22 @@ export const RiskSettingPage = () => {
                     fields[key][index] = {
                         // 风控评分等级
                         rank: ["EXCELLENT", "GOOD", "NORMAL", "ORDINARY", "REJECT"][index],
-                        
+
                         // 排序
                         sort: index + 1,
 
                         // 级距类型 0: 首贷, 1: 复借
                         type: key === "firstLoan" ? 0 : 1 , // 0 | 1
-                        
+
                         // 对应风控商等级
                         providerRank: formType === "KEY_VALUE" ? record.providerRank : null,
-                        
+
                         // 最高可放款笔数
                         loanCount: Number(record.loanCount),
 
                         // 终始阀值(exclude)
                         max: formType === "SCORE" ? Number(record.max) : null,
-                        
+
                         // 起始阀值(include)
                         min: formType === "SCORE" ? Number(record.min) : null,
 
@@ -444,7 +444,7 @@ export const RiskSettingPage = () => {
 
 
                     } as MssRiskRankVo
-                    
+
                     // NOTE: Edit
                     if(isEdit) {
                         fields[key][index]["modelId"] = modelId;
@@ -531,7 +531,7 @@ export const RiskSettingPage = () => {
                     hasEditForm={false}
                     onAddCallback={onAddCallback}
                     triggerGetList={()=>triggerGetList(null)}
-                  
+
                 />
 
                 <RiskSettingModal
@@ -550,8 +550,8 @@ export const RiskSettingPage = () => {
                         onFieldsChange={onFieldsChange}
                         onFinish={onFinish}
                         currentRiskMenuData={currentRiskMenuData}
-                        customAntFormFieldError={customAntFormFieldError}
-                        setCustomAntFormFieldError={setCustomAntFormFieldError}
+                        // customAntFormFieldError={customAntFormFieldError}
+                        // setCustomAntFormFieldError={setCustomAntFormFieldError}
                     />
                 </RiskSettingModal>
             </>
