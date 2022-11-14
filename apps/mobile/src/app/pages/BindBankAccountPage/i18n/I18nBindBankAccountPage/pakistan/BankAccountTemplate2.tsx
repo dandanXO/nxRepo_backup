@@ -4,6 +4,7 @@ import React from "react";
 import {IPakistanPageLayoutTypeProps} from "../../../types/IGeneralPageLayoutTypeProps";
 import {Label} from "../../../components/Label";
 import styled from "styled-components";
+import {useTranslation} from "react-i18next";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -18,16 +19,16 @@ const Warning = styled.div`
   color: #f82626;
 `;
 export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
-
+  const {t} = useTranslation();
   return (
     <>
       <Form>
-        <Label>Cardholder Name</Label>
+        <Label>{t("Cardholder Name", {ns: "bank-bind"})}</Label>
 
         <Input
           className="mb"
           labelType={"none"}
-          placeholder="Cardholder Name"
+          placeholder={t("Cardholder Name", {ns: "bank-bind"}) as string}
           value={props.cardholderName}
           disabled
         />
@@ -43,22 +44,22 @@ export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
         {/*  errorMessage={props.ifscData.errorMessage}*/}
         {/*/>*/}
 
-        <Label>Account Number</Label>
+        <Label>{t("Account Number", {ns: "bank-bind"})}</Label>
         <Input
           className="mb"
           labelType={"none"}
-          placeholder="Account Number"
+          placeholder={t("Account Number", {ns: "bank-bind"}) as string}
           value={props.bankcardNoData.data}
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
         />
 
-        <Label>Confirm Account Number</Label>
+        <Label>{t("Confirm Account Number", {ns: "bank-bind"})}</Label>
         <Input
           className="mb"
           labelType={"none"}
-          placeholder="Confirm Account Number"
+          placeholder={t("Confirm Account Number", {ns: "bank-bind"}) as string}
           value={props.confirmedBankcardNoData.data}
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
@@ -74,7 +75,7 @@ export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
         {/*  onChange={props.onUPIIDChange}*/}
         {/*/>*/}
 
-        <Warning>Unchangeable after linked, please check before submission.</Warning>
+        <Warning>{t("Unchangeable after linked, please check before submission.", {ns: "bank-bind"})}</Warning>
       </Form>
 
       <Button onClick={() => {

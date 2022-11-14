@@ -3,14 +3,16 @@ import type { AxiosError, AxiosRequestConfig } from "axios";
 import axios from "axios";
 import queryString from "query-string";
 import { Modal } from "@frontend/mobile/shared/ui";
+import i18next from "i18next";
+
 
 const alertModal = (message: string) =>
     Modal.alert({
         show: true,
         mask: true,
-        title: "Error",
+        title: i18next.t("modal.Error") as string,
         content: message,
-        confirmText: "Confirm",
+        confirmText: i18next.t("modal.Confirm") as string,
         maskClosable: true,
         enableClose: false,
         enableIcon: false,

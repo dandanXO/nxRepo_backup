@@ -3,23 +3,24 @@ import React from "react";
 import {IGeneralPageLayoutTypeProps} from "../../../types/IGeneralPageLayoutTypeProps";
 import {Form} from "../../../components/Form";
 import { Paragraph } from "../../../components/Paragraph";
+import {useTranslation} from "react-i18next";
 
 export const BankAccountTemplate1 = (props: IGeneralPageLayoutTypeProps) => {
+  const {t} = useTranslation();
   return (
     <>
       <Form>
         <Input
-          label="Cardholder Name"
+          label={t("Cardholder Name", {ns: "bank-bind"}) as string}
           value={props.cardholderName}
           disabled
         />
         <Paragraph>
-          For KYC, your Cardholder name and Aadhaar name should be
-          match.
+          {t("For KYC, your Cardholder name and Aadhaar name should be match.", {ns: "bank-bind-india"})}
         </Paragraph>
         <Input
           className="mb"
-          label="IFSC Code"
+          label={t("IFSC Code", {ns: "bank-bind-india"}) as string}
           value={props.ifscData.data}
           onChange={props.onIFSCChange}
           onBlur={props.onIFSCBlur}
@@ -27,7 +28,7 @@ export const BankAccountTemplate1 = (props: IGeneralPageLayoutTypeProps) => {
         />
         <Input
           className="mb"
-          label="Account Number"
+          label={t("Account Number", {ns: "bank-bind"}) as string}
           value={props.bankcardNoData.data}
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
@@ -35,7 +36,7 @@ export const BankAccountTemplate1 = (props: IGeneralPageLayoutTypeProps) => {
         />
         <Input
           className="mb"
-          label="Confirm Account Number"
+          label={t("Confirm Account Number", {ns: "bank-bind"}) as string}
           value={props.confirmedBankcardNoData.data}
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
@@ -43,7 +44,7 @@ export const BankAccountTemplate1 = (props: IGeneralPageLayoutTypeProps) => {
         />
         <Input
           className="mb"
-          label="UPI ID"
+          label={t("UPI ID", {ns: "bank-bind-india"}) as string}
           value={props.upiData.data}
           onChange={props.onUPIIDChange}
         />
