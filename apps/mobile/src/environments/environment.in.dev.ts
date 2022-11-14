@@ -6,4 +6,5 @@ export const environment: IEnvironment = {
   country: IndiaCountry.country,
   countryName: IndiaCountry.countryName,
   currency: IndiaCountry.currency,
+  language: IndiaCountry.language,
 };
