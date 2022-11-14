@@ -40,6 +40,12 @@ export function IndexPage() {
         <div>
             <Link to="/config-manage"><a> Config Manage</a></Link>
         </div>
+        <div>
+            <Link to="/order"><a> Order</a></Link>
+        </div>
+        <div>
+            <Link to="/order-detail"><a>Order Detail</a></Link>
+        </div>
     </div>
   );
 }

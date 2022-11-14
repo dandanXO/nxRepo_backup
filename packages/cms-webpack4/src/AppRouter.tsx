@@ -17,6 +17,8 @@ import WhiteListPage from "./modules/user/components/pages/WhiteListPage";
 import BlackListPage from "./modules/user/components/pages/BlackListPage";
 import {AppManagePage} from "./modules/product/components/pages/AppManagePage";
 import ConfigManagePage from "./modules/system/components/pages/ConfigManagePage";
+import OrderPage from "./modules/order/components/OrderPage";
+import OrderDetailPage from "./modules/order/components/OrderDetailPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -76,6 +78,10 @@ export const AppRouter = () => {
                     <Route path="/app-manage" component={AppManagePage} />
                     {/*// @ts-ignore*/}
                     <Route path="/config-manage" component={ConfigManagePage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/order" component={OrderPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/order-detail/:userId" component={OrderDetailPage} />
                 </Switch>
             </Router>
 
