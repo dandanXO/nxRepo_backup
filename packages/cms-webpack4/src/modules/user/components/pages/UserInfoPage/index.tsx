@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { Tabs } from 'antd';
-import UserInfo from '../../components/UserInfo';
-import AddressBook from '../../components/AddressBook';
-import SmsMessage from '../../components/SmsMessage';
-import LoanInfo from '../../components/LoanInfo';
+import UserInfo from '../../../../shared/components/userInfo/UserInfo';
+import AddressBook from '../../../../shared/components/userInfo/AddressBook';
+import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
+import LoanInfo from '../../../../shared/components/userInfo/LoanInfo';
 import {Link, useParams} from "react-router-dom";
 import {Route} from "antd/es/breadcrumb/Breadcrumb";
 import {itemRender} from "../../../../shared/itemRender";

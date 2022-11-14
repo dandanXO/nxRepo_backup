@@ -5,7 +5,7 @@ import { useGetUserContactsListQuery,useLazyGetUserContactsListQuery } from '../
 import { UserId } from "../../../../types/UserId";
 import { GetUserContacts } from "../../api/types/userInfoTypes/getUserContacts"
 import { useEffect, useState } from 'react';
-import usePageable from '../../../shared/hooks/usePageable';
+import usePageable from '../../hooks/usePageable';
 const AddressBook = (({ userId }: UserId) => {
 
     const [triggerGetList, { currentData, isLoading, isFetching,isSuccess }] = useLazyGetUserContactsListQuery({

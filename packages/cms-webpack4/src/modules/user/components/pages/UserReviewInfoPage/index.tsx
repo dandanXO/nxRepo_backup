@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { Tabs, Button ,Form,Modal,List } from 'antd';
-import UserInfo from '../../components/UserInfo';
-import AddressBook from '../../components/AddressBook';
-import SmsMessage from '../../components/SmsMessage';
+import UserInfo from '../../../../shared/components/userInfo/UserInfo';
+import AddressBook from '../../../../shared/components/userInfo/AddressBook';
+import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
 import { useParams } from "react-router-dom";
 import UsesrReviewModal from './UserReviewModal';
 import {  useHistory } from "react-router-dom";
