@@ -9,6 +9,15 @@ import {WalletVendor} from "../../../api/GetBindCardDropList";
 export default {
     title: "Page/BindBankAccountPage",
     component: IndiaBindBankAccountPage,
+  parameters: {
+    cardholderName: {
+      values: [
+        { name: 'red', value: '#f00' },
+        { name: 'green', value: '#0f0' },
+        { name: 'blue', value: '#00f' },
+      ]
+    }
+  }
 } as ComponentMeta<any>;
 
 // NOTE: Hide me when in India

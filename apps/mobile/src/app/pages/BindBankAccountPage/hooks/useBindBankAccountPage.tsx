@@ -6,11 +6,14 @@ import {validationInfo} from "../validationInfo";
 import {
   PureBindBankAccountPageProps
 } from "../types/PureBindBankAccountPageProps";
+import {useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 export const useBindBankAccountPage = (
     props: PureBindBankAccountPageProps
   // props: IndiaPureBindBankAccountPageProps | PKPureBindBankAccountPageProps
 ) => {
+  const {t} = useTranslation();
     // NOTE: FormInput - ifscData
     const [ifscData, setIFSCData] = useState<InputValue<string>>({
         data: "",
@@ -22,7 +25,7 @@ export const useBindBankAccountPage = (
         const ifscScheme = z
             .string()
             .min(1, validationInfo.min1)
-            .length(11, "IFSC must be 11 digits only.");
+            .length(11, t("IFSC must be 11 digits only.", {ns: "bank-bind-india"}) as string);
         const result = ifscScheme.safeParse(ifscData.data);
         if (!result.success) {
             const firstError = result.error.format();
@@ -65,10 +68,10 @@ export const useBindBankAccountPage = (
         const bankCardNoScheme = z
             .string()
             .min(1, validationInfo.min1)
-            .min(9, "Account number must be between from 9 to 18 digits only.")
+            .min(9, t("Account number must be between from 9 to 18 digits only.", {ns: "bank-bind"}) as string)
             .max(
                 18,
-                "Account number must be between from 9 to 18 digits only."
+              t("Account number must be between from 9 to 18 digits only.", {ns: "bank-bind"}) as string
             );
         const result = bankCardNoScheme.safeParse(bankcardNoData.data);
         if (!result.success) {
@@ -120,7 +123,8 @@ export const useBindBankAccountPage = (
             .refine(
                 (confirmedBankcardNo) => confirmedBankcardNo === bankcardNo,
                 {
-                    message: "Please make sure your account number match.",
+                    message: t("Please make sure your account number match.", {ns: "bank-bind"}) as string
+                  ,
                 }
             );
         const result = confirmedBankCardNoScheme.safeParse(confirmedBankcardNo);
@@ -235,9 +239,9 @@ export const useBindBankAccountPage = (
                 Modal.alert({
                     show: true,
                     mask: true,
-                    title: "Notice",
-                    content: "Success!",
-                    confirmText: "Confirm",
+                    title: i18next.t("Notice") as string,
+                    content: i18next.t("Success") as string,
+                    confirmText: i18next.t("Confirm") as string,
                     maskClosable: true,
                     enableClose: false,
                     enableIcon: false,

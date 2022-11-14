@@ -4,6 +4,8 @@ import React, {useCallback, useEffect, useState} from "react";
 import {Label} from "../../../components/Label";
 import {z} from "zod";
 import {WalletVendor} from "../../../../../api/GetBindCardDropList";
+import {useTranslation} from "react-i18next";
+import i18next from "i18next";
 
 interface IMobileWalletFormProps {
   triggerPostBankBindSaveToPKMutation: any;
@@ -11,6 +13,8 @@ interface IMobileWalletFormProps {
 }
 
 export const MobileWalletForm = (props: IMobileWalletFormProps) => {
+
+  const {t} = useTranslation();
 
   // NOTE: 電子錢包列表 Data
   const [walletDropList, setWalletDropList] = useState<string[]>([]);
@@ -46,7 +50,7 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
 
   // NOTE: 電子錢包帳戶 - 驗證
   const validateMobileWalletAccount = useCallback(() => {
-    const message = "Account number should be 11 digits starting with 0.";
+    const message = t("Account number should be 11 digits starting with 0.", {ns: "bank-bind"});
     const scheme = z
       .string()
       .regex(/^0/, message)
@@ -101,9 +105,9 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
         Modal.alert({
           show: true,
           mask: true,
-          title: "Notice",
-          content: "Success!",
-          confirmText: "Confirm",
+          title: i18next.t("Notice") as string,
+          content: i18next.t("Success") as string,
+          confirmText: i18next.t("Confirm") as string,
           maskClosable: true,
           enableClose: false,
           enableIcon: false,
@@ -117,9 +121,10 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
       });
 
   };
+
   return (
     <Form>
-      <Label>Please select the of your mobile wallet</Label>
+      <Label>{t("Please select the of your mobile wallet", { ns: "bank-bind" })}</Label>
       <Select
         className="mb"
         fixButtonWidth={"calc(100vw - 36px)"}
@@ -131,19 +136,19 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
         }}
       />
 
-      <Label>Your mobile wallet account</Label>
+      <Label>{t("Your mobile wallet account", { ns: "bank-bind" })}</Label>
       <Input
         className="mb"
         labelType={"left"}
         label={"+92"}
-        placeholder="Wallet Account Number"
+        placeholder={t("Wallet Account Number", { ns: "bank-bind" }) as string}
         value={mobileData.data}
         onChange={onMobileDataChange}
         onBlur={validateMobileWalletAccount}
         errorMessage={mobileData.errorMessage}
       />
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
-      <Button onClick={() => !isFormPending && confirmMobileWalletCallback()}>Submit</Button>
+      <Button onClick={() => !isFormPending && confirmMobileWalletCallback()}>{t("Submit", {ns: "bank-bind"})}</Button>
     </Form>
   );
 }
