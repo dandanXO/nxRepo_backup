@@ -3,7 +3,10 @@ import {UploadOutlined} from "@ant-design/icons";
 import React from "react";
 import {EmailValidator, NumberValidator} from "../../../../../shared/utils/validation/validator";
 import {maxOneUnitFloatReplacer} from "../../../../../shared/utils/maxOneUnitFloatReplacer";
+<<<<<<< HEAD
 import {cannotTypeFloat} from "../../../../../shared/utils/cannotTypeFloat";
+=======
+>>>>>>> 60a0e2b (feat(cms): APIADMIN-122 [前端] 調整顯示額度欄位，只能填正整數，不能填小數點)
 
 interface ProductSettingSectionProps {
     setLogo: React.Dispatch<React.SetStateAction<string>>;
@@ -136,7 +139,11 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                      },
                    ]}
                  normalize={(value, prevValue, prevValues) => {
+<<<<<<< HEAD
                      return cannotTypeFloat(value);
+=======
+                     return value.replace(/^(\d+)\.(\d)*$/,'$1');
+>>>>>>> 60a0e2b (feat(cms): APIADMIN-122 [前端] 調整顯示額度欄位，只能填正整數，不能填小數點)
                  }}
               >
                   <Input allowClear placeholder={"最低额度"} prefix="₹" />
@@ -153,7 +160,11 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                      },
                    ]}
                  normalize={(value, prevValue, prevValues) => {
+<<<<<<< HEAD
                      return cannotTypeFloat(value);
+=======
+                     return value.replace(/^(\d+)\.(\d)*$/,'$1');
+>>>>>>> 60a0e2b (feat(cms): APIADMIN-122 [前端] 調整顯示額度欄位，只能填正整數，不能填小數點)
                  }}
               >
                   <Input allowClear placeholder={"最高额度"} prefix="₹" />
