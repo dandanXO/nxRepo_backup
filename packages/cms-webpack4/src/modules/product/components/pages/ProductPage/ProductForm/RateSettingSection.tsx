@@ -126,15 +126,13 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
 
 
       <Form.Item label="复贷利率" required tooltip={
-        <div>
-          <span>例如：</span>
-          <ul>
-            <li>起始期数1，前置利息10%，后置利息15%</li>
-            <li>+起始期数4，前置利息8%，后置利息12%</li>
-            <li>则1~3期费率同起始期数1</li>
-            <li>第4期之后费率同起始期数4</li>
-          </ul>
-        </div>
+          <div>
+              <div>例如：</div>
+              <div>起始期数1，前置利息10%，后置利息15%</div>
+              <div>+起始期数4，前置利息8%，后置利息12%</div>
+              <div>则1~3期费率同起始期数1</div>
+              <div>第4期之后费率同起始期数4</div>
+          </div>
       }>
         <Form.List name="productInterestRatePairs">
           {(fields, { add, remove }) => {
