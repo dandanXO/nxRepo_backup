@@ -550,8 +550,8 @@ export const RiskSettingPage = () => {
                         onFieldsChange={onFieldsChange}
                         onFinish={onFinish}
                         currentRiskMenuData={currentRiskMenuData}
-                        customAntFormFieldError={customAntFormFieldError}
-                        setCustomAntFormFieldError={setCustomAntFormFieldError}
+                        // customAntFormFieldError={customAntFormFieldError}
+                        // setCustomAntFormFieldError={setCustomAntFormFieldError}
                     />
                 </RiskSettingModal>
             </>

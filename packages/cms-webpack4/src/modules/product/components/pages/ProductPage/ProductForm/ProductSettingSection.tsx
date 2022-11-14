@@ -272,7 +272,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
           <Form.Item name="csTime" label="客服时间" rules={[{ required: true }]}>
               <TimePicker.RangePicker format={'HH:mm'}/>
           </Form.Item>
-          <Form.Item name="csContact" label="客服电话" rules={[{ required: true }]} >
+          <Form.Item name="csContact" label="客服电话" >
               <Input allowClear placeholder="客服电话" style={{width:262}}/>
            </Form.Item>
       </React.Fragment>
