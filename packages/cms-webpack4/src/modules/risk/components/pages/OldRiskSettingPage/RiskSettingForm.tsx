@@ -34,7 +34,7 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 <Input placeholder="风控名称" disabled={props.isEdit}/>
             </Form.Item>
 
-            <Form.Item label={"風控应用"} name="riskModelName" rules={[{ required: true }]}>
+            <Form.Item label={"风控应用"} name="riskModelName" rules={[{ required: true }]}>
                 <Select placeholder={"选择"}>
                     {props.currentRiskMenuData && props.currentRiskMenuData.map((risk, index) => {
                         return (
