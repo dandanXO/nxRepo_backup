@@ -38,7 +38,10 @@ export const useUploadPaymentReceipt = (
   const [imageSrc, setImageSrc] = useState<string>();
 
   const confirm = useCallback(() => {
-    if (!utr.isValidation) return;
+
+    // FIXME: REFACTOR utr 巴基斯坦版本沒有
+    if (utr.data && !utr.isValidation) return;
+
     setIsUploading(true);
     props.postRepayReceiptRequest({
       orderNo: props.orderNo,
