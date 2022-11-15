@@ -27,9 +27,6 @@ export interface ChannelTag {
     name: string;
     // APP設定名称
 
-    showPermission: boolean;
-    // 显示受权页面 0: 关闭 1: 开启
-
-    showTermAndCondition: boolean;
-    // 显示条款页面 0: 关闭 1: 开启
+    occupied: boolean;
+    // 是否使用中
 }
