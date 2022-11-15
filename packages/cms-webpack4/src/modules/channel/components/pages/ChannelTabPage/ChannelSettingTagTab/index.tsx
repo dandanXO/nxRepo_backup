@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
+import {InfoCircleOutlined} from "@ant-design/icons";
 import {ProColumns} from "@ant-design/pro-components";
 import {AdminTable, ModalContent} from "../../../../../shared/components/AdminTable";
 import {
@@ -13,6 +14,7 @@ import {AdminCustomModal} from "../../../../../shared/components/AdminCustomModa
 import {ChannelTagVO} from "../../../../domain/vo/ChannelTagVO";
 import {useFormModal} from "./useFormModal";
 import {ChannelSettingTagFormModal} from "./ChannelSettingTagFormModal";
+import {Modal} from "antd/es";
 
 interface ChannelSettingTagTabPageProps {
     active: boolean;
@@ -173,10 +175,25 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
     const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateTagMutation();
     const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
 
+
     // NOTE: User browse DeleteChannelSetting
+    const [modal, contextHolder] = Modal.useModal();
     const userBrowseDeleteChannelSettingUseCase = useCallback((record: ChannelTagVO) => {
-        setEditID(record.id);
-        setShowDeletedModal(true);
+        if(!record.occupied) {
+            setEditID(record.id);
+            modal.confirm({
+                title: "确认要删除此笔数据吗?",
+                onOk: onDeleteModalOK,
+                onCancel: onDeleteModalCancel,
+            });
+        } else {
+            modal.warning({
+                title: "此配置标签已在使用中，不能刪除。",
+                content: <>若尚有任何疑问，请与技术联系</>,
+                onOk: () => {},
+                okText: "知道了",
+            });
+        }
     }, [])
 
     // NOTE: User delete ChannelSetting
@@ -241,6 +258,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
 
             {/*NOTICE: Delete Modal*/}
             <AdminCustomModal open={showDeleteModal} onOk={onDeleteModalOK} onCancel={onDeleteModalCancel} message={"确认要删除此笔数据吗?"}/>
+            <div>{contextHolder}</div>
         </>
     )
 }
