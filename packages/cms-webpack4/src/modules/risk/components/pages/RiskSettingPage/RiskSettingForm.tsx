@@ -40,7 +40,7 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
             </Form.Item>
 
             <Form.Item
-                label={'風控应用'}
+                label={'风控应用'}
                 name="riskModelName"
                 rules={[{ required: true }]}
             >
