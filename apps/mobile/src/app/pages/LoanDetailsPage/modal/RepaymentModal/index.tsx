@@ -94,10 +94,12 @@ const RepaymentModal = (props: RepaymentModalProps) => {
     const [paymentMethodValue, setPaymentMethodValue] = useState(0);
 
     const handleConfirm = () => {
+        const formBalanceValue = Number(balanceValue.replace(`${environment.currency}`, ""));
+        if(formBalanceValue === 0) return
         props.handlePostRepayCreate(
             false,
             false,
-            Number(balanceValue.replace(`${environment.currency}`, ""))
+            formBalanceValue
         );
         props.setShowRepaymentModal(false);
     };
@@ -141,14 +143,14 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     labelType="left"
                                     value={balanceValue}
                                     disabled={radioValue === "balance"}
-                                    onBlur={(event: any) => {
-                                      let value = event.target.value;
-                                      value = value.replaceAll(`${environment.currency}`, "");
-                                      if(String(value) === "") {
-                                        setBalanceValue(`${environment.currency}1`);
-                                        props.setRepayBalance(1);
-                                      }
-                                    }}
+                                    // onBlur={(event: any) => {
+                                    //   let value = event.target.value;
+                                    //   value = value.replaceAll(`${environment.currency}`, "");
+                                    //   if(String(value) === "") {
+                                    //     setBalanceValue(`${environment.currency}1`);
+                                    //     props.setRepayBalance(1);
+                                    //   }
+                                    // }}
                                     onChange={(event: any) => {
                                       let value = event.target.value;
                                       value = value.replaceAll(`${environment.currency}`, "");
@@ -163,7 +165,6 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                         setBalanceValue(`${environment.currency}` + value);
                                         props.setRepayBalance(value);
                                       }
-
                                     }}
                                 />
                                 <PaymentMethodContainer>
