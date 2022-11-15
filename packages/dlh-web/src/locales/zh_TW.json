@@ -682,6 +682,7 @@
     "windowPage.captcha.code" : "獲取驗證碼",
     "windowPage.reacquire" : "重新獲取({ indexTime }秒)",
     "windowPage.mobile" : "手機號碼",
+    "windowPage.email": "電子信箱",
     "windowPage.mobile.format.incorrect " : "手機號碼格式不正確",
     "windowPage.mobile.length" : "長度需11個字符",
     "windowPage.mobile.enter" : "輸入手機號碼",

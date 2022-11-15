@@ -329,6 +329,7 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.content.salaryRange" />：</span><span>{salaryRange[userInfo.salaryRange] || ''}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.education" />：</span><span>{education[userInfo.education] || ''}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.position" />：</span><span>{position[userInfo.position] || ''}</span></Col>
+                        <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="windowPage.email" />：</span><span>{userInfo.email || ''}</span></Col>
                     </Row>
                 </Card>
 

@@ -724,6 +724,7 @@
   "page.table.user.authorization" : "User authorization authentication",
   "page.table.user.operation" : "User operation authentication",
   "windowPage.mobile": "Mobile No.",
+  "windowPage.email":"Email",
   "windowPage.mobile.format.incorrect": "Mobile No. Format Incorrect",
   "windowPage.mobile.length": "The length should be equal to 11 characters",
   "windowPage.mobile.enter": "Please Enter Mobile No.",
