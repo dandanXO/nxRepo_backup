@@ -31,8 +31,8 @@ const LoanInfo = ({userId}:UserId) => {
 
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo' },
         { title: '借款产品', dataIndex: 'productName', key: 'productName' },
-        { title: '借款金额', dataIndex: 'deviceMoney', key: 'deviceMoney' },
-        { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney' },
+        { title: '借款金额', dataIndex: 'deviceMoney', key: 'deviceMoney', align: 'right'},
+        { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney' , align: 'right'},
         { title: '放款时间', dataIndex: 'loanTime', key: 'loanTime', valueType: 'dateTime' },
         {
             title: '状态', dataIndex: 'status', key: 'status', valueType: 'select', initialValue: '',

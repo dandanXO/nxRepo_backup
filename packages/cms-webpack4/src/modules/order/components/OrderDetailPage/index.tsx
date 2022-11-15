@@ -5,6 +5,7 @@ import UserInfo from '../../../shared/components/userInfo/UserInfo';
 import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import LoanInfo from '../../../shared/components/userInfo/LoanInfo';
+import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
 import {Link, useParams} from "react-router-dom";
 import {itemRender} from "../../../shared/itemRender";
 
@@ -18,7 +19,8 @@ const OrderDetailPage = () => {
     }, []);
 
     const tabs = [
-        { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId}/> }, // 务必填写 key
+        { label: '订单信息', key: 'orderInfo', children: <OrderInfo userId={userId}/> }, // 务必填写 key
+        { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId}/> }, 
         { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId}/> },
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId}/> },
         { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId}/> },

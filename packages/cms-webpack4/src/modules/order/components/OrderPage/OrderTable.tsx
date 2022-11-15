@@ -115,7 +115,7 @@
 //                 return <Tag color={tagStatus.color}>{tagStatus.text}</Tag>;
 //             },
 //         },
-//         { title: '空放訂單', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: { true: { text: '是' }, false: { text: '否' } } },
+//         { title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: { true: { text: '是' }, false: { text: '否' } } },
 //         { title: '申请金额', dataIndex: 'idcardNo', key: 'idcardNo', hideInSearch: true, initialValue: searchParams.idcardNo || "" },
 //         { title: '到帐金额', dataIndex: 'idcardNo', key: 'idcardNo', hideInSearch: true, initialValue: searchParams.idcardNo || "" },
 //         { title: '借款期限', dataIndex: 'idcardNo', key: 'idcardNo', hideInSearch: true, initialValue: searchParams.idcardNo || "" },
