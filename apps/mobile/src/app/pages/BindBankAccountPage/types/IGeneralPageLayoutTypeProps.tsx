@@ -28,6 +28,7 @@ export type IGeneralPageLayoutTypeProps = IForm & {
 export type IPakistanPageLayoutTypeProps = IForm & {
   cardholderName: string;
 
+
   bankcardNoData: InputValue<string>;
   onAccountNumberChange: (event: any) => void;
   onAccountNumberBlur: (event: any) => void;
@@ -35,4 +36,11 @@ export type IPakistanPageLayoutTypeProps = IForm & {
   confirmedBankcardNoData: InputValue<string>;
   onConfirmAccountNumberChange: (event: any) => void;
   onConfirmAccountNumberBlur: (event: any) => void;
+
+  bankDropList: any;
+  bankAccountValue: number;
+  onIFSCDropSelect: (index: number) => void;
+  bindCardDropListData: any;
+
+
 }

@@ -1,10 +1,11 @@
 import {Form} from "../../../components/Form";
-import {Button, Input} from "@frontend/mobile/shared/ui";
-import React from "react";
+import {Button, Input, Select} from "@frontend/mobile/shared/ui";
+import React, {useEffect, useState} from "react";
 import {IPakistanPageLayoutTypeProps} from "../../../types/IGeneralPageLayoutTypeProps";
 import {Label} from "../../../components/Label";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
+import {BankVendor, WalletVendor} from "../../../../../api/GetBindCardDropList";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -20,6 +21,7 @@ const Warning = styled.div`
 `;
 export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
   const {t} = useTranslation();
+
   return (
     <>
       <Form>
@@ -33,16 +35,16 @@ export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
           disabled
         />
 
-        {/*<Label>IFSC Code</Label>*/}
-        {/*<Input*/}
-        {/*  className="mb"*/}
-        {/*  labelType={"none"}*/}
-        {/*  placeholder="IFSC Code"*/}
-        {/*  value={props.ifscData.data}*/}
-        {/*  onChange={props.onIFSCChange}*/}
-        {/*  onBlur={props.onIFSCBlur}*/}
-        {/*  errorMessage={props.ifscData.errorMessage}*/}
-        {/*/>*/}
+        <Label>{t("IFSC Code", {ns: "bank-bind"})}</Label>
+        <Select
+          className="mb"
+          fixButtonWidth={"calc(100vw - 36px)"}
+          dataSource={props.bankDropList}
+          defaultIndex={props.bankAccountValue}
+          // FIXME: to controlled component
+          onSelect={(index: number) => props.onIFSCDropSelect(index)}
+          maxItemCount={5.5}
+        />
 
         <Label>{t("Account Number", {ns: "bank-bind"})}</Label>
         <Input

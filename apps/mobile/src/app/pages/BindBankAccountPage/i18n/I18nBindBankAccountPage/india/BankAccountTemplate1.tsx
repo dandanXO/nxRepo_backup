@@ -20,7 +20,7 @@ export const BankAccountTemplate1 = (props: IGeneralPageLayoutTypeProps) => {
         </Paragraph>
         <Input
           className="mb"
-          label={t("IFSC Code", {ns: "bank-bind-india"}) as string}
+          label={t("IFSC Code", {ns: "bank-bind"}) as string}
           value={props.ifscData.data}
           onChange={props.onIFSCChange}
           onBlur={props.onIFSCBlur}

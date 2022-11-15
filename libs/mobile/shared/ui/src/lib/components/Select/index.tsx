@@ -233,10 +233,8 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                 showArrow={showArrow}
             >
                 <InfiniteScrollContainer
-                    mode={mode}
-                    // itemSize={props.dataSource.length}
-                    height={getHeight(calculateDataSourceLength(source ? source : dataSource, tree), maxItemCount)}
                     width={fixButtonWidth ? fixButtonWidth : "70"}
+                    height={getHeight(calculateDataSourceLength(source ? source : dataSource, tree), maxItemCount)}
                 >
                     {/*TODO: Need to bind Full Window Change Scroll */}
                     <InfiniteScroll
@@ -245,6 +243,7 @@ const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
                         width="100%"
                         height={getHeight(calculateDataSourceLength(source ? source : dataSource, tree), maxItemCount) + "px"}
                         barWidth="9px"
+                        // barColor={"#000"}
                     >
                         <XuJieInfiniteScrollContent>{listItemComponents}</XuJieInfiniteScrollContent>
                     </InfiniteScroll>

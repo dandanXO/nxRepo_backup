@@ -16,7 +16,7 @@ export const StyledSelectButton = styled.div.attrs({
     position: relative;
     box-sizing: border-box;
 
-    border-radius: 3px;
+    border-radius: 9px;
     border-style: solid;
     border-width: 1px;
 

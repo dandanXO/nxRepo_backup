@@ -3,7 +3,6 @@ import styled from "styled-components";
 interface SelectListContainerProps {
     height: number;
     width?: string;
-    mode?: string;
 }
 const InfiniteScrollContainer = styled.div.attrs({
     className: "scroll-container dropdown-list-body",

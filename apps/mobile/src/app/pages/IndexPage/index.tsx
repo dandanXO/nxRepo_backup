@@ -32,7 +32,7 @@ export default () => {
 
             <li>
                 <Link
-                    to={"/bank-bind?" + getToken() + "&" + getCardholderName()}
+                    to={"/bank-bind?token=" + getToken() + "&" + getCardholderName()}
                 >
                     bank-bind
                 </Link>
@@ -58,7 +58,7 @@ export default () => {
                 </Link>
             </li>
             <li>
-                <Link to={"/product-ad-modal-list?" + getToken()}>
+                <Link to={"/product-ad-modal-list?token=" + getToken()}>
                     ProductAdModalListPage
                 </Link>
             </li>

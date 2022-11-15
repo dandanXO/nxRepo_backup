@@ -23,6 +23,7 @@ export const PakistanBindBankAccountPage = (props: PureBindBankAccountPageProps)
         <BankForm
           postBankBindSaveToPK={props.postBankBindSaveToPK}
           cardholderName={props.cardholderName}
+          bindCardDropListData={props.bindCardDropListData}
           disable={!props.bindCardDropListData?.showBankOption}
         />
       )}

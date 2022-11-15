@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import type {InputValue} from "@frontend/mobile/shared/ui";
 import {Modal} from "@frontend/mobile/shared/ui";
 import {z} from "zod";
@@ -8,6 +8,7 @@ import {
 } from "../types/PureBindBankAccountPageProps";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
+import {BankVendor} from "../../../api/GetBindCardDropList";
 
 export const useBindBankAccountPage = (
     props: PureBindBankAccountPageProps
@@ -21,11 +22,30 @@ export const useBindBankAccountPage = (
         errorMessage: "",
     });
 
+  // NOTE: 巴基斯坦多家銀行專用 - 帳號列表 Data
+  const [bankDropList, setBankDropList] = useState<string[]>([]);
+
+  useEffect(() => {
+    if(!props.bindCardDropListData) return;
+    const walletList = props.bindCardDropListData && props.bindCardDropListData.availableBanks && props.bindCardDropListData.availableBanks.map((wallet: BankVendor) => {
+      return wallet.bankName
+    });
+    setBankDropList(walletList);
+  }, [props.bindCardDropListData]);
+
+  //NOTE: 巴基斯坦多家銀行專用 - 選擇的帳號
+  const [bankAccountValue, setBankAccountValue] = useState(0);
+
+  const onIFSCDropSelect = useCallback((index: number) => {
+    setBankAccountValue(index);
+  }, []);
+
+    // NOTE: 印度單一銀行專用
     const validateIFSC = useCallback(() => {
         const ifscScheme = z
             .string()
             .min(1, validationInfo.min1)
-            .length(11, t("IFSC must be 11 digits only.", {ns: "bank-bind-india"}) as string);
+            .length(11, t("IFSC must be 11 digits only.", {ns: "bank-bind"}) as string);
         const result = ifscScheme.safeParse(ifscData.data);
         if (!result.success) {
             const firstError = result.error.format();
@@ -44,6 +64,7 @@ export const useBindBankAccountPage = (
         }
     }, [ifscData.data]);
 
+  // NOTE: 印度單一銀行專用
     const onIFSCChange = (event: any) => {
       let data = event.target.value;
       data = data.replace(/[^a-zA-Z0-9]/g, "");
@@ -53,6 +74,7 @@ export const useBindBankAccountPage = (
       });
     }
 
+    // NOTE: 印度單一銀行專用
     const onIFSCBlur = () => {
       validateIFSC();
     }
@@ -223,12 +245,17 @@ export const useBindBankAccountPage = (
               upiId: upiData.data,
             })
         } else if(props.postBankBindSaveToPK){
+
+          const targetBankAccount = props.bindCardDropListData && props.bindCardDropListData.availableBanks && props.bindCardDropListData.availableBanks[bankAccountValue];
           request = props
             .postBankBindSaveToPK({
               bankAccNr: bankcardNoData.data,
               mobileWallet: false,
               mobileWalletAccount: "",
               walletVendor:	"",
+              // FIXME:
+              bankName: targetBankAccount?.bankName || "",
+              bankCode: targetBankAccount?.bankCode || "",
             })
         }
 
@@ -262,6 +289,8 @@ export const useBindBankAccountPage = (
         ifscData.isValidation,
         bankcardNoData.isValidation,
         confirmedBankcardNoData.isValidation,
+        props.bindCardDropListData?.availableBanks,
+        bankAccountValue
     ]);
 
     return {
@@ -278,5 +307,9 @@ export const useBindBankAccountPage = (
       onUPIIDChange,
       isFormPending,
       confirm,
+
+      bankDropList,
+      bankAccountValue,
+      onIFSCDropSelect,
     }
 };

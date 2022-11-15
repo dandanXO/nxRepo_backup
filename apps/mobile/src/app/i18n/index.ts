@@ -30,6 +30,8 @@ i18next
           "Submit": "Submit",
           // Bank Account
           "Cardholder Name": "Cardholder Name",
+          "IFSC Code": "IFSC Code",
+          "IFSC must be 11 digits only.": "IFSC must be 11 digits only.",
           "Account Number": "Account Number",
           "Account number must be between from 9 to 18 digits only.": "Account number must be between from 9 to 18 digits only.",
           "Confirm Account Number": "Confirm Account Number",
@@ -39,8 +41,7 @@ i18next
         "bank-bind-india": {
           // Bank Account - India
           "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
-          "IFSC Code": "IFSC Code",
-          "IFSC must be 11 digits only.": "IFSC must be 11 digits only.",
+
           "UPI ID": "UPI ID",
         }
 

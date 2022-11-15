@@ -9,6 +9,7 @@ import {BankAccountTemplate2} from "./BankAccountTemplate2";
 
 export const BankForm = (props: PureBindBankAccountPageProps & {
   disable: boolean;
+  bindCardDropListData: any;
 }) => {
   // NOTICE: REFACTOR ME
   const {
@@ -16,6 +17,9 @@ export const BankForm = (props: PureBindBankAccountPageProps & {
     // onIFSCChange,
     // onIFSCBlur,
     bankcardNoData,
+    bankDropList,
+    bankAccountValue,
+    onIFSCDropSelect,
     onAccountNumberChange,
     onAccountNumberBlur,
     confirmedBankcardNoData,
@@ -32,6 +36,10 @@ export const BankForm = (props: PureBindBankAccountPageProps & {
                           // onIFSCChange={onIFSCChange}
                           // onIFSCBlur={onIFSCBlur}
                           bankcardNoData={bankcardNoData}
+                          bindCardDropListData={props.bindCardDropListData}
+                          bankDropList={bankDropList}
+                          bankAccountValue={bankAccountValue}
+                          onIFSCDropSelect={onIFSCDropSelect}
                           onAccountNumberChange={onAccountNumberChange}
                           onAccountNumberBlur={onAccountNumberBlur}
                           confirmedBankcardNoData={confirmedBankcardNoData}
@@ -40,6 +48,8 @@ export const BankForm = (props: PureBindBankAccountPageProps & {
                           // upiData={upiData} onUPIIDChange={onUPIIDChange}
                           isFormPending={isFormPending}
                           confirm={confirm}
+
+
     />
   )
 }
