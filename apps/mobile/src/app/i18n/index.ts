@@ -1,6 +1,6 @@
 import i18next from "i18next";
 import {initReactI18next} from "react-i18next";
-import { i18nBankBindPageKey, i18nBankBindPageTranslations } from "../pages/BindBankAccountPage/i18n/i18nTranslations";
+import { i18nBankBindPageKey, i18nBankBindPageTranslations } from "../pages/BindBankAccountPage/i18n/translations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next

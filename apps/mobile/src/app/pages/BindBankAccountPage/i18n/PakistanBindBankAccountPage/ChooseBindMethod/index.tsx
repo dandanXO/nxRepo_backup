@@ -6,7 +6,7 @@ import unselectedSVG from "./ic_check_disable_icon.svg";
 import selectedSVG from "./ic_check_available_icon.svg";
 import {Label} from "../../../components/Label";
 import {useTranslation} from "react-i18next";
-import {i18nBankBindPageKey} from "../../i18nTranslations";
+import {i18nBankBindPageKey} from "../../translations";
 
 const Container = styled.div`
   margin-bottom: 20px;

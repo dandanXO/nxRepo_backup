@@ -8,7 +8,7 @@ import {
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
 import {BankVendor} from "../../../../api/GetBindCardDropList";
-import {i18nBankBindPageKey} from "../i18nTranslations";
+import {i18nBankBindPageKey} from "../translations";
 
 const ValidationInfo = {
   min1: i18next.t("This field cannot be left blank", {ns: i18nBankBindPageKey.CommonKey}),

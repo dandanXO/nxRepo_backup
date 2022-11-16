@@ -4,9 +4,9 @@ import {IIndiaBankAccountFormTemplate} from "../types/IBankAccountFormTemplate";
 import {Form} from "../../components/Form";
 import { Paragraph } from "../../components/Paragraph";
 import {useTranslation} from "react-i18next";
-import {i18nBankBindPageKey} from "../i18nTranslations";
+import {i18nBankBindPageKey} from "../translations";
 
-export const BankAccountFormTemplate = (props: IIndiaBankAccountFormTemplate) => {
+export const BankAccountForm = (props: IIndiaBankAccountFormTemplate) => {
   const {t} = useTranslation();
   return (
     <>

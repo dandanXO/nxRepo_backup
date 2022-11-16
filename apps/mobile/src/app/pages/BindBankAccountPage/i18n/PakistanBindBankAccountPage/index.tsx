@@ -3,9 +3,9 @@ import {
   IUseBindBankAccountPage,
 } from "../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../components/CustomPage";
-import {ChooseBindMethod} from "./ChooseBindMethod/ChooseBindMethod";
+import {ChooseBindMethod} from "./ChooseBindMethod";
 import {MobileWalletForm} from "./MobileWalletForm";
-import {BankAccountFormTemplate} from "./BankAccountFormTemplate";
+import {BankAccountForm} from "./BankAccountForm";
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
@@ -20,7 +20,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
       {chooseBindMethodValue === 0 ? (
         <MobileWalletForm bindCardDropListData={props.bindCardDropListData} triggerPostBankBindSaveToPKMutation={props.triggerPostBankBindSaveToPKMutation}/>
         ) : (
-        <BankAccountFormTemplate
+        <BankAccountForm
           postBankBindSaveToPK={props.postBankBindSaveToPK}
           cardholderName={props.cardholderName}
           bindCardDropListData={props.bindCardDropListData}

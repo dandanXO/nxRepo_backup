@@ -6,7 +6,7 @@ import {z} from "zod";
 import {WalletVendor} from "../../../../api/GetBindCardDropList";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
-import {i18nBankBindPageKey} from "../i18nTranslations";
+import {i18nBankBindPageKey} from "../translations";
 
 interface IMobileWalletFormProps {
   triggerPostBankBindSaveToPKMutation: any;

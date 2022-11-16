@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {useTranslation} from "react-i18next";
 import {Form} from "../../components/Form";
 import {Label} from "../../components/Label";
-import {i18nBankBindPageKey} from "../i18nTranslations";
+import {i18nBankBindPageKey} from "../translations";
 import {Button, Input, Select} from "@frontend/mobile/shared/ui";
 
 const Warning = styled.div`
@@ -23,8 +23,7 @@ const Warning = styled.div`
   color: #f82626;
 `;
 
-
-export const BankAccountFormTemplate = (props: IUseBindBankAccountPage & {
+export const BankAccountForm = (props: IUseBindBankAccountPage & {
   disable: boolean;
   bindCardDropListData: any;
 }) => {
