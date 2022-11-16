@@ -2,9 +2,9 @@
 import React from "react";
 import {
   IUseBindBankAccountPage
-} from "../types/IUseBindBankAccountPage";
-import {CustomPage} from "../../components/CustomPage";
-import {useBindBankAccountPage} from "../hooks/useBindBankAccountPage";
+} from "../../types/IUseBindBankAccountPage";
+import {CustomPage} from "../../../components/CustomPage";
+import {useBindBankAccountPage} from "../../hooks/useBindBankAccountPage";
 import {BankAccountForm} from "./BankAccountForm";
 
 export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {

@@ -4,10 +4,10 @@ import React from "react";
 export interface IForm {
   // NOTICE: REFACTOR ME
   isFormPending: boolean;
-  confirm?: React.EffectCallback;
+  confirm: React.EffectCallback;
 }
 
-type IBankAccountFormTemplate = IForm & {
+type IBankAccountForm = IForm & {
   cardholderName: string;
 
   bankcardNoData: InputValue<string>;
@@ -19,7 +19,7 @@ type IBankAccountFormTemplate = IForm & {
   onConfirmAccountNumberBlur: (event: any) => void;
 }
 
-export type IIndiaBankAccountFormTemplate = IBankAccountFormTemplate & {
+export type IIndiaBankAccountForm = IBankAccountForm & {
   ifscData: InputValue<string>;
   onIFSCChange: (event: any) => void;
   onIFSCBlur: (event: any) => void;
@@ -28,7 +28,7 @@ export type IIndiaBankAccountFormTemplate = IBankAccountFormTemplate & {
   onUPIIDChange: (event: any) => void;
 }
 
-export type IPakistanBankAccountFormTemplate = IBankAccountFormTemplate & {
+export type IPakistanBankAccountForm = IBankAccountForm & {
   bankDropList: any;
   bankAccountValue: number;
   onIFSCDropSelect: (index: number) => void;

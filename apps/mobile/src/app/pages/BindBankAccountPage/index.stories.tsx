@@ -1,8 +1,8 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import {AppThemeProvider, DefaultThemeConfig, GreenThemeConfig} from "@frontend/mobile/shared/ui";
-import {IndiaBindBankAccountPage} from "./i18n/IndiaBindBankAccountPage";
-import {PakistanBindBankAccountPage} from "./i18n/PakistanBindBankAccountPage";
+import {IndiaBindBankAccountPage} from "./i18n/components/IndiaBindBankAccountPage";
+import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAccountPage";
 
 export default {
     title: "Page/BindBankAccountPage",

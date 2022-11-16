@@ -5,8 +5,8 @@ import {environment} from "../../../environments/environment";
 import {IndiaCountry} from "../../../environments/countries/IndiaCountry";
 
 import {PakistanCountry} from "../../../environments/countries/PakistanCountry";
-import {IndiaBindBankAccountPage} from "./i18n/IndiaBindBankAccountPage";
-import {PakistanBindBankAccountPage} from "./i18n/PakistanBindBankAccountPage";
+import {IndiaBindBankAccountPage} from "./i18n/components/IndiaBindBankAccountPage";
+import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAccountPage";
 
 const BindBankAccountPage = () => {
     // NOTICE: India

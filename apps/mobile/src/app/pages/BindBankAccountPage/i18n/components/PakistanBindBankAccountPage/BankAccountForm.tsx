@@ -1,14 +1,11 @@
 import React from "react";
-import {
-  IUseBindBankAccountPage,
-} from "../types/IUseBindBankAccountPage";
-import {useBindBankAccountPage} from "../hooks/useBindBankAccountPage";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
-import {Form} from "../../components/Form";
-import {Label} from "../../components/Label";
-import {i18nBankBindPageKey} from "../translations";
+import {Form} from "../../../components/Form";
+import {Label} from "../../../components/Label";
+import {i18nBankBindPageKey} from "../../translations";
 import {Button, Input, Select} from "@frontend/mobile/shared/ui";
+import {IPakistanBankAccountForm} from "../../types/IBankAccountForm";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -23,31 +20,8 @@ const Warning = styled.div`
   color: #f82626;
 `;
 
-export const BankAccountForm = (props: IUseBindBankAccountPage & {
-  disable: boolean;
-  bindCardDropListData: any;
-}) => {
+export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
   const {t} = useTranslation();
-
-  // NOTICE: REFACTOR ME
-  const {
-    // ifscData,
-    // onIFSCChange,
-    // onIFSCBlur,
-    bankcardNoData,
-    bankDropList,
-    bankAccountValue,
-    onIFSCDropSelect,
-    onAccountNumberChange,
-    onAccountNumberBlur,
-    confirmedBankcardNoData,
-    onConfirmAccountNumberChange,
-    onConfirmAccountNumberBlur,
-    // upiData,
-    // onUPIIDChange,
-    isFormPending,
-    confirm
-  } = useBindBankAccountPage(props);
 
   return (
     <>
@@ -66,10 +40,10 @@ export const BankAccountForm = (props: IUseBindBankAccountPage & {
         <Select
           className="mb"
           fixButtonWidth={"calc(100vw - 36px)"}
-          dataSource={bankDropList}
-          defaultIndex={bankAccountValue}
+          dataSource={props.bankDropList}
+          defaultIndex={props.bankAccountValue}
           // FIXME: to controlled component
-          onSelect={(index: number) => onIFSCDropSelect(index)}
+          onSelect={(index: number) => props.onIFSCDropSelect(index)}
           maxItemCount={5.5}
         />
 
@@ -78,10 +52,10 @@ export const BankAccountForm = (props: IUseBindBankAccountPage & {
           className="mb"
           labelType={"none"}
           placeholder={t("Account Number", {ns: i18nBankBindPageKey.CommonKey}) as string}
-          value={bankcardNoData.data}
-          onChange={onAccountNumberChange}
-          onBlur={onAccountNumberBlur}
-          errorMessage={bankcardNoData.errorMessage}
+          value={props.bankcardNoData.data}
+          onChange={props.onAccountNumberChange}
+          onBlur={props.onAccountNumberBlur}
+          errorMessage={props.bankcardNoData.errorMessage}
         />
 
         <Label>{t("Confirm Account Number", {ns: i18nBankBindPageKey.CommonKey})}</Label>
@@ -89,10 +63,10 @@ export const BankAccountForm = (props: IUseBindBankAccountPage & {
           className="mb"
           labelType={"none"}
           placeholder={t("Confirm Account Number", {ns: i18nBankBindPageKey.CommonKey}) as string}
-          value={confirmedBankcardNoData.data}
-          onChange={onConfirmAccountNumberChange}
-          onBlur={onConfirmAccountNumberBlur}
-          errorMessage={confirmedBankcardNoData.errorMessage}
+          value={props.confirmedBankcardNoData.data}
+          onChange={props.onConfirmAccountNumberChange}
+          onBlur={props.onConfirmAccountNumberBlur}
+          errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
 
         <Warning>{t("Unchangeable after linked, please check before submission.", {ns: i18nBankBindPageKey.CommonKey })}</Warning>
@@ -101,7 +75,7 @@ export const BankAccountForm = (props: IUseBindBankAccountPage & {
       <Button onClick={() => {
         // if(!props.isFormPending && props.confirm) {
         //   console.log("request")
-        confirm && confirm()
+        props.confirm && props.confirm()
         // } else {
         //   console.log("request2")
         // }
