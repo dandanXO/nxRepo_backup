@@ -9,14 +9,18 @@ import {IndiaBindBankAccountPage} from "./i18n/components/IndiaBindBankAccountPa
 import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAccountPage";
 
 const BindBankAccountPage = () => {
+    // NOTICE: Common
+    // NOTE: cardholderName
+    const pageQueryString = useLocationOrderQueryString();
+    const cardholderName = pageQueryString.cardholderName;
+
     // NOTICE: India
+    // NOTE: 綁定銀行卡
     const [postBankBindSave] = usePostBankBindSaveMutation();
 
     // NOTICE: Pakistan
+    // NOTE: 綁定銀行卡
     const [postBankBindSaveToPK] = usePostBankBindSaveToPKMutation();
-
-    // NOTE: 綁定電子錢包
-    const [triggerPostBankBindSaveToPKMutation, { isLoading }] = usePostBankBindSaveToPKMutation();
 
     // NOTE: 取得電子錢包列表
     const {currentData: bindCardDropListData,
@@ -24,10 +28,8 @@ const BindBankAccountPage = () => {
       isFetching: isBindCardDropListDataFetching,
     } = useGetBindCardDropListQuery({});
 
-    // NOTE: cardholderName
-    const pageQueryString = useLocationOrderQueryString();
-    const cardholderName = pageQueryString.cardholderName;
-
+    // NOTE: 綁定電子錢包
+    const [triggerPostBankBindSaveToPKMutation, { isLoading }] = usePostBankBindSaveToPKMutation();
 
     // NOTICE:
     if(environment.country === IndiaCountry.country) {
@@ -46,7 +48,6 @@ const BindBankAccountPage = () => {
           triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
           bindCardDropListData={bindCardDropListData}
           cardholderName={cardholderName ?? ""}
-
         />
       );
     } else {

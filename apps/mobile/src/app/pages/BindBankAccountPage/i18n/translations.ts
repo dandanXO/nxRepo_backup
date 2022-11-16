@@ -6,6 +6,7 @@ export enum i18nBankBindPageKey {
 
 export const i18nBankBindPageTranslations = {
   [i18nBankBindPageKey.CommonKey]: {
+    "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
     "Submit": "Submit",
     // NOTE: Bank Account
     "This field cannot be left blank": "This field cannot be left blank",
@@ -19,7 +20,6 @@ export const i18nBankBindPageTranslations = {
   },
   [i18nBankBindPageKey.IndiaKey]: {
     // NOTE: Bank Account - India
-    "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
     "UPI ID": "UPI ID",
     "IFSC Code": "IFSC Code",
     "IFSC must be 11 digits only.": "IFSC must be 11 digits only.",

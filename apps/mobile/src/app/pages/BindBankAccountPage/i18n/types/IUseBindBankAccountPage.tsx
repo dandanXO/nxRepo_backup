@@ -4,6 +4,7 @@ import {GetBindCardDropListResponse} from "../../../../api/GetBindCardDropList";
 export type IUseBindBankAccountPage = {
   // NOTE: 綁定
   cardholderName: string;
+
   postBankBindSave?: (requestBody: PostBankBindSaveRequest) => any;
   postBankBindSaveToPK?: (requestBody: PostPKBankBindSaveRequest) => any;
 
@@ -13,5 +14,9 @@ export type IUseBindBankAccountPage = {
 
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
+}
 
+export type IPakistanUseBindBankAccountPage = {
+  // NOTE: 取得電子錢包列表
+  bindCardDropListData?: GetBindCardDropListResponse;
 }

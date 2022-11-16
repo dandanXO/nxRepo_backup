@@ -1,12 +1,13 @@
 import React, {useState} from "react";
-import {
-  IUseBindBankAccountPage,
-} from "../../types/IUseBindBankAccountPage";
+import {IUseBindBankAccountPage,} from "../../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../../components/CustomPage";
 import {ChooseBindMethod} from "./ChooseBindMethod";
 import {MobileWalletForm} from "./MobileWalletForm";
 import {BankAccountForm} from "./BankAccountForm";
-import {useBindBankAccountPage} from "../../hooks/useBindBankAccountPage";
+import {useBindBankAccountForm} from "../../hooks/common/useBindBankAccountForm";
+import {usePakistanBankAccountForm} from "../../hooks/pakistan/usePakistanBankAccountForm";
+import {useFinishedBindBankAccountForm} from "../../hooks/common/useFinishedBindBankAccountForm";
+import {usePakistanMobileWalletForm} from "../../hooks/pakistan/usePakistanMobileWalletForm";
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
@@ -16,31 +17,76 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     setChooseBindMethodValue(value);
   }
 
-  // NOTICE: REFACTOR ME
   const {
-    // ifscData,
-    // onIFSCChange,
-    // onIFSCBlur,
+    // Wallet List
+    walletDropList,
+    walletValue,
+    setWalletValue,
+    // Wallet Account
+    mobileData,
+    onMobileDataChange,
+    validateMobileWalletAccount,
+    // Form
+    isFormPending: isWalletFormPending,
+    confirmMobileWalletCallback,
+  } = usePakistanMobileWalletForm({
+    triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
+    bindCardDropListData: props.bindCardDropListData,
+  });
+
+  const  {
     bankcardNoData,
-    bankDropList,
-    bankAccountValue,
-    onIFSCDropSelect,
     onAccountNumberChange,
     onAccountNumberBlur,
     confirmedBankcardNoData,
     onConfirmAccountNumberChange,
     onConfirmAccountNumberBlur,
-    // upiData,
-    // onUPIIDChange,
+    validate: validateCommonForm,
+  } = useBindBankAccountForm();
+
+  const {
+    bankDropList,
+    bankAccountValue,
+    onIFSCDropSelect,
+  } = usePakistanBankAccountForm({
+    bindCardDropListData: props.bindCardDropListData,
+  });
+
+  const {
     isFormPending,
-    confirm
-  } = useBindBankAccountPage(props);
+    confirm,
+  } = useFinishedBindBankAccountForm({
+    // NOTICE: Common
+    bankcardNoData,
+
+    // NOTICE: India
+    // postBankBindSave: props.postBankBindSave,
+    // ifscData,
+    // upiData,
+
+    // NOTICE: Pakistan
+    postBankBindSaveToPK: props.postBankBindSaveToPK,
+    // NOTE: 取得電子錢包列表
+    bindCardDropListData: props.bindCardDropListData,
+    // NOTE: 設定電子錢包列表
+    bankAccountValue,
+  });
+
 
   return (
     <CustomPage>
       <ChooseBindMethod value={chooseBindMethodValue} changeOptionValueCallback={changeOptionValue} disable={props.bindCardDropListData?.showBankOption || false}/>
       {chooseBindMethodValue === 0 ? (
-        <MobileWalletForm bindCardDropListData={props.bindCardDropListData} triggerPostBankBindSaveToPKMutation={props.triggerPostBankBindSaveToPKMutation}/>
+        <MobileWalletForm
+          walletDropList={walletDropList}
+          walletValue={walletValue}
+          setWalletValue={setWalletValue}
+          mobileData={mobileData}
+          onMobileDataChange={onMobileDataChange}
+          validateMobileWalletAccount={validateMobileWalletAccount}
+          isFormPending={isFormPending}
+          confirmMobileWalletCallback={confirmMobileWalletCallback}
+        />
         ) : (
           <BankAccountForm
             isFormPending={isFormPending}

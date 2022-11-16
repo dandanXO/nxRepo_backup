@@ -17,7 +17,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           disabled
         />
         <Paragraph>
-          {t("For KYC, your Cardholder name and Aadhaar name should be match.", {ns: i18nBankBindPageKey.IndiaKey })}
+          {t("For KYC, your Cardholder name and Aadhaar name should be match.", {ns: i18nBankBindPageKey.CommonKey })}
         </Paragraph>
         <Input
           className="mb"
