@@ -1,7 +1,7 @@
 import {Form} from "../../../components/Form";
 import {Button, Input, Select} from "@frontend/mobile/shared/ui";
 import React, {useEffect, useState} from "react";
-import {IPakistanPageLayoutTypeProps} from "../../../types/IGeneralPageLayoutTypeProps";
+import {IPakistanBankAccountTemplate} from "../types/IBankAccountTemplate";
 import {Label} from "../../../components/Label";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
@@ -19,7 +19,8 @@ const Warning = styled.div`
   text-align: center;
   color: #f82626;
 `;
-export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
+
+export const PakistanBankAccountTemplate = (props: IPakistanBankAccountTemplate) => {
   const {t} = useTranslation();
 
   return (

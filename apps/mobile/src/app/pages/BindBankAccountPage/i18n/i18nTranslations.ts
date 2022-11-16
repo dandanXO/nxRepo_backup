@@ -2,6 +2,7 @@ export enum i18nBankBindPageKey {
   CommonKey = "bank-bind-page",
   IndiaKey= "bank-bind-india-page",
 }
+
 export const i18nBankBindPageTranslations = {
   [i18nBankBindPageKey.CommonKey]: {
     // NOTE: Mobile Wallet

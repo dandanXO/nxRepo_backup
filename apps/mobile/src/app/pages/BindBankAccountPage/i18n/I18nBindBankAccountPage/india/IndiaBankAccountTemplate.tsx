@@ -1,12 +1,12 @@
 import {Button, Input} from "@frontend/mobile/shared/ui";
 import React from "react";
-import {IGeneralPageLayoutTypeProps} from "../../../types/IGeneralPageLayoutTypeProps";
+import {IIndiaBankAccountTemplate} from "../types/IBankAccountTemplate";
 import {Form} from "../../../components/Form";
 import { Paragraph } from "../../../components/Paragraph";
 import {useTranslation} from "react-i18next";
 import {i18nBankBindPageKey} from "../../i18nTranslations";
 
-export const BankAccountTemplate1 = (props: IGeneralPageLayoutTypeProps) => {
+export const IndiaBankAccountTemplate = (props: IIndiaBankAccountTemplate) => {
   const {t} = useTranslation();
   return (
     <>

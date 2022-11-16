@@ -4,9 +4,9 @@ import {IndiaCountry} from "../../../../../environments/countries/IndiaCountry";
 import {IndiaBindBankAccountPage} from "./india/IndiaBindBankAccountPage";
 import {PakistanCountry} from "../../../../../environments/countries/PakistanCountry";
 import {PakistanBindBankAccountPage} from "./pakistan/PakistanBindBankAccountPage";
-import {PureBindBankAccountPageProps} from "../../types/PureBindBankAccountPageProps";
+import {IUseBindBankAccountPage} from "./types/IUseBindBankAccountPage";
 
-export const I18nBindBankAccountPage = (props: PureBindBankAccountPageProps) => {
+export const I18nBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTICE:
   if(environment.country === IndiaCountry.country) {
     // NOTICE: India

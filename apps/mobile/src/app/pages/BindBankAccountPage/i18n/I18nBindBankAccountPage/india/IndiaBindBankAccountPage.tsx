@@ -1,13 +1,13 @@
 
 import React from "react";
 import {
-  PureBindBankAccountPageProps
-} from "../../../types/PureBindBankAccountPageProps";
+  IUseBindBankAccountPage
+} from "../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../../components/CustomPage";
-import {useBindBankAccountPage} from "../../../hooks/useBindBankAccountPage";
-import {BankAccountTemplate1} from "./BankAccountTemplate1";
+import {useBindBankAccountPage} from "../../hooks/useBindBankAccountPage";
+import {IndiaBankAccountTemplate} from "./IndiaBankAccountTemplate";
 
-export const IndiaBindBankAccountPage = (props: PureBindBankAccountPageProps) => {
+export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   const {
     ifscData,
     onIFSCChange,
@@ -25,19 +25,19 @@ export const IndiaBindBankAccountPage = (props: PureBindBankAccountPageProps) =>
   } = useBindBankAccountPage(props);
   return (
     <CustomPage>
-        <BankAccountTemplate1 cardholderName={props.cardholderName}
-                               ifscData={ifscData}
-                               onIFSCChange={onIFSCChange}
-                               onIFSCBlur={onIFSCBlur}
-                               bankcardNoData={bankcardNoData}
-                               onAccountNumberChange={onAccountNumberChange}
-                               onAccountNumberBlur={onAccountNumberBlur}
-                               confirmedBankcardNoData={confirmedBankcardNoData}
-                               onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-                               onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
-                               upiData={upiData} onUPIIDChange={onUPIIDChange}
-                               isFormPending={isFormPending}
-                               confirm={confirm}
+        <IndiaBankAccountTemplate cardholderName={props.cardholderName}
+                                  ifscData={ifscData}
+                                  onIFSCChange={onIFSCChange}
+                                  onIFSCBlur={onIFSCBlur}
+                                  bankcardNoData={bankcardNoData}
+                                  onAccountNumberChange={onAccountNumberChange}
+                                  onAccountNumberBlur={onAccountNumberBlur}
+                                  confirmedBankcardNoData={confirmedBankcardNoData}
+                                  onConfirmAccountNumberChange={onConfirmAccountNumberChange}
+                                  onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
+                                  upiData={upiData} onUPIIDChange={onUPIIDChange}
+                                  isFormPending={isFormPending}
+                                  confirm={confirm}
       />
 
     </CustomPage>

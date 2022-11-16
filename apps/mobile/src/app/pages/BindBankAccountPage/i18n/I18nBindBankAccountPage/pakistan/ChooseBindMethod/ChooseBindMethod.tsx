@@ -46,11 +46,12 @@ const Option = styled.div`
   position: relative;
 `
 
-export interface IChooseBindMethod {
+interface IChooseBindMethod {
   value: 0 | 1;
   changeOptionValueCallback: (option: 0|1) => void;
   disable: boolean;
 }
+
 export const ChooseBindMethod = (props: IChooseBindMethod) => {
   const { t } = useTranslation();
   return (

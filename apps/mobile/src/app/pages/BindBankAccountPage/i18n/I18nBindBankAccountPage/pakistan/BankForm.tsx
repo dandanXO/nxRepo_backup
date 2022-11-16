@@ -1,13 +1,12 @@
-
 import React from "react";
 import {
-  PureBindBankAccountPageProps,
-} from "../../../types/PureBindBankAccountPageProps";
-import {useBindBankAccountPage} from "../../../hooks/useBindBankAccountPage";
-import {BankAccountTemplate2} from "./BankAccountTemplate2";
+  IUseBindBankAccountPage,
+} from "../types/IUseBindBankAccountPage";
+import {useBindBankAccountPage} from "../../hooks/useBindBankAccountPage";
+import {PakistanBankAccountTemplate} from "./PakistanBankAccountTemplate";
 
 
-export const BankForm = (props: PureBindBankAccountPageProps & {
+export const BankForm = (props: IUseBindBankAccountPage & {
   disable: boolean;
   bindCardDropListData: any;
 }) => {
@@ -31,23 +30,23 @@ export const BankForm = (props: PureBindBankAccountPageProps & {
     confirm
   } = useBindBankAccountPage(props);
   return (
-    <BankAccountTemplate2 cardholderName={props.cardholderName}
+    <PakistanBankAccountTemplate cardholderName={props.cardholderName}
                           // ifscData={ifscData}
                           // onIFSCChange={onIFSCChange}
                           // onIFSCBlur={onIFSCBlur}
-                          bankcardNoData={bankcardNoData}
-                          bindCardDropListData={props.bindCardDropListData}
-                          bankDropList={bankDropList}
-                          bankAccountValue={bankAccountValue}
-                          onIFSCDropSelect={onIFSCDropSelect}
-                          onAccountNumberChange={onAccountNumberChange}
-                          onAccountNumberBlur={onAccountNumberBlur}
-                          confirmedBankcardNoData={confirmedBankcardNoData}
-                          onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-                          onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
+                                 bankcardNoData={bankcardNoData}
+                                 bindCardDropListData={props.bindCardDropListData}
+                                 bankDropList={bankDropList}
+                                 bankAccountValue={bankAccountValue}
+                                 onIFSCDropSelect={onIFSCDropSelect}
+                                 onAccountNumberChange={onAccountNumberChange}
+                                 onAccountNumberBlur={onAccountNumberBlur}
+                                 confirmedBankcardNoData={confirmedBankcardNoData}
+                                 onConfirmAccountNumberChange={onConfirmAccountNumberChange}
+                                 onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
                           // upiData={upiData} onUPIIDChange={onUPIIDChange}
-                          isFormPending={isFormPending}
-                          confirm={confirm}
+                                 isFormPending={isFormPending}
+                                 confirm={confirm}
 
 
     />

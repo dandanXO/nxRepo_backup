@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {
-  PureBindBankAccountPageProps,
-} from "../../../types/PureBindBankAccountPageProps";
+  IUseBindBankAccountPage,
+} from "../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../../components/CustomPage";
 import {ChooseBindMethod} from "./ChooseBindMethod/ChooseBindMethod";
 import {MobileWalletForm} from "./MobileWalletForm";
 import {BankForm} from "./BankForm";
 
-export const PakistanBindBankAccountPage = (props: PureBindBankAccountPageProps) => {
+export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0|1>(0);
 

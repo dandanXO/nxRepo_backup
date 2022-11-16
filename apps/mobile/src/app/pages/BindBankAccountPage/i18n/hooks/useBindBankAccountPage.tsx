@@ -3,12 +3,12 @@ import type {InputValue} from "@frontend/mobile/shared/ui";
 import {Modal} from "@frontend/mobile/shared/ui";
 import {z} from "zod";
 import {
-  PureBindBankAccountPageProps
-} from "../types/PureBindBankAccountPageProps";
+  IUseBindBankAccountPage
+} from "../I18nBindBankAccountPage/types/IUseBindBankAccountPage";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
-import {BankVendor} from "../../../api/GetBindCardDropList";
-import {i18nBankBindPageKey} from "../i18n/i18nTranslations";
+import {BankVendor} from "../../../../api/GetBindCardDropList";
+import {i18nBankBindPageKey} from "../i18nTranslations";
 
 const ValidationInfo = {
   min1: i18next.t("This field cannot be left blank", {ns: i18nBankBindPageKey.CommonKey}),
@@ -16,7 +16,7 @@ const ValidationInfo = {
 
 
 export const useBindBankAccountPage = (
-    props: PureBindBankAccountPageProps
+    props: IUseBindBankAccountPage
   // props: IndiaPureBindBankAccountPageProps | PKPureBindBankAccountPageProps
 ) => {
   const {t} = useTranslation();
