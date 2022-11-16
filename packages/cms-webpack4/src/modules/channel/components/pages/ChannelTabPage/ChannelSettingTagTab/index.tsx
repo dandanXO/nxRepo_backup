@@ -52,10 +52,10 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
     // NOTICE: Modal - Delete
     const [showDeleteModal, setShowDeletedModal] = useState(false);
 
-    const onDeleteModalOK = useCallback(() => {
+    const onDeleteModalOK = useCallback((editID: number) => {
         // NOTICE: need dependency array
-        userDeleteChannelSettingUseCase()
-    }, [editID])
+        userDeleteChannelSettingUseCase(editID)
+    }, [])
 
     const onDeleteModalCancel = useCallback(() => {
         setShowDeletedModal(false);
@@ -180,10 +180,11 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
     const [modal, contextHolder] = Modal.useModal();
     const userBrowseDeleteChannelSettingUseCase = useCallback((record: ChannelTagVO) => {
         if(!record.occupied) {
-            setEditID(record.id);
             modal.confirm({
                 title: "确认要删除此笔数据吗?",
-                onOk: onDeleteModalOK,
+                // NOTICE: 得用下面寫法否則 editID 會找不到
+                onOk: () => onDeleteModalOK(record.id),
+                // onOk: onDeleteModalOK,
                 onCancel: onDeleteModalCancel,
             });
         } else {
@@ -197,7 +198,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
     }, [])
 
     // NOTE: User delete ChannelSetting
-    const userDeleteChannelSettingUseCase = useCallback(() => {
+    const userDeleteChannelSettingUseCase = useCallback((editID: number) => {
         // NOTE:
         triggerDelete({
             id: editID,
@@ -205,7 +206,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
             setShowDeletedModal(false);
             triggerGetList(null);
         })
-    }, [editID]);
+    }, []);
 
     const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteTagMutation();
 
@@ -257,7 +258,6 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
             />
 
             {/*NOTICE: Delete Modal*/}
-            <AdminCustomModal open={showDeleteModal} onOk={onDeleteModalOK} onCancel={onDeleteModalCancel} message={"确认要删除此笔数据吗?"}/>
             <div>{contextHolder}</div>
         </>
     )

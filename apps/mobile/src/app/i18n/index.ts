@@ -41,7 +41,6 @@ i18next
         "bank-bind-india": {
           // Bank Account - India
           "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
-
           "UPI ID": "UPI ID",
         }
 
