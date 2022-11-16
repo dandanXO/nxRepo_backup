@@ -7,7 +7,7 @@ export interface IForm {
   confirm?: React.EffectCallback;
 }
 
-export type IBankAccountTemplate = IForm & {
+type IBankAccountFormTemplate = IForm & {
   cardholderName: string;
 
   bankcardNoData: InputValue<string>;
@@ -19,7 +19,7 @@ export type IBankAccountTemplate = IForm & {
   onConfirmAccountNumberBlur: (event: any) => void;
 }
 
-export type IIndiaBankAccountTemplate = IBankAccountTemplate & {
+export type IIndiaBankAccountFormTemplate = IBankAccountFormTemplate & {
   ifscData: InputValue<string>;
   onIFSCChange: (event: any) => void;
   onIFSCBlur: (event: any) => void;
@@ -28,7 +28,7 @@ export type IIndiaBankAccountTemplate = IBankAccountTemplate & {
   onUPIIDChange: (event: any) => void;
 }
 
-export type IPakistanBankAccountTemplate = IBankAccountTemplate & {
+export type IPakistanBankAccountFormTemplate = IBankAccountFormTemplate & {
   bankDropList: any;
   bankAccountValue: number;
   onIFSCDropSelect: (index: number) => void;

@@ -1,12 +1,12 @@
 import {Button, Input} from "@frontend/mobile/shared/ui";
 import React from "react";
-import {IIndiaBankAccountTemplate} from "../types/IBankAccountTemplate";
+import {IIndiaBankAccountFormTemplate} from "../types/IBankAccountFormTemplate";
 import {Form} from "../../components/Form";
 import { Paragraph } from "../../components/Paragraph";
 import {useTranslation} from "react-i18next";
 import {i18nBankBindPageKey} from "../i18nTranslations";
 
-export const IndiaBankAccountTemplate = (props: IIndiaBankAccountTemplate) => {
+export const BankAccountFormTemplate = (props: IIndiaBankAccountFormTemplate) => {
   const {t} = useTranslation();
   return (
     <>

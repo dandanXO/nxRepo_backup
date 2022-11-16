@@ -1,11 +1,14 @@
-import {Form} from "../../components/Form";
-import {Button, Input, Select} from "@frontend/mobile/shared/ui";
-import React, {useEffect, useState} from "react";
-import {IPakistanBankAccountTemplate} from "../types/IBankAccountTemplate";
-import {Label} from "../../components/Label";
+import React from "react";
+import {
+  IUseBindBankAccountPage,
+} from "../types/IUseBindBankAccountPage";
+import {useBindBankAccountPage} from "../hooks/useBindBankAccountPage";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
+import {Form} from "../../components/Form";
+import {Label} from "../../components/Label";
 import {i18nBankBindPageKey} from "../i18nTranslations";
+import {Button, Input, Select} from "@frontend/mobile/shared/ui";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -20,8 +23,32 @@ const Warning = styled.div`
   color: #f82626;
 `;
 
-export const PakistanBankAccountTemplate = (props: IPakistanBankAccountTemplate) => {
+
+export const BankAccountFormTemplate = (props: IUseBindBankAccountPage & {
+  disable: boolean;
+  bindCardDropListData: any;
+}) => {
   const {t} = useTranslation();
+
+  // NOTICE: REFACTOR ME
+  const {
+    // ifscData,
+    // onIFSCChange,
+    // onIFSCBlur,
+    bankcardNoData,
+    bankDropList,
+    bankAccountValue,
+    onIFSCDropSelect,
+    onAccountNumberChange,
+    onAccountNumberBlur,
+    confirmedBankcardNoData,
+    onConfirmAccountNumberChange,
+    onConfirmAccountNumberBlur,
+    // upiData,
+    // onUPIIDChange,
+    isFormPending,
+    confirm
+  } = useBindBankAccountPage(props);
 
   return (
     <>
@@ -40,10 +67,10 @@ export const PakistanBankAccountTemplate = (props: IPakistanBankAccountTemplate)
         <Select
           className="mb"
           fixButtonWidth={"calc(100vw - 36px)"}
-          dataSource={props.bankDropList}
-          defaultIndex={props.bankAccountValue}
+          dataSource={bankDropList}
+          defaultIndex={bankAccountValue}
           // FIXME: to controlled component
-          onSelect={(index: number) => props.onIFSCDropSelect(index)}
+          onSelect={(index: number) => onIFSCDropSelect(index)}
           maxItemCount={5.5}
         />
 
@@ -52,10 +79,10 @@ export const PakistanBankAccountTemplate = (props: IPakistanBankAccountTemplate)
           className="mb"
           labelType={"none"}
           placeholder={t("Account Number", {ns: i18nBankBindPageKey.CommonKey}) as string}
-          value={props.bankcardNoData.data}
-          onChange={props.onAccountNumberChange}
-          onBlur={props.onAccountNumberBlur}
-          errorMessage={props.bankcardNoData.errorMessage}
+          value={bankcardNoData.data}
+          onChange={onAccountNumberChange}
+          onBlur={onAccountNumberBlur}
+          errorMessage={bankcardNoData.errorMessage}
         />
 
         <Label>{t("Confirm Account Number", {ns: i18nBankBindPageKey.CommonKey})}</Label>
@@ -63,10 +90,10 @@ export const PakistanBankAccountTemplate = (props: IPakistanBankAccountTemplate)
           className="mb"
           labelType={"none"}
           placeholder={t("Confirm Account Number", {ns: i18nBankBindPageKey.CommonKey}) as string}
-          value={props.confirmedBankcardNoData.data}
-          onChange={props.onConfirmAccountNumberChange}
-          onBlur={props.onConfirmAccountNumberBlur}
-          errorMessage={props.confirmedBankcardNoData.errorMessage}
+          value={confirmedBankcardNoData.data}
+          onChange={onConfirmAccountNumberChange}
+          onBlur={onConfirmAccountNumberBlur}
+          errorMessage={confirmedBankcardNoData.errorMessage}
         />
 
         <Warning>{t("Unchangeable after linked, please check before submission.", {ns: i18nBankBindPageKey.CommonKey })}</Warning>
@@ -75,7 +102,7 @@ export const PakistanBankAccountTemplate = (props: IPakistanBankAccountTemplate)
       <Button onClick={() => {
         // if(!props.isFormPending && props.confirm) {
         //   console.log("request")
-        props.confirm && props.confirm()
+        confirm && confirm()
         // } else {
         //   console.log("request2")
         // }
