@@ -24,6 +24,8 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
   // NOTE: Form
   const [isFormPending, setIsFormPending] = useState<boolean>(false);
 
+  const navigateToAPP = useCallback(() => window.location.href = "innerh5://127.0.0.1", []);
+
   const confirm = useCallback(() => {
     setIsFormPending(true);
 
@@ -70,7 +72,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
           enableClose: false,
           enableIcon: false,
           onConfirm: () => {
-            window.location.href = "innerh5://127.0.0.1";
+            navigateToAPP();
           },
         });
       })
@@ -79,6 +81,8 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
       });
 
   }, [
+    props.postBankBindSave,
+    props.postBankBindSaveToPK,
     props.ifscData && props.ifscData.data,
     props.bankcardNoData.data,
     props.upiData && props.upiData.data,

@@ -77,7 +77,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   const [isFormPending, setIsFormPending] = useState<boolean>(false);
 
   // NOTE: 點擊 Submit
-  const confirmMobileWalletCallback = () => {
+  const confirmMobileWalletCallback = useCallback(() => {
 
     setIsFormPending(true);
 
@@ -101,7 +101,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     })
       .unwrap()
       .then((data: any) => {
-        console.log("data:", data);
+        // console.log("data:", data);
         // Notice: bind account successfully
         Modal.alert({
           show: true,
@@ -120,7 +120,12 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
       .finally(() => {
         setIsFormPending(false);
       });
-  };
+  },[
+    mobileData.isValidation,
+    mobileData.data,
+    props.bindCardDropListData,
+    props.triggerPostBankBindSaveToPKMutation,
+  ]);
 
   return {
     // Wallet List
