@@ -1,6 +1,6 @@
 import i18next from "i18next";
 import {initReactI18next} from "react-i18next";
-import { i18nBankBindPageTranslationKey, i18nBankBindPageTranslations } from "../pages/BindBankAccountPage/i18n/i18nTranslations";
+import { i18nBankBindPageKey, i18nBankBindPageTranslations } from "../pages/BindBankAccountPage/i18n/i18nTranslations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -18,8 +18,8 @@ i18next
             "Confirm": "Confirm",
           },
         },
-        [i18nBankBindPageTranslationKey.BankBindPageKey]: [i18nBankBindPageTranslations[i18nBankBindPageTranslationKey.BankBindPageKey]],
-        [i18nBankBindPageTranslationKey.BankBindPageForIndiaKey]: [i18nBankBindPageTranslations[i18nBankBindPageTranslationKey.BankBindPageForIndiaKey]],
+        [i18nBankBindPageKey.CommonKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.CommonKey]],
+        [i18nBankBindPageKey.IndiaKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.IndiaKey]],
       },
     },
 

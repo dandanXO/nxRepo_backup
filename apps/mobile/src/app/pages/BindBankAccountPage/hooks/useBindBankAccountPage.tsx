@@ -8,10 +8,10 @@ import {
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
 import {BankVendor} from "../../../api/GetBindCardDropList";
-import {i18nBankBindPageTranslationKey} from "../i18n/i18nTranslations";
+import {i18nBankBindPageKey} from "../i18n/i18nTranslations";
 
 const ValidationInfo = {
-  min1: i18next.t("This field cannot be left blank", {ns: i18nBankBindPageTranslationKey.BankBindPageKey}),
+  min1: i18next.t("This field cannot be left blank", {ns: i18nBankBindPageKey.CommonKey}),
 };
 
 
@@ -50,7 +50,7 @@ export const useBindBankAccountPage = (
         const ifscScheme = z
             .string()
             .min(1, ValidationInfo.min1)
-            .length(11, t("IFSC must be 11 digits only.", {ns: i18nBankBindPageTranslationKey.BankBindPageKey}) as string);
+            .length(11, t("IFSC must be 11 digits only.", {ns: i18nBankBindPageKey.CommonKey}) as string);
         const result = ifscScheme.safeParse(ifscData.data);
         if (!result.success) {
             const firstError = result.error.format();
@@ -95,10 +95,10 @@ export const useBindBankAccountPage = (
         const bankCardNoScheme = z
             .string()
             .min(1, ValidationInfo.min1)
-            .min(9, t("Account number must be between from 9 to 18 digits only.", {ns: i18nBankBindPageTranslationKey.BankBindPageKey}) as string)
+            .min(9, t("Account number must be between from 9 to 18 digits only.", {ns: i18nBankBindPageKey.CommonKey}) as string)
             .max(
                 18,
-              t("Account number must be between from 9 to 18 digits only.", {ns: i18nBankBindPageTranslationKey.BankBindPageKey}) as string
+              t("Account number must be between from 9 to 18 digits only.", {ns: i18nBankBindPageKey.CommonKey}) as string
             );
         const result = bankCardNoScheme.safeParse(bankcardNoData.data);
         if (!result.success) {
@@ -150,7 +150,7 @@ export const useBindBankAccountPage = (
             .refine(
                 (confirmedBankcardNo) => confirmedBankcardNo === bankcardNo,
                 {
-                    message: t("Please make sure your account number match.", {ns: i18nBankBindPageTranslationKey.BankBindPageKey}) as string
+                    message: t("Please make sure your account number match.", {ns: i18nBankBindPageKey.CommonKey}) as string
                   ,
                 }
             );

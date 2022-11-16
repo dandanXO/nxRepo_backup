@@ -1,9 +1,9 @@
-export enum i18nBankBindPageTranslationKey {
-  BankBindPageKey = "bank-bind-page",
-  BankBindPageForIndiaKey= "bank-bind-india-page",
+export enum i18nBankBindPageKey {
+  CommonKey = "bank-bind-page",
+  IndiaKey= "bank-bind-india-page",
 }
 export const i18nBankBindPageTranslations = {
-  [i18nBankBindPageTranslationKey.BankBindPageKey]: {
+  [i18nBankBindPageKey.CommonKey]: {
     // NOTE: Mobile Wallet
     "Choose the method to receive the money": "Choose the method to receive the money",
     "Mobile wallet": "Mobile wallet",
@@ -24,7 +24,7 @@ export const i18nBankBindPageTranslations = {
     "Please make sure your account number match.": "Please make sure your account number match.",
     "Unchangeable after linked, please check before submission.": "Unchangeable after linked, please check before submission.",
   },
-  [i18nBankBindPageTranslationKey.BankBindPageForIndiaKey]: {
+  [i18nBankBindPageKey.IndiaKey]: {
     // NOTE: Bank Account - India
     "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
     "UPI ID": "UPI ID",
