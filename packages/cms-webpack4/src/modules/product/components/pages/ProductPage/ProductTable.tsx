@@ -36,21 +36,20 @@ const ProductTable = (props: ProductTableProps) => {
           ],
             width: 80,
         },
-        { key: 'productName', title: '產品名稱', dataIndex: 'productName', initialValue: "" },
+        { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" },
         { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
         { key: 'loanTerm', title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
         { key: 'extensionRate', title: '展期利率(%)', dataIndex: 'extensionRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
-        { key: 'overdueRate', title: '逾期費率(%)', dataIndex: 'overdueRate', hideInSearch: true , render: (text) => Number(Number(text) * 100).toFixed(1) },
-        { key: 'weight', title: '權重', dataIndex: 'weight', hideInSearch: true },
+        { key: 'overdueRate', title: '逾期费率(%)', dataIndex: 'overdueRate', hideInSearch: true , render: (text) => Number(Number(text) * 100).toFixed(1) },
+        { key: 'weight', title: '权重', dataIndex: 'weight', hideInSearch: true },
         {
-            key: 'enabled',
-            title: '狀態', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', valueEnum: {
+            key: 'enabled',title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', valueEnum: {
             all: { text: '全部', status: 'Default' },
             true: { text: '上架', status: 'Success' },
             false: { text: '下架', status: 'Default' },
           }
         },
-        { key: 'updateTime', title: '修改時間', dataIndex: 'updateTime', hideInSearch: true, valueType: 'dateTime' },
+        { key: 'updateTime', title: '修改时间', dataIndex: 'updateTime', hideInSearch: true, valueType: 'dateTime' },
       ];
       return columns;
 
