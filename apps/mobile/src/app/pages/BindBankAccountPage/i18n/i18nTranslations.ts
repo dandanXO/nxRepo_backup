@@ -17,6 +17,13 @@ export const i18nBankBindPageTranslations = {
     "Please make sure your account number match.": "Please make sure your account number match.",
     "Unchangeable after linked, please check before submission.": "Unchangeable after linked, please check before submission.",
   },
+  [i18nBankBindPageKey.IndiaKey]: {
+    // NOTE: Bank Account - India
+    "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
+    "UPI ID": "UPI ID",
+    "IFSC Code": "IFSC Code",
+    "IFSC must be 11 digits only.": "IFSC must be 11 digits only.",
+  },
   [i18nBankBindPageKey.PakistanKey]: {
     // NOTE: Bank Account - Pakistan
     // NOTE: Mobile Wallet
@@ -29,11 +36,4 @@ export const i18nBankBindPageTranslations = {
     "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
     "Please select your bank name": "Please select your bank name",
   },
-  [i18nBankBindPageKey.IndiaKey]: {
-    // NOTE: Bank Account - India
-    "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
-    "UPI ID": "UPI ID",
-    "IFSC Code": "IFSC Code",
-    "IFSC must be 11 digits only.": "IFSC must be 11 digits only.",
-  }
 }
