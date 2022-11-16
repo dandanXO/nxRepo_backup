@@ -1,10 +1,7 @@
-import { Page } from "@frontend/mobile/shared/ui";
 import React from "react";
 
-import Advertisement from "../../components/Advertisement";
-import PureLoanDetails, {
-    PureLoanDetailsPageProps,
-} from "../../components/PureLoanDetails";
+import Advertisement from "./Advertisement";
+import PureLoanDetails, {PureLoanDetailsPageProps,} from "../../components/PureLoanDetails";
 import {CustomPage} from "../BindBankAccountPage/components/CustomPage";
 
 type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps & {

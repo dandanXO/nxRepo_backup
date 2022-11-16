@@ -12,8 +12,7 @@ const LoanDetailsPage = () => {
         setPayType,
     } = useLoanDetailStory();
 
-  const [postLoanSubmitOrder, { isLoading }] =
-    usePostLoanSubmitOrderMutation();
+  const [postLoanSubmitOrder, { isLoading }] = usePostLoanSubmitOrderMutation();
 
     return (
         <PureLoanDetailsAdvertisementPage

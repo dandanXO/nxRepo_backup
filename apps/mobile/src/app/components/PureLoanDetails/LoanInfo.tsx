@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { GetLoanDetailResponse } from "../api/getLoanDetail";
+import { GetLoanDetailResponse } from "../../api/getLoanDetail";
 import {
     Tag,
     Card,
@@ -9,7 +9,7 @@ import {
     LoanBrand,
     AmountPaidIcon,
 } from "@frontend/mobile/shared/ui";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 
 const LoanInfoStyled = styled.div`
     text-align: center;

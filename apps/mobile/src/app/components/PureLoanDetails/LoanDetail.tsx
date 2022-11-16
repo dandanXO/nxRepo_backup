@@ -3,9 +3,9 @@ import React from "react";
 import {
     GetLoanDetailChargeFeeDetail,
     GetLoanDetailResponse,
-} from "../api/getLoanDetail";
+} from "../../api/getLoanDetail";
 import { ListItem, Button, Accordion, Card } from "@frontend/mobile/shared/ui";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 const LoanDetailStyled = styled.div`
     text-align: center;
 
