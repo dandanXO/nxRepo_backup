@@ -5,7 +5,7 @@ import {IPakistanPageLayoutTypeProps} from "../../../types/IGeneralPageLayoutTyp
 import {Label} from "../../../components/Label";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
-import {BankVendor, WalletVendor} from "../../../../../api/GetBindCardDropList";
+import {i18nBankBindPageTranslationKey} from "../../i18nTranslations";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -25,17 +25,17 @@ export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
   return (
     <>
       <Form>
-        <Label>{t("Cardholder Name", {ns: "bank-bind"})}</Label>
+        <Label>{t("Cardholder Name", {ns: i18nBankBindPageTranslationKey.BankBindPageKey})}</Label>
 
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={t("Cardholder Name", {ns: "bank-bind"}) as string}
+          placeholder={t("Cardholder Name", {ns: i18nBankBindPageTranslationKey.BankBindPageKey}) as string}
           value={props.cardholderName}
           disabled
         />
 
-        <Label>{t("IFSC Code", {ns: "bank-bind"})}</Label>
+        <Label>{t("IFSC Code", {ns: i18nBankBindPageTranslationKey.BankBindPageKey})}</Label>
         <Select
           className="mb"
           fixButtonWidth={"calc(100vw - 36px)"}
@@ -46,22 +46,22 @@ export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
           maxItemCount={5.5}
         />
 
-        <Label>{t("Account Number", {ns: "bank-bind"})}</Label>
+        <Label>{t("Account Number", {ns: i18nBankBindPageTranslationKey.BankBindPageKey})}</Label>
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={t("Account Number", {ns: "bank-bind"}) as string}
+          placeholder={t("Account Number", {ns: i18nBankBindPageTranslationKey.BankBindPageKey}) as string}
           value={props.bankcardNoData.data}
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
         />
 
-        <Label>{t("Confirm Account Number", {ns: "bank-bind"})}</Label>
+        <Label>{t("Confirm Account Number", {ns: i18nBankBindPageTranslationKey.BankBindPageKey})}</Label>
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={t("Confirm Account Number", {ns: "bank-bind"}) as string}
+          placeholder={t("Confirm Account Number", {ns: i18nBankBindPageTranslationKey.BankBindPageKey}) as string}
           value={props.confirmedBankcardNoData.data}
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
@@ -77,7 +77,7 @@ export const BankAccountTemplate2 = (props: IPakistanPageLayoutTypeProps) => {
         {/*  onChange={props.onUPIIDChange}*/}
         {/*/>*/}
 
-        <Warning>{t("Unchangeable after linked, please check before submission.", {ns: "bank-bind"})}</Warning>
+        <Warning>{t("Unchangeable after linked, please check before submission.", {ns: i18nBankBindPageTranslationKey.BankBindPageKey })}</Warning>
       </Form>
 
       <Button onClick={() => {

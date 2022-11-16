@@ -6,6 +6,7 @@ import {z} from "zod";
 import {WalletVendor} from "../../../../../api/GetBindCardDropList";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
+import {i18nBankBindPageTranslationKey} from "../../i18nTranslations";
 
 interface IMobileWalletFormProps {
   triggerPostBankBindSaveToPKMutation: any;
@@ -50,7 +51,7 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
 
   // NOTE: 電子錢包帳戶 - 驗證
   const validateMobileWalletAccount = useCallback(() => {
-    const message = t("Account number should be 11 digits starting with 0.", {ns: "bank-bind"});
+    const message = t("Account number should be 11 digits starting with 0.", {ns: i18nBankBindPageTranslationKey.BankBindPageKey});
     const scheme = z
       .string()
       .regex(/^0/, message)
@@ -124,7 +125,7 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
 
   return (
     <Form>
-      <Label>{t("Please select the of your mobile wallet", { ns: "bank-bind" })}</Label>
+      <Label>{t("Please select the of your mobile wallet", { ns: i18nBankBindPageTranslationKey.BankBindPageKey })}</Label>
       <Select
         className="mb"
         fixButtonWidth={"calc(100vw - 36px)"}
@@ -136,19 +137,19 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
         }}
       />
 
-      <Label>{t("Your mobile wallet account", { ns: "bank-bind" })}</Label>
+      <Label>{t("Your mobile wallet account", { ns: i18nBankBindPageTranslationKey.BankBindPageKey })}</Label>
       <Input
         className="mb"
         labelType={"left"}
         label={"+92"}
-        placeholder={t("Wallet Account Number", { ns: "bank-bind" }) as string}
+        placeholder={t("Wallet Account Number", { ns: i18nBankBindPageTranslationKey.BankBindPageKey }) as string}
         value={mobileData.data}
         onChange={onMobileDataChange}
         onBlur={validateMobileWalletAccount}
         errorMessage={mobileData.errorMessage}
       />
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
-      <Button onClick={() => !isFormPending && confirmMobileWalletCallback()}>{t("Submit", {ns: "bank-bind"})}</Button>
+      <Button onClick={() => !isFormPending && confirmMobileWalletCallback()}>{t("Submit", {ns: i18nBankBindPageTranslationKey.BankBindPageKey})}</Button>
     </Form>
   );
 }

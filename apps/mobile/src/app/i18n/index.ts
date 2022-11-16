@@ -1,6 +1,6 @@
 import i18next from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
-
+import {initReactI18next} from "react-i18next";
+import { i18nBankBindPageTranslationKey, i18nBankBindPageTranslations } from "../pages/BindBankAccountPage/i18n/i18nTranslations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -18,32 +18,8 @@ i18next
             "Confirm": "Confirm",
           },
         },
-        "bank-bind": {
-          // Mobile Wallet
-          "Choose the method to receive the money": "Choose the method to receive the money",
-          "Mobile wallet": "Mobile wallet",
-          "Bank account": "Bank account",
-          "Please select the of your mobile wallet": "Please select the of your mobile wallet",
-          "Your mobile wallet account": "Your mobile wallet account",
-          "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
-          "Wallet Account Number": "Wallet Account Number",
-          "Submit": "Submit",
-          // Bank Account
-          "Cardholder Name": "Cardholder Name",
-          "IFSC Code": "IFSC Code",
-          "IFSC must be 11 digits only.": "IFSC must be 11 digits only.",
-          "Account Number": "Account Number",
-          "Account number must be between from 9 to 18 digits only.": "Account number must be between from 9 to 18 digits only.",
-          "Confirm Account Number": "Confirm Account Number",
-          "Please make sure your account number match.": "Please make sure your account number match.",
-          "Unchangeable after linked, please check before submission.": "Unchangeable after linked, please check before submission.",
-        },
-        "bank-bind-india": {
-          // Bank Account - India
-          "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
-          "UPI ID": "UPI ID",
-        }
-
+        [i18nBankBindPageTranslationKey.BankBindPageKey]: [i18nBankBindPageTranslations[i18nBankBindPageTranslationKey.BankBindPageKey]],
+        [i18nBankBindPageTranslationKey.BankBindPageForIndiaKey]: [i18nBankBindPageTranslations[i18nBankBindPageTranslationKey.BankBindPageForIndiaKey]],
       },
     },
 
