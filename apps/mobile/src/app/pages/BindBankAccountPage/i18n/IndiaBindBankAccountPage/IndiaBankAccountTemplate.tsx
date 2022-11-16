@@ -1,10 +1,10 @@
 import {Button, Input} from "@frontend/mobile/shared/ui";
 import React from "react";
 import {IIndiaBankAccountTemplate} from "../types/IBankAccountTemplate";
-import {Form} from "../../../components/Form";
-import { Paragraph } from "../../../components/Paragraph";
+import {Form} from "../../components/Form";
+import { Paragraph } from "../../components/Paragraph";
 import {useTranslation} from "react-i18next";
-import {i18nBankBindPageKey} from "../../i18nTranslations";
+import {i18nBankBindPageKey} from "../i18nTranslations";
 
 export const IndiaBankAccountTemplate = (props: IIndiaBankAccountTemplate) => {
   const {t} = useTranslation();
@@ -21,7 +21,7 @@ export const IndiaBankAccountTemplate = (props: IIndiaBankAccountTemplate) => {
         </Paragraph>
         <Input
           className="mb"
-          label={t("IFSC Code", {ns: i18nBankBindPageKey.CommonKey}) as string}
+          label={t("IFSC Code", {ns: i18nBankBindPageKey.IndiaKey}) as string}
           value={props.ifscData.data}
           onChange={props.onIFSCChange}
           onBlur={props.onIFSCBlur}

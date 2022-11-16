@@ -4,7 +4,7 @@ import {Modal} from "@frontend/mobile/shared/ui";
 import {z} from "zod";
 import {
   IUseBindBankAccountPage
-} from "../I18nBindBankAccountPage/types/IUseBindBankAccountPage";
+} from "../types/IUseBindBankAccountPage";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
 import {BankVendor} from "../../../../api/GetBindCardDropList";

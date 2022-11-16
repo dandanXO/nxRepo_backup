@@ -1,11 +1,11 @@
-import {Form} from "../../../components/Form";
+import {Form} from "../../components/Form";
 import {Button, Input, Select} from "@frontend/mobile/shared/ui";
 import React, {useEffect, useState} from "react";
 import {IPakistanBankAccountTemplate} from "../types/IBankAccountTemplate";
-import {Label} from "../../../components/Label";
+import {Label} from "../../components/Label";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
-import {i18nBankBindPageKey} from "../../i18nTranslations";
+import {i18nBankBindPageKey} from "../i18nTranslations";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -36,7 +36,7 @@ export const PakistanBankAccountTemplate = (props: IPakistanBankAccountTemplate)
           disabled
         />
 
-        <Label>{t("IFSC Code", {ns: i18nBankBindPageKey.CommonKey})}</Label>
+        <Label>{t("Please select your bank name", {ns: i18nBankBindPageKey.PakistanKey})}</Label>
         <Select
           className="mb"
           fixButtonWidth={"calc(100vw - 36px)"}
@@ -68,15 +68,6 @@ export const PakistanBankAccountTemplate = (props: IPakistanBankAccountTemplate)
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
-
-        {/*<Label>UPI ID</Label>*/}
-        {/*<Input*/}
-        {/*  className="mb"*/}
-        {/*  labelType={"none"}*/}
-        {/*  placeholder="UPI ID"*/}
-        {/*  value={props.upiData.data}*/}
-        {/*  onChange={props.onUPIIDChange}*/}
-        {/*/>*/}
 
         <Warning>{t("Unchangeable after linked, please check before submission.", {ns: i18nBankBindPageKey.CommonKey })}</Warning>
       </Form>

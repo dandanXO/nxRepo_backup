@@ -3,8 +3,8 @@ import React from "react";
 import {
   IUseBindBankAccountPage
 } from "../types/IUseBindBankAccountPage";
-import {CustomPage} from "../../../components/CustomPage";
-import {useBindBankAccountPage} from "../../hooks/useBindBankAccountPage";
+import {CustomPage} from "../../components/CustomPage";
+import {useBindBankAccountPage} from "../hooks/useBindBankAccountPage";
 import {IndiaBankAccountTemplate} from "./IndiaBankAccountTemplate";
 
 export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {

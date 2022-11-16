@@ -2,7 +2,7 @@ import React from "react";
 import {
   IUseBindBankAccountPage,
 } from "../types/IUseBindBankAccountPage";
-import {useBindBankAccountPage} from "../../hooks/useBindBankAccountPage";
+import {useBindBankAccountPage} from "../hooks/useBindBankAccountPage";
 import {PakistanBankAccountTemplate} from "./PakistanBankAccountTemplate";
 
 

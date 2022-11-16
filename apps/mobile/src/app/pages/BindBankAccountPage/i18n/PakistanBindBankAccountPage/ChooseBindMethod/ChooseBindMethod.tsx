@@ -4,9 +4,9 @@ import BankAccountSVG from "./ic_bank_account_icon.svg";
 import MobileWalletSVG from "./ic_mobile_wallet_icon.svg";
 import unselectedSVG from "./ic_check_disable_icon.svg";
 import selectedSVG from "./ic_check_available_icon.svg";
-import {Label} from "../../../../components/Label";
+import {Label} from "../../../components/Label";
 import {useTranslation} from "react-i18next";
-import {i18nBankBindPageKey} from "../../../i18nTranslations";
+import {i18nBankBindPageKey} from "../../i18nTranslations";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -56,12 +56,12 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
   const { t } = useTranslation();
   return (
     <Container>
-      <Label>{t("Choose the method to receive the money", { ns: i18nBankBindPageKey.CommonKey })}</Label>
+      <Label>{t("Choose the method to receive the money", { ns: i18nBankBindPageKey.PakistanKey })}</Label>
       <OptionContainer>
         <Option onClick={() => props.changeOptionValueCallback(0)}>
           <OptionIcon enable={props.value === 0}/>
           <img src={MobileWalletSVG}/>
-          <Label>{t("Mobile wallet", { ns: i18nBankBindPageKey.CommonKey })}</Label>
+          <Label>{t("Mobile wallet", { ns: i18nBankBindPageKey.PakistanKey })}</Label>
         </Option>
         <Option onClick={() => {
           if(!props.disable) props.changeOptionValueCallback(1)
@@ -70,7 +70,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
         }}>
           <OptionIcon enable={props.value === 1}/>
           <img src={BankAccountSVG}/>
-          <Label>{t("Bank account", { ns: i18nBankBindPageKey.CommonKey })}</Label>
+          <Label>{t("Bank account", { ns: i18nBankBindPageKey.PakistanKey })}</Label>
         </Option>
       </OptionContainer>
     </Container>

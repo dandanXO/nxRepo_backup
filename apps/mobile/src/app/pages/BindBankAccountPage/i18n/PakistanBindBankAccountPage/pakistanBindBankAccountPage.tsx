@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {
   IUseBindBankAccountPage,
 } from "../types/IUseBindBankAccountPage";
-import {CustomPage} from "../../../components/CustomPage";
+import {CustomPage} from "../../components/CustomPage";
 import {ChooseBindMethod} from "./ChooseBindMethod/ChooseBindMethod";
 import {MobileWalletForm} from "./MobileWalletForm";
 import {BankForm} from "./BankForm";

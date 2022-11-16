@@ -1,12 +1,12 @@
-import {Form} from "../../../components/Form";
+import {Form} from "../../components/Form";
 import {Button, Input, InputValue, Modal, Select} from "@frontend/mobile/shared/ui";
 import React, {useCallback, useEffect, useState} from "react";
-import {Label} from "../../../components/Label";
+import {Label} from "../../components/Label";
 import {z} from "zod";
-import {WalletVendor} from "../../../../../api/GetBindCardDropList";
+import {WalletVendor} from "../../../../api/GetBindCardDropList";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
-import {i18nBankBindPageKey} from "../../i18nTranslations";
+import {i18nBankBindPageKey} from "../i18nTranslations";
 
 interface IMobileWalletFormProps {
   triggerPostBankBindSaveToPKMutation: any;
@@ -51,7 +51,7 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
 
   // NOTE: 電子錢包帳戶 - 驗證
   const validateMobileWalletAccount = useCallback(() => {
-    const message = t("Account number should be 11 digits starting with 0.", {ns: i18nBankBindPageKey.CommonKey});
+    const message = t("Account number should be 11 digits starting with 0.", {ns: i18nBankBindPageKey.PakistanKey});
     const scheme = z
       .string()
       .regex(/^0/, message)
@@ -125,7 +125,7 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
 
   return (
     <Form>
-      <Label>{t("Please select the of your mobile wallet", { ns: i18nBankBindPageKey.CommonKey })}</Label>
+      <Label>{t("Please select the of your mobile wallet", { ns: i18nBankBindPageKey.PakistanKey })}</Label>
       <Select
         className="mb"
         fixButtonWidth={"calc(100vw - 36px)"}
@@ -137,12 +137,12 @@ export const MobileWalletForm = (props: IMobileWalletFormProps) => {
         }}
       />
 
-      <Label>{t("Your mobile wallet account", { ns: i18nBankBindPageKey.CommonKey })}</Label>
+      <Label>{t("Your mobile wallet account", { ns: i18nBankBindPageKey.PakistanKey })}</Label>
       <Input
         className="mb"
         labelType={"left"}
         label={"+92"}
-        placeholder={t("Wallet Account Number", { ns: i18nBankBindPageKey.CommonKey }) as string}
+        placeholder={t("Wallet Account Number", { ns: i18nBankBindPageKey.PakistanKey }) as string}
         value={mobileData.data}
         onChange={onMobileDataChange}
         onBlur={validateMobileWalletAccount}
