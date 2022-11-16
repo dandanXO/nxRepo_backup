@@ -250,16 +250,8 @@ export const RiskSettingPage = () => {
         const prevField = Number(loan[prevIndex][field]);
         const nextField = Number(loan[nextIndex][field]);
 
-        let comparePrev = false;
-        let compareNext = false;
-
-        if (field === 'loanCount' || field === 'balance') {
-            comparePrev = isFirstField ? loanCount < nextField : loanCount > prevField;
-            compareNext = isLastField ? loanCount > nextField : loanCount < nextField;
-        } else {
-            comparePrev = isFirstField ? loanCount <= nextField : loanCount >= prevField;
-            compareNext = isLastField ? loanCount >= nextField : loanCount <= nextField;
-        }
+        let comparePrev = isFirstField ? loanCount < nextField : loanCount > prevField;
+        let compareNext = isLastField ? loanCount > nextField : loanCount < nextField;
 
         return comparePrev || compareNext;
 
