@@ -89,6 +89,7 @@ const BannerWithCard = (props: BannerWithCardProps) => {
         </BannerWithCardStyled>
     );
 };
+
 export interface AdvertisementProps {
     recommendProducts: [];
     postLoanSubmitOrder: (obj: any) => any;

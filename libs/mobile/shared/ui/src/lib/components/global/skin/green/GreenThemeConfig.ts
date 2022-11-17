@@ -31,5 +31,8 @@ export const GreenThemeConfig: IThemeConfig = {
   },
   radio: {
     color: Colors.green,
+  },
+  card: {
+    color: Colors.orange,
   }
 }

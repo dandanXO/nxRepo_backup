@@ -31,6 +31,9 @@ const DefaultThemeConfig: IThemeConfig = {
   },
   radio: {
     color: Colors.orange,
+  },
+  card: {
+    color: Colors.orange,
   }
 }
 export default DefaultThemeConfig;

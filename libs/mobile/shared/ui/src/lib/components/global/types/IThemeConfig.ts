@@ -28,5 +28,8 @@ export interface IThemeConfig {
   },
   radio: {
     color: Colors;
+  },
+  card: {
+    color: Colors;
   }
 }

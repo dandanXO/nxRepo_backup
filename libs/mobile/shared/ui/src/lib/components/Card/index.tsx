@@ -63,7 +63,6 @@ const Card = (props: CardProps) => {
           <span className={'hotTagText'}>Hot</span>
         </div>
       )}
-
       {children}
     </CardStyled>
   );

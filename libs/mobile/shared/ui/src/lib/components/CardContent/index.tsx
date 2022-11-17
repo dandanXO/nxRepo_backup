@@ -18,9 +18,7 @@ const CardContentStyled = styled.div`
 `;
 
 const CardHeaderStyled = styled(FlexRowItem)`
-  .text {
-    font-size: ${({ theme }) => theme.fontSize[18]};
-  }
+
 `;
 
 const CardFooterStyled = styled(FlexRowItem)`
@@ -34,9 +32,12 @@ const CardFooterStyled = styled(FlexRowItem)`
   }
   .linkButton {
     font-size: ${({ theme }) => theme.fontSize[12]};
+    width: auto;
+    color: ${({ theme }) => theme.color.gray500 };
   }
   .applyButton {
     background-color: ${({ theme }) => theme.color.black};
+    width: auto;
   }
 `;
 
@@ -61,11 +62,11 @@ const CardContent = (props: CardContentProps) => {
   return (
     <CardContentStyled>
       <CardHeaderStyled>
-        <LoanBrand iconUrl={icon} productName={productName} />
-        <div className={'text'}>{balance}</div>
+        <LoanBrand iconUrl={icon} productName={productName} balance={balance}/>
       </CardHeaderStyled>
       {contentItems}
       <Divider styleType="narrow" />
+
       <CardFooterStyled>
         <Button
           className={'linkButton'}

@@ -41,24 +41,29 @@ const LoanInfoStyled = styled.div`
     .relatedRepayment {
         width: 100%;
         text-align: right;
+        margin-bottom: 10px;
         button {
+            text-align: right;
             color: ${({ theme }) => theme.color.blue};
             font-size: ${({ theme }) => theme.fontSize[14]};
-        }
-    }
-    .uploadButton {
-        padding: 0px 12px;
-        button {
-            width: 100%;
-            font-weight: bold;
+            text-decoration: underline;
         }
     }
 
-    .noticeText {
-        color: ${({ theme }) => theme.color.gray500};
-        font-size: ${({ theme }) => theme.fontSize[12]};
-        padding: 18px 12px;
+    .payButtons {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 14px;
+      width: 100%;
+      .extendButton {
+        flex: 1 3;
+        margin-right: 12px;
+      }
+      .repayButton {
+        flex: 3 1;
+      }
     }
+
 `;
 
 type LoanInfoProps = Pick<
@@ -70,10 +75,15 @@ type LoanInfoProps = Pick<
     | "paidAmount"
     | "balance"
     | "extended"
+    | "orderNo"
+    | "extendable"
 > & {
     setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowAmountPaidModal: React.Dispatch<React.SetStateAction<boolean>>;
     navigateToUploadPaymentReceiptPage: () => void;
+} & {
+  setShowExtendModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowRepaymentModal?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const LoanInfo = (props: LoanInfoProps) => {
@@ -87,6 +97,10 @@ const LoanInfo = (props: LoanInfoProps) => {
         extended,
         setShowExtensionModal,
         setShowAmountPaidModal,
+        orderNo,
+        setShowExtendModal,
+        setShowRepaymentModal,
+        extendable,
     } = props;
 
     return (
@@ -96,8 +110,11 @@ const LoanInfo = (props: LoanInfoProps) => {
                 productName={productName ? productName : ""}
                 sizeType={"small"}
             />
+
             <div className="totalTitle">Total Due</div>
+
             <div className="totalText">{environment.currency} {totalDueAmount}</div>
+
             {status === "OVERDUE" && (
                 <div className={"errorText"}>
                     {`Your payment is now N days overdue.
@@ -106,9 +123,14 @@ const LoanInfo = (props: LoanInfoProps) => {
                   without affecting your loan credit.`}
                 </div>
             )}
+
             <Card isHot={false}>
                 <div className={"loanInfo-Card-Title"}>General</div>
                 <div className={"loanInfo-Card-list"}>
+                    <ListItem
+                      title={"No."}
+                      text={orderNo || ""}
+                    />
                     <ListItem
                         title={"State"}
                         text={
@@ -130,10 +152,14 @@ const LoanInfo = (props: LoanInfoProps) => {
                         }
                         text={`${environment.currency} ${paidAmount}`}
                     />
+
                     {status !== "PAY_OFF" && (
                         <ListItem title={"Balance"} text={`${environment.currency} ${balance}`} />
                     )}
+
+
                 </div>
+
                 <React.Fragment>
                     {extended && (
                         <div className={"relatedRepayment"}>
@@ -146,21 +172,30 @@ const LoanInfo = (props: LoanInfoProps) => {
                         </div>
                     )}
                 </React.Fragment>
-            </Card>
-            {(status === "UNPAID" || status === "OVERDUE") && (
-                <div>
-                    <div
-                        className={"uploadButton"}
-                        onClick={props.navigateToUploadPaymentReceiptPage}
+
+              <div className={"payButtons"}>
+                {
+                  extendable !== undefined && extendable && (
+                    <Button
+                      onClick={() => setShowExtendModal && setShowExtendModal(true)}
+                      className={"extendButton"}
+                      styleType="secondary"
                     >
-                        <Button>Upload Receipt</Button>
-                    </div>
-                    <div className={"noticeText"}>
-                        After completing the repayment, take a screenshot and
-                        uploadyour repayment receipt here.
-                    </div>
-                </div>
-            )}
+                      Extend
+                    </Button>
+                  )
+                }
+                <Button
+                  onClick={() => setShowRepaymentModal && setShowRepaymentModal(true)}
+                  className={"repayButton"}
+                  styleType="primary"
+                >
+                  Repay
+                </Button>
+              </div>
+
+            </Card>
+
         </LoanInfoStyled>
     );
 };

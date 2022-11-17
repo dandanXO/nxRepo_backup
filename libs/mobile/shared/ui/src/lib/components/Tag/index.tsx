@@ -3,6 +3,7 @@ import DefaultThemeConfig from '../global/skin/default/DefaultThemeConfig';
 
 const { color } = DefaultThemeConfig;
 
+// NOTICE: Need to be refactor 不能牽扯到業務邏輯
 const tagStatusProps: {
   [key: string]: object;
 } = {

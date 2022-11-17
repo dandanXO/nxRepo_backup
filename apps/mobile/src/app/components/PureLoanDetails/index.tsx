@@ -7,7 +7,25 @@ import RepaymentNoticeModal from "../../pages/LoanDetailsPage/modal/RepaymentNot
 import LoanInfo from "./LoanInfo";
 import LoanDetail from "./LoanDetail";
 import {CustomPage} from "../../pages/BindBankAccountPage/components/CustomPage";
+import {Attention} from "./Attention";
+import {Button} from "@frontend/mobile/shared/ui";
+import styled from "styled-components";
 
+const StyledUploadReceiptSection = styled.div`
+  .uploadButton {
+    padding: 0px 12px;
+    button {
+      width: 100%;
+      font-weight: bold;
+    }
+  }
+
+  .noticeText {
+    color: ${({ theme }) => theme.color.gray500};
+    font-size: ${({ theme }) => theme.fontSize[12]};
+    padding: 18px 12px;
+  }
+`
 export interface PureLoanDetailsPageProps {
     currentData?: any;
     navigateToUploadPaymentReceiptPage: any;
@@ -69,6 +87,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               handlePostRepayCreate={props.handlePostRepayCreate}
             />
           )}
+
           <LoanInfo
             {...props.currentData}
             setShowExtensionModal={setShowExtensionModal}
@@ -76,12 +95,33 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
             navigateToUploadPaymentReceiptPage={
               props.navigateToUploadPaymentReceiptPage
             }
-          />
-          <LoanDetail
-            {...props.currentData}
             setShowExtendModal={setShowExtendModal}
             setShowRepaymentModal={setShowRepaymentModal}
           />
+
+          <LoanDetail
+            {...props.currentData}
+          />
+
+          <Attention/>
+
+          {(props.currentData?.status === "UNPAID" || props.currentData?.status === "OVERDUE") && (
+            <StyledUploadReceiptSection>
+              <div
+                className={"uploadButton"}
+                onClick={props.navigateToUploadPaymentReceiptPage}
+              >
+                <Button>Upload Receipt</Button>
+              </div>
+
+              <div className={"noticeText"}>
+                After completing the repayment, take a screenshot and
+                uploadyour repayment receipt here.
+              </div>
+
+            </StyledUploadReceiptSection>
+          )}
+
         </React.Fragment>
       </CustomPage>
     );

@@ -11,7 +11,6 @@ type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps & {
 export const PureLoanDetailsAdvertisementPage = (
     props: PureLoanDetailsAdvertisementPage
 ) => {
-
     return (
         <CustomPage>
             <PureLoanDetails
