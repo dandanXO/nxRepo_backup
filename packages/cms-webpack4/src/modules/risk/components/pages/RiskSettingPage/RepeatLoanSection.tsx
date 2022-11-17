@@ -73,7 +73,7 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
                         <div>▪ 请按级数大小，由大至小填写数值。</div>
                         <div>▪ 所有数值必须为≥0的整数。</div>
                         <div>▪ 范围类型的各级距数值需连贯且大小值数值不可包含于相邻级距中。</div>
-                        <div>▪ 最高可放款笔数和最高可借总额字段，下一级的值应≤上一级的值。</div>
+                        <div>▪ 除超过逾期天数之外，所有字段数值应≤上一级。</div>
                     </div>
                 }
                 help={(props.customAntFormFieldError?.[`repeatLoan_error`] as any)?.help}

@@ -2,6 +2,7 @@ import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space } from
 import CustomLabel from "./CustomLabel";
 import { NumberValidator } from "../../../../shared/utils/validation/validator";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
+import { InfoCircleOutlined } from "@ant-design/icons";
 interface FormProps {
     isEdit: boolean;
     customAntFormFieldError: CustomAntFormFieldError;
@@ -17,7 +18,13 @@ function FirstAndRepeatLoanFormByValue(props: FormProps) {
                             <CustomLabel style={{ margin: '0 8px 0 0', width: 76 }}>风控标签</CustomLabel>
                             <CustomLabel style={{ width: 120 }}>风控商等级</CustomLabel>
                             <CustomLabel style={{ width: 120 }}>最高可放款笔数</CustomLabel>
-                            <CustomLabel style={{ width: 120 }}>最高可借总额</CustomLabel>
+                            <CustomLabel style={{ width: 120 }}>
+                                    <Space>最高可借总额
+                                        <Tooltip title="每当前逾期一笔，风控等级降低一级">
+                                            <InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} />
+                                        </Tooltip>
+                                    </Space>
+                                </CustomLabel>
                         </div>
                     )}
                     <Input.Group compact>

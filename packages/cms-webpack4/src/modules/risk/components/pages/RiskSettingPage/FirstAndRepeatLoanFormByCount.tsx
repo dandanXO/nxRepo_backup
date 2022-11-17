@@ -15,7 +15,7 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
             return (
                 <Form.Item key={index}>
                     {index === 0 && (
-                        <div>
+                        <div>               
                             <CustomLabel style={{ width: 76 }}>风控标签</CustomLabel>
                             <CustomLabel style={{ width: 130 }}>
                                 <Space>还款笔数
@@ -25,7 +25,13 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                                 </Space>
                             </CustomLabel>
                             <CustomLabel style={{ width: 120 }}>最高可放款笔数</CustomLabel>
-                            <CustomLabel style={{ width: 110 }}>最高可借总额</CustomLabel>
+                            <CustomLabel style={{ width: 110 }}>
+                                <Space>最高可借总额
+                                    <Tooltip title="每当前逾期一笔，风控等级降低一级">
+                                        <InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} />
+                                    </Tooltip>
+                                </Space>
+                            </CustomLabel>
                         </div>
                     )}
                     <Input.Group compact>
