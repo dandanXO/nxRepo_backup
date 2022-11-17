@@ -24,7 +24,13 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                                     </Tooltip>
                                 </Space>
                             </CustomLabel>
-                            <CustomLabel style={{ width: 120 }}>最高可放款笔数</CustomLabel>
+                            <CustomLabel style={{ width: 120 }}>
+                                <Space>最高可放款笔数
+                                    <Tooltip title="每当前逾期一笔，风控等级降低一级">
+                                        <InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} />
+                                    </Tooltip>
+                                </Space>
+                            </CustomLabel>
                             <CustomLabel style={{ width: 110 }}>
                                 <Space>最高可借总额
                                     <Tooltip title="每当前逾期一笔，风控等级降低一级">
