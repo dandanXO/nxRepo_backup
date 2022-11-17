@@ -69,10 +69,8 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                 <Input placeholder={"包名"} disabled={props.isEdit}/>
             </Form.Item>
 
-            <Form.Item label="配置标签" name="publishId" rules={[{ required: true }]}
-                       extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
-            >
-                <Select placeholder="选择" disabled={props.isEdit}
+            <Form.Item label="配置标签" name="publishId" rules={[{ required: true }]}>
+                <Select placeholder="选择"
                         ref={selectRef}
                         // onSelect={(value, option) => {
                         //     console.log("value", value)
