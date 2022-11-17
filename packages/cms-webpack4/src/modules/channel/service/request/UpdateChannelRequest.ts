@@ -9,4 +9,7 @@ export interface UpdateChannelRequest {
 
     name: string;
     // 渠道名称
+
+    publishId: number;
+    // 配置標籤ID
 }

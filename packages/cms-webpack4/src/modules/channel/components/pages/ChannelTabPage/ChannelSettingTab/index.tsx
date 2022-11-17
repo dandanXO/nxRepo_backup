@@ -248,6 +248,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                 modelId: fields.modelId,
                 name: fields.name,
                 enabled: fields.enabled,
+                publishId: fields.publishId,
             } as UpdateChannelRequest;
         }
         fields["enabled"] = fields.enabled ? 1 : 0;
