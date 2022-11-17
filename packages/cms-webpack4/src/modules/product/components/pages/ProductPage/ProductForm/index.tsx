@@ -21,7 +21,7 @@ interface ProductFormProps {
     enableLoanAmount: boolean;
     enableReLoanAmount:boolean;
     setEnableLoanAmount:any;
-        setEnableReLoanAmount: any;
+    setEnableReLoanAmount: any;
 
 }
 
@@ -56,6 +56,65 @@ const Index = (props: ProductFormProps) => {
         return field;
     }
 
+    const compareCount = (index, loanLength, loan, field) => {
+
+        const isFirstField = index === 0;
+        const isLastField = index === loanLength - 1;
+        const prevIndex = isFirstField ? 0 : index - 1;
+        const nextIndex = isLastField ? index - 1 : index + 1;
+
+        const loanCount = Number(loan[index][field]);
+        const prevField = Number(loan[prevIndex][field]);
+        const nextField = Number(loan[nextIndex][field]);
+
+        const comparePrev = isFirstField ? loanCount < nextField : loanCount > prevField;
+        const compareNext = isLastField ? loanCount > nextField : loanCount < nextField;
+
+        return comparePrev || compareNext;
+
+    }
+
+    const validateRiskRankLoanAmount = (validateForm) => {
+       
+        let formFieldError = {};
+
+        const isFormError = validateForm.map((i,index)=>{
+
+            const validateError = i.loanAmount < 0 || isNaN(i.loanAmount) || i.loanAmount === '';
+            const compareError = validateForm.length !== 1 ? compareCount(index, validateForm.length, validateForm, 'loanAmount') : false;
+            const errorMessage = i.loanAmount < 0 || isNaN(i.loanAmount) ? '请输入大于0的整数' : (i.loanAmount === '' || i.loanAmount === undefined) ? `请输入初始额度` : '';
+            const formIndex = validateForm.length === 1 ? i.index : index;
+         
+            formFieldError = {
+                ...formFieldError,
+                ...{
+                    [`riskRankLoanAmount_${formIndex}`]: {
+                        validateStatus:  validateError || compareError ? "error" : '',
+                        help: errorMessage
+                    },
+                }
+            }
+           return compareError
+           
+        })
+       
+        formFieldError = {
+            ...formFieldError,
+            ...{
+                [`riskRankLoanAmount_error`]: {
+                    validateStatus: isFormError.includes(true) ? "error" : '',
+                    help: isFormError.includes(true)?<div>
+                               <div>{"以上填写格式可能有以下错误，请再次检查并修正："}</div>
+                                <div>{"▪ 所有字段都必须填写。"}</div>
+                                <div>{"▪ 初始额度需由大至小填写≥0的整数。"}</div>
+                               <div>{"▪ 各级距数值应≤上一级。"}</div>
+                       </div>:''
+                },
+            }
+        }
+
+        setCustomAntFormFieldError(prev => ({ ...prev, ...formFieldError }));
+    }
 
 
     return (
@@ -63,18 +122,22 @@ const Index = (props: ProductFormProps) => {
             // ref={props.formRef}
             {...layout} form={form} name="control-hooks" onFinish={onFinish}
             onFieldsChange={(changedFields, allFields) => {
+
+                if(changedFields[0].name[0] ==="riskRankLoanAmount"){
+                    const { riskRankLoanAmount } = form.getFieldsValue();
+                    const changedField = [{ "loanAmount": changedFields[0].value, index: changedFields[0].name[1] }];
+                    const isLoanFormNotFilled = riskRankLoanAmount.map(i => Object.values(i).includes(undefined)).includes(true);
+                    const validateForm = isLoanFormNotFilled ? changedField : riskRankLoanAmount;
+                    validateRiskRankLoanAmount(validateForm);
+                }
+
                 if(changedFields[0].name[0] ==="firstLoanQuotaSwitch") {
-                    // console.log("changedFields", changedFields[0].value);
                     props.setEnableLoanAmount(changedFields[0].value === 0)
                 }
-
+                
                 if(changedFields[0].name[0] ==="reLoanQuotaSwitch") {
-                    // console.log("changedFields", changedFields[0].value);
                     props.setEnableReLoanAmount(changedFields[0].value === 0)
                 }
-
-
-                // console.log("allFields", allFields);
 
                 function empty(str) {
                     return str === ""
@@ -434,6 +497,7 @@ const Index = (props: ProductFormProps) => {
                 enableLoanAmount={props.enableLoanAmount}
                 enableReLoanAmount={props.enableReLoanAmount}
                 isEdit={productModalData.isEdit}
+                customAntFormFieldError={customAntFormFieldError}
             />
             <RateSettingSection form={form} customAntFormFieldError={customAntFormFieldError} />
             <UploadSettingSection />

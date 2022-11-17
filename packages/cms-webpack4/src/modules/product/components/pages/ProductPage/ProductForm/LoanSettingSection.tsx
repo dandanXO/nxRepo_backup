@@ -2,14 +2,20 @@ import { Divider, Form, Input, Radio, Switch } from "antd";
 import React from "react";
 import { NumberValidator } from "../../../../../shared/utils/validation/validator";
 import { FormInstance } from "antd/es";
+import CustomLabel from "../../../../../shared/components/CustomLabel";
+import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 
 interface LoanSettingSectionProps {
     form: FormInstance;
     enableLoanAmount: boolean;
     enableReLoanAmount: boolean;
     isEdit: boolean;
+    customAntFormFieldError: CustomAntFormFieldError;
 }
+
+
 const LoanSettingSection = (props: LoanSettingSectionProps) => {
+
     return (
         <React.Fragment>
             <Divider orientation="left">借款设定</Divider>
@@ -65,28 +71,44 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
             </Form.Item>
 
             <Form.Item label="初贷初始额度">
-
                 <Form.Item name="firstLoanQuotaSwitch" style={{ display: 'inline-block', margin: '0 8px 0 0' }}>
                     <Radio.Group>
                         <Radio value={1}>依照风控</Radio>
                         <Radio value={0}>系统规则</Radio>
                     </Radio.Group>
                 </Form.Item>
-
-                <Form.Item name="loanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
-                    rules={[
-                        {
-                            validator: async (_, value) => NumberValidator(_, value)({
-                                required: true,
-                                requiredErrorMessage: "请输入初贷初始额度",
-                                typeErrorMessage: "请输入大于0的整数",
-                            })
-                        },
-                    ]}
+                {props.enableLoanAmount && <Form.Item style={{ margin: '0' }}
+                    help={(props.customAntFormFieldError?.[`riskRankLoanAmount_error`] as any)?.help}
+                    validateStatus={(props.customAntFormFieldError?.[`riskRankLoanAmount_error`] as any)?.validateStatus}
                 >
-                    <Input disabled={!props.enableLoanAmount} placeholder={"初贷初始额度"} />
-                </Form.Item>
-
+                    {[["极好", "EXCELLENT"], ["良好", "GOOD"], ["正常", "NORMAL"], ["普通", "ORDINARY"], ["拒绝", "REJECT"]].map((levelTag, index) => {
+                        return (
+                            <Form.Item key={index}>
+                                {index === 0 && (
+                                    <div>
+                                        <CustomLabel style={{ margin: '0 8px 0 0', width: 76 }}>风控商等级</CustomLabel>
+                                        <CustomLabel style={{ width: 120 }}>初始额度</CustomLabel>
+                                    </div>
+                                )}
+                                <Input.Group compact>
+                                    <Form.Item style={{ margin: '0 8px 0 0', width: 76 }}>
+                                        <Input placeholder={levelTag[0]} disabled />
+                                    </Form.Item>
+                                    <Form.Item name={['riskRankLoanAmount', index, 'riskRank']} initialValue={levelTag[1]} style={{ display: "none" }}>
+                                        <Input  />
+                                    </Form.Item>
+                                    <Form.Item name={['riskRankLoanAmount', index, "loanAmount"]} style={{ margin: '0 8px 0 0', width: 120 }}
+                                        help={(props.customAntFormFieldError?.[`riskRankLoanAmount_${index}`] as any)?.help}
+                                        validateStatus={(props.customAntFormFieldError?.[`riskRankLoanAmount_${index}`] as any)?.validateStatus}
+                                        rules={[{ required: true, message: "请输入初始额度" }]}
+                                    >
+                                        <Input placeholder={"初始额度"} />
+                                    </Form.Item>
+                                </Input.Group>
+                            </Form.Item>
+                        )
+                    })}
+                </Form.Item>}
             </Form.Item>
 
 
@@ -100,7 +122,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                 </Form.Item>
 
                 <Form.Item name="reLoanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
-                    rules={[
+                    rules={!props.enableReLoanAmount ? [] : [
                         {
                             validator: async (_, value) => NumberValidator(_, value)({
                                 required: true,

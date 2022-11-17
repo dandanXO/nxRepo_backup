@@ -139,7 +139,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
         firstLoanQuotaSwitch: productFormData.firstLoanQuotaSwitch === true ? 1 : 0,
         reLoanQuotaSwitch: productFormData.reLoanQuotaSwitch === true ? 1 : 0,
-        loanAmount:productFormData.loanAmount,
+        riskRankLoanAmount:productFormData.riskRankLoanAmount,
         reLoanAmount: productFormData.reLoanAmount,
 
 
@@ -236,6 +236,11 @@ export const useProductFormModal = (props: ProductFormModal) => {
         plusAmount: Number(i.plusAmount),
     }))
 
+    const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
+        ...i,
+        loanAmount: Number(i.loanAmount),
+      }))
+
     let creatProductData: PostProductCreateRequestBody = {
       merchantId: Number(values.merchantId),
       productName: values.productName,
@@ -261,7 +266,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
       firstLoanQuotaSwitch: values.firstLoanQuotaSwitch,
       reLoanQuotaSwitch: values.reLoanQuotaSwitch,
-      loanAmount:values.loanAmount,
+      riskRankLoanAmount:riskRankLoanAmount,
       reLoanAmount: values.reLoanAmount,
 
       preInterestRate: strToFloatNumberWithFixed3(values.preInterestRate),

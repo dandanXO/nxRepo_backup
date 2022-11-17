@@ -52,8 +52,8 @@ export interface GetProductQueryResponse {
     interestRange?: string;
     // 广告放款利率
 
-    loanAmount?: number;
-    // 初始贷款额度
+    riskRankLoanAmount?: RiskRankLoanAmount[];
+    // 依照風控等級初始贷款额度
 
     loanTerm?: number;
     // 借款周期
@@ -110,4 +110,9 @@ export interface GetProductQueryResponse {
     weight?: number;
     // 权重
 
+}
+
+interface RiskRankLoanAmount{
+    loanAmount?: number;
+    riskRank?: "EXCELLENT" | "GOOD" | "NORMAL" | "ORDINARY" | "REJECT"
 }

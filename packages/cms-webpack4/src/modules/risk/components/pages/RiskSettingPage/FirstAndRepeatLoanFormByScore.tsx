@@ -1,5 +1,5 @@
 import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space } from "antd";
-import CustomLabel from "./CustomLabel";
+import CustomLabel from "../../../../shared/components/CustomLabel";
 import {NumberValidator} from "../../../../shared/utils/validation/validator";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
 
