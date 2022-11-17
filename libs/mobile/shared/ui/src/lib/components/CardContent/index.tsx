@@ -62,7 +62,7 @@ const CardContent = (props: CardContentProps) => {
   return (
     <CardContentStyled>
       <CardHeaderStyled>
-        <LoanBrand iconUrl={icon} productName={productName} balance={balance}/>
+        <LoanBrand iconUrl={icon} productName={productName} balance={balance} showCurrency={true}/>
       </CardHeaderStyled>
       {contentItems}
       <Divider styleType="narrow" />

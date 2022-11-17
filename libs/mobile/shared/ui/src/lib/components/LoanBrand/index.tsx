@@ -32,6 +32,7 @@ type LoanBrandProps = {
   iconUrl: string;
   productName: string;
   balance?: string;
+  showCurrency?: boolean;
 } & propsStyles;
 
 interface propsStyles {
@@ -39,7 +40,7 @@ interface propsStyles {
 }
 
 const LoanBrand = (props: LoanBrandProps) => {
-  const { iconUrl, productName, sizeType, balance } = props;
+  const { iconUrl, productName, sizeType, balance, showCurrency = false } = props;
   return (
     <LoanBrandStyled className={'loanBrand'} sizeType={sizeType}>
       <div>
@@ -47,7 +48,7 @@ const LoanBrand = (props: LoanBrandProps) => {
       </div>
       <div className={"loanBrandInfo"}>
         <div className={"product"}>{productName}</div>
-        <div className={'balance'}>{environment.currency} {balance}</div>
+        {showCurrency && (<div className={'balance'}>{environment.currency} {balance}</div>)}
       </div>
     </LoanBrandStyled>
   );
