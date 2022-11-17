@@ -28,6 +28,11 @@ const DefaultThemeConfig: IThemeConfig = {
       main: Colors.none,
       text: Colors.gray500,
     },
+    ghost: {
+      main: Colors.none,
+      text: Colors.orange,
+      border: Colors.orange,
+    }
   },
   radio: {
     color: Colors.orange,

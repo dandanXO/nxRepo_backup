@@ -28,6 +28,11 @@ export const GreenThemeConfig: IThemeConfig = {
       main: Colors.none,
       text: Colors.green,
     },
+    ghost: {
+      main: Colors.none,
+      text: Colors.green,
+      border: Colors.green,
+    }
   },
   radio: {
     color: Colors.green,

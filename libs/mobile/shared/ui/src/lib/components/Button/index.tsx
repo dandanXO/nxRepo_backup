@@ -7,7 +7,7 @@ const sizeProps: {
   large: '14px',
 };
 interface buttonPropsStyle {
-  styleType?: 'primary' | 'secondary' | 'link' | 'info';
+  styleType?: 'primary' | 'secondary' | 'link' | 'info' | 'ghost';
   size?: string;
 }
 export default styled.button<buttonPropsStyle>`
@@ -23,7 +23,7 @@ export default styled.button<buttonPropsStyle>`
     props.styleType === 'link'
       ? 0
       : sizeProps[props.size ? props.size : 'large']};
-  border: none;
+  border: ${(props) => props.styleType === "ghost" ? `1px solid ${props.theme.button[props.styleType].border}` : "none"};
   border-radius: 8px;
   font-size: ${({ theme }) => theme.fontSize[16]};
   width: 100%;

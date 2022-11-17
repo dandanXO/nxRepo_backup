@@ -111,12 +111,12 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
                 className={"uploadButton"}
                 onClick={props.navigateToUploadPaymentReceiptPage}
               >
-                <Button>Upload Receipt</Button>
+                <Button styleType={"ghost"}>Upload Receipt</Button>
               </div>
 
               <div className={"noticeText"}>
                 After completing the repayment, take a screenshot and
-                uploadyour repayment receipt here.
+                upload your repayment receipt here.
               </div>
 
             </StyledUploadReceiptSection>

@@ -25,6 +25,11 @@ export interface IThemeConfig {
       main: Colors;
       text: Colors;
     },
+    ghost: {
+      main: Colors;
+      text: Colors;
+      border: Colors;
+    }
   },
   radio: {
     color: Colors;
