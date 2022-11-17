@@ -86,6 +86,7 @@ specifiers:
   regenerator-runtime: 0.13.7
   styled-components: 5.3.5
   tailwindcss: ^3.1.8
+  translation-check: ^1.0.2
   ts-jest: 28.0.5
   ts-node: 10.9.1
   tslib: 2.3.0
@@ -132,6 +133,7 @@ dependencies:
   regenerator-runtime: 0.13.7
   styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
   tailwindcss: 3.1.8_57znarxsqwmnneadci5z5fd5gu
+  translation-check: 1.0.2
   ts-node: 10.9.1_zxsrsjixpeut7yrvpb4oxiogs4
   tslib: 2.3.0
   umi-request: 1.4.0
@@ -2922,6 +2924,13 @@ packages:
       core-js-pure: 3.25.2
       regenerator-runtime: 0.13.7
     dev: true
+
+  /@babel/runtime/7.15.4:
+    resolution: {integrity: sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.7
+    dev: false
 
   /@babel/runtime/7.19.0:
     resolution: {integrity: sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==}
@@ -20317,6 +20326,12 @@ packages:
     dependencies:
       punycode: 2.1.1
     dev: true
+
+  /translation-check/1.0.2:
+    resolution: {integrity: sha512-Bt5BDrIfa7R/+1x1OMskS3JZ2b1AEkaUdcHc40fj1IltM/EA1uX+1yroQU6IdtSFhIH7HFip7vXaLmuiUclSgg==}
+    dependencies:
+      '@babel/runtime': 7.15.4
+    dev: false
 
   /tree-kill/1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}

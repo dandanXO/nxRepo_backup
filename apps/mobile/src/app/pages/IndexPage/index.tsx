@@ -29,7 +29,9 @@ export default () => {
               <div>Country: {environment.countryName}</div>
               <div>Environment: {environment.production ? "正式機" : "測試機"}</div>
             </p>
-
+            <button onClick={() => {
+              window.open("http://localhost:4003/?showtranslations", "_self");
+            }}>showtranslations</button>
             <li>
                 <Link
                     to={"/bank-bind?token=" + getToken() + "&" + getCardholderName()}
