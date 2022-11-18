@@ -1,9 +1,9 @@
 import i18next from "i18next";
 import {initReactI18next} from "react-i18next";
-import {i18nBankBindPageKey, i18nBankBindPageTranslations} from "../pages/BindBankAccountPage/i18n/translations";
+import {i18nBankBindPageKey, i18nBankBindPageTranslations} from "../components/pages/BindBankAccountPage/i18n/translations";
 import {i18nextPlugin} from 'translation-check'
-import {i18nComponentsKey, i18nComponentsTranslations} from "../components/i18n/translations";
-import {i18nLoanDetailsPageKey, i18nLoanDetailsPageTranslations} from "../pages/LoanDetailsPage/i18n/translations";
+import {i18nLoanDetailsPageKey, i18nLoanDetailsPageTranslations} from "../components/pages/LoanDetailsPage/i18n/translations";
+import {i18nComponentsKey, i18nComponentsTranslations} from "../components/atoms/i18n/translations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next

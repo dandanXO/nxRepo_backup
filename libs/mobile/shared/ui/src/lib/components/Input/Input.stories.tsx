@@ -5,7 +5,7 @@ import { AppThemeProvider } from '../index';
 import {useCallback, useState} from "react";
 import {z} from "zod";
 import {InputValue} from "../../../../../../../../apps/mobile/src/app/core/types/InputValue";
-import {validationInfo} from "../../../../../../../../apps/mobile/src/app/pages/BindBankAccountPage/validationInfo";
+import {validationInfo} from "../../../../../../../../apps/mobile/src/app/components/pages/BindBankAccountPage/validationInfo";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

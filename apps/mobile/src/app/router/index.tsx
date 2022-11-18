@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import IndexPage from "../pages/IndexPage";
-import LoanDetailsPage from "../pages/LoanDetailsPage";
-import ExtendDetailsPage from "../pages/ExtendDetailsPage";
-import UploadPaymentReceiptPage from "../pages/UploadPaymentReceiptPage";
-import BindBankAccountPage from "../pages/BindBankAccountPage";
-import UploadedPaymentReceiptPage from "../pages/UploadedPaymentReceiptPage";
-import ProductAdModalListPage from "../pages/ProductAdModalListPage";
+import IndexPage from "../components/pages/IndexPage";
+import LoanDetailsPage from "../components/pages/LoanDetailsPage";
+import ExtendDetailsPage from "../components/pages/ExtendDetailsPage";
+import UploadPaymentReceiptPage from "../components/pages/UploadPaymentReceiptPage";
+import BindBankAccountPage from "../components/pages/BindBankAccountPage";
+import UploadedPaymentReceiptPage from "../components/pages/UploadedPaymentReceiptPage";
+import ProductAdModalListPage from "../components/pages/ProductAdModalListPage";
 
 // NOTE:
 // https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris
