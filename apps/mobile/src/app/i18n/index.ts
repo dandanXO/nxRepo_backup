@@ -1,7 +1,9 @@
 import i18next from "i18next";
 import {initReactI18next} from "react-i18next";
-import { i18nBankBindPageKey, i18nBankBindPageTranslations } from "../pages/BindBankAccountPage/i18n/translations";
-import { i18nextPlugin } from 'translation-check'
+import {i18nBankBindPageKey, i18nBankBindPageTranslations} from "../pages/BindBankAccountPage/i18n/translations";
+import {i18nextPlugin} from 'translation-check'
+import {i18nComponentsKey, i18nComponentsTranslations} from "../components/i18n/translations";
+import {i18nLoanDetailsPageKey, i18nLoanDetailsPageTranslations} from "../pages/LoanDetailsPage/i18n/translations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -10,7 +12,7 @@ i18next
     ns: ['common', 'moduleA', 'moduleB'],
     defaultNS: 'common',
     resources: {
-      en: {
+      en_US: {
         common: {
           "Welcome to Mobile": "Welcome to Mobile !!!",
           modal: {
@@ -23,11 +25,16 @@ i18next
         [i18nBankBindPageKey.CommonKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.CommonKey]],
         [i18nBankBindPageKey.IndiaKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.IndiaKey]],
         [i18nBankBindPageKey.PakistanKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.PakistanKey]],
+        [i18nComponentsKey]: i18nComponentsTranslations,
+        [i18nLoanDetailsPageKey]: i18nLoanDetailsPageTranslations,
       },
+      bn_BD: {
+
+      }
     },
 
-    lng: "en", // if you're using a language detector, do not define the lng option
-    fallbackLng: "en",
+    lng: "en_US", // if you're using a language detector, do not define the lng option
+    fallbackLng: "en_US",
 
     interpolation: {
       escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape

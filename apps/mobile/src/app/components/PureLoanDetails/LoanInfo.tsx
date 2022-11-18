@@ -3,13 +3,15 @@ import React from "react";
 import { GetLoanDetailResponse } from "../../api/getLoanDetail";
 import {
     Tag,
-    Card,
     ListItem,
     Button,
-    LoanBrand,
     AmountPaidIcon,
 } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../environments/environment";
+import {useTranslation} from "react-i18next";
+import {i18nComponentsKey} from "../i18n/translations";
+import LoanBrand from "../LoanBrand";
+import Card from "../Card";
 
 const LoanInfoStyled = styled.div`
     text-align: center;
@@ -103,6 +105,7 @@ const LoanInfo = (props: LoanInfoProps) => {
         extendable,
     } = props;
 
+    const {t} = useTranslation();
     return (
         <LoanInfoStyled>
             <LoanBrand
@@ -111,21 +114,18 @@ const LoanInfo = (props: LoanInfoProps) => {
                 sizeType={"small"}
             />
 
-            <div className="totalTitle">Total Due</div>
+            <div className="totalTitle">{t("Total Due", {ns: i18nComponentsKey})}</div>
 
             <div className="totalText">{environment.currency} {totalDueAmount}</div>
 
             {status === "OVERDUE" && (
                 <div className={"errorText"}>
-                    {`Your payment is now N days overdue.
-                  We kindly request that you immediately satisfy the
-                  balance in order to maintain a good loan relationship
-                  without affecting your loan credit.`}
+                    {t("Your payment is now N days overdue.We kindly request that you immediately satisfy the balance in order to maintain a good loan relationship without affecting your loan credit.", {ns: i18nComponentsKey})}
                 </div>
             )}
 
             <Card isHot={false}>
-                <div className={"loanInfo-Card-Title"}>General</div>
+                <div className={"loanInfo-Card-Title"}>{t("General", {ns: i18nComponentsKey})}</div>
                 <div className={"loanInfo-Card-list"}>
                     <ListItem
                       title={"No."}
@@ -167,7 +167,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                                 onClick={() => setShowExtensionModal(true)}
                                 styleType={"link"}
                             >
-                                {"Related repayment >"}
+                                {`${t("Related repayment", {ns: i18nComponentsKey})} >`}
                             </Button>
                         </div>
                     )}
@@ -181,7 +181,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                       className={"extendButton"}
                       styleType="secondary"
                     >
-                      Extend
+                      {t("Extend", {ns: i18nComponentsKey})}
                     </Button>
                   )
                 }
@@ -190,7 +190,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                   className={"repayButton"}
                   styleType="primary"
                 >
-                  Repay
+                  {t("Repay", {ns: i18nComponentsKey})}
                 </Button>
               </div>
 

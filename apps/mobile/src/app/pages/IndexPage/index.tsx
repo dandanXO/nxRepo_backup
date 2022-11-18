@@ -13,7 +13,7 @@ const getOrderNo = () => {
   if(environment.country === "in") {
     return `no-3632791101642108-9`;
   } else if (environment.country == "pk") {
-    return `no-1208588871298485`;
+    return `no-1816320407159254`;
   }
 }
 
@@ -30,7 +30,7 @@ export default () => {
               <div>Environment: {environment.production ? "正式機" : "測試機"}</div>
             </p>
             <button onClick={() => {
-              window.open("http://localhost:4003/?showtranslations", "_self");
+              window.open("http://localhost:4003/?showtranslations", "_blank");
             }}>showtranslations</button>
             <li>
                 <Link

@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import LoanBrand from './index';
-import { AppThemeProvider } from '../index';
+import { AppThemeProvider } from '../../../../../../libs/mobile/shared/ui/src/lib/components';
 import * as React from 'react';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: LoanBrand,
 } as ComponentMeta<typeof LoanBrand>;
 
-const fileIcon = require('../images/fileIcon.jpg');
+const fileIcon = require('../../../../../../libs/mobile/shared/ui/src/lib/components/images/fileIcon.jpg');
 
 const Template: ComponentStory<typeof LoanBrand> = (args) => (
   <AppThemeProvider>

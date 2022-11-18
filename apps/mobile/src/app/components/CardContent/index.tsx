@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
-import { flexCreator } from '../utils';
+import { flexCreator } from '../../../../../../libs/mobile/shared/ui/src/lib/components/utils';
 import LoanBrand from '../LoanBrand';
-import Button from '../Button';
-import Divider from '../Divider';
-import nextIcon_gray from '../images/next_icon_gray.svg';
-import nextIcon from '../images/next_icon.svg';
+import Button from '../../../../../../libs/mobile/shared/ui/src/lib/components/Button';
+import Divider from '../../../../../../libs/mobile/shared/ui/src/lib/components/Divider';
+import nextIcon_gray from '../../../../../../libs/mobile/shared/ui/src/lib/components/images/next_icon_gray.svg';
+import nextIcon from '../../../../../../libs/mobile/shared/ui/src/lib/components/images/next_icon.svg';
+import {i18nComponentsKey} from "../i18n/translations";
+import {useTranslation} from "react-i18next";
 
 const FlexRowItem = styled.div`
   ${flexCreator('row', 'space-between', 'center')};
@@ -59,6 +61,7 @@ const CardContent = (props: CardContentProps) => {
     handleViewDetail,
     handleApplyNow,
   } = props;
+  const {t} = useTranslation();
   return (
     <CardContentStyled>
       <CardHeaderStyled>
@@ -73,7 +76,7 @@ const CardContent = (props: CardContentProps) => {
           styleType={'link'}
           onClick={handleViewDetail}
         >
-          {'view details'}
+          {t('view details', {ns: i18nComponentsKey})}
           <img src={nextIcon_gray} />
         </Button>
         <Button
@@ -82,7 +85,7 @@ const CardContent = (props: CardContentProps) => {
           size={'small'}
           onClick={handleApplyNow}
         >
-          {'Apply now'} <img src={nextIcon} />
+          {t('Apply now', {ns: i18nComponentsKey})} <img src={nextIcon} />
         </Button>
       </CardFooterStyled>
     </CardContentStyled>

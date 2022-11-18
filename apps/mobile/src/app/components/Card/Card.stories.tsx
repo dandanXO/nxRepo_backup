@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Card from './index';
-import { AppThemeProvider } from '../index';
-import CardContent from '../CardContent';
+import { AppThemeProvider } from '../../../../../../libs/mobile/shared/ui/src/lib/components';
+// import CardContent from '../../../../../../../../apps/mobile/src/app/components/CardContent';
 
 export default {
   title: 'Component/Card',
@@ -31,14 +31,14 @@ Normal.args = {
 export const ContentTemplate: ComponentStory<typeof Card> = (args) => (
   <AppThemeProvider>
     <Card {...args}>
-      <CardContent
-        balance={'1000'}
-        contentItems={{} as any}
-        handleApplyNow={{} as any}
-        handleViewDetail={{} as any}
-        icon={{} as any}
-        productName={{} as any}
-      />
+      {/*<CardContent*/}
+      {/*  balance={'1000'}*/}
+      {/*  contentItems={{} as any}*/}
+      {/*  handleApplyNow={{} as any}*/}
+      {/*  handleViewDetail={{} as any}*/}
+      {/*  icon={{} as any}*/}
+      {/*  productName={{} as any}*/}
+      {/*/>*/}
     </Card>
   </AppThemeProvider>
 );

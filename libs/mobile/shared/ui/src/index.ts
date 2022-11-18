@@ -1,13 +1,10 @@
 import Accordion from './lib/components/Accordion';
 import Button from './lib/components/Button';
-import Card from './lib/components/Card';
-import CardContent from './lib/components/CardContent';
 import Checkbox from './lib/components/Checkbox';
 import Divider from './lib/components/Divider';
 import Form from './lib/components/Form';
 
 import ListItem from './lib/components/ListItem';
-import LoanBrand from './lib/components/LoanBrand';
 import Modal from './lib/components/Modal';
 import Title from './lib/components/Modal/Title';
 import Overlay from './lib/components/Overlay';
@@ -40,8 +37,6 @@ export {
   RepayICON,
   Accordion,
   Button,
-  Card,
-  CardContent,
   Checkbox,
   DefaultThemeConfig,
 
@@ -53,7 +48,6 @@ export {
   Divider,
   Form,
   ListItem,
-  LoanBrand,
   Modal,
   Title,
   Overlay,

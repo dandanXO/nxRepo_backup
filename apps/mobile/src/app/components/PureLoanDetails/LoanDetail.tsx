@@ -4,11 +4,12 @@ import {
     GetLoanDetailChargeFeeDetail,
     GetLoanDetailResponse,
 } from "../../api/getLoanDetail";
-import { ListItem, Button, Accordion, Card } from "@frontend/mobile/shared/ui";
+import { ListItem, Accordion } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../environments/environment";
+import Card from "../Card";
+
 const LoanDetailStyled = styled.div`
     text-align: center;
-
     .textTitle {
         color: ${({ theme }) => theme.color.gray500};
         font-size: ${({ theme }) => theme.fontSize[12]};
@@ -19,9 +20,6 @@ const LoanDetailStyled = styled.div`
     .detailsContent {
         padding-bottom: 4px;
     }
-
-
-
 `;
 
 type LoanDetailProps = Pick<

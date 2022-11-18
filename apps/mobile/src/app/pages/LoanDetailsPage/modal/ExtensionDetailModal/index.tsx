@@ -1,6 +1,5 @@
 import {
     Overlay,
-    LoanBrand,
     ListItem,
     Divider,
     Tag,
@@ -12,6 +11,7 @@ import { GetLoanDetailResponse } from "../../../../api/getLoanDetail";
 import { useGetLoanDetailQuery } from "../../../../api";
 import recordStatusStyleProps from "../../../../components/recordStatusColorMapper";
 import {environment} from "../../../../../environments/environment";
+import LoanBrand from "../../../../components/LoanBrand";
 
 const ExtesionDetailStyled = styled.div`
     text-align: center;

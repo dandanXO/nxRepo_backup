@@ -10,6 +10,8 @@ import {CustomPage} from "../../pages/BindBankAccountPage/components/CustomPage"
 import {Attention} from "./Attention";
 import {Button} from "@frontend/mobile/shared/ui";
 import styled from "styled-components";
+import {i18nComponentsKey} from "../i18n/translations";
+import {useTranslation} from "react-i18next";
 
 const StyledUploadReceiptSection = styled.div`
   .uploadButton {
@@ -35,6 +37,7 @@ export interface PureLoanDetailsPageProps {
 }
 
 const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
+    const {t} = useTranslation();
     const [showExtendModal, setShowExtendModal] = useState(false);
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     const [showAmountPaidModal, setShowAmountPaidModal] = useState(false);
@@ -111,12 +114,11 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
                 className={"uploadButton"}
                 onClick={props.navigateToUploadPaymentReceiptPage}
               >
-                <Button styleType={"ghost"}>Upload Receipt</Button>
+                <Button styleType={"ghost"}>{t("Upload Receipt", {ns: i18nComponentsKey})}</Button>
               </div>
 
               <div className={"noticeText"}>
-                After completing the repayment, take a screenshot and
-                upload your repayment receipt here.
+                {t("After completing the repayment, take a screenshot and upload your repayment receipt here.", {ns: i18nComponentsKey})}
               </div>
 
             </StyledUploadReceiptSection>

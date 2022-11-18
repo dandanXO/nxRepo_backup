@@ -5,7 +5,11 @@ import ProductDetailModal from "../../modal/ProductDetailModal";
 import SubmitOrderModal from "../../modal/SubmitOrderModal";
 import SubmitOrderSuccessModal from "../../modal/SubmitOrderSuccessModal";
 import { PostLoanSubmitOrderRequestBody } from "../../api/postLoanSubmitOrder";
-import { Card, CardContent, ListItem } from "@frontend/mobile/shared/ui";
+import { ListItem } from "@frontend/mobile/shared/ui";
+import {useTranslation} from "react-i18next";
+import CardContent from "../../components/CardContent";
+import {i18nLoanDetailsPageKey} from "./i18n/translations";
+import Card from "../../components/Card";
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;
@@ -124,10 +128,11 @@ const Advertisement = (props: AdvertisementProps) => {
         });
     }, []);
 
+    const {t} = useTranslation();
     return (
         <div>
             <AdvertisementStyled>
-                <div className={"infoTitle"}>More Recommend Loan</div>
+                <div className={"infoTitle"}>{t("More Recommend Loan", {ns: i18nLoanDetailsPageKey})}</div>
                 {recommendProducts.map((ad) => (
                     <BannerWithCard
                         key={ad["productId"]}

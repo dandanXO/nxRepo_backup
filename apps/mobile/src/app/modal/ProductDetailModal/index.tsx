@@ -4,11 +4,11 @@ import { GetLoanDetailRecommendProducts } from "../../api/getLoanDetail";
 import {
     Overlay,
     ListItem,
-    LoanBrand,
     Title,
     Divider,
 } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../environments/environment";
+import LoanBrand from "../../components/LoanBrand";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
     color: ${({ theme }) => theme.color.black};
