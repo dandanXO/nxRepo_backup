@@ -207,13 +207,7 @@ export const Page: ComponentStory<
   > = () => {
     return (
       <AppThemeProvider>
-        <PureLoanDetails
-          currentData={currentData}
-          navigateToUploadPaymentReceiptPage={
-            {}
-          }
-          handlePostRepayCreate={{}}
-        />
+        <PureLoanDetails navigateToUploadPaymentReceiptPage={() => {}} handlePostRepayCreate={() => {}} paymentMethodList={["type1", "type2"]} setPayType={() => {}} currentData={currentData}/>
       </AppThemeProvider>
     );
 };

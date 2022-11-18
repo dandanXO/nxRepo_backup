@@ -1,18 +1,18 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PureExtendModal } from "./ExtendModal";
+import ExtendModal  from "./ExtendModal";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import { mockGetLoanDetailResponse } from "../../../api/getLoanDetail";
 import * as React from "react";
 
 export default {
     title: "Modal/ExtendModal",
-    component: PureExtendModal,
-} as ComponentMeta<typeof PureExtendModal>;
+    component: ExtendModal,
+} as ComponentMeta<typeof ExtendModal>;
 
-export const Template: ComponentStory<typeof PureExtendModal> = () => {
+export const Template: ComponentStory<typeof ExtendModal> = () => {
     return (
         <AppThemeProvider>
-            <PureExtendModal
+            <ExtendModal
                 repayConfirmDetail={mockGetLoanDetailResponse}
                 setShowExtendModal={() => {
                     // do nothing.

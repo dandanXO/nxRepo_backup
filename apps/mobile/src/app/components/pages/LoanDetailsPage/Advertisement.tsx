@@ -6,7 +6,7 @@ import SubmitOrderModal from "../../modals/SubmitOrderModal";
 import SubmitOrderSuccessModal from "../../modals/SubmitOrderSuccessModal";
 import { PostLoanSubmitOrderRequestBody } from "../../../api/postLoanSubmitOrder";
 import { ListItem } from "@frontend/mobile/shared/ui";
-import {useTranslation} from "react-i18next";
+import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nLoanDetailsPageKey} from "./i18n/translations";
 import Card from "../../atoms/Card";
 import CardContent from "../../atoms/CardContent";
@@ -94,10 +94,11 @@ const BannerWithCard = (props: BannerWithCardProps) => {
     );
 };
 
-export interface AdvertisementProps {
+type AdvertisementProps = {
     recommendProducts: [];
     postLoanSubmitOrder: (obj: any) => any;
-}
+} & WithTranslation;
+
 const Advertisement = (props: AdvertisementProps) => {
     const { recommendProducts = [] } = props;
     const [productDetails, setProductDetails] = useState({});
@@ -128,11 +129,10 @@ const Advertisement = (props: AdvertisementProps) => {
         });
     }, []);
 
-    const {t} = useTranslation();
     return (
         <div>
             <AdvertisementStyled>
-                <div className={"infoTitle"}>{t("More Recommend Loan", {ns: i18nLoanDetailsPageKey})}</div>
+                <div className={"infoTitle"}>{props.t("More Recommend Loan")}</div>
                 {recommendProducts.map((ad) => (
                     <BannerWithCard
                         key={ad["productId"]}
@@ -167,4 +167,5 @@ const Advertisement = (props: AdvertisementProps) => {
     );
 };
 
-export default Advertisement;
+export default withTranslation(i18nLoanDetailsPageKey)(Advertisement)
+

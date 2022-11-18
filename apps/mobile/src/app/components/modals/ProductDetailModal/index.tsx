@@ -9,6 +9,8 @@ import {
 } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
 import LoanBrand from "../../atoms/LoanBrand";
+import {WithTranslation, withTranslation} from "react-i18next";
+import {i18nProductDetailModal} from "./i18n/tranlations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -20,11 +22,12 @@ const ModalContentStyled = styled.div`
     }
 `;
 
-export interface PureProductDetailModalProps {
+export type PureProductDetailModalProps = {
     recommendProducts?: GetLoanDetailRecommendProducts;
     setShowProductDetailModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
-export const PureProductDetailModal = (props: PureProductDetailModalProps) => {
+} & WithTranslation;
+
+const PureProductDetailModal = (props: PureProductDetailModalProps) => {
     return (
         <div>
             <Overlay
@@ -36,7 +39,7 @@ export const PureProductDetailModal = (props: PureProductDetailModalProps) => {
                 content={(hide: () => void) => {
                     return (
                         <ModalContentStyled>
-                            <Title>Product Details</Title>
+                            <Title>{props.t("Product Details")}</Title>
                             <Divider />
                             <LoanBrand
                                 iconUrl={
@@ -48,41 +51,41 @@ export const PureProductDetailModal = (props: PureProductDetailModalProps) => {
                                 sizeType={"small"}
                             />
                             <ListItem
-                                title={"Loanable amount"}
+                                title={props.t("Loanable amount") as string}
                                 text={`${environment.currency} ${
                                     props?.recommendProducts?.loanQuota ?? ""
                                 }`}
                             />
                             <ListItem
-                                title={"Interest"}
+                                title={props.t("Interest") as string}
                                 text={
                                     props?.recommendProducts?.interestRate ?? ""
                                 }
                             />
                             <ListItem
-                                title={"Terms"}
+                                title={props.t("Terms") as string}
                                 text={props?.recommendProducts?.term ?? ""}
                             />
                             <ListItem
-                                title={"Approval Rates"}
+                                title={props.t("Approval Rates") as string}
                                 text={
                                     props?.recommendProducts?.approvedRate ?? ""
                                 }
                             />
                             <ListItem
-                                title={"Approval Time"}
+                                title={props.t("Approval Time") as string}
                                 text={
                                     props?.recommendProducts?.approvedTime ?? ""
                                 }
                             />
                             <Divider />
-                            <div className={"info-title"}>customer service</div>
+                            <div className={"info-title"}>{props.t("customer service") as string}</div>
                             <ListItem
-                                title={"Service time"}
+                                title={props.t("Service time") as string}
                                 text={props?.recommendProducts?.csTime ?? ""}
                             />
                             <ListItem
-                                title={"Email"}
+                                title={props.t("Email") as string}
                                 text={props?.recommendProducts?.csEmail ?? ""}
                             />
                         </ModalContentStyled>
@@ -93,13 +96,4 @@ export const PureProductDetailModal = (props: PureProductDetailModalProps) => {
     );
 };
 
-const ProductDetailModal = (props: PureProductDetailModalProps) => {
-    return (
-        <PureProductDetailModal
-            recommendProducts={props?.recommendProducts}
-            setShowProductDetailModal={props.setShowProductDetailModal}
-        />
-    );
-};
-
-export default ProductDetailModal;
+export default withTranslation(i18nProductDetailModal.namespace)(PureProductDetailModal);

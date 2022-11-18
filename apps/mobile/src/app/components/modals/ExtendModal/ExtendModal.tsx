@@ -13,6 +13,8 @@ import {
     ListItem,
 } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
+import {WithTranslation, withTranslation} from "react-i18next";
+import {i18nExtendModal} from "./i18n/tranlations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -42,11 +44,12 @@ const ModalContentStyled = styled.div`
 //     currentProps: any;
 //     handlePostRepayCreate: any;
 // }
-export interface PureExtendModalProps {
+type PureExtendModalProps = {
     repayConfirmDetail?: GetLoanDetailRepayConfirmDetail;
     setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
     handlePostRepayCreate?: any;
-}
+} & WithTranslation;
+
 export const PureExtendModal = (props: PureExtendModalProps) => {
     const {
         // repayConfirmDetail = {
@@ -59,6 +62,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
         // },
         setShowExtendModal,
         handlePostRepayCreate,
+        t,
     } = props;
 
     const handleConfirm = () => {
@@ -72,6 +76,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
         );
         setShowExtendModal(false);
     };
+
     return (
         <div>
             <Overlay
@@ -80,37 +85,37 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                 content={(hide: () => void) => {
                     return (
                         <ModalContentStyled>
-                            <Title>Extend</Title>
+                            <Title>{t("Extend")}</Title>
                             <Divider />
                             <ListItem
-                                title={"Extension Fee"}
+                                title={t("Extension Fee") as string}
                                 text={`${environment.currency} ${
                                     props?.repayConfirmDetail?.extensionFee ??
                                     ""
                                 }`}
                             />
                             <ListItem
-                                title={"Amount Paid"}
+                                title={t("Amount Paid") as string}
                                 text={`${environment.currency} ${
                                     props?.repayConfirmDetail?.paidAmount ?? ""
                                 }`}
                             />
                             <ListItem
-                                title={"Penalty Interest"}
+                                title={t("Penalty Interest") as string}
                                 text={`${environment.currency} ${
                                     props?.repayConfirmDetail
                                         ?.penaltyInterest ?? ""
                                 }`}
                             />
                             <ListItem
-                                title={"Reduction Amount"}
+                                title={t("Reduction Amount") as string}
                                 text={`${environment.currency} ${
                                     props?.repayConfirmDetail
                                         ?.reductionAmount ?? ""
                                 }`}
                             />
                             <ListItem
-                                title={"Total Amount"}
+                                title={t("Total Amount") as string}
                                 text={`${environment.currency} ${
                                     props?.repayConfirmDetail
                                         ?.extensionPayAmount ?? ""
@@ -119,7 +124,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                             <Divider />
                             <div className={"hintText"}>
                                 <ListItem
-                                    title={"Extension due date"}
+                                    title={t("Extension due date") as string}
                                     text={`${environment.currency} ${
                                         props?.repayConfirmDetail?.extendDate ??
                                         ""
@@ -132,14 +137,14 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                                     className={"cancelButton"}
                                     styleType="secondary"
                                 >
-                                    Cancel
+                                  {t("Cancel")}
                                 </Button>
                                 <Button
                                     onClick={handleConfirm}
                                     className={"confirmButton"}
                                     styleType="primary"
                                 >
-                                    Confirm
+                                  {t("Confirm")}
                                 </Button>
                             </div>
                         </ModalContentStyled>
@@ -151,19 +156,4 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
     );
 };
 
-type ExtendModalProps = Pick<GetLoanDetailResponse, "repayConfirmDetail"> & {
-    setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
-    handlePostRepayCreate: any;
-};
-
-const ExtendModal = (props: ExtendModalProps) => {
-    return (
-        <PureExtendModal
-            repayConfirmDetail={props?.repayConfirmDetail}
-            handlePostRepayCreate={props.handlePostRepayCreate}
-            setShowExtendModal={props.setShowExtendModal}
-        />
-    );
-};
-
-export default ExtendModal;
+export default withTranslation(i18nExtendModal.namespace)(PureExtendModal);

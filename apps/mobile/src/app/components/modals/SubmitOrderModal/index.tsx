@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { GetLoanDetailRecommendProducts } from "../../../api/getLoanDetail";
 import { Overlay, Title, Divider, Button } from "@frontend/mobile/shared/ui";
+import {WithTranslation, withTranslation} from "react-i18next";
+import {i18nSubmitOrderModal} from "./i18n/tranlations";
+
 const ModalContentStyled = styled.div`
     padding: 0 12px;
     .productName {
@@ -28,11 +31,12 @@ const Paragraph = styled.div`
     margin-bottom: 10px;
 `;
 
-export interface PureSubmitOrderModalProps {
+export type PureSubmitOrderModalProps = {
     productDetails?: GetLoanDetailRecommendProducts;
     setShowSubmitOrdereModal: React.Dispatch<React.SetStateAction<boolean>>;
     handleLoanSubmitOrder: (productId: number) => void;
-}
+} & WithTranslation;
+
 export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
     const handleConfirm = () => {
         props.handleLoanSubmitOrder(
@@ -52,19 +56,17 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
                 content={(hide: () => void) => {
                     return (
                         <ModalContentStyled>
-                            <Title>Loan Application</Title>
+                            <Title>{props.t("Loan Application")}</Title>
                             <Divider />
-                            Selected product
+                            {props.t("Selected product")}
                             <div className="productName">
                                 {props?.productDetails?.productName ?? ""}
                             </div>
                             <Paragraph>
-                                Are you sure you want to submit this loan
-                                application?
+                              {props.t("Are you sure you want to submit this loan application?")}
                             </Paragraph>
                             <Paragraph>
-                                The loan amount you can borrow based on the
-                                application information you submitted
+                              {props.t("The loan amount you can borrow based on the application information you submitted")}
                             </Paragraph>
                             <div className={"sectionButtons"}>
                                 <Button
@@ -74,14 +76,14 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
                                     className={"cancelButton"}
                                     styleType="secondary"
                                 >
-                                    Cancel
+                                  {props.t("Cancel")}
                                 </Button>
                                 <Button
                                     onClick={handleConfirm}
                                     className={"confirmButton"}
                                     styleType="primary"
                                 >
-                                    Confirm
+                                  {props.t("Confirm")}
                                 </Button>
                             </div>
                         </ModalContentStyled>
@@ -93,14 +95,4 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
     );
 };
 
-const SubmitOrderModal = (props: PureSubmitOrderModalProps) => {
-    return (
-        <PureSubmitOrderModal
-            productDetails={props?.productDetails}
-            setShowSubmitOrdereModal={props.setShowSubmitOrdereModal}
-            handleLoanSubmitOrder={props.handleLoanSubmitOrder}
-        />
-    );
-};
-
-export default SubmitOrderModal;
+export default withTranslation(i18nSubmitOrderModal.namespace)(PureSubmitOrderModal);

@@ -1,17 +1,17 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PureProductDetailModal } from "./index";
+import ProductDetailModal  from "./index";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import * as React from "react";
 
 export default {
     title: "Modal/ProductDetailModal",
-    component: PureProductDetailModal,
-} as ComponentMeta<typeof PureProductDetailModal>;
+    component: ProductDetailModal,
+} as ComponentMeta<typeof ProductDetailModal>;
 
-export const Template: ComponentStory<typeof PureProductDetailModal> = () => {
+export const Template: ComponentStory<typeof ProductDetailModal> = () => {
     return (
         <AppThemeProvider>
-            <PureProductDetailModal
+            <ProductDetailModal
                 recommendProducts={data}
                 setShowProductDetailModal={() => {
                     // do nothing.

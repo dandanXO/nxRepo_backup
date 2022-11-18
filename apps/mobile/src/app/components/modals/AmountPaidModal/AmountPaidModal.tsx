@@ -9,6 +9,8 @@ import {
     Title,
     Divider,
 } from "@frontend/mobile/shared/ui";
+import {withTranslation, WithTranslation} from "react-i18next";
+import {i18nAmountPaidModal} from "./i18n/tranlations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -34,7 +36,7 @@ const NoDataStyled = styled.div`
 
 type AmountPaidRecordsProps = Pick<GetLoanDetailResponse, "repayRecords"> & {
     setShowAmountPaidModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
+} & WithTranslation;
 
 interface RecordStyledProps {
     status: string;
@@ -67,7 +69,7 @@ const renderRecordList = (props: AmountPaidRecordsProps) => {
 };
 
 const AmountPaidModal = (props: AmountPaidRecordsProps) => {
-    const { repayRecords, setShowAmountPaidModal } = props;
+    const { repayRecords, setShowAmountPaidModal, t } = props;
     return (
         <div>
             <Overlay
@@ -77,10 +79,10 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
                 content={(hide: () => void) => {
                     return (
                         <div>
-                            <Title>Amount Paid Record</Title>
+                            <Title>{t("Amount Paid Record")}</Title>
                             <Divider styleType="narrow" />
                             {repayRecords?.length === 0 ? (
-                                <NoDataStyled>No paid records yet</NoDataStyled>
+                                <NoDataStyled>{t("No paid records yet")}</NoDataStyled>
                             ) : (
                                 <ModalContentStyled>
                                     {renderRecordList(props)}
@@ -96,4 +98,4 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
     );
 };
 
-export default AmountPaidModal;
+export default withTranslation(i18nAmountPaidModal.namespace)(AmountPaidModal);
