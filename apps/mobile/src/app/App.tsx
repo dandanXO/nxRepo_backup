@@ -1,7 +1,7 @@
 import {Provider} from "react-redux";
 import {environment} from "../environments/environment";
 import {AppThemeProvider, IThemeConfig} from "@frontend/mobile/shared/ui";
-import {getThemeConfig} from "./i18n/pk/presenter/ThemeConfig";
+import {getThemeConfig} from "./i18n/pk/ThemeConfig";
 import {appStore} from "./store";
 import {AppRouter} from "./router";
 import {AppStyle} from "./AppStyle";
