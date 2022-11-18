@@ -9,7 +9,7 @@ import React from "react";
 import styled from "styled-components";
 import { GetLoanDetailResponse } from "../../../../api/getLoanDetail";
 import { useGetLoanDetailQuery } from "../../../../api";
-import recordStatusStyleProps from "../../../../components/recordStatusColorMapper";
+import recordStatusStyleProps from "../../../../core/recordStatusColorMapper";
 import {environment} from "../../../../../environments/environment";
 import LoanBrand from "../../../../components/LoanBrand";
 

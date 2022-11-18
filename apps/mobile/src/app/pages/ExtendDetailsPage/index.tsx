@@ -1,5 +1,5 @@
 import React from "react";
-import useLoanDetailStory from "../../components/useLoanDetailStory";
+import useLoanDetailStory from "../../hooks/useLoanDetailStory";
 import PureLoanDetails from "../../components/PureLoanDetails";
 import { Page } from "@frontend/mobile/shared/ui";
 

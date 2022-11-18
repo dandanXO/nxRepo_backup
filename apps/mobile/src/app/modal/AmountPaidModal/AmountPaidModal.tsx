@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GetLoanDetailResponse } from "../../api/getLoanDetail";
-import recordStatusStyleProps from "../../components/recordStatusColorMapper";
+import recordStatusStyleProps from "../../core/recordStatusColorMapper";
 import {
     Overlay,
     ListItem,
