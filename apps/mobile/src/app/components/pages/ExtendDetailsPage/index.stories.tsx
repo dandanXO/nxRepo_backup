@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import PureLoanDetails from "../../components/PureLoanDetails";
 import React from "react";
 import {AppThemeProvider} from "../../../../../../../libs/mobile/shared/ui/src";
+import PureLoanDetails from "../../atoms/PureLoanDetails";
 
 export default {
     title: "Page/ExtendDetailsPage",
