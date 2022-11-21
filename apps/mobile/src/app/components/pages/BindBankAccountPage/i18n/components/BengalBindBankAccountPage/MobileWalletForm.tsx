@@ -23,18 +23,6 @@ type IMobileWalletForm = {
 export const MobileWalletForm = withTranslation(i18nBankBindAccountPage.namespace)((props: IMobileWalletForm) => {
     return (
       <Form>
-        <Label>{props.t("Please select the of your mobile wallet")}</Label>
-        <Select
-          className="mb"
-          fixButtonWidth={"calc(100vw - 36px)"}
-          dataSource={props.walletDropList}
-          defaultIndex={props.walletValue}
-          // FIXME: to controlled component
-          onSelect={(index:number) => {
-            props.setWalletValue(index);
-          }}
-        />
-
         <Label>{props.t("Your mobile wallet account")}</Label>
         <Input
           className="mb"

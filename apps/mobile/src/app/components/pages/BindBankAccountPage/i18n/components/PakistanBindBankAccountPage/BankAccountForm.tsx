@@ -77,7 +77,7 @@ export const BankAccountForm = withTranslation(i18nBankBindAccountPage.namespace
         // } else {
         //   console.log("request2")
         // }
-      }}>{props.t("Submit")}</Button>
+      }}>{props.t("Save")}</Button>
     </>
   );
 })

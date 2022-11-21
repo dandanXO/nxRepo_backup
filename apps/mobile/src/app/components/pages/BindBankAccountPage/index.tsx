@@ -7,6 +7,8 @@ import {PakistanCountry} from "../../../../environments/config/countries/Pakista
 import {IndiaBindBankAccountPage} from "./i18n/components/IndiaBindBankAccountPage";
 import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAccountPage";
 import {renderByCountry} from "../../../i18n";
+import {BengalCountry} from "../../../../environments/config/countries/BengalCountry";
+import {BengalBindBankAccountPage} from "./i18n/components/BengalBindBankAccountPage";
 
 const BindBankAccountPage = () => {
     // NOTICE: Common
@@ -47,6 +49,15 @@ const BindBankAccountPage = () => {
           cardholderName={cardholderName ?? ""}
         />
       ),
+      // NOTICE: REFACTOR ME
+      [BengalCountry.country]: (
+        <BengalBindBankAccountPage
+          postBankBindSaveToPK={postBankBindSaveToPK}
+          triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
+          bindCardDropListData={bindCardDropListData}
+          cardholderName={cardholderName ?? ""}
+        />
+      )
     }, (
       <IndiaBindBankAccountPage
         postBankBindSave={postBankBindSave}

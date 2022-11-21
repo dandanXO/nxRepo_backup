@@ -30,6 +30,12 @@ i18next
         // NOTICE: REFACTOR ME
         common: {
           "Welcome to Mobile": "Welcome to Mobile !!!",
+          modal: {
+            "Error": "Error",
+            "Notice": "Notice",
+            "Success": "Success!",
+            "Confirm": "Confirm",
+          },
         },
 
         // NOTICE: Atoms
