@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import {useTranslation} from "react-i18next";
 import {Form} from "../../../components/Form";
 import {Label} from "../../../components/Label";
 import {i18nBankBindPageKey} from "../../translations";
-import {Button, Input, Select} from "@frontend/mobile/shared/ui";
+import {Button, Input} from "@frontend/mobile/shared/ui";
 import {IPakistanBankAccountForm} from "../../types/IBankAccountForm";
+import Select from 'react-select';
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -20,11 +21,29 @@ const Warning = styled.div`
   color: #f82626;
 `;
 
+const CustomForm = styled.div`
+  .css-1s2u09g-control, .css-1pahdxg-control {
+    border-radius: 9px;
+    height: 49px;
+    border: 1px solid #aaaaaa;
+  }
+`
 export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
   const {t} = useTranslation();
 
+  const options = props.bankDropList.map((item: string, index: number) => {
+    return { value: item, label: item, index: index }
+  });
+
+  // useEffect(() => {
+  //   if(props.bankDropList) {
+      // console.log("props.bankDropList", props.bankDropList)
+      // props.onIFSCDropSelect(0)
+    // }
+  // }, [props.bankDropList])
+
   return (
-    <>
+    <CustomForm>
       <Form>
         <Label>{t("Cardholder Name", {ns: i18nBankBindPageKey.CommonKey})}</Label>
 
@@ -38,14 +57,25 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
 
         <Label>{t("Please select your bank name", {ns: i18nBankBindPageKey.PakistanKey})}</Label>
         <Select
-          className="mb"
-          fixButtonWidth={"calc(100vw - 36px)"}
-          dataSource={props.bankDropList}
-          defaultIndex={props.bankAccountValue}
-          // FIXME: to controlled component
-          onSelect={(index: number) => props.onIFSCDropSelect(index)}
-          maxItemCount={5.5}
+          className="react-select-container mb"
+          // defaultValue={props.bankDropList[0].value}
+          value={props.bankDropList[props.bankAccountValue].value}
+          onChange={(item: any) => {
+            console.log(item)
+            props.onIFSCDropSelect(item.index)
+          }}
+          options={options}
         />
+
+        {/*<Select*/}
+        {/*  className="mb"*/}
+        {/*  fixButtonWidth={"calc(100vw - 36px)"}*/}
+        {/*  dataSource={props.bankDropList}*/}
+        {/*  defaultIndex={props.bankAccountValue}*/}
+        {/*  // FIXME: to controlled component*/}
+        {/*  onSelect={(index: number) => props.onIFSCDropSelect(index)}*/}
+        {/*  maxItemCount={5.5}*/}
+        {/*/>*/}
 
         <Label>{t("Account Number", {ns: i18nBankBindPageKey.CommonKey})}</Label>
         <Input
@@ -80,6 +110,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         //   console.log("request2")
         // }
       }}>Submit</Button>
-    </>
+    </CustomForm>
   );
 }
