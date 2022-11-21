@@ -2,9 +2,9 @@ import React from "react";
 import {useGetBindCardDropListQuery, usePostBankBindSaveMutation, usePostBankBindSaveToPKMutation} from "../../../api";
 import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
-import {IndiaCountry} from "../../../../environments/countries/IndiaCountry";
+import {IndiaCountry} from "../../../../environments/config/countries/IndiaCountry";
 
-import {PakistanCountry} from "../../../../environments/countries/PakistanCountry";
+import {PakistanCountry} from "../../../../environments/config/countries/PakistanCountry";
 import {IndiaBindBankAccountPage} from "./i18n/components/IndiaBindBankAccountPage";
 import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAccountPage";
 import {renderByCountry} from "../../../i18n";

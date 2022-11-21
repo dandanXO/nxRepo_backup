@@ -7,9 +7,9 @@ import {PostRepayReceiptResponse} from "../../../api/postRepayReceipt";
 import {useUploadPaymentReceipt} from "./hooks/useUploadPaymentReceipt";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nUploadPaymentReceiptPage} from "./i18n/translations";
-import {IndiaCountry} from "../../../../environments/countries/IndiaCountry";
+import {IndiaCountry} from "../../../../environments/config/countries/IndiaCountry";
 import {IndiaUploadPaymentReceiptPage} from "./i18n/components/IndiaUploadPaymentReceiptPage";
-import {PakistanCountry} from "../../../../environments/countries/PakistanCountry";
+import {PakistanCountry} from "../../../../environments/config/countries/PakistanCountry";
 import {PakistanUploadPaymentReceiptPage} from "./i18n/components/PakistanUploadPaymentReceiptPage";
 import {renderByCountry} from "../../../i18n";
 

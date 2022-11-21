@@ -7,7 +7,8 @@
     "build": "nx build",
     "test": "nx test",
     "serve:min": "nx run-many --target=serve --projects=mobile  --configuration=development-in",
-    "serve:mpk": "nx run-many --target=serve --projects=mobile  --configuration=development-pk"
+    "serve:mpk": "nx run-many --target=serve --projects=mobile  --configuration=development-pk",
+    "serve:mbn": "nx run-many --target=serve --projects=mobile  --configuration=development-bn"
   },
   "private": true,
   "dependencies": {

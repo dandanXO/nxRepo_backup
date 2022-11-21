@@ -74,7 +74,7 @@ i18next
 
       },
       bn_BD: {
-        [i18nAmountPaidModal.namespace]: i18nAmountPaidModal.translation.bd_BD,
+        [i18nAmountPaidModal.namespace]: i18nAmountPaidModal.translation.bn_BD,
       }
     },
 

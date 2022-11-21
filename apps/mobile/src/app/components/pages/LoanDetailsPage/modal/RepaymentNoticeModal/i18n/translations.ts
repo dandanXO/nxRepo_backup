@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../../../i18n/i18n";
+import {i18nComponent} from "../../../../../../i18n/i18nComponent";
 
 export const i18nRepaymentNoticeModal: i18nComponent = {
   namespace: "i18nRepaymentNoticeModal",
@@ -10,7 +10,7 @@ export const i18nRepaymentNoticeModal: i18nComponent = {
       "After you have completed the repayment, you can return to APP and check all the loan history on the Loan Record page.": "After you have completed the repayment, you can return to APP and check all the loan history on the Loan Record page.",
       "Repay": "Repay",
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }

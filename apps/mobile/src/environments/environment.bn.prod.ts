@@ -4,4 +4,4 @@ import {BengalCountry} from "./config/countries/BengalCountry";
 export const environment: IEnvironment = {
   production: true,
   ...BengalCountry,
-};
+}

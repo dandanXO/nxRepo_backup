@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../../../i18n/i18n";
+import {i18nComponent} from "../../../../../../i18n/i18nComponent";
 
 export const i18nExtensionDetailModal: i18nComponent = {
   namespace: "extensionDetailModal",
@@ -18,7 +18,7 @@ export const i18nExtensionDetailModal: i18nComponent = {
       "Link account": "Link account",
       "Bank card": "Bank card",
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }

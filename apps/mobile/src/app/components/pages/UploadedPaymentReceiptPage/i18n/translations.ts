@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../i18n/i18n";
+import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nUploadedPaymentReceiptPage: i18nComponent = {
   namespace: "i18nUploadedPaymentReceiptPage",
@@ -8,7 +8,7 @@ export const i18nUploadedPaymentReceiptPage: i18nComponent = {
       "Thank you. Your receipt has been uploaded successfully.": "Thank you. Your receipt has been uploaded successfully.",
       "Done": "Done",
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }

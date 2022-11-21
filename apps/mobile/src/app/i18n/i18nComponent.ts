@@ -1,10 +1,9 @@
+import { IAllLanguage } from "../../environments/config/languages/IAllLanguage";
+
 export interface i18nComponent {
   namespace: string;
   translation: {
-    en_US: {
-      [key: string]: string;
-    },
-    bd_BD: {
+    [key in IAllLanguage]: {
       [key: string]: string;
     }
   };

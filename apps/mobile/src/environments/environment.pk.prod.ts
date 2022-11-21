@@ -1,10 +1,7 @@
 import {IEnvironment} from "./types/IEnvironment";
-import {PakistanCountry} from "./countries/PakistanCountry";
+import {PakistanCountry} from "./config/countries/PakistanCountry";
 
 export const environment: IEnvironment = {
   production: true,
-  country: PakistanCountry.country,
-  countryName: PakistanCountry.countryName,
-  currency: PakistanCountry.currency,
-  language: PakistanCountry.language,
+  ...PakistanCountry,
 };

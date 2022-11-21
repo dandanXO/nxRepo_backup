@@ -5,14 +5,11 @@
 // console.log("process.env.NX_TEST_SINGLE", process.env.NX_SERVE)
 
 import {IEnvironment} from "./types/IEnvironment";
-import {PakistanCountry} from "./countries/PakistanCountry";
+import {BengalCountry} from "./config/countries/BengalCountry";
 
 export const environment: IEnvironment = {
   production: false,
-  country: PakistanCountry.country,
-  countryName: PakistanCountry.countryName,
-  currency: PakistanCountry.currency,
-  language: PakistanCountry.language,
+  ...BengalCountry,
 };
 
 

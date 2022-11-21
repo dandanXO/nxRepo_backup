@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../i18n/i18n";
+import {i18nComponent} from "../../../../i18n/i18nComponent";
 import {PakistanUploadPaymentReceiptPage} from "./components/PakistanUploadPaymentReceiptPage";
 
 export const i18nUploadPaymentReceiptPage: i18nComponent = {
@@ -13,7 +13,7 @@ export const i18nUploadPaymentReceiptPage: i18nComponent = {
       "UTR": "UTR",
       // PakistanUploadPaymentReceiptPage
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }

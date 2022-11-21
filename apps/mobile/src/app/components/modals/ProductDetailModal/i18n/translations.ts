@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../i18n/i18n";
+import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nProductDetailModal: i18nComponent = {
   namespace: "productDetailModal",
@@ -14,7 +14,7 @@ export const i18nProductDetailModal: i18nComponent = {
       "Service time": "Service time",
       "Email": "Email",
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }

@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../i18n/i18n";
+import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nExtendModal: i18nComponent = {
   namespace: "extendModal",
@@ -14,7 +14,7 @@ export const i18nExtendModal: i18nComponent = {
       "Cancel": "Cancel",
       "Confirm": "Confirm",
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }

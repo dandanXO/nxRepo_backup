@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../i18n/i18n";
+import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nAmountPaidModal: i18nComponent = {
   namespace: "AmountPaidModal",
@@ -7,7 +7,7 @@ export const i18nAmountPaidModal: i18nComponent = {
       "Amount Paid Record": "Amount Paid Record",
       "No paid records yet": "No paid records yet",
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }

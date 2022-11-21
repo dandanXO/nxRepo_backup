@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../i18n/i18n";
+import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nSubmitOrderSuccessModal: i18nComponent = {
   namespace: "submitOrderSuccessModal",
@@ -11,7 +11,7 @@ export const i18nSubmitOrderSuccessModal: i18nComponent = {
       "You can check all the loan history on the Loan Record page later.": "You can check all the loan history on the Loan Record page later.",
       "OK": "OK",
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }

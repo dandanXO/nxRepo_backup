@@ -1,4 +1,4 @@
-import {i18nComponent} from "../../../../i18n/i18n";
+import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nLoanDetailsPage: i18nComponent = {
   namespace: "loanDetailsPage",
@@ -10,7 +10,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
       "interest": "interest",
       "terms": "terms",
     },
-    bd_BD: {
+    bn_BD: {
 
     }
   }
