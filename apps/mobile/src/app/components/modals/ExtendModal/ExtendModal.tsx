@@ -14,7 +14,7 @@ import {
 } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nExtendModal} from "./i18n/tranlations";
+import {i18nExtendModal} from "./i18n/translations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

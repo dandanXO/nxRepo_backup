@@ -10,7 +10,7 @@ import {
     Divider,
 } from "@frontend/mobile/shared/ui";
 import {withTranslation, WithTranslation} from "react-i18next";
-import {i18nAmountPaidModal} from "./i18n/tranlations";
+import {i18nAmountPaidModal} from "./i18n/translations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

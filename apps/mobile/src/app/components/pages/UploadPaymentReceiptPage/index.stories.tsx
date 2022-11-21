@@ -3,10 +3,8 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import {
   useUploadPaymentReceipt
 } from "./hooks/useUploadPaymentReceipt";
-import {InputValue} from "../../../core/types/InputValue";
 import React from "react";
-import {IndiaUploadPaymentReceiptPage} from "./i18n/I18UploadPaymentReceiptPage/india/IndiaUploadPaymentReceiptPage";
-import {I18UploadPaymentReceiptPageProps} from "./i18n/I18UploadPaymentReceiptPage/I18UploadPaymentReceiptPageProps";
+import {IndiaUploadPaymentReceiptPage} from "./i18n/components/IndiaUploadPaymentReceiptPage";
 
 export default {
     title: "Page/UploadPaymentReceiptPage",

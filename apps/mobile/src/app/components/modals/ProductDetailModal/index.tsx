@@ -10,7 +10,7 @@ import {
 import {environment} from "../../../../environments/environment";
 import LoanBrand from "../../atoms/LoanBrand";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nProductDetailModal} from "./i18n/tranlations";
+import {i18nProductDetailModal} from "./i18n/translations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

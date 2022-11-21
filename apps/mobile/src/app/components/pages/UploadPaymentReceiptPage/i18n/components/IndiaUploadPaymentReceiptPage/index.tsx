@@ -1,6 +1,6 @@
 import UploadingFileModal from "../../../modal/UploadingFileModal";
 import {Button, Input} from "@frontend/mobile/shared/ui";
-import I18CameraSvgIcon from "../../I18CameraSvgIcon";
+import I18CameraSvgIcon from "../I18CameraSvgIcon";
 import React from "react";
 import {
   CameraSvgIconWrapper,
@@ -10,12 +10,14 @@ import {
   UploadSection,
   UploadSectionImg,
   UploadSectionTitle
-} from "../../common/components";
+} from "../common";
 
-import {I18UploadPaymentReceiptPageProps} from "../I18UploadPaymentReceiptPageProps";
+import {I18UploadPaymentReceiptPageProps} from "../../types/I18UploadPaymentReceiptPageProps";
+import {withTranslation} from "react-i18next";
+import {i18nUploadPaymentReceiptPage} from "../../translations";
 
 
-export const IndiaUploadPaymentReceiptPage = (props: I18UploadPaymentReceiptPageProps) => {
+export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)((props: I18UploadPaymentReceiptPageProps) => {
   return (
     <CustomPage>
       {props.isUploading && <UploadingFileModal/>}
@@ -25,7 +27,7 @@ export const IndiaUploadPaymentReceiptPage = (props: I18UploadPaymentReceiptPage
           className="mb"
           value={props.utr.data}
           labelType="left"
-          label="UTR"
+          label={props.t("UTR") as string}
           onChange={(event) => {
             props.setURT({
               ...props.utr,
@@ -39,7 +41,7 @@ export const IndiaUploadPaymentReceiptPage = (props: I18UploadPaymentReceiptPage
         />
       </Section>
 
-      <Title>Upload your repayment receipt(optional)</Title>
+      <Title>{props.t("Upload your repayment receipt(optional)")}</Title>
 
       <UploadSection>
         {!props.formFile ? (
@@ -48,7 +50,7 @@ export const IndiaUploadPaymentReceiptPage = (props: I18UploadPaymentReceiptPage
               <I18CameraSvgIcon/>
             </CameraSvgIconWrapper>
             <UploadSectionTitle>
-              Upload from Photo Album
+              {props.t("Upload from Photo Album")}
             </UploadSectionTitle>
             <Input
               type="file"
@@ -62,7 +64,7 @@ export const IndiaUploadPaymentReceiptPage = (props: I18UploadPaymentReceiptPage
           <UploadSectionImg imageURL={props.imageSrc ? props.imageSrc : ""}/>
         )}
       </UploadSection>
-      <Button onClick={() => props.confirm()}>Confirm</Button>
+      <Button onClick={() => props.confirm()}>{props.t("Confirm")}</Button>
     </CustomPage>
   );
-}
+})

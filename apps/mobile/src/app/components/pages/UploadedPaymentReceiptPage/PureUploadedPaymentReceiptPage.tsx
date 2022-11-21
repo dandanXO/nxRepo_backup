@@ -2,6 +2,8 @@ import {SuccessICON} from "./i18n/SuccessICON";
 import {Button, Page} from "@frontend/mobile/shared/ui";
 import UploadedPaymentReceiptPage from "./index";
 import styled from "styled-components";
+import {WithTranslation, withTranslation} from "react-i18next";
+import {i18nUploadedPaymentReceiptPage} from "./i18n/translations";
 
 
 const CustomPage = styled(Page)`
@@ -34,27 +36,28 @@ const ControlSection = styled.div`
     flex-direction: column;
     width: 100%;
 `;
-interface UploadedPaymentReceiptPage {
-  navigateToLoanDetails: () => void;
-}
 
-export const PureUploadedPaymentReceiptPage = (
+type UploadedPaymentReceiptPage = {
+  navigateToLoanDetails: () => void;
+} & WithTranslation;
+
+export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymentReceiptPage.namespace)((
   props: UploadedPaymentReceiptPage
 ) => {
   return (
     <CustomPage>
       <Content>
         <SuccessICON/>
-        <Title>Upload payment receipt</Title>
+        <Title>{props.t("Upload payment receipt")}</Title>
         <Description>
-          Thank you. Your receipt has been uploaded successfully.
+          {props.t("Thank you. Your receipt has been uploaded successfully.")}
         </Description>
       </Content>
       <ControlSection>
         <Button onClick={() => props.navigateToLoanDetails()}>
-          Done
+          {props.t("Done")}
         </Button>
       </ControlSection>
     </CustomPage>
   );
-};
+})

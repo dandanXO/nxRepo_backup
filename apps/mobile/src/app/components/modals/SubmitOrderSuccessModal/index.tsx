@@ -2,7 +2,7 @@ import { Modal } from "@frontend/mobile/shared/ui";
 import React from "react";
 import styled from "styled-components";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nSubmitOrderSuccessModal} from "./i18n/tranlations";
+import {i18nSubmitOrderSuccessModal} from "./i18n/translations";
 
 const Container = styled.div`
     padding: 0 20px;

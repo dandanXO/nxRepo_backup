@@ -6,11 +6,11 @@ import {
   i18nLoanDetailsPage,
 } from "../components/pages/LoanDetailsPage/i18n/translations";
 import {i18nComponentsKey, i18nComponentsTranslations} from "../components/atoms/i18n/translations";
-import {i18nAmountPaidModal} from "../components/modals/AmountPaidModal/i18n/tranlations";
-import {i18nExtendModal} from "../components/modals/ExtendModal/i18n/tranlations";
-import {i18nProductDetailModal} from "../components/modals/ProductDetailModal/i18n/tranlations";
-import {i18nSubmitOrderModal} from "../components/modals/SubmitOrderModal/i18n/tranlations";
-import {i18nSubmitOrderSuccessModal} from "../components/modals/SubmitOrderSuccessModal/i18n/tranlations";
+import {i18nAmountPaidModal} from "../components/modals/AmountPaidModal/i18n/translations";
+import {i18nExtendModal} from "../components/modals/ExtendModal/i18n/translations";
+import {i18nProductDetailModal} from "../components/modals/ProductDetailModal/i18n/translations";
+import {i18nSubmitOrderModal} from "../components/modals/SubmitOrderModal/i18n/translations";
+import {i18nSubmitOrderSuccessModal} from "../components/modals/SubmitOrderSuccessModal/i18n/translations";
 import {
   i18nExtensionDetailModal
 } from "../components/pages/LoanDetailsPage/modal/ExtensionDetailModal/i18n/translations";
@@ -18,6 +18,8 @@ import {i18nRepaymentModal} from "../components/pages/LoanDetailsPage/modal/Repa
 import {
   i18nRepaymentNoticeModal
 } from "../components/pages/LoanDetailsPage/modal/RepaymentNoticeModal/i18n/translations";
+import {i18nUploadPaymentReceiptPage} from "../components/pages/UploadPaymentReceiptPage/i18n/translations";
+import {i18nUploadedPaymentReceiptPage} from "../components/pages/UploadedPaymentReceiptPage/i18n/translations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -62,6 +64,14 @@ i18next
         [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.en_US,
         [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.en_US,
 
+        // NOTE: UploadedPaymentReceiptPage
+        [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.en_US,
+
+        // NOTE: UploadPaymentReceiptPage
+        [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.en_US,
+
+
+
       },
       bn_BD: {
         [i18nAmountPaidModal.namespace]: i18nAmountPaidModal.translation.bd_BD,
@@ -78,3 +88,4 @@ i18next
     console.log("3:", i18next.t('Welcome to React', { ns: 'common' }));
   });
 
+export {renderByCountry} from "./renderByCountry";

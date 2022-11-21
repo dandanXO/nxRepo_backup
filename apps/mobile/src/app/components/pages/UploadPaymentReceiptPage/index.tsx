@@ -5,8 +5,13 @@ import {useNavigate} from "react-router-dom";
 import {usePostRepayReceiptMutation} from "../../../api";
 import {PostRepayReceiptResponse} from "../../../api/postRepayReceipt";
 import {useUploadPaymentReceipt} from "./hooks/useUploadPaymentReceipt";
-import {I18UploadPaymentReceiptPage} from "./i18n/I18UploadPaymentReceiptPage";
-
+import {WithTranslation, withTranslation} from "react-i18next";
+import {i18nUploadPaymentReceiptPage} from "./i18n/translations";
+import {IndiaCountry} from "../../../../environments/countries/IndiaCountry";
+import {IndiaUploadPaymentReceiptPage} from "./i18n/components/IndiaUploadPaymentReceiptPage";
+import {PakistanCountry} from "../../../../environments/countries/PakistanCountry";
+import {PakistanUploadPaymentReceiptPage} from "./i18n/components/PakistanUploadPaymentReceiptPage";
+import {renderByCountry} from "../../../i18n";
 
 export interface PostRepayReceiptRequestProps {
     formFile: any;
@@ -14,7 +19,10 @@ export interface PostRepayReceiptRequestProps {
     receipt: string;
     setIsUploading: any;
 }
-const UploadPaymentReceiptPage = () => {
+
+type UploadPaymentReceiptPageProps = WithTranslation;
+
+const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
     const [postRepayReceipt, { isLoading }] = usePostRepayReceiptMutation();
     const navigate = useNavigate();
     const pageQueryString = useLocationOrderQueryString();
@@ -57,8 +65,17 @@ const UploadPaymentReceiptPage = () => {
     token: pageQueryString.token ? pageQueryString.token : "",
     orderNo: pageQueryString.orderNo ? pageQueryString.orderNo : "",
   });
-    return (
-      <I18UploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
-    );
+
+  return renderByCountry({
+    [IndiaCountry.country]: (
+      <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
+    ),
+    [PakistanCountry.country]: (
+      <PakistanUploadPaymentReceiptPage isUploading={isUploading} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
+    ),
+  }, (
+    <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
+  ))
 };
-export default UploadPaymentReceiptPage;
+
+export default withTranslation(i18nUploadPaymentReceiptPage.namespace)(UploadPaymentReceiptPage);

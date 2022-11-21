@@ -1,7 +1,8 @@
 import {InputValue} from "../../../../../core/types/InputValue";
 import React from "react";
+import {WithTranslation} from "react-i18next";
 
-export interface I18UploadPaymentReceiptPageProps {
+export type I18UploadPaymentReceiptPageProps = {
   // NOTE: UTR
   utr: InputValue<string>;
   setURT: React.Dispatch<React.SetStateAction<InputValue<string>>>;
@@ -13,4 +14,4 @@ export interface I18UploadPaymentReceiptPageProps {
   // NOTE: FORM
   confirm: () => void;
   isUploading: boolean;
-}
+} & WithTranslation;

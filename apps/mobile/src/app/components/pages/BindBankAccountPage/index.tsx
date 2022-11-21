@@ -7,6 +7,7 @@ import {IndiaCountry} from "../../../../environments/countries/IndiaCountry";
 import {PakistanCountry} from "../../../../environments/countries/PakistanCountry";
 import {IndiaBindBankAccountPage} from "./i18n/components/IndiaBindBankAccountPage";
 import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAccountPage";
+import {renderByCountry} from "../../../i18n";
 
 const BindBankAccountPage = () => {
     // NOTICE: Common
@@ -31,34 +32,28 @@ const BindBankAccountPage = () => {
     // NOTE: 綁定電子錢包
     const [triggerPostBankBindSaveToPKMutation, { isLoading }] = usePostBankBindSaveToPKMutation();
 
-    // NOTICE:
-    if(environment.country === IndiaCountry.country) {
-      // NOTICE: India
-      return (
+    return renderByCountry({
+      // NOTICE: default 0 index
+      [IndiaCountry.country]: (
         <IndiaBindBankAccountPage
           postBankBindSave={postBankBindSave}
           cardholderName={cardholderName ?? ""}
         />
-      );
-    } else if(environment.country === PakistanCountry.country){
-      // NOTICE: Pakistan
-      return (
+      ),
+      [PakistanCountry.country]: (
         <PakistanBindBankAccountPage
           postBankBindSaveToPK={postBankBindSaveToPK}
           triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
           bindCardDropListData={bindCardDropListData}
           cardholderName={cardholderName ?? ""}
         />
-      );
-    } else {
-      // NOTICE: India
-      return (
-        <IndiaBindBankAccountPage
-          postBankBindSave={postBankBindSave}
-          cardholderName={cardholderName ?? ""}
-        />
-      );
-    }
+      ),
+    }, (
+      <IndiaBindBankAccountPage
+        postBankBindSave={postBankBindSave}
+        cardholderName={cardholderName ?? ""}
+      />
+    ))
 };
 
 export default BindBankAccountPage;
