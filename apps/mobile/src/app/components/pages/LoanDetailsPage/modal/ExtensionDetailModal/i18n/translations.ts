@@ -4,7 +4,7 @@ export const i18nExtensionDetailModal: i18nComponent = {
   namespace: "extensionDetailModal",
   translation: {
     en_US: {
-      "Extension Fee": "!Extension Fee",
+      "Extension Fee": "Extension Fee",
       "General": "General",
       "No.": "No.",
       "State": "State",
