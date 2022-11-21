@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { flexCreator } from '../../../../../../../libs/mobile/shared/ui/src/lib/components/utils';
+import {flexCreator} from '../../../../../../../libs/mobile/shared/ui/src/lib/components/utils';
 import {environment} from "../../../../environments/environment";
 
 const LoanBrandStyled = styled.div<propsStyles>`

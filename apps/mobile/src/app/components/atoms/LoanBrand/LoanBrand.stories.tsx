@@ -1,6 +1,6 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import LoanBrand from './index';
-import { AppThemeProvider } from '../../../../../../../libs/mobile/shared/ui/src/lib/components';
+import {AppThemeProvider} from '../../../../../../../libs/mobile/shared/ui/src/lib/components';
 import * as React from 'react';
 
 export default {

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
-import { flexCreator } from '../../../../../../../libs/mobile/shared/ui/src/lib/components/utils';
+import {flexCreator} from '../../../../../../../libs/mobile/shared/ui/src/lib/components/utils';
 import {useTranslation} from "react-i18next";
-import {i18nComponentsKey} from "../i18n/translations";
+import {i18nComponents} from "../i18n/translations";
 
 const CardStyled = styled.div`
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
@@ -57,13 +57,13 @@ type CardProps = {
 
 const Card = (props: CardProps) => {
   const { children, isHot } = props;
-  const {t} = useTranslation();
+  const {t} = useTranslation(i18nComponents.namespace);
   return (
     <CardStyled>
       {isHot && (
         <div>
           <HotTag />
-          <span className={'hotTagText'}>{t("Hot", {ns: i18nComponentsKey})}</span>
+          <span className={'hotTagText'}>{t("Hot")}</span>
         </div>
       )}
       {children}

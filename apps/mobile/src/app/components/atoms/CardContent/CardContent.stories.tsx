@@ -1,6 +1,6 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import CardContent from './index';
-import { AppThemeProvider } from '../../../../../../../libs/mobile/shared/ui/src/lib/components';
+import {AppThemeProvider} from '../../../../../../../libs/mobile/shared/ui/src/lib/components';
 
 export default {
   title: 'Business Component/CardContent',

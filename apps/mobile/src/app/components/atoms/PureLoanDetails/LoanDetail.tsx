@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import React from "react";
-import {
-    GetLoanDetailChargeFeeDetail,
-    GetLoanDetailResponse,
-} from "../../../api/getLoanDetail";
-import { ListItem, Accordion } from "@frontend/mobile/shared/ui";
+import {GetLoanDetailChargeFeeDetail, GetLoanDetailResponse,} from "../../../api/getLoanDetail";
+import {Accordion, ListItem} from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
 import Card from "../Card";
 

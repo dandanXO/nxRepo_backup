@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import ExtendModal from "../../modals/ExtendModal/ExtendModal";
 import ExtensionDetailModal from "../../pages/LoanDetailsPage/modal/ExtensionDetailModal";
 import AmountPaidModal from "../../modals/AmountPaidModal/AmountPaidModal";
@@ -10,7 +10,7 @@ import {CustomPage} from "../../pages/BindBankAccountPage/components/CustomPage"
 import {Attention} from "./Attention";
 import {Button} from "@frontend/mobile/shared/ui";
 import styled from "styled-components";
-import {i18nComponentsKey} from "../i18n/translations";
+import {i18nComponents} from "../i18n/translations";
 import {useTranslation} from "react-i18next";
 
 const StyledUploadReceiptSection = styled.div`
@@ -37,7 +37,8 @@ export interface PureLoanDetailsPageProps {
 }
 
 const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
-    const {t} = useTranslation();
+
+    const {t} = useTranslation(i18nComponents.namespace);
     const [showExtendModal, setShowExtendModal] = useState(false);
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     const [showAmountPaidModal, setShowAmountPaidModal] = useState(false);
@@ -114,11 +115,11 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
                 className={"uploadButton"}
                 onClick={props.navigateToUploadPaymentReceiptPage}
               >
-                <Button styleType={"ghost"}>{t("Upload Receipt", {ns: i18nComponentsKey})}</Button>
+                <Button styleType={"ghost"}>{t("Upload Receipt")}</Button>
               </div>
 
               <div className={"noticeText"}>
-                {t("After completing the repayment, take a screenshot and upload your repayment receipt here.", {ns: i18nComponentsKey})}
+                {t("After completing the repayment, take a screenshot and upload your repayment receipt here.")}
               </div>
 
             </StyledUploadReceiptSection>

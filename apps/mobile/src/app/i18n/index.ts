@@ -1,13 +1,9 @@
 import i18next from "i18next";
 import {initReactI18next} from "react-i18next";
-import {
-  i18nBankBindAccountPage
-} from "../components/pages/BindBankAccountPage/i18n/translations";
+import {i18nBankBindAccountPage} from "../components/pages/BindBankAccountPage/i18n/translations";
 import {i18nextPlugin} from 'translation-check'
-import {
-  i18nLoanDetailsPage,
-} from "../components/pages/LoanDetailsPage/i18n/translations";
-import {i18nComponentsKey, i18nComponentsTranslations} from "../components/atoms/i18n/translations";
+import {i18nLoanDetailsPage,} from "../components/pages/LoanDetailsPage/i18n/translations";
+import {i18nComponents} from "../components/atoms/i18n/translations";
 import {i18nAmountPaidModal} from "../components/modals/AmountPaidModal/i18n/translations";
 import {i18nExtendModal} from "../components/modals/ExtendModal/i18n/translations";
 import {i18nProductDetailModal} from "../components/modals/ProductDetailModal/i18n/translations";
@@ -42,7 +38,7 @@ i18next
           },
         },
         // NOTICE: Atoms
-        [i18nComponentsKey]: i18nComponentsTranslations,
+        [i18nComponents.namespace]: i18nComponents.translation.en_US,
 
         // NOTICE: Modals
         [i18nAmountPaidModal.namespace]: i18nAmountPaidModal.translation.en_US,
