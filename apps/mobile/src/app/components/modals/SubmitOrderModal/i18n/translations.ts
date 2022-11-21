@@ -1,7 +1,7 @@
 import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nSubmitOrderModal: i18nComponent = {
-  namespace: "submitOrderModal",
+  namespace: "modals/i18nSubmitOrderModal",
   translation: {
     en_US: {
       "Loan Application": "Loan Application",

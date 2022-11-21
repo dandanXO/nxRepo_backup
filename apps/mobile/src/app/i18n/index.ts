@@ -30,13 +30,8 @@ i18next
         // NOTICE: REFACTOR ME
         common: {
           "Welcome to Mobile": "Welcome to Mobile !!!",
-          modal: {
-            "Error": "Error",
-            "Notice": "Notice",
-            "Success": "Success!",
-            "Confirm": "Confirm",
-          },
         },
+
         // NOTICE: Atoms
         [i18nComponents.namespace]: i18nComponents.translation.en_US,
 
@@ -70,7 +65,35 @@ i18next
 
       },
       bn_BD: {
+        // NOTICE: Atoms
+        [i18nComponents.namespace]: i18nComponents.translation.bn_BD,
+
+        // NOTICE: Modals
         [i18nAmountPaidModal.namespace]: i18nAmountPaidModal.translation.bn_BD,
+        [i18nExtendModal.namespace]: i18nExtendModal.translation.bn_BD,
+        [i18nProductDetailModal.namespace]: i18nProductDetailModal.translation.bn_BD,
+        [i18nSubmitOrderModal.namespace]: i18nSubmitOrderModal.translation.bn_BD,
+        [i18nSubmitOrderSuccessModal.namespace]: i18nSubmitOrderSuccessModal.translation.bn_BD,
+
+        // NOTICE: Pages
+        // NOTE: BankBindPage
+        [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.bn_BD,
+
+        // NOTE: LoanDetailPage
+        [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.bn_BD,
+
+        // NOTE: LoanDetailsPage
+        [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.bn_BD,
+        // NOTE: LoanDetailsPage - Modal
+        [i18nExtensionDetailModal.namespace]: i18nExtensionDetailModal.translation.bn_BD,
+        [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.bn_BD,
+        [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.bn_BD,
+
+        // NOTE: UploadedPaymentReceiptPage
+        [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.bn_BD,
+
+        // NOTE: UploadPaymentReceiptPage
+        [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.bn_BD,
       }
     },
 

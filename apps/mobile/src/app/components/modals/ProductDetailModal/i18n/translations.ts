@@ -1,7 +1,7 @@
 import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nProductDetailModal: i18nComponent = {
-  namespace: "productDetailModal",
+  namespace: "modals/i18nProductDetailModal",
   translation: {
     en_US: {
       "Product Details": "Product Details",

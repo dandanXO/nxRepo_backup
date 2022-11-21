@@ -1,13 +1,7 @@
 import {i18nComponent} from "../../../../i18n/i18nComponent";
 
-export enum i18nBankBindPageKey {
-  CommonKey = "bank-bind-page",
-  IndiaKey = "bank-bind-india-page",
-  PakistanKey = "bank-bind-pakistan-page"
-}
-
 export const i18nBankBindAccountPage: i18nComponent = {
-  namespace: "pages/i18nBankBindAccountPage/common",
+  namespace: "pages/i18nBankBindAccountPage",
   translation: {
     en_US: {
       // NOTICE: common

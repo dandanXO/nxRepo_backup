@@ -2,7 +2,7 @@ import {i18nComponent} from "../../../../i18n/i18nComponent";
 import {PakistanUploadPaymentReceiptPage} from "./components/PakistanUploadPaymentReceiptPage";
 
 export const i18nUploadPaymentReceiptPage: i18nComponent = {
-  namespace: "UploadPaymentReceiptPage",
+  namespace: "pages/i18nUploadPaymentReceiptPage",
   translation: {
     en_US: {
       // Common

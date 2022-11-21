@@ -1,7 +1,7 @@
 import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nExtendModal: i18nComponent = {
-  namespace: "extendModal",
+  namespace: "modals/i18nExtendModal",
   translation: {
     en_US: {
       "Extend": "Extend",

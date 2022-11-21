@@ -1,7 +1,7 @@
 import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nUploadedPaymentReceiptPage: i18nComponent = {
-  namespace: "i18nUploadedPaymentReceiptPage",
+  namespace: "pages/i18nUploadedPaymentReceiptPage",
   translation: {
     en_US: {
       "Upload payment receipt": "Upload payment receipt",

@@ -1,7 +1,7 @@
 import {i18nComponent} from "../../../../i18n/i18nComponent";
 
 export const i18nSubmitOrderSuccessModal: i18nComponent = {
-  namespace: "submitOrderSuccessModal",
+  namespace: "modals/i18nSubmitOrderSuccessModal",
   translation: {
     en_US: {
       "confirm": "confirm",
