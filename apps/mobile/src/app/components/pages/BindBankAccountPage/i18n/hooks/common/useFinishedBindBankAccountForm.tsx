@@ -1,7 +1,8 @@
 import {useCallback, useState} from "react";
 import {InputValue, Modal} from "@frontend/mobile/shared/ui";
-import i18next from "i18next";
 import {GetBindCardDropListResponse} from "../../../../../../api/GetBindCardDropList";
+import {useTranslation} from "react-i18next";
+import {i18nBankBindAccountPage} from "../../translations";
 
 type IUseFinishedBindBankAccountPage =  {
   // NOTICE: Common
@@ -21,6 +22,8 @@ type IUseFinishedBindBankAccountPage =  {
 }
 
 export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
+  const {t} = useTranslation(i18nBankBindAccountPage.namespace);
+
   // NOTE: Form
   const [isFormPending, setIsFormPending] = useState<boolean>(false);
 
@@ -70,9 +73,9 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         Modal.alert({
           show: true,
           mask: true,
-          title: i18next.t("Notice") as string,
-          content: i18next.t("Success") as string,
-          confirmText: i18next.t("Confirm") as string,
+          title: t("Notice") as string,
+          content: t("Success") as string,
+          confirmText: t("Confirm") as string,
           maskClosable: true,
           enableClose: false,
           enableIcon: false,

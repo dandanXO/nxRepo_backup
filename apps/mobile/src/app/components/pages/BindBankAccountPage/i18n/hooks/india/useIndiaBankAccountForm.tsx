@@ -3,15 +3,15 @@ import type {InputValue} from "@frontend/mobile/shared/ui";
 import {z} from "zod";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
-import {i18nBankBindPageKey} from "../../translations";
+import {i18nBankBindAccountPage} from "../../translations";
 
 const ValidationInfo = {
-  min1: i18next.t("This field cannot be left blank", {ns: i18nBankBindPageKey.CommonKey}),
+  min1: i18next.t("This field cannot be left blank", {ns: i18nBankBindAccountPage.namespace}),
 };
 
 // NOTE: 印度單一銀行專用
 export const useIndiaBankAccountForm = () => {
-  const {t} = useTranslation();
+  const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
   // NOTE: FormInput - IFSC
   const [ifscData, setIFSCData] = useState<InputValue<string>>({
@@ -26,7 +26,7 @@ export const useIndiaBankAccountForm = () => {
     const ifscScheme = z
       .string()
       .min(1, ValidationInfo.min1)
-      .length(11, t("IFSC must be 11 digits only.", {ns: i18nBankBindPageKey.CommonKey}) as string);
+      .length(11, t("IFSC must be 11 digits only.") as string);
     const result = ifscScheme.safeParse(ifscData.data);
     if (!result.success) {
       const firstError = result.error.format();

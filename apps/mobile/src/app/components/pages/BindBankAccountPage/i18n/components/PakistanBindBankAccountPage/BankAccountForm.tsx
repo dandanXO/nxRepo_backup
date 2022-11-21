@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import {useTranslation} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import {Form} from "../../../components/Form";
 import {Label} from "../../../components/Label";
-import {i18nBankBindPageKey} from "../../translations";
+import {i18nBankBindAccountPage} from "../../translations";
 import {Button, Input, Select} from "@frontend/mobile/shared/ui";
 import {IPakistanBankAccountForm} from "../../types/IBankAccountForm";
 
@@ -20,23 +20,21 @@ const Warning = styled.div`
   color: #f82626;
 `;
 
-export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
-  const {t} = useTranslation();
-
+export const BankAccountForm = withTranslation(i18nBankBindAccountPage.namespace)((props: IPakistanBankAccountForm)  => {
   return (
     <>
       <Form>
-        <Label>{t("Cardholder Name", {ns: i18nBankBindPageKey.CommonKey})}</Label>
+        <Label>{props.t("Cardholder Name")}</Label>
 
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={t("Cardholder Name", {ns: i18nBankBindPageKey.CommonKey}) as string}
+          placeholder={props.t("Cardholder Name") as string}
           value={props.cardholderName}
           disabled
         />
 
-        <Label>{t("Please select your bank name", {ns: i18nBankBindPageKey.PakistanKey})}</Label>
+        <Label>{props.t("Please select your bank name")}</Label>
         <Select
           className="mb"
           fixButtonWidth={"calc(100vw - 36px)"}
@@ -47,29 +45,29 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           maxItemCount={5.5}
         />
 
-        <Label>{t("Account Number", {ns: i18nBankBindPageKey.CommonKey})}</Label>
+        <Label>{props.t("Account Number", )}</Label>
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={t("Account Number", {ns: i18nBankBindPageKey.CommonKey}) as string}
+          placeholder={props.t("Account Number") as string}
           value={props.bankcardNoData.data}
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
         />
 
-        <Label>{t("Confirm Account Number", {ns: i18nBankBindPageKey.CommonKey})}</Label>
+        <Label>{props.t("Confirm Account Number")}</Label>
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={t("Confirm Account Number", {ns: i18nBankBindPageKey.CommonKey}) as string}
+          placeholder={props.t("Confirm Account Number") as string}
           value={props.confirmedBankcardNoData.data}
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
 
-        <Warning>{t("Unchangeable after linked, please check before submission.", {ns: i18nBankBindPageKey.CommonKey })}</Warning>
+        <Warning>{props.t("Unchangeable after linked, please check before submission.")}</Warning>
       </Form>
 
       <Button onClick={() => {
@@ -79,7 +77,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         // } else {
         //   console.log("request2")
         // }
-      }}>Submit</Button>
+      }}>{props.t("Submit")}</Button>
     </>
   );
-}
+})

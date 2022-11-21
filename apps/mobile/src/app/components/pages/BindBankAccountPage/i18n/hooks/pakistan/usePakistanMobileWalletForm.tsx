@@ -2,7 +2,7 @@ import {useTranslation} from "react-i18next";
 import {useCallback, useEffect, useState} from "react";
 import {GetBindCardDropListResponse, WalletVendor} from "../../../../../../api/GetBindCardDropList";
 import {InputValue, Modal} from "@frontend/mobile/shared/ui";
-import {i18nBankBindPageKey} from "../../translations";
+import {i18nBankBindAccountPage} from "../../translations";
 import {z} from "zod";
 import i18next from "i18next";
 
@@ -13,7 +13,7 @@ interface IUsePakistanMobileWalletForm {
 
 export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm) => {
 
-  const {t} = useTranslation();
+  const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
   // NOTE: Wallet List
   // Wallet List - 電子錢包列表 Data
@@ -50,7 +50,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
 
   // Wallet Account  - 驗證
   const validateMobileWalletAccount = useCallback(() => {
-    const message = t("Account number should be 11 digits starting with 0.", {ns: i18nBankBindPageKey.PakistanKey});
+    const message = t("Account number should be 11 digits starting with 0.");
     const scheme = z
       .string()
       .regex(/^0/, message)

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {IUseBindBankAccountPage,} from "../../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../../components/CustomPage";
 import {ChooseBindMethod} from "./ChooseBindMethod";

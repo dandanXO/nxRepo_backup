@@ -1,6 +1,8 @@
 import i18next from "i18next";
 import {initReactI18next} from "react-i18next";
-import {i18nBankBindPageKey, i18nBankBindPageTranslations} from "../components/pages/BindBankAccountPage/i18n/translations";
+import {
+  i18nBankBindAccountPage
+} from "../components/pages/BindBankAccountPage/i18n/translations";
 import {i18nextPlugin} from 'translation-check'
 import {
   i18nLoanDetailsPage,
@@ -51,9 +53,7 @@ i18next
 
         // NOTICE: Pages
         // NOTE: BankBindPage
-        [i18nBankBindPageKey.CommonKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.CommonKey]],
-        [i18nBankBindPageKey.IndiaKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.IndiaKey]],
-        [i18nBankBindPageKey.PakistanKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.PakistanKey]],
+        [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.en_US,
 
         // NOTE: LoanDetailPage
         [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.en_US,

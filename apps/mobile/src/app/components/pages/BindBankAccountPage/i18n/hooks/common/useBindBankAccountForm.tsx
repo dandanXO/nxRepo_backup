@@ -3,14 +3,14 @@ import type {InputValue} from "@frontend/mobile/shared/ui";
 import {z} from "zod";
 import {useTranslation} from "react-i18next";
 import i18next from "i18next";
-import {i18nBankBindPageKey} from "../../translations";
+import {i18nBankBindAccountPage} from "../../translations";
 
 const ValidationInfo = {
-  min1: i18next.t("This field cannot be left blank", {ns: i18nBankBindPageKey.CommonKey}),
+  min1: i18next.t("This field cannot be left blank"),
 };
 
 export const useBindBankAccountForm = () => {
-    const {t} = useTranslation();
+    const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
     // NOTE: FormInput - bankcardNoData
     const [bankcardNoData, setBankcardNoData] = useState<InputValue<string>>({
@@ -23,10 +23,10 @@ export const useBindBankAccountForm = () => {
         const bankCardNoScheme = z
             .string()
             .min(1, ValidationInfo.min1)
-            .min(9, t("Account number must be between from 9 to 18 digits only.", {ns: i18nBankBindPageKey.CommonKey}) as string)
+            .min(9, t("Account number must be between from 9 to 18 digits only.") as string)
             .max(
                 18,
-              t("Account number must be between from 9 to 18 digits only.", {ns: i18nBankBindPageKey.CommonKey}) as string
+              t("Account number must be between from 9 to 18 digits only.") as string
             );
         const result = bankCardNoScheme.safeParse(bankcardNoData.data);
         if (!result.success) {
@@ -79,7 +79,7 @@ export const useBindBankAccountForm = () => {
             .refine(
                 (confirmedBankcardNo) => confirmedBankcardNo === bankcardNo,
                 {
-                    message: t("Please make sure your account number match.", {ns: i18nBankBindPageKey.CommonKey}) as string
+                    message: t("Please make sure your account number match.") as string
                   ,
                 }
             );

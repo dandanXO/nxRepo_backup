@@ -5,8 +5,8 @@ import MobileWalletSVG from "./ic_mobile_wallet_icon.svg";
 import unselectedSVG from "./ic_check_disable_icon.svg";
 import selectedSVG from "./ic_check_available_icon.svg";
 import {Label} from "../../../../components/Label";
-import {useTranslation} from "react-i18next";
-import {i18nBankBindPageKey} from "../../../translations";
+import {WithTranslation, withTranslation} from "react-i18next";
+import {i18nBankBindAccountPage} from "../../../translations";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -46,22 +46,21 @@ const Option = styled.div`
   position: relative;
 `
 
-interface IChooseBindMethod {
+type IChooseBindMethod = {
   value: 0 | 1;
   changeOptionValueCallback: (option: 0|1) => void;
   disable: boolean;
-}
+} & WithTranslation;
 
-export const ChooseBindMethod = (props: IChooseBindMethod) => {
-  const { t } = useTranslation();
+export const ChooseBindMethod = withTranslation(i18nBankBindAccountPage.namespace)((props: IChooseBindMethod) => {
   return (
     <Container>
-      <Label>{t("Choose the method to receive the money", { ns: i18nBankBindPageKey.PakistanKey })}</Label>
+      <Label>{props.t("Choose the method to receive the money")}</Label>
       <OptionContainer>
         <Option onClick={() => props.changeOptionValueCallback(0)}>
           <OptionIcon enable={props.value === 0}/>
           <img src={MobileWalletSVG}/>
-          <Label>{t("Mobile wallet", { ns: i18nBankBindPageKey.PakistanKey })}</Label>
+          <Label>{props.t("Mobile wallet")}</Label>
         </Option>
         <Option onClick={() => {
           if(!props.disable) props.changeOptionValueCallback(1)
@@ -70,9 +69,9 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
         }}>
           <OptionIcon enable={props.value === 1}/>
           <img src={BankAccountSVG}/>
-          <Label>{t("Bank account", { ns: i18nBankBindPageKey.PakistanKey })}</Label>
+          <Label>{props.t("Bank account")}</Label>
         </Option>
       </OptionContainer>
     </Container>
   )
-}
+})
