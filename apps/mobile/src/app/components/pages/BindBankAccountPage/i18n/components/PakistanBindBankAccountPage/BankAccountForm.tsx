@@ -28,7 +28,7 @@ const CustomForm = styled.div`
     border: 1px solid #aaaaaa;
   }
   .css-14el2xx-placeholder {
-    font-weight: 600;
+    //font-weight: 600;
   }
 `
 export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
