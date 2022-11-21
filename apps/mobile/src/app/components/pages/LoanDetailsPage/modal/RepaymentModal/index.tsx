@@ -13,6 +13,9 @@ import {
   Input, Select,
 } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../../../environments/environment";
+import {WithTranslation, withTranslation} from "react-i18next";
+import {i18nRepaymentModal} from "./i18n/translations";
+
 const Paragraph = styled.div`
     text-align: left;
     color: #aaaaaa;
@@ -78,7 +81,9 @@ const AdvertisementImg = styled.img.attrs(props => ({
   src: AdSVG
 }))``;
 
-interface RepaymentModalProps {
+
+
+type RepaymentModalProps = {
     balance: number;
     setRepayBalance: React.Dispatch<React.SetStateAction<number>>;
     setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -86,7 +91,8 @@ interface RepaymentModalProps {
     handlePostRepayCreate: any;
     paymentMethodList: string[];
     setPayType: React.Dispatch<React.SetStateAction<number>>;
-}
+} & WithTranslation;
+
 const RepaymentModal = (props: RepaymentModalProps) => {
     const balance = props.balance;
     const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
@@ -110,7 +116,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                 content={(hide: () => void) => {
                     return (
                         <RepaymentModalContainer>
-                            <Title>Repayment</Title>
+                            <Title>{props.t("Repayment")}</Title>
                             <Horizontal />
 
                             <SectionBalance>
@@ -119,7 +125,6 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     text={`${environment.currency} ${balance}`}
                                 />
                             </SectionBalance>
-
 
                             <SectionOptions>
 
@@ -133,13 +138,13 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                       }
                                     }}
                                   >
-                                    <Radio value="balance">Balance</Radio>
-                                    <Radio value="custom">Custom Amount</Radio>
+                                    <Radio value="balance">{props.t("Balance")}</Radio>
+                                    <Radio value="custom">{props.t("Custom Amount")}</Radio>
                                   </Radio.Group>
                                 </MethodContainer>
 
                                 <Input
-                                    label="Amount"
+                                    label={props.t("Amount") as string}
                                     labelType="left"
                                     value={balanceValue}
                                     disabled={radioValue === "balance"}
@@ -168,7 +173,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     }}
                                 />
                                 <PaymentMethodContainer>
-                                  <BoldText>Payment Method</BoldText>
+                                  <BoldText>{props.t("Payment Method")}</BoldText>
 
                                   <Select
                                     dataSource={props.paymentMethodList}
@@ -185,10 +190,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
 
                                 <Horizontal />
 
-
                                 <AdvertisementImg/>
-
-
 
                                 <SectionButton>
                                     <RepayAndApplyButton
@@ -199,7 +201,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                             );
                                         }}
                                     >
-                                        <RepayICON /> Repay and Apply Again
+                                        <RepayICON />{props.t("Repay and Apply Again")}
                                     </RepayAndApplyButton>
                                 </SectionButton>
                                 <SectionButton2>
@@ -208,10 +210,10 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                             props.setShowRepaymentModal(false)
                                         }
                                     >
-                                        Cancel
+                                      {props.t("Cancel")}
                                     </RepaymentCancelButton>
                                     <RepaymentButton onClick={handleConfirm}>
-                                        Repayment
+                                      {props.t("Repayment")}
                                     </RepaymentButton>
                                 </SectionButton2>
 
@@ -219,19 +221,12 @@ const RepaymentModal = (props: RepaymentModalProps) => {
 
 
                             <SectionParagraph>
-                              <Paragraph>Attention:</Paragraph>
+                              <Paragraph>{props.t("Attention")}:</Paragraph>
                               <Paragraph>
-                                1. Before repayment, please make sure
-                                that youhave enough balance on your bank
-                                account.
+                                {props.t("1. Before repayment, please make sure that youhave enough balance on your bank account.")}
                               </Paragraph>
                               <Paragraph>
-                                2. In order to protect your rights, we
-                                strongly recommend you take a screenshot
-                                and upload your UTR number after
-                                completing the repayment and return to
-                                the APP to upload your repayment
-                                receipt.
+                                {props.t("2. In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number after completing the repayment and return to the APP to upload your repayment receipt.")}
                               </Paragraph>
                             </SectionParagraph>
 
@@ -243,4 +238,5 @@ const RepaymentModal = (props: RepaymentModalProps) => {
     );
 };
 
-export default RepaymentModal;
+
+export default withTranslation(i18nRepaymentModal.namespace)(RepaymentModal);

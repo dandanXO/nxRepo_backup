@@ -12,6 +12,9 @@ import { useGetLoanDetailQuery } from "../../../../../api";
 import recordStatusStyleProps from "../../../../../core/recordStatusColorMapper";
 import {environment} from "../../../../../../environments/environment";
 import LoanBrand from "../../../../atoms/LoanBrand";
+import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
+import {i18nExtensionDetailModal} from "./i18n/translations";
+import i18next from "i18next";
 
 const ExtesionDetailStyled = styled.div`
     text-align: center;
@@ -85,10 +88,11 @@ const NoDataStyled = styled.div`
     color: ${({ theme }) => theme.color.gray500};
 `;
 
-type ExtesionDetailProps = GetLoanDetailResponse & {
+type renderExtesionDetailProps = GetLoanDetailResponse & {
     setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
-const renderExtesionDetail = (props: ExtesionDetailProps) => {
+} & WithTranslation;
+
+const renderExtesionDetail = (props: renderExtesionDetailProps) => {
     const {
         iconUrl,
         status,
@@ -104,6 +108,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
         chargeFeeDetail,
         orderNo,
     } = props;
+
     return (
         <ExtesionDetailStyled>
             <div className="loanBrand">
@@ -113,23 +118,23 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                     sizeType={"small"}
                 />
             </div>
-            <div className="totalTitle">Extension Fee</div>
+            <div className="totalTitle">{props.t("Extension Fee")}</div>
             <div className="totalText">{environment.currency} {extensionFee ? extensionFee : ""} </div>
             <Divider />
-            <div className={"loanInfo-Card-Title"}>General</div>
+            <div className={"loanInfo-Card-Title"}>{props.t("General")}</div>
             <div className={"loanInfo-Card-list"}>
-                <ListItem title={"No."} text={orderNo ? orderNo : ""} />
+                <ListItem title={props.t("No.") as string} text={orderNo ? orderNo : ""} />
                 <ListItem
-                    title={"State"}
+                    title={props.t("State") as string}
                     text={
-                        <Tag status={status ? status : "EXTEND"}>{status}</Tag>
+                        <Tag status={status ? status : props.t("EXTEND")}>{status}</Tag>
                     }
                 />
-                <ListItem title={"Amount Paid"} text={`${environment.currency} ${paidAmount}`} />
+                <ListItem title={props.t("Amount Paid") as string} text={`${environment.currency} ${paidAmount}`} />
                 <RepayRecordStyled>
-                    <Accordion title={"Amount Paid Record"} isCollapse={true}>
+                    <Accordion title={props.t("Amount Paid Record")} isCollapse={true}>
                         {repayRecords.length === 0 ? (
-                            <NoDataStyled>No paid records yet</NoDataStyled>
+                            <NoDataStyled>{props.t("No paid records yet")}</NoDataStyled>
                         ) : (
                             repayRecords.map((record) => {
                                 return (
@@ -141,7 +146,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                                                     status={
                                                         record.repayType
                                                             ? record.repayType
-                                                            : "EXTEND"
+                                                            : props.t("EXTEND")
                                                     }
                                                 >
                                                     {record.repayType}
@@ -155,7 +160,7 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
                         )}
                     </Accordion>
                 </RepayRecordStyled>
-                <ListItem title={"Balance"} text={`${environment.currency} ${balance}`} />
+                <ListItem title={props.t("Balance") as string} text={`${environment.currency} ${balance}`} />
             </div>
             <Divider />
             <div className={"loanInfo-Card-Title"}>
@@ -177,22 +182,26 @@ const renderExtesionDetail = (props: ExtesionDetailProps) => {
             /> */}
             <Divider />
             <ListItem
-                title={"Original due date"}
+                title={props.t("Original due date") as string}
                 text={originalDueDate ? originalDueDate : ""}
             />
             <ListItem
-                title={"Extension Date"}
+                title={props.t("Extension Date") as string}
                 text={extendDate ? extendDate : ""}
             />
             {/* <ListItem title={"Due Date"} text={dueDate ? dueDate : ""} /> */}
             <Divider />
-            <div className={"loanInfo-Card-Title"}>Link account</div>
-            <ListItem title={"Bank card"} text={bankCardNo ? bankCardNo : ""} />
+            <div className={"loanInfo-Card-Title"}>{props.t("Link account")}</div>
+            <ListItem title={props.t("Bank card") as string} text={bankCardNo ? bankCardNo : ""} />
         </ExtesionDetailStyled>
     );
 };
 
-const ExtensionDetailModal = (props: ExtesionDetailProps) => {
+type ExtensionDetailModalProps = GetLoanDetailResponse & {
+  setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
+} & WithTranslation;
+
+const ExtensionDetailModal = (props: ExtensionDetailModalProps) => {
     const { setShowExtensionModal, parentOrderNo } = props;
     const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({
         orderNo: parentOrderNo,
@@ -202,11 +211,14 @@ const ExtensionDetailModal = (props: ExtesionDetailProps) => {
         <div>
             <Overlay
                 show={true}
-                title="Notice"
+                title={props.t("Notice") as string}
                 content={(hide: () => void) =>
                     renderExtesionDetail({
-                        ...currentData,
-                        setShowExtensionModal,
+                      ...currentData,
+                      setShowExtensionModal,
+                      t: props.t,
+                      i18n: i18next,
+                      tReady: false,
                     })
                 }
                 enableTitleHorizontal={true}
@@ -216,4 +228,5 @@ const ExtensionDetailModal = (props: ExtesionDetailProps) => {
         </div>
     );
 };
-export default ExtensionDetailModal;
+
+export default withTranslation(i18nExtensionDetailModal.namespace)(ExtensionDetailModal);

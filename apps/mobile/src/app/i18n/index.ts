@@ -2,13 +2,22 @@ import i18next from "i18next";
 import {initReactI18next} from "react-i18next";
 import {i18nBankBindPageKey, i18nBankBindPageTranslations} from "../components/pages/BindBankAccountPage/i18n/translations";
 import {i18nextPlugin} from 'translation-check'
-import {i18nLoanDetailsPageKey, i18nLoanDetailsPageTranslations} from "../components/pages/LoanDetailsPage/i18n/translations";
+import {
+  i18nLoanDetailsPage,
+} from "../components/pages/LoanDetailsPage/i18n/translations";
 import {i18nComponentsKey, i18nComponentsTranslations} from "../components/atoms/i18n/translations";
 import {i18nAmountPaidModal} from "../components/modals/AmountPaidModal/i18n/tranlations";
 import {i18nExtendModal} from "../components/modals/ExtendModal/i18n/tranlations";
 import {i18nProductDetailModal} from "../components/modals/ProductDetailModal/i18n/tranlations";
 import {i18nSubmitOrderModal} from "../components/modals/SubmitOrderModal/i18n/tranlations";
 import {i18nSubmitOrderSuccessModal} from "../components/modals/SubmitOrderSuccessModal/i18n/tranlations";
+import {
+  i18nExtensionDetailModal
+} from "../components/pages/LoanDetailsPage/modal/ExtensionDetailModal/i18n/translations";
+import {i18nRepaymentModal} from "../components/pages/LoanDetailsPage/modal/RepaymentModal/i18n/translations";
+import {
+  i18nRepaymentNoticeModal
+} from "../components/pages/LoanDetailsPage/modal/RepaymentNoticeModal/i18n/translations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -28,17 +37,31 @@ i18next
             "Confirm": "Confirm",
           },
         },
-        [i18nBankBindPageKey.CommonKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.CommonKey]],
-        [i18nBankBindPageKey.IndiaKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.IndiaKey]],
-        [i18nBankBindPageKey.PakistanKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.PakistanKey]],
+        // NOTICE: Atoms
         [i18nComponentsKey]: i18nComponentsTranslations,
-        [i18nLoanDetailsPageKey]: i18nLoanDetailsPageTranslations,
 
+        // NOTICE: Modals
         [i18nAmountPaidModal.namespace]: i18nAmountPaidModal.translation.en_US,
         [i18nExtendModal.namespace]: i18nExtendModal.translation.en_US,
         [i18nProductDetailModal.namespace]: i18nProductDetailModal.translation.en_US,
         [i18nSubmitOrderModal.namespace]: i18nSubmitOrderModal.translation.en_US,
         [i18nSubmitOrderSuccessModal.namespace]: i18nSubmitOrderSuccessModal.translation.en_US,
+
+        // NOTICE: Pages
+        // NOTE: BankBindPage
+        [i18nBankBindPageKey.CommonKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.CommonKey]],
+        [i18nBankBindPageKey.IndiaKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.IndiaKey]],
+        [i18nBankBindPageKey.PakistanKey]: [i18nBankBindPageTranslations[i18nBankBindPageKey.PakistanKey]],
+
+        // NOTE: LoanDetailPage
+        [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.en_US,
+
+        // NOTE: LoanDetailsPage
+        [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.en_US,
+        [i18nExtensionDetailModal.namespace]: i18nExtensionDetailModal.translation.en_US,
+        [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.en_US,
+        [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.en_US,
+
       },
       bn_BD: {
         [i18nAmountPaidModal.namespace]: i18nAmountPaidModal.translation.bd_BD,
