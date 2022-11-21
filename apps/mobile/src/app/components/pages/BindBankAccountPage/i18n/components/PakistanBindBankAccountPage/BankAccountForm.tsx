@@ -27,6 +27,9 @@ const CustomForm = styled.div`
     height: 49px;
     border: 1px solid #aaaaaa;
   }
+  .css-14el2xx-placeholder {
+    font-weight: 600;
+  }
 `
 export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
   const {t} = useTranslation();
