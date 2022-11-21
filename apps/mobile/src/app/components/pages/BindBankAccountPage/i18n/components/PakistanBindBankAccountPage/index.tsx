@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {IUseBindBankAccountPage,} from "../../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../../components/CustomPage";
 import {ChooseBindMethod} from "./ChooseBindMethod";
@@ -28,7 +28,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     validateMobileWalletAccount,
     // Form
     isFormPending: isWalletFormPending,
-    confirmMobileWalletCallback,
+    confirm: confirmMobileWallet,
   } = usePakistanMobileWalletForm({
     triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
     bindCardDropListData: props.bindCardDropListData,
@@ -72,7 +72,6 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bankAccountValue,
   });
 
-
   return (
     <CustomPage>
       <ChooseBindMethod value={chooseBindMethodValue} changeOptionValueCallback={changeOptionValue} disable={props.bindCardDropListData?.showBankOption || false}/>
@@ -85,7 +84,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           onMobileDataChange={onMobileDataChange}
           validateMobileWalletAccount={validateMobileWalletAccount}
           isFormPending={isFormPending}
-          confirmMobileWalletCallback={confirmMobileWalletCallback}
+          confirm={() => {
+            confirmMobileWallet();
+          }}
         />
         ) : (
           <BankAccountForm
@@ -101,7 +102,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             bankAccountValue={bankAccountValue}
             bindCardDropListData={props.bindCardDropListData}
             onIFSCDropSelect={onIFSCDropSelect}
-            confirm={confirm}
+            confirm={() => { validateCommonForm() && confirm() }}
           />
         )}
     </CustomPage>

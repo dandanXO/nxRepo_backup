@@ -20,7 +20,7 @@ type IMobileWalletForm = {
   validateMobileWalletAccount: (event: any) => void;
   // Form
   isFormPending: boolean;
-  confirmMobileWalletCallback: () => void;
+  confirm: () => void;
 }
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
@@ -54,7 +54,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       />
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
       <Button
-        onClick={() => !props.isFormPending && props.confirmMobileWalletCallback()}
+        onClick={() => !props.isFormPending && props.confirm()}
       >
         {t("Submit", {ns: i18nBankBindPageKey.CommonKey})}
       </Button>

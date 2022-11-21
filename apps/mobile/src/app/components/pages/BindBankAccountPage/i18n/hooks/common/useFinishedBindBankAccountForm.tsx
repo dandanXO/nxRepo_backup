@@ -42,20 +42,25 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         })
     } else if (props.postBankBindSaveToPK) {
       // NOTICE: Pakistan
-      const targetBankAccount = props.bindCardDropListData &&
-        props.bindCardDropListData.availableBanks &&
-        props.bankAccountValue && props.bindCardDropListData.availableBanks[props.bankAccountValue];
-
+      let targetBankAccount
+      if(props.bindCardDropListData && props.bindCardDropListData.availableBanks) {
+        // NOTICE: bankAccountValue 可能為 0
+        if(typeof props.bankAccountValue === "number") {
+          targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue];
+        }
+      }
+      const requestBody = {
+        bankAccNr: props.bankcardNoData.data,
+        mobileWallet: false,
+        mobileWalletAccount: "",
+        walletVendor: "",
+        // FIXME:
+        bankName: targetBankAccount && targetBankAccount?.bankName || "",
+        bankCode: targetBankAccount && targetBankAccount?.bankCode || "",
+      }
+      // console.log("requestBody", requestBody);
       request = props
-        .postBankBindSaveToPK({
-          bankAccNr: props.bankcardNoData.data,
-          mobileWallet: false,
-          mobileWalletAccount: "",
-          walletVendor: "",
-          // FIXME:
-          bankName: targetBankAccount && targetBankAccount?.bankName || "",
-          bankCode: targetBankAccount && targetBankAccount?.bankCode || "",
-        })
+        .postBankBindSaveToPK(requestBody)
     }
 
     request.unwrap()
