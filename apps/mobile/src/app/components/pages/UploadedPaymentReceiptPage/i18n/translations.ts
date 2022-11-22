@@ -9,7 +9,9 @@ export const i18nUploadedPaymentReceiptPage: i18nComponent = {
       "Done": "Done",
     },
     bn_BD: {
-
+      "Upload payment receipt": "পেমেন্টের রসিদ আপলোড করো",
+      "Thank you. Your receipt has been uploaded successfully.": "ধন্যবাদ. তোমার রসিদ সফলভাবে আপলোড হয়েছে",
+      "Done": "সম্পন্ন হয়েছে",
     }
   }
 }
