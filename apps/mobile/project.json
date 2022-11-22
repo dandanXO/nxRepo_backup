@@ -77,6 +77,26 @@
                             "with": "apps/mobile/src/environments/environment.pk.prod.ts"
                         }
                     ]
+                },
+                "development-bn": {
+                  "extractLicenses": false,
+                  "optimization": false,
+                  "sourceMap": true,
+                  "vendorChunk": true,
+                  "fileReplacements": [
+                    {
+                      "replace": "apps/mobile/src/environments/environment.ts",
+                      "with": "apps/mobile/src/environments/environment.bn.dev.ts"
+                    }
+                  ]
+                },
+                "production-bn": {
+                  "fileReplacements": [
+                    {
+                      "replace": "apps/mobile/src/environments/environment.ts",
+                      "with": "apps/mobile/src/environments/environment.bn.prod.ts"
+                    }
+                  ]
                 }
             }
         },
