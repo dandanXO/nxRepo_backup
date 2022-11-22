@@ -9,7 +9,7 @@ const getToken = () => {
   } else if (environment.country == "pk") {
     return `d5f794a6f0fa419da6ae65cb85b07c1c`
   } else if(environment.country == "bn") {
-    return `cc0c49b19d92488cb66db8d23e165f15`
+    return `dbb501e9b49d4a69bf8a7b3a3de85e06`
   }
 };
 const getOrderNo = () => {

@@ -27,6 +27,7 @@ import { IThemeConfig } from './lib/components/global/types/IThemeConfig';
 import { Colors } from './lib/components/global/Colors';
 import { fontSizeListToRem } from './lib/components/global/fontSize';
 import {GreenThemeConfig} from "./lib/components/global/skin/green/GreenThemeConfig";
+import {DarkGreenThemeConfig} from "./lib/components/global/skin/darkgreen/DarkGreenThemeConfig";
 import DefaultThemeConfig from "./lib/components/global/skin/default/DefaultThemeConfig";
 import { Select } from './lib/components/Select';
 
@@ -43,7 +44,8 @@ export {
   IThemeConfig,
   Colors,
   fontSizeListToRem,
-  GreenThemeConfig,
+
+
 
   Divider,
   Form,
@@ -62,6 +64,10 @@ export {
   AppThemeProvider,
   AmountPaidIcon,
   Select,
+
+  // NOTICE: THEME
+  GreenThemeConfig,
+  DarkGreenThemeConfig,
 };
 
 export type { InputValue };

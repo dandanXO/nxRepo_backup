@@ -20,4 +20,8 @@ export enum Colors {
   superLightGreen = '#f5faf4',
   lightGreen = '#bcf270',
   mediumGreen = '#3A7F38',
+
+  darkGreen = '#0c5a42',
+  lightDarkGreen = '#a6cec3',
+  lightBlue = '#43d4ff',
 }
