@@ -14,7 +14,13 @@ export const i18nUploadPaymentReceiptPage: i18nComponent = {
       // PakistanUploadPaymentReceiptPage
     },
     bn_BD: {
-
+      // Common
+      "Upload your repayment receipt(optional)": "তোমার ঋণ পরিশোধের রসিদ আপলোড কর (ঐচ্ছিক)",
+      "Upload from Photo Album": "তোমার ঋণ পরিশোধের রসিদ আপলোড কর (ঐচ্ছিক)",
+      "Confirm": "নিশ্চিত করুন",
+      // IndiaUploadPaymentReceiptPage
+      "UTR": "UTR",
+      // PakistanUploadPaymentReceiptPage
     }
   }
 }
