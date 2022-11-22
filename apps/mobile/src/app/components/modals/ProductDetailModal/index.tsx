@@ -8,7 +8,7 @@ import {
     Divider,
 } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
-import LoanBrand from "../../atoms/LoanBrand";
+import LoanBrand from "../../components/LoanBrand";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nProductDetailModal} from "./i18n/translations";
 

@@ -1,7 +1,7 @@
 import {GetLoanDetailRecommendProducts} from "../../../api/getLoanDetail";
 import React, {useState} from "react";
-import Card from "../../atoms/Card";
-import CardContent from "../../atoms/CardContent";
+import Card from "../../components/Card";
+import CardContent from "../../components/CardContent";
 import {ListItem} from "@frontend/mobile/shared/ui";
 import styled from "styled-components";
 import {WithTranslation, withTranslation} from "react-i18next";

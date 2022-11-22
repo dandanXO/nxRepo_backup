@@ -11,7 +11,7 @@ import { GetLoanDetailResponse } from "../../../../../api/getLoanDetail";
 import { useGetLoanDetailQuery } from "../../../../../api";
 import recordStatusStyleProps from "../../../../../core/recordStatusColorMapper";
 import {environment} from "../../../../../../environments/environment";
-import LoanBrand from "../../../../atoms/LoanBrand";
+import LoanBrand from "../../../../components/LoanBrand";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nExtensionDetailModal} from "./i18n/translations";
 import i18next from "i18next";

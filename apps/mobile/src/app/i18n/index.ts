@@ -3,7 +3,7 @@ import {initReactI18next} from "react-i18next";
 import {i18nBankBindAccountPage} from "../components/pages/BindBankAccountPage/i18n/translations";
 import {i18nextPlugin} from 'translation-check'
 import {i18nLoanDetailsPage,} from "../components/pages/LoanDetailsPage/i18n/translations";
-import {i18nComponents} from "../components/atoms/i18n/translations";
+import {i18nComponents} from "../components/components/i18n/translations";
 import {i18nAmountPaidModal} from "../components/modals/AmountPaidModal/i18n/translations";
 import {i18nExtendModal} from "../components/modals/ExtendModal/i18n/translations";
 import {i18nProductDetailModal} from "../components/modals/ProductDetailModal/i18n/translations";

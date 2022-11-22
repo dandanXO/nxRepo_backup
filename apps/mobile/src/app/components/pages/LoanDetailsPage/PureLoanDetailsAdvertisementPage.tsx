@@ -2,7 +2,7 @@ import React from "react";
 
 import Advertisement from "./Advertisement";
 import {CustomPage} from "../BindBankAccountPage/components/CustomPage";
-import PureLoanDetails, {PureLoanDetailsPageProps} from "../../atoms/PureLoanDetails";
+import PureLoanDetails, {PureLoanDetailsPageProps} from "../../components/PureLoanDetails";
 
 type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps & {
   postLoanSubmitOrder: (obj: any) => any;
