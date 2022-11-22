@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useGetLoanRecommendQuery } from "../../../api";
 import {HotSvgIcon} from "./i18n/HotSvgIcon";
 import {environment} from "../../../../environments/environment";
+import {useTranslation} from "react-i18next";
+import {i18nProductAdModalListPage} from "./i18n/translations";
 
 const ProductAdStyled = styled.div`
     display: flex;
@@ -49,21 +51,25 @@ interface ProductAdProps {
 }
 
 const ProductAd = ({ logo, productName, loanQuota, interestRate, term }: ProductAdProps) => {
-    return <ProductAdStyled>
+  const {t} = useTranslation(i18nProductAdModalListPage.namespace);
+
+  return (
+      <ProductAdStyled>
         <div className="product">
-            <div className="icon">
-                <div  className="hotIcon"><HotSvgIcon/></div>
-                <img className="logoIcon" src={logo} alt="" /></div>
-            <div>
-                <div className="productName">{productName ? productName : ""}</div>
-                <div>{environment.currency} {loanQuota ? loanQuota : ""}</div>
-            </div>
+          <div className="icon">
+            <div className="hotIcon"><HotSvgIcon/></div>
+            <img className="logoIcon" src={logo} alt="" /></div>
+          <div>
+            <div className="productName">{productName ? productName : ""}</div>
+            <div>{environment.currency} {loanQuota ? loanQuota : ""}</div>
+          </div>
         </div>
         <div className="productInfo">
-            <div>interest : {interestRate ? interestRate : ""}</div>
-            <div>terms : {term ? term : ""}</div>
+          <div>{t("interest")} : {interestRate ? interestRate : ""}</div>
+          <div>{t("terms")} : {term ? term : ""}</div>
         </div>
-    </ProductAdStyled>
+      </ProductAdStyled>
+    )
 }
 
 
