@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "https://app.bn-api-dev.com",
+        "target": "https://app.bd-api-dlh-dev.com",
         "secure": true,
         "changeOrigin": true
     }

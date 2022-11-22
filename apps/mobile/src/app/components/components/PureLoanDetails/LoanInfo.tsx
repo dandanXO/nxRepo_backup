@@ -124,11 +124,11 @@ const LoanInfo = (props: LoanInfoProps) => {
                 <div className={"loanInfo-Card-Title"}>{t("General")}</div>
                 <div className={"loanInfo-Card-list"}>
                     <ListItem
-                      title={"No."}
+                      title={t("No.") as string}
                       text={orderNo || ""}
                     />
                     <ListItem
-                        title={"State"}
+                        title={t("State") as string}
                         text={
                             <Tag status={status ? status : "EXTEND"}>
                                 {status}
@@ -138,7 +138,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                     <ListItem
                         title={
                             <div>
-                                <div>Amount Paid</div>
+                                <div>{t("Amount Paid")}</div>
                                 <div
                                     onClick={() => setShowAmountPaidModal(true)}
                                 >
@@ -150,7 +150,7 @@ const LoanInfo = (props: LoanInfoProps) => {
                     />
 
                     {status !== "PAY_OFF" && (
-                        <ListItem title={"Balance"} text={`${environment.currency} ${balance}`} />
+                        <ListItem title={t("Balance") as string} text={`${environment.currency} ${balance}`} />
                     )}
 
 

@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "https://app.pk-api-dev.com",
+        "target": "https://app.india-api-dev.com",
         "secure": true,
         "changeOrigin": true
     }

@@ -15,6 +15,10 @@ export const i18nComponents: i18nComponent = {
       // PureLoanDetails-LoanInfo
       "Total Due": "Total Due",
       "Your payment is now N days overdue.We kindly request that you immediately satisfy the balance in order to maintain a good loan relationship without affecting your loan credit.": "Your payment is now N days overdue.We kindly request that you immediately satisfy the balance in order to maintain a good loan relationship without affecting your loan credit.",
+      "No.": "No.",
+      "State": "State",
+      "Amount Paid": "Amount Paid",
+      "Balance": "Balance",
       "General": "General",
       "Related repayment": "Related repayment",
       "Extend": "Extend",
@@ -38,6 +42,10 @@ export const i18nComponents: i18nComponent = {
       // PureLoanDetails-LoanInfo
       "Total Due": "মোট বাকি",
       "Your payment is now N days overdue.We kindly request that you immediately satisfy the balance in order to maintain a good loan relationship without affecting your loan credit.": "আপনার পেমেন্ট এখন N দিন বিলম্বিত হয়েছে । আমরা অনুগ্রহ করে অনুরোধ করছি যে আপনি অবিলম্বে আপনার ঋণ ক্রেডিট প্রভাবিত না করে একটি ভাল ঋণ সম্পর্ক বজায় রাখার জন্য ভারসাম্য সন্তুষ্ট করুন।",
+      "No.": "না.",
+      "State": "রাষ্ট্র",
+      "Amount Paid": "পরিশোধিত অর্থের পরিমাণ",
+      "Balance": "ভারসাম্য",
       "General": "সাধারণ",
       "Related repayment": "সম্পর্কিত পরিশোধ",
       "Extend": "প্রসারিত করা",
