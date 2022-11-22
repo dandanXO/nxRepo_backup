@@ -52,7 +52,6 @@ interface ProductAdProps {
 
 const ProductAd = ({ logo, productName, loanQuota, interestRate, term }: ProductAdProps) => {
   const {t} = useTranslation(i18nProductAdModalListPage.namespace);
-
   return (
       <ProductAdStyled>
         <div className="product">

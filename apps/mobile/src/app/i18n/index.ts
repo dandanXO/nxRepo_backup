@@ -18,6 +18,7 @@ import {
 } from "../components/pages/LoanDetailsPage/modal/RepaymentNoticeModal/i18n/translations";
 import {i18nUploadPaymentReceiptPage} from "../components/pages/UploadPaymentReceiptPage/i18n/translations";
 import {i18nUploadedPaymentReceiptPage} from "../components/pages/UploadedPaymentReceiptPage/i18n/translations";
+import {i18nProductAdModalListPage} from "../components/pages/ProductAdModalListPage/i18n/translations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -61,6 +62,9 @@ i18next
         [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.en_US,
         [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.en_US,
 
+        // NOTE: ProductAdModalListPage
+        [i18nProductAdModalListPage.namespace]: i18nProductAdModalListPage.translation.en_US,
+
         // NOTE: UploadedPaymentReceiptPage
         [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.en_US,
 
@@ -95,11 +99,16 @@ i18next
         [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.bn_BD,
         [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.bn_BD,
 
+        // NOTE: ProductAdModalListPage
+        [i18nProductAdModalListPage.namespace]: i18nProductAdModalListPage.translation.bn_BD,
+
         // NOTE: UploadedPaymentReceiptPage
         [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.bn_BD,
 
         // NOTE: UploadPaymentReceiptPage
         [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.bn_BD,
+
+
       }
     },
 
