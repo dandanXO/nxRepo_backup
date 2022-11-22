@@ -32,11 +32,10 @@ export const useBengalMobileWalletForm = (props: IUseBengalMobileWalletForm) => 
 
   // Wallet Account  - 驗證
   const validateMobileWalletAccount = useCallback(() => {
-    const message = t("Account number should be 11 digits starting with 0.");
+    const message = t("Account number should be 10 digits.");
     const scheme = z
       .string()
-      .regex(/^0/, message)
-      .length(11, message);
+      .length(10, message);
     const result = scheme.safeParse(mobileData.data);
     if (!result.success) {
       const firstError = result.error.format();
@@ -56,6 +55,59 @@ export const useBengalMobileWalletForm = (props: IUseBengalMobileWalletForm) => 
   }, [mobileData.data]);
 
 
+  // NOTE: FormInput - confirmedMobileData
+  const [confirmedMobileData, setConfirmedMobileData] = useState<
+    InputValue<string>
+    >({
+    data: "",
+    isValidation: false,
+    errorMessage: "",
+  });
+
+  const validateConfirmedMobileData = useCallback(() => {
+    const confirmedMobile = confirmedMobileData.data;
+    const mobile = mobileData.data;
+    const confirmedMobileDataScheme = z
+      .string()
+      .refine(
+        (confirmedBankcardNo) => confirmedMobile === mobile,
+        {
+          message: t("Please make sure your account number match.") as string
+          ,
+        }
+      );
+    const result = confirmedMobileDataScheme.safeParse(confirmedMobile);
+    if (!result.success) {
+      const firstError = result.error.format();
+      const errorMessage = firstError._errors[0];
+      setConfirmedMobileData({
+        ...confirmedMobileData,
+        isValidation: false,
+        errorMessage,
+      });
+    } else {
+      setConfirmedMobileData({
+        ...confirmedMobileData,
+        isValidation: true,
+        errorMessage: "",
+      });
+    }
+  }, [confirmedMobileData.data, mobileData.data]);
+
+  const onConfirmedMobileDataChange = (event: any) => {
+    let data = event.target.value;
+    data = data.replace(/[^0-9]/g, "");
+    setConfirmedMobileData({
+      ...confirmedMobileData,
+      data,
+    });
+  }
+
+  const onConfirmedMobileDataBlur = () => {
+    validateConfirmedMobileData();
+  }
+
+
 
   // NOTE: 鎖定表單傳送
   const [isFormPending, setIsFormPending] = useState<boolean>(false);
@@ -66,13 +118,15 @@ export const useBengalMobileWalletForm = (props: IUseBengalMobileWalletForm) => 
     setIsFormPending(true);
 
     validateMobileWalletAccount();
+    validateConfirmedMobileData();
 
-    if (!mobileData.isValidation) return;
+    if (!mobileData.isValidation || !confirmedMobileData.isValidation) return;
 
     props.triggerPostBankBindSaveToBengalMutation({
       bankAccNr: "",
       mobileWallet: true,
       mobileWalletAccount: mobileData.data,
+      walletVendor: "",
     })
       .unwrap()
       .then((data: any) => {
@@ -98,6 +152,8 @@ export const useBengalMobileWalletForm = (props: IUseBengalMobileWalletForm) => 
   },[
     mobileData.isValidation,
     mobileData.data,
+    confirmedMobileData.isValidation,
+    confirmedMobileData.data,
     props.triggerPostBankBindSaveToBengalMutation,
   ]);
 
@@ -106,6 +162,12 @@ export const useBengalMobileWalletForm = (props: IUseBengalMobileWalletForm) => 
     mobileData,
     onMobileDataChange,
     validateMobileWalletAccount,
+
+    // ConfirmedMobile
+    confirmedMobileData,
+    onConfirmedMobileDataChange,
+    onConfirmedMobileDataBlur,
+
     // Form
     isFormPending,
     confirm,

@@ -34,6 +34,10 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
       // NOTE: Bank Account
       "Please select your bank name": "Please select your bank name",
+
+      // NOTICE: Bengal
+      "Your mobile wallet number": "Your mobile wallet number",
+      "Confirm your number": "Confirm your number",
     },
     bn_BD: {
       // NOTICE: common
@@ -62,12 +66,15 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Bank account": "ব্যাংক হিসাব",
       "Please select the of your mobile wallet": "আপনার মোবাইল ওয়ালেট নির্বাচন করুন",
       "Your mobile wallet account": "আপনার মোবাইল ওয়ালেট অ্যাকাউন্ট",
-      // TODO: 缺語系
-      // "Wallet Account Number": "Wallet Account Number",
-      // TODO: 缺語系
-      // "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
+
+      "Wallet Account Number": "Wallet Account Number",
+      "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
+
+      // NOTICE: Bengal
       // NOTE: Bank Account
-      "Please select your bank name": "আপনার ব্যাঙ্ক নাম নির্বাচন করুন",
+      "Your mobile wallet number": "১। তোমার মোবাইল ওয়ালেট নম্বর",
+      "Confirm your number": "২। তোমার নম্বরটি কনফার্ম করো ",
+      "Account number should be 10 digits.": "Account number should be 10 digits",
     }
   }
 }
