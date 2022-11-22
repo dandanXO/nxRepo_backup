@@ -20,3 +20,8 @@ export type IPakistanUseBindBankAccountPage = {
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
 }
+
+
+export type IUseBindBankAccountPageForBengal = {
+  triggerPostBankBindSaveToBengalMutation: any;
+}

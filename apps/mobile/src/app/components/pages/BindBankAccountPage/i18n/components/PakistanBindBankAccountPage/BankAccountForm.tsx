@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "react-i18next";
 import {Form} from "../../../components/Form";
 import {Label} from "../../../components/Label";
 import {i18nBankBindAccountPage} from "../../translations";
@@ -31,7 +31,9 @@ const CustomForm = styled.div`
     //font-weight: 600;
   }
 `
-export const BankAccountForm = withTranslation(i18nBankBindAccountPage.namespace)((props: IPakistanBankAccountForm)  => {
+export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
+
+  const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
   const options = props.bankDropList.map((item: string, index: number) => {
     return {value: item, label: item, index: index}
@@ -47,17 +49,17 @@ export const BankAccountForm = withTranslation(i18nBankBindAccountPage.namespace
   return (
     <CustomForm>
       <Form>
-        <Label>{props.t("Cardholder Name")}</Label>
+        <Label>{t("Cardholder Name")}</Label>
 
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={props.t("Cardholder Name") as string}
+          placeholder={t("Cardholder Name") as string}
           value={props.cardholderName}
           disabled
         />
 
-        <Label>{props.t("Please select your bank name")}</Label>
+        <Label>{t("Please select your bank name")}</Label>
         <Select
           className="react-select-container mb"
           // defaultValue={props.bankDropList[0].value}
@@ -79,29 +81,29 @@ export const BankAccountForm = withTranslation(i18nBankBindAccountPage.namespace
         {/*  maxItemCount={5.5}*/}
         {/*/>*/}
 
-        <Label>{props.t("Account Number",)}</Label>
+        <Label>{t("Account Number",)}</Label>
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={props.t("Account Number") as string}
+          placeholder={t("Account Number") as string}
           value={props.bankcardNoData.data}
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
         />
 
-        <Label>{props.t("Confirm Account Number")}</Label>
+        <Label>{t("Confirm Account Number")}</Label>
         <Input
           className="mb"
           labelType={"none"}
-          placeholder={props.t("Confirm Account Number") as string}
+          placeholder={t("Confirm Account Number") as string}
           value={props.confirmedBankcardNoData.data}
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
 
-        <Warning>{props.t("Unchangeable after linked, please check before submission.")}</Warning>
+        <Warning>{t("Unchangeable after linked, please check before submission.")}</Warning>
       </Form>
 
       <Button onClick={() => {
@@ -111,7 +113,7 @@ export const BankAccountForm = withTranslation(i18nBankBindAccountPage.namespace
         // } else {
         //   console.log("request2")
         // }
-      }}>{props.t("Save")}</Button>
+      }}>{t("Save")}</Button>
     </CustomForm>
   );
-});
+}

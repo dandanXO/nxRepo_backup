@@ -27,11 +27,11 @@ export type IIndiaBankAccountForm = IBankAccountForm & {
 
   upiData: InputValue<string>;
   onUPIIDChange: (event: any) => void;
-} & WithTranslation;
+}
 
 export type IPakistanBankAccountForm = IBankAccountForm & {
   bankDropList: any;
   bankAccountValue: number;
   onIFSCDropSelect: (index: number) => void;
   bindCardDropListData: any;
-} & WithTranslation;
+}

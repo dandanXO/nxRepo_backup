@@ -1,5 +1,10 @@
 import React from "react";
-import {useGetBindCardDropListQuery, usePostBankBindSaveMutation, usePostBankBindSaveToPKMutation} from "../../../api";
+import {
+  useGetBindCardDropListQuery,
+  usePostBankBindSaveMutation,
+  usePostBankBindSaveToBengalMutation,
+  usePostBankBindSaveToPKMutation
+} from "../../../api";
 import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
 import {IndiaCountry} from "../../../../environments/config/countries/IndiaCountry";
 
@@ -24,6 +29,10 @@ const BindBankAccountPage = () => {
     // NOTE: 綁定銀行卡
     const [postBankBindSaveToPK] = usePostBankBindSaveToPKMutation();
 
+    // NOTICE: Bengal
+    // NOTE: 綁定手機
+    const [triggerPostBankBindSaveToBengalMutation] = usePostBankBindSaveToBengalMutation();
+
     // NOTE: 取得電子錢包列表
     const {currentData: bindCardDropListData,
       isLoading: isBindCardDropListDataLoading,
@@ -32,6 +41,7 @@ const BindBankAccountPage = () => {
 
     // NOTE: 綁定電子錢包
     const [triggerPostBankBindSaveToPKMutation, { isLoading }] = usePostBankBindSaveToPKMutation();
+
 
     return renderByCountry({
       // NOTICE: default 0 index
@@ -52,10 +62,7 @@ const BindBankAccountPage = () => {
       // NOTICE: REFACTOR ME
       [BengalCountry.country]: (
         <BengalBindBankAccountPage
-          postBankBindSaveToPK={postBankBindSaveToPK}
-          triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
-          bindCardDropListData={bindCardDropListData}
-          cardholderName={cardholderName ?? ""}
+          triggerPostBankBindSaveToBengalMutation={triggerPostBankBindSaveToBengalMutation}
         />
       )
     }, (
