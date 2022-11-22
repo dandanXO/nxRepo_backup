@@ -8,6 +8,8 @@ const getToken = () => {
     return `b5f2db2c45e24edcbc49540bae862fbd`
   } else if (environment.country == "pk") {
     return `d5f794a6f0fa419da6ae65cb85b07c1c`
+  } else if(environment.country == "bn") {
+    return `cc0c49b19d92488cb66db8d23e165f15`
   }
 };
 const getOrderNo = () => {
@@ -15,6 +17,8 @@ const getOrderNo = () => {
     return `no-3632791101642108-9`;
   } else if (environment.country == "pk") {
     return `no-1816320407159254`;
+  } else if(environment.country == "bn") {
+    return `no-953565457571651`
   }
 }
 

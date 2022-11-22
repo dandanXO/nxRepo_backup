@@ -8,7 +8,8 @@ export const i18nAmountPaidModal: i18nComponent = {
       "No paid records yet": "No paid records yet",
     },
     bn_BD: {
-
+      "Amount Paid Record": "প্রদত্ত পরিমাণ রেকর্ড",
+      "No paid records yet": "এখনো কোন প্রদত্ত রেকর্ড নেই",
     }
   }
 }

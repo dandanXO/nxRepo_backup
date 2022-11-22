@@ -62,7 +62,9 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Bank account": "ব্যাংক হিসাব",
       "Please select the of your mobile wallet": "আপনার মোবাইল ওয়ালেট নির্বাচন করুন",
       "Your mobile wallet account": "আপনার মোবাইল ওয়ালেট অ্যাকাউন্ট",
+      // TODO: 缺語系
       // "Wallet Account Number": "Wallet Account Number",
+      // TODO: 缺語系
       // "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
       // NOTE: Bank Account
       "Please select your bank name": "আপনার ব্যাঙ্ক নাম নির্বাচন করুন",

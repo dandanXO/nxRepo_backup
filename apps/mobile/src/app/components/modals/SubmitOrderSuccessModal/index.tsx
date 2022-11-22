@@ -23,7 +23,7 @@ const SubmitOrderSuccessModal = (props: RepaymentNoticeModalProps) => {
             <Modal
                 mask={true}
                 show={true}
-                type={props.t("confirm") as string}
+                type={"confirm"}
                 title={props.t("Successfully Submitted") as string}
                 content={
                     <Container>

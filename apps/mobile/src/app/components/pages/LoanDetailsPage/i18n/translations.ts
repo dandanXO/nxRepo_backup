@@ -11,7 +11,11 @@ export const i18nLoanDetailsPage: i18nComponent = {
       "terms": "terms",
     },
     bn_BD: {
-
+      // Advertisement
+      "More Recommend Loan": "আরো সুপারিশ ঋণ",
+      // BannerWithCard
+      "interest": "মুনাফা",
+      "terms": "শর্তাবলী",
     }
   }
 }

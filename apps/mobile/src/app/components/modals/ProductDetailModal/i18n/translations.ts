@@ -15,7 +15,15 @@ export const i18nProductDetailModal: i18nComponent = {
       "Email": "Email",
     },
     bn_BD: {
-
+      "Product Details": "পণ্যের বিবরণ",
+      "Loanable amount": "ঋণযোগ্য পরিমাণ",
+      "Interest": "মুনাফা",
+      "Terms": "শর্তাবলী",
+      "Approval Rates": "অনুমোদনের হার",
+      "Approval Time": "অনুমোদনের সময়",
+      "customer service": "গ্রাহক সেবা",
+      "Service time": "সেবার সময়",
+      "Email": "ইমেইল",
     }
   }
 }
