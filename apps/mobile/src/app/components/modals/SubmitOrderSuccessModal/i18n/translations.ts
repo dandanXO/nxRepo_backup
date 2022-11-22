@@ -11,7 +11,11 @@ export const i18nSubmitOrderSuccessModal: i18nComponent = {
       "OK": "OK",
     },
     bn_BD: {
-
+      "Successfully Submitted": "সফলভাবে জমা দেওয়া হয়েছে",
+      "Your submission has been received.": "আপনার জমা দেওয়া সফল হয়েছে,",
+      "Please wait while the loan is being reviewed.": "অনুগ্রহ করে অপেক্ষা করুন যখন ঋণ পর্যালোচনা করা হচ্ছে। ",
+      "You can check all the loan history on the Loan Record page later.": "আমরা যত তাড়াতাড়ি সম্ভব আপনাকে একাধিক আর্থিক পণ্যের সাথে মেলাব।",
+      "OK": "ঠিক আছে",
     }
   }
 }
