@@ -14,7 +14,8 @@
     "dev:pk": "webpack-dev-server --config config/webpack.dev.js --color --env PK",
     "build:in": "webpack --config config/webpack.prod.js --color --env IN ",
     "build:mx": "webpack --config config/webpack.prod.js --color --env MX",
-    "build:pk": "webpack --config config/webpack.prod.js --color --env PK"
+    "build:pk": "webpack --config config/webpack.prod.js --color --env PK",
+    "build:bd": "webpack --config config/webpack.prod.js --color --env BD"
   },
   "keywords": [
     "backstage",
