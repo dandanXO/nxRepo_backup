@@ -3,8 +3,6 @@ import { PageContainer } from '@ant-design/pro-components';
 import OrderReviewTable from './OrderReviewTable';
 import { itemRender } from '../../../shared/itemRender';
 
-import {Route} from "antd/es/breadcrumb/Breadcrumb";
-
 const OrderReviewPage = () => {
     // NOTE: breadcrumb
 
@@ -16,8 +14,8 @@ const OrderReviewPage = () => {
                     itemRender: itemRender,
                     routes: [
                         { path: "/", breadcrumbName: '首页' },
-                        { path: null, breadcrumbName: '用户管理' },
-                        { path: null, breadcrumbName: '用户终审' },
+                        { path: null, breadcrumbName: '订单管理' },
+                        { path: null, breadcrumbName: '待终审订单' },
                     ],
                 },
             }}

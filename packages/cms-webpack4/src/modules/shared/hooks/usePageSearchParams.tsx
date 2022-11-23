@@ -1,19 +1,11 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { setSearchParams, setPathname, selectSearchParams, setSelectedRow } from '../utils/searchParamsSlice';
-import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 
 interface usePageSearchParamsProps {
-    // pathname?: string;
-    // previousPathname?: string;
     searchListParams?: {}
-    // selectedRowParams?: [];
-    // setSearchList?: React.Dispatch<React.SetStateAction<Object>>;
-    // id?: string | number;
-    // type?: any
 }
-
 
 const usePageSearchParams = (props: usePageSearchParamsProps) => {
 
@@ -30,10 +22,10 @@ const usePageSearchParams = (props: usePageSearchParamsProps) => {
     }, [searchParams, selectedRow])
 
 
-    const handleToDetailPage = (pathname, previousPathname, selectedRowParams) => {
+    const handleToDetailPage = (pathname, previousPathname, selectedRowParams = []) => {
         dispatch(setPathname({ pathname: pathname, previousPathname: previousPathname }));
         dispatch(setSearchParams(searchList));
-        selectedRowParams && dispatch(setSelectedRow(selectedRowParams));
+        dispatch(setSelectedRow(selectedRowParams));
     }
 
     return {

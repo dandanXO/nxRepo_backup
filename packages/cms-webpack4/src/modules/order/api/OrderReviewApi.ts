@@ -1,23 +1,22 @@
 import { API } from "../../../api";
 import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from "./types/OrderReviewTypes/getOrderReviewList";
-import { UserId } from "../../../types/UserId";
 import { PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring } from "./types/OrderReviewTypes/postOrderReview";
 
 const OrderReviewApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // NOTE: GET /hs​/admin​/order-review​/final 獲取待终审訂單列表
-        getUOrderReviewList: builder.query<GetOrderReviewListProps, GetOrderReviewListRequestQuerystring>({
+        getOrderReviewList: builder.query<GetOrderReviewListProps, GetOrderReviewListRequestQuerystring>({
             query: (requestBody: GetOrderReviewListRequestQuerystring) => ({
                 url: `/order-review/final`,
                 params: requestBody,
                 method: "get",
             }),
         }),
-        // NOTE: POST /hs​/admin​/user-review​/final 终审
+        // NOTE: POST /hs/admin/order-review/batch-review 批次訂單審核
         postOrderReview: builder.mutation<PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring>({
             query: (requestBody: PostOrderReviewRequestQuerystring) => ({
-                url: `/user-review/final`,
+                url: `/order-review/batch-review`,
                 method: "post",
                 data: requestBody,
             }),
@@ -25,6 +24,6 @@ const OrderReviewApi = API.injectEndpoints({
     })
 })
 export const {
-    useLazyGetUOrderReviewListQuery,
+    useLazyGetOrderReviewListQuery,
     usePostOrderReviewMutation
 } = OrderReviewApi;

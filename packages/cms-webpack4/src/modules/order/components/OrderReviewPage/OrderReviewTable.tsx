@@ -1,48 +1,38 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, Modal, Radio, Space,List ,Tooltip} from 'antd';
+import { Button, Form, Input, Modal, Radio, Space, List, Tooltip } from 'antd';
 import moment from 'moment';
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../shared/hooks/useValuesEnums';
 import { InfoCircleOutlined } from "@ant-design/icons";
-import { useLazyGetUOrderReviewListQuery,usePostOrderReviewMutation } from '../../api/OrderReviewApi';
-import { GetOrderReviewListRequestQuerystring,OrderReviewListResponse ,GetOrderReviewListProps} from '../../api/types/OrderReviewTypes/getOrderReviewList';
+import { useLazyGetOrderReviewListQuery, usePostOrderReviewMutation } from '../../api/OrderReviewApi';
+import { GetOrderReviewListRequestQuerystring, OrderReviewListResponse, GetOrderReviewListProps } from '../../api/types/OrderReviewTypes/getOrderReviewList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
 const OrderReviewTable = () => {
 
-    const { channelListEnum, riskRankEnum ,providerListEnum} = useValuesEnums();
+    const { channelListEnum, riskRankEnum, providerListEnum } = useValuesEnums();
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUOrderReviewListQuery({
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetOrderReviewListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [postOrderReview, { data, isSuccess:postOrderReviewIsSuccess }] = usePostOrderReviewMutation();
+    const [postOrderReview, { data, isSuccess: postOrderReviewIsSuccess }] = usePostOrderReviewMutation();
 
     const initSearchList: GetOrderReviewListRequestQuerystring = {
-        addEndTime: "",
-        addStartTime: "",
-        appName: "",
-        applyChannel: "",
-        oldMember: "",
-        orderNo: "",
-        phoneNo: "",
-        productName: "",
-        provider: "",
-        riskRank: "",
-        userName: "",
-        pageNum: 1, pageSize: 10
+        addEndTime: "", addStartTime: "", appName: "", applyChannel: "", oldMember: "", orderNo: "",
+        phoneNo: "", productName: "", provider: "", riskRank: "", userName: "", pageNum: 1, pageSize: 10
     }
 
     // state
     const [orderReviewList, setOrderReviewList] = useState<GetOrderReviewListProps>({ records: [] });
     const [modal, contextHolder] = Modal.useModal();
     const [errorModal, errorContextHolder] = Modal.useModal();
-    const [buttonDisabled,setButtonDisbaled]=useState(true)
-    const [randomInputValue,setRandomInputValue]=useState<number|string>("");
-    const { searchList, setSearchList, handleToDetailPage ,searchParams, selectedList,  setSelectedList} = usePageSearchParams({ searchListParams: initSearchList });
+    const [buttonDisabled, setButtonDisbaled] = useState(true)
+    const [randomInputValue, setRandomInputValue] = useState<number | string>("");
+    const { searchList, setSearchList, handleToDetailPage, searchParams, selectedList, setSelectedList } = usePageSearchParams({ searchListParams: initSearchList });
     // redux
     const history = useHistory();
 
@@ -51,9 +41,9 @@ const OrderReviewTable = () => {
     }, [searchList,postOrderReviewIsSuccess])
 
     useEffect(() => {
-        setButtonDisbaled(selectedList.length > 0 ? false : true)
+        setButtonDisbaled(selectedList.length > 0 ? false : true);
+        setRandomInputValue(selectedList.length === 0 ? "" : randomInputValue);
     }, [selectedList])
-
 
     useEffect(() => {
         if (currentData !== undefined) {
@@ -62,32 +52,8 @@ const OrderReviewTable = () => {
     }, [currentData])
 
 
-    useEffect(() => {
-
-        // 送出審核 - 錯誤訊息提醒
-        if (data && data.length !== 0) {
-            errorModal.error({
-                title: 'Error',
-                content:
-                    <List
-                        itemLayout="horizontal"
-                        dataSource={data}
-                        renderItem={item => (
-                            <List.Item>
-                                <List.Item.Meta
-                                    // title={`用户ID - ${item.userId}`}
-                                    // description={item.errorMessage}
-                                />
-                            </List.Item>
-                        )}
-                    />
-            })
-        }
-
-    }, [postOrderReviewIsSuccess])
-
-    const handleToUserDetail = (userId) => {
-        history.push(`order-review-detail/${userId}`);
+    const handleToUserDetail = (userId,orderNo) => {
+        history.push(`order-review-detail/${userId}/${orderNo}`);
         handleToDetailPage('/order-review-detail', '/order-review', selectedList)
     }
 
@@ -96,9 +62,7 @@ const OrderReviewTable = () => {
     }
 
     const onSelectChange = (selectedRowKeys) => {
-        setButtonDisbaled(selectedRowKeys.length === 0 ? true : false)
         setSelectedList(selectedRowKeys);
-        setRandomInputValue(selectedRowKeys.length === 0 ? "" : randomInputValue);
     };
 
     const handleReviewAll = (status) => {
@@ -106,7 +70,15 @@ const OrderReviewTable = () => {
         modal.confirm({
             content: `确认全部审核${confirmText}吗？`,
             onOk() {
-                postOrderReview({ userIds: selectedList, status: status });
+                postOrderReview({ orderNos: selectedList, status: status })
+                .unwrap()
+                .then()
+                .catch((error) => {
+                    errorModal.error({
+                        title: 'Error',
+                        content:`审核${confirmText}失败`
+                    })
+                });
             }
         });
     }
@@ -131,8 +103,9 @@ const OrderReviewTable = () => {
     }
 
     const handleSelectRandomRows = () => {
-        const selectArray = selectRandomRows(orderReviewList?.records, randomInputValue, 'orderNo')
-        onSelectChange(selectArray)
+        const selectArray = selectRandomRows(orderReviewList?.records, randomInputValue, 'orderNo');
+        if (!selectArray) return
+        onSelectChange(selectArray);
     }
 
     const columns: ProColumns<OrderReviewListResponse>[] = [
@@ -140,7 +113,7 @@ const OrderReviewTable = () => {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId)} >审核</a>],
+            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId,record.orderNo)} >审核</a>],
             width: 80,
         },
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" },
@@ -235,7 +208,7 @@ const OrderReviewTable = () => {
                                     addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addStartTime: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     appName,
-                                    applyChannel,
+                                    applyChannel: applyChannel === "" ? "" : channelListEnum[applyChannel].text,
                                     phoneNo,
                                     oldMember,
                                     orderNo,
