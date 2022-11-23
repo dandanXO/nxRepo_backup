@@ -1,0 +1,275 @@
+import { useEffect, useState } from 'react';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Form, Input, Modal, Radio, Space,List ,Tooltip} from 'antd';
+import moment from 'moment';
+import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import useValuesEnums from '../../../shared/hooks/useValuesEnums';
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { useLazyGetUOrderReviewListQuery,usePostOrderReviewMutation } from '../../api/OrderReviewApi';
+import { GetOrderReviewListRequestQuerystring,OrderReviewListResponse ,GetOrderReviewListProps} from '../../api/types/OrderReviewTypes/getOrderReviewList';
+import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
+import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
+const OrderReviewTable = () => {
+
+    const { channelListEnum, riskRankEnum ,providerListEnum} = useValuesEnums();
+    // api
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUOrderReviewListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+    const [postOrderReview, { data, isSuccess:postOrderReviewIsSuccess }] = usePostOrderReviewMutation();
+
+    const initSearchList: GetOrderReviewListRequestQuerystring = {
+        addEndTime: "",
+        addStartTime: "",
+        appName: "",
+        applyChannel: "",
+        oldMember: "",
+        orderNo: "",
+        phoneNo: "",
+        productName: "",
+        provider: "",
+        riskRank: "",
+        userName: "",
+        pageNum: 1, pageSize: 10
+    }
+
+    // state
+    const [orderReviewList, setOrderReviewList] = useState<GetOrderReviewListProps>({ records: [] });
+    const [modal, contextHolder] = Modal.useModal();
+    const [errorModal, errorContextHolder] = Modal.useModal();
+    const [buttonDisabled,setButtonDisbaled]=useState(true)
+    const [randomInputValue,setRandomInputValue]=useState<number|string>("");
+    const { searchList, setSearchList, handleToDetailPage ,searchParams, selectedList,  setSelectedList} = usePageSearchParams({ searchListParams: initSearchList });
+    // redux
+    const history = useHistory();
+
+    useEffect(() => {
+        triggerGetList(searchList);
+    }, [searchList,postOrderReviewIsSuccess])
+
+    useEffect(() => {
+        setButtonDisbaled(selectedList.length > 0 ? false : true)
+    }, [selectedList])
+
+
+    useEffect(() => {
+        if (currentData !== undefined) {
+            setOrderReviewList(currentData)
+        }
+    }, [currentData])
+
+
+    useEffect(() => {
+
+        // 送出審核 - 錯誤訊息提醒
+        if (data && data.length !== 0) {
+            errorModal.error({
+                title: 'Error',
+                content:
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={data}
+                        renderItem={item => (
+                            <List.Item>
+                                <List.Item.Meta
+                                    // title={`用户ID - ${item.userId}`}
+                                    // description={item.errorMessage}
+                                />
+                            </List.Item>
+                        )}
+                    />
+            })
+        }
+
+    }, [postOrderReviewIsSuccess])
+
+    const handleToUserDetail = (userId) => {
+        history.push(`order-review-detail/${userId}`);
+        handleToDetailPage('/order-review-detail', '/order-review', selectedList)
+    }
+
+    const pageOnChange = (current, pageSize) => {
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
+    }
+
+    const onSelectChange = (selectedRowKeys) => {
+        setButtonDisbaled(selectedRowKeys.length === 0 ? true : false)
+        setSelectedList(selectedRowKeys);
+        setRandomInputValue(selectedRowKeys.length === 0 ? "" : randomInputValue);
+    };
+
+    const handleReviewAll = (status) => {
+        const confirmText = status === 1 ? '通过' : '拒绝'
+        modal.confirm({
+            content: `确认全部审核${confirmText}吗？`,
+            onOk() {
+                postOrderReview({ userIds: selectedList, status: status });
+            }
+        });
+    }
+
+    const handleRandomInputOnchange = (e) => {
+
+        const inputValue = e.target.value;
+        if (inputValue === "") {
+            setRandomInputValue("")
+            return;
+        }
+
+        if (!isNaN(inputValue)) {
+            setRandomInputValue(
+                inputValue > 100 ? 100 :
+                inputValue < 0 ? 0 :
+                Number(inputValue).toFixed()
+            )
+        } else {
+            setRandomInputValue(0);
+        }
+    }
+
+    const handleSelectRandomRows = () => {
+        const selectArray = selectRandomRows(orderReviewList?.records, randomInputValue, 'orderNo')
+        onSelectChange(selectArray)
+    }
+
+    const columns: ProColumns<OrderReviewListResponse>[] = [
+        {
+            title: '操作',
+            valueType: 'option',
+            key: 'option',
+            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId)} >审核</a>],
+            width: 80,
+        },
+        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" },
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" },
+        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" },
+        {
+            title: '老客下单', dataIndex: 'oldMember', valueType: 'select', key: 'oldMember', initialValue: searchParams.oldMember || "",
+            valueEnum: {
+                '': { text: '不限' },
+                true: { text: '是' },
+                false: { text: '否' },
+            },
+        },
+        { title: '申请渠道', dataIndex: 'applyChannel', valueType: 'select',  key: 'applyChannel', valueEnum: channelListEnum, initialValue:searchParams.applyChannel || ''},
+        { title: 'APP名称', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
+        { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || ""  },
+        { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
+        { title: '风控应用', dataIndex: 'provider', valueType: 'select', key: 'provider', valueEnum: providerListEnum, initialValue: searchParams.provider || '' },
+        {
+            title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: {
+                true: { text: '是' },
+                false: { text: '否' },
+            },
+        },
+        { title: '申请金额', dataIndex: 'deviceMoney', key: 'deviceMoney', hideInSearch: true, align: 'right' },
+        { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney', hideInSearch: true, align: 'right' },
+        { title: '申请时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true, valueType: 'dateTime' },
+        {
+            title: '申请时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
+            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
+            initialValue:
+                (searchParams.searchList === undefined || searchParams.searchList.addStartTime === "")
+                    ? ""
+                    : [moment(searchParams.searchList.addStartTime), moment(searchParams.searchList.addEndTime)]
+        },
+       
+    ]
+    return (
+        <ProTable<OrderReviewListResponse>
+            columns={columns}
+            dataSource={orderReviewList?.records || []}
+            loading={isFetching}
+            rowSelection={{
+                selectedRowKeys: selectedList,
+                onChange: onSelectChange,
+            }}
+            rowKey={({orderNo})=>orderNo}
+            headerTitle={
+                <Space>
+                    <Button key="passButton" type="primary" ghost disabled={buttonDisabled} onClick={()=>handleReviewAll(1)}>全部通过</Button>
+                    <Button key="rejectButton" type="primary" ghost disabled={buttonDisabled} onClick={()=>handleReviewAll(0)}>全部拒绝</Button>
+                    <Input.Group compact>
+                        <div style={{ padding: '4px 11px', border: '1px solid #d9d9d9' }}>
+                            <Space>随机提取
+                                <Tooltip title="以当前页面呈现笔数为总笔数，输入提取百分比，送出后由系统随机提取待审订单笔数。">
+                                    <InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} />
+                                </Tooltip>
+                            </Space>
+                        </div>
+                        <Input style={{ width: '30%' }} suffix="%" onChange={handleRandomInputOnchange} value={randomInputValue} placeholder={'0'} />
+                        <Button type="primary" onClick={handleSelectRandomRows}>送出</Button>
+                    </Input.Group>
+                </Space>
+            }
+            search={{
+                labelWidth: 'auto',
+                // @ts-ignore
+                optionRender: ({ searchText, resetText }, { form }) => (
+                    <Space >
+                        {contextHolder}
+                        {errorContextHolder}
+                        <Button
+                            onClick={() => {
+                                // @ts-ignore
+                                form.setFieldsValue({
+                                    ...initSearchList,
+                                    addTimeRange: '',
+                                });
+                                setSearchList(initSearchList);
+                                onSelectChange([]);
+                            }}
+                        >
+                            {resetText}
+                        </Button>
+                        <Button
+                            type={'primary'}
+                            onClick={() => {
+                                // @ts-ignore
+                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider } = form.getFieldValue();
+                                setSearchList({
+                                    ...searchList,
+                                    addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
+                                    addStartTime: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    appName,
+                                    applyChannel,
+                                    phoneNo,
+                                    oldMember,
+                                    orderNo,
+                                    productName,
+                                    provider,
+                                    riskRank,
+                                    userName
+                                });
+                                onSelectChange([]);
+                                form.submit();
+
+                            }}
+                        >
+                            {searchText}
+                        </Button>
+                    </Space>
+                ),
+            }}
+            options={{
+                setting: { listsHeight: 400 },
+                reload: () => triggerGetList(searchList),
+            }}
+            pagination={{
+                showSizeChanger: true,
+                defaultPageSize: 10,
+                onChange: pageOnChange,
+                total: orderReviewList?.totalRecords,
+                current: orderReviewList?.records?.length === 0 ? 0 : orderReviewList?.currentPage,
+            }}
+        >
+
+        </ProTable>
+    );
+}
+
+export default OrderReviewTable;
+

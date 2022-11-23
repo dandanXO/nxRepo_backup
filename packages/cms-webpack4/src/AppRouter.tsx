@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {selectSearchParams, setSearchParams} from "./modules/shared/utils/searchParamsSlice";
+import {selectSearchParams, setSearchParams,setSelectedRow} from "./modules/shared/utils/searchParamsSlice";
 import React, {useEffect} from "react";
 import {ConfigProvider} from "antd";
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
@@ -19,6 +19,8 @@ import {AppManagePage} from "./modules/product/components/pages/AppManagePage";
 import ConfigManagePage from "./modules/system/components/pages/ConfigManagePage";
 import OrderPage from "./modules/order/components/OrderPage";
 import OrderDetailPage from "./modules/order/components/OrderDetailPage";
+import OrderReviewPage from "./modules/order/components/OrderReviewPage";
+import OrderReviewDetailPage from "./modules/order/components/OrderReviewDetailPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -34,6 +36,7 @@ export const AppRouter = () => {
 
             if (location.pathname.indexOf(pathname) + location.pathname.indexOf(previousPathname) <= -2) {
                 dispatch(setSearchParams({}));
+                dispatch(setSelectedRow([]))
             }
 
         })
@@ -82,6 +85,10 @@ export const AppRouter = () => {
                     <Route path="/order" component={OrderPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/order-detail/:userId" component={OrderDetailPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/order-review" component={OrderReviewPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/order-review-detail/:userId" component={OrderReviewDetailPage} />
                 </Switch>
             </Router>
 

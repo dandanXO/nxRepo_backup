@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, Modal, Radio, Space,List } from 'antd';
-import { GetUerReviewListProps,UserReviewListResponse,GetUserReviewListRequestQuerystring } from '../../../api/types/userReviewTypes/getUserReviewList';
+import { GetUserReviewListProps,UserReviewListResponse,GetUserReviewListRequestQuerystring } from '../../../api/types/userReviewTypes/getUserReviewList';
 import { useLazyGetUserReviewListQuery } from '../../../api/UserReviewApi';
 import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
@@ -26,7 +26,7 @@ const UserReviewTable = () => {
     }
 
     // state
-    const [userReviewList, setUserList] = useState<GetUerReviewListProps>({ records: [] });
+    const [userReviewList, setUserList] = useState<GetUserReviewListProps>({ records: [] });
     const [searchList, setSearchList] = useState<GetUserReviewListRequestQuerystring>(initSearchList);
     const [modal, contextHolder] = Modal.useModal();
     const [selectedRow, setSelectedRow] = useState([]);

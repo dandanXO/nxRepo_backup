@@ -30,4 +30,4 @@ export interface UserReviewListResponse {
     userName?: string;       // 姓名
 }
 
-export type GetUerReviewListProps = GetUserReviewListResponse & GetPageableResponse;
+export type GetUserReviewListProps = GetUserReviewListResponse & GetPageableResponse;
