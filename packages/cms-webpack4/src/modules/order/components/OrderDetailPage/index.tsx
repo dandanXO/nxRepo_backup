@@ -20,7 +20,7 @@ const OrderDetailPage = () => {
 
     const tabs = [
         { label: '订单信息', key: 'orderInfo', children: <OrderInfo userId={userId}/> }, // 务必填写 key
-        { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId}/> }, 
+        { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId} type="order"/> }, 
         { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId}/> },
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId}/> },
         { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId}/> },

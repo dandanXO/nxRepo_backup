@@ -5,12 +5,14 @@ interface searchParamsState {
     searchParams: any;
     previousPathname?: string;
     pathname?: string;
+    selectedRow?: []
 }
 
 const initialState: searchParamsState = {
     searchParams: {},
     previousPathname: "",
     pathname: "",
+    selectedRow: []
 }
 
 const searchParamsSlice = createSlice({
@@ -20,6 +22,9 @@ const searchParamsSlice = createSlice({
         setSearchParams(state, action) {
             state.searchParams = action.payload;
         },
+        setSelectedRow(state, action) {
+            state.selectedRow = action.payload;
+        },
         setPathname(state, action) {
             state.pathname = action.payload.pathname;
             state.previousPathname = action.payload.previousPathname;
@@ -27,6 +32,6 @@ const searchParamsSlice = createSlice({
     }
 })
 
-export const { setSearchParams ,setPathname} = searchParamsSlice.actions;
+export const { setSearchParams ,setPathname,setSelectedRow} = searchParamsSlice.actions;
 export const selectSearchParams = (state: RootState) => state.searchParams;
 export default searchParamsSlice.reducer

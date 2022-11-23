@@ -1,5 +1,6 @@
 import {useGetChannelListQuery} from "../api/channelListApi";
 import { useGetOperatorListQuery } from "../api/operatorListApi";
+import { useGetProviderListQuery } from "../api/providerApi";
 import {useEffect, useState} from "react";
 
 const useValuesEnums = () => {
@@ -25,6 +26,18 @@ const useValuesEnums = () => {
         setOperatorListEnum({ ...operatorList, '': { text: '不限' } })
     }, [isOperatorListDataSuccess])
 
+    
+    // 风控应用
+    const { currentData: providerListData, isSuccess: isProviderListDataSuccess } = useGetProviderListQuery(null);
+    const [providerListEnum, setProviderListEnum] = useState(null)
+
+    useEffect(() => {
+        const providerList = providerListData && providerListData?.reduce((prev, curr) => {
+            return {...prev, ...{[curr]: { text: curr } } }
+        }, {});
+        setProviderListEnum({ ...providerList, '': { text: '不限' } })
+    }, [isProviderListDataSuccess])
+
     // 风控标签
     const riskRankEnum = {
         '': { text: '不限', color: '' },
@@ -36,7 +49,7 @@ const useValuesEnums = () => {
     }
 
 
-    return { channelListEnum, riskRankEnum, operatorListEnum }
+    return { channelListEnum, riskRankEnum, operatorListEnum, providerListEnum }
 }
 
 export default useValuesEnums;

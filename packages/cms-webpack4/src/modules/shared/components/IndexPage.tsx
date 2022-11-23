@@ -46,6 +46,12 @@ export function IndexPage() {
         <div>
             <Link to="/order-detail"><a>Order Detail</a></Link>
         </div>
+        <div>
+            <Link to="/order-review"><a> Order Review</a></Link>
+        </div>
+        <div>
+            <Link to="/order-review-detail"><a>Order Review Detail</a></Link>
+        </div>
     </div>
   );
 }
