@@ -78,7 +78,7 @@
                         }
                     ]
                 },
-                "development-bn": {
+                "development-bd": {
                   "extractLicenses": false,
                   "optimization": false,
                   "sourceMap": true,
@@ -86,15 +86,15 @@
                   "fileReplacements": [
                     {
                       "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.bn.dev.ts"
+                      "with": "apps/mobile/src/environments/environment.bd.dev.ts"
                     }
                   ]
                 },
-                "production-bn": {
+                "production-bd": {
                   "fileReplacements": [
                     {
                       "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.bn.prod.ts"
+                      "with": "apps/mobile/src/environments/environment.bd.prod.ts"
                     }
                   ]
                 }
@@ -106,7 +106,7 @@
             "options": {
                 "buildTarget": "mobile:build",
                 "hmr": true,
-                "proxyConfig": "apps/mobile/proxy.config.bn.json"
+                "proxyConfig": "apps/mobile/proxy.config.bd.json"
             },
             "configurations": {
                 "development": {
@@ -129,6 +129,13 @@
                 "production-pk": {
                     "buildTarget": "mobile:build:production-pk",
                     "hmr": false
+                },
+                "development-pd": {
+                  "buildTarget": "mobile:build:development-pd"
+                },
+                "production-pd": {
+                  "buildTarget": "mobile:build:production-pd",
+                  "hmr": false
                 }
             }
         },

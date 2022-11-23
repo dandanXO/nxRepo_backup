@@ -32,7 +32,7 @@ export interface PostPKBankBindSaveRequest {
   // 銀行名稱
 }
 
-export interface PostBengalBankBindSaveRequest {
+export interface PostBangladeshBankBindSaveRequest {
   bankAccNr:	string;
   // 銀行帳戶
 

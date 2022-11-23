@@ -22,6 +22,6 @@ export type IPakistanUseBindBankAccountPage = {
 }
 
 
-export type IUseBindBankAccountPageForBengal = {
-  triggerPostBankBindSaveToBengalMutation: any;
+export type IUseBindBankAccountPageForBangladesh = {
+  triggerPostBankBindSaveToBangladeshMutation: any;
 }

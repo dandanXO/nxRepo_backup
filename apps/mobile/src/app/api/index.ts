@@ -14,7 +14,7 @@ import {
     PostRepayCreateRequestBody,
     PostRepayCreateResponse,
 } from "./postRepayCreate";
-import {PostBankBindSaveRequest, PostPKBankBindSaveRequest, PostBengalBankBindSaveRequest} from "./postBankBindSave";
+import {PostBankBindSaveRequest, PostPKBankBindSaveRequest, PostBangladeshBankBindSaveRequest} from "./postBankBindSave";
 import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
 import { GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring } from "./getLoanRecommend";
 import {GetBindCardDropListResponse} from "./GetBindCardDropList";
@@ -103,9 +103,9 @@ export const API = createApi({
             data: requestBody,
           }),
         }),
-        // NOTICE: Bengal - 绑定银行主卡或是電子錢包
-        postBankBindSaveToBengal: builder.mutation<{}, PostBengalBankBindSaveRequest>({
-          query: (requestBody: PostBengalBankBindSaveRequest) => ({
+        // NOTICE: Bangladesh - 绑定银行主卡或是電子錢包
+        postBankBindSaveToBangladesh: builder.mutation<{}, PostBangladeshBankBindSaveRequest>({
+          query: (requestBody: PostBangladeshBankBindSaveRequest) => ({
             method: "post",
             url: `/bank-bind/save`,
             data: requestBody,
@@ -138,7 +138,7 @@ export const {
     useGetBindCardDropListQuery,
     usePostBankBindSaveMutation,
     usePostBankBindSaveToPKMutation,
-    usePostBankBindSaveToBengalMutation,
+    usePostBankBindSaveToBangladeshMutation,
     usePostLoanSubmitOrderMutation,
     useGetLoanRecommendQuery,
 } = API;

@@ -2,7 +2,7 @@ import React from "react";
 import {
   useGetBindCardDropListQuery,
   usePostBankBindSaveMutation,
-  usePostBankBindSaveToBengalMutation,
+  usePostBankBindSaveToBangladeshMutation,
   usePostBankBindSaveToPKMutation
 } from "../../../api";
 import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
@@ -12,8 +12,8 @@ import {PakistanCountry} from "../../../../environments/config/countries/Pakista
 import {IndiaBindBankAccountPage} from "./i18n/components/IndiaBindBankAccountPage";
 import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAccountPage";
 import {renderByCountry} from "../../../i18n";
-import {BengalCountry} from "../../../../environments/config/countries/BengalCountry";
-import {BengalBindBankAccountPage} from "./i18n/components/BengalBindBankAccountPage";
+import {BangladeshCountry} from "../../../../environments/config/countries/BangladeshCountry";
+import {BangladeshBindBankAccountPage} from "./i18n/components/BangladeshBindBankAccountPage";
 
 const BindBankAccountPage = () => {
     // NOTICE: Common
@@ -29,9 +29,9 @@ const BindBankAccountPage = () => {
     // NOTE: 綁定銀行卡
     const [postBankBindSaveToPK] = usePostBankBindSaveToPKMutation();
 
-    // NOTICE: Bengal
+    // NOTICE: Bangladesh
     // NOTE: 綁定手機
-    const [triggerPostBankBindSaveToBengalMutation] = usePostBankBindSaveToBengalMutation();
+    const [triggerPostBankBindSaveToBangladeshMutation] = usePostBankBindSaveToBangladeshMutation();
 
     // NOTE: 取得電子錢包列表
     const {currentData: bindCardDropListData,
@@ -60,9 +60,9 @@ const BindBankAccountPage = () => {
         />
       ),
       // NOTICE: REFACTOR ME
-      [BengalCountry.country]: (
-        <BengalBindBankAccountPage
-          triggerPostBankBindSaveToBengalMutation={triggerPostBankBindSaveToBengalMutation}
+      [BangladeshCountry.country]: (
+        <BangladeshBindBankAccountPage
+          triggerPostBankBindSaveToBangladeshMutation={triggerPostBankBindSaveToBangladeshMutation}
         />
       )
     }, (

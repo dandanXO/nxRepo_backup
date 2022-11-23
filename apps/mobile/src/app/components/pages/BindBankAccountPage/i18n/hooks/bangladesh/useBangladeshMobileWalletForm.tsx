@@ -5,11 +5,11 @@ import {i18nBankBindAccountPage} from "../../translations";
 import {z} from "zod";
 import i18next from "i18next";
 
-interface IUseBengalMobileWalletForm {
-  triggerPostBankBindSaveToBengalMutation: any;
+interface IUseBangladeshMobileWalletForm {
+  triggerPostBankBindSaveToBangladeshMutation: any;
 }
 
-export const useBengalMobileWalletForm = (props: IUseBengalMobileWalletForm) => {
+export const useBangladeshMobileWalletForm = (props: IUseBangladeshMobileWalletForm) => {
 
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
@@ -122,7 +122,7 @@ export const useBengalMobileWalletForm = (props: IUseBengalMobileWalletForm) => 
 
     if (!mobileData.isValidation || !confirmedMobileData.isValidation) return;
 
-    props.triggerPostBankBindSaveToBengalMutation({
+    props.triggerPostBankBindSaveToBangladeshMutation({
       bankAccNr: "",
       mobileWallet: true,
       mobileWalletAccount: mobileData.data,
@@ -154,7 +154,7 @@ export const useBengalMobileWalletForm = (props: IUseBengalMobileWalletForm) => 
     mobileData.data,
     confirmedMobileData.isValidation,
     confirmedMobileData.data,
-    props.triggerPostBankBindSaveToBengalMutation,
+    props.triggerPostBankBindSaveToBangladeshMutation,
   ]);
 
   return {

@@ -1,7 +1,7 @@
 import {IEnvironment} from "./types/IEnvironment";
-import {BengalCountry} from "./config/countries/BengalCountry";
+import {BangladeshCountry} from "./config/countries/BangladeshCountry";
 
 export const environment: IEnvironment = {
   production: true,
-  ...BengalCountry,
+  ...BangladeshCountry,
 }

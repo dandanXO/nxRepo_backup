@@ -35,7 +35,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       // NOTE: Bank Account
       "Please select your bank name": "Please select your bank name",
 
-      // NOTICE: Bengal
+      // NOTICE: Bangladesh
       "Your mobile wallet number": "Your mobile wallet number",
       "Confirm your number": "Confirm your number",
     },
@@ -70,7 +70,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Wallet Account Number": "Wallet Account Number",
       "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
 
-      // NOTICE: Bengal
+      // NOTICE: Bangladesh
       // NOTE: Bank Account
       "Your mobile wallet number": "১। তোমার মোবাইল ওয়ালেট নম্বর",
       "Confirm your number": "২। তোমার নম্বরটি কনফার্ম করো ",

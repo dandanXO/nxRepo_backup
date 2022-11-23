@@ -1,11 +1,11 @@
 import React from "react";
-import {IUseBindBankAccountPageForBengal,} from "../../types/IUseBindBankAccountPage";
+import {IUseBindBankAccountPageForBangladesh,} from "../../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../../components/CustomPage";
 import {MobileWalletForm} from "./MobileWalletForm";
-import {useBengalMobileWalletForm} from "../../hooks/bengal/useBengalMobileWalletForm";
+import {useBangladeshMobileWalletForm} from "../../hooks/bangladesh/useBangladeshMobileWalletForm";
 import {ChooseBindMethod} from "../PakistanBindBankAccountPage/ChooseBindMethod";
 
-export const BengalBindBankAccountPage = (props: IUseBindBankAccountPageForBengal) => {
+export const BangladeshBindBankAccountPage = (props: IUseBindBankAccountPageForBangladesh) => {
 
   const {
     // mobile
@@ -19,8 +19,8 @@ export const BengalBindBankAccountPage = (props: IUseBindBankAccountPageForBenga
     // Form
     isFormPending,
     confirm,
-  } = useBengalMobileWalletForm({
-    triggerPostBankBindSaveToBengalMutation: props.triggerPostBankBindSaveToBengalMutation,
+  } = useBangladeshMobileWalletForm({
+    triggerPostBankBindSaveToBangladeshMutation: props.triggerPostBankBindSaveToBangladeshMutation,
   })
 
   return (
