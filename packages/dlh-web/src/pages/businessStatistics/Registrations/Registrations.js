@@ -28,17 +28,6 @@ class Registrations extends Component {
         const precent = props.intl.formatMessage({ id: "page.table.percentage" });
 
         this.operationColumns = [
-            // Pan卡认证量(百分比)
-            {
-                title: <TableTitle text={"page.table.new.customer.pancard.verify.qty"} />,className: 'operation',
-                dataIndex: 'panCount',
-                key: 'panCount',
-                render (text, record) {
-                    const { panCountRate } = record;
-                    if (!text) { return ''; }
-                    return <div><div>{text}</div><div>({panCountRate})</div></div>;
-                }
-            },
             // 新客实名认证量(百分比)
             {
                 title: <TableTitle text={"page.table.new.customer.realname.verify.qty"} />,className: 'operation',
@@ -101,6 +90,21 @@ class Registrations extends Component {
             },
         ]
 
+        if(conf.PCardCertification) {
+          this.operationColumns.unshift(
+            // Pan卡认证量(百分比)
+            {
+              title: <TableTitle text={"page.table.new.customer.pancard.verify.qty"} />,className: 'operation',
+              dataIndex: 'panCount',
+              key: 'panCount',
+              render (text, record) {
+                const { panCountRate } = record;
+                if (!text) { return ''; }
+                return <div><div>{text}</div><div>({panCountRate})</div></div>;
+              }
+            },
+          )
+        }
         this.columns = [
             {
                 title: "",className: '',
@@ -165,10 +169,10 @@ class Registrations extends Component {
                 title: <FormattedMessage id="page.table.user.operation" />,className: 'operationTitle',
                 children: conf.Registrations?this.operationColumns:this.operationColumns.filter(i=>i.key!=="panCount")
             },
-          
+
             {
                 title: "",className: '',
-                children: [ 
+                children: [
                     // 新客总申请量
                     { title: props.intl.formatMessage({ id: "page.table.new.customer.application.qty" }), dataIndex: 'applyCount', key: 'applyCount', },
                     // 訂單申请率
