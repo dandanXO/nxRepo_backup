@@ -4,21 +4,23 @@ import { Tabs, Button ,Form,Modal,List } from 'antd';
 import UserInfo from '../../../shared/components/userInfo/UserInfo';
 import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
-import { useParams } from "react-router-dom";
+import { useParams,useHistory } from "react-router-dom";
 import OrderReviewModal from './OrderReviewModal';
-import { useHistory } from "react-router-dom";
 import { usePostOrderReviewMutation } from '../../api/OrderReviewApi';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
 import {itemRender} from "../../../shared/itemRender";
+
 const OrderReviewDetailPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
-    const urlParams = useParams<{ userId: string }>();
-    const userId = Number(urlParams.userId)
+    const urlParams = useParams<{ userId: string, orderNo: string }>();
+    const userId = Number(urlParams.userId);
+    const orderNo = urlParams.orderNo;
     const [form] = Form.useForm();
     const [showModal,setShowModal]=useState(false);
     const [postOrderReview, { data, isLoading, isSuccess }] = usePostOrderReviewMutation();
+    const [errorModal, errorContextHolder] = Modal.useModal();
     const history = useHistory();
-    const [modal, contextHolder] = Modal.useModal();
+
     useEffect(() => {
         setDomLoaded(true);
     }, []);
@@ -35,36 +37,19 @@ const OrderReviewDetailPage = () => {
         setShowModal(false);
     }
 
-    useEffect(() => {
-        setShowModal(false);
-        if(data && data.length === 0){
-            history.push('/order-review');
-        }
-
-        // 送出審核 - 錯誤訊息提醒
-        if (data && data.length !== 0) {
-            modal.error({
-                title: 'Error',
-                content:
-                    <List
-                        itemLayout="horizontal"
-                        dataSource={data}
-                        renderItem={item => (
-                            <List.Item>
-                                <List.Item.Meta
-                                    // title={`用户ID - ${item.userId}`}
-                                    // description={item.errorMessage}
-                                />
-                            </List.Item>
-                        )}
-                    />
+    const onFinish = () => {
+        postOrderReview({ orderNos: [orderNo], ...form.getFieldsValue() })
+            .unwrap()
+            .then((payload) => {
+                setShowModal(false);
+                history.push('/order-review');
             })
-        }
-
-    }, [isSuccess])
-
-    const onFinish=()=>{
-        postOrderReview({userIds:[userId],...form.getFieldsValue()})
+            .catch((error) => {
+                errorModal.error({
+                    title: 'Error',
+                    content: `审核失败`
+                })
+            })
     }
 
     return domLoaded ? (
@@ -94,7 +79,7 @@ const OrderReviewDetailPage = () => {
             >
                 <Tabs items={tabs} />
                 <OrderReviewModal showModal={showModal} handleCloseModal={handleCloseModal} form={form} onFinish={onFinish}/>
-                {contextHolder}
+                {errorContextHolder}
             </PageContainer>
         </div>
     ) : null;

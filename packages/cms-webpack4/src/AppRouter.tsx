@@ -84,11 +84,11 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/order" component={OrderPage} />
                     {/*// @ts-ignore*/}
-                    <Route path="/order-detail/:userId" component={OrderDetailPage} />
+                    <Route path="/order-detail/:userId/:orderNo" component={OrderDetailPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/order-review" component={OrderReviewPage} />
                     {/*// @ts-ignore*/}
-                    <Route path="/order-review-detail/:userId" component={OrderReviewDetailPage} />
+                    <Route path="/order-review-detail/:userId/:orderNo" component={OrderReviewDetailPage} />
                 </Switch>
             </Router>
 
