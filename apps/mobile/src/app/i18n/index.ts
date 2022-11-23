@@ -33,9 +33,9 @@ i18next
           "Welcome to Mobile": "Welcome to Mobile !!!",
           modal: {
             "Error": "Error",
-            "Notice": "Notice",
+            "Notice": "লক্ষ্য করুন",
             "Success": "Success!",
-            "Confirm": "Confirm",
+            "Confirm": "নিশ্চিত করুন",
           },
         },
 
