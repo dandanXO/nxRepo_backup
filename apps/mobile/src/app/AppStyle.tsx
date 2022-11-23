@@ -13,5 +13,7 @@ export const AppStyle = createGlobalStyle<IGlobalStyle>`
     background: ${(props) => props.theme.page.bgColor};
     box-sizing: border-box;
     height: 100%;
+    // NOTICE:
+    user-select: none;
   }
 `;
