@@ -457,6 +457,9 @@ class OrderDetail extends Component{
         getOrderData({ overdueId: params }, { userId });
         getAllUrgeRecord({ overdueId: params });
         const _this = this;
+
+        loadHideContactIfNotDueFlag();
+
         axios({
             url: '/hs/admin/orderToday/hidenYysAndContacts',
             method: 'get'
@@ -467,6 +470,17 @@ class OrderDetail extends Component{
                 });
             }
         });
+
+        function loadHideContactIfNotDueFlag(){
+            axios({
+                url: '/hs/admin/orderToday/hideContactIfNotDue',
+                method: 'get'
+            }).then((res) => {
+                _this.setState({
+                    hideContactIfNotDue: res
+                });
+            });
+        }
     }
     componentWillUnmount() {
         const { setOrderData } = this.props;
@@ -480,7 +494,7 @@ class OrderDetail extends Component{
     render() {
         const ele = this.renderBtn();
         const { visible, recordVisible, recordData, intl,repaymentVisible,orderData,messageContent,messageVisible,changeMessageVisible } = this.props;
-        const { remark } = this.state;
+        const { remark, hideContactIfNotDue } = this.state;
         return (
             <div>
                 <Tabs animated={false} tabBarExtraContent={ele}>
@@ -490,7 +504,7 @@ class OrderDetail extends Component{
                     <TabPane tab={intl.formatMessage({id: "windowPage.customer.msg"})} key="2">
                         {this.renderUserInfo()}
                     </TabPane>
-                    <TabPane tab={intl.formatMessage({id: "windowPage.contact.list"})} key="3">
+                    <TabPane tab={intl.formatMessage({id: "windowPage.contact.list"})} key="3" disabled={ hideContactIfNotDue && this.isNotOverdue(orderData) }>
                         {this.renderAddressBook()}
                     </TabPane>
                 </Tabs>
@@ -513,6 +527,17 @@ class OrderDetail extends Component{
             </div>
         );
     }
+
+    isNotOverdue = (orderData) => {
+        if(orderData && orderData.orderInfo && orderData.orderInfo.expireTime){
+            const expireDate = moment(orderData.orderInfo.expireTime ).startOf('day');
+            const today = moment().startOf('day');
+            return today.isSameOrBefore(expireDate);
+        }
+        
+        return false;
+    }
+
 }
 
 OrderDetail.propTypes = {
