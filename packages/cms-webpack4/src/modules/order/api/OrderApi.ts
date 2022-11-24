@@ -12,17 +12,8 @@ const OrderApi = API.injectEndpoints({
                 method: "get",
             }),
         }),
-        // NOTE: /hs/admin/order/list/download 導出訂單列表
-        getOrderListDownload: builder.query<GetOrderListProps, GetOrderListRequestQuerystring>({
-            query: (requestBody: GetOrderListRequestQuerystring) => ({
-                url: `/order/list/download`,
-                params: requestBody,
-                method: "get",
-            }),
-        }),
     })
 })
 export const {
-    useLazyGetOrderListQuery,
-    useLazyGetOrderListDownloadQuery
+    useLazyGetOrderListQuery
 } = OrderApi;
