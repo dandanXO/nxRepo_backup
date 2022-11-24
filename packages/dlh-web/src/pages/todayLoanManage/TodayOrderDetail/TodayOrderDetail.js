@@ -532,7 +532,7 @@ class OrderDetail extends Component{
         if(orderData && orderData.orderInfo && orderData.orderInfo.expireTime){
             const expireDate = moment(orderData.orderInfo.expireTime ).startOf('day');
             const today = moment().startOf('day');
-            return today.isSameOrBefore(expireDate);
+            return today.isBefore(expireDate);
         }
         
         return false;
