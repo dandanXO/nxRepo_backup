@@ -1,13 +1,21 @@
 import { API } from "../../../api";
-import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from "./types/OrderReviewTypes/getOrderReviewList";
+import { GetOrderListRequestQuerystring, GetOrderListProps } from "./types/OrderTypes/getOrderList";
 
-const OrderReviewApi = API.injectEndpoints({
+const OrderApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-        // NOTE: GET /hs​/admin​/order-review​/final 獲取待终审訂單列表
-        getOrderList: builder.query<GetOrderReviewListProps, GetOrderReviewListRequestQuerystring>({
-            query: (requestBody: GetOrderReviewListRequestQuerystring) => ({
-                url: `/order-review/final`,
+        // NOTE: GET /hs​/admin​/order/list 訂單列表查詢
+        getOrderList: builder.query<GetOrderListProps, GetOrderListRequestQuerystring>({
+            query: (requestBody: GetOrderListRequestQuerystring) => ({
+                url: `/order/list`,
+                params: requestBody,
+                method: "get",
+            }),
+        }),
+        // NOTE: /hs/admin/order/list/download 導出訂單列表
+        getOrderListDownload: builder.query<GetOrderListProps, GetOrderListRequestQuerystring>({
+            query: (requestBody: GetOrderListRequestQuerystring) => ({
+                url: `/order/list/download`,
                 params: requestBody,
                 method: "get",
             }),
@@ -16,4 +24,5 @@ const OrderReviewApi = API.injectEndpoints({
 })
 export const {
     useLazyGetOrderListQuery,
-} = OrderReviewApi;
+    useLazyGetOrderListDownloadQuery
+} = OrderApi;

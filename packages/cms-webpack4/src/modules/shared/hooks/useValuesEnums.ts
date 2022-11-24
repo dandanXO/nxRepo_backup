@@ -33,7 +33,7 @@ const useValuesEnums = () => {
 
     useEffect(() => {
         const providerList = providerListData && providerListData?.reduce((prev, curr) => {
-            return {...prev, ...{[curr]: { text: curr } } }
+            return {...prev, ...{[curr.code]: { text: curr.displayName } } }
         }, {});
         setProviderListEnum({ ...providerList, '': { text: '不限' } })
     }, [isProviderListDataSuccess])

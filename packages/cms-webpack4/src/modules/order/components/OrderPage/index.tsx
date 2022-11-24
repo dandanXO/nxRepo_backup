@@ -4,6 +4,7 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
 
 import AdminPage from '../../../shared/components/AdminPage';
+import OrderTable from './OrderTable';
 
 const OrderPage = () => {
    
@@ -26,7 +27,7 @@ const OrderPage = () => {
             }}
         >
             <>
-                订单列表
+                <OrderTable/>
             </>
         </AdminPage>
     );
