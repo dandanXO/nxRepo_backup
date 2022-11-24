@@ -1,14 +1,18 @@
 import { GetPageableResponse } from "../../../../../types/commonReponse";
 export interface GetOrderListRequestQuerystring {
-    addEndTime?: string;              // 申請時間結束
-    addStartTime?: string;            // 申請時間開始
     appName?: string;                 // APP名稱
-    applyChannel?: string;            // 申請渠道
-    oldMember?: boolean | "";         // 是否为老客
+    applyTimeEnd?: string;            // 申请时间迄
+    applyTimeStart?: string;          // 申請時間開始
+    channelId?: number;               // 申请渠道
+    expireTimeEnd?: string;           // 到期日迄
+    expireTimeStart?: string;         // 到期日起
+    isLeng?: boolean;                 // 是否展期
+    isOldUser?: boolean | "";         // 老客下单
+    loanTimeEnd?: string;             // 放款时间迄
+    loanTimeStart?: string;           // 放款时间起
     orderNo?: string;                 // 訂單編號
-    phoneNo?: string;                 // 手机号
     productName?: string;             // 產品名稱
-    provider?: ""
+    rcProvider?: ""
     | "BLUE_RAY"
     | "DESTINY"
     | "MERCURY"
@@ -21,15 +25,9 @@ export interface GetOrderListRequestQuerystring {
     | "SEA_CORE"
     | "BLUE_RAY_PK"
     | "WU_PIAN_PK";                    // 风控應用
-
-    riskRank?: ""
-    | "REJECT"
-    | "ORDINARY"
-    | "NORMAL"
-    | "GOOD"
-    | "EXCELLENT";                     // 风控標籤
-
-    userName?: string;                // 姓名
+    status?: number;                   // 订单状态
+    userPhone?: string;                // 手机号
+    userTrueName?: string;             // 姓名
     pageNum?: number;
     pageSize?: number;
     sortField?: string;
@@ -41,21 +39,25 @@ export interface GetOrderListResponse {
 }
 
 export interface OrderListResponse {
-    addTime?: string;           // 申請時間
-    appName?: string;           // APP名稱
-    applyChannel?: string;      // 申請渠道
-    deviceMoney?: number;       // 申請金額
-    dummy?: boolean;            // 空放訂單
-    id?: number;                // 訂單ID
-    lendMoney?: number;         // 到帳金額
-    oldMember?: boolean;        // 老客下單
-    orderNo?: string;           // 訂單號
-    phoneNo?: string;           // 手機號
-    productName?: string;       // 產品名稱
-    provider?: string;          // 風控應用
-    riskRank?: string;          // 風控標籤
-    userName?: string;          // 姓名
-    userId?: number;            // userid
+    appName?:string;          // APP名称
+    applyTime?:string;        // 申请时间
+    channelName?:string;      // 申请渠道
+    deviceMoney?:number;      // 申请金额
+    dummy?:boolean;           // 空放訂單
+    expireDate?:string;       // 到期日
+    id?:number;               // id
+    isLeng?:boolean;          // 是否展期
+    isOldUser?:boolean;       // 老客下单
+    lendDays?:number;         // 借款期限
+    lendMoney?:number;        // 到帐金额
+    loanTime?:string;         // 放款时间
+    orderNo?:string;          // 订单编号
+    phoneNo?:string;          // 手机号
+    productName?:string;      // 产品名称         
+    riskModelName?:string;    // 风控应用         
+    status?:number;           // 订单状态         
+    userId?:number;           // 客戶Id
+    userName?:string;         // 姓名
 }
 
-export type GetOrderReviewListProps = GetOrderListResponse & GetPageableResponse;
+export type GetOrderListProps = GetOrderListResponse & GetPageableResponse;
