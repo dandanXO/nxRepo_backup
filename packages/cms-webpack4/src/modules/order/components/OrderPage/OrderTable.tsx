@@ -5,9 +5,10 @@ import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
 import moment from 'moment';
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../shared/hooks/useValuesEnums';
-import { useLazyGetOrderListQuery ,useLazyGetOrderListDownloadQuery} from '../../api/OrderApi';
+import { useLazyGetOrderListQuery } from '../../api/OrderApi';
 import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/OrderTypes/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
+
 
 const OrderTable = () => {
 
@@ -30,13 +31,6 @@ const OrderTable = () => {
         refetchOnReconnect: false
     });
 
-    const [triggerDownList, { currentData: downLoadData }] = useLazyGetOrderListDownloadQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
-
-   
     useEffect(() => {
         triggerGetList(searchList);
     }, [searchList])
@@ -57,10 +51,7 @@ const OrderTable = () => {
     }
 
     const handleExportOrderList = () => {
-        triggerDownList(searchList)
-            .unwrap()
-            .then((payload) => { })
-            .catch((err) => { })
+        window.open("/hs/admin/order/list/download");
     }
 
     const statusEnum = {
