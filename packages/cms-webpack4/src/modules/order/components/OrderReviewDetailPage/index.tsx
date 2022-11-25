@@ -67,8 +67,8 @@ const OrderReviewDetailPage = () => {
                         routes: [
                             { path: '/', breadcrumbName: '首页', },
                             { path: null, breadcrumbName: '订单管理', },
-                            { path: '/order-review', breadcrumbName: '订单列表', },
-                            { path: null, breadcrumbName: '订单详情', },
+                            { path: '/order-review', breadcrumbName: '订单终审', },
+                            { path: null, breadcrumbName: '审核', },
                         ],
                     },
                 }}

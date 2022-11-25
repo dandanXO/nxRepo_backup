@@ -15,7 +15,7 @@ const OrderReviewPage = () => {
                     routes: [
                         { path: "/", breadcrumbName: '首页' },
                         { path: null, breadcrumbName: '订单管理' },
-                        { path: null, breadcrumbName: '待终审订单' },
+                        { path: null, breadcrumbName: '订单终审' },
                     ],
                 },
             }}
