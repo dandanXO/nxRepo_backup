@@ -109,6 +109,20 @@ class SettleOrderList extends Component {
                     );
                 }
             },{
+                width: 120,
+                title: this.props.intl.formatMessage({ id: "page.search.list.product.name" }),
+                dataIndex: 'productName',
+                key: 'productName',
+                render(text) {
+                    return (
+                        <CopyToClipboard text={text} onCopy={_this.onCopy}>
+                            <Tooltip title={text}>
+                                <span style={{ cursor: 'pointer' }}>{text}</span>
+                            </Tooltip>
+                        </CopyToClipboard>
+                    );
+                }
+            },{
                 width: 160,
                 title: props.intl.formatMessage({id : "page.search.list.repayement.platfrom"}),
                 dataIndex: 'platId',
