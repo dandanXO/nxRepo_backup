@@ -22,7 +22,7 @@ const CategoryText = styled.div`
   font-weight: 500;
   margin-bottom: 11px;
 `
-export const IndexPageAdvertisementSection = () => {
+export const ActivityAdListPage = () => {
   return (
     <Container>
       <CategoryText>Theme Activities</CategoryText>

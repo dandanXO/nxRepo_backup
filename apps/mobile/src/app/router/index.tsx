@@ -6,7 +6,7 @@ import UploadPaymentReceiptPage from "../components/pages/UploadPaymentReceiptPa
 import BindBankAccountPage from "../components/pages/BindBankAccountPage";
 import UploadedPaymentReceiptPage from "../components/pages/UploadedPaymentReceiptPage";
 import ProductAdModalListPage from "../components/pages/ProductAdModalListPage";
-import { IndexPageAdvertisementSection } from "../components/pages/IndexPageAdvertisementSection";
+import { ActivityAdListPage } from "../components/pages/ActivityAdListPage";
 
 // NOTE:
 // https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris
@@ -16,7 +16,6 @@ export const AppRouter = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<IndexPage />} />
-                <Route path={"/index"} element={<IndexPageAdvertisementSection/>}/>
                 {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
                 <Route path="/loan-details" element={<LoanDetailsPage />} />
                 {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
@@ -26,6 +25,8 @@ export const AppRouter = () => {
                 <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />}/>
                 <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />}/>
                 <Route path="/product-ad-modal-list" element={<ProductAdModalListPage />}/>
+                {/*NOTICE: ad 字眼容易被 Google 擋*/}
+                <Route path="/activity-list" element={<ActivityAdListPage />}/>
                 <Route path="*" element={<div>Not Found</div>} />
             </Routes>
         </BrowserRouter>

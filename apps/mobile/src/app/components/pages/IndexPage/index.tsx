@@ -39,7 +39,7 @@ export default () => {
             }}>showtranslations</button>
 
             <li>
-              <Link to={"/index"}>IndexPageAdvertisement</Link>
+              <Link to={"/activity-ad-list"}>ActivityAdList</Link>
             </li>
             <li>
                 <Link
