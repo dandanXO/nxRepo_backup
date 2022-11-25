@@ -1,7 +1,8 @@
 
 // NOTICE: 以下會儲存在資料庫，異動得請後端 執行 migrating，盡量固定
-import {AdTemplateCard} from "../index";
+import {AdTemplateCard} from "../../index";
 import styled from "styled-components";
+import MainCardImg from "./promotions_bg@2x.png";
 
 export interface AdTemplate1 {
   brandCard: AdTemplate1BrandCard;
@@ -43,18 +44,19 @@ const BaseAdTemplate1BrandCardUI = styled.div`
   margin-right: 8px;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
   border-radius: 3px;
-  padding: 9px 0 0 0px;
   width: 120px;
   height: 120px;
   text-align: center;
-  font-weight: 500;
 `
 const StyledAdTemplate1BrandCardUI = styled(BaseAdTemplate1BrandCardUI)`
-  background: #ec606a;
+  //background: #ec606a;
+  background-image: url(${MainCardImg});
+  background-size: 120px 120px;
 `
 const StyledBrandTitle = styled.div`
   color: #ffffff;
   font-size: 11px;
+  margin-top: 9px;
   margin-bottom: 15px;
 `;
 
@@ -84,6 +86,7 @@ const StyledAdTemplate1CardUI = styled(BaseAdTemplate1BrandCardUI)`
 const StyledTitle = styled.div`
   color: #000000;
   font-size: 11px;
+  margin-top: 9px;
   margin-bottom: 15px;
 `;
 const StyledDescription1 = styled.div`

@@ -7,7 +7,7 @@ const getToken = () => {
   if(environment.country === "in") {
     return `b5f2db2c45e24edcbc49540bae862fbd`
   } else if (environment.country == "pk") {
-    return `d5f794a6f0fa419da6ae65cb85b07c1c`
+    return `8048370a5b6f40048bee52486f9a5cab`
   } else if(environment.country == "bn") {
     return `dbb501e9b49d4a69bf8a7b3a3de85e06`
   }
