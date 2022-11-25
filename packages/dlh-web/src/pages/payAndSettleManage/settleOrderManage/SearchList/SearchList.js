@@ -41,7 +41,7 @@ class SearchList extends Component{
                                     getFieldDecorator('orderNo', {
                                         initialValue: ""
                                     })(
-                                        <Input placehoder={intl.formatMessage({id : "page.search.list.order.no.enter"})} allowClear={true} />
+                                        <Input placeholder={intl.formatMessage({id : "page.search.list.order.no.enter"})} allowClear={true} />
                                     )
                                 }
                             </Form.Item>
@@ -52,7 +52,7 @@ class SearchList extends Component{
                                     getFieldDecorator('platOrderId', {
                                         initialValue: ""
                                     })(
-                                        <Input placehoder={intl.formatMessage({id : "page.search.list.platform.order.serial.no.enter"})} allowClear={true} />
+                                        <Input placeholder={intl.formatMessage({id : "page.search.list.platform.order.serial.no.enter"})} allowClear={true} />
                                     )
                                 }
                             </Form.Item>
@@ -63,7 +63,7 @@ class SearchList extends Component{
                                     getFieldDecorator('bankAccountName', {
                                         initialValue: ""
                                     })(
-                                        <Input placehoder={intl.formatMessage({id : "page.search.list.name.enter"})} allowClear={true} />
+                                        <Input placeholder={intl.formatMessage({id : "page.search.list.name.enter"})} allowClear={true} />
                                     )
                                 }
                             </Form.Item>
@@ -74,7 +74,18 @@ class SearchList extends Component{
                                     getFieldDecorator('phoneNo', {
                                         initialValue: ""
                                     })(
-                                        <Input placehoder={intl.formatMessage({id : "windowPage.mobile.enter"})} allowClear={true} />
+                                        <Input placeholder={intl.formatMessage({id : "windowPage.mobile.enter"})} allowClear={true} />
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                        <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.product.name"})}>
+                                {
+                                    getFieldDecorator('productName', {
+                                        initialValue: ""
+                                    })(
+                                        <Input placeholder={intl.formatMessage({id : "page.table.product.name.enter"})} allowClear={true} />
                                     )
                                 }
                             </Form.Item>
@@ -101,7 +112,7 @@ class SearchList extends Component{
                                     getFieldDecorator('mchNo', {
                                         initialValue: ""
                                     })(
-                                        <Input placehoder={intl.formatMessage({id : "page.search.list.business.no.enter"})} allowClear={true} />
+                                        <Input placeholder={intl.formatMessage({id : "page.search.list.business.no.enter"})} allowClear={true} />
                                     )
                                 }
                             </Form.Item>
