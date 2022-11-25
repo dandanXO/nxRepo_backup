@@ -12,6 +12,7 @@
     "dev:in": "webpack-dev-server --config config/webpack.dev.js --color --env IN ",
     "dev:mx": "webpack-dev-server --config config/webpack.dev.js --color --env MX",
     "dev:pk": "webpack-dev-server --config config/webpack.dev.js --color --env PK",
+    "dev:bd": "webpack-dev-server --config config/webpack.dev.js --color --env BD",
     "build:in": "webpack --config config/webpack.prod.js --color --env IN ",
     "build:mx": "webpack --config config/webpack.prod.js --color --env MX",
     "build:pk": "webpack --config config/webpack.prod.js --color --env PK",

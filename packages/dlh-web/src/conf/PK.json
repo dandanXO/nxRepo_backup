@@ -1,4 +1,5 @@
 {
     "Registrations": false,
-    "PCardCertification": false
+    "PCardCertification": false,
+    "timezone":"Asia/Karachi"
 }
