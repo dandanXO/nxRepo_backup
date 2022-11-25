@@ -14,7 +14,7 @@ const OrderTable = () => {
 
     const { channelListEnum, providerListEnum  } = useValuesEnums();
     const initSearchList = {
-        appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: "",
+        appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '', 
         loanTimeEnd: '', loanTimeStart: '', orderNo: '', productName: '', rcProvider: '', status: '', userPhone: '', userTrueName: '', pageNum: 1, pageSize: 10
     }
     // redux
@@ -57,7 +57,7 @@ const OrderTable = () => {
     const statusEnum = {
         '': { text: '不限' },
         '6': { text: '审核中', color: 'blue' },
-        '7': { text: '审核拒绝', color: 'red' },
+        '7': { text: '订单拒绝', color: 'red' },
         '8': { text: '放款中', color: 'purple' },
         '9': { text: '还款中', color: 'blue' },
         '10': { text: '已完成', color: 'green' },
@@ -129,7 +129,7 @@ const OrderTable = () => {
                 false: { text: '否' },
             },
         },
-        { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.riskModelName || "", valueEnum: providerListEnum },
+        { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.rcProvider || "", valueEnum: providerListEnum,},
     ]
     return (
         <ProTable<OrderListResponse>
@@ -153,13 +153,13 @@ const OrderTable = () => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { appName, applyTimeRange, channelId, expireDateRange, isLeng, isOldUser, loanTimeRange, orderNo, productName, rcProvider, status, userPhone, userTrueName } = form.getFieldValue();
-        
+                                const { appName, applyTimeRange, channelId, expireDateRange, isLeng, isOldUser, loanTimeRange, orderNo, productName, riskModelName, status, phoneNo, userName } = form.getFieldValue();
+
                                 setSearchList({
-                                    ...searchList,
+                                    ...initSearchList,
                                     appName,
                                     applyTimeEnd: applyTimeRange[1] ? applyTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    applyTimeStart:applyTimeRange[0] ? applyTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    applyTimeStart: applyTimeRange[0] ? applyTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     channelId: channelId === '0' ? '' : channelId,
                                     expireTimeEnd: expireDateRange[1] ? expireDateRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     expireTimeStart: expireDateRange[0] ? expireDateRange[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -169,10 +169,10 @@ const OrderTable = () => {
                                     loanTimeStart: loanTimeRange[0] ? loanTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     orderNo,
                                     productName,
-                                    rcProvider,
+                                    rcProvider: riskModelName,
                                     status,
-                                    userPhone,
-                                    userTrueName,
+                                    userPhone: phoneNo,
+                                    userTrueName: userName,
                                 })
                                 form.submit();
                             }}
@@ -194,8 +194,6 @@ const OrderTable = () => {
                 onChange: pageOnChange,
                 total: orderList?.totalRecords,
                 current: orderList?.records?.length === 0 ? 0 : orderList.currentPage,
-                // ...pageable,
-                // onChange: pageOnChange,
             }}
         />
 
