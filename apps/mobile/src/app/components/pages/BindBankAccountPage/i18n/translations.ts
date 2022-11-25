@@ -67,14 +67,14 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Please select the of your mobile wallet": "আপনার মোবাইল ওয়ালেট নির্বাচন করুন",
       "Your mobile wallet account": "আপনার মোবাইল ওয়ালেট অ্যাকাউন্ট",
 
-      "Wallet Account Number": "Wallet Account Number",
+      "Wallet Account Number": "ওয়ালেট অ্যাকাউন্ট নম্বর",
       "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
 
       // NOTICE: Bangladesh
       // NOTE: Bank Account
       "Your mobile wallet number": "১। তোমার মোবাইল ওয়ালেট নম্বর",
       "Confirm your number": "২। তোমার নম্বরটি কনফার্ম করো ",
-      "Account number should be 10 digits.": "Account number should be 10 digits",
+      "Account number should be 10 digits.": "অ্যাকাউন্ট নম্বর 10 সংখ্যার হওয়া উচিত",
     }
   }
 }
