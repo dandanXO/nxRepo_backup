@@ -204,7 +204,7 @@ const OrderReviewTable = () => {
                                 // @ts-ignore
                                 const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider } = form.getFieldValue();
                                 setSearchList({
-                                    ...searchList,
+                                    ...initSearchList,
                                     addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addStartTime: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     appName,
@@ -215,7 +215,7 @@ const OrderReviewTable = () => {
                                     productName,
                                     provider,
                                     riskRank,
-                                    userName
+                                    userName,
                                 });
                                 onSelectChange([]);
                                 form.submit();
