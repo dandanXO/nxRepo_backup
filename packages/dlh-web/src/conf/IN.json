@@ -1,4 +1,5 @@
 {
     "Registrations": true,
-    "PCardCertification": true
+    "PCardCertification": true,
+    "timezone":"Asia/Kolkata"
 }

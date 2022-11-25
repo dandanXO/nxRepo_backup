@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import MainLayout from './layouts/MainLayout';
-import { LocaleProvider } from 'antd';
-import zh_CN from 'antd/lib/locale-provider/zh_CN';
-
 import { history } from './utils';
 import { rootSaga, configStore } from './store';
 import { Login } from './pages/login/Login';
 import { GoogleAuth } from './pages/googleauth/GoogleAuth';
 import { AuthRoute } from 'components'
 import {IntlProviderWrapper} from './locales/api/IntlContext';
-// import {moment} from 'moment-timezone';
+import moment from 'moment-timezone';
+import conf from 'conf';
 
 const store = configStore();
 store.runSaga(rootSaga);
-// const moment2 = moment().tz().setDefault("America/New_York");
-var moment = require('moment-timezone');
-moment.tz.setDefault("Asia/Kolkata");
+
+// NOTICE: Moment - Timezone
+// NOTE: Timezone https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+// console.log(conf);
+moment.tz.setDefault(conf.timezone);
+// console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
+
 export default class App extends Component {
 
     render() {
