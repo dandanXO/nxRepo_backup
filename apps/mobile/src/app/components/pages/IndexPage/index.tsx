@@ -37,6 +37,10 @@ export default () => {
             <button onClick={() => {
               window.open("http://localhost:4003/?showtranslations", "_blank");
             }}>showtranslations</button>
+
+            <li>
+              <Link to={"/index"}>IndexPageAdvertisement</Link>
+            </li>
             <li>
                 <Link
                     to={"/bank-bind?token=" + getToken() + "&" + getCardholderName()}
