@@ -7,7 +7,7 @@ const OperatorListApi = API.injectEndpoints({
         // NOTE: GET ​/hs​/admin​/whitelist​/operatorOptionList 取得操作人選項列表
         getOperatorList: builder.query<GetOperatorListResponse, null>({
             query: () => ({
-                url: `/whitelist/operatorOptionList`,
+                url: `/black-list/operator-option-list`,
                 params: {},
                 method: "get",
             }),
