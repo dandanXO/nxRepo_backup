@@ -135,12 +135,14 @@ interface IAdTemplate1 {
 export const AdTemplate1 = (props: IAdTemplate1) => {
   const onClickToDoLoan = () => {
     console.log("window.SyncTask.doQuickLoanApply()");
+    // window.SyncTask.doQuickLoanApply();
     window["SyncTask"] &&
     window["SyncTask"]["doQuickLoanApply"] &&
     window["SyncTask"]["doQuickLoanApply"]();
   }
   const onClickToPopup = () => {
     console.log("window.SyncTask.ThematicActivitiesPopup(url: String)");
+    // window.SyncTask.ThematicActivitiesPopup("https://www.google.com/");
     window["SyncTask"] &&
     window["SyncTask"]["ThematicActivitiesPopup"] &&
     window["SyncTask"]["ThematicActivitiesPopup"]("https://www.google.com/");
