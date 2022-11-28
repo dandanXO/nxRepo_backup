@@ -85,7 +85,7 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/order" component={OrderPage} />
                     {/*// @ts-ignore*/}
-                    <Route path="/order-detail/:userId/:orderNo" component={OrderDetailPage} />
+                    <Route path="/order-detail/:userId/:orderId/:orderNo" component={OrderDetailPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/order-review" component={OrderReviewPage} />
                     {/*// @ts-ignore*/}

@@ -41,9 +41,9 @@ const OrderTable = () => {
         }
     }, [currentData])
 
-    const handleToUserDetail = (userId, orderNo) => {
-        history.push(`order-detail/${userId}/${orderNo}`);
-        handleToDetailPage('/order-detail', '/order')
+    const handleToUserDetail = (userId, orderId, orderNo) => {
+        history.push(`order-detail/${userId}/${orderId}/${orderNo}`);
+        handleToDetailPage('/order-detail', '/order');
     }
 
     const pageOnChange = (current, pageSize) => {
@@ -73,11 +73,11 @@ const OrderTable = () => {
             align: 'left',
             width: 50,
             render: (text, record, _, action) => {
-                return <a key="editable" onClick={() => handleToUserDetail(record.userId, record.orderNo)} >查看</a>
+                return <a key="editable" onClick={() => handleToUserDetail(record.userId, record.id, record.orderNo)} >查看</a>
             }
         },
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "", render: (text) => <CopyText text={text} /> },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" , render: (text) => <CopyText text={text} />},
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.userPhone || "" , render: (text) => <CopyText text={text} />},
         { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" , render: (text) => <CopyText text={text} />},
         {
             title: '老客下单', dataIndex: 'isOldUser', valueType: 'select', key: 'isOldUser', initialValue: searchParams.isOldUser || "",
@@ -87,7 +87,8 @@ const OrderTable = () => {
                 false: { text: '否' },
             },
         },
-        { title: '申请渠道', dataIndex: 'channelName', valueType: 'select', key: 'channelName', valueEnum: channelListEnum, initialValue: searchParams.channelName || '' },
+        { title: '申请渠道', dataIndex: 'channelId', valueType: 'select', key: 'channelId', valueEnum: channelListEnum, initialValue: searchParams.channelId || '', hideInTable: true },
+        { title: '申请渠道', dataIndex: 'channelName', valueType: 'select', key: 'channelName', hideInSearch: true },
         { title: 'APP名称', dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || "", },
         { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "" , render: (text) => <CopyText text={text} />},
         {
@@ -158,15 +159,15 @@ const OrderTable = () => {
                                 setSearchList({
                                     ...initSearchList,
                                     appName,
-                                    applyTimeEnd: applyTimeRange[1] ? applyTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    applyTimeStart: applyTimeRange[0] ? applyTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    applyTimeEnd: applyTimeRange ? applyTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
+                                    applyTimeStart: applyTimeRange ? applyTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     channelId: channelId === '0' ? '' : channelId,
-                                    expireTimeEnd: expireDateRange[1] ? expireDateRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    expireTimeStart: expireDateRange[0] ? expireDateRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    expireTimeEnd: expireDateRange ? expireDateRange[1].format('YYYY-MM-DD 23:59:59') : '',
+                                    expireTimeStart: expireDateRange ? expireDateRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     isLeng,
                                     isOldUser,
-                                    loanTimeEnd: loanTimeRange[1] ? loanTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    loanTimeStart: loanTimeRange[0] ? loanTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    loanTimeEnd: loanTimeRange ? loanTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
+                                    loanTimeStart: loanTimeRange ? loanTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     orderNo,
                                     productName,
                                     rcProvider: riskModelName,

@@ -52,8 +52,8 @@ const OrderReviewTable = () => {
     }, [currentData])
 
 
-    const handleToUserDetail = (userId,orderNo) => {
-        history.push(`order-review-detail/${userId}/${orderNo}`);
+    const handleToUserDetail = (userId, orderId, orderNo) => {
+        history.push(`order-review-detail/${userId}/${orderId}/${orderNo}`);
         handleToDetailPage('/order-review-detail', '/order-review', selectedList)
     }
 
@@ -113,7 +113,7 @@ const OrderReviewTable = () => {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId,record.orderNo)} >审核</a>],
+            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId,record.id,record.orderNo)} >审核</a>],
             width: 80,
         },
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" },
@@ -205,8 +205,8 @@ const OrderReviewTable = () => {
                                 const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider } = form.getFieldValue();
                                 setSearchList({
                                     ...initSearchList,
-                                    addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    addStartTime: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    addEndTime: addTimeRange ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
+                                    addStartTime: addTimeRange ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     appName,
                                     applyChannel: applyChannel === "" ? "" : channelListEnum[applyChannel].text,
                                     phoneNo,

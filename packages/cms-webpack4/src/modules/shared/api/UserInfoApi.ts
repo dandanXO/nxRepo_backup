@@ -4,7 +4,7 @@ import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./types/
 import { GetUserSmsProps } from "./types/userInfoTypes/getUserSms";
 import { GetUserContactsProps } from "./types/userInfoTypes/getUserContacts";
 import { GetUserOrdersProps } from "./types/userInfoTypes/getUserOrders";
-
+import { GetOrderDetailResponse ,GetOrderDetailRequestQuerystring} from "./types/userInfoTypes/getOrderDetail";
 
 const UserInfoApi = API.injectEndpoints({
     overrideExisting: false,
@@ -41,6 +41,14 @@ const UserInfoApi = API.injectEndpoints({
                 method: "get",
             }),
         }),
+        // NOTE: GET /hs/admin/order/detail/{orderId} 訂單詳情
+        getOrderDetail: builder.query<GetOrderDetailResponse, GetOrderDetailRequestQuerystring>({
+            query: ({orderId}: GetOrderDetailRequestQuerystring) => ({
+                url: `/order/detail/${orderId}`,
+                params: {},
+                method: "get",
+            }),
+        }),
     })
 })
 export const {
@@ -48,8 +56,10 @@ export const {
     useGetUserSMSListQuery,
     useGetUserContactsListQuery,
     useGetUserOrdersListQuery,
+    useGetOrderDetailQuery,
 
     useLazyGetUserContactsListQuery,
     useLazyGetUserSMSListQuery,
-    useLazyGetUserOrdersListQuery
+    useLazyGetUserOrdersListQuery,
+    useLazyGetOrderDetailQuery
 } = UserInfoApi;
