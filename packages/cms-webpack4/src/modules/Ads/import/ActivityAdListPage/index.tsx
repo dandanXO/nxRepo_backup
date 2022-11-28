@@ -8,10 +8,14 @@ import {MockAdTemplate1Data} from "./MockAdTemplate1Data";
 
 const Page = styled.div`
   //background: #f5faf4;
+  //border-radius: 4px;
+  //border: 1px solid #000;
   background: url(${Android260x720}) 360px 720px;
   height: 100vh;
   //padding: 20px 18px 0 18px;
   padding: 30px 18px 0 18px;
+  width: 360px;
+
 `;
 export interface AdTemplate {
   type: AdTemplate1 | AdTemplate2 | AdTemplate3,
@@ -29,8 +33,13 @@ const CategoryText = styled.div`
   margin-bottom: 11px;
 `
 const parsedQueryString = queryString.parse(window.location.search);
-export const ActivityAdListPage = () => {
-  const type = parsedQueryString.type;
+
+interface IActivityAdListPage {
+    type?: string;
+}
+
+export const ActivityAdListPage = (props: IActivityAdListPage) => {
+  const type = parsedQueryString.type || props.type;
   switch (type) {
     case "1": {
       return <AdTemplate1 data={MockAdTemplate1Data}/>;
@@ -46,8 +55,8 @@ export const ActivityAdListPage = () => {
   }
 }
 
-export const DemoActivityAdListPage = () => {
-  const type = parsedQueryString.type;
+export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
+  const type = parsedQueryString.type || props.type;
   let adTemplate;
   switch (type) {
     case "1": {
