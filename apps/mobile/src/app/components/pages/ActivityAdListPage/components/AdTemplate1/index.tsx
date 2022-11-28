@@ -96,37 +96,47 @@ const StyledActionName = styled.div`
   font-weight: 500;
   color: #101010;
 `;
-const AdTemplate1BrandCardUI = () => {
+
+interface IAdTemplate1BrandCardUI {
+  data: AdTemplate1BrandCard;
+}
+const AdTemplate1BrandCardUI = (props: IAdTemplate1BrandCardUI) => {
   return (
     <StyledAdTemplate1BrandCardUI>
-      <StyledBrandTitle>新人福利</StyledBrandTitle>
+      <StyledBrandTitle>{props.data.title}</StyledBrandTitle>
       <StyledPrice>
-        <StyledBrandPriceUnit>PKR</StyledBrandPriceUnit>
-        <StyledBrandPriceValue>5,000</StyledBrandPriceValue>
+        <StyledBrandPriceUnit>{props.data.priceUnit}</StyledBrandPriceUnit>
+        <StyledBrandPriceValue>{props.data.price}</StyledBrandPriceValue>
       </StyledPrice>
-      <StyledBrandDescription>新人大禮包</StyledBrandDescription>
+      <StyledBrandDescription>{props.data.description}</StyledBrandDescription>
     </StyledAdTemplate1BrandCardUI>
   )
 }
 
-const AdTemplate1CardUI = () => {
+interface IAdTemplate1CardUI {
+  data: AdTemplate1Card;
+}
+const AdTemplate1CardUI = (props: IAdTemplate1CardUI) => {
   return (
     <StyledAdTemplate1CardUI>
-      <StyledTitle>利息優惠</StyledTitle>
-      <StyledDescription1>- 3.5%</StyledDescription1>
-      <StyledDescription2>原利息35%</StyledDescription2>
-      <StyledActionName>點我借款 ></StyledActionName>
+      <StyledTitle>{props.data.title}</StyledTitle>
+      <StyledDescription1>{props.data.description1}</StyledDescription1>
+      <StyledDescription2>{props.data.description2}</StyledDescription2>
+      <StyledActionName>{props.data.actionName}</StyledActionName>
     </StyledAdTemplate1CardUI>
   )
 }
 
-export const AdTemplate1 = () => {
+interface IAdTemplate1 {
+  data: AdTemplate1;
+}
+export const AdTemplate1 = (props: IAdTemplate1) => {
   return (
     <AdTemplateContainer>
       <ContainerContent>
-        <AdTemplate1BrandCardUI/>
-        <AdTemplate1CardUI/>
-        <AdTemplate1CardUI/>
+        <AdTemplate1BrandCardUI data={props.data.brandCard}/>
+        <AdTemplate1CardUI data={props.data.cards[0]}/>
+        <AdTemplate1CardUI data={props.data.cards[1]}/>
       </ContainerContent>
     </AdTemplateContainer>
   )
