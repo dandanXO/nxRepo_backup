@@ -110,22 +110,12 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                                                 <Form.Item
                                                     {...restField}
                                                     name={[name, 'preInterest']}
-                                                    validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.validateStatus || ""}
-                                                    help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.help || ""}
-                                                    normalize={(value, prevValue, prevValues) => {
-                                                        return maxOneUnitFloatReplacer(value);
-                                                    }}
                                                 >
                                                     <Input placeholder="前置利息" suffix={"%"}/>
                                                 </Form.Item>
                                                 <Form.Item
                                                     {...restField}
                                                     name={[name, 'postInterest']}
-                                                    validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.validateStatus || ""}
-                                                    help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.help || ""}
-                                                    normalize={(value, prevValue, prevValues) => {
-                                                        return maxOneUnitFloatReplacer(value);
-                                                    }}
                                                 >
                                                     <Input placeholder="后置利息" suffix={"%"}/>
                                                 </Form.Item>
