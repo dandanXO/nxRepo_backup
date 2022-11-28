@@ -15,6 +15,7 @@ const Page = styled.div`
   //padding: 20px 18px 0 18px;
   padding: 30px 18px 0 18px;
   width: 360px;
+
 `;
 export interface AdTemplate {
   type: AdTemplate1 | AdTemplate2 | AdTemplate3,
@@ -33,9 +34,8 @@ const CategoryText = styled.div`
 `
 const parsedQueryString = queryString.parse(window.location.search);
 
-
 interface IActivityAdListPage {
-  type?: string;
+    type?: string;
 }
 
 export const ActivityAdListPage = (props: IActivityAdListPage) => {

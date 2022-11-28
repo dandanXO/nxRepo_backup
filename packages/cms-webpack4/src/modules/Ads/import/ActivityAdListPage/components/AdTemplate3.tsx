@@ -78,8 +78,8 @@ export const AdTemplate3 = () => {
           <Description2 color={"#fff"}>成功放款率</Description2>
         </Description>
         <Button bgColor={"#fff"} color={"#ec606a"}>
-          <div>立即申請</div>
-          <div>{'>'}</div>
+            <div>立即申請</div>
+            <div>{'>'}</div>
         </Button>
       </Card>
       <Card bgColor={"#fff"}>

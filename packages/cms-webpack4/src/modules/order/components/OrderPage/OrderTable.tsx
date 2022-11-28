@@ -8,7 +8,7 @@ import useValuesEnums from '../../../shared/hooks/useValuesEnums';
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
 import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/OrderTypes/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
-
+import CopyText from '../../../shared/components/CopyText';
 
 const OrderTable = () => {
 
@@ -76,9 +76,9 @@ const OrderTable = () => {
                 return <a key="editable" onClick={() => handleToUserDetail(record.userId, record.orderNo)} >查看</a>
             }
         },
-        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" },
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" },
+        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "", render: (text) => <CopyText text={text} /> },
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" , render: (text) => <CopyText text={text} />},
+        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" , render: (text) => <CopyText text={text} />},
         {
             title: '老客下单', dataIndex: 'isOldUser', valueType: 'select', key: 'isOldUser', initialValue: searchParams.isOldUser || "",
             width: '50px', align: 'center', valueEnum: {
@@ -89,7 +89,7 @@ const OrderTable = () => {
         },
         { title: '申请渠道', dataIndex: 'channelName', valueType: 'select', key: 'channelName', valueEnum: channelListEnum, initialValue: searchParams.channelName || '' },
         { title: 'APP名称', dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || "", },
-        { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "" },
+        { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "" , render: (text) => <CopyText text={text} />},
         {
             title: '订单状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
             valueEnum: statusEnum,
