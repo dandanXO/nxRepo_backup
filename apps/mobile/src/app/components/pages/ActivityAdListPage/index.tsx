@@ -2,6 +2,7 @@ import {AdTemplate1} from "./components/AdTemplate1";
 import {AdTemplate2} from "./components/AdTemplate2";
 import {AdTemplate3} from "./components/AdTemplate3";
 import styled from "styled-components";
+import queryString from "query-string";
 
 const Page = styled.div`
   background: #f5faf4;
@@ -23,16 +24,26 @@ const CategoryText = styled.div`
   font-weight: 500;
   margin-bottom: 11px;
 `
-
+const parsedQueryString = queryString.parse(window.location.search);
 export const ActivityAdListPage = () => {
-  return (
-    <div>
-      <AdTemplate1/>
-    </div>
-  )
+  const type = parsedQueryString.type;
+  switch (type) {
+    case "1": {
+      return <AdTemplate1/>;
+    }
+    case "2": {
+      return <AdTemplate2/>
+    }
+    case "3": {
+      return <AdTemplate3/>
+    }
+    default:
+      return <AdTemplate1/>
+  }
 }
 
 export const DemoActivityAdListPage = () => {
+
   return (
     <Page>
       <div>
