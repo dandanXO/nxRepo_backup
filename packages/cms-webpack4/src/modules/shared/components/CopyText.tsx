@@ -7,7 +7,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 function CopyText({ text, acturalCopy = text}) {
 
     const handleCopy = () => {
-        message.success('复制成功');
+        // message.success('复制成功',2);
+        
     }
     return (
         <div style={{cursor:'pointer'}}> 

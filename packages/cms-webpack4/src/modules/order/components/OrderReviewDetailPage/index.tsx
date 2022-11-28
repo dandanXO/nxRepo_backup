@@ -12,8 +12,9 @@ import {itemRender} from "../../../shared/itemRender";
 
 const OrderReviewDetailPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
-    const urlParams = useParams<{ userId: string, orderNo: string }>();
+    const urlParams = useParams<{ userId: string, orderId: string,orderNo: string }>();
     const userId = Number(urlParams.userId);
+    const orderId = Number(urlParams.orderId);
     const orderNo = urlParams.orderNo;
     const [form] = Form.useForm();
     const [showModal,setShowModal]=useState(false);
@@ -26,7 +27,7 @@ const OrderReviewDetailPage = () => {
     }, []);
 
     const tabs = [
-        { label: '订单信息', key: 'orderInfo', children: <OrderInfo userId={userId}/> }, // 务必填写 key
+        { label: '订单信息', key: 'orderInfo', children: <OrderInfo orderId={orderId}/> }, // 务必填写 key
         { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId} type="order"/> },
         { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId} /> },
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId} /> },
