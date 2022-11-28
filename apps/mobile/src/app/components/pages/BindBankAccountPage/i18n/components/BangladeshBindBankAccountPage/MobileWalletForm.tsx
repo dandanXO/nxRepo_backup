@@ -31,8 +31,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         className="mb"
         labelType={"left"}
         label={"+880"}
-        // placeholder={t("Wallet Account Number") as string}
-        placeholder={"1234567890"}
+        placeholder={t("Wallet Account Number") as string}
         value={props.mobileData.data}
         onChange={props.onMobileDataChange}
         onBlur={props.validateMobileWalletAccount}
@@ -44,7 +43,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         className="mb"
         labelType={"left"}
         label={"+880"}
-        placeholder={"1234567890"}
+        placeholder={t("Wallet Account Number") as string}
         value={props.confirmedMobileData.data}
         onChange={props.onConfirmedMobileDataChange}
         onBlur={props.onConfirmedMobileDataBlur}

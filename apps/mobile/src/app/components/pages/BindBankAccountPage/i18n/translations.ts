@@ -36,8 +36,12 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Please select your bank name": "Please select your bank name",
 
       // NOTICE: Bangladesh
+      // NOTE: Mobile Wallet
       "Your mobile wallet number": "Your mobile wallet number",
       "Confirm your number": "Confirm your number",
+      "Phone number should be 10 digits.": "Phone number should be 10 digits.",
+      "Please make sure your mobile number match.": "Please make sure your mobile number match.",
+
     },
     bn_BD: {
       // NOTICE: common
@@ -54,27 +58,31 @@ export const i18nBankBindAccountPage: i18nComponent = {
 
       // NOTICE: India
       // NOTE: Bank Account
-      "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
-      "UPI ID": "UPI ID",
-      "IFSC Code": "IFSC Code",
-      "IFSC must be 11 digits only.": "IFSC must be 11 digits only.",
+      // "For KYC, your Cardholder name and Aadhaar name should be match.": "For KYC, your Cardholder name and Aadhaar name should be match.",
+      // "UPI ID": "UPI ID",
+      // "IFSC Code": "IFSC Code",
+      // "IFSC must be 11 digits only.": "IFSC must be 11 digits only.",
 
       // NOTICE: Pakistan
       // NOTE: Mobile Wallet
-      "Choose the method to receive the money": "টাকা পাওয়ার পদ্ধতি বেছে নিন",
-      "Mobile wallet": "মোবাইল ওয়ালেট",
-      "Bank account": "ব্যাংক হিসাব",
-      "Please select the of your mobile wallet": "আপনার মোবাইল ওয়ালেট নির্বাচন করুন",
-      "Your mobile wallet account": "আপনার মোবাইল ওয়ালেট অ্যাকাউন্ট",
-
-      "Wallet Account Number": "Wallet Account Number",
-      "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
+      // "Choose the method to receive the money": "টাকা পাওয়ার পদ্ধতি বেছে নিন",
+      // "Mobile wallet": "মোবাইল ওয়ালেট",
+      // "Bank account": "ব্যাংক হিসাব",
+      // "Please select the of your mobile wallet": "আপনার মোবাইল ওয়ালেট নির্বাচন করুন",
+      // "Your mobile wallet account": "আপনার মোবাইল ওয়ালেট অ্যাকাউন্ট",
+      // "Wallet Account Number": "ওয়ালেট অ্যাকাউন্ট নম্বর",
+      // "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
+      // NOTE: Bank Account
+      // "Please select your bank name": "Please select your bank name",
 
       // NOTICE: Bangladesh
-      // NOTE: Bank Account
+      // NOTE: Mobile Wallet
       "Your mobile wallet number": "১। তোমার মোবাইল ওয়ালেট নম্বর",
       "Confirm your number": "২। তোমার নম্বরটি কনফার্ম করো ",
-      "Account number should be 10 digits.": "Account number should be 10 digits",
+      "Phone number should be 10 digits.": "ফোন নম্বরটি 10 ​​সংখ্যার হওয়া উচিত।",
+      "Please make sure your mobile number match.": "আপনার মোবাইল নম্বর মেলে তা নিশ্চিত করুন.",
+
+
     }
   }
 }

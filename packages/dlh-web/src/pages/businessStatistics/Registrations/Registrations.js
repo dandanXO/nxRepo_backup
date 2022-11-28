@@ -89,22 +89,6 @@ class Registrations extends Component {
                 }
             },
         ]
-
-        if(conf.PCardCertification) {
-          this.operationColumns.unshift(
-            // Pan卡认证量(百分比)
-            {
-              title: <TableTitle text={"page.table.new.customer.pancard.verify.qty"} />,className: 'operation',
-              dataIndex: 'panCount',
-              key: 'panCount',
-              render (text, record) {
-                const { panCountRate } = record;
-                if (!text) { return ''; }
-                return <div><div>{text}</div><div>({panCountRate})</div></div>;
-              }
-            },
-          )
-        }
         this.columns = [
             {
                 title: "",className: '',

@@ -30,9 +30,9 @@ export const useBangladeshMobileWalletForm = (props: IUseBangladeshMobileWalletF
     });
   }
 
-  // Wallet Account  - 驗證
+  // Mobile  - 驗證
   const validateMobileWalletAccount = useCallback(() => {
-    const message = t("Account number should be 10 digits.");
+    const message = t("Phone number should be 10 digits.");
     const scheme = z
       .string()
       .length(10, message);
@@ -72,7 +72,7 @@ export const useBangladeshMobileWalletForm = (props: IUseBangladeshMobileWalletF
       .refine(
         (confirmedBankcardNo) => confirmedMobile === mobile,
         {
-          message: t("Please make sure your account number match.") as string
+          message: t("Please make sure your mobile number match.") as string
           ,
         }
       );

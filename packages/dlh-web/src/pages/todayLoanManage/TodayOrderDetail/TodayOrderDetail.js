@@ -287,7 +287,7 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.appName" />：</span><span>{orderInfo['appName']}</span></Col>
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankName" />：</span><span>{bankInfo['bankName']}</span></Col>}
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankCardNo" />：</span><span>{bankInfo['bankCardNo']}</span></Col>}
-                        
+
                     </Row>
                 </Card>
                 {/*<Card type={'inner'} title={'iCloud账号信息'} className={styles.card}>*/}
@@ -333,11 +333,11 @@ class OrderDetail extends Component{
                     </Row>
                 </Card>
 
-                 
+
                 <div className={styles.cardWrapper}>
                     <Card type={'inner'} title={intl.formatMessage({id : "windowPage.emergency.contact"})}>
 
-                    {userInfo.emergencyContactInfos && userInfo.emergencyContactInfos.map((emer, i) => {  
+                    {userInfo.emergencyContactInfos && userInfo.emergencyContactInfos.map((emer, i) => {
                         return (
                         <Row gutter={24}>
                             <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.name" />：</span><span>{emer.name || ''}</span></Col>
@@ -345,7 +345,7 @@ class OrderDetail extends Component{
                             <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.mobile" />：</span><span>{emer.phoneNr || ''}</span></Col>
 
                         </Row>
-                        )   
+                        )
                     })}
                     </Card>
                 </div>
@@ -534,7 +534,7 @@ class OrderDetail extends Component{
             const today = moment().startOf('day');
             return today.isBefore(expireDate);
         }
-        
+
         return false;
     }
 
