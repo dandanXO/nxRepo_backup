@@ -26,11 +26,9 @@ const CategoryText = styled.div`
 
 export const ActivityAdListPage = () => {
   return (
-    <Page>
-      <div>
-        <AdTemplate1/>
-      </div>
-    </Page>
+    <div>
+      <AdTemplate1/>
+    </div>
   )
 }
 
