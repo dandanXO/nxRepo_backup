@@ -135,8 +135,9 @@ export const AdTemplate1 = (props: IAdTemplate1) => {
     <AdTemplateContainer>
       <ContainerContent>
         <AdTemplate1BrandCardUI data={props.data.brandCard}/>
-        <AdTemplate1CardUI data={props.data.cards[0]}/>
-        <AdTemplate1CardUI data={props.data.cards[1]}/>
+          {props.data.cards.map((data) => {
+              return <AdTemplate1CardUI data={data}/>
+          })}
       </ContainerContent>
     </AdTemplateContainer>
   )
