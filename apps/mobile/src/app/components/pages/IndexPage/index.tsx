@@ -41,6 +41,11 @@ export default () => {
             <li>
               <Link to={"/activity-list"}>ActivityAdList</Link>
             </li>
+
+            <li>
+              <Link to={"/activity-list-dev"}>(DEV)ActivityAdList</Link>
+            </li>
+
             <li>
                 <Link
                     to={"/bank-bind?token=" + getToken() + "&" + getCardholderName()}
