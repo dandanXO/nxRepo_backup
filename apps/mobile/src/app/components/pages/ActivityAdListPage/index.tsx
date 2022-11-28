@@ -3,9 +3,10 @@ import {AdTemplate2} from "./components/AdTemplate2";
 import {AdTemplate3} from "./components/AdTemplate3";
 import styled from "styled-components";
 
-const Container = styled.div`
+const Page = styled.div`
   background: #f5faf4;
   height: 100vh;
+  padding: 0px 18px;
 `;
 export interface AdTemplate {
   type: AdTemplate1 | AdTemplate2 | AdTemplate3,
@@ -24,9 +25,22 @@ const CategoryText = styled.div`
 `
 export const ActivityAdListPage = () => {
   return (
-    <Container>
-      <CategoryText>Theme Activities</CategoryText>
-      <AdTemplate1/>
-    </Container>
+    <Page>
+      <div>
+        <CategoryText>Theme Activities</CategoryText>
+        <AdTemplate1/>
+      </div>
+
+      <div>
+        <CategoryText>Theme Activities</CategoryText>
+        <AdTemplate2/>
+      </div>
+
+      <div>
+        <CategoryText>Theme Activities</CategoryText>
+        <AdTemplate3/>
+      </div>
+
+    </Page>
   )
 }

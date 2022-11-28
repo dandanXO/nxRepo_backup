@@ -39,7 +39,7 @@ export default () => {
             }}>showtranslations</button>
 
             <li>
-              <Link to={"/activity-ad-list"}>ActivityAdList</Link>
+              <Link to={"/activity-list"}>ActivityAdList</Link>
             </li>
             <li>
                 <Link

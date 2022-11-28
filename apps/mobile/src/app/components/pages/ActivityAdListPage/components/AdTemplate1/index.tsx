@@ -1,8 +1,8 @@
-
 // NOTICE: 以下會儲存在資料庫，異動得請後端 執行 migrating，盡量固定
 import {AdTemplateCard} from "../../index";
 import styled from "styled-components";
 import MainCardImg from "./promotions_bg@2x.png";
+import {AdContainer} from "../AdContainer";
 
 export interface AdTemplate1 {
   brandCard: AdTemplate1BrandCard;
@@ -22,16 +22,9 @@ export interface AdTemplate1Card extends AdTemplateCard{
   description2: string;
 }
 
-// NOTICE: 130px
-const Container = styled.div`
-  // NOTICE: simulated
-  //background: lightgreen;
+const AdTemplateContainer = styled(AdContainer)`
   overflow: scroll;
-  height: 130px;
-  display: flex;
-  align-items: center;
-`;
-
+`
 const ContainerContent = styled.div`
   display: flex;
   flex-direction: row;
@@ -129,12 +122,12 @@ const AdTemplate1CardUI = () => {
 
 export const AdTemplate1 = () => {
   return (
-    <Container>
+    <AdTemplateContainer>
       <ContainerContent>
         <AdTemplate1BrandCardUI/>
         <AdTemplate1CardUI/>
         <AdTemplate1CardUI/>
       </ContainerContent>
-    </Container>
+    </AdTemplateContainer>
   )
 }
