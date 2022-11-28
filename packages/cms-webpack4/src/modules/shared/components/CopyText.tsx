@@ -13,7 +13,7 @@ function CopyText({ text, acturalCopy = text}) {
         <div style={{cursor:'pointer'}}> 
             {text &&
                 <CopyToClipboard text={acturalCopy} onCopy={handleCopy}> 
-                    <Tooltip title={text} >
+                    <Tooltip title={'点击复制'} >
                         <span>{text}</span>
                     </Tooltip>
                 </CopyToClipboard>
