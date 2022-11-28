@@ -99,10 +99,11 @@ const StyledActionName = styled.div`
 
 interface IAdTemplate1BrandCardUI {
   data: AdTemplate1BrandCard;
+  onClick: any;
 }
 const AdTemplate1BrandCardUI = (props: IAdTemplate1BrandCardUI) => {
   return (
-    <StyledAdTemplate1BrandCardUI>
+    <StyledAdTemplate1BrandCardUI onClick={props.onClick}>
       <StyledBrandTitle>{props.data.title}</StyledBrandTitle>
       <StyledPrice>
         <StyledBrandPriceUnit>{props.data.priceUnit}</StyledBrandPriceUnit>
@@ -115,10 +116,11 @@ const AdTemplate1BrandCardUI = (props: IAdTemplate1BrandCardUI) => {
 
 interface IAdTemplate1CardUI {
   data: AdTemplate1Card;
+  onClick: any;
 }
 const AdTemplate1CardUI = (props: IAdTemplate1CardUI) => {
   return (
-    <StyledAdTemplate1CardUI>
+    <StyledAdTemplate1CardUI onClick={props.onClick}>
       <StyledTitle>{props.data.title}</StyledTitle>
       <StyledDescription1>{props.data.description1}</StyledDescription1>
       <StyledDescription2>{props.data.description2}</StyledDescription2>
@@ -131,12 +133,21 @@ interface IAdTemplate1 {
   data: AdTemplate1;
 }
 export const AdTemplate1 = (props: IAdTemplate1) => {
+  const onClickToDoLoan = () => {
+    console.log("window.SyncTask.doQuickLoanApply()");
+    window.SyncTask.doQuickLoanApply();
+  }
+  const onClickToPopup = () => {
+    console.log("window.SyncTask.ThematicActivitiesPopup(url: String)");
+    window.SyncTask.ThematicActivitiesPopup("https://www.google.com/");
+  }
   return (
     <AdTemplateContainer>
       <ContainerContent>
-        <AdTemplate1BrandCardUI data={props.data.brandCard}/>
-        <AdTemplate1CardUI data={props.data.cards[0]}/>
-        <AdTemplate1CardUI data={props.data.cards[1]}/>
+        <AdTemplate1BrandCardUI data={props.data.brandCard} onClick={onClickToDoLoan}/>
+        {props.data.cards.map((data) => {
+          return <AdTemplate1CardUI data={data} onClick={onClickToPopup}/>
+        })}
       </ContainerContent>
     </AdTemplateContainer>
   )

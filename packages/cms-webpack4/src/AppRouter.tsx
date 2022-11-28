@@ -21,6 +21,7 @@ import OrderPage from "./modules/order/components/OrderPage";
 import OrderDetailPage from "./modules/order/components/OrderDetailPage";
 import OrderReviewPage from "./modules/order/components/OrderReviewPage";
 import OrderReviewDetailPage from "./modules/order/components/OrderReviewDetailPage";
+import {ActivityAdsPage} from "./modules/Ads/components/pages/ActivityAdsPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -88,7 +89,9 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/order-review" component={OrderReviewPage} />
                     {/*// @ts-ignore*/}
-                    <Route path="/order-review-detail/:userId/:orderId/:orderNo" component={OrderReviewDetailPage} />
+                    <Route path="/order-review-detail/:userId/:orderNo" component={OrderReviewDetailPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path={"/activity-ads"} component={ActivityAdsPage}/>
                 </Switch>
             </Router>
 
