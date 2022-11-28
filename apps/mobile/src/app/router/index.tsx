@@ -6,7 +6,7 @@ import UploadPaymentReceiptPage from "../components/pages/UploadPaymentReceiptPa
 import BindBankAccountPage from "../components/pages/BindBankAccountPage";
 import UploadedPaymentReceiptPage from "../components/pages/UploadedPaymentReceiptPage";
 import ProductAdModalListPage from "../components/pages/ProductAdModalListPage";
-import { ActivityAdListPage } from "../components/pages/ActivityAdListPage";
+import {ActivityAdListPage, DemoActivityAdListPage} from "../components/pages/ActivityAdListPage";
 
 // NOTE:
 // https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris
@@ -27,6 +27,8 @@ export const AppRouter = () => {
                 <Route path="/product-ad-modal-list" element={<ProductAdModalListPage />}/>
                 {/*NOTICE: ad 字眼容易被 Google 擋*/}
                 <Route path="/activity-list" element={<ActivityAdListPage />}/>
+              <Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>
+
                 <Route path="*" element={<div>Not Found</div>} />
             </Routes>
         </BrowserRouter>

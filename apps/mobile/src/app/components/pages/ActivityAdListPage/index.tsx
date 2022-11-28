@@ -23,7 +23,18 @@ const CategoryText = styled.div`
   font-weight: 500;
   margin-bottom: 11px;
 `
+
 export const ActivityAdListPage = () => {
+  return (
+    <Page>
+      <div>
+        <AdTemplate1/>
+      </div>
+    </Page>
+  )
+}
+
+export const DemoActivityAdListPage = () => {
   return (
     <Page>
       <div>
