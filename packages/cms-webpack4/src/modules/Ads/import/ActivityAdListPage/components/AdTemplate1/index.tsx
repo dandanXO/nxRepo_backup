@@ -51,6 +51,10 @@ const StyledBrandTitle = styled.div`
   font-size: 11px;
   margin-top: 9px;
   margin-bottom: 15px;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const StyledPrice = styled.div`
@@ -58,6 +62,10 @@ const StyledPrice = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: end;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 const StyledBrandPriceUnit = styled.div`
   color: #ffffff;
@@ -81,20 +89,36 @@ const StyledTitle = styled.div`
   font-size: 11px;
   margin-top: 9px;
   margin-bottom: 15px;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 const StyledDescription1 = styled.div`
   color: #ec606a;
   font-size: 21px;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 const StyledDescription2 = styled.div`
   color: #a2a2a2;
   font-size: 11px;
   margin-bottom: 11px;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 const StyledActionName = styled.div`
   font-size: 11px;
   font-weight: 500;
   color: #101010;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 interface IAdTemplate1BrandCardUI {

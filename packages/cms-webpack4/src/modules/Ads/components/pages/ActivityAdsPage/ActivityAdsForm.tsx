@@ -111,231 +111,246 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                     </Radio.Group>
                 </Form.Item>
 
-                <Form.Item label="廣告列表" required>
-                    <Form.List name="ads">
-                        {(fields, { add, remove }) => {
-                            return (
-                                <>
-                                    {/*<Form.Item>*/}
-                                    {/*    <Space>*/}
-                                    {/*        <CustomLabel>標題</CustomLabel>*/}
-                                    {/*        <CustomLabel>描述1</CustomLabel>*/}
-                                    {/*        <CustomLabel>描述2</CustomLabel>*/}
-                                    {/*        <CustomLabel>按鈕名稱</CustomLabel>*/}
-                                    {/*        <CustomLabel>按鈕動作</CustomLabel>*/}
-                                    {/*    </Space>*/}
-                                    {/*</Form.Item>*/}
-                                    {fields.map(({ key, name, ...restField }, index) => (
-                                        <>
-                                            {/*<Space key={key}*/}
-                                            {/*       style={{*/}
-                                            {/*           // borderBottom: "1px solid #aaa",*/}
-                                            {/*           // marginBottom: 16*/}
-                                            {/*       }}*/}
-                                            {/*>*/}
-                                                {index === 0 && (
-                                                    <Space>
-                                                        <CustomLabel style={{width: 94}}>標題</CustomLabel>
-                                                        <CustomLabel style={{width: 94}}>描述1</CustomLabel>
-                                                        <CustomLabel style={{width: 94}}>描述2</CustomLabel>
-                                                        <CustomLabel style={{width: 94}}>按鈕名稱</CustomLabel>
-                                                        <CustomLabel style={{width: 94}}>按鈕動作</CustomLabel>
-                                                    </Space>
-                                                )}
-                                            {/*</Space>*/}
-                                            <Space key={key}
-                                                   style={{
-                                                       // borderBottom: "1px solid #aaa",
-                                                       // marginBottom: 16
-                                                   }}
-                                            >
-                                                <Form.Item
-                                                    required
-                                                    // label={"標題"}
-                                                    {...restField}
-                                                    name={[name, 'title']}
-                                                    // rules={[
-                                                    //     {
-                                                    //         transform: (value) => Number(value),
-                                                    //         validator: async (_, value) =>NumberValidator(_, value)({
-                                                    //             min: 1,
-                                                    //             minMessage: "请输入起始期数",
-                                                    //         })
-                                                    //     },
-                                                    // ]}
-                                                >
-                                                    <Input placeholder="標題" />
-                                                </Form.Item>
-
-                                                <Form.Item
-                                                    required
-                                                    // label={"描述1"}
-                                                    {...restField}
-                                                    name={[name, 'description1']}
-                                                >
-                                                    <Input placeholder="描述1"/>
-                                                </Form.Item>
-
-                                                <Form.Item
-                                                    required
-                                                    // label={"描述2"}
-                                                    {...restField}
-                                                    name={[name, 'description2']}
-                                                >
-                                                    <Input placeholder="描述2"/>
-                                                </Form.Item>
-                                                <Form.Item
-                                                    required
-                                                    // label={"按鈕名稱"}
-                                                    {...restField}
-                                                    name={[name, 'actionName']}
-                                                >
-                                                    <Input placeholder="按鈕名稱"/>
-                                                </Form.Item>
-                                                <Form.Item
-                                                    required
-                                                    // label={"按鈕動作"}
-                                                    {...restField}
-                                                    name={[name, 'action']}
-                                                >
-                                                    <Input placeholder="按鈕動作"/>
-                                                </Form.Item>
-
-                                                <MinusCircleOutlined onClick={() => remove(name)} />
-
-                                            </Space>
-                                        </>
-                                    ))}
-
-                                    <Form.Item>
-                                        <Button type="dashed" onClick={() => add({
-                                            title: "優惠名稱" + ads.length + 1,
-                                            description1: "- 3.5%",
-                                            description2: "原利息35%",
-                                            action: "",
-                                            actionName: "點我借款 >"
-                                        }, ads.length)} block icon={<PlusOutlined />}>
-                                            添加
-                                        </Button>
-                                    </Form.Item>
-
-                                </>
-                            )
-                        }}
-                    </Form.List>
-                </Form.Item>
-
                 {/*<Form.Item label="廣告列表" required>*/}
                 {/*    <Form.List name="ads">*/}
                 {/*        {(fields, { add, remove }) => {*/}
                 {/*            return (*/}
                 {/*                <>*/}
+                {/*                    /!*<Form.Item>*!/*/}
+                {/*                    /!*    <Space>*!/*/}
+                {/*                    /!*        <CustomLabel>標題</CustomLabel>*!/*/}
+                {/*                    /!*        <CustomLabel>描述1</CustomLabel>*!/*/}
+                {/*                    /!*        <CustomLabel>描述2</CustomLabel>*!/*/}
+                {/*                    /!*        <CustomLabel>按鈕名稱</CustomLabel>*!/*/}
+                {/*                    /!*        <CustomLabel>按鈕動作</CustomLabel>*!/*/}
+                {/*                    /!*    </Space>*!/*/}
+                {/*                    /!*</Form.Item>*!/*/}
                 {/*                    {fields.map(({ key, name, ...restField }, index) => (*/}
                 {/*                        <>*/}
-                {/*                            <Row key={key} gutter={[8, 8]}*/}
-                {/*                                 style={{*/}
-                {/*                                     // borderBottom: "1px solid #aaa",*/}
-                {/*                                     // marginBottom: 16*/}
-                {/*                                }}*/}
+                {/*                            /!*<Space key={key}*!/*/}
+                {/*                            /!*       style={{*!/*/}
+                {/*                            /!*           // borderBottom: "1px solid #aaa",*!/*/}
+                {/*                            /!*           // marginBottom: 16*!/*/}
+                {/*                            /!*       }}*!/*/}
+                {/*                            /!*>*!/*/}
+                {/*                                {index === 0 && (*/}
+                {/*                                    <Space>*/}
+                {/*                                        <CustomLabel style={{width: 94}}>標題</CustomLabel>*/}
+                {/*                                        <CustomLabel style={{width: 94}}>描述1</CustomLabel>*/}
+                {/*                                        <CustomLabel style={{width: 94}}>描述2</CustomLabel>*/}
+                {/*                                        <CustomLabel style={{width: 94}}>按鈕名稱</CustomLabel>*/}
+                {/*                                        <CustomLabel style={{width: 94}}>按鈕動作</CustomLabel>*/}
+                {/*                                    </Space>*/}
+                {/*                                )}*/}
+                {/*                            /!*</Space>*!/*/}
+                {/*                            <Space key={key}*/}
+                {/*                                   style={{*/}
+                {/*                                       // borderBottom: "1px solid #aaa",*/}
+                {/*                                       // marginBottom: 16*/}
+                {/*                                   }}*/}
                 {/*                            >*/}
-                {/*                                /!*{index === 0 && (*!/*/}
-                {/*                                /!*    <Space>*!/*/}
-                {/*                                /!*        <CustomLabel>標題</CustomLabel>*!/*/}
-                {/*                                /!*        <CustomLabel>描述1</CustomLabel>*!/*/}
-                {/*                                /!*        <CustomLabel>描述2</CustomLabel>*!/*/}
-                {/*                                /!*        <CustomLabel>按鈕名稱</CustomLabel>*!/*/}
-                {/*                                /!*        <CustomLabel>按鈕動作</CustomLabel>*!/*/}
-                {/*                                /!*    </Space>*!/*/}
-                {/*                                /!*)}*!/*/}
-                {/*                                <Col span={24} >*/}
-                {/*                                    <Form.Item*/}
-                {/*                                        required*/}
-                {/*                                        label={"標題"}*/}
-                {/*                                        {...restField}*/}
-                {/*                                        name={[name, 'title']}*/}
-                {/*                                        // rules={[*/}
-                {/*                                        //     {*/}
-                {/*                                        //         transform: (value) => Number(value),*/}
-                {/*                                        //         validator: async (_, value) =>NumberValidator(_, value)({*/}
-                {/*                                        //             min: 1,*/}
-                {/*                                        //             minMessage: "请输入起始期数",*/}
-                {/*                                        //         })*/}
-                {/*                                        //     },*/}
-                {/*                                        // ]}*/}
-                {/*                                    >*/}
-                {/*                                        <Input placeholder="標題" />*/}
-                {/*                                    </Form.Item>*/}
-                {/*                                </Col>*/}
-                {/*                                <Col span={12}>*/}
-                {/*                                    <Form.Item*/}
-                {/*                                        required*/}
-                {/*                                        label={"描述1"}*/}
-                {/*                                        {...restField}*/}
-                {/*                                        name={[name, 'description1']}*/}
-                {/*                                    >*/}
-                {/*                                        <Input placeholder="描述1"/>*/}
-                {/*                                    </Form.Item>*/}
-                {/*                                </Col>*/}
-                {/*                                <Col span={12}>*/}
-                {/*                                    <Form.Item*/}
-                {/*                                        required*/}
-                {/*                                        label={"描述2"}*/}
-                {/*                                        {...restField}*/}
-                {/*                                        name={[name, 'description2']}*/}
-                {/*                                    >*/}
-                {/*                                        <Input placeholder="描述2"/>*/}
-                {/*                                    </Form.Item>*/}
-                {/*                                </Col>*/}
-                {/*                                <Col span={12}>*/}
-                {/*                                    <Form.Item*/}
-                {/*                                        required*/}
-                {/*                                        label={"按鈕名稱"}*/}
-                {/*                                        {...restField}*/}
-                {/*                                        name={[name, 'actionName']}*/}
-                {/*                                    >*/}
-                {/*                                        <Input placeholder="按鈕名稱"/>*/}
-                {/*                                    </Form.Item>*/}
-                {/*                                </Col>*/}
-                {/*                                <Col span={12}>*/}
-                {/*                                    <Form.Item*/}
-                {/*                                        required*/}
-                {/*                                        label={"按鈕動作"}*/}
-                {/*                                        {...restField}*/}
-                {/*                                        name={[name, 'action']}*/}
-                {/*                                    >*/}
-                {/*                                        <Input placeholder="按鈕動作"/>*/}
-                {/*                                    </Form.Item>*/}
-                {/*                                </Col>*/}
-                {/*                                <Col span={24}>*/}
-                {/*                                    <MinusCircleOutlined onClick={() => remove(name)} />*/}
-                {/*                                </Col>*/}
-                {/*                            </Row>*/}
-                {/*                            <Divider orientation="left"></Divider>*/}
+                {/*                                <Form.Item*/}
+                {/*                                    required*/}
+                {/*                                    // label={"標題"}*/}
+                {/*                                    {...restField}*/}
+                {/*                                    name={[name, 'title']}*/}
+                {/*                                    // rules={[*/}
+                {/*                                    //     {*/}
+                {/*                                    //         transform: (value) => Number(value),*/}
+                {/*                                    //         validator: async (_, value) =>NumberValidator(_, value)({*/}
+                {/*                                    //             min: 1,*/}
+                {/*                                    //             minMessage: "请输入起始期数",*/}
+                {/*                                    //         })*/}
+                {/*                                    //     },*/}
+                {/*                                    // ]}*/}
+                {/*                                >*/}
+                {/*                                    <Input placeholder="標題" />*/}
+                {/*                                </Form.Item>*/}
+
+                {/*                                <Form.Item*/}
+                {/*                                    required*/}
+                {/*                                    // label={"描述1"}*/}
+                {/*                                    {...restField}*/}
+                {/*                                    name={[name, 'description1']}*/}
+                {/*                                >*/}
+                {/*                                    <Input placeholder="描述1"/>*/}
+                {/*                                </Form.Item>*/}
+
+                {/*                                <Form.Item*/}
+                {/*                                    required*/}
+                {/*                                    // label={"描述2"}*/}
+                {/*                                    {...restField}*/}
+                {/*                                    name={[name, 'description2']}*/}
+                {/*                                >*/}
+                {/*                                    <Input placeholder="描述2"/>*/}
+                {/*                                </Form.Item>*/}
+                {/*                                <Form.Item*/}
+                {/*                                    required*/}
+                {/*                                    // label={"按鈕名稱"}*/}
+                {/*                                    {...restField}*/}
+                {/*                                    name={[name, 'actionName']}*/}
+                {/*                                >*/}
+                {/*                                    <Input placeholder="按鈕名稱"/>*/}
+                {/*                                </Form.Item>*/}
+                {/*                                <Form.Item*/}
+                {/*                                    required*/}
+                {/*                                    // label={"按鈕動作"}*/}
+                {/*                                    {...restField}*/}
+                {/*                                    name={[name, 'action']}*/}
+                {/*                                >*/}
+                {/*                                    <Input placeholder="按鈕動作"/>*/}
+                {/*                                </Form.Item>*/}
+
+                {/*                                <MinusCircleOutlined onClick={() => remove(name)} />*/}
+
+                {/*                            </Space>*/}
                 {/*                        </>*/}
                 {/*                    ))}*/}
-                {/*                    <Row/>*/}
 
-                {/*                    <Row>*/}
-                {/*                        <Col span={12}>*/}
-                {/*                            <Form.Item>*/}
-                {/*                                <Button type="dashed" onClick={() => add({*/}
-                {/*                                    title: "優惠名稱" + ads.length + 1,*/}
-                {/*                                    description1: "- 3.5%",*/}
-                {/*                                    description2: "原利息35%",*/}
-                {/*                                    action: "",*/}
-                {/*                                    actionName: "點我借款 >"*/}
-                {/*                                }, ads.length)} block icon={<PlusOutlined />}>*/}
-                {/*                                    添加*/}
-                {/*                                </Button>*/}
-                {/*                            </Form.Item>*/}
-                {/*                        </Col>*/}
-                {/*                    </Row>*/}
+                {/*                    <Form.Item>*/}
+                {/*                        <Button type="dashed" onClick={() => add({*/}
+                {/*                            title: "優惠名稱" + ads.length + 1,*/}
+                {/*                            description1: "- 3.5%",*/}
+                {/*                            description2: "原利息35%",*/}
+                {/*                            action: "",*/}
+                {/*                            actionName: "點我借款 >"*/}
+                {/*                        }, ads.length)} block icon={<PlusOutlined />}>*/}
+                {/*                            添加*/}
+                {/*                        </Button>*/}
+                {/*                    </Form.Item>*/}
 
                 {/*                </>*/}
                 {/*            )*/}
                 {/*        }}*/}
                 {/*    </Form.List>*/}
                 {/*</Form.Item>*/}
+
+                <Form.Item label="廣告列表" required>
+                    <Form.List name="ads">
+                        {(fields, { add, remove }) => {
+                            return (
+                                <>
+                                    {fields.map(({ key, name, ...restField }, index) => (
+                                        <>
+                                            <Row key={key}
+                                                 gutter={[8, 8]}
+                                                 style={{
+                                                     // borderBottom: "1px solid #aaa",
+                                                     // marginBottom: 16
+                                                }}
+                                            >
+                                                {/*{index === 0 && (*/}
+                                                {/*    <Space>*/}
+                                                {/*        <CustomLabel>標題</CustomLabel>*/}
+                                                {/*        <CustomLabel>描述1</CustomLabel>*/}
+                                                {/*        <CustomLabel>描述2</CustomLabel>*/}
+                                                {/*        <CustomLabel>按鈕名稱</CustomLabel>*/}
+                                                {/*        <CustomLabel>按鈕動作</CustomLabel>*/}
+                                                {/*    </Space>*/}
+                                                {/*)}*/}
+                                                <Col span={23}>
+                                                    <Row
+                                                        gutter={[8, 8]}
+                                                    >
+                                                        <Col span={24} >
+                                                            <Form.Item
+                                                                required
+                                                                label={"標題"}
+                                                                {...restField}
+                                                                name={[name, 'title']}
+                                                                // rules={[
+                                                                //     {
+                                                                //         transform: (value) => Number(value),
+                                                                //         validator: async (_, value) =>NumberValidator(_, value)({
+                                                                //             min: 1,
+                                                                //             minMessage: "请输入起始期数",
+                                                                //         })
+                                                                //     },
+                                                                // ]}
+                                                            >
+                                                                <Input placeholder="標題" />
+                                                            </Form.Item>
+                                                        </Col>
+                                                        <Col span={12}>
+                                                            <Form.Item
+                                                                required
+                                                                label={"描述1"}
+                                                                {...restField}
+                                                                name={[name, 'description1']}
+                                                            >
+                                                                <Input placeholder="描述1"/>
+                                                            </Form.Item>
+                                                        </Col>
+                                                        <Col span={12}>
+                                                            <Form.Item
+                                                                required
+                                                                label={"描述2"}
+                                                                {...restField}
+                                                                name={[name, 'description2']}
+                                                            >
+                                                                <Input placeholder="描述2"/>
+                                                            </Form.Item>
+                                                        </Col>
+                                                        <Col span={12}>
+                                                            <Form.Item
+                                                                required
+                                                                label={"按鈕名稱"}
+                                                                {...restField}
+                                                                name={[name, 'actionName']}
+                                                            >
+                                                                <Input placeholder="按鈕名稱"/>
+                                                            </Form.Item>
+                                                        </Col>
+                                                        <Col span={12}>
+                                                            <Form.Item
+                                                                required
+                                                                label={"按鈕動作"}
+                                                                {...restField}
+                                                                name={[name, 'action']}
+                                                            >
+                                                                <Input placeholder="按鈕動作"/>
+                                                            </Form.Item>
+                                                        </Col>
+                                                    </Row>
+
+
+                                                </Col>
+
+                                                <Col span={1}>
+                                                    <Row >
+                                                        <Col span={24}>
+                                                            <MinusCircleOutlined onClick={() => remove(name)} />
+                                                        </Col>
+                                                    </Row>
+                                                </Col>
+
+                                            </Row>
+                                            <Divider orientation="left"></Divider>
+                                        </>
+                                    ))}
+                                    <Row/>
+
+                                    <Row>
+                                        <Col span={12}>
+                                            <Form.Item>
+                                                <Button type="dashed" onClick={() => add({
+                                                    title: "優惠名稱" + ads.length + 1,
+                                                    description1: "- 3.5%",
+                                                    description2: "原利息35%",
+                                                    action: "",
+                                                    actionName: "點我借款 >"
+                                                }, ads.length)} block icon={<PlusOutlined />}>
+                                                    添加
+                                                </Button>
+                                            </Form.Item>
+                                        </Col>
+                                    </Row>
+
+                                </>
+                            )
+                        }}
+                    </Form.List>
+                </Form.Item>
 
                 <Form.Item
                     label={'状态'}
