@@ -29,6 +29,7 @@
         "react-router-dom": "^5.2.0",
         "styled-components": "^5.3.5",
         "umi-request": "^1.4.0",
+        "url-loader": "^3.0.0",
         "zod": "^3.19.1"
     },
     "devDependencies": {

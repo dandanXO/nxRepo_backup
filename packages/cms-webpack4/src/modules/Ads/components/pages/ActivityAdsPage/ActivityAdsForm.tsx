@@ -12,6 +12,11 @@ import {CustomLabel} from "../../../../product/components/pages/ProductPage/Prod
 import {MockAdTemplate1Data} from "../../../import/ActivityAdListPage/MockAdTemplate1Data";
 
 const Container = styled.div`
+    // self
+    position: fixed;
+    left: 50px;
+    top: 0;
+
     box-sizing: border-box;
     width: 360px;
     height: 640px;
@@ -19,6 +24,7 @@ const Container = styled.div`
     border-radius: 4px;
     border: 1px solid #000;
     margin: 0 auto;
+
 `;
 export interface AdsTemplate {
     id: number;
@@ -55,7 +61,8 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
         <FormContainer>
             <Preview>
                 <Container>
-                    <DemoActivityAdListPage type={String(templateType)}
+                    <DemoActivityAdListPage
+                        type={String(templateType)}
                         data={{
                         brandCard: {
                             title: "新人福利",
@@ -80,7 +87,9 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                     }}/>
                 </Container>
             </Preview>
+
             <AdminForm
+                style={{marginLeft: 50}}
                 form={props.form}
                 initialValues={props.initialValues}
                 onFieldsChange={props.onFieldsChange}
@@ -90,9 +99,6 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                     label="廣告名称"
                     name="name"
                     rules={[{ required: true }]}
-                    extra={
-                        '设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。'
-                    }
                 >
                     <Input placeholder="廣告名称" disabled={props.isEdit} />
                 </Form.Item>
@@ -101,6 +107,9 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                     label={"模板選擇"}
                     name={"templateType"}
                     required
+                    extra={
+                        '设定后即无法直接修改，送出前请务必再次确认。'
+                    }
                 >
                     <Radio.Group>
                         {props.templateData && props.templateData.map((template, index) => {
@@ -230,8 +239,50 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                         {(fields, { add, remove }) => {
                             return (
                                 <>
+                                    <Divider orientation="left" style={{ color: "#ec606a"}}>主打廣告</Divider>
+                                    <Row
+                                        gutter={[8, 8]}
+                                    >
+                                        <Col span={24} >
+                                            <Form.Item
+                                                required
+                                                label={"標題"}
+                                                name={['ads-main', 'title']}
+                                            >
+                                                <Input placeholder="標題" />
+                                            </Form.Item>
+                                        </Col>
+                                        <Col span={12}>
+                                            <Form.Item
+                                                required
+                                                label={"幣別"}
+                                                name={['ads-main', 'priceUnit']}
+                                            >
+                                                <Input placeholder="幣別"/>
+                                            </Form.Item>
+                                        </Col>
+                                        <Col span={12}>
+                                            <Form.Item
+                                                required
+                                                label={"價格"}
+                                                name={['ads-main', 'price']}
+                                            >
+                                                <Input placeholder="價格"/>
+                                            </Form.Item>
+                                        </Col>
+                                        <Col span={12}>
+                                            <Form.Item
+                                                required
+                                                label={"敘述"}
+                                                name={['ads-main', 'description']}
+                                            >
+                                                <Input placeholder="敘述"/>
+                                            </Form.Item>
+                                        </Col>
+                                    </Row>
                                     {fields.map(({ key, name, ...restField }, index) => (
                                         <>
+                                            <Divider orientation="left" style={{color: "#73c106"}}>廣告 - {index + 1}</Divider>
                                             <Row key={key}
                                                  gutter={[8, 8]}
                                                  style={{
@@ -291,7 +342,7 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                                                                 <Input placeholder="描述2"/>
                                                             </Form.Item>
                                                         </Col>
-                                                        <Col span={12}>
+                                                        <Col span={24}>
                                                             <Form.Item
                                                                 required
                                                                 label={"按鈕名稱"}
@@ -311,6 +362,16 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                                                                 <Input placeholder="按鈕動作"/>
                                                             </Form.Item>
                                                         </Col>
+                                                        {/*<Col span={12}>*/}
+                                                        {/*    <Form.Item*/}
+                                                        {/*        required*/}
+                                                        {/*        label={"目標網址"}*/}
+                                                        {/*        {...restField}*/}
+                                                        {/*        name={[name, 'actionURL']}*/}
+                                                        {/*    >*/}
+                                                        {/*        <Input placeholder="目標網址"/>*/}
+                                                        {/*    </Form.Item>*/}
+                                                        {/*</Col>*/}
                                                     </Row>
 
 
@@ -325,7 +386,6 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                                                 </Col>
 
                                             </Row>
-                                            <Divider orientation="left"></Divider>
                                         </>
                                     ))}
                                     <Row/>

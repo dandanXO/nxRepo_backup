@@ -13,11 +13,13 @@ export interface AdminFormProps {
     onFieldsChange: (changedFields: any, allFields: any) => void;
     onFinish: () => void;
     customAntFormFieldError?: CustomAntFormFieldError;
+    style?: CSSStyleRule;
 }
 
 export const AdminForm = (props: AdminFormProps) => {
     return (
         <Form
+            style={props.style as any}
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 19 }}
             // NOTE: common
