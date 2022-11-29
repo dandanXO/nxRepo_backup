@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Image, Descriptions, Tag } from 'antd';
+import { Card, Image, Descriptions, Tag , Empty } from 'antd';
 const { Item } = Descriptions;
 import { useGetOrderDetailQuery } from "../../api/UserInfoApi";
 import { GetOrderDetailResponse } from "../../api/types/userInfoTypes/getOrderDetail";
@@ -63,10 +63,14 @@ const OrderInfo = (props:{orderId:number} ) => {
             </Descriptions>
         </CardStyle>
         <CardStyle title="还款证明" >
-            <Descriptions size="small" bordered>
-                <Item label="UTR" labelStyle={{width:150}} span={3}>{utr || ""}</Item>
-                <Item label="还款证明单据" labelStyle={{width:150}} span={3}><Image width={200} src={receiptImage || ""} fallback={imgError} /></Item>
-            </Descriptions>
+            {
+                utr ?
+                    <Descriptions size="small" bordered>
+                        <Item label="UTR" labelStyle={{ width: 150 }} span={3}>{utr || ""}</Item>
+                        <Item label="还款证明单据" labelStyle={{ width: 150 }} span={3}><Image width={200} src={receiptImage || ""} fallback={imgError} /></Item>
+                    </Descriptions>
+                    : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+            }
         </CardStyle>
     </div>
 }
