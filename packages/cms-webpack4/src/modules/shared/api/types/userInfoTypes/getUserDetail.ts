@@ -10,6 +10,7 @@ export interface GetUserDetailResponse {
     userImage?: UserImageVo;
     userKycInfoVo?: UserKycInfoVo;
     userThirdInfo?: UserThirdInfoVo;
+    userRiskControlInfo?: UserRiskControlInfo;
 }
 
 export interface UserEmergencyContacts {
@@ -85,4 +86,13 @@ export interface UserThirdInfoVo {
     providerDisplayName?: string;
     score?: number;
     similarity?: number;
+}
+
+export interface UserRiskControlInfo {
+    maxAmount?: number;              // 可借建议金额
+    maxLoanApplyCount?: number;      // 可借款订单数
+    orderReviewUpdateTime?: string;  // 订单风控更新时间
+    rcProvider?: string;             // 风控应用
+    riskRank?: string;               // 风控等級
+    riskScore?: number;              // 风控分数
 }

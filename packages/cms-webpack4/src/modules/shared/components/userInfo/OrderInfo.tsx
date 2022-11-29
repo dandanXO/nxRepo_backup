@@ -54,10 +54,10 @@ const OrderInfo = (props:{orderId:number} ) => {
                 <Item label="申请金额">{deviceMoney === 0 || deviceMoney ? deviceMoney : ""}</Item>
                 <Item label="到帐金额">{lendMoney === 0 || lendMoney ? lendMoney : ""}</Item>
                 <Item label="应还金额">{totalMoney === 0 || totalMoney ? totalMoney : ""}</Item>
-                <Item label="申请时间">{moment(applyTime).format('YYYY-MM-DD HH:mm:ss')}</Item>
-                <Item label="审核时间">{moment(reviewTime).format('YYYY-MM-DD HH:mm:ss')}</Item>
-                <Item label="放款时间">{moment(loanTime).format('YYYY-MM-DD HH:mm:ss')}</Item>
-                <Item label="到期时间">{moment(expireTime).format('YYYY-MM-DD HH:mm:ss')}</Item>
+                <Item label="申请时间">{moment(applyTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
+                <Item label="审核时间">{moment(reviewTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
+                <Item label="放款时间">{moment(loanTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
+                <Item label="到期时间">{moment(expireTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
                 <Item label="逾期天数">{overdueDays === 0 || overdueDays ? overdueDays : ""}</Item>
                 <Item label="逾期金额">{overdueMoney === 0 || overdueMoney ? overdueMoney : ""}</Item>
             </Descriptions>

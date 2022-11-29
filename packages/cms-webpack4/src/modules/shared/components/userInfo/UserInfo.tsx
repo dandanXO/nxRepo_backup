@@ -32,14 +32,15 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
         }}
     ];
     const [userDetail, setUserDetail] = useState<GetUserDetailResponse>({ 
-        emergencyContacts: [], personaInfoVo: {}, userDevice: {}, userImage: {}, userKycInfoVo: {}, userThirdInfo: {} });
+        emergencyContacts: [], personaInfoVo: {}, userDevice: {}, userImage: {}, userKycInfoVo: {}, userThirdInfo: {}, userRiskControlInfo: {}
+    });
     useEffect(() => {
         if (currentData !== undefined) {
             setUserDetail(currentData)
         }
     }, [currentData]);
 
-    const { personaInfoVo, userImage, userKycInfoVo, userDevice, emergencyContacts, userThirdInfo } = userDetail;
+    const { personaInfoVo, userImage, userKycInfoVo, userDevice, emergencyContacts, userThirdInfo, userRiskControlInfo } = userDetail;
     const { channelName = "", phoneNo = "", appName = "", nameTrue = "", gender = "", idcardNo = "", fatherName = "", birth = "", panId = "", email = "", education = "", marriageStatus = "", position = "", salaryRange = "", address = "", bankCardNo = "", ifscCode = "", addTime = "" } = personaInfoVo;
     const { idcardBackPhoto = "", idcardFrontPhoto = "", idcardPortraitPhoto = "", panPhoto = "" } = userImage;
     const { pan = "", idcard = "", isAuth = "", emergency = "", liveness = "", bank = "", kycFinishTime = "" } = userKycInfoVo;
@@ -92,14 +93,14 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
                 <Item label="家庭地址">{address || ""}</Item>
             </Descriptions>
         </CardStyle>
-        {type === 'order' && <CardStyle title="风控信息">
+        {type === 'order' && userRiskControlInfo && <CardStyle title="风控信息">
             <Descriptions size="small" bordered >
-                <Item label="风控应用">{nameTrue || ""}</Item>
-                <Item label="风控等級">{gender || ""}</Item>
-                <Item label="风控分数">{idcardNo || ""}</Item>
-                <Item label="可借款订单数">{fatherName || ""}</Item>
-                <Item label="可借建议金额">{birth || ""}</Item>
-                <Item label="订单风控更新时间">{panId || ""}</Item>
+                <Item label="风控应用">{userRiskControlInfo?.rcProvider || ""}</Item>
+                <Item label="风控等級">{userRiskControlInfo?.riskRank || ""}</Item>
+                <Item label="风控分数">{userRiskControlInfo?.riskScore === 0 || userRiskControlInfo?.riskScore ? userRiskControlInfo?.riskScore : ""}</Item>
+                <Item label="可借款订单数">{userRiskControlInfo?.maxLoanApplyCount === 0 || userRiskControlInfo?.maxLoanApplyCount ? userRiskControlInfo?.maxLoanApplyCount : ""}</Item>
+                <Item label="可借建议金额">{userRiskControlInfo?.maxAmount === 0 || userRiskControlInfo?.maxAmount ? userRiskControlInfo?.maxAmount : ""}</Item>
+                <Item label="订单风控更新时间">{moment(userRiskControlInfo?.orderReviewUpdateTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
             </Descriptions>
         </CardStyle>}
         <CardStyle title="设备信息">
