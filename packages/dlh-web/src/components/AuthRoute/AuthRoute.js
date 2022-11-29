@@ -88,6 +88,19 @@ class AuthRoute extends Component {
                       }
                     })
                   }
+
+                  if(menuItem.actionUrl === "/windControlCheck") {
+                      menuItem.children.map(level2MenuItem => {
+                          // 訂單列表
+                          if (level2MenuItem.actionUrl === "/orderList") {
+                              level2MenuItem.actionUrl = "/cms/order";
+                          }
+                          // 訂單終審
+                          if (level2MenuItem.actionUrl === "/businessLastCheck") {
+                              level2MenuItem.actionUrl = "/cms/order-review";
+                          }
+                      })
+                  }
                   return menuItem;
                 })
                 console.log("[MainApp][after] menu", data);

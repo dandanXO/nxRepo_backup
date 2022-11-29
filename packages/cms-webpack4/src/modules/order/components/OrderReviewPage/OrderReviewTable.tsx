@@ -67,19 +67,20 @@ const OrderReviewTable = () => {
     };
 
     const handleReviewAll = (status) => {
-        const confirmText = status === 1 ? '通过' : '拒绝'
+        const confirmText = status === 1 ? '通过' : '拒绝';
+        const reasonText = status === 1 ? `批次审核通过` : `批次审核不通过`;
         modal.confirm({
             content: `确认全部审核${confirmText}吗？`,
             onOk() {
-                postOrderReview({ orderNos: selectedList, status: status })
-                .unwrap()
-                .then()
-                .catch((error) => {
-                    errorModal.error({
-                        title: 'Error',
-                        content:`审核${confirmText}失败`
-                    })
-                });
+                postOrderReview({ orderNos: selectedList, status: status, reason: reasonText })
+                    .unwrap()
+                    .then()
+                    .catch((error) => {
+                        errorModal.error({
+                            title: 'Error',
+                            content: `审核${confirmText}失败`
+                        })
+                    });
             }
         });
     }
