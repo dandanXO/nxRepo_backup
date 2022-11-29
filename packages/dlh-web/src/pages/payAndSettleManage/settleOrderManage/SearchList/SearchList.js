@@ -26,11 +26,9 @@ class SearchList extends Component{
     render() {
         const { allSettlePlatList,allSettleMchList,OrderStatus,form: { getFieldDecorator  }, intl  } = this.props;
         let statusList = [];
-        statusList.push({key:null,label: intl.formatMessage({id : "page.search.list.select"})});
         for(let key in OrderStatus){
             statusList.push({key:key,label:OrderStatus[key]});
         }
-        // console.dir(statusList);
         return (
             <div>
                 <Form>
