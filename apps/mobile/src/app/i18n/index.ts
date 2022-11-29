@@ -33,9 +33,9 @@ i18next
           "Welcome to Mobile": "Welcome to Mobile !!!",
           modal: {
             "Error": "Error",
-            "Notice": "লক্ষ্য করুন",
+            "Notice": "Notice",
             "Success": "Success!",
-            "Confirm": "নিশ্চিত করুন",
+            "Confirm": "Confirm",
           },
         },
 
@@ -75,6 +75,18 @@ i18next
 
       },
       bn_BD: {
+
+        // NOTICE: REFACTOR ME
+        common: {
+          "Welcome to Mobile": "Welcome to Mobile !!!",
+          modal: {
+            "Error": "ত্রুটি",
+            "Notice": "লক্ষ্য করুন",
+            "Success": "সফলতা",
+            "Confirm": "নিশ্চিত করুন",
+          },
+        },
+
         // NOTICE: Atoms
         [i18nComponents.namespace]: i18nComponents.translation.bn_BD,
 
