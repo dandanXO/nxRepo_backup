@@ -102,11 +102,12 @@ const UserReviewTable = () => {
     };
 
     const handleReviewAll = (status) => {
-        const confirmText = status === 1 ? '通过' : '拒绝'
+        const confirmText = status === 1 ? '通过' : '拒绝';
+        const reasonText = status === 1 ? `批次审核通过` : `批次审核不通过`;
         modal.confirm({
             content: `确认全部审核${confirmText}吗？`,
             onOk() {
-                postUserReview({ userIds: selectedRow, status: status });
+                postUserReview({ userIds: selectedRow, status: status, reason: reasonText });
             }
         });
     }
