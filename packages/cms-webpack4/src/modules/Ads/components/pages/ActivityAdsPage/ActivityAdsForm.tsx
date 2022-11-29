@@ -12,10 +12,13 @@ import {CustomLabel} from "../../../../product/components/pages/ProductPage/Prod
 import {MockAdTemplate1Data} from "../../../import/ActivityAdListPage/MockAdTemplate1Data";
 
 const Container = styled.div`
-    // self
-    position: fixed;
-    left: 50px;
+    // NOTICE: 失效的 position: sticky - 1、包裹的父容器高度与 sticky 元素一致
+    //https://www.cnblogs.com/coco1s/p/14180476.html
+
+    position: sticky;
     top: 0;
+    left: 0;
+    height: 640px;
 
     box-sizing: border-box;
     width: 360px;
@@ -89,7 +92,7 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
             </Preview>
 
             <AdminForm
-                style={{marginLeft: 50}}
+                // style={{marginLeft: 50}}
                 form={props.form}
                 initialValues={props.initialValues}
                 onFieldsChange={props.onFieldsChange}
