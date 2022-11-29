@@ -115,9 +115,9 @@ export const ActivityAdsPage = () => {
                 onFieldsChange={onFieldsChange}
                 onFinish={onFinish}
                 templateData={[
-                    {id: 1, name: "樣板1"},
-                    {id: 2, name: "樣板2"},
-                    {id: 3, name: "樣板3"},
+                    {id: 1, name: "样板1"},
+                    {id: 2, name: "样板2"},
+                    {id: 3, name: "样板3"},
                 ]}
              />
         </div>
