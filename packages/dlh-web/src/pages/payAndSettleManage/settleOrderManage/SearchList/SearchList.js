@@ -60,7 +60,7 @@ class SearchList extends Component{
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.name"})}>
                                 {
-                                    getFieldDecorator('bankAccountName', {
+                                    getFieldDecorator('userName', {
                                         initialValue: ""
                                     })(
                                         <Input placeholder={intl.formatMessage({id : "page.search.list.name.enter"})} allowClear={true} />

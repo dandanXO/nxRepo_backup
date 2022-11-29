@@ -17,17 +17,16 @@ function* getTableData(action) {
     yield put(settleOrderChangeTableLoading(true));
     try {
         const res = yield call(getModelList, action.params);
-        if (res.code === '200') {
-            const {data} = res;
-            const obj = {
-                data: data.content || [],
-                pagination: {
-                    total: data.total,
-                    current: data.pageNumber
-                }
+
+        const obj = {
+            data: res.records || [],
+            pagination: {
+                total: res.totalRecords,
+                current: res.records.length === 0 ? 0 : res.currentPage,
             }
-            yield put(settleOrderSetTableData(obj));
         }
+        yield put(settleOrderSetTableData(obj));
+
     } catch (e) {
 
     }

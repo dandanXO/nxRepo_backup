@@ -13,21 +13,20 @@ import {
 import { getModelList, addModel, updateModel, deleteModelByIds } from '../api';
 
 
-function* getTableData(action) {
+function* getTableData (action) {
     yield put(payOrderChangeTableLoading(true));
     try {
         const res = yield call(getModelList, action.params);
-        if (res.code === '200') {
-            const {data} = res;
-            const obj = {
-                data: data.content || [],
-                pagination: {
-                    total: data.total,
-                    current: data.pageNumber
-                }
+    
+        const obj = {
+            data: res.records || [],
+            pagination: {
+                total: res.totalRecords,
+                current: res.records.length === 0 ? 0 : res.currentPage,
             }
-            yield put(payOrderSetTableData(obj));
         }
+        yield put(payOrderSetTableData(obj));
+
     } catch (e) {
 
     }

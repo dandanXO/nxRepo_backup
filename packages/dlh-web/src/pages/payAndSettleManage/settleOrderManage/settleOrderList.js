@@ -89,8 +89,8 @@ class SettleOrderList extends Component {
             },{
                 width: 170,
                 title: props.intl.formatMessage({id : "page.table.user.name"}),
-                dataIndex: 'bankAccountName',
-                key: 'bankAccountName',
+                dataIndex: 'userName',
+                key: 'userName',
                 render(text) {
                     return <CopyText text={text} isEllispsis={true} />
                 }
@@ -109,7 +109,7 @@ class SettleOrderList extends Component {
                     );
                 }
             },{
-                width: 120,
+                width: 110,
                 title: this.props.intl.formatMessage({ id: "page.search.list.product.name" }),
                 dataIndex: 'productName',
                 key: 'productName',
@@ -123,45 +123,30 @@ class SettleOrderList extends Component {
                     );
                 }
             },{
-                width: 160,
+                width: 110,
                 title: props.intl.formatMessage({id : "page.search.list.repayement.platfrom"}),
-                dataIndex: 'platId',
-                key: 'platId',
+                dataIndex: 'platName',
+                key: 'platName',
                 render(text) {
-                    let showStr = '';
-                    if(!!text){
-                        let {allSettlePlatList} = _this.state;
-                        let settlePlat = allSettlePlatList.find(item => item.id == text);
-                        if(!!settlePlat){
-                            showStr = settlePlat.platName+'('+settlePlat.platClass+')';
-                        }
-                    }
                     return (
-                        <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
-                            <Tooltip title={showStr}>
-                                <span style={{cursor: 'pointer'}}>{showStr}</span>
+                        <CopyToClipboard text={text} onCopy={_this.onCopy}>
+                            <Tooltip title={text}>
+                                <span style={{cursor: 'pointer'}}>{text}</span>
                             </Tooltip>
                         </CopyToClipboard>
                     )
                 }
             },{
-                width: 100,
+                width: 110,
                 title: props.intl.formatMessage({id : "page.search.list.payment.merchant"}),
-                dataIndex: 'mchId',
-                key: 'mchId',
+                dataIndex: 'mchNo',
+                key: 'mchNo',
                 render(text) {
-                    let showStr = '';
-                    if(!!text){
-                        let {allSettleMchList} = _this.state;
-                        let settleMch = allSettleMchList.find(item => item.id == text);
-                        if(!!settleMch){
-                            showStr = settleMch.mchName;
-                        }
-                    }
+                  
                     return (
-                        <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
-                            <Tooltip title={showStr}>
-                                <span style={{cursor: 'pointer'}}>{showStr}</span>
+                        <CopyToClipboard text={text} onCopy={_this.onCopy}>
+                            <Tooltip title={text}>
+                                <span style={{cursor: 'pointer'}}>{text}</span>
                             </Tooltip>
                         </CopyToClipboard>
                     )
@@ -265,33 +250,33 @@ class SettleOrderList extends Component {
                     );
                 }
             },{
-                width: 65,
+                width: 80,
                 title: props.intl.formatMessage({id : "page.table.order.finish.time"}),
                 dataIndex: 'finishTime',
                 key: 'finishTime',
                 className: styles.smallText,
                 render(text) {
-                    let showStr = !!text ? moment(Number(text)).format('YYYY-MM-DD HH:mm:ss') : '';
+                    let showStr = !!text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
-                                <span style={{ cursor: 'pointer' }}>{!!text ? moment(Number(text)).format('MM-DD HH:mm:ss') : ''}</span>
+                                <span style={{ cursor: 'pointer' }}>{showStr}</span>
                             </Tooltip>
                         </CopyToClipboard>
                     );
                 }
             },{
-                width: 65,
+                width: 80,
                 title: props.intl.formatMessage({id : "page.table.crete.time"}),
                 dataIndex: 'createDate',
                 key: 'createDate',
                 className: styles.smallText,
                 render(text) {
-                    let showStr = !!text ? moment(Number(text)).format('YYYY-MM-DD HH:mm:ss') : '';
+                    let showStr = !!text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
-                                <span style={{ cursor: 'pointer' }}>{!!text ? moment(Number(text)).format('MM-DD HH:mm:ss') : ''}</span>
+                                <span style={{ cursor: 'pointer' }}>{showStr}</span>
                             </Tooltip>
                         </CopyToClipboard>
                     );
@@ -394,7 +379,7 @@ class SettleOrderList extends Component {
     }
 
     handleSearch = (obj) => {
-        let { time,orderNo,platOrderId, platId, mchNo, mchId,status,bankAccountName,phoneNo } = obj;
+        let { time,orderNo,platOrderId, platId, mchNo, mchId,status,userName,phoneNo ,productName} = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
         if(Array.isArray(time)) {
@@ -407,7 +392,7 @@ class SettleOrderList extends Component {
             }
         }
 
-        const params = {  orderNo,platOrderId, platId, mchNo, mchId,status,bankAccountName,phoneNo, startDate, endDate, pageSize: 10, pageNum: 1 };
+        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, pageSize: 10, pageNum: 1 };
         this.searchParams = params;
         getTableData(params);
     }
@@ -422,7 +407,10 @@ class SettleOrderList extends Component {
 
     componentDidMount() {
         const { getTableData } = this.props;
-        getTableData({ pageSize: 10, pageNum: 1 });
+        getTableData({
+            endDate: '', mchId: '', mchNo: '', orderNo: '', pageNum: 1, pageSize: 10,
+            phoneNo: '', platId: '', platOrderId: '', productName: '', startDate: '', status: '', userName: ''
+        });
 
         try {
             const _this = this;

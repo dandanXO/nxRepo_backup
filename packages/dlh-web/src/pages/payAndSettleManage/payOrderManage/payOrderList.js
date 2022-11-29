@@ -33,7 +33,7 @@ class PayOrderList extends Component {
             btnDisabled: false,
         };
 
-        this.searchParams = {};
+        this.searchParams =  {};
         this.pageSize = 10;
         this.pageNum = 1;
         const _this = this;
@@ -84,8 +84,8 @@ class PayOrderList extends Component {
             }, {
                 width: 180,
                 title: this.props.intl.formatMessage({ id: "page.table.user.name" }),
-                dataIndex: 'username',
-                key: 'username',
+                dataIndex: 'userName',
+                key: 'userName',
                 render(text) {
                     return <CopyText text={text} isEllispsis={true} />
                 }
@@ -104,7 +104,7 @@ class PayOrderList extends Component {
                     );
                 }
             }, {
-                width: 120,
+                width: 110,
                 title: this.props.intl.formatMessage({ id: "page.search.list.product.name" }),
                 dataIndex: 'productName',
                 key: 'productName',
@@ -118,10 +118,10 @@ class PayOrderList extends Component {
                     );
                 }
             }, {
-                width: 80,
+                width: 110,
                 title: this.props.intl.formatMessage({ id: "windowPage.payment.type" }),
-                dataIndex: 'payType',
-                key: 'payType',
+                dataIndex: 'platClassName',
+                key: 'platClassName',
                 render(text) {
                     return (
                         <CopyToClipboard text={text} onCopy={_this.onCopy}>
@@ -132,24 +132,17 @@ class PayOrderList extends Component {
                     );
                 }
             }, {
-                width: 160,
+                width: 110,
                 title: this.props.intl.formatMessage({ id: "page.search.list.repayement.platfrom" }),
-                dataIndex: 'platId',
-                key: 'platId',
-                render(text) {
-                    let showStr = '';
-
-                    if (!!text) {
-                        let { allPayPlatList } = _this.state;
-                        let payPlat = allPayPlatList.find(item => item.id == text);
-                        if (!!payPlat) {
-                            showStr = payPlat.platName + '(' + payPlat.platClass + ')';
-                        }
-                    }
+                dataIndex: 'platName',
+                key: 'platName',
+                render(text,record) {
+                  
+                    // const platName = record.platName + '(' + record.platClassName + ')';
                     return (
-                        <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
-                            <Tooltip title={showStr}>
-                                <span>{showStr}</span>
+                        <CopyToClipboard text={text} onCopy={_this.onCopy}>
+                            <Tooltip title={text}>
+                                <span>{text}</span>
                             </Tooltip>
                         </CopyToClipboard>
                     );
@@ -157,21 +150,13 @@ class PayOrderList extends Component {
             }, {
                 width: 100,
                 title: this.props.intl.formatMessage({ id: "page.search.list.payment.merchant" }),
-                dataIndex: 'mchId',
-                key: 'mchId',
+                dataIndex: 'mchNo',
+                key: 'mchNo',
                 render(text) {
-                    let showStr = '';
-                    if (!!text) {
-                        let { allPayMchList } = _this.state;
-                        let payMch = allPayMchList.find(item => item.id == text);
-                        if (!!payMch) {
-                            showStr = payMch.mchName;
-                        }
-                    }
                     return (
-                        <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
+                        <CopyToClipboard text={text} onCopy={_this.onCopy}>
                             <Tooltip title={_this.props.intl.formatMessage({ id: "page.table.copy" })}>
-                                <span style={{ cursor: 'pointer' }}>{showStr}</span>
+                                <span style={{ cursor: 'pointer' }}>{text}</span>
                             </Tooltip>
                         </CopyToClipboard>
                     );
@@ -267,33 +252,33 @@ class PayOrderList extends Component {
                     );
                 }
             }, {
-                width: 50,
+                width: 80,
                 title: this.props.intl.formatMessage({ id: "page.table.finish.time" }),
                 dataIndex: 'finishTime',
                 key: 'finishTime',
                 className: styles.smallText,
                 render(text) {
-                    let showStr = !!text ? moment(Number(text)).format('YYYY-MM-DD HH:mm:ss') : '';
+                    let showStr = !!text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
-                                <span style={{ cursor: 'pointer' }}>{!!text ? moment(Number(text)).format('MM-DD HH:mm:ss') : ''}</span>
+                                <span style={{ cursor: 'pointer' }}>{showStr}</span>
                             </Tooltip>
                         </CopyToClipboard>
                     );
                 }
             }, {
-                width: 50,
+                width: 80,
                 title: this.props.intl.formatMessage({ id: "page.table.crete.time" }),
                 dataIndex: 'createDate',
                 key: 'createDate',
                 className: styles.smallText,
                 render(text) {
-                    let showStr = !!text ? moment(Number(text)).format('YYYY-MM-DD HH:mm:ss') : '';
+                    let showStr = !!text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
-                                <span style={{ cursor: 'pointer' }}>{!!text ? moment(Number(text)).format('MM-DD HH:mm:ss') : ''}</span>
+                                <span style={{ cursor: 'pointer' }}>{showStr}</span>
                             </Tooltip>
                         </CopyToClipboard>
                     );
@@ -393,7 +378,7 @@ class PayOrderList extends Component {
         getTableData({ ...this.searchParams, pageSize:this.pageSize, pageNum: this.pageNum});
     }
     handleSearch = (obj) => {
-        let { time,orderNo,platOrderId, platId, mchNo, mchId,status,username,phoneNo } = obj;
+        let { time,orderNo,platOrderId, platId, mchNo, mchId,status,userName,phoneNo,productName } = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
         if(Array.isArray(time)) {
@@ -406,7 +391,7 @@ class PayOrderList extends Component {
             }
         }
 
-        const params = {  orderNo,platOrderId, platId, mchNo, mchId,status,username,phoneNo, startDate, endDate, pageSize: 10, pageNum: 1 };
+        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, pageSize: 10, pageNum: 1 };
         this.searchParams = params;
         getTableData(params);
     }
@@ -421,7 +406,9 @@ class PayOrderList extends Component {
 
     componentDidMount() {
         const { getTableData } = this.props;
-        getTableData({ pageSize: 10, pageNum: 1 });
+        getTableData({ endDate: '', mchId: '', mchNo: '', orderNo: '', pageNum: 1, pageSize: 10,
+            phoneNo: '', platId: '',platOrderId: '',productName: '', startDate: '', status: '', userName: ''
+        });
         try {
             const _this = this;
             axios({
