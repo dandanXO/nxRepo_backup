@@ -151,7 +151,7 @@ export const AdTemplate1 = (props: IAdTemplate1) => {
     <AdTemplateContainer>
       <ContainerContent>
         <AdTemplate1BrandCardUI data={props.data.brandCard} onClick={onClickToDoLoan}/>
-        {props.data.cards.map((data) => {
+        {props.data?.cards?.map((data) => {
           return <AdTemplate1CardUI data={data} onClick={onClickToPopup}/>
         })}
       </ContainerContent>

@@ -36,13 +36,14 @@ const parsedQueryString = queryString.parse(window.location.search);
 
 interface IActivityAdListPage {
   type?: string;
+  data?: AdTemplate1;
 }
 
 export const ActivityAdListPage = (props: IActivityAdListPage) => {
   const type = parsedQueryString.type || props.type;
   switch (type) {
     case "1": {
-      return <AdTemplate1 data={MockAdTemplate1Data}/>;
+      return <AdTemplate1 data={props.data || MockAdTemplate1Data}/>;
     }
     case "2": {
       return <AdTemplate2/>
@@ -51,7 +52,7 @@ export const ActivityAdListPage = (props: IActivityAdListPage) => {
       return <AdTemplate3/>
     }
     default:
-      return <AdTemplate1 data={MockAdTemplate1Data}/>;
+      return <AdTemplate1 data={props.data || MockAdTemplate1Data}/>;
   }
 }
 
@@ -60,7 +61,7 @@ export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
   let adTemplate;
   switch (type) {
     case "1": {
-      adTemplate = <AdTemplate1 data={MockAdTemplate1Data}/>;
+      adTemplate = <AdTemplate1 data={props.data || MockAdTemplate1Data}/>;
       break;
     }
     case "2": {
@@ -72,7 +73,7 @@ export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
       break;
     }
     default:
-      adTemplate = <AdTemplate1 data={MockAdTemplate1Data}/>;
+      adTemplate = <AdTemplate1 data={props.data || MockAdTemplate1Data}/>;
       break;
   }
   return (

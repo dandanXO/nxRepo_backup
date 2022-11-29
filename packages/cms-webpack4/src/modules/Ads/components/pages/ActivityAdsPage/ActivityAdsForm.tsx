@@ -1,4 +1,4 @@
-import {Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space, Button} from "antd";
+import {Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space, Button, Col, Row, Divider} from "antd";
 import React, {useState} from "react";
 import TextArea from "antd/es/input/TextArea";
 import {AdminForm} from "../../../../shared/components/AdminForm";
@@ -9,6 +9,7 @@ import {NumberValidator} from "../../../../shared/utils/validation/validator";
 import {maxOneUnitFloatReplacer} from "../../../../shared/utils/maxOneUnitFloatReplacer";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {CustomLabel} from "../../../../product/components/pages/ProductPage/ProductForm/RateSettingSection";
+import {MockAdTemplate1Data} from "../../../import/ActivityAdListPage/MockAdTemplate1Data";
 
 const Container = styled.div`
     box-sizing: border-box;
@@ -37,6 +38,8 @@ interface IActivityAdsForm {
 const FormContainer = styled.div`
     display: flex;
     flex-direction: row;
+    width: 1000px;
+    margin: 0 auto;
 `
 const Preview = styled.div`
 `
@@ -45,12 +48,36 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
     const templateType = Form.useWatch('templateType', props.form);
     console.log("templateType", templateType);
 
+    const ads = Form.useWatch('ads', props.form);
+
     // NOTE:
     return (
         <FormContainer>
             <Preview>
                 <Container>
-                    <DemoActivityAdListPage type={String(templateType)}/>
+                    <DemoActivityAdListPage type={String(templateType)}
+                        data={{
+                        brandCard: {
+                            title: "新人福利",
+                            priceUnit: "PKR",
+                            price: "5,000",
+                            description: "新人大禮包",
+                            action: "",
+                            actionName: ""
+                        },
+                        // cards: props.form.getFieldValue("ads")?.map((data) => {
+                        //     return {
+                        //         title: data.title,
+                        //         description1: data.description1,
+                        //         description2: data.description2,
+                        //         action: data.action,
+                        //         actionName: data.actionName,
+                        //     }
+                        // }),
+                        // cards: MockAdTemplate1Data.cards,
+                        // cards: props.form.getFieldValue("ads"),
+                        cards: ads,
+                    }}/>
                 </Container>
             </Preview>
             <AdminForm
@@ -85,74 +112,230 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                 </Form.Item>
 
                 <Form.Item label="廣告列表" required>
-                    <Form.List name="productInterestRatePairs">
+                    <Form.List name="ads">
                         {(fields, { add, remove }) => {
                             return (
                                 <>
+                                    {/*<Form.Item>*/}
+                                    {/*    <Space>*/}
+                                    {/*        <CustomLabel>標題</CustomLabel>*/}
+                                    {/*        <CustomLabel>描述1</CustomLabel>*/}
+                                    {/*        <CustomLabel>描述2</CustomLabel>*/}
+                                    {/*        <CustomLabel>按鈕名稱</CustomLabel>*/}
+                                    {/*        <CustomLabel>按鈕動作</CustomLabel>*/}
+                                    {/*    </Space>*/}
+                                    {/*</Form.Item>*/}
                                     {fields.map(({ key, name, ...restField }, index) => (
                                         <>
-                                            <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
+                                            {/*<Space key={key}*/}
+                                            {/*       style={{*/}
+                                            {/*           // borderBottom: "1px solid #aaa",*/}
+                                            {/*           // marginBottom: 16*/}
+                                            {/*       }}*/}
+                                            {/*>*/}
+                                                {index === 0 && (
+                                                    <Space>
+                                                        <CustomLabel style={{width: 94}}>標題</CustomLabel>
+                                                        <CustomLabel style={{width: 94}}>描述1</CustomLabel>
+                                                        <CustomLabel style={{width: 94}}>描述2</CustomLabel>
+                                                        <CustomLabel style={{width: 94}}>按鈕名稱</CustomLabel>
+                                                        <CustomLabel style={{width: 94}}>按鈕動作</CustomLabel>
+                                                    </Space>
+                                                )}
+                                            {/*</Space>*/}
+                                            <Space key={key}
+                                                   style={{
+                                                       // borderBottom: "1px solid #aaa",
+                                                       // marginBottom: 16
+                                                   }}
+                                            >
                                                 <Form.Item
+                                                    required
+                                                    // label={"標題"}
                                                     {...restField}
-                                                    name={[name, 'num']}
-                                                    rules={[
-                                                        {
-                                                            transform: (value) => Number(value),
-                                                            validator: async (_, value) =>NumberValidator(_, value)({
-                                                                min: 1,
-                                                                minMessage: "请输入起始期数",
-                                                            })
-                                                        },
-                                                    ]}
+                                                    name={[name, 'title']}
+                                                    // rules={[
+                                                    //     {
+                                                    //         transform: (value) => Number(value),
+                                                    //         validator: async (_, value) =>NumberValidator(_, value)({
+                                                    //             min: 1,
+                                                    //             minMessage: "请输入起始期数",
+                                                    //         })
+                                                    //     },
+                                                    // ]}
                                                 >
                                                     <Input placeholder="標題" />
                                                 </Form.Item>
-                                                <Form.Item
-                                                    {...restField}
-                                                    name={[name, 'preInterest']}
-                                                >
-                                                    <Input placeholder="前置利息" suffix={"%"}/>
-                                                </Form.Item>
-                                                <Form.Item
-                                                    {...restField}
-                                                    name={[name, 'postInterest']}
-                                                >
-                                                    <Input placeholder="后置利息" suffix={"%"}/>
-                                                </Form.Item>
-
 
                                                 <Form.Item
-                                                    {...restField}
-                                                    name={[name, 'plusAmount']}
                                                     required
-                                                    rules={[
-                                                        {
-                                                            transform: (value) => Number(value),
-                                                            validator: async (_, value) =>NumberValidator(_, value)({
-                                                                min: 0,
-                                                                minMessage: "请输入提額金额",
-                                                            })
-                                                        },
-                                                    ]}
+                                                    // label={"描述1"}
+                                                    {...restField}
+                                                    name={[name, 'description1']}
                                                 >
-                                                    <Input placeholder="提額金额"/>
+                                                    <Input placeholder="描述1"/>
                                                 </Form.Item>
 
+                                                <Form.Item
+                                                    required
+                                                    // label={"描述2"}
+                                                    {...restField}
+                                                    name={[name, 'description2']}
+                                                >
+                                                    <Input placeholder="描述2"/>
+                                                </Form.Item>
+                                                <Form.Item
+                                                    required
+                                                    // label={"按鈕名稱"}
+                                                    {...restField}
+                                                    name={[name, 'actionName']}
+                                                >
+                                                    <Input placeholder="按鈕名稱"/>
+                                                </Form.Item>
+                                                <Form.Item
+                                                    required
+                                                    // label={"按鈕動作"}
+                                                    {...restField}
+                                                    name={[name, 'action']}
+                                                >
+                                                    <Input placeholder="按鈕動作"/>
+                                                </Form.Item>
 
                                                 <MinusCircleOutlined onClick={() => remove(name)} />
+
                                             </Space>
                                         </>
                                     ))}
+
                                     <Form.Item>
-                                        <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                                        <Button type="dashed" onClick={() => add({
+                                            title: "優惠名稱" + ads.length + 1,
+                                            description1: "- 3.5%",
+                                            description2: "原利息35%",
+                                            action: "",
+                                            actionName: "點我借款 >"
+                                        }, ads.length)} block icon={<PlusOutlined />}>
                                             添加
                                         </Button>
                                     </Form.Item>
+
                                 </>
                             )
                         }}
                     </Form.List>
                 </Form.Item>
+
+                {/*<Form.Item label="廣告列表" required>*/}
+                {/*    <Form.List name="ads">*/}
+                {/*        {(fields, { add, remove }) => {*/}
+                {/*            return (*/}
+                {/*                <>*/}
+                {/*                    {fields.map(({ key, name, ...restField }, index) => (*/}
+                {/*                        <>*/}
+                {/*                            <Row key={key} gutter={[8, 8]}*/}
+                {/*                                 style={{*/}
+                {/*                                     // borderBottom: "1px solid #aaa",*/}
+                {/*                                     // marginBottom: 16*/}
+                {/*                                }}*/}
+                {/*                            >*/}
+                {/*                                /!*{index === 0 && (*!/*/}
+                {/*                                /!*    <Space>*!/*/}
+                {/*                                /!*        <CustomLabel>標題</CustomLabel>*!/*/}
+                {/*                                /!*        <CustomLabel>描述1</CustomLabel>*!/*/}
+                {/*                                /!*        <CustomLabel>描述2</CustomLabel>*!/*/}
+                {/*                                /!*        <CustomLabel>按鈕名稱</CustomLabel>*!/*/}
+                {/*                                /!*        <CustomLabel>按鈕動作</CustomLabel>*!/*/}
+                {/*                                /!*    </Space>*!/*/}
+                {/*                                /!*)}*!/*/}
+                {/*                                <Col span={24} >*/}
+                {/*                                    <Form.Item*/}
+                {/*                                        required*/}
+                {/*                                        label={"標題"}*/}
+                {/*                                        {...restField}*/}
+                {/*                                        name={[name, 'title']}*/}
+                {/*                                        // rules={[*/}
+                {/*                                        //     {*/}
+                {/*                                        //         transform: (value) => Number(value),*/}
+                {/*                                        //         validator: async (_, value) =>NumberValidator(_, value)({*/}
+                {/*                                        //             min: 1,*/}
+                {/*                                        //             minMessage: "请输入起始期数",*/}
+                {/*                                        //         })*/}
+                {/*                                        //     },*/}
+                {/*                                        // ]}*/}
+                {/*                                    >*/}
+                {/*                                        <Input placeholder="標題" />*/}
+                {/*                                    </Form.Item>*/}
+                {/*                                </Col>*/}
+                {/*                                <Col span={12}>*/}
+                {/*                                    <Form.Item*/}
+                {/*                                        required*/}
+                {/*                                        label={"描述1"}*/}
+                {/*                                        {...restField}*/}
+                {/*                                        name={[name, 'description1']}*/}
+                {/*                                    >*/}
+                {/*                                        <Input placeholder="描述1"/>*/}
+                {/*                                    </Form.Item>*/}
+                {/*                                </Col>*/}
+                {/*                                <Col span={12}>*/}
+                {/*                                    <Form.Item*/}
+                {/*                                        required*/}
+                {/*                                        label={"描述2"}*/}
+                {/*                                        {...restField}*/}
+                {/*                                        name={[name, 'description2']}*/}
+                {/*                                    >*/}
+                {/*                                        <Input placeholder="描述2"/>*/}
+                {/*                                    </Form.Item>*/}
+                {/*                                </Col>*/}
+                {/*                                <Col span={12}>*/}
+                {/*                                    <Form.Item*/}
+                {/*                                        required*/}
+                {/*                                        label={"按鈕名稱"}*/}
+                {/*                                        {...restField}*/}
+                {/*                                        name={[name, 'actionName']}*/}
+                {/*                                    >*/}
+                {/*                                        <Input placeholder="按鈕名稱"/>*/}
+                {/*                                    </Form.Item>*/}
+                {/*                                </Col>*/}
+                {/*                                <Col span={12}>*/}
+                {/*                                    <Form.Item*/}
+                {/*                                        required*/}
+                {/*                                        label={"按鈕動作"}*/}
+                {/*                                        {...restField}*/}
+                {/*                                        name={[name, 'action']}*/}
+                {/*                                    >*/}
+                {/*                                        <Input placeholder="按鈕動作"/>*/}
+                {/*                                    </Form.Item>*/}
+                {/*                                </Col>*/}
+                {/*                                <Col span={24}>*/}
+                {/*                                    <MinusCircleOutlined onClick={() => remove(name)} />*/}
+                {/*                                </Col>*/}
+                {/*                            </Row>*/}
+                {/*                            <Divider orientation="left"></Divider>*/}
+                {/*                        </>*/}
+                {/*                    ))}*/}
+                {/*                    <Row/>*/}
+
+                {/*                    <Row>*/}
+                {/*                        <Col span={12}>*/}
+                {/*                            <Form.Item>*/}
+                {/*                                <Button type="dashed" onClick={() => add({*/}
+                {/*                                    title: "優惠名稱" + ads.length + 1,*/}
+                {/*                                    description1: "- 3.5%",*/}
+                {/*                                    description2: "原利息35%",*/}
+                {/*                                    action: "",*/}
+                {/*                                    actionName: "點我借款 >"*/}
+                {/*                                }, ads.length)} block icon={<PlusOutlined />}>*/}
+                {/*                                    添加*/}
+                {/*                                </Button>*/}
+                {/*                            </Form.Item>*/}
+                {/*                        </Col>*/}
+                {/*                    </Row>*/}
+
+                {/*                </>*/}
+                {/*            )*/}
+                {/*        }}*/}
+                {/*    </Form.List>*/}
+                {/*</Form.Item>*/}
 
                 <Form.Item
                     label={'状态'}
