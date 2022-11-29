@@ -10,6 +10,7 @@ import { useLazyGetOrderReviewListQuery, usePostOrderReviewMutation } from '../.
 import { GetOrderReviewListRequestQuerystring, OrderReviewListResponse, GetOrderReviewListProps } from '../../api/types/OrderReviewTypes/getOrderReviewList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
+import CopyText from '../../../shared/components/CopyText';
 const OrderReviewTable = () => {
 
     const { channelListEnum, riskRankEnum, providerListEnum } = useValuesEnums();
@@ -116,9 +117,9 @@ const OrderReviewTable = () => {
             render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId,record.id,record.orderNo)} >审核</a>],
             width: 80,
         },
-        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" },
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" },
+        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" , render: (text) => <CopyText text={text} />},
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" , render: (text) => <CopyText text={text} />},
+        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" , render: (text) => <CopyText text={text} />},
         {
             title: '老客下单', dataIndex: 'oldMember', valueType: 'select', key: 'oldMember', initialValue: searchParams.oldMember || "",
             valueEnum: {
@@ -128,8 +129,8 @@ const OrderReviewTable = () => {
             },
         },
         { title: '申请渠道', dataIndex: 'applyChannel', valueType: 'select',  key: 'applyChannel', valueEnum: channelListEnum, initialValue:searchParams.applyChannel || ''},
-        { title: 'APP名称', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
-        { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || ""  },
+        { title: 'APP名称', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} />},
+        { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "", render: (text) => <CopyText text={text} />  },
         { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
         { title: '风控应用', dataIndex: 'provider', valueType: 'select', key: 'provider', valueEnum: providerListEnum, initialValue: searchParams.provider || '' },
         {

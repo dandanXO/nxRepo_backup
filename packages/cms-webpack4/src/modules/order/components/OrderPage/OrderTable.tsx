@@ -89,7 +89,7 @@ const OrderTable = () => {
         },
         { title: '申请渠道', dataIndex: 'channelId', valueType: 'select', key: 'channelId', valueEnum: channelListEnum, initialValue: searchParams.channelId || '', hideInTable: true },
         { title: '申请渠道', dataIndex: 'channelName', valueType: 'select', key: 'channelName', hideInSearch: true },
-        { title: 'APP名称', dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || "", },
+        { title: 'APP名称', dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || "", render: (text) => <CopyText text={text} /> },
         { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "" , render: (text) => <CopyText text={text} />},
         {
             title: '订单状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
@@ -102,7 +102,7 @@ const OrderTable = () => {
         { title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: { true: { text: '是' }, false: { text: '否' } } ,width:'50px',align:'center'},
         { title: '申请金额', dataIndex: 'deviceMoney', key: 'idcadeviceMoneyrdNo', hideInSearch: true, initialValue: searchParams.deviceMoney || "", align: 'right' },
         { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney', hideInSearch: true, initialValue: searchParams.lendMoney || "", align: 'right' },
-        { title: '借款期限', dataIndex: 'lendDays', key: 'lendDays', hideInSearch: true, initialValue: searchParams.lendDays || "", align: 'right' },
+        { title: '借款期限(天)', dataIndex: 'lendDays', key: 'lendDays', hideInSearch: true, initialValue: searchParams.lendDays || "", align: 'center',width: '80px' },
         { title: '申请时间', dataIndex: 'applyTime', key: 'applyTime', hideInSearch: true, valueType: 'dateTime',width:'100px', },
         {
             title: '申请时间', dataIndex: 'applyTimeRange', valueType: 'dateRange', key: 'applyTimeRange',

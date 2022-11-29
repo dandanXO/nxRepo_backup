@@ -89,7 +89,7 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/order-review" component={OrderReviewPage} />
                     {/*// @ts-ignore*/}
-                    <Route path="/order-review-detail/:userId/:orderNo" component={OrderReviewDetailPage} />
+                    <Route path="/order-review-detail/:userId/:orderId/:orderNo" component={OrderReviewDetailPage} />
                     {/*// @ts-ignore*/}
                     <Route path={"/activity-ads"} component={ActivityAdsPage}/>
                 </Switch>
