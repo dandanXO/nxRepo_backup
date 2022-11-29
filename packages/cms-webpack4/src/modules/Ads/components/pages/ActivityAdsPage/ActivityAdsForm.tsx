@@ -1,4 +1,5 @@
-import {Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space, Button, Col, Row, Divider} from "antd";
+import {Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space, Button, Col, Row, Divider, Typography} from "antd";
+const { Title, Text } = Typography;
 import React, {useState} from "react";
 import TextArea from "antd/es/input/TextArea";
 import {AdminForm} from "../../../../shared/components/AdminForm";
@@ -15,17 +16,12 @@ const Container = styled.div`
     // NOTICE: 失效的 position: sticky - 1、包裹的父容器高度与 sticky 元素一致
     //https://www.cnblogs.com/coco1s/p/14180476.html
 
-    position: sticky;
-    top: 0;
-    left: 0;
-    height: 640px;
-
     box-sizing: border-box;
     width: 360px;
     height: 640px;
     overflow: hidden;
     border-radius: 4px;
-    border: 1px solid #000;
+    border: 1px solid #aaa;
     margin: 0 auto;
 
 `;
@@ -51,6 +47,10 @@ const FormContainer = styled.div`
     margin: 0 auto;
 `
 const Preview = styled.div`
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 640px;
 `
 export const ActivityAdsForm = (props: IActivityAdsForm) => {
 
@@ -63,6 +63,10 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
     return (
         <FormContainer>
             <Preview>
+                <Title level={5}>预览</Title>
+                <div style={{ textAlign: "center"}}>
+                    <Text>观赏首页广告</Text>
+                </div>
                 <Container>
                     <DemoActivityAdListPage
                         type={String(templateType)}
@@ -99,15 +103,15 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                 onFinish={props.onFinish}
             >
                 <Form.Item
-                    label="廣告名称"
+                    label="广告名称"
                     name="name"
                     rules={[{ required: true }]}
                 >
-                    <Input placeholder="廣告名称" disabled={props.isEdit} />
+                    <Input placeholder="广告名称" disabled={props.isEdit} />
                 </Form.Item>
 
                 <Form.Item
-                    label={"模板選擇"}
+                    label={"模板选择"}
                     name={"templateType"}
                     required
                     extra={
@@ -237,55 +241,55 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                 {/*    </Form.List>*/}
                 {/*</Form.Item>*/}
 
-                <Form.Item label="廣告列表" required>
+                <Form.Item label="广告列表" required>
                     <Form.List name="ads">
                         {(fields, { add, remove }) => {
                             return (
                                 <>
-                                    <Divider orientation="left" style={{ color: "#ec606a"}}>主打廣告</Divider>
+                                    <Divider orientation="left" style={{ color: "#ec606a"}}>主打广告</Divider>
                                     <Row
                                         gutter={[8, 8]}
                                     >
                                         <Col span={24} >
                                             <Form.Item
                                                 required
-                                                label={"標題"}
+                                                label={"广告标题"}
                                                 name={['ads-main', 'title']}
                                             >
-                                                <Input placeholder="標題" />
+                                                <Input placeholder="广告标题" />
                                             </Form.Item>
                                         </Col>
                                         <Col span={12}>
                                             <Form.Item
                                                 required
-                                                label={"幣別"}
+                                                label={"價格幣別"}
                                                 name={['ads-main', 'priceUnit']}
                                             >
-                                                <Input placeholder="幣別"/>
+                                                <Input placeholder="价格币别"/>
                                             </Form.Item>
                                         </Col>
                                         <Col span={12}>
                                             <Form.Item
                                                 required
-                                                label={"價格"}
+                                                label={"幣別價格"}
                                                 name={['ads-main', 'price']}
                                             >
-                                                <Input placeholder="價格"/>
+                                                <Input placeholder="币别价格"/>
                                             </Form.Item>
                                         </Col>
                                         <Col span={12}>
                                             <Form.Item
                                                 required
-                                                label={"敘述"}
+                                                label={"廣告說明"}
                                                 name={['ads-main', 'description']}
                                             >
-                                                <Input placeholder="敘述"/>
+                                                <Input placeholder="广告说明"/>
                                             </Form.Item>
                                         </Col>
                                     </Row>
                                     {fields.map(({ key, name, ...restField }, index) => (
                                         <>
-                                            <Divider orientation="left" style={{color: "#73c106"}}>廣告 - {index + 1}</Divider>
+                                            <Divider orientation="left" style={{color: "#73c106"}}>广告 - {index + 1}</Divider>
                                             <Row key={key}
                                                  gutter={[8, 8]}
                                                  style={{
@@ -309,7 +313,7 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                                                         <Col span={24} >
                                                             <Form.Item
                                                                 required
-                                                                label={"標題"}
+                                                                label={"广告标题"}
                                                                 {...restField}
                                                                 name={[name, 'title']}
                                                                 // rules={[
@@ -322,47 +326,47 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                                                                 //     },
                                                                 // ]}
                                                             >
-                                                                <Input placeholder="標題" />
+                                                                <Input placeholder="广告标题" />
                                                             </Form.Item>
                                                         </Col>
                                                         <Col span={12}>
                                                             <Form.Item
                                                                 required
-                                                                label={"描述1"}
+                                                                label={"广告说明1"}
                                                                 {...restField}
                                                                 name={[name, 'description1']}
                                                             >
-                                                                <Input placeholder="描述1"/>
+                                                                <Input placeholder="广告说明1"/>
                                                             </Form.Item>
                                                         </Col>
                                                         <Col span={12}>
                                                             <Form.Item
                                                                 required
-                                                                label={"描述2"}
+                                                                label={"广告说明2"}
                                                                 {...restField}
                                                                 name={[name, 'description2']}
                                                             >
-                                                                <Input placeholder="描述2"/>
+                                                                <Input placeholder="广告说明2"/>
                                                             </Form.Item>
                                                         </Col>
                                                         <Col span={24}>
                                                             <Form.Item
                                                                 required
-                                                                label={"按鈕名稱"}
+                                                                label={"按钮名称"}
                                                                 {...restField}
                                                                 name={[name, 'actionName']}
                                                             >
-                                                                <Input placeholder="按鈕名稱"/>
+                                                                <Input placeholder="按钮名称"/>
                                                             </Form.Item>
                                                         </Col>
                                                         <Col span={12}>
                                                             <Form.Item
                                                                 required
-                                                                label={"按鈕動作"}
+                                                                label={"按钮动作"}
                                                                 {...restField}
                                                                 name={[name, 'action']}
                                                             >
-                                                                <Input placeholder="按鈕動作"/>
+                                                                <Input placeholder="按钮动作"/>
                                                             </Form.Item>
                                                         </Col>
                                                         {/*<Col span={12}>*/}
