@@ -33,6 +33,8 @@ export default () => {
               <div>{t('Welcome to Mobile', {ns: "common"})}</div>
               <div>Country: {environment.countryName}</div>
               <div>Environment: {environment.production ? "正式機" : "測試機"}</div>
+              <div>Language: {environment.language}</div>
+              <div>開發模式的 Proxy 得由 project.json 進行設定</div>
             </p>
             <button onClick={() => {
               window.open("http://localhost:4003/?showtranslations", "_blank");

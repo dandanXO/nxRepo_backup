@@ -35,7 +35,7 @@ const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
         (props: PostRepayReceiptRequestProps) => {
             // NOTICE: impure
             const formData = new FormData();
-            formData.append("file", props.formFile);
+            if(props.formFile) formData.append("file", props.formFile);
             formData.append("orderNo", props.orderNo);
             formData.append("receipt", props.receipt);
 
