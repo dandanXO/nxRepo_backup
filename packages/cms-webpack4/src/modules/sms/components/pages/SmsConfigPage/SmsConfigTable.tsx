@@ -1,0 +1,77 @@
+
+import { ProColumns, ProProvider } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { useGetUserContactsListQuery ,useLazyGetUserContactsListQuery} from '../../../../shared/api/UserInfoApi';
+import { GetUserContacts } from '../../../../shared/api/types/userInfoTypes/getUserContacts';
+import { useEffect, useState } from 'react';
+import { FormModalProps } from '../../../../../types/FormModal';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+const SmsConfigTable = ((props:FormModalProps) => {
+
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess }] = useLazyGetUserContactsListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+    const columns: ProColumns<GetUserContacts>[] = [
+        {
+            title: '操作',
+            valueType: 'option',
+            key: 'option',
+            align: 'left',
+            width: 100,
+            render: (text, record, _, action) => {
+                return [<a key="editable" onClick={() => props.setShowModal(true)} >修改</a>,
+                <a key="editable" onClick={() => props.setShowModal(true)} >删除</a>]
+            }
+        },
+        { title: '短信名称', dataIndex: 'name', key: 'name' },
+        { title: '应用短信商', dataIndex: 'phone', key: 'phone' },
+        { title: '短信类型', dataIndex: 'name', key: 'name' },
+        { title: '备注', dataIndex: 'phone', key: 'phone' },
+        { title: '创建时间', dataIndex: 'lastUpdateTime', key: 'lastUpdateTime', valueType: 'dateTime' },
+        { title: '更新时间', dataIndex: 'lastUpdateTime', key: 'lastUpdateTime', valueType: 'dateTime' },
+    ]
+
+    const [pageable, setPageable] = useState({ pageNum: 1, pageSize: 10 })
+    const [addressBook, setAddressBook] = useState<any>()
+    useEffect(() => {
+        triggerGetList(pageable)
+    }, [pageable]);
+
+    useEffect(() => {
+        if (currentData !== undefined) {
+            setAddressBook(currentData)
+        }
+    }, [currentData])
+
+
+    const pageOnChange = (current, pageSize) => {
+        setPageable({ ...pageable, pageNum: current, pageSize: pageSize })
+    }
+
+    return (
+
+        <ProTable<GetUserContacts>
+            columns={columns}
+            dataSource={!isLoading && addressBook?.records || []}
+            loading={isFetching}
+            rowKey="id"
+            search={false}
+            options={false}
+            headerTitle={<Button key="addButton" icon={<PlusOutlined />} type="primary" onClick={()=>props.setShowModal(true)}>添加</Button>}
+            pagination={{
+                showSizeChanger: true,
+                defaultPageSize: 10,
+                onChange: pageOnChange,
+                total: addressBook?.totalRecords,
+                current:addressBook?.records?.length === 0 ? 0 : addressBook?.currentPage,
+            }}
+        />
+
+    )
+})
+
+export default SmsConfigTable;
+

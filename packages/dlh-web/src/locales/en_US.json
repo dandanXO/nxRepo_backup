@@ -1161,6 +1161,7 @@
   "menu.userManage": "User Mgmt",
   "menu.userInfoManage": "User Info Mgmt",
   "menu.riskControlExamine": "Risk Control Exam",
+  "menu.orderManagement": "Order Mgmt",
   "menu.orderList": "Order List",
   "menu.loan.reExamine": "Loan ReExam",
   "menu.loan.finalExamine": "Loan Final Exam",

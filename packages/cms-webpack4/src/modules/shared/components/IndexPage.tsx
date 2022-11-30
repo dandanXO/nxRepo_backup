@@ -58,6 +58,9 @@ export function IndexPage() {
                 <a>activity-ads</a>
             </Link>
         </div>
+        <div>
+            <Link to="/sms-config"><a>SMS Config</a></Link>
+        </div>
     </div>
   );
 }
