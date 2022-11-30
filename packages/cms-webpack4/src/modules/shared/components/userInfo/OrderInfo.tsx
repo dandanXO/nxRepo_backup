@@ -47,7 +47,7 @@ const OrderInfo = (props:{orderId:number} ) => {
                 <Item label="申請渠道">{channelName || ""}</Item>
                 <Item label="APP名称">{appName || ""}</Item>
                 <Item label="申请产品">{productName || ""}</Item>
-                <Item label="订单状态">{status ? <Tag color={statusEnum[status].color}>{statusEnum[6].text}</Tag> : ''}</Item>
+                <Item label="订单状态">{status ? <Tag color={statusEnum[status].color}>{statusEnum[status].text}</Tag> : ''}</Item>
                 <Item label="老客下单">{isOldUser ? "是" : "否"}</Item>
                 <Item label="空放订单">{dummy ? "是" : "否"}</Item>
                 <Item label="借款期限">{lendDays === 0 || lendDays ? lendDays : ""}</Item>
