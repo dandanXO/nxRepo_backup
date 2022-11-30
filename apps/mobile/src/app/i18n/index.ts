@@ -19,6 +19,9 @@ import {
 import {i18nUploadPaymentReceiptPage} from "../components/pages/UploadPaymentReceiptPage/i18n/translations";
 import {i18nUploadedPaymentReceiptPage} from "../components/pages/UploadedPaymentReceiptPage/i18n/translations";
 import {i18nProductAdModalListPage} from "../components/pages/ProductAdModalListPage/i18n/translations";
+import {
+  i18nUploadingFileModal
+} from "../components/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -70,6 +73,7 @@ i18next
 
         // NOTE: UploadPaymentReceiptPage
         [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.en_US,
+        [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.en_US,
 
 
 
@@ -119,6 +123,7 @@ i18next
 
         // NOTE: UploadPaymentReceiptPage
         [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.bn_BD,
+        [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.bn_BD,
 
 
       }
