@@ -9,7 +9,7 @@ import { useLazyGetOrderListQuery } from '../../api/OrderApi';
 import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/OrderTypes/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/CopyText';
-
+import queryString from "query-string";
 const OrderTable = () => {
 
     const { channelListEnum, providerListEnum  } = useValuesEnums();
@@ -51,7 +51,8 @@ const OrderTable = () => {
     }
 
     const handleExportOrderList = () => {
-        window.open("/hs/admin/order/list/download");
+        const searchQueryString = queryString.stringify(searchList);
+        window.open(`/hs/admin/order/list/download?${searchQueryString}`);
     }
 
     const statusEnum = {
