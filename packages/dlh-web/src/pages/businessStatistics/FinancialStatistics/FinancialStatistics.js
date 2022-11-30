@@ -12,17 +12,15 @@ import {injectIntl, FormattedMessage} from "react-intl";
 
 
 const convertParams = (time) => {
-    const isArr = Array.isArray(time) && time.length > 0;
     return {
-        startTime: isArr ? time[0].format('YYYY-MM-DD') : '',
-        endTime: isArr ? time[1].format('YYYY-MM-DD') : ''
+        startTime: time.format('YYYY-MM-DD') ,
+        endTime: time.format('YYYY-MM-DD')
     };
 }
 class FinancialStatistics extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: [moment(), moment()],
             btnDisabled:false
         };
     }
@@ -34,12 +32,12 @@ class FinancialStatistics extends Component {
         const { time = [] } = obj;
         this.setState({ btnDisabled: true });
         let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
-        const searchStatus = convertParams(this.state.time);
+        const searchStatus = convertParams(time);
         axios.get("/hs/admin/statistics/financial-statements/download", { params: searchStatus, responseType: 'blob' })
         .then(res => {
             hide && hide();
             this.setState({ btnDisabled: false });
-            download(res, this.props.intl.formatMessage({id : "menu.financial.report.xlsx"}, {expDate : Date.now()}));
+            download(res, this.props.intl.formatMessage({id : "menu.financial.report.xlsx"}, {expDate : moment(Date.now()).format('YYYYMMDDHHmmss')}));
         })
         .catch(() => {
             hide && hide();
@@ -52,12 +50,12 @@ class FinancialStatistics extends Component {
             const { time = [] } = obj;
             this.setState({ btnDisabled: true });
             let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
-            const searchStatus = convertParams(this.state.time);
+            const searchStatus = convertParams(time);
             axios.get("/hs/admin/statistics/operation-daily/download", { params: searchStatus, responseType: 'blob' })
             .then(res => {
                 hide && hide();
                 this.setState({ btnDisabled: false });
-                download(res, this.props.intl.formatMessage({id : "menu.operation.report.xlsx"}, {expDate : Date.now()}));
+                download(res, this.props.intl.formatMessage({id : "menu.operation.report.xlsx"}, {expDate : moment(Date.now()).format('YYYYMMDDHHmmss')}));
             })
             .catch(() => {
                 hide && hide();
@@ -69,7 +67,7 @@ class FinancialStatistics extends Component {
         const { btnDisabled } = this.state;
         return (
             <div>
-                <SearchList initTime={this.state.time}
+                <SearchList initTime={moment()}
                 		  exportFinancialRecord={this.exportFinancialRecord}
                           exportOperationRecord={this.exportOperationRecord}
                           btnDisable={btnDisabled}
