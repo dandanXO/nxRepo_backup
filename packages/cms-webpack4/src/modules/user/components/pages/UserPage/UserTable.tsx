@@ -9,6 +9,7 @@ import { setSearchParams, setPathname, selectSearchParams } from '../../../../sh
 import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
+import queryString from "query-string";
 // import usePageable from '../../../../shared/hooks/usePageable';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
@@ -111,7 +112,10 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             onOk() { releaseUser({ userId: Number(id) }) }
         });
     }
-
+    const handleExportUserList = () => {
+        const searchQueryString = queryString.stringify(searchList);
+        window.open(`/hs/admin/user-manage/user-download?${searchQueryString}`);
+    }
     const statusEnum = {
         '': { text: '不限' },
         '0': { text: '未注册', color: 'orange' },
@@ -279,6 +283,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                 setting: { listsHeight: 400, },
                 reload: () => triggerGetList(searchList)
             }}
+            toolBarRender={() => [<Button onClick={handleExportUserList} type='primary'>导出</Button>]}
             pagination={{
                 showSizeChanger: true,
                 defaultPageSize: 10,
