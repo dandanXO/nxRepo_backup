@@ -116,7 +116,7 @@ const OrderTable = () => {
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
             initialValue: (searchParams.loanTimeStart === undefined || searchParams.loanTimeStart === "") ? "" : [moment(searchParams.loanTimeStart), moment(searchParams.loanTimeEnd)]
         },
-        { title: '到期日', dataIndex: 'expireDate', key: 'expireDate', valueType: "date", hideInSearch: true, width: '100px', tip: '截止时间为该日23:59:59', },
+        { title: '到期日', dataIndex: 'expireDate', key: 'expireDate', hideInSearch: true, width:'100px',  tip: '截止时间为该日23:59:59',},
         {
             title: '到期日', dataIndex: 'expireDateRange', valueType: 'dateRange', key: 'expireDateRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
