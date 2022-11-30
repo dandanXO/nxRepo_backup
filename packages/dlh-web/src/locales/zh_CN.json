@@ -1148,6 +1148,7 @@
   "menu.userManage": "用户管理",
   "menu.userInfoManage": "用户管理",
   "menu.riskControlExamine": "风控审核",
+  "menu.orderManagement": "订单管理",
   "menu.orderList": "订单列表",
   "menu.loan.reExamine": "业务复审",
   "menu.loan.finalExamine": "订单终审",

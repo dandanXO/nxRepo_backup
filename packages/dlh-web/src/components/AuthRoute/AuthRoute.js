@@ -89,7 +89,7 @@ class AuthRoute extends Component {
                     })
                   }
 
-                  if(menuItem.actionUrl === "/windControlCheck") {
+                  if(menuItem.actionUrl === "/orderManagement") {
                       menuItem.children.map(level2MenuItem => {
                           // 訂單列表
                           if (level2MenuItem.actionUrl === "/orderList") {
