@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import queryString from "query-string";
-import CopyText from '../../../../shared/components/CopyText';
 // import usePageable from '../../../../shared/hooks/usePageable';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
@@ -148,10 +147,10 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
 
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || ""},
-        { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: searchParams.nameTrue || "" , render: (text) => <CopyText text={text} /> },
+        { title: '姓名', dataIndex: 'nameTrue', key: 'nameTrue', initialValue: searchParams.nameTrue || ""  },
         { title: '性别', dataIndex: 'gender', key: 'gender', hideInSearch: true },
         { title: '年龄', dataIndex: 'age', key: 'age', hideInSearch: true },
-        { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: searchParams.idcardNo || "", render: (text) => <CopyText text={text} /> },
+        { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: searchParams.idcardNo || "" },
         { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
         {
             title: '是否新客', dataIndex: 'newMember', valueType: 'select', key: 'newMember', initialValue: searchParams.newMember || "" ,
@@ -169,7 +168,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                 return <Tag color={tagStatus.color}>{tagStatus.text}</Tag>;
             },
         },
-        { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} />},
+        { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" ,},
         { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListEnum, initialValue:searchParams.channelId || ''},
         {
             title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true, valueType: 'dateTime'
