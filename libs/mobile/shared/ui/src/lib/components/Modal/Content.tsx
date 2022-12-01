@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Content = styled.div`
+const Content = styled.div<{contentNoStyle?: boolean}>`
   /* Display */
   //display: table;
   /* Margin */
@@ -9,7 +9,7 @@ const Content = styled.div`
   max-width: 320px;
   //height: 80px;
   /* Padding */
-  padding: 10px;
+  padding: ${(props) => props.contentNoStyle ? 0 : "10px"};
   /* Text */
   text-align: center;
   //text-shadow: 1px 0 4px #191a1b;

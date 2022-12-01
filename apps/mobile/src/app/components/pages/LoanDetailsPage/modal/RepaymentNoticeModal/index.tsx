@@ -14,7 +14,7 @@ const Paragraph = styled.div`
 type RepaymentNoticeModalProps = {
     setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
     handlePostRepayCreate: any;
-    balance: number;
+    balance: number ;
 } & WithTranslation;
 
 const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
