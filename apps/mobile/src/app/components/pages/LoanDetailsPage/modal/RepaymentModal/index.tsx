@@ -22,7 +22,7 @@ const Paragraph = styled.div`
     color: #aaaaaa;
     line-height: 16px;
 `;
-const RepaymentModalContainer = styled.div`
+export const RepaymentModalContainer = styled.div`
     color: #101010;
 `;
 const SectionBalance = styled.div`
@@ -39,7 +39,7 @@ const SectionParagraph = styled.div`
     padding: 10px;
 `;
 
-const SectionButton = styled.div`
+export const SectionButton = styled.div`
     margin-bottom: 10px;
 `;
 const SectionButton2 = styled.div`
@@ -48,7 +48,7 @@ const SectionButton2 = styled.div`
     justify-content: space-between;
 `;
 
-const RepayAndApplyButton = styled(NotificationButton)`
+export const RepayAndApplyButton = styled(NotificationButton)`
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -62,7 +62,7 @@ const RepaymentCancelButton = styled(NotificationButton)`
     color: ${(props) => props.theme.button.secondary.text};
 `;
 
-const RepaymentButton = styled(RepayAndApplyButton)`
+export const RepaymentButton = styled(RepayAndApplyButton)`
     flex: 3 0 auto;
     background: ${(props) => props.theme.button.info.main};
     color: ${(props) => props.theme.button.info.text};

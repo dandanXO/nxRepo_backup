@@ -46,7 +46,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     const [showRepaymentModal, setShowRepaymentModal] = useState(false);
     const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] =
         useState(false);
-    const [showRepaymentAdsModal, setShowRepaymentAdsModal] = useState(true);
+    const [showRepaymentAdsModal, setShowRepaymentAdsModal] = useState(false);
 
     const [repayBalance, setRepayBalance] = useState(
         props?.currentData?.balance
