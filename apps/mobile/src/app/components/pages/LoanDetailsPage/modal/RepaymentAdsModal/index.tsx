@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 
 import {NotificationButton, Overlay, RepayICON,} from "@frontend/mobile/shared/ui";
@@ -7,6 +7,7 @@ import {i18nRepaymentAdsModal} from "./i18n/translations";
 import {environment} from "../../../../../../environments/environment";
 import GiftICONPng from "./limited_time_offer.png";
 import CloseICONPng from "./limited_time_offer_icon.png";
+import moment from "moment";
 
 const RepaymentModalContainer = styled.div`
   color: #101010;
@@ -116,26 +117,55 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
 
 
     };
-    const getLongTitle = () => {
+    const longTitle = useMemo(() => {
       const index = Math.floor(Math.random()*2);
       const titles = [
         t("Available for higher amount"),
         t("Available for lower interest rates"),
       ]
       return titles[index];
-    }
-  const getShortTitle = () => {
-    const index = Math.floor(Math.random()*2);
-    const titles = [
-      t("Good news for you…"),
-      t("Just finish within 24 hours…"),
-      t("Don’t rush to leave, here’s a time-limited offer"),
-      t("only today"),
-      t("special offer"),
-      t("this week only"),
-    ]
-    return titles[index];
-  }
+    },[]);
+
+    const shortTitle = useMemo(() => {
+      const index = Math.floor(Math.random()*2);
+      const titles = [
+        t("Good news for you…"),
+        t("Just finish within 24 hours…"),
+        t("Don’t rush to leave, here’s a time-limited offer"),
+        t("only today"),
+        t("special offer"),
+        t("this week only"),
+      ]
+      return titles[index];
+    }, []);
+
+    const [timeString, setTimeString] = useState<string>();
+
+    useEffect(() => {
+      const timeInterval = setInterval(function(){
+        const currentTime = moment();
+        const tomorrowTime = moment().add(1,'days').startOf("day");
+        // console.log("now", currentTime.format("MM/DD HH:mm:ss"))
+        // console.log("tomorrow", tomorrowTime.format("MM/DD HH:mm:ss"))
+        const diffTime = tomorrowTime.diff(currentTime, "seconds");
+        // console.log("diffTime", diffTime);
+        const duration = moment.duration(diffTime, "seconds");
+        //   console.log("duration", duration);
+        const padStartZero = (number: number) => {
+          return String(number).padStart(2, "0");
+        }
+        const hours = padStartZero(duration.hours());
+        const minutes = padStartZero(duration.minutes());
+        const seconds = padStartZero(duration.seconds());
+        const time = `${hours}:${minutes}:${seconds}`;
+        // console.log("time", time);
+        setTimeString(time);
+      }, 1000);
+      return () => {
+        clearInterval(timeInterval);
+      }
+    })
+
     return (
         <div>
             <Overlay
@@ -154,9 +184,9 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                 <GiftICON src={GiftICONPng}/>
                                 <BrandContent>
                                   <BrandHeader>{t("Limited Time Offer")}</BrandHeader>
-                                  <BrandLongTitle>{getLongTitle()}</BrandLongTitle>
-                                  {/*<BrandCountDown>{t("Countdown")} : 23:59:59</BrandCountDown>*/}
-                                  <BrandShortTitle>{getShortTitle()}</BrandShortTitle>
+                                  <BrandLongTitle>{longTitle}</BrandLongTitle>
+                                  <BrandCountDown>{t("Countdown")} : {timeString}</BrandCountDown>
+                                  <BrandShortTitle>{shortTitle}</BrandShortTitle>
                                 </BrandContent>
                               </Brand>
                               <ContentContainer>
