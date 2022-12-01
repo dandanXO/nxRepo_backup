@@ -1,34 +1,15 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 
-import {NotificationButton, Overlay, RepayICON,} from "@frontend/mobile/shared/ui";
-import {useTranslation, WithTranslation} from "react-i18next";
+import {Overlay, RepayICON,} from "@frontend/mobile/shared/ui";
+import {useTranslation} from "react-i18next";
 import {i18nRepaymentAdsModal} from "./i18n/translations";
 import {environment} from "../../../../../../environments/environment";
 import GiftICONPng from "./limited_time_offer.png";
 import CloseICONPng from "./limited_time_offer_icon.png";
 import moment from "moment";
+import {RepayAndApplyButton, RepaymentButton, RepaymentModalContainer, SectionButton} from "../RepaymentModal";
 
-const RepaymentModalContainer = styled.div`
-  color: #101010;
-`;
-
-const SectionButton = styled.div`
-    margin-bottom: 10px;
-`;
-
-const RepayAndApplyButton = styled(NotificationButton)`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: ${(props) => props.theme.button.primary.text};
-    margin-bottom: 16px;;
-`;
-const RepaymentButton = styled(RepayAndApplyButton)`
-    flex: 3 0 auto;
-    background: ${(props) => props.theme.button.info.main};
-    color: ${(props) => props.theme.button.info.text};
-`;
 
 const Brand = styled.div`
   width: 100%;
@@ -83,6 +64,13 @@ const ContentContainer = styled.div`
   padding: 16px 10px 5px;
 `
 
+const UniversalRepayAndApplyButton = styled(RepayAndApplyButton)`
+  background: #EF4B4B;
+  margin-bottom: 16px;
+`;
+const UniversalRepaymentButton = styled(RepaymentButton)`
+  background: #E5E5E5;
+`
 type RepaymentAdsModalProps = {
   balance: number;
   handlePostRepayCreate: any;
@@ -190,7 +178,7 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                 </BrandContent>
                               </Brand>
                               <ContentContainer>
-                                <RepayAndApplyButton
+                                <UniversalRepayAndApplyButton
                                   onClick={() => {
                                     // NOTE: self
                                     props.setShowRepaymentNoticeModal(
@@ -199,10 +187,10 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                   }}
                                 >
                                   <RepayICON />{t("Repay and Apply Again")}
-                                </RepayAndApplyButton>
-                                <RepaymentButton onClick={handleConfirm}>
+                                </UniversalRepayAndApplyButton>
+                                <UniversalRepaymentButton onClick={handleConfirm}>
                                   {t("Repayment")}
-                                </RepaymentButton>
+                                </UniversalRepaymentButton>
                               </ContentContainer>
 
                           </SectionButton>
