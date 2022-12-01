@@ -166,7 +166,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             valueEnum:statusEnum,
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
-                return <Tag color={tagStatus.color}>{tagStatus.text}</Tag>;
+                return statusEnum[status] ? <Tag color={tagStatus.color}>{tagStatus.text}</Tag> : '-';
             },
         },
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} /> },

@@ -57,6 +57,7 @@ const OrderTable = () => {
 
     const statusEnum = {
         '': { text: '不限' },
+        '1': { text: '机审中', color: 'default'},
         '6': { text: '审核中', color: 'blue' },
         '7': { text: '订单拒绝', color: 'red' },
         '8': { text: '放款中', color: 'purple' },
@@ -97,7 +98,7 @@ const OrderTable = () => {
             valueEnum: statusEnum,
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
-                return <Tag color={tagStatus.color}>{tagStatus.text}</Tag>;
+                return statusEnum[status] ? <Tag color={tagStatus.color}>{tagStatus.text}</Tag> : '-';
             },
         },
         { title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: { true: { text: '是' }, false: { text: '否' } } ,width:'50px',align:'center'},
