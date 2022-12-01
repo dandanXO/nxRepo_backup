@@ -195,6 +195,11 @@ class RepeatLoan extends Component {
         changeSelectKeys(selectedKeys);
     }
 
+    handleExportReloanList = () => {
+        const { orderNo, userPhone, userTrueName } = this.searchParams
+        window.open(`/hs/admin/order/fail/download?orderNo=${orderNo}&userPhone=${userPhone}&userTrueName=${userTrueName}`)
+    }
+
     render() {
         const { tableData: { data, pagination }, loading, visible, modalLoading, modalData, selectKeys } = this.props;
         const rowSelection = {
@@ -207,6 +212,7 @@ class RepeatLoan extends Component {
                 <SearchList submit={this.submit}/>
                 <div>
                     <Row gutter={16}>
+                        <Button type={'danger'} onClick={this.handleExportReloanList} style={{ margin: '10px' }}>{this.props.intl.formatMessage({ id: "page.table.export" })}  </Button>
                         <Button type={'primary'} disabled={batchReloanBtnDisabled} onClick={this.onClickBatchReLoan} style={{ margin: '10px' }}>{this.props.intl.formatMessage({ id: "page.table.batch.loan.again" })}  </Button>
                         <Button type={'primary'} disabled={batchLoanRefuseDisabled} onClick={this.loanBatchRefuse} style={{ margin: '10px' }}>{this.props.intl.formatMessage({ id: "windowPage.loan.batch.refuse" })}  </Button>
                     </Row>
