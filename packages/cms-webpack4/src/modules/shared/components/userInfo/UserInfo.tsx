@@ -51,18 +51,18 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
         <CardStyle title="注册信息">
             <Descriptions size="small" bordered >
                 <Item label="用户ID">{userDetail.userId || "-"}</Item>
-                <Item label="注册渠道">{channelName || ""}</Item>
-                <Item label="注册包名">{appName || ""}</Item>
-                <Item label="手机号">{phoneNo || ""}</Item>
-                <Item label="注册时间">{addTime ? moment(addTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
+                <Item label="注册渠道">{channelName || "-"}</Item>
+                <Item label="注册包名">{appName || "-"}</Item>
+                <Item label="手机号">{phoneNo || "-"}</Item>
+                <Item label="注册时间">{addTime ? moment(addTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="身份信息">
             <Descriptions size="small" bordered layout="vertical" column={{ xs: 1, sm: 2, md: 2, lg: 4 }}>
-                <Item label="PAN card"><Image width={200} src={panPhoto || ""} fallback={imgError} /></Item>
-                <Item label="Aadhaar card 正面"><Image width={200} src={idcardFrontPhoto || ""} fallback={imgError} /></Item>
-                <Item label="Aadhaar card 反面"><Image width={200} src={idcardBackPhoto || ""} fallback={imgError} /></Item>
-                <Item label="人像"><Image width={200} src={idcardPortraitPhoto || ""} fallback={imgError} /></Item>
+                <Item label="PAN card"><Image width={200} src={panPhoto || "-"} fallback={imgError} /></Item>
+                <Item label="Aadhaar card 正面"><Image width={200} src={idcardFrontPhoto || "-"} fallback={imgError} /></Item>
+                <Item label="Aadhaar card 反面"><Image width={200} src={idcardBackPhoto || "-"} fallback={imgError} /></Item>
+                <Item label="人像"><Image width={200} src={idcardPortraitPhoto || "-"} fallback={imgError} /></Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="认证状态">
@@ -73,42 +73,42 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
                 <Item label="联系人">{emergency ? "是" : "否"}</Item>
                 <Item label="活体">{liveness ? "是" : "否"}</Item>
                 <Item label="银行卡">{bank ? "是" : "否"}</Item>
-                <Item label="人脸识别相似值">{similarity ? similarity : ""}</Item>
-                <Item label="认证完成时间">{kycFinishTime ? moment(kycFinishTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
+                <Item label="人脸识别相似值">{similarity ? similarity : "-"}</Item>
+                <Item label="认证完成时间">{kycFinishTime ? moment(kycFinishTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="个人信息">
             <Descriptions size="small" bordered >
-                <Item label="姓名">{nameTrue || ""}</Item>
-                <Item label="性别">{gender || ""}</Item>
-                <Item label="身份证号">{idcardNo || ""}</Item>
-                <Item label="父亲姓名">{fatherName || ""}</Item>
-                <Item label="出生日期">{birth || ""}</Item>
-                <Item label="税务证号">{panId || ""}</Item>
-                <Item label="教育程度">{education || ""}</Item>
-                <Item label="婚姻状况">{marriageStatus || ""}</Item>
-                <Item label="Email">{email || ""}</Item>
-                <Item label="职业">{position || ""}</Item>
-                <Item span={2} label="薪资范围">{salaryRange || ""}</Item>
-                <Item label="家庭地址">{address || ""}</Item>
+                <Item label="姓名">{nameTrue || "-"}</Item>
+                <Item label="性别">{gender || "-"}</Item>
+                <Item label="身份证号">{idcardNo || "-"}</Item>
+                <Item label="父亲姓名">{fatherName || "-"}</Item>
+                <Item label="出生日期">{birth || "-"}</Item>
+                <Item label="税务证号">{panId || "-"}</Item>
+                <Item label="教育程度">{education || "-"}</Item>
+                <Item label="婚姻状况">{marriageStatus || "-"}</Item>
+                <Item label="Email">{email || "-"}</Item>
+                <Item label="职业">{position || "-"}</Item>
+                <Item span={2} label="薪资范围">{salaryRange || "-"}</Item>
+                <Item label="家庭地址">{address || "-"}</Item>
             </Descriptions>
         </CardStyle>
         {type === 'order' && userRiskControlInfo && <CardStyle title="风控信息">
             <Descriptions size="small" bordered >
-                <Item label="风控应用">{userRiskControlInfo?.rcProvider || ""}</Item>
-                <Item label="风控等級">{userRiskControlInfo?.riskRank || ""}</Item>
-                <Item label="风控分数">{userRiskControlInfo?.riskScore === 0 || userRiskControlInfo?.riskScore ? userRiskControlInfo?.riskScore : ""}</Item>
-                <Item label="可借款订单数">{userRiskControlInfo?.maxLoanApplyCount === 0 || userRiskControlInfo?.maxLoanApplyCount ? userRiskControlInfo?.maxLoanApplyCount : ""}</Item>
-                <Item label="可借建议金额">{userRiskControlInfo?.maxAmount === 0 || userRiskControlInfo?.maxAmount ? userRiskControlInfo?.maxAmount : ""}</Item>
-                <Item label="订单风控更新时间">{userRiskControlInfo?.orderReviewUpdateTime ? moment(userRiskControlInfo?.orderReviewUpdateTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
+                <Item label="风控应用">{userRiskControlInfo?.rcProvider || "-"}</Item>
+                <Item label="风控等級">{userRiskControlInfo?.riskRank || "-"}</Item>
+                <Item label="风控分数">{userRiskControlInfo?.riskScore === 0 || userRiskControlInfo?.riskScore ? userRiskControlInfo?.riskScore : "-"}</Item>
+                <Item label="可借款订单数">{userRiskControlInfo?.maxLoanApplyCount === 0 || userRiskControlInfo?.maxLoanApplyCount ? userRiskControlInfo?.maxLoanApplyCount : "-"}</Item>
+                <Item label="可借建议金额">{userRiskControlInfo?.maxAmount === 0 || userRiskControlInfo?.maxAmount ? userRiskControlInfo?.maxAmount : "-"}</Item>
+                <Item label="订单风控更新时间">{userRiskControlInfo?.orderReviewUpdateTime ? moment(userRiskControlInfo?.orderReviewUpdateTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
             </Descriptions>
         </CardStyle>}
         <CardStyle title="设备信息">
             <Descriptions size="small" bordered >
-                <Item label="手机型号">{deviceModel || ""}</Item>
-                <Item label="操作系统版本">{osVersion || ""}</Item>
-                <Item label="客户端平台">{osPlatform || ""}</Item>
-                <Item label="安裝APP版本">{appVersion || ""}</Item>
+                <Item label="手机型号">{deviceModel || "-"}</Item>
+                <Item label="操作系统版本">{osVersion || "-"}</Item>
+                <Item label="客户端平台">{osPlatform || "-"}</Item>
+                <Item label="安裝APP版本">{appVersion || "-"}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="紧急联络人" >
@@ -116,9 +116,9 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
         </CardStyle>
         <CardStyle title="银行卡信息">
             <Descriptions size="small" bordered >
-                <Item label="姓名">{nameTrue || ""}</Item>
-                <Item label="卡号">{bankCardNo || ""}</Item>
-                <Item label="IFSC Code">{ifscCode || ""}</Item>
+                <Item label="姓名">{nameTrue || "-"}</Item>
+                <Item label="卡号">{bankCardNo || "-"}</Item>
+                <Item label="IFSC Code">{ifscCode || "-"}</Item>
             </Descriptions>
         </CardStyle>
     </div>

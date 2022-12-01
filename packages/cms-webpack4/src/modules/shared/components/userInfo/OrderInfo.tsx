@@ -43,32 +43,32 @@ const OrderInfo = (props:{orderId:number} ) => {
     return currentData !== undefined && <div style={{ margin: '16px' }}>
         <CardStyle title="订单信息">
             <Descriptions size="small" bordered >
-                <Item label="订单编号">{orderNo || ""}</Item>
-                <Item label="手机号">{phoneNo || ""}</Item>
-                <Item label="申請渠道">{channelName || ""}</Item>
-                <Item label="APP名称">{appName || ""}</Item>
-                <Item label="申请产品">{productName || ""}</Item>
+                <Item label="订单编号">{orderNo || "-"}</Item>
+                <Item label="手机号">{phoneNo || "-"}</Item>
+                <Item label="申請渠道">{channelName || "-"}</Item>
+                <Item label="APP名称">{appName || "-"}</Item>
+                <Item label="申请产品">{productName || "-"}</Item>
                 <Item label="订单状态">{statusEnum[status] ? <Tag color={statusEnum[status].color}>{statusEnum[status].text}</Tag> : '-'}</Item>
                 <Item label="老客下单">{isOldUser ? "是" : "否"}</Item>
                 <Item label="空放订单">{dummy ? "是" : "否"}</Item>
-                <Item label="借款期限">{lendDays === 0 || lendDays ? lendDays : ""}</Item>
-                <Item label="申请金额">{deviceMoney === 0 || deviceMoney ? deviceMoney : ""}</Item>
-                <Item label="到帐金额">{lendMoney === 0 || lendMoney ? lendMoney : ""}</Item>
-                <Item label="应还金额">{totalMoney === 0 || totalMoney ? totalMoney : ""}</Item>
-                <Item label="申请时间">{applyTime ? moment(applyTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
-                <Item label="审核时间">{reviewTime ? moment(reviewTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
-                <Item label="放款时间">{loanTime ? moment(loanTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
-                <Item label="到期时间">{expireTime ? moment(expireTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
-                <Item label="逾期天数">{overdueDays === 0 || overdueDays ? overdueDays : ""}</Item>
-                <Item label="逾期金额">{overdueMoney === 0 || overdueMoney ? overdueMoney : ""}</Item>
+                <Item label="借款期限">{lendDays === 0 || lendDays ? lendDays : "-"}</Item>
+                <Item label="申请金额">{deviceMoney === 0 || deviceMoney ? deviceMoney : "-"}</Item>
+                <Item label="到帐金额">{lendMoney === 0 || lendMoney ? lendMoney : "-"}</Item>
+                <Item label="应还金额">{totalMoney === 0 || totalMoney ? totalMoney : "-"}</Item>
+                <Item label="申请时间">{applyTime ? moment(applyTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
+                <Item label="审核时间">{reviewTime ? moment(reviewTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
+                <Item label="放款时间">{loanTime ? moment(loanTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
+                <Item label="到期时间">{expireTime ? moment(expireTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
+                <Item label="逾期天数">{overdueDays === 0 || overdueDays ? overdueDays : "-"}</Item>
+                <Item label="逾期金额">{overdueMoney === 0 || overdueMoney ? overdueMoney : "-"}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="还款证明" >
             {
                 utr ?
                     <Descriptions size="small" bordered>
-                        <Item label="UTR" labelStyle={{ width: 150 }} span={3}>{utr || ""}</Item>
-                        <Item label="还款证明单据" labelStyle={{ width: 150 }} span={3}><Image width={200} src={receiptImage || ""} fallback={imgError} /></Item>
+                        <Item label="UTR" labelStyle={{ width: 150 }} span={3}>{utr || "-"}</Item>
+                        <Item label="还款证明单据" labelStyle={{ width: 150 }} span={3}><Image width={200} src={receiptImage || "-"} fallback={imgError} /></Item>
                     </Descriptions>
                     : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
             }

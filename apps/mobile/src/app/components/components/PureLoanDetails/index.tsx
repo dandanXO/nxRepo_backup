@@ -12,6 +12,7 @@ import {Button} from "@frontend/mobile/shared/ui";
 import styled from "styled-components";
 import {i18nComponents} from "../i18n/translations";
 import {useTranslation} from "react-i18next";
+import RepaymentAdsModal from "../../pages/LoanDetailsPage/modal/RepaymentAdsModal";
 
 const StyledUploadReceiptSection = styled.div`
   .uploadButton {
@@ -45,6 +46,8 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     const [showRepaymentModal, setShowRepaymentModal] = useState(false);
     const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] =
         useState(false);
+    const [showRepaymentAdsModal, setShowRepaymentAdsModal] = useState(false);
+
     const [repayBalance, setRepayBalance] = useState(
         props?.currentData?.balance
     );
@@ -75,22 +78,32 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
           )}
           {showRepaymentModal && (
             <RepaymentModal
-              balance={props.currentData.balance}
+              balance={props.currentData?.balance}
               setRepayBalance={setRepayBalance}
               setShowRepaymentModal={setShowRepaymentModal}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
-              handlePostRepayCreate={props.handlePostRepayCreate}
               paymentMethodList={props.paymentMethodList}
               setPayType={props.setPayType}
+              setShowRepaymentAdsModal={setShowRepaymentAdsModal}
+            />
+          )}
+          {showRepaymentAdsModal && (
+            <RepaymentAdsModal
+              balance={props.currentData?.balance}
+              handlePostRepayCreate={props.handlePostRepayCreate}
+              setShowRepaymentAdsModal={setShowRepaymentAdsModal}
+              setShowRepaymentModal={setShowRepaymentModal}
+              setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
             />
           )}
           {showRepaymentNoticeModal && (
             <RepaymentNoticeModal
-              balance={repayBalance}
+              balance={repayBalance || 0}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
               handlePostRepayCreate={props.handlePostRepayCreate}
             />
           )}
+
 
           <LoanInfo
             {...props.currentData}

@@ -15,6 +15,7 @@ import {
 import {environment} from "../../../../../../environments/environment";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nRepaymentModal} from "./i18n/translations";
+import RepaymentAdsModal from "../RepaymentAdsModal";
 
 const Paragraph = styled.div`
     text-align: left;
@@ -88,9 +89,10 @@ type RepaymentModalProps = {
     setRepayBalance: React.Dispatch<React.SetStateAction<number>>;
     setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
-    handlePostRepayCreate: any;
     paymentMethodList: string[];
     setPayType: React.Dispatch<React.SetStateAction<number>>;
+    // FIXME:
+    setShowRepaymentAdsModal: React.Dispatch<React.SetStateAction<boolean>>;
 } & WithTranslation;
 
 const RepaymentModal = (props: RepaymentModalProps) => {
@@ -100,14 +102,11 @@ const RepaymentModal = (props: RepaymentModalProps) => {
     const [paymentMethodValue, setPaymentMethodValue] = useState(0);
 
     const handleConfirm = () => {
-        const formBalanceValue = Number(balanceValue.replace(`${environment.currency}`, ""));
-        if(formBalanceValue === 0) return
-        props.handlePostRepayCreate(
-            false,
-            false,
-            formBalanceValue
-        );
-        props.setShowRepaymentModal(false);
+      // self
+      props.setShowRepaymentModal(false);
+      // other
+      props.setShowRepaymentAdsModal(true);
+
     };
     return (
         <div>

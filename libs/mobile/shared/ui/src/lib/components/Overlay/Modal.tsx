@@ -6,8 +6,9 @@ import CloseButton from '../Modal/CloseButton';
 import Content from '../Modal/Content';
 import styled from 'styled-components';
 
-const ModalPopup = styled(Popup)`
+const ModalPopup = styled(Popup)<{overflow?: string}>`
   justify-content: flex-start;
+  overflow: ${props => props.overflow ? props.overflow : "inherit"};
 `;
 const ModalContent = styled(Content)`
   margin: 0;
@@ -27,6 +28,8 @@ interface IModalProps {
   enableClose?: boolean;
   enableTitleHorizontal?: boolean;
   onCancel?: () => void;
+  contentNoStyle?: boolean;
+  overflow?: string;
 }
 interface ModalState {
   show: boolean;
@@ -81,7 +84,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
           //     }
           // }}
         >
-          <ModalPopup width={this.props.width} height={this.props.height}>
+          <ModalPopup width={this.props.width} height={this.props.height} overflow={this.props.overflow}>
             {this.props.enableClose && (
               <div
                 onClick={() => {
@@ -99,7 +102,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
             {/*        <Horizontal/>*/}
             {/*    )}*/}
             {/*</div>*/}
-            <ModalContent>
+            <ModalContent contentNoStyle={this.props.contentNoStyle}>
               {this.props.content &&
                 typeof this.props.content === 'string' &&
                 this.props.content}

@@ -9,6 +9,7 @@ interface IModalWrapperProps {
   content: (hide: () => void) => React.ReactElement;
   // content?: string | ModalContentFunction<any>;
   show: boolean;
+  contentNoStyle?: boolean;
 }
 
 type ModalWrapperProps = IModalWrapperProps & IModalProps;
