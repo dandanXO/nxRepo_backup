@@ -45,7 +45,7 @@ const LoanInfo = ({userId}:UserId) => {
                 '4': { text: '待还款', color: 'blue' },
                 '5': { text: '已逾期', color: 'gold' },
                 '6': { text: '已结清', color: 'orange' },
-                '7': { text: '已展期', color: 'default' },
+                '7': { text: '已展期', color: 'lightgray' },
             },
         },
         { title: '申请时间', dataIndex: 'applyTime', key: 'applyTime', valueType: 'dateTime' },
