@@ -27,6 +27,7 @@ const OrderInfo = (props:{orderId:number} ) => {
     }, [currentData]);
     const statusEnum = {
         '': { text: '不限' },
+        '1': { text: '机审中', color: 'default'},
         '6': { text: '审核中', color: 'blue' },
         '7': { text: '审核拒绝', color: 'red' },
         '8': { text: '放款中', color: 'purple' },
@@ -35,10 +36,10 @@ const OrderInfo = (props:{orderId:number} ) => {
         '11': { text: '放款失败', color: 'red' },
         '12': { text: '已逾期', color: 'orange' },
     };
-    const {orderNo,phoneNo,channelName,appName,productName,status,isOldUser,dummy,lendDays,deviceMoney,lendMoney,totalMoney,
-        applyTime,reviewTime,loanTime,expireTime,overdueDays,overdueMoney,utr,receiptImage
-    
-    }=orderDetail;
+    const { orderNo, phoneNo, channelName, appName, productName, status, isOldUser, dummy, lendDays, deviceMoney,
+        lendMoney, totalMoney, applyTime, reviewTime, loanTime, expireTime, overdueDays, overdueMoney, utr, receiptImage
+    } = orderDetail;
+
     return currentData !== undefined && <div style={{ margin: '16px' }}>
         <CardStyle title="订单信息">
             <Descriptions size="small" bordered >
@@ -47,17 +48,17 @@ const OrderInfo = (props:{orderId:number} ) => {
                 <Item label="申請渠道">{channelName || ""}</Item>
                 <Item label="APP名称">{appName || ""}</Item>
                 <Item label="申请产品">{productName || ""}</Item>
-                <Item label="订单状态">{status ? <Tag color={statusEnum[status].color}>{statusEnum[status].text}</Tag> : ''}</Item>
+                <Item label="订单状态">{statusEnum[status] ? <Tag color={statusEnum[status].color}>{statusEnum[status].text}</Tag> : '-'}</Item>
                 <Item label="老客下单">{isOldUser ? "是" : "否"}</Item>
                 <Item label="空放订单">{dummy ? "是" : "否"}</Item>
                 <Item label="借款期限">{lendDays === 0 || lendDays ? lendDays : ""}</Item>
                 <Item label="申请金额">{deviceMoney === 0 || deviceMoney ? deviceMoney : ""}</Item>
                 <Item label="到帐金额">{lendMoney === 0 || lendMoney ? lendMoney : ""}</Item>
                 <Item label="应还金额">{totalMoney === 0 || totalMoney ? totalMoney : ""}</Item>
-                <Item label="申请时间">{moment(applyTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
-                <Item label="审核时间">{moment(reviewTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
-                <Item label="放款时间">{moment(loanTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
-                <Item label="到期时间">{moment(expireTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
+                <Item label="申请时间">{applyTime ? moment(applyTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
+                <Item label="审核时间">{reviewTime ? moment(reviewTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
+                <Item label="放款时间">{loanTime ? moment(loanTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
+                <Item label="到期时间">{expireTime ? moment(expireTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
                 <Item label="逾期天数">{overdueDays === 0 || overdueDays ? overdueDays : ""}</Item>
                 <Item label="逾期金额">{overdueMoney === 0 || overdueMoney ? overdueMoney : ""}</Item>
             </Descriptions>

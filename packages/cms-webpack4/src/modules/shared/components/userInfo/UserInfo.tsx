@@ -50,11 +50,11 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
     return currentData !== undefined && <div style={{ margin: '16px' }}>
         <CardStyle title="注册信息">
             <Descriptions size="small" bordered >
-                <Item label="用户ID">{userDetail.userId || ""}</Item>
+                <Item label="用户ID">{userDetail.userId || "-"}</Item>
                 <Item label="注册渠道">{channelName || ""}</Item>
                 <Item label="注册包名">{appName || ""}</Item>
                 <Item label="手机号">{phoneNo || ""}</Item>
-                <Item label="注册时间">{moment(addTime).format('YYYY-MM-DD HH:mm:ss')}</Item>
+                <Item label="注册时间">{addTime ? moment(addTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="身份信息">
@@ -74,7 +74,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
                 <Item label="活体">{liveness ? "是" : "否"}</Item>
                 <Item label="银行卡">{bank ? "是" : "否"}</Item>
                 <Item label="人脸识别相似值">{similarity ? similarity : ""}</Item>
-                <Item label="认证完成时间">{kycFinishTime===null?"":moment(kycFinishTime).format('YYYY-MM-DD HH:mm:ss')}</Item>
+                <Item label="认证完成时间">{kycFinishTime ? moment(kycFinishTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="个人信息">
@@ -100,7 +100,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
                 <Item label="风控分数">{userRiskControlInfo?.riskScore === 0 || userRiskControlInfo?.riskScore ? userRiskControlInfo?.riskScore : ""}</Item>
                 <Item label="可借款订单数">{userRiskControlInfo?.maxLoanApplyCount === 0 || userRiskControlInfo?.maxLoanApplyCount ? userRiskControlInfo?.maxLoanApplyCount : ""}</Item>
                 <Item label="可借建议金额">{userRiskControlInfo?.maxAmount === 0 || userRiskControlInfo?.maxAmount ? userRiskControlInfo?.maxAmount : ""}</Item>
-                <Item label="订单风控更新时间">{moment(userRiskControlInfo?.orderReviewUpdateTime).format('YYYY-MM-DD HH:mm:ss') || ""}</Item>
+                <Item label="订单风控更新时间">{userRiskControlInfo?.orderReviewUpdateTime ? moment(userRiskControlInfo?.orderReviewUpdateTime).format('YYYY-MM-DD HH:mm:ss') : ""}</Item>
             </Descriptions>
         </CardStyle>}
         <CardStyle title="设备信息">
