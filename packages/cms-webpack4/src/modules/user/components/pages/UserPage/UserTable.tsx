@@ -119,7 +119,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     }
     const statusEnum = {
         '': { text: '不限' },
-        '0': { text: '未認證', color: 'orange' },
+        '0': { text: '未认证', color: 'orange' },
         '4': { text: '黑名单', color: 'default' },
         '13': { text: '禁止登入', color: 'default' },
         '14': { text: '认证通过', color: 'success' },
