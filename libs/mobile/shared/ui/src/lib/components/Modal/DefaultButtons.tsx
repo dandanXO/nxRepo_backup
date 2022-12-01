@@ -35,7 +35,7 @@ const ConfirmButton = styled(StyledlessButton)<ButtonProps>`
   font-weight: 600;
   /* Other */
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0 15px;
 `;
 
 ConfirmButton.displayName = 'ConfirmButton';

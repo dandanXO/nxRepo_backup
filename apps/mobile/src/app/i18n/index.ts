@@ -22,6 +22,7 @@ import {i18nProductAdModalListPage} from "../components/pages/ProductAdModalList
 import {
   i18nUploadingFileModal
 } from "../components/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations";
+import {i18nRepaymentAdsModal} from "../components/pages/LoanDetailsPage/modal/RepaymentAdsModal/i18n/translations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -64,6 +65,7 @@ i18next
         [i18nExtensionDetailModal.namespace]: i18nExtensionDetailModal.translation.en_US,
         [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.en_US,
         [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.en_US,
+        [i18nRepaymentAdsModal.namespace]: i18nRepaymentAdsModal.translation.en_US,
 
         // NOTE: ProductAdModalListPage
         [i18nProductAdModalListPage.namespace]: i18nProductAdModalListPage.translation.en_US,
@@ -114,6 +116,7 @@ i18next
         [i18nExtensionDetailModal.namespace]: i18nExtensionDetailModal.translation.bn_BD,
         [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.bn_BD,
         [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.bn_BD,
+        [i18nRepaymentAdsModal.namespace]: i18nRepaymentAdsModal.translation.bn_BD,
 
         // NOTE: ProductAdModalListPage
         [i18nProductAdModalListPage.namespace]: i18nProductAdModalListPage.translation.bn_BD,
@@ -134,7 +137,8 @@ i18next
 
     interpolation: {
       escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
-    }
+    },
+    // debug: true,
   }, (err, t) => {
     console.log("3:", i18next.t('Welcome to React', { ns: 'common' }));
   });
