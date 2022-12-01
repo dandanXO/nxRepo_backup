@@ -1,4 +1,10 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
+const argv = yargs(hideBin(process.argv)).argv
+// console.log("argv.env", argv.env);
+
 const commonRules = [
     {
         test: /\.(tsx|ts)$/,
