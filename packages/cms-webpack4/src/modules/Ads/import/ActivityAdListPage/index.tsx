@@ -4,7 +4,7 @@ import {AdTemplate3} from "./components/AdTemplate3";
 import styled from "styled-components";
 import queryString from "query-string";
 import Android260x720 from "./720.svg";
-import {MockAdTemplate1Data} from "./MockAdTemplate1Data";
+import {MockAdTemplate1Data, MockAdTemplate2Data} from "./MockAdTemplate1Data";
 
 const Page = styled.div`
   //background: #f5faf4;
@@ -37,7 +37,8 @@ const parsedQueryString = queryString.parse(window.location.search);
 
 interface IActivityAdListPage {
   type?: string;
-  data?: AdTemplate1;
+  // data?: AdTemplate1 | AdTemplate2;
+    data?: any;
 }
 
 export const ActivityAdListPage = (props: IActivityAdListPage) => {
@@ -47,7 +48,7 @@ export const ActivityAdListPage = (props: IActivityAdListPage) => {
       return <AdTemplate1 data={props.data || MockAdTemplate1Data}/>;
     }
     case "2": {
-      return <AdTemplate2/>
+      return <AdTemplate2 data={props.data || MockAdTemplate2Data}/>
     }
     case "3": {
       return <AdTemplate3/>
@@ -55,6 +56,15 @@ export const ActivityAdListPage = (props: IActivityAdListPage) => {
     default:
       return <AdTemplate1 data={props.data || MockAdTemplate1Data}/>;
   }
+}
+
+function instanceOfTemplate1(obj: any): obj is AdTemplate1 {
+    return 'cards' in obj;
+    // return obj.type === 'adTemplate1'
+}
+function instanceOfTemplate2(obj: any): obj is AdTemplate2 {
+    return 'topCard' in obj;
+    // return obj.type === 'adTemplate2'
 }
 
 export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
@@ -66,7 +76,7 @@ export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
       break;
     }
     case "2": {
-      adTemplate = <AdTemplate2/>
+      adTemplate = <AdTemplate2 data={props.data || MockAdTemplate2Data}/>
       break;
     }
     case "3": {

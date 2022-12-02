@@ -5,7 +5,8 @@ import {ModalContent} from "../../../../shared/components/AdminTable";
 import {MockAdTemplate1Data} from "../../../import/ActivityAdListPage/MockAdTemplate1Data";
 import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
 import {AdsTemplateData} from "../../../data/AdsTemplateData";
-import {MockActivityBannerResponse} from "../../../service/mock/MockActivityBannerResponse";
+import {MockActivityBannerResponseData1} from "../../../service/mock/MockActivityBannerResponseData1";
+import {MockActivityBannerResponseData2} from "../../../service/mock/MockActivityBannerResponseData2";
 
 interface IUseAdminFormModal {
     // initialValues: any
@@ -52,7 +53,8 @@ interface IActivityAdsPage {
 //     enabled: true,
 // };
 
-const MockFormStore = MockActivityBannerResponse;
+// const MockFormStore = MockActivityBannerResponseData1;
+const MockFormStore = MockActivityBannerResponseData2;
 
 export const ActivityAdsPage = () => {
 
@@ -92,6 +94,8 @@ export const ActivityAdsPage = () => {
         const originalValues = form.getFieldValue("ads");
         // console.log(form.getFieldValue("ads"))
         // console.log("changedFields", changedFields);
+
+        // NOTE: Template1
         if(changedFields[0].name[0] === "ads") {
             const index = changedFields[0].name[1];
             const key = changedFields[0].name[2];

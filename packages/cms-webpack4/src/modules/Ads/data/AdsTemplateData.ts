@@ -8,7 +8,7 @@ export const getDefaultActivityBannerContent = (index: number) => ({
     action: "APPLY_LOAN",
     actionUrl: "",
     payload: {
-        isBrand: false,
+        // isBrand: false,
         title: "優惠名稱" + index,
         description1: "- 3.5%",
         description2: "原利息35%",

@@ -1,20 +1,23 @@
-import {Button, Col, Divider, Form, FormInstance, Input, Radio, Row, Select, Switch, Typography} from "antd";
+import {Form, FormInstance, Input, Radio, Switch, Typography} from "antd";
 import React from "react";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 // import {Store} from "antd/es/form/interface"
 import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
 import styled from "styled-components";
-import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {IAdsTemplate} from "../../../types/IAdsTemplate";
 import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
-import {getDefaultActivityBannerContent} from "../../../data/AdsTemplateData";
 import {
     AdTemplate1,
     AdTemplate1BrandCard,
     AdTemplate1Card
 } from "../../../import/ActivityAdListPage/components/AdTemplate1";
-import {AdTemplate2Card} from "../../../import/ActivityAdListPage/components/AdTemplate2";
-import {ActivityBanner, AdsTemplate1Payload1, AdsTemplate1Payload2} from "../../../service/types";
+import {
+    AdTemplate2,
+    AdTemplate2BrandCard,
+    AdTemplate2Card
+} from "../../../import/ActivityAdListPage/components/AdTemplate2";
+import {ActivityBanner} from "../../../service/types";
+import {getFormItemForTemplateType} from "./getFormItemForTemplateType";
 // import {IAdsFormStore} from "../../../types/IAdsFormStore";
 
 const { Title, Text } = Typography;
@@ -65,7 +68,7 @@ function instanceOfCard(obj: any): obj is AdTemplate1Card {
     return 'description1' in obj;
 }
 
-const getTemplate1AdTemplate1Data = (ads?: ActivityBanner[]): AdTemplate1 | null => {
+const getTemplate1AdTemplate1Data = (ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]): AdTemplate1 | null => {
     if(!ads) return;
     return {
         brandCard: instanceOfBrandCard(ads[0].payload) && {
@@ -74,7 +77,7 @@ const getTemplate1AdTemplate1Data = (ads?: ActivityBanner[]): AdTemplate1 | null
             price: instanceOfBrandCard(ads[0].payload) && ads[0].payload.price,
             description: instanceOfBrandCard(ads[0].payload) && ads[0].payload.description,
         },
-        cards: ads.slice(1, ads.length).map((item: ActivityBanner) => {
+        cards: ads.slice(1, ads.length).map((item: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>) => {
             return {
                 action: item.action,
                 actionUrl: item.actionUrl,
@@ -86,6 +89,43 @@ const getTemplate1AdTemplate1Data = (ads?: ActivityBanner[]): AdTemplate1 | null
         })
     }
 }
+
+function instanceOfBrandCard2(obj: any): obj is AdTemplate2BrandCard {
+    return 'priceUnit' in obj;
+}
+
+function instanceOfCard2(obj: any): obj is AdTemplate2Card {
+    return 'title' in obj;
+}
+
+
+const getTemplate2AdTemplate1Data = (ads?: ActivityBanner<AdTemplate2BrandCard, AdTemplate2Card>[]): AdTemplate2 | null => {
+    if(!ads) return;
+    return {
+        brandCard: {
+            title1: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.title1,
+            title2: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.title2,
+            priceUnit: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.priceUnit,
+            price: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.price,
+            actionName: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.actionName,
+            action: ads[0].action,
+            actionUrl: ads[0].actionUrl,
+        },
+        topCard: {
+            title: instanceOfCard2(ads[1].payload) && ads[1].payload.title,
+            actionName: instanceOfCard2(ads[1].payload) && ads[1].payload.actionName,
+            action: ads[1].action,
+            actionUrl: ads[1].actionUrl,
+        },
+        bottomCard: {
+            title: instanceOfCard2(ads[2].payload) && ads[2].payload.title,
+            actionName: instanceOfCard2(ads[2].payload) && ads[2].payload.actionName,
+            action: ads[2].action,
+            actionUrl: ads[2].actionUrl,
+        },
+    }
+}
+
 export const ActivityAdsForm = (props: IActivityAdsForm) => {
 
     const templateType = Form.useWatch('templateType', props.form);
@@ -93,8 +133,13 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
 
     const ads = Form.useWatch('contents', props.form);
     console.log("ads", ads);
+    let adTemplate1Data;
+    if(templateType === 1) {
+        adTemplate1Data = getTemplate1AdTemplate1Data(ads);
+    } else if(templateType === 2) {
+        adTemplate1Data = getTemplate2AdTemplate1Data(ads);
+    }
 
-    const adTemplate1Data = getTemplate1AdTemplate1Data(ads);
     // NOTE:
     return (
         <FormContainer>
@@ -142,185 +187,7 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                     </Radio.Group>
                 </Form.Item>
 
-
-                <Form.Item label="广告列表" required>
-                    <Form.List name="contents">
-                        {(fields, { add, remove }) => {
-                            // console.log("fields", fields);
-                            return (
-                                <>
-                                    <Divider orientation="left" style={{ color: "#ec606a"}}>主打广告</Divider>
-                                    <Row
-                                        gutter={[8, 8]}
-                                    >
-                                        <Col span={24} >
-                                            <Form.Item
-                                                required
-                                                label={"广告标题"}
-                                                name={[0, 'payload', 'title']}
-                                            >
-                                                <Input placeholder="广告标题" />
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={12}>
-                                            <Form.Item
-                                                required
-                                                label={"价格币别"}
-                                                name={[0, 'payload', 'priceUnit']}
-                                            >
-                                                <Input placeholder="价格币别"/>
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={12}>
-                                            <Form.Item
-                                                required
-                                                label={"币别价格"}
-                                                name={[0, 'payload', 'price']}
-                                            >
-                                                <Input placeholder="币别价格"/>
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={12}>
-                                            <Form.Item
-                                                required
-                                                label={"广告说明"}
-                                                name={[0, 'payload', 'description']}
-                                            >
-                                                <Input placeholder="广告说明"/>
-                                            </Form.Item>
-                                        </Col>
-                                    </Row>
-                                    {fields.map(({ key, name, ...restField }, index) => {
-                                        // console.log("name", name)
-                                        if(index === 0) return null;
-                                        return (
-                                            <div key={index}>
-                                                <Divider orientation="left" style={{}}>广告 - {index + 1}</Divider>
-                                                <Row key={key}
-                                                     gutter={[8, 8]}
-                                                     style={{
-                                                         // borderBottom: "1px solid #aaa",
-                                                         // marginBottom: 16
-                                                     }}
-                                                >
-                                                    <Col span={23}>
-                                                        <Row
-                                                            gutter={[8, 8]}
-                                                        >
-                                                            <Col span={24} >
-                                                                <Form.Item
-                                                                    label={"广告标题"}
-                                                                    {...restField}
-                                                                    name={[name, 'payload', 'title']}
-                                                                    rules={[{ required: true }]}
-                                                                >
-                                                                    <Input placeholder="广告标题" />
-                                                                </Form.Item>
-                                                            </Col>
-                                                            <Col span={12}>
-                                                                <Form.Item
-                                                                    label={"广告说明1"}
-                                                                    {...restField}
-                                                                    name={[name, 'payload', 'description1']}
-                                                                    rules={[{ required: true }]}
-                                                                >
-                                                                    <Input placeholder="广告说明1"/>
-                                                                </Form.Item>
-                                                            </Col>
-                                                            <Col span={12}>
-                                                                <Form.Item
-                                                                    label={"广告说明2"}
-                                                                    {...restField}
-                                                                    name={[name, 'payload', 'description2']}
-                                                                    rules={[{ required: true }]}
-                                                                >
-                                                                    <Input placeholder="广告说明2"/>
-                                                                </Form.Item>
-                                                            </Col>
-                                                            <Col span={24}>
-                                                                <Form.Item
-                                                                    label={"按钮名称"}
-                                                                    {...restField}
-                                                                    name={[name, 'payload', 'actionName']}
-                                                                    rules={[{ required: true }]}
-                                                                >
-                                                                    <Input placeholder="按钮名称"/>
-                                                                </Form.Item>
-                                                            </Col>
-                                                            <Col span={12}>
-                                                                <Form.Item
-                                                                    label={"按钮动作"}
-                                                                    {...restField}
-                                                                    name={[name, 'action']}
-                                                                    rules={[{ required: true }]}
-                                                                >
-                                                                    <Select>
-                                                                        <Select.Option value="APPLY_LOAN">跳轉至付款頁</Select.Option>
-                                                                        <Select.Option value="POP_URL">跳轉至自定義網址</Select.Option>
-                                                                    </Select>
-                                                                </Form.Item>
-                                                            </Col>
-                                                            <Col span={24}>
-                                                                <Form.Item
-                                                                    noStyle
-                                                                    shouldUpdate={(prevValues, curValues) => {
-                                                                        // console.log("prevValues")
-                                                                        // console.log(prevValues)
-                                                                        // console.log("curValues")
-                                                                        // console.log(curValues)
-                                                                        return prevValues.contents[name].action !== curValues.contents[name].action
-                                                                    }}
-                                                                >
-                                                                    {({ getFieldValue }) => {
-                                                                        let action = getFieldValue(['contents', name, 'action']);
-                                                                        // console.log("action", action)
-                                                                        if (action == "POP_URL") {
-                                                                            return (
-                                                                                <Form.Item name={[name, 'actionUrl']} label="目標網址" rules={[{ required: true }]}>
-                                                                                    <Input placeholder="目標網址"/>
-                                                                                </Form.Item>
-                                                                            )
-                                                                        } else {
-                                                                            return null;
-                                                                        }
-                                                                    }}
-                                                                </Form.Item>
-                                                            </Col>
-                                                        </Row>
-                                                    </Col>
-
-                                                    <Col span={1}>
-                                                        <Row >
-                                                            <Col span={24}>
-                                                                <MinusCircleOutlined onClick={() => remove(name)} />
-                                                            </Col>
-                                                        </Row>
-                                                    </Col>
-
-                                                </Row>
-                                            </div>
-                                        )
-                                    })}
-                                    <Row/>
-
-                                    <Row>
-                                        <Col span={12}>
-                                            <Form.Item>
-                                                <Button
-                                                    type="dashed"
-                                                    onClick={() => add(getDefaultActivityBannerContent(ads.length + 1),
-                                                        ads.length)} block icon={<PlusOutlined />}>
-                                                    添加
-                                                </Button>
-                                            </Form.Item>
-                                        </Col>
-                                    </Row>
-
-                                </>
-                            )
-                        }}
-                    </Form.List>
-                </Form.Item>
+                {getFormItemForTemplateType(templateType, ads)}
 
                 <Form.Item
                     label={'状态'}

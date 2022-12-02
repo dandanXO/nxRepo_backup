@@ -5,8 +5,9 @@ import MainCardImg from "./promotions_bg@2x.png";
 import {AdContainer} from "../AdContainer";
 
 export interface AdTemplate1 {
-  brandCard: AdTemplate1BrandCard;
-  cards: AdTemplate1Card[];
+    type?: "adTemplate1",
+    brandCard: AdTemplate1BrandCard;
+    cards: AdTemplate1Card[];
 }
 
 export interface AdTemplate1BrandCard {

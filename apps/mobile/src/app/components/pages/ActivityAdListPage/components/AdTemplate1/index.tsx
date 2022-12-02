@@ -5,8 +5,9 @@ import MainCardImg from "./promotions_bg@2x.png";
 import {AdContainer} from "../AdContainer";
 
 export interface AdTemplate1 {
-  brandCard: AdTemplate1BrandCard;
-  cards: AdTemplate1Card[];
+    type?: "adTemplate1",
+    brandCard: AdTemplate1BrandCard;
+    cards: AdTemplate1Card[];
 }
 
 export interface AdTemplate1BrandCard {
@@ -51,6 +52,10 @@ const StyledBrandTitle = styled.div`
   font-size: 11px;
   margin-top: 9px;
   margin-bottom: 15px;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const StyledPrice = styled.div`
@@ -58,6 +63,10 @@ const StyledPrice = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: end;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 const StyledBrandPriceUnit = styled.div`
   color: #ffffff;
