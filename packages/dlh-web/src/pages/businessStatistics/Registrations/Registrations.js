@@ -95,8 +95,19 @@ class Registrations extends Component {
                 children: [
                     // 日期
                     { title: props.intl.formatMessage({ id: "page.table.date" }), dataIndex: 'day', key: 'day', },
-                    // 新客总注册量
-                    { title: props.intl.formatMessage({ id: "page.table.new.customer.registration.quantity" }), dataIndex: 'registerCount', key: 'registerCount', width: 60, },
+                    // OTP发送量
+                    { title: props.intl.formatMessage({ id: "page.table.new.customer.otp.quantity" }), dataIndex: 'otpCount', key: 'otpCount'},
+                    // 注册量/注册率
+                    {
+                      title: <TableTitle text={"page.table.register"} />,
+                      dataIndex: 'registerCount',
+                      key: 'registerCount',
+                      render (text, record) {
+                        const { registerRate } = record;
+                        if (!text) { return ''; }
+                        return (<div><div>{text}</div><div>({registerRate})</div></div>);
+                      }
+                    }
                 ]
             },
             {
