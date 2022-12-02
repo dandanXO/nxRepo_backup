@@ -22,8 +22,9 @@ export interface AdTemplate {
 
 export interface AdTemplateCard {
   // NOTICE: 得與 APP Team 討論
-  action: any;
-  actionName: null | string;
+  action: "APPLY_LOAN" | "POP_URL";
+  actionName: string;
+  actionUrl?: string;
 }
 
 const CategoryText = styled.div`

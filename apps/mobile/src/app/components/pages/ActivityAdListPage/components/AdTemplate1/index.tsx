@@ -9,7 +9,7 @@ export interface AdTemplate1 {
   cards: AdTemplate1Card[];
 }
 
-export interface AdTemplate1BrandCard extends AdTemplateCard{
+export interface AdTemplate1BrandCard {
   title: string;
   priceUnit: string;
   price: string;
@@ -167,8 +167,8 @@ export const AdTemplate1 = (props: IAdTemplate1) => {
     <AdTemplateContainer>
       <ContainerContent>
         <AdTemplate1BrandCardUI data={props.data.brandCard} onClick={onClickToDoLoan}/>
-        {props.data.cards.map((data) => {
-          return <AdTemplate1CardUI data={data} onClick={onClickToPopup}/>
+        {props.data?.cards?.map((data, index) => {
+          return <AdTemplate1CardUI key={index} data={data} onClick={onClickToPopup}/>
         })}
       </ContainerContent>
     </AdTemplateContainer>
