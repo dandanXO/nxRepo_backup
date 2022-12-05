@@ -7,38 +7,24 @@ import { useEffect, useState } from 'react';
 import { FormModalProps } from '../../../../../types/FormModal';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-const SmsConfigTable = ((props:FormModalProps) => {
+const SmsConfigTable = ((props:FormModalProps & {isAddOrEditSuccess?:boolean}) => {
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess }] = useLazyGetUserContactsListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const columns: ProColumns<GetUserContacts>[] = [
-        {
-            title: '操作',
-            valueType: 'option',
-            key: 'option',
-            align: 'left',
-            width: 100,
-            render: (text, record, _, action) => {
-                return [<a key="editable" onClick={() => props.setShowModal(true)} >修改</a>,
-                <a key="editable" onClick={() => props.setShowModal(true)} >删除</a>]
-            }
-        },
-        { title: '短信名称', dataIndex: 'name', key: 'name' },
-        { title: '应用短信商', dataIndex: 'phone', key: 'phone' },
-        { title: '短信类型', dataIndex: 'name', key: 'name' },
-        { title: '备注', dataIndex: 'phone', key: 'phone' },
-        { title: '创建时间', dataIndex: 'lastUpdateTime', key: 'lastUpdateTime', valueType: 'dateTime' },
-        { title: '更新时间', dataIndex: 'lastUpdateTime', key: 'lastUpdateTime', valueType: 'dateTime' },
-    ]
 
     const [pageable, setPageable] = useState({ pageNum: 1, pageSize: 10 })
-    const [addressBook, setAddressBook] = useState<any>()
+    const [addressBook, setAddressBook] = useState<any>();
+
     useEffect(() => {
         triggerGetList(pageable)
     }, [pageable]);
+
+    useEffect(() => {
+        setPageable({ pageNum: 1, pageSize: 20 })
+    }, [props.isAddOrEditSuccess]);
 
     useEffect(() => {
         if (currentData !== undefined) {
@@ -50,6 +36,32 @@ const SmsConfigTable = ((props:FormModalProps) => {
     const pageOnChange = (current, pageSize) => {
         setPageable({ ...pageable, pageNum: current, pageSize: pageSize })
     }
+
+    const handleEdit=()=>{
+        props.setShowModal(true)
+        props.setIsEdit(true)
+    }
+
+    const columns: ProColumns<GetUserContacts>[] = [
+        {
+            title: '操作',
+            valueType: 'option',
+            key: 'option',
+            align: 'left',
+            width: 100,
+            render: (text, record, _, action) => {
+                return [<a key="editable" onClick={handleEdit} >修改</a>,
+                <a key="editable" onClick={() => props.setShowModal(true)} >删除</a>]
+            }
+        },
+        { title: '短信名称', dataIndex: 'name', key: 'name' },
+        { title: '应用短信商', dataIndex: 'phone', key: 'phone' },
+        { title: '短信类型', dataIndex: 'name', key: 'name' },
+        { title: '备注', dataIndex: 'phone', key: 'phone' },
+        { title: '创建时间', dataIndex: 'lastUpdateTime', key: 'lastUpdateTime', valueType: 'dateTime' },
+        { title: '更新时间', dataIndex: 'lastUpdateTime', key: 'lastUpdateTime', valueType: 'dateTime' },
+    ]
+
 
     return (
 

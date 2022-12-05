@@ -4,21 +4,17 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
 import AdminPage from '../../../../shared/components/AdminPage';
 import SmsConfigTable from './SmsConfigTable';
+import SmsConfigModal from './SmsConfigModal';
+import useAddOrEditFormModal from '../../../../shared/hooks/useAddOrEditModal';
+import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../../../api/MerchantApi";
 const SmsConfigPage = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [form] = Form.useForm();
-    // const [postBlackList, { isLoading, isSuccess }] = usePostBlackListMutation();
+
+    const { form, showModal, setShowModal, isEdit, setIsEdit, handleAddOrEdit, isSuccess, } = useAddOrEditFormModal(usePostMerchantCreateMutation, usePutMerchantEditMutation);
 
     const onFinish = (values: any) => {
-        // postBlackList(values);
-        form.resetFields();
-        setShowModal(false)
+        const formValues = isEdit ? { merchantId: values.merchantId, ...values } : values;
+        handleAddOrEdit(formValues)
     };
-
-    const handleCloseModal = () => {
-        setShowModal(false)
-        form.resetFields()
-    }
 
     return (
         <AdminPage
@@ -29,14 +25,19 @@ const SmsConfigPage = () => {
             }}
         >
             <>
-                {/* <SmsConfigTable setShowModal={setShowModal} isPostBlackListSuccess={isSuccess}/> */}
-                <SmsConfigTable setShowModal={setShowModal} />
-                {/* <AddBlackListModal
+                <SmsConfigTable
+                    setShowModal={setShowModal}
+                    isAddOrEditSuccess={isSuccess}
+                    setIsEdit={setIsEdit}
+                />
+                <SmsConfigModal
                     showModal={showModal}
-                    handleCloseModal={handleCloseModal}
+                    setShowModal={setShowModal}
                     onFinish={onFinish}
                     form={form}
-                /> */}
+                    isSuccess={isSuccess}
+                    isEdit={isEdit}
+                />
             </>
         </AdminPage>
     );
