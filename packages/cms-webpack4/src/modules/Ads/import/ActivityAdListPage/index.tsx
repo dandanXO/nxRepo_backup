@@ -4,9 +4,9 @@ import {AdTemplate3} from "./components/AdTemplate3";
 import styled from "styled-components";
 import queryString from "query-string";
 import Android260x720 from "./720.svg";
-import {MockAdTemplate1Data} from "./MockAdTemplate1Data";
-import {MockAdTemplate2Data} from "./MockAdTemplate2Data";
-import {MockAdTemplate3Data} from "./MockAdTemplate3Data";
+import {MockAdTemplate1Data} from "./mock/MockAdTemplate1Data";
+import {MockAdTemplate2Data} from "./mock/MockAdTemplate2Data";
+import {MockAdTemplate3Data} from "./mock/MockAdTemplate3Data";
 
 const Page = styled.div`
   //background: #f5faf4;

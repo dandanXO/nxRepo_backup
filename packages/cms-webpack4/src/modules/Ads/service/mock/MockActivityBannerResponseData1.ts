@@ -26,10 +26,12 @@ export const MockActivityBannerResponseData1: ActivityBannerResponse<AdTemplate1
             payload: {
                 // NOTICE: REFACTOR
                 action: "APPLY_LOAN",
+                actionUrl: "",
+                actionName: "點我借款 >",
                 title: "利息優惠1",
                 description1: "- 1.0%",
                 description2: "原利息15%",
-                actionName: "點我借款 >",
+
             },
         },
         {
@@ -39,10 +41,11 @@ export const MockActivityBannerResponseData1: ActivityBannerResponse<AdTemplate1
             payload: {
                 // NOTICE: REFACTOR
                 action: "POP_URL",
+                actionUrl: "",
+                actionName: "點我借款 >",
                 title: "利息優惠2",
                 description1: "- 2.0%",
                 description2: "原利息25%",
-                actionName: "點我借款 >",
             },
         },
     ],

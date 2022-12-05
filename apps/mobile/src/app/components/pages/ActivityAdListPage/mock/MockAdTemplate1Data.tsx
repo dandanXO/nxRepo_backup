@@ -1,4 +1,4 @@
-import {AdTemplate1} from "./components/AdTemplate1";
+import {AdTemplate1} from "../components/AdTemplate1";
 
 export const MockAdTemplate1Data: AdTemplate1 = {
   brandCard: {

@@ -16,6 +16,7 @@ export const MockActivityBannerResponseData2: ActivityBannerResponse<AdTemplate2
                 // NOTICE: REFACTOR
                 action: "POP_URL",
                 actionName: "立即查看",
+                actionUrl: "",
                 title1: "最快3分鐘",
                 title2: "放款率最高",
                 priceUnit: "PKR",
@@ -29,8 +30,9 @@ export const MockActivityBannerResponseData2: ActivityBannerResponse<AdTemplate2
             payload: {
                 // NOTICE: REFACTOR
                 action: "POP_URL",
-                title: "信用500以上 秒下款",
+                actionUrl: "http://google.com",
                 actionName: "立即申請",
+                title: "信用500以上 秒下款",
             },
         },
         {
@@ -40,8 +42,9 @@ export const MockActivityBannerResponseData2: ActivityBannerResponse<AdTemplate2
             payload: {
                 // NOTICE: REFACTOR
                 action: "POP_URL",
-                title: "憑信用卡秒下50000元",
+                actionUrl: "http://google.com",
                 actionName: "立即申請",
+                title: "憑信用卡秒下50000元",
             },
         },
     ],
