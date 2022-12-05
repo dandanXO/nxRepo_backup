@@ -1,17 +1,8 @@
-export const AdsTemplateData = [
-    {id: 1, name: "样板1"},
-    {id: 2, name: "样板2"},
-    {id: 3, name: "样板3"},
+import {IAdsTemplate} from "../types/IAdsTemplate";
+
+export const AdsTemplateData: IAdsTemplate[] = [
+    {id: 1, name: "左右滑动版型(数量可条整)"},
+    {id: 2, name: "固定版型1(数量固定)"},
+    {id: 3, name: "固定版型2(数量固定)"},
 ]
 
-export const getDefaultActivityBannerContent = (index: number) => ({
-    action: "APPLY_LOAN",
-    actionUrl: "",
-    payload: {
-        // isBrand: false,
-        title: "優惠名稱" + index,
-        description1: "- 3.5%",
-        description2: "原利息35%",
-        actionName: "點我借款 >",
-    },
-})

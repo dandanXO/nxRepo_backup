@@ -1,5 +1,4 @@
 // NOTICE: REFACTOR to utils
-import {Store} from "antd/es/form/interface";
 import {ActivityBannerResponse} from "../service/types";
 
 // export interface IAdsFormStore extends Store {
@@ -17,7 +16,7 @@ import {ActivityBannerResponse} from "../service/types";
     // enabled: boolean;
 // }
 
-export type IActivityAdsPageFormStore = ActivityBannerResponse;
+export type IActivityAdsPageFormStore = ActivityBannerResponse<any, any>;
 
 
 

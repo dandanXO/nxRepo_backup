@@ -1,13 +1,12 @@
 import {ActivityBannerResponse} from "../types";
-import {
-    AdTemplate2,
-    AdTemplate2BrandCard,
-    AdTemplate2Card
-} from "../../import/ActivityAdListPage/components/AdTemplate2";
+import {AdTemplate2BrandCard, AdTemplate2Card} from "../../import/ActivityAdListPage/components/AdTemplate2";
 
 export const MockActivityBannerResponseData2: ActivityBannerResponse<AdTemplate2BrandCard, AdTemplate2Card> = {
-    name: "新年廣告",
+    name: "Ads Name",
     templateType: 2,
+    enabled: true,
+    scenario: "DEFAULT",
+    sort: 0,
     contents: [
         {
             // NOTICE: REFACTOR
@@ -17,6 +16,7 @@ export const MockActivityBannerResponseData2: ActivityBannerResponse<AdTemplate2
                 // NOTICE: REFACTOR
                 action: "POP_URL",
                 actionName: "立即查看",
+                actionUrl: "",
                 title1: "最快3分鐘",
                 title2: "放款率最高",
                 priceUnit: "PKR",
@@ -30,8 +30,9 @@ export const MockActivityBannerResponseData2: ActivityBannerResponse<AdTemplate2
             payload: {
                 // NOTICE: REFACTOR
                 action: "POP_URL",
-                title: "信用500以上 秒下款",
+                actionUrl: "http://google.com",
                 actionName: "立即申請",
+                title: "信用500以上 秒下款",
             },
         },
         {
@@ -41,8 +42,9 @@ export const MockActivityBannerResponseData2: ActivityBannerResponse<AdTemplate2
             payload: {
                 // NOTICE: REFACTOR
                 action: "POP_URL",
-                title: "憑信用卡秒下50000元",
+                actionUrl: "http://google.com",
                 actionName: "立即申請",
+                title: "憑信用卡秒下50000元",
             },
         },
     ],

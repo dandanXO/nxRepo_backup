@@ -1,9 +1,4 @@
 import {ActivityBanner} from "../../../service/types";
-import {
-    AdTemplate2,
-    AdTemplate2BrandCard,
-    AdTemplate2Card
-} from "../../../import/ActivityAdListPage/components/AdTemplate2";
 import {AdTemplate3, AdTemplate3Card} from "../../../import/ActivityAdListPage/components/AdTemplate3";
 
 export const getTemplate3AdTemplate1Data = (ads?: ActivityBanner<AdTemplate3Card, AdTemplate3Card>[]): AdTemplate3 | null => {
