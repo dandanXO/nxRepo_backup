@@ -5,11 +5,12 @@ import MainCardImg from "./promotions_bg@2x.png";
 import {AdContainer} from "../AdContainer";
 
 export interface AdTemplate1 {
-  brandCard: AdTemplate1BrandCard;
-  cards: AdTemplate1Card[];
+    type?: "adTemplate1",
+    brandCard: AdTemplate1BrandCard;
+    cards: AdTemplate1Card[];
 }
 
-export interface AdTemplate1BrandCard extends AdTemplateCard{
+export interface AdTemplate1BrandCard {
   title: string;
   priceUnit: string;
   price: string;
@@ -51,6 +52,10 @@ const StyledBrandTitle = styled.div`
   font-size: 11px;
   margin-top: 9px;
   margin-bottom: 15px;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const StyledPrice = styled.div`
@@ -58,6 +63,10 @@ const StyledPrice = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: end;
+  // NOTICE:
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 const StyledBrandPriceUnit = styled.div`
   color: #ffffff;
@@ -167,8 +176,8 @@ export const AdTemplate1 = (props: IAdTemplate1) => {
     <AdTemplateContainer>
       <ContainerContent>
         <AdTemplate1BrandCardUI data={props.data.brandCard} onClick={onClickToDoLoan}/>
-        {props.data.cards.map((data) => {
-          return <AdTemplate1CardUI data={data} onClick={onClickToPopup}/>
+        {props.data?.cards?.map((data, index) => {
+          return <AdTemplate1CardUI key={index} data={data} onClick={onClickToPopup}/>
         })}
       </ContainerContent>
     </AdTemplateContainer>

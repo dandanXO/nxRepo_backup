@@ -2,10 +2,20 @@ import {AdTemplateCard} from "../index";
 import {AdContainer} from "./AdContainer";
 import styled from "styled-components";
 
+const makeStyleEllipsisOverflowText = () => {
+    return `
+        // NOTICE:
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    `;
+}
+
 export interface AdTemplate2 {
-  brandCard: AdTemplate2BrandCard;
-  topCard: AdTemplate2Card;
-  bottomCard: AdTemplate2Card;
+    type?: "adTemplate2",
+    brandCard: AdTemplate2BrandCard;
+    topCard: AdTemplate2Card;
+    bottomCard: AdTemplate2Card;
 }
 
 export interface AdTemplate2BrandCard extends AdTemplateCard{
@@ -37,14 +47,20 @@ const Title1 = styled.div`
   font-size: 12px;
   font-weight: 500;
   color: #845e3a;
+  // NOTICE:
+  ${makeStyleEllipsisOverflowText()};
 `
 const Title2 = styled.div`
   font-size: 16px;
   font-weight: 500;
   color: #845e3a;
+  // NOTICE:
+  ${makeStyleEllipsisOverflowText()};
 `
 const Price = styled.div`
   margin-bottom: 12px;
+  // NOTICE:
+  ${makeStyleEllipsisOverflowText()};
 `;
 const PriceUnit = styled.span`
   font-size: 14px;
@@ -67,15 +83,18 @@ const Button = styled.div<{bgColor: string}>`
   padding: 2px 16px;
   color: #fff;
   font-size: 12px;
-  background-color: ${props => props.bgColor || "#ef7e3a\n" +
-    "\n"};
+  background-color: ${props => props.bgColor || "#ef7e3a"};
+  // NOTICE:
+  ${makeStyleEllipsisOverflowText()};
 `
+
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   height: 130px;
   flex: 1 1;
+  overflow: hidden;
 `;
 const Card = styled.div<{bgColor: string}>`
   box-sizing: border-box;
@@ -88,27 +107,34 @@ const Title = styled.div<{color: string}>`
   font-weight: 500;
   color: ${props => props.color || "#469c7d"};
   margin-bottom: 4px;
+  // NOTICE:
+  ${makeStyleEllipsisOverflowText()};
 `;
-export const AdTemplate2 = () => {
+
+interface IAdTemplate2 {
+    data?: AdTemplate2;
+}
+export const AdTemplate2 = (props: IAdTemplate2) => {
+    // console.log("props", props)
   return (
     <AdTemplate2Container>
       <BrandCard>
-        <Title1>最快3分鐘</Title1>
-        <Title2>放款率最高</Title2>
+        <Title1>{props.data?.brandCard.title1}</Title1>
+        <Title2>{props.data?.brandCard.title2}</Title2>
         <Price>
-          <PriceUnit>PKR</PriceUnit>
-          <PriceValue>5,000</PriceValue>
+          <PriceUnit>{props.data?.brandCard.priceUnit}</PriceUnit>
+          <PriceValue>{props.data?.brandCard.price}</PriceValue>
         </Price>
-        <Button bgColor={"#ef7e3a"}>立即查看 {'>'}</Button>
+        <Button bgColor={"#ef7e3a"}>{props.data?.brandCard.actionName}</Button>
       </BrandCard>
       <CardContainer>
         <Card bgColor={"#e4f6ef"}>
-          <Title color={"#469c7d"}>信用500以上 秒下款</Title>
-          <Button bgColor={"#59c19e"}>立即申請 {'>'}</Button>
+          <Title color={"#469c7d"}>{props.data?.topCard.title}</Title>
+          <Button bgColor={"#59c19e"}>{props.data?.topCard.actionName}</Button>
         </Card>
         <Card bgColor={"#f2f4fa"}>
-          <Title color={"#485d8c"}>憑信用卡秒下50000元</Title>
-          <Button bgColor={"#5175aa"}>立即申請 {'>'}</Button>
+          <Title color={"#485d8c"}>{props.data?.bottomCard.title}</Title>
+          <Button bgColor={"#5175aa"}>{props.data?.bottomCard.actionName}</Button>
         </Card>
       </CardContainer>
     </AdTemplate2Container>

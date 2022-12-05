@@ -50,15 +50,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           onChange={props.onUPIIDChange}
         />
       </Form>
-
-      <Button onClick={() => {
-        // if(!props.isFormPending && props.confirm) {
-        //   console.log("request")
-        props.confirm && props.confirm();
-        // } else {
-        //   console.log("request2")
-        // }
-      }}>{t("Save")}</Button>
+      <Button onClick={() => {!props.isFormPending && props.confirm()}}>{t("Save")}</Button>
     </>
   );
 }

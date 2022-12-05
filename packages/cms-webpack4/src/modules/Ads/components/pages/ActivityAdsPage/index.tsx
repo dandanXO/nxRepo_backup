@@ -1,10 +1,12 @@
-import {ActivityAdListPage} from "../../../import/ActivityAdListPage";
 import React, {useCallback, useMemo, useState} from "react";
 import {ActivityAdsForm} from "./ActivityAdsForm";
 import {useForm} from "antd/es/form/Form";
 import {ModalContent} from "../../../../shared/components/AdminTable";
-import {FormResponseData} from "../../../../risk/components/pages/RiskSettingPage";
 import {MockAdTemplate1Data} from "../../../import/ActivityAdListPage/MockAdTemplate1Data";
+import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
+import {AdsTemplateData} from "../../../data/AdsTemplateData";
+import {MockActivityBannerResponseData1} from "../../../service/mock/MockActivityBannerResponseData1";
+import {MockActivityBannerResponseData2} from "../../../service/mock/MockActivityBannerResponseData2";
 
 interface IUseAdminFormModal {
     // initialValues: any
@@ -31,7 +33,31 @@ const useAdminFormModal = (props: IUseAdminFormModal) => {
         editID,
     }
 }
+
+interface IActivityAdsPage {
+    formStore: IActivityAdsPageFormStore;
+}
+
+// const FormStore: DeepPartial<IAdsFormStore> = {
+//     name: "新年廣告",
+//     templateType: 1,
+//     ads: MockAdTemplate1Data.cards.map(data => {
+//         return {
+//             title: data.title,
+//             description1: data.description1,
+//             description2: data.description2,
+//             actionName: data.actionName,
+//             action: data.action
+//         }
+//     }),
+//     enabled: true,
+// };
+
+// const MockFormStore = MockActivityBannerResponseData1;
+const MockFormStore = MockActivityBannerResponseData2;
+
 export const ActivityAdsPage = () => {
+
     const {
         form,
         showModalContent,
@@ -42,63 +68,42 @@ export const ActivityAdsPage = () => {
     });
 
     // NOTE: 1. Initial Data
-    const initialValues = useMemo(() => {
-        // NOTICE: select and switch need initialValue if you want to select one
-        return {
-            name: "新年廣告",
-            templateType: 1,
-            // ads: [
-            //     {
-            //         title: "",
-            //         description1: "",
-            //         description2: "",
-            //         actionName: "點我借款",
-            //         action: "",
-            //     }
-            // ],
-            ads: MockAdTemplate1Data.cards.map(data => {
-                return {
-                    title: data.title,
-                    description1: data.description1,
-                    description2: data.description2,
-                    actionName: data.actionName,
-                    action: data.action
-                }
-            }),
-            enabled: true,
-            // useRcQuota: true,
-        } as DeepPartial<FormResponseData>;
-    }, [])
+    // const initialValues = useMemo(() => {
+    //     // NOTICE: select and switch need initialValue if you want to select one
+    //     return {
+    //         name: "新年廣告",
+    //         templateType: 1,
+    //         ads: MockAdTemplate1Data.cards.map(data => {
+    //             return {
+    //                 title: data.title,
+    //                 description1: data.description1,
+    //                 description2: data.description2,
+    //                 actionName: data.actionName,
+    //                 action: data.action
+    //             }
+    //         }),
+    //         enabled: true,
+    //     } as DeepPartial<IAdsFormStore>;
+    // }, [])
+    //
+    const initialValues = MockFormStore;
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
-        // console.log("allFields", allFields);
-        // if(changedFields[0].name[0] ==="ads") {
-        //     form.setFieldValue("ads", ads);
-        // }
-        // const ads = allFields.filter(field => field.name && field.name[0] ==="ads");
-        // console.log("ads", ads);
-        // ads.map(data => {
-        //     return {
-        //         title: data.title,
-        //         description1: data.description1,
-        //         description2: data.description2,
-        //         actionName: data.actionName,
-        //         action: data.action
-        //     }
-        // });
-        // form.setFieldValue("ads", ads);
+        // NOTICE: change form field value
         const originalValues = form.getFieldValue("ads");
-        console.log(form.getFieldValue("ads"))
-        console.log("changedFields", changedFields);
+        // console.log(form.getFieldValue("ads"))
+        // console.log("changedFields", changedFields);
+
+        // NOTE: Template1
         if(changedFields[0].name[0] === "ads") {
             const index = changedFields[0].name[1];
             const key = changedFields[0].name[2];
             const value = changedFields[0].value;
             originalValues[index][key] = value;
-            console.log("originalValues", originalValues)
+            // console.log("originalValues", originalValues)
             form.setFieldValue("ads", originalValues);
-            console.log("after", form.getFieldValue("ads"));
+            // console.log("after", form.getFieldValue("ads"));
         }
     }, [])
 
@@ -114,11 +119,7 @@ export const ActivityAdsPage = () => {
                 initialValues={initialValues}
                 onFieldsChange={onFieldsChange}
                 onFinish={onFinish}
-                templateData={[
-                    {id: 1, name: "样板1"},
-                    {id: 2, name: "样板2"},
-                    {id: 3, name: "样板3"},
-                ]}
+                templateData={AdsTemplateData}
              />
         </div>
     )
