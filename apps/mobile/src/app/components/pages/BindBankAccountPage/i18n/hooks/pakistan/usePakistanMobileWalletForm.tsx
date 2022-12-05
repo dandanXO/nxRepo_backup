@@ -108,9 +108,9 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         Modal.alert({
           show: true,
           mask: true,
-          title: i18next.t("Notice") as string,
-          content: i18next.t("Success") as string,
-          confirmText: i18next.t("Confirm") as string,
+          title: i18next.t("modal.Notice", {ns: "common"}) as string,
+          content: i18next.t("modal.Success", {ns: "common"}) as string,
+          confirmText: i18next.t("modal.Confirm", {ns: "common"}) as string,
           maskClosable: true,
           enableClose: false,
           enableIcon: false,
