@@ -124,6 +124,49 @@ class SettleOrderList extends Component {
                 }
             },{
                 width: 110,
+                title: this.props.intl.formatMessage({ id: "windowPage.email" }),
+                dataIndex: 'email',
+                key: 'email',
+                render(text) {
+                    return (
+                        <CopyToClipboard text={text} onCopy={_this.onCopy}>
+                            <Tooltip title={text}>
+                                <span style={{ cursor: 'pointer' }}>{text}</span>
+                            </Tooltip>
+                        </CopyToClipboard>
+                    );
+                }
+            },{
+                width: 110,
+                title: this.props.intl.formatMessage({ id: "bankCardNo" }),
+                dataIndex: 'bankCardNo',
+                key: 'bankCardNo',
+                render(text) {
+                    return (
+                        <CopyToClipboard text={text} onCopy={_this.onCopy}>
+                            <Tooltip title={text}>
+                                <span style={{ cursor: 'pointer' }}>{text}</span>
+                            </Tooltip>
+                        </CopyToClipboard>
+                    );
+                }
+            },{
+                width: 110,
+                title: this.props.intl.formatMessage({ id: "windowPage.bank" }),
+                dataIndex: 'bankName',
+                key: 'bankName',
+                render(text) {
+                    return (
+                        <CopyToClipboard text={text} onCopy={_this.onCopy}>
+                            <Tooltip title={text}>
+                                <span style={{ cursor: 'pointer' }}>{text}</span>
+                            </Tooltip>
+                        </CopyToClipboard>
+                    );
+                }
+            }
+            ,{
+                width: 110,
                 title: props.intl.formatMessage({id : "page.search.list.repayement.platfrom"}),
                 dataIndex: 'platName',
                 key: 'platName',
