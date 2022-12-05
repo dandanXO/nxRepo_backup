@@ -1,4 +1,4 @@
-import {Form, FormInstance, Input, Radio, Switch, Typography} from "antd";
+import {Form, FormInstance, Input, Radio, Select, Switch, Typography} from "antd";
 import React from "react";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
@@ -84,7 +84,6 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
             </Preview>
 
             <AdminForm
-                // style={{marginLeft: 50}}
                 form={props.form}
                 initialValues={props.initialValues}
                 onFieldsChange={props.onFieldsChange}
@@ -99,36 +98,41 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                 </Form.Item>
 
                 <Form.Item
-                    label={"模板选择"}
-                    name={"templateType"}
-                    required
+                    label={'模板选择'}
+                    name="templateType"
+                    rules={[{ required: true }]}
                     extra={
                         '设定后即无法直接修改，送出前请务必再次确认。'
                     }
                 >
-                    <Radio.Group>
-                        {props.templateData && props.templateData.map((template, index) => {
-                            return (
-                                <Radio key={index} value={template.id}>{template.name}</Radio>
-                            );
-                        })}
-                    </Radio.Group>
+                    <Select placeholder={'选择'}>
+                        {props.templateData &&
+                            props.templateData.map((template, index) => {
+                                return (
+                                    <Select.Option key={index} value={template.id}>
+                                        {template.name}
+                                    </Select.Option>
+                                );
+                            })}
+                    </Select>
                 </Form.Item>
 
                 <Form.Item
-                    label={"目标场景"}
-                    name={"scenario"}
-                    required
+                    label={'目标场景'}
+                    name="scenario"
+                    rules={[{ required: true }]}
                 >
-                    <Radio.Group>
-                        {props.scenarioData && props.scenarioData.map((template, index) => {
-                            return (
-                                <Radio key={index} value={template.value}>{template.name}</Radio>
-                            );
-                        })}
-                    </Radio.Group>
+                    <Select placeholder={'选择'}>
+                        {props.scenarioData &&
+                            props.scenarioData.map((template, index) => {
+                                return (
+                                    <Select.Option key={index} value={template.value}>
+                                        {template.name}
+                                    </Select.Option>
+                                );
+                            })}
+                    </Select>
                 </Form.Item>
-
 
 
                 {getFormItemForTemplateType(templateType, ads)}
