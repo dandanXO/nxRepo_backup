@@ -65,18 +65,21 @@ export const i18nBankBindAccountPage: i18nComponent = {
 
       // NOTICE: Pakistan
       // NOTE: Mobile Wallet
-      // "Choose the method to receive the money": "টাকা পাওয়ার পদ্ধতি বেছে নিন",
-      // "Mobile wallet": "মোবাইল ওয়ালেট",
-      // "Bank account": "ব্যাংক হিসাব",
       // "Please select the of your mobile wallet": "আপনার মোবাইল ওয়ালেট নির্বাচন করুন",
       // "Your mobile wallet account": "আপনার মোবাইল ওয়ালেট অ্যাকাউন্ট",
-      // "Wallet Account Number": "ওয়ালেট অ্যাকাউন্ট নম্বর",
+
       // "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
       // NOTE: Bank Account
       // "Please select your bank name": "Please select your bank name",
 
       // NOTICE: Bangladesh
       // NOTE: Mobile Wallet
+      "Choose the method to receive the money": "টাকা পাওয়ার পদ্ধতি বেছে নিন",
+      "Mobile wallet": "মোবাইল ওয়ালেট",
+      "Bank account": "ব্যাংক হিসাব",
+      "Wallet Account Number": "ওয়ালেট অ্যাকাউন্ট নম্বর",
+
+
       "Your mobile wallet number": "১। তোমার মোবাইল ওয়ালেট নম্বর",
       "Confirm your number": "২। তোমার নম্বরটি কনফার্ম করো ",
       "Phone number should be 10 digits.": "ফোন নম্বরটি 10 ​​সংখ্যার হওয়া উচিত।",
