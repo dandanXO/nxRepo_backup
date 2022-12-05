@@ -2,8 +2,11 @@ import {ActivityBannerResponse} from "../types";
 import {AdTemplate1BrandCard, AdTemplate1Card} from "../../import/ActivityAdListPage/components/AdTemplate1";
 
 export const MockActivityBannerResponseData1: ActivityBannerResponse<AdTemplate1BrandCard, AdTemplate1Card> = {
-    name: "新年廣告",
+    name: "Ads Name",
     templateType: 1,
+    enabled: true,
+    scenario: "DEFAULT",
+    sort: 0,
     contents: [
         {
             // NOTICE: REFACTOR

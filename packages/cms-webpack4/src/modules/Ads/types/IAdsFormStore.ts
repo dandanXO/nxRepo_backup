@@ -17,7 +17,7 @@ import {ActivityBannerResponse} from "../service/types";
     // enabled: boolean;
 // }
 
-export type IActivityAdsPageFormStore = ActivityBannerResponse;
+export type IActivityAdsPageFormStore = ActivityBannerResponse<any, any>;
 
 
 

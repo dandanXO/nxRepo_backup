@@ -11,6 +11,7 @@ import {getFormItemForTemplateType} from "./getFormItemForTemplateType";
 import {getTemplate1AdTemplate1Data} from "./getTemplate1AdTemplate1Data";
 import {getTemplate2AdTemplate1Data} from "./getTemplate2AdTemplate1Data";
 import {getTemplate3AdTemplate1Data} from "./getTemplate3AdTemplate1Data";
+import {IAdsScenario} from "../../../types/IAdsScenario";
 // import {IAdsFormStore} from "../../../types/IAdsFormStore";
 
 const { Title, Text } = Typography;
@@ -37,6 +38,7 @@ interface IActivityAdsForm {
     // initialValues: IAdsFormStore;
     initialValues: IActivityAdsPageFormStore;
     templateData: Array<IAdsTemplate>;
+    scenarioData: IAdsScenario[];
 }
 
 const FormContainer = styled.div`
@@ -59,6 +61,7 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
 
     const ads = Form.useWatch('contents', props.form);
     console.log("ads", ads);
+
     let adTemplate1Data;
     if(templateType === 1) {
         adTemplate1Data = getTemplate1AdTemplate1Data(ads);
@@ -99,6 +102,20 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                 </Form.Item>
 
                 <Form.Item
+                    label={"目标场景"}
+                    name={"scenario"}
+                    required
+                >
+                    <Radio.Group>
+                        {props.scenarioData && props.scenarioData.map((template, index) => {
+                            return (
+                                <Radio key={index} value={template.value}>{template.name}</Radio>
+                            );
+                        })}
+                    </Radio.Group>
+                </Form.Item>
+
+                <Form.Item
                     label={"模板选择"}
                     name={"templateType"}
                     required
@@ -114,6 +131,7 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                         })}
                     </Radio.Group>
                 </Form.Item>
+
 
                 {getFormItemForTemplateType(templateType, ads)}
 
