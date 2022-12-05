@@ -68,28 +68,32 @@ const Button = styled.div<{bgColor: string; color: string}>`
   flex-direction: row;
   align-items: center;
 `
-export const AdTemplate3 = () => {
+
+interface IAdTemplate3 {
+  data?: AdTemplate3;
+}
+export const AdTemplate3 = (props: IAdTemplate3) => {
   return (
     <AdTemplate3Container>
       <Card bgColor={"#ec606a"}>
-        <Title color={"#fff"}>新人福利</Title>
+        <Title color={"#fff"}>{props.data?.brandCard.title}</Title>
         <Description>
-          <Description1 color={"#fff"}>99%</Description1>
-          <Description2 color={"#fff"}>成功放款率</Description2>
+          <Description1 color={"#fff"}>{props.data?.brandCard.description1}</Description1>
+          <Description2 color={"#fff"}>{props.data?.brandCard.description2}</Description2>
         </Description>
         <Button bgColor={"#fff"} color={"#ec606a"}>
-          <div>立即申請</div>
+          <div>{props.data?.brandCard.actionName}</div>
           <div>{'>'}</div>
         </Button>
       </Card>
       <Card bgColor={"#fff"}>
-        <Title color={"#000"}>利息優惠</Title>
+        <Title color={"#000"}>{props.data?.card.title}</Title>
         <Description>
-          <Description1 color={"#ec606a"}>-3.5%%</Description1>
-          <Description2 color={"#a2a2a2"}>原利息35%</Description2>
+          <Description1 color={"#ec606a"}>{props.data?.card.description1}</Description1>
+          <Description2 color={"#a2a2a2"}>{props.data?.card.description2}</Description2>
         </Description>
         <Button bgColor={"#ec606a"} color={"#fff"}>
-          <div>立即申請</div>
+          <div>{props.data?.card.actionName}</div>
           <div>{'>'}</div>
         </Button>
       </Card>

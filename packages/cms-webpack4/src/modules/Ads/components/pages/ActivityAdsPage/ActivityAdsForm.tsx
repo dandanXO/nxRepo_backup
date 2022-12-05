@@ -6,18 +6,11 @@ import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
 import styled from "styled-components";
 import {IAdsTemplate} from "../../../types/IAdsTemplate";
 import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
-import {
-    AdTemplate1,
-    AdTemplate1BrandCard,
-    AdTemplate1Card
-} from "../../../import/ActivityAdListPage/components/AdTemplate1";
-import {
-    AdTemplate2,
-    AdTemplate2BrandCard,
-    AdTemplate2Card
-} from "../../../import/ActivityAdListPage/components/AdTemplate2";
-import {ActivityBanner} from "../../../service/types";
+import {AdTemplate2BrandCard, AdTemplate2Card} from "../../../import/ActivityAdListPage/components/AdTemplate2";
 import {getFormItemForTemplateType} from "./getFormItemForTemplateType";
+import {getTemplate1AdTemplate1Data} from "./getTemplate1AdTemplate1Data";
+import {getTemplate2AdTemplate1Data} from "./getTemplate2AdTemplate1Data";
+import {getTemplate3AdTemplate1Data} from "./getTemplate3AdTemplate1Data";
 // import {IAdsFormStore} from "../../../types/IAdsFormStore";
 
 const { Title, Text } = Typography;
@@ -59,73 +52,6 @@ const Preview = styled.div`
     height: 640px;
 `
 
-// NOTICE: Interface type check with Typescript https://stackoverflow.com/questions/14425568/interface-type-check-with-typescript
-function instanceOfBrandCard(obj: any): obj is AdTemplate1BrandCard {
-    return 'priceUnit' in obj;
-}
-
-function instanceOfCard(obj: any): obj is AdTemplate1Card {
-    return 'description1' in obj;
-}
-
-const getTemplate1AdTemplate1Data = (ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]): AdTemplate1 | null => {
-    if(!ads) return;
-    return {
-        brandCard: instanceOfBrandCard(ads[0].payload) && {
-            title: ads[0].payload.title,
-            priceUnit: instanceOfBrandCard(ads[0].payload) && ads[0].payload.priceUnit,
-            price: instanceOfBrandCard(ads[0].payload) && ads[0].payload.price,
-            description: instanceOfBrandCard(ads[0].payload) && ads[0].payload.description,
-        },
-        cards: ads.slice(1, ads.length).map((item: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>) => {
-            return {
-                action: item.action,
-                actionUrl: item.actionUrl,
-                actionName: instanceOfCard(item.payload) && item.payload.actionName,
-                title: item.payload.title,
-                description1: instanceOfCard(item.payload) && item.payload.description1,
-                description2: instanceOfCard(item.payload) && item.payload.description2,
-            }
-        })
-    }
-}
-
-function instanceOfBrandCard2(obj: any): obj is AdTemplate2BrandCard {
-    return 'priceUnit' in obj;
-}
-
-function instanceOfCard2(obj: any): obj is AdTemplate2Card {
-    return 'title' in obj;
-}
-
-
-const getTemplate2AdTemplate1Data = (ads?: ActivityBanner<AdTemplate2BrandCard, AdTemplate2Card>[]): AdTemplate2 | null => {
-    if(!ads) return;
-    return {
-        brandCard: {
-            title1: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.title1,
-            title2: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.title2,
-            priceUnit: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.priceUnit,
-            price: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.price,
-            actionName: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.actionName,
-            action: ads[0].action,
-            actionUrl: ads[0].actionUrl,
-        },
-        topCard: {
-            title: instanceOfCard2(ads[1].payload) && ads[1].payload.title,
-            actionName: instanceOfCard2(ads[1].payload) && ads[1].payload.actionName,
-            action: ads[1].action,
-            actionUrl: ads[1].actionUrl,
-        },
-        bottomCard: {
-            title: instanceOfCard2(ads[2].payload) && ads[2].payload.title,
-            actionName: instanceOfCard2(ads[2].payload) && ads[2].payload.actionName,
-            action: ads[2].action,
-            actionUrl: ads[2].actionUrl,
-        },
-    }
-}
-
 export const ActivityAdsForm = (props: IActivityAdsForm) => {
 
     const templateType = Form.useWatch('templateType', props.form);
@@ -138,6 +64,8 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
         adTemplate1Data = getTemplate1AdTemplate1Data(ads);
     } else if(templateType === 2) {
         adTemplate1Data = getTemplate2AdTemplate1Data(ads);
+    } else if(templateType === 3) {
+        adTemplate1Data = getTemplate3AdTemplate1Data(ads);
     }
 
     // NOTE:

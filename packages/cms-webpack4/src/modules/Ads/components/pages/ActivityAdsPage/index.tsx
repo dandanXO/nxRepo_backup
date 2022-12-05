@@ -7,6 +7,7 @@ import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
 import {AdsTemplateData} from "../../../data/AdsTemplateData";
 import {MockActivityBannerResponseData1} from "../../../service/mock/MockActivityBannerResponseData1";
 import {MockActivityBannerResponseData2} from "../../../service/mock/MockActivityBannerResponseData2";
+import {MockActivityBannerResponseData3} from "../../../service/mock/MockActivityBannerResponseData3";
 
 interface IUseAdminFormModal {
     // initialValues: any
@@ -54,7 +55,8 @@ interface IActivityAdsPage {
 // };
 
 // const MockFormStore = MockActivityBannerResponseData1;
-const MockFormStore = MockActivityBannerResponseData2;
+// const MockFormStore = MockActivityBannerResponseData2;
+const MockFormStore = MockActivityBannerResponseData3;
 
 export const ActivityAdsPage = () => {
 

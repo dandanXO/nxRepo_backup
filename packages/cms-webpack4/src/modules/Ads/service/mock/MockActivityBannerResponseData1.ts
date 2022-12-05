@@ -6,10 +6,10 @@ export const MockActivityBannerResponseData1: ActivityBannerResponse<AdTemplate1
     templateType: 1,
     contents: [
         {
+            // NOTICE: REFACTOR
             action: "APPLY_LOAN",
             actionUrl: "",
             payload: {
-                // isBrand: true,
                 title: "新人福利",
                 priceUnit: "PKR",
                 price: "5,000",
@@ -17,27 +17,29 @@ export const MockActivityBannerResponseData1: ActivityBannerResponse<AdTemplate1
             },
         },
         {
+            // NOTICE: REFACTOR
             action: "APPLY_LOAN",
             actionUrl: "",
             payload: {
-                // isBrand: false,
+                // NOTICE: REFACTOR
+                action: "APPLY_LOAN",
                 title: "利息優惠1",
                 description1: "- 1.0%",
                 description2: "原利息15%",
                 actionName: "點我借款 >",
-                action: "APPLY_LOAN",
             },
         },
         {
+            // NOTICE: REFACTOR
             action: "POP_URL",
             actionUrl: "http://google.com",
             payload: {
-                // isBrand: false,
+                // NOTICE: REFACTOR
+                action: "POP_URL",
                 title: "利息優惠2",
                 description1: "- 2.0%",
                 description2: "原利息25%",
                 actionName: "點我借款 >",
-                action: "POP_URL",
             },
         },
     ],
