@@ -17,12 +17,12 @@ export enum ButtonsText {
 
 
 interface AdminTableTemplateProps<TableListItemDataType> {
-    tableHeaderColumns?:  ProColumns<TableListItemDataType, "text">[];
+    tableHeaderColumns:  ProColumns<TableListItemDataType, "text">[];
     loading?: boolean;
-    tableDatasource?: TableListItemDataType[];
+    tableDatasource: TableListItemDataType[];
     onSearchClick?: (props: any) => TableListItemDataType[];
     setShowModalContent?: React.Dispatch<React.SetStateAction<ModalContent>>;
-    hasAddForm?: boolean;
+    hasAddForm: boolean;
     hasEditForm?: boolean;
     searchable?: boolean;
     addText?: string;
@@ -153,7 +153,7 @@ export const AdminTable = <TableListItemDataType,>({
             headerTitle={
                 <>
                     {hasAddForm && (
-                        <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback()}>{addText}</Button>
+                        <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback && onAddCallback()}>{addText}</Button>
                     )}
                 </>
             }

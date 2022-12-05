@@ -11,6 +11,7 @@ import { GetOrderReviewListRequestQuerystring, OrderReviewListResponse, GetOrder
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
 import CopyText from '../../../shared/components/CopyText';
+import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
 const OrderReviewTable = () => {
 
     const { channelListEnum, riskRankEnum, providerListEnum } = useValuesEnums();
@@ -115,8 +116,10 @@ const OrderReviewTable = () => {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId,record.id,record.orderNo)} >审核</a>],
-            width: 80,
+            render: (text, record, _, action) => [
+                <a key="editable" onClick={() => handleToUserDetail(record.userId,record.id,record.orderNo)} >审核</a>
+            ],
+            width: ProColumnsOperationConstant.width["1"],
         },
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" , render: (text) => <CopyText text={text} />},
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" , render: (text) => <CopyText text={text} />},
@@ -151,7 +154,7 @@ const OrderReviewTable = () => {
                     ? ""
                     : [moment(searchParams.searchList.addStartTime), moment(searchParams.searchList.addEndTime)]
         },
-       
+
     ]
     return (
         <ProTable<OrderReviewListResponse>

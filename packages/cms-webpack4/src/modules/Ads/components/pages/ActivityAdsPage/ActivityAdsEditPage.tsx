@@ -56,7 +56,7 @@ interface IActivityAdsPage {
 // const MockFormStore = MockActivityBannerResponseData2;
 const MockFormStore = MockActivityBannerResponseData3;
 
-export const ActivityAdsPage = () => {
+export const ActivityAdsEditPage = () => {
 
     const {
         form,

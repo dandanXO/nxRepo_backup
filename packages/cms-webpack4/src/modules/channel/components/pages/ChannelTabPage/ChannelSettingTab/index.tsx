@@ -17,6 +17,7 @@ import {Channel} from "../../../../domain/vo/Channel";
 import {UpdateChannelRequest} from "../../../../service/request/UpdateChannelRequest";
 import {ChannelSettingTagFormModal} from "../ChannelSettingTagTab/ChannelSettingTagFormModal";
 import {useFormModal} from "../ChannelSettingTagTab/useFormModal";
+import {ProColumnsOperationConstant} from "../../../../../shared/components/ProColumnsOperationConstant";
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;
@@ -106,7 +107,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                         }}>修改</a>,
                     ]
                 },
-                width: 80,
+                width: ProColumnsOperationConstant.width["2"],
             },
             {
                 key: 'id',
@@ -351,6 +352,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
         <>
             {/*NOTICE: List Table*/}
             <AdminTable<ChannelListItemVO>
+                hasAddForm={true}
                 tableHeaderColumns={columns}
                 tableDatasource={currentTableListData}
                 loading={isGetListFetching}

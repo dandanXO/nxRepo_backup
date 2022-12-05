@@ -5,6 +5,7 @@ import { ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
 import { useLazyGetMerchantManageListQuery } from "../../../service/merchant/MerchantApi";
 import { GetMerchantListResponse } from "../../../service/merchant/getMerchantList";
+import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 
 interface MerchantTableProps {
     postMerchantSuccess?: boolean;
@@ -52,7 +53,7 @@ const MerchantTable = ({
                     form.setFieldsValue(record);
                 }}>修改</a>,
             ],
-            width: 80,
+            width: ProColumnsOperationConstant.width["1"],
         },
         { title: '商户编号', dataIndex: 'merchantId', key: 'merchantId', hideInSearch: true },
         { title: '商户名', dataIndex: 'name', key: 'name', initialValue: "" },

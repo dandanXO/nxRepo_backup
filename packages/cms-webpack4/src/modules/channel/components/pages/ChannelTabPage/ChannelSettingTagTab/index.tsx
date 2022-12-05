@@ -15,6 +15,7 @@ import {ChannelTagVO} from "../../../../domain/vo/ChannelTagVO";
 import {useFormModal} from "./useFormModal";
 import {ChannelSettingTagFormModal} from "./ChannelSettingTagFormModal";
 import {Modal} from "antd/es";
+import {ProColumnsOperationConstant} from "../../../../../shared/components/ProColumnsOperationConstant";
 
 interface ChannelSettingTagTabPageProps {
     active: boolean;
@@ -88,7 +89,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
 
                     ]
                 },
-                width: 100,
+                width: ProColumnsOperationConstant.width["2"],
             },
             {
                 key: 'id',
@@ -234,6 +235,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
         <>
             {/*NOTICE: List Table*/}
             <AdminTable<ChannelTagVO>
+                hasAddForm={true}
                 tableHeaderColumns={columns}
                 tableDatasource={currentItemListData}
                 loading={isGetListFetching}

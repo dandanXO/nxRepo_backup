@@ -10,11 +10,12 @@ import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../.
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
+import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
 const OrderTable = () => {
 
     const { channelListEnum, providerListEnum  } = useValuesEnums();
     const initSearchList = {
-        appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '', 
+        appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '',
         loanTimeEnd: '', loanTimeStart: '', orderNo: '', productName: '', rcProvider: '', status: '', userPhone: '', userTrueName: '', pageNum: 1, pageSize: 10
     }
     // redux
@@ -73,7 +74,7 @@ const OrderTable = () => {
             valueType: 'option',
             key: 'option',
             align: 'left',
-            width: 50,
+            width: ProColumnsOperationConstant.width["1"],
             render: (text, record, _, action) => {
                 return <a key="editable" onClick={() => handleToUserDetail(record.userId, record.id, record.orderNo)} >查看</a>
             }
@@ -188,7 +189,7 @@ const OrderTable = () => {
             options={{
                 setting: { listsHeight: 400, },
                 reload: () => triggerGetList(searchList),
-                
+
             }}
             toolBarRender={() => [<Button onClick={handleExportOrderList} type='primary'>导出</Button>]}
             pagination={{

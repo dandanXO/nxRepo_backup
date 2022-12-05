@@ -4,6 +4,7 @@ import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Space, Tag } from 'antd';
 import { useRef } from 'react';
 import request from 'umi-request';
+import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
 
 type GithubIssueItem = {
   url: string;
@@ -47,7 +48,7 @@ const columns: ProColumns<GithubIssueItem>[] = [
         ]}
       />,
     ],
-    width: 80,
+  width: ProColumnsOperationConstant.width["2"],
   },
   {
     dataIndex: 'index',

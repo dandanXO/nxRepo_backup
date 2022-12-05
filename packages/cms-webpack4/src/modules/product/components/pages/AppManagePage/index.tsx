@@ -15,6 +15,7 @@ import {UpdateChannelRequest} from "../../../../channel/service/request/UpdateCh
 import AdminPage from "../../../../shared/components/AdminPage";
 import {AppConfigurationListItem} from "../../../service/appManage/domain/AppConfigurationListItem";
 import {useLazyGetAllAppConfigurationQuery} from "../../../service/appManage/AppManageApi";
+import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 
 const i18n = {
     "AppManagePage": {
@@ -68,7 +69,7 @@ export const AppManagePage = () => {
                         }}>刪除</a>,
                     ]
                 },
-                width: 100,
+                width: ProColumnsOperationConstant.width["2"],
             },
             { key: 'appName', title: 'APP名稱', dataIndex: 'appName', initialValue: "" },
             { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: "", hideInSearch: true,},
@@ -268,6 +269,7 @@ export const AppManagePage = () => {
             <>
                 {/*NOTICE: List Table*/}
                 <AdminTable<AppConfigurationListItem>
+                    hasAddForm={true}
                     tableHeaderColumns={columns}
                     tableDatasource={currentTableListData}
                     loading={isGetListFetching}

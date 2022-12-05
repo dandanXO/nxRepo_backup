@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
+import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 const UserReviewTable = () => {
 
     const { channelListEnum, riskRankEnum } = useValuesEnums();
@@ -154,7 +155,7 @@ const UserReviewTable = () => {
             valueType: 'option',
             key: 'option',
             render: (text, record, _, action) => [<a key="editable" onClick={() => handleToUserDetail(record.userId)} >审核</a>],
-            width: 80,
+            width: ProColumnsOperationConstant.width["1"],
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" },
         { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" },

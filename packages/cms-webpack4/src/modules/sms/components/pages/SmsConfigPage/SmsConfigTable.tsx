@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { FormModalProps } from '../../../../../types/FormModal';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 const SmsConfigTable = ((props:FormModalProps & {isAddOrEditSuccess?:boolean}) => {
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess }] = useLazyGetUserContactsListQuery({
@@ -48,9 +49,10 @@ const SmsConfigTable = ((props:FormModalProps & {isAddOrEditSuccess?:boolean}) =
             valueType: 'option',
             key: 'option',
             align: 'left',
-            width: 100,
+            width: ProColumnsOperationConstant.width["2"],
             render: (text, record, _, action) => {
-                return [<a key="editable" onClick={handleEdit} >修改</a>,
+                return [
+                    <a key="editable" onClick={handleEdit} >修改</a>,
                 <a key="editable" onClick={() => props.setShowModal(true)} >删除</a>]
             }
         },

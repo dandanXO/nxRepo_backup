@@ -45,9 +45,9 @@ const FormContainer = styled.div`
     margin: 0 auto;
 `
 const Preview = styled.div`
-    position: sticky;
-    top: 0;
-    left: 0;
+    //position: sticky;
+    //top: 0;
+    //left: 0;
     height: 640px;
 `
 
@@ -99,20 +99,6 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                 </Form.Item>
 
                 <Form.Item
-                    label={"目标场景"}
-                    name={"scenario"}
-                    required
-                >
-                    <Radio.Group>
-                        {props.scenarioData && props.scenarioData.map((template, index) => {
-                            return (
-                                <Radio key={index} value={template.value}>{template.name}</Radio>
-                            );
-                        })}
-                    </Radio.Group>
-                </Form.Item>
-
-                <Form.Item
                     label={"模板选择"}
                     name={"templateType"}
                     required
@@ -128,6 +114,21 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                         })}
                     </Radio.Group>
                 </Form.Item>
+
+                <Form.Item
+                    label={"目标场景"}
+                    name={"scenario"}
+                    required
+                >
+                    <Radio.Group>
+                        {props.scenarioData && props.scenarioData.map((template, index) => {
+                            return (
+                                <Radio key={index} value={template.value}>{template.name}</Radio>
+                            );
+                        })}
+                    </Radio.Group>
+                </Form.Item>
+
 
 
                 {getFormItemForTemplateType(templateType, ads)}

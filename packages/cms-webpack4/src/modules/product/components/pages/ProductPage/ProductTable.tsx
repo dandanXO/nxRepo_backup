@@ -6,6 +6,7 @@ import {Button, PaginationProps, Space} from 'antd';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {GetProductListResponseProduct} from "../../../service/product/domain/getProductList";
 import {ProductFormModal} from "./hooks/useProductFormModal";
+import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 
 interface ProductTableProps {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
@@ -34,7 +35,7 @@ const ProductTable = (props: ProductTableProps) => {
               productId: record.productId,
             })}>修改</a>,
           ],
-            width: 80,
+            width: ProColumnsOperationConstant.width["1"],
         },
         { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" },
         { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },

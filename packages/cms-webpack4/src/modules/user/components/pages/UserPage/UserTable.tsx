@@ -11,13 +11,14 @@ import { HashRouter as Router, Route, Switch, useHistory } from "react-router-do
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import queryString from "query-string";
 import CopyText from '../../../../shared/components/CopyText';
+import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 // import usePageable from '../../../../shared/hooks/usePageable';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
 }
 
 const UserTable = ({ setShowModal }: UserTableProps) => {
-   
+
     const { channelListEnum, riskRankEnum } = useValuesEnums();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
@@ -127,14 +128,14 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         '19': { text: '审核拒绝', color: 'error' },
         '20': { text: '审核通过', color: 'processing' },
     };
-    
+
     const columns: ProColumns<UserListContent>[] = [
         {
             title: '操作',
             valueType: 'option',
             key: 'option',
             align: 'left',
-            width:'135x',
+            width: ProColumnsOperationConstant.width["3"],
             render: (text, record, _, action) => {
                 const optionCheck = [<a key="editable" onClick={() => handleToUserDetail(record.id)} >查看</a>];
                 const optionClear = [<a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>];
@@ -253,7 +254,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
                                     modal.warning({content:'結清未複借終止天數，需大於結清未複借起始天數'});
                                     return;
                                 }
-                            
+
                                 setIsImportTelSale(noLoanAgain === "true" ? true : false)
                                 setIsNoLoanAgain(noLoanAgain === "true" ? true : false);
                                 setSearchList({
