@@ -1,9 +1,5 @@
 import {ActivityBannerResponse} from "../types";
-import {
-    AdTemplate2,
-    AdTemplate2BrandCard,
-    AdTemplate2Card
-} from "../../import/ActivityAdListPage/components/AdTemplate2";
+import {AdTemplate2BrandCard, AdTemplate2Card} from "../../import/ActivityAdListPage/components/AdTemplate2";
 
 export const MockActivityBannerResponseData2: ActivityBannerResponse<AdTemplate2BrandCard, AdTemplate2Card> = {
     name: "Ads Name",

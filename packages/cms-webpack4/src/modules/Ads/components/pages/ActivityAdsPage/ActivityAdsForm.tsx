@@ -1,18 +1,15 @@
 import {Form, FormInstance, Input, Radio, Switch, Typography} from "antd";
 import React from "react";
 import {AdminForm} from "../../../../shared/components/AdminForm";
-// import {Store} from "antd/es/form/interface"
 import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
 import styled from "styled-components";
 import {IAdsTemplate} from "../../../types/IAdsTemplate";
 import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
-import {AdTemplate2BrandCard, AdTemplate2Card} from "../../../import/ActivityAdListPage/components/AdTemplate2";
 import {getFormItemForTemplateType} from "./getFormItemForTemplateType";
 import {getTemplate1AdTemplate1Data} from "./getTemplate1AdTemplate1Data";
 import {getTemplate2AdTemplate1Data} from "./getTemplate2AdTemplate1Data";
 import {getTemplate3AdTemplate1Data} from "./getTemplate3AdTemplate1Data";
 import {IAdsScenario} from "../../../types/IAdsScenario";
-// import {IAdsFormStore} from "../../../types/IAdsFormStore";
 
 const { Title, Text } = Typography;
 
