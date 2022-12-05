@@ -73,9 +73,9 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         Modal.alert({
           show: true,
           mask: true,
-          title: t("Notice") as string,
-          content: t("Success") as string,
-          confirmText: t("Confirm") as string,
+          title: t("modal.Notice", {ns: "common"}) as string,
+          content: t("modal.Success", {ns: "common"}) as string,
+          confirmText: t("modal.Confirm", {ns: "common"}) as string,
           maskClosable: true,
           enableClose: false,
           enableIcon: false,
