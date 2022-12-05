@@ -115,12 +115,12 @@ export const useBangladeshMobileWalletForm = (props: IUseBangladeshMobileWalletF
   // NOTE: 點擊 Submit
   const confirm = useCallback(() => {
 
-    setIsFormPending(true);
-
     validateMobileWalletAccount();
     validateConfirmedMobileData();
 
     if (!mobileData.isValidation || !confirmedMobileData.isValidation) return;
+
+    setIsFormPending(true);
 
     props.triggerPostBankBindSaveToBangladeshMutation({
       bankAccNr: "",

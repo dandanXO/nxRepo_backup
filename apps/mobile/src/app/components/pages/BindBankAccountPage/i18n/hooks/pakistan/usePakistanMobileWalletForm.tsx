@@ -79,7 +79,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   // NOTE: 點擊 Submit
   const confirm = useCallback(() => {
 
-    setIsFormPending(true);
+
 
     validateMobileWalletAccount();
 
@@ -89,6 +89,8 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
       )
     )
       return;
+
+    setIsFormPending(true);
 
     const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue];
     // console.log("mobileWalletAccount", mobileWalletAccount);
