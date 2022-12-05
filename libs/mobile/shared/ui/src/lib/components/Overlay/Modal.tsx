@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const ModalPopup = styled(Popup)<{overflow?: string}>`
   justify-content: flex-start;
-  overflow: ${props => props.overflow ? props.overflow : "inherit"};
+  overflow: ${props => props.overflow ? props.overflow : "auto"};
 `;
 const ModalContent = styled(Content)`
   margin: 0;
