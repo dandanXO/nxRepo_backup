@@ -4,7 +4,9 @@ import {AdTemplate3} from "./components/AdTemplate3";
 import styled from "styled-components";
 import queryString from "query-string";
 import Android260x720 from "./720.svg";
-import {MockAdTemplate1Data, MockAdTemplate2Data} from "./MockAdTemplate1Data";
+import {MockAdTemplate1Data} from "./MockAdTemplate1Data";
+import {MockAdTemplate2Data} from "./MockAdTemplate2Data";
+import {MockAdTemplate3Data} from "./MockAdTemplate3Data";
 
 const Page = styled.div`
   //background: #f5faf4;
@@ -51,7 +53,7 @@ export const ActivityAdListPage = (props: IActivityAdListPage) => {
       return <AdTemplate2 data={props.data || MockAdTemplate2Data}/>
     }
     case "3": {
-      return <AdTemplate3/>
+      return <AdTemplate3 data={props.data || MockAdTemplate3Data}/>
     }
     default:
       return <AdTemplate1 data={props.data || MockAdTemplate1Data}/>;
@@ -80,7 +82,7 @@ export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
       break;
     }
     case "3": {
-      adTemplate = <AdTemplate3/>
+      adTemplate = <AdTemplate3 data={props.data || MockAdTemplate3Data}/>
       break;
     }
     default:

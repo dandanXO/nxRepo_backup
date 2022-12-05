@@ -120,7 +120,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
 
                             <SectionBalance>
                                 <ListItem
-                                    title="Balance"
+                                    title={props.t("Balance") as any}
                                     text={`${environment.currency} ${balance}`}
                                 />
                             </SectionBalance>
