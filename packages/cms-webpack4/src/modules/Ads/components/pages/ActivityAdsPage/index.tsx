@@ -4,10 +4,11 @@ import {useForm} from "antd/es/form/Form";
 import {ModalContent} from "../../../../shared/components/AdminTable";
 import {MockAdTemplate1Data} from "../../../import/ActivityAdListPage/MockAdTemplate1Data";
 import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
-import {AdsScenarioData, AdsTemplateData} from "../../../data/AdsTemplateData";
+import {AdsTemplateData} from "../../../data/AdsTemplateData";
 import {MockActivityBannerResponseData1} from "../../../service/mock/MockActivityBannerResponseData1";
 import {MockActivityBannerResponseData2} from "../../../service/mock/MockActivityBannerResponseData2";
 import {MockActivityBannerResponseData3} from "../../../service/mock/MockActivityBannerResponseData3";
+import {AdsScenarioData} from "../../../data/AdsScenarioData";
 
 interface IUseAdminFormModal {
     // initialValues: any

@@ -2,8 +2,8 @@ import {ActivityBanner} from "../../../service/types";
 import {AdTemplate1BrandCard, AdTemplate1Card} from "../../../import/ActivityAdListPage/components/AdTemplate1";
 import {Button, Col, Divider, Form, Input, Row, Select} from "antd";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
-import {getDefaultActivityBannerContent} from "../../../data/AdsTemplateData";
 import React from "react";
+import {getDefaultActivity1BannerContent} from "./getDefaultActivity1BannerContent";
 
 export const getFormItemForTemplateType1 = (templateType: number, ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]) => {
     return (
@@ -176,7 +176,7 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                     <Form.Item>
                                         <Button
                                             type="dashed"
-                                            onClick={() => add(getDefaultActivityBannerContent(ads.length + 1),
+                                            onClick={() => add(getDefaultActivity1BannerContent(ads.length + 1),
                                                 ads.length)} block icon={<PlusOutlined/>}>
                                             添加
                                         </Button>
