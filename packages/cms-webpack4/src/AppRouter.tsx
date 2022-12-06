@@ -13,6 +13,7 @@ import {createHashHistory} from "history";
 import {ChannelTabPage} from "./modules/channel/components/pages/ChannelTabPage";
 import UserReviewPage from "./modules/user/components/pages/UserReviewPage";
 import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPage";
+import UserReviewRecordPage from "./modules/user/components/pages/UserReviewRecordPage";
 import WhiteListPage from "./modules/user/components/pages/WhiteListPage";
 import BlackListPage from "./modules/user/components/pages/BlackListPage";
 import {AppManagePage} from "./modules/product/components/pages/AppManagePage";
@@ -76,6 +77,8 @@ export const AppRouter = () => {
                     <Route path="/user-review" component={UserReviewPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/user-review-info/:userId" component={UserReviewInfoPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path={"/user-review-record"} component={UserReviewRecordPage}/>
                     {/*// @ts-ignore*/}
                     <Route path="/whitelist" component={WhiteListPage} />
                     {/*// @ts-ignore*/}
