@@ -22,9 +22,9 @@ import OrderPage from "./modules/order/components/OrderPage";
 import OrderDetailPage from "./modules/order/components/OrderDetailPage";
 import OrderReviewPage from "./modules/order/components/OrderReviewPage";
 import OrderReviewDetailPage from "./modules/order/components/OrderReviewDetailPage";
-import {ActivityAdsEditPage} from "./modules/Ads/components/pages/ActivityAdsPage/ActivityAdsEditPage";
+import {ActivityAdsEditPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsEditPage";
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
-import {ActivityAdsAdminPage} from "./modules/Ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
+import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
