@@ -64,12 +64,13 @@ const OrderInfo = (props:{orderId:number} ) => {
             </Descriptions>
         </CardStyle>
         <CardStyle title="还款证明" >
-            {
-                utr ?
+            {(utr || receiptImage) ?
+                (
                     <Descriptions size="small" bordered>
-                        <Item label="UTR" labelStyle={{ width: 150 }} span={3}>{utr || "-"}</Item>
-                        <Item label="还款证明单据" labelStyle={{ width: 150 }} span={3}><Image width={200} src={receiptImage || "-"} fallback={imgError} /></Item>
+                        utr && <Item label="UTR" labelStyle={{ width: 150 }} span={3}>{utr || "-"}</Item>
+                        receiptImage && <Item label="还款证明单据" labelStyle={{ width: 150 }} span={3}><Image width={200} src={receiptImage || "-"} fallback={imgError} /></Item>
                     </Descriptions>
+                )
                     : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
             }
         </CardStyle>

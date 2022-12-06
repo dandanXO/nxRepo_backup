@@ -13,6 +13,7 @@ import {createHashHistory} from "history";
 import {ChannelTabPage} from "./modules/channel/components/pages/ChannelTabPage";
 import UserReviewPage from "./modules/user/components/pages/UserReviewPage";
 import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPage";
+import UserReviewRecordPage from "./modules/user/components/pages/UserReviewRecordPage";
 import WhiteListPage from "./modules/user/components/pages/WhiteListPage";
 import BlackListPage from "./modules/user/components/pages/BlackListPage";
 import {AppManagePage} from "./modules/product/components/pages/AppManagePage";
@@ -21,9 +22,9 @@ import OrderPage from "./modules/order/components/OrderPage";
 import OrderDetailPage from "./modules/order/components/OrderDetailPage";
 import OrderReviewPage from "./modules/order/components/OrderReviewPage";
 import OrderReviewDetailPage from "./modules/order/components/OrderReviewDetailPage";
-import {ActivityAdsEditPage} from "./modules/Ads/components/pages/ActivityAdsPage/ActivityAdsEditPage";
+import {ActivityAdsEditPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsEditPage";
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
-import {ActivityAdsAdminPage} from "./modules/Ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
+import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -76,6 +77,8 @@ export const AppRouter = () => {
                     <Route path="/user-review" component={UserReviewPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/user-review-info/:userId" component={UserReviewInfoPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path={"/user-review-record"} component={UserReviewRecordPage}/>
                     {/*// @ts-ignore*/}
                     <Route path="/whitelist" component={WhiteListPage} />
                     {/*// @ts-ignore*/}
