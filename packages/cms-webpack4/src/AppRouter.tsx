@@ -22,6 +22,7 @@ import OrderPage from "./modules/order/components/OrderPage";
 import OrderDetailPage from "./modules/order/components/OrderDetailPage";
 import OrderReviewPage from "./modules/order/components/OrderReviewPage";
 import OrderReviewDetailPage from "./modules/order/components/OrderReviewDetailPage";
+import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordPage";
 import {ActivityAdsEditPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsEditPage";
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
 import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
@@ -95,6 +96,8 @@ export const AppRouter = () => {
                     <Route path="/order-review" component={OrderReviewPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/order-review-detail/:userId/:orderId/:orderNo" component={OrderReviewDetailPage} />
+                    {/*// @ts-ignore*/}
+                    <Route path="/order-review-record" component={OrderReviewRecordPage} />
                     {/*// @ts-ignore*/}
                     <Route path={"/activity-ads"} component={ActivityAdsEditPage}/>
                     {/*// @ts-ignore*/}
