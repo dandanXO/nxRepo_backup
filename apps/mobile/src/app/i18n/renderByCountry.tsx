@@ -1,6 +1,6 @@
 import React from "react";
 import {environment} from "../../environments/environment";
-
+console.log("environment: ", environment);
 export const renderByCountry = (props: {
   [country: string]: React.ReactElement
 }, defaultComponent: React.ReactElement) => {

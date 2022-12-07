@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {IUseBindBankAccountPage,} from "../../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../../components/CustomPage";
 import {ChooseBindMethod} from "./ChooseBindMethod";
@@ -16,6 +16,10 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   const changeOptionValue = (value: 0|1) => {
     setChooseBindMethodValue(value);
   }
+
+  useEffect(() => {
+    props.triggerGetBindCardDropListQuery();
+  }, [])
 
   const {
     // Wallet List

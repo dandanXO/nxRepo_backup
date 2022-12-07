@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  useGetBindCardDropListQuery,
+  useLazyGetBindCardDropListQuery,
   usePostBankBindSaveMutation,
   usePostBankBindSaveToBangladeshMutation,
   usePostBankBindSaveToPKMutation
@@ -33,11 +33,11 @@ const BindBankAccountPage = () => {
     // NOTE: 綁定手機
     const [triggerPostBankBindSaveToBangladeshMutation] = usePostBankBindSaveToBangladeshMutation();
 
-    // NOTE: 取得電子錢包列表
-    const {currentData: bindCardDropListData,
+    // NOTE: 取得電子錢包列表(IN 沒有, PK 有, BD未來有)
+    const [triggerGetBindCardDropListQuery, {currentData: bindCardDropListData,
       isLoading: isBindCardDropListDataLoading,
       isFetching: isBindCardDropListDataFetching,
-    } = useGetBindCardDropListQuery({});
+    } ] = useLazyGetBindCardDropListQuery({})
 
     // NOTE: 綁定電子錢包
     const [triggerPostBankBindSaveToPKMutation, { isLoading }] = usePostBankBindSaveToPKMutation();
@@ -55,6 +55,7 @@ const BindBankAccountPage = () => {
         <PakistanBindBankAccountPage
           postBankBindSaveToPK={postBankBindSaveToPK}
           triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
+          triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
           bindCardDropListData={bindCardDropListData}
           cardholderName={cardholderName ?? ""}
         />
