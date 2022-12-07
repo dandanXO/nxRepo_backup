@@ -72,25 +72,24 @@ const UniversalRepaymentButton = styled(RepaymentButton)`
   background: #E5E5E5;
 `
 type RepaymentAdsModalProps = {
-  balance: number;
   handlePostRepayCreate: any;
   setShowRepaymentAdsModal: React.Dispatch<React.SetStateAction<boolean>>;
   setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
   setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
+  balance: string;
 }
 
 const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
     // const [isRequestPending, setIsRequestPending] = useState(false);
 
     const {t} = useTranslation(i18nRepaymentAdsModal.namespace);
-    const balance = props.balance;
-    const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
+
 
     const handleConfirm = () => {
       // if(isRequestPending) return;
       // if(!isRequestPending) setIsRequestPending(true);
 
-      const formBalanceValue = Number(balanceValue.replace(`${environment.currency}`, ""));
+      const formBalanceValue = Number(props.balance.replace(`${environment.currency}`, ""));
       if(formBalanceValue === 0) return
 
       props.handlePostRepayCreate(
