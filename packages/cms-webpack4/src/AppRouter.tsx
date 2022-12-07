@@ -23,7 +23,6 @@ import OrderDetailPage from "./modules/order/components/OrderDetailPage";
 import OrderReviewPage from "./modules/order/components/OrderReviewPage";
 import OrderReviewDetailPage from "./modules/order/components/OrderReviewDetailPage";
 import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordPage";
-import {ActivityAdsEditPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsEditPage";
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
 import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
@@ -99,9 +98,7 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/order-review-record" component={OrderReviewRecordPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/activity-ads"} component={ActivityAdsEditPage}/>
-                    {/*// @ts-ignore*/}
-                    <Route path={"/activity-ads-admin"} component={ActivityAdsAdminPage}/>
+                    <Route path={"/activity-ads"} component={ActivityAdsAdminPage}/>
                      {/*// @ts-ignore*/}
                      <Route path={"/sms-config"} component={SmsConfigPage}/>
                 </Switch>
