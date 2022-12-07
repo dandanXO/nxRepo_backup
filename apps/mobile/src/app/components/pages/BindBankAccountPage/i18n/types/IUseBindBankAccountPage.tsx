@@ -14,6 +14,8 @@ export type IUseBindBankAccountPage = {
 
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
+
+  triggerGetBindCardDropListQuery?: any;
 }
 
 export type IPakistanUseBindBankAccountPage = {

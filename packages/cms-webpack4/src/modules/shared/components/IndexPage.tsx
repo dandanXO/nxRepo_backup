@@ -55,19 +55,14 @@ export function IndexPage() {
         <div>
             <Link to="/order-review-detail"><a>Order Review Detail</a></Link>
         </div>
-
+        <div>
+            <Link to="/order-review-record"><a> Order Review Record</a></Link>
+        </div>
         <div>
             <Link to="/activity-ads">
                 <a>activity-ads</a>
             </Link>
         </div>
-
-        <div>
-            <Link to="/activity-ads-admin">
-                <a>activity-ads-admin</a>
-            </Link>
-        </div>
-
         <div>
             <Link to="/sms-config"><a>SMS Config</a></Link>
         </div>

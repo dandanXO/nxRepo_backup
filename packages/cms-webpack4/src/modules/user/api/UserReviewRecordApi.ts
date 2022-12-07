@@ -3,10 +3,10 @@ import { GetUserReviewRecordListResponse,GetUserReviewRecordListRequestQuerystri
 const UserReviewRecordApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-        // NOTE: GET /hs/admin/black-list 获取全部黑名单列表
+        // NOTE: GET /hs/admin/riskReview/getUserRiskReviewList 获取用戶審核紀錄
         getUserReviewRecordList: builder.query<GetUserReviewRecordListResponse, GetUserReviewRecordListRequestQuerystring>({
             query: (requestBody: GetUserReviewRecordListRequestQuerystring) => ({
-                url: `/black-list`,
+                url: `/riskReview/getUserRiskReviewList`,
                 params: requestBody,
                 method: "get",
             }),

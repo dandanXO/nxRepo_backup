@@ -136,6 +136,7 @@ export const {
     useGetRepayTypesQuery,
     usePostRepayCreateMutation,
     useGetBindCardDropListQuery,
+    useLazyGetBindCardDropListQuery,
     usePostBankBindSaveMutation,
     usePostBankBindSaveToPKMutation,
     usePostBankBindSaveToBangladeshMutation,

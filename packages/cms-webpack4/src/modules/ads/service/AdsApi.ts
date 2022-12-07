@@ -35,7 +35,7 @@ export interface ActivityModel {
     // 模板類型
 }
 
-export type GetActivityResponse = ActivityModel;
+export type GetActivitiesResponse = ActivityModel[];
 export type PostActivityRequest = ActivityModel;
 export type PutActivityRequest = ActivityModel;
 
@@ -46,9 +46,9 @@ interface DeleteActivityRequest {
 const AdsApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-        getActivity: builder.query<GetActivityResponse, null>({
+        getActivities: builder.query<GetActivitiesResponse, null>({
             query: () => ({
-                url: `/activity`,
+                url: `/activity/list`,
                 method: 'get',
             })
         }),
@@ -76,7 +76,7 @@ const AdsApi = API.injectEndpoints({
 })
 
 export const {
-    useLazyGetActivityQuery,
+    useLazyGetActivitiesQuery,
     usePostActivityMutation,
     usePutActivityMutation,
     useDeleteActivityMutation,

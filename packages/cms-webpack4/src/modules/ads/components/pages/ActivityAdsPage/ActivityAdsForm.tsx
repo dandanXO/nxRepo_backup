@@ -3,13 +3,13 @@ import React from "react";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
 import styled from "styled-components";
-import {IAdsTemplate} from "../../../types/IAdsTemplate";
 import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
 import {getFormItemForTemplateType} from "./getFormItemForTemplateType";
 import {getTemplate1AdTemplate1Data} from "./getTemplate1AdTemplate1Data";
 import {getTemplate2AdTemplate1Data} from "./getTemplate2AdTemplate1Data";
 import {getTemplate3AdTemplate1Data} from "./getTemplate3AdTemplate1Data";
-import {IAdsScenario} from "../../../types/IAdsScenario";
+import {AdsTemplateData} from "../../../data/AdsTemplateData";
+import {AdsScenarioData} from "../../../data/AdsScenarioData";
 
 const { Title, Text } = Typography;
 
@@ -33,9 +33,9 @@ interface IActivityAdsForm {
     onFinish: () => void;
     form: FormInstance;
     // initialValues: IAdsFormStore;
-    initialValues: IActivityAdsPageFormStore;
-    templateData: Array<IAdsTemplate>;
-    scenarioData: IAdsScenario[];
+    initialValues: DeepPartial<IActivityAdsPageFormStore>;
+    // templateData: Array<IAdsTemplate>;
+    // scenarioData: IAdsScenario[];
 }
 
 const FormContainer = styled.div`
@@ -56,16 +56,16 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
     const templateType = Form.useWatch('templateType', props.form);
     console.log("templateType", templateType);
 
-    const ads = Form.useWatch('contents', props.form);
-    console.log("ads", ads);
+    const contents: any| undefined = Form.useWatch('contents', props.form);
+    console.log("contents", contents);
 
     let adTemplate1Data;
     if(templateType === 1) {
-        adTemplate1Data = getTemplate1AdTemplate1Data(ads);
+        adTemplate1Data = getTemplate1AdTemplate1Data(contents as any);
     } else if(templateType === 2) {
-        adTemplate1Data = getTemplate2AdTemplate1Data(ads);
+        adTemplate1Data = getTemplate2AdTemplate1Data(contents as any);
     } else if(templateType === 3) {
-        adTemplate1Data = getTemplate3AdTemplate1Data(ads);
+        adTemplate1Data = getTemplate3AdTemplate1Data(contents as any);
     }
 
     // NOTE:
@@ -79,7 +79,8 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                 <Container>
                     <DemoActivityAdListPage
                         type={String(templateType)}
-                        data={adTemplate1Data}/>
+                        data={adTemplate1Data}
+                    />
                 </Container>
             </Preview>
 
@@ -106,8 +107,8 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                     }
                 >
                     <Select placeholder={'选择'}>
-                        {props.templateData &&
-                            props.templateData.map((template, index) => {
+                        {AdsTemplateData &&
+                            AdsTemplateData.map((template, index) => {
                                 return (
                                     <Select.Option key={index} value={template.id}>
                                         {template.name}
@@ -123,8 +124,8 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                     rules={[{ required: true }]}
                 >
                     <Select placeholder={'选择'}>
-                        {props.scenarioData &&
-                            props.scenarioData.map((template, index) => {
+                        {AdsScenarioData &&
+                            AdsScenarioData.map((template, index) => {
                                 return (
                                     <Select.Option key={index} value={template.value}>
                                         {template.name}
@@ -135,7 +136,7 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                 </Form.Item>
 
 
-                {getFormItemForTemplateType(templateType, ads)}
+                {getFormItemForTemplateType(templateType, contents)}
 
                 <Form.Item
                     label={'状态'}
