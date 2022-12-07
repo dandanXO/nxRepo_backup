@@ -5,6 +5,15 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const isProduction = process.env.NODE_ENV == "production";
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+// get git info from command line
+// let commitHash = require('child_process')
+//   .execSync('git rev-parse --short HEAD')
+//   .toString()
+//   .trim();
+
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
+const gitRevisionPlugin = new GitRevisionPlugin()
+console.log("gitRevisionPlugin.commithash()", gitRevisionPlugin.commithash());
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
     devtool: false,
@@ -81,6 +90,15 @@ module.exports = (config, context) => {
       //   },
       // },
     },
+    plugins: [
+      new webpack.DefinePlugin({
+          'appInfo': {
+              'VERSION': JSON.stringify(gitRevisionPlugin.version()),
+              'COMMITHASH': JSON.stringify(gitRevisionPlugin.commithash()),
+              'BRANCH': JSON.stringify(gitRevisionPlugin.branch()),
+          },
+      })
+    ]
   });
   if(isProduction) {
     finalConfig.plugins.push(

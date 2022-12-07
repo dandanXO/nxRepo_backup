@@ -412,6 +412,7 @@ export const ActivityAdsAdminPage = () => {
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
+        // console.log("onFieldsChange")
         // NOTICE: change form field value
         const originalValues = form.getFieldValue("ads");
         // console.log(form.getFieldValue("ads"))
@@ -436,18 +437,19 @@ export const ActivityAdsAdminPage = () => {
             console.log("DefaultFormByTemplateType", DefaultFormByTemplateType);
             const defaultFormValues = DefaultFormByTemplateType[value];
 
-            modal.confirm({
-                title: "切換版型會遺失目前的內容?",
-                // NOTICE: 得用下面寫法否則 editID 會找不到
-                onOk:  () => {
-                    // console.log("defaultFormValues: ", defaultFormValues);
-                    // form.setFieldsValue(defaultFormValues);
-                },
-                // onOk: onDeleteModalOK,
-                onCancel: () => {
-
-                },
-            });
+            // NOTICE: Why onFieldsChange is triggered twice? #156 https://github.com/react-component/form/issues/156
+            // modal.confirm({
+            //     title: "切換版型會遺失目前的內容?",
+            //     // NOTICE: 得用下面寫法否則 editID 會找不到
+            //     onOk:  () => {
+            //         // console.log("defaultFormValues: ", defaultFormValues);
+            //         // form.setFieldsValue(defaultFormValues);
+            //     },
+            //     // onOk: onDeleteModalOK,
+            //     onCancel: () => {
+            //
+            //     },
+            // });
         }
     }, [])
 
