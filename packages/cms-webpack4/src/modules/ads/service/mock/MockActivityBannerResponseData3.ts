@@ -32,7 +32,7 @@ export const MockActivityBannerResponseData3: ActivityBannerResponse<AdTemplate3
                 actionUrl: "",
                 actionName: "立即申請",
                 title: "利息優惠",
-                description1: "-3.5%%",
+                description1: "-3.5%",
                 description2: "原利息35%",
             },
         },

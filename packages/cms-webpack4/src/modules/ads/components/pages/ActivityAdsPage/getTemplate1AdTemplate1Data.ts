@@ -1,6 +1,6 @@
 import {ActivityBanner} from "../../../service/types";
 import {
-    AdTemplate1,
+    IAdTemplate1Data,
     AdTemplate1BrandCard,
     AdTemplate1Card
 } from "../../../import/ActivityAdListPage/components/AdTemplate1";
@@ -13,7 +13,7 @@ function instanceOfBrandCard(obj: any): obj is AdTemplate1BrandCard {
 function instanceOfCard(obj: any): obj is AdTemplate1Card {
     return 'description1' in obj;
 }
-export const getTemplate1AdTemplate1Data = (ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]): AdTemplate1 | null => {
+export const getTemplate1AdTemplate1Data = (ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]): IAdTemplate1Data | null => {
     if (!ads) return;
     return {
         brandCard: instanceOfBrandCard(ads[0].payload) && {

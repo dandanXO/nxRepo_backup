@@ -4,8 +4,9 @@ import styled from "styled-components";
 import MainCardImg from "./promotions_bg@2x.png";
 import {AdContainer} from "../AdContainer";
 
-export interface AdTemplate1 {
-    type?: "adTemplate1",
+// NOTE: Data
+export interface IAdTemplate1Data {
+    // type?: "adTemplate1",
     brandCard: AdTemplate1BrandCard;
     cards: AdTemplate1Card[];
 }
@@ -22,6 +23,8 @@ export interface AdTemplate1Card extends AdTemplateCard{
   description1: string;
   description2: string;
 }
+
+// NOTE: Component
 
 const AdTemplateContainer = styled(AdContainer)`
   overflow: scroll;
@@ -122,23 +125,26 @@ const StyledActionName = styled.div`
   text-overflow: ellipsis;
 `;
 
+// NOTE:
 interface IAdTemplate1BrandCardUI {
-  data: AdTemplate1BrandCard;
+  data: AdTemplate1BrandCard | null;
   onClick: any;
 }
+
 const AdTemplate1BrandCardUI = (props: IAdTemplate1BrandCardUI) => {
   return (
     <StyledAdTemplate1BrandCardUI onClick={props.onClick}>
-      <StyledBrandTitle>{props.data.title}</StyledBrandTitle>
+      <StyledBrandTitle>{props.data?.title}</StyledBrandTitle>
       <StyledPrice>
-        <StyledBrandPriceUnit>{props.data.priceUnit}</StyledBrandPriceUnit>
-        <StyledBrandPriceValue>{props.data.price}</StyledBrandPriceValue>
+        <StyledBrandPriceUnit>{props.data?.priceUnit}</StyledBrandPriceUnit>
+        <StyledBrandPriceValue>{props.data?.price}</StyledBrandPriceValue>
       </StyledPrice>
-      <StyledBrandDescription>{props.data.description}</StyledBrandDescription>
+      <StyledBrandDescription>{props.data?.description}</StyledBrandDescription>
     </StyledAdTemplate1BrandCardUI>
   )
 }
 
+// NOTE:
 interface IAdTemplate1CardUI {
   data: AdTemplate1Card;
   onClick: any;
@@ -146,40 +152,45 @@ interface IAdTemplate1CardUI {
 const AdTemplate1CardUI = (props: IAdTemplate1CardUI) => {
   return (
     <StyledAdTemplate1CardUI onClick={props.onClick}>
-      <StyledTitle>{props.data.title}</StyledTitle>
-      <StyledDescription1>{props.data.description1}</StyledDescription1>
-      <StyledDescription2>{props.data.description2}</StyledDescription2>
-      <StyledActionName>{props.data.actionName}</StyledActionName>
+      <StyledTitle>{props.data?.title}</StyledTitle>
+      <StyledDescription1>{props.data?.description1}</StyledDescription1>
+      <StyledDescription2>{props.data?.description2}</StyledDescription2>
+      <StyledActionName>{props.data?.actionName}</StyledActionName>
     </StyledAdTemplate1CardUI>
   )
 }
 
+
+
+// NOTE:
 interface IAdTemplate1 {
-  data: AdTemplate1;
+  data: IAdTemplate1Data | null;
 }
+
 export const AdTemplate1 = (props: IAdTemplate1) => {
-  const onClickToDoLoan = () => {
-    console.log("window.SyncTask.doQuickLoanApply()");
-    // window.SyncTask.doQuickLoanApply();
-    window["SyncTask"] &&
-    window["SyncTask"]["doQuickLoanApply"] &&
-    window["SyncTask"]["doQuickLoanApply"]();
-  }
-  const onClickToPopup = () => {
-    console.log("window.SyncTask.thematicActivitiesPopup(url: String)");
-    // window.SyncTask.thematicActivitiesPopup("https://www.google.com/");
-    window["SyncTask"] &&
-    window["SyncTask"]["thematicActivitiesPopup"] &&
-    window["SyncTask"]["thematicActivitiesPopup"]("https://www.google.com/");
-  }
-  return (
-    <AdTemplateContainer>
-      <ContainerContent>
-        <AdTemplate1BrandCardUI data={props.data.brandCard} onClick={onClickToDoLoan}/>
-        {props.data?.cards?.map((data, index) => {
-          return <AdTemplate1CardUI key={index} data={data} onClick={onClickToPopup}/>
-        })}
-      </ContainerContent>
-    </AdTemplateContainer>
-  )
+    console.log("AdTemplate1: ", props)
+    const onClickToDoLoan = () => {
+        console.log("window.SyncTask.doQuickLoanApply()");
+        // window.SyncTask.doQuickLoanApply();
+        window["SyncTask"] &&
+        window["SyncTask"]["doQuickLoanApply"] &&
+        window["SyncTask"]["doQuickLoanApply"]();
+    }
+    const onClickToPopup = () => {
+        console.log("window.SyncTask.thematicActivitiesPopup(url: String)");
+        // window.SyncTask.thematicActivitiesPopup("https://www.google.com/");
+        window["SyncTask"] &&
+        window["SyncTask"]["thematicActivitiesPopup"] &&
+        window["SyncTask"]["thematicActivitiesPopup"]("https://www.google.com/");
+    }
+    return (
+        <AdTemplateContainer>
+          <ContainerContent>
+            <AdTemplate1BrandCardUI data={props.data?.brandCard} onClick={onClickToDoLoan}/>
+            {props.data?.cards?.map((data, index) => {
+              return <AdTemplate1CardUI key={index} data={data} onClick={onClickToPopup}/>
+            })}
+          </ContainerContent>
+        </AdTemplateContainer>
+    )
 }
