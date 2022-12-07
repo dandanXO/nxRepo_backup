@@ -29,6 +29,7 @@
     "core-js": "3.6.5",
     "dom-helpers": "5.2.1",
     "g": "^2.0.1",
+    "git-revision-webpack-plugin": "^5.0.0",
     "i18next": "^22.0.5",
     "js-cookie": "3.0.1",
     "moment": "2.29.4",

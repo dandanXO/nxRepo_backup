@@ -31,9 +31,24 @@ export default () => {
         <Page>
             <p>
               <div>{t('Welcome to Mobile', {ns: "common"})}</div>
+
+              <hr/>
+
+              <div>
+                <div>App Info</div>
+                <div>Commit Hash: {appInfo.COMMITHASH}</div>
+                <div>Version: {appInfo.VERSION}</div>
+                <div>BRANCH: {appInfo.BRANCH}</div>
+              </div>
+
+              <hr/>
+
               <div>Country: {environment.countryName}</div>
               <div>Environment: {environment.production ? "正式機" : "測試機"}</div>
               <div>Language: {environment.language}</div>
+
+              <hr/>
+
               <div>開發模式的 Proxy 得由 project.json 進行設定</div>
             </p>
             <button onClick={() => {

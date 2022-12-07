@@ -59,6 +59,7 @@ specifiers:
   eslint-plugin-react: 7.31.1
   eslint-plugin-react-hooks: 4.6.0
   g: ^2.0.1
+  git-revision-webpack-plugin: ^5.0.0
   html-webpack-plugin: 5.5.0
   husky: 8.0.0
   i18next: ^22.0.5
@@ -117,6 +118,7 @@ dependencies:
   core-js: 3.6.5
   dom-helpers: 5.2.1
   g: 2.0.1
+  git-revision-webpack-plugin: 5.0.0_webpack@5.74.0
   i18next: 22.0.5
   js-cookie: 3.0.1
   moment: 2.29.4
@@ -12625,6 +12627,15 @@ packages:
 
   /git-clone/0.1.0:
     resolution: {integrity: sha512-zs9rlfa7HyaJAKG9o+V7C6qfMzyc+tb1IIXdUFcOBcR1U7siKy/uPdauLlrH1mc0vOgUwIv4BF+QxPiiTYz3Rw==}
+    dev: false
+
+  /git-revision-webpack-plugin/5.0.0_webpack@5.74.0:
+    resolution: {integrity: sha512-RptQN/4UKcEPkCBmRy8kLPo5i8MnF8+XfAgFYN9gbwmKLTLx4YHsQw726H+C5+sIGDixDkmGL3IxPA2gKo+u4w==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      webpack: ^5.0.0
+    dependencies:
+      webpack: 5.74.0
     dev: false
 
   /github-slugger/1.4.0:
