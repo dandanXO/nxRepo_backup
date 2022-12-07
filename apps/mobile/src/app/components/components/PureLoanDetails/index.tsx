@@ -13,6 +13,7 @@ import styled from "styled-components";
 import {i18nComponents} from "../i18n/translations";
 import {useTranslation} from "react-i18next";
 import RepaymentAdsModal from "../../pages/LoanDetailsPage/modal/RepaymentAdsModal";
+import {environment} from "../../../../environments/environment";
 
 const StyledUploadReceiptSection = styled.div`
   .uploadButton {
@@ -54,6 +55,14 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     useEffect(() => {
         setRepayBalance(props?.currentData?.balance);
     }, [props.currentData]);
+
+
+  const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + props.currentData?.balance));
+  useEffect(() => {
+    setBalanceValue(String(`${environment.currency}` + props.currentData?.balance));
+  }, [props.currentData]);
+
+
     return (
       <CustomPage>
         <React.Fragment>
@@ -80,6 +89,10 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
             <RepaymentModal
               balance={props.currentData?.balance}
               setRepayBalance={setRepayBalance}
+
+              balanceValue={balanceValue}
+              setBalanceValue={setBalanceValue}
+
               setShowRepaymentModal={setShowRepaymentModal}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
               paymentMethodList={props.paymentMethodList}
@@ -89,7 +102,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
           )}
           {showRepaymentAdsModal && (
             <RepaymentAdsModal
-              balance={props.currentData?.balance}
+              balance={balanceValue}
               handlePostRepayCreate={props.handlePostRepayCreate}
               setShowRepaymentAdsModal={setShowRepaymentAdsModal}
               setShowRepaymentModal={setShowRepaymentModal}

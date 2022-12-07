@@ -93,11 +93,19 @@ type RepaymentModalProps = {
     setPayType: React.Dispatch<React.SetStateAction<number>>;
     // FIXME:
     setShowRepaymentAdsModal: React.Dispatch<React.SetStateAction<boolean>>;
+
+  balanceValue: string;
+  setBalanceValue: React.Dispatch<React.SetStateAction<string>>;
 } & WithTranslation;
 
 const RepaymentModal = (props: RepaymentModalProps) => {
+
+    // NOTE: 標籤
     const balance = props.balance;
-    const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
+
+    // NOTE: 變動數值
+    // const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
+
     const [radioValue, setRadioValue] = useState("balance");
     const [paymentMethodValue, setPaymentMethodValue] = useState(0);
 
@@ -133,7 +141,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                     onCheck={(value: any) => {
                                       setRadioValue(value);
                                       if (value === "balance") {
-                                        setBalanceValue(`${environment.currency}` + balance);
+                                        props.setBalanceValue(`${environment.currency}` + balance);
                                       }
                                     }}
                                   >
@@ -145,7 +153,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                 <Input
                                     label={props.t("Amount") as string}
                                     labelType="left"
-                                    value={balanceValue}
+                                    value={props.balanceValue}
                                     disabled={radioValue === "balance"}
                                     // onBlur={(event: any) => {
                                     //   let value = event.target.value;
@@ -160,13 +168,13 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                       value = value.replaceAll(`${environment.currency}`, "");
                                       // NOTE: if custom balance exceed max balance then setting max balance
                                       if(String(Number(value)) === "NaN" || String(value) === "0") {
-                                        setBalanceValue(`${environment.currency}1`);
+                                        props.setBalanceValue(`${environment.currency}1`);
                                         props.setRepayBalance(1);
                                       } else {
                                         if(Number(value) > Number(balance)) {
                                           value = balance;
                                         }
-                                        setBalanceValue(`${environment.currency}` + value);
+                                        props.setBalanceValue(`${environment.currency}` + value);
                                         props.setRepayBalance(value);
                                       }
                                     }}

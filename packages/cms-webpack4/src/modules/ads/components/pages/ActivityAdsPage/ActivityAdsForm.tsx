@@ -1,4 +1,4 @@
-import {Form, FormInstance, Input, Radio, Select, Switch, Typography} from "antd";
+import {Form, FormInstance, Input, Modal, Radio, Select, Switch, Typography} from "antd";
 import React from "react";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
@@ -36,6 +36,7 @@ interface IActivityAdsForm {
     initialValues: DeepPartial<IActivityAdsPageFormStore>;
     // templateData: Array<IAdsTemplate>;
     // scenarioData: IAdsScenario[];
+    modal: any;
 }
 
 const FormContainer = styled.div`
@@ -70,87 +71,111 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
 
     // NOTE:
     return (
-        <FormContainer>
-            <Preview>
-                <Title level={5}>预览</Title>
-                <div style={{ textAlign: "center"}}>
-                    <Text>观赏首页广告</Text>
-                </div>
-                <Container>
-                    <DemoActivityAdListPage
-                        type={String(templateType)}
-                        data={adTemplate1Data}
-                    />
-                </Container>
-            </Preview>
+        <AdminForm
+            form={props.form}
+            initialValues={props.initialValues}
+            onFieldsChange={props.onFieldsChange}
+            onFinish={props.onFinish}
+        >
+            <FormContainer>
+                <Preview>
+                    <Title level={5}>预览</Title>
+                    <div style={{ textAlign: "center"}}>
+                        <Text>观赏首页广告</Text>
+                    </div>
+                    <Container>
+                        <DemoActivityAdListPage
+                            type={String(templateType)}
+                            data={adTemplate1Data}
+                        />
+                    </Container>
+                </Preview>
 
-            <AdminForm
-                form={props.form}
-                initialValues={props.initialValues}
-                onFieldsChange={props.onFieldsChange}
-                onFinish={props.onFinish}
-            >
-                <Form.Item
-                    label="广告名称"
-                    name="name"
-                    rules={[{ required: true }]}
+                <AdminForm
+                    form={props.form}
+                    initialValues={props.initialValues}
+                    onFieldsChange={props.onFieldsChange}
+                    onFinish={props.onFinish}
                 >
-                    <Input placeholder="广告名称" disabled={props.isEdit} />
-                </Form.Item>
+                    <Form.Item
+                        label="广告名称"
+                        name="name"
+                        rules={[{ required: true }]}
+                    >
+                        <Input placeholder="广告名称"/>
+                    </Form.Item>
 
-                <Form.Item
-                    label={'模板选择'}
-                    name="templateType"
-                    rules={[{ required: true }]}
-                    extra={
-                        '设定后即无法直接修改，送出前请务必再次确认。'
-                    }
-                >
-                    <Select placeholder={'选择'}>
-                        {AdsTemplateData &&
-                            AdsTemplateData.map((template, index) => {
-                                return (
-                                    <Select.Option key={index} value={template.id}>
-                                        {template.name}
-                                    </Select.Option>
-                                );
-                            })}
-                    </Select>
-                </Form.Item>
+                    <Form.Item
+                        label={'模板选择'}
+                        name="templateType"
+                        rules={[{ required: true }]}
+                        extra={
+                            '设定后即无法直接修改，送出前请务必再次确认。'
+                        }
+                    >
+                        <Select
+                            disabled={props.isEdit}
+                            placeholder={'选择'}
+                                onClick={() => {
+                                    // props.modal.confirm({
+                                    //     title: "切換版型會遺失目前的內容",
+                                    //     // NOTICE: 得用下面寫法否則 editID 會找不到
+                                    //     onOk:  () => {
+                                    //         // console.log("defaultFormValues: ", defaultFormValues);
+                                    //         // form.setFieldsValue(defaultFormValues);
+                                    //     },
+                                    //     // onOk: onDeleteModalOK,
+                                    //     onCancel: () => {
+                                    //
+                                    //     },
+                                    // });
+                                }}
+                        >
+                            {AdsTemplateData &&
+                                AdsTemplateData.map((template, index) => {
+                                    return (
+                                        <Select.Option key={index} value={template.id}>
+                                            {template.name}
+                                        </Select.Option>
+                                    );
+                                })}
+                        </Select>
+                    </Form.Item>
 
-                <Form.Item
-                    label={'目标场景'}
-                    name="scenario"
-                    rules={[{ required: true }]}
-                >
-                    <Select placeholder={'选择'}>
-                        {AdsScenarioData &&
-                            AdsScenarioData.map((template, index) => {
-                                return (
-                                    <Select.Option key={index} value={template.value}>
-                                        {template.name}
-                                    </Select.Option>
-                                );
-                            })}
-                    </Select>
-                </Form.Item>
+                    <Form.Item
+                        label={'目标场景'}
+                        name="scenario"
+                        rules={[{ required: true }]}
+                    >
+                        <Select placeholder={'选择'}>
+                            {AdsScenarioData &&
+                                AdsScenarioData.map((template, index) => {
+                                    return (
+                                        <Select.Option key={index} value={template.value}>
+                                            {template.name}
+                                        </Select.Option>
+                                    );
+                                })}
+                        </Select>
+                    </Form.Item>
 
 
-                {getFormItemForTemplateType(templateType, contents)}
+                    {getFormItemForTemplateType(templateType, contents)}
 
-                <Form.Item
-                    label={'状态'}
-                    name={'enabled'}
-                    valuePropName={'checked'}
-                >
-                    <Switch
-                        checkedChildren={'启用'}
-                        unCheckedChildren={'停用'}
-                    ></Switch>
-                </Form.Item>
+                    <Form.Item
+                        label={'状态'}
+                        name={'enabled'}
+                        valuePropName={'checked'}
+                    >
+                        <Switch
+                            checkedChildren={'启用'}
+                            unCheckedChildren={'停用'}
+                        ></Switch>
+                    </Form.Item>
 
-            </AdminForm>
-        </FormContainer>
+                </AdminForm>
+            </FormContainer>
+        </AdminForm>
     );
 }
 

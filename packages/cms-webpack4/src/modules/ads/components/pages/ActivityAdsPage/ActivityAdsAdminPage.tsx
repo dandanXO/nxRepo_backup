@@ -10,8 +10,13 @@ import {useForm} from "antd/es/form/Form";
 import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import {ActivityAdsForm} from "./ActivityAdsForm";
 import {MockActivityBannerResponseData3} from "../../../service/mock/MockActivityBannerResponseData3";
-import {useDeleteTagMutation} from "../../../../channel/service/ChannelApi";
-import {ActivityModel, useLazyGetActivitiesQuery} from "../../../service/AdsApi";
+import {useCreateTagMutation, useDeleteTagMutation, usePutTagMutation} from "../../../../channel/service/ChannelApi";
+import {
+    ActivityModel, useDeleteActivityMutation,
+    useLazyGetActivitiesQuery,
+    usePostActivityMutation,
+    usePutActivityMutation
+} from "../../../service/AdsApi";
 import {Modal} from "antd/es";
 import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
 import {Form} from "antd";
@@ -276,6 +281,7 @@ const DefaultFormByTemplateType = {
 
 export const ActivityAdsAdminPage = () => {
 
+
     // NOTE: GET list and item
     const [triggerGetList, {
         currentData: currentItemListData,
@@ -287,11 +293,11 @@ export const ActivityAdsAdminPage = () => {
         refetchOnReconnect: false
     });
 
-    const [triggerDelete, {
-        data: deleteData,
-        isLoading: isDeleteLoading,
-        isSuccess: isDeleteSuccess
-    }] = useDeleteTagMutation();
+    // NOTE: POST , PUT and DELETE
+    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = usePostActivityMutation();
+    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutActivityMutation();
+    const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteActivityMutation();
+
 
     const {
         showModalContent,
@@ -412,34 +418,55 @@ export const ActivityAdsAdminPage = () => {
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
-        // console.log("onFieldsChange")
+        // console.log("onFieldsChange.changedFields[0].name[0]", changedFields[0].name[0])
         // NOTICE: change form field value
-        const originalValues = form.getFieldValue("ads");
+
         // console.log(form.getFieldValue("ads"))
         // console.log("changedFields", changedFields);
 
         // NOTE: Template1
         if(changedFields[0].name[0] === "contents") {
+            const originalValues = form.getFieldValue("contents");
+
             const index = changedFields[0].name[1];
             const key = changedFields[0].name[2];
             const value = changedFields[0].value;
+
+            // console.log("changedFields[0]", changedFields[0])
+
             originalValues[index][key] = value;
+            // NOTE: 同步 actionUrl 與 payload.actionUrl
+            if(key === "actionUrl") {
+                originalValues[index].payload.actionUrl = value;
+            }
+
+            // NOTE: 切換 action 將 actionUrl 原本值清空
+            if(key === "action") {
+                originalValues[index].actionUrl = "";
+                originalValues[index].payload.actionUrl = "";
+            }
+
             // console.log("originalValues", originalValues)
             form.setFieldValue("contents", originalValues);
             // console.log("after", form.getFieldValue("contents"));
+
+
+            // console.log("key", key)
         }
 
         if(changedFields[0].name[0] === "templateType") {
             const index = changedFields[0].name[1];
             const key = changedFields[0].name[2];
             const value = changedFields[0].value;
-            console.log("templateType.value", value);
-            console.log("DefaultFormByTemplateType", DefaultFormByTemplateType);
+            // console.log("templateType.value", value);
+            // console.log("DefaultFormByTemplateType", DefaultFormByTemplateType);
+
             const defaultFormValues = DefaultFormByTemplateType[value];
+            form.setFieldsValue(defaultFormValues);
 
             // NOTICE: Why onFieldsChange is triggered twice? #156 https://github.com/react-component/form/issues/156
             // modal.confirm({
-            //     title: "切換版型會遺失目前的內容?",
+            //     title: "切換版型會遺失目前的內容",
             //     // NOTICE: 得用下面寫法否則 editID 會找不到
             //     onOk:  () => {
             //         // console.log("defaultFormValues: ", defaultFormValues);
@@ -453,8 +480,72 @@ export const ActivityAdsAdminPage = () => {
         }
     }, [])
 
-    // NOTICE: Form.3 onFinish
-    const onFinish = useCallback(() => {}, []);
+    // Form - Finish
+    const onFormFinish = useCallback(() => {
+        userEditedChannelSettingUseCase();
+    }, [showModalContent.isEdit, editID])
+
+    // NOTE: System validate ChannelSetting
+    const systemValidateChannelSettingUseCase = useCallback(() => {
+        // NOTICE: need
+        const fields = form.getFieldsValue();
+
+        // NOTICE: need to prevent restored validation
+        Object.keys(fields).map(key => {
+            if (fields[key] === undefined) {
+                form.setFieldValue(key, "");
+            }
+        })
+
+        // NOTICE: need
+        // const data = channelTagSchemaEntity.transformToEntityData(fields);
+        // const validData = channelTagSchemaEntity.setProperties(data).validate();
+
+        // setCustomAntFormFieldError({
+        //     ...customAntFormFieldError,
+        //     ...validData.fieldsMessage,
+        // });
+        // return validData.isEntityValid;
+    }, [])
+
+    // NOTE: user Edited ChannelSetting
+    const userEditedChannelSettingUseCase = useCallback(() => {
+        // const isValid = systemValidateChannelSettingUseCase();
+        // if (!isValid) return;
+
+        // NOTICE: need
+        const fields = form.getFieldsValue();
+
+        // NOTICE: MODE - Edit
+        if (showModalContent.isEdit) {
+            fields["id"] = editID;
+        }
+
+        // NOTE: Create or Edit
+        const triggerAPI = (!showModalContent.isEdit ? triggerPost : triggerPut) as any;
+
+        // console.log("fields", fields);
+
+        // // NOTE: Request
+        triggerAPI(fields).unwrap().then((responseData) => {
+            // console.log("responseData", responseData);
+
+            // Reset Form
+            form.resetFields();
+
+            // Close Modal
+            setShowModalContent({
+                show: false,
+                isEdit: false,
+            })
+
+            // Reset TableList
+            triggerGetList && triggerGetList(null);
+
+            // formSuccessCallback && formSuccessCallback();
+
+        })
+    }, [showModalContent.isEdit, editID])
 
 
     // NOTICE: UseCase
@@ -466,6 +557,9 @@ export const ActivityAdsAdminPage = () => {
     useEffect(() => {
         userBrowseAllActivitiesUseCase()
     }, [])
+
+
+
 
     return (
         <AdminPage navigator={{
@@ -487,6 +581,7 @@ export const ActivityAdsAdminPage = () => {
                     hasAddForm={true}
                     onAddCallback={onAddItem}
                 />
+
                 <AdminFormCustomModal
                     title={adminModalTitle}
                     width={"1200px"}
@@ -501,7 +596,8 @@ export const ActivityAdsAdminPage = () => {
                         id={editID}
                         initialValues={initialValues}
                         onFieldsChange={onFieldsChange}
-                        onFinish={onFinish}
+                        onFinish={onFormFinish}
+                        modal={modal}
                     />
                 </AdminFormCustomModal>
                 {/*NOTICE: Delete Modal*/}
