@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { Page } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
 import {useTranslation} from "react-i18next";
+import styled from "styled-components";
 
 const getToken = () => {
   if(environment.country === "in") {
     return `b5f2db2c45e24edcbc49540bae862fbd`
   } else if (environment.country == "pk") {
-    return `8048370a5b6f40048bee52486f9a5cab`
+    return `8c63e92475854c7baf2a64734a036b2b`
   } else if(environment.country == "bn") {
     return `dbb501e9b49d4a69bf8a7b3a3de85e06`
   }
@@ -25,10 +26,13 @@ const getOrderNo = () => {
 const queryString = () => `token=${getToken()}&orderNo=${getOrderNo()}`;
 const getCardholderName = () => `cardholderName=C I Riyaz Ur Rahaman`;
 
+const IndexPage = styled(Page)`
+  user-select: text;
+`;
 export default () => {
     const { t } = useTranslation();
     return (
-        <Page>
+        <IndexPage>
             <p>
               <div>{t('Welcome to Mobile', {ns: "common"})}</div>
 
@@ -49,7 +53,9 @@ export default () => {
 
               <hr/>
 
-              <div>開發模式的 Proxy 得由 project.json 進行設定</div>
+              <div>開發模式的 Proxy 得由 project.json 進行設定。</div>
+              <div>"proxyConfig": "apps/mobile/proxy.config.pk.json"</div>
+
             </p>
             <button onClick={() => {
               window.open("http://localhost:4003/?showtranslations", "_blank");
@@ -95,6 +101,6 @@ export default () => {
                     ProductAdModalListPage
                 </Link>
             </li>
-        </Page>
+        </IndexPage>
     );
 };

@@ -90,6 +90,8 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
       // if(!isRequestPending) setIsRequestPending(true);
 
       const formBalanceValue = Number(props.balance.replace(`${environment.currency}`, ""));
+
+      console.log("formBalanceValue", formBalanceValue);
       if(formBalanceValue === 0) return
 
       props.handlePostRepayCreate(

@@ -344,11 +344,15 @@ export const ActivityAdsAdminPage = () => {
             title: 'ID',
             dataIndex: 'id',
             hideInSearch: true,
+            width: 80,
         },
-        { key: 'name', title: '广告名称', dataIndex: 'name', initialValue: "" },
+        {
+            key: 'name', title: '广告名称', dataIndex: 'name', initialValue: "", hideInSearch: true,
+            width: 300,
+        },
         {
             key: 'scenario',
-            title: '目标场景', dataIndex: 'enabled', valueType: 'select',
+            title: '目标场景', dataIndex: 'scenario', valueType: 'select',
             initialValue: 'all',
             valueEnum: {
                 "all": { text: '全部', status: 'Default' },
@@ -359,11 +363,12 @@ export const ActivityAdsAdminPage = () => {
                 [AdsScenarioData[4]['value']]: { text: AdsScenarioData[4].name},
 
             },
-            width: 80,
+            width: 200,
+            hideInSearch: true,
         },
         {
             key: 'templateType',
-            title: '模板选择', dataIndex: 'enabled', valueType: 'select',
+            title: '模板选择', dataIndex: 'templateType', valueType: 'select',
             initialValue: 'all',
             valueEnum: {
                 "all": { text: '全部', status: 'Default' },
@@ -371,7 +376,8 @@ export const ActivityAdsAdminPage = () => {
                 "2": { text: AdsTemplateData[1].name},
                 "3": { text: AdsTemplateData[2].name},
             },
-            width: 80,
+            // width: 80,
+            hideInSearch: true,
         },
         {
             key: 'enabled',
@@ -383,6 +389,7 @@ export const ActivityAdsAdminPage = () => {
                 "disable": { text: '停用', status: 'Default' },
             },
             width: 80,
+            hideInSearch: true,
         },
     ]
 
@@ -575,7 +582,7 @@ export const ActivityAdsAdminPage = () => {
         // NOTE: Create or Edit
         const triggerAPI = (!showModalContent.isEdit ? triggerPost : triggerPut) as any;
 
-        // console.log("fields", fields);
+        console.log("fields", fields);
 
         // // NOTE: Request
         triggerAPI(fields).unwrap().then((responseData) => {
