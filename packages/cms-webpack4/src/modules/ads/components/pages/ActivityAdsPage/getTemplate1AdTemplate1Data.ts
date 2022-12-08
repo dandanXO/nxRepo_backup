@@ -1,8 +1,8 @@
 import {ActivityBanner} from "../../../service/types";
 import {
-    IAdTemplate1Data,
     AdTemplate1BrandCard,
-    AdTemplate1Card
+    AdTemplate1Card,
+    IAdTemplate1Data
 } from "../../../import/ActivityAdListPage/components/AdTemplate1";
 
 // NOTICE: Interface type check with Typescript https://stackoverflow.com/questions/14425568/interface-type-check-with-typescript

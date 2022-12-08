@@ -86,6 +86,7 @@ const AdsApi = API.injectEndpoints({
 })
 
 export const {
+    useLazyGetActivityQuery,
     useLazyGetActivitiesQuery,
     usePostActivityMutation,
     usePutActivityMutation,

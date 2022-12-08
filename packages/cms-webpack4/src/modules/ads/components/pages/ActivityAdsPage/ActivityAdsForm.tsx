@@ -1,4 +1,4 @@
-import {Form, FormInstance, Input, Modal, Radio, Select, Switch, Typography} from "antd";
+import {Form, FormInstance, Input, Select, Switch, Typography} from "antd";
 import React from "react";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
@@ -55,10 +55,10 @@ const Preview = styled.div`
 export const ActivityAdsForm = (props: IActivityAdsForm) => {
 
     const templateType = Form.useWatch('templateType', props.form);
-    console.log("templateType", templateType);
+    // console.log("templateType", templateType);
 
     const contents: any| undefined = Form.useWatch('contents', props.form);
-    console.log("contents", contents);
+    // console.log("contents", contents);
 
     let adTemplate1Data;
     if(templateType === 1) {

@@ -9,11 +9,11 @@ import {AdminFormCustomModal} from "../../../../shared/components/AdminFormCusto
 import {useForm} from "antd/es/form/Form";
 import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import {ActivityAdsForm} from "./ActivityAdsForm";
-import {MockActivityBannerResponseData3} from "../../../service/mock/MockActivityBannerResponseData3";
-import {useCreateTagMutation, useDeleteTagMutation, usePutTagMutation} from "../../../../channel/service/ChannelApi";
 import {
-    ActivityModel, useDeleteActivityMutation,
+    ActivityModel,
+    useDeleteActivityMutation,
     useLazyGetActivitiesQuery,
+    useLazyGetActivityQuery,
     usePostActivityMutation,
     usePutActivityMutation
 } from "../../../service/AdsApi";
@@ -23,7 +23,9 @@ import {Form} from "antd";
 
 type IUseAdminTable = {
     triggerGetList: any;
+    triggerGet: any;
     triggerDelete: any;
+    // currentFormData: any;
 }
 const useAdminFormModal = (props: IUseAdminTable) => {
 
@@ -81,12 +83,12 @@ const useAdminFormModal = (props: IUseAdminTable) => {
             show: true,
             isEdit: true,
         })
-        // triggerGet({
-        //     id: record.id,
-        // });
-        props.triggerGetList({
+        props.triggerGet({
             id: record.id,
-        })
+        });
+        // props.triggerGetList({
+        //     id: record.id,
+        // })
     }, []);
 
     // NOTICE: Modal - Delete
@@ -294,6 +296,7 @@ export const ActivityAdsAdminPage = () => {
     });
 
     // NOTE: POST , PUT and DELETE
+    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetActivityQuery();
     const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = usePostActivityMutation();
     const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutActivityMutation();
     const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteActivityMutation();
@@ -312,6 +315,7 @@ export const ActivityAdsAdminPage = () => {
         contextHolder,
         modal,
     } = useAdminFormModal({
+        triggerGet,
         triggerGetList,
         triggerDelete,
     });
@@ -390,7 +394,7 @@ export const ActivityAdsAdminPage = () => {
     // const initialValues = MockFormStore;
 
     const templateType = Form.useWatch('templateType', form);
-    console.log("templateType", templateType);
+    // console.log("templateType", templateType);
 
     // const initialValues = useMemo(() => {
     //     // NOTICE: select and switch need initialValue if you want to select one
@@ -415,6 +419,25 @@ export const ActivityAdsAdminPage = () => {
     //     form.setFieldValue("ads", defaultFormValues);
     // }, [])
 
+    // NOTE: System reload EditChannelSetting
+    const systemReloadEditUseCase = useCallback((currentFormData) => {
+        // NOTICE: form
+        // NOTE: form - menu
+        // const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
+        // const id = targetMenu && targetMenu[0] && targetMenu[0].id || undefined;
+
+        // NOTE: form - main data
+        form.setFieldsValue(currentFormData)
+    }, [showModalContent.isEdit, currentFormData])
+
+
+    // NOTE: Form - Mode: edit (Set form fields from data)
+    useEffect(() => {
+        if(showModalContent.isEdit && currentFormData) {
+            systemReloadEditUseCase(currentFormData)
+        }
+    }, [showModalContent.isEdit, currentFormData])
+
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
@@ -424,17 +447,45 @@ export const ActivityAdsAdminPage = () => {
         // console.log(form.getFieldValue("ads"))
         // console.log("changedFields", changedFields);
 
+        // if(changedFields[0].name[0] === "contents") {
+        //     const originalValues = form.getFieldValue("contents");
+        //     const index = changedFields[0].name[1];
+        //     const key = changedFields[0].name[2];
+        //     const key2 = changedFields[0].name[3];
+        //     const value = changedFields[0].value;
+        //     console.log("index", index);
+        //     console.log("key", key);
+        //     console.log("key2", key2);
+        //     console.log("value", value);
+        //     originalValues[index][key][key2] = value;
+        //     // console.log("originalValues", originalValues)
+        //     form.setFieldValue("contents", originalValues);
+        //     // console.log("after", form.getFieldValue("contents"));
+        // }
+
         // NOTE: Template1
         if(changedFields[0].name[0] === "contents") {
             const originalValues = form.getFieldValue("contents");
 
             const index = changedFields[0].name[1];
             const key = changedFields[0].name[2];
+            const key2 = changedFields[0].name[3];
             const value = changedFields[0].value;
+
+            // console.log("index", index);
+            // console.log("key", key);
+            // console.log("key2", key2);
+            // console.log("value", value);
 
             // console.log("changedFields[0]", changedFields[0])
 
-            originalValues[index][key] = value;
+            // key actionUrl
+            // ActivityAdsAdminPage.tsx?211d:389 key2 undefined
+            if(key2) {
+                originalValues[index][key][key2] = value;
+            }
+
+
             // NOTE: 同步 actionUrl 與 payload.actionUrl
             if(key === "actionUrl") {
                 originalValues[index].payload.actionUrl = value;
