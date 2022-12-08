@@ -20,6 +20,7 @@ import {
 import {Modal} from "antd/es";
 import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
 import {Form} from "antd";
+import {CommonResponseError} from "../../../../../types/CommonResponseError";
 
 type IUseAdminTable = {
     triggerGetList: any;
@@ -147,7 +148,53 @@ const useAdminFormModal = (props: IUseAdminTable) => {
 // const MockFormStore = MockActivityBannerResponseData2;
 // const MockFormStore = MockActivityBannerResponseData3;
 
-
+const DefaultFirstForm = {
+    templateType: 1,
+    enabled: true,
+    scenario: "DEFAULT",
+    sort: 0,
+    contents: [
+        {
+            // NOTICE: REFACTOR
+            action: "APPLY_LOAN",
+            actionUrl: "",
+            payload: {
+                title: "",
+                priceUnit: "",
+                price: "",
+                description: "",
+            },
+        },
+        {
+            // NOTICE: REFACTOR
+            action: "APPLY_LOAN",
+            actionUrl: "",
+            payload: {
+                // NOTICE: REFACTOR
+                action: "",
+                actionUrl: "",
+                actionName: "",
+                title: "",
+                description1: "",
+                description2: "",
+            },
+        },
+        {
+            // NOTICE: REFACTOR
+            action: "APPLY_LOAN",
+            actionUrl: "",
+            payload: {
+                // NOTICE: REFACTOR
+                action: "",
+                actionUrl: "",
+                actionName: "",
+                title: "",
+                description1: "",
+                description2: "",
+            },
+        },
+    ],
+}
 const DefaultFormByTemplateType = {
     "1": {
         templateType: 1,
@@ -411,20 +458,22 @@ export const ActivityAdsAdminPage = () => {
     // }, [templateType]);
 
     const initialValues = useMemo(() => {
-        // return {
-        //     templateType: 1,
-        //     enabled: true,
-        //     scenario: "DEFAULT",
-        //     sort: 0,
-        // } as DeepPartial<IActivityAdsPageFormStore>
-        const defaultFormValues = DefaultFormByTemplateType[1];
-        return defaultFormValues;
-    }, []);
+       return {} as DeepPartial<IActivityAdsPageFormStore>
+    }, [showModalContent.isEdit]);
 
-    // useEffect(() => {
-    //     const defaultFormValues = DefaultFormByTemplateType[1];
-    //     form.setFieldValue("ads", defaultFormValues);
-    // }, [])
+    useEffect(() => {
+
+        if(!showModalContent.show) {
+            form.setFieldsValue({});
+        } else {
+            if(!showModalContent.isEdit) {
+                const defaultFormValues = DefaultFormByTemplateType[1];
+                form.setFieldsValue(defaultFormValues);
+            } else {
+                form.setFieldsValue({});
+            }
+        }
+    }, [showModalContent.show])
 
     // NOTE: System reload EditChannelSetting
     const systemReloadEditUseCase = useCallback((currentFormData) => {
@@ -599,9 +648,16 @@ export const ActivityAdsAdminPage = () => {
 
             // Reset TableList
             triggerGetList && triggerGetList(null);
-
             // formSuccessCallback && formSuccessCallback();
-
+        }).catch((error: CommonResponseError) => {
+            modal.error({
+                title: "Error",
+                // NOTICE: 得用下面寫法否則 editID 會找不到
+                onOk: () => {},
+                // onOk: onDeleteModalOK,
+                onCancel: () => {},
+                content: error.data.message
+            });
         })
     }, [showModalContent.isEdit, editID])
 
@@ -627,10 +683,10 @@ export const ActivityAdsAdminPage = () => {
             },
             parent: {
                 path: "",
-                breadcrumbName: "廣告管理",
+                breadcrumbName: "导流管理",
             },
             self: {
-                path: "/activity-ads-admin",
+                path: "",
                 breadcrumbName:"廣告管理"
             }
         }}>

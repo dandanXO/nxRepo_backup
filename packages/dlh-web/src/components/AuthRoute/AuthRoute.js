@@ -101,6 +101,14 @@ class AuthRoute extends Component {
                           }
                       })
                   }
+                  if(menuItem.actionUrl === "/h5Manage") {
+                    menuItem.children.map(level2MenuItem => {
+                      // 廣告管理
+                      if (level2MenuItem.actionUrl === "/activity-setting") {
+                        level2MenuItem.actionUrl = "/cms/activity-ads";
+                      }
+                    })
+                  }
                   return menuItem;
                 })
                 console.log("[MainApp][after] menu", data);
