@@ -134,6 +134,7 @@
   "page.search.list.config.name": "Configuration name",
   "page.search.list.config.name.enter": "Please enter configuration name",
   "page.search.list.belonging.channel": "Belonging Channel",
+  "page.search.list.finish.time": "Finish Time",
   "page.search.clear.no.repeat.loan": "Whether cleared and no repeat loan",
   "page.search.clear.no.repeat.loan.days": "Cleared and no repeat loan days",
   "page.search.list.collect.team.report.days.violation": "Do not query over {days} days",

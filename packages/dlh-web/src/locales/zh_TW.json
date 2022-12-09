@@ -136,6 +136,7 @@
   "page.search.loan.time": "借款時間",
   "page.search.format.incorrect": "格式不正確",
   "page.search.list.belonging.channel": "所屬渠道",
+  "page.search.list.finish.time": "完成時間",
   "page.search.clear.no.repeat.loan": "是否結清未複借",
   "page.search.clear.no.repeat.loan.days": "結清未複借天數",
   "page.table.leng": "展期",

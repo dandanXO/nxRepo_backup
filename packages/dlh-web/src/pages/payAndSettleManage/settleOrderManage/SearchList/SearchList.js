@@ -159,6 +159,18 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
 
+                        <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.finish.time"})}>
+                                {
+                                    getFieldDecorator('finishTime', {
+                                        initialValue: []
+                                    })(
+                                        <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]} allowClear={true} />
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+
                         <Col lg={36} xl={24} style={{textAlign:'right'}}>
                                 <Button onClick={this.handleClick} type={'primary'}><FormattedMessage id="page.search.list.search" /></Button>
                         </Col>
