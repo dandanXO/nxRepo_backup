@@ -1,13 +1,11 @@
 import AdminPage from "../../../../shared/components/AdminPage";
-import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
+import {AdminTable} from "../../../../shared/components/AdminTable";
 import {ProColumns} from "@ant-design/pro-components";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo} from "react";
 import {AdsTemplateData} from "../../../data/AdsTemplateData";
 import {AdsScenarioData} from "../../../data/AdsScenarioData";
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 import {AdminFormCustomModal} from "../../../../shared/components/AdminFormCustomModal";
-import {useForm} from "antd/es/form/Form";
-import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import {ActivityAdsForm} from "./ActivityAdsForm";
 import {
     ActivityModel,
@@ -17,319 +15,13 @@ import {
     usePostActivityMutation,
     usePutActivityMutation
 } from "../../../service/AdsApi";
-import {Modal} from "antd/es";
 import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";
 import {Form} from "antd";
 import {CommonResponseError} from "../../../../../types/CommonResponseError";
-
-type IUseAdminTable = {
-    triggerGetList: any;
-    triggerGet: any;
-    triggerDelete: any;
-    // currentFormData: any;
-}
-const useAdminFormModal = (props: IUseAdminTable) => {
-
-    // NOTICE: Action: Create or Edit
-    // NOTE: Modal
-    const [showModalContent, setShowModalContent] = useState<ModalContent>({
-        show: false,
-        isEdit: false,
-    });
-
-    // NOTICE: Form
-    const [form] = useForm()
-
-    const [editID, setEditID] = useState<number>();
-
-    // Form - Validation
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
-
-    // NOTICE: Modal - Create, Edit
-    const [modal, contextHolder] = Modal.useModal();
-    // Modal - OK
-    const onModalOk = useCallback(() => {
-        form.submit();
-    }, [form])
-
-    // Modal - Close
-    const onCloseModal = useCallback(() => {
-        form.resetFields();
-        setCustomAntFormFieldError({});
-    }, []);
-
-    const onAddItem = useCallback(() => {
-        userAdd()
-    }, [])
-
-
-    // NOTE: User add ChannelSetting
-    const userAdd = useCallback(() => {
-        setEditID(undefined);
-        setShowModalContent({
-            show: true,
-            isEdit: false,
-        });
-    }, []);
-
-
-    // NOTE: User browse EditChannelSetting
-    //     userBrowseEditChannelSettingUseCase
-    const onEditItem = useCallback((record: ActivityModel) => {
-        // triggerGetAllRiskDropMenu(null);
-        // triggerGetAllChannelSettingTagDropMenu(null);
-
-        setEditID(record.id);
-        setShowModalContent({
-            show: true,
-            isEdit: true,
-        })
-        props.triggerGet({
-            id: record.id,
-        });
-        // props.triggerGetList({
-        //     id: record.id,
-        // })
-    }, []);
-
-    // NOTICE: Modal - Delete
-    const [showDeleteModal, setShowDeletedModal] = useState(false);
-
-    const onDeleteModalOK = useCallback((editID: number) => {
-        // NOTICE: need dependency array
-        userDeleteChannelSettingUseCase(editID)
-    }, [])
-
-    // NOTE: User delete ChannelSetting
-    const userDeleteChannelSettingUseCase = useCallback((editID: number) => {
-        // NOTE:
-        props.triggerDelete({
-            id: editID,
-        }).unwrap().then(() => {
-            setShowDeletedModal(false);
-            props.triggerGetList(null);
-        })
-    }, []);
-
-    const onDeleteModalCancel = useCallback(() => {
-        setShowDeletedModal(false);
-    }, [])
-
-    // userBrowseDeleteChannelSettingUseCase
-    const onDeleteItem = useCallback((record: ActivityModel) => {
-        modal.confirm({
-            title: "确认要删除此笔数据吗?",
-            // NOTICE: 得用下面寫法否則 editID 會找不到
-            onOk: () => onDeleteModalOK(record.id),
-            // onOk: onDeleteModalOK,
-            onCancel: onDeleteModalCancel,
-        });
-    }, [])
-
-
-    return {
-        showModalContent,
-        setShowModalContent,
-        onModalOk,
-        onCloseModal,
-
-        modal,
-        editID,
-        form,
-        onAddItem,
-        onEditItem,
-        onDeleteItem,
-        contextHolder,
-
-    }
-}
-
-// const MockFormStore = MockActivityBannerResponseData1;
-// const MockFormStore = MockActivityBannerResponseData2;
-// const MockFormStore = MockActivityBannerResponseData3;
-
-const DefaultFirstForm = {
-    templateType: 1,
-    enabled: true,
-    scenario: "DEFAULT",
-    sort: 0,
-    contents: [
-        {
-            // NOTICE: REFACTOR
-            action: "APPLY_LOAN",
-            actionUrl: "",
-            payload: {
-                title: "",
-                priceUnit: "",
-                price: "",
-                description: "",
-            },
-        },
-        {
-            // NOTICE: REFACTOR
-            action: "APPLY_LOAN",
-            actionUrl: "",
-            payload: {
-                // NOTICE: REFACTOR
-                action: "",
-                actionUrl: "",
-                actionName: "",
-                title: "",
-                description1: "",
-                description2: "",
-            },
-        },
-        {
-            // NOTICE: REFACTOR
-            action: "APPLY_LOAN",
-            actionUrl: "",
-            payload: {
-                // NOTICE: REFACTOR
-                action: "",
-                actionUrl: "",
-                actionName: "",
-                title: "",
-                description1: "",
-                description2: "",
-            },
-        },
-    ],
-}
-const DefaultFormByTemplateType = {
-    "1": {
-        templateType: 1,
-        enabled: true,
-        scenario: "DEFAULT",
-        sort: 0,
-        contents: [
-            {
-                // NOTICE: REFACTOR
-                action: "APPLY_LOAN",
-                actionUrl: "",
-                payload: {
-                    title: "新人福利",
-                    priceUnit: "PKR",
-                    price: "5,000",
-                    description: "新人大禮包",
-                },
-            },
-            {
-                // NOTICE: REFACTOR
-                action: "APPLY_LOAN",
-                actionUrl: "",
-                payload: {
-                    // NOTICE: REFACTOR
-                    action: "APPLY_LOAN",
-                    actionUrl: "",
-                    actionName: "點我借款 >",
-                    title: "利息優惠1",
-                    description1: "- 1.0%",
-                    description2: "原利息15%",
-                },
-            },
-            {
-                // NOTICE: REFACTOR
-                action: "POP_URL",
-                actionUrl: "http://google.com",
-                payload: {
-                    // NOTICE: REFACTOR
-                    action: "POP_URL",
-                    actionUrl: "",
-                    actionName: "點我借款 >",
-                    title: "利息優惠2",
-                    description1: "- 2.0%",
-                    description2: "原利息25%",
-                },
-            },
-        ],
-    } as DeepPartial<IActivityAdsPageFormStore>,
-    "2": {
-        templateType: 2,
-        enabled: true,
-        scenario: "DEFAULT",
-        sort: 0,
-        contents: [
-            {
-                // NOTICE: REFACTOR
-                action: "APPLY_LOAN",
-                actionUrl: "",
-                payload: {
-                    // NOTICE: REFACTOR
-                    action: "POP_URL",
-                    actionName: "立即查看",
-                    actionUrl: "",
-                    title1: "最快3分鐘",
-                    title2: "放款率最高",
-                    priceUnit: "PKR",
-                    price: "5,000",
-                },
-            },
-            {
-                // NOTICE: REFACTOR
-                action: "APPLY_LOAN",
-                actionUrl: "",
-                payload: {
-                    // NOTICE: REFACTOR
-                    action: "POP_URL",
-                    actionUrl: "http://google.com",
-                    actionName: "立即申請",
-                    title: "信用500以上 秒下款",
-                },
-            },
-            {
-                // NOTICE: REFACTOR
-                action: "POP_URL",
-                actionUrl: "http://google.com",
-                payload: {
-                    // NOTICE: REFACTOR
-                    action: "POP_URL",
-                    actionUrl: "http://google.com",
-                    actionName: "立即申請",
-                    title: "憑信用卡秒下50000元",
-                },
-            },
-        ],
-    } as DeepPartial<IActivityAdsPageFormStore>,
-    "3": {
-        templateType: 3,
-        enabled: true,
-        scenario: "DEFAULT",
-        sort: 0,
-        contents: [
-            {
-                // NOTICE: REFACTOR
-                action: "APPLY_LOAN",
-                actionUrl: "",
-                payload: {
-                    // NOTICE: REFACTOR
-                    action: "APPLY_LOAN",
-                    actionUrl: "",
-                    actionName: "立即查看",
-                    title: "新人福利",
-                    description1: "99%",
-                    description2: "成功放款率",
-                },
-            },
-            {
-                // NOTICE: REFACTOR
-                action: "APPLY_LOAN",
-                actionUrl: "",
-                payload: {
-                    // NOTICE: REFACTOR
-                    action: "POP_URL",
-                    actionUrl: "",
-                    actionName: "立即申請",
-                    title: "利息優惠",
-                    description1: "-3.5%",
-                    description2: "原利息35%",
-                },
-            },
-        ],
-    } as DeepPartial<IActivityAdsPageFormStore>
-}
+import {DefaultFormByTemplateType} from "./DefaultFormByTemplateType";
+import {useAdminFormModal} from "./useAdminFormModal";
 
 export const ActivityAdsAdminPage = () => {
-
 
     // NOTE: GET list and item
     const [triggerGetList, {
@@ -366,7 +58,6 @@ export const ActivityAdsAdminPage = () => {
         triggerGetList,
         triggerDelete,
     });
-
 
     const columns: ProColumns<ActivityModel, "text">[] = [
         {
@@ -440,9 +131,6 @@ export const ActivityAdsAdminPage = () => {
         },
     ]
 
-
-
-
     const adminModalTitle = "廣告管理";
 
     // const initialValues = MockFormStore;
@@ -503,22 +191,6 @@ export const ActivityAdsAdminPage = () => {
         // console.log(form.getFieldValue("ads"))
         // console.log("changedFields", changedFields);
 
-        // if(changedFields[0].name[0] === "contents") {
-        //     const originalValues = form.getFieldValue("contents");
-        //     const index = changedFields[0].name[1];
-        //     const key = changedFields[0].name[2];
-        //     const key2 = changedFields[0].name[3];
-        //     const value = changedFields[0].value;
-        //     console.log("index", index);
-        //     console.log("key", key);
-        //     console.log("key2", key2);
-        //     console.log("value", value);
-        //     originalValues[index][key][key2] = value;
-        //     // console.log("originalValues", originalValues)
-        //     form.setFieldValue("contents", originalValues);
-        //     // console.log("after", form.getFieldValue("contents"));
-        // }
-
         // NOTE: Template1
         if(changedFields[0].name[0] === "contents") {
             const originalValues = form.getFieldValue("contents");
@@ -528,10 +200,10 @@ export const ActivityAdsAdminPage = () => {
             const key2 = changedFields[0].name[3];
             const value = changedFields[0].value;
 
-            // console.log("index", index);
-            // console.log("key", key);
-            // console.log("key2", key2);
-            // console.log("value", value);
+            console.log("index", index);
+            console.log("key", key);
+            console.log("key2", key2);
+            console.log("value", value);
 
             // console.log("changedFields[0]", changedFields[0])
 
@@ -539,6 +211,8 @@ export const ActivityAdsAdminPage = () => {
             // ActivityAdsAdminPage.tsx?211d:389 key2 undefined
             if(key2) {
                 originalValues[index][key][key2] = value;
+            } else {
+                originalValues[index][key] = value;
             }
 
 
@@ -550,10 +224,11 @@ export const ActivityAdsAdminPage = () => {
             // NOTE: 切換 action 將 actionUrl 原本值清空
             if(key === "action") {
                 originalValues[index].actionUrl = "";
+                originalValues[index].payload.action = value
                 originalValues[index].payload.actionUrl = "";
             }
 
-            // console.log("originalValues", originalValues)
+            console.log("originalValues", originalValues)
             form.setFieldValue("contents", originalValues);
             // console.log("after", form.getFieldValue("contents"));
 
@@ -591,29 +266,6 @@ export const ActivityAdsAdminPage = () => {
     const onFormFinish = useCallback(() => {
         userEditedChannelSettingUseCase();
     }, [showModalContent.isEdit, editID])
-
-    // NOTE: System validate ChannelSetting
-    const systemValidateChannelSettingUseCase = useCallback(() => {
-        // NOTICE: need
-        const fields = form.getFieldsValue();
-
-        // NOTICE: need to prevent restored validation
-        Object.keys(fields).map(key => {
-            if (fields[key] === undefined) {
-                form.setFieldValue(key, "");
-            }
-        })
-
-        // NOTICE: need
-        // const data = channelTagSchemaEntity.transformToEntityData(fields);
-        // const validData = channelTagSchemaEntity.setProperties(data).validate();
-
-        // setCustomAntFormFieldError({
-        //     ...customAntFormFieldError,
-        //     ...validData.fieldsMessage,
-        // });
-        // return validData.isEntityValid;
-    }, [])
 
     // NOTE: user Edited ChannelSetting
     const userEditedChannelSettingUseCase = useCallback(() => {
@@ -671,8 +323,6 @@ export const ActivityAdsAdminPage = () => {
     useEffect(() => {
         userBrowseAllActivitiesUseCase()
     }, [])
-
-
 
 
     return (
