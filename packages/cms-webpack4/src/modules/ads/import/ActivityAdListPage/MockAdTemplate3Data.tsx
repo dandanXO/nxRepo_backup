@@ -1,6 +1,6 @@
-import {AdTemplate3} from "./components/AdTemplate3";
+import {AdTemplate3, IAdTemplate3Data} from "./components/AdTemplate3";
 
-export const MockAdTemplate3Data: AdTemplate3 = {
+export const MockAdTemplate3Data: IAdTemplate3Data = {
   brandCard: {
     title: "新人福利",
     description1: "99%",

@@ -1,6 +1,7 @@
 import {AdTemplateCard} from "../index";
 import {AdContainer} from "./AdContainer";
 import styled from "styled-components";
+import {onClickToAction} from "./AdClick";
 
 export interface IAdTemplate3Data {
   brandCard: AdTemplate3Card;
@@ -73,9 +74,14 @@ interface IAdTemplate3 {
   data: IAdTemplate3Data | null;
 }
 export const AdTemplate3 = (props: IAdTemplate3) => {
+  console.log("AdTemplate3.props: ", props)
   return (
     <AdTemplate3Container>
-      <Card bgColor={"#ec606a"}>
+      {/*NOTE: Brand*/}
+      <Card bgColor={"#ec606a"} onClick={() => onClickToAction({
+        action: props.data?.brandCard.action,
+        actionUrl: props.data?.brandCard.actionUrl,
+      })}>
         <Title color={"#fff"}>{props.data?.brandCard.title}</Title>
         <Description>
           <Description1 color={"#fff"}>{props.data?.brandCard.description1}</Description1>
@@ -86,7 +92,11 @@ export const AdTemplate3 = (props: IAdTemplate3) => {
           <div>{'>'}</div>
         </Button>
       </Card>
-      <Card bgColor={"#fff"}>
+      {/*NOTE: Card*/}
+      <Card bgColor={"#fff"} onClick={() => onClickToAction({
+        action: props.data?.card.action,
+        actionUrl: props.data?.card.actionUrl,
+      })}>
         <Title color={"#000"}>{props.data?.card.title}</Title>
         <Description>
           <Description1 color={"#ec606a"}>{props.data?.card.description1}</Description1>

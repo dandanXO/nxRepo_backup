@@ -1,8 +1,7 @@
 import {ActivityBanner} from "../../../service/types";
 import {
-    AdTemplate2,
-    AdTemplate2BrandCard,
-    AdTemplate2Card
+  AdTemplate2BrandCard,
+  AdTemplate2Card, IAdTemplate2Data
 } from "../../../import/ActivityAdListPage/components/AdTemplate2";
 
 
@@ -14,27 +13,27 @@ function instanceOfCard2(obj: any): obj is AdTemplate2Card {
     return 'title' in obj;
 }
 
-export const getTemplate2AdTemplate1Data = (ads?: ActivityBanner<AdTemplate2BrandCard, AdTemplate2Card>[]): AdTemplate2 | null => {
-    if (!ads) return;
+export const getTemplate2AdTemplate1Data = (ads?: ActivityBanner<AdTemplate2BrandCard, AdTemplate2Card>[]): IAdTemplate2Data | null => {
+    if (!ads) return null;
     return {
         brandCard: {
-            title1: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.title1,
-            title2: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.title2,
-            priceUnit: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.priceUnit,
-            price: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.price,
-            actionName: instanceOfBrandCard2(ads[0].payload) && ads[0].payload.actionName,
+            title1: (ads[0].payload as AdTemplate2BrandCard).title1,
+            title2: (ads[0].payload as AdTemplate2BrandCard).title2,
+            priceUnit: (ads[0].payload as AdTemplate2BrandCard).priceUnit,
+            price: (ads[0].payload as AdTemplate2BrandCard).price,
+            actionName: (ads[0].payload as AdTemplate2BrandCard).actionName,
             action: ads[0].action,
             actionUrl: ads[0].actionUrl,
         },
         topCard: {
-            title: instanceOfCard2(ads[1].payload) && ads[1].payload.title,
-            actionName: instanceOfCard2(ads[1].payload) && ads[1].payload.actionName,
+            title: (ads[1].payload as AdTemplate2Card).title,
+            actionName: (ads[1].payload as AdTemplate2Card).actionName,
             action: ads[1].action,
             actionUrl: ads[1].actionUrl,
         },
         bottomCard: {
-            title: instanceOfCard2(ads[2].payload) && ads[2].payload.title,
-            actionName: instanceOfCard2(ads[2].payload) && ads[2].payload.actionName,
+            title: (ads[2].payload as AdTemplate2Card).title,
+            actionName: (ads[2].payload as AdTemplate2Card).actionName,
             action: ads[2].action,
             actionUrl: ads[2].actionUrl,
         },

@@ -1,6 +1,9 @@
 import {AdTemplateCard} from "../index";
 import {AdContainer} from "./AdContainer";
 import styled from "styled-components";
+import {
+  onClickToAction
+} from "../../../../../../../../packages/cms-webpack4/src/modules/ads/import/ActivityAdListPage/components/AdClick";
 
 const makeStyleEllipsisOverflowText = () => {
     return `
@@ -118,7 +121,13 @@ export const AdTemplate2 = (props: IAdTemplate2) => {
     // console.log("props", props)
   return (
     <AdTemplate2Container>
-      <BrandCard>
+      {/*NOTE: Brand*/}
+      <BrandCard
+        onClick={() => onClickToAction({
+          action: props.data?.brandCard.action,
+          actionUrl: props.data?.brandCard.actionUrl,
+        })}
+      >
         <Title1>{props.data?.brandCard.title1}</Title1>
         <Title2>{props.data?.brandCard.title2}</Title2>
         <Price>
@@ -128,11 +137,23 @@ export const AdTemplate2 = (props: IAdTemplate2) => {
         <Button bgColor={"#ef7e3a"}>{props.data?.brandCard.actionName}</Button>
       </BrandCard>
       <CardContainer>
-        <Card bgColor={"#e4f6ef"}>
+        {/*NOTE: Top*/}
+        <Card bgColor={"#e4f6ef"}
+              onClick={() => onClickToAction({
+                action: props.data?.topCard.action,
+                actionUrl: props.data?.brandCard.actionUrl,
+              })}
+        >
           <Title color={"#469c7d"}>{props.data?.topCard.title}</Title>
           <Button bgColor={"#59c19e"}>{props.data?.topCard.actionName}</Button>
         </Card>
-        <Card bgColor={"#f2f4fa"}>
+        {/*NOTE: Bottom*/}
+        <Card bgColor={"#f2f4fa"}
+              onClick={() => onClickToAction({
+                action: props.data?.bottomCard.action,
+                actionUrl: props.data?.bottomCard.actionUrl,
+              })}
+        >
           <Title color={"#485d8c"}>{props.data?.bottomCard.title}</Title>
           <Button bgColor={"#5175aa"}>{props.data?.bottomCard.actionName}</Button>
         </Card>

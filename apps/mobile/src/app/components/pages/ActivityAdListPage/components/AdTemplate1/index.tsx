@@ -3,6 +3,7 @@ import {AdTemplateCard} from "../../index";
 import styled from "styled-components";
 import MainCardImg from "./promotions_bg@2x.png";
 import {AdContainer} from "../AdContainer";
+import {onClickToAction} from "../AdClick";
 
 // NOTE: Data
 export interface IAdTemplate1Data {
@@ -128,12 +129,11 @@ const StyledActionName = styled.div`
 // NOTE:
 interface IAdTemplate1BrandCardUI {
   data?: AdTemplate1BrandCard;
-  onClick: any;
 }
 
 const AdTemplate1BrandCardUI = (props: IAdTemplate1BrandCardUI) => {
   return (
-    <StyledAdTemplate1BrandCardUI onClick={props.onClick}>
+    <StyledAdTemplate1BrandCardUI>
       <StyledBrandTitle>{props.data?.title}</StyledBrandTitle>
       <StyledPrice>
         <StyledBrandPriceUnit>{props.data?.priceUnit}</StyledBrandPriceUnit>
@@ -169,26 +169,19 @@ interface IAdTemplate1 {
 
 export const AdTemplate1 = (props: IAdTemplate1) => {
     console.log("AdTemplate1: ", props)
-    const onClickToDoLoan = () => {
-        console.log("window.SyncTask.doQuickLoanApply()");
-        // window.SyncTask.doQuickLoanApply();
-        window["SyncTask"] &&
-        window["SyncTask"]["doQuickLoanApply"] &&
-        window["SyncTask"]["doQuickLoanApply"]();
-    }
-    const onClickToPopup = () => {
-        console.log("window.SyncTask.thematicActivitiesPopup(url: String)");
-        // window.SyncTask.thematicActivitiesPopup("https://www.google.com/");
-        window["SyncTask"] &&
-        window["SyncTask"]["thematicActivitiesPopup"] &&
-        window["SyncTask"]["thematicActivitiesPopup"]("https://www.google.com/");
-    }
+
     return (
         <AdTemplateContainer>
           <ContainerContent>
-            <AdTemplate1BrandCardUI data={props.data?.brandCard} onClick={onClickToDoLoan}/>
+            <AdTemplate1BrandCardUI data={props.data?.brandCard} />
             {props.data?.cards?.map((data, index) => {
-              return <AdTemplate1CardUI key={index} data={data} onClick={onClickToPopup}/>
+              return <AdTemplate1CardUI
+                key={index}
+                data={data}
+                onClick={onClickToAction({
+                  action: data.action,
+                  actionUrl: data.actionUrl,
+                })}/>
             })}
           </ContainerContent>
         </AdTemplateContainer>

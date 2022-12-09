@@ -14,22 +14,22 @@ function instanceOfCard(obj: any): obj is AdTemplate1Card {
     return 'description1' in obj;
 }
 export const getTemplate1AdTemplate1Data = (ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]): IAdTemplate1Data | null => {
-    if (!ads) return;
+    if (!ads) return null;
     return {
-        brandCard: instanceOfBrandCard(ads[0].payload) && {
+        brandCard: {
             title: ads[0].payload.title,
-            priceUnit: instanceOfBrandCard(ads[0].payload) && ads[0].payload.priceUnit,
-            price: instanceOfBrandCard(ads[0].payload) && ads[0].payload.price,
-            description: instanceOfBrandCard(ads[0].payload) && ads[0].payload.description,
+            priceUnit: (ads[0].payload as AdTemplate1BrandCard).priceUnit,
+            price: (ads[0].payload as AdTemplate1BrandCard).price,
+            description: (ads[0].payload as AdTemplate1BrandCard).description,
         },
         cards: ads.slice(1, ads.length).map((item: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>) => {
             return {
                 action: item.action,
                 actionUrl: item.actionUrl,
-                actionName: instanceOfCard(item.payload) && item.payload.actionName,
+                actionName: (item.payload as AdTemplate1Card).actionName,
                 title: item.payload.title,
-                description1: instanceOfCard(item.payload) && item.payload.description1,
-                description2: instanceOfCard(item.payload) && item.payload.description2,
+                description1: (item.payload as AdTemplate1Card).description1,
+                description2: (item.payload as AdTemplate1Card).description2,
             }
         })
     }
