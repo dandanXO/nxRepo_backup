@@ -204,7 +204,7 @@ export const ActivityAdsAdminPage = () => {
             // console.log("value", value);
             if(key2) {
                 originalValues[index][key][key2] = value;
-            } else {
+            } else if(typeof index !== "undefined" && typeof key !== "undefined"){
                 originalValues[index][key] = value;
             }
             // NOTE: 同步 actionUrl 與 payload.actionUrl

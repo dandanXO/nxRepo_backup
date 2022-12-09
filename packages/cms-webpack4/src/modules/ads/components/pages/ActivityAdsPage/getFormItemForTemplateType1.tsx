@@ -55,7 +55,7 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                 </Col>
                             </Row>
                             {fields.map(({key, name, ...restField}, index) => {
-                                // console.log("name", name)
+                                console.log("name", name)
                                 if (index === 0) return null;
                                 return (
                                     <div key={index}>
@@ -130,11 +130,11 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                                         <Form.Item
                                                             noStyle
                                                             shouldUpdate={(prevValues, curValues) => {
-                                                                // console.log("prevValues")
-                                                                // console.log(prevValues)
-                                                                // console.log("curValues")
-                                                                // console.log(curValues)
-                                                                return prevValues.contents[name].action !== curValues.contents[name].action
+                                                                console.log("prevValues")
+                                                                console.log(prevValues)
+                                                                console.log("curValues")
+                                                                console.log(curValues)
+                                                                return prevValues.contents[name]?.action !== curValues.contents[name]?.action
                                                             }}
                                                         >
                                                             {({getFieldValue}) => {
