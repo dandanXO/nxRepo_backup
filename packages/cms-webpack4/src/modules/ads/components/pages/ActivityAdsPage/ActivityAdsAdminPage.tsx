@@ -123,8 +123,8 @@ export const ActivityAdsAdminPage = () => {
             initialValue: 'all',
             valueEnum: {
                 "all": { text: '全部', status: 'Default' },
-                "enable": { text: '启用', status: 'Success' },
-                "disable": { text: '停用', status: 'Default' },
+                "true": { text: '启用', status: 'Success' },
+                "false": { text: '停用', status: 'Default' },
             },
             width: 80,
             hideInSearch: true,
