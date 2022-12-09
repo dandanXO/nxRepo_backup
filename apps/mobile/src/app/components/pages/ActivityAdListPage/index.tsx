@@ -113,10 +113,9 @@ export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
       break;
     }
     default:
-      adTemplate = <AdTemplate1 data={props.data || MockAdTemplate1Data}/>;
+      adTemplate = null;
       break;
   }
-
 
 
   return (

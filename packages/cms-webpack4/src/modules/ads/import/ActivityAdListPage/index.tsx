@@ -46,7 +46,7 @@ interface IActivityAdListPage {
 }
 
 export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
-    console.log("DemoActivityAdListPage.props:z", props)
+    // console.log("DemoActivityAdListPage.props:z", props)
   const type = parsedQueryString.type || props.type;
   let adTemplate;
   switch (type) {
@@ -63,13 +63,13 @@ export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
       break;
     }
     default:
-      adTemplate = <AdTemplate1 data={props.data}/>;
+      adTemplate = <div>读取中</div>;
       break;
   }
   return (
     <Page>
         <CategoryText>Theme Activities</CategoryText>
-        {adTemplate}
+        {props && adTemplate}
     </Page>
   )
 }
