@@ -59,8 +59,14 @@ export const getFormItemForTemplateType3 = (templateType: number, ads?: Activity
                                         rules={[{required: true}]}
                                     >
                                         <Select>
-                                            <Select.Option value="APPLY_LOAN">跳轉至付款頁</Select.Option>
-                                            <Select.Option value="POP_URL">跳轉至自定義網址</Select.Option>
+                                            <Select>
+                                                <Select.Option
+                                                    value="APPLY_LOAN">跳转至借款页
+                                                </Select.Option>
+                                                <Select.Option
+                                                    value="POP_URL">跳转至自定义网址
+                                                </Select.Option>
+                                            </Select>
                                         </Select>
                                     </Form.Item>
                                 </Col>
