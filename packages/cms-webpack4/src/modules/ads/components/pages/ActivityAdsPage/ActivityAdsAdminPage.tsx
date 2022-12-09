@@ -131,7 +131,7 @@ export const ActivityAdsAdminPage = () => {
         },
     ]
 
-    const adminModalTitle = "廣告管理";
+    const adminModalTitle = "活动广告管理";
 
     // const initialValues = MockFormStore;
 
@@ -194,28 +194,19 @@ export const ActivityAdsAdminPage = () => {
         // NOTE: Template1
         if(changedFields[0].name[0] === "contents") {
             const originalValues = form.getFieldValue("contents");
-
             const index = changedFields[0].name[1];
             const key = changedFields[0].name[2];
             const key2 = changedFields[0].name[3];
             const value = changedFields[0].value;
-
-            console.log("index", index);
-            console.log("key", key);
-            console.log("key2", key2);
-            console.log("value", value);
-
-            // console.log("changedFields[0]", changedFields[0])
-
-            // key actionUrl
-            // ActivityAdsAdminPage.tsx?211d:389 key2 undefined
+            // console.log("index", index);
+            // console.log("key", key);
+            // console.log("key2", key2);
+            // console.log("value", value);
             if(key2) {
                 originalValues[index][key][key2] = value;
             } else {
                 originalValues[index][key] = value;
             }
-
-
             // NOTE: 同步 actionUrl 與 payload.actionUrl
             if(key === "actionUrl") {
                 originalValues[index].payload.actionUrl = value;
@@ -227,13 +218,7 @@ export const ActivityAdsAdminPage = () => {
                 originalValues[index].payload.action = value
                 originalValues[index].payload.actionUrl = "";
             }
-
-            console.log("originalValues", originalValues)
             form.setFieldValue("contents", originalValues);
-            // console.log("after", form.getFieldValue("contents"));
-
-
-            // console.log("key", key)
         }
 
         if(changedFields[0].name[0] === "templateType") {
@@ -283,7 +268,7 @@ export const ActivityAdsAdminPage = () => {
         // NOTE: Create or Edit
         const triggerAPI = (!showModalContent.isEdit ? triggerPost : triggerPut) as any;
 
-        console.log("fields", fields);
+        // console.log("fields", fields);
 
         // // NOTE: Request
         triggerAPI(fields).unwrap().then((responseData) => {
