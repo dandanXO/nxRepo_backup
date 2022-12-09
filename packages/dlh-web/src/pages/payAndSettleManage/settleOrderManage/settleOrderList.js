@@ -422,7 +422,7 @@ class SettleOrderList extends Component {
     }
 
     handleSearch = (obj) => {
-        let { time,orderNo,platOrderId, platId, mchNo, mchId,status,userName,phoneNo ,productName} = obj;
+        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo , productName, finishTime} = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
         if(Array.isArray(time)) {
@@ -435,7 +435,18 @@ class SettleOrderList extends Component {
             }
         }
 
-        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, pageSize: 10, pageNum: 1 };
+        let startFinishDate = '', endFinishDate = '';
+        if(Array.isArray(finishTime)) {
+            [startFinishDate, endFinishDate] = finishTime.map(item => item.format('YYYY-MM-DD'));
+            if(!!startFinishDate){
+                startFinishDate += ' 00:00:00.0';
+            }
+            if(!!endFinishDate){
+                endFinishDate += ' 23:59:59.999';
+            }
+        }
+
+        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, pageSize: 10, pageNum: 1 };
         this.searchParams = params;
         getTableData(params);
     }
