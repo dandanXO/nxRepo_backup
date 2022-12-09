@@ -3,11 +3,11 @@ import React from "react";
 import {AdminForm} from "../../../../shared/components/AdminForm";
 import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
 import styled from "styled-components";
-import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
+import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";
 import {getFormItemForTemplateType} from "./getFormItemForTemplateType";
-import {getTemplate1AdTemplate1Data} from "./getTemplate1AdTemplate1Data";
-import {getTemplate2AdTemplate1Data} from "./getTemplate2AdTemplate1Data";
-import {getTemplate3AdTemplate1Data} from "./getTemplate3AdTemplate1Data";
+import {getTemplate1AdTemplate1Data} from "../../../export/mapper/getTemplate1AdTemplate1Data";
+import {getTemplate2AdTemplate1Data} from "../../../export/mapper/getTemplate2AdTemplate1Data";
+import {getTemplate3AdTemplate1Data} from "../../../export/mapper/getTemplate3AdTemplate1Data";
 import {AdsTemplateData} from "../../../data/AdsTemplateData";
 import {AdsScenarioData} from "../../../data/AdsScenarioData";
 

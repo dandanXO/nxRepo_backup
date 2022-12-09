@@ -1,5 +1,5 @@
 import {API} from "../../../api";
-import {AdsScenarioType} from "../types/IAdsScenario";
+import {AdsScenarioType} from "../export/types/IAdsScenario";
 
 export interface ActivityBannerVoRes {
     action:string;

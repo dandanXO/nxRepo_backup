@@ -1,4 +1,4 @@
-import {ActivityBanner} from "../../../service/types";
+import {ActivityBanner} from "../../../export/service/types";
 import {AdTemplate1BrandCard, AdTemplate1Card} from "../../../import/ActivityAdListPage/components/AdTemplate1";
 import {Col, Divider, Form, Input, Row, Select} from "antd";
 import React from "react";

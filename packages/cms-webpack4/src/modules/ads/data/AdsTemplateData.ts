@@ -1,4 +1,4 @@
-import {IAdsTemplate} from "../types/IAdsTemplate";
+import {IAdsTemplate} from "../export/types/IAdsTemplate";
 
 export const AdsTemplateData: IAdsTemplate[] = [
     {id: 1, name: "左右滑动版型(数量可条整)"},

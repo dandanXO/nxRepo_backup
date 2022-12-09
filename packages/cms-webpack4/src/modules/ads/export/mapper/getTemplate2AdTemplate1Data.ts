@@ -1,8 +1,8 @@
-import {ActivityBanner} from "../../../service/types";
+import {ActivityBanner} from "../service/types";
 import {
   AdTemplate2BrandCard,
   AdTemplate2Card, IAdTemplate2Data
-} from "../../../import/ActivityAdListPage/components/AdTemplate2";
+} from "../../import/ActivityAdListPage/components/AdTemplate2";
 
 
 function instanceOfBrandCard2(obj: any): obj is AdTemplate2BrandCard {

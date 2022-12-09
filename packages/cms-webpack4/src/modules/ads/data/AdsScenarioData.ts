@@ -1,4 +1,4 @@
-import {IAdsScenario} from "../types/IAdsScenario";
+import {IAdsScenario} from "../export/types/IAdsScenario";
 
 export const AdsScenarioData: IAdsScenario[] = [
     {id: 1, name: "預設", value: "DEFAULT"},

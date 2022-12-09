@@ -18,7 +18,7 @@ import {
     usePutActivityMutation
 } from "../../../service/AdsApi";
 import {Modal} from "antd/es";
-import {IActivityAdsPageFormStore} from "../../../types/IAdsFormStore";
+import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";
 import {Form} from "antd";
 import {CommonResponseError} from "../../../../../types/CommonResponseError";
 
