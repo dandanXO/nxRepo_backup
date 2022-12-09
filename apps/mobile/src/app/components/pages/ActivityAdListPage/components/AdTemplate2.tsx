@@ -3,7 +3,7 @@ import {AdContainer} from "./AdContainer";
 import styled from "styled-components";
 
 const makeStyleEllipsisOverflowText = () => {
-  return `
+    return `
         // NOTICE:
         overflow: hidden;
         white-space: nowrap;
@@ -11,11 +11,11 @@ const makeStyleEllipsisOverflowText = () => {
     `;
 }
 
-export interface AdTemplate2 {
-  type?: "adTemplate2",
-  brandCard: AdTemplate2BrandCard;
-  topCard: AdTemplate2Card;
-  bottomCard: AdTemplate2Card;
+export interface IAdTemplate2Data {
+    type?: "adTemplate2",
+    brandCard: AdTemplate2BrandCard;
+    topCard: AdTemplate2Card;
+    bottomCard: AdTemplate2Card;
 }
 
 export interface AdTemplate2BrandCard extends AdTemplateCard{
@@ -112,10 +112,10 @@ const Title = styled.div<{color: string}>`
 `;
 
 interface IAdTemplate2 {
-  data?: AdTemplate2;
+    data: IAdTemplate2Data | null;
 }
 export const AdTemplate2 = (props: IAdTemplate2) => {
-  // console.log("props", props)
+    // console.log("props", props)
   return (
     <AdTemplate2Container>
       <BrandCard>

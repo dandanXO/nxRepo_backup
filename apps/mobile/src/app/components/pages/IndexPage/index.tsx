@@ -62,7 +62,7 @@ export default () => {
             }}>showtranslations</button>
 
             <li>
-              <Link to={"/activity-list"}>ActivityAdList</Link>
+              <Link to={"/activity-list?phoneNo=9049334242"}>ActivityAdList</Link>
             </li>
 
             <li>

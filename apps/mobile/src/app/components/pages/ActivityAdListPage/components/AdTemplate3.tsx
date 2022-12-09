@@ -2,7 +2,7 @@ import {AdTemplateCard} from "../index";
 import {AdContainer} from "./AdContainer";
 import styled from "styled-components";
 
-export interface AdTemplate3 {
+export interface IAdTemplate3Data {
   brandCard: AdTemplate3Card;
   card: AdTemplate3Card;
 }
@@ -70,7 +70,7 @@ const Button = styled.div<{bgColor: string; color: string}>`
 `
 
 interface IAdTemplate3 {
-  data?: AdTemplate3;
+  data: IAdTemplate3Data | null;
 }
 export const AdTemplate3 = (props: IAdTemplate3) => {
   return (

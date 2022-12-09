@@ -19,6 +19,19 @@ import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
 import { GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring } from "./getLoanRecommend";
 import {GetBindCardDropListResponse} from "./GetBindCardDropList";
 
+interface GetActivityAdsRequest {
+  phoneNo: string;
+}
+interface ActivityAd {
+  action: "APPLY_LOAN" | "POP_URL";
+  actionUrl: string;
+  payload: any;
+}
+interface GetActivityAdsResponse {
+  name: string;
+  templateType: number;
+  contents: ActivityAd[];
+}
 export const API = createApi({
     reducerPath: "api",
     baseQuery: axiosBaseQuery({
@@ -127,6 +140,15 @@ export const API = createApi({
                 params: query
             }),
         }),
+        // NOTE: 取得活動廣告橫幅內容
+        getActivityAds: builder.query<GetActivityAdsResponse, GetActivityAdsRequest>({
+          query: (query: GetActivityAdsRequest) => ({
+            method: "get",
+            url: `/activity`,
+            params: query
+          })
+        })
+
     }),
 });
 
@@ -142,4 +164,5 @@ export const {
     usePostBankBindSaveToBangladeshMutation,
     usePostLoanSubmitOrderMutation,
     useGetLoanRecommendQuery,
+    useLazyGetActivityAdsQuery,
 } = API;

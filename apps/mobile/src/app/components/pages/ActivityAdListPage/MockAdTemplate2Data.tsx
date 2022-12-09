@@ -1,6 +1,6 @@
-import {AdTemplate2} from "./components/AdTemplate2";
+import {IAdTemplate2Data} from "./components/AdTemplate2";
 
-export const MockAdTemplate2Data: AdTemplate2 = {
+export const MockAdTemplate2Data: IAdTemplate2Data = {
   brandCard: {
     title1: "最快3分鐘",
     title2: "放款率最高",
