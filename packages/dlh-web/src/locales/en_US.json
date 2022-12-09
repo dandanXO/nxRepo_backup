@@ -1233,6 +1233,7 @@
   "menu.operation.report.xlsx": "Operation Daily {expDate}.xlsx",
   "menu.advertiseManage": "AD Recommend",
   "menu.recall": "Recall Setting",
+  "menu.activity.setting": "Activity Ads",
   "menu.tel.sale": "Tel Sale Manage",
   "menu.tel.sale.distribute": "Tel Sale Assign",
   "menu.tel.sale.new.guest": "Tel Sale Assign New Guest",

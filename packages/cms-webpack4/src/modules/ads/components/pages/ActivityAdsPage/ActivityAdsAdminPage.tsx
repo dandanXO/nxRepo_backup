@@ -337,7 +337,7 @@ export const ActivityAdsAdminPage = () => {
             },
             self: {
                 path: "",
-                breadcrumbName:"廣告管理"
+                breadcrumbName:"活动广告管理"
             }
         }}>
             <>

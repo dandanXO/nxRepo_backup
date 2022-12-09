@@ -1169,6 +1169,7 @@
   "menu.operation.report.xlsx": "運營日報 {expDate}.xlsx",
   "menu.advertiseManage": "廣告推薦",
   "menu.recall": "召回设定",
+  "menu.activity.setting": "活動廣告管理",
   "menu.tel.sale": "電銷管理",
   "menu.tel.sale.distribute": "電銷分配",
   "menu.tel.sale.new.guest": "新客電銷列表",

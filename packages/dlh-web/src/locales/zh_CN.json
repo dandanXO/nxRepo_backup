@@ -1243,7 +1243,7 @@
   "menu.operation.report.xlsx": "运营日报 {expDate}.xlsx",
   "menu.advertiseManage": "广告推荐",
   "menu.recall": "召回设定",
-  "menu.activity.setting": "广告管理",
+  "menu.activity.setting": "活动广告管理",
   "menu.tel.sale": "电销管理",
   "menu.tel.sale.distribute": "电销分配",
   "menu.tel.sale.new.guest": "新客电销列表",
