@@ -24,6 +24,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     setShowModalContent?: React.Dispatch<React.SetStateAction<ModalContent>>;
     hasAddForm: boolean;
     hasEditForm?: boolean;
+    // NOTE: 是否有搜尋功能
     searchable?: boolean;
     addText?: string;
     onAddCallback?: () => void;

@@ -341,9 +341,12 @@ export const ActivityAdsAdminPage = () => {
             }
         }}>
             <>
-                <AdminTable<ActivityModel> tableHeaderColumns={columns} tableDatasource={currentItemListData}
+                <AdminTable<ActivityModel>
+                    tableHeaderColumns={columns}
+                    tableDatasource={currentItemListData}
                     hasAddForm={true}
                     onAddCallback={onAddItem}
+                    searchable={false}
                 />
 
                 <AdminFormCustomModal
