@@ -17,19 +17,19 @@ export const getTemplate1AdTemplate1Data = (ads?: ActivityBanner<AdTemplate1Bran
     if (!ads) return null;
     return {
         brandCard: {
-            title: ads[0].payload.title,
-            priceUnit: (ads[0].payload as AdTemplate1BrandCard).priceUnit,
-            price: (ads[0].payload as AdTemplate1BrandCard).price,
-            description: (ads[0].payload as AdTemplate1BrandCard).description,
+            title: ads[0]?.payload?.title,
+            priceUnit: (ads[0]?.payload as AdTemplate1BrandCard)?.priceUnit,
+            price: (ads[0]?.payload as AdTemplate1BrandCard)?.price,
+            description: (ads[0]?.payload as AdTemplate1BrandCard)?.description,
         },
         cards: ads.slice(1, ads.length).map((item: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>) => {
             return {
                 action: item.action,
                 actionUrl: item.actionUrl,
-                actionName: (item.payload as AdTemplate1Card).actionName,
-                title: item.payload.title,
-                description1: (item.payload as AdTemplate1Card).description1,
-                description2: (item.payload as AdTemplate1Card).description2,
+                actionName: (item?.payload as AdTemplate1Card)?.actionName,
+                title: item?.payload?.title,
+                description1: (item?.payload as AdTemplate1Card)?.description1,
+                description2: (item?.payload as AdTemplate1Card)?.description2,
             }
         })
     }
