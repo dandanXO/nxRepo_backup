@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Modal, Form, Select, Input, Button } from 'antd';
 import PropTypes from 'prop-types';
 import styles from './AddBlackModal.less';
-import {axios} from "utils";
+import {axios,getAdminUserInfo} from "utils";
 import {injectIntl} from "react-intl";
-
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -29,12 +28,11 @@ class AddBlackModal extends Component{
     }
 
 
-    getCaptcha = () => {
+    getCaptcha = async() => {
         //post ajax
         // const { info } = this.props;
-        let jsonStr = sessionStorage.getItem('adminUser');
-        let adminUser = JSON.parse(jsonStr);
-        let loginUserPhone = adminUser.phoneNo;
+        let adminUser = await getAdminUserInfo();
+        let loginUserPhone = adminUser.data.phoneNo;
         console.log("当前登录号码:" + loginUserPhone);
         try {
             axios({

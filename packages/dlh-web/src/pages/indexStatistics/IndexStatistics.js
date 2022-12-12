@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import G2 from 'g2';
 import createG2 from 'g2-react';
 import { duration } from 'moment';
-import {getAdminUser} from 'utils';
+import { getAdminUserInfo } from 'utils';
 import {injectIntl, FormattedMessage} from "react-intl";
 
 const convertData = (obj) => {
@@ -205,19 +205,18 @@ class IndexStatistics extends Component {
     componentWillMount() {
         window.addEventListener('resize', () => this.updateSize());
     }
-    componentDidMount() {
+    async componentDidMount() {
         let _this = this;
-        getAdminUser(function(adminUser){
-            const adminUserRoleId = !!adminUser ? adminUser.roleId : null;
-            if(adminUserRoleId==1){
-                _this.getDataValue();
-            }else{
-                _this.setState({
-                    dispaly:'none',
-                    undisply:'block'
-                });
-            }
-        });
+
+        const adminUser = await getAdminUserInfo()
+        if (adminUser.data.roleId  == 1) {
+            _this.getDataValue();
+        } else {
+            _this.setState({
+                dispaly: 'none',
+                undisply: 'block'
+            });
+        }
         _this.updateSize();    
     }
     

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
-import { hasLogin, hasGoogleAuth, axios } from 'utils';
+import { getLoginInfo, userLogout, axios } from 'utils';
 import { Icon, Spin } from 'antd';
 import Cookies from 'js-cookie';
 import {microApp} from "../../index";
@@ -19,17 +19,8 @@ class AuthRoute extends Component {
             method: 'post'
         }).then((res) => {
 
-
-            if(res) {
+            if(Number(res.code) === 200) {
                 let { data } = res;
-               // alert(JSON.stringify(data));
-                if(data && data.code == '400'){
-                    const {history} = this.props;
-                    sessionStorage.setItem("adminUser", null);
-                    Cookies.remove('isLogin');
-                    history.push('/login');
-                }
-
 
                 data = [{
                     actionUrl: '/index',
@@ -126,8 +117,7 @@ class AuthRoute extends Component {
         const { location: { pathname }, children } = this.props;
         const { menu } = this.state;
 
-        const isLogin = hasLogin();
-
+        const hasLoginInfo = getLoginInfo();
 
         const antIcon = <Icon type="loading-3-quarters" style={{ fontSize: 50 }} spin />;
 
@@ -147,10 +137,10 @@ class AuthRoute extends Component {
         }
 
         const isToLogin = pathname === '/login';
-        if(!isLogin && !isToLogin) {
+        if(!hasLoginInfo && !isToLogin) {
             return <Redirect to="/login" />;
         }
-        if(isLogin && isToLogin) {
+        if(hasLoginInfo && isToLogin) {
             return <Redirect to={'/index'}/>;
         }
         return React.cloneElement(children, { list: menu })

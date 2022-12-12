@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Form, Input, message,Row,Col,Icon,Button } from 'antd';
 import PropTypes from 'prop-types';
 import styles from '../OverOrderHandle.less';
-import {axios} from "utils";
+import {axios,getAdminUserInfo} from "utils";
 import {injectIntl, FormattedMessage} from "react-intl";
 
 const FormItem = Form.Item;
@@ -27,12 +27,11 @@ class OverOrderHandleModal extends Component{
         this.timer = null;
     }
 
-    getCaptcha = () => {
+    getCaptcha = async() => {
         //post ajax
         // const { info } = this.props;
-        let jsonStr = sessionStorage.getItem('adminUser');
-        let adminUser = JSON.parse(jsonStr);
-        let loginUserPhone = adminUser.phoneNo;
+        let adminUser = await getAdminUserInfo();
+        let loginUserPhone = adminUser.data.phoneNo;
         console.log("当前登录号码:" + loginUserPhone);
         try {
             axios({

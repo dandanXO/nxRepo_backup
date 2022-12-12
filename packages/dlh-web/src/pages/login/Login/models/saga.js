@@ -17,34 +17,16 @@ function* getCodeData(action) {
 function* watchGetCodeData() {
     yield takeEvery(LG_GET_CODE, getCodeData);
 }
-function* postLoginData(action) {
-    console.log(1);
-    const res = yield call(postLogin,action.params);
-    console.log(res);
-    if(Number(res.code) === 200) {
-        Cookies.set('isLogin', 'ok');
-        history.push('/index');
+function* postLoginData (action) {
+
+    const res = yield call(postLogin, action.params);
+    if (Number(res.code) === 200) {
+        Cookies.set('loginInfo', res);
+        res.data.googleAuthFlag && !res.data.passGoogleAuth ? history.push('/googleauth') : history.push('/index');
+        axios.defaults.headers["Authorization"] = res.data.token;
     }
-    axios({
-        url: '/hs/admin/auth/getInfo',
-        method: 'post'
-    }).then((res) => {
-     
-        if(res && res.code == '200') {
-            let { data } = res;
-          
-            sessionStorage.setItem("adminUser", JSON.stringify(data));
-            if(data.googleAuthFlag==0){
-              Cookies.set('isGoogleAuth', 'ok');
-            }else{
-                if(!Cookies.get("isGoogleAuth")){
-                    history.push('/googleauth');
-                }
-            }
-        
-        }
-    });
 }
+
 function* watchPostLoginData() {
     yield takeEvery(LG_POST_LOGIN, postLoginData);
 }
