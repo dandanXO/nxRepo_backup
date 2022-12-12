@@ -178,7 +178,7 @@ export const AdTemplate1 = (props: IAdTemplate1) => {
               return <AdTemplate1CardUI
                 key={index}
                 data={data}
-                onClick={onClickToAction({
+                onClick={() => onClickToAction({
                   action: data.action,
                   actionUrl: data.actionUrl,
                 })}/>
