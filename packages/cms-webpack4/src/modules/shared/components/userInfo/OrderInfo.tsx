@@ -14,6 +14,13 @@ const CardStyle = (props: { title: string, children }) => {
     );
 }
 
+const isUtr = (utr: string) => {
+    return typeof utr !== "undefined" && utr !== ""
+}
+const isReceiptImage = (receiptImage: string) => {
+    return typeof receiptImage !== "undefined" && receiptImage !== ""
+}
+
 const OrderInfo = (props:{orderId:number} ) => {
 
     const { currentData } = useGetOrderDetailQuery({ orderId: props.orderId });
@@ -40,6 +47,7 @@ const OrderInfo = (props:{orderId:number} ) => {
         lendMoney, totalMoney, applyTime, reviewTime, loanTime, expireTime, overdueDays, overdueMoney, utr, receiptImage
     } = orderDetail;
 
+
     return currentData !== undefined && <div style={{ margin: '16px' }}>
         <CardStyle title="订单信息">
             <Descriptions size="small" bordered >
@@ -64,11 +72,11 @@ const OrderInfo = (props:{orderId:number} ) => {
             </Descriptions>
         </CardStyle>
         <CardStyle title="还款证明" >
-            {(utr || receiptImage) ?
+            {( isUtr(utr) || isReceiptImage(receiptImage) ) ?
                 (
                     <Descriptions size="small" bordered>
-                        utr && <Item label="UTR" labelStyle={{ width: 150 }} span={3}>{utr || "-"}</Item>
-                        receiptImage && <Item label="还款证明单据" labelStyle={{ width: 150 }} span={3}><Image width={200} src={receiptImage || "-"} fallback={imgError} /></Item>
+                        {isUtr(utr) && <Item label="UTR" labelStyle={{ width: 150 }} span={3}>{utr || "-"}</Item>}
+                        {isReceiptImage(receiptImage) && <Item label="还款证明单据" labelStyle={{ width: 150 }} span={3}><Image width={200} src={receiptImage || "-"} fallback={imgError} /></Item>}
                     </Descriptions>
                 )
                     : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
