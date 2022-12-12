@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, message, Button, Input, Tag } from 'antd';
 import { injectIntl } from "react-intl";
 import CheckBoxGroup from './CheckBoxGroup';
 import styles from "./UrgePersonModal.less";
 import useFavoriteList from './useFavoriteList';
-import { history, showMsg } from "utils";
+import { history, showMsg, getAdminUserInfo } from "utils";
 
 function UrgePersonModal ({ modalTitle, urgePerson, visible, onModalCancel, onModalOk, intl }) {
 
     const { location: { pathname } } = history;
-    const userID = JSON.parse(sessionStorage.getItem('adminUser')).id;
-
     const [checkAllList, setCheckAllList] = useState([]);
     const [isAdd, setIsAdd] = useState(false);
+    const [userID, setUserID] = useState('');
     const [favoriteName, setFavoriteName] = useState("");
     const { favoriteList, handleAddFavorite, handleRemoveFavorite } = useFavoriteList({ userID, pathname }); //取得及設定常用群組
 
+    useEffect(() => {
+        const adminUserInfo = async () => {
+            const res = await getAdminUserInfo();
+            setUserID(res.data.id);
+        };
+        adminUserInfo()
+    }, [])
     const onOk = () => {
         if (checkAllList.length === 0) {
             message.warning(intl.formatMessage({ id: "windowPage.select.collector" }))

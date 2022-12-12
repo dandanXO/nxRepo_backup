@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import {loginAction, loginState} from './index';
 import { withRouter } from 'react-router-dom';
 import { Form, Row, Col, Input, Icon, Button } from 'antd';
-import Cookies from 'js-cookie';
 import styles from './Login.less';
 import { FormattedMessage, injectIntl} from "react-intl";
 import LanguageSwitch from '../../../locales/component/LanguageSwitch';
-
+import { userLogout } from 'utils';
 
 class Login extends Component{
     constructor(props) {
@@ -58,8 +57,6 @@ class Login extends Component{
                     phoneNo: phoneNumber,
                     code: captcha
                 }));
-                // Cookies.set('name', 'zs');
-                // history.push('/index');
             }
         });
     }
@@ -77,8 +74,7 @@ class Login extends Component{
         }
     }
     componentDidMount() {
-        // console.log(Cookies.get('JSESSIONID'))
-        // const { dispatch } =  this.props;
+        userLogout();
     }
 
     componentWillUnmount() {
