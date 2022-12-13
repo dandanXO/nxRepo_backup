@@ -3,10 +3,7 @@ import { Breadcrumb } from 'antd';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {FormattedMessage} from "react-intl";
-import {adminRoutesPath} from "../../import/AdminModule";
-// import {adminRoutesPath} from "../../import/CMSModule";
 
-// import list from '../../layouts/LayoutMenu/menuConfig';
 class PathBread extends Component {
     constructor(props) {
         super(props);
@@ -14,10 +11,6 @@ class PathBread extends Component {
     }
     renderBread = () => {
         const { location: { pathname }, list } = this.props;
-        // FIXME:
-        if(adminRoutesPath.indexOf(pathname) > -1) {
-          return null
-        }
         const res = this.findTitle(pathname, list);
         if(res.length < 2) {
             return null;

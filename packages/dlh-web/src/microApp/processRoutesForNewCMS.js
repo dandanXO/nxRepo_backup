@@ -1,0 +1,72 @@
+export const processRoutesForNewCMS = (data) => {
+  return data.map(menuItem => {
+    // 用戶管理
+    if (menuItem.actionUrl === "/userManage") {
+      menuItem.children.map(level2MenuItem => {
+        // 用戶管理
+        if (level2MenuItem.actionUrl === "/userInfoManage") {
+          level2MenuItem.actionUrl = "/cms/user";
+        }
+        // 用戶終審
+        if (level2MenuItem.actionUrl === "/userLastCheck") {
+          level2MenuItem.actionUrl = "/cms/user-review";
+        }
+        // 黑名單
+        if (level2MenuItem.actionUrl === "/blackListManage") {
+          level2MenuItem.actionUrl = "/cms/blacklist";
+        }
+        // 白名單
+        if (level2MenuItem.actionUrl === "/whiteListManage") {
+          level2MenuItem.actionUrl = "/cms/whitelist";
+        }
+      })
+    }
+    // 渠道管理
+    if (menuItem.actionUrl === "/channelManage") {
+      menuItem.children.map(level2MenuItem => {
+        if (level2MenuItem.actionUrl === "/channelList") {
+          level2MenuItem.actionUrl = "/cms/channel";
+        }
+      })
+    }
+
+    if (menuItem.actionUrl === "/platform-manage") {
+      menuItem.children.map(level2MenuItem => {
+        if (level2MenuItem.actionUrl === "/merchant-manage") {
+          level2MenuItem.actionUrl = "/cms/merchant";
+        } else if (level2MenuItem.actionUrl === "/product-manage") {
+          level2MenuItem.actionUrl = "/cms/product";
+        }
+      })
+    }
+    if (menuItem.actionUrl === "/riskConfigManage") {
+      menuItem.children.map(level2MenuItem => {
+        if (level2MenuItem.actionUrl === "/risk-model-setting") {
+          level2MenuItem.actionUrl = "/cms/risk-setting";
+        }
+      })
+    }
+
+    if (menuItem.actionUrl === "/orderManagement") {
+      menuItem.children.map(level2MenuItem => {
+        // 訂單列表
+        if (level2MenuItem.actionUrl === "/orderList") {
+          level2MenuItem.actionUrl = "/cms/order";
+        }
+        // 訂單終審
+        if (level2MenuItem.actionUrl === "/businessLastCheck") {
+          level2MenuItem.actionUrl = "/cms/order-review";
+        }
+      })
+    }
+    if (menuItem.actionUrl === "/h5Manage") {
+      menuItem.children.map(level2MenuItem => {
+        // 廣告管理
+        if (level2MenuItem.actionUrl === "/activity-setting") {
+          level2MenuItem.actionUrl = "/cms/activity-ads";
+        }
+      })
+    }
+    return menuItem;
+  })
+}

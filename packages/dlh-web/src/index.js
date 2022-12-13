@@ -5,6 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {initGlobalState, registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start, addGlobalUncaughtErrorHandler} from "qiankun"
+import {isMicroApp} from "./microApp/isMicroApp";
 
 ReactDOM.render(<App/>, document.querySelector('#root'));
 
@@ -17,9 +18,8 @@ const ifElseDevelopment = (trueSection, falseSection) => {
   }
 }
 
-export const microApp = true;
 
-if(microApp) {
+if(isMicroApp) {
 
   // window.addEventListener('hashchange', function handleHashChanged(event) {
   //     console.log("[MainApp][hashchange] event.newURL.1", event.newURL);
@@ -37,7 +37,6 @@ if(microApp) {
   // } else {
   //   console.log("[MainApp][hashchange] not supported");
   // }
-
 
   try {
 

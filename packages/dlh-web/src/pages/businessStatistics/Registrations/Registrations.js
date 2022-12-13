@@ -170,15 +170,6 @@ class Registrations extends Component {
                 children: [
                     // 新客总申请量
                     { title: props.intl.formatMessage({ id: "page.table.new.customer.application.qty" }), dataIndex: 'applyCount', key: 'applyCount', },
-                    // 訂單申请率
-                    {
-                        title: props.intl.formatMessage({ id: "page.table.new.customer.application.rate" }), dataIndex: 'applyCount', key: 'applyCount', render (text, record) {
-                            const { examPassCount } = record;
-                            let applicationRate = Number(text) / Number(examPassCount);
-                            applicationRate = isFinite(applicationRate) ? applicationRate : 0;
-                            return Number(applicationRate).toFixed(2)+'%';
-                        }
-                    },
                     // 新客放款量
                     { title: props.intl.formatMessage({ id: "page.table.new.customer.loan.qantity" }), dataIndex: 'loanCount', key: 'loanCount', },
                     // 新客申请转化率

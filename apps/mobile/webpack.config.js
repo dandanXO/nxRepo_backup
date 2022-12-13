@@ -13,7 +13,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const gitRevisionPlugin = new GitRevisionPlugin()
-console.log("gitRevisionPlugin.commithash()", gitRevisionPlugin.commithash());
+// console.log("gitRevisionPlugin.commithash()", gitRevisionPlugin.commithash());
+
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
     devtool: false,

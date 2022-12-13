@@ -10,6 +10,11 @@ const config = require('./index');
 
 const publicPath = "/";
 
+// FIXME
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
+const gitRevisionPlugin = new GitRevisionPlugin()
+
+
 const devConfig = webpackMerge(webpackBaseConfig, {
     mode: 'development',
     entry: path.join(config.srcDir, './index.js'),
@@ -75,7 +80,14 @@ const devConfig = webpackMerge(webpackBaseConfig, {
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: path.join(config.srcDir, './index.html')
-        })
+        }),
+      new webpack.DefinePlugin({
+        'appInfo': {
+          'VERSION': JSON.stringify(gitRevisionPlugin.version()),
+          'COMMITHASH': JSON.stringify(gitRevisionPlugin.commithash()),
+          'BRANCH': JSON.stringify(gitRevisionPlugin.branch()),
+        },
+      })
     ]
 });
 

@@ -1,5 +1,5 @@
 import { API } from "../../../../api";
-import {GetAllAppConfigurationResponse} from "./request/GetAllAppConfigurationResponse";
+import {GetAllAppConfigurationResponse} from "./response/GetAllAppConfigurationResponse";
 import {GetAppConfigurationResponse} from "./response/GetAppConfigurationResponse";
 import {GetAppConfigurationRequest} from "./request/GetAppConfigurationRequest";
 import {CreateAppConfigurationRequest} from "./request/CreateAppConfigurationRequest";
@@ -19,7 +19,7 @@ const AppManageApi = API.injectEndpoints({
             }),
         }),
         // 取得 APP 配置
-        getAppConfiguration: builder.query<GetAppConfigurationResponse, {}>({
+        getAppConfiguration: builder.query<GetAppConfigurationResponse, GetAppConfigurationRequest>({
             query: (arg: GetAppConfigurationRequest) => ({
                 url: `/app-manage/${arg.id}`,
                 method: "get",

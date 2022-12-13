@@ -33,6 +33,7 @@ export default class App extends Component {
                             <Route exact path={'/login'} component={Login}/>
                             <Route exact path={'/googleauth'} component={GoogleAuth}/>
                             <AuthRoute>
+                                {/*NOTICE: MainLayout 會拿到 AuthRoute 給的 props.list*/}
                                 <MainLayout/>
                             </AuthRoute>
                         </Switch>
