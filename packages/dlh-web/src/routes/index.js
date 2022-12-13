@@ -18,8 +18,7 @@ import { todayLoanManageRoutes } from '../pages/todayLoanManage';
 import { payAndSettleManageRoutes } from '../pages/payAndSettleManage';
 import { extensionPeriodLoanManageRoutes } from '../pages/extensionPeriodLoanManage';
 import { telSaleManageRoutes } from '../pages/telSaleManage';
-import { AdminRoutes } from "../import/AdminModule"
-// import { AdminRoutes } from "../import/CMSModule"
+import { RouteForNewCMSAdapter } from "../microApp/RouteForNewCMSAdapter";
 
 const allRoutes = [].concat(
     userManageRoutes,
@@ -38,7 +37,6 @@ const allRoutes = [].concat(
     payAndSettleManageRoutes,
     extensionPeriodLoanManageRoutes,
     telSaleManageRoutes,
-    AdminRoutes,
 );
 
 export default class Routes extends React.Component {
@@ -70,9 +68,10 @@ export default class Routes extends React.Component {
     render() {
         return (
             <Switch>
+                {/*NOTICE: Old CMS*/}
                 {this.renderRoutes()}
-                {/*NOTICE empty view for new cms*/}
-                <Route key={'/cms'} path="/cms" render={() => <div></div>}/>
+                {/*NOTICE: New CMS*/}
+                <RouteForNewCMSAdapter />
                 <Route key={'/noFound'} render={() => <div>no found</div>}/>
             </Switch>
         );
