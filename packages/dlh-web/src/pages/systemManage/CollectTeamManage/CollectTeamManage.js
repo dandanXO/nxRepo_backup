@@ -60,8 +60,8 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
     ]
 
     return <div>
-        <Tabs animated={false}>
-            <TabPane tab={intl.formatMessage({ id: "page.table.collect-team" })} key="1">
+        {/* <Tabs animated={false}>
+            <TabPane tab={intl.formatMessage({ id: "page.table.collect-team" })} key="1"> */}
                 <div className={styles.inputItem}>
                     <FormattedMessage id='page.table.add.collect-team' /> :
                     <Input value={teamValue} onChange={handleTeamValue} placeholder={intl.formatMessage({ id: "page.table.collect-team.enter" })} />
@@ -72,11 +72,11 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
                     dataSource={teamsData}
                     expandedRowRender={(record, i) => <ExpandRow record={record} handleAddGruop={handleAddGruop} intl={intl} />}
                 />
-            </TabPane>
+            {/* </TabPane>
             <TabPane tab={intl.formatMessage({ id: "page.table.collect-people" })} key="2">
                <PeopleManage/>
             </TabPane>
-        </Tabs>
+        </Tabs> */}
     </div>
 }
 
