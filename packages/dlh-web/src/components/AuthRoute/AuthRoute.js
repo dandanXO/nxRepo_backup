@@ -131,9 +131,6 @@ class AuthRoute extends Component {
             );
         }
 
-
-
-
         if(pathname === '/') {
             return <Redirect to={'/index'}/>
         }
