@@ -56,6 +56,8 @@ class LayoutHeader extends Component {
         const _this = this;
 
         const res = await getAdminUserInfo();
+        // console.log("getAdminUserInfo.res", res);
+
         let { data } = res;
 
         if (res && res.code == '200') {

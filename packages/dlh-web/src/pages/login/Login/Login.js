@@ -1,13 +1,15 @@
 import React, { Component} from 'react';
+import { withRouter } from 'react-router-dom';
+import { Form, Row, Col, Input, Button } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {loginAction, loginState} from './index';
-import { withRouter } from 'react-router-dom';
-import { Form, Row, Col, Input, Icon, Button } from 'antd';
-import styles from './Login.less';
 import { FormattedMessage, injectIntl} from "react-intl";
-import LanguageSwitch from '../../../locales/component/LanguageSwitch';
+
 import { userLogout } from 'utils';
+import {loginAction } from './index';
+import styles from './Login.less';
+import LanguageSwitch from '../../../locales/component/LanguageSwitch';
+
 
 class Login extends Component{
     constructor(props) {
@@ -23,9 +25,9 @@ class Login extends Component{
         //post ajax
         const { dispatch, form: { getFieldValue } } = this.props;
         const phoneNo = getFieldValue('phoneNumber');
-        console.log(phoneNo)
         // NOTICE: UseCase:GetLoginCode
         dispatch(loginAction.lgGetCode({ phoneNo }));
+
         let index = 60;
         this.setState({
             text: <FormattedMessage id ="page.login.reacquire" values={{index : index}} defaultMessage="重新获取({ index }S)"/>,
@@ -71,6 +73,7 @@ class Login extends Component{
                 text: <FormattedMessage id ="page.login.auth.code" defaultMessage="获取验证码"/>,
                 disabled: false,
             }, () => {
+                
                 dispatch(loginAction.lgCancelTimer(false));
             })
         }

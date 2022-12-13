@@ -23,7 +23,14 @@ function* postLoginData (action) {
     const res = yield call(postLogin, action.params);
     if (Number(res.code) === 200) {
         Cookies.set('loginInfo', res);
-        res.data.googleAuthFlag && !res.data.passGoogleAuth ? history.push('/googleauth') : history.push('/index');
+
+        if(res.data.googleAuthFlag && !res.data.passGoogleAuth) {
+          history.push('/googleauth')
+        } else {
+          // NOTICE: UseCase:GoToIndexPage
+          history.push('/index');
+        }
+
         axios.defaults.headers["Authorization"] = res.data.token;
     }
 }

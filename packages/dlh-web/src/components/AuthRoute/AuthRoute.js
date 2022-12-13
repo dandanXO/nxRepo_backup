@@ -13,6 +13,8 @@ class AuthRoute extends Component {
         };
     }
     componentDidMount() {
+      // console.log("[AuthRoute] componentDidMount");
+
         const _this = this;
         axios({
             url: '/hs/admin/menu/personalList',
