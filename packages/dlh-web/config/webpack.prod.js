@@ -117,7 +117,7 @@ const prodConfig = () =>  webpackMerge(baseConfig, {
             'COMMITHASH': JSON.stringify(gitRevisionPlugin.commithash()),
             'BRANCH': JSON.stringify(gitRevisionPlugin.branch()),
           },
-        })
+        }),
         new CleanWebpackPlugin(config.distDir, { root: path.join(__dirname, '../') }),
         new webpack.ContextReplacementPlugin(
             /moment[\\\/]locale$/,
