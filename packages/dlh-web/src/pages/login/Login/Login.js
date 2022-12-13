@@ -24,6 +24,7 @@ class Login extends Component{
         const { dispatch, form: { getFieldValue } } = this.props;
         const phoneNo = getFieldValue('phoneNumber');
         console.log(phoneNo)
+        // NOTICE: UseCase:GetLoginCode
         dispatch(loginAction.lgGetCode({ phoneNo }));
         let index = 60;
         this.setState({
@@ -52,7 +53,8 @@ class Login extends Component{
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const { phoneNumber, captcha } =getFieldsValue();
+                const { phoneNumber, captcha } = getFieldsValue();
+                // NOTICE: UseCase:Login
                 dispatch(loginAction.lgPostLogin({
                     phoneNo: phoneNumber,
                     code: captcha
@@ -90,13 +92,13 @@ class Login extends Component{
                 <div className={styles.formTitle}><FormattedMessage id="page.login.admin" defaultMessage="后台管理系统"/></div>
                 <div className={styles.formBg}>
                     <Form onSubmit={this.handleSubmit} className="login-form">
-                    <Form.Item>                           
+                    <Form.Item>
                         {getFieldDecorator('phoneNumber', {
                             rules: [{ required: true, message: intl.formatMessage({id:"page.login.phone.empty"})}],
                             initialValue: ''
                         })(
                             <Input placeholder={intl.formatMessage({id:"page.login.phone"})} type="text" className={styles.antInputSt} />
-                        )}                        
+                        )}
                     </Form.Item>
 
                         <Row>

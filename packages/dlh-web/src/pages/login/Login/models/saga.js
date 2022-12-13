@@ -17,6 +17,7 @@ function* getCodeData(action) {
 function* watchGetCodeData() {
     yield takeEvery(LG_GET_CODE, getCodeData);
 }
+
 function* postLoginData (action) {
 
     const res = yield call(postLogin, action.params);
@@ -30,6 +31,7 @@ function* postLoginData (action) {
 function* watchPostLoginData() {
     yield takeEvery(LG_POST_LOGIN, postLoginData);
 }
+
 export default function* root() {
     yield all([
         fork(watchGetCodeData),

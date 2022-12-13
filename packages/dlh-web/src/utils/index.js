@@ -124,11 +124,10 @@ const filterUrl = [
     "whiteDownload",
 ];
 
+// REFACTOR: Axios
 const BASE_URL = "/";
-//ajax
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers["Content-Type"] = "application/json";
-
 // axios.defaults.timeout=6000;
 axios.interceptors.response.use(
     function (response) {
@@ -137,11 +136,11 @@ axios.interceptors.response.use(
             data,
             config: { url }
         } = response;
-        //过滤下载订单接口
+
+        // NOTICE: 过滤下载订单接口
         if (filterUrl.find(item => url.indexOf(item) !== -1)) {
             return data;
         }
-
 
         /**
          * 目前暫時沒有用到 統計渠道頁面沒有使用，當有要重新使用時再打開並確認後面data.code 這段。
@@ -152,8 +151,10 @@ axios.interceptors.response.use(
         //   return response;
         // }
 
+        // NOTICE: code !== 200
         if (Number(data.code) !== 200 && data.code !== undefined) {
-            //session过期
+
+            // NOTICE: session过期
             if (Number(data.code) === 400) {
                 // showModal('session过期，请重新登录！');
                 setTimeout(() => {
@@ -192,6 +193,8 @@ axios.interceptors.response.use(
             }
             showModal(msg || intlMsg("system.err"));
         }
+
+        // NOTICE: code == 200
         return response["data"];
     },
     function (error) {
@@ -202,6 +205,9 @@ axios.interceptors.response.use(
 );
 
 export { axios };
+
+
+
 
 const covertUrlParams = url => {
     if (!url) {
