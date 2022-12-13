@@ -119,8 +119,6 @@ class AuthRoute extends Component {
         const { location: { pathname }, children } = this.props;
         const { menu } = this.state;
 
-        const hasLoginInfo = getLoginInfo();
-
         const antIcon = <Icon type="loading-3-quarters" style={{ fontSize: 50 }} spin />;
 
         if(menu.length === 0) {
@@ -131,17 +129,25 @@ class AuthRoute extends Component {
             );
         }
 
+        // NOTE: "/" 強轉至 "/index"
         if(pathname === '/') {
             return <Redirect to={'/index'}/>
         }
 
-        const isToLogin = pathname === '/login';
-        if(!hasLoginInfo && !isToLogin) {
+        const hasLoginInfo = getLoginInfo();
+        const isToLoginPage = pathname === '/login';
+
+        // NOTE: 登入失效跳轉至登入
+        if(!isToLoginPage && !hasLoginInfo) {
             return <Redirect to="/login" />;
         }
-        if(hasLoginInfo && isToLogin) {
+
+        // NOTE: 登入成功跳轉至首頁
+        if(isToLoginPage && hasLoginInfo) {
             return <Redirect to={'/index'}/>;
         }
+
+        // NOTE: 登入成功轉至其他頁面
         return React.cloneElement(children, { list: menu })
     }
 }

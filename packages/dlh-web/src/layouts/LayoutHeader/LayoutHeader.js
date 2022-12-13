@@ -113,6 +113,8 @@ class LayoutHeader extends Component {
 
     handleClick = () => {
         const { history } = this.props;
+
+        // NOTICE: UseCase:Logout
         axios({
             url: '/hs/admin/auth/logout',
             method: 'delete',

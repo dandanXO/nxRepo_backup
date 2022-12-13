@@ -54,6 +54,7 @@ class MainLayout extends Component {
                     >
                       {/*NOTICE: Layout Menu  */}
                         <LayoutMenu isTrigger={isTrigger} list={list}/>
+
                         <div className={styles.trigger} onClick={this.handleClick}>
                             <Icon style={{fontWeight: 'bold',color:'#BFCBD4'}} type={isTrigger ? 'right' : 'left'}/>
                         </div>
