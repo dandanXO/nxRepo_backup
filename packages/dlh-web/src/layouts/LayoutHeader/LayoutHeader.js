@@ -54,10 +54,10 @@ class LayoutHeader extends Component {
         const { setTableSize } = this.props;
         setTableSize(this.state.globalTableSize);
         const _this = this;
-       
+
         const res = await getAdminUserInfo();
         let { data } = res;
-      
+
         if (res && res.code == '200') {
             _this.setState({
                 adminInfo: data,
@@ -118,7 +118,7 @@ class LayoutHeader extends Component {
             userLogout();
             history.push('/login');
         });
-      
+
     }
 
     handleSwitchTableSize = (size) => {
@@ -175,7 +175,7 @@ class LayoutHeader extends Component {
                     <Icon type="pay-circle" theme="outlined" style={{ 'font-size': '20px' }} />
                     <span className={styles.title}>{this.state.appName}</span>
                     <span className={styles.subTitle}><FormattedMessage id="page.login.admin" defaultMessage="后台管理系统" /></span>
-                    <span className={styles.versionText}>{' v - bc149129'}</span>
+                    <span className={styles.versionText}>{`version: ${appInfo.VERSION}`}</span>
                 </div>
                 {balanceInfo}
                 <Dropdown overlay={this.menu}>

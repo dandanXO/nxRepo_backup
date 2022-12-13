@@ -13,6 +13,11 @@ const config = require('./index');
 const routerManifest = require('../dll/routerVendor.manifest');
 const reduxManifest = require('../dll/reduxVendor.manifest');
 const momentManifest = require('../dll/momentVendor.manifest');
+
+// FIXME
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
+const gitRevisionPlugin = new GitRevisionPlugin()
+
 const prodConfig = () =>  webpackMerge(baseConfig, {
     entry: {
         main: path.join(config.srcDir, './index.js')
@@ -106,6 +111,13 @@ const prodConfig = () =>  webpackMerge(baseConfig, {
         // }
     },
     plugins: [
+        new webpack.DefinePlugin({
+          'appInfo': {
+            'VERSION': JSON.stringify(gitRevisionPlugin.version()),
+            'COMMITHASH': JSON.stringify(gitRevisionPlugin.commithash()),
+            'BRANCH': JSON.stringify(gitRevisionPlugin.branch()),
+          },
+        })
         new CleanWebpackPlugin(config.distDir, { root: path.join(__dirname, '../') }),
         new webpack.ContextReplacementPlugin(
             /moment[\\\/]locale$/,
