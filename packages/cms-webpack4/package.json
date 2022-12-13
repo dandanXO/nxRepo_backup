@@ -23,6 +23,7 @@
         "@types/styled-components": "^5.1.26",
         "antd": "^4.23.2",
         "axios": "^0.19.2",
+        "git-revision-webpack-plugin": "^5.0.0",
         "i18next": "^22.0.6",
         "js-cookie": "^3.0.1",
         "qs": "^6.10.1",
