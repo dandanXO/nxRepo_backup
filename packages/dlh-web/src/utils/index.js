@@ -67,11 +67,11 @@ export const getAdminUserInfo = async () => {
     }
 }
 
-export const asyncIsSuperAdmin = async () => {
+export const getIsSuperAdmin = () => {
   return JSON.parse(localStorage.getItem("isSuperAdmin"))
 }
 
-export const asyncGetAllMerchants = async () => {
+export const getAllMerchants = () => {
   return JSON.parse(localStorage.getItem("merchantsData"))
 }
 
