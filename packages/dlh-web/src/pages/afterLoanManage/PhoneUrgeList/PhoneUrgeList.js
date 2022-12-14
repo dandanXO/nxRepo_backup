@@ -11,9 +11,10 @@ import {axios, convertMoneyFormat} from "utils";
 import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj = {}) => {
-    const {time = [], orderStatus = '', phoneNo = '', name = '', orderNo = ''} = obj;
+    const {time = [], orderStatus = '', phoneNo = '', name = '', orderNo = '', merchantId = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     return {
         fstartTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -22,7 +23,8 @@ const convertParams = (obj = {}) => {
         userPhone: phoneNo,
         userTrueName: name,
         orderNo,
-        isDc: true
+        isDc: true,
+        merchantId,
     };
 }
 const statusObj = {
@@ -34,7 +36,11 @@ const statusObj = {
 class PhoneUrgeList extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             btnDisabled: false
         };
         const _this = this;
@@ -58,7 +64,7 @@ class PhoneUrgeList extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.distribute.time" }),
                 dataIndex: 'distributionTime',
                 key: 'distributionTime',
-                width: 170,
+                width: isSuperAdmin ? 80 : 170,
                 render(text) {
                     return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
                 }
@@ -70,12 +76,12 @@ class PhoneUrgeList extends Component {
                 key: "productName",
                 width:120,
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
-            },    
+            },
             {
                 title: <FormattedMessage id='page.table.appName' />,
                 dataIndex: "appName",
                 key: "appName",
-                width:120,
+                width: 120,
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', width: 200, render(text) { return <CopyText text={text} /> } },
@@ -139,7 +145,6 @@ class PhoneUrgeList extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.repaid.time" }),
                 dataIndex: 'payTime',
                 key: 'payTime',
-                width: '10%',
                 width: 170,
                 render(text) {
                     return text ? moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss') : '';
@@ -149,6 +154,14 @@ class PhoneUrgeList extends Component {
             // { title: '最后跟进时间', dataIndex: 'lastRecordTime', key: 'lastRecordTime' },
 
         ];
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName',
+            width: 90,
+          })
+        }
     }
 
     //导出记录列表
@@ -209,7 +222,7 @@ class PhoneUrgeList extends Component {
         const {btnDisabled} = this.state;
         return (
             <div>
-                <SearchList handleSubmit={this.handleSubmit} params={searchParams}/>
+                <SearchList handleSubmit={this.handleSubmit} params={searchParams}  isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record"/></Button></div>
                 <CommonTable
                     columns={this.columns}

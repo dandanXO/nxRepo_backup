@@ -6,9 +6,14 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { CollectTeamReport } from 'components';
 import moment from 'moment';
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 function OverdueCollectTeamReport(props) {
 
     const initTime = [moment().subtract(7, 'days'), moment()];
+
+    const isSuperAdmin = getIsSuperAdmin();
+    const allMerchants = getAllMerchants();
+
     useEffect(() => {
         const { getCollectTeamData, getReportData } = props;
         getCollectTeamData();
@@ -17,7 +22,7 @@ function OverdueCollectTeamReport(props) {
         getReportData({ startDate, endDate, collectTeamId: '', leng: '' });
     }, []);
 
-    return <CollectTeamReport {...props} initTime={initTime} type={'overdue'}/>
+    return <CollectTeamReport {...props} initTime={initTime} type={'overdue'} isSuperAdmin={isSuperAdmin} allMerchants={allMerchants}/>
 }
 
 OverdueCollectTeamReport.propTypes = {

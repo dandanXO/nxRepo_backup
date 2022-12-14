@@ -11,9 +11,10 @@ import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
 import styles from "./OverdueBackRecord.less"
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj) => {
-    const {time, phoneNo, name, orderNo, payType, backType} = obj;
+    const {time, phoneNo, name, orderNo, payType, backType, merchantId = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     //todo 核对参数
     return {
@@ -23,7 +24,8 @@ const convertParams = (obj) => {
         userTrueName: name,
         orderNo,
         payId: payType,
-        state: backType
+        state: backType,
+        merchantId,
     }
 }
 
@@ -40,77 +42,90 @@ const backTypeObj = {
 
 
 class OverdueBackRecord extends Component {
-    //todo 核对字段
-    columns = [
-        {
+
+    constructor(props) {
+        super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+        this.state = {
+            isSuperAdmin,
+            allMerchants,
+            btnDisabled: false
+        };
+        this.searchParams = {};
+        this.searchStatus = {};
+
+        //todo 核对字段
+        this.columns = [
+          {
             title: <FormattedMessage id="page.table.overdue.time" />,
             dataIndex: 'expireTime',
             key: 'expireTime',
             width: '8%',
             render(text) {
-                return text ? moment(Number(text) * 1000).format('YYYY-MM-DD') : '';
+              return text ? moment(Number(text) * 1000).format('YYYY-MM-DD') : '';
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="page.search.list.repaid.time" />,
             dataIndex: 'payTime',
             key: 'payTime',
             width: '10%',
             render(text) {
-                return <Tooltip title={moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")}>
-                    {moment(Number(text) * 1000).format("MM-DD HH:mm:ss")}
-                </Tooltip>;
+              return <Tooltip title={moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")}>
+                {moment(Number(text) * 1000).format("MM-DD HH:mm:ss")}
+              </Tooltip>;
             }
-        },
-        { title: <FormattedMessage id="page.search.list.order.no" />, dataIndex: 'orderNo', key: 'orderNo', render(text) { return <CopyText text={text} /> } },
-        {
+          },
+          { title: <FormattedMessage id="page.search.list.order.no" />, dataIndex: 'orderNo', key: 'orderNo', render(text) { return <CopyText text={text} /> } },
+          {
             title: <FormattedMessage id="page.search.list.product.name" />,
             dataIndex: "productName",
             key: "productName",
             width:'8%',
             render(text) { return <CopyText text={text} isEllispsis={true} /> }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id='page.table.appName' />,
             dataIndex: "appName",
             key: "appName",
             width:'10%',
             render(text) { return <CopyText text={text} isEllispsis={true} /> }
-        },
-        { title: <FormattedMessage id="page.search.list.name" />, dataIndex: 'userName', key: 'userName', render(text) { return <CopyText text={text} isEllispsis={true} /> } },
-        { title: <FormattedMessage id="page.search.list.mobile" />, dataIndex: 'phoneNo', key: 'phoneNo', width: '10%', render(text) { return <CopyText text={text} /> } },
-        { title: <FormattedMessage id="windowPage.payment.method" />, dataIndex: 'payName', key: 'payName',  width: '8%', render(text) { return <CopyText text={text} /> } },
-        {
+          },
+          { title: <FormattedMessage id="page.search.list.name" />, dataIndex: 'userName', key: 'userName', render(text) { return <CopyText text={text} isEllispsis={true} /> } },
+          { title: <FormattedMessage id="page.search.list.mobile" />, dataIndex: 'phoneNo', key: 'phoneNo', width: '10%', render(text) { return <CopyText text={text} /> } },
+          { title: <FormattedMessage id="windowPage.payment.method" />, dataIndex: 'payName', key: 'payName',  width: '8%', render(text) { return <CopyText text={text} /> } },
+          {
             title: <FormattedMessage id="windowPage.repayment.type" />,
             dataIndex: 'state',
             key: 'state',
             width: '7%',
             render(text) {
-                return backTypeObj[text] || '';
+              return backTypeObj[text] || '';
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="windowPage.repayment.amount" />,
             dataIndex: 'totalMoney',
             key: 'totalMoney',
             width: '7%',
             render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)} />;
+              return <CopyText text={convertMoneyFormat(text)} />;
             }
-        },
-        // { title: '还款状态', dataIndex: 'state', key: 'state' },
-        { title: <FormattedMessage id="page.search.list.trans.serial.no" />, dataIndex: 'payTradeNo', key: 'payTradeNo',  width: '7%',render(text) { return <CopyText text={text} isEllispsis={true} /> } },
-        // { title: '入账时间', dataIndex: 'billTime', key: 'billTime' },
-        { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorName', key: 'collectorName', width: '10%', }
-    ];
+          },
+          // { title: '还款状态', dataIndex: 'state', key: 'state' },
+          { title: <FormattedMessage id="page.search.list.trans.serial.no" />, dataIndex: 'payTradeNo', key: 'payTradeNo',  width: '7%',render(text) { return <CopyText text={text} isEllispsis={true} /> } },
+          // { title: '入账时间', dataIndex: 'billTime', key: 'billTime' },
+          { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorName', key: 'collectorName', width: '10%', }
+        ];
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            btnDisabled: false
-        };
-        this.searchParams = {};
-        this.searchStatus = {};
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName'
+          })
+        }
     }
 
     //分页
@@ -161,7 +176,7 @@ class OverdueBackRecord extends Component {
         const {btnDisabled} = this.state;
         return (
             <div>
-                <SearchList handleSubmit={this.handleSearch}/>
+                <SearchList handleSubmit={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div className={styles.wrapper}>
                     <Button type={'danger'} disabled={btnDisabled} onClick={this.exportOrder}><FormattedMessage id="page.table.export.record" /></Button>
                     <div>

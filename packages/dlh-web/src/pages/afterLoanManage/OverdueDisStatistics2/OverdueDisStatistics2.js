@@ -10,38 +10,18 @@ import { axios, convertMoneyFormat } from "utils";
 import download from "downloadjs";
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 
 class OverdueDisStatistics2 extends Component {
 
-    columns = [
-        { title: <FormattedMessage id="page.table.assign.date" />, dataIndex: 'day', key: 'day' },
-        { title: <FormattedMessage id="page.table.department" />, dataIndex: 'collector', width: '18%', key: 'collector' },
-        { title: <FormattedMessage id="page.table.num.allocat.order" />, dataIndex: 'disCount', key: 'disCount' },
-        {
-            title: <FormattedMessage id="page.table.allocated.orders.amount" />,
-            dataIndex: 'disOrderAmt',
-            key: 'disOrderAmt',
-            render(text, record) {
-                return convertMoneyFormat(text);
-            }
-        },
-        { title: <FormattedMessage id="page.table.num.repayment.order" />, dataIndex: 'repayCount', key: 'repayCount' },
-        {
-            title: <FormattedMessage id="page.table.repayment.order.amount" />,
-            dataIndex: 'repaySumMoney',
-            key: 'repaySumMoney',
-            render(text, record) {
-                return convertMoneyFormat(text);
-            }
-        },
-        { title: <FormattedMessage id="page.table.repayment.order.rate" />, dataIndex: 'repayCountRate', key: 'repayCountRate' },
-        { title: <FormattedMessage id="page.table.repayment.amount.rate" />, dataIndex: 'repaySumMoneyRate', key: 'repaySumMoneyRate' }
-    ];
-
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             btnDisabled:false
         };
         this.initTime = [
@@ -49,8 +29,40 @@ class OverdueDisStatistics2 extends Component {
             moment()
         ];
         this.searchParams={...this.convertParams(), page: 0, size: 10 };
+        this.columns = [
+          { title: <FormattedMessage id="page.table.assign.date" />, dataIndex: 'day', key: 'day' },
+          { title: <FormattedMessage id="page.table.department" />, dataIndex: 'collector', width: '18%', key: 'collector' },
+          { title: <FormattedMessage id="page.table.num.allocat.order" />, dataIndex: 'disCount', key: 'disCount' },
+          {
+            title: <FormattedMessage id="page.table.allocated.orders.amount" />,
+            dataIndex: 'disOrderAmt',
+            key: 'disOrderAmt',
+            render(text, record) {
+              return convertMoneyFormat(text);
+            }
+          },
+          { title: <FormattedMessage id="page.table.num.repayment.order" />, dataIndex: 'repayCount', key: 'repayCount' },
+          {
+            title: <FormattedMessage id="page.table.repayment.order.amount" />,
+            dataIndex: 'repaySumMoney',
+            key: 'repaySumMoney',
+            render(text, record) {
+              return convertMoneyFormat(text);
+            }
+          },
+          { title: <FormattedMessage id="page.table.repayment.order.rate" />, dataIndex: 'repayCountRate', key: 'repayCountRate' },
+          { title: <FormattedMessage id="page.table.repayment.amount.rate" />, dataIndex: 'repaySumMoneyRate', key: 'repaySumMoneyRate' }
+        ];
+
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName'
+          })
+        }
     }
-    
+
     //导出记录
     exportRecord = (obj) => {
         this.setState({ btnDisabled: true });
@@ -74,13 +86,14 @@ class OverdueDisStatistics2 extends Component {
     };
 
     convertParams = (obj = {}) => {
-        const { time = this.initTime, queryId = '',disId='' } = obj;
+        const { time = this.initTime, queryId = '',disId='', merchantId = ''  } = obj;
         const isArr = Array.isArray(time) && time.length > 0;
         return {
             startTime: isArr ? time[0].format('YYYY-MM-DD'): '',
             endTime: isArr? time[1].format('YYYY-MM-DD') : '',
             queryId,
-            disId
+            disId,
+            merchantId,
         };
     }
 
@@ -90,7 +103,7 @@ class OverdueDisStatistics2 extends Component {
         this.searchParams = this.convertParams(obj);
         getTableData({ ...this.searchParams, page: 0, size: 10 });
     }
-    
+
     handlePageChange = (info) => {
         const { current, pageSize } = info;
         const { getTableData } = this.props;
@@ -118,6 +131,7 @@ class OverdueDisStatistics2 extends Component {
                     handleSearch={this.handleSearch}
                     exportRecord={this.exportRecord}
                     btnDisable={btnDisabled}
+                    isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}
                 />
                 <CommonTable
                     dataSource={data}
