@@ -38,55 +38,55 @@ class PeopleManage extends Component {
 
         const _this = this;
 
-      this.columns = [
-        { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'trueName', key: 'trueName' },
-        { title: props.intl.formatMessage({ id: "page.search.list.account" }), dataIndex: 'userName', key: 'userName' },
-        { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo' },
-        { title: props.intl.formatMessage({ id: "page.table.department" }), dataIndex: 'departmentStr', key: 'departmentStr', width: '23%' },
-        { title: props.intl.formatMessage({ id: "page.search.list.roles" }), dataIndex: 'roleStr', key: 'roleStr', width: '23%' },
-        {
-          title: props.intl.formatMessage({ id: "page.search.list.status" }),
-          dataIndex: 'enabled',
-          key: 'enabled',
-          width: '6%',
-          render(text) {
-            return userStatus[text];
+        this.columns = [
+          { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'trueName', key: 'trueName' },
+          { title: props.intl.formatMessage({ id: "page.search.list.account" }), dataIndex: 'userName', key: 'userName' },
+          { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo' },
+          { title: props.intl.formatMessage({ id: "page.table.department" }), dataIndex: 'departmentStr', key: 'departmentStr', width: '23%' },
+          { title: props.intl.formatMessage({ id: "page.search.list.roles" }), dataIndex: 'roleStr', key: 'roleStr', width: '23%' },
+          {
+            title: props.intl.formatMessage({ id: "page.search.list.status" }),
+            dataIndex: 'enabled',
+            key: 'enabled',
+            width: '6%',
+            render(text) {
+              return userStatus[text];
+            }
+          },
+          {
+            title: props.intl.formatMessage({ id: "page.search.list.google.auth" }),
+            dataIndex: 'googleAuthFlag',
+            key: 'googleAuthFlag',
+            width: '8%',
+            render(text) {
+              return googleStatus[text];
+            }
+          },
+          {
+            title: props.intl.formatMessage({ id: "page.table.operation" }),
+            dataIndex: 'id',
+            key: 'id',
+            width: '8%',
+            render(text, record) {
+              return (
+                <div className={styles.btnWrapper}>
+                  <span onClick={() => _this.editTreeList(record)}><Icon type={'edit'} /></span>
+                  <Popconfirm title={_this.props.intl.formatMessage({ id: "windowPage.confirm.delete" })} onConfirm={() => _this.deleteTreeList(text)}>
+                    <span><Icon type={'delete'} /></span>
+                  </Popconfirm>
+                </div>
+              );
+            }
           }
-        },
-        {
-          title: props.intl.formatMessage({ id: "page.search.list.google.auth" }),
-          dataIndex: 'googleAuthFlag',
-          key: 'googleAuthFlag',
-          width: '8%',
-          render(text) {
-            return googleStatus[text];
-          }
-        },
-        {
-          title: props.intl.formatMessage({ id: "page.table.operation" }),
-          dataIndex: 'id',
-          key: 'id',
-          width: '8%',
-          render(text, record) {
-            return (
-              <div className={styles.btnWrapper}>
-                <span onClick={() => _this.editTreeList(record)}><Icon type={'edit'} /></span>
-                <Popconfirm title={_this.props.intl.formatMessage({ id: "windowPage.confirm.delete" })} onConfirm={() => _this.deleteTreeList(text)}>
-                  <span><Icon type={'delete'} /></span>
-                </Popconfirm>
-              </div>
-            );
-          }
-        }
-      ];
+        ];
 
-      if(isSuperAdmin) {
-        this.columns.unshift({
-          title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
-          dataIndex: 'merchantName',
-          key: 'merchantName'
-        })
-      }
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName'
+          })
+        }
 
     }
 
@@ -172,7 +172,7 @@ class PeopleManage extends Component {
         getTableData({...obj, pageSize: this.pageSize, pageNum: 1})
     }
 
-    async componentDidMount() {
+    componentDidMount() {
       const {getTableData, getRoleData, getDepartmentData, getTeamsData, getGroupsData, teamsData} = this.props;
       getTableData({pageSize: this.pageSize, pageNum: 1, ...this.searchParams});
       getRoleData({});

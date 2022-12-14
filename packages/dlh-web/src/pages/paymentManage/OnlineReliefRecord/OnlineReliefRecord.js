@@ -10,9 +10,10 @@ import {axios, convertMoneyFormat} from "utils";
 import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj = {}) => {
-    const {time = [], orderNo = '', userName = '', phoneNo = '', status = ''} = obj;
+    const {time = [], orderNo = '', userName = '', phoneNo = '', status = '', merchantId = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     return {
         startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -20,65 +21,79 @@ const convertParams = (obj = {}) => {
         orderNo,
         phoneNo,
         userName,
-        status
+        status,
+        merchantId,
     };
 }
 
 class OlRefundRecord extends Component {
-    columns = [
-        { title: this.props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', width: 200, render(text) { return <CopyText text={text} /> } },
-        { title: this.props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', width: 200, render(text) { return <CopyText text={text} /> } },
-        { title: this.props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone', width: 130, render(text) { return <CopyText text={text} /> } },
-        { title: this.props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName', width: 110 },
-        { title: this.props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName', width: 110 },
-        {
+
+    constructor(props) {
+        super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+        this.state = {
+            isSuperAdmin,
+            allMerchants,
+            btnDisabled: false
+        };
+        this.pageSize = 10;
+        this.searchParams = convertParams();
+
+        this.columns = [
+          { title: this.props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', width: 200, render(text) { return <CopyText text={text} /> } },
+          { title: this.props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', width: 200, render(text) { return <CopyText text={text} /> } },
+          { title: this.props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone', width: 130, render(text) { return <CopyText text={text} /> } },
+          { title: this.props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName', width: 110 },
+          { title: this.props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName', width: 110 },
+          {
             title: this.props.intl.formatMessage({ id: "page.table.loan" }),
             dataIndex: 'deviceMoney',
             key: 'deviceMoney',
             width: 100,
             render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)} />;
+              return <CopyText text={convertMoneyFormat(text)} />;
             }
-        },
-        { title: this.props.intl.formatMessage({ id: "page.table.loan.period" }), dataIndex: 'lendDays', key: 'lendDays', width: 110 },
-        {
+          },
+          { title: this.props.intl.formatMessage({ id: "page.table.loan.period" }), dataIndex: 'lendDays', key: 'lendDays', width: 110 },
+          {
             title: this.props.intl.formatMessage({ id: "page.table.overdue.time" }),
             dataIndex: 'expireTime',
             key: 'expireTime',
             width: 170,
             render(text) {
-                return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
+              return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
             }
-        },
-        { title: this.props.intl.formatMessage({ id: "page.table.days.overdue" }), dataIndex: 'expireDay', key: 'expireDay', width: 100, },
-        {
+          },
+          { title: this.props.intl.formatMessage({ id: "page.table.days.overdue" }), dataIndex: 'expireDay', key: 'expireDay', width: 100, },
+          {
             title: this.props.intl.formatMessage({ id: "page.table.reduce.amount" }),
             dataIndex: 'reductionMoney',
             key: 'reductionMoney',
             width: 100,
             render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)} />;
+              return <CopyText text={convertMoneyFormat(text)} />;
             }
-        },
-        {
+          },
+          {
             title: this.props.intl.formatMessage({ id: "windowPage.add.time" }),
             dataIndex: 'addTime',
             key: 'addTime',
             width: 170,
             render(text) {
-                return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
+              return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
             }
-        },
-        { title: this.props.intl.formatMessage({ id: "page.table.operation.people" }), dataIndex: 'operatorName', key: 'operatorName', width: 130, render(text) { return <CopyText text={text} /> } }
-    ];
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            btnDisabled: false
-        };
-        this.pageSize = 10;
-        this.searchParams = convertParams();
+          },
+          { title: this.props.intl.formatMessage({ id: "page.table.operation.people" }), dataIndex: 'operatorName', key: 'operatorName', width: 70, render(text) { return <CopyText text={text} /> } }
+        ];
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName',
+            width: 60
+          })
+        }
 
     }
 
@@ -132,7 +147,7 @@ class OlRefundRecord extends Component {
         const {btnDisabled} = this.state;
         return (
             <div>
-                <SearchList submit={this.handleSearch}/>
+                <SearchList submit={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record"/></Button></div>
                 <CommonTable
                     columns={this.columns}

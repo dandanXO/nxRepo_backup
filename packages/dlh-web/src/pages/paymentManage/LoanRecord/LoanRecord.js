@@ -14,9 +14,10 @@ import LoanToFailModal from './LoanToFailModal/LoanToFailModal';
 import LoanToRejectModal from './LoanToRejectModal/LoanToRejectModal';
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj = {}) => {
-    const {time = [], orderNo = '', userName = '', phoneNo = '', status = '', assetType = '', payTradeNo = ''} = obj;
+    const {time = [], orderNo = '', userName = '', phoneNo = '', status = '', assetType = '', payTradeNo = '', merchantId = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     return {
         startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -26,7 +27,8 @@ const convertParams = (obj = {}) => {
         userName,
         status,
         assetType,
-        payTradeNo
+        payTradeNo,
+        merchantId,
     };
 }
 
@@ -43,7 +45,11 @@ class LoanRecord extends Component {
     constructor(props) {
         console.log(props)
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             btnDisabled: false,
             info: {},
             setFailModalVisible: false,
@@ -93,7 +99,7 @@ class LoanRecord extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.name" }),
                 dataIndex: 'userName',
                 key: 'userName',
-                width: '15%',
+                width: isSuperAdmin ? '8%' : '15%',
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone',  width: '7%', },
@@ -166,6 +172,14 @@ class LoanRecord extends Component {
                 }
             }
         ];
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName',
+            width: '7%',
+          })
+        }
     }
 
     //导出放款记录列表
@@ -364,7 +378,7 @@ class LoanRecord extends Component {
         const {btnDisabled} = this.state;
         return (
             <div>
-                <SearchList submit={this.handleSearch}/>
+                <SearchList submit={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record"/></Button></div>
                 <CommonTable
                     dataSource={data}
