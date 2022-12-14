@@ -63,42 +63,24 @@ export const getAdminUserInfo = async () => {
     if (Cookies.get("adminUser")) {
         return JSON.parse(Cookies.get("adminUser"))
     } else {
-        return await new Promise((resolve, reject) => {
-            axios({
-                url: '/hs/admin/auth/getInfo',
-                method: 'post',
-            }).then((res) => {
-                if (res && res.code == '200') {
-                    Cookies.set("adminUser", res);
-                    resolve(res);
-                }
-            })
-        });
-    };
+      new Error("Error:getAdminUserInfo");
+    }
 }
 
 export const asyncIsSuperAdmin = async () => {
-  const { code, data } = await getAdminUserInfo();
-  return data.roleId === 1;
+  return JSON.parse(localStorage.getItem("isSuperAdmin"))
 }
 
 export const asyncGetAllMerchants = async () => {
-  // REFACTOR
-  try {
-    const res = await axios({
-      url: '/hs/admin/merchant-manage/available',
-      method: 'get',
-    })
-    return res;
-  } catch (error) {
-    return null;
-  }
+  return JSON.parse(localStorage.getItem("merchantsData"))
 }
 
 export const userLogout = () => {
-    Cookies.remove('loginInfo');
-    Cookies.remove("adminUser");
-    delete axios.defaults.headers["Authorization"];
+  Cookies.remove('loginInfo');
+  Cookies.remove("adminUser");
+  delete axios.defaults.headers["Authorization"];
+  localStorage.removeItem("isSuperAdmin");
+  localStorage.removeItem("merchantsData");
 }
 
 const filterUrl = [
