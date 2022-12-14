@@ -30,6 +30,14 @@ class SearchList extends Component {
         return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
 
+    renderMerchants = () => {
+      const { allMerchants } = this.props;
+      if(!allMerchants) return;
+      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+
+
     renderRole = () => {
         const { roleData } = this.props;
         const ele = roleData.map(item => <Option key={item.id} value={item.id} >{item.name}</Option>);
@@ -38,11 +46,27 @@ class SearchList extends Component {
 
 
     render() {
-        const {form: {getFieldDecorator}, intl} = this.props;
+        const {form: {getFieldDecorator}, intl, isSuperAdmin} = this.props;
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <Row>
+                        {isSuperAdmin && (
+                          <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
+                              {
+                                getFieldDecorator('merchantId', {
+                                  initialValue: ''
+                                })(
+                                  <Select>
+                                    {this.renderMerchants()}
+                                    {/*{this.renderDepartment()}*/}
+                                  </Select>
+                                )
+                              }
+                            </Form.Item>
+                          </Col>
+                        )}
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.name"})}>
                                 {

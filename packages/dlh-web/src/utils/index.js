@@ -72,9 +72,27 @@ export const getAdminUserInfo = async () => {
                     Cookies.set("adminUser", res);
                     resolve(res);
                 }
-            });
+            })
         });
     };
+}
+
+export const asyncIsSuperAdmin = async () => {
+  const { code, data } = await getAdminUserInfo();
+  return data.roleId === 1;
+}
+
+export const asyncGetAllMerchants = async () => {
+  // REFACTOR
+  try {
+    const res = await axios({
+      url: '/hs/admin/merchant-manage/available',
+      method: 'get',
+    })
+    return res;
+  } catch (error) {
+    return null;
+  }
 }
 
 export const userLogout = () => {

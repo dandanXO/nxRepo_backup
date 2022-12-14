@@ -22,9 +22,7 @@ moment.tz.setDefault(conf.timezone);
 // console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
 
 export default class App extends Component {
-
     render() {
-
         return (
             <Provider store={store}>
                 <IntlProviderWrapper>
