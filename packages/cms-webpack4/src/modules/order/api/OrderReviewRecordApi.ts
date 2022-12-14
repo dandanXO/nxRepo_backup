@@ -1,12 +1,12 @@
 import { API } from "../../../api";
-import { GetOrderReviewRecordListResponse,GetOrderReviewRecordListRequestQuerystring } from "./types/orderReviewRecordTypes/getOrderReviewRecordList";
-const UserReviewRecordApi = API.injectEndpoints({
+import { GetOrderReviewRecordListProps,GetOrderReviewRecordListRequestQuerystring } from "./types/orderReviewRecordTypes/getOrderReviewRecordList";
+const OrderReviewRecordApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-        // NOTE: GET /hs/admin/black-list 获取全部黑名单列表
-        getOrderReviewRecordList: builder.query<GetOrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring>({
+        // NOTE: GET /hs/admin/order-review-record/list 訂單審核紀錄列表
+        getOrderReviewRecordList: builder.query<GetOrderReviewRecordListProps, GetOrderReviewRecordListRequestQuerystring>({
             query: (requestBody: GetOrderReviewRecordListRequestQuerystring) => ({
-                url: `/black-list`,
+                url: `/order-review-record/list`,
                 params: requestBody,
                 method: "get",
             }),
@@ -16,4 +16,4 @@ const UserReviewRecordApi = API.injectEndpoints({
 })
 export const {
     useLazyGetOrderReviewRecordListQuery,
-} = UserReviewRecordApi;
+} = OrderReviewRecordApi;
