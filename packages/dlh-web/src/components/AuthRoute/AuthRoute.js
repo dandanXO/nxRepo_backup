@@ -64,15 +64,21 @@ class AuthRoute extends Component {
         this.setState({
           menu: menuData || [],
         })
-        return {menuData, isSuperAdmin}
-      }).then(({menuData, isSuperAdmin}) => {
-        return axios({
-          url: '/hs/admin/merchant-manage/available',
-          method: 'get',
-        })
+        return isSuperAdmin;
+      }).then((isSuperAdmin) => {
+        if(isSuperAdmin) {
+          return axios({
+            url: '/hs/admin/merchant-manage/available',
+            method: 'get',
+          })
+        } else {
+          return null;
+        }
       }).then((merchantsData) => {
-        localStorage.setItem("merchantsData", JSON.stringify(merchantsData));
-
+        if(merchantsData) {
+          console.log("merchantsData", merchantsData);
+          localStorage.setItem("merchantsData", JSON.stringify(merchantsData));
+        }
         this.setState({
           setup: true,
         })

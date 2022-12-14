@@ -9,7 +9,7 @@ import styles from './PeopleManage.less';
 import SearchList from './SearchList/SearchList';
 import PropTypes from 'prop-types';
 import {FormattedMessage, injectIntl} from "react-intl";
-import {asyncGetAllMerchants, asyncIsSuperAdmin, getAdminUserInfo, isSuperAdmin} from "../../../utils";
+import {getIsSuperAdmin, getAllMerchants} from "../../../utils";
 
 const userStatus = {
     0: <FormattedMessage id="page.search.list.freeze"/>,
@@ -24,11 +24,13 @@ const googleStatus = {
 class PeopleManage extends Component {
     constructor(props) {
         super(props);
-        const isSuperAdmin = asyncIsSuperAdmin();
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
 
         this.state = {
           isSuperAdmin,
-            info: {},
+          allMerchants,
+          info: {},
         };
         this.pageSize = 10;
         this.modifyId = '';
@@ -88,23 +90,8 @@ class PeopleManage extends Component {
 
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //   if(this.state.isSuperAdmin !== prevState.isSuperAdmin) {
-    //     this.setState({
-    //       columns:
-    //         [
-    //           {
-    //             title: prevProps.intl.formatMessage({id: "page.search.list.merchantName"}),
-    //             dataIndex: 'merchantName',
-    //             key: 'merchantName'
-    //           },
-    //           ...this.state.columns,
-    //         ]
-    //     });
-    //   }
-    // }
 
-  addPeople = () => {
+    addPeople = () => {
         const { changeModalVisible, departmentData, roleData, teamsData, getGroupsData } = this.props;
         this.modifyId = '';
         const info = {
@@ -192,15 +179,6 @@ class PeopleManage extends Component {
       getDepartmentData({});
       getTeamsData();
       getGroupsData('', '')
-
-      // const isSuperAdmin = await asyncIsSuperAdmin();
-      const allMerchants = await asyncGetAllMerchants();
-      console.log("allMerchants", allMerchants);
-      // console.log("isSuperAdmin", isSuperAdmin);
-      this.setState({
-        // isSuperAdmin,
-        allMerchants,
-      })
     }
 
     render() {
