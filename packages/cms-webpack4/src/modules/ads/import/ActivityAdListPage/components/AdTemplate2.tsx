@@ -141,7 +141,7 @@ export const AdTemplate2 = (props: IAdTemplate2) => {
                 <Card bgColor={"#e4f6ef"}
                       onClick={() => onClickToAction({
                           action: props.data?.topCard.action,
-                          actionUrl: props.data?.brandCard.actionUrl,
+                          actionUrl: props.data?.topCard.actionUrl,
                       })}
                 >
                     <Title color={"#469c7d"}>{props.data?.topCard.title}</Title>
