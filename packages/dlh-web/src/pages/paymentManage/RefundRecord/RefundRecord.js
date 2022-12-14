@@ -11,9 +11,10 @@ import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
 import styles from "./RefundRecord.less"
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj = {}) => {
-    const {time = [], orderNo = '', userName = '', phoneNo = '', status = '', payTradeNo, assetType = '0', payName = ''} = obj;
+    const {time = [], orderNo = '', userName = '', phoneNo = '', status = '', payTradeNo, assetType = '0', payName = '', merchantId = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     return {
         startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -24,7 +25,8 @@ const convertParams = (obj = {}) => {
         status,
         payTradeNo,
         assetType,
-        payName
+        payName,
+        merchantId
     };
 }
 
@@ -35,15 +37,29 @@ const payStatus = {
 };
 
 class RefundRecord extends Component {
-    columns = [
+
+
+
+    constructor(props) {
+        super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+        this.state = {
+            isSuperAdmin,
+            allMerchants,
+            btnDisabled: false
+        };
+        this.pageSize = 10;
+        this.searchParams = convertParams();
+        this.columns = [
         {
-            title: this.props.intl.formatMessage({ id: "page.search.list.repaid.time" }),
-            dataIndex: 'payTime',
-            key: 'payTime',
-            width: '13%',
-            render(text) {
-                return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
-            }
+          title: this.props.intl.formatMessage({ id: "page.search.list.repaid.time" }),
+          dataIndex: 'payTime',
+          key: 'payTime',
+          width: isSuperAdmin ? '7%' : '13%',
+          render(text) {
+            return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+          }
         },
         { title: this.props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', width: '15%',  render(text) { return <CopyText text={text} /> } },
         { title: this.props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userName', key: 'userName', width: '15%', render(text) { return <CopyText text={text} isEllispsis={true} /> } },
@@ -51,54 +67,56 @@ class RefundRecord extends Component {
         { title: this.props.intl.formatMessage({ id: "page.table.appName" }), dataIndex: 'appName', key: 'appName', width: '9%' },
         { title: this.props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo',  width: '9%'},
         {
-            title: this.props.intl.formatMessage({ id: "page.table.total.repaid" }),
-            dataIndex: 'totalMoney',
-            key: 'totalMoney',
-            width: '7%', 
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)} />;
-            }
+          title: this.props.intl.formatMessage({ id: "page.table.total.repaid" }),
+          dataIndex: 'totalMoney',
+          key: 'totalMoney',
+          width: '7%',
+          render(text, record) {
+            return <CopyText text={convertMoneyFormat(text)} />;
+          }
         },
         {
 
-            title: this.props.intl.formatMessage({ id: "page.search.list.funds.types" }),
-            dataIndex: 'isLeng',
-            key: 'isLeng',
-            width: '6%', 
-            render(text) {
-                if (text == 1) {
-                    return <FormattedMessage id="page.table.virtual" />;
-                } else {
-                    return <FormattedMessage id="page.search.list.normal" />;
-                }
+          title: this.props.intl.formatMessage({ id: "page.search.list.funds.types" }),
+          dataIndex: 'isLeng',
+          key: 'isLeng',
+          width: '6%',
+          render(text) {
+            if (text == 1) {
+              return <FormattedMessage id="page.table.virtual" />;
+            } else {
+              return <FormattedMessage id="page.search.list.normal" />;
             }
+          }
         },
         {
-            title: this.props.intl.formatMessage({ id: "page.search.list.platform" }),
-            dataIndex: 'payName',
-            key: 'payName',
-            width: '10%', 
-            render(text) { return <CopyText text={text} /> }
+          title: this.props.intl.formatMessage({ id: "page.search.list.platform" }),
+          dataIndex: 'payName',
+          key: 'payName',
+          width: '10%',
+          render(text) { return <CopyText text={text} /> }
         },
         {
-            title: this.props.intl.formatMessage({ id: "page.table.repaid.status" }),
-            dataIndex: 'payStatus',
-            key: 'payStatus',
-            width: '6%', 
-            render(text) {
-                return payStatus[text];
-            }
+          title: this.props.intl.formatMessage({ id: "page.table.repaid.status" }),
+          dataIndex: 'payStatus',
+          key: 'payStatus',
+          width: '6%',
+          render(text) {
+            return payStatus[text];
+          }
         },
         { title: this.props.intl.formatMessage({ id: "page.search.list.trans.serial.no" }), dataIndex: 'payTradeNo', key: 'payTradeNo', width: '8%' ,  render(text) { return <CopyText text={text} isEllispsis={true} /> } },
-    ];
+      ];
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            btnDisabled: false
-        };
-        this.pageSize = 10;
-        this.searchParams = convertParams();
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName',
+            width: '6%',
+          })
+        }
+
 
     }
 
@@ -152,7 +170,7 @@ class RefundRecord extends Component {
         const {btnDisabled} = this.state;
         return (
           <div>
-            <SearchList submit={this.handleSearch} />
+            <SearchList submit={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
             <div className={styles.wrapper}>
               <Button type={"danger"} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record" /></Button>
               <div>

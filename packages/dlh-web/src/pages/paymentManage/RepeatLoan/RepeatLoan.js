@@ -17,13 +17,15 @@ import styles from './RepeatLoan.less';
 import { orderStatus, convertMoneyFormat } from 'utils';
 import { injectIntl, FormattedMessage } from "react-intl";
 import PropTypes from 'prop-types';
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj) => {
-    const { orderNo = '', userTrueName = '', userPhone = '' } = obj;
+    const { orderNo = '', userTrueName = '', userPhone = '', merchantId = '' } = obj;
     return {
         orderNo,
         userTrueName,
-        userPhone
+        userPhone,
+        merchantId,
     };
 }
 
@@ -31,9 +33,13 @@ const convertParams = (obj) => {
 class RepeatLoan extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
-            batchReloanBtnDisabled: false,
-            batchLoanRefuseDisabled: false
+          isSuperAdmin,
+          allMerchants,
+          batchReloanBtnDisabled: false,
+          batchLoanRefuseDisabled: false,
         };
         const _this = this;
         this.searchParams = convertParams({});
@@ -97,6 +103,13 @@ class RepeatLoan extends Component {
                 }
             },
         ];
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName'
+          })
+        }
     }
 
     lookDetail = (record) => {
@@ -209,7 +222,7 @@ class RepeatLoan extends Component {
         const { batchReloanBtnDisabled, batchLoanRefuseDisabled } = this.state;
         return (
             <div>
-                <SearchList submit={this.submit}/>
+                <SearchList submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div>
                     <Row gutter={16}>
                         <Button type={'danger'} onClick={this.handleExportReloanList} style={{ margin: '10px' }}>{this.props.intl.formatMessage({ id: "page.table.export" })}  </Button>

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { Form, Row, Col, Input, Button } from 'antd';
+import {Form, Row, Col, Input, Button, Select} from 'antd';
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
+import {MerchantSelect} from "../../../../components/MerchantSelect";
 
 const formItemLayout = {
     labelCol: {span: 6},
@@ -21,12 +22,34 @@ class SearchList extends Component {
         submit(params);
     }
 
+    renderMerchants = () => {
+      const { allMerchants } = this.props
+      if(!allMerchants) return;
+      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+
     render() {
-        const {form: {getFieldDecorator}, intl} = this.props;
+        const {form: {getFieldDecorator}, intl, isSuperAdmin, allMerchants} = this.props;
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <Row>
+                        {isSuperAdmin && (
+                          <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
+                              {
+                                getFieldDecorator('merchantId', {
+                                  initialValue: ''
+                                })(
+                                  <Select>
+                                    {this.renderMerchants()}
+                                  </Select>
+                                )
+                              }
+                            </Form.Item>
+                          </Col>
+                        )}
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.name"})}>
                                 {
