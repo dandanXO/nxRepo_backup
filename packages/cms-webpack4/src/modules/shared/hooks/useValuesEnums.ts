@@ -1,6 +1,7 @@
 import {useGetChannelListQuery} from "../api/channelListApi";
 import { useGetOperatorListQuery } from "../api/operatorListApi";
 import { useGetProviderListQuery } from "../api/providerApi";
+import { useGetAvailableMerchantListQuery } from "../api/availableMerchantListApi";
 import {useEffect, useState} from "react";
 
 const useValuesEnums = () => {
@@ -21,10 +22,11 @@ const useValuesEnums = () => {
     const [operatorListEnum, setOperatorListEnum] = useState(null)
 
     useEffect(() => {
-        const operatorList = operatorListData && operatorListData?.reduce((prev, curr) => {
-            return { ...prev, ...{ [curr.id]: { text: curr.name } } }
-        }, {});
-        setOperatorListEnum({ ...operatorList, '': { text: '不限' } })
+        let operatorList = new Map().set('', { text: '不限' });
+        operatorListData && operatorListData?.map((i) => {
+            return operatorList.set(i.id, { text: i.name })
+        });
+        setOperatorListEnum(operatorList)
     }, [isOperatorListDataSuccess])
 
     
@@ -49,8 +51,21 @@ const useValuesEnums = () => {
         'GOOD': { text: '良好', color: 'orange' },
     }
 
+    
+    // 可用商戶
+    const { currentData: merchantListData, isSuccess: isMerchantListDataSuccess } = useGetAvailableMerchantListQuery(null);
+    const [merchantListEnum, setMerchantListEnum] = useState(null)
 
-    return { channelListEnum, riskRankEnum, operatorListEnum, providerListEnum }
+    useEffect(() => {
+        let merchantList = new Map().set('', { text: '不限' });
+        merchantListData && merchantListData?.map((i) => {
+            return merchantList.set(i.merchantId, { text: i.name })
+        });
+        setMerchantListEnum(merchantList)
+    }, [isMerchantListDataSuccess])
+
+
+    return { channelListEnum, riskRankEnum, operatorListEnum, providerListEnum, merchantListEnum }
 }
 
 export default useValuesEnums;
