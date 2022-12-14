@@ -23,8 +23,16 @@ class SearchList extends Component{
         handleSearch(getFieldsValue());
     }
 
+    renderMerchants = () => {
+        const { allMerchants } = this.props;
+        if (!allMerchants) return;
+        const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+        return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+  
+
     render() {
-        const { allPayPlatList,allPayMchList,OrderStatus,form: { getFieldDecorator  } , intl } = this.props;
+        const { allPayPlatList,allPayMchList,OrderStatus,form: { getFieldDecorator  } , intl,isSuperAdmin } = this.props;
         let statusList = [];
         for(let key in OrderStatus){
             statusList.push({key:key,label:OrderStatus[key]});
@@ -34,6 +42,21 @@ class SearchList extends Component{
             <div>
                 <Form>
                     <Row>
+                        {isSuperAdmin && (
+                            <Col lg={12} xl={8}>
+                                <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
+                                    {
+                                        getFieldDecorator('merchantId', {
+                                            initialValue: ''
+                                        })(
+                                            <Select>
+                                                {this.renderMerchants()}
+                                            </Select>
+                                        )
+                                    }
+                                </Form.Item>
+                            </Col>
+                        )}
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.order.no"})}>
                                 {
