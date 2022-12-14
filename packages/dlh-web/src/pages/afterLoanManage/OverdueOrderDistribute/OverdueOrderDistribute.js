@@ -10,50 +10,19 @@ import { convertMoneyFormat } from 'utils';
 import { FormattedMessage, injectIntl } from "react-intl";
 import PropTypes from 'prop-types';
 import { select } from 'redux-saga/effects';
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 
 
 class OverdueOrderDistribute extends Component {
-    columns = [
-        { title: this.props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', render(text) { return <CopyText text={text} /> } },
-        {
-            title: <FormattedMessage id="page.search.list.product.name" />,
-            dataIndex: "productName",
-            key: "productName",
-            render(text) { return <CopyText text={text} isEllispsis={true} /> }
-        },
-        {
-            title: <FormattedMessage id='page.table.appName' />,
-            dataIndex: "appName",
-            key: "appName",
-            render(text) { return <CopyText text={text} isEllispsis={true} /> }
-        },
-        { title: this.props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', render(text) { return <CopyText text={text} /> } },
-        { title: this.props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone', width: '10%', render(text) { return <CopyText text={text} /> } },
-        {
-            title: this.props.intl.formatMessage({ id: "page.table.loan" }),
-            dataIndex: 'deviceMoney',
-            key: 'deviceMoney',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)} />;
-            }
-        },
-        { title: this.props.intl.formatMessage({ id: "page.table.num.extend.period" }), dataIndex: 'lengNum', key: 'lengNum', width: '8%' },
-        {
-            title: this.props.intl.formatMessage({ id: "page.table.overdue.time" }),
-            dataIndex: 'expireTime',
-            key: 'expireTime',
-            render(text) {
-                return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
-            }
-        },
-        { title: this.props.intl.formatMessage({ id: "page.table.collect.depart" }), dataIndex: 'departmentName', key: 'departmentName' }
-        // { title: '上次催收人', dataIndex: 'lastPerson', key: 'lastPerson' }
-    ]
-
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             // selectedRowKeys: []
             pageSize: 10
         };
@@ -65,13 +34,59 @@ class OverdueOrderDistribute extends Component {
             pageNum: 1,
             collectorId: 0,
             pageSize: 10,
+            merchantId: '',
             time: [ moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 }) ]
         };
 
-        
+        this.columns = [
+          { title: this.props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo', render(text) { return <CopyText text={text} /> } },
+          {
+            title: <FormattedMessage id="page.search.list.product.name" />,
+            dataIndex: "productName",
+            key: "productName",
+            render(text) { return <CopyText text={text} isEllispsis={true} /> }
+          },
+          {
+            title: <FormattedMessage id='page.table.appName' />,
+            dataIndex: "appName",
+            key: "appName",
+            render(text) { return <CopyText text={text} isEllispsis={true} /> }
+          },
+          { title: this.props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName', render(text) { return <CopyText text={text} /> } },
+          { title: this.props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone', width: '10%', render(text) { return <CopyText text={text} /> } },
+          {
+            title: this.props.intl.formatMessage({ id: "page.table.loan" }),
+            dataIndex: 'deviceMoney',
+            key: 'deviceMoney',
+            render(text, record) {
+              return <CopyText text={convertMoneyFormat(text)} />;
+            }
+          },
+          { title: this.props.intl.formatMessage({ id: "page.table.num.extend.period" }), dataIndex: 'lengNum', key: 'lengNum', width: '8%' },
+          {
+            title: this.props.intl.formatMessage({ id: "page.table.overdue.time" }),
+            dataIndex: 'expireTime',
+            key: 'expireTime',
+            render(text) {
+              return moment(Number(text) * 1000).format('YYYY-MM-DD HH:mm:ss');
+            }
+          },
+          { title: this.props.intl.formatMessage({ id: "page.table.collect.depart" }), dataIndex: 'departmentName', key: 'departmentName' }
+          // { title: '上次催收人', dataIndex: 'lastPerson', key: 'lastPerson' }
+        ]
+
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName'
+          })
+        }
+
 
         this.convertParams = (obj) => {
-            const { collectorId, pageNum, pageSize, time, userPhone } = obj;
+            const { collectorId, pageNum, pageSize, time, userPhone, merchantId } = obj;
+            console.log("merchantId", merchantId);
             const isArr = Array.isArray(time) && time.length > 0;
             return {
                 startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -79,7 +94,8 @@ class OverdueOrderDistribute extends Component {
                 collectorId: collectorId,
                 userPhone: userPhone,
                 pageNum: pageNum,
-                pageSize: pageSize
+                pageSize: pageSize,
+                merchantId,
             };
         }
     }
@@ -135,7 +151,8 @@ class OverdueOrderDistribute extends Component {
         const params = {
             startTime: isArr ? time[0].format('YYYY-MM-DD HH:mm:ss') : '',
             endTime: isArr ? time[1].format('YYYY-MM-DD HH:mm:ss') : '',
-            userPhone: obj['userPhone']
+            userPhone: obj['userPhone'],
+            merchantId: obj['merchantId'],
         };
         this.searchPrams = params;
         getTableData({...params, pageSize: pageSize, pageNum: 1, collectorId: 0});
@@ -174,7 +191,7 @@ class OverdueOrderDistribute extends Component {
         const pageInfo = {...pagination, pageSizeOptions: ['10', '20', '30', '40', '50', "100", "200", "300", "400", "500", "1000", "2000"]}  //客戶要求1000、2000的分頁數
         return (
             <div>
-                <SearchList handleSearch={this.handleSearch} init={this.initParam} />
+                <SearchList handleSearch={this.handleSearch} init={this.initParam} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'primary'} onClick={this.distributeOrder}><FormattedMessage id="windowPage.distribute.order"/></Button></div>
                 <CommonTable
                     rowSelection={rowSelection}

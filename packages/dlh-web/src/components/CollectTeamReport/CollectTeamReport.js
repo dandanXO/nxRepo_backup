@@ -6,7 +6,7 @@ import { CommonTable } from 'components';
 import styles from "./CollectTeamReport.less";
 import download from "downloadjs";
 import { message } from "antd";
-function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime, downloadReport, downloadData, intl }) {
+function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime, downloadReport, downloadData, intl, isSuperAdmin, allMerchants }) {
 
     const renderRowSpan = (date, team, parentField, parentValue, field, value, index) => {
         const obj = {
@@ -95,11 +95,17 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
             ]
         }
     ];
+    if(isSuperAdmin) {
+      columns.unshift({
+        title: intl.formatMessage({id: "page.search.list.merchantName"}),
+        dataIndex: 'merchantName',
+        key: 'merchantName'
+      })
+    }
 
 
-    
 
-    const handleSearch = (obj) => {
+  const handleSearch = (obj) => {
         const { time, collectTeamId, leng } = obj
         const isArr = Array.isArray(time) && time.length > 0;
         const limit = 7;
@@ -129,7 +135,7 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
     }
 
     return <div className={styles.collectTeamReportTable}>
-        <SearchList teamsData={teamsData} handleSearch={handleSearch} initTime={initTime} downloadReport={downloadReport}/>
+        <SearchList teamsData={teamsData} handleSearch={handleSearch} initTime={initTime} downloadReport={downloadReport} isSuperAdmin={isSuperAdmin} allMerchants={allMerchants}/>
         <CommonTable
             columns={columns}
             dataSource={tableData}

@@ -12,6 +12,7 @@ import {axios, convertMoneyFormat} from "utils";
 import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 //转换参数格式
 // const convertParams = (obj) => {
@@ -37,7 +38,11 @@ const statusObj = {
 class OverdueList extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             btnDisabled: false
         };
         const _this = this;
@@ -107,7 +112,13 @@ class OverdueList extends Component {
                 width:'8%',
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
-            {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName',width:'13%',  render(text) { return <CopyText text={text} isEllispsis={true}/> } },
+            {
+              title: props.intl.formatMessage({id: "page.search.list.name"}),
+              dataIndex: 'userTrueName',
+              key: 'userTrueName',
+              width: isSuperAdmin ? '7%' : '13%',
+              render(text) { return <CopyText text={text} isEllispsis={true}/> }
+            },
             // { title: '手机型号', dataIndex: 'deviceModel', key: 'deviceModel' },
             // { title: '手机号', dataIndex: 'userPhone', key: 'userPhone' },
             {
@@ -190,12 +201,20 @@ class OverdueList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({ id: "page.table.appName" }), 
-                dataIndex: "appName", 
+                title: props.intl.formatMessage({ id: "page.table.appName" }),
+                dataIndex: "appName",
                 key: "appName",
                 width:'10%',
             },
         ];
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName',
+            width:'6%',
+          })
+        }
     }
 
 
@@ -373,7 +392,7 @@ class OverdueList extends Component {
         const pageInfo = {...pagination, pageSizeOptions: ['10', '20', '30', '40', '50', "100", "200", "300", "400", "500", "1000", "2000"]}  //客戶要求1000、2000的分頁數
         return (
             <div>
-                <SearchList handleSubmit={this.handleSearch} params={searchParams} personData={personData}/>
+                <SearchList handleSubmit={this.handleSearch} params={searchParams} personData={personData} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div>
                     <span>
                         <Button type={'primary'} onClick={this.distributeOrder}><FormattedMessage id="page.table.redistribute.order"/></Button>
