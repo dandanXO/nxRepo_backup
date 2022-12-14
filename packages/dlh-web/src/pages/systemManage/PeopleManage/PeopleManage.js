@@ -187,7 +187,7 @@ class PeopleManage extends Component {
             <div>
                 <SearchList departmentData={departmentData} roleData={roleData} submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'primary'} onClick={this.addPeople}><FormattedMessage id="page.table.add.staff"/></Button></div>
-                <CommonTable columns={this.columns} dataSource={data} pagination={pagination} loading={loading} handlePageChange={this.handlePageChange} isSuperAdmin={this.state.isSuperAdmin}/>
+                <CommonTable columns={this.columns} dataSource={data} pagination={pagination} loading={loading} handlePageChange={this.handlePageChange}/>
                 <AddModal
                     departmentData={departmentData}
                     handleOk={this.handleOk}

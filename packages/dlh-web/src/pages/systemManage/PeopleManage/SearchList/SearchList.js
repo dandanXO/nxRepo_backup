@@ -60,7 +60,6 @@ class SearchList extends Component {
                                 })(
                                   <Select>
                                     {this.renderMerchants()}
-                                    {/*{this.renderDepartment()}*/}
                                   </Select>
                                 )
                               }
