@@ -60,11 +60,7 @@ export const getLoginInfo = () => {
 
 //取得登入帳號資訊
 export const getAdminUserInfo = async () => {
-    if (Cookies.get("adminUser")) {
-        return JSON.parse(Cookies.get("adminUser"))
-    } else {
-      new Error("Error:getAdminUserInfo");
-    }
+  return JSON.parse(Cookies.get("adminUser"))
 }
 
 export const getIsSuperAdmin = () => {
