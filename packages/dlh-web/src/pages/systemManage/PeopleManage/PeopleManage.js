@@ -24,72 +24,85 @@ const googleStatus = {
 class PeopleManage extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = asyncIsSuperAdmin();
+
         this.state = {
+          isSuperAdmin,
             info: {},
-            columns: [
-              { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'trueName', key: 'trueName' },
-              { title: props.intl.formatMessage({ id: "page.search.list.account" }), dataIndex: 'userName', key: 'userName' },
-              { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo' },
-              { title: props.intl.formatMessage({ id: "page.table.department" }), dataIndex: 'departmentStr', key: 'departmentStr', width: '23%' },
-              { title: props.intl.formatMessage({ id: "page.search.list.roles" }), dataIndex: 'roleStr', key: 'roleStr', width: '23%' },
-              {
-                title: props.intl.formatMessage({ id: "page.search.list.status" }),
-                dataIndex: 'enabled',
-                key: 'enabled',
-                width: '6%',
-                render(text) {
-                  return userStatus[text];
-                }
-              },
-              {
-                title: props.intl.formatMessage({ id: "page.search.list.google.auth" }),
-                dataIndex: 'googleAuthFlag',
-                key: 'googleAuthFlag',
-                width: '8%',
-                render(text) {
-                  return googleStatus[text];
-                }
-              },
-              {
-                title: props.intl.formatMessage({ id: "page.table.operation" }),
-                dataIndex: 'id',
-                key: 'id',
-                width: '8%',
-                render(text, record) {
-                  return (
-                    <div className={styles.btnWrapper}>
-                      <span onClick={() => _this.editTreeList(record)}><Icon type={'edit'} /></span>
-                      <Popconfirm title={_this.props.intl.formatMessage({ id: "windowPage.confirm.delete" })} onConfirm={() => _this.deleteTreeList(text)}>
-                        <span><Icon type={'delete'} /></span>
-                      </Popconfirm>
-                    </div>
-                  );
-                }
-              }
-            ]
         };
         this.pageSize = 10;
         this.modifyId = '';
         this.searchParams = {};
+
         const _this = this;
 
+      this.columns = [
+        { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'trueName', key: 'trueName' },
+        { title: props.intl.formatMessage({ id: "page.search.list.account" }), dataIndex: 'userName', key: 'userName' },
+        { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo' },
+        { title: props.intl.formatMessage({ id: "page.table.department" }), dataIndex: 'departmentStr', key: 'departmentStr', width: '23%' },
+        { title: props.intl.formatMessage({ id: "page.search.list.roles" }), dataIndex: 'roleStr', key: 'roleStr', width: '23%' },
+        {
+          title: props.intl.formatMessage({ id: "page.search.list.status" }),
+          dataIndex: 'enabled',
+          key: 'enabled',
+          width: '6%',
+          render(text) {
+            return userStatus[text];
+          }
+        },
+        {
+          title: props.intl.formatMessage({ id: "page.search.list.google.auth" }),
+          dataIndex: 'googleAuthFlag',
+          key: 'googleAuthFlag',
+          width: '8%',
+          render(text) {
+            return googleStatus[text];
+          }
+        },
+        {
+          title: props.intl.formatMessage({ id: "page.table.operation" }),
+          dataIndex: 'id',
+          key: 'id',
+          width: '8%',
+          render(text, record) {
+            return (
+              <div className={styles.btnWrapper}>
+                <span onClick={() => _this.editTreeList(record)}><Icon type={'edit'} /></span>
+                <Popconfirm title={_this.props.intl.formatMessage({ id: "windowPage.confirm.delete" })} onConfirm={() => _this.deleteTreeList(text)}>
+                  <span><Icon type={'delete'} /></span>
+                </Popconfirm>
+              </div>
+            );
+          }
+        }
+      ];
+
+      if(isSuperAdmin) {
+        this.columns.unshift({
+          title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+          dataIndex: 'merchantName',
+          key: 'merchantName'
+        })
+      }
+
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-      if(this.state.isSuperAdmin !== prevState.isSuperAdmin) {
-        this.setState({
-          columns:
-            [
-              {
-                title: prevProps.intl.formatMessage({id: "page.search.list.merchantName"}),
-                dataIndex: 'merchantName',
-                key: 'merchantName'
-              },
-              ...this.state.columns,
-            ]
-        });
-      }
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //   if(this.state.isSuperAdmin !== prevState.isSuperAdmin) {
+    //     this.setState({
+    //       columns:
+    //         [
+    //           {
+    //             title: prevProps.intl.formatMessage({id: "page.search.list.merchantName"}),
+    //             dataIndex: 'merchantName',
+    //             key: 'merchantName'
+    //           },
+    //           ...this.state.columns,
+    //         ]
+    //     });
+    //   }
+    // }
 
   addPeople = () => {
         const { changeModalVisible, departmentData, roleData, teamsData, getGroupsData } = this.props;
@@ -180,12 +193,12 @@ class PeopleManage extends Component {
       getTeamsData();
       getGroupsData('', '')
 
-      const isSuperAdmin = await asyncIsSuperAdmin();
+      // const isSuperAdmin = await asyncIsSuperAdmin();
       const allMerchants = await asyncGetAllMerchants();
       console.log("allMerchants", allMerchants);
-      console.log("isSuperAdmin", isSuperAdmin);
+      // console.log("isSuperAdmin", isSuperAdmin);
       this.setState({
-        isSuperAdmin,
+        // isSuperAdmin,
         allMerchants,
       })
     }
@@ -196,7 +209,7 @@ class PeopleManage extends Component {
             <div>
                 <SearchList departmentData={departmentData} roleData={roleData} submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'primary'} onClick={this.addPeople}><FormattedMessage id="page.table.add.staff"/></Button></div>
-                <CommonTable columns={this.state.columns} dataSource={data} pagination={pagination} loading={loading} handlePageChange={this.handlePageChange} isSuperAdmin={this.state.isSuperAdmin}/>
+                <CommonTable columns={this.columns} dataSource={data} pagination={pagination} loading={loading} handlePageChange={this.handlePageChange} isSuperAdmin={this.state.isSuperAdmin}/>
                 <AddModal
                     departmentData={departmentData}
                     handleOk={this.handleOk}
