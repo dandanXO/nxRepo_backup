@@ -13,6 +13,7 @@ import { axios,convertMoneyFormat } from 'utils';
 import download from "downloadjs";
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 const OrderStatus = {
     pending:<FormattedMessage id="page.table.unpaid" />,
@@ -25,12 +26,16 @@ const OrderStatus = {
 class PayOrderList extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
             modelId: null,
             allPayPlatList:[],
             allPayTypeList:[],
             allPayMchList:[],
             btnDisabled: false,
+            isSuperAdmin,
+            allMerchants
         };
 
         this.searchParams =  {};
@@ -285,7 +290,18 @@ class PayOrderList extends Component {
                 }
             },
         ];
-        this.searchParams = {};
+        if (isSuperAdmin) {
+            this.columns.unshift({
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                width:90
+            })
+        }
+        this.searchParams = {
+            endDate: '', mchId: '', mchNo: '', orderNo: '', pageNum: 1, pageSize: 10,
+            phoneNo: '', platId: '', platOrderId: '', productName: '', startDate: '', status: '', userName: '', merchantId: ''
+        };
     }
     onCopy = () => {
         message.success(this.props.intl.formatMessage({id : "page.table.copy.success"}), 2);
@@ -378,7 +394,7 @@ class PayOrderList extends Component {
         getTableData({ ...this.searchParams, pageSize:this.pageSize, pageNum: this.pageNum});
     }
     handleSearch = (obj) => {
-        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime } = obj;
+        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime, merchantId='' } = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
         if(Array.isArray(time)) {
@@ -402,7 +418,7 @@ class PayOrderList extends Component {
             }
         }
 
-        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, pageSize: 10, pageNum: 1 };
+        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, merchantId, pageSize: 10, pageNum: 1 };
         this.searchParams = params;
         getTableData(params);
     }
@@ -417,9 +433,7 @@ class PayOrderList extends Component {
 
     componentDidMount() {
         const { getTableData } = this.props;
-        getTableData({ endDate: '', mchId: '', mchNo: '', orderNo: '', pageNum: 1, pageSize: 10,
-            phoneNo: '', platId: '',platOrderId: '',productName: '', startDate: '', status: '', userName: ''
-        });
+        getTableData(this.searchParams);
         try {
             const _this = this;
             axios({
@@ -477,7 +491,7 @@ class PayOrderList extends Component {
         const { allPayPlatList,allPayTypeList,allPayMchList,btnDisabled } = this.state;
         return (
             <div>
-                <SearchList allPayPlatList={allPayPlatList} allPayMchList={allPayMchList} OrderStatus={OrderStatus} handleSearch={this.handleSearch} />
+                <SearchList allPayPlatList={allPayPlatList} allPayMchList={allPayMchList} OrderStatus={OrderStatus} handleSearch={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <Button type={'danger'} disabled={btnDisabled} onClick={this.exportPayOrder}><FormattedMessage id="page.table.export" /></Button>
                 <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading} bordered  />
                 <EditModel visible={visible} allPayPlatList={allPayPlatList} allPayTypeList={allPayTypeList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk}/>
