@@ -9,6 +9,7 @@ import styles from './PeopleManage.less';
 import SearchList from './SearchList/SearchList';
 import PropTypes from 'prop-types';
 import {FormattedMessage, injectIntl} from "react-intl";
+import {asyncGetAllMerchants, asyncIsSuperAdmin, getAdminUserInfo, isSuperAdmin} from "../../../utils";
 
 const userStatus = {
     0: <FormattedMessage id="page.search.list.freeze"/>,
@@ -24,57 +25,73 @@ class PeopleManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            info: {}
-        };
-        this.pageSize = 10;
-        this.modifyId = '';
-        this.searchParams = {};
-        const _this = this;
-        this.columns = [
-            { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'trueName', key: 'trueName' },
-            { title: props.intl.formatMessage({ id: "page.search.list.account" }), dataIndex: 'userName', key: 'userName' },
-            { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo' },
-            { title: props.intl.formatMessage({ id: "page.table.department" }), dataIndex: 'departmentStr', key: 'departmentStr', width: '23%' },
-            { title: props.intl.formatMessage({ id: "page.search.list.roles" }), dataIndex: 'roleStr', key: 'roleStr', width: '23%' },
-            {
+            info: {},
+            columns: [
+              { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'trueName', key: 'trueName' },
+              { title: props.intl.formatMessage({ id: "page.search.list.account" }), dataIndex: 'userName', key: 'userName' },
+              { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo' },
+              { title: props.intl.formatMessage({ id: "page.table.department" }), dataIndex: 'departmentStr', key: 'departmentStr', width: '23%' },
+              { title: props.intl.formatMessage({ id: "page.search.list.roles" }), dataIndex: 'roleStr', key: 'roleStr', width: '23%' },
+              {
                 title: props.intl.formatMessage({ id: "page.search.list.status" }),
                 dataIndex: 'enabled',
                 key: 'enabled',
                 width: '6%',
                 render(text) {
-                    return userStatus[text];
+                  return userStatus[text];
                 }
-            },
-            {
+              },
+              {
                 title: props.intl.formatMessage({ id: "page.search.list.google.auth" }),
                 dataIndex: 'googleAuthFlag',
                 key: 'googleAuthFlag',
                 width: '8%',
                 render(text) {
-                    return googleStatus[text];
+                  return googleStatus[text];
                 }
-            },
-            {
+              },
+              {
                 title: props.intl.formatMessage({ id: "page.table.operation" }),
                 dataIndex: 'id',
                 key: 'id',
                 width: '8%',
                 render(text, record) {
-                    return (
-                        <div className={styles.btnWrapper}>
-                            <span onClick={() => _this.editTreeList(record)}><Icon type={'edit'} /></span>
-                            <Popconfirm title={_this.props.intl.formatMessage({ id: "windowPage.confirm.delete" })} onConfirm={() => _this.deleteTreeList(text)}>
-                                <span><Icon type={'delete'} /></span>
-                            </Popconfirm>
-                        </div>
-                    );
+                  return (
+                    <div className={styles.btnWrapper}>
+                      <span onClick={() => _this.editTreeList(record)}><Icon type={'edit'} /></span>
+                      <Popconfirm title={_this.props.intl.formatMessage({ id: "windowPage.confirm.delete" })} onConfirm={() => _this.deleteTreeList(text)}>
+                        <span><Icon type={'delete'} /></span>
+                      </Popconfirm>
+                    </div>
+                  );
                 }
-            }
-        ];
+              }
+            ]
+        };
+        this.pageSize = 10;
+        this.modifyId = '';
+        this.searchParams = {};
+        const _this = this;
+
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+      if(this.state.isSuperAdmin !== prevState.isSuperAdmin) {
+        this.setState({
+          columns:
+            [
+              {
+                title: prevProps.intl.formatMessage({id: "page.search.list.merchantName"}),
+                dataIndex: 'merchantName',
+                key: 'merchantName'
+              },
+              ...this.state.columns,
+            ]
+        });
+      }
+    }
 
-    addPeople = () => {
+  addPeople = () => {
         const { changeModalVisible, departmentData, roleData, teamsData, getGroupsData } = this.props;
         this.modifyId = '';
         const info = {
@@ -155,22 +172,31 @@ class PeopleManage extends Component {
         getTableData({...obj, pageSize: this.pageSize, pageNum: 1})
     }
 
-    componentDidMount() {
-        const { getTableData, getRoleData, getDepartmentData, getTeamsData, getGroupsData, teamsData } = this.props;
-        getTableData({pageSize: this.pageSize, pageNum: 1, ...this.searchParams});
-        getRoleData({});
-        getDepartmentData({});
-        getTeamsData();
-        getGroupsData('', '')
+    async componentDidMount() {
+      const {getTableData, getRoleData, getDepartmentData, getTeamsData, getGroupsData, teamsData} = this.props;
+      getTableData({pageSize: this.pageSize, pageNum: 1, ...this.searchParams});
+      getRoleData({});
+      getDepartmentData({});
+      getTeamsData();
+      getGroupsData('', '')
+
+      const isSuperAdmin = await asyncIsSuperAdmin();
+      const allMerchants = await asyncGetAllMerchants();
+      console.log("allMerchants", allMerchants);
+      console.log("isSuperAdmin", isSuperAdmin);
+      this.setState({
+        isSuperAdmin,
+        allMerchants,
+      })
     }
 
     render() {
         const { tableData: { data, pagination }, loading, departmentData, roleData, visible, getGroupsData, teamsData, groupsData, collectTeamId, collectGroupId } = this.props;
         return (
             <div>
-                <SearchList departmentData={departmentData} roleData={roleData} submit={this.submit}/>
+                <SearchList departmentData={departmentData} roleData={roleData} submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'primary'} onClick={this.addPeople}><FormattedMessage id="page.table.add.staff"/></Button></div>
-                <CommonTable columns={this.columns} dataSource={data} pagination={pagination} loading={loading} handlePageChange={this.handlePageChange}/>
+                <CommonTable columns={this.state.columns} dataSource={data} pagination={pagination} loading={loading} handlePageChange={this.handlePageChange} isSuperAdmin={this.state.isSuperAdmin}/>
                 <AddModal
                     departmentData={departmentData}
                     handleOk={this.handleOk}

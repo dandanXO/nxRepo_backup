@@ -66,6 +66,8 @@ class LayoutHeader extends Component {
                 appName: res.appName
             });
             document.title = res.appName;
+
+            // NOTICE: 超管角色
             if (data['roleId'] === 1) {
                 const freshBalance = (callBack) => {
                     axios({
