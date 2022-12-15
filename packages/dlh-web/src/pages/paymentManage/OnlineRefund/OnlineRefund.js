@@ -33,7 +33,12 @@ const getParams = () => {
 class AddOLRefund extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             info: getParams()
         };
         const _this = this;
@@ -122,6 +127,13 @@ class AddOLRefund extends Component {
                 }
             }
         ];
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName'
+          })
+        }
     }
 
     onChange= (changedFields) => {
