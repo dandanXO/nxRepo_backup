@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, DatePicker, Row, Col, Button, Checkbox } from 'antd';
+import {Form, DatePicker, Row, Col, Button, Checkbox, Select} from 'antd';
 import {injectIntl, FormattedMessage} from "react-intl";
 
 
@@ -20,20 +20,42 @@ class SearchList extends Component{
         e.preventDefault();
         const { form: { getFieldsValue }, handleSearch } = this.props;
         handleSearch(getFieldsValue());
-    }    
-    
+    }
+
     retu = () => {
         const { form: { getFieldsValue }, exportRecord } = this.props;
         exportRecord(getFieldsValue());
     }
 
+    renderMerchants = () => {
+      const { allMerchants } = this.props;
+      if(!allMerchants) return;
+      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+
     render() {
-        const { form: { getFieldDecorator  }, initTime, isStatistLeng, intl  } = this.props;
-        
+        const { form: { getFieldDecorator  }, initTime, isStatistLeng, intl, isSuperAdmin  } = this.props;
+
         return (
             <div>
                 <Form onSubmit={this.submit}>
                     <Row>
+                        {isSuperAdmin && (
+                          <Col span={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
+                              {
+                                getFieldDecorator('merchantId', {
+                                  initialValue: ''
+                                })(
+                                  <Select>
+                                    {this.renderMerchants()}
+                                  </Select>
+                                )
+                              }
+                            </Form.Item>
+                          </Col>
+                        )}
                         <Col span={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.time"})}>
                                 {
