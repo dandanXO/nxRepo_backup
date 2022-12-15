@@ -306,6 +306,12 @@ export default Form.create({
             password: Form.createFormField({
                 value: info['password'] || ''
             }),
+            merchantId: Form.createFormField({
+              value: info['merchantId'],
+            }),
+            deptManager: Form.createFormField({
+              value: info['deptManager'],
+            }),
 
         };
     }

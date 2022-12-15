@@ -125,7 +125,7 @@ class PeopleManage extends Component {
     }
     editTreeList = (record) => {
         const { changeModalVisible, getGroupsData } = this.props;
-        const { id, departmentId, roleId, trueName, userName, enabled, phoneNo, googleAuthFlag, password, passwordLogin, collectTeamId, collectGroupId } = record;
+        const { id, departmentId, roleId, trueName, userName, enabled, phoneNo, googleAuthFlag, password, passwordLogin, collectTeamId, collectGroupId, merchantId, deptManager } = record;
         this.modifyId = id;
         const teamId = collectTeamId === null ? "" : collectTeamId;
         const groupId = collectGroupId === null ? "" : collectGroupId;
@@ -139,6 +139,8 @@ class PeopleManage extends Component {
             googleAuthFlag,
             passwordLogin,
             password,
+            merchantId,
+            deptManager,
         };
         this.setState({ info }, () => {
             getGroupsData(teamId, groupId);
