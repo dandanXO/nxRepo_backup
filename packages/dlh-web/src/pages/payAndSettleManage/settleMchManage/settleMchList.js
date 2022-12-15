@@ -100,7 +100,7 @@ class SettleMchList extends Component {
                 key: 'createDate',
                 width:'13%',
                 render(text) {
-                    return moment(Number(text)).format('YYYY-MM-DD HH:mm:ss');
+                  return moment(text).format('YYYY-MM-DD HH:mm:ss');
                 }
             },
             {
@@ -109,7 +109,7 @@ class SettleMchList extends Component {
                 key: 'modifyDate',
                 width:'13%',
                 render(text) {
-                    return moment(Number(text)).format('YYYY-MM-DD HH:mm:ss');
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
                 }
             },
             {
@@ -134,13 +134,13 @@ class SettleMchList extends Component {
         if (isSuperAdmin) {
             this.columns.unshift({
                 title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
-                dataIndex: 'merchantName',
-                key: 'merchantName',
+                dataIndex: 'dlhMerchantName',
+                key: 'dlhMerchantName',
                 width: 90
             })
         }
 
-        this.searchParams = { platId:'', mchNo:'', mchName:'', startDate:'', endDate:'', merchantId:'', pageSize: this.pageSize, pageNum: 1 };
+        this.searchParams = { platId:'', mchNo:'', mchName:'', startDate:'', endDate:'', dlhMerchantId:'', pageSize: this.pageSize, pageNum: 1 };
     }
 
     //添加
@@ -148,14 +148,34 @@ class SettleMchList extends Component {
         const { changeModalVisible, changeModalInfo, info } = this.props;
         this.setState({ modelId: null });
         changeModalVisible(true);
-        changeModalInfo({  mchNo:'',mchName:'',mchKey:'',mchKey2:'',platId:'',rate:'',openTime:'',settleMoneyList:'',file1Id:'',file2Id:'',callbackHost:'',forFirst:false,isEnabled:true,sortNum:99,business1Field:"",business2Field:"",business3Field:"" });
+        changeModalInfo({
+          mchNo:'',
+          mchName:'',
+          mchKey:'',
+          mchKey2:'',
+          platId:'',
+          rate:'',
+          openTime:'',
+          settleMoneyList:'',
+          file1Id:'',
+          file2Id:'',
+          callbackHost:'',
+          forFirst:false,
+          isEnabled:true,
+          sortNum:99,
+          business1Field:"",
+          business2Field:"",
+          business3Field:"",
+          dlhMerchantId: ""
+        });
     }
     //修改
     modifyModel = (record) => {
-        const { id,mchNo,mchName,mchKey,mchKey2,platId,rate,openTime,settleMoneyList,callbackHost,forFirst,isEnabled,sortNum,file1Id,file2Id,business1Field,business2Field,business3Field} = record;
+      console.log("modifyModel.record", record);
+        const { id,mchNo,mchName,mchKey,mchKey2,platId,rate,openTime,settleMoneyList,callbackHost,forFirst,isEnabled,sortNum,file1Id,file2Id,business1Field,business2Field,business3Field,dlhMerchantId} = record;
         const { changeModalVisible, changeModalInfo, info } = this.props;
         this.setState({ modelId: id });
-        changeModalInfo({ mchNo,mchName,mchKey,mchKey2,platId,rate,openTime,settleMoneyList,callbackHost,settleTypeIds:forFirst,isEnabled,sortNum,file1Id,file2Id,business1Field,business2Field,business3Field });
+        changeModalInfo({ ...record, mchNo,mchName,mchKey,mchKey2,platId,rate,openTime,settleMoneyList,callbackHost,settleTypeIds:forFirst,isEnabled,sortNum,file1Id,file2Id,business1Field,business2Field,business3Field, dlhMerchantId });
         changeModalVisible(true);
     }
     //删除
@@ -180,17 +200,19 @@ class SettleMchList extends Component {
 
     handleModalOk = (obj) => {
         const { modelId } = this.state;
-        const { addModel, updateModel } = this.props;
-
+        const { addModel, updateModel, changeModalVisible, getTableData } = this.props;
         if(modelId) {
             updateModel({ ...obj, id: modelId });
-            return;
+        } else {
+            addModel(obj);
         }
-        addModel(obj);
+        changeModalVisible(false);
+        getTableData({ ...this.searchParams, pageSize: this.pageSize, pageNum: 1 });
+
     }
 
     handleSearch = (obj) => {
-        let { time, platId, mchNo, mchName, merchantId = '' } = obj;
+        let { time, platId, mchNo, mchName, dlhMerchantId = '' } = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
         if (Array.isArray(time)) {
@@ -203,7 +225,7 @@ class SettleMchList extends Component {
             }
         }
 
-        const params = { platId, mchNo, mchName, startDate, endDate, merchantId, pageSize: this.pageSize, pageNum: 1 };
+        const params = { platId, mchNo, mchName, startDate, endDate, dlhMerchantId, pageSize: this.pageSize, pageNum: 1 };
         this.searchParams = params;
         getTableData(params);
     }

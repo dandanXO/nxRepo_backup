@@ -56,7 +56,7 @@ class EditModel extends Component{
         }
     }
     handleOk = () => {
-        const { form: { getFieldsValue, validateFields }, handleOk } =  this.props;
+        const { form: { getFieldsValue, validateFields }, handleOk, info } =  this.props;
         validateFields((err) => {
             if(err) {
                 return;
@@ -64,6 +64,12 @@ class EditModel extends Component{
             let editInfo = getFieldsValue();
             editInfo.file1Id = this.props.info.file1Id;
             editInfo.file2Id = this.props.info.file2Id;
+
+            console.log("info", info);
+            editInfo = {
+              ...info,
+              ...editInfo,
+            }
             handleOk(editInfo);
         })
     }
@@ -109,7 +115,7 @@ class EditModel extends Component{
                         {isSuperAdmin && (
                           <Form.Item label={intl.formatMessage({id : "page.search.list.merchantName"})} {...this.layout}>
                             {
-                              getFieldDecorator('merchantId', {
+                              getFieldDecorator('dlhMerchantId', {
                                 initialValue: ''
                               })(
                                 <Select>
@@ -405,7 +411,11 @@ export default Form.create({
             }),
             business3Field:Form.createFormField({
                 value: info['business3Field']
-            })
+            }),
+            dlhMerchantId:Form.createFormField({
+              value: info['dlhMerchantId']
+            }),
+
         }
     }
 })(injectIntl(EditModel));
