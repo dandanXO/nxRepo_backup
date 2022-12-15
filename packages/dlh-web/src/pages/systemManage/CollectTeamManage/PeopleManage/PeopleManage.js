@@ -28,6 +28,11 @@ const googleStatus = {
     0: <FormattedMessage id="page.search.list.disable"/>
 }
 
+const deptManager = {
+  "true": <FormattedMessage id="page.table.yes"/>,
+  "false": "",
+}
+
 class PeopleManage extends Component {
     constructor(props) {
         super(props);
@@ -56,7 +61,12 @@ class PeopleManage extends Component {
             { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo' },
             { title: props.intl.formatMessage({ id: "page.table.collect-team" }), dataIndex: 'collectTeamName', key: 'collectTeamName' },
             { title: props.intl.formatMessage({ id: "page.table.collect-group" }), dataIndex: 'collectGroupName', key: 'collectGroupName' },
-            { title: props.intl.formatMessage({ id: "page.table.department.leader" }), dataIndex: 'deptManager', key: 'deptManager' },
+            { title: props.intl.formatMessage({ id: "page.table.department.leader" }), dataIndex: 'deptManager', key: 'deptManager',
+              render(text) {
+              return deptManager[text];
+              }
+            },
+
             { title: props.intl.formatMessage({ id: "page.search.list.roles" }), dataIndex: 'roleStr', key: 'roleStr', width: '23%' },
             {
                 title: props.intl.formatMessage({ id: "page.search.list.status" }),

@@ -1,22 +1,13 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import {
-    GetLoanDetailRequestQuerystring,
-    GetLoanDetailResponse,
-} from "./getLoanDetail";
+import {createApi} from "@reduxjs/toolkit/query/react";
+import {GetLoanDetailRequestQuerystring, GetLoanDetailResponse,} from "./getLoanDetail";
 import axiosBaseQuery from "./base/axiosBaseQuery";
-import {
-    GetRepayReceiptRequestQuerystring,
-    GetRepayReceiptResponse,
-} from "./getRepayReceipt";
-import { PostRepayReceiptResponse } from "./postRepayReceipt";
-import { GetRepayTypesResponse } from "./getRepayTypes";
-import {
-    PostRepayCreateRequestBody,
-    PostRepayCreateResponse,
-} from "./postRepayCreate";
-import {PostBankBindSaveRequest, PostPKBankBindSaveRequest, PostBangladeshBankBindSaveRequest} from "./postBankBindSave";
-import { PostLoanSubmitOrderRequestBody } from "./postLoanSubmitOrder";
-import { GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring } from "./getLoanRecommend";
+import {GetRepayReceiptRequestQuerystring, GetRepayReceiptResponse,} from "./getRepayReceipt";
+import {PostRepayReceiptResponse} from "./postRepayReceipt";
+import {GetRepayTypesRequestQuerystring, GetRepayTypesResponse} from "./getRepayTypes";
+import {PostRepayCreateRequestBody, PostRepayCreateResponse,} from "./postRepayCreate";
+import {PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBindSaveRequest} from "./postBankBindSave";
+import {PostLoanSubmitOrderRequestBody} from "./postLoanSubmitOrder";
+import {GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring} from "./getLoanRecommend";
 import {GetBindCardDropListResponse} from "./GetBindCardDropList";
 
 interface GetActivityAdsRequest {
@@ -79,10 +70,13 @@ export const API = createApi({
             }),
         }),
         // NOTE: 取得可用付款方式
-        getRepayTypes: builder.query<GetRepayTypesResponse, {}>({
-            query: () => ({
+        getRepayTypes: builder.query<GetRepayTypesResponse, GetRepayTypesRequestQuerystring>({
+            query: (query: GetRepayTypesRequestQuerystring) => ({
                 method: "get",
                 url: `/repay/types`,
+                params: {
+                    orderNo: query.orderNo,
+                },
             }),
         }),
         // NOTE: 創建還款訂單

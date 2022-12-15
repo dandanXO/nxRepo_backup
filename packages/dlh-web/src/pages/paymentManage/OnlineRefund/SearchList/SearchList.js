@@ -24,11 +24,26 @@ class SearchList extends Component {
         submit(params);
     }
     render() {
-        const {form: {getFieldDecorator}, intl} = this.props;
+        const {form: {getFieldDecorator}, intl, isSuperAdmin} = this.props;
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <Row>
+                        {isSuperAdmin && (
+                          <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
+                              {
+                                getFieldDecorator('merchantId', {
+                                  initialValue: ''
+                                })(
+                                  <Select>
+                                    {this.renderMerchants()}
+                                  </Select>
+                                )
+                              }
+                            </Form.Item>
+                          </Col>
+                        )}
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id :"page.search.list.name"})}>
                                 {

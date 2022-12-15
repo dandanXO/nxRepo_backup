@@ -1,15 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
-import {
-    useGetLoanDetailQuery,
-    useGetRepayTypesQuery,
-    usePostRepayCreateMutation,
-} from "../api";
-import { useCallback, useEffect, useState } from "react";
-import {
-    PostRepayCreateRequestBody,
-    PostRepayCreateResponse,
-} from "../api/postRepayCreate";
+import {useNavigate} from "react-router-dom";
+import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
+import {useGetLoanDetailQuery, useGetRepayTypesQuery, usePostRepayCreateMutation,} from "../api";
+import {useCallback, useEffect, useState} from "react";
+import {PostRepayCreateRequestBody, PostRepayCreateResponse,} from "../api/postRepayCreate";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();
@@ -21,7 +14,7 @@ const useLoanDetailStory = () => {
         currentData: repayTypes,
         isLoading: isRepayTypesLoading,
         isFetching: isRepayTypesFetching,
-    } = useGetRepayTypesQuery({});
+    } = useGetRepayTypesQuery({orderNo: pageQueryString.orderNo});
     const orderNo = pageQueryString.orderNo;
     const token = pageQueryString.token;
     const [payType, setPayType] = useState<number>(0);

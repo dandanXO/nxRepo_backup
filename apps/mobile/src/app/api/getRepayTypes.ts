@@ -1,4 +1,8 @@
 // GetRepayPayPlats
+export interface GetRepayTypesRequestQuerystring {
+    /** 訂單號 */
+    orderNo?: string;
+}
 interface GetRepayTypesResponseObject {
     /** 支付平台 */
     payPlats?: GetRepayTypesPayPlats[];
