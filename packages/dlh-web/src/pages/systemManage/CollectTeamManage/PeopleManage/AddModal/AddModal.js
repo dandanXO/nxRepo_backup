@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Modal, Form, Select, Input, Radio, message, Col} from 'antd';
+import {Modal, Form, Select, Input, Radio, message, Col, Switch} from 'antd';
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
 
@@ -89,7 +89,7 @@ class AddModal extends Component{
       const { allMerchants } = this.props
       if(!allMerchants) return;
       const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
-      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+      return ele;
     }
 
     render() {
@@ -164,6 +164,16 @@ class AddModal extends Component{
                                 </Select>
                             )
                         }
+                    </FormItem>
+                    <FormItem required={true} label={intl.formatMessage({id : "page.table.department.leader"})} {...this.layout}>
+                      {
+                        getFieldDecorator('deptManager', {
+                          valuePropName: 'checked',
+                          initialValue: false
+                        })(
+                          <Switch checkedChildren={intl.formatMessage({id : "page.table.yes"})} unCheckedChildren={intl.formatMessage({id : "page.table.no"})} />
+                        )
+                      }
                     </FormItem>
                     <FormItem required={true} label={intl.formatMessage({id : "page.search.list.roles"})} {...this.layout}>
                         {
