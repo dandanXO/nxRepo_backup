@@ -138,10 +138,10 @@ class PayTypeList extends Component {
         if(Array.isArray(time)) {
             [startDate, endDate] = time.map(item => item.format('YYYY-MM-DD'));
             if(!!startDate){
-                startDate += ' 00:00:00.0';
+                startDate += ' 00:00:00';
             }
             if(!!endDate){
-                endDate += ' 23:59:59.999';
+                endDate += ' 23:59:59';
             }
         }
         

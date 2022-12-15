@@ -447,10 +447,10 @@ class SettleOrderList extends Component {
         if(Array.isArray(time)) {
             [startDate, endDate] = time.map(item => item.format('YYYY-MM-DD'));
             if(!!startDate){
-                startDate += ' 00:00:00.0';
+                startDate += ' 00:00:00';
             }
             if(!!endDate){
-                endDate += ' 23:59:59.999';
+                endDate += ' 23:59:59';
             }
         }
 
@@ -458,10 +458,10 @@ class SettleOrderList extends Component {
         if(Array.isArray(finishTime)) {
             [startFinishDate, endFinishDate] = finishTime.map(item => item.format('YYYY-MM-DD'));
             if(!!startFinishDate){
-                startFinishDate += ' 00:00:00.0';
+                startFinishDate += ' 00:00:00';
             }
             if(!!endFinishDate){
-                endFinishDate += ' 23:59:59.999';
+                endFinishDate += ' 23:59:59';
             }
         }
 
