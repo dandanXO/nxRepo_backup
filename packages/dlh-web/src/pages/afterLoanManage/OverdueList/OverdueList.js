@@ -38,8 +38,8 @@ const statusObj = {
 class OverdueList extends Component {
     constructor(props) {
         super(props);
-        const isSuperAdmin = getIsSuperAdmin();
-        const allMerchants = getAllMerchants();
+      const isSuperAdmin = getIsSuperAdmin();
+      const allMerchants = getAllMerchants();
         this.state = {
             isSuperAdmin,
             allMerchants,
@@ -392,7 +392,7 @@ class OverdueList extends Component {
         const pageInfo = {...pagination, pageSizeOptions: ['10', '20', '30', '40', '50', "100", "200", "300", "400", "500", "1000", "2000"]}  //客戶要求1000、2000的分頁數
         return (
             <div>
-                <SearchList handleSubmit={this.handleSearch} params={searchParams} personData={personData} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList handleSubmit={this.handleSearch} params={searchParams} personData={personData}/>
                 <div>
                     <span>
                         <Button type={'primary'} onClick={this.distributeOrder}><FormattedMessage id="page.table.redistribute.order"/></Button>

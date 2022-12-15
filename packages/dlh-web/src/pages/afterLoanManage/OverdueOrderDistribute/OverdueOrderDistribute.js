@@ -191,7 +191,7 @@ class OverdueOrderDistribute extends Component {
         const pageInfo = {...pagination, pageSizeOptions: ['10', '20', '30', '40', '50', "100", "200", "300", "400", "500", "1000", "2000"]}  //客戶要求1000、2000的分頁數
         return (
             <div>
-                <SearchList handleSearch={this.handleSearch} init={this.initParam} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList handleSearch={this.handleSearch} init={this.initParam} />
                 <div><Button type={'primary'} onClick={this.distributeOrder}><FormattedMessage id="windowPage.distribute.order"/></Button></div>
                 <CommonTable
                     rowSelection={rowSelection}

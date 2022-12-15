@@ -29,26 +29,11 @@ class SearchList extends Component{
       return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
     render() {
-        const { form: { getFieldDecorator  }, intl , init, isSuperAdmin } = this.props;
+        const { form: { getFieldDecorator  }, intl , init } = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
                     <Row gutter={40}>
-                        {isSuperAdmin && (
-                          <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
-                              {
-                                getFieldDecorator('merchantId', {
-                                  initialValue: ''
-                                })(
-                                  <Select>
-                                    {this.renderMerchants()}
-                                  </Select>
-                                )
-                              }
-                            </Form.Item>
-                          </Col>
-                        )}
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id :"page.table.overdue.time"})}>
                                 {
