@@ -29,14 +29,13 @@ function* watchGetTableData() {
 }
 //添加渠道
 
-function* addChannel(action) {
-    try{
-        const res = yield call(addModel, action.params);
-        if(res.code === '200') {
-            message.success('操作成功');
-            yield put(settleMchChangeModalVisible(false));
-            yield put(settleMchGetTableData({ pageSize: 50, pageNum: 1 }));
-        }
+function* addChannel (action) {
+    try {
+        yield call(addModel, action.params);
+        message.success('操作成功');
+        yield put(settleMchChangeModalVisible(false));
+        yield put(settleMchGetTableData({ pageSize: 50, pageNum: 1 }));
+
     } catch (e) {
         console.log(e);
     }
@@ -47,12 +46,11 @@ function* watchAddChannel() {
 
 function* modifyChannel(action) {
     try {
-        const res = yield call(updateModel, action.params);
-        if(res.code === '200') {
-            message.success('操作成功');
-            yield put(settleMchChangeModalVisible(false));
-            yield put(settleMchGetTableData({ pageSize: 50, pageNum: 1 }));
-        }
+        yield call(updateModel, action.params);
+        message.success('操作成功');
+        yield put(settleMchChangeModalVisible(false));
+        yield put(settleMchGetTableData({ pageSize: 50, pageNum: 1 }));
+
     } catch (e) {
         console.log(e);
     }
