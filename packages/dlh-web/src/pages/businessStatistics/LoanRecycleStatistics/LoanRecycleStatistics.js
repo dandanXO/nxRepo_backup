@@ -10,132 +10,149 @@ import { axios, convertMoneyFormat } from "utils";
 import download from "downloadjs";
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 
-const convertParams = (time) => {
+const convertParams = (obj = {}) => {
+    const { time = [], merchantId = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     return {
         startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
-        endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : ''
+        endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
+        merchantId
     };
 }
 
 class LoanRecycleStatistics extends Component{
-    columns = [
-        { title: <FormattedMessage id="page.table.loan.time" />, dataIndex: 'day', key: 'day' },
-        { title: <FormattedMessage id="page.table.num.loan" />, dataIndex: 'loanNum', key: 'loanNum' },
-        {
-            title: <FormattedMessage id="page.table.loan.principal" />,
-            dataIndex: 'lendMoney',
-            key: 'lendMoney',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.loan.contract.amount" />,
-            dataIndex: 'deviceMoney',
-            key: 'deviceMoney',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.normal.repayment" />,
-            dataIndex: 'normalRepayment',
-            key: 'normalRepayment',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        // { title: '正常展期费用', dataIndex: 'normalLeng', key: 'normalLeng' },
-        {
-            title: <FormattedMessage id="page.table.overdue.repayment" />,
-            dataIndex: 'overdueRepayment',
-            key: 'overdueRepayment',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        // { title: '逾期展期费用', dataIndex: 'overdueLeng', key: 'overdueLeng' },
-        {
-            title: <FormattedMessage id="page.table.overdue.late.fee" />,
-            dataIndex: 'overMoney',
-            key: 'overMoney',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        // { title: '在贷金额', dataIndex: 'ingLoan', key: 'ingLoan' },
-        {
-            title: <FormattedMessage id="page.table.normal.loan.amount" />,
-            dataIndex: 'ingLoanNormal',
-            key: 'ingLoanNormal',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.overdue.loan.amount" />,
-            dataIndex: 'ingLoanDue',
-            key: 'ingLoanDue',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.total.repayment" />,
-            dataIndex: 'totalRepayment',
-            key: 'totalRepayment',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.first.overdue.rate" />,
-            dataIndex: 'firstDueLoanRate',
-            key: 'firstDueLoanRate',
-            render(text) {
-                const str = Number(text) * 100;
-                return <CopyText text={Number.isInteger(str) ? `${str}%` : `${str.toFixed(2)}%`}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.principal.recovery.rate" />,
-            dataIndex: 'rate',
-            key: 'rate',
-            render(text) {
-                const str = Number(text) * 100;
-                return <CopyText text={Number.isInteger(str) ? `${str}%` : `${str.toFixed(2)}%`}/>;
-            }
-        },
-    ];
+
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+
         this.state = {
             time: [moment().subtract(9, 'days'), moment()],
-            btnDisabled:false
+            btnDisabled:false,
+            isSuperAdmin,
+            allMerchants
+
         };
+        this.columns = [
+            { title: <FormattedMessage id="page.table.loan.time" />, dataIndex: 'day', key: 'day' },
+            { title: <FormattedMessage id="page.table.num.loan" />, dataIndex: 'loanNum', key: 'loanNum' },
+            {
+                title: <FormattedMessage id="page.table.loan.principal" />,
+                dataIndex: 'lendMoney',
+                key: 'lendMoney',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.loan.contract.amount" />,
+                dataIndex: 'deviceMoney',
+                key: 'deviceMoney',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.normal.repayment" />,
+                dataIndex: 'normalRepayment',
+                key: 'normalRepayment',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            // { title: '正常展期费用', dataIndex: 'normalLeng', key: 'normalLeng' },
+            {
+                title: <FormattedMessage id="page.table.overdue.repayment" />,
+                dataIndex: 'overdueRepayment',
+                key: 'overdueRepayment',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            // { title: '逾期展期费用', dataIndex: 'overdueLeng', key: 'overdueLeng' },
+            {
+                title: <FormattedMessage id="page.table.overdue.late.fee" />,
+                dataIndex: 'overMoney',
+                key: 'overMoney',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            // { title: '在贷金额', dataIndex: 'ingLoan', key: 'ingLoan' },
+            {
+                title: <FormattedMessage id="page.table.normal.loan.amount" />,
+                dataIndex: 'ingLoanNormal',
+                key: 'ingLoanNormal',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.overdue.loan.amount" />,
+                dataIndex: 'ingLoanDue',
+                key: 'ingLoanDue',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.total.repayment" />,
+                dataIndex: 'totalRepayment',
+                key: 'totalRepayment',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.first.overdue.rate" />,
+                dataIndex: 'firstDueLoanRate',
+                key: 'firstDueLoanRate',
+                render(text) {
+                    const str = Number(text) * 100;
+                    return <CopyText text={Number.isInteger(str) ? `${str}%` : `${str.toFixed(2)}%`}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.principal.recovery.rate" />,
+                dataIndex: 'rate',
+                key: 'rate',
+                render(text) {
+                    const str = Number(text) * 100;
+                    return <CopyText text={Number.isInteger(str) ? `${str}%` : `${str.toFixed(2)}%`}/>;
+                }
+            },
+        ];
+        if (isSuperAdmin) {
+            this.columns.unshift({
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                width: 90
+            })
+        }
+
     }
 
-    componentDidMount() {
+    componentDidMount () {
         const { getTableData } = this.props;
-        const params = convertParams(this.state.time);
+        const params = convertParams({time:this.state.time, merchantId: ''});
         getTableData({ ...params });
     }
 
     handleSearch = (obj) => {
-        const { time = [] } = obj;
         const { getTableData } = this.props;
-        const params = convertParams(time);
+        const params = convertParams(obj);
         getTableData({ ...params });
     }
 
     //导出记录
     exportRecord = (obj) => {
-        const { time = [] } = obj;
         this.setState({ btnDisabled: true });
         let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
-        const searchStatus = convertParams(time);
+        const searchStatus = convertParams(obj);
         axios({
         url: "/hs/admin/statistics/s1Download",
         method: "post",
@@ -158,10 +175,14 @@ class LoanRecycleStatistics extends Component{
         const { btnDisabled } = this.state;
         return (
             <div>
-                <SearchList handleSearch={this.handleSearch} initTime={this.state.time}
-                		  exportRecord={this.exportRecord}
-                          btnDisable={btnDisabled}
-                          />
+                <SearchList
+                    handleSearch={this.handleSearch}
+                    initTime={this.state.time}
+                    exportRecord={this.exportRecord}
+                    btnDisable={btnDisabled}
+                    isSuperAdmin={this.state.isSuperAdmin}
+                    allMerchants={this.state.allMerchants}
+                />
                 <CommonTable
                     columns={this.columns}
                     dataSource={data}
