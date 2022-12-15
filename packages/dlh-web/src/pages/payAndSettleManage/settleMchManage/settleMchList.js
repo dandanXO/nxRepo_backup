@@ -12,19 +12,25 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { axios } from 'utils';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from "react-intl";
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 class SettleMchList extends Component {
 
     constructor(props) {
         super(props);
         this.pageSize = 50;
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
 
         this.state = {
             modelId: null,
             allSettlePlatList:[],
             pagination: {
                 pageSize: this.pageSize
-            }
+            },
+            isSuperAdmin,
+            allMerchants
+
         };
         const _this = this;
         this.columns =[
@@ -48,7 +54,7 @@ class SettleMchList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({id : "page.search.list.repayement.platfrom"}),
+                title: props.intl.formatMessage({id : "page.search.list.collection.platId"}),
                 dataIndex: 'platId',
                 key: 'platId',
                 width:'23%',
@@ -65,13 +71,13 @@ class SettleMchList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({id : "page.search.list.business.no"}),
+                title: props.intl.formatMessage({id : "page.search.list.collection.mchNo"}),
                 dataIndex: 'mchNo',
                 key: 'mchNo',
                 render(text) { return <CopyText text={text} /> }
             },
             {
-                title: props.intl.formatMessage({id : "page.search.list.business.name"}),
+                title: props.intl.formatMessage({id : "page.search.list.collection.mchName"}),
                 dataIndex: 'mchName',
                 key: 'mchName',
                 width:'13%',
@@ -125,7 +131,16 @@ class SettleMchList extends Component {
                 }
             },
         ];
-        this.searchParams = {};
+        if (isSuperAdmin) {
+            this.columns.unshift({
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                width: 90
+            })
+        }
+
+        this.searchParams = { platId:'', mchNo:'', mchName:'', startDate:'', endDate:'', merchantId:'', pageSize: this.pageSize, pageNum: 1 };
     }
 
     //添加
@@ -175,20 +190,20 @@ class SettleMchList extends Component {
     }
 
     handleSearch = (obj) => {
-        let { time, platId, mchNo, mchName } = obj;
+        let { time, platId, mchNo, mchName, merchantId = '' } = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
-        if(Array.isArray(time)) {
+        if (Array.isArray(time)) {
             [startDate, endDate] = time.map(item => item.format('YYYY-MM-DD'));
-            if(!!startDate){
+            if (!!startDate) {
                 startDate += ' 00:00:00.0';
             }
-            if(!!endDate){
+            if (!!endDate) {
                 endDate += ' 23:59:59.999';
             }
         }
 
-        const params = { platId, mchNo, mchName, startDate, endDate, pageSize: this.pageSize, pageNum: 1 };
+        const params = { platId, mchNo, mchName, startDate, endDate, merchantId, pageSize: this.pageSize, pageNum: 1 };
         this.searchParams = params;
         getTableData(params);
     }
@@ -210,7 +225,7 @@ class SettleMchList extends Component {
 
     componentDidMount() {
         const { getTableData } = this.props;
-        getTableData({ pageSize: this.pageSize, pageNum: 1 });
+        getTableData({ ...this.searchParams, pageSize: this.pageSize, pageNum: 1 });
 
         try {
             const _this = this;
@@ -236,7 +251,7 @@ class SettleMchList extends Component {
         const { allSettlePlatList } = this.state;
         return (
             <div>
-                <SearchList allSettlePlatList={allSettlePlatList} handleSearch={this.handleSearch} />
+                <SearchList allSettlePlatList={allSettlePlatList} handleSearch={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <Button type={'primary'} onClick={this.handleAddModel}><FormattedMessage id="page.table.add" /></Button>
                 <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading}/>
                 <EditModel visible={visible} allSettlePlatList={allSettlePlatList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk}/>
