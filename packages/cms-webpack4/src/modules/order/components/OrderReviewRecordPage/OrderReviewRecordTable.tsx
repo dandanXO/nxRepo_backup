@@ -74,7 +74,7 @@ const OrderReviewRecordTable = () => {
         { title: '备注', dataIndex: 'remark', key: 'remark', hideInSearch: true, render: (text) => <CopyText text={text} /> },
     ]
 
-    if(!isSuperAdmin){
+    if(isSuperAdmin){
         columns.unshift({
             title: '商户名', dataIndex: 'merchantName', key: 'merchantName', valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
             width: ProColumnsOperationConstant.width["2"], render: (text) => <CopyText text={text} />, hideInSearch: true
