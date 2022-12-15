@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Button, Popconfirm, Icon, Tooltip, Modal, message} from 'antd';
+import { Button, Icon, message, Modal, Popconfirm, Tooltip } from 'antd';
 import moment from 'moment';
 import SearchList from './SearchList/SearchList';
 import EditModel from './EditModel/EditModel';
-import { CommonTable,CopyText } from 'components';
+import { CommonTable, CopyText } from 'components';
 import { bindActionCreators } from 'redux';
 import { payOrderListAction } from './index';
 import styles from './payOrderList.less';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { axios,convertMoneyFormat } from 'utils';
+import { axios, convertMoneyFormat, getAllMerchants, getIsSuperAdmin } from 'utils';
 import download from "downloadjs";
 import PropTypes from 'prop-types';
-import {injectIntl, FormattedMessage} from "react-intl";
-import {getIsSuperAdmin, getAllMerchants} from "utils";
+import { FormattedMessage, injectIntl } from "react-intl";
 
 const OrderStatus = {
     pending:<FormattedMessage id="page.table.unpaid" />,
@@ -394,7 +393,7 @@ class PayOrderList extends Component {
         getTableData({ ...this.searchParams, pageSize:this.pageSize, pageNum: this.pageNum});
     }
     handleSearch = (obj) => {
-        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime, merchantId='' } = obj;
+        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime, dlhMerchantId='' } = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
         if(Array.isArray(time)) {
@@ -418,7 +417,7 @@ class PayOrderList extends Component {
             }
         }
 
-        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, merchantId, pageSize: 10, pageNum: 1 };
+        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, dlhMerchantId, pageSize: 10, pageNum: 1 };
         this.searchParams = params;
         getTableData(params);
     }

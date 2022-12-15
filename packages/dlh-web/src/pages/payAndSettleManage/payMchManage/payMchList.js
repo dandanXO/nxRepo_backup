@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Icon, Tooltip, Modal, Switch } from 'antd';
+import { Button, Icon, Modal, Switch, Tooltip } from 'antd';
 import moment from 'moment';
 import SearchList from './SearchList/SearchList';
 import EditModel from './EditModel/EditModel';
@@ -8,11 +8,10 @@ import { CommonTable, CopyText } from 'components';
 import { bindActionCreators } from 'redux';
 import { payMchListAction } from './index';
 import styles from './payMchList.less';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { axios } from 'utils';
+import { axios, getAllMerchants, getIsSuperAdmin } from 'utils';
 import PropTypes from 'prop-types';
-import {injectIntl, FormattedMessage} from "react-intl";
-import {getIsSuperAdmin, getAllMerchants} from "utils";
+import { FormattedMessage, injectIntl } from "react-intl";
+
 class PayMchList extends Component {
 
     constructor(props) {
@@ -260,7 +259,7 @@ class PayMchList extends Component {
             }
         }
 
-        const params = { platId, mchNo, mchName, startDate, endDate, dlhMerchantId: obj['dlhMerchantId'], pageSize: this.pageSize, pageNum: 1 };
+        const params = { platId, mchNo, mchName, startDate, endDate, dlhMerchantId, pageSize: this.pageSize, pageNum: 1 };
         this.searchParams = params;
         console.log("params", params);
         getTableData(params);
