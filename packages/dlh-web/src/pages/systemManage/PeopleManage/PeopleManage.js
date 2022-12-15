@@ -43,6 +43,7 @@ class PeopleManage extends Component {
           { title: props.intl.formatMessage({ id: "page.search.list.account" }), dataIndex: 'userName', key: 'userName' },
           { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phoneNo', key: 'phoneNo' },
           { title: props.intl.formatMessage({ id: "page.table.department" }), dataIndex: 'departmentStr', key: 'departmentStr', width: '23%' },
+          { title: props.intl.formatMessage({ id: "page.table.department.leader" }), dataIndex: 'deptManager', key: 'deptManager' },
           { title: props.intl.formatMessage({ id: "page.search.list.roles" }), dataIndex: 'roleStr', key: 'roleStr', width: '23%' },
           {
             title: props.intl.formatMessage({ id: "page.search.list.status" }),
