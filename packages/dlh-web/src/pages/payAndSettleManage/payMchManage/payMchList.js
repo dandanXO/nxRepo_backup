@@ -242,8 +242,6 @@ class PayMchList extends Component {
         } else {
           addModel(obj);
         }
-        changeModalVisible(false);
-        getTableData({ ...this.searchParams, pageSize: this.pageSize, pageNum: 1 });
 
     }
 
