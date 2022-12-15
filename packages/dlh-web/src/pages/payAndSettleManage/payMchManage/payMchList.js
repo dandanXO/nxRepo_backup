@@ -147,7 +147,7 @@ class PayMchList extends Component {
                 key: 'createDate',
                 width: 160,
                 render(text) {
-                    return moment(Number(text)).format('YYYY-MM-DD HH:mm:ss');
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
                 }
             },
             {
@@ -156,7 +156,7 @@ class PayMchList extends Component {
                 key: 'modifyDate',
                 width: 160,
                 render(text) {
-                    return moment(Number(text)).format('YYYY-MM-DD HH:mm:ss');
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
                 }
             },
             {
@@ -182,13 +182,13 @@ class PayMchList extends Component {
         if (isSuperAdmin) {
             this.columns.splice(1,0,{
                 title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
-                dataIndex: 'merchantName',
-                key: 'merchantName',
+                dataIndex: 'dlhMerchantName',
+                key: 'dlhMerchantName',
                 width: 90
             })
         }
 
-        this.searchParams = {  platId:'', mchNo:'', mchName:'', startDate:'', endDate:'', merchantId:'' };
+        this.searchParams = {  platId:'', mchNo:'', mchName:'', startDate:'', endDate:'', dlhMerchantId:'' };
     }
 
     //添加
@@ -196,14 +196,14 @@ class PayMchList extends Component {
         const { changeModalVisible, changeModalInfo, info } = this.props;
         this.setState({ modelId: null });
         changeModalVisible(true);
-        changeModalInfo({ merchantId: '', mchNo: '', mchName: '', mchKey: '', mchKey2: '', platId: '', rate: '', openTime: '', payMoneyList: '', callbackHost: '', openPayTypeList: '', enabledRepaied: true, enabledAuthBank: false, isEnabled: true, sortNum: 99, business1Field: '', business2Field: '', business3Field: '', openDays: '', startTime: '', endTime: '' });
+        changeModalInfo({ dlhMerchantId: '', mchNo: '', mchName: '', mchKey: '', mchKey2: '', platId: '', rate: '', openTime: '', payMoneyList: '', callbackHost: '', openPayTypeList: '', enabledRepaied: true, enabledAuthBank: false, isEnabled: true, sortNum: 99, business1Field: '', business2Field: '', business3Field: '', openDays: '', startTime: '', endTime: ''});
     }
     //修改
     modifyModel = (record) => {
-        const { merchantId = '', id, mchNo, mchName, mchKey, mchKey2, platId, rate, openTime, payMoneyList, callbackHost, openPayTypeList, forFirst, isEnabled, sortNum, file1Id, file2Id, enabledRepaied, enabledAuthBank, business1Field, business2Field, business3Field, openDays, startTime, endTime } = record;
+        const {dlhMerchantId, id, mchNo, mchName, mchKey, mchKey2, platId, rate, openTime, payMoneyList, callbackHost, openPayTypeList, forFirst, isEnabled, sortNum, file1Id, file2Id, enabledRepaied, enabledAuthBank, business1Field, business2Field, business3Field, openDays, startTime, endTime } = record;
         const { changeModalVisible, changeModalInfo, info } = this.props;
         this.setState({ modelId: id });
-        changeModalInfo({ merchantId, mchNo, mchName, mchKey, mchKey2, platId, rate, openTime, payMoneyList, callbackHost, openPayTypeList, payTypeIds: openPayTypeList.split(','), forFirst, isEnabled, sortNum, file1Id, file2Id, enabledRepaied, enabledAuthBank, business1Field, business2Field, business3Field, openDays, startTime, endTime });
+        changeModalInfo({ ...record, dlhMerchantId, mchNo, mchName, mchKey, mchKey2, platId, rate, openTime, payMoneyList, callbackHost, openPayTypeList, payTypeIds: openPayTypeList.split(','), forFirst, isEnabled, sortNum, file1Id, file2Id, enabledRepaied, enabledAuthBank, business1Field, business2Field, business3Field, openDays, startTime, endTime });
         changeModalVisible(true);
     }
     //删除
@@ -228,7 +228,7 @@ class PayMchList extends Component {
 
     handleModalOk = (obj) => {
         const { modelId } = this.state;
-        const { addModel, updateModel } = this.props;
+        const { addModel, updateModel, changeModalVisible, getTableData } = this.props;
 
         const { payTypeIds } = obj;
         let ids = [''];
@@ -239,13 +239,17 @@ class PayMchList extends Component {
 
         if(modelId) {
             updateModel({ ...obj, id: modelId });
-            return;
+        } else {
+          addModel(obj);
         }
-        addModel(obj);
+        changeModalVisible(false);
+        getTableData({ ...this.searchParams, pageSize: this.pageSize, pageNum: 1 });
+
     }
 
     handleSearch = (obj) => {
-        let { time, platId, mchNo, mchName, merchantId = '' } = obj;
+      console.log("obj", obj)
+        let { time, platId, mchNo, mchName, dlhMerchantId = '' } = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
         if (Array.isArray(time)) {
@@ -258,11 +262,12 @@ class PayMchList extends Component {
             }
         }
 
-        const params = { platId, mchNo, mchName, startDate, endDate, merchantId, pageSize: this.pageSize, pageNum: 1 };
+        const params = { platId, mchNo, mchName, startDate, endDate, dlhMerchantId: obj['dlhMerchantId'], pageSize: this.pageSize, pageNum: 1 };
         this.searchParams = params;
+        console.log("params", params);
         getTableData(params);
     }
-    
+
     handlePageChange = (pagination) => {
         const { current, pageSize } = pagination;
         const { getTableData } = this.props;
@@ -296,7 +301,7 @@ class PayMchList extends Component {
                     });
                     // console.dir(content);
                 }
-            });        
+            });
         } catch (e) {
         }
         try {
@@ -314,7 +319,7 @@ class PayMchList extends Component {
                     });
                     // console.dir(content);
                 }
-            });        
+            });
         } catch (e) {
         }
     }
@@ -350,7 +355,7 @@ class PayMchList extends Component {
 
 const mapStateToProps = (state) => {
     const { payAndSettleManageState: { payMchListState } } = state;
-    
+
     return {
         tableData: payMchListState['data'],
         loading: payMchListState['loading'],

@@ -10,7 +10,7 @@ const CheckboxGroup = Checkbox.Group;
 
 const weekday = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 let plainOptions = [];
-let defaultCheckedList = [];   
+let defaultCheckedList = [];
 
 class EditModel extends Component{
     layout = {
@@ -50,7 +50,7 @@ class EditModel extends Component{
                 this.props.info.file1Id = res.data.id;
                 alert(this.props.intl.formatMessage({id : "windowPage.attach1.upload.success"}));
             }
-            
+
         }
     }
     handleFile2Change = (info) => {
@@ -68,7 +68,7 @@ class EditModel extends Component{
         }
     }
     handleOk = () => {
-        const { form: { getFieldsValue, validateFields }, handleOk } =  this.props;
+        const { form: { getFieldsValue, validateFields }, handleOk, info } =  this.props;
         validateFields((err) => {
             if(err) {
                 return;
@@ -76,6 +76,11 @@ class EditModel extends Component{
             let editInfo = getFieldsValue();
             editInfo.file1Id = this.props.info.file1Id;
             editInfo.file2Id = this.props.info.file2Id;
+            console.log("info", info);
+            editInfo = {
+              ...info,
+              ...editInfo,
+            }
             handleOk(editInfo);
         })
     }
@@ -87,18 +92,18 @@ class EditModel extends Component{
         const { allMerchants } = this.props;
         if (!allMerchants) return;
         const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
-        return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+        return ele;
     }
 
     render() {
         const { visible,allPayPlatList,allPayTypeList, form: { getFieldDecorator,getFieldsValue },intl ,isSuperAdmin} = this.props;
         plainOptions = [];
         defaultCheckedList = [];
-        weekday.forEach(day =>{ 
+        weekday.forEach(day =>{
             plainOptions.push(intl.formatMessage({id : day}));
-            defaultCheckedList.push(intl.formatMessage({id : day})); 
+            defaultCheckedList.push(intl.formatMessage({id : day}));
         });
- 
+
         let platPayTypeList = [];
         if(Array.isArray(allPayPlatList) && Array.isArray(allPayTypeList)) {
             let currentPlat = allPayPlatList.find(item=> item.id === getFieldsValue().platId);
@@ -115,7 +120,7 @@ class EditModel extends Component{
                 // console.dir(getFieldsValue());
             }
         }
-        
+
         return (
             <Modal
                 onOk={this.handleOk}
@@ -128,7 +133,7 @@ class EditModel extends Component{
                         {isSuperAdmin && (
                             <Form.Item {...this.layout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
                                 {
-                                    getFieldDecorator('merchantId', { initialValue: ''})(
+                                    getFieldDecorator('dlhMerchantId', { initialValue: ''})(
                                         <Select>{this.renderMerchants()}</Select>
                                     )
                                 }
@@ -296,7 +301,7 @@ class EditModel extends Component{
                         <Form.Item label={intl.formatMessage({id : "windowPage.business open.day"})} {...this.layout}>
                             {
                                 getFieldDecorator('openDays', {
-                                    
+
                                     rules: [{ required: false, message: intl.formatMessage({id : "windowPage.remarks.empty"}) }]
                                 })(
                                     <CheckboxGroup
@@ -351,7 +356,7 @@ class EditModel extends Component{
                                 )
                             }
                         </Form.Item>
-                        
+
                         <Form.Item label={intl.formatMessage({id : "page.table.is.enabled"})} {...this.layout}>
                             {
                                 getFieldDecorator('isEnabled', {
@@ -415,8 +420,8 @@ export default Form.create({
     mapPropsToFields(props){
         const { info = {} } = props;
         return {
-            merchantId:Form.createFormField({
-                value: info['merchantId']
+            dlhMerchantId:Form.createFormField({
+              value: info['dlhMerchantId']
             }),
             mchNo:Form.createFormField({
                 value: info['mchNo']
@@ -484,7 +489,7 @@ export default Form.create({
             openDays:Form.createFormField({
                 value: info['openDays']
             }),
-            startTime:Form.createFormField({        
+            startTime:Form.createFormField({
                 //value: moment(info['startTime'],'HH:mm:ss')
                 //value: moment(startTime).format('YYYY-MM-DD HH:mm:ss')
                 value: typeof(info['startTime']) == 'string' && info['startTime'].length>13 ? moment(info['startTime'].substring(info['startTime'].length -13,info['startTime'].length - 5), 'HH:mm:ss') : ""
