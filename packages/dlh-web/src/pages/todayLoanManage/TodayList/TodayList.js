@@ -12,6 +12,7 @@ import { axios, convertMoneyFormat } from "utils";
 import download from "downloadjs";
 import { FormattedMessage, injectIntl } from "react-intl";
 import PropTypes from 'prop-types';
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 const statusObj = {
     "0": <FormattedMessage id="page.search.list.outstanding"/>,
@@ -22,22 +23,28 @@ const statusObj = {
 class TodayList extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+
         this.state = {
-            btnDisabled: false
+            btnDisabled: false,
+            isSuperAdmin,
+            allMerchants
+
         };
         const _this = this;
         this.initSearchParams = {
-            time: [ moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 }).add(1, 'd') ],
+            time: [moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 }).add(1, 'd')],
             phoneNo: '',
             name: '',
             orderNo: '',
             orderStatus: '0',
-            person: ''
+            person: '',
         };
         this.convertParams = (obj) => {
             const {personType} = this.props;
             let key = personType === 'group' ? 'departmentId' : 'collectorId';
-            const {time, phoneNo, name, orderNo, orderStatus, person} = obj;
+            const { time, phoneNo, name, orderNo, orderStatus, person } = obj;
             const isArr = Array.isArray(time) && time.length > 0;
             return {
                 startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -46,7 +53,7 @@ class TodayList extends Component {
                 userPhone: phoneNo,
                 userTrueName: name,
                 orderNo,
-                [key]: person
+                [key]: person,
             };
         }
         this.columns = [
@@ -172,6 +179,15 @@ class TodayList extends Component {
             }
 
         ];
+        if (isSuperAdmin) {
+            this.columns.splice(1,0,{
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                width: 90
+            })
+        }
+
     }
 
 

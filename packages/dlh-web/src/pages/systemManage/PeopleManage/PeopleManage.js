@@ -101,7 +101,8 @@ class PeopleManage extends Component {
             departmentId: departmentData.length > 0 ? departmentData[0].id : '',
             roleId: roleData.length > 0 ? roleData[0].id : '',
             enabled: 1,
-            googleAuthFlag: 0
+            googleAuthFlag: 0,
+            passwordLogin: 0,
         }
         this.setState({ info }, () => {
             getGroupsData('', '');

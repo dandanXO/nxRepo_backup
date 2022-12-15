@@ -27,13 +27,37 @@ class SearchList extends Component{
         exportRecord(getFieldsValue());
     }
 
+    renderMerchants = () => {
+        const { allMerchants } = this.props;
+        if (!allMerchants) return;
+        const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+        return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+
+
     render() {
-        const { form: { getFieldDecorator  }, initTime, channelList,isStatistLeng, intl  } = this.props;
+        const { form: { getFieldDecorator }, initTime, channelList, isStatistLeng, intl, isSuperAdmin } = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
                     <Row gutter={60}>
-                        <Col span={7}>
+                        {isSuperAdmin && (
+                            <Col lg={12} xl={8}>
+                                <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
+                                    {
+                                        getFieldDecorator('merchantId', {
+                                            initialValue: ''
+                                        })(
+                                            <Select>
+                                                {this.renderMerchants()}
+                                            </Select>
+                                        )
+                                    }
+                                </Form.Item>
+                            </Col>
+                        )}
+
+                        <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.expiration.time"})}>
                                 {
                                     getFieldDecorator('time', {
@@ -44,7 +68,7 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col span={7}>
+                        <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "windowPage.channel"})}>
                                 {
                                     getFieldDecorator('channelId', {
@@ -60,7 +84,7 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col span={8}>
+                        <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.new.old.user"})}>
                                 {
                                     getFieldDecorator('isOldUser', {
@@ -75,18 +99,18 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col span={6}>
-                            <Form.Item {...formItemLayout} label={""}>
+                        <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id:"page.search.list.extend.statis" })}>
                                 {
                                     getFieldDecorator('isStatistLeng', {
                                         initialValue: isStatistLeng
                                     })(
-                                        <Checkbox><FormattedMessage id="page.search.list.extend.statis" /></Checkbox>
+                                        <Checkbox></Checkbox>
                                     )
                                 }
                             </Form.Item>
                         </Col>
-                        <Col span={18}>
+                        <Col lg={12} xl={8}>
                             <Form.Item style={{textAlign:'right'}}>
                                 <Button type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /></Button>
                                 <Button type={'primary'} style={{marginLeft:'10px'}} disabled={this.props.btnDisable} onClick={this.retu}><FormattedMessage id="page.table.export" /></Button>
