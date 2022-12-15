@@ -23,12 +23,6 @@ class SearchList extends Component {
         const params = getFieldsValue();
         submit(params);
     }
-    renderMerchants = () => {
-      const { allMerchants } = this.props;
-      if(!allMerchants) return;
-      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
-      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
-    }
     render() {
         const {form: {getFieldDecorator}, intl, isSuperAdmin} = this.props;
         return (

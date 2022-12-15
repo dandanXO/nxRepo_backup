@@ -36,8 +36,8 @@ class OverdueReduction extends Component {
         const isSuperAdmin = getIsSuperAdmin();
         const allMerchants = getAllMerchants();
         this.state = {
-            isSuperAdmin,
-            allMerchants,
+          isSuperAdmin,
+          allMerchants,
             info: getParams()
         };
         const _this = this;
@@ -194,7 +194,7 @@ class OverdueReduction extends Component {
         const { tableData: { data, pagination }, loading, btnLoading, visible } = this.props;
         return (
             <div>
-                <SearchList submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList submit={this.submit}/>
                 <CommonTable
                     columns={this.columns}
                     handlePageChange={this.handlePageChange}

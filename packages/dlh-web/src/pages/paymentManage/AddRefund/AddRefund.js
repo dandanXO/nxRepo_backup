@@ -129,7 +129,6 @@ class AddRefund extends Component {
                 }
             }
         ];
-
         if(isSuperAdmin) {
           this.columns.unshift({
             title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
@@ -137,6 +136,7 @@ class AddRefund extends Component {
             key: 'merchantName'
           })
         }
+
     }
 
     onChange= (changedFields) => {
@@ -190,7 +190,7 @@ class AddRefund extends Component {
         const { tableData: { data, pagination }, loading, btnLoading, visible } = this.props;
         return (
             <div>
-                <SearchList submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList submit={this.submit}/>
                 <CommonTable
                     columns={this.columns}
                     handlePageChange={this.handlePageChange}

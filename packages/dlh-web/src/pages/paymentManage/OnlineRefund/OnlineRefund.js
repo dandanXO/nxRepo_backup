@@ -35,6 +35,7 @@ class AddOLRefund extends Component {
         super(props);
         const isSuperAdmin = getIsSuperAdmin();
         const allMerchants = getAllMerchants();
+
         this.state = {
             isSuperAdmin,
             allMerchants,
@@ -186,7 +187,7 @@ class AddOLRefund extends Component {
         const { tableData: { data, pagination }, loading, btnLoading, visible } = this.props;
         return (
             <div>
-                <SearchList submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList submit={this.submit}/>
                 <CommonTable
                     columns={this.columns}
                     handlePageChange={this.handlePageChange}
