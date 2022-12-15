@@ -58,7 +58,7 @@ class SearchList extends Component{
                         {/*        }*/}
                         {/*    </Form.Item>*/}
                         {/*</Col>*/}
-                         {isSuperAdmin && (
+                         {/* {isSuperAdmin && (
                            <Col lg={12} xl={8}>
                              <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
                                {
@@ -77,7 +77,7 @@ class SearchList extends Component{
                             <Form.Item style={{textAlign:'right'}}>
                                 <Button type={'primary'} htmlType={'submit'}>查询</Button>
                             </Form.Item>
-                        </Col>
+                        </Col> */}
                     </Row>
 
                 </Form>
