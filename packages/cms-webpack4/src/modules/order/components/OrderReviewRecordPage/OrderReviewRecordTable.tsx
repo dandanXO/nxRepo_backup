@@ -55,7 +55,7 @@ const OrderReviewRecordTable = () => {
       const statusEnum =  {
         '': { text: '不限' },
         '1': { text: '机审通过', color: 'blue' },
-        '2': { text: '机审拒绝', color: 'blue' },
+        '2': { text: '机审拒绝', color: 'orange' },
         '6': { text: '审核通过', color: 'green' },
         '7': { text: '审核拒绝', color: 'red' },
     };
