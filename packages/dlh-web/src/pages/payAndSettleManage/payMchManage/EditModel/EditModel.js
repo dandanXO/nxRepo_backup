@@ -83,8 +83,15 @@ class EditModel extends Component{
         this.props.handleCancel();
     }
 
+    renderMerchants = () => {
+        const { allMerchants } = this.props;
+        if (!allMerchants) return;
+        const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+        return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+
     render() {
-        const { visible,allPayPlatList,allPayTypeList, form: { getFieldDecorator,getFieldsValue },intl } = this.props;
+        const { visible,allPayPlatList,allPayTypeList, form: { getFieldDecorator,getFieldsValue },intl ,isSuperAdmin} = this.props;
         plainOptions = [];
         defaultCheckedList = [];
         weekday.forEach(day =>{ 
@@ -118,6 +125,15 @@ class EditModel extends Component{
                 title={intl.formatMessage({id :"windowPage.add.modify.repayment.business"})}>
                 <div>
                     <Form>
+                        {isSuperAdmin && (
+                            <Form.Item {...this.layout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
+                                {
+                                    getFieldDecorator('merchantId', { initialValue: ''})(
+                                        <Select>{this.renderMerchants()}</Select>
+                                    )
+                                }
+                            </Form.Item>
+                        )}
                         <Form.Item label={intl.formatMessage({id : "page.search.list.repayement.platfrom"})} {...this.layout}>
                             {
                                 getFieldDecorator('platId', {
@@ -132,22 +148,22 @@ class EditModel extends Component{
                                 )
                             }
                         </Form.Item>
-                        <Form.Item label={intl.formatMessage({id : "page.search.list.business.no"})} {...this.layout}>
+                        <Form.Item label={intl.formatMessage({id : "page.search.list.collection.mchNo"})} {...this.layout}>
                             {
                                 getFieldDecorator('mchNo', {
                                     initialValue: '',
                                     rules: [{ required: true, message: intl.formatMessage({id : "windowPage.remarks.empty"}) }]
                                 })(
-                                    <Input placeholder={intl.formatMessage({id : "page.search.list.business.no.enter"})}/>
+                                    <Input placeholder={intl.formatMessage({ id: "page.table.enter" }, { text: intl.formatMessage({id : "page.search.list.collection.mchNo"}) })}/>
                                 )
                             }
                         </Form.Item>
-                        <Form.Item label={intl.formatMessage({id : "page.search.list.business.name"})} {...this.layout}>
+                        <Form.Item label={intl.formatMessage({id : "page.search.list.collection.mchName"})} {...this.layout}>
                             {
                                 getFieldDecorator('mchName', {
                                     rules: [{ required: true, message: intl.formatMessage({id : "windowPage.remarks.empty"}) }]
                                 })(
-                                    <Input disabled={false} placeholder={intl.formatMessage({id : "page.search.list.business.name.enter"})}/>
+                                    <Input disabled={false} placeholder={intl.formatMessage({ id: "page.table.enter" }, { text: intl.formatMessage({id : "page.search.list.collection.mchName"}) })}/>
                                 )
                             }
                         </Form.Item>
@@ -399,6 +415,9 @@ export default Form.create({
     mapPropsToFields(props){
         const { info = {} } = props;
         return {
+            merchantId:Form.createFormField({
+                value: info['merchantId']
+            }),
             mchNo:Form.createFormField({
                 value: info['mchNo']
             }),
