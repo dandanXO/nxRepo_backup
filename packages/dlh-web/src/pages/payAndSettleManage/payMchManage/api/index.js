@@ -16,7 +16,7 @@ const updateModel = (params) => {
     return axios.put(api.updateUrl, params);
 }
 const deleteModelByIds = (params) => {
-    return axios.delete(api.deleteUrl, {params: params});
+    return axios.delete(api.deleteUrl + `/${params.id}`);
 }
 const toggleEnabled = (params) => {
     return axios.post(api.enabledUrl, params);

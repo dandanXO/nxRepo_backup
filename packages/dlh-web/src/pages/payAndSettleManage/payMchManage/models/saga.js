@@ -17,17 +17,15 @@ function* getTableData(action) {
     yield put(payMchChangeTableLoading(true));
     try {
         const res = yield call(getModelList, action.params);
-        if (res.code === '200') {
-            const {data} = res;
-            const obj = {
-                data: data.content || [],
-                pagination: {
-                    total: data.total,
-                    current: data.pageNumber
-                }
-            }
-            yield put(payMchSetTableData(obj));
+        const {records} = res;
+        const obj = {
+          data: records || [],
+          pagination: {
+            total: res.totalPage,
+            current: res.currentPage
+          }
         }
+        yield put(payMchSetTableData(obj));
     } catch (e) {
 
     }

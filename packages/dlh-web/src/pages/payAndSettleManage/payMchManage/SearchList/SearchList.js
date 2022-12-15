@@ -43,7 +43,7 @@ class SearchList extends Component{
                             <Col lg={12} xl={8}>
                                 <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
                                     {
-                                        getFieldDecorator('merchantId', {
+                                        getFieldDecorator('dlhMerchantId', {
                                             initialValue: ''
                                         })(
                                             <Select>
