@@ -11,6 +11,7 @@ import ManualExtendModalModal from './ManualExtendModal/ManualExtendModalModal';
 import { orderStatus, convertMoneyFormat} from 'utils';
 import {injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 const getParams = () => {
     return {
@@ -32,8 +33,12 @@ const getParams = () => {
 class AddMLoanExtend extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
-            info: getParams()
+            info: getParams(),
+            isSuperAdmin,
+            allMerchants
         };
         const _this = this;
         //当前选中的订单号
@@ -121,9 +126,17 @@ class AddMLoanExtend extends Component {
                 }
             }
         ];
+        if (isSuperAdmin) {
+            this.columns.unshift({
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                width: 90
+            })
+        }
     }
 
-    onChange= (changedFields) => {
+    onChange = (changedFields) => {
         this.setState(({ info }) => ({
             info: { ...info, ...changedFields },
         }));
@@ -148,7 +161,7 @@ class AddMLoanExtend extends Component {
     submit = (obj) => {
         const { getTableData } = this.props;
         this.searchParams = obj;
-        getTableData({ pageNum:1, pageSize: this.pageSize, ...this.searchParams });
+        getTableData({ ...this.searchParams, pageNum: 1, pageSize: this.pageSize, });
     }
 
     handleOk = (obj) => {
@@ -172,7 +185,7 @@ class AddMLoanExtend extends Component {
         const { tableData: { data, pagination }, loading, btnLoading, visible } = this.props;
         return (
             <div>
-                <SearchList submit={this.submit}/>
+                <SearchList submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <CommonTable
                     columns={this.columns}
                     handlePageChange={this.handlePageChange}

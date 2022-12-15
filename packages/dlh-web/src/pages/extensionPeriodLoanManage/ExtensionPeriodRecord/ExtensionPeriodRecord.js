@@ -13,10 +13,10 @@ import styles from "./ExtensionPeriodRecord.less";
 import DeleteLengOrderModal from './DeleteLengOrderModal/DeleteLengOrderModal';
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
-
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 const convertParams = (obj = {}) => {
-    const {time = [], lengTime = [], orderNo = '', userName = '', phoneNo = '', status = ''} = obj;
+    const { time = [], lengTime = [], orderNo = '', userName = '', phoneNo = '', status = '', merchantId = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     const isArr2 = Array.isArray(lengTime) && lengTime.length > 0;
     return {
@@ -27,7 +27,8 @@ const convertParams = (obj = {}) => {
         orderNo,
         phoneNo,
         userName,
-        status
+        status,
+        merchantId
     };
 }
 
@@ -36,6 +37,8 @@ class ExtensionPeriodRecord extends Component {
 
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
             btnDisabled: false,
             info: {},
@@ -43,6 +46,8 @@ class ExtensionPeriodRecord extends Component {
             currentDetailId: "",
             currentDetailPage: "",
             delelteModalVisible: false,
+            isSuperAdmin,
+            allMerchants
         };
         this.init = {
             time: [moment(0, 'HH'), moment({hour: 23, minute: 59, seconds: 59})]
@@ -135,6 +140,14 @@ class ExtensionPeriodRecord extends Component {
                 }
             }
         ];
+        if (isSuperAdmin) {
+            this.columns.unshift({
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                width: 90
+            })
+        }
 
     }
 
@@ -266,7 +279,7 @@ class ExtensionPeriodRecord extends Component {
         const {btnDisabled, currentDetailPage} = this.state;
         return (
             <div>
-                <SearchList submit={this.handleSearch} init={this.init}/>
+                <SearchList submit={this.handleSearch} init={this.init} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record"/></Button></div>
                 <CommonTable
                     columns={this.columns}
