@@ -139,7 +139,8 @@ class EditModel extends Component{
                                     initialValue: '',
                                     rules: [{ required: true, message: intl.formatMessage({id : "windowPage.remarks.empty"}) }]
                                 })(
-                                    <Input placeholder={intl.formatMessage({id : "page.search.list.business.no.enter"})}/>
+                                    <Input placeholder={intl.formatMessage({ id: "page.table.enter" }, { text: intl.formatMessage({id : "page.search.list.payment.mchNo"}) })}/>
+
                                 )
                             }
                         </Form.Item>
@@ -148,7 +149,7 @@ class EditModel extends Component{
                                 getFieldDecorator('mchName', {
                                     rules: [{ required: true, message: intl.formatMessage({id : "windowPage.remarks.empty"}) }]
                                 })(
-                                    <Input disabled={false} placeholder={intl.formatMessage({id : "page.search.list.business.name.enter"})}/>
+                                    <Input disabled={false} placeholder={intl.formatMessage({ id: "page.table.enter" }, { text: intl.formatMessage({id : "page.search.list.payment.mchName"}) })}/>
                                 )
                             }
                         </Form.Item>
