@@ -117,7 +117,7 @@ class EditModel extends Component{
                             {
                               getFieldDecorator('dlhMerchantId', {
                                 initialValue: '',
-                                  rules: [{ required: true, message: intl.formatMessage({ id: "page.search.list.select" }) + intl.formatMessage({ id: "page.search.list.merchantName" }) }]
+                                rules: [{ required: true, message: intl.formatMessage({ id: "page.search.list.select" }) + intl.formatMessage({ id: "page.search.list.merchantName" }) }]
                               })(
                                 <Select>
                                   {this.renderMerchants()}
