@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Form, Select, Input, Radio, message } from 'antd';
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
+import {getIsSuperAdmin} from "../../../../utils";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -18,7 +19,6 @@ class AddModal extends Component{
     }
     constructor(props) {
         super(props);
-        
         this.state = {
             groupsData: this.props.groupsData,
             info:this.props.info
@@ -59,7 +59,7 @@ class AddModal extends Component{
         return teamsData.map(item => <Option key={item.id} value={item.id} >{item.name}</Option>)
     }
 
-   
+
     renderGroup = () => {
         const { groupsData } = this.props;
         return groupsData.map(item => <Option key={item.id} value={item.id} >{item.name}</Option>)
@@ -73,10 +73,10 @@ class AddModal extends Component{
     static getDerivedStateFromProps(props, state) {
         const { form: { setFieldsValue }, groupsData, collectTeamId, collectGroupId } = props;
         if (groupsData !== state.groupsData) {
-            setFieldsValue({ 
+            setFieldsValue({
                 ...state.info,
-                collectTeamId: collectTeamId, 
-                collectGroupId: collectGroupId, 
+                collectTeamId: collectTeamId,
+                collectGroupId: collectGroupId,
             });
             return {
                 groupsData: groupsData
@@ -86,8 +86,15 @@ class AddModal extends Component{
     }
 
 
+    renderMerchants = () => {
+      const { allMerchants } = this.props
+      if(!allMerchants) return;
+      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+
     render() {
-        const { visible, form: { getFieldDecorator }, intl ,groupsData } = this.props;
+        const { visible, form: { getFieldDecorator }, intl ,groupsData, isSuperAdmin } = this.props;
         return (
             <Modal
                 onOk={this.onOk}
@@ -95,31 +102,58 @@ class AddModal extends Component{
                 width={500}
                 visible={visible}
                 title={intl.formatMessage({id : "windowPage.add.modify.staff"})}
-  
+
             >
                 <Form>
-                    <FormItem label={intl.formatMessage({id : "page.search.list.account"})} {...this.layout}>
+                    {isSuperAdmin && (
+                      <FormItem
+                        required={true}
+                        label={intl.formatMessage({id : "page.search.list.merchantName"})}
+                        {...this.layout}
+                      >
                         {
-                            getFieldDecorator('userName', {})(
-                                <Input placeholder={intl.formatMessage({id : "page.search.list.account.enter"})} />
-                            )
+                          getFieldDecorator('merchantId', {
+                            initialValue: ''
+                          })(
+                            <Select>
+                              {this.renderMerchants()}
+                            </Select>
+                          )
                         }
-                    </FormItem>
-                    <FormItem label={intl.formatMessage({id : "page.search.list.name"})} {...this.layout}>
+                      </FormItem>
+                    )}
+                    <FormItem required={true} label={intl.formatMessage({id : "page.search.list.name"})} {...this.layout}>
                         {
                             getFieldDecorator('trueName', {})(
                                 <Input placeholder={intl.formatMessage({id : "page.search.list.name.enter"})} />
                             )
                         }
                     </FormItem>
-                    <FormItem label={intl.formatMessage({id : "page.search.list.mobile"})} {...this.layout}>
+
+                    <FormItem required={true} label={intl.formatMessage({id : "page.search.list.mobile"})} {...this.layout}>
                         {
                             getFieldDecorator('phoneNo', {})(
                                 <Input placeholder={intl.formatMessage({id : "page.search.list.mobile.enter"})} />
                             )
                         }
                     </FormItem>
-                    <FormItem label={intl.formatMessage({id : "page.table.department"})} {...this.layout}>
+
+                    <FormItem required={true} label={intl.formatMessage({id : "page.search.list.account"})} {...this.layout}>
+                      {
+                        getFieldDecorator('userName', {})(
+                          <Input placeholder={intl.formatMessage({id : "page.search.list.account.enter"})} />
+                        )
+                      }
+                    </FormItem>
+
+                    <FormItem required={true}  label={intl.formatMessage({id : "windowPage.password"})} {...this.layout}>
+                      {
+                        getFieldDecorator('password', {})(
+                          <Input placeholder={intl.formatMessage({id : "windowPage.password"})} />
+                        )
+                      }
+                    </FormItem>
+                    <FormItem required={true} label={intl.formatMessage({id : "page.table.department"})} {...this.layout}>
                         {
                             getFieldDecorator('departmentId', {})(
                                 <Select>
@@ -128,7 +162,7 @@ class AddModal extends Component{
                             )
                         }
                     </FormItem>
-                    <FormItem label={intl.formatMessage({id : "page.search.list.roles"})} {...this.layout}>
+                    <FormItem required={true} label={intl.formatMessage({id : "page.search.list.roles"})} {...this.layout}>
                         {
                             getFieldDecorator('roleId', {})(
                                 <Select>
@@ -137,7 +171,7 @@ class AddModal extends Component{
                             )
                         }
                     </FormItem>
-                    <FormItem label={intl.formatMessage({ id: "page.table.collect-team" })} {...this.layout}>
+                    <FormItem required={true} label={intl.formatMessage({ id: "page.table.collect-team" })} {...this.layout}>
                         {
                             getFieldDecorator('collectTeamId', { initialValue: "" })(
                                 <Select onChange={this.handleTeamOnChange}>
@@ -147,7 +181,7 @@ class AddModal extends Component{
                             )
                         }
                     </FormItem>
-                    <FormItem label={intl.formatMessage({ id: "page.table.collect-group" })} {...this.layout}>
+                    <FormItem required={true} label={intl.formatMessage({ id: "page.table.collect-group" })} {...this.layout}>
                         {
                             getFieldDecorator('collectGroupId', { initialValue: "" })(
                                 <Select>
@@ -187,13 +221,7 @@ class AddModal extends Component{
                             )
                         }
                     </FormItem>
-                    <FormItem label={intl.formatMessage({id : "windowPage.password"})} {...this.layout}>
-                        {
-                            getFieldDecorator('password', {})(
-                                <Input placeholder={intl.formatMessage({id : "windowPage.password"})} />
-                            )
-                        }
-                    </FormItem>
+
                 </Form>
             </Modal>
         );
@@ -263,7 +291,7 @@ export default Form.create({
             password: Form.createFormField({
                 value: info['password'] || ''
             }),
-           
+
         };
     }
 })(injectIntl(AddModal));

@@ -36,24 +36,35 @@ class SearchList extends Component {
         return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
 
+    renderMerchants = () => {
+      const { allMerchants } = this.props
+      if(!allMerchants) return;
+      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+
 
     render() {
-        const {form: {getFieldDecorator}, intl} = this.props;
+        const {form: {getFieldDecorator}, intl, isSuperAdmin} = this.props;
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <Row>
-                        <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.name"})}>
-                                {
-                                    getFieldDecorator('trueName', {
-                                        initialValue: ''
-                                    })(
-                                        <Input placeholder={intl.formatMessage({id : "page.search.list.name.enter"})}/>
-                                    )
-                                }
+                        {isSuperAdmin && (
+                          <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
+                              {
+                                getFieldDecorator('merchantId', {
+                                  initialValue: ''
+                                })(
+                                  <Select>
+                                    {this.renderMerchants()}
+                                  </Select>
+                                )
+                              }
                             </Form.Item>
-                        </Col>
+                          </Col>
+                        )}
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.mobile"})}>
                                 {

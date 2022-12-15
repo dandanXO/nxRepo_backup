@@ -23,12 +23,34 @@ class SearchList extends Component {
         submit(params);
     }
 
+    renderMerchants = () => {
+        const { allMerchants } = this.props;
+        if (!allMerchants) return;
+        const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+        return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
+    
     render() {
-        const {form: {getFieldDecorator}, intl, init} = this.props;
+        const { form: { getFieldDecorator }, intl, init, isSuperAdmin } = this.props;
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <Row>
+                        {isSuperAdmin && (
+                            <Col lg={12} xl={8}>
+                                <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
+                                    {
+                                        getFieldDecorator('merchantId', {
+                                            initialValue: ''
+                                        })(
+                                            <Select>
+                                                {this.renderMerchants()}
+                                            </Select>
+                                        )
+                                    }
+                                </Form.Item>
+                            </Col>
+                        )}
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id :"page.search.list.appication.time"})}>
                                 {
