@@ -1,11 +1,11 @@
 import { API } from "../../../api";
 import { GetAvailableMerchantResponse } from "./types/getAvailableMerchantList";
 
-const AvailableMerchantListApi = API.injectEndpoints({
+const MerchantListApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // NOTE: GET /hs/admin/merchant-manage/available 可用商户
-        getAvailableMerchantList: builder.query<GetAvailableMerchantResponse[], null>({
+        getMerchantList: builder.query<GetAvailableMerchantResponse[], null>({
             query: () => ({
                 url: `/merchant-manage/available`,
                 method: "get",
@@ -14,5 +14,6 @@ const AvailableMerchantListApi = API.injectEndpoints({
     })
 })
 export const {
-    useGetAvailableMerchantListQuery
-} = AvailableMerchantListApi;
+    useLazyGetMerchantListQuery,
+    useGetMerchantListQuery
+} = MerchantListApi;

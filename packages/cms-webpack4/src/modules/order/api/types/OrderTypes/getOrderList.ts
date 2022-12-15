@@ -10,6 +10,7 @@ export interface GetOrderListRequestQuerystring {
     isOldUser?: boolean | "";         // 老客下单
     loanTimeEnd?: string;             // 放款时间迄
     loanTimeStart?: string;           // 放款时间起
+    merchantName?:string;             // 商户名
     orderNo?: string;                 // 訂單編號
     productName?: string;             // 產品名稱
     rcProvider?: ""
@@ -51,6 +52,7 @@ export interface OrderListResponse {
     lendDays?:number;         // 借款期限
     lendMoney?:number;        // 到帐金额
     loanTime?:string;         // 放款时间
+    merchantName?:string;     // 商户名
     orderNo?:string;          // 订单编号
     phoneNo?:string;          // 手机号
     productName?:string;      // 产品名称         

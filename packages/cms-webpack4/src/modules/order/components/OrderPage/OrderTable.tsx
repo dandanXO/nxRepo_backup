@@ -11,11 +11,13 @@ import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
 import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
+import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 const OrderTable = () => {
 
-    const { channelListEnum, providerListEnum  } = useValuesEnums();
+    const isSuperAdmin = getIsSuperAdmin();
+    const { channelListEnum, providerListEnum ,merchantListEnum } = useValuesEnums();
     const initSearchList = {
-        appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '',
+        merchantName:'', appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '',
         loanTimeEnd: '', loanTimeStart: '', orderNo: '', productName: '', rcProvider: '', status: '', userPhone: '', userTrueName: '', pageNum: 1, pageSize: 10
     }
     // redux
@@ -135,6 +137,13 @@ const OrderTable = () => {
         },
         { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.rcProvider || "", valueEnum: providerListEnum,},
     ]
+    if(isSuperAdmin){
+        columns.splice(1,0,{
+            title: '商户名', dataIndex: 'merchantName',  key: 'merchantName',  valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantName || '',
+            width: ProColumnsOperationConstant.width["2"],
+        })
+    }
+
     return (
         <ProTable<OrderListResponse>
             columns={columns}
@@ -157,8 +166,9 @@ const OrderTable = () => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { appName, applyTimeRange, channelId, expireDateRange, isLeng, isOldUser, loanTimeRange, orderNo, productName, riskModelName, status, phoneNo, userName } = form.getFieldValue();
-
+                                const { appName, applyTimeRange, channelId, expireDateRange, isLeng, isOldUser, loanTimeRange, orderNo, productName, riskModelName, status, phoneNo, userName ,merchantName=''} = form.getFieldValue();
+                                console.log('merchantName',merchantName,merchantListEnum.get(merchantName).text)
+                                const merchant = merchantName !== '' ? merchantListEnum.get(merchantName)?.text : '';
                                 setSearchList({
                                     ...initSearchList,
                                     appName,
@@ -177,6 +187,7 @@ const OrderTable = () => {
                                     status,
                                     userPhone: phoneNo,
                                     userTrueName: userName,
+                                    merchantName: isSuperAdmin ? merchant : ''
                                 })
                                 form.submit();
                             }}

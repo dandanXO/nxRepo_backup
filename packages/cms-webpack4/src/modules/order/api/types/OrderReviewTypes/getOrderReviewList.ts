@@ -8,6 +8,7 @@ export interface GetOrderReviewListRequestQuerystring {
     orderNo?: string;                 // 訂單編號
     phoneNo?: string;                 // 手机号
     productName?: string;             // 產品名稱
+    merchantName?:string;             // 商户名
     provider?: ""
     | "BLUE_RAY"
     | "DESTINY"
@@ -52,6 +53,7 @@ export interface OrderReviewListResponse {
     orderNo?: string;           // 訂單號
     phoneNo?: string;           // 手機號
     productName?: string;       // 產品名稱
+    merchantName?:string;       // 商户名
     provider?: string;          // 風控應用
     riskRank?: string;          // 風控標籤
     userName?: string;          // 姓名

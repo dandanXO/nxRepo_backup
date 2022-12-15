@@ -12,9 +12,11 @@ import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
 import CopyText from '../../../shared/components/CopyText';
 import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
+import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 const OrderReviewTable = () => {
 
-    const { channelListEnum, riskRankEnum, providerListEnum } = useValuesEnums();
+    const isSuperAdmin = getIsSuperAdmin();
+    const { channelListEnum, riskRankEnum, providerListEnum ,merchantListEnum} = useValuesEnums();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetOrderReviewListQuery({
         pollingInterval: 0,
@@ -156,6 +158,13 @@ const OrderReviewTable = () => {
         },
 
     ]
+
+    if(isSuperAdmin){
+        columns.splice(1,0,{
+            title: '商户名', dataIndex: 'merchantName',  key: 'merchantName',  valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantName || '',
+            width: ProColumnsOperationConstant.width["2"],
+        })
+    }
     return (
         <ProTable<OrderReviewListResponse>
             columns={columns}
@@ -207,7 +216,8 @@ const OrderReviewTable = () => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider } = form.getFieldValue();
+                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantName } = form.getFieldValue();
+                                const merchant = merchantName !== '' ? merchantListEnum.get(merchantName)?.text : '';
                                 setSearchList({
                                     ...initSearchList,
                                     addEndTime: addTimeRange ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
@@ -221,6 +231,7 @@ const OrderReviewTable = () => {
                                     provider,
                                     riskRank,
                                     userName,
+                                    merchantName: isSuperAdmin ? merchant : ''
                                 });
                                 onSelectChange([]);
                                 form.submit();
