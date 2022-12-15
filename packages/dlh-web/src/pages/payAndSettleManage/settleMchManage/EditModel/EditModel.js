@@ -116,7 +116,8 @@ class EditModel extends Component{
                           <Form.Item label={intl.formatMessage({id : "page.search.list.merchantName"})} {...this.layout}>
                             {
                               getFieldDecorator('dlhMerchantId', {
-                                initialValue: ''
+                                initialValue: '',
+                                  rules: [{ required: true, message: intl.formatMessage({ id: "page.search.list.select" }) + intl.formatMessage({ id: "page.search.list.merchantName" }) }]
                               })(
                                 <Select>
                                   {this.renderMerchants()}
