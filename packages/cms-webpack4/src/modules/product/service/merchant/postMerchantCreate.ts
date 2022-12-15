@@ -9,4 +9,7 @@ export interface PostMerchantCreateRequestBody {
     mchNo?: string;
     /** 商户名称 */
     name?: string;
+    /** 商戶號密碼 */
+    password?: string;
+
 }

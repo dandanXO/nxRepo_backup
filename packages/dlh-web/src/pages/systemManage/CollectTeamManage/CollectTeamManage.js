@@ -89,7 +89,9 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
 
     const submit = (obj) => {
       const params = convertParams(obj);
-      getCollectTeamsList(params);
+      getCollectTeamsList({
+        params,
+      });
     }
 
     return (

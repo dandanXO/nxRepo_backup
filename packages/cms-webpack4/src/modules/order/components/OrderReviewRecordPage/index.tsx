@@ -13,8 +13,8 @@ const OrderReviewRecordPage = () => {
         <AdminPage
             navigator={{
                 ancestor: { path: '/', breadcrumbName: '首页', },
-                parent: { path: null, breadcrumbName: '用户管理', },
-                self: { path: null, breadcrumbName: '用户审核纪录', },
+                parent: { path: null, breadcrumbName: '订单管理', },
+                self: { path: null, breadcrumbName: '订单审核纪录', },
             }}
         >
             <>

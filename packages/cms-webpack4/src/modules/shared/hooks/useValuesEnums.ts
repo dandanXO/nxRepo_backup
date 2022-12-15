@@ -1,10 +1,14 @@
 import {useGetChannelListQuery} from "../api/channelListApi";
-import { useGetOperatorListQuery } from "../api/operatorListApi";
+import { useGetOperatorListQuery ,useLazyGetOperatorListQuery} from "../api/operatorListApi";
 import { useGetProviderListQuery } from "../api/providerApi";
-import { useGetAvailableMerchantListQuery } from "../api/availableMerchantListApi";
+import { useGetMerchantListQuery,useLazyGetMerchantListQuery } from "../api/merchantListApi";
 import {useEffect, useState} from "react";
+import { getIsSuperAdmin } from "../utils/getUserInfo";
 
 const useValuesEnums = () => {
+
+    const isSuperAdmin = getIsSuperAdmin();
+    
 
     // 注册渠道
     const { currentData, isSuccess } = useGetChannelListQuery(null);
@@ -18,15 +22,21 @@ const useValuesEnums = () => {
 
 
      // 操作人
-    const { currentData:operatorListData, isSuccess:isOperatorListDataSuccess } = useGetOperatorListQuery(null);
+    const [triggerGetOperatorList, { currentData: operatorListData, isSuccess: isOperatorListDataSuccess }] = useLazyGetOperatorListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
     const [operatorListEnum, setOperatorListEnum] = useState(null)
 
     useEffect(() => {
-        let operatorList = new Map().set('', { text: '不限' });
-        operatorListData && operatorListData?.map((i) => {
-            return operatorList.set(i.id, { text: i.name })
-        });
-        setOperatorListEnum(operatorList)
+        if (isSuperAdmin && operatorListData) {
+            let operatorList = new Map().set('', { text: '不限' });
+            operatorListData && operatorListData?.map((i) => {
+                return operatorList.set(i.id, { text: i.name })
+            });
+            setOperatorListEnum(operatorList)
+        }
     }, [isOperatorListDataSuccess])
 
     
@@ -53,17 +63,30 @@ const useValuesEnums = () => {
 
     
     // 可用商戶
-    const { currentData: merchantListData, isSuccess: isMerchantListDataSuccess } = useGetAvailableMerchantListQuery(null);
+    const [triggerGetMerchantList, { currentData: merchantListData, isLoading, isFetching, isSuccess: isMerchantListDataSuccess, isError, isUninitialized }] = useLazyGetMerchantListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
     const [merchantListEnum, setMerchantListEnum] = useState(null)
 
     useEffect(() => {
-        let merchantList = new Map().set('', { text: '不限' });
-        merchantListData && merchantListData?.map((i) => {
-            return merchantList.set(i.merchantId, { text: i.name })
-        });
-        setMerchantListEnum(merchantList)
+        if (isSuperAdmin && merchantListData) {
+            let merchantList = new Map().set('', { text: '不限' });
+            merchantListData && merchantListData?.map((i) => {
+                return merchantList.set(i.merchantId, { text: i.name })
+            });
+            setMerchantListEnum(merchantList)
+        }
+
     }, [isMerchantListDataSuccess])
 
+    useEffect(() => {
+        if (isSuperAdmin) {
+            triggerGetMerchantList(null);
+            triggerGetOperatorList(null);
+        }
+    }, [])
 
     return { channelListEnum, riskRankEnum, operatorListEnum, providerListEnum, merchantListEnum }
 }

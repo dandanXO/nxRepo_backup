@@ -9,9 +9,13 @@ import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderR
 import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
 import {enumObjectToMap} from '../../../shared/utils/enumObjectToMap';
+import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
+import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
+
 
 const OrderReviewRecordTable = () => {
 
+    const isSuperAdmin = getIsSuperAdmin();
     const { operatorListEnum ,merchantListEnum} = useValuesEnums();
     const initSearchList: GetOrderReviewRecordListRequestQuerystring = {
         appName: '', merchantId: '', operatorId: '', orderNo: '', phoneNo: '', productName: '', reviewStatus: '', reviewTimeEnd: '',
@@ -57,8 +61,6 @@ const OrderReviewRecordTable = () => {
     };
 
     const columns: ProColumns<OrderReviewRecordListResponse>[] = [
-        { title: '商戶名', dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true, initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '商戶名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: "", valueEnum: merchantListEnum },
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: "", render: (text) => <CopyText text={text} /> },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "", render: (text) => <CopyText text={text} /> },
         { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: "", render: (text) => <CopyText text={text} /> },
@@ -71,6 +73,13 @@ const OrderReviewRecordTable = () => {
         { title: '操作人', dataIndex: 'operatorId', key: 'operatorId', hideInTable: true, valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },
         { title: '备注', dataIndex: 'remark', key: 'remark', hideInSearch: true, render: (text) => <CopyText text={text} /> },
     ]
+
+    if(isSuperAdmin){
+        columns.unshift({
+            title: '商户名', dataIndex: 'merchantName', key: 'merchantName', valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
+            width: ProColumnsOperationConstant.width["2"], render: (text) => <CopyText text={text} />, hideInSearch: true
+        }, { title: '商戶名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: "", valueEnum: merchantListEnum },)
+    }
     return (
         <ProTable<OrderReviewRecordListResponse>
             columns={columns}
@@ -91,7 +100,7 @@ const OrderReviewRecordTable = () => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { appName, merchantId, operatorId, orderNo, phoneNo, productName, reviewStatus, userName, reviewTimeRange } = form.getFieldValue();
+                                const { appName, merchantId = '', operatorId, orderNo, phoneNo, productName, reviewStatus, userName, reviewTimeRange } = form.getFieldValue();
                                 setSearchList({
                                     ...initSearchList,
                                     appName, merchantId, operatorId, orderNo, phoneNo, productName, reviewStatus, userName,

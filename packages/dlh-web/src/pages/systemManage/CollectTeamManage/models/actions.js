@@ -10,7 +10,7 @@ export const UPDATE_COLLECT_GROUP = 'UPDATE_COLLECT_GROUP';
 export const DELETE_COLLECT_GROUP = 'DELETE_COLLECT_GROUP';
 
 
-export const getCollectTeam = () => ({ type: GET_COLLECT_TEAM_DATA });
+export const getCollectTeam = (params) => ({ type: GET_COLLECT_TEAM_DATA, params });
 export const setCollectTeam = (data) => ({ type: SET_COLLECT_TEAM_DATA, data });
 export const addCollectTeam = (params) => ({ type: ADD_COLLECT_TEAM, params });
 export const updateCollectTeam = (params) => ({ type: UPDATE_COLLECT_TEAM, params });

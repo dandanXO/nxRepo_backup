@@ -37,7 +37,10 @@ const MerchantModal = (props: MerchantModalProps) => {
                     <Form.Item name="name" label="商户名" rules={[{ required: true }]}>
                         <Input allowClear />
                     </Form.Item>
-                    <Form.Item name="contact" label="联系电话">
+                    <Form.Item name="password" label="商户密码" rules={[{ required: true }]}>
+                        <Input allowClear />
+                    </Form.Item>
+                    <Form.Item name="contact" label="联系电话" rules={[{ required: true }]}>
                         <Input allowClear />
                     </Form.Item>
                     <Form.Item name="email" label="电子邮箱">
