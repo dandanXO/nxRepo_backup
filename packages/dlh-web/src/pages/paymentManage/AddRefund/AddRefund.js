@@ -39,11 +39,7 @@ const getParams = () => {
 class AddRefund extends Component {
     constructor(props) {
         super(props);
-        const isSuperAdmin = getIsSuperAdmin();
-        const allMerchants = getAllMerchants();
         this.state = {
-            isSuperAdmin,
-            allMerchants,
             info: getParams()
         };
         const _this = this;
@@ -129,14 +125,6 @@ class AddRefund extends Component {
                 }
             }
         ];
-
-        if(isSuperAdmin) {
-          this.columns.unshift({
-            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
-            dataIndex: 'merchantName',
-            key: 'merchantName'
-          })
-        }
     }
 
     onChange= (changedFields) => {
@@ -190,7 +178,7 @@ class AddRefund extends Component {
         const { tableData: { data, pagination }, loading, btnLoading, visible } = this.props;
         return (
             <div>
-                <SearchList submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList submit={this.submit}/>
                 <CommonTable
                     columns={this.columns}
                     handlePageChange={this.handlePageChange}
