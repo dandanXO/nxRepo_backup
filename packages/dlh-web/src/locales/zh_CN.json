@@ -316,6 +316,7 @@
   "page.table.repayment.amount.rate": "金额回款率",
   "page.table.overdue.collect.statis.export": "逾期催收统计一_{expDate}.xlsx",
   "page.table.department": "部门",
+  "page.table.department.leader": "部门负责人",
   "page.table.overdue.collect.statis2.export": "逾期催收统计二_{expDate}.xlsx",
   "page.table.designator": "指派人",
   "page.today.list.export": "当天档案列表_{expDate}.xlsx",
