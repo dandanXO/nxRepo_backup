@@ -57,6 +57,11 @@ export const processRoutesForNewCMS = (data) => {
         if (level2MenuItem.actionUrl === "/businessLastCheck") {
           level2MenuItem.actionUrl = "/cms/order-review";
         }
+
+        // 訂單終審紀錄
+        if (level2MenuItem.actionUrl === "/checkRecord") {
+            level2MenuItem.actionUrl = "/cms/order-review-record";
+        }
       })
     }
     if (menuItem.actionUrl === "/h5Manage") {
