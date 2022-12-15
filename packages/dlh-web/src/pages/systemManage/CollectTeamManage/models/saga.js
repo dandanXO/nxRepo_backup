@@ -19,7 +19,6 @@ function* getTableData(action) {
     try{
        const res = yield call(getCollectTeamsList, action.params);
        yield put(setCollectTeam(res));
-        
     } catch (e) {
         console.log(e);
     }
@@ -33,7 +32,6 @@ function* addCollectTeamData(action) {
     try{
         yield call(addCollectTeam, action.params);
         yield getTableData(action)
-        
     } catch (e) {
         console.log(e);
     }
@@ -79,7 +77,7 @@ function* getCollectGroupData(action) {
     try{
         const res = yield call(getCollectGroup, action.params);
         yield put(setCollectGroup(res));
-     
+
     } catch (e) {
         console.log(e);
     }
@@ -93,7 +91,7 @@ function* addCollectGroupData(action) {
     try{
         yield call(addCollectGroup, action.params);
         yield getTableData(action)
-        
+
     } catch (e) {
         console.log(e);
     }
@@ -121,7 +119,7 @@ function* deleteCollectGroupData(action) {
     try{
         yield call(deleteCollectGroup, action.params);
         yield getTableData(action)
-        
+
     } catch (e) {
         console.log(e);
     }
