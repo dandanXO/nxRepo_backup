@@ -159,7 +159,7 @@ const OrderTable = () => {
                         <Button onClick={() => {
                             //  form.resetFields();
                             // @ts-ignore
-                            form.setFieldsValue({ ...initSearchList, applyTimeRange: '', expireDateRange: '', loanTimeRange: '' })
+                            form.setFieldsValue({...initSearchList, applyTimeRange: '', expireDateRange: '', loanTimeRange: '', riskModelName: '', phoneNo: '', userName: '', merchantName: ''})
                             setSearchList(initSearchList);
                         }}>{resetText}</Button>
                         <Button
@@ -167,8 +167,7 @@ const OrderTable = () => {
                             onClick={() => {
                                 // @ts-ignore
                                 const { appName, applyTimeRange, channelId, expireDateRange, isLeng, isOldUser, loanTimeRange, orderNo, productName, riskModelName, status, phoneNo, userName ,merchantName=''} = form.getFieldValue();
-                                console.log('merchantName',merchantName,merchantListEnum.get(merchantName).text)
-                                const merchant = merchantName !== '' ? merchantListEnum.get(merchantName)?.text : '';
+                                const merchant = merchantName  ? merchantListEnum.get(merchantName)?.text : '';
                                 setSearchList({
                                     ...initSearchList,
                                     appName,

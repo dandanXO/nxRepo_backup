@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Modal, Input, Radio,Select,Upload,Icon } from 'antd';
+import {Form, Modal, Input, Radio, Select, Upload, Icon, Col} from 'antd';
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
 
@@ -38,7 +38,7 @@ class EditModel extends Component{
                 this.props.info.file1Id = res.data.id;
                 alert(this.props.intl.formatMessage({id : "windowPage.attach1.upload.success"}));
             }
-            
+
         }
     }
     handleFile2Change = (info) => {
@@ -67,13 +67,20 @@ class EditModel extends Component{
             handleOk(editInfo);
         })
     }
-    
+
     handleCancel = () => {
         this.props.handleCancel();
     }
 
+    renderMerchants = () => {
+      const { allMerchants } = this.props
+      if(!allMerchants) return;
+      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+      return ele;
+    }
+
     render() {
-        const { visible,allSettlePlatList,allSettleTypeList, form: { getFieldDecorator,getFieldsValue }, intl } = this.props;
+        const { visible,allSettlePlatList,allSettleTypeList, form: { getFieldDecorator,getFieldsValue }, intl, isSuperAdmin } = this.props;
         let platSettleTypeList = [];
         if(Array.isArray(allSettlePlatList) && Array.isArray(allSettleTypeList)) {
             let currentPlat = allSettlePlatList.find(item=> item.id === getFieldsValue().platId);
@@ -89,7 +96,7 @@ class EditModel extends Component{
                 // console.dir(getFieldsValue());
             }
         }
-        
+
         return (
             <Modal
                 onOk={this.handleOk}
@@ -99,7 +106,20 @@ class EditModel extends Component{
                 title={intl.formatMessage({id : "windowPage.add.modify.substitue.payment.merchant"})}>
                 <div>
                     <Form>
-                        <Form.Item label={intl.formatMessage({id : "page.search.list.repayement.platfrom"})} {...this.layout}>
+                        {isSuperAdmin && (
+                          <Form.Item label={intl.formatMessage({id : "page.search.list.merchantName"})} {...this.layout}>
+                            {
+                              getFieldDecorator('merchantId', {
+                                initialValue: ''
+                              })(
+                                <Select>
+                                  {this.renderMerchants()}
+                                </Select>
+                              )
+                            }
+                          </Form.Item>
+                        )}
+                        <Form.Item label={intl.formatMessage({id : "page.search.list.payment.platId"})} {...this.layout}>
                             {
                                 getFieldDecorator('platId', {
                                     initialValue: '',
@@ -113,22 +133,23 @@ class EditModel extends Component{
                                 )
                             }
                         </Form.Item>
-                        <Form.Item label={intl.formatMessage({id : "page.search.list.business.no"})} {...this.layout}>
+                        <Form.Item label={intl.formatMessage({id : "page.search.list.payment.mchNo"})} {...this.layout}>
                             {
                                 getFieldDecorator('mchNo', {
                                     initialValue: '',
                                     rules: [{ required: true, message: intl.formatMessage({id : "windowPage.remarks.empty"}) }]
                                 })(
-                                    <Input placeholder={intl.formatMessage({id : "page.search.list.business.no.enter"})}/>
+                                    <Input placeholder={intl.formatMessage({ id: "page.table.enter" }, { text: intl.formatMessage({id : "page.search.list.payment.mchNo"}) })}/>
+
                                 )
                             }
                         </Form.Item>
-                        <Form.Item label={intl.formatMessage({id : "page.search.list.business.name"})} {...this.layout}>
+                        <Form.Item label={intl.formatMessage({id : "page.search.list.payment.mchName"})} {...this.layout}>
                             {
                                 getFieldDecorator('mchName', {
                                     rules: [{ required: true, message: intl.formatMessage({id : "windowPage.remarks.empty"}) }]
                                 })(
-                                    <Input disabled={false} placeholder={intl.formatMessage({id : "page.search.list.business.name.enter"})}/>
+                                    <Input disabled={false} placeholder={intl.formatMessage({ id: "page.table.enter" }, { text: intl.formatMessage({id : "page.search.list.payment.mchName"}) })}/>
                                 )
                             }
                         </Form.Item>

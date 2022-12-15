@@ -140,12 +140,14 @@
   "page.search.list.finish.time": "完成時間",
   "page.search.clear.no.repeat.loan": "是否結清未複借",
   "page.search.clear.no.repeat.loan.days": "結清未複借天數",
+
   "page.search.list.collection.platId": "支付平台",
   "page.search.list.collection.mchNo": "支付商戶號",
   "page.search.list.collection.mchName": "支付商戶名稱",
   "page.search.list.payment.platId": "代付平台",
   "page.search.list.payment.mchNo": "代付商戶號",
   "page.search.list.payment.mchName": "代付商戶名稱",
+
   "page.table.merchant.name": "商戶名",
   "page.table.leng": "展期",
   "page.table.collect.amount": "催收金額",

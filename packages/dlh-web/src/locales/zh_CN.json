@@ -142,12 +142,14 @@
   "page.search.list.collect.team.report.days.violation": "查询日期不可超过{days}天",
   "page.search.loan.time": "借款时间",
   "page.search.format.incorrect": "格式不正确",
+
   "page.search.list.collection.platId": "支付平台",
   "page.search.list.collection.mchNo": "支付商户号",
   "page.search.list.collection.mchName": "支付商户名称",
   "page.search.list.payment.platId": "代付平台",
   "page.search.list.payment.mchNo": "代付商户号",
   "page.search.list.payment.mchName": "代付商户名称",
+
   "page.table.merchant.name": "商户名",
   "page.table.leng": "展期",
   "page.table.collect.amount": "催收金額",

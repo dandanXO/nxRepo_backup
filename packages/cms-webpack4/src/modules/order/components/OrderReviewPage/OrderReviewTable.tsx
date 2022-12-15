@@ -217,7 +217,7 @@ const OrderReviewTable = () => {
                             onClick={() => {
                                 // @ts-ignore
                                 const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantName } = form.getFieldValue();
-                                const merchant = merchantName !== '' ? merchantListEnum.get(merchantName)?.text : '';
+                                const merchant = merchantName ? merchantListEnum.get(merchantName)?.text : '';
                                 setSearchList({
                                     ...initSearchList,
                                     addEndTime: addTimeRange ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',

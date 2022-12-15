@@ -54,7 +54,7 @@ class SettleMchList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({id : "page.search.list.collection.platId"}),
+                title: props.intl.formatMessage({id : "page.search.list.payment.platId"}),
                 dataIndex: 'platId',
                 key: 'platId',
                 width:'23%',
@@ -63,7 +63,7 @@ class SettleMchList extends Component {
                     if(!!text){
                         let {allSettlePlatList} = _this.state;
                         let settlePlat = allSettlePlatList.find(item => item.id == text);
-                        if(!!settlePlat){   
+                        if(!!settlePlat){
                             showStr = settlePlat.platName+'('+settlePlat.platClass+')';
                         }
                     }
@@ -71,13 +71,13 @@ class SettleMchList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({id : "page.search.list.collection.mchNo"}),
+                title: props.intl.formatMessage({id : "page.search.list.payment.mchNo"}),
                 dataIndex: 'mchNo',
                 key: 'mchNo',
                 render(text) { return <CopyText text={text} /> }
             },
             {
-                title: props.intl.formatMessage({id : "page.search.list.collection.mchName"}),
+                title: props.intl.formatMessage({id : "page.search.list.payment.mchName"}),
                 dataIndex: 'mchName',
                 key: 'mchName',
                 width:'13%',
@@ -240,7 +240,7 @@ class SettleMchList extends Component {
                         allSettlePlatList: content || []
                     });
                 }
-            });        
+            });
         } catch (e) {
         }
     }
@@ -254,7 +254,7 @@ class SettleMchList extends Component {
                 <SearchList allSettlePlatList={allSettlePlatList} handleSearch={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <Button type={'primary'} onClick={this.handleAddModel}><FormattedMessage id="page.table.add" /></Button>
                 <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading}/>
-                <EditModel visible={visible} allSettlePlatList={allSettlePlatList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk}/>
+                <EditModel visible={visible} allSettlePlatList={allSettlePlatList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
             </div>
         );
     }

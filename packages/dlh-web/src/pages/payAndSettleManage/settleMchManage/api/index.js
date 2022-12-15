@@ -1,22 +1,22 @@
 import { axios } from 'utils';
 const api = {
-    listUrl: '/hs/payCenter/jsonGateWay?tar=/api/v1/SettleMch/list',
-    addUrl: '/hs/payCenter/jsonGateWay?tar=/api/v1/SettleMch/save',
-    updateUrl: '/hs/payCenter/jsonGateWay?tar=/api/v1/SettleMch/save',
-    deleteUrl: '/hs/payCenter/jsonGateWay?tar=/api/v1/SettleMch/delete',
+    listUrl: '/hs/admin/pay-center/settle-merchant',
+    addUrl: '/hs/admin/pay-center/settle-merchant',
+    updateUrl: '/hs/admin/pay-center/settle-merchant',
+    deleteUrl: '/hs/admin/pay-center/settle-merchant/',
     enabledUrl: '/hs/payCenter/jsonGateWay?tar=/api/v1/SettleMch/enabled',
 };
 const getModelList = (params) => {
-    return axios.post(api.listUrl, params);
+    return axios.get(api.listUrl, {params: params});
 }
 const addModel = (params) => {
     return axios.post(api.addUrl, params);
 }
 const updateModel = (params) => {
-    return axios.post(api.updateUrl, params);
+    return axios.put(api.updateUrl, params);
 }
 const deleteModelByIds = (params) => {
-    return axios.post(api.deleteUrl, params);
+    return axios.delete(api.deleteUrl, {params: params});
 }
 const toggleEnabled = (params) => {
     return axios.post(api.enabledUrl, params);
