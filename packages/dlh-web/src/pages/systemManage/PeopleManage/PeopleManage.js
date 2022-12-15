@@ -200,6 +200,8 @@ class PeopleManage extends Component {
                     groupsData={groupsData}
                     collectTeamId={collectTeamId}
                     collectGroupId={collectGroupId}
+                    isSuperAdmin={this.state.isSuperAdmin}
+                    allMerchants={this.state.allMerchants}
                 />
             </div>
         );
