@@ -8,17 +8,16 @@ function* getTableData(action) {
     yield put(settleMchChangeTableLoading(true));
     try {
         const res = yield call(getModelList, action.params);
-        if (res.code === '200') {
-            const { data } = res;
-            const obj = {
-                data: data.content || [],
-                pagination: {
-                    total: data.total,
-                    current: data.pageNumber
-                }
+        const { records } = res;
+        const obj = {
+            data: records || [],
+            pagination: {
+                total: res.totalPage,
+                current: res.currentPage
             }
-            yield put(settleMchSetTableData(obj));
         }
+        yield put(settleMchSetTableData(obj));
+
     } catch (e) {
 
     }
