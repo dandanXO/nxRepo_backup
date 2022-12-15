@@ -16,20 +16,26 @@ import { axios,convertMoneyFormat } from "utils";
 import download from "downloadjs";
 import PropTypes from 'prop-types';
 import {injectIntl} from "react-intl";
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
-const convertParams = (time,isStatistLeng) => {
+const convertParams = (time,isStatistLeng, merchantId) => {
     const isArr = Array.isArray(time) && time.length > 0;
-    
+
     return {
         startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
         endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
-        isStatistLeng
+        isStatistLeng,
+      merchantId,
     };
 }
 class AtoSStatistics extends Component{
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             initTime: [
                 moment().subtract(9, 'days'),
                 moment()
@@ -58,14 +64,23 @@ class AtoSStatistics extends Component{
                 key: 'newLengNum'
             },
             { title: props.intl.formatMessage({ id: "page.table.loan.conversion.new.customer" }), dataIndex: 'a2s', key: 'a2s', width: 150 },
-            
+
         ];
+
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName'
+          })
+        }
+
     }
 
     handleSearch = (obj) => {
-        const { time,isStatistLeng } = obj;
+        const { time,isStatistLeng, merchantId } = obj;
         const { getTableData } = this.props;
-        const params = convertParams(time,isStatistLeng);
+        const params = convertParams(time,isStatistLeng, merchantId);
         getTableData({ ...params });
     }
 
@@ -108,7 +123,7 @@ class AtoSStatistics extends Component{
         const { btnDisabled } = this.state;
         return (
             <div>
-                <SearchList handleSearch={this.handleSearch} initTime={initTime} isStatistLeng={isStatistLeng}
+                <SearchList handleSearch={this.handleSearch} initTime={initTime} isStatistLeng={isStatistLeng} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}
                 		  exportRecord={this.exportRecord}
                           btnDisable={btnDisabled}
                           />
