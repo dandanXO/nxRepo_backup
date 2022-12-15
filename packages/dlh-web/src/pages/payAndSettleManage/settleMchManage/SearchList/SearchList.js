@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, DatePicker, Row, Col, Button, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
+import {getAllMerchants, getIsSuperAdmin} from "../../../../utils";
 
 const { RangePicker } = DatePicker;
 
@@ -14,7 +15,6 @@ class SearchList extends Component{
     constructor(props) {
         super(props);
         this.state = {
-
         };
     }
     handleClick = () => {
@@ -54,7 +54,7 @@ class SearchList extends Component{
                             </Col>
                         )}
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.repayement.platfrom"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.payment.platId"})}>
                                 {
                                     getFieldDecorator('platId', {
                                         initialValue: ""
@@ -69,7 +69,7 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id :"page.search.list.business.no"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id :"page.search.list.payment.mchNo"})}>
                                 {
                                     getFieldDecorator('mchNo', {
                                         initialValue: ""
@@ -80,7 +80,7 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id :"page.search.list.business.name"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id :"page.search.list.payment.mchName"})}>
                                 {
                                     getFieldDecorator('mchName', {
                                         initialValue: ""

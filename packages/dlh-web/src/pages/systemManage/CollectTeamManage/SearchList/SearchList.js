@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Form, Row, Col, Input, Button, Select} from 'antd';
+const Option = Select.Option;
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
 import {MerchantSelect} from "../../../../components/MerchantSelect";
@@ -26,7 +27,7 @@ class SearchList extends Component {
       const { allMerchants } = this.props
       if(!allMerchants) return;
       const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
-      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+      return [<Option key={'merchantIdOption'} value=""><FormattedMessage id="page.search.list.select" /></Option>].concat(ele)
     }
 
     render() {

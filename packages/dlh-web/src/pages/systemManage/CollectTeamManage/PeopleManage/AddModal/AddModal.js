@@ -89,7 +89,7 @@ class AddModal extends Component{
       const { allMerchants } = this.props
       if(!allMerchants) return;
       const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
-      return ele;
+      return [<Option key={'merchantIdOption'} value=""><FormattedMessage id="page.search.list.select" /></Option>].concat(ele)
     }
 
     render() {
@@ -307,7 +307,7 @@ export default Form.create({
                 value: info['password'] || ''
             }),
             merchantId: Form.createFormField({
-              value: info['merchantId'],
+              value: info['merchantId'] || "",
             }),
             deptManager: Form.createFormField({
               value: info['deptManager'],
