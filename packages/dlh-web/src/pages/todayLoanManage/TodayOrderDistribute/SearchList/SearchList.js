@@ -35,51 +35,51 @@ class SearchList extends Component{
         return (
             <div>
                 <Form onSubmit={this.submit}>
-                     <Row gutter={40}>
-                        {/*<Col span={8}>*/}
-                        {/*    <Form.Item {...formItemLayout} label={"逾期时间"}>*/}
-                        {/*        {*/}
-                        {/*            getFieldDecorator('time', {*/}
-                        {/*                initialValue: []*/}
-                        {/*            })(*/}
-                        {/*                <RangePicker placeholder={['请选择', '请选择']}/>*/}
-                        {/*            )*/}
-                        {/*        }*/}
-                        {/*    </Form.Item>*/}
-                        {/*</Col>*/}
-                        {/*<Col span={8}>*/}
-                        {/*    <Form.Item {...formItemLayout} label={"手机号"}>*/}
-                        {/*        {*/}
-                        {/*            getFieldDecorator('userPhone', {*/}
-                        {/*                initialValue: ''*/}
-                        {/*            })(*/}
-                        {/*                <Input placeholder={'请输入手机号'}/>*/}
-                        {/*            )*/}
-                        {/*        }*/}
-                        {/*    </Form.Item>*/}
-                        {/*</Col>*/}
-                         {isSuperAdmin && (
-                           <Col lg={12} xl={8}>
-                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
-                               {
-                                 getFieldDecorator('merchantId', {
-                                   initialValue: ''
-                                 })(
-                                   <Select>
-                                     {this.renderMerchants()}
-                                   </Select>
-                                 )
-                               }
-                             </Form.Item>
-                           </Col>
-                         )}
-                        <Col span={8}>
-                            <Form.Item style={{textAlign:'right'}}>
-                                <Button type={'primary'} htmlType={'submit'}>查询</Button>
-                            </Form.Item>
-                        </Col>
-                    </Row>
+                    {isSuperAdmin &&
+                        <Row gutter={40}>
+                            {/*<Col span={8}>*/}
+                            {/*    <Form.Item {...formItemLayout} label={"逾期时间"}>*/}
+                            {/*        {*/}
+                            {/*            getFieldDecorator('time', {*/}
+                            {/*                initialValue: []*/}
+                            {/*            })(*/}
+                            {/*                <RangePicker placeholder={['请选择', '请选择']}/>*/}
+                            {/*            )*/}
+                            {/*        }*/}
+                            {/*    </Form.Item>*/}
+                            {/*</Col>*/}
+                            {/*<Col span={8}>*/}
+                            {/*    <Form.Item {...formItemLayout} label={"手机号"}>*/}
+                            {/*        {*/}
+                            {/*            getFieldDecorator('userPhone', {*/}
+                            {/*                initialValue: ''*/}
+                            {/*            })(*/}
+                            {/*                <Input placeholder={'请输入手机号'}/>*/}
+                            {/*            )*/}
+                            {/*        }*/}
+                            {/*    </Form.Item>*/}
+                            {/*</Col>*/}
 
+                            {/* <Col lg={12} xl={8}>
+                                <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
+                                    {
+                                        getFieldDecorator('merchantId', {
+                                            initialValue: ''
+                                        })(
+                                            <Select>
+                                                {this.renderMerchants()}
+                                            </Select>
+                                        )
+                                    }
+                                </Form.Item>
+                            </Col>
+                            <Col span={8}>
+                                <Form.Item style={{ textAlign: 'right' }}>
+                                    <Button type={'primary'} htmlType={'submit'}>查询</Button>
+                                </Form.Item>
+                            </Col> */}
+                        </Row>
+                    }
                 </Form>
             </div>
 
