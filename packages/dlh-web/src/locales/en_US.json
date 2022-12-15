@@ -1002,6 +1002,7 @@
   "windowPage.menu.description": "Menu description",
   "windowPage.add.modify.role": "Add/Modify Role",
   "windowPage.add.modify.staff": "Add/Modify Staff",
+  "windowPage.add.modify.collection.staff": "Add Collection Staff",
   "windowPage.modify.configuration": "Modify configuration",
   "windowPage.configuration.value.enter": "Please enter configuration value",
   "windowPage.default.channel": "Default channel",

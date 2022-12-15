@@ -63,6 +63,10 @@ export const getAdminUserInfo = async () => {
   return JSON.parse(Cookies.get("adminUser"))
 }
 
+export const getAdminUser = () => {
+  return JSON.parse(Cookies.get("adminUser"))
+}
+
 export const getIsSuperAdmin = () => {
   return JSON.parse(localStorage.getItem("isSuperAdmin"))
 }

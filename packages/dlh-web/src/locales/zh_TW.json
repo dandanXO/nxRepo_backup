@@ -955,6 +955,7 @@
   "windowPage.create.role": "可創建角色",
   "windowPage.menu.description": "菜單描述",
   "windowPage.add.modify.staff": "添加/修改員工",
+  "windowPage.add.modify.collection.staff": "添加催收人员",
   "windowPage.modify.configuration": "修改配置",
   "windowPage.configuration.value.enter": "請輸入配置值",
   "windowPage.default.channel": "默認渠道",

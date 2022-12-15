@@ -11,10 +11,15 @@ import { ExpandableTable } from "components";
 import EditInput from './EditInput';
 import ExpandRow from './ExpandRow/ExpandRow';
 import {PeopleManage}from './PeopleManage';
+import SearchList from "./SearchList/SearchList";
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 const { TabPane } = Tabs;
 
 function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTeamData, addCollectGroupData, updateCollectTeamData, deleteCollectTeamData }) {
     const { value: teamValue, setValue: setTeamValue, handleOnChange: handleTeamValue } = useInput();
+
+    const isSuperAdmin = getIsSuperAdmin();
+    const allMerchants = getAllMerchants();
 
     useEffect(() => {
         getCollectTeamsList();
@@ -48,36 +53,67 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
 
     const columns = [
         {
-            title: <FormattedMessage id={'page.table.enabled'}/>, dataIndex: 'enabled', key: 'enabled', width: '15%', render(text, record) {
+            title: <FormattedMessage id={'page.table.enabled'}/>,
+            dataIndex: 'enabled',
+            key: 'enabled',
+            width: '15%',
+            render(text, record) {
                 return (<Switch checkedChildren="ON" unCheckedChildren="OFF" defaultChecked={text} size="small" onChange={() => handleOnSwitchChange(record)} />);
             }
         },
         {
-            title: <FormattedMessage id={'page.table.collect-team.name'}/>, dataIndex: 'name', key: 'name',  render(text, record) {
+            title: <FormattedMessage id={'page.table.collect-team.name'}/>,
+            dataIndex: 'name',
+            key: 'name',
+            render(text, record) {
                 return (<EditInput intl={intl} inputValue={text} record={record} handleUpdateTeam={handleUpdateTeam} handleDeleteTeam={handleDeleteTeam} />);
             }
         },
     ]
 
-    return <div>
-        {/* <Tabs animated={false}>
-            <TabPane tab={intl.formatMessage({ id: "page.table.collect-team" })} key="1"> */}
-                <div className={styles.inputItem}>
-                    <FormattedMessage id='page.table.add.collect-team' /> :
-                    <Input value={teamValue} onChange={handleTeamValue} placeholder={intl.formatMessage({ id: "page.table.collect-team.enter" })} />
-                    <Button type="primary" shape="circle" icon="plus" onClick={handleAddTeam} />
-                </div>
-                <ExpandableTable
-                    columns={columns}
-                    dataSource={teamsData}
-                    expandedRowRender={(record, i) => <ExpandRow record={record} handleAddGruop={handleAddGruop} intl={intl} />}
-                />
-            {/* </TabPane>
-            <TabPane tab={intl.formatMessage({ id: "page.table.collect-people" })} key="2">
-               <PeopleManage/>
-            </TabPane>
-        </Tabs> */}
-    </div>
+    if(isSuperAdmin) {
+      columns.unshift({
+        title: intl.formatMessage({id: "page.search.list.merchantName"}),
+        dataIndex: 'merchantName',
+        key: 'merchantName',
+        width: '15%',
+      })
+    }
+
+    const convertParams = (obj) => {
+      const { merchantId = '' } = obj;
+      return {
+        merchantId,
+      };
+    }
+
+    const submit = (obj) => {
+      const params = convertParams(obj);
+      getCollectTeamsList(params);
+    }
+
+    return (
+      <div>
+        <Tabs animated={false}>
+          <TabPane tab={intl.formatMessage({ id: "page.table.collect-team" })} key="1">
+            <SearchList submit={submit} isSuperAdmin={isSuperAdmin} allMerchants={allMerchants}/>
+            <div className={styles.inputItem}>
+              <FormattedMessage id='page.table.add.collect-team' /> :
+              <Input value={teamValue} onChange={handleTeamValue} placeholder={intl.formatMessage({ id: "page.table.collect-team.enter" })} />
+              <Button type="primary" shape="circle" icon="plus" onClick={handleAddTeam} />
+            </div>
+            <ExpandableTable
+              columns={columns}
+              dataSource={teamsData}
+              expandedRowRender={(record, i) => <ExpandRow record={record} handleAddGruop={handleAddGruop} intl={intl} />}
+            />
+          </TabPane>
+          <TabPane tab={intl.formatMessage({ id: "page.table.collect-people" })} key="2">
+            <PeopleManage/>
+          </TabPane>
+        </Tabs>
+      </div>
+    )
 }
 
 CollectTeamManage.propTypes = {
