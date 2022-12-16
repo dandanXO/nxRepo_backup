@@ -1,5 +1,5 @@
 import {API} from "../../../api";
-import { GetOperatorListResponse } from "./types/getOperatorList";
+import { GetOperatorListResponse ,GetOrderReviewRecordOperatorListResponse} from "./types/getOperatorList";
 
 const OperatorListApi = API.injectEndpoints({
     overrideExisting: false,
@@ -12,9 +12,18 @@ const OperatorListApi = API.injectEndpoints({
                 method: "get",
             }),
         }),
+        // NOTE: GET ​/hs​/admin​/order-review-record​/operator-option 訂單審核紀錄操作人選單
+        getOrderReveiwRecordOperatorList: builder.query<GetOrderReviewRecordOperatorListResponse[], null>({
+            query: () => ({
+                url: `/order-review-record/operator-option`,
+                params: {},
+                method: "get",
+            }),
+        }),
     })
 })
 export const {
     useLazyGetOperatorListQuery,
-    useGetOperatorListQuery
+    useGetOperatorListQuery,
+    useLazyGetOrderReveiwRecordOperatorListQuery
 } = OperatorListApi;
