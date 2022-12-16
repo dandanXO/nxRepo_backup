@@ -19,7 +19,8 @@ class SettlePlatList extends Component {
         super(props);
         this.state = {
             modelId: null,
-            allSettleTypeList:[]
+            platClass: '',
+            allSettleTypeList: []
         };
         const _this = this;
         this.columns =[
@@ -27,11 +28,6 @@ class SettlePlatList extends Component {
                 title: this.props.intl.formatMessage({id : "page.search.list.platform.name"}),
                 dataIndex: 'platName',
                 key: 'platName',
-                render(text) { return <CopyText text={text} /> }
-            },{
-                title: this.props.intl.formatMessage({id : "page.search.list.platform.type"}),
-                dataIndex: 'platClass',
-                key: 'platClass',
                 render(text) { return <CopyText text={text} /> }
             },{
                 title: this.props.intl.formatMessage({id : "page.table.max.value"}),
@@ -87,16 +83,16 @@ class SettlePlatList extends Component {
     //添加
     handleAddModel = () => {
         const { changeModalVisible, changeModalInfo } = this.props;
-        this.setState({ modelId: null });
+        this.setState({ modelId: null ,platClass: ''});
         changeModalVisible(true);
         changeModalInfo({  plateName: '', platClass: '',sortNum:99 });
     }
     //修改
     modifyModel = (record) => {
-        const { id,platName,platClass,reqGateway,payGateway,maxMoney,minMoney,sortNum} = record;
+        const { id, platName, platClass, reqGateway, payGateway, maxMoney, minMoney, sortNum } = record;
         const { changeModalVisible, changeModalInfo } = this.props;
-        this.setState({ modelId: id });
-        changeModalInfo({ platName,platClass,reqGateway,payGateway,maxMoney,minMoney,sortNum });
+        this.setState({ modelId: id, platClass: platClass });
+        changeModalInfo({ platName, platClass, reqGateway, payGateway, maxMoney, minMoney, sortNum });
         changeModalVisible(true);
     }
     //删除
@@ -120,18 +116,17 @@ class SettlePlatList extends Component {
     }
 
     handleModalOk = (obj) => {
-        const { modelId } = this.state;
+        const { modelId, platClass } = this.state;
         const { addChannel, updateChannel } = this.props;
-
-        if(modelId) {
-            updateChannel({ ...obj, id: modelId });
+        if (modelId) {
+            updateChannel({ ...obj, id: modelId, platClass });
             return;
         }
         addChannel(obj);
     }
 
     handleSearch = (obj) => {
-        let { time, platName, platClass } = obj;
+        let { time, platName, platClass='' } = obj;
         const { getTableData } = this.props;
         let startDate = '', endDate = '';
         if(Array.isArray(time)) {

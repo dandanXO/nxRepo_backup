@@ -64,7 +64,7 @@ class SettleMchList extends Component {
                         let {allSettlePlatList} = _this.state;
                         let settlePlat = allSettlePlatList.find(item => item.id == text);
                         if(!!settlePlat){
-                            showStr = settlePlat.platName+'('+settlePlat.platClass+')';
+                            showStr = settlePlat.platName;
                         }
                     }
                     return <CopyText text={showStr} />

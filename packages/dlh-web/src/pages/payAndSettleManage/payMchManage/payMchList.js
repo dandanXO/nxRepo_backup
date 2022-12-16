@@ -56,14 +56,14 @@ class PayMchList extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.repayement.platfrom" }),
                 dataIndex: 'platId',
                 key: 'platId',
-                width: 260,
+                width: 200,
                 render(text) {
                     let showStr = '';
                     if (!!text) {
                         let { allPayPlatList } = _this.state;
                         let payPlat = allPayPlatList.find(item => item.id == text);
                         if (!!payPlat) {
-                            showStr = payPlat.platName + '(' + payPlat.platClass + ')';
+                            showStr = payPlat.platName;
                         }
                     }
                     return <CopyText text={showStr} />
@@ -74,21 +74,21 @@ class PayMchList extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.collection.mchNo" }),
                 dataIndex: 'mchNo',
                 key: 'mchNo',
-                width: 240,
+                width: 200,
                 render(text) { return <CopyText text={text} /> }
             },
             {
                 title: props.intl.formatMessage({ id: "page.search.list.collection.mchName" }),
                 dataIndex: 'mchName',
                 key: 'mchName',
-                width: 220,
+                width: 200,
                 render(text) { return <CopyText text={text} /> }
             },
             {
                 title: props.intl.formatMessage({ id: "windowPage.payment.method" }),
                 dataIndex: 'openPayTypeList',
                 key: 'openPayTypeList',
-                width: 350,
+                width: 300,
                 render(text, record) {
                     let { allPayTypeList } = _this.state;
                     let showStr = '';
