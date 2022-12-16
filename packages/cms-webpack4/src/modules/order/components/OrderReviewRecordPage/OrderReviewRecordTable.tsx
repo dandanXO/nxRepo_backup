@@ -11,12 +11,14 @@ import queryString from "query-string";
 import {enumObjectToMap} from '../../../shared/utils/enumObjectToMap';
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
+import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
 
 
 const OrderReviewRecordTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    const { operatorListEnum ,merchantListEnum} = useValuesEnums();
+    const {  merchantListEnum} = useValuesEnums();
+    const { triggerGetOperatorList ,orderReviewRecordOperatorEnum} = useGetOrderReviewRecordOperatorEnum();
     const initSearchList: GetOrderReviewRecordListRequestQuerystring = {
         appName: '', merchantId: '', operatorId: '', orderNo: '', phoneNo: '', productName: '', reviewStatus: '', reviewTimeEnd: '',
         reviewTimeStart: '', userName: '', pageNum: 1, pageSize: 10
@@ -34,6 +36,7 @@ const OrderReviewRecordTable = () => {
 
     useEffect(() => {
         triggerGetList(searchList);
+        triggerGetOperatorList(null);
     }, [searchList])
 
     useEffect(() => {
@@ -70,7 +73,7 @@ const OrderReviewRecordTable = () => {
         { title: '审核时间', dataIndex: 'reviewTime', key: 'reviewTime', hideInSearch: true, valueType: 'dateTime', width: '100px', },
         { title: '审核时间', dataIndex: 'reviewTimeRange', valueType: 'dateRange', key: 'reviewTimeRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: "" },
         { title: '操作人', dataIndex: 'operator', key: 'operator',  initialValue: "" , hideInSearch: true},
-        { title: '操作人', dataIndex: 'operatorId', key: 'operatorId', hideInTable: true, valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },
+        { title: '操作人', dataIndex: 'operatorId', key: 'operatorId', hideInTable: true, valueType: 'select', valueEnum: orderReviewRecordOperatorEnum, initialValue: "" },
         { title: '备注', dataIndex: 'remark', key: 'remark', hideInSearch: true, render: (text) => <CopyText text={text} /> },
     ]
 
