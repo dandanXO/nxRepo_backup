@@ -64,21 +64,21 @@ class SearchList extends Component {
             <div className={styles.searchList}>
                 <Form onSubmit={this.submit}>
                     <Row gutter={40}>
-                        {isSuperAdmin && (
-                            <Col span={6}>
-                                <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
-                                    {
-                                        getFieldDecorator('merchantId', {
-                                            initialValue: ''
-                                        })(
-                                            <Select>
-                                                {this.renderMerchants()}
-                                            </Select>
-                                        )
-                                    }
-                                </Form.Item>
-                            </Col>
-                        )}
+                        {/*{isSuperAdmin && (*/}
+                        {/*    <Col span={6}>*/}
+                        {/*        <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>*/}
+                        {/*            {*/}
+                        {/*                getFieldDecorator('merchantId', {*/}
+                        {/*                    initialValue: ''*/}
+                        {/*                })(*/}
+                        {/*                    <Select>*/}
+                        {/*                        {this.renderMerchants()}*/}
+                        {/*                    </Select>*/}
+                        {/*                )*/}
+                        {/*            }*/}
+                        {/*        </Form.Item>*/}
+                        {/*    </Col>*/}
+                        {/*)}*/}
                         <Col span={6}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id: "page.table.due.time"})}>
                                 {

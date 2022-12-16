@@ -77,7 +77,7 @@ class TodayStatistics extends Component{
                 title: props.intl.formatMessage({id : "page.table.num.allocat.order"}),
                 dataIndex: 'todayCount',
                 key: 'todayCount',
-                width:110, 
+                width:110,
                 render(text, record) {
                     const res =  text == null || text == ''? 0 : text;
                     return res;
@@ -96,7 +96,7 @@ class TodayStatistics extends Component{
                 title: props.intl.formatMessage({id : "page.table.num.repayment.order"}),
                 dataIndex: 'todayBackCount',
                 key: 'todayBackCount',
-                width:110, 
+                width:110,
                 render(text, record) {
                     const res =  text == null || text == ''? 0 : text;
                     return res;
@@ -122,7 +122,7 @@ class TodayStatistics extends Component{
                 title: props.intl.formatMessage({id : "page.table.num.allocat.order"}),
                 dataIndex: 'todayCount',
                 key: 'todayCount',
-                width:110, 
+                width:110,
                 render(text, record) {
                     const res =  text == null || text == ''? 0 : text;
                     return res;
@@ -141,7 +141,7 @@ class TodayStatistics extends Component{
                 title: props.intl.formatMessage({id : "page.table.num.repayment.order"}),
                 dataIndex: 'todayBackCount',
                 key: 'todayBackCount',
-                width:110, 
+                width:110,
                 render(text, record) {
                     const res =  text == null || text == ''? 0 : text;
                     return res;
@@ -160,21 +160,21 @@ class TodayStatistics extends Component{
             { title: props.intl.formatMessage({id : "page.table.repayment.amount.rate"}), dataIndex: 'todaySumBackAmtRate', key: 'todaySumBackAmtRate' ,width:100},
         ];
 
-        if (isSuperAdmin) {
-            this.allColumns.unshift({
-                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
-                dataIndex: 'merchantName',
-                key: 'merchantName',
-                width:90
-            })
-
-            this.collectorsColumns.unshift({
-                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
-                dataIndex: 'merchantName',
-                key: 'merchantName',
-                width:90
-            })
-        }
+        // if (isSuperAdmin) {
+        //     this.allColumns.unshift({
+        //         title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+        //         dataIndex: 'merchantName',
+        //         key: 'merchantName',
+        //         width:90
+        //     })
+        //
+        //     this.collectorsColumns.unshift({
+        //         title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+        //         dataIndex: 'merchantName',
+        //         key: 'merchantName',
+        //         width:90
+        //     })
+        // }
 
     }
 
