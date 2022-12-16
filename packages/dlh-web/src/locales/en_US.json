@@ -24,6 +24,7 @@
   "page.login.password.empty": "Captcha Code is cannot empty",
   "page.search.list.reg.time": "Register Time",
   "page.search.list.select": "Please Select",
+  "page.search.list.select.empty": "Please Select {text}",
   "page.search.list.status": "Status",
   "page.search.list.no.restrict": "No Restriction",
   "page.search.list.normal": "Normal",

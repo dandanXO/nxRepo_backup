@@ -76,7 +76,6 @@ class AuthRoute extends Component {
         }
       }).then((merchantsData) => {
         if(merchantsData) {
-          console.log("merchantsData", merchantsData);
           localStorage.setItem("merchantsData", JSON.stringify(merchantsData));
         }
         this.setState({

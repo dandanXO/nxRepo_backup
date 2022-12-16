@@ -24,6 +24,7 @@
   "page.login.password.empty": "验证码不能为空",
   "page.search.list.reg.time": "注册时间",
   "page.search.list.select": "请选择",
+  "page.search.list.select.empty": "请选择{text}",
   "page.search.list.status": "状态",
   "page.search.list.no.restrict": "不限",
   "page.search.list.normal": "正常",
