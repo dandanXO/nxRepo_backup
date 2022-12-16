@@ -60,7 +60,7 @@ class SearchList extends Component{
                                     })(
                                         <Select initialValue=''>
                                             {allSettlePlatList.length > 0 && allSettlePlatList.map((item, i) => {
-                                                return <Select.Option key={i} value={item.id}>{item.platName}({item.platClass})</Select.Option>
+                                                return <Select.Option key={i} value={item.id}>{item.platName}</Select.Option>
                                             })}
                                         </Select>
                                     )

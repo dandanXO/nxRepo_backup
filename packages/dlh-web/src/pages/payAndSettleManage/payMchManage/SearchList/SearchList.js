@@ -62,7 +62,7 @@ class SearchList extends Component{
                                     })(
                                         <Select initialValue=''>
                                             {allPayPlatList.length > 0 && allPayPlatList.map((item, i) => {
-                                                return <Select.Option key={i} value={item.id}>{item.platName}({item.platClass})</Select.Option>
+                                                return <Select.Option key={i} value={item.id}>{item.platName}</Select.Option>
                                             })}
                                         </Select>
                                     )
@@ -70,7 +70,7 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.business.no"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.collection.mchNo"})}>
                                 {
                                     getFieldDecorator('mchNo', {
                                         initialValue: ""
@@ -81,7 +81,7 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.business.name"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.collection.mchName"})}>
                                 {
                                     getFieldDecorator('mchName', {
                                         initialValue: ""

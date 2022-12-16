@@ -41,17 +41,6 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.platform.type"})}>
-                                {
-                                    getFieldDecorator('platClass', {
-                                        initialValue: ""
-                                    })(
-                                        <Input placehoder={intl.formatMessage({id : "page.search.list.platform.type.enter"})}/>
-                                    )
-                                }
-                            </Form.Item>
-                        </Col>
-                        <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.table.crete.time"})}>
                                 {
                                     getFieldDecorator('time', {
