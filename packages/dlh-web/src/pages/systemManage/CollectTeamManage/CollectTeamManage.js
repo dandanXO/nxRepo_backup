@@ -3,7 +3,8 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { collectTeamManageAction } from './index';
-import { message, Button, Input, Switch,Tabs } from 'antd';
+import {message, Button, Input, Switch, Tabs, Form, Select} from 'antd';
+const { Option } = Select;
 import PropTypes from 'prop-types';
 import { useInput } from 'hooks';
 import styles from "./CollectTeamManage.less";
@@ -17,7 +18,7 @@ const { TabPane } = Tabs;
 
 function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTeamData, addCollectGroupData, updateCollectTeamData, deleteCollectTeamData }) {
     const { value: teamValue, setValue: setTeamValue, handleOnChange: handleTeamValue } = useInput();
-
+    const { value: merchantIdValue, setValue: setMerchantIdValue, handleOnChange: handleMerchantIdValue } = useInput();
     const isSuperAdmin = getIsSuperAdmin();
     const allMerchants = getAllMerchants();
 
@@ -26,10 +27,13 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
     }, []);
 
     const handleAddTeam = () => {
-        teamValue === "" ?
-            message.warning(intl.formatMessage({ id: "page.table.collect-team.enter" })) :
-            addCollectTeamData({ name: teamValue });
-        setTeamValue('');
+      if(teamValue === "") {
+        message.warning(intl.formatMessage({ id: "page.table.collect-team.enter" }));
+      } else {
+        addCollectTeamData({ name: teamValue, merchantId: merchantIdValue });
+      }
+      setTeamValue('');
+      setMerchantIdValue('');
     }
 
     const handleUpdateTeam = (record, inputValue) => {
@@ -94,6 +98,12 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
       });
     }
 
+    const renderMerchants = () => {
+      if(!allMerchants) return;
+      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+      return [<Option key={'merchantIdOption'} value=""><FormattedMessage id="page.search.list.select" /></Option>].concat(ele)
+    }
+
     return (
       <div>
         <Tabs animated={false}>
@@ -102,6 +112,11 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
             <div className={styles.inputItem}>
               <FormattedMessage id='page.table.add.collect-team' /> :
               <Input value={teamValue} onChange={handleTeamValue} placeholder={intl.formatMessage({ id: "page.table.collect-team.enter" })} />
+              <Select value={merchantIdValue} onSelect={(value) => {
+                setMerchantIdValue(value);
+              }}>
+                {renderMerchants()}
+              </Select>
               <Button type="primary" shape="circle" icon="plus" onClick={handleAddTeam} />
             </div>
             <ExpandableTable
