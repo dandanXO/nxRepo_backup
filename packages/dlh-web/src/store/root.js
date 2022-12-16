@@ -8,6 +8,7 @@ import { paramsManageSaga, paramsManageState } from '../pages/paramsManage';
 import { loanManageSaga, loanManageState } from '../pages/loanManage';
 import { afterLoanManageSaga, afterLoanManageState } from '../pages/afterLoanManage';
 import { systemManageSaga, systemManageState } from '../pages/systemManage';
+import { systemPeopleManageSaga, systemPeopleManageState } from '../pages/systemManage/CollectTeamManage/PeopleManage';
 import { windControlCheckSaga, windControlCheckState } from '../pages/windControlCheck';
 import { h5ManageSaga, h5ManageState } from '../pages/h5Manage';
 import { businessStatisticsSaga, businessStatisticsState } from '../pages/businessStatistics';
@@ -28,6 +29,7 @@ const rootState = combineReducers({
     afterLoanManageState,
     loginState,
     systemManageState,
+    systemPeopleManageState,
     windControlCheckState,
     h5ManageState,
     businessStatisticsState,
@@ -39,7 +41,8 @@ const rootState = combineReducers({
     payAndSettleManageState,
     extensionPeriodLoanManageState,
     globalSettingState,
-    telSaleManageState
+    telSaleManageState,
+
 })
 
 function* rootSaga () {
@@ -51,6 +54,7 @@ function* rootSaga () {
         fork(afterLoanManageSaga),
         fork(loginSaga),
         fork(systemManageSaga),
+        fork(systemPeopleManageSaga),
         fork(windControlCheckSaga),
         fork(h5ManageSaga),
         fork(businessStatisticsSaga),

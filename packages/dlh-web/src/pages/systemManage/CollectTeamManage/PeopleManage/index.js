@@ -1,6 +1,6 @@
-import PeopleManage from './PeopleManage';
-import * as peopleManageAction from './models/actions';
-import peopleManageState from './models/reducers';
-import peopleManageSaga from './models/saga';
+import * as systemTeamPeopleManageAction from './models/actions';
+import SystemPeopleManage from './PeopleManage';
+import systemPeopleManageState from './models/reducers';
+import systemPeopleManageSaga from './models/saga';
 
-export { PeopleManage, peopleManageAction, peopleManageState, peopleManageSaga };
+export { SystemPeopleManage, systemTeamPeopleManageAction, systemPeopleManageState, systemPeopleManageSaga };
