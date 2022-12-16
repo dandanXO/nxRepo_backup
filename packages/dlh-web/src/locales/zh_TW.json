@@ -24,6 +24,7 @@
   "page.login.password.empty": "驗證碼不能為空",
   "page.search.list.reg.time": "註冊時間",
   "page.search.list.select": "請選擇",
+  "page.search.list.select.empty": "請選擇{text}",
   "page.search.list.status": "狀態",
   "page.search.list.no.restrict": "不限",
   "page.search.list.normal": "正常",

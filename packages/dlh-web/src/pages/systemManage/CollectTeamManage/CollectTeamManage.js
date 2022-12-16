@@ -29,9 +29,14 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
     const handleAddTeam = () => {
       if(teamValue === "") {
         message.warning(intl.formatMessage({ id: "page.table.collect-team.enter" }));
-      } else {
-        addCollectTeamData({ name: teamValue, merchantId: merchantIdValue });
+        return;
       }
+
+      if(merchantIdValue === "") {
+        message.warning(intl.formatMessage({ id: "page.search.list.select.empty" }, { text: intl.formatMessage({id : "page.search.list.merchantName"}) }));
+        return;
+      }
+      addCollectTeamData({ name: teamValue, merchantId: merchantIdValue });
       setTeamValue('');
       setMerchantIdValue('');
     }
@@ -112,11 +117,14 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
             <div className={styles.inputItem}>
               <FormattedMessage id='page.table.add.collect-team' /> :
               <Input value={teamValue} onChange={handleTeamValue} placeholder={intl.formatMessage({ id: "page.table.collect-team.enter" })} />
-              <Select value={merchantIdValue} onSelect={(value) => {
+
+              <FormattedMessage id='page.search.list.merchantName' /> :
+              <Select style={{ margin: "0 18px", width: "300px" }} value={merchantIdValue} onSelect={(value) => {
                 setMerchantIdValue(value);
               }}>
                 {renderMerchants()}
               </Select>
+
               <Button type="primary" shape="circle" icon="plus" onClick={handleAddTeam} />
             </div>
             <ExpandableTable

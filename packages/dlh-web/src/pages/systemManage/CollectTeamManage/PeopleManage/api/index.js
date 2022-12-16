@@ -15,7 +15,7 @@ const api = {
     collectGroup: '/hs/admin/user/collect-groups'
 };
 const peopleList = (params) => {
-    return axios.post(api.peopleList, params);
+    return axios.post(api.peopleList + `?collectManage=true`, params);
 }
 const addPeopleList = (params) => {
     return axios.post(api.addPeopleList, params);
