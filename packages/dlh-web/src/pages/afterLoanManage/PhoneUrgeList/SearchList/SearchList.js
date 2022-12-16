@@ -151,7 +151,11 @@ export default Form.create({
             }),
             orderStatus: Form.createFormField({
                 value: params['orderStatus']
-            })
+            }),
+            merchantId: Form.createFormField({
+              value: params['merchantId'] || ""
+            }),
+
         }
     }
 })(injectIntl(SearchList));
