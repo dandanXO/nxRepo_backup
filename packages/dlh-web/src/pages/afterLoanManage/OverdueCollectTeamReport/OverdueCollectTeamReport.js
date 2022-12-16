@@ -19,7 +19,7 @@ function OverdueCollectTeamReport(props) {
         getCollectTeamData();
         const startDate = initTime[0].format('YYYY-MM-DD');
         const endDate = initTime[1].format('YYYY-MM-DD');
-        getReportData({ startDate, endDate, collectTeamId: '', leng: '' });
+        getReportData({ startDate, endDate, collectTeamId: '', leng: '', merchantId: '' });
     }, []);
 
     return <CollectTeamReport {...props} initTime={initTime} type={'overdue'} isSuperAdmin={isSuperAdmin} allMerchants={allMerchants}/>

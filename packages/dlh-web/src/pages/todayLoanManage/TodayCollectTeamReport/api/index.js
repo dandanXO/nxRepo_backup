@@ -11,7 +11,7 @@ const getCollectTeamsList = (params) => {
     return axios.get(api.collectTeamsList, params);
 }
 const getCollectReport = (params) => {
-    return axios.get(api.collectReport, { params: { ...params } });
+    return axios.get(api.collectReport, { params: params});
 }
 
 const getCollectReportDownload = (params) => {

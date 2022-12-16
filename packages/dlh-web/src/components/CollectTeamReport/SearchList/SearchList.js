@@ -30,16 +30,17 @@ class SearchList extends Component{
     downloadCollectReport = () => {
         const { form: { getFieldsValue }, downloadReport } = this.props;
 
-        const { time, collectTeamId, leng } = getFieldsValue()
+        const { time, collectTeamId, leng, merchantId = '' } = getFieldsValue()
         const isArr = Array.isArray(time) && time.length > 0;
         const params = {
             startDate: isArr ? time[0].format('YYYY-MM-DD') : '',
             endDate: isArr ? time[1].format('YYYY-MM-DD') : '',
             collectTeamId,
-            leng
+            leng,
+            merchantId
         }
 
-       downloadReport(params);
+        downloadReport(params);
 
     }
 
