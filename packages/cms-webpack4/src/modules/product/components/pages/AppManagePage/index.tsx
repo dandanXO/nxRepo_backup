@@ -16,6 +16,7 @@ import AdminPage from "../../../../shared/components/AdminPage";
 import {AppConfigurationListItem} from "../../../service/appManage/domain/AppConfigurationListItem";
 import {useLazyGetAllAppConfigurationQuery} from "../../../service/appManage/AppManageApi";
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
+import {AppManageForm} from "./AppManageForm";
 
 const i18n = {
     "AppManagePage": {
@@ -282,23 +283,13 @@ export const AppManagePage = () => {
                 />
                 <AdminFormCustomModal
                     title={i18n.AppManagePage.modalTitle}
+                    width={"1200px"}
                     showModalContent={showModalContent}
                     setShowModalContent={setShowModalContent}
                     onOk={onModalOk}
                     onCloseModal={onCloseModal}
                 >
-                    <></>
-                    {/*<ChannelSettingForm*/}
-                    {/*    isEdit={showModalContent.isEdit}*/}
-                    {/*    form={form}*/}
-                    {/*    initialValues={formInitialValues}*/}
-                    {/*    onFieldsChange={onFormFieldsChange}*/}
-                    {/*    onFinish={onFormFinish}*/}
-                    {/*    customAntFormFieldError={customAntFormFieldError}*/}
-                    {/*    // NOTE: data*/}
-                    {/*    // dataForAllRiskDropMenuData={allRiskDropMenuData}*/}
-                    {/*    // dataForAllChannelSettingTagDropMenuData={allChannelSettingTagDropMenuData}*/}
-                    {/*/>*/}
+                    <AppManageForm isEdit={showModalContent.isEdit} form={form} initialValues={formInitialValues} onFieldsChange={onFormFieldsChange} onFinish={onFormFinish}/>
                 </AdminFormCustomModal>
             </>
         </AdminPage>
