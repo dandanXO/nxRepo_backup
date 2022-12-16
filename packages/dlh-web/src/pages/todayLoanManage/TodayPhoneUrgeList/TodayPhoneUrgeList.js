@@ -12,9 +12,10 @@ import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
 import CopyText from "../../../components/CopyText/CopyText";
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj = {}) => {
-    const {time = [], orderStatus = '', phoneNo = '', name = '', orderNo = ''} = obj;
+    const {time = [], orderStatus = '', phoneNo = '', name = '', orderNo = '', merchantId} = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     return {
         fstartTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -23,7 +24,8 @@ const convertParams = (obj = {}) => {
         userPhone: phoneNo,
         userTrueName: name,
         orderNo,
-        isDc: true
+        isDc: true,
+        merchantId,
     };
 }
 const statusObj = {
@@ -48,7 +50,11 @@ const urgeRecordColumns = [
 class PhoneUrgeList extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             btnDisabled: false,
             visible: false,
             dueTableData: []
@@ -158,6 +164,13 @@ class PhoneUrgeList extends Component {
             // { title: '最后跟进时间', dataIndex: 'lastRecordTime', key: 'lastRecordTime' },
 
         ];
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName'
+          })
+        }
     }
 
     //导出记录列表
@@ -251,7 +264,7 @@ class PhoneUrgeList extends Component {
         const {btnDisabled, dueTableData} = this.state;
         return (
             <div>
-                <SearchList handleSubmit={this.handleSubmit} params={searchParams} />
+                <SearchList handleSubmit={this.handleSubmit} params={searchParams} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record"/></Button></div>
                 <CommonTable
                     columns={this.columns}

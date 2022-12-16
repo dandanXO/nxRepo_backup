@@ -51,7 +51,7 @@ class AddModal extends Component{
     }
     renderRole = () => {
         const { roleData } = this.props;
-        return roleData.map(item => <Option key={item.id} value={item.id} >{item.name}</Option>)
+        return roleData.filter(item => [14, 15, 21].indexOf(item.id) > -1).map(item => <Option key={item.id} value={item.id} >{item.name}</Option>)
     }
 
     renderTeam = () => {
@@ -159,7 +159,7 @@ class AddModal extends Component{
                         {
                             getFieldDecorator('departmentId', {
                             })(
-                                <Select disabled={true}>
+                                <Select>
                                     {this.renderDepartment()}
                                 </Select>
                             )

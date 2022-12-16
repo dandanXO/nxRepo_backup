@@ -11,9 +11,10 @@ import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
 import styles from "./TodayBackRecord.less";
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj) => {
-    const { expiredTime, time, phoneNo, name, orderNo, payType, backType, pageSize, pageNum } = obj;
+    const { expiredTime, time, phoneNo, name, orderNo, payType, backType, pageSize, pageNum, merchantId } = obj;
     //todo 核对参数
     return {
         startTime: Array.isArray(time) && time.length > 0 ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -26,7 +27,8 @@ const convertParams = (obj) => {
         payId: payType,
         state: backType,
         pageSize: pageSize,
-        pageNum: pageNum
+        pageNum: pageNum,
+        merchantId,
     }
 }
 
@@ -40,105 +42,119 @@ const backTypeObj = {
 
 
 class TodayBackRecord extends Component {
-    //todo 核对字段
-    columns = [
-        {
+
+    constructor(props) {
+        super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+        this.state = {
+            isSuperAdmin,
+            allMerchants,
+            btnDisabled: false,
+        };
+        this.columns = [
+          {
             title: <FormattedMessage id="page.search.list.expiration.time"/>,
             dataIndex: 'expireTime',
             key: 'expireTime',
             width: '12%',
             render(text) {
-                return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+              return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
 
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="page.search.list.repaid.time"/>,
             dataIndex: 'payTime',
             key: 'payTime',
             width: '12%',
             render(text) {
-                return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+              return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="page.search.list.order.no" />, dataIndex: 'orderNo', key: 'orderNo',width:'15%',
             render(text) {
-                return <CopyText text={text} />
+              return <CopyText text={text} />
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="page.search.list.product.name" />,
             dataIndex: "productName",
             key: "productName",
             width:'10%',
             render(text) { return <CopyText text={text} isEllispsis={true} /> }
-        },
-        {
-          title: <FormattedMessage id='page.table.appName' />,
-          dataIndex: "appName",
-          key: "appName",
-          width:'10%',
-          render(text) { return <CopyText text={text} isEllispsis={true} /> }
-        },
-        {
+          },
+          {
+            title: <FormattedMessage id='page.table.appName' />,
+            dataIndex: "appName",
+            key: "appName",
+            width:'10%',
+            render(text) { return <CopyText text={text} isEllispsis={true} /> }
+          },
+          {
             title: <FormattedMessage id="page.search.list.name" />, dataIndex: 'userName', key: 'userName',  width: '17%',
             render(text) {
-                return <CopyText text={text} isEllispsis={true} />
+              return <CopyText text={text} isEllispsis={true} />
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="page.search.list.mobile" />, dataIndex: 'phoneNo', key: 'phoneNo',  width: '8%',
             render(text) {
-                return <CopyText text={text} />
+              return <CopyText text={text} />
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="windowPage.payment.method" />, dataIndex: 'payName', key: 'payName',  width: '8%',
             render(text) {
-                return <CopyText text={text} />
+              return <CopyText text={text} />
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="windowPage.repayment.type" />,
             dataIndex: 'state',
             key: 'state',
             width: '6%',
             render(text) {
-                return backTypeObj[text] || '';
+              return backTypeObj[text] || '';
             }
-        },
-        {
+          },
+          {
             title: <FormattedMessage id="windowPage.repayment.amount" />,
             dataIndex: 'totalMoney',
             key: 'totalMoney',
             width: '6%',
             render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)} />
+              return <CopyText text={convertMoneyFormat(text)} />
             }
-        },
-        // { title: '还款状态', dataIndex: 'state', key: 'state' },
-        {
+          },
+          // { title: '还款状态', dataIndex: 'state', key: 'state' },
+          {
             title: <FormattedMessage id="page.search.list.trans.serial.no" />, dataIndex: 'payTradeNo', key: 'payTradeNo',  width: '7%',
             render(text) {
-                return <CopyText text={text} isEllispsis={true}/>
+              return <CopyText text={text} isEllispsis={true}/>
             }
-        },
-        // { title: '入账时间', dataIndex: 'billTime', key: 'billTime' },
-        { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorName', key: 'collectorName',  width: '8%',}
-    ];
+          },
+          // { title: '入账时间', dataIndex: 'billTime', key: 'billTime' },
+          { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorName', key: 'collectorName',  width: '8%',}
+        ];
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            btnDisabled: false
-        };
+        if(isSuperAdmin) {
+          this.columns.unshift({
+            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
+            dataIndex: 'merchantName',
+            key: 'merchantName',
+            width: '6%',
+          })
+        }
+
         this.searchParams = {};
         this.initSearchParams = {
             time: [ moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 }) ],
             expiredTime: [ moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 }).add(1, 'd') ],
             pageSize: 10,
-            pageNum: 1
+            pageNum: 1,
+            merchantId: "",
         };
     }
 
@@ -190,7 +206,7 @@ class TodayBackRecord extends Component {
         const {btnDisabled} = this.state;
         return (
             <div>
-                <SearchList handleSubmit={this.handleSearch} initSearchParams={this.initSearchParams} />
+                <SearchList handleSubmit={this.handleSearch} initSearchParams={this.initSearchParams} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div className={styles.wrapper}>
                     <Button type={'danger'} disabled={btnDisabled} onClick={this.exportOrder}><FormattedMessage id="page.table.export.record"/></Button>
                     <div>
