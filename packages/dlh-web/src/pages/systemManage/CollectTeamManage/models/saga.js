@@ -14,7 +14,6 @@ import {
 import { message } from 'antd';
 import { getCollectTeamsList, addCollectTeam, updateCollectTeam, deleteCollectTeam, getCollectGroup, addCollectGroup, updateCollectGroup, deleteCollectGroup } from '../api';
 
-
 function* getTableData(action) {
     try{
        const res = yield call(getCollectTeamsList, action.params);
@@ -139,6 +138,6 @@ export default function* root() {
         fork(watchAddGroupData),
         fork(watchGetGroupData),
         fork(watchUpdateGroupData),
-        fork(watchDeleteGroupData),
+        fork(watchDeleteGroupData)
     ])
 }

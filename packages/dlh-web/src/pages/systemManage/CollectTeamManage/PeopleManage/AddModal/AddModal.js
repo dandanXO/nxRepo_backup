@@ -47,11 +47,11 @@ class AddModal extends Component{
 
     renderDepartment = () => {
         const { departmentData } = this.props;
-        return departmentData.map(item => <Option key={item.id} value={item.id}>{item.name}</Option>)
+        return departmentData.map(item => <Option key={item.departmentId} value={item.departmentId}>{item.name}</Option>)
     }
     renderRole = () => {
         const { roleData } = this.props;
-        return roleData.filter(item => [14, 15, 21].indexOf(item.id) > -1).map(item => <Option key={item.id} value={item.id} >{item.name}</Option>)
+        return roleData.map(item => <Option key={item.roleId} value={item.roleId} >{item.name}</Option>)
     }
 
     renderTeam = () => {
@@ -283,7 +283,7 @@ export default Form.create({
                 value: info['phoneNo'] || ''
             }),
             departmentId: Form.createFormField({
-                value: info['departmentId'] || ''
+                value: info['departmentId']
             }),
             roleId: Form.createFormField({
                 value: info['roleId'] || ''

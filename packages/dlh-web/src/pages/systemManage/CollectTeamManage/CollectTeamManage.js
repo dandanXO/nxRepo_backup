@@ -10,7 +10,7 @@ import styles from "./CollectTeamManage.less";
 import { ExpandableTable } from "components";
 import EditInput from './EditInput';
 import ExpandRow from './ExpandRow/ExpandRow';
-import {PeopleManage}from './PeopleManage';
+import {SystemPeopleManage}from './PeopleManage';
 import SearchList from "./SearchList/SearchList";
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 const { TabPane } = Tabs;
@@ -111,7 +111,7 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
             />
           </TabPane>
           <TabPane tab={intl.formatMessage({ id: "page.table.collect-people" })} key="2">
-            <PeopleManage/>
+            <SystemPeopleManage/>
           </TabPane>
         </Tabs>
       </div>

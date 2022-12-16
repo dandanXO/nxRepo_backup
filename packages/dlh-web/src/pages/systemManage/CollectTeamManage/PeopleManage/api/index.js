@@ -7,8 +7,10 @@ const api = {
     addPeopleList: '/hs/admin/user/add',
     delPeopleList: '/hs/admin/user/del',
     updatePeopleList: '/hs/admin/user/update',
-    roleList: '/hs/admin/role/assignList',
-    departmentList: '/hs/admin/department/list',
+    // 角色列表
+    roleList: '/hs/admin/collector/role',
+    // 部門列表
+    departmentList:'/hs/admin/collector/department',
     collectTeamsList: '/hs/admin/user/collect-teams',
     collectGroup: '/hs/admin/user/collect-groups'
 };
@@ -25,10 +27,10 @@ const updatePeopleList = (params) => {
     return axios.post(api.updatePeopleList, params);
 }
 const roleList = (params) => {
-    return axios.post(api.roleList, params);
+    return axios.get(api.roleList, params);
 }
 const departmentList = (params) => {
-    return axios.post(api.departmentList, params);
+    return axios.get(api.departmentList, params);
 }
 
 const getCollectTeamsList = (params) => {

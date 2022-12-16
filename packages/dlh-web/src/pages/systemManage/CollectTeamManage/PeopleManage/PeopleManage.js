@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {CommonTable} from 'components';
-import {peopleManageAction} from "./index";
+import {systemTeamPeopleManageAction} from "./index";
 import AddModal from './AddModal/AddModal';
 import {Button, Icon, Popconfirm} from 'antd';
 import styles from './PeopleManage.less';
@@ -237,32 +237,32 @@ class PeopleManage extends Component {
 
 
 const mapStateToProps = (state) => {
-    const {systemManageState: {peopleManageState}} = state;
+    const {systemPeopleManageState} = state;
     return {
-        tableData: peopleManageState['tableData'],
-        loading: peopleManageState['loading'],
-        visible: peopleManageState['visible'],
-        departmentData: peopleManageState['departmentData'],
-        roleData: peopleManageState['roleData'],
-        teamsData:peopleManageState['teamsData'],
-        groupsData:peopleManageState['groupsData'],
-        collectTeamId:peopleManageState['collectTeamId'],
-        collectGroupId:peopleManageState['collectGroupId'],
+        tableData: systemPeopleManageState['tableData'],
+        loading: systemPeopleManageState['loading'],
+        visible: systemPeopleManageState['visible'],
+        departmentData: systemPeopleManageState['departmentData'],
+        roleData: systemPeopleManageState['roleData'],
+        teamsData:systemPeopleManageState['teamsData'],
+        groupsData:systemPeopleManageState['groupsData'],
+        collectTeamId:systemPeopleManageState['collectTeamId'],
+        collectGroupId:systemPeopleManageState['collectGroupId'],
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getTableData: peopleManageAction.pmgGetTableData,
-        setTableData: peopleManageAction.pmgSetTableData,
-        changeModalVisible: peopleManageAction.pmgChangeModalVisible,
-        getDepartmentData: peopleManageAction.pmgGetDepartmentData,
-        getRoleData: peopleManageAction.pmgGetRoleData,
-        addPeopleData: peopleManageAction.pmgAddPeopleList,
-        updatePeopleData: peopleManageAction.pmgUpdatePeopleList,
-        deletePeopleData: peopleManageAction.pmgDelPeopleList,
-        getTeamsData: peopleManageAction.pmgGetCollectTeams,
-        getGroupsData: peopleManageAction.pmgGetCollectGroups,
+        getTableData: systemTeamPeopleManageAction.pmgGetTableData,
+        setTableData: systemTeamPeopleManageAction.pmgSetTableData,
+        changeModalVisible: systemTeamPeopleManageAction.pmgChangeModalVisible,
+        getDepartmentData: systemTeamPeopleManageAction.pmgGetDepartmentData,
+        getRoleData: systemTeamPeopleManageAction.pmgGetRoleData,
+        addPeopleData: systemTeamPeopleManageAction.pmgAddPeopleList,
+        updatePeopleData: systemTeamPeopleManageAction.pmgUpdatePeopleList,
+        deletePeopleData: systemTeamPeopleManageAction.pmgDelPeopleList,
+        getTeamsData: systemTeamPeopleManageAction.pmgGetCollectTeams,
+        getGroupsData: systemTeamPeopleManageAction.pmgGetCollectGroups,
     }, dispatch);
 }
 

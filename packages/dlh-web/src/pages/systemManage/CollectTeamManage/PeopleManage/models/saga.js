@@ -1,24 +1,23 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
 import { message } from 'antd';
 import {
-    PMG_GET_TABLE_DATA,
-    pmgChangeModalVisible,
-    pmgChangeTableLoading,
-    pmgSetTableData,
-    PMG_ADD_PEOPLE_LIST,
-    PMG_DEL_PEOPLE_LIST,
-    PMG_UPDATE_PEOPLE_LIST,
-    PMG_GET_ROLE_DATA,
-    PMG_GET_DEPARTMENT_DATA,
-    pmgSetDepartmentData,
-    pmgSetRoleData,
-    PMG_GET_COLLECT_TEAM_DATA,
-    PMG_GET_COLLECT_GROUP_DATA,
-    pmgSetCollectTeams,
-    pmgSetCollectGroups
+  COLLECT_TEAM_MANAGE_PMG_GET_TABLE_DATA,
+  pmgChangeModalVisible,
+  pmgChangeTableLoading,
+  pmgSetTableData,
+  COLLECT_TEAM_MANAGE_PMG_ADD_PEOPLE_LIST,
+  COLLECT_TEAM_MANAGE_PMG_DEL_PEOPLE_LIST,
+  COLLECT_TEAM_MANAGE_PMG_UPDATE_PEOPLE_LIST,
+  COLLECT_TEAM_MANAGE_PMG_GET_ROLE_DATA,
+  COLLECT_TEAM_MANAGE_PMG_GET_DEPARTMENT_DATA,
+  pmgSetDepartmentData,
+  pmgSetRoleData,
+  COLLECT_TEAM_MANAGE_PMG_GET_COLLECT_TEAM_DATA,
+  COLLECT_TEAM_MANAGE_PMG_GET_COLLECT_GROUP_DATA,
+  pmgSetCollectTeams,
+  pmgSetCollectGroups,
 } from './actions';
 import { roleList, addPeopleList, delPeopleList, departmentList, peopleList, updatePeopleList, getCollectTeamsList, getCollectGroup } from '../api';
-import { axios } from 'utils';
 
 function* getTableData(action) {
     yield put(pmgChangeTableLoading(true));
@@ -43,40 +42,34 @@ function* getTableData(action) {
 }
 
 function* watchGetTableData() {
-    yield takeEvery(PMG_GET_TABLE_DATA, getTableData);
+    yield takeEvery(COLLECT_TEAM_MANAGE_PMG_GET_TABLE_DATA, getTableData);
 }
 
-//获取角色数据
+//获取角色列表
 function* getRoleList(action) {
     try {
-        const res = yield call(roleList, action.params);
-        if(Number(res.code) === 200) {
-            const { data: content } = res;
-            yield put(pmgSetRoleData(content))
-        }
+        const content = yield call(roleList, action.params);
+        yield put(pmgSetRoleData(content))
     } catch (e) {
 
     }
 }
 function* watchGetRoleList() {
-    yield takeEvery(PMG_GET_ROLE_DATA, getRoleList);
+    yield takeEvery(COLLECT_TEAM_MANAGE_PMG_GET_ROLE_DATA, getRoleList);
 }
 
-//部门数据
+//获取部门列表
 function* getDepartmentList(action) {
     try {
-        const res = yield call(departmentList, action.params);
-        if(Number(res.code) === 200) {
-            const { data: content } = res;
-            yield put(pmgSetDepartmentData(content))
-        }
+        const content = yield call(departmentList, action.params);
+        yield put(pmgSetDepartmentData(content))
     } catch (e) {
 
     }
 }
 
 function* watchGetDepartmentList() {
-    yield takeEvery(PMG_GET_DEPARTMENT_DATA, getDepartmentList);
+    yield takeEvery(COLLECT_TEAM_MANAGE_PMG_GET_DEPARTMENT_DATA, getDepartmentList);
 }
 
 
@@ -94,7 +87,7 @@ function* addPeople(action) {
     }
 }
 function* watchAddPeople() {
-    yield takeEvery(PMG_ADD_PEOPLE_LIST, addPeople);
+    yield takeEvery(COLLECT_TEAM_MANAGE_PMG_ADD_PEOPLE_LIST, addPeople);
 }
 
 function* modifyPeople(action) {
@@ -110,7 +103,7 @@ function* modifyPeople(action) {
     }
 }
 function* watchModifyPeople() {
-    yield takeEvery(PMG_UPDATE_PEOPLE_LIST, modifyPeople)
+    yield takeEvery(COLLECT_TEAM_MANAGE_PMG_UPDATE_PEOPLE_LIST, modifyPeople)
 }
 //删除
 function* deletePeople(action) {
@@ -126,7 +119,7 @@ function* deletePeople(action) {
 }
 
 function* watchDeletePeople() {
-    yield takeEvery(PMG_DEL_PEOPLE_LIST, deletePeople);
+    yield takeEvery(COLLECT_TEAM_MANAGE_PMG_DEL_PEOPLE_LIST, deletePeople);
 }
 
 
@@ -134,14 +127,14 @@ function* getCollectTeamsData(action) {
     try{
        const res = yield call(getCollectTeamsList, action.params);
        yield put(pmgSetCollectTeams(res));
-        
+
     } catch (e) {
         console.log(e);
     }
 }
 
 function* watchGetTeamsData() {
-    yield takeEvery(PMG_GET_COLLECT_TEAM_DATA, getCollectTeamsData);
+    yield takeEvery(COLLECT_TEAM_MANAGE_PMG_GET_COLLECT_TEAM_DATA, getCollectTeamsData);
 }
 
 function* getCollectGroupsData(action) {
@@ -153,14 +146,14 @@ function* getCollectGroupsData(action) {
             collectGroupId: action.groupId ? action.groupId : ''
         }
         yield put(pmgSetCollectGroups(obj));
-     
+
     } catch (e) {
         console.log(e);
     }
 }
 
 function* watchGetCollectGroupsData() {
-    yield takeEvery(PMG_GET_COLLECT_GROUP_DATA, getCollectGroupsData);
+    yield takeEvery(COLLECT_TEAM_MANAGE_PMG_GET_COLLECT_GROUP_DATA, getCollectGroupsData);
 }
 
 
