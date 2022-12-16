@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Form, DatePicker, Row, Col, Button, Input, Select } from 'antd';
+import { Button, Col, DatePicker, Form, Input, Row, Select } from 'antd';
 import PropTypes from 'prop-types';
-import {injectIntl, FormattedMessage} from "react-intl";
+import { FormattedMessage, injectIntl } from "react-intl";
 
 const { RangePicker } = DatePicker;
 
@@ -46,7 +46,7 @@ class SearchList extends Component{
                             <Col lg={12} xl={8}>
                                 <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
                                     {
-                                        getFieldDecorator('merchantId', {
+                                        getFieldDecorator('dlhMerchantId', {
                                             initialValue: ''
                                         })(
                                             <Select>
