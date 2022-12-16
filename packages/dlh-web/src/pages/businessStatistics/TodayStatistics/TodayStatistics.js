@@ -9,12 +9,19 @@ import { message,Tabs } from "antd";
 import { convertMoneyFormat } from "utils";
 import {injectIntl, FormattedMessage} from "react-intl";
 import PropTypes from 'prop-types';
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 const { TabPane } = Tabs;
 class TodayStatistics extends Component{
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+
         this.state = {
-            btnDisabled:false
+            btnDisabled:false,
+            isSuperAdmin,
+            allMerchants
+
         };
         this.initTime={
             time: [moment(0, "HH").add(-30,'d'), moment({ hour: 23, minute: 59, seconds: 59 })],
@@ -152,6 +159,23 @@ class TodayStatistics extends Component{
             { title: props.intl.formatMessage({id : "page.table.repayment.order.rate"}), dataIndex: 'todaySumBackNumRate', key: 'todaySumBackNumRate' ,width:120},
             { title: props.intl.formatMessage({id : "page.table.repayment.amount.rate"}), dataIndex: 'todaySumBackAmtRate', key: 'todaySumBackAmtRate' ,width:100},
         ];
+
+        if (isSuperAdmin) {
+            this.allColumns.unshift({
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                width:90
+            })
+
+            this.collectorsColumns.unshift({
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                width:90
+            })
+        }
+
     }
 
     handleSearch = (searchObj) => {
@@ -164,13 +188,13 @@ class TodayStatistics extends Component{
 
 
     convertParams = (type, searchType) => {
-        const { time, distributeTime } = searchType;
+        const { time, distributeTime, merchantId = '' } = searchType;
         const isArr = Array.isArray(time) && time.length > 0;
         const startTime = isArr ? time[0].format("YYYY-MM-DD 00:00:00") : "";
         const endTime = isArr ? time[1].format("YYYY-MM-DD 23:59:59") : "";
         const fstartTime = Array.isArray(distributeTime) && distributeTime.length > 0 ? distributeTime[0].format("YYYY-MM-DD 00:00:00") : "";
         const fendTime = Array.isArray(distributeTime) && distributeTime.length > 0 ? distributeTime[1].format("YYYY-MM-DD 23:59:59") : "";
-        const params = { startTime, endTime, fstartTime, fendTime }
+        const params = { startTime, endTime, fstartTime, fendTime, merchantId }
         return type === 'all' ? { ...params } : { ...params, collectorId: searchType.collectorId };
     }
 
@@ -204,14 +228,14 @@ class TodayStatistics extends Component{
         const { current, pageSize } = info;
         const { getTableData } = this.props;
         const params = this.convertParams('all',{...this.searchParams})
-        getTableData({ page: current - 1, size: pageSize, ...params });
+        getTableData({ ...params, page: current - 1, size: pageSize });
     }
 
     handleCollectorPageChange = (info) => {
         const { current, pageSize } = info;
         const { getCollectorsData } = this.props;
         const collectorParams = this.convertParams('collector',{...this.searchCollectorParams})
-        getCollectorsData({ page: current - 1, size: pageSize, ...collectorParams });
+        getCollectorsData({ ...collectorParams ,page: current - 1, size: pageSize});
     }
 
     render() {
@@ -229,6 +253,8 @@ class TodayStatistics extends Component{
                             exportRecord={this.exportRecord}
                             btnDisable={btnDisabled}
                             type={"all"}
+                            isSuperAdmin={this.state.isSuperAdmin}
+                            allMerchants={this.state.allMerchants}
                         />
                         <CommonTable
                             columns={this.allColumns}
@@ -246,6 +272,8 @@ class TodayStatistics extends Component{
                             exportRecord={this.exportRecord}
                             btnDisable={btnDisabled}
                             type={"collector"}
+                            isSuperAdmin={this.state.isSuperAdmin}
+                            allMerchants={this.state.allMerchants}
                         />
                         <CommonTable
                             columns={this.collectorsColumns}

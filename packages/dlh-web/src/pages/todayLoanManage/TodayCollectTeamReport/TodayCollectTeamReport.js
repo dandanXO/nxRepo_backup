@@ -6,7 +6,11 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { CollectTeamReport } from 'components';
 import moment from 'moment';
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 function TodayCollectTeamReport(props) {
+
+    const isSuperAdmin = getIsSuperAdmin();
+    const allMerchants = getAllMerchants();
 
     const initTime = [moment(), moment()];
 
@@ -15,10 +19,10 @@ function TodayCollectTeamReport(props) {
         getCollectTeamData();
         const startDate = initTime[0].format('YYYY-MM-DD');
         const endDate = initTime[1].format('YYYY-MM-DD');
-        getReportData({ startDate, endDate, collectTeamId: '', leng: '' });
+        getReportData({ startDate, endDate, collectTeamId: '', leng: '', merchantId: '' });
     }, []);
 
-    return <CollectTeamReport {...props} initTime={initTime} type={'today'}/>
+    return <CollectTeamReport {...props} initTime={initTime} type={'today'} isSuperAdmin={isSuperAdmin} allMerchants={allMerchants}/>
 }
 
 TodayCollectTeamReport.propTypes = {

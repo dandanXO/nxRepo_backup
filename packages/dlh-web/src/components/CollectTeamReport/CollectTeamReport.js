@@ -105,13 +105,14 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
 
 
 
-  const handleSearch = (obj) => {
-        const { time, collectTeamId, leng } = obj
+    const handleSearch = (obj) => {
+        
+        const { time, collectTeamId, leng, merchantId = '' } = obj
         const isArr = Array.isArray(time) && time.length > 0;
         const limit = 7;
         // query over 7d
         if (isArr && time[0] && time[1] && time[1].diff(time[0], 'days') > limit) {
-            message.warning(intl.formatMessage({id: 'page.search.list.collect.team.report.days.violation'}, { 'days': limit }), 3);
+            message.warning(intl.formatMessage({ id: 'page.search.list.collect.team.report.days.violation' }, { 'days': limit }), 3);
             return;
         }
 
@@ -119,8 +120,10 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
             startDate: isArr ? time[0].format('YYYY-MM-DD') : '',
             endDate: isArr ? time[1].format('YYYY-MM-DD') : '',
             collectTeamId,
-            leng
+            leng,
+            merchantId
         }
+        console.log(params)
         getReportData(params)
     }
 

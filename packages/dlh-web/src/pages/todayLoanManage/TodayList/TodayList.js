@@ -40,12 +40,11 @@ class TodayList extends Component {
             orderNo: '',
             orderStatus: '0',
             person: '',
-            merchantId: ''
         };
         this.convertParams = (obj) => {
             const {personType} = this.props;
             let key = personType === 'group' ? 'departmentId' : 'collectorId';
-            const { time, phoneNo, name, orderNo, orderStatus, person ,merchantId=''} = obj;
+            const { time, phoneNo, name, orderNo, orderStatus, person } = obj;
             const isArr = Array.isArray(time) && time.length > 0;
             return {
                 startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -55,7 +54,6 @@ class TodayList extends Component {
                 userTrueName: name,
                 orderNo,
                 [key]: person,
-                merchantId
             };
         }
         this.columns = [
@@ -325,8 +323,6 @@ class TodayList extends Component {
                 <SearchList
                     handleSubmit={this.handleSearch}
                     params={searchParams} personData={personData}
-                    isSuperAdmin={this.state.isSuperAdmin}
-                    allMerchants={this.state.allMerchants}
                 />
                 <div>
                     <span>
