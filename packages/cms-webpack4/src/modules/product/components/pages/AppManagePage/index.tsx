@@ -283,7 +283,6 @@ export const AppManagePage = () => {
                 />
                 <AdminFormCustomModal
                     title={i18n.AppManagePage.modalTitle}
-                    width={"1200px"}
                     showModalContent={showModalContent}
                     setShowModalContent={setShowModalContent}
                     onOk={onModalOk}

@@ -141,7 +141,7 @@ class PayOrderList extends Component {
                 dataIndex: 'platName',
                 key: 'platName',
                 render(text,record) {
-                  
+
                     // const platName = record.platName + '(' + record.platClassName + ')';
                     return (
                         <CopyToClipboard text={text} onCopy={_this.onCopy}>
@@ -165,7 +165,7 @@ class PayOrderList extends Component {
                         </CopyToClipboard>
                     );
                 }
-            }, 
+            },
             // {
             //     width:140,
             //     title: this.props.intl.formatMessage({ id: "page.search.list.business.no" }),
@@ -180,7 +180,7 @@ class PayOrderList extends Component {
             //             </CopyToClipboard>
             //         );
             //     }
-            // }, 
+            // },
             {
                 width: 65,
                 title: this.props.intl.formatMessage({ id: "page.table.order.amount" }),
@@ -292,8 +292,8 @@ class PayOrderList extends Component {
         if (isSuperAdmin) {
             this.columns.unshift({
                 title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
-                dataIndex: 'merchantName',
-                key: 'merchantName',
+                dataIndex: 'dlhMerchantName',
+                key: 'dlhMerchantName',
                 width:90
             })
         }

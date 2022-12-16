@@ -192,7 +192,7 @@ class SettleOrderList extends Component {
                 dataIndex: 'mchNo',
                 key: 'mchNo',
                 render(text) {
-                  
+
                     return (
                         <CopyToClipboard text={text} onCopy={_this.onCopy}>
                             <Tooltip title={text}>
@@ -296,7 +296,7 @@ class SettleOrderList extends Component {
                                 <span style={{cursor: 'pointer'}}>{!!text && text.length>6 ? text.substring(0,6)+'...' : text}</span>
                             </Tooltip>
                         </CopyToClipboard>
-                        
+
                     );
                 }
             },{
@@ -337,8 +337,8 @@ class SettleOrderList extends Component {
         if (isSuperAdmin) {
             this.columns.unshift({
                 title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
-                dataIndex: 'merchantName',
-                key: 'merchantName',
+                dataIndex: 'dlhMerchantName',
+                key: 'dlhMerchantName',
                 width:90
             })
         }
