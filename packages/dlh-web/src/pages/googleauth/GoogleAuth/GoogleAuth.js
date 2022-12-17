@@ -21,8 +21,15 @@ class GoogleAuth extends Component{
 
     async componentDidMount () {
         const _this = this;
-        const adminUser = await getAdminUserInfo();
-        const hasGoogleKey = adminUser ? adminUser.data.googleAuthKey : "";
+        const res = await axios({
+          url: '/hs/admin/auth/getInfo',
+          method: 'post'
+        })
+        let { data } = res;
+        if(res && res.code == '200') {
+          Cookies.set("adminUser", JSON.stringify(data))
+        }
+        const hasGoogleKey = data.googleAuthKey;
         _this.setState({
             hasGoogleKey: hasGoogleKey
         })
@@ -33,12 +40,9 @@ class GoogleAuth extends Component{
             const { googleAuthUrl } = res;
             _this.setState({
                 googleAuthUrl: googleAuthUrl
-
             })
             // document.getElementById("googleAuthUrlImg").setAttribute("src",googleAuthUrl);
-
         })
-
     }
 
     handleCancel = (e) => {
@@ -71,7 +75,7 @@ class GoogleAuth extends Component{
     render () {
         const { form: { getFieldDecorator } } = this.props;
         const hasLoginInfo = getLoginInfo();
-       
+
         if(!hasLoginInfo) {
             return <Redirect to="/login" />;
         }
@@ -82,7 +86,7 @@ class GoogleAuth extends Component{
                 return <Redirect to="/index" />;
             }
         }
-     
+
         return (
             <div className={styles.margin10}>
                 {(() => {
@@ -147,7 +151,7 @@ class GoogleAuth extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        
+
     }
 };
 
