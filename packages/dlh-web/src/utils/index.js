@@ -132,6 +132,7 @@ axios.defaults.headers["Content-Type"] = "application/json";
 axios.interceptors.response.use(
     function (response) {
 
+
         const {
             data,
             config: { url }
@@ -153,7 +154,6 @@ axios.interceptors.response.use(
 
         // NOTICE: code !== 200
         if (Number(data.code) !== 200 && data.code !== undefined) {
-
             // NOTICE: session过期
             if (Number(data.code) === 400) {
                 // showModal('session过期，请重新登录！');
@@ -167,6 +167,7 @@ axios.interceptors.response.use(
             if (Number(data.code) === 401) {
                 // showModal('session过期，请重新登录！');
                 setTimeout(() => {
+                    userLogout();
                     history.push("/googleauth");
                 }, 1500);
                 return;

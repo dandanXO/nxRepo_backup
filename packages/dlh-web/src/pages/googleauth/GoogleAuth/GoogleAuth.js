@@ -138,7 +138,6 @@ class GoogleAuth extends Component{
     render () {
         const { form: { getFieldDecorator } } = this.props;
         const hasLoginInfo = getLoginInfo();
-
         if(!hasLoginInfo) {
             return <Redirect to="/login" />;
         }
