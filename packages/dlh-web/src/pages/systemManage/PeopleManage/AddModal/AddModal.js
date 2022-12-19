@@ -183,7 +183,7 @@ class AddModal extends Component{
                             )
                         }
                     </FormItem>
-                    <FormItem required={true} label={intl.formatMessage({ id: "page.table.collect-team" })} {...this.layout}>
+                    <FormItem label={intl.formatMessage({ id: "page.table.collect-team" })} {...this.layout}>
                         {
                             getFieldDecorator('collectTeamId', { initialValue: "" })(
                                 <Select onChange={this.handleTeamOnChange}>
@@ -193,7 +193,7 @@ class AddModal extends Component{
                             )
                         }
                     </FormItem>
-                    <FormItem required={true} label={intl.formatMessage({ id: "page.table.collect-group" })} {...this.layout}>
+                    <FormItem label={intl.formatMessage({ id: "page.table.collect-group" })} {...this.layout}>
                         {
                             getFieldDecorator('collectGroupId', { initialValue: "" })(
                                 <Select>
