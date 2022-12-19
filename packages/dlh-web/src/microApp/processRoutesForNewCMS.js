@@ -1,5 +1,14 @@
 export const processRoutesForNewCMS = (data) => {
   return data.map(menuItem => {
+    // APP 配置
+    if (menuItem.actionUrl === "/appSetting") {
+      menuItem.children && menuItem.children.map(level2MenuItem => {
+        // APP 配置
+        if (level2MenuItem.actionUrl === "/appSettingManage") {
+          level2MenuItem.actionUrl = "/cms/app-manage";
+        }
+      })
+    }
     // 用戶管理
     if (menuItem.actionUrl === "/userManage") {
       menuItem.children && menuItem.children.map(level2MenuItem => {

@@ -6,14 +6,14 @@ import {AdminFormCustomModal} from "../../../../shared/components/AdminFormCusto
 import {useForm} from "antd/es/form/Form";
 import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import AdminPage from "../../../../shared/components/AdminPage";
-import {AppConfigurationListItem} from "../../../service/appManage/domain/AppConfigurationListItem";
+import {AppConfigurationListItem} from "../../../services/appManage/domain/AppConfigurationListItem";
 import {
     useCreateAppConfigurationMutation,
     useDeleteAppConfigurationMutation,
     useLazyGetAllAppConfigurationQuery,
     useLazyGetAppConfigurationQuery,
     useUpdateAppConfigurationMutation
-} from "../../../service/appManage/AppManageApi";
+} from "../../../services/appManage/AppManageApi";
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 import {AppManageForm} from "./AppManageForm";
 import {ChannelTagVO} from "../../../../channel/domain/vo/ChannelTagVO";
@@ -129,7 +129,7 @@ export const AppManagePage = () => {
                 },
                 width: ProColumnsOperationConstant.width["2"],
             },
-            { key: 'appName', title: 'APP名稱', dataIndex: 'appName', initialValue: "" },
+            { key: 'appName', title: 'APP名称', dataIndex: 'appName', initialValue: "" },
             { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: "", hideInSearch: true,},
             { key: 'createTime', title: '创建时间', dataIndex: 'createTime', initialValue: "", hideInSearch: true},
             { key: 'updateTime', title: '更新时间', dataIndex: 'updateTime', initialValue: "", hideInSearch: true,},
@@ -319,7 +319,7 @@ export const AppManagePage = () => {
                 },
                 parent: {
                     path: "",
-                    breadcrumbName: "产品管理",
+                    breadcrumbName: "APP配置",
                 },
                 self: {
                     path: "",

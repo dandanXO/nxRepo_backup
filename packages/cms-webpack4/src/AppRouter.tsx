@@ -16,7 +16,7 @@ import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPa
 import UserReviewRecordPage from "./modules/user/components/pages/UserReviewRecordPage";
 import WhiteListPage from "./modules/user/components/pages/WhiteListPage";
 import BlackListPage from "./modules/user/components/pages/BlackListPage";
-import {AppManagePage} from "./modules/product/components/pages/AppManagePage";
+import {AppManagePage} from "./modules/app/components/pages/AppManagePage";
 import ConfigManagePage from "./modules/system/components/pages/ConfigManagePage";
 import OrderPage from "./modules/order/components/OrderPage";
 import OrderDetailPage from "./modules/order/components/OrderDetailPage";
