@@ -1,27 +1,23 @@
 import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
-import {
-    useCreateChannelMutation,
-    useLazyGetChannelQuery,
-    useUpdateChannelMutation
-} from "../../../../channel/service/ChannelApi";
-import {FormInstance, Tabs} from "antd";
+import {FormInstance} from "antd";
 import {AdminFormCustomModal} from "../../../../shared/components/AdminFormCustomModal";
 import {useForm} from "antd/es/form/Form";
-import {ChannelSettingForm} from "../../../../channel/components/pages/ChannelTabPage/ChannelSettingTab/ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import {UpdateChannelRequest} from "../../../../channel/service/request/UpdateChannelRequest";
 import AdminPage from "../../../../shared/components/AdminPage";
 import {AppConfigurationListItem} from "../../../service/appManage/domain/AppConfigurationListItem";
 import {
     useCreateAppConfigurationMutation,
+    useDeleteAppConfigurationMutation,
     useLazyGetAllAppConfigurationQuery,
-    useLazyGetAppConfigurationQuery, useUpdateAppConfigurationMutation
+    useLazyGetAppConfigurationQuery,
+    useUpdateAppConfigurationMutation
 } from "../../../service/appManage/AppManageApi";
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 import {AppManageForm} from "./AppManageForm";
-import {optional} from "zod";
+import {ChannelTagVO} from "../../../../channel/domain/vo/ChannelTagVO";
+import {Modal} from "antd/es";
 
 const i18n = {
     "AppManagePage": {
@@ -78,6 +74,41 @@ export const AppManagePage = () => {
         userBrowseAndSearchAllItemsUseCase({});
     }, [])
 
+
+    const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteAppConfigurationMutation();
+
+    const [modal, contextHolder] = Modal.useModal();
+
+    const onDeleteModalOK = useCallback((editID: number) => {
+        // NOTICE: need dependency array
+        userDeleteChannelSettingUseCase(editID)
+    }, [])
+
+    // NOTE: User delete ChannelSetting
+    const userDeleteChannelSettingUseCase = useCallback((editID: number) => {
+        // NOTE:
+        triggerDelete({
+            id: editID,
+        }).unwrap().then(() => {
+            triggerGetList(null);
+        })
+    }, []);
+
+    const onDeleteModalCancel = useCallback(() => {
+
+    }, [])
+
+
+    const userBrowseDeleteChannelSettingUseCase = useCallback((record: ChannelTagVO) => {
+        modal.confirm({
+            title: "确认要删除此笔数据吗?",
+            // NOTICE: 得用下面寫法否則 editID 會找不到
+            onOk: () => onDeleteModalOK(record.id),
+            // onOk: onDeleteModalOK,
+            onCancel: onDeleteModalCancel,
+        });
+    }, [])
+
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
     const systemInitalizeListUsecase = useCallback(() => {
@@ -92,7 +123,7 @@ export const AppManagePage = () => {
                             userBrowseEditChannelSettingUseCase(record);
                         }}>修改</a>,
                         <a key="deletable" onClick={() => {
-                            // userBrowseDeleteChannelSettingUseCase(record)
+                            userBrowseDeleteChannelSettingUseCase(record)
                         }}>刪除</a>,
                     ]
                 },
@@ -321,6 +352,9 @@ export const AppManagePage = () => {
                     <AppManageForm isEdit={showModalContent.isEdit} form={form} initialValues={formInitialValues} onFieldsChange={onFormFieldsChange} onFinish={onFormFinish}
                                    taxCardOcrList={taxCardOcrList} idCardOcrList={idCardOcrList} liveDetectList={liveDetectList}/>
                 </AdminFormCustomModal>
+
+                {/*NOTICE: Delete Modal*/}
+                <div>{contextHolder}</div>
             </>
         </AdminPage>
     )
