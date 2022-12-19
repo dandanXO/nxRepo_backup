@@ -20,6 +20,8 @@
         "@ant-design/icons": "^4.7.0",
         "@ant-design/pro-components": "^2.3.12",
         "@reduxjs/toolkit": "^1.8.5",
+        "@sentry/react": "^7.27.0",
+        "@sentry/tracing": "^7.27.0",
         "@types/styled-components": "^5.1.26",
         "antd": "^4.23.2",
         "axios": "^0.19.2",
