@@ -19,6 +19,9 @@ export const MerchantPage = () => {
     }, []);
 
     const onFinish = (values: any) => {
+        if(isEdit && !values.password){
+            delete values.password;
+        }
         isEdit ? putMerchantEdit(values) : postMerchantCreate({ merchantId: values.merchantId, ...values });
         form.resetFields()
     };

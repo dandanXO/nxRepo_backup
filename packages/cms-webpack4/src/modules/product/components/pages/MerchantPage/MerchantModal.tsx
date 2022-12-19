@@ -35,16 +35,19 @@ const MerchantModal = (props: MerchantModalProps) => {
                         <Input allowClear />
                     </Form.Item>}
                     <Form.Item name="name" label="商户名" rules={[{ required: true }]}>
-                        <Input allowClear />
+                        <Input allowClear placeholder="商户名"/>
                     </Form.Item>
-                    <Form.Item name="password" label="商户密码" rules={[{ required: true }]}>
-                        <Input allowClear />
+                    <Form.Item name="mchNo" label="商户帐号" rules={[{ required: true }]} >
+                        <Input allowClear disabled={isEdit} placeholder="商户帐号"/>
+                    </Form.Item>
+                    <Form.Item name="password" label="商户密码" rules={[{ required: !isEdit }]}>
+                        <Input allowClear placeholder="商户密码"/>
                     </Form.Item>
                     <Form.Item name="contact" label="联系电话" rules={[{ required: true }]}>
-                        <Input allowClear />
+                        <Input allowClear placeholder="联系电话"/>
                     </Form.Item>
                     <Form.Item name="email" label="电子邮箱">
-                        <Input allowClear />
+                        <Input allowClear placeholder="mail@mail.com"/>
                     </Form.Item>
                     <Form.Item name="enabled" label="状态">
                         <Radio.Group >
