@@ -6,6 +6,69 @@ import Cookies from 'js-cookie';
 import { getLoginInfo, axios, getAdminUserInfo, userLogout } from 'utils';
 import styles from './GoogleAuth.less';
 
+// NOTE: /hs/admin/auth/getInfo
+// Response
+// NOTE: res
+// {
+//   "showDownLoanBtn":"1",
+//   "code":200,
+//   "appName":"测试用",
+//   "data":{
+//   "collectGroupId":0,
+//     "lastLogin":0,
+//     "addTime":1670381505,
+//     "lastIp":"",
+//     "collectTeamId":0,
+//     "googleAuthKey":"",
+//     "departmentId":1,
+//     "googleAuthFlag":1,
+//     "isOnline":0,
+//     "enabled":1,
+//     "phoneNo":"12341234",
+//     "trueName":"Eric",
+//     "password":"andy5412",
+//     "passwordLogin":0,
+//     "merchantId":5,
+//     "isLocked":0,
+//     "id":35,
+//     "stationId":0,
+//     "deptManager":false,
+//     "salt":"1",
+//     "roleId":30,
+//     "skinName":"",
+//     "updateTime":{
+//     "dayOfWeek":"SATURDAY",
+//       "hour":19,
+//       "month":"DECEMBER",
+//       "dayOfMonth":17,
+//       "dayOfYear":351,
+//       "year":2022,
+//       "monthValue":12,
+//       "nano":0,
+//       "minute":1,
+//       "second":47
+//   },
+//   "userName":"eric",
+//     "loginCount":0,
+//     "token":"",
+//     "regionId":0
+// },
+//   "announcementsForCollectors":[
+//   "সতর্কীকরণ: কোন ধরনের ফটোশপ অথবা অকথ্য ভাষায় গালাগালি করলে সাথে সাথে চাকরীচ্যুত করা হবে",
+//   "Waning: No photoshop, No abuse! Termination will be conducted immediately when you done this."
+// ],
+//   "riskPlan":"C"
+// }
+
+// NOTE: /hs/admin/auth/getGoogleAuthQRCode
+// NOTE: res
+// {
+//   "code":200,
+//   "appName":"测试用",
+//   "googleAuthUrl":"https://chart.googleapis.com/chart?chs=200x200&chld=M%7C0&cht=qr&chl=otpauth://totp/12341234@测试用%3Fsecret%3DIBV74LNWMG3BBINP"
+// }
+
+
 class GoogleAuth extends Component{
 
     constructor(props){
@@ -26,7 +89,7 @@ class GoogleAuth extends Component{
           method: 'post'
         })
         let { data } = res;
-        if(res && res.code == '200') {
+        if(res && String(res.code) == "200") {
           Cookies.set("adminUser", JSON.stringify(data))
         }
         const hasGoogleKey = data.googleAuthKey;
