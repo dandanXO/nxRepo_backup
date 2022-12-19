@@ -67,7 +67,7 @@ export function IndexPage() {
             <Link to="/sms-config"><a>SMS Config</a></Link>
         </div>
 
-        <button onClick={() => methodDoesNotExist()}>Test Sentry - Break the world</button>;
+        {/*<button onClick={() => methodDoesNotExist()}>Test Sentry - Break the world</button>;*/}
 
     </div>
   );
