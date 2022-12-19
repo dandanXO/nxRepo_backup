@@ -30,7 +30,7 @@ export const AppManageForm = (props: AppManageFormProps) => {
             <Form.Item label="APP名稱" name={"appName"} rules={[{ required: true }]}
                 extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
             >
-                <Input placeholder={"APP名稱"}/>
+                <Input placeholder={"APP名稱"} disabled={props.isEdit}/>
             </Form.Item>
 
             <Form.Item label="PackageID" name={"packageId"} rules={[{ required: true }]}
