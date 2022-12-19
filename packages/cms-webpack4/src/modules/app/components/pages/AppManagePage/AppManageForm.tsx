@@ -6,7 +6,7 @@ const { Text } = Typography;
 const { Option } = Select;
 import {AdminForm, AdminFormProps} from "../../../../shared/components/AdminForm";
 import {Switch} from "antd";
-import {AppConfiguration} from "../../../service/appManage/domain/AppConfiguration";
+import {AppConfiguration} from "../../../services/appManage/domain/AppConfiguration";
 import "./style.less";
 
 type AppManageFormProps = {

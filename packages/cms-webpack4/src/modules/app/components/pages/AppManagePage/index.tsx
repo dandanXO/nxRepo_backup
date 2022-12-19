@@ -6,14 +6,14 @@ import {AdminFormCustomModal} from "../../../../shared/components/AdminFormCusto
 import {useForm} from "antd/es/form/Form";
 import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import AdminPage from "../../../../shared/components/AdminPage";
-import {AppConfigurationListItem} from "../../../service/appManage/domain/AppConfigurationListItem";
+import {AppConfigurationListItem} from "../../../services/appManage/domain/AppConfigurationListItem";
 import {
     useCreateAppConfigurationMutation,
     useDeleteAppConfigurationMutation,
     useLazyGetAllAppConfigurationQuery,
     useLazyGetAppConfigurationQuery,
     useUpdateAppConfigurationMutation
-} from "../../../service/appManage/AppManageApi";
+} from "../../../services/appManage/AppManageApi";
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 import {AppManageForm} from "./AppManageForm";
 import {ChannelTagVO} from "../../../../channel/domain/vo/ChannelTagVO";
