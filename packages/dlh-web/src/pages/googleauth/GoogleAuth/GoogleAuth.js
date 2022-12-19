@@ -26,7 +26,7 @@ class GoogleAuth extends Component{
           method: 'post'
         })
         let { data } = res;
-        if(res && res.code == '200') {
+        if(res && String(res.code) == "200") {
           Cookies.set("adminUser", JSON.stringify(data))
         }
         const hasGoogleKey = data.googleAuthKey;
