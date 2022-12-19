@@ -14,9 +14,14 @@ import {CustomAntFormFieldError} from "../../../../shared/utils/validation/Custo
 import {UpdateChannelRequest} from "../../../../channel/service/request/UpdateChannelRequest";
 import AdminPage from "../../../../shared/components/AdminPage";
 import {AppConfigurationListItem} from "../../../service/appManage/domain/AppConfigurationListItem";
-import {useLazyGetAllAppConfigurationQuery} from "../../../service/appManage/AppManageApi";
+import {
+    useCreateAppConfigurationMutation,
+    useLazyGetAllAppConfigurationQuery,
+    useLazyGetAppConfigurationQuery, useUpdateAppConfigurationMutation
+} from "../../../service/appManage/AppManageApi";
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 import {AppManageForm} from "./AppManageForm";
+import {optional} from "zod";
 
 const i18n = {
     "AppManagePage": {
@@ -24,6 +29,27 @@ const i18n = {
         modalTitle: "APP配置",
     }
 }
+export const idCardOcrList = [
+    "NONE",
+    "ACCUAUTH",
+    "ADV_IQA",
+    "ADV_IQC",
+    "GCT",
+]
+export const liveDetectList = [
+    "NONE",
+    "ACCUAUTH",
+    "ADVANCE",
+    "GCT",
+]
+export const taxCardOcrList = [
+    "NONE",
+    "ACCUAUTH",
+    "ADV_IQA",
+    "ADV_IQC",
+    "GCT",
+]
+
 export const AppManagePage = () => {
     // NOTICE: Action: List
     // NOTE: Table
@@ -159,7 +185,15 @@ export const AppManagePage = () => {
     const formInitialValues = useMemo(() => {
         // NOTE: select and switch need initialValue if you want to select one
         return {
-            enabled: true
+            showNbfc: true,
+            loginFirst: true,
+            kycFirst: false,
+            showPermission: true,
+            showTermAndCondition: true,
+            showPartnership: false,
+            taxCardOcr: taxCardOcrList[0],
+            liveDetect: liveDetectList[0],
+            idCardOcr: idCardOcrList[0],
         } as DeepPartial<{}>;
     }, [])
 
@@ -182,14 +216,9 @@ export const AppManagePage = () => {
 
         // NOTICE: MODE - Edit
         if(showModalContent.isEdit) {
-            fields = {
-                id: editID,
-                modelId: fields.modelId,
-                name: fields.name,
-                enabled: fields.enabled,
-            } as UpdateChannelRequest;
+            fields['id'] = editID;
+            delete fields['packageId'];
         }
-        fields["enabled"] = fields.enabled ? 1 : 0;
 
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
@@ -215,8 +244,8 @@ export const AppManagePage = () => {
     }, [showModalContent.isEdit, editID])
 
     // NOTE: POST , PUT and DELETE
-    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateChannelMutation();
-    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = useUpdateChannelMutation();
+    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateAppConfigurationMutation();
+    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = useUpdateAppConfigurationMutation();
 
     // Form - Validation
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
@@ -235,7 +264,7 @@ export const AppManagePage = () => {
             id: record.id,
         });
     }, []);
-    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetChannelQuery();
+    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetAppConfigurationQuery();
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
@@ -282,13 +311,15 @@ export const AppManagePage = () => {
                     onFormResetCallback={onFormResetCallback}
                 />
                 <AdminFormCustomModal
+                    width={"600px"}
                     title={i18n.AppManagePage.modalTitle}
                     showModalContent={showModalContent}
                     setShowModalContent={setShowModalContent}
                     onOk={onModalOk}
                     onCloseModal={onCloseModal}
                 >
-                    <AppManageForm isEdit={showModalContent.isEdit} form={form} initialValues={formInitialValues} onFieldsChange={onFormFieldsChange} onFinish={onFormFinish}/>
+                    <AppManageForm isEdit={showModalContent.isEdit} form={form} initialValues={formInitialValues} onFieldsChange={onFormFieldsChange} onFinish={onFormFinish}
+                                   taxCardOcrList={taxCardOcrList} idCardOcrList={idCardOcrList} liveDetectList={liveDetectList}/>
                 </AdminFormCustomModal>
             </>
         </AdminPage>
