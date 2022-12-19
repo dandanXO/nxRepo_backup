@@ -36,9 +36,10 @@ class SettleOrderList extends Component {
             isSuperAdmin,
             allMerchants
         };
+        this.initTime = [moment().subtract(7, 'days'), moment()];
         this.searchParams = {
-            endDate: '', mchId: '', mchNo: '', orderNo: '', pageNum: 1, pageSize: 10, phoneNo: '',
-            platId: '', platOrderId: '', productName: '', startDate: '', status: '', userName: '', merchantId: ''
+            startDate: this.initTime[0].format('YYYY-MM-DD 00:00:00'), endDate: this.initTime[1].format('YYYY-MM-DD 23:59:59'),
+            mchId: '', mchNo: '', orderNo: '', pageNum: 1, pageSize: 10, phoneNo: '', platId: '', platOrderId: '', productName: '', status: '', userName: '', merchantId: ''
         };
         this.pageSize = 10;
         this.pageNum = 1;
@@ -442,31 +443,15 @@ class SettleOrderList extends Component {
     handleSearch = (obj) => {
         let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime, dlhMerchantId = '' } = obj;
         const { getTableData } = this.props;
-        let startDate = '', endDate = '';
-        if(Array.isArray(time)) {
-            [startDate, endDate] = time.map(item => item.format('YYYY-MM-DD'));
-            if(!!startDate){
-                startDate += ' 00:00:00';
-            }
-            if(!!endDate){
-                endDate += ' 23:59:59';
-            }
-        }
-
-        let startFinishDate = '', endFinishDate = '';
-        if(Array.isArray(finishTime)) {
-            [startFinishDate, endFinishDate] = finishTime.map(item => item.format('YYYY-MM-DD'));
-            if(!!startFinishDate){
-                startFinishDate += ' 00:00:00';
-            }
-            if(!!endFinishDate){
-                endFinishDate += ' 23:59:59';
-            }
-        }
-
-        const params = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, dlhMerchantId, pageSize: 10, pageNum: 1 };
-        this.searchParams = params;
-        getTableData(params);
+        const isTimeArr = Array.isArray(time) && time.length > 0;
+        const isfinishTimeArr = Array.isArray(finishTime) && finishTime.length > 0;
+        let startDate = isTimeArr ? time[0].format('YYYY-MM-DD 00:00:00') : '';
+        let endDate = isTimeArr ? time[1].format('YYYY-MM-DD 23:59:59') : '';
+        let startFinishDate = isfinishTimeArr ? finishTime[0].format('YYYY-MM-DD 00:00:00') : ''; 
+        let endFinishDate = isfinishTimeArr ? finishTime[1].format('YYYY-MM-DD 23:59:59') : '';
+ 
+        this.searchParams = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, dlhMerchantId, pageSize: 10, pageNum: 1 };
+        getTableData(this.searchParams);
     }
 
     handlePageChange = (pagination) => {
@@ -521,7 +506,15 @@ class SettleOrderList extends Component {
         const { allSettlePlatList,allSettleMchList,btnDisabled  } = this.state;
         return (
             <div>
-                <SearchList allSettlePlatList={allSettlePlatList} allSettleMchList={allSettleMchList} OrderStatus={OrderStatus} handleSearch={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList
+                    initTime={this.initTime}
+                    allSettlePlatList={allSettlePlatList}
+                    allSettleMchList={allSettleMchList}
+                    OrderStatus={OrderStatus}
+                    handleSearch={this.handleSearch}
+                    isSuperAdmin={this.state.isSuperAdmin}
+                    allMerchants={this.state.allMerchants}
+                />
                 <Button type={'danger'} disabled={btnDisabled} onClick={this.exportSettleOrder}><FormattedMessage id="page.table.export" /></Button>
                 <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading}/>
                 <EditModel visible={visible} allSettlePlatList={allSettlePlatList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk}/>
