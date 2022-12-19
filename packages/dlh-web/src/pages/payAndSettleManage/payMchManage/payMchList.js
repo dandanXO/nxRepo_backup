@@ -56,7 +56,6 @@ class PayMchList extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.repayement.platfrom" }),
                 dataIndex: 'platId',
                 key: 'platId',
-                width: 200,
                 render(text) {
                     let showStr = '';
                     if (!!text) {
@@ -74,21 +73,18 @@ class PayMchList extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.collection.mchNo" }),
                 dataIndex: 'mchNo',
                 key: 'mchNo',
-                width: 200,
                 render(text) { return <CopyText text={text} /> }
             },
             {
                 title: props.intl.formatMessage({ id: "page.search.list.collection.mchName" }),
                 dataIndex: 'mchName',
                 key: 'mchName',
-                width: 200,
                 render(text) { return <CopyText text={text} /> }
             },
             {
                 title: props.intl.formatMessage({ id: "windowPage.payment.method" }),
                 dataIndex: 'openPayTypeList',
                 key: 'openPayTypeList',
-                width: 300,
                 render(text, record) {
                     let { allPayTypeList } = _this.state;
                     let showStr = '';
@@ -245,24 +241,13 @@ class PayMchList extends Component {
     }
 
     handleSearch = (obj) => {
-      console.log("obj", obj)
         let { time, platId, mchNo, mchName, dlhMerchantId = '' } = obj;
         const { getTableData } = this.props;
-        let startDate = '', endDate = '';
-        if (Array.isArray(time)) {
-            [startDate, endDate] = time.map(item => item.format('YYYY-MM-DD'));
-            if (!!startDate) {
-                startDate += ' 00:00:00';
-            }
-            if (!!endDate) {
-                endDate += ' 23:59:59';
-            }
-        }
-
-        const params = { platId, mchNo, mchName, startDate, endDate, dlhMerchantId, pageSize: this.pageSize, pageNum: 1 };
-        this.searchParams = params;
-        console.log("params", params);
-        getTableData(params);
+        const isTimeArr = Array.isArray(time) && time.length > 0;
+        let startDate = isTimeArr ? time[0].format('YYYY-MM-DD 00:00:00') : '';
+        let endDate = isTimeArr ? time[1].format('YYYY-MM-DD 23:59:59') : '';
+        this.searchParams = { platId, mchNo, mchName, startDate, endDate, dlhMerchantId, pageSize: this.pageSize, pageNum: 1 };
+        getTableData(this.searchParams);
     }
 
     handlePageChange = (pagination) => {
@@ -292,7 +277,7 @@ class PayMchList extends Component {
             }).then((res) => {
                 if(res && res.code == '200') {
                     let { data: { content }} = res;
-                    content = content.map(item => ({ id: item.id, pId: 0, value: item.id + '', label: item.typeName+'('+item.typeAlias+')' }));
+                    content = content.map(item => ({ id: item.id, pId: 0, value: item.id + '', label: item.typeName }));
                     _this.setState({
                         allPayTypeList: content || []
                     });
@@ -334,7 +319,7 @@ class PayMchList extends Component {
                     allMerchants={this.state.allMerchants}
                 />
                 <Button type={'primary'} onClick={this.handleAddModel}><FormattedMessage id="page.table.add" /></Button>
-                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading} scroll={{x:'100%'}}/>
+                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading}/>
                 <EditModel
                     visible={visible}
                     allPayPlatList={allPayPlatList}

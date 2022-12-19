@@ -31,7 +31,7 @@ class EditModel extends Component{
     }
 
     render() {
-        const { visible, form: { getFieldDecorator }, allPayTypeList, intl } = this.props;
+        const { visible, form: { getFieldDecorator }, allPayTypeList, intl ,info} = this.props;
 
         return (
             <Modal
@@ -52,15 +52,15 @@ class EditModel extends Component{
                                 )
                             }
                         </Form.Item>
-                        <Form.Item label={intl.formatMessage({id : "page.search.list.platform.type"})} {...this.layout}>
+                        {info.platClass === '' && <Form.Item label={intl.formatMessage({ id: "page.search.list.platform.type" })} {...this.layout}>
                             {
                                 getFieldDecorator('platClass', {
-                                    rules: [{ required: true, message: intl.formatMessage({id : "windowPage.remarks.empty"})}]
+                                    rules: [{ required: true, message: intl.formatMessage({ id: "windowPage.remarks.empty" }) }]
                                 })(
-                                    <Input disabled={false} placeholder={intl.formatMessage({id : "page.search.list.platform.type.enter"})}/>
+                                    <Input disabled={false} placeholder={intl.formatMessage({ id: "page.search.list.platform.type.enter" })} />
                                 )
                             }
-                        </Form.Item>
+                        </Form.Item>}
                         <Form.Item label={intl.formatMessage({id : "windowPage.request.gateway.address"})} {...this.layout}>
                             {
                                 getFieldDecorator('reqGateway', {
@@ -144,7 +144,7 @@ export default Form.create({
                 value: info['payTypeList']
             }),
             payTypeIds: Form.createFormField({
-                value: info['payTypeIds'] || []
+                value: info['payTypeIds'] ||[]
             })
         }
     }
