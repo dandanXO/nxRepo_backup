@@ -32,7 +32,7 @@ class SearchList extends Component{
   
 
     render() {
-        const { allPayPlatList,allPayMchList,OrderStatus,form: { getFieldDecorator  } , intl,isSuperAdmin } = this.props;
+        const { allPayPlatList, allPayMchList, OrderStatus, form: { getFieldDecorator }, intl, isSuperAdmin, initTime } = this.props;
         let statusList = [];
         for(let key in OrderStatus){
             statusList.push({key:key,label:OrderStatus[key]});
@@ -172,12 +172,10 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.table.crete.time"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.crete.time" })}>
                                 {
-                                    getFieldDecorator('time', {
-                                        initialValue: []
-                                    })(
-                                        <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]} allowClear={true} />
+                                    getFieldDecorator('time', { initialValue: initTime })(
+                                        <RangePicker placeholder={[intl.formatMessage({ id: "page.search.list.select" }), intl.formatMessage({ id: "page.search.list.select" })]} allowClear={true} />
                                     )
                                 }
                             </Form.Item>
