@@ -99,7 +99,7 @@ export const AppManagePage = () => {
     }, [])
 
 
-    const userBrowseDeleteChannelSettingUseCase = useCallback((record: ChannelTagVO) => {
+    const userBrowseDeleteChannelSettingUseCase = useCallback((record: AppConfigurationListItem) => {
         modal.confirm({
             title: "确认要删除此笔数据吗?",
             // NOTICE: 得用下面寫法否則 editID 會找不到
