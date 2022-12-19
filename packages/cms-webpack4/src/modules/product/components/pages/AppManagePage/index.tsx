@@ -337,9 +337,20 @@ export const AppManagePage = () => {
                     addText={i18n.AppManagePage.add}
                     onAddCallback={onAddItem}
                     setShowModalContent={setShowModalContent}
-                    isSearchFromClient={false}
                     onFormSearchCallback={onFormSearch}
                     onFormResetCallback={onFormResetCallback}
+                    isSearchFromClient={true}
+                    onSearchClick={(searchInputKeys: any) => {
+                        // console.log("searchInputKeys", searchInputKeys);
+                        let temp = currentTableListData;
+                        Object.keys(searchInputKeys).map(key => {
+                            let searchInputValue = searchInputKeys[key]
+                            if(searchInputValue !== "") {
+                                temp = temp.filter(item => item[key] === searchInputValue);
+                            }
+                        })
+                        return temp;
+                    }}
                 />
                 <AdminFormCustomModal
                     width={"600px"}

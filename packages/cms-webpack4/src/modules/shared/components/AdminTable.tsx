@@ -20,7 +20,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     tableHeaderColumns:  ProColumns<TableListItemDataType, "text">[];
     loading?: boolean;
     tableDatasource: TableListItemDataType[];
-    onSearchClick?: (props: any) => TableListItemDataType[];
+    onSearchClick?: (searchInputKeys: any) => TableListItemDataType[];
     setShowModalContent?: React.Dispatch<React.SetStateAction<ModalContent>>;
     hasAddForm: boolean;
     hasEditForm?: boolean;
