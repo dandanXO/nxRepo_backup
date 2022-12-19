@@ -19,7 +19,8 @@ class PayPlatList extends Component {
         super(props);
         this.state = {
             modelId: null,
-            allPayTypeList:[]
+            platClass: '',
+            allPayTypeList: []
         };
         const _this = this;
         this.columns =[
@@ -28,15 +29,10 @@ class PayPlatList extends Component {
                 dataIndex: 'platName',
                 key: 'platName', render(text) { return <CopyText text={text} /> } 
             },{
-                title: props.intl.formatMessage({id : "page.search.list.platform.type"}),
-                dataIndex: 'platClass',
-                key: 'platClass',
-                render(text) { return <CopyText text={text} /> } 
-            },{
                 title: props.intl.formatMessage({id : "page.table.supoort.repayment.method"}),
                 dataIndex: 'payTypeList',
                 key: 'payTypeList',
-                width:'30%',
+                // width:'30%',
                 render(text,record) {
                     let { allPayTypeList } = _this.state;
                     let showStr = '';
@@ -74,6 +70,7 @@ class PayPlatList extends Component {
                 title: props.intl.formatMessage({id : "page.table.operation"}),
                 dataIndex: 'id',
                 key: 'id',
+                width:'10%',
                 render(text, record) {
                     return (
                         <div className={styles.recordWrapper}>
@@ -88,23 +85,23 @@ class PayPlatList extends Component {
                 }
             },
         ];
-        this.searchParams = {};
+        this.searchParams = { startDate: '', endDate: '', platName: '', pageSize: 10, pageNum: 1 };
     }
 
     //添加
     handleAddModel = () => {
         const { changeModalVisible, changeModalInfo, info } = this.props;
-        this.setState({ modelId: null });
+        this.setState({ modelId: null, platClass: '' });
         changeModalVisible(true);
-        changeModalInfo({  plateName: '', platClass: '', });
+        changeModalInfo({ plateName: '', platClass: '' });
     }
     //修改
     modifyModel = (record) => {
-        const { id,platName,platClass,reqGateway,payGateway,payTypeList} = record;
+        const { id, platName, platClass, reqGateway, payGateway, payTypeList } = record;
         const { changeModalVisible, changeModalInfo, info } = this.props;
-        this.setState({ modelId: id });
+        this.setState({ modelId: id, platClass: platClass });
         let payTypeIds = payTypeList.split(',');
-        changeModalInfo({ platName,platClass,reqGateway,payGateway,payTypeList,payTypeIds });
+        changeModalInfo({ platName, platClass, reqGateway, payGateway, payTypeList, payTypeIds });
         changeModalVisible(true);
     }
     //删除
@@ -128,40 +125,31 @@ class PayPlatList extends Component {
     }
 
     handleModalOk = (obj) => {
-        const { modelId } = this.state;
+        const { modelId, platClass } = this.state;
         const { addChannel, updateChannel } = this.props;
 
         const { payTypeIds } = obj;
         let ids = [''];
-        if(Array.isArray(payTypeIds)) {
+        if (Array.isArray(payTypeIds)) {
             ids = [...payTypeIds];
         }
         obj.payTypeList = ids.join(',');
 
-        if(modelId) {
-            updateChannel({ ...obj, id: modelId });
+        if (modelId) {
+            updateChannel({ ...obj, id: modelId, platClass });
             return;
         }
         addChannel(obj);
     }
 
     handleSearch = (obj) => {
-        let { time, platName, platClass } = obj;
+        let { time, platName, platClass = '' } = obj;
         const { getTableData } = this.props;
-        let startDate = '', endDate = '';
-        if(Array.isArray(time)) {
-            [startDate, endDate] = time.map(item => item.format('YYYY-MM-DD'));
-            if(!!startDate){
-                startDate += ' 00:00:00';
-            }
-            if(!!endDate){
-                endDate += ' 23:59:59';
-            }
-        }
-        
-        const params = { platName, platClass, startDate, endDate, pageSize: 10, pageNum: 1 };
-        this.searchParams = params;
-        getTableData(params);
+        const isTimeArr = Array.isArray(time) && time.length > 0;
+        let startDate = isTimeArr ? time[0].format('YYYY-MM-DD 00:00:00') : '';
+        let endDate = isTimeArr ? time[1].format('YYYY-MM-DD 23:59:59') : '';
+        this.searchParams = { platName, platClass, startDate, endDate, pageSize: 10, pageNum: 1 };
+        getTableData(this.searchParams);
     }
     
     handlePageChange = (pagination) => {
@@ -172,7 +160,7 @@ class PayPlatList extends Component {
 
     componentDidMount() {
         const { getTableData } = this.props;
-        getTableData({ pageSize: 10, pageNum: 1 });
+        getTableData(this.searchParams);
 
         try {
             const _this = this;
@@ -183,7 +171,7 @@ class PayPlatList extends Component {
             }).then((res) => {
                 if(res && res.code == '200') {
                     let { data: { content }} = res;
-                    content = content.map(item => ({ id: item.id, pId: 0, value: item.id + '', label: item.typeName+'('+item.typeAlias+')' }));
+                    content = content.map(item => ({ id: item.id, pId: 0, value: item.id + '', label: item.typeName }));
                     _this.setState({
                         allPayTypeList: content || []
                     });
