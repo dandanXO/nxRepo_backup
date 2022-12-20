@@ -18,9 +18,6 @@ const getParams = () => {
         payType: {
             value: '1'
         },
-        payName: {
-            value: '1'
-        },
         totalMoney: {
             value: 0.01
         },
@@ -30,9 +27,7 @@ const getParams = () => {
         payTime: {
             value: moment()
         },
-        remark: {
-            value: ''
-        }
+        remark: ''
     };
 }
 
@@ -146,7 +141,7 @@ class AddRefund extends Component {
     }
 
     showModal = (record) => {
-        const { orderNo, userTrueName, userPhone, needPayMoney,reductionMoney, hadPaidMoney,remainderMoney, status } = record;
+        const { orderNo, userTrueName, userPhone, needPayMoney,reductionMoney, hadPaidMoney,remainderMoney, status  } = record;
         const { changeModalVisible } = this.props;
         this.selectOrderNo = orderNo;
         this.setState({

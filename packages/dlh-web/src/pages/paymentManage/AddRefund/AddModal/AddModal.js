@@ -121,16 +121,6 @@ class AddModal extends Component{
                             )
                         }
                     </FormItem>
-                    <FormItem label={intl.formatMessage({id : "windowPage.repayment.method"})} {...this.layout}>
-                        {
-                            getFieldDecorator('payName', {})(
-                                <RadioGroup>
-                                    <Radio value={'1'}><FormattedMessage id="windowPage.alipay" /></Radio>
-                                    <Radio value={'3'}><FormattedMessage id="windowPage.weChat.pay" /></Radio>
-                                </RadioGroup>
-                            )
-                        }
-                    </FormItem>
                     <Form.Item {...this.layout} label={intl.formatMessage({id : "windowPage.repayment.amount"})}>
                         {
                             getFieldDecorator('totalMoney', {
@@ -152,7 +142,8 @@ class AddModal extends Component{
                                 rules: [
                                     { required: true, message: intl.formatMessage({id : "windowPage.remarks.empty"})},
                                     // { whitespace: true, message: '交易流水号不能出现空白' }
-                                ]
+                                ],
+                                
                             })(
                                 <Input placeholder={intl.formatMessage({id : "page.search.list.trans.serial.no.enter"})}/>
                             )
@@ -206,10 +197,6 @@ export default Form.create({
             payType: Form.createFormField({
                 ...info['payType'],
                 value: info['payType'].value
-            }),
-            payName: Form.createFormField({
-                ...info['payName'],
-                value: info['payName'].value
             }),
             totalMoney: Form.createFormField({
                 ...info['totalMoney'],
