@@ -52,29 +52,7 @@ const useLoanDetailStory = () => {
           reject(error);
         })
     })
-
-    // const handlePostRepayCreate = useCallback(
-    //     (
-    //         isExtend: boolean,
-    //         isForceApplyAfterRepay: true,
-    //         repayAmount: number,
-    //     ) => {
-    //         postRepayCreateRequest({
-    //             extend: isExtend,
-    //             forceApplyAfterRepay: isForceApplyAfterRepay,
-    //             orderNo: orderNo,
-    //             payType: repayTypes && repayTypes[payType].payType,
-    //             repayAmount: repayAmount,
-    //         });
-    //     },
-    //     [orderNo, payType, repayTypes]
-    // );
-  const handlePostRepayCreate =
-    (
-      isExtend: boolean,
-      isForceApplyAfterRepay: true,
-      repayAmount: number,
-    ) => {
+  const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: true, repayAmount: number) => {
       return postRepayCreateRequest({
         extend: isExtend,
         forceApplyAfterRepay: isForceApplyAfterRepay,
