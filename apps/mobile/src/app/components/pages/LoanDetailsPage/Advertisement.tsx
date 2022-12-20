@@ -31,27 +31,25 @@ const Advertisement = (props: AdvertisementProps) => {
     const [showSubmitOrderSuccessModal, setShowSubmitOrderSuccessModal] =
         useState(false);
 
-    const postLoanSubmitOrderRequest = useCallback(
-        (requestBody: PostLoanSubmitOrderRequestBody) => {
-          props.postLoanSubmitOrder(requestBody)
-                .unwrap()
-                .then(() => {
-                    setShowSubmitOrdereModal(false);
-                    setShowSubmitOrderSuccessModal(true);
-                })
-                .catch(({ }) => {
-                    setShowSubmitOrdereModal(false);
-                })
-                .finally(() => {});
-        },
-        []
-    );
+    const postLoanSubmitOrderRequest = (requestBody: PostLoanSubmitOrderRequestBody): Promise<string> => new Promise((resolve, reject) => {
+        props.postLoanSubmitOrder(requestBody)
+          .unwrap()
+          .then(() => {
+            setShowSubmitOrdereModal(false);
+            setShowSubmitOrderSuccessModal(true);
+            resolve("");
+          })
+          .catch((error: any) => {
+            setShowSubmitOrdereModal(false);
+            reject("error")
+          })
+    });
 
-    const handleLoanSubmitOrder = useCallback((productId: number) => {
-        postLoanSubmitOrderRequest({
+    const handleLoanSubmitOrder = (productId: number): Promise<string> => {
+        return postLoanSubmitOrderRequest({
             productId: productId,
         });
-    }, []);
+    };
 
     return (
         <div>
