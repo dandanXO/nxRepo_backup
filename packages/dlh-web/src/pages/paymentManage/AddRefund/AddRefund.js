@@ -27,7 +27,9 @@ const getParams = () => {
         payTime: {
             value: moment()
         },
-        remark: ''
+        remark: {
+            value: ''
+        },
     };
 }
 
