@@ -20,23 +20,23 @@ class DepartmentManage extends Component{
         this.modifyId = '';
         this.columns = [
             { title: props.intl.formatMessage({id : "page.search.list.department.name"}), dataIndex: 'name', key: 'name' ,width:'30%'},
-            {
-                title: props.intl.formatMessage({id : "page.table.in-charge.person"}),
-                dataIndex: 'userName',
-                key: 'userName',
-                width:'25%',
-                render(text, record) {
-                    const { roleName } = record;
-                    if(!text) {
-                        return '';
-                    }
-                    return (
-                        <div>
-                            <span>{text}</span>(<span>{roleName}</span>)
-                        </div>
-                    );
-                }
-            },
+            // {
+            //     title: props.intl.formatMessage({id : "page.table.in-charge.person"}),
+            //     dataIndex: 'userName',
+            //     key: 'userName',
+            //     width:'25%',
+            //     render(text, record) {
+            //         const { roleName } = record;
+            //         if(!text) {
+            //             return '';
+            //         }
+            //         return (
+            //             <div>
+            //                 <span>{text}</span>(<span>{roleName}</span>)
+            //             </div>
+            //         );
+            //     }
+            // },
             { title: props.intl.formatMessage({id : "windowPage.remarks"}), dataIndex: 'remark', key: 'remark' },
             { title: props.intl.formatMessage({id : "page.table.superior.department"}), dataIndex: 'parentName', key: 'parentName' },
             {
