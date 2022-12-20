@@ -15,5 +15,6 @@ const ProviderListApi = API.injectEndpoints({
     })
 })
 export const {
-    useGetProviderListQuery
+    useGetProviderListQuery,
+    useLazyGetProviderListQuery
 } = ProviderListApi;

@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
 import moment from 'moment';
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
-import useValuesEnums from '../../../shared/hooks/useValuesEnums';
-import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
 import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/OrderTypes/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
@@ -13,11 +11,15 @@ import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
 import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
+import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
+import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
+import useGetProviderEnum from '../../../shared/hooks/useGetProviderEnum';
 const OrderTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    const { channelListEnum, providerListEnum } = useValuesEnums();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
+    const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
+    const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
     const initSearchList = {
         merchantName:'', appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '',
         loanTimeEnd: '', loanTimeStart: '', orderNo: '', productName: '', rcProvider: '', status: '', userPhone: '', userTrueName: '', pageNum: 1, pageSize: 10
@@ -38,10 +40,15 @@ const OrderTable = () => {
 
     useEffect(() => {
         triggerGetList(searchList);
-        if(isSuperAdmin){
-            triggerGetMerchantList(null)
-        };
     }, [searchList])
+
+    useEffect(() => {
+        if(isSuperAdmin){
+            triggerGetMerchantList(null);
+            triggerGetChannelList(null);
+            triggerGetProviderList(null);
+        };
+    }, [isSuperAdmin])
 
     useEffect(() => {
         if (currentData !== undefined) {
@@ -97,8 +104,6 @@ const OrderTable = () => {
                 false: { text: '否' },
             },
         },
-        { title: '申请渠道', dataIndex: 'channelId', valueType: 'select', key: 'channelId', valueEnum: channelListEnum, initialValue: searchParams.channelId || '', hideInTable: true },
-        { title: '申请渠道', dataIndex: 'channelName', valueType: 'select', key: 'channelName', hideInSearch: true },
         { title: 'APP名称', dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || "", render: (text) => <CopyText text={text} /> },
         { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "" , render: (text) => <CopyText text={text} />},
         {
@@ -140,13 +145,21 @@ const OrderTable = () => {
                 false: { text: '否' },
             },
         },
-        { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.rcProvider || "", valueEnum: providerListEnum,},
+        
     ]
-    if(isSuperAdmin){
-        columns.splice(1,0,{
-            title: '商户名', dataIndex: 'merchantName',  key: 'merchantName',  valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantName || '',
+    if (isSuperAdmin) {
+        columns.splice(1, 0, {
+            title: '商户名', dataIndex: 'merchantName', key: 'merchantName', valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantName || '',
             width: ProColumnsOperationConstant.width["2"],
         })
+        columns.splice(6, 0,
+            { title: '申请渠道', dataIndex: 'channelId', valueType: 'select', key: 'channelId', valueEnum: channelListEnum, initialValue: searchParams.channelId || '', hideInTable: true },
+            { title: '申请渠道', dataIndex: 'channelName', valueType: 'select', key: 'channelName', hideInSearch: true }
+        )
+        columns.push(
+            { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.rcProvider || "", valueEnum: providerListEnum,}
+        )
+        
     }
 
     return (

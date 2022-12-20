@@ -13,10 +13,18 @@ import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
 import CopyText from '../../../shared/components/CopyText';
 import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
+import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
+import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
+import useGetProviderEnum from '../../../shared/hooks/useGetProviderEnum';
 const OrderReviewTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    const { channelListEnum, riskRankEnum, providerListEnum ,merchantListEnum} = useValuesEnums();
+
+    // Hooks
+    const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
+    const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
+    const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
+
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetOrderReviewListQuery({
         pollingInterval: 0,
@@ -43,6 +51,14 @@ const OrderReviewTable = () => {
     useEffect(() => {
         triggerGetList(searchList);
     }, [searchList,postOrderReviewIsSuccess])
+
+    useEffect(() => {
+        if(isSuperAdmin){
+            triggerGetMerchantList(null);
+            triggerGetChannelList(null);
+            triggerGetProviderList(null);
+        };
+    }, [isSuperAdmin])
 
     useEffect(() => {
         setButtonDisbaled(selectedList.length > 0 ? false : true);
@@ -113,6 +129,16 @@ const OrderReviewTable = () => {
         onSelectChange(selectArray);
     }
 
+    // 风控标签
+    const riskRankEnum = {
+        '': { text: '不限', color: '' },
+        'EXCELLENT': { text: '极好', color: 'green' },
+        'NORMAL': { text: '正常', color: 'blue' },
+        'ORDINARY': { text: '普通', color: 'gold' },
+        'REJECT': { text: '拒绝', color: 'lightGray' },
+        'GOOD': { text: '良好', color: 'orange' },
+    }
+
     const columns: ProColumns<OrderReviewListResponse>[] = [
         {
             title: '操作',
@@ -134,11 +160,9 @@ const OrderReviewTable = () => {
                 false: { text: '否' },
             },
         },
-        { title: '申请渠道', dataIndex: 'applyChannel', valueType: 'select',  key: 'applyChannel', valueEnum: channelListEnum, initialValue:searchParams.applyChannel || ''},
         { title: 'APP名称', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} />},
         { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "", render: (text) => <CopyText text={text} />  },
         { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
-        { title: '风控应用', dataIndex: 'provider', valueType: 'select', key: 'provider', valueEnum: providerListEnum, initialValue: searchParams.provider || '' },
         {
             title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: {
                 true: { text: '是' },
@@ -159,11 +183,13 @@ const OrderReviewTable = () => {
 
     ]
 
-    if(isSuperAdmin){
-        columns.splice(1,0,{
-            title: '商户名', dataIndex: 'merchantName',  key: 'merchantName',  valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantName || '',
+    if (isSuperAdmin) {
+        columns.splice(1, 0, {
+            title: '商户名', dataIndex: 'merchantName', key: 'merchantName', valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantName || '',
             width: ProColumnsOperationConstant.width["2"],
         })
+        columns.splice(6, 0, { title: '申请渠道', dataIndex: 'applyChannel', valueType: 'select', key: 'applyChannel', valueEnum: channelListEnum, initialValue: searchParams.applyChannel || '' })
+        columns.splice(10, 0, { title: '风控应用', dataIndex: 'provider', valueType: 'select', key: 'provider', valueEnum: providerListEnum, initialValue: searchParams.provider || '' })
     }
     return (
         <ProTable<OrderReviewListResponse>
@@ -217,13 +243,13 @@ const OrderReviewTable = () => {
                             onClick={() => {
                                 // @ts-ignore
                                 const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantName } = form.getFieldValue();
-                                const merchant = merchantName ? merchantListEnum.get(merchantName)?.text : '';
+                                const merchant = merchantName ? merchantListEnum?.get(merchantName)?.text : '';
                                 setSearchList({
                                     ...initSearchList,
                                     addEndTime: addTimeRange ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addStartTime: addTimeRange ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     appName,
-                                    applyChannel: applyChannel === "" ? "" : channelListEnum[applyChannel].text,
+                                    applyChannel: applyChannel === "" ? "" : channelListEnum.get(applyChannel)?.text || "",
                                     phoneNo,
                                     oldMember,
                                     orderNo,

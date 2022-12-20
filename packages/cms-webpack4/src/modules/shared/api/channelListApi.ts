@@ -16,4 +16,5 @@ const ChannelListApi = API.injectEndpoints({
 })
 export const {
     useGetChannelListQuery,
+    useLazyGetChannelListQuery
 } = ChannelListApi;
