@@ -9,6 +9,7 @@ import GiftICONPng from "./limited_time_offer.png";
 import CloseICONPng from "./limited_time_offer_icon.png";
 import moment from "moment";
 import {RepayAndApplyButton, RepaymentButton, RepaymentModalContainer, SectionButton} from "../RepaymentModal";
+import {useLockRequest} from "../../../../../hooks/useLockRequest";
 
 
 const Brand = styled.div`
@@ -80,18 +81,19 @@ type RepaymentAdsModalProps = {
 }
 
 const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
-    // const [isRequestPending, setIsRequestPending] = useState(false);
+    const {startRequest, endRequest, isRequestPending} = useLockRequest("handlePostRepayCreate");
 
     const {t} = useTranslation(i18nRepaymentAdsModal.namespace);
 
-
     const handleConfirm = () => {
-      // if(isRequestPending) return;
-      // if(!isRequestPending) setIsRequestPending(true);
+      if(isRequestPending("handlePostRepayCreate")) {
+        return;
+      } else {
+        startRequest("handlePostRepayCreate");
+      }
 
       const formBalanceValue = Number(props.balance.replace(`${environment.currency}`, ""));
-
-      console.log("formBalanceValue", formBalanceValue);
+      // console.log("formBalanceValue", formBalanceValue);
       if(formBalanceValue === 0) return
 
       props.handlePostRepayCreate(
@@ -99,11 +101,10 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
         false,
         formBalanceValue
       ).then(() => {
-        // console.log("done!!")
-        // setIsRequestPending(false);
         props.setShowRepaymentAdsModal(false);
+      }).finally(() => {
+        endRequest("handlePostRepayCreate");
       })
-
 
     };
     const longTitle = useMemo(() => {

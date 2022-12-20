@@ -38,40 +38,52 @@ const useLoanDetailStory = () => {
     const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =
         usePostRepayCreateMutation();
 
-    const postRepayCreateRequest = useCallback(
-        (props: PostRepayCreateRequestBody) => {
-            postRepayCreate(props)
-                .unwrap()
-                .then((data: PostRepayCreateResponse) => {
-                    // NOTICE: 跳轉至付款頁面
-                    window.location.href = data.nextUrl;
-                })
-                .catch(({ error }) => {
-                    console.log(error);
-                })
-                .finally(() => {
-                    // do nothing.
-                });
-        },
-        []
-    );
+    const postRepayCreateRequest = (props: PostRepayCreateRequestBody) => new Promise((resolve, reject) => {
+      postRepayCreate(props)
+        .unwrap()
+        .then((data: PostRepayCreateResponse) => {
+          console.log("data", data);
+          // NOTICE: 跳轉至付款頁面
+          // window.location.href = data.nextUrl;
+          resolve("");
+        })
+        .catch(({ error }) => {
+          console.log(error);
+          reject(error);
+        })
+    })
 
-    const handlePostRepayCreate = useCallback(
-        (
-            isExtend: boolean,
-            isForceApplyAfterRepay: true,
-            repayAmount: number,
-        ) => {
-            postRepayCreateRequest({
-                extend: isExtend,
-                forceApplyAfterRepay: isForceApplyAfterRepay,
-                orderNo: orderNo,
-                payType: repayTypes && repayTypes[payType].payType,
-                repayAmount: repayAmount,
-            });
-        },
-        [orderNo, payType, repayTypes]
-    );
+    // const handlePostRepayCreate = useCallback(
+    //     (
+    //         isExtend: boolean,
+    //         isForceApplyAfterRepay: true,
+    //         repayAmount: number,
+    //     ) => {
+    //         postRepayCreateRequest({
+    //             extend: isExtend,
+    //             forceApplyAfterRepay: isForceApplyAfterRepay,
+    //             orderNo: orderNo,
+    //             payType: repayTypes && repayTypes[payType].payType,
+    //             repayAmount: repayAmount,
+    //         });
+    //     },
+    //     [orderNo, payType, repayTypes]
+    // );
+  const handlePostRepayCreate =
+    (
+      isExtend: boolean,
+      isForceApplyAfterRepay: true,
+      repayAmount: number,
+    ) => {
+      return postRepayCreateRequest({
+        extend: isExtend,
+        forceApplyAfterRepay: isForceApplyAfterRepay,
+        orderNo: orderNo,
+        payType: repayTypes && repayTypes[payType].payType,
+        repayAmount: repayAmount,
+      });
+    }
+
     return {
         currentData,
         navigateToUploadPaymentReceiptPage,
