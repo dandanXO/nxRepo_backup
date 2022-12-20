@@ -98,24 +98,6 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "windowPage.payment.method"})}>
-                                {
-                                    getFieldDecorator('payType', {
-                                        initialValue: ''
-                                    })(
-                                        <Select>
-                                            <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
-                                            <Option value={'1'}><FormattedMessage id="windowPage.alipay" /></Option>
-                                            <Option value={'2'}><FormattedMessage id="windowPage.lian.lian.pay" /></Option>
-                                            <Option value={'3'}><FormattedMessage id="windowPage.wechat" /></Option>
-                                            <Option value={'4'}><FormattedMessage id="windowPage.yeepay" /></Option>
-                                            <Option value={'5'}><FormattedMessage id="windowPage.YiZhiJuhe" /></Option>
-                                        </Select>
-                                    )
-                                }
-                            </Form.Item>
-                        </Col>
-                        <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "windowPage.repayment.type"})}>
                                 {
                                     getFieldDecorator('backType', {

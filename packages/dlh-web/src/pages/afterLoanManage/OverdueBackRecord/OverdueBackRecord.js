@@ -14,7 +14,7 @@ import styles from "./OverdueBackRecord.less"
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj) => {
-    const {time, phoneNo, name, orderNo, payType, backType, merchantId = '' } = obj;
+    const {time, phoneNo, name, orderNo, backType, merchantId = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     //todo 核对参数
     return {
@@ -23,7 +23,6 @@ const convertParams = (obj) => {
         userPhone: phoneNo,
         userTrueName: name,
         orderNo,
-        payId: payType,
         state: backType,
         merchantId,
     }
