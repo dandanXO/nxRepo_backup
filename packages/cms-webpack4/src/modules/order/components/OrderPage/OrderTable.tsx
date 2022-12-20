@@ -5,6 +5,7 @@ import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
 import moment from 'moment';
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../shared/hooks/useValuesEnums';
+import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
 import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/OrderTypes/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
@@ -15,7 +16,8 @@ import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 const OrderTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    const { channelListEnum, providerListEnum ,merchantListEnum } = useValuesEnums();
+    const { channelListEnum, providerListEnum } = useValuesEnums();
+    const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const initSearchList = {
         merchantName:'', appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '',
         loanTimeEnd: '', loanTimeStart: '', orderNo: '', productName: '', rcProvider: '', status: '', userPhone: '', userTrueName: '', pageNum: 1, pageSize: 10
@@ -36,6 +38,9 @@ const OrderTable = () => {
 
     useEffect(() => {
         triggerGetList(searchList);
+        if(isSuperAdmin){
+            triggerGetMerchantList(null)
+        };
     }, [searchList])
 
     useEffect(() => {

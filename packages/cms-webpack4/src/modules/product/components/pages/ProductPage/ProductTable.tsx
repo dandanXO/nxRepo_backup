@@ -7,7 +7,8 @@ import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {GetProductListResponseProduct} from "../../../service/product/domain/getProductList";
 import {ProductFormModal} from "./hooks/useProductFormModal";
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
-
+import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
+import useGetMerchantEnum from '../../../../shared/hooks/useGetMerchantEnum';
 interface ProductTableProps {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
   triggerGetList?: any;
@@ -15,10 +16,15 @@ interface ProductTableProps {
 }
 
 const ProductTable = (props: ProductTableProps) => {
+    const isSuperAdmin = getIsSuperAdmin();
+    const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const [productList, setProductList] = useState<GetProductListResponseProduct[]>(props.productListData);
 
     useEffect(()=>{
-        setProductList(props.productListData)
+        setProductList(props.productListData);
+        if(isSuperAdmin){
+            triggerGetMerchantList(null);
+        }
     },[props.productListData])
 
     const columns = useMemo(() => {
@@ -52,9 +58,22 @@ const ProductTable = (props: ProductTableProps) => {
         },
         { key: 'updateTime', title: '修改时间', dataIndex: 'updateTime', hideInSearch: true, valueType: 'dateTime' },
       ];
+    //   if(isSuperAdmin){
+    //     columns.splice(1,0,{
+    //         title: '商户名', dataIndex: 'merchantId',  key: 'merchantId',  valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
+    //         width: ProColumnsOperationConstant.width["2"],
+    //     })
+    //   }
       return columns;
 
-    }, []);
+     
+
+    }, [merchantListEnum,isSuperAdmin]);
+
+
+
+
+
     const actionRef = useRef<ActionType>();
 
     // const onShowSizeChange: PaginationProps['onShowSizeChange'] = (current, pageSize) => {
