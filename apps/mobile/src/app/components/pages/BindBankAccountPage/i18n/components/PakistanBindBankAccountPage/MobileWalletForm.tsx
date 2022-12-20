@@ -49,7 +49,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       />
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
       <Button
-        onClick={() => !props.isFormPending && props.confirm()}
+        onClick={() => props.confirm()}
       >
         {t("Save")}
       </Button>

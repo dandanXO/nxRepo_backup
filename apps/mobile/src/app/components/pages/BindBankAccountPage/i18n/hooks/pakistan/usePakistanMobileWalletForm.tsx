@@ -5,6 +5,7 @@ import {InputValue, Modal} from "@frontend/mobile/shared/ui";
 import {i18nBankBindAccountPage} from "../../translations";
 import {z} from "zod";
 import i18next from "i18next";
+import {useLockRequest} from "../../../../../../hooks/useLockRequest";
 
 interface IUsePakistanMobileWalletForm {
   triggerPostBankBindSaveToPKMutation: any;
@@ -74,23 +75,18 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   }, [mobileData.data]);
 
   // NOTE: 鎖定表單傳送
-  const [isFormPending, setIsFormPending] = useState<boolean>(false);
+  const {startRequest, isRequestPending, endRequest} = useLockRequest("triggerPostBankBindSaveToPKMutation");
 
   // NOTE: 點擊 Submit
   const confirm = useCallback(() => {
-
-
+    if(isRequestPending("triggerPostBankBindSaveToPKMutation")) {
+      return;
+    } else {
+      startRequest("triggerPostBankBindSaveToPKMutation")
+    }
 
     validateMobileWalletAccount();
-
-    if (
-      !(
-        mobileData.isValidation
-      )
-    )
-      return;
-
-    setIsFormPending(true);
+    if (!mobileData.isValidation) return;
 
     const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue];
     // console.log("mobileWalletAccount", mobileWalletAccount);
@@ -103,7 +99,8 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     })
       .unwrap()
       .then((data: any) => {
-        // console.log("data:", data);
+        console.log("data:", data);
+
         // Notice: bind account successfully
         Modal.alert({
           show: true,
@@ -120,7 +117,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         });
       })
       .finally(() => {
-        setIsFormPending(false);
+        endRequest("triggerPostBankBindSaveToPKMutation")
       });
   },[
     mobileData.isValidation,
@@ -139,7 +136,6 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     onMobileDataChange,
     validateMobileWalletAccount,
     // Form
-    isFormPending,
     confirm,
   }
 }

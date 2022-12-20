@@ -224,7 +224,7 @@ class SettleOrderList extends Component {
                 dataIndex: 'orderAmount',
                 key: 'orderAmount',
                 render(text) {
-                    var showStr = !isNaN(text) ? convertMoneyFormat(text/100) : '';
+                    var showStr = !isNaN(text) ? convertMoneyFormat(text) : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
@@ -239,7 +239,7 @@ class SettleOrderList extends Component {
                 dataIndex: 'payAmount',
                 key: 'payAmount',
                 render(text) {
-                    var showStr = !isNaN(text) ? convertMoneyFormat(text/100) : '';
+                    var showStr = !isNaN(text) ? convertMoneyFormat(text) : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
