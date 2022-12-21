@@ -20,7 +20,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
       <React.Fragment>
-          <Collapse ghost>
+          <Collapse ghost defaultActiveKey={["1"]}>
               <Panel header="费率设定" key="1">
                   <Paragraph style={{ margin: "0 0 0 100px" }}>
                       <span>填写规则：</span>

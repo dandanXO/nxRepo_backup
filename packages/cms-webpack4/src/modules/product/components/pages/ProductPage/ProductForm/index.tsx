@@ -75,7 +75,7 @@ const Index = (props: ProductFormProps) => {
     }
 
     const validateRiskRankLoanAmount = (validateForm) => {
-       
+
         let formFieldError = {};
 
         const isFormError = validateForm.map((i,index)=>{
@@ -84,7 +84,7 @@ const Index = (props: ProductFormProps) => {
             const compareError = validateForm.length !== 1 ? compareCount(index, validateForm.length, validateForm, 'loanAmount') : false;
             const errorMessage = i.loanAmount < 0 || isNaN(i.loanAmount) ? '请输入大于0的整数' : (i.loanAmount === '' || i.loanAmount === undefined) ? `请输入初始额度` : '';
             const formIndex = validateForm.length === 1 ? i.index : index;
-         
+
             formFieldError = {
                 ...formFieldError,
                 ...{
@@ -95,9 +95,9 @@ const Index = (props: ProductFormProps) => {
                 }
             }
            return compareError
-           
+
         })
-       
+
         formFieldError = {
             ...formFieldError,
             ...{
@@ -134,7 +134,7 @@ const Index = (props: ProductFormProps) => {
                 if(changedFields[0].name[0] ==="firstLoanQuotaSwitch") {
                     props.setEnableLoanAmount(changedFields[0].value === 0)
                 }
-                
+
                 if(changedFields[0].name[0] ==="reLoanQuotaSwitch") {
                     props.setEnableReLoanAmount(changedFields[0].value === 0)
                 }
