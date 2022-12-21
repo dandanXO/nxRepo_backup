@@ -61,6 +61,7 @@ const OrderReviewRecordTable = () => {
         '2': { text: '机审拒绝', color: 'orange' },
         '6': { text: '审核通过', color: 'green' },
         '7': { text: '审核拒绝', color: 'red' },
+        '8': { text: '放款拒绝', color: 'gray' },
     };
 
     const columns: ProColumns<OrderReviewRecordListResponse>[] = [
