@@ -6,7 +6,7 @@ const argv = yargs(hideBin(process.argv)).argv
 // console.log("argv.env", argv.env);
 const countryAbbreviation = argv.env;
 const countryMapping = {
-    "IN": "india",
+    "IN": "indian",
     "PK": "Pakistan",
     "BD": "Bangladesh",
 }
