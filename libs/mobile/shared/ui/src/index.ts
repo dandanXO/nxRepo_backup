@@ -23,7 +23,7 @@ import { NotificationButton } from './lib/components/Modal/DefaultButtons';
 import { RepayICON } from './lib/components/Icon/Icon';
 import StyledLoading from './lib/Loading';
 import type { InputValue } from './lib/types/InputValue';
-import { IThemeConfig } from './lib/components/global/types/IThemeConfig';
+import type { IThemeConfig } from './lib/components/global/types/IThemeConfig';
 import { Colors } from './lib/components/global/Colors';
 import { fontSizeListToRem } from './lib/components/global/fontSize';
 import {GreenThemeConfig} from "./lib/components/global/skin/green/GreenThemeConfig";
