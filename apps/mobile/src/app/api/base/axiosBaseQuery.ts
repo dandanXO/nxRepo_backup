@@ -41,7 +41,7 @@ const axiosBaseQuery =
                 ? (parsedQueryString.token as string)
                 : "";
             if (!TOKEN) {
-                console.log("error");
+                // console.log("error");
             }
             return TOKEN;
         };
@@ -58,7 +58,7 @@ const axiosBaseQuery =
                     ...headers,
                 },
                 onUploadProgress: (progressEvent) => {
-                    console.log({ progressEvent });
+                    // console.log({ progressEvent });
                     if (progressEvent.lengthComputable) {
                         const complete =
                             ((progressEvent.loaded / progressEvent.total) *
@@ -68,8 +68,8 @@ const axiosBaseQuery =
                         if (complete >= 100) {
                             onUploadPercent = 0;
                         }
-                        console.log("baseUrl + url: ", baseUrl + url);
-                        console.log("percent", onUploadPercent);
+                        // console.log("baseUrl + url: ", baseUrl + url);
+                        // console.log("percent", onUploadPercent);
                     }
                 },
                 onDownloadProgress: function (progressEvent) {
@@ -77,7 +77,7 @@ const axiosBaseQuery =
                     onDownloadPercent =
                         (progressEvent.loaded / progressEvent.total) * 100; // 計算進度
                     const loadingText = "進度：" + onDownloadPercent + "%";
-                    console.log(loadingText);
+                    // console.log(loadingText);
                 },
             });
             return {

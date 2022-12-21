@@ -19,7 +19,7 @@ type RepaymentNoticeModalProps = {
 
 const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
     const handleConfirm = () => {
-        console.log(props.balance);
+        // console.log(props.balance);
         props.handlePostRepayCreate(false, true, props.balance);
         props.setShowRepaymentNoticeModal(false);
     };

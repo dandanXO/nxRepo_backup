@@ -99,7 +99,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     })
       .unwrap()
       .then((data: any) => {
-        console.log("data:", data);
+        // console.log("data:", data);
 
         // Notice: bind account successfully
         Modal.alert({

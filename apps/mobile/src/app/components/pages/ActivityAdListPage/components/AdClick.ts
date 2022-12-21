@@ -1,12 +1,12 @@
 const onClickToDoLoan = () => {
-  console.log("window.SyncTask.doQuickLoanApply()");
+  // console.log("window.SyncTask.doQuickLoanApply()");
   // window.SyncTask.doQuickLoanApply();
   window["SyncTask"] &&
   window["SyncTask"]["doQuickLoanApply"] &&
   window["SyncTask"]["doQuickLoanApply"]();
 }
 const onClickToPopup = (url: string) => {
-  console.log("onClickToPopup.url:", url);
+  // console.log("onClickToPopup.url:", url);
   // window.SyncTask.thematicActivitiesPopup("https://www.google.com/");
   window["SyncTask"] &&
   window["SyncTask"]["thematicActivitiesPopup"] &&
