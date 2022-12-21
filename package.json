@@ -17,6 +17,8 @@
     "@ant-design/pro-components": "2.3.7",
     "@canyuegongzi/t-cli": "^1.2.18",
     "@reduxjs/toolkit": "1.8.5",
+    "@sentry/react": "^7.28.0",
+    "@sentry/tracing": "^7.28.0",
     "@types/dom-helpers": "5.0.1",
     "@types/ramda": "0.27.1",
     "@types/react": "18.0.16",
