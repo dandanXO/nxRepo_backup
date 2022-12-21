@@ -56,7 +56,9 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2",
-    "yargs": "^17.5.1"
+    "yargs": "^17.5.1",
+    "@sentry/react": "^7.27.0",
+    "@sentry/tracing": "^7.27.0"
   },
   "dependencies": {
     "antd": "^3.22.2",

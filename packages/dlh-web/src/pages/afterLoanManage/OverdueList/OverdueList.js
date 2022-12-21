@@ -102,14 +102,14 @@ class OverdueList extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.product.name" }),
                 dataIndex: "productName",
                 key: "productName",
-                width:'8%',
+                width:'10%',
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             {
                 title: <FormattedMessage id='page.table.appName' />,
                 dataIndex: "appName",
                 key: "appName",
-                width:'8%',
+                width:'12%',
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             {
@@ -120,7 +120,13 @@ class OverdueList extends Component {
               render(text) { return <CopyText text={text} isEllispsis={true}/> }
             },
             // { title: '手机型号', dataIndex: 'deviceModel', key: 'deviceModel' },
-            // { title: '手机号', dataIndex: 'userPhone', key: 'userPhone' },
+            {
+              title: <FormattedMessage id="page.search.list.mobile" />,
+              dataIndex: "userPhone",
+              key: "userPhone",
+              width:'12%',
+              render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },
             {
                 title: props.intl.formatMessage({id: "page.table.loan"}),
                 dataIndex: 'deviceMoney',

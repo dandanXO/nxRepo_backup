@@ -91,6 +91,13 @@ class TodayList extends Component {
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             {
+              title: <FormattedMessage id="page.search.list.mobile" />,
+              dataIndex: "userPhone",
+              key: "userPhone",
+              width:'10%',
+              render(text) { return <CopyText text={text} isEllispsis={true} /> }
+            },
+            {
                 title: <FormattedMessage id="page.table.appName" />,
                 dataIndex: "appName",
                 key: "appName",
