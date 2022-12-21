@@ -1,9 +1,17 @@
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const argv = yargs(hideBin(process.argv)).argv
 // console.log("argv.env", argv.env);
+const countryAbbreviation = argv.env;
+const countryMapping = {
+    "IN": "india",
+    "PK": "Pakistan",
+    "BD": "Bangladesh",
+}
+const country = countryMapping[countryAbbreviation];
+console.log("country", country);
 
 const commonRules = [
     {
@@ -88,6 +96,11 @@ const commonPlugins = [
     new MiniCssExtractPlugin({
         filename: 'css/[name][hash:8].css',
         chunkFilename: 'css/[id][hash:8].css'
+    }),
+    new webpack.DefinePlugin({
+        'appInfo': {
+            'COUNTRY': JSON.stringify(country),
+        },
     })
 ]
 module.exports = { commonRules, commonPlugins };
