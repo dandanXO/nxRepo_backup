@@ -9,6 +9,7 @@ import {ProductFormModal} from "./hooks/useProductFormModal";
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../../shared/hooks/useGetMerchantEnum';
+import { GetProductListRequestQuery } from '../../../service/product/request/getProductListRequestQuery';
 interface ProductTableProps {
   setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
   triggerGetList?: any;
@@ -19,6 +20,8 @@ const ProductTable = (props: ProductTableProps) => {
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const [productList, setProductList] = useState<GetProductListResponseProduct[]>(props.productListData);
+    const initSearchList: GetProductListRequestQuery = { enabled: true, merchantId: 2, productName: '' };
+    const [searchList, setSearchList] = useState(initSearchList)
 
     useEffect(()=>{
         setProductList(props.productListData);
@@ -26,6 +29,12 @@ const ProductTable = (props: ProductTableProps) => {
             triggerGetMerchantList(null);
         }
     },[props.productListData])
+
+    
+    // useEffect(()=>{
+    //     console.log(searchList)
+    //     props.triggerGetList(searchList)
+    // },[searchList])
 
     const columns = useMemo(() => {
 
@@ -50,8 +59,8 @@ const ProductTable = (props: ProductTableProps) => {
         { key: 'overdueRate', title: '逾期费率(%)', dataIndex: 'overdueRate', hideInSearch: true , render: (text) => Number(Number(text) * 100).toFixed(1) },
         { key: 'weight', title: '权重', dataIndex: 'weight', hideInSearch: true },
         {
-            key: 'enabled',title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: 'all', valueEnum: {
-            all: { text: '全部', status: 'Default' },
+            key: 'enabled',title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: '', valueEnum: {
+            '': { text: '全部', status: 'Default' },
             true: { text: '上架', status: 'Success' },
             false: { text: '下架', status: 'Default' },
           }
@@ -111,7 +120,8 @@ const ProductTable = (props: ProductTableProps) => {
                         <Button
                             type={'primary'}
                             onClick={() => {
-                                const { productName, enabled } = form.getFieldsValue();
+                                const { productName, enabled, merchantId = '' } = form.getFieldsValue();
+                                // setSearchList({productName, enabled, merchantId})
                                 const searchData = props.productListData
                                     .filter(i => productName === "" ? i :  i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
                                     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
