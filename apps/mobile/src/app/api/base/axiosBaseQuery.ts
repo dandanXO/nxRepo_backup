@@ -98,13 +98,14 @@ const axiosBaseQuery =
             // console.log(err);
             // console.log(error);
             alertModal(errorMessage);
+            throw axiosError;
             // alertModal(err.message);
-            return {
-                error: {
-                    status: err.response?.status,
-                    data: err.response?.data || err.message,
-                },
-            };
+            // return {
+            //     error: {
+            //         status: err.response?.status,
+            //         data: err.response?.data || err.message,
+            //     },
+            // };
         }
     };
 export default axiosBaseQuery;
