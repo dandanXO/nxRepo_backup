@@ -9,7 +9,7 @@ export function UploadSettingSection() {
     // console.log(`selected ${value}`);
   };
     return <>
-        <Collapse ghost>
+        <Collapse ghost defaultActiveKey={["1"]}>
             <Panel header="上架设定" key="1">
                 <Form.Item name="top" label="产品置顶" valuePropName="checked">
                     <Switch checkedChildren="是" unCheckedChildren="否" />

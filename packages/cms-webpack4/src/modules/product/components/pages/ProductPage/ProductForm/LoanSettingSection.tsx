@@ -18,7 +18,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
 
     return (
         <React.Fragment>
-            <Collapse ghost>
+            <Collapse ghost defaultActiveKey={["1"]}>
                 <Panel header="借款设定" key="1">
                     <Form.Item label="借贷期限" required>
                         <Form.Item name="loanTerm" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
