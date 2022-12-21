@@ -1211,7 +1211,7 @@
   "menu.withholdingStats": "代扣统计",
   "menu.currentDayOverdueCall": "当日催收",
   "menu.currentDayOrderAssign": "当日订单分配",
-  "menu.currentDayExpiredOrder": "当日到期档案",
+  "menu.currentDayExpiredOrder": "当日到期订单",
   "menu.currentDayRepaymentRecord": "当日还款记录",
   "menu.currentDayOverdueCallList": "当日电催列表",
   "menu.currentDayOverdueStats": "当日催收统计",

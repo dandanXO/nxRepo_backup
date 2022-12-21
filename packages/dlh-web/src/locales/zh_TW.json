@@ -1138,7 +1138,7 @@
   "menu.withholdingStats": "代扣統計",
   "menu.currentDayOverdueCall": "當日催收",
   "menu.currentDayOrderAssign": "當日訂單分配",
-  "menu.currentDayExpiredOrder": "當日到期檔案",
+  "menu.currentDayExpiredOrder": "當日到期訂單",
   "menu.currentDayRepaymentRecord": "當日還款記錄",
   "menu.currentDayOverdueCallList": "當日電催列表",
   "menu.currentDayOverdueStats": "當日催收統計",
