@@ -65,7 +65,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           // defaultValue={props.bankDropList[0].value}
           value={props?.bankDropList[props.bankAccountValue]?.value}
           onChange={(item: any) => {
-            console.log(item)
+            // console.log(item)
             props.onIFSCDropSelect(item.index)
           }}
           options={options}

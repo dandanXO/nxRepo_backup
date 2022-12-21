@@ -140,7 +140,7 @@ i18next
     },
     // debug: true,
   }, (err, t) => {
-    console.log("3:", i18next.t('Welcome to React', { ns: 'common' }));
+    // console.log("3:", i18next.t('Welcome to React', { ns: 'common' }));
   });
 
 export {renderByCountry} from "./renderByCountry";

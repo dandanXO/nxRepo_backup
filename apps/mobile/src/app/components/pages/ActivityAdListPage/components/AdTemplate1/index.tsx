@@ -168,7 +168,7 @@ interface IAdTemplate1 {
 }
 
 export const AdTemplate1 = (props: IAdTemplate1) => {
-    console.log("AdTemplate1: ", props)
+    // console.log("AdTemplate1: ", props)
 
     return (
         <AdTemplateContainer>

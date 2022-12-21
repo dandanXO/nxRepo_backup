@@ -17,7 +17,7 @@ export const useLockRequest = (identity: string) => {
 
   const startRequest = (identity: string) => {
     if (isRequestPending(identity)) {
-      console.log(`${identity} is requesting!`)
+      // console.log(`${identity} is requesting!`)
     } else {
       setRequest(identity, true)
     }

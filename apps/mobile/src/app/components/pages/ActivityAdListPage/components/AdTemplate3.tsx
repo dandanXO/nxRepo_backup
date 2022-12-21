@@ -74,7 +74,7 @@ interface IAdTemplate3 {
   data: IAdTemplate3Data | null;
 }
 export const AdTemplate3 = (props: IAdTemplate3) => {
-  console.log("AdTemplate3.props: ", props)
+  // console.log("AdTemplate3.props: ", props)
   return (
     <AdTemplate3Container>
       {/*NOTE: Brand*/}
