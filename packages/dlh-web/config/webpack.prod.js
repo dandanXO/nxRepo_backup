@@ -24,7 +24,7 @@ const prodConfig = () =>  webpackMerge(baseConfig, {
     },
     output: {
         path: config.distDir,
-        filename:'static/[name].[chunkhash].js',
+        filename:'static/[name].[contenthash].js',
         // publicPath:  config.buildPublicPath
         publicPath: config.buildPublicPath
     },

@@ -163,8 +163,8 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                         <Form.Item name="interestRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                             rules={[
                                 {
-                                    transform: (value) => Number(value),
                                     validator: async (_, value) => NumberValidator(_, value)({
+                                        required: true,
                                         min: 0,
                                         minMessage: "请输入最低利息",
                                         max: 100,
@@ -179,8 +179,8 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                         <Form.Item name="interestRangeHigh" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
                             rules={[
                                 {
-                                    transform: (value) => Number(value),
                                     validator: async (_, value) => NumberValidator(_, value)({
+                                        required: true,
                                         min: 0,
                                         minMessage: "请输入最高利息",
                                         max: 100,

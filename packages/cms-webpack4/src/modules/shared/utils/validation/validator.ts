@@ -51,7 +51,7 @@ export const NumberValidator = (_, value) => (params: ValidateNumber) => {
     // console.log("value", value);
     // console.log("params", params);
     if(params.required) {
-      const stringScheme = z.string().min(1, params && params.requiredErrorMessage ? params.requiredErrorMessage : RequireNumberMessage())
+      const stringScheme = z.string().min(1, params && params.requiredErrorMessage ? params.requiredErrorMessage : RequireNumberMessage(params.min))
       const stringResult = stringScheme.safeParse(String(value));
       if (!stringResult.success) {
         const firstError = (stringResult as any).error.format();

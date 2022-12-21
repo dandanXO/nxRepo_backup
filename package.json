@@ -8,7 +8,10 @@
     "test": "nx test",
     "serve:min": "nx run-many --target=serve --projects=mobile  --configuration=development-in",
     "serve:mpk": "nx run-many --target=serve --projects=mobile  --configuration=development-pk",
-    "serve:mbd": "nx run-many --target=serve --projects=mobile  --configuration=development-bd"
+    "serve:mbd": "nx run-many --target=serve --projects=mobile  --configuration=development-bd",
+    "build:min": "pnpm nx run-many --target=build --projects=mobile  --configuration=production-in --verbose && rm -rf ./dist/apps/mobile/*.map ",
+    "build:mpk": "pnpm nx run-many --target=build --projects=mobile  --configuration=production-bk --verbose && rm -rf ./dist/apps/mobile/*.map ",
+    "build:mbd": "pnpm nx run-many --target=build --projects=mobile  --configuration=production-bd --verbose && rm -rf ./dist/apps/mobile/*.map "
   },
   "private": true,
   "dependencies": {
@@ -72,6 +75,7 @@
     "@nrwl/storybook": "14.6.5",
     "@nrwl/web": "14.6.5",
     "@nrwl/workspace": "14.6.5",
+    "@sentry/webpack-plugin": "^1.20.0",
     "@storybook/addon-essentials": "6.5.9",
     "@storybook/builder-webpack5": "6.5.9",
     "@storybook/core-server": "6.5.9",

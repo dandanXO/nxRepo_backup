@@ -9,7 +9,7 @@ module.exports = {
         // path: path.resolve(__dirname, '../', "dist"),
         path: path.resolve(__dirname, '../../dlh-web', "dist/child/entry-cms-react/"),
 
-        filename: "bundle.[hash:8].js",
+        filename: "bundle.[contenthash].js",
 
         // NOTICE: MicroApp
         // publicPath: "/child/entry-cms-react/",

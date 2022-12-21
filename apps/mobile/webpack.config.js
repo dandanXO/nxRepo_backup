@@ -1,8 +1,11 @@
+console.info("[api-mobile][build]");
+
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 // const webpackConfig = require('@nrwl/react/plugins/webpack');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const isProduction = process.env.NODE_ENV == "production";
+console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // get git info from command line
@@ -14,13 +17,17 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const gitRevisionPlugin = new GitRevisionPlugin()
 // console.log("gitRevisionPlugin.commithash()", gitRevisionPlugin.commithash());
+const SentryCliPlugin = require('@sentry/webpack-plugin');
+
 
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
-    devtool: false,
+    // devtool: false,
+    // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
+    devtool: "source-map",
     output: {
       filename: "[name].[contenthash].js",
-      // sourceMapFilename: 'maps/[name].[chunkhash].map.js',
+      // sourceMapFilename: 'maps/[name].[contenthash].map.js',
     },
     module: {
       rules: [
@@ -98,16 +105,48 @@ module.exports = (config, context) => {
               'COMMITHASH': JSON.stringify(gitRevisionPlugin.commithash()),
               'BRANCH': JSON.stringify(gitRevisionPlugin.branch()),
           },
-      })
-    ]
-  });
-  if(isProduction) {
-    finalConfig.plugins.push(
+      }),
       new CleanWebpackPlugin({
         verbose: true,
-      })
-    );
-  }
+      }),
+      new SentryCliPlugin({
+        release: `${gitRevisionPlugin.commithash()}`,
+        debug: true,
+        authToken: '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
+        org: "workshop-xs",
+        project: "api-mobile",
+        include: './dist/apps/mobile',
+        ignoreFile: '.sentrycliignore',
+        ignore: [
+          'node_modules',
+          'webpack.config.js'
+        ],
+        configFile: 'sentry.properties',
+      }),
+    ]
+  });
+  // if(isProduction) {
+  //   finalConfig.plugins.push(
+  //     new CleanWebpackPlugin({
+  //       verbose: true,
+  //     })
+  //   );
+  //   finalConfig.plugins.push(
+  //     new SentryCliPlugin({
+  //       debug: true,
+  //       authToken: '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
+  //       org: "workshop-xs",
+  //       project: "api-mobile",
+  //       include: './dist/apps/mobile',
+  //       ignoreFile: '.sentrycliignore',
+  //       ignore: [
+  //         'node_modules',
+  //         'webpack.config.js'
+  //       ],
+  //       configFile: 'sentry.properties',
+  //     }),
+  //   )
+  // }
   // console.log("finalConfig", finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return finalConfig;
