@@ -54,15 +54,6 @@ class AddModal extends Component{
                             )
                         }
                     </FormItem>
-                    <FormItem label={intl.formatMessage({id : "page.table.in-charge.person"})} {...this.layout}>
-                        {
-                            getFieldDecorator('managerUserId', {})(
-                                <Select>
-                                    {this.renderPerson()}
-                                </Select>
-                            )
-                        }
-                    </FormItem>
                     <FormItem label={intl.formatMessage({id : "page.table.superior.department"})} {...this.layout}>
                         {
                             getFieldDecorator('pid', {})(

@@ -12,7 +12,8 @@ const LoanDetailsPage = () => {
         setPayType,
     } = useLoanDetailStory();
 
-  const [postLoanSubmitOrder, { isLoading }] = usePostLoanSubmitOrderMutation();
+  const [postLoanSubmitOrder, { isLoading: isPostLoanSubmitOrderLoading, }] = usePostLoanSubmitOrderMutation();
+  console.log("isPostLoanSubmitOrderLoading", isPostLoanSubmitOrderLoading);
 
     return (
         <PureLoanDetailsAdvertisementPage
@@ -22,6 +23,7 @@ const LoanDetailsPage = () => {
             }
             handlePostRepayCreate={handlePostRepayCreate}
             postLoanSubmitOrder={postLoanSubmitOrder}
+            isPostLoanSubmitOrderLoading={isPostLoanSubmitOrderLoading}
             paymentMethodList={paymentMethodList}
             setPayType={setPayType}
         />

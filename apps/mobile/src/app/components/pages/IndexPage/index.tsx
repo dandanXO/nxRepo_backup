@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const getToken = () => {
   if(environment.country === "in") {
-    return `b5f2db2c45e24edcbc49540bae862fbd`
+    return `64840b9abeaf4cd18229552a432e3064`
   } else if (environment.country == "pk") {
     return `8c63e92475854c7baf2a64734a036b2b`
   } else if(environment.country == "bn") {
@@ -15,7 +15,7 @@ const getToken = () => {
 };
 const getOrderNo = () => {
   if(environment.country === "in") {
-    return `no-3632791101642108-9`;
+    return `no-11514471867192162`;
   } else if (environment.country == "pk") {
     return `no-1816320407159254`;
   } else if(environment.country == "bn") {

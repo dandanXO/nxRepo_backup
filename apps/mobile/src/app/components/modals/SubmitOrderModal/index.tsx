@@ -4,7 +4,6 @@ import { GetLoanDetailRecommendProducts } from "../../../api/getLoanDetail";
 import { Overlay, Title, Divider, Button } from "@frontend/mobile/shared/ui";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nSubmitOrderModal} from "./i18n/translations";
-import {useLockRequest} from "../../../hooks/useLockRequest";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -39,14 +38,14 @@ export type PureSubmitOrderModalProps = {
 } & WithTranslation;
 
 export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
-    const {startRequest, isRequestPending, endRequest} = useLockRequest("handleLoanSubmitOrder");
+    // const {startRequest, isRequestPending, endRequest} = useLockRequest("handleLoanSubmitOrder");
 
     const handleConfirm = () => {
-      if(isRequestPending("handleLoanSubmitOrder")) {
-        return
-      } else {
-        startRequest("handleLoanSubmitOrder")
-      }
+      // if(isRequestPending("handleLoanSubmitOrder")) {
+      //   return
+      // } else {
+      //   startRequest("handleLoanSubmitOrder")
+      // }
         props.handleLoanSubmitOrder(
             props.productDetails && props.productDetails.productId
                 ? props.productDetails.productId
@@ -56,7 +55,7 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
           window["SyncTask"]["doExecuteSyncContactsTask"] &&
           window["SyncTask"]["doExecuteSyncContactsTask"]();
         }).finally(() => {
-          endRequest("handleLoanSubmitOrder");
+          // endRequest("handleLoanSubmitOrder");
         })
     };
     return (
