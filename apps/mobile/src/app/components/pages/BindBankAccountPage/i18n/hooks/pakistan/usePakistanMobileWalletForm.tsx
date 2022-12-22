@@ -5,6 +5,7 @@ import {InputValue, Modal} from "@frontend/mobile/shared/ui";
 import {i18nBankBindAccountPage} from "../../translations";
 import {z} from "zod";
 import i18next from "i18next";
+import * as Sentry from "@sentry/react";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -108,6 +109,9 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
             window.location.href = "innerh5://127.0.0.1";
           },
         });
+      })
+      .catch((error: any) => {
+        Sentry.captureException(error);
       })
       .finally(() => {
 

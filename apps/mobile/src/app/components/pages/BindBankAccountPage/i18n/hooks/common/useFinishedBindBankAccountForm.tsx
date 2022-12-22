@@ -3,6 +3,7 @@ import {InputValue, Modal} from "@frontend/mobile/shared/ui";
 import {GetBindCardDropListResponse} from "../../../../../../api/GetBindCardDropList";
 import {useTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
+import * as Sentry from "@sentry/react";
 
 type IUseFinishedBindBankAccountPage =  {
   // NOTICE: Common
@@ -83,6 +84,9 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
             navigateToAPP();
           },
         });
+      })
+      .catch((error: any) => {
+        Sentry.captureException(error);
       })
       .finally(() => {
         setIsFormPending(false);
