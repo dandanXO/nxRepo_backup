@@ -150,6 +150,7 @@ export const {
     useGetLoanDetailQuery,
     usePostRepayReceiptMutation,
     useGetRepayTypesQuery,
+    useLazyGetRepayTypesQuery,
     usePostRepayCreateMutation,
     useGetBindCardDropListQuery,
     useLazyGetBindCardDropListQuery,

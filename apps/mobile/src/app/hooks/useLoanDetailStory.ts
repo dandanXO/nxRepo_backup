@@ -1,6 +1,11 @@
 import {useNavigate} from "react-router-dom";
 import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
-import {useGetLoanDetailQuery, useGetRepayTypesQuery, usePostRepayCreateMutation,} from "../api";
+import {
+  useGetLoanDetailQuery,
+  useGetRepayTypesQuery,
+  useLazyGetRepayTypesQuery,
+  usePostRepayCreateMutation,
+} from "../api";
 import {useCallback, useEffect, useState} from "react";
 import {PostRepayCreateRequestBody, PostRepayCreateResponse,} from "../api/postRepayCreate";
 import * as Sentry from "@sentry/react";
@@ -26,6 +31,13 @@ const useLoanDetailStory = () => {
         isLoading: isRepayTypesLoading,
         isFetching: isRepayTypesFetching,
     } = useGetRepayTypesQuery({orderNo: pageQueryString.orderNo});
+
+  const [triggerGetRepayTypesQuery, { currentData: repayTypes2 , isLoading, isFetching }] = useLazyGetRepayTypesQuery({
+    pollingInterval: 0,
+    refetchOnFocus: false,
+    refetchOnReconnect: false
+  });
+
 
     const orderNo = pageQueryString.orderNo;
     const token = pageQueryString.token;
@@ -69,13 +81,32 @@ const useLoanDetailStory = () => {
 
     })
   const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: true, repayAmount: number) => {
-      return postRepayCreateRequest({
-        extend: isExtend,
-        forceApplyAfterRepay: isForceApplyAfterRepay,
-        orderNo: orderNo,
-        payType: repayTypes && repayTypes[payType].payType,
-        repayAmount: repayAmount,
-      });
+      if(!repayTypes) {
+        Sentry.captureMessage("repayTypes: false")
+        triggerGetRepayTypesQuery({orderNo: pageQueryString.orderNo})
+          .unwrap()
+          .then((repayTypes2) => {
+            console.log("repayTypes2", repayTypes2);
+            return postRepayCreateRequest({
+              extend: isExtend,
+              forceApplyAfterRepay: isForceApplyAfterRepay,
+              orderNo: orderNo,
+              payType: repayTypes2 && repayTypes2[payType].payType,
+              repayAmount: repayAmount,
+            });
+          })
+      } else {
+        Sentry.captureMessage("repayTypes: true")
+        return postRepayCreateRequest({
+          extend: isExtend,
+          forceApplyAfterRepay: isForceApplyAfterRepay,
+          orderNo: orderNo,
+          payType: repayTypes && repayTypes[payType].payType,
+          repayAmount: repayAmount,
+        });
+      }
+
+
     }
 
     return {
