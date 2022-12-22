@@ -108,7 +108,7 @@ const axiosBaseQuery =
 
             const error = new Error();
             // NOTE: 後端客製化訊息
-            error.name = err.message;
+            error.name = customError.message;
             error.message = JSON.stringify({
               originalError: {
                 code: err.code,
