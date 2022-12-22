@@ -3,6 +3,8 @@ import { Page } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
 import {useTranslation} from "react-i18next";
 import styled from "styled-components";
+// import {useEffect} from "react";
+// import * as Sentry from "@sentry/react";
 
 const getToken = () => {
   if(environment.country === "in") {
@@ -31,6 +33,14 @@ const IndexPage = styled(Page)`
 `;
 export default () => {
     const { t } = useTranslation();
+    // useEffect(() => {
+    //   try {
+    //     throw new Error("test_error")
+    //   } catch (err) {
+    //     console.log(err)
+    //     Sentry.captureException(err);
+    //   }
+    // })
     return (
         <IndexPage>
             <p>

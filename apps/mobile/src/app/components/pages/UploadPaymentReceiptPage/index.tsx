@@ -12,6 +12,7 @@ import {IndiaUploadPaymentReceiptPage} from "./i18n/components/IndiaUploadPaymen
 import {PakistanCountry} from "../../../../environments/config/countries/PakistanCountry";
 import {PakistanUploadPaymentReceiptPage} from "./i18n/components/PakistanUploadPaymentReceiptPage";
 import {renderByCountry} from "../../../i18n";
+import * as Sentry from "@sentry/react";
 
 export interface PostRepayReceiptRequestProps {
     formFile: any;
@@ -43,6 +44,9 @@ const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
                 .unwrap()
                 .then((data: PostRepayReceiptResponse) => {
                     goToUploadedPaymentReceiptPage();
+                })
+                .catch((error) => {
+                  Sentry.captureException(error);
                 })
                 .finally(() => {
                     props.setIsUploading(false);

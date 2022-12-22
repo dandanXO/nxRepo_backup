@@ -4,6 +4,7 @@ import axios from "axios";
 import queryString from "query-string";
 import { Modal } from "@frontend/mobile/shared/ui";
 import i18next from "i18next";
+import * as Sentry from "@sentry/react";
 
 
 const alertModal = (message: string) =>
@@ -98,6 +99,9 @@ const axiosBaseQuery =
             // console.log(err);
             // console.log(error);
             alertModal(errorMessage);
+
+            Sentry.captureException(axiosError);
+
             throw axiosError;
             // alertModal(err.message);
             // return {

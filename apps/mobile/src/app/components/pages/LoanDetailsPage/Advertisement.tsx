@@ -7,6 +7,7 @@ import {PostLoanSubmitOrderRequestBody} from "../../../api/postLoanSubmitOrder";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nLoanDetailsPage} from "./i18n/translations";
 import BannerWithCard from "./BannerWithCard";
+import * as Sentry from "@sentry/react";
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;
@@ -44,6 +45,7 @@ const Advertisement = (props: AdvertisementProps) => {
           })
           .catch((error: any) => {
             setShowSubmitOrdereModal(false);
+            Sentry.captureException(error);
             reject("error")
           })
     });

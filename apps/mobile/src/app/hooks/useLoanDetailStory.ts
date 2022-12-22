@@ -3,6 +3,7 @@ import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
 import {useGetLoanDetailQuery, useGetRepayTypesQuery, usePostRepayCreateMutation,} from "../api";
 import {useCallback, useEffect, useState} from "react";
 import {PostRepayCreateRequestBody, PostRepayCreateResponse,} from "../api/postRepayCreate";
+import * as Sentry from "@sentry/react";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();
@@ -59,6 +60,7 @@ const useLoanDetailStory = () => {
         })
         .catch(({ error }) => {
           // console.log(error);
+          Sentry.captureException(error);
           reject(error);
         })
     })
