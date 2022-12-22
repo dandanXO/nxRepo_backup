@@ -107,7 +107,8 @@ const axiosBaseQuery =
             alertModal(customErrorMessage);
 
             const error = new Error();
-            error.name = "axios"
+            // NOTE: 後端客製化訊息
+            error.name = err.message;
             error.message = JSON.stringify({
               originalError: {
                 code: err.code,
@@ -118,7 +119,7 @@ const axiosBaseQuery =
               customError
             })
             Sentry.captureException(error);
-            console.log("error", error);
+            console.info(error);
             // throw axiosError;
             // alertModal(err.message);
             return {
