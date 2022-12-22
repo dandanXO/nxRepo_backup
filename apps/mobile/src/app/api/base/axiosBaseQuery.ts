@@ -6,6 +6,10 @@ import { Modal } from "@frontend/mobile/shared/ui";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
 
+export interface CustomAxiosError {
+  status: any;
+  data: any;
+}
 
 const alertModal = (message: string) =>
     Modal.alert({
@@ -37,7 +41,7 @@ const axiosBaseQuery =
         let onUploadPercent = 0;
         let onDownloadPercent = 0;
         const getToken = (): string => {
-            const parsedQueryString = queryString.parse(location.search);
+            const parsedQueryString = queryString.parse(window.location.search);
             const TOKEN = parsedQueryString.token
                 ? (parsedQueryString.token as string)
                 : "";
@@ -102,7 +106,9 @@ const axiosBaseQuery =
             // console.log(error);
             alertModal(customErrorMessage);
 
-            Sentry.captureException(JSON.stringify({
+            const error = new Error();
+            error.name = "axios"
+            error.message = JSON.stringify({
               originalError: {
                 code: err.code,
                 message: err.message,
@@ -110,7 +116,9 @@ const axiosBaseQuery =
                 stack: err.stack,
               },
               customError
-            }));
+            })
+            Sentry.captureException(error);
+            console.log("error", error);
             // throw axiosError;
             // alertModal(err.message);
             return {

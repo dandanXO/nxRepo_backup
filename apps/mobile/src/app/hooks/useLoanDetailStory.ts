@@ -4,6 +4,7 @@ import {useGetLoanDetailQuery, useGetRepayTypesQuery, usePostRepayCreateMutation
 import {useCallback, useEffect, useState} from "react";
 import {PostRepayCreateRequestBody, PostRepayCreateResponse,} from "../api/postRepayCreate";
 import * as Sentry from "@sentry/react";
+import {CustomAxiosError} from "../api/base/axiosBaseQuery";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();
@@ -58,11 +59,14 @@ const useLoanDetailStory = () => {
           window.location.href = data.nextUrl;
           resolve("");
         })
-        .catch(({ error }) => {
-          // console.log(error);
-          Sentry.captureException(JSON.stringify(error));
-          reject(error);
+        .catch((err: CustomAxiosError) => {
+          const error = new Error();
+          error.name = "postRepayReceipt"
+          error.message = JSON.stringify(err)
+          Sentry.captureException(error);
+          reject(err);
         })
+
     })
   const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: true, repayAmount: number) => {
       return postRepayCreateRequest({

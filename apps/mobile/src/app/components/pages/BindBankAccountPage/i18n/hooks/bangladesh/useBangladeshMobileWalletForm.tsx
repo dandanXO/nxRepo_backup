@@ -5,6 +5,7 @@ import {i18nBankBindAccountPage} from "../../translations";
 import {z} from "zod";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
+import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
 
 interface IUseBangladeshMobileWalletForm {
   triggerPostBankBindSaveToBangladeshMutation: any;
@@ -147,8 +148,11 @@ export const useBangladeshMobileWalletForm = (props: IUseBangladeshMobileWalletF
           },
         });
       })
-      .catch((error: any) => {
-        Sentry.captureException(JSON.stringify(error));
+      .catch((err: CustomAxiosError) => {
+        const error = new Error();
+        error.name = "triggerPostBankBindSaveToBangladeshMutation"
+        error.message = JSON.stringify(err)
+        Sentry.captureException(error);
       })
       .finally(() => {
         setIsFormPending(false);

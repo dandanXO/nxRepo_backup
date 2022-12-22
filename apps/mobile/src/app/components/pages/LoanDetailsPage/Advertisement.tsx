@@ -8,6 +8,7 @@ import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nLoanDetailsPage} from "./i18n/translations";
 import BannerWithCard from "./BannerWithCard";
 import * as Sentry from "@sentry/react";
+import {CustomAxiosError} from "../../../api/base/axiosBaseQuery";
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;
@@ -43,9 +44,12 @@ const Advertisement = (props: AdvertisementProps) => {
             setShowSubmitOrderSuccessModal(true);
             resolve("");
           })
-          .catch((error: any) => {
+          .catch((err: CustomAxiosError) => {
+            const error = new Error();
+            error.name = "postLoanSubmitOrder"
+            error.message = JSON.stringify(err)
+            Sentry.captureException(error);
             setShowSubmitOrdereModal(false);
-            Sentry.captureException(JSON.stringify(error));
             reject("error")
           })
     });
