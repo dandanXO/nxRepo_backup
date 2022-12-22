@@ -60,7 +60,7 @@ const useLoanDetailStory = () => {
         })
         .catch(({ error }) => {
           // console.log(error);
-          Sentry.captureException(error);
+          Sentry.captureException(JSON.stringify(error));
           reject(error);
         })
     })

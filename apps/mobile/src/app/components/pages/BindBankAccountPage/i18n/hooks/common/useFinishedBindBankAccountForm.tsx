@@ -86,7 +86,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         });
       })
       .catch((error: any) => {
-        Sentry.captureException(error);
+        Sentry.captureException(JSON.stringify(error));
       })
       .finally(() => {
         setIsFormPending(false);
