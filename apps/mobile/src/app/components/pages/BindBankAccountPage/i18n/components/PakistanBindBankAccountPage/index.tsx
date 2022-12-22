@@ -32,6 +32,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     validateMobileWalletAccount,
     confirm: confirmMobileWallet,
   } = usePakistanMobileWalletForm({
+    isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
     triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
     bindCardDropListData: props.bindCardDropListData,
   });

@@ -7,7 +7,7 @@ import {z} from "zod";
 import i18next from "i18next";
 
 interface IUsePakistanMobileWalletForm {
-  // isPostBankBindSaveToPKMutationLoading: boolean;
+  isPostBankBindSaveToPKMutationLoading: boolean;
   triggerPostBankBindSaveToPKMutation: any;
   bindCardDropListData?: GetBindCardDropListResponse;
 }
@@ -82,9 +82,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     if (!mobileData.isValidation) return;
 
     const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue];
-    // console.log("mobileWalletAccount", mobileWalletAccount);
-
-    // if(props.isPostBankBindSaveToPKMutationLoading) return;
+    if(props.isPostBankBindSaveToPKMutationLoading) return;
 
     props.triggerPostBankBindSaveToPKMutation({
       bankAccNr: "",
@@ -119,6 +117,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     mobileData.data,
     props.bindCardDropListData,
     props.triggerPostBankBindSaveToPKMutation,
+    props.isPostBankBindSaveToPKMutationLoading,
   ]);
 
   return {

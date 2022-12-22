@@ -42,7 +42,6 @@ const BindBankAccountPage = () => {
     // NOTE: 綁定電子錢包
     const [triggerPostBankBindSaveToPKMutation, { isLoading: isPostBankBindSaveToPKMutationLoading}] = usePostBankBindSaveToPKMutation();
 
-
     return renderByCountry({
       // NOTICE: default 0 index
       [IndiaCountry.country]: (
@@ -54,7 +53,7 @@ const BindBankAccountPage = () => {
       [PakistanCountry.country]: (
         <PakistanBindBankAccountPage
           postBankBindSaveToPK={postBankBindSaveToPK}
-          // isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
+          isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
           triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
           triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
           bindCardDropListData={bindCardDropListData}
