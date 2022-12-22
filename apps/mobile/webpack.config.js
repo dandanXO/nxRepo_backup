@@ -146,8 +146,10 @@ module.exports = (config, context) => {
         ],
         configFile: 'sentry.properties',
         setCommits: {
-          auto: true,
-          ignoreMissing: true,
+          auto: false,
+          // ignoreMissing: true,
+          repo: "frontend",
+          commit: gitRevisionPlugin.commithash(),
         }
       }),
     )
