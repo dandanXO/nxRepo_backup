@@ -151,7 +151,7 @@ export const useBangladeshMobileWalletForm = (props: IUseBangladeshMobileWalletF
       .catch((err: CustomAxiosError) => {
         const error = new Error();
         error.name = "triggerPostBankBindSaveToBangladeshMutation"
-        error.message = JSON.stringify(err)
+        if(!err) error.message = JSON.stringify(err)
         Sentry.captureException(error);
       })
       .finally(() => {

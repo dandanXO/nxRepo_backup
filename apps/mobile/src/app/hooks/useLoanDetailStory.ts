@@ -61,8 +61,8 @@ const useLoanDetailStory = () => {
         })
         .catch((err: CustomAxiosError) => {
           const error = new Error();
-          error.name = "postRepayReceipt"
-          error.message = JSON.stringify(err)
+          error.name = "postRepayCreate"
+          if(!err) error.message = JSON.stringify(err)
           Sentry.captureException(error);
           reject(err);
         })

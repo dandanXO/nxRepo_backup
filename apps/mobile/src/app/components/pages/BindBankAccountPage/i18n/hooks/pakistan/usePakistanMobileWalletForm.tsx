@@ -114,7 +114,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
       .catch((err: CustomAxiosError) => {
         const error = new Error();
         error.name = "triggerPostBankBindSaveToPKMutation"
-        error.message = JSON.stringify(err)
+        if(!err) error.message = JSON.stringify(err)
         Sentry.captureException(error);
       })
   },[
