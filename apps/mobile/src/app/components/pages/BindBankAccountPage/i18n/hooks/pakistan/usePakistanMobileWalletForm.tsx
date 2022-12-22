@@ -111,11 +111,8 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         });
       })
       .catch((error: any) => {
-        Sentry.captureException(error);
+        Sentry.captureException(JSON.stringify(error));
       })
-      .finally(() => {
-
-      });
   },[
     mobileData.isValidation,
     mobileData.data,

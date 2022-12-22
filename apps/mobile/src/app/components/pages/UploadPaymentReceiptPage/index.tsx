@@ -46,7 +46,7 @@ const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
                     goToUploadedPaymentReceiptPage();
                 })
                 .catch((error) => {
-                  Sentry.captureException(error);
+                  Sentry.captureException(JSON.stringify(error));
                 })
                 .finally(() => {
                     props.setIsUploading(false);

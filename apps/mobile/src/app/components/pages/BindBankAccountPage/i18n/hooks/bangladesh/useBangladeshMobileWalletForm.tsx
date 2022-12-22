@@ -148,7 +148,7 @@ export const useBangladeshMobileWalletForm = (props: IUseBangladeshMobileWalletF
         });
       })
       .catch((error: any) => {
-        Sentry.captureException(error);
+        Sentry.captureException(JSON.stringify(error));
       })
       .finally(() => {
         setIsFormPending(false);

@@ -87,31 +87,38 @@ const axiosBaseQuery =
                 onDownloadProgress: onDownloadPercent,
             };
         } catch (axiosError) {
+            // console.log("axiosError", axiosError);
             const err = axiosError as AxiosError;
-            const error = JSON.parse(JSON.stringify(err.response?.data)) as {
+            // console.log("err.toJSON()", err.toJSON());
+            const customError = JSON.parse(JSON.stringify(err.response?.data)) as {
                 code: number;
-                message: string;
                 data?: {
-                    msg?: string;
+                  msg?: string;
                 };
+                message: string;
             };
-            const errorMessage = error?.data?.msg || error.message;
+            const customErrorMessage = customError?.data?.msg || customError.message;
             // console.log(err);
             // console.log(error);
-            alertModal(errorMessage);
+            alertModal(customErrorMessage);
 
-            Sentry.captureException(err.toJSON());
-            Sentry.captureException(axiosError);
-            Sentry.captureException(errorMessage);
-
-            throw axiosError;
+            Sentry.captureException(JSON.stringify({
+              originalError: {
+                code: err.code,
+                message: err.message,
+                name: err.name,
+                stack: err.stack,
+              },
+              customError
+            }));
+            // throw axiosError;
             // alertModal(err.message);
-            // return {
-            //     error: {
-            //         status: err.response?.status,
-            //         data: err.response?.data || err.message,
-            //     },
-            // };
+            return {
+                error: {
+                    status: err.response?.status,
+                    data: err.response?.data || err.message,
+                },
+            };
         }
     };
 export default axiosBaseQuery;

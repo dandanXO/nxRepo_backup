@@ -45,7 +45,7 @@ const Advertisement = (props: AdvertisementProps) => {
           })
           .catch((error: any) => {
             setShowSubmitOrdereModal(false);
-            Sentry.captureException(error);
+            Sentry.captureException(JSON.stringify(error));
             reject("error")
           })
     });
