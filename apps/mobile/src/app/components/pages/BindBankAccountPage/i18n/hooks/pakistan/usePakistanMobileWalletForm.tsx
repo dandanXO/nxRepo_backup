@@ -5,9 +5,9 @@ import {InputValue, Modal} from "@frontend/mobile/shared/ui";
 import {i18nBankBindAccountPage} from "../../translations";
 import {z} from "zod";
 import i18next from "i18next";
-import {useLockRequest} from "../../../../../../hooks/useLockRequest";
 
 interface IUsePakistanMobileWalletForm {
+  // isPostBankBindSaveToPKMutationLoading: boolean;
   triggerPostBankBindSaveToPKMutation: any;
   bindCardDropListData?: GetBindCardDropListResponse;
 }
@@ -74,22 +74,17 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     }
   }, [mobileData.data]);
 
-  // NOTE: 鎖定表單傳送
-  const {startRequest, isRequestPending, endRequest} = useLockRequest("triggerPostBankBindSaveToPKMutation");
 
   // NOTE: 點擊 Submit
   const confirm = useCallback(() => {
-    if(isRequestPending("triggerPostBankBindSaveToPKMutation")) {
-      return;
-    } else {
-      startRequest("triggerPostBankBindSaveToPKMutation")
-    }
 
     validateMobileWalletAccount();
     if (!mobileData.isValidation) return;
 
     const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue];
     // console.log("mobileWalletAccount", mobileWalletAccount);
+
+    // if(props.isPostBankBindSaveToPKMutationLoading) return;
 
     props.triggerPostBankBindSaveToPKMutation({
       bankAccNr: "",
@@ -117,7 +112,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         });
       })
       .finally(() => {
-        endRequest("triggerPostBankBindSaveToPKMutation")
+
       });
   },[
     mobileData.isValidation,

@@ -10,6 +10,7 @@ export type IUseBindBankAccountPage = {
 
   // NOTE: 電子錢包
   // NOTE: 綁定電子錢包
+  // isPostBankBindSaveToPKMutationLoading?: boolean;
   triggerPostBankBindSaveToPKMutation?: (requestBody: PostPKBankBindSaveRequest) => any;
 
   // NOTE: 取得電子錢包列表

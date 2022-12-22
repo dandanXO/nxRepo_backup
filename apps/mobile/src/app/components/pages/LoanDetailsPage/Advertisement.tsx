@@ -20,6 +20,7 @@ const AdvertisementStyled = styled.div`
 
 type AdvertisementProps = {
     recommendProducts: [];
+    isPostLoanSubmitOrderLoading: boolean;
     postLoanSubmitOrder: (obj: any) => any;
 } & WithTranslation;
 
@@ -32,6 +33,8 @@ const Advertisement = (props: AdvertisementProps) => {
         useState(false);
 
     const postLoanSubmitOrderRequest = (requestBody: PostLoanSubmitOrderRequestBody): Promise<string> => new Promise((resolve, reject) => {
+        if(props.isPostLoanSubmitOrderLoading) return;
+
         props.postLoanSubmitOrder(requestBody)
           .unwrap()
           .then(() => {

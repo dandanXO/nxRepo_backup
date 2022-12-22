@@ -5,6 +5,7 @@ import {CustomPage} from "../BindBankAccountPage/components/CustomPage";
 import PureLoanDetails, {PureLoanDetailsPageProps} from "../../components/PureLoanDetails";
 
 type PureLoanDetailsAdvertisementPage = PureLoanDetailsPageProps & {
+  isPostLoanSubmitOrderLoading: boolean;
   postLoanSubmitOrder: (obj: any) => any;
 };
 
@@ -24,6 +25,7 @@ export const PureLoanDetailsAdvertisementPage = (
             />
             <Advertisement
                 recommendProducts={props?.currentData?.recommendProducts}
+                isPostLoanSubmitOrderLoading={props.isPostLoanSubmitOrderLoading}
                 postLoanSubmitOrder={props.postLoanSubmitOrder}
             />
         </CustomPage>

@@ -40,7 +40,7 @@ const BindBankAccountPage = () => {
     } ] = useLazyGetBindCardDropListQuery({})
 
     // NOTE: 綁定電子錢包
-    const [triggerPostBankBindSaveToPKMutation, { isLoading }] = usePostBankBindSaveToPKMutation();
+    const [triggerPostBankBindSaveToPKMutation, { isLoading: isPostBankBindSaveToPKMutationLoading}] = usePostBankBindSaveToPKMutation();
 
 
     return renderByCountry({
@@ -54,6 +54,7 @@ const BindBankAccountPage = () => {
       [PakistanCountry.country]: (
         <PakistanBindBankAccountPage
           postBankBindSaveToPK={postBankBindSaveToPK}
+          // isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
           triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
           triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
           bindCardDropListData={bindCardDropListData}
