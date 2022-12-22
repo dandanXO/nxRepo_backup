@@ -26,7 +26,7 @@ if(environment.country === "bn") {
       // console.log("error:", error);
       const error = new Error();
       error.name = "changeLanguage"
-      if(!err) error.message = JSON.stringify(err)
+      if(err) error.message = JSON.stringify(err)
       Sentry.captureException(error);
     })
 }

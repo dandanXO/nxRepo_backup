@@ -47,7 +47,7 @@ const Advertisement = (props: AdvertisementProps) => {
           .catch((err: CustomAxiosError) => {
             const error = new Error();
             error.name = "postLoanSubmitOrder"
-            if(!err) error.message = JSON.stringify(err)
+            if(err) error.message = JSON.stringify(err)
             Sentry.captureException(error);
             setShowSubmitOrdereModal(false);
             reject("error")

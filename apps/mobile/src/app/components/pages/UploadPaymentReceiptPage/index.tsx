@@ -49,7 +49,7 @@ const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
                 .catch((err: CustomAxiosError) => {
                   const error = new Error();
                   error.name = "postRepayReceipt"
-                  if(!err) error.message = JSON.stringify(err)
+                  if(err) error.message = JSON.stringify(err)
                   Sentry.captureException(error);
                 })
                 .finally(() => {

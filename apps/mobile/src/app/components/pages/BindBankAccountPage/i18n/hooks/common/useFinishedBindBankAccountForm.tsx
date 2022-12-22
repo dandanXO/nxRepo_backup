@@ -94,7 +94,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
       .catch((err: CustomAxiosError) => {
         const error = new Error();
         error.name = requestName
-        if(!err) error.message = JSON.stringify(err)
+        if(err) error.message = JSON.stringify(err)
         Sentry.captureException(error);
       })
       .finally(() => {
