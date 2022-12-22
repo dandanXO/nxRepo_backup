@@ -82,6 +82,7 @@ const useLoanDetailStory = () => {
     })
   const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: true, repayAmount: number) => {
       if(!repayTypes) {
+        console.log("repayTypes: false");
         Sentry.captureMessage("repayTypes: false")
         triggerGetRepayTypesQuery({orderNo: pageQueryString.orderNo})
           .unwrap()
@@ -96,6 +97,7 @@ const useLoanDetailStory = () => {
             });
           })
       } else {
+        console.log("repayTypes: true");
         Sentry.captureMessage("repayTypes: true")
         return postRepayCreateRequest({
           extend: isExtend,
