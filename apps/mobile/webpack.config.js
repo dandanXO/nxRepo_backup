@@ -147,6 +147,7 @@ module.exports = (config, context) => {
         configFile: 'sentry.properties',
         setCommits: {
           auto: true,
+          ignoreMissing: true,
         }
       }),
     )
