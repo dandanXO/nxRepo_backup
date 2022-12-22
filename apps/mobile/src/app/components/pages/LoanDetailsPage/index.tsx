@@ -8,6 +8,7 @@ const LoanDetailsPage = () => {
         currentData,
         navigateToUploadPaymentReceiptPage,
         handlePostRepayCreate,
+        isRepayTypesFetching,
         paymentMethodList,
         setPayType,
     } = useLoanDetailStory();
@@ -25,6 +26,7 @@ const LoanDetailsPage = () => {
             postLoanSubmitOrder={postLoanSubmitOrder}
             isPostLoanSubmitOrderLoading={isPostLoanSubmitOrderLoading}
             paymentMethodList={paymentMethodList}
+            isRepayTypesFetching={isRepayTypesFetching}
             setPayType={setPayType}
         />
     );

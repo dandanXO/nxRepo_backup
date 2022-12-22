@@ -89,6 +89,7 @@ type RepaymentModalProps = {
     setRepayBalance: React.Dispatch<React.SetStateAction<number>>;
     setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
+    isRepayTypesFetching: boolean;
     paymentMethodList: string[];
     setPayType: React.Dispatch<React.SetStateAction<number>>;
     // FIXME:
@@ -96,6 +97,7 @@ type RepaymentModalProps = {
 
   balanceValue: string;
   setBalanceValue: React.Dispatch<React.SetStateAction<string>>;
+
 } & WithTranslation;
 
 const RepaymentModal = (props: RepaymentModalProps) => {
@@ -202,6 +204,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                 <SectionButton>
                                     <RepayAndApplyButton
                                         onClick={() => {
+                                            if(props.isRepayTypesFetching) return ;
                                             props.setShowRepaymentModal(false);
                                             props.setShowRepaymentNoticeModal(
                                                 true
@@ -213,13 +216,17 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                 </SectionButton>
                                 <SectionButton2>
                                     <RepaymentCancelButton
-                                        onClick={() =>
-                                            props.setShowRepaymentModal(false)
-                                        }
+                                        onClick={() =>{
+                                          if(props.isRepayTypesFetching) return ;
+                                          props.setShowRepaymentModal(false)
+                                        }}
                                     >
                                       {props.t("Cancel")}
                                     </RepaymentCancelButton>
-                                    <RepaymentButton onClick={handleConfirm}>
+                                    <RepaymentButton onClick={() => {
+                                      if(props.isRepayTypesFetching) return ;
+                                      handleConfirm();
+                                    }}>
                                       {props.t("Repayment")}
                                     </RepaymentButton>
                                 </SectionButton2>

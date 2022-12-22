@@ -8,6 +8,7 @@ const ExtendDetailsPage = () => {
         currentData,
         navigateToUploadPaymentReceiptPage,
         handlePostRepayCreate,
+        isRepayTypesFetching,
         paymentMethodList,
         setPayType,
     } = useLoanDetailStory();
@@ -19,6 +20,7 @@ const ExtendDetailsPage = () => {
                     navigateToUploadPaymentReceiptPage
                 }
                 handlePostRepayCreate={handlePostRepayCreate}
+                isRepayTypesFetching={isRepayTypesFetching}
                 paymentMethodList={paymentMethodList}
                 setPayType={setPayType}
             />

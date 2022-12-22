@@ -20,6 +20,7 @@ export const PureLoanDetailsAdvertisementPage = (
                     props.navigateToUploadPaymentReceiptPage
                 }
                 handlePostRepayCreate={props.handlePostRepayCreate}
+                isRepayTypesFetching={props.isRepayTypesFetching}
                 paymentMethodList={props.paymentMethodList}
                 setPayType={props.setPayType}
             />

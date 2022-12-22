@@ -80,41 +80,21 @@ const useLoanDetailStory = () => {
         })
 
     })
-  const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: true, repayAmount: number) => {
-      if(!repayTypes) {
-        console.log("repayTypes: false");
-        Sentry.captureMessage("repayTypes: false")
-        triggerGetRepayTypesQuery({orderNo: pageQueryString.orderNo})
-          .unwrap()
-          .then((repayTypes2) => {
-            console.log("repayTypes2", repayTypes2);
-            return postRepayCreateRequest({
-              extend: isExtend,
-              forceApplyAfterRepay: isForceApplyAfterRepay,
-              orderNo: orderNo,
-              payType: repayTypes2 && repayTypes2[payType].payType,
-              repayAmount: repayAmount,
-            });
-          })
-      } else {
-        console.log("repayTypes: true");
-        Sentry.captureMessage("repayTypes: true")
-        return postRepayCreateRequest({
-          extend: isExtend,
-          forceApplyAfterRepay: isForceApplyAfterRepay,
-          orderNo: orderNo,
-          payType: repayTypes && repayTypes[payType].payType,
-          repayAmount: repayAmount,
-        });
-      }
-
-
+    const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: true, repayAmount: number) => {
+      return postRepayCreateRequest({
+        extend: isExtend,
+        forceApplyAfterRepay: isForceApplyAfterRepay,
+        orderNo: orderNo,
+        payType: repayTypes && repayTypes[payType].payType,
+        repayAmount: repayAmount,
+      });
     }
 
     return {
         currentData,
         navigateToUploadPaymentReceiptPage,
         handlePostRepayCreate,
+        isRepayTypesFetching,
         paymentMethodList,
         setPayType,
     };

@@ -34,6 +34,7 @@ export interface PureLoanDetailsPageProps {
     currentData?: any;
     navigateToUploadPaymentReceiptPage: any;
     handlePostRepayCreate: any;
+    isRepayTypesFetching: boolean;
     paymentMethodList: string[];
     setPayType: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -96,6 +97,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               setShowRepaymentModal={setShowRepaymentModal}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
               paymentMethodList={props.paymentMethodList}
+              isRepayTypesFetching={props.isRepayTypesFetching}
               setPayType={props.setPayType}
               setShowRepaymentAdsModal={setShowRepaymentAdsModal}
             />
