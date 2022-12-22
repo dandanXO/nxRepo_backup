@@ -145,12 +145,12 @@ module.exports = (config, context) => {
           'webpack.config.js'
         ],
         configFile: 'sentry.properties',
-        setCommits: {
-          auto: false,
+        // setCommits: {
+        //   auto: false,
           // ignoreMissing: true,
-          repo: "frontend",
-          commit: gitRevisionPlugin.commithash(),
-        }
+          // repo: "frontend",
+          // commit: gitRevisionPlugin.commithash(),
+        // }
       }),
     )
   }
