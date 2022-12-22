@@ -6,20 +6,30 @@ import {PostRepayCreateRequestBody, PostRepayCreateResponse,} from "../api/postR
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();
+
     const pageQueryString = useLocationOrderQueryString();
-    const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({
+
+    // NOTE: useGetLoanDetailQuery
+    const {
+      currentData,
+      isLoading: isGetLoanDetailQueryLoading,
+      isFetching: isGetLoanDetailQueryFetching
+    } = useGetLoanDetailQuery({
         orderNo: pageQueryString.orderNo,
     });
+
+    // NOTE: useGetRepayTypesQuery
     const {
         currentData: repayTypes,
         isLoading: isRepayTypesLoading,
         isFetching: isRepayTypesFetching,
     } = useGetRepayTypesQuery({orderNo: pageQueryString.orderNo});
+
     const orderNo = pageQueryString.orderNo;
     const token = pageQueryString.token;
     const [payType, setPayType] = useState<number>(0);
 
-    // NOTICE:
+    // NOTE: navigate
     const navigateToUploadPaymentReceiptPage = useCallback(() => {
         navigate(`/upload-payment-receipt?token=${token}&orderNo=${orderNo}`);
     }, [token, orderNo]);
@@ -34,9 +44,9 @@ const useLoanDetailStory = () => {
       setPaymentMethodList(methods);
     }, [repayTypes])
 
-    // NOTICE:
-    const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =
-        usePostRepayCreateMutation();
+
+    // NOTE: usePostRepayCreateMutation
+    const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] = usePostRepayCreateMutation();
 
     const postRepayCreateRequest = (props: PostRepayCreateRequestBody) => new Promise((resolve, reject) => {
       postRepayCreate(props)
