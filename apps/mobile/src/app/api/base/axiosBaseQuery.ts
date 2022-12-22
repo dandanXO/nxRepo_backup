@@ -100,7 +100,9 @@ const axiosBaseQuery =
             // console.log(error);
             alertModal(errorMessage);
 
+            Sentry.captureException(err.toJSON());
             Sentry.captureException(axiosError);
+            Sentry.captureException(errorMessage);
 
             throw axiosError;
             // alertModal(err.message);
