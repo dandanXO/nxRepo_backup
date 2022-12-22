@@ -145,6 +145,9 @@ module.exports = (config, context) => {
           'webpack.config.js'
         ],
         configFile: 'sentry.properties',
+        setCommits: {
+          auto: true,
+        }
       }),
     )
   }
