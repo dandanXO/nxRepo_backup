@@ -4,7 +4,8 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 // const webpackConfig = require('@nrwl/react/plugins/webpack');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const isProduction = process.env.NODE_ENV == "production";
+// const isProduction = process.env.NODE_ENV == "production";
+const isProduction = process.env.NODE_ENV !== undefined;
 console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -109,8 +110,30 @@ module.exports = (config, context) => {
       new CleanWebpackPlugin({
         verbose: true,
       }),
+      // new SentryCliPlugin({
+      //   release: `${gitRevisionPlugin.commithash()}`,
+      //   debug: true,
+      //   authToken: '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
+      //   org: "workshop-xs",
+      //   project: "api-mobile",
+      //   include: './dist/apps/mobile',
+      //   ignoreFile: '.sentrycliignore',
+      //   ignore: [
+      //     'node_modules',
+      //     'webpack.config.js'
+      //   ],
+      //   configFile: 'sentry.properties',
+      // }),
+    ]
+  });
+  if(isProduction) {
+  //   finalConfig.plugins.push(
+  //     new CleanWebpackPlugin({
+  //       verbose: true,
+  //     })
+  //   );
+    finalConfig.plugins.push(
       new SentryCliPlugin({
-        release: `${gitRevisionPlugin.commithash()}`,
         debug: true,
         authToken: '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
         org: "workshop-xs",
@@ -123,30 +146,8 @@ module.exports = (config, context) => {
         ],
         configFile: 'sentry.properties',
       }),
-    ]
-  });
-  // if(isProduction) {
-  //   finalConfig.plugins.push(
-  //     new CleanWebpackPlugin({
-  //       verbose: true,
-  //     })
-  //   );
-  //   finalConfig.plugins.push(
-  //     new SentryCliPlugin({
-  //       debug: true,
-  //       authToken: '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
-  //       org: "workshop-xs",
-  //       project: "api-mobile",
-  //       include: './dist/apps/mobile',
-  //       ignoreFile: '.sentrycliignore',
-  //       ignore: [
-  //         'node_modules',
-  //         'webpack.config.js'
-  //       ],
-  //       configFile: 'sentry.properties',
-  //     }),
-  //   )
-  // }
+    )
+  }
   // console.log("finalConfig", finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return finalConfig;
