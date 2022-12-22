@@ -6,6 +6,7 @@ import {i18nBankBindAccountPage} from "../../translations";
 import {z} from "zod";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
+import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -93,7 +94,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     })
       .unwrap()
       .then((data: any) => {
-        // console.log("data:", data);
+        console.log("data:", data);
 
         // Notice: bind account successfully
         Modal.alert({
@@ -110,8 +111,11 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
           },
         });
       })
-      .catch((error: any) => {
-        Sentry.captureException(JSON.stringify(error));
+      .catch((err: CustomAxiosError) => {
+        const error = new Error();
+        error.name = "triggerPostBankBindSaveToPKMutation"
+        error.message = JSON.stringify(err)
+        Sentry.captureException(error);
       })
   },[
     mobileData.isValidation,

@@ -4,6 +4,7 @@ import {GetBindCardDropListResponse} from "../../../../../../api/GetBindCardDrop
 import {useTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import * as Sentry from "@sentry/react";
+import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
 
 type IUseFinishedBindBankAccountPage =  {
   // NOTICE: Common
@@ -31,13 +32,16 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
   const navigateToAPP = useCallback(() => window.location.href = "innerh5://127.0.0.1", []);
 
   const confirm = useCallback(() => {
+    console.log("confirm")
     setIsFormPending(true);
 
     // NOTE: FormRequest
     let request;
 
     // NOTICE: India
+    let requestName = ""
     if (props.postBankBindSave) {
+      requestName = "postBankBindSave"
       request = props
         .postBankBindSave({
           bankAccount: props.bankcardNoData.data,
@@ -45,6 +49,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
           upiId: props.upiData && props.upiData.data,
         })
     } else if (props.postBankBindSaveToPK) {
+      requestName = "postBankBindSaveToPK"
       // NOTICE: Pakistan
       let targetBankAccount
       if(props.bindCardDropListData && props.bindCardDropListData.availableBanks) {
@@ -67,9 +72,10 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         .postBankBindSaveToPK(requestBody)
     }
 
+    console.log("data!!!!");
     request.unwrap()
       .then((data: any) => {
-        // console.log("data:", data);
+        console.log("data:", data);
         // Notice: bind account successfully
         Modal.alert({
           show: true,
@@ -85,10 +91,14 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
           },
         });
       })
-      .catch((error: any) => {
-        Sentry.captureException(JSON.stringify(error));
+      .catch((err: CustomAxiosError) => {
+        const error = new Error();
+        error.name = requestName
+        error.message = JSON.stringify(err)
+        Sentry.captureException(error);
       })
       .finally(() => {
+        console.log("bind-finally")
         setIsFormPending(false);
       });
 

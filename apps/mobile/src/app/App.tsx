@@ -8,6 +8,7 @@ import {AppStyle} from "./AppStyle";
 import "./i18n"
 import i18next from "i18next";
 import {AllLanguage} from "../environments/config/languages/IAllLanguage";
+import * as Sentry from "@sentry/react";
 
 // console.log("environment.country", environment.country)
 
@@ -20,9 +21,13 @@ if(environment.country === "bn") {
     .then((t) => {
       // console.log("changeLanguage:", environment.countryName);
     })
-    .catch((error) => {
+    .catch((err) => {
       // console.log("changeLanguage:", environment.countryName);
       // console.log("error:", error);
+      const error = new Error();
+      error.name = "changeLanguage"
+      error.message = JSON.stringify(err)
+      Sentry.captureException(error);
     })
 }
 
