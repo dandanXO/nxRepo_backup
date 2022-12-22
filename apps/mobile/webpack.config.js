@@ -107,9 +107,9 @@ module.exports = (config, context) => {
               'BRANCH': JSON.stringify(gitRevisionPlugin.branch()),
           },
       }),
-      new CleanWebpackPlugin({
-        verbose: true,
-      }),
+      // new CleanWebpackPlugin({
+      //   verbose: true,
+      // }),
       // new SentryCliPlugin({
       //   release: `${gitRevisionPlugin.commithash()}`,
       //   debug: true,
