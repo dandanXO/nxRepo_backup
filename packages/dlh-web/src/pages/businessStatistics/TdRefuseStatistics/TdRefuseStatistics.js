@@ -10,7 +10,7 @@ import { axios, convertMoneyFormat } from "utils";
 import download from "downloadjs";
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
-
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 class TdRefuseStatistics extends Component {
     columns = [
         {
@@ -32,7 +32,9 @@ class TdRefuseStatistics extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { btnDisabled: false };
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
+        this.state = { btnDisabled: false ,  isSuperAdmin, allMerchants};
         this.initTime = [
             moment(),
             moment()
@@ -41,13 +43,14 @@ class TdRefuseStatistics extends Component {
     }
 
     handleSearch = (obj) => {
-        const { time, channelId } = obj;
+        const { time, channelId ,merchantId='' } = obj;
         const { getTableData } = this.props;
         const isArr = Array.isArray(time) && time.length > 0;
         this.searchParams = {
             startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
             endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
             channelId: channelId,
+            merchantId
         }
         getTableData({ ... this.searchParams, page: 0, size: 10 });
     }
@@ -55,7 +58,7 @@ class TdRefuseStatistics extends Component {
     handlePageChange = (info) => {
         const { current, pageSize } = info;
         const { getTableData } = this.props;
-        getTableData({ page: current - 1, size: pageSize, ...this.searchParams });
+        getTableData({ ...this.searchParams,page: current - 1, size: pageSize,  });
     }
 
     componentDidMount() {
@@ -64,6 +67,7 @@ class TdRefuseStatistics extends Component {
             startTime: this.initTime[0].format('YYYY-MM-DD 00:00:00'),
             endTime: this.initTime[1].format('YYYY-MM-DD 23:59:59'),
             channelId: '',
+            merchantId:''
         }
         getTableData({ ... this.searchParams, page: 0, size: 10 });
     }
@@ -82,7 +86,8 @@ class TdRefuseStatistics extends Component {
         const params = {
             startTime: isArr ? time[0].format('YYYY-MM-DD') : '',
             endTime: isArr ? time[1].format('YYYY-MM-DD') : '',
-            channelId:channelId
+            channelId:channelId,
+            merchantId:''
         }
         axios({
         url: "/hs/admin/statistics/refusedReasonStatisticDownLoad",
@@ -113,6 +118,8 @@ class TdRefuseStatistics extends Component {
                     handleSearch={this.handleSearch}
                     exportRecord={this.exportRecord}
                     btnDisable={btnDisabled}
+                    isSuperAdmin={this.state.isSuperAdmin}
+                    allMerchants={this.state.allMerchants}
                 />
                 <CommonTable
                     columns={this.columns}

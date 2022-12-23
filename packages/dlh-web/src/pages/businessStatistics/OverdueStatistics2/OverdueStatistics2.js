@@ -11,12 +11,15 @@ import moment from 'moment';
 import SearchList from './SearchList/SearchList';
 const { TabPane } = Tabs;
 import { Chart, Geom, Axis, Tooltip, Coord, Legend } from 'bizcharts';
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 function OverdueStatistics2 ({ intl, getTableData, tableData: { data, pagination }, loading, getTimingDistribution, timingDistribution }) {
 
-  
+    const isSuperAdmin = getIsSuperAdmin();
+    const allMerchants = getAllMerchants();
     const initTime=[moment(0, "HH").add(-7,'d'), moment({ hour: 23, minute: 59, seconds: 59 })]
 
     const [searchParams, setSearchParams] = useState({
+        merchantId:'',
         startTime: initTime[0].format("YYYY-MM-DD 00:00:00"),
         endTime: initTime[1].format("YYYY-MM-DD 23:59:59"),
         page: 0,
@@ -73,11 +76,11 @@ function OverdueStatistics2 ({ intl, getTableData, tableData: { data, pagination
     ]
 
     const handleSearch = (type, obj) => {
-        const { time } = obj
+        const { time, merchantId='' } = obj
         const isArr = Array.isArray(time) && time.length > 0;
         const startTime = isArr ? time[0].format("YYYY-MM-DD 00:00:00") : "";
         const endTime = isArr ? time[1].format("YYYY-MM-DD 23:59:59") : "";
-        type === "overdueTime" ? setSearchParams({ startTime, endTime, page: 0, size: 10 }) : setSearchTimingParams({startTime, endTime})
+        type === "overdueTime" ? setSearchParams({ merchantId,startTime, endTime, page: 0, size: 10 }) : setSearchTimingParams({startTime, endTime})
     }
     const handlePageChange = (info) => {
         const { current, pageSize } = info;
@@ -111,7 +114,7 @@ function OverdueStatistics2 ({ intl, getTableData, tableData: { data, pagination
       <div>
             <Tabs animated={false}>
                 <TabPane tab={intl.formatMessage({ id: "page.table.overdue.time" })} key="overdueTime">
-                    <SearchList initTime={initTime} handleSearch={handleSearch} type="overdueTime"/>
+                    <SearchList initTime={initTime} handleSearch={handleSearch} type="overdueTime" isSuperAdmin={isSuperAdmin} allMerchants={allMerchants}/>
                     <CommonTable
                         columns={columns}
                         dataSource={data}

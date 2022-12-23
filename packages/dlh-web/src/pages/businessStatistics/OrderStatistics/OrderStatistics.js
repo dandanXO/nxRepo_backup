@@ -10,87 +10,100 @@ import {axios,orderStatus,convertMoneyFormat} from "utils";
 import download from "downloadjs";
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
-
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 const convertParams = (obj = {}) => {
-    const { phoneNo = '', nameTrue = '',status='' } = obj;
+    const { phoneNo = '', nameTrue = '',status='',merchantId='' } = obj;
     return {
         phoneNo,
         nameTrue,
-        status
+        status,
+        merchantId
     };
 }
 
 class OrderStatistics extends Component {
-    columns = [
-        {
-            title: <FormattedMessage id="page.search.list.name" />, dataIndex: 'nameTrue', key: 'nameTrue', width: '15%',
-            render(text, record) {
-                return <CopyText text={text} />;
-            }
-        },
-        {
-            title: <FormattedMessage id="windowPage.mobile" />, dataIndex: 'phoneNo', key: 'phoneNo', 
-            render(text, record) {
-                return <CopyText text={text} />;
-            }
-        },
-        { title: <FormattedMessage id="page.table.number.loan" />, dataIndex: 'orderCount', key: 'orderCount' },
-        {
-            title: <FormattedMessage id="page.table.accumulated.contract.amount" />,
-            dataIndex: 'sumOrderAmt',
-            key: 'sumOrderAmt',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)} />
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.accumulated.repayment.amount" />,
-            dataIndex: 'sumRepayAmt',
-            key: 'sumRepayAmt',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)} />
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.recent.order.status" />, dataIndex: 'newStatus', key: 'newStatus', width: '12%',
-            render(text) {
-                return orderStatus[text];
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.recent.order.loan.date" />, dataIndex: 'newLoanTime', width: '13%', key: 'newLoanTime',
-            render(text) {
-                return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss");
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.recent.order.due.date" />, dataIndex: 'newExpireTime', width: '13%', key: 'newExpireTime',
-            render(text) {
-                return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss");
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.longest.overdue.days" />, dataIndex: 'maxExpireDays', key: 'maxExpireDays'
-            , render(text) {
-                return text ? text : 0;
-            }
-        }
-    ];
+    
 
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
-            btnDisabled: false
+            btnDisabled: false,
+            isSuperAdmin,
+            allMerchants
         };
         this.pageSize = 50;
         this.searchParams = convertParams();
+        this.columns = [
+            {
+                title: <FormattedMessage id="page.search.list.name" />, dataIndex: 'nameTrue', key: 'nameTrue', width: '15%',
+                render(text, record) {
+                    return <CopyText text={text} />;
+                }
+            },
+            {
+                title: <FormattedMessage id="windowPage.mobile" />, dataIndex: 'phoneNo', key: 'phoneNo', 
+                render(text, record) {
+                    return <CopyText text={text} />;
+                }
+            },
+            { title: <FormattedMessage id="page.table.number.loan" />, dataIndex: 'orderCount', key: 'orderCount' },
+            {
+                title: <FormattedMessage id="page.table.accumulated.contract.amount" />,
+                dataIndex: 'sumOrderAmt',
+                key: 'sumOrderAmt',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)} />
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.accumulated.repayment.amount" />,
+                dataIndex: 'sumRepayAmt',
+                key: 'sumRepayAmt',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)} />
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.recent.order.status" />, dataIndex: 'newStatus', key: 'newStatus', width: '12%',
+                render(text) {
+                    return orderStatus[text];
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.recent.order.loan.date" />, dataIndex: 'newLoanTime', width: '13%', key: 'newLoanTime',
+                render(text) {
+                    return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss");
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.recent.order.due.date" />, dataIndex: 'newExpireTime', width: '13%', key: 'newExpireTime',
+                render(text) {
+                    return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss");
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.longest.overdue.days" />, dataIndex: 'maxExpireDays', key: 'maxExpireDays'
+                , render(text) {
+                    return text ? text : 0;
+                }
+            }
+        ];
+        if (isSuperAdmin) {
+            this.columns.unshift({
+                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
+                dataIndex: 'merchantName',
+                key: 'merchantName'
+            })
+        }
        
     }
 
     handlePageChange = (info) => {
         const { current, pageSize } = info;
         const { getTableData } = this.props;
-        getTableData({ pageSize, pageNum: current, ...this.searchParams });
+        getTableData({  ...this.searchParams,pageSize, pageNum: current, });
     }
 
     handleSearch = (obj) => {
@@ -133,11 +146,11 @@ class OrderStatistics extends Component {
 
 
     render() {
-        const { tableData: { data, pagination }, loading } = this.props;
+        const { tableData: { data, pagination }, loading ,isSuperAdmin} = this.props;
         const { btnDisabled } = this.state;
         return (
             <div>
-                <SearchList submit={this.handleSearch}/>
+                <SearchList submit={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
                 <div><Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record" /></Button></div>
                 <CommonTable
                     columns={this.columns}
