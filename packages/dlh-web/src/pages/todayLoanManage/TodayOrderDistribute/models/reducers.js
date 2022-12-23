@@ -1,10 +1,10 @@
 import {
-    TOOD_SET_PERSON_DATA,
-    TOOD_CHANGE_MODAL_VISIBLE,
-    TOOD_CHANGE_TABLE_LOADING,
-    TOOD_SET_TABLE_DATA,
-    TOOD_CHANGE_SELECT_KEY,
-    TOOD_CHANGE_PERSON_TYPE
+  TOOD_SET_PERSON_DATA,
+  TOOD_CHANGE_MODAL_VISIBLE,
+  TOOD_CHANGE_TABLE_LOADING,
+  TOOD_SET_TABLE_DATA,
+  TOOD_CHANGE_SELECT_KEY,
+  TOOD_CHANGE_PERSON_TYPE, TOOD_SET_TODAY_COLLECTOR
 } from './actions';
 
 
@@ -17,7 +17,8 @@ const initState = {
     visible: false,
     personData: [],
     selectKeys: [],
-    personType: ''
+    personType: '',
+    todayCollector: [],
 }
 
 const TodayderDistribute = (state = initState, action) => {
@@ -34,6 +35,8 @@ const TodayderDistribute = (state = initState, action) => {
             return { ...state, selectKeys: action.data };
         case TOOD_CHANGE_PERSON_TYPE:
             return { ...state, personType: action.option };
+        case TOOD_SET_TODAY_COLLECTOR:
+            return { ...state, todayCollector: action.data };
         default:
             return state;
     }

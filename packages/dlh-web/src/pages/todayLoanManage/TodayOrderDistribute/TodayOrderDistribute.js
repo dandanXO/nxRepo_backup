@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import { Button, message } from 'antd';
 import {connect} from 'react-redux';
 import moment from 'moment';
-import { CommonTable, UrgePersonModal } from 'components';
+import { CommonTable, UrgePersonModal, CollectorModal } from 'components';
 import {todayOrderDistributeAction} from './index';
 import SearchList from './SearchList/SearchList';
 import {convertMoneyFormat} from "utils";
@@ -164,9 +164,10 @@ class TodayOrderDistribute extends Component {
     }
 
     componentDidMount() {
-        const {getTableData, getPersonData} = this.props;
+        const {getTableData, getPersonData, getTodayCollector} = this.props;
         getTableData({collectorId: null, pageSize: 10, pageNum: 1});
         getPersonData({roleId: 8});
+        getTodayCollector();
     }
 
     componentWillUnmount() {
@@ -180,7 +181,8 @@ class TodayOrderDistribute extends Component {
             loading,
             visible,
             personData,
-            selectKeys
+            selectKeys,
+            todayCollector,
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -213,6 +215,14 @@ class TodayOrderDistribute extends Component {
                     visible={visible}
                     modalTitle={"windowPage.select.collector"}
                 />
+                {/*<CollectorModal*/}
+                {/*  onModalCancel={this.onModalCancel}*/}
+                {/*  onModalOk={this.onModalOk}*/}
+                {/*  urgePerson={todayCollector}*/}
+                {/*  todayCollector={todayCollector}*/}
+                {/*  visible={visible}*/}
+                {/*  modalTitle={"windowPage.select.collector"}*/}
+                {/*/>*/}
             </div>
         );
     }
@@ -226,7 +236,8 @@ const mapStateToProps = (state) => {
         visible: todayOrderDistributeState['visible'],
         personData: todayOrderDistributeState['personData'],
         selectKeys: todayOrderDistributeState['selectKeys'],
-        personType: todayOrderDistributeState['personType']
+        personType: todayOrderDistributeState['personType'],
+        todayCollector: todayOrderDistributeState['todayCollector'],
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -236,7 +247,8 @@ const mapDispatchToProps = (dispatch) => {
         getPersonData: todayOrderDistributeAction.toodGetPersonData,
         changeModalVisible: todayOrderDistributeAction.toodChangeModalVisible,
         distributeOrder: todayOrderDistributeAction.toodDistributeOrder,
-        changeSelectKeys: todayOrderDistributeAction.toodChangeSelectKey
+        changeSelectKeys: todayOrderDistributeAction.toodChangeSelectKey,
+        getTodayCollector: todayOrderDistributeAction.toodGetTodayCollector,
     }, dispatch);
 }
 

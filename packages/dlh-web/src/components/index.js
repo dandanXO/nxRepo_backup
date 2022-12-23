@@ -5,6 +5,7 @@ import PathBread from './PathBread/PathBread';
 import CollapseCard from './CollapseCard/CollapseCard';
 import * as ConfigTypes from './ConfigTypes/index';
 import UrgePersonModal from './UrgePersonModal/UrgePersonModal';
+import CollectorModal from './CollectorModal/CollectorModal';
 import CollectTeamReport from './CollectTeamReport/CollectTeamReport';
 import CopyToLink from './CopyToLink/CopyToLink';
 import EllipsisText from './CopyToLink/EllipsisText';
@@ -22,6 +23,7 @@ export {
   CollapseCard,
   ConfigTypes,
   UrgePersonModal,
+  CollectorModal,
   CollectTeamReport,
   CopyToLink,
   EllipsisText,

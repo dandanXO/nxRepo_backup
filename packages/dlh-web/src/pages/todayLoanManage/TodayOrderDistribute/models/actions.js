@@ -7,7 +7,8 @@ export const TOOD_SET_PERSON_DATA = 'TOOD_SET_PERSON_DATA';
 export const TOOD_DISTRIBUTE_ORDER = 'TODD_DISTRIBUTE_ORDER';
 export const TOOD_CHANGE_SELECT_KEY = 'TOOD_CHANGE_SELECT_KEY';
 export const TOOD_CHANGE_PERSON_TYPE = 'TOOD_CHANGE_PERSON_TYPE';
-
+export const TOOD_GET_TODAY_COLLECTOR = 'TOOD_GET_TODAY_COLLECTOR';
+export const TOOD_SET_TODAY_COLLECTOR = 'TOOD_SET_TODAY_COLLECTOR';
 
 export const toodGetTableData = (params) => ({ type: TOOD_GET_TABLE_DATA, params });
 export const toodSetTableData = (data) => ({ type: TOOD_SET_TABLE_DATA, data });
@@ -18,3 +19,5 @@ export const toodSetPersonData = (data) => ({ type: TOOD_SET_PERSON_DATA, data }
 export const toodDistributeOrder = (params, callBack) => ({ type: TOOD_DISTRIBUTE_ORDER, params, callBack });
 export const toodChangeSelectKey = (data) => ({ type: TOOD_CHANGE_SELECT_KEY, data });
 export const toodChangePersonType = (option) => ({ type: TOOD_CHANGE_PERSON_TYPE, option });
+export const toodGetTodayCollector = () => ({ type: TOOD_GET_TODAY_COLLECTOR });
+export const toodSetTodayCollector = (data) => ({ type: TOOD_SET_TODAY_COLLECTOR, data });
