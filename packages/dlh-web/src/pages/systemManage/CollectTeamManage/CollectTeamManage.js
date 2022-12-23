@@ -56,8 +56,8 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
         record.enabled = record.enabled && record.enabled ? false : true;
         updateCollectTeamData({ id, enabled: record.enabled, name })
     }
-    const handleAddGruop = (id, groups, groupValue, dueDaysStart, dueDaysEnd) => {
-        addCollectGroupData({ collectTeamId: id, name: groupValue, dueDaysStart, dueDaysEnd })
+    const handleAddGruop = (id, groups, groupValue, dueDaysStart, dueDaysEnd, collectStage) => {
+        addCollectGroupData({ collectTeamId: id, name: groupValue, dueDaysStart, dueDaysEnd ,collectStage})
     }
 
     const columns = [

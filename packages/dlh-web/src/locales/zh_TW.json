@@ -296,6 +296,7 @@
   "page.table.overdue.report": "逾期報表",
   "page.table.overdue.date": "逾期日期",
   "page.table.overdue.days": "逾期天数",
+  "page.table.overdue.stage": "逾期階段",
   "page.table.compare.text": "{max} 需大於 {min}",
   "page.table.Equal.text": "{max} 需等於 {min} ",
   "page.table.operation.people": "操作人員",

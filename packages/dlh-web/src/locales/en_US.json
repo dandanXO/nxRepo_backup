@@ -181,6 +181,7 @@
   "page.table.overdue.report": "Overdue Report",
   "page.table.overdue.date": "Overdue Date",
   "page.table.overdue.days": "Overdue Days",
+  "page.table.overdue.stage": "Overdue Stage",
   "page.table.compare.text": "{max} needs to be greater than {min}",
   "page.table.Equal.text": "{max} must be equal to {min}",
   "page.table.operation.people": "Operator",
