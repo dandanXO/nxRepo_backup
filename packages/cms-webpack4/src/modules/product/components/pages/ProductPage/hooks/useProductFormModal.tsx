@@ -9,8 +9,7 @@ import {
 } from "../../../../service/product/ProductApi";
 import moment from "moment/moment";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import {PostProductCreateRequestBody} from "../../../../service/product/request/postProductCreateRequestBody";
-
+import { ProductTypes } from "../../../../service/product/domain/productTypes";
 export interface ProductFormModal {
   show: boolean;
   isEdit?: boolean
@@ -133,6 +132,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
           moment(productFormData.csTime.split(" - ")[1], 'h:mm'),
         ],
         loanTerm: productFormData.loanTerm,
+        loanMaxThreshold:productFormData.loanMaxThreshold,
         maxAmount: productFormData.maxAmount,
         extensible: productFormData.extensible,
         extensibleOverdueDays: productFormData.extensibleOverdueDays,
@@ -141,7 +141,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         reLoanQuotaSwitch: productFormData.reLoanQuotaSwitch === true ? 1 : 0,
         riskRankLoanAmount:productFormData.riskRankLoanAmount,
         reLoanAmount: productFormData.reLoanAmount,
-
+        reLoanMaxThreshold:productFormData.reLoanMaxThreshold,
 
         preInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.preInterestRate) * 100)}`,
         postInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.postInterestRate) * 100)}`,
@@ -241,7 +241,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         loanAmount: Number(i.loanAmount),
       }))
 
-    let creatProductData: PostProductCreateRequestBody = {
+    let creatProductData: ProductTypes = {
       merchantId: Number(values.merchantId),
       productName: values.productName,
       // NOTICE: 後端移除
@@ -260,6 +260,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       csEmail: values.csEmail,
       csTime: `${values.csTime[0].format('HH:mm')} - ${values.csTime[1].format('HH:mm')}`,
       loanTerm: Number(values.loanTerm),
+      loanMaxThreshold:Number(values.loanMaxThreshold),
       maxAmount: Number(values.maxAmount),
       extensible: values.extensible,
       extensibleOverdueDays: Number(values.extensibleOverdueDays),
@@ -268,6 +269,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       reLoanQuotaSwitch: values.reLoanQuotaSwitch,
       riskRankLoanAmount:riskRankLoanAmount,
       reLoanAmount: values.reLoanAmount,
+      reLoanMaxThreshold:Number(values.reLoanMaxThreshold),
 
       preInterestRate: strToFloatNumberWithFixed3(values.preInterestRate),
       postInterestRate: strToFloatNumberWithFixed3(values.postInterestRate),

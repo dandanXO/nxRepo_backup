@@ -1,83 +1,143 @@
 // eslint-disable max-classes-per-file
-import {PlusOutlined} from '@ant-design/icons';
-import type {ActionType, ProColumns} from '@ant-design/pro-components';
-import {ProTable} from '@ant-design/pro-components';
-import {Button, PaginationProps, Space} from 'antd';
-import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {GetProductListResponseProduct} from "../../../service/product/domain/getProductList";
-import {ProductFormModal} from "./hooks/useProductFormModal";
-import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
+import { PlusOutlined } from '@ant-design/icons';
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, PaginationProps, Space } from 'antd';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { GetProductListResponse } from '../../../service/product/ProductApi';
+import { ProductFormModal } from "./hooks/useProductFormModal";
+import { ProColumnsOperationConstant } from "../../../../shared/components/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../../shared/hooks/useGetMerchantEnum';
 import { GetProductListRequestQuery } from '../../../service/product/request/getProductListRequestQuery';
+import { EditableInput } from './EditableInput';
+import { NumberValidator } from '../../../../shared/utils/validation/validator';
+import { usePatchProductEditMutation } from '../../../service/product/ProductApi';
+
+
 interface ProductTableProps {
-  setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
-  triggerGetList?: any;
-  productListData?: any;
+    setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
+    triggerGetList?: any;
+    productListData?: any;
 }
 
 const ProductTable = (props: ProductTableProps) => {
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
-    const [productList, setProductList] = useState<GetProductListResponseProduct[]>(props.productListData);
-    const initSearchList: GetProductListRequestQuery = { enabled: true, merchantId: 2, productName: '' };
-    const [searchList, setSearchList] = useState(initSearchList)
+    const [patchProduct] = usePatchProductEditMutation();
+    const [productList, setProductList] = useState<GetProductListResponse[]>(props.productListData);
+    const initSearchList: GetProductListRequestQuery = { enabled: true, merchantId: '', productName: '' };
+    const [searchList, setSearchList] = useState(initSearchList);
 
-    useEffect(()=>{
+    useEffect(() => {
         setProductList(props.productListData);
-        if(isSuperAdmin){
+        if (isSuperAdmin) {
             triggerGetMerchantList(null);
         }
-    },[props.productListData])
+    }, [props.productListData])
 
-    
+
     // useEffect(()=>{
     //     console.log(searchList)
     //     props.triggerGetList(searchList)
     // },[searchList])
 
+
+
+    const handleEditProductList = async(productId, inputValue) => {
+        await patchProduct({productId,...inputValue});
+        props.triggerGetList(null)
+    }
+
     const columns = useMemo(() => {
 
-      const columns: ProColumns<GetProductListResponseProduct>[] = [
-        {
-          title: '操作',
-          valueType: 'option',
-          key: 'option',
-          render: (text, record, _, action) => [
-            <a key="editable" onClick={() => props.setProductModalData({
-              show: true,
-              isEdit: true,
-              productId: record.productId,
-            })}>修改</a>,
-          ],
-            width: ProColumnsOperationConstant.width["1"],
-        },
-        { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" },
-        { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
-        { key: 'loanTerm', title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
-        { key: 'extensionRate', title: '展期利率(%)', dataIndex: 'extensionRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
-        { key: 'overdueRate', title: '逾期费率(%)', dataIndex: 'overdueRate', hideInSearch: true , render: (text) => Number(Number(text) * 100).toFixed(1) },
-        { key: 'weight', title: '权重', dataIndex: 'weight', hideInSearch: true },
-        {
-            key: 'enabled',title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: '', valueEnum: {
-            '': { text: '全部', status: 'Default' },
-            true: { text: '上架', status: 'Success' },
-            false: { text: '下架', status: 'Default' },
-          }
-        },
-        { key: 'updateTime', title: '修改时间', dataIndex: 'updateTime', hideInSearch: true, valueType: 'dateTime' },
-      ];
-    //   if(isSuperAdmin){
-    //     columns.splice(1,0,{
-    //         title: '商户名', dataIndex: 'merchantId',  key: 'merchantId',  valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
-    //         width: ProColumnsOperationConstant.width["2"],
-    //     })
-    //   }
-      return columns;
+        const columns: ProColumns<GetProductListResponse>[] = [
+            {
+                title: '操作',
+                valueType: 'option',
+                key: 'option',
+                render: (text, record, _, action) => [
+                    <a key="editable" onClick={() => props.setProductModalData({
+                        show: true,
+                        isEdit: true,
+                        productId: record.productId,
+                    })}>修改</a>,
+                ],
+                width: ProColumnsOperationConstant.width["1"],
+            },
+            { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" },
+            { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
+            { key: 'loanTerm', title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
+            { key: 'extensionRate', title: '展期利率(%)', dataIndex: 'extensionRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
+            { key: 'overdueRate', title: '逾期费率(%)', dataIndex: 'overdueRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
+            {
+                key: 'loanMaxThreshold', title: '新客订单上限', dataIndex: 'loanMaxThreshold', initialValue: "", width: ProColumnsOperationConstant.width["4"],
+                render: (text, record) => {
+                    return <EditableInput name='loanMaxThreshold' placeholder='新客订单上限'
+                        initValue={record.loanMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
+                        rules={{
+                            validator: async (_, value) => NumberValidator(_, value)({
+                                required: true,
+                                requiredErrorMessage: "请输入新客订单上限",
+                                min: 0,
+                                max: 99999,
+                                maxMessage: "不可超过99999",
+                            })
+                        }}
+                    />
+                }
+            },
+            {
+                key: 'reLoanMaxThreshold', title: '次新客订单上限', dataIndex: 'reLoanMaxThreshold', initialValue: "", width: ProColumnsOperationConstant.width["4"],
+                render: (text, record) => {
+                    return <EditableInput name='reLoanMaxThreshold' placeholder='次新客订单上限'
+                        initValue={record.reLoanMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
+                        rules={{
+                            validator: async (_, value) => NumberValidator(_, value)({
+                                required: true,
+                                requiredErrorMessage: "请输入次新客订单上限",
+                                min: 0,
+                                max: 99999,
+                                maxMessage: "不可超过99999",
+                            })
+                        }}
+                    />
+                }
+            },
+            {
+                key: 'weight', title: '权重', dataIndex: 'weight', hideInSearch: true, width: ProColumnsOperationConstant.width["2"],
+                render: (text, record) => {
+                    return <EditableInput name='weight' placeholder='权重'
+                        initValue={record.weight} productId={record.productId} handleSave={handleEditProductList}
+                        rules={{
+                            validator: async (_, value) => NumberValidator(_, value)({
+                                min: 0,
+                                max: 99,
+                                maxMessage: "不可超过99",
+                            })
+                        }} />
+                }
+            },
+            {
+                key: 'enabled', title: '状态', dataIndex: 'enabled', valueType: 'select', initialValue: '', valueEnum: {
+                    '': { text: '全部', status: 'Default' },
+                    true: { text: '上架', status: 'Success' },
+                    false: { text: '下架', status: 'Default' },
+                }
+            },
+            { key: 'updateTime', title: '修改时间', dataIndex: 'updateTime', hideInSearch: true, valueType: 'dateTime' },
+        ];
+        //   if(isSuperAdmin){
+        //     columns.splice(1,0,{
+        //         title: '商户名', dataIndex: 'merchantId',  key: 'merchantId',  valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
+        //         width: ProColumnsOperationConstant.width["2"],
+        //     })
+        //   }
+        return columns;
 
-     
 
-    }, [merchantListEnum,isSuperAdmin]);
+
+    }, [merchantListEnum, isSuperAdmin]);
 
 
 
@@ -93,7 +153,7 @@ const ProductTable = (props: ProductTableProps) => {
 
 
     return (
-        <ProTable<GetProductListResponseProduct>
+        <ProTable<GetProductListResponse>
             columns={columns}
             actionRef={actionRef}
             dataSource={productList}
@@ -123,7 +183,7 @@ const ProductTable = (props: ProductTableProps) => {
                                 const { productName, enabled, merchantId = '' } = form.getFieldsValue();
                                 // setSearchList({productName, enabled, merchantId})
                                 const searchData = props.productListData
-                                    .filter(i => productName === "" ? i :  i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
+                                    .filter(i => productName === "" ? i : i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
                                     .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
                                 setProductList(searchData)
                                 form.submit();
@@ -138,7 +198,7 @@ const ProductTable = (props: ProductTableProps) => {
                 setting: {
                     listsHeight: 400,
                 },
-                reload:()=>props.triggerGetList(null)
+                reload: () => props.triggerGetList(null)
             }}
             form={{
                 // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下
@@ -169,10 +229,10 @@ const ProductTable = (props: ProductTableProps) => {
             }}
             dateFormatter="string"
             headerTitle={
-              <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => props.setProductModalData({
-              isEdit: false,
-              show: true,
-              })}>添加</Button>
+                <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => props.setProductModalData({
+                    isEdit: false,
+                    show: true,
+                })}>添加</Button>
             }
         />
     );
