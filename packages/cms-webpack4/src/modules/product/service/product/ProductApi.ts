@@ -1,12 +1,21 @@
 import { API } from "../../../../api";
-import { PostProductCreateRequestBody } from "./request/postProductCreateRequestBody";
-import { GetProductRequestQuery } from "./request/getProductRequestQuery";
 import { GetAvailableMerchantResponse } from "./response/getAvailableMerchantResponse";
-import { GetProductQueryResponse } from "./response/getProductQueryResponse";
 import { PostUploadProductIcon } from "./response/postUploadProductIcon";
-import { GetProductListResponse } from "./response/getProductListResponse";
-import { PutProductProps } from "./request/putProductProps";
 import { GetProductListRequestQuery } from './request/getProductListRequestQuery';
+import { PatchProductRequestBody } from "./domain/patchProduct";
+import { ProductTypes } from "./domain/productTypes";
+import { extraProductTypes } from "./domain/extraProductTypes";
+
+export interface ProductRequestParams {
+    productId: number
+}
+
+type Product = ProductTypes & extraProductTypes
+export type GetProductListResponse = Product;
+export type GetProductDetailResponse = Product;
+export type PostProductRequest = ProductTypes;
+export type PutProductProps = ProductRequestParams & ProductTypes;
+export type PatchProductProps = ProductRequestParams & PatchProductRequestBody;
 
 const ProductApi = API.injectEndpoints({
     overrideExisting: false,
@@ -20,7 +29,7 @@ const ProductApi = API.injectEndpoints({
             }),
         }),
         // NOTE: GET /hs/admin/product-manage/list 产品管理列表
-        getProductManageList: builder.query<GetProductListResponse, GetProductListRequestQuery>({
+        getProductManageList: builder.query<GetProductListResponse[], GetProductListRequestQuery>({
             query: (requestBody: GetProductListRequestQuery) => ({
                 url: `/product-manage/list`,
                 method: "get",
@@ -29,8 +38,8 @@ const ProductApi = API.injectEndpoints({
             }),
         }),
         // NOTE: POST /hs/admin/product-manage/product 创建产品
-        postProductCreate: builder.mutation<{}, PostProductCreateRequestBody>({
-            query: (requestBody: PostProductCreateRequestBody) => ({
+        postProductCreate: builder.mutation<{}, PostProductRequest>({
+            query: (requestBody: PostProductRequest) => ({
                 url: `/product-manage/product`,
                 method: "post",
                 data: requestBody,
@@ -50,8 +59,8 @@ const ProductApi = API.injectEndpoints({
             }),
         }),
         // NOTE: GET /hs/admin/product-manage/product 產品詳情
-        getProduct: builder.query<GetProductQueryResponse, GetProductRequestQuery>({
-            query: (arg: GetProductRequestQuery) => ({
+        getProduct: builder.query<GetProductDetailResponse, ProductRequestParams>({
+            query: (arg: ProductRequestParams) => ({
                 url: `/product-manage/product?productId=${arg.productId}`,
                 method: 'get',
             })
@@ -64,6 +73,14 @@ const ProductApi = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
+        // NOTE: PUT /hs/admin/product-manage/product/{productId} 异动产品
+        patchProductEdit: builder.mutation<{}, PatchProductProps>({
+            query: (requestBody: PatchProductProps) => ({
+                url: `/product-manage/product/${requestBody.productId}`,
+                method: "patch",
+                data: requestBody,
+            }),
+        }),
     })
 })
 
@@ -73,4 +90,5 @@ export const {
     useLazyGetProductQuery,
     usePostProductCreateMutation,
     usePutProductEditMutation,
+    usePatchProductEditMutation
 } = ProductApi;

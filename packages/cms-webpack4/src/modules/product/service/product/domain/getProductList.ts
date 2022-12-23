@@ -33,6 +33,10 @@ export interface GetProductListResponseProduct {
     interestRange?: string;
     /** 借款周期 */
     loanTerm?: number;
+    /** 初始贷款额度 */
+    loanAmount?: number;
+    /** 新客最大放款量 */
+    loanMaxThreshold?: number;
     /** 产品logo url */
     logo?: string;
     /** 商户流水号 */
@@ -51,6 +55,10 @@ export interface GetProductListResponseProduct {
     productInterestRatePairs?: GetProductInterestRatePairs[];
     /** 产品名称 */
     productName?: string;
+    /** 老客贷款额度 */
+    reLoanAmount?: number;
+    /** 次新客最大放款量: 第二次借款的老客 */
+    reLoanMaxThreshold?: number;
     /** 还款链结有效天数 */
     repayExpiryDays?: number;
     /** 是否显示借款金额 */

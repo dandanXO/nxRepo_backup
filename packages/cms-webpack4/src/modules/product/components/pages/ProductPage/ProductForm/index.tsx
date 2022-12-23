@@ -8,6 +8,7 @@ import RateSettingSection from "./RateSettingSection";
 import { UploadSettingSection } from "./UploadSettingSection";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {GetAvailableMerchantResponse} from "../../../../service/product/response/getAvailableMerchantResponse";
+import OrderSettingSection from "./OrderSettingSection";
 
 interface ProductFormProps {
     productModalData: ProductFormModal;
@@ -493,6 +494,7 @@ const Index = (props: ProductFormProps) => {
                 setLogo={setLogo}
                 setBackgroundImg={setBackgroundImg}
             />
+            <OrderSettingSection/>
             <LoanSettingSection form={form}
                 enableLoanAmount={props.enableLoanAmount}
                 enableReLoanAmount={props.enableReLoanAmount}
