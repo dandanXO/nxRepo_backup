@@ -25,6 +25,7 @@ export const ProductPage = () => {
       enableReLoanAmount,
       setEnableLoanAmount,
       setEnableReLoanAmount,
+      contextHolder,
   } = useProductFormModal({
     show: false,
     isEdit: false,
@@ -83,6 +84,7 @@ export const ProductPage = () => {
             />
         </ProductModal>
       )}
+        <div>{contextHolder}</div>
     </PageContainer>
   ): null;
 };
