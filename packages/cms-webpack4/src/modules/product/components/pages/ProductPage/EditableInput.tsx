@@ -37,7 +37,7 @@ export const EditableInput = ({ productId, name, rules, placeholder, initValue, 
 
 
 
-    return <Form form={form} initialValues={{ [name]: initValue }}>
+    return <Form form={form} initialValues={{ [name]: initValue }} key={name + productId}>
         <Form.Item name={name} rules={[{ required: true, ...rules }]} style={{ marginBottom: 0, width: '100%' }} >
             <Input
                 style={{ border: 'none' }}

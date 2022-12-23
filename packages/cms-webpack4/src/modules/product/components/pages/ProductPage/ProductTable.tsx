@@ -13,7 +13,7 @@ import { GetProductListRequestQuery } from '../../../service/product/request/get
 import { EditableInput } from './EditableInput';
 import { NumberValidator } from '../../../../shared/utils/validation/validator';
 import { usePatchProductEditMutation } from '../../../service/product/ProductApi';
-
+import CopyText from '../../../../shared/components/CopyText';
 
 interface ProductTableProps {
     setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;
@@ -24,7 +24,7 @@ interface ProductTableProps {
 const ProductTable = (props: ProductTableProps) => {
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
-    const [patchProduct] = usePatchProductEditMutation();
+    const [patchProduct, { isSuccess: patchProductSuccess }] = usePatchProductEditMutation();
     const [productList, setProductList] = useState<GetProductListResponse[]>(props.productListData);
     const initSearchList: GetProductListRequestQuery = { enabled: true, merchantId: '', productName: '' };
     const [searchList, setSearchList] = useState(initSearchList);
@@ -37,16 +37,12 @@ const ProductTable = (props: ProductTableProps) => {
     }, [props.productListData])
 
 
-    // useEffect(()=>{
-    //     console.log(searchList)
-    //     props.triggerGetList(searchList)
-    // },[searchList])
+    useEffect(() => {
+        props.triggerGetList(searchList)
+    }, [searchList, patchProductSuccess])
 
-
-
-    const handleEditProductList = async(productId, inputValue) => {
-        await patchProduct({productId,...inputValue});
-        props.triggerGetList(null)
+    const handleEditProductList = (productId, inputValue) => {
+        patchProduct({ productId, ...inputValue });
     }
 
     const columns = useMemo(() => {
@@ -65,14 +61,14 @@ const ProductTable = (props: ProductTableProps) => {
                 ],
                 width: ProColumnsOperationConstant.width["1"],
             },
-            { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" },
+            { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" ,render: (text) => <CopyText text={text} />},
             { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
             { key: 'loanTerm', title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
             { key: 'extensionRate', title: '展期利率(%)', dataIndex: 'extensionRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
             { key: 'overdueRate', title: '逾期费率(%)', dataIndex: 'overdueRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
             {
-                key: 'loanMaxThreshold', title: '新客订单上限', dataIndex: 'loanMaxThreshold', initialValue: "", width: ProColumnsOperationConstant.width["4"],
-                render: (text, record) => {
+                key: 'loanMaxThreshold', title: '新客订单上限', dataIndex: 'loanMaxThreshold', initialValue: "", hideInSearch: true,
+                width: ProColumnsOperationConstant.width["4"], render: (text, record) => {
                     return <EditableInput name='loanMaxThreshold' placeholder='新客订单上限'
                         initValue={record.loanMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
                         rules={{
@@ -88,8 +84,8 @@ const ProductTable = (props: ProductTableProps) => {
                 }
             },
             {
-                key: 'reLoanMaxThreshold', title: '次新客订单上限', dataIndex: 'reLoanMaxThreshold', initialValue: "", width: ProColumnsOperationConstant.width["4"],
-                render: (text, record) => {
+                key: 'reLoanMaxThreshold', title: '次新客订单上限', dataIndex: 'reLoanMaxThreshold', initialValue: "", hideInSearch: true,
+                width: ProColumnsOperationConstant.width["4"], render: (text, record) => {
                     return <EditableInput name='reLoanMaxThreshold' placeholder='次新客订单上限'
                         initValue={record.reLoanMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
                         rules={{
@@ -127,12 +123,12 @@ const ProductTable = (props: ProductTableProps) => {
             },
             { key: 'updateTime', title: '修改时间', dataIndex: 'updateTime', hideInSearch: true, valueType: 'dateTime' },
         ];
-        //   if(isSuperAdmin){
-        //     columns.splice(1,0,{
-        //         title: '商户名', dataIndex: 'merchantId',  key: 'merchantId',  valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
-        //         width: ProColumnsOperationConstant.width["2"],
-        //     })
-        //   }
+        if (isSuperAdmin) {
+            columns.splice(1, 0, {
+                title: '商户名', dataIndex: 'merchantId', key: 'merchantId', valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
+                width: ProColumnsOperationConstant.width["2"]
+            })
+        }
         return columns;
 
 
@@ -174,18 +170,13 @@ const ProductTable = (props: ProductTableProps) => {
                         <Button onClick={() => {
 
                             form.resetFields();
-                            setProductList(props.productListData)
-
+                            setSearchList(initSearchList);
                         }}>{resetText}</Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
                                 const { productName, enabled, merchantId = '' } = form.getFieldsValue();
-                                // setSearchList({productName, enabled, merchantId})
-                                const searchData = props.productListData
-                                    .filter(i => productName === "" ? i : i.productName.toLowerCase().indexOf(productName.toLowerCase()) > -1)
-                                    .filter(i => enabled === "all" ? i : i.enabled.toString() === enabled);
-                                setProductList(searchData)
+                                setSearchList({productName, enabled, merchantId});
                                 form.submit();
                             }}
                         >
