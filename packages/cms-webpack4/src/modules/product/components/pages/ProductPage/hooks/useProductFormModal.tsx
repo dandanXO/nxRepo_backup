@@ -31,6 +31,8 @@ export interface ProductFormUploads {
 }
 export const useProductFormModal = (props: ProductFormModal) => {
 
+    const [modal, contextHolder] = Modal.useModal();
+
   const [productModalData, setProductModalData] = useState<ProductFormModal>({
     show: props.show,
     isEdit: props.isEdit,
@@ -211,8 +213,11 @@ export const useProductFormModal = (props: ProductFormModal) => {
       // }
       triggerGetList(null);
     }).catch((error) => {
-      // console.log("error", error);
-      Modal.error(error.error);
+        // console.log(error)
+        modal.error({
+            title: "error",
+            content: error.data.message
+        })
     })
   // }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
   }, [productModalData.isEdit, productModalData.productId, postProductCreate, putProduct, setProductModalData, form, triggerGetList]);
@@ -385,5 +390,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
       enableReLoanAmount,
       setEnableLoanAmount,
       setEnableReLoanAmount,
+      contextHolder,
   }
 }

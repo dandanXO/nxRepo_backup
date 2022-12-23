@@ -1,19 +1,32 @@
 import {BaseQueryFn} from "@reduxjs/toolkit/query";
 import type {AxiosError, AxiosRequestConfig} from "axios";
 import axios from "axios";
-// import { Modal } from "@frontend/mobile/shared/ui";
+import { Modal } from "antd";
 
-// const alertModal = (message: string) =>
-//   Modal.alert({
-//     show: true,
-//     mask: true,
-//     title: "Error",
-//     content: message,
-//     confirmText: "Confirm",
-//     maskClosable: true,
-//     enableClose: false,
-//     enableIcon: false,
-//   });
+// const alertModal = (message: string) => {
+    // const modal = Modal.error({
+    //     mask: true,
+    //     title: "Error",
+    //     content: message,
+    //     maskClosable: true,
+    //     onOk: () => {
+            // console.log("test", test)
+            // modal.update({
+            //     title: "test"
+            // })
+            // modal.destroy();
+            // setTimeout(() => {
+                // clearInterval(timer);
+                // modal.destroy();
+            // },1000);
+        // },
+        // onCancel: (close) => {
+        //     console.log("close")
+        //     close();
+        // }
+    // });
+    // console.log("modal", modal)
+// }
 
 const axiosBaseQuery =
   (
@@ -50,14 +63,14 @@ const axiosBaseQuery =
         };
       } catch (axiosError) {
         const err = axiosError as AxiosError;
-        const error = JSON.parse(JSON.stringify(err.response?.data)) as {
-          code: number;
-          message: string;
-          data?: {
-            msg?: string;
-          };
-        };
-        const errorMessage = error?.data?.msg || error.message;
+        // const error = JSON.parse(JSON.stringify(err.response?.data)) as {
+        //   code: number;
+        //   message: string;
+        //   data?: {
+        //     msg?: string;
+        //   };
+        // };
+        // const errorMessage = error?.data?.msg || error.message;
         // console.log(err);
         // console.log(error);
         // alertModal(errorMessage);
