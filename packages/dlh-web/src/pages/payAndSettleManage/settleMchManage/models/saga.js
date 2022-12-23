@@ -12,7 +12,7 @@ function* getTableData(action) {
         const obj = {
             data: records || [],
             pagination: {
-                total: res.totalPage,
+                total: res.totalRecords,
                 current: res.currentPage
             }
         }
