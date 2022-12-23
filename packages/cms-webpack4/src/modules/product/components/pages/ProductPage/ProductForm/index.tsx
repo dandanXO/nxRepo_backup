@@ -406,8 +406,8 @@ const Index = (props: ProductFormProps) => {
                             productInterestRatePairsValidationMap[recordIndexKey]?.postInterest?.validateStatus !== "error"
                         ) {
                             if(
-                                Number(productInterestRatePairsValidationMap[recordIndexKey].preInterest.value) +
-                                Number(productInterestRatePairsValidationMap[recordIndexKey].postInterest.value) > 100
+                                Number(productInterestRatePairsValidationMap[recordIndexKey].preInterest?.value) +
+                                Number(productInterestRatePairsValidationMap[recordIndexKey].postInterest?.value) > 100
                             ) {
                                 productInterestRatePairsValidationMap[recordIndexKey] = {
                                     preInterest: {
