@@ -34,7 +34,7 @@ class FinancialStatistics extends Component {
 
     //导出记录
     exportFinancialRecord = (obj) => {
-        const { time = [] } = obj;
+        const { time = [], merchantId } = obj;
         this.setState({ btnDisabled: true });
         let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
         const searchStatus = convertParams(time);
