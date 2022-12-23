@@ -10,86 +10,91 @@ import { axios, convertMoneyFormat } from "utils";
 import download from "downloadjs";
 import {injectIntl, FormattedMessage} from "react-intl";
 import PropTypes from 'prop-types';
-
+import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 class OverdueStatistics extends Component {
 
-    columns = [
-        { title: <FormattedMessage id="page.table.overdue.time" />, dataIndex: 'day', key: 'day' },
-        { title: <FormattedMessage id="page.table.num.overdue.order" />, dataIndex: 'num', key: 'num' },
-        {
-            title: <FormattedMessage id="page.table.overdue.contract.amount" />,
-            dataIndex: 'amount',
-            key: 'amount',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        { title: <FormattedMessage id="page.table.num.collect.order" />, dataIndex: 'ingNum', key: 'ingNum' },
-        {
-            title: <FormattedMessage id="page.table.collect.amount" />,
-            dataIndex: 'ingMoney',
-            key: 'ingMoney',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.recover.contract.amount" />,
-            dataIndex: 'backMoney',
-            key: 'backMoney',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        // { title: '催回展期费用', dataIndex: 'lengMoney', key: 'lengMoney' },
-        {
-            title: <FormattedMessage id="page.table.recover.late.fee" />,
-            dataIndex: 'overMoney',
-            key: 'overMoney',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.total.repayment" />,
-            dataIndex: 'totalAmount',
-            key: 'totalAmount',
-            render(text, record) {
-                return <CopyText text={convertMoneyFormat(text)}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.back.order.rate" />,
-            dataIndex: 'backRate',
-            key: 'backRate',
-            render(text) {
-                const data = Number(text) * 100;
-                return <CopyText text={`${data.toFixed(2)}%`}/>;
-            }
-        },
-        {
-            title: <FormattedMessage id="page.table.repayment.rate" />,
-            dataIndex: 'id',
-            key: 'id',
-            render(text, record) {
-                const { amount, totalAmount } = record;
-                const result = Number(totalAmount) / Number(amount) * 100;
-                return  <CopyText text={Number.isInteger(result) ? `${result}%` : `${result.toFixed(2)}%`}/>;
-            }
-        }
-    ];
+
 
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
-            btnDisabled:false
+            btnDisabled:false,
+            isSuperAdmin,
+            allMerchants
         };
         this.initTime = [
             moment().subtract(9, 'days'),
             moment()
         ];
         this.searchParams = this.convertParams();
+        this.    columns = [
+            { title: <FormattedMessage id="page.table.overdue.time" />, dataIndex: 'day', key: 'day' },
+            { title: <FormattedMessage id="page.table.num.overdue.order" />, dataIndex: 'num', key: 'num' },
+            {
+                title: <FormattedMessage id="page.table.overdue.contract.amount" />,
+                dataIndex: 'amount',
+                key: 'amount',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            { title: <FormattedMessage id="page.table.num.collect.order" />, dataIndex: 'ingNum', key: 'ingNum' },
+            {
+                title: <FormattedMessage id="page.table.collect.amount" />,
+                dataIndex: 'ingMoney',
+                key: 'ingMoney',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.recover.contract.amount" />,
+                dataIndex: 'backMoney',
+                key: 'backMoney',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            // { title: '催回展期费用', dataIndex: 'lengMoney', key: 'lengMoney' },
+            {
+                title: <FormattedMessage id="page.table.recover.late.fee" />,
+                dataIndex: 'overMoney',
+                key: 'overMoney',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.total.repayment" />,
+                dataIndex: 'totalAmount',
+                key: 'totalAmount',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.back.order.rate" />,
+                dataIndex: 'backRate',
+                key: 'backRate',
+                render(text) {
+                    const data = Number(text) * 100;
+                    return <CopyText text={`${data.toFixed(2)}%`}/>;
+                }
+            },
+            {
+                title: <FormattedMessage id="page.table.repayment.rate" />,
+                dataIndex: 'id',
+                key: 'id',
+                render(text, record) {
+                    const { amount, totalAmount } = record;
+                    const result = Number(totalAmount) / Number(amount) * 100;
+                    return  <CopyText text={Number.isInteger(result) ? `${result}%` : `${result.toFixed(2)}%`}/>;
+                }
+            }
+        ];
     }
     
     //导出记录
@@ -115,12 +120,13 @@ class OverdueStatistics extends Component {
     };
 
     convertParams = (obj = {}) => {
-        const { time = this.initTime, days = '' } = obj;
+        const { time = this.initTime, days = '', merchantId = '' } = obj;
         const isArr = Array.isArray(time) && time.length > 0;
         return {
-            startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00'): '',
-            endTime: isArr? time[1].format('YYYY-MM-DD 23:59:59') : '',
-            days
+            startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
+            endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
+            days,
+            merchantId
         };
     }
 
@@ -155,6 +161,8 @@ class OverdueStatistics extends Component {
               handleSearch={this.handleSearch}
               exportRecord={this.exportRecord}
               btnDisable={btnDisabled}
+              isSuperAdmin={this.state.isSuperAdmin}
+              allMerchants={this.state.allMerchants}
             />
             <CommonTable
               dataSource={data}

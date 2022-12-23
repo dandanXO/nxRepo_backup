@@ -21,13 +21,34 @@ class SearchList extends Component{
         handleSearch(type, getFieldsValue());
     }
     
+    renderMerchants = () => {
+        const { allMerchants } = this.props;
+        if (!allMerchants) return;
+        const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
+        return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
+    }
 
     render() {
-        const { form: { getFieldDecorator  }, initTime , intl } = this.props;
+        const { form: { getFieldDecorator }, initTime, intl, isSuperAdmin } = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
                     <Row gutter={40}>
+                        {isSuperAdmin && (
+                            <Col span={8}>
+                                <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
+                                    {
+                                        getFieldDecorator('merchantId', {
+                                            initialValue: ''
+                                        })(
+                                            <Select>
+                                                {this.renderMerchants()}
+                                            </Select>
+                                        )
+                                    }
+                                </Form.Item>
+                            </Col>
+                        )}
                         <Col span={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.table.loan.date"})}>
                                 {
@@ -39,7 +60,7 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col span={16}>
+                        <Col span={8}>
                             <Form.Item style={{textAlign:'right'}}>
                                 <Button type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /></Button>
                            </Form.Item>
