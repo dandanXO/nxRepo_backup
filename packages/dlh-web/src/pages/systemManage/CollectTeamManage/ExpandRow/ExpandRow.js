@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Input, Button, message, InputNumber, Popconfirm, Modal } from "antd";
+import { Input, Button, message, InputNumber, Popconfirm, Modal,Select } from "antd";
 import styles from '../CollectTeamManage.less';
 import { useInput } from 'hooks';
 import { FormattedMessage, injectIntl } from "react-intl";
@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { collectTeamManageAction } from '../index';
 import { CommonTable } from 'components';
+const {Option}=Select
 
 
 function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, deleteCollectGroupData }) {
@@ -14,6 +15,7 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
     const { value, setValue, handleOnChange } = useInput();
     const [daysStartValue, setDaysStartValue] = useState(-1);
     const [daysEndValue, setDaysEndValue] = useState('');
+    const [collectStageValue, setCollectStageValue] = useState("S1");
     const [visible,setVisible]=useState(false)
 
 
@@ -54,7 +56,7 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
         }
         if (!checkDueDays(value, daysStartValue, daysEndValue)) return;
 
-        handleAddGruop(id, groups, value, daysStartValue, daysEndValue)
+        handleAddGruop(id, groups, value, daysStartValue, daysEndValue, collectStageValue)
         setValue("");
         setDaysStartValue("");
         setDaysEndValue("");
@@ -154,7 +156,7 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
         deleteCollectGroupData({ id })
         const groupsIndex = groups.findIndex(i => i.id === id);
         const groupListIndex = groupList.findIndex(i => i.id === id);
-        if (groupsIndex !== 0 && groupsIndex !== groupsIndex.length - 1) {
+        if (groupsIndex !== 0 && groupsIndex !== groupList.length - 1) {
             const prevItem = groups[groupListIndex - 1];
             const nextItem = groups[groupListIndex + 1];
             const updateItem = { ...nextItem, dueDaysStart: prevItem.dueDaysEnd }
@@ -222,6 +224,29 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
         return <InputNumber min={0} max={999} value={end} onChange={handleDueDaysEndChange} onBlur={handleSetUpdate} onPressEnter={handleSetUpdate} placeholder={'m'} />
     }
 
+    const CollectStageSelect = ({value,id}) => {
+        
+    
+        const handleChange = (optionValue) => {
+            console.log('optionValue', optionValue)
+            if(optionValue!==value){
+                const updateList = editGroupField(id, { collectStage: optionValue });
+                setUpdateList([...updateList]);
+            }
+        }
+
+        return <Select defaultValue={value} style={{ width: '90%' }} onChange={handleChange}>
+            <Option value="S1">S1</Option>
+            <Option value="S2">S2</Option>
+            <Option value="S3">S3</Option>
+            <Option value="S4">S4</Option>
+            <Option value="S5">S5</Option>
+            <Option value="S6">S6</Option>
+            <Option value="T0">T0</Option>
+            <Option value="T_1">T_1</Option>
+        </Select>
+    }
+
     const handleModifyCancel = (id) => {
         const isEdit = updateList.findIndex(i => i.id === id);
         updateList.splice(isEdit, 1);
@@ -248,7 +273,7 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
             title: intl.formatMessage({ id: "page.table.collect-group" }),
             dataIndex: 'name',
             key: 'name',
-            width:'40%',
+            width:'30%',
             render: (text, record) => {
                 const { id } = record;
                 return <NameInput text={text} id={id} />
@@ -258,7 +283,7 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
             title: intl.formatMessage({ id: "page.table.overdue.days" }),
             dataIndex: 'dueDays',
             key: 'dueDays',
-            width:'40%',
+            width:'30%',
             render (text, record) {
                 const { dueDaysStart, dueDaysEnd, id } = record;
                 return (
@@ -267,6 +292,17 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
                         <DueDaysEndInput text={dueDaysEnd} id={id}  />
                     </div>
                 )
+            }
+        },
+        {
+            title: intl.formatMessage({ id: "page.table.overdue.days" }),
+            dataIndex: 'collectStage',
+            key: 'collectStage',
+            width:'20%',
+            render (text, record) {
+                const { collectStage,  id } = record;
+                return <CollectStageSelect value={collectStage} id={id}/>
+                
             }
         },
         {
@@ -297,6 +333,17 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
                 <FormattedMessage id='page.table.overdue.days' /> :
                 <InputNumber min={-1} max={999} value={daysStartValue} onChange={handleSetDaysStartValue} placeholder={'n'} /> ~
                 <InputNumber min={0} max={999} value={daysEndValue} onChange={(num) => setDaysEndValue(num)} placeholder={'m'} />
+                <FormattedMessage id='page.table.overdue.stage' /> :
+                <Select defaultValue={"S1"} style={{ width: 120, marginLeft: 8 }} onChange={(value) => setCollectStageValue(value)}>
+                    <Option value="S1">S1</Option>
+                    <Option value="S2">S2</Option>
+                    <Option value="S3">S3</Option>
+                    <Option value="S4">S4</Option>
+                    <Option value="S5">S5</Option>
+                    <Option value="S6">S6</Option>
+                    <Option value="T0">T0</Option>
+                    <Option value="T_1">T_1</Option>
+                </Select>
                 <Button type="primary" onClick={handleSave} icon="plus" />
             </div>
             <div className={styles.groupTableStyle}>
