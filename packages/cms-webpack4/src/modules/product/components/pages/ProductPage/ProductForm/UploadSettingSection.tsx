@@ -2,6 +2,7 @@ import {Divider, Form, Input, Radio, Switch, Select, Collapse} from "antd";
 
 import React, {useMemo} from "react";
 import {NumberValidator, TagValidator } from "../../../../../shared/utils/validation/validator";
+
 const { Option } = Select;
 const { Panel } = Collapse;
 export function UploadSettingSection() {
@@ -55,13 +56,7 @@ export function UploadSettingSection() {
                 </Form.Item>
 
 
-                <Form.Item name="weight" label="权重" rules={[{
-                    validator: async (_, value) => NumberValidator(_, value)({
-                        min: 0,
-                        max: 99,
-                        maxMessage: "不可超过99",
-                    })
-                }]} >
+                <Form.Item name="weight" label="权重" >
                     <Input allowClear placeholder="填写 0-99 间的数字" />
                 </Form.Item>
 
