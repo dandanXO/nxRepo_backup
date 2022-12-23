@@ -145,8 +145,8 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                                                   <Input.Group compact>
                                                       <div>
                                                           <CustomLabel>起始期数</CustomLabel>
-                                                          <CustomLabel style={{ width: 135 }}>前置利息</CustomLabel>
-                                                          <CustomLabel style={{ width: 135 }}>后置利息</CustomLabel>
+                                                          <CustomLabel style={{ width: 125 }}>前置利息</CustomLabel>
+                                                          <CustomLabel style={{ width: 130 }}>后置利息</CustomLabel>
                                                           <CustomLabel>提額金额</CustomLabel>
                                                       </div>
                                                   </Input.Group>

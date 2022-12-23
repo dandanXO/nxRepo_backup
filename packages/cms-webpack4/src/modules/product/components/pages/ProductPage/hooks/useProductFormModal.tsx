@@ -228,7 +228,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
   const onFinish = (values: any) => {
     // console.log("onFinish.values", JSON.stringify(values));
-
+    
     const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
       num: i.num,
       postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
@@ -282,7 +282,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
       top: values.top,
       tags: values.tags.join(","),
       templateType: values.templateType,
-      weight: Number(values.weight),
+      weight: values.weight === undefined ? 0 : Number(values.weight),
       enabled: values.enabled,
     }
     if(!productModalData.isEdit) {
