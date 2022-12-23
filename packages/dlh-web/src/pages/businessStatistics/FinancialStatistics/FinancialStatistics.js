@@ -9,22 +9,27 @@ import { axios, convertMoneyFormat } from "utils";
 import download from "downloadjs";
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
+import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 
 const convertParams = (time) => {
     return {
         startTime: time.format('YYYY-MM-DD') ,
-        endTime: time.format('YYYY-MM-DD')
+        endTime: time.format('YYYY-MM-DD'),
     };
 }
 class FinancialStatistics extends Component {
     constructor(props) {
         super(props);
+        const isSuperAdmin = getIsSuperAdmin();
+        const allMerchants = getAllMerchants();
         this.state = {
+            isSuperAdmin,
+            allMerchants,
             btnDisabled:false
         };
     }
-    
+
 
 
     //导出记录
@@ -33,7 +38,10 @@ class FinancialStatistics extends Component {
         this.setState({ btnDisabled: true });
         let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
         const searchStatus = convertParams(time);
-        axios.get("/hs/admin/statistics/financial-statements/download", { params: searchStatus, responseType: 'blob' })
+        axios.get("/hs/admin/statistics/financial-statements/download", { params: {
+          ...searchStatus,
+          merchantId
+          }, responseType: 'blob' })
         .then(res => {
             hide && hide();
             this.setState({ btnDisabled: false });
@@ -47,11 +55,14 @@ class FinancialStatistics extends Component {
 
         //导出记录
         exportOperationRecord = (obj) => {
-            const { time = [] } = obj;
+            const { time = [], merchantId } = obj;
             this.setState({ btnDisabled: true });
             let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
             const searchStatus = convertParams(time);
-            axios.get("/hs/admin/statistics/operation-daily/download", { params: searchStatus, responseType: 'blob' })
+            axios.get("/hs/admin/statistics/operation-daily/download", { params: {
+              ...searchStatus,
+                merchantId,
+              }, responseType: 'blob' })
             .then(res => {
                 hide && hide();
                 this.setState({ btnDisabled: false });
@@ -71,6 +82,8 @@ class FinancialStatistics extends Component {
                 		  exportFinancialRecord={this.exportFinancialRecord}
                           exportOperationRecord={this.exportOperationRecord}
                           btnDisable={btnDisabled}
+                            isSuperAdmin={this.state.isSuperAdmin}
+                            allMerchants={this.state.allMerchants}
                           />
             </div>
         );
@@ -78,6 +91,6 @@ class FinancialStatistics extends Component {
 }
 FinancialStatistics.PropTypes = {
     intl: PropTypes.object.isRequired,
-} 
+}
 
 export default injectIntl(FinancialStatistics);

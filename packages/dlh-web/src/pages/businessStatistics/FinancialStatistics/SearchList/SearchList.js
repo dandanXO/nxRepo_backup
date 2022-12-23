@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, DatePicker, Row, Col, Button } from 'antd';
+import {Form, DatePicker, Row, Col, Button, Select} from 'antd';
 import {injectIntl, FormattedMessage} from "react-intl";
 
 const { RangePicker } = DatePicker;
@@ -26,13 +26,34 @@ class SearchList extends Component{
         exportOperationRecord(getFieldsValue());
     }
 
+    renderMerchants = () => {
+      const { allMerchants } = this.props
+      if(!allMerchants) return;
+      const ele = allMerchants.map(item => <Select.Option key={item.merchantId} value={item.merchantId} >{item.name}</Select.Option>);
+      return [<Select.Option key={'merchantIdOption'} value=""><FormattedMessage id="page.search.list.select" /></Select.Option>].concat(ele)
+    }
     render() {
-        const { form: { getFieldDecorator  }, initTime, intl  } = this.props;
-        console.log(initTime)
+        const { form: { getFieldDecorator  }, initTime, intl, isSuperAdmin, allMerchants  } = this.props;
+        // console.log(initTime)
         return (
             <div>
                 <Form onSubmit={this.submit}>
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                        {isSuperAdmin && (
+                          <Col span={6}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
+                              {
+                                getFieldDecorator('merchantId', {
+                                  initialValue: ''
+                                })(
+                                  <Select>
+                                    {this.renderMerchants()}
+                                  </Select>
+                                )
+                              }
+                            </Form.Item>
+                          </Col>
+                        )}
                         <Col span={6}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.date" })}>
                                 {
