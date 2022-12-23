@@ -53,14 +53,6 @@ class OverdueDisStatistics1 extends Component {
           { title: <FormattedMessage id="page.table.repayment.order.rate" />, dataIndex: 'repayCountRate', key: 'repayCountRate' },
           { title: <FormattedMessage id="page.table.repayment.amount.rate" />, dataIndex: 'repaySumMoneyRate', key: 'repaySumMoneyRate' }
         ];
-
-        if(isSuperAdmin) {
-          this.columns.unshift({
-            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
-            dataIndex: 'merchantName',
-            key: 'merchantName'
-          })
-        }
     }
 
     //导出记录

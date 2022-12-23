@@ -15,7 +15,7 @@ import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 class NewOverdueStatistics extends Component {
 
-   
+
     constructor(props) {
         super(props);
         const isSuperAdmin = getIsSuperAdmin();
@@ -163,18 +163,8 @@ class NewOverdueStatistics extends Component {
                 }
             },
         ];
-        if (isSuperAdmin) {
-            this.columns.unshift({
-                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
-                dataIndex: 'merchantName',
-                key: 'merchantName',
-                width: 90
-            })
-        }
-
-    
     }
-    
+
     //导出记录
     exportRecord = (obj) => {
         this.setState({ btnDisabled: true });
@@ -243,7 +233,7 @@ class NewOverdueStatistics extends Component {
                 _this.setState({
                     channelList : data.records
                 });
-                
+
             }
         });
     }

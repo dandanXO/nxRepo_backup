@@ -67,14 +67,6 @@ class AtoSStatistics extends Component{
 
         ];
 
-        if(isSuperAdmin) {
-          this.columns.unshift({
-            title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
-            dataIndex: 'merchantName',
-            key: 'merchantName'
-          })
-        }
-
     }
 
     handleSearch = (obj) => {

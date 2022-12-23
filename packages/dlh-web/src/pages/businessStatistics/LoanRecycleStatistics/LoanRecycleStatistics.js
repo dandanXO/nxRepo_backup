@@ -125,14 +125,6 @@ class LoanRecycleStatistics extends Component{
                 }
             },
         ];
-        if (isSuperAdmin) {
-            this.columns.unshift({
-                title: props.intl.formatMessage({ id: "page.search.list.merchantName" }),
-                dataIndex: 'merchantName',
-                key: 'merchantName',
-                width: 90
-            })
-        }
 
     }
 
