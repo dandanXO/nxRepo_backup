@@ -265,8 +265,8 @@ class SettleMchList extends Component {
     }
 
     render() {
-        const { pagination } = this.state;
-        const { tableData: { data }, loading, visible, info } = this.props;
+        // const { pagination } = this.state;
+        const { tableData: { data, pagination }, loading, visible, info } = this.props;
         const { allSettlePlatList } = this.state;
         return (
             <div>
