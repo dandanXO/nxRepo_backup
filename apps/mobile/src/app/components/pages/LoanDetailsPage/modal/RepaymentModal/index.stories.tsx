@@ -21,9 +21,9 @@ export const ModalRepayment: ComponentStory<typeof RepaymentModal> = (args) => {
                 setShowRepaymentNoticeModal={() => {
                     // do nothing.
                 }}
-                handlePostRepayCreate={() => {
-                    // do nothing.
-                }}
+                // handlePostRepayCreate={() => {
+                //     // do nothing.
+                // }}
                 paymentMethodList={["type1", "type2"]}
                 setPayType={{} as any}
             />

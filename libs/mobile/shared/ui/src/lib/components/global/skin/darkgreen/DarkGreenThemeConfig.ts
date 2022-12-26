@@ -39,5 +39,13 @@ export const DarkGreenThemeConfig: IThemeConfig = {
   },
   card: {
     color: Colors.lightBlue,
+  },
+  repaymentAdsModal: {
+    main: {
+      bg: Colors.mediumGreen,
+    },
+    secondary: {
+      bg: Colors.green,
+    }
   }
 }

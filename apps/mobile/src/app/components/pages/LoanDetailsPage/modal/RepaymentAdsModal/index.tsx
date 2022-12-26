@@ -66,12 +66,14 @@ const ContentContainer = styled.div`
 `
 
 const UniversalRepayAndApplyButton = styled(RepayAndApplyButton)`
-  background: #EF4B4B;
+  background: ${(props) => props.theme.repaymentAdsModal.main.bg};
   margin-bottom: 16px;
 `;
 const UniversalRepaymentButton = styled(RepaymentButton)`
-  background: #E5E5E5;
+  background: ${(props) => props.theme.repaymentAdsModal.secondary.bg};
+  color: #fff;
 `
+
 type RepaymentAdsModalProps = {
   handlePostRepayCreate: any;
   setShowRepaymentAdsModal: React.Dispatch<React.SetStateAction<boolean>>;

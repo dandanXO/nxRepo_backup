@@ -36,5 +36,13 @@ export interface IThemeConfig {
   },
   card: {
     color: Colors;
+  },
+  repaymentAdsModal: {
+    main: {
+      bg: string;
+    },
+    secondary: {
+      bg: string;
+    }
   }
 }
