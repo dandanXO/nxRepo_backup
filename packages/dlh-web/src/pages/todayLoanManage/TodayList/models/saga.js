@@ -1,16 +1,20 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
 import {
-    TODL_GET_TABLE_DATA,
-    todlSetTableData,
-    todlChangeTableLoading,
-    TODL_GET_PERSON,
-    todlSetPerson,
-    TODL_DISTRIBUTE_ORDER,
-    todlChangeModalVisible,
-    todlChangeSelectKey,
-    todlChangePersonType
+  TODL_GET_TABLE_DATA,
+  todlSetTableData,
+  todlChangeTableLoading,
+  TODL_GET_PERSON,
+  todlSetPerson,
+  TODL_DISTRIBUTE_ORDER,
+  todlChangeModalVisible,
+  todlChangeSelectKey,
+  todlChangePersonType,
+  TODL_COLLECTOR_GET_MODAL_DATA,
+  todlColleterChangeModalVisible,
+  todlColleterChangeModalLoading,
+  todlColletorSetModalData
 } from './actions';
-import { getOrderListData, getUrgePersonData, distributeOrder } from '../api';
+import {getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail} from '../api';
 import {message} from "antd";
 
 function* getTableData(action) {
@@ -75,10 +79,29 @@ function* distributeData(action) {
 function* watchDistributeData() {
     yield takeEvery(TODL_DISTRIBUTE_ORDER, distributeData);
 }
+
 export default function* root() {
     yield all([
         fork(watchGetTableData),
         fork(watchGetPerson),
-        fork(watchDistributeData)
+        fork(watchDistributeData),
+        fork(watchCollectorGetDetail)
     ])
+}
+
+function* watchCollectorGetDetail() {
+  yield takeEvery(TODL_COLLECTOR_GET_MODAL_DATA, getCollectorDetail);
+}
+
+function* getCollectorDetail(action) {
+  yield put(todlColleterChangeModalVisible(true));
+  yield put(todlColleterChangeModalLoading(true));
+  try{
+    console.log("action", action);
+    const res = yield call(collectorGetDetail, action.params);
+    yield put(todlColletorSetModalData(res));
+  } catch (e) {
+    console.log(e);
+  }
+  yield put(todlColleterChangeModalLoading(false));
 }
