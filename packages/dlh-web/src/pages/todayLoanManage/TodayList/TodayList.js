@@ -170,18 +170,13 @@ class TodayList extends Component {
                 key: 'collectorName',
                 width: '7%',
                 render(text, record) {
-                  console.log("text", text)
-                  console.log("record", record)
                     return (
-                      <div className={"styles.btnWrapper"}>
+                      <div>
                         <span onClick={() => _this.collectorLookDetail(record)}><Icon type={'file'} /></span>
                         {text}
                       </div>
                     )
-                    // const { personData } = _this.props;
-                    // const obj = personData.find(item => Number(item.value) === Number(text));
-                    // console.log(obj);
-                    // return  obj ? obj['name'] : '';
+
                 }
             },
             {

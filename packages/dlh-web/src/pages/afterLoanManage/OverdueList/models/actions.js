@@ -1,3 +1,9 @@
+import {
+  TODL_COLLECTOR_CHANGE_MODAL_LOADING, TODL_COLLECTOR_CHANGE_MODAL_VISIBLE,
+  TODL_COLLECTOR_GET_MODAL_DATA,
+  TODL_COLLECTOR_SET_MODAL_DATA
+} from "../../../todayLoanManage/TodayList/models/actions";
+
 export const ODL_GET_TABLE_DATA = 'ODL_GET_TABLE_DATA';
 export const ODL_SET_TABLE_DATA = 'ODL_SET_TABLE_DATA';
 export const ODL_CHANGE_TABLE_LOADING = 'ODL_CHANGE_TABLE_LOADING';
@@ -9,6 +15,12 @@ export const ODL_DISTRIBUTE_ORDER = 'ODL_DISTRIBUTE_ORDER';
 export const ODL_CHANGE_SELECT_KEY = 'ODL_CHANGE_SELECT_KEY';
 export const ODL_CHANGE_PERSON_TYPE = 'ODL_CHANGE_PERSON_TYPE';
 
+// 催收人紀錄
+export const ODL_COLLECTOR_CHANGE_MODAL_LOADING = 'ODL_COLLECTOR_CHANGE_MODAL_LOADING';
+export const ODL_COLLECTOR_CHANGE_MODAL_VISIBLE = 'ODL_COLLECTOR_CHANGE_MODAL_VISIBLE';
+export const ODL_COLLECTOR_GET_MODAL_DATA = 'ODL_COLLECTOR_GET_MODAL_DATA';
+export const ODL_COLLECTOR_SET_MODAL_DATA = 'ODL_COLLECTOR_SET_MODAL_DATA';
+
 export const odlGetTableData = (params) => ({ type: ODL_GET_TABLE_DATA, params });
 export const odlSetTableData = (data) => ({ type: ODL_SET_TABLE_DATA, data });
 export const odlChangeTableLoading = (option) => ({ type: ODL_CHANGE_TABLE_LOADING, option });
@@ -19,3 +31,10 @@ export const odlChangeModalVisible = (option) => ({ type: ODL_CHANGE_MODAL_VISIB
 export const odlDistributeOrder = (params, callBack) => ({ type: ODL_DISTRIBUTE_ORDER, params, callBack });
 export const odlChangeSelectKey = (data) => ({ type: ODL_CHANGE_SELECT_KEY, data });
 export const odlChangePersonType = (option) => ({ type: ODL_CHANGE_PERSON_TYPE, option })
+
+// 催收人紀錄
+export const odlColleterChangeModalLoading = (option) => ({ type: ODL_COLLECTOR_CHANGE_MODAL_LOADING, option });
+export const odlColleterChangeModalVisible = (option) => ({ type: ODL_COLLECTOR_CHANGE_MODAL_VISIBLE, option });
+export const odlColletorGetModalData = (params) => ({ type: ODL_COLLECTOR_GET_MODAL_DATA, params });
+export const odlColletorSetModalData = (data) => ({ type: ODL_COLLECTOR_SET_MODAL_DATA, data });
+

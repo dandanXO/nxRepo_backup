@@ -31,7 +31,8 @@ export const todlDistributeOrder = (params, callBack) => ({ type: TODL_DISTRIBUT
 export const todlChangeSelectKey = (data) => ({ type: TODL_CHANGE_SELECT_KEY, data });
 export const todlChangePersonType = (option) => ({ type: TODL_CHANGE_PERSON_TYPE, option })
 // 催收人紀錄
+export const todlColleterChangeModalVisible = (option) => ({ type: TODL_COLLECTOR_CHANGE_MODAL_VISIBLE, option });
+export const todlColleterChangeModalLoading = (option) => ({ type: TODL_COLLECTOR_CHANGE_MODAL_LOADING, option });
 export const todlColletorGetModalData = (params) => ({ type: TODL_COLLECTOR_GET_MODAL_DATA, params });
 export const todlColletorSetModalData = (data) => ({ type: TODL_COLLECTOR_SET_MODAL_DATA, data });
-export const todlColleterChangeModalLoading = (option) => ({ type: TODL_COLLECTOR_CHANGE_MODAL_LOADING, option });
-export const todlColleterChangeModalVisible = (option) => ({ type: TODL_COLLECTOR_CHANGE_MODAL_VISIBLE, option });
+
