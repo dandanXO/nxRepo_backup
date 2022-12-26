@@ -64,7 +64,7 @@ export const processRoutesForNewCMS = (data) => {
         }
         // 訂單終審
         if (level2MenuItem.actionUrl === "/businessLastCheck") {
-          level2MenuItem.actionUrl = "/cms/order-review";
+          level2MenuItem.actionUrl = "/cms/order-final-review";
         }
 
         // 訂單終審紀錄

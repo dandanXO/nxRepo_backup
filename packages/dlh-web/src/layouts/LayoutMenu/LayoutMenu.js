@@ -123,8 +123,8 @@ class LayoutMenu extends Component {
             }
 
             // NOTICE: 訂單详细信息歸類在訂單終審
-            if(pathArr[2] === "order-review-detail"){
-                pathArr[2] = "order-review"
+            if(pathArr[2] === "order-final-review-detail"){
+                pathArr[2] = "order-final-review"
             }
 
             if(truePath === "/cms") {
