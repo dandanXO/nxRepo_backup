@@ -64,8 +64,8 @@ const RepaymentCancelButton = styled(NotificationButton)`
 
 export const RepaymentButton = styled(RepayAndApplyButton)`
     flex: 3 0 auto;
-    background: ${(props) => props.theme.button.primary.main};
-    color: ${(props) => props.theme.button.primary.text};
+    background: ${(props) => props.theme.button.secondary.main};
+    color: ${(props) => props.theme.button.secondary.text};
 `;
 
 const BoldText = styled.div`
