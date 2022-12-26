@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Form, Modal, Spin, Input, Radio } from "antd";
 
-interface OrderReviewModalProps {
+interface OrderFinalReviewModalProps {
     showModal?: boolean;
     handleCloseModal: () => void;
     onFinish: any;
     form?: any;
 }
 
-const OrderReviewModal = ((props: OrderReviewModalProps) => {
+const OrderFinalReviewModal = ((props: OrderFinalReviewModalProps) => {
     const { showModal, handleCloseModal, onFinish, form } = props;
 
     const layout = {
@@ -41,5 +41,5 @@ const OrderReviewModal = ((props: OrderReviewModalProps) => {
     )
 })
 
-export default OrderReviewModal;
+export default OrderFinalReviewModal;
 

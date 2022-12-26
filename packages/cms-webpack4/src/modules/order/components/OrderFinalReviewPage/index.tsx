@@ -1,9 +1,9 @@
 
 import { PageContainer } from '@ant-design/pro-components';
-import OrderReviewTable from './OrderReviewTable';
+import OrderFinalReviewTable from './OrderFinalReviewTable';
 import { itemRender } from '../../../shared/itemRender';
 
-const OrderReviewPage = () => {
+const OrderFinalReviewPage = () => {
     // NOTE: breadcrumb
 
     return (
@@ -15,15 +15,15 @@ const OrderReviewPage = () => {
                     routes: [
                         { path: "/", breadcrumbName: '首页' },
                         { path: null, breadcrumbName: '订单管理' },
-                        { path: null, breadcrumbName: '订单复审' },
+                        { path: null, breadcrumbName: '订单终审' },
                     ],
                 },
             }}
         >
-             <OrderReviewTable  />
+             <OrderFinalReviewTable  />
         </PageContainer>
     )
 }
 
-export default OrderReviewPage;
+export default OrderFinalReviewPage;
 
