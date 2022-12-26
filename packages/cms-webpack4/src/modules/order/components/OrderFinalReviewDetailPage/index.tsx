@@ -5,7 +5,7 @@ import UserInfo from '../../../shared/components/userInfo/UserInfo';
 import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import { useParams,useHistory } from "react-router-dom";
-import OrderReviewModal from './OrderReviewModal';
+import OrderFinalReviewModal from './OrderFinalReviewModal';
 import { usePostOrderReviewMutation } from '../../api/OrderReviewApi';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
 import {itemRender} from "../../../shared/itemRender";
@@ -43,7 +43,7 @@ const OrderFinalReviewDetailPage = () => {
             .unwrap()
             .then((payload) => {
                 setShowModal(false);
-                history.push('/order-final-review');
+                history.push('/order-review');
             })
             .catch((error) => {
                 errorModal.error({
@@ -68,7 +68,7 @@ const OrderFinalReviewDetailPage = () => {
                         routes: [
                             { path: '/', breadcrumbName: '首页', },
                             { path: null, breadcrumbName: '订单管理', },
-                            { path: '/order-final-review', breadcrumbName: '订单终审', },
+                            { path: '/order-review', breadcrumbName: '订单终审', },
                             { path: null, breadcrumbName: '审核', },
                         ],
                     },
@@ -79,7 +79,7 @@ const OrderFinalReviewDetailPage = () => {
                 ]}
             >
                 <Tabs items={tabs} />
-                <OrderReviewModal showModal={showModal} handleCloseModal={handleCloseModal} form={form} onFinish={onFinish}/>
+                <OrderFinalReviewModal showModal={showModal} handleCloseModal={handleCloseModal} form={form} onFinish={onFinish}/>
                 {errorContextHolder}
             </PageContainer>
         </div>

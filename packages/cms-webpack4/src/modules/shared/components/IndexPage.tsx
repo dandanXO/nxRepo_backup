@@ -56,6 +56,12 @@ export function IndexPage() {
             <Link to="/order-review-detail"><a>Order Review Detail</a></Link>
         </div>
         <div>
+            <Link to="/order-final-review"><a> Order Final Review</a></Link>
+        </div>
+        <div>
+            <Link to="/order-final-review-detail"><a>Order Final Review Detail</a></Link>
+        </div>
+        <div>
             <Link to="/order-review-record"><a> Order Review Record</a></Link>
         </div>
         <div>
