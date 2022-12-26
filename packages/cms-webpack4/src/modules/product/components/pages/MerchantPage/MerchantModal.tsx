@@ -43,7 +43,7 @@ const MerchantModal = (props: MerchantModalProps) => {
                     <Form.Item name="password" label="商户密码" rules={[{ required: !isEdit }]}>
                         <Input allowClear placeholder="商户密码"/>
                     </Form.Item>
-                    <Form.Item name="contact" label="联系电话" rules={[{ required: true }]}>
+                    <Form.Item name="contact" label="联系电话" >
                         <Input allowClear placeholder="联系电话"/>
                     </Form.Item>
                     <Form.Item name="email" label="电子邮箱">
