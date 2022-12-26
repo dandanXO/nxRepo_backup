@@ -39,6 +39,14 @@ const DefaultThemeConfig: IThemeConfig = {
   },
   card: {
     color: Colors.orange,
+  },
+  repaymentAdsModal: {
+    main: {
+      bg: "#EF4B4B",
+    },
+    secondary: {
+      bg: "#E5E5E5",
+    }
   }
 }
 export default DefaultThemeConfig;

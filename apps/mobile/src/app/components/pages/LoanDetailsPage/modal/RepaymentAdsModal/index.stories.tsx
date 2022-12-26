@@ -1,16 +1,16 @@
 import * as React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import RepaymentModal from "./index";
+import RepaymentAdsModal from "./index";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 export default {
-    title: "Page/LoanDetailsPage/Modals",
-    component: RepaymentModal,
-} as ComponentMeta<typeof RepaymentModal>;
+    title: "Page/LoanDetailsPage/Modals123",
+    component: RepaymentAdsModal,
+} as ComponentMeta<typeof RepaymentAdsModal>;
 
-export const ModalRepayment: ComponentStory<typeof RepaymentModal> = (args) => {
+export const ModalRepayment: ComponentStory<typeof RepaymentAdsModal> = (args) => {
     return (
         <AppThemeProvider>
-            <RepaymentModal
+            <RepaymentAdsModal
                 balance={8500}
                 setRepayBalance={() => {
                     // do nothing.
