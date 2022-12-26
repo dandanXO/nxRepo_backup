@@ -35,26 +35,24 @@ class SearchList extends Component {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
-                    <Row>
-                        {isSuperAdmin && (
-                          <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
-                              {
-                                getFieldDecorator('merchantId', {
-                                  initialValue: ''
-                                })(
-                                  <Select>
-                                    {this.renderMerchants()}
-                                  </Select>
-                                )
-                              }
-                            </Form.Item>
-                          </Col>
-                        )}
-                        <Col lg={12} xl={24} style={{textAlign:'right'}}>
-                            <Button type="primary" htmlType="submit"><FormattedMessage id="page.search.list.search" /></Button>
-                        </Col>
-                    </Row>
+                        <Row>
+                            <Col lg={12} xl={8}>
+                                <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
+                                    {
+                                        getFieldDecorator('merchantId', {
+                                            initialValue: ''
+                                        })(
+                                            <Select>
+                                                {this.renderMerchants()}
+                                            </Select>
+                                        )
+                                    }
+                                </Form.Item>
+                            </Col>
+                            <Col lg={12} xl={16} style={{ textAlign: 'right' }}>
+                                <Button type="primary" htmlType="submit"><FormattedMessage id="page.search.list.search" /></Button>
+                            </Col>
+                        </Row>
                 </Form>
             </div>
         );

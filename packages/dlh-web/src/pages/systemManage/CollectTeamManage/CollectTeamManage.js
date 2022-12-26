@@ -32,7 +32,7 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
         return;
       }
 
-      if(merchantIdValue === "") {
+      if(isSuperAdmin && merchantIdValue === "") {
         message.warning(intl.formatMessage({ id: "page.search.list.select.empty" }, { text: intl.formatMessage({id : "page.search.list.merchantName"}) }));
         return;
       }
@@ -108,36 +108,38 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
       const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
       return [<Option key={'merchantIdOption'} value=""><FormattedMessage id="page.search.list.select" /></Option>].concat(ele)
     }
-
+    // console.log('isSuperAdmin',isSuperAdmin)
     return (
-      <div>
-        <Tabs animated={false}>
-          <TabPane tab={intl.formatMessage({ id: "page.table.collect-team" })} key="1">
-            <SearchList submit={submit} isSuperAdmin={isSuperAdmin} allMerchants={allMerchants}/>
-            <div className={styles.inputItem}>
-              <FormattedMessage id='page.table.add.collect-team' /> :
-              <Input value={teamValue} onChange={handleTeamValue} placeholder={intl.formatMessage({ id: "page.table.collect-team.enter" })} />
-
-              <FormattedMessage id='page.search.list.merchantName' /> :
-              <Select style={{ margin: "0 18px", width: "300px" }} value={merchantIdValue} onSelect={(value) => {
-                setMerchantIdValue(value);
-              }}>
-                {renderMerchants()}
-              </Select>
-
-              <Button type="primary" shape="circle" icon="plus" onClick={handleAddTeam} />
-            </div>
-            <ExpandableTable
-              columns={columns}
-              dataSource={teamsData}
-              expandedRowRender={(record, i) => <ExpandRow record={record} handleAddGruop={handleAddGruop} intl={intl} />}
-            />
-          </TabPane>
-          <TabPane tab={intl.formatMessage({ id: "page.table.collect-people" })} key="2">
-            <SystemPeopleManage/>
-          </TabPane>
-        </Tabs>
-      </div>
+        <div>
+            <Tabs animated={false}>
+                <TabPane tab={intl.formatMessage({ id: "page.table.collect-team" })} key="1">
+                    {isSuperAdmin && <SearchList submit={submit} isSuperAdmin={isSuperAdmin} allMerchants={allMerchants} />}
+                    <div className={styles.inputItem}>
+                        <FormattedMessage id='page.table.add.collect-team' /> :
+                        <Input value={teamValue} onChange={handleTeamValue} placeholder={intl.formatMessage({ id: "page.table.collect-team.enter" })} />
+                        {isSuperAdmin &&
+                            <div>
+                                <FormattedMessage id='page.search.list.merchantName' /> :
+                                <Select style={{ margin: "0 18px", width: "300px" }} value={merchantIdValue} onSelect={(value) => {
+                                    setMerchantIdValue(value);
+                                }}>
+                                    {renderMerchants()}
+                                </Select>
+                            </div>
+                        }
+                        <Button type="primary" shape="circle" icon="plus" onClick={handleAddTeam} />
+                    </div>
+                    <ExpandableTable
+                        columns={columns}
+                        dataSource={teamsData}
+                        expandedRowRender={(record, i) => <ExpandRow record={record} handleAddGruop={handleAddGruop} intl={intl} />}
+                    />
+                </TabPane>
+                <TabPane tab={intl.formatMessage({ id: "page.table.collect-people" })} key="2">
+                    <SystemPeopleManage />
+                </TabPane>
+            </Tabs>
+        </div>
     )
 }
 

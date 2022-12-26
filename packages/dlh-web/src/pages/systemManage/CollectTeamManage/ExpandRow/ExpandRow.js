@@ -295,7 +295,7 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
             }
         },
         {
-            title: intl.formatMessage({ id: "page.table.overdue.days" }),
+            title: intl.formatMessage({ id: "page.table.overdue.stage" }),
             dataIndex: 'collectStage',
             key: 'collectStage',
             width:'20%',
