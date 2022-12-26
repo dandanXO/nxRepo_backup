@@ -14,6 +14,8 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import PropTypes from 'prop-types';
 import {getIsSuperAdmin, getAllMerchants} from "utils";
 
+import DetailModal from "./DetailModal/DetailModal";
+
 const statusObj = {
     "0": <FormattedMessage id="page.search.list.outstanding"/>,
     "1": <FormattedMessage id="page.search.list.repaid"/>,
@@ -167,8 +169,15 @@ class TodayList extends Component {
                 dataIndex: 'collectorName',
                 key: 'collectorName',
                 width: '7%',
-                render(text) {
-                    return text;
+                render(text, record) {
+                  console.log("text", text)
+                  console.log("record", record)
+                    return (
+                      <div className={"styles.btnWrapper"}>
+                        <span onClick={() => _this.collectorLookDetail(record)}><Icon type={'file'} /></span>
+                        {text}
+                      </div>
+                    )
                     // const { personData } = _this.props;
                     // const obj = personData.find(item => Number(item.value) === Number(text));
                     // console.log(obj);
@@ -309,6 +318,24 @@ class TodayList extends Component {
     }
 
 
+    collectorAfterClose = () => {
+      const {collectorSetModalData, collectorChangeModalLoading} = this.props;
+      collectorSetModalData([]);
+      collectorChangeModalLoading(false);
+    }
+
+    collectorHandleModalCancel = () => {
+      const {collectorChangeModalVisible} = this.props;
+      collectorChangeModalVisible(false);
+    }
+
+    collectorLookDetail = (record) => {
+      const {id} = record;
+      const {collectorChangeModalLoading, collectorGetModalData} = this.props;
+      collectorChangeModalLoading(true);
+      collectorGetModalData({id});
+    }
+
     render() {
         const {
             tableData: {data, pagination},
@@ -316,7 +343,10 @@ class TodayList extends Component {
             searchParams,
             visible,
             selectKeys,
-            personData
+            personData,
+            collectorModalLoading,
+            collectorVisible,
+            collectorModalData,
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -354,6 +384,14 @@ class TodayList extends Component {
                     onModalCancel={this.onModalCancel}
                     modalTitle={"windowPage.select.collector"}
                 />
+                <DetailModal
+                  modalLoading={collectorModalLoading}
+                  visible={collectorVisible}
+                  modalData={collectorModalData}
+                  afterClose={this.collectorAfterClose}
+                  handleCancel={this.collectorHandleModalCancel}
+                  handlePageChange={this.handleModalPageChange}
+                />
             </div>
         );
     }
@@ -368,7 +406,12 @@ const mapStateToProps = (state) => {
         personData: todayListState['personData'],
         selectKeys: todayListState['selectKeys'],
         visible: todayListState['visible'],
-        personType: todayListState['personType']
+        personType: todayListState['personType'],
+        // 催收人員列表
+        collectorModalLoading: todayListState['collector']['modalLoading'],
+        collectorVisible: todayListState['collector']['visible'],
+        collectorModalData: todayListState['collector']['modalData'],
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -379,7 +422,12 @@ const mapDispatchToProps = (dispatch) => {
         getPerson: todayListAction.todlGetPerson,
         changeModalVisible: todayListAction.todlChangeModalVisible,
         distributeOrder: todayListAction.todlDistributeOrder,
-        changeSelectKeys: todayListAction.todlChangeSelectKey
+        changeSelectKeys: todayListAction.todlChangeSelectKey,
+        // 催收人員列表
+        collectorChangeModalVisible: todayListAction.todlColleterChangeModalVisible,
+        collectorChangeModalLoading: todayListAction.todlColleterChangeModalLoading,
+        collectorGetModalData: todayListAction.todlColletorGetModalData,
+        collectorSetModalData: todayListAction.todlColletorSetModalData,
     }, dispatch);
 }
 

@@ -881,6 +881,7 @@
   "windowPage.distribute.order": "分配订单",
   "windowPage.select.collector": "选择催收员",
   "windowPage.collector": "催收人",
+  "windowPage.collector.record": "催收人分配纪录",
   "windowPage.collectors": "催收員",
   "windowPage.overdueStatistics": "{type}催收统计",
   "windowPage.all": "总览",

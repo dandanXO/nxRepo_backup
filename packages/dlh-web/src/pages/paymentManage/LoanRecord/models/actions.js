@@ -12,7 +12,8 @@ export const lrdGetTableData = (params) => ({ type: LRD_GET_TABLE_DATA, params }
 export const lrdSetTableData = (data) => ({ type: LRD_SET_TABLE_DATA, data });
 export const lrdChangeTableLoading = (option) => ({ type: LRD_CHANGE_TABLE_LOADING, option });
 export const lrdPayMoney = (params, callback) => ({ type: LRD_PAY_MONEY, params, callback });
+export const lrdChangeModalVisible = (option) => ({ type: LRD_CHANGE_MODAL_VISIBLE, option });
+export const lrdChangeModalLoading = (option) => ({ type: LRD_CHANGE_MODAL_LOADING, option });
 export const lrdGetModalData = (params) => ({ type: LRD_GET_MODAL_DATA, params });
 export const lrdSetModalData = (data) => ({ type: LRD_SET_MODAL_DATA, data });
-export const lrdChangeModalLoading = (option) => ({ type: LRD_CHANGE_MODAL_LOADING, option });
-export const lrdChangeModalVisible = (option) => ({ type: LRD_CHANGE_MODAL_VISIBLE, option });
+

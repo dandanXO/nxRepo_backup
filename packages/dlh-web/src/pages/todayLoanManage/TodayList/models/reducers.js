@@ -1,11 +1,14 @@
 import {
-    TODL_CHANGE_TABLE_LOADING,
-    TODL_SET_TABLE_DATA,
-    TODL_CHANGE_SEARCH_PARAMS,
-    TODL_SET_PERSON,
-    TODL_CHANGE_MODAL_VISIBLE,
-    TODL_CHANGE_SELECT_KEY,
-    TODL_CHANGE_PERSON_TYPE
+  TODL_CHANGE_TABLE_LOADING,
+  TODL_SET_TABLE_DATA,
+  TODL_CHANGE_SEARCH_PARAMS,
+  TODL_SET_PERSON,
+  TODL_CHANGE_MODAL_VISIBLE,
+  TODL_CHANGE_SELECT_KEY,
+  TODL_CHANGE_PERSON_TYPE,
+  TODL_COLLECTOR_CHANGE_MODAL_LOADING,
+  TODL_COLLECTOR_CHANGE_MODAL_VISIBLE,
+  TODL_COLLECTOR_SET_MODAL_DATA,
 } from './actions'
 
 const initState = {
@@ -28,7 +31,12 @@ const initState = {
     personData: [],
     selectKeys: [],
     visible: false,
-    personType: ''
+    personType: '',
+    collector: {
+      modalLoading: false,
+      visible: false,
+      modalData: [],
+    }
 }
 
 const todayList = (state = initState, action) => {
@@ -47,6 +55,22 @@ const todayList = (state = initState, action) => {
             return { ...state, selectKeys: action.data };
         case TODL_CHANGE_PERSON_TYPE:
             return { ...state, personType: action.option };
+
+        case TODL_COLLECTOR_CHANGE_MODAL_LOADING:
+          return { ...state, collector: {
+              ...state.collector,
+              modalLoading: action.option,
+            }};
+        case TODL_COLLECTOR_CHANGE_MODAL_VISIBLE:
+          return { ...state, collector: {
+              ...state.collector,
+              visible: action.option,
+            }};
+        case TODL_COLLECTOR_SET_MODAL_DATA:
+          return { ...state, collector: {
+              ...state.collector,
+              modalData: action.data,
+            }};
         default:
             return state;
     }
