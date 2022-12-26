@@ -32,6 +32,7 @@ const initState = {
     selectKeys: [],
     visible: false,
     personType: '',
+    // 催收人紀錄
     collector: {
       modalLoading: false,
       visible: false,
@@ -55,7 +56,7 @@ const todayList = (state = initState, action) => {
             return { ...state, selectKeys: action.data };
         case TODL_CHANGE_PERSON_TYPE:
             return { ...state, personType: action.option };
-
+        // 催收人紀錄
         case TODL_COLLECTOR_CHANGE_MODAL_LOADING:
           return { ...state, collector: {
               ...state.collector,

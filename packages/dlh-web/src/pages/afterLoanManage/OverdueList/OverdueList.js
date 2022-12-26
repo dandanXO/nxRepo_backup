@@ -13,6 +13,7 @@ import download from "downloadjs";
 import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
+import DetailModal from "./DetailModal/DetailModal";
 
 //转换参数格式
 // const convertParams = (obj) => {
@@ -178,12 +179,15 @@ class OverdueList extends Component {
                 dataIndex: 'collectorName',
                 key: 'collectorName',
                 width:'10%',
-                render(text) {
-                    return text;
-                    // const { personData } = _this.props;
-                    // const obj = personData.find(item => Number(item.value) === Number(text));
-                    // console.log(obj);
-                    // return  obj ? obj['name'] : '';
+                render(text, record) {
+                  console.log("text", text)
+                  console.log("record", record)
+                  return (
+                    <div>
+                      <span onClick={() => _this.collectorLookDetail(record)}><Icon type={'file'} /></span>
+                      {text}
+                    </div>
+                  )
                 }
             },
             {
@@ -381,6 +385,24 @@ class OverdueList extends Component {
     }
 
 
+    collectorAfterClose = () => {
+      const {collectorSetModalData, collectorChangeModalLoading} = this.props;
+      collectorSetModalData([]);
+      collectorChangeModalLoading(false);
+    }
+
+    collectorHandleModalCancel = () => {
+      const {collectorChangeModalVisible} = this.props;
+      collectorChangeModalVisible(false);
+    }
+
+    collectorLookDetail = (record) => {
+      const {id} = record;
+      const {collectorChangeModalLoading, collectorGetModalData} = this.props;
+      collectorChangeModalLoading(true);
+      collectorGetModalData({id});
+    }
+
     render() {
         const {
             tableData: {data, pagination},
@@ -388,7 +410,10 @@ class OverdueList extends Component {
             searchParams,
             visible,
             selectKeys,
-            personData
+            personData,
+            collectorModalLoading,
+            collectorVisible,
+            collectorModalData,
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -422,6 +447,14 @@ class OverdueList extends Component {
                     onModalCancel={this.onModalCancel}
                     modalTitle={"windowPage.select.collector"}
                 />
+                <DetailModal
+                  modalLoading={collectorModalLoading}
+                  visible={collectorVisible}
+                  modalData={collectorModalData}
+                  afterClose={this.collectorAfterClose}
+                  handleCancel={this.collectorHandleModalCancel}
+                  handlePageChange={this.handleModalPageChange}
+                />
             </div>
         );
     }
@@ -436,7 +469,11 @@ const mapStateToProps = (state) => {
         personData: overdueListState['personData'],
         selectKeys: overdueListState['selectKeys'],
         visible: overdueListState['visible'],
-        personType: overdueListState['personType']
+        personType: overdueListState['personType'],
+        // 催收人員列表
+        collectorModalLoading: overdueListState['collector']['modalLoading'],
+        collectorVisible: overdueListState['collector']['visible'],
+        collectorModalData: overdueListState['collector']['modalData'],
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -447,7 +484,12 @@ const mapDispatchToProps = (dispatch) => {
         getPerson: overdueListAction.odlGetPerson,
         changeModalVisible: overdueListAction.odlChangeModalVisible,
         distributeOrder: overdueListAction.odlDistributeOrder,
-        changeSelectKeys: overdueListAction.odlChangeSelectKey
+        changeSelectKeys: overdueListAction.odlChangeSelectKey,
+        // 催收人員列表
+        collectorChangeModalLoading: overdueListAction.odlColleterChangeModalLoading,
+        collectorChangeModalVisible: overdueListAction.odlColleterChangeModalVisible,
+        collectorGetModalData: overdueListAction.odlColletorGetModalData,
+        collectorSetModalData: overdueListAction.odlColletorSetModalData,
     }, dispatch);
 }
 
