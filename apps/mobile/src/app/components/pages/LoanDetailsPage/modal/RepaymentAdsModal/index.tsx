@@ -10,6 +10,15 @@ import CloseICONPng from "./limited_time_offer_icon.png";
 import moment from "moment";
 import {RepayAndApplyButton, RepaymentButton, RepaymentModalContainer, SectionButton} from "../RepaymentModal";
 import {useLockRequest} from "../../../../../hooks/useLockRequest";
+import {renderByCountry} from "../../../../../i18n";
+import {IndiaCountry} from "../../../../../../environments/config/countries/IndiaCountry";
+import {IndiaBindBankAccountPage} from "../../../BindBankAccountPage/i18n/components/IndiaBindBankAccountPage";
+import {PakistanCountry} from "../../../../../../environments/config/countries/PakistanCountry";
+import {PakistanBindBankAccountPage} from "../../../BindBankAccountPage/i18n/components/PakistanBindBankAccountPage";
+import {BangladeshCountry} from "../../../../../../environments/config/countries/BangladeshCountry";
+import {
+  BangladeshBindBankAccountPage
+} from "../../../BindBankAccountPage/i18n/components/BangladeshBindBankAccountPage";
 
 
 const Brand = styled.div`
@@ -72,6 +81,7 @@ const UniversalRepayAndApplyButton = styled(RepayAndApplyButton)`
 const UniversalRepaymentButton = styled(RepaymentButton)`
   background: ${(props) => props.theme.repaymentAdsModal.main.bg};
   color: #fff;
+  margin-bottom: 16px;
 `
 
 type RepaymentAdsModalProps = {
@@ -181,22 +191,8 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                   <BrandShortTitle>{shortTitle}</BrandShortTitle>
                                 </BrandContent>
                               </Brand>
-                              <ContentContainer>
-                                <UniversalRepaymentButton onClick={handleConfirm}>
-                                  {t("Repayment")}
-                                </UniversalRepaymentButton>
-                                <UniversalRepayAndApplyButton
-                                  onClick={() => {
-                                    // NOTE: self
-                                    props.setShowRepaymentNoticeModal(
-                                      true
-                                    );
-                                  }}
-                                >
-                                  <RepayICON />{t("Repay and Apply Again")}
-                                </UniversalRepayAndApplyButton>
-                              </ContentContainer>
 
+                              <ButtonContainer t={t} handleConfirm={handleConfirm} setShowRepaymentNoticeModal={props.setShowRepaymentNoticeModal}/>
                           </SectionButton>
                         </RepaymentModalContainer>
                     );
@@ -206,5 +202,84 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
     );
 };
 
+interface IButtonContainer {
+  handleConfirm: any;
+  t: any;
+  setShowRepaymentNoticeModal: any;
+}
+const ButtonContainer = (props: IButtonContainer) => {
+  return renderByCountry({
+    // NOTICE: default 0 index
+    [IndiaCountry.country]: (
+      <ContentContainer>
+        <UniversalRepayAndApplyButton
+          onClick={() => {
+            // NOTE: self
+            props.setShowRepaymentNoticeModal(
+              true
+            );
+          }}
+        >
+          <RepayICON />{props.t("Repay and Apply Again")}
+        </UniversalRepayAndApplyButton>
+        <UniversalRepaymentButton onClick={props.handleConfirm}>
+          {props.t("Repayment")}
+        </UniversalRepaymentButton>
+      </ContentContainer>
+    ),
+    [PakistanCountry.country]: (
+      <ContentContainer>
+        <UniversalRepaymentButton onClick={props.handleConfirm}>
+          {props.t("Repayment")}
+        </UniversalRepaymentButton>
+        <UniversalRepayAndApplyButton
+          onClick={() => {
+            // NOTE: self
+            props.setShowRepaymentNoticeModal(
+              true
+            );
+          }}
+        >
+          <RepayICON />{props.t("Repay and Apply Again")}
+        </UniversalRepayAndApplyButton>
+      </ContentContainer>
+    ),
+    // NOTICE: REFACTOR ME
+    [BangladeshCountry.country]: (
+      <ContentContainer>
+        <UniversalRepaymentButton onClick={props.handleConfirm}>
+          {props.t("Repayment")}
+        </UniversalRepaymentButton>
+        <UniversalRepayAndApplyButton
+          onClick={() => {
+            // NOTE: self
+            props.setShowRepaymentNoticeModal(
+              true
+            );
+          }}
+        >
+          <RepayICON />{props.t("Repay and Apply Again")}
+        </UniversalRepayAndApplyButton>
+      </ContentContainer>
+    )
+  }, (
+    <ContentContainer>
+      <UniversalRepayAndApplyButton
+        onClick={() => {
+          // NOTE: self
+          props.setShowRepaymentNoticeModal(
+            true
+          );
+        }}
+      >
+        <RepayICON />{props.t("Repay and Apply Again")}
+      </UniversalRepayAndApplyButton>
+      <UniversalRepaymentButton onClick={props.handleConfirm}>
+        {props.t("Repayment")}
+      </UniversalRepaymentButton>
+    </ContentContainer>
+  ))
+
+}
 
 export default RepaymentAdsModal;
