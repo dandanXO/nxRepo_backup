@@ -6,7 +6,7 @@ import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import { useParams,useHistory } from "react-router-dom";
 import OrderFinalReviewModal from './OrderFinalReviewModal';
-import { usePostOrderReviewMutation } from '../../api/OrderReviewApi';
+import { usePostOrderReviewMutation } from '../../api/OrderFinalReviewApi';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
 import {itemRender} from "../../../shared/itemRender";
 

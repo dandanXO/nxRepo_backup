@@ -4,10 +4,10 @@ import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, Modal, Radio, Space, List, Tooltip } from 'antd';
 import moment from 'moment';
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
-import useValuesEnums from '../../../shared/hooks/useValuesEnums';
 import { InfoCircleOutlined } from "@ant-design/icons";
-import { useLazyGetOrderReviewListQuery, usePostOrderReviewMutation } from '../../api/OrderReviewApi';
-import { GetOrderReviewListRequestQuerystring, OrderReviewListResponse, GetOrderReviewListProps } from '../../api/types/getOrderReviewList';
+import { useLazyGetOrderFinalReviewListQuery, usePostOrderReviewMutation } from '../../api/OrderFinalReviewApi';
+import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from '../../api/types/getOrderReviewList';
+import { OrderReviewTypes } from '../../api/types/domain/OrderReviewTypes';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
 import CopyText from '../../../shared/components/CopyText';
@@ -18,6 +18,7 @@ import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
 import useGetProviderEnum from '../../../shared/hooks/useGetProviderEnum';
 const OrderFinalReviewTable = () => {
 
+
     const isSuperAdmin = getIsSuperAdmin();
 
     // Hooks
@@ -26,7 +27,7 @@ const OrderFinalReviewTable = () => {
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
 
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetOrderReviewListQuery({
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetOrderFinalReviewListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -86,6 +87,11 @@ const OrderFinalReviewTable = () => {
     };
 
     const handleReviewAll = (status) => {
+        // const confirmText = status === 1 ? '通过' : status === 0 ? '拒绝' : '拒绝且拉黑';
+        // const reasonText = status === 1 ? `批次审核通过` : `批次审核不通过`;
+        // modal.confirm({
+        //     title:`确认全部订单审核${confirmText}吗？`,
+        //     content: status === 0 ? `审核拒绝后，用戶7天之内无法再申请任何订单。7天后，订单会自动拉回。` : '',
         const confirmText = status === 1 ? '通过' : '拒绝';
         const reasonText = status === 1 ? `批次审核通过` : `批次审核不通过`;
         modal.confirm({
@@ -139,7 +145,7 @@ const OrderFinalReviewTable = () => {
         'GOOD': { text: '良好', color: 'orange' },
     }
 
-    const columns: ProColumns<OrderReviewListResponse>[] = [
+    const columns: ProColumns<OrderReviewTypes>[] = [
         {
             title: '操作',
             valueType: 'option',
@@ -192,7 +198,7 @@ const OrderFinalReviewTable = () => {
         columns.splice(10, 0, { title: '风控应用', dataIndex: 'provider', valueType: 'select', key: 'provider', valueEnum: providerListEnum, initialValue: searchParams.provider || '' })
     }
     return (
-        <ProTable<OrderReviewListResponse>
+        <ProTable<OrderReviewTypes>
             columns={columns}
             dataSource={orderReviewList?.records || []}
             loading={isFetching}
@@ -205,6 +211,7 @@ const OrderFinalReviewTable = () => {
                 <Space>
                     <Button key="passButton" type="primary" ghost disabled={buttonDisabled} onClick={()=>handleReviewAll(1)}>全部通过</Button>
                     <Button key="rejectButton" type="primary" ghost disabled={buttonDisabled} onClick={()=>handleReviewAll(0)}>全部拒绝</Button>
+                    {/* <Button key="blackButton" type="primary" ghost disabled={buttonDisabled} onClick={()=>handleReviewAll(2)}>全部拉黑</Button> */}
                     <Input.Group compact>
                         <div style={{ padding: '4px 11px', border: '1px solid #d9d9d9' }}>
                             <Space>随机提取
