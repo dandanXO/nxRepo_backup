@@ -66,11 +66,11 @@ const ContentContainer = styled.div`
 `
 
 const UniversalRepayAndApplyButton = styled(RepayAndApplyButton)`
-  background: ${(props) => props.theme.repaymentAdsModal.main.bg};
+  background: ${(props) => props.theme.repaymentAdsModal.secondary.bg};
   margin-bottom: 16px;
 `;
 const UniversalRepaymentButton = styled(RepaymentButton)`
-  background: ${(props) => props.theme.repaymentAdsModal.secondary.bg};
+  background: ${(props) => props.theme.repaymentAdsModal.main.bg};
   color: #fff;
 `
 
@@ -182,6 +182,9 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                 </BrandContent>
                               </Brand>
                               <ContentContainer>
+                                <UniversalRepaymentButton onClick={handleConfirm}>
+                                  {t("Repayment")}
+                                </UniversalRepaymentButton>
                                 <UniversalRepayAndApplyButton
                                   onClick={() => {
                                     // NOTE: self
@@ -192,9 +195,6 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                 >
                                   <RepayICON />{t("Repay and Apply Again")}
                                 </UniversalRepayAndApplyButton>
-                                <UniversalRepaymentButton onClick={handleConfirm}>
-                                  {t("Repayment")}
-                                </UniversalRepaymentButton>
                               </ContentContainer>
 
                           </SectionButton>
