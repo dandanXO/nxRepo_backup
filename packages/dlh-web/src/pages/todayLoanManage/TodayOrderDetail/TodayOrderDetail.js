@@ -26,6 +26,7 @@ class OrderDetail extends Component{
             remark: '',
             isShowBtn,
             hidenTag:'0',
+            hideContactIfNotDue: true,
         };
         const _this = this;
         this.overdueRecordColumns = [
@@ -392,6 +393,7 @@ class OrderDetail extends Component{
         const { hidenTag } = this.state;
         console.log("hidenTag" + hidenTag);
         console.log("hidenTagx" + hidenTag !== 1);
+        if(hidenTag==='1')return;
         if(hidenTag !== '1'){
             return (
                 <CommonTable columns={columns} dataSource={addressBook} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
@@ -404,6 +406,7 @@ class OrderDetail extends Component{
     renderOperatorMsg = () => {
         const { orderData: { operator = {} } } = this.props;
         const { hidenTag } = this.state;
+        if(hidenTag==='1')return;
         if(hidenTag !== '1'){
             return (
                 <div>
@@ -529,12 +532,14 @@ class OrderDetail extends Component{
     }
 
     isNotOverdue = (orderData) => {
+        if (Object.keys(orderData).length === 0) {
+            return this.state.hideContactIfNotDue;
+        }
         if(orderData && orderData.orderInfo && orderData.orderInfo.expireTime){
             const expireDate = moment(orderData.orderInfo.expireTime ).startOf('day');
             const today = moment().startOf('day');
             return today.isBefore(expireDate);
         }
-
         return false;
     }
 
