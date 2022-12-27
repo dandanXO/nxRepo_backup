@@ -7,7 +7,7 @@ import { HashRouter as Router, Route, Switch, useHistory } from "react-router-do
 import useValuesEnums from '../../../shared/hooks/useValuesEnums';
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { useLazyGetOrderReviewListQuery, usePostOrderReviewMutation } from '../../api/OrderReviewApi';
-import { GetOrderReviewListRequestQuerystring, OrderReviewListResponse, GetOrderReviewListProps } from '../../api/types/OrderReviewTypes/getOrderReviewList';
+import { GetOrderReviewListRequestQuerystring, OrderReviewListResponse, GetOrderReviewListProps } from '../../api/types/getOrderReviewList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
 import CopyText from '../../../shared/components/CopyText';

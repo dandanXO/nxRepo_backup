@@ -1,5 +1,5 @@
 import { API } from "../../../api";
-import { GetOrderReviewRecordListProps,GetOrderReviewRecordListRequestQuerystring } from "./types/orderReviewRecordTypes/getOrderReviewRecordList";
+import { GetOrderReviewRecordListProps,GetOrderReviewRecordListRequestQuerystring } from "./types/getOrderReviewRecordList";
 const OrderReviewRecordApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
@@ -11,7 +11,7 @@ const OrderReviewRecordApi = API.injectEndpoints({
                 method: "get",
             }),
         }),
-      
+
     })
 })
 export const {

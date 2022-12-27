@@ -1,4 +1,5 @@
-import { GetPageableResponse } from "../../../../../types/commonReponse";
+import { GetPageableResponse } from "../../../../types/commonReponse";
+
 export interface GetOrderReviewListRequestQuerystring {
     addEndTime?: string;              // 申請時間結束
     addStartTime?: string;            // 申請時間開始

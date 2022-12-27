@@ -1,6 +1,6 @@
 import { API } from "../../../api";
-import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from "./types/OrderReviewTypes/getOrderReviewList";
-import { PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring } from "./types/OrderReviewTypes/postOrderReview";
+import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from "./types/getOrderReviewList";
+import { PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring } from "./types/postOrderReview";
 
 const OrderReviewApi = API.injectEndpoints({
     overrideExisting: false,

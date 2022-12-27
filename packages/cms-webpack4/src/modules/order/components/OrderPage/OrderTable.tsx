@@ -5,7 +5,7 @@ import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
 import moment from 'moment';
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
-import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/OrderTypes/getOrderList';
+import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
@@ -145,7 +145,7 @@ const OrderTable = () => {
                 false: { text: '否' },
             },
         },
-        
+
     ]
     if (isSuperAdmin) {
         columns.splice(1, 0, {
@@ -159,7 +159,7 @@ const OrderTable = () => {
         columns.push(
             { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.rcProvider || "", valueEnum: providerListEnum,}
         )
-        
+
     }
 
     return (
