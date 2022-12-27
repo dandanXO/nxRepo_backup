@@ -5,7 +5,7 @@ import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
 import moment from 'moment';
 import useValuesEnums from '../../../shared/hooks/useValuesEnums';
 import { useLazyGetOrderReviewRecordListQuery } from '../../api/OrderReviewRecordApi';
-import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring } from '../../api/types/orderReviewRecordTypes/getOrderReviewRecordList';
+import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring } from '../../api/types/getOrderReviewRecordList';
 import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
 import {enumObjectToMap} from '../../../shared/utils/enumObjectToMap';
@@ -54,7 +54,7 @@ const OrderReviewRecordTable = () => {
         const searchQueryString = queryString.stringify(searchList);
         window.open(`/hs/admin/order-review-record/list/download?${searchQueryString}`);
     }
-   
+
       const statusEnum =  {
         '': { text: '不限' },
         '1': { text: '机审通过', color: 'blue' },
@@ -88,7 +88,7 @@ const OrderReviewRecordTable = () => {
         <ProTable<OrderReviewRecordListResponse>
             columns={columns}
             dataSource={recordList?.records || []}
-            loading={isFetching} 
+            loading={isFetching}
             rowKey="id"
             search={{
                 labelWidth: 'auto',

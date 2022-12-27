@@ -18,6 +18,8 @@ const OrderFinalReviewModal = ((props: OrderFinalReviewModalProps) => {
     const statusOptions = [
         { label: '审核通过', value: 1 },
         { label: '审核不通过', value: 0 },
+        // { label: '拒绝且拉黑', value: 0 },
+        // { label: '拒绝7天', value: 2 },
     ]
 
 

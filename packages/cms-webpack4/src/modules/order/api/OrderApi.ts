@@ -1,5 +1,5 @@
 import { API } from "../../../api";
-import { GetOrderListRequestQuerystring, GetOrderListProps } from "./types/OrderTypes/getOrderList";
+import { GetOrderListRequestQuerystring, GetOrderListProps } from "./types/getOrderList";
 
 const OrderApi = API.injectEndpoints({
     overrideExisting: false,

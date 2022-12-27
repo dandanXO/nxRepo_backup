@@ -4,7 +4,7 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, PaginationProps, Space } from 'antd';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { GetProductListResponse } from '../../../service/product/ProductApi';
+import {GetProductListResponse, Product} from '../../../service/product/ProductApi';
 import { ProductFormModal } from "./hooks/useProductFormModal";
 import { ProColumnsOperationConstant } from "../../../../shared/components/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
@@ -25,7 +25,7 @@ const ProductTable = (props: ProductTableProps) => {
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const [patchProduct, { isSuccess: patchProductSuccess }] = usePatchProductEditMutation();
-    const [productList, setProductList] = useState<GetProductListResponse[]>(props.productListData);
+    const [productList, setProductList] = useState<Product[]>(props.productListData);
     const initSearchList: GetProductListRequestQuery = { enabled: true, merchantId: '', productName: '' };
     const [searchList, setSearchList] = useState(initSearchList);
 
@@ -47,7 +47,7 @@ const ProductTable = (props: ProductTableProps) => {
 
     const columns = useMemo(() => {
 
-        const columns: ProColumns<GetProductListResponse>[] = [
+        const columns: ProColumns<Product>[] = [
             {
                 title: '操作',
                 valueType: 'option',
@@ -149,7 +149,7 @@ const ProductTable = (props: ProductTableProps) => {
 
 
     return (
-        <ProTable<GetProductListResponse>
+        <ProTable<Product>
             columns={columns}
             actionRef={actionRef}
             dataSource={productList}

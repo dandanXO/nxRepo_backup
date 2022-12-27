@@ -10,8 +10,8 @@ export interface ProductRequestParams {
     productId: number
 }
 
-type Product = ProductTypes & extraProductTypes
-export type GetProductListResponse = Product;
+export type Product = ProductTypes & extraProductTypes
+export type GetProductListResponse = Product[];
 export type GetProductDetailResponse = Product;
 export type PostProductRequest = ProductTypes;
 export type PutProductProps = ProductRequestParams & ProductTypes;
@@ -29,7 +29,7 @@ const ProductApi = API.injectEndpoints({
             }),
         }),
         // NOTE: GET /hs/admin/product-manage/list 产品管理列表
-        getProductManageList: builder.query<GetProductListResponse[], GetProductListRequestQuery>({
+        getProductManageList: builder.query<GetProductListResponse, GetProductListRequestQuery>({
             query: (requestBody: GetProductListRequestQuery) => ({
                 url: `/product-manage/list`,
                 method: "get",

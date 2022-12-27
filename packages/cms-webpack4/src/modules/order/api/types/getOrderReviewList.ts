@@ -1,4 +1,6 @@
-import { GetPageableResponse } from "../../../../../types/commonReponse";
+import { GetPageableResponse } from "../../../../types/commonReponse";
+import { OrderReviewTypes } from "./domain/OrderReviewTypes";
+
 export interface GetOrderReviewListRequestQuerystring {
     addEndTime?: string;              // 申請時間結束
     addStartTime?: string;            // 申請時間開始
@@ -38,26 +40,8 @@ export interface GetOrderReviewListRequestQuerystring {
 }
 
 export interface GetOrderReviewListResponse {
-    records: OrderReviewListResponse[];
+    records: OrderReviewTypes[];
 }
 
-export interface OrderReviewListResponse {
-    addTime?: string;           // 申請時間
-    appName?: string;           // APP名稱
-    applyChannel?: string;      // 申請渠道
-    deviceMoney?: number;       // 申請金額
-    dummy?: boolean;            // 空放訂單
-    id?: number;                // 訂單ID
-    lendMoney?: number;         // 到帳金額
-    oldMember?: boolean;        // 老客下單
-    orderNo?: string;           // 訂單號
-    phoneNo?: string;           // 手機號
-    productName?: string;       // 產品名稱
-    merchantName?:string;       // 商户名
-    provider?: string;          // 風控應用
-    riskRank?: string;          // 風控標籤
-    userName?: string;          // 姓名
-    userId?: number;            // userid
-}
 
 export type GetOrderReviewListProps = GetOrderReviewListResponse & GetPageableResponse;

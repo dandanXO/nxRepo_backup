@@ -1,4 +1,4 @@
-import { GetPageableResponse } from "../../../../../types/commonReponse";
+import { GetPageableResponse } from "../../../../types/commonReponse";
 export interface GetOrderListRequestQuerystring {
     appName?: string;                 // APP名稱
     applyTimeEnd?: string;            // 申请时间迄
@@ -55,9 +55,9 @@ export interface OrderListResponse {
     merchantName?:string;     // 商户名
     orderNo?:string;          // 订单编号
     phoneNo?:string;          // 手机号
-    productName?:string;      // 产品名称         
-    riskModelName?:string;    // 风控应用         
-    status?:number;           // 订单状态         
+    productName?:string;      // 产品名称
+    riskModelName?:string;    // 风控应用
+    status?:number;           // 订单状态
     userId?:number;           // 客戶Id
     userName?:string;         // 姓名
 }

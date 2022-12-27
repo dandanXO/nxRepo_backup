@@ -5,7 +5,7 @@ import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
 import moment from 'moment';
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
-import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/OrderTypes/getOrderList';
+import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
@@ -70,10 +70,21 @@ const OrderTable = () => {
         window.open(`/hs/admin/order/list/download?${searchQueryString}`);
     }
 
-    const statusEnum = {
+    const statusEnum = appInfo.COUNTRY !== 'Bangladesh' ? {
         '': { text: '不限' },
-        '1': { text: '机审中', color: 'default'},
+        '1': { text: '机审中', color: 'default' },
         '6': { text: '审核中', color: 'blue' },
+        '7': { text: '订单拒绝', color: 'red' },
+        '8': { text: '放款中', color: 'purple' },
+        '9': { text: '还款中', color: 'blue' },
+        '10': { text: '已完成', color: 'green' },
+        '11': { text: '放款失败', color: 'red' },
+        '12': { text: '已逾期', color: 'orange' },
+    } : {
+        '': { text: '不限' },
+        '1': { text: '机审中', color: 'default' },
+        '3': { text: '复审中', color: 'cyan' },
+        '6': { text: '终审中', color: 'blue' },
         '7': { text: '订单拒绝', color: 'red' },
         '8': { text: '放款中', color: 'purple' },
         '9': { text: '还款中', color: 'blue' },
@@ -145,7 +156,7 @@ const OrderTable = () => {
                 false: { text: '否' },
             },
         },
-        
+
     ]
     if (isSuperAdmin) {
         columns.splice(1, 0, {
@@ -159,7 +170,7 @@ const OrderTable = () => {
         columns.push(
             { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.rcProvider || "", valueEnum: providerListEnum,}
         )
-        
+
     }
 
     return (
