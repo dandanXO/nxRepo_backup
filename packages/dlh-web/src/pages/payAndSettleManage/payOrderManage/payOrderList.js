@@ -241,8 +241,8 @@ class PayOrderList extends Component {
             , {
                 width: 50,
                 title: this.props.intl.formatMessage({ id: "page.table.last.response.content" }),
-                dataIndex: 'lastResponseContent',
-                key: 'lastResponseContent',
+                dataIndex: 'lastResponse',
+                key: 'lastResponse',
                 className: styles.smallText,
                 render(text) {
                     return (
