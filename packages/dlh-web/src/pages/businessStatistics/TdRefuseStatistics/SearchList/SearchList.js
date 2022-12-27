@@ -69,7 +69,7 @@ class SearchList extends Component{
             <div>
                 <Form onSubmit={this.submit}>
                     <Row gutter={40}>
-                        {isSuperAdmin && (
+                        {/* {isSuperAdmin && (
                             <Col span={6}>
                                 <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
                                     {
@@ -83,7 +83,7 @@ class SearchList extends Component{
                                     }
                                 </Form.Item>
                             </Col>
-                        )}
+                        )} */}
                         <Col span={6}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.time"})}>
                                 {
