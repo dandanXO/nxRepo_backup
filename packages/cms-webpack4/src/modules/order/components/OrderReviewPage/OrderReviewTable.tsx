@@ -269,7 +269,7 @@ const OrderReviewTable = () => {
                                     provider,
                                     riskRank,
                                     userName,
-                                    merchantName: isSuperAdmin ? merchantId : ''
+                                    merchantId: isSuperAdmin ? merchantId : ''
                                 });
                                 onSelectChange([]);
                                 form.submit();
