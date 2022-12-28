@@ -255,13 +255,13 @@ const OrderReviewTable = () => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantId } = form.getFieldValue();
+                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantId='' } = form.getFieldValue();
                                 setSearchList({
                                     ...initSearchList,
                                     addEndTime: addTimeRange ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addStartTime: addTimeRange ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     appName,
-                                    applyChannel: applyChannel === "" ? "" : channelListEnum.get(applyChannel)?.text || "",
+                                    applyChannel: applyChannel === "" ? "" : channelListEnum?.get(applyChannel)?.text || "",
                                     phoneNo,
                                     oldMember,
                                     orderNo,
