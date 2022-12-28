@@ -15,11 +15,13 @@ const OrderFinalReviewModal = ((props: OrderFinalReviewModalProps) => {
         labelCol: { span: 4 },
         wrapperCol: { span: 18 },
     };
-    const statusOptions = [
+    const statusOptions = appInfo.COUNTRY !== 'Bangladesh' ? [
         { label: '审核通过', value: 1 },
         { label: '审核不通过', value: 0 },
-        // { label: '拒绝且拉黑', value: 0 },
-        // { label: '拒绝7天', value: 2 },
+    ] : [
+        { label: '审核通过', value: 1 },
+        { label: '拒绝且拉黑', value: 2 },
+        { label: '拒绝7天', value: 3 },
     ]
 
 

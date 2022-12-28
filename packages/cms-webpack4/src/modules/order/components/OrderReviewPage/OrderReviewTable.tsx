@@ -86,13 +86,18 @@ const OrderReviewTable = () => {
     };
 
     const handleReviewAll = (status) => {
-        const confirmText = status === 1 ? '通过' : status === 0 ? '拒绝' : '拒绝且拉黑';
-        const reasonText = status === 1 ? `批次审核通过` : `批次审核不通过`;
+        const confirmText = { 0: '拒绝', 1: '通过', 2: '拒绝且拉黑', 3: '拒绝' }
+        const reasonText={
+            0:`批次审核不通过`,
+            1:`批次审核通过`,
+            2:'批次审核拒绝且拉黑',
+            3:'批次审核拒绝'
+        }
         modal.confirm({
-            title:`确认全部订单审核${confirmText}吗？`,
-            content: status === 0 ? `审核拒绝后，用戶7天之内无法再申请任何订单。7天后，订单会自动拉回。` : '',
+            title: `确认全部订单审核${confirmText[status]}吗？`,
+            content: status === 3 ? `审核拒绝后，用戶7天之内无法再申请任何订单。7天后，订单会自动拉回。` : '',
             onOk() {
-                postOrderReview({ orderNos: selectedList, status: status, reason: reasonText })
+                postOrderReview({ orderNos: selectedList, status: status, reason: reasonText[status] })
                     .unwrap()
                     .then()
                     .catch((error) => {
@@ -205,8 +210,12 @@ const OrderReviewTable = () => {
             headerTitle={
                 <Space>
                     <Button key="passButton" type="primary" ghost disabled={buttonDisabled} onClick={()=>handleReviewAll(1)}>全部通过</Button>
-                    <Button key="rejectButton" type="primary" ghost disabled={buttonDisabled} onClick={()=>handleReviewAll(0)}>全部拒绝</Button>
-                    <Button key="blackButton" type="primary" ghost disabled={buttonDisabled} onClick={()=>handleReviewAll(2)}>全部拉黑</Button>
+                    {appInfo.COUNTRY !== 'Bangladesh' && <Button key="rejectButton" type="primary" ghost disabled={buttonDisabled} onClick={() => handleReviewAll(0)}>全部拒绝</Button>}
+                    {appInfo.COUNTRY === 'Bangladesh' && <>
+                        <Button key="reject7daysButton" type="primary" ghost disabled={buttonDisabled} onClick={() => handleReviewAll(3)}>全部拒绝</Button>
+                        <Button key="blackButton" type="primary" ghost disabled={buttonDisabled} onClick={() => handleReviewAll(2)}>全部拉黑</Button>
+                    </>
+                    }
                     <Input.Group compact>
                         <div style={{ padding: '4px 11px', border: '1px solid #d9d9d9' }}>
                             <Space>随机提取
@@ -232,6 +241,7 @@ const OrderReviewTable = () => {
                                 // @ts-ignore
                                 form.setFieldsValue({
                                     ...initSearchList,
+                                    merchantName: '',
                                     addTimeRange: '',
                                 });
                                 setSearchList(initSearchList);

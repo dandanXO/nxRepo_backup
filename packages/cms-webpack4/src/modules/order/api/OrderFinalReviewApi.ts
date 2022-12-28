@@ -14,10 +14,10 @@ const OrderFinalReviewApi = API.injectEndpoints({
                 method: "get",
             }),
         }),
-        // NOTE: POST /hs/admin/order-review/batch-review 批次訂單審核
-        postOrderReview: builder.mutation<PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring>({
+        // NOTE: POST /hs/admin/order-review/final-batch 批次訂單審核
+        postOrderFinalReview: builder.mutation<PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring>({
             query: (requestBody: PostOrderReviewRequestQuerystring) => ({
-                url: `/order-review/batch-review`,
+                url: `/order-review/final-batch`,
                 method: "post",
                 data: requestBody,
             }),
@@ -26,5 +26,5 @@ const OrderFinalReviewApi = API.injectEndpoints({
 })
 export const {
     useLazyGetOrderFinalReviewListQuery,
-    usePostOrderReviewMutation
+    usePostOrderFinalReviewMutation
 } = OrderFinalReviewApi;

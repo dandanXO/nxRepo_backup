@@ -5,18 +5,18 @@ import { PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring } from "
 const OrderReviewApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-        // NOTE: GET /hs​/admin​/order-review​/final 獲取待终审訂單列表
+        // NOTE: GET /hs/admin/order-review/first 獲取待複審訂單列表
         getOrderReviewList: builder.query<GetOrderReviewListProps, GetOrderReviewListRequestQuerystring>({
             query: (requestBody: GetOrderReviewListRequestQuerystring) => ({
-                url: `/order-review/final`,
+                url: `/order-review/first`,
                 params: requestBody,
                 method: "get",
             }),
         }),
-        // NOTE: POST /hs/admin/order-review/batch-review 批次訂單審核
+        // NOTE: POST /hs/admin/order-review/first-batch 批次訂單初審
         postOrderReview: builder.mutation<PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring>({
             query: (requestBody: PostOrderReviewRequestQuerystring) => ({
-                url: `/order-review/batch-review`,
+                url: `/order-review/first-batch`,
                 method: "post",
                 data: requestBody,
             }),
