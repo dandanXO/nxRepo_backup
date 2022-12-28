@@ -1166,7 +1166,7 @@
   "menu.riskControlExamine": "风控审核",
   "menu.orderManagement": "订单管理",
   "menu.orderList": "订单列表",
-  "menu.loan.reExamine": "业务复审",
+  "menu.loan.reExamine": "订单复审",
   "menu.loan.finalExamine": "订单终审",
   "menu.loan.examineList": "订单审核纪录",
   "menu.financeManage": "财务管理",
