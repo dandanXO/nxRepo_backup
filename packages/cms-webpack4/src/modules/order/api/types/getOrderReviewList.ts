@@ -11,6 +11,7 @@ export interface GetOrderReviewListRequestQuerystring {
     phoneNo?: string;                 // 手机号
     productName?: string;             // 產品名稱
     merchantName?:string;             // 商户名
+    merchantId?: string;
     provider?: ""
     | "BLUE_RAY"
     | "DESTINY"
