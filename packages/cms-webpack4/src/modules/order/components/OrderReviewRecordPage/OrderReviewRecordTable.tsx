@@ -55,13 +55,22 @@ const OrderReviewRecordTable = () => {
         window.open(`/hs/admin/order-review-record/list/download?${searchQueryString}`);
     }
 
-      const statusEnum =  {
+      const statusEnum =  appInfo.COUNTRY !== 'Bangladesh' ? {
         '': { text: '不限' },
         '1': { text: '机审通过', color: 'blue' },
         '2': { text: '机审拒绝', color: 'orange' },
         '6': { text: '审核通过', color: 'green' },
         '7': { text: '审核拒绝', color: 'red' },
-        '8': { text: '放款拒绝', color: 'gray' },
+        '8': { text: '放款拒绝', color: 'lightgray' },
+    }:{
+        '': { text: '不限' },
+        '1': { text: '机审通过', color: 'blue' },
+        '2': { text: '机审拒绝', color: 'orange' },
+        '3': { text: '复审通过', color: 'lime' },
+        '4': { text: '复审拒绝', color: 'red' },
+        '6': { text: '终审通过', color: 'green' },
+        '7': { text: '终审拒绝', color: 'red' },
+        '8': { text: '放款拒绝', color: 'lightgray' },
     };
 
     const columns: ProColumns<OrderReviewRecordListResponse>[] = [

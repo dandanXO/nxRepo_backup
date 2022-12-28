@@ -122,7 +122,12 @@ class LayoutMenu extends Component {
                 pathArr[2] = "order"
             }
 
-            // NOTICE: 訂單详细信息歸類在訂單終審
+            // NOTICE: 訂單複審详细信息歸類在訂單終審
+            if(pathArr[2] === "order-review-detail"){
+                pathArr[2] = "order-review"
+            }
+
+            // NOTICE: 訂單終審详细信息歸類在訂單終審
             if(pathArr[2] === "order-final-review-detail"){
                 pathArr[2] = "order-final-review"
             }

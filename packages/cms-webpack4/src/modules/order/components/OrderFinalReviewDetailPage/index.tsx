@@ -6,7 +6,7 @@ import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import { useParams,useHistory } from "react-router-dom";
 import OrderFinalReviewModal from './OrderFinalReviewModal';
-import { usePostOrderReviewMutation } from '../../api/OrderFinalReviewApi';
+import { usePostOrderFinalReviewMutation } from '../../api/OrderFinalReviewApi';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
 import {itemRender} from "../../../shared/itemRender";
 
@@ -18,7 +18,7 @@ const OrderFinalReviewDetailPage = () => {
     const orderNo = urlParams.orderNo;
     const [form] = Form.useForm();
     const [showModal,setShowModal]=useState(false);
-    const [postOrderReview, { data, isLoading, isSuccess }] = usePostOrderReviewMutation();
+    const [postOrderFinalReview, { data, isLoading, isSuccess }] = usePostOrderFinalReviewMutation();
     const [errorModal, errorContextHolder] = Modal.useModal();
     const history = useHistory();
 
@@ -39,7 +39,7 @@ const OrderFinalReviewDetailPage = () => {
     }
 
     const onFinish = () => {
-        postOrderReview({ orderNos: [orderNo], ...form.getFieldsValue() })
+        postOrderFinalReview({ orderNos: [orderNo], ...form.getFieldsValue() })
             .unwrap()
             .then((payload) => {
                 setShowModal(false);

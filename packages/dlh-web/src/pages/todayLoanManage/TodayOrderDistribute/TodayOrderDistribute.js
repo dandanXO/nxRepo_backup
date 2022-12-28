@@ -10,6 +10,7 @@ import {convertMoneyFormat} from "utils";
 import PropTypes from 'prop-types';
 import {FormattedMessage, injectIntl} from "react-intl";
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
+import TreeCheckbox from "../../../components/TreeCheckbox";
 
 
 class TodayOrderDistribute extends Component {
@@ -97,6 +98,8 @@ class TodayOrderDistribute extends Component {
         const {pageSize} = this.state;
         const {distributeOrder, getTableData, personType} = this.props;
 
+        console.log("selectKeys", selectKeys);
+        console.log("obj", obj);
         //let key = personType === 'group' ? 'departmentId' : 'collectorId';
 
         //todo 分配订单回调？ type 1 = 订单分配 , type2 = 重新分配 ( 逾期的沒有type )
@@ -223,6 +226,7 @@ class TodayOrderDistribute extends Component {
                 {/*  visible={visible}*/}
                 {/*  modalTitle={"windowPage.select.collector"}*/}
                 {/*/>*/}
+              {/*<TreeCheckbox/>*/}
             </div>
         );
     }
