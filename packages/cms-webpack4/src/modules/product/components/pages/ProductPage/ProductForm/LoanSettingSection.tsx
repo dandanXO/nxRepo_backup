@@ -38,8 +38,18 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
                     </Form.Item>
 
-                    <Form.Item label="最高金额上限(选填)">
-                        <Form.Item name="maxAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
+                    <Form.Item label="最高金额上限" required>
+                        <Form.Item name="maxAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                         rules={[
+                            {
+                                transform: (value) => Number(value),
+                                validator: async (_, value) => NumberValidator(_, value)({
+                                    min: 1,
+                                    minMessage: "请输入大于0的整数",
+                                })
+                            },
+                        ]}
+                        >
                             <Input allowClear placeholder={"最高金额上限"} prefix="₹" />
                         </Form.Item>
                     </Form.Item>
