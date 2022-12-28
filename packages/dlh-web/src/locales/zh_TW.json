@@ -1095,7 +1095,7 @@
   "menu.riskControlExamine": "風控審核",
   "menu.orderManagement": "訂單管理",
   "menu.orderList": "訂單列表",
-  "menu.loan.reExamine": "業務複審",
+  "menu.loan.reExamine": "訂單複審",
   "menu.loan.finalExamine": "訂單終審",
   "menu.loan.examineList": "訂單審核記錄",
   "menu.financeManage": "財務管理",
