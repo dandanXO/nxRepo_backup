@@ -37,7 +37,7 @@ const OrderReviewModal = ((props: OrderReviewModalProps) => {
                 <Form.Item name="status" label="审核结果" >
                     <Radio.Group options={statusOptions} />
                 </Form.Item>
-                <Form.Item name="reason" label="备注" extra="提醒您，备注提交后即不可再修改">
+                <Form.Item name="remark" label="备注" extra="提醒您，备注提交后即不可再修改">
                     <Input.TextArea allowClear rows={8} />
                 </Form.Item>
             </Form>
