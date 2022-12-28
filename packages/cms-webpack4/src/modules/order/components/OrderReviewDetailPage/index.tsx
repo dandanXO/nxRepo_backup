@@ -39,11 +39,18 @@ const OrderFinalReviewDetailPage = () => {
     }
 
     const onFinish = () => {
-        postOrderReview({ orderNos: [orderNo], ...form.getFieldsValue() })
+        const {status}=form.getFieldsValue();
+        const reasonText={
+            0:`终审拒绝`,
+            1:``,
+            2:'复审拒绝且拉黑',
+            3:'复审拒绝7天'
+        }
+        postOrderReview({ orderNos: [orderNo], ...form.getFieldsValue() , reason: reasonText[status]})
             .unwrap()
             .then((payload) => {
                 setShowModal(false);
-                history.push('/order-final-review');
+                history.push('/order-review');
             })
             .catch((error) => {
                 errorModal.error({
