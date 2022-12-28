@@ -1,17 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Table, Input, Checkbox } from "antd";
-const { Search } = Input;
-import styled from "styled-components";
+// const { Search } = Input;
+import styled from "styled-csomponents";
 
 const TreeCheckboxStyle = styled.div`
   background: lightskyblue;
   text-align: left;
 
+  // 階段
   .ant-table-row-level-0 {
     text-align: left;
   }
 
-  .ant-table-row.ant-table-row-level-1 {
+  //商戶
+  .ant-table-row-level-1 {
     display: inline-block;
     padding-left: 30px;
     td {
@@ -25,13 +27,34 @@ const TreeCheckboxStyle = styled.div`
     }
   }
 
-  .ant-table-expanded-row-level-2 {
-    background: #fff;
-    padding-left: 30px;
-    text-align: left;
+  //團隊
+  .ant-table-row-level-2 {
+    display: inline-block;
+    padding-left: 51px;
+    td {
+      min-width: 100px;
+      &.ant-table-row-expand-icon-cell {
+        min-width: 0px;
+      }
+      &.ant-table-selection-column {
+        min-width: 0px;
+      }
+    }
   }
 
+  // 催收人
+  .ant-table-expanded-row-level-3 {
+    background: #fff;
+  }
+
+
+  // 隱藏催收下方 tr
   .hide-expand-icon + tr.ant-table-expanded-row-level-1 {
+    display: none;
+  }
+
+  // 隱藏團隊下方 tr
+  .hide-expand-icon + tr.ant-table-expanded-row-level-2 {
     display: none;
   }
 
@@ -41,58 +64,134 @@ const TreeCheckboxStyle = styled.div`
     }
   }
 `;
+
+const columns = [{ title: "title", dataIndex: "title", key: "title" }];
+
 export default () => {
   const initialData = useRef([]);
   const [data, setData] = useState([
     {
       key: "1",
       title: "催收階段1",
+      level: "stage",
       children: [
         {
           key: "1-1",
-          parent: "1",
           title: "商戶1",
-          checkboxData: [
-            { key: 12, title: "eric" },
-            { key: 13, title: "eric2" },
-            { key: 14, title: "eric3" },
-          ],
+          level: "merchant",
+          children: [
+            {
+              key: "team-1",
+              title: "團隊1",
+              level: "team",
+              checkboxData: [
+                { key: 1, title: "eric1" },
+                { key: 2, title: "eric2" },
+                { key: 3, title: "eric3" },
+              ],
+            },
+            {
+              key: "team-2",
+              title: "團隊2",
+              level: "team",
+              checkboxData: [
+                { key: 4, title: "eric4" },
+                { key: 5, title: "eric5" },
+                { key: 6, title: "eric6" },
+              ],
+            },
+          ]
         },
         {
           key: "1-2",
           parent: "1",
           title: "商戶2",
-          checkboxData: [
-            { key: 15, title: "eric4" },
-            { key: 16, title: "eric5" },
-            { key: 17, title: "eric6" },
-          ],
+          level: "merchant",
+          children: [
+            {
+              key: "team-3",
+              title: "團隊3",
+              level: "team",
+              checkboxData: [
+                { key: 7, title: "eric7" },
+                { key: 8, title: "eric8" },
+                { key: 9, title: "eric9" },
+              ],
+            },
+            {
+              key: "team-4",
+              title: "團隊4",
+              level: "team",
+              checkboxData: [
+                { key: 10, title: "eric10" },
+                { key: 11, title: "eric11" },
+                { key: 12, title: "eric12" },
+              ],
+            },
+          ]
         },
       ],
     },
     {
       key: "2",
       title: "催收階段2",
+      level: "stage",
       children: [
         {
           key: "2-1",
           parent: "2",
           title: "商戶1",
-          checkboxData: [
-            { key: 18, title: "eric" },
-            { key: 19, title: "eric2" },
-            { key: 20, title: "eric3" },
-          ],
+          level: "merchant",
+          children: [
+            {
+              key: "team-5",
+              title: "團隊5",
+              level: "team",
+              checkboxData: [
+                { key: 13, title: "eric13" },
+                { key: 14, title: "eric14" },
+                { key: 15, title: "eric15" },
+              ],
+            },
+            {
+              key: "team-6",
+              title: "團隊6",
+              level: "team",
+              checkboxData: [
+                { key: 16, title: "eric16" },
+                { key: 17, title: "eric17" },
+                { key: 18, title: "eric18" },
+              ],
+            },
+          ]
         },
         {
           key: "2-2",
           parent: "2",
           title: "商戶2",
-          checkboxData: [
-            { key: 21, title: "eric4" },
-            { key: 22, title: "eric5" },
-            { key: 23, title: "eric6" },
-          ],
+          level: "merchant",
+          children: [
+            {
+              key: "team-7",
+              title: "團隊7",
+              level: "team",
+              checkboxData: [
+                { key: 19, title: "eric19" },
+                { key: 20, title: "eric20" },
+                { key: 21, title: "eric21" },
+              ],
+            },
+            {
+              key: "team-8",
+              title: "團隊8",
+              level: "team",
+              checkboxData: [
+                { key: 22, title: "eric22" },
+                { key: 23, title: "eric23" },
+                { key: 24, title: "eric34" },
+              ],
+            },
+          ]
         },
       ],
     },
@@ -111,216 +210,151 @@ export default () => {
 
 
   const [selectAllDisabled, setSelectAllDisabled] = useState(false); //选择的时候，禁止全选
-  //搜索岗位时，进行过滤
-  // const loop = (searchValue) => {
-  //   let loopData = initialData.current && initialData.current.map((item) => {
-  //     let parentKey = !!~item.title.indexOf(searchValue);
-  //     let childrenData = [];
-  //     if (item.checkboxData) {
-  //       //如果存在二级，则进行二级的循环,过滤出搜索到的value
-  //       childrenData = item.checkboxData.filter(
-  //         (d) => !!~d.title.indexOf(searchValue)
-  //       );
-  //     }
-  //     //1.如果一级有，二级没有，则展示一级下所有的二级
-  //     //2.如果一级没有，二级有，则只展示存在的二级以及对应的一级
-  //     //3.如果一级有，二级有，则展示则存在的二级以及对应的一级
-  //     //4.如果一级没有，二级也没有，则不展示
-  //     if (parentKey && !childrenData.length) {
-  //       return {
-  //         title: item.title,
-  //         key: item.key,
-  //         checkboxData: item.checkboxData,
-  //       };
-  //     } else if ((!parentKey || parentKey) && childrenData.length) {
-  //       return {
-  //         title: item.title,
-  //         key: item.key,
-  //         checkboxData: childrenData,
-  //       };
-  //     } else {
-  //     }
-  //   });
-  //   setSelectAllDisabled(searchValue ? true : false);
-  //   //有数据时自动展开所有搜索到的，无数据的时候默认全部收起
-  //   setExpandedRowKeys(
-  //     searchValue ? initialData.current.map((d) => d.key) : []
-  //   );
-  //   return searchValue ? loopData.filter((d) => d) : initialData.current;
-  // };
-
-  const isContained = (a, b) => {
-    if (!(a instanceof Array) || !(b instanceof Array)) return false;
-    if (a.length < b.length) return false;
-    var aStr = a.toString();
-    for (var i = 0, len = b.length; i < len; i++) {
-      if (aStr.indexOf(b[i]) == -1) return false;
-    }
-    return true;
-  }
 
   const checkChange = (e) => {
-    console.log("checkChange.e", e)
+    // console.log("checkChange.e", e)
 
     let parentRowsKey = [];
 
-    // initialData.current.forEach((v) => {
-    //   if (v.checkboxData.find((d) => d.key === e.target.value)) {
-    //     parentRowsKey = v.key;
-    //   }
-    // });
+    const data = initialData.current
+    // console.log("data", data);
 
-    // let level = null;
-
-    // 點擊催收階段
-    // initialData.current.forEach((stage) => {
-    //   if (!stage.children) return;
-    //
-    //   if(stage.key === e.target.value) {
-    //     let newCheckedJob = [];
-    //     let newSelectedRowKeys = [...selectedRowKeys]
-    //     stage.children.map(merchant => {
-    //       merchant.checkboxData.map(collector => {
-    //         newCheckedJob.push(collector.key)
-    //       })
-    //       newSelectedRowKeys = [...newSelectedRowKeys, merchant.key]
-    //     })
-    //     newSelectedRowKeys = [...newSelectedRowKeys, stage.key]
-    //     setSelectedRowKeys(newSelectedRowKeys);
-    //     level = "stage";
-    //   }
-    // });
-
-    // if(level !== "stage") {
-      //找到点击child到一级key
-      initialData.current.forEach((level1) => {
-        // console.log("level1", level1)
-        level1.children.forEach(level2 => {
-          // console.log("level2", level2)
-          const isFind = level2 && level2.checkboxData && level2.checkboxData.find((person) => {
-            // console.log("person", person)
-            return person.key === e.target.value
+    data.forEach((stage) => {
+      // console.log("stage", stage)
+      stage.children.forEach(merchant => {
+        // console.log("merchant", merchant)
+        merchant.children.forEach((team) => {
+          const isFind = team && team.checkboxData && team.checkboxData.find((collector) => {
+            return collector.key === e.target.value
           });
           if (isFind) {
-            // setSelectedRowKeys([...selectedRowKeys, e.target.value])
-            parentRowsKey.push(level1.key)
-            parentRowsKey.push(level2.key)
+            parentRowsKey.push(stage.key)
+            parentRowsKey.push(merchant.key)
+            parentRowsKey.push(team.key)
           }
         })
-      });
-      console.log("parentRowsKey", parentRowsKey);
+      })
+    });
+    // console.log("parentRowsKey", parentRowsKey);
 
-
-
-    // }
-
-    const data = initialData.current
-    console.log("data", data);
 
     // NOTE: 全部催收階段
     let allStage = data && data.map((i) => i.key);
-    console.log("allStage", allStage);
+    // console.log("allStage", allStage);
 
     // NOTE: 當前選擇催收階段
     let currentSelectedStage = data && data.find((d) => d.key === parentRowsKey[0]);
-    console.log("currentSelectedStage", currentSelectedStage);
+    // console.log("currentSelectedStage", currentSelectedStage);
 
     // NOTE: 全部商戶
     let currentAllMerchant = currentSelectedStage && currentSelectedStage.children.map((d) => d.key);
-    console.log("currentAllMerchant", currentAllMerchant);
+    // console.log("currentAllMerchant", currentAllMerchant);
 
+    // NOTE: 當前選擇全部商戶
+    let currentSelectedAllMerchant = currentSelectedStage && currentSelectedStage.children.find((d) => d.key === parentRowsKey[1]);
+    // console.log("currentSelectedAllMerchant", currentSelectedAllMerchant);
 
+    // NOTE: 全部 Team
+    let currentAllTeam = currentSelectedAllMerchant && currentSelectedAllMerchant.children.map((d) => d.key);
+    // console.log("currentAllTeam", currentAllTeam);
+
+    // NOTE: 當前選擇 Team
+    let currentSelectedTeam
+      currentSelectedAllMerchant && currentSelectedAllMerchant.children.map((team) => {
+      if(team.key === parentRowsKey[2]) {
+        currentSelectedTeam = team;
+      }
+    });
+
+    // console.log("currentSelectedTeam", currentSelectedTeam);
 
     // NOTE: parentRowsKey
     // 0 催收階段
     // 1 商戶
     if (e.target.checked) {
 
-      // if(level !== "stage") {
-        //判断当前child的内容是否全部被选中，如果全部选中，则需要设置selectedRowKeys
-        //parentRowsKey 下的所有子元素
+
+      // NOTE: 當前商戶有不論選擇的全部人員
+      let currentAllCollector = currentSelectedTeam && currentSelectedTeam.checkboxData.map((i) => i.key);
+      // console.log("currentAllCollector", currentAllCollector);
+
+      //NOTE: 動作選中人員
+      let newCheckedJob = [...checkedJob, e.target.value];
+      setCheckedJob(newCheckedJob);
+
+      // 判斷全部已選人員
+      const checkedAllCollector = newCheckedJob.filter(o => currentAllCollector.indexOf(o) > -1);
+      // console.log("已選人員", checkedAllCollector);
+
+      let newSelectedRowKeys = [...selectedRowKeys];
+
+      // NOTE: 人員全選，team 單選
+      if(checkedAllCollector.length === currentAllCollector.length) {
+        newSelectedRowKeys = [...selectedRowKeys, parentRowsKey[2]];
+        // NOTE: 把 team 塞入陣列
+        // setSelectedRowKeys(newSelectedRowKeys);
+        // console.log("把team塞入陣列: ", parentRowsKey[2]);
+      }
+      // console.log("newSelectedRowKeys", newSelectedRowKeys);
+
+      // NOTE: 判斷已選 team
+      // let selectedAllMerchantArray = newSelectedRowKeys.filter(o => currentAllMerchant.filter(p => o === p))
+      // selectedAllMerchantArray = selectedAllMerchantArray.filter(o => currentAllMerchant.indexOf(o) > -1);
+      let selectedAllTeam = newSelectedRowKeys.filter(o => currentAllTeam.indexOf(o) > -1);
+      // console.log("已選 team", selectedAllTeam);
 
 
+      if(selectedAllTeam.length === currentAllTeam.length) {
+        // NOTE: 把商戶塞入陣列
+        // console.log("把商戶塞入陣列: ", parentRowsKey[1]);
+        newSelectedRowKeys = [...newSelectedRowKeys, parentRowsKey[1]];
+      }
+      // console.log("newSelectedRowKeys", newSelectedRowKeys);
 
-        // NOTE: 當前選擇全部商戶
-        let currentSelectedAllMerchant = currentSelectedStage && currentSelectedStage.children.find((d) => d.key === parentRowsKey[1]);
-        console.log("currentSelectedAllMerchant", currentSelectedAllMerchant);
-
-
-        // NOTE: 當前商戶有不論選擇的全部人員
-        let currentAllCollector = currentSelectedAllMerchant && currentSelectedAllMerchant.checkboxData.map((i) => i.key);
-        console.log("currentAllCollector", currentAllCollector);
-
-        //NOTE: 動作選中人員
-        let newCheckedJob = [...checkedJob, e.target.value];
-        setCheckedJob(newCheckedJob);
+      // setSelectedRowKeys(newSelectedRowKeys);
 
 
-        // 判斷全部已選人員
-        const checkedAllCollector = newCheckedJob.filter(o => currentAllCollector.indexOf(o) > -1);
-        console.log("已選人員", checkedAllCollector);
+      // NOTE: 判斷已選 商戶
+      let selectedAllMerchant = newSelectedRowKeys.filter(o => currentAllMerchant.indexOf(o) > -1);
+      // console.log("已選 merchant", selectedAllMerchant);
 
-        let newSelectedRowKeys = [...selectedRowKeys];
-
-        // NOTE: 人員全選，商戶單選
-        if(checkedAllCollector.length === currentAllCollector.length) {
-          newSelectedRowKeys = [...selectedRowKeys, parentRowsKey[1]];
-          // NOTE: 把商戶塞入陣列
-          // setSelectedRowKeys(newSelectedRowKeys);
-          console.log("把商戶塞入陣列: ", parentRowsKey[1]);
-
-        }
-        console.log("newSelectedRowKeys", newSelectedRowKeys);
-
-        // NOTE: 判斷已選商戶
-        // let selectedAllMerchantArray = newSelectedRowKeys.filter(o => currentAllMerchant.filter(p => o === p))
-        // selectedAllMerchantArray = selectedAllMerchantArray.filter(o => currentAllMerchant.indexOf(o) > -1);
-        let selectedAllMerchantArray = newSelectedRowKeys.filter(o => currentAllMerchant.indexOf(o) > -1);
-        console.log("已選商戶", selectedAllMerchantArray);
-
-
-        if(selectedAllMerchantArray.length === currentAllMerchant.length) {
-          // NOTE: 把催收階段塞入陣列
-          console.log("把催收階段塞入陣列: ", parentRowsKey[0]);
-          newSelectedRowKeys = [...newSelectedRowKeys, parentRowsKey[0]];
-        }
-        console.log("newSelectedRowKeys", newSelectedRowKeys);
-
-        setSelectedRowKeys(newSelectedRowKeys);
-
-      // }
-
+      if(selectedAllMerchant.length === currentAllMerchant.length) {
+        // NOTE: 把催收塞入陣列
+        // console.log("把催收塞入陣列: ", parentRowsKey[0]);
+        newSelectedRowKeys = [...newSelectedRowKeys, parentRowsKey[0]];
+      }
+      // console.log("newSelectedRowKeys", newSelectedRowKeys);
+      setSelectedRowKeys(newSelectedRowKeys);
 
     } else {
-      console.log("selectedRowKeys", selectedRowKeys);
+      // console.log("取消 parentRowsKey", parentRowsKey);
 
-      console.log("取消");
+      // NOTE: 取消人員後
+      setCheckedJob(
+        [...checkedJob].filter((d) => d !== e.target.value)
+      );
 
-      // if(level !== "stage") {
-        // NOTE: 取消人員後
-        setCheckedJob(
-          [...checkedJob].filter((d) => d !== e.target.value)
-        );
+      let newSelectedRowKeys = [...selectedRowKeys];
 
-        let newSelectedRowKeys = [];
-        // NOTE: 取消人員後，取消商戶選擇
-        if (!!~selectedRowKeys.indexOf(parentRowsKey[1])) {
-          newSelectedRowKeys =  [...selectedRowKeys].filter((d) => d !== parentRowsKey[1]);
-        }
+      // NOTE: 取消人員後，取消 team 選擇
+      if (!!~selectedRowKeys.indexOf(parentRowsKey[2])) {
+        newSelectedRowKeys =  newSelectedRowKeys.filter((d) => d !== parentRowsKey[2]);
+        // console.log("1.newSelectedRowKeys", newSelectedRowKeys);
+      }
 
-        // NOTE: 取消商戶後，取消階段選擇
-        if (!!~selectedRowKeys.indexOf(parentRowsKey[0])) {
-          newSelectedRowKeys =  [...newSelectedRowKeys].filter((d) => d !== parentRowsKey[0])
-        }
+      // NOTE: 取消team後，取消商戶選擇
+      if (!!~selectedRowKeys.indexOf(parentRowsKey[1])) {
+        newSelectedRowKeys =  newSelectedRowKeys.filter((d) => d !== parentRowsKey[1]);
+        // console.log("2.newSelectedRowKeys", newSelectedRowKeys);
+      }
 
-        console.log("newSelectedRowKeys", newSelectedRowKeys);
-        setSelectedRowKeys(newSelectedRowKeys);
-      // } else {
-        // NOTE: 取消人員後
-        // setCheckedJob(
-        //   [...checkedJob].filter((d) => d !== e.target.value)
-        // );
-      // }
+      // NOTE: 取消商戶後，取消階段選擇
+      if (!!~selectedRowKeys.indexOf(parentRowsKey[0])) {
+        newSelectedRowKeys =  newSelectedRowKeys.filter((d) => d !== parentRowsKey[0])
+        // console.log("3.newSelectedRowKeys", newSelectedRowKeys);
+      }
+      // console.log("4.newSelectedRowKeys", newSelectedRowKeys);
+      setSelectedRowKeys(newSelectedRowKeys);
 
     }
 
@@ -331,7 +365,7 @@ export default () => {
   // console.log("checkedJob", checkedJob);
   //控制表格的展开收起
   const onExpand = (expanded, record) => {
-    console.log("onExpand.record", record);
+    // console.log("onExpand.record", record);
     //expanded： true展开，false：关闭
     if (expanded) {
       setExpandedRowKeys([...expandedRowKeys, record.key]);
@@ -408,106 +442,193 @@ export default () => {
   const rowSelection = {
     selectedRowKeys,
     onSelect: (record, selected, selectedRows, nativeEvent) => {
-      console.log("record", record);
-      console.log("selected", selected);
-      console.log("selectedRows", selectedRows);
-      console.log("nativeEvent", nativeEvent);
-      console.log("selectedRowKeys", selectedRowKeys);
+      // console.log("record", record);
+      // console.log("selected", selected);
+      // console.log("selectedRows", selectedRows);
+      // console.log("nativeEvent", nativeEvent);
+      // console.log("selectedRowKeys", selectedRowKeys);
 
-      if(record.children) {
+      if(record.level === "stage") {
+
+        const allMerchantKey = record.children.map(merchant => merchant.key);
+
+        const allTeamKey = []
+        record.children.map(merchant => merchant.children.map(team => allTeamKey.push(team.key)));
+
+        let allCollector = []
+        record.children.map(merchant => {
+          merchant.children.map(team => {
+            const currentAllPerson = team.checkboxData.map(collector => collector.key);
+            allCollector = [...allCollector, ...currentAllPerson];
+          })
+        })
 
         // 催收階段
-        console.log("催收階段")
+        // console.log("催收階段")
+
         if(selected) {
-          const allMerchantKey = record.children.map(merchant => merchant.key);
-          const newSelectedRowKeys = [...selectedRowKeys, record.key, ...allMerchantKey, ];
+          let newSelectedRowKeys = [...selectedRowKeys, record.key, ...allMerchantKey, ...allTeamKey];
           setSelectedRowKeys(newSelectedRowKeys);
-
-          // collector
-          let allPerson = []
-          record.children.map(merchant => {
-            const currentAllPerson = merchant.checkboxData.map(collector => collector.key);
-            allPerson = [...allPerson, ...currentAllPerson];
-          })
-          setCheckedJob([...checkedJob, ...allPerson]);
-
+          setCheckedJob([...checkedJob, ...allCollector]);
         } else {
           const allMerchantKey = record.children.map(merchant => merchant.key);
           setSelectedRowKeys(
             selectedRowKeys
               .filter(key => key !== record.key)
               .filter(key => allMerchantKey.indexOf(key) === -1)
+              .filter(key => allTeamKey.indexOf(key) === -1)
           )
-
-          // collector
-          let allPerson = []
-          record.children.map(merchant => {
-            const currentAllPerson = merchant.checkboxData.map(collector => collector.key);
-            allPerson = [...allPerson, ...currentAllPerson];
-          })
           setCheckedJob(
-            checkedJob.filter(collector => allPerson.indexOf(collector) === -1)
+            checkedJob.filter(collector => allCollector.indexOf(collector) === -1)
           );
         }
-      } else {
+      } else if(record.level === "merchant"){
         // 商戶階段
-        console.log("商戶階段")
+        // console.log("商戶階段")
+        // if(!record.checkboxData) return;
 
-        if(!record.checkboxData) return;
+        const allTeamKey = []
+        record.children.map(team => allTeamKey.push(team.key));
+
+        // merchant 下的 collector
+        const currentAllCollector = []
+        record.children.map(team => {
+          team.checkboxData.map(collector => {
+            currentAllCollector.push(collector.key);
+          });
+        })
+
+        // 商戶都選擇後，加入催收階段
+        const stage = initialData.current.filter(stage => stage.children.find(merchant => merchant.key === record.key))[0]
+        const allMerchantKey = stage.children.map(team => team.key);
 
         if(selected) {
+          // self, team
+          let newSelectedRowKeys = [...selectedRowKeys, record.key, ...allTeamKey]
+          setCheckedJob([...checkedJob, ...currentAllCollector]);
 
-          // self
-          setSelectedRowKeys([...selectedRowKeys, record.key]);
+          // console.log("stage", stage);
+          // console.log("allMerchantKey", allMerchantKey);
+          // console.log("selectedRowKeys", selectedRowKeys);
 
-          // collector
-          const currentAllPerson = record.checkboxData.map(collector => collector.key);
-          setCheckedJob([...checkedJob, ...currentAllPerson]);
+          const selectedMerchantKeys = newSelectedRowKeys.filter(merchantKey => allMerchantKey.indexOf(merchantKey) > -1);
+          // console.log("selectedMerchantKeys", selectedMerchantKeys);
+
+          if(selectedMerchantKeys.length === allMerchantKey.length) {
+            newSelectedRowKeys = [...newSelectedRowKeys, record.key, stage.key, ...allTeamKey];
+          }
+
+          setSelectedRowKeys(newSelectedRowKeys);
 
         } else {
           // self
           setSelectedRowKeys(
-            selectedRowKeys.filter(key => key !== record.key)
+            selectedRowKeys
+            .filter(key => key !== record.key)
+            .filter(key => allTeamKey.indexOf(key) === -1)
+            .filter(key => key !== stage.key)
           );
 
           // collector
-          const currentAllPerson = record.checkboxData.map(collector => collector.key);
           setCheckedJob(
-            checkedJob.filter(collector => currentAllPerson.indexOf(collector) === -1)
+            checkedJob.filter(collector => currentAllCollector.indexOf(collector) === -1)
+          );
+
+        }
+
+      } else if(record.level === "team") {
+
+        const currentAllCollector = record.checkboxData.map(collector => collector.key);
+
+        let currentMerchant;
+        initialData.current.filter(stage =>
+          stage.children.map(merchant => {
+            merchant.children.filter(team => {
+              if(team.key === record.key) {
+                currentMerchant = merchant;
+              }
+            })
+          }))
+        // console.log("currentMerchant", currentMerchant);
+
+        let tempStage
+        initialData.current.map(stage => {
+          stage.children.map(
+            merchant => {
+              merchant.children.map((team => {
+                if(team.key === record.key) {
+                  // merchantKey = merchant.key;
+                  tempStage = stage;
+                }
+              }))
+            }
+          )
+        })
+
+        // console.log("tempStage", tempStage);
+
+        if(selected) {
+          let newSelectedRowKeys = [...selectedRowKeys, record.key]
+
+          setCheckedJob([...checkedJob, ...currentAllCollector]);
+
+          //當 team 全部被選，merchant 要被勾選
+          const allTeam = currentMerchant.children.map(team => team.key)
+          const selectedTeam = newSelectedRowKeys
+            .filter(selectedTeamkey => allTeam.indexOf(selectedTeamkey) > -1)
+            .filter((item, index, arr) => {
+              return arr.indexOf(item) === index;
+            })
+
+          // console.log("allTeam", allTeam);
+          // console.log("selectedTeam", selectedTeam);
+
+          if(selectedTeam.length === allTeam.length) {
+            newSelectedRowKeys = [...newSelectedRowKeys, currentMerchant.key]
+          } else {
+            newSelectedRowKeys = newSelectedRowKeys.filter(key => key !== currentMerchant.key)
+          }
+
+          //當 team勾選 商戶也勾選，催收也要勾選
+          // let merchantKey
+
+
+          const allMerchantKey = tempStage.children.map(merchant => merchant.key);
+
+          const selectedAllMerchant = newSelectedRowKeys.filter(key => allMerchantKey.indexOf(key) > -1);
+          // console.log("allMerchantKey", allMerchantKey);
+          // console.log("selectedAllMerchant", selectedAllMerchant);
+
+          if(selectedAllMerchant.length === allMerchantKey.length) {
+            newSelectedRowKeys = [...newSelectedRowKeys, tempStage.key]
+          } else {
+            newSelectedRowKeys = newSelectedRowKeys.filter(key => key !== tempStage.key)
+          }
+          setSelectedRowKeys(newSelectedRowKeys);
+
+          // console.log("newSelectedRowKeys", newSelectedRowKeys);
+
+        } else {
+
+          const newSelectedRowKeys = selectedRowKeys
+            .filter(key => key !== record.key)
+            .filter(key => key !== currentMerchant.key)
+            .filter(key => key !== tempStage.key);
+
+          // console.log("selectedRowKeys", selectedRowKeys);
+          // console.log("newSelectedRowKeys", newSelectedRowKeys);
+
+          setSelectedRowKeys(newSelectedRowKeys);
+
+          // collector
+          setCheckedJob(
+            checkedJob.filter(collector => currentAllCollector.indexOf(collector) === -1)
           );
         }
 
       }
 
-
     }
-    // getCheckboxProps: (record: any) => ({
-    //   disabled: selectAllDisabled,
-    // }),
-  //   renderCell: (checked, record) => {
-  //     console.log("renderCell.checked", checked);
-  //     console.log("renderCell.record", record);
-  //
-  //     //当前record.key对应大初始化数据的一级所有数据
-  //     let parentArr = initialData && initialData.current && initialData.current.find(
-  //       (d) => d.key === record.key
-  //     );
-  //     //从所有已经选择过的数据中过滤出在parentArr中的数据
-  //     let checkArr = parentArr && parentArr.checkboxData && parentArr.checkboxData.filter(
-  //       (item) => checkedJob.indexOf(item.key) > -1
-  //     );
-  //     return (
-  //       <Checkbox
-  //         indeterminate={ parentArr && parentArr.checkboxData &&  checkArr && !!checkArr.length && checkArr.length < parentArr.checkboxData.length
-  //             ? true
-  //             : false
-  //         } //比较 当过滤后选中数据的长度 < 初始化数据的长度时，设置 indeterminate 状态为true，否则为false
-  //         onClick={(e) => onClick(e, record)}
-  //         checked={checked}
-  //         disabled={selectAllDisabled}
-  //       ></Checkbox>
-  //     );
-  //   },
   };
   return (
     <TreeCheckboxStyle
@@ -518,13 +639,6 @@ export default () => {
         width: 982,
       }}
     >
-      {/*<Search*/}
-      {/*  placeholder="请输入岗位名称"*/}
-      {/*  onSearch={(value) => {*/}
-      {/*    console.log(loop(value));*/}
-      {/*    setData(loop(value));*/}
-      {/*  }}*/}
-      {/*/>*/}
       <Table
         showHeader={false}
         columns={columns}
@@ -540,4 +654,4 @@ export default () => {
     </TreeCheckboxStyle>
   );
 };
-const columns = [{ title: "title", dataIndex: "title", key: "title" }];
+
