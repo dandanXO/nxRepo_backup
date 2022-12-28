@@ -34,7 +34,7 @@ const OrderReviewTable = () => {
     const [postOrderReview, { data, isSuccess: postOrderReviewIsSuccess }] = usePostOrderReviewMutation();
 
     const initSearchList: GetOrderReviewListRequestQuerystring = {
-        addEndTime: "", addStartTime: "", appName: "", applyChannel: "", oldMember: "", orderNo: "",
+        merchantId: "", addEndTime: "", addStartTime: "", appName: "", applyChannel: "", oldMember: "", orderNo: "",
         phoneNo: "", productName: "", provider: "", riskRank: "", userName: "", pageNum: 1, pageSize: 10
     }
 
@@ -191,8 +191,9 @@ const OrderReviewTable = () => {
 
     if (isSuperAdmin) {
         columns.splice(1, 0, {
-            title: '商户名', dataIndex: 'merchantName', key: 'merchantName', valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantName || '',
-            width: ProColumnsOperationConstant.width["2"],
+            title: '商户名', dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true, width: ProColumnsOperationConstant.width["2"]
+        }, {
+            title: '商户名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantId || '',
         })
         columns.splice(6, 0, { title: '申请渠道', dataIndex: 'applyChannel', valueType: 'select', key: 'applyChannel', valueEnum: channelListEnum, initialValue: searchParams.applyChannel || '' })
         columns.splice(10, 0, { title: '风控应用', dataIndex: 'provider', valueType: 'select', key: 'provider', valueEnum: providerListEnum, initialValue: searchParams.provider || '' })
@@ -241,7 +242,7 @@ const OrderReviewTable = () => {
                                 // @ts-ignore
                                 form.setFieldsValue({
                                     ...initSearchList,
-                                    merchantName: '',
+                                    merchantId: '',
                                     addTimeRange: '',
                                 });
                                 setSearchList(initSearchList);
@@ -254,8 +255,7 @@ const OrderReviewTable = () => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantName } = form.getFieldValue();
-                                const merchant = merchantName ? merchantListEnum?.get(merchantName)?.text : '';
+                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantId } = form.getFieldValue();
                                 setSearchList({
                                     ...initSearchList,
                                     addEndTime: addTimeRange ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
@@ -269,7 +269,7 @@ const OrderReviewTable = () => {
                                     provider,
                                     riskRank,
                                     userName,
-                                    merchantName: isSuperAdmin ? merchant : ''
+                                    merchantName: isSuperAdmin ? merchantId : ''
                                 });
                                 onSelectChange([]);
                                 form.submit();
