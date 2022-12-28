@@ -103,7 +103,7 @@ const OrderReviewTable = () => {
                     .catch((error) => {
                         errorModal.error({
                             title: 'Error',
-                            content: `审核${confirmText}失败`
+                            content: `审核${confirmText[status]}失败`
                         })
                     });
             }
