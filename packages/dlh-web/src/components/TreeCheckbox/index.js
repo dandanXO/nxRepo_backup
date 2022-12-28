@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Table, Input, Checkbox } from "antd";
 // const { Search } = Input;
-import styled from "styled-csomponents";
+import styled from "styled-components";
 
 const TreeCheckboxStyle = styled.div`
   background: lightskyblue;
