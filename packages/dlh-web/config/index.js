@@ -20,8 +20,10 @@ const proxy = {
     // NOTE: India 產品後台
     // target: "http://65.1.53.136:8080",
     // NOTE: API 產品後台
-    target: "https://app.india-api-dev.com",
+    // target: "https://app.india-api-dev.com",
+    target: "https://console.india-api-dev.com/",
     // target: "https://app.pk-api-dev.com",
+    // target: "https://console.bd-api-dlh-dev.com/",
     changeOrigin: true
   }
 };

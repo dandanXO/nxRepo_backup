@@ -5,11 +5,9 @@
     "main": "src/main.tsx",
     "scripts": {
         "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-        "webpack:dev": "webpack-dev-server --config ./build/webpack_dev.config --mode development --env IN",
         "dev:in": "webpack-dev-server --config ./build/webpack_dev.config --mode development --env IN",
         "dev:pk": "webpack-dev-server --config ./build/webpack_dev.config --mode development --env PK",
         "dev:bd": "webpack-dev-server --config ./build/webpack_dev.config --mode development --env BD",
-        "webpack:build": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env IN",
         "build:in": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env IN",
         "build:pk": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env PK",
         "build:bd": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env BD",
