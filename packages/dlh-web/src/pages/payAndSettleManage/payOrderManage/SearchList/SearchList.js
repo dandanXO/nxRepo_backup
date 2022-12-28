@@ -129,12 +129,12 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.business.no"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.collection.mchNo"})}>
                                 {
                                     getFieldDecorator('mchNo', {
                                         initialValue: ""
                                     })(
-                                        <Input placeholder={intl.formatMessage({id : "page.search.list.business.no.enter"})}/>
+                                        <Input placeholder={intl.formatMessage({ id: "page.table.enter" }, { text: intl.formatMessage({id : "page.search.list.collection.mchNo"}) })}/>
                                     )
                                 }
                             </Form.Item>
