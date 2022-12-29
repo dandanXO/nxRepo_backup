@@ -209,8 +209,8 @@ class RepeatLoan extends Component {
     }
 
     handleExportReloanList = () => {
-        const { orderNo, userPhone, userTrueName } = this.searchParams
-        window.open(`/hs/admin/order/fail/download?orderNo=${orderNo}&userPhone=${userPhone}&userTrueName=${userTrueName}`)
+        const { orderNo, userPhone, userTrueName , merchantId} = this.searchParams
+        window.open(`/hs/admin/order/fail/download?orderNo=${orderNo}&userPhone=${userPhone}&userTrueName=${userTrueName}&merchantId=${merchantId}`)
     }
 
     render() {
