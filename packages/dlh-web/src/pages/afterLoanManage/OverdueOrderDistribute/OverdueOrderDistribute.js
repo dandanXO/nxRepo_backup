@@ -3,13 +3,12 @@ import { bindActionCreators } from 'redux';
 import { Button, message } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { CommonTable, UrgePersonModal, CopyText } from 'components';
+import { CommonTable, CopyText, CollectorModal } from 'components';
 import { overdueOrderDistributeAction } from './index';
 import SearchList from './SearchList/SearchList';
 import { convertMoneyFormat } from 'utils';
 import { FormattedMessage, injectIntl } from "react-intl";
 import PropTypes from 'prop-types';
-import { select } from 'redux-saga/effects';
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 
@@ -109,14 +108,14 @@ class OverdueOrderDistribute extends Component {
     distributeOrder = () => {
         // const { selectedRowKeys } = this.state;
         const {selectKeys, intl} = this.props;
-        const {changeModalVisible, personData} = this.props;
+        const {changeModalVisible, overdueCollector} = this.props;
         //是否有选中订单
         const isSelected = selectKeys.length > 0;
         if (!isSelected) {
             message.warn(intl.formatMessage({id: "windowPage.select.order"}));
             return;
         }
-        if (personData.length === 0) {
+        if (overdueCollector.length === 0) {
             message.warn(intl.formatMessage({id: "windowPage.no.collector"}));
             return;
         }
@@ -130,15 +129,10 @@ class OverdueOrderDistribute extends Component {
     }
     //点击弹框确定按钮,分配订单
     onModalOk = (obj) => {
-        // const { selectedRowKeys } = this.state;
         const {selectKeys} = this.props;
         const {pageSize} = this.state;
-        const {distributeOrder, getTableData, personType} = this.props;
-        // const collectorId = obj['person'];
-        let key = personType === 'group' ? 'departmentIds' : 'collectorIds';
-        //todo 分配订单回调？
-
-        distributeOrder({ disIds: selectKeys.join(','), [key]: obj.join(',') }, () => {
+        const {distributeOrder, getTableData} = this.props;
+        distributeOrder({ disIds: selectKeys.join(','), collectorIds: obj.join(',') }, () => {
             getTableData({pageSize: pageSize, pageNum: 1, collectorId: 0, ...this.searchPrams });
         });
     }
@@ -166,9 +160,9 @@ class OverdueOrderDistribute extends Component {
     }
 
     componentDidMount() {
-        const { getTableData, getPersonData } = this.props;
+        const { getTableData, getOverdueCollector } = this.props;
         getTableData(this.convertParams(this.initParam));
-        getPersonData({ roleId: 8 });
+        getOverdueCollector();
     }
 
     componentWillUnmount() {
@@ -181,8 +175,8 @@ class OverdueOrderDistribute extends Component {
             tableData: {data, pagination},
             loading,
             visible,
-            personData,
-            selectKeys
+            selectKeys,
+            overdueCollector
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -201,12 +195,12 @@ class OverdueOrderDistribute extends Component {
                     pagination={pageInfo}
                     loading={loading}
                 />
-                <UrgePersonModal
-                    onModalCancel={this.onModalCancel}
-                    onModalOk={this.onModalOk}
-                    urgePerson={personData}
-                    visible={visible}
-                    modalTitle={"windowPage.select.collector"}
+                <CollectorModal
+                  visible={visible}
+                  collectors={overdueCollector}
+                  onModalCancel={this.onModalCancel}
+                  onModalOk={this.onModalOk}
+                  modalTitle={"windowPage.select.collector"}
                 />
             </div>
         );
@@ -219,19 +213,18 @@ const mapStateToProps = (state) => {
         tableData: overdueOrderDistributeState['data'],
         loading: overdueOrderDistributeState['loading'],
         visible: overdueOrderDistributeState['visible'],
-        personData: overdueOrderDistributeState['personData'],
         selectKeys: overdueOrderDistributeState['selectKeys'],
-        personType: overdueOrderDistributeState['personType']
+        overdueCollector: overdueOrderDistributeState['overdueCollector'],
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         getTableData: overdueOrderDistributeAction.oodGetTableData,
         setTableData: overdueOrderDistributeAction.oodSetTableData,
-        getPersonData: overdueOrderDistributeAction.oodGetPersonData,
         changeModalVisible: overdueOrderDistributeAction.oodChangeModalVisible,
         distributeOrder: overdueOrderDistributeAction.oodDistributeOrder,
-        changeSelectKeys: overdueOrderDistributeAction.oodChangeSelectKey
+        changeSelectKeys: overdueOrderDistributeAction.oodChangeSelectKey,
+        getOverdueCollector: overdueOrderDistributeAction.oodGetOverdueCollector,
     }, dispatch);
 }
 

@@ -290,11 +290,11 @@ class TodayList extends Component {
 
         console.log("obj", obj);
         //todo 分配订单回调？ type 1 = 订单分配 , type2 = 重新分配 ( 逾期的沒有type )
-        // distributeOrder({type: 2, disIds: selectKeys.join(','), personIds: obj.join(',')}, () => {
-        //     let params = this.convertParams(searchParams);
-        //     params = {...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1};
-        //     getTableData(params);
-        // });
+        distributeOrder({type: 2, disIds: selectKeys.join(','), personIds: obj.join(',')}, () => {
+            let params = this.convertParams(searchParams);
+            params = {...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1};
+            getTableData(params);
+        });
     }
 
     componentDidMount() {

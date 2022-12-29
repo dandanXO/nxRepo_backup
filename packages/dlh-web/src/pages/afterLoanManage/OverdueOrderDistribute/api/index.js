@@ -3,12 +3,10 @@
 * */
 import { axios } from 'utils';
 const api = {
-    // orderListData: '/hs/admin/orderOverdue/list',
     orderListData: '/hs/admin/orderOverdue/unDislist',
-    // getUrgePerson: '/hs/admin/user/cslist',
-    // distributeOrder: '/hs/admin/orderOverdue/distribution'
     getUrgePerson: '/hs/admin/orderOverdue/getDisPerOrGroup',
-    distributeOrder: '/hs/admin/orderOverdue/distribution'
+    distributeOrder: '/hs/admin/orderOverdue/distribution',
+    getOverdueCollector: '/hs/admin/collect-today/stage',
 };
 const getOrderListData = (params) => {
     return axios.post(api.orderListData, params);
@@ -19,5 +17,7 @@ const getUrgePersonData = (params) => {
 const distributeOrder = (params) => {
     return axios.post(api.distributeOrder, params);
 }
-
-export { getOrderListData, getUrgePersonData, distributeOrder };
+const getOverdueCollector = () => {
+  return axios.get(api.getOverdueCollector);
+}
+export { getOrderListData, getUrgePersonData, distributeOrder, getOverdueCollector };

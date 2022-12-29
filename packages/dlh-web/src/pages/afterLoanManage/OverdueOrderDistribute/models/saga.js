@@ -1,18 +1,20 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
 import { message } from 'antd';
 import {
-    OOD_GET_TABLE_DATA,
-    oodSetTableData,
-    oodChangeTableLoading,
-    OOD_GET_PERSON_DATA,
-    oodSetPersonData,
-    OOD_DISTRIBUTE_ORDER,
-    oodChangeModalVisible,
-    oodChangeSelectKey,
-    oodChangePersonType
+  OOD_GET_TABLE_DATA,
+  oodSetTableData,
+  oodChangeTableLoading,
+  OOD_GET_PERSON_DATA,
+  oodSetPersonData,
+  OOD_DISTRIBUTE_ORDER,
+  oodChangeModalVisible,
+  oodChangeSelectKey,
+  oodChangePersonType,
+  OOD_GET_OVERDUE_COLLECTOR,
+  oodSetOverdueCollector,
 } from './actions';
-import { getOrderListData, getUrgePersonData, distributeOrder } from '../api';
 
+import { getOrderListData, getUrgePersonData, distributeOrder, getOverdueCollector } from '../api';
 
 //获取列表数据
 function* getTableData(action) {
@@ -81,6 +83,20 @@ export default function* root() {
     yield all([
         fork(watchGetTableData),
         fork(watchGetPerson),
-        fork(watchDistributeData)
+        fork(watchDistributeData),
+        fork(watchGetOverdueCollector),
     ])
+}
+function* watchGetOverdueCollector() {
+  yield  takeEvery(OOD_GET_OVERDUE_COLLECTOR, getOverdueCollectorSaga)
+}
+function* getOverdueCollectorSaga() {
+  try {
+    const response = yield call(getOverdueCollector);
+
+    yield put(oodSetOverdueCollector(response));
+
+  } catch (e) {
+    console.log(e);
+  }
 }
