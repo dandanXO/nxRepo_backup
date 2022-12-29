@@ -43,9 +43,11 @@ const DefaultThemeConfig: IThemeConfig = {
   repaymentAdsModal: {
     main: {
       bg: "#FFE0E0",
+      text: "#ef4b4b",
     },
     secondary: {
       bg: "#EF4B4B",
+      text: "#FFFFFF",
     }
   }
 }

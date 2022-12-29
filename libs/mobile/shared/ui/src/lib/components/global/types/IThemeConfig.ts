@@ -40,9 +40,11 @@ export interface IThemeConfig {
   repaymentAdsModal: {
     main: {
       bg: string;
+      text: string;
     },
     secondary: {
       bg: string;
+      text: string;
     }
   }
 }
