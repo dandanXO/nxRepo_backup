@@ -6,6 +6,7 @@ import {
   TOOD_CHANGE_SELECT_KEY,
   TOOD_CHANGE_PERSON_TYPE, TOOD_SET_TODAY_COLLECTOR
 } from './actions';
+import {normalizeCollector} from "../../../../utils/normalizeCollector";
 
 
 const initState = {
@@ -37,38 +38,7 @@ const TodayderDistribute = (state = initState, action) => {
             return { ...state, personType: action.option };
         case TOOD_SET_TODAY_COLLECTOR:
         {
-          // console.log("action.data", action.data);
-          const newData = action.data.map((stage, stageIndex) => {
-            const newMerchants = stage.merchants.map((merchant, merchantIndex) => {
-              const newTeams = merchant.teams.map((team, teamIndex) => {
-                const newCollectors = team.collectors.map((collector) => {
-                  return {
-                    key: collector.collectorId,
-                    title: collector.collectorName,
-                    collectorId: collector.collectorId,
-                  }
-                })
-                return {
-                  key: `${stageIndex}:${merchantIndex}::${teamIndex}:${team.team}`,
-                  title: team.team === null ? "催收團隊-未分類" : "催收團隊-" + team.team,
-                  level: "team",
-                  checkboxData: newCollectors,
-                }
-              })
-              return {
-                key: `${stageIndex}:${merchantIndex}:${merchant.merchantId}`,
-                title: "商戶-" + merchant.merchant,
-                level: "merchant",
-                children: newTeams,
-              }
-            })
-            return {
-              key: `${stageIndex}:${stage.stage}`,
-              title: "催收階段 " + stage.stage,
-              level: "stage",
-              children: newMerchants
-            }
-          })
+          const newData = normalizeCollector(action.data)
           return {
             ...state,
             todayCollector: newData
