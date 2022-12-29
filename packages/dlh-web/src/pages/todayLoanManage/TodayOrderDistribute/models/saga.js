@@ -85,49 +85,7 @@ function* watchDistributeData() {
 function* getTodayCollectorSaga() {
   try {
     const response = yield call(getTodayCollector);
-    console.log("response", response);
-
-    const treeData = response.map(stage => {
-      const newMerchants = stage.merchants.map(merchant => {
-        const newTeams = merchant.teams.map(team => {
-          const newCollectors = team.collectors.map(collector => {
-            collector.title = collector.collectorName;
-            collector.title = <Checkbox value={collector.collectorId} key={collector.collectorId} >{`${collector.collectorName}`}</Checkbox>;
-            collector.key = collector.collectorId;
-            return collector
-            // return <Checkbox value={collector.collectorId} key={collector.collectorId} >{`${collector.collectorName}`}</Checkbox>;
-          })
-          // console.log("newCollectors", newCollectors);
-          // team.title = (
-          //   <Checkbox.Group style={{
-          //     display: "flex",
-          //     flexWrap: "wrap-reverse"
-          //   }}>
-          //     {newCollectors}
-          //     {/*<Checkbox value={1} key={`1`} >{`1`}</Checkbox>;*/}
-          //     {/*<Checkbox value={1} key={`1`} >{`1`}</Checkbox>;*/}
-          //     {/*<Checkbox value={1} key={`1`} >{`1`}</Checkbox>;*/}
-          //     {/*<Checkbox value={1} key={`1`} >{`1`}</Checkbox>;*/}
-          //     {/*<Checkbox value={1} key={`1`} >{`1`}</Checkbox>;*/}
-          //   </Checkbox.Group>
-          // )
-          team.title = team.team === null ? "[未分类团队]" : "[团队] " + team.team;
-          if(team.team === null) team.disableCheckbox = true;
-          team.key = team.team;
-          return team
-        })
-        merchant.children = newTeams;
-        merchant.title = "[商户] " + merchant.merchant;
-        merchant.key = merchant.merchantId;
-        return merchant
-      })
-      stage.children = newMerchants;
-      stage.title = stage.stage === "NONE" ? "NONE" : "[阶段] " + stage.stage;
-      stage.key = stage.stage;
-      return stage;
-    })
-    // console.log("treeData", treeData);
-    yield put(toodSetTodayCollector(treeData));
+    yield put(toodSetTodayCollector(response));
 
     } catch (e) {
       console.log(e);
