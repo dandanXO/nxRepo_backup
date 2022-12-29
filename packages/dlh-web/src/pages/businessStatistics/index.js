@@ -15,6 +15,7 @@ import { OrderStatistics, orderStatisticsState, orderStatisticsSaga } from './Or
 import { UVStatistics, UVStatisticsState, UVStatisticsSaga } from './UVStatistics';
 import { ChannelUserUVStatistics, channelUserUVStatisticsState, channelUserUVStatisticsSaga } from './ChannelUserUVStatistics';
 import { FinancialStatistics, } from './FinancialStatistics';
+import { OrderTdRefuseStatistics, orderTdRefuseStatisticsState, orderTdRefuseStatisticsSaga } from './OrderTdRefuseStatistics';
 
 const businessStatisticsRoutes  = [
     { path: '/loanRecycleStatistics', component: LoanRecycleStatistics },
@@ -32,6 +33,7 @@ const businessStatisticsRoutes  = [
     { path: '/uvStatistics', component: UVStatistics },
     { path: '/channelUserUVStatistics', component: ChannelUserUVStatistics },
     { path: '/financial-report', component: FinancialStatistics },
+    { path: '/order-refuse-reason-statistics', component: OrderTdRefuseStatistics },
 ]
 
 const businessStatisticsMenuList = [
@@ -133,6 +135,7 @@ const businessStatisticsState = combineReducers({
     orderStatisticsState,
     UVStatisticsState,
     channelUserUVStatisticsState,
+    orderTdRefuseStatisticsState
 });
 
 function* businessStatisticsSaga() {
@@ -151,6 +154,7 @@ function* businessStatisticsSaga() {
         fork(orderStatisticsSaga),
         fork(UVStatisticsSaga),
         fork(channelUserUVStatisticsSaga),
+        fork(orderTdRefuseStatisticsSaga)
     ])
 }
 
