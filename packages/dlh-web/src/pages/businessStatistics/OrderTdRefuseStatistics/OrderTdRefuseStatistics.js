@@ -90,7 +90,7 @@ class OrderTdRefuseStatistics extends Component {
             merchantId:''
         }
         axios({
-        url: "/hs/admin/statistics/refusedReasonStatisticDownLoad",
+        url: "/hs/admin/statistics/order/refuse-reason/download",
         method: "post",
         responseType: "blob",
         data: params
@@ -98,7 +98,7 @@ class OrderTdRefuseStatistics extends Component {
         .then(res => {
             hide && hide();
             this.setState({ btnDisabled: false });
-            download(res, this.props.intl.formatMessage({id : "page.table.reject.reason.statis.export"}, {expDate : Date.now()}));
+            download(res, this.props.intl.formatMessage({id : "page.table.reject.order.reason.statis.export"}, {expDate : Date.now()}));
         })
         .catch(() => {
             hide && hide();

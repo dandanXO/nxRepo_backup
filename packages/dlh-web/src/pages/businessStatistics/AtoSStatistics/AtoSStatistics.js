@@ -18,14 +18,14 @@ import PropTypes from 'prop-types';
 import {injectIntl} from "react-intl";
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
-const convertParams = (time,isStatistLeng, merchantId) => {
+const convertParams = (time, isStatistLeng, merchantId = '') => {
     const isArr = Array.isArray(time) && time.length > 0;
 
     return {
         startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
         endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
         isStatistLeng,
-      merchantId,
+        merchantId,
     };
 }
 class AtoSStatistics extends Component{
@@ -89,9 +89,9 @@ class AtoSStatistics extends Component{
     //导出记录
     exportRecord = (obj) => {
         this.setState({ btnDisabled: true });
-        const { time = [] } = obj;
         let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
-        const searchStatus = convertParams(time);
+        const { time, isStatistLeng, merchantId } = obj;
+        const searchStatus = convertParams(time, isStatistLeng, merchantId);
         axios({
         url: "/hs/admin/statistics/atosStatisticDownLoad",
         method: "post",
