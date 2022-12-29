@@ -243,7 +243,7 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
             <Option value="S5">S5</Option>
             <Option value="S6">S6</Option>
             <Option value="T0">T0</Option>
-            <Option value="T_1">T_1</Option>
+            <Option value="T_1">T-1</Option>
         </Select>
     }
 
@@ -342,7 +342,7 @@ function ExpandRow ({ intl, record, handleAddGruop, updateCollectGroupData, dele
                     <Option value="S5">S5</Option>
                     <Option value="S6">S6</Option>
                     <Option value="T0">T0</Option>
-                    <Option value="T_1">T_1</Option>
+                    <Option value="T_1">T-1</Option>
                 </Select>
                 <Button type="primary" onClick={handleSave} icon="plus" />
             </div>
