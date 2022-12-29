@@ -98,8 +98,8 @@ class TodayOrderDistribute extends Component {
         const {pageSize} = this.state;
         const {distributeOrder, getTableData, personType} = this.props;
 
-        console.log("selectKeys", selectKeys);
-        console.log("obj", obj);
+        // console.log("selectKeys", selectKeys);
+        // console.log("obj", obj);
         //let key = personType === 'group' ? 'departmentId' : 'collectorId';
 
         //todo 分配订单回调？ type 1 = 订单分配 , type2 = 重新分配 ( 逾期的沒有type )
@@ -187,6 +187,7 @@ class TodayOrderDistribute extends Component {
             selectKeys,
             todayCollector,
         } = this.props;
+        // console.log("todayCollector", todayCollector);
         const rowSelection = {
             selectedRowKeys: selectKeys,
             onChange: this.onSelectChange
@@ -211,22 +212,13 @@ class TodayOrderDistribute extends Component {
                     pagination={pageInfo}
                     loading={loading}
                 />
-                <UrgePersonModal
-                    onModalCancel={this.onModalCancel}
-                    onModalOk={this.onModalOk}
-                    urgePerson={personData}
-                    visible={visible}
-                    modalTitle={"windowPage.select.collector"}
+                <CollectorModal
+                  onModalCancel={this.onModalCancel}
+                  onModalOk={this.onModalOk}
+                  collectors={todayCollector}
+                  visible={visible}
+                  modalTitle={"windowPage.select.collector"}
                 />
-                {/*<CollectorModal*/}
-                {/*  onModalCancel={this.onModalCancel}*/}
-                {/*  onModalOk={this.onModalOk}*/}
-                {/*  urgePerson={todayCollector}*/}
-                {/*  todayCollector={todayCollector}*/}
-                {/*  visible={visible}*/}
-                {/*  modalTitle={"windowPage.select.collector"}*/}
-                {/*/>*/}
-              {/*<TreeCheckbox/>*/}
             </div>
         );
     }
