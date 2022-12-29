@@ -43,9 +43,11 @@ export const GreenThemeConfig: IThemeConfig = {
   repaymentAdsModal: {
     main: {
       bg: Colors.mediumGreen,
+      text: "#FFFFFF",
     },
     secondary: {
       bg: Colors.green,
+      text: "#FFFFFF",
     }
   }
 }

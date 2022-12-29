@@ -10,16 +10,6 @@ import CloseICONPng from "./limited_time_offer_icon.png";
 import moment from "moment";
 import {RepayAndApplyButton, RepaymentButton, RepaymentModalContainer, SectionButton} from "../RepaymentModal";
 import {useLockRequest} from "../../../../../hooks/useLockRequest";
-import {renderByCountry} from "../../../../../i18n";
-import {IndiaCountry} from "../../../../../../environments/config/countries/IndiaCountry";
-import {IndiaBindBankAccountPage} from "../../../BindBankAccountPage/i18n/components/IndiaBindBankAccountPage";
-import {PakistanCountry} from "../../../../../../environments/config/countries/PakistanCountry";
-import {PakistanBindBankAccountPage} from "../../../BindBankAccountPage/i18n/components/PakistanBindBankAccountPage";
-import {BangladeshCountry} from "../../../../../../environments/config/countries/BangladeshCountry";
-import {
-  BangladeshBindBankAccountPage
-} from "../../../BindBankAccountPage/i18n/components/BangladeshBindBankAccountPage";
-
 
 const Brand = styled.div`
   width: 100%;
@@ -76,11 +66,12 @@ const ContentContainer = styled.div`
 
 const UniversalRepayAndApplyButton = styled(RepayAndApplyButton)`
   background: ${(props) => props.theme.repaymentAdsModal.secondary.bg};
+  color: ${(props) => props.theme.repaymentAdsModal.secondary.text};
   margin-bottom: 16px;
 `;
 const UniversalRepaymentButton = styled(RepaymentButton)`
   background: ${(props) => props.theme.repaymentAdsModal.main.bg};
-  color: #fff;
+  color: ${(props) => props.theme.repaymentAdsModal.main.text};
   margin-bottom: 16px;
 `
 
