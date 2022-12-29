@@ -91,7 +91,7 @@ class OrderTdRefuseStatistics extends Component {
         }
         axios({
         url: "/hs/admin/statistics/order/refuse-reason/download",
-        method: "post",
+        method: "get",
         responseType: "blob",
         data: params
         })
