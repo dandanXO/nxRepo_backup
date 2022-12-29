@@ -37,6 +37,7 @@ const TodayderDistribute = (state = initState, action) => {
             return { ...state, personType: action.option };
         case TOOD_SET_TODAY_COLLECTOR:
         {
+          // console.log("action.data", action.data);
           const newData = action.data.map((stage, stageIndex) => {
             const newMerchants = stage.merchants.map((merchant, merchantIndex) => {
               const newTeams = merchant.teams.map((team, teamIndex) => {
@@ -48,8 +49,8 @@ const TodayderDistribute = (state = initState, action) => {
                   }
                 })
                 return {
-                  key: `${stageIndex}:${merchantIndex}::${teamIndex}:${team.key}`,
-                  title: "催收團隊-" + team.title,
+                  key: `${stageIndex}:${merchantIndex}::${teamIndex}:${team.team}`,
+                  title: team.team === null ? "催收團隊-未分類" : "催收團隊-" + team.team,
                   level: "team",
                   checkboxData: newCollectors,
                 }
@@ -62,8 +63,8 @@ const TodayderDistribute = (state = initState, action) => {
               }
             })
             return {
-              key: `${stageIndex}:${stage.key}`,
-              title: "催收階段 " + stage.key,
+              key: `${stageIndex}:${stage.stage}`,
+              title: "催收階段 " + stage.stage,
               level: "stage",
               children: newMerchants
             }
