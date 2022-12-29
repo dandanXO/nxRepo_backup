@@ -208,62 +208,11 @@ interface IButtonContainer {
   setShowRepaymentNoticeModal: any;
 }
 const ButtonContainer = (props: IButtonContainer) => {
-  return renderByCountry({
-    // NOTICE: default 0 index
-    [IndiaCountry.country]: (
-      <ContentContainer>
-        <UniversalRepayAndApplyButton
-          onClick={() => {
-            // NOTE: self
-            props.setShowRepaymentNoticeModal(
-              true
-            );
-          }}
-        >
-          <RepayICON />{props.t("Repay and Apply Again")}
-        </UniversalRepayAndApplyButton>
-        <UniversalRepaymentButton onClick={props.handleConfirm}>
-          {props.t("Repayment")}
-        </UniversalRepaymentButton>
-      </ContentContainer>
-    ),
-    [PakistanCountry.country]: (
-      <ContentContainer>
-        <UniversalRepaymentButton onClick={props.handleConfirm}>
-          {props.t("Repayment")}
-        </UniversalRepaymentButton>
-        <UniversalRepayAndApplyButton
-          onClick={() => {
-            // NOTE: self
-            props.setShowRepaymentNoticeModal(
-              true
-            );
-          }}
-        >
-          <RepayICON />{props.t("Repay and Apply Again")}
-        </UniversalRepayAndApplyButton>
-      </ContentContainer>
-    ),
-    // NOTICE: REFACTOR ME
-    [BangladeshCountry.country]: (
-      <ContentContainer>
-        <UniversalRepaymentButton onClick={props.handleConfirm}>
-          {props.t("Repayment")}
-        </UniversalRepaymentButton>
-        <UniversalRepayAndApplyButton
-          onClick={() => {
-            // NOTE: self
-            props.setShowRepaymentNoticeModal(
-              true
-            );
-          }}
-        >
-          <RepayICON />{props.t("Repay and Apply Again")}
-        </UniversalRepayAndApplyButton>
-      </ContentContainer>
-    )
-  }, (
+  return (
     <ContentContainer>
+      <UniversalRepaymentButton onClick={props.handleConfirm}>
+        {props.t("Repayment")}
+      </UniversalRepaymentButton>
       <UniversalRepayAndApplyButton
         onClick={() => {
           // NOTE: self
@@ -274,12 +223,8 @@ const ButtonContainer = (props: IButtonContainer) => {
       >
         <RepayICON />{props.t("Repay and Apply Again")}
       </UniversalRepayAndApplyButton>
-      <UniversalRepaymentButton onClick={props.handleConfirm}>
-        {props.t("Repayment")}
-      </UniversalRepaymentButton>
     </ContentContainer>
-  ))
-
+  )
 }
 
 export default RepaymentAdsModal;
