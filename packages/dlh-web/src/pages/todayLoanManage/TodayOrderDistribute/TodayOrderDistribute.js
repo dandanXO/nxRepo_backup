@@ -213,10 +213,10 @@ class TodayOrderDistribute extends Component {
                     loading={loading}
                 />
                 <CollectorModal
+                  visible={visible}
+                  collectors={todayCollector}
                   onModalCancel={this.onModalCancel}
                   onModalOk={this.onModalOk}
-                  collectors={todayCollector}
-                  visible={visible}
                   modalTitle={"windowPage.select.collector"}
                 />
             </div>
