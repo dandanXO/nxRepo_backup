@@ -3,7 +3,7 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space,Tag } from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
-import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation,usePostUserBanReleaseMutation } from '../../../api/UserApi';
+import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation,usePostUserBanReleaseMutation ,useDeleteBlackListMutation} from '../../../api/UserApi';
 import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
@@ -12,14 +12,16 @@ import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import queryString from "query-string";
 import CopyText from '../../../../shared/components/CopyText';
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
-// import usePageable from '../../../../shared/hooks/usePageable';
+import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
+    ispostBlackListSuccess?:boolean;
 }
 
-const UserTable = ({ setShowModal }: UserTableProps) => {
+const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
     const { channelListEnum, riskRankEnum } = useValuesEnums();
+    const isSuperAdmin = getIsSuperAdmin();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
         pollingInterval: 0,
@@ -30,6 +32,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
     const [banUser, { isSuccess: isBanUserSuccess }] = usePostUserBanMutation();
     const [releaseUser, { isSuccess: isReleaseUserSuccess }] = usePostUserBanReleaseMutation();
     const [importTelSale,{isSuccess:isImportTelSaleSuccess}] = usePostTelSaleMutation();
+    const [removeBlack,{isSuccess:isRemoveBlackSuccess}] = useDeleteBlackListMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
         addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
@@ -57,7 +60,7 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList, isUserDeleting,isBanUserSuccess,isReleaseUserSuccess])
+    }, [searchList, isUserDeleting,isBanUserSuccess,isReleaseUserSuccess,isRemoveBlackSuccess,ispostBlackListSuccess])
 
     useEffect(() => {
         if (currentData !== undefined) {
@@ -107,6 +110,14 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
         });
     }
 
+    const handleRemoveBlack = (id) => {
+        deleteModal.confirm({
+            title: "确认要解除该用户的黑名单状态吗？",
+            content: "解除黑名单状态后将回到加入黑名单前的状态",
+            onOk() { removeBlack({ userId: Number(id) }) }
+        });
+    }
+
     const handleReleaseUser = (id) => {
         banModal.confirm({
             title: "确认要解除该用户禁止登入吗？",
@@ -135,14 +146,15 @@ const UserTable = ({ setShowModal }: UserTableProps) => {
             valueType: 'option',
             key: 'option',
             align: 'left',
-            width: ProColumnsOperationConstant.width["3"],
+            width: ProColumnsOperationConstant.width[isSuperAdmin ? "5" : "3"],
             render: (text, record, _, action) => {
                 const optionCheck = [<a key="editable" onClick={() => handleToUserDetail(record.id)} >查看</a>];
                 const optionClear = [<a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>];
                 const optionRelease = [<a key="forRelease" onClick={() => handleReleaseUser(record.id)}>解禁</a>];
                 const optionBan = [<a key="forbidden" onClick={() => handleBanUser(record.id)}>禁止</a>];
                 const optionBlackList = [<a key="blackList" onClick={() => setShowModal({ show: true, userId: record.id })}>黑名单</a>];
-                return record.status === 4 ? [...optionCheck, ...optionClear, ...optionBan] :
+                const optionRemoveBlack = isSuperAdmin ? [<a key="removeBlack" onClick={() => handleRemoveBlack(record.id )}>解除</a>] : [];
+                return record.status === 4 ? [...optionCheck, ...optionClear, ...optionBan,...optionRemoveBlack] :
                        record.status === 13 ? [...optionCheck, ...optionClear, ...optionRelease] :
                        [...optionCheck, ...optionBlackList]
             }

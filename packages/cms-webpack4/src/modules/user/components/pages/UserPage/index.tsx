@@ -10,7 +10,7 @@ import AdminPage from '../../../../shared/components/AdminPage';
 const UserManage = () => {
     const [showModal, setShowModal] = useState({show:false,userId:''});
     const [form] = Form.useForm();
-    const [postBlackListAdd, { isLoading, isSuccess }] = usePostBlackListAddMutation();
+    const [postBlackListAdd, { isLoading, isSuccess:ispostBlackListSuccess }] = usePostBlackListAddMutation();
 
     const onFinish = (values: any) => {
         postBlackListAdd({ ...values, userId: showModal.userId });
@@ -43,7 +43,7 @@ const UserManage = () => {
             }}
         >
             <>
-                <UserTable setShowModal={setShowModal} />
+                <UserTable setShowModal={setShowModal} ispostBlackListSuccess={ispostBlackListSuccess}/>
                 <AddBlackListModal showModal={showModal.show} handleCloseModal={handleCloseModal} onFinish={onFinish} form={form} />
             </>
 
