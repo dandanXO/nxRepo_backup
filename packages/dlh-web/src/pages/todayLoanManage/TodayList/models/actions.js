@@ -19,6 +19,11 @@ export const TODL_COLLECTOR_CHANGE_MODAL_LOADING = 'TODL_COLLECTOR_CHANGE_MODAL_
 export const TODL_COLLECTOR_CHANGE_MODAL_VISIBLE = 'TODL_COLLECTOR_CHANGE_MODAL_VISIBLE';
 export const TODL_COLLECTOR_GET_MODAL_DATA = 'TODL_COLLECTOR_GET_MODAL_DATA';
 export const TODL_COLLECTOR_SET_MODAL_DATA = 'TODL_COLLECTOR_SET_MODAL_DATA';
+// 催收人員列表
+export const TODL_GET_TODAY_COLLECTOR = 'TOOD_GET_TODAY_COLLECTOR';
+export const TODL_SET_TODAY_COLLECTOR = 'TOOD_SET_TODAY_COLLECTOR';
+export const TODL_GET_COLLECTOR_LIST = 'TODL_GET_COLLECTOR_LIST';
+export const TODL_SET_COLLECTOR_LIST = 'TODL_SET_COLLECTOR_LIST';
 
 export const todlGetTableData = (params) => ({ type: TODL_GET_TABLE_DATA, params });
 export const todlSetTableData = (data) => ({ type: TODL_SET_TABLE_DATA, data });
@@ -35,4 +40,8 @@ export const todlColleterChangeModalVisible = (option) => ({ type: TODL_COLLECTO
 export const todlColleterChangeModalLoading = (option) => ({ type: TODL_COLLECTOR_CHANGE_MODAL_LOADING, option });
 export const todlColletorGetModalData = (params) => ({ type: TODL_COLLECTOR_GET_MODAL_DATA, params });
 export const todlColletorSetModalData = (data) => ({ type: TODL_COLLECTOR_SET_MODAL_DATA, data });
-
+// 催收人員列表
+export const todlGetTodayCollector = () => ({ type: TODL_GET_TODAY_COLLECTOR });
+export const todlSetTodayCollector = (data) => ({ type: TODL_SET_TODAY_COLLECTOR, data });
+export const todlGetCollectorList = () => ({ type: TODL_GET_COLLECTOR_LIST });
+export const todlSetCollectorList = (data) => ({ type: TODL_SET_COLLECTOR_LIST, data });

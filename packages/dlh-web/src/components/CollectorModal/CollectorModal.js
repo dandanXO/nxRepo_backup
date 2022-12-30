@@ -9,7 +9,6 @@ import TreeCheckbox from "../TreeCheckbox";
 
 function CollectorModal ({ modalTitle, collectors, visible, onModalCancel, onModalOk, intl }) {
 
-
     const [checkAllList, setCheckAllList] = useState([]);
 
     const onOk = () => {
@@ -19,16 +18,25 @@ function CollectorModal ({ modalTitle, collectors, visible, onModalCancel, onMod
         }
         setCheckAllList([]);
         onModalOk(checkAllList);
+        setCheckedJob([]);
+        setSelectedRowKeys([]);
     }
 
     const onCancel = () => {
         setCheckAllList([]);
         onModalCancel();
+        setCheckedJob([]);
+        setSelectedRowKeys([]);
     }
 
     const onTreeCheckboxCheck = (collectors) => {
       setCheckAllList(collectors)
     }
+
+    const [checkedJob, setCheckedJob] = useState([]); //设置选择的 level3，人ㄩㄢf
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]); //设置选择的 level1, level2 row
+
+  console.log("checkedJob", checkedJob);
     return (
         <Modal
             className={`${styles.urgePersonModal} collectorModal`}
@@ -38,7 +46,14 @@ function CollectorModal ({ modalTitle, collectors, visible, onModalCancel, onMod
             visible={visible}
             title={intl.formatMessage({ id: modalTitle })}
         >
-            <TreeCheckbox data={collectors} onCheck={onTreeCheckboxCheck}/>
+            <TreeCheckbox
+              data={collectors}
+              onCheck={onTreeCheckboxCheck}
+              checkedJob={checkedJob}
+              setCheckedJob={setCheckedJob}
+              selectedRowKeys={selectedRowKeys}
+              setSelectedRowKeys={setSelectedRowKeys}
+            />
         </Modal>
     );
 }
