@@ -6,20 +6,30 @@ const api = {
     orderListData: '/hs/admin/orderOverdue/list',
     // getUrgePerson: '/hs/admin/user/cslist',
     // distributeOrder: '/hs/admin/orderOverdue/distribution'
-    getUrgePerson: '/hs/admin/orderOverdue/getDisPerOrGroup',
+    // getUrgePerson: '/hs/admin/orderOverdue/getDisPerOrGroup',
+
+    // /hs/admin/collect-overdue/stage
+    getOverdueCollectorStage: '/hs/admin/collect-overdue/stage',
+
+    // 获取催收阶段的催收员 (下拉選單)
+    getOverdueCollector: '/hs/admin/collect-overdue/collector',
     distributeOrder: '/hs/admin/orderOverdue/distribution',
     // 獲取催收分配紀錄
     orderOverdueGetCollectStreamList: '/hs/admin/orderOverdue/collect-stream/list'
-
+    
 };
 const getOrderListData = (params) => {
     return axios.post(api.orderListData, params);
 }
-const getUrgePersonData = (params) => {
-    return axios.post(api.getUrgePerson, params);
+const getOverdueCollectorStageData = (params) => {
+    return axios.get(api.getOverdueCollectorStage);
 }
 const distributeOrder = (params) => {
     return axios.post(api.distributeOrder, params);
+}
+
+const getOverdueCollectorData = (params) => {
+    return axios.get(api.getOverdueCollector);
 }
 
 
@@ -40,4 +50,4 @@ const collectorGetDetail = (params) => {
   return axios.get(api.orderOverdueGetCollectStreamList, { params: { overdueId: params.id } });
 }
 
-export { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail };
+export { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail };

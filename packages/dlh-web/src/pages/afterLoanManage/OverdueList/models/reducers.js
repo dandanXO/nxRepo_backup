@@ -5,11 +5,13 @@ import {
     ODL_SET_PERSON,
     ODL_CHANGE_MODAL_VISIBLE,
     ODL_CHANGE_SELECT_KEY,
-    ODL_CHANGE_PERSON_TYPE,
     ODL_COLLECTOR_CHANGE_MODAL_LOADING,
     ODL_COLLECTOR_CHANGE_MODAL_VISIBLE,
     ODL_COLLECTOR_SET_MODAL_DATA,
-} from './actions'
+    ODL_SET_COLLECTOR_SELECT
+} from './actions';
+
+import {normalizeCollector} from "../../../../utils/normalizeCollector";
 
 
 const initState = {
@@ -32,13 +34,13 @@ const initState = {
     personData: [],
     selectKeys: [],
     visible: false,
-    personType: '',
     // 催收人紀錄
     collector: {
       modalLoading: false,
       visible: false,
       modalData: [],
-    }
+    },
+    collectorSelect:[]
 }
 
 const overdueList = (state = initState, action) => {
@@ -50,13 +52,12 @@ const overdueList = (state = initState, action) => {
         case ODL_CHANGE_SEARCH_PARAMS:
             return { ...state, params: action.params };
         case ODL_SET_PERSON:
-            return { ...state, personData: action.data };
+            const newData = normalizeCollector(action.data)
+            return { ...state, personData: newData };
         case ODL_CHANGE_MODAL_VISIBLE:
             return { ...state, visible: action.option };
         case ODL_CHANGE_SELECT_KEY:
             return { ...state, selectKeys: action.data };
-        case ODL_CHANGE_PERSON_TYPE:
-            return { ...state, personType: action.option };
         // 催收人紀錄
         case ODL_COLLECTOR_CHANGE_MODAL_LOADING:
           return { ...state, collector: {
@@ -73,6 +74,8 @@ const overdueList = (state = initState, action) => {
               ...state.collector,
               modalData: action.data,
             }};
+        case ODL_SET_COLLECTOR_SELECT:
+            return { ...state, collectorSelect: action.data };
         default:
             return state;
     }
