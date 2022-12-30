@@ -212,11 +212,11 @@ export default (props) => {
   // useEffect(() => {
   //   initialData.current = [...data]; //设置初始化值
   // }, []);
-  
-  const [expandedRowKeys, setExpandedRowKeys] = useState([]); //设置展开的 row
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]); //设置选择的 level1, level2 row
-  const [checkedJob, setCheckedJob] = useState([]); //设置选择的 level3，人ㄩㄢf
 
+  const [expandedRowKeys, setExpandedRowKeys] = useState([]); //设置展开的 row
+
+
+  const {selectedRowKeys, setSelectedRowKeys, checkedJob, setCheckedJob} = props
 
   useEffect(() => {
     props.onCheck(checkedJob);
