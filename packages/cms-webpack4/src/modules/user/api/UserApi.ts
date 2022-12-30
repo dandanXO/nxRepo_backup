@@ -3,6 +3,8 @@ import { GetUerListProps,GetUserListRequestQuerystring } from "./types/userTypes
 import { PostBlackListRequestBody } from "./types/userTypes/postBlackList";
 import { UserId } from "../../../types/UserId";
 import { PostTelSaleRequestQuerystring } from './types/userTypes/postTelSale';
+
+
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
@@ -54,6 +56,13 @@ const UserApi = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
+        // NOTE: DELETE /hs/admin/user-manage/black-list/{userId} 刪除黑名單
+        deleteBlackList: builder.mutation<null, UserId>({
+            query: (requestBody: UserId) => ({
+                url: `/user-manage/black-list/${requestBody.userId}`,
+                method: "delete",
+            }),
+        }),
     })
 })
 export const {
@@ -62,5 +71,6 @@ export const {
     useDeleteUserMutation,
     usePostUserBanMutation,
     usePostUserBanReleaseMutation,
-    usePostTelSaleMutation
+    usePostTelSaleMutation,
+    useDeleteBlackListMutation
 } = UserApi;
