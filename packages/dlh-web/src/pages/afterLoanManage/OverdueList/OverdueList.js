@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { CommonTable, UrgePersonModal, CopyText } from 'components';
+import { CommonTable, CopyText ,CollectorModal} from 'components';
 import {bindActionCreators} from 'redux';
 import {Button, Icon, Tooltip} from 'antd';
 import moment from 'moment';
@@ -48,8 +48,6 @@ class OverdueList extends Component {
         };
         const _this = this;
         this.convertParams = (obj) => {
-            const {personType} = this.props;
-            let key = personType === 'group' ? 'departmentId' : 'collectorId';
             const { disTime, time, phoneNo, name, orderNo, orderStatus, person } = obj;
             const isArr = Array.isArray(time) && time.length > 0;
             const isArr2 = Array.isArray(disTime) && disTime.length > 0;
@@ -62,7 +60,7 @@ class OverdueList extends Component {
                 userPhone: phoneNo,
                 userTrueName: name,
                 orderNo,
-                [key]: person
+                collectorId: person
             };
         }
 
@@ -350,14 +348,10 @@ class OverdueList extends Component {
     }
     //点击弹框确定按钮,分配订单
     onModalOk = (obj) => {
-        // const { selectedRowKeys } = this.state;
-        // const { selectKeys } = this.props;
-        const {distributeOrder, getTableData, searchParams, selectKeys, tableData: {pagination}, personType} = this.props;
-        // const collectorId = obj['person'];
-        let key = personType === 'group' ? 'departmentIds' : 'collectorIds';
 
+        const {distributeOrder, getTableData, searchParams, selectKeys, tableData: {pagination}} = this.props;
         //todo 分配订单回调？
-        distributeOrder({disIds: selectKeys.join(','), [key]: obj.join(',')}, () => {
+        distributeOrder({disIds: selectKeys.join(','), collectorIds: obj.join(',')}, () => {
             let params = this.convertParams(searchParams);
             params = {...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1};
             getTableData(params);
@@ -366,16 +360,18 @@ class OverdueList extends Component {
 
 
     componentDidMount() {
-        const {getTableData, tableData: {pagination}, getPerson, setSearchParams } = this.props;
+        const { getTableData, tableData: { pagination }, getPerson, setSearchParams, getCollectorSelect } = this.props;
         setSearchParams(this.initSearchParams);
 
         let params = this.convertParams(this.initSearchParams);
-        params = {...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1};
+        params = { ...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1 };
 
-        //如果store中没有催收人信息，则取请求催收人列表
-        getPerson({roleId: 8}, () => {
-            getTableData(params);
-        });
+        getTableData(params);
+
+        // 取得催收人
+        getPerson();
+        // 取得催收人/組下拉選單
+        getCollectorSelect();
     }
 
     //todo 是否清理列表以及选择数据
@@ -404,6 +400,7 @@ class OverdueList extends Component {
     }
 
     render() {
+     
         const {
             tableData: {data, pagination},
             loading,
@@ -414,6 +411,7 @@ class OverdueList extends Component {
             collectorModalLoading,
             collectorVisible,
             collectorModalData,
+            collectorSelect
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -423,7 +421,7 @@ class OverdueList extends Component {
         const pageInfo = {...pagination, pageSizeOptions: ['10', '20', '30', '40', '50', "100", "200", "300", "400", "500", "1000", "2000"]}  //客戶要求1000、2000的分頁數
         return (
             <div>
-                <SearchList handleSubmit={this.handleSearch} params={searchParams} personData={personData}  isSuperAdmin={this.state.isSuperAdminisSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList handleSubmit={this.handleSearch} params={searchParams} personData={personData}  isSuperAdmin={this.state.isSuperAdminisSuperAdmin} allMerchants={this.state.allMerchants} collectorSelect={collectorSelect}/>
                 <div>
                     <span>
                         <Button type={'primary'} onClick={this.distributeOrder}><FormattedMessage id="page.table.redistribute.order"/></Button>
@@ -440,11 +438,11 @@ class OverdueList extends Component {
                     dataSource={data}
                     rowSelection={rowSelection}
                 />
-                <UrgePersonModal
-                    visible={visible}
-                    urgePerson={personData}
-                    onModalOk={this.onModalOk}
+                <CollectorModal
                     onModalCancel={this.onModalCancel}
+                    onModalOk={this.onModalOk}
+                    collectors={personData}
+                    visible={visible}
                     modalTitle={"windowPage.select.collector"}
                 />
                 <DetailModal
@@ -469,7 +467,7 @@ const mapStateToProps = (state) => {
         personData: overdueListState['personData'],
         selectKeys: overdueListState['selectKeys'],
         visible: overdueListState['visible'],
-        personType: overdueListState['personType'],
+        collectorSelect:overdueListState['collectorSelect'],
         // 催收人員列表
         collectorModalLoading: overdueListState['collector']['modalLoading'],
         collectorVisible: overdueListState['collector']['visible'],
@@ -482,6 +480,7 @@ const mapDispatchToProps = (dispatch) => {
         setTableData: overdueListAction.odlSetTableData,
         setSearchParams: overdueListAction.odlChangeSearchParams,
         getPerson: overdueListAction.odlGetPerson,
+        getCollectorSelect: overdueListAction.odlGetCollectorSelect,
         changeModalVisible: overdueListAction.odlChangeModalVisible,
         distributeOrder: overdueListAction.odlDistributeOrder,
         changeSelectKeys: overdueListAction.odlChangeSelectKey,

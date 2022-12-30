@@ -10,6 +10,8 @@ const api = {
     distributeOrder: '/hs/admin/orderToday/todayDistribution',
     // 獲取催收分配紀錄
     orderTodayGetCollectStreamList: '/hs/admin/orderToday/collect-stream/list',
+    getTodayCollector: '/hs/admin/collect-today/stage',
+    getCollectorList: '/hs/admin/collect-today/collector',
 };
 const getOrderListData = (params) => {
     return axios.post(api.orderListData, params);
@@ -19,6 +21,12 @@ const getUrgePersonData = (params) => {
 }
 const distributeOrder = (params) => {
     return axios.post(api.distributeOrder, params);
+}
+const getTodayCollector = () => {
+  return axios.get(api.getTodayCollector);
+}
+const getCollectorList = () => {
+  return axios.get(api.getCollectorList);
 }
 
 /**
@@ -38,4 +46,4 @@ const collectorGetDetail = (params) => {
   return axios.get(api.orderTodayGetCollectStreamList, { params: { todayId: params.id } });
 }
 
-export { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail };
+export { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getTodayCollector, getCollectorList };

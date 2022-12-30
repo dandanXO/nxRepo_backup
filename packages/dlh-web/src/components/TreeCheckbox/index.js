@@ -10,14 +10,18 @@ const TreeCheckboxStyle = styled.div`
   // 階段
   .ant-table-row-level-0 {
     text-align: left;
+    min-width: 1000px;
+    font-weight: 700;
   }
 
   //商戶
   .ant-table-row-level-1 {
     display: inline-block;
     padding-left: 30px;
+    min-width: 1000px;
+    text-align: left;
     td {
-      min-width: 100px;
+      min-width: 1000px;
       &.ant-table-row-expand-icon-cell {
         min-width: 0px;
       }
@@ -31,8 +35,10 @@ const TreeCheckboxStyle = styled.div`
   .ant-table-row-level-2 {
     display: inline-block;
     padding-left: 51px;
+    min-width: 1000px;
+    text-align: left;
     td {
-      min-width: 100px;
+      min-width: 1000px;
       &.ant-table-row-expand-icon-cell {
         min-width: 0px;
       }
@@ -67,149 +73,154 @@ const TreeCheckboxStyle = styled.div`
 
 const columns = [{ title: "title", dataIndex: "title", key: "title" }];
 
-export default () => {
+export default (props) => {
   const initialData = useRef([]);
-  const [data, setData] = useState([
-    {
-      key: "1",
-      title: "催收階段1",
-      level: "stage",
-      children: [
-        {
-          key: "1-1",
-          title: "商戶1",
-          level: "merchant",
-          children: [
-            {
-              key: "team-1",
-              title: "團隊1",
-              level: "team",
-              checkboxData: [
-                { key: 1, title: "eric1" },
-                { key: 2, title: "eric2" },
-                { key: 3, title: "eric3" },
-              ],
-            },
-            {
-              key: "team-2",
-              title: "團隊2",
-              level: "team",
-              checkboxData: [
-                { key: 4, title: "eric4" },
-                { key: 5, title: "eric5" },
-                { key: 6, title: "eric6" },
-              ],
-            },
-          ]
-        },
-        {
-          key: "1-2",
-          parent: "1",
-          title: "商戶2",
-          level: "merchant",
-          children: [
-            {
-              key: "team-3",
-              title: "團隊3",
-              level: "team",
-              checkboxData: [
-                { key: 7, title: "eric7" },
-                { key: 8, title: "eric8" },
-                { key: 9, title: "eric9" },
-              ],
-            },
-            {
-              key: "team-4",
-              title: "團隊4",
-              level: "team",
-              checkboxData: [
-                { key: 10, title: "eric10" },
-                { key: 11, title: "eric11" },
-                { key: 12, title: "eric12" },
-              ],
-            },
-          ]
-        },
-      ],
-    },
-    {
-      key: "2",
-      title: "催收階段2",
-      level: "stage",
-      children: [
-        {
-          key: "2-1",
-          parent: "2",
-          title: "商戶1",
-          level: "merchant",
-          children: [
-            {
-              key: "team-5",
-              title: "團隊5",
-              level: "team",
-              checkboxData: [
-                { key: 13, title: "eric13" },
-                { key: 14, title: "eric14" },
-                { key: 15, title: "eric15" },
-              ],
-            },
-            {
-              key: "team-6",
-              title: "團隊6",
-              level: "team",
-              checkboxData: [
-                { key: 16, title: "eric16" },
-                { key: 17, title: "eric17" },
-                { key: 18, title: "eric18" },
-              ],
-            },
-          ]
-        },
-        {
-          key: "2-2",
-          parent: "2",
-          title: "商戶2",
-          level: "merchant",
-          children: [
-            {
-              key: "team-7",
-              title: "團隊7",
-              level: "team",
-              checkboxData: [
-                { key: 19, title: "eric19" },
-                { key: 20, title: "eric20" },
-                { key: 21, title: "eric21" },
-              ],
-            },
-            {
-              key: "team-8",
-              title: "團隊8",
-              level: "team",
-              checkboxData: [
-                { key: 22, title: "eric22" },
-                { key: 23, title: "eric23" },
-                { key: 24, title: "eric34" },
-              ],
-            },
-          ]
-        },
-      ],
-    },
-  ]);
-  useEffect(() => {
-    initialData.current = [...data]; //设置初始化值
-  }, []);
+  const [data, setData] = useState(props.data);
+  // const [data, setData] = useState([
+  //   {
+  //     key: "1",
+  //     title: "催收階段1",
+  //     level: "stage",
+  //     children: [
+  //       {
+  //         key: "1-1",
+  //         title: "商戶1",
+  //         level: "merchant",
+  //         children: [
+  //           {
+  //             key: "team-1",
+  //             title: "團隊1",
+  //             level: "team",
+  //             checkboxData: [
+  //               { key: 1, title: "eric1" },
+  //               { key: 2, title: "eric2" },
+  //               { key: 3, title: "eric3" },
+  //             ],
+  //           },
+  //           {
+  //             key: "team-2",
+  //             title: "團隊2",
+  //             level: "team",
+  //             checkboxData: [
+  //               { key: 4, title: "eric4" },
+  //               { key: 5, title: "eric5" },
+  //               { key: 6, title: "eric6" },
+  //             ],
+  //           },
+  //         ]
+  //       },
+  //       {
+  //         key: "1-2",
+  //         parent: "1",
+  //         title: "商戶2",
+  //         level: "merchant",
+  //         children: [
+  //           {
+  //             key: "team-3",
+  //             title: "團隊3",
+  //             level: "team",
+  //             checkboxData: [
+  //               { key: 7, title: "eric7" },
+  //               { key: 8, title: "eric8" },
+  //               { key: 9, title: "eric9" },
+  //             ],
+  //           },
+  //           {
+  //             key: "team-4",
+  //             title: "團隊4",
+  //             level: "team",
+  //             checkboxData: [
+  //               { key: 10, title: "eric10" },
+  //               { key: 11, title: "eric11" },
+  //               { key: 12, title: "eric12" },
+  //             ],
+  //           },
+  //         ]
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     key: "2",
+  //     title: "催收階段2",
+  //     level: "stage",
+  //     children: [
+  //       {
+  //         key: "2-1",
+  //         parent: "2",
+  //         title: "商戶1",
+  //         level: "merchant",
+  //         children: [
+  //           {
+  //             key: "team-5",
+  //             title: "團隊5",
+  //             level: "team",
+  //             checkboxData: [
+  //               { key: 13, title: "eric13" },
+  //               { key: 14, title: "eric14" },
+  //               { key: 15, title: "eric15" },
+  //             ],
+  //           },
+  //           {
+  //             key: "team-6",
+  //             title: "團隊6",
+  //             level: "team",
+  //             checkboxData: [
+  //               { key: 16, title: "eric16" },
+  //               { key: 17, title: "eric17" },
+  //               { key: 18, title: "eric18" },
+  //             ],
+  //           },
+  //         ]
+  //       },
+  //       {
+  //         key: "2-2",
+  //         parent: "2",
+  //         title: "商戶2",
+  //         level: "merchant",
+  //         children: [
+  //           {
+  //             key: "team-7",
+  //             title: "團隊7",
+  //             level: "team",
+  //             checkboxData: [
+  //               { key: 19, title: "eric19" },
+  //               { key: 20, title: "eric20" },
+  //               { key: 21, title: "eric21" },
+  //             ],
+  //           },
+  //           {
+  //             key: "team-8",
+  //             title: "團隊8",
+  //             level: "team",
+  //             checkboxData: [
+  //               { key: 22, title: "eric22" },
+  //               { key: 23, title: "eric23" },
+  //               { key: 24, title: "eric34" },
+  //             ],
+  //           },
+  //         ]
+  //       },
+  //     ],
+  //   },
+  // ]);
 
+  useEffect(() => {
+    initialData.current = [...props.data]; //设置初始化值
+    setData(props.data)
+  }, [props.data]);
+
+  // useEffect(() => {
+  //   initialData.current = [...data]; //设置初始化值
+  // }, []);
 
   const [expandedRowKeys, setExpandedRowKeys] = useState([]); //设置展开的 row
 
-  // const [selectedRowKeys, setSelectedRowKeys] = useState(["1", "2", "1-2"]); //设置选择的 level1, level2 row
-  // const [checkedJob, setCheckedJob] = useState([12]); //设置选择的 level3，人ㄩㄢf
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]); //设置选择的 level1, level2 row
-  const [checkedJob, setCheckedJob] = useState([]); //设置选择的 level3，人ㄩㄢf
 
+  const {selectedRowKeys, setSelectedRowKeys, checkedJob, setCheckedJob} = props
 
-  const [selectAllDisabled, setSelectAllDisabled] = useState(false); //选择的时候，禁止全选
+  useEffect(() => {
+    props.onCheck(checkedJob);
+  }, [checkedJob]);
 
   const checkChange = (e) => {
     // console.log("checkChange.e", e)
@@ -415,7 +426,7 @@ export default () => {
 
     // return null;
     return (
-      <div style={{ paddingLeft: 50, boxSizing: "border-box" }}>
+      <div style={{ paddingLeft: 0, boxSizing: "border-box" }}>
         <div>
           <Checkbox.Group value={checkedJob} style={{
             display: "flex",
@@ -630,13 +641,15 @@ export default () => {
 
     }
   };
+
+  if(!data) return null;
+
   return (
     <TreeCheckboxStyle
       style={{
         background: "#fff",
         padding: 24,
         boxSizing: "border-box",
-        width: 982,
       }}
     >
       <Table

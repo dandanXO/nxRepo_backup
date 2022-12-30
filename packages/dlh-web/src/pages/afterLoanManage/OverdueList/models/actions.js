@@ -13,7 +13,8 @@ export const ODL_SET_PERSON = 'ODL_SET_PERSON';
 export const ODL_CHANGE_MODAL_VISIBLE = 'ODL_CHANGE_MODAL_VISIBLE';
 export const ODL_DISTRIBUTE_ORDER = 'ODL_DISTRIBUTE_ORDER';
 export const ODL_CHANGE_SELECT_KEY = 'ODL_CHANGE_SELECT_KEY';
-export const ODL_CHANGE_PERSON_TYPE = 'ODL_CHANGE_PERSON_TYPE';
+export const ODL_GET_COLLECTOR_SELECT= 'ODL_GET_COLLECTOR_SELECT';
+export const ODL_SET_COLLECTOR_SELECT= 'ODL_SET_COLLECTOR_SELECT';
 
 // 催收人紀錄
 export const ODL_COLLECTOR_CHANGE_MODAL_LOADING = 'ODL_COLLECTOR_CHANGE_MODAL_LOADING';
@@ -30,7 +31,8 @@ export const odlSetPerson = (data) => ({ type: ODL_SET_PERSON, data });
 export const odlChangeModalVisible = (option) => ({ type: ODL_CHANGE_MODAL_VISIBLE, option });
 export const odlDistributeOrder = (params, callBack) => ({ type: ODL_DISTRIBUTE_ORDER, params, callBack });
 export const odlChangeSelectKey = (data) => ({ type: ODL_CHANGE_SELECT_KEY, data });
-export const odlChangePersonType = (option) => ({ type: ODL_CHANGE_PERSON_TYPE, option })
+export const odlGetCollectorSelect = (params) => ({ type: ODL_GET_COLLECTOR_SELECT, params });
+export const odlSetCollectorSelect = (data) => ({ type: ODL_SET_COLLECTOR_SELECT, data });
 
 // 催收人紀錄
 export const odlColleterChangeModalLoading = (option) => ({ type: ODL_COLLECTOR_CHANGE_MODAL_LOADING, option });

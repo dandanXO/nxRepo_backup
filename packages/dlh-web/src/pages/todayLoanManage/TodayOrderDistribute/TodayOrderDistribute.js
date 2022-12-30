@@ -3,15 +3,13 @@ import {bindActionCreators} from 'redux';
 import { Button, message } from 'antd';
 import {connect} from 'react-redux';
 import moment from 'moment';
-import { CommonTable, UrgePersonModal, CollectorModal } from 'components';
+import { CommonTable, CollectorModal } from 'components';
 import {todayOrderDistributeAction} from './index';
 import SearchList from './SearchList/SearchList';
 import {convertMoneyFormat} from "utils";
 import PropTypes from 'prop-types';
 import {FormattedMessage, injectIntl} from "react-intl";
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
-import TreeCheckbox from "../../../components/TreeCheckbox";
-
 
 class TodayOrderDistribute extends Component {
     constructor(props) {
@@ -72,14 +70,14 @@ class TodayOrderDistribute extends Component {
     distributeOrder = () => {
         // const { selectedRowKeys } = this.state;
         const { selectKeys, intl } = this.props;
-        const { changeModalVisible, personData } = this.props;
+        const { changeModalVisible, todayCollector } = this.props;
         //是否有选中订单
         const isSelected = selectKeys.length > 0;
         if(!isSelected) {
             message.warn(intl.formatMessage({id : "windowPage.select.order"}));
             return;
         }
-        if (personData.length === 0) {
+        if (todayCollector.length === 0) {
             message.warn(intl.formatMessage({id : "windowPage.no.collector"}));
             return;
         }
@@ -96,11 +94,7 @@ class TodayOrderDistribute extends Component {
 
         const {selectKeys} = this.props;
         const {pageSize} = this.state;
-        const {distributeOrder, getTableData, personType} = this.props;
-
-        console.log("selectKeys", selectKeys);
-        console.log("obj", obj);
-        //let key = personType === 'group' ? 'departmentId' : 'collectorId';
+        const {distributeOrder, getTableData} = this.props;
 
         //todo 分配订单回调？ type 1 = 订单分配 , type2 = 重新分配 ( 逾期的沒有type )
         distributeOrder({type: 1, disIds: selectKeys.join(','), personIds: obj.join(',')}, () => {
@@ -167,9 +161,8 @@ class TodayOrderDistribute extends Component {
     }
 
     componentDidMount() {
-        const {getTableData, getPersonData, getTodayCollector} = this.props;
+        const {getTableData, getTodayCollector} = this.props;
         getTableData({collectorId: null, pageSize: 10, pageNum: 1});
-        getPersonData({roleId: 8});
         getTodayCollector();
     }
 
@@ -183,10 +176,10 @@ class TodayOrderDistribute extends Component {
             tableData: {data, pagination},
             loading,
             visible,
-            personData,
             selectKeys,
             todayCollector,
         } = this.props;
+        // console.log("todayCollector", todayCollector);
         const rowSelection = {
             selectedRowKeys: selectKeys,
             onChange: this.onSelectChange
@@ -211,22 +204,13 @@ class TodayOrderDistribute extends Component {
                     pagination={pageInfo}
                     loading={loading}
                 />
-                <UrgePersonModal
-                    onModalCancel={this.onModalCancel}
-                    onModalOk={this.onModalOk}
-                    urgePerson={personData}
-                    visible={visible}
-                    modalTitle={"windowPage.select.collector"}
+                <CollectorModal
+                  visible={visible}
+                  collectors={todayCollector}
+                  onModalCancel={this.onModalCancel}
+                  onModalOk={this.onModalOk}
+                  modalTitle={"windowPage.select.collector"}
                 />
-                {/*<CollectorModal*/}
-                {/*  onModalCancel={this.onModalCancel}*/}
-                {/*  onModalOk={this.onModalOk}*/}
-                {/*  urgePerson={todayCollector}*/}
-                {/*  todayCollector={todayCollector}*/}
-                {/*  visible={visible}*/}
-                {/*  modalTitle={"windowPage.select.collector"}*/}
-                {/*/>*/}
-              {/*<TreeCheckbox/>*/}
             </div>
         );
     }
@@ -238,9 +222,7 @@ const mapStateToProps = (state) => {
         tableData: todayOrderDistributeState['data'],
         loading: todayOrderDistributeState['loading'],
         visible: todayOrderDistributeState['visible'],
-        personData: todayOrderDistributeState['personData'],
         selectKeys: todayOrderDistributeState['selectKeys'],
-        personType: todayOrderDistributeState['personType'],
         todayCollector: todayOrderDistributeState['todayCollector'],
     };
 };
@@ -248,7 +230,6 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         getTableData: todayOrderDistributeAction.toodGetTableData,
         setTableData: todayOrderDistributeAction.toodSetTableData,
-        getPersonData: todayOrderDistributeAction.toodGetPersonData,
         changeModalVisible: todayOrderDistributeAction.toodChangeModalVisible,
         distributeOrder: todayOrderDistributeAction.toodDistributeOrder,
         changeSelectKeys: todayOrderDistributeAction.toodChangeSelectKey,
