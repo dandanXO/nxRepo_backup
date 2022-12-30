@@ -31,7 +31,7 @@ const AddressBook = (({ userId }: UserId) => {
         }
     },[currentData])
 
-    
+
     const pageOnChange = (current, pageSize) => {
         setPagealbe({ ...pageable, pageNum: current, pageSize: pageSize })
     }
@@ -45,7 +45,7 @@ const AddressBook = (({ userId }: UserId) => {
     //     }
     // }, [currentData])
 
-    
+
 
     return (
 
@@ -57,6 +57,7 @@ const AddressBook = (({ userId }: UserId) => {
             search={false}
             options={false}
             pagination={{
+                pageSizeOptions: [10, 20, 50, 100, 500, 1000],
                 showSizeChanger: true,
                 defaultPageSize: 10,
                 onChange: pageOnChange,

@@ -1,12 +1,13 @@
 import {
-    OOD_SET_PERSON_DATA,
-    OOD_CHANGE_MODAL_VISIBLE,
-    OOD_CHANGE_TABLE_LOADING,
-    OOD_SET_TABLE_DATA,
-    OOD_CHANGE_SELECT_KEY,
-    OOD_CHANGE_PERSON_TYPE
+  OOD_SET_PERSON_DATA,
+  OOD_CHANGE_MODAL_VISIBLE,
+  OOD_CHANGE_TABLE_LOADING,
+  OOD_SET_TABLE_DATA,
+  OOD_CHANGE_SELECT_KEY,
+  OOD_CHANGE_PERSON_TYPE,
+  OOD_SET_OVERDUE_COLLECTOR,
 } from './actions';
-
+import {normalizeCollector} from "../../../../utils/normalizeCollector";
 
 const initState = {
     loading: false,
@@ -17,7 +18,8 @@ const initState = {
     visible: false,
     personData: [],
     selectKeys: [],
-    personType: ''
+    personType: '',
+    overdueCollector: [],
 }
 
 const OverdueOrderDistribute = (state = initState, action) => {
@@ -34,8 +36,17 @@ const OverdueOrderDistribute = (state = initState, action) => {
             return { ...state, selectKeys: action.data };
         case OOD_CHANGE_PERSON_TYPE:
             return { ...state, personType: action.option };
+        case OOD_SET_OVERDUE_COLLECTOR:
+        {
+          const newData = normalizeCollector(action.data)
+          return {
+            ...state,
+            overdueCollector: newData
+          };
+        }
         default:
-            return state;
+          return state;
+
     }
 }
 export default OverdueOrderDistribute;

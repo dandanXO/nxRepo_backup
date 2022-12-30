@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CommonTable, UrgePersonModal, CopyText } from 'components';
+import { CommonTable, CollectorModal, CopyText } from 'components';
 import { bindActionCreators } from 'redux';
 import { Button, Icon, Tooltip } from 'antd';
 import moment from 'moment';
@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 import DetailModal from "./DetailModal/DetailModal";
+import {todlGetCollectorList} from "./models/actions";
 
 const statusObj = {
     "0": <FormattedMessage id="page.search.list.outstanding"/>,
@@ -244,14 +245,14 @@ class TodayList extends Component {
     distributeOrder = () => {
         // const { selectedRowKeys } = this.state;
         const {selectKeys, intl} = this.props;
-        const {changeModalVisible, personData} = this.props;
+        const {changeModalVisible, todayCollector} = this.props;
         //是否有选中订单
         const isSelected = selectKeys.length > 0;
         if (!isSelected) {
             message.warn(intl.formatMessage({id: "windowPage.select.order"}));
             return;
         }
-        if (personData.length === 0) {
+        if (todayCollector.length === 0) {
             message.warn(intl.formatMessage({id: "windowPage.no.collector"}));
             return;
         }
@@ -288,6 +289,7 @@ class TodayList extends Component {
 
         // let key = personType === 'group' ? 'departmentId' : 'collectorId';
 
+        console.log("obj", obj);
         //todo 分配订单回调？ type 1 = 订单分配 , type2 = 重新分配 ( 逾期的沒有type )
         distributeOrder({type: 2, disIds: selectKeys.join(','), personIds: obj.join(',')}, () => {
             let params = this.convertParams(searchParams);
@@ -297,13 +299,14 @@ class TodayList extends Component {
     }
 
     componentDidMount() {
-        const { setSearchParams, getTableData, tableData: { pagination }, getPerson, personData } = this.props;
+        const { setSearchParams, getTableData, tableData: { pagination }, getTodayCollector, getCollectorList } = this.props;
         setSearchParams(this.initSearchParams);
         let params = this.convertParams(this.initSearchParams);
         params = { ...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1 };
-        getPerson({ roleId: 8 }, () => {
-            getTableData(params);
-        });
+        getCollectorList();
+        getTableData(params);
+        getTodayCollector();
+
     }
 
     //todo 是否清理列表以及选择数据
@@ -338,10 +341,11 @@ class TodayList extends Component {
             searchParams,
             visible,
             selectKeys,
-            personData,
             collectorModalLoading,
             collectorVisible,
             collectorModalData,
+            todayCollector,
+            todayCollectorList,
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -354,7 +358,7 @@ class TodayList extends Component {
             <div>
                 <SearchList
                     handleSubmit={this.handleSearch}
-                    params={searchParams} personData={personData}
+                    params={searchParams} personData={todayCollectorList}
                 />
                 <div>
                     <span>
@@ -372,13 +376,6 @@ class TodayList extends Component {
                     dataSource={data}
                     rowSelection={rowSelection}
                 />
-                <UrgePersonModal
-                    visible={visible}
-                    urgePerson={personData}
-                    onModalOk={this.onModalOk}
-                    onModalCancel={this.onModalCancel}
-                    modalTitle={"windowPage.select.collector"}
-                />
                 <DetailModal
                   modalLoading={collectorModalLoading}
                   visible={collectorVisible}
@@ -386,6 +383,13 @@ class TodayList extends Component {
                   afterClose={this.collectorAfterClose}
                   handleCancel={this.collectorHandleModalCancel}
                   handlePageChange={this.handleModalPageChange}
+                />
+                <CollectorModal
+                  visible={visible}
+                  collectors={todayCollector}
+                  onModalCancel={this.onModalCancel}
+                  onModalOk={this.onModalOk}
+                  modalTitle={"windowPage.select.collector"}
                 />
             </div>
         );
@@ -398,7 +402,7 @@ const mapStateToProps = (state) => {
         tableData: todayListState['data'],
         loading: todayListState['loading'],
         searchParams: todayListState['params'],
-        personData: todayListState['personData'],
+        // personData: todayListState['personData'],
         selectKeys: todayListState['selectKeys'],
         visible: todayListState['visible'],
         personType: todayListState['personType'],
@@ -406,6 +410,9 @@ const mapStateToProps = (state) => {
         collectorModalLoading: todayListState['collector']['modalLoading'],
         collectorVisible: todayListState['collector']['visible'],
         collectorModalData: todayListState['collector']['modalData'],
+        // 催收人員列表
+        todayCollector: todayListState['todayCollector'],
+        todayCollectorList: todayListState['collectorList'],
 
     }
 }
@@ -423,6 +430,9 @@ const mapDispatchToProps = (dispatch) => {
         collectorChangeModalLoading: todayListAction.todlColleterChangeModalLoading,
         collectorGetModalData: todayListAction.todlColletorGetModalData,
         collectorSetModalData: todayListAction.todlColletorSetModalData,
+        // 催收人員列表
+        getTodayCollector: todayListAction.todlGetTodayCollector,
+        getCollectorList: todayListAction.todlGetCollectorList,
     }, dispatch);
 }
 

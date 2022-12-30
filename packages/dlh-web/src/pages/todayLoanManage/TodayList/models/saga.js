@@ -12,10 +12,15 @@ import {
   TODL_COLLECTOR_GET_MODAL_DATA,
   todlColleterChangeModalVisible,
   todlColleterChangeModalLoading,
-  todlColletorSetModalData
+  todlColletorSetModalData,
+  TODL_GET_TODAY_COLLECTOR,
+  todlSetTodayCollector,
+  TODL_GET_COLLECTOR_LIST,
+  todlSetCollectorList
 } from './actions';
-import {getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail} from '../api';
+import {getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getCollectorList} from '../api';
 import {message} from "antd";
+import {getTodayCollector} from "../../TodayOrderDistribute/api";
 
 function* getTableData(action) {
     yield put(todlChangeTableLoading(true));
@@ -85,7 +90,9 @@ export default function* root() {
         fork(watchGetTableData),
         fork(watchGetPerson),
         fork(watchDistributeData),
-        fork(watchCollectorGetDetail)
+        fork(watchCollectorGetDetail),
+        fork(watchGetTodayCollector),
+        fork(watchGetCollectorList),
     ])
 }
 
@@ -104,4 +111,35 @@ function* getCollectorDetail(action) {
     console.log(e);
   }
   yield put(todlColleterChangeModalLoading(false));
+}
+
+function* watchGetTodayCollector() {
+  yield  takeEvery(TODL_GET_TODAY_COLLECTOR, getTodayCollectorSaga)
+}
+
+function* getTodayCollectorSaga() {
+  try {
+    const response = yield call(getTodayCollector);
+    yield put(todlSetTodayCollector(response));
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+
+
+function* watchGetCollectorList() {
+  yield  takeEvery(TODL_GET_COLLECTOR_LIST, getCollectorListSaga)
+}
+
+function* getCollectorListSaga() {
+  try {
+    const response = yield call(getCollectorList);
+    console.log("list:", response)
+    yield put(todlSetCollectorList(response));
+
+  } catch (e) {
+    console.log(e);
+  }
 }

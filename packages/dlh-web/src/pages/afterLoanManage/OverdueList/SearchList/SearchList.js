@@ -25,8 +25,8 @@ class SearchList extends Component{
 
     }
     renderPerson = () => {
-        const { personData } = this.props;
-        const ele = personData.map(item => <Option value={item.value} key={item.value} >{item.name}</Option>)
+        const { collectorSelect } = this.props;
+        const ele = collectorSelect.map(item => <Option value={item.collectorId} key={item.collectorId} >{item.collectorName}</Option>)
         return [<Option value={''} key={''} ><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
 
@@ -36,6 +36,7 @@ class SearchList extends Component{
       const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
       return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
+
     render() {
         const { form: { getFieldDecorator  }, intl, isSuperAdmin } = this.props;
         return (
@@ -189,7 +190,7 @@ export default Form.create({
                 value: params['orderStatus'] || ''
             }),
             person: Form.createFormField({
-                value: params['person']
+                value: params['person'] || ''
             })
         }
     }

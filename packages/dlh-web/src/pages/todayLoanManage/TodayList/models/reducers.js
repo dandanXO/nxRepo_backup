@@ -8,8 +8,9 @@ import {
   TODL_CHANGE_PERSON_TYPE,
   TODL_COLLECTOR_CHANGE_MODAL_LOADING,
   TODL_COLLECTOR_CHANGE_MODAL_VISIBLE,
-  TODL_COLLECTOR_SET_MODAL_DATA,
+  TODL_COLLECTOR_SET_MODAL_DATA, TODL_SET_TODAY_COLLECTOR, TODL_SET_COLLECTOR_LIST,
 } from './actions'
+import {normalizeCollector} from "../../../../utils/normalizeCollector";
 
 const initState = {
     loading: false,
@@ -37,7 +38,9 @@ const initState = {
       modalLoading: false,
       visible: false,
       modalData: [],
-    }
+    },
+    todayCollector: [],
+    collectorList: [],
 }
 
 const todayList = (state = initState, action) => {
@@ -72,6 +75,27 @@ const todayList = (state = initState, action) => {
               ...state.collector,
               modalData: action.data,
             }};
+        case TODL_SET_TODAY_COLLECTOR:
+        {
+          const newData = normalizeCollector(action.data)
+          return {
+            ...state,
+            todayCollector: newData
+          };
+        }
+        case TODL_SET_COLLECTOR_LIST:
+        {
+          const list = action.data.map(collector => {
+            return {
+              value: collector.collectorId,
+              name: collector.collectorName,
+            }
+          })
+          return {
+            ...state,
+            collectorList: list,
+          };
+        }
         default:
             return state;
     }
