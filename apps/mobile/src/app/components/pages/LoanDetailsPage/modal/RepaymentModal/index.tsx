@@ -48,7 +48,6 @@ const SectionButton2 = styled.div`
     justify-content: space-between;
 `;
 
-// NOTE:1
 export const RepayAndApplyButton = styled(NotificationButton)`
     display: flex;
     flex-direction: row;
@@ -63,7 +62,6 @@ const RepaymentCancelButton = styled(NotificationButton)`
     color: ${(props) => props.theme.button.secondary.text};
 `;
 
-// NOTE:2
 export const RepaymentButton = styled(RepayAndApplyButton)`
     flex: 3 0 auto;
     background: ${(props) => props.theme.button.secondary.main};
