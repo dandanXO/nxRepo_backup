@@ -41,7 +41,7 @@ class SearchList extends Component{
                 <Form onSubmit={this.submit}>
                     <Row>
                         {isSuperAdmin && (
-                            <Col lg={12} xl={8}>
+                            <Col lg={12} xl={6}>
                                 <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.merchantName" })}>
                                     {
                                         getFieldDecorator('merchantId', {
@@ -56,7 +56,7 @@ class SearchList extends Component{
                             </Col>
                         )}
 
-                        <Col lg={12} xl={8}>
+                        <Col lg={12} xl={6}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.time"})}>
                                 {
                                     getFieldDecorator('time', {
@@ -67,7 +67,22 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col lg={12} xl={8}>
+                        <Col lg={12} xl={6}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.table.leng"})}>
+                                {
+                                    getFieldDecorator('isStatistLeng', {
+                                        initialValue: ''
+                                    })(
+                                        <Select initialValue=''>
+                                            <Select.Option value=""><FormattedMessage id="page.search.list.no.restrict" /></Select.Option>
+                                            {/* <Select.Option value="true"><FormattedMessage id="page.table.yes" /></Select.Option> */}
+                                            <Select.Option value="false"><FormattedMessage id="page.table.no" /></Select.Option>
+                                        </Select>
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                        <Col lg={12} xl={6}>
                             <Form.Item style={{textAlign:'right'}}>
                                 <Button type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /></Button>
                                 <Button type={'danger'} style={{marginLeft:'10px'}} disabled={this.props.btnDisable} onClick={this.retu}><FormattedMessage id="page.table.export" /></Button>

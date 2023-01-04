@@ -6,7 +6,7 @@ const api = {
     orderListData: '/hs/admin/orderOverdue/unDislist',
     getUrgePerson: '/hs/admin/orderOverdue/getDisPerOrGroup',
     distributeOrder: '/hs/admin/orderOverdue/distribution',
-    getOverdueCollector: '/hs/admin/collect-today/stage',
+    getOverdueCollector: '/hs/admin/collect-overdue/stage',
 };
 const getOrderListData = (params) => {
     return axios.post(api.orderListData, params);

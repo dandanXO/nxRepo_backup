@@ -13,12 +13,13 @@ import {injectIntl, FormattedMessage} from "react-intl";
 import {getIsSuperAdmin, getAllMerchants} from "utils";
 
 const convertParams = (obj = {}) => {
-    const { time = [], merchantId = '' } = obj;
+    const { time = [], merchantId = '', isStatistLeng = '' } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     return {
         startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
         endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
-        merchantId
+        merchantId,
+        isStatistLeng
     };
 }
 

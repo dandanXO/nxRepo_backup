@@ -4,5 +4,6 @@ export const  ProColumnsOperationConstant = {
         2: 100,
         3: 135,
         4: 150,
+        5: 180,
     }
 }
