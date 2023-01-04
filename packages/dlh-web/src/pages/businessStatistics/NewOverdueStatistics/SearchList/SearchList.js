@@ -21,7 +21,7 @@ class SearchList extends Component{
         const { form: { getFieldsValue }, handleSearch } = this.props;
         handleSearch(getFieldsValue());
     }
-    
+
     retu = () => {
         const { form: { getFieldsValue }, exportRecord } = this.props;
         exportRecord(getFieldsValue());
@@ -68,22 +68,24 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col lg={12} xl={8}>
+                        {isSuperAdmin && (
+                          <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "windowPage.channel"})}>
-                                {
-                                    getFieldDecorator('channelId', {
-                                        initialValue: ""
-                                    })(
-                                        <Select initialValue=''>
-                                            {channelList.length > 0 && channelList.map((item, i) => {
-                                                var idStr = item.id != '' ? '('+item.id+')' :'';
-                                                return <Select.Option key={i} value={item.id}>{item.name} {idStr}</Select.Option>
-                                            })}
-                                        </Select>
-                                    )
-                                }
+                              {
+                                getFieldDecorator('channelId', {
+                                  initialValue: ""
+                                })(
+                                  <Select initialValue=''>
+                                    {channelList.length > 0 && channelList.map((item, i) => {
+                                      var idStr = item.id != '' ? '('+item.id+')' :'';
+                                      return <Select.Option key={i} value={item.id}>{item.name} {idStr}</Select.Option>
+                                    })}
+                                  </Select>
+                                )
+                              }
                             </Form.Item>
-                        </Col>
+                          </Col>
+                        )}
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.new.old.user"})}>
                                 {
