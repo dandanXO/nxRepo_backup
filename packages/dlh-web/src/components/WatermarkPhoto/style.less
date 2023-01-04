@@ -1,0 +1,33 @@
+.watermark {
+  position: relative;
+  width: 100px;
+}
+
+.watermark__inner {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  left: 0px;
+  position: absolute;
+  top: 0px;
+
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.watermark__body {
+  color: rgba(0,0,0,.4);
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transform: rotate(-23deg);
+  user-select: none;
+}
+
+.watermark__content {
+  img {
+    width: 100%;
+  }
+}
