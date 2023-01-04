@@ -13,6 +13,7 @@ const TabPane = Tabs.TabPane;
 import { convertMoneyFormat, emerRelation, maritalStatus, salaryRange, education, position, repaymentType } from "utils";
 import { axios } from 'utils';
 import { injectIntl, FormattedMessage } from "react-intl";
+import {WatermarkPhoto} from "../../../components/WatermarkPhoto/WatermarkPhoto";
 
 
 class OrderDetail extends Component{
@@ -357,23 +358,23 @@ class OrderDetail extends Component{
                         <Row gutter={96}>
                             <Col className={`${styles.col}`} lg={12} xl={8}>
                                 {
-                                    userInfo['idCardFrontPhoto'] && <img className={styles.imgCol} width={'100%'} src={userInfo['idCardFrontPhoto']}/>
+                                    userInfo['idCardFrontPhoto'] && <WatermarkPhoto className={styles.imgCol} width={'100%'} src={userInfo['idCardFrontPhoto']}/>
                                 }
                             </Col>
                             <Col className={`${styles.col}`} lg={12} xl={8}>
                                 {
-                                    userInfo['idCardBackPhoto'] && <img className={styles.imgCol} width={'100%'} src={userInfo['idCardBackPhoto']}/>
+                                  userInfo['idCardBackPhoto'] && <WatermarkPhoto className={styles.imgCol} width={'100%'} src={userInfo['idCardBackPhoto']}/>
                                 }
 
                             </Col>
                             <Col className={`${styles.col}`} lg={12} xl={8}>
                                 {
-                                    userInfo['idCardPhoto'] && <img className={styles.imgCol} width={'100%'} src={userInfo['idCardPhoto']}/>
+                                  userInfo['idCardPhoto'] && <WatermarkPhoto className={styles.imgCol} width={'100%'} src={userInfo['idCardPhoto']}/>
                                 }
                             </Col>
                             <Col className={`${styles.col}`} lg={12} xl={8}>
                                 {
-                                    userInfo['panPhoto'] && <img className={styles.imgCol} width={'100%'} src={userInfo['panPhoto']}/>
+                                  userInfo['panPhoto'] && <WatermarkPhoto className={styles.imgCol} width={'100%'} src={userInfo['panPhoto']}/>
                                 }
                             </Col>
                         </Row>
