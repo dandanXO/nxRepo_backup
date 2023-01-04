@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, DatePicker, Row, Col, Button, Select } from 'antd';
+import {Form, DatePicker, Row, Col, Button, Select, Checkbox} from 'antd';
 import {injectIntl, FormattedMessage} from "react-intl";
 
 const { RangePicker } = DatePicker;
@@ -67,20 +67,15 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col lg={12} xl={6}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.table.leng"})}>
-                                {
-                                    getFieldDecorator('isStatistLeng', {
-                                        initialValue: ''
-                                    })(
-                                        <Select initialValue=''>
-                                            <Select.Option value=""><FormattedMessage id="page.search.list.no.restrict" /></Select.Option>
-                                            {/* <Select.Option value="true"><FormattedMessage id="page.table.yes" /></Select.Option> */}
-                                            <Select.Option value="false"><FormattedMessage id="page.table.no" /></Select.Option>
-                                        </Select>
-                                    )
-                                }
-                            </Form.Item>
+                        <Col lg={12} xl={8}>
+                          <Form.Item {...formItemLayout} label={intl.formatMessage({id:"page.search.list.extend.statis" })}>
+                            {
+                              getFieldDecorator('isStatistLeng', {
+                              })(
+                                <Checkbox></Checkbox>
+                              )
+                            }
+                          </Form.Item>
                         </Col>
                         <Col lg={12} xl={6}>
                             <Form.Item style={{textAlign:'right'}}>
