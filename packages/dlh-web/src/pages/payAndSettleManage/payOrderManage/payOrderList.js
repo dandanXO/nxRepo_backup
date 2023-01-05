@@ -305,11 +305,23 @@ class PayOrderList extends Component {
         message.success(this.props.intl.formatMessage({id : "page.table.copy.success"}), 2);
     }
 
+    convertParams = (obj) => {
+        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime, dlhMerchantId = '' } = obj;
+        const isTimeArr = Array.isArray(time) && time.length > 0;
+        const isfinishTimeArr = Array.isArray(finishTime) && finishTime.length > 0;
+        let startDate = isTimeArr ? time[0].format('YYYY-MM-DD 00:00:00') : '';
+        let endDate = isTimeArr ? time[1].format('YYYY-MM-DD 23:59:59') : '';
+        let startFinishDate = isfinishTimeArr ? finishTime[0].format('YYYY-MM-DD 00:00:00') : '';
+        let endFinishDate = isfinishTimeArr ? finishTime[1].format('YYYY-MM-DD 23:59:59') : '';
+        return { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, dlhMerchantId, pageSize: 10, pageNum: 1 };
+    }
+
     //导出支付订单
-    exportPayOrder = () => {
+    exportPayOrder = (obj) => {
+        const { getTableData } = this.props;
         this.setState({btnDisabled: true});
         let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
-        const params = { ...this.searchParams, pageNum:1, pageSize:1000000 };
+        const params = { ...this.convertParams(obj), pageNum:1, pageSize:1000000 };
         axios({
             url: '/hs/payCenter/downLoadPayOrder',
             method: 'post',
@@ -318,6 +330,7 @@ class PayOrderList extends Component {
         }).then((res) => {
             hide && hide();
             this.setState({btnDisabled: false});
+            getTableData({...params, pageNum:1, pageSize:10})
             download(res, this.props.intl.formatMessage({id : "page.table.payment.list.export"}, {expDate : Date.now()}));
         }).catch(() => {
             hide && hide();
@@ -393,16 +406,8 @@ class PayOrderList extends Component {
     }
 
     handleSearch = (obj) => {
-        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime, dlhMerchantId='' } = obj;
         const { getTableData } = this.props;
-        const isTimeArr = Array.isArray(time) && time.length > 0;
-        const isfinishTimeArr = Array.isArray(finishTime) && finishTime.length > 0;
-        let startDate = isTimeArr ? time[0].format('YYYY-MM-DD 00:00:00') : '';
-        let endDate = isTimeArr ? time[1].format('YYYY-MM-DD 23:59:59') : '';
-        let startFinishDate = isfinishTimeArr ? finishTime[0].format('YYYY-MM-DD 00:00:00') : ''; 
-        let endFinishDate = isfinishTimeArr ? finishTime[1].format('YYYY-MM-DD 23:59:59') : '';
-       
-        this.searchParams =  { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, dlhMerchantId, pageSize: 10, pageNum: 1 };
+        this.searchParams = this.convertParams(obj)
         getTableData(this.searchParams);
     }
 
@@ -484,8 +489,9 @@ class PayOrderList extends Component {
                     handleSearch={this.handleSearch}
                     isSuperAdmin={this.state.isSuperAdmin}
                     allMerchants={this.state.allMerchants}
+                    exportPayOrder={this.exportPayOrder}
+                    btnDisabled={btnDisabled}
                 />
-                <Button type={'danger'} disabled={btnDisabled} onClick={this.exportPayOrder}><FormattedMessage id="page.table.export" /></Button>
                 <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading} bordered  />
                 <EditModel visible={visible} allPayPlatList={allPayPlatList} allPayTypeList={allPayTypeList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk}/>
             </div>

@@ -22,6 +22,10 @@ class SearchList extends Component{
         // const { visible,allPayPlatList,allPayTypeList, form: { getFieldDecorator,getFieldsValue } } = this.props;
         handleSearch(getFieldsValue());
     }
+    handleExport = () => {
+        const { exportPayOrder, form: { getFieldsValue } } = this.props;
+        exportPayOrder(getFieldsValue());
+    }
 
     renderMerchants = () => {
         const { allMerchants } = this.props;
@@ -32,7 +36,7 @@ class SearchList extends Component{
   
 
     render() {
-        const { allPayPlatList, allPayMchList, OrderStatus, form: { getFieldDecorator }, intl, isSuperAdmin, initTime } = this.props;
+        const { allPayPlatList, allPayMchList, OrderStatus, form: { getFieldDecorator }, intl, isSuperAdmin, initTime ,btnDisabled} = this.props;
         let statusList = [];
         for(let key in OrderStatus){
             statusList.push({key:key,label:OrderStatus[key]});
@@ -192,9 +196,12 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-
-                        <Col lg={36} xl={24} style={{textAlign:'right'}}>
-                                <Button onClick={this.handleClick} type={'primary'}><FormattedMessage id="page.search.list.search" /></Button>
+                      
+                        <Col lg={36} xl={24} style={{ textAlign: 'right' }}>
+                            <Button onClick={this.handleClick} type={'primary'}><FormattedMessage id="page.search.list.search" /></Button>
+                        </Col>
+                        <Col lg={36} xl={24} style={{ textAlign: 'left' }}>
+                            <Button type={'danger'} disabled={btnDisabled} onClick={this.handleExport}><FormattedMessage id="page.table.export" /></Button>
                         </Col>
 
                     </Row>
