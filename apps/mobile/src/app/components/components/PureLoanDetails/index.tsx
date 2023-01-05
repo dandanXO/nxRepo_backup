@@ -14,6 +14,7 @@ import {i18nComponents} from "../i18n/translations";
 import {useTranslation} from "react-i18next";
 import RepaymentAdsModal from "../../pages/LoanDetailsPage/modal/RepaymentAdsModal";
 import {environment} from "../../../../environments/environment";
+import {I18nRepaymentStepsModal} from "../../pages/LoanDetailsPage/modal/RepaymentStepsModal";
 
 const StyledUploadReceiptSection = styled.div`
   .uploadButton {
@@ -46,9 +47,9 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     const [showAmountPaidModal, setShowAmountPaidModal] = useState(false);
     const [showRepaymentModal, setShowRepaymentModal] = useState(false);
-    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] =
-        useState(false);
+    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] = useState(false);
     const [showRepaymentAdsModal, setShowRepaymentAdsModal] = useState(false);
+    const [showRepaymentSteps, setShowRepaymentSteps] = useState(false);
 
     const [repayBalance, setRepayBalance] = useState(
         props?.currentData?.balance
@@ -63,6 +64,19 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     setBalanceValue(String(`${environment.currency}` + props.currentData?.balance));
   }, [props.currentData]);
 
+  const [payload, setPayload] = useState<{
+    isExtend: boolean;
+    isForceApplyAfterRepay: boolean;
+    repayAmount: number;
+  }>()
+  const repayUseCase = (isExtend: boolean, isForceApplyAfterRepay: boolean, repayAmount: number) => {
+    setPayload({
+      isExtend,
+      isForceApplyAfterRepay,
+      repayAmount,
+    })
+    setShowRepaymentSteps(true);
+  }
 
     return (
       <CustomPage>
@@ -71,7 +85,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
             <ExtendModal
               setShowExtendModal={setShowExtendModal}
               {...props.currentData}
-              handlePostRepayCreate={props.handlePostRepayCreate}
+              handlePostRepayCreate={repayUseCase}
             />
           )}
           {showExtensionModal && (
@@ -86,6 +100,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               setShowAmountPaidModal={setShowAmountPaidModal}
             />
           )}
+          {/*還款流程*/}
           {showRepaymentModal && (
             <RepaymentModal
               balance={props.currentData?.balance}
@@ -102,20 +117,35 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               setShowRepaymentAdsModal={setShowRepaymentAdsModal}
             />
           )}
+          {/*還款再借款廣告*/}
           {showRepaymentAdsModal && (
             <RepaymentAdsModal
               balance={balanceValue}
-              handlePostRepayCreate={props.handlePostRepayCreate}
+              handlePostRepayCreate={repayUseCase}
               setShowRepaymentAdsModal={setShowRepaymentAdsModal}
               setShowRepaymentModal={setShowRepaymentModal}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
             />
           )}
+          {/*還款再借款須知*/}
           {showRepaymentNoticeModal && (
             <RepaymentNoticeModal
               balance={repayBalance || 0}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
-              handlePostRepayCreate={props.handlePostRepayCreate}
+              handlePostRepayCreate={repayUseCase}
+            />
+          )}
+
+          {showRepaymentSteps && (
+            <I18nRepaymentStepsModal
+              setShowRepaymentSteps={setShowRepaymentSteps}
+              onConfirmCallback={() => {
+                props.handlePostRepayCreate(
+                  payload?.isExtend,
+                  payload?.isForceApplyAfterRepay,
+                  payload?.repayAmount
+                )
+              }}
             />
           )}
 

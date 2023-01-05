@@ -6,10 +6,11 @@ import {useTranslation} from "react-i18next";
 import {i18nRepaymentAdsModal} from "./i18n/translations";
 import {environment} from "../../../../../../environments/environment";
 import GiftICONPng from "./limited_time_offer.png";
-import CloseICONPng from "./limited_time_offer_icon.png";
+import CloseICONPng from "../../../../components/CloseICON/limited_time_offer_icon.png";
 import moment from "moment";
 import {RepayAndApplyButton, RepaymentButton, RepaymentModalContainer, SectionButton} from "../RepaymentModal";
 import {useLockRequest} from "../../../../../hooks/useLockRequest";
+import {CloseICON} from "../../../../components/CloseICON";
 
 const Brand = styled.div`
   width: 100%;
@@ -24,12 +25,6 @@ const GiftICON = styled.img`
   width: 87%;
   top: -82px;
   left: -10px;
-`;
-const CloseICON = styled.img`
-  position: relative;
-  width: 27px;
-  top: -183px;
-  right: -284px;
 `;
 
 const BrandContent = styled.div`
