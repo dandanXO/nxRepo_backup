@@ -17,10 +17,16 @@ class SearchList extends Component{
 
         };
     }
+    
     handleClick = () => {
         const { handleSearch, form: { getFieldsValue } } = this.props;
         // const { visible,allSettlePlatList,allSettleTypeList, form: { getFieldDecorator,getFieldsValue } } = this.props;
         handleSearch(getFieldsValue());
+    }
+
+    handleExport = () => {
+        const { exportSettleOrder, form: { getFieldsValue } } = this.props;
+        exportSettleOrder(getFieldsValue())
     }
 
     renderMerchants = () => {
@@ -30,8 +36,10 @@ class SearchList extends Component{
         return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
 
+
+
     render() {
-        const { allSettlePlatList, allSettleMchList, OrderStatus, form: { getFieldDecorator }, intl, isSuperAdmin ,initTime} = this.props;
+        const { allSettlePlatList, allSettleMchList, OrderStatus, form: { getFieldDecorator }, intl, isSuperAdmin ,initTime,btnDisabled} = this.props;
         let statusList = [];
         for(let key in OrderStatus){
             statusList.push({key:key,label:OrderStatus[key]});
@@ -191,8 +199,11 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
 
-                        <Col lg={36} xl={24} style={{textAlign:'right'}}>
-                                <Button onClick={this.handleClick} type={'primary'}><FormattedMessage id="page.search.list.search" /></Button>
+                        <Col lg={36} xl={24} style={{ textAlign: 'right' }}>
+                            <Button onClick={this.handleClick} type={'primary'}><FormattedMessage id="page.search.list.search" /></Button>
+                        </Col>
+                        <Col lg={36} xl={24} style={{ textAlign: 'left' }}>
+                            <Button type={'danger'} disabled={btnDisabled} onClick={this.handleExport}><FormattedMessage id="page.table.export" /></Button>
                         </Col>
 
                     </Row>
