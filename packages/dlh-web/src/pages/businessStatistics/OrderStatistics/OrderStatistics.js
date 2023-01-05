@@ -33,7 +33,6 @@ class OrderStatistics extends Component {
             isSuperAdmin,
             allMerchants
         };
-        this.pageSize = 50;
         this.searchParams = convertParams();
         this.columns = [
             {
@@ -110,12 +109,12 @@ class OrderStatistics extends Component {
         const params = convertParams(obj);
         this.searchParams = params;
         const { getTableData } = this.props;
-        getTableData({ ...params, pageSize: this.pageSize, pageNum: 1 });
+        getTableData({ ...params, pageSize: 10, pageNum: 1 });
     }
 
     componentDidMount() {
         const { getTableData } = this.props;
-        getTableData({ pageSize: this.pageSize, pageNum: 1, ...this.searchParams });
+        // getTableData({ pageSize: 10, pageNum: 1, ...this.searchParams });
     }
 
     componentWillUnmount() {
@@ -156,7 +155,6 @@ class OrderStatistics extends Component {
                     columns={this.columns}
                     dataSource={data}
                     pagination={pagination}
-                    pageSize={50}
                     loading={loading}
                     handlePageChange={this.handlePageChange}
                 />
