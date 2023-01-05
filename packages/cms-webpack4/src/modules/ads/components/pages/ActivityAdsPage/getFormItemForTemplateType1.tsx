@@ -145,9 +145,9 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                                                 if (action == "POP_URL") {
                                                                     return (
                                                                         <Form.Item name={[name, 'actionUrl']}
-                                                                                   label="目標網址"
+                                                                                   label="目标网址"
                                                                                    rules={[{required: true}]}>
-                                                                            <Input placeholder="目標網址"/>
+                                                                            <Input placeholder="目标网址"/>
                                                                         </Form.Item>
                                                                     )
                                                                 } else {

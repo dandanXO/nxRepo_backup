@@ -86,10 +86,10 @@ export const getFormItemForTemplateType3 = (templateType: number, ads?: Activity
                                                 return (
                                                     <Form.Item
                                                         name={[0, 'actionUrl']}
-                                                        label="目標網址"
+                                                        label="目标网址"
                                                         rules={[{required: true}]}
                                                     >
-                                                        <Input placeholder="目標網址"/>
+                                                        <Input placeholder="目标网址"/>
                                                     </Form.Item>
                                                 )
                                             } else {
@@ -166,9 +166,9 @@ export const getFormItemForTemplateType3 = (templateType: number, ads?: Activity
                                                         >
                                                             <Select>
                                                                 <Select.Option
-                                                                    value="APPLY_LOAN">跳轉至付款頁</Select.Option>
+                                                                    value="APPLY_LOAN">跳转至借款页</Select.Option>
                                                                 <Select.Option
-                                                                    value="POP_URL">跳轉至自定義網址</Select.Option>
+                                                                    value="POP_URL">跳转至自定义网址</Select.Option>
                                                             </Select>
                                                         </Form.Item>
                                                     </Col>
@@ -189,9 +189,9 @@ export const getFormItemForTemplateType3 = (templateType: number, ads?: Activity
                                                                 if (action == "POP_URL") {
                                                                     return (
                                                                         <Form.Item name={[name, 'actionUrl']}
-                                                                                   label="目標網址"
+                                                                                   label="目标网址"
                                                                                    rules={[{required: true}]}>
-                                                                            <Input placeholder="目標網址"/>
+                                                                            <Input placeholder="目标网址"/>
                                                                         </Form.Item>
                                                                     )
                                                                 } else {
