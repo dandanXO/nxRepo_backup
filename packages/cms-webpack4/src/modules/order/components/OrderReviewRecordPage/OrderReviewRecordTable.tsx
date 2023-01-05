@@ -57,6 +57,7 @@ const OrderReviewRecordTable = () => {
 
       const statusEnum =  appInfo.COUNTRY !== 'Bangladesh' ? {
         '': { text: '不限' },
+        '0': { text: '机审异常', color: 'lightgray' },
         '1': { text: '机审通过', color: 'blue' },
         '2': { text: '机审拒绝', color: 'orange' },
         '6': { text: '审核通过', color: 'green' },
@@ -64,6 +65,7 @@ const OrderReviewRecordTable = () => {
         '8': { text: '放款拒绝', color: 'lightgray' },
     }:{
         '': { text: '不限' },
+        '0': { text: '机审异常', color: 'lightgray' },
         '1': { text: '机审通过', color: 'blue' },
         '2': { text: '机审拒绝', color: 'orange' },
         '3': { text: '复审通过', color: 'lime' },
