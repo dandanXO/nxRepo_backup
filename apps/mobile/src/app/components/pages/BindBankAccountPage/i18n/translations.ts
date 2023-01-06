@@ -80,8 +80,8 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Wallet Account Number": "ওয়ালেট অ্যাকাউন্ট নম্বর",
 
 
-      "Your mobile wallet number": "১। তোমার মোবাইল ওয়ালেট নম্বর",
-      "Confirm your number": "২। তোমার নম্বরটি কনফার্ম করো ",
+      "Your mobile wallet number": "১। আপনার মোবাইল ওয়ালেট নম্বর",
+      "Confirm your number": "২। আপনার নম্বরটি নিশ্চিত করুন",
       "Phone number should be 10 digits.": "ফোন নম্বরটি 10 ​​সংখ্যার হওয়া উচিত।",
       "Please make sure your mobile number match.": "আপনার মোবাইল নম্বর মেলে তা নিশ্চিত করুন.",
 
