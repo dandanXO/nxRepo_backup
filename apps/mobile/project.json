@@ -101,12 +101,101 @@
             }
         },
         "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "defaultConfiguration": "development",
+          "options": {
+            "buildTarget": "mobile:build",
+            "hmr": true,
+            "proxyConfig": "apps/mobile/proxy.config.pk.json"
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "mobile:build:development"
+            },
+            "production": {
+              "buildTarget": "mobile:build:production",
+              "hmr": false
+            },
+            "development-in": {
+              "buildTarget": "mobile:build:development-in"
+            },
+            "production-in": {
+              "buildTarget": "mobile:build:production-in",
+              "hmr": false
+            },
+            "development-pk": {
+              "buildTarget": "mobile:build:development-pk"
+            },
+            "production-pk": {
+              "buildTarget": "mobile:build:production-pk",
+              "hmr": false
+            },
+            "development-bd": {
+              "buildTarget": "mobile:build:development-bd"
+            },
+            "production-bd": {
+              "buildTarget": "mobile:build:production-bd",
+              "hmr": false
+            }
+          }
+        },
+        "serve:pk": {
+          "executor": "@nrwl/web:dev-server",
+          "defaultConfiguration": "development",
+          "options": {
+            "buildTarget": "mobile:build",
+            "hmr": true,
+            "proxyConfig": "apps/mobile/proxy.config.in.json"
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "mobile:build:development"
+            },
+            "production": {
+              "buildTarget": "mobile:build:production",
+              "hmr": false
+            },
+            "development-pk": {
+              "buildTarget": "mobile:build:development-in"
+            },
+            "production-pk": {
+              "buildTarget": "mobile:build:production-in",
+              "hmr": false
+            }
+          }
+        },
+        "serve:bd": {
+          "executor": "@nrwl/web:dev-server",
+          "defaultConfiguration": "development",
+          "options": {
+            "buildTarget": "mobile:build",
+            "hmr": true,
+            "proxyConfig": "apps/mobile/proxy.config.bd.json"
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "mobile:build:development"
+            },
+            "production": {
+              "buildTarget": "mobile:build:production",
+              "hmr": false
+            },
+            "development-bd": {
+              "buildTarget": "mobile:build:development-bd"
+            },
+            "production-bd": {
+              "buildTarget": "mobile:build:production-bd",
+              "hmr": false
+            }
+          }
+        },
+        "serve:pk": {
             "executor": "@nrwl/web:dev-server",
             "defaultConfiguration": "development",
             "options": {
                 "buildTarget": "mobile:build",
                 "hmr": true,
-                "proxyConfig": "apps/mobile/proxy.config.in.json"
+                "proxyConfig": "apps/mobile/proxy.config.pk.json"
             },
             "configurations": {
                 "development": {
@@ -116,26 +205,12 @@
                     "buildTarget": "mobile:build:production",
                     "hmr": false
                 },
-                "development-in": {
-                    "buildTarget": "mobile:build:development-in"
-                },
-                "production-in": {
-                    "buildTarget": "mobile:build:production-in",
-                    "hmr": false
-                },
                 "development-pk": {
                     "buildTarget": "mobile:build:development-pk"
                 },
                 "production-pk": {
                     "buildTarget": "mobile:build:production-pk",
                     "hmr": false
-                },
-                "development-pd": {
-                  "buildTarget": "mobile:build:development-pd"
-                },
-                "production-pd": {
-                  "buildTarget": "mobile:build:production-pd",
-                  "hmr": false
                 }
             }
         },
