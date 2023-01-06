@@ -84,27 +84,16 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
     const {t} = useTranslation(i18nRepaymentAdsModal.namespace);
 
     const handleConfirm = () => {
-      if(isRequestPending("handlePostRepayCreate")) {
-        return;
-      } else {
-        startRequest("handlePostRepayCreate");
-      }
-
       const formBalanceValue = Number(props.balance.replace(`${environment.currency}`, ""));
       // console.log("formBalanceValue", formBalanceValue);
       if(formBalanceValue === 0) return
-
       props.handlePostRepayCreate(
         false,
         false,
         formBalanceValue
-      ).then(() => {
-        props.setShowRepaymentAdsModal(false);
-      }).finally(() => {
-        endRequest("handlePostRepayCreate");
-      })
-
+      )
     };
+
     const longTitle = useMemo(() => {
       const index = Math.floor(Math.random()*2);
       const titles = [
@@ -178,7 +167,7 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                 </BrandContent>
                               </Brand>
 
-                              <ButtonContainer t={t} handleConfirm={handleConfirm} setShowRepaymentNoticeModal={props.setShowRepaymentNoticeModal}/>
+                              <ButtonContainer t={t} handleConfirm={handleConfirm} setShowRepaymentNoticeModal={props.setShowRepaymentNoticeModal} setShowRepaymentAdsModal={props.setShowRepaymentAdsModal}/>
                           </SectionButton>
                         </RepaymentModalContainer>
                     );
@@ -192,6 +181,7 @@ interface IButtonContainer {
   handleConfirm: any;
   t: any;
   setShowRepaymentNoticeModal: any;
+  setShowRepaymentAdsModal: any;
 }
 const ButtonContainer = (props: IButtonContainer) => {
   return (
@@ -202,9 +192,8 @@ const ButtonContainer = (props: IButtonContainer) => {
       <UniversalRepayAndApplyButton
         onClick={() => {
           // NOTE: self
-          props.setShowRepaymentNoticeModal(
-            true
-          );
+          props.setShowRepaymentNoticeModal(true);
+          props.setShowRepaymentAdsModal(false);
         }}
       >
         <RepayICON />{props.t("Repay and Apply Again")}

@@ -15,6 +15,7 @@ import {useTranslation} from "react-i18next";
 import RepaymentAdsModal from "../../pages/LoanDetailsPage/modal/RepaymentAdsModal";
 import {environment} from "../../../../environments/environment";
 import {I18nRepaymentStepsModal} from "../../pages/LoanDetailsPage/modal/RepaymentStepsModal";
+import {useLockRequest} from "../../../hooks/useLockRequest";
 
 const StyledUploadReceiptSection = styled.div`
   .uploadButton {
@@ -78,6 +79,8 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     setShowRepaymentSteps(true);
   }
 
+  const {startRequest, endRequest, isRequestPending} = useLockRequest("handlePostRepayCreate");
+
     return (
       <CustomPage>
         <React.Fragment>
@@ -139,12 +142,29 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
           {showRepaymentSteps && (
             <I18nRepaymentStepsModal
               setShowRepaymentSteps={setShowRepaymentSteps}
+              onCancel={() => {
+                setShowRepaymentSteps(false);
+                if(payload?.isForceApplyAfterRepay) {
+                  setShowRepaymentNoticeModal(true);
+                }
+              }}
               onConfirmCallback={() => {
+
+                if(isRequestPending("handlePostRepayCreate")) {
+                  return;
+                } else {
+                  startRequest("handlePostRepayCreate");
+                }
+
                 props.handlePostRepayCreate(
                   payload?.isExtend,
                   payload?.isForceApplyAfterRepay,
                   payload?.repayAmount
-                )
+                ).then(() => {
+                  setShowRepaymentAdsModal(false);
+                }).finally(() => {
+                  endRequest("handlePostRepayCreate");
+                })
               }}
             />
           )}

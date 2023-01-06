@@ -6,7 +6,7 @@ const Content = styled.div<{contentNoStyle?: boolean}>`
   /* Margin */
   //margin: 10px;
   /* NOTICE: 最大尺寸 */
-  max-width: 400px;
+  max-width: 320px;
   //height: 80px;
   /* Padding */
   padding: ${(props) => props.contentNoStyle ? 0 : "10px"};
