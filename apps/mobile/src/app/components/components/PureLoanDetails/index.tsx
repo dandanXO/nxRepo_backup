@@ -70,13 +70,41 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     isForceApplyAfterRepay: boolean;
     repayAmount: number;
   }>()
+
+  //NOTE: 設定還款參數
   const repayUseCase = (isExtend: boolean, isForceApplyAfterRepay: boolean, repayAmount: number) => {
     setPayload({
       isExtend,
       isForceApplyAfterRepay,
       repayAmount,
     })
-    setShowRepaymentSteps(true);
+    if(!isForceApplyAfterRepay) {
+      setShowRepaymentSteps(true);
+    }
+  }
+  //NOTE: 執行還款
+  const repaymentUseCase = () => {
+    if(isRequestPending("handlePostRepayCreate")) {
+      return;
+    } else {
+      startRequest("handlePostRepayCreate");
+    }
+    setShowRepaymentSteps(false);
+    setShowRepaymentAdsModal(false);
+
+    props.handlePostRepayCreate(
+      payload?.isExtend,
+      payload?.isForceApplyAfterRepay,
+      payload?.repayAmount
+    ).then(() => {
+      //
+    }).catch(() => {
+      // setShowRepaymentAdsModal(true);
+      // setShowRepaymentSteps(true);
+    }).finally(() => {
+      endRequest("handlePostRepayCreate");
+      // setPayload({});
+    })
   }
 
   const {startRequest, endRequest, isRequestPending} = useLockRequest("handlePostRepayCreate");
@@ -123,10 +151,11 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
           {/*還款再借款廣告*/}
           {showRepaymentAdsModal && (
             <RepaymentAdsModal
+              setShowRepaymentModal={setShowRepaymentModal}
               balance={balanceValue}
               handlePostRepayCreate={repayUseCase}
               setShowRepaymentAdsModal={setShowRepaymentAdsModal}
-              setShowRepaymentModal={setShowRepaymentModal}
+              // setShowRepaymentModal={setShowRepaymentModal}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
             />
           )}
@@ -136,6 +165,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               balance={repayBalance || 0}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
               handlePostRepayCreate={repayUseCase}
+              repaymentUseCase={repaymentUseCase}
             />
           )}
 
@@ -148,27 +178,9 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
                   setShowRepaymentNoticeModal(true);
                 }
               }}
-              onConfirmCallback={() => {
-
-                if(isRequestPending("handlePostRepayCreate")) {
-                  return;
-                } else {
-                  startRequest("handlePostRepayCreate");
-                }
-
-                props.handlePostRepayCreate(
-                  payload?.isExtend,
-                  payload?.isForceApplyAfterRepay,
-                  payload?.repayAmount
-                ).then(() => {
-                  setShowRepaymentAdsModal(false);
-                }).finally(() => {
-                  endRequest("handlePostRepayCreate");
-                })
-              }}
+              onConfirmCallback={repaymentUseCase}
             />
           )}
-
 
           <LoanInfo
             {...props.currentData}

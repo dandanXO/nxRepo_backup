@@ -129,7 +129,6 @@ const RepaymentStepsModal = (props: I18nRepaymentStepsModalProps) => {
           </StyledContainer>
           <ButtonGroup>
             <PrimaryButton onClick={() => {
-              props.setShowRepaymentSteps(false);
               props.onConfirmCallback();
             }}>{t("Next")}</PrimaryButton>
           </ButtonGroup>
