@@ -11,11 +11,13 @@ type IUseFinishedBindBankAccountPage =  {
   bankcardNoData: InputValue<string>;
 
   // NOTICE: India
+  isLoadingPostBankBindSave?: boolean;
   postBankBindSave?: any;
   ifscData?: InputValue<string>;
   upiData?: InputValue<string>;
 
   // NOTICE: Pakistan
+  isLoadingPostBankBindSaveToPK?: boolean;
   postBankBindSaveToPK?: any;
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
@@ -26,14 +28,10 @@ type IUseFinishedBindBankAccountPage =  {
 export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
-  // NOTE: Form
-  const [isFormPending, setIsFormPending] = useState<boolean>(false);
-
   const navigateToAPP = useCallback(() => window.location.href = "innerh5://127.0.0.1", []);
 
   const confirm = useCallback(() => {
-    console.log("confirm")
-    setIsFormPending(true);
+    if(props.isLoadingPostBankBindSaveToPK) return;
 
     // NOTE: FormRequest
     let request;
@@ -71,11 +69,8 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
       request = props
         .postBankBindSaveToPK(requestBody)
     }
-
-    console.log("data!!!!");
     request.unwrap()
       .then((data: any) => {
-        console.log("data:", data);
         // Notice: bind account successfully
         Modal.alert({
           show: true,
@@ -97,10 +92,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         if(err) error.message = JSON.stringify(err)
         Sentry.captureException(error);
       })
-      .finally(() => {
-        console.log("bind-finally")
-        setIsFormPending(false);
-      });
+
 
   }, [
     props.postBankBindSave,
@@ -109,11 +101,13 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
     props.bankcardNoData.data,
     props.upiData && props.upiData.data,
     props.bindCardDropListData?.availableBanks,
-    props.bankAccountValue
+    props.bankAccountValue,
+    props.isLoadingPostBankBindSave,
+    props.isLoadingPostBankBindSaveToPK,
   ]);
 
   return {
-    isFormPending,
+    isFormPending: props.postBankBindSave ? props.isLoadingPostBankBindSave : props.isLoadingPostBankBindSaveToPK,
     confirm,
   }
 

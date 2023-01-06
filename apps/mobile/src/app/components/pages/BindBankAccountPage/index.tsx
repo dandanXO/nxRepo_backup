@@ -23,11 +23,11 @@ const BindBankAccountPage = () => {
 
     // NOTICE: India
     // NOTE: 綁定銀行卡
-    const [postBankBindSave] = usePostBankBindSaveMutation();
+    const [postBankBindSave, { isLoading: isLoadingPostBankBindSave}] = usePostBankBindSaveMutation();
 
     // NOTICE: Pakistan
     // NOTE: 綁定銀行卡
-    const [postBankBindSaveToPK] = usePostBankBindSaveToPKMutation();
+    const [postBankBindSaveToPK, { isLoading: isLoadingPostBankBindSaveToPK}] = usePostBankBindSaveToPKMutation();
 
     // NOTICE: Bangladesh
     // NOTE: 綁定手機
@@ -46,12 +46,14 @@ const BindBankAccountPage = () => {
       // NOTICE: default 0 index
       [IndiaCountry.country]: (
         <IndiaBindBankAccountPage
+          isLoadingPostBankBindSave={isLoadingPostBankBindSave}
           postBankBindSave={postBankBindSave}
           cardholderName={cardholderName ?? ""}
         />
       ),
       [PakistanCountry.country]: (
         <PakistanBindBankAccountPage
+          isLoadingPostBankBindSaveToPK={isLoadingPostBankBindSaveToPK}
           postBankBindSaveToPK={postBankBindSaveToPK}
           isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
           triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
@@ -68,6 +70,7 @@ const BindBankAccountPage = () => {
       )
     }, (
       <IndiaBindBankAccountPage
+        isLoadingPostBankBindSave={isLoadingPostBankBindSave}
         postBankBindSave={postBankBindSave}
         cardholderName={cardholderName ?? ""}
       />
