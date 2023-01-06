@@ -38,6 +38,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bankcardNoData,
 
     // NOTICE: India
+    isLoadingPostBankBindSave: props.isLoadingPostBankBindSave || false,
     postBankBindSave: props.postBankBindSave,
     ifscData,
     upiData,
@@ -63,7 +64,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                          onConfirmAccountNumberChange={onConfirmAccountNumberChange}
                          onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
                          upiData={upiData} onUPIIDChange={onUPIIDChange}
-                         isFormPending={isFormPending}
+                         isFormPending={isFormPending || false}
                          confirm={() => {
                            if(validateCommonForm() && validateIndiaForm()) {
                              confirm();
