@@ -5,7 +5,10 @@ export type IUseBindBankAccountPage = {
   // NOTE: 綁定
   cardholderName: string;
 
+  isLoadingPostBankBindSave?: boolean;
   postBankBindSave?: (requestBody: PostBankBindSaveRequest) => any;
+
+  isLoadingPostBankBindSaveToPK?: boolean;
   postBankBindSaveToPK?: (requestBody: PostPKBankBindSaveRequest) => any;
 
   // NOTE: 電子錢包
@@ -17,6 +20,7 @@ export type IUseBindBankAccountPage = {
   bindCardDropListData?: GetBindCardDropListResponse;
 
   triggerGetBindCardDropListQuery?: any;
+
 }
 
 export type IPakistanUseBindBankAccountPage = {

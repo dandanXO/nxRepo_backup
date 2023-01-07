@@ -351,11 +351,23 @@ class SettleOrderList extends Component {
         message.success(this.props.intl.formatMessage({id : "page.table.copy.success"}), 2);
     }
 
+    convertParams = (obj) => {
+        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime, dlhMerchantId = '' } = obj;
+        const isTimeArr = Array.isArray(time) && time.length > 0;
+        const isfinishTimeArr = Array.isArray(finishTime) && finishTime.length > 0;
+        let startDate = isTimeArr ? time[0].format('YYYY-MM-DD 00:00:00') : '';
+        let endDate = isTimeArr ? time[1].format('YYYY-MM-DD 23:59:59') : '';
+        let startFinishDate = isfinishTimeArr ? finishTime[0].format('YYYY-MM-DD 00:00:00') : '';
+        let endFinishDate = isfinishTimeArr ? finishTime[1].format('YYYY-MM-DD 23:59:59') : '';
+
+        return { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, dlhMerchantId, pageSize: 10, pageNum: 1 };
+    }
     //导出代付订单
-    exportSettleOrder = () => {
-        this.setState({btnDisabled: true});
-        let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
-        const params = { ...this.searchParams, pageNum:1, pageSize:1000000 };
+    exportSettleOrder = (obj) => {
+        const { getTableData } = this.props;
+        this.setState({ btnDisabled: true });
+        let hide = message.loading(this.props.intl.formatMessage({ id: "page.table.exporting" }), 0);
+        const params = { ...this.convertParams(obj), pageNum:1, pageSize:1000000 };
         axios({
             url: '/hs/payCenter/downLoadSettleOrder',
             method: 'post',
@@ -364,7 +376,9 @@ class SettleOrderList extends Component {
         }).then((res) => {
             hide && hide();
             this.setState({btnDisabled: false});
+            getTableData({ ...params, pageNum:1, pageSize:10 });
             download(res, this.props.intl.formatMessage({id : "page.table.substitute.order.list"}, {expDate : Date.now()}));
+         
         }).catch(() => {
             hide && hide();
             this.setState({btnDisabled: false});
@@ -441,25 +455,16 @@ class SettleOrderList extends Component {
     }
 
     handleSearch = (obj) => {
-        let { time, orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, productName, finishTime, dlhMerchantId = '' } = obj;
         const { getTableData } = this.props;
-        const isTimeArr = Array.isArray(time) && time.length > 0;
-        const isfinishTimeArr = Array.isArray(finishTime) && finishTime.length > 0;
-        let startDate = isTimeArr ? time[0].format('YYYY-MM-DD 00:00:00') : '';
-        let endDate = isTimeArr ? time[1].format('YYYY-MM-DD 23:59:59') : '';
-        let startFinishDate = isfinishTimeArr ? finishTime[0].format('YYYY-MM-DD 00:00:00') : ''; 
-        let endFinishDate = isfinishTimeArr ? finishTime[1].format('YYYY-MM-DD 23:59:59') : '';
- 
-        this.searchParams = { orderNo, platOrderId, platId, mchNo, mchId, status, userName, phoneNo, startDate, endDate, productName, startFinishDate, endFinishDate, dlhMerchantId, pageSize: 10, pageNum: 1 };
+        this.searchParams = this.convertParams(obj);
         getTableData(this.searchParams);
     }
 
-    handlePageChange = (pagination) => {
-        const { current, pageSize } = pagination;
+    handlePageChange = ({ current, pageSize }) => {
         const { getTableData } = this.props;
         this.pageNum = current;
         this.pageSize = pageSize;
-        getTableData({ ...this.searchParams, pageSize:this.pageSize, pageNum: this.pageNum});
+        getTableData({ ...this.searchParams, pageSize: this.pageSize, pageNum: this.pageNum });
     }
 
     componentDidMount() {
@@ -514,8 +519,9 @@ class SettleOrderList extends Component {
                     handleSearch={this.handleSearch}
                     isSuperAdmin={this.state.isSuperAdmin}
                     allMerchants={this.state.allMerchants}
+                    exportSettleOrder={this.exportSettleOrder}
+                    btnDisabled={btnDisabled}
                 />
-                <Button type={'danger'} disabled={btnDisabled} onClick={this.exportSettleOrder}><FormattedMessage id="page.table.export" /></Button>
                 <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading}/>
                 <EditModel visible={visible} allSettlePlatList={allSettlePlatList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk}/>
             </div>

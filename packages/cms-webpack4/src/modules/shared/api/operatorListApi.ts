@@ -1,5 +1,10 @@
-import {API} from "../../../api";
-import { GetOperatorListResponse ,GetOrderReviewRecordOperatorListResponse} from "./types/getOperatorList";
+import { API } from "../../../api";
+import { GetOperatorListResponse } from "./types/getOperatorList";
+
+export interface OperatorType {
+    operatorId?: number;
+    operatorName?: string;
+}
 
 const OperatorListApi = API.injectEndpoints({
     overrideExisting: false,
@@ -13,9 +18,17 @@ const OperatorListApi = API.injectEndpoints({
             }),
         }),
         // NOTE: GET ​/hs​/admin​/order-review-record​/operator-option 訂單審核紀錄操作人選單
-        getOrderReveiwRecordOperatorList: builder.query<GetOrderReviewRecordOperatorListResponse[], null>({
+        getOrderReveiwRecordOperatorList: builder.query<OperatorType[], null>({
             query: () => ({
                 url: `/order-review-record/operator-option`,
+                params: {},
+                method: "get",
+            }),
+        }),
+        // NOTE: GET /hs/admin/user-review-record/operator-option 用戶審核紀錄操作人選單
+        getUserReveiwRecordOperatorList: builder.query<OperatorType[], null>({
+            query: () => ({
+                url: `/user-review-record/operator-option`,
                 params: {},
                 method: "get",
             }),
@@ -25,5 +38,6 @@ const OperatorListApi = API.injectEndpoints({
 export const {
     useLazyGetOperatorListQuery,
     useGetOperatorListQuery,
-    useLazyGetOrderReveiwRecordOperatorListQuery
+    useLazyGetOrderReveiwRecordOperatorListQuery,
+    useLazyGetUserReveiwRecordOperatorListQuery
 } = OperatorListApi;

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Card, Image, Descriptions, Table } from 'antd';
+import { Card, Image, Descriptions, Table,Modal } from 'antd';
 const { Item } = Descriptions;
 import { useGetUserDetailQuery } from "../../api/UserInfoApi";
 import { GetUserDetailResponse } from "../../api/types/userInfoTypes/getUserDetail";
 import { UserId } from "../../../../types/UserId";
 import moment from "moment";
+import { WaterMark } from '@ant-design/pro-components';
+
 const CardStyle = (props: { title: string, children }) => {
     const { title, children } = props
     return (
@@ -46,7 +48,29 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
     const { pan = "", idcard = "", isAuth = "", emergency = "", liveness = "", bank = "", kycFinishTime = "" } = userKycInfoVo;
     const { similarity = "" } = userThirdInfo;
     const { appVersion, deviceModel, osPlatform, osVersion } = userDevice;
+    const [modal, contextHolder] = Modal.useModal();
 
+    const showImage = (img) => {
+        if (!img) return
+        modal.info({
+            icon: <></>,
+            bodyStyle: { padding: '0' },
+            closable: true,
+            maskClosable: true,
+            width: '60%',
+            content: <WaterMark width={250} zIndex={100} content={[phoneNo, moment().format('YYYY-MM-DD-HH:mm:ss')]} fontSize={32} fontColor={'rgba(0,0,0,.40)'}>
+                <img src={img || "-"} width={'100%'} />
+            </WaterMark>,
+            className: 'modalImg'
+        })
+
+    }
+
+    const renderImage = (img) => {
+        return <WaterMark width={200} content={`${phoneNo} - ${moment().format('YYYY-MM-DD-HH:mm:ss')}`} offsetLeft={20} offsetTop={150} fontSize={12} fontColor={'rgba(0,0,0,.40)'}>
+            <Image width={250} src={img || "-"} fallback={imgError} onClick={() => showImage(img)} preview={{ visible: false }} />
+        </WaterMark>
+    }
     return currentData !== undefined && <div style={{ margin: '16px' }}>
         <CardStyle title="注册信息">
             <Descriptions size="small" bordered >
@@ -58,11 +82,12 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
             </Descriptions>
         </CardStyle>
         <CardStyle title="身份信息">
+            {contextHolder}
             <Descriptions size="small" bordered layout="vertical" column={{ xs: 1, sm: 2, md: 2, lg: 4 }}>
-                <Item label="PAN card"><Image width={200} src={panPhoto || "-"} fallback={imgError} /></Item>
-                <Item label="Aadhaar card 正面"><Image width={200} src={idcardFrontPhoto || "-"} fallback={imgError} /></Item>
-                <Item label="Aadhaar card 反面"><Image width={200} src={idcardBackPhoto || "-"} fallback={imgError} /></Item>
-                <Item label="人像"><Image width={200} src={idcardPortraitPhoto || "-"} fallback={imgError} /></Item>
+                <Item label="PAN card" >{renderImage(panPhoto)}</Item>
+                <Item label="Aadhaar card 正面">{renderImage(idcardFrontPhoto)}</Item>
+                <Item label="Aadhaar card 反面">{renderImage(idcardBackPhoto)}</Item>
+                <Item label="人像">{renderImage(idcardPortraitPhoto)}</Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="认证状态">

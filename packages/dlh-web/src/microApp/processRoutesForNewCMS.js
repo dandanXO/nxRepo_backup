@@ -20,6 +20,10 @@ export const processRoutesForNewCMS = (data) => {
         if (level2MenuItem.actionUrl === "/userLastCheck") {
           level2MenuItem.actionUrl = "/cms/user-review";
         }
+        // 用戶審核紀錄
+        if (level2MenuItem.actionUrl === "/userCheckRecord") {
+            level2MenuItem.actionUrl = "/cms/user-review-record";
+          }
         // 黑名單
         if (level2MenuItem.actionUrl === "/blackListManage") {
           level2MenuItem.actionUrl = "/cms/blacklist";

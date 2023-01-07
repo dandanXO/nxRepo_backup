@@ -14,7 +14,7 @@ const useGetOrderReviewRecordOperatorEnum = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [orderReviewRecordOperatorEnum, setUrderReviewRecordOperatorEnum] = useState(null)
+    const [orderReviewRecordOperatorEnum, setOrderReviewRecordOperatorEnum] = useState(null)
 
     useEffect(() => {
 
@@ -22,7 +22,7 @@ const useGetOrderReviewRecordOperatorEnum = () => {
         operatorListData && operatorListData?.map((i) => {
             return operatorList.set(i.operatorId, { text: i.operatorName })
         });
-        setUrderReviewRecordOperatorEnum(operatorList)
+        setOrderReviewRecordOperatorEnum(operatorList)
 
     }, [isSuccess])
 

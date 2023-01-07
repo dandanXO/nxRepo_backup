@@ -3,19 +3,12 @@ import { GetUserReviewRecordListResponse,GetUserReviewRecordListRequestQuerystri
 const UserReviewRecordApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-        // NOTE: GET /hs/admin/riskReview/getUserRiskReviewList 获取用戶審核紀錄
+        // NOTE: GET ​/hs​/admin​/user-review-record​/list 獲取用戶審核紀錄列表
         getUserReviewRecordList: builder.query<GetUserReviewRecordListResponse, GetUserReviewRecordListRequestQuerystring>({
             query: (requestBody: GetUserReviewRecordListRequestQuerystring) => ({
-                url: `/riskReview/getUserRiskReviewList`,
+                url: `/user-review-record/list`,
                 params: requestBody,
                 method: "get",
-            }),
-        }),
-        postUserReviewRecordList: builder.mutation<GetUserReviewRecordListResponse, GetUserReviewRecordListRequestQuerystring>({
-            query: (requestBody: GetUserReviewRecordListRequestQuerystring) => ({
-                url: `/riskReview/getUserRiskReviewList`,
-                data: requestBody,
-                method: "post",
             }),
         }),
 
@@ -23,5 +16,4 @@ const UserReviewRecordApi = API.injectEndpoints({
 })
 export const {
     useLazyGetUserReviewRecordListQuery,
-    usePostUserReviewRecordListMutation
 } = UserReviewRecordApi;
