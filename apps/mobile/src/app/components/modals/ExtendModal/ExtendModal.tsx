@@ -47,7 +47,7 @@ const ModalContentStyled = styled.div`
 type PureExtendModalProps = {
     repayConfirmDetail?: GetLoanDetailRepayConfirmDetail;
     setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
-    handlePostRepayCreate?: any;
+    handlePostRepayCreate: (isExtend: boolean, isForceApplyAfterRepay: boolean, repayAmount: number) => void;
 } & WithTranslation;
 
 export const PureExtendModal = (props: PureExtendModalProps) => {
@@ -72,7 +72,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
             props.repayConfirmDetail &&
                 props.repayConfirmDetail.extensionPayAmount
                 ? props.repayConfirmDetail.extensionPayAmount
-                : ""
+                : 0
         );
         setShowExtendModal(false);
     };

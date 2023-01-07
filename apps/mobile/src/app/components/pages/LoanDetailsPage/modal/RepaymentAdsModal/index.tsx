@@ -6,10 +6,11 @@ import {useTranslation} from "react-i18next";
 import {i18nRepaymentAdsModal} from "./i18n/translations";
 import {environment} from "../../../../../../environments/environment";
 import GiftICONPng from "./limited_time_offer.png";
-import CloseICONPng from "./limited_time_offer_icon.png";
+import CloseICONPng from "../../../../components/CloseICON/limited_time_offer_icon.png";
 import moment from "moment";
 import {RepayAndApplyButton, RepaymentButton, RepaymentModalContainer, SectionButton} from "../RepaymentModal";
 import {useLockRequest} from "../../../../../hooks/useLockRequest";
+import {CloseICON} from "../../../../components/CloseICON";
 
 const Brand = styled.div`
   width: 100%;
@@ -24,12 +25,6 @@ const GiftICON = styled.img`
   width: 87%;
   top: -82px;
   left: -10px;
-`;
-const CloseICON = styled.img`
-  position: relative;
-  width: 27px;
-  top: -183px;
-  right: -284px;
 `;
 
 const BrandContent = styled.div`
@@ -89,27 +84,16 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
     const {t} = useTranslation(i18nRepaymentAdsModal.namespace);
 
     const handleConfirm = () => {
-      if(isRequestPending("handlePostRepayCreate")) {
-        return;
-      } else {
-        startRequest("handlePostRepayCreate");
-      }
-
       const formBalanceValue = Number(props.balance.replace(`${environment.currency}`, ""));
       // console.log("formBalanceValue", formBalanceValue);
       if(formBalanceValue === 0) return
-
       props.handlePostRepayCreate(
         false,
         false,
         formBalanceValue
-      ).then(() => {
-        props.setShowRepaymentAdsModal(false);
-      }).finally(() => {
-        endRequest("handlePostRepayCreate");
-      })
-
+      )
     };
+
     const longTitle = useMemo(() => {
       const index = Math.floor(Math.random()*2);
       const titles = [
@@ -183,7 +167,7 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                 </BrandContent>
                               </Brand>
 
-                              <ButtonContainer t={t} handleConfirm={handleConfirm} setShowRepaymentNoticeModal={props.setShowRepaymentNoticeModal}/>
+                              <ButtonContainer t={t} handleConfirm={handleConfirm} setShowRepaymentNoticeModal={props.setShowRepaymentNoticeModal} setShowRepaymentAdsModal={props.setShowRepaymentAdsModal}/>
                           </SectionButton>
                         </RepaymentModalContainer>
                     );
@@ -197,6 +181,7 @@ interface IButtonContainer {
   handleConfirm: any;
   t: any;
   setShowRepaymentNoticeModal: any;
+  setShowRepaymentAdsModal: any;
 }
 const ButtonContainer = (props: IButtonContainer) => {
   return (
@@ -207,9 +192,8 @@ const ButtonContainer = (props: IButtonContainer) => {
       <UniversalRepayAndApplyButton
         onClick={() => {
           // NOTE: self
-          props.setShowRepaymentNoticeModal(
-            true
-          );
+          props.setShowRepaymentNoticeModal(true);
+          props.setShowRepaymentAdsModal(false);
         }}
       >
         <RepayICON />{props.t("Repay and Apply Again")}
