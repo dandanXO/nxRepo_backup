@@ -8,3 +8,9 @@ export const AllCountry: ICountry[] = [
   PakistanCountry,
   BangladeshCountry,
 ];
+
+export const AllCountryInstance = {
+  IndiaCountry,
+  PakistanCountry,
+  BangladeshCountry
+}

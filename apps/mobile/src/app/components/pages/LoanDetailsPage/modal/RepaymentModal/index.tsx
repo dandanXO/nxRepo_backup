@@ -15,7 +15,6 @@ import {
 import {environment} from "../../../../../../environments/environment";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nRepaymentModal} from "./i18n/translations";
-import RepaymentAdsModal from "../RepaymentAdsModal";
 
 const Paragraph = styled.div`
     text-align: left;
@@ -219,6 +218,11 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                         onClick={() =>{
                                           if(props.isRepayTypesFetching) return ;
                                           props.setShowRepaymentModal(false)
+                                          // navigate("/loan-details", {
+                                          //   state: {
+                                          //     name: STATE_REPAYMENT_STEPS,
+                                          //   }
+                                          // })
                                         }}
                                     >
                                       {props.t("Cancel")}

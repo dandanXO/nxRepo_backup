@@ -14,6 +14,9 @@ import {i18nComponents} from "../i18n/translations";
 import {useTranslation} from "react-i18next";
 import RepaymentAdsModal from "../../pages/LoanDetailsPage/modal/RepaymentAdsModal";
 import {environment} from "../../../../environments/environment";
+import {I18nRepaymentStepsModal} from "../../pages/LoanDetailsPage/modal/RepaymentStepsModal";
+import {useLockRequest} from "../../../hooks/useLockRequest";
+import {AllCountryInstance} from "../../../../environments/config/AllCountry";
 
 const StyledUploadReceiptSection = styled.div`
   .uploadButton {
@@ -46,9 +49,9 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     const [showExtensionModal, setShowExtensionModal] = useState(false);
     const [showAmountPaidModal, setShowAmountPaidModal] = useState(false);
     const [showRepaymentModal, setShowRepaymentModal] = useState(false);
-    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] =
-        useState(false);
+    const [showRepaymentNoticeModal, setShowRepaymentNoticeModal] = useState(false);
     const [showRepaymentAdsModal, setShowRepaymentAdsModal] = useState(false);
+    const [showRepaymentSteps, setShowRepaymentSteps] = useState(false);
 
     const [repayBalance, setRepayBalance] = useState(
         props?.currentData?.balance
@@ -63,6 +66,55 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     setBalanceValue(String(`${environment.currency}` + props.currentData?.balance));
   }, [props.currentData]);
 
+  const [payload, setPayload] = useState<{
+    isExtend: boolean;
+    isForceApplyAfterRepay: boolean;
+    repayAmount: number;
+  }>()
+
+  //NOTE: 設定還款參數
+  const repayUseCase = (isExtend: boolean, isForceApplyAfterRepay: boolean, repayAmount: number) => {
+    setPayload({
+      isExtend,
+      isForceApplyAfterRepay,
+      repayAmount,
+    })
+    if(environment.country === AllCountryInstance.IndiaCountry.country) {
+      // NOTICE: 印度直接還款
+      repaymentUseCase();
+    } else {
+      if(!isForceApplyAfterRepay) {
+        setShowRepaymentSteps(true);
+      }
+    }
+
+  }
+  //NOTE: 執行還款
+  const repaymentUseCase = () => {
+    if(isRequestPending("handlePostRepayCreate")) {
+      return;
+    } else {
+      startRequest("handlePostRepayCreate");
+    }
+    setShowRepaymentSteps(false);
+    setShowRepaymentAdsModal(false);
+
+    props.handlePostRepayCreate(
+      payload?.isExtend,
+      payload?.isForceApplyAfterRepay,
+      payload?.repayAmount
+    ).then(() => {
+      //
+    }).catch(() => {
+      // setShowRepaymentAdsModal(true);
+      // setShowRepaymentSteps(true);
+    }).finally(() => {
+      endRequest("handlePostRepayCreate");
+      // setPayload({});
+    })
+  }
+
+  const {startRequest, endRequest, isRequestPending} = useLockRequest("handlePostRepayCreate");
 
     return (
       <CustomPage>
@@ -71,7 +123,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
             <ExtendModal
               setShowExtendModal={setShowExtendModal}
               {...props.currentData}
-              handlePostRepayCreate={props.handlePostRepayCreate}
+              handlePostRepayCreate={repayUseCase}
             />
           )}
           {showExtensionModal && (
@@ -86,6 +138,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               setShowAmountPaidModal={setShowAmountPaidModal}
             />
           )}
+          {/*還款流程*/}
           {showRepaymentModal && (
             <RepaymentModal
               balance={props.currentData?.balance}
@@ -102,23 +155,39 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               setShowRepaymentAdsModal={setShowRepaymentAdsModal}
             />
           )}
+          {/*還款再借款廣告*/}
           {showRepaymentAdsModal && (
             <RepaymentAdsModal
-              balance={balanceValue}
-              handlePostRepayCreate={props.handlePostRepayCreate}
-              setShowRepaymentAdsModal={setShowRepaymentAdsModal}
               setShowRepaymentModal={setShowRepaymentModal}
+              balance={balanceValue}
+              handlePostRepayCreate={repayUseCase}
+              setShowRepaymentAdsModal={setShowRepaymentAdsModal}
+              // setShowRepaymentModal={setShowRepaymentModal}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
             />
           )}
+          {/*還款再借款須知*/}
           {showRepaymentNoticeModal && (
             <RepaymentNoticeModal
               balance={repayBalance || 0}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
-              handlePostRepayCreate={props.handlePostRepayCreate}
+              handlePostRepayCreate={repayUseCase}
+              repaymentUseCase={repaymentUseCase}
             />
           )}
 
+          {showRepaymentSteps && (
+            <I18nRepaymentStepsModal
+              setShowRepaymentSteps={setShowRepaymentSteps}
+              onCancel={() => {
+                setShowRepaymentSteps(false);
+                if(payload?.isForceApplyAfterRepay) {
+                  setShowRepaymentNoticeModal(true);
+                }
+              }}
+              onConfirmCallback={repaymentUseCase}
+            />
+          )}
 
           <LoanInfo
             {...props.currentData}

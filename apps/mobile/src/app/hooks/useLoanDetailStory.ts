@@ -80,7 +80,7 @@ const useLoanDetailStory = () => {
         })
 
     })
-    const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: true, repayAmount: number) => {
+    const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: boolean, repayAmount: number) => {
       return postRepayCreateRequest({
         extend: isExtend,
         forceApplyAfterRepay: isForceApplyAfterRepay,
