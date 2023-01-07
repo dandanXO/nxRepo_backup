@@ -16,6 +16,7 @@ import RepaymentAdsModal from "../../pages/LoanDetailsPage/modal/RepaymentAdsMod
 import {environment} from "../../../../environments/environment";
 import {I18nRepaymentStepsModal} from "../../pages/LoanDetailsPage/modal/RepaymentStepsModal";
 import {useLockRequest} from "../../../hooks/useLockRequest";
+import {AllCountryInstance} from "../../../../environments/config/AllCountry";
 
 const StyledUploadReceiptSection = styled.div`
   .uploadButton {
@@ -78,9 +79,15 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
       isForceApplyAfterRepay,
       repayAmount,
     })
-    if(!isForceApplyAfterRepay) {
-      setShowRepaymentSteps(true);
+    if(environment.country === AllCountryInstance.IndiaCountry.country) {
+      // NOTICE: 印度直接還款
+      repaymentUseCase();
+    } else {
+      if(!isForceApplyAfterRepay) {
+        setShowRepaymentSteps(true);
+      }
     }
+
   }
   //NOTE: 執行還款
   const repaymentUseCase = () => {
