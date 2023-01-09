@@ -1215,6 +1215,7 @@
   "menu.overdueReduction": "Overdue Reduction List",
   "menu.errorOrderEdit": "Error Order Edit",
   "menu.errorOrderHistory": "Error Order History",
+  "menu.order.pay.receipt":"UTR List",
   "menu.serviceChargeManage": "Service Charge Mgmt",
   "menu.userSourceUVStats": "User Source UV Stats",
   "menu.whiteList": "Whitelist",
