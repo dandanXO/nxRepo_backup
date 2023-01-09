@@ -3,7 +3,8 @@ import moment from "moment";
 import style from "./style.less"
 import {getAdminUser} from "../../utils";
 
-export const WatermarkPhoto = ({ width = "300px", src = ""}) => {
+export const WatermarkPhoto = ({
+                                 width = "300px", src = ""}) => {
   const adminUserInfo = getAdminUser();
   const collector = adminUserInfo.data.phoneNo;
   const content = `${collector}-${moment().format('YYYY-MM-DD-HH:mm:ss')}`
