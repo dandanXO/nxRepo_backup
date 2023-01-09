@@ -65,13 +65,15 @@ export function IndexPage() {
             <Link to="/order-review-record"><a> Order Review Record</a></Link>
         </div>
         <div>
-            <Link to="/activity-ads">
-                <a>activity-ads</a>
-            </Link>
+            <Link to="/activity-ads"><a>activity-ads</a></Link>
         </div>
         <div>
             <Link to="/sms-config"><a>SMS Config</a></Link>
         </div>
+        <div>
+            <Link to="/pay-receipt"><a>pay receipt</a></Link>
+        </div>
+
 
         {/*<button onClick={() => methodDoesNotExist()}>Test Sentry - Break the world</button>;*/}
 

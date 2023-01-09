@@ -1227,6 +1227,7 @@
   "menu.overdueReduction": "逾期减免纪录",
   "menu.errorOrderEdit": "错单维护",
   "menu.errorOrderHistory": "错单历史",
+  "menu.order.pay.receipt":"还款补单",
   "menu.serviceChargeManage": "服务费率管理",
   "menu.userSourceUVStats": "渠道用户来源UV统计",
   "menu.whiteList": "白名单",

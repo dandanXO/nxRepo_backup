@@ -126,7 +126,7 @@ const OrderTable = () => {
             },
         },
         { title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: { true: { text: '是' }, false: { text: '否' } } ,width:'50px',align:'center'},
-        { title: '申请金额', dataIndex: 'deviceMoney', key: 'idcadeviceMoneyrdNo', hideInSearch: true, initialValue: searchParams.deviceMoney || "", align: 'right' },
+        { title: '申请金额', dataIndex: 'deviceMoney', key: 'deviceMoney', hideInSearch: true, initialValue: searchParams.deviceMoney || "", align: 'right' },
         { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney', hideInSearch: true, initialValue: searchParams.lendMoney || "", align: 'right' },
         { title: '借款期限(天)', dataIndex: 'lendDays', key: 'lendDays', hideInSearch: true, initialValue: searchParams.lendDays || "", align: 'center',width: '80px' },
         { title: '申请时间', dataIndex: 'applyTime', key: 'applyTime', hideInSearch: true, valueType: 'dateTime',width:'100px', },

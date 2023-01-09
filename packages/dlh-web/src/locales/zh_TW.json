@@ -1154,6 +1154,7 @@
   "menu.overdueReduction": "逾期减免纪录",
   "menu.errorOrderEdit": "錯單維護",
   "menu.errorOrderHistory": "錯單歷史",
+  "menu.order.pay.receipt":"還款補單",
   "menu.serviceChargeManage": "服務費率管理",
   "menu.userSourceUVStats": "渠道用戶來源UV統計",
   "menu.whiteList": "白名單",
