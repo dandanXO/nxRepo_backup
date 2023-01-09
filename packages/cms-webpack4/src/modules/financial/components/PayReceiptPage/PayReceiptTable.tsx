@@ -1,14 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
-import moment from 'moment';
-import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
-import { useLazyGetPayReceiptListQuery ,usePostPayReceiptConfirmMutation} from '../../api/PayReceiptApi';
-import { GetPayReceiptListProps, PayReceiptList ,GetPayReceiptListRequestQuerystring} from '../../api/types/PayReceiptTypes/getPayReceiptList';
-import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
+import { Button, Modal, Space, Tag } from 'antd';
+import { useLazyGetPayReceiptListQuery, usePostPayReceiptConfirmMutation } from '../../api/PayReceiptApi';
+import { PayReceiptList, GetPayReceiptListRequestQuerystring } from '../../api/types/PayReceiptTypes/getPayReceiptList';
 import CopyText from '../../../shared/components/CopyText';
-import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../shared/components/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import { enumObjectToMap } from '../../../shared/utils/enumObjectToMap';
@@ -103,7 +100,7 @@ const PayReceiptTable = () => {
             title: '建立时间', dataIndex: 'createTimeRange', valueType: 'dateRange', key: 'createTimeRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ""
         },
-        { title: '更新时间', dataIndex: 'updateTime', key: 'updateTime', valueType: "date", hideInSearch: true },
+        { title: '更新时间', dataIndex: 'updateTime', key: 'updateTime', valueType: "dateTime", hideInSearch: true },
 
     ]
     if (isSuperAdmin) {
