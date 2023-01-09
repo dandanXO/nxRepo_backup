@@ -1,16 +1,19 @@
 import React from "react";
 import moment from "moment";
 import style from "./style.less"
+import {getAdminUser} from "../../utils";
 
 export const WatermarkPhoto = ({
                             width = "300px",
-                            src = "",
-                            watermarkContent = `collector-${moment().format('YYYY-MM-DD-HH:mm:ss')}`
+                            src = ""
                           }) => {
+  const adminUserInfo = getAdminUser();
+  const collector = adminUserInfo.data.phoneNo;
+  const content = `${collector}-${moment().format('YYYY-MM-DD-HH:mm:ss')}`
   return (
     <div className={style.watermark} style={{ width: width}} >
       <div className={style.watermark__inner}>
-        <div className={style.watermark__body}>{watermarkContent}</div>
+        <div className={style.watermark__body}>{content}</div>
       </div>
       <div className={style.watermark__content}>
         <img src={src}/>
