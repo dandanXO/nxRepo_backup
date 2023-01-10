@@ -117,7 +117,7 @@ const OrderReviewRecordTable = () => {
                                 // @ts-ignore
                                 const { appName, merchantId = '', operatorId, orderNo, phoneNo, productName, reviewStatus, userName, reviewTimeRange } = form.getFieldValue();
                                 setSearchList({
-                                    ...initSearchList,
+                                    ...searchList,
                                     appName, merchantId, operatorId, orderNo, phoneNo, productName, reviewStatus, userName,
                                     reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
