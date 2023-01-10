@@ -64,8 +64,8 @@ const ProductTable = (props: ProductTableProps) => {
             { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" ,render: (text) => <CopyText text={text} />},
             { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
             { key: 'loanTerm', title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
-            { key: 'extensionRate', title: '展期利率(%)', dataIndex: 'extensionRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
-            { key: 'overdueRate', title: '逾期费率(%)', dataIndex: 'overdueRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
+            { key: 'extensionRate', title: '前置利息(%)', dataIndex: 'preInterestRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
+            { key: 'overdueRate', title: '后置利息(%)', dataIndex: 'postInterestRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
             {
                 key: 'loanMaxThreshold', title: '新客订单上限', dataIndex: 'loanMaxThreshold', initialValue: "", hideInSearch: true,
                 width: ProColumnsOperationConstant.width["4"], render: (text, record) => {

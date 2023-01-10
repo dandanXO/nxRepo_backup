@@ -27,6 +27,7 @@ import OrderFinalReviewDetailPage from "./modules/order/components/OrderFinalRev
 import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordPage";
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
 import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
+import PayReceiptPage from "./modules/financial/components/PayReceiptPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -106,8 +107,10 @@ export const AppRouter = () => {
                     <Route path="/order-review-record" component={OrderReviewRecordPage} />
                     {/*// @ts-ignore*/}
                     <Route path={"/activity-ads"} component={ActivityAdsAdminPage}/>
-                     {/*// @ts-ignore*/}
-                     <Route path={"/sms-config"} component={SmsConfigPage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/sms-config"} component={SmsConfigPage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/pay-receipt"} component={PayReceiptPage}/>
                 </Switch>
             </Router>
 
