@@ -54,7 +54,8 @@ const urgeRecordColumns = [
             return moment(text).format('YYYY-MM-DD HH:mm:ss');
         }
     },
-    { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark',width:'60%' },
+    { title: <FormattedMessage id="customer.status" />, dataIndex: 'status', key: 'status' , width: '15%'},
+    { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark', width: '50%' },
     { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorname', key: 'collectorname' }
 ];
 //展期记录
@@ -471,7 +472,7 @@ class OrderDetail extends Component{
                         {this.renderAddressBook()}
                     </TabPane>
                 </Tabs>
-                <AddUrgeModal visible={visible} handleCancel={this.urgeModalCancel} handleOk={this.urgeHandleOk} remark={remark}/>
+                <AddUrgeModal intl={intl} visible={visible} handleCancel={this.urgeModalCancel} handleOk={this.urgeHandleOk} remark={remark}/>
                 <UrgeRecordModal visible={recordVisible} handleCancel={this.urgeHandleCancel} tableData={recordData}/>
                 <FormModal
                     dataSorce={this.repaymentModelField}
