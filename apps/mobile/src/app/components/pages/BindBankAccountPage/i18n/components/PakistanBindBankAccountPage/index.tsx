@@ -68,7 +68,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // upiData,
 
     // NOTICE: Pakistan
+    isLoadingPostBankBindSaveToPK: props.isLoadingPostBankBindSaveToPK || false,
     postBankBindSaveToPK: props.postBankBindSaveToPK,
+
     // NOTE: 取得電子錢包列表
     bindCardDropListData: props.bindCardDropListData,
     // NOTE: 設定電子錢包列表
@@ -86,14 +88,14 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           mobileData={mobileData}
           onMobileDataChange={onMobileDataChange}
           validateMobileWalletAccount={validateMobileWalletAccount}
-          isFormPending={isFormPending}
+          isFormPending={isFormPending || false}
           confirm={() => {
             confirmMobileWallet();
           }}
         />
         ) : (
           <BankAccountForm
-            isFormPending={isFormPending}
+            isFormPending={isFormPending || false}
             cardholderName={props.cardholderName}
             bankcardNoData={bankcardNoData}
             onAccountNumberChange={onAccountNumberChange}

@@ -118,9 +118,9 @@ export const useBindBankAccountForm = () => {
     const validate = useCallback(() => {
 
         // NOTE: FormInput
+        if (String(bankcardNoData.data).length === 0) return false;
         validateBankcardNo();
         validateConfirmedBankcardNo();
-
         return bankcardNoData.isValidation && confirmedBankcardNoData.isValidation
 
     }, [
@@ -128,7 +128,7 @@ export const useBindBankAccountForm = () => {
         bankcardNoData.isValidation,
         bankcardNoData.data,
         confirmedBankcardNoData.isValidation,
-        confirmedBankcardNoData.data, bankcardNoData.data
+        confirmedBankcardNoData.data,
     ]);
 
     return {
