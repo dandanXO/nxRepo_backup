@@ -370,7 +370,7 @@ class SettleOrderList extends Component {
         const params = { ...this.convertParams(obj), pageNum:1, pageSize:1000000 };
         axios({
             url: '/hs/payCenter/downLoadSettleOrder',
-            method: 'post',
+            method: 'get',
             responseType: 'blob',
             data: params
         }).then((res) => {
