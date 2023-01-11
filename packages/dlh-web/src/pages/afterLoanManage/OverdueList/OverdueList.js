@@ -108,7 +108,7 @@ class OverdueList extends Component {
                 title: <FormattedMessage id='page.table.appName' />,
                 dataIndex: "appName",
                 key: "appName",
-                width:'12%',
+                width:'8%',
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             {
@@ -123,7 +123,7 @@ class OverdueList extends Component {
               title: <FormattedMessage id="page.search.list.mobile" />,
               dataIndex: "userPhone",
               key: "userPhone",
-              width:'12%',
+              width:'10%',
               render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             {
@@ -164,6 +164,33 @@ class OverdueList extends Component {
                 }
             },
             {
+                title: props.intl.formatMessage({id: "page.table.overdue.stage"}),
+                dataIndex: 'payable',
+                key: 'payable',
+                width: '6%',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: props.intl.formatMessage({id: "customer.status"}),
+                dataIndex: 'payable',
+                key: 'payable',
+                width: '6%',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: props.intl.formatMessage({id: "windowPage.remarks"}),
+                dataIndex: 'orderNo',
+                key: 'orderNo',
+                width: '4%',
+                render(text, record) {
+                    return <CopyText text={text} isEllispsis={true}  toolTipText={text}/>;
+                }
+            },
+            {
                 title: props.intl.formatMessage({id: "page.search.list.order.status"}),
                 dataIndex: 'status',
                 key: 'status',
@@ -176,7 +203,7 @@ class OverdueList extends Component {
                 title: props.intl.formatMessage({id: "windowPage.collector"}),
                 dataIndex: 'collectorName',
                 key: 'collectorName',
-                width:'10%',
+                width:'6%',
                 render(text, record) {
                   console.log("text", text)
                   console.log("record", record)
@@ -189,7 +216,7 @@ class OverdueList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({id: "page.table.overdue.time"}),
+                title: ()=><div>{props.intl.formatMessage({ id: "page.table.overdue.time"})} <Tooltip title={props.intl.formatMessage({id:"page.table.due.time.same.day"})}><Icon type="info-circle" /></Tooltip></div> ,
                 dataIndex: 'expireTime',
                 key: 'expireTime',
                 width:'8%',
@@ -208,19 +235,13 @@ class OverdueList extends Component {
                     </Tooltip> : '';
                 }
             },
-            {
-                title: props.intl.formatMessage({ id: "page.table.appName" }),
-                dataIndex: "appName",
-                key: "appName",
-                width:'10%',
-            },
         ];
         if(isSuperAdmin) {
           this.columns.unshift({
             title: props.intl.formatMessage({id: "page.search.list.merchantName"}),
             dataIndex: 'merchantName',
             key: 'merchantName',
-            width:'6%',
+            width:'8%',
           })
         }
     }

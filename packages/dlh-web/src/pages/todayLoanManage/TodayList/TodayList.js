@@ -80,12 +80,12 @@ class TodayList extends Component {
                 title: props.intl.formatMessage({id: "page.search.list.distribute.time"}),
                 dataIndex: 'distributionTime',
                 key: 'distributionTime',
-                width: '11%',
+                width: '14%',
                 render(text) {
                     return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
                 }
             },
-            {title: props.intl.formatMessage({id: "page.search.list.order.no"}), dataIndex: 'orderNo', key: 'orderNo', width: '13%', render(text) { return <CopyText text={text} /> } },
+            {title: props.intl.formatMessage({id: "page.search.list.order.no"}), dataIndex: 'orderNo', key: 'orderNo', width: '16%', render(text) { return <CopyText text={text} /> } },
             {
                 title: <FormattedMessage id="page.search.list.product.name" />,
                 dataIndex: "productName",
@@ -97,17 +97,17 @@ class TodayList extends Component {
               title: <FormattedMessage id="page.search.list.mobile" />,
               dataIndex: "userPhone",
               key: "userPhone",
-              width:'10%',
+              width:'8%',
               render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             {
                 title: <FormattedMessage id="page.table.appName" />,
                 dataIndex: "appName",
                 key: "appName",
-                width:'10%',
+                width:'8%',
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
-            {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName', width: '8%', render(text) { return <CopyText text={text} isEllispsis={true}/> } },
+            {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName', width: '8%', render(text) { return <CopyText text={text} isEllispsis={true} toolTipText={text}/> } },
             // { title: '手机型号', dataIndex: 'deviceModel', key: 'deviceModel' },
             // { title: '手机号', dataIndex: 'userPhone', key: 'userPhone' },
             {
@@ -148,10 +148,37 @@ class TodayList extends Component {
                 }
             },
             {
+                title: props.intl.formatMessage({id: "page.table.overdue.stage"}),
+                dataIndex: 'payable',
+                key: 'payable',
+                width: '6%',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: props.intl.formatMessage({id: "customer.status"}),
+                dataIndex: 'payable',
+                key: 'payable',
+                width: '6%',
+                render(text, record) {
+                    return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: props.intl.formatMessage({id: "windowPage.remarks"}),
+                dataIndex: 'orderNo',
+                key: 'orderNo',
+                width: '4%',
+                render(text, record) {
+                    return <CopyText text={text} isEllispsis={true}  toolTipText={text}/>;
+                }
+            },
+            {
                 title: props.intl.formatMessage({id: "page.search.list.order.status"}),
                 dataIndex: 'status',
                 key: 'status',
-                width: '5%',
+                width: '6%',
                 render(text) {
                     return statusObj[text] || '';
                 }
@@ -160,7 +187,7 @@ class TodayList extends Component {
                 title: props.intl.formatMessage({id: "page.table.designator"}),
                 dataIndex: 'distributionName',
                 key: 'distributionName',
-                width: '8%',
+                width: '10%',
                 render(text) {
                     return text;
                 }
@@ -169,7 +196,7 @@ class TodayList extends Component {
                 title: props.intl.formatMessage({id: "windowPage.collector"}),
                 dataIndex: 'collectorName',
                 key: 'collectorName',
-                width: '7%',
+                width: '6%',
                 render(text, record) {
                     return (
                       <div>
@@ -181,12 +208,12 @@ class TodayList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({ id: "page.search.list.expiration.time" }),
+                title: ()=><div>{props.intl.formatMessage({ id: "page.search.list.expiration.time" })} <Tooltip title={props.intl.formatMessage({id:"page.table.due.time.same.day"})}><Icon type="info-circle" /></Tooltip></div> ,
                 dataIndex: 'expireTime',
                 key: 'expireTime',
-                width: '11%',
+                width: '8%',
                 render(text) {
-                    return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+                    return moment(Number(text) * 1000).format("YYYY-MM-DD")
                 }
             }
 
