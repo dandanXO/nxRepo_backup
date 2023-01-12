@@ -20,7 +20,6 @@ class SumStatistics extends Component{
                 moment().subtract(9, 'days'),
                 moment()
             ],
-            loading: false,
             btnDisabled: false
         };
         this.columns = [
@@ -236,25 +235,6 @@ class SumStatistics extends Component{
         })
     }
 
-    getTableData = (data) => {
-        console.log(data)
-        axios({
-            url: '/hs/admin/statistics/summaryStatistic',
-            method: 'post',
-            data: data
-        }).then((res) => {
-            if(res.code === 200){  
-                this.setState({
-                    tableData:res.data
-                })
-            }
-            this.setState({
-                loading: false,
-                btnDisable: false
-            })
-        })
-    }
-
     convertParams = (time, channelId) => {
         const isArr = Array.isArray(time) && time.length > 0;
         return {
@@ -265,11 +245,8 @@ class SumStatistics extends Component{
     }
     handleSearch = (obj) => {
         const { time, channelId } = obj;
-        this.setState({
-            loading: true
-        })
         const params = this.convertParams(time, channelId);
-        this.getTableData({ ...params });
+        this.props.getTableData({ ...params });
     }
 
     handlReturn = (obj) => {
@@ -295,13 +272,13 @@ class SumStatistics extends Component{
 
     componentDidMount() {
         const params = this.convertParams(this.state.initTime)
-        this.getTableData({ ...params });
+        this.props.getTableData({ ...params });
         this.getSourceData({ pageSize: 10000, pageNum: 1 });
     }
 
-    render() {
-        const { tableData, sourceData, initTime, loading } = this.state;
-        const { btnDisabled } = this.state;
+    render () {
+        const { sourceData, initTime, btnDisabled } = this.state;
+        const { tableData, loading } = this.props;
         return (
             <div>
                 <SearchList handleSearch={this.handleSearch}
@@ -326,8 +303,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getTableData: sumStatisticsAction.assGetTableData,
-        setTableData: sumStatisticsAction.assSetTableData
+        getTableData: sumStatisticsAction.sumGetTableData,
+        setTableData: sumStatisticsAction.sumSetTableData
     }, dispatch);
 }
 
