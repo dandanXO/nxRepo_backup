@@ -6,7 +6,7 @@ const initState = {
     loading: false
 };
 
-const atosStatisticsState = (state = initState, action) => {
+const sumStatisticsState = (state = initState, action) => {
     switch (action.type) {
         case SUM_SET_TABLE_DATA:
             return { ...state, tableData: action.data };
@@ -16,4 +16,4 @@ const atosStatisticsState = (state = initState, action) => {
             return state;
     }
 };
-export default atosStatisticsState;
+export default sumStatisticsState;
