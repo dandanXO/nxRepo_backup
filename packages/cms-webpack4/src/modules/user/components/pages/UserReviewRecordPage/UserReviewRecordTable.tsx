@@ -94,7 +94,7 @@ const UserReviewRecordTable = () => {
                                 // @ts-ignore
                                 const { reviewTimeRange, phoneNo, userName, reviewStatus, operatorId} = form.getFieldValue();
                                 setSearchList({
-                                    ...initSearchList,
+                                    ...searchList,
                                     phoneNo, 
                                     userName, 
                                     reviewStatus: reviewStatus === '' ? '' : Number(reviewStatus),

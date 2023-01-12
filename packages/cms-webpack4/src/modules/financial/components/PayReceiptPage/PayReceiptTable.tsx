@@ -141,7 +141,7 @@ const PayReceiptTable = () => {
                                 // @ts-ignore
                                 const {  createTimeRange, merchantId='', orderNo, phoneNo, status, userName, utr} = form.getFieldValue();
                                 setSearchList({
-                                    ...initSearchList,
+                                    ...searchList,
                                     createTimeEnd: createTimeRange ? createTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     createTimeStart: createTimeRange ? createTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     merchantId, orderNo, phoneNo, status:Number(status), userName, utr
