@@ -323,10 +323,10 @@ class PayOrderList extends Component {
         let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
         const params = { ...this.convertParams(obj), pageNum:1, pageSize:1000000 };
         axios({
-            url: '/hs/payCenter/downLoadPayOrder',
-            method: 'post',
+            url: `/hs/admin/pay-center/pay-order/download`,
+            method: 'get',
             responseType: 'blob',
-            data: params
+            params: params
         }).then((res) => {
             hide && hide();
             this.setState({btnDisabled: false});
