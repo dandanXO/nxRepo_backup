@@ -404,6 +404,7 @@
   "page.table.channel.first.overdue": "渠道首逾单数",
   "page.table.channel.first.overdue.rate": "渠道首逾率",
   "page.table.num.old.customer": "老客申请量",
+  "page.table.num.old.customer.people": "老客申请人数",
   "page.table.num.old.customer.loan": "老客放款量",
   "page.table.num.old.customer.extension": "老客展期数量",
   "page.table.num.new.customer.extension": "新客展期数量",
