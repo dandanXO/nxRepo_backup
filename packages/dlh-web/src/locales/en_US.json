@@ -399,6 +399,7 @@
   "page.table.channel.first.overdue": "No. of the Channel first overdue orders",
   "page.table.channel.first.overdue.rate": "Channel's first overdue rate",
   "page.table.num.old.customer": "No. of old customer",
+  "page.table.num.old.customer.people": "No. of people old customer",
   "page.table.num.old.customer.loan": "No. of old customer loan",
   "page.table.num.old.customer.extension": "No. of old customers extension",
   "page.table.num.new.customer.extension": "No. of new customers extension",
