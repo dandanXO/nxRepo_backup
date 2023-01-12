@@ -1,23 +1,23 @@
 
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
-import { ASS_GET_TABLE_DATA, assChangeTableLoading, assSetTableData } from './actions';
+import { SUM_GET_TABLE_DATA, sumChangeTableLoading, sumSetTableData } from './actions';
 import { tableList } from '../api';
 
 function* getTableData(action) {
-    yield put(assChangeTableLoading(true));
+    yield put(sumChangeTableLoading(true));
     try {
         const res = yield call(tableList, action.params);
         if(Number(res.code) === 200) {
             const { data } = res;
-            yield put(assSetTableData(data))
+            yield put(sumSetTableData(data))
         }
     } catch (e) {
 
     }
-    yield put(assChangeTableLoading(false));
+    yield put(sumChangeTableLoading(false));
 }
 function* watchGetTableData() {
-    yield takeEvery(ASS_GET_TABLE_DATA, getTableData)
+    yield takeEvery(SUM_GET_TABLE_DATA, getTableData)
 }
 
 export default function* root() {

@@ -1,9 +1,9 @@
 
 
-export const ASS_GET_TABLE_DATA = 'ASS_GET_TABLE_DATA';
-export const ASS_SET_TABLE_DATA = 'ASS_SET_TABLE_DATA';
-export const ASS_CHANGE_TABLE_LOADING = 'ASS_CHANGE_TABLE_LOADING';
+export const SUM_GET_TABLE_DATA = 'SUM_GET_TABLE_DATA';
+export const SUM_SET_TABLE_DATA = 'SUM_SET_TABLE_DATA';
+export const SUM_CHANGE_TABLE_LOADING = 'SUM_CHANGE_TABLE_LOADING';
 
-export const assGetTableData = (params) => ({ type: ASS_GET_TABLE_DATA, params });
-export const assSetTableData = (data) => ({ type: ASS_SET_TABLE_DATA, data });
-export const assChangeTableLoading = (option) => ({ type: ASS_CHANGE_TABLE_LOADING, option });
+export const sumGetTableData = (params) => ({ type: SUM_GET_TABLE_DATA, params });
+export const sumSetTableData = (data) => ({ type: SUM_SET_TABLE_DATA, data });
+export const sumChangeTableLoading = (option) => ({ type: SUM_CHANGE_TABLE_LOADING, option });
