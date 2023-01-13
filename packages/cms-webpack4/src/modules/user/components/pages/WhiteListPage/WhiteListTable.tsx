@@ -125,7 +125,8 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
                                     addTimeEnd: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addTimeStart: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     operatorId:operatorName,
-                                    phoneNo,
+                                    phoneNo, 
+                                    pageNum: 1,
                                 });
                                 onSelectChange([]);
                                 form.submit();

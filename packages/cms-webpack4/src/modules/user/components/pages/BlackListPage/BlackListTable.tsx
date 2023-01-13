@@ -91,7 +91,8 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
                                     idcardNo,
                                     operatorId:operatorName,
                                     phoneNo,
-                                    userNameTrue
+                                    userNameTrue, 
+                                    pageNum: 1,
                                 });
                                 form.submit();
                             }}
