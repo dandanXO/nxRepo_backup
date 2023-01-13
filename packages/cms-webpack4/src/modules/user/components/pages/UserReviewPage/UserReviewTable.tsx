@@ -227,7 +227,8 @@ const UserReviewTable = () => {
                                     phoneNo,
                                     regChannelId,
                                     riskRank,
-                                    userName
+                                    userName, 
+                                    pageNum: 1,
                                 });
                                 onSelectChange([]);
                                 form.submit();
