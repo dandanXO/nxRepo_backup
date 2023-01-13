@@ -6,7 +6,13 @@ import styled from "styled-components";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
 import {Button, Space} from "antd";
-import {DistributionSummaryDistributionSummary, Stage, useLazyGetSummaryQuery} from "../services/TodayDistributionAPI";
+import {
+    CollectDistributionQueryResponse,
+    DistributionSummaryDistributionSummary,
+    Stage,
+    useLazyGetDistributionQuery,
+    useLazyGetSummaryQuery
+} from "../services/TodayDistributionAPI";
 
 const StagePanel = styled.div``
 const StageContainer = styled.div``
@@ -51,68 +57,69 @@ export const TodayDistributionPage = () => {
         triggerFetchSummary(null);
     }, []);
 
-    const columns: ProColumns<ActivityModel, "text">[] = [
+    const columns: ProColumns<CollectDistributionQueryResponse, "text">[] = [
         {
             key: 'id',
             title: 'ID',
             dataIndex: 'id',
             hideInSearch: true,
+            hideInTable: true,
             width: 80,
         },
         {
-            key: 'name',
+            key: 'merchantName',
             title: '商戶名',
-            dataIndex: 'name',
+            dataIndex: 'merchantName',
             initialValue: "",
             width: 300,
         },
         {
-            key: 'name',
+            key: 'orderNo',
             title: '订单编号',
-            dataIndex: 'name',
+            dataIndex: 'orderNo',
             initialValue: "",
             width: 300,
         },
         {
-            key: 'name',
+            key: 'appName',
             title: 'APP名称',
-            dataIndex: 'name',
+            dataIndex: 'appName',
             initialValue: "",
             width: 300,
         },
         {
-            key: 'name',
+            key: 'productName',
             title: '产品名称',
-            dataIndex: 'name',
+            dataIndex: 'productName',
             initialValue: "",
             width: 300,
         },
         {
-            key: 'name',
+            key: 'phoneNo',
             title: '手机号',
-            dataIndex: 'name',
+            dataIndex: 'phoneNo',
             initialValue: "",
             width: 300,
         },
         {
-            key: 'name',
+            key: 'userName',
             title: '姓名',
-            dataIndex: 'name',
+            dataIndex: 'userName',
             initialValue: "",
             width: 300,
         },
         {
-            key: 'name',
+            key: 'deviceMoney',
             title: '申请金额',
-            dataIndex: 'name',
+            dataIndex: 'deviceMoney',
             hideInSearch: true,
             initialValue: "",
             width: 300,
         },
         {
-            key: 'name',
+            key: 'expireTime',
             title: '到期日',
-            dataIndex: 'name',
+            dataIndex: 'expireTime',
             hideInSearch: true,
             initialValue: "",
             width: 300,
@@ -128,16 +135,21 @@ export const TodayDistributionPage = () => {
     ]
 
     // NOTE: GET list and item
+    // const [triggerGetList, {
+    //     currentData: currentItemListData,
+    //     isLoading: isGetListLoading,
+    //     isFetching: isGetListFetching
+    // }] = useLazyGetActivitiesQuery({
+    //     pollingInterval: 0,
+    //     refetchOnFocus: false,
+    //     refetchOnReconnect: false
+    // });
+
     const [triggerGetList, {
         currentData: currentItemListData,
         isLoading: isGetListLoading,
         isFetching: isGetListFetching
-    }] = useLazyGetActivitiesQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
-
+    }] = useLazyGetDistributionQuery();
     const {
         showModalContent,
         setShowModalContent,
@@ -195,9 +207,9 @@ export const TodayDistributionPage = () => {
                     </StageContainer>
                 </StagePanel>
 
-                <AdminTable<ActivityModel>
+                <AdminTable<CollectDistributionQueryResponse>
                     tableHeaderColumns={columns}
-                    tableDatasource={currentItemListData}
+                    tableDatasource={currentItemListData.records}
                     hasAddForm={false}
                     searchable={true}
                     headerTitle={
@@ -206,6 +218,19 @@ export const TodayDistributionPage = () => {
                             <Button key="passButton" type="primary" ghost disabled={false} onClick={() => {}}>依阶段分配</Button>
                         </Space>
                     }
+                    // onSubmit={(params: any) => {
+                    //     console.log("params", params);
+                    // }}
+                    // onReset={() => {
+                    //     console.log("onReset");
+                    // }}
+                    onFormSearchCallback={() => {
+                        console.log("onFormSearchCallback");
+                    }}
+                    onFormResetCallback={() => {
+                        console.log("onFormResetCallback");
+                    }}
+
                 />
                 {/*<AdminFormCustomModal*/}
                 {/*    title={adminModalTitle}*/}

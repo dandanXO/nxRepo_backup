@@ -25,7 +25,7 @@ type CollectDistributionQueryRequest  = {
     userName?: string;
 } & PageRequest;
 
-interface CollectDistributionQueryResponse {
+export interface CollectDistributionQueryResponse {
     appName: string;
     // APP NAME
 

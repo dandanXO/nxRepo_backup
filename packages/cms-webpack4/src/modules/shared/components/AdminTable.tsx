@@ -34,6 +34,9 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     // NOTE: setting
     triggerGetList?: () => void;
     headerTitle?: React.ReactNode;
+    // onSubmit?: (params: any) => void;
+    // onReset?: () => void;
+    // onLoad?: (dataSource: any[]) => void;
 }
 export const AdminTable = <TableListItemDataType,>({
                                                        tableHeaderColumns,
@@ -51,6 +54,9 @@ export const AdminTable = <TableListItemDataType,>({
                                                        onFormResetCallback,
                                                        triggerGetList,
                                                        headerTitle,
+                                                       // onSubmit,
+                                                       // onReset,
+                                                       // onLoad,
 }: AdminTableTemplateProps<TableListItemDataType>) => {
     // NOTE: actionRef
     // const actionRef = useRef<ActionType>();
@@ -121,6 +127,7 @@ export const AdminTable = <TableListItemDataType,>({
 
     return (
         <ProTable<TableListItemDataType>
+
             // Table action 的引用，便于自定义触发
             // actionRef={actionRef}
             // 可以获取到查询表单的 form 实例，用于一些灵活的配置
@@ -179,9 +186,10 @@ export const AdminTable = <TableListItemDataType,>({
 
             }}
             // form={form}
-            // onSubmit={(params: U) => void}
-            // onReset={() => void}
+            onSubmit={onSubmit}
+            onReset={onReset}
             loading={loading}
+            onLoad={onLoad}
             // NOTE:
             // scroll={{ x: 1000 }}
             // 收起按钮的 render
