@@ -786,6 +786,7 @@
   "windowPage.reg.channel": "注册渠道",
   "windowPage.loan.success": "借款成功次数",
   "windowPage.customer.source": "客户来源",
+  "windowPage.user.source": "用户来源",
   "windowPage.customer.image": "客户影像",
   "windowPage.auth.info": "认证信息",
   "windowPage.auth.real.name": "实名认证",
