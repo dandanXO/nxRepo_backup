@@ -50,6 +50,7 @@ class AtoSStatistics extends Component{
             { title: props.intl.formatMessage({id : "page.table.new.customer.application.qantity"}), dataIndex: 'newSubNum', key: 'newSubNum' },
             { title: props.intl.formatMessage({id : "page.table.new.customer.loan.qantity"}), dataIndex: 'newLoanSum', key: 'newLoanSum' },
             { title: props.intl.formatMessage({id : "page.table.num.old.customer"}), dataIndex: 'oldSubNum', key: 'oldSubNum' },
+            { title: props.intl.formatMessage({id : "page.table.num.old.customer.people"}), dataIndex: 'oldUserCount', key: 'oldUserCount' },
             { title: props.intl.formatMessage({id : "page.table.num.old.customer.loan"}), dataIndex: 'oldLoanSum', key: 'oldLoanSum' },
             { title: props.intl.formatMessage({id : "page.table.new.customer.overdue.quantity"}), dataIndex: 'newUserOverdeu', key: 'newUserOverdeu' },
             { title: props.intl.formatMessage({id : "page.table.old.customer.overdue.quantity"}), dataIndex: 'oldUserOverdeu', key: 'oldUserOverdeu' },

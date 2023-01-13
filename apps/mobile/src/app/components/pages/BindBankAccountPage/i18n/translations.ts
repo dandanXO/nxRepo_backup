@@ -75,7 +75,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       // NOTICE: Bangladesh
       // NOTE: Mobile Wallet
       "Choose the method to receive the money": "টাকা পাওয়ার পদ্ধতি বেছে নিন",
-      "Mobile wallet": "মোবাইল ওয়ালেট",
+      "Mobile wallet": "মোবাইল ওয়ালেট (Nagad)",
       "Bank account": "ব্যাংক হিসাব",
       "Wallet Account Number": "ওয়ালেট অ্যাকাউন্ট নম্বর",
 

@@ -10,6 +10,8 @@ interface ProductSettingSectionProps {
 }
 const ProductSettingSection = (props: ProductSettingSectionProps) => {
 
+    const [messageApi, contextHolder] = message.useMessage();
+
     // NOTE: uploadLogoProps
   const uploadLogoProps: UploadProps = {
     name: 'file',
@@ -17,7 +19,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
     beforeUpload: file => {
       const isPNG = file.type === 'image/png';
       if (!isPNG) {
-        message.error(`${file.name} is not a png file`);
+        messageApi.error(`${file.name} is not a png file`);
       }
       return isPNG || Upload.LIST_IGNORE;
     },
@@ -27,10 +29,10 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
         // console.log(info.file, info.fileList);
       }
       if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
+        messageApi.success(`${info.file.name} file uploaded successfully`);
         props.setLogo(info.file.response.url);
       } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
+        messageApi.error(`${info.file.name} file upload failed.`);
       }
     },
   };
@@ -41,7 +43,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
     beforeUpload: file => {
       const isPNG = file.type === 'image/png';
       if (!isPNG) {
-        message.error(`${file.name} is not a png file`);
+          messageApi.error(`${file.name} is not a png file`);
       }
       return isPNG || Upload.LIST_IGNORE;
     },
@@ -51,10 +53,10 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
         // console.log(info.file, info.fileList);
       }
       if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
+          messageApi.success(`${info.file.name} file uploaded successfully`);
         props.setBackgroundImg(info.file.response.url);
       } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
+          messageApi.error(`${info.file.name} file upload failed.`);
       }
     },
   };
@@ -69,6 +71,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
 
     return (
         <React.Fragment>
+            {contextHolder}
             <Collapse defaultActiveKey={['1']} ghost>
                 <Panel header="产品设定" key="1">
                     <Form.Item label="Logo" required>

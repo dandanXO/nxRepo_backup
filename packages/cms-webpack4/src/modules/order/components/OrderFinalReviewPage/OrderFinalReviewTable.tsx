@@ -259,7 +259,7 @@ const OrderFinalReviewTable = () => {
                                 const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantId='' } = form.getFieldValue();
                                 // const merchant = merchantName ? merchantListEnum?.get(merchantName)?.text : '';
                                 setSearchList({
-                                    ...initSearchList,
+                                    ...searchList,
                                     addEndTime: addTimeRange ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addStartTime: addTimeRange ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     appName,

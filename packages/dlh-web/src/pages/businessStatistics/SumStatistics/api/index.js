@@ -1,6 +1,6 @@
 import { axios } from 'utils';
 const api = {
-    tableList: '/hs/admin/statistics/atosStatistic',
+    tableList: '/hs/admin/statistics/summaryStatistic',
 };
 
 const tableList = (params) => {

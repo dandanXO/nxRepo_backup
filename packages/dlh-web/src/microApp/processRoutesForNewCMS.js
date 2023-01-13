@@ -89,6 +89,16 @@ export const processRoutesForNewCMS = (data) => {
         }
       })
     }
+    
+    // 财务管理
+    if (menuItem.actionUrl === "/paymentManage") {
+        menuItem.children && menuItem.children.map(level2MenuItem => {
+          // 还款补单
+          if (level2MenuItem.actionUrl === "/pay-receipt") {
+            level2MenuItem.actionUrl = "/cms/pay-receipt";
+          }
+        })
+      }
     return menuItem;
   })
 }
