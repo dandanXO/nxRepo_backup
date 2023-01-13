@@ -47,9 +47,9 @@ export interface UserPersonaInfoVo {
     successCount?:number;	    // 借款成功次数
     userId?:number;	            // 用户id
     userSource?:string;	        // 用户来源
-    appName?:string;	 
-    ifscCode?:string;       
-    addTime?:string;
+    appName?:string;	        // App名稱
+    ifscCode?:string;           // IFSC
+    addTime?:string;            // 註冊時間
 }
 
 export interface UserDeviceInfo {
