@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {RootState} from "../../core/store";
+import {RootState} from "../store";
 
 interface searchParamsState {
     searchParams: any;

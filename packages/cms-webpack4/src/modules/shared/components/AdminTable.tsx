@@ -33,6 +33,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     onFormResetCallback?: () => void;
     // NOTE: setting
     triggerGetList?: () => void;
+    headerTitle?: React.ReactNode;
 }
 export const AdminTable = <TableListItemDataType,>({
                                                        tableHeaderColumns,
@@ -49,6 +50,7 @@ export const AdminTable = <TableListItemDataType,>({
                                                        onFormSearchCallback,
                                                        onFormResetCallback,
                                                        triggerGetList,
+                                                       headerTitle,
 }: AdminTableTemplateProps<TableListItemDataType>) => {
     // NOTE: actionRef
     // const actionRef = useRef<ActionType>();
@@ -152,6 +154,7 @@ export const AdminTable = <TableListItemDataType,>({
             }}
             // NOTE: Unknow
             headerTitle={
+                headerTitle ? headerTitle :
                 <>
                     {hasAddForm && (
                         <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback && onAddCallback()}>{addText}</Button>
