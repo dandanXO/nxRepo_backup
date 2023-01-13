@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BankAccountSVG from "./ic_bank_account_icon.svg";
-import MobileWalletSVG from "./ic_mobile_wallet_icon.svg";
+import MobileWalletSVG from "./logo2.png";
 import unselectedSVG from "./ic_check_disable_icon.svg";
 import selectedSVG from "./ic_check_available_icon.svg";
 import {Label} from "../../../../components/Label";
@@ -44,6 +44,7 @@ const Option = styled.div`
   text-align: center;
 
   position: relative;
+  width: 159px;
 `
 
 type IChooseBindMethod = {
@@ -60,7 +61,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
       <OptionContainer>
         <Option onClick={() => props.changeOptionValueCallback(0)}>
           <OptionIcon enable={props.value === 0}/>
-          <img src={MobileWalletSVG}/>
+          <img style={{ width: 60, height: 60 }} src={MobileWalletSVG}/>
           <Label>{t("Mobile wallet")}</Label>
         </Option>
         <Option onClick={() => {
@@ -69,7 +70,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
           background: props.disable ? "#D0D0D0": ""
         }}>
           <OptionIcon enable={props.value === 1}/>
-          <img src={BankAccountSVG}/>
+          <img style={{ width: 60, height: 60 }}  src={BankAccountSVG}/>
           <Label>{t("Bank account")}</Label>
         </Option>
       </OptionContainer>
