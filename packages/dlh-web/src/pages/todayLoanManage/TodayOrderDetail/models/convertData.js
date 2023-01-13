@@ -38,6 +38,7 @@ const userConvertData = (obj = {}) => {
         idCard: user['idcardNo'] || '',
         address: user['address'] || '',
         email: user['email'] || '',
+        userSource: user['userSource'] || '',
         idCardFrontPhoto: userRealnameInfo['idcardFrontPhoto'] || '',
         idCardBackPhoto: userRealnameInfo['idcardBackPhoto'] || '',
         idCardPhoto: userRealnameInfo['livingPhoto'] || '',
@@ -48,7 +49,8 @@ const userConvertData = (obj = {}) => {
         position: userAuthInfo['position'],
         salaryRange: userAuthInfo['salaryRange'],
         emergencyContactInfos: userAuthInfo['emergencyContactInfos'],
-        education: userAuthInfo['education']
+        education: userAuthInfo['education'],
+       
     };
 }
 export { converData, userConvertData };

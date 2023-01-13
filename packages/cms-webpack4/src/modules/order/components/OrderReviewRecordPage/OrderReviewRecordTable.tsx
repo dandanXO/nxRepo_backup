@@ -120,7 +120,8 @@ const OrderReviewRecordTable = () => {
                                     ...searchList,
                                     appName, merchantId, operatorId, orderNo, phoneNo, productName, reviewStatus, userName,
                                     reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '', 
+                                    pageNum: 1,
                                 })
                                 form.submit();
                             }}

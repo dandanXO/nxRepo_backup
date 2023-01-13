@@ -100,7 +100,8 @@ const UserReviewRecordTable = () => {
                                     reviewStatus: reviewStatus === '' ? '' : Number(reviewStatus),
                                     reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD HH:mm:ss') : '',
                                     reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD HH:mm:ss') : '',
-                                    operatorId
+                                    operatorId, 
+                                    pageNum: 1,
                                 })
                                 form.submit();
                             }}

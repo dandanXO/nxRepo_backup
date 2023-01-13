@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import styles from './TodayOrderDetail.less';
-import { CommonTable, FormModal, CopyModalMessage } from 'components';
+import { CommonTable, FormModal, CopyModalMessage  } from 'components';
 import { todayOrderDetailAction } from './index';
 import AddUrgeModal from './AddUrgeModal/AddUrgeModal';
 import UrgeRecordModal from './UrgeRecordModal/UrgeRecordModal';
@@ -14,7 +14,8 @@ import { convertMoneyFormat, emerRelation, maritalStatus, salaryRange, education
 import { axios } from 'utils';
 import { injectIntl, FormattedMessage } from "react-intl";
 import {WatermarkPhoto} from "../../../components/WatermarkPhoto/WatermarkPhoto";
-
+import { Typography } from 'antd';
+const { Paragraph } = Typography;
 
 class OrderDetail extends Component{
     constructor(props) {
@@ -98,7 +99,8 @@ class OrderDetail extends Component{
                     return moment(text).format('YYYY-MM-DD HH:mm:ss');
                 }
             },
-            { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark',width:'60%' },
+            { title: <FormattedMessage id="customer.status" />, dataIndex: 'status', key: 'status' , width: '15%'},
+            { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark',width:'50%' },
             { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorname', key: 'collectorname' }
         ];
         //展期记录
@@ -332,6 +334,13 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.education" />：</span><span>{education[userInfo.education] || ''}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.position" />：</span><span>{position[userInfo.position] || ''}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="windowPage.email" />：</span><span>{userInfo.email || ''}</span></Col>
+                        <Col className={styles.col} lg={12} xl={8} ><span className={styles.title}>
+                            <FormattedMessage id="windowPage.user.source" />：</span>
+                            {userInfo.userSource ?
+                                <Tooltip title={userInfo.userSource}>
+                                    <Paragraph style={{ width: '150px', display: 'inline-block' }} copyable={{ text: userInfo.userSource }} ellipsis={true}>{userInfo.userSource}</Paragraph>
+                                </Tooltip> : ''}
+                        </Col>
                     </Row>
                 </Card>
 
@@ -512,7 +521,7 @@ class OrderDetail extends Component{
                         {this.renderAddressBook()}
                     </TabPane>
                 </Tabs>
-                <AddUrgeModal visible={visible} handleCancel={this.urgeModalCancel} handleOk={this.urgeHandleOk} remark={remark}/>
+                <AddUrgeModal intl={intl} visible={visible} handleCancel={this.urgeModalCancel} handleOk={this.urgeHandleOk} remark={remark}/>
                 <UrgeRecordModal visible={recordVisible} handleCancel={this.urgeHandleCancel} tableData={recordData}/>
                 <FormModal
                     dataSorce={this.repaymentModelField}

@@ -283,7 +283,8 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                                     noLoanAgainStartDays: noLoanAgainStartDays,
                                     phoneNo: phoneNo,
                                     riskRank: riskRank,
-                                    status:status
+                                    status:status, 
+                                    pageNum: 1,
                                 })
                                 form.submit();
                             }}

@@ -13,7 +13,8 @@ const TabPane = Tabs.TabPane;
 import {axios,convertMoneyFormat, emerRelation, maritalStatus,salaryRange, education, position,repaymentType } from "utils";
 import {injectIntl, FormattedMessage} from "react-intl";
 import {WatermarkPhoto} from "../../../components/WatermarkPhoto/WatermarkPhoto";
-
+import { Typography } from 'antd';
+const { Paragraph } = Typography;
 //还款记录
 const backRecordColumns = [
     {
@@ -54,7 +55,8 @@ const urgeRecordColumns = [
             return moment(text).format('YYYY-MM-DD HH:mm:ss');
         }
     },
-    { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark',width:'60%' },
+    { title: <FormattedMessage id="customer.status" />, dataIndex: 'status', key: 'status' , width: '15%'},
+    { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark', width: '50%' },
     { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorname', key: 'collectorname' }
 ];
 //展期记录
@@ -312,7 +314,7 @@ class OrderDetail extends Component{
     }
     //渲染客户信息
     renderUserInfo = () => {
-        const { orderData: { userInfo = {} }, intl } = this.props;
+        const { orderData: { userInfo = {} }, intl } = this.props;  
         return (
             <div>
                 <Card type={'inner'} title={intl.formatMessage({id : "windowPage.person.info"})}>
@@ -328,6 +330,13 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.education" />：</span><span>{education[userInfo.education] || ''}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.position" />：</span><span>{position[userInfo.position] || ''}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="windowPage.email" />：</span><span>{userInfo.email || ''}</span></Col>
+                        <Col className={styles.col} lg={12} xl={8} ><span className={styles.title}>
+                            <FormattedMessage id="windowPage.user.source" />：</span>
+                            {userInfo.userSource ?
+                                <Tooltip title={userInfo.userSource}>
+                                    <Paragraph style={{ width: '150px', display: 'inline-block' }} copyable={{ text: userInfo.userSource }} ellipsis={true}>{userInfo.userSource}</Paragraph>
+                                </Tooltip> : ''}
+                        </Col>
                     </Row>
                 </Card>
 
@@ -471,7 +480,7 @@ class OrderDetail extends Component{
                         {this.renderAddressBook()}
                     </TabPane>
                 </Tabs>
-                <AddUrgeModal visible={visible} handleCancel={this.urgeModalCancel} handleOk={this.urgeHandleOk} remark={remark}/>
+                <AddUrgeModal intl={intl} visible={visible} handleCancel={this.urgeModalCancel} handleOk={this.urgeHandleOk} remark={remark}/>
                 <UrgeRecordModal visible={recordVisible} handleCancel={this.urgeHandleCancel} tableData={recordData}/>
                 <FormModal
                     dataSorce={this.repaymentModelField}

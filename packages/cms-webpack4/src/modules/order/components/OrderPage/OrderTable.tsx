@@ -215,7 +215,8 @@ const OrderTable = () => {
                                     status,
                                     userPhone: phoneNo,
                                     userTrueName: userName,
-                                    merchantName: isSuperAdmin ? merchant : ''
+                                    merchantName: isSuperAdmin ? merchant : '', 
+                                    pageNum: 1,
                                 })
                                 form.submit();
                             }}

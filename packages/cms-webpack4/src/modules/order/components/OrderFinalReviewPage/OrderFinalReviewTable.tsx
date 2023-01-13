@@ -271,7 +271,8 @@ const OrderFinalReviewTable = () => {
                                     provider,
                                     riskRank,
                                     userName,
-                                    merchantId: isSuperAdmin ? merchantId : ''
+                                    merchantId: isSuperAdmin ? merchantId : '', 
+                                    pageNum: 1,
                                 });
                                 onSelectChange([]);
                                 form.submit();
