@@ -800,6 +800,7 @@
   "windowPage.reg.channel": "Registration channel",
   "windowPage.loan.success": "No. of successful loans",
   "windowPage.customer.source": "Customer Source",
+  "windowPage.user.source": "User Source",
   "windowPage.customer.image": "Customer Image",
   "windowPage.auth.info": "Authentication Information",
   "windowPage.auth.real.name": "Real Name Certified",
