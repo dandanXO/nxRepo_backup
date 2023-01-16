@@ -56,8 +56,8 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
         record.enabled = record.enabled && record.enabled ? false : true;
         updateCollectTeamData({ id, enabled: record.enabled, name })
     }
-    const handleAddGruop = (id, groups, groupValue, dueDaysStart, dueDaysEnd, collectStage) => {
-        addCollectGroupData({ collectTeamId: id, name: groupValue, dueDaysStart, dueDaysEnd ,collectStage})
+    const handleAddGruop = (id, groups, groupValue, collectStage) => {
+        addCollectGroupData({ collectTeamId: id, name: groupValue, collectStage })
     }
 
     const columns = [
@@ -132,7 +132,7 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
                     <ExpandableTable
                         columns={columns}
                         dataSource={teamsData}
-                        expandedRowRender={(record, i) => <ExpandRow record={record} handleAddGruop={handleAddGruop} intl={intl} />}
+                        expandedRowRender={(record, i) => <ExpandRow record={record} addGruop={handleAddGruop} intl={intl} />}
                     />
                 </TabPane>
                 <TabPane tab={intl.formatMessage({ id: "page.table.collect-people" })} key="2">
