@@ -37,6 +37,7 @@ const userConvertData = (obj = {}) => {
         idCard: user['idcardNo'] || '',
         address: user['address'] || '',
         email: user['email'] || '',
+        userSource: user['userSource'] || '',
         idCardFrontPhoto: userRealnameInfo['idcardFrontPhoto'] || '',
         idCardBackPhoto: userRealnameInfo['idcardBackPhoto'] || '',
         idCardPhoto: userRealnameInfo['livingPhoto'] || '',

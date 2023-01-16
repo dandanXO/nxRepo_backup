@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Image, Descriptions, Table,Modal } from 'antd';
+import { Card, Image, Descriptions, Table,Modal, Tooltip } from 'antd';
 const { Item } = Descriptions;
 import { useGetUserDetailQuery } from "../../api/UserInfoApi";
 import { GetUserDetailResponse } from "../../api/types/userInfoTypes/getUserDetail";
@@ -7,7 +7,9 @@ import { UserId } from "../../../../types/UserId";
 import moment from "moment";
 import { WaterMark } from '@ant-design/pro-components';
 import { getAdminUser } from "../../utils/getUserInfo";
+import { Typography } from 'antd';
 
+const { Paragraph } = Typography;
 const CardStyle = (props: { title: string, children }) => {
     const { title, children } = props
     return (
@@ -47,7 +49,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
     }, [currentData]);
 
     const { personaInfoVo, userImage, userKycInfoVo, userDevice, emergencyContacts, userThirdInfo, userRiskControlInfo } = userDetail;
-    const { channelName = "", phoneNo = "", appName = "", nameTrue = "", gender = "", idcardNo = "", fatherName = "", birth = "", panId = "", email = "", education = "", marriageStatus = "", position = "", salaryRange = "", address = "", bankCardNo = "", ifscCode = "", addTime = "" } = personaInfoVo;
+    const { channelName = "", phoneNo = "", appName = "", nameTrue = "", gender = "", idcardNo = "", fatherName = "", birth = "", panId = "", email = "", education = "", marriageStatus = "", position = "", salaryRange = "", address = "", bankCardNo = "", ifscCode = "", addTime = "", userSource = "" } = personaInfoVo;
     const { idcardBackPhoto = "", idcardFrontPhoto = "", idcardPortraitPhoto = "", panPhoto = "" } = userImage;
     const { pan = "", idcard = "", isAuth = "", emergency = "", liveness = "", bank = "", kycFinishTime = "" } = userKycInfoVo;
     const { similarity = "" } = userThirdInfo;
@@ -77,12 +79,18 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
     }
     return currentData !== undefined && <div style={{ margin: '16px' }}>
         <CardStyle title="注册信息">
-            <Descriptions size="small" bordered >
+            <Descriptions size="small" bordered>
                 <Item label="用户ID">{userDetail.userId || "-"}</Item>
                 <Item label="注册渠道">{channelName || "-"}</Item>
                 <Item label="注册包名">{appName || "-"}</Item>
                 <Item label="手机号">{phoneNo || "-"}</Item>
                 <Item label="注册时间">{addTime ? moment(addTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
+                <Item label="用户来源" >
+                    {userSource ?
+                        <Tooltip title={userSource}>
+                            <Paragraph style={{ width: '150px' }} copyable={{ text: userSource }} ellipsis={true}>{userSource}</Paragraph>
+                        </Tooltip> : '-'}
+                </Item>
             </Descriptions>
         </CardStyle>
         <CardStyle title="身份信息">

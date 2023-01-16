@@ -198,7 +198,7 @@ const OrderTable = () => {
                                 const { appName, applyTimeRange, channelId, expireDateRange, isLeng, isOldUser, loanTimeRange, orderNo, productName, riskModelName, status, phoneNo, userName ,merchantName=''} = form.getFieldValue();
                                 const merchant = merchantName  ? merchantListEnum.get(merchantName)?.text : '';
                                 setSearchList({
-                                    ...initSearchList,
+                                    ...searchList,
                                     appName,
                                     applyTimeEnd: applyTimeRange ? applyTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     applyTimeStart: applyTimeRange ? applyTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -215,7 +215,8 @@ const OrderTable = () => {
                                     status,
                                     userPhone: phoneNo,
                                     userTrueName: userName,
-                                    merchantName: isSuperAdmin ? merchant : ''
+                                    merchantName: isSuperAdmin ? merchant : '', 
+                                    pageNum: 1,
                                 })
                                 form.submit();
                             }}

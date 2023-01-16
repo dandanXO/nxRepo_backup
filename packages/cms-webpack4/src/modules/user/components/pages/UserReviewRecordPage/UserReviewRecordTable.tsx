@@ -94,13 +94,14 @@ const UserReviewRecordTable = () => {
                                 // @ts-ignore
                                 const { reviewTimeRange, phoneNo, userName, reviewStatus, operatorId} = form.getFieldValue();
                                 setSearchList({
-                                    ...initSearchList,
+                                    ...searchList,
                                     phoneNo, 
                                     userName, 
                                     reviewStatus: reviewStatus === '' ? '' : Number(reviewStatus),
                                     reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD HH:mm:ss') : '',
                                     reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD HH:mm:ss') : '',
-                                    operatorId
+                                    operatorId, 
+                                    pageNum: 1,
                                 })
                                 form.submit();
                             }}
