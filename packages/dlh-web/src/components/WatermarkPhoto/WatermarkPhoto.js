@@ -2,16 +2,17 @@ import React from "react";
 import moment from "moment";
 import style from "./style.less"
 import {getAdminUser} from "../../utils";
+import conf from 'conf';
 
-export const WatermarkPhoto = ({
-                                 width = "300px", src = ""}) => {
+export const WatermarkPhoto = ({width = "300px", src = ""}) => {
   const adminUserInfo = getAdminUser();
   const collector = adminUserInfo.data.phoneNo;
   const content = `${collector}-${moment().format('YYYY-MM-DD-HH:mm:ss')}`
+ 
   return (
-    <div className={style.watermark} style={{ width: width}} >
+    <div className={style.watermark} style={{ width: width}} onContextMenu={(e)=>e.preventDefault()}>
       <div className={style.watermark__inner}>
-        <div className={style.watermark__body}>{content}</div>
+        {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color:conf.waterMarkColor}}>{content}</div>)}
       </div>
       <div className={style.watermark__content}>
         <img src={src}/>

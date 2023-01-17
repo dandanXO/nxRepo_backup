@@ -1,4 +1,5 @@
 {
     "Registrations": false,
-    "timezone":"America/Mexico_City"
+    "timezone":"America/Mexico_City",
+    "waterMarkColor":"rgba(0,0,0,.6)"
 }

@@ -1,5 +1,6 @@
 {
   "country": "Bangladesh",
   "Registrations": false,
-  "timezone":"Asia/Dhaka"
+  "timezone":"Asia/Dhaka",
+  "waterMarkColor":"rgba(0,0,0,.6)"
 }
