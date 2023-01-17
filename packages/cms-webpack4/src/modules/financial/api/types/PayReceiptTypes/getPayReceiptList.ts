@@ -31,6 +31,7 @@ export interface PayReceiptList {
     updateTime?: string;      // 更新时间
     userName?: string;        // 姓名
     utr?: string;             // UTR
+    receiptImageUrl?: string; // 还款明细圖
 }
 
 export type GetPayReceiptListProps = GetPayReceiptListResponse & GetPageableResponse;

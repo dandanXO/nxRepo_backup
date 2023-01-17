@@ -15,7 +15,7 @@ const PayReceiptTable = () => {
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const initSearchList :GetPayReceiptListRequestQuerystring= {
-        createTimeEnd: '', createTimeStart: '', merchantId: '', orderNo: '', phoneNo: '', status: '', userName: '', utr: '', pageNum: 1, pageSize: 10
+        createTimeEnd: '', createTimeStart: '', merchantId: '', orderNo: '', phoneNo: '', status: 0, userName: '', utr: '', pageNum: 1, pageSize: 10
     }
 
     // state
@@ -68,6 +68,10 @@ const PayReceiptTable = () => {
         '1': { text: '已确认', color: 'green' },
     };
 
+    const utrOrReceiptimgColumn: ProColumns = appInfo.COUNTRY !== 'Pakistan'
+        ? { title: 'UTR', dataIndex: 'utr', key: 'utr', initialValue: "", render: (text) => <CopyText text={text} /> }
+        : { title: '还款明细', dataIndex: 'receiptImageUrl', key: 'receiptImageUrl', valueType: 'image', hideInSearch: true }
+        
     const columns: ProColumns<PayReceiptList>[] = [
         {
             title: '操作',
@@ -85,7 +89,7 @@ const PayReceiptTable = () => {
         { title: 'APP名称', dataIndex: 'appName', key: 'appName', hideInSearch: true, render: (text) => <CopyText text={text} /> },
         { title: '产品名称', dataIndex: 'productName', key: 'productName', hideInSearch: true, render: (text) => <CopyText text={text} /> },
         {
-            title: '确认状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: "", align: 'center',
+            title: '确认状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: 0, align: 'center',
             valueEnum: enumObjectToMap(statusEnum),
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
@@ -93,7 +97,7 @@ const PayReceiptTable = () => {
             },
         },
         { title: '应还金额', dataIndex: 'deviceMoney', key: 'deviceMoney', hideInSearch: true, align: 'right' },
-        { title: 'UTR', dataIndex: 'utr', key: 'utr', initialValue: "", render: (text) => <CopyText text={text} /> },
+        { ...utrOrReceiptimgColumn },
         { title: '操作人', dataIndex: 'operator', key: 'operator', hideInSearch: true },
         { title: '建立时间', dataIndex: 'createTime', key: 'createTime', hideInSearch: true, valueType: 'dateTime' },
         {
@@ -122,7 +126,6 @@ const PayReceiptTable = () => {
                 onChange: onSelectChange,
             }}
             rowKey={({orderNo})=>orderNo}
-            // headerTitle={<Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
             search={{
                 labelWidth: 'auto',
                 // @ts-ignore
@@ -139,7 +142,7 @@ const PayReceiptTable = () => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const {  createTimeRange, merchantId='', orderNo, phoneNo, status, userName, utr} = form.getFieldValue();
+                                const {  createTimeRange, merchantId='', orderNo, phoneNo, status, userName, utr=''} = form.getFieldValue();
                                 setSearchList({
                                     ...searchList,
                                     createTimeEnd: createTimeRange ? createTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
