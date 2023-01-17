@@ -5,7 +5,7 @@ import React, {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, FormInstance, Space} from "antd";
+import {Button, FormInstance, Space, Table} from "antd";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
@@ -199,7 +199,11 @@ export const TodayDistributionPage = () => {
             hideInTable: true,
             initialValue: Stage.T_1,
             width: 300,
-            valueEnum: Stage,
+            // valueEnum: Stage,
+            valueEnum: {
+                [Stage.T0]: Stage.T0,
+                [Stage.T_1]: Stage.T_1,
+            },
             valueType: 'select',
         },
     ]
@@ -242,6 +246,12 @@ export const TodayDistributionPage = () => {
     }, []);
 
     // if(!currentItemListData) return null;
+
+    const [selectedRow, setSelectedRow] = useState([]);
+
+    const onSelectChange = (selectedRowKeys) => {
+        setSelectedRow(selectedRowKeys);
+    };
 
     return (
         <AdminPage navigator={{
@@ -293,6 +303,7 @@ export const TodayDistributionPage = () => {
                             <Button key="2" type="primary" ghost disabled={false} onClick={() => {}}>依阶段分配</Button>
                         </Space>
                     }
+
                     // onSubmit={(params: any) => {
                     //     console.log("params", params);
                     // }}
@@ -313,7 +324,12 @@ export const TodayDistributionPage = () => {
                     onFormResetCallback={() => {
                         console.log("onFormResetCallback");
                     }}
-
+                    rowKey={"id"}
+                    rowSelection={{
+                        selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+                        selectedRowKeys: selectedRow,
+                        onChange: onSelectChange,
+                    }}
                 />
                 {/*<AdminFormCustomModal*/}
                 {/*    title={adminModalTitle}*/}
