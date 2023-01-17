@@ -23,6 +23,8 @@ type UserInfoProps = {
     type?: string
 } & UserId
 
+
+
 const UserInfo = ({ userId, type }: UserInfoProps) => {
 
     const adminUserInfo = getAdminUser();
@@ -55,7 +57,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
     const { similarity = "" } = userThirdInfo;
     const { appVersion, deviceModel, osPlatform, osVersion } = userDevice;
     const [modal, contextHolder] = Modal.useModal();
-
+    const warterMarkColor = appInfo.COUNTRY !== 'Pakistan' ? 'rgba(0,0,0,.6)' : 'rgba(244,133,78,.6)';
     const showImage = (img) => {
         if (!img) return
         modal.info({
@@ -64,8 +66,9 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
             closable: true,
             maskClosable: true,
             width: '60%',
-            content: <WaterMark width={250} zIndex={100} content={[collector, moment().format('YYYY-MM-DD-HH:mm:ss')]} fontSize={32} fontColor={'rgba(0,0,0,.40)'}>
-                <img src={img || "-"} width={'100%'} />
+            content: <WaterMark width={250} zIndex={100} content={[collector, moment().format('YYYY-MM-DD-HH:mm:ss')]}
+                fontSize={32} fontColor={warterMarkColor} fontFamily={'Arial Black'}>
+                <img src={img || "-"} width={'100%'} onContextMenu={(e) => e.preventDefault()} />
             </WaterMark>,
             className: 'modalImg'
         })
@@ -73,8 +76,8 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
     }
 
     const renderImage = (img) => {
-        return <WaterMark width={200} content={`${collector} - ${moment().format('YYYY-MM-DD-HH:mm:ss')}`} offsetLeft={20} offsetTop={150} fontSize={12} fontColor={'rgba(0,0,0,.40)'}>
-            <Image width={250} src={img || "-"} fallback={imgError} onClick={() => showImage(img)} preview={{ visible: false }} />
+        return <WaterMark height={0} width={200} gapX={10} gapY={100} offsetLeft={0} offsetTop={100} content={`${collector} - ${moment().format('YYYY-MM-DD-HH:mm:ss')}`}  fontSize={12} fontColor={warterMarkColor} fontFamily={'Arial Black'}>
+            <Image width={250} src={img || "-"} fallback={imgError} onClick={() => showImage(img)} preview={{ visible: false }} onContextMenu={(e)=> e.preventDefault()}/>
         </WaterMark>
     }
     return currentData !== undefined && <div style={{ margin: '16px' }}>

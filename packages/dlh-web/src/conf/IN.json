@@ -1,5 +1,6 @@
 {
     "country": "India",
     "Registrations": true,
-    "timezone":"Asia/Kolkata"
+    "timezone":"Asia/Kolkata",
+    "waterMarkColor":"rgba(0,0,0,.6)"
 }
