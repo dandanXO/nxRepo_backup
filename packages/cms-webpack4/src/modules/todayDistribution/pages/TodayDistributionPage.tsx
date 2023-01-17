@@ -1,24 +1,50 @@
 import {AdminTable} from "../../shared/components/AdminTable";
 import {ActivityModel, useLazyGetActivitiesQuery} from "../../ads/service/AdsApi";
 import AdminPage from "../../shared/components/AdminPage";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, Space} from "antd";
+import {Button, FormInstance, Space} from "antd";
 import {
+    CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
     DistributionSummaryDistributionSummary,
-    Stage,
-    useLazyGetDistributionQuery,
+    Stage, useGetProductNamesQuery,
+    useLazyGetDistributionQuery, useLazyGetProductNamesQuery,
     useLazyGetSummaryQuery
 } from "../services/TodayDistributionAPI";
+import {ProColumnsOperationConstant} from "../../shared/components/ProColumnsOperationConstant";
+import {useGetAvailableMerchantListQuery} from "../../product/service/product/ProductApi";
 
-const StagePanel = styled.div``
-const StageContainer = styled.div``
-const StageItem = styled.div``
-const StageTitle = styled.div``
-const StageTotal = styled.div``
+const StagePanel = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 60px;
+`
+const StageContainer = styled.div`
+    border-left: 1px solid #000;
+    padding-right: 47px;
+`
+const StageItem = styled.div`
+    display: inline-block;
+    height: 72px;
+    padding-left: 24px;
+`
+const StageTitle = styled.div`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.45);
+`
+const StageTotal = styled.div`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: rgba(0, 0, 0, 0.85);
+`
 
 type StageData = {
     [stage: string]: Omit<DistributionSummaryDistributionSummary, "stage">;
@@ -53,9 +79,29 @@ export const TodayDistributionPage = () => {
         })
     }, [summaryResponseData])
 
-    useEffect(() => {
-        triggerFetchSummary(null);
-    }, []);
+
+
+    const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
+    const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetProductNamesQuery(null);
+
+    let tempMerchantListMap = (merchantList?.reduce((previousItem, currentItem) => {
+        return {
+            ...previousItem,
+            [currentItem.merchantId]: {
+                text: currentItem.name,
+            }
+        }
+    }, {"": {text:"全部"} }) as any)
+
+    const productListMap = (productList?.reduce((previousItem, currentItem) => {
+        return {
+            ...previousItem,
+            [currentItem.productId]: {
+                text: currentItem.productName,
+            }
+        }
+    }, {"": {text:"全部"} }) as any)
+
 
     const columns: ProColumns<CollectDistributionQueryResponse, "text">[] = [
         {
@@ -72,6 +118,17 @@ export const TodayDistributionPage = () => {
             dataIndex: 'merchantName',
             initialValue: "",
             width: 300,
+            hideInSearch: true,
+        },
+        {
+            key: 'merchantId',
+            title: '商戶名',
+            dataIndex: 'merchantId',
+            width: 300,
+            hideInTable: true,
+            initialValue: "",
+            valueType: 'select',
+            valueEnum: tempMerchantListMap,
         },
         {
             key: 'orderNo',
@@ -93,6 +150,17 @@ export const TodayDistributionPage = () => {
             dataIndex: 'productName',
             initialValue: "",
             width: 300,
+            hideInSearch: true,
+        },
+        {
+            key: 'productId',
+            title: '产品名称',
+            dataIndex: 'productId',
+            width: 300,
+            hideInTable: true,
+            initialValue: "",
+            valueType: "select",
+            valueEnum: productListMap,
         },
         {
             key: 'phoneNo',
@@ -125,31 +193,29 @@ export const TodayDistributionPage = () => {
             width: 300,
         },
         {
-            key: 'name',
-            title: '到期日',
-            dataIndex: 'name',
+            key: 'stage',
+            title: '逾期阶段',
+            dataIndex: 'stage',
             hideInTable: true,
-            initialValue: "T-1",
+            initialValue: Stage.T_1,
             width: 300,
+            valueEnum: Stage,
+            valueType: 'select',
         },
     ]
 
     // NOTE: GET list and item
-    // const [triggerGetList, {
-    //     currentData: currentItemListData,
-    //     isLoading: isGetListLoading,
-    //     isFetching: isGetListFetching
-    // }] = useLazyGetActivitiesQuery({
-    //     pollingInterval: 0,
-    //     refetchOnFocus: false,
-    //     refetchOnReconnect: false
-    // });
-
     const [triggerGetList, {
         currentData: currentItemListData,
         isLoading: isGetListLoading,
         isFetching: isGetListFetching
     }] = useLazyGetDistributionQuery();
+
+    const [formState, setFormState] = useState<CollectDistributionQueryRequest>({
+        stage: Stage.T_1,
+        pageNum: 1,
+        pageSize: 10,
+    })
     const {
         showModalContent,
         setShowModalContent,
@@ -167,6 +233,15 @@ export const TodayDistributionPage = () => {
         triggerGetList,
         // triggerDelete,
     });
+
+
+
+    useEffect(() => {
+        triggerFetchSummary(null);
+        triggerGetList(formState);
+    }, []);
+
+    // if(!currentItemListData) return null;
 
     return (
         <AdminPage navigator={{
@@ -209,13 +284,13 @@ export const TodayDistributionPage = () => {
 
                 <AdminTable<CollectDistributionQueryResponse>
                     tableHeaderColumns={columns}
-                    tableDatasource={currentItemListData.records}
+                    tableDatasource={currentItemListData?.records}
                     hasAddForm={false}
                     searchable={true}
                     headerTitle={
                         <Space>
-                            <Button key="passButton" type="primary" ghost disabled={false} onClick={() => {}}>自选订单分配</Button>
-                            <Button key="passButton" type="primary" ghost disabled={false} onClick={() => {}}>依阶段分配</Button>
+                            <Button key="1" type="primary" ghost disabled={false} onClick={() => {}}>自选订单分配</Button>
+                            <Button key="2" type="primary" ghost disabled={false} onClick={() => {}}>依阶段分配</Button>
                         </Space>
                     }
                     // onSubmit={(params: any) => {
@@ -224,8 +299,16 @@ export const TodayDistributionPage = () => {
                     // onReset={() => {
                     //     console.log("onReset");
                     // }}
-                    onFormSearchCallback={() => {
-                        console.log("onFormSearchCallback");
+                    isSearchFromClient={false}
+                    onFormSearchCallback={(form: FormInstance) => {
+                        const searchFormState = form.getFieldsValue();
+                        const searchForm = {
+                            ...formState,
+                            ...searchFormState,
+                        };
+                        setFormState(searchForm)
+                        console.log("searchForm", searchForm)
+                        triggerGetList(searchForm)
                     }}
                     onFormResetCallback={() => {
                         console.log("onFormResetCallback");

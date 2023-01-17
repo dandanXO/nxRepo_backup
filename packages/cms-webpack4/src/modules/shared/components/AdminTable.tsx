@@ -186,10 +186,7 @@ export const AdminTable = <TableListItemDataType,>({
 
             }}
             // form={form}
-            onSubmit={onSubmit}
-            onReset={onReset}
             loading={loading}
-            onLoad={onLoad}
             // NOTE:
             // scroll={{ x: 1000 }}
             // 收起按钮的 render

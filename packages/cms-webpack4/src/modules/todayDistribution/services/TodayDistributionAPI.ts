@@ -15,7 +15,7 @@ interface PageRequest {
     sortOrder?: string;
 }
 
-type CollectDistributionQueryRequest  = {
+export type CollectDistributionQueryRequest  = {
     appName?: string;
     merchantId?: number;
     orderNo?: string;
@@ -118,6 +118,8 @@ export interface DistributionSummaryDistributionSummary {
     todoTotal: number;
 }
 
+// export type Stage = "NONE" | "S1" | "S2" | "S3" | "S4" | "T0" | "T_1";
+
 export enum Stage {
     NONE,
     S1 = "S1",
@@ -204,4 +206,5 @@ export const {
     useLazyPostDistributionStageQuery,
     useLazyPostDistributionSelectedQuery,
     useLazyGetProductNamesQuery,
+    useGetProductNamesQuery,
 } = TodayDistributionAPI
