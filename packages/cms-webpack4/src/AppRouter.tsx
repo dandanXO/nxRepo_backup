@@ -28,7 +28,8 @@ import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordP
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
 import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
 import PayReceiptPage from "./modules/financial/components/PayReceiptPage";
-import {TodayDistributionPage} from "./modules/todayDistribution/pages/TodayDistributionPage";
+import {TodayDistributionPage} from "./modules/distribution/pages/TodayDistributionPage";
+import {OverdueDistributionPage} from "./modules/distribution/pages/OverdueDistributionPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -114,6 +115,8 @@ export const AppRouter = () => {
                     <Route path={"/pay-receipt"} component={PayReceiptPage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/today-distribution"} component={TodayDistributionPage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
                 </Switch>
             </Router>
 

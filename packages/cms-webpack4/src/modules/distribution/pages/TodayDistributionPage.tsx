@@ -1,57 +1,30 @@
 import {AdminTable} from "../../shared/components/AdminTable";
-import {ActivityModel, useLazyGetActivitiesQuery} from "../../ads/service/AdsApi";
 import AdminPage from "../../shared/components/AdminPage";
-import React, {useEffect, useRef, useState} from "react";
-import styled from "styled-components";
+import React, {useEffect, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
 import {Button, FormInstance, Space, Table} from "antd";
 import {
-    CollectDistributionQueryRequest,
-    CollectDistributionQueryResponse,
-    DistributionSummaryDistributionSummary,
-    Stage, useGetProductNamesQuery,
-    useLazyGetDistributionQuery, useLazyGetProductNamesQuery,
+    useGetProductNamesQuery,
+    useLazyGetDistributionQuery,
     useLazyGetSummaryQuery
 } from "../services/TodayDistributionAPI";
-import {ProColumnsOperationConstant} from "../../shared/components/ProColumnsOperationConstant";
-import {useGetAvailableMerchantListQuery} from "../../product/service/product/ProductApi";
 
-const StagePanel = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 60px;
-`
-const StageContainer = styled.div`
-    border-left: 1px solid #000;
-    padding-right: 47px;
-`
-const StageItem = styled.div`
-    display: inline-block;
-    height: 72px;
-    padding-left: 24px;
-`
-const StageTitle = styled.div`
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 22px;
-    color: rgba(0, 0, 0, 0.45);
-`
-const StageTotal = styled.div`
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 32px;
-    color: rgba(0, 0, 0, 0.85);
-`
+import  {
+    CollectDistributionQueryRequest,
+    CollectDistributionQueryResponse,
+    DistributionSummary,
+    Stage,
+} from "../types/index"
+
+import {useGetAvailableMerchantListQuery} from "../../product/service/product/ProductApi";
+import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
 
 type StageData = {
-    [stage: string]: Omit<DistributionSummaryDistributionSummary, "stage">;
+    [stage: string]: Omit<DistributionSummary, "stage">;
 }
 
 export const TodayDistributionPage = () => {
-
     const [triggerFetchSummary, {data: summaryResponseData}] = useLazyGetSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData | null>({
         [Stage.T_1] : {
@@ -65,8 +38,8 @@ export const TodayDistributionPage = () => {
     });
 
     useEffect(() => {
-        const t1 = summaryResponseData?.summaries.filter(item => item.stage === Stage.T_1)[0];
-        const t0 = summaryResponseData?.summaries.filter(item => item.stage === Stage.T0)[0];
+        const t1 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.T_1)[0];
+        const t0 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.T0)[0];
         setSummaryData({
             [Stage.T_1] : {
                 todoTotal: t1?.todoTotal,
@@ -238,14 +211,10 @@ export const TodayDistributionPage = () => {
         // triggerDelete,
     });
 
-
-
     useEffect(() => {
         triggerFetchSummary(null);
         triggerGetList(formState);
     }, []);
-
-    // if(!currentItemListData) return null;
 
     const [selectedRow, setSelectedRow] = useState([]);
 
@@ -303,13 +272,6 @@ export const TodayDistributionPage = () => {
                             <Button key="2" type="primary" ghost disabled={false} onClick={() => {}}>依阶段分配</Button>
                         </Space>
                     }
-
-                    // onSubmit={(params: any) => {
-                    //     console.log("params", params);
-                    // }}
-                    // onReset={() => {
-                    //     console.log("onReset");
-                    // }}
                     isSearchFromClient={false}
                     onFormSearchCallback={(form: FormInstance) => {
                         const searchFormState = form.getFieldsValue();
@@ -331,24 +293,6 @@ export const TodayDistributionPage = () => {
                         onChange: onSelectChange,
                     }}
                 />
-                {/*<AdminFormCustomModal*/}
-                {/*    title={adminModalTitle}*/}
-                {/*    width={"1200px"}*/}
-                {/*    showModalContent={showModalContent}*/}
-                {/*    setShowModalContent={setShowModalContent}*/}
-                {/*    onOk={onModalOk}*/}
-                {/*    onCloseModal={onCloseModal}*/}
-                {/*>*/}
-                {/*    <ActivityAdsForm*/}
-                {/*        form={form}*/}
-                {/*        isEdit={showModalContent.isEdit}*/}
-                {/*        id={editID}*/}
-                {/*        initialValues={initialValues}*/}
-                {/*        onFieldsChange={onFieldsChange}*/}
-                {/*        onFinish={onFormFinish}*/}
-                {/*        modal={modal}*/}
-                {/*    />*/}
-                {/*</AdminFormCustomModal>*/}
                 {/*NOTICE: Modal*/}
                 <div>{contextHolder}</div>
             </>
