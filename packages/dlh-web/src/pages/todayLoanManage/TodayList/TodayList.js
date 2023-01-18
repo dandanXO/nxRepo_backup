@@ -89,7 +89,7 @@ class TodayList extends Component {
                 key: 'distributionTime',
                 width: '14%',
                 render(text) {
-                    return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+                    return moment(text).format("YYYY-MM-DD HH:mm:ss")
                 }
             },
             {title: props.intl.formatMessage({id: "page.search.list.order.no"}), dataIndex: 'orderNo', key: 'orderNo', width: '16%', render(text) { return <CopyText text={text} /> } },
@@ -205,8 +205,8 @@ class TodayList extends Component {
             },
             {
                 title: props.intl.formatMessage({id: "page.table.designator"}),
-                dataIndex: 'distributionName',
-                key: 'distributionName',
+                dataIndex: 'distributorName',
+                key: 'distributorName',
                 width: '10%',
                 render(text) {
                     return text;
@@ -233,7 +233,7 @@ class TodayList extends Component {
                 key: 'expireTime',
                 width: '8%',
                 render(text) {
-                    return moment(Number(text) * 1000).format("YYYY-MM-DD")
+                    return moment(text).format("YYYY-MM-DD")
                 }
             }
 

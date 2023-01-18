@@ -83,8 +83,8 @@ class OverdueList extends Component {
                 key: 'distributionTime',
                 width:'10%',
                 render(text) {
-                    return text ? <Tooltip title={moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")}>
-                        {moment(Number(text) * 1000).format("MM-DD HH:mm:ss")}
+                    return text ? <Tooltip title={moment(text).format("YYYY-MM-DD HH:mm:ss")}>
+                        {moment(text).format("MM-DD HH:mm:ss")}
                     </Tooltip> : '';
                 }
             },
