@@ -20,7 +20,7 @@ class SearchList extends Component{
 
     submit = (e) => {
         e.preventDefault();
-        const { form: { getFieldsValue }, handleSubmit } = this.props;
+        const { form: { getFieldsValue }, handleSubmit  } = this.props;
         handleSubmit(getFieldsValue());
 
     }
@@ -30,9 +30,15 @@ class SearchList extends Component{
         return [<Option value={''} key={''} ><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
 
+    handleExport = (e) => {
+        e.preventDefault();
+        const { form: { getFieldsValue }, exportRecord } = this.props;
+        exportRecord(getFieldsValue());
+    }
+
 
     render() {
-        const { form: { getFieldDecorator  }, intl ,productSelect } = this.props;
+        const { form: { getFieldDecorator  }, intl ,productSelect,distributeOrder ,btnDisabled } = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
@@ -168,6 +174,12 @@ class SearchList extends Component{
                         <Col span={24}>
                             <Form.Item style={{textAlign:'right'}}>
                                 <Button type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /></Button>
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item style={{ textAlign: 'left' }}>
+                                <Button style={{ marginRight: '5px' }} type={'primary'} onClick={distributeOrder}><FormattedMessage id="page.table.redistribute.order" /></Button>
+                                <Button type={'danger'} disabled={btnDisabled} onClick={this.handleExport}><FormattedMessage id="page.table.export.record" /></Button>
                             </Form.Item>
                         </Col>
                     </Row>

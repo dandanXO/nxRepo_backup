@@ -41,20 +41,6 @@ class TodayList extends Component {
             person: '',
         };
         this.convertParams = (obj) => {
-            // const {personType} = this.props;
-            // let key = personType === 'group' ? 'departmentId' : 'collectorId';
-            // const { time, phoneNo, name, orderNo, orderStatus, person } = obj;
-            // const isArr = Array.isArray(time) && time.length > 0;
-            // return {
-            //     startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
-            //     endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
-            //     status: orderStatus,
-            //     userPhone: phoneNo,
-            //     userTrueName: name,
-            //     orderNo,
-            //     [key]: person,
-            // };
-
             const { disTime, time, appName, collectorId, orderNo, productId, stage, status, userPhone, userTrueName } = obj;
             const isArr = Array.isArray(time) && time.length > 0;
             const isArr2 = Array.isArray(disTime) && disTime.length > 0;
@@ -254,10 +240,11 @@ class TodayList extends Component {
     exportRecord = (obj) => {
         this.setState({btnDisabled: true});
         let hide = message.loading(this.props.intl.formatMessage({id: "page.table.exporting"}), 0);
-        const {searchParams} = this.props;
-        const searchStatus = this.convertParams(searchParams);
+        const {setSearchParams, getTableData} = this.props;
+        setSearchParams(obj);
+        const searchStatus = this.convertParams(obj);
         axios({
-            url: "/hs/admin/orderToday/todayListDownLoad",
+            url: "/hs/admin/collect-today/download",
             method: "post",
             responseType: "blob",
             data: searchStatus
@@ -265,6 +252,7 @@ class TodayList extends Component {
             .then(res => {
                 hide && hide();
                 this.setState({btnDisabled: false});
+                getTableData({...searchStatus, pageNum: 1, pageSize: 10});
                 download(res, this.props.intl.formatMessage({id: "page.today.list.export"}, {expDate: Date.now()}));
             })
             .catch(() => {
@@ -410,15 +398,11 @@ class TodayList extends Component {
                     params={searchParams} 
                     personData={todayCollectorList}
                     productSelect={productSelect}
+                    btnDisabled={btnDisabled}
+                    distributeOrder={this.distributeOrder}
+                    exportRecord={this.exportRecord}
                 />
-                <div>
-                    <span>
-                        <Button type={'primary'} onClick={this.distributeOrder}><FormattedMessage id="page.table.redistribute.order"/></Button>
-                    </span>
-                    <span className={styles.btnStyle}>
-                        <Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record"/></Button>
-                    </span>
-                </div>
+              
                 <CommonTable
                     columns={this.columns}
                     pagination={pageInfo}
