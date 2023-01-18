@@ -68,9 +68,9 @@ const PayReceiptTable = () => {
         '1': { text: '已确认', color: 'green' },
     };
 
-    const utrOrReceiptimgColumn: ProColumns = appInfo.COUNTRY !== 'Pakistan'
+    const utrOrReceiptimgColumn: ProColumns = (appInfo.COUNTRY !== 'Pakistan'  && appInfo.COUNTRY !=='Bangladesh')
         ? { title: 'UTR', dataIndex: 'utr', key: 'utr', initialValue: "", render: (text) => <CopyText text={text} /> }
-        : { title: '还款明细', dataIndex: 'receiptImageUrl', key: 'receiptImageUrl', valueType: 'image', hideInSearch: true }
+        : { title: '还款明细', dataIndex: 'receiptImageUrl', key: 'receiptImageUrl', valueType: 'image', hideInSearch: true ,align:'center'}
         
     const columns: ProColumns<PayReceiptList>[] = [
         {
@@ -89,7 +89,7 @@ const PayReceiptTable = () => {
         { title: 'APP名称', dataIndex: 'appName', key: 'appName', hideInSearch: true, render: (text) => <CopyText text={text} /> },
         { title: '产品名称', dataIndex: 'productName', key: 'productName', hideInSearch: true, render: (text) => <CopyText text={text} /> },
         {
-            title: '确认状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: 0, align: 'center',
+            title: '确认状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: "0", align: 'center',
             valueEnum: enumObjectToMap(statusEnum),
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
