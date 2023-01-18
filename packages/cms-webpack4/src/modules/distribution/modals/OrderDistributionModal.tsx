@@ -1,64 +1,11 @@
 import {Button, Modal, Table} from "antd";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {useForm} from "antd/es/form/Form";
 import {TreeCheckbox} from "../components/TreeCheckbox";
 import {useLazyGetCollectorQuery} from "../services/TodayDistributionAPI";
 import {normalizeCollector} from "../components/TreeCheckbox/normalizeCollector";
-import type { ColumnsType } from 'antd/es/table';
 import {Stage} from "../types";
-
-
-interface DataType {
-    key: React.Key;
-    name: string;
-    age: number;
-    address: string;
-    description: string;
-}
-
-const columns: ColumnsType<DataType> = [
-    { title: 'Name', dataIndex: 'name', key: 'name' },
-    { title: 'Age', dataIndex: 'age', key: 'age' },
-    { title: 'Address', dataIndex: 'address', key: 'address' },
-    {
-        title: 'Action',
-        dataIndex: '',
-        key: 'x',
-        render: () => <a>Delete</a>,
-    },
-];
-
-const data: DataType[] = [
-    {
-        key: 1,
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-    },
-    {
-        key: 2,
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
-    },
-    {
-        key: 3,
-        name: 'Not Expandable',
-        age: 29,
-        address: 'Jiangsu No. 1 Lake Park',
-        description: 'This not expandable',
-    },
-    {
-        key: 4,
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
-    },
-];
-
+import {Typography} from "antd/es";
 
 interface OrderDistributionModalProps {
     show: boolean;
@@ -67,7 +14,6 @@ interface OrderDistributionModalProps {
 }
 export const OrderDistributionModal = (props: OrderDistributionModalProps) => {
     const form = useForm();
-
 
     const [triggerGetCollector , {
         // data,
@@ -93,78 +39,44 @@ export const OrderDistributionModal = (props: OrderDistributionModalProps) => {
         setCheckedCollector(collectors)
     }
 
-    // console.log("checkedCollector", checkedCollector);
+    const treeCheckboxData = useMemo(() => {
+        return normalizeCollector(currentData, [Stage.NONE]);
+    }, [currentData]);
 
+    const handleSelectedAllCollector = useCallback(() => {
+        setSelectedRowKeys(treeCheckboxData["allKey"]);
+        setCheckedJob(treeCheckboxData["allCollectorKey"]);
+        setCheckedCollector(treeCheckboxData["allCollectorKey"]);
+    }, [treeCheckboxData]);
 
-    const columns: ColumnsType<DataType> = [
-        { title: 'Name', dataIndex: 'name', key: 'name' },
-        { title: 'Age', dataIndex: 'age', key: 'age' },
-        { title: 'Address', dataIndex: 'address', key: 'address' },
-        {
-            title: 'Action',
-            dataIndex: '',
-            key: 'x',
-            render: () => <a>Delete</a>,
-        },
-    ];
-
-    const data: DataType[] = [
-        {
-            key: 1,
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-            description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-        },
-        {
-            key: 2,
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-            description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
-        },
-        {
-            key: 3,
-            name: 'Not Expandable',
-            age: 29,
-            address: 'Jiangsu No. 1 Lake Park',
-            description: 'This not expandable',
-        },
-        {
-            key: 4,
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
-        },
-    ];
+    const handleUnselectedAllCollector = useCallback(() => {
+        setSelectedRowKeys([]);
+        setCheckedJob([]);
+        setCheckedCollector([]);
+    }, []);
 
     return (
         <Modal
-            title={"自选订单分配"}
+            title={"分配订单"}
             open={props.show}
             onCancel={props.handleCloseModal}
             onOk={props.onOk}
             width={'1000px'}
             maskClosable={false}
         >
+            <div>
+                <Button style={{marginRight: 8}} onClick={handleSelectedAllCollector}>全选</Button>
+                <Button style={{marginRight: 8}} onClick={handleUnselectedAllCollector}>清空重选</Button>
+                <Typography.Text>已选择 {checkedCollector.length} 个催收人员</Typography.Text>
+            </div>
             <TreeCheckbox
-                data={normalizeCollector(currentData, [Stage.NONE])}
+                data={treeCheckboxData}
                 selectedRowKeys={selectedRowKeys}
                 setSelectedRowKeys={setSelectedRowKeys}
                 onCheck={onTreeCheckboxCheck}
                 checkedJob={checkedJob}
                 setCheckedJob={setCheckedJob}
             />
-
-            {/*<Table*/}
-            {/*    columns={columns}*/}
-            {/*    expandable={{*/}
-            {/*        expandedRowRender: record => <p style={{ margin: 0 }}>{record.description}</p>,*/}
-            {/*        rowExpandable: record => record.name !== 'Not Expandable',*/}
-            {/*    }}*/}
-            {/*    dataSource={data}*/}
-            {/*/>*/}
         </Modal>
     )
 }
