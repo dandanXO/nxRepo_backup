@@ -13,26 +13,28 @@ import {
   odlColleterChangeModalLoading,
   odlColleterChangeModalVisible,
   odlColletorSetModalData,
-  ODL_COLLECTOR_GET_MODAL_DATA
+  ODL_COLLECTOR_GET_MODAL_DATA,
+  ODL_GET_PRODUCT_SELECT,
+  odlSetProductSelect
 } from './actions';
-import { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail } from '../api';
+import { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail, getProductList } from '../api';
 import {message} from "antd";
 
 function* getTableData(action) {
     yield put(odlChangeTableLoading(true));
     try{
         const res = yield call(getOrderListData, action.params);
-        if(Number(res.code) === 200) {
+ 
             const obj = {
-                data: res.data || [],
+                data: res.records || [],
                 pagination: {
-                    total: res.total,
-                    current: res.pageNum
+                    total: res.totalRecords,
+                    current: res.currentPage
                 }
             };
             yield put(odlSetTableData(obj));
             yield put(odlChangeSelectKey([]));
-        }
+
     } catch (e) {
 
     }
@@ -86,13 +88,27 @@ function* distributeData(action) {
 function* watchDistributeData() {
     yield takeEvery(ODL_DISTRIBUTE_ORDER, distributeData);
 }
+
+//產品列表下拉
+function* getProductData(action) {
+    try {
+        const res = yield call(getProductList, action.params);
+        yield put(odlSetProductSelect(res));
+    } catch (e) {
+        console.log(e);
+    }
+}
+function* watchGetProductData() {
+    yield takeEvery(ODL_GET_PRODUCT_SELECT, getProductData);
+}
 export default function* root() {
     yield all([
         fork(watchGetTableData),
         fork(watchGetPerson),
         fork(watchDistributeData),
         fork(watchCollectorGetDetail),
-        fork(watchGetCollectorSelect)
+        fork(watchGetCollectorSelect),
+        fork(watchGetProductData)
     ])
 }
 

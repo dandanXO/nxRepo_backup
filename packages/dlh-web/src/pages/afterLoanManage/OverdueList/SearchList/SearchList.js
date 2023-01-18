@@ -30,46 +30,21 @@ class SearchList extends Component{
         return [<Option value={''} key={''} ><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
 
-    renderMerchants = () => {
-      const { allMerchants } = this.props
-      if(!allMerchants) return;
-      const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
-      return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
-    }
 
+    handleExport = (e) => {
+        e.preventDefault();
+        const { form: { getFieldsValue }, exportRecord } = this.props;
+        exportRecord(getFieldsValue());
+
+    }
+    
     render() {
-        const { form: { getFieldDecorator  }, intl, isSuperAdmin } = this.props;
+        const { form: { getFieldDecorator ,getFieldsValue }, intl, productSelect ,distributeOrder,btnDisabled} = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
                     <Row gutter={40}>
-                        {isSuperAdmin && (
-                          <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.merchantName"})}>
-                              {
-                                getFieldDecorator('merchantId', {
-                                  initialValue: ''
-                                })(
-                                  <Select>
-                                    {this.renderMerchants()}
-                                  </Select>
-                                )
-                              }
-                            </Form.Item>
-                          </Col>
-                        )}
-                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.distribute.time"})}>
-                                {
-                                    getFieldDecorator('disTime', {
-                                        initialValue: []
-                                    })(
-                                        <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]}/>
-                                    )
-                                }
-                            </Form.Item>
-                        </Col>
-                        <Col lg={12} xl={8}>
+                    <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.table.overdue.time"})}>
                                 {
                                     getFieldDecorator('time', {
@@ -80,24 +55,13 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.mobile"})}>
+                         <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.distribute.time"})}>
                                 {
-                                    getFieldDecorator('phoneNo', {
-                                        initialValue: ''
+                                    getFieldDecorator('disTime', {
+                                        initialValue: []
                                     })(
-                                        <Input placeholder={intl.formatMessage({id : "page.search.list.mobile.enter"})}/>
-                                    )
-                                }
-                            </Form.Item>
-                        </Col>
-                        <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.name"})}>
-                                {
-                                    getFieldDecorator('name', {
-                                        initialValue: ''
-                                    })(
-                                        <Input placeholder={intl.formatMessage({id : "page.search.list.name.enter"})}/>
+                                        <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]}/>
                                     )
                                 }
                             </Form.Item>
@@ -114,9 +78,57 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.appName" })}>
+                                {
+                                    getFieldDecorator('appName', {
+                                        initialValue: ''
+                                    })(
+                                        <Input placeholder={intl.formatMessage({ id: "page.table.enter" }, { text: intl.formatMessage({ id: "page.table.appName" }) })} />
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                        <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.product.name" })}>
+                                {
+                                    getFieldDecorator('productId', {
+                                        initialValue: ''
+                                    })(
+                                        <Select>
+                                            <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
+                                            {productSelect.map(i => <Option value={i.productId} key={i.productId}>{i.productName}</Option>)}
+                                        </Select>
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                        <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.mobile"})}>
+                                {
+                                    getFieldDecorator('userPhone', {
+                                        initialValue: ''
+                                    })(
+                                        <Input placeholder={intl.formatMessage({id : "page.search.list.mobile.enter"})}/>
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                        <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.name"})}>
+                                {
+                                    getFieldDecorator('userTrueName', {
+                                        initialValue: ''
+                                    })(
+                                        <Input placeholder={intl.formatMessage({id : "page.search.list.name.enter"})}/>
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                      
+                        <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.order.status"})}>
                                 {
-                                    getFieldDecorator('orderStatus', {
+                                    getFieldDecorator('status', {
                                         initialValue: ''
                                     })(
                                         <Select>
@@ -129,9 +141,27 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id :   "page.table.overdue.stage"})}>
+                                {
+                                    getFieldDecorator('stage', { initialValue: '' })(
+                                        <Select>
+                                            <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
+                                            <Option value={'NONE'}>NONE</Option>
+                                            <Option value={'T_1'}>T-1</Option>
+                                            <Option value={'T0'}>T0</Option>
+                                            <Option value={'S1'}>S1</Option>
+                                            <Option value={'S2'}>S2</Option>
+                                            <Option value={'S3'}>S3</Option>
+                                            <Option value={'S4'}>S4</Option>
+                                        </Select>
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                        <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.table.collector.group"})}>
                                 {
-                                    getFieldDecorator('person', {
+                                    getFieldDecorator('collectorId', {
                                         initialValue: ''
                                     })(
                                         <Select>
@@ -144,6 +174,12 @@ class SearchList extends Component{
                         <Col span={16}>
                             <Form.Item style={{textAlign:'right'}}>
                                 <Button type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /></Button>
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item style={{ textAlign: 'left' }}>
+                                <Button style={{ marginRight: '5px' }} type={'primary'} onClick={distributeOrder}><FormattedMessage id="page.table.redistribute.order" /></Button>
+                                <Button type={'danger'} disabled={btnDisabled} onClick={this.handleExport}><FormattedMessage id="page.table.export.record" /></Button>
                             </Form.Item>
                         </Col>
                     </Row>
@@ -177,20 +213,29 @@ export default Form.create({
             time: Form.createFormField({
                 value: params['time'] || []
             }),
-            phoneNo: Form.createFormField({
-                value: params['phoneNo'] || ''
-            }),
-            name: Form.createFormField({
-                value: params['name'] || ''
-            }),
             orderNo: Form.createFormField({
                 value: params['orderNo'] || ''
             }),
-            orderStatus: Form.createFormField({
-                value: params['orderStatus'] || ''
+            appName: Form.createFormField({
+                value: params['appName'] || ''
             }),
-            person: Form.createFormField({
-                value: params['person'] || ''
+            productId: Form.createFormField({
+                value: params['productId'] || ''
+            }),
+            userPhone: Form.createFormField({
+                value: params['userPhone'] || ''
+            }),
+            userTrueName: Form.createFormField({
+                value: params['userTrueName'] || ''
+            }),
+            status: Form.createFormField({
+                value: params['status'] || ''
+            }),
+            stage: Form.createFormField({
+                value: params['stage'] || ''
+            }),
+            collectorId: Form.createFormField({
+                value: params['collectorId'] || ''
             })
         }
     }

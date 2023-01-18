@@ -110,7 +110,7 @@ class OrderDetail extends Component{
                         4: "customer.status.lost.contact",
                         5: "customer.status.other"
                     }
-                    return <FormattedMessage id={customerStatus[text]} /> || '';
+                    return text !== null ? <FormattedMessage id={customerStatus[text]} /> : '';
                 }
             },
             { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark',width:'50%' },

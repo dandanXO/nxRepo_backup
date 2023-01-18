@@ -30,11 +30,7 @@ import DetailModal from "./DetailModal/DetailModal";
 //     };
 // }
 
-const statusObj = {
-    "0": <FormattedMessage id="status.obj.zero"/>,
-    "1": <FormattedMessage id="status.obj.one"/>,
-    "2": <FormattedMessage id="status.obj.three"/>
-}
+
 
 class OverdueList extends Component {
     constructor(props) {
@@ -48,7 +44,7 @@ class OverdueList extends Component {
         };
         const _this = this;
         this.convertParams = (obj) => {
-            const { disTime, time, phoneNo, name, orderNo, orderStatus, person } = obj;
+            const { disTime, time, appName, collectorId,orderNo,productId,stage,status,userPhone,userTrueName} = obj;
             const isArr = Array.isArray(time) && time.length > 0;
             const isArr2 = Array.isArray(disTime) && disTime.length > 0;
             return {
@@ -56,11 +52,7 @@ class OverdueList extends Component {
                 endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
                 fstartTime: isArr2 ? disTime[0].format('YYYY-MM-DD 00:00:00') : '',
                 fendTime: isArr2 ? disTime[1].format('YYYY-MM-DD 23:59:59') : '',
-                status: orderStatus,
-                userPhone: phoneNo,
-                userTrueName: name,
-                orderNo,
-                collectorId: person
+                appName, collectorId, orderNo, productId, stage, status, userPhone, userTrueName
             };
         }
 
@@ -113,8 +105,8 @@ class OverdueList extends Component {
             },
             {
               title: props.intl.formatMessage({id: "page.search.list.name"}),
-              dataIndex: 'userTrueName',
-              key: 'userTrueName',
+              dataIndex: 'userName',
+              key: 'userName',
               width: isSuperAdmin ? '7%' : '13%',
               render(text) { return <CopyText text={text} isEllispsis={true}/> }
             },
@@ -165,26 +157,34 @@ class OverdueList extends Component {
             },
             {
                 title: props.intl.formatMessage({id: "page.table.overdue.stage"}),
-                dataIndex: 'payable',
-                key: 'payable',
+                dataIndex: 'stage',
+                key: 'stage',
                 width: '6%',
                 render(text, record) {
-                    return <CopyText text={convertMoneyFormat(text)}/>;
+                    return <CopyText text={text}/>;
                 }
             },
             {
-                title: props.intl.formatMessage({id: "customer.status"}),
-                dataIndex: 'payable',
-                key: 'payable',
+                title: props.intl.formatMessage({ id: "customer.status" }),
+                dataIndex: 'collectRecordStatus',
+                key: 'collectRecordStatus',
                 width: '6%',
-                render(text, record) {
-                    return <CopyText text={convertMoneyFormat(text)}/>;
+                render (text) {
+                    const customerStatus = {
+                        0: "page.table.none",
+                        1: "customer.status.promise",
+                        2: "customer.status.missed",
+                        3: "customer.status.turned.off",
+                        4: "customer.status.lost.contact",
+                        5: "customer.status.other"
+                    }
+                    return text !== null ? <FormattedMessage id={customerStatus[text]} /> : '';
                 }
             },
             {
                 title: props.intl.formatMessage({id: "windowPage.remarks"}),
-                dataIndex: 'orderNo',
-                key: 'orderNo',
+                dataIndex: 'collectRecordRemark',
+                key: 'collectRecordRemark',
                 width: '4%',
                 render(text, record) {
                     return <CopyText text={text} isEllispsis={true}  toolTipText={text}/>;
@@ -192,11 +192,15 @@ class OverdueList extends Component {
             },
             {
                 title: props.intl.formatMessage({id: "page.search.list.order.status"}),
-                dataIndex: 'status',
-                key: 'status',
+                dataIndex: 'repayStatus',
+                key: 'repayStatus',
                 width:'6%',
                 render(text) {
-                    return statusObj[text] || '';
+                    const repayStatus = {
+                        0: <FormattedMessage id="page.search.list.overdue"/>,
+                        1: <FormattedMessage id="windowPage.cleared"/>,
+                    }
+                    return  text !== null ? repayStatus[text] : '';
                 }
             },
             {
@@ -221,18 +225,7 @@ class OverdueList extends Component {
                 key: 'expireTime',
                 width:'8%',
                 render(text) {
-                    return moment(Number(text) * 1000).format('YYYY-MM-DD');
-                }
-            },
-            {
-                title: props.intl.formatMessage({id: "page.search.list.repaid.time"}),
-                dataIndex: 'payTime',
-                key: 'payTime',
-                width:'10%',
-                render(text) {
-                    return text ? <Tooltip title={moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")}>
-                        {moment(Number(text) * 1000).format("MM-DD HH:mm:ss")}
-                    </Tooltip> : '';
+                    return moment(text).format('YYYY-MM-DD');
                 }
             },
         ];
@@ -249,66 +242,26 @@ class OverdueList extends Component {
 
     //导出记录
     exportRecord = (obj) => {
-        this.setState({btnDisabled: true});
-        let hide = message.loading(this.props.intl.formatMessage({id: "page.table.exporting"}), 0);
-        const {searchParams} = this.props;
-        const searchStatus = this.convertParams(searchParams);
-        let intervalTask;
+        this.setState({ btnDisabled: true });
+        let hide = message.loading(this.props.intl.formatMessage({ id: "page.table.exporting" }), 0);
+        const {setSearchParams, getTableData} = this.props;
+        setSearchParams(obj);
+        const searchStatus = this.convertParams(obj);
+     
         axios({
-            url: "/hs/admin/orderOverdue/overDueListDownLoadPrepare",
+            url: "/hs/admin/collect-overdue/download",
             method: "post",
             data: searchStatus
-        })
-            .then(res => {
-                let taskId = res.data;
-                console.log(taskId);
-                intervalTask = setInterval(() => {
+        }).then(res => {
+            hide && hide();
+            this.setState({ btnDisabled: false });
+            getTableData({...searchStatus, pageNum: 1, pageSize: 10});
+            download(res, this.props.intl.formatMessage({ id: "page.table.overdue.list.export" }, { expDate: Date.now() }));
 
-                    axios({
-                        url: "/hs/admin/orderOverdue/overDueListDownLoadCheck",
-                        method: "post",
-                        data: taskId
-                    })
-                        .then(res => {
-
-                            if (Number(res.code) == 200) {
-                                clearInterval(intervalTask);
-                                axios({
-                                    url: "/hs/admin/orderOverdue/overDueListDownLoad2",
-                                    method: "post",
-                                    responseType: "blob",
-                                    data: taskId
-                                })
-                                    .then(res => {
-                                        hide && hide();
-                                        this.setState({btnDisabled: false});
-                                        download(res, this.props.intl.formatMessage({id: "page.table.overdue.list.export"}, {expDate: Date.now()}));
-
-                                    })
-                                    .catch(() => {
-                                        clearInterval(intervalTask);
-                                        hide && hide();
-                                        this.setState({btnDisabled: false});
-                                    });
-                            }
-
-                        })
-                        .catch(() => {
-                            clearInterval(intervalTask);
-                            hide && hide();
-                            this.setState({btnDisabled: false});
-                        });
-
-
-                }, 5000);
-
-
-            })
-            .catch(() => {
-                hide && hide();
-                this.setState({btnDisabled: false});
-            });
-
+        }).catch(() => {
+            hide && hide();
+            this.setState({ btnDisabled: false });
+        });
 
     };
 
@@ -321,7 +274,6 @@ class OverdueList extends Component {
             state: { userId }
         })
     }
-
 
     //选择订单
     onSelectChange = (selectedRowKeys) => {
@@ -381,7 +333,7 @@ class OverdueList extends Component {
 
 
     componentDidMount() {
-        const { getTableData, tableData: { pagination }, getPerson, setSearchParams, getCollectorSelect } = this.props;
+        const { getTableData, tableData: { pagination }, getPerson, setSearchParams, getCollectorSelect ,getProductSelect} = this.props;
         setSearchParams(this.initSearchParams);
 
         let params = this.convertParams(this.initSearchParams);
@@ -393,6 +345,8 @@ class OverdueList extends Component {
         getPerson();
         // 取得催收人/組下拉選單
         getCollectorSelect();
+        // 取得產品下拉選單
+        getProductSelect();
     }
 
     //todo 是否清理列表以及选择数据
@@ -432,7 +386,8 @@ class OverdueList extends Component {
             collectorModalLoading,
             collectorVisible,
             collectorModalData,
-            collectorSelect
+            collectorSelect,
+            productSelect
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -442,15 +397,16 @@ class OverdueList extends Component {
         const pageInfo = {...pagination, pageSizeOptions: ['10', '20', '30', '40', '50', "100", "200", "300", "400", "500", "1000", "2000"]}  //客戶要求1000、2000的分頁數
         return (
             <div>
-                <SearchList handleSubmit={this.handleSearch} params={searchParams} personData={personData}  isSuperAdmin={this.state.isSuperAdminisSuperAdmin} allMerchants={this.state.allMerchants} collectorSelect={collectorSelect}/>
-                <div>
-                    <span>
-                        <Button type={'primary'} onClick={this.distributeOrder}><FormattedMessage id="page.table.redistribute.order"/></Button>
-                    </span>
-                    <span className={styles.btnStyle}>
-                        <Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record"/></Button>
-                    </span>
-                </div>
+                <SearchList
+                    exportRecord={this.exportRecord}
+                    distributeOrder={this.distributeOrder}
+                    btnDisabled={btnDisabled}
+                    handleSubmit={this.handleSearch}
+                    params={searchParams}
+                    personData={personData}
+                    productSelect={productSelect}
+                    collectorSelect={collectorSelect}
+                />
                 <CommonTable
                     columns={this.columns}
                     pagination={pageInfo}
@@ -489,10 +445,12 @@ const mapStateToProps = (state) => {
         selectKeys: overdueListState['selectKeys'],
         visible: overdueListState['visible'],
         collectorSelect:overdueListState['collectorSelect'],
+        productSelect:overdueListState['productSelect'],
         // 催收人員列表
         collectorModalLoading: overdueListState['collector']['modalLoading'],
         collectorVisible: overdueListState['collector']['visible'],
         collectorModalData: overdueListState['collector']['modalData'],
+      
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -505,6 +463,7 @@ const mapDispatchToProps = (dispatch) => {
         changeModalVisible: overdueListAction.odlChangeModalVisible,
         distributeOrder: overdueListAction.odlDistributeOrder,
         changeSelectKeys: overdueListAction.odlChangeSelectKey,
+        getProductSelect: overdueListAction.odlGetProductSelect,
         // 催收人員列表
         collectorChangeModalLoading: overdueListAction.odlColleterChangeModalLoading,
         collectorChangeModalVisible: overdueListAction.odlColleterChangeModalVisible,
