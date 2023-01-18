@@ -206,12 +206,13 @@ export const TodayDistributionPage = () => {
         setSelectedRow(selectedRowKeys);
     };
 
+    const [showModal, setShowModal] = useState(false);
     const handleModalClose = () => {
-
+        setShowModal(false);
     }
 
     const handlerModalOk = () => {
-
+        setShowModal(false);
     }
 
     return (
@@ -260,8 +261,12 @@ export const TodayDistributionPage = () => {
                     searchable={true}
                     headerTitle={
                         <Space>
-                            <Button key="1" type="primary" ghost disabled={false} onClick={() => {}}>自选订单分配</Button>
-                            <Button key="2" type="primary" ghost disabled={false} onClick={() => {}}>依阶段分配</Button>
+                            <Button key="1" type="primary" ghost disabled={false} onClick={() => {
+                                setShowModal(true);
+                            }}>自选订单分配</Button>
+                            <Button key="2" type="primary" ghost disabled={false} onClick={() => {
+                                setShowModal(true);
+                            }}>依阶段分配</Button>
                         </Space>
                     }
                     isSearchFromClient={false}
@@ -272,11 +277,11 @@ export const TodayDistributionPage = () => {
                             ...searchFormState,
                         };
                         setFormState(searchForm)
-                        console.log("searchForm", searchForm)
+                        // console.log("searchForm", searchForm)
                         triggerGetList(searchForm)
                     }}
                     onFormResetCallback={() => {
-                        console.log("onFormResetCallback");
+                        // console.log("onFormResetCallback");
                     }}
                     rowKey={"id"}
                     rowSelection={{
@@ -287,7 +292,7 @@ export const TodayDistributionPage = () => {
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}
-                <OrderDistributionModal show={true} handleCloseModal={handleModalClose} onOk={handlerModalOk}/>
+                <OrderDistributionModal show={showModal} handleCloseModal={handleModalClose} onOk={handlerModalOk}/>
             </>
         </AdminPage>
     )
