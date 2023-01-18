@@ -34,14 +34,6 @@ export const OverdueDistributionAPI = API.injectEndpoints({
                 method: "get",
             }),
         }),
-
-        // NOTE: 催收人員列表 - 获取催收阶段的催收员(依照催收階段)
-        // getOverdueCollector: builder.query<DistributeCollectByStageResponse, null>({
-        //     query: () => ({
-        //         url: `/collect-today/stage`,
-        //         method: "get",
-        //     }),
-        // }),
         // NOTE: 依催收階段分配訂單
         postOverdueDistributionStage: builder.query<StageDistributionRequest, null>({
             query: (requestBody: StageDistributionRequest ) => ({
@@ -58,6 +50,13 @@ export const OverdueDistributionAPI = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
+        // NOTE: 催收人員列表 - 获取催收阶段的催收员(依照催收階段)
+        // getOverdueCollector: builder.query<DistributeCollectByStageResponse, null>({
+        //     query: () => ({
+        //         url: `/collect-today/stage`,
+        //         method: "get",
+        //     }),
+        // }),
 
     })
 })

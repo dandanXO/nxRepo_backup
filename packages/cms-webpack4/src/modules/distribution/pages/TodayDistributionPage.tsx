@@ -19,6 +19,7 @@ import  {
 
 import {useGetAvailableMerchantListQuery} from "../../product/service/product/ProductApi";
 import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
+import {OrderDistributionModal} from "../modals/OrderDistributionModal";
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
@@ -193,23 +194,6 @@ export const TodayDistributionPage = () => {
         pageNum: 1,
         pageSize: 10,
     })
-    const {
-        showModalContent,
-        setShowModalContent,
-        onModalOk,
-        onCloseModal,
-        editID,
-        form,
-        onAddItem,
-        onEditItem,
-        onDeleteItem,
-        contextHolder,
-        modal,
-    } = useAdminFormModal({
-        // triggerGet,
-        triggerGetList,
-        // triggerDelete,
-    });
 
     useEffect(() => {
         triggerFetchSummary(null);
@@ -221,6 +205,14 @@ export const TodayDistributionPage = () => {
     const onSelectChange = (selectedRowKeys) => {
         setSelectedRow(selectedRowKeys);
     };
+
+    const handleModalClose = () => {
+
+    }
+
+    const handlerModalOk = () => {
+
+    }
 
     return (
         <AdminPage navigator={{
@@ -294,7 +286,8 @@ export const TodayDistributionPage = () => {
                     }}
                 />
                 {/*NOTICE: Modal*/}
-                <div>{contextHolder}</div>
+                {/*<div>{contextHolder}</div>*/}
+                <OrderDistributionModal show={true} handleCloseModal={handleModalClose} onOk={handlerModalOk}/>
             </>
         </AdminPage>
     )

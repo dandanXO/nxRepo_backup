@@ -58,39 +58,39 @@ export interface CollectDistributionQueryResponse {
     // 用姓名
 }
 
-// interface DistributeCollectByStageResponse {
-//     merchants: DistributeCollectGroupByMerchant[];
-//     stage: Stage;
-// }
+export interface DistributeCollectByStageResponse {
+    merchants: DistributeCollectGroupByMerchant[];
+    stage: Stage;
+}
 
-// interface DistributeCollectGroupByMerchant {
-//     merchant: string;
-//     // 商户名
-//
-//     merchantId: number;
-//     // 商户ID
-//
-//     teams: DistributeCollectGroupBy[];
-// }
+export interface DistributeCollectGroupByMerchant {
+    merchant: string;
+    // 商户名
 
-// interface DistributeCollectGroupBy {
-//     collectors: DistributionCollector;
-//     team: string;
-// }
-//
-// interface DistributionCollector {
-//     collectGroup: string;
-//     // 催收颓团队组
-//
-//     collectTeam: string;
-//     // 催收团队
-//
-//     collectorId: number;
-//     // 催收员ID
-//
-//     collectorName: string;
-//     // 催收员名称
-// }
+    merchantId: number;
+    // 商户ID
+
+    teams: DistributeCollectGroupByTeam[];
+}
+
+export interface DistributeCollectGroupByTeam {
+    collectors: DistributionCollector[];
+    team: string;
+}
+
+export interface DistributionCollector {
+    collectGroup: string;
+    // 催收颓团队组
+
+    collectTeam: string;
+    // 催收团队
+
+    collectorId: number;
+    // 催收员ID
+
+    collectorName: string;
+    // 催收员名称
+}
 
 export interface CollectDistributionSummaryResponse {
     summaries: DistributionSummary[];
@@ -106,7 +106,7 @@ export interface DistributionSummary {
 }
 
 export enum Stage {
-    NONE,
+    NONE = "NONE",
     S1 = "S1",
     S2 = "S2",
     S3 = "S3",
