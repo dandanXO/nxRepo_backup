@@ -15,7 +15,7 @@ const CardStyle = (props: { title: string, children }) => {
 }
 
 const isUtr = (utr: string) => {
-    return typeof utr !== "undefined" && utr !== ""
+    return typeof utr !== "undefined" && utr !== "" && appInfo.COUNTRY !== 'Pakistan'  && appInfo.COUNTRY !=='Bangladesh';
 }
 const isReceiptImage = (receiptImage: string) => {
     return typeof receiptImage !== "undefined" && receiptImage !== ""
