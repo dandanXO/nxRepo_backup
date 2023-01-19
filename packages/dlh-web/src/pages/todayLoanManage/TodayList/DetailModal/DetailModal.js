@@ -12,7 +12,7 @@ class DetailModal extends Component{
             { title: props.intl.formatMessage({id :"windowPage.add.time"}), dataIndex: 'addTime', key: 'addTime' },
             { title: props.intl.formatMessage({id :"page.table.designator"}), dataIndex: 'distributor', key: 'distributor' },
             { title: props.intl.formatMessage({id :"windowPage.collector"}), dataIndex: 'collector', key: 'collector' },
-            { title: props.intl.formatMessage({id :"page.table.assign.overdue.stage"}), dataIndex: 'collector', key: 'collector' },
+            { title: props.intl.formatMessage({id :"page.table.assign.overdue.stage"}), dataIndex: 'stage', key: 'stage' },
         ]
     }
     render() {
