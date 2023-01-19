@@ -8,7 +8,8 @@ import {
     ODL_COLLECTOR_CHANGE_MODAL_LOADING,
     ODL_COLLECTOR_CHANGE_MODAL_VISIBLE,
     ODL_COLLECTOR_SET_MODAL_DATA,
-    ODL_SET_COLLECTOR_SELECT
+    ODL_SET_COLLECTOR_SELECT,
+    ODL_SET_PRODUCT_SELECT
 } from './actions';
 
 import {normalizeCollector} from "../../../../utils/normalizeCollector";
@@ -40,7 +41,8 @@ const initState = {
       visible: false,
       modalData: [],
     },
-    collectorSelect:[]
+    collectorSelect:[],
+    productSelect:[]
 }
 
 const overdueList = (state = initState, action) => {
@@ -76,6 +78,8 @@ const overdueList = (state = initState, action) => {
             }};
         case ODL_SET_COLLECTOR_SELECT:
             return { ...state, collectorSelect: action.data };
+        case ODL_SET_PRODUCT_SELECT:
+            return { ...state, productSelect: action.data };
         default:
             return state;
     }

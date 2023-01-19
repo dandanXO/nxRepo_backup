@@ -9,6 +9,7 @@ import {
   TODL_COLLECTOR_CHANGE_MODAL_LOADING,
   TODL_COLLECTOR_CHANGE_MODAL_VISIBLE,
   TODL_COLLECTOR_SET_MODAL_DATA, TODL_SET_TODAY_COLLECTOR, TODL_SET_COLLECTOR_LIST,
+  TODL_SET_PRODUCT_SELECT
 } from './actions'
 import {normalizeCollector} from "../../../../utils/normalizeCollector";
 
@@ -41,6 +42,7 @@ const initState = {
     },
     todayCollector: [],
     collectorList: [],
+    productSelect: []
 }
 
 const todayList = (state = initState, action) => {
@@ -96,6 +98,8 @@ const todayList = (state = initState, action) => {
             collectorList: list,
           };
         }
+        case TODL_SET_PRODUCT_SELECT:
+            return { ...state, productSelect: action.data };
         default:
             return state;
     }
