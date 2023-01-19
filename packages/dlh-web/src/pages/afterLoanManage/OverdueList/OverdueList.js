@@ -120,8 +120,8 @@ class OverdueList extends Component {
             },
             {
                 title: props.intl.formatMessage({id: "page.table.loan"}),
-                dataIndex: 'deviceMoney',
-                key: 'deviceMoney',
+                dataIndex: 'loanAmount',
+                key: 'loanAmount',
                 width:'7%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
@@ -130,8 +130,8 @@ class OverdueList extends Component {
             // { title: '展期次数', dataIndex: 'lengNum', key: 'lengNum' },
             {
                 title: props.intl.formatMessage({id: "page.table.amount.due.currency"}),
-                dataIndex: 'payable',
-                key: 'payable',
+                dataIndex: 'payableAmount',
+                key: 'payableAmount',
                 width:'7%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
@@ -139,8 +139,8 @@ class OverdueList extends Component {
             },
             {
                 title: props.intl.formatMessage({id: "page.table.amount.paid.currency"}),
-                dataIndex: 'repaidAmt',
-                key: 'repaidAmt',
+                dataIndex: 'repaidAmount',
+                key: 'repaidAmount',
                 width:'7%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
@@ -148,8 +148,8 @@ class OverdueList extends Component {
             },
             {
                 title: props.intl.formatMessage({id: "page.table.reduce.amount.currency"}),
-                dataIndex: 'reductionAmt',
-                key: 'reductionAmt',
+                dataIndex: 'reductionAmount',
+                key: 'reductionAmount',
                 width:'7%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
