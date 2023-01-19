@@ -250,8 +250,9 @@ class OverdueList extends Component {
      
         axios({
             url: "/hs/admin/collect-overdue/download",
-            method: "post",
-            data: searchStatus
+            method: "get",
+            responseType: "blob",
+            params: searchStatus
         }).then(res => {
             hide && hide();
             this.setState({ btnDisabled: false });

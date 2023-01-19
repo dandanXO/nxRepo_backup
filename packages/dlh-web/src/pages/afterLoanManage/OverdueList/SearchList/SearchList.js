@@ -146,9 +146,6 @@ class SearchList extends Component{
                                     getFieldDecorator('stage', { initialValue: '' })(
                                         <Select>
                                             <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
-                                            <Option value={'NONE'}>NONE</Option>
-                                            <Option value={'T_1'}>T-1</Option>
-                                            <Option value={'T0'}>T0</Option>
                                             <Option value={'S1'}>S1</Option>
                                             <Option value={'S2'}>S2</Option>
                                             <Option value={'S3'}>S3</Option>

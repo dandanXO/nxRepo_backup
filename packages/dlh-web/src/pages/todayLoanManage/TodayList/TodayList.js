@@ -245,9 +245,9 @@ class TodayList extends Component {
         const searchStatus = this.convertParams(obj);
         axios({
             url: "/hs/admin/collect-today/download",
-            method: "post",
+            method: "get",
             responseType: "blob",
-            data: searchStatus
+            params: searchStatus
         })
             .then(res => {
                 hide && hide();
