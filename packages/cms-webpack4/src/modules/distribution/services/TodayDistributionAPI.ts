@@ -36,27 +36,27 @@ export const TodayDistributionAPI = API.injectEndpoints({
                 method: "get",
             }),
         }),
-        // NOTE: 依催收階段分配訂單
-        postDistributionStage: builder.query<StageDistributionRequest, null>({
-            query: (requestBody: StageDistributionRequest) => ({
-                url: `/collect-today/distribution-stage`,
-                method: "post",
-                data: requestBody,
+        // NOTE: 催收人員列表 - 获取催收阶段的催收员(依照催收階段)
+        getCollector: builder.query<DistributeCollectByStageResponse[], null>({
+            query: () => ({
+                url: `/collect-today/stage`,
+                method: "get",
             }),
         }),
         // NOTE: 自選訂單分配
-        postDistributionSelected: builder.query<SelectedDistributionRequest, null>({
+        postDistributionSelected: builder.mutation<null, SelectedDistributionRequest>({
             query: (requestBody: SelectedDistributionRequest) => ({
                 url: `/collect-today/distribution-selected`,
                 method: "post",
                 data: requestBody,
             }),
         }),
-        // NOTE: 催收人員列表 - 获取催收阶段的催收员(依照催收階段)
-        getCollector: builder.query<DistributeCollectByStageResponse[], null>({
-            query: () => ({
-                url: `/collect-today/stage`,
-                method: "get",
+        // NOTE: 依催收階段分配訂單
+        postDistributionStage: builder.mutation<null, StageDistributionRequest>({
+            query: (requestBody: StageDistributionRequest) => ({
+                url: `/collect-today/distribution-stage`,
+                method: "post",
+                data: requestBody,
             }),
         }),
 
@@ -69,4 +69,6 @@ export const {
     useLazyGetDistributionQuery,
     useGetProductNamesQuery,
     useLazyGetCollectorQuery,
+    usePostDistributionSelectedMutation,
+    usePostDistributionStageMutation,
 } = TodayDistributionAPI

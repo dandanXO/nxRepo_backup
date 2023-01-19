@@ -34,22 +34,6 @@ export const OverdueDistributionAPI = API.injectEndpoints({
                 method: "get",
             }),
         }),
-        // NOTE: 依催收階段分配訂單
-        postOverdueDistributionStage: builder.query<StageDistributionRequest, null>({
-            query: (requestBody: StageDistributionRequest ) => ({
-                url: `/collect-overdue/distribution-stage`,
-                method: "post",
-                data: requestBody,
-            }),
-        }),
-        // NOTE: 自選訂單分配
-        postOverdueDistributionSelected: builder.query<SelectedDistributionRequest, null>({
-            query: (requestBody: SelectedDistributionRequest ) => ({
-                url: `/collect-overdue/distribution-selected`,
-                method: "post",
-                data: requestBody,
-            }),
-        }),
         // NOTE: 催收人員列表 - 获取催收阶段的催收员(依照催收階段)
         // getOverdueCollector: builder.query<DistributeCollectByStageResponse, null>({
         //     query: () => ({
@@ -57,6 +41,22 @@ export const OverdueDistributionAPI = API.injectEndpoints({
         //         method: "get",
         //     }),
         // }),
+        // NOTE: 依催收階段分配訂單
+        postOverdueDistributionStage: builder.mutation<null, StageDistributionRequest>({
+            query: (requestBody: StageDistributionRequest ) => ({
+                url: `/collect-overdue/distribution-stage`,
+                method: "post",
+                data: requestBody,
+            }),
+        }),
+        // NOTE: 自選訂單分配
+        postOverdueDistributionSelected: builder.mutation<null, SelectedDistributionRequest>({
+            query: (requestBody: SelectedDistributionRequest ) => ({
+                url: `/collect-overdue/distribution-selected`,
+                method: "post",
+                data: requestBody,
+            }),
+        }),
 
     })
 })
@@ -65,4 +65,6 @@ export const {
     useLazyGetOverdueSummaryQuery,
     useLazyGetOverdueDistributionQuery,
     useGetOverdueProductNamesQuery,
+    usePostOverdueDistributionSelectedMutation,
+    usePostOverdueDistributionStageMutation,
 } = OverdueDistributionAPI

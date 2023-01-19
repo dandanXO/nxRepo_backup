@@ -7,7 +7,8 @@ import {Button, FormInstance, Space, Table} from "antd";
 import {
     useGetProductNamesQuery,
     useLazyGetDistributionQuery,
-    useLazyGetSummaryQuery
+    useLazyGetSummaryQuery,
+    usePostDistributionSelectedMutation, usePostDistributionStageMutation
 } from "../services/TodayDistributionAPI";
 
 import  {
@@ -21,7 +22,7 @@ import {useGetAvailableMerchantListQuery} from "../../product/service/product/Pr
 import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
 import {OrderDistributionModal} from "../modals/OrderDistributionModal";
 
-type StageData = {
+export type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
 }
 
@@ -207,13 +208,34 @@ export const TodayDistributionPage = () => {
     };
 
     const [showModal, setShowModal] = useState(false);
+
     const handleModalClose = () => {
         setShowModal(false);
     }
 
-    const handlerModalOk = () => {
+    const handlerModalOk = (checkedCollector: number[]) => {
+        // console.log("checkedCollector", checkedCollector);
         setShowModal(false);
+        if(isSelectedByOrder) {
+            // console.log("orderIds", selectedRow);
+            postDistributionSelected({
+                collectorIds: checkedCollector,
+                orderIds: selectedRow,
+            })
+        } else {
+            // console.log("stage", distributionStage);
+            postDistributionStage({
+                collectorIds: checkedCollector,
+                stage: distributionStage,
+            });
+        }
     }
+
+    const [isSelectedByOrder, setIsSelectedByOrder] = useState(true);
+    const [postDistributionSelected] = usePostDistributionSelectedMutation();
+    const [distributionStage, setDistributionStage] = useState<Stage>();
+    const [postDistributionStage] = usePostDistributionStageMutation();
+
 
     return (
         <AdminPage navigator={{
@@ -261,11 +283,13 @@ export const TodayDistributionPage = () => {
                     searchable={true}
                     headerTitle={
                         <Space>
-                            <Button key="1" type="primary" ghost disabled={false} onClick={() => {
+                            <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {
                                 setShowModal(true);
+                                setIsSelectedByOrder(true);
                             }}>自选订单分配</Button>
-                            <Button key="2" type="primary" ghost disabled={false} onClick={() => {
+                            <Button key="2" type="primary" ghost disabled={selectedRow.length > 0} onClick={() => {
                                 setShowModal(true);
+                                setIsSelectedByOrder(false);
                             }}>依阶段分配</Button>
                         </Space>
                     }
@@ -292,7 +316,14 @@ export const TodayDistributionPage = () => {
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}
-                <OrderDistributionModal show={showModal} handleCloseModal={handleModalClose} onOk={handlerModalOk}/>
+                <OrderDistributionModal
+                    show={showModal}
+                    handleCloseModal={handleModalClose}
+                    onOk={handlerModalOk}
+                    isSelectedByOrder={isSelectedByOrder}
+                    summaryData={summaryData}
+                    setDistributionStage={setDistributionStage}
+                />
             </>
         </AdminPage>
     )
