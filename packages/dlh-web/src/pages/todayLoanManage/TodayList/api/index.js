@@ -3,7 +3,7 @@
 * */
 import { axios } from 'utils';
 const api = {
-    orderListData: '/hs/admin/orderToday/list',
+    orderListData: '/hs/admin/collect-today/list',
     // getUrgePerson: '/hs/admin/user/cslist',
     // distributeOrder: '/hs/admin/orderOverdue/distribution'
     getUrgePerson: '/hs/admin/orderToday/getDisPerOrGroup',
@@ -12,9 +12,10 @@ const api = {
     orderTodayGetCollectStreamList: '/hs/admin/orderToday/collect-stream/list',
     getTodayCollector: '/hs/admin/collect-today/stage',
     getCollectorList: '/hs/admin/collect-today/collector',
+    productList:'/hs/admin/commons/product-names'
 };
 const getOrderListData = (params) => {
-    return axios.post(api.orderListData, params);
+    return axios.get(api.orderListData, {params});
 }
 const getUrgePersonData = (params) => {
     return axios.post(api.getUrgePerson, params);
@@ -46,4 +47,9 @@ const collectorGetDetail = (params) => {
   return axios.get(api.orderTodayGetCollectStreamList, { params: { todayId: params.id } });
 }
 
-export { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getTodayCollector, getCollectorList };
+const getProductList = (params) => {
+    return axios.get(api.productList);
+}
+
+
+export { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getTodayCollector, getCollectorList, getProductList };

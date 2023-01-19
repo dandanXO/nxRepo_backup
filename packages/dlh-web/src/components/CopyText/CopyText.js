@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styles from './CopyText.less'
 
 // acturalCopy 實際複製的可以與顯示的內容不同，沒給就是預設text 
-function CopyText({ text, acturalCopy = text, intl, isEllispsis = false }) {
+function CopyText({ text, acturalCopy = text, intl, isEllispsis = false ,toolTipText='' }) {
 
     const handleCopy = () => {
         message.success(intl.formatMessage({ id: "page.table.copy.success" }), 2);
@@ -15,7 +15,7 @@ function CopyText({ text, acturalCopy = text, intl, isEllispsis = false }) {
         <div className={styles.copyText}> 
             {text &&
                 <CopyToClipboard text={acturalCopy} onCopy={handleCopy}> 
-                    <Tooltip title={<FormattedMessage id="page.table.copy" />} >
+                    <Tooltip title={toolTipText === '' ? <FormattedMessage id="page.table.copy" /> : toolTipText} >
                         <span className={`${isEllispsis ? styles.isEllispsis : ''}`}>{text}</span>
                     </Tooltip>
                 </CopyToClipboard>

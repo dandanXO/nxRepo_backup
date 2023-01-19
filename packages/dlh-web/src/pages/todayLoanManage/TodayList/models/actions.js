@@ -14,6 +14,8 @@ export const TODL_CHANGE_MODAL_VISIBLE = 'TODL_CHANGE_MODAL_VISIBLE';
 export const TODL_DISTRIBUTE_ORDER = 'TODL_DISTRIBUTE_ORDER';
 export const TODL_CHANGE_SELECT_KEY = 'TODL_CHANGE_SELECT_KEY';
 export const TODL_CHANGE_PERSON_TYPE = 'TODL_CHANGE_PERSON_TYPE';
+export const TODL_GET_PRODUCT_SELECT= 'TODL_GET_PRODUCT_SELECT';
+export const TODL_SET_PRODUCT_SELECT= 'TODL_SET_PRODUCT_SELECT';
 // 催收人紀錄
 export const TODL_COLLECTOR_CHANGE_MODAL_LOADING = 'TODL_COLLECTOR_CHANGE_MODAL_LOADING';
 export const TODL_COLLECTOR_CHANGE_MODAL_VISIBLE = 'TODL_COLLECTOR_CHANGE_MODAL_VISIBLE';
@@ -34,7 +36,9 @@ export const todlSetPerson = (data) => ({ type: TODL_SET_PERSON, data });
 export const todlChangeModalVisible = (option) => ({ type: TODL_CHANGE_MODAL_VISIBLE, option });
 export const todlDistributeOrder = (params, callBack) => ({ type: TODL_DISTRIBUTE_ORDER, params, callBack });
 export const todlChangeSelectKey = (data) => ({ type: TODL_CHANGE_SELECT_KEY, data });
-export const todlChangePersonType = (option) => ({ type: TODL_CHANGE_PERSON_TYPE, option })
+export const todlChangePersonType = (option) => ({ type: TODL_CHANGE_PERSON_TYPE, option });
+export const todlGetProductSelect = (params) => ({ type: TODL_GET_PRODUCT_SELECT, params });
+export const todlSetProductSelect = (data) => ({ type: TODL_SET_PRODUCT_SELECT, data });
 // 催收人紀錄
 export const todlColleterChangeModalVisible = (option) => ({ type: TODL_COLLECTOR_CHANGE_MODAL_VISIBLE, option });
 export const todlColleterChangeModalLoading = (option) => ({ type: TODL_COLLECTOR_CHANGE_MODAL_LOADING, option });

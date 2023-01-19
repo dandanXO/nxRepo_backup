@@ -3,7 +3,7 @@
 * */
 import { axios } from 'utils';
 const api = {
-    orderListData: '/hs/admin/orderOverdue/list',
+    orderListData: '/hs/admin/collect-overdue/list',
     // getUrgePerson: '/hs/admin/user/cslist',
     // distributeOrder: '/hs/admin/orderOverdue/distribution'
     // getUrgePerson: '/hs/admin/orderOverdue/getDisPerOrGroup',
@@ -15,11 +15,12 @@ const api = {
     getOverdueCollector: '/hs/admin/collect-overdue/collector',
     distributeOrder: '/hs/admin/orderOverdue/distribution',
     // 獲取催收分配紀錄
-    orderOverdueGetCollectStreamList: '/hs/admin/orderOverdue/collect-stream/list'
+    orderOverdueGetCollectStreamList: '/hs/admin/orderOverdue/collect-stream/list',
+    productList:'/hs/admin/commons/product-names'
     
 };
 const getOrderListData = (params) => {
-    return axios.post(api.orderListData, params);
+    return axios.get(api.orderListData, {params});
 }
 const getOverdueCollectorStageData = (params) => {
     return axios.get(api.getOverdueCollectorStage);
@@ -50,4 +51,9 @@ const collectorGetDetail = (params) => {
   return axios.get(api.orderOverdueGetCollectStreamList, { params: { overdueId: params.id } });
 }
 
-export { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail };
+const getProductList = (params) => {
+    return axios.get(api.productList);
+}
+
+
+export { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail, getProductList };

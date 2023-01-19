@@ -16,27 +16,27 @@ import {
   TODL_GET_TODAY_COLLECTOR,
   todlSetTodayCollector,
   TODL_GET_COLLECTOR_LIST,
-  todlSetCollectorList
+  todlSetCollectorList,
+  TODL_GET_PRODUCT_SELECT,
+  todlSetProductSelect
 } from './actions';
-import {getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getCollectorList} from '../api';
+import { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getCollectorList, getProductList } from '../api';
 import {message} from "antd";
 import {getTodayCollector} from "../../TodayOrderDistribute/api";
 
-function* getTableData(action) {
+function* getTableData (action) {
     yield put(todlChangeTableLoading(true));
-    try{
+    try {
         const res = yield call(getOrderListData, action.params);
-        if(Number(res.code) === 200) {
-            const obj = {
-                data: res.data || [],
-                pagination: {
-                    total: res.total,
-                    current: res.pageNum
-                }
-            };
-            yield put(todlSetTableData(obj));
-            yield put(todlChangeSelectKey([]));
-        }
+        const obj = {
+            data: res.records || [],
+            pagination: {
+                total: res.totalRecords,
+                current: res.currentPage
+            }
+        };
+        yield put(todlSetTableData(obj));
+        yield put(todlChangeSelectKey([]));
     } catch (e) {
 
     }
@@ -84,7 +84,18 @@ function* distributeData(action) {
 function* watchDistributeData() {
     yield takeEvery(TODL_DISTRIBUTE_ORDER, distributeData);
 }
-
+//產品列表下拉
+function* getProductData(action) {
+    try {
+        const res = yield call(getProductList, action.params);
+        yield put(todlSetProductSelect(res));
+    } catch (e) {
+        console.log(e);
+    }
+}
+function* watchGetProductData() {
+    yield takeEvery(TODL_GET_PRODUCT_SELECT, getProductData);
+}
 export default function* root() {
     yield all([
         fork(watchGetTableData),
@@ -93,6 +104,7 @@ export default function* root() {
         fork(watchCollectorGetDetail),
         fork(watchGetTodayCollector),
         fork(watchGetCollectorList),
+        fork(watchGetProductData)
     ])
 }
 

@@ -17,11 +17,7 @@ import {getIsSuperAdmin, getAllMerchants} from "utils";
 import DetailModal from "./DetailModal/DetailModal";
 import {todlGetCollectorList} from "./models/actions";
 
-const statusObj = {
-    "0": <FormattedMessage id="page.search.list.outstanding"/>,
-    "1": <FormattedMessage id="page.search.list.repaid"/>,
-    "3": <FormattedMessage id="page.search.list.partial.repaid"/>
-}
+
 
 class TodayList extends Component {
     constructor(props) {
@@ -45,18 +41,15 @@ class TodayList extends Component {
             person: '',
         };
         this.convertParams = (obj) => {
-            const {personType} = this.props;
-            let key = personType === 'group' ? 'departmentId' : 'collectorId';
-            const { time, phoneNo, name, orderNo, orderStatus, person } = obj;
+            const { disTime, time, appName, collectorId, orderNo, productId, stage, status, userPhone, userTrueName } = obj;
             const isArr = Array.isArray(time) && time.length > 0;
+            const isArr2 = Array.isArray(disTime) && disTime.length > 0;
             return {
                 startTime: isArr ? time[0].format('YYYY-MM-DD 00:00:00') : '',
                 endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
-                status: orderStatus,
-                userPhone: phoneNo,
-                userTrueName: name,
-                orderNo,
-                [key]: person,
+                fstartTime: isArr2 ? disTime[0].format('YYYY-MM-DD 00:00:00') : '',
+                fendTime: isArr2 ? disTime[1].format('YYYY-MM-DD 23:59:59') : '',
+                appName, collectorId, orderNo, productId, stage, status, userPhone, userTrueName
             };
         }
         this.columns = [
@@ -80,12 +73,12 @@ class TodayList extends Component {
                 title: props.intl.formatMessage({id: "page.search.list.distribute.time"}),
                 dataIndex: 'distributionTime',
                 key: 'distributionTime',
-                width: '11%',
+                width: '14%',
                 render(text) {
-                    return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+                    return moment(text).format("YYYY-MM-DD HH:mm:ss")
                 }
             },
-            {title: props.intl.formatMessage({id: "page.search.list.order.no"}), dataIndex: 'orderNo', key: 'orderNo', width: '13%', render(text) { return <CopyText text={text} /> } },
+            {title: props.intl.formatMessage({id: "page.search.list.order.no"}), dataIndex: 'orderNo', key: 'orderNo', width: '16%', render(text) { return <CopyText text={text} /> } },
             {
                 title: <FormattedMessage id="page.search.list.product.name" />,
                 dataIndex: "productName",
@@ -97,23 +90,23 @@ class TodayList extends Component {
               title: <FormattedMessage id="page.search.list.mobile" />,
               dataIndex: "userPhone",
               key: "userPhone",
-              width:'10%',
+              width:'8%',
               render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
             {
                 title: <FormattedMessage id="page.table.appName" />,
                 dataIndex: "appName",
                 key: "appName",
-                width:'10%',
+                width:'8%',
                 render(text) { return <CopyText text={text} isEllispsis={true} /> }
             },
-            {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userTrueName', key: 'userTrueName', width: '8%', render(text) { return <CopyText text={text} isEllispsis={true}/> } },
+            {title: props.intl.formatMessage({id: "page.search.list.name"}), dataIndex: 'userName', key: 'userName', width: '8%', render(text) { return <CopyText text={text} isEllispsis={true} toolTipText={text}/> } },
             // { title: '手机型号', dataIndex: 'deviceModel', key: 'deviceModel' },
             // { title: '手机号', dataIndex: 'userPhone', key: 'userPhone' },
             {
                 title: props.intl.formatMessage({id: "page.table.loan"}),
-                dataIndex: 'deviceMoney',
-                key: 'deviceMoney',
+                dataIndex: 'loanAmount',
+                key: 'loanAmount',
                 width: '6%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
@@ -122,8 +115,8 @@ class TodayList extends Component {
             // { title: '展期次数', dataIndex: 'lengNum', key: 'lengNum' },
             {
                 title: props.intl.formatMessage({id: "page.table.amount.due.currency"}),
-                dataIndex: 'payable',
-                key: 'payable',
+                dataIndex: 'payableAmount',
+                key: 'payableAmount',
                 width: '6%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
@@ -131,8 +124,8 @@ class TodayList extends Component {
             },
             {
                 title: props.intl.formatMessage({id: "page.table.reduce.amount.currency"}),
-                dataIndex: 'reductionAmt',
-                key: 'reductionAmt',
+                dataIndex: 'reductionAmount',
+                key: 'reductionAmount',
                 width: '6%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
@@ -140,27 +133,67 @@ class TodayList extends Component {
             },
             {
                 title: props.intl.formatMessage({id: "page.table.amount.paid.currency"}),
-                dataIndex: 'payMoney',
-                key: 'payMoney',
+                dataIndex: 'repaidAmount',
+                key: 'repaidAmount',
                 width: '6%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
                 }
             },
             {
+                title: props.intl.formatMessage({id: "page.table.overdue.stage"}),
+                dataIndex: 'stage',
+                key: 'stage',
+                width: '6%',
+                render(text, record) {
+                    return <CopyText text={text}/>;
+                }
+            },
+            {
+                title: props.intl.formatMessage({id: "customer.status"}),
+                dataIndex: 'collectRecordStatus',
+                key: 'collectRecordStatus',
+                width: '6%',
+                render(text, record) {
+                    const customerStatus = {
+                        0: "page.table.none",
+                        1: "customer.status.promise",
+                        2: "customer.status.missed",
+                        3: "customer.status.turned.off",
+                        4: "customer.status.lost.contact",
+                        5: "customer.status.other"
+                    }
+                    return text !== null ? <FormattedMessage id={customerStatus[text]} /> : '';
+                }
+            },
+            {
+                title: props.intl.formatMessage({id: "windowPage.remarks"}),
+                dataIndex: 'collectRecordRemark',
+                key: 'collectRecordRemark',
+                width: '4%',
+                render(text, record) {
+                    return <CopyText text={text} isEllispsis={true}  toolTipText={text}/>;
+                }
+            },
+            {
                 title: props.intl.formatMessage({id: "page.search.list.order.status"}),
-                dataIndex: 'status',
-                key: 'status',
-                width: '5%',
+                dataIndex: 'repayStatus',
+                key: 'repayStatus',
+                width: '6%',
                 render(text) {
-                    return statusObj[text] || '';
+                    const repayStatus = {
+                        0: <FormattedMessage id="page.search.list.repaymenting"/>,
+                        1: <FormattedMessage id="windowPage.cleared"/>,
+                        3: <FormattedMessage id="page.search.list.partial.repaid"/>
+                    }
+                    return  text !== null ? repayStatus[text] : '';
                 }
             },
             {
                 title: props.intl.formatMessage({id: "page.table.designator"}),
-                dataIndex: 'distributionName',
-                key: 'distributionName',
-                width: '8%',
+                dataIndex: 'distributorName',
+                key: 'distributorName',
+                width: '10%',
                 render(text) {
                     return text;
                 }
@@ -169,7 +202,7 @@ class TodayList extends Component {
                 title: props.intl.formatMessage({id: "windowPage.collector"}),
                 dataIndex: 'collectorName',
                 key: 'collectorName',
-                width: '7%',
+                width: '6%',
                 render(text, record) {
                     return (
                       <div>
@@ -181,12 +214,12 @@ class TodayList extends Component {
                 }
             },
             {
-                title: props.intl.formatMessage({ id: "page.search.list.expiration.time" }),
+                title: ()=><div>{props.intl.formatMessage({ id: "page.search.list.expiration.time" })} <Tooltip title={props.intl.formatMessage({id:"page.table.due.time.same.day"})}><Icon type="info-circle" /></Tooltip></div> ,
                 dataIndex: 'expireTime',
                 key: 'expireTime',
-                width: '11%',
+                width: '8%',
                 render(text) {
-                    return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
+                    return moment(text).format("YYYY-MM-DD")
                 }
             }
 
@@ -207,17 +240,19 @@ class TodayList extends Component {
     exportRecord = (obj) => {
         this.setState({btnDisabled: true});
         let hide = message.loading(this.props.intl.formatMessage({id: "page.table.exporting"}), 0);
-        const {searchParams} = this.props;
-        const searchStatus = this.convertParams(searchParams);
+        const {setSearchParams, getTableData} = this.props;
+        setSearchParams(obj);
+        const searchStatus = this.convertParams(obj);
         axios({
-            url: "/hs/admin/orderToday/todayListDownLoad",
-            method: "post",
+            url: "/hs/admin/collect-today/download",
+            method: "get",
             responseType: "blob",
-            data: searchStatus
+            params: searchStatus
         })
             .then(res => {
                 hide && hide();
                 this.setState({btnDisabled: false});
+                getTableData({...searchStatus, pageNum: 1, pageSize: 10});
                 download(res, this.props.intl.formatMessage({id: "page.today.list.export"}, {expDate: Date.now()}));
             })
             .catch(() => {
@@ -299,13 +334,14 @@ class TodayList extends Component {
     }
 
     componentDidMount() {
-        const { setSearchParams, getTableData, tableData: { pagination }, getTodayCollector, getCollectorList } = this.props;
+        const { setSearchParams, getTableData, tableData: { pagination }, getTodayCollector, getCollectorList ,getProductSelect} = this.props;
         setSearchParams(this.initSearchParams);
         let params = this.convertParams(this.initSearchParams);
         params = { ...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1 };
         getCollectorList();
         getTableData(params);
         getTodayCollector();
+        getProductSelect();
 
     }
 
@@ -346,6 +382,7 @@ class TodayList extends Component {
             collectorModalData,
             todayCollector,
             todayCollectorList,
+            productSelect
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -358,16 +395,14 @@ class TodayList extends Component {
             <div>
                 <SearchList
                     handleSubmit={this.handleSearch}
-                    params={searchParams} personData={todayCollectorList}
+                    params={searchParams} 
+                    personData={todayCollectorList}
+                    productSelect={productSelect}
+                    btnDisabled={btnDisabled}
+                    distributeOrder={this.distributeOrder}
+                    exportRecord={this.exportRecord}
                 />
-                <div>
-                    <span>
-                        <Button type={'primary'} onClick={this.distributeOrder}><FormattedMessage id="page.table.redistribute.order"/></Button>
-                    </span>
-                    <span className={styles.btnStyle}>
-                        <Button type={'danger'} disabled={btnDisabled} onClick={this.exportRecord}><FormattedMessage id="page.table.export.record"/></Button>
-                    </span>
-                </div>
+              
                 <CommonTable
                     columns={this.columns}
                     pagination={pageInfo}
@@ -406,6 +441,7 @@ const mapStateToProps = (state) => {
         selectKeys: todayListState['selectKeys'],
         visible: todayListState['visible'],
         personType: todayListState['personType'],
+        productSelect:todayListState['productSelect'],
         // 催收人員列表
         collectorModalLoading: todayListState['collector']['modalLoading'],
         collectorVisible: todayListState['collector']['visible'],
@@ -425,6 +461,7 @@ const mapDispatchToProps = (dispatch) => {
         changeModalVisible: todayListAction.todlChangeModalVisible,
         distributeOrder: todayListAction.todlDistributeOrder,
         changeSelectKeys: todayListAction.todlChangeSelectKey,
+        getProductSelect: todayListAction.todlGetProductSelect,
         // 催收人員列表
         collectorChangeModalVisible: todayListAction.todlColleterChangeModalVisible,
         collectorChangeModalLoading: todayListAction.todlColleterChangeModalLoading,

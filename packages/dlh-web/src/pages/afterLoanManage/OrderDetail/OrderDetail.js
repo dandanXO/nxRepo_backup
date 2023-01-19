@@ -55,7 +55,20 @@ const urgeRecordColumns = [
             return moment(text).format('YYYY-MM-DD HH:mm:ss');
         }
     },
-    { title: <FormattedMessage id="customer.status" />, dataIndex: 'status', key: 'status' , width: '15%'},
+    {
+        title: <FormattedMessage id="customer.status" />, dataIndex: 'status', key: 'status', width: '15%',
+        render (text) {
+            const customerStatus = {
+                0: "page.table.none",
+                1: "customer.status.promise",
+                2: "customer.status.missed",
+                3: "customer.status.turned.off",
+                4: "customer.status.lost.contact",
+                5: "customer.status.other"
+            }
+            return text !== null ? <FormattedMessage id={customerStatus[text]} /> : '';
+        }
+    },
     { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark', width: '50%' },
     { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorname', key: 'collectorname' }
 ];
