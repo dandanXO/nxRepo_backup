@@ -12,7 +12,6 @@ import {
     Stage,
 } from "../types/index";
 
-import {useGetAvailableMerchantListQuery} from "../../product/service/product/ProductApi";
 import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
 import {useGetOverdueProductNamesQuery, useLazyGetOverdueSummaryQuery, useLazyGetOverdueDistributionQuery} from "../services/OverdueDistributionAPI";
 
@@ -59,19 +58,7 @@ export const OverdueDistributionPage = () => {
         })
     }, [summaryResponseData])
 
-
-
-    const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
     const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetOverdueProductNamesQuery(null);
-
-    let tempMerchantListMap = (merchantList?.reduce((previousItem, currentItem) => {
-        return {
-            ...previousItem,
-            [currentItem.merchantId]: {
-                text: currentItem.name,
-            }
-        }
-    }, {"": {text:"全部"} }) as any)
 
     const productListMap = (productList?.reduce((previousItem, currentItem) => {
         return {
@@ -99,16 +86,6 @@ export const OverdueDistributionPage = () => {
             initialValue: "",
             width: 300,
             hideInSearch: true,
-        },
-        {
-            key: 'merchantId',
-            title: '商戶名',
-            dataIndex: 'merchantId',
-            width: 300,
-            hideInTable: true,
-            initialValue: "",
-            valueType: 'select',
-            valueEnum: tempMerchantListMap,
         },
         {
             key: 'orderNo',

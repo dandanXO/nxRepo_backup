@@ -18,7 +18,6 @@ import  {
     Stage,
 } from "../types/index"
 
-import {useGetAvailableMerchantListQuery} from "../../product/service/product/ProductApi";
 import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
 import {OrderDistributionModal} from "../modals/OrderDistributionModal";
 
@@ -54,19 +53,7 @@ export const TodayDistributionPage = () => {
         })
     }, [summaryResponseData])
 
-
-
-    const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
     const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetProductNamesQuery(null);
-
-    let tempMerchantListMap = (merchantList?.reduce((previousItem, currentItem) => {
-        return {
-            ...previousItem,
-            [currentItem.merchantId]: {
-                text: currentItem.name,
-            }
-        }
-    }, {"": {text:"全部"} }) as any)
 
     const productListMap = (productList?.reduce((previousItem, currentItem) => {
         return {
@@ -94,16 +81,6 @@ export const TodayDistributionPage = () => {
             initialValue: "",
             width: 300,
             hideInSearch: true,
-        },
-        {
-            key: 'merchantId',
-            title: '商戶名',
-            dataIndex: 'merchantId',
-            width: 300,
-            hideInTable: true,
-            initialValue: "",
-            valueType: 'select',
-            valueEnum: tempMerchantListMap,
         },
         {
             key: 'orderNo',
