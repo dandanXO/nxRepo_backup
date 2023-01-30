@@ -13,7 +13,13 @@ import {
 } from "../types/index";
 
 import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
-import {useGetOverdueProductNamesQuery, useLazyGetOverdueSummaryQuery, useLazyGetOverdueDistributionQuery} from "../services/OverdueDistributionAPI";
+import {
+    useGetOverdueProductNamesQuery,
+    useLazyGetOverdueSummaryQuery,
+    useLazyGetOverdueDistributionQuery,
+    usePostOverdueDistributionSelectedMutation, usePostOverdueDistributionStageMutation
+} from "../services/OverdueDistributionAPI";
+import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
@@ -214,6 +220,35 @@ export const OverdueDistributionPage = () => {
         setSelectedRow(selectedRowKeys);
     };
 
+    const [showModal, setShowModal] = useState(false);
+
+    const handleModalClose = () => {
+        setShowModal(false);
+    }
+
+    const handlerModalOk = (checkedCollector: number[]) => {
+        // console.log("checkedCollector", checkedCollector);
+        setShowModal(false);
+        if(isSelectedByOrder) {
+            // console.log("orderIds", selectedRow);
+            postDistributionSelected({
+                collectorIds: checkedCollector,
+                orderIds: selectedRow,
+            })
+        } else {
+            // console.log("stage", distributionStage);
+            postDistributionStage({
+                collectorIds: checkedCollector,
+                stage: distributionStage,
+            });
+        }
+    }
+
+    const [isSelectedByOrder, setIsSelectedByOrder] = useState(true);
+    const [postDistributionSelected] = usePostOverdueDistributionSelectedMutation();
+    const [distributionStage, setDistributionStage] = useState<Stage>();
+    const [postDistributionStage] = usePostOverdueDistributionStageMutation();
+
     return (
         <AdminPage navigator={{
             ancestor: {
@@ -280,8 +315,8 @@ export const OverdueDistributionPage = () => {
                     searchable={true}
                     headerTitle={
                         <Space>
-                            <Button key="1" type="primary" ghost disabled={false} onClick={() => {}}>自选订单分配</Button>
-                            <Button key="2" type="primary" ghost disabled={false} onClick={() => {}}>依阶段分配</Button>
+                            <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {}}>自选订单分配</Button>
+                            <Button key="2" type="primary" ghost disabled={selectedRow.length > 0} onClick={() => {}}>依阶段分配</Button>
                         </Space>
                     }
                     isSearchFromClient={false}
@@ -292,11 +327,11 @@ export const OverdueDistributionPage = () => {
                             ...searchFormState,
                         };
                         setFormState(searchForm)
-                        console.log("searchForm", searchForm)
+                        // console.log("searchForm", searchForm)
                         triggerGetList(searchForm)
                     }}
                     onFormResetCallback={() => {
-                        console.log("onFormResetCallback");
+                        // console.log("onFormResetCallback");
                     }}
                     rowKey={"id"}
                     rowSelection={{
@@ -306,7 +341,16 @@ export const OverdueDistributionPage = () => {
                     }}
                 />
                 {/*NOTICE: Modal*/}
-                <div>{contextHolder}</div>
+                {/*<div>{contextHolder}</div>*/}
+
+                <CommonOrderDistributionModal
+                    show={showModal}
+                    handleCloseModal={handleModalClose}
+                    onOk={handlerModalOk}
+                    isSelectedByOrder={isSelectedByOrder}
+                    summaryData={summaryData}
+                    setDistributionStage={setDistributionStage}
+                />
             </>
         </AdminPage>
     )

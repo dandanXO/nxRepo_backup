@@ -19,7 +19,7 @@ import  {
 } from "../types/index"
 
 import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
-import {OrderDistributionModal} from "../modals/OrderDistributionModal";
+import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
 
 export type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
@@ -191,16 +191,16 @@ export const TodayDistributionPage = () => {
     }
 
     const handlerModalOk = (checkedCollector: number[]) => {
-        // console.log("checkedCollector", checkedCollector);
+        console.log("checkedCollector", checkedCollector);
         setShowModal(false);
         if(isSelectedByOrder) {
-            // console.log("orderIds", selectedRow);
+            console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
             })
         } else {
-            // console.log("stage", distributionStage);
+            console.log("stage", distributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
                 stage: distributionStage,
@@ -293,7 +293,7 @@ export const TodayDistributionPage = () => {
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}
-                <OrderDistributionModal
+                <CommonOrderDistributionModal
                     show={showModal}
                     handleCloseModal={handleModalClose}
                     onOk={handlerModalOk}

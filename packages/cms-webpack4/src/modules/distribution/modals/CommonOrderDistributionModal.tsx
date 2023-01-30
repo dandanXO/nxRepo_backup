@@ -16,7 +16,7 @@ interface OrderDistributionModalProps {
     setDistributionStage: (distributionStage: Stage) => void;
     summaryData?: StageData;
 }
-export const OrderDistributionModal = (props: OrderDistributionModalProps) => {
+export const CommonOrderDistributionModal = (props: OrderDistributionModalProps) => {
     const form = useForm();
 
     const [triggerGetCollector , {
@@ -31,7 +31,7 @@ export const OrderDistributionModal = (props: OrderDistributionModalProps) => {
 
     useEffect(() => {
         triggerGetCollector(null);
-    })
+    }, []);
 
     const [checkedCollector, setCheckedCollector] = useState([]);
 
