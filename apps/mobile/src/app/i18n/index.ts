@@ -23,6 +23,9 @@ import {
   i18nUploadingFileModal
 } from "../components/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations";
 import {i18nRepaymentAdsModal} from "../components/pages/LoanDetailsPage/modal/RepaymentAdsModal/i18n/translations";
+import {
+  i18nRepaymentStepsModalTranslations
+} from "../components/pages/LoanDetailsPage/modal/RepaymentStepsModal/i18nTranslations";
 
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -52,6 +55,7 @@ i18next
         [i18nProductDetailModal.namespace]: i18nProductDetailModal.translation.en_US,
         [i18nSubmitOrderModal.namespace]: i18nSubmitOrderModal.translation.en_US,
         [i18nSubmitOrderSuccessModal.namespace]: i18nSubmitOrderSuccessModal.translation.en_US,
+        [i18nRepaymentStepsModalTranslations.namespace]: i18nRepaymentStepsModalTranslations.translation.en_US,
 
         // NOTICE: Pages
         // NOTE: BankBindPage
@@ -102,6 +106,7 @@ i18next
         [i18nProductDetailModal.namespace]: i18nProductDetailModal.translation.bn_BD,
         [i18nSubmitOrderModal.namespace]: i18nSubmitOrderModal.translation.bn_BD,
         [i18nSubmitOrderSuccessModal.namespace]: i18nSubmitOrderSuccessModal.translation.bn_BD,
+        [i18nRepaymentStepsModalTranslations.namespace]: i18nRepaymentStepsModalTranslations.translation.bn_BD,
 
         // NOTICE: Pages
         // NOTE: BankBindPage
