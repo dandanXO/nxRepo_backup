@@ -7,8 +7,8 @@ import {ActivityModel} from "../../../service/AdsApi";
 
 type IUseAdminTable = {
     triggerGetList: any;
-    triggerGet: any;
-    triggerDelete: any;
+    triggerGet?: any;
+    triggerDelete?: any;
     // currentFormData: any;
 }
 export const useAdminFormModal = (props: IUseAdminTable) => {

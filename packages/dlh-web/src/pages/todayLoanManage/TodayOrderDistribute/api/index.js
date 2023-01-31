@@ -18,7 +18,7 @@ const distributeOrder = (params) => {
     return axios.post(api.distributeOrder, params);
 }
 const getTodayCollector = () => {
-  return axios.get(api.getTodayCollector);
+    return axios.get(api.getTodayCollector);
 }
 
 export { getOrderListData, getUrgePersonData, distributeOrder, getTodayCollector };
