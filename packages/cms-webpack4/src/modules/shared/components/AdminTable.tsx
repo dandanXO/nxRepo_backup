@@ -1,7 +1,7 @@
-import {Button, FormInstance, Space} from "antd";
+import {Button, FormInstance, Space, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 
 export interface ModalContent {
     show: boolean;
@@ -33,7 +33,24 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     onFormResetCallback?: () => void;
     // NOTE: setting
     triggerGetList?: () => void;
+    headerTitle?: React.ReactNode;
+    // onSubmit?: (params: any) => void;
+    // onReset?: () => void;
+    // onLoad?: (dataSource: any[]) => void;
+    rowKey?: string;
+    rowSelection?: any;
 }
+
+interface ActionType {
+    reload: (resetPageIndex?: boolean) => void;
+    reloadAndRest: () => void;
+    reset: () => void;
+    clearSelected?: () => void;
+    startEditable: (rowKey: string) => boolean;
+    cancelEditable: (rowKey: string) => boolean;
+
+}
+
 export const AdminTable = <TableListItemDataType,>({
                                                        tableHeaderColumns,
                                                        loading,
@@ -49,9 +66,16 @@ export const AdminTable = <TableListItemDataType,>({
                                                        onFormSearchCallback,
                                                        onFormResetCallback,
                                                        triggerGetList,
+                                                       headerTitle,
+                                                       // onSubmit,
+                                                       // onReset,
+                                                       // onLoad,
+                                                       rowKey = "",
+                                                       rowSelection,
 }: AdminTableTemplateProps<TableListItemDataType>) => {
+
     // NOTE: actionRef
-    // const actionRef = useRef<ActionType>();
+    const actionRef = useRef<ActionType>();
 
     // NOTE: cachedTableHeaderColumns
     // const [cachedTableHeaderColumns, setCachedTableHeaderColumns] = useState<ProColumns<TableListItemDataType, "text">[]>()
@@ -117,8 +141,10 @@ export const AdminTable = <TableListItemDataType,>({
 
     const [currentPaginationPageSize, setCurrentPaginationPageSize] = useState(10);
 
+
     return (
         <ProTable<TableListItemDataType>
+
             // Table action 的引用，便于自定义触发
             // actionRef={actionRef}
             // 可以获取到查询表单的 form 实例，用于一些灵活的配置
@@ -145,6 +171,14 @@ export const AdminTable = <TableListItemDataType,>({
                 // NOTICE: refresh icon
                 reload: ()=> triggerGetList(),
             }}
+            // alwaysShowAlert={true}
+            rowSelection={{
+                // 自定义选择项参考: https://ant.design/components/table-cn/#components-table-demo-row-selection-custom
+                // 注释该行则默认不显示下拉选项
+                // selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+                // defaultSelectedRowKeys: [1],
+                ...rowSelection,
+            }}
             // dateFormatter="string"
             dateFormatter={(value, valueType) => {
                 // console.log('====>', value, valueType);
@@ -152,6 +186,7 @@ export const AdminTable = <TableListItemDataType,>({
             }}
             // NOTE: Unknow
             headerTitle={
+                headerTitle ? headerTitle :
                 <>
                     {hasAddForm && (
                         <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback && onAddCallback()}>{addText}</Button>
@@ -176,8 +211,6 @@ export const AdminTable = <TableListItemDataType,>({
 
             }}
             // form={form}
-            // onSubmit={(params: U) => void}
-            // onReset={() => void}
             loading={loading}
             // NOTE:
             // scroll={{ x: 1000 }}
@@ -191,6 +224,9 @@ export const AdminTable = <TableListItemDataType,>({
             // onCollapse(collapsed: boolean) => void;
             // 是否显示收起之后显示隐藏个数
             // showHiddenNum={false}
+            // 用來標示選取的key
+            rowKey={rowKey}
+
         />
     )
 }

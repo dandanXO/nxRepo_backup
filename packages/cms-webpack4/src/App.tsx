@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Provider} from "react-redux";
-import {appStore} from "./modules/core/store";
+import {appStore} from "./modules/shared/store";
 import "./styles/app.less";
 import {AppRouter} from "./AppRouter";
 require('antd/dist/antd.less');
