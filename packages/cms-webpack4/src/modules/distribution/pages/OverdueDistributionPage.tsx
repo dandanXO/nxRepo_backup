@@ -168,12 +168,14 @@ export const OverdueDistributionPage = () => {
             title: '逾期阶段',
             dataIndex: 'stage',
             hideInTable: true,
-            initialValue: Stage.T_1,
+            initialValue: Stage.S1,
             width: 300,
             // valueEnum: Stage,
             valueEnum: {
-                [Stage.T0]: Stage.T0,
-                [Stage.T_1]: Stage.T_1,
+                [Stage.S1]: Stage.S1,
+                [Stage.S2]: Stage.S2,
+                [Stage.S3]: Stage.S3,
+                [Stage.S4]: Stage.S4,
             },
             valueType: 'select',
         },
@@ -315,8 +317,14 @@ export const OverdueDistributionPage = () => {
                     searchable={true}
                     headerTitle={
                         <Space>
-                            <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {}}>自选订单分配</Button>
-                            <Button key="2" type="primary" ghost disabled={selectedRow.length > 0} onClick={() => {}}>依阶段分配</Button>
+                            <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {
+                                setShowModal(true);
+                                setIsSelectedByOrder(true);
+                            }}>自选订单分配</Button>
+                            <Button key="2" type="primary" ghost disabled={selectedRow.length > 0} onClick={() => {
+                                setShowModal(true);
+                                setIsSelectedByOrder(false);
+                            }}>依阶段分配</Button>
                         </Space>
                     }
                     isSearchFromClient={false}
