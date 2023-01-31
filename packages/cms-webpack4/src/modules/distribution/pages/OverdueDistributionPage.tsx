@@ -317,8 +317,14 @@ export const OverdueDistributionPage = () => {
                     searchable={true}
                     headerTitle={
                         <Space>
-                            <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {}}>自选订单分配</Button>
-                            <Button key="2" type="primary" ghost disabled={selectedRow.length > 0} onClick={() => {}}>依阶段分配</Button>
+                            <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {
+                                setShowModal(true);
+                                setIsSelectedByOrder(true);
+                            }}>自选订单分配</Button>
+                            <Button key="2" type="primary" ghost disabled={selectedRow.length > 0} onClick={() => {
+                                setShowModal(true);
+                                setIsSelectedByOrder(false);
+                            }}>依阶段分配</Button>
                         </Space>
                     }
                     isSearchFromClient={false}
