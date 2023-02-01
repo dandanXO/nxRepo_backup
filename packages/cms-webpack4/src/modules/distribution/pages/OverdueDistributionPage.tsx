@@ -358,6 +358,7 @@ export const OverdueDistributionPage = () => {
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
                     setDistributionStage={setDistributionStage}
+                    type={"overdue"}
                 />
             </>
         </AdminPage>
