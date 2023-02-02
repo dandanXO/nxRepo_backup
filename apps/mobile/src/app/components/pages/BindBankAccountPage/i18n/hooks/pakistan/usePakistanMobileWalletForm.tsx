@@ -7,6 +7,7 @@ import {z} from "zod";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
+import {processWalletDisplayName} from "./customization/processWalletDisplayName";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -20,12 +21,12 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
 
   // NOTE: Wallet List
   // Wallet List - 電子錢包列表 Data
-  const [walletDropList, setWalletDropList] = useState<string[]>([]);
+  const [walletDropList, setWalletDropList] = useState<(string| React.ReactNode)[]>([]);
 
   useEffect(() => {
     if(!props.bindCardDropListData) return;
     const walletList = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors && props.bindCardDropListData.availableWalletVendors.map((wallet: WalletVendor) => {
-      return wallet.displayName
+      return processWalletDisplayName(wallet);
     });
     setWalletDropList(walletList);
   }, [props.bindCardDropListData]);
