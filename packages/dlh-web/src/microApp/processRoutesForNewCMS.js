@@ -93,12 +93,22 @@ export const processRoutesForNewCMS = (data) => {
     // 财务管理
     if (menuItem.actionUrl === "/paymentManage") {
         menuItem.children && menuItem.children.map(level2MenuItem => {
-          // 还款补单
-          if (level2MenuItem.actionUrl === "/pay-receipt") {
-            level2MenuItem.actionUrl = "/cms/pay-receipt";
-          }
+            // 还款补单
+            if (level2MenuItem.actionUrl === "/pay-receipt") {
+                level2MenuItem.actionUrl = "/cms/pay-receipt";
+            }
         })
-      }
+    }
+
+    // 数据统计
+    if (menuItem.actionUrl === "/businessStatistics") {
+        menuItem.children && menuItem.children.map(level2MenuItem => {
+            // 每日风控标签统计
+            if (level2MenuItem.actionUrl === "/riskControlStatistic") {
+                level2MenuItem.actionUrl = "/cms/riskControlStatistic";
+            }
+        })
+    }
     return menuItem;
   })
 }
