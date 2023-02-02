@@ -33,7 +33,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Wallet Account Number": "Wallet Account Number",
       "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
       // NOTE: Bank Account
-      "Please select your bank name": "Please select your bank name",
+      "Select a mobile wallet": "Select a mobile wallet",
 
       // NOTICE: Bangladesh
       // NOTE: Mobile Wallet
@@ -70,7 +70,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
 
       // "Account number should be 11 digits starting with 0.": "Account number should be 11 digits starting with 0.",
       // NOTE: Bank Account
-      // "Please select your bank name": "Please select your bank name",
+      // "Select a mobile wallet": "Select a mobile wallet",
 
       // NOTICE: Bangladesh
       // NOTE: Mobile Wallet
