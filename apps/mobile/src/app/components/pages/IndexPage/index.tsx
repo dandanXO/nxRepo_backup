@@ -111,6 +111,11 @@ export default () => {
                     ProductAdModalListPage
                 </Link>
             </li>
+          <li>
+            <Link to={"/news-section"}>
+              NewsSection
+            </Link>
+          </li>
         </IndexPage>
     );
 };
