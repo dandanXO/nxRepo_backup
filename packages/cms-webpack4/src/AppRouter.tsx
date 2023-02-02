@@ -28,6 +28,7 @@ import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordP
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
 import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
 import PayReceiptPage from "./modules/financial/components/PayReceiptPage";
+import DailyRiskControlPage from "./modules/statistics/components/DailyRiskControlPage"
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -111,6 +112,8 @@ export const AppRouter = () => {
                     <Route path={"/sms-config"} component={SmsConfigPage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/pay-receipt"} component={PayReceiptPage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/riskControlStatistic"} component={DailyRiskControlPage}/>
                 </Switch>
             </Router>
 
