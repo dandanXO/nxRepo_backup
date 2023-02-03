@@ -13,22 +13,10 @@ export interface GetOrderListRequestQuerystring {
     merchantName?:string;             // 商户名
     orderNo?: string;                 // 訂單編號
     productName?: string;             // 產品名稱
-    rcProvider?: ""
-    | "BLUE_RAY"
-    | "DESTINY"
-    | "MERCURY"
-    | "DUMMY"
-    | "BATEI"
-    | "HX"
-    | "WU_PIAN"
-    | "BLUE_RAY_API"
-    | "BLUE_RAY_V4"
-    | "SEA_CORE"
-    | "BLUE_RAY_PK"
-    | "WU_PIAN_PK";                    // 风控應用
-    status?: number;                   // 订单状态
-    userPhone?: string;                // 手机号
-    userTrueName?: string;             // 姓名
+    rcProvider?: string;              // 风控應用
+    status?: number;                  // 订单状态
+    userPhone?: string;               // 手机号
+    userTrueName?: string;            // 姓名
     pageNum?: number;
     pageSize?: number;
     sortField?: string;

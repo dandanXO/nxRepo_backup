@@ -28,6 +28,7 @@ import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordP
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
 import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
 import PayReceiptPage from "./modules/financial/components/PayReceiptPage";
+import DailyRiskControlPage from "./modules/statistics/components/DailyRiskControlPage"
 import {TodayDistributionPage} from "./modules/distribution/pages/TodayDistributionPage";
 import {OverdueDistributionPage} from "./modules/distribution/pages/OverdueDistributionPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
@@ -102,7 +103,7 @@ export const AppRouter = () => {
                     <Route path="/order-review-detail/:userId/:orderId/:orderNo" component={OrderReviewDetailPage} />
                     {/*// @ts-ignore*/}
                      {/*// @ts-ignore*/}
-                     <Route path="/order-final-review" component={OrderFinalReviewPage} />
+                    <Route path="/order-final-review" component={OrderFinalReviewPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/order-final-review-detail/:userId/:orderId/:orderNo" component={OrderFinalReviewDetailPage} />
                     {/*// @ts-ignore*/}
@@ -113,6 +114,8 @@ export const AppRouter = () => {
                     <Route path={"/sms-config"} component={SmsConfigPage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/pay-receipt"} component={PayReceiptPage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/riskControlStatistic"} component={DailyRiskControlPage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/today-distribution"} component={TodayDistributionPage}/>
                     {/*// @ts-ignore*/}

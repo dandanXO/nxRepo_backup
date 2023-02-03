@@ -7,6 +7,7 @@ import {normalizeCollector} from "../components/TreeCheckbox/normalizeCollector"
 import {Stage} from "../types";
 import {Typography} from "antd/es";
 import {StageData} from "../pages/TodayDistributionPage";
+import {useLazyGetOverdueCollectorQuery, useLazyGetOverdueDistributionQuery} from "../services/OverdueDistributionAPI";
 
 interface OrderDistributionModalProps {
     show: boolean;
@@ -15,6 +16,7 @@ interface OrderDistributionModalProps {
     isSelectedByOrder: boolean;
     setDistributionStage: (distributionStage: Stage) => void;
     summaryData?: StageData;
+    type: "today" | "overdue",
 }
 export const CommonOrderDistributionModal = (props: OrderDistributionModalProps) => {
     const form = useForm();
@@ -29,8 +31,18 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         isUninitialized,
     }] = useLazyGetCollectorQuery();
 
+    const [triggerGetOverdueCollector , {
+        // data,
+        currentData: currentOverdueData,
+    }] = useLazyGetOverdueCollectorQuery();
+
     useEffect(() => {
-        triggerGetCollector(null);
+        if(props.type === "today") {
+            triggerGetCollector(null);
+        } else {
+            triggerGetOverdueCollector(null);
+        }
+
     }, []);
 
     const [checkedCollector, setCheckedCollector] = useState([]);
@@ -44,8 +56,9 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
     }
 
     const treeCheckboxData = useMemo(() => {
-        return normalizeCollector(currentData, [Stage.NONE]);
-    }, [currentData]);
+        const data = props.type === "today" ? currentData : currentOverdueData;
+        return normalizeCollector(data, [Stage.NONE]);
+    }, [currentData, currentOverdueData]);
 
     const handleSelectedAllCollector = useCallback(() => {
         setSelectedRowKeys(treeCheckboxData["allKey"]);
@@ -59,7 +72,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         setCheckedCollector([]);
     }, []);
 
-    const [distributionStage, setDistributionStage] = useState(Stage.T_1);
+    const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T_1 : Stage.S1);
     // console.log("summaryData", props?.summaryData);
 
     return (
@@ -85,8 +98,19 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                             setDistributionStage(value);
                             props.setDistributionStage(value)
                         }}>
-                            <Select.Option key={1} value={Stage.T_1}>{Stage.T_1}</Select.Option>
-                            <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
+                            {props.type === "today" ? (
+                                    <React.Fragment>
+                                        <Select.Option key={1} value={Stage.T_1}>{Stage.T_1}</Select.Option>
+                                        <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
+                                    </React.Fragment>
+                            ): (
+                                    <React.Fragment>
+                                        <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>
+                                        <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>
+                                        <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>
+                                        <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>
+                                    </React.Fragment>
+                                )}
                         </Select>
                     </Form.Item>
                     <Form.Item name="productName" label="待分案单量">
@@ -99,14 +123,16 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                 <Button style={{marginRight: 8}} onClick={handleUnselectedAllCollector}>清空重选</Button>
                 <Typography.Text>已选择 {checkedCollector.length} 个催收人员</Typography.Text>
             </div>
-            <TreeCheckbox
-                data={treeCheckboxData}
-                selectedRowKeys={selectedRowKeys}
-                setSelectedRowKeys={setSelectedRowKeys}
-                onCheck={onTreeCheckboxCheck}
-                checkedJob={checkedJob}
-                setCheckedJob={setCheckedJob}
-            />
+            {props?.summaryData[distributionStage]?.todoTotal > 0 && (
+                <TreeCheckbox
+                    data={treeCheckboxData}
+                    selectedRowKeys={selectedRowKeys}
+                    setSelectedRowKeys={setSelectedRowKeys}
+                    onCheck={onTreeCheckboxCheck}
+                    checkedJob={checkedJob}
+                    setCheckedJob={setCheckedJob}
+                />
+            )}
         </Modal>
     )
 }

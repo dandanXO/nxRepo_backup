@@ -82,7 +82,7 @@ export interface UserKycInfoVo {
 }
 
 export interface UserThirdInfoVo {
-    provider?: "BATEI" | "BLUE_RAY" | "BLUE_RAY_API" | "BLUE_RAY_V4" | "DESTINY" | "DUMMY" | "HX" | "MERCURY" | "SEA_CORE" | "WU_PIAN";
+    provider?: string;
     providerDisplayName?: string;
     score?: number;
     similarity?: number;

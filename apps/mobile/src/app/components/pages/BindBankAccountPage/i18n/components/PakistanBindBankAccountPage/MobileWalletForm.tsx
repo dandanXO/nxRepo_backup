@@ -7,12 +7,11 @@ import {i18nBankBindAccountPage} from "../../translations";
 import styled from "styled-components";
 
 const WalletDiscountHint = styled.div`
-  height: 23px;
   line-height: 23px;
   background: #fff3b2;
   color: #31a843;
-  font-size: 12px;
-  padding: 4px 20px;
+  font-size: 16px;
+  padding: 4px 12px;
   margin-bottom: 17px;
 `
 
@@ -45,8 +44,8 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           props.setWalletValue(index);
         }}
       />
-      <WalletDiscountHint>Get an interest rate discount on Jazzcash!</WalletDiscountHint>
-      <Label>{t("Your mobile wallet account")}</Label>
+      <WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>
+      <Label>{t("Select a mobile wallet")}</Label>
       <Input
         className="mb"
         labelType={"left"}

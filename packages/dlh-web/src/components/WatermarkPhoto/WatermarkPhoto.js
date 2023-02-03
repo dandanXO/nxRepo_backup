@@ -4,19 +4,50 @@ import style from "./style.less"
 import {getAdminUser} from "../../utils";
 import conf from 'conf';
 
-export const WatermarkPhoto = ({width = "300px", src = ""}) => {
+const gap = 500;
+export const WatermarkPhoto = ({width = "300px", src = "", children}) => {
   const adminUserInfo = getAdminUser();
   const collector = adminUserInfo.data.phoneNo;
   const content = `${collector}-${moment().format('YYYY-MM-DD-HH:mm:ss')}`
- 
+
   return (
-    <div className={style.watermark} style={{ width: width}} onContextMenu={(e)=>e.preventDefault()}>
-      <div className={style.watermark__inner}>
-        {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color:conf.waterMarkColor}}>{content}</div>)}
-      </div>
-      <div className={style.watermark__content}>
-        <img src={src}/>
-      </div>
+    <div className={style.watermark} style={{ width: children ? "auto" : width}} onContextMenu={(e)=>e.preventDefault()}>
+
+      {!children && (
+        <React.Fragment>
+          <div className={style.watermark__inner}>
+            {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: conf.waterMarkColor}}>{content}</div>)}
+          </div>
+          <div className={style.watermark__content}>
+            <img src={src}/>
+          </div>
+        </React.Fragment>
+      )}
+      {children && (
+        <React.Fragment>
+          <div style={{ display: "flex", flexDirection: "row"}}>
+            <div className={style.watermark__inner} style={{ left: "0"}}>
+              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.05)" }}>{content}</div>)}
+            </div>
+            <div className={style.watermark__inner} style={{ left: gap * 1}}>
+              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.05)" }}>{content}</div>)}
+            </div>
+            <div className={style.watermark__inner} style={{ left: gap * 2}}>
+              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.05)" }}>{content}</div>)}
+            </div>
+            <div className={style.watermark__inner} style={{ left: gap * 3}}>
+              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.05)" }}>{content}</div>)}
+            </div>
+            <div className={style.watermark__inner} style={{ left: gap * 4}}>
+              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.05)" }}>{content}</div>)}
+            </div>
+            <div className={style.watermark__inner} style={{ left: gap * 5}}>
+              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.05)" }}>{content}</div>)}
+            </div>
+          </div>
+          {children}
+        </React.Fragment>
+      )}
     </div>
   )
 }
