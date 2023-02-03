@@ -12,26 +12,14 @@ export interface GetOrderReviewListRequestQuerystring {
     productName?: string;             // 產品名稱
     merchantName?:string;             // 商户名
     merchantId?: string;
-    provider?: ""
-    | "BLUE_RAY"
-    | "DESTINY"
-    | "MERCURY"
-    | "DUMMY"
-    | "BATEI"
-    | "HX"
-    | "WU_PIAN"
-    | "BLUE_RAY_API"
-    | "BLUE_RAY_V4"
-    | "SEA_CORE"
-    | "BLUE_RAY_PK"
-    | "WU_PIAN_PK";                    // 风控應用
+    provider?: string;                // 风控應用
 
     riskRank?: ""
     | "REJECT"
     | "ORDINARY"
     | "NORMAL"
     | "GOOD"
-    | "EXCELLENT";                     // 风控標籤
+    | "EXCELLENT";                    // 风控標籤
 
     userName?: string;                // 姓名
     pageNum?: number;

@@ -16,7 +16,8 @@ export const StyledListItem = styled.li<StyledListItemProps>`
     box-sizing: border-box;
     text-align: left;
     height: 28px;
-    padding: 0 28px 0 20px;
+    //padding: 0 28px 0 20px;
+    padding: 0 14px;
     line-height: 28px;
     cursor: pointer;
     color: #ffffff;

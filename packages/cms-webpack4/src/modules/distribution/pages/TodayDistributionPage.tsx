@@ -300,6 +300,7 @@ export const TodayDistributionPage = () => {
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
                     setDistributionStage={setDistributionStage}
+                    type={"today"}
                 />
             </>
         </AdminPage>
