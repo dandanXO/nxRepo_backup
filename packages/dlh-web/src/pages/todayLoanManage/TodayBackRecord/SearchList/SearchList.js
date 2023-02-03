@@ -33,7 +33,7 @@ class SearchList extends Component{
     }
 
     render() {
-        const { form: { getFieldDecorator  }, intl, initSearchParams, isSuperAdmin } = this.props;
+        const { form: { getFieldDecorator }, intl, initSearchParams, isSuperAdmin, paymentList } = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
@@ -112,16 +112,12 @@ class SearchList extends Component{
                         <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "windowPage.payment.method"})}>
                                 {
-                                    getFieldDecorator('payType', {
+                                    getFieldDecorator('payName', {
                                         initialValue: ''
                                     })(
                                         <Select>
                                             <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
-                                            <Option value={'1'}><FormattedMessage id="windowPage.alipay" /></Option>
-                                            <Option value={'2'}><FormattedMessage id="windowPage.lian.lian.pay" /></Option>
-                                            <Option value={'3'}><FormattedMessage id="windowPage.wechat" /></Option>
-                                            <Option value={'4'}><FormattedMessage id="windowPage.yeepay" /></Option>
-                                            <Option value={'5'}><FormattedMessage id="windowPage.YiZhiJuhe" /></Option>
+                                            {paymentList.map(i => <Option value={i}>{i}</Option>)}
                                         </Select>
                                     )
                                 }
