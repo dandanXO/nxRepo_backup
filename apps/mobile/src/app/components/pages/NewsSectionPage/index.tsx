@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Instant_approval_photo from "./1_instant_approval.svg"
-import apply_photo from "./2_apply.svg"
-import instant_cash_on_the_go_photo from "./3_instant_cash_on_the_go.svg"
-import transfer_money_photo from "./4_transfer_money.svg";
+
 import star_icon_photo from "./star_icon.svg"
+
+import instant_cash_on_the_go_photo from "./pakistan/1_instant_cash_on_the_go.svg"
+import apply_photo from "./pakistan/2_apply.svg"
+import Instant_approval_photo from "./pakistan/3_instant_approval.svg"
+import transfer_money_photo from "./pakistan/4_transfer_money.svg";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,7 +24,8 @@ const StepTitle = styled.div`
   margin-bottom: 4px;
 `;
 const StepSubtitle = styled.div`
-  color: #f58b10;
+  //color: #f58b10;
+  color: #73C106;
   font-size: 16px;
   margin-bottom: 4px;
 `;
@@ -47,7 +51,7 @@ export const NewsSectionPage = () => {
 
       <StepContainer>
         <StepImage src={instant_cash_on_the_go_photo}/>
-        <StepTitle><span style={{color: "#f58b10"}}>Instant Cash</span> on the go!</StepTitle>
+        <StepTitle><span style={{color: "#73C106"}}>Instant Cash</span> on the go!</StepTitle>
         <StepFeatureDescription>
           <div>Borrow and Repay on your own terms.</div>
           <div>Effortless application. Takes 10 mins to apply.</div>
