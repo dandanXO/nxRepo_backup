@@ -14,7 +14,7 @@ import styles from "./OverdueBackRecord.less"
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj) => {
-    const {time, phoneNo, name, orderNo, backType, merchantId = '' } = obj;
+    const { time, phoneNo, name, orderNo, backType, merchantId = '', payName } = obj;
     const isArr = Array.isArray(time) && time.length > 0;
     //todo 核对参数
     return {
@@ -25,6 +25,7 @@ const convertParams = (obj) => {
         orderNo,
         state: backType,
         merchantId,
+        payName
     }
 }
 
@@ -165,17 +166,18 @@ class OverdueBackRecord extends Component {
         });
     }
 
-    componentDidMount() {
-        const {getTableData} = this.props;
-        getTableData({pageSize: 10, pageNum: 1});
+    componentDidMount () {
+        const { getTableData, getPaymentData } = this.props;
+        getTableData({ pageSize: 10, pageNum: 1 });
+        getPaymentData();
     }
 
     render() {
-        const {tableData: {data, pagination}, loading} = this.props;
+        const { tableData: { data, pagination }, loading, paymentList } = this.props;
         const {btnDisabled} = this.state;
         return (
             <div>
-                <SearchList handleSubmit={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList handleSubmit={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants} paymentList={paymentList}/>
                 <div className={styles.wrapper}>
                     <Button type={'danger'} disabled={btnDisabled} onClick={this.exportOrder}><FormattedMessage id="page.table.export.record" /></Button>
                     <div>
@@ -197,15 +199,17 @@ class OverdueBackRecord extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const {afterLoanManageState: {overdueBackRecordState}} = state;
+    const { afterLoanManageState: { overdueBackRecordState } } = state;
     return {
         tableData: overdueBackRecordState['data'],
-        loading: overdueBackRecordState['loading']
+        loading: overdueBackRecordState['loading'],
+        paymentList: overdueBackRecordState['paymentList'],
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getTableData: overdueBackRecordAction.obrGetTableData
+        getTableData: overdueBackRecordAction.obrGetTableData,
+        getPaymentData: overdueBackRecordAction.obrGetPaymentData
     }, dispatch);
 
 }
