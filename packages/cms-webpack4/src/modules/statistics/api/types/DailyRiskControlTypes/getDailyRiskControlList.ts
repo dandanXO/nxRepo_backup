@@ -1,6 +1,4 @@
 export interface GetDailyRiskControlListRequestQuery {
-    appName?: string;                 // APP名稱
-    channelId?: number| "";           // 申请渠道
     endTime?: string;                 // 結束時間
     startTime?: string;               // 開始時間
     isCharge?: boolean | "";          // 是否收費
