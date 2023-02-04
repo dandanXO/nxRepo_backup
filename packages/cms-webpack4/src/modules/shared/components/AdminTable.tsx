@@ -39,6 +39,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     // onLoad?: (dataSource: any[]) => void;
     rowKey?: string;
     rowSelection?: any;
+    form?: any;
 }
 
 interface ActionType {
@@ -72,6 +73,7 @@ export const AdminTable = <TableListItemDataType,>({
                                                        // onLoad,
                                                        rowKey = "",
                                                        rowSelection,
+                                                       form,
 }: AdminTableTemplateProps<TableListItemDataType>) => {
 
     // NOTE: actionRef
@@ -210,7 +212,7 @@ export const AdminTable = <TableListItemDataType,>({
                 // onChange: (page) => console.log(page),
 
             }}
-            // form={form}
+            form={form}
             loading={loading}
             // NOTE:
             // scroll={{ x: 1000 }}

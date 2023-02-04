@@ -1,4 +1,4 @@
-import {Button, Form, Input, Modal, Select, Table} from "antd";
+import {Button, Form, Modal, Select} from "antd";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {useForm} from "antd/es/form/Form";
 import {TreeCheckbox} from "../components/TreeCheckbox";
@@ -7,7 +7,7 @@ import {normalizeCollector} from "../components/TreeCheckbox/normalizeCollector"
 import {Stage} from "../types";
 import {Typography} from "antd/es";
 import {StageData} from "../pages/TodayDistributionPage";
-import {useLazyGetOverdueCollectorQuery, useLazyGetOverdueDistributionQuery} from "../services/OverdueDistributionAPI";
+import {useLazyGetOverdueCollectorQuery} from "../services/OverdueDistributionAPI";
 
 interface OrderDistributionModalProps {
     show: boolean;
@@ -17,6 +17,7 @@ interface OrderDistributionModalProps {
     setDistributionStage: (distributionStage: Stage) => void;
     summaryData?: StageData;
     type: "today" | "overdue",
+    stage?: string;
 }
 export const CommonOrderDistributionModal = (props: OrderDistributionModalProps) => {
     const form = useForm();
@@ -57,7 +58,25 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
     const treeCheckboxData = useMemo(() => {
         const data = props.type === "today" ? currentData : currentOverdueData;
-        return normalizeCollector(data, [Stage.NONE]);
+        let restrictedStageArray = []
+        if(props.type === "today") {
+            if(props.stage == Stage.T0) {
+                restrictedStageArray = [Stage.T_1, Stage.S1, Stage.S2, Stage.S3, Stage.S4];
+            } else {
+                restrictedStageArray = [Stage.T0, Stage.S1, Stage.S2, Stage.S3, Stage.S4];
+            }
+        } else {
+            if(props.stage == Stage.S1) {
+                restrictedStageArray = [Stage.T0, Stage.S2, Stage.S3, Stage.S4];
+            } else if (props.stage == Stage.S2) {
+                restrictedStageArray = [Stage.T0, Stage.S1, Stage.S3, Stage.S4];
+            } else if (props.stage == Stage.S3) {
+                restrictedStageArray = [Stage.T0, Stage.S2, Stage.S1, Stage.S4];
+            } else if (props.stage == Stage.S4) {
+                restrictedStageArray = [Stage.T0, Stage.S2, Stage.S3, Stage.S1];
+            }
+        }
+        return normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
     }, [currentData, currentOverdueData]);
 
     const handleSelectedAllCollector = useCallback(() => {
@@ -72,8 +91,9 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         setCheckedCollector([]);
     }, []);
 
-    const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T_1 : Stage.S1);
-    // console.log("summaryData", props?.summaryData);
+    const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T0 : Stage.S1);
+    console.log("distributionStage", distributionStage);
+    console.log("summaryData", props?.summaryData);
 
     return (
         <Modal

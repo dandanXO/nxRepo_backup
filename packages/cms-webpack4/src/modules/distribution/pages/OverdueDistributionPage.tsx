@@ -1,10 +1,10 @@
 
 import {AdminTable} from "../../shared/components/AdminTable";
 import AdminPage from "../../shared/components/AdminPage";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, FormInstance, Space, Table} from "antd";
+import {Button, Form, FormInstance, Space, Table} from "antd";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
@@ -21,6 +21,7 @@ import {
 } from "../services/OverdueDistributionAPI";
 import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
 import moment from "moment";
+import {useForm} from "antd/es/form/Form";
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
@@ -193,7 +194,7 @@ export const OverdueDistributionPage = () => {
         onModalOk,
         onCloseModal,
         editID,
-        form,
+        form: modalForm,
         onAddItem,
         onEditItem,
         onDeleteItem,
@@ -245,6 +246,9 @@ export const OverdueDistributionPage = () => {
     const [distributionStage, setDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostOverdueDistributionStageMutation();
 
+    const [form] = useForm();
+    const formStage = Form.useWatch("stage", form);
+    console.log("formStage", formStage);
     return (
         <AdminPage navigator={{
             ancestor: {
@@ -321,6 +325,7 @@ export const OverdueDistributionPage = () => {
                 </StagePanel>
 
                 <AdminTable<CollectDistributionQueryResponse>
+                    form={form}
                     tableHeaderColumns={columns}
                     tableDatasource={currentItemListData?.records}
                     hasAddForm={false}
@@ -354,7 +359,7 @@ export const OverdueDistributionPage = () => {
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
                     }}
-                    rowKey={"id"}
+                    rowKey={"orderNo"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
@@ -372,6 +377,7 @@ export const OverdueDistributionPage = () => {
                     summaryData={summaryData}
                     setDistributionStage={setDistributionStage}
                     type={"overdue"}
+                    stage={formStage}
                 />
             </>
         </AdminPage>

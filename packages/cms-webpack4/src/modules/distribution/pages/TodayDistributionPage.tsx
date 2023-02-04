@@ -150,7 +150,7 @@ export const TodayDistributionPage = () => {
             title: '逾期阶段',
             dataIndex: 'stage',
             hideInTable: true,
-            // initialValue: Stage.T_1,
+            initialValue: Stage.T0,
             width: 300,
             // valueEnum: Stage,
             valueEnum: {
@@ -169,7 +169,7 @@ export const TodayDistributionPage = () => {
     }] = useLazyGetDistributionQuery();
 
     const [formState, setFormState] = useState<CollectDistributionQueryRequest>({
-        stage: Stage.T_1,
+        stage: Stage.T0,
         pageNum: 1,
         pageSize: 10,
     })
@@ -182,6 +182,7 @@ export const TodayDistributionPage = () => {
     const [selectedRow, setSelectedRow] = useState([]);
 
     const onSelectChange = (selectedRowKeys) => {
+        console.log("selectedRowKeys", selectedRowKeys);
         setSelectedRow(selectedRowKeys);
     };
 
@@ -285,7 +286,7 @@ export const TodayDistributionPage = () => {
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
                     }}
-                    rowKey={"id"}
+                    rowKey={"orderNo"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
