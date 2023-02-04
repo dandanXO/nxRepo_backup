@@ -99,7 +99,8 @@ export interface CollectDistributionSummaryResponse {
 export interface DistributionSummary {
     doneTotal: number;
     // 已分案数量
-    stage: Stage;
+    // stage: Stage;
+    stage: string;
     // 催收阶段
     todoTotal: number;
     // 待分案数量
@@ -111,6 +112,7 @@ export enum Stage {
     S2 = "S2",
     S3 = "S3",
     S4 = "S4",
+    S5 = "S5",
     T0 = "T0",
     T_1 = "T_1"
 }

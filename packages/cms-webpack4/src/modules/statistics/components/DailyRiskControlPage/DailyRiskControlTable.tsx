@@ -20,11 +20,8 @@ const DailyRiskControlTable = () => {
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
-    const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
     const dayRange = [moment().subtract(7, 'days'), moment()];
     const initSearchList: GetDailyRiskControlListRequestQuery = {
-        appName: '',
-        channelId: '',
         endTime: dayRange[1].format('YYYY-MM-DD 23:59:59'),
         startTime: dayRange[0].format('YYYY-MM-DD 00:00:00') ,
         isCharge: '',
@@ -53,18 +50,15 @@ const DailyRiskControlTable = () => {
             triggerGetMerchantList(null);
         };
         triggerGetProviderList(null);
-        triggerGetChannelList(null);
     }, []);
     const formRef = useRef<ProFormInstance>();
 
     const getSearchParams = () => {
         // @ts-ignore
-        const { appName, channelId = '', dayRange, isCharge, isOldUser, merchantId = '', riskControlModel = '' } = formRef.current.getFieldValue();
+        const {  dayRange, isCharge, isOldUser, merchantId = '', riskControlModel = '' } = formRef.current.getFieldValue();
         return{
-            appName,
-            channelId,
-            endTime: dayRange[1].format('YYYY-MM-DD 23:59:59'),
-            startTime: dayRange[0].format('YYYY-MM-DD 00:00:00') ,
+            endTime: dayRange ? dayRange[1].format('YYYY-MM-DD 23:59:59') : '',
+            startTime: dayRange ? dayRange[0].format('YYYY-MM-DD 00:00:00') : '',
             isCharge,
             isOldUser,
             merchantId,
@@ -84,7 +78,6 @@ const DailyRiskControlTable = () => {
         normalRate, ordinaryCount, ordinaryRate, rejectCount, rejectRate, riskControlFee } = currentData?.total || {};
   
     const columns: ProColumns<GetDailyRiskControlList>[] = [
-        { title: 'APP名称', dataIndex: 'appName', key: 'appName', hideInTable: true },
         {
             title: '日期', dataIndex: 'dayRange', key: 'dayRange', valueType: 'dateRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: dayRange
@@ -106,7 +99,6 @@ const DailyRiskControlTable = () => {
                 false: { text: '否' },
             }
         },
-        { title: '渠道名称', dataIndex: 'channelId', key: 'channelId', initialValue: "", valueEnum: channelListEnum, valueType: 'select', hideInTable: true },
         { title: <CustomColumnTitle titleText={'日期'} contentText={day || ''} />, dataIndex: 'day', key: 'day', valueType: 'date', hideInSearch: true },
         { title: <CustomColumnTitle titleText={'风控请求数'} contentText={requestCount || ''} />, dataIndex: 'requestCount', key: 'requestCount', hideInSearch: true },
         { title: <CustomColumnTitle titleText={'成功回复数'} contentText={successCount || ''} />, dataIndex: 'successCount', key: 'successCount', hideInSearch: true },
