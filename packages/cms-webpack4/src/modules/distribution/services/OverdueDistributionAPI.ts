@@ -2,7 +2,7 @@ import {API} from "../../../api";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
-    CollectDistributionSummaryResponse,
+    CollectDistributionSummaryResponse, DistributeCollectByStageResponse,
     Page,
     ProductNameOptions, SelectedDistributionRequest, StageDistributionRequest
 } from "../types/index";
@@ -35,12 +35,12 @@ export const OverdueDistributionAPI = API.injectEndpoints({
             }),
         }),
         // NOTE: 催收人員列表 - 获取催收阶段的催收员(依照催收階段)
-        // getOverdueCollector: builder.query<DistributeCollectByStageResponse, null>({
-        //     query: () => ({
-        //         url: `/collect-today/stage`,
-        //         method: "get",
-        //     }),
-        // }),
+        getOverdueCollector: builder.query<DistributeCollectByStageResponse[], null>({
+            query: () => ({
+                url: `/collect-overdue/stage`,
+                method: "get",
+            }),
+        }),
         // NOTE: 依催收階段分配訂單
         postOverdueDistributionStage: builder.mutation<null, StageDistributionRequest>({
             query: (requestBody: StageDistributionRequest ) => ({
@@ -67,4 +67,5 @@ export const {
     useGetOverdueProductNamesQuery,
     usePostOverdueDistributionSelectedMutation,
     usePostOverdueDistributionStageMutation,
+    useLazyGetOverdueCollectorQuery,
 } = OverdueDistributionAPI

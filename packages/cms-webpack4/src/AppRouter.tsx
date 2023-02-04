@@ -103,7 +103,7 @@ export const AppRouter = () => {
                     <Route path="/order-review-detail/:userId/:orderId/:orderNo" component={OrderReviewDetailPage} />
                     {/*// @ts-ignore*/}
                      {/*// @ts-ignore*/}
-                     <Route path="/order-final-review" component={OrderFinalReviewPage} />
+                    <Route path="/order-final-review" component={OrderFinalReviewPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/order-final-review-detail/:userId/:orderId/:orderNo" component={OrderFinalReviewDetailPage} />
                     {/*// @ts-ignore*/}

@@ -9,6 +9,7 @@ import ProductAdModalListPage from "../components/pages/ProductAdModalListPage";
 import {ActivityAdListPage, DemoActivityAdListPage} from "../components/pages/ActivityAdListPage";
 import {I18nRepaymentStepsModal} from "../components/pages/LoanDetailsPage/modal/RepaymentStepsModal";
 import React from "react";
+import {NewsSectionPage} from "../components/pages/NewsSectionPage";
 
 // NOTE:
 // https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris
@@ -43,6 +44,7 @@ const Pages = () => {
         {/*NOTICE: ad 字眼容易被 Google 擋*/}
         <Route path="/activity-list" element={<ActivityAdListPage />}/>
         <Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>
+        <Route path="/news-section" element={<NewsSectionPage/>}/>
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       {/*{state?.name && (*/}

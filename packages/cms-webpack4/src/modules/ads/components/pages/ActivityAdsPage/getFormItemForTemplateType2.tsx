@@ -69,7 +69,7 @@ export const getFormItemForTemplateType2 = (templateType: number, ads?: Activity
                                     >
                                         <Select>
                                             <Select.Option
-                                                value="APPLY_LOAN">跳转至借款页
+                                                value="APPLY_LOAN">强制下款
                                             </Select.Option>
                                             <Select.Option
                                                 value="POP_URL">跳转至自定义网址
@@ -155,7 +155,7 @@ export const getFormItemForTemplateType2 = (templateType: number, ads?: Activity
                                                         >
                                                             <Select>
                                                                 <Select.Option
-                                                                    value="APPLY_LOAN">跳转至借款页</Select.Option>
+                                                                    value="APPLY_LOAN">强制下款</Select.Option>
                                                                 <Select.Option
                                                                     value="POP_URL">跳转至自定义网址</Select.Option>
                                                             </Select>

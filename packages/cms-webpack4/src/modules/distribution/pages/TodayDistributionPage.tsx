@@ -143,18 +143,19 @@ export const TodayDistributionPage = () => {
             hideInSearch: true,
             initialValue: "",
             width: 300,
+            tooltip: "起算时间为该日00:00:00",
         },
         {
             key: 'stage',
             title: '逾期阶段',
             dataIndex: 'stage',
             hideInTable: true,
-            initialValue: Stage.T_1,
+            // initialValue: Stage.T_1,
             width: 300,
             // valueEnum: Stage,
             valueEnum: {
-                [Stage.T0]: Stage.T0,
-                [Stage.T_1]: Stage.T_1,
+                [Stage.T0]: "T0",
+                [Stage.T_1]: "T-1"
             },
             valueType: 'select',
         },
@@ -300,6 +301,7 @@ export const TodayDistributionPage = () => {
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
                     setDistributionStage={setDistributionStage}
+                    type={"today"}
                 />
             </>
         </AdminPage>

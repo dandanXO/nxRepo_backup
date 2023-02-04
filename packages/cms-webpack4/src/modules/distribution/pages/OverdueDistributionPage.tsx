@@ -20,48 +20,26 @@ import {
     usePostOverdueDistributionSelectedMutation, usePostOverdueDistributionStageMutation
 } from "../services/OverdueDistributionAPI";
 import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
+import moment from "moment";
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
-}
+};
 
 export const OverdueDistributionPage = () => {
-
     const [triggerFetchSummary, {data: summaryResponseData}] = useLazyGetOverdueSummaryQuery();
-    const [summaryData, setSummaryData] = useState<StageData | null>({
-        [Stage.T_1] : {
-            todoTotal: 0,
-            doneTotal: 0,
-        },
-        [Stage.T0] : {
-            todoTotal: 0,
-            doneTotal: 0,
-        },
-    });
+    const [summaryData, setSummaryData] = useState<StageData>({});
 
     useEffect(() => {
-        const s1 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.S1)[0];
-        const s2 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.S2)[0];
-        const s3 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.S3)[0];
-        const s4 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.S4)[0];
-        setSummaryData({
-            [Stage.S1] : {
-                todoTotal: s1?.todoTotal,
-                doneTotal: s1?.doneTotal,
-            },
-            [Stage.S2] : {
-                todoTotal: s2?.todoTotal,
-                doneTotal: s2?.doneTotal,
-            },
-            [Stage.S3] : {
-                todoTotal: s3?.todoTotal,
-                doneTotal: s3?.doneTotal,
-            },
-            [Stage.S4] : {
-                todoTotal: s4?.todoTotal,
-                doneTotal: s4?.doneTotal,
-            },
+        let summaryData = {}
+        summaryResponseData?.summaries?.map((item, current) => {
+            summaryData[item.stage] = {
+                todoTotal: item?.todoTotal,
+                doneTotal: item?.doneTotal,
+            }
         })
+        // console.log("summaryData", summaryData);
+        setSummaryData(summaryData);
     }, [summaryResponseData])
 
     const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetOverdueProductNamesQuery(null);
@@ -76,6 +54,18 @@ export const OverdueDistributionPage = () => {
     }, {"": {text:"全部"} }) as any)
 
 
+    const stageEnum = {}
+    Object.keys(summaryData).map((key, currentValue) => {
+        stageEnum[key] = {
+            [Stage.S1]: "S1",
+            [Stage.S2]: "S2",
+            [Stage.S3]: "S3",
+            [Stage.S4]: "S4",
+            [Stage.S5]: "S5",
+        }[key];
+    })
+    // console.log("summaryData", summaryData);
+    // console.log("stageEnum", stageEnum);
     const columns: ProColumns<CollectDistributionQueryResponse, "text">[] = [
         {
             key: 'id',
@@ -162,6 +152,7 @@ export const OverdueDistributionPage = () => {
             hideInSearch: true,
             initialValue: "",
             width: 300,
+            tooltip: "截止时间为该日23:59:59"
         },
         {
             key: 'stage',
@@ -170,14 +161,17 @@ export const OverdueDistributionPage = () => {
             hideInTable: true,
             initialValue: Stage.S1,
             width: 300,
-            // valueEnum: Stage,
-            valueEnum: {
-                [Stage.S1]: Stage.S1,
-                [Stage.S2]: Stage.S2,
-                [Stage.S3]: Stage.S3,
-                [Stage.S4]: Stage.S4,
-            },
+            valueEnum: stageEnum,
             valueType: 'select',
+        },
+        {
+            key: 'dateRange',
+            title: '逾期时间',
+            dataIndex: 'createdAtRange',
+            valueType: 'dateRange',
+            search: {
+                transform: (value: any) => ({ expireStartTime: value[0], expireEndTime: value[1] }),
+            },
         },
     ]
 
@@ -189,7 +183,7 @@ export const OverdueDistributionPage = () => {
     }] = useLazyGetOverdueDistributionQuery();
 
     const [formState, setFormState] = useState<CollectDistributionQueryRequest>({
-        stage: Stage.T_1,
+        stage: Stage.S1,
         pageNum: 1,
         pageSize: 10,
     })
@@ -278,6 +272,7 @@ export const OverdueDistributionPage = () => {
                             <StageTotal>{summaryData[Stage.S1]?.doneTotal}</StageTotal>
                         </StageItem>
                     </StageContainer>
+
                     <StageContainer>
                         <StageItem>
                             <StageTitle>{Stage.S2}待分案</StageTitle>
@@ -288,6 +283,7 @@ export const OverdueDistributionPage = () => {
                             <StageTotal>{summaryData[Stage.S2]?.doneTotal}</StageTotal>
                         </StageItem>
                     </StageContainer>
+
                     <StageContainer>
                         <StageItem>
                             <StageTitle>{Stage.S3}待分案</StageTitle>
@@ -298,6 +294,7 @@ export const OverdueDistributionPage = () => {
                             <StageTotal>{summaryData[Stage.S3]?.doneTotal}</StageTotal>
                         </StageItem>
                     </StageContainer>
+
                     <StageContainer>
                         <StageItem>
                             <StageTitle>{Stage.S4}待分案</StageTitle>
@@ -308,6 +305,19 @@ export const OverdueDistributionPage = () => {
                             <StageTotal>{summaryData[Stage.S4]?.doneTotal}</StageTotal>
                         </StageItem>
                     </StageContainer>
+
+                    {Object.keys(summaryData).indexOf("S5") > 1 && (
+                        <StageContainer>
+                            <StageItem>
+                                <StageTitle>{Stage.S5}待分案</StageTitle>
+                                <StageTotal>{summaryData[Stage.S5]?.todoTotal}</StageTotal>
+                            </StageItem>
+                            <StageItem>
+                                <StageTitle>{Stage.S5}已分案</StageTitle>
+                                <StageTotal>{summaryData[Stage.S5]?.doneTotal}</StageTotal>
+                            </StageItem>
+                        </StageContainer>
+                    )}
                 </StagePanel>
 
                 <AdminTable<CollectDistributionQueryResponse>
@@ -333,9 +343,12 @@ export const OverdueDistributionPage = () => {
                         const searchForm = {
                             ...formState,
                             ...searchFormState,
+                            expireStartTime: moment(searchFormState.dateRange[0]).toISOString(),
+                            expireEndTime: moment(searchFormState.dateRange[1]).toISOString(),
                         };
+                        delete searchForm["dateRange"]
                         setFormState(searchForm)
-                        // console.log("searchForm", searchForm)
+                        console.log("searchForm", searchForm)
                         triggerGetList(searchForm)
                     }}
                     onFormResetCallback={() => {
@@ -358,6 +371,7 @@ export const OverdueDistributionPage = () => {
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
                     setDistributionStage={setDistributionStage}
+                    type={"overdue"}
                 />
             </>
         </AdminPage>

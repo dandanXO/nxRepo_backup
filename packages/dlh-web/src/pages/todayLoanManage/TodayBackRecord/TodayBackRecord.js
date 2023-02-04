@@ -14,7 +14,7 @@ import styles from "./TodayBackRecord.less";
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj) => {
-    const { expiredTime, time, phoneNo, name, orderNo, payType, backType, pageSize, pageNum, merchantId } = obj;
+    const { expiredTime, time, phoneNo = '', name = '', orderNo = '', payName = '', backType = '', pageSize, pageNum, merchantId = '' } = obj;
     //todo 核对参数
     return {
         startTime: Array.isArray(time) && time.length > 0 ? time[0].format('YYYY-MM-DD 00:00:00') : '',
@@ -24,7 +24,7 @@ const convertParams = (obj) => {
         userPhone: phoneNo,
         userTrueName: name,
         orderNo,
-        payId: payType,
+        payName,
         state: backType,
         pageSize: pageSize,
         pageNum: pageNum,
@@ -150,11 +150,10 @@ class TodayBackRecord extends Component {
 
         this.searchParams = {};
         this.initSearchParams = {
-            time: [ moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 }) ],
-            expiredTime: [ moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 }).add(1, 'd') ],
+            time: [moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 })],
+            expiredTime: [moment(0, 'HH'), moment({ hour: 23, minute: 59, seconds: 59 }).add(1, 'd')],
             pageSize: 10,
             pageNum: 1,
-            merchantId: "",
         };
     }
 
@@ -195,18 +194,19 @@ class TodayBackRecord extends Component {
         });
     }
 
-    componentDidMount() {
-        const {getTableData} = this.props;
-        this.searchParams =  convertParams(this.initSearchParams);
+    componentDidMount () {
+        const { getTableData, getPaymentData } = this.props;
+        this.searchParams = convertParams(this.initSearchParams);
         getTableData(this.searchParams);
+        getPaymentData();
     }
 
     render() {
-        const {tableData: {data, pagination}, loading} = this.props;
+        const { tableData: { data, pagination }, loading, paymentList } = this.props;
         const {btnDisabled} = this.state;
         return (
             <div>
-                <SearchList handleSubmit={this.handleSearch} initSearchParams={this.initSearchParams} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList handleSubmit={this.handleSearch} initSearchParams={this.initSearchParams} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants} paymentList={paymentList}/>
                 <div className={styles.wrapper}>
                     <Button type={'danger'} disabled={btnDisabled} onClick={this.exportOrder}><FormattedMessage id="page.table.export.record"/></Button>
                     <div>
@@ -231,12 +231,14 @@ const mapStateToProps = (state) => {
     const {todayLoanManageState: {todayBackRecordState}} = state;
     return {
         tableData: todayBackRecordState['data'],
-        loading: todayBackRecordState['loading']
+        loading: todayBackRecordState['loading'],
+        paymentList: todayBackRecordState['paymentList'],
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getTableData: todayBackRecordAction.tobrGetTableData
+        getTableData: todayBackRecordAction.tobrGetTableData,
+        getPaymentData: todayBackRecordAction.tobrGetPaymentData
     }, dispatch);
 }
 
