@@ -57,8 +57,8 @@ const DailyRiskControlTable = () => {
         // @ts-ignore
         const {  dayRange, isCharge, isOldUser, merchantId = '', riskControlModel = '' } = formRef.current.getFieldValue();
         return{
-            endTime: dayRange[1].format('YYYY-MM-DD 23:59:59'),
-            startTime: dayRange[0].format('YYYY-MM-DD 00:00:00') ,
+            endTime: dayRange ? dayRange[1].format('YYYY-MM-DD 23:59:59') : '',
+            startTime: dayRange ? dayRange[0].format('YYYY-MM-DD 00:00:00') : '',
             isCharge,
             isOldUser,
             merchantId,
