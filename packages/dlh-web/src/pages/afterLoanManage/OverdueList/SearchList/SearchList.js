@@ -39,7 +39,7 @@ class SearchList extends Component{
     }
     
     render() {
-        const { form: { getFieldDecorator ,getFieldsValue }, intl, productSelect ,distributeOrder,btnDisabled} = this.props;
+        const { form: { getFieldDecorator, getFieldsValue }, intl, productSelect, distributeOrder, btnDisabled, stageSelect } = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
@@ -146,10 +146,7 @@ class SearchList extends Component{
                                     getFieldDecorator('stage', { initialValue: '' })(
                                         <Select>
                                             <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
-                                            <Option value={'S1'}>S1</Option>
-                                            <Option value={'S2'}>S2</Option>
-                                            <Option value={'S3'}>S3</Option>
-                                            <Option value={'S4'}>S4</Option>
+                                            {stageSelect.map(i => <Option value={i}>{i === "T_1" ? "T-1" : i}</Option>)}
                                         </Select>
                                     )
                                 }

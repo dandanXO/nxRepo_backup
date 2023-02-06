@@ -10,10 +10,10 @@ import { CommonTable } from 'components';
 const { Option } = Select;
 
 
-function ExpandRow ({ intl, record, addGruop, updateCollectGroupData, deleteCollectGroupData }) {
+function ExpandRow ({ intl, record, addGruop, updateCollectGroupData, deleteCollectGroupData,stageSelect }) {
     const { id, groups = [] } = record
     const { value, setValue, handleOnChange } = useInput();
-    const [collectStageValue, setCollectStageValue] = useState("S1");
+    const [collectStageValue, setCollectStageValue] = useState(stageSelect[0]);
 
     const [groupList, setGroupList] = useState(groups);
     const [updateList, setUpdateList] = useState([]);
@@ -122,12 +122,7 @@ function ExpandRow ({ intl, record, addGruop, updateCollectGroupData, deleteColl
         }
 
         return <Select defaultValue={value} style={{ width: '90%' }} onChange={handleChange}>
-            <Option value="S1">S1</Option>
-            <Option value="S2">S2</Option>
-            <Option value="S3">S3</Option>
-            <Option value="S4">S4</Option>
-            <Option value="T0">T0</Option>
-            <Option value="T_1">T-1</Option>
+            {stageSelect.map(i => <Option value={i}>{i === "T_1" ? "T-1" : i}</Option>)}
         </Select>
     }
 
@@ -183,13 +178,8 @@ function ExpandRow ({ intl, record, addGruop, updateCollectGroupData, deleteColl
                 <FormattedMessage id='page.table.add.collect-group' /> :
                 <Input value={value} onChange={handleOnChange} placeholder={intl.formatMessage({ id: "page.table.collect-group.enter" })} />
                 <FormattedMessage id='page.table.overdue.stage' /> :
-                <Select defaultValue={"S1"} style={{ width: 120, marginLeft: 8 }} onChange={(value) => setCollectStageValue(value)}>
-                    <Option value="S1">S1</Option>
-                    <Option value="S2">S2</Option>
-                    <Option value="S3">S3</Option>
-                    <Option value="S4">S4</Option>
-                    <Option value="T0">T0</Option>
-                    <Option value="T_1">T-1</Option>
+                <Select defaultValue={stageSelect[0]} style={{ width: 120, marginLeft: 8 }} onChange={(value) => setCollectStageValue(value)}>
+                    {stageSelect.map(i => <Option value={i}>{i === "T_1" ? "T-1" : i}</Option>)}
                 </Select>
                 <Button type="primary" onClick={handleAddGruop} icon="plus" />
             </div>

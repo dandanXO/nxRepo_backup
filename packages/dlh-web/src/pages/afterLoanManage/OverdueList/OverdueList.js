@@ -14,6 +14,7 @@ import {FormattedMessage, injectIntl} from "react-intl";
 import PropTypes from 'prop-types';
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 import DetailModal from "./DetailModal/DetailModal";
+import { odlGetStageSelect } from './models/actions';
 
 //转换参数格式
 // const convertParams = (obj) => {
@@ -334,7 +335,7 @@ class OverdueList extends Component {
 
 
     componentDidMount() {
-        const { getTableData, tableData: { pagination }, getPerson, setSearchParams, getCollectorSelect ,getProductSelect} = this.props;
+        const { getTableData, tableData: { pagination }, getPerson, setSearchParams, getCollectorSelect, getProductSelect, getStageSelect } = this.props;
         setSearchParams(this.initSearchParams);
 
         let params = this.convertParams(this.initSearchParams);
@@ -348,6 +349,8 @@ class OverdueList extends Component {
         getCollectorSelect();
         // 取得產品下拉選單
         getProductSelect();
+        //取得催收階段下拉選單
+        getStageSelect();
     }
 
     //todo 是否清理列表以及选择数据
@@ -388,7 +391,8 @@ class OverdueList extends Component {
             collectorVisible,
             collectorModalData,
             collectorSelect,
-            productSelect
+            productSelect,
+            stageSelect
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -407,6 +411,7 @@ class OverdueList extends Component {
                     personData={personData}
                     productSelect={productSelect}
                     collectorSelect={collectorSelect}
+                    stageSelect={stageSelect}
                 />
                 <CommonTable
                     columns={this.columns}
@@ -447,6 +452,7 @@ const mapStateToProps = (state) => {
         visible: overdueListState['visible'],
         collectorSelect:overdueListState['collectorSelect'],
         productSelect:overdueListState['productSelect'],
+        stageSelect: overdueListState['stageSelect'],
         // 催收人員列表
         collectorModalLoading: overdueListState['collector']['modalLoading'],
         collectorVisible: overdueListState['collector']['visible'],
@@ -465,6 +471,7 @@ const mapDispatchToProps = (dispatch) => {
         distributeOrder: overdueListAction.odlDistributeOrder,
         changeSelectKeys: overdueListAction.odlChangeSelectKey,
         getProductSelect: overdueListAction.odlGetProductSelect,
+        getStageSelect: overdueListAction.odlGetStageSelect,
         // 催收人員列表
         collectorChangeModalLoading: overdueListAction.odlColleterChangeModalLoading,
         collectorChangeModalVisible: overdueListAction.odlColleterChangeModalVisible,

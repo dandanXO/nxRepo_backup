@@ -334,7 +334,7 @@ class TodayList extends Component {
     }
 
     componentDidMount() {
-        const { setSearchParams, getTableData, tableData: { pagination }, getTodayCollector, getCollectorList ,getProductSelect} = this.props;
+        const { setSearchParams, getTableData, tableData: { pagination }, getTodayCollector, getCollectorList ,getProductSelect,getStageSelect} = this.props;
         setSearchParams(this.initSearchParams);
         let params = this.convertParams(this.initSearchParams);
         params = { ...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1 };
@@ -342,6 +342,7 @@ class TodayList extends Component {
         getTableData(params);
         getTodayCollector();
         getProductSelect();
+        getStageSelect();
 
     }
 
@@ -382,7 +383,8 @@ class TodayList extends Component {
             collectorModalData,
             todayCollector,
             todayCollectorList,
-            productSelect
+            productSelect,
+            stageSelect
         } = this.props;
         const rowSelection = {
             selectedRowKeys: selectKeys,
@@ -401,6 +403,7 @@ class TodayList extends Component {
                     btnDisabled={btnDisabled}
                     distributeOrder={this.distributeOrder}
                     exportRecord={this.exportRecord}
+                    stageSelect={stageSelect}
                 />
               
                 <CommonTable
@@ -442,6 +445,7 @@ const mapStateToProps = (state) => {
         visible: todayListState['visible'],
         personType: todayListState['personType'],
         productSelect:todayListState['productSelect'],
+        stageSelect: todayListState['stageSelect'],
         // 催收人員列表
         collectorModalLoading: todayListState['collector']['modalLoading'],
         collectorVisible: todayListState['collector']['visible'],
@@ -449,6 +453,7 @@ const mapStateToProps = (state) => {
         // 催收人員列表
         todayCollector: todayListState['todayCollector'],
         todayCollectorList: todayListState['collectorList'],
+        
 
     }
 }
@@ -462,6 +467,7 @@ const mapDispatchToProps = (dispatch) => {
         distributeOrder: todayListAction.todlDistributeOrder,
         changeSelectKeys: todayListAction.todlChangeSelectKey,
         getProductSelect: todayListAction.todlGetProductSelect,
+        getStageSelect: todayListAction.todlGetStageList,
         // 催收人員列表
         collectorChangeModalVisible: todayListAction.todlColleterChangeModalVisible,
         collectorChangeModalLoading: todayListAction.todlColleterChangeModalLoading,
@@ -470,6 +476,7 @@ const mapDispatchToProps = (dispatch) => {
         // 催收人員列表
         getTodayCollector: todayListAction.todlGetTodayCollector,
         getCollectorList: todayListAction.todlGetCollectorList,
+        
     }, dispatch);
 }
 

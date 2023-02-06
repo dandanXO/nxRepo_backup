@@ -8,6 +8,8 @@ export const SET_COLLECT_GROUP_DATA = 'SET_COLLECT_GROUP_DATA';
 export const ADD_COLLECT_GROUP = 'ADD_COLLECT_GROUP';
 export const UPDATE_COLLECT_GROUP = 'UPDATE_COLLECT_GROUP';
 export const DELETE_COLLECT_GROUP = 'DELETE_COLLECT_GROUP';
+export const GET_COLLECT_STAGE_DATA = 'GET_COLLECT_STAGE_DATA';
+export const SET_COLLECT_STAGE_DATA = 'SET_COLLECT_STAGE_DATA';
 
 
 export const getCollectTeam = (params) => ({ type: GET_COLLECT_TEAM_DATA, params });
@@ -20,3 +22,5 @@ export const setCollectGroup = (data) => ({ type: SET_COLLECT_GROUP_DATA, data }
 export const addCollectGroup = (params) => ({ type: ADD_COLLECT_GROUP, params });
 export const updateCollectGroup = (params) => ({ type: UPDATE_COLLECT_GROUP, params });
 export const deleteCollectGroup = (params) => ({ type: DELETE_COLLECT_GROUP, params });
+export const getCollectStage = (params) => ({ type: GET_COLLECT_STAGE_DATA, params });
+export const setCollectStage = (data) => ({ type: SET_COLLECT_STAGE_DATA, data });
