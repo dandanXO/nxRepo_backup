@@ -20,16 +20,10 @@ const DailyRiskControlTable = () => {
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
-    const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
     const dayRange = [moment().subtract(7, 'days'), moment()];
     const initSearchList: GetDailyRiskControlListRequestQuery = {
-        appName: '',
-        channelId: '',
         endTime: dayRange[1].format('YYYY-MM-DD 23:59:59'),
         startTime: dayRange[0].format('YYYY-MM-DD 00:00:00') ,
-        isCharge: '',
-        isOldUser: '',
-        merchantId: '',
         riskControlModel: ''
     }
 
@@ -53,21 +47,15 @@ const DailyRiskControlTable = () => {
             triggerGetMerchantList(null);
         };
         triggerGetProviderList(null);
-        triggerGetChannelList(null);
     }, []);
     const formRef = useRef<ProFormInstance>();
 
     const getSearchParams = () => {
         // @ts-ignore
-        const { appName, channelId = '', dayRange, isCharge, isOldUser, merchantId = '', riskControlModel = '' } = formRef.current.getFieldValue();
+        const {  dayRange,  riskControlModel = '' } = formRef.current.getFieldValue();
         return{
-            appName,
-            channelId,
-            endTime: dayRange[1].format('YYYY-MM-DD 23:59:59'),
-            startTime: dayRange[0].format('YYYY-MM-DD 00:00:00') ,
-            isCharge,
-            isOldUser,
-            merchantId,
+            endTime: dayRange ? dayRange[1].format('YYYY-MM-DD 23:59:59') : '',
+            startTime: dayRange ? dayRange[0].format('YYYY-MM-DD 00:00:00') : '',
             riskControlModel
         }
     }
@@ -81,32 +69,14 @@ const DailyRiskControlTable = () => {
 
     // title 總計的欄位
     const { day, requestCount, successCount, excellentCount, excellentRate, goodCount, goodRate, normalCount,
-        normalRate, ordinaryCount, ordinaryRate, rejectCount, rejectRate, riskControlFee } = currentData?.total || {};
+        normalRate, ordinaryCount, ordinaryRate, rejectCount, rejectRate } = currentData?.total || {};
   
     const columns: ProColumns<GetDailyRiskControlList>[] = [
-        { title: 'APP名称', dataIndex: 'appName', key: 'appName', hideInTable: true },
         {
             title: '日期', dataIndex: 'dayRange', key: 'dayRange', valueType: 'dateRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: dayRange
         },
         { title: '风控名称', dataIndex: 'riskControlModel', key: 'riskControlModel', initialValue: "", valueEnum: providerListEnum, hideInTable: true },
-        {
-            title: '是否新客', dataIndex: 'isOldUser', key: 'isOldUser', hideInTable: true, valueType: 'select', initialValue: "",
-            valueEnum: {
-                '': { text: '选择' },
-                true: { text: '是' },
-                false: { text: '否' },
-            }
-        },
-        {
-            title: '是否收费', dataIndex: 'isCharge', key: 'isCharge', hideInTable: true, valueType: 'select', initialValue: "",
-            valueEnum: {
-                '': { text: '选择' },
-                true: { text: '是' },
-                false: { text: '否' },
-            }
-        },
-        { title: '渠道名称', dataIndex: 'channelId', key: 'channelId', initialValue: "", valueEnum: channelListEnum, valueType: 'select', hideInTable: true },
         { title: <CustomColumnTitle titleText={'日期'} contentText={day || ''} />, dataIndex: 'day', key: 'day', valueType: 'date', hideInSearch: true },
         { title: <CustomColumnTitle titleText={'风控请求数'} contentText={requestCount || ''} />, dataIndex: 'requestCount', key: 'requestCount', hideInSearch: true },
         { title: <CustomColumnTitle titleText={'成功回复数'} contentText={successCount || ''} />, dataIndex: 'successCount', key: 'successCount', hideInSearch: true },
@@ -115,14 +85,8 @@ const DailyRiskControlTable = () => {
         { title: <CustomColumnTitle titleText={'正常'} contentText={normalCount ? `${normalCount}(${normalRate})` : ''} />, dataIndex: 'normalCount', key: 'normalCount', hideInSearch: true, render: (text, { normalRate }) => `${text}(${normalRate})` },
         { title: <CustomColumnTitle titleText={'普通'} contentText={ordinaryCount ? `${ordinaryCount}(${ordinaryRate})` : ''} />, dataIndex: 'ordinaryCount', key: 'ordinaryCount', hideInSearch: true, render: (text, { ordinaryRate }) => `${text}(${ordinaryRate})` },
         { title: <CustomColumnTitle titleText={'拒绝'} contentText={rejectCount ? `${rejectCount}(${rejectRate})` : ''} />, dataIndex: 'rejectCount', key: 'rejectCount', hideInSearch: true, render: (text, { rejectRate }) => `${text}(${rejectRate})` },
-        { title: <CustomColumnTitle titleText={'风控费用(USD)'} contentText={riskControlFee || ''} />, dataIndex: 'riskControlFee', key: 'riskControlFee', hideInSearch: true },
     ]
-    if (isSuperAdmin) {
-        columns.splice(0, 0, {
-            title: '商户名', dataIndex: 'merchantId', key: 'merchantId', valueEnum: merchantListEnum, valueType: 'select', initialValue: '', hideInTable: true
-        })
-    }
-
+    
     return (
         <ProTable<GetDailyRiskControlList>
             formRef={formRef}
