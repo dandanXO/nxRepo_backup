@@ -6,7 +6,7 @@ import { CommonTable } from 'components';
 import styles from "./CollectTeamReport.less";
 import download from "downloadjs";
 import { message } from "antd";
-function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime, downloadReport, downloadData, intl, isSuperAdmin, allMerchants }) {
+function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime, downloadReport, downloadData, intl, isSuperAdmin, allMerchants ,loading }) {
 
     const renderRowSpan = (date, team, parentField, parentValue, field, value, index) => {
         const obj = {
@@ -140,6 +140,7 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
     return <div className={styles.collectTeamReportTable}>
         <SearchList teamsData={teamsData} handleSearch={handleSearch} initTime={initTime} downloadReport={downloadReport} isSuperAdmin={isSuperAdmin} allMerchants={allMerchants}/>
         <CommonTable
+            loading={loading}
             columns={columns}
             dataSource={tableData}
             pagination={null}

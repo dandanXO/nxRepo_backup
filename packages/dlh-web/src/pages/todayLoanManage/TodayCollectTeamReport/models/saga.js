@@ -5,12 +5,14 @@ import {
     GET_DOWNLOAD_TODAY_TEAM_REPORT,
     setTableData,
     setCollectTeam,
-    setDownloadCollectReport
+    setDownloadCollectReport,
+    changeTableLoading
 } from './actions';
 
 import { getCollectTeamsList, getCollectReport, getCollectReportDownload } from '../api';
 
 function* getTableData(action) {
+    yield put(changeTableLoading(true));
     try {
         const res = yield call(getCollectReport, action.params);
         yield put(setTableData(res));
@@ -18,6 +20,7 @@ function* getTableData(action) {
     } catch (e) {
         console.log(e);
     }
+    yield put(changeTableLoading(false));
 }
 
 function* watchGetTableData() {

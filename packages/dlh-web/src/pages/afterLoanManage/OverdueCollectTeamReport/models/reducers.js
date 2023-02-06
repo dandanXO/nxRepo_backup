@@ -1,6 +1,12 @@
-import { SET_OVERDUE_TEAM_REPORT_TABLE_DATA, SET_OVERDUE_COLLECT_TEAM_DATA, SET_DOWNLOAD_OVERDUE_TEAM_REPORT } from './actions';
+import {
+    SET_OVERDUE_TEAM_REPORT_TABLE_DATA,
+    SET_OVERDUE_COLLECT_TEAM_DATA,
+    SET_DOWNLOAD_OVERDUE_TEAM_REPORT,
+    CHANGE_OVERDUE_TEAM_REPORT_TABLE_LOADING
+} from './actions';
 
 const initState = {
+    loading: false,
     teamsData: [],
     tableData: [],
     downloadData: []
@@ -10,6 +16,8 @@ const overdueCollectTeamReportState = (state = initState, action) => {
     switch (action.type) {
         case SET_OVERDUE_TEAM_REPORT_TABLE_DATA:
             return { ...state, tableData: action.data };
+        case CHANGE_OVERDUE_TEAM_REPORT_TABLE_LOADING:
+            return { ...state, loading: action.option };
         case SET_OVERDUE_COLLECT_TEAM_DATA:
             return { ...state, teamsData: action.data };
         case SET_DOWNLOAD_OVERDUE_TEAM_REPORT:
