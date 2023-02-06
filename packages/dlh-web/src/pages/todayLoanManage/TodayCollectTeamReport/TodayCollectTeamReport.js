@@ -36,6 +36,7 @@ const mapStateToProps = (state) => {
         teamsData: todayCollectTeamReportState['teamsData'],
         tableData: todayCollectTeamReportState['tableData'],
         downloadData: todayCollectTeamReportState['downloadData'],
+        loading: todayCollectTeamReportState['loading'],
     }
 }
 const mapDispatchToProps = (dispatch) => {
