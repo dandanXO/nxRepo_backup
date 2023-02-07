@@ -11,7 +11,14 @@ import download from "downloadjs";
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
 import {getIsSuperAdmin, getAllMerchants} from "utils";
+import styles from './NewOverdueStatistics.less';
 
+const CustomColumnTitle = ({ titleText, contentText }) => {
+    return <div >
+        <div style={{whiteSpace:'nowrap'}}>{titleText}</div>
+        <div style={{ background: '#E6F7FF', margin: '8px -7px -12px -7px', padding: '8px' }} className={styles.customColumnTitle}>{contentText}</div>
+    </div>
+}
 
 class NewOverdueStatistics extends Component {
 
@@ -24,8 +31,7 @@ class NewOverdueStatistics extends Component {
         this.state = {
             channelList : [],
             isSuperAdmin,
-            allMerchants
-
+            allMerchants,
         };
         this.initTime = [
             moment().subtract(9, 'days'),
@@ -33,137 +39,10 @@ class NewOverdueStatistics extends Component {
         ];
         this.isStatistLeng = false;
         const _this = this;
-        this.pageSize = 30;
         this.searchParams = this.convertParams({});
-        this.columns = [
-            { title: <FormattedMessage id="page.table.date" />, width: 110, dataIndex: 'date', key: 'date' },
-            { title: <FormattedMessage id="page.table.maturity" />, dataIndex: 'dueOrderTotal', key: 'dueOrderTotal', width: 60 },
-            { title: <FormattedMessage id="page.table.realtime" />, dataIndex: 'paidOrderTotal', key: 'paidOrderTotal', width: 60 },
-            { title: <FormattedMessage id="page.table.T0" />, dataIndex: 't0PaidOrderTotal', key: 't0PaidOrderTotal', width: 55 },
-            { title: <FormattedMessage id="page.table.T1" />, dataIndex: 't1PaidOrderTotal', key: 't1PaidOrderTotal', width: 55 },
-            { title: <FormattedMessage id="page.table.T2" />, dataIndex: 't2PaidOrderTotal', key: 't2PaidOrderTotal', width: 55 },
-            { title: <FormattedMessage id="page.table.T3" />, dataIndex: 't3PaidOrderTotal', key: 't3PaidOrderTotal', width: 55 },
-            { title: <FormattedMessage id="page.table.T4" />, dataIndex: 't4PaidOrderTotal', key: 't3PaidOrderTotal', width: 55 },
-            { title: <FormattedMessage id="page.table.T5" />, dataIndex: 't5PaidOrderTotal', key: 't3PaidOrderTotal', width: 55 },
-            { title: <FormattedMessage id="page.table.T5plus" />, dataIndex: 't5PlusPaidOrderTotal', key: 't5PlusPaidOrderTotal', width: 60 },
-            {
-                title: this.props.intl.formatMessage({ id: "page.table.realtime.repayment" }) + '%', dataIndex: 'paidOrderRate', key: 'paidOrderRate',
-                width: 100,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-            {
-                title: this.props.intl.formatMessage({ id: "page.table.T0.repayment" }) + '%', dataIndex: 't0PaidOrderRate', key: 't0PaidOrderRate',
-                width: 90,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-            {
-                title: this.props.intl.formatMessage({ id: "page.table.T1.repayment" }) + '%', dataIndex: 't1PaidOrderRate', key: 't1PaidOrderRate',
-                width: 90,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-            {
-                title: this.props.intl.formatMessage({ id: "page.table.T2" }) + '%', dataIndex: 't2PaidOrderRate', key: 't2PaidOrderRate',
-                width: 80,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-            {
-                title: this.props.intl.formatMessage({ id: "page.table.T3" }) + '%', dataIndex: 't3PaidOrderRate', key: 't3PaidOrderRate',
-                width: 80,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-            {
-                title: this.props.intl.formatMessage({ id: "page.table.T4" }) + '%', dataIndex: 't4PaidOrderRate', key: 't4PaidOrderRate',
-                width: 80,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-            {
-                title: this.props.intl.formatMessage({ id: "page.table.T5" }) + '%', dataIndex: 't5PaidOrderRate', key: 't5PaidOrderRate',
-                width: 80,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-            {
-                title: this.props.intl.formatMessage({ id: "page.table.T5plus" }) + '%', dataIndex: 't5PlusPaidOrderRate', key: 't5PlusPaidOrderRate',
-                width: 90,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-            {
-                title: <FormattedMessage id="page.table.loan.principal" />,
-                dataIndex: 'lendMoneyAmount',
-                key: 'lendMoneyAmount',
-                width: 100,
-                render(text, record) {
-                    return <CopyText text={convertMoneyFormat(text)}/>;
-                }
-            },
-            {
-                title: <FormattedMessage id="page.table.repayment.amount" />,
-                dataIndex: 'paidOrderAmount',
-                key: 'paidOrderAmount',
-                width: 90,
-                render(text, record) {
-                    return <CopyText text={convertMoneyFormat(text)}/>;
-                }
-            },
-            // {
-            //     title: '展期金额',
-            //     dataIndex: 'lengAmount',
-            //     key: 'lengAmount',
-            //     render(text, record) {
-            //         return convertMoneyFormat(text);
-            //     }
-            // },
-            {
-                title: <FormattedMessage id="windowPage.late.fee" />,
-                dataIndex: 'overMonyAmount',
-                key: 'overMonyAmount',
-                width: 90,
-                render(text, record) {
-                    return <CopyText text={convertMoneyFormat(text)}/>;
-                }
-            },
-            {
-                title: <FormattedMessage id="page.table.subtotal" />,
-                dataIndex: 'totalMonyAmount',
-                key: 'totalMonyAmount',
-                width: 90,
-                render(text, record) {
-                    return <CopyText text={convertMoneyFormat(text)}/>;
-                }
-            },
-            {
-                title: <FormattedMessage id="page.table.principal.repayment.rate" />, dataIndex: 'paidLendMoneyRate', key: 'paidLendMoneyRate',
-                width: 120,
-                render(text, record) {
-                    const data = Number(text) * 100;
-                    return <CopyText text={`${data.toFixed(2)}%`} />;
-                }
-            },
-        ];
+      
     }
+
 
     //导出记录
     exportRecord = (obj) => {
@@ -202,22 +81,16 @@ class NewOverdueStatistics extends Component {
 
     handleSearch = (obj) => {
         const { getTableData } = this.props;
-        const params = this.convertParams(obj);
-        this.searchParams = params;
-        getTableData({ pageSize: this.pageSize, pageNum: 1, ...this.searchParams });
-    }
-
-    handlePageChange = (pagination) => {
-        const { current, pageSize } = pagination;
-        const { getTableData } = this.props;
-        getTableData({ ...this.searchParams, pageSize, pageNum: current});
+        this.searchParams = this.convertParams(obj);
+        getTableData({  ...this.searchParams });
     }
 
     componentDidMount() {
         const { getTableData } = this.props;
         this.searchParams = this.convertParams({});
-        getTableData({ pageSize: this.pageSize, pageNum: 1, ...this.searchParams });
+        getTableData({ ...this.searchParams });
         this.getChannelList();
+      
     }
 
     getChannelList() {
@@ -239,11 +112,134 @@ class NewOverdueStatistics extends Component {
     }
 
 
+   
     render() {
-        const { tableData: { data, pagination }, loading } = this.props;
+        const { tableData: { list, total }, loading } = this.props;
         const {channelList} = this.state;
+        
+        const numberToFixed = (text) => {
+            return <CopyText text={`${(Number(text) * 100).toFixed(2)}%`} />
+        }
+
+        const columns = [
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.date" />} contentText={total ? total.date : ''} />,
+                dataIndex: 'date', key: 'date',width: '8%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.maturity" />} contentText={total ? total.dueOrderTotal : ''} />,
+                dataIndex: 'dueOrderTotal', key: 'dueOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.realtime" />} contentText={total ? total.paidOrderTotal : ''} />,
+                dataIndex: 'paidOrderTotal', key: 'paidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T0" />} contentText={total ? total.t0PaidOrderTotal : ''} />,
+                dataIndex: 't0PaidOrderTotal', key: 't0PaidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T1" />} contentText={total ? total.t1PaidOrderTotal : ''} />,
+                dataIndex: 't1PaidOrderTotal', key: 't1PaidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T2" />} contentText={total ? total.t2PaidOrderTotal : ''} />,
+                dataIndex: 't2PaidOrderTotal', key: 't2PaidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T3" />} contentText={total ? total.t3PaidOrderTotal : ''} />,
+                dataIndex: 't3PaidOrderTotal', key: 't3PaidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T4" />} contentText={total ? total.t4PaidOrderTotal : ''} />,
+                dataIndex: 't4PaidOrderTotal', key: 't4PaidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T5" />} contentText={total ? total.t5PaidOrderTotal : ''} />,
+                dataIndex: 't5PaidOrderTotal', key: 't5PaidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T5plus" />} contentText={total ? total.t5PlusPaidOrderTotal : ''} />,
+                dataIndex: 't5PlusPaidOrderTotal', key: 't5PlusPaidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.realtime.repayment" }) + '%'}
+                    contentText={total ? numberToFixed(total.paidOrderRate) : ''} />,
+                dataIndex: 'paidOrderRate', key: 'paidOrderRate', width: '7%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T0.repayment" }) + '%'}
+                    contentText={total ? numberToFixed(total.t0PaidOrderRate) : ''} />,
+                dataIndex: 't0PaidOrderRate', key: 't0PaidOrderRate', width: '7%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T1.repayment" }) + '%'}
+                    contentText={total ? numberToFixed(total.t1PaidOrderRate) : ''} />,
+                dataIndex: 't1PaidOrderRate', key: 't1PaidOrderRate', width: '7%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T2" }) + '%'}
+                    contentText={total ? numberToFixed(total.t2PaidOrderRate) : ''} />,
+                dataIndex: 't2PaidOrderRate', key: 't2PaidOrderRate', width: '5%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T3" }) + '%'}
+                    contentText={total ? numberToFixed(total.t3PaidOrderRate) : ''} />,
+                dataIndex: 't3PaidOrderRate', key: 't3PaidOrderRate', width: '5%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T4" }) + '%'}
+                    contentText={total ? numberToFixed(total.t4PaidOrderRate) : ''} />,
+                dataIndex: 't4PaidOrderRate', key: 't4PaidOrderRate', width: '5%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T5" }) + '%'}
+                    contentText={total ? numberToFixed(total.t5PaidOrderRate) : ''} />,
+                dataIndex: 't5PaidOrderRate', key: 't5PaidOrderRate', width: '5%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T5plus" }) + '%'}
+                    contentText={total ? numberToFixed(total.t5PlusPaidOrderRate) : ''} />,
+                dataIndex: 't5PlusPaidOrderRate', key: 't5PlusPaidOrderRate', width: '6%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.loan.principal" />} contentText={total ? total.lendMoneyAmount : ''} />,
+                dataIndex: 'lendMoneyAmount', key: 'lendMoneyAmount', width: '6%',
+                render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.repayment.amount" />} contentText={total ? total.paidOrderAmount : ''} />,
+                dataIndex: 'paidOrderAmount', key: 'paidOrderAmount', width: '6%',
+                render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="windowPage.late.fee" />} contentText={total ? total.overMonyAmount : ''} />,
+                dataIndex: 'overMonyAmount', key: 'overMonyAmount', width: '6%',
+                render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.subtotal" />} contentText={total ? total.totalMonyAmount : ''} />,
+                dataIndex: 'totalMonyAmount', key: 'totalMonyAmount', width: '6%',
+                render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.principal.repayment.rate" />}
+                    contentText={total ? numberToFixed(total.paidLendMoneyRate) : ''} />,
+                dataIndex: 'paidLendMoneyRate', key: 'paidLendMoneyRate', width: '8%',
+                render (text, record) { return numberToFixed(text); }
+            },
+        ];
+        
         return (
-            <div>
+            <div className={styles.newOverdueStatisticsTable}>
                 <SearchList
                     initTime={this.initTime}
                     handleSearch={this.handleSearch}
@@ -253,7 +249,7 @@ class NewOverdueStatistics extends Component {
                     isSuperAdmin={this.state.isSuperAdmin}
                     allMerchants={this.state.allMerchants}
                 />
-                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading} pageSize={this.pageSize} scroll={{x:'100%'}}/>
+                <CommonTable columns={columns} dataSource={list} loading={loading}  />
             </div>
         );
     }
