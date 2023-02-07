@@ -202,17 +202,19 @@ export const TodayDistributionPage = () => {
                 orderIds: selectedRow,
             })
         } else {
-            console.log("stage", distributionStage);
+            console.log("stage", selectedDistributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
-                stage: distributionStage,
+                stage: selectedDistributionStage,
             });
         }
     }
 
+    const [searchedStage, setSearchedStage] = useState(Stage.T0);
+
     const [isSelectedByOrder, setIsSelectedByOrder] = useState(true);
     const [postDistributionSelected] = usePostDistributionSelectedMutation();
-    const [distributionStage, setDistributionStage] = useState<Stage>();
+    const [selectedDistributionStage, setSelectedDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostDistributionStageMutation();
 
 
@@ -274,7 +276,12 @@ export const TodayDistributionPage = () => {
                     }
                     isSearchFromClient={false}
                     onFormSearchCallback={(form: FormInstance) => {
+                        setSelectedRow([]);
+
                         const searchFormState = form.getFieldsValue();
+
+                        setSearchedStage(searchFormState.stage);
+
                         const searchForm = {
                             ...formState,
                             ...searchFormState,
@@ -301,7 +308,8 @@ export const TodayDistributionPage = () => {
                     onOk={handlerModalOk}
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
-                    setDistributionStage={setDistributionStage}
+                    setDistributionStage={setSelectedDistributionStage}
+                    searchedStage={searchedStage}
                     type={"today"}
                 />
             </>

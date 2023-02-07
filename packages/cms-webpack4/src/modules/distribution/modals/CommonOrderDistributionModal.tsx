@@ -18,6 +18,8 @@ interface OrderDistributionModalProps {
     summaryData?: StageData;
     type: "today" | "overdue",
     stage?: string;
+    searchedStage: Stage;
+    hasS5?: boolean;
 }
 export const CommonOrderDistributionModal = (props: OrderDistributionModalProps) => {
     const form = useForm();
@@ -44,7 +46,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
             triggerGetOverdueCollector(null);
         }
 
-    }, []);
+    }, [props.type]);
 
     const [checkedCollector, setCheckedCollector] = useState([]);
 
@@ -58,26 +60,32 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
     const treeCheckboxData = useMemo(() => {
         const data = props.type === "today" ? currentData : currentOverdueData;
+
         let restrictedStageArray = []
         if(props.type === "today") {
-            if(props.stage == Stage.T0) {
-                restrictedStageArray = [Stage.T_1, Stage.S1, Stage.S2, Stage.S3, Stage.S4];
+            if(props.searchedStage == Stage.T0) {
+                restrictedStageArray = [Stage.T0];
             } else {
-                restrictedStageArray = [Stage.T0, Stage.S1, Stage.S2, Stage.S3, Stage.S4];
+                restrictedStageArray = [Stage.T0, Stage.T_1];
             }
         } else {
-            if(props.stage == Stage.S1) {
-                restrictedStageArray = [Stage.T0, Stage.S2, Stage.S3, Stage.S4];
-            } else if (props.stage == Stage.S2) {
-                restrictedStageArray = [Stage.T0, Stage.S1, Stage.S3, Stage.S4];
-            } else if (props.stage == Stage.S3) {
-                restrictedStageArray = [Stage.T0, Stage.S2, Stage.S1, Stage.S4];
-            } else if (props.stage == Stage.S4) {
-                restrictedStageArray = [Stage.T0, Stage.S2, Stage.S3, Stage.S1];
+            if(props.searchedStage == Stage.S1) {
+                restrictedStageArray = [Stage.S1, Stage.S2, Stage.S3, Stage.S4];
+            } else if (props.searchedStage == Stage.S2) {
+                restrictedStageArray = [Stage.S2, Stage.S3, Stage.S4];
+            } else if (props.searchedStage == Stage.S3) {
+                restrictedStageArray = [Stage.S3, Stage.S4];
+            } else if (props.searchedStage == Stage.S4) {
+                restrictedStageArray = [Stage.S4];
+            } else if (props.searchedStage == Stage.S5) {
+                restrictedStageArray = [Stage.S5];
+            }
+            if(props.hasS5 && props.searchedStage !== Stage.S5) {
+                restrictedStageArray.push(Stage.S5)
             }
         }
         return normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
-    }, [currentData, currentOverdueData]);
+    }, [props.type, props.searchedStage, currentData, currentOverdueData, props.hasS5]);
 
     const handleSelectedAllCollector = useCallback(() => {
         setSelectedRowKeys(treeCheckboxData["allKey"]);
@@ -92,9 +100,13 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
     }, []);
 
     const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T0 : Stage.S1);
-    console.log("distributionStage", distributionStage);
-    console.log("summaryData", props?.summaryData);
+    // console.log("distributionStage", distributionStage);
+    // console.log("summaryData", props?.summaryData);
+    // console.log("props.searchedStage", props.searchedStage);
 
+    useEffect(() => {
+        setDistributionStage(props.searchedStage);
+    }, [props.searchedStage])
     return (
         <Modal
             title={"分配订单"}
@@ -112,30 +124,34 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         >
             {!props.isSelectedByOrder && (
                 <div>
-                    <Form.Item name="merchantId" label="逾期等级" rules={[{ required: true }]}>
-                        <Select placeholder={"选择"} defaultValue={distributionStage} onSelect={(value) => {
-                            // console.log("value", value);
-                            setDistributionStage(value);
-                            props.setDistributionStage(value)
-                        }}>
-                            {props.type === "today" ? (
+                    <Form>
+                        <Form.Item name="merchantId" label="逾期等级" rules={[{ required: true }]}>
+                            <Select placeholder={"选择"} value={distributionStage} onSelect={(value) => {
+                                // console.log("value", value);
+                                setDistributionStage(value);
+                                // props.setDistributionStage(value)
+                            }}>
+                                {props.type === "today" ? (
                                     <React.Fragment>
-                                        <Select.Option key={1} value={Stage.T_1}>{Stage.T_1}</Select.Option>
+                                        {props.searchedStage === Stage.T_1 && <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>}
                                         <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
                                     </React.Fragment>
-                            ): (
+                                ): (
                                     <React.Fragment>
-                                        <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>
-                                        <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>
-                                        <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>
-                                        <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>
+                                        {props.searchedStage === Stage.S1 && <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>}
+                                        {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2) && <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>}
+                                        {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3) && <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>}
+                                        {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3 || props.searchedStage === Stage.S4)  && <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>}
+                                        {props.hasS5 && (props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3 || props.searchedStage === Stage.S4 ||props.searchedStage === Stage.S5)  && <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>}
                                     </React.Fragment>
                                 )}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item name="productName" label="待分案单量">
-                        {props?.summaryData[distributionStage]?.todoTotal}
-                    </Form.Item>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item name="productName" label="待分案单量">
+                            {props?.summaryData[distributionStage]?.todoTotal}
+                        </Form.Item>
+                    </Form>
+
                 </div>
             )}
             <div>

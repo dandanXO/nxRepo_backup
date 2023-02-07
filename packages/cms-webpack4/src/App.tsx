@@ -9,6 +9,15 @@ import "./i18n"
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 
+// IN
+// "timezone":"Asia/Kolkata"
+// PK
+// "timezone":"Asia/Karachi"
+// BD
+// "timezone":"Asia/Dhaka"
+// import moment from 'moment-timezone';
+// moment.tz.setDefault(conf.timezone);
+
 Sentry.init({
     dsn: "https://cf9c82eab5004dd492404928f531e5ca@o4504354754985984.ingest.sentry.io/4504354755969024",
     integrations: [new BrowserTracing()],

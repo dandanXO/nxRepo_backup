@@ -241,14 +241,16 @@ export const OverdueDistributionPage = () => {
         }
     }
 
+    const [searchedStage, setSearchedStage] = useState(Stage.S1);
+
     const [isSelectedByOrder, setIsSelectedByOrder] = useState(true);
     const [postDistributionSelected] = usePostOverdueDistributionSelectedMutation();
-    const [distributionStage, setDistributionStage] = useState<Stage>();
+    const [distributionStage, setSelectedDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostOverdueDistributionStageMutation();
 
-    const [form] = useForm();
-    const formStage = Form.useWatch("stage", form);
-    console.log("formStage", formStage);
+    // const [form] = useForm();
+    // const formStage = Form.useWatch("stage", form);
+    // console.log("formStage", formStage);
     return (
         <AdminPage navigator={{
             ancestor: {
@@ -325,7 +327,7 @@ export const OverdueDistributionPage = () => {
                 </StagePanel>
 
                 <AdminTable<CollectDistributionQueryResponse>
-                    form={form}
+                    // form={form}
                     tableHeaderColumns={columns}
                     tableDatasource={currentItemListData?.records}
                     hasAddForm={false}
@@ -344,13 +346,18 @@ export const OverdueDistributionPage = () => {
                     }
                     isSearchFromClient={false}
                     onFormSearchCallback={(form: FormInstance) => {
+                        setSelectedRow([]);
                         const searchFormState = form.getFieldsValue();
+                        setSearchedStage(searchFormState.stage);
+
                         const searchForm = {
                             ...formState,
                             ...searchFormState,
-                            expireStartTime: moment(searchFormState.dateRange[0]).toISOString(),
-                            expireEndTime: moment(searchFormState.dateRange[1]).toISOString(),
                         };
+                        if(searchFormState.dateRange) {
+                            searchForm.expireStartTime = moment(searchFormState.dateRange[0]).format('YYYY-MM-DD HH:mm:ss');
+                            searchForm.expireEndTime = moment(searchFormState.dateRange[1]).format('YYYY-MM-DD HH:mm:ss');
+                        }
                         delete searchForm["dateRange"]
                         setFormState(searchForm)
                         console.log("searchForm", searchForm)
@@ -375,9 +382,11 @@ export const OverdueDistributionPage = () => {
                     onOk={handlerModalOk}
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
-                    setDistributionStage={setDistributionStage}
+                    setDistributionStage={setSelectedDistributionStage}
                     type={"overdue"}
-                    stage={formStage}
+                    searchedStage={searchedStage}
+                    stage={distributionStage}
+                    hasS5={Object.keys(summaryData).indexOf("S5") > 1 }
                 />
             </>
         </AdminPage>
