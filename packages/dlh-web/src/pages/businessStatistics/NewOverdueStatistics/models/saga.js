@@ -8,17 +8,8 @@ function* getTableData(action) {
     yield put(noscChangeTableLoading(true));
     try{
         const res = yield call(getListData, action.params);
-        if (Number(res.code) === 200) {
-            const {data} = res;
-            const obj = {
-                data: data.records || [],
-                pagination: {
-                    total: data.totalRecords,
-                    current: data.currentPage
-                }
-            }
-            yield put(noscSetTableData(obj));
-        }
+        yield put(noscSetTableData(res));
+
     } catch (e) {
         console.log(e);
     }

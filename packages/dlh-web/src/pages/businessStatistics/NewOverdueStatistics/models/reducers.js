@@ -2,10 +2,7 @@ import { NOSC_CHANGE_TABLE_LOADING, NOSC_SET_TABLE_DATA } from './actions';
 
 
 const initState = {
-    tableData: {
-        data:[],
-        pagination: {}
-    },
+    tableData: {},
     loading: false
 };
 
