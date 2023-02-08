@@ -45,14 +45,10 @@ export const OverdueDistributionPage = () => {
 
     const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetOverdueProductNamesQuery(null);
 
-    const productListMap = (productList?.reduce((previousItem, currentItem) => {
-        return {
-            ...previousItem,
-            [currentItem.productId]: {
-                text: currentItem.productName,
-            }
-        }
-    }, {"": {text:"全部"} }) as any)
+    const productListMap = new Map().set('', { text: '全部' });
+    productList?.map((i) => {
+        return productListMap.set(i.productId, { text: i.productName })
+    });
 
 
     const stageEnum = {}
@@ -81,7 +77,6 @@ export const OverdueDistributionPage = () => {
             title: '商戶名',
             dataIndex: 'merchantName',
             initialValue: "",
-            width: 300,
             hideInSearch: true,
         },
         {
@@ -89,28 +84,24 @@ export const OverdueDistributionPage = () => {
             title: '订单编号',
             dataIndex: 'orderNo',
             initialValue: "",
-            width: 300,
         },
         {
             key: 'appName',
             title: 'APP名称',
             dataIndex: 'appName',
             initialValue: "",
-            width: 300,
         },
         {
             key: 'productName',
             title: '产品名称',
             dataIndex: 'productName',
             initialValue: "",
-            width: 300,
             hideInSearch: true,
         },
         {
             key: 'productId',
             title: '产品名称',
             dataIndex: 'productId',
-            width: 300,
             hideInTable: true,
             initialValue: "",
             valueType: "select",
@@ -121,14 +112,12 @@ export const OverdueDistributionPage = () => {
             title: '手机号',
             dataIndex: 'phoneNo',
             initialValue: "",
-            width: 300,
         },
         {
             key: 'userName',
             title: '姓名',
             dataIndex: 'userName',
             initialValue: "",
-            width: 300,
         },
         {
             key: 'deviceMoney',
@@ -136,7 +125,6 @@ export const OverdueDistributionPage = () => {
             dataIndex: 'deviceMoney',
             hideInSearch: true,
             initialValue: "",
-            width: 300,
         },
         {
             key: 'time',
@@ -144,7 +132,6 @@ export const OverdueDistributionPage = () => {
             dataIndex: 'time',
             hideInSearch: true,
             initialValue: "",
-            width: 300,
         },
         {
             key: 'expireTime',
@@ -152,7 +139,7 @@ export const OverdueDistributionPage = () => {
             dataIndex: 'expireTime',
             hideInSearch: true,
             initialValue: "",
-            width: 300,
+            valueType: "date",
             tooltip: "截止时间为该日23:59:59"
         },
         {
@@ -161,7 +148,6 @@ export const OverdueDistributionPage = () => {
             dataIndex: 'stage',
             hideInTable: true,
             initialValue: Stage.S1,
-            width: 300,
             valueEnum: stageEnum,
             valueType: 'select',
         },
