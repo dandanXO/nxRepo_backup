@@ -150,7 +150,7 @@ export const TodayDistributionPage = () => {
             title: '逾期阶段',
             dataIndex: 'stage',
             hideInTable: true,
-            // initialValue: Stage.T_1,
+            initialValue: Stage.T0,
             width: 300,
             // valueEnum: Stage,
             valueEnum: {
@@ -169,7 +169,7 @@ export const TodayDistributionPage = () => {
     }] = useLazyGetDistributionQuery();
 
     const [formState, setFormState] = useState<CollectDistributionQueryRequest>({
-        stage: Stage.T_1,
+        stage: Stage.T0,
         pageNum: 1,
         pageSize: 10,
     })
@@ -182,6 +182,7 @@ export const TodayDistributionPage = () => {
     const [selectedRow, setSelectedRow] = useState([]);
 
     const onSelectChange = (selectedRowKeys) => {
+        // console.log("selectedRowKeys", selectedRowKeys);
         setSelectedRow(selectedRowKeys);
     };
 
@@ -192,26 +193,28 @@ export const TodayDistributionPage = () => {
     }
 
     const handlerModalOk = (checkedCollector: number[]) => {
-        console.log("checkedCollector", checkedCollector);
+        // console.log("checkedCollector", checkedCollector);
         setShowModal(false);
         if(isSelectedByOrder) {
-            console.log("orderIds", selectedRow);
+            // console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
             })
         } else {
-            console.log("stage", distributionStage);
+            // console.log("stage", selectedDistributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
-                stage: distributionStage,
+                stage: selectedDistributionStage,
             });
         }
     }
 
+    const [searchedStage, setSearchedStage] = useState(Stage.T0);
+
     const [isSelectedByOrder, setIsSelectedByOrder] = useState(true);
     const [postDistributionSelected] = usePostDistributionSelectedMutation();
-    const [distributionStage, setDistributionStage] = useState<Stage>();
+    const [selectedDistributionStage, setSelectedDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostDistributionStageMutation();
 
 
@@ -273,7 +276,12 @@ export const TodayDistributionPage = () => {
                     }
                     isSearchFromClient={false}
                     onFormSearchCallback={(form: FormInstance) => {
+                        setSelectedRow([]);
+
                         const searchFormState = form.getFieldsValue();
+
+                        setSearchedStage(searchFormState.stage);
+
                         const searchForm = {
                             ...formState,
                             ...searchFormState,
@@ -285,7 +293,7 @@ export const TodayDistributionPage = () => {
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
                     }}
-                    rowKey={"id"}
+                    rowKey={"orderNo"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
@@ -300,7 +308,8 @@ export const TodayDistributionPage = () => {
                     onOk={handlerModalOk}
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
-                    setDistributionStage={setDistributionStage}
+                    setDistributionStage={setSelectedDistributionStage}
+                    searchedStage={searchedStage}
                     type={"today"}
                 />
             </>
