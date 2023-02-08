@@ -1,10 +1,10 @@
 
 import {AdminTable} from "../../shared/components/AdminTable";
 import AdminPage from "../../shared/components/AdminPage";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, FormInstance, Space, Table} from "antd";
+import {Button, Form, FormInstance, Space, Table} from "antd";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
@@ -21,6 +21,7 @@ import {
 } from "../services/OverdueDistributionAPI";
 import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
 import moment from "moment";
+import {useForm} from "antd/es/form/Form";
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
@@ -193,7 +194,7 @@ export const OverdueDistributionPage = () => {
         onModalOk,
         onCloseModal,
         editID,
-        form,
+        form: modalForm,
         onAddItem,
         onEditItem,
         onDeleteItem,
@@ -240,11 +241,16 @@ export const OverdueDistributionPage = () => {
         }
     }
 
+    const [searchedStage, setSearchedStage] = useState(Stage.S1);
+
     const [isSelectedByOrder, setIsSelectedByOrder] = useState(true);
     const [postDistributionSelected] = usePostOverdueDistributionSelectedMutation();
-    const [distributionStage, setDistributionStage] = useState<Stage>();
+    const [distributionStage, setSelectedDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostOverdueDistributionStageMutation();
 
+    // const [form] = useForm();
+    // const formStage = Form.useWatch("stage", form);
+    // console.log("formStage", formStage);
     return (
         <AdminPage navigator={{
             ancestor: {
@@ -321,6 +327,7 @@ export const OverdueDistributionPage = () => {
                 </StagePanel>
 
                 <AdminTable<CollectDistributionQueryResponse>
+                    // form={form}
                     tableHeaderColumns={columns}
                     tableDatasource={currentItemListData?.records}
                     hasAddForm={false}
@@ -339,22 +346,29 @@ export const OverdueDistributionPage = () => {
                     }
                     isSearchFromClient={false}
                     onFormSearchCallback={(form: FormInstance) => {
+                        setSelectedRow([]);
                         const searchFormState = form.getFieldsValue();
+                        setSearchedStage(searchFormState.stage);
+
                         const searchForm = {
                             ...formState,
                             ...searchFormState,
-                            expireStartTime: moment(searchFormState.dateRange[0]).toISOString(),
-                            expireEndTime: moment(searchFormState.dateRange[1]).toISOString(),
                         };
+                        if(searchFormState.dateRange) {
+                            searchForm.expireStartTime = moment(searchFormState.dateRange[0]).format('YYYY-MM-DDTHH:mm:ss');
+                            searchForm.expireEndTime = moment(searchFormState.dateRange[1]).format('YYYY-MM-DDTHH:mm:ss');
+                            // searchForm.expireStartTime = moment(searchFormState.dateRange[0]).toISOString().split(".")[0];
+                            // searchForm.expireEndTime = moment(searchFormState.dateRange[1]).toISOString().split(".")[0];
+                        }
                         delete searchForm["dateRange"]
                         setFormState(searchForm)
-                        console.log("searchForm", searchForm)
+                        // console.log("searchForm", searchForm)
                         triggerGetList(searchForm)
                     }}
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
                     }}
-                    rowKey={"id"}
+                    rowKey={"orderNo"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
@@ -370,8 +384,11 @@ export const OverdueDistributionPage = () => {
                     onOk={handlerModalOk}
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
-                    setDistributionStage={setDistributionStage}
+                    setDistributionStage={setSelectedDistributionStage}
                     type={"overdue"}
+                    searchedStage={searchedStage}
+                    stage={distributionStage}
+                    hasS5={Object.keys(summaryData).indexOf("S5") > 1 }
                 />
             </>
         </AdminPage>

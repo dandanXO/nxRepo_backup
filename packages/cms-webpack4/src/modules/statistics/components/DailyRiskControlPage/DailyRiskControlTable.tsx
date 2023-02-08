@@ -1,24 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
-import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
+import type { ColumnsState, ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Modal, Space, Tag } from 'antd';
+import { Button, Modal, Space, Table, Tag } from 'antd';
 import { useLazyGetDailyRiskControlListQuery } from '../../api/DailyRiskControlApi';
 import { GetDailyRiskControlListRequestQuery, GetDailyRiskControlList } from '../../api/types/DailyRiskControlTypes/getDailyRiskControlList';
 import CopyText from '../../../shared/components/CopyText';
 import { ProColumnsOperationConstant } from "../../../shared/components/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
-import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import useGetProviderEnum from '../../../shared/hooks/useGetProviderEnum';
-import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
 import { enumObjectToMap } from '../../../shared/utils/enumObjectToMap';
 import moment from 'moment';
 import queryString from "query-string";
-import { CustomColumnTitle } from '../../../shared/components/CustomColumnTitle';
 
 const DailyRiskControlTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
     const dayRange = [moment().subtract(7, 'days'), moment()];
     const initSearchList: GetDailyRiskControlListRequestQuery = {
@@ -36,16 +32,12 @@ const DailyRiskControlTable = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    
 
     useEffect(() => {
         triggerGetList(searchList);
     }, [searchList])
 
     useEffect(() => {
-        if(isSuperAdmin){
-            triggerGetMerchantList(null);
-        };
         triggerGetProviderList(null);
     }, []);
     const formRef = useRef<ProFormInstance>();
@@ -68,25 +60,28 @@ const DailyRiskControlTable = () => {
     }
 
     // title 總計的欄位
-    const { day, requestCount, successCount, excellentCount, excellentRate, goodCount, goodRate, normalCount,
-        normalRate, ordinaryCount, ordinaryRate, rejectCount, rejectRate } = currentData?.total || {};
+    const { day = '', requestCount = '', successCount = '', excellentCount = '', excellentRate = '', goodCount = '', goodRate = '', normalCount = '',
+        normalRate = '', ordinaryCount = '', ordinaryRate = '', rejectCount = '', rejectRate = '' } = currentData?.total || {};
   
     const columns: ProColumns<GetDailyRiskControlList>[] = [
-        {
-            title: '日期', dataIndex: 'dayRange', key: 'dayRange', valueType: 'dateRange',
-            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: dayRange
-        },
+        { title: '日期', dataIndex: 'dayRange', key: 'dayRange', valueType: 'dateRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: dayRange },
         { title: '风控名称', dataIndex: 'riskControlModel', key: 'riskControlModel', initialValue: "", valueEnum: providerListEnum, hideInTable: true },
-        { title: <CustomColumnTitle titleText={'日期'} contentText={day || ''} />, dataIndex: 'day', key: 'day', valueType: 'date', hideInSearch: true },
-        { title: <CustomColumnTitle titleText={'风控请求数'} contentText={requestCount || ''} />, dataIndex: 'requestCount', key: 'requestCount', hideInSearch: true },
-        { title: <CustomColumnTitle titleText={'成功回复数'} contentText={successCount || ''} />, dataIndex: 'successCount', key: 'successCount', hideInSearch: true },
-        { title: <CustomColumnTitle titleText={'极好'} contentText={excellentCount ? `${excellentCount}(${excellentRate})` : ''} />, dataIndex: 'excellentCount', key: 'excellentCount', hideInSearch: true, render: (text, { excellentRate }) => `${text}(${excellentRate})` },
-        { title: <CustomColumnTitle titleText={'良好'} contentText={goodCount ? `${goodCount}(${goodRate})` : ''} />, dataIndex: 'goodCount', key: 'goodCount', hideInSearch: true, render: (text, { goodRate }) => `${text}(${goodRate})` },
-        { title: <CustomColumnTitle titleText={'正常'} contentText={normalCount ? `${normalCount}(${normalRate})` : ''} />, dataIndex: 'normalCount', key: 'normalCount', hideInSearch: true, render: (text, { normalRate }) => `${text}(${normalRate})` },
-        { title: <CustomColumnTitle titleText={'普通'} contentText={ordinaryCount ? `${ordinaryCount}(${ordinaryRate})` : ''} />, dataIndex: 'ordinaryCount', key: 'ordinaryCount', hideInSearch: true, render: (text, { ordinaryRate }) => `${text}(${ordinaryRate})` },
-        { title: <CustomColumnTitle titleText={'拒绝'} contentText={rejectCount ? `${rejectCount}(${rejectRate})` : ''} />, dataIndex: 'rejectCount', key: 'rejectCount', hideInSearch: true, render: (text, { rejectRate }) => `${text}(${rejectRate})` },
+        { title: '日期', dataIndex: 'day', key: 'day', hideInSearch: true },
+        { title: '风控请求数', dataIndex: 'requestCount', key: 'requestCount', hideInSearch: true },
+        { title: '成功回复数', dataIndex: 'successCount', key: 'successCount', hideInSearch: true },
+        { title: '极好', dataIndex: 'excellentCount', key: 'excellentCount', hideInSearch: true, render: (text, { excellentRate }) => `${text}(${excellentRate})` },
+        { title: '良好', dataIndex: 'goodCount', key: 'goodCount', hideInSearch: true, render: (text, { goodRate }) => `${text}(${goodRate})` },
+        { title: '正常', dataIndex: 'normalCount', key: 'normalCount', hideInSearch: true, render: (text, { normalRate }) => `${text}(${normalRate})` },
+        { title: '普通', dataIndex: 'ordinaryCount', key: 'ordinaryCount', hideInSearch: true, render: (text, { ordinaryRate }) => `${text}(${ordinaryRate})` },
+        { title: '拒绝', dataIndex: 'rejectCount', key: 'rejectCount', hideInSearch: true, render: (text, { rejectRate }) => `${text}(${rejectRate})` },
     ]
+
+    const initColumnsStateMap = columns.reduce((prev, curr) => {
+        return curr.hideInSearch ? { ...prev, ...{ [`${curr.key}`]: { show: true } } } : { ...prev }
+    }, {}) as Record<string, ColumnsState>;
     
+    const [columnsStateMap, setColumnsStateMap] = useState<Record<string, ColumnsState>>({ ...initColumnsStateMap });
+
     return (
         <ProTable<GetDailyRiskControlList>
             formRef={formRef}
@@ -101,7 +96,7 @@ const DailyRiskControlTable = () => {
                         <Button onClick={() => {
                             //  form.resetFields();
                             // @ts-ignore
-                            form.setFieldsValue({...initSearchList})
+                            form.setFieldsValue({ ...initSearchList })
                             setSearchList(initSearchList);
                         }}>{resetText}</Button>
                         <Button
@@ -116,17 +111,38 @@ const DailyRiskControlTable = () => {
                     </Space>
                 ),
             }}
-             // headerTitle={<Button type="primary" ghost onClick={() => handlePayReceiptConfirm(selectedList)} disabled={selectedList.length === 0}>全部确认</Button>}
+            summary={() => {
+                return (
+                    <Table.Summary>
+                        <Table.Summary.Row style={{ fontWeight: 'bold', background: '#fafafa' }}>
+                            {columnsStateMap.day.show && <Table.Summary.Cell index={0}>{day}</Table.Summary.Cell>}
+                            {columnsStateMap.requestCount.show && <Table.Summary.Cell index={1}>{requestCount}</Table.Summary.Cell>}
+                            {columnsStateMap.successCount.show && <Table.Summary.Cell index={2}>{successCount}</Table.Summary.Cell>}
+                            {columnsStateMap.excellentCount.show && <Table.Summary.Cell index={3}>{excellentCount ? `${excellentCount}(${excellentRate})` : ''}</Table.Summary.Cell>}
+                            {columnsStateMap.goodCount.show && <Table.Summary.Cell index={4}>{goodCount ? `${goodCount}(${goodRate})` : ''}</Table.Summary.Cell>}
+                            {columnsStateMap.normalCount.show && <Table.Summary.Cell index={5}>{normalCount ? `${normalCount}(${normalRate})` : ''}</Table.Summary.Cell>}
+                            {columnsStateMap.ordinaryCount.show && <Table.Summary.Cell index={6}>{ordinaryCount ? `${ordinaryCount}(${ordinaryRate})` : ''}</Table.Summary.Cell>}
+                            {columnsStateMap.rejectCount.show && <Table.Summary.Cell index={7}>{rejectCount ? `${rejectCount}(${rejectRate})` : ''}</Table.Summary.Cell>}
+                        </Table.Summary.Row>
+                    </Table.Summary>
+                );
+            }}
+            // headerTitle={<Button type="primary" ghost onClick={() => handlePayReceiptConfirm(selectedList)} disabled={selectedList.length === 0}>全部确认</Button>}
             toolBarRender={() => [<Button onClick={handleExportDailyRiskControlList} type='primary'>导出</Button>]}
             options={{
-                setting: { listsHeight: 400, },
+                setting: { listsHeight: 400, draggable: false },
                 reload: () => triggerGetList(searchList),
+            }}
+            columnsState={{
+                value: columnsStateMap,
+                onChange: (v) => setColumnsStateMap(v)
             }}
             pagination={{
                 showSizeChanger: true,
                 defaultPageSize: 10,
             }}
         />
+
     )
 }
 
