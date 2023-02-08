@@ -55,14 +55,10 @@ export const TodayDistributionPage = () => {
 
     const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetProductNamesQuery(null);
 
-    const productListMap = (productList?.reduce((previousItem, currentItem) => {
-        return {
-            ...previousItem,
-            [currentItem.productId]: {
-                text: currentItem.productName,
-            }
-        }
-    }, {"": {text:"全部"} }) as any)
+    const productListMap = new Map().set('', { text: '全部' });
+    productList?.map((i) => {
+        return productListMap.set(i.productId, { text: i.productName })
+    });
 
 
     const columns: ProColumns<CollectDistributionQueryResponse, "text">[] = [
@@ -79,7 +75,6 @@ export const TodayDistributionPage = () => {
             title: '商戶名',
             dataIndex: 'merchantName',
             initialValue: "",
-            width: 300,
             hideInSearch: true,
         },
         {
@@ -87,28 +82,24 @@ export const TodayDistributionPage = () => {
             title: '订单编号',
             dataIndex: 'orderNo',
             initialValue: "",
-            width: 300,
         },
         {
             key: 'appName',
             title: 'APP名称',
             dataIndex: 'appName',
             initialValue: "",
-            width: 300,
         },
         {
             key: 'productName',
             title: '产品名称',
             dataIndex: 'productName',
             initialValue: "",
-            width: 300,
             hideInSearch: true,
         },
         {
             key: 'productId',
             title: '产品名称',
             dataIndex: 'productId',
-            width: 300,
             hideInTable: true,
             initialValue: "",
             valueType: "select",
@@ -119,14 +110,12 @@ export const TodayDistributionPage = () => {
             title: '手机号',
             dataIndex: 'phoneNo',
             initialValue: "",
-            width: 300,
         },
         {
             key: 'userName',
             title: '姓名',
             dataIndex: 'userName',
             initialValue: "",
-            width: 300,
         },
         {
             key: 'deviceMoney',
@@ -134,7 +123,6 @@ export const TodayDistributionPage = () => {
             dataIndex: 'deviceMoney',
             hideInSearch: true,
             initialValue: "",
-            width: 300,
         },
         {
             key: 'expireTime',
@@ -142,7 +130,7 @@ export const TodayDistributionPage = () => {
             dataIndex: 'expireTime',
             hideInSearch: true,
             initialValue: "",
-            width: 300,
+            valueType: "date",
             tooltip: "起算时间为该日00:00:00",
         },
         {
@@ -151,7 +139,6 @@ export const TodayDistributionPage = () => {
             dataIndex: 'stage',
             hideInTable: true,
             initialValue: Stage.T0,
-            width: 300,
             // valueEnum: Stage,
             valueEnum: {
                 [Stage.T0]: "T0",
