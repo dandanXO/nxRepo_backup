@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {IUseBindBankAccountPage,} from "../../types/IUseBindBankAccountPage";
 import {CustomPage} from "../../../components/CustomPage";
-import {ChooseBindMethod} from "./ChooseBindMethod";
+import {ChooseBindMethod} from "../ChooseBindMethod";
 import {MobileWalletForm} from "./MobileWalletForm";
 import {BankAccountForm} from "./BankAccountForm";
 import {useBindBankAccountForm} from "../../hooks/common/useBindBankAccountForm";
