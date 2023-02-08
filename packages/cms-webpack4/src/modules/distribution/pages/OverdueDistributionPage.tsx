@@ -140,7 +140,7 @@ export const OverdueDistributionPage = () => {
             hideInSearch: true,
             initialValue: "",
             valueType: "date",
-            tooltip: "截止时间为该日23:59:59"
+            tooltip: "起算时间为该日00:00:00"
         },
         {
             key: 'stage',
@@ -354,7 +354,7 @@ export const OverdueDistributionPage = () => {
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
                     }}
-                    rowKey={"orderNo"}
+                    rowKey={"orderId"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,

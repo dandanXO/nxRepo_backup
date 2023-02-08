@@ -131,7 +131,7 @@ export const TodayDistributionPage = () => {
             hideInSearch: true,
             initialValue: "",
             valueType: "date",
-            tooltip: "起算时间为该日00:00:00",
+            tooltip: "截止时间为该日23:59:59",
         },
         {
             key: 'stage',
