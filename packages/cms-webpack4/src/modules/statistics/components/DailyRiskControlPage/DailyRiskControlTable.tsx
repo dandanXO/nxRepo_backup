@@ -59,10 +59,9 @@ const DailyRiskControlTable = () => {
         setSearchList(searchParams);
     }
 
-
     // title 總計的欄位
-    const { day, requestCount, successCount, excellentCount, excellentRate, goodCount, goodRate, normalCount,
-        normalRate, ordinaryCount, ordinaryRate, rejectCount, rejectRate } = currentData?.total || {};
+    const { day = '', requestCount = '', successCount = '', excellentCount = '', excellentRate = '', goodCount = '', goodRate = '', normalCount = '',
+        normalRate = '', ordinaryCount = '', ordinaryRate = '', rejectCount = '', rejectRate = '' } = currentData?.total || {};
   
     const columns: ProColumns<GetDailyRiskControlList>[] = [
         { title: '日期', dataIndex: 'dayRange', key: 'dayRange', valueType: 'dateRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: dayRange },
@@ -119,11 +118,11 @@ const DailyRiskControlTable = () => {
                             {columnsStateMap.day.show && <Table.Summary.Cell index={0}>{day}</Table.Summary.Cell>}
                             {columnsStateMap.requestCount.show && <Table.Summary.Cell index={1}>{requestCount}</Table.Summary.Cell>}
                             {columnsStateMap.successCount.show && <Table.Summary.Cell index={2}>{successCount}</Table.Summary.Cell>}
-                            {columnsStateMap.excellentCount.show && <Table.Summary.Cell index={3}>{`${excellentCount}(${excellentRate})`}</Table.Summary.Cell>}
-                            {columnsStateMap.goodCount.show && <Table.Summary.Cell index={4}>{`${goodCount}(${goodRate})`}</Table.Summary.Cell>}
-                            {columnsStateMap.normalCount.show && <Table.Summary.Cell index={5}>{`${normalCount}(${normalRate})`}</Table.Summary.Cell>}
-                            {columnsStateMap.ordinaryCount.show && <Table.Summary.Cell index={6}>{`${ordinaryCount}(${ordinaryRate})`}</Table.Summary.Cell>}
-                            {columnsStateMap.rejectCount.show && <Table.Summary.Cell index={7}>{`${rejectCount}(${rejectRate})`}</Table.Summary.Cell>}
+                            {columnsStateMap.excellentCount.show && <Table.Summary.Cell index={3}>{excellentCount ? `${excellentCount}(${excellentRate})` : ''}</Table.Summary.Cell>}
+                            {columnsStateMap.goodCount.show && <Table.Summary.Cell index={4}>{goodCount ? `${goodCount}(${goodRate})` : ''}</Table.Summary.Cell>}
+                            {columnsStateMap.normalCount.show && <Table.Summary.Cell index={5}>{normalCount ? `${normalCount}(${normalRate})` : ''}</Table.Summary.Cell>}
+                            {columnsStateMap.ordinaryCount.show && <Table.Summary.Cell index={6}>{ordinaryCount ? `${ordinaryCount}(${ordinaryRate})` : ''}</Table.Summary.Cell>}
+                            {columnsStateMap.rejectCount.show && <Table.Summary.Cell index={7}>{rejectCount ? `${rejectCount}(${rejectRate})` : ''}</Table.Summary.Cell>}
                         </Table.Summary.Row>
                     </Table.Summary>
                 );
