@@ -355,12 +355,14 @@ export const OverdueDistributionPage = () => {
                             ...searchFormState,
                         };
                         if(searchFormState.dateRange) {
-                            searchForm.expireStartTime = moment(searchFormState.dateRange[0]).format('YYYY-MM-DD HH:mm:ss');
-                            searchForm.expireEndTime = moment(searchFormState.dateRange[1]).format('YYYY-MM-DD HH:mm:ss');
+                            searchForm.expireStartTime = moment(searchFormState.dateRange[0]).format('YYYY-MM-DDTHH:mm:ss');
+                            searchForm.expireEndTime = moment(searchFormState.dateRange[1]).format('YYYY-MM-DDTHH:mm:ss');
+                            // searchForm.expireStartTime = moment(searchFormState.dateRange[0]).toISOString().split(".")[0];
+                            // searchForm.expireEndTime = moment(searchFormState.dateRange[1]).toISOString().split(".")[0];
                         }
                         delete searchForm["dateRange"]
                         setFormState(searchForm)
-                        console.log("searchForm", searchForm)
+                        // console.log("searchForm", searchForm)
                         triggerGetList(searchForm)
                     }}
                     onFormResetCallback={() => {

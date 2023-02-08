@@ -182,7 +182,7 @@ export const TodayDistributionPage = () => {
     const [selectedRow, setSelectedRow] = useState([]);
 
     const onSelectChange = (selectedRowKeys) => {
-        console.log("selectedRowKeys", selectedRowKeys);
+        // console.log("selectedRowKeys", selectedRowKeys);
         setSelectedRow(selectedRowKeys);
     };
 
@@ -193,16 +193,16 @@ export const TodayDistributionPage = () => {
     }
 
     const handlerModalOk = (checkedCollector: number[]) => {
-        console.log("checkedCollector", checkedCollector);
+        // console.log("checkedCollector", checkedCollector);
         setShowModal(false);
         if(isSelectedByOrder) {
-            console.log("orderIds", selectedRow);
+            // console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
             })
         } else {
-            console.log("stage", selectedDistributionStage);
+            // console.log("stage", selectedDistributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
                 stage: selectedDistributionStage,

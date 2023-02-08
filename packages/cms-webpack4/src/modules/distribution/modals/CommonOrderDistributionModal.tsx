@@ -22,7 +22,7 @@ interface OrderDistributionModalProps {
     hasS5?: boolean;
 }
 export const CommonOrderDistributionModal = (props: OrderDistributionModalProps) => {
-    const form = useForm();
+
 
     const [triggerGetCollector , {
         // data,
@@ -58,34 +58,47 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         setCheckedCollector(collectors)
     }
 
+    const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T0 : Stage.S1);
+    // console.log("distributionStage", distributionStage);
+    // console.log("summaryData", props?.summaryData);
+    // console.log("props.searchedStage", props.searchedStage);
+
+    useEffect(() => {
+        setDistributionStage(props.searchedStage);
+        form.setFieldsValue({
+            stage: props.searchedStage,
+        });
+    }, [props.searchedStage])
+    // console.log("distributionStage", distributionStage);
+
     const treeCheckboxData = useMemo(() => {
         const data = props.type === "today" ? currentData : currentOverdueData;
 
         let restrictedStageArray = []
         if(props.type === "today") {
-            if(props.searchedStage == Stage.T0) {
-                restrictedStageArray = [Stage.T0];
+            if(distributionStage == Stage.T0) {
+                restrictedStageArray = [Stage.T_1];
             } else {
-                restrictedStageArray = [Stage.T0, Stage.T_1];
+                restrictedStageArray = [];
             }
         } else {
-            if(props.searchedStage == Stage.S1) {
+            if(distributionStage == Stage.S1) {
+                restrictedStageArray = [];
+            } else if (distributionStage == Stage.S2) {
+                restrictedStageArray = [Stage.S1];
+            } else if (distributionStage == Stage.S3) {
+                restrictedStageArray = [Stage.S1, Stage.S2];
+            } else if (distributionStage == Stage.S4) {
+                restrictedStageArray = [Stage.S1, Stage.S2, Stage.S3];
+            } else if (distributionStage == Stage.S5) {
                 restrictedStageArray = [Stage.S1, Stage.S2, Stage.S3, Stage.S4];
-            } else if (props.searchedStage == Stage.S2) {
-                restrictedStageArray = [Stage.S2, Stage.S3, Stage.S4];
-            } else if (props.searchedStage == Stage.S3) {
-                restrictedStageArray = [Stage.S3, Stage.S4];
-            } else if (props.searchedStage == Stage.S4) {
-                restrictedStageArray = [Stage.S4];
-            } else if (props.searchedStage == Stage.S5) {
-                restrictedStageArray = [Stage.S5];
             }
-            if(props.hasS5 && props.searchedStage !== Stage.S5) {
-                restrictedStageArray.push(Stage.S5)
-            }
+            // if(props.hasS5 && distributionStage !== Stage.S5) {
+            //     restrictedStageArray.push(Stage.S5)
+            // }
         }
         return normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
-    }, [props.type, props.searchedStage, currentData, currentOverdueData, props.hasS5]);
+    }, [props.type, distributionStage, currentData, currentOverdueData, props.hasS5]);
 
     const handleSelectedAllCollector = useCallback(() => {
         setSelectedRowKeys(treeCheckboxData["allKey"]);
@@ -99,14 +112,8 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         setCheckedCollector([]);
     }, []);
 
-    const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T0 : Stage.S1);
-    // console.log("distributionStage", distributionStage);
-    // console.log("summaryData", props?.summaryData);
-    // console.log("props.searchedStage", props.searchedStage);
 
-    useEffect(() => {
-        setDistributionStage(props.searchedStage);
-    }, [props.searchedStage])
+    const [form] = useForm();
     return (
         <Modal
             title={"分配订单"}
@@ -124,9 +131,9 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         >
             {!props.isSelectedByOrder && (
                 <div>
-                    <Form>
-                        <Form.Item name="merchantId" label="逾期等级" rules={[{ required: true }]}>
-                            <Select placeholder={"选择"} value={distributionStage} onSelect={(value) => {
+                    <Form form={form}>
+                        <Form.Item name="stage" label="逾期等级" rules={[{ required: true }]}>
+                            <Select placeholder={"选择"} defaultValue={distributionStage} onSelect={(value) => {
                                 // console.log("value", value);
                                 setDistributionStage(value);
                                 // props.setDistributionStage(value)
@@ -154,11 +161,13 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
                 </div>
             )}
-            <div>
-                <Button style={{marginRight: 8}} onClick={handleSelectedAllCollector}>全选</Button>
-                <Button style={{marginRight: 8}} onClick={handleUnselectedAllCollector}>清空重选</Button>
-                <Typography.Text>已选择 {checkedCollector.length} 个催收人员</Typography.Text>
-            </div>
+            {props?.summaryData[distributionStage]?.todoTotal > 0 && (
+                <div>
+                    <Button style={{marginRight: 8}} onClick={handleSelectedAllCollector}>全选</Button>
+                    <Button style={{marginRight: 8}} onClick={handleUnselectedAllCollector}>清空重选</Button>
+                    <Typography.Text>已选择 {checkedCollector.length} 个催收人员</Typography.Text>
+                </div>
+            )}
             {props?.summaryData[distributionStage]?.todoTotal > 0 && (
                 <TreeCheckbox
                     data={treeCheckboxData}
