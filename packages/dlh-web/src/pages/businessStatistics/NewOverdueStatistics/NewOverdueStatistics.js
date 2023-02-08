@@ -211,22 +211,22 @@ class NewOverdueStatistics extends Component {
                 render (text, record) { return numberToFixed(text); }
             },
             {
-                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.loan.principal" />} contentText={total ? total.lendMoneyAmount : ''} />,
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.loan.principal" />} contentText={total ? <CopyText text={convertMoneyFormat(total.lendMoneyAmount)}/> : ''} />,
                 dataIndex: 'lendMoneyAmount', key: 'lendMoneyAmount', width: '6%',
                 render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
             },
             {
-                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.repayment.amount" />} contentText={total ? total.paidOrderAmount : ''} />,
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.repayment.amount" />} contentText={total ? <CopyText text={convertMoneyFormat(total.paidOrderAmount)}/> : ''} />,
                 dataIndex: 'paidOrderAmount', key: 'paidOrderAmount', width: '6%',
                 render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
             },
             {
-                title: <CustomColumnTitle titleText={<FormattedMessage id="windowPage.late.fee" />} contentText={total ? total.overMonyAmount : ''} />,
+                title: <CustomColumnTitle titleText={<FormattedMessage id="windowPage.late.fee" />} contentText={total ? <CopyText text={convertMoneyFormat(total.overMonyAmount)}/> : ''} />,
                 dataIndex: 'overMonyAmount', key: 'overMonyAmount', width: '6%',
                 render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
             },
             {
-                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.subtotal" />} contentText={total ? total.totalMonyAmount : ''} />,
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.subtotal" />} contentText={total ? <CopyText text={convertMoneyFormat(total.totalMonyAmount)}/> : ''} />,
                 dataIndex: 'totalMonyAmount', key: 'totalMonyAmount', width: '6%',
                 render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
             },
