@@ -2,7 +2,9 @@ import { axios } from 'utils';
 const api = {
     collectTeamsList: '/hs/admin/collect-team/all',
     collectTeam: '/hs/admin/collect-team',
-    collectGroup: '/hs/admin/collect-group'
+    collectGroup: '/hs/admin/collect-group',
+    collectStageList:'/hs/admin/commons/collect-stages'
+
 };
 const getCollectTeamsList = (params) => {
     return axios.get(api.collectTeamsList, params);
@@ -29,4 +31,8 @@ const deleteCollectGroup = (params) => {
     return axios.request({url:api.collectGroup, data:params, method: 'delete'});
 }
 
-export { getCollectTeamsList, addCollectTeam, updateCollectTeam, deleteCollectTeam, getCollectGroup, addCollectGroup, updateCollectGroup, deleteCollectGroup };
+const getCollectStageList = (params) => {
+    return axios.get(api.collectStageList, params);
+}
+
+export { getCollectTeamsList, addCollectTeam, updateCollectTeam, deleteCollectTeam, getCollectGroup, addCollectGroup, updateCollectGroup, deleteCollectGroup ,getCollectStageList};

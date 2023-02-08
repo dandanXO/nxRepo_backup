@@ -16,7 +16,7 @@ import SearchList from "./SearchList/SearchList";
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 const { TabPane } = Tabs;
 
-function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTeamData, addCollectGroupData, updateCollectTeamData, deleteCollectTeamData }) {
+function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTeamData, addCollectGroupData, updateCollectTeamData, deleteCollectTeamData ,getStageSelect,stageSelect}) {
     const { value: teamValue, setValue: setTeamValue, handleOnChange: handleTeamValue } = useInput();
     const { value: merchantIdValue, setValue: setMerchantIdValue, handleOnChange: handleMerchantIdValue } = useInput();
     const isSuperAdmin = getIsSuperAdmin();
@@ -24,6 +24,7 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
 
     useEffect(() => {
         getCollectTeamsList();
+        getStageSelect();
     }, []);
 
     const handleAddTeam = () => {
@@ -132,7 +133,7 @@ function CollectTeamManage({ teamsData, intl, getCollectTeamsList, addCollectTea
                     <ExpandableTable
                         columns={columns}
                         dataSource={teamsData}
-                        expandedRowRender={(record, i) => <ExpandRow record={record} addGruop={handleAddGruop} intl={intl} />}
+                        expandedRowRender={(record, i) => <ExpandRow record={record} addGruop={handleAddGruop} intl={intl} stageSelect={stageSelect}/>}
                     />
                 </TabPane>
                 <TabPane tab={intl.formatMessage({ id: "page.table.collect-people" })} key="2">
@@ -152,6 +153,7 @@ const mapStateToProps = (state) => {
     return {
         teamsData: collectTeamManageState['teamsData'],
         groupsData: collectTeamManageState['groupsData'],
+        stageSelect: collectTeamManageState['stageSelect'],
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -162,6 +164,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteCollectTeamData: collectTeamManageAction.deleteCollectTeam,
         addCollectGroupData: collectTeamManageAction.addCollectGroup,
         getCollectGroupList: collectTeamManageAction.getCollectGroup,
+        getStageSelect:collectTeamManageAction.getCollectStage,
     }, dispatch)
 }
 

@@ -18,9 +18,12 @@ import {
   TODL_GET_COLLECTOR_LIST,
   todlSetCollectorList,
   TODL_GET_PRODUCT_SELECT,
-  todlSetProductSelect
+  todlSetProductSelect,
+  TODL_GET_STAGE_LIST,
+  todlSetStageList
+
 } from './actions';
-import { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getCollectorList, getProductList } from '../api';
+import { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getCollectorList, getProductList, getTodayStageList } from '../api';
 import {message} from "antd";
 import {getTodayCollector} from "../../TodayOrderDistribute/api";
 
@@ -96,6 +99,20 @@ function* getProductData(action) {
 function* watchGetProductData() {
     yield takeEvery(TODL_GET_PRODUCT_SELECT, getProductData);
 }
+
+// 催收階段下拉
+function* getStageSelect(action) {
+    try{
+        const res = yield call(getTodayStageList);
+        yield put(todlSetStageList(res));
+    } catch (e) {
+        console.log(e);
+    }
+}
+function* watchGetStageSelect() {
+    yield takeEvery(TODL_GET_STAGE_LIST, getStageSelect);
+}
+
 export default function* root() {
     yield all([
         fork(watchGetTableData),
@@ -104,7 +121,8 @@ export default function* root() {
         fork(watchCollectorGetDetail),
         fork(watchGetTodayCollector),
         fork(watchGetCollectorList),
-        fork(watchGetProductData)
+        fork(watchGetProductData),
+        fork(watchGetStageSelect)
     ])
 }
 

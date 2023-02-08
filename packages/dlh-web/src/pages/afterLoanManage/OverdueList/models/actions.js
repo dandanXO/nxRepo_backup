@@ -17,6 +17,8 @@ export const ODL_GET_COLLECTOR_SELECT= 'ODL_GET_COLLECTOR_SELECT';
 export const ODL_SET_COLLECTOR_SELECT= 'ODL_SET_COLLECTOR_SELECT';
 export const ODL_GET_PRODUCT_SELECT= 'ODL_GET_PRODUCT_SELECT';
 export const ODL_SET_PRODUCT_SELECT= 'ODL_SET_PRODUCT_SELECT';
+export const ODL_GET_STAGE_SELECT= 'ODL_GET_STAGE_SELECT';
+export const ODL_SET_STAGE_SELECT= 'ODL_SET_STAGE_SELECT';
 
 // 催收人紀錄
 export const ODL_COLLECTOR_CHANGE_MODAL_LOADING = 'ODL_COLLECTOR_CHANGE_MODAL_LOADING';
@@ -37,6 +39,8 @@ export const odlGetCollectorSelect = (params) => ({ type: ODL_GET_COLLECTOR_SELE
 export const odlSetCollectorSelect = (data) => ({ type: ODL_SET_COLLECTOR_SELECT, data });
 export const odlGetProductSelect = (params) => ({ type: ODL_GET_PRODUCT_SELECT, params });
 export const odlSetProductSelect = (data) => ({ type: ODL_SET_PRODUCT_SELECT, data });
+export const odlGetStageSelect = (params) => ({ type: ODL_GET_STAGE_SELECT, params });
+export const odlSetStageSelect = (data) => ({ type: ODL_SET_STAGE_SELECT, data });
 
 // 催收人紀錄
 export const odlColleterChangeModalLoading = (option) => ({ type: ODL_COLLECTOR_CHANGE_MODAL_LOADING, option });

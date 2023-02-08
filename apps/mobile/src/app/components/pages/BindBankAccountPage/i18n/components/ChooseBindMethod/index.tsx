@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import BankAccountSVG from "./ic_bank_account_icon.svg";
-import MobileWalletSVG from "./logo2.png";
+import MobileWalletSVG from "./ic_mobile_wallet_icon.svg";
+import BDMobileWalletSVG from "./bd_ic_mobile_wallet_icon.png";
 import unselectedSVG from "./ic_check_disable_icon.svg";
 import selectedSVG from "./ic_check_available_icon.svg";
-import {Label} from "../../../../components/Label";
+import {Label} from "../../../components/Label";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
-import {i18nBankBindAccountPage} from "../../../translations";
+import {i18nBankBindAccountPage} from "../../translations";
+import {environment} from "../../../../../../../environments/environment";
+import {IAllCountryIdentityName} from "../../../../../../../environments/config/IAllCountryIdentityName";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -44,7 +47,6 @@ const Option = styled.div`
   text-align: center;
 
   position: relative;
-  width: 159px;
 `
 
 type IChooseBindMethod = {
@@ -61,7 +63,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
       <OptionContainer>
         <Option onClick={() => props.changeOptionValueCallback(0)}>
           <OptionIcon enable={props.value === 0}/>
-          <img style={{ width: 60, height: 60 }} src={MobileWalletSVG}/>
+          <img style={{ width: 60, height: 60 }} src={environment.country === IAllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}/>
           <Label>{t("Mobile wallet")}</Label>
         </Option>
         <Option onClick={() => {
