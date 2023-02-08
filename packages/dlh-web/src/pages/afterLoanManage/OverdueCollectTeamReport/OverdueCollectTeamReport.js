@@ -9,7 +9,7 @@ import moment from 'moment';
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 function OverdueCollectTeamReport(props) {
 
-    const initTime = [moment().subtract(7, 'days'), moment()];
+    const initTime = [moment().subtract(3, 'days'), moment()];
 
     const isSuperAdmin = getIsSuperAdmin();
     const allMerchants = getAllMerchants();
@@ -36,6 +36,7 @@ const mapStateToProps = (state) => {
         teamsData: overdueCollectTeamReportState['teamsData'],
         tableData: overdueCollectTeamReportState['tableData'],
         downloadData: overdueCollectTeamReportState['downloadData'],
+        loading: overdueCollectTeamReportState['loading'],
     }
 }
 const mapDispatchToProps = (dispatch) => {

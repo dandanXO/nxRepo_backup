@@ -12,7 +12,10 @@ const api = {
     orderTodayGetCollectStreamList: '/hs/admin/orderToday/collect-stream/list',
     getTodayCollector: '/hs/admin/collect-today/stage',
     getCollectorList: '/hs/admin/collect-today/collector',
-    productList:'/hs/admin/commons/product-names'
+    productList:'/hs/admin/commons/product-names',
+
+    // 获取當日催收阶段 (下拉選單)
+    todayStageList:'/hs/admin/collect-today/stages-options',
 };
 const getOrderListData = (params) => {
     return axios.get(api.orderListData, {params});
@@ -51,5 +54,8 @@ const getProductList = (params) => {
     return axios.get(api.productList);
 }
 
+const getTodayStageList = (params) => {
+    return axios.get(api.todayStageList);
+}
 
-export { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getTodayCollector, getCollectorList, getProductList };
+export { getOrderListData, getUrgePersonData, distributeOrder, collectorGetDetail, getTodayCollector, getCollectorList, getProductList, getTodayStageList };

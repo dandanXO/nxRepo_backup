@@ -9,10 +9,12 @@ import {
     UPDATE_COLLECT_GROUP,
     DELETE_COLLECT_GROUP,
     setCollectTeam,
-    setCollectGroup
+    setCollectGroup,
+    GET_COLLECT_STAGE_DATA,
+    setCollectStage
 } from './actions';
 import { message } from 'antd';
-import { getCollectTeamsList, addCollectTeam, updateCollectTeam, deleteCollectTeam, getCollectGroup, addCollectGroup, updateCollectGroup, deleteCollectGroup } from '../api';
+import { getCollectTeamsList, addCollectTeam, updateCollectTeam, deleteCollectTeam, getCollectGroup, addCollectGroup, updateCollectGroup, deleteCollectGroup,getCollectStageList } from '../api';
 
 function* getTableData(action) {
     try{
@@ -129,6 +131,19 @@ function* watchDeleteGroupData() {
 }
 
 
+// 催收階段下拉
+function* getStageSelect(action) {
+    try{
+        const res = yield call(getCollectStageList);
+        yield put(setCollectStage(res));
+    } catch (e) {
+        console.log(e);
+    }
+}
+function* watchGetStageSelect() {
+    yield takeEvery(GET_COLLECT_STAGE_DATA, getStageSelect);
+}
+
 export default function* root() {
     yield all([
         fork(watchGetTableData),
@@ -138,6 +153,7 @@ export default function* root() {
         fork(watchAddGroupData),
         fork(watchGetGroupData),
         fork(watchUpdateGroupData),
-        fork(watchDeleteGroupData)
+        fork(watchDeleteGroupData),
+        fork(watchGetStageSelect)
     ])
 }

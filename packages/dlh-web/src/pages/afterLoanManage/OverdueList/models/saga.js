@@ -15,9 +15,11 @@ import {
   odlColletorSetModalData,
   ODL_COLLECTOR_GET_MODAL_DATA,
   ODL_GET_PRODUCT_SELECT,
-  odlSetProductSelect
+  odlSetProductSelect,
+  ODL_GET_STAGE_SELECT,
+  odlSetStageSelect
 } from './actions';
-import { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail, getProductList } from '../api';
+import { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail, getProductList ,getOverdueStageList} from '../api';
 import {message} from "antd";
 
 function* getTableData(action) {
@@ -101,6 +103,21 @@ function* getProductData(action) {
 function* watchGetProductData() {
     yield takeEvery(ODL_GET_PRODUCT_SELECT, getProductData);
 }
+
+
+// 催收階段下拉
+function* getStageSelect(action) {
+    try{
+        const res = yield call(getOverdueStageList);
+        yield put(odlSetStageSelect(res));
+    } catch (e) {
+        console.log(e);
+    }
+}
+function* watchGetStageSelect() {
+    yield takeEvery(ODL_GET_STAGE_SELECT, getStageSelect);
+}
+
 export default function* root() {
     yield all([
         fork(watchGetTableData),
@@ -108,7 +125,8 @@ export default function* root() {
         fork(watchDistributeData),
         fork(watchCollectorGetDetail),
         fork(watchGetCollectorSelect),
-        fork(watchGetProductData)
+        fork(watchGetProductData),
+        fork(watchGetStageSelect)
     ])
 }
 

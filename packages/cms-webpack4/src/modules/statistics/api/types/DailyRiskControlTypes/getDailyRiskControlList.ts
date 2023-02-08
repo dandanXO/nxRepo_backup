@@ -1,9 +1,6 @@
 export interface GetDailyRiskControlListRequestQuery {
     endTime?: string;                 // 結束時間
     startTime?: string;               // 開始時間
-    isCharge?: boolean | "";          // 是否收費
-    isOldUser?: boolean | "";         // 老客下单
-    merchantId?: number | "";         // 商户名
     riskControlModel?: string;        // 风控名稱
 }
 
@@ -25,6 +22,5 @@ export interface GetDailyRiskControlList {
     rejectCount?: string;      // 拒绝數量
     rejectRate?: string;       // 拒绝比例
     requestCount?: string;     // 风控请求数
-    riskControlFee?: string;   // 风控费用(USD)
     successCount?: string;     // 回调数
 }

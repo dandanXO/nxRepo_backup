@@ -27,6 +27,9 @@ export const TODL_SET_TODAY_COLLECTOR = 'TOOD_SET_TODAY_COLLECTOR';
 export const TODL_GET_COLLECTOR_LIST = 'TODL_GET_COLLECTOR_LIST';
 export const TODL_SET_COLLECTOR_LIST = 'TODL_SET_COLLECTOR_LIST';
 
+export const TODL_GET_STAGE_LIST = 'TODL_GET_STAGE_LIST';
+export const TODL_SET_STAGE_LIST = 'TODL_SET_STAGE_LIST';
+
 export const todlGetTableData = (params) => ({ type: TODL_GET_TABLE_DATA, params });
 export const todlSetTableData = (data) => ({ type: TODL_SET_TABLE_DATA, data });
 export const todlChangeTableLoading = (option) => ({ type: TODL_CHANGE_TABLE_LOADING, option });
@@ -49,3 +52,6 @@ export const todlGetTodayCollector = () => ({ type: TODL_GET_TODAY_COLLECTOR });
 export const todlSetTodayCollector = (data) => ({ type: TODL_SET_TODAY_COLLECTOR, data });
 export const todlGetCollectorList = () => ({ type: TODL_GET_COLLECTOR_LIST });
 export const todlSetCollectorList = (data) => ({ type: TODL_SET_COLLECTOR_LIST, data });
+
+export const todlGetStageList = () => ({ type: TODL_GET_STAGE_LIST });
+export const todlSetStageList = (data) => ({ type: TODL_SET_STAGE_LIST, data });

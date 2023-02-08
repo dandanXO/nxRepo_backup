@@ -3,7 +3,7 @@ import {IUseBindBankAccountPageForBangladesh,} from "../../types/IUseBindBankAcc
 import {CustomPage} from "../../../components/CustomPage";
 import {MobileWalletForm} from "./MobileWalletForm";
 import {useBangladeshMobileWalletForm} from "../../hooks/bangladesh/useBangladeshMobileWalletForm";
-import {ChooseBindMethod} from "../PakistanBindBankAccountPage/ChooseBindMethod";
+import {ChooseBindMethod} from "../ChooseBindMethod";
 
 export const BangladeshBindBankAccountPage = (props: IUseBindBankAccountPageForBangladesh) => {
 

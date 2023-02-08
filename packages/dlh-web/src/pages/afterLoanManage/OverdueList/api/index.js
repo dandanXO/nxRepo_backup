@@ -14,9 +14,13 @@ const api = {
     // 获取催收阶段的催收员 (下拉選單)
     getOverdueCollector: '/hs/admin/collect-overdue/collector',
     distributeOrder: '/hs/admin/orderOverdue/distribution',
+
     // 獲取催收分配紀錄
     orderOverdueGetCollectStreamList: '/hs/admin/orderOverdue/collect-stream/list',
-    productList:'/hs/admin/commons/product-names'
+    productList:'/hs/admin/commons/product-names',
+
+    // 获取逾期催收阶段 (下拉選單)
+    overdueStageList:'/hs/admin/collect-overdue/stages-options',
     
 };
 const getOrderListData = (params) => {
@@ -55,5 +59,10 @@ const getProductList = (params) => {
     return axios.get(api.productList);
 }
 
+const getOverdueStageList = (params) => {
+    return axios.get(api.overdueStageList);
+}
 
-export { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail, getProductList };
+
+
+export { getOrderListData, getOverdueCollectorStageData, getOverdueCollectorData, distributeOrder, collectorGetDetail, getProductList ,getOverdueStageList };
