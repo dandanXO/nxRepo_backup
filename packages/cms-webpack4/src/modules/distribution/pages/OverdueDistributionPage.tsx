@@ -321,6 +321,7 @@ export const OverdueDistributionPage = () => {
                     tableDatasource={currentItemListData?.records}
                     hasAddForm={false}
                     searchable={true}
+                    loading={isGetListFetching}
                     headerTitle={
                         <Space>
                             <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {
@@ -361,6 +362,7 @@ export const OverdueDistributionPage = () => {
                         selectedRowKeys: selectedRow,
                         onChange: onSelectChange,
                     }}
+                    triggerGetList={()=>triggerGetList(formState)}
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}

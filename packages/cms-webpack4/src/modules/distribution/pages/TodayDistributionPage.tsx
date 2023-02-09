@@ -254,6 +254,7 @@ export const TodayDistributionPage = () => {
                     tableDatasource={currentItemListData?.records}
                     hasAddForm={false}
                     searchable={true}
+                    loading={isGetListFetching}
                     headerTitle={
                         <Space>
                             <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {
@@ -291,6 +292,7 @@ export const TodayDistributionPage = () => {
                         selectedRowKeys: selectedRow,
                         onChange: onSelectChange,
                     }}
+                    triggerGetList={()=>triggerGetList(formState)}
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}
