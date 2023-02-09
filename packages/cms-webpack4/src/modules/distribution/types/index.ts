@@ -21,6 +21,8 @@ export type CollectDistributionQueryRequest  = {
     productId?: number;
     stage: Stage;
     userName?: string;
+    expireEndTime?: string;
+    expireStartTime?: string;
 } & PageRequest;
 
 export interface CollectDistributionQueryResponse {
