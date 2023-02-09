@@ -46,18 +46,20 @@ class NewOverdueStatistics extends Component {
 
     //导出记录
     exportRecord = (obj) => {
+        const { getTableData } = this.props;
         this.setState({ btnDisabled: true });
         let hide = message.loading(this.props.intl.formatMessage({id : "page.table.exporting"}), 0);
-        const searchStatus = this.convertParams(obj);
+        this.searchParams = this.convertParams(obj);
         axios({
-        url: "/hs/admin/newStatistics/overdueStatisticDownLoad",
-        method: "post",
+        url: "/hs/admin/newStatistics/overdueRepayStatistics/download",
+        method: "get",
         responseType: "blob",
-        data: searchStatus
+        params:  this.searchParams
         })
         .then(res => {
             hide && hide();
             this.setState({ btnDisabled: false });
+            getTableData(this.searchParams);
             download(res, this.props.intl.formatMessage({id :'page.table.repayment.statis.export.two'}, {expDate : Date.now()}));
         })
         .catch(() => {
