@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
 import {Button, FormInstance, Space, Table} from "antd";
+import CopyText from "../../shared/components/CopyText";
 import {
     useGetProductNamesQuery,
     useLazyGetDistributionQuery,
@@ -82,12 +83,14 @@ export const TodayDistributionPage = () => {
             title: '订单编号',
             dataIndex: 'orderNo',
             initialValue: "",
+            render: (text) => <CopyText text={text} />
         },
         {
             key: 'appName',
             title: 'APP名称',
             dataIndex: 'appName',
             initialValue: "",
+            render: (text) => <CopyText text={text} />
         },
         {
             key: 'productName',
@@ -110,12 +113,14 @@ export const TodayDistributionPage = () => {
             title: '手机号',
             dataIndex: 'phoneNo',
             initialValue: "",
+            render: (text) => <CopyText text={text} />
         },
         {
             key: 'userName',
             title: '姓名',
             dataIndex: 'userName',
             initialValue: "",
+            render: (text) => <CopyText text={text} />
         },
         {
             key: 'deviceMoney',

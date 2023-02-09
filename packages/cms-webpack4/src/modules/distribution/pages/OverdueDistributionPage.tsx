@@ -22,6 +22,7 @@ import {
 import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
 import moment from "moment";
 import {useForm} from "antd/es/form/Form";
+import CopyText from "../../shared/components/CopyText";
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
@@ -84,12 +85,14 @@ export const OverdueDistributionPage = () => {
             title: '订单编号',
             dataIndex: 'orderNo',
             initialValue: "",
+            render: (text) => <CopyText text={text} />
         },
         {
             key: 'appName',
             title: 'APP名称',
             dataIndex: 'appName',
             initialValue: "",
+            render: (text) => <CopyText text={text} />
         },
         {
             key: 'productName',
@@ -112,12 +115,14 @@ export const OverdueDistributionPage = () => {
             title: '手机号',
             dataIndex: 'phoneNo',
             initialValue: "",
+            render: (text) => <CopyText text={text} />
         },
         {
             key: 'userName',
             title: '姓名',
             dataIndex: 'userName',
             initialValue: "",
+            render: (text) => <CopyText text={text} />
         },
         {
             key: 'deviceMoney',
@@ -156,9 +161,7 @@ export const OverdueDistributionPage = () => {
             title: '逾期时间',
             dataIndex: 'createdAtRange',
             valueType: 'dateRange',
-            search: {
-                transform: (value: any) => ({ expireStartTime: value[0], expireEndTime: value[1] }),
-            },
+            hideInTable: true,
         },
     ]
 
@@ -341,10 +344,8 @@ export const OverdueDistributionPage = () => {
                             ...searchFormState,
                         };
                         if(searchFormState.dateRange) {
-                            searchForm.expireStartTime = moment(searchFormState.dateRange[0]).format('YYYY-MM-DDTHH:mm:ss');
-                            searchForm.expireEndTime = moment(searchFormState.dateRange[1]).format('YYYY-MM-DDTHH:mm:ss');
-                            // searchForm.expireStartTime = moment(searchFormState.dateRange[0]).toISOString().split(".")[0];
-                            // searchForm.expireEndTime = moment(searchFormState.dateRange[1]).toISOString().split(".")[0];
+                            searchForm.expireStartTime = searchFormState.dateRange[0].format('YYYY-MM-DDTHH:mm:ss');
+                            searchForm.expireEndTime = searchFormState.dateRange[1].format('YYYY-MM-DDTHH:mm:ss');
                         }
                         delete searchForm["dateRange"]
                         setFormState(searchForm)
