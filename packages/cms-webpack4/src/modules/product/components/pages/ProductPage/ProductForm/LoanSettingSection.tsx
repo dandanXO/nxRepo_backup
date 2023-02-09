@@ -81,7 +81,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                     </Form.Item>
 
                     <Form.Item label="初贷初始额度">
-                        <Form.Item name="firstLoanQuotaSwitch" style={{ display: 'inline-block', margin: '0 8px 0 0' }}>
+                        <Form.Item name="newGuestLoanQuotaSwitch" style={{ display: 'inline-block', margin: '0 8px 0 0' }}>
                             <Radio.Group>
                                 <Radio value={1}>依照风控</Radio>
                                 <Radio value={0}>系统规则</Radio>
@@ -124,14 +124,14 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
 
                     <Form.Item label="复贷初始额度">
 
-                        <Form.Item name="reLoanQuotaSwitch" style={{ display: 'inline-block', margin: '0 8px 0 0' }}>
+                        <Form.Item name="oldGuestLoanQuotaSwitch" style={{ display: 'inline-block', margin: '0 8px 0 0' }}>
                             <Radio.Group>
                                 <Radio value={1}>依照风控</Radio>
                                 <Radio value={0}>系统规则</Radio>
                             </Radio.Group>
                         </Form.Item>
 
-                        <Form.Item name="reLoanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                        <Form.Item name="oldGuestLoanAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                             rules={!props.enableReLoanAmount ? [] : [
                                 {
                                     validator: async (_, value) => NumberValidator(_, value)({

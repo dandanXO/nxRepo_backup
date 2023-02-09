@@ -30,7 +30,15 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                       </ul>
                   </Paragraph>
 
-                  <Form.Item label="前置利息" required>
+                  <Form.Item label="新客利息" required>
+
+                      <Input.Group compact>
+                          <div>
+                              <CustomLabel style={{ width: 193 }}>前置利息</CustomLabel>
+                              <CustomLabel style={{ width: 193 }}>后置利息</CustomLabel>
+                          </div>
+                      </Input.Group>
+
                       <Form.Item name="preInterestRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                           validateStatus={(props?.customAntFormFieldError?.preInterestRate as any).validateStatus}
                           help={(props?.customAntFormFieldError?.preInterestRate as any).help}
@@ -41,20 +49,53 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                           <Input allowClear placeholder="填写 0 - 100 间数字" />
                       </Form.Item>
                       <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
-                  </Form.Item>
 
-                  <Form.Item label="后置利息" required>
                       <Form.Item name="postInterestRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
-                          validateStatus={(props?.customAntFormFieldError?.postInterestRate as any).validateStatus}
-                          help={(props?.customAntFormFieldError?.postInterestRate as any).help}
-                          normalize={(value, prevValue, prevValues) => {
-                              return maxOneUnitFloatReplacer(value);
-                          }}
+                                 validateStatus={(props?.customAntFormFieldError?.postInterestRate as any).validateStatus}
+                                 help={(props?.customAntFormFieldError?.postInterestRate as any).help}
+                                 normalize={(value, prevValue, prevValues) => {
+                                     return maxOneUnitFloatReplacer(value);
+                                 }}
                       >
                           <Input allowClear placeholder="填写 0 - 100 间数字" />
                       </Form.Item>
                       <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
+
                   </Form.Item>
+
+                  <Form.Item label="次新客利息" required>
+
+                      <Input.Group compact>
+                          <div>
+                              <CustomLabel style={{ width: 193 }}>前置利息</CustomLabel>
+                              <CustomLabel style={{ width: 193 }}>后置利息</CustomLabel>
+                          </div>
+                      </Input.Group>
+
+                      <Form.Item name="renewPreInterestRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                                 validateStatus={(props?.customAntFormFieldError?.renewPreInterestRate as any).validateStatus}
+                                 help={(props?.customAntFormFieldError?.renewPreInterestRate as any).help}
+                                 normalize={(value, prevValue, prevValues) => {
+                                     return maxOneUnitFloatReplacer(value);
+                                 }}
+                      >
+                          <Input allowClear placeholder="填写 0 - 100 间数字" />
+                      </Form.Item>
+                      <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
+
+                      <Form.Item name="renewPostInterestRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                                 validateStatus={(props?.customAntFormFieldError?.renewPostInterestRate as any).validateStatus}
+                                 help={(props?.customAntFormFieldError?.renewPostInterestRate as any).help}
+                                 normalize={(value, prevValue, prevValues) => {
+                                     return maxOneUnitFloatReplacer(value);
+                                 }}
+                      >
+                          <Input allowClear placeholder="填写 0 - 100 间数字" />
+                      </Form.Item>
+                      <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
+
+                  </Form.Item>
+
 
                   <Form.Item label="日利息" tooltip="以年利息计" required>
                       <Form.Item name="dailyRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
