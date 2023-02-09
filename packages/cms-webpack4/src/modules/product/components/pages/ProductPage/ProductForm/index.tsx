@@ -132,11 +132,11 @@ const Index = (props: ProductFormProps) => {
                     validateRiskRankLoanAmount(validateForm);
                 }
 
-                if(changedFields[0].name[0] ==="firstLoanQuotaSwitch") {
+                if(changedFields[0].name[0] ==="newGuestLoanQuotaSwitch") {
                     props.setEnableLoanAmount(changedFields[0].value === 0)
                 }
 
-                if(changedFields[0].name[0] ==="reLoanQuotaSwitch") {
+                if(changedFields[0].name[0] ==="oldGuestLoanQuotaSwitch") {
                     props.setEnableReLoanAmount(changedFields[0].value === 0)
                 }
 
@@ -150,8 +150,9 @@ const Index = (props: ProductFormProps) => {
                 let map = {
 
                 }
-                let inValidPreInterestRateUnit = false;
 
+
+                let inValidPreInterestRateUnit = false;
 
                 const preInterestRateField = allFields.filter(field => field.name && field.name[0] ==="preInterestRate")
 
@@ -286,6 +287,145 @@ const Index = (props: ProductFormProps) => {
                 // console.log("map", map);
 
 
+                // NOTICE: 次新客利息
+
+                let inValidRenewPreInterestRateUnit = false;
+
+                const renewPreInterestRateField = allFields.filter(field => field.name && field.name[0] ==="renewPreInterestRate")
+
+                if(renewPreInterestRateField[0].touched && renewPreInterestRateField[0].name && renewPreInterestRateField[0].name[0] === "renewPreInterestRate") {
+                    if(empty(renewPreInterestRateField[0].value)) {
+                        inValidRenewPreInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            renewPreInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入前置利息",
+                                value: renewPreInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidRenewPreInterestRateUnit && isNaN(renewPreInterestRateField[0].value)) {
+                        inValidRenewPreInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            renewPreInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入數字",
+                                value: renewPreInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidRenewPreInterestRateUnit && equalRangeBelow100(renewPreInterestRateField[0].value)) {
+                        inValidRenewPreInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            renewPreInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入0-100间数字",
+                                value: renewPreInterestRateField[0].value,
+                            },
+                        }
+                    }
+
+                    if(!inValidRenewPreInterestRateUnit) {
+                        map = {
+                            ...map,
+                            renewPreInterestRate: {
+                                validateStatus: "",
+                                help: "",
+                                value: renewPreInterestRateField[0].value,
+                            },
+                        }
+                    }
+                }
+
+                // console.log("renewPreInterestRate.map", JSON.parse(JSON.stringify(map)));
+
+                const renewPostInterestRateField = allFields.filter(field => field.name && field.name[0] ==="renewPostInterestRate")
+
+                // NOTICE:  inValidPostInterestUnit
+                let inValidRenewPostInterestRateUnit = false;
+                if(renewPostInterestRateField[0].touched && renewPostInterestRateField[0].name && renewPostInterestRateField[0].name[0] === "renewPostInterestRate") {
+                    if(empty(renewPostInterestRateField[0].value)) {
+                        inValidRenewPostInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            renewPostInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入後置利息",
+                                value: renewPostInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidRenewPostInterestRateUnit && isNaN(renewPostInterestRateField[0].value)) {
+                        inValidRenewPostInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            renewPostInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入數字",
+                                value: renewPostInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidRenewPostInterestRateUnit && equalRangeBelow100(renewPostInterestRateField[0].value)) {
+                        inValidRenewPostInterestRateUnit = true;
+                        map = {
+                            ...map,
+                            renewPostInterestRate: {
+                                validateStatus: "error",
+                                help: "请输入0-100间数字",
+                                value: renewPostInterestRateField[0].value,
+                            },
+                        }
+                    }
+                    if(!inValidRenewPostInterestRateUnit) {
+                        map = {
+                            ...map,
+                            renewPostInterestRate: {
+                                validateStatus: "",
+                                help: "",
+                                value: renewPostInterestRateField[0].value,
+                            },
+                        }
+                    }
+                }
+                // console.log("renewPostInterestRate.map", JSON.parse(JSON.stringify(map)));
+
+                if(!inValidRenewPreInterestRateUnit && !inValidRenewPostInterestRateUnit) {
+                    if(Number(getChangedField(allFields, "renewPreInterestRate").value) +
+                        Number(getChangedField(allFields, "renewPostInterestRate").value) > 100) {
+                        map = {
+                            ...map,
+                            renewPreInterestRate: {
+                                validateStatus: "error",
+                                help: "前置利息＋后置利息不得超过100%"
+                            },
+                            renewPostInterestRate: {
+                                validateStatus: "error",
+                                help: "前置利息＋后置利息不得超过100%"
+                            },
+                        }
+                    } else {
+                        map = {
+                            ...map,
+                            renewPreInterestRate: {
+                                validateStatus: "",
+                                help: ""
+                            },
+                            renewPostInterestRate: {
+                                validateStatus: "",
+                                help: ""
+                            },
+                        }
+                    }
+                }
+                // console.log("map", map);
+
+
+
+                // NOTICE: END 次新客利息
                 let productInterestRatePairsValidationMap = {}
                 // NOTICE: productInterestRatePairs
                 if(changedFields[0].touched && changedFields[0].name && changedFields[0].name[0] === "productInterestRatePairs") {
@@ -485,8 +625,10 @@ const Index = (props: ProductFormProps) => {
                     preInterest: "",
                     plusAmount: "",
                 }],
-                firstLoanQuotaSwitch: 1,
-                reLoanQuotaSwitch: 1,
+                newGuestLoanQuotaSwitch: 1,
+                oldGuestLoanQuotaSwitch: 1,
+                newGuestProductDisplayStatus: 1,
+                renewProductDisplayStatus: 1,
             }}
         >
             <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit} />

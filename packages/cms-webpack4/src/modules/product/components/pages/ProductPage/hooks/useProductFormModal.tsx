@@ -59,6 +59,14 @@ export const useProductFormModal = (props: ProductFormModal) => {
       validateStatus: "",
       help: "",
     },
+    renewPostInterestRate: {
+      validateStatus: "",
+      help: "",
+    },
+    renewPreInterestRate: {
+      validateStatus: "",
+      help: "",
+    },
   })
   const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
   const [postProductCreate, { isLoading }] = usePostProductCreateMutation();
@@ -88,8 +96,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
     if(!merchantList) return;
 
 
-        setEnableLoanAmount(productFormData.firstLoanQuotaSwitch === false)
-        setEnableReLoanAmount(productFormData.reLoanQuotaSwitch === false)
+        setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false)
+        setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false)
 
 
     const currentMerchant = merchantList?.find(merchant => merchant.merchantId === productFormData.merchantId);
@@ -134,19 +142,30 @@ export const useProductFormModal = (props: ProductFormModal) => {
           moment(productFormData.csTime.split(" - ")[1], 'h:mm'),
         ],
         loanTerm: productFormData.loanTerm,
-        loanMaxThreshold:productFormData.loanMaxThreshold,
+
         maxAmount: productFormData.maxAmount,
         extensible: productFormData.extensible,
         extensibleOverdueDays: productFormData.extensibleOverdueDays,
 
-        firstLoanQuotaSwitch: productFormData.firstLoanQuotaSwitch === true ? 1 : 0,
-        reLoanQuotaSwitch: productFormData.reLoanQuotaSwitch === true ? 1 : 0,
-        riskRankLoanAmount:productFormData.riskRankLoanAmount,
-        reLoanAmount: productFormData.reLoanAmount,
-        reLoanMaxThreshold:productFormData.reLoanMaxThreshold,
+          newGuestLoanQuotaSwitch: productFormData.newGuestLoanQuotaSwitch === true ? 1 : 0,
+          oldGuestLoanQuotaSwitch: productFormData.oldGuestLoanQuotaSwitch === true ? 1 : 0,
+          oldGuestLoanAmount: productFormData.oldGuestLoanAmount,
+
+        riskRankLoanAmount: productFormData.riskRankLoanAmount,
+
+
+          newGuestMaxThreshold:productFormData.newGuestMaxThreshold,
+          renewMaxThreshold:productFormData.renewMaxThreshold,
 
         preInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.preInterestRate) * 100)}`,
         postInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.postInterestRate) * 100)}`,
+
+        renewPreInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.renewPreInterestRate) * 100)}`,
+        renewPostInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.renewPostInterestRate) * 100)}`,
+
+        newGuestProductDisplayStatus: productFormData.newGuestProductDisplayStatus,
+        renewProductDisplayStatus: productFormData.renewProductDisplayStatus,
+
         dailyRate: `${fixedFloatNumberToFixed3(Number(productFormData.dailyRate) * 100)}`,
         dummy: productFormData.dummy,
         extensionRate: `${fixedFloatNumberToFixed3(Number(productFormData.extensionRate) * 100)}`,
@@ -233,7 +252,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
   const onFinish = (values: any) => {
     // console.log("onFinish.values", JSON.stringify(values));
-    
+
     const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
       num: i.num,
       postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
@@ -265,19 +284,29 @@ export const useProductFormModal = (props: ProductFormModal) => {
       csEmail: values.csEmail,
       csTime: `${values.csTime[0].format('HH:mm')} - ${values.csTime[1].format('HH:mm')}`,
       loanTerm: Number(values.loanTerm),
-      loanMaxThreshold:Number(values.loanMaxThreshold),
+
+        newGuestMaxThreshold: Number(values.newGuestMaxThreshold),
+
       maxAmount: Number(values.maxAmount),
       extensible: values.extensible,
       extensibleOverdueDays: Number(values.extensibleOverdueDays),
 
-      firstLoanQuotaSwitch: values.firstLoanQuotaSwitch,
-      reLoanQuotaSwitch: values.reLoanQuotaSwitch,
-      riskRankLoanAmount:riskRankLoanAmount,
-      reLoanAmount: values.reLoanAmount,
-      reLoanMaxThreshold:Number(values.reLoanMaxThreshold),
+        newGuestLoanQuotaSwitch: values.newGuestLoanQuotaSwitch,
+        oldGuestLoanQuotaSwitch: values.oldGuestLoanQuotaSwitch,
+        riskRankLoanAmount: values.riskRankLoanAmount,
+        oldGuestLoanAmount: values.oldGuestLoanAmount,
+        renewMaxThreshold: Number(values.renewMaxThreshold),
 
       preInterestRate: strToFloatNumberWithFixed3(values.preInterestRate),
       postInterestRate: strToFloatNumberWithFixed3(values.postInterestRate),
+
+      renewPreInterestRate: strToFloatNumberWithFixed3(values.renewPreInterestRate),
+      renewPostInterestRate: strToFloatNumberWithFixed3(values.renewPostInterestRate),
+
+        newGuestProductDisplayStatus: values.newGuestProductDisplayStatus,
+        renewProductDisplayStatus: values.renewProductDisplayStatus,
+
+
       dailyRate: strToFloatNumberWithFixed3(values.dailyRate),
       extensionRate: strToFloatNumberWithFixed3(values.extensionRate),
       overdueRate: strToFloatNumberWithFixed3(values.overdueRate),
@@ -312,7 +341,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
     })
   }
 
-
   // const onAutoFinishedForm = useCallback(() => {
   //   form.setFieldsValue({
   //     // "merchantId": 2,
@@ -338,10 +366,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
   //     "maxAmount": "140000",
   //     "extensible": true,
   //     "extensibleOverdueDays": "15",
-  //      "firstLoanQuotaSwitch": 0,
+  //      "newGuestLoanQuotaSwitch": 0,
   //       "loanAmount": "1000",
-  //       "reLoanQuotaSwitch": 0,
-  //       "reLoanAmount": "2000",
+  //       "oldGuestLoanQuotaSwitch": 0,
+  //       "oldGuestLoanAmount": "2000",
   //     "preInterestRate": "16",
   //     "postInterestRate": "17",
   //     "dailyRate": "18",
