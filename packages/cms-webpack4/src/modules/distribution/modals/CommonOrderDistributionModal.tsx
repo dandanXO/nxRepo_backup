@@ -55,7 +55,9 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
     const [selectedRowKeys, setSelectedRowKeys] = useState([]); //设置选择的 level1, level2 row
 
     const onTreeCheckboxCheck = (collectors) => {
-        setCheckedCollector(collectors)
+        const data = collectors.filter((item, index) => collectors.indexOf(item) === index);
+        // console.log("collectors", data)
+        setCheckedCollector(data);
     }
 
     const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T0 : Stage.S1);
