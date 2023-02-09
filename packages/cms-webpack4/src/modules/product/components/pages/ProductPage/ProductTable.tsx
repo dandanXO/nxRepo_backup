@@ -69,8 +69,8 @@ const ProductTable = (props: ProductTableProps) => {
 
             { key: 'newGuestProductDisplayStatus', title: '新客优先满足', dataIndex: 'newGuestProductDisplayStatus', hideInSearch: true,
                 render: (text, record) => {
-                    return <Switch onChange={() => {
-                        console.log("newGuestProductDisplayStatus");
+                    return <Switch onChange={(checked) => {
+                        handleEditProductList(record.productId, {newGuestProductDisplayStatus: checked});
                     }} checkedChildren="是" unCheckedChildren="否" defaultChecked={record.newGuestProductDisplayStatus}/>;
                 }},
             {
@@ -92,8 +92,8 @@ const ProductTable = (props: ProductTableProps) => {
             },
             { key: 'renewProductDisplayStatus', title: '次新客优先满足', dataIndex: 'renewProductDisplayStatus', hideInSearch: true,
                 render: (text, record) => {
-                    return <Switch onChange={() => {
-                        console.log("renewProductDisplayStatus");
+                    return <Switch onChange={(checked) => {
+                        handleEditProductList(record.productId, {renewProductDisplayStatus: checked});
                     }} checkedChildren="是" unCheckedChildren="否" defaultChecked={record.renewProductDisplayStatus}/>;
                 }
             },
