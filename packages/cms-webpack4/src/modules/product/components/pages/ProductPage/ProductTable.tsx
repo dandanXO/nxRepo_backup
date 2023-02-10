@@ -64,8 +64,29 @@ const ProductTable = (props: ProductTableProps) => {
             { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" ,render: (text) => <CopyText text={text} />},
             { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
             { key: 'loanTerm', title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
-            { key: 'extensionRate', title: '前置利息(%)', dataIndex: 'preInterestRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
-            { key: 'overdueRate', title: '后置利息(%)', dataIndex: 'postInterestRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
+
+            {
+                key: 'extensionRate',
+                title: '新客/次新客前置利息（%）',
+                dataIndex: 'mix-preInterestRate',
+                hideInSearch: true,
+                render: (text, record) => {
+                    return (
+                        <div>{Number(Number(record.preInterestRate) * 100).toFixed(1)}/{Number(Number(record.renewPreInterestRate) * 100).toFixed(1)}</div>
+                    )
+                }
+            },
+            {
+                key: 'overdueRate',
+                title: '新客/次新客后置利息（%）',
+                dataIndex: 'mix-postInterestRate',
+                hideInSearch: true,
+                render: (text, record) => {
+                    return (
+                        <div>{Number(Number(record.postInterestRate) * 100).toFixed(1)}/{Number(Number(record.renewPostInterestRate) * 100).toFixed(1)}</div>
+                    )
+                }
+            },
 
             { key: 'newGuestProductDisplayStatus', title: '新客优先满足', dataIndex: 'newGuestProductDisplayStatus', hideInSearch: true,
                 render: (text, record) => {
