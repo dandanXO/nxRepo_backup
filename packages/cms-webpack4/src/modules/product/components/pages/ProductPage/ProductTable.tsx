@@ -95,9 +95,9 @@ const ProductTable = (props: ProductTableProps) => {
                     }} checkedChildren="是" unCheckedChildren="否" defaultChecked={record.newGuestProductDisplayStatus}/>;
                 }},
             {
-                key: 'loanMaxThreshold', title: '新客订单上限', dataIndex: 'loanMaxThreshold', initialValue: "", hideInSearch: true,
+                key: 'newGuestMaxThreshold', title: '新客订单上限', dataIndex: 'newGuestMaxThreshold', initialValue: "", hideInSearch: true,
                 width: ProColumnsOperationConstant.width["4"], render: (text, record) => {
-                    return <EditableInput name='loanMaxThreshold' placeholder='新客订单上限'
+                    return <EditableInput name='newGuestMaxThreshold' placeholder='新客订单上限'
                         initValue={record.newGuestMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
                         rules={{
                             validator: async (_, value) => NumberValidator(_, value)({

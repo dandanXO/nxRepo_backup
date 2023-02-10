@@ -63,7 +63,7 @@ export interface ProductTypes {
     // NOTICE: Deprecated 次新客最大放款量: 第二次借款的老客 ; replace by renewMaxThreshold
 
     // reLoanQuotaSwitch?: boolean;     // 老客贷款额度开关 0: 系统规则 1: 风控返回
-    // NOTICE: Deprecated 次新客最大放款量: 第二次借款的老客 ; replace by renewMaxThreshold
+    // NOTICE: Deprecated 次新客最大放款量: 第二次借款的老客 ; replace by oldGuestLoanQuotaSwitch
 
     renewMaxThreshold?: number;
     // 次新客最大放款量: 第二次借款的老客
