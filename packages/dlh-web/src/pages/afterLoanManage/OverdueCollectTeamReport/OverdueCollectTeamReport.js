@@ -9,7 +9,7 @@ import moment from 'moment';
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 function OverdueCollectTeamReport(props) {
 
-    const initTime = [moment().subtract(3, 'days'), moment()];
+    const initTime = [moment().subtract(2, 'days'), moment()];
 
     const isSuperAdmin = getIsSuperAdmin();
     const allMerchants = getAllMerchants();
