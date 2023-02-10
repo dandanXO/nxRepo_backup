@@ -44,10 +44,10 @@ function App() {
 
     const adminUserInfo = getAdminUser();
     const phoneNo = adminUserInfo.data.phoneNo;
-    const waterMarkColor = appInfo.COUNTRY !== 'Pakistan' ? 'rgba(0,0,0,.05)' : 'rgba(244,133,78,.05)';
+    const waterMarkColor = appInfo.COUNTRY !== 'Pakistan' ? 'rgba(0,0,0,.06)' : 'rgba(244,133,78,.06)';
     return (
         <Provider store={appStore}>
-            <WaterMark height={0} width={200} gapX={100} gapY={100} offsetLeft={0} offsetTop={100} content={`${phoneNo} - ${moment().format('YYYY-MM-DD-HH:mm:ss')}`}  fontSize={20} fontColor={waterMarkColor} fontFamily={'Arial Black'}>
+            <WaterMark fontFamily={'Arial'} fontWeight={600} height={0} width={200} gapX={100} gapY={100} offsetLeft={0} offsetTop={100} content={`${phoneNo} - ${moment().format('YYYY-MM-DD-HH:mm:ss')}`}  fontSize={20} fontColor={waterMarkColor}>
                 <AppRouter />
             </WaterMark>
         </Provider>
