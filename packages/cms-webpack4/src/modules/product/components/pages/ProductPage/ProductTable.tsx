@@ -26,7 +26,7 @@ const ProductTable = (props: ProductTableProps) => {
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const [patchProduct, { isSuccess: patchProductSuccess }] = usePatchProductEditMutation();
     const [productList, setProductList] = useState<Product[]>(props.productListData);
-    const initSearchList: GetProductListRequestQuery = { enabled: true, merchantId: '', productName: '' };
+    const initSearchList: GetProductListRequestQuery = { enabled: '', merchantId: '', productName: '' };
     const [searchList, setSearchList] = useState(initSearchList);
 
     useEffect(() => {
