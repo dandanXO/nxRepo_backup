@@ -627,6 +627,8 @@
   "page.table.name": "名稱",
   "page.table.count": "件數",
   "page.table.rate": "達成率",
+  "page.table.achieved.amount": "達成金額",
+  "page.table.achievement.rate": "金額達成率",
   "page.table.enter": "請輸入{text}",
   "page.table.report.date": "報表日期",
   "page.table.collect-team.name": "催收團隊名稱",

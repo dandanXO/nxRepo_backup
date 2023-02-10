@@ -673,6 +673,8 @@
   "page.table.name": "Name",
   "page.table.count": "Count",
   "page.table.rate": "Rate",
+  "page.table.achieved.amount": "Achieved amount",
+  "page.table.achievement.rate": "Achievement rate",
   "page.table.enter": "Please Enter {text}",
   "page.table.Expand": "Expand",
   "page.table.Collapse": "Collapse",

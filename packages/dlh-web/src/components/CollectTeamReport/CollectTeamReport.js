@@ -43,8 +43,13 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
 
 
     useEffect(()=>{
-        if(downloadData.length === 0) return;
-        download(downloadData, intl.formatMessage({id: `menu.collect.team.report.${type}.xlsx`}, { expDate: Date.now() }));
+        if (downloadData.length === 0) return;
+        const downloadReport = async () => {
+            await message.success(intl.formatMessage({ id: "page.table.exporting" }));
+            await download(downloadData, intl.formatMessage({ id: `menu.collect.team.report.${type}.xlsx` }, { expDate: Date.now() }));
+            await message.destroy();
+        }
+        downloadReport();
     },[downloadData])
 
     const columns = [
@@ -66,6 +71,14 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
                 {
                     title: <FormattedMessage id="page.table.rate" />, dataIndex: "teamRate", key: "teamRate", className: 'teams',
                     render: (value, row) => renderRowSpan(row.reportDate, row.team, "team", row.team, "teamRate", value, row.rowIndex)
+                },
+                {
+                    title: <FormattedMessage id="page.table.achieved.amount" />, dataIndex: "teamAchievedMoney", key: "teamAchievedMoney", className: 'teams',
+                    render: (value, row) => renderRowSpan(row.reportDate, row.team, "team", row.team, "teamAchievedMoney", value, row.rowIndex)
+                },
+                {
+                    title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "teamAchievedMoneyRate", key: "teamAchievedMoneyRate", className: 'teams',
+                    render: (value, row) => renderRowSpan(row.reportDate, row.team, "team", row.team, "teamAchievedMoneyRate", value, row.rowIndex)
                 }
             ]
         },
@@ -83,6 +96,14 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
                 {
                     title: <FormattedMessage id="page.table.rate" />, dataIndex: "groupRate", key: "groupRate", className: 'groups',
                     render: (value, row) => renderRowSpan(row.reportDate, row.team, "group", row.group, "groupRate", value, row.rowIndex)
+                },
+                {
+                    title: <FormattedMessage id="page.table.achieved.amount" />, dataIndex: "groupAchievedMoney", key: "groupAchievedMoney", className: 'groups',
+                    render: (value, row) => renderRowSpan(row.reportDate, row.team, "group", row.group, "groupAchievedMoney", value, row.rowIndex)
+                },
+                {
+                    title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "groupAchievedMoneyRate", key: "groupAchievedMoneyRate", className: 'groups',
+                    render: (value, row) => renderRowSpan(row.reportDate, row.team, "group", row.group, "groupAchievedMoneyRate", value, row.rowIndex)
                 }
             ]
         },
@@ -91,7 +112,9 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
             children: [
                 { title: <FormattedMessage id="page.table.name" />, dataIndex: "collector", key: "collector", className: 'name' },
                 { title: <FormattedMessage id="page.table.count" />, dataIndex: "collectorCount", key: "collectorCount", className: 'count' },
-                { title: <FormattedMessage id="page.table.rate" />, dataIndex: "collectorRate", key: "collectorRate", className: 'rate' }
+                { title: <FormattedMessage id="page.table.rate" />, dataIndex: "collectorRate", key: "collectorRate", className: 'rate' },
+                { title: <FormattedMessage id="page.table.achieved.amount" />, dataIndex: "collectorAchievedMoney", key: "collectorAchievedMoney", className: 'collectorAchievedMoney' },
+                { title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "collectorAchievedMoneyRate", key: "collectorAchievedMoneyRate", className: 'collectorAchievedMoneyRate' }
             ]
         }
     ];
@@ -123,7 +146,6 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
             leng,
             merchantId
         }
-        console.log(params)
         getReportData(params)
     }
 

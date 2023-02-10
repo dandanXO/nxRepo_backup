@@ -2,7 +2,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, PaginationProps, Space } from 'antd';
+import {Button, PaginationProps, Space, Switch} from 'antd';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {GetProductListResponse, Product} from '../../../service/product/ProductApi';
 import { ProductFormModal } from "./hooks/useProductFormModal";
@@ -26,7 +26,7 @@ const ProductTable = (props: ProductTableProps) => {
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const [patchProduct, { isSuccess: patchProductSuccess }] = usePatchProductEditMutation();
     const [productList, setProductList] = useState<Product[]>(props.productListData);
-    const initSearchList: GetProductListRequestQuery = { enabled: true, merchantId: '', productName: '' };
+    const initSearchList: GetProductListRequestQuery = { enabled: '', merchantId: '', productName: '' };
     const [searchList, setSearchList] = useState(initSearchList);
 
     useEffect(() => {
@@ -64,13 +64,41 @@ const ProductTable = (props: ProductTableProps) => {
             { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" ,render: (text) => <CopyText text={text} />},
             { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
             { key: 'loanTerm', title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
-            { key: 'extensionRate', title: '前置利息(%)', dataIndex: 'preInterestRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
-            { key: 'overdueRate', title: '后置利息(%)', dataIndex: 'postInterestRate', hideInSearch: true, render: (text) => Number(Number(text) * 100).toFixed(1) },
+
             {
-                key: 'loanMaxThreshold', title: '新客订单上限', dataIndex: 'loanMaxThreshold', initialValue: "", hideInSearch: true,
+                key: 'extensionRate',
+                title: '新客/次新客前置利息（%）',
+                dataIndex: 'mix-preInterestRate',
+                hideInSearch: true,
+                render: (text, record) => {
+                    return (
+                        <div>{Number(Number(record.preInterestRate) * 100).toFixed(1)}/{Number(Number(record.renewPreInterestRate) * 100).toFixed(1)}</div>
+                    )
+                }
+            },
+            {
+                key: 'overdueRate',
+                title: '新客/次新客后置利息（%）',
+                dataIndex: 'mix-postInterestRate',
+                hideInSearch: true,
+                render: (text, record) => {
+                    return (
+                        <div>{Number(Number(record.postInterestRate) * 100).toFixed(1)}/{Number(Number(record.renewPostInterestRate) * 100).toFixed(1)}</div>
+                    )
+                }
+            },
+
+            { key: 'newGuestProductDisplayStatus', title: '新客优先满足', dataIndex: 'newGuestProductDisplayStatus', hideInSearch: true,
+                render: (text, record) => {
+                    return <Switch onChange={(checked) => {
+                        handleEditProductList(record.productId, {newGuestProductDisplayStatus: checked});
+                    }} checkedChildren="是" unCheckedChildren="否" defaultChecked={record.newGuestProductDisplayStatus}/>;
+                }},
+            {
+                key: 'newGuestMaxThreshold', title: '新客订单上限', dataIndex: 'newGuestMaxThreshold', initialValue: "", hideInSearch: true,
                 width: ProColumnsOperationConstant.width["4"], render: (text, record) => {
-                    return <EditableInput name='loanMaxThreshold' placeholder='新客订单上限'
-                        initValue={record.loanMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
+                    return <EditableInput name='newGuestMaxThreshold' placeholder='新客订单上限'
+                        initValue={record.newGuestMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
                         rules={{
                             validator: async (_, value) => NumberValidator(_, value)({
                                 required: true,
@@ -83,11 +111,18 @@ const ProductTable = (props: ProductTableProps) => {
                     />
                 }
             },
+            { key: 'renewProductDisplayStatus', title: '次新客优先满足', dataIndex: 'renewProductDisplayStatus', hideInSearch: true,
+                render: (text, record) => {
+                    return <Switch onChange={(checked) => {
+                        handleEditProductList(record.productId, {renewProductDisplayStatus: checked});
+                    }} checkedChildren="是" unCheckedChildren="否" defaultChecked={record.renewProductDisplayStatus}/>;
+                }
+            },
             {
-                key: 'reLoanMaxThreshold', title: '次新客订单上限', dataIndex: 'reLoanMaxThreshold', initialValue: "", hideInSearch: true,
+                key: 'renewMaxThreshold', title: '次新客订单上限', dataIndex: 'renewMaxThreshold', initialValue: "", hideInSearch: true,
                 width: ProColumnsOperationConstant.width["4"], render: (text, record) => {
-                    return <EditableInput name='reLoanMaxThreshold' placeholder='次新客订单上限'
-                        initValue={record.reLoanMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
+                    return <EditableInput name='renewMaxThreshold' placeholder='次新客订单上限'
+                        initValue={record.renewMaxThreshold} productId={record.productId} handleSave={handleEditProductList}
                         rules={{
                             validator: async (_, value) => NumberValidator(_, value)({
                                 required: true,
