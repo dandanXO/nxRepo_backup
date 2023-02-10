@@ -43,8 +43,13 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
 
 
     useEffect(()=>{
-        if(downloadData.length === 0) return;
-        download(downloadData, intl.formatMessage({id: `menu.collect.team.report.${type}.xlsx`}, { expDate: Date.now() }));
+        if (downloadData.length === 0) return;
+        const downloadReport = async () => {
+            await message.success(intl.formatMessage({ id: "page.table.exporting" }));
+            await download(downloadData, intl.formatMessage({ id: `menu.collect.team.report.${type}.xlsx` }, { expDate: Date.now() }));
+            await message.destroy();
+        }
+        downloadReport();
     },[downloadData])
 
     const columns = [
