@@ -36,7 +36,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
     const initSearchList: GetUserListRequestQuerystring = {
         addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
-        noLoanAgainEndDays: 10, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", status: "", pageNum: 1, pageSize: 10
+        noLoanAgainEndDays: 30, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", status: "", pageNum: 1, pageSize: 10
     }
     // redux
     const history = useHistory();
@@ -215,14 +215,14 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             initialValue: '',
             hideInTable: true,
             renderFormItem: (item, { }, form) => {
-                return <Form form={form} key={'noLoanAgainDays'} initialValues={{ noLoanAgainStartDays: searchParams.noLoanAgainStartDays ||1, noLoanAgainEndDays:searchParams.noLoanAgainEndDays || 10 }} >
+                return <Form form={form} key={'noLoanAgainDays'} initialValues={{ noLoanAgainStartDays: searchParams.noLoanAgainStartDays ||1, noLoanAgainEndDays:searchParams.noLoanAgainEndDays || 30 }} >
                     <Form.Item style={{ whiteSpace: 'nowrap' }} >
                         <Form.Item name="noLoanAgainStartDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px 0 0' }}>
-                            <InputNumber min={1} max={10} placeholder={"天"} disabled={!isNoLoanAgain} />
+                            <InputNumber min={1} max={30} placeholder={"天"} disabled={!isNoLoanAgain} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>~</Form.Item>
                         <Form.Item name="noLoanAgainEndDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px' }}>
-                            <InputNumber min={1} max={10} placeholder={"天"} disabled={!isNoLoanAgain} />
+                            <InputNumber min={1} max={30} placeholder={"天"} disabled={!isNoLoanAgain} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
                     </Form.Item>
