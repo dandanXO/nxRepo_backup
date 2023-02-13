@@ -14,9 +14,9 @@ import {getIsSuperAdmin, getAllMerchants} from "utils";
 import styles from './NewOverdueStatistics.less';
 
 const CustomColumnTitle = ({ titleText, contentText }) => {
-    return <div >
-        <div style={{whiteSpace:'nowrap'}}>{titleText}</div>
-        <div style={{ background: '#E6F7FF', margin: '8px -7px -12px -7px', padding: '8px' }} className={styles.customColumnTitle}>{contentText}</div>
+    return <div className={styles.customColumn}>
+        <div className={styles.customColumnTitle}>{titleText}</div>
+        <div style={{ background: '#E6F7FF', margin: '-2px', padding: '0px' }} className={styles.customColumnText}>{contentText}</div>
     </div>
 }
 
@@ -173,13 +173,13 @@ class NewOverdueStatistics extends Component {
             {
                 title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T0.repayment" }) + '%'}
                     contentText={total ? numberToFixed(total.t0PaidOrderRate) : ''} />,
-                dataIndex: 't0PaidOrderRate', key: 't0PaidOrderRate', width: '7%',
+                dataIndex: 't0PaidOrderRate', key: 't0PaidOrderRate', width: '5%',
                 render (text, record) { return numberToFixed(text); }
             },
             {
                 title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T1.repayment" }) + '%'}
                     contentText={total ? numberToFixed(total.t1PaidOrderRate) : ''} />,
-                dataIndex: 't1PaidOrderRate', key: 't1PaidOrderRate', width: '7%',
+                dataIndex: 't1PaidOrderRate', key: 't1PaidOrderRate', width: '5%',
                 render (text, record) { return numberToFixed(text); }
             },
             {
