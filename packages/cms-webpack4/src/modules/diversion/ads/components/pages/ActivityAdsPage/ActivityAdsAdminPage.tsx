@@ -1,11 +1,11 @@
-import AdminPage from "../../../../shared/components/AdminPage";
-import {AdminTable} from "../../../../shared/components/AdminTable";
+import AdminPage from "../../../../../shared/components/AdminPage";
+import {AdminTable} from "../../../../../shared/components/AdminTable";
 import {ProColumns} from "@ant-design/pro-components";
 import React, {useCallback, useEffect, useMemo} from "react";
 import {AdsTemplateData} from "../../../data/AdsTemplateData";
 import {AdsScenarioData} from "../../../data/AdsScenarioData";
-import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
-import {AdminFormCustomModal} from "../../../../shared/components/AdminFormCustomModal";
+import {ProColumnsOperationConstant} from "../../../../../shared/components/ProColumnsOperationConstant";
+import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
 import {ActivityAdsForm} from "./ActivityAdsForm";
 import {
     ActivityModel,
@@ -17,7 +17,7 @@ import {
 } from "../../../service/AdsApi";
 import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";
 import {Form} from "antd";
-import {CommonResponseError} from "../../../../../types/CommonResponseError";
+import {CommonResponseError} from "../../../../../../types/CommonResponseError";
 import {DefaultFormByTemplateType} from "./DefaultFormByTemplateType";
 import {useAdminFormModal} from "./useAdminFormModal";
 

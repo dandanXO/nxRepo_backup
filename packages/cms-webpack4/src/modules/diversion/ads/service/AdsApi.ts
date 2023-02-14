@@ -1,4 +1,4 @@
-import {API} from "../../../api";
+import {API} from "../../../../api";
 import {AdsScenarioType} from "../export/types/IAdsScenario";
 
 export interface ActivityBannerVoRes {

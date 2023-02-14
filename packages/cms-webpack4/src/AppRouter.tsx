@@ -26,9 +26,9 @@ import OrderFinalReviewPage from "./modules/order/components/OrderFinalReviewPag
 import OrderFinalReviewDetailPage from "./modules/order/components/OrderFinalReviewDetailPage";
 import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordPage";
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
-import {ActivityAdsAdminPage} from "./modules/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
+import {ActivityAdsAdminPage} from "./modules/diversion/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
 import PayReceiptPage from "./modules/financial/components/PayReceiptPage";
-import DailyRiskControlPage from "./modules/statistics/components/DailyRiskControlPage"
+import DailyRiskControlPage from "./modules/statistics/components/pages/DailyRiskControlPage"
 import {TodayDistributionPage} from "./modules/distribution/pages/TodayDistributionPage";
 import {OverdueDistributionPage} from "./modules/distribution/pages/OverdueDistributionPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';

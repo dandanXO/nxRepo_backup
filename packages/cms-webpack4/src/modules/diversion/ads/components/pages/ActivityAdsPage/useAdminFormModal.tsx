@@ -1,7 +1,7 @@
 import {useCallback, useState} from "react";
-import {ModalContent} from "../../../../shared/components/AdminTable";
+import {ModalContent} from "../../../../../shared/components/AdminTable";
 import {useForm} from "antd/es/form/Form";
-import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
+import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {Modal} from "antd/es";
 import {ActivityModel} from "../../../service/AdsApi";
 

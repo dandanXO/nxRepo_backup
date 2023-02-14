@@ -3,7 +3,7 @@ import {AdminTable} from "../../shared/components/AdminTable";
 import AdminPage from "../../shared/components/AdminPage";
 import React, {useEffect, useRef, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
-import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
+import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
 import {Button, Form, FormInstance, Space, Table} from "antd";
 import {
     CollectDistributionQueryRequest,

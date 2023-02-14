@@ -1,7 +1,6 @@
-import AdminPage from '../../../shared/components/AdminPage';
+import AdminPage from '../../../../shared/components/AdminPage';
 import DailyRiskControlTable from './DailyRiskControlTable';
 const DailyRiskControlPage = () => {
-   
 
     return (
         <AdminPage

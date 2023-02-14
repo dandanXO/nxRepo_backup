@@ -3,7 +3,7 @@ import {AdContainer} from "./AdContainer";
 import styled from "styled-components";
 import {
     onClickToAction
-} from "../../../../../../../../packages/cms-webpack4/src/modules/ads/import/ActivityAdListPage/components/AdClick";
+} from "./AdClick";
 
 const makeStyleEllipsisOverflowText = () => {
     return `

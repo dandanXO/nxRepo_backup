@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import type { ColumnsState, ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Modal, Space, Table, Tag } from 'antd';
-import { useLazyGetDailyRiskControlListQuery } from '../../api/DailyRiskControlApi';
-import { GetDailyRiskControlListRequestQuery, GetDailyRiskControlList } from '../../api/types/DailyRiskControlTypes/getDailyRiskControlList';
-import CopyText from '../../../shared/components/CopyText';
-import { ProColumnsOperationConstant } from "../../../shared/components/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
-import useGetProviderEnum from '../../../shared/hooks/useGetProviderEnum';
-import { enumObjectToMap } from '../../../shared/utils/enumObjectToMap';
+import { useLazyGetDailyRiskControlListQuery } from '../../../api/DailyRiskControlApi';
+import { GetDailyRiskControlListRequestQuery, GetDailyRiskControlList } from '../../../api/types/DailyRiskControlTypes/getDailyRiskControlList';
+import CopyText from '../../../../shared/components/CopyText';
+import { ProColumnsOperationConstant } from "../../../../shared/components/ProColumnsOperationConstant";
+import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
+import useGetProviderEnum from '../../../../shared/hooks/useGetProviderEnum';
+import { enumObjectToMap } from '../../../../shared/utils/enumObjectToMap';
 import moment from 'moment';
 import queryString from "query-string";
 
@@ -62,7 +62,7 @@ const DailyRiskControlTable = () => {
     // title 總計的欄位
     const { day = '', requestCount = '', successCount = '', excellentCount = '', excellentRate = '', goodCount = '', goodRate = '', normalCount = '',
         normalRate = '', ordinaryCount = '', ordinaryRate = '', rejectCount = '', rejectRate = '' } = currentData?.total || {};
-  
+
     const columns: ProColumns<GetDailyRiskControlList>[] = [
         { title: '日期', dataIndex: 'dayRange', key: 'dayRange', valueType: 'dateRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: dayRange },
         { title: '风控名称', dataIndex: 'riskControlModel', key: 'riskControlModel', initialValue: "", valueEnum: providerListEnum, hideInTable: true },
@@ -79,7 +79,7 @@ const DailyRiskControlTable = () => {
     const initColumnsStateMap = columns.reduce((prev, curr) => {
         return curr.hideInSearch ? { ...prev, ...{ [`${curr.key}`]: { show: true } } } : { ...prev }
     }, {}) as Record<string, ColumnsState>;
-    
+
     const [columnsStateMap, setColumnsStateMap] = useState<Record<string, ColumnsState>>({ ...initColumnsStateMap });
 
     return (

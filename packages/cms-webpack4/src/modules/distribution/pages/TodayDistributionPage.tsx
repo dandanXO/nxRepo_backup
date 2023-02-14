@@ -2,7 +2,7 @@ import {AdminTable} from "../../shared/components/AdminTable";
 import AdminPage from "../../shared/components/AdminPage";
 import React, {useEffect, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
-import {useAdminFormModal} from "../../ads/components/pages/ActivityAdsPage/useAdminFormModal";
+import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
 import {Button, FormInstance, Space, Table} from "antd";
 import CopyText from "../../shared/components/CopyText";
 import {
