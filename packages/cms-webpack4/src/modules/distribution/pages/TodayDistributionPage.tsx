@@ -287,7 +287,7 @@ export const TodayDistributionPage = () => {
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
                     }}
-                    rowKey={"orderId"}
+                    rowKey={"orderNo"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
