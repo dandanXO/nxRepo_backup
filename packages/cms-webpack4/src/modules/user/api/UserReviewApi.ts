@@ -1,6 +1,6 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { GetUserReviewListProps,GetUserReviewListRequestQuerystring } from "./types/userReviewTypes/getUserReviewList";
-import { UserId } from "../../../types/UserId";
+import { UserId } from "../../shared/types/UserId";
 import { PostUserReviewErrorReponse,PostUserReviewRequestQuerystring } from "./types/userReviewTypes/postUserReview";
 
 const UserReviewApi = API.injectEndpoints({

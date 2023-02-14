@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "./index";
 import { GetAvailableMerchantResponse } from "./types/getAvailableMerchantList";
 
 const MerchantListApi = API.injectEndpoints({

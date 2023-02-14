@@ -1,11 +1,11 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { PostMerchantCreateRequestBody } from "./postMerchantCreate";
 import { PutMerchantProps } from "./putMerchant";
 
 const MerchantApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-       
+
         // NOTE: POST /hs/admin/merchant-manage/merchant 创建商戶
         postMerchantCreate: builder.mutation<{}, PostMerchantCreateRequestBody>({
             query: (requestBody: PostMerchantCreateRequestBody) => ({

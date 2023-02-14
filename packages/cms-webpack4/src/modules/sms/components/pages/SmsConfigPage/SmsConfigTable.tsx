@@ -4,7 +4,7 @@ import { ProTable } from '@ant-design/pro-components';
 import { useGetUserContactsListQuery ,useLazyGetUserContactsListQuery} from '../../../../shared/api/UserInfoApi';
 import { GetUserContacts } from '../../../../shared/api/types/userInfoTypes/getUserContacts';
 import { useEffect, useState } from 'react';
-import { FormModalProps } from '../../../../../types/FormModal';
+import { FormModalProps } from '../../../../shared/types/FormModal';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";

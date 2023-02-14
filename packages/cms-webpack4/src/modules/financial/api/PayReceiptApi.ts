@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { GetPayReceiptListRequestQuerystring,GetPayReceiptListProps } from "./types/PayReceiptTypes/getPayReceiptList";
 import { PostPayRecieptConfirmRequest } from "./types/PayReceiptTypes/postPayReceiptConfirm";
 

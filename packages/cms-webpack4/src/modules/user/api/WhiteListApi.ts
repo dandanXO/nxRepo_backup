@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { GetWhiteListProps ,GetWhiteListRequestQuerystring } from "./types/whiteListTypes/getWhtieList";
 import { PostWhiteListRequestQuerystring } from "./types/whiteListTypes/postWhiteList";
 import { DeleteWhiteListRequestQuerystring } from "./types/whiteListTypes/deleteWhiteList";

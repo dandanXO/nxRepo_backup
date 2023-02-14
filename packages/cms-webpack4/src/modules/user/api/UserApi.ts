@@ -1,7 +1,7 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { GetUerListProps,GetUserListRequestQuerystring } from "./types/userTypes/getUserList";
 import { PostBlackListRequestBody } from "./types/userTypes/postBlackList";
-import { UserId } from "../../../types/UserId";
+import { UserId } from "../../shared/types/UserId";
 import { PostTelSaleRequestQuerystring } from './types/userTypes/postTelSale';
 
 

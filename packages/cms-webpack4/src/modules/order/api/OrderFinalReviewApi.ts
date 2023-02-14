@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from "./types/getOrderReviewList";
 import { PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring } from "./types/postOrderReview";
 

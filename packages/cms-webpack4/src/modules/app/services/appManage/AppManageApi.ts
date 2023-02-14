@@ -1,4 +1,4 @@
-import { API } from "../../../../api";
+import { API } from "../../../shared/api";
 import {GetAllAppConfigurationResponse} from "./response/GetAllAppConfigurationResponse";
 import {GetAppConfigurationResponse} from "./response/GetAppConfigurationResponse";
 import {GetAppConfigurationRequest} from "./request/GetAppConfigurationRequest";

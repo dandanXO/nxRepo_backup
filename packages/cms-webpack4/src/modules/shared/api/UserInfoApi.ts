@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "./index";
 import { GetUserInfoRequestQuerystring } from "./types/userInfoTypes/getUserInfoRequestString";
 import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./types/userInfoTypes/getUserDetail";
 import { GetUserSmsProps } from "./types/userInfoTypes/getUserSms";

@@ -1,4 +1,4 @@
-import {API} from "../../../api";
+import {API} from "./index";
 import { GetProviderListResponse } from "./types/getProviderList";
 
 const ProviderListApi = API.injectEndpoints({

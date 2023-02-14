@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { GetUserReviewRecordListResponse,GetUserReviewRecordListRequestQuerystring } from "./types/userReviewRecordTypes/getUserReviewRecordList";
 const UserReviewRecordApi = API.injectEndpoints({
     overrideExisting: false,

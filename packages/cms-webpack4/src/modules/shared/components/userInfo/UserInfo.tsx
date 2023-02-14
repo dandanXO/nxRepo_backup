@@ -3,7 +3,7 @@ import { Card, Image, Descriptions, Table,Modal, Tooltip } from 'antd';
 const { Item } = Descriptions;
 import { useGetUserDetailQuery } from "../../api/UserInfoApi";
 import { GetUserDetailResponse } from "../../api/types/userInfoTypes/getUserDetail";
-import { UserId } from "../../../../types/UserId";
+import { UserId } from "../../types/UserId";
 import moment from "moment";
 import { WaterMark } from '@ant-design/pro-components';
 import { getAdminUser } from "../../utils/getUserInfo";
@@ -41,7 +41,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
             return moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")
         }}
     ];
-    const [userDetail, setUserDetail] = useState<GetUserDetailResponse>({ 
+    const [userDetail, setUserDetail] = useState<GetUserDetailResponse>({
         emergencyContacts: [], personaInfoVo: {}, userDevice: {}, userImage: {}, userKycInfoVo: {}, userThirdInfo: {}, userRiskControlInfo: {}
     });
     useEffect(() => {

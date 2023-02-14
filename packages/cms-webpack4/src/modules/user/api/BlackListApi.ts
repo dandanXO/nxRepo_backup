@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { GetBlackListProps,GetBlackListRequestQuerystring } from "./types/blackListTypes/getBlackList";
 import { PostBlackListRequestBody } from "./types/userTypes/postBlackList";
 const BlackListApi = API.injectEndpoints({
@@ -26,5 +26,5 @@ const BlackListApi = API.injectEndpoints({
 export const {
     useLazyGetBlackListQuery,
     usePostBlackListMutation
-   
+
 } = BlackListApi;

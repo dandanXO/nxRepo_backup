@@ -1,4 +1,4 @@
-import {API} from "../../../api";
+import {API} from "../../shared/api";
 import {ChannelTag} from "../domain/vo/ChannelTag";
 import {RiskDropMenu} from "../domain/vo/RiskDropMenu";
 import {ChannelTagDropMenu} from "../domain/vo/ChannelTagDropMenu";

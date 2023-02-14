@@ -1,4 +1,4 @@
-import { GetPageableResponse } from "../../../../../types/commonReponse";
+import { GetPageableResponse } from "../../../../shared/types/commonReponse";
 export interface GetUserListRequestQuerystring {
 
     addEndTime?: string;            // 註冊時間結束
@@ -40,7 +40,7 @@ export interface UserListContent {
     id?: number;          // 用户ID
     idcardNo?: string;    // 证件号码
     isBlack?: number;     // 是否為黑名單
-    nameTrue?: string;    // 真实姓名        
+    nameTrue?: string;    // 真实姓名
     newMember?: boolean;  // 是否为新客
     phoneNo?: string;     // 手机号
     riskRank?: string;    // 风控标签

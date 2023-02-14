@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "./index";
 import { GetOperatorListResponse } from "./types/getOperatorList";
 
 export interface OperatorType {

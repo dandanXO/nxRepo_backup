@@ -1,13 +1,13 @@
-import { GetPageableResponse } from "../../../../../types/commonReponse";
+import { GetPageableResponse } from "../../../../shared/types/commonReponse";
 
 export interface GetBlackListRequestQuerystring {
 
-    addTimeEnd?: string;            
-    addTimeStart?: string;   
-    idcardNo?: string;      
-    operatorId?:string;   
-    phoneNo?: string;            
-    userNameTrue?: string;   
+    addTimeEnd?: string;
+    addTimeStart?: string;
+    idcardNo?: string;
+    operatorId?:string;
+    phoneNo?: string;
+    userNameTrue?: string;
     pageNum?: number;
     pageSize?: number;
     sortField?: string;

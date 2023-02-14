@@ -3,7 +3,7 @@ import { Card, Image, Descriptions, Tag , Empty } from 'antd';
 const { Item } = Descriptions;
 import { useGetOrderDetailQuery } from "../../api/UserInfoApi";
 import { GetOrderDetailResponse } from "../../api/types/userInfoTypes/getOrderDetail";
-import { UserId } from "../../../../types/UserId";
+import { UserId } from "../../types/UserId";
 import moment from "moment";
 const CardStyle = (props: { title: string, children }) => {
     const { title, children } = props

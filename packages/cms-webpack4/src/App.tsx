@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {Provider} from "react-redux";
 import {appStore} from "./modules/shared/store";
-import "./styles/app.less";
+import "./modules/shared/styles/app.less";
 import {AppRouter} from "./AppRouter";
 require('antd/dist/antd.less');
-import "./i18n"
+import "./modules/shared/i18n"
 
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";

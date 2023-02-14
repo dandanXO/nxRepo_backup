@@ -1,4 +1,4 @@
-import { API } from "../../../../../api";
+import { API } from "../../../../shared/api";
 import { GetConfigListResponse } from "./getConfigList";
 
 const ConfigListApi = API.injectEndpoints({

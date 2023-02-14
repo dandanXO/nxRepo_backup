@@ -1,4 +1,4 @@
-import { API } from "../../../../api";
+import { API } from "../../../shared/api";
 import { GetAvailableMerchantResponse } from "./response/getAvailableMerchantResponse";
 import { PostUploadProductIcon } from "./response/postUploadProductIcon";
 import { GetProductListRequestQuery } from './request/getProductListRequestQuery';

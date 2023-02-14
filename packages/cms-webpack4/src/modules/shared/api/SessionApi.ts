@@ -1,4 +1,4 @@
-import {API} from "../../../api";
+import {API} from "./index";
 import {LoginRequest, LoginResponse} from "./types/postLogin";
 
 const SessionApi = API.injectEndpoints({

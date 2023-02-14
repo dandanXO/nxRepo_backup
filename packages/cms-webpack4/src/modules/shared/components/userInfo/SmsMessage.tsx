@@ -2,7 +2,7 @@ import type { ProColumns } from '@ant-design/pro-components';
 import {ProTable } from '@ant-design/pro-components';
 import { useLazyGetUserSMSListQuery } from "../../api/UserInfoApi";
 import { GetUserSms } from '../../api/types/userInfoTypes/getUserSms';
-import { UserId } from '../../../../types/UserId';
+import { UserId } from '../../types/UserId';
 import { useEffect, useState } from 'react';
 const SmsMessage = ({userId}:UserId) => {
     const [triggerGetList, { currentData, isLoading, isFetching,isSuccess }] = useLazyGetUserSMSListQuery({
@@ -30,7 +30,7 @@ const SmsMessage = ({userId}:UserId) => {
         }
     },[currentData])
 
-    
+
     const pageOnChange = (current, pageSize) => {
         setPagealbe({ ...pageable, pageNum: current, pageSize: pageSize })
     }

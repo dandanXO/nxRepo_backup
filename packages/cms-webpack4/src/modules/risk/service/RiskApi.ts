@@ -1,4 +1,4 @@
-import {API} from "../../../api";
+import {API} from "../../shared/api";
 import {GetRiskManageRequest} from "./request/GetRiskManageRequest";
 import {PutRiskManageCreateRequest} from "./request/PutRiskManageCreateRequest";
 import {PostRiskManageCreateRequest} from "./request/PostRiskManageCreateRequest";

@@ -1,4 +1,4 @@
-import { API } from "../../../api";
+import { API } from "../../shared/api";
 import { GetDailyRiskControlListRequestQuery,GetDailyRiskControlListResponse } from "./types/DailyRiskControlTypes/getDailyRiskControlList";
 
 
