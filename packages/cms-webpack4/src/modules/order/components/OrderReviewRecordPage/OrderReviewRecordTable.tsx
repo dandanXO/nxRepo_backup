@@ -9,7 +9,7 @@ import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderR
 import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
 import {enumObjectToMap} from '../../../shared/utils/format/enumObjectToMap';
-import { getIsSuperAdmin } from '../../../shared/i18n/getUserInfo';
+import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
 import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
 

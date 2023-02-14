@@ -6,7 +6,7 @@ import { GetUserDetailResponse } from "../../../sms/api/userInfoTypes/getUserDet
 import { UserId } from "../../domain/UserId";
 import moment from "moment";
 import { WaterMark } from '@ant-design/pro-components';
-import { getAdminUser } from "../../i18n/getUserInfo";
+import { getAdminUser } from "../../storage/getUserInfo";
 import { Typography } from 'antd';
 
 const { Paragraph } = Typography;

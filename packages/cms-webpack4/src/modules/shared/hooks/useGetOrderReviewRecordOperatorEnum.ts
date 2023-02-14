@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useLazyGetOrderReveiwRecordOperatorListQuery } from "../api/operatorListApi";
-import { getIsSuperAdmin } from "../i18n/getUserInfo";
+import { getIsSuperAdmin } from "../storage/getUserInfo";
 
 const useGetOrderReviewRecordOperatorEnum = () => {
 

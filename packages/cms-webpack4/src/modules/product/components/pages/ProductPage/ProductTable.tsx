@@ -7,7 +7,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {GetProductListResponse, Product} from '../../../service/product/ProductApi';
 import { ProductFormModal } from "./hooks/useProductFormModal";
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../../shared/i18n/getUserInfo';
+import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
 import useGetMerchantEnum from '../../../../shared/hooks/useGetMerchantEnum';
 import { GetProductListRequestQuery } from '../../../service/product/request/getProductListRequestQuery';
 import { EditableInput } from './EditableInput';
