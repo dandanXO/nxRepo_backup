@@ -48,7 +48,7 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                                     help={(props.customAntFormFieldError?.[`${props.type}_min_${index}`] as any)?.help}
                                     rules={[{ required: true, message: "请输入值" }]}
                                 >
-                                    <Input placeholder={"值"} />
+                                    <Input placeholder={"值"} disabled={index !== 4 ? true : false} />
                                 </Form.Item>
                             </Form.Item>
 
