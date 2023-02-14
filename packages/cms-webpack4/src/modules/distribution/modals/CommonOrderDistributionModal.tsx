@@ -66,12 +66,14 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
     // console.log("props.searchedStage", props.searchedStage);
 
     useEffect(() => {
-        setDistributionStage(props.searchedStage);
-        props.setDistributionStage(props.searchedStage)
-        form.setFieldsValue({
-            stage: props.searchedStage,
-        });
-    }, [props.searchedStage])
+        if(props.show) {
+            setDistributionStage(props.searchedStage);
+            props.setDistributionStage(props.searchedStage)
+            form.setFieldsValue({
+                stage: props.searchedStage,
+            });
+        }
+    }, [props.searchedStage, props.show])
 
     // console.log("distributionStage", distributionStage);
 
@@ -182,7 +184,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                             <Select placeholder={"选择"} defaultValue={distributionStage} onSelect={(value) => {
                                 console.log("value", value);
                                 setDistributionStage(value);
-                                props.setDistributionStage(value)
+                                // props.setDistributionStage(value)
                             }}>
                                 {renderOptionsComponent()}
                             </Select>
