@@ -11,7 +11,7 @@ import { OrderReviewTypes } from '../../api/types/domain/OrderReviewTypes';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
 import CopyText from '../../../shared/components/CopyText';
-import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../shared/components/atoms/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
@@ -269,7 +269,7 @@ const OrderReviewTable = () => {
                                     provider,
                                     riskRank,
                                     userName,
-                                    merchantId: isSuperAdmin ? merchantId : '', 
+                                    merchantId: isSuperAdmin ? merchantId : '',
                                     pageNum: 1,
                                 });
                                 onSelectChange([]);

@@ -9,7 +9,7 @@ import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../.
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
-import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../shared/components/atoms/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
@@ -215,7 +215,7 @@ const OrderTable = () => {
                                     status,
                                     userPhone: phoneNo,
                                     userTrueName: userName,
-                                    merchantName: isSuperAdmin ? merchant : '', 
+                                    merchantName: isSuperAdmin ? merchant : '',
                                     pageNum: 1,
                                 })
                                 form.submit();

@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import UsesrReviewModal from './UserReviewModal';
 import {  useHistory } from "react-router-dom";
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
-import {itemRender} from "../../../../shared/itemRender";
+import {itemRender} from "../../../../shared/components/atoms/itemRender";
 const UserReviewInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();

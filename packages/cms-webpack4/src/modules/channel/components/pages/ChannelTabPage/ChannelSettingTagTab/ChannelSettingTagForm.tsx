@@ -1,5 +1,5 @@
 import Form from "antd/es/form";
-import {AdminForm, AdminFormProps} from "../../../../../shared/components/AdminForm";
+import {AdminForm, AdminFormProps} from "../../../../../shared/components/atoms/AdminForm";
 import {Input} from "antd/es";
 import {Divider} from "antd";
 import React from "react";

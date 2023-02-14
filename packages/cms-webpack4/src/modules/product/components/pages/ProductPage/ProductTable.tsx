@@ -6,7 +6,7 @@ import {Button, PaginationProps, Space, Switch} from 'antd';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {GetProductListResponse, Product} from '../../../service/product/ProductApi';
 import { ProductFormModal } from "./hooks/useProductFormModal";
-import { ProColumnsOperationConstant } from "../../../../shared/components/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../../shared/components/atoms/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../../shared/hooks/useGetMerchantEnum';
 import { GetProductListRequestQuery } from '../../../service/product/request/getProductListRequestQuery';

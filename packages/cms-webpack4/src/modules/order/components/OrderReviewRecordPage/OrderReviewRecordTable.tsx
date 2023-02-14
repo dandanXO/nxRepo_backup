@@ -10,7 +10,7 @@ import CopyText from '../../../shared/components/CopyText';
 import queryString from "query-string";
 import {enumObjectToMap} from '../../../shared/utils/enumObjectToMap';
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
-import {ProColumnsOperationConstant} from "../../../shared/components/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../shared/components/atoms/ProColumnsOperationConstant";
 import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
 
 
@@ -120,7 +120,7 @@ const OrderReviewRecordTable = () => {
                                     ...searchList,
                                     appName, merchantId, operatorId, orderNo, phoneNo, productName, reviewStatus, userName,
                                     reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '', 
+                                    reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     pageNum: 1,
                                 })
                                 form.submit();

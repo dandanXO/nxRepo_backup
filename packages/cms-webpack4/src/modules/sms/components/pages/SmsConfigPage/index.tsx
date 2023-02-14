@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
-import AdminPage from '../../../../shared/components/AdminPage';
+import AdminPage from '../../../../shared/components/atoms/AdminPage';
 import SmsConfigTable from './SmsConfigTable';
 import SmsConfigModal from './SmsConfigModal';
 import useAddOrEditFormModal from '../../../../shared/hooks/useAddOrEditModal';

@@ -5,7 +5,7 @@ import { Button, Modal, Space, Tag } from 'antd';
 import { useLazyGetPayReceiptListQuery, usePostPayReceiptConfirmMutation } from '../../api/PayReceiptApi';
 import { PayReceiptList, GetPayReceiptListRequestQuerystring } from '../../api/types/PayReceiptTypes/getPayReceiptList';
 import CopyText from '../../../shared/components/CopyText';
-import { ProColumnsOperationConstant } from "../../../shared/components/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../shared/components/atoms/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import { enumObjectToMap } from '../../../shared/utils/enumObjectToMap';
@@ -30,7 +30,7 @@ const PayReceiptTable = () => {
     });
     const [postPayReceipt, { isSuccess: isPostPayReceiptSuccess }] = usePostPayReceiptConfirmMutation();
 
-    
+
 
     useEffect(() => {
         triggerGetList(searchList);
@@ -71,7 +71,7 @@ const PayReceiptTable = () => {
     const utrOrReceiptimgColumn: ProColumns = (appInfo.COUNTRY !== 'Pakistan'  && appInfo.COUNTRY !=='Bangladesh')
         ? { title: 'UTR', dataIndex: 'utr', key: 'utr', initialValue: "", render: (text) => <CopyText text={text} /> }
         : { title: '还款明细', dataIndex: 'receiptImageUrl', key: 'receiptImageUrl', valueType: 'image', hideInSearch: true ,align:'center'}
-        
+
     const columns: ProColumns<PayReceiptList>[] = [
         {
             title: '操作',

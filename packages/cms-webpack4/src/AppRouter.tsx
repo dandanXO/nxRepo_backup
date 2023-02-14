@@ -3,7 +3,7 @@ import {selectSearchParams, setSearchParams,setSelectedRow} from "./modules/shar
 import React, {useEffect} from "react";
 import {ConfigProvider} from "antd";
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
-import IndexPage from "./modules/shared/components/IndexPage";
+import IndexPage from "./modules/shared/components/pages/IndexPage";
 import {MerchantPage} from "./modules/product/components/pages/MerchantPage";
 import {ProductPage} from "./modules/product/components/pages/ProductPage";
 import UserPage from "./modules/user/components/pages/UserPage";
@@ -31,6 +31,9 @@ import PayReceiptPage from "./modules/financial/components/PayReceiptPage";
 import DailyRiskControlPage from "./modules/statistics/components/pages/DailyRiskControlPage"
 import {TodayDistributionPage} from "./modules/distribution/pages/TodayDistributionPage";
 import {OverdueDistributionPage} from "./modules/distribution/pages/OverdueDistributionPage";
+import {
+    NewCustomerRiskControlRepaymentRatePage
+} from "./modules/statistics/components/pages/NewCustomerRiskControlRepaymentRatePage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -120,6 +123,8 @@ export const AppRouter = () => {
                     <Route path={"/today-distribution"} component={TodayDistributionPage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/statistics/new-customer-repayment-rate"} component={NewCustomerRiskControlRepaymentRatePage}/>
                 </Switch>
             </Router>
 

@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import AdminPage from "../../../../shared/components/AdminPage";
+import AdminPage from "../../../../shared/components/atoms/AdminPage";
 import {ProColumns} from "@ant-design/pro-components";
 import {GetProductListResponseProduct} from "../../../../product/service/product/domain/getProductList";
 import {
@@ -10,14 +10,14 @@ import {
     usePutRiskManageCreateMutation
 } from "../../../service/RiskApi";
 import {useForm} from "antd/es/form/Form";
-import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
+import {AdminTable, ModalContent} from "../../../../shared/components/atoms/AdminTable";
 import RiskSettingForm from "./RiskSettingForm";
 import RiskSettingModal from "./RiskSettingModal";
 import {GetRiskManageResponse} from "../../../service/response/GetRiskManageResponse";
 import {RiskManageList} from "../../../domain/vo/RiskManageList";
 import {MssRiskRankVo} from "../../../domain/vo/MssRiskRankVo";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../shared/components/atoms/ProColumnsOperationConstant";
 
 
 export type FormResponseData = GetRiskManageResponse;

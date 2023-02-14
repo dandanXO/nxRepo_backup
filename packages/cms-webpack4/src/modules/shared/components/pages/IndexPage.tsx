@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 
-
 export function IndexPage() {
   return (
     <div>
@@ -76,8 +75,9 @@ export function IndexPage() {
         <div>
             <Link to="/riskControlStatistic"><a>Daily Risk Control Level Stats</a></Link>
         </div>
-
-
+        <div>
+            <Link to="/statistics/new-customer-repayment-rate"><a>NewCustomerRiskControlRepaymentRatePage</a></Link>
+        </div>
 
         {/*<button onClick={() => methodDoesNotExist()}>Test Sentry - Break the world</button>;*/}
 

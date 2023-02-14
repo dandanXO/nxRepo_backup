@@ -1,11 +1,11 @@
-import {AdminTable, ModalContent} from "../../../../shared/components/AdminTable";
+import {AdminTable, ModalContent} from "../../../../shared/components/atoms/AdminTable";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {FormInstance} from "antd";
-import {AdminFormCustomModal} from "../../../../shared/components/AdminFormCustomModal";
+import {AdminFormCustomModal} from "../../../../shared/components/atoms/AdminFormCustomModal";
 import {useForm} from "antd/es/form/Form";
 import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import AdminPage from "../../../../shared/components/AdminPage";
+import AdminPage from "../../../../shared/components/atoms/AdminPage";
 import {AppConfigurationListItem} from "../../../services/appManage/domain/AppConfigurationListItem";
 import {
     useCreateAppConfigurationMutation,
@@ -14,7 +14,7 @@ import {
     useLazyGetAppConfigurationQuery,
     useUpdateAppConfigurationMutation
 } from "../../../services/appManage/AppManageApi";
-import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../shared/components/atoms/ProColumnsOperationConstant";
 import {AppManageForm} from "./AppManageForm";
 import {ChannelTagVO} from "../../../../channel/domain/vo/ChannelTagVO";
 import {Modal} from "antd/es";

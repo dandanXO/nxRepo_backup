@@ -2,7 +2,7 @@ import { Divider, Form, Input, Radio, Switch, Collapse } from "antd";
 import React from "react";
 import { NumberValidator } from "../../../../../shared/utils/validation/validator";
 import { FormInstance } from "antd/es";
-import CustomLabel from "../../../../../shared/components/CustomLabel";
+import CustomLabel from "../../../../../shared/components/atoms/CustomLabel";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 const { Panel } = Collapse;
 interface LoanSettingSectionProps {

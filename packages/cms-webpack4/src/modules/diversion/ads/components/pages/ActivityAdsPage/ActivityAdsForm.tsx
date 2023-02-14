@@ -1,6 +1,6 @@
 import {Form, FormInstance, Input, Select, Switch, Typography} from "antd";
 import React from "react";
-import {AdminForm} from "../../../../../shared/components/AdminForm";
+import {AdminForm} from "../../../../../shared/components/atoms/AdminForm";
 import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
 import styled from "styled-components";
 import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";

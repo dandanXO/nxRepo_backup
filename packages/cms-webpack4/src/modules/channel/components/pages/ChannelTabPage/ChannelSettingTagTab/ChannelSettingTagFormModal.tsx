@@ -1,4 +1,4 @@
-import {AdminFormCustomModal} from "../../../../../shared/components/AdminFormCustomModal";
+import {AdminFormCustomModal} from "../../../../../shared/components/atoms/AdminFormCustomModal";
 import {ChannelSettingTagForm} from "./ChannelSettingTagForm";
 import React from "react";
 

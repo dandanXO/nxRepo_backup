@@ -1,4 +1,4 @@
-import AdminPage from '../../../../shared/components/AdminPage';
+import AdminPage from '../../../../shared/components/atoms/AdminPage';
 import DailyRiskControlTable from './DailyRiskControlTable';
 const DailyRiskControlPage = () => {
 

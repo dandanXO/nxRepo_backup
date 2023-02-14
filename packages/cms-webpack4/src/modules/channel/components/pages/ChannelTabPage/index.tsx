@@ -1,4 +1,4 @@
-import AdminPage from "../../../../shared/components/AdminPage";
+import AdminPage from "../../../../shared/components/atoms/AdminPage";
 import {Tabs} from "antd";
 import {ChannelSettingTabPage} from "./ChannelSettingTab";
 import {ChannelSettingTagTabPage} from "./ChannelSettingTagTab";

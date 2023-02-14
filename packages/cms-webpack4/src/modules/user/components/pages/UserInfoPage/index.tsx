@@ -7,7 +7,7 @@ import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
 import LoanInfo from '../../../../shared/components/userInfo/LoanInfo';
 import {Link, useParams} from "react-router-dom";
 import {Route} from "antd/es/breadcrumb/Breadcrumb";
-import {itemRender} from "../../../../shared/itemRender";
+import {itemRender} from "../../../../shared/components/atoms/itemRender";
 const UserInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();

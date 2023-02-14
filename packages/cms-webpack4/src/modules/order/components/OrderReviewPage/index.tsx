@@ -1,7 +1,7 @@
 
 import { PageContainer } from '@ant-design/pro-components';
 import OrderReviewTable from './OrderReviewTable';
-import { itemRender } from '../../../shared/itemRender';
+import { itemRender } from '../../../shared/components/atoms/itemRender';
 
 const OrderReviewPage = () => {
     // NOTE: breadcrumb

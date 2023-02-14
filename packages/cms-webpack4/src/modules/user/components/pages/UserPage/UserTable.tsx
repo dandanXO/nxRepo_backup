@@ -11,7 +11,7 @@ import { HashRouter as Router, Route, Switch, useHistory } from "react-router-do
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import queryString from "query-string";
 import CopyText from '../../../../shared/components/CopyText';
-import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../shared/components/atoms/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
@@ -283,7 +283,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                                     noLoanAgainStartDays: noLoanAgainStartDays,
                                     phoneNo: phoneNo,
                                     riskRank: riskRank,
-                                    status:status, 
+                                    status:status,
                                     pageNum: 1,
                                 })
                                 form.submit();

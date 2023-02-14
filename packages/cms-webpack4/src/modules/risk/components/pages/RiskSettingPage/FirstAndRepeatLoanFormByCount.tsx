@@ -1,5 +1,5 @@
 import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space } from "antd";
-import CustomLabel from "../../../../shared/components/CustomLabel";
+import CustomLabel from "../../../../shared/components/atoms/CustomLabel";
 import { NumberValidator } from "../../../../shared/utils/validation/validator";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import { InfoCircleOutlined } from "@ant-design/icons";
@@ -15,7 +15,7 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
             return (
                 <Form.Item key={index}>
                     {index === 0 && (
-                        <div>               
+                        <div>
                             <CustomLabel style={{ width: 76 }}>风控标签</CustomLabel>
                             <CustomLabel style={{ width: 130 }}>
                                 <Space>还款笔数

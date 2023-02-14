@@ -5,7 +5,7 @@ import { ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
 import { useLazyGetMerchantManageListQuery } from "../../../service/merchant/MerchantApi";
 import { GetMerchantListResponse } from "../../../service/merchant/getMerchantList";
-import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../shared/components/atoms/ProColumnsOperationConstant";
 
 interface MerchantTableProps {
     postMerchantSuccess?: boolean;

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
-import {ProColumnsOperationConstant} from "../../../../shared/components/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../shared/components/atoms/ProColumnsOperationConstant";
 const UserReviewTable = () => {
 
     const { channelListEnum, riskRankEnum } = useValuesEnums();
@@ -227,7 +227,7 @@ const UserReviewTable = () => {
                                     phoneNo,
                                     regChannelId,
                                     riskRank,
-                                    userName, 
+                                    userName,
                                     pageNum: 1,
                                 });
                                 onSelectChange([]);

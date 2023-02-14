@@ -5,7 +5,7 @@ import { Button, Modal, Space, Table, Tag } from 'antd';
 import { useLazyGetDailyRiskControlListQuery } from '../../../api/DailyRiskControlApi';
 import { GetDailyRiskControlListRequestQuery, GetDailyRiskControlList } from '../../../api/types/DailyRiskControlTypes/getDailyRiskControlList';
 import CopyText from '../../../../shared/components/CopyText';
-import { ProColumnsOperationConstant } from "../../../../shared/components/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../../shared/components/atoms/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
 import useGetProviderEnum from '../../../../shared/hooks/useGetProviderEnum';
 import { enumObjectToMap } from '../../../../shared/utils/enumObjectToMap';

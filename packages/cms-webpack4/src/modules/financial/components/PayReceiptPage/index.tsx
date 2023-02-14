@@ -1,7 +1,7 @@
-import AdminPage from '../../../shared/components/AdminPage';
+import AdminPage from '../../../shared/components/atoms/AdminPage';
 import PayReceiptTable from './PayReceiptTable';
 const PayReceiptPage = () => {
-   
+
 
     return (
         <AdminPage
