@@ -7,8 +7,8 @@
     - APP Name: mobile
   - CMS
     - APP Name: admin
-
-## Development
+---
+## Pre Development
 
 ### Install Packages Management Tool
 
@@ -28,7 +28,9 @@ pnpm install
 pnpm add -g nx
 ```
 
-### Development
+---
+
+## Development
 
 #### HMR
 
@@ -38,15 +40,18 @@ pnpm add -g nx
 # Run mobile app
 nx serve mobile
 
-# Run Admin app
+# Run Admin app (old)
 cd packages/dlh-web
-npm run start
+npm run dev:in
 
+# Run Admin app (new)
 cd packages/cms-webpack4
-npm run webpack:dev
+npm run dev:in
 ```
 
-#### Storybook
+---
+
+## Storybook
 
 ```shell
 # Generating Storybook Configuration
@@ -65,9 +70,11 @@ nx storybook mobile-shared-ui
 
 # Storybook admin app
 
+---
+
 ```
 
-#### Lint
+## Lint
 
 ```shell
 # Lint
@@ -98,7 +105,9 @@ nx format:check admin
 nx format:write admin
 ```
 
-### Show Dependencies
+---
+
+## Show Dependencies
 
 ```shell
 # Graph Apps
@@ -106,7 +115,7 @@ nx graph
 
 ```
 
-### Build
+## Build
 
 ```shell
 # Build App
@@ -119,6 +128,7 @@ nx build mobile
 
 ```
 
+---
 
 ## Projects Command
 
@@ -153,6 +163,8 @@ npm run [scripts]
 cd ./packages/cws-webpack4
 npm run [scripts]
 ```
+
+---
 
 ## Recipe
 
