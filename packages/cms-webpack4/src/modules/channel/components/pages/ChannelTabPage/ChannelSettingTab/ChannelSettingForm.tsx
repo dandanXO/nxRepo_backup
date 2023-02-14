@@ -1,5 +1,5 @@
 import Form from "antd/es/form";
-import {AdminForm, AdminFormProps} from "../../../../../shared/components/atoms/AdminForm";
+import {AdminForm, AdminFormProps} from "../../../../../shared/components/common/AdminForm";
 import {Input} from "antd/es";
 import {Alert, Button, Divider, Select, Space, Switch, Typography} from "antd";
 const { Text } = Typography;

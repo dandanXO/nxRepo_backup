@@ -10,8 +10,8 @@ import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from '.
 import { OrderReviewTypes } from '../../api/types/domain/OrderReviewTypes';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
-import CopyText from '../../../shared/components/CopyText';
-import {ProColumnsOperationConstant} from "../../../shared/components/atoms/ProColumnsOperationConstant";
+import CopyText from '../../../shared/components/other/CopyText';
+import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';

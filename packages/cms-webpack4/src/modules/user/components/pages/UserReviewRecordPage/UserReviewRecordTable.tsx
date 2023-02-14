@@ -6,7 +6,7 @@ import moment from 'moment';
 import useGetUserReviewRecordOperatorEnum from '../../../../shared/hooks/useGetUserReviewRecordOperatorEnum';
 import { useLazyGetUserReviewRecordListQuery } from '../../../api/UserReviewRecordApi';
 import { UserReviewRecordList, GetUserReviewRecordListRequestQuerystring, GetUserReviewRecordListProps } from '../../../api/types/userReviewRecordTypes/getUserReviewRecordList';
-import CopyText from '../../../../shared/components/CopyText';
+import CopyText from '../../../../shared/components/other/CopyText';
 import queryString from "query-string";
 import {enumObjectToMap} from '../../../../shared/utils/enumObjectToMap';
 
@@ -16,7 +16,7 @@ const UserReviewRecordTable = () => {
     const initSearchList:GetUserReviewRecordListRequestQuerystring = {
         operatorId: '', phoneNo: '', reviewStatus: '', reviewTimeEnd: '', reviewTimeStart: '', userName: '', pageNum: 1, pageSize: 10
     }
-  
+
     const [searchList, setSearchList] = useState<GetUserReviewRecordListRequestQuerystring>(initSearchList);
     const [recordList,setRecordList]=useState<GetUserReviewRecordListProps>({ records: [] });
     // api
@@ -41,7 +41,7 @@ const UserReviewRecordTable = () => {
         triggerGetOperatorList(null)
     },[])
 
-   
+
     const pageOnChange = (current, pageSize) => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
     }
@@ -95,12 +95,12 @@ const UserReviewRecordTable = () => {
                                 const { reviewTimeRange, phoneNo, userName, reviewStatus, operatorId} = form.getFieldValue();
                                 setSearchList({
                                     ...searchList,
-                                    phoneNo, 
-                                    userName, 
+                                    phoneNo,
+                                    userName,
                                     reviewStatus: reviewStatus === '' ? '' : Number(reviewStatus),
                                     reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD HH:mm:ss') : '',
                                     reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD HH:mm:ss') : '',
-                                    operatorId, 
+                                    operatorId,
                                     pageNum: 1,
                                 })
                                 form.submit();
@@ -114,7 +114,7 @@ const UserReviewRecordTable = () => {
             options={{
                 setting: { listsHeight: 400, },
                 reload: () => triggerGetList(searchList),
-                
+
             }}
             toolBarRender={() => [<Button onClick={handleExportUserRecordList} type='primary'>导出</Button>]}
             pagination={{

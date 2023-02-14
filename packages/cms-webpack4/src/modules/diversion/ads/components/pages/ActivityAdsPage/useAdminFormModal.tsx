@@ -1,5 +1,5 @@
 import {useCallback, useState} from "react";
-import {ModalContent} from "../../../../../shared/components/atoms/AdminTable";
+import {ModalContent} from "../../../../../shared/components/common/AdminTable";
 import {useForm} from "antd/es/form/Form";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {Modal} from "antd/es";

@@ -6,7 +6,7 @@ import UserTable from './UserTable';
 import AddBlackListModal from './AddBlackListModal';
 import { usePostBlackListAddMutation } from '../../../api/UserApi';
 
-import AdminPage from '../../../../shared/components/atoms/AdminPage';
+import AdminPage from '../../../../shared/components/common/AdminPage';
 const UserManage = () => {
     const [showModal, setShowModal] = useState({show:false,userId:''});
     const [form] = Form.useForm();

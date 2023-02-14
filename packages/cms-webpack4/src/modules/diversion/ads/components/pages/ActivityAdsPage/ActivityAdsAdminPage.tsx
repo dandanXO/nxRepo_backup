@@ -1,11 +1,11 @@
-import AdminPage from "../../../../../shared/components/atoms/AdminPage";
-import {AdminTable} from "../../../../../shared/components/atoms/AdminTable";
+import AdminPage from "../../../../../shared/components/common/AdminPage";
+import {AdminTable} from "../../../../../shared/components/common/AdminTable";
 import {ProColumns} from "@ant-design/pro-components";
 import React, {useCallback, useEffect, useMemo} from "react";
 import {AdsTemplateData} from "../../../data/AdsTemplateData";
 import {AdsScenarioData} from "../../../data/AdsScenarioData";
-import {ProColumnsOperationConstant} from "../../../../../shared/components/atoms/ProColumnsOperationConstant";
-import {AdminFormCustomModal} from "../../../../../shared/components/atoms/AdminFormCustomModal";
+import {ProColumnsOperationConstant} from "../../../../../shared/components/common/ProColumnsOperationConstant";
+import {AdminFormCustomModal} from "../../../../../shared/components/common/AdminFormCustomModal";
 import {ActivityAdsForm} from "./ActivityAdsForm";
 import {
     ActivityModel,

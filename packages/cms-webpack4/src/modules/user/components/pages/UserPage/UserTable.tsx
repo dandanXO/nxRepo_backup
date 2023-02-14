@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import queryString from "query-string";
-import CopyText from '../../../../shared/components/CopyText';
-import {ProColumnsOperationConstant} from "../../../../shared/components/atoms/ProColumnsOperationConstant";
+import CopyText from '../../../../shared/components/other/CopyText';
+import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;

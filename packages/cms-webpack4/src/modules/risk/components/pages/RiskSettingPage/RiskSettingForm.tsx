@@ -1,7 +1,7 @@
 import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip ,Space} from "antd";
 import React from "react";
 import TextArea from "antd/es/input/TextArea";
-import {AdminForm} from "../../../../shared/components/atoms/AdminForm";
+import {AdminForm} from "../../../../shared/components/common/AdminForm";
 import {Store} from "antd/es/form/interface"
 import {RiskModelMenu} from "../../../domain/vo/RiskModelMenu";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";

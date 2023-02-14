@@ -4,7 +4,7 @@ import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Space, Tag } from 'antd';
 import { useRef } from 'react';
 import request from 'umi-request';
-import {ProColumnsOperationConstant} from "../../../modules/shared/components/atoms/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../modules/shared/components/common/ProColumnsOperationConstant";
 
 type GithubIssueItem = {
   url: string;

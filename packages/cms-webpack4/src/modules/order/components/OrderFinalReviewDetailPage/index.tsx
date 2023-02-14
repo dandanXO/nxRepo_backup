@@ -8,7 +8,7 @@ import { useParams,useHistory } from "react-router-dom";
 import OrderFinalReviewModal from './OrderFinalReviewModal';
 import { usePostOrderFinalReviewMutation } from '../../api/OrderFinalReviewApi';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
-import {itemRender} from "../../../shared/components/atoms/itemRender";
+import {itemRender} from "../../../shared/components/common/itemRender";
 
 const OrderFinalReviewDetailPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);

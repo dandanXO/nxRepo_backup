@@ -4,7 +4,7 @@ import {PageContainer} from '@ant-design/pro-components';
 import {useProductFormModal} from "./hooks/useProductFormModal";
 import {ProductModal} from "./ProductModal";
 import ProductForm from "./ProductForm";
-import {itemRender} from "../../../../shared/components/atoms/itemRender";
+import {itemRender} from "../../../../shared/components/common/itemRender";
 
 export const ProductPage = () => {
 

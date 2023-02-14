@@ -6,11 +6,11 @@ import moment from 'moment';
 import useValuesEnums from '../../../shared/hooks/useValuesEnums';
 import { useLazyGetOrderReviewRecordListQuery } from '../../api/OrderReviewRecordApi';
 import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring } from '../../api/types/getOrderReviewRecordList';
-import CopyText from '../../../shared/components/CopyText';
+import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
 import {enumObjectToMap} from '../../../shared/utils/enumObjectToMap';
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
-import {ProColumnsOperationConstant} from "../../../shared/components/atoms/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
 import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
 
 

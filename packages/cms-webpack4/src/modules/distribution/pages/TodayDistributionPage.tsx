@@ -1,10 +1,10 @@
-import {AdminTable} from "../../shared/components/atoms/AdminTable";
-import AdminPage from "../../shared/components/atoms/AdminPage";
+import {AdminTable} from "../../shared/components/common/AdminTable";
+import AdminPage from "../../shared/components/common/AdminPage";
 import React, {useEffect, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
 import {Button, FormInstance, Space, Table} from "antd";
-import CopyText from "../../shared/components/CopyText";
+import CopyText from "../../shared/components/other/CopyText";
 import {
     useGetProductNamesQuery,
     useLazyGetDistributionQuery,

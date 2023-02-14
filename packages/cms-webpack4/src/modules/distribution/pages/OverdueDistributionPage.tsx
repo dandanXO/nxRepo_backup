@@ -1,6 +1,6 @@
 
-import {AdminTable} from "../../shared/components/atoms/AdminTable";
-import AdminPage from "../../shared/components/atoms/AdminPage";
+import {AdminTable} from "../../shared/components/common/AdminTable";
+import AdminPage from "../../shared/components/common/AdminPage";
 import React, {useEffect, useRef, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
@@ -22,7 +22,7 @@ import {
 import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
 import moment from "moment";
 import {useForm} from "antd/es/form/Form";
-import CopyText from "../../shared/components/CopyText";
+import CopyText from "../../shared/components/other/CopyText";
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;

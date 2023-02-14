@@ -1,4 +1,4 @@
-import AdminPage from '../../../shared/components/atoms/AdminPage';
+import AdminPage from '../../../shared/components/common/AdminPage';
 import PayReceiptTable from './PayReceiptTable';
 const PayReceiptPage = () => {
 

@@ -7,7 +7,7 @@ import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import LoanInfo from '../../../shared/components/userInfo/LoanInfo';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
 import {Link, useParams} from "react-router-dom";
-import {itemRender} from "../../../shared/components/atoms/itemRender";
+import {itemRender} from "../../../shared/components/common/itemRender";
 
 const OrderDetailPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);

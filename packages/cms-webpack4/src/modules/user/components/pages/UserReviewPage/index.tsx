@@ -1,7 +1,7 @@
 
 import { PageContainer } from '@ant-design/pro-components';
 import UserReviewTable from './UserReviewTable';
-import {itemRender} from "../../../../shared/components/atoms/itemRender";
+import {itemRender} from "../../../../shared/components/common/itemRender";
 
 import {Route} from "antd/es/breadcrumb/Breadcrumb";
 

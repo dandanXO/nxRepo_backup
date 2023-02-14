@@ -4,7 +4,7 @@ import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../..
 import { Form } from "antd";
 import MerchantModal from './MerchantModal';
 import MerchantTable from './MerchantTable';
-import {itemRender} from "../../../../shared/components/atoms/itemRender";
+import {itemRender} from "../../../../shared/components/common/itemRender";
 
 export const MerchantPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);

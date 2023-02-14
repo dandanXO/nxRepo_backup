@@ -6,14 +6,14 @@ import {Button, PaginationProps, Space, Switch} from 'antd';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {GetProductListResponse, Product} from '../../../service/product/ProductApi';
 import { ProductFormModal } from "./hooks/useProductFormModal";
-import { ProColumnsOperationConstant } from "../../../../shared/components/atoms/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../../shared/hooks/useGetMerchantEnum';
 import { GetProductListRequestQuery } from '../../../service/product/request/getProductListRequestQuery';
 import { EditableInput } from './EditableInput';
 import { NumberValidator } from '../../../../shared/utils/validation/validator';
 import { usePatchProductEditMutation } from '../../../service/product/ProductApi';
-import CopyText from '../../../../shared/components/CopyText';
+import CopyText from '../../../../shared/components/other/CopyText';
 
 interface ProductTableProps {
     setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;

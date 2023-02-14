@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { FormModalProps } from '../../../../shared/types/FormModal';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import {ProColumnsOperationConstant} from "../../../../shared/components/atoms/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";
 const SmsConfigTable = ((props:FormModalProps & {isAddOrEditSuccess?:boolean}) => {
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess }] = useLazyGetUserContactsListQuery({

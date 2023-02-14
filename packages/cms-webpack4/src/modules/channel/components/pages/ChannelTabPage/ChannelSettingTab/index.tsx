@@ -1,4 +1,4 @@
-import {AdminTable, ModalContent} from "../../../../../shared/components/atoms/AdminTable";
+import {AdminTable, ModalContent} from "../../../../../shared/components/common/AdminTable";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {
@@ -9,7 +9,7 @@ import {
     useLazyGetChannelQuery, useUpdateChannelMutation
 } from "../../../../service/ChannelApi";
 import {FormInstance} from "antd";
-import {AdminFormCustomModal} from "../../../../../shared/components/atoms/AdminFormCustomModal";
+import {AdminFormCustomModal} from "../../../../../shared/components/common/AdminFormCustomModal";
 import {useForm} from "antd/es/form/Form";
 import {ChannelSettingForm} from "./ChannelSettingForm";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
@@ -17,7 +17,7 @@ import {Channel} from "../../../../domain/vo/Channel";
 import {UpdateChannelRequest} from "../../../../service/request/UpdateChannelRequest";
 import {ChannelSettingTagFormModal} from "../ChannelSettingTagTab/ChannelSettingTagFormModal";
 import {useFormModal} from "../ChannelSettingTagTab/useFormModal";
-import {ProColumnsOperationConstant} from "../../../../../shared/components/atoms/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../../shared/components/common/ProColumnsOperationConstant";
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;

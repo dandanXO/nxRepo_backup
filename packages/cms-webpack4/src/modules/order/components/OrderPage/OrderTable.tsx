@@ -7,9 +7,9 @@ import { HashRouter as Router, Route, Switch, useHistory } from "react-router-do
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
 import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
-import CopyText from '../../../shared/components/CopyText';
+import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
-import {ProColumnsOperationConstant} from "../../../shared/components/atoms/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';

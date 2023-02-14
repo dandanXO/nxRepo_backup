@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {ProColumns} from "@ant-design/pro-components";
-import {AdminTable, ModalContent} from "../../../../../shared/components/atoms/AdminTable";
+import {AdminTable, ModalContent} from "../../../../../shared/components/common/AdminTable";
 import {
     useCreateTagMutation,
     useDeleteTagMutation,
@@ -10,12 +10,11 @@ import {
     usePutTagMutation
 } from "../../../../service/ChannelApi";
 import {useForm} from "antd/es/form/Form";
-import {AdminCustomModal} from "../../../../../shared/components/AdminCustomModal";
 import {ChannelTagVO} from "../../../../domain/vo/ChannelTagVO";
 import {useFormModal} from "./useFormModal";
 import {ChannelSettingTagFormModal} from "./ChannelSettingTagFormModal";
 import {Modal} from "antd/es";
-import {ProColumnsOperationConstant} from "../../../../../shared/components/atoms/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../../shared/components/common/ProColumnsOperationConstant";
 
 interface ChannelSettingTagTabPageProps {
     active: boolean;

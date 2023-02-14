@@ -4,7 +4,7 @@ import {Select, Typography, Input, Collapse, Space} from "antd/es";
 const { Panel } = Collapse;
 const { Text } = Typography;
 const { Option } = Select;
-import {AdminForm, AdminFormProps} from "../../../../shared/components/atoms/AdminForm";
+import {AdminForm, AdminFormProps} from "../../../../shared/components/common/AdminForm";
 import {Switch} from "antd";
 import {AppConfiguration} from "../../../services/appManage/domain/AppConfiguration";
 import "./style.less";

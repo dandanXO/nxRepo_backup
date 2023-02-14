@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
-import {ProColumnsOperationConstant} from "../../../../shared/components/atoms/ProColumnsOperationConstant";
+import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";
 const UserReviewTable = () => {
 
     const { channelListEnum, riskRankEnum } = useValuesEnums();
