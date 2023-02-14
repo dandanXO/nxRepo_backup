@@ -3,12 +3,13 @@ console.info("[api-mobile][build]");
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 // const webpackConfig = require('@nrwl/react/plugins/webpack');
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // const isProduction = process.env.NODE_ENV == "production";
-const isProduction = process.env.NODE_ENV !== undefined;
-console.log("isProduction: ", isProduction);
+const isProduction = process.env.NODE_ENV == "production";
 console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// console.log("isProduction: ", isProduction);
+
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // get git info from command line
 // let commitHash = require('child_process')
@@ -135,7 +136,7 @@ module.exports = (config, context) => {
   //   );
     finalConfig.plugins.push(
       new SentryCliPlugin({
-        debug: true,
+        debug: false,
         authToken: '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
         org: "workshop-xs",
         project: "api-mobile",
