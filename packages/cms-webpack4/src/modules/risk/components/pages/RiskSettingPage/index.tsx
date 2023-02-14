@@ -240,6 +240,7 @@ export const RiskSettingPage = () => {
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>({})
 
 
+    // 比對 最高可放款笔数、最高可借总额大小值
     const compareCount = (index, loanLength, loan, field) => {
 
         const isFirstField = index === 0;
@@ -258,15 +259,27 @@ export const RiskSettingPage = () => {
 
     }
 
-    const compareMinAndMax=(index, loanLength, loan, field)=>{
+    // 比對 最大值、最小值，最小值會依下一階的最大值連動並自動填入 (分數類型:範圍)
+    const compareMinAndMax = (index, loanLength, loan, field, formType) => {
         const isFirstField = index === 0;
         const isLastField = index === loanLength - 1;
         const max = Number(loan[index].max);
         const min = Number(loan[index].min);
-        const isMaxError = isFirstField ? max <= min : max <= min || max !== Number(loan[index - 1].min) - 1;
-        const isMinError = isLastField ? max <= min : max <= min || min !== Number(loan[index + 1].max) + 1;
-        return field==='max'?isMaxError:isMinError
+        const prevIndex = isFirstField ? 0 : index - 1;
+        const nextIndex = isLastField ? index - 1 : index + 1;
+        const loanCount = Number(loan[index][field]);
+        const prevField = Number(loan[prevIndex][field]);
+        const nextField = Number(loan[nextIndex][field]);
+       
+        if(field==='max'){
+            setMinValue(formType, index);
+        }
 
+        const comparePrev = isFirstField ? loanCount <= nextField : loanCount >= prevField;
+        const compareNext = isLastField ? loanCount >= nextField : loanCount <= nextField;
+        const isMaxOrMinError = max <= min;
+
+        return comparePrev || compareNext || isMaxOrMinError
     }
 
     const errorMessage = (validateType) => {
@@ -274,20 +287,21 @@ export const RiskSettingPage = () => {
         return validateType === 'KEY_VALUE' ?
             <div>
                 <div>{"以上填写格式可能有以下错误，请再次检查并修正："}</div>
-                <div>{"▪ 所有字段都必须填写"}。</div>
-                <div>{"▪ 最高可放款笔数和最高可借總額需由大至小填写≥0的整数，且各级距数值应≤上一级。"}</div>
+                <div>{"▪ 所有字段都必须填写。"}。</div>
+                <div>{"▪ 最高可放款笔数和最高可借总额需由大至小填写≥0的整数。"}</div>
+                <div>{"▪ 填写示例：极好等级的值应≥良好的值；良好的值≥正常的值。其他依此类推。"}</div>
             </div>
             : validateType === 'SCORE' ?
                 <div>
                     <div>{"以上填写格式可能有以下错误，请再次检查并修正："}</div>
                     <div>{"▪ 所有字段必须由大至小填写≥0的整数。"}</div>
-                    <div>{"▪ 最大值、最小值数值需连贯且数值应<上一级，并>下一级。"}</div>
-                    <div>{"▪ 最高可放款笔数和最高可借总额数值应≤上一级。"}</div>
+                    <div>{"▪ 填写示例1：良好等级的值应>正常等级的值、并<极好等级的值。其他依此类推。"}</div>
+                    <div>{"▪ 填写示例2：极好等级的最高可放款笔数和最高可借总额数值应≥良好等级的值。其他依此类推。"}</div>
                 </div>
             : <div>
                     <div>{"以上填写格式可能有以下错误，请再次检查并修正："}</div>
                     <div>{"▪ 所有字段必须由大至小填写≥0的整数。"}</div>
-                    <div>{"▪ 除超过逾期天数之外，所有字段数值应≤上一级。"}</div>
+                    <div>{"▪ 除”超过逾期天数”字段之外，极好等级的值应≥良好等级的值。其他依此类推。"}</div>
                 </div>
 
     }
@@ -315,7 +329,7 @@ export const RiskSettingPage = () => {
                 const loanLength = key === 'repaymentCount' ? loan.length - 1 : loan.length;
                 const compareError = loan.length !== 1
                     ? key === 'min' || key === 'max'
-                        ? compareMinAndMax(index, loanLength, loan, key)
+                        ? compareMinAndMax(index, loanLength, loan, key,formType)
                         : compareCount(index, loanLength, loan, key)
                     : false;
 
@@ -354,12 +368,12 @@ export const RiskSettingPage = () => {
         return isFormError;
     }
 
-    const validateTypeSelector = (formType,changedField) => {
+    const validateTypeSelector = (formType, changedField) => {
 
         const { rankStrategy, oldRankStrategy, firstLoan, repeatLoan } = form.getFieldsValue();
         const validateType = formType === 'firstLoan' ? rankStrategy : oldRankStrategy;
         const loan = formType === 'firstLoan' ? firstLoan : repeatLoan;
-        const isLoanFormNotFilled = loan.map(i => Object.values(i).includes(undefined)).includes(true);
+        const isLoanFormNotFilled = loan.map(i => Object.keys(i).filter(key => key !== "min").map(field => i[field]).includes(undefined)).includes(true);
         const validateForm = isLoanFormNotFilled ? changedField : loan;
         return validateFirstAndRepeatLoanForm(formType, validateForm, validateType)
 
@@ -373,6 +387,22 @@ export const RiskSettingPage = () => {
         }
     }
 
+
+    // 分數類型:範圍 - 填完最大值，自動填入最小值
+    const setMinValue = (formType, index) => {
+        const { firstLoan, repeatLoan } = form.getFieldsValue();
+        if (index !== 0 || index === firstLoan.length - 1) {
+            if (formType === 'firstLoan') {
+                Object.assign(firstLoan[index - 1], { ...firstLoan[index - 1], min: Number(firstLoan[index].max) })
+                form.setFieldsValue({ firstLoan });
+            }
+            if (formType === 'repeatLoan') {
+                Object.assign(repeatLoan[index - 1], { ...repeatLoan[index - 1], min: Number(repeatLoan[index].max) })
+                form.setFieldsValue({ repeatLoan });
+            }
+        }
+    }
+
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
 
@@ -382,6 +412,11 @@ export const RiskSettingPage = () => {
         const value = changedFields[0].value;
 
         const changedField = [{ [field]: value, index: fieldIndex }]
+
+        if (field === 'max') {
+            setMinValue(formType, fieldIndex)
+        }
+       
         if (formType === 'firstLoan' || formType === 'repeatLoan') {
             validateTypeSelector(formType, changedField)
         }
@@ -411,7 +446,6 @@ export const RiskSettingPage = () => {
 
             if(key === "firstLoan" || key === "repeatLoan") {
                 const formType = key === "firstLoan" ? fields.rankStrategy : fields.oldRankStrategy;
-                console.log('formType',formType)
                 fields[key].map((record, index) => {
                     fields[key][index] = {
                         // 风控评分等级
