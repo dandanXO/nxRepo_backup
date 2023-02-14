@@ -1,6 +1,6 @@
 import { useLazyGetChannelListQuery } from "../api/channelListApi";
 import { useEffect, useState } from "react";
-import { getIsSuperAdmin } from "../utils/getUserInfo";
+import { getIsSuperAdmin } from "../i18n/getUserInfo";
 
 const useGetChannelEnum = () => {
 

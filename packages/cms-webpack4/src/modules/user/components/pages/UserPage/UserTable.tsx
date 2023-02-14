@@ -12,7 +12,7 @@ import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
 import queryString from "query-string";
 import CopyText from '../../../../shared/components/other/CopyText';
 import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
+import { getIsSuperAdmin } from '../../../../shared/i18n/getUserInfo';
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
     ispostBlackListSuccess?:boolean;

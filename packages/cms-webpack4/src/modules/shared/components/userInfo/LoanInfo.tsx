@@ -1,7 +1,7 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { GetUserOrders } from '../../api/types/userInfoTypes/getUserOrders';
-import { UserId } from '../../types/UserId';
+import { GetUserOrders } from '../../../sms/api/userInfoTypes/getUserOrders';
+import { UserId } from '../../domain/UserId';
 import { useLazyGetUserOrdersListQuery } from '../../api/UserInfoApi';
 import { useEffect, useState } from 'react';
 const LoanInfo = ({userId}:UserId) => {

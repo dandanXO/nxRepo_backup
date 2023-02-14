@@ -11,7 +11,7 @@ import { BrowserTracing } from "@sentry/tracing";
 import { WaterMark } from '@ant-design/pro-components';
 import moment from "moment/moment";
 
-import {getAdminUser} from "./modules/shared/utils/getUserInfo";
+import {getAdminUser} from "./modules/shared/i18n/getUserInfo";
 
 // IN
 // "timezone":"Asia/Kolkata"

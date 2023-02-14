@@ -6,9 +6,9 @@ import { useLazyGetDailyRiskControlListQuery } from '../../../api/DailyRiskContr
 import { GetDailyRiskControlListRequestQuery, GetDailyRiskControlList } from '../../../api/types/DailyRiskControlTypes/getDailyRiskControlList';
 import CopyText from '../../../../shared/components/other/CopyText';
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../../shared/utils/getUserInfo';
+import { getIsSuperAdmin } from '../../../../shared/i18n/getUserInfo';
 import useGetProviderEnum from '../../../../shared/hooks/useGetProviderEnum';
-import { enumObjectToMap } from '../../../../shared/utils/enumObjectToMap';
+import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
 import moment from 'moment';
 import queryString from "query-string";
 

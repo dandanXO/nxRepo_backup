@@ -1,5 +1,5 @@
 import { API } from "./index";
-import { GetOperatorListResponse } from "./types/getOperatorList";
+import { GetOperatorListResponse } from "./getOperatorList";
 
 export interface OperatorType {
     operatorId?: number;

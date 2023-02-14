@@ -1,4 +1,4 @@
-import { GetPageableResponse} from "../../../types/commonReponse";
+import { GetPageableResponse} from "../../../shared/api/commonReponse";
 
 export interface GetUserOrdersResponse {
     records:GetUserOrders[]

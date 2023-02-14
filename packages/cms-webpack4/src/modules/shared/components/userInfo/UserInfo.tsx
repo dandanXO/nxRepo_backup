@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Card, Image, Descriptions, Table,Modal, Tooltip } from 'antd';
 const { Item } = Descriptions;
 import { useGetUserDetailQuery } from "../../api/UserInfoApi";
-import { GetUserDetailResponse } from "../../api/types/userInfoTypes/getUserDetail";
-import { UserId } from "../../types/UserId";
+import { GetUserDetailResponse } from "../../../sms/api/userInfoTypes/getUserDetail";
+import { UserId } from "../../domain/UserId";
 import moment from "moment";
 import { WaterMark } from '@ant-design/pro-components';
-import { getAdminUser } from "../../utils/getUserInfo";
+import { getAdminUser } from "../../i18n/getUserInfo";
 import { Typography } from 'antd';
 
 const { Paragraph } = Typography;

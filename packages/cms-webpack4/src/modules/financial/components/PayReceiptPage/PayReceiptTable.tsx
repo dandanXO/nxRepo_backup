@@ -6,9 +6,9 @@ import { useLazyGetPayReceiptListQuery, usePostPayReceiptConfirmMutation } from 
 import { PayReceiptList, GetPayReceiptListRequestQuerystring } from '../../api/types/PayReceiptTypes/getPayReceiptList';
 import CopyText from '../../../shared/components/other/CopyText';
 import { ProColumnsOperationConstant } from "../../../shared/components/common/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
+import { getIsSuperAdmin } from '../../../shared/i18n/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
-import { enumObjectToMap } from '../../../shared/utils/enumObjectToMap';
+import { enumObjectToMap } from '../../../shared/utils/format/enumObjectToMap';
 
 const PayReceiptTable = () => {
 

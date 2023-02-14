@@ -1,4 +1,4 @@
-import { GetPageableResponse } from "../../../../shared/types/commonReponse";
+import { GetPageableResponse } from "../../../../shared/api/commonReponse";
 export interface GetUserReviewListRequestQuerystring {
     phoneNo?: string;                  // 手機號
     regChannelId?: string | number;    // 注册通道

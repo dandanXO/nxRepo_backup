@@ -10,7 +10,7 @@ import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
 import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
+import { getIsSuperAdmin } from '../../../shared/i18n/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
 import useGetProviderEnum from '../../../shared/hooks/useGetProviderEnum';

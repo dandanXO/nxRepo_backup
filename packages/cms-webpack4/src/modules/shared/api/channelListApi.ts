@@ -1,5 +1,5 @@
 import {API} from "./index";
-import {GetChannelListResponse} from "./types/getChannelList";
+import {GetChannelListResponse} from "./getChannelList";
 
 const ChannelListApi = API.injectEndpoints({
     overrideExisting: false,

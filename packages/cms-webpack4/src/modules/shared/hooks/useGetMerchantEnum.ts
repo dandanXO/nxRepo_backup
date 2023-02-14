@@ -1,11 +1,11 @@
 import { useLazyGetMerchantListQuery } from "../api/merchantListApi";
 import { useEffect, useState } from "react";
-import { getIsSuperAdmin } from "../utils/getUserInfo";
+import { getIsSuperAdmin } from "../i18n/getUserInfo";
 
 const useGetMerchantEnum = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    
+
     // 可用商戶
     const [triggerGetMerchantList, { currentData: merchantListData, isLoading, isFetching, isSuccess: isMerchantListDataSuccess, isError, isUninitialized }] = useLazyGetMerchantListQuery({
         pollingInterval: 0,

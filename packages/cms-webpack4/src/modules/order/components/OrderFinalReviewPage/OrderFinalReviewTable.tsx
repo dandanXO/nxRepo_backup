@@ -9,10 +9,10 @@ import { useLazyGetOrderFinalReviewListQuery, usePostOrderFinalReviewMutation } 
 import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from '../../api/types/getOrderReviewList';
 import { OrderReviewTypes } from '../../api/types/domain/OrderReviewTypes';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
-import { selectRandomRows } from '../../../shared/utils/selectRandomRows';
+import { selectRandomRows } from '../../utils/selectRandomRows';
 import CopyText from '../../../shared/components/other/CopyText';
 import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
+import { getIsSuperAdmin } from '../../../shared/i18n/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
 import useGetProviderEnum from '../../../shared/hooks/useGetProviderEnum';

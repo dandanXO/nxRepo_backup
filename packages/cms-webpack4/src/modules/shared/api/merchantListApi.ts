@@ -1,5 +1,5 @@
 import { API } from "./index";
-import { GetAvailableMerchantResponse } from "./types/getAvailableMerchantList";
+import { GetAvailableMerchantResponse } from "./getAvailableMerchantList";
 
 const MerchantListApi = API.injectEndpoints({
     overrideExisting: false,

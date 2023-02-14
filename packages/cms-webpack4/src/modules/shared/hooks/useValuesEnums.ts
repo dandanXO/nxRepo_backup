@@ -3,12 +3,12 @@ import { useGetOperatorListQuery ,useLazyGetOperatorListQuery} from "../api/oper
 import { useGetProviderListQuery } from "../api/providerApi";
 import { useGetMerchantListQuery,useLazyGetMerchantListQuery } from "../api/merchantListApi";
 import {useEffect, useState} from "react";
-import { getIsSuperAdmin } from "../utils/getUserInfo";
+import { getIsSuperAdmin } from "../i18n/getUserInfo";
 
 const useValuesEnums = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    
+
 
     // 注册渠道
     const { currentData, isSuccess } = useGetChannelListQuery(null);
@@ -39,7 +39,7 @@ const useValuesEnums = () => {
         }
     }, [isOperatorListDataSuccess])
 
-    
+
     // 风控应用
     const { currentData: providerListData, isSuccess: isProviderListDataSuccess } = useGetProviderListQuery(null);
     const [providerListEnum, setProviderListEnum] = useState(null)
@@ -61,7 +61,7 @@ const useValuesEnums = () => {
         'GOOD': { text: '良好', color: 'orange' },
     }
 
-    
+
     // 可用商戶
     const [triggerGetMerchantList, { currentData: merchantListData, isLoading, isFetching, isSuccess: isMerchantListDataSuccess, isError, isUninitialized }] = useLazyGetMerchantListQuery({
         pollingInterval: 0,

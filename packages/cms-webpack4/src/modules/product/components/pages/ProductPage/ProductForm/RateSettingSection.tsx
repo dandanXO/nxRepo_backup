@@ -4,7 +4,7 @@ import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {
   NumberValidator,
 } from "../../../../../shared/utils/validation/validator";
-import {maxOneUnitFloatReplacer} from "../../../../../shared/utils/maxOneUnitFloatReplacer";
+import {maxOneUnitFloatReplacer} from "../../../../../shared/utils/format/maxOneUnitFloatReplacer";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {FormInstance} from "antd/es";
 

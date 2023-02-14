@@ -2,7 +2,7 @@ import {Button, Divider, Form, Input, message, Select, TimePicker, Upload, Uploa
 import {UploadOutlined} from "@ant-design/icons";
 import React from "react";
 import {EmailValidator, NumberValidator} from "../../../../../shared/utils/validation/validator";
-import {cannotTypeFloat} from "../../../../../shared/utils/cannotTypeFloat";
+import {cannotTypeFloat} from "../../../../../shared/utils/format/cannotTypeFloat";
 const { Panel } = Collapse;
 interface ProductSettingSectionProps {
     setLogo: React.Dispatch<React.SetStateAction<string>>;

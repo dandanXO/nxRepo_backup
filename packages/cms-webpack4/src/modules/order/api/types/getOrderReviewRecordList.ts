@@ -1,4 +1,4 @@
-import { GetPageableResponse } from "../../../shared/types/commonReponse";
+import { GetPageableResponse } from "../../../shared/api/commonReponse";
 export interface GetOrderReviewRecordListRequestQuerystring {
     appName?: string;	          // APP名称
     merchantId?: number | "";	  // 商戶ID

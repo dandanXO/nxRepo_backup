@@ -8,8 +8,8 @@ import { useLazyGetOrderReviewRecordListQuery } from '../../api/OrderReviewRecor
 import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring } from '../../api/types/getOrderReviewRecordList';
 import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
-import {enumObjectToMap} from '../../../shared/utils/enumObjectToMap';
-import { getIsSuperAdmin } from '../../../shared/utils/getUserInfo';
+import {enumObjectToMap} from '../../../shared/utils/format/enumObjectToMap';
+import { getIsSuperAdmin } from '../../../shared/i18n/getUserInfo';
 import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
 import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
 

@@ -8,7 +8,7 @@ import { useLazyGetUserReviewRecordListQuery } from '../../../api/UserReviewReco
 import { UserReviewRecordList, GetUserReviewRecordListRequestQuerystring, GetUserReviewRecordListProps } from '../../../api/types/userReviewRecordTypes/getUserReviewRecordList';
 import CopyText from '../../../../shared/components/other/CopyText';
 import queryString from "query-string";
-import {enumObjectToMap} from '../../../../shared/utils/enumObjectToMap';
+import {enumObjectToMap} from '../../../../shared/utils/format/enumObjectToMap';
 
 const UserReviewRecordTable = () => {
 

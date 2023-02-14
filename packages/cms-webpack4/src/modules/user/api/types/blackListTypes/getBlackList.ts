@@ -1,4 +1,4 @@
-import { GetPageableResponse } from "../../../../shared/types/commonReponse";
+import { GetPageableResponse } from "../../../../shared/api/commonReponse";
 
 export interface GetBlackListRequestQuerystring {
 

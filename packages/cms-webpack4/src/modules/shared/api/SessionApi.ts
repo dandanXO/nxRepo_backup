@@ -1,5 +1,5 @@
 import {API} from "./index";
-import {LoginRequest, LoginResponse} from "./types/postLogin";
+import {LoginRequest, LoginResponse} from "./postLogin";
 
 const SessionApi = API.injectEndpoints({
   overrideExisting: false,

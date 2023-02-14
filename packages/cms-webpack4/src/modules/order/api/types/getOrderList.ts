@@ -1,4 +1,4 @@
-import { GetPageableResponse } from "../../../shared/types/commonReponse";
+import { GetPageableResponse } from "../../../shared/api/commonReponse";
 export interface GetOrderListRequestQuerystring {
     appName?: string;                 // APP名稱
     applyTimeEnd?: string;            // 申请时间迄

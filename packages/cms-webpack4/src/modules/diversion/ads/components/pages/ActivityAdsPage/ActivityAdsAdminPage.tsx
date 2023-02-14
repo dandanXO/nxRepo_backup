@@ -17,7 +17,7 @@ import {
 } from "../../../service/AdsApi";
 import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";
 import {Form} from "antd";
-import {CommonResponseError} from "../../../../../shared/types/CommonResponseError";
+import {CommonResponseError} from "../../../../../shared/api/CommonResponseError";
 import {DefaultFormByTemplateType} from "./DefaultFormByTemplateType";
 import {useAdminFormModal} from "./useAdminFormModal";
 

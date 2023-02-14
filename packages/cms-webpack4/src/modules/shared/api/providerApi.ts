@@ -1,5 +1,5 @@
 import {API} from "./index";
-import { GetProviderListResponse } from "./types/getProviderList";
+import { GetProviderListResponse } from "./getProviderList";
 
 const ProviderListApi = API.injectEndpoints({
     overrideExisting: false,

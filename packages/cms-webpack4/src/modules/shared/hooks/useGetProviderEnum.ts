@@ -1,12 +1,12 @@
 
 import { useLazyGetProviderListQuery } from "../api/providerApi";
 import { useEffect, useState } from "react";
-import { getIsSuperAdmin } from "../utils/getUserInfo";
+import { getIsSuperAdmin } from "../i18n/getUserInfo";
 
 const useGetProviderEnum = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    
+
     // 风控应用
     const [triggerGetProviderList, { currentData: providerListData, isSuccess: isProviderListDataSuccess }] = useLazyGetProviderListQuery({
         pollingInterval: 0,
