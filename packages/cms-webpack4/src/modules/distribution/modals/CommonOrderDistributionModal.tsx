@@ -67,10 +67,12 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
     useEffect(() => {
         setDistributionStage(props.searchedStage);
+        props.setDistributionStage(props.searchedStage)
         form.setFieldsValue({
             stage: props.searchedStage,
         });
     }, [props.searchedStage])
+
     // console.log("distributionStage", distributionStage);
 
     const treeCheckboxData = useMemo(() => {
@@ -116,6 +118,48 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
 
     const [form] = useForm();
+
+    const renderOptionsComponent = () => {
+        if(props.type === "today" && props.isSelectedByOrder) {
+            console.log("test.1")
+            return (
+                <React.Fragment>
+                    {props.searchedStage === Stage.T_1 && <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>}
+                    <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
+                </React.Fragment>
+            )
+        } else if(props.type === "today" && !props.isSelectedByOrder) {
+            console.log("test.2")
+            return (
+                <React.Fragment>
+                    <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>
+                    <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
+                </React.Fragment>
+            )
+        } else if(props.type === "overdue" && props.isSelectedByOrder) {
+            console.log("test.3")
+            return (
+                <React.Fragment>
+                    {props.searchedStage === Stage.S1 && <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>}
+                    {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2) && <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>}
+                    {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3) && <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>}
+                    {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3 || props.searchedStage === Stage.S4)  && <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>}
+                    {props.hasS5 && (props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3 || props.searchedStage === Stage.S4 ||props.searchedStage === Stage.S5)  && <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>}
+                </React.Fragment>
+            )
+        } else if(props.type === "overdue" && !props.isSelectedByOrder) {
+            console.log("test.4")
+            return (
+                <React.Fragment>
+                    <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>
+                    <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>
+                    <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>
+                    <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>
+                    <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>
+                </React.Fragment>
+            )
+        }
+    }
     return (
         <Modal
             title={"分配订单"}
@@ -136,24 +180,11 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                     <Form form={form}>
                         <Form.Item name="stage" label="逾期等级" rules={[{ required: true }]}>
                             <Select placeholder={"选择"} defaultValue={distributionStage} onSelect={(value) => {
-                                // console.log("value", value);
+                                console.log("value", value);
                                 setDistributionStage(value);
-                                // props.setDistributionStage(value)
+                                props.setDistributionStage(value)
                             }}>
-                                {props.type === "today" ? (
-                                    <React.Fragment>
-                                        {props.searchedStage === Stage.T_1 && <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>}
-                                        <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
-                                    </React.Fragment>
-                                ): (
-                                    <React.Fragment>
-                                        {props.searchedStage === Stage.S1 && <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>}
-                                        {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2) && <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>}
-                                        {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3) && <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>}
-                                        {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3 || props.searchedStage === Stage.S4)  && <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>}
-                                        {props.hasS5 && (props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3 || props.searchedStage === Stage.S4 ||props.searchedStage === Stage.S5)  && <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>}
-                                    </React.Fragment>
-                                )}
+                                {renderOptionsComponent()}
                             </Select>
                         </Form.Item>
                         <Form.Item name="productName" label="待分案单量">

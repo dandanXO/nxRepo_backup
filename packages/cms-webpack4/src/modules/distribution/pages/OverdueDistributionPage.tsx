@@ -163,6 +163,13 @@ export const OverdueDistributionPage = () => {
             valueType: 'dateRange',
             hideInTable: true,
         },
+        // {
+        //     key: 'deviceMoney',
+        //     title: '逾期天数',
+        //     dataIndex: 'deviceMoney',
+        //     hideInSearch: true,
+        // },
+
     ]
 
     // NOTE: GET list and item
@@ -216,18 +223,19 @@ export const OverdueDistributionPage = () => {
         // console.log("checkedCollector", checkedCollector);
         setShowModal(false);
         if(isSelectedByOrder) {
-            // console.log("orderIds", selectedRow);
+            console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
             })
         } else {
-            // console.log("stage", distributionStage);
+            console.log("stage", distributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
                 stage: distributionStage,
             });
         }
+        triggerGetList(formState);
     }
 
     const [searchedStage, setSearchedStage] = useState(Stage.S1);

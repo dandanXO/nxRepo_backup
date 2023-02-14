@@ -200,6 +200,7 @@ export const TodayDistributionPage = () => {
                 stage: selectedDistributionStage,
             });
         }
+        triggerGetList(formState);
     }
 
     const [searchedStage, setSearchedStage] = useState(Stage.T0);
@@ -286,7 +287,7 @@ export const TodayDistributionPage = () => {
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
                     }}
-                    rowKey={"orderNo"}
+                    rowKey={"orderId"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
