@@ -50,6 +50,9 @@ export interface CollectDistributionQueryResponse {
     orderNo: string;
     // 訂單號
 
+    overdueDays: number;
+    // 逾期天數
+
     phoneNo: string;
     // 電話
 

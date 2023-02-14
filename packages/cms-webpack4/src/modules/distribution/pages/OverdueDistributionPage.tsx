@@ -163,12 +163,12 @@ export const OverdueDistributionPage = () => {
             valueType: 'dateRange',
             hideInTable: true,
         },
-        // {
-        //     key: 'deviceMoney',
-        //     title: '逾期天数',
-        //     dataIndex: 'deviceMoney',
-        //     hideInSearch: true,
-        // },
+        {
+            key: 'overdueDays',
+            title: '逾期天数',
+            dataIndex: 'overdueDays',
+            hideInSearch: true,
+        },
 
     ]
 
