@@ -74,14 +74,21 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
 
   //NOTE: 設定還款參數
   const repayUseCase = (isExtend: boolean, isForceApplyAfterRepay: boolean, repayAmount: number) => {
-    setPayload({
+    console.log("[repay] repayUseCase.isExtend", isExtend)
+    console.log("[repay] repayUseCase.isForceApplyAfterRepay", isForceApplyAfterRepay)
+    console.log("[repay] repayUseCase.repayAmount", repayAmount)
+    const payloadData = {
       isExtend,
       isForceApplyAfterRepay,
       repayAmount,
-    })
+    };
+    console.log("[repay] payloadData", payloadData);
+    // NOTICE: 這邊居然無法正確給值
+    setPayload(payloadData);
+
     if(environment.country === AllCountryInstance.IndiaCountry.country) {
       // NOTICE: 印度直接還款
-      repaymentUseCase();
+      repaymentUseCase(payloadData);
     } else {
       if(!isForceApplyAfterRepay) {
         setShowRepaymentSteps(true);
@@ -90,7 +97,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
 
   }
   //NOTE: 執行還款
-  const repaymentUseCase = () => {
+  const repaymentUseCase = (payloadData: any) => {
     if(isRequestPending("handlePostRepayCreate")) {
       return;
     } else {
@@ -99,10 +106,13 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     setShowRepaymentSteps(false);
     setShowRepaymentAdsModal(false);
 
+    // NOTICE: 這邊居然無法正確從payload 拿值
+    console.log("[repay] repaymentUseCase.payload", payload);
+    console.log("[repay] repaymentUseCase.payloadData", payloadData);
     props.handlePostRepayCreate(
-      payload?.isExtend,
-      payload?.isForceApplyAfterRepay,
-      payload?.repayAmount
+      payloadData?.isExtend,
+      payloadData?.isForceApplyAfterRepay,
+      payloadData?.repayAmount
     ).then(() => {
       //
     }).catch(() => {

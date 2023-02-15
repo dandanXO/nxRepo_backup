@@ -175,6 +175,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                         if(Number(value) > Number(balance)) {
                                           value = balance;
                                         }
+                                        console.log("[repay] onChange.value", value)
                                         props.setBalanceValue(`${environment.currency}` + value);
                                         props.setRepayBalance(value);
                                       }
