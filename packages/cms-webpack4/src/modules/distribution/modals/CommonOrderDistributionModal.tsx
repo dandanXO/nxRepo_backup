@@ -171,7 +171,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                             <Select placeholder={"选择"} defaultValue={distributionStage} onSelect={(value) => {
                                 console.log("value", value);
                                 setDistributionStage(value);
-                                // props.setDistributionStage(value)
+                                props.setDistributionStage(value)
                             }}>
                                 {renderOptionsComponent()}
                             </Select>
