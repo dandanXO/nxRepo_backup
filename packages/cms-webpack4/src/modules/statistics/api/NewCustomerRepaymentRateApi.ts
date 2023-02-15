@@ -68,13 +68,13 @@ const NewCustomerRepaymentRateApi = API.injectEndpoints({
             }),
         }),
         // NOTICE: 新客風控回款率報表下載
-        downloadNewCustomerRiskPaymentRateList: builder.query<null, GetNewCustomerRiskPaymentRateListRequest>({
-            query: (requestBody: GetNewCustomerRiskPaymentRateListRequest) => ({
-                url: `/statistics/new-customer-risk-payment-rate`,
-                params: requestBody,
-                method: "get",
-        }),
-}),
+        // downloadNewCustomerRiskPaymentRateList: builder.query<null, GetNewCustomerRiskPaymentRateListRequest>({
+        //     query: (requestBody: GetNewCustomerRiskPaymentRateListRequest) => ({
+        //         url: `/statistics/new-customer-risk-payment-rate`,
+        //         params: requestBody,
+        //         method: "get",
+        //     }),
+        // }),
     })
 })
 
