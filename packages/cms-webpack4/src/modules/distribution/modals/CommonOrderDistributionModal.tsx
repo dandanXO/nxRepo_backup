@@ -12,8 +12,10 @@ import {useLazyGetOverdueCollectorQuery} from "../services/OverdueDistributionAP
 interface OrderDistributionModalProps {
     show: boolean;
     handleCloseModal: () => void;
+    // NOTE: 回傳催收人員
     onOk: (checkedCollector: number[]) => void;
     isSelectedByOrder: boolean;
+    // NOTE: 依階段分配模式，回傳所選的逾期等级
     setDistributionStage: (distributionStage: Stage) => void;
     summaryData?: StageData;
     type: "today" | "overdue",
@@ -67,11 +69,15 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
     useEffect(() => {
         if(props.show) {
-            setDistributionStage(props.searchedStage);
-            props.setDistributionStage(props.searchedStage)
+            let stage = props.type === "today" ? Stage.T0 : Stage.S1;
+            // NOTE:預設逾期等级
+            setDistributionStage(stage);
             form.setFieldsValue({
-                stage: props.searchedStage,
+                stage: stage,
             });
+            // NOTE: callback
+            props.setDistributionStage(stage);
+
         }
     }, [props.searchedStage, props.show])
 
@@ -122,44 +128,25 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
     const [form] = useForm();
 
     const renderOptionsComponent = () => {
-        if(props.type === "today" && props.isSelectedByOrder) {
-            console.log("test.1")
-            return (
-                <React.Fragment>
-                    {props.searchedStage === Stage.T_1 && <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>}
-                    <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
-                </React.Fragment>
-            )
-        } else if(props.type === "today" && !props.isSelectedByOrder) {
-            console.log("test.2")
-            return (
-                <React.Fragment>
-                    <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>
-                    <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
-                </React.Fragment>
-            )
-        } else if(props.type === "overdue" && props.isSelectedByOrder) {
-            console.log("test.3")
-            return (
-                <React.Fragment>
-                    {props.searchedStage === Stage.S1 && <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>}
-                    {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2) && <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>}
-                    {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3) && <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>}
-                    {(props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3 || props.searchedStage === Stage.S4)  && <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>}
-                    {props.hasS5 && (props.searchedStage === Stage.S1 || props.searchedStage === Stage.S2 || props.searchedStage === Stage.S3 || props.searchedStage === Stage.S4 ||props.searchedStage === Stage.S5)  && <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>}
-                </React.Fragment>
-            )
-        } else if(props.type === "overdue" && !props.isSelectedByOrder) {
-            console.log("test.4")
-            return (
-                <React.Fragment>
-                    <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>
-                    <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>
-                    <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>
-                    <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>
-                    <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>
-                </React.Fragment>
-            )
+        if(!props.isSelectedByOrder) {
+            if(props.type === "today") {
+                return (
+                    <React.Fragment>
+                        <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>
+                        <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
+                    </React.Fragment>
+                )
+            } else {
+                return (
+                    <React.Fragment>
+                        <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>
+                        <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>
+                        <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>
+                        <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>
+                        <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>
+                    </React.Fragment>
+                )
+            }
         }
     }
     return (
