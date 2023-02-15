@@ -32,7 +32,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     onFormSearchCallback?: (form: FormInstance) => void;
     onFormResetCallback?: () => void;
     // NOTE: setting
-    triggerGetList?: () => void;
+    triggerToRefreshList?: () => void;
     headerTitle?: React.ReactNode;
     // onSubmit?: (params: any) => void;
     // onReset?: () => void;
@@ -67,7 +67,7 @@ export const AdminTable = <TableListItemDataType,>({
                                                        isSearchFromClient = true,
                                                        onFormSearchCallback,
                                                        onFormResetCallback,
-                                                       triggerGetList,
+                                                       triggerToRefreshList,
                                                        headerTitle,
                                                        // onSubmit,
                                                        // onReset,
@@ -173,7 +173,7 @@ export const AdminTable = <TableListItemDataType,>({
                     listsHeight: 400,
                 },
                 // NOTICE: refresh icon
-                reload: ()=> triggerGetList(),
+                reload: ()=> triggerToRefreshList(),
             }}
             // alwaysShowAlert={true}
             rowSelection={rowSelection}

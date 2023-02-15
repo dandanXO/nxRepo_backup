@@ -370,7 +370,7 @@ export const OverdueDistributionPage = () => {
                         selectedRowKeys: selectedRow,
                         onChange: onSelectChange,
                     }}
-                    triggerGetList={()=>triggerGetList(formState)}
+                    triggerToRefreshList={()=>triggerGetList(formState)}
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}

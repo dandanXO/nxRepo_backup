@@ -270,7 +270,7 @@ export const RiskSettingPage = () => {
         const loanCount = Number(loan[index][field]);
         const prevField = Number(loan[prevIndex][field]);
         const nextField = Number(loan[nextIndex][field]);
-       
+
         if(field==='max'){
             setMinValue(formType, index);
         }
@@ -416,7 +416,7 @@ export const RiskSettingPage = () => {
         if (field === 'max') {
             setMinValue(formType, fieldIndex)
         }
-       
+
         if (formType === 'firstLoan' || formType === 'repeatLoan') {
             validateTypeSelector(formType, changedField)
         }
@@ -567,7 +567,7 @@ export const RiskSettingPage = () => {
                     searchable={false}
                     hasEditForm={false}
                     onAddCallback={onAddCallback}
-                    triggerGetList={()=>triggerGetList(null)}
+                    triggerToRefreshList={()=>triggerGetList(null)}
 
                 />
 

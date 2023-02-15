@@ -183,7 +183,7 @@ export const RepaymentRateTable = () => {
             toolBarRender={() => [<Button onClick={onClickHandleExport} type='primary'>导出</Button>]}
             tableHeaderColumns={tableHeaderColumns}
             tableDatasource={currentData}
-            triggerGetList={triggerGetList}
+            triggerToRefreshList={triggerGetList}
             loading={isFetching}
             hasAddForm={false}
             hasEditForm={false}

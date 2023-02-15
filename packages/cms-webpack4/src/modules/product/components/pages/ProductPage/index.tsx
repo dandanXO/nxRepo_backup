@@ -60,7 +60,7 @@ export const ProductPage = () => {
         },
       }}
     >
-      <ProductTable triggerGetList={triggerGetList} productListData={productListData} setProductModalData={setProductModalData} />
+      <ProductTable triggerToRefreshList={triggerGetList} productListData={productListData} setProductModalData={setProductModalData} />
 
       {productModalData.show && (
         <ProductModal
