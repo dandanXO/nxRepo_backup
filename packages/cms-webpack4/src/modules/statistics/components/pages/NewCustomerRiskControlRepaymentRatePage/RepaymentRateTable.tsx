@@ -7,7 +7,6 @@ import {
 } from "../../../api/NewCustomerRepaymentRateApi";
 import {useCallback, useEffect, useState} from "react";
 import {FormInstance} from "antd";
-import {CollectDistributionQueryRequest, Stage} from "../../../../distribution/types";
 import {Button} from "antd/es";
 import queryString from "query-string";
 
@@ -153,7 +152,7 @@ export const RepaymentRateTable = () => {
     const onClickHandleExport = useCallback(() => {
         const searchQueryString = queryString.stringify(formState);
         const path = `/hs/admin/statistics/new-customer-risk-payment-rate?${searchQueryString}`;
-        console.log("path", path)
+        // console.log("path", path)
         window.open(path);
     }, [formState])
 
