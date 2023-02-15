@@ -1,6 +1,15 @@
 import {AdminTable} from "../../../../shared/components/common/AdminTable";
 import {ProColumns} from "@ant-design/pro-components";
-import {RiskPaymentRateResponseRiskPaymentRateResponse} from "../../../api/NewCustomerRepaymentRateApi";
+import {
+    GetNewCustomerRiskPaymentRateListRequest,
+    RiskPaymentRateResponseRiskPaymentRateResponse,
+    useLazyGetNewCustomerRiskPaymentRateListQuery
+} from "../../../api/NewCustomerRepaymentRateApi";
+import {useCallback, useEffect, useState} from "react";
+import {FormInstance} from "antd";
+import {CollectDistributionQueryRequest, Stage} from "../../../../distribution/types";
+import {Button} from "antd/es";
+import queryString from "query-string";
 
 export const RepaymentRateTable = () => {
     const tableHeaderColumns: ProColumns<RiskPaymentRateResponseRiskPaymentRateResponse, "text">[] = [
@@ -9,49 +18,65 @@ export const RepaymentRateTable = () => {
             title: '放款日期',
             dataIndex: 'loanDate',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
-            valueType: "date",
+            valueType: 'date',
         },
         {
-            key: 'finishCount',
+            key: 'fakeLoanDate',
+            title: '放款日期',
+            dataIndex: 'fakeLoanDate',
+            hideInSearch: false,
+            hideInTable: true,
+            initialValue: "",
+            valueType: 'dateRange',
+        },
+        {
+            key: 'totalCount',
             title: '放款笔数',
-            dataIndex: 'finishCount',
+            dataIndex: 'totalCount',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'totalLendUsers',
             title: '放款用户数',
-            dataIndex: 'finishCount',
+            dataIndex: 'totalLendUsers',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'totalLendMoney',
             title: '放款金额',
-            dataIndex: 'finishCount',
+            dataIndex: 'totalLendMoney',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'pendingRepaymentCount',
             title: '待还款笔数',
-            dataIndex: 'finishCount',
+            dataIndex: 'pendingRepaymentCount',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'pendingRepaymentUsers',
             title: '待还用户数',
-            dataIndex: 'finishCount',
+            dataIndex: 'pendingRepaymentUsers',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'pendingRepaymentMoney',
             title: '待还金额',
-            dataIndex: 'finishCount',
+            dataIndex: 'pendingRepaymentMoney',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
@@ -59,46 +84,109 @@ export const RepaymentRateTable = () => {
             title: '已结清笔数',
             dataIndex: 'finishCount',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'finishUsers',
             title: '已结清用户数',
-            dataIndex: 'finishCount',
+            dataIndex: 'finishUsers',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'finishMoney',
             title: '已结清金额',
-            dataIndex: 'finishCount',
+            dataIndex: 'finishMoney',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'overdueCount',
             title: '已逾期笔数',
-            dataIndex: 'finishCount',
+            dataIndex: 'overdueCount',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'overdueUsers',
             title: '已逾期用户数',
-            dataIndex: 'finishCount',
+            dataIndex: 'overdueUsers',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
         {
-            key: 'finishCount',
+            key: 'overdueMoney',
             title: '已逾期金额',
-            dataIndex: 'finishCount',
+            dataIndex: 'overdueMoney',
             hideInSearch: true,
+            hideInTable: false,
             initialValue: "",
         },
     ]
-    // return (
-    //     <AdminTable tableHeaderColumns={tableHeaderColumns} tableDatasource={} hasAddForm={}/>
-    // )
-    return (<div>test</div>)
+    const [triggerGetNewCustomerRiskPaymentRateList, {data, currentData, isLoading, isFetching, isSuccess, isError}] = useLazyGetNewCustomerRiskPaymentRateListQuery();
+
+    useEffect(() => {
+        triggerGetNewCustomerRiskPaymentRateList(null);
+    }, [])
+
+    const triggerGetList = useCallback(() => {
+        triggerGetNewCustomerRiskPaymentRateList(null)
+    }, [])
+
+    const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
+        endTime: "",
+        // 結束時間
+        riskControlModel: "",
+        // 风控名稱
+        riskRank: "",
+        // 風控標籤
+        startTime: ""
+        // 開始時間
+    })
+
+
+    const onClickHandleExport = useCallback(() => {
+        const searchQueryString = queryString.stringify(formState);
+        const path = `/hs/admin/statistics/new-customer-risk-payment-rate?${searchQueryString}`;
+        console.log("path", path)
+        window.open(path);
+    }, [formState])
+
+    return (
+        <AdminTable <RiskPaymentRateResponseRiskPaymentRateResponse>
+            searchable={true}
+            isSearchFromClient={false}
+            onFormSearchCallback={(form: FormInstance) => {
+                // setSelectedRow([]);
+                const searchFormState = form.getFieldsValue();
+                // setSearchedStage(searchFormState.stage);
+                const searchForm = {
+                    ...formState,
+                    ...searchFormState,
+                };
+                if(searchFormState.fakeLoanDate) {
+                    // searchForm.startTime = searchFormState.fakeLoanDate[0].format('YYYY-MM-DDTHH:mm:ss');
+                    // searchForm.endTime = searchFormState.fakeLoanDate[1].format('YYYY-MM-DDTHH:mm:ss');
+                    searchForm.startTime = searchFormState.fakeLoanDate[0].format('YYYY-MM-DD HH:mm:ss');
+                    searchForm.endTime = searchFormState.fakeLoanDate[1].format('YYYY-MM-DD HH:mm:ss');
+                }
+                delete searchForm["fakeLoanDate"]
+                setFormState(searchForm)
+                // console.log("searchForm", searchForm)
+                triggerGetNewCustomerRiskPaymentRateList(searchForm);
+            }}
+            toolBarRender={() => [<Button onClick={onClickHandleExport} type='primary'>导出</Button>]}
+            tableHeaderColumns={tableHeaderColumns}
+            tableDatasource={currentData}
+            triggerGetList={triggerGetList}
+            loading={isFetching}
+            hasAddForm={false}
+            hasEditForm={false}
+        />
+    )
 }

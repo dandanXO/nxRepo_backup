@@ -40,6 +40,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     rowKey?: string;
     rowSelection?: any;
     form?: any;
+    toolBarRender?: any;
 }
 
 interface ActionType {
@@ -74,6 +75,7 @@ export const AdminTable = <TableListItemDataType,>({
                                                        rowKey = "",
                                                        rowSelection,
                                                        form,
+    toolBarRender = null,
 }: AdminTableTemplateProps<TableListItemDataType>) => {
 
     // NOTE: actionRef
@@ -174,13 +176,14 @@ export const AdminTable = <TableListItemDataType,>({
                 reload: ()=> triggerGetList(),
             }}
             // alwaysShowAlert={true}
-            rowSelection={{
+            rowSelection={rowSelection}
+            // rowSelection={{
                 // 自定义选择项参考: https://ant.design/components/table-cn/#components-table-demo-row-selection-custom
                 // 注释该行则默认不显示下拉选项
                 // selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                 // defaultSelectedRowKeys: [1],
-                ...rowSelection,
-            }}
+                // ...rowSelection,
+            // }}
             // dateFormatter="string"
             dateFormatter={(value, valueType) => {
                 // console.log('====>', value, valueType);
@@ -195,6 +198,7 @@ export const AdminTable = <TableListItemDataType,>({
                     )}
                 </>
             }
+            toolBarRender={toolBarRender}
             // NOTE: Antd Design
             pagination={{
                 // NOTE: Changing Page Size
