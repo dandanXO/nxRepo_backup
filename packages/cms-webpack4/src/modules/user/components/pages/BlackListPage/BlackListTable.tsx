@@ -5,7 +5,7 @@ import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
 import { GetBlackListProps,GetBlackListRequestQuerystring,BlackListReponse } from '../../../api/types/blackListTypes/getBlackList';
 import { useLazyGetBlackListQuery } from '../../../api/BlackListApi';
 import { PlusOutlined } from '@ant-design/icons';
-import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
+import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
 
 interface BlackLisTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
@@ -13,7 +13,7 @@ interface BlackLisTableProps {
 }
 
 const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableProps) => {
-   
+
     const { operatorListEnum } = useValuesEnums();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetBlackListQuery({
@@ -56,7 +56,7 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
         { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: "" },
         { title: '备注', dataIndex: 'reason', key: 'reason', hideInSearch: true},
         { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },
-       
+
     ]
 
 
@@ -91,7 +91,7 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
                                     idcardNo,
                                     operatorId:operatorName,
                                     phoneNo,
-                                    userNameTrue, 
+                                    userNameTrue,
                                     pageNum: 1,
                                 });
                                 form.submit();

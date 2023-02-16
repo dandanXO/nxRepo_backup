@@ -8,7 +8,7 @@ import {GetProductListResponse, Product} from '../../../service/product/ProductA
 import { ProductFormModal } from "./hooks/useProductFormModal";
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
-import useGetMerchantEnum from '../../../../shared/hooks/useGetMerchantEnum';
+import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
 import { GetProductListRequestQuery } from '../../../service/product/request/getProductListRequestQuery';
 import { EditableInput } from './EditableInput';
 import { NumberValidator } from '../../../../shared/utils/validation/validator';

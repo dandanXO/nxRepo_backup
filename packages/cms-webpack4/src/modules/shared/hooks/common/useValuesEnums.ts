@@ -1,9 +1,9 @@
-import {useGetChannelListQuery} from "../api/channelListApi";
-import { useGetOperatorListQuery ,useLazyGetOperatorListQuery} from "../api/operatorListApi";
-import { useGetProviderListQuery } from "../api/providerApi";
-import { useGetMerchantListQuery,useLazyGetMerchantListQuery } from "../api/merchantListApi";
+import {useGetChannelListQuery} from "../../api/channelListApi";
+import { useGetOperatorListQuery ,useLazyGetOperatorListQuery} from "../../api/operatorListApi";
+import { useGetProviderListQuery } from "../../api/providerApi";
+import { useGetMerchantListQuery,useLazyGetMerchantListQuery } from "../../api/merchantListApi";
 import {useEffect, useState} from "react";
-import { getIsSuperAdmin } from "../storage/getUserInfo";
+import { getIsSuperAdmin } from "../../storage/getUserInfo";
 
 const useValuesEnums = () => {
 

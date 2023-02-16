@@ -1,6 +1,6 @@
-import { useLazyGetMerchantListQuery } from "../api/merchantListApi";
+import { useLazyGetMerchantListQuery } from "../../api/merchantListApi";
 import { useEffect, useState } from "react";
-import { getIsSuperAdmin } from "../storage/getUserInfo";
+import { getIsSuperAdmin } from "../../storage/getUserInfo";
 
 const useGetMerchantEnum = () => {
 

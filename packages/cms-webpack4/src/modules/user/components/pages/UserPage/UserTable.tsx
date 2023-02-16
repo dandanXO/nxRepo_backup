@@ -8,7 +8,7 @@ import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
 import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
-import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
+import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
 import queryString from "query-string";
 import CopyText from '../../../../shared/components/other/CopyText';
 import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";

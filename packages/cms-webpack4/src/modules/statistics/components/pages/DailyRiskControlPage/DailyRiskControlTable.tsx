@@ -7,7 +7,7 @@ import { GetDailyRiskControlListRequestQuery, GetDailyRiskControlList } from '..
 import CopyText from '../../../../shared/components/other/CopyText';
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
-import useGetProviderEnum from '../../../../shared/hooks/useGetProviderEnum';
+import useGetProviderEnum from '../../../../shared/hooks/common/useGetProviderEnum';
 import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
 import moment from 'moment';
 import queryString from "query-string";

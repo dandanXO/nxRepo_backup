@@ -1,7 +1,7 @@
 
-import { useLazyGetProviderListQuery } from "../api/providerApi";
+import { useLazyGetProviderListQuery } from "../../api/providerApi";
 import { useEffect, useState } from "react";
-import { getIsSuperAdmin } from "../storage/getUserInfo";
+import { getIsSuperAdmin } from "../../storage/getUserInfo";
 
 const useGetProviderEnum = () => {
 

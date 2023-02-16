@@ -6,7 +6,7 @@ import { LoginAccountList, GetLoginAccountListRequestQuery } from '../../../api/
 import { usePostLogoutMutation, useLazyGetLoginAccountListQuery } from '../../../api/LoginAccountManageApi';
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
-import useGetMerchantEnum from '../../../../shared/hooks/useGetMerchantEnum';
+import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
 
 const LoginAccountManageTable = () => {
 

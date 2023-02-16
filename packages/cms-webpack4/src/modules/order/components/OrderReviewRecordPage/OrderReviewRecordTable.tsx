@@ -3,7 +3,7 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
 import moment from 'moment';
-import useValuesEnums from '../../../shared/hooks/useValuesEnums';
+import useValuesEnums from '../../../shared/hooks/common/useValuesEnums';
 import { useLazyGetOrderReviewRecordListQuery } from '../../api/OrderReviewRecordApi';
 import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring } from '../../api/types/getOrderReviewRecordList';
 import CopyText from '../../../shared/components/other/CopyText';

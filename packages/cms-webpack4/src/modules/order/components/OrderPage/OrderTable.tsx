@@ -11,9 +11,9 @@ import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
 import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
-import useGetMerchantEnum from '../../../shared/hooks/useGetMerchantEnum';
+import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
-import useGetProviderEnum from '../../../shared/hooks/useGetProviderEnum';
+import useGetProviderEnum from '../../../shared/hooks/common/useGetProviderEnum';
 const OrderTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();

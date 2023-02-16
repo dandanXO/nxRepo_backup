@@ -5,7 +5,7 @@ import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
 import { GetWhiteListRequestQuerystring, GetWhiteListProps, WhiteListReponse } from '../../../api/types/whiteListTypes/getWhtieList';
 import { useLazyGetWhiteListQuery, useDeleteWhiteListMutation, useDeleteWhiteListAllMutation } from '../../../api/WhiteListApi';
 import { PlusOutlined } from '@ant-design/icons';
-import useValuesEnums from '../../../../shared/hooks/useValuesEnums';
+import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
 
 interface WhiteLisTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
@@ -13,7 +13,7 @@ interface WhiteLisTableProps {
 }
 
 const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTableProps) => {
-   
+
     const { operatorListEnum } = useValuesEnums();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetWhiteListQuery({
@@ -50,7 +50,7 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
     }
 
-    
+
     const onSelectChange = (selectedRowKeys) => {
         setButtonDisbaled(selectedRowKeys.length === 0 ? true : false)
         setSelectedRow(selectedRowKeys);
@@ -65,7 +65,7 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
         },
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "" },
         { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },
-       
+
     ]
 
     const handleDelete=()=>{
@@ -125,7 +125,7 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
                                     addTimeEnd: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addTimeStart: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     operatorId:operatorName,
-                                    phoneNo, 
+                                    phoneNo,
                                     pageNum: 1,
                                 });
                                 onSelectChange([]);
