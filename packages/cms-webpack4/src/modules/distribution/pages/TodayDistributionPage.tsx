@@ -156,7 +156,6 @@ export const TodayDistributionPage = () => {
     // NOTE: GET list and item
     const [triggerGetList, {
         currentData: currentItemListData,
-        isLoading: isGetListLoading,
         isFetching: isGetListFetching
     }] = useLazyGetDistributionQuery();
 
@@ -200,7 +199,9 @@ export const TodayDistributionPage = () => {
                 stage: selectedDistributionStage,
             });
         }
+        // console.log("refresh");
         triggerGetList(formState);
+        setSelectedRow([]);
     }
 
     const [searchedStage, setSearchedStage] = useState(Stage.T0);

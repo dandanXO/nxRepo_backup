@@ -175,7 +175,6 @@ export const OverdueDistributionPage = () => {
     // NOTE: GET list and item
     const [triggerGetList, {
         currentData: currentItemListData,
-        isLoading: isGetListLoading,
         isFetching: isGetListFetching
     }] = useLazyGetOverdueDistributionQuery();
 
@@ -184,23 +183,6 @@ export const OverdueDistributionPage = () => {
         pageNum: 1,
         pageSize: 10,
     })
-    const {
-        showModalContent,
-        setShowModalContent,
-        onModalOk,
-        onCloseModal,
-        editID,
-        form: modalForm,
-        onAddItem,
-        onEditItem,
-        onDeleteItem,
-        contextHolder,
-        modal,
-    } = useAdminFormModal({
-        // triggerGet,
-        triggerGetList,
-        // triggerDelete,
-    });
 
     useEffect(() => {
         triggerFetchSummary(null);
@@ -223,19 +205,21 @@ export const OverdueDistributionPage = () => {
         // console.log("checkedCollector", checkedCollector);
         setShowModal(false);
         if(isSelectedByOrder) {
-            console.log("orderIds", selectedRow);
+            // console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
             })
         } else {
-            console.log("stage", distributionStage);
+            // console.log("stage", distributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
                 stage: distributionStage,
             });
         }
+        console.log("refresh");
         triggerGetList(formState);
+        setSelectedRow([]);
     }
 
     const [searchedStage, setSearchedStage] = useState(Stage.S1);
@@ -245,9 +229,6 @@ export const OverdueDistributionPage = () => {
     const [distributionStage, setSelectedDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostOverdueDistributionStageMutation();
 
-    // const [form] = useForm();
-    // const formStage = Form.useWatch("stage", form);
-    // console.log("formStage", formStage);
     return (
         <AdminPage navigator={{
             ancestor: {
@@ -324,7 +305,6 @@ export const OverdueDistributionPage = () => {
                 </StagePanel>
 
                 <AdminTable<CollectDistributionQueryResponse>
-                    // form={form}
                     tableHeaderColumns={columns}
                     tableDatasource={currentItemListData?.records}
                     hasAddForm={false}
