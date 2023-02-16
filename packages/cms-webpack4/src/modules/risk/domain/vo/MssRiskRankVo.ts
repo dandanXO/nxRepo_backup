@@ -13,6 +13,6 @@ export interface MssRiskRankVo {
     repaymentCount?: number;       // 还款笔数阀值
     sort?: number;                 // 排序
     type?: 0 | 1;                  // 级距类型 0: 首贷, 1: 复借
-
+    autoLoan?: boolean;            // 自動放款
 
 }

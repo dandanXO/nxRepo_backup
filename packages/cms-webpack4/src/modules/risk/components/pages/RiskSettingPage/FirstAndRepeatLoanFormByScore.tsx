@@ -1,7 +1,8 @@
-import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space } from "antd";
+import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space, Checkbox } from "antd";
 import CustomLabel from "../../../../shared/components/other/CustomLabel";
 import {NumberValidator} from "../../../../shared/utils/validation/validator";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
+import { useState } from "react";
 
 interface FormProps{
     isEdit:boolean;
@@ -10,7 +11,7 @@ interface FormProps{
 }
 
 function FirstAndRepeatLoanFormByScore(props:FormProps) {
-
+    
     return <>
             {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
                 return (
@@ -22,6 +23,7 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                                 <CustomLabel style={{ width: 76 }}>最小值</CustomLabel>
                                 <CustomLabel style={{ width: 110 }}>最高可放款笔数</CustomLabel>
                                 <CustomLabel style={{ width: 110 }}>最高可借总额</CustomLabel>
+                                <CustomLabel style={{ width: 100 }}>自动放款</CustomLabel>
                             </div>
                         )}
                         <Input.Group compact>
@@ -66,6 +68,13 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                                 rules={[{ required: true, message: "请输入最高可借总额" }]}
                             >
                                 <Input placeholder={"最高可借总额"} />
+                            </Form.Item>
+                            <Form.Item name={[props.type, index, "autoLoan"]} style={{ margin: '0 0px 0 20px', width: 100, textAlign: 'left' }}
+                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_autoLoan_${index}`] as any)?.validateStatus}
+                                help={(props.customAntFormFieldError?.[`${props.type}_autoLoan_${index}`] as any)?.help}
+                                valuePropName={'checked'}
+                           >
+                                <Checkbox/>
                             </Form.Item>
                         </Input.Group>
                     </Form.Item>

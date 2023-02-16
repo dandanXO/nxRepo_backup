@@ -324,7 +324,7 @@ export const RiskSettingPage = () => {
             const isError = Object.keys(i).map((key) => {
 
                 if (loan.length === 1 && key === 'index') return;
-                if (key === 'providerRank' || key === 'id' || key === "overdueDaysReject") return;
+                if (key === 'providerRank' || key === 'id' || key === "overdueDaysReject" || key === "autoLoan") return;
 
                 const loanLength = key === 'repaymentCount' ? loan.length - 1 : loan.length;
                 const compareError = loan.length !== 1
@@ -447,6 +447,7 @@ export const RiskSettingPage = () => {
             if(key === "firstLoan" || key === "repeatLoan") {
                 const formType = key === "firstLoan" ? fields.rankStrategy : fields.oldRankStrategy;
                 fields[key].map((record, index) => {
+                    // console.log(record.autoLoan)
                     fields[key][index] = {
                         // 风控评分等级
                         rank: ["EXCELLENT", "GOOD", "NORMAL", "ORDINARY", "REJECT"][index],
@@ -476,8 +477,11 @@ export const RiskSettingPage = () => {
                         repaymentCount:formType === "REPAY_COUNT" && index!==4  ? Number(record.repaymentCount) : null,
 
                         // 逾期天数超过N天拒绝
-                        overdueDaysReject:formType === "REPAY_COUNT" && index===4 ? Number(record.overdueDaysReject) : null,
+                        overdueDaysReject: formType === "REPAY_COUNT" && index === 4 ? Number(record.overdueDaysReject) : null,
 
+                        // 自動放款
+                        autoLoan: record.autoLoan
+                        
 
                     } as MssRiskRankVo
 
@@ -490,6 +494,8 @@ export const RiskSettingPage = () => {
             } else if(key === "riskModelName") {
                 fields["riskModelName"] = riskModelName;
             }
+
+           
         });
         // NOTE: Edit
         if(isEdit) {

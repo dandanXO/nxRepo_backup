@@ -15,7 +15,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
 
     return (
         <AdminFormModal
-            width={"700px"}
+            width={"850px"}
             show={props.showModalContent.show}
             isEdit={props.showModalContent.isEdit}
             addTitle={"添加风控配置"}
