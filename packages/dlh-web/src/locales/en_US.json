@@ -1249,6 +1249,7 @@
   "menu.fakerLoanManage": "Faker Loan Mgmt",
   "menu.riskControlModelScoreData": "Risk Model Score Data",
   "menu.operationLogManage": "Operation Log Mgmt",
+  "menu.login.account.manage": "Login Account Mgmt",
   "menu.homePage": "Home Page",
   "menu.userCheckRecord": "User Exam Record",
   "menu.userRepeatCheck": "User Re-exam I",

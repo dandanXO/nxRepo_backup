@@ -1261,6 +1261,7 @@
   "menu.fakerLoanManage": "撸贷库管理",
   "menu.riskControlModelScoreData": "风控模型分数据",
   "menu.operationLogManage": "操作日志管理",
+  "menu.login.account.manage": "登入帐号管理",
   "menu.homePage": "首页",
   "menu.userCheckRecord": "用户审核记录",
   "menu.userRepeatCheck": "用户复审",

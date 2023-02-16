@@ -1188,6 +1188,7 @@
   "menu.fakerLoanManage": "擼貸庫管理",
   "menu.riskControlModelScoreData": "風控模型分數據",
   "menu.operationLogManage": "操作日誌管理",
+  "menu.login.account.manage": "登入帳號管理",
   "menu.homePage": "首頁",
   "menu.userRepeatCheck": "用户复审",
   "menu.userLastCheck": "用户终审",

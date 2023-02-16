@@ -100,12 +100,12 @@ export const processRoutesForNewCMS = (data) => {
         })
     }
 
-    // 数据统计
-    if (menuItem.actionUrl === "/businessStatistics") {
+    // 系統管理
+    if (menuItem.actionUrl === "/systemManage") {
         menuItem.children && menuItem.children.map(level2MenuItem => {
-            // 每日风控标签统计
-            if (level2MenuItem.actionUrl === "/riskControlStatistic") {
-                level2MenuItem.actionUrl = "/cms/riskControlStatistic";
+            // 登入帐号管理
+            if (level2MenuItem.actionUrl === "/loginAccountMange") {
+                level2MenuItem.actionUrl = "/cms/loginAccountMange";
             }
         })
     }
