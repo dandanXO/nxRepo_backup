@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { Tabs ,Collapse,List,Form,Button,Input} from 'antd';
 import { ConfigResponse,ConfigList } from '../../../api/types/configManageTypes/getConfigList';
-import { useLazyGetConfigListQuery } from '../../../api/types/configManageTypes/configManageApi';
+import { useLazyGetConfigListQuery } from '../../../api/configManageApi';
 
 import ConfigInput from './components/ConfigInput';
 

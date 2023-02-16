@@ -34,6 +34,7 @@ import {OverdueDistributionPage} from "./modules/distribution/pages/OverdueDistr
 import {
     NewCustomerRiskControlRepaymentRatePage
 } from "./modules/statistics/components/pages/NewCustomerRiskControlRepaymentRatePage";
+import LoginAccountManagePage from "./modules/system/components/pages/LoginAccountManage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -125,6 +126,8 @@ export const AppRouter = () => {
                     <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/statistics/new-customer-repayment-rate"} component={NewCustomerRiskControlRepaymentRatePage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/loginAccountMange"} component={LoginAccountManagePage}/>
                 </Switch>
             </Router>
 

@@ -1,5 +1,5 @@
-import { API } from "../../../../shared/api";
-import { GetConfigListResponse } from "./getConfigList";
+import { API } from "../../shared/api";
+import { GetConfigListResponse } from "./types/configManageTypes/getConfigList";
 
 const ConfigListApi = API.injectEndpoints({
     overrideExisting: false,
