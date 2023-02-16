@@ -9,8 +9,36 @@ import {useCallback, useEffect, useState} from "react";
 import {FormInstance} from "antd";
 import {Button} from "antd/es";
 import queryString from "query-string";
+import {ConstantRiskRankEnum} from "../../../../shared/constants/constantRiskRankEnum";
+import useGetProviderEnum from "../../../../shared/hooks/common/useGetProviderEnum";
 
 export const RepaymentRateTable = () => {
+
+    const [triggerGetNewCustomerRiskPaymentRateList, {data, currentData, isLoading, isFetching, isSuccess, isError}] = useLazyGetNewCustomerRiskPaymentRateListQuery();
+
+    useEffect(() => {
+        triggerGetNewCustomerRiskPaymentRateList(null);
+        triggerGetProviderList(null);
+    }, [])
+
+    const triggerGetList = useCallback(() => {
+        triggerGetNewCustomerRiskPaymentRateList(null)
+    }, [])
+
+    const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
+        endTime: "",
+        // 結束時間
+        riskControlModel: "",
+        // 风控名稱
+        riskRank: "",
+        // 風控標籤
+        startTime: ""
+        // 開始時間
+    })
+
+
+    const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
+
     const tableHeaderColumns: ProColumns<RiskPaymentRateResponseRiskPaymentRateResponse, "text">[] = [
         {
             key: 'loanDate',
@@ -126,28 +154,31 @@ export const RepaymentRateTable = () => {
             hideInTable: false,
             initialValue: "",
         },
+        // NOTE: only search
+        {
+            key: 'riskControlModel',
+            hideInTable: true,
+            title: '风控应用',
+            dataIndex: 'riskControlModel',
+            initialValue: formState.riskControlModel || "",
+            valueEnum: providerListEnum,
+            fieldProps: {
+                allowClear: false,
+            }
+        },
+        {
+            key: 'riskRank',
+            hideInTable: true,
+            title: '风控标签',
+            dataIndex: 'riskRank',
+            valueType: 'select',
+            valueEnum: ConstantRiskRankEnum,
+            initialValue: formState.riskRank || "",
+            fieldProps: {
+                allowClear: false,
+            }
+        },
     ]
-    const [triggerGetNewCustomerRiskPaymentRateList, {data, currentData, isLoading, isFetching, isSuccess, isError}] = useLazyGetNewCustomerRiskPaymentRateListQuery();
-
-    useEffect(() => {
-        triggerGetNewCustomerRiskPaymentRateList(null);
-    }, [])
-
-    const triggerGetList = useCallback(() => {
-        triggerGetNewCustomerRiskPaymentRateList(null)
-    }, [])
-
-    const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
-        endTime: "",
-        // 結束時間
-        riskControlModel: "",
-        // 风控名稱
-        riskRank: "",
-        // 風控標籤
-        startTime: ""
-        // 開始時間
-    })
-
 
     const onClickHandleExport = useCallback(() => {
         const searchQueryString = queryString.stringify(formState);
