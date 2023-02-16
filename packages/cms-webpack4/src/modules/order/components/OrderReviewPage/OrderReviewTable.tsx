@@ -16,6 +16,7 @@ import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
 import useGetProviderEnum from '../../../shared/hooks/common/useGetProviderEnum';
+import {ConstantRiskRankEnum} from "../../../shared/constants/constantRiskRankEnum";
 const OrderReviewTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
@@ -135,16 +136,6 @@ const OrderReviewTable = () => {
         onSelectChange(selectArray);
     }
 
-    // 风控标签
-    const riskRankEnum = {
-        '': { text: '不限', color: '' },
-        'EXCELLENT': { text: '极好', color: 'green' },
-        'NORMAL': { text: '正常', color: 'blue' },
-        'ORDINARY': { text: '普通', color: 'gold' },
-        'REJECT': { text: '拒绝', color: 'lightGray' },
-        'GOOD': { text: '良好', color: 'orange' },
-    }
-
     const columns: ProColumns<OrderReviewTypes>[] = [
         {
             title: '操作',
@@ -168,7 +159,7 @@ const OrderReviewTable = () => {
         },
         { title: 'APP名称', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} />},
         { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "", render: (text) => <CopyText text={text} />  },
-        { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: riskRankEnum, initialValue: searchParams.riskRank || "" },
+        { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: ConstantRiskRankEnum, initialValue: searchParams.riskRank || "" },
         {
             title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: {
                 true: { text: '是' },

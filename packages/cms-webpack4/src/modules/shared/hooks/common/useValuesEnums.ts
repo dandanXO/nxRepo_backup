@@ -4,6 +4,7 @@ import { useGetProviderListQuery } from "../../api/providerApi";
 import { useGetMerchantListQuery,useLazyGetMerchantListQuery } from "../../api/merchantListApi";
 import {useEffect, useState} from "react";
 import { getIsSuperAdmin } from "../../storage/getUserInfo";
+import {ConstantRiskRankEnum} from "../../constants/constantRiskRankEnum";
 
 const useValuesEnums = () => {
 
@@ -51,15 +52,7 @@ const useValuesEnums = () => {
         setProviderListEnum({ ...providerList, '': { text: '不限' } })
     }, [isProviderListDataSuccess])
 
-    // 风控标签
-    const riskRankEnum = {
-        '': { text: '不限', color: '' },
-        'EXCELLENT': { text: '极好', color: 'green' },
-        'NORMAL': { text: '正常', color: 'blue' },
-        'ORDINARY': { text: '普通', color: 'gold' },
-        'REJECT': { text: '拒绝', color: 'lightGray' },
-        'GOOD': { text: '良好', color: 'orange' },
-    }
+
 
 
     // 可用商戶
@@ -88,7 +81,7 @@ const useValuesEnums = () => {
         }
     }, [])
 
-    return { channelListEnum, riskRankEnum, operatorListEnum, providerListEnum, merchantListEnum }
+    return { channelListEnum, riskRankEnum: ConstantRiskRankEnum, operatorListEnum, providerListEnum, merchantListEnum }
 }
 
 export default useValuesEnums;
