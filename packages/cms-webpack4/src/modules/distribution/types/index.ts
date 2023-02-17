@@ -23,6 +23,7 @@ export type CollectDistributionQueryRequest  = {
     userName?: string;
     expireEndTime?: string;
     expireStartTime?: string;
+    dateRange?: any;
 } & PageRequest;
 
 export interface CollectDistributionQueryResponse {

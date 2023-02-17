@@ -324,34 +324,49 @@ export const OverdueDistributionPage = () => {
                     }
                     isSearchFromClient={false}
                     onFormSearchCallback={(form: FormInstance) => {
+                        // 移除預設選擇項目
                         setSelectedRow([]);
+
+                        // 紀錄目前選擇階段
                         const searchFormState = form.getFieldsValue();
                         setSearchedStage(searchFormState.stage);
-                        const searchForm = {
-                            ...formState,
+
+                        const finalFormData = {
                             ...searchFormState,
                         };
-                        if(searchFormState.dateRange) {
-                            searchForm.expireStartTime = searchFormState.dateRange[0].format('YYYY-MM-DDT00:00:00');
-                            searchForm.expireEndTime = searchFormState.dateRange[1].format('YYYY-MM-DDT23:59:59');
+
+                        if(finalFormData.dateRange) {
+                            finalFormData.expireStartTime = searchFormState.dateRange[0].format('YYYY-MM-DDT00:00:00');
+                            finalFormData.expireEndTime = searchFormState.dateRange[1].format('YYYY-MM-DDT23:59:59');
                         }
-                        delete searchForm["dateRange"]
-                        setFormState(searchForm)
-                        triggerGetList(searchForm)
+                        delete finalFormData["dateRange"]
+
+                        // 設定最終查詢
+                        setFormState(finalFormData)
+                        triggerGetList(finalFormData)
                     }}
-                    onFormResetCallback={() => {
-                        // console.log("onFormResetCallback", formState);
-                        if(formState.expireStartTime) formState.expireStartTime = null;
-                        if(formState.expireEndTime) formState.expireEndTime = null;
-                        if(formState["dateRange"]) delete formState["dateRange"];
+                    onFormResetCallback={(form: FormInstance) => {
+                        setFormState({
+                            ...formState,
+                            dateRange: null,
+                            expireStartTime: null,
+                            expireEndTime: null,
+                        })
+                        const searchFormState = form.getFieldsValue();
+                        form.setFieldsValue({
+                            ...searchFormState,
+                            dateRange: null,
+                            expireStartTime: null,
+                            expireEndTime: null,
+                        })
                     }}
+                    triggerToRefreshList={()=>triggerGetList(formState)}
                     rowKey={"orderId"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
                         onChange: onSelectChange,
                     }}
-                    triggerToRefreshList={()=>triggerGetList(formState)}
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}

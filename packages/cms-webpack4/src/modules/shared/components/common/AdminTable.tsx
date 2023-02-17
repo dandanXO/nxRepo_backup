@@ -30,7 +30,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     onAddCallback?: () => void;
     isSearchFromClient?: boolean;
     onFormSearchCallback?: (form: FormInstance) => void;
-    onFormResetCallback?: () => void;
+    onFormResetCallback?: (form: FormInstance) => void;
     // NOTE: setting
     triggerToRefreshList?: () => void;
     headerTitle?: React.ReactNode;
@@ -117,7 +117,7 @@ export const AdminTable = <TableListItemDataType,>({
                     <Button onClick={() => {
                         form.resetFields();
                         setCachedDatasource(tableDatasource);
-                        onFormResetCallback();
+                        onFormResetCallback(form);
                     }}>
                         {resetText}
                     </Button>
