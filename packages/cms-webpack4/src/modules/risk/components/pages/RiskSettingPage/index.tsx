@@ -373,7 +373,7 @@ export const RiskSettingPage = () => {
         const { rankStrategy, oldRankStrategy, firstLoan, repeatLoan } = form.getFieldsValue();
         const validateType = formType === 'firstLoan' ? rankStrategy : oldRankStrategy;
         const loan = formType === 'firstLoan' ? firstLoan : repeatLoan;
-        const isLoanFormNotFilled = loan.map(i => Object.keys(i).filter(key => key !== "min").map(field => i[field]).includes(undefined)).includes(true);
+        const isLoanFormNotFilled = loan.map(i => Object.keys(i).filter(key => key !== "min" && key !== "autoLoan").map(field => i[field]).includes(undefined)).includes(true);
         const validateForm = isLoanFormNotFilled ? changedField : loan;
         return validateFirstAndRepeatLoanForm(formType, validateForm, validateType)
 
