@@ -341,8 +341,8 @@ export const OverdueDistributionPage = () => {
                     }}
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback", formState);
-                        if(formState.expireStartTime) delete formState.expireStartTime;
-                        if(formState.expireEndTime) delete formState.expireEndTime;
+                        if(formState.expireStartTime) formState.expireStartTime = null;
+                        if(formState.expireEndTime) formState.expireEndTime = null;
                         if(formState["dateRange"]) delete formState["dateRange"];
                     }}
                     rowKey={"orderId"}
