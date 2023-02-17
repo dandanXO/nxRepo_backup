@@ -327,22 +327,23 @@ export const OverdueDistributionPage = () => {
                         setSelectedRow([]);
                         const searchFormState = form.getFieldsValue();
                         setSearchedStage(searchFormState.stage);
-
                         const searchForm = {
                             ...formState,
                             ...searchFormState,
                         };
                         if(searchFormState.dateRange) {
-                            searchForm.expireStartTime = searchFormState.dateRange[0].format('YYYY-MM-DDTHH:mm:ss');
-                            searchForm.expireEndTime = searchFormState.dateRange[1].format('YYYY-MM-DDTHH:mm:ss');
+                            searchForm.expireStartTime = searchFormState.dateRange[0].format('YYYY-MM-DDT00:00:00');
+                            searchForm.expireEndTime = searchFormState.dateRange[1].format('YYYY-MM-DDT23:59:59');
                         }
                         delete searchForm["dateRange"]
                         setFormState(searchForm)
-                        // console.log("searchForm", searchForm)
                         triggerGetList(searchForm)
                     }}
                     onFormResetCallback={() => {
-                        // console.log("onFormResetCallback");
+                        // console.log("onFormResetCallback", formState);
+                        if(formState.expireStartTime) delete formState.expireStartTime;
+                        if(formState.expireEndTime) delete formState.expireEndTime;
+                        if(formState["dateRange"]) delete formState["dateRange"];
                     }}
                     rowKey={"orderId"}
                     rowSelection={{
