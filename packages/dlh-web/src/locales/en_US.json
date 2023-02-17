@@ -1273,6 +1273,7 @@
   "menu.tel.sale.statistics": "Tel Sale Statistics",
   "menu.tel.sale.list": "Tel Sale List",
   "menu.payAndSettleManage": "Pay And Settle Management",
+  "menu.new.customer.risk.payment.rate": "新客风控回款率",
   "personal.center": "Profile",
   "setting": "Setting",
   "logout": "Logout",

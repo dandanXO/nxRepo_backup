@@ -89,7 +89,7 @@ export const processRoutesForNewCMS = (data) => {
         }
       })
     }
-    
+
     // 财务管理
     if (menuItem.actionUrl === "/paymentManage") {
         menuItem.children && menuItem.children.map(level2MenuItem => {
@@ -108,6 +108,15 @@ export const processRoutesForNewCMS = (data) => {
                 level2MenuItem.actionUrl = "/cms/loginAccountMange";
             }
         })
+    }
+
+    // 数据统计
+    if (menuItem.actionUrl === "/businessStatistics") {
+      menuItem.children && menuItem.children.map(level2MenuItem => {
+        if (level2MenuItem.actionUrl === "/newCustomerRiskPaymentRate") {
+          level2MenuItem.actionUrl = "/cms/statistics/new-customer-repayment-rate";
+        }
+      })
     }
     return menuItem;
   })
