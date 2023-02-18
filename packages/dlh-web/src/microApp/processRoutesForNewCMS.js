@@ -113,6 +113,11 @@ export const processRoutesForNewCMS = (data) => {
     // 数据统计
     if (menuItem.actionUrl === "/businessStatistics") {
       menuItem.children && menuItem.children.map(level2MenuItem => {
+        // 每日风控标签统计
+        if (level2MenuItem.actionUrl === "/riskControlStatistic") {
+          level2MenuItem.actionUrl = "/cms/riskControlStatistic";
+        }
+        // 新客风控回款率
         if (level2MenuItem.actionUrl === "/newCustomerRiskPaymentRate") {
           level2MenuItem.actionUrl = "/cms/statistics/new-customer-repayment-rate";
         }
