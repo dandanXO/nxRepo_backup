@@ -88,29 +88,29 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
         let restrictedStageArray = []
         if(props.type === "today") {
-            if(distributionStage == Stage.T0) {
+            if(props.searchedStage == Stage.T0) {
                 restrictedStageArray = [Stage.T_1];
             } else {
                 restrictedStageArray = [];
             }
         } else {
-            if(distributionStage == Stage.S1) {
+            if(props.searchedStage == Stage.S1) {
                 restrictedStageArray = [];
-            } else if (distributionStage == Stage.S2) {
+            } else if (props.searchedStage == Stage.S2) {
                 restrictedStageArray = [Stage.S1];
-            } else if (distributionStage == Stage.S3) {
+            } else if (props.searchedStage == Stage.S3) {
                 restrictedStageArray = [Stage.S1, Stage.S2];
-            } else if (distributionStage == Stage.S4) {
+            } else if (props.searchedStage == Stage.S4) {
                 restrictedStageArray = [Stage.S1, Stage.S2, Stage.S3];
-            } else if (distributionStage == Stage.S5) {
+            } else if (props.searchedStage == Stage.S5) {
                 restrictedStageArray = [Stage.S1, Stage.S2, Stage.S3, Stage.S4];
             }
-            // if(props.hasS5 && distributionStage !== Stage.S5) {
-            //     restrictedStageArray.push(Stage.S5)
-            // }
         }
-        return normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
-    }, [props.type, distributionStage, currentData, currentOverdueData, props.hasS5]);
+        // console.log("props.searchedStage", props.searchedStage);
+        const checkedData = normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
+        // console.log("checkedData", checkedData);
+        return checkedData
+    }, [props.type, currentData, currentOverdueData, props.hasS5, props.searchedStage]);
 
     const handleSelectedAllCollector = useCallback(() => {
         setSelectedRowKeys(treeCheckboxData["allKey"]);
