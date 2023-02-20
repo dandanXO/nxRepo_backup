@@ -63,9 +63,10 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
     }
 
     const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T0 : Stage.S1);
-    // console.log("distributionStage", distributionStage);
     // console.log("summaryData", props?.summaryData);
     // console.log("props.searchedStage", props.searchedStage);
+    // console.log("distributionStage", distributionStage);
+
 
     useEffect(() => {
         if(props.show) {
@@ -87,30 +88,37 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         const data = props.type === "today" ? currentData : currentOverdueData;
 
         let restrictedStageArray = []
+
+        let stage = props.isSelectedByOrder ? props.searchedStage : distributionStage;
+
         if(props.type === "today") {
-            if(props.searchedStage == Stage.T0) {
+            if(stage == Stage.T0) {
                 restrictedStageArray = [Stage.T_1];
-            } else {
-                restrictedStageArray = [];
+            } else if (stage == Stage.T_1) {
+                restrictedStageArray = [Stage.T0];
             }
         } else {
-            if(props.searchedStage == Stage.S1) {
-                restrictedStageArray = [];
-            } else if (props.searchedStage == Stage.S2) {
-                restrictedStageArray = [Stage.S1];
-            } else if (props.searchedStage == Stage.S3) {
-                restrictedStageArray = [Stage.S1, Stage.S2];
-            } else if (props.searchedStage == Stage.S4) {
+            if (stage == Stage.S1) {
+                restrictedStageArray = [Stage.S2, Stage.S3, Stage.S4];
+            } else if (stage == Stage.S2) {
+                restrictedStageArray = [Stage.S1, Stage.S3, Stage.S4];
+            } else if (stage == Stage.S3) {
+                restrictedStageArray = [Stage.S1, Stage.S2, Stage.S4];
+            } else if (stage == Stage.S4) {
                 restrictedStageArray = [Stage.S1, Stage.S2, Stage.S3];
-            } else if (props.searchedStage == Stage.S5) {
+            } else if (stage == Stage.S5) {
                 restrictedStageArray = [Stage.S1, Stage.S2, Stage.S3, Stage.S4];
             }
+            if (props.hasS5 && distributionStage !== Stage.S5) {
+                restrictedStageArray.push(Stage.S5)
+            }
         }
+
         // console.log("props.searchedStage", props.searchedStage);
         const checkedData = normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
         // console.log("checkedData", checkedData);
         return checkedData
-    }, [props.type, currentData, currentOverdueData, props.hasS5, props.searchedStage]);
+    }, [props.type, currentData, currentOverdueData, props.hasS5, props.searchedStage, distributionStage]);
 
     const handleSelectedAllCollector = useCallback(() => {
         setSelectedRowKeys(treeCheckboxData["allKey"]);
@@ -149,6 +157,8 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
             }
         }
     }
+
+    let stage = props.isSelectedByOrder ? props.searchedStage : distributionStage;
     return (
         <Modal
             title={"分配订单"}
@@ -169,7 +179,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                     <Form form={form}>
                         <Form.Item name="stage" label="逾期等级" rules={[{ required: true }]}>
                             <Select placeholder={"选择"} defaultValue={distributionStage} onSelect={(value) => {
-                                console.log("value", value);
+                                // console.log("value", value);
                                 setDistributionStage(value);
                                 props.setDistributionStage(value)
                             }}>
@@ -183,14 +193,14 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
                 </div>
             )}
-            {props?.summaryData[distributionStage]?.todoTotal > 0 && (
+            {props?.summaryData[stage]?.todoTotal > 0 && (
                 <div>
                     <Button style={{marginRight: 8}} onClick={handleSelectedAllCollector}>全选</Button>
                     <Button style={{marginRight: 8}} onClick={handleUnselectedAllCollector}>清空重选</Button>
                     <Typography.Text>已选择 {checkedCollector.length} 个催收人员</Typography.Text>
                 </div>
             )}
-            {props?.summaryData[distributionStage]?.todoTotal > 0 && (
+            {props?.summaryData[stage]?.todoTotal > 0 && (
                 <TreeCheckbox
                     data={treeCheckboxData}
                     selectedRowKeys={selectedRowKeys}

@@ -199,7 +199,7 @@ export const TodayDistributionPage = () => {
                 stage: selectedDistributionStage,
             });
         }
-        // console.log("refresh");
+        console.log("refresh");
         triggerGetList(formState);
         setSelectedRow([]);
     }
