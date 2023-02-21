@@ -4,8 +4,16 @@ import {Input, InputGroup} from './index';
 import { AppThemeProvider } from '../index';
 import {useCallback, useState} from "react";
 import {z} from "zod";
-import {InputValue} from "../../../../../../../../apps/mobile/src/app/core/types/InputValue";
-import {validationInfo} from "../../../../../../../../apps/mobile/src/app/components/pages/BindBankAccountPage/validationInfo";
+
+export type InputValue<T> = {
+  data: T;
+  isValidation?: boolean;
+  errorMessage?: string;
+};
+
+const ValidationInfo = {
+  min1: "This field cannot be left blank",
+};
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -106,7 +114,7 @@ const Template1: ComponentStory<typeof Input> = (args) => {
 
       <div>輸入前</div>
       <Input
-        labelType="right"
+        labelType="left"
         label="UTR"
         inputWidth={"200px"}
         className="mb"
@@ -126,7 +134,7 @@ const Template1: ComponentStory<typeof Input> = (args) => {
 
       <div>輸入中(請自行 Focus)</div>
       <Input
-        labelType="right"
+        labelType="left"
         label="UTR"
         inputWidth={"200px"}
         className="mb"
@@ -148,7 +156,7 @@ const Template1: ComponentStory<typeof Input> = (args) => {
       <div>輸入後 - 正確</div>
       <Input
         label="UTR"
-        labelType="right"
+        labelType="left"
         inputWidth={"200px"}
         className="mb"
         value={"123213"}
@@ -156,7 +164,7 @@ const Template1: ComponentStory<typeof Input> = (args) => {
 
       <div>輸入後 - 錯誤</div>
       <Input
-        labelType="right"
+        labelType="left"
         label="UTR"
         inputWidth={"200px"}
         className="mb"
@@ -167,7 +175,7 @@ const Template1: ComponentStory<typeof Input> = (args) => {
 
       <div>輸入後 - disable</div>
       <Input
-        labelType="right"
+        labelType="left"
         label="UTR"
         inputWidth={"200px"}
         className="mb"
@@ -202,7 +210,7 @@ const Template2: ComponentStory<typeof Input> = (args) => {
   const validateIFSC = useCallback(() => {
     const ifscScheme = z
       .string()
-      .min(1, validationInfo.min1)
+      .min(1, ValidationInfo.min1)
       .length(11, "IFSC must be 11 digits only.");
     const result = ifscScheme.safeParse(ifscData.data);
     if (!result.success) {

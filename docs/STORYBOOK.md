@@ -3,12 +3,12 @@
 ## Mobile Shared UI
 ![](assets/Screen Shot 2022-11-02 at 12.42.03 PM.png)
 ```shell
-nx storybook mobile-shared-ui 
+pnpm nx storybook mobile-shared-ui 
 ```
 
 ## Mobile
 ![](assets/Screen Shot 2022-11-02 at 12.41.54 PM.png)
 ```shell
-nx storybook mobile 
+pnpm nx storybook mobile 
 ```
 
