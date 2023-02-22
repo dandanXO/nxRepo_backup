@@ -57,6 +57,7 @@ const NewCustomersDailyConversionRatesTable = () => {
             title: '日期', dataIndex: 'dateRange', key: 'dateRange', valueType: 'dateRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ""
         },
+        { title: '日期', dataIndex: 'day', key: 'day', hideInSearch: true },
         { title: '渠道来源', dataIndex: 'channelId', key: 'channelId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: channelListEnum, fieldProps: { showSearch: true } },
     ]
 
@@ -67,7 +68,7 @@ const NewCustomersDailyConversionRatesTable = () => {
     }
 
     const customColumns = [
-        { title: '日期', dataIndex: 'day', key: 'day', hideInSearch: true },
+        { title: 'OTP发送量', dataIndex: 'otpCount', key: 'otpCount', hideInSearch: true },
         { title: <CustomColumn text={'注册量'} />, dataIndex: 'registerCount', key: 'registerCount', hideInSearch: true, tooltip: '注册百分比=注册量/短信发送数', render: (text, { registerRate }) => <CustomColumn text={text} rate={registerRate} /> },
         {
             title: '使用者授权认证', dataIndex: 'authorization', key: 'authorization', hideInSearch: true,
@@ -138,8 +139,8 @@ const NewCustomersDailyConversionRatesTable = () => {
         // @ts-ignore
         const { merchantId = '', channelId = '', dateRange } = formRef.current.getFieldValue();
         return {
-            // merchantId,
-             channelId,
+            merchantId,
+            channelId,
             endTime: dateRange[1] ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
             startTime: dateRange[0] ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
         }
@@ -189,7 +190,7 @@ const NewCustomersDailyConversionRatesTable = () => {
                                     checked={selectedTags.indexOf(tag.key) > -1}
                                     onChange={(checked) => handleChange(tag.key, checked)}
                                 >
-                                    {tag.title}
+                                    {tag.key === 'otpCount' ? 'OTP短信' : tag.title}
                                 </CheckableTag>
                             })}
                         </div>
