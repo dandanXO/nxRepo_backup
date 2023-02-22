@@ -121,6 +121,9 @@ export const processRoutesForNewCMS = (data) => {
         if (level2MenuItem.actionUrl === "/newCustomerRiskPaymentRate") {
           level2MenuItem.actionUrl = "/cms/statistics/new-customer-repayment-rate";
         }
+        if (level2MenuItem.actionUrl === "/Registrations") {
+            level2MenuItem.actionUrl = "/cms/Registrations";
+        }
       })
     }
     return menuItem;
