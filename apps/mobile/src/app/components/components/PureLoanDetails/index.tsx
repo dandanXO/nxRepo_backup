@@ -86,14 +86,20 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
     // NOTICE: 這邊居然無法正確給值
     setPayload(payloadData);
 
-    if(environment.country === AllCountryInstance.IndiaCountry.country) {
-      // NOTICE: 印度直接還款
+    // NOTICE: 展期流程
+    if(isExtend) {
       repaymentUseCase(payloadData);
     } else {
-      if(!isForceApplyAfterRepay) {
-        setShowRepaymentSteps(true);
+      if(environment.country === AllCountryInstance.IndiaCountry.country) {
+        // NOTICE: 印度直接還款
+        repaymentUseCase(payloadData);
+      } else {
+        if(!isForceApplyAfterRepay) {
+          setShowRepaymentSteps(true);
+        }
       }
     }
+
 
   }
   //NOTE: 執行還款
