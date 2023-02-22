@@ -204,22 +204,30 @@ export const OverdueDistributionPage = () => {
     const handlerModalOk = (checkedCollector: number[]) => {
         // console.log("checkedCollector", checkedCollector);
         setShowModal(false);
+
+        const refresh = () => {
+            // console.log("refresh");
+            setSelectedRow([]);
+            triggerFetchSummary(null);
+            triggerGetList(formState);
+        }
         if(isSelectedByOrder) {
             // console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
+            }).then(() => {
+                refresh();
             })
         } else {
             // console.log("stage", distributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
                 stage: distributionStage,
-            });
+            }).then(() => {
+                refresh();
+            })
         }
-        console.log("refresh");
-        triggerGetList(formState);
-        setSelectedRow([]);
     }
 
     const [searchedStage, setSearchedStage] = useState(Stage.S1);
