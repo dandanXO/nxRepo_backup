@@ -85,7 +85,7 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
 
     const handleConfirm = () => {
       const formBalanceValue = Number(props.balance.replace(`${environment.currency}`, ""));
-      // console.log("formBalanceValue", formBalanceValue);
+      console.log("[repay] formBalanceValue", formBalanceValue);
       if(formBalanceValue === 0) return
       props.handlePostRepayCreate(
         false,
@@ -167,7 +167,11 @@ const RepaymentAdsModal = (props: RepaymentAdsModalProps) => {
                                 </BrandContent>
                               </Brand>
 
-                              <ButtonContainer t={t} handleConfirm={handleConfirm} setShowRepaymentNoticeModal={props.setShowRepaymentNoticeModal} setShowRepaymentAdsModal={props.setShowRepaymentAdsModal}/>
+                              <ButtonContainer t={t}
+                                               handleConfirm={handleConfirm}
+                                               setShowRepaymentNoticeModal={props.setShowRepaymentNoticeModal}
+                                               setShowRepaymentAdsModal={props.setShowRepaymentAdsModal}
+                              />
                           </SectionButton>
                         </RepaymentModalContainer>
                     );

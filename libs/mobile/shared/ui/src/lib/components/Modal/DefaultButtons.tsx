@@ -7,6 +7,7 @@ interface StyledlessButtonProps {
   onClick?: () => void;
   children?: React.ReactNode;
   color?: string;
+  disable?: boolean;
 }
 const StyledlessButton = (props: StyledlessButtonProps) => (
   <div className={props.className} onClick={props.onClick}>

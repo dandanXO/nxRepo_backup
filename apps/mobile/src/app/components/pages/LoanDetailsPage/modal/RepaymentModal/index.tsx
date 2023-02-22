@@ -52,6 +52,7 @@ export const RepayAndApplyButton = styled(NotificationButton)`
     flex-direction: row;
     justify-content: center;
     color: ${(props) => props.theme.button.primary.text};
+    background: ${(props) => props.disable ? "#C0C0C0" : props.theme.button.primary.main};
 `;
 
 const RepaymentCancelButton = styled(NotificationButton)`
@@ -122,6 +123,13 @@ const RepaymentModal = (props: RepaymentModalProps) => {
             <Overlay
                 show={true}
                 content={(hide: () => void) => {
+                  // let price = Number(String(props.balanceValue).replace(`${environment.currency}`, ""));
+                  // if(price - 1 <= 0) {
+                  //   price = 0;
+                  // }  else {
+                  //   price = price - 1;
+                  // }
+
                     return (
                         <RepaymentModalContainer>
                             <Title>{props.t("Repayment")}</Title>
@@ -154,6 +162,7 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                 <Input
                                     label={props.t("Amount") as string}
                                     labelType="left"
+                                    // value={radioValue === "balance" ? props.balanceValue : `${environment.currency}${price}`}
                                     value={props.balanceValue}
                                     disabled={radioValue === "balance"}
                                     // onBlur={(event: any) => {
@@ -173,9 +182,15 @@ const RepaymentModal = (props: RepaymentModalProps) => {
                                         props.setRepayBalance(1);
                                       } else {
                                         if(Number(value) > Number(balance)) {
-                                          value = balance;
+                                          // if(balance - 1 < 0) {
+                                          //   value = 0;
+                                          // }  else {
+                                            value = balance;
+                                          // }
+
                                         }
                                         console.log("[repay] onChange.value", value)
+                                        console.log(value)
                                         props.setBalanceValue(`${environment.currency}` + value);
                                         props.setRepayBalance(value);
                                       }
@@ -203,7 +218,9 @@ const RepaymentModal = (props: RepaymentModalProps) => {
 
                                 <SectionButton>
                                     <RepayAndApplyButton
+                                        disable={radioValue !== "balance"}
                                         onClick={() => {
+                                            if(radioValue !== "balance") return;
                                             if(props.isRepayTypesFetching) return ;
                                             props.setShowRepaymentModal(false);
                                             props.setShowRepaymentNoticeModal(

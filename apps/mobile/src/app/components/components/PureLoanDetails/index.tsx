@@ -94,7 +94,9 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
         // NOTICE: 印度直接還款
         repaymentUseCase(payloadData);
       } else {
-        if(!isForceApplyAfterRepay) {
+        if(isForceApplyAfterRepay) {
+          // NOTICE: 續借
+        } else {
           setShowRepaymentSteps(true);
         }
       }
@@ -185,7 +187,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
           {/*還款再借款須知*/}
           {showRepaymentNoticeModal && (
             <RepaymentNoticeModal
-              balance={repayBalance || 0}
+              balance={props.currentData?.balance}
               setShowRepaymentNoticeModal={setShowRepaymentNoticeModal}
               handlePostRepayCreate={repayUseCase}
               repaymentUseCase={repaymentUseCase}
@@ -201,7 +203,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
                   setShowRepaymentNoticeModal(true);
                 }
               }}
-              onConfirmCallback={repaymentUseCase}
+              onConfirmCallback={() => repaymentUseCase(payload)}
             />
           )}
 
