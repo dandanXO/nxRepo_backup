@@ -9,8 +9,7 @@ import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEn
 import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import queryString from "query-string";
-import download from "downloadjs";
-import axios from 'axios';
+
 const { CheckableTag } = Tag;
 const NewCustomersDailyConversionRatesTable = () => {
 
@@ -147,22 +146,10 @@ const NewCustomersDailyConversionRatesTable = () => {
     }
 
     const handleExport = () => {
-        // const searchParams = getSearchParams();
-        // postDownload(searchParams).unwrap().then(file=>{
-        //     // download(file,'新客日统计转化率.xlsx')
-        //     var blob = new Blob(
-        //         [file],
-        //         {type:   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}
-        //     );
-            
-        //     // Programatically create a link and click it:
-        //     var a = document.createElement("a");
-        //     a.href = URL.createObjectURL(blob);
-        //     a.download = 'fileName.xlsx';
-        //     a.click();
-        // });
-        // setSearchList({...searchList,...searchParams});
-       
+        const searchParams = getSearchParams();
+        const searchQueryString = queryString.stringify(searchParams);
+        window.open(`/hs/admin/statistics/dayRegisterStatisticDownLoad?${searchQueryString}`);
+        setSearchList({ ...searchList, ...searchParams, page: 0 });
     }
 
     return (
@@ -230,7 +217,7 @@ const NewCustomersDailyConversionRatesTable = () => {
                     </Space>
                 ),
             }}
-            // toolBarRender={() => [<Button onClick={handleExport} type='primary'>导出</Button>]}
+            toolBarRender={() => [<Button onClick={handleExport} type='primary'>导出</Button>]}
             options={{
                 setting: false,
                 reload: () => triggerGetList(searchList),
