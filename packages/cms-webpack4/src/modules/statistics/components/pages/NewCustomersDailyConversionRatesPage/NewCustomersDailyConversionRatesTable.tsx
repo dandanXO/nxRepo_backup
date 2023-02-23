@@ -9,6 +9,7 @@ import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEn
 import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import queryString from "query-string";
+import moment from 'moment';
 
 const { CheckableTag } = Tag;
 const NewCustomersDailyConversionRatesTable = () => {
@@ -23,12 +24,13 @@ const NewCustomersDailyConversionRatesTable = () => {
         refetchOnReconnect: false
     });
     const [postDownload, { data, isSuccess: postDownloadIsSuccess }] = usePostNewCustomersDailyConversionRatesDownloadMutation();
-
+   
+    const initDayRange = [moment().subtract(6, 'days'), moment()];
     const initSearchList: GetNewCustomersDailyConversionRatesRequestQuerystring = {
-        channelId: '', endTime: '', merchantId: '', startTime: '', size: 10, page: 0
+        channelId: '', endTime: initDayRange[1].format('YYYY-MM-DD 23:59:59'), merchantId: '', startTime: initDayRange[0].format('YYYY-MM-DD 00:00:00'), size: 10, page: 0
     }
-
-    // // state
+    
+    // state
     const [searchList, setSearchList] = useState<GetNewCustomersDailyConversionRatesRequestQuerystring>(initSearchList);
 
 
@@ -54,7 +56,7 @@ const NewCustomersDailyConversionRatesTable = () => {
 
         {
             title: '日期', dataIndex: 'dateRange', key: 'dateRange', valueType: 'dateRange',
-            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ""
+            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: [moment(),moment().subtract(6, 'days')]
         },
         { title: '日期', dataIndex: 'day', key: 'day', hideInSearch: true },
         { title: '渠道来源', dataIndex: 'channelId', key: 'channelId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: channelListEnum, fieldProps: { showSearch: true } },
@@ -81,8 +83,8 @@ const NewCustomersDailyConversionRatesTable = () => {
         {
             title: '使用者操作认证', dataIndex: 'operation', key: 'operation', hideInSearch: true,
             children: [
-                { title: <CustomColumn text={'紧急联系人'} />, dataIndex: 'authCount', key: 'authCount', hideInSearch: true, render: (text, { authRate }) => <CustomColumn text={text} rate={authRate} /> },
                 { title: <CustomColumn text={'实名认证'} />, dataIndex: 'idCardCount', key: 'idCardCount', hideInSearch: true, render: (text, { idCardRate }) => <CustomColumn text={text} rate={idCardRate} /> },
+                { title: <CustomColumn text={'紧急联系人'} />, dataIndex: 'authCount', key: 'authCount', hideInSearch: true, render: (text, { authRate }) => <CustomColumn text={text} rate={authRate} /> },
                 { title: <CustomColumn text={'Face ID'} />, dataIndex: 'livenessCount', key: 'livenessCount', hideInSearch: true, render: (text, { livenessCountRate }) => <CustomColumn text={text} rate={livenessCountRate} /> },
                 { title: <CustomColumn text={'绑卡认证'} />, dataIndex: 'bankCount', key: 'bankCount', hideInSearch: true, render: (text, { bankRate }) => <CustomColumn text={text} rate={bankRate} /> },
             ]
@@ -116,8 +118,18 @@ const NewCustomersDailyConversionRatesTable = () => {
             ]
         },
     ]
-
     const formRef = useRef<ProFormInstance>();
+    const getSearchParams = () => {
+        // @ts-ignore
+        const { merchantId = '', channelId = '', dateRange='' } = formRef.current.getFieldValue();
+        return {
+            merchantId,
+            channelId,
+            endTime: dateRange[1] ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
+            startTime: dateRange[0] ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
+        }
+    }
+
     const [selectedTags, setSelectedTags] = useState<string[]>(customColumns.map(i => i['key']));
     const [tagColumns, setTagColumns] = useState<Object[]>(customColumns);
     const handleChange = (tag: string, checked: boolean) => {
@@ -134,16 +146,7 @@ const NewCustomersDailyConversionRatesTable = () => {
         setSearchList({ ...searchList, page: current-1, size: pageSize })
     }
 
-    const getSearchParams = () => {
-        // @ts-ignore
-        const { merchantId = '', channelId = '', dateRange } = formRef.current.getFieldValue();
-        return {
-            merchantId,
-            channelId,
-            endTime: dateRange[1] ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
-            startTime: dateRange[0] ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
-        }
-    }
+
 
     const handleExport = () => {
         const searchParams = getSearchParams();
