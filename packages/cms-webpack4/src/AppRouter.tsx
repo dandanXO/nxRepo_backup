@@ -36,6 +36,7 @@ import {
 } from "./modules/statistics/components/pages/NewCustomerRiskControlRepaymentRatePage";
 import LoginAccountManagePage from "./modules/system/components/pages/LoginAccountManage";
 import NewCustomersDailyConversionRatesPage from "./modules/statistics/components/pages/NewCustomersDailyConversionRatesPage";
+import ReloanStatisticsPage from "./modules/statistics/components/pages/ReloanStatisticsPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -131,6 +132,8 @@ export const AppRouter = () => {
                     <Route path={"/loginAccountMange"} component={LoginAccountManagePage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/Registrations"} component={NewCustomersDailyConversionRatesPage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/reloanStatistics"} component={ReloanStatisticsPage}/>
                 </Switch>
             </Router>
 

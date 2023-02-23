@@ -1,10 +1,7 @@
 import { useLazyGetChannelListQuery } from "../api/channelListApi";
 import { useEffect, useState } from "react";
-import { getIsSuperAdmin } from "../storage/getUserInfo";
 
 const useGetChannelEnum = () => {
-
-    const isSuperAdmin = getIsSuperAdmin();
 
     // 注册渠道
     const [triggerGetChannelList, { currentData: channelListData, isSuccess: isChannelListDataSuccess }] = useLazyGetChannelListQuery({
@@ -15,7 +12,7 @@ const useGetChannelEnum = () => {
     const [channelListEnum, setChannelListEnum] = useState(null)
 
     useEffect(() => {
-        if (isSuperAdmin && channelListData) {
+        if (channelListData) {
             let channelList = new Map().set('', { text: '不限' });
             channelListData && channelListData?.map((i) => {
                 return channelList.set(i.channelId, { text: i.name })

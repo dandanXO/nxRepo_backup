@@ -84,6 +84,9 @@ export function IndexPage() {
         <div>
             <Link to="/Registrations"><a>NewCustomersDailyConversionRatesPage</a></Link>
         </div>
+        <div>
+            <Link to="/reloanStatistics"><a>Reloan Statistics</a></Link>
+        </div>
 
         {/*<button onClick={() => methodDoesNotExist()}>Test Sentry - Break the world</button>;*/}
 
