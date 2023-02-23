@@ -185,23 +185,32 @@ export const TodayDistributionPage = () => {
 
     const handlerModalOk = (checkedCollector: number[]) => {
         // console.log("checkedCollector", checkedCollector);
+
+        const refresh = () => {
+            // console.log("refresh");
+            setSelectedRow([]);
+            triggerFetchSummary(null);
+            triggerGetList(formState);
+        }
+
         setShowModal(false);
         if(isSelectedByOrder) {
             // console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
+            }).then(() => {
+                refresh();
             })
         } else {
             // console.log("stage", selectedDistributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
                 stage: selectedDistributionStage,
-            });
+            }).then(() => {
+                refresh();
+            })
         }
-        console.log("refresh");
-        triggerGetList(formState);
-        setSelectedRow([]);
     }
 
     const [searchedStage, setSearchedStage] = useState(Stage.T0);
