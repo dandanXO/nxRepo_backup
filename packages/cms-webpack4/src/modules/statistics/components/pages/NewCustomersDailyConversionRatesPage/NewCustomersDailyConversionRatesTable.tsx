@@ -56,7 +56,7 @@ const NewCustomersDailyConversionRatesTable = () => {
 
         {
             title: '日期', dataIndex: 'dateRange', key: 'dateRange', valueType: 'dateRange',
-            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: [moment(),moment().subtract(6, 'days')]
+            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: initDayRange
         },
         { title: '日期', dataIndex: 'day', key: 'day', hideInSearch: true },
         { title: '渠道来源', dataIndex: 'channelId', key: 'channelId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: channelListEnum, fieldProps: { showSearch: true } },
