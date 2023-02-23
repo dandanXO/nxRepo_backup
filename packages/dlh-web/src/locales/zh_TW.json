@@ -1170,6 +1170,7 @@
   "menu.serviceChargeManage": "服務費率管理",
   "menu.userSourceUVStats": "渠道用戶來源UV統計",
   "menu.riskControlStatistic":"每日新用戶風控標簽統計",
+  "menu.reloan.statistics": "用戶複借統計",
   "menu.whiteList": "白名單",
   "menu.collectionConf": "支付代付配置",
   "menu.collectionFuncList": "支付方式列表",

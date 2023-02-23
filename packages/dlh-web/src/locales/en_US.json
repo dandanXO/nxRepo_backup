@@ -1231,6 +1231,7 @@
   "menu.serviceChargeManage": "Service Charge Mgmt",
   "menu.userSourceUVStats": "User Source UV Stats",
   "menu.riskControlStatistic":"Daily New Customers Risk Control Level Stats",
+  "menu.reloan.statistics": "Customers Repeat Borrowing Rate",
   "menu.whiteList": "Whitelist",
   "menu.collectionConf": "Collection & Payment",
   "menu.collectionFuncList": "Collection Func List",
