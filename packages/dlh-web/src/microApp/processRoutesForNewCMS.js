@@ -126,6 +126,26 @@ export const processRoutesForNewCMS = (data) => {
         }
       })
     }
+
+    // 当日催收
+    if (menuItem.actionUrl === "/todayLoanManage") {
+      menuItem.children && menuItem.children.map(level2MenuItem => {
+        // 当日订单分配
+        if (level2MenuItem.actionUrl === "/todayOrderDistribute") {
+          level2MenuItem.actionUrl = "/cms/today-distribution";
+        }
+      })
+    }
+
+    // 逾期催收
+    if (menuItem.actionUrl === "/afterLoanManage") {
+      menuItem.children && menuItem.children.map(level2MenuItem => {
+        // 逾期订单分配
+        if (level2MenuItem.actionUrl === "/overdueOrderDistribute") {
+          level2MenuItem.actionUrl = "/cms/overdue-distribution";
+        }
+      })
+    }
     return menuItem;
   })
 }
