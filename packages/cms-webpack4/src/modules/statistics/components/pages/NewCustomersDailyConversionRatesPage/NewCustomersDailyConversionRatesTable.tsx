@@ -125,8 +125,8 @@ const NewCustomersDailyConversionRatesTable = () => {
         return {
             merchantId,
             channelId,
-            endTime: dateRange[1] ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
-            startTime: dateRange[0] ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
+            endTime: dateRange ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
+            startTime: dateRange ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
         }
     }
 
