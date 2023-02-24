@@ -221,6 +221,20 @@ export const TodayDistributionPage = () => {
     const [postDistributionStage] = usePostDistributionStageMutation();
 
 
+    const pageOnChange = (current, pageSize) => {
+        // console.log("pageOnChange.current", current)
+        // console.log("pageOnChange.pageSize", pageSize)
+        // console.log("pageOnChange.formState", formState)
+        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize }
+        setFormState(newFormStage)
+        triggerGetList(newFormStage);
+    }
+
+    const refresh = () => {
+        // console.log("pageOnChange.formState", formState)
+        triggerGetList(formState);
+    }
+
     return (
         <AdminPage navigator={{
             ancestor: {
@@ -303,7 +317,9 @@ export const TodayDistributionPage = () => {
                         selectedRowKeys: selectedRow,
                         onChange: onSelectChange,
                     }}
-                    triggerToRefreshList={()=>triggerGetList(formState)}
+                    triggerToRefreshList={refresh}
+                    currentPage={currentItemListData?.currentPage}
+                    pageOnChange={pageOnChange}
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}

@@ -41,6 +41,8 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     rowSelection?: any;
     form?: any;
     toolBarRender?: any;
+    currentPage?:number;
+    pageOnChange?: (current: any, pageSize: number) => void;
 }
 
 interface ActionType {
@@ -75,7 +77,10 @@ export const AdminTable = <TableListItemDataType,>({
                                                        rowKey = "",
                                                        rowSelection,
                                                        form,
-    toolBarRender = null,
+                                                       toolBarRender = null,
+                                                       currentPage,
+                                                       pageOnChange,
+
 }: AdminTableTemplateProps<TableListItemDataType>) => {
 
     // NOTE: actionRef
@@ -153,6 +158,7 @@ export const AdminTable = <TableListItemDataType,>({
             // actionRef={actionRef}
             // 可以获取到查询表单的 form 实例，用于一些灵活的配置
             // formRef={formRef}
+            // formRef={form}
             columns={tableHeaderColumns}
             dataSource={cachedDatasource}
             // onDataSourceChange={(dataSource: T[]) => void}
@@ -204,6 +210,7 @@ export const AdminTable = <TableListItemDataType,>({
                 // NOTE: Changing Page Size
                 // 每页条数
                 pageSize: currentPaginationPageSize,
+
                 // 是否展示 pageSize 切换器
                 showSizeChanger: true,
                 // pageSize 变化的回调
@@ -211,7 +218,10 @@ export const AdminTable = <TableListItemDataType,>({
                     console.log(current, pageSize);
                     setCurrentPaginationPageSize(pageSize);
                 },
-
+                defaultPageSize: 2,
+                total: cachedDatasource?.length,
+                current: cachedDatasource?.length === 0 ? 0 : currentPage,
+                onChange: pageOnChange,
                 // 页码或 pageSize 改变的回调，参数是改变后的页码及每页条数
                 // onChange: (page) => console.log(page),
 

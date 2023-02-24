@@ -184,6 +184,8 @@ export const OverdueDistributionPage = () => {
         pageSize: 10,
     })
 
+
+
     useEffect(() => {
         triggerFetchSummary(null);
         triggerGetList(formState);
@@ -230,12 +232,28 @@ export const OverdueDistributionPage = () => {
         }
     }
 
+    // 紀錄目前選擇階段
     const [searchedStage, setSearchedStage] = useState(Stage.S1);
 
     const [isSelectedByOrder, setIsSelectedByOrder] = useState(true);
     const [postDistributionSelected] = usePostOverdueDistributionSelectedMutation();
     const [distributionStage, setSelectedDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostOverdueDistributionStageMutation();
+
+
+    const pageOnChange = (current, pageSize) => {
+        // console.log("pageOnChange.current", current)
+        // console.log("pageOnChange.pageSize", pageSize)
+        // console.log("pageOnChange.formState", formState)
+        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize }
+        setFormState(newFormStage)
+        triggerGetList(newFormStage);
+    }
+
+    const refresh = () => {
+        // console.log("pageOnChange.formState", formState)
+        triggerGetList(formState);
+    }
 
     return (
         <AdminPage navigator={{
@@ -340,6 +358,8 @@ export const OverdueDistributionPage = () => {
                         setSearchedStage(searchFormState.stage);
 
                         const finalFormData = {
+                            pageNum: formState.pageNum,
+                            pageSize: formState.pageSize,
                             ...searchFormState,
                         };
 
@@ -350,7 +370,10 @@ export const OverdueDistributionPage = () => {
                         delete finalFormData["dateRange"]
 
                         // 設定最終查詢
-                        setFormState(finalFormData)
+                        setFormState({
+                            // ...formState,
+                            ...finalFormData
+                        })
                         triggerGetList(finalFormData)
                     }}
                     onFormResetCallback={(form: FormInstance) => {
@@ -368,13 +391,16 @@ export const OverdueDistributionPage = () => {
                             expireEndTime: null,
                         })
                     }}
-                    triggerToRefreshList={()=>triggerGetList(formState)}
+                    triggerToRefreshList={refresh}
                     rowKey={"orderId"}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
                         onChange: onSelectChange,
                     }}
+                    currentPage={currentItemListData?.currentPage}
+                    pageOnChange={pageOnChange}
+
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}
