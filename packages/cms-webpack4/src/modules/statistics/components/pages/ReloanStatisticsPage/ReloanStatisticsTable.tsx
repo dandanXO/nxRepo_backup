@@ -148,13 +148,13 @@ const ReloanStatisticsTable = () => {
 
     const getSearchParams = () => {
         // @ts-ignore
-        const { appName = '', merchantId = '', dateRange, productId = '' } = formRef.current.getFieldValue();
+        const { appName = '', merchantId = '', dateRange = '', productId = '' } = formRef.current.getFieldValue();
         return {
             appName,
             merchantId,
             productId,
-            repayEndDate: dateRange[1] ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
-            repayStartDate: dateRange[0] ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
+            repayEndDate: dateRange ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
+            repayStartDate: dateRange ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
         }
     }
 
