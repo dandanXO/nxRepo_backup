@@ -151,7 +151,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                         <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>
                         <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>
                         <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>
-                        <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>
+                        {props.hasS5 && <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>}
                     </React.Fragment>
                 )
             }

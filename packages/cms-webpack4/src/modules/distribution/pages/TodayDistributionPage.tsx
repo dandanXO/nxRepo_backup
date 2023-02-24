@@ -3,7 +3,7 @@ import AdminPage from "../../shared/components/common/AdminPage";
 import React, {useEffect, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, FormInstance, Space, Table} from "antd";
+import {Button, FormInstance, Space, Table, message} from "antd";
 import CopyText from "../../shared/components/other/CopyText";
 import {
     useGetProductNamesQuery,
@@ -183,6 +183,8 @@ export const TodayDistributionPage = () => {
         setShowModal(false);
     }
 
+    const [messageApi, contextHolder] = message.useMessage();
+
     const handlerModalOk = (checkedCollector: number[]) => {
         // console.log("checkedCollector", checkedCollector);
 
@@ -201,6 +203,9 @@ export const TodayDistributionPage = () => {
                 orderIds: selectedRow,
             }).then(() => {
                 refresh();
+                messageApi.success("分配成功");
+            }).catch((error) => {
+                messageApi.error("分配失敗")
             })
         } else {
             // console.log("stage", selectedDistributionStage);
@@ -209,6 +214,9 @@ export const TodayDistributionPage = () => {
                 stage: selectedDistributionStage,
             }).then(() => {
                 refresh();
+                messageApi.success("分配成功");
+            }).catch((error) => {
+                messageApi.error("分配失敗")
             })
         }
     }
@@ -234,6 +242,10 @@ export const TodayDistributionPage = () => {
         // console.log("pageOnChange.formState", formState)
         triggerGetList(formState);
     }
+
+
+
+
 
     return (
         <AdminPage navigator={{
@@ -323,7 +335,7 @@ export const TodayDistributionPage = () => {
                     total={currentItemListData?.totalRecords}
                 />
                 {/*NOTICE: Modal*/}
-                {/*<div>{contextHolder}</div>*/}
+                <div>{contextHolder}</div>
                 <CommonOrderDistributionModal
                     show={showModal}
                     handleCloseModal={handleModalClose}

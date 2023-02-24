@@ -4,7 +4,7 @@ import AdminPage from "../../shared/components/common/AdminPage";
 import React, {useEffect, useRef, useState} from "react";
 import {ProColumns} from "@ant-design/pro-components";
 import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, Form, FormInstance, Space, Table} from "antd";
+import {Button, Form, FormInstance, message, Space, Table} from "antd";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
@@ -203,6 +203,8 @@ export const OverdueDistributionPage = () => {
         setShowModal(false);
     }
 
+    const [messageApi, contextHolder] = message.useMessage();
+
     const handlerModalOk = (checkedCollector: number[]) => {
         // console.log("checkedCollector", checkedCollector);
         setShowModal(false);
@@ -220,6 +222,9 @@ export const OverdueDistributionPage = () => {
                 orderIds: selectedRow,
             }).then(() => {
                 refresh();
+                messageApi.success("分配成功");
+            }).catch((error) => {
+                messageApi.error("分配失敗")
             })
         } else {
             // console.log("stage", distributionStage);
@@ -228,6 +233,9 @@ export const OverdueDistributionPage = () => {
                 stage: distributionStage,
             }).then(() => {
                 refresh();
+                messageApi.success("分配成功");
+            }).catch((error) => {
+                messageApi.error("分配失敗")
             })
         }
     }
@@ -404,7 +412,7 @@ export const OverdueDistributionPage = () => {
 
                 />
                 {/*NOTICE: Modal*/}
-                {/*<div>{contextHolder}</div>*/}
+                <div>{contextHolder}</div>
 
                 <CommonOrderDistributionModal
                     show={showModal}
