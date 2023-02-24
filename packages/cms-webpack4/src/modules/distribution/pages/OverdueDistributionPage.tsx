@@ -132,9 +132,9 @@ export const OverdueDistributionPage = () => {
             initialValue: "",
         },
         {
-            key: 'time',
+            key: 'lengNum',
             title: '展期次数',
-            dataIndex: 'time',
+            dataIndex: "lengNum",
             hideInSearch: true,
             initialValue: "",
         },
