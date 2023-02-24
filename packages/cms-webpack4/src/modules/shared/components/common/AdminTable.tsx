@@ -43,6 +43,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     toolBarRender?: any;
     currentPage?:number;
     pageOnChange?: (current: any, pageSize: number) => void;
+    total?: number;
 }
 
 interface ActionType {
@@ -79,6 +80,7 @@ export const AdminTable = <TableListItemDataType,>({
                                                        form,
                                                        toolBarRender = null,
                                                        currentPage,
+                                                       total,
                                                        pageOnChange,
 
 }: AdminTableTemplateProps<TableListItemDataType>) => {
@@ -218,8 +220,8 @@ export const AdminTable = <TableListItemDataType,>({
                     console.log(current, pageSize);
                     setCurrentPaginationPageSize(pageSize);
                 },
-                defaultPageSize: 2,
-                total: cachedDatasource?.length,
+                // defaultPageSize: 2,
+                total: total,
                 current: cachedDatasource?.length === 0 ? 0 : currentPage,
                 onChange: pageOnChange,
                 // 页码或 pageSize 改变的回调，参数是改变后的页码及每页条数

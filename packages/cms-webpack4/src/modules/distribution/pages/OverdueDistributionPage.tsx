@@ -399,6 +399,7 @@ export const OverdueDistributionPage = () => {
                         onChange: onSelectChange,
                     }}
                     currentPage={currentItemListData?.currentPage}
+                    total={currentItemListData?.totalRecords}
                     pageOnChange={pageOnChange}
 
                 />

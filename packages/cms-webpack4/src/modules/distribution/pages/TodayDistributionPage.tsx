@@ -320,6 +320,7 @@ export const TodayDistributionPage = () => {
                     triggerToRefreshList={refresh}
                     currentPage={currentItemListData?.currentPage}
                     pageOnChange={pageOnChange}
+                    total={currentItemListData?.totalRecords}
                 />
                 {/*NOTICE: Modal*/}
                 {/*<div>{contextHolder}</div>*/}
