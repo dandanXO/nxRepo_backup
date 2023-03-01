@@ -44,6 +44,7 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     currentPage?:number;
     pageOnChange?: (current: any, pageSize: number) => void;
     total?: number;
+    formRef?:any;
 }
 
 interface ActionType {
@@ -82,6 +83,7 @@ export const AdminTable = <TableListItemDataType,>({
                                                        currentPage,
                                                        total,
                                                        pageOnChange,
+                                                       formRef
 
 }: AdminTableTemplateProps<TableListItemDataType>) => {
 
@@ -159,7 +161,7 @@ export const AdminTable = <TableListItemDataType,>({
             // Table action 的引用，便于自定义触发
             // actionRef={actionRef}
             // 可以获取到查询表单的 form 实例，用于一些灵活的配置
-            // formRef={formRef}
+            formRef={formRef}
             // formRef={form}
             columns={tableHeaderColumns}
             dataSource={cachedDatasource}

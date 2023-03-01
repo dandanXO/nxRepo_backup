@@ -1,11 +1,11 @@
 import {AdminTable} from "../../../../shared/components/common/AdminTable";
-import {ProColumns} from "@ant-design/pro-components";
+import {ProColumns, ProFormInstance} from "@ant-design/pro-components";
 import {
     GetNewCustomerRiskPaymentRateListRequest,
     RiskPaymentRateResponseRiskPaymentRateResponse,
     useLazyGetNewCustomerRiskPaymentRateListQuery
 } from "../../../api/NewCustomerRepaymentRateApi";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {FormInstance} from "antd";
 import {Button} from "antd/es";
 import queryString from "query-string";
@@ -16,26 +16,22 @@ export const RepaymentRateTable = () => {
 
     const [triggerGetNewCustomerRiskPaymentRateList, {data, currentData, isLoading, isFetching, isSuccess, isError}] = useLazyGetNewCustomerRiskPaymentRateListQuery();
 
+ 
+
+    const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
+        endTime: "",          // 結束時間
+        riskControlModel: "", // 风控名稱
+        riskRank: "",         // 風控標籤
+        startTime: ""         // 開始時間
+    })
     useEffect(() => {
         triggerGetNewCustomerRiskPaymentRateList(null);
         triggerGetProviderList(null);
     }, [])
 
     const triggerGetList = useCallback(() => {
-        triggerGetNewCustomerRiskPaymentRateList(null)
-    }, [])
-
-    const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
-        endTime: "",
-        // 結束時間
-        riskControlModel: "",
-        // 风控名稱
-        riskRank: "",
-        // 風控標籤
-        startTime: ""
-        // 開始時間
-    })
-
+        triggerGetNewCustomerRiskPaymentRateList(formState)
+    }, [formState])
 
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
 
@@ -160,7 +156,7 @@ export const RepaymentRateTable = () => {
             hideInTable: true,
             title: '风控应用',
             dataIndex: 'riskControlModel',
-            initialValue: formState.riskControlModel || "",
+            initialValue: "",
             valueEnum: providerListEnum,
             fieldProps: {
                 allowClear: false,
@@ -173,41 +169,43 @@ export const RepaymentRateTable = () => {
             dataIndex: 'riskRank',
             valueType: 'select',
             valueEnum: ConstantRiskRankEnum,
-            initialValue: formState.riskRank || "",
+            initialValue: "",
             fieldProps: {
                 allowClear: false,
             }
         },
     ]
+    const formRef = useRef<ProFormInstance>();
+    const getSearchParams = () => {
+        // @ts-ignore
+        const { fakeLoanDate = '', riskControlModel = '', riskRank = '' } = formRef.current.getFieldValue();
+        return {
+            riskControlModel, riskRank,
+            startTime: fakeLoanDate ? fakeLoanDate[0].format('YYYY-MM-DD 00:00:00') : '',
+            endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : ''
+        }
+    }
 
-    const onClickHandleExport = useCallback(() => {
-        const searchQueryString = queryString.stringify(formState);
-        const path = `/hs/admin/statistics/new-customer-risk-payment-rate?${searchQueryString}`;
-        // console.log("path", path)
-        window.open(path);
-    }, [formState])
+    const onClickHandleExport = () => {
+        const searchParams = getSearchParams();
+        const searchQueryString = queryString.stringify(searchParams);
+        window.open(`/hs/admin/statistics/new-customer-risk-payment-rate/download?${searchQueryString}`);
+        setFormState(searchParams)
+        triggerGetNewCustomerRiskPaymentRateList(searchParams);
+    }
 
     return (
         <AdminTable <RiskPaymentRateResponseRiskPaymentRateResponse>
+            formRef={formRef}
             searchable={true}
             isSearchFromClient={false}
+            onFormResetCallback={(form: FormInstance)=>{
+                form.resetFields();
+                triggerGetNewCustomerRiskPaymentRateList(null);
+            }}
             onFormSearchCallback={(form: FormInstance) => {
-                // setSelectedRow([]);
-                const searchFormState = form.getFieldsValue();
-                // setSearchedStage(searchFormState.stage);
-                const searchForm = {
-                    ...formState,
-                    ...searchFormState,
-                };
-                if(searchFormState.fakeLoanDate) {
-                    // searchForm.startTime = searchFormState.fakeLoanDate[0].format('YYYY-MM-DDTHH:mm:ss');
-                    // searchForm.endTime = searchFormState.fakeLoanDate[1].format('YYYY-MM-DDTHH:mm:ss');
-                    searchForm.startTime = searchFormState.fakeLoanDate[0].format('YYYY-MM-DD HH:mm:ss');
-                    searchForm.endTime = searchFormState.fakeLoanDate[1].format('YYYY-MM-DD HH:mm:ss');
-                }
-                delete searchForm["fakeLoanDate"]
-                setFormState(searchForm)
-                // console.log("searchForm", searchForm)
+                const searchForm = getSearchParams();
+                setFormState(searchForm);
                 triggerGetNewCustomerRiskPaymentRateList(searchForm);
             }}
             toolBarRender={() => [<Button onClick={onClickHandleExport} type='primary'>导出</Button>]}
