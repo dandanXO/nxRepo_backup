@@ -45,7 +45,6 @@ class AtoSStatistics extends Component{
         };
         this.columns = [
             { title: props.intl.formatMessage({id : "page.table.date"}), dataIndex: 'day', key: 'day' },
-            { title: props.intl.formatMessage({id : "page.table.registration.qantity"}), dataIndex: 'regNum', key: 'regNum' , width: 80},
             { title: props.intl.formatMessage({id : "page.table.total.loan.quantity"}), dataIndex: 'loanSum', key: 'loanSum' , width: 90},
             { title: props.intl.formatMessage({id : "page.table.new.customer.application.qantity"}), dataIndex: 'newSubNum', key: 'newSubNum' },
             { title: props.intl.formatMessage({id : "page.table.new.customer.loan.qantity"}), dataIndex: 'newLoanSum', key: 'newLoanSum' },
@@ -67,7 +66,9 @@ class AtoSStatistics extends Component{
             { title: props.intl.formatMessage({ id: "page.table.loan.conversion.new.customer" }), dataIndex: 'a2s', key: 'a2s', width: 150 },
 
         ];
-
+        if (isSuperAdmin) {
+            this.columns.splice(1, 0, { title: props.intl.formatMessage({ id: "page.table.registration.qantity" }), dataIndex: 'regNum', key: 'regNum', width: 80 },)
+        }
     }
 
     handleSearch = (obj) => {
