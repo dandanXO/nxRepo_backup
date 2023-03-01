@@ -76,7 +76,7 @@ export function IndexPage() {
             <Link to="/riskControlStatistic"><a>Daily Risk Control Level Stats</a></Link>
         </div>
         <div>
-            <Link to="/statistics/new-customer-repayment-rate"><a>NewCustomerRiskControlRepaymentRatePage</a></Link>
+            <Link to="/new-customer-repayment-rate"><a>NewCustomerRiskControlRepaymentRatePage</a></Link>
         </div>
         <div>
             <Link to="/loginAccountMange"><a>Login Account Manage</a></Link>

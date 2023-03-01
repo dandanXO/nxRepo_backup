@@ -127,7 +127,7 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
                     {/*// @ts-ignore*/}
-                    <Route path={"/statistics/new-customer-repayment-rate"} component={NewCustomerRiskControlRepaymentRatePage}/>
+                    <Route path={"/new-customer-repayment-rate"} component={NewCustomerRiskControlRepaymentRatePage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/loginAccountMange"} component={LoginAccountManagePage}/>
                     {/*// @ts-ignore*/}
