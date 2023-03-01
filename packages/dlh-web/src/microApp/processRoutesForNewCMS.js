@@ -119,7 +119,7 @@ export const processRoutesForNewCMS = (data) => {
         }
         // 新客风控回款率
         if (level2MenuItem.actionUrl === "/newCustomerRiskPaymentRate") {
-          level2MenuItem.actionUrl = "/cms/statistics/new-customer-repayment-rate";
+          level2MenuItem.actionUrl = "/cms/new-customer-repayment-rate";
         }
         if (level2MenuItem.actionUrl === "/Registrations") {
             level2MenuItem.actionUrl = "/cms/Registrations";
