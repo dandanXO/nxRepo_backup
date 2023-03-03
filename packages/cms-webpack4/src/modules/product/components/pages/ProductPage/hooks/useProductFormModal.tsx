@@ -333,13 +333,31 @@ export const useProductFormModal = (props: ProductFormModal) => {
     handlePostProductCreate(creatProductData);
   };
 
-  const handleCloseModal = (e:any) => {
-    e.stopPropagation();
-    form.resetFields()
-    setProductModalData({
-      show: false,
-    })
-  }
+    const handleCloseModal = (e: any) => {
+        e.stopPropagation();
+        form.resetFields()
+        setProductModalData({
+            show: false,
+        })
+        setCustomAntFormFieldError({
+            preInterestRate: {
+                validateStatus: "",
+                help: "",
+            },
+            postInterestRate: {
+                validateStatus: "",
+                help: "",
+            },
+            renewPostInterestRate: {
+                validateStatus: "",
+                help: "",
+            },
+            renewPreInterestRate: {
+                validateStatus: "",
+                help: "",
+            },
+        })
+    }
 
   // const onAutoFinishedForm = useCallback(() => {
   //   form.setFieldsValue({
