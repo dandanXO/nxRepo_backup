@@ -40,7 +40,7 @@ const BrandCard = styled.div`
     display: flex;
     flex-direction: column;
     background: #f4f1ec;
-    padding: 10px;
+    padding: 6px;
     box-sizing: border-box;
     width: 120px;
     height: 120px;
@@ -83,7 +83,7 @@ const Button = styled.div<{bgColor: string}>`
     text-align: center;
     width: 81px;
     height: 20px;
-    padding: 2px 16px;
+    padding: 2px 10px;
     color: #fff;
     font-size: 12px;
     background-color: ${props => props.bgColor || "#ef7e3a"};
@@ -102,7 +102,7 @@ const CardContainer = styled.div`
 const Card = styled.div<{bgColor: string}>`
     box-sizing: border-box;
     background-color: ${props => props.bgColor || "#e4f6ef"};
-    padding: 8px;
+    padding: 6px;
     height: 56px;
 `;
 const Title = styled.div<{color: string}>`
