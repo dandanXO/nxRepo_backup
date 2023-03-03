@@ -81,7 +81,7 @@ const Button = styled.div<{bgColor: string}>`
   display: inline-block;
   box-sizing: border-box;
   text-align: center;
-  width: 81px;
+  width: 90px;
   height: 20px;
   padding: 2px 10px;
   color: #fff;
