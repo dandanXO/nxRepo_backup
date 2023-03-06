@@ -236,14 +236,15 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                                                   <Form.Item
                                                       {...restField}
                                                       name={[name, 'plusAmount']}
-                                                      required
                                                       rules={[
                                                           {
-                                                              transform: (value) => Number(value),
+                                                              transform: (value) => value === '' ? '' : Number(value),
                                                               validator: async (_, value) => NumberValidator(_, value)({
                                                                   min: 0,
                                                                   minMessage: "请输入提額金额",
-                                                              })
+                                                                  required: true,
+                                                                  requiredErrorMessage: "请输入提額金额",
+                                                              }),
                                                           },
                                                       ]}
                                                   >

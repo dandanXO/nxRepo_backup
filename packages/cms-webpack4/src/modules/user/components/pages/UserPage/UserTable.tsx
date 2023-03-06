@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import type { ProColumns } from '@ant-design/pro-components';
+import { useEffect, useRef, useState } from 'react';
+import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space,Tag } from 'antd';
+import { Button, Form, InputNumber, Modal, Radio, Space,Tag ,Select} from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
 import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation,usePostUserBanReleaseMutation ,useDeleteBlackListMutation} from '../../../api/UserApi';
 import moment from 'moment';
@@ -13,6 +13,11 @@ import queryString from "query-string";
 import CopyText from '../../../../shared/components/other/CopyText';
 import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
+import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
+import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
+
+
+
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
     ispostBlackListSuccess?:boolean;
@@ -20,7 +25,8 @@ interface UserTableProps {
 
 const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
-    const { channelListEnum, riskRankEnum } = useValuesEnums();
+    const { riskRankEnum } = useValuesEnums();
+    const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
     const isSuperAdmin = getIsSuperAdmin();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
@@ -43,10 +49,10 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     const dispatch = useDispatch();
     const { searchParams } = useSelector(selectSearchParams);
     // state
-    const [userList, setUserList] = useState<GetUerListProps>({ records: [] });
     const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
     const [isImportTelSale, setIsImportTelSale] = useState(false);
+    const [isExportRemainOrder, setIsExportRemainOrder] = useState(false);
     const [modal, contextHolder] = Modal.useModal();
 
 
@@ -62,11 +68,9 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         triggerGetList(searchList);
     }, [searchList, isUserDeleting,isBanUserSuccess,isReleaseUserSuccess,isRemoveBlackSuccess,ispostBlackListSuccess])
 
-    useEffect(() => {
-        if (currentData !== undefined) {
-            setUserList(currentData);
-        }
-    }, [currentData])
+    useEffect(()=>{
+        triggerGetChannelList(null);
+    },[])
 
     const handleToUserDetail=(userId)=>{
         dispatch(setPathname({pathname:'/user-info',previousPathname:'/user'}));
@@ -74,7 +78,6 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         history.push(`user-info/${userId}`);
     }
 
-    // const {pageable}=usePageable(userList);
     const pageOnChange = (current, pageSize) => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
     }
@@ -125,9 +128,23 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             onOk() { releaseUser({ userId: Number(id) }) }
         });
     }
-    const handleExportUserList = () => {
-        const searchQueryString = queryString.stringify(searchList);
-        window.open(`/hs/admin/user-manage/user-download?${searchQueryString}`);
+
+    const getSearchParams = () => {
+        // @ts-ignore
+        const { addTimeRange, ...values } = formRef.current.getFieldValue();
+        return {
+            ...searchList,
+            ...values,
+            addEndTime: addTimeRange?.[1]?.format('YYYY-MM-DD 23:59:59') || '',
+            addStartTime: addTimeRange?.[0]?.format('YYYY-MM-DD 00:00:00') || '',
+            pageNum: 1,
+        };
+    }
+
+    const handleExportUserList = (exportRemainOrder) => {
+        const searchQueryString = queryString.stringify(getSearchParams());
+        window.open(`/hs/admin/user-manage/user-download?${searchQueryString}&exportRemainOrder=${exportRemainOrder}`);
+        setSearchList(getSearchParams());
     }
     const statusEnum = {
         '': { text: '不限' },
@@ -139,6 +156,15 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         '19': { text: '审核拒绝', color: 'error' },
         '20': { text: '审核通过', color: 'processing' },
     };
+
+    const formRef = useRef<ProFormInstance>();
+
+    const handleStatusOnChange = () => {
+        // @ts-ignore
+        const { addTimeRange } = formRef.current.getFieldValue();
+        const [addStartTime, addEndTime] = addTimeRange ? addTimeRange.map(date => date?.format('YYYY-MM-DD')) : ['', ''];
+        setIsExportRemainOrder(addEndTime !== '' && addStartTime !== '' && addStartTime === addEndTime);
+    }
 
     const columns: ProColumns<UserListContent>[] = [
         {
@@ -176,7 +202,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         },
         {
             title: '用户状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
-            valueEnum:statusEnum,
+            valueEnum: enumObjectToMap(statusEnum),
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
                 return statusEnum[status] ? <Tag color={tagStatus.color}>{tagStatus.text}</Tag> : '-';
@@ -184,13 +210,11 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         },
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} /> },
         { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListEnum, initialValue:searchParams.channelId || ''},
-        {
-            title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true, valueType: 'dateTime'
-        },
+        { title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true, valueType: 'dateTime' },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
-            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
-            initialValue: (searchParams.addStartTime === undefined || searchParams.addStartTime ==="" )? "" : [moment(searchParams.addStartTime), moment(searchParams.addEndTime)]
+            fieldProps: { placeholder: ['开始时间', '结束时间'] ,onChange: () => handleStatusOnChange()}, hideInTable: true,
+            initialValue: (searchParams.addStartTime === undefined || searchParams.addStartTime ==="" )? '' : [moment(searchParams.addStartTime), moment(searchParams.addEndTime)]
         },
         {
             title: '结清未复借',
@@ -234,8 +258,9 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
     return (
         <ProTable<UserListContent>
+            formRef={formRef}
             columns={columns}
-            dataSource={userList?.records || []}
+            dataSource={currentData?.records || []}
             loading={isFetching}
             rowKey="id"
             headerTitle={<Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
@@ -248,44 +273,25 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                         {banContextHolder}
                         {contextHolder}
                         <Button onClick={() => {
-                            //  form.resetFields();
                             // @ts-ignore
-                            form.setFieldsValue({...initSearchList,addTimeRange:''})
+                            form.setFieldsValue({ ...initSearchList, addTimeRange: '' })
                             setSearchList(initSearchList);
                             setIsImportTelSale(false);
                             setIsNoLoanAgain(false);
-
+                            setIsExportRemainOrder(false);
                         }}>{resetText}</Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { addTimeRange, appName, channelId, idcardNo, nameTrue, newMember,noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays, phoneNo, riskRank,status } = form.getFieldValue();
-
+                                const { noLoanAgain, noLoanAgainStartDays, noLoanAgainEndDays } = form.getFieldValue();
                                 if (noLoanAgain && noLoanAgainStartDays > noLoanAgainEndDays) {
                                     modal.warning({content:'結清未複借終止天數，需大於結清未複借起始天數'});
                                     return;
                                 }
-
                                 setIsImportTelSale(noLoanAgain === "true" ? true : false)
                                 setIsNoLoanAgain(noLoanAgain === "true" ? true : false);
-                                setSearchList({
-                                    ...searchList,
-                                    addEndTime: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    addStartTime: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
-                                    appName:appName,
-                                    channelId: channelId === '0' ? '' : channelId,
-                                    idcardNo: idcardNo,
-                                    nameTrue: nameTrue,
-                                    newMember: newMember,
-                                    noLoanAgain: noLoanAgain,
-                                    noLoanAgainEndDays: noLoanAgainEndDays,
-                                    noLoanAgainStartDays: noLoanAgainStartDays,
-                                    phoneNo: phoneNo,
-                                    riskRank: riskRank,
-                                    status:status,
-                                    pageNum: 1,
-                                })
+                                setSearchList(getSearchParams())
                                 form.submit();
                             }}
                         >
@@ -298,15 +304,15 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                 setting: { listsHeight: 400, },
                 reload: () => triggerGetList(searchList)
             }}
-            toolBarRender={() => [<Button onClick={handleExportUserList} type='primary'>导出</Button>]}
+            toolBarRender={() => [
+            <Button onClick={()=>handleExportUserList(true)} type='primary' disabled={!isExportRemainOrder}>导出剩馀单量</Button>,
+            <Button onClick={()=>handleExportUserList(false)} type='primary'>导出</Button>]}
             pagination={{
                 showSizeChanger: true,
                 defaultPageSize: 10,
                 onChange: pageOnChange,
-                total: userList?.totalRecords,
-                current: userList?.records?.length === 0 ? 0 : userList.currentPage,
-                // ...pageable,
-                // onChange: pageOnChange,
+                total: currentData?.totalRecords,
+                current: currentData?.records?.length === 0 ? 0 : currentData?.currentPage,
             }}
         />
 
