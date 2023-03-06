@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space,Tag ,Select} from 'antd';
+import { Button, Form, InputNumber, Modal, Radio, Space,Tag ,Select, Tooltip} from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
 import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation,usePostUserBanReleaseMutation ,useDeleteBlackListMutation} from '../../../api/UserApi';
 import moment from 'moment';
@@ -305,8 +305,8 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                 reload: () => triggerGetList(searchList)
             }}
             toolBarRender={() => [
-            <Button onClick={()=>handleExportUserList(true)} type='primary' disabled={!isExportRemainOrder}>导出剩馀单量</Button>,
-            <Button onClick={()=>handleExportUserList(false)} type='primary'>导出</Button>]}
+                <Tooltip placement="top" title={'限制只能导出注册时间1天内且审核通过的用户资料'}><Button onClick={() => handleExportUserList(true)} type='primary' disabled={!isExportRemainOrder}>导出剩馀单量</Button> </Tooltip>,
+                <Button onClick={() => handleExportUserList(false)} type='primary'>导出</Button>]}
             pagination={{
                 showSizeChanger: true,
                 defaultPageSize: 10,
