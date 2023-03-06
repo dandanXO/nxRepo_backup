@@ -89,10 +89,19 @@ const ProductTable = (props: ProductTableProps) => {
             },
 
             { key: 'newGuestProductDisplayStatus', title: '新客优先满足', dataIndex: 'newGuestProductDisplayStatus', hideInSearch: true,
-                render: (text, record) => {
-                    return <Switch onChange={(checked) => {
-                        handleEditProductList(record.productId, {newGuestProductDisplayStatus: checked});
-                    }} checkedChildren="是" unCheckedChildren="否" defaultChecked={record.newGuestProductDisplayStatus}/>;
+                render: (text, record,index) => {
+                    console.log("index", index)
+                    console.log("record.newGuestProductDisplayStatus", record.newGuestProductDisplayStatus)
+                    return (
+                        <Switch
+                            onChange={(checked) => {
+                                handleEditProductList(record.productId, {newGuestProductDisplayStatus: checked});
+                            }}
+                            checkedChildren="是"
+                            unCheckedChildren="否"
+                            checked={record.newGuestProductDisplayStatus}
+                        />
+                    );
                 }},
             {
                 key: 'newGuestMaxThreshold', title: '新客订单上限', dataIndex: 'newGuestMaxThreshold', initialValue: "", hideInSearch: true,
@@ -113,9 +122,16 @@ const ProductTable = (props: ProductTableProps) => {
             },
             { key: 'renewProductDisplayStatus', title: '次新客优先满足', dataIndex: 'renewProductDisplayStatus', hideInSearch: true,
                 render: (text, record) => {
-                    return <Switch onChange={(checked) => {
-                        handleEditProductList(record.productId, {renewProductDisplayStatus: checked});
-                    }} checkedChildren="是" unCheckedChildren="否" defaultChecked={record.renewProductDisplayStatus}/>;
+                    return (
+                        <Switch
+                            onChange={(checked) => {
+                                handleEditProductList(record.productId, {renewProductDisplayStatus: checked});
+                            }}
+                            checkedChildren="是"
+                            unCheckedChildren="否"
+                            checked={record.renewProductDisplayStatus}
+                        />
+                    )
                 }
             },
             {
