@@ -161,9 +161,9 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
     const handleStatusOnChange = () => {
         // @ts-ignore
-        const { status, addTimeRange } = formRef.current.getFieldValue();
+        const { addTimeRange } = formRef.current.getFieldValue();
         const [addStartTime, addEndTime] = addTimeRange ? addTimeRange.map(date => date?.format('YYYY-MM-DD')) : ['', ''];
-        setIsExportRemainOrder(addEndTime !== '' && addStartTime !== '' && addStartTime === addEndTime && status === '20');
+        setIsExportRemainOrder(addEndTime !== '' && addStartTime !== '' && addStartTime === addEndTime);
     }
 
     const columns: ProColumns<UserListContent>[] = [
@@ -202,7 +202,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         },
         {
             title: '用户状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
-            valueEnum: enumObjectToMap(statusEnum), fieldProps: { onChange: () => handleStatusOnChange() },
+            valueEnum: enumObjectToMap(statusEnum),
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
                 return statusEnum[status] ? <Tag color={tagStatus.color}>{tagStatus.text}</Tag> : '-';
