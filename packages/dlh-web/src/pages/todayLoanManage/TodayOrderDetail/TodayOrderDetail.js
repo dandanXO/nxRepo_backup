@@ -248,12 +248,14 @@ class OrderDetail extends Component{
     renderBtn = () => {
         const { isShowBtn } = this.state;
         const ele = isShowBtn ? <Button type={'primary'} onClick={this.handleBtnClick}><FormattedMessage id="windowPage.add.collect.record" /></Button> : null;
+        const { orderData: { orderInfo = {} }, intl } = this.props;
+        const isT_1 = moment(orderInfo.expireTime).subtract(1, 'day').format('YYYY-MM-DD') === moment().startOf('day').format('YYYY-MM-DD');
         return (
             <div className={styles.btnWrapper}>
                 {ele}
                 <Button onClick={this.openRepaymentModel} type={'primary'}><FormattedMessage id="page.table.operation.send.partial.repayment" /></Button>
                 <Button onClick={this.sendPaymentLinks} type={'primary'}><FormattedMessage id="page.table.operation.send.payment.links" /></Button>
-                <Button onClick={this.sendExtensionLinks} type={'primary'}><FormattedMessage id="page.table.operation.send.extension.links" /></Button>
+                <Button onClick={this.sendExtensionLinks} type={'primary'} disabled={isT_1}><FormattedMessage id="page.table.operation.send.extension.links" /></Button>
                 <Button onClick={this.backList}><FormattedMessage id="windowPage.back" /></Button>
             </div>
         );
