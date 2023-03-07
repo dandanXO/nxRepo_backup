@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Button, Card, Row, Col, Tooltip, Icon, Modal, message } from 'antd';
+import { Tabs, Button, Card, Row, Col, Tooltip, Icon, Modal, message,Descriptions } from 'antd';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -14,7 +14,9 @@ import {axios,convertMoneyFormat, emerRelation, maritalStatus,salaryRange, educa
 import {injectIntl, FormattedMessage} from "react-intl";
 import {WatermarkPhoto} from "../../../components/WatermarkPhoto/WatermarkPhoto";
 import { Typography } from 'antd';
+import conf from 'conf';
 const { Paragraph } = Typography;
+const { Item } = Descriptions;
 //还款记录
 const backRecordColumns = [
     {
@@ -45,6 +47,7 @@ const backRecordColumns = [
     { title: <FormattedMessage id="page.search.list.trans.serial.no" />, dataIndex: 'payTradeNo', key: 'payTradeNo' },
     { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorName', key: 'collectorName' }
 ];
+
 //催收记录
 const urgeRecordColumns = [
     {
@@ -316,6 +319,17 @@ class OrderDetail extends Component{
                     {/*</Row>*/}
                 {/*</Card>*/}
                 <CommonTable columns={backRecordColumns} dataSource={orderInfo['backRecord'] || []} title={() => <div><FormattedMessage id="windowPage.repayment.record" /></div>}/>
+                <div className={`${styles.card} ${styles.labelStyle}`}>
+                    <Card bodyStyle={{ padding: 0, margin: '-1px' }} type={'inner'} title={intl.formatMessage({ id: "windowPage.repayment.proof" })}>
+                        <Descriptions size="small" bordered>
+                            <Item label={<FormattedMessage id="page.table.update.time" />} span={3}>{orderInfo['lastUpdateTime'] || "-"}</Item>
+                            {conf.country === "India" && <Item label="UTR" span={3}>{orderInfo['receipt'] || "-"}</Item>}
+                            <Item label={<FormattedMessage id="windowPage.repayment.proof" />} span={3}>
+                                {orderInfo['receiptImgUrl'] ? <img width={200} src={orderInfo['receiptImgUrl']} /> : <Icon style={{ fontSize: '30px' }} type="picture" theme="twoTone" twoToneColor="#ccc" />}
+                            </Item>
+                        </Descriptions>
+                    </Card>
+                </div>
                 <CommonTable columns={urgeRecordColumns} dataSource={orderInfo['urgeRecord'] || []} title={() => <div><FormattedMessage id="windowPage.collect.record" /></div>}/>
                 {/*<CommonTable columns={standOverRecordColumns} dataSource={orderInfo['standOverRecord'] || []} title={() => <div>展期记录</div>}/>*/}
                 <CommonTable columns={this.overdueRecordColumns} dataSource={orderInfo['overdueRecord'] || []} title={() => <div><FormattedMessage id="windowPage.overdue.record" /></div>}/>
