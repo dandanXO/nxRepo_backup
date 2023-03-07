@@ -295,7 +295,7 @@ class AllDataStatistics extends Component {
         } = convertData(tableData);
         return (
             <div>
-                <Card type={'inner'} title={intl.formatMessage({id : "page.table.traffic.statistics"})}>
+                <Card style={{background:'transparent'}} type={'inner'} title={intl.formatMessage({id : "page.table.traffic.statistics"})}>
                     <Row style={{marginBottom: '20px'}}>
                         <Col span={4}>
                             <FormattedMessage id="page.table.today" />
@@ -361,7 +361,7 @@ class AllDataStatistics extends Component {
 
                 <Row gutter={16} style={{ marginBottom: '20px' }}>
                     <Col span={12}>
-                        <Card type={'inner'} title={intl.formatMessage({id : "page.table.expenditure.amount.currency"})}>
+                        <Card style={{background:'transparent'}} type={'inner'} title={intl.formatMessage({id : "page.table.expenditure.amount.currency"})}>
                             <Row style={{ marginBottom: '20px' }}>
                                 <Col span={8}>
                                     <div><FormattedMessage id="page.table.today.loan.amount.currency" /></div>
@@ -401,7 +401,7 @@ class AllDataStatistics extends Component {
                         </Card>
                     </Col>
                     <Col span={12}>
-                        <Card type={'inner'} title={intl.formatMessage({id : "page.table.amount.recovered.currency"})}>
+                        <Card style={{background:'transparent'}} type={'inner'} title={intl.formatMessage({id : "page.table.amount.recovered.currency"})}>
                             <Row style={{ marginBottom: '20px' }}>
                                 <Col span={12}>
                                     <div><FormattedMessage id="page.table.today.principal.repayment.currency" /></div>
@@ -436,7 +436,7 @@ class AllDataStatistics extends Component {
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <Card type={'inner'} title={intl.formatMessage({id : "page.table.amount.repaid.currency"})}>
+                        <Card style={{background:'transparent'}} type={'inner'} title={intl.formatMessage({id : "page.table.amount.repaid.currency"})}>
                             {/*<Row style={{ marginBottom: '20px' }}>*/}
                             {/*<Col span={12}>*/}
                             {/*<div>今日待还金额(₹)</div>*/}
@@ -462,7 +462,7 @@ class AllDataStatistics extends Component {
 
                     </Col>
                     <Col span={12}>
-                        <Card type={'inner'} title={intl.formatMessage({id : "page.table.total.amount.currency"})}>
+                        <Card style={{background:'transparent'}} type={'inner'} title={intl.formatMessage({id : "page.table.total.amount.currency"})}>
                             <Row>
                                 <Col span={12}>
                                     <div><FormattedMessage id="page.table.accumulated.loan.amount.currency" /></div>

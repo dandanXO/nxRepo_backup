@@ -283,7 +283,7 @@ class OrderDetail extends Component{
         const bankInfo = orderInfo['bankInfo'];
         return (
             <div>
-                <Card type={'inner'} title={intl.formatMessage({id:"windowPage.business.info"})}>
+                <Card className={styles.cardBackground} type={'inner'} title={intl.formatMessage({id:"windowPage.business.info"})}>
                     <Row gutter={24}>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.order.no" />：</span><span>{orderInfo.orderNo}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.name" />：</span><span>{orderInfo.name}</span></Col>
@@ -348,7 +348,7 @@ class OrderDetail extends Component{
         const { orderData: { userInfo = {} } , intl} = this.props;
         return (
             <div>
-                <Card type={'inner'} title={ intl.formatMessage({id: "windowPage.person.info"})}>
+                <Card className={styles.cardBackground}  type={'inner'} title={ intl.formatMessage({id: "windowPage.person.info"})}>
                     <Row gutter={16}>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.name" />：</span><span>{userInfo.name || ''}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.mobile" />：</span><span>{userInfo.phoneNo || ''}</span></Col>
@@ -373,7 +373,7 @@ class OrderDetail extends Component{
 
 
                 <div className={styles.cardWrapper}>
-                    <Card type={'inner'} title={intl.formatMessage({id : "windowPage.emergency.contact"})}>
+                    <Card className={styles.cardBackground}  type={'inner'} title={intl.formatMessage({id : "windowPage.emergency.contact"})}>
 
                     {userInfo.emergencyContactInfos && userInfo.emergencyContactInfos.map((emer, i) => {
                         return (
@@ -390,7 +390,7 @@ class OrderDetail extends Component{
 
 
                 <div className={styles.card}>
-                    <Card type={'inner'} title={intl.formatMessage({id: "windowPage.customer.infor"})}>
+                    <Card className={styles.cardBackground}  type={'inner'} title={intl.formatMessage({id: "windowPage.customer.infor"})}>
                         <Row gutter={96}>
                             <Col className={`${styles.col}`} lg={12} xl={8}>
                                 {
