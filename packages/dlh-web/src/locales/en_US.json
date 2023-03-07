@@ -420,6 +420,8 @@
   "page.table.repayment.statis.export": "RepaymentStatistics_{expDate}.xlsx",
   "page.table.maturity": "Maturity",
   "page.table.realtime": "Real time",
+  "page.table.T_1Before": "T-1 Before",
+  "page.table.T_1": "T-1",
   "page.table.T0": "T0",
   "page.table.T1": "T1",
   "page.table.T2T3": "T2-T3",

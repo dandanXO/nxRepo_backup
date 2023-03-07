@@ -425,6 +425,8 @@
   "page.table.repayment.statis.export": "回款统计_{expDate}.xlsx",
   "page.table.maturity": "到期",
   "page.table.realtime": "实时",
+  "page.table.T_1Before": "T-1前",
+  "page.table.T_1": "T-1",
   "page.table.T0": "T0",
   "page.table.T1": "T1",
   "page.table.T2T3": "T2-T3",
