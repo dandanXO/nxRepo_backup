@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Image, Descriptions, Table,Modal, Tooltip } from 'antd';
 const { Item } = Descriptions;
 import { useGetUserDetailQuery } from "../../api/UserInfoApi";
-import { GetUserDetailResponse } from "../../../sms/api/userInfoTypes/getUserDetail";
+import { GetUserDetailResponse } from "../../api/userInfoTypes/getUserDetail";
 import { UserId } from "../../domain/UserId";
 import moment from "moment";
 import { WaterMark } from '@ant-design/pro-components';
