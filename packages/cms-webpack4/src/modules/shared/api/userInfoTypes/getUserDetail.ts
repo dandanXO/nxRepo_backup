@@ -11,6 +11,7 @@ export interface GetUserDetailResponse {
     userKycInfoVo?: UserKycInfoVo;
     userThirdInfo?: UserThirdInfoVo;
     userRiskControlInfo?: UserRiskControlInfo;
+    userRiskControlInfos?: UserRiskControlInfo[];
 }
 
 export interface UserEmergencyContacts {
