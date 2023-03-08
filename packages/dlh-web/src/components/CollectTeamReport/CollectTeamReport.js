@@ -61,7 +61,7 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
             title: <FormattedMessage id="page.table.collect-team" />, className: 'teams',
             children: [
                 {
-                    title: <FormattedMessage id="page.table.name" />, dataIndex: "team", key: "team", className: 'teams',
+                    title: <FormattedMessage id="page.table.name" />, dataIndex: "team", key: "team", className: 'teams',width:'100px',
                     render: (value, row) => renderRowSpan(row.reportDate, row.team, "reportDate", row.reportDate, "team", value, row.rowIndex)
                 },
                 {
@@ -79,6 +79,10 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
                 {
                     title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "teamAchievedMoneyRate", key: "teamAchievedMoneyRate", className: 'teams',
                     render: (value, row) => renderRowSpan(row.reportDate, row.team, "team", row.team, "teamAchievedMoneyRate", value, row.rowIndex)
+                },
+                {
+                    title: <FormattedMessage id="page.table.partial.repayment.amount" />, dataIndex: "teamTotalPartialMoney", key: "teamTotalPartialMoney", className: 'teams',
+                    render: (value, row) => renderRowSpan(row.reportDate, row.team, "team", row.team, "teamTotalPartialMoney", value, row.rowIndex)
                 }
             ]
         },
@@ -104,17 +108,22 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
                 {
                     title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "groupAchievedMoneyRate", key: "groupAchievedMoneyRate", className: 'groups',
                     render: (value, row) => renderRowSpan(row.reportDate, row.team, "group", row.group, "groupAchievedMoneyRate", value, row.rowIndex)
-                }
+                },
+                {
+                    title: <FormattedMessage id="page.table.partial.repayment.amount"/>, dataIndex: "groupTotalPartialMoney", key: "groupTotalPartialMoney", className: 'groups',
+                    render: (value, row) => renderRowSpan(row.reportDate, row.team, "group", row.group, "groupTotalPartialMoney", value, row.rowIndex)
+                },
             ]
         },
         {
             title: <FormattedMessage id="windowPage.collector" />, className: 'collectors',
             children: [
                 { title: <FormattedMessage id="page.table.name" />, dataIndex: "collector", key: "collector", className: 'name' },
-                { title: <FormattedMessage id="page.table.count" />, dataIndex: "collectorCount", key: "collectorCount", className: 'count' },
+                { title: <FormattedMessage id="page.table.count" />, dataIndex: "collectorCount", key: "collectorCount", className: 'count'},
                 { title: <FormattedMessage id="page.table.rate" />, dataIndex: "collectorRate", key: "collectorRate", className: 'rate' },
                 { title: <FormattedMessage id="page.table.achieved.amount" />, dataIndex: "collectorAchievedMoney", key: "collectorAchievedMoney", className: 'collectorAchievedMoney' },
-                { title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "collectorAchievedMoneyRate", key: "collectorAchievedMoneyRate", className: 'collectorAchievedMoneyRate' }
+                { title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "collectorAchievedMoneyRate", key: "collectorAchievedMoneyRate", className: 'collectorAchievedMoneyRate' },
+                { title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "collectorTotalPartialMoney", key: "collectorTotalPartialMoney", className: 'collectorTotalPartialMoney' }
             ]
         }
     ];

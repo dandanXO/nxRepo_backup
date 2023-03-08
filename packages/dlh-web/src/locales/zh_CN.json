@@ -1004,6 +1004,7 @@
   "page.table.rate": "达成率",
   "page.table.achieved.amount": "达成金额",
   "page.table.achievement.rate": "金额达成率",
+  "page.table.partial.repayment.amount": "部分还款金额",
   "page.table.enter": "请输入{text}",
   "page.table.report.date": "报表日期",
   "page.table.collect-team.name": "催收团队名称",

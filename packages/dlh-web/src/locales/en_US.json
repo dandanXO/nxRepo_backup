@@ -677,6 +677,7 @@
   "page.table.rate": "Rate",
   "page.table.achieved.amount": "Achieved amount",
   "page.table.achievement.rate": "Achievement rate",
+  "page.table.partial.repayment.amount": "Partial Repayment Amount",
   "page.table.enter": "Please Enter {text}",
   "page.table.Expand": "Expand",
   "page.table.Collapse": "Collapse",
