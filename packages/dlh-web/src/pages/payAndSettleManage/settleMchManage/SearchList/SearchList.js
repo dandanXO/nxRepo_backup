@@ -61,7 +61,7 @@ class SearchList extends Component{
                                         <Select initialValue=''>
                                             <Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
                                             {allSettlePlatList.length > 0 && allSettlePlatList.map((item, i) => {
-                                                return <Select.Option key={i} value={item.id}>{item.platName}</Select.Option>
+                                                return <Select.Option key={i} value={item.platId}>{item.platName}</Select.Option>
                                             })}
                                         </Select>
                                     )
