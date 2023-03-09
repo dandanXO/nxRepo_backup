@@ -24,6 +24,7 @@ class PayMchList extends Component {
             modelId: null,
             allPayPlatList:[],
             allPayTypeList:[],
+            filterPayPlatList:[],
             pagination: {
                 pageSize: this.pageSize
             },
@@ -59,8 +60,8 @@ class PayMchList extends Component {
                 render(text) {
                     let showStr = '';
                     if (!!text) {
-                        let { allPayPlatList } = _this.state;
-                        let payPlat = allPayPlatList.find(item => item.platId == text);
+                        let { filterPayPlatList } = _this.state;
+                        let payPlat = filterPayPlatList.find(item => item.platId == text);
                         if (!!payPlat) {
                             showStr = payPlat.platName;
                         }
@@ -293,21 +294,39 @@ class PayMchList extends Component {
                 method: 'get',
             }).then((res) => {
                 _this.setState({
-                    allPayPlatList: res || []
+                    filterPayPlatList: res || []
                 });
             });
         } catch (e) {
         }
+
+        try {
+            const _this = this;
+            axios({
+                url: '/hs/payCenter/jsonGateWay?tar=/api/v1/PayPlat/list',
+                method: 'post',
+                data: {pageSize: 1000, pageNum: 1}
+            }).then((res) => {
+                if(res && res.code == '200') {
+                    let { data: { content }} = res;
+                    _this.setState({
+                        allPayPlatList: content || []
+                    });
+                }
+            });
+        } catch (e) {
+        }
+
     }
 
     render() {
         const { pagination } = this.state;
         const { tableData: { data }, loading, visible, info } = this.props;
-        const { allPayPlatList,allPayTypeList } = this.state;
+        const { allPayPlatList,allPayTypeList,filterPayPlatList } = this.state;
         return (
             <div>
                 <SearchList
-                    allPayPlatList={allPayPlatList}
+                    allPayPlatList={filterPayPlatList}
                     handleSearch={this.handleSearch}
                     isSuperAdmin={this.state.isSuperAdmin}
                     allMerchants={this.state.allMerchants}

@@ -25,6 +25,7 @@ class SettleMchList extends Component {
         this.state = {
             modelId: null,
             allSettlePlatList:[],
+            filterSettlePlatList:[],
             pagination: {
                 pageSize: this.pageSize
             },
@@ -61,9 +62,9 @@ class SettleMchList extends Component {
                 render(text) {
                     let showStr = '';
                     if(!!text){
-                        let {allSettlePlatList} = _this.state;
-                        let settlePlat = allSettlePlatList.find(item => item.platId == text);
-                        if(!!settlePlat){
+                        let { filterSettlePlatList } = _this.state;
+                        let settlePlat = filterSettlePlatList.find(item => item.platId == text);
+                        if (!!settlePlat) {
                             showStr = settlePlat.platName;
                         }
                     }
@@ -252,24 +253,44 @@ class SettleMchList extends Component {
                 url: '/hs/admin/pay-center/settle-plat/by-merchant',
                 method: 'get',
             }).then((res) => {
+                console.log(res)
                 _this.setState({
-                    allSettlePlatList: res || []
+                    filterSettlePlatList: res || []
                 });
+            });
+        } catch (e) {}
+
+        try {
+            const _this = this;
+            axios({
+                url: '/hs/payCenter/jsonGateWay?tar=/api/v1/SettlePlat/list',
+                method: 'post',
+                data: {pageSize: 1000, pageNum: 1}
+             
+            }).then((res) => {
+                if(res && res.code == '200') {
+                    let { data: { content }} = res;
+                    _this.setState({
+                        allSettlePlatList: content || []
+                    });
+                }
             });
         } catch (e) {
         }
+
+
     }
 
     render() {
         // const { pagination } = this.state;
         const { tableData: { data, pagination }, loading, visible, info } = this.props;
-        const { allSettlePlatList } = this.state;
+        const { allSettlePlatList, filterSettlePlatList } = this.state;
         return (
             <div>
-                <SearchList allSettlePlatList={allSettlePlatList} handleSearch={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <SearchList allSettlePlatList={filterSettlePlatList} handleSearch={this.handleSearch} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants} />
                 <Button type={'primary'} onClick={this.handleAddModel}><FormattedMessage id="page.table.add" /></Button>
-                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading}/>
-                <EditModel visible={visible} allSettlePlatList={allSettlePlatList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
+                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading} />
+                <EditModel visible={visible} allSettlePlatList={allSettlePlatList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants} />
             </div>
         );
     }
