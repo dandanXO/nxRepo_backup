@@ -9,6 +9,7 @@ import {PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBi
 import {PostLoanSubmitOrderRequestBody} from "./postLoanSubmitOrder";
 import {GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring} from "./getLoanRecommend";
 import {GetBindCardDropListResponse} from "./GetBindCardDropList";
+import {GetPersonalLoanRecommendRequestQuerystring, GetPersonalLoanRecommendResponse} from "./GetPersonalLoanRecommend";
 
 interface GetActivityAdsRequest {
   phoneNo: string;
@@ -126,6 +127,7 @@ export const API = createApi({
                 data: requestBody,
             }),
         }),
+        // NOTICE: deprecated
         // NOTE: 借款产品推荐
         getLoanRecommend: builder.query<GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring>({
             query: (query: GetLoanRecommendRequestQuerystring) => ({
@@ -133,6 +135,14 @@ export const API = createApi({
                 url: `/loan/recommend`,
                 params: query
             }),
+        }),
+        // NOTE: 個人借款推荐
+        getPersonalLoanRecommend: builder.query<GetPersonalLoanRecommendResponse, GetPersonalLoanRecommendRequestQuerystring>({
+          query: (query: GetPersonalLoanRecommendRequestQuerystring) => ({
+            method: "get",
+            url: `/product/personal-recommend`,
+            params: query
+          }),
         }),
         // NOTE: 取得活動廣告橫幅內容
         getActivityAds: builder.query<GetActivityAdsResponse, GetActivityAdsRequest>({
@@ -160,4 +170,5 @@ export const {
     usePostLoanSubmitOrderMutation,
     useGetLoanRecommendQuery,
     useLazyGetActivityAdsQuery,
+    useGetPersonalLoanRecommendQuery,
 } = API;
