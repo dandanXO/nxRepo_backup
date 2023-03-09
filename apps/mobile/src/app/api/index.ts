@@ -171,4 +171,5 @@ export const {
     useGetLoanRecommendQuery,
     useLazyGetActivityAdsQuery,
     useGetPersonalLoanRecommendQuery,
+    useLazyGetPersonalLoanRecommendQuery,
 } = API;

@@ -1,7 +1,11 @@
 import { Page } from "@frontend/mobile/shared/ui";
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import {useGetLoanRecommendQuery, useGetPersonalLoanRecommendQuery} from "../../../api";
+import {
+  useGetLoanRecommendQuery,
+  useGetPersonalLoanRecommendQuery,
+  useLazyGetPersonalLoanRecommendQuery
+} from "../../../api";
 import {environment} from "../../../../environments/environment";
 import {useTranslation} from "react-i18next";
 import {i18nProductAdModalListPage} from "./i18n/translations";
@@ -191,7 +195,7 @@ const StyledList = styled.div`
   max-height: 196px;
   overflow: auto;
 
-  .loading-container {
+  .container {
     height: 196px;
     display: flex;
     justify-content: center;
@@ -201,10 +205,16 @@ const StyledList = styled.div`
 
 const ProductAdModalListPage = () => {
 
-    // const { currentData, isLoading, isFetching } = useGetLoanRecommendQuery({ count: '' });
     const { currentData, isLoading, isFetching } = useGetPersonalLoanRecommendQuery({
       count: "",
     });
+
+    // const [trigger, { currentData: currentLazyData, isLoading: isLazyLoading, isFetching: isLazyFetching }] = useLazyGetPersonalLoanRecommendQuery({});
+    // useEffect(() => {
+    //   trigger({count: "1"});
+    //   trigger({count: "2"});
+    //   trigger({count: "3"});
+    // }, [])
 
     const [currentValue, setCurrentValue] = useState<number>(0);
 
@@ -216,7 +226,7 @@ const ProductAdModalListPage = () => {
 
     let resultProductId: number[] = [];
 
-    const [productList, setProductList] = useState<RecommendProduct[]>();
+    const [productList, setProductList] = useState<RecommendProduct[]>([]);
     useEffect(() => {
       if(currentData?.quotaBar.current) {
         let currentPrice = 0;
@@ -274,8 +284,13 @@ const ProductAdModalListPage = () => {
 
           <StyledList>
             {isLoading && (
-              <div className="loading-container">
+              <div className="container">
                 <div>Loading</div>
+              </div>
+            )}
+            {!isLoading && productList?.length === 0 && (
+              <div className="container">
+                <div>Empty</div>
               </div>
             )}
             {!isLoading && productList?.map((product) => (
