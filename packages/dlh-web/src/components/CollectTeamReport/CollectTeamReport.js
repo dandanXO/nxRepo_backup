@@ -123,7 +123,7 @@ function CollectTeamReport({ type,teamsData, tableData, getReportData, initTime,
                 { title: <FormattedMessage id="page.table.rate" />, dataIndex: "collectorRate", key: "collectorRate", className: 'rate' },
                 { title: <FormattedMessage id="page.table.achieved.amount" />, dataIndex: "collectorAchievedMoney", key: "collectorAchievedMoney", className: 'collectorAchievedMoney' },
                 { title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "collectorAchievedMoneyRate", key: "collectorAchievedMoneyRate", className: 'collectorAchievedMoneyRate' },
-                { title: <FormattedMessage id="page.table.achievement.rate" />, dataIndex: "collectorTotalPartialMoney", key: "collectorTotalPartialMoney", className: 'collectorTotalPartialMoney' }
+                { title: <FormattedMessage id="page.table.partial.repayment.amount" />, dataIndex: "collectorTotalPartialMoney", key: "collectorTotalPartialMoney", className: 'collectorTotalPartialMoney' }
             ]
         }
     ];
