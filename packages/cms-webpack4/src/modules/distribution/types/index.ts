@@ -24,6 +24,7 @@ export type CollectDistributionQueryRequest  = {
     expireEndTime?: string;
     expireStartTime?: string;
     dateRange?: any;
+    oldUser?: boolean;
 } & PageRequest;
 
 export interface CollectDistributionQueryResponse {
@@ -62,6 +63,9 @@ export interface CollectDistributionQueryResponse {
 
     userName: string;
     // 用姓名
+
+    oldUser?: boolean;
+    // 是否为新老客
 }
 
 export interface DistributeCollectByStageResponse {
