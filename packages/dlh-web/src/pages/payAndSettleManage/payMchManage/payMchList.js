@@ -60,7 +60,7 @@ class PayMchList extends Component {
                     let showStr = '';
                     if (!!text) {
                         let { allPayPlatList } = _this.state;
-                        let payPlat = allPayPlatList.find(item => item.id == text);
+                        let payPlat = allPayPlatList.find(item => item.platId == text);
                         if (!!payPlat) {
                             showStr = payPlat.platName;
                         }
@@ -289,18 +289,12 @@ class PayMchList extends Component {
         try {
             const _this = this;
             axios({
-                url: '/hs/payCenter/jsonGateWay?tar=/api/v1/PayPlat/list',
-                method: 'post',
-                data: {pageSize: 1000, pageNum: 1}
+                url: '/hs/admin/pay-center/pay-plat/by-merchant',
+                method: 'get',
             }).then((res) => {
-                if(res && res.code == '200') {
-                    let { data: { content }} = res;
-                    // content = content.map(item => ({ id: item.id, pId: 0, value: item.id + '', label: item.typeName+'('+item.typeAlias+')' }));
-                    _this.setState({
-                        allPayPlatList: content || []
-                    });
-                    // console.dir(content);
-                }
+                _this.setState({
+                    allPayPlatList: res || []
+                });
             });
         } catch (e) {
         }
