@@ -1,7 +1,7 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import {ProTable } from '@ant-design/pro-components';
 import { useLazyGetUserSMSListQuery } from "../../api/UserInfoApi";
-import { GetUserSms } from '../../../sms/api/userInfoTypes/getUserSms';
+import { GetUserSms } from '../../api/userInfoTypes/getUserSms';
 import { UserId } from '../../domain/UserId';
 import { useEffect, useState } from 'react';
 const SmsMessage = ({userId}:UserId) => {

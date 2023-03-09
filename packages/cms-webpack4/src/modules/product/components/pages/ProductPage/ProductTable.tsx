@@ -90,8 +90,6 @@ const ProductTable = (props: ProductTableProps) => {
 
             { key: 'newGuestProductDisplayStatus', title: '新客优先满足', dataIndex: 'newGuestProductDisplayStatus', hideInSearch: true,
                 render: (text, record,index) => {
-                    console.log("index", index)
-                    console.log("record.newGuestProductDisplayStatus", record.newGuestProductDisplayStatus)
                     return (
                         <Switch
                             onChange={(checked) => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Image, Descriptions, Table,Modal, Tooltip } from 'antd';
 const { Item } = Descriptions;
 import { useGetUserDetailQuery } from "../../api/UserInfoApi";
-import { GetUserDetailResponse } from "../../../sms/api/userInfoTypes/getUserDetail";
+import { GetUserDetailResponse } from "../../api/userInfoTypes/getUserDetail";
 import { UserId } from "../../domain/UserId";
 import moment from "moment";
 import { WaterMark } from '@ant-design/pro-components';
@@ -42,7 +42,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
         }}
     ];
     const [userDetail, setUserDetail] = useState<GetUserDetailResponse>({
-        emergencyContacts: [], personaInfoVo: {}, userDevice: {}, userImage: {}, userKycInfoVo: {}, userThirdInfo: {}, userRiskControlInfo: {}
+        emergencyContacts: [], personaInfoVo: {}, userDevice: {}, userImage: {}, userKycInfoVo: {}, userThirdInfo: {}, userRiskControlInfo: {}, userRiskControlInfos: []
     });
     useEffect(() => {
         if (currentData !== undefined) {
@@ -50,7 +50,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
         }
     }, [currentData]);
 
-    const { personaInfoVo, userImage, userKycInfoVo, userDevice, emergencyContacts, userThirdInfo, userRiskControlInfo } = userDetail;
+    const { personaInfoVo, userImage, userKycInfoVo, userDevice, emergencyContacts, userThirdInfo, userRiskControlInfo ,userRiskControlInfos} = userDetail;
     const { channelName = "", phoneNo = "", appName = "", nameTrue = "", gender = "", idcardNo = "", fatherName = "", birth = "", panId = "", email = "", education = "", marriageStatus = "", position = "", salaryRange = "", address = "", bankCardNo = "", ifscCode = "", addTime = "", userSource = "" } = personaInfoVo;
     const { idcardBackPhoto = "", idcardFrontPhoto = "", idcardPortraitPhoto = "", panPhoto = "" } = userImage;
     const { pan = "", idcard = "", isAuth = "", emergency = "", liveness = "", bank = "", kycFinishTime = "" } = userKycInfoVo;
@@ -133,14 +133,20 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
                 <Item label="家庭地址">{address || "-"}</Item>
             </Descriptions>
         </CardStyle>
-        {type === 'order' && userRiskControlInfo && <CardStyle title="风控信息">
+        {type === 'order' && userRiskControlInfos && <CardStyle title="风控信息">
             <Descriptions size="small" bordered >
-                <Item label="风控应用">{userRiskControlInfo?.rcProvider || "-"}</Item>
-                <Item label="风控等級">{userRiskControlInfo?.riskRank || "-"}</Item>
-                <Item label="风控分数">{userRiskControlInfo?.riskScore === 0 || userRiskControlInfo?.riskScore ? userRiskControlInfo?.riskScore : "-"}</Item>
-                <Item label="可借款订单数">{userRiskControlInfo?.maxLoanApplyCount === 0 || userRiskControlInfo?.maxLoanApplyCount ? userRiskControlInfo?.maxLoanApplyCount : "-"}</Item>
-                <Item label="可借建议金额">{userRiskControlInfo?.maxAmount === 0 || userRiskControlInfo?.maxAmount ? userRiskControlInfo?.maxAmount : "-"}</Item>
-                <Item label="订单风控更新时间">{userRiskControlInfo?.orderReviewUpdateTime ? moment(userRiskControlInfo?.orderReviewUpdateTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
+                {
+                    userRiskControlInfos.map((i, index) => {
+                        return <>
+                            <Item label={`风控应用 ${Number(index) + 1}`}>{i?.rcProvider || "-"}</Item>
+                            <Item label="风控等級">{i?.riskRank || "-"}</Item>
+                            <Item label="风控分数">{i?.riskScore === 0 || i?.riskScore ? i?.riskScore : "-"}</Item>
+                            <Item label="可借款订单数">{i?.maxLoanApplyCount === 0 || i?.maxLoanApplyCount ? i?.maxLoanApplyCount : "-"}</Item>
+                            <Item label="可借建议金额">{i?.maxAmount === 0 || i?.maxAmount ? i?.maxAmount : "-"}</Item>
+                            <Item label="订单风控更新时间">{i?.orderReviewUpdateTime ? moment(i?.orderReviewUpdateTime).format('YYYY-MM-DD HH:mm:ss') : "-"}</Item>
+                        </>
+                    })
+                }
             </Descriptions>
         </CardStyle>}
         <CardStyle title="设备信息">

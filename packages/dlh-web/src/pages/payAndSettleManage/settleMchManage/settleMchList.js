@@ -62,7 +62,7 @@ class SettleMchList extends Component {
                     let showStr = '';
                     if(!!text){
                         let {allSettlePlatList} = _this.state;
-                        let settlePlat = allSettlePlatList.find(item => item.id == text);
+                        let settlePlat = allSettlePlatList.find(item => item.platId == text);
                         if(!!settlePlat){
                             showStr = settlePlat.platName;
                         }
@@ -249,16 +249,12 @@ class SettleMchList extends Component {
         try {
             const _this = this;
             axios({
-                url: '/hs/payCenter/jsonGateWay?tar=/api/v1/SettlePlat/list',
-                method: 'post',
-                data: {pageSize: 1000, pageNum: 1}
+                url: '/hs/admin/pay-center/settle-plat/by-merchant',
+                method: 'get',
             }).then((res) => {
-                if(res && res.code == '200') {
-                    let { data: { content }} = res;
-                    _this.setState({
-                        allSettlePlatList: content || []
-                    });
-                }
+                _this.setState({
+                    allSettlePlatList: res || []
+                });
             });
         } catch (e) {
         }

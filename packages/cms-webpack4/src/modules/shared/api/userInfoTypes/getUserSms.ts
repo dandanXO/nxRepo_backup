@@ -1,4 +1,4 @@
-import { GetPageableResponse } from "../../../shared/api/commonReponse";
+import { GetPageableResponse } from "../commonReponse";
 
 export interface GetUserSmsResponse{
     records:GetUserSms[]

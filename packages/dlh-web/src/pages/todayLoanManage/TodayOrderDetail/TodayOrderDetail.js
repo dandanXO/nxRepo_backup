@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Button, Card, Row, Col, Tooltip, Icon, Modal, message } from 'antd';
+import { Tabs, Button, Card, Row, Col, Tooltip, Icon, Modal, message,Descriptions } from 'antd';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -15,8 +15,9 @@ import { axios } from 'utils';
 import { injectIntl, FormattedMessage } from "react-intl";
 import {WatermarkPhoto} from "../../../components/WatermarkPhoto/WatermarkPhoto";
 import { Typography } from 'antd';
+import conf from 'conf';
 const { Paragraph } = Typography;
-
+const { Item } = Descriptions;
 class OrderDetail extends Component{
     constructor(props) {
         super(props);
@@ -89,6 +90,7 @@ class OrderDetail extends Component{
             { title: <FormattedMessage id="page.search.list.trans.serial.no" />, dataIndex: 'payTradeNo', key: 'payTradeNo' },
             { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorName', key: 'collectorName' }
         ];
+
         //催收记录
         this.urgeRecordColumns = [
             {
@@ -248,12 +250,14 @@ class OrderDetail extends Component{
     renderBtn = () => {
         const { isShowBtn } = this.state;
         const ele = isShowBtn ? <Button type={'primary'} onClick={this.handleBtnClick}><FormattedMessage id="windowPage.add.collect.record" /></Button> : null;
+        const { orderData: { orderInfo = {} }, intl } = this.props;
+        const isT_1 = moment(orderInfo.expireTime).subtract(1, 'day').format('YYYY-MM-DD') === moment().startOf('day').format('YYYY-MM-DD');
         return (
             <div className={styles.btnWrapper}>
                 {ele}
                 <Button onClick={this.openRepaymentModel} type={'primary'}><FormattedMessage id="page.table.operation.send.partial.repayment" /></Button>
                 <Button onClick={this.sendPaymentLinks} type={'primary'}><FormattedMessage id="page.table.operation.send.payment.links" /></Button>
-                <Button onClick={this.sendExtensionLinks} type={'primary'}><FormattedMessage id="page.table.operation.send.extension.links" /></Button>
+                <Button onClick={this.sendExtensionLinks} type={'primary'} disabled={isT_1}><FormattedMessage id="page.table.operation.send.extension.links" /></Button>
                 <Button onClick={this.backList}><FormattedMessage id="windowPage.back" /></Button>
             </div>
         );
@@ -273,14 +277,13 @@ class OrderDetail extends Component{
     //渲染订单信息
     renderOrderCard = () => {
         const { orderData: { orderInfo = {} }, intl } = this.props;
-        console.log(orderInfo);
         const info = orderInfo['icloud'] || {};
         const isOlduserStyle = orderInfo['isOlduser'] === intl.formatMessage({id: "page.table.yes"}) ? { color: 'red' } : {};
         const standOverNumberStyle = Number(orderInfo.standOverNumber) > 0 ? { color: 'red' } : {};
         const bankInfo = orderInfo['bankInfo'];
         return (
             <div>
-                <Card type={'inner'} title={intl.formatMessage({id:"windowPage.business.info"})}>
+                <Card className={styles.cardBackground} type={'inner'} title={intl.formatMessage({id:"windowPage.business.info"})}>
                     <Row gutter={24}>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.order.no" />：</span><span>{orderInfo.orderNo}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.name" />：</span><span>{orderInfo.name}</span></Col>
@@ -321,6 +324,17 @@ class OrderDetail extends Component{
                     {/*</Row>*/}
                 {/*</Card>*/}
                 <CommonTable columns={this.backRecordColumns} dataSource={orderInfo['backRecord'] || []} title={() => <div><FormattedMessage id="windowPage.repayment.record" /></div>}/>
+                <div className={`${styles.card} ${styles.labelStyle}`}>
+                    <Card bodyStyle={{ padding: 0, margin: '-1px' }} type={'inner'} title={intl.formatMessage({ id: "windowPage.repayment.proof" })}>
+                        <Descriptions size="small" bordered>
+                            <Item label={<FormattedMessage id="page.table.update.time" />} span={3}>{orderInfo['lastUpdateTime'] || "-"}</Item>
+                            {conf.country === "India" && <Item label="UTR" span={3}>{orderInfo['receipt'] || "-"}</Item>}
+                            <Item label={<FormattedMessage id="windowPage.repayment.proof" />} span={3}>
+                                {orderInfo['receiptImgUrl'] ? <img width={200} src={orderInfo['receiptImgUrl']} /> : <Icon style={{ fontSize: '30px' }} type="picture" theme="twoTone" twoToneColor="#ccc" />}
+                            </Item>
+                        </Descriptions>
+                    </Card>
+                </div>
                 <CommonTable columns={this.urgeRecordColumns} dataSource={orderInfo['urgeRecord'] || []} title={() => <div><FormattedMessage id="windowPage.collect.record" /></div>}/>
                 {/*<CommonTable columns={this.standOverRecordColumns} dataSource={orderInfo['standOverRecord'] || []} title={() => <div>展期记录</div>}/>*/}
                 {/* <CommonTable columns={this.overdueRecordColumns} dataSource={orderInfo['overdueRecord'] || []} title={() => <div>逾期记录</div>}/> */}
@@ -334,7 +348,7 @@ class OrderDetail extends Component{
         const { orderData: { userInfo = {} } , intl} = this.props;
         return (
             <div>
-                <Card type={'inner'} title={ intl.formatMessage({id: "windowPage.person.info"})}>
+                <Card className={styles.cardBackground}  type={'inner'} title={ intl.formatMessage({id: "windowPage.person.info"})}>
                     <Row gutter={16}>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.name" />：</span><span>{userInfo.name || ''}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.search.list.mobile" />：</span><span>{userInfo.phoneNo || ''}</span></Col>
@@ -359,7 +373,7 @@ class OrderDetail extends Component{
 
 
                 <div className={styles.cardWrapper}>
-                    <Card type={'inner'} title={intl.formatMessage({id : "windowPage.emergency.contact"})}>
+                    <Card className={styles.cardBackground}  type={'inner'} title={intl.formatMessage({id : "windowPage.emergency.contact"})}>
 
                     {userInfo.emergencyContactInfos && userInfo.emergencyContactInfos.map((emer, i) => {
                         return (
@@ -376,7 +390,7 @@ class OrderDetail extends Component{
 
 
                 <div className={styles.card}>
-                    <Card type={'inner'} title={intl.formatMessage({id: "windowPage.customer.infor"})}>
+                    <Card className={styles.cardBackground}  type={'inner'} title={intl.formatMessage({id: "windowPage.customer.infor"})}>
                         <Row gutter={96}>
                             <Col className={`${styles.col}`} lg={12} xl={8}>
                                 {

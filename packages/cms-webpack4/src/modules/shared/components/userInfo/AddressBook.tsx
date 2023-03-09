@@ -3,7 +3,7 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { useGetUserContactsListQuery,useLazyGetUserContactsListQuery } from '../../api/UserInfoApi';
 import { UserId } from "../../domain/UserId";
-import { GetUserContacts } from "../../../sms/api/userInfoTypes/getUserContacts"
+import { GetUserContacts } from "../../api/userInfoTypes/getUserContacts"
 import { useEffect, useState } from 'react';
 import usePageable from '../../hooks/usePageable';
 const AddressBook = (({ userId }: UserId) => {

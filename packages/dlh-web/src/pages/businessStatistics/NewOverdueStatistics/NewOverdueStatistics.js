@@ -40,7 +40,7 @@ class NewOverdueStatistics extends Component {
         this.isStatistLeng = false;
         const _this = this;
         this.searchParams = this.convertParams({});
-      
+
     }
 
 
@@ -92,7 +92,7 @@ class NewOverdueStatistics extends Component {
         this.searchParams = this.convertParams({});
         getTableData({ ...this.searchParams });
         this.getChannelList();
-      
+
     }
 
     getChannelList() {
@@ -114,11 +114,11 @@ class NewOverdueStatistics extends Component {
     }
 
 
-   
+
     render() {
         const { tableData: { list, total }, loading } = this.props;
         const {channelList} = this.state;
-        
+
         const numberToFixed = (text) => {
             return <CopyText text={`${(Number(text) * 100).toFixed(2)}%`} />
         }
@@ -135,6 +135,14 @@ class NewOverdueStatistics extends Component {
             {
                 title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.realtime" />} contentText={total ? total.paidOrderTotal : ''} />,
                 dataIndex: 'paidOrderTotal', key: 'paidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T_1Before" />} contentText={total ? total.t_1BeforePaidOrderTotal : ''} />,
+                dataIndex: 't_1BeforePaidOrderTotal', key: 't_1BeforePaidOrderTotal', width: '3%'
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T_1" />} contentText={total ? total.t_1PaidOrderTotal : ''} />,
+                dataIndex: 't_1PaidOrderTotal', key: 't_1PaidOrderTotal', width: '3%'
             },
             {
                 title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.T0" />} contentText={total ? total.t0PaidOrderTotal : ''} />,
@@ -168,6 +176,18 @@ class NewOverdueStatistics extends Component {
                 title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.realtime.repayment" }) + '%'}
                     contentText={total ? numberToFixed(total.paidOrderRate) : ''} />,
                 dataIndex: 'paidOrderRate', key: 'paidOrderRate', width: '7%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T_1Before" }) + '%'}
+                                          contentText={total ? numberToFixed(total.t_1BeforePaidOrderRate) : ''} />,
+                dataIndex: 't_1BeforePaidOrderRate', key: 't_1BeforePaidOrderRate', width: '5%',
+                render (text, record) { return numberToFixed(text); }
+            },
+            {
+                title: <CustomColumnTitle titleText={this.props.intl.formatMessage({ id: "page.table.T_1" }) + '%'}
+                                          contentText={total ? numberToFixed(total.t_1PaidOrderRate) : ''} />,
+                dataIndex: 't_1PaidOrderRate', key: 't_1PaidOrderRate', width: '5%',
                 render (text, record) { return numberToFixed(text); }
             },
             {
@@ -239,7 +259,7 @@ class NewOverdueStatistics extends Component {
                 render (text, record) { return numberToFixed(text); }
             },
         ];
-        
+
         return (
             <div className={styles.newOverdueStatisticsTable}>
                 <SearchList

@@ -125,6 +125,19 @@ export const OverdueDistributionPage = () => {
             render: (text) => <CopyText text={text} />
         },
         {
+            key: 'oldUser',
+            title: '老客下单',
+            dataIndex: 'oldUser',
+            initialValue: "",
+            valueEnum: {
+                '': { text: '不限' },
+                true: { text: '是' },
+                false: { text: '否' },
+            },
+            valueType: 'select',
+            align: 'center'
+        },
+        {
             key: 'deviceMoney',
             title: '申请金额',
             dataIndex: 'deviceMoney',

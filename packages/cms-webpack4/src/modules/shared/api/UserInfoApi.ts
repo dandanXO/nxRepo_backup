@@ -1,10 +1,10 @@
 import { API } from "./index";
-import { GetUserInfoRequestQuerystring } from "../../sms/api/userInfoTypes/getUserInfoRequestString";
-import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "../../sms/api/userInfoTypes/getUserDetail";
-import { GetUserSmsProps } from "../../sms/api/userInfoTypes/getUserSms";
-import { GetUserContactsProps } from "../../sms/api/userInfoTypes/getUserContacts";
-import { GetUserOrdersProps } from "../../sms/api/userInfoTypes/getUserOrders";
-import { GetOrderDetailResponse ,GetOrderDetailRequestQuerystring} from "../../sms/api/userInfoTypes/getOrderDetail";
+import { GetUserInfoRequestQuerystring } from "./userInfoTypes/getUserInfoRequestString";
+import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./userInfoTypes/getUserDetail";
+import { GetUserSmsProps } from "./userInfoTypes/getUserSms";
+import { GetUserContactsProps } from "./userInfoTypes/getUserContacts";
+import { GetUserOrdersProps } from "./userInfoTypes/getUserOrders";
+import { GetOrderDetailResponse ,GetOrderDetailRequestQuerystring} from "./userInfoTypes/getOrderDetail";
 
 const UserInfoApi = API.injectEndpoints({
     overrideExisting: false,
