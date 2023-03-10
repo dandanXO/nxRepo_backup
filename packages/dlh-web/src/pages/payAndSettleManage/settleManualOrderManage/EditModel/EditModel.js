@@ -67,11 +67,11 @@ class EditModel extends Component{
                 title={'手动充值支付'}>
                 <div>
                     <Form>
-                        <Form.Item label={'支付平台'} {...this.layout}>
+                        <Form.Item label={'代收平台'} {...this.layout}>
                             {
                                 getFieldDecorator('payPlatId', {
                                     initialValue: '',
-                                    rules: [{ required: true, message: '请选择支付平台' }]
+                                    rules: [{ required: true, message: '请选择代收平台' }]
                                 })(
                                     <Select initialValue='' onChange={this.handlePayPlatChange}>
                                         {allSettlePlatList.length > 0 && allSettlePlatList.map((item, i) => {
@@ -81,11 +81,11 @@ class EditModel extends Component{
                                 )
                             }
                         </Form.Item>
-                        <Form.Item label={'支付商户'} {...this.layout}>
+                        <Form.Item label={'代收商户'} {...this.layout}>
                             {
                                 getFieldDecorator('settleMchId', {
                                     initialValue: '',
-                                    rules: [{ required: true, message: '请选择支付商户' }]
+                                    rules: [{ required: true, message: '请选择代收商户' }]
                                 })(
                                     <Select initialValue=''>
                                         {Array.isArray(this.state.payMchList) && this.state.payMchList.length > 0 && this.state.payMchList.map((item, i) => {

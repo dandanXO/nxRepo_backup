@@ -492,7 +492,7 @@ class PayOrderList extends Component {
                     exportPayOrder={this.exportPayOrder}
                     btnDisabled={btnDisabled}
                 />
-                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading} bordered  />
+                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading} bordered  scroll={{x:'100%'}}/>
                 <EditModel visible={visible} allPayPlatList={allPayPlatList} allPayTypeList={allPayTypeList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk}/>
             </div>
         );
