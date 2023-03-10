@@ -76,11 +76,11 @@ class PayOrderList extends Component {
                 dataIndex: 'phoneNo',
                 key: 'phoneNo'
             },{
-                title: '支付类型',
+                title: '代收类型',
                 dataIndex: 'payType',
                 key: 'payType'
             },{
-                title: '支付平台',
+                title: '代收平台',
                 dataIndex: 'platId',
                 key: 'platId',
                 render(text) {
@@ -97,7 +97,7 @@ class PayOrderList extends Component {
                     )
                 }
             },{
-                title: '支付商户',
+                title: '代收商户',
                 dataIndex: 'mchId',
                 key: 'mchId',
                 render(text) {
@@ -129,7 +129,7 @@ class PayOrderList extends Component {
                     );
                 }
             },{
-                title: '实际支付金额',
+                title: '实际代收金额',
                 dataIndex: 'payAmount',
                 key: 'payAmount',
                 render(text) {

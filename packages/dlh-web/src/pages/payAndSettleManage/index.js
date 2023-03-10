@@ -31,27 +31,27 @@ const payAndSettleManageRoutes = [
 
 const payAndSettleManageMenuList = [
     {
-        title: '支付代付订单',
+        title: '代收代付订单',
         key: '/payAndSettleManage',
         icon: 'pay-circle-o',
         children: [
             {
-                title: '支付方式列表',
+                title: '代收方式列表',
                 key: '/payTypeList',
                 icon: 'pay-circle'
             },
             {
-                title: '支付平台列表',
+                title: '代收平台列表',
                 key: '/payPlatList',
                 icon: 'file-text'
             },
             {
-                title: '支付商户列表',
+                title: '代收商户列表',
                 key: '/payMchList',
                 icon: 'save'
             },
             {
-                title: '支付订单列表',
+                title: '代收订单列表',
                 key: '/payOrderList',
                 icon: 'file-circle'
             },
@@ -81,7 +81,7 @@ const payAndSettleManageMenuList = [
                 icon: 'file-circle'
             },
             {
-                title: '手动支付订单列表',
+                title: '手动代收订单列表',
                 key: '/payManualOrderList',
                 icon: 'file-circle'
             },
@@ -91,7 +91,7 @@ const payAndSettleManageMenuList = [
                 icon: 'file-circle'
             },
             {
-                title: '支付代付统计',
+                title: '代收代付统计',
                 key: '/paymentStatistic',
                 icon: 'file-circle'
             },

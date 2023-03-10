@@ -54,10 +54,10 @@ class EditModel extends Component{
                 onCancel={this.handleCancel}
                 width={700}
                 visible={visible}
-                title={'添加/修改支付商户'}>
+                title={'添加/修改代收商户'}>
                 <div>
                     <Form>
-                        <Form.Item label={'支付平台'} {...this.layout}>
+                        <Form.Item label={'代收平台'} {...this.layout}>
                             {
                                 getFieldDecorator('platId', {
                                     initialValue: '',
@@ -133,7 +133,7 @@ class EditModel extends Component{
                                 )
                             }
                         </Form.Item>
-                        <Form.Item label={'支付类型'} {...this.layout}>
+                        <Form.Item label={'代收类型'} {...this.layout}>
                             {
                                 getFieldDecorator('settleTypeIds', {
                                     rules: [{ required: false, message: ''}]
@@ -145,7 +145,7 @@ class EditModel extends Component{
                                         showCheckedStrategy={TreeSelect.SHOW_ALL}
                                         allowClear={true}
                                         dropdownStyle={{ height: '300px' }}
-                                        searchPlaceholder={'请选择支持的支付方式'}
+                                        searchPlaceholder={'请选择支持的代收方式'}
 
                                     />
                                 )
