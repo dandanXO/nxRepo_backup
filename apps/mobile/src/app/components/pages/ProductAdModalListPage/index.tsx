@@ -209,11 +209,18 @@ const ProductAdModalListPage = () => {
       count: "",
     });
 
-    // const [trigger, { currentData: currentLazyData, isLoading: isLazyLoading, isFetching: isLazyFetching }] = useLazyGetPersonalLoanRecommendQuery({});
+    // NOTICE: for testing
+    // const [trigger, { currentData: currentLazyData, isLoading: isLazyLoading, isFetching: isLazyFetching }] = useLazyGetPersonalLoanRecommendQuery({
+      // refetchOnFocus: true,
+      // refetchOnReconnect: true,
+    // });
     // useEffect(() => {
-    //   trigger({count: "1"});
     //   trigger({count: "2"});
-    //   trigger({count: "3"});
+    //   trigger({count: "2"});
+    //   setInterval(() => {
+    //     console.log("shoot")
+    //     trigger({count: "2"});
+    //   }, 10 * 1000)
     // }, [])
 
     const [currentValue, setCurrentValue] = useState<number>(0);
@@ -265,9 +272,9 @@ const ProductAdModalListPage = () => {
                     </div>
                   )
                 }}
-                min={currentData?.quotaBar?.min}
-                max={currentData?.quotaBar?.max}
-                minDistance={currentData?.quotaBar?.interval}
+                min={currentData?.quotaBar?.min ?? 0}
+                max={currentData?.quotaBar?.max ?? 0}
+                step={currentData?.quotaBar?.interval}
                 onChange={(value, index) => {
                   setCurrentValue(value);
                 }}
@@ -290,7 +297,7 @@ const ProductAdModalListPage = () => {
             )}
             {!isLoading && productList?.length === 0 && (
               <div className="container">
-                <div>Empty</div>
+                <div>Insufficient funds to provide product recommendations. Please adjust your budget accordingly.</div>
               </div>
             )}
             {!isLoading && productList?.map((product) => (

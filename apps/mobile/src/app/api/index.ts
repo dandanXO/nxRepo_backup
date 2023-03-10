@@ -29,6 +29,8 @@ export const API = createApi({
     baseQuery: axiosBaseQuery({
         baseUrl: "/api/v2",
     }),
+    // keepUnusedDataFor: 600,
+    // refetchOnMountOrArgChange: 60,
     endpoints: (builder) => ({
         // NOTE: 取得貸款訂單詳情
         getLoanDetail: builder.query<
@@ -141,7 +143,7 @@ export const API = createApi({
           query: (query: GetPersonalLoanRecommendRequestQuerystring) => ({
             method: "get",
             url: `/product/personal-recommend`,
-            params: query
+            params: query,
           }),
         }),
         // NOTE: 取得活動廣告橫幅內容
