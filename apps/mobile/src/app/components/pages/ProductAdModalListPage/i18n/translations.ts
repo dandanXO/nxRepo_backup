@@ -4,8 +4,8 @@ export const i18nProductAdModalListPage: i18nComponent = {
   namespace: "pages/i18nProductAdModalListPage",
   translation: {
     en_US: {
-      "interest": "interest",
-      "terms": "terms",
+      "interest": "Interest",
+      "terms": "Terms",
     },
     bn_BD: {
       "interest": "মুনাফা",

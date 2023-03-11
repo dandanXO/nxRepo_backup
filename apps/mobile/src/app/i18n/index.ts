@@ -18,7 +18,7 @@ import {
 } from "../components/pages/LoanDetailsPage/modal/RepaymentNoticeModal/i18n/translations";
 import {i18nUploadPaymentReceiptPage} from "../components/pages/UploadPaymentReceiptPage/i18n/translations";
 import {i18nUploadedPaymentReceiptPage} from "../components/pages/UploadedPaymentReceiptPage/i18n/translations";
-import {i18nProductAdModalListPage} from "../components/pages/OldProductAdModalListPage/i18n/translations";
+import {i18nProductAdModalListPage} from "../components/pages/ProductAdModalListPage/i18n/translations";
 import {
   i18nUploadingFileModal
 } from "../components/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations";

@@ -8,7 +8,7 @@ import React from "react";
 export const Title = styled.div`
   font-size: 16px;
   font-weight: 400;
-  //margin: 16px 0;
+  margin: 0 0 12px;
   text-align: center;
   letter-spacing: 1px;
 `;
@@ -39,8 +39,8 @@ export const StyledProduct = styled.div`
             }
           }
           .productName {
-            font-weight: 500;
-            font-size: 18px;
+            font-weight: 300;
+            font-size: 16px;
           }
         }
         .right {
@@ -49,6 +49,12 @@ export const StyledProduct = styled.div`
           }
         }
     }
+  .productInfo{
+    color: #aaaaaa;
+    font-weight: 100;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
 `;
 
 export const StyledSlider = styled.div`
@@ -161,21 +167,26 @@ export const Countdown = styled.div`
   width: 85%;
 
   font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 1px;
+  font-weight: 400;
   color: #F82626;
   text-align: center;
 
   .title {
+
   }
   .timer {
-    margin-bottom: 10px;
+
+  }
+
+  .button-container {
+    margin-top: 8px;
   }
 `
 
 type ButtonProps = {
   color?: string;
   background?: string;
+  disable?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -189,7 +200,7 @@ export const Button = styled.button<ButtonProps>`
   //line-height: 28px;
   //padding: 6px 4px;
   padding: 12px;
-  background: ${(props) => props.background ?? "#F82626"};
+  background: ${(props) => props.disable ? "#E5E5E5" : props.background ? props.background : "#707070"};
   border: 0;
   border-radius: 8px;
 `;
@@ -199,15 +210,42 @@ export const Footer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const ApplyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    margin-bottom: 12px;
+    width: 200px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .content {
+    width: 86%;
+    font-size: 16px;
+    font-weight: lighter;
+    text-align: center;
+    color: #AAAAAA;
+    .p1 {
+      margin-bottom: 16px;
+    }
+    .p2 {
+
+    }
+  }
+`
 export const StyledList = styled.div`
   margin-bottom: 16px;
 
-  min-height: 196px;
-  max-height: 196px;
+  min-height: 225px;
+  max-height: 225px;
   overflow: auto;
 
   .container {
-    height: 196px;
+    height: 225px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,12 +253,16 @@ export const StyledList = styled.div`
     p {
       color: #AAAAAA;
     }
+    .overdue {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `;
 
-type ProductAdProps = Required<Pick<RecommendProduct, "logoUrl"|"productName"|"loanableAmount">>
+type ProductAdProps = Required<Pick<RecommendProduct, "logoUrl"|"productName"|"loanableAmount"|"interestRate"|"terms">>
 
-export const Product = ({logoUrl, productName, loanableAmount}: ProductAdProps) => {
+export const Product = ({logoUrl, productName, loanableAmount,interestRate, terms}: ProductAdProps) => {
   const {t} = useTranslation(i18nProductAdModalListPage.namespace);
   return (
     <StyledProduct>
@@ -234,6 +276,9 @@ export const Product = ({logoUrl, productName, loanableAmount}: ProductAdProps) 
         <div className="right">
           <div className="price">{environment.currency} {loanableAmount ? loanableAmount : ""}</div>
         </div>
+      </div>
+      <div className="productInfo">
+        <span>{t("interest")} : {interestRate ? interestRate : ""}</span> : <span>{t("terms")} : {terms ? terms : ""}</span>
       </div>
     </StyledProduct>
   )
