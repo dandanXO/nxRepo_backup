@@ -1,207 +1,24 @@
-import { Page } from "@frontend/mobile/shared/ui";
+import {Page} from "@frontend/mobile/shared/ui";
 import React, {useEffect, useState} from "react";
-import styled from "styled-components";
-import {
-  useGetLoanRecommendQuery,
-  useGetPersonalLoanRecommendQuery,
-  useLazyGetPersonalLoanRecommendQuery
-} from "../../../api";
+import {useGetPersonalLoanRecommendQuery} from "../../../api";
 import {environment} from "../../../../environments/environment";
-import {useTranslation} from "react-i18next";
-import {i18nProductAdModalListPage} from "./i18n/translations";
 import ReactSlider from 'react-slider'
 import {RecommendProduct} from "../../../api/GetPersonalLoanRecommend";
 
-const Title = styled.div`
-  font-size: 16px;
-  font-weight: 400;
-  margin: 16px 0;
-  text-align: center;
-  letter-spacing: 1px;
+import {useTranslation} from "react-i18next";
+import {i18nProductAdModalListPage} from "./i18n/translations";
 
-`;
-const StyledProduct = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 16px;
-    background: #FFF0DE;
-    border-radius: 8px;
-    margin-bottom: 8px;
+import {
+  Button,
 
-    .product {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .left {
-          display: flex;
-          align-items: center;
-          .icon{
-            position: relative;
-            .logoIcon {
-              width: 2.25rem;
-              height: 2.25rem;
-              margin-right: 8px;
-              box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.16);
-            }
-          }
-          .productName {
-            font-weight: 500;
-            font-size: 18px;
-          }
-        }
-        .right {
-          .price {
-
-          }
-        }
-    }
-`;
-
-type ProductAdProps = Required<Pick<RecommendProduct, "logoUrl"|"productName"|"loanableAmount">>
-
-const Product = ({ logoUrl, productName, loanableAmount }: ProductAdProps) => {
-  const {t} = useTranslation(i18nProductAdModalListPage.namespace);
-  return (
-      <StyledProduct>
-        <div className="product">
-          <div className="left">
-            <div className="icon">
-              <img className="logoIcon" src={logoUrl} alt="" />
-            </div>
-            <div className="productName">{productName ? productName : ""}</div>
-          </div>
-          <div className="right">
-            <div className="price">{environment.currency} {loanableAmount ? loanableAmount : ""}</div>
-          </div>
-        </div>
-      </StyledProduct>
-    )
-}
-
-const StyledSlider = styled.div`
-  border: 1.5px solid #F58B10;
-  padding: 16px 12px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 16px;
-    .label {
-      //font-size: 16px;
-      font-weight: lighter;
-    }
-    .price {
-      color: #F58B10;
-      font-weight: bold;
-      //font-size: 16px;
-      font-size: 26px;
-    }
-  }
-  .slider {
-    width: 100%;
-    .horizontal-slider {
-      //width: 267px;
-      height: 12px;
-    }
-    .example-track-0 {
-      background: #F58B10;
-      height: 12px;
-      border-radius: 8px;
-    }
-    .example-track-1 {
-      background: #E5E5E5;
-      height: 12px;
-      border-radius: 8px;
-    }
-    .example-track {
-      //width: 100px;
-      //background: lightcoral;
-    }
-    .example-thumb {
-      border: 1.5px solid #F58B10;
-      background: #fff;
-
-      width: 25px;
-      height: 25px;
-
-      top: -7px;
-      text-align: center;
-      line-height: 25px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .example-thumb-inner {
-        background: #F58B10;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-      }
-    }
-    .example-thumbActiveClassName {
-      //background: lightpink;
-      //width: 50px;
-      //height: 50px;
-    }
-  }
-  .slider-labels {
-    width: 100%;
-    display: flex;
-    margin-top: 16px;
-    justify-content: space-between;
-    color: #AAAAAA;
-    font-weight: lighter;
-    .min {
-
-    }
-    .max {
-
-    }
-  }
-`
-const ApplyButton = styled.button`
-  background: #F58B10;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 12px;
-  text-align: center;
-  height: 50px;
-  border: 0;
-  width: 90%;
-  border-radius: 8px;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const StyledList = styled.div`
-  margin-bottom: 16px;
-
-  min-height: 196px;
-  max-height: 196px;
-  overflow: auto;
-
-  .container {
-    height: 196px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
+  Countdown,
+  CountdownContainer,
+  Footer,
+  StyledList,
+  StyledSlider,
+  Title,
+  Product,
+} from "./Components";
 
 const ProductAdModalListPage = () => {
 
@@ -234,6 +51,7 @@ const ProductAdModalListPage = () => {
     let resultProductId: number[] = [];
 
     const [productList, setProductList] = useState<RecommendProduct[]>([]);
+
     useEffect(() => {
       if(currentData?.quotaBar.current) {
         let currentPrice = 0;
@@ -253,10 +71,12 @@ const ProductAdModalListPage = () => {
     return (
         <Page>
           <StyledSlider>
+
             <div className="info">
-              <div className="label">Borrowed amount</div>
+              <div className="label">loan amount</div>
               <div className="price">{environment.currency} {currentValue}</div>
             </div>
+
             <div className="slider">
               <ReactSlider
                 className="horizontal-slider"
@@ -274,18 +94,28 @@ const ProductAdModalListPage = () => {
                 }}
                 min={currentData?.quotaBar?.min ?? 0}
                 max={currentData?.quotaBar?.max ?? 0}
-                step={currentData?.quotaBar?.interval}
+                step={currentData?.quotaBar?.interval ?? 0}
                 onChange={(value, index) => {
-                  setCurrentValue(value);
+                  // console.log("value", value);
+                  setCurrentValue(!isNaN(value) ? value : 0);
                 }}
               />
             </div>
+
             <div className="slider-labels">
               <span className="min">Minimum</span>
               <span className="max">Maximum</span>
             </div>
 
           </StyledSlider>
+
+          <CountdownContainer>
+            <Countdown>
+              <div className="title">Limited Time Offer Countdown :</div>
+              <div className="timer">00 : 00 : 00</div>
+              <Button color="#fff" background="#F82626">re-acquire the loan amount</Button>
+            </Countdown>
+          </CountdownContainer>
 
           <Title>PERSONALIZED RECOMMENDATION</Title>
 
@@ -297,7 +127,7 @@ const ProductAdModalListPage = () => {
             )}
             {!isLoading && productList?.length === 0 && (
               <div className="container">
-                <div>Insufficient funds to provide product recommendations. Please adjust your budget accordingly.</div>
+                <p>Insufficient funds to provide product recommendations. Please adjust your budget accordingly.</p>
               </div>
             )}
             {!isLoading && productList?.map((product) => (
@@ -311,8 +141,9 @@ const ProductAdModalListPage = () => {
           </StyledList>
 
           <Footer>
-            <ApplyButton>Apply</ApplyButton>
+            <Button background="#F58B10">Apply</Button>
           </Footer>
+
         </Page>
     );
 };
