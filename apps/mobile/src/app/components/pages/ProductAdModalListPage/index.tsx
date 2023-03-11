@@ -19,6 +19,7 @@ import {
   Title,
   Product,
 } from "./Components";
+import moment from "moment/moment";
 
 
 enum STATE {
@@ -46,6 +47,7 @@ const ProductAdModalListPage = () => {
     const [currentData, setCurrentData] = useState<GetPersonalLoanRecommendResponse>();
 
     const [currentValue, setCurrentValue] = useState<number>(0);
+    const [timeString, setTimeString] = useState<string>("00 : 00 : 00");
 
     useEffect(() => {
       if(currentData?.quotaBar.current) {
@@ -139,12 +141,56 @@ const ProductAdModalListPage = () => {
             min: 100,
             // 拉霸最低額度
           },
-          quotaExpireTime: new Date().toDateString(),
+          // quotaExpireTime: moment().add(1,'days').startOf("day").format('YYYY-MM-DD HH:mm:ss'),
+          quotaExpireTime: moment().add(20,'second').format('YYYY-MM-DD HH:mm:ss'),
         } ;
-
+        console.log("data", data);
         setCurrentData(data);
 
         setCurrentValue(data?.quotaBar.current);
+
+
+        function countDown(quotaExpireTime: string) {
+          const currentTime = moment();
+          // const tomorrowTime = moment().add(1,'days').startOf("day");
+          const tomorrowTime = moment(quotaExpireTime);
+
+          // console.log("now", currentTime.format("MM/DD HH:mm:ss"))
+          // console.log("tomorrow", tomorrowTime.format("MM/DD HH:mm:ss"))
+          const diffTime = tomorrowTime.diff(currentTime, "seconds");
+          // console.log("diffTime", diffTime);
+          const duration = moment.duration(diffTime, "seconds");
+          //   console.log("duration", duration);
+          const padStartZero = (number: number) => {
+            return String(number).padStart(2, "0");
+          }
+          const hours = duration.hours();
+          const minutes = duration.minutes();
+          const seconds = duration.seconds();
+          // console.log("hours", hours);
+          // console.log("minutes", minutes);
+          // console.log("seconds", seconds);
+
+          const end = hours === 0 && minutes === 0 && seconds === 0;
+          const time = `${padStartZero(hours)} : ${padStartZero(minutes)} : ${padStartZero(seconds)}`;
+          // console.log("time", time);
+          return {
+            time,
+            end,
+          };
+        }
+        const defaultTime = moment().add(20,'second').format('YYYY-MM-DD HH:mm:ss');
+        const timeInfo = countDown(currentData?.quotaExpireTime || defaultTime);
+        setTimeString(timeInfo.time);
+
+        const intervalID = setInterval(() => {
+          const timeInfo = countDown(currentData?.quotaExpireTime || defaultTime);
+          setTimeString(timeInfo.time);
+          if(timeInfo.end) {
+            clearInterval(intervalID);
+            setState(STATE.OVERDUE);
+          }
+        }, 1000)
 
         // setTimeout(() => {
         //   setState(STATE.OVERDUE);
@@ -178,8 +224,6 @@ const ProductAdModalListPage = () => {
     //     trigger({count: "2"});
     //   }, 10 * 1000)
     // }, [])
-
-
 
     let resultProducts: RecommendProduct[] = [];
 
@@ -237,6 +281,7 @@ const ProductAdModalListPage = () => {
                     </div>
                   )
                 }}
+                // NOTE: WHY?
                 // min={currentData?.quotaBar?.min ?? 0}
                 // max={currentData?.quotaBar?.max ?? 1000}
                 // step={currentData?.quotaBar?.interval ?? 0}
@@ -245,9 +290,6 @@ const ProductAdModalListPage = () => {
                 step={currentData?.quotaBar?.interval}
                 value={currentValue}
                 onChange={(value, index) => {
-                  console.log("value", value);
-                  console.log("index", index);
-                  // setCurrentValue(!isNaN(value) ? value : 0);
                   setCurrentValue(value)
                 }}
               />
@@ -263,7 +305,7 @@ const ProductAdModalListPage = () => {
           <CountdownContainer>
             <Countdown>
               <div className="title">Limited Time Offer Countdown :</div>
-              <div className="timer">00 : 00 : 00</div>
+              <div className="timer">{timeString}</div>
               {state === STATE.OVERDUE && (
                 <Button color="#fff" background="#F82626">Re-Acquire The Loan Amount</Button>
               )}
