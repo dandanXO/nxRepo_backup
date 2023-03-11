@@ -10,6 +10,7 @@ import {PostLoanSubmitOrderRequestBody} from "./postLoanSubmitOrder";
 import {GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring} from "./getLoanRecommend";
 import {GetBindCardDropListResponse} from "./GetBindCardDropList";
 import {GetPersonalLoanRecommendRequestQuerystring, GetPersonalLoanRecommendResponse} from "./GetPersonalLoanRecommend";
+import {PostLoanQuotaRefreshResponse} from "./PostLoanQuotaRefreshResponse";
 
 interface GetActivityAdsRequest {
   phoneNo: string;
@@ -146,6 +147,13 @@ export const API = createApi({
             params: query,
           }),
         }),
+        // NOTE: 借款額度刷新
+        postLoanQuotaRefresh: builder.mutation<PostLoanQuotaRefreshResponse, null>({
+          query: () => ({
+            method: "post",
+            url: `/loan/quote/refresh`,
+          }),
+        }),
         // NOTE: 取得活動廣告橫幅內容
         getActivityAds: builder.query<GetActivityAdsResponse, GetActivityAdsRequest>({
           query: (query: GetActivityAdsRequest) => ({
@@ -174,4 +182,5 @@ export const {
     useLazyGetActivityAdsQuery,
     useGetPersonalLoanRecommendQuery,
     useLazyGetPersonalLoanRecommendQuery,
+    usePostLoanQuotaRefreshMutation,
 } = API;

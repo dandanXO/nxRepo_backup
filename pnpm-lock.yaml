@@ -72,6 +72,7 @@ specifiers:
   js-cookie: 3.0.1
   less-loader: 11.0.0
   moment: 2.29.4
+  moment-timezone: ^0.5.41
   next: 12.2.5
   next-plugin-antd-less: 1.8.0
   next-transpile-modules: 9.0.0
@@ -131,6 +132,7 @@ dependencies:
   i18next: 22.0.5
   js-cookie: 3.0.1
   moment: 2.29.4
+  moment-timezone: 0.5.41
   next: 12.2.5_a7mipu7kvrstgwvi56qu2qyzhe
   next-plugin-antd-less: 1.8.0_webpack@5.74.0
   popper.js: 1.16.1
@@ -15889,6 +15891,12 @@ packages:
       yargs: 16.2.0
       yargs-parser: 20.2.4
       yargs-unparser: 2.0.0
+    dev: false
+
+  /moment-timezone/0.5.41:
+    resolution: {integrity: sha512-e0jGNZDOHfBXJGz8vR/sIMXvBIGJJcqFjmlg9lmE+5KX1U7/RZNMswfD8nKnNCnQdKTIj50IaRKwl1fvMLyyRg==}
+    dependencies:
+      moment: 2.29.4
     dev: false
 
   /moment/2.29.4:
