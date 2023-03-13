@@ -1,4 +1,4 @@
-import {Page} from "@frontend/mobile/shared/ui";
+import {Page, StyledLoading} from "@frontend/mobile/shared/ui";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {
   useGetPersonalLoanRecommendQuery,
@@ -563,8 +563,13 @@ const ProductAdModalListPage = () => {
 
           <CountdownContainer>
             <Countdown>
-              <div className="title">LIMITED TIME OFFER COUNTDOWN :</div>
-              <div className="timer">{timeString}</div>
+
+              {(state === STATE.COUNTDOWN) && (
+                <>
+                  <div className="title">LIMITED TIME OFFER COUNTDOWN :</div>
+                  <div className="timer">{timeString}</div>
+                </>
+              )}
 
               {(state === STATE.OVERDUE) && (
                 <div className="button-container">
@@ -577,14 +582,24 @@ const ProductAdModalListPage = () => {
               {state === STATE.OVERDUE_LOADING && (
                 <div className="button-container">
                   <Button color="#fff" background="#F82626">
-                    <span>Loading</span>
+                    {/*<span>Loading</span>*/}
+                    <StyledLoading style={{
+                      transform: "scale(0.3)",
+                      width: "10px",
+                      height: "20px",
+                      top: "-9px",
+                    }}
+                    bg="#fff"/>
                   </Button>
                 </div>
               )}
             </Countdown>
           </CountdownContainer>
 
-          <Title>PERSONALIZED RECOMMENDATION</Title>
+
+          {(state === STATE.COUNTDOWN) && (
+            <Title>PERSONALIZED RECOMMENDATION</Title>
+          )}
 
           <StyledList>
             {state === STATE.LOADING && (

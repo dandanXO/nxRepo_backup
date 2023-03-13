@@ -240,12 +240,12 @@ export const ApplyContainer = styled.div`
 export const StyledList = styled.div`
   margin-bottom: 16px;
 
-  min-height: 225px;
-  max-height: 225px;
+  min-height: 120px;
+  max-height: 120px;
   overflow: auto;
 
   .container {
-    height: 225px;
+    //height: 225px;
     display: flex;
     justify-content: center;
     align-items: center;
