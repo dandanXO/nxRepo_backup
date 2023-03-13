@@ -2,7 +2,7 @@ import {Page} from "@frontend/mobile/shared/ui";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {
   useGetPersonalLoanRecommendQuery,
-  useLazyGetPersonalLoanRecommendQuery,
+  useLazyGetPersonalLoanRecommendQuery, usePostApplyProductMutation,
   usePostLoanQuotaRefreshMutation
 } from "../../../api";
 import {environment} from "../../../../environments/environment";
@@ -24,6 +24,8 @@ import {
   Product, ApplyContainer,
 } from "./Components";
 import moment from 'moment-timezone';
+import {PostLoanQuotaRefreshResponse} from "../../../api/PostLoanQuotaRefreshResponse";
+import {boolean} from "zod";
 
 enum STATE {
   "INIT" ,
@@ -33,6 +35,7 @@ enum STATE {
   "OVERDUE_LOADING",
   "APPLY",
   "APPLY_OVERDUE",
+  "APPLY_REPEAT",
 }
 
 const debugSwitch = (isDebeg: boolean, debugFun: () => void, fun: () => void) => {
@@ -43,6 +46,14 @@ const debugSwitch = (isDebeg: boolean, debugFun: () => void, fun: () => void) =>
 const debug = false;
 
 // let intervalID: NodeJS.Timer;
+let init = false;
+
+let triggerRefreshID: NodeJS.Timer;
+let debugTimeout1: NodeJS.Timer;
+let debugTimeout2: NodeJS.Timer;
+
+const limitRetryCount = 30;
+let currentRetryCount = 0;
 const ProductAdModalListPage = () => {
 
     const [state, setState] = useState<STATE>(STATE.INIT);
@@ -57,6 +68,8 @@ const ProductAdModalListPage = () => {
     const [trigger, { currentData: data, isLoading, isFetching, isSuccess, isError }] = useLazyGetPersonalLoanRecommendQuery({
 
     });
+
+
     useEffect(() => {
       setCurrentData(data);
       setCurrentValue(data?.quotaBar?.current || 0);
@@ -66,8 +79,15 @@ const ProductAdModalListPage = () => {
       data: refreshData,
       isLoading: isRefreshLoading,
       isSuccess: isRefreshSuccess,
-      isError: isRefreshError
+      isError: isRefreshError,
     }] = usePostLoanQuotaRefreshMutation();
+
+    const [triggerApplyProduct, {
+      data: applyData,
+      isLoading: isApplyLoading,
+      isSuccess: isApplySuccess,
+      isError: isApplyError,
+    }] = usePostApplyProductMutation();
 
     // NOTICE: mock
     // const isSuccess = null;
@@ -186,6 +206,7 @@ const ProductAdModalListPage = () => {
         },
         // quotaExpireTime: moment().add(1,'days').startOf("day").format('YYYY-MM-DD HH:mm:ss'),
         quotaExpireTime: moment().add(20,'second').format('YYYY-MM-DD HH:mm:ss'),
+        processing: false,
       } ;
       // console.log("data", data);
       setCurrentData(data);
@@ -193,15 +214,58 @@ const ProductAdModalListPage = () => {
     }
 
     useEffect(() => {
-      if(isLoading || isFetching || isError) {
+      if(currentData && currentData?.processing) {
+        setState(STATE.APPLY_REPEAT);
+      } else if(isLoading || isFetching || isError) {
         setState(STATE.LOADING);
+      } else if(isSuccess) {
+        // setState(STATE.COUNTDOWN);
       }
-      if(isSuccess) {
-        setState(STATE.COUNTDOWN);
-      }
-    }, [isLoading, isSuccess, isError])
+    }, [isLoading, isSuccess, isError, currentData])
 
-    let init = false;
+    useEffect(() => {
+      return () => {
+        // console.log("安全清除 id");
+        if(triggerRefreshID) clearTimeout(triggerRefreshID);
+        if(debugTimeout1) clearTimeout(debugTimeout1);
+        if(debugTimeout2) clearTimeout(debugTimeout2);
+      }
+    })
+
+    const requestRecommendProducts = () => {
+      console.log("requestRecommendProducts");
+      trigger({
+        count: "",
+      }).then((data) => {
+        const result = data.data;
+        if(result?.quotaExpireTime) {
+          const currentTime = debug ? moment() : moment.tz("Asia/Kolkata")
+          // console.log("currentTime.format:", currentTime.format("YYYY-MM-DD HH:mm:ss"))
+          // console.log("quotaExpireTime:", result?.quotaExpireTime);
+          // console.log("quotaExpireTime.2:", result?.quotaExpireTime.split(".")[0]);
+          // console.log("quotaExpireTime.3:", moment(result?.quotaExpireTime.split(".")[0]).format("YYYY-MM-DD HH:mm:ss"));
+          const expireTime = result?.quotaExpireTime.split(".")[0];
+          const isOverdue = currentTime.diff(expireTime) > 0;
+          if(isOverdue) {
+            console.log("[mode][production] 過期");
+            setState(STATE.OVERDUE);
+          } else {
+            console.log("[mode][production] 只能執行一次")
+            setState(STATE.COUNTDOWN);
+            // NOTICE: real world
+            const expiredTime = result?.quotaExpireTime ? result?.quotaExpireTime.split(".")[0] : ""
+            const countDownStr = moment(expiredTime).format('YYYY-MM-DD HH:mm:ss');
+            // NOTICE: DEBUG
+            // const defaultTime = moment().add(5,'second').format('YYYY-MM-DD HH:mm:ss');
+            // const countDownStr = defaultTime;
+            countDown(countDownStr);
+          }
+        }
+      }).catch((error) => {
+        console.log("requestRecommendProducts")
+        console.log(error)
+      })
+    }
     useEffect(() => {
       if(init) return;
       init = true;
@@ -211,7 +275,7 @@ const ProductAdModalListPage = () => {
         console.log("[mode][debug] 只能執行一次")
         setState(STATE.LOADING);
 
-        setTimeout(() => {
+        debugTimeout1 = setTimeout(() => {
           mockResponse();
           setState(STATE.COUNTDOWN);
           // console.log("[Countdown] start")
@@ -222,21 +286,7 @@ const ProductAdModalListPage = () => {
       }, () => {
         // NOTICE: PRODUCTION
         setState(STATE.LOADING);
-        trigger({
-          count: "",
-        }).then((data) => {
-          const result = data.data;
-          if(result?.quotaExpireTime) {
-            console.log("[mode][production] 只能執行一次")
-            setState(STATE.COUNTDOWN);
-            const expiredTime = result?.quotaExpireTime ? result?.quotaExpireTime.split(".")[0] : ""
-
-            const countDownStr = moment(expiredTime).format('YYYY-MM-DD HH:mm:ss');
-            countDown(countDownStr);
-          }
-          // ERROR
-          // result?.quotaExpireTime
-        })
+        requestRecommendProducts();
       })
 
       return () => {
@@ -253,33 +303,72 @@ const ProductAdModalListPage = () => {
 
     }, [])
 
+    const asyncRefreshTimeout = () => {
+      console.log("asyncRefreshTimeout");
+
+      let retry = true;
+      const asyncRequestRefresh = new Promise((resolve, reject) => {
+        triggerRefresh(null).then((result)  => {
+          console.log("result", result);
+          const data = (result as any).data as PostLoanQuotaRefreshResponse;
+          console.log("data", data);
+          if((result as any).error) {
+            // NOTICE: 商務邏輯錯誤
+            console.log("商務邏輯錯誤")
+            resolve(false);
+          } else {
+            if(data.effective) {
+              resolve(true);
+            } else {
+              resolve(false);
+            }
+          }
+        }).catch((error) => {
+          console.log("error", error);
+          reject(true);
+        });
+      })
+
+        triggerRefreshID = setTimeout(() => {
+        if(retry && currentRetryCount < limitRetryCount) {
+          asyncRequestRefresh.then((effective) => {
+            console.log("refreshInterval.result", effective);
+            if(effective) {
+              retry = false;
+              requestRecommendProducts();
+            } else {
+              currentRetryCount++;
+              asyncRefreshTimeout();
+            }
+          }).catch((error) => {
+            // console.log("error", error)
+            asyncRefreshTimeout();
+          })
+        } else {
+          console.log("success")
+          clearTimeout(triggerRefreshID);
+          requestRecommendProducts();
+        }
+      }, 20 * 1000)
+    }
+
     const onClickToLoadRecommendation = useCallback(() => {
       setState(STATE.OVERDUE_LOADING);
 
       debugSwitch(debug, () => {
         // NOTICE: DEBUG
-        setTimeout(() => {
+        debugTimeout2 = setTimeout(() => {
           mockResponse();
           setState(STATE.COUNTDOWN);
           // const mockCountDownStr = currentData?.quotaExpireTime;
           const defaultTime = moment().add(20,'second').format('YYYY-MM-DD HH:mm:ss');
           const mockCountDownStr = defaultTime;
           countDown(mockCountDownStr);
-        }, 3000 * 1000)
+        }, 3 * 1000)
       }, () => {
-        // NOTICE: PRODUCTION
-        const refresh = new Promise((resolve, reject) => {
-          triggerRefresh(null).then((data) => {
-            console.log("data", data);
-            resolve(data);
-          }).catch((error) => {
-            reject(error);
-          });
-        })
-        refresh.then(() => {
-          //
-        });
 
+        // NOTICE: PRODUCTION
+        asyncRefreshTimeout();
       })
 
     }, [debug]);
@@ -312,6 +401,16 @@ const ProductAdModalListPage = () => {
         //   break;
         // }
       }
+
+      triggerApplyProduct({
+        applyQuota: currentValue,
+        productIds: productList.map(product => product.productId)
+      }).then((result) => {
+        console.log("result", result);
+      }).catch((error) => {
+        console.log(error);
+      })
+
     };
 
     useEffect(() => {
@@ -321,37 +420,23 @@ const ProductAdModalListPage = () => {
     }, [currentData?.quotaBar.current]);
 
     const getTimeInfoBetweenCurrentAndCountDown = (quotaExpireTime: string) => {
-      // const currentTime = debugSwitch(debug, () => {
-      //     return moment();
-      // }, () => {
-      //     return moment.tz("Asia/Kolkata")
-      // })
+      // NOTICE: REFACTOR ME (debug)
       const currentTime = debug ? moment() : moment.tz("Asia/Kolkata")
       // console.log("currentTime.format", currentTime.format("YYYY-MM-DD HH:mm:ss"));
-
       const tomorrowTime = moment(quotaExpireTime)
       // console.log("tomorrow.format", tomorrowTime.format("YYYY-MM-DD HH:mm:ss"))
-
       const diffTime = tomorrowTime.diff(currentTime, "seconds");
       // console.log("diffTime", diffTime);
-
       const duration = moment.duration(diffTime, "seconds");
       //   console.log("duration", duration);
-
       const padStartZero = (number: number) => {
         return String(number).padStart(2, "0");
       }
       const hours = duration.hours();
       const minutes = duration.minutes();
       const seconds = duration.seconds();
-      // console.log("hours", hours);
-      // console.log("minutes", minutes);
-      // console.log("seconds", seconds);
-
       const end = hours === 0 && minutes === 0 && seconds === 0;
       const time = `${padStartZero(hours)} : ${padStartZero(minutes)} : ${padStartZero(seconds)}`;
-      // console.log("time", time);
-      // console.log("end", end);
       return {
         time,
         end,
@@ -362,7 +447,6 @@ const ProductAdModalListPage = () => {
       // console.log("[Countdown] start")
       // const defaultTime = moment().add(20,'second').format('YYYY-MM-DD HH:mm:ss');
       // const countDownStr = currentData?.quotaExpireTime || defaultTime;
-
       const timeInfo = getTimeInfoBetweenCurrentAndCountDown(countDownStr);
       setTimeString(timeInfo.time);
 
@@ -430,7 +514,8 @@ const ProductAdModalListPage = () => {
     }, [currentValue]);
     // console.log("currentData", currentData);
 
-    if(state !== STATE.APPLY && state !== STATE.APPLY_OVERDUE) {
+    console.log("state", STATE[state])
+    if(state !== STATE.APPLY && state !== STATE.APPLY_OVERDUE && state !== STATE.APPLY_REPEAT) {
       return (
         <Page>
           <StyledSlider>
@@ -464,7 +549,7 @@ const ProductAdModalListPage = () => {
                 step={currentData?.quotaBar?.interval}
                 value={currentValue}
                 onChange={(value, index) => {
-                  setCurrentValue(value)
+                  setCurrentValue(!isNaN(value) ? value : 0)
                 }}
               />
             </div>
@@ -481,7 +566,7 @@ const ProductAdModalListPage = () => {
               <div className="title">LIMITED TIME OFFER COUNTDOWN :</div>
               <div className="timer">{timeString}</div>
 
-              {state === STATE.OVERDUE && (
+              {(state === STATE.OVERDUE) && (
                 <div className="button-container">
                   <Button color="#fff" background="#F82626" onClick={onClickToLoadRecommendation}>
                     <span>Re-Acquire The Loan Amount</span>
@@ -535,7 +620,7 @@ const ProductAdModalListPage = () => {
           <Footer>
             <Button
               background="#F58B10"
-              disable={state === STATE.INIT || state === STATE.LOADING || state === STATE.OVERDUE_LOADING}
+              disable={state === STATE.INIT || state === STATE.LOADING || state === STATE.OVERDUE_LOADING || productList.length === 0}
               onClick={() =>{
                 if(state === STATE.COUNTDOWN || state === STATE.OVERDUE) onClickToApply();
               }}
@@ -558,6 +643,11 @@ const ProductAdModalListPage = () => {
               <div className="content">
                 <p className="p1">The limited-time promotional loan scheme has expired, and the loan amount will be based on the latest review results.</p>
                 <p className="p2">Please be patient while waiting for the review results. After the review is successful, you can view your loan order in the loan record.</p>
+              </div>
+            )}
+            {state === STATE.APPLY_REPEAT && (
+              <div>
+                <p className="p1">Please do not resubmit and wait patiently.</p>
               </div>
             )}
           </ApplyContainer>

@@ -7,6 +7,8 @@ export type GetPersonalLoanRecommendResponse = {
   quotaBar: PersonalQuotaBar;
   quotaExpireTime?: string;
   // 個人額度有效期限
+  processing: boolean;
+  // 是否有已提交/处里中/审核中的申请
 }
 
 export type RecommendProduct = {

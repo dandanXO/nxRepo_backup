@@ -11,6 +11,7 @@ import {GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring} fr
 import {GetBindCardDropListResponse} from "./GetBindCardDropList";
 import {GetPersonalLoanRecommendRequestQuerystring, GetPersonalLoanRecommendResponse} from "./GetPersonalLoanRecommend";
 import {PostLoanQuotaRefreshResponse} from "./PostLoanQuotaRefreshResponse";
+import {PostApplyProductRequest} from "./PostApplyProductRequest";
 
 interface GetActivityAdsRequest {
   phoneNo: string;
@@ -151,8 +152,16 @@ export const API = createApi({
         postLoanQuotaRefresh: builder.mutation<PostLoanQuotaRefreshResponse, null>({
           query: () => ({
             method: "post",
-            url: `/loan/quote/refresh`,
+            url: `/loan/quota/refresh`,
           }),
+        }),
+        // NOTE: 個人推薦商品借款
+        postApplyProduct: builder.mutation<null, PostApplyProductRequest>({
+          query: (requestBody: PostApplyProductRequest) => ({
+            method: "post",
+            url: `/product/apply`,
+            data: requestBody,
+          })
         }),
         // NOTE: 取得活動廣告橫幅內容
         getActivityAds: builder.query<GetActivityAdsResponse, GetActivityAdsRequest>({
@@ -183,4 +192,5 @@ export const {
     useGetPersonalLoanRecommendQuery,
     useLazyGetPersonalLoanRecommendQuery,
     usePostLoanQuotaRefreshMutation,
+    usePostApplyProductMutation,
 } = API;
