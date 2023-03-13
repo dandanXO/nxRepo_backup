@@ -515,6 +515,7 @@ const ProductAdModalListPage = () => {
     // console.log("currentData", currentData);
 
     console.log("state", STATE[state])
+
     if(state !== STATE.APPLY && state !== STATE.APPLY_OVERDUE && state !== STATE.APPLY_REPEAT) {
       return (
         <Page>
@@ -597,54 +598,62 @@ const ProductAdModalListPage = () => {
           </CountdownContainer>
 
 
-          {(state === STATE.COUNTDOWN) && (
-            <Title>PERSONALIZED RECOMMENDATION</Title>
-          )}
+          {/*NOTICE: REFACTOR ME*/}
+          <div className="" style={{
+            position: "relative",
+            top: "-20px"
+          }}>
+            {(state === STATE.COUNTDOWN) && (
+              <Title>PERSONALIZED RECOMMENDATION</Title>
+            )}
 
-          <StyledList>
-            {state === STATE.LOADING && (
-              <div className="container">
-                <div>Loading</div>
-              </div>
-            )}
-            {state === STATE.COUNTDOWN && productList?.length === 0 && (
-              <div className="container">
-                <p>Insufficient funds to provide product recommendations. Please adjust your budget accordingly.</p>
-              </div>
-            )}
-            {(state === STATE.COUNTDOWN || state === STATE.OVERDUE) && productList?.map((product) => (
-              <Product
-                key={product.productId ?? ""}
-                logoUrl={product.logoUrl ?? ""}
-                productName={product.productName ?? ""}
-                loanableAmount={product.loanableAmount ?? 0}
-                interestRate={product?.interestRate ?? ""}
-                terms={product?.interestRate ?? ""}
-              />
-            ))}
-            {state === STATE.OVERDUE_LOADING && (
-              <div className="container">
-                <div className="overdue">
-                  <div>Please wait patiently for 30 seconds to 2 minutes while we review the loan amount you are eligible for as quickly as possible.</div>
-                  <div>To prevent errors, please remain on this screen.</div>
+            <StyledList>
+              {state === STATE.LOADING && (
+                <div className="container">
+                  <div>Loading</div>
                 </div>
-              </div>
-            )}
-          </StyledList>
+              )}
+              {state === STATE.COUNTDOWN && productList?.length === 0 && (
+                <div className="container">
+                  <p>Insufficient funds to provide product recommendations. Please adjust your budget accordingly.</p>
+                </div>
+              )}
+              {(state === STATE.COUNTDOWN || state === STATE.OVERDUE) && productList?.map((product) => (
+                <Product
+                  key={product.productId ?? ""}
+                  logoUrl={product.logoUrl ?? ""}
+                  productName={product.productName ?? ""}
+                  loanableAmount={product.loanableAmount ?? 0}
+                  interestRate={product?.interestRate ?? ""}
+                  terms={product?.interestRate ?? ""}
+                />
+              ))}
+              {state === STATE.OVERDUE_LOADING && (
+                <div className="container">
+                  <div className="overdue">
+                    <div>Please wait patiently for 30 seconds to 2 minutes while we review the loan amount you are eligible for as quickly as possible.</div>
+                    <div>To prevent errors, please remain on this screen.</div>
+                  </div>
+                </div>
+              )}
+            </StyledList>
 
-          <Footer>
-            <Button
-              background="#F58B10"
-              disable={state === STATE.INIT || state === STATE.LOADING || state === STATE.OVERDUE_LOADING || productList.length === 0}
-              onClick={() =>{
-                if((state === STATE.COUNTDOWN || state === STATE.OVERDUE) && productList.length > 0) onClickToApply();
-              }}
-            >Apply</Button>
-          </Footer>
+            <Footer>
+              <Button
+                background="#F58B10"
+                disable={state === STATE.INIT || state === STATE.LOADING || state === STATE.OVERDUE_LOADING || productList.length === 0}
+                onClick={() =>{
+                  if((state === STATE.COUNTDOWN || state === STATE.OVERDUE) && productList.length > 0) onClickToApply();
+                }}
+              >Apply</Button>
+            </Footer>
+
+          </div>
+
 
         </Page>
       );
-    } else {
+    } else if(state === STATE.APPLY) {
       return (
         <Page>
           <ApplyContainer>
@@ -654,17 +663,57 @@ const ProductAdModalListPage = () => {
                 <p className="p1">After the review is successful, you can view your loan order in the loan record.</p>
               </div>
             )}
+          </ApplyContainer>
+        </Page>
+      )
+    } else if(state === STATE.APPLY_OVERDUE) {
+      return (
+        <Page>
+          <ApplyContainer>
+            <div className="title">Your loan application has been submitted.</div>
             {state === STATE.APPLY_OVERDUE && (
               <div className="content">
                 <p className="p1">The limited-time promotional loan scheme has expired, and the loan amount will be based on the latest review results.</p>
                 <p className="p2">Please be patient while waiting for the review results. After the review is successful, you can view your loan order in the loan record.</p>
               </div>
             )}
+          </ApplyContainer>
+        </Page>
+      )
+    } else if(state === STATE.APPLY_REPEAT) {
+      return (
+        <Page>
+          <ApplyContainer>
+            <div className="title">Your loan application has been submitted.</div>
             {state === STATE.APPLY_REPEAT && (
               <div>
                 <p className="p1">Please do not resubmit and wait patiently.</p>
               </div>
             )}
+          </ApplyContainer>
+        </Page>
+      )
+    } else{
+      return (
+        <Page>
+          <ApplyContainer>
+            <div className="title">Your loan application has been submitted.</div>
+            {/*{state === STATE.APPLY && (*/}
+            {/*  <div className="content">*/}
+            {/*    <p className="p1">After the review is successful, you can view your loan order in the loan record.</p>*/}
+            {/*  </div>*/}
+            {/*)}*/}
+            {/*{state === STATE.APPLY_OVERDUE && (*/}
+            {/*  <div className="content">*/}
+            {/*    <p className="p1">The limited-time promotional loan scheme has expired, and the loan amount will be based on the latest review results.</p>*/}
+            {/*    <p className="p2">Please be patient while waiting for the review results. After the review is successful, you can view your loan order in the loan record.</p>*/}
+            {/*  </div>*/}
+            {/*)}*/}
+            {/*{state === STATE.APPLY_REPEAT && (*/}
+            {/*  <div>*/}
+            {/*    <p className="p1">Please do not resubmit and wait patiently.</p>*/}
+            {/*  </div>*/}
+            {/*)}*/}
           </ApplyContainer>
         </Page>
       )
