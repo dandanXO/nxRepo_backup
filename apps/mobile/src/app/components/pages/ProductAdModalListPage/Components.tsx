@@ -240,8 +240,8 @@ export const ApplyContainer = styled.div`
 export const StyledList = styled.div`
   margin-bottom: 16px;
 
-  min-height: 120px;
-  max-height: 120px;
+  min-height: 200px;
+  max-height: 200px;
   overflow: auto;
 
   .container {

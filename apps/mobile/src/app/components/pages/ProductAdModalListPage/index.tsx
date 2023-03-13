@@ -8,7 +8,6 @@ import {
 import {environment} from "../../../../environments/environment";
 import ReactSlider from 'react-slider'
 import {GetPersonalLoanRecommendResponse, RecommendProduct} from "../../../api/GetPersonalLoanRecommend";
-
 import {useTranslation} from "react-i18next";
 import {i18nProductAdModalListPage} from "./i18n/translations";
 
@@ -23,9 +22,15 @@ import {
   Title,
   Product, ApplyContainer,
 } from "./Components";
+
 import moment from 'moment-timezone';
 import {PostLoanQuotaRefreshResponse} from "../../../api/PostLoanQuotaRefreshResponse";
-import {boolean} from "zod";
+import styled from "styled-components";
+
+const EmbedPage = styled.div`
+  background: ${({ theme }) => theme.color.gray100};
+`;
+
 
 enum STATE {
   "INIT" ,
@@ -52,8 +57,8 @@ let triggerRefreshID: NodeJS.Timer;
 let debugTimeout1: NodeJS.Timer;
 let debugTimeout2: NodeJS.Timer;
 
-const limitRetryCount = 30;
-let currentRetryCount = 0;
+// const limitRetryCount = 30;
+// let currentRetryCount = 0;
 const ProductAdModalListPage = () => {
 
     const [state, setState] = useState<STATE>(STATE.INIT);
@@ -304,52 +309,56 @@ const ProductAdModalListPage = () => {
     }, [])
 
     const asyncRefreshTimeout = () => {
-      console.log("asyncRefreshTimeout");
-
       let retry = true;
-      const asyncRequestRefresh = new Promise((resolve, reject) => {
+      const asyncRequestRefresh = () => new Promise((resolve, reject) => {
+        const pendingRefetch = () => {
+          setTimeout(() => {
+            resolve(false)
+          }, 20 * 1000)
+        };
         triggerRefresh(null).then((result)  => {
           console.log("result", result);
           const data = (result as any).data as PostLoanQuotaRefreshResponse;
           console.log("data", data);
           if((result as any).error) {
             // NOTICE: 商務邏輯錯誤
-            console.log("商務邏輯錯誤")
-            resolve(false);
+            console.log("商務邏輯錯誤 - 像是時間太頻繁")
+            pendingRefetch();
           } else {
             if(data.effective) {
               resolve(true);
             } else {
-              resolve(false);
+              console.log("沒得到")
+              pendingRefetch();
             }
           }
         }).catch((error) => {
           console.log("error", error);
-          reject(true);
+          pendingRefetch();
         });
       })
 
-        triggerRefreshID = setTimeout(() => {
-        if(retry && currentRetryCount < limitRetryCount) {
-          asyncRequestRefresh.then((effective) => {
-            console.log("refreshInterval.result", effective);
-            if(effective) {
-              retry = false;
-              requestRecommendProducts();
-            } else {
-              currentRetryCount++;
-              asyncRefreshTimeout();
-            }
-          }).catch((error) => {
-            // console.log("error", error)
+      if(!retry) {
+        clearTimeout(triggerRefreshID);
+        requestRecommendProducts();
+      } else {
+        asyncRequestRefresh().then((effective) => {
+          if(effective) {
+            retry = false;
+            requestRecommendProducts();
+          } else {
+            retry = true;
+            // currentRetryCount++;
             asyncRefreshTimeout();
-          })
-        } else {
-          console.log("success")
-          clearTimeout(triggerRefreshID);
-          requestRecommendProducts();
-        }
-      }, 20 * 1000)
+          }
+        }).catch((error) => {
+          // console.log("error", error)
+          // console.log("還是拿不到")
+          retry = true;
+          asyncRefreshTimeout();
+        })
+      }
+
     }
 
     const onClickToLoadRecommendation = useCallback(() => {
@@ -518,7 +527,7 @@ const ProductAdModalListPage = () => {
 
     if(state !== STATE.APPLY && state !== STATE.APPLY_OVERDUE && state !== STATE.APPLY_REPEAT) {
       return (
-        <Page>
+        <EmbedPage>
           <StyledSlider>
 
             <div className="info">
@@ -578,8 +587,15 @@ const ProductAdModalListPage = () => {
                     <span>Re-Acquire The Loan Amount</span>
                   </Button>
                 </div>
-
               )}
+              {/*// NOTICE: DEBUG*/}
+              {/*{(state === STATE.OVERDUE) && (*/}
+              {/*  <div className="button-container">*/}
+              {/*    <Button color="#fff" background="#F82626" onClick={onClickToLoadRecommendation}>*/}
+              {/*      <span>測試開拿</span>*/}
+              {/*    </Button>*/}
+              {/*  </div>*/}
+              {/*)}*/}
               {state === STATE.OVERDUE_LOADING && (
                 <div className="button-container">
                   <Button color="#fff" background="#F82626">
@@ -651,7 +667,7 @@ const ProductAdModalListPage = () => {
           </div>
 
 
-        </Page>
+        </EmbedPage>
       );
     } else if(state === STATE.APPLY) {
       return (
