@@ -637,7 +637,7 @@ const ProductAdModalListPage = () => {
               background="#F58B10"
               disable={state === STATE.INIT || state === STATE.LOADING || state === STATE.OVERDUE_LOADING || productList.length === 0}
               onClick={() =>{
-                if(state === STATE.COUNTDOWN || state === STATE.OVERDUE) onClickToApply();
+                if((state === STATE.COUNTDOWN || state === STATE.OVERDUE) && productList.length > 0) onClickToApply();
               }}
             >Apply</Button>
           </Footer>
