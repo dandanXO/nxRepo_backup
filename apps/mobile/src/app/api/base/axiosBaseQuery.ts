@@ -91,7 +91,7 @@ const axiosBaseQuery =
                 onDownloadProgress: onDownloadPercent,
             };
         } catch (axiosError) {
-            // console.log("axiosError", axiosError);
+            console.log("axiosError", axiosError);
             const err = axiosError as AxiosError;
             // console.log("err.toJSON()", err.toJSON());
             const customError = JSON.parse(JSON.stringify(err.response?.data)) as {
@@ -104,7 +104,11 @@ const axiosBaseQuery =
             const customErrorMessage = customError?.data?.msg || customError.message;
             // console.log(err);
             // console.log(error);
-            alertModal(customErrorMessage);
+
+            // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
+            if(err.config.url !== "/api/v2/loan/quota/refresh") {
+              alertModal(customErrorMessage);
+            }
 
             const error = new Error();
             // NOTE: 後端客製化訊息

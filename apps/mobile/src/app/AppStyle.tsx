@@ -6,7 +6,7 @@ interface IGlobalStyle {
 }
 export const AppStyle = createGlobalStyle<IGlobalStyle>`
   body {
-    font-family: Rubik;
+    font-family: Arial;
     margin: 0;
     padding: 0;
     // NOTE: APP 底色
