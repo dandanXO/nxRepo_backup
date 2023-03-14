@@ -6,7 +6,9 @@ import {
   usePostLoanQuotaRefreshMutation
 } from "../../../api";
 import {environment} from "../../../../environments/environment";
-import ReactSlider from 'react-slider'
+// import ReactSlider from 'react-slider'
+import ReactSlider from "./ReactSlider";
+
 import {GetPersonalLoanRecommendResponse, RecommendProduct} from "../../../api/GetPersonalLoanRecommend";
 import {useTranslation} from "react-i18next";
 import {i18nProductAdModalListPage} from "./i18n/translations";
@@ -59,6 +61,7 @@ let debugTimeout2: NodeJS.Timer;
 
 // const limitRetryCount = 30;
 // let currentRetryCount = 0;
+let firstLoadingList = false;
 const ProductAdModalListPage = () => {
 
     const [state, setState] = useState<STATE>(STATE.INIT);
@@ -76,8 +79,18 @@ const ProductAdModalListPage = () => {
 
 
     useEffect(() => {
-      setCurrentData(data);
-      setCurrentValue(data?.quotaBar?.current || 0);
+      // console.log("超怪 data", data)
+      // NOTICE: 過段時間會拿到 undefined
+      // undefined=>undefined->hasData->undefined
+      if(data) {
+        setCurrentData(data);
+        setCurrentValue(() => {
+          return data?.quotaBar?.current || 0
+        });
+      } else {
+        console.log("data 被重置成 undefined")
+      }
+
     }, [data])
 
     const [triggerRefresh, {
@@ -215,7 +228,10 @@ const ProductAdModalListPage = () => {
       } ;
       // console.log("data", data);
       setCurrentData(data);
-      setCurrentValue(data?.quotaBar.current);
+      setCurrentValue(() => {
+        return data?.quotaBar.current
+      });
+
     }
 
     useEffect(() => {
@@ -242,6 +258,7 @@ const ProductAdModalListPage = () => {
       trigger({
         count: "",
       }).then((data) => {
+
         const result = data.data;
         if(result?.quotaExpireTime) {
           const currentTime = debug ? moment() : moment.tz("Asia/Kolkata")
@@ -251,7 +268,21 @@ const ProductAdModalListPage = () => {
           // console.log("quotaExpireTime.3:", moment(result?.quotaExpireTime.split(".")[0]).format("YYYY-MM-DD HH:mm:ss"));
           const expireTime = result?.quotaExpireTime.split(".")[0];
           const isOverdue = currentTime.diff(expireTime) > 0;
-          if(isOverdue) {
+
+          const isBelow7days = currentTime.diff(expireTime, "day") <=7;
+
+          if(!firstLoadingList) {
+            firstLoadingList = true;
+          }
+
+          // console.log("isOverdue", isOverdue)
+          // console.log("isBelow7days", isBelow7days)
+          // console.log("firstLoadingList", firstLoadingList)
+
+          if(firstLoadingList && isBelow7days) {
+            setState(STATE.OVERDUE_LOADING);
+            asyncRefreshTimeout();
+          } else if(isOverdue) {
             // console.log("[mode][production] 過期");
             setState(STATE.OVERDUE);
           } else {
@@ -424,7 +455,9 @@ const ProductAdModalListPage = () => {
 
     useEffect(() => {
       if(currentData?.quotaBar.current) {
-        setCurrentValue(currentData?.quotaBar.current)
+        setCurrentValue(() => {
+          return currentData?.quotaBar.current
+        })
       }
     }, [currentData?.quotaBar.current]);
 
@@ -541,7 +574,7 @@ const ProductAdModalListPage = () => {
                 thumbClassName="example-thumb"
                 thumbActiveClassName="example-thumbActiveClassName"
                 trackClassName="example-track"
-                renderThumb={(props, state) => {
+                renderThumb={(props: any, state: any) => {
                   // console.log("props", props);
                   // console.log("state", state);
                   return (
@@ -558,8 +591,10 @@ const ProductAdModalListPage = () => {
                 max={currentData?.quotaBar?.max}
                 step={currentData?.quotaBar?.interval}
                 value={currentValue}
-                onChange={(value, index) => {
-                  setCurrentValue(!isNaN(value) ? value : 0)
+                onChange={(value: any, index: any) => {
+                  setCurrentValue(() => {
+                    return !isNaN(value) ? value : 0;
+                  })
                 }}
               />
             </div>

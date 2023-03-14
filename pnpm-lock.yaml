@@ -80,6 +80,7 @@ specifiers:
   nx: 14.7.5
   popper.js: 1.16.1
   prettier: 2.6.2
+  prop-types: ^15.8.1
   query-string: 7.1.1
   ramda: 0.27.1
   react: 18.2.0
@@ -136,6 +137,7 @@ dependencies:
   next: 12.2.5_a7mipu7kvrstgwvi56qu2qyzhe
   next-plugin-antd-less: 1.8.0_webpack@5.74.0
   popper.js: 1.16.1
+  prop-types: 15.8.1
   query-string: 7.1.1
   ramda: 0.27.1
   react: 18.2.0
