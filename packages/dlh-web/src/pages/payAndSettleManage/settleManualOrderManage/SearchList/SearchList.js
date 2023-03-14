@@ -78,7 +78,7 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={'支付平台'}>
+                            <Form.Item {...formItemLayout} label={'代收平台'}>
                                 {
                                     getFieldDecorator('platId', {
                                         initialValue: ""
@@ -105,7 +105,7 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={'支付商户'}>
+                            <Form.Item {...formItemLayout} label={'代收商户'}>
                                 {
                                     getFieldDecorator('mchId', {
                                         initialValue: ""

@@ -522,7 +522,7 @@ class SettleOrderList extends Component {
                     exportSettleOrder={this.exportSettleOrder}
                     btnDisabled={btnDisabled}
                 />
-                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading}/>
+                <CommonTable handlePageChange={this.handlePageChange} columns={this.columns} dataSource={data} pagination={pagination} loading={loading} scroll={{x:'100%'}}/>
                 <EditModel visible={visible} allSettlePlatList={allSettlePlatList} info={info} handleCancel={this.handleModalCancel} handleOk={this.handleModalOk}/>
             </div>
         );
