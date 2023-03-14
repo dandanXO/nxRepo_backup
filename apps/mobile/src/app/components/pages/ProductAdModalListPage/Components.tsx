@@ -3,7 +3,7 @@ import {RecommendProduct} from "../../../api/GetPersonalLoanRecommend";
 import {useTranslation} from "react-i18next";
 import {i18nProductAdModalListPage} from "./i18n/translations";
 import {environment} from "../../../../environments/environment";
-import React from "react";
+import React, {memo} from "react";
 
 export const Title = styled.div`
   font-size: 16px;
@@ -262,7 +262,7 @@ export const StyledList = styled.div`
 
 type ProductAdProps = Required<Pick<RecommendProduct, "logoUrl"|"productName"|"loanableAmount"|"interestRate"|"terms">>
 
-export const Product = ({logoUrl, productName, loanableAmount,interestRate, terms}: ProductAdProps) => {
+export const Product = memo(({logoUrl, productName, loanableAmount,interestRate, terms}: ProductAdProps) => {
   const {t} = useTranslation(i18nProductAdModalListPage.namespace);
   return (
     <StyledProduct>
@@ -282,4 +282,5 @@ export const Product = ({logoUrl, productName, loanableAmount,interestRate, term
       </div>
     </StyledProduct>
   )
-}
+});
+
