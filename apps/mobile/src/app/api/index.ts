@@ -9,6 +9,9 @@ import {PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBi
 import {PostLoanSubmitOrderRequestBody} from "./postLoanSubmitOrder";
 import {GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring} from "./getLoanRecommend";
 import {GetBindCardDropListResponse} from "./GetBindCardDropList";
+import {GetPersonalLoanRecommendRequestQuerystring, GetPersonalLoanRecommendResponse} from "./GetPersonalLoanRecommend";
+import {PostLoanQuotaRefreshResponse} from "./PostLoanQuotaRefreshResponse";
+import {PostApplyProductRequest} from "./PostApplyProductRequest";
 
 interface GetActivityAdsRequest {
   phoneNo: string;
@@ -28,6 +31,8 @@ export const API = createApi({
     baseQuery: axiosBaseQuery({
         baseUrl: "/api/v2",
     }),
+    // keepUnusedDataFor: 600,
+    // refetchOnMountOrArgChange: 60,
     endpoints: (builder) => ({
         // NOTE: 取得貸款訂單詳情
         getLoanDetail: builder.query<
@@ -126,6 +131,7 @@ export const API = createApi({
                 data: requestBody,
             }),
         }),
+        // NOTICE: deprecated
         // NOTE: 借款产品推荐
         getLoanRecommend: builder.query<GetLoanRecommendProductsResponse, GetLoanRecommendRequestQuerystring>({
             query: (query: GetLoanRecommendRequestQuerystring) => ({
@@ -133,6 +139,29 @@ export const API = createApi({
                 url: `/loan/recommend`,
                 params: query
             }),
+        }),
+        // NOTE: 個人借款推荐
+        getPersonalLoanRecommend: builder.query<GetPersonalLoanRecommendResponse, GetPersonalLoanRecommendRequestQuerystring>({
+          query: (query: GetPersonalLoanRecommendRequestQuerystring) => ({
+            method: "get",
+            url: `/product/personal-recommend`,
+            params: query,
+          }),
+        }),
+        // NOTE: 借款額度刷新
+        postLoanQuotaRefresh: builder.mutation<PostLoanQuotaRefreshResponse, null>({
+          query: () => ({
+            method: "post",
+            url: `/loan/quota/refresh`,
+          }),
+        }),
+        // NOTE: 個人推薦商品借款
+        postApplyProduct: builder.mutation<null, PostApplyProductRequest>({
+          query: (requestBody: PostApplyProductRequest) => ({
+            method: "post",
+            url: `/product/apply`,
+            data: requestBody,
+          })
         }),
         // NOTE: 取得活動廣告橫幅內容
         getActivityAds: builder.query<GetActivityAdsResponse, GetActivityAdsRequest>({
@@ -160,4 +189,8 @@ export const {
     usePostLoanSubmitOrderMutation,
     useGetLoanRecommendQuery,
     useLazyGetActivityAdsQuery,
+    useGetPersonalLoanRecommendQuery,
+    useLazyGetPersonalLoanRecommendQuery,
+    usePostLoanQuotaRefreshMutation,
+    usePostApplyProductMutation,
 } = API;
