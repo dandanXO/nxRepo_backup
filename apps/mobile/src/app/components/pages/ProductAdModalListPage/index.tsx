@@ -238,7 +238,7 @@ const ProductAdModalListPage = () => {
     })
 
     const requestRecommendProducts = () => {
-      console.log("requestRecommendProducts");
+      // console.log("requestRecommendProducts");
       trigger({
         count: "",
       }).then((data) => {
@@ -252,10 +252,10 @@ const ProductAdModalListPage = () => {
           const expireTime = result?.quotaExpireTime.split(".")[0];
           const isOverdue = currentTime.diff(expireTime) > 0;
           if(isOverdue) {
-            console.log("[mode][production] 過期");
+            // console.log("[mode][production] 過期");
             setState(STATE.OVERDUE);
           } else {
-            console.log("[mode][production] 只能執行一次")
+            // console.log("[mode][production] 只能執行一次")
             setState(STATE.COUNTDOWN);
             // NOTICE: real world
             const expiredTime = result?.quotaExpireTime ? result?.quotaExpireTime.split(".")[0] : ""
@@ -267,7 +267,7 @@ const ProductAdModalListPage = () => {
           }
         }
       }).catch((error) => {
-        console.log("requestRecommendProducts")
+        // console.log("requestRecommendProducts")
         console.log(error)
       })
     }
@@ -277,7 +277,7 @@ const ProductAdModalListPage = () => {
 
       debugSwitch(debug,() => {
         // NOTICE: DEBUG
-        console.log("[mode][debug] 只能執行一次")
+        // console.log("[mode][debug] 只能執行一次")
         setState(STATE.LOADING);
 
         debugTimeout1 = setTimeout(() => {
@@ -297,11 +297,11 @@ const ProductAdModalListPage = () => {
       return () => {
         debugSwitch(debug, () => {
           // NOTICE: DEBUG
-          console.log("effect return cancel.intervalIDRef.current",intervalIDRef.current)
+          // console.log("effect return cancel.intervalIDRef.current",intervalIDRef.current)
           cancelCountDown();
         }, () => {
           // NOTICE: PRODUCTION
-          console.log("effect return cancel.intervalIDRef.current",intervalIDRef.current)
+          // console.log("effect return cancel.intervalIDRef.current",intervalIDRef.current)
           cancelCountDown();
         })
       }
@@ -317,18 +317,18 @@ const ProductAdModalListPage = () => {
           }, 20 * 1000)
         };
         triggerRefresh(null).then((result)  => {
-          console.log("result", result);
+          // console.log("result", result);
           const data = (result as any).data as PostLoanQuotaRefreshResponse;
-          console.log("data", data);
+          // console.log("data", data);
           if((result as any).error) {
             // NOTICE: 商務邏輯錯誤
-            console.log("商務邏輯錯誤 - 像是時間太頻繁")
+            // console.log("商務邏輯錯誤 - 像是時間太頻繁")
             pendingRefetch();
           } else {
             if(data.effective) {
               resolve(true);
             } else {
-              console.log("沒得到")
+              // console.log("沒得到")
               pendingRefetch();
             }
           }
@@ -415,7 +415,7 @@ const ProductAdModalListPage = () => {
         applyQuota: currentValue,
         productIds: productList.map(product => product.productId)
       }).then((result) => {
-        console.log("result", result);
+        // console.log("result", result);
       }).catch((error) => {
         console.log(error);
       })
@@ -523,7 +523,7 @@ const ProductAdModalListPage = () => {
     }, [currentValue]);
     // console.log("currentData", currentData);
 
-    console.log("state", STATE[state])
+    // console.log("state", STATE[state])
 
     if(state !== STATE.APPLY && state !== STATE.APPLY_OVERDUE && state !== STATE.APPLY_REPEAT) {
       return (
