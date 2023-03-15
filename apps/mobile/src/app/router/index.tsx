@@ -25,15 +25,15 @@ import NewsSectionPage from "../components/pages/NewsSectionPage";
 
 // NOTE: Component - way2
 // NOTICE: TS1323: Dynamic imports are only supported when the '--module' flag is set to 'es2020', 'es2022', 'esnext', 'commonjs', 'amd', 'system', 'umd', 'node16', or 'nodenext'.
-// const LazyIndexPage = React.lazy(() => import(/* webpackChunkName: "chunk-index" */ "../components/pages/IndexPage"))
-// const LazyLoanDetailsPage = React.lazy(() => import(/* webpackChunkName: "chunk-loan-details" */ "../components/pages/LoanDetailsPage"))
-// const LazyExtendDetailsPage = React.lazy(() => import(/* webpackChunkName: "chunk-extend-details" */ "../components/pages/ExtendDetailsPage"))
-// const LazyBindBankAccountPage = React.lazy(() => import(/* webpackChunkName: "chunk-bind-bank-account" */ "../components/pages/BindBankAccountPage"))
-// const LazyUploadPaymentReceiptPage = React.lazy(() => import(/* webpackChunkName: "chunk-upload-payment-receipt" */ "../components/pages/UploadPaymentReceiptPage"))
-// const LazyUploadedPaymentReceiptPage = React.lazy(() => import(/* webpackChunkName: "chunk-uploaded-payment-receipt" */ "../components/pages/UploadedPaymentReceiptPage"))
-// const LazyProductAdModalListPage = React.lazy(() => import(/* webpackChunkName: "chunk-product-ad-modal-list" */ "../components/pages/ProductAdModalListPage"))
-// const LazyActivityAdListPage = React.lazy(() => import(/* webpackChunkName: "chunk-activity-ad-modal-list" */ "../components/pages/ActivityAdListPage"))
-// const LazyNewsSectionPage = React.lazy(() => import(/* webpackChunkName: "chunk-news-section" */ "../components/pages/NewsSectionPage"))
+const LazyIndexPage = React.lazy(() => import(/* webpackChunkName: "chunk-index" */ "../components/pages/IndexPage"))
+const LazyLoanDetailsPage = React.lazy(() => import(/* webpackChunkName: "chunk-loan-details" */ "../components/pages/LoanDetailsPage"))
+const LazyExtendDetailsPage = React.lazy(() => import(/* webpackChunkName: "chunk-extend-details" */ "../components/pages/ExtendDetailsPage"))
+const LazyBindBankAccountPage = React.lazy(() => import(/* webpackChunkName: "chunk-bind-bank-account" */ "../components/pages/BindBankAccountPage"))
+const LazyUploadPaymentReceiptPage = React.lazy(() => import(/* webpackChunkName: "chunk-upload-payment-receipt" */ "../components/pages/UploadPaymentReceiptPage"))
+const LazyUploadedPaymentReceiptPage = React.lazy(() => import(/* webpackChunkName: "chunk-uploaded-payment-receipt" */ "../components/pages/UploadedPaymentReceiptPage"))
+const LazyProductAdModalListPage = React.lazy(() => import(/* webpackChunkName: "chunk-product-ad-modal-list" */ "../components/pages/ProductAdModalListPage"))
+const LazyActivityAdListPage = React.lazy(() => import(/* webpackChunkName: "chunk-activity-ad-modal-list" */ "../components/pages/ActivityAdListPage"))
+const LazyNewsSectionPage = React.lazy(() => import(/* webpackChunkName: "chunk-news-section" */ "../components/pages/NewsSectionPage"))
 
 // NOTE: Component - way3 = Error
 // let LazyIndexPage: any;
@@ -82,15 +82,15 @@ import NewsSectionPage from "../components/pages/NewsSectionPage";
 // })
 
 // NOTE: Component - way4
-const LazyIndexPage = loadable(() => import(/* webpackChunkName: "chunk-index" */ "../components/pages/IndexPage"))
-const LazyLoanDetailsPage = loadable(() => import(/* webpackChunkName: "chunk-loan-details" */ "../components/pages/LoanDetailsPage"))
-const LazyExtendDetailsPage = loadable(() => import(/* webpackChunkName: "chunk-extend-details" */ "../components/pages/ExtendDetailsPage"))
-const LazyBindBankAccountPage = loadable(() => import(/* webpackChunkName: "chunk-bind-bank-account" */ "../components/pages/BindBankAccountPage"))
-const LazyUploadPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "chunk-upload-payment-receipt" */ "../components/pages/UploadPaymentReceiptPage"))
-const LazyUploadedPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "chunk-uploaded-payment-receipt" */ "../components/pages/UploadedPaymentReceiptPage"))
-const LazyProductAdModalListPage = loadable(() => import(/* webpackChunkName: "chunk-product-ad-modal-list" */ "../components/pages/ProductAdModalListPage"))
-const LazyActivityAdListPage = loadable(() => import(/* webpackChunkName: "chunk-activity-ad-modal-list" */ "../components/pages/ActivityAdListPage"))
-const LazyNewsSectionPage = loadable(() => import(/* webpackChunkName: "chunk-news-section" */ "../components/pages/NewsSectionPage"))
+// const LazyIndexPage = loadable(() => import(/* webpackChunkName: "chunk-index" */ "../components/pages/IndexPage"))
+// const LazyLoanDetailsPage = loadable(() => import(/* webpackChunkName: "chunk-loan-details" */ "../components/pages/LoanDetailsPage"))
+// const LazyExtendDetailsPage = loadable(() => import(/* webpackChunkName: "chunk-extend-details" */ "../components/pages/ExtendDetailsPage"))
+// const LazyBindBankAccountPage = loadable(() => import(/* webpackChunkName: "chunk-bind-bank-account" */ "../components/pages/BindBankAccountPage"))
+// const LazyUploadPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "chunk-upload-payment-receipt" */ "../components/pages/UploadPaymentReceiptPage"))
+// const LazyUploadedPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "chunk-uploaded-payment-receipt" */ "../components/pages/UploadedPaymentReceiptPage"))
+// const LazyProductAdModalListPage = loadable(() => import(/* webpackChunkName: "chunk-product-ad-modal-list" */ "../components/pages/ProductAdModalListPage"))
+// const LazyActivityAdListPage = loadable(() => import(/* webpackChunkName: "chunk-activity-ad-modal-list" */ "../components/pages/ActivityAdListPage"))
+// const LazyNewsSectionPage = loadable(() => import(/* webpackChunkName: "chunk-news-section" */ "../components/pages/NewsSectionPage"))
 
 // LazyIndexPage.preload();
 // LazyLoanDetailsPage.preload();
