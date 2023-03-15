@@ -60,7 +60,7 @@ export const StyledProduct = styled.div`
 export const StyledSlider = styled.div`
   background: #FFF0DE;
   border: 1.5px solid #F58B10;
-  padding: 16px 12px 40px;
+  padding: 4px 8px 30px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;

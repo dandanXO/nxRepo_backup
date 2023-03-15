@@ -11,16 +11,16 @@ import useErrorModal from "../../../../../packages/cms-webpack4/src/modules/shar
 // })
 
 // NOTE: Component - way1
-// import IndexPage from "../components/pages/IndexPage";
-// import LoanDetailsPage, {STATE_REPAYMENT_STEPS} from "../components/pages/LoanDetailsPage";
-// import ExtendDetailsPage from "../components/pages/ExtendDetailsPage";
-// import BindBankAccountPage from "../components/pages/BindBankAccountPage";
-// import UploadPaymentReceiptPage from "../components/pages/UploadPaymentReceiptPage";
-// import UploadedPaymentReceiptPage from "../components/pages/UploadedPaymentReceiptPage";
-// import OldProductAdModalListPage from "../components/pages/OldProductAdModalListPage";
-// import ProductAdModalListPage from "../components/pages/ProductAdModalListPage";
-// import ActivityAdListPage, {DemoActivityAdListPage} from "../components/pages/ActivityAdListPage";
-// import NewsSectionPage from "../components/pages/NewsSectionPage";
+import IndexPage from "../components/pages/IndexPage";
+import LoanDetailsPage, {STATE_REPAYMENT_STEPS} from "../components/pages/LoanDetailsPage";
+import ExtendDetailsPage from "../components/pages/ExtendDetailsPage";
+import BindBankAccountPage from "../components/pages/BindBankAccountPage";
+import UploadPaymentReceiptPage from "../components/pages/UploadPaymentReceiptPage";
+import UploadedPaymentReceiptPage from "../components/pages/UploadedPaymentReceiptPage";
+import OldProductAdModalListPage from "../components/pages/OldProductAdModalListPage";
+import ProductAdModalListPage from "../components/pages/ProductAdModalListPage";
+import ActivityAdListPage, {DemoActivityAdListPage} from "../components/pages/ActivityAdListPage";
+import NewsSectionPage from "../components/pages/NewsSectionPage";
 
 
 // NOTE: Component - way2
@@ -159,28 +159,28 @@ const Pages = () => {
   // const state = location.state as { name?: Location };
   const location = useLocation();
 
-  useEffect(() => {
-    if(!location.pathname) return;
-
-    console.log("location", location);
-    const map = {
-      "/": LazyIndexPage,
-      "/loan-details": LazyLoanDetailsPage,
-      "/extend-details": LazyExtendDetailsPage,
-      "/bank-bind": LazyBindBankAccountPage,
-      "/upload-payment-receipt": LazyUploadPaymentReceiptPage,
-      "/uploaded-payment-receipt": LazyUploadedPaymentReceiptPage,
-      "/product-ad-modal-list": LazyProductAdModalListPage,
-      "/activity-list": LazyActivityAdListPage,
-      "/news-section": LazyNewsSectionPage,
-    } as any;
-    (map[location.pathname] as any).preload();
-
-    Object.keys(map).map(routeKey => {
-      (map[routeKey] as any).load();
-    })
-
-  }, [location])
+  // useEffect(() => {
+  //   if(!location.pathname) return;
+  //
+  //   console.log("location", location);
+  //   const map = {
+  //     "/": LazyIndexPage,
+  //     "/loan-details": LazyLoanDetailsPage,
+  //     "/extend-details": LazyExtendDetailsPage,
+  //     "/bank-bind": LazyBindBankAccountPage,
+  //     "/upload-payment-receipt": LazyUploadPaymentReceiptPage,
+  //     "/uploaded-payment-receipt": LazyUploadedPaymentReceiptPage,
+  //     "/product-ad-modal-list": LazyProductAdModalListPage,
+  //     "/activity-list": LazyActivityAdListPage,
+  //     "/news-section": LazyNewsSectionPage,
+  //   } as any;
+  //   (map[location.pathname] as any).preload();
+  //
+  //   Object.keys(map).map(routeKey => {
+  //     (map[routeKey] as any).load();
+  //   })
+  //
+  // }, [location])
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
