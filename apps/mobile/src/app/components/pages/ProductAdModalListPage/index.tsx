@@ -259,7 +259,7 @@ const ProductAdModalListPage = () => {
         count: "",
       }).then((data) => {
 
-        const result = data.data;
+        const result = data.data as GetPersonalLoanRecommendResponse;
         if(result?.quotaExpireTime) {
           const currentTime = debug ? moment() : moment.tz("Asia/Kolkata")
           // console.log("currentTime.format:", currentTime.format("YYYY-MM-DD HH:mm:ss"))
@@ -269,21 +269,22 @@ const ProductAdModalListPage = () => {
           const expireTime = result?.quotaExpireTime.split(".")[0];
           const isOverdue = currentTime.diff(expireTime) > 0;
 
-          // const isBelow7days = currentTime.diff(expireTime, "day") <=7;
+          const isBelow7days = currentTime.diff(expireTime, "day") <=7;
 
-          // if(!firstLoadingList) {
-          //   firstLoadingList = true;
-          // }
+          if(!firstLoadingList) {
+            firstLoadingList = true;
+          }
 
           // console.log("isOverdue", isOverdue)
           // console.log("isBelow7days", isBelow7days)
           // console.log("firstLoadingList", firstLoadingList)
-          //
-          // if(firstLoadingList && isBelow7days) {
-          //   setState(STATE.OVERDUE_LOADING);
-          //   asyncRefreshTimeout();
-          // } else
-          if(isOverdue) {
+
+          // NOTE: 沒額度、有過期：自動刷新額度
+          // NOTE: 有額度、有過期： 不自動刷新額度
+          if(firstLoadingList && isBelow7days && result?.quotaBar.current > 0) {
+            setState(STATE.OVERDUE_LOADING);
+            asyncRefreshTimeout();
+          } else if(isOverdue) {
             // console.log("[mode][production] 過期");
             setState(STATE.OVERDUE);
           } else {
