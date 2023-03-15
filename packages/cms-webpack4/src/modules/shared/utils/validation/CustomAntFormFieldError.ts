@@ -9,5 +9,5 @@ export type CustomAntFormFieldError = {
         validateStatus?: ValidateStatus;
         help: string;
         value?: string;
-    }[]
+    }[] | {}
 }
