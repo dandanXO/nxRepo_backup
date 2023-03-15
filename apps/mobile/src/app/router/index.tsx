@@ -25,15 +25,15 @@ import NewsSectionPage from "../components/pages/NewsSectionPage";
 
 // NOTE: Component - way2
 // NOTICE: TS1323: Dynamic imports are only supported when the '--module' flag is set to 'es2020', 'es2022', 'esnext', 'commonjs', 'amd', 'system', 'umd', 'node16', or 'nodenext'.
-const LazyIndexPage = React.lazy(() => import(/* webpackChunkName: "chunk-index" */ "../components/pages/IndexPage"))
-const LazyLoanDetailsPage = React.lazy(() => import(/* webpackChunkName: "chunk-loan-details" */ "../components/pages/LoanDetailsPage"))
-const LazyExtendDetailsPage = React.lazy(() => import(/* webpackChunkName: "chunk-extend-details" */ "../components/pages/ExtendDetailsPage"))
-const LazyBindBankAccountPage = React.lazy(() => import(/* webpackChunkName: "chunk-bind-bank-account" */ "../components/pages/BindBankAccountPage"))
-const LazyUploadPaymentReceiptPage = React.lazy(() => import(/* webpackChunkName: "chunk-upload-payment-receipt" */ "../components/pages/UploadPaymentReceiptPage"))
-const LazyUploadedPaymentReceiptPage = React.lazy(() => import(/* webpackChunkName: "chunk-uploaded-payment-receipt" */ "../components/pages/UploadedPaymentReceiptPage"))
-const LazyProductAdModalListPage = React.lazy(() => import(/* webpackChunkName: "chunk-product-ad-modal-list" */ "../components/pages/ProductAdModalListPage"))
-const LazyActivityAdListPage = React.lazy(() => import(/* webpackChunkName: "chunk-activity-ad-modal-list" */ "../components/pages/ActivityAdListPage"))
-const LazyNewsSectionPage = React.lazy(() => import(/* webpackChunkName: "chunk-news-section" */ "../components/pages/NewsSectionPage"))
+// const LazyIndexPage = React.lazy(() => import(/* webpackChunkName: "chunk-index" */ "../components/pages/IndexPage"))
+// const LazyLoanDetailsPage = React.lazy(() => import(/* webpackChunkName: "chunk-loan-details" */ "../components/pages/LoanDetailsPage"))
+// const LazyExtendDetailsPage = React.lazy(() => import(/* webpackChunkName: "chunk-extend-details" */ "../components/pages/ExtendDetailsPage"))
+// const LazyBindBankAccountPage = React.lazy(() => import(/* webpackChunkName: "chunk-bind-bank-account" */ "../components/pages/BindBankAccountPage"))
+// const LazyUploadPaymentReceiptPage = React.lazy(() => import(/* webpackChunkName: "chunk-upload-payment-receipt" */ "../components/pages/UploadPaymentReceiptPage"))
+// const LazyUploadedPaymentReceiptPage = React.lazy(() => import(/* webpackChunkName: "chunk-uploaded-payment-receipt" */ "../components/pages/UploadedPaymentReceiptPage"))
+// const LazyProductAdModalListPage = React.lazy(() => import(/* webpackChunkName: "chunk-product-ad-modal-list" */ "../components/pages/ProductAdModalListPage"))
+// const LazyActivityAdListPage = React.lazy(() => import(/* webpackChunkName: "chunk-activity-ad-modal-list" */ "../components/pages/ActivityAdListPage"))
+// const LazyNewsSectionPage = React.lazy(() => import(/* webpackChunkName: "chunk-news-section" */ "../components/pages/NewsSectionPage"))
 
 // NOTE: Component - way3 = Error
 // let LazyIndexPage: any;
@@ -185,26 +185,26 @@ const Pages = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes >
-        <Route path="/" element={<LazyIndexPage />}/>
+        <Route path="/" element={<IndexPage />}/>
         {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-        <Route path="/loan-details" element={<LazyLoanDetailsPage />} />
+        <Route path="/loan-details" element={<LoanDetailsPage />} />
 
         {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-        <Route path="/extend-details" element={<LazyExtendDetailsPage />} />
+        <Route path="/extend-details" element={<ExtendDetailsPage />} />
 
         {/*<Route path="/repayment-modal-advertisement" element={<div />} />*/}
 
-        <Route path="/bank-bind" element={<LazyBindBankAccountPage />} />
-        <Route path="/upload-payment-receipt" element={<LazyUploadPaymentReceiptPage />}/>
-        <Route path="/uploaded-payment-receipt" element={<LazyUploadedPaymentReceiptPage />}/>
+        <Route path="/bank-bind" element={<BindBankAccountPage />} />
+        <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />}/>
+        <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />}/>
         {/*<Route path="/product-ad-modal-list-old" element={<OldProductAdModalListPage />}/>*/}
 
-        <Route path="/product-ad-modal-list" element={<LazyProductAdModalListPage />}/>
+        <Route path="/product-ad-modal-list" element={<ProductAdModalListPage />}/>
 
         {/*NOTICE: ad 字眼容易被 Google 擋*/}
-        <Route path="/activity-list" element={<LazyActivityAdListPage />}/>
+        <Route path="/activity-list" element={<ActivityAdListPage />}/>
         {/*<Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>*/}
-        <Route path="/news-section" element={<LazyNewsSectionPage/>}/>
+        <Route path="/news-section" element={<NewsSectionPage/>}/>
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       {/*{state?.name && (*/}
@@ -214,4 +214,37 @@ const Pages = () => {
       {/*)}*/}
     </Suspense>
   )
+
+  // return (
+  //   <Suspense fallback={<div>Loading...</div>}>
+  //     <Routes >
+  //       <Route path="/" element={<LazyIndexPage />}/>
+  //       {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
+  //       <Route path="/loan-details" element={<LazyLoanDetailsPage />} />
+  //
+  //       {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
+  //       <Route path="/extend-details" element={<LazyExtendDetailsPage />} />
+  //
+  //       {/*<Route path="/repayment-modal-advertisement" element={<div />} />*/}
+  //
+  //       <Route path="/bank-bind" element={<LazyBindBankAccountPage />} />
+  //       <Route path="/upload-payment-receipt" element={<LazyUploadPaymentReceiptPage />}/>
+  //       <Route path="/uploaded-payment-receipt" element={<LazyUploadedPaymentReceiptPage />}/>
+  //       {/*<Route path="/product-ad-modal-list-old" element={<OldProductAdModalListPage />}/>*/}
+  //
+  //       <Route path="/product-ad-modal-list" element={<LazyProductAdModalListPage />}/>
+  //
+  //       {/*NOTICE: ad 字眼容易被 Google 擋*/}
+  //       <Route path="/activity-list" element={<LazyActivityAdListPage />}/>
+  //       {/*<Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>*/}
+  //       <Route path="/news-section" element={<LazyNewsSectionPage/>}/>
+  //       <Route path="*" element={<div>Not Found</div>} />
+  //     </Routes>
+  //     {/*{state?.name && (*/}
+  //     {/*  <Routes>*/}
+  //     {/*    <Route path={`/loan-details`} element={<I18nRepaymentStepsModal/>}/>*/}
+  //     {/*  </Routes>*/}
+  //     {/*)}*/}
+  //   </Suspense>
+  // )
 }
