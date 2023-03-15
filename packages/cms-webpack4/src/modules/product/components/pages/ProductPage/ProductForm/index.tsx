@@ -9,6 +9,7 @@ import { UploadSettingSection } from "./UploadSettingSection";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { GetAvailableMerchantResponse } from "../../../../service/product/response/getAvailableMerchantResponse";
 import OrderSettingSection from "./OrderSettingSection";
+import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
 
 interface ProductFormProps {
     productModalData: ProductFormModal;
@@ -122,7 +123,7 @@ const Index = (props: ProductFormProps) => {
     }
 
     const isValueValidate = (value) => {
-        return  !value || isNaN(value) || equalRangeBelow100(value) 
+        return !value || isNaN(value) || equalRangeBelow100(value) 
     }
     const validatePreOrPostInterestRateField = (value, errorText, map, field) => {
 
@@ -130,14 +131,13 @@ const Index = (props: ProductFormProps) => {
             : isNaN(value) ? "请输入數字"
                 : equalRangeBelow100(value) ? "请输入0-100间数字" : '';
         return {
+            ...map,
             [field]: {
-                ...map,
                 validateStatus: helpText ? "error" : "",
                 help: helpText,
                 value: value,
             }
         }
-
     }
 
     const validatePreAndPostInterestRateSumBelow100 = (preInterestRate, postInterestRate, map, preInterestRateField, postInterestRateField) => {
@@ -156,14 +156,17 @@ const Index = (props: ProductFormProps) => {
             },
         }
     }
-
+    
+    
     // NOTICE: preInterestRate
     let map = {}
+    const [interestRatePairsTouchInput, setInterestRatePairsTouchInput] = useState(null);
     return (
         <Form
             // ref={props.formRef}
             {...layout} form={form} name="control-hooks" onFinish={onFinish}
             onFieldsChange={(changedFields, allFields) => {
+
                 if (changedFields[0].name[0] === "riskRankLoanAmount") {
                     const { riskRankLoanAmount } = form.getFieldsValue();
                     const changedField = [{ "loanAmount": changedFields[0].value, index: changedFields[0].name[1] }];
@@ -178,6 +181,10 @@ const Index = (props: ProductFormProps) => {
 
                 if (changedFields[0].name[0] === "oldGuestLoanQuotaSwitch") {
                     props.setEnableReLoanAmount(changedFields[0].value === 0)
+                }
+
+                if (changedFields[0].name[0] === "productInterestRatePairs") {
+                    setInterestRatePairsTouchInput(changedFields)
                 }
               
                 // NOTICE: 新客利息
@@ -195,7 +202,6 @@ const Index = (props: ProductFormProps) => {
                 // NOTICE:  inValidPostInterestUnit
                 if (changedFields[0].touched && changedFields[0].name[0] === "postInterestRate") {
                     map = validatePreOrPostInterestRateField(postInterestRateField[0].value, "请输入後置利息", map, 'postInterestRate');
-                    
                 }
 
                
@@ -204,8 +210,6 @@ const Index = (props: ProductFormProps) => {
                 }
                
                 // NOTICE: 次新客利息
-
-
                 const renewPreInterestRateField = allFields.filter(field => field.name && field.name[0] === "renewPreInterestRate")
                 const renewPostInterestRateField = allFields.filter(field => field.name && field.name[0] === "renewPostInterestRate")
 
@@ -214,9 +218,7 @@ const Index = (props: ProductFormProps) => {
 
 
                 if (changedFields[0].touched && changedFields[0].name[0] === "renewPreInterestRate") {
-
                     map = validatePreOrPostInterestRateField(renewPreInterestRateField[0].value, "请输入前置利息", map, 'renewPreInterestRate');
-                   
                 }
 
                 // NOTICE:  inValidPostInterestUnit
@@ -229,7 +231,9 @@ const Index = (props: ProductFormProps) => {
                     map = validatePreAndPostInterestRateSumBelow100(renewPreInterestRateField[0].value, renewPostInterestRateField[0].value, map, 'renewPreInterestRate', 'renewPostInterestRate')
                 }
 
+                let productInterestRatePairsValidationMap = {}
 
+                // 送出表單時欄位檢查
                 if (changedFields.length > 1) {
                     map = {
                         ...customAntFormFieldError,
@@ -238,103 +242,17 @@ const Index = (props: ProductFormProps) => {
                         ...validatePreOrPostInterestRateField(renewPreInterestRateField[0].value, "请输入前置利息", map, 'renewPreInterestRate'),
                         ...validatePreOrPostInterestRateField(renewPostInterestRateField[0].value, "请输入後置利息", map, 'renewPostInterestRate'),
                     };
+
+                    // NOTICE: 复贷利率
+                    const { productInterestRatePairs } = props.form.getFieldsValue();
+                    productInterestRatePairsValidationMap = validatePreOrPostInterestGroups(productInterestRatePairs);
                 }
-
-                const productInterestRatePairsField = allFields.filter(field => field.name && field.name[0] === "productInterestRatePairs")
-
-                // NOTICE: END 次新客利息
-                let productInterestRatePairsValidationMap = {}
-                // NOTICE: productInterestRatePairs
-                if (productInterestRatePairsField[0].name[0] === "productInterestRatePairs") {
-                    const productInterestRatePairs = allFields.filter(field => field.name && (field.name as any).length === 3 && field.name[0] === "productInterestRatePairs")
-                    let recordIndex
-                    productInterestRatePairs.map((row, index) => {
-                        recordIndex = row.name[1] !== recordIndex ? recordIndex = row.name[1] : recordIndex;
-                      
-                        // 按送出時檢查
-                        if (changedFields.length > 1) {
-                            // NOTE: 前置利息
-                            if (row.name[1] === recordIndex && row.name[2] === "preInterest") {
-                                productInterestRatePairsValidationMap[recordIndex] = {
-                                    ...productInterestRatePairsValidationMap[recordIndex],
-                                    ...validatePreOrPostInterestRateField(row.value, "请输入前置利息", {}, 'preInterest')
-                                };
-                            }
-                            // NOTE: 後置利息
-                            if (row.name[1] === recordIndex && row.name[2] === "postInterest") {
-                                productInterestRatePairsValidationMap[recordIndex] = {
-                                    ...productInterestRatePairsValidationMap[recordIndex],
-                                    ...validatePreOrPostInterestRateField(row.value, "请输入後置利息", {}, 'postInterest')
-                                };
-                            }
-                        }
-
-                        // NOTE: 前置利息
-                        if (row.name[1] === recordIndex && row.touched && (row.name[2] as any).indexOf("preInterest") > -1) {
-
-                            productInterestRatePairsValidationMap[recordIndex] = {
-                                ...productInterestRatePairsValidationMap[recordIndex],
-                                ...validatePreOrPostInterestRateField(row.value, "请输入前置利息", {}, 'preInterest')
-                            };
-                        }
-
-                        // NOTE: 後置利息
-                        if (row.name[1] === recordIndex && row.touched && (row.name[2] as any).indexOf("postInterest") > -1) {
-                            productInterestRatePairsValidationMap[recordIndex] = {
-                                ...productInterestRatePairsValidationMap[recordIndex],
-                                ...validatePreOrPostInterestRateField(row.value, "请输入後置利息", {}, 'postInterest')
-                            };
-                        }
-                    })
-
-
-                    Object.keys(productInterestRatePairsValidationMap).map(recordIndexKey => {
-                        if (
-                            productInterestRatePairsValidationMap[recordIndexKey]?.preInterest?.validateStatus !== "error" &&
-                            productInterestRatePairsValidationMap[recordIndexKey]?.postInterest?.validateStatus !== "error"
-                        ) {
-                            if (
-                                Number(productInterestRatePairsValidationMap[recordIndexKey].preInterest?.value) +
-                                Number(productInterestRatePairsValidationMap[recordIndexKey].postInterest?.value) > 100
-                            ) {
-                                productInterestRatePairsValidationMap[recordIndexKey] = {
-                                    preInterest: {
-                                        validateStatus: "error",
-                                        help: "前置利息＋后置利息不得超过100%"
-                                    },
-                                    postInterest: {
-                                        validateStatus: "error",
-                                        help: "前置利息＋后置利息不得超过100%"
-                                    },
-                                }
-                            } 
-                        }
-
-                    })
-                }
-
-                // console.log("productInterestRatePairsValidationMap.1", productInterestRatePairsValidationMap);
-
-
+              
 
                 setCustomAntFormFieldError(prev => {
-                    const finalMap = {}
-                    if (prev.productInterestRatePairs) {
-                        Object.keys(prev.productInterestRatePairs).map((key, index) => {
-                            finalMap[key] = prev.productInterestRatePairs[key];
-                        })
-                    }
-                    if (productInterestRatePairsValidationMap) {
-                        Object.keys(productInterestRatePairsValidationMap).map((key, index) => {
-                            finalMap[key] = {
-                                ...finalMap[key],
-                                ...productInterestRatePairsValidationMap[key]
-                            };
-                        })
-                    }
-
-                    // console.log("productInterestRatePairsValidationMap.2", productInterestRatePairsValidationMap);
-
+                    const finalMap = Object.keys(productInterestRatePairsValidationMap).length > 0
+                        ? productInterestRatePairsValidationMap
+                        : prev.productInterestRatePairs;
                     return {
                         ...prev,
                         ...map,
@@ -352,12 +270,7 @@ const Index = (props: ProductFormProps) => {
                 top: false,
                 enabled: true,
                 templateType: 1,
-                productInterestRatePairs: [{
-                    num: "",
-                    postInterest: "",
-                    preInterest: "",
-                    plusAmount: "",
-                }],
+                productInterestRatePairs: [],
                 newGuestLoanQuotaSwitch: 1,
                 oldGuestLoanQuotaSwitch: 1,
                 newGuestProductDisplayStatus: 1,
@@ -376,7 +289,12 @@ const Index = (props: ProductFormProps) => {
                 isEdit={productModalData.isEdit}
                 customAntFormFieldError={customAntFormFieldError}
             />
-            <RateSettingSection form={form} customAntFormFieldError={customAntFormFieldError} />
+            <RateSettingSection
+                form={form}
+                customAntFormFieldError={customAntFormFieldError}
+                setCustomAntFormFieldError={setCustomAntFormFieldError}
+                interestRatePairsTouchInput={interestRatePairsTouchInput}
+            />
             <UploadSettingSection />
         </Form>
     )

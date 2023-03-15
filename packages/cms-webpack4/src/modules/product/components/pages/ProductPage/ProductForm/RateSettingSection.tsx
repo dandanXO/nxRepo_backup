@@ -6,13 +6,16 @@ import {
 } from "../../../../../shared/utils/validation/validator";
 import {maxOneUnitFloatReplacer} from "../../../../../shared/utils/format/maxOneUnitFloatReplacer";
 import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import PreAndPostInterestGroups from "../../../../../shared/components/other/PreAndPostInterestGroups";
 import {FormInstance} from "antd/es";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
 interface RateSettingSectionProps {
-  form: FormInstance;
-  customAntFormFieldError: CustomAntFormFieldError
+    form: FormInstance;
+    customAntFormFieldError: CustomAntFormFieldError;
+    setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
+    interestRatePairsTouchInput: any
 }
 export const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>
 
@@ -176,95 +179,13 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                           <div>第4期之后费率同起始期数4</div>
                       </div>
                   }>
-                      <Form.List name="productInterestRatePairs">
-                          {(fields, { add, remove }) => {
-                              return (
-                                  <>
-                                      {fields.map(({ key, name, ...restField }, index) => (
-                                          <>
-                                              {index === 0 && (
-                                                  <Input.Group compact>
-                                                      <div>
-                                                          <CustomLabel>起始期数</CustomLabel>
-                                                          <CustomLabel style={{ width: 125 }}>前置利息</CustomLabel>
-                                                          <CustomLabel style={{ width: 130 }}>后置利息</CustomLabel>
-                                                          <CustomLabel>提額金额</CustomLabel>
-                                                      </div>
-                                                  </Input.Group>
-                                              )}
-
-                                              <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
-                                                  <Form.Item
-                                                      {...restField}
-                                                      name={[name, 'num']}
-                                                      rules={[
-                                                          {
-                                                              transform: (value) => Number(value),
-                                                              validator: async (_, value) => NumberValidator(_, value)({
-                                                                  min: 1,
-                                                                  minMessage: "请输入起始期数",
-                                                              })
-                                                          },
-                                                      ]}
-                                                  >
-                                                      <Input placeholder="起始期数" />
-                                                  </Form.Item>
-                                                  <Form.Item
-                                                      {...restField}
-                                                      name={[name, 'preInterest']}
-                                                      validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.validateStatus || ""}
-                                                      help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.help || ""}
-                                                      normalize={(value, prevValue, prevValues) => {
-                                                          return maxOneUnitFloatReplacer(value);
-                                                      }}
-                                                  >
-                                                      <Input placeholder="前置利息" suffix={"%"} />
-                                                  </Form.Item>
-                                                  <Form.Item
-                                                      {...restField}
-                                                      name={[name, 'postInterest']}
-                                                      validateStatus={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.validateStatus || ""}
-                                                      help={props?.customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.help || ""}
-                                                      normalize={(value, prevValue, prevValues) => {
-                                                          return maxOneUnitFloatReplacer(value);
-                                                      }}
-                                                  >
-                                                      <Input placeholder="后置利息" suffix={"%"} />
-                                                  </Form.Item>
-
-
-                                                  <Form.Item
-                                                      {...restField}
-                                                      name={[name, 'plusAmount']}
-                                                      rules={[
-                                                          {
-                                                              transform: (value) => value === '' ? '' : Number(value),
-                                                              validator: async (_, value) => NumberValidator(_, value)({
-                                                                  min: 0,
-                                                                  minMessage: "请输入提額金额",
-                                                                  required: true,
-                                                                  requiredErrorMessage: "请输入提額金额",
-                                                              }),
-                                                          },
-                                                      ]}
-                                                  >
-                                                      <Input placeholder="提額金额" />
-                                                  </Form.Item>
-
-
-                                                  <MinusCircleOutlined onClick={() => remove(name)} />
-                                              </Space>
-                                          </>
-                                      ))}
-                                      <Form.Item>
-                                          <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                              添加
-                                          </Button>
-                                      </Form.Item>
-                                  </>
-                              )
-                          }}
-                      </Form.List>
+                      <PreAndPostInterestGroups
+                          form={props.form}
+                          fieldName={"productInterestRatePairs"}
+                          customAntFormFieldError={props.customAntFormFieldError}
+                          setCustomAntFormFieldError={props.setCustomAntFormFieldError}
+                          interestRatePairsTouchInput={props.interestRatePairsTouchInput}
+                      />
                   </Form.Item>
               </Panel>
           </Collapse>

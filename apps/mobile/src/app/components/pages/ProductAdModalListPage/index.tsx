@@ -272,6 +272,11 @@ const ProductAdModalListPage = () => {
           const isOverdue = currentTime.diff(expireTime) > 0;
           // console.log("isOverdue", isOverdue);
 
+          // const isBelow7days = currentTime.diff(expireTime, "day") <=7;
+
+          // if(!firstLoadingList) {
+          //   firstLoadingList = true;
+          // }
           // const diffDay = currentTime.diff(expireTime, "day");
           // console.log("diffDay", diffDay);
           // const isBelow7days = diffDay <= 7;
@@ -290,7 +295,7 @@ const ProductAdModalListPage = () => {
           //   setState(STATE.OVERDUE_LOADING);
           //   asyncRefreshTimeout();
           // } else
-            if(isOverdue) {
+          if(isOverdue) {
             // console.log("[mode][production] 過期");
             setState(STATE.OVERDUE);
           } else {
