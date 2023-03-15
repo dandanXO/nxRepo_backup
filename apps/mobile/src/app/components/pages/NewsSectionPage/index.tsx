@@ -45,7 +45,8 @@ const StepStar = styled.img`
   vertical-align: center;
 `;
 const StepImage = styled.img``
-export const NewsSectionPage = () => {
+
+const NewsSectionPage = () => {
   return (
     <Container>
 
@@ -82,3 +83,5 @@ export const NewsSectionPage = () => {
     </Container>
   )
 }
+
+export default NewsSectionPage;

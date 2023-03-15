@@ -43,7 +43,7 @@ export default () => {
     // })
     return (
         <IndexPage>
-            <p>
+            <div>
               <div>{t('Welcome to Mobile', {ns: "common"})}</div>
 
               <hr/>
@@ -66,7 +66,7 @@ export default () => {
               <div>開發模式的 Proxy 得由 project.json 進行設定。</div>
               <div>"proxyConfig": "apps/mobile/proxy.config.pk.json"</div>
 
-            </p>
+            </div>
             <button onClick={() => {
               window.open("http://localhost:4003/?showtranslations", "_blank");
             }}>showtranslations</button>

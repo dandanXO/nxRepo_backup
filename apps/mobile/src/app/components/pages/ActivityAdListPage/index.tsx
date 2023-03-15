@@ -51,7 +51,8 @@ interface IActivityAdListPage {
     phoneNo?: string;
 }
 
-export const ActivityAdListPage = (props: IActivityAdListPage) => {
+
+const ActivityAdListPage = (props: IActivityAdListPage) => {
 
   const [triggerGetActivityAd, {currentData: currentData}] = useLazyGetActivityAdsQuery({})
 
@@ -94,7 +95,7 @@ export const ActivityAdListPage = (props: IActivityAdListPage) => {
       return null;
   }
 }
-
+export default ActivityAdListPage;
 
 export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
   const type = parsedQueryString.type || props.type;

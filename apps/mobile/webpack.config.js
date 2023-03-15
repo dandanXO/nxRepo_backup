@@ -22,6 +22,7 @@ const gitRevisionPlugin = new GitRevisionPlugin()
 // console.log("gitRevisionPlugin.commithash()", gitRevisionPlugin.commithash());
 const SentryCliPlugin = require('@sentry/webpack-plugin');
 
+// const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
@@ -102,6 +103,12 @@ module.exports = (config, context) => {
       // },
     },
     plugins: [
+      // new PreloadWebpackPlugin({
+      //   rel: 'preload',
+      //   // include: 'asyncChunks'
+      //   include: 'all'
+      //   // include: 'initial'
+      // }),
       new webpack.DefinePlugin({
           'appInfo': {
               'VERSION': JSON.stringify(gitRevisionPlugin.version()),
@@ -156,7 +163,7 @@ module.exports = (config, context) => {
       }),
     )
   }
-  // console.log("finalConfig", finalConfig);
+  console.log("finalConfig", finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return finalConfig;
 };

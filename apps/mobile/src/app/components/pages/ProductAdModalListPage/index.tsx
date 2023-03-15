@@ -259,7 +259,7 @@ const ProductAdModalListPage = () => {
         count: "",
       }).then((data) => {
 
-        const result = data.data;
+        const result = data.data as GetPersonalLoanRecommendResponse;
         if(result?.quotaExpireTime) {
           const currentTime = debug ? moment() : moment.tz("Asia/Kolkata")
           // console.log("currentTime.format:", currentTime.format("YYYY-MM-DD HH:mm:ss"))
@@ -269,22 +269,26 @@ const ProductAdModalListPage = () => {
           const expireTime = result?.quotaExpireTime.split(".")[0];
           const isOverdue = currentTime.diff(expireTime) > 0;
 
-          // const isBelow7days = currentTime.diff(expireTime, "day") <=7;
-
-          // if(!firstLoadingList) {
-          //   firstLoadingList = true;
-          // }
+          const diffDay = currentTime.diff(expireTime, "day");
+          console.log("diffDay", diffDay);
+          const isBelow7days = diffDay <= 7;
+          console.log("isBelow7days", diffDay);
+          if(!firstLoadingList) {
+            firstLoadingList = true;
+          }
 
           // console.log("isOverdue", isOverdue)
           // console.log("isBelow7days", isBelow7days)
           // console.log("firstLoadingList", firstLoadingList)
-          //
-          // if(firstLoadingList && isBelow7days) {
+
+          // NOTE: 沒額度、有過期：自動刷新額度
+          // NOTE: 有額度、有過期： 不自動刷新額度
+          // if(firstLoadingList && isBelow7days && result?.quotaBar.current > 0) {
           //   setState(STATE.OVERDUE_LOADING);
           //   asyncRefreshTimeout();
           // } else
-          if(isOverdue) {
-            // console.log("[mode][production] 過期");
+            if(isOverdue) {
+            console.log("[mode][production] 過期");
             setState(STATE.OVERDUE);
           } else {
             // console.log("[mode][production] 只能執行一次")
@@ -525,12 +529,15 @@ const ProductAdModalListPage = () => {
     //   }, 10 * 1000)
     // }, [])
 
-    let resultProducts: RecommendProduct[] = [];
+
 
     const [productList, setProductList] = useState<RecommendProduct[]>([]);
 
     useEffect(() => {
-      if(currentData?.quotaBar.current ) {
+
+      let resultProducts: RecommendProduct[] = [];
+
+      if(currentData?.quotaBar.current) {
         let currentTotalPrice = 0;
 
         let end = false;
@@ -553,6 +560,7 @@ const ProductAdModalListPage = () => {
         setProductList(resultProducts);
       } else {
         resultProducts = [];
+        setProductList([])
       }
     }, [currentValue]);
     // console.log("currentData", currentData);
@@ -677,7 +685,7 @@ const ProductAdModalListPage = () => {
                   productName={product.productName ?? ""}
                   loanableAmount={product.loanableAmount ?? 0}
                   interestRate={product?.interestRate ?? ""}
-                  terms={product?.interestRate ?? ""}
+                  terms={product?.terms ?? ""}
                 />
               ))}
               {state === STATE.OVERDUE_LOADING && (
