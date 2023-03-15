@@ -1,6 +1,7 @@
-import React, {ReactComponentElement, Suspense} from "react";
+import React, {ReactComponentElement, Suspense, useEffect} from "react";
 import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 import loadable from '@loadable/component'
+import useErrorModal from "../../../../../packages/cms-webpack4/src/modules/shared/hooks/useConfirmModal";
 // import {I18nRepaymentStepsModal} from "../components/pages/LoanDetailsPage/modal/RepaymentStepsModal";
 
 
@@ -91,15 +92,43 @@ const LazyProductAdModalListPage = loadable(() => import(/* webpackChunkName: "c
 const LazyActivityAdListPage = loadable(() => import(/* webpackChunkName: "chunk-activity-ad-modal-list" */ "../components/pages/ActivityAdListPage"))
 const LazyNewsSectionPage = loadable(() => import(/* webpackChunkName: "chunk-news-section" */ "../components/pages/NewsSectionPage"))
 
-LazyIndexPage.preload();
-LazyLoanDetailsPage.preload();
-LazyExtendDetailsPage.preload();
-LazyBindBankAccountPage.preload();
-LazyUploadPaymentReceiptPage.preload();
-LazyUploadedPaymentReceiptPage.preload();
-LazyProductAdModalListPage.preload();
-LazyActivityAdListPage.preload();
-LazyNewsSectionPage.preload();
+// LazyIndexPage.preload();
+// LazyLoanDetailsPage.preload();
+// LazyExtendDetailsPage.preload();
+// LazyBindBankAccountPage.preload();
+// LazyUploadPaymentReceiptPage.preload();
+// LazyUploadedPaymentReceiptPage.preload();
+// LazyProductAdModalListPage.preload();
+// LazyActivityAdListPage.preload();
+// LazyNewsSectionPage.preload();
+
+// LazyIndexPage.load().then(() => {//
+//   //
+//   });
+// LazyLoanDetailsPage.load().then(() => {//
+//   //
+//   });
+// LazyExtendDetailsPage.load().then(() => {//
+//   //
+// });
+// LazyBindBankAccountPage.load().then(() => {//
+//   //
+// });
+// LazyUploadPaymentReceiptPage.load().then(() => {//
+//   //
+// });
+// LazyUploadedPaymentReceiptPage.load().then(() => {//
+//   //
+// });
+// LazyProductAdModalListPage.load().then(() => {//
+//   //
+// });
+// LazyActivityAdListPage.load().then(() => {//
+//   //
+// });
+// LazyNewsSectionPage.load().then(() => {
+//   //
+// });
 
 
 // NOTICE:
@@ -122,16 +151,41 @@ export const AppRouter = () => {
   );
 };
 
+
 const Pages = () => {
   // const location = useLocation();
   // const showRepaymentStepsModal = location.state && location.state.name === STATE_REPAYMENT_STEPS;
   // console.log("showRepaymentStepsModal", showRepaymentStepsModal);
   // const state = location.state as { name?: Location };
+  const location = useLocation();
+
+  useEffect(() => {
+    if(!location.pathname) return;
+
+    console.log("location", location);
+    const map = {
+      "/": LazyIndexPage,
+      "/loan-details": LazyLoanDetailsPage,
+      "/extend-details": LazyExtendDetailsPage,
+      "/bank-bind": LazyBindBankAccountPage,
+      "/upload-payment-receipt": LazyUploadPaymentReceiptPage,
+      "/uploaded-payment-receipt": LazyUploadedPaymentReceiptPage,
+      "/product-ad-modal-list": LazyProductAdModalListPage,
+      "/activity-list": LazyActivityAdListPage,
+      "/news-section": LazyNewsSectionPage,
+    } as any;
+    (map[location.pathname] as any).preload();
+
+    Object.keys(map).map(routeKey => {
+      (map[routeKey] as any).load();
+    })
+
+  }, [location])
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route path="/" element={<LazyIndexPage />} />
+      <Routes >
+        <Route path="/" element={<LazyIndexPage />}/>
         {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
         <Route path="/loan-details" element={<LazyLoanDetailsPage />} />
 
