@@ -17,7 +17,7 @@ export const StyledProduct = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 16px;
+    padding: 8px;
     background: #FFF0DE;
     border-radius: 8px;
     margin-bottom: 8px;
@@ -199,7 +199,7 @@ export const Button = styled.button<ButtonProps>`
   //height: 28px;
   //line-height: 28px;
   //padding: 6px 4px;
-  padding: 12px;
+  padding: 8px;
   background: ${(props) => props.disable ? "#E5E5E5" : props.background ? props.background : "#707070"};
   border: 0;
   border-radius: 8px;

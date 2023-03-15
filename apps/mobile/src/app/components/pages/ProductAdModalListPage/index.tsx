@@ -267,15 +267,18 @@ const ProductAdModalListPage = () => {
           // console.log("quotaExpireTime.2:", result?.quotaExpireTime.split(".")[0]);
           // console.log("quotaExpireTime.3:", moment(result?.quotaExpireTime.split(".")[0]).format("YYYY-MM-DD HH:mm:ss"));
           const expireTime = result?.quotaExpireTime.split(".")[0];
-          const isOverdue = currentTime.diff(expireTime) > 0;
+          // console.log("expireTime:", moment(expireTime).format("YYYY-MM-DD HH:mm:ss"));
 
-          const diffDay = currentTime.diff(expireTime, "day");
-          console.log("diffDay", diffDay);
-          const isBelow7days = diffDay <= 7;
-          console.log("isBelow7days", diffDay);
-          if(!firstLoadingList) {
-            firstLoadingList = true;
-          }
+          const isOverdue = currentTime.diff(expireTime) > 0;
+          // console.log("isOverdue", isOverdue);
+
+          // const diffDay = currentTime.diff(expireTime, "day");
+          // console.log("diffDay", diffDay);
+          // const isBelow7days = diffDay <= 7;
+          // console.log("isBelow7days", isBelow7days);
+          // if(!firstLoadingList) {
+          //   firstLoadingList = true;
+          // }
 
           // console.log("isOverdue", isOverdue)
           // console.log("isBelow7days", isBelow7days)
@@ -288,7 +291,7 @@ const ProductAdModalListPage = () => {
           //   asyncRefreshTimeout();
           // } else
             if(isOverdue) {
-            console.log("[mode][production] 過期");
+            // console.log("[mode][production] 過期");
             setState(STATE.OVERDUE);
           } else {
             // console.log("[mode][production] 只能執行一次")
