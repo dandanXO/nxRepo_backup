@@ -72,7 +72,7 @@ const ReloanStatisticsTable = () => {
             children: [
                 { title: '到期总用户数', dataIndex: 'expireDateOrderUserCount', key: 'expireDateOrderUserCount', hideInSearch: true, className: 'totalColumn' },
                 { title: '新客到期用户数', dataIndex: 'expireDateNewUserOrderUserCount', key: 'expireDateNewUserOrderUserCount', hideInSearch: true, className: 'newCustomer' },
-                { title: '老客到期订单数', dataIndex: 'expireDateOldUserOrderCount', key: 'expireDateOldUserOrderCount', hideInSearch: true, className: 'oldCustomer'  },
+                { title: '老客到期用户数', dataIndex: 'expireDateOldUserOrderUserCount', key: 'expireDateOldUserOrderUserCount', hideInSearch: true, className: 'oldCustomer'  },
             ]
         },
         {
