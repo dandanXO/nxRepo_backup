@@ -258,6 +258,30 @@ class NewOverdueStatistics extends Component {
                 dataIndex: 'paidLendMoneyRate', key: 'paidLendMoneyRate', width: '8%',
                 render (text, record) { return numberToFixed(text); }
             },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.loan.principal.contain.leng" />}
+                                          contentText={total ? <CopyText text={convertMoneyFormat(total.lendMoneyAmountContainLeng)}/> : ''} />,
+                dataIndex: 'lendMoneyAmountContainLeng', key: 'lendMoneyAmountContainLeng', width: '6%',
+                render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
+            },
+            {
+                title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.repayment.amount.contain.leng" />}
+                                          contentText={total ? <CopyText text={convertMoneyFormat(total.paidOrderAmountContainLeng)}/> : ''} />,
+                dataIndex: 'paidOrderAmountContainLeng', key: 'paidOrderAmountContainLeng', width: '6%',
+                render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
+            },
+            {
+               title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.subtotal.contain.leng" />}
+                                         contentText={total ? <CopyText text={convertMoneyFormat(total.totalMonyAmountContainLeng)}/> : ''} />,
+               dataIndex: 'totalMonyAmountContainLeng', key: 'totalMonyAmountContainLeng', width: '6%',
+               render (text, record) { return <CopyText text={convertMoneyFormat(text)} />; }
+            },
+            {
+               title: <CustomColumnTitle titleText={<FormattedMessage id="page.table.principal.repayment.contain.leng.rate" />}
+                                         contentText={total ? numberToFixed(total.paidLendMoneyRateContainLeng) : ''} />,
+               dataIndex: 'paidLendMoneyRateContainLeng', key: 'paidLendMoneyRateContainLeng', width: '6%',
+               render (text, record) { return numberToFixed(text); }
+            },
         ];
 
         return (
