@@ -1,3 +1,5 @@
+//NOTICE: PageObject
+// https://www.toolsqa.com/cypress/page-object-pattern-in-cypress/
 import { getGreeting } from '../support/app.po';
 import {GetPersonalLoanRecommendResponse, RecommendProduct} from "../../../mobile/src/app/api/GetPersonalLoanRecommend";
 import moment from "moment-timezone";
