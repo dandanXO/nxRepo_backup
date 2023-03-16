@@ -272,11 +272,11 @@ const ProductAdModalListPage = () => {
           const isOverdue = currentTime.diff(expireTime) > 0;
           // console.log("isOverdue", isOverdue);
 
-          // const isBelow7days = currentTime.diff(expireTime, "day") <=7;
+          const isBelow7days = currentTime.diff(expireTime, "day") <= 7;
 
-          // if(!firstLoadingList) {
-          //   firstLoadingList = true;
-          // }
+          if(!firstLoadingList) {
+            firstLoadingList = true;
+          }
           // const diffDay = currentTime.diff(expireTime, "day");
           // console.log("diffDay", diffDay);
           // const isBelow7days = diffDay <= 7;
@@ -286,16 +286,16 @@ const ProductAdModalListPage = () => {
           // }
 
           // console.log("isOverdue", isOverdue)
-          // console.log("isBelow7days", isBelow7days)
-          // console.log("firstLoadingList", firstLoadingList)
+          console.log("isBelow7days", isBelow7days)
+          console.log("firstLoadingList", firstLoadingList)
 
           // NOTE: 沒額度、有過期：自動刷新額度
           // NOTE: 有額度、有過期： 不自動刷新額度
-          // if(firstLoadingList && isBelow7days && result?.quotaBar.current > 0) {
+          // if(firstLoadingList && isBelow7days && result?.quotaBar.min === 0) {
           //   setState(STATE.OVERDUE_LOADING);
           //   asyncRefreshTimeout();
           // } else
-          if(isOverdue) {
+            if(isOverdue) {
             // console.log("[mode][production] 過期");
             setState(STATE.OVERDUE);
           } else {
@@ -354,6 +354,7 @@ const ProductAdModalListPage = () => {
 
     const asyncRefreshTimeout = () => {
       let retry = true;
+
       const asyncRequestRefresh = () => new Promise((resolve, reject) => {
         const pendingRefetch = () => {
           setTimeout(() => {
@@ -386,6 +387,7 @@ const ProductAdModalListPage = () => {
         clearTimeout(triggerRefreshID);
         requestRecommendProducts();
       } else {
+
         asyncRequestRefresh().then((effective) => {
           if(effective) {
             retry = false;
