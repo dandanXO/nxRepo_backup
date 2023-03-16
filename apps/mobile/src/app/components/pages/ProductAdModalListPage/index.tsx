@@ -62,21 +62,31 @@ let debugTimeout2: NodeJS.Timer;
 // const limitRetryCount = 30;
 // let currentRetryCount = 0;
 let firstLoadingList = false;
+
 const ProductAdModalListPage = () => {
 
     const [state, setState] = useState<STATE>(STATE.INIT);
-
     const [currentData, setCurrentData] = useState<GetPersonalLoanRecommendResponse>();
     const [currentValue, setCurrentValue] = useState<number>(0);
     const [timeString, setTimeString] = useState<string>("00 : 00 : 00");
 
-    // const { currentData: data, isLoading, isFetching, isSuccess, isError } = useGetPersonalLoanRecommendQuery({
-    //   count: "",
+    // NOTICE: for testing
+    // const [trigger, { currentData: currentLazyData, isLoading: isLazyLoading, isFetching: isLazyFetching }] = useLazyGetPersonalLoanRecommendQuery({
+    // refetchOnFocus: true,
+    // refetchOnReconnect: true,
     // });
+    // useEffect(() => {
+    //   trigger({count: "2"});
+    //   trigger({count: "2"});
+    //   setInterval(() => {
+    //     console.log("shoot")
+    //     trigger({count: "2"});
+    //   }, 10 * 1000)
+    // }, [])
+
     const [trigger, { currentData: data, data: latestData, isLoading, isFetching, isSuccess, isError, isUninitialized, requestId }] = useLazyGetPersonalLoanRecommendQuery({
 
     });
-
     // console.log("requestId", requestId);
     // console.log("isUninitialized", isUninitialized);
     // console.log("isLoading", isLoading);
@@ -84,23 +94,6 @@ const ProductAdModalListPage = () => {
     // console.log("isSuccess", isSuccess);
     // console.log("isError", isError);
 
-
-
-    useEffect(() => {
-      // console.log("超怪 data", data)
-      // console.log("超怪 latestData", latestData)
-      // NOTICE: 過段時間會拿到 undefined
-      // undefined=>undefined->hasData->undefined
-      if(data) {
-        setCurrentData(data);
-        setCurrentValue(() => {
-          return data?.quotaBar?.current || 0
-        });
-      } else {
-        console.log("data 被重置成 undefined")
-      }
-
-    }, [data])
 
     const [triggerRefresh, {
       data: refreshData,
@@ -243,130 +236,74 @@ const ProductAdModalListPage = () => {
 
     }
 
-    useEffect(() => {
-      if(currentData && currentData?.processing) {
-        setState(STATE.APPLY_REPEAT);
-      } else if(isLoading || isFetching || isError) {
-        setState(STATE.LOADING);
-      } else if(isSuccess) {
-        // setState(STATE.COUNTDOWN);
-      }
-    }, [isLoading, isSuccess, isError, currentData])
-
-    useEffect(() => {
-      return () => {
-        // console.log("安全清除 id");
-        if(triggerRefreshID) clearTimeout(triggerRefreshID);
-        if(debugTimeout1) clearTimeout(debugTimeout1);
-        if(debugTimeout2) clearTimeout(debugTimeout2);
-      }
-    })
-
     const requestRecommendProducts = () => {
-      console.log("requestRecommendProducts");
+    console.log("requestRecommendProducts");
 
-      // NOTICE: 得加
-      // if(firstLoadingList) return false;
+    // NOTICE: 得加
+    // if(firstLoadingList) return false;
 
-      trigger({
-        count: "",
-      }).then((data) => {
+    trigger({
+      count: "",
+    }).then((data) => {
 
-        const result = data.data as GetPersonalLoanRecommendResponse;
-        if(result?.quotaExpireTime) {
-          const currentTime = debug ? moment() : moment.tz("Asia/Kolkata")
-          // console.log("currentTime.format:", currentTime.format("YYYY-MM-DD HH:mm:ss"))
-          // console.log("quotaExpireTime:", result?.quotaExpireTime);
-          // console.log("quotaExpireTime.2:", result?.quotaExpireTime.split(".")[0]);
-          // console.log("quotaExpireTime.3:", moment(result?.quotaExpireTime.split(".")[0]).format("YYYY-MM-DD HH:mm:ss"));
-          const expireTime = result?.quotaExpireTime.split(".")[0];
-          // console.log("expireTime:", moment(expireTime).format("YYYY-MM-DD HH:mm:ss"));
+      const result = data.data as GetPersonalLoanRecommendResponse;
+      if(result?.quotaExpireTime) {
+        const currentTime = debug ? moment() : moment.tz("Asia/Kolkata")
+        // console.log("currentTime.format:", currentTime.format("YYYY-MM-DD HH:mm:ss"))
+        // console.log("quotaExpireTime:", result?.quotaExpireTime);
+        // console.log("quotaExpireTime.2:", result?.quotaExpireTime.split(".")[0]);
+        // console.log("quotaExpireTime.3:", moment(result?.quotaExpireTime.split(".")[0]).format("YYYY-MM-DD HH:mm:ss"));
+        const expireTime = result?.quotaExpireTime.split(".")[0];
+        // console.log("expireTime:", moment(expireTime).format("YYYY-MM-DD HH:mm:ss"));
 
-          const isOverdue = currentTime.diff(expireTime) > 0;
-          // console.log("isOverdue", isOverdue);
+        const isOverdue = currentTime.diff(expireTime) > 0;
+        // console.log("isOverdue", isOverdue);
 
-          const isBelow7days = currentTime.diff(expireTime, "day") <= 7;
-
-
-          // const diffDay = currentTime.diff(expireTime, "day");
-          // console.log("diffDay", diffDay);
-          // const isBelow7days = diffDay <= 7;
-          // console.log("isBelow7days", isBelow7days);
+        const isBelow7days = currentTime.diff(expireTime, "day") <= 7;
 
 
-          // console.log("isOverdue", isOverdue)
-          console.log("isBelow7days", isBelow7days)
-          console.log("firstLoadingList", firstLoadingList)
-
-          // NOTE: 沒額度、有過期：自動刷新額度
-          // NOTE: 有額度、有過期： 不自動刷新額度
-          // if(!firstLoadingList && isBelow7days && result?.quotaBar.min === 0) {
-          //   setState(STATE.OVERDUE_LOADING);
-          //   asyncRefreshTimeout();
-          // }
-          // else
-            if(isOverdue) {
-            // console.log("[mode][production] 過期");
-            setState(STATE.OVERDUE);
-          } else {
-              // firstLoadingList = true;
-
-            // console.log("[mode][production] 只能執行一次")
-            setState(STATE.COUNTDOWN);
-            // NOTICE: real world
-            const expiredTime = result?.quotaExpireTime ? result?.quotaExpireTime.split(".")[0] : ""
-            const countDownStr = moment(expiredTime).format('YYYY-MM-DD HH:mm:ss');
-            // NOTICE: DEBUG
-            // const defaultTime = moment().add(5,'second').format('YYYY-MM-DD HH:mm:ss');
-            // const countDownStr = defaultTime;
-            countDown(countDownStr);
-          }
+        // const diffDay = currentTime.diff(expireTime, "day");
+        // console.log("diffDay", diffDay);
+        // const isBelow7days = diffDay <= 7;
+        // console.log("isBelow7days", isBelow7days);
 
 
+        // console.log("isOverdue", isOverdue)
+        console.log("isBelow7days", isBelow7days)
+        console.log("firstLoadingList", firstLoadingList)
 
-        }
-      }).catch((error) => {
-        // console.log("requestRecommendProducts")
-        console.log(error)
-      })
-    }
-    useEffect(() => {
-      console.log("[only one]")
-      if(init) return;
-      init = true;
+        // NOTE: 沒額度、有過期：自動刷新額度
+        // NOTE: 有額度、有過期： 不自動刷新額度
+        // if(!firstLoadingList && isBelow7days && result?.quotaBar.min === 0) {
+        //   setState(STATE.OVERDUE_LOADING);
+        //   asyncRefreshTimeout();
+        // }
+        // else
+        if(isOverdue) {
+          // console.log("[mode][production] 過期");
+          setState(STATE.OVERDUE);
+        } else {
+          // firstLoadingList = true;
 
-      debugSwitch(debug,() => {
-        // NOTICE: DEBUG
-        // console.log("[mode][debug] 只能執行一次")
-        setState(STATE.LOADING);
-
-        debugTimeout1 = setTimeout(() => {
-          mockResponse();
+          // console.log("[mode][production] 只能執行一次")
           setState(STATE.COUNTDOWN);
-          // console.log("[Countdown] start")
-          const defaultTime = moment().add(20,'second').format('YYYY-MM-DD HH:mm:ss');
-          const countDownStr = defaultTime;
-          countDown(countDownStr);
-        }, 2000);
-      }, () => {
-        // NOTICE: PRODUCTION
-        setState(STATE.LOADING);
-        requestRecommendProducts();
-      })
-
-      return () => {
-        debugSwitch(debug, () => {
+          // NOTICE: real world
+          const expiredTime = result?.quotaExpireTime ? result?.quotaExpireTime.split(".")[0] : ""
+          const countDownStr = moment(expiredTime).format('YYYY-MM-DD HH:mm:ss');
           // NOTICE: DEBUG
-          // console.log("effect return cancel.intervalIDRef.current",intervalIDRef.current)
-          cancelCountDown();
-        }, () => {
-          // NOTICE: PRODUCTION
-          // console.log("effect return cancel.intervalIDRef.current",intervalIDRef.current)
-          cancelCountDown();
-        })
-      }
+          // const defaultTime = moment().add(5,'second').format('YYYY-MM-DD HH:mm:ss');
+          // const countDownStr = defaultTime;
+          countDown(countDownStr);
+        }
 
-    }, [])
+
+
+      }
+    }).catch((error) => {
+      // console.log("requestRecommendProducts")
+      console.log(error)
+    })
+  }
 
     const asyncRefreshTimeout = () => {
       // console.log("asyncRefreshTimeout")
@@ -484,13 +421,45 @@ const ProductAdModalListPage = () => {
 
     };
 
+
     useEffect(() => {
-      if(currentData?.quotaBar.current) {
-        setCurrentValue(() => {
-          return currentData?.quotaBar.current
+      console.log("[only one]")
+      if(init) return;
+      init = true;
+
+      debugSwitch(debug,() => {
+        // NOTICE: DEBUG
+        // console.log("[mode][debug] 只能執行一次")
+        setState(STATE.LOADING);
+
+        debugTimeout1 = setTimeout(() => {
+          mockResponse();
+          setState(STATE.COUNTDOWN);
+          // console.log("[Countdown] start")
+          const defaultTime = moment().add(20,'second').format('YYYY-MM-DD HH:mm:ss');
+          const countDownStr = defaultTime;
+          countDown(countDownStr);
+        }, 2000);
+      }, () => {
+        // NOTICE: PRODUCTION
+        setState(STATE.LOADING);
+        requestRecommendProducts();
+      })
+
+      return () => {
+        debugSwitch(debug, () => {
+          // NOTICE: DEBUG
+          // console.log("effect return cancel.intervalIDRef.current",intervalIDRef.current)
+          cancelCountDown();
+        }, () => {
+          // NOTICE: PRODUCTION
+          // console.log("effect return cancel.intervalIDRef.current",intervalIDRef.current)
+          cancelCountDown();
         })
       }
-    }, [currentData?.quotaBar.current]);
+
+    }, [])
+
 
     const getTimeInfoBetweenCurrentAndCountDown = (quotaExpireTime: string) => {
       // NOTICE: REFACTOR ME (debug)
@@ -541,23 +510,42 @@ const ProductAdModalListPage = () => {
       clearInterval(intervalIDRef.current as NodeJS.Timer);
     }
 
-    // NOTICE: for testing
-    // const [trigger, { currentData: currentLazyData, isLoading: isLazyLoading, isFetching: isLazyFetching }] = useLazyGetPersonalLoanRecommendQuery({
-      // refetchOnFocus: true,
-      // refetchOnReconnect: true,
-    // });
-    // useEffect(() => {
-    //   trigger({count: "2"});
-    //   trigger({count: "2"});
-    //   setInterval(() => {
-    //     console.log("shoot")
-    //     trigger({count: "2"});
-    //   }, 10 * 1000)
-    // }, [])
-
-
-
     const [productList, setProductList] = useState<RecommendProduct[]>([]);
+
+
+    useEffect(() => {
+      if(currentData && currentData?.processing) {
+        setState(STATE.APPLY_REPEAT);
+      } else if(isLoading || isFetching || isError) {
+        setState(STATE.LOADING);
+      } else if(isSuccess) {
+        // setState(STATE.COUNTDOWN);
+      }
+    }, [isLoading, isSuccess, isError, currentData])
+
+    useEffect(() => {
+      // console.log("超怪 data", data)
+      // console.log("超怪 latestData", latestData)
+      // NOTICE: 過段時間會拿到 undefined
+      // undefined=>undefined->hasData->undefined
+      if(data) {
+        setCurrentData(data);
+        setCurrentValue(() => {
+          return data?.quotaBar?.current || 0
+        });
+      } else {
+        console.log("data 被重置成 undefined")
+      }
+
+    }, [data])
+
+    useEffect(() => {
+      if(currentData?.quotaBar.current) {
+        setCurrentValue(() => {
+          return currentData?.quotaBar.current
+        })
+      }
+    }, [currentData?.quotaBar.current]);
 
     useEffect(() => {
 
@@ -592,6 +580,15 @@ const ProductAdModalListPage = () => {
     // console.log("currentData", currentData);
 
     // console.log("state", STATE[state])
+
+    useEffect(() => {
+      return () => {
+        // console.log("安全清除 id");
+        if(triggerRefreshID) clearTimeout(triggerRefreshID);
+        if(debugTimeout1) clearTimeout(debugTimeout1);
+        if(debugTimeout2) clearTimeout(debugTimeout2);
+      }
+    })
 
     if(state !== STATE.APPLY && state !== STATE.APPLY_OVERDUE && state !== STATE.APPLY_REPEAT) {
       return (
