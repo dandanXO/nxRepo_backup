@@ -73,13 +73,22 @@ const ProductAdModalListPage = () => {
     // const { currentData: data, isLoading, isFetching, isSuccess, isError } = useGetPersonalLoanRecommendQuery({
     //   count: "",
     // });
-    const [trigger, { currentData: data, isLoading, isFetching, isSuccess, isError }] = useLazyGetPersonalLoanRecommendQuery({
+    const [trigger, { currentData: data, data: latestData, isLoading, isFetching, isSuccess, isError, isUninitialized, requestId }] = useLazyGetPersonalLoanRecommendQuery({
 
     });
+
+    // console.log("requestId", requestId);
+    // console.log("isUninitialized", isUninitialized);
+    // console.log("isLoading", isLoading);
+    // console.log("isFetching", isFetching);
+    // console.log("isSuccess", isSuccess);
+    // console.log("isError", isError);
+
 
 
     useEffect(() => {
       // console.log("超怪 data", data)
+      // console.log("超怪 latestData", latestData)
       // NOTICE: 過段時間會拿到 undefined
       // undefined=>undefined->hasData->undefined
       if(data) {
@@ -254,7 +263,11 @@ const ProductAdModalListPage = () => {
     })
 
     const requestRecommendProducts = () => {
-      // console.log("requestRecommendProducts");
+      console.log("requestRecommendProducts");
+
+      // NOTICE: 得加
+      // if(firstLoadingList) return false;
+
       trigger({
         count: "",
       }).then((data) => {
@@ -274,16 +287,12 @@ const ProductAdModalListPage = () => {
 
           const isBelow7days = currentTime.diff(expireTime, "day") <= 7;
 
-          if(!firstLoadingList) {
-            firstLoadingList = true;
-          }
+
           // const diffDay = currentTime.diff(expireTime, "day");
           // console.log("diffDay", diffDay);
           // const isBelow7days = diffDay <= 7;
           // console.log("isBelow7days", isBelow7days);
-          // if(!firstLoadingList) {
-          //   firstLoadingList = true;
-          // }
+
 
           // console.log("isOverdue", isOverdue)
           console.log("isBelow7days", isBelow7days)
@@ -291,14 +300,17 @@ const ProductAdModalListPage = () => {
 
           // NOTE: 沒額度、有過期：自動刷新額度
           // NOTE: 有額度、有過期： 不自動刷新額度
-          // if(firstLoadingList && isBelow7days && result?.quotaBar.min === 0) {
+          // if(!firstLoadingList && isBelow7days && result?.quotaBar.min === 0) {
           //   setState(STATE.OVERDUE_LOADING);
           //   asyncRefreshTimeout();
-          // } else
+          // }
+          // else
             if(isOverdue) {
             // console.log("[mode][production] 過期");
             setState(STATE.OVERDUE);
           } else {
+              // firstLoadingList = true;
+
             // console.log("[mode][production] 只能執行一次")
             setState(STATE.COUNTDOWN);
             // NOTICE: real world
@@ -309,6 +321,9 @@ const ProductAdModalListPage = () => {
             // const countDownStr = defaultTime;
             countDown(countDownStr);
           }
+
+
+
         }
       }).catch((error) => {
         // console.log("requestRecommendProducts")
@@ -316,6 +331,7 @@ const ProductAdModalListPage = () => {
       })
     }
     useEffect(() => {
+      console.log("[only one]")
       if(init) return;
       init = true;
 
@@ -353,8 +369,8 @@ const ProductAdModalListPage = () => {
     }, [])
 
     const asyncRefreshTimeout = () => {
+      // console.log("asyncRefreshTimeout")
       let retry = true;
-
       const asyncRequestRefresh = () => new Promise((resolve, reject) => {
         const pendingRefetch = () => {
           setTimeout(() => {

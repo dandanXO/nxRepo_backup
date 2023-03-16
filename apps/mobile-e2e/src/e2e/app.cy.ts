@@ -160,56 +160,56 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-  // it("無額度，有風控到期，風控在七天內到期。自動幫用戶刷新", () => {
-  //   const responseData: GetPersonalLoanRecommendResponse = {
-  //     products: productList,
-  //     quotaBar: {
-  //       current: 0,
-  //       // 拉霸初始額度
-  //       interval: 0,
-  //       // 拉霸額度間隔
-  //       max: 0,
-  //       // 拉霸最高額度
-  //       min: 0,
-  //       // 拉霸最低額度
-  //     },
-  //     quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
-  //     processing: false,
-  //   } ;
-  //
-  //   cy.intercept("/api/v2/product/personal-recommend?count=", {
-  //     statusCode: 200,
-  //     body: {
-  //       ...responseData,
-  //     }
-  //   }).then(() => {
-  //     // cy.get(".button-container").contains("Re-Acquire The Loan Amount")
-  //     cy.get(".button-container > button > div").should("have.class", "loadingio-spinner-spinner-e19blwp8l9")
-  //   }).as("loadList");
-  //
-  //   // cy.wait("@loadList");
-  //
-  //   cy.wait(25 * 1000);
-  //
-  //   // NOTICE: 模擬拿到新的風控資料了
-  //   const responseData2: PostLoanQuotaRefreshResponse = {
-  //     effective:	true,
-  //     // 用户额度是否有效
-  //
-  //     quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
-  //     // 用户额度有效时间
-  //   }
-  //
-  //   cy.intercept("/api/v2/loan/quota/refresh", {
-  //     statusCode: 200,
-  //     body: {
-  //       ...responseData2
-  //     }
-  //   }).then(() => {
-  //     cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
-  //   }).as("loadList2");
-  //
-  // });
+  it.skip("無額度，有風控到期，風控在七天內到期。自動幫用戶刷新", () => {
+    const responseData: GetPersonalLoanRecommendResponse = {
+      products: productList,
+      quotaBar: {
+        current: 0,
+        // 拉霸初始額度
+        interval: 0,
+        // 拉霸額度間隔
+        max: 0,
+        // 拉霸最高額度
+        min: 0,
+        // 拉霸最低額度
+      },
+      quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
+      processing: false,
+    } ;
+
+    cy.intercept("/api/v2/product/personal-recommend?count=", {
+      statusCode: 200,
+      body: {
+        ...responseData,
+      }
+    }).then(() => {
+      // cy.get(".button-container").contains("Re-Acquire The Loan Amount")
+      cy.get(".button-container > button > div").should("have.class", "loadingio-spinner-spinner-e19blwp8l9")
+    }).as("loadList");
+
+    // cy.wait("@loadList");
+
+    cy.wait(25 * 1000);
+
+    // NOTICE: 模擬拿到新的風控資料了
+    const responseData2: PostLoanQuotaRefreshResponse = {
+      effective:	true,
+      // 用户额度是否有效
+
+      quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+      // 用户额度有效时间
+    }
+
+    cy.intercept("/api/v2/loan/quota/refresh", {
+      statusCode: 200,
+      body: {
+        ...responseData2
+      }
+    }).then(() => {
+      cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
+    }).as("loadList2");
+
+  });
 
   it("有額度，無風控到期", () => {
     const responseData: GetPersonalLoanRecommendResponse = {

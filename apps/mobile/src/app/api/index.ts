@@ -32,6 +32,7 @@ export const API = createApi({
         baseUrl: "/api/v2",
     }),
     // keepUnusedDataFor: 600,
+    // keepUnusedDataFor: 1,
     // refetchOnMountOrArgChange: 60,
     endpoints: (builder) => ({
         // NOTE: 取得貸款訂單詳情
