@@ -13,7 +13,16 @@
     "storybook:m": "pnpm nx storybook mobile",
     "build:min": "pnpm nx run-many --target=build --projects=mobile  --configuration=production-in --verbose && rm -rf ./dist/apps/mobile/*.map ",
     "build:mpk": "pnpm nx run-many --target=build --projects=mobile  --configuration=production-bk --verbose && rm -rf ./dist/apps/mobile/*.map ",
-    "build:mbd": "pnpm nx run-many --target=build --projects=mobile  --configuration=production-bd --verbose && rm -rf ./dist/apps/mobile/*.map "
+    "build:mbd": "pnpm nx run-many --target=build --projects=mobile  --configuration=production-bd --verbose && rm -rf ./dist/apps/mobile/*.map ",
+    "e2e:min": "NODE_ENV=development nx run mobile-e2e:e2e:dev-in",
+    "e2e:mpk": "NODE_ENV=development nx run mobile-e2e:e2e:dev-pk",
+    "e2e:mbd": "NODE_ENV=development nx run mobile-e2e:e2e:dev-bd",
+    "e2e:w:min": "NODE_ENV=development nx run mobile-e2e:e2e:dev-in --watch",
+    "e2e:w:mpk": "NODE_ENV=development nx run mobile-e2e:e2e:dev-pk --watch",
+    "e2e:w:mbd": "NODE_ENV=development nx run mobile-e2e:e2e:dev-bd --watch",
+    "e2e:w:min:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-in --watch --baseUrl=https://frontend.com",
+    "e2e:w:mpk:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-pk --watch --baseUrl=https://frontend.com",
+    "e2e:w:mbd:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-bd --watch --baseUrl=https://frontend.com"
   },
   "private": true,
   "dependencies": {

@@ -193,6 +193,45 @@
             }
           }
         },
+        "serve2-in": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "defaultConfiguration": "development",
+            "buildTarget": "mobile:build:development-in",
+            "proxyConfig": "apps/mobile/proxy.config.in.json"
+          },
+          "configurations": {
+            "development": {
+              "hmr": true
+            }
+          }
+        },
+        "serve2-pk": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "defaultConfiguration": "development",
+            "buildTarget": "mobile:build:development-pk",
+            "proxyConfig": "apps/mobile/proxy.config.pk.json"
+          },
+          "configurations": {
+            "development": {
+              "hmr": true
+            }
+          }
+        },
+        "serve2-bd": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "defaultConfiguration": "development",
+            "buildTarget": "mobile:build:development-bd",
+            "proxyConfig": "apps/mobile/proxy.config.bd.json"
+          },
+          "configurations": {
+            "development": {
+              "hmr": true
+            }
+          }
+        },
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],

@@ -44,7 +44,7 @@ export default () => {
     return (
         <IndexPage>
             <div>
-              <div>{t('Welcome to Mobile', {ns: "common"})}</div>
+              <header>{t('Welcome to Mobile', {ns: "common"})}</header>
 
               <hr/>
 

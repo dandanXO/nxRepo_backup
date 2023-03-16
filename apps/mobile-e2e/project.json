@@ -1,0 +1,41 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/mobile-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/mobile-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "env": {
+          "login_url": "/login",
+          "products_url": "/products"
+        }
+      },
+      "configurations": {
+        "dev-in": {
+          "devServerTarget": "mobile:serve2-in"
+        },
+        "dev-pk": {
+          "devServerTarget": "mobile:serve2-pk"
+        },
+        "dev-bd": {
+          "devServerTarget": "mobile:serve2-bd"
+        },
+        "production": {
+          "devServerTarget": "mobile:serve:production-in"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/mobile-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["mobile"]
+}

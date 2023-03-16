@@ -78,7 +78,7 @@ module.exports = (config, context) => {
     },
     devServer: {
       hot: true,
-      open: true,
+      // open: true,
       host: "localhost",
       // NOTE: REFACTOR ME
       port: 4003,
@@ -163,7 +163,7 @@ module.exports = (config, context) => {
       }),
     )
   }
-  console.log("finalConfig", finalConfig);
+  // console.log("finalConfig", finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return finalConfig;
 };
