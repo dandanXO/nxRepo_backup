@@ -3,7 +3,7 @@ import { GetUerListProps,GetUserListRequestQuerystring } from "./types/userTypes
 import { PostBlackListRequestBody } from "./types/userTypes/postBlackList";
 import { UserId } from "../../shared/domain/UserId";
 import { PostTelSaleRequestQuerystring } from './types/userTypes/postTelSale';
-
+import { PostQuotaLabelRequestBody } from "./types/userTypes/postQuotaLabel";
 
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
@@ -63,6 +63,14 @@ const UserApi = API.injectEndpoints({
                 method: "delete",
             }),
         }),
+        // NOTE: POST /hs/admin/user-manage/quota-label 配置額度標籤
+        postQuotaLabel: builder.mutation<{}, PostQuotaLabelRequestBody>({
+            query: (requestBody: PostQuotaLabelRequestBody) => ({
+                url: `/user-manage/quota-label`,
+                method: "post",
+                data: requestBody,
+            }),
+        }),
     })
 })
 export const {
@@ -72,5 +80,6 @@ export const {
     usePostUserBanMutation,
     usePostUserBanReleaseMutation,
     usePostTelSaleMutation,
-    useDeleteBlackListMutation
+    useDeleteBlackListMutation,
+    usePostQuotaLabelMutation
 } = UserApi;

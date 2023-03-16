@@ -21,6 +21,6 @@
       "src/**/*.vue",
       "tests/**/*.ts",
       "tests/**/*.tsx"
-  ],
+, "src/modules/shared/api/commonSelectTypes/getOperatorSelect.ts"  ],
   "exclude": ["node_modules", "dist"]
 }

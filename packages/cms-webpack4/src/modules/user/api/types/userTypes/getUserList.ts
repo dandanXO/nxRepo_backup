@@ -12,6 +12,7 @@ export interface GetUserListRequestQuerystring {
     noLoanAgainEndDays?: number;    // 結清未複借終止天數
     noLoanAgainStartDays?: number;  // 結清未複借起始天數
     phoneNo?: string;               // 手機號
+    quotaLabelId?: number;          // 額度標籤ID
     riskRank?: ""
     | "REJECT"
     | "ORDINARY"
@@ -39,10 +40,12 @@ export interface UserListContent {
     gender?: string;      // 性别
     id?: number;          // 用户ID
     idcardNo?: string;    // 证件号码
+    labelColor?: string;  // 用戶額度標籤顏色
     isBlack?: number;     // 是否為黑名單
     nameTrue?: string;    // 真实姓名
     newMember?: boolean;  // 是否为新客
     phoneNo?: string;     // 手机号
+    quotaLabel?: string;  // 用戶額度標籤
     riskRank?: string;    // 风控标签
     status?:number        // 用戶狀態
 }

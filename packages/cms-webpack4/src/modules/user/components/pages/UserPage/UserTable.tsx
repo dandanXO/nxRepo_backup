@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space,Tag ,Select, Tooltip} from 'antd';
+import { Button, Form, InputNumber, Modal, Radio, Space,Tag ,Select, Tooltip,notification} from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
-import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation,usePostUserBanReleaseMutation ,useDeleteBlackListMutation} from '../../../api/UserApi';
+import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation, usePostUserBanReleaseMutation, useDeleteBlackListMutation, usePostQuotaLabelMutation } from '../../../api/UserApi';
 import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
@@ -15,6 +15,8 @@ import {ProColumnsOperationConstant} from "../../../../shared/components/common/
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
 import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
 import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
+import useGetUserQuotaLabelEnum from '../../../../shared/hooks/useGetUserQuotaLabelEnum';
+
 
 
 
@@ -27,6 +29,8 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
     const { riskRankEnum } = useValuesEnums();
     const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
+    const { triggerGetUserQuotaLable, userQuotaLablEnum, userQuotaLablSelect } = useGetUserQuotaLabelEnum();
+
     const isSuperAdmin = getIsSuperAdmin();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserManageListQuery({
@@ -39,6 +43,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     const [releaseUser, { isSuccess: isReleaseUserSuccess }] = usePostUserBanReleaseMutation();
     const [importTelSale,{isSuccess:isImportTelSaleSuccess}] = usePostTelSaleMutation();
     const [removeBlack,{isSuccess:isRemoveBlackSuccess}] = useDeleteBlackListMutation();
+    const [setQuotaLabel, { isSuccess: isSetQuotaLabelSuccess }] = usePostQuotaLabelMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
         addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
@@ -54,7 +59,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     const [isImportTelSale, setIsImportTelSale] = useState(false);
     const [isExportRemainOrder, setIsExportRemainOrder] = useState(false);
     const [modal, contextHolder] = Modal.useModal();
-
+    const [notice, noticeContextHolder] = notification.useNotification();
 
     useEffect(() => {
         if (Object.keys(searchParams).length > 0) {
@@ -70,6 +75,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
     useEffect(()=>{
         triggerGetChannelList(null);
+        triggerGetUserQuotaLable(null);
     },[])
 
     const handleToUserDetail=(userId)=>{
@@ -131,12 +137,13 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
     const getSearchParams = () => {
         // @ts-ignore
-        const { addTimeRange, ...values } = formRef.current.getFieldValue();
+        const { addTimeRange, quotaLabel, ...values } = formRef.current.getFieldValue();
         return {
             ...searchList,
             ...values,
             addEndTime: addTimeRange?.[1]?.format('YYYY-MM-DD 23:59:59') || '',
             addStartTime: addTimeRange?.[0]?.format('YYYY-MM-DD 00:00:00') || '',
+            quotaLabelId: userQuotaLablEnum?.get(quotaLabel || '').id,
             pageNum: 1,
         };
     }
@@ -146,6 +153,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         window.open(`/hs/admin/user-manage/user-download?${searchQueryString}&exportRemainOrder=${exportRemainOrder}`);
         setSearchList(getSearchParams());
     }
+
     const statusEnum = {
         '': { text: '不限' },
         '0': { text: '未认证', color: 'orange' },
@@ -166,6 +174,26 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         setIsExportRemainOrder(addEndTime !== '' && addStartTime !== '' && addStartTime === addEndTime);
     }
 
+    const [selectedRow, setSelectedRow] = useState([]);
+    const [quotaLabelValue,setQuotaLabelValue]=useState('')
+    const [quotaLabelSelectDisabled, setQuotaLabelSelectDisabled] = useState(false)
+    const onSelectChange = (selectedRowKeys) => {
+        setQuotaLabelSelectDisabled(selectedRowKeys.length > 0 ? true : false)
+        setSelectedRow(selectedRowKeys);
+    };
+
+    const handleQuotaLabelChange = (value) => {
+        if (value === '') return
+        setQuotaLabel({ quotaLabelId: value, userIds: selectedRow })
+            .unwrap()
+            .then(() => {
+                onSelectChange([]);
+                triggerGetList(searchList);
+                setQuotaLabelValue('');
+                notice['success']({ message: value === 0 ? '已移除额度标签' : '已加上额度标签'});
+            })
+    }
+
     const columns: ProColumns<UserListContent>[] = [
         {
             title: '操作',
@@ -173,6 +201,13 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             key: 'option',
             align: 'left',
             width: ProColumnsOperationConstant.width[isSuperAdmin ? "5" : "3"],
+            tooltip: <div>
+                <div>▪ 黑名单：将用户列入黑名单。</div>
+                <div>▪ 清除：清除该用户信息。</div>
+                <div>▪ 禁止：禁止该用户登入。</div>
+                <div>▪ 解除：解除黑名单状态。</div>
+                <div>▪ 解禁：解除禁止登入。</div>
+            </div>,
             render: (text, record, _, action) => {
                 const optionCheck = [<a key="editable" onClick={() => handleToUserDetail(record.id)} >查看</a>];
                 const optionClear = [<a key="clear" onClick={() => handleDeleteUser(record.id)}>清除</a>];
@@ -202,14 +237,22 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         },
         {
             title: '用户状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
-            valueEnum: enumObjectToMap(statusEnum),
+            valueEnum: enumObjectToMap(statusEnum), fieldProps: { showSearch: true },
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
                 return statusEnum[status] ? <Tag color={tagStatus.color}>{tagStatus.text}</Tag> : '-';
             },
         },
+        {
+            title: '额度标签', dataIndex: 'quotaLabel', valueType: 'select', key: 'quotaLabel', initialValue: searchParams.quotaLabel || "",
+            valueEnum: userQuotaLablEnum, fieldProps: { showSearch: true },
+            render: (text, { quotaLabel }) => {
+                const userQuotaLaProperty = userQuotaLablEnum?.get(quotaLabel || '');
+                return quotaLabel ? <Tag color={userQuotaLaProperty.color}>{userQuotaLaProperty.text}</Tag> : '-';
+            },
+        },
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} /> },
-        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select',  key: 'channelId', valueEnum: channelListEnum, initialValue:searchParams.channelId || ''},
+        { title: '注册渠道', dataIndex: 'channelId', valueType: 'select', key: 'channelId', valueEnum: channelListEnum, fieldProps: { showSearch: true }, initialValue: searchParams.channelId || '' },
         { title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true, valueType: 'dateTime' },
         {
             title: '注册时间', dataIndex: 'addTimeRange', valueType: 'dateRange', key: 'addTimeRange',
@@ -255,15 +298,23 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         },
     ]
 
-
     return (
         <ProTable<UserListContent>
             formRef={formRef}
             columns={columns}
             dataSource={currentData?.records || []}
             loading={isFetching}
-            rowKey="id"
-            headerTitle={<Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
+            rowKey={({id})=>id}
+            headerTitle={
+                <Space>
+                    <Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>
+                    <Select value={quotaLabelValue} allowClear={false} placeholder="额度标签" disabled={!quotaLabelSelectDisabled} onChange={handleQuotaLabelChange} options={userQuotaLablSelect} />
+                </Space>
+            }
+            rowSelection={{
+                selectedRowKeys: selectedRow,
+                onChange: onSelectChange,
+            }}
             search={{
                 labelWidth: 'auto',
                 // @ts-ignore
@@ -272,6 +323,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                         {deleteContextHolder}
                         {banContextHolder}
                         {contextHolder}
+                        {noticeContextHolder}
                         <Button onClick={() => {
                             // @ts-ignore
                             form.setFieldsValue({ ...initSearchList, addTimeRange: '' })
@@ -306,7 +358,8 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             }}
             toolBarRender={() => [
                 <Tooltip placement="top" title={'限制只能导出注册时间1天内且审核通过的用户资料'}><Button onClick={() => handleExportUserList(true)} type='primary' disabled={!isExportRemainOrder}>导出剩馀单量</Button> </Tooltip>,
-                <Button onClick={() => handleExportUserList(false)} type='primary'>导出</Button>]}
+                <Button onClick={() => handleExportUserList(false)} type='primary'>导出</Button>,
+            ]}
             pagination={{
                 showSizeChanger: true,
                 defaultPageSize: 10,
