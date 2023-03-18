@@ -23,10 +23,12 @@ const initialState: SliceState = {
   data: undefined,
   status: STATE.INIT,
 };
+
 export type SliceState = {
   data: GetPersonalLoanRecommendResponse | undefined;
   status: STATE;
 }
+
 export const personalLoanRecommendSlice = createSlice<SliceState, any, any>({
   name: "personalLoanRecommendSlice",
   initialState,

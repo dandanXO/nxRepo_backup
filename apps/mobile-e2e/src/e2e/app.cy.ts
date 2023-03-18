@@ -137,7 +137,6 @@ describe("iphone-3一鍵快速借款", () => {
     //   statusCode: 200,
     // })
 
-
     // cy.intercept('/url', (req) => {
     //   req.on('before:response', (res) => {
     //     // this will be called before any `req.continue` or
@@ -193,9 +192,8 @@ describe("iphone-3一鍵快速借款", () => {
       } as GetPersonalLoanRecommendResponse,
     }).then(() => {
       // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
-      cy.get(".title").contains("您目前無額度")
+      cy.get(".container").contains("Insufficient funds to provide product recommendations. Please adjust your budget accordingly.")
       cy.get(".price").contains("0");
-
 
     }).as("fetchProducts")
 
@@ -204,7 +202,14 @@ describe("iphone-3一鍵快速借款", () => {
     cy.get("@fetchProducts")
       .should('have.length', 1)
       .then(() => {
-        cy.get("button").should("have.class", "不能借款");
+        // NOTE: way1
+        cy.get("button").should('have.css', 'background-color', 'rgb(229, 229, 229)');
+        // NOTE: way2
+        // cy.get("button").then(($el) => {
+        //   expect($el).to.have.css('background-color', 'rgb(229, 229, 229)')
+        // })
+
+
       })
 
     // NOTICE: THEN: API Refresh 應該完全不會呼叫
@@ -223,7 +228,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-  it("[OK] 2.有額度，無風控到期。用戶應該能 Apply。", () => {
+  it("2.有額度，無風控到期。用戶應該能 Apply。", () => {
     // NOTICE: GIVEN: 有額度，無風控到期
     // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
     // NOTICE: THEN: 用戶應該能 Apply。
@@ -252,7 +257,7 @@ describe("iphone-3一鍵快速借款", () => {
       cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
       cy.get(".price").contains("2000");
       // NOTICE: THEN: 用戶應該能 Apply。
-      // cy.get("button").should("have.class", "能借款");
+      cy.get("button").should('have.css', 'background-color', 'rgb(245, 139, 16)');
     })
 
     cy.intercept("/api/v2/product/apply", (req) => {
@@ -269,7 +274,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-  it("[OK] 3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。", () => {
+  it("3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。", () => {
     // NOTICE GIVEN 無額度，風控到期，但是在七天內
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN 自動幫用戶刷新
@@ -374,7 +379,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-  it("[OK] 4.無額度，風控到期，已超過七天，不幫用戶自動刷新。", () => {
+  it("4.無額度，風控到期，已超過七天，不幫用戶自動刷新。", () => {
     // NOTICE: GIVEN 用戶無額度，用戶風控到期，已超過七天
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN: 不幫用戶自動刷新
@@ -421,7 +426,7 @@ describe("iphone-3一鍵快速借款", () => {
   })
 
   // NOTICE: 但如果用戶在其他借貸APP已經借滿，會噴出錯誤唷
-  it("[OK] 5.有額度，風控到期，不管幾天內。用戶要自己手動刷新。也可不刷新直接借款 APPLY。", () => {
+  it("5.有額度，風控到期，不管幾天內。用戶要自己手動刷新。也可不刷新直接借款 APPLY。", () => {
     // NOTICE: GIVEN 有額度，風控到期，不管幾天內。
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN 用戶要自己手動刷新。也可不刷新直接借款
@@ -574,8 +579,7 @@ describe("iphone-3一鍵快速借款", () => {
       }).then(() => {
         console.log("[step] 6")
         cy.get(".button-container button").click();
-        cy.get(".button-container > button > div").should("have.class", "loadingio-spinner-spinner-e19blwp8l9");
-        // cy.get(".button-container > button").should("have.class", "sc-hZgfyJ");
+        cy.get(".button-container > button > span").should("contain", "Refreshing . . . .")
       })
 
     console.log("[step] 3")
@@ -592,14 +596,14 @@ describe("iphone-3一鍵快速借款", () => {
         cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
         cy.get(".price").contains("7777")
         // NOTICE: THEN: 用戶應該能 Apply。
-        cy.get("button").should("have.class", "能借款");
+        cy.get("button").should('have.css', 'background-color', 'rgb(245, 139, 16)');
       }
     })
 
 
   });
 
-  it("[OK] 用戶有正在審核的訂單", () => {
+  it("6.用戶有正在審核的訂單", () => {
     // NOTICE: GIVEN 用戶有正在審核的訂單
     // NOTICE: THEN 畫面顯示正在審核請稍候
 
@@ -630,7 +634,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   })
 
-  it("用戶風控被拒。顯示對應回饋畫面", () => {
+  it("7.用戶風控被拒。顯示對應回饋畫面", () => {
     // NOTICE: GIVEN 用戶風控被拒
     // NOTICE: THEN 顯示對應回饋畫面
 
@@ -662,7 +666,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-  it("用戶再過一陣子就到期", () => {
+  it("8.用戶再過一陣子就到期", () => {
     // NOTICE: GIVEN 用戶再過一陣子就到期
     cy.intercept("/api/v2/product/personal-recommend?count=", {
       statusCode: 200,
