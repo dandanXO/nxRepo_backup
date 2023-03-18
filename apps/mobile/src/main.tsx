@@ -3,13 +3,21 @@ import "./sentry";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app/App";
+import {isLocalhost} from "./sentry";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 
-root.render(
-    <React.StrictMode>
+// NOTICE: React StrictMode renders components twice on dev server
+// https://stackoverflow.com/questions/60618844/react-hooks-useeffect-is-called-twice-even-if-an-empty-array-is-used-as-an-ar
+
+root.render(isLocalhost() ?
+      (
         <App />
-    </React.StrictMode>
+      ) : (
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    )
 );

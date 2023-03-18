@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import {environment} from "./environments/environment";
 
-const isLocalhost = () => window.location.hostname === "localhost";
+export const isLocalhost = () => window.location.hostname === "localhost";
 
 const getEnvironment = () => {
   const envMachine = isLocalhost() ? "localhost" : "production";

@@ -179,7 +179,7 @@
           "executor": "@nrwl/web:dev-server",
           "defaultConfiguration": "development",
           "options": {
-            "buildTarget": "mobile:build"
+            "buildTarget": "mobile:build:development-bd"
           },
           "configurations": {
             "development": {

@@ -139,7 +139,7 @@ export const StyledSlider = styled.div`
     display: flex;
     margin-top: 16px;
     justify-content: space-between;
-    color: #AAAAAA;
+    color: #F58B10;
     font-weight: lighter;
     .min {
 
