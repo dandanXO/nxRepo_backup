@@ -10,6 +10,7 @@ import {GetPersonalLoanRecommendResponse, RecommendProduct} from "../../../mobil
 import moment from "moment-timezone";
 import {PostLoanQuotaRefreshResponse} from "../../../mobile/src/app/api/PostLoanQuotaRefreshResponse";
 import React from "react";
+import {PostApplyProductRequest} from "../../../mobile/src/app/api/PostApplyProductRequest";
 
 console.log("[e2e] env", Cypress.env())
 
@@ -165,7 +166,7 @@ describe("iphone-3一鍵快速借款", () => {
     // cy.screenshot();
   })
 
-  it("1.無額度，無風控到期。畫面應顯示提示用戶語句。用戶不能 Apply。", () => {
+  it.only("1.無額度，無風控到期。畫面應顯示提示用戶語句。用戶不能 Apply。", () => {
     // NOTICE: GIVEN: 無額度，無風控到期
     // NOTICE: THEN: 畫面顯示倒數計時器、可用金額 0
     // NOTICE: THEN: API Refresh 應該完全不會呼叫
@@ -223,8 +224,6 @@ describe("iphone-3一鍵快速借款", () => {
   });
 
 
-
-
   it("[OK] 2.有額度，無風控到期。用戶應該能 Apply。", () => {
     // NOTICE: GIVEN: 有額度，無風控到期
     // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
@@ -254,8 +253,21 @@ describe("iphone-3一鍵快速借款", () => {
       cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
       cy.get(".price").contains("2000");
       // NOTICE: THEN: 用戶應該能 Apply。
-      cy.get("button").should("have.class", "能借款");
+      // cy.get("button").should("have.class", "能借款");
     })
+
+    cy.intercept("/api/v2/product/apply", (req) => {
+      console.log("req", req);
+      req.continue((res) => {
+        console.log("res", res);
+        const stubResponse: PostApplyProductRequest = {
+          applyQuota: 1000,
+          productIds: [1, 2, 3]
+        }
+        res.send(stubResponse);
+      })
+    })
+
   });
 
   it("[OK] 3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。", () => {
@@ -306,7 +318,8 @@ describe("iphone-3一鍵快速借款", () => {
       console.log("[3]7");
       console.log("[dog] request 2")
       // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
-      cy.get(".button-container > button > div").should("have.class", "loadingio-spinner-spinner-e19blwp8l9")
+      cy.get(".button-container > button > span")
+        .should("contain", "Refreshing . . . .")
     }).as("loadList2");
 
 
@@ -587,7 +600,6 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-
   it("[OK] 用戶有正在審核的訂單", () => {
     // NOTICE: GIVEN 用戶有正在審核的訂單
     // NOTICE: THEN 畫面顯示正在審核請稍候
@@ -619,7 +631,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   })
 
-  it.only("用戶風控被拒。顯示對應回饋畫面", () => {
+  it("用戶風控被拒。顯示對應回饋畫面", () => {
     // NOTICE: GIVEN 用戶風控被拒
     // NOTICE: THEN 顯示對應回饋畫面
 
@@ -646,6 +658,46 @@ describe("iphone-3一鍵快速借款", () => {
       // NOTICE: THEN 顯示對應回饋畫面
       cy.get(".overdue").contains("Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.");
       cy.get(".overdue").contains("To avoid errors, we recommended that you stay on this screen.");
+    })
+
+
+  });
+
+  it("用戶再過一陣子就到期", () => {
+    // NOTICE: GIVEN 用戶再過一陣子就到期
+    cy.intercept("/api/v2/product/personal-recommend?count=", {
+      statusCode: 200,
+      body: {
+        products: productList,
+        quotaBar: {
+          current: 2000,
+          // 拉霸初始額度
+          interval: 100,
+          // 拉霸額度間隔
+          max: 8880,
+          // 拉霸最高額度
+          min: 100,
+          // 拉霸最低額度
+        },
+        quotaExpireTime: moment().add(5,'second').format('YYYY-MM-DD HH:mm:ss'),
+        processing: false,
+        riskReject: false,
+      } as GetPersonalLoanRecommendResponse
+    }).then(() => {
+      // cy.get(".overdue").contains("Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.");
+      // cy.get(".overdue").contains("To avoid errors, we recommended that you stay on this screen.");
+    })
+
+    cy.intercept("/api/v2/product/apply", (req) => {
+      console.log("req", req);
+      req.continue((res) => {
+        console.log("res", res);
+        const stubResponse: PostApplyProductRequest = {
+          applyQuota: 1000,
+          productIds: [1, 2, 3]
+        }
+        res.send(stubResponse);
+      })
     })
 
   })

@@ -44,8 +44,8 @@ import moment from "moment-timezone";
 
 
 export const autoRefreshCreator = createAction("autoRefresh");
-export const autoRefreshAction = autoRefreshCreator();
-console.log(`The action type is: ${autoRefreshCreator.toString()}`)
+// export const autoRefreshAction = autoRefreshCreator();
+
 
 const getUsers = () => {
   const parsedQueryString = queryString.parse(window.location.search);
@@ -64,22 +64,17 @@ const getUsers = () => {
 };
 
 function *autoRefreshSaga(action: any) {
-  console.log("autoRefreshSaga.action", action);
   function *refetch() {
-    console.log("重新準備拉取");
     yield delay(20 * 1000);
-    console.log("開始拉取");
     yield put(autoRefreshCreator());
   }
   try {
+    yield put((personalLoanRecommendSlice.actions as any).overdueLoading());
     const result: PostLoanQuotaRefreshResponse = yield call(getUsers);
     const resultData = (result as any).data;
-    console.log("[Eric] refresh.resultData", resultData);
     if(resultData.effective === false) {
-      console.log("[Eric] refreshing...")
       yield refetch();
     } else {
-      console.log("[Eric] 開始拉取熱騰騰的推薦列表")
       yield put(getLoanRecommendFetch());
     }
   } catch (error) {
@@ -101,12 +96,10 @@ const getLoanRecommend = () => {
 let firstLoadingList = true;
 
 function *getLoanRecommendSaga(action: any) {
-  console.log("getLoanRecommendAction.action", action);
   try {
     // @ts-ignore
     const result = yield call(getLoanRecommend);
     const resultData: GetPersonalLoanRecommendResponse = (result as any).data;
-    console.log("[eric] resultData", resultData);
     const actions = personalLoanRecommendSlice.actions ;
 
     // const currentTime = moment("2023-03-17T13:38:47+05:30").tz("Asia/Kolkata");
@@ -115,8 +108,8 @@ function *getLoanRecommendSaga(action: any) {
     // const expireTime = moment(resultData.quotaExpireTime?.split(".")[0].replace("T", " ")).tz("Asia/Kolkata").utc()
     const expireTime = moment(resultData.quotaExpireTime).tz("Asia/Kolkata");
 
-    console.log("[eric] currentTime.format", currentTime.format())
-    console.log("[eric] expireTime.format", expireTime.format())
+    // console.log("[eric] currentTime.format", currentTime.format())
+    // console.log("[eric] expireTime.format", expireTime.format())
     // console.log("[eric] expireTime.utc.format", expireTime.utc().format())
     // console.log("[eric] expireTime.isUTC", expireTime.isUTC())
     // console.log("[eric] test", currentTime.diff(expireTime, "seconds"))
@@ -127,12 +120,12 @@ function *getLoanRecommendSaga(action: any) {
 
     const isOverdue = expireTime.isBefore(currentTime);
 
-    console.log("[eric] isOverdue", isOverdue)
-    console.log("[eric] isSame", currentTime.isSame(expireTime))
-    console.log("[eric] firstLoadingList", firstLoadingList)
+    // console.log("[eric] isOverdue", isOverdue)
+    // console.log("[eric] isSame", currentTime.isSame(expireTime))
+    // console.log("[eric] firstLoadingList", firstLoadingList)
 
     const isBelow7days = currentTime.diff(expireTime, "day") <= 7;
-    console.log("[eric] isBelow7days", isBelow7days)
+    // console.log("[eric] isBelow7days", isBelow7days)
 
     yield put((actions as any).update(resultData));
     // yield put((personalLoanRecommendSlice.actions as any).update());
@@ -143,7 +136,7 @@ function *getLoanRecommendSaga(action: any) {
       isOverdue && isBelow7days
     ) {
       firstLoadingList = false;
-      console.log("[Eric] 第一次開始 refreshing...")
+      // console.log("[Eric] 第一次開始 refreshing...")
       // NOTE: setState(STATE.OVERDUE_LOADING);
       yield put((personalLoanRecommendSlice.actions as any).loading());
       yield put(autoRefreshCreator())
@@ -158,9 +151,8 @@ function *getLoanRecommendSaga(action: any) {
       resultData?.quotaBar?.min > 0 &&
       isOverdue
     ) {
-      console.log("[Eric] downloaded recommend products successfully")
+      // console.log("[Eric] downloaded recommend products successfully")
       yield put((actions as any).success());
-      // yield put(getLoanRecommendAction.success());
       // NOTE: setState(STATE.OVERDUE);
       yield put((personalLoanRecommendSlice.actions as any).overdue())
     } else if(resultData?.riskReject) {
@@ -181,12 +173,39 @@ function *getLoanRecommendSaga(action: any) {
   }
 }
 
-type FetchActionStatus = "loading" | "success" | "failure" | "overdue" | "countdown" | "applyRepeat" | "reject";
-const initialState = { data: undefined, status: undefined };
+type FetchActionStatus =
+  "init" |
+  "loading" |
+  "success" |
+  "failure" |
+  "overdue" |
+  "overdueLoading"|
+  "countdown" |
+  "apply"|
+  "applyRepeat" |
+  "applyOverdue" |
+  "reject";
 
+export enum STATE {
+  "init" = "init",
+  "loading" = "loading",
+  "success" = "success",
+  "failure" = "failure",
+  "overdue" = "overdue",
+  "overdueLoading" = "overdueLoading",
+  "countdown" = "countdown",
+  "apply" = "apply",
+  "applyRepeat" = "applyRepeat",
+  "applyOverdue" = "applyOverdue",
+  "reject" = "reject",
+}
+const initialState: SliceState = {
+  data: undefined,
+  status: STATE.init,
+};
 export type SliceState = {
   data: GetPersonalLoanRecommendResponse | undefined;
-  status: FetchActionStatus | undefined;
+  status: STATE;
 }
 export const personalLoanRecommendSlice = createSlice<SliceState, any, any>({
   name: "personalLoanRecommendSlice",
@@ -197,31 +216,43 @@ export const personalLoanRecommendSlice = createSlice<SliceState, any, any>({
       return state;
     },
     "loading": (state: SliceState , action: any) => {
-      state.status = "loading";
+      state.status = STATE.loading;
       return state;
     },
     "success": (state: SliceState , action: any) => {
-      state.status = "success";
+      state.status = STATE.success
       return state;
     },
     "failure": (state: SliceState , action: any) => {
-      state.status = "failure";
+      state.status = STATE.failure;
       return state;
     },
     "overdue": (state: SliceState , action: any) => {
-      state.status = "overdue";
+      state.status = STATE.overdue;
       return state;
     },
     "countdown": (state: SliceState , action: any) => {
-      state.status = "countdown";
+      state.status = STATE.countdown;
       return state;
     },
     "applyRepeat":  (state: SliceState , action: any) => {
-      state.status = "applyRepeat";
+      state.status = STATE.applyRepeat
       return state;
     },
     "reject":  (state: SliceState , action: any) => {
-      state.status = "reject";
+      state.status = STATE.reject
+      return state;
+    },
+    "overdueLoading": (state: SliceState , action: any) => {
+      state.status = STATE.overdueLoading
+      return state;
+    },
+    "apply": (state: SliceState , action: any) => {
+      state.status = STATE.apply
+      return state;
+    },
+    "applyOverdue":  (state: SliceState , action: any) => {
+      state.status = STATE.applyOverdue
       return state;
     },
   },
@@ -235,12 +266,9 @@ export const personalLoanRecommendSlice = createSlice<SliceState, any, any>({
 })
 
 export const getLoanRecommendFetch = createAction("getLoanRecommend/fetch");
-console.log("[fdsafdasfdsa]personalLoanRecommendSlice", personalLoanRecommendSlice.actions.loading)
-
 
 export default AppSaga;
 
-console.log("personalLoanRecommendSlice.actions", (personalLoanRecommendSlice.actions as any).fetch)
 function *AppSaga() {
   yield takeLatest(autoRefreshCreator.toString(), autoRefreshSaga);
   yield takeLatest(getLoanRecommendFetch, getLoanRecommendSaga);
