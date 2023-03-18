@@ -6,22 +6,22 @@ export const autoRefreshCreator = createAction("autoRefresh");
 export const getLoanRecommendFetch = createAction("getLoanRecommend/fetch");
 
 export enum STATE {
-  "init" = "init",
-  "loading" = "loading",
-  "success" = "success",
-  "failure" = "failure",
-  "overdue" = "overdue",
-  "overdueLoading" = "overdueLoading",
-  "countdown" = "countdown",
-  "apply" = "apply",
-  "applyRepeat" = "applyRepeat",
-  "applyOverdue" = "applyOverdue",
-  "reject" = "reject",
+  "INIT" = "INIT",
+  "LOADING" = "LOADING",
+  "SUCCESS" = "SUCCESS",
+  "FAILURE" = "FAILURE",
+  "OVERDUE" = "OVERDUE",
+  "OVERDUE_LOADING" = "OVERDUE_LOADING",
+  "COUNTDOWN" = "COUNTDOWN",
+  "APPLY" = "APPLY",
+  "APPLY_REPEAT" = "APPLY_REPEAT",
+  "APPLY_OVERDUE" = "APPLY_OVERDUE",
+  "REJECT" = "REJECT",
 }
 
 const initialState: SliceState = {
   data: undefined,
-  status: STATE.init,
+  status: STATE.INIT,
 };
 export type SliceState = {
   data: GetPersonalLoanRecommendResponse | undefined;
@@ -35,44 +35,44 @@ export const personalLoanRecommendSlice = createSlice<SliceState, any, any>({
       state.data = action.payload;
       return state;
     },
-    "loading": (state: SliceState , action: any) => {
-      state.status = STATE.loading;
+    loading: (state: SliceState , action: any) => {
+      state.status = STATE.LOADING;
       return state;
     },
-    "success": (state: SliceState , action: any) => {
-      state.status = STATE.success
+    success: (state: SliceState , action: any) => {
+      state.status = STATE.SUCCESS
       return state;
     },
-    "failure": (state: SliceState , action: any) => {
-      state.status = STATE.failure;
+    failure: (state: SliceState , action: any) => {
+      state.status = STATE.FAILURE;
       return state;
     },
-    "overdue": (state: SliceState , action: any) => {
-      state.status = STATE.overdue;
+    overdue: (state: SliceState , action: any) => {
+      state.status = STATE.OVERDUE;
       return state;
     },
-    "countdown": (state: SliceState , action: any) => {
-      state.status = STATE.countdown;
+    countdown: (state: SliceState , action: any) => {
+      state.status = STATE.COUNTDOWN;
       return state;
     },
-    "applyRepeat":  (state: SliceState , action: any) => {
-      state.status = STATE.applyRepeat
+    applyRepeat:  (state: SliceState , action: any) => {
+      state.status = STATE.APPLY_REPEAT
       return state;
     },
-    "reject":  (state: SliceState , action: any) => {
-      state.status = STATE.reject
+    reject:  (state: SliceState , action: any) => {
+      state.status = STATE.REJECT
       return state;
     },
-    "overdueLoading": (state: SliceState , action: any) => {
-      state.status = STATE.overdueLoading
+    overdueLoading: (state: SliceState , action: any) => {
+      state.status = STATE.OVERDUE_LOADING
       return state;
     },
-    "apply": (state: SliceState , action: any) => {
-      state.status = STATE.apply
+    apply: (state: SliceState , action: any) => {
+      state.status = STATE.APPLY
       return state;
     },
-    "applyOverdue":  (state: SliceState , action: any) => {
-      state.status = STATE.applyOverdue
+    applyOverdue:  (state: SliceState , action: any) => {
+      state.status = STATE.APPLY_OVERDUE
       return state;
     },
   },

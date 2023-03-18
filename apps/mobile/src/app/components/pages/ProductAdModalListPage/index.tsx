@@ -106,10 +106,10 @@ const ProductAdModalListPage = () => {
 
     const onUserClickToApply = useCallback(() => {
 
-      if(pageStatus === STATE.countdown) {
+      if(pageStatus === STATE.COUNTDOWN) {
         cancelCountDown();
         dispatch((personalLoanRecommendSlice.actions as any).apply())
-      } else if(STATE.overdue) {
+      } else if(STATE.OVERDUE) {
         cancelCountDown();
         dispatch((personalLoanRecommendSlice.actions as any).applyOverdue())
       }
@@ -134,7 +134,7 @@ const ProductAdModalListPage = () => {
 
     // NOTICE: Status
     useEffect(() => {
-      if(pageStatus === "countdown") {
+      if(pageStatus === "COUNTDOWN") {
         if(personalLoanInfo?.quotaExpireTime) {
           // NOTICE: real world
           const expiredTime = personalLoanInfo?.quotaExpireTime ? personalLoanInfo?.quotaExpireTime.split(".")[0] : ""
@@ -206,12 +206,12 @@ const ProductAdModalListPage = () => {
 
     // NOTE: template
     if(
-      pageStatus === STATE.countdown ||
-      pageStatus === STATE.overdue ||
-      pageStatus === STATE.overdueLoading ||
-      pageStatus === STATE.loading ||
-      pageStatus === STATE.init ||
-      pageStatus === STATE.reject
+      pageStatus === STATE.COUNTDOWN ||
+      pageStatus === STATE.OVERDUE ||
+      pageStatus === STATE.OVERDUE_LOADING ||
+      pageStatus === STATE.LOADING ||
+      pageStatus === STATE.INIT ||
+      pageStatus === STATE.REJECT
     ) {
       return (
         <EmbedPage>
@@ -221,7 +221,7 @@ const ProductAdModalListPage = () => {
               <div className="label">Loan Amount</div>
               <div className="price">
                 {environment.currency}
-                {(pageStatus === STATE.init || pageStatus === STATE.loading) ? "-" : currentValue}
+                {(pageStatus === STATE.INIT || pageStatus === STATE.LOADING) ? "-" : currentValue}
               </div>
             </div>
 
@@ -265,20 +265,20 @@ const ProductAdModalListPage = () => {
 
           <CountdownContainer>
             <Countdown>
-              {(pageStatus === STATE.countdown) && (
+              {(pageStatus === STATE.COUNTDOWN) && (
                 <>
                   <div className="title">LIMITED TIME OFFER COUNTDOWN :</div>
                   <div className="timer">{timeString}</div>
                 </>
               )}
-              {(pageStatus === STATE.overdue) && (
+              {(pageStatus === STATE.OVERDUE) && (
                 <div className="button-container">
                   <Button color="#fff" background="#F82626" onClick={onUserClickToLoadRecommendation}>
                     <span>Re-Acquire The Loan Amount</span>
                   </Button>
                 </div>
               )}
-              {pageStatus === STATE.overdueLoading && (
+              {pageStatus === STATE.OVERDUE_LOADING && (
                 <div className="button-container">
                   <Button color="#fff" background="#F82626">
                     {/*<StyledLoading style={{*/}
@@ -301,16 +301,16 @@ const ProductAdModalListPage = () => {
             position: "relative",
             top: "-20px"
           }}>
-            {(pageStatus === STATE.countdown) && (
+            {(pageStatus === STATE.COUNTDOWN) && (
               <Title>PERSONALIZED RECOMMENDATION</Title>
             )}
             <StyledList>
-              {pageStatus === STATE.countdown && productList?.length === 0 && (
+              {pageStatus === STATE.COUNTDOWN && productList?.length === 0 && (
                 <div className="container">
                   <p>Insufficient funds to provide product recommendations. Please adjust your budget accordingly.</p>
                 </div>
               )}
-              {(pageStatus === STATE.countdown || pageStatus === STATE.overdue) && productList?.map((product) => (
+              {(pageStatus === STATE.COUNTDOWN || pageStatus === STATE.OVERDUE) && productList?.map((product) => (
                 <Product
                   key={product.productId ?? ""}
                   logoUrl={product.logoUrl ?? ""}
@@ -320,7 +320,7 @@ const ProductAdModalListPage = () => {
                   terms={product?.terms ?? ""}
                 />
               ))}
-              {pageStatus === STATE.overdueLoading && (
+              {pageStatus === STATE.OVERDUE_LOADING && (
                 <div className="container">
                   <div className="overdue">
                     <div>Please wait patiently for 30 seconds to 2 minutes while we review the loan amount you are eligible for as quickly as possible.</div>
@@ -328,7 +328,7 @@ const ProductAdModalListPage = () => {
                   </div>
                 </div>
               )}
-              {pageStatus === STATE.reject && (
+              {pageStatus === STATE.REJECT && (
                 <div className="container">
                   <div className="overdue">
                     <div>Your current discount limit has been exhausted
@@ -342,9 +342,9 @@ const ProductAdModalListPage = () => {
             <Footer>
               <Button
                 background="#F58B10"
-                disable={pageStatus === STATE.init || pageStatus === STATE.loading || pageStatus === STATE.overdueLoading || productList.length === 0}
+                disable={pageStatus === STATE.INIT || pageStatus === STATE.LOADING || pageStatus === STATE.OVERDUE_LOADING || productList.length === 0}
                 onClick={() =>{
-                  if((pageStatus === STATE.countdown || pageStatus === STATE.overdue) && productList.length > 0) onUserClickToApply();
+                  if((pageStatus === STATE.COUNTDOWN || pageStatus === STATE.OVERDUE) && productList.length > 0) onUserClickToApply();
                 }}
               >Apply</Button>
             </Footer>
@@ -353,12 +353,12 @@ const ProductAdModalListPage = () => {
 
         </EmbedPage>
       );
-    } else if(pageStatus === STATE.apply) {
+    } else if(pageStatus === STATE.APPLY) {
       return (
         <Page>
           <ApplyContainer>
             <div className="title">Your loan application has been submitted.</div>
-            {pageStatus === STATE.apply && (
+            {pageStatus === STATE.APPLY && (
               <div className="content">
                 <p className="p1">After the review is successful, you can view your loan order in the loan record.</p>
               </div>
@@ -366,12 +366,12 @@ const ProductAdModalListPage = () => {
           </ApplyContainer>
         </Page>
       )
-    } else if(pageStatus === STATE.applyOverdue) {
+    } else if(pageStatus === STATE.APPLY_OVERDUE) {
       return (
         <Page>
           <ApplyContainer>
             <div className="title">Your loan application has been submitted.</div>
-            {pageStatus === STATE.applyOverdue && (
+            {pageStatus === STATE.APPLY_OVERDUE && (
               <div className="content">
                 <p className="p1">The limited-time promotional loan scheme has expired, and the loan amount will be based on the latest review results.</p>
                 <p className="p2">Please be patient while waiting for the review results. After the review is successful, you can view your loan order in the loan record.</p>
@@ -380,12 +380,12 @@ const ProductAdModalListPage = () => {
           </ApplyContainer>
         </Page>
       )
-    } else if(pageStatus === STATE.applyRepeat) {
+    } else if(pageStatus === STATE.APPLY_REPEAT) {
       return (
         <Page>
           <ApplyContainer>
             <div className="title">Your loan application has been submitted.</div>
-            {pageStatus === STATE.applyRepeat && (
+            {pageStatus === STATE.APPLY_REPEAT && (
               <div>
                 <p className="p1">Please do not resubmit and wait patiently.</p>
               </div>
