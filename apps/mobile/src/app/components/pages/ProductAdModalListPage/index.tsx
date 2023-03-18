@@ -1,45 +1,32 @@
-import {Page, StyledLoading} from "@frontend/mobile/shared/ui";
+import {Page} from "@frontend/mobile/shared/ui";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux'
 
 
-import {
-  useGetPersonalLoanRecommendQuery,
-  useLazyGetPersonalLoanRecommendQuery, usePostApplyProductMutation,
-  usePostLoanQuotaRefreshMutation
-} from "../../../api";
+import {usePostApplyProductMutation} from "../../../api";
 import {environment} from "../../../../environments/environment";
 // import ReactSlider from 'react-slider'
 import ReactSlider from "./ReactSlider";
 
 import {GetPersonalLoanRecommendResponse, RecommendProduct} from "../../../api/GetPersonalLoanRecommend";
-import {useTranslation} from "react-i18next";
-import {i18nProductAdModalListPage} from "./i18n/translations";
 
 import {
+  ApplyContainer,
   Button,
-
   Countdown,
   CountdownContainer,
   Footer,
+  Product,
   StyledList,
   StyledSlider,
   Title,
-  Product, ApplyContainer,
 } from "./Components";
 
 import moment from 'moment-timezone';
-import {PostLoanQuotaRefreshResponse} from "../../../api/PostLoanQuotaRefreshResponse";
 import styled from "styled-components";
 import {AppDispatch, RootState} from "../../../store";
 
-import {
-  autoRefreshAction,
-  autoRefreshCreator, getLoanRecommendFetch,
-  // getLoanRecommendAction,
-  // getLoanRecommendCreator,
-  personalLoanRecommendSlice
-} from "./redux";
+import {autoRefreshCreator, getLoanRecommendFetch} from "./redux";
 
 const EmbedPage = styled.div`
   background: ${({ theme }) => theme.color.gray100};
