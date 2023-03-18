@@ -81,7 +81,7 @@ const ProductAdModalListPage = () => {
         setTimeString(timeInfo.time);
         if(timeInfo.end) {
           cancelCountDown();
-          dispatch((personalLoanRecommendSlice.actions as any).overdue());
+          dispatch(personalLoanRecommendSlice.actions.overdue({}));
         }
       }, 1000)
       // console.log("intervalIDRef.current",intervalIDRef.current);
@@ -108,10 +108,10 @@ const ProductAdModalListPage = () => {
 
       if(pageStatus === STATE.COUNTDOWN) {
         cancelCountDown();
-        dispatch((personalLoanRecommendSlice.actions as any).apply())
+        dispatch(personalLoanRecommendSlice.actions.apply({}));
       } else if(STATE.OVERDUE) {
         cancelCountDown();
-        dispatch((personalLoanRecommendSlice.actions as any).applyOverdue())
+        dispatch(personalLoanRecommendSlice.actions.applyOverdue({}));
       }
 
       triggerApplyProduct({
@@ -127,8 +127,6 @@ const ProductAdModalListPage = () => {
 
     // NOTE: useEffect
     useEffect(() => {
-      // dispatch((personalLoanRecommendSlice.actions as any).fetch())
-      // dispatch((personalLoanRecommendSlice.actions as any).loading())
       dispatch(getLoanRecommendFetch());
     }, [])
 

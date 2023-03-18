@@ -1,4 +1,4 @@
-import {createAction, createSlice} from "@reduxjs/toolkit";
+import {createAction, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {API} from "../../../api";
 import {GetPersonalLoanRecommendResponse} from "../../../api/GetPersonalLoanRecommend";
 
@@ -29,51 +29,51 @@ export type SliceState = {
   status: STATE;
 }
 
-export const personalLoanRecommendSlice = createSlice<SliceState, any, any>({
+export const personalLoanRecommendSlice = createSlice({
   name: "personalLoanRecommendSlice",
   initialState,
   reducers: {
-    update(state: SliceState , action: any) {
+    update(state: SliceState , action: PayloadAction<GetPersonalLoanRecommendResponse>) {
       state.data = action.payload;
       return state;
     },
-    loading: (state: SliceState , action: any) => {
+    loading: (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.LOADING;
       return state;
     },
-    success: (state: SliceState , action: any) => {
+    success: (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.SUCCESS
       return state;
     },
-    failure: (state: SliceState , action: any) => {
+    failure: (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.FAILURE;
       return state;
     },
-    overdue: (state: SliceState , action: any) => {
+    overdue: (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.OVERDUE;
       return state;
     },
-    countdown: (state: SliceState , action: any) => {
+    countdown: (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.COUNTDOWN;
       return state;
     },
-    applyRepeat:  (state: SliceState , action: any) => {
+    applyRepeat:  (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.APPLY_REPEAT
       return state;
     },
-    reject:  (state: SliceState , action: any) => {
+    reject:  (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.REJECT
       return state;
     },
-    overdueLoading: (state: SliceState , action: any) => {
+    overdueLoading: (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.OVERDUE_LOADING
       return state;
     },
-    apply: (state: SliceState , action: any) => {
+    apply: (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.APPLY
       return state;
     },
-    applyOverdue:  (state: SliceState , action: any) => {
+    applyOverdue:  (state: SliceState , action: PayloadAction<any>) => {
       state.status = STATE.APPLY_OVERDUE
       return state;
     },

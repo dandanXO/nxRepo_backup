@@ -16,7 +16,7 @@ function *AppSaga() {
 
 function *autoRefreshSaga(action: any) {
   try {
-    yield put((personalLoanRecommendSlice.actions as any).overdueLoading());
+    yield put(personalLoanRecommendSlice.actions.overdueLoading({}));
     const result: PostLoanQuotaRefreshResponse = yield call(getUsers);
     const resultData = (result as any).data;
     if(resultData.effective === false) {
@@ -63,8 +63,7 @@ function *getLoanRecommendSaga(action: any) {
     const isBelow7days = currentTime.diff(expireTime, "day") <= 7;
     // console.log("[eric] isBelow7days", isBelow7days)
 
-    yield put((actions as any).update(resultData));
-    // yield put((personalLoanRecommendSlice.actions as any).update());
+    yield put(personalLoanRecommendSlice.actions.update(resultData));
 
     if(
       firstLoadingList &&
@@ -73,8 +72,7 @@ function *getLoanRecommendSaga(action: any) {
     ) {
       firstLoadingList = false;
       // console.log("[Eric] 第一次開始 refreshing...")
-      // NOTE: setState(STATE.OVERDUE_LOADING);
-      yield put((personalLoanRecommendSlice.actions as any).loading());
+      yield put(personalLoanRecommendSlice.actions.loading({}));
       yield put(autoRefreshCreator())
     } else if (
       firstLoadingList &&
@@ -82,7 +80,7 @@ function *getLoanRecommendSaga(action: any) {
       isOverdue && !isBelow7days
     ) {
       yield put((actions as any).success());
-      yield put((personalLoanRecommendSlice.actions as any).overdue())
+      yield put(personalLoanRecommendSlice.actions.overdue({}));
     } else if(
       resultData?.quotaBar?.min > 0 &&
       isOverdue
@@ -90,21 +88,21 @@ function *getLoanRecommendSaga(action: any) {
       // console.log("[Eric] downloaded recommend products successfully")
       yield put((actions as any).success());
       // NOTE: setState(STATE.OVERDUE);
-      yield put((personalLoanRecommendSlice.actions as any).overdue())
+      yield put(personalLoanRecommendSlice.actions.overdue({}));
     } else if(resultData?.riskReject) {
       // NOTE: 優先 1
       yield put((actions as any).success());
-      yield put((personalLoanRecommendSlice.actions as any).reject())
+      yield put(personalLoanRecommendSlice.actions.reject({}));
     } else if (resultData?.processing){
       // NOTE: 優先 2
       yield put((actions as any).success());
-      yield put((personalLoanRecommendSlice.actions as any).applyRepeat())
+      yield put(personalLoanRecommendSlice.actions.applyRepeat({}));
     } else {
       yield put((actions as any).success());
-      yield put((personalLoanRecommendSlice.actions as any).countdown())
+      yield put(personalLoanRecommendSlice.actions.countdown({}));
     }
   } catch (error) {
     console.error(error);
-    yield put((personalLoanRecommendSlice.actions as any).failure());
+    yield put(personalLoanRecommendSlice.actions.failure({}));
   }
 }
