@@ -1,20 +1,16 @@
 import {Page} from "@frontend/mobile/shared/ui";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux'
-
-
 import {usePostApplyProductMutation} from "../../../api";
 import {environment} from "../../../../environments/environment";
-// import ReactSlider from 'react-slider'
 import ReactSlider from "./ReactSlider";
-
 import {GetPersonalLoanRecommendResponse, RecommendProduct} from "../../../api/GetPersonalLoanRecommend";
 
 import {
   ApplyContainer,
   Button,
   Countdown,
-  CountdownContainer,
+  CountdownContainer, EmbedPage,
   Footer,
   Product,
   StyledList,
@@ -23,40 +19,15 @@ import {
 } from "./Components";
 
 import moment from 'moment-timezone';
-import styled from "styled-components";
 import {AppDispatch, RootState} from "../../../store";
 
 import { STATE } from "./redux"
 
 import {autoRefreshCreator, getLoanRecommendFetch, personalLoanRecommendSlice} from "./redux";
 
-const EmbedPage = styled.div`
-  background: ${({ theme }) => theme.color.gray100};
-`;
-
-
-
-// enum STATE {
-//   "INIT" ,
-//   "LOADING",
-//   "COUNTDOWN",
-//   "OVERDUE",
-//   "OVERDUE_LOADING",
-//   "APPLY",
-//   "APPLY_OVERDUE",
-//   "APPLY_REPEAT",
-//   "REJECT"
-// }
-// let intervalID: NodeJS.Timer;
-
 let triggerRefreshID: NodeJS.Timer;
 let debugTimeout1: NodeJS.Timer;
 let debugTimeout2: NodeJS.Timer;
-
-// const limitRetryCount = 30;
-// let currentRetryCount = 0;
-// let firstLoadingList = false;
-
 
 const ProductAdModalListPage = () => {
     // NOTICE: for testing
@@ -75,11 +46,12 @@ const ProductAdModalListPage = () => {
 
     // NOTICE: for testing
     const dispatch = useDispatch<AppDispatch>();
-    const [currentData, setCurrentData] = useState<GetPersonalLoanRecommendResponse>();
-    // console.log("currentData", currentData)
 
     const data = useSelector((state: RootState) => state.personalLoanRecommendSlice.data);
     // console.log("data", data);
+    const [personalLoanInfo, setCurrentData] = useState<GetPersonalLoanRecommendResponse>();
+    // console.log("personalLoanInfo", personalLoanInfo)
+
 
     const [currentValue, setCurrentValue] = useState<number>(0);
     const [timeString, setTimeString] = useState<string>("00 : 00 : 00");
@@ -127,35 +99,21 @@ const ProductAdModalListPage = () => {
     // NOTE: DEBUG
     console.log("state", STATE[pageStatus]);
 
-
     // NOTE: user interaction
     const onUserClickToLoadRecommendation = useCallback(() => {
       dispatch(autoRefreshCreator());
     }, []);
 
     const onUserClickToApply = useCallback(() => {
-      // console.log("onUserClickToApply.state", state);
-      switch (pageStatus) {
-        // case STATE.INIT: {
-        //   break;
-        // }
-        // case STATE.LOADING: {
-        //   break;
-        // }
-        case STATE.countdown: {
-          cancelCountDown();
-          dispatch((personalLoanRecommendSlice.actions as any).apply())
-          break;
-        }
-        case STATE.overdue: {
-          cancelCountDown();
-          dispatch((personalLoanRecommendSlice.actions as any).applyOverdue())
-          break;
-        }
-        // case STATE.OVERDUE_LOADING: {
-        //   break;
-        // }
+
+      if(pageStatus === STATE.countdown) {
+        cancelCountDown();
+        dispatch((personalLoanRecommendSlice.actions as any).apply())
+      } else if(STATE.overdue) {
+        cancelCountDown();
+        dispatch((personalLoanRecommendSlice.actions as any).applyOverdue())
       }
+
       triggerApplyProduct({
         applyQuota: currentValue,
         productIds: productList.map(product => product.productId)
@@ -164,8 +122,8 @@ const ProductAdModalListPage = () => {
       }).catch((error) => {
         console.log(error);
       })
-    }, [pageStatus, productList, currentValue])
 
+    }, [pageStatus, productList, currentValue])
 
     // NOTE: useEffect
     useEffect(() => {
@@ -177,16 +135,14 @@ const ProductAdModalListPage = () => {
     // NOTICE: Status
     useEffect(() => {
       if(pageStatus === "countdown") {
-        const data = currentData
-        const result = data as GetPersonalLoanRecommendResponse;
-        if(result?.quotaExpireTime) {
+        if(personalLoanInfo?.quotaExpireTime) {
           // NOTICE: real world
-          const expiredTime = result?.quotaExpireTime ? result?.quotaExpireTime.split(".")[0] : ""
+          const expiredTime = personalLoanInfo?.quotaExpireTime ? personalLoanInfo?.quotaExpireTime.split(".")[0] : ""
           const countDownStr = moment(expiredTime).format('YYYY-MM-DD HH:mm:ss');
           countDown(countDownStr);
         }
       }
-    }, [pageStatus, currentData])
+    }, [pageStatus, personalLoanInfo])
 
     // NOTICE: 清除計時器
     useEffect(() => {
@@ -204,9 +160,7 @@ const ProductAdModalListPage = () => {
       // undefined=>undefined->hasData->undefined
       if(data) {
         setCurrentData(data);
-        setCurrentValue(() => {
-          return data?.quotaBar?.current || 0
-        });
+        setCurrentValue(data?.quotaBar?.current || 0);
       } else {
         console.log("data 被重置成 undefined")
       }
@@ -214,21 +168,21 @@ const ProductAdModalListPage = () => {
 
     // NOTICE: 目前額度發生變化
     useEffect(() => {
-      if(currentData?.quotaBar?.current) {
+      if(personalLoanInfo?.quotaBar?.current) {
         setCurrentValue(() => {
-          return currentData?.quotaBar?.current
+          return personalLoanInfo?.quotaBar?.current
         })
       }
-    }, [currentData?.quotaBar?.current]);
+    }, [personalLoanInfo?.quotaBar?.current]);
 
     // NOTICE: 用戶拉動拉霸
     useEffect(() => {
       let resultProducts: RecommendProduct[] = [];
-      if(currentData?.quotaBar?.current) {
+      if(personalLoanInfo?.quotaBar?.current) {
         let currentTotalPrice = 0;
 
         let end = false;
-        currentData?.products?.map((product) => {
+        personalLoanInfo?.products?.map((product) => {
           if(!end) {
             if(
               product?.loanableAmount &&
@@ -287,12 +241,12 @@ const ProductAdModalListPage = () => {
                   )
                 }}
                 // NOTE: WHY?
-                // min={currentData?.quotaBar?.min ?? 0}
-                // max={currentData?.quotaBar?.max ?? 1000}
-                // step={currentData?.quotaBar?.interval ?? 0}
-                min={currentData?.quotaBar?.min}
-                max={currentData?.quotaBar?.max}
-                step={currentData?.quotaBar?.interval}
+                // min={personalLoanInfo?.quotaBar?.min ?? 0}
+                // max={personalLoanInfo?.quotaBar?.max ?? 1000}
+                // step={personalLoanInfo?.quotaBar?.interval ?? 0}
+                min={personalLoanInfo?.quotaBar?.min}
+                max={personalLoanInfo?.quotaBar?.max}
+                step={personalLoanInfo?.quotaBar?.interval}
                 value={currentValue}
                 onChange={(value: any, index: any) => {
                   setCurrentValue(() => {

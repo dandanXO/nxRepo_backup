@@ -7,7 +7,8 @@ import {store} from "next/dist/build/output/store";
 // import { setupListeners } from '@reduxjs/toolkit/query'
 
 import createSagaMiddleware from 'redux-saga'
-import AppSaga, {personalLoanRecommendSlice} from "../components/pages/ProductAdModalListPage/redux";
+import {personalLoanRecommendSlice} from "../components/pages/ProductAdModalListPage/redux";
+import AppSaga from "../components/pages/ProductAdModalListPage/saga";
 // NOTICE: create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
 

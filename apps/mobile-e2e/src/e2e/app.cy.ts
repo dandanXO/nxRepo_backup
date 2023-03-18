@@ -166,7 +166,7 @@ describe("iphone-3一鍵快速借款", () => {
     // cy.screenshot();
   })
 
-  it.only("1.無額度，無風控到期。畫面應顯示提示用戶語句。用戶不能 Apply。", () => {
+  it("1.無額度，無風控到期。畫面應顯示提示用戶語句。用戶不能 Apply。", () => {
     // NOTICE: GIVEN: 無額度，無風控到期
     // NOTICE: THEN: 畫面顯示倒數計時器、可用金額 0
     // NOTICE: THEN: API Refresh 應該完全不會呼叫
@@ -222,7 +222,6 @@ describe("iphone-3一鍵快速借款", () => {
 
 
   });
-
 
   it("[OK] 2.有額度，無風控到期。用戶應該能 Apply。", () => {
     // NOTICE: GIVEN: 有額度，無風控到期

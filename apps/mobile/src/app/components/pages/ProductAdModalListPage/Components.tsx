@@ -5,6 +5,10 @@ import {i18nProductAdModalListPage} from "./i18n/translations";
 import {environment} from "../../../../environments/environment";
 import React, {memo} from "react";
 
+export const EmbedPage = styled.div`
+  background: ${({ theme }) => theme.color.gray100};
+`;
+
 export const Title = styled.div`
   font-size: 16px;
   font-weight: 400;
