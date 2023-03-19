@@ -1,9 +1,9 @@
-import {Page} from "@frontend/mobile/shared/ui";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux'
-import {usePostApplyProductMutation} from "../../../api";
-import {environment} from "../../../../environments/environment";
 import ReactSlider from "./ReactSlider";
+
+import {environment} from "../../../../environments/environment";
+import {usePostApplyProductMutation} from "../../../api";
 import {GetPersonalLoanRecommendResponse, RecommendProduct} from "../../../api/GetPersonalLoanRecommend";
 
 import {
@@ -349,7 +349,7 @@ const ProductAdModalListPage = () => {
       );
     } else if(pageStatus === STATE.APPLY) {
       return (
-        <Page>
+        <EmbedPage>
           <ApplyContainer>
             <div className="title">Your loan application has been submitted.</div>
             {pageStatus === STATE.APPLY && (
@@ -358,11 +358,11 @@ const ProductAdModalListPage = () => {
               </div>
             )}
           </ApplyContainer>
-        </Page>
+        </EmbedPage>
       )
     } else if(pageStatus === STATE.APPLY_OVERDUE) {
       return (
-        <Page>
+        <EmbedPage>
           <ApplyContainer>
             <div className="title">Your loan application has been submitted.</div>
             {pageStatus === STATE.APPLY_OVERDUE && (
@@ -372,11 +372,11 @@ const ProductAdModalListPage = () => {
               </div>
             )}
           </ApplyContainer>
-        </Page>
+        </EmbedPage>
       )
     } else if(pageStatus === STATE.APPLY_REPEAT) {
       return (
-        <Page>
+        <EmbedPage>
           <ApplyContainer>
             <div className="title">Your loan application has been submitted.</div>
             {pageStatus === STATE.APPLY_REPEAT && (
@@ -385,23 +385,23 @@ const ProductAdModalListPage = () => {
               </div>
             )}
           </ApplyContainer>
-        </Page>
+        </EmbedPage>
       )
     } else if(pageStatus === STATE.FAILURE){
       return (
-        <Page>
+        <EmbedPage>
           <ApplyContainer>
             <div className="title">FAILURE</div>
           </ApplyContainer>
-        </Page>
+        </EmbedPage>
       )
     } else {
       return (
-        <Page>
+        <EmbedPage>
           <ApplyContainer>
             <div className="title">FAILURE code:2</div>
           </ApplyContainer>
-        </Page>
+        </EmbedPage>
       )
     }
 };
