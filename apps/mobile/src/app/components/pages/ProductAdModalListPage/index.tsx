@@ -104,7 +104,6 @@ const ProductAdModalListPage = () => {
     }, []);
 
     const onUserClickToApply = useCallback(() => {
-
       if(pageStatus === STATE.COUNTDOWN) {
         cancelCountDown();
         dispatch(PersonalRecommendActions[STATE.APPLY](STATE.APPLY))
@@ -112,7 +111,6 @@ const ProductAdModalListPage = () => {
         cancelCountDown();
         dispatch(PersonalRecommendActions[STATE.APPLY_OVERDUE](STATE.APPLY_OVERDUE))
       }
-
       triggerApplyProduct({
         applyQuota: currentValue,
         productIds: productList.map(product => product.productId)
@@ -121,7 +119,6 @@ const ProductAdModalListPage = () => {
       }).catch((error) => {
         console.log(error);
       })
-
     }, [pageStatus, productList, currentValue])
 
     // NOTE: useEffect
@@ -203,11 +200,11 @@ const ProductAdModalListPage = () => {
 
     // NOTE: template
     if(
+      pageStatus === STATE.INIT ||
+      pageStatus === STATE.LOADING ||
       pageStatus === STATE.COUNTDOWN ||
       pageStatus === STATE.OVERDUE ||
       pageStatus === STATE.OVERDUE_LOADING ||
-      pageStatus === STATE.LOADING ||
-      pageStatus === STATE.INIT ||
       pageStatus === STATE.REJECT
     ) {
       return (

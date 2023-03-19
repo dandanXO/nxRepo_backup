@@ -36,7 +36,9 @@ export type SliceState = {
 const PersonalRecommendActionsName = "PersonalRecommendActions"
 
 export const PersonalRecommendActions = {
+  // NOTICE: Fetch API
   [STATE.UPDATE]: createAction<GetPersonalLoanRecommendResponse>(`${PersonalRecommendActionsName}/${STATE.UPDATE}`),
+  // NOTICE: Page Status
   [STATE.LOADING]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.LOADING}`),
   [STATE.COUNTDOWN]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.COUNTDOWN}`),
   [STATE.OVERDUE]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.OVERDUE}`),
