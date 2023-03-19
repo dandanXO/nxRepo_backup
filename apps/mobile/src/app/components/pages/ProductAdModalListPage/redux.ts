@@ -23,16 +23,6 @@ export enum STATE {
   "FAILURE" = "FAILURE",
 }
 
-const initialState: SliceState = {
-  data: undefined,
-  status: STATE.INIT,
-};
-
-export type SliceState = {
-  data: GetPersonalLoanRecommendResponse | undefined;
-  status: STATE;
-}
-
 const PersonalRecommendActionsName = "PersonalRecommendActions"
 
 export const PersonalRecommendActions = {
@@ -51,9 +41,22 @@ export const PersonalRecommendActions = {
 }
 
 const isPersonalRecommendActions = (action: AnyAction) => {
+  // NOTE: SAME
   return Object.keys(PersonalRecommendActions).map(item => `${PersonalRecommendActionsName}/${item}`).indexOf(action.type) > -1 && action.type;
+  // NOTE: SAME
   // return Object.keys(PersonalRecommendActions).map(item => `${PersonalRecommendActionsName}/${item}`).indexOf(action.type) > -1 && action.type !== STATE.UPDATE
 }
+
+const initialState: SliceState = {
+  data: undefined,
+  status: STATE.INIT,
+};
+
+export type SliceState = {
+  data: GetPersonalLoanRecommendResponse | undefined;
+  status: STATE;
+}
+
 export const personalRecommendActionsReducer = createReducer(
   initialState,
   (builder) => {
