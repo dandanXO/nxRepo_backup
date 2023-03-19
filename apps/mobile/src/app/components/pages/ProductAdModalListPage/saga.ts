@@ -2,8 +2,8 @@ import {call, delay, put, takeLatest} from "redux-saga/effects";
 import {PostLoanQuotaRefreshResponse} from "../../../api/PostLoanQuotaRefreshResponse";
 import {GetPersonalLoanRecommendResponse} from "../../../api/GetPersonalLoanRecommend";
 import moment from "moment-timezone";
-import {autoRefreshCreator, getLoanRecommendFetch, personalLoanRecommendSlice} from "./redux";
-import {getUsers, getLoanRecommend} from "./api";
+import {autoRefreshCreator, getLoanRecommendFetch, PersonalRecommendActions, STATE} from "./redux";
+import {getLoanRecommend, getUsers} from "./api";
 
 let firstLoadingList = true;
 
@@ -16,7 +16,7 @@ function *AppSaga() {
 
 function *autoRefreshSaga(action: any) {
   try {
-    yield put(personalLoanRecommendSlice.actions.overdueLoading({}));
+    yield put(PersonalRecommendActions[STATE.OVERDUE_LOADING](STATE.OVERDUE_LOADING))
     const result: PostLoanQuotaRefreshResponse = yield call(getUsers);
     const resultData = (result as any).data;
     if(resultData.effective === false) {
@@ -36,7 +36,7 @@ function *getLoanRecommendSaga(action: any) {
     // @ts-ignore
     const result = yield call(getLoanRecommend);
     const resultData: GetPersonalLoanRecommendResponse = (result as any).data;
-    const actions = personalLoanRecommendSlice.actions ;
+    const actions = PersonalRecommendActions ;
 
     // const currentTime = moment("2023-03-17T13:38:47+05:30").tz("Asia/Kolkata");
     const currentTime = moment().tz("Asia/Kolkata");
@@ -63,7 +63,7 @@ function *getLoanRecommendSaga(action: any) {
     const isBelow7days = currentTime.diff(expireTime, "day") <= 7;
     // console.log("[eric] isBelow7days", isBelow7days)
 
-    yield put(personalLoanRecommendSlice.actions.update(resultData));
+    yield put(PersonalRecommendActions[STATE.UPDATE](resultData))
 
     if(
       firstLoadingList &&
@@ -72,37 +72,32 @@ function *getLoanRecommendSaga(action: any) {
     ) {
       firstLoadingList = false;
       // console.log("[Eric] 第一次開始 refreshing...")
-      yield put(personalLoanRecommendSlice.actions.loading({}));
+      yield put(PersonalRecommendActions[STATE.LOADING](STATE.LOADING))
       yield put(autoRefreshCreator())
     } else if (
       firstLoadingList &&
       resultData?.quotaBar?.min === 0 &&
       isOverdue && !isBelow7days
     ) {
-      yield put((actions as any).success());
-      yield put(personalLoanRecommendSlice.actions.overdue({}));
+      yield put(PersonalRecommendActions[STATE.OVERDUE](STATE.OVERDUE))
     } else if(
       resultData?.quotaBar?.min > 0 &&
       isOverdue
     ) {
       // console.log("[Eric] downloaded recommend products successfully")
-      yield put((actions as any).success());
       // NOTE: setState(STATE.OVERDUE);
-      yield put(personalLoanRecommendSlice.actions.overdue({}));
+      yield put(PersonalRecommendActions[STATE.OVERDUE](STATE.OVERDUE))
     } else if(resultData?.riskReject) {
       // NOTE: 優先 1
-      yield put((actions as any).success());
-      yield put(personalLoanRecommendSlice.actions.reject({}));
+      yield put(PersonalRecommendActions[STATE.REJECT](STATE.REJECT))
     } else if (resultData?.processing){
       // NOTE: 優先 2
-      yield put((actions as any).success());
-      yield put(personalLoanRecommendSlice.actions.applyRepeat({}));
+      yield put(PersonalRecommendActions[STATE.APPLY_REPEAT](STATE.APPLY_REPEAT))
     } else {
-      yield put((actions as any).success());
-      yield put(personalLoanRecommendSlice.actions.countdown({}));
+      yield put(PersonalRecommendActions[STATE.COUNTDOWN](STATE.COUNTDOWN))
     }
   } catch (error) {
     console.error(error);
-    yield put(personalLoanRecommendSlice.actions.failure({}));
+    yield put(PersonalRecommendActions[STATE.FAILURE](STATE.FAILURE))
   }
 }

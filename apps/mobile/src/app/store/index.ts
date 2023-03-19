@@ -7,7 +7,9 @@ import {store} from "next/dist/build/output/store";
 // import { setupListeners } from '@reduxjs/toolkit/query'
 
 import createSagaMiddleware from 'redux-saga'
-import {personalLoanRecommendSlice} from "../components/pages/ProductAdModalListPage/redux";
+import {
+  personalRecommendActionsReducer
+} from "../components/pages/ProductAdModalListPage/redux";
 import AppSaga from "../components/pages/ProductAdModalListPage/saga";
 // NOTICE: create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
@@ -15,7 +17,8 @@ const sagaMiddleware = createSagaMiddleware()
 export const appStore = configureStore({
     reducer: {
         [API.reducerPath]: API.reducer,
-      personalLoanRecommendSlice: personalLoanRecommendSlice.reducer,
+        // personalLoanRecommendSlice: personalLoanRecommendSlice.reducer,
+        personalLoanRecommendSlice: personalRecommendActionsReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(API.middleware).concat(sagaMiddleware),

@@ -1,22 +1,26 @@
-import {createAction, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {API} from "../../../api";
+import {AnyAction, createAction, createReducer, PayloadAction} from "@reduxjs/toolkit";
 import {GetPersonalLoanRecommendResponse} from "../../../api/GetPersonalLoanRecommend";
 
 export const autoRefreshCreator = createAction("autoRefresh");
 export const getLoanRecommendFetch = createAction("getLoanRecommend/fetch");
 
 export enum STATE {
+  // NOTE: 畫面初始化
   "INIT" = "INIT",
+  "UPDATE" = "UPDATE",
+  // NOTE: 資料進行任何 API 反饋畫面讀取中
   "LOADING" = "LOADING",
-  "SUCCESS" = "SUCCESS",
-  "FAILURE" = "FAILURE",
+  // NOTE: success 分為以下好多情況
+  // "SUCCESS" = "SUCCESS",
+  "COUNTDOWN" = "COUNTDOWN",
   "OVERDUE" = "OVERDUE",
   "OVERDUE_LOADING" = "OVERDUE_LOADING",
-  "COUNTDOWN" = "COUNTDOWN",
   "APPLY" = "APPLY",
-  "APPLY_REPEAT" = "APPLY_REPEAT",
   "APPLY_OVERDUE" = "APPLY_OVERDUE",
+  "APPLY_REPEAT" = "APPLY_REPEAT",
   "REJECT" = "REJECT",
+  // NOTE: 任何 api 有 failure
+  "FAILURE" = "FAILURE",
 }
 
 const initialState: SliceState = {
@@ -29,64 +33,36 @@ export type SliceState = {
   status: STATE;
 }
 
-export const personalLoanRecommendSlice = createSlice({
-  name: "personalLoanRecommendSlice",
+const PersonalRecommendActionsName = "PersonalRecommendActions"
+
+export const PersonalRecommendActions = {
+  [STATE.UPDATE]: createAction<GetPersonalLoanRecommendResponse>(`${PersonalRecommendActionsName}/${STATE.UPDATE}`),
+  [STATE.LOADING]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.LOADING}`),
+  [STATE.COUNTDOWN]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.COUNTDOWN}`),
+  [STATE.OVERDUE]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.OVERDUE}`),
+  [STATE.OVERDUE_LOADING]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.OVERDUE_LOADING}`),
+  [STATE.APPLY]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.APPLY}`),
+  [STATE.APPLY_OVERDUE]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.APPLY_OVERDUE}`),
+  [STATE.APPLY_REPEAT]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.APPLY_REPEAT}`),
+  [STATE.REJECT]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.REJECT}`),
+  [STATE.FAILURE]: createAction<STATE>(`${PersonalRecommendActionsName}/${STATE.FAILURE}`),
+}
+
+const isPersonalRecommendActions = (action: AnyAction) => {
+  return Object.keys(PersonalRecommendActions).map(item => `${PersonalRecommendActionsName}/${item}`).indexOf(action.type) > -1 && action.type;
+  // return Object.keys(PersonalRecommendActions).map(item => `${PersonalRecommendActionsName}/${item}`).indexOf(action.type) > -1 && action.type !== STATE.UPDATE
+}
+export const personalRecommendActionsReducer = createReducer(
   initialState,
-  reducers: {
-    update(state: SliceState , action: PayloadAction<GetPersonalLoanRecommendResponse>) {
-      state.data = action.payload;
-      return state;
-    },
-    loading: (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.LOADING;
-      return state;
-    },
-    success: (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.SUCCESS
-      return state;
-    },
-    failure: (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.FAILURE;
-      return state;
-    },
-    overdue: (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.OVERDUE;
-      return state;
-    },
-    countdown: (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.COUNTDOWN;
-      return state;
-    },
-    applyRepeat:  (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.APPLY_REPEAT
-      return state;
-    },
-    reject:  (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.REJECT
-      return state;
-    },
-    overdueLoading: (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.OVERDUE_LOADING
-      return state;
-    },
-    apply: (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.APPLY
-      return state;
-    },
-    applyOverdue:  (state: SliceState , action: PayloadAction<any>) => {
-      state.status = STATE.APPLY_OVERDUE
-      return state;
-    },
-  },
-  extraReducers: (builder) => {
+  (builder) => {
     builder
-      .addCase((API.endpoints.getPersonalLoanRecommend.initiate as any)().name, (state, action) => {
-        console.log("extraReducers.state", state);
-        console.log("extraReducers.action", action);
+      .addCase(PersonalRecommendActions[STATE.UPDATE], (state: SliceState, action: PayloadAction<GetPersonalLoanRecommendResponse>) => {
+        state.data = action.payload
       })
-  },
-})
-
-
+      .addMatcher(isPersonalRecommendActions, (state, action) => {
+        state.status = action.payload;
+      })
+  }
+)
 
 

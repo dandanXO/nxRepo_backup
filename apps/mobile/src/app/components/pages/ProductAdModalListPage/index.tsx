@@ -10,7 +10,8 @@ import {
   ApplyContainer,
   Button,
   Countdown,
-  CountdownContainer, EmbedPage,
+  CountdownContainer,
+  EmbedPage,
   Footer,
   Product,
   StyledList,
@@ -21,9 +22,7 @@ import {
 import moment from 'moment-timezone';
 import {AppDispatch, RootState} from "../../../store";
 
-import { STATE } from "./redux"
-
-import {autoRefreshCreator, getLoanRecommendFetch, personalLoanRecommendSlice} from "./redux";
+import {autoRefreshCreator, getLoanRecommendFetch, PersonalRecommendActions, STATE} from "./redux"
 
 let triggerRefreshID: NodeJS.Timer;
 let debugTimeout1: NodeJS.Timer;
@@ -57,7 +56,6 @@ const ProductAdModalListPage = () => {
     const [timeString, setTimeString] = useState<string>("00 : 00 : 00");
 
     const pageStatus: STATE = useSelector((state: RootState) => state.personalLoanRecommendSlice.status);
-    // console.log("[Eric] pageStatus", pageStatus)
 
     const [triggerApplyProduct, {
       data: applyData,
@@ -81,7 +79,7 @@ const ProductAdModalListPage = () => {
         setTimeString(timeInfo.time);
         if(timeInfo.end) {
           cancelCountDown();
-          dispatch(personalLoanRecommendSlice.actions.overdue({}));
+          dispatch(PersonalRecommendActions[STATE.OVERDUE](STATE.OVERDUE))
         }
       }, 1000)
       // console.log("intervalIDRef.current",intervalIDRef.current);
@@ -97,7 +95,8 @@ const ProductAdModalListPage = () => {
     const [productList, setProductList] = useState<RecommendProduct[]>([]);
 
     // NOTE: DEBUG
-    console.log("state", STATE[pageStatus]);
+    // console.log("[Eric] pageStatus", pageStatus)
+    // console.log("state", STATE[pageStatus]);
 
     // NOTE: user interaction
     const onUserClickToLoadRecommendation = useCallback(() => {
@@ -108,10 +107,10 @@ const ProductAdModalListPage = () => {
 
       if(pageStatus === STATE.COUNTDOWN) {
         cancelCountDown();
-        dispatch(personalLoanRecommendSlice.actions.apply({}));
+        dispatch(PersonalRecommendActions[STATE.APPLY](STATE.APPLY))
       } else if(STATE.OVERDUE) {
         cancelCountDown();
-        dispatch(personalLoanRecommendSlice.actions.applyOverdue({}));
+        dispatch(PersonalRecommendActions[STATE.APPLY_OVERDUE](STATE.APPLY_OVERDUE))
       }
 
       triggerApplyProduct({
@@ -391,11 +390,19 @@ const ProductAdModalListPage = () => {
           </ApplyContainer>
         </Page>
       )
-    } else{
+    } else if(pageStatus === STATE.FAILURE){
       return (
         <Page>
           <ApplyContainer>
-            <div className="title">Your loan application has been submitted.</div>
+            <div className="title">FAILURE</div>
+          </ApplyContainer>
+        </Page>
+      )
+    } else {
+      return (
+        <Page>
+          <ApplyContainer>
+            <div className="title">FAILURE code:2</div>
           </ApplyContainer>
         </Page>
       )
