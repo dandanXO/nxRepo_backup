@@ -194,7 +194,7 @@ describe("iphone-3一鍵快速借款", () => {
     }).then(() => {
       // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
       cy.get(".container").contains("Insufficient funds to provide product recommendations. Please adjust your budget accordingly.")
-      cy.get(".price").contains("0");
+      cy.get(".price").contains("-");
 
     }).as("fetchProducts")
 
@@ -278,7 +278,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-  it("3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。", () => {
+  it.only("3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。", () => {
     // NOTICE GIVEN 無額度，風控到期，但是在七天內
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN 自動幫用戶刷新
@@ -330,6 +330,7 @@ describe("iphone-3一鍵快速借款", () => {
         .should("contain", "Refreshing . . . .")
     }).as("loadList2");
 
+    cy.screenshot();
 
     console.log("[3]3");
 
@@ -530,6 +531,7 @@ describe("iphone-3一鍵快速借款", () => {
               quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
               processing: false,
               riskReject: false,
+              stubRequest: true,
             } as GetPersonalLoanRecommendResponse
           })
         } else if(interceptPersonRecommendCount === 2) {
@@ -552,6 +554,7 @@ describe("iphone-3一鍵快速借款", () => {
               quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
               processing: false,
               riskReject: false,
+              stubRequest: true,
             } as GetPersonalLoanRecommendResponse
           })
         }

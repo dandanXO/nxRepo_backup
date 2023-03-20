@@ -47,15 +47,36 @@ const ProductAdModalListPage = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const data = useSelector((state: RootState) => state.personalLoanRecommendSlice.data);
-    // console.log("data", data);
     const [personalLoanInfo, setCurrentData] = useState<GetPersonalLoanRecommendResponse>();
     // console.log("personalLoanInfo", personalLoanInfo)
 
+    const pageStatus: STATE = useSelector((state: RootState) => state.personalLoanRecommendSlice.status);
+
+    // NOTE: useEffect
+    useEffect(() => {
+      dispatch(getLoanRecommendFetch());
+    }, [])
 
     const [currentValue, setCurrentValue] = useState<number>(0);
     const [timeString, setTimeString] = useState<string>("00 : 00 : 00");
 
-    const pageStatus: STATE = useSelector((state: RootState) => state.personalLoanRecommendSlice.status);
+    // NOTICE: 過段時間會拿到 undefined
+    // NOTICE: 目前額度發生變化
+    useEffect(() => {
+      console.log("超怪 data", data)
+      // console.log("超怪 latestData", latestData)
+      // undefined=>undefined->hasData->undefined
+      if(data) {
+        setCurrentData(data);
+        setCurrentValue(() => {
+          return personalLoanInfo?.quotaBar?.current || 0;
+        })
+      } else {
+        console.log("data 被重置成 undefined")
+
+      }
+    }, [data, personalLoanInfo])
+
 
     const [triggerApplyProduct, {
       data: applyData,
@@ -84,47 +105,12 @@ const ProductAdModalListPage = () => {
       }, 1000)
       // console.log("intervalIDRef.current",intervalIDRef.current);
     }
-
     const cancelCountDown = () => {
       // console.log("[Countdown] cancel.intervalIDRef.current",intervalIDRef.current)
       // clearInterval(intervalIDRef.current);
       // clearInterval(intervalIDRef.current as any);
       clearInterval(intervalIDRef.current as NodeJS.Timer);
     }
-
-    const [productList, setProductList] = useState<RecommendProduct[]>([]);
-
-    // NOTE: DEBUG
-    // console.log("[Eric] pageStatus", pageStatus)
-    // console.log("state", STATE[pageStatus]);
-
-    // NOTE: user interaction
-    const onUserClickToLoadRecommendation = useCallback(() => {
-      dispatch(autoRefreshCreator());
-    }, []);
-
-    const onUserClickToApply = useCallback(() => {
-      if(pageStatus === STATE.COUNTDOWN) {
-        cancelCountDown();
-        dispatch(PersonalRecommendActions[STATE.APPLY](STATE.APPLY))
-      } else if(STATE.OVERDUE) {
-        cancelCountDown();
-        dispatch(PersonalRecommendActions[STATE.APPLY_OVERDUE](STATE.APPLY_OVERDUE))
-      }
-      triggerApplyProduct({
-        applyQuota: currentValue,
-        productIds: productList.map(product => product.productId)
-      }).then((result) => {
-        // console.log("result", result);
-      }).catch((error) => {
-        console.log(error);
-      })
-    }, [pageStatus, productList, currentValue])
-
-    // NOTE: useEffect
-    useEffect(() => {
-      dispatch(getLoanRecommendFetch());
-    }, [])
 
     // NOTICE: Status
     useEffect(() => {
@@ -147,29 +133,8 @@ const ProductAdModalListPage = () => {
       }
     })
 
-    // NOTICE: 過段時間會拿到 undefined
-    useEffect(() => {
-      // console.log("超怪 data", data)
-      // console.log("超怪 latestData", latestData)
-      // undefined=>undefined->hasData->undefined
-      if(data) {
-        setCurrentData(data);
-        setCurrentValue(data?.quotaBar?.current || 0);
-      } else {
-        console.log("data 被重置成 undefined")
-      }
-    }, [data])
-
-    // NOTICE: 目前額度發生變化
-    useEffect(() => {
-      if(personalLoanInfo?.quotaBar?.current) {
-        setCurrentValue(() => {
-          return personalLoanInfo?.quotaBar?.current
-        })
-      }
-    }, [personalLoanInfo?.quotaBar?.current]);
-
     // NOTICE: 用戶拉動拉霸
+    const [productList, setProductList] = useState<RecommendProduct[]>([]);
     useEffect(() => {
       let resultProducts: RecommendProduct[] = [];
       if(personalLoanInfo?.quotaBar?.current) {
@@ -195,7 +160,34 @@ const ProductAdModalListPage = () => {
         resultProducts = [];
         setProductList([])
       }
-    }, [currentValue]);
+    }, [personalLoanInfo, currentValue]);
+
+    // NOTE: DEBUG
+    // console.log("[Eric] pageStatus", pageStatus)
+    // console.log("state", STATE[pageStatus]);
+
+    // NOTE: user interaction
+    const onUserClickToLoadRecommendation = useCallback(() => {
+      dispatch(autoRefreshCreator());
+    }, []);
+
+    const onUserClickToApply = useCallback(() => {
+      if(pageStatus === STATE.COUNTDOWN) {
+        cancelCountDown();
+        dispatch(PersonalRecommendActions[STATE.APPLY](STATE.APPLY))
+      } else if(STATE.OVERDUE) {
+        cancelCountDown();
+        dispatch(PersonalRecommendActions[STATE.APPLY_OVERDUE](STATE.APPLY_OVERDUE))
+      }
+      triggerApplyProduct({
+        applyQuota: typeof currentValue === "number" ? currentValue : 0,
+        productIds: productList.map(product => product.productId)
+      }).then((result) => {
+        // console.log("result", result);
+      }).catch((error) => {
+        console.log(error);
+      })
+    }, [pageStatus, productList, currentValue])
 
 
     // NOTE: template
@@ -215,7 +207,7 @@ const ProductAdModalListPage = () => {
               <div className="label">Loan Amount</div>
               <div className="price">
                 {environment.currency}
-                {(pageStatus === STATE.INIT || pageStatus === STATE.LOADING) ? "-" : currentValue}
+                {(personalLoanInfo?.quotaBar?.min === 0) ? "-" : currentValue}
               </div>
             </div>
 
@@ -260,13 +252,17 @@ const ProductAdModalListPage = () => {
           <CountdownContainer>
             <Countdown>
               {(pageStatus === STATE.COUNTDOWN) && (
-                <>
+                <div className="countdown-info">
                   <div className="title">LIMITED TIME OFFER COUNTDOWN :</div>
                   <div className="timer">{timeString}</div>
-                </>
+                </div>
               )}
               {(pageStatus === STATE.OVERDUE) && (
                 <div className="button-container">
+                  <div className="countdown-info">
+                    <div className="title">LIMITED TIME OFFER COUNTDOWN :</div>
+                    <div className="timer">{timeString}</div>
+                  </div>
                   <Button color="#fff" background="#F82626" onClick={onUserClickToLoadRecommendation}>
                     <span>Re-Acquire The Loan Amount</span>
                   </Button>
@@ -274,6 +270,10 @@ const ProductAdModalListPage = () => {
               )}
               {pageStatus === STATE.OVERDUE_LOADING && (
                 <div className="button-container">
+                  <div className="countdown-info">
+                    <div className="title">LIMITED TIME OFFER COUNTDOWN :</div>
+                    <div className="timer">{timeString}</div>
+                  </div>
                   <Button color="#fff" background="#F82626">
                     {/*<StyledLoading style={{*/}
                     {/*  transform: "scale(0.3)",*/}
@@ -295,7 +295,7 @@ const ProductAdModalListPage = () => {
             position: "relative",
             top: "-20px"
           }}>
-            {(pageStatus === STATE.COUNTDOWN) && (
+            {(pageStatus === STATE.COUNTDOWN || pageStatus === STATE.OVERDUE) && (
               <Title>PERSONALIZED RECOMMENDATION</Title>
             )}
             <StyledList>
@@ -317,8 +317,8 @@ const ProductAdModalListPage = () => {
               {pageStatus === STATE.OVERDUE_LOADING && (
                 <div className="container">
                   <div className="overdue">
-                    <div>Please wait patiently for 30 seconds to 2 minutes while we review the loan amount you are eligible for as quickly as possible.</div>
-                    <div>To prevent errors, please remain on this screen.</div>
+                    <div className={"p1"}>Please wait patiently for 30 seconds to 2 minutes while we review the loan amount you are eligible for as quickly as possible.</div>
+                    <div className={"p2"}>To prevent errors, please remain on this screen.</div>
                   </div>
                 </div>
               )}

@@ -175,12 +175,16 @@ export const Countdown = styled.div`
   color: #F82626;
   text-align: center;
 
-  .title {
+  .countdown-info {
+    margin-bottom: 4px;
+    .title {
 
-  }
-  .timer {
+    }
+    .timer {
 
+    }
   }
+
 
   .button-container {
     margin-top: 8px;
@@ -260,6 +264,13 @@ export const StyledList = styled.div`
     .overdue {
       display: flex;
       flex-direction: column;
+      color: #AAAAAA;
+      .p1 {
+        margin-bottom: 4px;
+      }
+      .p2 {
+
+      }
     }
   }
 `;
