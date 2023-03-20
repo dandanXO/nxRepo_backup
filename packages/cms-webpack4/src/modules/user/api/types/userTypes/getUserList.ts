@@ -46,6 +46,7 @@ export interface UserListContent {
     newMember?: boolean;  // 是否为新客
     phoneNo?: string;     // 手机号
     quotaLabel?: string;  // 用戶額度標籤
+    quotaLabelId?:number; // 用戶額度標籤id
     riskRank?: string;    // 风控标签
     status?:number        // 用戶狀態
 }

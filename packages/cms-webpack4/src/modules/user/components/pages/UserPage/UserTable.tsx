@@ -3,7 +3,7 @@ import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Form, InputNumber, Modal, Radio, Space,Tag ,Select, Tooltip,notification} from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
-import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation, usePostUserBanReleaseMutation, useDeleteBlackListMutation, usePostQuotaLabelMutation } from '../../../api/UserApi';
+import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation, usePostUserBanReleaseMutation, useDeleteBlackListMutation, usePostUserManageQuotaLabelMutation } from '../../../api/UserApi';
 import moment from 'moment';
 import { setSearchParams, setPathname, selectSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux"
@@ -43,7 +43,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     const [releaseUser, { isSuccess: isReleaseUserSuccess }] = usePostUserBanReleaseMutation();
     const [importTelSale,{isSuccess:isImportTelSaleSuccess}] = usePostTelSaleMutation();
     const [removeBlack,{isSuccess:isRemoveBlackSuccess}] = useDeleteBlackListMutation();
-    const [setQuotaLabel, { isSuccess: isSetQuotaLabelSuccess }] = usePostQuotaLabelMutation();
+    const [setQuotaLabel, { isSuccess: isSetQuotaLabelSuccess }] = usePostUserManageQuotaLabelMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
         addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
@@ -137,13 +137,12 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
 
     const getSearchParams = () => {
         // @ts-ignore
-        const { addTimeRange, quotaLabel, ...values } = formRef.current.getFieldValue();
+        const { addTimeRange, ...values } = formRef.current.getFieldValue();
         return {
             ...searchList,
             ...values,
             addEndTime: addTimeRange?.[1]?.format('YYYY-MM-DD 23:59:59') || '',
             addStartTime: addTimeRange?.[0]?.format('YYYY-MM-DD 00:00:00') || '',
-            quotaLabelId: userQuotaLablEnum?.get(quotaLabel || '').id,
             pageNum: 1,
         };
     }
@@ -244,11 +243,11 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             },
         },
         {
-            title: '额度标签', dataIndex: 'quotaLabel', valueType: 'select', key: 'quotaLabel', initialValue: searchParams.quotaLabel || "",
+            title: '额度标签', dataIndex: 'quotaLabelId', valueType: 'select', key: 'quotaLabelId', initialValue: searchParams.quotaLabelId || "",
             valueEnum: userQuotaLablEnum, fieldProps: { showSearch: true },
-            render: (text, { quotaLabel }) => {
-                const userQuotaLaProperty = userQuotaLablEnum?.get(quotaLabel || '');
-                return quotaLabel ? <Tag color={userQuotaLaProperty.color}>{userQuotaLaProperty.text}</Tag> : '-';
+            render: (text, { quotaLabelId }) => {
+                const userQuotaLaProperty = quotaLabelId ? userQuotaLablEnum?.get(quotaLabelId || '') : '';
+                return quotaLabelId ? <Tag color={userQuotaLaProperty?.color}>{userQuotaLaProperty?.text}</Tag> : '-';
             },
         },
         { title: '注册包名', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} /> },
