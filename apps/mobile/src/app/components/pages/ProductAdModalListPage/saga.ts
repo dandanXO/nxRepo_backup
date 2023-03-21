@@ -67,7 +67,7 @@ function *getLoanRecommendSaga(action: any) {
 
     if(
       firstLoadingList &&
-      resultData?.quotaBar?.min === 0 &&
+      resultData?.quotaBar?.max === 0 &&
       isOverdue && isBelow7days
     ) {
       firstLoadingList = false;
@@ -76,12 +76,12 @@ function *getLoanRecommendSaga(action: any) {
       yield put(autoRefreshCreator())
     } else if (
       firstLoadingList &&
-      resultData?.quotaBar?.min === 0 &&
+      resultData?.quotaBar?.max === 0 &&
       isOverdue && !isBelow7days
     ) {
       yield put(PersonalRecommendActions[STATE.OVERDUE](STATE.OVERDUE))
     } else if(
-      resultData?.quotaBar?.min > 0 &&
+      resultData?.quotaBar?.max > 0 &&
       isOverdue
     ) {
       // console.log("[Eric] downloaded recommend products successfully")

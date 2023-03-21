@@ -206,7 +206,7 @@ const ProductAdModalListPage = () => {
               <div className="label">Loan Amount</div>
               <div className="price">
                 {environment.currency}
-                {(personalLoanInfo?.quotaBar?.min === 0) ? "-" : currentValue}
+                {(personalLoanInfo?.quotaBar?.max === 0) ? "-" : currentValue}
               </div>
             </div>
 
