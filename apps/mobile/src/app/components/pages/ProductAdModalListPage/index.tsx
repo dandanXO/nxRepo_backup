@@ -314,6 +314,14 @@ const ProductAdModalListPage = () => {
                   terms={product?.terms ?? ""}
                 />
               ))}
+              {pageStatus === STATE.OVERDUE && (
+                <div className="container">
+                  <div className="overdue">
+                    <div className={"p1"}>Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.</div>
+                    <div className={"p2"}>To avoid errors, we recommended that you stay on this screen.</div>
+                  </div>
+                </div>
+              )}
               {pageStatus === STATE.OVERDUE_LOADING && (
                 <div className="container">
                   <div className="overdue">

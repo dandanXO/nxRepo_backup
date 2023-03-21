@@ -278,7 +278,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-  it.only("3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。", () => {
+  it("3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。", () => {
     // NOTICE GIVEN 無額度，風控到期，但是在七天內
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN 自動幫用戶刷新
@@ -322,13 +322,14 @@ describe("iphone-3一鍵快速借款", () => {
         quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
         // 用户额度有效时间
       } as PostLoanQuotaRefreshResponse
-    }).then(() => {
+    }).as("refresh2").then(() => {
       console.log("[3]7");
       console.log("[dog] request 2")
       // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
       cy.get(".button-container > button > span")
         .should("contain", "Refreshing . . . .")
-    }).as("loadList2");
+    })
+
 
     cy.screenshot();
 
@@ -349,11 +350,11 @@ describe("iphone-3一鍵快速借款", () => {
         quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
         // 用户额度有效时间
       } as PostLoanQuotaRefreshResponse
-    }).then(() => {
+    }).as("lastRefresh").then(() => {
       console.log("[3]9");
       console.log("[dog] request 3")
       // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
-    });
+    })
 
     // NOTE: 模擬拿到新的風控資料了
     cy.intercept("/api/v2/product/personal-recommend?count=", {
@@ -374,13 +375,14 @@ describe("iphone-3一鍵快速借款", () => {
         processing: false,
         riskReject: false,
       } as GetPersonalLoanRecommendResponse
-    }).then(() => {
+    }).as("lastGetProduct").then(() => {
       console.log("[3]10");
       console.log("[dog] request 4")
       // cy.get(".button-container").contains("Re-Acquire The Loan Amount")
       // cy.get(".button-container > button > div").should("have.class", "loadingio-spinner-spinner-e19blwp8l9")
-    });
+    })
     console.log("[3]5");
+
 
     cy.intercept("/api/v2/product/apply", (req) => {
       console.log("req", req);
@@ -397,9 +399,12 @@ describe("iphone-3一鍵快速借款", () => {
       })
     })
 
+    cy.wait(20 * 1000)
+      .wait(["@lastRefresh", "@lastGetProduct"]);
+    cy.screenshot();
   });
 
-  it("4.無額度，風控到期，已超過七天，不幫用戶自動刷新。不能 APPLY。除非刷新。", () => {
+  it.only("4.無額度，風控到期，已超過七天，不幫用戶自動刷新。不能 APPLY。除非刷新。", () => {
     // NOTICE: GIVEN 用戶無額度，用戶風控到期，已超過七天
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN: 不幫用戶自動刷新
