@@ -63,8 +63,7 @@ const ProductAdModalListPage = () => {
     // NOTICE: 過段時間會拿到 undefined
     // NOTICE: 目前額度發生變化
     useEffect(() => {
-      console.log("超怪 data", data)
-      // console.log("超怪 latestData", latestData)
+      // console.log("useEffect data", data)
       // undefined=>undefined->hasData->undefined
       if(data) {
         setCurrentData(data);
@@ -275,13 +274,6 @@ const ProductAdModalListPage = () => {
                     <div className="timer">{timeString}</div>
                   </div>
                   <Button color="#fff" background="#F82626">
-                    {/*<StyledLoading style={{*/}
-                    {/*  transform: "scale(0.3)",*/}
-                    {/*  width: "10px",*/}
-                    {/*  height: "20px",*/}
-                    {/*  top: "-9px",*/}
-                    {/*}}*/}
-                    {/*bg="#fff"/>*/}
                     <span>Refreshing . . . .</span>
                   </Button>
                 </div>
