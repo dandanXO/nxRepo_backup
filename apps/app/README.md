@@ -1,7 +1,9 @@
 * css
   * 使用 tailwind，在合理情況下去使用指定 px
+  * [tailwind 常用類別](./docs/TAILWIND.md)
 * typescript
   * 開啟 strict 模式
+  * [Typescript strict](./docs/TYPESCRIPT.md)
 * react
   * side effect
     * 盡量不去使用 useEffect 完成功能，而用 redux + redux saga 使用
