@@ -4,28 +4,91 @@
 
 - API Product
   - Website
-    - APP Name: mobile
+    - NX Integrated
+      - APP Name: mobile
+      - APP Name: app
+        - New Version
   - CMS
-    - APP Name: admin
+    - NX Packaged-Based
+      - packages/dlh-web
+      - packages/cms-webpack
 ---
-## Pre Development
+## Node
+```shell
+nvm use 16.16
+```
+## Pre Development (1/1)
 
-### Install Packages Management Tool
+### NX Packaged-Based
+```
+cd ./packages/dlh-web
+npm install --legacy-peer-deps
+npm run dev:in
+
+cd ./packages/cms-webpack
+npm install --legacy-peer-deps
+npm run dev:in
+```
+
+---
+## Pre Development (1/2)
+### NX Integrated
+
+#### Install Packages Management Tool
 
 [pnpm](https://pnpm.io/zh-TW/installation)
 
-### Install Packages
-
-```shell
-pnpm install
-```
-
-### Install Build System
+#### Install Build System
 
 [nx](https://nx.app/)
 
 ```shell
 pnpm add -g nx
+```
+
+
+#### Install Packages
+
+```shell
+pnpm install
+```
+
+---
+
+## Create
+
+```shell
+# Creating a New Workspace
+npx create-nx-workspace@latest
+
+# Creating Applications and Libraries
+# https://nx.dev/packages/react
+nx g @nrwl/react:app my-new-app
+nx g @nrwl/react:app app --bundler=webpack
+
+# And add a new library as follows:
+nx g @nrwl/react:lib my-new-lib
+
+# Generating a Component for app
+nx g @nrwl/react:component my-new-component --project=my-new-app
+
+# Creating Hooks
+nx g @nrwl/react:hook my-new-hook --project=app
+
+# Development
+# default url: http://localhost:4200/
+nx serve app
+
+# Testing Projects
+nx test my-new-app
+nx test my-new-lib
+nx e2e my-new-app-e2e
+
+# Building Projects
+nx build my-new-app
+nx build my-new-lib
+
+
 ```
 
 ---
@@ -166,68 +229,6 @@ npm run [scripts]
 
 ---
 
-## Recipe
-
-- Git
-  - [Commit Message Guidelines](https://gist.github.com/brianclements/841ea7bffdb01346392c)
-- Nx
-  - [Mental Model](https://nx.dev/concepts/mental-model)
-  - Core Features
-  - Plugin Features
-  - Conceipts
-    - [Monorepos](https://nx.dev/more-concepts/why-monorepos)
-    - _[Applications and libraries](https://nx.dev/more-concepts/applications-and-libraries)_
-    - [Publishable and Buildable Nx Libraries](https://nx.dev/more-concepts/buildable-and-publishable-libraries)
-    - Library
-      - [Creating Libraries](https://nx.dev/more-concepts/creating-libraries)
-      - [Library Types](https://nx.dev/more-concepts/library-types)
-      - [Grouping Libraries](https://nx.dev/more-concepts/grouping-libraries)
-    - [Using Nx at Enterprises](https://nx.dev/more-concepts/monorepo-nx-enterprise#code-organization-&-naming-conventions)
-    - [Tag in Multiple Dimensions](https://nx.dev/recipe/tag-multiple-dimensions)
-    - [Enforce Project Boundaries](https://nx.dev/core-features/enforce-project-boundaries)
-
-## Best Practices
-
-![](docs/assets/organization.png)
-
-- importants
-  - mental model
-    - application
-      - as containers, link, bundld and compile implemented in libraries
-      - place 80% of your logic intor the libs/folder
-      - and 20% into apps
-    - libraries
-  - library Types
-    - feature
-    - ui
-    - data-access
-    - utility
-    - share
-
-```shell
-# --dry-run
-nx g @nrwl/workspace:library feature-bank --dry-run --directory=account/mobile --tags=scope:mobile,type:feature
-
-# directory: mobile/account/feature-bank , library-type: feature, name: feature-bank, tags: scope:mobile, type:feature
-nx g @nrwl/workspace:library feature-bank --directory=account/mobile --tags=scope:mobile,type:feature
-
-# directory: mobile/shared/ui , library-type: ui, name: ui tags: scope:mobile, type:ui
-# dry run
-nx g @nrwl/react:library ui --dry-run --directory=mobile/shared --tags=scope:mobile,type:ui
-# run
-nx g @nrwl/react:library ui --directory=mobile/shared --tags=scope:mobile,type:ui
-
-# next.js add page
-nx g @nrwl/next:page demo --project=admin
-
-# next.js add component 
-nx g @nrwl/next:component protable --project=admin
-
-```
-
-[Using pnpm with Lerna
-](https://lerna.js.org/docs/recipes/using-pnpm-with-lerna)
-
 ## pnpm workspace (未使用)
 ```shell
 
@@ -265,23 +266,6 @@ pnpm nx run build
 pnpm -F  backstage_system  add webpack-dev-server@3.11.0 -D 
 ```
 
-
-
-
-## issues
-* [next-plugin-antd-less](https://www.npmjs.com/package/next-plugin-antd-less)
-* Module not found: Can't resolve 'null-loader'
-  * [null-loader](https://www.npmjs.com/package/null-loader)
-* [Cannot use import statement outside a module](https://stackoverflow.com/questions/66244968/cannot-use-import-statement-outside-a-module-error-when-importing-react-hook-m)
-* [next-transpile-modules](https://www.npmjs.com/package/next-transpile-modules)
-* [style is broken on build but works on dev env](https://github.com/SolidZORO/next-plugin-antd-less/issues/103)
-* [ReferenceError: document is not defined in Next.js while working with React Aria overlays](https://stackoverflow.com/questions/64614006/referenceerror-document-is-not-defined-in-next-js-while-working-with-react-aria)
-* [React 18: Hydration failed because the initial UI does not match what was rendered on the server](https://stackoverflow.com/questions/71706064/react-18-hydration-failed-because-the-initial-ui-does-not-match-what-was-render)
-* [Solve “document is not defined” errors in Next.js](https://www.webtutpro.com/solve-document-is-not-defined-errors-in-next-js-26fea778b868)
-* [Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties](https://github.com/rails/webpacker/issues/3008)
-* [NX Passed 11161 file paths to Git to hash, but received 11148 hashes. #9946](https://github.com/nrwl/nx/issues/9946)
-## TODO
-* [搬移 git commit 紀錄到新的 git repo 上](https://medium.com/@pgtsai/搬移-git-commit-紀錄到新的-git-repo-上-13a6c84cb354)
 
 ---
 # Senty
