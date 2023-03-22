@@ -14,15 +14,17 @@
   * API
     * 使用 rtk query OpenAPI 去產生後端 API 對應的 typescript interface。
       * 發生錯誤時，請與後端確認 swagger model 不能為中文名字，否則工具無法產生對應 ts file
-  * Core Library
-    * 初期先不使用 storybook
-  * e2e testing
-    * 根據重要或複雜情境撰寫 cypress e2e testing
-    * 使用 mocha 方式建構測試案例 describe, it，未來再考慮使用 cucumber 去 BDD 
-    * 使用 testing library 方式 query
-    * 使用 chai, sinon chai 方式 assert
-    * 未來再考慮使用 BDD, ATDD 方式改變開發流程
-  * 監控部分
-    * 未來考慮使用 sentry
-  * Martech
-    * mixpanel
+  * Pages/Modals
+    * 切換 page, modal 使用 saga 控制，來控制整個流程
+* Core Library
+  * 初期先不使用 storybook
+* e2e testing
+  * 根據重要或複雜情境撰寫 cypress e2e testing
+  * 使用 mocha 方式建構測試案例 describe, it，未來再考慮使用 cucumber 去 BDD 
+  * 使用 testing library 方式 query
+  * 使用 chai, sinon chai 方式 assert
+  * 未來再考慮使用 BDD, ATDD 方式改變開發流程
+* 監控部分
+  * 未來考慮使用 sentry
+* Martech
+  * mixpanel
