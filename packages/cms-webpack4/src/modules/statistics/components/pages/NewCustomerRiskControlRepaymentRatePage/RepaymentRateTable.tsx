@@ -16,13 +16,12 @@ export const RepaymentRateTable = () => {
 
     const [triggerGetNewCustomerRiskPaymentRateList, {data, currentData, isLoading, isFetching, isSuccess, isError}] = useLazyGetNewCustomerRiskPaymentRateListQuery();
 
- 
-
     const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
         endTime: "",          // 結束時間
         riskControlModel: "", // 风控名稱
         riskRank: "",         // 風控標籤
-        startTime: ""         // 開始時間
+        startTime: "",         // 開始時間
+        newMember:""
     })
     useEffect(() => {
         triggerGetNewCustomerRiskPaymentRateList(null);
@@ -35,11 +34,12 @@ export const RepaymentRateTable = () => {
 
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
 
+    const formatNumber = (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
     const tableHeaderColumns: ProColumns<RiskPaymentRateResponseRiskPaymentRateResponse, "text">[] = [
         {
-            key: 'loanDate',
-            title: '放款日期',
-            dataIndex: 'loanDate',
+            key: 'expireTime',
+            title: '到期日',
+            dataIndex: 'expireTime',
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
@@ -47,7 +47,7 @@ export const RepaymentRateTable = () => {
         },
         {
             key: 'fakeLoanDate',
-            title: '放款日期',
+            title: '到期時間',
             dataIndex: 'fakeLoanDate',
             hideInSearch: false,
             hideInTable: true,
@@ -77,6 +77,7 @@ export const RepaymentRateTable = () => {
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
+            render:(text)=>formatNumber(text)
         },
         {
             key: 'pendingRepaymentCount',
@@ -101,6 +102,7 @@ export const RepaymentRateTable = () => {
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
+            render:(text)=>formatNumber(text)
         },
         {
             key: 'finishCount',
@@ -125,6 +127,7 @@ export const RepaymentRateTable = () => {
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
+            render:(text)=>formatNumber(text)
         },
         {
             key: 'overdueCount',
@@ -149,6 +152,7 @@ export const RepaymentRateTable = () => {
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
+            render:(text)=>formatNumber(text)
         },
         // NOTE: only search
         {
@@ -174,13 +178,21 @@ export const RepaymentRateTable = () => {
                 allowClear: false,
             }
         },
+        {
+            title: '是否新客', dataIndex: 'newMember', valueType: 'select', key: 'newMember', initialValue: "", hideInTable: true,
+            valueEnum: {
+                '': { text: '不限' },
+                true: { text: '是' },
+                false: { text: '否' },
+            },
+        },
     ]
     const formRef = useRef<ProFormInstance>();
     const getSearchParams = () => {
         // @ts-ignore
-        const { fakeLoanDate = '', riskControlModel = '', riskRank = '' } = formRef.current.getFieldValue();
+        const { fakeLoanDate = '', riskControlModel = '', riskRank = '', newMember } = formRef.current.getFieldValue();
         return {
-            riskControlModel, riskRank,
+            riskControlModel, riskRank, newMember,
             startTime: fakeLoanDate ? fakeLoanDate[0].format('YYYY-MM-DD 00:00:00') : '',
             endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : ''
         }

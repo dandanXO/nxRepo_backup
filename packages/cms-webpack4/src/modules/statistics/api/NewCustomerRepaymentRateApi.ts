@@ -12,6 +12,7 @@ export type GetNewCustomerRiskPaymentRateListRequest = {
     // 風控標籤
     startTime: string;
     // 開始時間
+    newMember: boolean | "";
 }
 export type GetNewCustomerRiskPaymentRateListResponse = RiskPaymentRateResponseRiskPaymentRateResponse[];
 
