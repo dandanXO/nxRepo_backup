@@ -78,6 +78,17 @@ nx g @nrwl/react:hook my-new-hook --project=app
 # Development
 # default url: http://localhost:4200/
 nx serve app
+# add package
+# windicss
+# mode: 
+# interpret mode, compile mode
+# https://windicss.org/posts/modes.html
+# attributify mode: https://windicss.org/posts/attributify.html
+
+
+#https://windicss.org/integrations/webpack.html
+pnpm add -D windicss
+pnpm add -D windicss-webpack-plugin
 
 # Testing Projects
 nx test my-new-app

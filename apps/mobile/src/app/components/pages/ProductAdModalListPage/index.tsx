@@ -189,6 +189,8 @@ const ProductAdModalListPage = () => {
     }, [pageStatus, productList, currentValue])
 
 
+    const maxQuota = personalLoanInfo?.quotaBar?.max ?? 0;
+
     // NOTE: template
     if(
       pageStatus === STATE.INIT ||
@@ -306,7 +308,9 @@ const ProductAdModalListPage = () => {
                   terms={product?.terms ?? ""}
                 />
               ))}
-              {pageStatus === STATE.OVERDUE && (
+
+              {/*NOTE: 時效過期前有額度*/}
+              {pageStatus === STATE.OVERDUE && maxQuota > 0 && (
                 <div className="container">
                   <div className="overdue">
                     <div className={"p1"}>Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.</div>
@@ -314,6 +318,17 @@ const ProductAdModalListPage = () => {
                   </div>
                 </div>
               )}
+
+              {/*NOTE: 時效過期前沒額度*/}
+              {pageStatus === STATE.OVERDUE && maxQuota === 0 && (
+                <div className="container">
+                  <div className="overdue">
+                    <div className={"p1"}>Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.</div>
+                    <div className={"p2"}>To avoid errors, we recommended that you stay on this screen.</div>
+                  </div>
+                </div>
+              )}
+
               {pageStatus === STATE.OVERDUE_LOADING && (
                 <div className="container">
                   <div className="overdue">
@@ -325,8 +340,7 @@ const ProductAdModalListPage = () => {
               {pageStatus === STATE.REJECT && (
                 <div className="container">
                   <div className="overdue">
-                    <div>Your current discount limit has been exhausted
-                      We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.</div>
+                    <div>Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.</div>
                     <div>To avoid errors, we recommended that you stay on this screen.</div>
                   </div>
                 </div>
