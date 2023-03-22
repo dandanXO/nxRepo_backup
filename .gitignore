@@ -53,3 +53,6 @@ Thumbs.db
 /packages/react16/build
 /packages/react18/build
 /packages/cms-webpack4/dist
+
+
+/apps/app/dist/

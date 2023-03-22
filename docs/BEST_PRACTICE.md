@@ -20,7 +20,7 @@
 
 ## Best Practices
 
-![](docs/assets/organization.png)
+![](assets/organization.png)
 
 - importants
   - mental model
