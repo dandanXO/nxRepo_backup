@@ -41,10 +41,13 @@ export const IndexPage = () => {
 
           <div className={"mb-3"}>
             <LoanOverViewSection/>
-            <Button text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>
           </div>
         </div>
 
+      </div>
+
+      <div className={"sticky bottom-[63px] px-3 py-3"}>
+        <Button text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>
       </div>
 
       <Navigation/>
