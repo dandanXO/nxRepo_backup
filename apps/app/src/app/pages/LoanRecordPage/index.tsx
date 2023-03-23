@@ -1,5 +1,10 @@
+import PaymentItem from "./PaymentItem"
+
 export const LoanRecordPage = () => {
   return (
-    <div>LoanRecordPage</div>
+    <div>LoanRecordPage
+
+        <PaymentItem/>
+    </div>
   )
 }
