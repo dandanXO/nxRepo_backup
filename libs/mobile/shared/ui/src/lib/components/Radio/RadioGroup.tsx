@@ -111,6 +111,8 @@ class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
                   ? this.props.disabled
                   : radioChild.props.disabled,
               });
+            } else {
+              return null;
             }
           }
         )}

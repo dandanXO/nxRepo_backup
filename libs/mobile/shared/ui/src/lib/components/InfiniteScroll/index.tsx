@@ -122,16 +122,19 @@ class InfiniteScroll extends Component<InfiniteScrollInterface, InfiniteScrollSt
         this.bindEventHandler = false;
         this.lastDragTopPositionRef = 0;
     }
+    // @ts-ignore
     componentDidMount() {
         // NOTE: isPassiveSupported
         // this.options = this.eventListenerOptions();
         this.update();
     }
+    // @ts-ignore
     componentDidUpdate(prevProps: InfiniteScrollInterface) {
         if (this.props.children !== prevProps.children) {
             this.update();
         }
     }
+    // @ts-ignore
     componentWillUnmount() {
         this.detachEventHandler();
     }
@@ -634,6 +637,7 @@ class InfiniteScroll extends Component<InfiniteScrollInterface, InfiniteScrollSt
         this.scrollBarDomRef.current = element;
     };
 
+  // @ts-ignore
     render() {
         const {
             element = "div",

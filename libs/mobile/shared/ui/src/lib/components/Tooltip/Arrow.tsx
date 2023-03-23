@@ -54,8 +54,13 @@ function getPlcamentDirection(placement: Placement) {
         `;
     } else if (placement === "left") {
         return `
-            transform: rotate(${135 + 180}deg);            
+            transform: rotate(${135 + 180}deg);
             right: 3px;
         `;
-    }
+    } return {
+    return `
+            transform: rotate(${135 + 180}deg);
+            right: 3px;
+        `;
+  }
 }

@@ -30,6 +30,7 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
     super(props);
     this.state = {};
   }
+  // @ts-ignore
   render() {
     AppContext.dev && console.log('[ModalWrapper] this.props', this.props);
     return (
@@ -72,6 +73,7 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
       >
         {/*// NOTICE: FIXME: 因為 theme 目前無法由第三方替換*/}
         {mode !== 'custom' ? (
+          // @ts-ignore
           <AppThemeProvider theme={window.theme || props.theme}>
             <Modal mode={mode} {...props} show={true}></Modal>
           </AppThemeProvider>

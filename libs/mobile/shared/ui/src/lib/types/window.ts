@@ -1,3 +1,3 @@
 interface Window {
-    theme?:any;
+    theme?: any;
 }

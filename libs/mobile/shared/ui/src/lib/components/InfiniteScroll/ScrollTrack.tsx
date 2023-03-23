@@ -46,6 +46,7 @@ class StylessScrollTrack extends Component<StylessScrollTrackProps> {
             });
         }
     };
+  // @ts-ignore
     render() {
         return (
             <div

@@ -151,5 +151,9 @@ function getPaddingByPlacement(placement: Placement = "top") {
         return `
             padding: 0 0.4rem;
         `;
+    } else {
+      return `
+            padding: 0 0.4rem;
+        `;
     }
 }

@@ -35,6 +35,7 @@ class MouseDetect extends React.Component<MouseDetectProps> {
         //     this.mouseLeave = this.mouseLeave.bind(this);
         // }
     }
+    // @ts-ignore
     componentDidMount() {
         // if (this.props.mouseWheel) {
         //     this.containerRef.current.addEventListener("mousewheel", this.props.mouseWheel, false);
@@ -62,6 +63,7 @@ class MouseDetect extends React.Component<MouseDetectProps> {
         //     this.containerRef.current.addEventListener("mouseleave", this.mouseLeave, false);
         // }
     }
+    // @ts-ignore
     componentWillUnmount() {
         // if (this.props.mouseWheel) {
         //     this.containerRef.current.removeEventListener("mousewheel", this.props.mouseWheel, false);
@@ -115,6 +117,7 @@ class MouseDetect extends React.Component<MouseDetectProps> {
         this.props.mouseLeave && this.props.mouseLeave(event);
     }
 
+    // @ts-ignore
     render() {
         return (
             <div

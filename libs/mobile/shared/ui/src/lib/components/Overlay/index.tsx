@@ -22,6 +22,7 @@ class Overlay extends React.Component<ModalWrapperProps> {
     super(props);
     this.state = {};
   }
+  // @ts-ignore
   render() {
     AppContext.dev && console.log('[ModalWrapper] this.props', this.props);
     return (

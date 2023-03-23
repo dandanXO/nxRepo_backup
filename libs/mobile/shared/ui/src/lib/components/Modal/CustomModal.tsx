@@ -20,7 +20,7 @@ const CustomPopupContainer = styled.div`
   /* Background */
   /* background: gray; */
   /* background-color: #fff;
-    background-clip: padding-box;    
+    background-clip: padding-box;
 
     /* Content */
   max-width: 90%;
@@ -55,6 +55,7 @@ class CustomModal extends React.Component<CustomModalProp, CustomModalState> {
       show: props.show ? props.show : true,
     };
   }
+  // @ts-ignore
   componentWillUnmount() {
     AppContext.dev && console.log('[CustomModal] componentWillUnmount');
   }
@@ -67,6 +68,7 @@ class CustomModal extends React.Component<CustomModalProp, CustomModalState> {
     });
     // destory
   };
+  // @ts-ignore
   render() {
     AppContext.dev && console.log('[CustomModal] this.props', this.props);
     // JSX

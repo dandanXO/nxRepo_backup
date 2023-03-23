@@ -76,6 +76,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
       show: props.show ? props.show : false,
     };
   }
+  // @ts-ignore
   componentDidUpdate(prevProps: IModalProps, prevState: ModalState) {
     if (prevProps != this.props) {
       this.setState({
@@ -88,6 +89,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
       show: false,
     });
   };
+  // @ts-ignore
   render() {
     if (!this.state.show) return null;
     AppContext.dev && console.log('this.props', this.props);

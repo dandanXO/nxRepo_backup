@@ -194,6 +194,8 @@ const Input: InputInterface = ({
       const hasOtherClass = otherClass.map((componentClass) => {
         if ((target as Element).closest(componentClass)) {
           return true;
+        } else {
+          return false;
         }
       });
       // REFACTORING

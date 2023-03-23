@@ -33,9 +33,11 @@ class StylessScrollBar extends React.Component<StylessScrollBarProps, StylessScr
         this.draging = false;
         this.lastDragTopPosition = 0;
     }
+    // @ts-ignore
     componentDidMount() {
         this.props.exportScrollBarDOM(this.scrollBarRef.current);
     }
+    // @ts-ignore
     componentDidUpdate(prevProps: StylessScrollBarProps, prevState: StylessScrollBarState) {
         // scrollbar follow native scrollbar top distance
         // !this.dragRef.current
@@ -103,6 +105,7 @@ class StylessScrollBar extends React.Component<StylessScrollBarProps, StylessScr
             top: scrollTop,
         });
     };
+  // @ts-ignore
     render() {
         return (
             <div
