@@ -26,23 +26,23 @@ export const AppRouter = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes >
             <Route path="/" element={<IndexPage />}/>
-            <Route path="/" element={<AuthPage />}/>
-            <Route path="/" element={<BankCardListPage/>}/>
-            <Route path="/" element={<BindBankCardPage/>}/>
-            <Route path="/" element={<CustomerServicePage/>}/>
-            <Route path="/" element={<DisclosureStatementPage/>}/>
-            <Route path="/" element={<ExtendDetailsPage/>}/>
-            <Route path="/" element={<FinishedRepaymentPage/>}/>
-            <Route path="/" element={<LoanRecordDetailPage/>}/>
-            <Route path="/" element={<LoanRecordPage/>}/>
-            <Route path="/" element={<MyCouponListPage/>}/>
-            <Route path="/" element={<MyCouponPage/>}/>
-            <Route path="/" element={<PartnerPage/>}/>
-            <Route path="/" element={<PersonalInfoPage/>}/>
-            <Route path="/" element={<PrivacyPolicyPage/>}/>
-            <Route path="/" element={<QuotaModelPage/>}/>
-            <Route path="/" element={<UploadedPaymentReceiptPage/>}/>
-            <Route path="/" element={<UploadPaymentReceiptPage/>}/>
+            <Route path="/auth" element={<AuthPage />}/>
+            <Route path="/bankcard-list" element={<BankCardListPage/>}/>
+            <Route path="/bind-bankcard" element={<BindBankCardPage/>}/>
+            <Route path="/customer-service" element={<CustomerServicePage/>}/>
+            <Route path="/disclosure-statement" element={<DisclosureStatementPage/>}/>
+            <Route path="/extend-details" element={<ExtendDetailsPage/>}/>
+            <Route path="/finished-repayment" element={<FinishedRepaymentPage/>}/>
+            <Route path="/loan-record-detail" element={<LoanRecordDetailPage/>}/>
+            <Route path="/loan-record" element={<LoanRecordPage/>}/>
+            <Route path="/my-coupon-list" element={<MyCouponListPage/>}/>
+            <Route path="/mu-coupon" element={<MyCouponPage/>}/>
+            <Route path="/partner" element={<PartnerPage/>}/>
+            <Route path="/personal-info" element={<PersonalInfoPage/>}/>
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage/>}/>
+            <Route path="/quota-model" element={<QuotaModelPage/>}/>
+            <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage/>}/>
+            <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage/>}/>
             <Route path="*" element={<div>Not Found</div>} />
         </Routes>
       </Suspense>
