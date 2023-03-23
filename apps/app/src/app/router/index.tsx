@@ -19,12 +19,14 @@ import {PrivacyPolicyPage} from "../pages/PrivacyPolicyPage";
 import {QuotaModelPage} from "../pages/QuotaModelPage";
 import {UploadedPaymentReceiptPage} from "../pages/UploadedPaymentReceiptPage";
 import {UploadPaymentReceiptPage} from "../pages/UploadPaymentReceiptPage";
+import {CategoryPage} from "../pages/__test__/CategoryPage";
 
 export const AppRouter = () => {
   return (
     // <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes >
+            <Route path="/category" element={<CategoryPage/>}/>
             <Route path="/" element={<IndexPage />}/>
             <Route path="/auth" element={<AuthPage />}/>
             <Route path="/bankcard-list" element={<BankCardListPage/>}/>
