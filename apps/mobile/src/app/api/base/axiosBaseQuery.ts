@@ -42,8 +42,8 @@ const axiosBaseQuery =
         let onDownloadPercent = 0;
         const getToken = (): string => {
             const parsedQueryString = queryString.parse(window.location.search);
-            const TOKEN = parsedQueryString.token
-                ? (parsedQueryString.token as string)
+            const TOKEN = parsedQueryString["token"]
+                ? (parsedQueryString["token"] as string)
                 : "";
             if (!TOKEN) {
                 // console.log("error");

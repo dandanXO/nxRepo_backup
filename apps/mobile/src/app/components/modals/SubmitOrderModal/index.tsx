@@ -51,9 +51,13 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
                 ? props.productDetails.productId
                 : 0
         ).then(()=> {
+          // @ts-ignore
           window["SyncTask"] &&
+          // @ts-ignore
           window["SyncTask"]["doExecuteSyncContactsTask"] &&
+          // @ts-ignore
           window["SyncTask"]["doExecuteSyncContactsTask"]();
+
         }).finally(() => {
           // endRequest("handleLoanSubmitOrder");
         })
