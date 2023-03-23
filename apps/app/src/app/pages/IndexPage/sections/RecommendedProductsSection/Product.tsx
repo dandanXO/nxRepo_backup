@@ -8,7 +8,7 @@ export const Product = () => {
   }, [expand]);
 
   return (
-    <div className={"product flex flex-col mb-2"}>
+    <div className={"product flex flex-col mb-2"} onClick={toggleExpand}>
       <div className={"brand pt-1 pb-3 px-2 flex flex-row justify-between"}>
         <div className={"left flex flex-row items-center"}>
           <div className={"w-10 h-10 rounded-md bg-[#D9D9D9] bg-gray-300 mr-2"}></div>
@@ -17,9 +17,9 @@ export const Product = () => {
         <div className={"right flex flex-row items-center"}>
           <div className={"font-medium"}>₹ 3,200</div>
           {expand ? (
-            <MdExpandMore size={30} color={"#AAAAAA"} onClick={toggleExpand}/>
+            <MdExpandMore size={30} color={"#AAAAAA"}/>
           ) : (
-            <MdExpandLess size={30} color={"#AAAAAA"} onClick={toggleExpand}/>
+            <MdExpandLess size={30} color={"#AAAAAA"}/>
           )}
         </div>
       </div>
