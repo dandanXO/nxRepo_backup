@@ -4,7 +4,7 @@ import {useCallback} from "react";
 import {PureUploadedPaymentReceiptPage} from "./PureUploadedPaymentReceiptPage";
 
 
-const UploadedPaymentReceiptPage = () => {
+export const UploadedPaymentReceiptPage = () => {
     const navigate = useNavigate();
     const pageQueryString = useLocationOrderQueryString();
     const navigateToLoanDetails = useCallback(() => {
@@ -20,4 +20,3 @@ const UploadedPaymentReceiptPage = () => {
     );
 };
 
-export default UploadedPaymentReceiptPage;

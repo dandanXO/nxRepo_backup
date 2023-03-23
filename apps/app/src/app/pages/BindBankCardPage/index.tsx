@@ -18,7 +18,7 @@ import {PakistanCountry} from "../../modules/country/constants/PakistanCountry";
 import {BangladeshCountry} from "../../modules/country/constants/BangladeshCountry";
 
 
-const BindBankAccountPage = () => {
+export const BindBankCardPage = () => {
     // NOTICE: Common
     // NOTE: cardholderName
     const pageQueryString = useLocationOrderQueryString();
@@ -80,4 +80,3 @@ const BindBankAccountPage = () => {
     ))
 };
 
-export default BindBankAccountPage;

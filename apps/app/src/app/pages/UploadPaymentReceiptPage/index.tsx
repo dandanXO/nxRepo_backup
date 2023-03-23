@@ -18,7 +18,6 @@ import {CustomAxiosError} from "../../api/base/axiosBaseQuery";
 import {PostRepayReceiptResponse} from "../../api/old/postRepayReceipt";
 import {usePostRepayReceiptMutation} from "../../../../../mobile/src/app/api";
 
-
 export interface PostRepayReceiptRequestProps {
     formFile: any;
     orderNo: string;
@@ -28,7 +27,7 @@ export interface PostRepayReceiptRequestProps {
 
 type UploadPaymentReceiptPageProps = WithTranslation;
 
-const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
+const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
     const [postRepayReceipt, { isLoading }] = usePostRepayReceiptMutation();
     const navigate = useNavigate();
     const pageQueryString = useLocationOrderQueryString();
@@ -90,4 +89,4 @@ const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
   ))
 };
 
-export default withTranslation(i18nUploadPaymentReceiptPage.namespace)(UploadPaymentReceiptPage);
+export const UploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(Uni18nUploadPaymentReceiptPage);

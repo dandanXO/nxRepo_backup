@@ -4,7 +4,7 @@ import { Page } from "@frontend/mobile/shared/ui";
 import PureLoanDetails from "../../components/PureLoanDetails";
 import useLoanDetailStory from "../../hooks/useLoanDetailStory";
 
-const ExtendDetailsPage = () => {
+export const ExtendDetailsPage = () => {
     const {
         currentData,
         navigateToUploadPaymentReceiptPage,
@@ -29,4 +29,3 @@ const ExtendDetailsPage = () => {
     );
 };
 
-export default ExtendDetailsPage;

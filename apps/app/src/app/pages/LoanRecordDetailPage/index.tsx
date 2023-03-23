@@ -5,7 +5,7 @@ import {usePostLoanSubmitOrderMutation} from "../../../../../mobile/src/app/api"
 
 export const STATE_REPAYMENT_STEPS = "STATE_REPAYMENT_STEPS";
 
-const LoanDetailsPage = () => {
+export const LoanRecordDetailPage = () => {
     const {
         currentData,
         navigateToUploadPaymentReceiptPage,
@@ -36,5 +36,3 @@ const LoanDetailsPage = () => {
       />
     );
 };
-
-export default LoanDetailsPage;
