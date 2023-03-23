@@ -1,10 +1,12 @@
 import {Navigation} from "../../components/layouts/Navigation";
-import {Marquee} from "../../components/layouts/Marquee";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
-import {ADInformationSection} from "./sections/ADInformationSection";
-import {AccountInformationSection} from "./sections/AccountInformationSection";
+import {LoanInformationSection} from "./sections/LoanInformationSection";
+import {UserInformationSection} from "./sections/UserInformationSection";
 import {RecommendedProductsSection} from "./sections/RecommendedProductsSection";
+import {MarqueeSection} from "./sections/MarqueeSection";
+import {LoanOverViewSection} from "./sections/LoanOverViewSection";
+import {Button} from "../../components/layouts/Button";
 
 export const IndexPage = () => {
   return (
@@ -13,16 +15,16 @@ export const IndexPage = () => {
       <div className={"flex grow flex-col"}>
 
         <div>
-          <Marquee/>
+          <MarqueeSection/>
         </div>
 
-        <div className={"info mb-5"}>
-          <AccountInformationSection/>
+        <div className={"mb-5"}>
+          <UserInformationSection/>
         </div>
 
         <div className={"px-3"}>
           <div className={"mb-3"}>
-            <ADInformationSection/>
+            <LoanInformationSection/>
           </div>
 
           <div className={"mb-3"}>
@@ -35,6 +37,11 @@ export const IndexPage = () => {
 
           <div className={"mb-3"}>
             <RecommendedProductsSection/>
+          </div>
+
+          <div className={"mb-3"}>
+            <LoanOverViewSection/>
+            <Button text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>
           </div>
         </div>
 

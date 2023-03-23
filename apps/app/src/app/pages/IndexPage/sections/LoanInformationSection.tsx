@@ -1,6 +1,6 @@
 import {AiOutlineFieldTime, GiPowderBag} from "react-icons/all"
 
-export const ADInformationSection = () => {
+export const LoanInformationSection = () => {
   return (
     <div className={"ad flex flex-row justify-around"}>
       <div className={"flex flex-row"}>

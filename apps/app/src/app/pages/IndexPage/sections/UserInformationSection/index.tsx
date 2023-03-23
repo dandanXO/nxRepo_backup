@@ -6,7 +6,7 @@ import "./style.scss";
 import {UnAuthenticationStatus} from "./UnAuthenticationStatus";
 import {QuotaSliderStatus} from "./QuotaSliderStatus";
 
-export const AccountInformationSection = () => {
+export const UserInformationSection = () => {
   return (
     <div className={"h-42 bg-orange-100 px-3 pt-2 flex flex-col items-center"}>
       <div className={"welcome-info w-full flex flex-row justify-between mb-2"}>

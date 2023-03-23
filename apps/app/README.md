@@ -31,3 +31,8 @@
   * 未來考慮使用 sentry
 * Martech
   * mixpanel
+
+
+---
+* other issues
+  * [【Day16】滾動條 - 避免滾動穿透(Lock Scroll Chaining)](https://ithelp.ithome.com.tw/articles/10301290?sc=iThelpR)

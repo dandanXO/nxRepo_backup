@@ -1,7 +1,9 @@
+import {Button} from "../../../components/layouts/Button";
+
 export const AuthenticationSection = () => {
   return (
     <div className={"authentication"}>
-      <div className={"rounded-lg bg-blue-500 p-2 text-white text-center shadow-lg shadow-gray-400"}>Get my limit</div>
+      <Button text={"Get my limit"} bgColor={"bg-blue-500"}/>
     </div>
   )
 }
