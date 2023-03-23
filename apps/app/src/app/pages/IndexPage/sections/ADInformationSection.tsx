@@ -1,6 +1,6 @@
 export const ADInformationSection = () => {
   return (
-    <div className={"ad flex flex-row justify-around mb-3"}>
+    <div className={"ad flex flex-row justify-around"}>
       <div className={"flex flex-row"}>
         <div className={"flex flex-col justify-center"}>
           <div className={"rounded-full bg-gray-300 mr-3 w-10 h-10 text-center"}>icon</div>

@@ -3,8 +3,8 @@ import {Marquee} from "../../components/layouts/Marquee";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADInformationSection} from "./sections/ADInformationSection";
-import {AccountInformationSection} from "./sections/AccountInformationSection/AccountInformationSection";
-
+import {AccountInformationSection} from "./sections/AccountInformationSection";
+import {RecommendedProductsSection} from "./sections/RecommendedProductsSection";
 
 export const IndexPage = () => {
   return (
@@ -16,14 +16,26 @@ export const IndexPage = () => {
           <Marquee/>
         </div>
 
-        <div className={"info h-42 bg-orange-100 mb-3"}>
+        <div className={"info mb-5"}>
           <AccountInformationSection/>
         </div>
 
-        <div className={"content px-3"}>
-          <ADInformationSection/>
-          <AuthenticationSection/>
-          <ADBannerSection/>
+        <div className={"px-3"}>
+          <div className={"mb-3"}>
+            <ADInformationSection/>
+          </div>
+
+          <div className={"mb-3"}>
+            <AuthenticationSection/>
+          </div>
+
+          <div className={"mb-3"}>
+            <ADBannerSection/>
+          </div>
+
+          <div className={"mb-3"}>
+            <RecommendedProductsSection/>
+          </div>
         </div>
 
       </div>

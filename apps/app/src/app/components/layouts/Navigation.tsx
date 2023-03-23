@@ -2,7 +2,7 @@ import {MdOutlineAccountCircle, MdPayment, RiMoneyDollarCircleFill} from "react-
 
 export const Navigation = () => {
   return (
-    <div className={"h-16 flex flex-row border-t"}>
+    <div className={"h-16 bg-white border-t sticky bottom-0 flex flex-row"}>
       <div className={"flex-1 flex flex-col justify-center items-center"}>
         <RiMoneyDollarCircleFill color={"#F58B10"} size={20}/>
         <div className={"text-orange-300"}>Loan</div>
