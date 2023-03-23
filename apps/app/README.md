@@ -24,6 +24,7 @@
   * 根據重要或複雜情境撰寫 cypress e2e testing
   * 使用 mocha 方式建構測試案例 describe, it，未來再考慮使用 cucumber 去 BDD 
   * 使用 testing library 方式 query
+    * [About Queries](https://testing-library.com/docs/queries/about)
   * 使用 chai, sinon chai 方式 assert
   * 未來再考慮使用 BDD, ATDD 方式改變開發流程
 * 監控部分

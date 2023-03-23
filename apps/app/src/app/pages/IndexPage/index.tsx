@@ -1,10 +1,17 @@
-import {BiHide, RiCustomerServiceLine} from "react-icons/all";
+import {
+  BiHide,
+  MdOutlineAccountCircle,
+  MdPayment,
+  RiCustomerServiceLine,
+  RiMoneyDollarCircleFill
+} from "react-icons/all";
 
 export const IndexPage = () => {
   return (
-    <div className={"container"}>
-      <div className={"flex flex-col"}>
-        <div className={"marquee p-1 bg-orange-300"}>Lorem Ipsum is simply dummy text of the printing </div>
+    <div className={"container flex flex-col min-h-screen"}>
+
+      <div className={"flex grow flex-col"}>
+        <div className={"marquee p-1 bg-orange-300 h-7"}>Lorem Ipsum is simply dummy text of the printing </div>
 
         <div className={"info h-42 bg-orange-100 mb-3"}>
           <div className={"pt-2 px-3 flex flex-col items-center"}>
@@ -60,20 +67,21 @@ export const IndexPage = () => {
         </div>
       </div>
 
-      <div className={"flex"}>
-        <div className={""}>
-          <RiCustomerServiceLine/>
-          <div>Loan</div>
+      <div className={"h-16 flex flex-row border-t"}>
+        <div className={"flex-1 flex flex-col justify-center items-center"}>
+          <RiMoneyDollarCircleFill color={"#F58B10"} size={30}/>
+          <div className={"text-orange-300"}>Loan</div>
         </div>
-        <div className={""}>
-          <RiCustomerServiceLine/>
-          <div>Loan</div>
+        <div className={"flex-1 flex flex-col justify-center items-center"}>
+          <MdPayment color={"#D7D7D7"} size={30}/>
+          <div className={"text-gray-400"}>Payment</div>
         </div>
-        <div className={""}>
-          <RiCustomerServiceLine/>
-          <div>Loan</div>
+        <div className={"flex-1 flex flex-col justify-center items-center"}>
+          <MdOutlineAccountCircle color={"#D7D7D7"} size={30}/>
+          <div className={"text-gray-300"}>Account</div>
         </div>
       </div>
+
     </div>
   )
 }
