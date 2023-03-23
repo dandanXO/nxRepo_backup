@@ -1,62 +1,79 @@
-import {Link, Route, Routes} from "react-router-dom";
+import {BiHide, RiCustomerServiceLine} from "react-icons/all";
 
 export const IndexPage = () => {
   return (
-    <div className="pink-900">
-      {/*<NxWelcome title="app" />*/}
-      <div className="text-lg">test</div>
-      <div
-        className="py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-2 sm:(py-4 flex items-center space-y-0 space-x-6)">
-        <img className="block mx-auto h-24 rounded-full sm:(mx-0 flex-shrink-0)" src="/img/erin-lindford.jpg"
-             alt="Woman's Face"/>
-        <div className="text-center space-y-2 sm:text-left">
-          <div className="space-y-0.5">
-            <p className="text-lg text-black font-semibold">Erin Lindford</p>
-            <p className="text-gray-500 font-medium">Product Engineer</p>
+    <div className={"container"}>
+      <div className={"flex flex-col"}>
+        <div className={"marquee p-1 bg-orange-300"}>Lorem Ipsum is simply dummy text of the printing </div>
+
+        <div className={"info h-42 bg-orange-100 mb-3"}>
+          <div className={"pt-2 px-3 flex flex-col items-center"}>
+
+            <div className={"welcome-info w-full flex flex-row justify-between mb-2"}>
+              <div className={"left-section flex flex-row"}>
+                <div className={"welcome pr-2 font-medium"}>Welcome 901*****123</div>
+                <div className={"hide-icon"}>
+                  <BiHide/>
+                </div>
+              </div>
+              <div className={"right-section"}>
+                <div className={"contact-icon"}><RiCustomerServiceLine/></div>
+              </div>
+            </div>
+
+            <div className={"loan-amount flex flex-col p-2 text-center bg-orange-400 w-full rounded-t-lg"}>
+              <div className={"text-white"}>Maximum Loan Amount up to</div>
+              <div className={"text-white text-2xl font-bold"}>₹ 10,000-30,000</div>
+            </div>
           </div>
-          <button
-            className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:(text-white bg-purple-600 border-transparent) focus:(outline-none ring-2 ring-purple-600 ring-offset-2)">
-            Message
-          </button>
+        </div>
+
+        <div className={"content px-3"}>
+
+          <div className={"ad flex flex-row justify-around mb-3"}>
+            <div className={"flex flex-row"}>
+              <div className={"flex flex-col justify-center"}>
+                <div className={"rounded-full bg-gray-300 mr-3 w-10 h-10 text-center"}>icon</div>
+              </div>
+              <div className={"info"}>
+                <div className={"name"}>Interest rate</div>
+                <div className={"value text-2xl"}>1.2-2.8%</div>
+              </div>
+            </div>
+            <div className={"flex flex-row justify-center"}>
+              <div className={"flex flex-col justify-center"}>
+                <div className={"rounded-full bg-gray-300 mr-3 w-10 h-10 text-center"}>icon</div>
+              </div>
+              <div className={"info"}>
+                <div className={"name"}>Loan Term</div>
+                <div className={"value text-2xl"}>91+ days</div>
+              </div>
+            </div>
+          </div>
+
+          <div className={"authentication mb-3"}>
+            <div className={"rounded-lg bg-blue-500 p-2 text-white text-center shadow-lg shadow-gray-400"}>Get my limit</div>
+          </div>
+          <div className={"ad-banner"}>
+            <div className={"rounded-lg bg-green-800 p-10 text-center text-white"}>廣告圖塊</div>
+          </div>
         </div>
       </div>
 
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
-      <br />
-      <hr />
-      <br />
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2">Page 2</Link>
-          </li>
-        </ul>
+      <div className={"flex"}>
+        <div className={""}>
+          <RiCustomerServiceLine/>
+          <div>Loan</div>
+        </div>
+        <div className={""}>
+          <RiCustomerServiceLine/>
+          <div>Loan</div>
+        </div>
+        <div className={""}>
+          <RiCustomerServiceLine/>
+          <div>Loan</div>
+        </div>
       </div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              This is the generated root route.{' '}
-              <Link to="/page-2">Click here for page 2.</Link>
-            </div>
-          }
-        />
-        <Route
-          path="/page-2"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
-          }
-        />
-      </Routes>
-      {/* END: routes */}
     </div>
   )
 }
