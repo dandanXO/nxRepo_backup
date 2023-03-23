@@ -1,10 +1,9 @@
 import {SuccessICON} from "./i18n/SuccessICON";
 import {Button, Page} from "@frontend/mobile/shared/ui";
-import UploadedPaymentReceiptPage from "./index";
+import {UploadedPaymentReceiptPage} from "./index";
 import styled from "styled-components";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nUploadedPaymentReceiptPage} from "./i18n/translations";
-
 
 const CustomPage = styled(Page)`
     display: flex;

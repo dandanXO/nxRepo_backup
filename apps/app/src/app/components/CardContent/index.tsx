@@ -3,8 +3,8 @@ import React from 'react';
 import { flexCreator, Button, Divider } from "@frontend/mobile/shared/ui";
 import LoanBrand from '../LoanBrand';
 
-import nextIcon_gray from '../../../../../../../libs/mobile/shared/ui/src/lib/components/images/next_icon_gray.svg';
-import nextIcon from '../../../../../../../libs/mobile/shared/ui/src/lib/components/images/next_icon.svg';
+import nextIcon_gray from '../../../../../../libs/mobile/shared/ui/src/lib/components/images/next_icon_gray.svg';
+import nextIcon from '../../../../../../libs/mobile/shared/ui/src/lib/components/images/next_icon.svg';
 
 import {i18nComponents} from "../i18n/translations";
 import {useTranslation} from "react-i18next";

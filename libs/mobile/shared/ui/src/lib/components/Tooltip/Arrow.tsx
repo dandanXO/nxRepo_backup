@@ -57,10 +57,10 @@ function getPlcamentDirection(placement: Placement) {
             transform: rotate(${135 + 180}deg);
             right: 3px;
         `;
-    } return {
-    return `
+    } else {
+      return `
             transform: rotate(${135 + 180}deg);
             right: 3px;
-        `;
+      `;
   }
 }
