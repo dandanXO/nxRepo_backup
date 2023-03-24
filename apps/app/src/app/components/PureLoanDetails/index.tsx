@@ -12,7 +12,8 @@ import {environment} from "../../../environments/environment";
 import {useLockRequest} from "../../hooks/useLockRequest";
 
 
-import {AllCountryInstance} from "../../../../../mobile/src/environments/config/AllCountry";
+import { AllCountryInstance } from "../../modules/country/constants/AllCountry";
+// import {AllCountryInstance} from "../../../../mobile/src/environments/config/AllCountry";
 
 import ExtensionDetailModal from "../../models/old/ExtensionDetailModal";
 
@@ -22,8 +23,8 @@ import RepaymentNoticeModal from "../../models/old/RepaymentNoticeModal";
 import {I18nRepaymentStepsModal} from "../../models/old/RepaymentStepsModal";
 
 import {CustomPage} from "../../pages/BindBankCardPage/components/CustomPage";
-import ExtendModal from "../../models/old/ExtendModal/ExtendModal";
-import AmountPaidModal from "../../models/old/AmountRepaidModal/AmountPaidModal";
+import ExtendModal from "../../models/ExtendModal/ExtendModal";
+import AmountPaidModal from "../../models/AmountRepaidModal/AmountRepaidModal";
 
 
 

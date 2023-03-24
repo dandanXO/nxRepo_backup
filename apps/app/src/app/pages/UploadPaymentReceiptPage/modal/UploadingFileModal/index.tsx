@@ -1,10 +1,10 @@
-import { Overlay } from "@frontend/mobile/shared/ui";
+import {  Overlay } from "@frontend/mobile/shared/ui";
 import React from "react";
 import styled from "styled-components";
 import { StyledLoading } from "@frontend/mobile/shared/ui";
 import {useTranslation} from "react-i18next";
 import {i18nUploadingFileModal} from "./i18n/translations";
-
+import Divider from "../../../../components/Divider";
 const Container = styled.div`
     padding: 8px;
     font-size: 16px;
@@ -45,18 +45,14 @@ const UploadingFileModal = () => {
         <Overlay
             height={100}
             show={true}
+            overflow="hidden"
             content={(hide: () => void) => {
                 return (
                     <Container>
-                        <StyledLoading />
-                        <Title>{t("UploadingFile")}</Title>
-                        {/*<ProgressBar>*/}
-                        {/*    <ProgressBarContainer>*/}
-                        {/*        <ProgressBarWater width={"30" + "%"}/>*/}
-                        {/*    </ProgressBarContainer>*/}
-                        {/*</ProgressBar>*/}
-                        {/*<Percent>30%</Percent>*/}
-                        <Description>
+                        <div>{t("Uploading File")}</div>
+                        <Divider/>
+                        <div className={`mt-8 mb-6`}><StyledLoading /></div>
+                        <Description className={`mb-6`}>
                           {t("Your file is uploading, please keep your network connection is active and wait for few minutes")}
                         </Description>
                     </Container>

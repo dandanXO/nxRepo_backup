@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import AmountPaidModal from "./AmountPaidModal";
+import AmountPaidModal from "./AmountRepaidModal";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 
 export default {
@@ -19,9 +19,9 @@ export const Template: ComponentStory<typeof AmountPaidModal> = (
         <AppThemeProvider>
             <AmountPaidModal
                 repayRecords={[data]}
-                setShowAmountPaidModal={() => {
-                    // do nothing.
-                }}
+                // setShowAmountPaidModal={() => {
+                //     // do nothing.
+                // }}
             />
         </AppThemeProvider>
     );

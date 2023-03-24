@@ -8,10 +8,10 @@ import {
     Divider,
 } from "@frontend/mobile/shared/ui";
 import {withTranslation, WithTranslation} from "react-i18next";
-import {i18nAmountPaidModal} from "./i18n/translations";
-import {GetLoanDetailResponse} from "../../../api/old/getLoanDetail";
-import recordStatusStyleProps from "../../../modules/recordStatusColorMapper";
-
+import {i18nAmountRepaidModal} from "./i18n/translations";
+import {GetLoanDetailResponse} from "../../api/old/getLoanDetail";
+import recordStatusStyleProps from "../../modules/recordStatusColorMapper";
+import { useNavigate } from "react-router-dom";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
 `;
@@ -34,8 +34,8 @@ const NoDataStyled = styled.div`
     ${flexCreator("row", "center", "center")};
 `;
 
-type AmountPaidRecordsProps = Pick<GetLoanDetailResponse, "repayRecords"> & {
-    setShowAmountPaidModal: React.Dispatch<React.SetStateAction<boolean>>;
+type AmountRepaidRecordsProps = Pick<GetLoanDetailResponse, "repayRecords"> & {
+    // setShowAmountPaidModal: React.Dispatch<React.SetStateAction<boolean>>;
 } & WithTranslation;
 
 interface RecordStyledProps {
@@ -57,8 +57,8 @@ const Record = (props: {
         </RecordStyled>
     );
 };
-const renderRecordList = (props: AmountPaidRecordsProps) => {
-    const { repayRecords } = props;
+const renderRecordList = (props: AmountRepaidRecordsProps) => {
+    const { repayRecords=[{repayDate:'2022/09/05',repayAmount:8500,repayType:'overdue / pay off'}] } = props;
     return repayRecords?.map((i) => (
         <Record
             repayDate={i.repayDate ? i.repayDate : ""}
@@ -68,8 +68,9 @@ const renderRecordList = (props: AmountPaidRecordsProps) => {
     ));
 };
 
-const AmountPaidModal = (props: AmountPaidRecordsProps) => {
-    const { repayRecords, setShowAmountPaidModal, t } = props;
+const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
+    const { repayRecords, t } = props;
+    const navigate = useNavigate();
     return (
         <div>
             <Overlay
@@ -79,7 +80,7 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
                 content={(hide: () => void) => {
                     return (
                         <div>
-                            <Title>{t("Amount Paid Record")}</Title>
+                            <Title>{t("Amount RePaid Record")}</Title>
                             <Divider styleType="narrow" />
                             {repayRecords?.length === 0 ? (
                                 <NoDataStyled>{t("No paid records yet")}</NoDataStyled>
@@ -91,11 +92,11 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
                         </div>
                     );
                 }}
-                onCancel={() => setShowAmountPaidModal(false)}
+                onCancel={() => navigate('/loan-record-detail')}
                 enableTitleHorizontal={true}
             ></Overlay>
         </div>
     );
 };
 
-export default withTranslation(i18nAmountPaidModal.namespace)(AmountPaidModal);
+export default withTranslation(i18nAmountRepaidModal.namespace)(AmountRepaidModal);

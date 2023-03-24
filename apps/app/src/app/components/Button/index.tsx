@@ -3,17 +3,25 @@
 interface ButtonProps {
     fontSize?: string;
     buttonText?: string;
-    borderColor?: string;
     backgroundColor?: string;
-    borderSolid?: string;
     padding?: string;
     border?: string
     width?: string;
+    color?:string;
+    onClick?:()=>void
 }
 
 
-const Button = ({ fontSize = 'sm', buttonText = '', border = '', padding = 'py-3 px-3', backgroundColor = 'bg-orange-500', width = 'w-auto' }: ButtonProps) => {
-    return <button className={`text-${fontSize} ${border}  ${padding} ${width} ${backgroundColor} rounded-lg text-center`}>
+const Button = ({ fontSize = 'sm',
+ buttonText = '', 
+ border = '',
+  padding = 'p-3', 
+  backgroundColor = 'bg-orange-500', 
+  width = 'w-auto' ,
+  color='text-orange-100',
+  onClick
+}: ButtonProps) => {
+    return <button onClick={onClick} className={`text-${fontSize} ${border} ${padding} ${width} ${backgroundColor} ${color} rounded-lg text-center leading-none`}>
         {buttonText}
     </button>
 }
