@@ -350,7 +350,14 @@ const ProductAdModalListPage = () => {
             <Footer>
               <Button
                 background="#F58B10"
-                disable={pageStatus === STATE.INIT || pageStatus === STATE.LOADING || pageStatus === STATE.OVERDUE_LOADING || productList.length === 0}
+                disable={
+                  pageStatus === STATE.INIT ||
+                  pageStatus === STATE.LOADING ||
+                  pageStatus === STATE.OVERDUE_LOADING ||
+                  productList.length === 0 ||
+                  pageStatus === STATE.OVERDUE && maxQuota === 0 ||
+                  pageStatus === STATE.COUNTDOWN && maxQuota === 0
+                }
                 onClick={() =>{
                   if((pageStatus === STATE.COUNTDOWN || pageStatus === STATE.OVERDUE) && productList.length > 0) onUserClickToApply();
                 }}

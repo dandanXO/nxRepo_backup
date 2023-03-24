@@ -11,6 +11,9 @@ export type GetPersonalLoanRecommendResponse = {
   // 是否有已提交/处里中/审核中的申请
 
   riskReject?: boolean;
+  // 是否为风控拒绝
+
+
 }
 
 export type RecommendProduct = {

@@ -54,7 +54,7 @@ export const StyledProduct = styled.div`
         }
     }
   .productInfo{
-    color: #aaaaaa;
+    color: #7B7B7B;
     font-weight: 100;
     font-size: 14px;
     letter-spacing: 1px;
@@ -293,7 +293,8 @@ export const Product = memo(({logoUrl, productName, loanableAmount,interestRate,
         </div>
       </div>
       <div className="productInfo">
-        <span>{t("interest")} : {interestRate ? interestRate : ""}</span> : <span>{t("terms")} : {terms ? terms : ""}</span>
+        <div>{t("interest")} : {interestRate ? interestRate : ""}</div>
+        <div>{t("terms")} : {terms ? terms : ""}</div>
       </div>
     </StyledProduct>
   )

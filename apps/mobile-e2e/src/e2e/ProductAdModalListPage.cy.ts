@@ -229,7 +229,7 @@ describe("iphone-3一鍵快速借款", () => {
 
   });
 
-  it("2.有額度，無風控到期。用戶應該能 Apply。", () => {
+  it.only("2.有額度，無風控到期。用戶應該能 Apply。", () => {
     // NOTICE: GIVEN: 有額度，無風控到期
     // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
     // NOTICE: THEN: 用戶應該能 Apply。
@@ -404,7 +404,7 @@ describe("iphone-3一鍵快速借款", () => {
     cy.screenshot();
   });
 
-  it.only("4.無額度，風控到期，已超過七天，不幫用戶自動刷新。不能 APPLY。除非刷新。", () => {
+  it("4.無額度，風控到期，已超過七天，不幫用戶自動刷新。不能 APPLY。除非刷新。", () => {
     // NOTICE: GIVEN 用戶無額度，用戶風控到期，已超過七天
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN: 不幫用戶自動刷新
