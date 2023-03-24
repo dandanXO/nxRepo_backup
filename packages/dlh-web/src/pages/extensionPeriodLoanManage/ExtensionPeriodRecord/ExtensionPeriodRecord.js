@@ -49,7 +49,7 @@ class ExtensionPeriodRecord extends Component {
             isSuperAdmin,
             allMerchants
         };
-        this.INIT = {
+        this.init = {
             time: [moment(0, 'HH'), moment({hour: 23, minute: 59, seconds: 59})]
         };
         const _this = this;
