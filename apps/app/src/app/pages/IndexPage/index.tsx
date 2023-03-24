@@ -1,4 +1,4 @@
-import {Navigation} from "../../components/layouts/Navigation";
+import {TabBar} from "../../components/layouts/TabBar";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {LoanInformationSection} from "./sections/LoanInformationSection";
@@ -71,7 +71,7 @@ export const IndexPage = () => {
         <Button text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
       </div>
 
-      <Navigation/>
+      <TabBar/>
 
     </div>
   )

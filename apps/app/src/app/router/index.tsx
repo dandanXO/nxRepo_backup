@@ -24,6 +24,7 @@ import RepaymentModal from '../models/RepaymentModal';
 import AmountRepaidModal from "../models/AmountRepaidModal/AmountRepaidModal";
 import { ExtendConfirmModal } from "../models/ExtendConfirmModal";
 import ExtendModal from "../models/ExtendModal/ExtendModal";
+import {ApplicationProgressPage} from "../pages/ApplicationProgressPage";
 export const AppRouter = () => {
     return (
         // <BrowserRouter>
@@ -31,6 +32,7 @@ export const AppRouter = () => {
             <Routes >
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/" element={<IndexPage />} />
+                <Route path="/application-progress" element={<ApplicationProgressPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/bankcard-list" element={<BankCardListPage />} />
                 <Route path="/bind-bankcard" element={<BindBankCardPage />} />
@@ -38,7 +40,7 @@ export const AppRouter = () => {
                 <Route path="/disclosure-statement" element={<DisclosureStatementPage />} />
                 <Route path="/extend-details" element={<ExtendDetailsPage />} />
                 <Route path="/finished-repayment" element={<FinishedRepaymentPage />} />
-                
+
                 <Route path="/loan-record-detail" element={<LoanRecordDetailPage />}>
                     <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
                     <Route path="extend-modal" element={<ExtendModal />} />
