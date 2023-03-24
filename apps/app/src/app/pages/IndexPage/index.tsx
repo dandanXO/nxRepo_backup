@@ -9,6 +9,13 @@ import {LoanOverViewSection} from "./sections/LoanOverViewSection";
 import {Button} from "../../components/layouts/Button";
 import {PageContent} from "../../components/layouts/PageContent";
 import {TipsSection} from "./sections/TipsSection";
+import {NoticeOrderRejectedSection} from "./sections/NoticeOrderRejectedSection";
+import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
+import {NoticeUserAuthedEmptyQuotaSection} from "./sections/NoticeUserAuthedEmptyQuotaSection";
+import {
+  NoticeUserInProgressAuthStatusSections
+} from "./sections/NoticeUserInProgressAuthStatusSections";
+import {NoticeUserRejectedSection} from "./sections/NoticeUserRejectedSection";
 
 export const IndexPage = () => {
   return (
@@ -41,20 +48,27 @@ export const IndexPage = () => {
           {/*  <RecommendedProductsSection/>*/}
           {/*</div>*/}
 
-          <div className={"mb-3"}>
-            <LoanOverViewSection/>
-          </div>
+          {/*<div className={"mb-3"}>*/}
+          {/*  <LoanOverViewSection/>*/}
+          {/*</div>*/}
 
-          <div className={"mb-3"}>
-            <TipsSection/>
-          </div>
+          {/*<div className={"mb-3"}>*/}
+          {/*  <TipsSection/>*/}
+          {/*</div>*/}
+
+          {/*<NoticeOrderRejectedSection/>*/}
+          {/*<NoticeUserAuthedEmptyQuotaSection/>*/}
+          {/*<WelcomeBackAndReapplyInTimeSection/>*/}
+          {/*<NoticeUserInProgressAuthStatusSections/>*/}
+          <NoticeUserRejectedSection/>
 
         </PageContent>
 
       </div>
 
       <div className={"sticky bottom-[63px] px-3 py-3"}>
-        <Button text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>
+        {/*<Button text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>*/}
+        <Button text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
       </div>
 
       <Navigation/>

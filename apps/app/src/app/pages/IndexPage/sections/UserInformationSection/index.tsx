@@ -16,9 +16,9 @@ export const UserInformationSection = () => {
         <UserInfoSupportField/>
       </div>
 
-      <div className={"w-full mb-3"}>
-        <LatestOrderStatus/>
-      </div>
+      {/*<div className={"w-full mb-3"}>*/}
+      {/*  <LatestOrderStatus/>*/}
+      {/*</div>*/}
 
       <StatusContainer>
         {/*<UnAuthenticationStatus/>*/}
