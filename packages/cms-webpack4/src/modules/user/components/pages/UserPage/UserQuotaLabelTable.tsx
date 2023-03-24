@@ -106,7 +106,7 @@ export default () => {
             },
         },
         {
-            title: '可借额度', dataIndex: 'loanAmount', key: 'loanAmount', hideInSearch: true,
+            title: '可借额度', dataIndex: 'balance', key: 'balance', hideInSearch: true,
             formItemProps: (form, { rowIndex }) => {
                 return {
                     rules: [
@@ -169,13 +169,13 @@ export default () => {
                     type: 'multiple',
                     editableKeys,
                     onSave: async (rowKey, data, row) => {
-                        const { quotaLabel, labelColor, loanCount, loanAmount } = data;
+                        const { quotaLabel, labelColor, loanCount, balance } = data;
                         const isEdit = dataSource.some(i => i.id === Number(row.id));
                         const saveQuotaLabel = {
                             quotaLabel,
                             labelColor,
                             loanCount: Number(loanCount),
-                            loanAmount: Number(loanAmount)
+                            balance: Number(balance)
                         }
                         isEdit ? EditUserQuotaLabel({ id: Number(row.id), ...saveQuotaLabel }) : AddUserQuotaLabel(saveQuotaLabel)
                     },
