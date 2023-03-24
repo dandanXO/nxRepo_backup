@@ -5,16 +5,16 @@ import {formatPrice} from "../../../../modules/formatPrice";
 export const QuotaSliderStatus = () => {
   const [currentQuotaValue, setCurrentQuotaValue] = useState(6400);
   return (
-    <div className={"mb-4"}>
+    <div className={"mb-4 text-center"}>
       <div className={"h-[60px]"}>
 
         <div className={"flex flex-col justify-center items-center mb"}>
           <div className="w-full flex flex-row justify-between mb-2">
-            <div className="text-white">You can get up to</div>
+            <div className="text-white text-sm font-light">You can get up to</div>
             <div className="text-white font-medium">₹ {formatPrice(currentQuotaValue)} / ${formatPrice(9600)}</div>
           </div>
 
-          <div className="slider">
+          <div className="slider mb-1">
             <ReactSlider
               className="quota-slider"
               trackClassName="quota-slider-track"
@@ -40,8 +40,8 @@ export const QuotaSliderStatus = () => {
           </div>
 
           <div className="w-full flex flex-row justify-between">
-            <span className="text-white">MIN</span>
-            <span className="text-white">MAX</span>
+            <span className="text-white text-xs font-light">MIN</span>
+            <span className="text-white text-xs font-light">MAX</span>
           </div>
 
         </div>

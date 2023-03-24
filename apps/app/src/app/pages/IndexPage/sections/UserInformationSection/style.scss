@@ -1,5 +1,6 @@
 $slider-height: 5px;
-
+$slider-button-size: 19px;
+$slider-button-inner-size: 10px;
 .slider {
   width: 100%;
 
@@ -28,10 +29,10 @@ $slider-height: 5px;
     border: 1.5px solid #F58B10;
     background: #fff;
 
-    width: 25px;
-    height: 25px;
+    width: $slider-button-size;
+    height: $slider-button-size;
 
-    top: -10px;
+    top: -7px;
     text-align: center;
     line-height: 25px;
     border-radius: 50%;
@@ -42,8 +43,8 @@ $slider-height: 5px;
     // NOTE: 拉霸按鈕-內圓
     .quota-slider-thumb-inner {
       background: #33AF85;
-      width: 15px;
-      height: 15px;
+      width: $slider-button-inner-size;
+      height: $slider-button-inner-size;
       border-radius: 50%;
     }
   }

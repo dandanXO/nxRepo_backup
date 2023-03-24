@@ -7,6 +7,8 @@ import {RecommendedProductsSection} from "./sections/RecommendedProductsSection"
 import {MarqueeSection} from "./sections/MarqueeSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
 import {Button} from "../../components/layouts/Button";
+import {PageContent} from "../../components/layouts/PageContent";
+import {TipsSection} from "./sections/TipsSection";
 
 export const IndexPage = () => {
   return (
@@ -22,27 +24,32 @@ export const IndexPage = () => {
           <UserInformationSection/>
         </div>
 
-        <div className={"px-3"}>
-          <div className={"mb-3"}>
-            <LoanInformationSection/>
-          </div>
+        <PageContent>
+          {/*<div className={"mb-3"}>*/}
+          {/*  <LoanInformationSection/>*/}
+          {/*</div>*/}
 
-          <div className={"mb-3"}>
-            <AuthenticationSection/>
-          </div>
+          {/*<div className={"mb-3"}>*/}
+          {/*  <AuthenticationSection/>*/}
+          {/*</div>*/}
 
-          <div className={"mb-3"}>
-            <ADBannerSection/>
-          </div>
+          {/*<div className={"mb-3"}>*/}
+          {/*  <ADBannerSection/>*/}
+          {/*</div>*/}
 
-          <div className={"mb-3"}>
-            <RecommendedProductsSection/>
-          </div>
+          {/*<div className={"mb-3"}>*/}
+          {/*  <RecommendedProductsSection/>*/}
+          {/*</div>*/}
 
           <div className={"mb-3"}>
             <LoanOverViewSection/>
           </div>
-        </div>
+
+          <div className={"mb-3"}>
+            <TipsSection/>
+          </div>
+
+        </PageContent>
 
       </div>
 

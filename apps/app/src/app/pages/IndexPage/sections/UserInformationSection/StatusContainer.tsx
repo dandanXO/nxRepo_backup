@@ -5,7 +5,7 @@ interface Props {
 }
 export const StatusContainer = (props: Props) => {
   return (
-    <div className={"loan-amount flex flex-col p-2 text-center bg-orange-400 w-full rounded-t-lg"}>
+    <div className={"loan-amount flex flex-col p-2 bg-orange-400 w-full rounded-t-lg"}>
       {props.children}
     </div>
   )
