@@ -1,74 +1,158 @@
 import {TabBar} from "../../components/layouts/TabBar";
-import {ADBannerSection} from "./sections/ADBannerSection";
-import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {LoanInformationSection} from "./sections/LoanInformationSection";
 import {UserInformationSection} from "./sections/UserInformationSection";
 import {RecommendedProductsSection} from "./sections/RecommendedProductsSection";
 import {MarqueeSection} from "./sections/MarqueeSection";
-import {LoanOverViewSection} from "./sections/LoanOverViewSection";
 import {Button} from "../../components/layouts/Button";
 import {PageContent} from "../../components/layouts/PageContent";
 import {TipsSection} from "./sections/TipsSection";
-import {NoticeOrderRejectedSection} from "./sections/NoticeOrderRejectedSection";
+import {NoticeOrderRejectedSection} from "./sections/NoticeSectionContainer/NoticeOrderRejectedSection";
 import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
-import {NoticeUserAuthedEmptyQuotaSection} from "./sections/NoticeUserAuthedEmptyQuotaSection";
+import {NoticeUserAuthedEmptyQuotaSection} from "./sections/NoticeSectionContainer/NoticeUserAuthedEmptyQuotaSection";
 import {
   NoticeUserInProgressAuthStatusSections
-} from "./sections/NoticeUserInProgressAuthStatusSections";
-import {NoticeUserRejectedSection} from "./sections/NoticeUserRejectedSection";
+} from "./sections/NoticeSectionContainer/NoticeUserInProgressAuthStatusSections";
+import {NoticeUserRejectedSection} from "./sections/NoticeSectionContainer/NoticeUserRejectedSection";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
+import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../flow";
+import {AuthenticationSection} from "./sections/AuthenticationSection";
+import {ADBannerSection} from "./sections/ADBannerSection";
+import {LoanOverViewSection} from "./sections/LoanOverViewSection";
+
 
 export const IndexPage = () => {
+  const indexPageState = useSelector((state: RootState) => state.indexPage);
+
   return (
     <div className={"container flex flex-col min-h-screen"}>
 
       <div className={"flex grow flex-col"}>
 
         <div>
-          <MarqueeSection/>
+          <MarqueeSection state={indexPageState}/>
         </div>
 
         <div className={"mb-5"}>
-          <UserInformationSection/>
+          <UserInformationSection state={indexPageState}/>
         </div>
 
         <PageContent>
-          {/*<div className={"mb-3"}>*/}
-          {/*  <LoanInformationSection/>*/}
-          {/*</div>*/}
+          <div className={"mb-3"}>
+            <LoanInformationSection state={indexPageState}/>
+          </div>
 
-          {/*<div className={"mb-3"}>*/}
-          {/*  <AuthenticationSection/>*/}
-          {/*</div>*/}
+          {indexPageState.user.state === USER_AUTH_STATE.ready && (
+            <div className={"mb-3"}>
+              <AuthenticationSection/>
+            </div>
+          )}
 
-          {/*<div className={"mb-3"}>*/}
-          {/*  <ADBannerSection/>*/}
-          {/*</div>*/}
+          {indexPageState.user.state === USER_AUTH_STATE.ready && (
+            <div className={"mb-3"}>
+              {/*TODO*/}
+              <ADBannerSection/>
+            </div>
+          )}
 
-          {/*<div className={"mb-3"}>*/}
-          {/*  <RecommendedProductsSection/>*/}
-          {/*</div>*/}
+          {(
+            indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.valid
+          )&& (
+            <div className={"mb-3"}>
+              <RecommendedProductsSection state={indexPageState}/>
+            </div>
+          )}
 
-          {/*<div className={"mb-3"}>*/}
-          {/*  <LoanOverViewSection/>*/}
-          {/*</div>*/}
 
-          {/*<div className={"mb-3"}>*/}
-          {/*  <TipsSection/>*/}
-          {/*</div>*/}
+          {(
+            indexPageState.user.state === USER_AUTH_STATE.authing ||
+            indexPageState.user.state === USER_AUTH_STATE.reject ||
+            (
+              indexPageState.user.state === USER_AUTH_STATE.success && (
+                indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
+                indexPageState.order.state === ORDER_STATE.reject
+              )
+            )
+          )&& (
+            <div className={"mb-3"}>
+              <LoanOverViewSection state={indexPageState}/>
+            </div>
+          )}
 
-          {/*<NoticeOrderRejectedSection/>*/}
-          {/*<NoticeUserAuthedEmptyQuotaSection/>*/}
-          {/*<WelcomeBackAndReapplyInTimeSection/>*/}
-          {/*<NoticeUserInProgressAuthStatusSections/>*/}
-          <NoticeUserRejectedSection/>
+
+
+          {/*TODO: Remove me by identify state*/}
+          <div className={"mb-3"}>
+            <TipsSection state={indexPageState}/>
+          </div>
+
+          {(
+            indexPageState.user.state === USER_AUTH_STATE.authing
+          ) && (
+            <>
+              <NoticeUserInProgressAuthStatusSections/>
+            </>
+          )}
+
+          {(
+            indexPageState.user.state === USER_AUTH_STATE.authing
+          ) && (
+            <>
+              <NoticeUserRejectedSection/>
+            </>
+          )}
+
+          {(
+            indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.order.state === ORDER_STATE.reject
+          ) && (
+              <>
+                <NoticeOrderRejectedSection/>
+              </>
+          )}
+
+          {(
+            indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
+          ) && (
+            <>
+              <NoticeUserAuthedEmptyQuotaSection/>
+            </>
+          )}
+
+          {(
+            indexPageState.user.state === USER_AUTH_STATE.success &&
+            (
+              indexPageState.order.state === ORDER_STATE.reject ||
+              indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
+            )
+          ) && (
+            <WelcomeBackAndReapplyInTimeSection/>
+          )}
+
 
         </PageContent>
 
       </div>
 
       <div className={"sticky bottom-[63px] px-3 py-3"}>
-        {/*<Button text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>*/}
-        <Button text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
+        {/*TODO*/}
+        {(
+          indexPageState.user.state === USER_AUTH_STATE.success
+        ) && (
+          <Button text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>
+        )}
+
+        {(
+          indexPageState.user.state === USER_AUTH_STATE.authing ||
+          indexPageState.order.state === ORDER_STATE.reject
+        ) && (
+          <>
+            <Button text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
+          </>
+        )}
+
       </div>
 
       <TabBar/>

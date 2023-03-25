@@ -1,8 +1,8 @@
-import {PageContentNotificationContainer} from "../PageContentNotificationContainer";
+import {NoticeSectionContainer} from "./index";
 
 export const NoticeOrderRejectedSection = () => {
   return (
-    <PageContentNotificationContainer>
+    <NoticeSectionContainer>
 
       <div className={"text-orange-500 mb-2"}>Your order has not been approved</div>
 
@@ -16,6 +16,6 @@ export const NoticeOrderRejectedSection = () => {
         If you have any questions, please contact our customer service center.
       </div>
 
-    </PageContentNotificationContainer>
+    </NoticeSectionContainer>
   )
 }

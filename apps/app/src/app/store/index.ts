@@ -1,7 +1,7 @@
 import {configureStore, createAsyncThunk} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
 import {API} from "../api";
-import { AppSaga } from "../flow";
+import {AppSaga, indexPageSlice} from "../flow";
 
 
 const sagaMiddleware = createSagaMiddleware()
@@ -9,6 +9,7 @@ const sagaMiddleware = createSagaMiddleware()
 export const appStore = configureStore({
   reducer: {
     [API.reducerPath]: API.reducer,
+    [indexPageSlice.name]: indexPageSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -18,3 +19,13 @@ export const appStore = configureStore({
 
 // NOTICE: then run the saga
 sagaMiddleware.run(AppSaga)
+
+export type RootState = ReturnType<typeof appStore.getState>
+export type AppDispatch = typeof appStore.dispatch
+
+
+
+export type IndexPageProps = {
+  state: RootState["indexPage"];
+}
+

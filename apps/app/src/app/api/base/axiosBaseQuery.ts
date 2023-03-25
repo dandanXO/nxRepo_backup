@@ -1,11 +1,10 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosError, AxiosRequestConfig } from "axios";
-import axios from "axios";
-import queryString from "query-string";
 // import { Modal } from "@frontend/mobile/shared/ui";
-
 // import * as Sentry from "@sentry/react";
-import i18next from "i18next";
+import {alertModal} from "../alertModal";
+import {runAxios} from "./runAxios";
+
 
 export interface CustomAxiosError {
   status: any;
@@ -27,60 +26,11 @@ const axiosBaseQuery =
         unknown
     > =>
     async ({ url, method, data, params, headers }) => {
-        let onUploadPercent = 0;
-        let onDownloadPercent = 0;
-        const getToken = (): string => {
-            const parsedQueryString = queryString.parse(window.location.search);
-            const TOKEN = parsedQueryString["token"]
-                ? (parsedQueryString["token"] as string)
-                : "";
-            if (!TOKEN) {
-                // console.log("error");
-            }
-            return TOKEN;
-        };
-        const token = getToken();
         try {
-            const result = await axios({
-                url: baseUrl + url,
-                method,
-                data,
-                params,
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: token,
-                    ...headers,
-                },
-                onUploadProgress: (progressEvent) => {
-                    // console.log({ progressEvent });
-                    if (progressEvent.lengthComputable) {
-                        const complete =
-                            ((progressEvent.loaded / progressEvent.total) *
-                                100) |
-                            0;
-                        onUploadPercent = complete;
-                        if (complete >= 100) {
-                            onUploadPercent = 0;
-                        }
-                        // console.log("baseUrl + url: ", baseUrl + url);
-                        // console.log("percent", onUploadPercent);
-                    }
-                },
-                onDownloadProgress: function (progressEvent) {
-                    // 對原生進度事件的處理
-                    onDownloadPercent =
-                        (progressEvent.loaded / progressEvent.total) * 100; // 計算進度
-                    const loadingText = "進度：" + onDownloadPercent + "%";
-                    // console.log(loadingText);
-                },
-            });
-            return {
-                data: result.data,
-                onUploadProgress: onUploadPercent,
-                onDownloadProgress: onDownloadPercent,
-            };
+            const resultData = runAxios(baseUrl, url, method, data, params, headers);
+            return resultData
         } catch (axiosError) {
-            console.log("axiosError", axiosError);
+            // console.log("axiosError", axiosError);
             const err = axiosError as AxiosError;
             // console.log("err.toJSON()", err.toJSON());
             const customError = JSON.parse(JSON.stringify(err.response?.data)) as {
@@ -112,7 +62,7 @@ const axiosBaseQuery =
               customError
             })
             // Sentry.captureException(error);
-            console.info(error);
+            // console.info(error);
             // throw axiosError;
             // alertModal(err.message);
             return {
@@ -124,19 +74,6 @@ const axiosBaseQuery =
         }
     };
 
-const alertModal = (message: string) => {
-  console.log("message", message);
-  // Modal.alert({
-  //   show: true,
-  //   mask: true,
-  //   title: i18next.t("modal.Error") as string,
-  //   content: message,
-  //   confirmText: i18next.t("modal.Confirm") as string,
-  //   maskClosable: true,
-  //   enableClose: false,
-  //   enableIcon: false,
-  // });
-}
 
 
 export default axiosBaseQuery;

@@ -1,8 +1,8 @@
-import {PageContentNotificationContainer} from "../PageContentNotificationContainer";
+import {NoticeSectionContainer} from "./index";
 
 export const NoticeUserInProgressAuthStatusSections = () => {
   return (
-    <PageContentNotificationContainer>
+    <NoticeSectionContainer>
       <div className={"text-orange-500 mb-2"}>Under review</div>
 
       <div className={"paragraph font-light mb-3"}>
@@ -11,6 +11,6 @@ export const NoticeUserInProgressAuthStatusSections = () => {
       <div className={"paragraph font-light mb-3"}>
         Please wait patiently for review.
       </div>
-    </PageContentNotificationContainer>
+    </NoticeSectionContainer>
   )
 }

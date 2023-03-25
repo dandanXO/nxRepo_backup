@@ -1,7 +1,9 @@
 import {Marquee} from "../../../components/layouts/Marquee";
+import {IndexPageProps} from "../../../store";
 
-export const MarqueeSection = () => {
+type Props = IndexPageProps;
+export const MarqueeSection = (props: Props) => {
   return (
-    <Marquee/>
+    <Marquee state={props.state}/>
   )
 }

@@ -1,8 +1,8 @@
-import {PageContentNotificationContainer} from "../PageContentNotificationContainer";
+import {NoticeSectionContainer} from "./index";
 
 export const NoticeUserAuthedEmptyQuotaSection = () => {
   return (
-    <PageContentNotificationContainer>
+    <NoticeSectionContainer>
 
       <div className={"text-orange-500 mb-2"}>Oops...</div>
 
@@ -16,6 +16,6 @@ export const NoticeUserAuthedEmptyQuotaSection = () => {
         If you have any questions, please contact our customer service center.
       </div>
 
-    </PageContentNotificationContainer>
+    </NoticeSectionContainer>
   )
 }

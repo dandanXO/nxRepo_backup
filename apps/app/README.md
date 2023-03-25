@@ -1,3 +1,6 @@
+* 差異化
+  * 元件差異化看能不能找到靈感
+    * [bit.dev](https://bit.dev/)
 * css
   * 使用 tailwind，在合理情況下去使用指定 px
   * [tailwind 常用類別](./docs/TAILWIND.md)

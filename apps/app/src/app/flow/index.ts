@@ -1,109 +1,152 @@
 import {select, spawn, call, put, all, fork, take, takeEvery, takeLeading, takeMaybe, takeLatest} from "redux-saga/effects";
-import {userLoginAction, userLoginSaga} from "./userLoginSaga";
-import {userLogoutAction, userLogoutSaga} from "./userLogoutSaga";
-import {createAction} from "@reduxjs/toolkit";
+import {createAction, createReducer, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { push } from 'connected-react-router'
+import {IndexServiceResponse, Service, UserServiceResponse} from "./IndexFlow";
+import moment from "moment-timezone";
 
-export function *AppSaga() {
-  // sagas will be executed in parallel.
-  // yield all([
-  //   userFlowSaga,
-  //   uiFlowSaga,
-  //   blockingSaga,
-  // ]);
-  // yield fork(nonBlockingSaga);
-  // yield spawn(alwaysRootAliveSaga);
-  //
-  // // other
-  // yield take(UserViewIndexPageAction, systemLoadPageSaga);
-  // yield take(UserTapPayment, systemLoadPaymentPageSaga)
-  // yield take(UserTapProfile, systemLoadProfilePageSaga)
+// NOTE: 使用者瀏覽頁面
+export const userViewIndexPageAction = createAction("userViewIndexPage");
+
+// type STATE = "ready" | "pending"| "success" | "reject";
+export enum USER_AUTH_STATE {
+  "ready",
+  "authing",
+  "reject",
+  "success",
 }
 
-const Services = {
-  loadIndexPage: () => {
-    //
+export enum ORDER_STATE {
+  "empty",
+  "reviewing",
+  "hasInComingOverdueOrder",
+  "hasOverdueOrder",
+  "reject"
+}
+
+export enum RISK_CONTROL_STATE {
+  "unknow",
+  "expired_refresh_able",
+  "expired_refresh_one_time",
+  "empty_quota",
+  "valid" ,
+}
+
+interface InitialState {
+  indexAPI: IndexServiceResponse | null;
+  user: {
+    state: USER_AUTH_STATE,
+    userName: string;
   },
-  loadRepaymentPage: () => {
-    //
+  order: {
+    state: ORDER_STATE;
   },
-  loadProfilePage: () => {
-    //
+  riskControl: {
+    state: RISK_CONTROL_STATE;
   }
 }
 
-type LoadIndexPageData = {
-  name: string;
+const initialState: InitialState = {
+  indexAPI: null,
+  user: {
+    state: USER_AUTH_STATE.ready,
+    userName: "",
+  },
+  order: {
+    state: ORDER_STATE.empty,
+  },
+  riskControl: {
+    state: RISK_CONTROL_STATE.unknow,
+  },
+  // TODO:
+  // indexPage: {
+  //   state: ""
+  // }
 }
-const UserViewIndexPageAction = createAction("UserViewIndexPageAction")
-function *systemLoadPageSaga() {
-  // yield take()
-  yield put(push('/load'));
-  const response: LoadIndexPageData = yield call(Services.loadIndexPage);
-  // yield put("setLoadIndexPage");
+// NOTICE: refactor me
+moment.tz.setDefault("Asia/Kolkata");
+
+// NOTE: PageRedux
+export const indexPageSlice = createSlice({
+  name: "indexPage",
+  initialState,
+  reducers: {
+    updateUserAPI: (state, action: PayloadAction<UserServiceResponse>) => {
+      state.user.userName = action.payload.userName;
+      if(action.payload.status === 0) {
+        state.user.state = USER_AUTH_STATE.ready;
+      } else if(action.payload.status === 1) {
+        state.user.state = USER_AUTH_STATE.success;
+      } else if(action.payload.status === 2) {
+        state.user.state = USER_AUTH_STATE.authing;
+      } else if(action.payload.status === 3) {
+        state.user.state = USER_AUTH_STATE.reject;
+      }
+    },
+    updateIndexAPI: (state, action: PayloadAction<IndexServiceResponse>) => {
+      state.indexAPI = action.payload;
+
+      // NOTICE: order
+      if(action.payload.payableRecords.length === 0) {
+        state.order.state = ORDER_STATE.empty
+
+      } else if (action.payload.payableRecords.length > 0) {
+
+        // NOTE: order priority
+        if(action.payload.payableRecords.some(order => order.overdue)) {
+          state.order.state = ORDER_STATE.hasOverdueOrder;
+        } else if(action.payload.payableRecords.some(order => {
+
+          const currentTime = moment();
+          const expireTime = moment(order.dueDate);
+          const isOverdue = expireTime.isBefore(currentTime);
+          return isOverdue;
+        })) {
+          state.order.state = ORDER_STATE.hasInComingOverdueOrder;
+
+        } else if(action.payload.orderUnderReview == true) {
+          state.order.state = ORDER_STATE.reviewing;
+
+        } else if(action.payload.riskReject === true && action.payload.refreshable === false) {
+          state.order.state = ORDER_STATE.reject;
+        }
+      }
+
+      // NOTICE: risk control
+      const currentTime = moment();
+      const expireTime = moment(action.payload.offerExpireTime);
+      const isRiskControlOverdue = expireTime.isBefore(currentTime);
+      if(isRiskControlOverdue) {
+        if(action.payload.refreshable && action.payload.refreshOverRetry === false) {
+          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+        } else if(action.payload.refreshable && action.payload.refreshOverRetry === true) {
+          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+        }
+      } else {
+        if(action.payload.availableAmount === 0) {
+          state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+        } else {
+          state.riskControl.state = RISK_CONTROL_STATE.valid;
+        }
+      }
+    },
+  }
+})
+
+export function *AppSaga() {
+  // yield all([
+  //   userViewIndexPageSaga,
+  // ])
+
+  // yield takeEvery(userViewIndexPageAction().type, userViewIndexPageSaga);
+  yield userViewIndexPageSaga();
 }
 
-const UserTapPayment = createAction("UserTapPayment")
-const UserTapOrder = createAction("UserTapOrder")
-function *systemLoadPaymentPageSaga() {
-  yield put(push('/payment'));
-  const response: LoadIndexPageData = yield call(Services.loadRepaymentPage);
-  // yield take(UserTapOrder, UserTapOrderSaga);
+function *userViewIndexPageSaga() {
+  const userResponse: UserServiceResponse = yield call(Service.UserService, {});
+  yield put(indexPageSlice.actions.updateUserAPI(userResponse));
+
+  const indexResponse: IndexServiceResponse = yield call(Service.IndexService, {dummy: 1});
+  yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
 
 }
-const appOpenRepaymentModal = createAction("appOpenRepaymentModal");
-const appCloseRepaymentModal = createAction("appCloseRepaymentModal");
-function *UserTapOrderSaga() {
-  yield put(appOpenRepaymentModal);
-  // yield take(appCloseRepaymentModal, function *() {
-    //
-  // });
-}
 
-
-const UserTapProfile = createAction("UserTapProfile")
-function *systemLoadProfilePageSaga() {
-  yield put(push('/profile'));
-  const response: LoadIndexPageData = yield call(Services.loadProfilePage)
-}
-
-// NOTICE: system saga
-
-function *systemFlowSaga() {
-  //
-}
-
-// NOTICE: 跟 UI 無關的 Action Saga Style
-function *userFlowSaga() {
-  // NOTE: Authentication
-  yield takeLatest(userLoginAction, userLoginSaga);
-  yield takeLatest(userLogoutAction, userLogoutSaga);
-
-  /*
-  從 query 取得 token
-  使用 token 訪問其他 API。
-   */
-
-  // 使用者點擊
-  // 使用者滑動
-}
-
-// NOTICE: 跟 UI 有關的 Action Saga Style
-function *uiFlowSaga() {
-  // 當收到首頁轉倒，到首頁
-}
-
-function *blockingSaga() {
-  // 當 modal loading，離開 APP 會噴訊息。
-}
-function *nonBlockingSaga() {
-  // 當情況Ａ，去背景發送資料
-}
-
-function *alwaysRootAliveSaga() {
-  // 當發送失敗後，APP不當掉
-}
-
-function *alwaysEveryAliveSaga() {
-  //
-}

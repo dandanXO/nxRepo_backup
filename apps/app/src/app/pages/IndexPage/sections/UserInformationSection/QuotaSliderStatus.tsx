@@ -1,9 +1,17 @@
 import ReactSlider from "./ReactSlider";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {formatPrice} from "../../../../modules/formatPrice";
+import {IndexPageProps} from "../../../../store";
 
-export const QuotaSliderStatus = () => {
-  const [currentQuotaValue, setCurrentQuotaValue] = useState(6400);
+type Props = IndexPageProps;
+
+export const QuotaSliderStatus = (props: Props) => {
+  const [currentQuotaValue, setCurrentQuotaValue] = useState(0);
+
+  useEffect(() => {
+    setCurrentQuotaValue(props.state.indexAPI?.quotaBar.current || 0);
+  }, [props.state.indexAPI?.quotaBar])
+
   return (
     <div className={"mb-4 text-center"}>
       <div className={"h-[60px]"}>
@@ -11,7 +19,7 @@ export const QuotaSliderStatus = () => {
         <div className={"flex flex-col justify-center items-center mb"}>
           <div className="w-full flex flex-row justify-between mb-2">
             <div className="text-white text-sm font-light">You can get up to</div>
-            <div className="text-white font-medium">₹ {formatPrice(currentQuotaValue)} / ${formatPrice(9600)}</div>
+            <div className="text-white font-medium">₹ {formatPrice(currentQuotaValue)} / ${formatPrice(props.state.indexAPI?.quotaBar.max || 0)}</div>
           </div>
 
           <div className="slider mb-1">
@@ -29,9 +37,9 @@ export const QuotaSliderStatus = () => {
                   </div>
                 )
               }}
-              min={0}
-              max={9600}
-              step={1000}
+              min={props.state.indexAPI?.quotaBar.min || 0}
+              max={props.state.indexAPI?.quotaBar.max || 0}
+              step={props.state.indexAPI?.quotaBar.serial || 0}
               value={currentQuotaValue}
               onChange={(value: any, index: any) => {
                 setCurrentQuotaValue(value);
@@ -49,7 +57,8 @@ export const QuotaSliderStatus = () => {
         {/*NOTE: ExclusiveLoanOffer*/}
         <div className={"p-2 bg-white rounded-lg relative top-1 flex flex-row justify-between shadow-md shadow-gray-300"}>
           <div>Exclusive Personal Loan offer</div>
-          <div className={"text-orange-500"}>13:20:29</div>
+          {/*TODO:*/}
+          <div className={"text-orange-500"}>TODO: 13:20:29</div>
         </div>
 
       </div>

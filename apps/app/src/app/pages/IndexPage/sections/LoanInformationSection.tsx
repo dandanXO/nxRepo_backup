@@ -1,6 +1,10 @@
 import {AiOutlineFieldTime, GiPowderBag} from "react-icons/all"
+import {IndexPageProps} from "../../../store";
 
-export const LoanInformationSection = () => {
+type Props = IndexPageProps;
+
+// TODO
+export const LoanInformationSection = (props: Props) => {
   return (
     <div className={"ad flex flex-row justify-around"}>
       <div className={"flex flex-row"}>
