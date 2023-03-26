@@ -1,3 +1,4 @@
+// NOTICE: refactor me
 const APP_IDENTIFICATION = "[apps/app]";
 const infoLog = (message, rest) => {
   if(!rest) {
@@ -5,7 +6,6 @@ const infoLog = (message, rest) => {
   } else {
     console.info(`${APP_IDENTIFICATION} ${message}`, rest);
   }
-
 }
 
 infoLog("build");
