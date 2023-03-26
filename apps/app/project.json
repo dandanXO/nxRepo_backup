@@ -43,13 +43,49 @@
         }
       }
     },
-    "serve": {
+    "serve-in": {
       "executor": "@nrwl/web:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "app:build",
         "hmr": true,
         "proxyConfig": "apps/app/build/proxy.config.in.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "app:build:development"
+        },
+        "production": {
+          "buildTarget": "app:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "serve-pk": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "app:build",
+        "hmr": true,
+        "proxyConfig": "apps/app/build/proxy.config.pk.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "app:build:development"
+        },
+        "production": {
+          "buildTarget": "app:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "serve-bd": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "app:build",
+        "hmr": true,
+        "proxyConfig": "apps/app/build/proxy.config.bd.json"
       },
       "configurations": {
         "development": {
