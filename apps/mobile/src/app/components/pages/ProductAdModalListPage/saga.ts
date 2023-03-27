@@ -42,7 +42,9 @@ function *getLoanRecommendSaga(action: any) {
     const currentTime = moment().tz("Asia/Kolkata");
     // NOTICE: ERROR
     // const expireTime = moment(resultData.quotaExpireTime?.split(".")[0].replace("T", " ")).tz("Asia/Kolkata").utc()
-    const expireTime = moment(resultData.quotaExpireTime).tz("Asia/Kolkata");
+    // const expireTime = moment(resultData.quotaExpireTime).tz("Asia/Kolkata");
+    // NOTE: resultData.quotaExpireTime 已經是印度時區了
+    const expireTime = moment(resultData.quotaExpireTime);
 
     // console.log("[eric] currentTime.format", currentTime.format())
     // console.log("[eric] expireTime.format", expireTime.format())
