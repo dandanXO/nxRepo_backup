@@ -8,7 +8,7 @@ export const UserInfoSupportField = (props: Props) => {
   return (
     <div className={"w-full flex flex-row justify-between "}>
       <div className={"left-section flex flex-row"}>
-        <div className={"welcome pr-2 font-medium"}>Welcome {props.state.user.userName}</div>
+        <div data-testing-id="welcome" className={"welcome pr-2 font-medium"}>Welcome {props.state.user.userName}</div>
         <div className={"hide-icon"}>
           <BiHide/>
         </div>

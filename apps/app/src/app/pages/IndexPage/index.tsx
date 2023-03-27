@@ -6,13 +6,13 @@ import {MarqueeSection} from "./sections/MarqueeSection";
 import {Button} from "../../components/layouts/Button";
 import {PageContent} from "../../components/layouts/PageContent";
 import {TipsSection} from "./sections/TipsSection";
-import {NoticeOrderRejectedSection} from "./sections/NoticeSectionContainer/NoticeOrderRejectedSection";
+import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
 import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
-import {NoticeUserAuthedEmptyQuotaSection} from "./sections/NoticeSectionContainer/NoticeUserAuthedEmptyQuotaSection";
+import {NoticeUserAuthedEmptyQuotaSection} from "./sections/NoticeSection/NoticeUserAuthedEmptyQuotaSection";
 import {
   NoticeUserInProgressAuthStatusSections
-} from "./sections/NoticeSectionContainer/NoticeUserInProgressAuthStatusSections";
-import {NoticeUserRejectedSection} from "./sections/NoticeSectionContainer/NoticeUserRejectedSection";
+} from "./sections/NoticeSection/NoticeUserInProgressAuthStatusSections";
+import {NoticeUserRejectedSection} from "./sections/NoticeSection/NoticeUserRejectedSection";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../flow";

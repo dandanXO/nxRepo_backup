@@ -6,7 +6,7 @@ type Props = IndexPageProps;
 // TODO
 export const LoanInformationSection = (props: Props) => {
   return (
-    <div className={"ad flex flex-row justify-around"}>
+    <div data-testing-id="adProductInfo" className={"ad flex flex-row justify-around"}>
       <div className={"flex flex-row"}>
         <div className={"flex flex-col justify-center"}>
           <div className={"mr-3"}>
