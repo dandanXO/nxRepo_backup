@@ -132,7 +132,8 @@ describe("iphone-3一鍵快速借款", () => {
     // console.log("[testing]aaaa", moment("2023-03-17T13:56:44").format())
     // console.log("[testing]aaaa", moment("2023-03-17T13:56:44").tz("Asia/Kolkata").format())
 
-    cy.viewport('iphone-3')
+    // cy.viewport('iphone-3')
+    cy.viewport(320, 300);
     cy.visit("/product-ad-modal-list?token=45d9ab38654247e88406fa06308fa604");
     // cy.intercept("**.sentry.io**", {
     //   statusCode: 200,

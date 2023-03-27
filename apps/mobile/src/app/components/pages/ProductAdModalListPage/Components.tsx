@@ -77,7 +77,7 @@ export const StyledSlider = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 4px;
     .label {
       //font-size: 16px;
       font-weight: lighter;
@@ -141,7 +141,7 @@ export const StyledSlider = styled.div`
   .slider-labels {
     width: 100%;
     display: flex;
-    margin-top: 16px;
+    margin-top: 4px;
     justify-content: space-between;
     color: #F58B10;
     font-weight: lighter;
@@ -166,7 +166,7 @@ export const Countdown = styled.div`
   border-radius: 8px;
   border: 1.5px solid #F82626;
   background: #fff;
-  padding: 8px;
+  padding: 4px;
 
   width: 85%;
 
@@ -178,7 +178,7 @@ export const Countdown = styled.div`
   .countdown-info {
     margin-bottom: 4px;
     .title {
-
+      font-size: 14px;
     }
     .timer {
 
@@ -214,6 +214,8 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 export const Footer = styled.div`
+  position: sticky;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
