@@ -7,8 +7,7 @@ import { StrictMode } from 'react';
 // import 'virtual:windi.css'
 
 // NOTE: tailwind
-// import "./input.css";
-import "../dist/output.css"
+import "./style.css";
 
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';

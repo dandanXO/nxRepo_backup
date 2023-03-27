@@ -24,14 +24,14 @@ infoLog("env", Cypress.env());
 describe('IndexPage', () => {
   beforeEach(() => {
     cy.viewport("iphone-3")
-    cy.visit("/")
+    cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   })
 
   afterEach(() => {
     //
   })
 
-  it("status: 用戶未認證", () => {
+  it.only("status: 用戶未認證", () => {
     // NOTE: Given
     // const userServiceResponse = User
     const indexServiceResponse: IndexServiceResponse = {
