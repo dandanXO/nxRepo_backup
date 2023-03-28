@@ -66,6 +66,7 @@ export const IndexPage = () => {
       indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
       indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time,
       indexPageState.order.state === ORDER_STATE.reject,
+      indexPageState.user.state === USER_AUTH_STATE.ready,
       indexPageState.user.state === USER_AUTH_STATE.authing,
       indexPageState.user.state === USER_AUTH_STATE.reject,
     ].some(condition => condition === true);
