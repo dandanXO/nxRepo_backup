@@ -3,9 +3,10 @@ import Divider from "../../components/Divider";
 import ListItem from "../../components/ListItem";
 import Button from "../../components/Button";
 import { AmountPaidIcon, } from "@frontend/mobile/shared/ui";
-import { Link,Outlet  } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 export const LoanRecordDetailPage = (props: any) => {
-
+    const location = useLocation();
+    console.log(location)
     const productName = 'CCC Loan';
     const orderNo = 'no-3632791101642108-1';
     const dueDate = '17-03-2023';

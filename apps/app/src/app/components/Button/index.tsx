@@ -7,21 +7,25 @@ interface ButtonProps {
     padding?: string;
     border?: string
     width?: string;
-    color?:string;
-    onClick?:()=>void
+    height?: string;
+    color?: string;
+    style?: object;
+    onClick?: () => void
 }
 
 
 const Button = ({ fontSize = 'sm',
- buttonText = '', 
- border = '',
-  padding = 'p-3', 
-  backgroundColor = 'bg-orange-500', 
-  width = 'w-auto' ,
-  color='text-orange-100',
-  onClick
+    buttonText = '',
+    border = '',
+    padding = 'p-3',
+    backgroundColor = 'bg-orange-500',
+    width = 'w-auto',
+    height = 'h-auto',
+    color = 'text-orange-100',
+    style = {},
+    onClick
 }: ButtonProps) => {
-    return <button onClick={onClick} className={`text-${fontSize} ${border} ${padding} ${width} ${backgroundColor} ${color} rounded-lg text-center leading-none`}>
+    return <button style={style} onClick={onClick} className={`text-${fontSize} ${style} ${border} ${padding} ${width} ${height} ${backgroundColor} ${color} rounded-lg text-center leading-0`}>
         {buttonText}
     </button>
 }
