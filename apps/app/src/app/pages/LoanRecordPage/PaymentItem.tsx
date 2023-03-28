@@ -5,61 +5,64 @@ import Logo from './amount_paid_icon.svg';
 import Divider from "../../components/Divider";
 import { useEffect, useState } from "react";
 import ListItem from "../../components/ListItem";
-const PaymentItem = (props: any) => {
+import { GetLoanRecord } from "../../api/types/getLoanRecordList";
+import { environment } from "../../../environments/environment";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+
+const PaymentItem = (props: GetLoanRecord) => {
+
+    const navigate = useNavigate();
+
+    const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '', loanDate = '', repayRecords = [], overdueDays = '', penaltyInterest = '' } = props;
 
 
-    const logoSrc = Logo;
-    const loanName = 'CCC Loan';
-    const { paymentStatus= 'Extend'} = props;
-    // const paymentStatus = 'Extend';
-    const loan = '10,000';
-    const due = 'Due 10/03/2023';
+    const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
+    const repaymentAmount = 'repaymentAmount';
 
-    const orderNo = 'no-3632791101642108-1';
-    const loanDate = '10-03-2023';
-    const dueDate = '17-03-2023';
-    const repaymentDate = '17-03-2023';
-    const loanAmount = '₹ 4,800.00';
-    const overdueDays = '0';
-    const overdueFee = '₹ 0.00';
-    const repaymentAmount = '₹ 4,800.00';
+    const statusEnum = {
+        'OVERDUE': { text: 'Overdue', color: 'text-red-500' },
+        'PAY_OFF': { text: 'Pay off', color: 'text-sky-400' },
+        'UNPAID': { text: 'Unpaid', color: '' },
+        'PROCESSING': { text: 'Processing', color: '' },
+        'REJECTED': { text: 'Rejected', color: '' },
+        'EXTEND': { text: 'Expend', color: 'text-sky-600' },
+    } as { [key: string]: { text: string; color: string } }
 
 
-    const [collapse, setCollapse] = useState(true);
+    const [collapse, setCollapse] = useState(false);
     const handleCollapse = () => {
         setCollapse(!collapse);
     };
 
-
-    return <div className={`border-solid border-slate-200 border px-3 pt-4 pb-3 mx-4 my-5 rounded-lg`}>
-        <div className="flex flex-row justify-between mb-2">
+    return <div className={`border-solid border-slate-200 border px-2 pt-4 pb-3 mx-4 mb-5 rounded-lg`}>
+        <div className="flex flex-row justify-between mb-2 px-2">
             <div className="flex flex-row items-center">
-                <div><img className="mr-2" src={logoSrc} alt="logo" /></div><div className="text-sm font-bold">{loanName}</div>
+                <div className="w-6 h-6 mr-2 "><img src={iconUrl} alt="logo" /></div><div className="text-sm font-bold">{productName ?? ''}</div>
             </div>
-            <div className="text-xs font-bold">{paymentStatus}</div>
-
+            <div className={`text-xs font-bold ${statusEnum[status].color}`}>{status ? statusEnum[status].text : ''}</div>
         </div>
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between px-2 items-center">
             <div className="flex flex-col ">
-                <div className="text-base font-bold mb-1">$ {loan}</div>
-                <div className="text-xs">{due}</div>
+                <div className="text-base font-bold mb-1">{`${environment.currency} ${loanAmount ?? ''}`}</div>
+                <div className="text-xs">{`Due ${moment(dueDate).format('L') ?? ''}`}</div>
             </div>
-            <Button buttonText="Repay" width={'w-20'} fontSize="xs"/>
+            {status !== "PAY_OFF" && <Button style={{lineHeight:0}} onClick={()=>navigate('/loan-record-detail',{ state: {orderNo} })} buttonText="Repay" width={'w-20'} height={'h-8'} fontSize="xs" />}
         </div>
-        <Divider/>
+        <Divider />
         {collapse && <div className="px-3">
-            <ListItem title={'No.'} text={orderNo} titleColor="text-slate-400" />
-            <ListItem title={'Loan Date'} text={loanDate} titleColor="text-slate-400" />
-            <ListItem title={'Due Date'} text={dueDate} titleColor="text-slate-400" />
-            {paymentStatus === "Done" && <ListItem title={'Repayment Date'} text={repaymentDate} titleColor="text-slate-400" />}
-            <ListItem title={'Loan Amount'} text={loanAmount} titleColor="text-slate-400" />
-            <ListItem title={'Overdue Days'} text={overdueDays} titleColor="text-slate-400" />
-            <ListItem title={'Overdue Fee'} text={overdueFee} titleColor="text-slate-400" />
-            <Divider/>
-            <ListItem title={'Repayment Amount'} text={repaymentAmount} titleColor="text-slate-400" fontWeight="font-bold"/>
-            <Divider/>
+            <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-slate-400" />
+            <ListItem title={'Loan Date'} text={loanDate ?? ''} titleColor="text-slate-400" />
+            <ListItem title={'Due Date'} text={dueDate ?? ''} titleColor="text-slate-400" />
+            {status === "PAY_OFF" && <ListItem title={'Repayment Date'} text={repaymentDate ?? ''} titleColor="text-slate-400" />}
+            <ListItem title={'Loan Amount'} text={`${environment.currency} ${loanAmount ?? ''}`} titleColor="text-slate-400" />
+            <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+            <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+            <Divider />
+            <ListItem title={'Repayment Amount'} text={`${environment.currency} ${repaymentAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+            <Divider />
         </div>}
- 
+
         <div className={'flex flex-row items-center justify-center mt-3'} onClick={handleCollapse}>
             <div className={'text-xs text-slate-400 mr-2'}>{'view details'}</div>
             <div className={'w-2.5'}>

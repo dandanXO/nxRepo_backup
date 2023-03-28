@@ -170,6 +170,7 @@ class OrderDetail extends Component{
         this.state = {
             remark: '',
             isShowBtn,
+            repaymentLinkIsProhibited: false,
         };
         const _this = this;
         this.overdueRecordColumns = [
@@ -245,14 +246,14 @@ class OrderDetail extends Component{
     }
 
     renderBtn = () => {
-        const { isShowBtn } = this.state;
+        const { isShowBtn, repaymentLinkIsProhibited } = this.state;
         const ele = isShowBtn ? <Button type={'primary'} onClick={this.handleBtnClick}><FormattedMessage id="windowPage.add.collect.record" /></Button> : null;
         return (
             <div className={styles.btnWrapper}>
                 {ele}
-                <Button onClick={this.openRepaymentModel} type={'primary'}><FormattedMessage id="page.table.operation.send.partial.repayment" /></Button>
-                <Button onClick={this.sendPaymentLinks} type={'primary'}><FormattedMessage id="page.table.operation.send.payment.links" /></Button>
-                <Button onClick={this.sendExtensionLinks} type={'primary'}><FormattedMessage id="page.table.operation.send.extension.links" /></Button>
+                <Button onClick={this.openRepaymentModel} type={'primary'} disabled={!!repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.partial.repayment" /></Button>
+                <Button onClick={this.sendPaymentLinks} type={'primary'} disabled={!!repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.payment.links" /></Button>
+                <Button onClick={this.sendExtensionLinks} type={'primary'} disabled={!!repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.extension.links" /></Button>
                 <Button onClick={this.backList}><FormattedMessage id="windowPage.back" /></Button>
             </div>
         );
@@ -341,7 +342,7 @@ class OrderDetail extends Component{
     }
     //渲染客户信息
     renderUserInfo = () => {
-        const { orderData: { userInfo = {} }, intl } = this.props;  
+        const { orderData: { userInfo = {} }, intl } = this.props;
         return (
             <div>
                 <Card className={styles.cardBackground} type={'inner'} title={intl.formatMessage({id : "windowPage.person.info"})}>
@@ -480,6 +481,20 @@ class OrderDetail extends Component{
         const params = match['params']['id'] || '';
         getOrderData({ overdueId: params }, { userId });
         getAllUrgeRecord({ overdueId: params });
+        const _this = this;
+
+        loadRepaymentLinkFlag();
+
+        function loadRepaymentLinkFlag() {
+          axios({
+            url: '/hs/admin/orderOverdue/repayment-link-is-prohibited',
+            method: 'get'
+          }).then((res) => {
+            _this.setState({
+              repaymentLinkIsProhibited: res
+            });
+          });
+        }
     }
     componentWillUnmount() {
         const { setOrderData } = this.props;

@@ -1,8 +1,22 @@
 import BankCard from "./BankCard";
 import NoDataIcon from '../../components/images/NoData.svg';
 import { useNavigate } from "react-router-dom";
+import { useLazyGetBankCardListQuery } from "../../api";
+import { useEffect } from "react";
 export const BankCardListPage = () => {
     const navigate=useNavigate();
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetBankCardListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+    useEffect(()=>{
+        triggerGetList(null);
+    },[])
+
+    useEffect(()=>{
+        console.log('currentData',currentData)
+    },[currentData])
     const bankList = [
         { cardName: 'A New Card', cardStatus: 'Primary', cardNo: '**** **** **** 6789' },
         { cardName: 'yyb Pay', cardStatus: '', cardNo: '**** **** **** 3451' }
