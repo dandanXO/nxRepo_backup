@@ -23,6 +23,10 @@ sagaMiddleware.run(AppSaga)
 export type RootState = ReturnType<typeof appStore.getState>
 export type AppDispatch = typeof appStore.dispatch
 
+appStore.subscribe(() => {
+  console.log(appStore.getState())
+
+})
 
 
 export type IndexPageProps = {

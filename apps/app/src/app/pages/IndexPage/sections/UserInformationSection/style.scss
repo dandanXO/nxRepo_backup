@@ -20,6 +20,11 @@ $slider-button-inner-size: 10px;
     height: $slider-height;
     border-radius: 8px;
   }
+  .quota-slider-track-disable-1 {
+    background: #FFFFFF;
+    height: $slider-height;
+    border-radius: 8px;
+  }
   .example-track {
     //width: 100px;
     //background: lightcoral;
@@ -43,6 +48,12 @@ $slider-button-inner-size: 10px;
     // NOTE: 拉霸按鈕-內圓
     .quota-slider-thumb-inner {
       background: #33AF85;
+      width: $slider-button-inner-size;
+      height: $slider-button-inner-size;
+      border-radius: 50%;
+    }
+    .quota-slider-thumb-inner-disable {
+      background: #686868;
       width: $slider-button-inner-size;
       height: $slider-button-inner-size;
       border-radius: 50%;

@@ -9,13 +9,13 @@ class IndexPagePo {
     return cy.get("[data-testing-id='loanableAmount']")
   }
   adProductInfo() {
-    return cy.get("[data-testing-id='loanableAmount']")
-  }
-  adBanner() {
-    return cy.get("[data-testing-id='adBanner']")
+    return cy.get("[data-testing-id='adProductInfo']")
   }
   getMyLimitButton() {
     return cy.get("[data-testing-id='limit-button']");
+  }
+  adBanner() {
+    return cy.get("[data-testing-id='adBanner']")
   }
 }
 

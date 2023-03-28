@@ -31,7 +31,7 @@ export const TipsSection = (props: Props) => {
       )
   } else if(
     props.state.user.state === USER_AUTH_STATE.success &&
-    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time
+    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
   ){
     messageComponent =  (
       <>

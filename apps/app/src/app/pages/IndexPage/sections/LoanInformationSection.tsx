@@ -15,7 +15,8 @@ export const LoanInformationSection = (props: Props) => {
         </div>
         <div className={"info pt-1"}>
           <div className={"name"}>Interest rate</div>
-          <div className={"value text-2xl"}>1.2-2.8%</div>
+          {/*NOTICE: FIX to text-md because admin*/}
+          <div className={"value text-md"}>{props.state.openIndexAPI?.interestRate}</div>
         </div>
       </div>
       <div className={"flex flex-row justify-center"}>
@@ -26,7 +27,8 @@ export const LoanInformationSection = (props: Props) => {
         </div>
         <div className={"info pt-1"}>
           <div className={"name"}>Loan Term</div>
-          <div className={"value text-2xl"}>91+ days</div>
+          {/*NOTICE: FIX to text-md because admin*/}
+          <div className={"value text-md"}>{props.state.openIndexAPI?.loanTerms}</div>
         </div>
       </div>
     </div>

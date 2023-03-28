@@ -7,8 +7,9 @@ import {UserInfoSupportField} from "./UserInfoSupportField";
 import {IndexPageProps} from "../../../../store";
 import {ORDER_STATE, USER_AUTH_STATE} from "../../../../flow";
 import {UnAuthenticationStatus} from "./UnAuthenticationStatus";
+import {PageState} from "../../index";
 
-type Props = IndexPageProps;
+type Props = IndexPageProps & PageState;
 
 export const UserInformationSection = (props: Props) => {
   return (
@@ -20,20 +21,22 @@ export const UserInformationSection = (props: Props) => {
 
       <div className={"w-full mb-3"}>
         {props.state.user.state === USER_AUTH_STATE.success &&
-          props.state.order.state === ORDER_STATE.hasOverdueOrder && (
+          (
+            props.state.order.state === ORDER_STATE.hasInComingOverdueOrder ||
+            props.state.order.state === ORDER_STATE.hasOverdueOrder
+          ) && (
             // TODO
             <LatestOrderStatus state={props.state}/>
         )}
       </div>
 
-      <StatusContainer>
+      <StatusContainer state={props.state} pageState={props.pageState}>
         {props.state.user.state === USER_AUTH_STATE.ready && (
           <UnAuthenticationStatus state={props.state}/>
         )}
         {props.state.user.state !== USER_AUTH_STATE.ready && (
           <QuotaSliderStatus state={props.state}/>
         )}
-
       </StatusContainer>
     </div>
   )

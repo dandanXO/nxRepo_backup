@@ -1,7 +1,11 @@
 // NOTICE: refactor me
-import {IndexServiceResponse} from "../../../app/src/app/flow/IndexFlow";
-import {indexPagePo} from "../support/indexPage.po";
+import {GetOpenIndexResponse, IndexServiceResponse, UserServiceResponse} from "../../../app/src/app/flow/service";
 
+import {indexPagePo} from "../support/indexPage.po";
+import {indexPageSlice, USER_AUTH_STATE} from "../../../app/src/app/flow";
+import moment from "moment-timezone"
+
+const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
 const infoLog = (message, rest) => {
   if(!rest) {
@@ -21,19 +25,98 @@ infoLog("env", Cypress.env());
 //
 // });
 
+function visitIndexPage() {
+  // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
+  cy.visit("/??pageNumber=0&pageSize=500&status=UNPAID&token=b5d47535879b4d3daddd35437c8ddbdd")
+}
 describe('IndexPage', () => {
   beforeEach(() => {
-    cy.viewport("iphone-3")
-    cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
+    // cy.viewport("iphone-5")
+    // NOTE: figma 360, 640
+    cy.viewport(360, 640);
+    // NOTICE: 不能在這邊放 visit ，不然 other each 會 intercept 不到 request
   })
 
   afterEach(() => {
-    //
+    // cy.screenshot();
   })
 
-  it.only("status: 用戶未認證", () => {
+  it("status: 用戶未認證", () => {
+    // NOTE: Given - 訪客
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.ready,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
     // NOTE: Given
-    // const userServiceResponse = User
+    const openIndexServiceResponse: GetOpenIndexResponse = {
+      "popupUrl": null,
+      "marquee": "Borrow now for discounts, get certified immediately to earn the discounts.",
+      "loanQuotaAmount": "160-9000",
+      "interestRate": "15 - 40% / day",
+      "loanTerms": "10-50 Days",
+      "banners": [
+        {
+          "imageUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/ad_logo/2471912.jpg",
+          "jumpUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/dummy/popup.html"
+        }
+      ],
+      "customerServiceUrl": null,
+      "forceApplyForNew": false
+    }
+    cy.intercept("get", "/api/v3/open-index**", {
+      statusCode: 200,
+      body: openIndexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+    visitIndexPage();
+
+    // NOTE: When
+    // NOTE: then
+    // 看到跑馬燈
+    indexPagePo.marquee().contains(openIndexServiceResponse.marquee)
+    // 看到 welcome 包含姓名、客服 Button
+    indexPagePo.welcome().contains(userServiceResponse.userName)
+    // 看到可借款額度區間
+    indexPagePo.loanableAmount().contains(openIndexServiceResponse.loanQuotaAmount)
+    // 看到廣告利息與借貸天數
+    // indexPagePo.adProductInfo()
+    // NOTE: important 可點選按鈕去認證
+    indexPagePo.getMyLimitButton().should("be.visible")
+    // 看到廣告區塊
+    indexPagePo.adBanner().should("be.visible")
+  })
+
+  it("status: 用戶認證中", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.authing,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
       "totalAmount": 15000,
       "usedAmount": 15000,
@@ -113,24 +196,20 @@ describe('IndexPage', () => {
       "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
       "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
     }
-    cy.intercept("/index", indexServiceResponse);
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
 
-    // NOTE: When
+    visitIndexPage();
+
     // NOTE: then
     // 看到跑馬燈
-    indexPagePo.marquee().contains(indexServiceResponse.marquee);
+    indexPagePo.marquee().should("be.visible");
     // 看到 welcome 包含姓名、客服 Button
-    // indexPagePo.welcome().contains()
-    // 看到可借款額度區間
-    // 看到廣告利息與借貸天數
-    // NOTE: important 可點選按鈕去認證
-    // 看到廣告區塊
-  })
-
-  it("status: 用戶認證中", () => {
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
+    indexPagePo.welcome().contains(userServiceResponse.userName)
     // NOTE: important 看到反灰無法使用的可借款額度拉霸、歸零的倒數計計時
     // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸按鈕在最右邊
     // NOTE: important 看到用戶認證中訊息
@@ -138,6 +217,23 @@ describe('IndexPage', () => {
   })
 
   it("status: 用戶認證被拒絕", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.reject,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+    visitIndexPage();
+
     // NOTE: then
     // 看到跑馬燈
     // 看到 welcome 包含姓名、客服 Button
@@ -161,6 +257,110 @@ describe('IndexPage', () => {
   // })
 
   it("status: 用戶已認證、有3天即將到期的訂單", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "riskReject": false,
+      "refreshable": true,
+      "refreshOverRetry": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": "2023-03-28T08:10:24",
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(3, "days").add("1", "minutes"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+    visitIndexPage();
     // NOTE: then
     // 看到跑馬燈
     // 看到 welcome 包含姓名、客服 Button
@@ -175,6 +375,110 @@ describe('IndexPage', () => {
   })
 
   it("status: 用戶已認證、有逾期的訂單", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "riskReject": false,
+      "refreshable": true,
+      "refreshOverRetry": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": "2023-03-28T08:10:24",
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(-1, "second"),
+          "overdue": true,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+    visitIndexPage();
     // NOTE: then
     // 看到跑馬燈
     // 看到 welcome 包含姓名、客服 Button
@@ -191,6 +495,112 @@ describe('IndexPage', () => {
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   it("status: 用戶已認證、有訂單被拒絕。情境：之前有訂單，最近一次訂單被拒。", () => {
+
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "riskReject": true,
+      "refreshable": true,
+      "refreshOverRetry": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": "2023-03-28T08:10:24",
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(-1, "second"),
+          "overdue": true,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+
+    visitIndexPage();
     // NOTE: then
     // 看到跑馬燈
     // 看到 welcome 包含姓名、客服 Button
@@ -202,7 +612,114 @@ describe('IndexPage', () => {
 
 
   // NOTICE: 風控相關
-  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。", () => {
+  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      // NOTICE: 優先權最高
+      "riskReject": false,
+      "refreshable": true,
+      "refreshOverRetry": true,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+
+    visitIndexPage();
+
     // NOTE: then
     // 看到跑馬燈
     // 看到 welcome 包含姓名、客服 Button
@@ -223,7 +740,117 @@ describe('IndexPage', () => {
 
   })
 
-  it("status: 用戶已認證、風控額度時間無效，已經重新獲取信用額度過一次。", () => {
+  // NOTE: 使用者自行點擊獲取額度
+  it("status: 用戶已認證、風控額度時間無效，使用者自己已經重新獲取信用額度過一次。", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      // NOTICE: 優先權最高
+      "riskReject": false,
+      "refreshable": true,
+      "refreshOverRetry": true,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+    visitIndexPage();
+
+    // NOTICE: 模擬用戶點擊
+    // cy.get("[data-testing-id='reacquireCredit']").click();
+
     // NOTE: then
     // 看到跑馬燈
     // 看到 welcome 包含姓名、客服 Button
@@ -232,9 +859,116 @@ describe('IndexPage', () => {
     // 正常隨意顯示 Loan Over View
     // NOTE: important 看到下方 tips 額度相關訊息
     // NOTE: important 看到反灰無法點擊的 Apply Now Button
+
   })
 
   it("status: 用戶已認證、風控額度時間有效，但額度不足", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "riskReject": false,
+      "refreshable": true,
+      "refreshOverRetry": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+
+    visitIndexPage();
+
     // NOTE: then
     // 看到跑馬燈
     // 看到 welcome 包含姓名、客服 Button
@@ -245,7 +979,137 @@ describe('IndexPage', () => {
 
   })
 
-  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 2000,
+      "availableAmount": 13000,
+      "quotaBar": {
+        "min": 1000,
+        "max": 13000,
+        "current": 2000,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "riskReject": false,
+      "refreshable": false,
+      "refreshOverRetry": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(5, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "BB LOAN",
+          "payableAmount": 2000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(6, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "CC LOAN",
+          "payableAmount": 3000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "DD LOAN",
+          "payableAmount": 4000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(8, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+
+    visitIndexPage();
+
     // NOTE: then
     // 看到跑馬燈
     // 看到 welcome 包含姓名、客服 Button

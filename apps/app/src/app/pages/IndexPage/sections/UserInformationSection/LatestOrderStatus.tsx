@@ -1,6 +1,8 @@
 import cx from "classnames";
 import {IndexPageProps} from "../../../../store";
 import {ORDER_STATE} from "../../../../flow";
+import {formatPrice} from "../../../../modules/formatPrice";
+import moment from "moment";
 
 type Props = IndexPageProps;
 
@@ -14,7 +16,7 @@ export const LatestOrderStatus = (props: Props) => {
         <div className={"left"}>
           <div className={"top flex flex-row"}>
             <div className={"font-light mr-2"}>Loan Order</div>
-            <div className={"font-medium"}>₹ 4,800</div>
+            <div className={"font-medium"}>₹ {formatPrice(props.state.order.overdueOrComingOverdueOrder?.payableAmount || 0)}</div>
           </div>
 
           <div className={"bottom flex flex-col"}>
@@ -30,7 +32,7 @@ export const LatestOrderStatus = (props: Props) => {
                 <div className={cx("font-normal text-sm", {
                   "text-gray-500": props.state.order.state === ORDER_STATE.hasInComingOverdueOrder,
                   "text-red-500": props.state.order.state === ORDER_STATE.hasOverdueOrder
-                })}>21-03-2023</div>
+                })}>{moment(props.state.order.overdueOrComingOverdueOrder?.dueDate).format("DD-MM-YYYY")}</div>
               </div>
             </div>
           </div>

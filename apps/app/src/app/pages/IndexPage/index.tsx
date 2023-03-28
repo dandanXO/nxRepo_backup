@@ -9,20 +9,43 @@ import {TipsSection} from "./sections/TipsSection";
 import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
 import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
 import {NoticeUserAuthedEmptyQuotaSection} from "./sections/NoticeSection/NoticeUserAuthedEmptyQuotaSection";
-import {
-  NoticeUserInProgressAuthStatusSections
-} from "./sections/NoticeSection/NoticeUserInProgressAuthStatusSections";
+import {NoticeUserInProgressAuthStatusSections} from "./sections/NoticeSection/NoticeUserInProgressAuthStatusSections";
 import {NoticeUserRejectedSection} from "./sections/NoticeSection/NoticeUserRejectedSection";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
-import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../flow";
+import {indexPageSlice, ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../flow";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
+import {useCallback} from "react";
+import cx from "classnames";
 
+export enum PageStateEnum {
+  unknow,
+  UserAuthing,
+  UserRejected,
+}
 
+export type PageState = {
+  pageState: PageStateEnum;
+}
 export const IndexPage = () => {
   const indexPageState = useSelector((state: RootState) => state.indexPage);
+  // const [hasClickReacquireCredit, setHasClickReacquireCredit] = useState(false);
+
+  const dispatch = useDispatch();
+  const onClickReacquireCredit = useCallback(() => {
+    // setHasClickReacquireCredit(!hasClickReacquireCredit);
+    dispatch(indexPageSlice.actions.reacquire({}));
+  }, [])
+
+  // NOTE:
+  let finalPageState = PageStateEnum.unknow;
+  if(indexPageState.user.state === USER_AUTH_STATE.authing) {
+    finalPageState = PageStateEnum.UserAuthing;
+  } else if(indexPageState.user.state === USER_AUTH_STATE.reject) {
+    finalPageState = PageStateEnum.UserRejected;
+  }
 
   return (
     <div className={"container flex flex-col min-h-screen"}>
@@ -34,25 +57,24 @@ export const IndexPage = () => {
         </div>
 
         <div className={"mb-5"}>
-          <UserInformationSection state={indexPageState}/>
+          <UserInformationSection state={indexPageState} pageState={finalPageState}/>
         </div>
 
         <PageContent>
-          <div className={"mb-3"}>
-            <LoanInformationSection state={indexPageState}/>
-          </div>
 
           {indexPageState.user.state === USER_AUTH_STATE.ready && (
-            <div className={"mb-3"}>
-              <AuthenticationSection/>
-            </div>
-          )}
-
-          {indexPageState.user.state === USER_AUTH_STATE.ready && (
-            <div className={"mb-3"}>
-              {/*TODO*/}
-              <ADBannerSection/>
-            </div>
+            <>
+              <div className={"mb-3"}>
+                <LoanInformationSection state={indexPageState}/>
+              </div>
+              <div className={"mb-3"}>
+                <AuthenticationSection/>
+              </div>
+              <div className={"mb-3"}>
+                {/*TODO*/}
+                <ADBannerSection state={indexPageState}/>
+              </div>
+            </>
           )}
 
           {(
@@ -64,22 +86,19 @@ export const IndexPage = () => {
             </div>
           )}
 
-
-          {(
-            indexPageState.user.state === USER_AUTH_STATE.authing ||
-            indexPageState.user.state === USER_AUTH_STATE.reject ||
+          {
+            [
+              indexPageState.riskControl.state === RISK_CONTROL_STATE.valid,
+              indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
+              indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
+              indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
+              indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+            ].some(condition => condition === true) &&
             (
-              indexPageState.user.state === USER_AUTH_STATE.success && (
-                indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
-                indexPageState.order.state === ORDER_STATE.reject
-              )
-            )
-          )&& (
             <div className={"mb-3"}>
               <LoanOverViewSection state={indexPageState}/>
             </div>
           )}
-
 
 
           {/*TODO: Remove me by identify state*/}
@@ -87,22 +106,13 @@ export const IndexPage = () => {
             <TipsSection state={indexPageState}/>
           </div>
 
-          {(
-            indexPageState.user.state === USER_AUTH_STATE.authing
-          ) && (
-            <>
-              <NoticeUserInProgressAuthStatusSections/>
-            </>
-          )}
+          {indexPageState.user.state === USER_AUTH_STATE.authing ? (
+            <NoticeUserInProgressAuthStatusSections/>
+          ): indexPageState.user.state === USER_AUTH_STATE.reject ? (
+            <NoticeUserRejectedSection/>
+          ) : null}
 
-          {(
-            indexPageState.user.state === USER_AUTH_STATE.authing
-          ) && (
-            <>
-              <NoticeUserRejectedSection/>
-            </>
-          )}
-
+          {/*TODO: 這邊得修改更通用的文案*/}
           {(
             indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.order.state === ORDER_STATE.reject
@@ -139,17 +149,35 @@ export const IndexPage = () => {
       <div className={"sticky bottom-[63px] px-3 py-3"}>
         {/*TODO*/}
         {(
-          indexPageState.user.state === USER_AUTH_STATE.success
+          indexPageState.user.state === USER_AUTH_STATE.success &&
+          indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
         ) && (
-          <Button text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>
+          <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>
         )}
 
         {(
           indexPageState.user.state === USER_AUTH_STATE.authing ||
-          indexPageState.order.state === ORDER_STATE.reject
+          indexPageState.user.state === USER_AUTH_STATE.reject
         ) && (
           <>
-            <Button text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
+            <Button dataTestingID={"viewAppProgress"} text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
+          </>
+        )}
+
+        {/*NOTE: 可以點擊獲取額度*/}
+        {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
+        {(
+          indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
+        ) && (
+          <>
+            <Button
+              onClick={onClickReacquireCredit}
+              dataTestingID={"reacquireCredit"}
+              text={"Reacquire Credit Amount"}
+              bgColor={cx({
+                "bg-[#F58B10]": indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
+                "bg-[#D7D7D7]": indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
+              })}/>
           </>
         )}
 
@@ -160,3 +188,4 @@ export const IndexPage = () => {
     </div>
   )
 }
+

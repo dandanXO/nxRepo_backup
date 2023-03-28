@@ -1,6 +1,6 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./base/axiosBaseQuery";
-import {GetIndexRequest, GetIndexResponse} from "../flow/IndexFlow";
+import {GetIndexRequest, GetIndexResponse} from "../flow/service";
 
 
 

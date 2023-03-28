@@ -1,16 +1,48 @@
 import ReactSlider from "./ReactSlider";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {formatPrice} from "../../../../modules/formatPrice";
 import {IndexPageProps} from "../../../../store";
+import {ORDER_STATE, USER_AUTH_STATE} from "../../../../flow";
+import {environment} from "../../../../../environments/environment";
+import cx from "classnames";
+import {PageStateEnum} from "../../index";
 
 type Props = IndexPageProps;
 
 export const QuotaSliderStatus = (props: Props) => {
-  const [currentQuotaValue, setCurrentQuotaValue] = useState(0);
+  const [currentQuotaValue, setCurrentQuotaValue] = useState("");
+  const [maxQuotaValue, setMaxQuotaValue] = useState("")
+  const [disableQuotaBar, setDisableQuotaBar] = useState(false);
+  // console.log("currentQuotaValue", currentQuotaValue)
+  // console.log("maxQuotaValue", maxQuotaValue);
 
   useEffect(() => {
-    setCurrentQuotaValue(props.state.indexAPI?.quotaBar.current || 0);
-  }, [props.state.indexAPI?.quotaBar])
+    setMaxQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.max || 0));
+  }, [props.state.indexAPI?.quotaBar.max])
+
+
+  const disable = useMemo(() => {
+    return [
+      props.state.user.state === USER_AUTH_STATE.authing,
+      props.state.user.state === USER_AUTH_STATE.reject,
+      props.state.order.state === ORDER_STATE.hasInComingOverdueOrder,
+      props.state.order.state === ORDER_STATE.hasOverdueOrder,
+      props.state.order.state === ORDER_STATE.reject,
+    ].some(item => item === true);
+  }, [props.state.user.state, props.state.order.state]);
+
+
+  useEffect(() => {
+    if(disable) {
+      setCurrentQuotaValue("****")
+      setMaxQuotaValue("****")
+      setDisableQuotaBar(true);
+    } else {
+      setCurrentQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.current || 0));
+      setDisableQuotaBar(false);
+    }
+  }, [disable, props.state.indexAPI?.quotaBar])
+
 
   return (
     <div className={"mb-4 text-center"}>
@@ -19,13 +51,16 @@ export const QuotaSliderStatus = (props: Props) => {
         <div className={"flex flex-col justify-center items-center mb"}>
           <div className="w-full flex flex-row justify-between mb-2">
             <div className="text-white text-sm font-light">You can get up to</div>
-            <div className="text-white font-medium">₹ {formatPrice(currentQuotaValue)} / ${formatPrice(props.state.indexAPI?.quotaBar.max || 0)}</div>
+            <div className="text-white font-medium">{environment.currency} {currentQuotaValue} / {maxQuotaValue}</div>
           </div>
 
           <div className="slider mb-1">
             <ReactSlider
               className="quota-slider"
-              trackClassName="quota-slider-track"
+              trackClassName={cx({
+                "quota-slider-track" : !disable,
+                "quota-slider-track-disable": disable,
+              })}
               thumbClassName="quota-slider-thumb"
               thumbActiveClassName="active-quota-slider-thumb"
               renderThumb={(props: any, state: any) => {
@@ -33,16 +68,20 @@ export const QuotaSliderStatus = (props: Props) => {
                 // console.log("state", state);
                 return (
                   <div {...props}>
-                    <div className="quota-slider-thumb-inner"></div>
+                    <div className={cx({
+                      "quota-slider-thumb-inner": !disable,
+                      "quota-slider-thumb-inner-disable": disable,
+                    })}></div>
                   </div>
                 )
               }}
+              disabled={disableQuotaBar}
               min={props.state.indexAPI?.quotaBar.min || 0}
               max={props.state.indexAPI?.quotaBar.max || 0}
               step={props.state.indexAPI?.quotaBar.serial || 0}
-              value={currentQuotaValue}
+              value={typeof currentQuotaValue === "number" ? currentQuotaValue : 0}
               onChange={(value: any, index: any) => {
-                setCurrentQuotaValue(value);
+                setCurrentQuotaValue(String(value));
               }}
             />
           </div>
@@ -55,10 +94,9 @@ export const QuotaSliderStatus = (props: Props) => {
         </div>
 
         {/*NOTE: ExclusiveLoanOffer*/}
-        <div className={"p-2 bg-white rounded-lg relative top-1 flex flex-row justify-between shadow-md shadow-gray-300"}>
-          <div>Exclusive Personal Loan offer</div>
-          {/*TODO:*/}
-          <div className={"text-orange-500"}>TODO: 13:20:29</div>
+        <div className={"p-2 bg-white rounded-lg relative top-1 shadow-md shadow-gray-300"}>
+          <span className={"pr-2"}>Exclusive Personal Loan offer</span>
+          <span className={"text-orange-500"}>13:20:29</span>
         </div>
 
       </div>
