@@ -41,7 +41,7 @@ describe('IndexPage', () => {
     // cy.screenshot();
   })
 
-  it("status: 用戶未認證", () => {
+  it.only("status: 用戶未認證", () => {
     // NOTE: Given - 訪客
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
@@ -980,7 +980,7 @@ describe('IndexPage', () => {
 
   })
 
-  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",

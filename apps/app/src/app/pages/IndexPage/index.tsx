@@ -49,6 +49,8 @@ export const IndexPage = () => {
 
   const applyDisable = useMemo(() => {
     let disable = false;
+
+    // FIXME: 下面判會變成不能根據優先順序
     if(
       indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
       indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder ||
@@ -57,7 +59,7 @@ export const IndexPage = () => {
       disable = true;
     }
     return disable;
-  }, [indexPageState.user.state])
+  }, [indexPageState.user.state, indexPageState.order.state, indexPageState.riskControl.state])
 
   const applyHide = useMemo(() => {
     return [
@@ -174,8 +176,8 @@ export const IndexPage = () => {
         {!applyHide &&
           (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) && (
           <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={cx({
-            "bg-[#F58B10]": applyDisable,
-            "bg-[#D7D7D7]": !applyDisable,
+            "bg-[#F58B10]": !applyDisable,
+            "bg-[#D7D7D7]": applyDisable,
           })}/>
         )}
 

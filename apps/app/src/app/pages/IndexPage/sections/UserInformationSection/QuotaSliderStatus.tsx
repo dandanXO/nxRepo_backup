@@ -10,7 +10,8 @@ import {PageStateEnum} from "../../index";
 type Props = IndexPageProps;
 
 export const QuotaSliderStatus = (props: Props) => {
-  const [currentQuotaValue, setCurrentQuotaValue] = useState("");
+  const [currentQuotaValue, setCurrentQuotaValue] = useState(0);
+  const [currentQuotaLabelValue, setCurrentQuotaLabelValue] = useState("");
   const [maxQuotaValue, setMaxQuotaValue] = useState("")
   const [disableQuotaBar, setDisableQuotaBar] = useState(false);
   // console.log("currentQuotaValue", currentQuotaValue)
@@ -34,11 +35,12 @@ export const QuotaSliderStatus = (props: Props) => {
 
   useEffect(() => {
     if(disable) {
-      setCurrentQuotaValue("****")
+      setCurrentQuotaLabelValue("****")
       setMaxQuotaValue("****")
       setDisableQuotaBar(true);
     } else {
-      setCurrentQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.current || 0));
+      setCurrentQuotaValue(props.state.indexAPI?.quotaBar.current || 0)
+      setCurrentQuotaLabelValue(formatPrice(props.state.indexAPI?.quotaBar.current || 0));
       setDisableQuotaBar(false);
     }
   }, [disable, props.state.indexAPI?.quotaBar])
@@ -51,7 +53,7 @@ export const QuotaSliderStatus = (props: Props) => {
         <div className={"flex flex-col justify-center items-center mb"}>
           <div className="w-full flex flex-row justify-between mb-2">
             <div className="text-white text-sm font-light">You can get up to</div>
-            <div className="text-white font-medium">{environment.currency} {currentQuotaValue} / {maxQuotaValue}</div>
+            <div className="text-white font-medium">{environment.currency} {currentQuotaLabelValue} / {maxQuotaValue}</div>
           </div>
 
           <div className="slider mb-1">
@@ -79,9 +81,10 @@ export const QuotaSliderStatus = (props: Props) => {
               min={props.state.indexAPI?.quotaBar.min || 0}
               max={props.state.indexAPI?.quotaBar.max || 0}
               step={props.state.indexAPI?.quotaBar.serial || 0}
-              value={typeof currentQuotaValue === "number" ? currentQuotaValue : 0}
+              value={currentQuotaValue}
               onChange={(value: any, index: any) => {
-                setCurrentQuotaValue(String(value));
+                setCurrentQuotaValue(value);
+                setCurrentQuotaLabelValue(String(value));
               }}
             />
           </div>

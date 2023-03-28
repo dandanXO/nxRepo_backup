@@ -34,9 +34,14 @@ export const TipsSection = (props: Props) => {
     messageComponent =  (
       <>
         <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>
-          <div className={"mb-2"}>Your current preferential loan quota has been used up, please wait for the next round of preferential loan plans.</div>
-          <div>Remind you to prioritize repayment to obtain a higher credit limit.</div>
+          <div className={"mb-2"}>The available credit limit has expired, please reacquire credit amount.</div>
+          <div>Before reacquire credit amount, we strongly suggest that you prioritize repayment before you can reapply for a higher credit limit.</div>
         </div>
+        {/*TODO: 沒有應還訂單時的文案*/}
+        {/*The available credit limit has expired, please reacquire credit amount.*/}
+        {/*TODO: 有應還訂單時的文案*/}
+        {/*The available credit limit has expired, please reacquire credit amount.*/}
+        {/*Before reacquire credit amount, we strongly suggest that you prioritize repayment before you can reapply for a higher credit limit.*/}
       </>
     )
   }
