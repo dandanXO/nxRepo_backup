@@ -9,9 +9,9 @@ export const RecommendedProductsSection = (props: Props) => {
       <div className="font-medium">Recommended Products</div>
 
       <div className={"overflow-auto"}>
-        {props.state.indexAPI?.products.map((product => {
+        {props.state.indexAPI?.products.map(((product, index) => {
           return (
-            <Product product={product}/>
+            <Product key={index} product={product}/>
           )
         }))}
       </div>

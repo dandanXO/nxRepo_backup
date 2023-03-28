@@ -32,7 +32,7 @@ export const Product = (props: Props) => {
         </div>
       </div>
       {expand && (
-        <div className={"expandable-brand bg-[#F3F3F3] p-3 flex flex-col"}>
+        <div className={"expandable-brand bg-[#F3F3F3] text-[#707070] p-3 flex flex-col"}>
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Interest</div>
             <div className={"value"}>{props.product.platformChargeFeeRate}</div>

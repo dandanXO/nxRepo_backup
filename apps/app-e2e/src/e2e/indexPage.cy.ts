@@ -862,6 +862,7 @@ describe('IndexPage', () => {
 
   })
 
+  // NOTICE: 注意這情況
   it("status: 用戶已認證、風控額度時間有效，但額度不足", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {

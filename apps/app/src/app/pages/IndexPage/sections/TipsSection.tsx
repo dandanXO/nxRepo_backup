@@ -22,10 +22,8 @@ export const TipsSection = (props: Props) => {
     messageComponent =  (
         <>
           <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>
-            Remind you to prioritize repayment to obtain a higher credit limit, and wait for the next round of preferential loan plans.
-          </div>
-          <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>
-            Remind you to prioritize repayment to obtain a higher credit limit, and wait for the next round of preferential loan plans.
+            <div className={"mb-2"}>Your current preferential loan quota has been used up.</div>
+            <div>Remind you to prioritize repayment to obtain a higher credit limit, and wait for the next round of preferential loan plans.</div>
           </div>
         </>
       )
@@ -36,10 +34,8 @@ export const TipsSection = (props: Props) => {
     messageComponent =  (
       <>
         <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>
-          Your current preferential loan quota has been used up, please wait for the next round of preferential loan plans.
-        </div>
-        <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>
-          Remind you to prioritize repayment to obtain a higher credit limit.
+          <div className={"mb-2"}>Your current preferential loan quota has been used up, please wait for the next round of preferential loan plans.</div>
+          <div>Remind you to prioritize repayment to obtain a higher credit limit.</div>
         </div>
       </>
     )

@@ -17,7 +17,7 @@ import {indexPageSlice, ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
-import {useCallback} from "react";
+import {useCallback, useMemo} from "react";
 import cx from "classnames";
 
 export enum PageStateEnum {
@@ -46,6 +46,28 @@ export const IndexPage = () => {
   } else if(indexPageState.user.state === USER_AUTH_STATE.reject) {
     finalPageState = PageStateEnum.UserRejected;
   }
+
+  const applyDisable = useMemo(() => {
+    let disable = false;
+    if(
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
+      indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder ||
+      indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+    ) {
+      disable = true;
+    }
+    return disable;
+  }, [indexPageState.user.state])
+
+  const applyHide = useMemo(() => {
+    return [
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time,
+      indexPageState.order.state === ORDER_STATE.reject,
+      indexPageState.user.state === USER_AUTH_STATE.authing,
+      indexPageState.user.state === USER_AUTH_STATE.reject,
+    ].some(condition => condition === true);
+  }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state])
 
   return (
     <div className={"container flex flex-col min-h-screen"}>
@@ -81,8 +103,9 @@ export const IndexPage = () => {
             indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.riskControl.state === RISK_CONTROL_STATE.valid
           )&& (
-            <div className={"mb-3"}>
+            <div className={"mb-4 mt-6"}>
               <RecommendedProductsSection state={indexPageState}/>
+              <div className={"border-t-2 h-[0.5px]"}/>
             </div>
           )}
 
@@ -148,11 +171,12 @@ export const IndexPage = () => {
 
       <div className={"sticky bottom-[63px] px-3 py-3"}>
         {/*TODO*/}
-        {(
-          indexPageState.user.state === USER_AUTH_STATE.success &&
-          indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
-        ) && (
-          <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={"bg-[#F58B10]"}/>
+        {!applyHide &&
+          (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) && (
+          <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={cx({
+            "bg-[#F58B10]": applyDisable,
+            "bg-[#D7D7D7]": !applyDisable,
+          })}/>
         )}
 
         {(
