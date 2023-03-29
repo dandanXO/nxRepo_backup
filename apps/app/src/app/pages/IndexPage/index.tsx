@@ -19,6 +19,7 @@ import {ADBannerSection} from "./sections/ADBannerSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
 import {useCallback, useMemo} from "react";
 import cx from "classnames";
+import {NoticeUserReacquireOver3TimeSections} from "./sections/NoticeSection/NoticeUserReacquireOver3TimeSections";
 
 export enum PageStateEnum {
   unknow,
@@ -66,10 +67,12 @@ export const IndexPage = () => {
     return [
       indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
       indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time,
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3,
       indexPageState.order.state === ORDER_STATE.reject,
       indexPageState.user.state === USER_AUTH_STATE.ready,
       indexPageState.user.state === USER_AUTH_STATE.authing,
       indexPageState.user.state === USER_AUTH_STATE.reject,
+
     ].some(condition => condition === true);
   }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state])
 
@@ -119,7 +122,7 @@ export const IndexPage = () => {
               indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
               indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
               indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
-              indexPageState.riskControl.state !== RISK_CONTROL_STATE.empty_quota && indexPageState.indexAPI?.availableAmount === 0,
+              indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount === 0,
             ].some(condition => condition === true) &&
             (
             <div className={"mb-3"}>
@@ -138,6 +141,15 @@ export const IndexPage = () => {
           ): indexPageState.user.state === USER_AUTH_STATE.reject ? (
             <NoticeUserRejectedSection/>
           ) : null}
+
+          {
+            indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3 &&
+            (
+              <NoticeUserReacquireOver3TimeSections/>
+            )
+          }
+
 
           {/*TODO: 這邊得修改更通用的文案*/}
           {(

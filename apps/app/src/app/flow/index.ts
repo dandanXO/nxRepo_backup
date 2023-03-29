@@ -31,6 +31,7 @@ export enum RISK_CONTROL_STATE {
   "unknow",
   "expired_refresh_able",
   "expired_refresh_one_time",
+  "expired_refresh_over_3",
   "empty_quota", // NOTE: 風控取得就為零，不是已經借完
   "valid" ,
 }
@@ -169,8 +170,10 @@ export const indexPageSlice = createSlice({
         } else {
           state.order.state = ORDER_STATE.normal;
         }
+        if(action.payload.noQuotaByRetryFewTimes === true) {
+          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
 
-        if(action.payload.noQuotaBalance === true) {
+        } else if(action.payload.noQuotaBalance === true) {
           // NOTE: 優先度最後
           state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
           // noQuotaBalance
@@ -186,7 +189,7 @@ export const indexPageSlice = createSlice({
         // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
         //
         // }
-        else  if(!isRiskControlOverdue && action.payload.availableAmount > 0) {
+        else if(!isRiskControlOverdue && action.payload.availableAmount > 0) {
           state.riskControl.state = RISK_CONTROL_STATE.valid;
         }
 

@@ -21,6 +21,7 @@ export const TipsSection = (props: Props) => {
     props.state.riskControl.state !== RISK_CONTROL_STATE.empty_quota &&
     props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
     props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_one_time &&
+    props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_over_3 &&
     props.state.indexAPI?.availableAmount === 0
   ) {
     // NOTE: 沒有應還訂單時的文案

@@ -984,8 +984,130 @@ describe('IndexPage', () => {
 
   })
 
+  it("status: 用戶已認證、風控額度時間無效，使用者自己重新獲取信用三次了。", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "noQuotaByRetryFewTimes": true,
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      // NOTICE: 優先權最高
+      "riskReject": false,
+      "refreshable": true,
+      "refreshOverRetry": true,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+    visitIndexPage();
+
+    // NOTICE: 模擬用戶點擊
+    // cy.get("[data-testing-id='reacquireCredit']").click();
+
+    // NOTE: then
+    // 看到跑馬燈
+    // 看到 welcome 包含姓名、客服 Button
+    // NOTE: important 看到不反灰但無法使用的可借款額度拉霸、無法倒數計計時
+    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最右邊
+    // 正常隨意顯示 Loan Over View
+    // NOTE: important 看到下方 tips 額度相關訊息
+    // NOTE: important 看到反灰無法點擊的 Apply Now Button
+
+  })
+
   // NOTICE: 注意這情況
-  it("status: 用戶已認證、但風控額度直接不足", () => {
+  it.only("status: 用戶已認證、但風控額度直接不足", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
@@ -1123,6 +1245,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "noQuotaBalance": false,
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 0,
@@ -1222,7 +1345,7 @@ describe('IndexPage', () => {
   })
 
 
-  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
