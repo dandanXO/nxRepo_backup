@@ -2,9 +2,12 @@ import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {useCallback, useState} from "react";
 import {IndexPageProps} from "../../../../store";
 import {PlatformProduct} from "../../../../api/models/PlatformProduct";
+import {environment} from "../../../../../environments/environment";
+import {formatPrice} from "../../../../modules/formatPrice";
 
 type Props = {
   product: PlatformProduct;
+  loanInterestRate: number;
 };
 
 export const Product = (props: Props) => {
@@ -13,6 +16,8 @@ export const Product = (props: Props) => {
     setExpand(!expand);
   }, [expand]);
 
+  const interestPrice = props.product.max * props.product.platformChargeFeeRate * props.loanInterestRate;
+  const disbursalPrice = props.product.max * (1 - props.loanInterestRate)
   return (
     <div className={"product flex flex-col mb-2"} onClick={toggleExpand}>
       <div className={"brand pt-1 pb-3 px-2 flex flex-row justify-between"}>
@@ -35,17 +40,17 @@ export const Product = (props: Props) => {
         <div className={"expandable-brand bg-[#F3F3F3] text-[#707070] p-3 flex flex-col"}>
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Interest</div>
-            <div className={"value"}>{props.product.platformChargeFeeRate}</div>
+            <div className={"value"}>{environment.currency} {formatPrice(interestPrice)}</div>
           </div>
 
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Terms</div>
-            <div className={"value"}>{props.product.terms}</div>
+            <div className={"value"}>{props.product.terms}days</div>
           </div>
 
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Disbursal Amount </div>
-            <div className={"value"}>2,400</div>
+            <div className={"value"}>{environment.currency} {formatPrice(disbursalPrice)}</div>
           </div>
 
           <div className={"item flex flex-row justify-between mb-1"}>

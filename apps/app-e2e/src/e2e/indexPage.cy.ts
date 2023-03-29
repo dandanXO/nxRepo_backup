@@ -27,7 +27,7 @@ infoLog("env", Cypress.env());
 
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
-  cy.visit("/??pageNumber=0&pageSize=500&status=UNPAID&token=b5d47535879b4d3daddd35437c8ddbdd")
+  cy.visit("/??pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
 }
 describe('IndexPage', () => {
   beforeEach(() => {
@@ -41,7 +41,7 @@ describe('IndexPage', () => {
     // cy.screenshot();
   })
 
-  it.only("status: 用戶未認證", () => {
+  it("status: 用戶未認證", () => {
     // NOTE: Given - 訪客
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
@@ -980,7 +980,7 @@ describe('IndexPage', () => {
 
   })
 
-  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
@@ -997,7 +997,7 @@ describe('IndexPage', () => {
       console.log("info");
     })
 
-    // NOTE: Given
+    // // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
       "totalAmount": 15000,
       "usedAmount": 2000,

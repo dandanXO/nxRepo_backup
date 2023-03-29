@@ -50,11 +50,12 @@ export const IndexPage = () => {
   const applyDisable = useMemo(() => {
     let disable = false;
 
-    // FIXME: 下面判會變成不能根據優先順序
+    // NOTICE: 主義下面判斷是否變成不能根據優先順序
     if(
       indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
       indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder ||
-      indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+      indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
+      indexPageState.indexAPI?.availableAmount === 0
     ) {
       disable = true;
     }
@@ -118,7 +119,8 @@ export const IndexPage = () => {
               indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
               indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
               indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
-              indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+              indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
+              indexPageState.indexAPI?.availableAmount === 0,
             ].some(condition => condition === true) &&
             (
             <div className={"mb-3"}>

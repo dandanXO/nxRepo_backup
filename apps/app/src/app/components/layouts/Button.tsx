@@ -9,6 +9,6 @@ type Props = {
 
 export const Button = (props: Props) => {
   return (
-    <div onClick={props.onClick} data-testing-id={props.dataTestingID} className={cx("rounded-lg p-2 text-white text-center shadow-lg shadow-gray-400", props.bgColor)}>{props.text}</div>
+    <div onClick={props.onClick} data-testing-id={props.dataTestingID} className={cx("rounded-lg p-2 text-white text-center shadow-md shadow-gray-400", props.bgColor)}>{props.text}</div>
   )
 }

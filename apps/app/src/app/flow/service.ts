@@ -79,6 +79,12 @@ export type GetIndexResponse = {
   needRiskKycUpdate:	boolean;
   // 是否需要更新上传风控客户信息
 
+  noQuotaBalance:	boolean;
+  // 当次刷新没有额度(新客、老客重刷沒額度)
+
+  noQuotaByRetryFewTimes:	boolean;
+  // 刷新超過N次都没有额度
+
   offerExpireTime:	string;
   // example: yyyy-MM-dd'T'HH:mm:ss
   // 额度有效期限

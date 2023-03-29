@@ -17,7 +17,8 @@ export const TipsSection = (props: Props) => {
     )
   } else if(
     props.state.user.state === USER_AUTH_STATE.success &&
-    props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota
+    // props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota
+    props.state.indexAPI?.availableAmount === 0
   ) {
     messageComponent =  (
         <>

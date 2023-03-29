@@ -31,7 +31,7 @@ export enum RISK_CONTROL_STATE {
   "unknow",
   "expired_refresh_able",
   "expired_refresh_one_time",
-  "empty_quota",
+  "empty_quota", // NOTE: 風控取得就為零，不是已經借完
   "valid" ,
 }
 
@@ -117,6 +117,10 @@ export const indexPageSlice = createSlice({
         state.order.state = ORDER_STATE.reject;
         state.order.overdueOrComingOverdueOrder = null;
 
+      } else if(action.payload.noQuotaBalance === true) {
+        // NOTE: 優先度最後
+        state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+        // noQuotaBalance
       } else if (action.payload.payableRecords.length === 0) {
         // NOTICE: order
         state.order.state = ORDER_STATE.empty
@@ -126,13 +130,12 @@ export const indexPageSlice = createSlice({
 
         // NOTICE: order
         // NOTE: order priority
-        if (action.payload.payableRecords.some(order => {
+        const isOrderOverdue = action.payload.payableRecords.some(order => {
           if (order.overdue) state.order.overdueOrComingOverdueOrder = order;
           return order.overdue
-        })) {
-          state.order.state = ORDER_STATE.hasOverdueOrder;
-        } else if (action.payload.payableRecords.some(order => {
+        })
 
+        const isAnyOrderComingOverdue = action.payload.payableRecords.some(order => {
           const currentTime = moment()
           const expireTime = moment(order.dueDate);
           const overdueDay = expireTime.diff(currentTime, "days");
@@ -148,7 +151,11 @@ export const indexPageSlice = createSlice({
 
           if (isOverdueEqual3Days) state.order.overdueOrComingOverdueOrder = order;
           return isOverdueEqual3Days;
-        })) {
+        })
+
+        if (isOrderOverdue) {
+          state.order.state = ORDER_STATE.hasOverdueOrder;
+        } else if (isAnyOrderComingOverdue) {
           // NOTICE: order
           state.order.overdueOrComingOverdueOrder = null;
           state.order.state = ORDER_STATE.hasInComingOverdueOrder;
@@ -161,6 +168,7 @@ export const indexPageSlice = createSlice({
           state.order.state = ORDER_STATE.normal;
         }
 
+
         if (isRiskControlOverdue) {
           // NOTE: 優先度比較低，首頁-認證完成-額度時間到期-需重新取得信用額度
           if (action.payload.refreshable && action.payload.refreshOverRetry === true) {
@@ -169,13 +177,12 @@ export const indexPageSlice = createSlice({
             // TODO:
             // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
           }
-        } else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
-          // NOTE: 優先度最後
-          state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
-
-        } else if(!isRiskControlOverdue && action.payload.availableAmount > 0) {
+        }
+        // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
+        //
+        // }
+        else  if(!isRiskControlOverdue && action.payload.availableAmount > 0) {
           state.riskControl.state = RISK_CONTROL_STATE.valid;
-
         }
 
 
