@@ -116,11 +116,10 @@ export const IndexPage = () => {
           {
             [
               indexPageState.riskControl.state === RISK_CONTROL_STATE.valid,
-              indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
               indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
               indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
               indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
-              indexPageState.indexAPI?.availableAmount === 0,
+              indexPageState.riskControl.state !== RISK_CONTROL_STATE.empty_quota && indexPageState.indexAPI?.availableAmount === 0,
             ].some(condition => condition === true) &&
             (
             <div className={"mb-3"}>
@@ -150,6 +149,7 @@ export const IndexPage = () => {
               </>
           )}
 
+          {/*TODO: 檢查下*/}
           {(
             indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota

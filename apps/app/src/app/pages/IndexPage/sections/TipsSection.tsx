@@ -16,8 +16,10 @@ export const TipsSection = (props: Props) => {
       </div>
     )
   } else if(
+    // TODO: 檢查下
     props.state.user.state === USER_AUTH_STATE.success &&
-    // props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota
+    props.state.riskControl.state !== RISK_CONTROL_STATE.empty_quota &&
+
     props.state.indexAPI?.availableAmount === 0
   ) {
     messageComponent =  (

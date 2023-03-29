@@ -2,7 +2,7 @@ import {ReactNode} from "react";
 import cx from "classnames";
 import {IndexPageProps} from "../../../../store";
 import {PageState, PageStateEnum} from "../../index";
-import {ORDER_STATE, USER_AUTH_STATE} from "../../../../flow";
+import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../flow";
 
 type Props = {
   children?: ReactNode;
@@ -15,12 +15,14 @@ export const StatusContainer = (props: Props) => {
         props.pageState === PageStateEnum.UserAuthing ||
         props.pageState === PageStateEnum.UserRejected ||
         props.state.order.state === ORDER_STATE.hasOverdueOrder ||
-        props.state.order.state === ORDER_STATE.reject,
+        props.state.order.state === ORDER_STATE.reject ||
+        props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota,
       "bg-orange-400":
         props.pageState !== PageStateEnum.UserAuthing &&
         props.pageState !== PageStateEnum.UserRejected &&
         props.state.order.state !== ORDER_STATE.hasOverdueOrder &&
-        props.state.order.state !== ORDER_STATE.reject
+        props.state.order.state !== ORDER_STATE.reject &&
+        props.state.riskControl.state !== RISK_CONTROL_STATE.empty_quota,
     })}>
       {props.children}
     </div>

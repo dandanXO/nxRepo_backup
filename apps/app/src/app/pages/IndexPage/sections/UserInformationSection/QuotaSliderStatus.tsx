@@ -2,7 +2,7 @@ import ReactSlider from "./ReactSlider";
 import {useEffect, useMemo, useState} from "react";
 import {formatPrice} from "../../../../modules/formatPrice";
 import {IndexPageProps} from "../../../../store";
-import {ORDER_STATE, USER_AUTH_STATE} from "../../../../flow";
+import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../flow";
 import {environment} from "../../../../../environments/environment";
 import cx from "classnames";
 import {PageStateEnum} from "../../index";
@@ -29,6 +29,7 @@ export const QuotaSliderStatus = (props: Props) => {
       props.state.order.state === ORDER_STATE.hasInComingOverdueOrder,
       props.state.order.state === ORDER_STATE.hasOverdueOrder,
       props.state.order.state === ORDER_STATE.reject,
+      props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota,
     ].some(item => item === true);
   }, [props.state.user.state, props.state.order.state]);
 

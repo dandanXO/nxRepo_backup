@@ -117,11 +117,13 @@ export const indexPageSlice = createSlice({
         state.order.state = ORDER_STATE.reject;
         state.order.overdueOrComingOverdueOrder = null;
 
-      } else if(action.payload.noQuotaBalance === true) {
-        // NOTE: 優先度最後
-        state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
-        // noQuotaBalance
-      } else if (action.payload.payableRecords.length === 0) {
+      }
+      // else if(action.payload.noQuotaBalance === true) {
+      //   // NOTE: 優先度最後
+      //   state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+      //   // noQuotaBalance
+      // }
+      else if (action.payload.payableRecords.length === 0) {
         // NOTICE: order
         state.order.state = ORDER_STATE.empty
         state.order.overdueOrComingOverdueOrder = null;
@@ -168,8 +170,11 @@ export const indexPageSlice = createSlice({
           state.order.state = ORDER_STATE.normal;
         }
 
-
-        if (isRiskControlOverdue) {
+        if(action.payload.noQuotaBalance === true) {
+          // NOTE: 優先度最後
+          state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+          // noQuotaBalance
+        } else if (isRiskControlOverdue) {
           // NOTE: 優先度比較低，首頁-認證完成-額度時間到期-需重新取得信用額度
           if (action.payload.refreshable && action.payload.refreshOverRetry === true) {
             state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
