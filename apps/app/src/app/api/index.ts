@@ -6,6 +6,7 @@ import { GetIndexRequest, GetIndexResponse } from "../flow/service";
 import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "./types/getLoanDetail";
 import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "./types/getRepayTypes";
 import { PostRepayCreateRequestBody, PostRepayCreateResponse } from './types/postRepayCreate';
+import { PostRepayReceiptResponse } from "./types/postRepayReceipt";
 
 
 export const API = createApi({
@@ -58,11 +59,22 @@ export const API = createApi({
             }),
         }),
         // NOTE: 創建還款訂單
-        postRepayCreate: builder.mutation<PostRepayCreateResponse,PostRepayCreateRequestBody>({
+        postRepayCreate: builder.mutation<PostRepayCreateResponse, PostRepayCreateRequestBody>({
             query: (query: PostRepayCreateRequestBody) => ({
                 method: "post",
                 url: `/repay/create`,
                 data: query,
+            }),
+        }),
+        // NOTE: 取得還款證明
+        postRepayReceipt: builder.mutation<PostRepayReceiptResponse, FormData>({
+            query: (requestBody: FormData) => ({
+                method: "post",
+                url: `/repay/receipt`,
+                headers: {
+                    "Content-Type": "multipart/form-data;boundary=" + new Date().getTime(),
+                },
+                data: requestBody,
             }),
         }),
         // NOTE: 取得還款證明
@@ -82,5 +94,6 @@ export const {
     useLazyGetLoanRecordListQuery,
     useLazyGetLoanDetailQuery,
     useLazyGetRepayTypesQuery,
-    usePostRepayCreateMutation
+    usePostRepayCreateMutation,
+    usePostRepayReceiptMutation
 } = API;

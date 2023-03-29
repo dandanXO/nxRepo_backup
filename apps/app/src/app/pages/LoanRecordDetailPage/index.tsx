@@ -8,8 +8,10 @@ import { useLazyGetLoanDetailQuery } from "../../api";
 import { useEffect, useState } from "react";
 import { getToken } from "../../api/base/getToken";
 import { environment } from "../../../environments/environment";
+import { Navigation } from "../../components/layouts/Navigation";
 
 export const LoanRecordDetailPage = (props: any) => {
+    const navigate = useNavigate()
     const location = useLocation();
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetLoanDetailQuery({
         pollingInterval: 0,
@@ -29,6 +31,7 @@ export const LoanRecordDetailPage = (props: any) => {
     const { status = '', productName = '', orderNo = '', dueDate = '', loanAmount = '', overdueDays = '', penaltyInterest = '', paidAmount = '', repayRecords = [], totalRepayAmount = '' } = currentData ?? {};
     return (
         <div>
+            <Navigation title={"Payment"} back={() => {navigate(-1)}} />
             <div className={`text-sm text-center text-blue-500 bg-blue-200 py-2`}>Get more amount after instant payment</div>
             <div className={`px-6 pt-3`}>
                 <ListItem title={'Product'} text={productName ?? ''} titleColor="text-slate-400" />
@@ -59,7 +62,7 @@ export const LoanRecordDetailPage = (props: any) => {
                     </ul>
                 </div>
                 <div className={`flex my-3`}>
-                    <Link to="/upload-payment-receipt" className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></Link>
+                    <Link to={{ pathname: `/upload-payment-receipt` ,search:`?token=${getToken()}`}} state={{orderNo}}className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></Link>
                 </div>
                 <div className={`text-xs text-gray-300`}>
                     After completing the repayment, take a screenshot and upload your repayment receipt here.
