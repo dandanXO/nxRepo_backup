@@ -6,11 +6,14 @@ import {MarqueeSection} from "./sections/MarqueeSection";
 import {Button} from "../../components/layouts/Button";
 import {PageContent} from "../../components/layouts/PageContent";
 import {TipsSection} from "./sections/TipsSection";
-import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
-import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
+
+// import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
+import {NoticeUserRejectedSection} from "./sections/NoticeSection/NoticeUserRejectedSection";
+
 import {NoticeUserAuthedEmptyQuotaSection} from "./sections/NoticeSection/NoticeUserAuthedEmptyQuotaSection";
 import {NoticeUserInProgressAuthStatusSections} from "./sections/NoticeSection/NoticeUserInProgressAuthStatusSections";
-import {NoticeUserRejectedSection} from "./sections/NoticeSection/NoticeUserRejectedSection";
+
+import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {indexPageSlice, ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../flow";
@@ -20,6 +23,7 @@ import {LoanOverViewSection} from "./sections/LoanOverViewSection";
 import {useCallback, useMemo} from "react";
 import cx from "classnames";
 import {NoticeUserReacquireOver3TimeSections} from "./sections/NoticeSection/NoticeUserReacquireOver3TimeSections";
+import {useNavigate} from "react-router-dom";
 
 export enum PageStateEnum {
   unknow,
@@ -75,6 +79,8 @@ export const IndexPage = () => {
 
     ].some(condition => condition === true);
   }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state])
+
+  const navigate = useNavigate();
 
   return (
     <div className={"container flex flex-col min-h-screen"}>
@@ -150,16 +156,15 @@ export const IndexPage = () => {
             )
           }
 
-
-          {/*TODO: 這邊得修改更通用的文案*/}
-          {(
-            indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.order.state === ORDER_STATE.reject
-          ) && (
-              <>
-                <NoticeOrderRejectedSection/>
-              </>
-          )}
+          {/*TODO:訂單拒絕這邊不會有*/}
+          {/*{(*/}
+          {/*  indexPageState.user.state === USER_AUTH_STATE.success &&*/}
+          {/*  indexPageState.order.state === ORDER_STATE.reject*/}
+          {/*) && (*/}
+          {/*    <>*/}
+          {/*      <NoticeOrderRejectedSection/>*/}
+          {/*    </>*/}
+          {/*)}*/}
 
           {/*TODO: 檢查下*/}
           {(
@@ -201,7 +206,9 @@ export const IndexPage = () => {
           indexPageState.user.state === USER_AUTH_STATE.reject
         ) && (
           <>
-            <Button dataTestingID={"viewAppProgress"} text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
+            <Button onClick={() => {
+              navigate("/application-progress");
+            }} dataTestingID={"viewAppProgress"} text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
           </>
         )}
 
@@ -224,7 +231,7 @@ export const IndexPage = () => {
 
       </div>
 
-      <TabBar/>
+
 
     </div>
   )

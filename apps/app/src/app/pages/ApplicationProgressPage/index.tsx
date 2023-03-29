@@ -1,12 +1,14 @@
 import {Navigation} from "../../components/layouts/Navigation";
 import {PageContent} from "../../components/layouts/PageContent";
 import {ProgressItem} from "./ProgressItem";
+import {useNavigate} from "react-router-dom";
 
 export const ApplicationProgressPage = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <Navigation title={"Application progress"} back={() => {
-        //
+        navigate("/")
       }}/>
       <PageContent>
         <ProgressItem

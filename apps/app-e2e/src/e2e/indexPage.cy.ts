@@ -216,7 +216,7 @@ describe('IndexPage', () => {
     // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
   })
 
-  it("status: 用戶認證被拒絕", () => {
+  it.only("status: 用戶認證被拒絕", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
@@ -1107,7 +1107,7 @@ describe('IndexPage', () => {
   })
 
   // NOTICE: 注意這情況
-  it.only("status: 用戶已認證、但風控額度直接不足", () => {
+  it("status: 用戶已認證、但風控額度直接不足", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
