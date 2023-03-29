@@ -248,7 +248,7 @@ export const IndexPage = () => {
       {/*<QuickRepaymentModal state={indexPageState}/>*/}
       {/*NOTE: 一鍵借款 AgreementModal*/}
       {/*<LoanAgreementModal/>*/}
-      <QRSuccessModal/>
+      {/*<QRSuccessModal/>*/}
 
     </div>
   )

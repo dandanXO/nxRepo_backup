@@ -6,7 +6,7 @@ interface Props {
 }
 export const Navigation = (props: Props) => {
   return (
-    <div className={"navigation h-14 flex flex-row justify-start items-center"}>
+    <div className={"navigation h-14 bg-white flex flex-row justify-start items-center sticky top-0"}>
       {props.back && (
         <div onClick={() => {
           props.back && props.back();

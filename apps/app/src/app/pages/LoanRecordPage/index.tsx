@@ -38,7 +38,7 @@ export const LoanRecordPage = () => {
     return (
         <div>
             <Navigation title={"Payment"} back={() => {navigate(-1)}} />
-            <div className={`flex flex-row py-3 px-5 justify-between`}>
+            <div className={`flex flex-row py-3 px-5 justify-between sticky top-[56px] bg-white`}>
                 {['Unpaid', 'Overdue', 'Done'].map(i => <Tag
                     key={i} onClick={() => setListStatus(i)} text={i}
                     isActive={i === listStatus} style={` text-sm mx-1`} />)}
