@@ -35,9 +35,9 @@ export const Product = (props: Props) => {
         <div className={"right flex flex-row items-center"}>
           <div className={"font-light"}>₹ 3,200</div>
           {expand ? (
-            <MdExpandMore size={30} color={"#AAAAAA"}/>
-          ) : (
             <MdExpandLess size={30} color={"#AAAAAA"}/>
+          ) : (
+            <MdExpandMore size={30} color={"#AAAAAA"}/>
           )}
         </div>
       </div>
