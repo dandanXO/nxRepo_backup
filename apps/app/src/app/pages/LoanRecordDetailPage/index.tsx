@@ -59,7 +59,7 @@ export const LoanRecordDetailPage = (props: any) => {
                     </ul>
                 </div>
                 <div className={`flex my-3`}>
-                    <Link to="/upload-payment-receipt" className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></Link>
+                    <Link to={{ pathname: `/upload-payment-receipt` ,search:`?token=${getToken()}`}} state={{orderNo}}className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></Link>
                 </div>
                 <div className={`text-xs text-gray-300`}>
                     After completing the repayment, take a screenshot and upload your repayment receipt here.
