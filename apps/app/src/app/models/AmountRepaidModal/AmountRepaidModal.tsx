@@ -7,11 +7,12 @@ import {
     Title,
     Divider,
 } from "@frontend/mobile/shared/ui";
-import {withTranslation, WithTranslation} from "react-i18next";
-import {i18nAmountRepaidModal} from "./i18n/translations";
-import {GetLoanDetailResponse} from "../../api/old/getLoanDetail";
+import { withTranslation, WithTranslation } from "react-i18next";
+import { i18nAmountRepaidModal } from "./i18n/translations";
+import { GetLoanDetailResponse } from "../../api/old/getLoanDetail";
 import recordStatusStyleProps from "../../modules/recordStatusColorMapper";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { stat } from "fs";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
 `;
@@ -58,7 +59,8 @@ const Record = (props: {
     );
 };
 const renderRecordList = (props: AmountRepaidRecordsProps) => {
-    const { repayRecords=[{repayDate:'2022/09/05',repayAmount:8500,repayType:'overdue / pay off'}] } = props;
+
+    const { repayRecords = [] } = props;
     return repayRecords?.map((i) => (
         <Record
             repayDate={i.repayDate ? i.repayDate : ""}
@@ -71,6 +73,8 @@ const renderRecordList = (props: AmountRepaidRecordsProps) => {
 const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
     const { repayRecords, t } = props;
     const navigate = useNavigate();
+    const { state } = useLocation();
+    console.log('state',state)
     return (
         <div>
             <Overlay
@@ -82,11 +86,11 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
                         <div>
                             <Title>{t("Amount RePaid Record")}</Title>
                             <Divider styleType="narrow" />
-                            {repayRecords?.length === 0 ? (
+                            {state.repayRecords?.length === 0 ? (
                                 <NoDataStyled>{t("No paid records yet")}</NoDataStyled>
                             ) : (
                                 <ModalContentStyled>
-                                    {renderRecordList(props)}
+                                    {renderRecordList(state.repayRecords)}
                                 </ModalContentStyled>
                             )}
                         </div>

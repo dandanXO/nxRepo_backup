@@ -3,6 +3,7 @@ import PaymentItem from "./PaymentItem";
 import { useLazyGetLoanRecordListQuery } from "../../api";
 import { GetLoanRecordListRequestQuery } from "../../api/types/getLoanRecordList";
 import Tag from "../../components/Tag";
+
 // @ts-ignore
 import { default as data } from './data.json';
 

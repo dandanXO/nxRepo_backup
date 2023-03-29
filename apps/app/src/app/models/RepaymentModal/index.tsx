@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AdSVG from "./repayment_banner.svg";
 import Button from "../../components/Button";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 import {
@@ -19,6 +19,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import { i18nRepaymentModal } from "./i18n/translations";
 import { environment } from "../../../environments/environment";
 import { Link } from "react-router-dom";
+import { useLazyGetRepayTypesQuery } from "../../api";
 
 
 export const RepaymentModalContainer = styled.div`
@@ -58,46 +59,75 @@ const BoldText = styled.div`
   margin-top: 12px;
   margin-bottom: 8px;
 `;
+
 const PaymentMethodContainer = styled.div`
   margin-bottom: 18px;
   width:100%
-`
+  div{
+    top:20px
+  }
+`;
 
 
-type RepaymentModalProps = {
-    balance: number;
-    setRepayBalance: React.Dispatch<React.SetStateAction<number>>;
-    setShowRepaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
-    setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
-    isRepayTypesFetching: boolean;
-    paymentMethodList: string[];
-    setPayType: React.Dispatch<React.SetStateAction<number>>;
-    // FIXME:
-    setShowRepaymentAdsModal: React.Dispatch<React.SetStateAction<boolean>>;
 
-    balanceValue: string;
-    setBalanceValue: React.Dispatch<React.SetStateAction<string>>;
-
-} & WithTranslation;
 
 const RepaymentModal = (props: any) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location)
+    const { balance = '', orderNo = '' } = location.state.currentData;
     // NOTE: 標籤
-    const balance = props.balance;
+    /* const balance = props.balance; */
 
     // NOTE: 變動數值
     // const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
 
     const [radioValue, setRadioValue] = useState("balance");
+    const [balanceValue, setBalanceValue] = useState(balance);
     const [paymentMethodValue, setPaymentMethodValue] = useState(0);
 
     const handleConfirm = () => {
         // self
-        props.setShowRepaymentModal(false);
+        /* props.setShowRepaymentModal(false);
         // other
-        props.setShowRepaymentAdsModal(true);
+        props.setShowRepaymentAdsModal(true); */
 
     };
+
+
+
+
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetRepayTypesQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+
+    useEffect(() => {
+        triggerGetList({ orderNo: orderNo });
+    }, [])
+    const [paymentMethodList, setPaymentMethodList] = useState<string[]>([]);
+    useEffect(() => {
+        if (currentData !== undefined) {
+            const methods = currentData && currentData?.map(item => {
+                return item.payTypeAlias ? item.payTypeAlias : "";
+            })
+            setPaymentMethodList(methods);
+            console.log('paymentMethodList', methods)
+        }
+
+       
+    }, [currentData])
+
+
+
+    /* useEffect(() => {
+        if (!repayTypes) return;
+        const methods = repayTypes.map(item => {
+            return item.payTypeAlias ? item.payTypeAlias : "";
+        })
+        setPaymentMethodList(methods);
+    }, [repayTypes]) */
     return (
         <Overlay
             show={true}
@@ -119,7 +149,7 @@ const RepaymentModal = (props: any) => {
                             onCheck={(value: any) => {
                                 setRadioValue(value);
                                 if (value === "balance") {
-                                    props.setBalanceValue(`${environment.currency}` + balance);
+                                    setBalanceValue(balance);
                                 }
                             }}
                         >
@@ -131,27 +161,22 @@ const RepaymentModal = (props: any) => {
                     <Input
                         label={props.t("Amount") as string}
                         labelType="left"
-                        value={props.balanceValue}
+                        value={`${environment.currency} ${balanceValue}`}
                         disabled={radioValue === "balance"}
                         onChange={(event: any) => {
                             let value = event.target.value;
                             value = value.replaceAll(`${environment.currency}`, "");
                             // NOTE: if custom balance exceed max balance then setting max balance
                             if (String(Number(value)) === "NaN" || String(value) === "0") {
-                                props.setBalanceValue(`${environment.currency}1`);
+                                setBalanceValue(1);
                                 props.setRepayBalance(1);
                             } else {
                                 if (Number(value) > Number(balance)) {
-                                    // if(balance - 1 < 0) {
-                                    //   value = 0;
-                                    // }  else {
                                     value = balance;
-                                    // }
-
                                 }
                                 console.log("[repay] onChange.value", value)
                                 console.log(value)
-                                props.setBalanceValue(`${environment.currency}` + value);
+                                setBalanceValue(value);
                                 props.setRepayBalance(value);
                             }
                         }}
@@ -160,7 +185,7 @@ const RepaymentModal = (props: any) => {
                         <BoldText>{props.t("Payment Method")}</BoldText>
 
                         <Select
-                            dataSource={props?.paymentMethodList || []}
+                            dataSource={paymentMethodList || []}
                             defaultIndex={paymentMethodValue}
                             fixButtonWidth={"100%"}
                             maxItemCount={4}
@@ -173,10 +198,10 @@ const RepaymentModal = (props: any) => {
                     </PaymentMethodContainer>
                     <div className={`my-4`}><img className={`w-full`} src={AdSVG} /></div>
                     <div className={`flex flex-row my-3`}>
-                        <div className={ `mr-1.5 w-full`}>
+                        <div className={`mr-1.5 w-full`}>
                             <Button onClick={() => {
                                 if (props.isRepayTypesFetching) return;
-                                navigate('/loan-record-detail');
+                                navigate(-1);
                             }} buttonText={props.t("Cancel")} backgroundColor={'bg-orange-300'} width={`w-full`} />
                         </div>
                         <div className={` ml-1.5 w-full`}>

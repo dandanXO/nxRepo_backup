@@ -5,7 +5,7 @@ import { environment } from "../../../environments/environment";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { i18nExtendModal } from "./i18n/translations";
 import { GetLoanDetailRepayConfirmDetail } from "../../api/old/getLoanDetail";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation} from "react-router-dom";
 import Button from "../../components/Button";
 import ListItem from "../../components/ListItem";
 import Divider from "../../components/Divider";
@@ -18,6 +18,9 @@ type PureExtendModalProps = {
 
 export const PureExtendModal = (props: PureExtendModalProps) => {
     const navigate = useNavigate();
+
+    const location = useLocation();
+    console.log('extend location',location)
     const {
         // repayConfirmDetail = {
         //     extendDate: "",
@@ -98,7 +101,7 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                                     }`}
                             />
                             <div className={`flex flex-row mt-6`}>
-                                <div className={`grow mr-1.5`}><Button onClick={() => navigate('/loan-record-detail')} buttonText={'Cancel'} backgroundColor={'bg-orange-300'} width={`w-full`} /></div>
+                                <div className={`grow mr-1.5`}><Button onClick={() => navigate(-2)} buttonText={'Cancel'} backgroundColor={'bg-orange-300'} width={`w-full`} /></div>
                                 <div className={`grow ml-1.5`} ><Button onClick={handleConfirm} buttonText={'Repay'} width={`w-full`} /></div>
                             </div>
                         </div>

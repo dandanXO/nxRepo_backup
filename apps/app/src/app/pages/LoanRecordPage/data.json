@@ -39,6 +39,7 @@
                 }
             ],
             "totalDueAmount": 8,
+            "totalRepayAmount": null,
             "balance": 8,
             "extensionFee": null,
             "status": "OVERDUE",
@@ -131,6 +132,7 @@
                 }
             ],
             "totalDueAmount": 2179,
+            "totalRepayAmount": null,
             "balance": 2179,
             "extensionFee": null,
             "status": "PROCESSING",
@@ -244,6 +246,7 @@
                 }
             ],
             "totalDueAmount": 2186,
+            "totalRepayAmount": null,
             "balance": 0,
             "extensionFee": null,
             "status": "PAY_OFF",
@@ -357,6 +360,7 @@
                 }
             ],
             "totalDueAmount": 1483,
+            "totalRepayAmount": null,
             "balance": 0,
             "extensionFee": null,
             "status": "PAY_OFF",
@@ -460,6 +464,7 @@
                 }
             ],
             "totalDueAmount": 10108,
+            "totalRepayAmount": null,
             "balance": 0,
             "extensionFee": null,
             "status": "PAY_OFF",
@@ -573,6 +578,7 @@
                 }
             ],
             "totalDueAmount": 1776,
+            "totalRepayAmount": null,
             "balance": 0,
             "extensionFee": null,
             "status": "PAY_OFF",
@@ -686,6 +692,7 @@
                 }
             ],
             "totalDueAmount": 1776,
+            "totalRepayAmount": null,
             "balance": 0,
             "extensionFee": null,
             "status": "PAY_OFF",
@@ -799,6 +806,7 @@
                 }
             ],
             "totalDueAmount": 1776,
+            "totalRepayAmount": null,
             "balance": 0,
             "extensionFee": null,
             "status": "PAY_OFF",
@@ -912,6 +920,7 @@
                 }
             ],
             "totalDueAmount": 1206,
+            "totalRepayAmount": null,
             "balance": 0,
             "extensionFee": null,
             "status": "PAY_OFF",
@@ -1009,6 +1018,7 @@
                 }
             ],
             "totalDueAmount": 1501,
+            "totalRepayAmount": null,
             "balance": 1501,
             "extensionFee": null,
             "status": "UNPAID",
@@ -1087,8 +1097,8 @@
         "paged": true
     },
     "totalElements": 10,
-    "last": true,
     "totalPages": 1,
+    "last": true,
     "number": 0,
     "size": 10,
     "sort": [],

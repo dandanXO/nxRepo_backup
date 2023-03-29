@@ -3,8 +3,8 @@ import axiosBaseQuery from "./base/axiosBaseQuery";
 import { GetBankCardListResponse } from "./types/getBankCardList";
 import { GetLoanRecordListRequestQuery, GetLoanRecordListReponse } from "./types/getLoanRecordList";
 import {GetIndexRequest, GetIndexResponse} from "../flow/service";
-
-
+import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "./types/getLoanDetail";
+import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "./types/getRepayTypes";
 
 
 export const API = createApi({
@@ -40,6 +40,22 @@ export const API = createApi({
                 params: query,
             }),
         }),
+        // NOTE: /api/v2/loan/detail 貸款訂單詳情
+        getLoanDetail: builder.query<GetLoanDetailResponse, GetLoanDetailRequestQuery>({
+            query: (query: GetLoanDetailRequestQuery) => ({
+                method: "get",
+                url: `/loan/detail`,
+                params: query,
+            }),
+        }),
+        // NOTE: 取得可用付款方式
+        getRepayTypes: builder.query<GetRepayTypesResponse, GetRepayTypesRequestQuerystring>({
+            query: (query: GetRepayTypesRequestQuerystring) => ({
+                method: "get",
+                url: `/repay/types`,
+                params: query,
+            }),
+        }),
         // NOTE: 取得還款證明
         // post: builder.mutation<PostResponse, PostRequest>({
         //     query: (requestBody: FormData) => ({
@@ -54,5 +70,7 @@ export const API = createApi({
 export const {
     useLazyGetIndexQuery,
     useLazyGetBankCardListQuery,
-    useLazyGetLoanRecordListQuery
+    useLazyGetLoanRecordListQuery,
+    useLazyGetLoanDetailQuery,
+    useLazyGetRepayTypesQuery
 } = API;
