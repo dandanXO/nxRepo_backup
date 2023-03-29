@@ -11,8 +11,6 @@ import { environment } from "../../../environments/environment";
 
 export const LoanRecordDetailPage = (props: any) => {
     const location = useLocation();
-    const token = getToken();
-
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetLoanDetailQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -20,7 +18,7 @@ export const LoanRecordDetailPage = (props: any) => {
     });
 
     useEffect(() => {
-        triggerGetList({ orderNo: location.state.orderNo, token });
+        triggerGetList({ orderNo: location.state.orderNo });
     }, [])
 
     useEffect(() => {

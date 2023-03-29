@@ -10,7 +10,7 @@ import {
   useLazyGetRepayTypesQuery,
   usePostRepayCreateMutation
 } from "../../../../mobile/src/app/api";
-import {PostRepayCreateRequestBody, PostRepayCreateResponse} from "../api/old/postRepayCreate";
+import {PostRepayCreateRequestBody, PostRepayCreateResponse} from "../api/types/postRepayCreate";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();

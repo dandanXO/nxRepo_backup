@@ -1,7 +1,5 @@
 export interface GetLoanDetailRequestQuery {
     orderNo: string;
-    token?:string;
-    
 }
 export interface GetLoanDetailResponse {
     applyDate?: string;                  // 申請日期

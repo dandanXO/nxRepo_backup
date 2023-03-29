@@ -2,9 +2,10 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./base/axiosBaseQuery";
 import { GetBankCardListResponse } from "./types/getBankCardList";
 import { GetLoanRecordListRequestQuery, GetLoanRecordListReponse } from "./types/getLoanRecordList";
-import {GetIndexRequest, GetIndexResponse} from "../flow/service";
+import { GetIndexRequest, GetIndexResponse } from "../flow/service";
 import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "./types/getLoanDetail";
 import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "./types/getRepayTypes";
+import { PostRepayCreateRequestBody, PostRepayCreateResponse } from './types/postRepayCreate';
 
 
 export const API = createApi({
@@ -56,6 +57,14 @@ export const API = createApi({
                 params: query,
             }),
         }),
+        // NOTE: 創建還款訂單
+        postRepayCreate: builder.mutation<PostRepayCreateResponse,PostRepayCreateRequestBody>({
+            query: (query: PostRepayCreateRequestBody) => ({
+                method: "post",
+                url: `/repay/create`,
+                data: query,
+            }),
+        }),
         // NOTE: 取得還款證明
         // post: builder.mutation<PostResponse, PostRequest>({
         //     query: (requestBody: FormData) => ({
@@ -72,5 +81,6 @@ export const {
     useLazyGetBankCardListQuery,
     useLazyGetLoanRecordListQuery,
     useLazyGetLoanDetailQuery,
-    useLazyGetRepayTypesQuery
+    useLazyGetRepayTypesQuery,
+    usePostRepayCreateMutation
 } = API;

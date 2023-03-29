@@ -20,7 +20,7 @@ import { i18nRepaymentModal } from "./i18n/translations";
 import { environment } from "../../../environments/environment";
 import { Link } from "react-router-dom";
 import { useLazyGetRepayTypesQuery } from "../../api";
-
+import useRepayCreate from "../../hooks/useRepayCreate";
 
 export const RepaymentModalContainer = styled.div`
     color: #101010;
@@ -74,60 +74,42 @@ const PaymentMethodContainer = styled.div`
 const RepaymentModal = (props: any) => {
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location)
+    const { handlePostRepayCreate } = useRepayCreate()
     const { balance = '', orderNo = '' } = location.state.currentData;
-    // NOTE: 標籤
-    /* const balance = props.balance; */
-
-    // NOTE: 變動數值
-    // const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
 
     const [radioValue, setRadioValue] = useState("balance");
+    // NOTE: 變動數值
     const [balanceValue, setBalanceValue] = useState(balance);
     const [paymentMethodValue, setPaymentMethodValue] = useState(0);
+
+    const [triggerGetList, { currentData: repayTypes, isLoading, isFetching: isRepayTypesFetching, isSuccess, isError, isUninitialized }] = useLazyGetRepayTypesQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+    useEffect(() => {
+        triggerGetList({ orderNo: orderNo });
+    }, [])
+
+    const [paymentMethodList, setPaymentMethodList] = useState<string[]>([]);
+    useEffect(() => {
+        if (repayTypes !== undefined) {
+            const methods = repayTypes && repayTypes?.map(item => {
+                return item.payTypeAlias ? item.payTypeAlias : "";
+            })
+            setPaymentMethodList(methods);
+        }
+    }, [repayTypes])
 
     const handleConfirm = () => {
         // self
         /* props.setShowRepaymentModal(false);
         // other
         props.setShowRepaymentAdsModal(true); */
-
+        const payType = repayTypes && repayTypes[paymentMethodValue].payType || '';
+        handlePostRepayCreate(false, orderNo, balanceValue, payType);
     };
 
-
-
-
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetRepayTypesQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
-
-    useEffect(() => {
-        triggerGetList({ orderNo: orderNo });
-    }, [])
-    const [paymentMethodList, setPaymentMethodList] = useState<string[]>([]);
-    useEffect(() => {
-        if (currentData !== undefined) {
-            const methods = currentData && currentData?.map(item => {
-                return item.payTypeAlias ? item.payTypeAlias : "";
-            })
-            setPaymentMethodList(methods);
-            console.log('paymentMethodList', methods)
-        }
-
-       
-    }, [currentData])
-
-
-
-    /* useEffect(() => {
-        if (!repayTypes) return;
-        const methods = repayTypes.map(item => {
-            return item.payTypeAlias ? item.payTypeAlias : "";
-        })
-        setPaymentMethodList(methods);
-    }, [repayTypes]) */
     return (
         <Overlay
             show={true}
@@ -200,13 +182,13 @@ const RepaymentModal = (props: any) => {
                     <div className={`flex flex-row my-3`}>
                         <div className={`mr-1.5 w-full`}>
                             <Button onClick={() => {
-                                if (props.isRepayTypesFetching) return;
+                                if (isRepayTypesFetching) return;
                                 navigate(-1);
                             }} buttonText={props.t("Cancel")} backgroundColor={'bg-orange-300'} width={`w-full`} />
                         </div>
                         <div className={` ml-1.5 w-full`}>
                             <Button onClick={() => {
-                                if (props.isRepayTypesFetching) return;
+                                if (isRepayTypesFetching) return;
                                 handleConfirm();
                             }} buttonText={'Repayment'} width={`w-full`} />
                         </div>
