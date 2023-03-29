@@ -39,9 +39,6 @@ export {
   Accordion,
   Button,
   Checkbox,
-  DefaultThemeConfig,
-
-  IThemeConfig,
   Colors,
   fontSizeListToRem,
 
@@ -61,11 +58,15 @@ export {
   flexCreator,
   OrangeSuccessICON,
   GeneralSuccessICON,
-  AppThemeProvider,
+
   AmountPaidIcon,
   Select,
 
   // NOTICE: THEME
+
+  AppThemeProvider,
+  IThemeConfig,
+  DefaultThemeConfig,
   GreenThemeConfig,
   DarkGreenThemeConfig,
 };

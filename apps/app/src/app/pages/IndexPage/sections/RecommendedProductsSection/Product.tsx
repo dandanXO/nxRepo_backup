@@ -1,9 +1,10 @@
 import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {useCallback, useState} from "react";
-import {IndexPageProps} from "../../../../store";
 import {PlatformProduct} from "../../../../api/models/PlatformProduct";
 import {environment} from "../../../../../environments/environment";
 import {formatPrice} from "../../../../modules/formatPrice";
+import moment from "moment-timezone";
+
 
 type Props = {
   product: PlatformProduct;
@@ -18,6 +19,8 @@ export const Product = (props: Props) => {
 
   const interestPrice = props.product.max * props.product.platformChargeFeeRate * props.loanInterestRate;
   const disbursalPrice = props.product.max * (1 - props.loanInterestRate)
+  const dueDate = moment().add(props.product.terms - 1, "days").format("MM-DD-YYYY")
+
   return (
     <div className={"product flex flex-col mb-2"} onClick={toggleExpand}>
       <div className={"brand pt-1 pb-3 px-2 flex flex-row justify-between"}>
@@ -55,7 +58,7 @@ export const Product = (props: Props) => {
 
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Due Date</div>
-            <div className={"value"}>2023-03-10</div>
+            <div className={"value"}>{dueDate}</div>
           </div>
         </div>
       )}
