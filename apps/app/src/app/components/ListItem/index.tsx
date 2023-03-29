@@ -8,11 +8,11 @@ type ListItemProps = {
 };
 
 const ListItem = (props: ListItemProps) => {
-    const { title, text, titleColor = 'text-black', textColor = titleColor, fontWeight = '', fontSize = 'text-sm' } = props;
+    const { title, text, titleColor = 'text-black', textColor = '', fontWeight = '', fontSize = 'text-sm' } = props;
     return (
         <div className={`${fontWeight} ${fontSize} flex flex-row justify-between mb-2`}>
             <div className={`${titleColor}`}>{title}</div>
-            <div className={`${textColor}`}>{text}</div>
+            <div className={`${textColor === '' ? titleColor : textColor}`}>{text}</div>
         </div>
     );
 };

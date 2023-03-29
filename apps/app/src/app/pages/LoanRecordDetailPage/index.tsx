@@ -3,41 +3,53 @@ import Divider from "../../components/Divider";
 import ListItem from "../../components/ListItem";
 import Button from "../../components/Button";
 import { AmountPaidIcon, } from "@frontend/mobile/shared/ui";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useLazyGetLoanDetailQuery } from "../../api";
+import { useEffect, useState } from "react";
+import { getToken } from "../../api/base/getToken";
+import { environment } from "../../../environments/environment";
+
 export const LoanRecordDetailPage = (props: any) => {
     const location = useLocation();
-    console.log(location)
-    const productName = 'CCC Loan';
-    const orderNo = 'no-3632791101642108-1';
-    const dueDate = '17-03-2023';
-    const loanAmount = '₹ 4,800.00';
-    const overdueDays = '0';
-    const overdueFee = '₹ 0.00';
-    const repaymentAmount = '₹ 4,800.00';
-    const amountReapid = '- ₹ 0.00';
+    const token = getToken();
 
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetLoanDetailQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
 
+    useEffect(() => {
+        triggerGetList({ orderNo: location.state.orderNo, token });
+    }, [])
+
+    useEffect(() => {
+
+        console.log('loanDetail', currentData)
+    }, [currentData])
+
+    const { status = '', productName = '', orderNo = '', dueDate = '', loanAmount = '', overdueDays = '', penaltyInterest = '', paidAmount = '', repayRecords = [], totalRepayAmount = '' } = currentData ?? {};
     return (
         <div>
             <div className={`text-sm text-center text-blue-500 bg-blue-200 py-2`}>Get more amount after instant payment</div>
             <div className={`px-6 pt-3`}>
-                <ListItem title={'Product'} text={productName} titleColor="text-slate-400" />
-                <ListItem title={'No.'} text={orderNo} titleColor="text-slate-400" />
-                <ListItem title={'Due Date'} text={dueDate} titleColor="text-slate-400" />
-                <ListItem title={'Loan Amount'} text={loanAmount} titleColor="text-slate-400" />
-                <ListItem title={'Overdue Days'} text={overdueDays} titleColor="text-slate-400" />
-                <ListItem title={'Overdue Fee'} text={overdueFee} titleColor="text-slate-400" />
+                <ListItem title={'Product'} text={productName ?? ''} titleColor="text-slate-400" />
+                <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-slate-400" />
+                <ListItem title={'Due Date'} text={dueDate ?? ''} titleColor="text-slate-400" />
+                <ListItem title={'Loan Amount'} text={`${environment.currency} ${loanAmount ?? ''}`} titleColor="text-slate-400" />
+                <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+                <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
                 <ListItem title={
                     <div className={`flex flex-row item-center items-center`}>
                         <div className={` mr-1`}>Amount Repaid</div>
-                        <Link to="amount-repaid-record-modal"><img src={AmountPaidIcon} /></Link>
+                        <Link to={{pathname: 'amount-repaid-record-modal'}} state={{repayRecords}}><img src={AmountPaidIcon} /></Link>
                     </div>
-                } text={amountReapid} titleColor="text-slate-400" />
+                } text={`- ${environment.currency} ${paidAmount ?? ''}`} titleColor="text-slate-400" />
                 <Divider />
-                <ListItem title={'Repayment Amount'} text={repaymentAmount} titleColor="text-slate-400" fontWeight="font-bold" />
+                <ListItem title={'Repayment Amount'} text={`${environment.currency} ${totalRepayAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" />
                 <div className={`flex flex-row my-3`}>
-                    <Link to="extend-confirm-modal" className={`grow mr-1.5`}><Button buttonText={'Extend'} backgroundColor={'bg-orange-300'} width={`w-full`} /></Link>
-                    <Link to="repayment-modal" className={`grow ml-1.5`}><Button buttonText={'Repay'} width={`w-full`} /></Link>
+                    <Link to={{pathname: `extend-confirm-modal`}} state={{currentData}} className={`grow mr-1.5`}><Button buttonText={'Extend'} backgroundColor={'bg-orange-300'} width={`w-full`} /></Link>
+                    <Link to={{pathname: `repayment-modal`}} state={{currentData}} className={`grow ml-1.5`}><Button buttonText={'Repay'} width={`w-full`} /></Link>
                 </div>
                 <div className={`text-xs text-gray-300`}>
                     <div>Attention：</div>

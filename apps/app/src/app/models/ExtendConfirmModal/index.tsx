@@ -20,7 +20,7 @@ export const ExtendConfirmModal = () => {
                     <div className="font-bold mb-4 leading-tight">We recommend that you prioritize full repayment when possible for a higher credit limit.</div>
                     <div className={`flex flex-col`}>
                         <div className="mb-2"><Button onClick={()=>navigate('/loan-record-detail/extend-modal')} buttonText={'Got it and go extension'} width={`w-full`} /></div>
-                        <div><Button onClick={()=>navigate('/loan-record-detail')} buttonText={'Next time'} backgroundColor={'bg-orange-300'} width={`w-full`} /></div>
+                        <div><Button onClick={()=>navigate(-1)} buttonText={'Next time'} backgroundColor={'bg-orange-300'} width={`w-full`} /></div>
                     </div>
                 </div>
             }}

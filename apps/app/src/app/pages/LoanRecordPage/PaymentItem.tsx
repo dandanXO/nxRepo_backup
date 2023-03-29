@@ -9,16 +9,15 @@ import { GetLoanRecord } from "../../api/types/getLoanRecordList";
 import { environment } from "../../../environments/environment";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-
+import { getToken } from "../../api/base/getToken";
 const PaymentItem = (props: GetLoanRecord) => {
-
+    
     const navigate = useNavigate();
 
-    const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '', loanDate = '', repayRecords = [], overdueDays = '', penaltyInterest = '' } = props;
+    const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '', loanDate = '', repayRecords = [], overdueDays = '', penaltyInterest = '',totalRepayAmount='' } = props;
 
 
     const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
-    const repaymentAmount = 'repaymentAmount';
 
     const statusEnum = {
         'OVERDUE': { text: 'Overdue', color: 'text-red-500' },
@@ -47,7 +46,7 @@ const PaymentItem = (props: GetLoanRecord) => {
                 <div className="text-base font-bold mb-1">{`${environment.currency} ${loanAmount ?? ''}`}</div>
                 <div className="text-xs">{`Due ${moment(dueDate).format('L') ?? ''}`}</div>
             </div>
-            {status !== "PAY_OFF" && <Button style={{lineHeight:0}} onClick={()=>navigate('/loan-record-detail',{ state: {orderNo} })} buttonText="Repay" width={'w-20'} height={'h-8'} fontSize="xs" />}
+            {status !== "PAY_OFF" && <Button onClick={()=>navigate(`/loan-record-detail?token=${getToken()}`,{ state: {orderNo} })} buttonText="Repay" width={'w-20'} height={'h-8'} fontSize="xs" />}
         </div>
         <Divider />
         {collapse && <div className="px-3">
@@ -59,7 +58,7 @@ const PaymentItem = (props: GetLoanRecord) => {
             <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             <Divider />
-            <ListItem title={'Repayment Amount'} text={`${environment.currency} ${repaymentAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+            <ListItem title={'Repayment Amount'} text={`${environment.currency} ${totalRepayAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             <Divider />
         </div>}
 

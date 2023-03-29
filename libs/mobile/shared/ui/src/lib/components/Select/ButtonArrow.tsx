@@ -5,7 +5,7 @@ const ButtonArrow = styled.div<{theme: string}>`
     display: inline-block;
     padding: 0 0 0 0;
     position: absolute;
-    right: 8px;
-    top: 0;
+    right: 20px;
+    top: 20px;
 `;
 export default ButtonArrow;
