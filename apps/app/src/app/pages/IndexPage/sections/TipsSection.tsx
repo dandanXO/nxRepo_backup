@@ -19,10 +19,22 @@ export const TipsSection = (props: Props) => {
     // TODO: 檢查下
     props.state.user.state === USER_AUTH_STATE.success &&
     props.state.riskControl.state !== RISK_CONTROL_STATE.empty_quota &&
-
+    props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
+    props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_one_time &&
     props.state.indexAPI?.availableAmount === 0
   ) {
-    messageComponent =  (
+    // NOTE: 沒有應還訂單時的文案
+    if(props.state.order.state === ORDER_STATE.empty) {
+      messageComponent =  (
+        <>
+          <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>
+            <div className={"mb-2"}>Your current preferential loan quota has been used up.</div>
+          </div>
+        </>
+      )
+      // NOTE: 有應還訂單時的文案
+    } else if(props.state.order.state === ORDER_STATE.normal){
+      messageComponent =  (
         <>
           <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>
             <div className={"mb-2"}>Your current preferential loan quota has been used up.</div>
@@ -30,6 +42,8 @@ export const TipsSection = (props: Props) => {
           </div>
         </>
       )
+    }
+
   } else if(
     props.state.user.state === USER_AUTH_STATE.success &&
     props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able

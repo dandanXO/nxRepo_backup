@@ -612,7 +612,128 @@ describe('IndexPage', () => {
 
 
   // NOTICE: 風控相關
-  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+  // NOTE: 沒有應還訂單
+  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+    // NOTE: Given
+    const userServiceResponse: UserServiceResponse = {
+      "userName": "Eric",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      // NOTICE: 優先權最高
+      "riskReject": false,
+      "refreshable": true,
+      "refreshOverRetry": true,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index?dummy=1", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+
+    visitIndexPage();
+
+    // NOTE: then
+    // 看到跑馬燈
+    // 看到 welcome 包含姓名、客服 Button
+    // NOTE: important 看到不反灰但無法使用的可借款額度拉霸、無法倒數計計時
+    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最中間
+    // 正常隨意顯示 Loan Over View
+    // NOTE: important 顯示文案：我們建議您在重新申請更高的信用額度之前優先還款。
+    // NOTE: important 看到 Reacquire Credit Limit Button 可以點選。
+    // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
+    // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。
+    // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
+    it("refresh 回來有風控時間有效、但額度不足", () => {
+      //
+    })
+    it("refresh 回來有風控時間有效、額度足夠", () => {
+      //
+    })
+
+  })
+
+  // NOTE: 有應還訂單
+  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
@@ -739,6 +860,7 @@ describe('IndexPage', () => {
     })
 
   })
+
 
   // NOTE: 使用者自行點擊獲取額度
   it("status: 用戶已認證、風控額度時間無效，使用者自己已經重新獲取信用額度過一次。", () => {
@@ -982,7 +1104,7 @@ describe('IndexPage', () => {
   })
 
   // NOTICE: 注意這情況
-  it.only("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
+  it("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
@@ -1100,7 +1222,7 @@ describe('IndexPage', () => {
   })
 
 
-  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
       "userName": "Eric",
