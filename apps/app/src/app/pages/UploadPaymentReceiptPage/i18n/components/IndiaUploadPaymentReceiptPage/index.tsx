@@ -13,11 +13,15 @@ import {
 import { I18UploadPaymentReceiptPageProps } from "../../types/I18UploadPaymentReceiptPageProps";
 import { withTranslation } from "react-i18next";
 import { i18nUploadPaymentReceiptPage } from "../../translations";
+import { Navigation } from "../../../../../components/layouts/Navigation";
+import { useNavigate } from "react-router-dom";
 
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)((props: I18UploadPaymentReceiptPageProps) => {
+    const navigate = useNavigate();
     return (
         <CustomPage>
+            <Navigation title={"Upload payment receipt"} back={() => { navigate(-1) }} />
             {props.isUploading && <UploadingFileModal />}
             <div className={`mb-8`}>
                 <Input

@@ -3,13 +3,15 @@ import PaymentItem from "./PaymentItem";
 import { useLazyGetLoanRecordListQuery } from "../../api";
 import { GetLoanRecordListRequestQuery } from "../../api/types/getLoanRecordList";
 import Tag from "../../components/Tag";
-
+import { Navigation } from "../../components/layouts/Navigation";
+import {useNavigate} from "react-router-dom";
 // @ts-ignore
 import { default as data } from './data.json';
 
 
 export const LoanRecordPage = () => {
     console.log('config', data)
+    const navigate = useNavigate();
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetLoanRecordListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -35,6 +37,7 @@ export const LoanRecordPage = () => {
 
     return (
         <div>
+            <Navigation title={"Payment"} back={() => {navigate(-1)}} />
             <div className={`flex flex-row py-3 px-5 justify-between`}>
                 {['Unpaid', 'Overdue', 'Done'].map(i => <Tag
                     key={i} onClick={() => setListStatus(i)} text={i}

@@ -3,6 +3,7 @@ import NoDataIcon from '../../components/images/NoData.svg';
 import { useNavigate } from "react-router-dom";
 import { useLazyGetBankCardListQuery } from "../../api";
 import { useEffect } from "react";
+import { Navigation } from "../../components/layouts/Navigation";
 export const BankCardListPage = () => {
     const navigate=useNavigate();
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetBankCardListQuery({
@@ -33,6 +34,7 @@ export const BankCardListPage = () => {
     }
     return (
         <div className={`flex flex-col h-screen`}>
+            <Navigation title={"Upload payment receipt"} back={() => { navigate(-1) }} />
             {
                 bankList.length === 0 ? renderNodata() :
                     <>
