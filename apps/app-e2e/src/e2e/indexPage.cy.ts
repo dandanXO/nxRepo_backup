@@ -27,7 +27,7 @@ infoLog("env", Cypress.env());
 
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
-  cy.visit("/??pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
+  cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
 }
 describe('IndexPage', () => {
   beforeEach(() => {
@@ -44,7 +44,7 @@ describe('IndexPage', () => {
   it("status: 用戶未認證", () => {
     // NOTE: Given - 訪客
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.ready,
       "demoAccount": false,
       "oldUser": false,
@@ -102,7 +102,7 @@ describe('IndexPage', () => {
   it("status: 用戶認證中", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.authing,
       "demoAccount": false,
       "oldUser": false,
@@ -216,10 +216,10 @@ describe('IndexPage', () => {
     // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
   })
 
-  it.only("status: 用戶認證被拒絕", () => {
+  it("status: 用戶認證被拒絕", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.reject,
       "demoAccount": false,
       "oldUser": false,
@@ -259,7 +259,7 @@ describe('IndexPage', () => {
   it("status: 用戶已認證、有3天即將到期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -377,7 +377,7 @@ describe('IndexPage', () => {
   it("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -498,7 +498,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -616,7 +616,7 @@ describe('IndexPage', () => {
   it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -736,7 +736,7 @@ describe('IndexPage', () => {
   it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -866,7 +866,7 @@ describe('IndexPage', () => {
   it("status: 用戶已認證、風控額度時間無效，使用者自己已經重新獲取信用額度過一次。", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -987,7 +987,7 @@ describe('IndexPage', () => {
   it("status: 用戶已認證、風控額度時間無效，使用者自己重新獲取信用三次了。", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -1110,7 +1110,7 @@ describe('IndexPage', () => {
   it("status: 用戶已認證、但風控額度直接不足", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -1229,7 +1229,7 @@ describe('IndexPage', () => {
   it("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -1345,10 +1345,10 @@ describe('IndexPage', () => {
   })
 
 
-  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: UserServiceResponse = {
-      "userName": "Eric",
+      "userName": "9013452123",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,

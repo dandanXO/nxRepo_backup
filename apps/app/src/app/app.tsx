@@ -15,7 +15,6 @@ export function App() {
       <Provider store={appStore}>
         <AppThemeProvider theme={window.theme}>
           <AppRouter/>
-          <TabBar/>
         </AppThemeProvider>
       </Provider>
     </div>
