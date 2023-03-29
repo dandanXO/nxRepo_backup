@@ -24,6 +24,8 @@ import {useCallback, useMemo} from "react";
 import cx from "classnames";
 import {NoticeUserReacquireOver3TimeSections} from "./sections/NoticeSection/NoticeUserReacquireOver3TimeSections";
 import {useNavigate} from "react-router-dom";
+import {Horizontal} from "../../components/layouts/Horizontal";
+import {Product} from "./sections/RecommendedProductsSection/Product";
 
 export enum PageStateEnum {
   unknow,
@@ -82,6 +84,8 @@ export const IndexPage = () => {
 
   const navigate = useNavigate();
 
+  const loanInterestRate = indexPageState.indexAPI?.chargeFeeDetails.find(fee => fee.key === "LOAN_INTEREST");
+
   return (
     <div className={"container flex flex-col min-h-screen"}>
 
@@ -118,7 +122,7 @@ export const IndexPage = () => {
           )&& (
             <div className={"mb-4 mt-6"}>
               <RecommendedProductsSection state={indexPageState}/>
-              <div className={"border-t-2 h-[0.5px]"}/>
+              <Horizontal/>
             </div>
           )}
 
@@ -191,7 +195,7 @@ export const IndexPage = () => {
 
       </div>
 
-      <div className={"sticky bottom-[63px] px-3 py-3"}>
+      <div className={"sticky bottom-[63px] px-3 py-2"}>
         {/*TODO*/}
         {!applyHide &&
           (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) && (
@@ -233,6 +237,76 @@ export const IndexPage = () => {
 
       <TabBar/>
 
+      {/*NOTE: 一鍵借款 Modal*/}
+      <div className={"quick-repayment-modal z-10 w-screen h-screen bg-white p-5 sticky top-0 bottom-0 flex flex-col"}>
+        {/*<div className={"close"}>X</div>*/}
+        <div className={"header"}>
+          <div className={"text-xl font-medium"}>My Loan Orders</div>
+        </div>
+        <div className={"summary flex-1"}>
+          <div className={"flex flex-col"}>
+            <div className={"text-md font-medium"}>Summary Details</div>
+            <div className={"item-list"}>
+              <div className={"item font-light flex flex-row justify-between"}>
+                <div className={"key"}>Loan Amount</div>
+                <div className={"value"}>₹ 6,400.00</div>
+              </div>
+              <div className={"item font-light flex flex-row justify-between"}>
+                <div className={"key"}>Interest</div>
+                <div className={"value"}>₹ 0.00</div>
+              </div>
+              <div className={"item font-light flex flex-row justify-between"}>
+                <div className={"key"}>Processing Fee</div>
+                <div className={"value"}>₹ 1,472.00</div>
+              </div>
+              <div className={"item font-light flex flex-row justify-between"}>
+                <div className={"key"}>Service Charge</div>
+                <div className={"value"}>₹ 128.00</div>
+              </div>
+              <div className={"item font-light flex flex-row justify-between"}>
+                <div className={"key"}>Disbursal Amount</div>
+                <div className={"value"}>₹ 4,800.00</div>
+              </div>
+              <div className={"item font-light flex flex-row justify-between"}>
+                <div className={"key"}>Repayment Date</div>
+                <div className={"value"}>03-25-2023</div>
+              </div>
+          </div>
+        </div>
+        </div>
+
+        <Horizontal/>
+
+        <div className={"products "}>
+          <div className={"text-md font-medium mb-2"}>Your Products</div>
+          <div className={"flex flex-col h-[200px] overflow-auto"}>
+            {indexPageState.indexAPI?.products.map(((product, index) => {
+              return (
+                <Product key={index} product={product} loanInterestRate={!loanInterestRate ? 1 : loanInterestRate.counting}/>
+              )
+            }))}
+          </div>
+        </div>
+
+        <Horizontal/>
+
+        <div className={"footer flex-1"}>
+
+
+          <div className={"bankcard"}>
+            <div className={"text-md font-medium"}>Bank Card</div>
+          </div>
+
+          <Horizontal/>
+
+          <div className={"text-xs font-light text-gray-400 mb-2"}>By continuing, I have read and agree
+            <span className={"text-blue-500 underline"}> Loan Agreement </span> carefully.</div>
+          <Button text={"Confirm"} bgColor={"bg-[#F58B10]"}/>
+
+        </div>
+
+
+      </div>
     </div>
   )
 }

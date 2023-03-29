@@ -4,11 +4,13 @@ import {PlatformProduct} from "../../../../api/models/PlatformProduct";
 import {environment} from "../../../../../environments/environment";
 import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment-timezone";
+import cx from "classnames";
 
 
 type Props = {
   product: PlatformProduct;
   loanInterestRate: number;
+  className?: string;
 };
 
 export const Product = (props: Props) => {
@@ -22,16 +24,16 @@ export const Product = (props: Props) => {
   const dueDate = moment().add(props.product.terms - 1, "days").format("MM-DD-YYYY")
 
   return (
-    <div className={"product flex flex-col mb-2"} onClick={toggleExpand}>
-      <div className={"brand pt-1 pb-3 px-2 flex flex-row justify-between"}>
+    <div className={cx("product flex flex-col mb-1")} onClick={toggleExpand}>
+      <div className={"brand pb-1 flex flex-row justify-between"}>
         <div className={"left flex flex-row items-center"}>
-          <div className={"w-10 h-10 rounded-md mr-2"}>
+          <div className={"w-10 h-10 rounded-md mr-3"}>
             <img src={props.product.logoUrl}/>
           </div>
-          <div className={""}>{props.product.productName}</div>
+          <div className={"font-light"}>{props.product.productName}</div>
         </div>
         <div className={"right flex flex-row items-center"}>
-          <div className={"font-medium"}>₹ 3,200</div>
+          <div className={"font-light"}>₹ 3,200</div>
           {expand ? (
             <MdExpandMore size={30} color={"#AAAAAA"}/>
           ) : (
@@ -40,7 +42,7 @@ export const Product = (props: Props) => {
         </div>
       </div>
       {expand && (
-        <div className={"expandable-brand bg-[#F3F3F3] text-[#707070] p-3 flex flex-col"}>
+        <div className={"expandable-brand bg-[#F3F3F3] text-[#707070] p-2 flex flex-col"}>
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Interest</div>
             <div className={"value"}>{environment.currency} {formatPrice(interestPrice)}</div>
