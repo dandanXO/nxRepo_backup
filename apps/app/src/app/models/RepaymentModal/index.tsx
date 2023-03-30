@@ -13,14 +13,16 @@ import {
     Title,
     Overlay,
     Radio,
-    Input, Select,
+    Input,
 } from "@frontend/mobile/shared/ui";
+import Select from 'react-select';
 import { WithTranslation, withTranslation } from "react-i18next";
 import { i18nRepaymentModal } from "./i18n/translations";
 import { environment } from "../../../environments/environment";
 import { Link } from "react-router-dom";
 import { useLazyGetRepayTypesQuery } from "../../api";
 import useRepayCreate from "../../hooks/useRepayCreate";
+import useRepayTypes from "../../hooks/useRepayTypes";
 
 export const RepaymentModalContainer = styled.div`
     color: #101010;
@@ -69,44 +71,32 @@ const PaymentMethodContainer = styled.div`
 `;
 
 
-
+type paymentMethodValueType = {
+    type: string;
+    label: string;
+};
 
 const RepaymentModal = (props: any) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { handlePostRepayCreate } = useRepayCreate()
     const { balance = '', orderNo = '' } = location.state.currentData;
-
     const [radioValue, setRadioValue] = useState("balance");
     // NOTE: 變動數值
     const [balanceValue, setBalanceValue] = useState(balance);
-    const [paymentMethodValue, setPaymentMethodValue] = useState(0);
-
-    const [triggerGetList, { currentData: repayTypes, isLoading, isFetching: isRepayTypesFetching, isSuccess, isError, isUninitialized }] = useLazyGetRepayTypesQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
+ 
+    // NOTE: 付款方式
+    const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
     useEffect(() => {
         triggerGetList({ orderNo: orderNo });
     }, [])
-
-    const [paymentMethodList, setPaymentMethodList] = useState<string[]>([]);
-    useEffect(() => {
-        if (repayTypes !== undefined) {
-            const methods = repayTypes && repayTypes?.map(item => {
-                return item.payTypeAlias ? item.payTypeAlias : "";
-            })
-            setPaymentMethodList(methods);
-        }
-    }, [repayTypes])
 
     const handleConfirm = () => {
         // self
         /* props.setShowRepaymentModal(false);
         // other
         props.setShowRepaymentAdsModal(true); */
-        const payType = repayTypes && repayTypes[paymentMethodValue].payType || '';
+        const payType = repayType && repayType.type;
         handlePostRepayCreate(false, orderNo, balanceValue, payType);
     };
 
@@ -151,7 +141,6 @@ const RepaymentModal = (props: any) => {
                             // NOTE: if custom balance exceed max balance then setting max balance
                             if (String(Number(value)) === "NaN" || String(value) === "0") {
                                 setBalanceValue(1);
-                                props.setRepayBalance(1);
                             } else {
                                 if (Number(value) > Number(balance)) {
                                     value = balance;
@@ -159,22 +148,16 @@ const RepaymentModal = (props: any) => {
                                 console.log("[repay] onChange.value", value)
                                 console.log(value)
                                 setBalanceValue(value);
-                                props.setRepayBalance(value);
                             }
                         }}
                     />
                     <PaymentMethodContainer>
                         <BoldText>{props.t("Payment Method")}</BoldText>
-
                         <Select
-                            dataSource={paymentMethodList || []}
-                            defaultIndex={paymentMethodValue}
-                            fixButtonWidth={"100%"}
-                            maxItemCount={4}
-                            // FIXME: to controlled component
-                            onSelect={(index: number) => {
-                                setPaymentMethodValue(index);
-                                props.setPayType(index);
+                            options={repayTypesList || []}
+                            value={repayType}
+                            onChange={(item) => {
+                                setRepayType(item as paymentMethodValueType);
                             }}
                         />
                     </PaymentMethodContainer>
