@@ -30,7 +30,7 @@ class OrderDetail extends Component{
             isShowBtn,
             hidenTag:'0',
             hideContactIfNotDue: true,
-            repaymentLinkIsProhibited: false,
+            repaymentLinkIsProhibited: true,
         };
         const _this = this;
         this.overdueRecordColumns = [
@@ -529,7 +529,7 @@ class OrderDetail extends Component{
             method: 'get'
           }).then((res) => {
             _this.setState({
-              repaymentLinkIsProhibited: res
+              repaymentLinkIsProhibited: true //res
             });
           });
         }
