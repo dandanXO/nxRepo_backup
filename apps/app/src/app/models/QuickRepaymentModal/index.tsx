@@ -5,6 +5,7 @@ import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {Button} from "../../components/layouts/Button";
 import {useCallback, useState} from "react";
 import {IndexPageProps} from "../../store";
+import {FinalProductType} from "../../pages/IndexPage/sections/RecommendedProductsSection";
 
 type Props = IndexPageProps;
 
@@ -60,8 +61,12 @@ export const QuickRepaymentModal = (props: Props) => {
         <div className={"text-md font-medium mb-2"}>Your Products</div>
         <div className={"flex flex-col h-[200px] overflow-auto"}>
           {props.state.indexAPI?.products.map(((product, index) => {
+            const finalProduct: FinalProductType = {
+              ...product,
+              finalLoanPrice: 0,
+            };
             return (
-              <Product key={index} product={product} loanInterestRate={!loanInterestRate ? 1 : loanInterestRate.counting}/>
+              <Product key={index} product={finalProduct} loanInterestRate={!loanInterestRate ? 1 : loanInterestRate.counting}/>
             )
           }))}
         </div>

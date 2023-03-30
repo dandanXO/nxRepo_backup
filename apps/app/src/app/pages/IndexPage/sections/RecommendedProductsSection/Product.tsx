@@ -5,10 +5,11 @@ import {environment} from "../../../../../environments/environment";
 import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment-timezone";
 import cx from "classnames";
+import {FinalProductType} from "./index";
 
 
 type Props = {
-  product: PlatformProduct;
+  product: FinalProductType;
   loanInterestRate: number;
   className?: string;
 };
@@ -19,8 +20,8 @@ export const Product = (props: Props) => {
     setExpand(!expand);
   }, [expand]);
 
-  const interestPrice = props.product.max * props.product.platformChargeFeeRate * props.loanInterestRate;
-  const disbursalPrice = props.product.max * (1 - props.loanInterestRate)
+  const interestPrice = props.product.finalLoanPrice * props.product.platformChargeFeeRate * props.loanInterestRate;
+  const disbursalPrice = props.product.finalLoanPrice * (1 - props.product.platformChargeFeeRate)
   const dueDate = moment().add(props.product.terms - 1, "days").format("MM-DD-YYYY")
 
   return (
@@ -33,7 +34,7 @@ export const Product = (props: Props) => {
           <div className={"font-light"}>{props.product.productName}</div>
         </div>
         <div className={"right flex flex-row items-center"}>
-          <div className={"font-light"}>₹ 3,200</div>
+          <div className={"font-light"}>₹ {formatPrice((props.product as FinalProductType).finalLoanPrice)}</div>
           {expand ? (
             <MdExpandLess size={30} color={"#AAAAAA"}/>
           ) : (

@@ -60,7 +60,7 @@ appStore.dispatch(indexPageSlice.actions.updateIndexAPI({
       "productId": 1,
       "productName": "A LOAN",
       "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
-      "min": 1000,
+      "min": 3000,
       "max": 3000,
       "terms": 7,
       "platformChargeFeeRate": 0.4
@@ -105,7 +105,7 @@ appStore.dispatch(indexPageSlice.actions.updateIndexAPI({
       "productId": 6,
       "productName": "F LOAN",
       "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
-      "min": 6000,
+      "min": 1000,
       "max": 10000,
       "terms": 9,
       "platformChargeFeeRate": 0.4
@@ -125,6 +125,69 @@ appStore.dispatch(indexPageSlice.actions.updateIndexAPI({
       "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
       "min": 6000,
       "max": 10000,
+      "terms": 9,
+      "platformChargeFeeRate": 0.4
+    },
+    {
+      "productId": 9,
+      "productName": "I LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 6000,
+      "max": 10000,
+      "terms": 9,
+      "platformChargeFeeRate": 0.4
+    },
+    {
+      "productId": 10,
+      "productName": "J LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 1000,
+      "max": 1000,
+      "terms": 9,
+      "platformChargeFeeRate": 0.4
+    },
+    {
+      "productId": 11,
+      "productName": "K LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 3000,
+      "max": 5000,
+      "terms": 9,
+      "platformChargeFeeRate": 0.4
+    },
+    {
+      "productId": 12,
+      "productName": "L LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 6000,
+      "max": 3000,
+      "terms": 9,
+      "platformChargeFeeRate": 0.4
+    },
+    {
+      "productId": 13,
+      "productName": "13 LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 4000,
+      "max": 5000,
+      "terms": 9,
+      "platformChargeFeeRate": 0.4
+    },
+    {
+      "productId": 14,
+      "productName": "14 LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 5000,
+      "max": 9000,
+      "terms": 9,
+      "platformChargeFeeRate": 0.4
+    },
+    {
+      "productId": 15,
+      "productName": "15 LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 1000,
+      "max": 1000,
       "terms": 9,
       "platformChargeFeeRate": 0.4
     }
