@@ -1,9 +1,11 @@
 // NOTICE: refactor me
-import {GetOpenIndexResponse, IndexServiceResponse, UserServiceResponse} from "../../../app/src/app/flow/service";
+import {IndexServiceResponse} from "../../../app/src/app/api/service";
 
 import {indexPagePo} from "../support/indexPage.po";
 import {indexPageSlice, USER_AUTH_STATE} from "../../../app/src/app/flow";
 import moment from "moment-timezone"
+import {GetOpenIndexResponse} from "../../../app/src/app/api/services/indexService/getOpenIndexService";
+import {UserServiceResponse} from "../../../app/src/app/api/services/userService";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";

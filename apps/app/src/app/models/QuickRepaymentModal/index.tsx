@@ -5,13 +5,11 @@ import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {Button} from "../../components/layouts/Button";
 import {useCallback, useState} from "react";
 import {IndexPageProps} from "../../store";
-import {FinalProductType} from "../../pages/IndexPage/sections/RecommendedProductsSection";
+import {FinalProductType} from "../../pages/IndexPage";
 
 type Props = IndexPageProps;
 
 export const QuickRepaymentModal = (props: Props) => {
-
-  const loanInterestRate = props.state.indexAPI?.chargeFeeDetails.find(fee => fee.key === "LOAN_INTEREST");
   const [expandBankcard, setExpandBankcard] = useState(false);
   const onClickExpandBankcard = useCallback(() => {
     setExpandBankcard(!expandBankcard)
@@ -63,10 +61,16 @@ export const QuickRepaymentModal = (props: Props) => {
           {props.state.indexAPI?.products.map(((product, index) => {
             const finalProduct: FinalProductType = {
               ...product,
-              finalLoanPrice: 0,
+              calculating: {
+                finalLoanPrice: 0,
+                interestPrice: 0,
+                terms: 0,
+                disbursalPrice: 0,
+                dueDate: "",
+              }
             };
             return (
-              <Product key={index} product={finalProduct} loanInterestRate={!loanInterestRate ? 1 : loanInterestRate.counting}/>
+              <Product key={index} product={finalProduct}/>
             )
           }))}
         </div>

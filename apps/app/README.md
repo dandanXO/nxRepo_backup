@@ -4,6 +4,8 @@
 * css
   * 使用 tailwind，在合理情況下去使用指定 px
   * [tailwind 常用類別](./docs/TAILWIND.md)
+* UI/UX
+  * 按鈕可點擊範圍盡量合理加大
 * typescript
   * 開啟 strict 模式
   * [Typescript strict](./docs/TYPESCRIPT.md)
