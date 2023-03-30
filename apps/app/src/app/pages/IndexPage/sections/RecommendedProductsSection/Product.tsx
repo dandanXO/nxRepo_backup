@@ -1,6 +1,5 @@
 import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {useCallback, useState} from "react";
-import {PlatformProduct} from "../../../../api/models/PlatformProduct";
 import {environment} from "../../../../../environments/environment";
 import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment-timezone";
