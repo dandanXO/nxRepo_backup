@@ -14,6 +14,7 @@ const PaymentItem = (props: GetLoanRecord) => {
     
     const navigate = useNavigate();
 
+    // NOTE: 印度的時間格式要轉成 月/日/年
     const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '', loanDate = '', repayRecords = [], overdueDays = '', penaltyInterest = '',totalRepayAmount='' } = props;
 
 
@@ -34,7 +35,7 @@ const PaymentItem = (props: GetLoanRecord) => {
         setCollapse(!collapse);
     };
 
-    return <div className={`border-solid border-slate-200 border px-2 pt-4 pb-3 mx-4 mb-5 rounded-lg`}>
+    return <div className={`border-solid border-slate-200 border px-2 pt-4 pb-3 mx-4 mb-5 rounded-lg`}  onClick={handleCollapse}>
         <div className="flex flex-row justify-between mb-2 px-2">
             <div className="flex flex-row items-center">
                 <div className="w-6 h-6 mr-2 "><img src={iconUrl} alt="logo" /></div><div className="text-sm font-bold">{productName ?? ''}</div>
@@ -51,9 +52,9 @@ const PaymentItem = (props: GetLoanRecord) => {
         <Divider />
         {collapse && <div className="px-3">
             <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-slate-400" />
-            <ListItem title={'Loan Date'} text={loanDate ?? ''} titleColor="text-slate-400" />
-            <ListItem title={'Due Date'} text={dueDate ?? ''} titleColor="text-slate-400" />
-            {status === "PAY_OFF" && <ListItem title={'Repayment Date'} text={repaymentDate ?? ''} titleColor="text-slate-400" />}
+            <ListItem title={'Loan Date'} text={loanDate ? moment(loanDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
+            <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
+            {status === "PAY_OFF" && <ListItem title={'Repayment Date'} text={repaymentDate ? moment(repaymentDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />}
             <ListItem title={'Loan Amount'} text={`${environment.currency} ${loanAmount ?? ''}`} titleColor="text-slate-400" />
             <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
@@ -62,7 +63,7 @@ const PaymentItem = (props: GetLoanRecord) => {
             <Divider />
         </div>}
 
-        <div className={'flex flex-row items-center justify-center mt-3'} onClick={handleCollapse}>
+        <div className={'flex flex-row items-center justify-center mt-3'}>
             <div className={'text-xs text-slate-400 mr-2'}>{'view details'}</div>
             <div className={'w-2.5'}>
                 {collapse ? (
