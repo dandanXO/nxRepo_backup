@@ -1,6 +1,13 @@
 import {Button} from "../../components/layouts/Button";
+import {useCallback} from "react";
 
-export const QRSuccessModal = () => {
+type Props = {
+  onClose: () => void;
+}
+export const QRSuccessModal = (props: Props) => {
+  const onClickClose = useCallback(() => {
+    props.onClose()
+  }, [])
   return (
     <div className={"loan-agreement-modal z-10 w-screen h-screen bg-black bg-opacity-80 p-5 sticky top-0 bottom-0 flex flex-col justify-center items-center"}>
 
@@ -20,7 +27,7 @@ export const QRSuccessModal = () => {
         </div>
 
         <div>
-          <Button text={"OK"} bgColor={"bg-[#F58B10]"}/>
+          <Button text={"OK"} bgColor={"bg-[#F58B10]"} onClick={onClickClose}/>
         </div>
 
       </div>

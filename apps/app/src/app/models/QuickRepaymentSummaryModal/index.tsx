@@ -13,6 +13,8 @@ type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];
   setQuickRepaymentSummaryModal: Dispatch<SetStateAction<boolean>>;
   calculatingSummary: FinalProductsSummary;
+  confirmApply: () => void;
+  setShowLoanAgreementModal: Dispatch<SetStateAction<boolean>>;
 }
 
 export const QuickRepaymentSummaryModal = (props: Props) => {
@@ -21,10 +23,18 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
     setExpandBankcard(!expandBankcard)
   }, [expandBankcard]);
 
-
   const onClickClose = useCallback(() => {
     props.setQuickRepaymentSummaryModal(false);
-  }, [props.setQuickRepaymentSummaryModal])
+  }, [])
+
+  const onClickConfirmApply = useCallback(() => {
+    props.setQuickRepaymentSummaryModal(false)
+    props.confirmApply()
+  }, [])
+
+  const onClickLoanAgreement = useCallback(() => {
+    props.setShowLoanAgreementModal(true);
+  }, []);
 
   return (
     <div className={"quick-repayment-modal z-10 w-screen h-screen bg-white p-4 fixed top-0 bottom-0 flex flex-col"}>
@@ -102,9 +112,13 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
 
         <Horizontal/>
 
-        <div className={"text-xs font-light text-gray-400 mb-2"}>By continuing, I have read and agree
-          <span className={"text-blue-500 underline"}> Loan Agreement </span> carefully.</div>
-        <Button text={"Confirm"} bgColor={"bg-[#F58B10]"}/>
+        <div className={"text-xs font-light text-gray-400 mb-2"}>
+          <span>By continuing, I have read and agree</span>
+          <span className={"text-blue-500 underline"} onClick={onClickLoanAgreement}> Loan Agreement </span>
+          <span>carefully.</span>
+        </div>
+
+        <Button text={"Confirm"} bgColor={"bg-[#F58B10]"} onClick={onClickConfirmApply}/>
 
       </div>
 

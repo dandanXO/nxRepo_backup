@@ -231,21 +231,20 @@ export const IndexPage = () => {
           [currentValue.key]: currentValue.counting
         }
       }, {})
-
-      console.log("keyFeeMapping", keyFeeMapping);
+      // console.log("keyFeeMapping", keyFeeMapping);
 
       const finalProductsSummary = {...initialFinalProductsSummary};
-      console.log("finalProductsSummary", finalProductsSummary);
+      // console.log("finalProductsSummary", finalProductsSummary);
       if(keyFeeMapping) {
         currentSelectedProducts.map((product) => {
-          console.log("product", product);
+          // console.log("product", product);
           const interestPrice = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.LOAN_INTEREST;
           const disbursalPrice = product.calculating.finalLoanPrice * (1 - product.platformChargeFeeRate)
           const dueDate = moment().add(product.terms - 1, "days");
           const formatedDueDate = dueDate.format("MM-DD-YYYY");
 
-          console.log("interestPrice", interestPrice);
-          console.log("disbursalPrice", disbursalPrice);
+          // console.log("interestPrice", interestPrice);
+          // console.log("disbursalPrice", disbursalPrice);
 
           product.calculating.interestPrice = interestPrice;
           product.calculating.disbursalPrice = disbursalPrice;
@@ -254,8 +253,8 @@ export const IndexPage = () => {
           const processingFee = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.PROCESSING_FEE;
           const serviceCharge = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.SERVICE_FEE;
 
-          console.log("processingFee", processingFee);
-          console.log("serviceCharge", serviceCharge);
+          // console.log("processingFee", processingFee);
+          // console.log("serviceCharge", serviceCharge);
 
           finalProductsSummary.loanAmount = finalProductsSummary.loanAmount + product.calculating.finalLoanPrice
           finalProductsSummary.interest = finalProductsSummary.interest + interestPrice;
@@ -273,7 +272,7 @@ export const IndexPage = () => {
           }
         })
       }
-      console.log("finalProductsSummary", finalProductsSummary);
+      // console.log("finalProductsSummary", finalProductsSummary);
       setCalculatingSummary(finalProductsSummary);
       setCalculatingProducts(currentSelectedProducts)
       setCurrentSelectedProductsPrice(currentSelectedProductsPrice);
@@ -281,13 +280,15 @@ export const IndexPage = () => {
   }, [indexPageState.indexAPI?.products, quotaBarTargetPrice])
 
   const [showQuickRepaymentSummaryModal, setQuickRepaymentSummaryModal] = useState(false);
+  const [showLoanAgreementModal, setShowLoanAgreementModal] = useState(false);
+  const [showQRSuccessModal, setShowQRSuccessModal] = useState(false);
 
   const onClickApply = useCallback(() => {
     // NOTICE: empty guard
     if(!calculatingProducts) return;
     setQuickRepaymentSummaryModal(true);
-  }, [currentSelectedProductsPrice]);
 
+  }, [currentSelectedProductsPrice]);
 
   const confirmApply = useCallback(() => {
     // NOTICE:
@@ -458,22 +459,34 @@ export const IndexPage = () => {
               })}/>
           </>
         )}
-
       </div>
 
-      {/*NOTE: 一鍵借款 Modal*/}
+      {/*NOTE: Quick Repay Modal*/}
       {showQuickRepaymentSummaryModal && (
         <QuickRepaymentSummaryModal
           setQuickRepaymentSummaryModal={setQuickRepaymentSummaryModal}
           state={indexPageState}
           calculatingProducts={calculatingProducts || []}
           calculatingSummary={calculatingSummary || {...initialFinalProductsSummary}}
+          confirmApply={() => {
+            confirmApply()
+            setShowQRSuccessModal(true);
+          }}
+          setShowLoanAgreementModal={setShowLoanAgreementModal}
         />
       )}
 
-      {/*NOTE: 一鍵借款 AgreementModal*/}
-      {/*<LoanAgreementModal/>*/}
-      {/*<QRSuccessModal/>*/}
+      {/*NOTE: Quick Repay - RepaymentAgreementModal*/}
+      {showLoanAgreementModal && <LoanAgreementModal onClose={() => {
+        setShowLoanAgreementModal(false);
+      }}/>}
+
+      {/*NOTE: Quick Repay - SuccessModal*/}
+      {showQRSuccessModal && (
+        <QRSuccessModal onClose={() => {
+          setShowQRSuccessModal(false)
+        }}/>
+      )}
 
     </Page>
   )
