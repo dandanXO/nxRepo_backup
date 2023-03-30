@@ -3,11 +3,21 @@ import {runAxios} from "../../base/runAxios";
 export type GetIndexRequest = {
   dummy?: number;
 }
+export enum FeeRateKey {
+  "DAILY_FEE" = "DAILY_FEE" ,
+  "GST" = "GST" ,
+  "LOAN_AMOUNT" = "LOAN_AMOUNT" ,
+  "LOAN_INTEREST" = "LOAN_INTEREST" ,
+  "PENALTY_INTEREST" = "PENALTY_INTEREST",
+  "PROCESSING_FEE" = "PROCESSING_FEE",
+  "REDUCTION_AMOUNT" = "REDUCTION_AMOUNT",
+  "SERVICE_FEE" = "SERVICE_FEE",
+}
 export type PlatformChargeFeeRateDetail = {
   counting: number;
   // 费率占比%
 
-  key: "DAILY_FEE" | "GST" | "LOAN_AMOUNT" | "LOAN_INTEREST" | "PENALTY_INTEREST" | "PROCESSING_FEE" | "REDUCTION_AMOUNT" | "SERVICE_FEE";
+  key: FeeRateKey;
   // KEY值
 
   title: string;

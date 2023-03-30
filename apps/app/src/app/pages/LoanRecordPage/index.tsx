@@ -7,6 +7,7 @@ import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router-dom";
 // @ts-ignore
 import { default as data } from './data.json';
+import {Page} from "../../components/layouts/Page";
 
 
 export const LoanRecordPage = () => {
@@ -36,7 +37,7 @@ export const LoanRecordPage = () => {
     }, [currentData])
 
     return (
-        <div>
+        <Page>
             <Navigation title={"Payment"} back={() => { navigate(-1) }} />
             <div className={`flex flex-row py-3 px-5 justify-between sticky top-[56px] bg-white`}>
                 {['Unpaid', 'Overdue', 'Done'].map(i => <Tag
@@ -55,6 +56,6 @@ export const LoanRecordPage = () => {
                     })
                     : <div className="flex justify-center items-center p-3">There are no orders currently</div>
             }
-        </div>
+        </Page>
     )
 }

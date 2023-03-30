@@ -29,15 +29,15 @@ import {Product} from "./sections/RecommendedProductsSection/Product";
 import {AiOutlineClose, MdExpandLess, MdExpandMore} from "react-icons/all";
 import {CloseButton} from "../../components/layouts/CloseButton";
 import {LoanAgreementModal} from "../../models/QRLoanAgreementModal";
-import {QuickRepaymentModal} from "../../models/QuickRepaymentModal";
+import {QuickRepaymentSummaryModal} from "../../models/QuickRepaymentSummaryModal";
 import {QRSuccessModal} from "../../models/QRSuccessModal";
 import moment from "moment-timezone";
-import {PlatformProduct} from "../../api/services/indexService/getIndexService";
+import {FeeRateKey, PlatformProduct} from "../../api/services/indexService/getIndexService";
 import {ProductApplyDetail} from "../../api/services/loanService";
 import {Page} from "../../components/layouts/Page";
+import {Moment} from "moment";
 
 export type FinalProductType = PlatformProduct & {
-
   calculating: {
     finalLoanPrice: number;
     interestPrice: number;
@@ -45,6 +45,28 @@ export type FinalProductType = PlatformProduct & {
     disbursalPrice: number;
     dueDate: string;
   }
+}
+
+export type FinalProductsSummary = {
+  loanAmount: number;
+  interest: number;
+  processingFee: number;
+  serviceCharge: number;
+  disbursalAmount: number;
+  repaymentDate: Moment | null;
+}
+
+export type FeeRateKeyToPriceMapping = {
+  [key in FeeRateKey]: number
+};
+
+const initialFinalProductsSummary: FinalProductsSummary = {
+  loanAmount: 0,
+  interest: 0,
+  processingFee: 0,
+  serviceCharge: 0,
+  disbursalAmount: 0,
+  repaymentDate: null,
 }
 
 export enum PageStateEnum {
@@ -108,6 +130,7 @@ export const IndexPage = () => {
   const [quotaBarTargetPrice, setQuotaBarTargetPrice] = useState(0);
   const [calculatingProducts, setCalculatingProducts] = useState<FinalProductType[]>()
   const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] = useState(0);
+  const [calculatingSummary, setCalculatingSummary] = useState<FinalProductsSummary>();
 
   // NOTE: setCalculatingProducts
   useEffect(() => {
@@ -202,25 +225,72 @@ export const IndexPage = () => {
       // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice);
 
 
-      const loanInterestRate = indexPageState.indexAPI?.chargeFeeDetails.find(fee => fee.key === "LOAN_INTEREST");
+      const keyFeeMapping: any = indexPageState.indexAPI?.chargeFeeDetails.reduce((previousMap, currentValue) => {
+        return {
+          ...previousMap,
+          [currentValue.key]: currentValue.counting
+        }
+      }, {})
 
-      if(loanInterestRate) {
+      console.log("keyFeeMapping", keyFeeMapping);
+
+      const finalProductsSummary = {...initialFinalProductsSummary};
+      console.log("finalProductsSummary", finalProductsSummary);
+      if(keyFeeMapping) {
         currentSelectedProducts.map((product) => {
-          const interestPrice = product.calculating.finalLoanPrice * product.platformChargeFeeRate * loanInterestRate.counting;
+          console.log("product", product);
+          const interestPrice = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.LOAN_INTEREST;
           const disbursalPrice = product.calculating.finalLoanPrice * (1 - product.platformChargeFeeRate)
-          const dueDate = moment().add(product.terms - 1, "days").format("MM-DD-YYYY")
+          const dueDate = moment().add(product.terms - 1, "days");
+          const formatedDueDate = dueDate.format("MM-DD-YYYY");
+
+          console.log("interestPrice", interestPrice);
+          console.log("disbursalPrice", disbursalPrice);
+
           product.calculating.interestPrice = interestPrice;
           product.calculating.disbursalPrice = disbursalPrice;
-          product.calculating.dueDate = dueDate;
+          product.calculating.dueDate = formatedDueDate;
+
+          const processingFee = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.PROCESSING_FEE;
+          const serviceCharge = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.SERVICE_FEE;
+
+          console.log("processingFee", processingFee);
+          console.log("serviceCharge", serviceCharge);
+
+          finalProductsSummary.loanAmount = finalProductsSummary.loanAmount + product.calculating.finalLoanPrice
+          finalProductsSummary.interest = finalProductsSummary.interest + interestPrice;
+          finalProductsSummary.processingFee = finalProductsSummary.processingFee + processingFee
+          finalProductsSummary.serviceCharge = finalProductsSummary.serviceCharge + serviceCharge
+          finalProductsSummary.disbursalAmount = finalProductsSummary.disbursalAmount + disbursalPrice;
+
+          if(finalProductsSummary.repaymentDate) {
+            const afterDueDate = dueDate.isAfter(finalProductsSummary.repaymentDate)
+            if(afterDueDate) {
+              finalProductsSummary.repaymentDate = dueDate;
+            }
+          } else {
+            finalProductsSummary.repaymentDate = dueDate;
+          }
         })
       }
+      console.log("finalProductsSummary", finalProductsSummary);
+      setCalculatingSummary(finalProductsSummary);
       setCalculatingProducts(currentSelectedProducts)
       setCurrentSelectedProductsPrice(currentSelectedProductsPrice);
     }
   }, [indexPageState.indexAPI?.products, quotaBarTargetPrice])
 
+  const [showQuickRepaymentSummaryModal, setQuickRepaymentSummaryModal] = useState(false);
+
   const onClickApply = useCallback(() => {
     // NOTICE: empty guard
+    if(!calculatingProducts) return;
+    setQuickRepaymentSummaryModal(true);
+  }, [currentSelectedProductsPrice]);
+
+
+  const confirmApply = useCallback(() => {
+    // NOTICE:
     if(!calculatingProducts) return;
     const simpleProducts: ProductApplyDetail[] = calculatingProducts.map((product) => {
       const simpleProduct: ProductApplyDetail = {
@@ -234,7 +304,7 @@ export const IndexPage = () => {
       bankId: 11,
       details: simpleProducts,
     }))
-  }, [currentSelectedProductsPrice]);
+  }, [calculatingProducts, currentSelectedProductsPrice])
 
   return (
     <Page className={"flex flex-col"}>
@@ -392,7 +462,15 @@ export const IndexPage = () => {
       </div>
 
       {/*NOTE: 一鍵借款 Modal*/}
-      {/*<QuickRepaymentModal state={indexPageState}/>*/}
+      {showQuickRepaymentSummaryModal && (
+        <QuickRepaymentSummaryModal
+          setQuickRepaymentSummaryModal={setQuickRepaymentSummaryModal}
+          state={indexPageState}
+          calculatingProducts={calculatingProducts || []}
+          calculatingSummary={calculatingSummary || {...initialFinalProductsSummary}}
+        />
+      )}
+
       {/*NOTE: 一鍵借款 AgreementModal*/}
       {/*<LoanAgreementModal/>*/}
       {/*<QRSuccessModal/>*/}

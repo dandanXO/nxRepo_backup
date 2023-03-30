@@ -264,7 +264,7 @@ export function *AppSaga() {
 
   // yield takeEvery(userViewIndexPageAction().type, userViewIndexPageSaga);
   // NOTICE: 暫時註解變成 stubbing mode
-  yield userViewIndexPageSaga();
+  // yield userViewIndexPageSaga();
   // yield all([
   //   userApplyProductsSaga,
   // ])
