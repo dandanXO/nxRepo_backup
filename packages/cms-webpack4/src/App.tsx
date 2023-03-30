@@ -44,7 +44,7 @@ function App() {
 
     const adminUserInfo = getAdminUser();
     const phoneNo = adminUserInfo.data.phoneNo;
-    const waterMarkColor = appInfo.COUNTRY !== 'Pakistan' ? 'rgba(0,0,0,.06)' : 'rgba(244,133,78,.06)';
+    const waterMarkColor = appInfo.COUNTRY !== 'Pakistan' ? 'rgba(0,0,0,.10)' : 'rgba(244,133,78,.10)';
     return (
         <Provider store={appStore}>
             <WaterMark fontFamily={'Arial'} fontWeight={600} height={0} width={200} gapX={100} gapY={100} offsetLeft={0} offsetTop={100} content={`${phoneNo} - ${moment().format('YYYY-MM-DD-HH:mm:ss')}`}  fontSize={20} fontColor={waterMarkColor}>
