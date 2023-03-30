@@ -30,7 +30,7 @@ class OrderDetail extends Component{
             isShowBtn,
             hidenTag:'0',
             hideContactIfNotDue: true,
-            repaymentLinkIsProhibited: true,
+            repaymentLinkIsProhibited: false,
         };
         const _this = this;
         this.overdueRecordColumns = [
@@ -254,9 +254,9 @@ class OrderDetail extends Component{
         return (
             <div className={styles.btnWrapper}>
                 {ele}
-                <Button onClick={this.openRepaymentModel} type={'primary'} disabled={!!repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.partial.repayment" /></Button>
-                <Button onClick={this.sendPaymentLinks} type={'primary'} disabled={!!repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.payment.links" /></Button>
-                <Button onClick={this.sendExtensionLinks} type={'primary'} disabled={!!repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.extension.links" /></Button>
+                <Button onClick={this.openRepaymentModel} type={'primary'} disabled={repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.partial.repayment" /></Button>
+                <Button onClick={this.sendPaymentLinks} type={'primary'} disabled={repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.payment.links" /></Button>
+                <Button onClick={this.sendExtensionLinks} type={'primary'} disabled={repaymentLinkIsProhibited}><FormattedMessage id="page.table.operation.send.extension.links" /></Button>
                 <Button onClick={this.backList}><FormattedMessage id="windowPage.back" /></Button>
             </div>
         );
@@ -499,7 +499,7 @@ class OrderDetail extends Component{
 
         loadHideContactIfNotDueFlag();
 
-        loadRepaymentLinkFlag();
+        //loadRepaymentLinkFlag();
 
         axios({
             url: '/hs/admin/orderToday/hidenYysAndContacts',
@@ -529,7 +529,7 @@ class OrderDetail extends Component{
             method: 'get'
           }).then((res) => {
             _this.setState({
-              repaymentLinkIsProhibited: true //res
+              repaymentLinkIsProhibited: res
             });
           });
         }
