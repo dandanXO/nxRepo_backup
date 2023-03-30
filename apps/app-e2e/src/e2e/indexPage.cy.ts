@@ -693,7 +693,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": true,
+      "refreshOverRetry": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
@@ -725,12 +725,10 @@ describe('IndexPage', () => {
     // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
     // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。
     // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
-    it("refresh 回來有風控時間有效、但額度不足", () => {
-      //
-    })
-    it("refresh 回來有風控時間有效、額度足夠", () => {
-      //
-    })
+
+    // NOTICE: 還缺
+    // refresh 回來有風控時間有效、但額度不足
+    // refresh 回來有風控時間有效、額度足夠
 
   })
 
@@ -943,7 +941,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": true,
+      "refreshOverRetry": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),

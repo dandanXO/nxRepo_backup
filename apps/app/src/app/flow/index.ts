@@ -162,13 +162,13 @@ export const indexPageSlice = createSlice({
           return isOverdueEqual3Days;
         })
 
+        // NOTICE: 訂單優先判斷
         if (isOrderOverdue) {
           state.order.state = ORDER_STATE.hasOverdueOrder;
         } else if (isAnyOrderComingOverdue) {
           // NOTICE: order
           state.order.overdueOrComingOverdueOrder = null;
           state.order.state = ORDER_STATE.hasInComingOverdueOrder;
-
         } else if (action.payload.orderUnderReview == true) {
           // NOTICE: order
           state.order.state = ORDER_STATE.reviewing;
@@ -176,31 +176,29 @@ export const indexPageSlice = createSlice({
         } else {
           state.order.state = ORDER_STATE.normal;
         }
-        if(action.payload.noQuotaByRetryFewTimes === true) {
-          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
-
-        } else if(action.payload.noQuotaBalance === true) {
-          // NOTE: 優先度最後
-          state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
-          // noQuotaBalance
-        } else if (isRiskControlOverdue) {
-          // NOTE: 優先度比較低，首頁-認證完成-額度時間到期-需重新取得信用額度
-          if (action.payload.refreshable && action.payload.refreshOverRetry === true) {
-            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
-          } else if (action.payload.refreshable && action.payload.refreshOverRetry === false) {
-            // TODO:
-            // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-          }
-        }
-        // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
-        //
-        // }
-        else if(!isRiskControlOverdue && action.payload.availableAmount > 0) {
-          state.riskControl.state = RISK_CONTROL_STATE.valid;
-        }
 
       }
 
+      if (action.payload.refreshable && action.payload.refreshOverRetry === false) {
+        state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+
+        // NOTE: 差別? 額度刷新超過次數
+      } else if (action.payload.refreshable && action.payload.refreshOverRetry === true) {
+        // TODO:
+        // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+      } else if(action.payload.noQuotaByRetryFewTimes === true) {
+        // NOTE: 差別? 刷新超過N次都没有额度
+        state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+      } if(action.payload.noQuotaBalance === true) {
+        // NOTE: 優先度最後
+        state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+      }
+      // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
+        //
+      // }
+      else if(!isRiskControlOverdue && action.payload.availableAmount > 0) {
+        state.riskControl.state = RISK_CONTROL_STATE.valid;
+      }
 
     },
     updateOpenAPI: (state, action: PayloadAction<GetOpenIndexResponse>) => {
