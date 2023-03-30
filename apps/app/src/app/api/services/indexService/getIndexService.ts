@@ -1,7 +1,7 @@
 import {runAxios} from "../../base/runAxios";
 
 export type GetIndexRequest = {
-  dummy: number;
+  dummy?: number;
 }
 export type PlatformChargeFeeRateDetail = {
   counting: number;

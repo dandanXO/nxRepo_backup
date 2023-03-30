@@ -12,16 +12,16 @@ export type LoanServiceRequest = {
 
   details: ProductApplyDetail[];
 
-  deviceCode: string;
+  deviceCode?: string;
   // 装置码
 
-  deviceModel: string;
+  deviceModel?: string;
   // 装置机型
 
-  imei: string;
+  imei?: string;
   // IMEI
 
-  systemVersion: string;
+  systemVersion?: string;
   // 安卓版本
 }
 

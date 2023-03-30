@@ -33,6 +33,8 @@ import {QuickRepaymentModal} from "../../models/QuickRepaymentModal";
 import {QRSuccessModal} from "../../models/QRSuccessModal";
 import moment from "moment-timezone";
 import {PlatformProduct} from "../../api/services/indexService/getIndexService";
+import {ProductApplyDetail} from "../../api/services/loanService";
+import {Page} from "../../components/layouts/Page";
 
 export type FinalProductType = PlatformProduct & {
 
@@ -105,6 +107,7 @@ export const IndexPage = () => {
   // NOTICE: 推薦產品
   const [quotaBarTargetPrice, setQuotaBarTargetPrice] = useState(0);
   const [calculatingProducts, setCalculatingProducts] = useState<FinalProductType[]>()
+  const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] = useState(0);
 
   // NOTE: setCalculatingProducts
   useEffect(() => {
@@ -188,6 +191,7 @@ export const IndexPage = () => {
             }
           }
           currentSelectedProducts.push(finalProduct);
+          currentSelectedProductsPrice = currentSelectedProductsPrice + remainDistributingQuota;
           processSuccess = false;
         } else {
           // console.log("下個產品最小金額無法滿足剩餘要借的")
@@ -195,6 +199,8 @@ export const IndexPage = () => {
         }
       }
       // console.log("currentSelectedProducts", currentSelectedProducts);
+      // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice);
+
 
       const loanInterestRate = indexPageState.indexAPI?.chargeFeeDetails.find(fee => fee.key === "LOAN_INTEREST");
 
@@ -209,11 +215,29 @@ export const IndexPage = () => {
         })
       }
       setCalculatingProducts(currentSelectedProducts)
+      setCurrentSelectedProductsPrice(currentSelectedProductsPrice);
     }
   }, [indexPageState.indexAPI?.products, quotaBarTargetPrice])
 
+  const onClickApply = useCallback(() => {
+    // NOTICE: empty guard
+    if(!calculatingProducts) return;
+    const simpleProducts: ProductApplyDetail[] = calculatingProducts.map((product) => {
+      const simpleProduct: ProductApplyDetail = {
+        applyAmount: product.calculating.finalLoanPrice,
+        productId: product.productId,
+      }
+      return simpleProduct;
+    });
+    dispatch(UserApplyProductAction({
+      applyAmount: currentSelectedProductsPrice,
+      bankId: 11,
+      details: simpleProducts,
+    }))
+  }, [currentSelectedProductsPrice]);
+
   return (
-    <div className={"container flex flex-col min-h-screen"}>
+    <Page className={"flex flex-col"}>
 
       <div className={"flex grow flex-col"}>
 
@@ -332,9 +356,9 @@ export const IndexPage = () => {
           <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={cx({
             "bg-[#F58B10]": !applyDisable,
             "bg-[#D7D7D7]": applyDisable,
-          })} onClick={() => {
-            dispatch(UserApplyProductAction())
-          }}/>
+          })}
+            onClick={onClickApply}
+          />
         )}
 
         {(
@@ -373,7 +397,7 @@ export const IndexPage = () => {
       {/*<LoanAgreementModal/>*/}
       {/*<QRSuccessModal/>*/}
 
-    </div>
+    </Page>
   )
 }
 

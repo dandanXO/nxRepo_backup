@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, {Suspense, useState} from "react";
 import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 
 import { IndexPage } from "../pages/IndexPage";
@@ -25,10 +25,16 @@ import AmountRepaidModal from "../models/AmountRepaidModal/AmountRepaidModal";
 import { ExtendConfirmModal } from "../models/ExtendConfirmModal";
 import ExtendModal from "../models/ExtendModal/ExtendModal";
 import {ApplicationProgressPage} from "../pages/ApplicationProgressPage";
-import {Tabs} from "antd";
 import {TabBar} from "../components/layouts/TabBar";
+import {APIBoundaryModal} from "../models/APIBoundaryModal";
+import {useSelector} from "react-redux";
+import {RootState} from "../store";
+
+
 export const AppRouter = () => {
     const location = useLocation();
+    const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
+    console.log("apiBoundary", apiBoundary)
     return (
         // <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
@@ -61,12 +67,16 @@ export const AppRouter = () => {
                 <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
                 <Route path="*" element={<div>Not Found</div>} />
             </Routes>
+            {[
+              "/",
+              "/loan-record",
+              "/personal-info"
+            ].indexOf(location.pathname) > -1 && <TabBar/>}
 
-          {[
-            "/",
-            "/loan-record",
-            "/personal-info"
-          ].indexOf(location.pathname) > -1 && <TabBar/>}
+          {apiBoundary.show && (
+            <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message}/>
+          )}
+
 
         </Suspense>
         // </BrowserRouter>

@@ -8,6 +8,8 @@ import {GetOpenIndexResponse} from "../api/services/indexService/getOpenIndexSer
 import {GetIndexResponse, PayableRecords} from "../api/services/indexService/getIndexService";
 import {UserServiceResponse} from "../api/services/userService";
 import {LoanServiceRequest, LoanServiceResponse} from "../api/services/loanService";
+import {APIBoundaryModuleSlice} from "../store/APIBoundaryModule";
+import axios, {AxiosError} from "axios";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 
@@ -197,8 +199,6 @@ export const indexPageSlice = createSlice({
           state.riskControl.state = RISK_CONTROL_STATE.valid;
         }
 
-
-
       }
 
 
@@ -213,18 +213,7 @@ export const indexPageSlice = createSlice({
   }
 })
 
-export function *AppSaga() {
-  // yield all([
-  //   userViewIndexPageSaga,
-  // ])
 
-  // yield takeEvery(userViewIndexPageAction().type, userViewIndexPageSaga);
-  // NOTICE: 暫時註解變成 stubbing mode
-  // yield userViewIndexPageSaga();
-  yield all([
-    userApplyProductsSaga,
-  ])
-}
 
 // NOTE: Action: UserApplyProduct
 function *userViewIndexPageSaga() {
@@ -235,15 +224,49 @@ function *userViewIndexPageSaga() {
     const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, {packageId: "com.ylbu8.abha"});
     yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
   } else {
-    const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {dummy: 1});
+    const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
     yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
   }
 }
 
 // NOTE: Action: UserApplyProduct
-export const UserApplyProductAction = createAction("userApplyProduct");
+export const UserApplyProductAction = createAction<LoanServiceRequest>("userApplyProduct");
 
 function *userApplyProductsSaga(action: PayloadAction<LoanServiceRequest>) {
-  const response: LoanServiceResponse = yield call(Service.LoanService.applyLoan, action.payload);
-  console.log("response", response);
+  // NOTICE: 防止錯誤後無法重新 watch
+  try {
+    const response: LoanServiceResponse = yield call(Service.LoanService.applyLoan, action.payload);
+    console.log("response", response);
+  } catch (error: any) {
+    yield catchSagaError(error);
+  }
+}
+
+function *catchSagaError(error: any) {
+  if(axios.isAxiosError(error)) {
+    const axiosError: AxiosError = error;
+    if(axiosError?.response?.status === 401) {
+      yield put(APIBoundaryModuleSlice.actions.update({
+        show: true,
+        title: "Error",
+        message: "Please login again.",
+      }));
+    }
+  } else {
+    console.log("[APP] error", error);
+  }
+}
+
+export function *AppSaga() {
+  // yield all([
+  //   userViewIndexPageSaga,
+  // ])
+
+  // yield takeEvery(userViewIndexPageAction().type, userViewIndexPageSaga);
+  // NOTICE: 暫時註解變成 stubbing mode
+  yield userViewIndexPageSaga();
+  // yield all([
+  //   userApplyProductsSaga,
+  // ])
+  yield takeLatest(UserApplyProductAction.type, userApplyProductsSaga);
 }

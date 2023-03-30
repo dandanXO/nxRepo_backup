@@ -1,5 +1,7 @@
+import {Page} from "../../components/layouts/Page";
+
 export const PersonalInfoPage = () => {
   return (
-    <div>PersonalInfoPage</div>
+    <Page>PersonalInfoPage</Page>
   )
 }
