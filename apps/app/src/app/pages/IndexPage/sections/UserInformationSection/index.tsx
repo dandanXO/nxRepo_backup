@@ -9,7 +9,9 @@ import {ORDER_STATE, USER_AUTH_STATE} from "../../../../flow";
 import {UnAuthenticationStatus} from "./UnAuthenticationStatus";
 import {PageState} from "../../index";
 
-type Props = IndexPageProps & PageState;
+type Props = IndexPageProps & PageState & {
+  setQuotaBarTargetPrice: React.Dispatch<React.SetStateAction<number>>;
+};
 
 export const UserInformationSection = (props: Props) => {
   return (
@@ -35,7 +37,10 @@ export const UserInformationSection = (props: Props) => {
           <UnAuthenticationStatus state={props.state}/>
         )}
         {props.state.user.state !== USER_AUTH_STATE.ready && (
-          <QuotaSliderStatus state={props.state}/>
+          <QuotaSliderStatus
+            state={props.state}
+            setQuotaBarTargetPrice={props.setQuotaBarTargetPrice}
+          />
         )}
       </StatusContainer>
     </div>

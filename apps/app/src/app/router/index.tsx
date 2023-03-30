@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 
 import { IndexPage } from "../pages/IndexPage";
 import { AuthPage } from "../pages/AuthPage";
@@ -25,7 +25,10 @@ import AmountRepaidModal from "../models/AmountRepaidModal/AmountRepaidModal";
 import { ExtendConfirmModal } from "../models/ExtendConfirmModal";
 import ExtendModal from "../models/ExtendModal/ExtendModal";
 import {ApplicationProgressPage} from "../pages/ApplicationProgressPage";
+import {Tabs} from "antd";
+import {TabBar} from "../components/layouts/TabBar";
 export const AppRouter = () => {
+    const location = useLocation();
     return (
         // <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
@@ -58,6 +61,13 @@ export const AppRouter = () => {
                 <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
                 <Route path="*" element={<div>Not Found</div>} />
             </Routes>
+
+          {[
+            "/",
+            "/loan-record",
+            "/personal-info"
+          ].indexOf(location.pathname) > -1 && <TabBar/>}
+
         </Suspense>
         // </BrowserRouter>
     );

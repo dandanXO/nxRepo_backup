@@ -89,7 +89,7 @@ export const IndexPage = () => {
 
   const navigate = useNavigate();
 
-
+  const [quotaBarTargetPrice, setQuotaBarTargetPrice] = useState(0);
 
   return (
     <div className={"container flex flex-col min-h-screen"}>
@@ -101,7 +101,11 @@ export const IndexPage = () => {
         </div>
 
         <div className={"mb-5"}>
-          <UserInformationSection state={indexPageState} pageState={finalPageState}/>
+          <UserInformationSection
+            state={indexPageState}
+            pageState={finalPageState}
+            setQuotaBarTargetPrice={setQuotaBarTargetPrice}
+          />
         </div>
 
         <PageContent>
@@ -126,7 +130,7 @@ export const IndexPage = () => {
             indexPageState.riskControl.state === RISK_CONTROL_STATE.valid
           )&& (
             <div className={"mb-4 mt-6"}>
-              <RecommendedProductsSection state={indexPageState}/>
+              <RecommendedProductsSection state={indexPageState} quotaBarTargetPrice={quotaBarTargetPrice}/>
               <Horizontal/>
             </div>
           )}
@@ -240,7 +244,6 @@ export const IndexPage = () => {
 
       </div>
 
-      <TabBar/>
 
 
 

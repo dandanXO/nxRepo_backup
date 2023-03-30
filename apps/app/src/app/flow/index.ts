@@ -4,6 +4,7 @@ import { push } from 'connected-react-router'
 import {GetIndexResponse, GetOpenIndexResponse, Service, UserServiceResponse} from "./service";
 import moment from "moment-timezone";
 import {PayableRecords} from "../api/models/PayableRecords";
+import {appStore} from "../store";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 
@@ -215,7 +216,8 @@ export function *AppSaga() {
   // ])
 
   // yield takeEvery(userViewIndexPageAction().type, userViewIndexPageSaga);
-  yield userViewIndexPageSaga();
+  // NOTICE: 暫時註解變成 stubbing mode
+  // yield userViewIndexPageSaga();
 }
 
 function *userViewIndexPageSaga() {
@@ -229,7 +231,4 @@ function *userViewIndexPageSaga() {
     const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {dummy: 1});
     yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
   }
-
-
 }
-

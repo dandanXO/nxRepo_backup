@@ -1,13 +1,15 @@
 import ReactSlider from "./ReactSlider";
-import {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState, SetStateAction} from "react";
 import {formatPrice} from "../../../../modules/formatPrice";
 import {IndexPageProps} from "../../../../store";
 import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../flow";
 import {environment} from "../../../../../environments/environment";
 import cx from "classnames";
-import {PageStateEnum} from "../../index";
 
-type Props = IndexPageProps;
+
+type Props = IndexPageProps & {
+  setQuotaBarTargetPrice: React.Dispatch<React.SetStateAction<number>>;
+};
 
 export const QuotaSliderStatus = (props: Props) => {
   const [currentQuotaValue, setCurrentQuotaValue] = useState(0);
@@ -39,13 +41,18 @@ export const QuotaSliderStatus = (props: Props) => {
       setCurrentQuotaLabelValue("****")
       setMaxQuotaValue("****")
       setDisableQuotaBar(true);
+      props.setQuotaBarTargetPrice(0);
     } else {
       setCurrentQuotaValue(props.state.indexAPI?.quotaBar.current || 0)
       setCurrentQuotaLabelValue(formatPrice(props.state.indexAPI?.quotaBar.current || 0));
       setDisableQuotaBar(false);
+      props.setQuotaBarTargetPrice(props.state.indexAPI?.quotaBar.current || 0);
     }
   }, [disable, props.state.indexAPI?.quotaBar])
 
+  useEffect(() => {
+    props.setQuotaBarTargetPrice(currentQuotaValue);
+  }, [currentQuotaValue])
 
   return (
     <div className={"mb-4 text-center"}>
@@ -84,6 +91,7 @@ export const QuotaSliderStatus = (props: Props) => {
               step={props.state.indexAPI?.quotaBar.serial || 0}
               value={currentQuotaValue}
               onChange={(value: any, index: any) => {
+                // console.log("quota.value", value)
                 setCurrentQuotaValue(value);
                 setCurrentQuotaLabelValue(String(value));
               }}

@@ -5,7 +5,7 @@ import {IndexPageProps, RootState} from "../../../../store";
 type Props = IndexPageProps;
 
 export const UserInfoSupportField = (props: Props) => {
-  const userName = props.state.user.userName.slice(0, 3) + "***" + props.state.user.userName.slice(7, 10);
+  const userName = props.state.user.userName.slice(0, 3) + "****" + props.state.user.userName.slice(7, 10);
   return (
     <div className={"w-full flex flex-row justify-between "}>
       <div className={"left-section flex flex-row items-center"}>

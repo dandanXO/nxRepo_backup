@@ -5,7 +5,7 @@ import cx from "classnames";
 export const TabBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("location", location);
+  // console.log("location", location);
   return (
     <div className={"h-16 bg-white border-t sticky bottom-0 flex flex-row"}>
       <div className={"flex-1 flex flex-col justify-center items-center"} onClick={() => {
