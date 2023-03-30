@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Overlay } from "@frontend/mobile/shared/ui";
 import { environment } from "../../../environments/environment";
 import { WithTranslation, withTranslation } from "react-i18next";
@@ -9,17 +9,24 @@ import Button from "../../components/Button";
 import ListItem from "../../components/ListItem";
 import Divider from "../../components/Divider";
 import useExtendCreate from "../../hooks/useExtendCreate";
+import useRepayTypes from "../../hooks/useRepayTypes";
 
 
 
 export const PureExtendModal = (props: any) => {
     const navigate = useNavigate();
-
     const location = useLocation();
     console.log('extend location', location)
+
     const { t } = props;
     const { productName = '', orderNo = '', dueDate = '', overdueDays = '', penaltyInterest = '', extendDate = '', extensionFee = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
-    const { handlePostExpendCreate } = useExtendCreate()
+    const { handlePostExpendCreate } = useExtendCreate();
+
+    const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
+    useEffect(() => {
+        triggerGetList({ orderNo: orderNo });
+    }, [])
+
     const handleConfirm = () => {
         handlePostExpendCreate && handlePostExpendCreate(
             false,
@@ -28,10 +35,8 @@ export const PureExtendModal = (props: any) => {
                 repayConfirmDetail.extensionPayAmount
                 ? repayConfirmDetail.extensionPayAmount
                 : 0,
-            "",
+           repayType && repayType.type
         );
-        navigate('/loan-record-detail')
-        // setShowExtendModal(false);
     };
 
     return (
