@@ -53,7 +53,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     });
 
     return (
-        <><Navigation title={"Upload payment receipt"} back={() => { navigate(-1) }} />
+        <><Navigation title={"Bank Card"} back={() => { navigate(-1) }} />
             <CustomPage>
                 <BankAccountForm cardholderName={props.cardholderName}
                     ifscData={ifscData}

@@ -15,6 +15,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                     {t("For KYC, your Cardholder name and Aadhaar name should be match.")}
                 </Paragraph>
                 <Input
+                    className="mb"
                     label={t("Cardholder Name") as string}
                     value={props.cardholderName}
                     disabled

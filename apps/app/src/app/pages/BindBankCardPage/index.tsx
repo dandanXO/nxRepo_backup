@@ -11,18 +11,20 @@ import {
   usePostBankBindSaveMutation,
   usePostBankBindSaveToBangladeshMutation,
   usePostBankBindSaveToPKMutation
-} from "../../../../../mobile/src/app/api";
+} from "../../api"
 import {renderByCountry} from "../../modules/i18n";
 import {IndiaCountry} from "../../modules/country/constants/IndiaCountry";
 import {PakistanCountry} from "../../modules/country/constants/PakistanCountry";
 import {BangladeshCountry} from "../../modules/country/constants/BangladeshCountry";
+import { useSelector } from "react-redux";
 
 
 export const BindBankCardPage = () => {
     // NOTICE: Common
     // NOTE: cardholderName
     const pageQueryString = useLocationOrderQueryString();
-    const cardholderName = pageQueryString.cardholderName;
+    // const cardholderName = pageQueryString.cardholderName;
+    const cardholderName = useSelector((state:any) => state.indexPage.user.userName);
 
     // NOTICE: India
     // NOTE: 綁定銀行卡

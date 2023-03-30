@@ -10,6 +10,7 @@ import ListItem from "../../components/ListItem";
 import Divider from "../../components/Divider";
 import useExtendCreate from "../../hooks/useExtendCreate";
 import useRepayTypes from "../../hooks/useRepayTypes";
+import moment from "moment";
 
 
 
@@ -50,7 +51,7 @@ export const PureExtendModal = (props: any) => {
                             <div className="text-xl font-bold mb-4">Extend</div>
                             <ListItem title={t("Product") as string} text={productName ?? ""} />
                             <ListItem title={t("No.") as string} text={orderNo ?? ""} />
-                            <ListItem title={t("Due Date") as string} text={dueDate ?? ""} />
+                            <ListItem title={t("Due Date") as string} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} />
                             <ListItem title={t("Overdue Days") as string} text={overdueDays ?? ""} />
                             <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""} />
                             <ListItem title={t("Extension Due Date") as string} text={extendDate ?? ""} />
