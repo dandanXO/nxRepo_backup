@@ -2,19 +2,21 @@ import Tag from "../../components/Tag";
 
 interface IBankCard {
     cardName: string;
-    cardStatus: string;
+    isMainCard: boolean;
     cardNo: string;
-}
-const BankCard = ({ cardName, cardStatus, cardNo }: IBankCard) => {
+    handleSetPrimary:()=>void;
 
-    const cardStyle = cardStatus === 'Primary' ? 'border-orange-500 bg-orange-200 text-orange-600' : 'border-slate-400 bg-slate-100 text-slate-400';
-    const handleSetPrimary = () => {
-        console.log('handleSetPrimary')
-    }
+}
+const BankCard = ({ cardName, isMainCard, cardNo,handleSetPrimary }: IBankCard) => {
+
+
+
+    const cardStyle = isMainCard ? 'border-orange-500 bg-orange-200 text-orange-600' : 'border-slate-400 bg-slate-100 text-slate-400';
+
     return <div className={`m-4 border border-solid ${cardStyle} pl-6 pr-3 pt-4 pb-5 rounded-lg`}>
         <div className={`flex flex-row justify-between font-bold mb-3`}>
             <div className={`text-base`}>{cardName}</div>
-            <div className={`text-xs`}>{cardStatus !== 'Primary' ? <Tag text='Set Primary' onClick={handleSetPrimary} isActive={cardStatus === 'Primary'} /> : cardStatus}</div>
+            <div className={`text-xs`}>{!isMainCard ? <Tag text='Set Primary' onClick={handleSetPrimary} isActive={isMainCard} /> : 'Primary'}</div>
         </div>
         <div>{cardNo}</div>
     </div>
