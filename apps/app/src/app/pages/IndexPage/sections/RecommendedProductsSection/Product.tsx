@@ -2,15 +2,12 @@ import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {useCallback, useState} from "react";
 import {environment} from "../../../../../environments/environment";
 import {formatPrice} from "../../../../modules/formatPrice";
-import moment from "moment-timezone";
-import cx from "classnames";
-import {FinalProductType} from "./index";
 
+import cx from "classnames";
+import {FinalProductType} from "../../index";
 
 type Props = {
   product: FinalProductType;
-  loanInterestRate: number;
-  className?: string;
 };
 
 export const Product = (props: Props) => {
@@ -18,10 +15,6 @@ export const Product = (props: Props) => {
   const toggleExpand = useCallback(() => {
     setExpand(!expand);
   }, [expand]);
-
-  const interestPrice = props.product.finalLoanPrice * props.product.platformChargeFeeRate * props.loanInterestRate;
-  const disbursalPrice = props.product.finalLoanPrice * (1 - props.product.platformChargeFeeRate)
-  const dueDate = moment().add(props.product.terms - 1, "days").format("MM-DD-YYYY")
 
   return (
     <div className={cx("product flex flex-col mb-1")} onClick={toggleExpand}>
@@ -33,7 +26,7 @@ export const Product = (props: Props) => {
           <div className={"font-light"}>{props.product.productName}</div>
         </div>
         <div className={"right flex flex-row items-center"}>
-          <div className={"font-light"}>₹ {formatPrice((props.product as FinalProductType).finalLoanPrice)}</div>
+          <div className={"font-light"}>₹ {formatPrice(props.product.calculating.finalLoanPrice)}</div>
           {expand ? (
             <MdExpandLess size={30} color={"#AAAAAA"}/>
           ) : (
@@ -45,7 +38,7 @@ export const Product = (props: Props) => {
         <div className={"expandable-brand bg-[#F3F3F3] text-[#707070] p-2 flex flex-col"}>
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Interest</div>
-            <div className={"value"}>{environment.currency} {formatPrice(interestPrice)}</div>
+            <div className={"value"}>{environment.currency} {formatPrice(props.product.calculating.interestPrice)}</div>
           </div>
 
           <div className={"item flex flex-row justify-between mb-1"}>
@@ -55,12 +48,12 @@ export const Product = (props: Props) => {
 
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Disbursal Amount </div>
-            <div className={"value"}>{environment.currency} {formatPrice(disbursalPrice)}</div>
+            <div className={"value"}>{environment.currency} {formatPrice(props.product.calculating.disbursalPrice)}</div>
           </div>
 
           <div className={"item flex flex-row justify-between mb-1"}>
             <div className={"key"}>Due Date</div>
-            <div className={"value"}>{dueDate}</div>
+            <div className={"value"}>{props.product.calculating.dueDate}</div>
           </div>
         </div>
       )}

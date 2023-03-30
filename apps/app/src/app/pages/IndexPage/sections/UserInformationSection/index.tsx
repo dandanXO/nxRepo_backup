@@ -21,16 +21,18 @@ export const UserInformationSection = (props: Props) => {
         <UserInfoSupportField state={props.state}/>
       </div>
 
-      <div className={"w-full mb-3"}>
-        {props.state.user.state === USER_AUTH_STATE.success &&
-          (
-            props.state.order.state === ORDER_STATE.hasInComingOverdueOrder ||
-            props.state.order.state === ORDER_STATE.hasOverdueOrder
-          ) && (
-            // TODO
+
+      {props.state.user.state === USER_AUTH_STATE.success &&
+        (
+          props.state.order.state === ORDER_STATE.hasInComingOverdueOrder ||
+          props.state.order.state === ORDER_STATE.hasOverdueOrder
+        ) && (
+          // TODO
+          <div className={"w-full mb-3"}>
             <LatestOrderStatus state={props.state}/>
-        )}
-      </div>
+          </div>
+      )}
+
 
       <StatusContainer state={props.state} pageState={props.pageState}>
         {props.state.user.state === USER_AUTH_STATE.ready && (

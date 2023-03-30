@@ -2,7 +2,6 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./base/axiosBaseQuery";
 import { GetBankCardListResponse } from "./types/getBankCardList";
 import { GetLoanRecordListRequestQuery, GetLoanRecordListReponse } from "./types/getLoanRecordList";
-import { GetIndexRequest, GetIndexResponse } from "../flow/service";
 import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "./types/getLoanDetail";
 import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "./types/getRepayTypes";
 import { PostRepayCreateRequestBody, PostRepayCreateResponse } from './types/postRepayCreate';
@@ -10,6 +9,7 @@ import { PostRepayReceiptResponse } from "./types/postRepayReceipt";
 import { PostBankCardMainRequestBody } from "./types/postBankCardMain";
 import { PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBindSaveRequest } from "./types/postBankBindSave";
 import { GetBindCardDropListResponse } from "./types/GetBindCardDropList";
+import {GetIndexRequest, GetIndexResponse} from "./services/indexService/getIndexService";
 
 
 export const API = createApi({

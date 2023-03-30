@@ -1,10 +1,13 @@
 import {select, spawn, call, put, all, fork, take, takeEvery, takeLeading, takeMaybe, takeLatest} from "redux-saga/effects";
 import {createAction, createReducer, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { push } from 'connected-react-router'
-import {GetIndexResponse, GetOpenIndexResponse, Service, UserServiceResponse} from "./service";
+import {Service} from "../api/service";
 import moment from "moment-timezone";
-import {PayableRecords} from "../api/models/PayableRecords";
 import {appStore} from "../store";
+import {GetOpenIndexResponse} from "../api/services/indexService/getOpenIndexService";
+import {GetIndexResponse, PayableRecords} from "../api/services/indexService/getIndexService";
+import {UserServiceResponse} from "../api/services/userService";
+import {LoanServiceRequest, LoanServiceResponse} from "../api/services/loanService";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 
@@ -108,9 +111,9 @@ export const indexPageSlice = createSlice({
       const currentTime = moment()
       const expireTime = moment(action.payload.offerExpireTime);
       const isRiskControlOverdue = expireTime.isBefore(currentTime);
-      console.log("currentTime", currentTime.format());
-      console.log("expireTime", expireTime.format());
-      console.log("isRiskControlOverdue", isRiskControlOverdue);
+      // console.log("currentTime", currentTime.format());
+      // console.log("expireTime", expireTime.format());
+      // console.log("isRiskControlOverdue", isRiskControlOverdue);
 
 
       // NOTE: 會有其他條件同時相符，所以這邊用if優先權最高-直接第一
@@ -218,8 +221,12 @@ export function *AppSaga() {
   // yield takeEvery(userViewIndexPageAction().type, userViewIndexPageSaga);
   // NOTICE: 暫時註解變成 stubbing mode
   // yield userViewIndexPageSaga();
+  yield all([
+    userApplyProductsSaga,
+  ])
 }
 
+// NOTE: Action: UserApplyProduct
 function *userViewIndexPageSaga() {
   const userResponse: UserServiceResponse = yield call(Service.UserService, {});
   yield put(indexPageSlice.actions.updateUserAPI(userResponse));
@@ -231,4 +238,12 @@ function *userViewIndexPageSaga() {
     const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {dummy: 1});
     yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
   }
+}
+
+// NOTE: Action: UserApplyProduct
+export const UserApplyProductAction = createAction("userApplyProduct");
+
+function *userApplyProductsSaga(action: PayloadAction<LoanServiceRequest>) {
+  const response: LoanServiceResponse = yield call(Service.LoanService.applyLoan, action.payload);
+  console.log("response", response);
 }

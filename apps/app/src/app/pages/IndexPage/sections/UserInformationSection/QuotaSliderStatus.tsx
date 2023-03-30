@@ -93,7 +93,7 @@ export const QuotaSliderStatus = (props: Props) => {
               onChange={(value: any, index: any) => {
                 // console.log("quota.value", value)
                 setCurrentQuotaValue(value);
-                setCurrentQuotaLabelValue(String(value));
+                setCurrentQuotaLabelValue(formatPrice(value));
               }}
             />
           </div>

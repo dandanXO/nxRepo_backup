@@ -16,11 +16,11 @@ import {NoticeUserInProgressAuthStatusSections} from "./sections/NoticeSection/N
 import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
-import {indexPageSlice, ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../flow";
+import {indexPageSlice, ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE, UserApplyProductAction} from "../../flow";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
-import {useCallback, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import cx from "classnames";
 import {NoticeUserReacquireOver3TimeSections} from "./sections/NoticeSection/NoticeUserReacquireOver3TimeSections";
 import {useNavigate} from "react-router-dom";
@@ -31,6 +31,19 @@ import {CloseButton} from "../../components/layouts/CloseButton";
 import {LoanAgreementModal} from "../../models/QRLoanAgreementModal";
 import {QuickRepaymentModal} from "../../models/QuickRepaymentModal";
 import {QRSuccessModal} from "../../models/QRSuccessModal";
+import moment from "moment-timezone";
+import {PlatformProduct} from "../../api/services/indexService/getIndexService";
+
+export type FinalProductType = PlatformProduct & {
+
+  calculating: {
+    finalLoanPrice: number;
+    interestPrice: number;
+    terms: number;
+    disbursalPrice: number;
+    dueDate: string;
+  }
+}
 
 export enum PageStateEnum {
   unknow,
@@ -89,7 +102,115 @@ export const IndexPage = () => {
 
   const navigate = useNavigate();
 
+  // NOTICE: 推薦產品
   const [quotaBarTargetPrice, setQuotaBarTargetPrice] = useState(0);
+  const [calculatingProducts, setCalculatingProducts] = useState<FinalProductType[]>()
+
+  // NOTE: setCalculatingProducts
+  useEffect(() => {
+    // console.log("==============================")
+    // console.log("預期要借的總額", quotaBarTargetPrice);
+    if(indexPageState.indexAPI?.products && quotaBarTargetPrice > 0) {
+      let currentSelectedProductsPrice = 0;
+      // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice)
+
+      const currentSelectedProducts: FinalProductType[] = [];
+      let processSuccess = false;
+
+      let firstRoundFinalIndex = 0
+      indexPageState.indexAPI?.products.map((product, index) => {
+        if(processSuccess) {
+          // NOTE: 已經完成任務，忽略執行
+        } else {
+          // console.log("currentTotalPrice", currentSelectedProductsPrice)
+          // NOTE: 假如加入此商品沒爆掉。
+          const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
+
+          if(tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
+            // NOTE: 實際加入此商品
+            const finalProduct: FinalProductType = {
+              ...product,
+              calculating: {
+                finalLoanPrice: product.max,
+                interestPrice: 0,
+                terms: 0,
+                disbursalPrice: 0,
+                dueDate: "",
+              }
+            }
+            currentSelectedProducts.push(finalProduct);
+            // console.log("add product.max", product.max);
+
+            // NOTE: 實際加入後商品的總額
+            currentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
+            // console.log("added product currentTotalPrice", currentSelectedProductsPrice)
+          } else {
+            // 不能再借了
+            firstRoundFinalIndex = index;
+            processSuccess = true;
+          }
+        }
+      })
+
+      // console.log("第一步已借的總商品金額", currentSelectedProductsPrice);
+      // console.log("第一步已借的總商品", currentSelectedProducts);
+
+      // NOTICE: second round
+      // 還差多少要補
+      const remainDistributingQuota = quotaBarTargetPrice - currentSelectedProductsPrice;
+      // console.log("最後要補的總商品金額", remainDistributingQuota);
+
+      // 目前商品無法滿足，往下找並且計算範圍
+      let nextIndex = firstRoundFinalIndex;
+      const maxIndex = indexPageState.indexAPI?.products?.length - 1;
+      // console.log("nextIndex", nextIndex);
+      // console.log("maxIndex", maxIndex);
+
+      while(processSuccess && nextIndex <= maxIndex) {
+        const nextProduct = indexPageState.indexAPI?.products[nextIndex];
+        // console.log("nextProduct", nextProduct);
+        if(
+          nextProduct &&
+          nextProduct.min <= remainDistributingQuota &&
+          remainDistributingQuota < nextProduct.max
+        ) {
+          // console.log("目前商品可以不借到 max 來達到滿足")
+          // console.log("只借: ", remainDistributingQuota);
+          // NOTE: 實際商品最後借到的金額
+          const finalProduct: FinalProductType = {
+            ...nextProduct,
+            calculating: {
+              finalLoanPrice: remainDistributingQuota,
+              interestPrice: 0,
+              terms: 0,
+              disbursalPrice: 0,
+              dueDate: "",
+            }
+          }
+          currentSelectedProducts.push(finalProduct);
+          processSuccess = false;
+        } else {
+          // console.log("下個產品最小金額無法滿足剩餘要借的")
+          nextIndex = nextIndex + 1;
+        }
+      }
+      // console.log("currentSelectedProducts", currentSelectedProducts);
+
+      const loanInterestRate = indexPageState.indexAPI?.chargeFeeDetails.find(fee => fee.key === "LOAN_INTEREST");
+
+      if(loanInterestRate) {
+        currentSelectedProducts.map((product) => {
+          const interestPrice = product.calculating.finalLoanPrice * product.platformChargeFeeRate * loanInterestRate.counting;
+          const disbursalPrice = product.calculating.finalLoanPrice * (1 - product.platformChargeFeeRate)
+          const dueDate = moment().add(product.terms - 1, "days").format("MM-DD-YYYY")
+          product.calculating.interestPrice = interestPrice;
+          product.calculating.disbursalPrice = disbursalPrice;
+          product.calculating.dueDate = dueDate;
+        })
+      }
+      setCalculatingProducts(currentSelectedProducts)
+    }
+  }, [indexPageState.indexAPI?.products, quotaBarTargetPrice])
 
   return (
     <div className={"container flex flex-col min-h-screen"}>
@@ -130,7 +251,7 @@ export const IndexPage = () => {
             indexPageState.riskControl.state === RISK_CONTROL_STATE.valid
           )&& (
             <div className={"mb-4 mt-6"}>
-              <RecommendedProductsSection state={indexPageState} quotaBarTargetPrice={quotaBarTargetPrice}/>
+              <RecommendedProductsSection state={indexPageState} calculatingProducts={calculatingProducts || []}/>
               <Horizontal/>
             </div>
           )}
@@ -211,7 +332,9 @@ export const IndexPage = () => {
           <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={cx({
             "bg-[#F58B10]": !applyDisable,
             "bg-[#D7D7D7]": applyDisable,
-          })}/>
+          })} onClick={() => {
+            dispatch(UserApplyProductAction())
+          }}/>
         )}
 
         {(
@@ -243,9 +366,6 @@ export const IndexPage = () => {
         )}
 
       </div>
-
-
-
 
       {/*NOTE: 一鍵借款 Modal*/}
       {/*<QuickRepaymentModal state={indexPageState}/>*/}
