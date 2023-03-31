@@ -1,5 +1,5 @@
-import {IndexPageProps} from "../../../store";
-import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../flow";
+import {IndexPageProps} from "../../../usecaseFlow/store";
+import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../usecaseFlow";
 
 type Props = IndexPageProps;
 

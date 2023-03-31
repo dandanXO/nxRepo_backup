@@ -1,46 +1,11 @@
-import {select, spawn, call, put, all, fork, take, takeEvery, takeLeading, takeMaybe, takeLatest} from "redux-saga/effects";
-import {createAction, createReducer, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { push } from 'connected-react-router'
-import {Service} from "../api/service";
+// NOTE: PageRedux
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {UserServiceResponse} from "../../services/userService/userService";
+import {GetIndexResponse, PayableRecords} from "../../services/indexService/getIndexService";
 import moment from "moment-timezone";
-import {appStore} from "../store";
-import {GetOpenIndexResponse} from "../api/services/indexService/getOpenIndexService";
-import {GetIndexResponse, PayableRecords} from "../api/services/indexService/getIndexService";
-import {UserServiceResponse} from "../api/services/userService";
-import {LoanServiceRequest, LoanServiceResponse} from "../api/services/loanService";
-import {APIBoundaryModuleSlice} from "../store/APIBoundaryModule";
-import axios, {AxiosError} from "axios";
+import {GetOpenIndexResponse} from "../../services/indexService/getOpenIndexService";
+import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../index";
 
-const INDIA_TIME_ZONE = "Asia/Kolkata";
-
-// NOTE: 使用者瀏覽頁面
-export const userViewIndexPageAction = createAction("userViewIndexPage");
-
-// type STATE = "ready" | "pending"| "success" | "reject";
-export enum USER_AUTH_STATE {
-  "ready",
-  "success",
-  "authing",
-  "reject",
-}
-
-export enum ORDER_STATE {
-  "empty",
-  "reviewing",
-  "normal",
-  "hasInComingOverdueOrder",
-  "hasOverdueOrder",
-  "reject",
-}
-
-export enum RISK_CONTROL_STATE {
-  "unknow",
-  "expired_refresh_able",
-  "expired_refresh_one_time",
-  "expired_refresh_over_3",
-  "empty_quota", // NOTE: 風控取得就為零，不是已經借完
-  "valid" ,
-}
 
 interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null,
@@ -83,10 +48,7 @@ const initialState: InitialState = {
   //   state: ""
   // }
 }
-// NOTICE: refactor me
-moment.tz.setDefault(INDIA_TIME_ZONE);
 
-// NOTE: PageRedux
 export const indexPageSlice = createSlice({
   name: "indexPage",
   initialState,
@@ -125,10 +87,10 @@ export const indexPageSlice = createSlice({
         state.order.overdueOrComingOverdueOrder = null;
 
       }
-      // else if(action.payload.noQuotaBalance === true) {
-      //   // NOTE: 優先度最後
-      //   state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
-      //   // noQuotaBalance
+        // else if(action.payload.noQuotaBalance === true) {
+        //   // NOTE: 優先度最後
+        //   state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+        //   // noQuotaBalance
       // }
       else if (action.payload.payableRecords.length === 0) {
         // NOTICE: order
@@ -186,17 +148,18 @@ export const indexPageSlice = createSlice({
       } else if (action.payload.refreshable && action.payload.refreshOverRetry === true) {
         // TODO:
         // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-      } else if(action.payload.noQuotaByRetryFewTimes === true) {
+      } else if (action.payload.noQuotaByRetryFewTimes === true) {
         // NOTE: 差別? 刷新超過N次都没有额度
         state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
-      } if(action.payload.noQuotaBalance === true) {
+      }
+      if (action.payload.noQuotaBalance === true) {
         // NOTE: 優先度最後
         state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
       }
-      // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
+        // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
         //
       // }
-      else if(!isRiskControlOverdue && action.payload.availableAmount > 0) {
+      else if (!isRiskControlOverdue && action.payload.availableAmount > 0) {
         state.riskControl.state = RISK_CONTROL_STATE.valid;
       }
 
@@ -210,61 +173,3 @@ export const indexPageSlice = createSlice({
     },
   }
 })
-
-
-
-// NOTE: Action: UserApplyProduct
-function *userViewIndexPageSaga() {
-  const userResponse: UserServiceResponse = yield call(Service.UserService, {});
-  yield put(indexPageSlice.actions.updateUserAPI(userResponse));
-
-  if(userResponse.status === USER_AUTH_STATE.ready) {
-    const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, {packageId: "com.ylbu8.abha"});
-    yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
-  } else {
-    const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
-    yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
-  }
-}
-
-// NOTE: Action: UserApplyProduct
-export const UserApplyProductAction = createAction<LoanServiceRequest>("userApplyProduct");
-
-function *userApplyProductsSaga(action: PayloadAction<LoanServiceRequest>) {
-  // NOTICE: 防止錯誤後無法重新 watch
-  try {
-    const response: LoanServiceResponse = yield call(Service.LoanService.applyLoan, action.payload);
-    console.log("response", response);
-  } catch (error: any) {
-    yield catchSagaError(error);
-  }
-}
-
-function *catchSagaError(error: any) {
-  if(axios.isAxiosError(error)) {
-    const axiosError: AxiosError = error;
-    if(axiosError?.response?.status === 401) {
-      yield put(APIBoundaryModuleSlice.actions.update({
-        show: true,
-        title: "Error",
-        message: "Please login again.",
-      }));
-    }
-  } else {
-    console.log("[APP] error", error);
-  }
-}
-
-export function *AppSaga() {
-  // yield all([
-  //   userViewIndexPageSaga,
-  // ])
-
-  // yield takeEvery(userViewIndexPageAction().type, userViewIndexPageSaga);
-  // NOTICE: 暫時註解變成 stubbing mode
-  // yield userViewIndexPageSaga();
-  // yield all([
-  //   userApplyProductsSaga,
-  // ])
-  yield takeLatest(UserApplyProductAction.type, userApplyProductsSaga);
-}

@@ -4,8 +4,8 @@ import "./style.scss";
 import {QuotaSliderStatus} from "./QuotaSliderStatus";
 import {LatestOrderStatus} from "./LatestOrderStatus";
 import {UserInfoSupportField} from "./UserInfoSupportField";
-import {IndexPageProps} from "../../../../store";
-import {ORDER_STATE, USER_AUTH_STATE} from "../../../../flow";
+import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {ORDER_STATE, USER_AUTH_STATE} from "../../../../usecaseFlow";
 import {UnAuthenticationStatus} from "./UnAuthenticationStatus";
 import {PageState} from "../../index";
 

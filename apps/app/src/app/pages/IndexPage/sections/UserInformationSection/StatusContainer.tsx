@@ -1,8 +1,8 @@
 import {ReactNode} from "react";
 import cx from "classnames";
-import {IndexPageProps} from "../../../../store";
+import {IndexPageProps} from "../../../../usecaseFlow/store";
 import {PageState, PageStateEnum} from "../../index";
-import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../flow";
+import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../usecaseFlow";
 
 type Props = {
   children?: ReactNode;

@@ -1,8 +1,20 @@
-import {runAxios} from "../base/runAxios";
+import {runAxios} from "../../api/base/runAxios";
+
+export const UserService = async (params: UserServiceRequest) => {
+  const {data}: { data: UserServiceResponse } = await runAxios(
+    "/api",
+    "/v2/login/info",
+    "get",
+    null,
+    {}
+  )
+  return data;
+}
 
 export type UserServiceRequest = {
   //
 }
+
 export type UserServiceResponse = {
   demoAccount: boolean;
   // google review account
@@ -20,14 +32,4 @@ export type UserServiceResponse = {
   // 用戶狀態 0: 未認證, 1: 通過認證, 2: 審核中, 3: 審核拒絕
 
   userName: string;
-}
-export const UserService = async (params: UserServiceRequest) => {
-  const {data}: { data: UserServiceResponse } = await runAxios(
-    "/api",
-    "/v2/login/info",
-    "get",
-    null,
-    {}
-  )
-  return data;
 }

@@ -15,8 +15,12 @@ import {NoticeUserInProgressAuthStatusSections} from "./sections/NoticeSection/N
 
 import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
-import {indexPageSlice, ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE, UserApplyProductAction} from "../../flow";
+import {RootState} from "../../usecaseFlow/store";
+import {
+  ORDER_STATE,
+  RISK_CONTROL_STATE,
+  USER_AUTH_STATE,
+} from "../../usecaseFlow";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
@@ -32,10 +36,12 @@ import {LoanAgreementModal} from "../../models/QRLoanAgreementModal";
 import {QuickRepaymentSummaryModal} from "../../models/QuickRepaymentSummaryModal";
 import {QRSuccessModal} from "../../models/QRSuccessModal";
 import moment from "moment-timezone";
-import {FeeRateKey, PlatformProduct} from "../../api/services/indexService/getIndexService";
-import {ProductApplyDetail} from "../../api/services/loanService";
+import {FeeRateKey, PlatformProduct} from "../../services/indexService/getIndexService";
+import {ProductApplyDetail} from "../../services/loanService/loanService";
 import {Page} from "../../components/layouts/Page";
 import {Moment} from "moment";
+import {UseCaseActions} from "../../usecaseFlow/UseCaseActions";
+import {indexPageSlice} from "../../usecaseFlow/storeSlice/indexPageSlice";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -300,7 +306,7 @@ export const IndexPage = () => {
       }
       return simpleProduct;
     });
-    dispatch(UserApplyProductAction({
+    dispatch(UseCaseActions.UserApplyProductAction({
       applyAmount: currentSelectedProductsPrice,
       bankId: 11,
       details: simpleProducts,

@@ -1,7 +1,7 @@
 import {Button} from "../../components/layouts/Button";
 import {useDispatch} from "react-redux";
 import {useCallback} from "react";
-import {APIBoundaryModuleSlice} from "../../store/APIBoundaryModule";
+import {APIBoundaryModuleSlice} from "../../usecaseFlow/store/APIBoundaryModule";
 
 type Props = {
   title?: string;

@@ -1,4 +1,14 @@
-import {runAxios} from "../base/runAxios";
+import {runAxios} from "../../api/base/runAxios";
+
+export const applyLoanService = async (req: LoanServiceRequest) => {
+  const {data}: { data: LoanServiceResponse } = await runAxios(
+    "/api",
+    "/v3/loan/apply",
+    "post",
+    req,
+  )
+  return data;
+}
 
 export type LoanServiceRequest = {
   appName?:	string;
@@ -37,11 +47,3 @@ export type LoanServiceResponse = {
   //
 }
 
-export const applyLoanService = async (req: LoanServiceRequest) => {
-  await runAxios(
-    "/api",
-    "/v3/loan/apply",
-    "post",
-      req,
-  )
-}

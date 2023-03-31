@@ -1,10 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
-import {API} from "../api";
-import {AppSaga, indexPageSlice, USER_AUTH_STATE} from "../flow";
+import {API} from "../../api";
+import {AppSaga, USER_AUTH_STATE} from "../index";
 import moment from "moment-timezone";
 import {APIBoundaryModuleSlice} from "./APIBoundaryModule";
-import {FeeRateKey} from "../api/services/indexService/getIndexService";
+import {FeeRateKey} from "../../services/indexService/getIndexService";
+import {indexPageSlice} from "../storeSlice/indexPageSlice";
 
 
 const sagaMiddleware = createSagaMiddleware()

@@ -4,7 +4,7 @@ import {Product} from "../../pages/IndexPage/sections/RecommendedProductsSection
 import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {Button} from "../../components/layouts/Button";
 import {Dispatch, SetStateAction, useCallback, useMemo, useState} from "react";
-import {IndexPageProps} from "../../store";
+import {IndexPageProps} from "../../usecaseFlow/store";
 import {FinalProductsSummary, FinalProductType} from "../../pages/IndexPage";
 import {formatPrice} from "../../modules/formatPrice";
 

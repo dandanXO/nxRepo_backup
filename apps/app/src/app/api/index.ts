@@ -9,7 +9,7 @@ import { PostRepayReceiptResponse } from "./types/postRepayReceipt";
 import { PostBankCardMainRequestBody } from "./types/postBankCardMain";
 import { PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBindSaveRequest } from "./types/postBankBindSave";
 import { GetBindCardDropListResponse } from "./types/GetBindCardDropList";
-import {GetIndexRequest, GetIndexResponse} from "./services/indexService/getIndexService";
+import {GetIndexRequest, GetIndexResponse} from "../services/indexService/getIndexService";
 
 
 export const API = createApi({

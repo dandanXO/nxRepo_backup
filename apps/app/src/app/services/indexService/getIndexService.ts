@@ -1,4 +1,16 @@
-import {runAxios} from "../../base/runAxios";
+import {runAxios} from "../../api/base/runAxios";
+
+export const getIndexService = async (params: GetIndexRequest) => {
+  const {data}: { data: GetIndexResponse } = await runAxios(
+    "/api",
+    "/v3/index",
+    "get",
+    null,
+    params,
+  )
+  return data;
+}
+
 
 export type GetIndexRequest = {
   dummy?: number;
@@ -142,14 +154,4 @@ export type GetIndexResponse = {
 
   usedAmount: number;
   // 已使用额度
-}
-export const getIndexService = async (params: GetIndexRequest) => {
-  const {data}: { data: GetIndexResponse } = await runAxios(
-    "/api",
-    "/v3/index",
-    "get",
-    null,
-    params,
-  )
-  return data;
 }
