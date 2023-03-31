@@ -3,7 +3,8 @@ import Button from "../../components/Button";
 import { Overlay } from "@frontend/mobile/shared/ui";
 import { Navigation } from "../../components/layouts/Navigation";
 import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { RootState } from "../../usecaseFlow/store";
+
 
 export const CustomerServiceModal = () => {
     const navigate = useNavigate();
