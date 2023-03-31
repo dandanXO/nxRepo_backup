@@ -483,7 +483,7 @@ class OrderDetail extends Component{
         getAllUrgeRecord({ overdueId: params });
         const _this = this;
 
-        // loadRepaymentLinkFlag();
+        loadRepaymentLinkFlag();
 
         function loadRepaymentLinkFlag() {
           axios({
@@ -491,7 +491,7 @@ class OrderDetail extends Component{
             method: 'get'
           }).then((res) => {
             _this.setState({
-              repaymentLinkIsProhibited: res
+              repaymentLinkIsProhibited: res,
             });
           });
         }

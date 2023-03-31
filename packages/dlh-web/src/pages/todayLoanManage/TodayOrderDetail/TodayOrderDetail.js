@@ -499,7 +499,7 @@ class OrderDetail extends Component{
 
         loadHideContactIfNotDueFlag();
 
-        //loadRepaymentLinkFlag();
+        loadRepaymentLinkFlag();
 
         axios({
             url: '/hs/admin/orderToday/hidenYysAndContacts',
@@ -529,7 +529,7 @@ class OrderDetail extends Component{
             method: 'get'
           }).then((res) => {
             _this.setState({
-              repaymentLinkIsProhibited: res
+              repaymentLinkIsProhibited: res,
             });
           });
         }
