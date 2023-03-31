@@ -2,7 +2,7 @@
 
 interface ButtonProps {
     fontSize?: string;
-    buttonText?: string;
+    buttonText?: JSX.Element | string;
     backgroundColor?: string;
     padding?: string;
     border?: string
@@ -15,7 +15,7 @@ interface ButtonProps {
 
 
 const Button = ({ fontSize = 'sm',
-    buttonText = '',
+    buttonText ,
     border = '',
     padding = 'py-2',
     backgroundColor = 'bg-orange-500',
