@@ -26,7 +26,7 @@ import { ExtendConfirmModal } from "../models/ExtendConfirmModal";
 import ExtendModal from "../models/ExtendModal/ExtendModal";
 import {ApplicationProgressPage} from "../pages/ApplicationProgressPage";
 import { CustomerServiceModal } from "../models/CustomerServiceModal";
-import LogoutModal from "../models/LogoutModal";
+import {LogoutModal} from "../models/LogoutModal";
 import {Tabs} from "antd";
 import {TabBar} from "../components/layouts/TabBar";
 import {APIBoundaryModal} from "../models/APIBoundaryModal";
