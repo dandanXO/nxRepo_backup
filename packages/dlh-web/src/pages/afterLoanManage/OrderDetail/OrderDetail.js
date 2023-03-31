@@ -170,7 +170,7 @@ class OrderDetail extends Component{
         this.state = {
             remark: '',
             isShowBtn,
-            repaymentLinkIsProhibited: true,
+            repaymentLinkIsProhibited: false,
         };
         const _this = this;
         this.overdueRecordColumns = [
@@ -491,7 +491,7 @@ class OrderDetail extends Component{
             method: 'get'
           }).then((res) => {
             _this.setState({
-              repaymentLinkIsProhibited: true, //res
+              repaymentLinkIsProhibited: res,
             });
           });
         }

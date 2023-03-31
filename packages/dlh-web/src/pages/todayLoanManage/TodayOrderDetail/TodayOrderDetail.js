@@ -529,7 +529,7 @@ class OrderDetail extends Component{
             method: 'get'
           }).then((res) => {
             _this.setState({
-              repaymentLinkIsProhibited: true //res
+              repaymentLinkIsProhibited: res,
             });
           });
         }
