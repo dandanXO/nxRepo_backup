@@ -7,7 +7,7 @@ import {GetIndexResponse} from "../../services/indexService/getIndexService";
 import {USER_AUTH_STATE} from "../index";
 import {indexPageSlice} from "../storeSlice/indexPageSlice";
 
-function* userViewIndexPageSaga() {
+export function* userViewIndexPageSaga() {
   const userResponse: UserServiceResponse = yield call(Service.UserService, {});
   yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 

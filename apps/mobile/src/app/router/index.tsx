@@ -21,6 +21,7 @@ import OldProductAdModalListPage from "../components/pages/OldProductAdModalList
 import ProductAdModalListPage from "../components/pages/ProductAdModalListPage";
 import ActivityAdListPage, {DemoActivityAdListPage} from "../components/pages/ActivityAdListPage";
 import NewsSectionPage from "../components/pages/NewsSectionPage";
+import {AndroidDebugPage} from "../components/pages/AndroidDebugPage";
 
 
 // NOTE: Component - way2
@@ -205,6 +206,7 @@ const Pages = () => {
         <Route path="/activity-list" element={<ActivityAdListPage />}/>
         {/*<Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>*/}
         <Route path="/news-section" element={<NewsSectionPage/>}/>
+        <Route path="/android-debug" element={<AndroidDebugPage/>}/>
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       {/*{state?.name && (*/}

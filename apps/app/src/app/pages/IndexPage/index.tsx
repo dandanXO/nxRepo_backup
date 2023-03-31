@@ -315,6 +315,7 @@ export const IndexPage = () => {
 
   return (
     <Page className={"flex flex-col"}>
+      <input type="checkbox" className="toggle" checked />
 
       <div className={"flex grow flex-col"}>
 

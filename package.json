@@ -23,7 +23,6 @@
     "e2e:min:w:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-in --watch --baseUrl=https://frontend.com",
     "e2e:mpk:w:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-pk --watch --baseUrl=https://frontend.com",
     "e2e:mbd:w:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-bd --watch --baseUrl=https://frontend.com",
-
     "serve:ain": "NODE_ENV=development pnpm nx serve-in app -c=development",
     "serve:apk": "NODE_ENV=development pnpm nx serve-pk app -c=development",
     "serve:abd": "NODE_ENV=development pnpm nx serve-bd app -c=development",
@@ -59,6 +58,7 @@
     "classnames": "2.3.1",
     "connected-react-router": "^6.9.3",
     "core-js": "3.6.5",
+    "daisyui": "^2.51.5",
     "dom-helpers": "5.2.1",
     "g": "^2.0.1",
     "git-revision-webpack-plugin": "^5.0.0",

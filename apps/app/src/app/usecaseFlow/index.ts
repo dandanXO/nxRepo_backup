@@ -1,13 +1,11 @@
 import {takeLatest} from "redux-saga/effects";
-import {createAction, PayloadAction} from "@reduxjs/toolkit";
 import moment from "moment-timezone";
 import {UseCaseActions} from "./UseCaseActions";
 import {userApplyProductsSaga} from "./usecaseSaga/userApplyProductsSaga";
+import {userReacquireCreditSaga} from "./usecaseSaga/userReacquireCreditSaga";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 
-// NOTE: 使用者瀏覽頁面
-export const userViewIndexPageAction = createAction("userViewIndexPage");
 
 // type STATE = "ready" | "pending"| "success" | "reject";
 export enum USER_AUTH_STATE {
@@ -39,21 +37,17 @@ export enum RISK_CONTROL_STATE {
 moment.tz.setDefault(INDIA_TIME_ZONE);
 
 
-function *userReacquireCredit(action: PayloadAction<null>) {
-
-}
-
 export function *AppSaga() {
   // yield all([
   //   userViewIndexPageSaga,
   // ])
 
-  // yield takeEvery(userViewIndexPageAction().type, userViewIndexPageSaga);
+  // yield takeLatest(UseCaseActions.UserViewIndexPageAction.type, userViewIndexPageSaga);
   // NOTICE: 暫時註解變成 stubbing mode
   // yield userViewIndexPageSaga();
   // yield all([
   //   userApplyProductsSaga,
   // ])
   yield takeLatest(UseCaseActions.UserApplyProductAction.type, userApplyProductsSaga)
-  yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCredit)
+  yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCreditSaga)
 }
