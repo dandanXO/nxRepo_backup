@@ -76,8 +76,11 @@ const ProductAdModalListPage = () => {
     const { currentData, isLoading, isFetching } = useGetLoanRecommendQuery({ count: '' });
     useEffect(()=>{
         if(!isLoading && currentData && currentData?.length>0){
+            // @ts-ignore
             window["SyncTask"] &&
+            // @ts-ignore
             window["SyncTask"]["recommendBannerIsNotEmpty"] &&
+            // @ts-ignore
             window["SyncTask"]["recommendBannerIsNotEmpty"]();
         }
     },[isLoading]);

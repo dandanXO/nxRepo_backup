@@ -1,9 +1,12 @@
 // NOTICE: refactor me
-import {GetOpenIndexResponse, IndexServiceResponse, UserServiceResponse} from "../../../app/src/app/flow/service";
+import {IndexServiceResponse} from "../../../app/src/app/services/service";
 
 import {indexPagePo} from "../support/indexPage.po";
-import {indexPageSlice, USER_AUTH_STATE} from "../../../app/src/app/flow";
+import {USER_AUTH_STATE} from "../../../app/src/app/usecaseFlow";
 import moment from "moment-timezone"
+import {GetOpenIndexResponse} from "../../../app/src/app/services/indexService/getOpenIndexService";
+import {UserServiceResponse} from "../../../app/src/app/services/userService/userService";
+import {indexPageSlice} from "../../../app/src/app/usecaseFlow/storeSlice/indexPageSlice";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
@@ -691,7 +694,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": true,
+      "refreshOverRetry": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
@@ -723,12 +726,10 @@ describe('IndexPage', () => {
     // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
     // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。
     // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
-    it("refresh 回來有風控時間有效、但額度不足", () => {
-      //
-    })
-    it("refresh 回來有風控時間有效、額度足夠", () => {
-      //
-    })
+
+    // NOTICE: 還缺
+    // refresh 回來有風控時間有效、但額度不足
+    // refresh 回來有風控時間有效、額度足夠
 
   })
 
@@ -941,7 +942,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": true,
+      "refreshOverRetry": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),

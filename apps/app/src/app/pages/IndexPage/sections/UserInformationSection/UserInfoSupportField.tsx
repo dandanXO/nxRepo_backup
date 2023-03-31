@@ -1,6 +1,6 @@
 import {BiHide, RiCustomerServiceLine} from "react-icons/all";
 import React from "react";
-import {IndexPageProps, RootState} from "../../../../store";
+import {IndexPageProps, RootState} from "../../../../usecaseFlow/store";
 
 type Props = IndexPageProps;
 

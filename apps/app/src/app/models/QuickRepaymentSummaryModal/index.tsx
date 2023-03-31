@@ -3,23 +3,44 @@ import {Horizontal} from "../../components/layouts/Horizontal";
 import {Product} from "../../pages/IndexPage/sections/RecommendedProductsSection/Product";
 import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {Button} from "../../components/layouts/Button";
-import {useCallback, useState} from "react";
-import {IndexPageProps} from "../../store";
-import {FinalProductType} from "../../pages/IndexPage/sections/RecommendedProductsSection";
+import {Dispatch, SetStateAction, useCallback, useMemo, useState} from "react";
+import {IndexPageProps} from "../../usecaseFlow/store";
+import {FinalProductsSummary, FinalProductType} from "../../pages/IndexPage";
+import {formatPrice} from "../../modules/formatPrice";
 
-type Props = IndexPageProps;
 
-export const QuickRepaymentModal = (props: Props) => {
+type Props = IndexPageProps & {
+  calculatingProducts: FinalProductType[];
+  setQuickRepaymentSummaryModal: Dispatch<SetStateAction<boolean>>;
+  calculatingSummary: FinalProductsSummary;
+  confirmApply: () => void;
+  setShowLoanAgreementModal: Dispatch<SetStateAction<boolean>>;
+}
 
-  const loanInterestRate = props.state.indexAPI?.chargeFeeDetails.find(fee => fee.key === "LOAN_INTEREST");
+export const QuickRepaymentSummaryModal = (props: Props) => {
   const [expandBankcard, setExpandBankcard] = useState(false);
   const onClickExpandBankcard = useCallback(() => {
     setExpandBankcard(!expandBankcard)
   }, [expandBankcard]);
 
+  const onClickClose = useCallback(() => {
+    props.setQuickRepaymentSummaryModal(false);
+  }, [])
+
+  const onClickConfirmApply = useCallback(() => {
+    props.setQuickRepaymentSummaryModal(false)
+    props.confirmApply()
+  }, [])
+
+  const onClickLoanAgreement = useCallback(() => {
+    props.setShowLoanAgreementModal(true);
+  }, []);
+
   return (
-    <div className={"quick-repayment-modal z-10 w-screen h-screen bg-white p-4 sticky top-0 bottom-0 flex flex-col"}>
-      <CloseButton/>
+    <div className={"quick-repayment-modal z-10 w-screen h-screen bg-white p-4 fixed top-0 bottom-0 flex flex-col"}>
+      <div onClick={onClickClose}>
+        <CloseButton/>
+      </div>
       <div className={"header"}>
         <div className={"text-xl font-medium"}>My Loan Orders</div>
       </div>
@@ -29,27 +50,27 @@ export const QuickRepaymentModal = (props: Props) => {
           <div className={"item-list"}>
             <div className={"item font-light flex flex-row justify-between"}>
               <div className={"key"}>Loan Amount</div>
-              <div className={"value"}>₹ 6,400.00</div>
+              <div className={"value"}>₹ {formatPrice(props.calculatingSummary.loanAmount)}</div>
             </div>
             <div className={"item font-light flex flex-row justify-between"}>
               <div className={"key"}>Interest</div>
-              <div className={"value"}>₹ 0.00</div>
+              <div className={"value"}>₹ {formatPrice(props.calculatingSummary.interest)}</div>
             </div>
             <div className={"item font-light flex flex-row justify-between"}>
               <div className={"key"}>Processing Fee</div>
-              <div className={"value"}>₹ 1,472.00</div>
+              <div className={"value"}>₹ {formatPrice(props.calculatingSummary.processingFee)}</div>
             </div>
             <div className={"item font-light flex flex-row justify-between"}>
               <div className={"key"}>Service Charge</div>
-              <div className={"value"}>₹ 128.00</div>
+              <div className={"value"}>₹ {formatPrice(props.calculatingSummary.serviceCharge)}</div>
             </div>
             <div className={"item font-light flex flex-row justify-between"}>
               <div className={"key"}>Disbursal Amount</div>
-              <div className={"value"}>₹ 4,800.00</div>
+              <div className={"value"}>₹ {formatPrice(props.calculatingSummary.disbursalAmount)}</div>
             </div>
             <div className={"item font-light flex flex-row justify-between"}>
               <div className={"key"}>Repayment Date</div>
-              <div className={"value"}>03-25-2023</div>
+              <div className={"value"}>{props.calculatingSummary.repaymentDate?.format("MM-DD-YYYY")}</div>
             </div>
           </div>
         </div>
@@ -60,13 +81,9 @@ export const QuickRepaymentModal = (props: Props) => {
       <div className={"products "}>
         <div className={"text-md font-medium mb-2"}>Your Products</div>
         <div className={"flex flex-col h-[200px] overflow-auto"}>
-          {props.state.indexAPI?.products.map(((product, index) => {
-            const finalProduct: FinalProductType = {
-              ...product,
-              finalLoanPrice: 0,
-            };
+          {props.calculatingProducts.map(((product, index) => {
             return (
-              <Product key={index} product={finalProduct} loanInterestRate={!loanInterestRate ? 1 : loanInterestRate.counting}/>
+              <Product key={index} product={product}/>
             )
           }))}
         </div>
@@ -95,9 +112,13 @@ export const QuickRepaymentModal = (props: Props) => {
 
         <Horizontal/>
 
-        <div className={"text-xs font-light text-gray-400 mb-2"}>By continuing, I have read and agree
-          <span className={"text-blue-500 underline"}> Loan Agreement </span> carefully.</div>
-        <Button text={"Confirm"} bgColor={"bg-[#F58B10]"}/>
+        <div className={"text-xs font-light text-gray-400 mb-2"}>
+          <span>By continuing, I have read and agree</span>
+          <span className={"text-blue-500 underline"} onClick={onClickLoanAgreement}> Loan Agreement </span>
+          <span>carefully.</span>
+        </div>
+
+        <Button text={"Confirm"} bgColor={"bg-[#F58B10]"} onClick={onClickConfirmApply}/>
 
       </div>
 

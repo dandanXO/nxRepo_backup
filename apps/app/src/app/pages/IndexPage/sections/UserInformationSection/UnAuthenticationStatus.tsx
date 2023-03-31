@@ -1,4 +1,4 @@
-import {IndexPageProps} from "../../../../store";
+import {IndexPageProps} from "../../../../usecaseFlow/store";
 import {formatPrice} from "../../../../modules/formatPrice";
 
 type Props = IndexPageProps;

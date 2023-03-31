@@ -1,5 +1,5 @@
 import {AiOutlineFieldTime, GiPowderBag} from "react-icons/all"
-import {IndexPageProps} from "../../../store";
+import {IndexPageProps} from "../../../usecaseFlow/store";
 
 type Props = IndexPageProps;
 

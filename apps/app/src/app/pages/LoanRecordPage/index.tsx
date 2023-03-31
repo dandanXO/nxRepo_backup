@@ -4,9 +4,10 @@ import { useLazyGetLoanRecordListQuery } from "../../api";
 import { GetLoanRecordListRequestQuery } from "../../api/types/getLoanRecordList";
 import Tag from "../../components/Tag";
 import { Navigation } from "../../components/layouts/Navigation";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // @ts-ignore
 import { default as data } from './data.json';
+import {Page} from "../../components/layouts/Page";
 
 
 export const LoanRecordPage = () => {
@@ -36,24 +37,25 @@ export const LoanRecordPage = () => {
     }, [currentData])
 
     return (
-        <div>
-            <Navigation title={"Payment"} back={() => {navigate(-1)}} />
+        <Page className="flex flex-col">
+            <Navigation title={"Payment"} back={() => { navigate(-1) }} />
             <div className={`flex flex-row py-3 px-5 justify-between sticky top-[56px] bg-white`}>
                 {['Unpaid', 'Overdue', 'Done'].map(i => <Tag
                     key={i} onClick={() => setListStatus(i)} text={i}
                     isActive={i === listStatus} style={` text-sm mx-1`} />)}
             </div>
-            {// @ts-ignore
+            {/* {// @ts-ignore
                 data?.content?.map((record, index) => {
                     return <PaymentItem key={record.orderNo}  {...record} />
                 })
-            }
-            {/* {
-                currentData!==undefined && currentData?.content?.map(record=>{
-                    return  <PaymentItem {...record}/>
-                })
             } */}
-            {/* <PaymentItem /> */}
-        </div>
+            {
+                currentData && currentData.content.length > 0 ?
+                    currentData?.content?.map(record => {
+                        return <PaymentItem {...record} />
+                    })
+                    : <div className="flex justify-center items-center p-3 grow">There are no orders currently</div>
+            }
+        </Page>
     )
 }

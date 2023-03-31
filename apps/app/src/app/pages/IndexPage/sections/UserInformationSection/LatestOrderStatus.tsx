@@ -1,6 +1,6 @@
 import cx from "classnames";
-import {IndexPageProps} from "../../../../store";
-import {ORDER_STATE} from "../../../../flow";
+import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {ORDER_STATE} from "../../../../usecaseFlow";
 import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment";
 

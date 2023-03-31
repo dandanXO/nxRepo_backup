@@ -1,10 +1,19 @@
 import {CloseButton} from "../../components/layouts/CloseButton";
 import {Navigation} from "../../components/layouts/Navigation";
+import {useCallback} from "react";
 
-export const LoanAgreementModal = () => {
+type Props = {
+  onClose: () => void;
+}
+export const LoanAgreementModal = (props: Props) => {
+  const onClickClose = useCallback(() => {
+    props.onClose()
+  }, [])
   return (
-    <div className={"loan-agreement-modal z-10 w-screen h-screen bg-white p-5 sticky top-0 bottom-0 flex flex-col"}>
-      <CloseButton/>
+    <div className={"loan-agreement-modal z-10 w-screen bg-white p-5 absolute top-0 flex flex-col"}>
+      <div className={"z-10"} onClick={onClickClose}>
+        <CloseButton/>
+      </div>
       <div className={"mb-2"}>
         <Navigation title={"Loan Agreement"}/>
       </div>

@@ -4,6 +4,9 @@
 * css
   * 使用 tailwind，在合理情況下去使用指定 px
   * [tailwind 常用類別](./docs/TAILWIND.md)
+* UI/UX
+  * 按鈕可點擊範圍盡量合理加大
+  * [區分 select, listbox ]https://www.nngroup.com/articles/listbox-dropdown/
 * typescript
   * 開啟 strict 模式
   * [Typescript strict](./docs/TYPESCRIPT.md)

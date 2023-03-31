@@ -1,8 +1,8 @@
 import ReactSlider from "./ReactSlider";
 import React, {useEffect, useMemo, useState, SetStateAction} from "react";
 import {formatPrice} from "../../../../modules/formatPrice";
-import {IndexPageProps} from "../../../../store";
-import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../flow";
+import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../usecaseFlow";
 import {environment} from "../../../../../environments/environment";
 import cx from "classnames";
 
@@ -93,7 +93,7 @@ export const QuotaSliderStatus = (props: Props) => {
               onChange={(value: any, index: any) => {
                 // console.log("quota.value", value)
                 setCurrentQuotaValue(value);
-                setCurrentQuotaLabelValue(String(value));
+                setCurrentQuotaLabelValue(formatPrice(value));
               }}
             />
           </div>

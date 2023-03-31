@@ -4,8 +4,8 @@ import "./style.scss";
 import {QuotaSliderStatus} from "./QuotaSliderStatus";
 import {LatestOrderStatus} from "./LatestOrderStatus";
 import {UserInfoSupportField} from "./UserInfoSupportField";
-import {IndexPageProps} from "../../../../store";
-import {ORDER_STATE, USER_AUTH_STATE} from "../../../../flow";
+import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {ORDER_STATE, USER_AUTH_STATE} from "../../../../usecaseFlow";
 import {UnAuthenticationStatus} from "./UnAuthenticationStatus";
 import {PageState} from "../../index";
 
@@ -21,16 +21,18 @@ export const UserInformationSection = (props: Props) => {
         <UserInfoSupportField state={props.state}/>
       </div>
 
-      <div className={"w-full mb-3"}>
-        {props.state.user.state === USER_AUTH_STATE.success &&
-          (
-            props.state.order.state === ORDER_STATE.hasInComingOverdueOrder ||
-            props.state.order.state === ORDER_STATE.hasOverdueOrder
-          ) && (
-            // TODO
+
+      {props.state.user.state === USER_AUTH_STATE.success &&
+        (
+          props.state.order.state === ORDER_STATE.hasInComingOverdueOrder ||
+          props.state.order.state === ORDER_STATE.hasOverdueOrder
+        ) && (
+          // TODO
+          <div className={"w-full mb-3"}>
             <LatestOrderStatus state={props.state}/>
-        )}
-      </div>
+          </div>
+      )}
+
 
       <StatusContainer state={props.state} pageState={props.pageState}>
         {props.state.user.state === USER_AUTH_STATE.ready && (

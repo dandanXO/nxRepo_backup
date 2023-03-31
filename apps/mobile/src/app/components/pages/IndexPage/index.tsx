@@ -116,6 +116,11 @@ export default () => {
               NewsSection
             </Link>
           </li>
+          <li>
+            <Link to={"/android-debug"}>
+              Android Debug
+            </Link>
+          </li>
         </IndexPage>
     );
 };

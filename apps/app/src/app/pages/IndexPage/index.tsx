@@ -15,12 +15,16 @@ import {NoticeUserInProgressAuthStatusSections} from "./sections/NoticeSection/N
 
 import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
-import {indexPageSlice, ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../flow";
+import {RootState} from "../../usecaseFlow/store";
+import {
+  ORDER_STATE,
+  RISK_CONTROL_STATE,
+  USER_AUTH_STATE,
+} from "../../usecaseFlow";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
-import {useCallback, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import cx from "classnames";
 import {NoticeUserReacquireOver3TimeSections} from "./sections/NoticeSection/NoticeUserReacquireOver3TimeSections";
 import {useNavigate} from "react-router-dom";
@@ -29,8 +33,47 @@ import {Product} from "./sections/RecommendedProductsSection/Product";
 import {AiOutlineClose, MdExpandLess, MdExpandMore} from "react-icons/all";
 import {CloseButton} from "../../components/layouts/CloseButton";
 import {LoanAgreementModal} from "../../models/QRLoanAgreementModal";
-import {QuickRepaymentModal} from "../../models/QuickRepaymentModal";
+import {QuickRepaymentSummaryModal} from "../../models/QuickRepaymentSummaryModal";
 import {QRSuccessModal} from "../../models/QRSuccessModal";
+import moment from "moment-timezone";
+import {FeeRateKey, PlatformProduct} from "../../services/indexService/getIndexService";
+import {ProductApplyDetail} from "../../services/loanService/loanService";
+import {Page} from "../../components/layouts/Page";
+import {Moment} from "moment";
+import {UseCaseActions} from "../../usecaseFlow/UseCaseActions";
+import {indexPageSlice} from "../../usecaseFlow/storeSlice/indexPageSlice";
+
+export type FinalProductType = PlatformProduct & {
+  calculating: {
+    finalLoanPrice: number;
+    interestPrice: number;
+    terms: number;
+    disbursalPrice: number;
+    dueDate: string;
+  }
+}
+
+export type FinalProductsSummary = {
+  loanAmount: number;
+  interest: number;
+  processingFee: number;
+  serviceCharge: number;
+  disbursalAmount: number;
+  repaymentDate: Moment | null;
+}
+
+export type FeeRateKeyToPriceMapping = {
+  [key in FeeRateKey]: number
+};
+
+const initialFinalProductsSummary: FinalProductsSummary = {
+  loanAmount: 0,
+  interest: 0,
+  processingFee: 0,
+  serviceCharge: 0,
+  disbursalAmount: 0,
+  repaymentDate: null,
+}
 
 export enum PageStateEnum {
   unknow,
@@ -89,10 +132,190 @@ export const IndexPage = () => {
 
   const navigate = useNavigate();
 
+  // NOTICE: 推薦產品
   const [quotaBarTargetPrice, setQuotaBarTargetPrice] = useState(0);
+  const [calculatingProducts, setCalculatingProducts] = useState<FinalProductType[]>()
+  const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] = useState(0);
+  const [calculatingSummary, setCalculatingSummary] = useState<FinalProductsSummary>();
+
+  // NOTE: setCalculatingProducts
+  useEffect(() => {
+    // console.log("==============================")
+    // console.log("預期要借的總額", quotaBarTargetPrice);
+    if(indexPageState.indexAPI?.products && quotaBarTargetPrice > 0) {
+      let currentSelectedProductsPrice = 0;
+      // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice)
+
+      const currentSelectedProducts: FinalProductType[] = [];
+      let processSuccess = false;
+
+      let firstRoundFinalIndex = 0
+      indexPageState.indexAPI?.products.map((product, index) => {
+        if(processSuccess) {
+          // NOTE: 已經完成任務，忽略執行
+        } else {
+          // console.log("currentTotalPrice", currentSelectedProductsPrice)
+          // NOTE: 假如加入此商品沒爆掉。
+          const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
+
+          if(tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
+            // NOTE: 實際加入此商品
+            const finalProduct: FinalProductType = {
+              ...product,
+              calculating: {
+                finalLoanPrice: product.max,
+                interestPrice: 0,
+                terms: 0,
+                disbursalPrice: 0,
+                dueDate: "",
+              }
+            }
+            currentSelectedProducts.push(finalProduct);
+            // console.log("add product.max", product.max);
+
+            // NOTE: 實際加入後商品的總額
+            currentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
+            // console.log("added product currentTotalPrice", currentSelectedProductsPrice)
+          } else {
+            // 不能再借了
+            firstRoundFinalIndex = index;
+            processSuccess = true;
+          }
+        }
+      })
+
+      // console.log("第一步已借的總商品金額", currentSelectedProductsPrice);
+      // console.log("第一步已借的總商品", currentSelectedProducts);
+
+      // NOTICE: second round
+      // 還差多少要補
+      const remainDistributingQuota = quotaBarTargetPrice - currentSelectedProductsPrice;
+      // console.log("最後要補的總商品金額", remainDistributingQuota);
+
+      // 目前商品無法滿足，往下找並且計算範圍
+      let nextIndex = firstRoundFinalIndex;
+      const maxIndex = indexPageState.indexAPI?.products?.length - 1;
+      // console.log("nextIndex", nextIndex);
+      // console.log("maxIndex", maxIndex);
+
+      while(processSuccess && nextIndex <= maxIndex) {
+        const nextProduct = indexPageState.indexAPI?.products[nextIndex];
+        // console.log("nextProduct", nextProduct);
+        if(
+          nextProduct &&
+          nextProduct.min <= remainDistributingQuota &&
+          remainDistributingQuota < nextProduct.max
+        ) {
+          // console.log("目前商品可以不借到 max 來達到滿足")
+          // console.log("只借: ", remainDistributingQuota);
+          // NOTE: 實際商品最後借到的金額
+          const finalProduct: FinalProductType = {
+            ...nextProduct,
+            calculating: {
+              finalLoanPrice: remainDistributingQuota,
+              interestPrice: 0,
+              terms: 0,
+              disbursalPrice: 0,
+              dueDate: "",
+            }
+          }
+          currentSelectedProducts.push(finalProduct);
+          currentSelectedProductsPrice = currentSelectedProductsPrice + remainDistributingQuota;
+          processSuccess = false;
+        } else {
+          // console.log("下個產品最小金額無法滿足剩餘要借的")
+          nextIndex = nextIndex + 1;
+        }
+      }
+      // console.log("currentSelectedProducts", currentSelectedProducts);
+      // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice);
+
+
+      const keyFeeMapping: any = indexPageState.indexAPI?.chargeFeeDetails.reduce((previousMap, currentValue) => {
+        return {
+          ...previousMap,
+          [currentValue.key]: currentValue.counting
+        }
+      }, {})
+      // console.log("keyFeeMapping", keyFeeMapping);
+
+      const finalProductsSummary = {...initialFinalProductsSummary};
+      // console.log("finalProductsSummary", finalProductsSummary);
+      if(keyFeeMapping) {
+        currentSelectedProducts.map((product) => {
+          // console.log("product", product);
+          const interestPrice = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.LOAN_INTEREST;
+          const disbursalPrice = product.calculating.finalLoanPrice * (1 - product.platformChargeFeeRate)
+          const dueDate = moment().add(product.terms - 1, "days");
+          const formatedDueDate = dueDate.format("MM-DD-YYYY");
+
+          // console.log("interestPrice", interestPrice);
+          // console.log("disbursalPrice", disbursalPrice);
+
+          product.calculating.interestPrice = interestPrice;
+          product.calculating.disbursalPrice = disbursalPrice;
+          product.calculating.dueDate = formatedDueDate;
+
+          const processingFee = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.PROCESSING_FEE;
+          const serviceCharge = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.SERVICE_FEE;
+
+          // console.log("processingFee", processingFee);
+          // console.log("serviceCharge", serviceCharge);
+
+          finalProductsSummary.loanAmount = finalProductsSummary.loanAmount + product.calculating.finalLoanPrice
+          finalProductsSummary.interest = finalProductsSummary.interest + interestPrice;
+          finalProductsSummary.processingFee = finalProductsSummary.processingFee + processingFee
+          finalProductsSummary.serviceCharge = finalProductsSummary.serviceCharge + serviceCharge
+          finalProductsSummary.disbursalAmount = finalProductsSummary.disbursalAmount + disbursalPrice;
+
+          if(finalProductsSummary.repaymentDate) {
+            const afterDueDate = dueDate.isAfter(finalProductsSummary.repaymentDate)
+            if(afterDueDate) {
+              finalProductsSummary.repaymentDate = dueDate;
+            }
+          } else {
+            finalProductsSummary.repaymentDate = dueDate;
+          }
+        })
+      }
+      // console.log("finalProductsSummary", finalProductsSummary);
+      setCalculatingSummary(finalProductsSummary);
+      setCalculatingProducts(currentSelectedProducts)
+      setCurrentSelectedProductsPrice(currentSelectedProductsPrice);
+    }
+  }, [indexPageState.indexAPI?.products, quotaBarTargetPrice])
+
+  const [showQuickRepaymentSummaryModal, setQuickRepaymentSummaryModal] = useState(false);
+  const [showLoanAgreementModal, setShowLoanAgreementModal] = useState(false);
+  const [showQRSuccessModal, setShowQRSuccessModal] = useState(false);
+
+  const onClickApply = useCallback(() => {
+    // NOTICE: empty guard
+    if(!calculatingProducts) return;
+    setQuickRepaymentSummaryModal(true);
+
+  }, [currentSelectedProductsPrice]);
+
+  const confirmApply = useCallback(() => {
+    // NOTICE:
+    if(!calculatingProducts) return;
+    const simpleProducts: ProductApplyDetail[] = calculatingProducts.map((product) => {
+      const simpleProduct: ProductApplyDetail = {
+        applyAmount: product.calculating.finalLoanPrice,
+        productId: product.productId,
+      }
+      return simpleProduct;
+    });
+    dispatch(UseCaseActions.UserApplyProductAction({
+      applyAmount: currentSelectedProductsPrice,
+      bankId: 11,
+      details: simpleProducts,
+    }))
+  }, [calculatingProducts, currentSelectedProductsPrice])
 
   return (
-    <div className={"container flex flex-col min-h-screen"}>
+    <Page className={"flex flex-col"}>
+      <input type="checkbox" className="toggle" checked />
 
       <div className={"flex grow flex-col"}>
 
@@ -130,7 +353,7 @@ export const IndexPage = () => {
             indexPageState.riskControl.state === RISK_CONTROL_STATE.valid
           )&& (
             <div className={"mb-4 mt-6"}>
-              <RecommendedProductsSection state={indexPageState} quotaBarTargetPrice={quotaBarTargetPrice}/>
+              <RecommendedProductsSection state={indexPageState} calculatingProducts={calculatingProducts || []}/>
               <Horizontal/>
             </div>
           )}
@@ -211,7 +434,9 @@ export const IndexPage = () => {
           <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={cx({
             "bg-[#F58B10]": !applyDisable,
             "bg-[#D7D7D7]": applyDisable,
-          })}/>
+          })}
+            onClick={onClickApply}
+          />
         )}
 
         {(
@@ -241,19 +466,36 @@ export const IndexPage = () => {
               })}/>
           </>
         )}
-
       </div>
 
+      {/*NOTE: Quick Repay Modal*/}
+      {showQuickRepaymentSummaryModal && (
+        <QuickRepaymentSummaryModal
+          setQuickRepaymentSummaryModal={setQuickRepaymentSummaryModal}
+          state={indexPageState}
+          calculatingProducts={calculatingProducts || []}
+          calculatingSummary={calculatingSummary || {...initialFinalProductsSummary}}
+          confirmApply={() => {
+            confirmApply()
+            setShowQRSuccessModal(true);
+          }}
+          setShowLoanAgreementModal={setShowLoanAgreementModal}
+        />
+      )}
 
+      {/*NOTE: Quick Repay - RepaymentAgreementModal*/}
+      {showLoanAgreementModal && <LoanAgreementModal onClose={() => {
+        setShowLoanAgreementModal(false);
+      }}/>}
 
+      {/*NOTE: Quick Repay - SuccessModal*/}
+      {showQRSuccessModal && (
+        <QRSuccessModal onClose={() => {
+          setShowQRSuccessModal(false)
+        }}/>
+      )}
 
-      {/*NOTE: 一鍵借款 Modal*/}
-      {/*<QuickRepaymentModal state={indexPageState}/>*/}
-      {/*NOTE: 一鍵借款 AgreementModal*/}
-      {/*<LoanAgreementModal/>*/}
-      {/*<QRSuccessModal/>*/}
-
-    </div>
+    </Page>
   )
 }
 

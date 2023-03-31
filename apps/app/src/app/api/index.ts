@@ -2,11 +2,14 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./base/axiosBaseQuery";
 import { GetBankCardListResponse } from "./types/getBankCardList";
 import { GetLoanRecordListRequestQuery, GetLoanRecordListReponse } from "./types/getLoanRecordList";
-import { GetIndexRequest, GetIndexResponse } from "../flow/service";
 import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "./types/getLoanDetail";
 import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "./types/getRepayTypes";
 import { PostRepayCreateRequestBody, PostRepayCreateResponse } from './types/postRepayCreate';
 import { PostRepayReceiptResponse } from "./types/postRepayReceipt";
+import { PostBankCardMainRequestBody } from "./types/postBankCardMain";
+import { PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBindSaveRequest } from "./types/postBankBindSave";
+import { GetBindCardDropListResponse } from "./types/GetBindCardDropList";
+import {GetIndexRequest, GetIndexResponse} from "../services/indexService/getIndexService";
 
 
 export const API = createApi({
@@ -77,6 +80,45 @@ export const API = createApi({
                 data: requestBody,
             }),
         }),
+        // NOTE: /api/v2/kyc/bank-card/main 绑定主卡
+        postBankCardMain: builder.mutation<null, PostBankCardMainRequestBody>({
+            query: (requestBody: PostBankCardMainRequestBody) => ({
+                method: "post",
+                url: `/kyc/bank-card/main`,
+                data: requestBody,
+            }),
+        }),
+        // NOTE: 绑定银行主卡或是電子錢包
+        postBankBindSave: builder.mutation<{}, PostBankBindSaveRequest>({
+            query: (requestBody: PostBankBindSaveRequest) => ({
+                method: "post",
+                url: `/bank-bind/save`,
+                data: requestBody,
+            }),
+        }),
+        // NOTICE: Pakistan - 绑定银行主卡或是電子錢包
+        postBankBindSaveToPK: builder.mutation<{}, PostPKBankBindSaveRequest>({
+            query: (requestBody: PostPKBankBindSaveRequest) => ({
+                method: "post",
+                url: `/bank-bind/save`,
+                data: requestBody,
+            }),
+        }),
+        // NOTICE: Bangladesh - 绑定银行主卡或是電子錢包
+        postBankBindSaveToBangladesh: builder.mutation<{}, PostBangladeshBankBindSaveRequest>({
+            query: (requestBody: PostBangladeshBankBindSaveRequest) => ({
+                method: "post",
+                url: `/bank-bind/save`,
+                data: requestBody,
+            }),
+        }),
+        // NOTICE: Pakstan - 获取绑卡页信息
+        getBindCardDropList: builder.query<GetBindCardDropListResponse, {}>({
+            query: () => ({
+              method: "get",
+              url: `/bank-bind/info`,
+            }),
+        }),
         // NOTE: 取得還款證明
         // post: builder.mutation<PostResponse, PostRequest>({
         //     query: (requestBody: FormData) => ({
@@ -95,5 +137,10 @@ export const {
     useLazyGetLoanDetailQuery,
     useLazyGetRepayTypesQuery,
     usePostRepayCreateMutation,
-    usePostRepayReceiptMutation
+    usePostRepayReceiptMutation,
+    usePostBankCardMainMutation,
+    usePostBankBindSaveMutation,
+    usePostBankBindSaveToPKMutation,
+    usePostBankBindSaveToBangladeshMutation,
+    useLazyGetBindCardDropListQuery
 } = API;

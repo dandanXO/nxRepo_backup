@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, {Suspense, useState} from "react";
 import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 
 import { IndexPage } from "../pages/IndexPage";
@@ -25,10 +25,19 @@ import AmountRepaidModal from "../models/AmountRepaidModal/AmountRepaidModal";
 import { ExtendConfirmModal } from "../models/ExtendConfirmModal";
 import ExtendModal from "../models/ExtendModal/ExtendModal";
 import {ApplicationProgressPage} from "../pages/ApplicationProgressPage";
+import { CustomerServiceModal } from "../models/CustomerServiceModal";
+import {LogoutModal} from "../models/LogoutModal";
 import {Tabs} from "antd";
 import {TabBar} from "../components/layouts/TabBar";
+import {APIBoundaryModal} from "../models/APIBoundaryModal";
+import {useSelector} from "react-redux";
+import {RootState} from "../usecaseFlow/store";
+
+
 export const AppRouter = () => {
     const location = useLocation();
+    const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
+    console.log("apiBoundary", apiBoundary)
     return (
         // <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
@@ -39,7 +48,9 @@ export const AppRouter = () => {
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/bankcard-list" element={<BankCardListPage />} />
                 <Route path="/bind-bankcard" element={<BindBankCardPage />} />
-                <Route path="/customer-service" element={<CustomerServicePage />} />
+                <Route path="/customer-service" element={<CustomerServicePage />} >
+                    <Route path="customer-service-modal" element={<CustomerServiceModal />} />
+                </Route>
                 <Route path="/disclosure-statement" element={<DisclosureStatementPage />} />
                 <Route path="/extend-details" element={<ExtendDetailsPage />} />
                 <Route path="/finished-repayment" element={<FinishedRepaymentPage />} />
@@ -53,20 +64,26 @@ export const AppRouter = () => {
                 <Route path="/loan-record" element={<LoanRecordPage />} />
                 <Route path="/my-coupon-list" element={<MyCouponListPage />} />
                 <Route path="/mu-coupon" element={<MyCouponPage />} />
-                <Route path="/partner" element={<PartnerPage />} />
-                <Route path="/personal-info" element={<PersonalInfoPage />} />
+                <Route path="/partner" element={<PartnerPage />} />LogoutModal
+                <Route path="/personal-info" element={<PersonalInfoPage />} >
+                    <Route path="log-out-modal" element={<LogoutModal />} />
+                </Route>
                 <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="/quota-model" element={<QuotaModelPage />} />
                 <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
                 <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
                 <Route path="*" element={<div>Not Found</div>} />
             </Routes>
+            {[
+              "/",
+              "/loan-record",
+              "/personal-info"
+            ].indexOf(location.pathname) > -1 && <TabBar/>}
 
-          {[
-            "/",
-            "/loan-record",
-            "/personal-info"
-          ].indexOf(location.pathname) > -1 && <TabBar/>}
+          {apiBoundary.show && (
+            <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message}/>
+          )}
+
 
         </Suspense>
         // </BrowserRouter>

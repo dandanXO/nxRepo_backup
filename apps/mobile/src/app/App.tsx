@@ -13,6 +13,9 @@ import * as Sentry from "@sentry/react";
 // console.log("environment.country", environment.country)
 
 // NOTICE: REFACTOR ME , 目前Modal.alert 只能從全局取得
+
+// NOTICE: TS2339: Property 'theme' does not exist on type 'Window & typeof globalThis'.
+// @ts-ignore
 window.theme = getThemeConfig(environment.country);
 
 if(environment.country === "bn") {
@@ -34,6 +37,7 @@ if(environment.country === "bn") {
 export default function App() {
     return (
         <Provider store={appStore}>
+            {/*@ts-ignore*/}
             <AppThemeProvider theme={window.theme}>
                 <AppStyle/>
                 <AppRouter />
