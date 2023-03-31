@@ -37,7 +37,7 @@ export const LoanRecordPage = () => {
     }, [currentData])
 
     return (
-        <Page>
+        <Page className="flex flex-col">
             <Navigation title={"Payment"} back={() => { navigate(-1) }} />
             <div className={`flex flex-row py-3 px-5 justify-between sticky top-[56px] bg-white`}>
                 {['Unpaid', 'Overdue', 'Done'].map(i => <Tag
@@ -54,7 +54,7 @@ export const LoanRecordPage = () => {
                     currentData?.content?.map(record => {
                         return <PaymentItem {...record} />
                     })
-                    : <div className="flex justify-center items-center p-3">There are no orders currently</div>
+                    : <div className="flex justify-center items-center p-3 grow">There are no orders currently</div>
             }
         </Page>
     )
