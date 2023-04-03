@@ -4,7 +4,7 @@ import { appStore } from "./usecaseFlow/store";
 import {AppThemeProvider} from "@frontend/mobile/shared/ui";
 import {environment} from "../environments/environment";
 import {getThemeConfig} from "./modules/theme/getThemeConfig";
-import {TabBar} from "./components/layouts/TabBar";
+import "./modules/datetime/index";
 
 // NOTICE: REFACTOR ME , 目前Modal.alert 只能從全局取得
 window.theme = getThemeConfig(environment.country);

@@ -36,22 +36,22 @@ export const Product = (props: Props) => {
       </div>
       {expand && (
         <div className={"expandable-brand bg-[#F3F3F3] text-[#707070] p-2 flex flex-col"}>
-          <div className={"item flex flex-row justify-between mb-1"}>
+          <div className={"item flex flex-row justify-between mb-1 font-light"}>
             <div className={"key"}>Interest</div>
             <div className={"value"}>{environment.currency} {formatPrice(props.product.calculating.interestPrice)}</div>
           </div>
 
-          <div className={"item flex flex-row justify-between mb-1"}>
+          <div className={"item flex flex-row justify-between mb-1 font-light"}>
             <div className={"key"}>Terms</div>
             <div className={"value"}>{props.product.terms}days</div>
           </div>
 
-          <div className={"item flex flex-row justify-between mb-1"}>
+          <div className={"item flex flex-row justify-between mb-1 font-light"}>
             <div className={"key"}>Disbursal Amount </div>
             <div className={"value"}>{environment.currency} {formatPrice(props.product.calculating.disbursalPrice)}</div>
           </div>
 
-          <div className={"item flex flex-row justify-between mb-1"}>
+          <div className={"item flex flex-row justify-between mb-1 font-light"}>
             <div className={"key"}>Due Date</div>
             <div className={"value"}>{props.product.calculating.dueDate}</div>
           </div>

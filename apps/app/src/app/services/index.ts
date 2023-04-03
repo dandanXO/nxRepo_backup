@@ -1,6 +1,6 @@
 import {getOpenIndexService} from "./indexService/getOpenIndexService";
 import {getIndexService} from "./indexService/getIndexService";
-import {UserService} from "./userService/userService";
+import {GetBankCardList, GetUserInfoService} from "./userService/userService";
 import {applyLoanService} from "./loanService/loanService";
 import {getQuotaModelStatusService} from "./loanService/getQuotaModelStatus";
 
@@ -10,7 +10,10 @@ export const Service = {
     getOpenIndex: getOpenIndexService,
     getIndex: getIndexService,
   },
-  UserService,
+  UserService: {
+    GetUserInfoService,
+    GetBankCardList,
+  },
   LoanService: {
     applyLoan: applyLoanService,
     getQuotaModelStatus: getQuotaModelStatusService,

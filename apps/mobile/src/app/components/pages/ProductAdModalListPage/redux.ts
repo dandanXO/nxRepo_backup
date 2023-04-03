@@ -65,6 +65,7 @@ export const personalRecommendActionsReducer = createReducer(
         state.data = action.payload
       })
       .addMatcher(isPersonalRecommendActions, (state, action) => {
+        // @ts-ignore
         state.status = action.payload;
       })
   }

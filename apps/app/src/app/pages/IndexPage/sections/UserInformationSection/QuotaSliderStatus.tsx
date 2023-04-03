@@ -2,13 +2,16 @@ import ReactSlider from "./ReactSlider";
 import React, {useEffect, useMemo, useState, SetStateAction} from "react";
 import {formatPrice} from "../../../../modules/formatPrice";
 import {IndexPageProps} from "../../../../usecaseFlow/store";
-import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../usecaseFlow";
 import {environment} from "../../../../../environments/environment";
 import cx from "classnames";
+import {USER_AUTH_STATE} from "../../../../usecaseFlow/domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../../../usecaseFlow/domain/RISK_CONTROL_STATE";
 
 
 type Props = IndexPageProps & {
   setQuotaBarTargetPrice: React.Dispatch<React.SetStateAction<number>>;
+  countdown: string;
 };
 
 export const QuotaSliderStatus = (props: Props) => {
@@ -106,9 +109,10 @@ export const QuotaSliderStatus = (props: Props) => {
         </div>
 
         {/*NOTE: ExclusiveLoanOffer*/}
-        <div className={"p-2 bg-white rounded-lg relative top-1 shadow-md shadow-gray-300"}>
+        <div className={"px-1 py-2 bg-white rounded-lg relative top-1 shadow-md shadow-gray-300"}>
           <span className={"pr-2"}>Exclusive Personal Loan offer</span>
-          <span className={"text-orange-500"}>13:20:29</span>
+          {/*<span className={"text-orange-500"}>13:20:29</span>*/}
+          <span className={"text-orange-500"}>{props.countdown}</span>
         </div>
 
       </div>

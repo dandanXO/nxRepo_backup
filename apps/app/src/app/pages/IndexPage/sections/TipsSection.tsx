@@ -1,7 +1,11 @@
 import {IndexPageProps} from "../../../usecaseFlow/store";
-import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../usecaseFlow";
+import {USER_AUTH_STATE} from "../../../usecaseFlow/domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../usecaseFlow/domain/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../../usecaseFlow/domain/RISK_CONTROL_STATE";
 
-type Props = IndexPageProps;
+type Props = IndexPageProps & {
+  isLoading: boolean;
+}
 
 export const TipsSection = (props: Props) => {
   let messageComponent = null;
@@ -49,6 +53,9 @@ export const TipsSection = (props: Props) => {
     props.state.user.state === USER_AUTH_STATE.success &&
     props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
   ){
+    if(props.isLoading) {
+      return null;
+    }
     messageComponent =  (
       <>
         <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>

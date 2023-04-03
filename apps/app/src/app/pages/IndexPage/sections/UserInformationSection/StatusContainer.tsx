@@ -2,7 +2,9 @@ import {ReactNode} from "react";
 import cx from "classnames";
 import {IndexPageProps} from "../../../../usecaseFlow/store";
 import {PageState, PageStateEnum} from "../../index";
-import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../../../../usecaseFlow";
+import {USER_AUTH_STATE} from "../../../../usecaseFlow/domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../../../usecaseFlow/domain/RISK_CONTROL_STATE";
 
 type Props = {
   children?: ReactNode;

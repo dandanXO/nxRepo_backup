@@ -1,7 +1,8 @@
 import {runAxios} from "../../api/base/runAxios";
+import {GetBankCardListResponse} from "../../api/types/getBankCardList";
 
-export const UserService = async (params: UserServiceRequest) => {
-  const {data}: { data: UserServiceResponse } = await runAxios(
+export const GetUserInfoService = async (params: GetUserInfoServiceRequest) => {
+  const {data}: { data: GetUserInfoServiceResponse } = await runAxios(
     "/api",
     "/v2/login/info",
     "get",
@@ -11,11 +12,11 @@ export const UserService = async (params: UserServiceRequest) => {
   return data;
 }
 
-export type UserServiceRequest = {
+export type GetUserInfoServiceRequest = {
   //
 }
 
-export type UserServiceResponse = {
+export type GetUserInfoServiceResponse = {
   demoAccount: boolean;
   // google review account
 
@@ -32,4 +33,18 @@ export type UserServiceResponse = {
   // 用戶狀態 0: 未認證, 1: 通過認證, 2: 審核中, 3: 審核拒絕
 
   userName: string;
+}
+
+
+
+
+export const GetBankCardList = async (params: null) => {
+  const {data}: { data: GetBankCardListResponse } = await runAxios(
+    "/api",
+    "/v2/user/bank-card",
+    "get",
+    null,
+    {}
+  )
+  return data;
 }

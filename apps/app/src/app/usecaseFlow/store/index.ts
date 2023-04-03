@@ -1,12 +1,27 @@
-import {configureStore} from "@reduxjs/toolkit";
+import {configureStore, PayloadAction} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
 import {API} from "../../api";
-import {AppSaga, USER_AUTH_STATE} from "../index";
+import {AppSaga} from "../index";
 import moment from "moment-timezone";
 import {APIBoundaryModuleSlice} from "./APIBoundaryModule";
 import {FeeRateKey} from "../../services/indexService/getIndexService";
 import {indexPageSlice} from "../storeSlice/indexPageSlice";
+import {USER_AUTH_STATE} from "../domain/USER_AUTH_STATE";
+import {modalSlice} from "../storeSlice/modalSlice";
 
+const logger = (store: any) => (next: any) => (action: any) => {
+  if(action.type !== 'indexPage/updateRiskCountdown') {
+    console.log('dispatching', action)
+  }
+
+  const result: any = next(action)
+
+  if(action.type !== 'indexPage/updateRiskCountdown') {
+    console.log('next state', store.getState())
+  }
+
+  return result
+}
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -14,13 +29,19 @@ export const appStore = configureStore({
   reducer: {
     [API.reducerPath]: API.reducer,
     [indexPageSlice.name]: indexPageSlice.reducer,
+    // indexPage: indexPageReducer,
     [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
+    [modalSlice.name]: modalSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
+      .concat(logger)
       .concat(API.middleware)
       .concat(sagaMiddleware),
+
 });
+
+
 
 // NOTICE: then run the saga
 sagaMiddleware.run(AppSaga)
@@ -33,14 +54,14 @@ export type IndexPageProps = {
 }
 
 appStore.subscribe(() => {
-  console.log("[app] store:", appStore.getState())
-
+  // console.log("[app] store:", appStore.getState())
 })
 
 
 // NOTICE: Stubbing
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 appStore.dispatch(indexPageSlice.actions.updateUserAPI({
+// appStore.dispatch(indexPageReducerAction.updateUserAPIAction({
   "userName": "9013452123",
   "status": USER_AUTH_STATE.success,
   "demoAccount": false,
@@ -265,76 +286,77 @@ appStore.dispatch(indexPageSlice.actions.updateUserAPI({
 // }))
 
 // NOTE: 風控過期前有額度
-appStore.dispatch(indexPageSlice.actions.updateIndexAPI({
-  "noQuotaByRetryFewTimes": false,
-  "noQuotaBalance": false,
-  "totalAmount": 15000,
-  "usedAmount": 15000,
-  "availableAmount": 0,
-  "quotaBar": {
-    "min": 0,
-    "max": 0,
-    "current": 0,
-    "serial": 1000
-  },
-  "chargeFeeDetails": [
-    {
-      "title": "Processing Fee",
-      "counting": 0.4,
-      "key": FeeRateKey.PROCESSING_FEE
-    },
-    {
-      "title": "Service Fee",
-      "counting": 0.5,
-      "key": FeeRateKey.SERVICE_FEE
-    },
-    {
-      "title": "Interest Fee",
-      "counting": 0.1,
-      "key": FeeRateKey.LOAN_INTEREST
-    }
-  ],
-  "products": [
-    {
-      "productId": 1,
-      "productName": "AA LOAN",
-      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
-      "min": 2000,
-      "max": 5000,
-      "terms": 7,
-      "platformChargeFeeRate": 0.4
-    },
-    {
-      "productId": 2,
-      "productName": "BB LOAN",
-      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-      "min": 3000,
-      "max": 5000,
-      "terms": 7,
-      "platformChargeFeeRate": 0.4
-    },
-    {
-      "productId": 3,
-      "productName": "CC LOAN",
-      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
-      "min": 4000,
-      "max": 6000,
-      "terms": 7,
-      "platformChargeFeeRate": 0.4
-    }
-  ],
-  "needRiskKycUpdate": false,
-  // NOTICE: 優先權最高
-  "riskReject": false,
-  "refreshable": true,
-  "refreshOverRetry": false,
-  "refreshableUntil": "2023-03-28T08:10:24",
-  "orderUnderReview": false,
-  "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days").format(),
-  "oldUserForceApply": false,
-  "payableRecords": [],
-  "marquee": "我是跑馬燈...",
-  "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
-  "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
-  "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
-}))
+// appStore.dispatch(indexPageSlice.actions.updateIndexAPI({
+// // appStore.dispatch(indexPageReducerAction.updateIndexAPI({
+//   "noQuotaByRetryFewTimes": false,
+//   "noQuotaBalance": false,
+//   "totalAmount": 15000,
+//   "usedAmount": 15000,
+//   "availableAmount": 0,
+//   "quotaBar": {
+//     "min": 0,
+//     "max": 0,
+//     "current": 0,
+//     "serial": 1000
+//   },
+//   "chargeFeeDetails": [
+//     {
+//       "title": "Processing Fee",
+//       "counting": 0.4,
+//       "key": FeeRateKey.PROCESSING_FEE
+//     },
+//     {
+//       "title": "Service Fee",
+//       "counting": 0.5,
+//       "key": FeeRateKey.SERVICE_FEE
+//     },
+//     {
+//       "title": "Interest Fee",
+//       "counting": 0.1,
+//       "key": FeeRateKey.LOAN_INTEREST
+//     }
+//   ],
+//   "products": [
+//     {
+//       "productId": 1,
+//       "productName": "AA LOAN",
+//       "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+//       "min": 2000,
+//       "max": 5000,
+//       "terms": 7,
+//       "platformChargeFeeRate": 0.4
+//     },
+//     {
+//       "productId": 2,
+//       "productName": "BB LOAN",
+//       "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+//       "min": 3000,
+//       "max": 5000,
+//       "terms": 7,
+//       "platformChargeFeeRate": 0.4
+//     },
+//     {
+//       "productId": 3,
+//       "productName": "CC LOAN",
+//       "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+//       "min": 4000,
+//       "max": 6000,
+//       "terms": 7,
+//       "platformChargeFeeRate": 0.4
+//     }
+//   ],
+//   "needRiskKycUpdate": false,
+//   // NOTICE: 優先權最高
+//   "riskReject": false,
+//   "refreshable": true,
+//   "refreshOverRetry": false,
+//   "refreshableUntil": "2023-03-28T08:10:24",
+//   "orderUnderReview": false,
+//   "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days").format(),
+//   "oldUserForceApply": false,
+//   "payableRecords": [],
+//   "marquee": "我是跑馬燈...",
+//   "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+//   "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+//   "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+// }))

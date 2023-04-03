@@ -13,7 +13,7 @@ interface Window {
   }
   theme?:any;
   IndexTask: {
-    // uploadKycBackgroundData: (uploaded: boolean) => void;
+    uploadKycBackgroundData: (uploaded: boolean) => void;
     navToPage:  (androidPage: AndroidPage) => void;
   },
   // CallbackTask: {

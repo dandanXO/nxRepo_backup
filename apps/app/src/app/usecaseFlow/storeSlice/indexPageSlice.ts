@@ -1,10 +1,15 @@
 // NOTE: PageRedux
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {UserServiceResponse} from "../../services/userService/userService";
+import {GetUserInfoServiceResponse} from "../../services/userService/userService";
 import {GetIndexResponse, PayableRecords} from "../../services/indexService/getIndexService";
 import moment from "moment-timezone";
 import {GetOpenIndexResponse} from "../../services/indexService/getOpenIndexService";
-import {ORDER_STATE, RISK_CONTROL_STATE, USER_AUTH_STATE} from "../index";
+import {USER_AUTH_STATE} from "../domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../domain/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../domain/RISK_CONTROL_STATE";
+// import {getQuotaModelStatusActions} from "../usecaseSaga/userReacquireCreditSaga";
+import {GetQuotaModelStatusResponse} from "../../services/loanService/getQuotaModelStatus";
+import {getQuotaModelStatusAction} from "../usecaseSaga/userReacquireCreditSaga";
 
 
 interface InitialState {
@@ -24,6 +29,19 @@ interface InitialState {
   riskControl: {
     state: RISK_CONTROL_STATE;
   },
+  api: {
+    reacquire: {
+      data: GetQuotaModelStatusResponse | null,
+      isLoading: boolean;
+      // isFetching: boolean;
+      isSuccess: boolean;
+      isError: boolean;
+    }
+  },
+  timeout: {
+    riskControlDate: string;
+    refreshDate: string;
+  }
 }
 
 const initialState: InitialState = {
@@ -43,17 +61,30 @@ const initialState: InitialState = {
   riskControl: {
     state: RISK_CONTROL_STATE.unknow,
   },
+  api: {
+    reacquire: {
+      data: null,
+      isLoading: false,
+      // isFetching: false,
+      isSuccess: false,
+      isError: false,
+    }
+  },
   // TODO:
   // indexPage: {
   //   state: ""
   // }
+  timeout: {
+    riskControlDate: "",
+    refreshDate: "",
+  }
 }
 
 export const indexPageSlice = createSlice({
   name: "indexPage",
   initialState,
   reducers: {
-    updateUserAPI: (state, action: PayloadAction<UserServiceResponse>) => {
+    updateUserAPI: (state, action: PayloadAction<GetUserInfoServiceResponse>) => {
       state.user.userName = action.payload.userName;
       if (action.payload.status === 0) {
         state.user.state = USER_AUTH_STATE.ready;
@@ -66,9 +97,9 @@ export const indexPageSlice = createSlice({
       }
     },
     updateIndexAPI: (state, action: PayloadAction<GetIndexResponse>) => {
+      // console.log("updateIndexAPI", state, action)
       state.indexAPI = action.payload;
       state.sharedIndex.marquee = action.payload.marquee;
-
 
       // TODO: REACTOR ME
       // NOTICE: risk control
@@ -141,16 +172,22 @@ export const indexPageSlice = createSlice({
 
       }
 
-      if (action.payload.refreshable && action.payload.refreshOverRetry === false) {
-        state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
 
-        // NOTE: 差別? 額度刷新超過次數
-      } else if (action.payload.refreshable && action.payload.refreshOverRetry === true) {
-        // TODO:
-        // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-      } else if (action.payload.noQuotaByRetryFewTimes === true) {
-        // NOTE: 差別? 刷新超過N次都没有额度
-        state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+      if(isRiskControlOverdue) {
+        if (action.payload.refreshable === true && action.payload.refreshOverRetry === false) {
+          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+          // NOTE: 差別? 額度刷新超過次數
+        } else if (action.payload.refreshable === true && action.payload.refreshOverRetry === true) {
+          // TODO: 刷過一次
+          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+        } else if (action.payload.refreshable === false && action.payload.refreshOverRetry === true) {
+          // TODO: 刷過一次
+          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+        } else if (action.payload.noQuotaByRetryFewTimes === true) {
+          // NOTE: 刷新超過N次都没有额度
+          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+        }
+        // console.log("過期")
       }
       if (action.payload.noQuotaBalance === true) {
         // NOTE: 優先度最後
@@ -171,5 +208,28 @@ export const indexPageSlice = createSlice({
     reacquire: (state, action) => {
       state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time;
     },
-  }
+    // NOTICE: 計時器
+    updateRiskCountdown: (state, action) => {
+      state.timeout.riskControlDate = action.payload;
+    },
+    expiredRiskCountdown: (state, action) => {
+      // state.riskControl.state = RISK_CONTROL_STATE.expired;
+      state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+    }
+  },
+  extraReducers: (builder) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    builder.addCase(getQuotaModelStatusAction.loadingAction.type, (state, action) => {
+      state.api.reacquire.isLoading = true;
+      // state.api.reacquire.isFetching = true;
+    }),
+    builder.addCase(getQuotaModelStatusAction.successAction.type, (state, action) => {
+      state.api.reacquire.isLoading = false;
+      state.api.reacquire.isSuccess = true;
+    }),
+    builder.addCase(getQuotaModelStatusAction.failureAction.type, (state, action) => {
+      state.api.reacquire.isLoading = false;
+      state.api.reacquire.isError = true;
+    })
+  },
 })

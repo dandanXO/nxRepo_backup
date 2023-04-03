@@ -16,11 +16,6 @@ import {NoticeUserInProgressAuthStatusSections} from "./sections/NoticeSection/N
 import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../usecaseFlow/store";
-import {
-  ORDER_STATE,
-  RISK_CONTROL_STATE,
-  USER_AUTH_STATE,
-} from "../../usecaseFlow";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
@@ -40,8 +35,14 @@ import {FeeRateKey, PlatformProduct} from "../../services/indexService/getIndexS
 import {ProductApplyDetail} from "../../services/loanService/loanService";
 import {Page} from "../../components/layouts/Page";
 import {Moment} from "moment";
-import {UseCaseActions} from "../../usecaseFlow/UseCaseActions";
+
+import {USER_AUTH_STATE} from "../../usecaseFlow/domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../usecaseFlow/domain/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../usecaseFlow/domain/RISK_CONTROL_STATE";
+import {UseCaseActions} from "../../usecaseFlow";
 import {indexPageSlice} from "../../usecaseFlow/storeSlice/indexPageSlice";
+import {AuthorizationModal} from "../../models/AuthorizationModal";
+import {modalSlice} from "../../usecaseFlow/storeSlice/modalSlice";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -91,7 +92,8 @@ export const IndexPage = () => {
   const dispatch = useDispatch();
   const onClickReacquireCredit = useCallback(() => {
     // setHasClickReacquireCredit(!hasClickReacquireCredit);
-    dispatch(indexPageSlice.actions.reacquire({}));
+    // dispatch(indexPageSlice.actions.reacquire({}));
+    dispatch(UseCaseActions.UserReacquireCreditAction(null));
   }, [])
 
   // NOTE:
@@ -102,34 +104,6 @@ export const IndexPage = () => {
     finalPageState = PageStateEnum.UserRejected;
   }
 
-  const applyDisable = useMemo(() => {
-    let disable = false;
-
-    // NOTICE: 主義下面判斷是否變成不能根據優先順序
-    if(
-      indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
-      indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder ||
-      indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
-      indexPageState.indexAPI?.availableAmount === 0
-    ) {
-      disable = true;
-    }
-    return disable;
-  }, [indexPageState.user.state, indexPageState.order.state, indexPageState.riskControl.state])
-
-  const applyHide = useMemo(() => {
-    return [
-      indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
-      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time,
-      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3,
-      indexPageState.order.state === ORDER_STATE.reject,
-      indexPageState.user.state === USER_AUTH_STATE.ready,
-      indexPageState.user.state === USER_AUTH_STATE.authing,
-      indexPageState.user.state === USER_AUTH_STATE.reject,
-
-    ].some(condition => condition === true);
-  }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state])
-
   const navigate = useNavigate();
 
   // NOTICE: 推薦產品
@@ -137,6 +111,8 @@ export const IndexPage = () => {
   const [calculatingProducts, setCalculatingProducts] = useState<FinalProductType[]>()
   const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] = useState(0);
   const [calculatingSummary, setCalculatingSummary] = useState<FinalProductsSummary>();
+
+  // console.log("calculatingProducts", calculatingProducts);
 
   // NOTE: setCalculatingProducts
   useEffect(() => {
@@ -285,20 +261,52 @@ export const IndexPage = () => {
     }
   }, [indexPageState.indexAPI?.products, quotaBarTargetPrice])
 
-  const [showQuickRepaymentSummaryModal, setQuickRepaymentSummaryModal] = useState(false);
-  const [showLoanAgreementModal, setShowLoanAgreementModal] = useState(false);
-  const [showQRSuccessModal, setShowQRSuccessModal] = useState(false);
+  const modelState = useSelector((state: RootState) => state.model);
 
+  const applyDisable = useMemo(() => {
+    let disable = false;
+
+    // NOTICE: 主義下面判斷是否變成不能根據優先順序
+    if(
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
+      indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder ||
+      indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
+      indexPageState.indexAPI?.availableAmount === 0 ||
+      calculatingProducts?.length === 0
+    ) {
+      disable = true;
+    }
+    return disable;
+  }, [indexPageState.user.state, indexPageState.order.state, indexPageState.riskControl.state, calculatingProducts])
+
+  const applyHide = useMemo(() => {
+    return [
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time,
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3,
+      indexPageState.order.state === ORDER_STATE.reject,
+      indexPageState.user.state === USER_AUTH_STATE.ready,
+      indexPageState.user.state === USER_AUTH_STATE.authing,
+      indexPageState.user.state === USER_AUTH_STATE.reject,
+
+    ].some(condition => condition === true);
+  }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state])
+
+  const {isLoading, isSuccess, isError} = useSelector((state: RootState) => state.indexPage.api.reacquire);
+
+  useEffect(() => {
+    dispatch(UseCaseActions.UserViewIndexPageAction());
+  }, []);
+
+  const countdown = useSelector((state: RootState) => state.indexPage.timeout.riskControlDate);
+  // console.log("countdown", countdown);
+
+
+  // NOTICE: refactor me
   const onClickApply = useCallback(() => {
     // NOTICE: empty guard
     if(!calculatingProducts) return;
-    setQuickRepaymentSummaryModal(true);
 
-  }, [currentSelectedProductsPrice]);
-
-  const confirmApply = useCallback(() => {
-    // NOTICE:
-    if(!calculatingProducts) return;
     const simpleProducts: ProductApplyDetail[] = calculatingProducts.map((product) => {
       const simpleProduct: ProductApplyDetail = {
         applyAmount: product.calculating.finalLoanPrice,
@@ -306,16 +314,19 @@ export const IndexPage = () => {
       }
       return simpleProduct;
     });
+
     dispatch(UseCaseActions.UserApplyProductAction({
       applyAmount: currentSelectedProductsPrice,
-      bankId: 11,
+      // bankId: 11,
       details: simpleProducts,
     }))
-  }, [calculatingProducts, currentSelectedProductsPrice])
+
+  }, [calculatingProducts, currentSelectedProductsPrice]);
+
 
   return (
     <Page className={"flex flex-col"}>
-      <input type="checkbox" className="toggle" checked />
+      {/*<input type="checkbox" className="toggle" checked />*/}
 
       <div className={"flex grow flex-col"}>
 
@@ -328,6 +339,7 @@ export const IndexPage = () => {
             state={indexPageState}
             pageState={finalPageState}
             setQuotaBarTargetPrice={setQuotaBarTargetPrice}
+            countdown={countdown}
           />
         </div>
 
@@ -375,7 +387,7 @@ export const IndexPage = () => {
 
           {/*TODO: Remove me by identify state*/}
           <div className={"mb-3"}>
-            <TipsSection state={indexPageState}/>
+            <TipsSection state={indexPageState} isLoading={isLoading}/>
           </div>
 
           {indexPageState.user.state === USER_AUTH_STATE.authing ? (
@@ -450,49 +462,98 @@ export const IndexPage = () => {
           </>
         )}
 
+        {isLoading && (
+          <div className={"text-xs text-gray-500 text-center mb-3"}>
+            Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.
+          </div>
+        )}
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {(
-          indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
+          indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able ||
+          indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time
         ) && (
           <>
             <Button
               onClick={onClickReacquireCredit}
               dataTestingID={"reacquireCredit"}
               text={"Reacquire Credit Amount"}
+              loading={isLoading}
               bgColor={cx({
                 "bg-[#F58B10]": indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
-                "bg-[#D7D7D7]": indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
+                "bg-[#D7D7D7]": isLoading
               })}/>
           </>
         )}
       </div>
 
       {/*NOTE: Quick Repay Modal*/}
-      {showQuickRepaymentSummaryModal && (
+      {modelState.quickRepaymentSummaryModal.show && (
         <QuickRepaymentSummaryModal
-          setQuickRepaymentSummaryModal={setQuickRepaymentSummaryModal}
           state={indexPageState}
           calculatingProducts={calculatingProducts || []}
           calculatingSummary={calculatingSummary || {...initialFinalProductsSummary}}
-          confirmApply={() => {
-            confirmApply()
-            setShowQRSuccessModal(true);
+          bankcardList={modelState.quickRepaymentSummaryModal.bankcardList || []}
+          selectedBankcardId={modelState.quickRepaymentSummaryModal.selectedBankcardId}
+          onChangeBankcardID={(id: number) => {
+            dispatch(modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
+              selectedBankcardId: id
+            }))
           }}
-          setShowLoanAgreementModal={setShowLoanAgreementModal}
+          onClose={() => {
+            dispatch(modalSlice.actions.updateQuickRepaymentSummaryModal({
+              show: false,
+              confirm: false,
+            }))
+          }}
+          onConfirmApply={() => {
+            dispatch(modalSlice.actions.updateQuickRepaymentSummaryModal({
+              // NOTICE: 此處不關閉，來避免用戶提交中返回到首頁
+              show: true,
+              confirm: true,
+            }))
+          }}
+          onClickLoanAgreement={() => {
+            dispatch(modalSlice.actions.updateLoanAgreementModal({
+              show: true,
+            }))
+          }}
         />
       )}
 
       {/*NOTE: Quick Repay - RepaymentAgreementModal*/}
-      {showLoanAgreementModal && <LoanAgreementModal onClose={() => {
-        setShowLoanAgreementModal(false);
-      }}/>}
+      {modelState.loanAgreementModal.show && (
+        <LoanAgreementModal onClose={() => {
+          dispatch(modalSlice.actions.updateLoanAgreementModal({
+            show: false,
+          }));
+        }}/>
+      )}
 
       {/*NOTE: Quick Repay - SuccessModal*/}
-      {showQRSuccessModal && (
+      {modelState.QRSuccessModal.show && (
         <QRSuccessModal onClose={() => {
-          setShowQRSuccessModal(false)
+          dispatch(modalSlice.actions.updateQRSuccessModal({
+            show: false,
+          }))
         }}/>
+      )}
+
+      {modelState.authorizationModal.show && (
+        <AuthorizationModal
+          onClose={() => {
+            dispatch(modalSlice.actions.updateAuthorizationModal({
+              show: false,
+              confirm: false,
+            }))
+          }}
+          onConfirm={() => {
+            dispatch(modalSlice.actions.updateAuthorizationModal({
+              show: false,
+              confirm: true,
+            }))
+          }}
+        />
       )}
 
     </Page>

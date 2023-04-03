@@ -1,8 +1,8 @@
 import cx from "classnames";
 import {IndexPageProps} from "../../../../usecaseFlow/store";
-import {ORDER_STATE} from "../../../../usecaseFlow";
 import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment";
+import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
 
 type Props = IndexPageProps;
 

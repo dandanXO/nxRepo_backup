@@ -5,12 +5,14 @@ import {QuotaSliderStatus} from "./QuotaSliderStatus";
 import {LatestOrderStatus} from "./LatestOrderStatus";
 import {UserInfoSupportField} from "./UserInfoSupportField";
 import {IndexPageProps} from "../../../../usecaseFlow/store";
-import {ORDER_STATE, USER_AUTH_STATE} from "../../../../usecaseFlow";
 import {UnAuthenticationStatus} from "./UnAuthenticationStatus";
 import {PageState} from "../../index";
+import {USER_AUTH_STATE} from "../../../../usecaseFlow/domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
 
 type Props = IndexPageProps & PageState & {
   setQuotaBarTargetPrice: React.Dispatch<React.SetStateAction<number>>;
+  countdown: string;
 };
 
 export const UserInformationSection = (props: Props) => {
@@ -42,6 +44,7 @@ export const UserInformationSection = (props: Props) => {
           <QuotaSliderStatus
             state={props.state}
             setQuotaBarTargetPrice={props.setQuotaBarTargetPrice}
+            countdown={props.countdown}
           />
         )}
       </StatusContainer>
