@@ -43,6 +43,7 @@ import {UseCaseActions} from "../../usecaseFlow";
 import {indexPageSlice} from "../../usecaseFlow/storeSlice/indexPageSlice";
 import {AuthorizationModal} from "../../models/AuthorizationModal";
 import {modalSlice} from "../../usecaseFlow/storeSlice/modalSlice";
+import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -301,6 +302,8 @@ export const IndexPage = () => {
   const countdown = useSelector((state: RootState) => state.indexPage.timeout.riskControlDate);
   // console.log("countdown", countdown);
 
+  const refreshableCountdown = useSelector((state: RootState) => state.indexPage.timeout.refreshableDate);
+  // console.log("refreshableCountdown", refreshableCountdown);
 
   // NOTICE: refactor me
   const onClickApply = useCallback(() => {
@@ -324,6 +327,10 @@ export const IndexPage = () => {
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
 
+  const onClickToCustomerService = useCallback(() => {
+    navigate('/customer-service');
+  }, []);
+
   return (
     <Page className={"flex flex-col"}>
       {/*<input type="checkbox" className="toggle" checked />*/}
@@ -340,6 +347,7 @@ export const IndexPage = () => {
             pageState={finalPageState}
             setQuotaBarTargetPrice={setQuotaBarTargetPrice}
             countdown={countdown}
+            onClickToCustomerService={onClickToCustomerService}
           />
         </div>
 
@@ -404,15 +412,15 @@ export const IndexPage = () => {
             )
           }
 
-          {/*TODO:訂單拒絕這邊不會有*/}
-          {/*{(*/}
-          {/*  indexPageState.user.state === USER_AUTH_STATE.success &&*/}
-          {/*  indexPageState.order.state === ORDER_STATE.reject*/}
-          {/*) && (*/}
-          {/*    <>*/}
-          {/*      <NoticeOrderRejectedSection/>*/}
-          {/*    </>*/}
-          {/*)}*/}
+          {/*TODO:新客拒絕或是老客拒絕*/}
+          {(
+            indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.order.state === ORDER_STATE.reject
+          ) && (
+              <>
+                <NoticeOrderOrQuotaRejectedSection days={refreshableCountdown.days}/>
+              </>
+          )}
 
           {/*TODO: 檢查下*/}
           {(
@@ -420,7 +428,7 @@ export const IndexPage = () => {
             indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
           ) && (
             <>
-              <NoticeUserAuthedEmptyQuotaSection/>
+              <NoticeUserAuthedEmptyQuotaSection hours={refreshableCountdown.hours}/>
             </>
           )}
 
@@ -431,7 +439,7 @@ export const IndexPage = () => {
               indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
             )
           ) && (
-            <WelcomeBackAndReapplyInTimeSection/>
+            <WelcomeBackAndReapplyInTimeSection refreshableCountdown={refreshableCountdown}/>
           )}
 
 

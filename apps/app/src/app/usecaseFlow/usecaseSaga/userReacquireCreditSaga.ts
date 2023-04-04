@@ -5,7 +5,7 @@ import {GetQuotaModelStatusRequest, GetQuotaModelStatusResponse} from "../../ser
 import {GetIndexResponse} from "../../services/indexService/getIndexService";
 import {indexPageSlice} from "../storeSlice/indexPageSlice";
 import moment from "moment-timezone";
-import {SystemCaseActions} from "../index";
+import {SystemCaseActions, UseCaseActions} from "../index";
 import {RootState} from "../store";
 import {modalSlice} from "../storeSlice/modalSlice";
 
@@ -81,19 +81,21 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       yield put(getQuotaModelStatusAction.successAction());
       // yield put(getQuotaModelStatusActions.fulfilled);
 
-      const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
-      yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
+      // const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
+      // yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
 
       // NOTICE: refactor me
-      const currentTime = moment();
-      const expireTime = moment(indexResponse.offerExpireTime);
-      const isRiskControlOverdue = expireTime.isBefore(currentTime);
-      // console.log("currentTime.format", currentTime.format())
-      // console.log("expireTime.format", expireTime.format())
-      if (!isRiskControlOverdue && indexResponse.availableAmount > 0) {
-        const expiredTime = indexResponse?.offerExpireTime;
-        yield put(SystemCaseActions.SystemCountdownSaga(expiredTime))
-      }
+      // const currentTime = moment();
+      // const expireTime = moment(indexResponse.offerExpireTime);
+      // const isRiskControlOverdue = expireTime.isBefore(currentTime);
+      // // console.log("currentTime.format", currentTime.format())
+      // // console.log("expireTime.format", expireTime.format())
+      // if (!isRiskControlOverdue && indexResponse.availableAmount > 0) {
+      //   const expiredTime = indexResponse?.offerExpireTime;
+      //   yield put(SystemCaseActions.SystemCountdownSaga(expiredTime))
+      // }
+
+      yield put(UseCaseActions.UserViewIndexPageAction());
 
     }
   } catch (error) {

@@ -1,8 +1,10 @@
 import {BiHide, RiCustomerServiceLine} from "react-icons/all";
-import React from "react";
+import React, {useCallback} from "react";
 import {IndexPageProps, RootState} from "../../../../usecaseFlow/store";
 
-type Props = IndexPageProps;
+type Props = IndexPageProps & {
+  onClickToCustomerService: () => void;
+};
 
 export const UserInfoSupportField = (props: Props) => {
   const userName = props.state.user.userName.slice(0, 3) + "****" + props.state.user.userName.slice(7, 10);
@@ -16,7 +18,7 @@ export const UserInfoSupportField = (props: Props) => {
       </div>
 
       <div className={"right-section"}>
-        <div className={"contact-icon"}>
+        <div className={"contact-icon"} onClick={props.onClickToCustomerService}>
           <RiCustomerServiceLine/>
         </div>
       </div>

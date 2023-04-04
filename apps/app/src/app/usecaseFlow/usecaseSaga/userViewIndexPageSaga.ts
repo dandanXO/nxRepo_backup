@@ -24,15 +24,27 @@ export function* userViewIndexPageSaga(action: any) {
     yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
     // yield put(indexPageReducerAction.updateIndexAPI(indexResponse));
 
-    // NOTICE: refactor me
-    const currentTime = moment();
-    const expireTime = moment(indexResponse.offerExpireTime);
-    const isRiskControlOverdue = expireTime.isBefore(currentTime);
-    // console.log("currentTime.format", currentTime.format())
-    // console.log("expireTime.format", expireTime.format())
-    if (!isRiskControlOverdue && indexResponse.availableAmount > 0) {
-      const expiredTime = indexResponse?.offerExpireTime;
-      yield put(SystemCaseActions.SystemCountdownSaga(expiredTime))
+
+    if(indexResponse.noQuotaBalance || indexResponse.riskReject) {
+      // NOTICE: 不能重刷，需等待重刷時間
+      // console.log("不能重刷，需等待重刷時間")
+      // const expireTime = moment(indexResponse.refreshableUntil);
+      yield put(SystemCaseActions.SystemRefreshableCountdownSata(indexResponse.refreshableUntil))
+
+    } else {
+      // NOTICE: 可以重刷
+      const currentTime = moment();
+      const expireTime = moment(indexResponse.offerExpireTime);
+      const isRiskControlOverdue = expireTime.isBefore(currentTime);
+      // console.log("currentTime.format", currentTime.format())
+      // console.log("expireTime.format", expireTime.format())
+      if (!isRiskControlOverdue && indexResponse.availableAmount > 0) {
+        const expiredTime = indexResponse?.offerExpireTime;
+        yield put(SystemCaseActions.SystemCountdownSaga(expiredTime))
+      }
     }
+
+
+
   }
 }

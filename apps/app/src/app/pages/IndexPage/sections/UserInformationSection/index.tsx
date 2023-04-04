@@ -13,6 +13,7 @@ import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
 type Props = IndexPageProps & PageState & {
   setQuotaBarTargetPrice: React.Dispatch<React.SetStateAction<number>>;
   countdown: string;
+  onClickToCustomerService: () => void;
 };
 
 export const UserInformationSection = (props: Props) => {
@@ -20,7 +21,7 @@ export const UserInformationSection = (props: Props) => {
     <div className={"h-42 bg-orange-100 px-3 pt-2 flex flex-col items-center"}>
 
       <div className={"w-full mb-3"}>
-        <UserInfoSupportField state={props.state}/>
+        <UserInfoSupportField state={props.state} onClickToCustomerService={props.onClickToCustomerService}/>
       </div>
 
 

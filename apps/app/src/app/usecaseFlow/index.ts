@@ -4,7 +4,8 @@ import {userReacquireCreditSaga} from "./usecaseSaga/userReacquireCreditSaga";
 import {createAction} from "@reduxjs/toolkit";
 import {LoanServiceRequest} from "../services/loanService/loanService";
 import {userViewIndexPageSaga} from "./usecaseSaga/userViewIndexPageSaga";
-import {systemCountdownSaga} from "./usecaseSaga/systemCountdownSaga";
+import {systemCountdownSaga} from "./systemUsecaseSaga/systemCountdownSaga";
+import {systemRefreshableCountdownSata} from "./systemUsecaseSaga/systemRefreshableCountdownSata";
 
 
 export type UserApplyProductActionPayload = Pick<LoanServiceRequest, "applyAmount" | "details">;
@@ -19,6 +20,7 @@ export const UseCaseActions = {
 
 export const SystemCaseActions = {
   SystemCountdownSaga: createAction<string>("SystemCountdownSaga"),
+  SystemRefreshableCountdownSata: createAction<string>("SystemRefreshableCountdownSata"),
 }
 
 export function *AppSaga() {
@@ -31,5 +33,6 @@ export function *AppSaga() {
   yield takeLatest(UseCaseActions.UserApplyProductAction.type, userApplyProductsSaga)
   yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCreditSaga)
   yield takeLatest(SystemCaseActions.SystemCountdownSaga.type, systemCountdownSaga)
+  yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSata.type, systemRefreshableCountdownSata);
 
 }

@@ -104,6 +104,9 @@ export type GetIndexResponse = {
   customerServiceUrl: string;
   // 線上客服連結
 
+  loanAgreementUrl:	string;
+  // 借款同意申明URL
+
   marquee: string;
   // 跑馬燈文字
 

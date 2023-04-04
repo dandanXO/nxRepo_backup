@@ -59,7 +59,7 @@ export const AuthorizationModal = (props: Props) => {
 
         <Horizontal/>
 
-        <div className={"flex flex-row justify-between"}>
+        <div className={"flex flex-row justify-between font-light"}>
           <div onClick={props.onClose}>Cancel</div>
           <div onClick={props.onConfirm}>Confirm</div>
         </div>
