@@ -4,9 +4,9 @@ import {API} from "../../api";
 import moment from "moment-timezone";
 import {APIBoundaryModuleSlice} from "./APIBoundaryModule";
 import {FeeRateKey} from "../../services/indexService/getIndexService";
-import {indexPageSlice} from "../usecaseStoreSlice/indexPageSlice";
+import {indexPageSlice} from "../usecaseSaga/systemUsecaseStoreSlice/indexPageSlice";
 import {USER_AUTH_STATE} from "../domain/USER_AUTH_STATE";
-import {modalSlice} from "../usecaseStoreSlice/modalSlice";
+import {modalSlice} from "../usecaseSaga/systemUsecaseStoreSlice/modalSlice";
 import {AppSaga} from "../watchUsecaseSaga/appSaga";
 
 const logger = (store: any) => (next: any) => (action: any) => {

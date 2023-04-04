@@ -39,9 +39,9 @@ import {Moment} from "moment";
 import {USER_AUTH_STATE} from "../../usecaseFlow/domain/USER_AUTH_STATE";
 import {ORDER_STATE} from "../../usecaseFlow/domain/ORDER_STATE";
 import {RISK_CONTROL_STATE} from "../../usecaseFlow/domain/RISK_CONTROL_STATE";
-import {indexPageSlice} from "../../usecaseFlow/usecaseStoreSlice/indexPageSlice";
+import {indexPageSlice} from "../../usecaseFlow/usecaseSaga/systemUsecaseStoreSlice/indexPageSlice";
 import {AuthorizationModal} from "../../models/AuthorizationModal";
-import {modalSlice} from "../../usecaseFlow/usecaseStoreSlice/modalSlice";
+import {modalSlice} from "../../usecaseFlow/usecaseSaga/systemUsecaseStoreSlice/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
 import {UseCaseActions} from "../../usecaseFlow/usecaseActions/useCaseActions";
 

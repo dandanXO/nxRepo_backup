@@ -3,10 +3,10 @@ import {call, put, delay, select, take} from "redux-saga/effects";
 import {Service} from "../../services";
 import {GetQuotaModelStatusRequest, GetQuotaModelStatusResponse} from "../../services/loanService/getQuotaModelStatus";
 import {GetIndexResponse} from "../../services/indexService/getIndexService";
-import {indexPageSlice} from "../usecaseStoreSlice/indexPageSlice";
+import {indexPageSlice} from "./systemUsecaseStoreSlice/indexPageSlice";
 import moment from "moment-timezone";
 import {RootState} from "../reduxStore";
-import {modalSlice} from "../usecaseStoreSlice/modalSlice";
+import {modalSlice} from "./systemUsecaseStoreSlice/modalSlice";
 import {UseCaseActions} from "../usecaseActions/useCaseActions";
 import {SystemCaseActions} from "../usecaseActions/systemCaseActions";
 

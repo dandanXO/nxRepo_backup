@@ -1,4 +1,4 @@
-import {TimePartition} from "../../../usecaseFlow/usecaseStoreSlice/indexPageSlice";
+import {TimePartition} from "../../../usecaseFlow/usecaseSaga/systemUsecaseStoreSlice/indexPageSlice";
 
 type Props = {
   refreshableCountdown: TimePartition;
