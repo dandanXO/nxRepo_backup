@@ -191,28 +191,42 @@ export const indexPageSlice = createSlice({
         }
       }
 
+      // NOTE: 這邊要好好跟後端對規則
+      // NOTE: 1.風控到期後的重刷
+      // NOTE: 2.風控沒過，沒額度的重刷
 
       // NOTICE: 風控判斷
       if(typeof action.payload.offerExpireTime !== "undefined" && isRiskControlOverdue) {
-        // console.log("過期")
-        if (action.payload.refreshable === true && action.payload.refreshOverRetry === false) {
-          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
-          // NOTE: 差別? 額度刷新超過次數
-        } else if (action.payload.refreshable === true && action.payload.refreshOverRetry === true) {
-          // TODO: 刷過一次
-          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-        } else if (action.payload.refreshable === false && action.payload.refreshOverRetry === true) {
-          // TODO: 刷過一次
-          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+        // NOTE: 可重刷
+        if (action.payload.refreshable === true) {
+
+          if(action.payload.refreshOverRetry === false) {
+            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+          } else {
+            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+          }
+        // NOTE: 不可重刷
+        } else  {
+          if (action.payload.refreshOverRetry === true) {
+            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+          } else {
+            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+          }
         }
-      } else if (action.payload.noQuotaByRetryFewTimes === true) {
+      }
+
+      // NOTICE: 單一條件就可以取代了
+      if (action.payload.noQuotaByRetryFewTimes === true) {
         // NOTE: 刷新超過N次都没有额度
         state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+
       } else if (action.payload.noQuotaBalance === true) {
         // NOTE: 優先度最後
         state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+
       } else if (!isRiskControlOverdue && action.payload.availableAmount > 0) {
         state.riskControl.state = RISK_CONTROL_STATE.valid;
+
       }
       // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
       //

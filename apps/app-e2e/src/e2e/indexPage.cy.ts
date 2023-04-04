@@ -1159,7 +1159,7 @@ describe('IndexPage', () => {
       // NOTE: 下面如果給 false 就會出現 Loan View 了，後端不能給耶....
       // "noQuotaBalance": false,
 
-      // NOTE: 參數沒有差
+      // NOTE: 下面參數沒有差
       // "refreshable": false,
       // "refreshable": true,
 
@@ -1171,12 +1171,12 @@ describe('IndexPage', () => {
       "riskReject": false,
       "orderUnderReview": false,
 
-      // NOTICE: 下面過期會有問題
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
-      // NOTICE: 下面不會有問題
+      // NOTICE: 下面不管什麼時間都沒有問題
+      // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+      // NOTICE: 下面不管什麼時間都沒有問題
       // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("1", "days"),
-      // NOTICE: 下面不會有問題
-      // "offerExpireTime": null,
+      // NOTICE: 下面不管什麼時間都沒有問題
+      "offerExpireTime": null,
 
 
       "totalAmount": 15000,
