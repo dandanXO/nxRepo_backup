@@ -10,6 +10,7 @@ import { PostBankCardMainRequestBody } from "./types/postBankCardMain";
 import { PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBindSaveRequest } from "./types/postBankBindSave";
 import { GetBindCardDropListResponse } from "./types/GetBindCardDropList";
 import {GetIndexRequest, GetIndexResponse} from "../services/indexService/getIndexService";
+import {GetUserProcessResponse} from "./types/GetUserProcessResponse";
 
 
 export const API = createApi({
@@ -127,6 +128,13 @@ export const API = createApi({
         //         data: requestBody,
         //     }),
         // }),
+        // NOTICE: 取得用戶審核紀錄
+        getUserProcess: builder.query<GetUserProcessResponse, {}>({
+          query: () => ({
+            method: "get",
+            url: `/bank-user/process`,
+          }),
+        }),
     }),
 });
 
@@ -142,5 +150,6 @@ export const {
     usePostBankBindSaveMutation,
     usePostBankBindSaveToPKMutation,
     usePostBankBindSaveToBangladeshMutation,
-    useLazyGetBindCardDropListQuery
+    useLazyGetBindCardDropListQuery,
+    useLazyGetUserProcessQuery,
 } = API;

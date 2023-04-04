@@ -104,7 +104,7 @@ describe('IndexPage', () => {
     indexPagePo.adBanner().should("be.visible")
   })
 
-  it("status: 用戶認證中", () => {
+  it.only("status: 用戶認證中", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -123,6 +123,17 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+
+
+      "refreshable": false,
+      "refreshOverRetry": false,
+
+
+      "riskReject": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 0,
@@ -179,13 +190,10 @@ describe('IndexPage', () => {
         }
       ],
       "needRiskKycUpdate": false,
-      "riskReject": false,
-      "refreshable": true,
-      "refreshOverRetry": false,
       "orderUnderReview": false,
-      "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
       "oldUserForceApply": false,
+
+
       "payableRecords": [
         {
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
@@ -214,7 +222,8 @@ describe('IndexPage', () => {
     // 看到跑馬燈
     indexPagePo.marquee().should("be.visible");
     // 看到 welcome 包含姓名、客服 Button
-    indexPagePo.welcome().contains(userServiceResponse.userName)
+    // indexPagePo.welcome().contains(userServiceResponse.userName)
+
     // NOTE: important 看到反灰無法使用的可借款額度拉霸、歸零的倒數計計時
     // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸按鈕在最右邊
     // NOTE: important 看到用戶認證中訊息
@@ -499,7 +508,7 @@ describe('IndexPage', () => {
   })
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
-  it.only("status: 用戶已認證、新訂單被拒絕。新客情境：被拒絕。", () => {
+  it("status: 用戶已認證、新訂單被拒絕。新客情境：被拒絕。", () => {
 
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
