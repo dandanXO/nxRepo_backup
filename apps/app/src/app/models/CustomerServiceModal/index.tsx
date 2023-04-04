@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import { Overlay } from "@frontend/mobile/shared/ui";
 import { Navigation } from "../../components/layouts/Navigation";
 import { useSelector } from "react-redux";
-import { RootState } from "../../usecaseFlow/store";
+import { RootState } from "../../usecaseFlow/reduxStore";
 
 
 export const CustomerServiceModal = () => {

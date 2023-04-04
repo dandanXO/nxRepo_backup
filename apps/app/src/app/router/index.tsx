@@ -31,7 +31,7 @@ import {Tabs} from "antd";
 import {TabBar} from "../components/layouts/TabBar";
 import {APIBoundaryModal} from "../models/APIBoundaryModal";
 import {useSelector} from "react-redux";
-import {RootState} from "../usecaseFlow/store";
+import {RootState} from "../usecaseFlow/reduxStore";
 
 
 export const AppRouter = () => {

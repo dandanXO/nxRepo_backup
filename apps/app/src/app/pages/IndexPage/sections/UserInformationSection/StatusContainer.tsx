@@ -1,6 +1,6 @@
 import {ReactNode} from "react";
 import cx from "classnames";
-import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {PageState, PageStateEnum} from "../../index";
 import {USER_AUTH_STATE} from "../../../../usecaseFlow/domain/USER_AUTH_STATE";
 import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";

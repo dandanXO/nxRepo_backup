@@ -4,7 +4,7 @@ import "./style.scss";
 import {QuotaSliderStatus} from "./QuotaSliderStatus";
 import {LatestOrderStatus} from "./LatestOrderStatus";
 import {UserInfoSupportField} from "./UserInfoSupportField";
-import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {UnAuthenticationStatus} from "./UnAuthenticationStatus";
 import {PageState} from "../../index";
 import {USER_AUTH_STATE} from "../../../../usecaseFlow/domain/USER_AUTH_STATE";

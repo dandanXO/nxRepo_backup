@@ -4,7 +4,7 @@ import {Product} from "../../pages/IndexPage/sections/RecommendedProductsSection
 import {MdExpandLess, MdExpandMore} from "react-icons/all";
 import {Button} from "../../components/layouts/Button";
 import React, {Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState} from "react";
-import {IndexPageProps} from "../../usecaseFlow/store";
+import {IndexPageProps} from "../../usecaseFlow/reduxStore";
 import {FinalProductsSummary, FinalProductType} from "../../pages/IndexPage";
 import {formatPrice} from "../../modules/formatPrice";
 import {BankAccount} from "../../api/types/getBankCardList";

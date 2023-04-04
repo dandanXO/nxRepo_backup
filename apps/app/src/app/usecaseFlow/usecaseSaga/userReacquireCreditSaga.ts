@@ -3,11 +3,12 @@ import {call, put, delay, select, take} from "redux-saga/effects";
 import {Service} from "../../services";
 import {GetQuotaModelStatusRequest, GetQuotaModelStatusResponse} from "../../services/loanService/getQuotaModelStatus";
 import {GetIndexResponse} from "../../services/indexService/getIndexService";
-import {indexPageSlice} from "../storeSlice/indexPageSlice";
+import {indexPageSlice} from "../usecaseStoreSlice/indexPageSlice";
 import moment from "moment-timezone";
-import {SystemCaseActions, UseCaseActions} from "../index";
-import {RootState} from "../store";
-import {modalSlice} from "../storeSlice/modalSlice";
+import {RootState} from "../reduxStore";
+import {modalSlice} from "../usecaseStoreSlice/modalSlice";
+import {UseCaseActions} from "../usecaseActions/useCaseActions";
+import {SystemCaseActions} from "../usecaseActions/systemCaseActions";
 
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);

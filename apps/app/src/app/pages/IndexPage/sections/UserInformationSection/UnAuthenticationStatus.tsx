@@ -1,4 +1,4 @@
-import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {formatPrice} from "../../../../modules/formatPrice";
 
 type Props = IndexPageProps;

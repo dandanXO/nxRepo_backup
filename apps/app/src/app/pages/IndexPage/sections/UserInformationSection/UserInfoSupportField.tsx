@@ -1,6 +1,6 @@
 import {BiHide, RiCustomerServiceLine} from "react-icons/all";
 import React, {useCallback} from "react";
-import {IndexPageProps, RootState} from "../../../../usecaseFlow/store";
+import {IndexPageProps, RootState} from "../../../../usecaseFlow/reduxStore";
 
 type Props = IndexPageProps & {
   onClickToCustomerService: () => void;

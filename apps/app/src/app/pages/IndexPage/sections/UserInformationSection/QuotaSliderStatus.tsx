@@ -1,7 +1,7 @@
 import ReactSlider from "./ReactSlider";
 import React, {useEffect, useMemo, useState, SetStateAction} from "react";
 import {formatPrice} from "../../../../modules/formatPrice";
-import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {environment} from "../../../../../environments/environment";
 import cx from "classnames";
 import {USER_AUTH_STATE} from "../../../../usecaseFlow/domain/USER_AUTH_STATE";

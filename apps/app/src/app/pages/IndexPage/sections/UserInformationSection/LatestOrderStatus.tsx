@@ -1,5 +1,5 @@
 import cx from "classnames";
-import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment";
 import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";

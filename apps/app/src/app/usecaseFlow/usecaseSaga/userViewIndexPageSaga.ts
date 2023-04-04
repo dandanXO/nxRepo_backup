@@ -4,10 +4,10 @@ import {call, put, select} from "redux-saga/effects";
 import {Service} from "../../services";
 import {GetOpenIndexResponse} from "../../services/indexService/getOpenIndexService";
 import {GetIndexResponse} from "../../services/indexService/getIndexService";
-import {indexPageSlice} from "../storeSlice/indexPageSlice";
+import {indexPageSlice} from "../usecaseStoreSlice/indexPageSlice";
 import {USER_AUTH_STATE} from "../domain/USER_AUTH_STATE";
 import moment from "moment-timezone";
-import {SystemCaseActions} from "../index";
+import {SystemCaseActions} from "../usecaseActions/systemCaseActions";
 
 
 export function* userViewIndexPageSaga(action: any) {
@@ -25,7 +25,7 @@ export function* userViewIndexPageSaga(action: any) {
     // yield put(indexPageReducerAction.updateIndexAPI(indexResponse));
 
 
-    if(indexResponse.noQuotaBalance || indexResponse.riskReject) {
+    if(indexResponse.noQuotaBalance === true || indexResponse.riskReject === true) {
       // NOTICE: 不能重刷，需等待重刷時間
       // console.log("不能重刷，需等待重刷時間")
       // const expireTime = moment(indexResponse.refreshableUntil);

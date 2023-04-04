@@ -1,13 +1,13 @@
 import {configureStore, PayloadAction} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
 import {API} from "../../api";
-import {AppSaga} from "../index";
 import moment from "moment-timezone";
 import {APIBoundaryModuleSlice} from "./APIBoundaryModule";
 import {FeeRateKey} from "../../services/indexService/getIndexService";
-import {indexPageSlice} from "../storeSlice/indexPageSlice";
+import {indexPageSlice} from "../usecaseStoreSlice/indexPageSlice";
 import {USER_AUTH_STATE} from "../domain/USER_AUTH_STATE";
-import {modalSlice} from "../storeSlice/modalSlice";
+import {modalSlice} from "../usecaseStoreSlice/modalSlice";
+import {AppSaga} from "../watchUsecaseSaga/appSaga";
 
 const logger = (store: any) => (next: any) => (action: any) => {
   if(action.type !== 'indexPage/updateRiskCountdown') {

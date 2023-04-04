@@ -1,5 +1,5 @@
 import {Product} from "./Product";
-import {IndexPageProps} from "../../../../usecaseFlow/store";
+import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {FinalProductType} from "../../index";
 
 type Props = IndexPageProps & {

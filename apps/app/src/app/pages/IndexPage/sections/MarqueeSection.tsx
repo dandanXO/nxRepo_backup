@@ -1,5 +1,5 @@
 import {Marquee} from "../../../components/layouts/Marquee";
-import {IndexPageProps} from "../../../usecaseFlow/store";
+import {IndexPageProps} from "../../../usecaseFlow/reduxStore";
 
 type Props = IndexPageProps;
 export const MarqueeSection = (props: Props) => {

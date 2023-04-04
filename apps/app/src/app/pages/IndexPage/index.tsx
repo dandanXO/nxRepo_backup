@@ -15,7 +15,7 @@ import {NoticeUserInProgressAuthStatusSections} from "./sections/NoticeSection/N
 
 import {WelcomeBackAndReapplyInTimeSection} from "./sections/WelcomeBackAndReapplyInTimeSection";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../usecaseFlow/store";
+import {RootState} from "../../usecaseFlow/reduxStore";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADBannerSection} from "./sections/ADBannerSection";
 import {LoanOverViewSection} from "./sections/LoanOverViewSection";
@@ -39,11 +39,11 @@ import {Moment} from "moment";
 import {USER_AUTH_STATE} from "../../usecaseFlow/domain/USER_AUTH_STATE";
 import {ORDER_STATE} from "../../usecaseFlow/domain/ORDER_STATE";
 import {RISK_CONTROL_STATE} from "../../usecaseFlow/domain/RISK_CONTROL_STATE";
-import {UseCaseActions} from "../../usecaseFlow";
-import {indexPageSlice} from "../../usecaseFlow/storeSlice/indexPageSlice";
+import {indexPageSlice} from "../../usecaseFlow/usecaseStoreSlice/indexPageSlice";
 import {AuthorizationModal} from "../../models/AuthorizationModal";
-import {modalSlice} from "../../usecaseFlow/storeSlice/modalSlice";
+import {modalSlice} from "../../usecaseFlow/usecaseStoreSlice/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
+import {UseCaseActions} from "../../usecaseFlow/usecaseActions/useCaseActions";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {

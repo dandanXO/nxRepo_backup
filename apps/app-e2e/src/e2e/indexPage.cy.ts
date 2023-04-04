@@ -104,7 +104,7 @@ describe('IndexPage', () => {
     indexPagePo.adBanner().should("be.visible")
   })
 
-  it.only("status: 用戶認證中", () => {
+  it("status: 用戶認證中", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -388,124 +388,6 @@ describe('IndexPage', () => {
     // NOTE: important 看到反灰無法點擊的 Apply Now Button
   })
 
-  it("status: 用戶已認證、有逾期的訂單", () => {
-    // NOTE: Given
-    const userServiceResponse: GetUserInfoServiceResponse = {
-      "userName": "9013452123",
-      "status": USER_AUTH_STATE.success,
-      "demoAccount": false,
-      "oldUser": false,
-      "needUpdateKyc": false,
-      "organic": false
-    }
-    cy.intercept("get", "/api/v2/login/info", {
-      statusCode: 200,
-      body: userServiceResponse,
-    }).as("getInfo").then(() => {
-      console.log("info");
-    })
-
-    // NOTE: Given
-    const indexServiceResponse: IndexServiceResponse = {
-      "totalAmount": 15000,
-      "usedAmount": 15000,
-      "availableAmount": 0,
-      "quotaBar": {
-        "min": 0,
-        "max": 0,
-        "current": 0,
-        "serial": 1000
-      },
-      "chargeFeeDetails": [
-        {
-          "title": "Processing Fee",
-          "counting": 0.4,
-          "key": "PROCESSING_FEE"
-        },
-        {
-          "title": "Service Fee",
-          "counting": 0.5,
-          "key": "SERVICE_FEE"
-        },
-        {
-          "title": "Interest Fee",
-          "counting": 0.1,
-          "key": "LOAN_INTEREST"
-        }
-      ],
-      "products": [
-        {
-          "productId": 1,
-          "productName": "AA LOAN",
-          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
-          "min": 2000,
-          "max": 5000,
-          "terms": 7,
-          "platformChargeFeeRate": 0.4
-        },
-        {
-          "productId": 2,
-          "productName": "BB LOAN",
-          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-          "min": 3000,
-          "max": 5000,
-          "terms": 7,
-          "platformChargeFeeRate": 0.4
-        },
-        {
-          "productId": 3,
-          "productName": "CC LOAN",
-          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
-          "min": 4000,
-          "max": 6000,
-          "terms": 7,
-          "platformChargeFeeRate": 0.4
-        }
-      ],
-      "needRiskKycUpdate": false,
-      "riskReject": false,
-      "refreshable": true,
-      "refreshOverRetry": false,
-      "orderUnderReview": false,
-      "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
-      "oldUserForceApply": false,
-      "payableRecords": [
-        {
-          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
-          "productName": "AA LOAN",
-          "payableAmount": 1000,
-          "dueDate": moment().tz(INDIA_TIME_ZONE).add(-1, "second"),
-          "overdue": true,
-          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
-        }
-      ],
-      "marquee": "我是跑馬燈...",
-      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
-      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
-      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
-    }
-    cy.intercept("get", "/api/v3/index", {
-      statusCode: 200,
-      body: indexServiceResponse,
-    }).as("getIndex").then(() => {
-      console.log("index");
-    })
-
-    visitIndexPage();
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到逾期的訊息資訊、提醒您需要優先還清逾期款項才能再借款
-    // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-    // NOTE: important 看到反灰但無法使用的可借款額度拉霸、無法倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最左邊
-    // NOTE: important 倒數計時歸零
-    // 正常隨意顯示 Loan Over View
-    // NOTE: important 看到下方 tips 優先還款訊息
-    // NOTE: important 看到反灰無法點擊的 Apply Now Button
-    // NOTE: important 看到下方 Tab 的 Payment 有紅點提示
-  })
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   it("status: 用戶已認證、新訂單被拒絕。新客情境：被拒絕。", () => {
@@ -753,7 +635,7 @@ describe('IndexPage', () => {
 
 
   // NOTICE: 風控相關
-  // NOTE: 沒有應還訂單
+  // NOTICE: 沒有應還訂單
   it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -804,7 +686,7 @@ describe('IndexPage', () => {
           "productId": 1,
           "productName": "AA LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
-          "min": 2000,
+          "min": 1000,
           "max": 5000,
           "terms": 7,
           "platformChargeFeeRate": 0.4
@@ -876,7 +758,7 @@ describe('IndexPage', () => {
           "productId": 1,
           "productName": "AA LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
-          "min": 2000,
+          "min": 1000,
           "max": 5000,
           "terms": 7,
           "platformChargeFeeRate": 0.4
@@ -998,7 +880,7 @@ describe('IndexPage', () => {
 
   })
 
-  // NOTE: 有應還訂單
+  // NOTICE: 有應還訂單
   it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -1125,7 +1007,7 @@ describe('IndexPage', () => {
   })
 
 
-  // NOTE: 使用者自行點擊獲取額度
+  // NOTICE: 使用者自行點擊獲取額度
   it("status: 用戶已認證、風控額度時間無效，使用者自己已經重新獲取信用額度過一次。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -1247,7 +1129,8 @@ describe('IndexPage', () => {
 
   })
 
-  it("status: 用戶已認證、風控額度時間無效，使用者自己重新獲取信用三次了。", () => {
+  // NOTE: 這情況沒有實作到
+  it.only("status: 用戶已認證、風控額度時間無效，使用者自己重新獲取信用三次了。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1266,7 +1149,36 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+
+      // NOTICE: 刷新超過N次都没有额度
       "noQuotaByRetryFewTimes": true,
+
+
+      // NOTICE: 風控額度直接不足，無法執行重刷
+      "noQuotaBalance": true,
+      // NOTE: 下面如果給 false 就會出現 Loan View 了，後端不能給耶....
+      // "noQuotaBalance": false,
+
+      // NOTE: 參數沒有差
+      // "refreshable": false,
+      // "refreshable": true,
+
+      "refreshOverRetry": true,
+      // "refreshableUntil": "2023-03-28T08:10:24",
+      "refreshableUntil": null,
+
+      // NOTICE: 優先權最高
+      "riskReject": false,
+      "orderUnderReview": false,
+
+      // NOTICE: 下面過期會有問題
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+      // NOTICE: 下面不會有問題
+      // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("1", "days"),
+      // NOTICE: 下面不會有問題
+      // "offerExpireTime": null,
+
+
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 0,
@@ -1323,13 +1235,7 @@ describe('IndexPage', () => {
         }
       ],
       "needRiskKycUpdate": false,
-      // NOTICE: 優先權最高
-      "riskReject": false,
-      "refreshable": true,
-      "refreshOverRetry": true,
-      "orderUnderReview": false,
-      "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -1369,7 +1275,7 @@ describe('IndexPage', () => {
 
   })
 
-  // NOTICE: 注意這情況
+  // NOTE: 這情況是怎麼了
   it("status: 用戶已認證、但風控額度直接不足。需要等待 2 天。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -1504,8 +1410,8 @@ describe('IndexPage', () => {
 
   })
 
-  // NOTICE: 注意這情況
-  it("status: 用戶已認證、但風控額度直接不足。再等 5 秒就能刷新。", () => {
+
+  it("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1985,7 +1891,7 @@ describe('IndexPage', () => {
 
   })
 
-  // NOTICE: 注意這情況
+
   it("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -2105,7 +2011,7 @@ describe('IndexPage', () => {
   })
 
 
-  // NOTICE: 3秒到期
+
   it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -2883,7 +2789,7 @@ describe('IndexPage', () => {
     // NOTE: important 可以點擊 Apply Now Button
   })
 
-  // NOTICE: 用戶已認證、風控有效，額度足夠下。開始 Apply 的流程
+
   it("status: 用戶已認證、風控額度時間有效，額度足夠。點擊 Apply 後，再次確認後，完成 Apply", () => {
     // NOTE: important 看到已選擇的推薦商品項目、可點選展開單一商品了解更詳細的資訊
     // NOTE: important 顯示全部商品計算後的總結

@@ -3,7 +3,7 @@ import {NoticeSectionContainer} from "./index";
 export const NoticeUserReacquireOver3TimeSections = () => {
   return(
     <NoticeSectionContainer>
-      <div className={"text-orange-500 mb-2"}>Your order has not been approved</div>
+      <div className={"text-orange-500 mb-2"}>Your application has not been approved</div>
 
       <div className={"paragraph font-light mb-3"}>
         We regret to inform you that we cannot offer you any loans due to your credit score being below our standards.

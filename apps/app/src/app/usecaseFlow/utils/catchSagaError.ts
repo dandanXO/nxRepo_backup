@@ -1,6 +1,6 @@
 import axios, {AxiosError} from "axios";
 import {put} from "redux-saga/effects";
-import {APIBoundaryModuleSlice} from "../store/APIBoundaryModule";
+import {APIBoundaryModuleSlice} from "../reduxStore/APIBoundaryModule";
 
 export function* catchSagaError(error: any) {
   if (axios.isAxiosError(error)) {

@@ -1,6 +1,6 @@
 import moment from "moment-timezone";
 import {put, select, delay} from "redux-saga/effects";
-import {indexPageSlice} from "../storeSlice/indexPageSlice";
+import {indexPageSlice} from "../../usecaseStoreSlice/indexPageSlice";
 
 export function *systemCountdownSaga(action: any) {
   // console.log("systemCountdownSaga.action", action);
