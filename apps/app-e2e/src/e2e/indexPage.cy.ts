@@ -1130,7 +1130,7 @@ describe('IndexPage', () => {
   })
 
   // NOTE: 這情況沒有實作到
-  it.only("status: 用戶已認證、風控額度時間無效，使用者自己重新獲取信用三次了。", () => {
+  it("status: 用戶已認證、風控額度時間無效，使用者自己重新獲取信用三次了。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -2012,7 +2012,7 @@ describe('IndexPage', () => {
 
 
 
-  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -2790,6 +2790,7 @@ describe('IndexPage', () => {
   })
 
 
+  // NOTE: 尚未實作測試
   it("status: 用戶已認證、風控額度時間有效，額度足夠。點擊 Apply 後，再次確認後，完成 Apply", () => {
     // NOTE: important 看到已選擇的推薦商品項目、可點選展開單一商品了解更詳細的資訊
     // NOTE: important 顯示全部商品計算後的總結
