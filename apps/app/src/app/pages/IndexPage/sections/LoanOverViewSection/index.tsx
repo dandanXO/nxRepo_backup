@@ -11,6 +11,13 @@ export const LoanOverViewSection = (props: Props) => {
   const options = useRef<ApexOptions>();
   options.current = {
     labels: [""],
+    states: {
+      hover: {
+        filter: {
+          type: 'none',
+        }
+      },
+    },
     plotOptions: {
       radialBar: {
         hollow: {
@@ -32,16 +39,18 @@ export const LoanOverViewSection = (props: Props) => {
             opacity: 0.5
           }
         },
+        track: {
+          background: "rgb(156,163,175)",
+        },
         dataLabels: {
-          show: true,
+          show: false,
           name: {
-            // offsetY: -10,
             show: true,
             color: "#888",
             fontSize: "13px"
           },
           value: {
-            show: false,
+            show: true,
             color: "#111",
             fontSize: "30px",
             formatter: function (val) {
