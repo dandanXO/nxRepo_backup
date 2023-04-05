@@ -270,7 +270,7 @@ describe('IndexPage', () => {
   //   //
   // })
 
-  it("status: 用戶已認證、有3天即將到期的訂單", () => {
+  it.only("status: 用戶已認證、有3天即將到期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -636,7 +636,7 @@ describe('IndexPage', () => {
 
   // NOTICE: 風控相關
   // NOTICE: 沒有應還訂單
-  it.only("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",

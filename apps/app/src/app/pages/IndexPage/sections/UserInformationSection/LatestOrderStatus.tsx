@@ -3,12 +3,14 @@ import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment";
 import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
+import {useNavigate} from "react-router-dom";
 
 type Props = IndexPageProps;
 
 export const LatestOrderStatus = (props: Props) => {
   // NOTE: State1 - 到期前3天出現最近一期訂單提示用戶還款。
   // NOTE: State2 - 提醒您需要優先還清逾期款項才能再借款
+  const navigate = useNavigate();
   return (
     <div className={"bg-white px-5 py-1.5 rounded-lg border border-orange-500 flex flex-col"}>
 
@@ -38,7 +40,9 @@ export const LatestOrderStatus = (props: Props) => {
           </div>
         </div>
         <div className={"right"}>
-          <div className={"text-blue-800"}>Repay</div>
+          <div className={"text-blue-800"} onClick={() => {
+            navigate("/loan-record")
+          }}>Repay</div>
         </div>
       </div>
       {(props.state.order.state === ORDER_STATE.hasOverdueOrder) && (
