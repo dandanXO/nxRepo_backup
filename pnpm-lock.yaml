@@ -98,6 +98,7 @@ specifiers:
   react-i18next: ^12.0.0
   react-icons: ^4.7.1
   react-is: 18.2.0
+  react-loading-icons: ^1.1.0
   react-redux: 8.0.2
   react-router-dom: ^6.3.0
   react-select: ^5.6.1
@@ -165,6 +166,7 @@ dependencies:
   react-i18next: 12.0.0_e52s5leb62x5eudkmfoztpifde
   react-icons: 4.7.1_react@18.2.0
   react-is: 18.2.0
+  react-loading-icons: 1.1.0
   react-redux: 8.0.2_gayplthl7qwsnzwf6upd2ogamy
   react-router-dom: 6.4.0_biqbaboplfbrettd7655fr4n2y
   react-select: 5.6.1_gjmh6r3lp3og7xnvy4a67n2psa
@@ -19144,6 +19146,11 @@ packages:
 
   /react-lifecycles-compat/3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
+    dev: false
+
+  /react-loading-icons/1.1.0:
+    resolution: {integrity: sha512-Y9eZ6HAufmUd8DIQd6rFrx5Bt/oDlTM9Nsjvf8YpajTa3dI8cLNU8jUN5z7KTANU+Yd6/KJuBjxVlrU2dMw33g==}
+    engines: {node: '>= 12.0.0'}
     dev: false
 
   /react-redux/8.0.2_gayplthl7qwsnzwf6upd2ogamy:
