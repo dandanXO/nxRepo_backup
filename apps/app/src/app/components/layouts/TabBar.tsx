@@ -2,7 +2,10 @@ import {MdOutlineAccountCircle, MdPayment, RiMoneyDollarCircleFill} from "react-
 import {useLocation, useNavigate} from "react-router-dom";
 import cx from "classnames";
 
-export const TabBar = () => {
+type Props = {
+  hasOrder: boolean;
+}
+export const TabBar = (props: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   // console.log("location", location);
@@ -17,7 +20,7 @@ export const TabBar = () => {
           "text-gray-300": location.pathname !== "/",
         })}>Loan</div>
       </div>
-      <div className={"flex-1 flex flex-col justify-center items-center"} onClick={() => {
+      <div className={"flex-1 flex flex-col justify-center items-center relative"} onClick={() => {
         navigate("/loan-record")
       }}>
         <MdPayment color={location.pathname === "/loan-record" ? "#F58B10" : "#D7D7D7"} size={20}/>
@@ -25,6 +28,9 @@ export const TabBar = () => {
           "text-orange-300": location.pathname === "/loan-record",
           "text-gray-300": location.pathname !== "/loan-record",
         })}>Payment</div>
+        {props.hasOrder && (
+          <div className={"bg-[#F24822] w-2 h-2 rounded-full absolute right-1/3 top-2"}></div>
+        )}
       </div>
       <div className={"flex-1 flex flex-col justify-center items-center"}  onClick={() => {
         navigate("/personal-info")

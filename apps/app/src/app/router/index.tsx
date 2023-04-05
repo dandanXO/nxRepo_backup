@@ -38,6 +38,8 @@ export const AppRouter = () => {
     const location = useLocation();
     const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
     console.log("apiBoundary", apiBoundary)
+
+    const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
     return (
         // <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
@@ -78,7 +80,7 @@ export const AppRouter = () => {
               "/",
               "/loan-record",
               "/personal-info"
-            ].indexOf(location.pathname) > -1 && <TabBar/>}
+            ].indexOf(location.pathname) > -1 && <TabBar hasOrder={payableRecords ? payableRecords?.length > 0 : false}/>}
 
           {apiBoundary.show && (
             <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message}/>

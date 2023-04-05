@@ -18,6 +18,9 @@ export const LoanOverViewSection = (props: Props) => {
         }
       },
     },
+    fill: {
+      colors: ["#78CB4D"]
+    },
     plotOptions: {
       radialBar: {
         hollow: {
@@ -40,7 +43,7 @@ export const LoanOverViewSection = (props: Props) => {
           }
         },
         track: {
-          background: "rgb(156,163,175)",
+          background: "#E5E5E5",
         },
         dataLabels: {
           show: false,
@@ -97,7 +100,7 @@ export const LoanOverViewSection = (props: Props) => {
         <div className={"right flex flex-col justify-center items-end"}>
           <div className={"used-amount flex flex-col justify-end items-end"}>
             <div className={"label flex flex-row justify-between items-center"}>
-              <div className={"label-color w-4 h-1.5 bg-gray-400 rounded mr-2"}></div>
+              <div className={"label-color w-4 h-1.5 bg-[#E5E5E5] rounded mr-2"}></div>
               <div className={"label-price font-light"}>Used Amount</div>
             </div>
             <div className={"price font-medium"}>₹ {formatPrice(props.state.indexAPI?.usedAmount || 0)}</div>
