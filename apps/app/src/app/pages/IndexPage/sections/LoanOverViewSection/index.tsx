@@ -1,23 +1,87 @@
 import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {formatPrice} from "../../../../modules/formatPrice";
+import Chart from "react-apexcharts";
+import {useEffect, useRef, useState} from "react";
+import {ApexOptions} from "apexcharts";
+import {environment} from "../../../../../environments/environment";
 
 type Props = IndexPageProps;
 
 export const LoanOverViewSection = (props: Props) => {
+  const options = useRef<ApexOptions>();
+  options.current = {
+    labels: [""],
+    plotOptions: {
+      radialBar: {
+        hollow: {
+          margin: 5,
+          size: '70%',
+          background: 'transparent',
+          image: undefined,
+          imageWidth: 150,
+          imageHeight: 150,
+          imageOffsetX: 0,
+          imageOffsetY: 0,
+          imageClipped: true,
+          position: 'front',
+          dropShadow: {
+            enabled: false,
+            top: 0,
+            left: 0,
+            blur: 3,
+            opacity: 0.5
+          }
+        },
+        dataLabels: {
+          show: true,
+          name: {
+            // offsetY: -10,
+            show: true,
+            color: "#888",
+            fontSize: "13px"
+          },
+          value: {
+            show: false,
+            color: "#111",
+            fontSize: "30px",
+            formatter: function (val) {
+              return String(val);
+            },
+          }
+        }
+      }
+    },
+  }
+  const [series, setSeries] = useState<number[]>();
+  useEffect(() => {
+    if(props.state.indexAPI) {
+      const percent = (props.state.indexAPI?.availableAmount/props.state.indexAPI?.totalAmount) * 100;
+      setSeries([percent])
+    }
+  }, [props.state.indexAPI])
   return (
     <div>
       <div className={"font-medium mb-2"}>Loan Over View</div>
 
-      <div className={"w-full flex flex-row justify-center"}>
-        <div className={"left mr-4 relative"}>
-          <div className={"w-36 h-36 bg-gray-500 rounded-full flex flex-col justify-center items-center"}>
-            <div className={"w-32 h-32 bg-white rounded-full"}>
-              <div className={"w-32 h-32 quota-info flex flex-col justify-center items-center"}>
-                <div className={"price font-medium"}>₹ {formatPrice(props.state.indexAPI?.availableAmount || 0)}</div>
-                <div className={"text1 font-light"}>Available</div>
-                <div className={"text2 font-light"}>Balance</div>
+      <div className={"w-full flex flex-row justify-between"}>
+
+        <div className={"left relative"}>
+          <div className="container relative">
+            <Chart
+              options={options.current}
+              series={series}
+              type="radialBar"
+              width="180"
+              height="180"
+            />
+
+            <div className={"absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-center"}>
+              <div className="text">
+                <div>{environment.currency} {props.state.indexAPI?.availableAmount}</div>
+                <div>Available Balance</div>
               </div>
             </div>
+
           </div>
         </div>
 
