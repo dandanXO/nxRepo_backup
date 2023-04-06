@@ -6,6 +6,7 @@ export const CategoryPage = () => {
   return (
     <div>
       <div><Link to="/">IndexPage</Link></div>
+      <div><Link to="/login">Login</Link></div>
       <div><Link to="/application-progress">ApplicationProgressPage</Link></div>
       <div><Link to="/auth">AuthPage</Link></div>
       <div><Link to="/bankcard-list">BankCardListPage</Link></div>
