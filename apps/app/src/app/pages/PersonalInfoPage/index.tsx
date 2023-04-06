@@ -33,7 +33,7 @@ export const PersonalInfoPage = () => {
             </div>
             <div className={`flex flex-row justify-around items-center py-2 px-4 bg-orange-100`}>
                 <div>Verify now for highest amount</div>
-                <Button buttonText={<div className="flex flex-row items-center">verify now{<FiChevronRight className="ml-1" />}</div>} padding="py-1 px-2" />
+                <Button buttonText={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>} padding="py-1 px-2" />
             </div>
             <div className="m-4">
                 <Card><LinkItem title={'Bank Card'} to={`/bankcard-list?token${getToken()}`} /></Card>
