@@ -488,7 +488,8 @@ class OrderDetail extends Component{
         function loadRepaymentLinkFlag() {
           axios({
             url: '/hs/admin/orderOverdue/repayment-link-is-prohibited',
-            method: 'get'
+            method: 'get',
+            params: { overdueId: params }
           }).then((res) => {
             _this.setState({
               repaymentLinkIsProhibited: res,
