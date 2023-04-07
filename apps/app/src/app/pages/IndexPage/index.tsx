@@ -36,9 +36,9 @@ import {ProductApplyDetail} from "../../services/loanService/loanService";
 import {Page} from "../../components/layouts/Page";
 import {Moment} from "moment";
 
-import {USER_AUTH_STATE} from "../../usecaseFlow/domain/USER_AUTH_STATE";
-import {ORDER_STATE} from "../../usecaseFlow/domain/ORDER_STATE";
-import {RISK_CONTROL_STATE} from "../../usecaseFlow/domain/RISK_CONTROL_STATE";
+import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../domain/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../domain/RISK_CONTROL_STATE";
 import {indexPageSlice} from "../../usecaseFlow/reduxStore/indexPageSlice";
 import {AuthorizationModal} from "../../models/AuthorizationModal";
 import {modalSlice} from "../../usecaseFlow/reduxStore/modalSlice";

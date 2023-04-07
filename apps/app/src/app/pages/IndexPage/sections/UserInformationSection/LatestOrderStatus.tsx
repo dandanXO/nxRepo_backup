@@ -2,7 +2,7 @@ import cx from "classnames";
 import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment";
-import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
+import {ORDER_STATE} from "../../../../domain/ORDER_STATE";
 import {useNavigate} from "react-router-dom";
 
 type Props = IndexPageProps;

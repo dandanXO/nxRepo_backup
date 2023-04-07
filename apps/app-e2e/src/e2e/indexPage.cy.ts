@@ -5,7 +5,7 @@ import {indexPagePo} from "../support/indexPage.po";
 import moment from "moment-timezone"
 import {GetOpenIndexResponse} from "../../../app/src/app/services/indexService/getOpenIndexService";
 import {GetUserInfoServiceResponse} from "../../../app/src/app/services/userService/userService";
-import {USER_AUTH_STATE} from "../../../app/src/app/usecaseFlow/domain/USER_AUTH_STATE";
+import {USER_AUTH_STATE} from "../../../app/src/app/domain/USER_AUTH_STATE";
 import {GetQuotaModelStatusResponse} from "../../../app/src/app/services/loanService/getQuotaModelStatus";
 import {LoanServiceResponse} from "../../../app/src/app/services/loanService/loanService";
 import {GetBankCardListResponse} from "../../../app/src/app/api/types/getBankCardList";

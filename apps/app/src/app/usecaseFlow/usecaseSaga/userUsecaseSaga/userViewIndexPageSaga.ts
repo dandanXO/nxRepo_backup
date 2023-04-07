@@ -5,7 +5,7 @@ import {Service} from "../../../services";
 import {GetOpenIndexResponse} from "../../../services/indexService/getOpenIndexService";
 import {GetIndexResponse} from "../../../services/indexService/getIndexService";
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
-import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
+import {USER_AUTH_STATE} from "../../../domain/USER_AUTH_STATE";
 import moment from "moment-timezone";
 import {SystemCaseActions} from "../../usecaseActions/systemCaseActions";
 

@@ -1,13 +1,13 @@
 import {configureStore, PayloadAction} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
 import {API} from "../../api";
-import moment from "moment-timezone";
-import {APIBoundaryModuleSlice} from "./APIBoundaryModule";
+import {APIBoundaryModuleSlice} from "./apiBoundaryModuleSlice";
 import {FeeRateKey} from "../../services/indexService/getIndexService";
 import {indexPageSlice} from "./indexPageSlice";
-import {USER_AUTH_STATE} from "../domain/USER_AUTH_STATE";
+import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
 import {modalSlice} from "./modalSlice";
 import {AppSaga} from "../watchUsecaseSaga/appSaga";
+import {appSlice} from "./appSlice";
 
 const logger = (store: any) => (next: any) => (action: any) => {
   if(action.type !== 'indexPage/updateRiskCountdown') {
@@ -27,11 +27,11 @@ const sagaMiddleware = createSagaMiddleware()
 
 export const appStore = configureStore({
   reducer: {
-    [API.reducerPath]: API.reducer,
-    [indexPageSlice.name]: indexPageSlice.reducer,
-    // indexPage: indexPageReducer,
-    [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
+    [appSlice.name]: appSlice.reducer,
     [modalSlice.name]: modalSlice.reducer,
+    [API.reducerPath]: API.reducer,
+    [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
+    [indexPageSlice.name]: indexPageSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

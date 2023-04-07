@@ -2,9 +2,9 @@ import {ReactNode} from "react";
 import cx from "classnames";
 import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {PageState, PageStateEnum} from "../../index";
-import {USER_AUTH_STATE} from "../../../../usecaseFlow/domain/USER_AUTH_STATE";
-import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
-import {RISK_CONTROL_STATE} from "../../../../usecaseFlow/domain/RISK_CONTROL_STATE";
+import {USER_AUTH_STATE} from "../../../../domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../../domain/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../../../domain/RISK_CONTROL_STATE";
 
 type Props = {
   children?: ReactNode;

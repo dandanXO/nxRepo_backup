@@ -7,8 +7,8 @@ import {UserInfoSupportField} from "./UserInfoSupportField";
 import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
 import {UnAuthenticationStatus} from "./UnAuthenticationStatus";
 import {PageState} from "../../index";
-import {USER_AUTH_STATE} from "../../../../usecaseFlow/domain/USER_AUTH_STATE";
-import {ORDER_STATE} from "../../../../usecaseFlow/domain/ORDER_STATE";
+import {USER_AUTH_STATE} from "../../../../domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../../domain/ORDER_STATE";
 
 type Props = IndexPageProps & PageState & {
   setQuotaBarTargetPrice: React.Dispatch<React.SetStateAction<number>>;

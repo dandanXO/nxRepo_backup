@@ -4,9 +4,9 @@ import {GetUserInfoServiceResponse} from "../../services/userService/userService
 import {GetIndexResponse, PayableRecords} from "../../services/indexService/getIndexService";
 import moment from "moment-timezone";
 import {GetOpenIndexResponse} from "../../services/indexService/getOpenIndexService";
-import {USER_AUTH_STATE} from "../domain/USER_AUTH_STATE";
-import {ORDER_STATE} from "../domain/ORDER_STATE";
-import {RISK_CONTROL_STATE} from "../domain/RISK_CONTROL_STATE";
+import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../domain/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../domain/RISK_CONTROL_STATE";
 // import {getQuotaModelStatusActions} from "../usecaseSaga/userReacquireCreditSaga";
 import {GetQuotaModelStatusResponse} from "../../services/loanService/getQuotaModelStatus";
 import {getQuotaModelStatusAction} from "../usecaseSaga/userUsecaseSaga/userReacquireCreditSaga";
