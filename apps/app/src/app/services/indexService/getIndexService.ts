@@ -1,4 +1,4 @@
-import {runAxios} from "../../api/base/runAxios";
+import {runAxios} from "../api/base/runAxios";
 
 export const getIndexService = async (params: GetIndexRequest): Promise<GetIndexResponse> => {
   const {data}: { data: GetIndexResponse } = await runAxios(

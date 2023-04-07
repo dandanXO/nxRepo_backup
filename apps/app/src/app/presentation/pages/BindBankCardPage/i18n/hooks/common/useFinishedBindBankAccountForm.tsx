@@ -3,8 +3,8 @@ import {InputValue, Modal} from "@frontend/mobile/shared/ui";
 import {useTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import * as Sentry from "@sentry/react";
-import {GetBindCardDropListResponse} from "../../../../../../api/old/GetBindCardDropList";
-import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
+import {GetBindCardDropListResponse} from "../../../../../../services/api/old/GetBindCardDropList";
+import {CustomAxiosError} from "../../../../../../services/api/base/axiosBaseQuery";
 
 type IUseFinishedBindBankAccountPage =  {
   // NOTICE: Common

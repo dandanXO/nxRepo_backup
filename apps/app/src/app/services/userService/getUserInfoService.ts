@@ -1,4 +1,4 @@
-import {runAxios} from "../../api/base/runAxios";
+import {runAxios} from "../api/base/runAxios";
 
 export const GetUserInfoService = async (params: GetUserInfoServiceRequest) => {
   const {data}: { data: GetUserInfoServiceResponse } = await runAxios(

@@ -1,4 +1,4 @@
-import {WalletVendor} from "../../../../../../../api/old/GetBindCardDropList";
+import {WalletVendor} from "../../../../../../../services/api/old/GetBindCardDropList";
 
 export const processWalletDisplayName = (wallet: WalletVendor) => {
   if (wallet.code === "JAZZCASH") {

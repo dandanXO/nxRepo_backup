@@ -5,11 +5,11 @@ import Logo from './amount_paid_icon.svg';
 import Divider from "../../components/Divider";
 import { useEffect, useState } from "react";
 import ListItem from "../../components/ListItem";
-import { GetLoanRecord } from "../../../api/types/getLoanRecordList";
+import { GetLoanRecord } from "../../../services/api/types/getLoanRecordList";
 import { environment } from "../../../../environments/environment";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "../../../api/base/getToken";
+import { getToken } from "../../../services/api/base/getToken";
 const PaymentItem = (props: GetLoanRecord) => {
 
     const navigate = useNavigate();

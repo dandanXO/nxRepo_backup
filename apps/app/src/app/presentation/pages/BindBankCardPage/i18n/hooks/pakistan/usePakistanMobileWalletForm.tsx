@@ -6,8 +6,8 @@ import {z} from "zod";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
 import {processWalletDisplayName} from "./customization/processWalletDisplayName";
-import {GetBindCardDropListResponse, WalletVendor} from "../../../../../../api/old/GetBindCardDropList";
-import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
+import {GetBindCardDropListResponse, WalletVendor} from "../../../../../../services/api/old/GetBindCardDropList";
+import {CustomAxiosError} from "../../../../../../services/api/base/axiosBaseQuery";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;

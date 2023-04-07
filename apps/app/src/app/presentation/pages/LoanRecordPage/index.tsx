@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PaymentItem from "./PaymentItem";
-import { useLazyGetLoanRecordListQuery } from "../../../api";
-import { GetLoanRecordListRequestQuery } from "../../../api/types/getLoanRecordList";
+import { useLazyGetLoanRecordListQuery } from "../../../services/api";
+import { GetLoanRecordListRequestQuery } from "../../../services/api/types/getLoanRecordList";
 import Tag from "../../components/Tag";
 import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router-dom";

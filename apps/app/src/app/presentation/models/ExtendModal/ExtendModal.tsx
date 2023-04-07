@@ -3,7 +3,7 @@ import { Overlay } from "@frontend/mobile/shared/ui";
 import { environment } from "../../../../environments/environment";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { i18nExtendModal } from "./i18n/translations";
-import { GetLoanDetailRepayConfirmDetail } from "../../../api/old/getLoanDetail";
+import { GetLoanDetailRepayConfirmDetail } from "../../../services/api/old/getLoanDetail";
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 import ListItem from "../../components/ListItem";

@@ -1,6 +1,6 @@
 import {configureStore, PayloadAction} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
-import {API} from "../../api";
+import {API} from "../../services/api";
 import {APIBoundaryModuleSlice} from "./apiBoundaryModuleSlice";
 import {FeeRateKey} from "../../services/indexService/getIndexService";
 import {indexPageSlice} from "./indexPageSlice";

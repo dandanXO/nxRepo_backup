@@ -8,7 +8,7 @@ import {GetUserInfoServiceResponse} from "../../../app/src/app/services/userServ
 import {USER_AUTH_STATE} from "../../../app/src/app/domain/USER_AUTH_STATE";
 import {GetQuotaModelStatusResponse} from "../../../app/src/app/services/loanService/getQuotaModelStatus";
 import {LoanServiceResponse} from "../../../app/src/app/services/loanService/postApplyLoanService";
-import {GetBankCardListResponse} from "../../../app/src/app/api/types/getBankCardList";
+import {GetBankCardListResponse} from "../../../app/src/app/services/api/types/getBankCardList";
 import {
   GetInitServiceResponse,
   SDKidCardOcr, SDKliveDetect,

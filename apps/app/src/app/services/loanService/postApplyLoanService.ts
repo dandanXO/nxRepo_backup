@@ -1,4 +1,4 @@
-import {runAxios} from "../../api/base/runAxios";
+import {runAxios} from "../api/base/runAxios";
 
 export const postApplyLoanService = async (req: LoanServiceRequest) => {
   const {data}: { data: LoanServiceResponse } = await runAxios(
