@@ -14,6 +14,6 @@ export function *systemInitSaga(action: PayloadAction<null>) {
 
   const response: GetInitServiceResponse = yield call(Service.AppService.getInit, {packageId});
   console.log("response", response);
-  yield put(appSlice.actions.updateApp(response));
+  yield put(appSlice.actions.updateInit(response));
 
 }
