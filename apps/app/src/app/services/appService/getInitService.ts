@@ -34,7 +34,7 @@ interface GetInitServiceResponse {
 
   partnership: boolean;
   // 是否顯示合作夥伴
-3
+
   partnershipUrl: string;
   // 合作夥伴H5連結
 }
