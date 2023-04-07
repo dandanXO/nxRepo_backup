@@ -1,4 +1,4 @@
-import {AppRouter} from "./router";
+import {AppRouter} from "./presentation/router";
 import {Provider} from "react-redux";
 import { appStore } from "./usecaseFlow/reduxStore";
 import {AppThemeProvider} from "@frontend/mobile/shared/ui";
