@@ -1,5 +1,5 @@
 // NOTE: Action: UserApplyProduct
-import {GetUserInfoServiceResponse} from "../../../services/userService/userService";
+import {GetUserInfoServiceResponse} from "../../../services/userService/getUserInfoService";
 import {call, put, select} from "redux-saga/effects";
 import {Service} from "../../../services";
 import {GetOpenIndexResponse} from "../../../services/indexService/getOpenIndexService";

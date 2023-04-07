@@ -1,5 +1,5 @@
 // NOTE: Action: UserApplyProduct
-import {LoanServiceResponse} from "../../../services/loanService/loanService";
+import {LoanServiceResponse} from "../../../services/loanService/postApplyLoanService";
 import {call, put, select, take, race} from "redux-saga/effects";
 import {Service} from "../../../services";
 import {catchSagaError} from "../../utils/catchSagaError";

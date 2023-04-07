@@ -32,7 +32,7 @@ import {QuickRepaymentSummaryModal} from "../../models/QuickRepaymentSummaryModa
 import {QRSuccessModal} from "../../models/QRSuccessModal";
 import moment from "moment-timezone";
 import {FeeRateKey, PlatformProduct} from "../../services/indexService/getIndexService";
-import {ProductApplyDetail} from "../../services/loanService/loanService";
+import {ProductApplyDetail} from "../../services/loanService/postApplyLoanService";
 import {Page} from "../../components/layouts/Page";
 import {Moment} from "moment";
 

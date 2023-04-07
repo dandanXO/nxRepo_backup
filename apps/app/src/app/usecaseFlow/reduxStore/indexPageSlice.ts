@@ -1,6 +1,6 @@
 // NOTE: PageRedux
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {GetUserInfoServiceResponse} from "../../services/userService/userService";
+import {GetUserInfoServiceResponse} from "../../services/userService/getUserInfoService";
 import {GetIndexResponse, PayableRecords} from "../../services/indexService/getIndexService";
 import moment from "moment-timezone";
 import {GetOpenIndexResponse} from "../../services/indexService/getOpenIndexService";

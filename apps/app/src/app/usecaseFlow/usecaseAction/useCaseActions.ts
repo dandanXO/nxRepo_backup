@@ -1,5 +1,5 @@
 import {createAction} from "@reduxjs/toolkit";
-import {LoanServiceRequest} from "../../services/loanService/loanService";
+import {LoanServiceRequest} from "../../services/loanService/postApplyLoanService";
 
 export type UserApplyProductActionPayload = Pick<LoanServiceRequest, "applyAmount" | "details">;
 
