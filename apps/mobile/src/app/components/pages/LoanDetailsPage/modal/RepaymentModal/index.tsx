@@ -230,21 +230,26 @@ const RepaymentModal = (props: RepaymentModalProps) => {
 
                                 <AdvertisementImg/>
 
-                                <SectionButton>
+
+                                {/*NOTICE: 印度版不顯示還款再借*/}
+                                {environment.country !== AllCountryInstance.IndiaCountry.country && (
+                                  <SectionButton>
                                     <RepayAndApplyButton
-                                        disable={radioValue !== "balance"}
-                                        onClick={() => {
-                                            if(radioValue !== "balance") return;
-                                            if(props.isRepayTypesFetching) return ;
-                                            props.setShowRepaymentModal(false);
-                                            props.setShowRepaymentNoticeModal(
-                                                true
-                                            );
-                                        }}
+                                      disable={radioValue !== "balance"}
+                                      onClick={() => {
+                                        if(radioValue !== "balance") return;
+                                        if(props.isRepayTypesFetching) return ;
+                                        props.setShowRepaymentModal(false);
+                                        props.setShowRepaymentNoticeModal(
+                                          true
+                                        );
+                                      }}
                                     >
-                                        <RepayICON />{props.t("Repay and Apply Again")}
+                                      <RepayICON />{props.t("Repay and Apply Again")}
                                     </RepayAndApplyButton>
-                                </SectionButton>
+                                  </SectionButton>
+                                )}
+
                                 <SectionButton2>
                                     <RepaymentCancelButton
                                         onClick={() =>{
