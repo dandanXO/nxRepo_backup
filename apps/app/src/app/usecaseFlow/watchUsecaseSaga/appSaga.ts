@@ -1,4 +1,4 @@
-import {takeLatest, put, all} from "redux-saga/effects";
+import {takeLatest, put, all, fork} from "redux-saga/effects";
 import {userViewIndexPageSaga} from "../usecaseSaga/userUsecaseSaga/userViewIndexPageSaga";
 import {userApplyProductsSaga} from "../usecaseSaga/userUsecaseSaga/userApplyProductsSaga";
 import {userReacquireCreditSaga} from "../usecaseSaga/userUsecaseSaga/userReacquireCreditSaga";
@@ -13,10 +13,9 @@ export function* AppSaga() {
     // userViewIndexPageSaga,
     // systemInitSaga
   // ])
-  yield systemInitSaga(null);
+  // NOTE: 單獨這行會 stay this line
+  // yield systemInitSaga(null);
 
-  // NOTICE: 暫時註解變成 stubbing mode
-  // yield userViewIndexPageSaga();
   yield takeLatest(SystemCaseActions.InitSaga.type, systemInitSaga);
   yield takeLatest(UseCaseActions.UserViewIndexPageAction.type, userViewIndexPageSaga);
   yield takeLatest(UseCaseActions.UserApplyProductAction.type, userApplyProductsSaga)
@@ -24,5 +23,5 @@ export function* AppSaga() {
   yield takeLatest(SystemCaseActions.SystemCountdownSaga.type, systemCountdownSaga)
   yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSata.type, systemRefreshableCountdownSata);
 
-  // yield put(SystemCaseActions.InitSaga());
+  yield put(SystemCaseActions.InitSaga());
 }
