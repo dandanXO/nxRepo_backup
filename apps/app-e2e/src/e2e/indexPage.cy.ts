@@ -9,6 +9,11 @@ import {USER_AUTH_STATE} from "../../../app/src/app/usecaseFlow/domain/USER_AUTH
 import {GetQuotaModelStatusResponse} from "../../../app/src/app/services/loanService/getQuotaModelStatus";
 import {LoanServiceResponse} from "../../../app/src/app/services/loanService/loanService";
 import {GetBankCardListResponse} from "../../../app/src/app/api/types/getBankCardList";
+import {
+  GetInitServiceResponse,
+  SDKidCardOcr, SDKliveDetect,
+  SDKtaxCardOcr
+} from "../../../app/src/app/services/appService/getInitService";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
@@ -40,6 +45,29 @@ describe('IndexPage', () => {
     // NOTE: figma 360, 640
     cy.viewport(360, 640);
     // NOTICE: 不能在這邊放 visit ，不然 other each 會 intercept 不到 request
+
+    const initResponse: GetInitServiceResponse = {
+      "nbfc":false,
+      "showPermission":true,
+      "showTermAndCondition":true,
+      "partnership":false,
+      "partnershipUrl":"",
+      "i18nLastUpdateTime":1678711946,
+      "csEmail":"123@gmail.com",
+      "csContactNumber":"1234567890",
+      "sdkProvider":
+        {
+          "taxCardOcr": SDKtaxCardOcr.NONE,
+          "idCardOcr": SDKidCardOcr.NONE,
+          "liveDetect": SDKliveDetect.NONE,
+        },
+      "crossRegionIp":false,
+      "loginFirst":false,
+      "kycFirst":false,
+      "indexH5Url":null,
+      "couponH5Url":null
+    }
+    cy.intercept("/api/v2/init?packageId**", )
   })
 
   afterEach(() => {

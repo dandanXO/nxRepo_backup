@@ -1,14 +1,13 @@
 // NOTE: Action: UserApplyProduct
-import {LoanServiceRequest, LoanServiceResponse} from "../../services/loanService/loanService";
+import {LoanServiceResponse} from "../../../services/loanService/loanService";
 import {call, put, select, take, race} from "redux-saga/effects";
-import {Service} from "../../services";
-import {catchSagaError} from "../utils/catchSagaError";
-import {InitialStateType, modalSlice} from "./systemUsecaseStoreSlice/modalSlice";
+import {Service} from "../../../services";
+import {catchSagaError} from "../../utils/catchSagaError";
+import {InitialStateType, modalSlice} from "../../reduxStore/modalSlice";
 import {PayloadAction} from "@reduxjs/toolkit";
-import {API} from "../../api";
-import {GetBankCardListResponse} from "../../api/types/getBankCardList";
-import {RootState} from "../reduxStore";
-import {UseCaseActions, UserApplyProductActionPayload} from "../usecaseActions/useCaseActions";
+import {GetBankCardListResponse} from "../../../api/types/getBankCardList";
+import {RootState} from "../../reduxStore";
+import {UseCaseActions, UserApplyProductActionPayload} from "../../usecaseActions/useCaseActions";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {

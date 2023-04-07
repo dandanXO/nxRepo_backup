@@ -11,13 +11,13 @@ declare global {
       // NOTICE: Android 缺(不可能每次打開 APP 都問吧)
       hasAuthorizationToUploadKyc: () => boolean;
       navToPage:  (androidPage: AndroidPage) => void;
-    }
-    theme?: any;
+    };
     onUploadKycBackgroundData: (uploaded: boolean) => void;
+    theme?: any;
     isInAndroid: () => boolean;
   }
 }
 
 // window.IndexTask = window.IndexTask || {};
 // window.theme = window.theme || {};
-window["isInAndroid"] = ():boolean => typeof window["IndexTask"]["uploadKycBackgroundData"] !== "undefined";
+
