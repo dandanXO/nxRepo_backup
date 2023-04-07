@@ -171,6 +171,7 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
               isRepayTypesFetching={props.isRepayTypesFetching}
               setPayType={props.setPayType}
               setShowRepaymentAdsModal={setShowRepaymentAdsModal}
+              handlePostRepayCreate={repayUseCase}
             />
           )}
           {/*還款再借款廣告*/}

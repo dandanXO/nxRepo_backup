@@ -14,8 +14,10 @@ declare global {
     }
     theme?: any;
     onUploadKycBackgroundData: (uploaded: boolean) => void;
+    isInAndroid: () => boolean;
   }
 }
 
 // window.IndexTask = window.IndexTask || {};
 // window.theme = window.theme || {};
+window["isInAndroid"] = ():boolean => typeof window["IndexTask"]["uploadKycBackgroundData"] !== "undefined";
