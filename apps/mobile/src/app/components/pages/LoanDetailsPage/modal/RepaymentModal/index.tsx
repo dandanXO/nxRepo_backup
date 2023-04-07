@@ -97,6 +97,7 @@ type RepaymentModalProps = {
     setShowRepaymentAdsModal: React.Dispatch<React.SetStateAction<boolean>>;
 
   balanceValue: string;
+  repayBalance: number;
   setBalanceValue: React.Dispatch<React.SetStateAction<string>>;
 
   handlePostRepayCreate: any;
@@ -108,7 +109,6 @@ const RepaymentModal = (props: RepaymentModalProps) => {
     const balance = props.balance;
 
     // NOTE: 變動數值
-    // const [balanceValue, setBalanceValue] = useState(String(`${environment.currency}` + balance));
 
     const [radioValue, setRadioValue] = useState("balance");
     const [paymentMethodValue, setPaymentMethodValue] = useState(0);
@@ -119,11 +119,11 @@ const RepaymentModal = (props: RepaymentModalProps) => {
 
       // NOTE: 印度不顯示還款再借廣告，直接還款
       if(environment.country === AllCountryInstance.IndiaCountry.country) {
-        if(String(Number(radioValue)) !== "NaN" && String(radioValue) !== "0") {
+        if(Number(props.repayBalance) > 0) {
           props.handlePostRepayCreate(
             false,
             false,
-            radioValue
+            props.repayBalance
           )
         }
       } else {
