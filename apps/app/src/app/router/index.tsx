@@ -32,6 +32,8 @@ import {TabBar} from "../components/layouts/TabBar";
 import {APIBoundaryModal} from "../models/APIBoundaryModal";
 import {useSelector} from "react-redux";
 import {RootState} from "../usecaseFlow/reduxStore";
+import {LoginPage} from '../pages/LoginPage';
+import PrivacyPolicyModal from "../models/PrivacyPolicyModal";
 
 
 export const AppRouter = () => {
@@ -46,6 +48,10 @@ export const AppRouter = () => {
             <Routes >
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/" element={<IndexPage />} />
+                <Route path="/login" element={<LoginPage />} >
+                    <Route path="log-out-modal" element={<LogoutModal />} />
+                </Route>
+                <Route path="/privacy-policy-modal" element={<PrivacyPolicyModal />} />
                 <Route path="/application-progress" element={<ApplicationProgressPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/bankcard-list" element={<BankCardListPage />} />
@@ -66,7 +72,7 @@ export const AppRouter = () => {
                 <Route path="/loan-record" element={<LoanRecordPage />} />
                 <Route path="/my-coupon-list" element={<MyCouponListPage />} />
                 <Route path="/mu-coupon" element={<MyCouponPage />} />
-                <Route path="/partner" element={<PartnerPage />} />LogoutModal
+                <Route path="/partner" element={<PartnerPage />} />
                 <Route path="/personal-info" element={<PersonalInfoPage />} >
                     <Route path="log-out-modal" element={<LogoutModal />} />
                 </Route>
@@ -74,6 +80,7 @@ export const AppRouter = () => {
                 <Route path="/quota-model" element={<QuotaModelPage />} />
                 <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
                 <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
+                <Route path="/log-out-modal" element={<LogoutModal />} />
                 <Route path="*" element={<div>Not Found</div>} />
             </Routes>
             {[

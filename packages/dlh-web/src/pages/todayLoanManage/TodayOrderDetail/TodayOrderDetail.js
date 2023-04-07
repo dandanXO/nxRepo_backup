@@ -526,7 +526,8 @@ class OrderDetail extends Component{
         function loadRepaymentLinkFlag() {
           axios({
             url: '/hs/admin/orderToday/repayment-link-is-prohibited',
-            method: 'get'
+            method: 'get',
+            params: { todayId: params }
           }).then((res) => {
             _this.setState({
               repaymentLinkIsProhibited: res,
