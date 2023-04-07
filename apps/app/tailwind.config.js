@@ -11,7 +11,18 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+      extend: {
+          keyframes: {
+              marquee: {
+                  '0%': {  transform: 'translateX(100%)' },
+                  '100%': { transform: ' translateX(-200%)' },
+              }  
+          },
+          animation: {
+              marquee: 'marquee 15s linear infinite',
+          }
+
+      },
   },
   plugins: [
     // require("daisyui")
