@@ -53,6 +53,9 @@ export type PayableRecords = {
   dueDate: string;
   // 訂單到期日 yyyy/MM/dd
 
+  orderNo: string;
+  // 订單號
+
   overdue: boolean;
   // 是否逾期
 
