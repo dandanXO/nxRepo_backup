@@ -11,10 +11,13 @@ import LinkItem from "./LinkItem";
 import ListItem from "../../components/ListItem";
 import { getToken } from "../../api/base/getToken";
 import { Outlet } from "react-router-dom";
+import { RootState } from "../../usecaseFlow/reduxStore";
 
 export const PersonalInfoPage = () => {
     const navigate = useNavigate();
-    const { user } = useSelector((state: any) => state.indexPage)
+    const { indexPage, app } = useSelector((state: RootState) => state)
+    const { user } = indexPage;
+
     return (
         <Page>
             <Navigation title={""} back={() => { navigate(-1) }} />
@@ -42,7 +45,7 @@ export const PersonalInfoPage = () => {
                     <LinkItem title={'Disclosure Statement'} to={'/disclosure-statement'} />
                 </Card>
                 <Card>
-                    <LinkItem title={'Partner'} to={'/partner'} />
+                    {app?.init?.partnership ? (<LinkItem title={'Partner'} to={'/partner'} />) : <></>}
                     <LinkItem title={'Customer Service'} to={'/customer-service'} />
                 </Card>
                 {/* <Card><LinkItem title={'Rate Us 5 starts'} to={''} /></Card> */}

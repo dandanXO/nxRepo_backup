@@ -4,6 +4,7 @@ import {formatPrice} from "../../../../modules/formatPrice";
 import moment from "moment";
 import {ORDER_STATE} from "../../../../domain/ORDER_STATE";
 import {useNavigate} from "react-router-dom";
+import { getToken } from "../../../../api/base/getToken"
 
 type Props = IndexPageProps;
 
@@ -41,7 +42,7 @@ export const LatestOrderStatus = (props: Props) => {
         </div>
         <div className={"right"}>
           <div className={"text-blue-800"} onClick={() => {
-            navigate("/loan-record")
+            navigate(`/loan-record-detail?token=${getToken()}`, { state: { orderNo: props.state.order.overdueOrComingOverdueOrder?.orderNo } })
           }}>Repay</div>
         </div>
       </div>
