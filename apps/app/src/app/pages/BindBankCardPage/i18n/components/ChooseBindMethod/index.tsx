@@ -9,7 +9,7 @@ import {Label} from "../../../components/Label";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import {environment} from "../../../../../../environments/environment";
-import {IAllCountryIdentityName} from "../../../../../modules/country/constants/IAllCountryIdentityName";
+import {IAllCountryIdentityName} from "../../../../../domain/country/constants/IAllCountryIdentityName";
 
 const Container = styled.div`
   margin-bottom: 20px;

@@ -1,4 +1,4 @@
-import {ICountry} from "./country/ICountry";
+import {ICountry} from "../domain/country/ICountry";
 
 export type IEnvironment = ICountry & {
   // NOTE:

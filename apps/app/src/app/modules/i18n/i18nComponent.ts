@@ -1,4 +1,4 @@
-import { IAllLanguage } from "../language/IAllLanguage";
+import { IAllLanguage } from "../../domain/language/IAllLanguage";
 
 export interface i18nComponent {
   namespace: string;

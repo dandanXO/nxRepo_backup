@@ -13,9 +13,9 @@ import {
   usePostBankBindSaveToPKMutation
 } from "../../api"
 import {renderByCountry} from "../../modules/i18n";
-import {IndiaCountry} from "../../modules/country/constants/IndiaCountry";
-import {PakistanCountry} from "../../modules/country/constants/PakistanCountry";
-import {BangladeshCountry} from "../../modules/country/constants/BangladeshCountry";
+import {IndiaCountry} from "../../domain/country/constants/IndiaCountry";
+import {PakistanCountry} from "../../domain/country/constants/PakistanCountry";
+import {BangladeshCountry} from "../../domain/country/constants/BangladeshCountry";
 import { useSelector } from "react-redux";
 
 
