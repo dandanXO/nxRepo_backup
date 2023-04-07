@@ -6,6 +6,7 @@ import {systemCountdownSaga} from "../usecaseSaga/systemUsecaseSaga/systemCountd
 import {systemRefreshableCountdownSata} from "../usecaseSaga/systemUsecaseSaga/systemRefreshableCountdownSata";
 import {UseCaseActions} from "../usecaseActions/useCaseActions";
 import {SystemCaseActions} from "../usecaseActions/systemCaseActions";
+import {systemInitSaga} from "../usecaseSaga/systemUsecaseSaga/systemInitSaga";
 
 export function* AppSaga() {
   // yield all([
@@ -13,6 +14,7 @@ export function* AppSaga() {
   // ])
   // NOTICE: 暫時註解變成 stubbing mode
   // yield userViewIndexPageSaga();
+  yield takeLatest(SystemCaseActions.InitSaga, systemInitSaga);
   yield takeLatest(UseCaseActions.UserViewIndexPageAction.type, userViewIndexPageSaga);
   yield takeLatest(UseCaseActions.UserApplyProductAction.type, userApplyProductsSaga)
   yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCreditSaga)

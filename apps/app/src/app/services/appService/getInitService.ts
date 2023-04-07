@@ -1,0 +1,50 @@
+import {runAxios} from "../../api/base/runAxios";
+
+interface GetInitServiceRequest {
+  packageId: string;
+}
+
+interface GetInitServiceResponse {
+  couponH5Url:	string;
+  // H5优惠券列表(预留)
+
+  crossRegionIp:	boolean;
+  // 跨区域请求
+
+  csContactNumber:	string;
+  // 平台客服電話
+
+  csEmail:	string;
+  // 平台客服信箱
+
+  i18nLastUpdateTime: number;
+  // 多國語最後異動時間 unix time
+
+  indexH5Url:	string;
+  // H5首頁URL
+
+  kycFirst:	boolean;
+  // 登入后跳转KYC
+
+  loginFirst:	boolean;
+  // 首页登入优先(未登入前看到假首页)
+
+  nbfc:	boolean;
+  // 是否為NBFC產品
+
+  partnership: boolean;
+  // 是否顯示合作夥伴
+3
+  partnershipUrl: string;
+  // 合作夥伴H5連結
+}
+
+export const GetInitService = async (params: GetInitServiceRequest): Promise<GetInitServiceResponse> => {
+  const {data}: {data: GetInitServiceResponse}  = await runAxios(
+    "/api",
+    "/v2/init",
+    "get",
+    null,
+  )
+  return data;
+}

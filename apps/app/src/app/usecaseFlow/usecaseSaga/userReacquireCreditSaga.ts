@@ -68,7 +68,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     let count = 0;
     while(data.calculating === true && count <= 10) {
       // console.log("重新獲取中");
-      yield delay(3000);
+      yield delay(20 * 1000);
       data = yield call(Service.LoanService.getQuotaModelStatus, {})
       // console.log("GetQuotaModelStatusResponse", data);
       count++;
