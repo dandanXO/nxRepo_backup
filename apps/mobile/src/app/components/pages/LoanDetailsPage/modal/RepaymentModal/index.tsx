@@ -15,6 +15,7 @@ import {
 import {environment} from "../../../../../../environments/environment";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nRepaymentModal} from "./i18n/translations";
+import {AllCountryInstance} from "../../../../../../environments/config/AllCountry";
 
 const Paragraph = styled.div`
     text-align: left;
@@ -98,6 +99,7 @@ type RepaymentModalProps = {
   balanceValue: string;
   setBalanceValue: React.Dispatch<React.SetStateAction<string>>;
 
+  handlePostRepayCreate: any;
 } & WithTranslation;
 
 const RepaymentModal = (props: RepaymentModalProps) => {
@@ -114,8 +116,20 @@ const RepaymentModal = (props: RepaymentModalProps) => {
     const handleConfirm = () => {
       // self
       props.setShowRepaymentModal(false);
-      // other
-      props.setShowRepaymentAdsModal(true);
+
+      // NOTE: 印度不顯示還款再借廣告，直接還款
+      if(environment.country === AllCountryInstance.IndiaCountry.country) {
+        if(String(Number(radioValue)) !== "NaN" && String(radioValue) !== "0") {
+          props.handlePostRepayCreate(
+            false,
+            false,
+            radioValue
+          )
+        }
+      } else {
+        // NOTE: 其他國家一樣會顯示還款再借廣告
+        props.setShowRepaymentAdsModal(true);
+      }
 
     };
     return (
