@@ -4,7 +4,8 @@ import MailIcon from '../../components/images/MailIcon.svg';
 import Button from "../../components/Button";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../usecaseFlow/reduxStore";
+import {RootState} from "../../../usecaseFlow/reduxStore";
+
 export const CustomerServicePage = () => {
     const navigate = useNavigate();
     const { app } = useSelector((state: RootState) => state);

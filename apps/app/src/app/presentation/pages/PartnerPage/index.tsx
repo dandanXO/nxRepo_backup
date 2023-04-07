@@ -1,7 +1,9 @@
 import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../usecaseFlow/reduxStore";
+import {RootState} from "../../../usecaseFlow/reduxStore";
+
+
 export const PartnerPage = () => {
     const navigate = useNavigate();
     const { init } = useSelector((state: RootState) => state.app)

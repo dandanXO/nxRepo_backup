@@ -11,7 +11,8 @@ import LinkItem from "./LinkItem";
 import ListItem from "../../components/ListItem";
 import { getToken } from "../../../api/base/getToken";
 import { Outlet } from "react-router-dom";
-import { RootState } from "../../usecaseFlow/reduxStore";
+import {RootState} from "../../../usecaseFlow/reduxStore";
+
 
 export const PersonalInfoPage = () => {
     const navigate = useNavigate();
