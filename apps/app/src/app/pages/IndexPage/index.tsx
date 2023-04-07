@@ -43,7 +43,7 @@ import {indexPageSlice} from "../../usecaseFlow/reduxStore/indexPageSlice";
 import {AuthorizationModal} from "../../models/AuthorizationModal";
 import {modalSlice} from "../../usecaseFlow/reduxStore/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
-import {UseCaseActions} from "../../usecaseFlow/usecaseActions/useCaseActions";
+import {UseCaseActions} from "../../usecaseFlow/usecaseAction/useCaseActions";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {

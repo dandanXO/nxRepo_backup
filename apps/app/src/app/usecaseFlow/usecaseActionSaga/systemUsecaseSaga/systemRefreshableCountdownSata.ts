@@ -1,7 +1,7 @@
 import moment from "moment-timezone";
 import {put, select, delay} from "redux-saga/effects";
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
-import {UseCaseActions} from "../../usecaseActions/useCaseActions";
+import {UseCaseActions} from "../../usecaseAction/useCaseActions";
 
 export function *systemRefreshableCountdownSata(action: any) {
   console.log("systemRefreshableCountdownSata.action", action);

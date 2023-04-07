@@ -7,7 +7,7 @@ import {GetIndexResponse} from "../../../services/indexService/getIndexService";
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {USER_AUTH_STATE} from "../../../domain/USER_AUTH_STATE";
 import moment from "moment-timezone";
-import {SystemCaseActions} from "../../usecaseActions/systemCaseActions";
+import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
 
 
 export function* userViewIndexPageSaga(action: any) {

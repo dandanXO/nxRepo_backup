@@ -1,12 +1,12 @@
 import {takeLatest, put, all, fork} from "redux-saga/effects";
-import {userViewIndexPageSaga} from "../usecaseSaga/userUsecaseSaga/userViewIndexPageSaga";
-import {userApplyProductsSaga} from "../usecaseSaga/userUsecaseSaga/userApplyProductsSaga";
-import {userReacquireCreditSaga} from "../usecaseSaga/userUsecaseSaga/userReacquireCreditSaga";
-import {systemCountdownSaga} from "../usecaseSaga/systemUsecaseSaga/systemCountdownSaga";
-import {systemRefreshableCountdownSata} from "../usecaseSaga/systemUsecaseSaga/systemRefreshableCountdownSata";
-import {UseCaseActions} from "../usecaseActions/useCaseActions";
-import {SystemCaseActions} from "../usecaseActions/systemCaseActions";
-import {systemInitSaga} from "../usecaseSaga/systemUsecaseSaga/systemInitSaga";
+import {userViewIndexPageSaga} from "../usecaseActionSaga/userUsecaseSaga/userViewIndexPageSaga";
+import {userApplyProductsSaga} from "../usecaseActionSaga/userUsecaseSaga/userApplyProductsSaga";
+import {userReacquireCreditSaga} from "../usecaseActionSaga/userUsecaseSaga/userReacquireCreditSaga";
+import {systemCountdownSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemCountdownSaga";
+import {systemRefreshableCountdownSata} from "../usecaseActionSaga/systemUsecaseSaga/systemRefreshableCountdownSata";
+import {UseCaseActions} from "../usecaseAction/useCaseActions";
+import {SystemCaseActions} from "../usecaseAction/systemCaseActions";
+import {systemInitSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemInitSaga";
 
 export function* AppSaga() {
   // yield all([

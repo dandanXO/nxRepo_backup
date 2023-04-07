@@ -7,8 +7,8 @@ import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import moment from "moment-timezone";
 import {RootState} from "../../reduxStore";
 import {modalSlice} from "../../reduxStore/modalSlice";
-import {UseCaseActions} from "../../usecaseActions/useCaseActions";
-import {SystemCaseActions} from "../../usecaseActions/systemCaseActions";
+import {UseCaseActions} from "../../usecaseAction/useCaseActions";
+import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
 
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);
