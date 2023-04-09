@@ -15,16 +15,16 @@ import {useLockRequest} from "../../hooks/useLockRequest";
 import { AllCountryInstance } from "../../../domain/country/constants/AllCountry";
 // import {AllCountryInstance} from "../../../../mobile/src/environments/config/AllCountry";
 
-import ExtensionDetailModal from "../../models/old/ExtensionDetailModal";
+import ExtensionDetailModal from "../../modals/old/ExtensionDetailModal";
 
-import RepaymentModal from "../../models/old/RepaymentModal";
-import RepaymentAdsModal from "../../models/old/RepaymentAdsModal";
-import RepaymentNoticeModal from "../../models/old/RepaymentNoticeModal";
-import {I18nRepaymentStepsModal} from "../../models/old/RepaymentStepsModal";
+import RepaymentModal from "../../modals/old/RepaymentModal";
+import RepaymentAdsModal from "../../modals/old/RepaymentAdsModal";
+import RepaymentNoticeModal from "../../modals/old/RepaymentNoticeModal";
+import {I18nRepaymentStepsModal} from "../../modals/old/RepaymentStepsModal";
 
 import {CustomPage} from "../../pages/BindBankCardPage/components/CustomPage";
-import ExtendModal from "../../models/ExtendModal/ExtendModal";
-import AmountPaidModal from "../../models/AmountRepaidModal/AmountRepaidModal";
+import ExtendModal from "../../modals/ExtendModal/ExtendModal";
+import AmountPaidModal from "../../modals/AmountRepaidModal/AmountRepaidModal";
 
 
 

@@ -20,20 +20,20 @@ import { QuotaModelPage } from "../pages/QuotaModelPage";
 import { UploadedPaymentReceiptPage } from "../pages/UploadedPaymentReceiptPage";
 import { UploadPaymentReceiptPage } from "../pages/UploadPaymentReceiptPage";
 import { CategoryPage } from "../pages/__test__/CategoryPage";
-import RepaymentModal from '../models/RepaymentModal';
-import AmountRepaidModal from "../models/AmountRepaidModal/AmountRepaidModal";
-import { ExtendConfirmModal } from "../models/ExtendConfirmModal";
-import ExtendModal from "../models/ExtendModal/ExtendModal";
+import RepaymentModal from '../modals/RepaymentModal';
+import AmountRepaidModal from "../modals/AmountRepaidModal/AmountRepaidModal";
+import { ExtendConfirmModal } from "../modals/ExtendConfirmModal";
+import ExtendModal from "../modals/ExtendModal/ExtendModal";
 import {ApplicationProgressPage} from "../pages/ApplicationProgressPage";
-import { CustomerServiceModal } from "../models/CustomerServiceModal";
-import {LogoutModal} from "../models/LogoutModal";
+import { CustomerServiceModal } from "../modals/CustomerServiceModal";
+import {LogoutModal} from "../modals/LogoutModal";
 import {Tabs} from "antd";
 import {TabBar} from "../components/layouts/TabBar";
-import {APIBoundaryModal} from "../models/APIBoundaryModal";
+import {APIBoundaryModal} from "../modals/APIBoundaryModal";
 import {useSelector} from "react-redux";
 import {RootState} from "../../usecaseFlow/reduxStore";
 import {LoginPage} from '../pages/LoginPage';
-import PrivacyPolicyModal from "../models/PrivacyPolicyModal";
+import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
 
 
 export const AppRouter = () => {
