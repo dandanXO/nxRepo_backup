@@ -47,7 +47,7 @@ const PaymentItem = (props: GetLoanRecord) => {
                 <div className="text-base font-bold mb-1">{`${environment.currency} ${loanAmount ?? ''}`}</div>
                 <div className="text-xs">{`Due ${moment(dueDate).format('L') ?? ''}`}</div>
             </div>
-            {status !== "PAY_OFF" && <Button onClick={()=>navigate(`/loan-record-detail?token=${getToken()}`,{ state: {orderNo} })} buttonText="Repay" width={'w-20'} height={'h-8'} fontSize="xs" />}
+            {status !== "PAY_OFF" && <Button onClick={()=>navigate(`/loan-record-detail?token=${getToken()}`,{ state: {orderNo} })} buttonText="Repay Detail" width={'w-20'} height={'h-8'} fontSize="xs" />}
         </div>
         <Divider />
         {collapse && <div className="px-3">
@@ -55,22 +55,21 @@ const PaymentItem = (props: GetLoanRecord) => {
             <ListItem title={'Loan Date'} text={loanDate ? moment(loanDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
             <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
             {status === "PAY_OFF" && <ListItem title={'Repayment Date'} text={repaymentDate ? moment(repaymentDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />}
-            <ListItem title={'Loan Amount'} text={`${environment.currency} ${loanAmount ?? ''}`} titleColor="text-slate-400" />
+            {/* <ListItem title={'Loan Amount'} text={`${environment.currency} ${loanAmount ?? ''}`} titleColor="text-slate-400" /> */}
             <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
-            <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+            {/* <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} /> */}
             <Divider />
             <ListItem title={'Repayment Amount'} text={`${environment.currency} ${totalRepayAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             <Divider />
         </div>}
 
         <div className={'flex flex-row items-center justify-center mt-3'}>
-            <div className={'text-xs text-slate-400 mr-2'}>{'view details'}</div>
+            <div className={'text-xs text-slate-400 mr-2'}>{collapse ?'collapse':'expand'}</div>
             <div className={'w-2.5'}>
                 {collapse ? (
-                    <img src={DownArrow} alt="v" />
-                ) : (
                     <img src={UpArrow} alt="^" />
-
+                ) : (
+                    <img src={DownArrow} alt="v" />
                 )}
             </div>
         </div>

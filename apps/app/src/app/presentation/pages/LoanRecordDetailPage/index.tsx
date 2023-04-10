@@ -32,7 +32,7 @@ export const LoanRecordDetailPage = (props: any) => {
     const { status = '', productName = '', orderNo = '', dueDate = '', loanAmount = '', overdueDays = '', penaltyInterest = '', paidAmount = '', repayRecords = [], totalRepayAmount = '' } = currentData ?? {};
     return (
         <div>
-            <Navigation title={"Payment"} back={() => {navigate(-1)}} />
+            <Navigation title={"Repay Details"} back={() => {navigate(-1)}} />
             <div className={`text-sm text-center text-blue-500 bg-blue-200 py-2`}>Get more amount after instant payment</div>
             <div className={`px-6 pt-3`}>
                 <ListItem title={'Product'} text={productName ?? ''} titleColor="text-slate-400" />
