@@ -25,11 +25,13 @@ const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
 // const WindiCSSWebpackPlugin = require('windicss-webpack-plugin');
 
+const TerserPlugin = require("terser-webpack-plugin");
+
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
     // devtool: false,
     // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
-    devtool: "source-map",
+    // devtool: "source-map",
     output: {
       filename: "[name].[contenthash].js",
       // sourceMapFilename: 'maps/[name].[contenthash].map.js',
@@ -130,6 +132,25 @@ module.exports = (config, context) => {
     ]
   });
   if(isProduction) {
+    finalConfig["optimization"] = {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+            format: {
+              comments: false,
+            },
+          },
+          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+          extractComments: false,
+
+        })
+      ],
+    }
+
   //   finalConfig.plugins.push(
   //     new CleanWebpackPlugin({
   //       verbose: true,
