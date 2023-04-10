@@ -10,7 +10,7 @@ import {getQuotaModelStatusAction} from "../usecaseActionSaga/userUsecaseSaga/us
 import {PayableRecords} from "../../services/indexService/payableRecords";
 import {GetIndexResponse} from "../../services/indexService/getIndexResponse";
 import {GetQuotaModelStatusResponse} from "../../services/loanService/getQuotaModelStatusResponse";
-import {GetUserInfoServiceResponse} from "../../services/userService/getUserInfoServiceResponse";
+import {GetUserInfoServiceResponse} from "../../services/userService/GetUserInfoServiceResponse";
 
 
 interface InitialState {

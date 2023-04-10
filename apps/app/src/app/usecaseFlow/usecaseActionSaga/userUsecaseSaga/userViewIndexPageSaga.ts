@@ -7,7 +7,7 @@ import {USER_AUTH_STATE} from "../../../domain/USER_AUTH_STATE";
 import moment from "moment-timezone";
 import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
 import {GetIndexResponse} from "../../../services/indexService/getIndexResponse";
-import {GetUserInfoServiceResponse} from "../../../services/userService/getUserInfoServiceResponse";
+import {GetUserInfoServiceResponse} from "../../../services/userService/GetUserInfoServiceResponse";
 import {catchSagaError} from "../../utils/catchSagaError";
 
 

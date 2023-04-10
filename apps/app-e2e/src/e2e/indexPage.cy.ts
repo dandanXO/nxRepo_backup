@@ -12,7 +12,7 @@ import {SDKidCardOcr} from "../../../app/src/app/services/appService/SDKidCardOc
 import {SDKliveDetect} from "../../../app/src/app/services/appService/SDKliveDetect";
 import {SDKtaxCardOcr} from "../../../app/src/app/services/appService/SDKtaxCardOcr";
 import {GetQuotaModelStatusResponse} from "../../../app/src/app/services/loanService/getQuotaModelStatusResponse";
-import {GetUserInfoServiceResponse} from "../../../app/src/app/services/userService/getUserInfoServiceResponse";
+import {GetUserInfoServiceResponse} from "../../../app/src/app/services/userService/GetUserInfoServiceResponse";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";

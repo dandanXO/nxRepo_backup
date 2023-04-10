@@ -6,12 +6,14 @@ import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "../loanService
 import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "../loanService/getRepayTypes";
 import { PostRepayCreateRequestBody, PostRepayCreateResponse } from '../loanService/postRepayCreate';
 import { PostRepayReceiptResponse } from "../loanService/postRepayReceipt";
-import { PostBankCardMainRequestBody } from "../userService/postBankCardMain";
-import { PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBindSaveRequest } from "../userService/postBankBindSave";
-import { GetBindCardDropListResponse } from "../userService/GetBindCardDropList";
+import { PostBankCardMainRequest } from "../userService/PostBankCardMainRequest";
+import { GetBindCardDropListResponse } from "../userService/GetBindCardDropListResponse";
 import {GetUserProcessResponse} from "../loanService/GetUserProcessResponse";
 import {GetIndexRequest} from "../indexService/getIndexRequest";
 import {GetIndexResponse} from "../indexService/getIndexResponse";
+import {PostBankBindSaveRequest} from "../userService/PostBankBindSaveRequest";
+import {PostPKBankBindSaveRequest} from "../userService/PostPKBankBindSaveRequest";
+import {PostBangladeshBankBindSaveRequest} from "../userService/PostBangladeshBankBindSaveRequest";
 
 
 export const API = createApi({
@@ -83,8 +85,8 @@ export const API = createApi({
             }),
         }),
         // NOTE: /api/v2/kyc/bank-card/main 绑定主卡
-        postBankCardMain: builder.mutation<null, PostBankCardMainRequestBody>({
-            query: (requestBody: PostBankCardMainRequestBody) => ({
+        postBankCardMain: builder.mutation<null, PostBankCardMainRequest>({
+            query: (requestBody: PostBankCardMainRequest) => ({
                 method: "post",
                 url: `/kyc/bank-card/main`,
                 data: requestBody,

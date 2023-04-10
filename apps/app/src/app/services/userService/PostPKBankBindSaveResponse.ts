@@ -1,0 +1,4 @@
+// postBankBindSave
+export interface PostPKBankBindSaveResponse {
+  //
+}
