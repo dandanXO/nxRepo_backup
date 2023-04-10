@@ -9,14 +9,14 @@ import {GetIndexResponse} from "../../../../api/indexService/GetIndexResponse";
 import {GetUserInfoServiceResponse} from "../../../../api/userService/GetUserInfoServiceResponse";
 import {catchSagaError} from "../../../utils/catchSagaError";
 import {GetOpenIndexResponse} from "../../../../api/indexService/GetOpenIndexResponse";
+import {RootState} from "../../../reduxStore";
 
 
 export function* userViewIndexPageSaga(action: any) {
   try {
-    const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-    yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
-    if (userResponse.status === USER_AUTH_STATE.ready) {
+    const status: number = yield select((state: RootState) => state.indexPage.user.state);
+    if (status === USER_AUTH_STATE.ready) {
       const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, {packageId: "com.ylbu8.abha"});
       yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
 
@@ -47,5 +47,9 @@ export function* userViewIndexPageSaga(action: any) {
   } catch(error) {
     yield catchSagaError(error);
   }
+
+}
+
+function *callGetUserInfoServiceSaga() {
 
 }
