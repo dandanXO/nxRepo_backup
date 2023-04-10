@@ -9,7 +9,7 @@ import {RISK_CONTROL_STATE} from "../../domain/RISK_CONTROL_STATE";
 import {getQuotaModelStatusAction} from "../usecaseActionSaga/userUsecaseSaga/userReacquireCreditSaga";
 import {PayableRecords} from "../../services/indexService/payableRecords";
 import {GetIndexResponse} from "../../services/indexService/getIndexResponse";
-import {GetQuotaModelStatusResponse} from "../../services/loanService/getQuotaModelStatusResponse";
+import {GetQuotaModelStatusResponse} from "../../services/loanService/GetQuotaModelStatusResponse";
 import {GetUserInfoServiceResponse} from "../../services/userService/GetUserInfoServiceResponse";
 
 

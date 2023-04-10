@@ -44,7 +44,7 @@ import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/Notice
 import {UseCaseActions} from "../../../usecaseFlow/usecaseAction/useCaseActions";
 import {FeeRateKey} from "../../../services/indexService/feeRateKey";
 import {PlatformProduct} from "../../../services/indexService/platformProduct";
-import {ProductApplyDetail} from "../../../services/loanService/productApplyDetail";
+import {ProductApplyDetail} from "../../../services/loanService/ProductApplyDetail";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {

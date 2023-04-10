@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import PaymentItem from "./PaymentItem";
 import { useLazyGetLoanRecordListQuery } from "../../../services/rtk";
-import { GetLoanRecordListRequestQuery } from "../../../services/loanService/getLoanRecordList";
 import Tag from "../../components/Tag";
 import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router-dom";
 // @ts-ignore
 import { default as data } from './data.json';
 import {Page} from "../../components/layouts/Page";
+import {GetLoanRecordListRequest} from "../../../services/loanService/GetLoanRecordListRequest";
 
 
 export const LoanRecordPage = () => {
@@ -29,7 +29,7 @@ export const LoanRecordPage = () => {
 
     const [listStatus, setListStatus] = useState('Unpaid');
     useEffect(() => {
-        triggerGetList({ pageNumber: 0, pageSize: 500, status: statusEnum[listStatus] as GetLoanRecordListRequestQuery['status'] });
+        triggerGetList({ pageNumber: 0, pageSize: 500, status: statusEnum[listStatus] as GetLoanRecordListRequest['status'] });
     }, [listStatus])
 
     useEffect(() => {

@@ -4,7 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import * as Sentry from "@sentry/react";
 import { CustomAxiosError } from "../../services/rtk/axiosBaseQuery";
 import { usePostRepayCreateMutation } from "../../services/rtk";
-import { PostRepayCreateRequestBody, PostRepayCreateResponse } from "../../services/loanService/postRepayCreate";
+import {PostRepayCreateRequest} from "../../services/loanService/PostRepayCreateRequest";
+import {PostRepayCreateResponse} from "../../services/loanService/PostRepayCreateResponse";
 
 const useExtendCreate = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const useExtendCreate = () => {
     // NOTE: usePostRepayCreateMutation
     const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] = usePostRepayCreateMutation();
 
-    const postRepayCreateRequest = (props: PostRepayCreateRequestBody) => new Promise((resolve, reject) => {
+    const postRepayCreateRequest = (props: PostRepayCreateRequest) => new Promise((resolve, reject) => {
         console.log("[repay] postRepayCreateRequest.props", props);
         postRepayCreate(props)
             .unwrap()

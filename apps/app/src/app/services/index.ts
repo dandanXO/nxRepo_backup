@@ -1,10 +1,10 @@
 import {getOpenIndexService} from "./indexService/getOpenIndexService";
 import {getIndexService} from "./indexService/getIndexService";
-import {GetUserInfoService} from "./userService/service/GetUserInfoService";
-import {postApplyLoanService} from "./loanService/postApplyLoanService";
-import {getQuotaModelStatusService} from "./loanService/getQuotaModelStatusService";
+import {getUserInfoService} from "./userService/service/getUserInfoService";
+import {postApplyLoanService} from "./loanService/service/postApplyLoanService";
+import {getQuotaModelStatusService} from "./loanService/service/getQuotaModelStatusService";
 import {GetInitService} from "./appService/getInitService";
-import {GetBankCardListService} from "./userService/service/GetBankCardListService";
+import {GetBankCardListService} from "./userService/service/getBankCardListService";
 
 // NOTICE: 根據 非 Page，而是 Domain 做切分
 export const Service = {
@@ -16,7 +16,7 @@ export const Service = {
     getIndex: getIndexService,
   },
   UserService: {
-    GetUserInfoService,
+    GetUserInfoService: getUserInfoService,
     GetBankCardList: GetBankCardListService,
   },
   LoanService: {

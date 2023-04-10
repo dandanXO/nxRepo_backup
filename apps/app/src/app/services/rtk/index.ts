@@ -1,11 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./axiosBaseQuery";
 import { GetBankCardListResponse } from "./types/getBankCardList";
-import { GetLoanRecordListRequestQuery, GetLoanRecordListReponse } from "../loanService/getLoanRecordList";
-import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "../loanService/getLoanDetail";
-import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "../loanService/getRepayTypes";
-import { PostRepayCreateRequestBody, PostRepayCreateResponse } from '../loanService/postRepayCreate';
-import { PostRepayReceiptResponse } from "../loanService/postRepayReceipt";
+import { GetRepayTypesResponse } from "../loanService/GetRepayTypesResponse";
 import { PostBankCardMainRequest } from "../userService/PostBankCardMainRequest";
 import { GetBindCardDropListResponse } from "../userService/GetBindCardDropListResponse";
 import {GetUserProcessResponse} from "../loanService/GetUserProcessResponse";
@@ -14,6 +10,14 @@ import {GetIndexResponse} from "../indexService/getIndexResponse";
 import {PostBankBindSaveRequest} from "../userService/PostBankBindSaveRequest";
 import {PostPKBankBindSaveRequest} from "../userService/PostPKBankBindSaveRequest";
 import {PostBangladeshBankBindSaveRequest} from "../userService/PostBangladeshBankBindSaveRequest";
+import {GetLoanDetailRequest} from "../loanService/GetLoanDetailRequest";
+import {GetLoanDetailResponse} from "../loanService/GetLoanDetailResponse";
+import {GetLoanRecordListRequest} from "../loanService/GetLoanRecordListRequest";
+import {GetLoanRecordListReponse} from "../loanService/GetLoanRecordListReponse";
+import {GetRepayTypesRequest} from "../loanService/GetRepayTypesRequest";
+import {PostRepayReceiptResponse} from "../loanService/PostRepayReceiptResponse";
+import {PostRepayCreateRequest} from "../loanService/PostRepayCreateRequest";
+import {PostRepayCreateResponse} from "../loanService/PostRepayCreateResponse";
 
 
 export const API = createApi({
@@ -42,32 +46,32 @@ export const API = createApi({
             }),
         }),
         // NOTE: /api/v2/loan/records 貸款紀錄列表
-        getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequestQuery>({
-            query: (query: GetLoanRecordListRequestQuery) => ({
+        getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
+            query: (query: GetLoanRecordListRequest) => ({
                 method: "get",
                 url: `/loan/records`,
                 params: query,
             }),
         }),
         // NOTE: /api/v2/loan/detail 貸款訂單詳情
-        getLoanDetail: builder.query<GetLoanDetailResponse, GetLoanDetailRequestQuery>({
-            query: (query: GetLoanDetailRequestQuery) => ({
+        getLoanDetail: builder.query<GetLoanDetailResponse, GetLoanDetailRequest>({
+            query: (query: GetLoanDetailRequest) => ({
                 method: "get",
                 url: `/loan/detail`,
                 params: query,
             }),
         }),
         // NOTE: 取得可用付款方式
-        getRepayTypes: builder.query<GetRepayTypesResponse, GetRepayTypesRequestQuerystring>({
-            query: (query: GetRepayTypesRequestQuerystring) => ({
+        getRepayTypes: builder.query<GetRepayTypesResponse, GetRepayTypesRequest>({
+            query: (query: GetRepayTypesRequest) => ({
                 method: "get",
                 url: `/repay/types`,
                 params: query,
             }),
         }),
         // NOTE: 創建還款訂單
-        postRepayCreate: builder.mutation<PostRepayCreateResponse, PostRepayCreateRequestBody>({
-            query: (query: PostRepayCreateRequestBody) => ({
+        postRepayCreate: builder.mutation<PostRepayCreateResponse, PostRepayCreateRequest>({
+            query: (query: PostRepayCreateRequest) => ({
                 method: "post",
                 url: `/repay/create`,
                 data: query,

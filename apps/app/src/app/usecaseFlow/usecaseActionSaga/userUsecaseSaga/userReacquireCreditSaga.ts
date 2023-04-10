@@ -8,8 +8,8 @@ import {modalSlice} from "../../reduxStore/modalSlice";
 import {UseCaseActions} from "../../usecaseAction/useCaseActions";
 import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
 import {GetIndexResponse} from "../../../services/indexService/getIndexResponse";
-import {GetQuotaModelStatusRequest} from "../../../services/loanService/getQuotaModelStatusRequest";
-import {GetQuotaModelStatusResponse} from "../../../services/loanService/getQuotaModelStatusResponse";
+import {GetQuotaModelStatusRequest} from "../../../services/loanService/GetQuotaModelStatusRequest";
+import {GetQuotaModelStatusResponse} from "../../../services/loanService/GetQuotaModelStatusResponse";
 import {catchSagaError} from "../../utils/catchSagaError";
 
 const createRequestAction = (type: string) => {

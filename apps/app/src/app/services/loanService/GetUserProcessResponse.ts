@@ -1,15 +1,5 @@
+import {UserProcess} from "./UserProcess";
+
 export type GetUserProcessResponse = UserProcess[];
-
-export type UserProcess = {
-  addTime: number;
-  // 建立時間 (unix time)
-
-  content: string;
-  // 信息
-  id: number;
-
-  title: string;
-  // 標題
-}
 
 
