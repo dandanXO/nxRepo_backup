@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./axiosBaseQuery";
-import { GetBankCardListResponse } from "./types/getBankCardList";
+import { GetBankCardListResponse } from "../userService/GetBankCardListResponse";
 import { GetRepayTypesResponse } from "../loanService/GetRepayTypesResponse";
 import { PostBankCardMainRequest } from "../userService/PostBankCardMainRequest";
 import { GetBindCardDropListResponse } from "../userService/GetBindCardDropListResponse";

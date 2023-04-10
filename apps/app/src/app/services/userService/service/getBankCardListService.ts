@@ -1,4 +1,4 @@
-import {GetBankCardListResponse} from "../../rtk/types/getBankCardList";
+import {GetBankCardListResponse} from "../GetBankCardListResponse";
 import {runAxios} from "../../base/runAxios";
 
 export const GetBankCardListService = async (params: null) => {

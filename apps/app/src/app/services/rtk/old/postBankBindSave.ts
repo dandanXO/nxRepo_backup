@@ -9,7 +9,9 @@ export interface PostBankBindSaveRequest {
     upiId: string;
 }
 
-export interface PostBankBindSaveResponse {}
+export interface PostBankBindSaveResponse {
+  //
+}
 
 
 export interface PostPKBankBindSaveRequest {
@@ -45,4 +47,6 @@ export interface PostBangladeshBankBindSaveRequest {
   walletVendor:	string;
   // 電子錢包商
 }
-export interface PostPKBankBindSaveResponse {}
+export interface PostPKBankBindSaveResponse {
+  //
+}

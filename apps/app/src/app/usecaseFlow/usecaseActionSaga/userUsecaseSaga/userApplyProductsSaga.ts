@@ -5,7 +5,7 @@ import {Service} from "../../../services";
 import {catchSagaError} from "../../utils/catchSagaError";
 import {InitialStateType, modalSlice} from "../../reduxStore/modalSlice";
 import {PayloadAction} from "@reduxjs/toolkit";
-import {GetBankCardListResponse} from "../../../services/rtk/types/getBankCardList";
+import {GetBankCardListResponse} from "../../../services/userService/GetBankCardListResponse";
 import {RootState} from "../../reduxStore";
 import {UseCaseActions, UserApplyProductActionPayload} from "../../usecaseAction/useCaseActions";
 

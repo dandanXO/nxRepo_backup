@@ -15,8 +15,8 @@ import { renderByCountry } from "../../../modules/i18n";
 import { IndiaCountry } from "../../../domain/country/constants/IndiaCountry";
 import { PakistanCountry } from "../../../domain/country/constants/PakistanCountry";
 import { CustomAxiosError } from "../../../services/rtk/axiosBaseQuery";
-import { PostRepayReceiptResponse } from "../../../services/rtk/old/postRepayReceipt";
 import { usePostRepayReceiptMutation } from "../../../services/rtk";
+import {PostRepayReceiptResponse} from "../../../services/rtk/old/PostRepayReceiptResponse";
 export interface PostRepayReceiptRequestProps {
     formFile: any;
     orderNo: string;
