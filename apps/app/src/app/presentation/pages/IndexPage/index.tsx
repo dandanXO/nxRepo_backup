@@ -278,6 +278,8 @@ export const IndexPage = () => {
       indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
       indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder ||
       indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
+      // NOTICE: 額度不足
+      // REFACTOR ME
       indexPageState.indexAPI?.availableAmount === 0 ||
       calculatingProducts?.length === 0
     ) {
@@ -388,6 +390,7 @@ export const IndexPage = () => {
               indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
               indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
               indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
+              // NOTICE: 額度不足
               indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount === 0,
             ].some(condition => condition === true) &&
             (

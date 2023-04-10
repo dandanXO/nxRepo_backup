@@ -128,29 +128,20 @@ export const indexPageSlice = createSlice({
       // console.log("expireTime", expireTime.format());
       // console.log("isRiskControlOverdue", isRiskControlOverdue);
 
-
       // NOTE: 會有其他條件同時相符，所以這邊用if優先權最高-直接第一
       if (action.payload.riskReject === true) {
         // NOTICE: 新客直接被擋或是老客額度被擋，但前端直接視為 ORDER_STATE.reject，
-
         // NOTICE: order
         state.order.state = ORDER_STATE.reject;
         state.order.overdueOrComingOverdueOrder = null;
 
-
       }
-        // else if(action.payload.noQuotaBalance === true) {
-        //   // NOTE: 優先度最後
-        //   state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
-        //   // noQuotaBalance
-      // }
       else if (action.payload.payableRecords.length === 0) {
         // NOTICE: order
         state.order.state = ORDER_STATE.empty
         state.order.overdueOrComingOverdueOrder = null;
 
       } else if (action.payload.payableRecords.length > 0) {
-
         // NOTICE: order
         // NOTE: order priority
         const isOrderOverdue = action.payload.payableRecords.some(order => {
@@ -171,7 +162,6 @@ export const indexPageSlice = createSlice({
           // console.log("overdueHour", overdueHour)
           // console.log("overdueMinute", overdueMinute)
           // console.log("isOverdueEqual3Days", isOverdueEqual3Days);
-
           if (isOverdueEqual3Days) state.order.overdueOrComingOverdueOrder = order;
           return isOverdueEqual3Days;
         })
@@ -192,7 +182,7 @@ export const indexPageSlice = createSlice({
         }
       }
 
-      // NOTE: 這邊要好好跟後端對規則
+      // NOTE: 與後端對規則
       // NOTE: 1.風控到期後的重刷
       // NOTE: 2.風控沒過，沒額度的重刷
 
@@ -201,27 +191,25 @@ export const indexPageSlice = createSlice({
         // NOTE: 可重刷
         if (action.payload.refreshable === true) {
 
-          if(action.payload.refreshOverRetry === false) {
+          if(action.payload.noQuotaByRetryFewTimes === false) {
             state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
           } else {
-            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+            // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3
           }
         // NOTE: 不可重刷
         } else  {
-          if (action.payload.refreshOverRetry === true) {
-            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-          } else {
-            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-          }
+          // NOTE: 可能是尚有額度
+          // if (action.payload.noQuotaByRetryFewTimes === true) {
+          //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+          // } else {
+          //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+          // }
         }
       }
 
-      // NOTICE: 單一條件就可以取代了
-      if (action.payload.noQuotaByRetryFewTimes === true) {
-        // NOTE: 刷新超過N次都没有额度
-        state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
-
-      } else if (action.payload.noQuotaBalance === true) {
+      // NOTICE: 會有過期, 但是 noQuotaBalance 為 true 嗎?
+      if (action.payload.noQuotaBalance === true) {
         // NOTE: 優先度最後
         state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
 
@@ -229,6 +217,7 @@ export const indexPageSlice = createSlice({
         state.riskControl.state = RISK_CONTROL_STATE.valid;
 
       }
+      // REFACTOR ME: 額度不足
       // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
       //
       // }

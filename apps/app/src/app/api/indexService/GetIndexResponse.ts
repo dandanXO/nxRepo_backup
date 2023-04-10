@@ -51,8 +51,6 @@ export type GetIndexResponse = {
 
   quotaBar: AvailableQuotaBar;
 
-  refreshOverRetry: boolean;
-  // 額度刷新超過次數
 
   refreshable: boolean;
   // 可否刷新額度: 用戶有可能風控拒絕多次 不給重新刷新

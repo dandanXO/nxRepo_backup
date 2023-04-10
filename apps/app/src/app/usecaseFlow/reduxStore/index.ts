@@ -240,7 +240,7 @@ appStore.dispatch(indexPageSlice.actions.updateUserAPI({
 //   "needRiskKycUpdate": false,
 //   "riskReject": false,
 //   "refreshable": false,
-//   "refreshOverRetry": false,
+//   "noQuotaByRetryFewTimes": false,
 //   "orderUnderReview": false,
 //   "refreshableUntil": "2023-03-28T08:10:24",
 //   "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days").format(),
@@ -349,7 +349,7 @@ appStore.dispatch(indexPageSlice.actions.updateUserAPI({
 //   // NOTICE: 優先權最高
 //   "riskReject": false,
 //   "refreshable": true,
-//   "refreshOverRetry": false,
+//   "noQuotaByRetryFewTimes": false,
 //   "refreshableUntil": "2023-03-28T08:10:24",
 //   "orderUnderReview": false,
 //   "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days").format(),
