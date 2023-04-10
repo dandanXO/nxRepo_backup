@@ -3,9 +3,9 @@ import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 
 import { useCallback, useEffect, useState } from "react";
 import * as Sentry from "@sentry/react";
-import { CustomAxiosError } from "../../services/api/base/axiosBaseQuery";
-import { usePostRepayCreateMutation } from "../../services/api";
-import { PostRepayCreateRequestBody, PostRepayCreateResponse } from "../../services/api/types/postRepayCreate";
+import { CustomAxiosError } from "../../services/rtk/axiosBaseQuery";
+import { usePostRepayCreateMutation } from "../../services/rtk";
+import { PostRepayCreateRequestBody, PostRepayCreateResponse } from "../../services/loanService/postRepayCreate";
 
 const useRepayCreate = () => {
     const navigate = useNavigate();

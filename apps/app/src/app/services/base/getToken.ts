@@ -1,4 +1,5 @@
 import queryString from "query-string";
+import {alertModal} from "./alertModal";
 
 export const getToken = (): string => {
   const parsedQueryString = queryString.parse(window.location.search);
@@ -7,6 +8,7 @@ export const getToken = (): string => {
     : "";
   if (!TOKEN) {
     // console.log("error");
+    alertModal("TOKEN is missing")
   }
   return TOKEN;
 };

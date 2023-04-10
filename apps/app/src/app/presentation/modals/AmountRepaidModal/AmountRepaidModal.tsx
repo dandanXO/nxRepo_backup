@@ -9,7 +9,7 @@ import {
 } from "@frontend/mobile/shared/ui";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { i18nAmountRepaidModal } from "./i18n/translations";
-import { GetLoanDetailResponse } from "../../../services/api/old/getLoanDetail";
+import { GetLoanDetailResponse } from "../../../services/rtk/old/getLoanDetail";
 import recordStatusStyleProps from "../../../modules/recordStatusColorMapper";
 import { useNavigate, useLocation } from "react-router-dom";
 import { stat } from "fs";

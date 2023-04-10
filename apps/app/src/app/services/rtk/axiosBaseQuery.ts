@@ -2,8 +2,8 @@ import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosError, AxiosRequestConfig } from "axios";
 // import { Modal } from "@frontend/mobile/shared/ui";
 // import * as Sentry from "@sentry/react";
-import {alertModal} from "../alertModal";
-import {runAxios} from "./runAxios";
+import {alertModal} from "../base/alertModal";
+import {runAxios} from "../base/runAxios";
 
 
 export interface CustomAxiosError {

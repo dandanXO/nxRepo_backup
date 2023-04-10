@@ -4,16 +4,15 @@ import {IndexServiceResponse} from "../../../app/src/app/services/service";
 import {indexPagePo} from "../support/indexPage.po";
 import moment from "moment-timezone"
 import {GetOpenIndexResponse} from "../../../app/src/app/services/indexService/getOpenIndexService";
-import {GetUserInfoServiceResponse} from "../../../app/src/app/services/userService/getUserInfoService";
 import {USER_AUTH_STATE} from "../../../app/src/app/domain/USER_AUTH_STATE";
-import {GetQuotaModelStatusResponse} from "../../../app/src/app/services/loanService/getQuotaModelStatus";
 import {LoanServiceResponse} from "../../../app/src/app/services/loanService/postApplyLoanService";
-import {GetBankCardListResponse} from "../../../app/src/app/services/api/types/getBankCardList";
-import {
-  GetInitServiceResponse,
-  SDKidCardOcr, SDKliveDetect,
-  SDKtaxCardOcr
-} from "../../../app/src/app/services/appService/getInitService";
+import {GetBankCardListResponse} from "../../../app/src/app/services/rtk/types/getBankCardList";
+import {GetInitServiceResponse} from "../../../app/src/app/services/appService/getInitServiceResponse";
+import {SDKidCardOcr} from "../../../app/src/app/services/appService/SDKidCardOcr";
+import {SDKliveDetect} from "../../../app/src/app/services/appService/SDKliveDetect";
+import {SDKtaxCardOcr} from "../../../app/src/app/services/appService/SDKtaxCardOcr";
+import {GetQuotaModelStatusResponse} from "../../../app/src/app/services/loanService/getQuotaModelStatusResponse";
+import {GetUserInfoServiceResponse} from "../../../app/src/app/services/userService/getUserInfoServiceResponse";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";

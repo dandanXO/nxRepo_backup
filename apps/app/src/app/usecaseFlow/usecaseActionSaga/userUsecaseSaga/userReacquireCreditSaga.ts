@@ -1,14 +1,15 @@
 import {createAction, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import {call, put, delay, select, take} from "redux-saga/effects";
 import {Service} from "../../../services";
-import {GetQuotaModelStatusRequest, GetQuotaModelStatusResponse} from "../../../services/loanService/getQuotaModelStatus";
-import {GetIndexResponse} from "../../../services/indexService/getIndexService";
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import moment from "moment-timezone";
 import {RootState} from "../../reduxStore";
 import {modalSlice} from "../../reduxStore/modalSlice";
 import {UseCaseActions} from "../../usecaseAction/useCaseActions";
 import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
+import {GetIndexResponse} from "../../../services/indexService/getIndexResponse";
+import {GetQuotaModelStatusRequest} from "../../../services/loanService/getQuotaModelStatusRequest";
+import {GetQuotaModelStatusResponse} from "../../../services/loanService/getQuotaModelStatusResponse";
 
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);

@@ -1,4 +1,4 @@
-import {runAxios} from "../api/base/runAxios";
+import {runAxios} from "../base/runAxios";
 
 export const getOpenIndexService = async (params: GetOpenIndexRequest) => {
   const {data}: { data: GetOpenIndexResponse } = await runAxios(

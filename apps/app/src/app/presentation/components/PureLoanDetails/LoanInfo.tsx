@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next";
 import {i18nComponents} from "../i18n/translations";
 import LoanBrand from "../LoanBrand";
 import Card from "../Card";
-import { GetLoanDetailResponse } from "../../../services/api/old/getLoanDetail";
+import { GetLoanDetailResponse } from "../../../services/rtk/old/getLoanDetail";
 import {environment} from "../../../../environments/environment";
 
 const LoanInfoStyled = styled.div`

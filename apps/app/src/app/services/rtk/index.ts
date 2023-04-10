@@ -1,16 +1,17 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import axiosBaseQuery from "./base/axiosBaseQuery";
+import axiosBaseQuery from "./axiosBaseQuery";
 import { GetBankCardListResponse } from "./types/getBankCardList";
-import { GetLoanRecordListRequestQuery, GetLoanRecordListReponse } from "./types/getLoanRecordList";
-import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "./types/getLoanDetail";
-import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "./types/getRepayTypes";
-import { PostRepayCreateRequestBody, PostRepayCreateResponse } from './types/postRepayCreate';
-import { PostRepayReceiptResponse } from "./types/postRepayReceipt";
-import { PostBankCardMainRequestBody } from "./types/postBankCardMain";
-import { PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBindSaveRequest } from "./types/postBankBindSave";
-import { GetBindCardDropListResponse } from "./types/GetBindCardDropList";
-import {GetIndexRequest, GetIndexResponse} from "../indexService/getIndexService";
-import {GetUserProcessResponse} from "./types/GetUserProcessResponse";
+import { GetLoanRecordListRequestQuery, GetLoanRecordListReponse } from "../loanService/getLoanRecordList";
+import { GetLoanDetailRequestQuery, GetLoanDetailResponse } from "../loanService/getLoanDetail";
+import { GetRepayTypesRequestQuerystring, GetRepayTypesResponse } from "../loanService/getRepayTypes";
+import { PostRepayCreateRequestBody, PostRepayCreateResponse } from '../loanService/postRepayCreate';
+import { PostRepayReceiptResponse } from "../loanService/postRepayReceipt";
+import { PostBankCardMainRequestBody } from "../userService/postBankCardMain";
+import { PostBangladeshBankBindSaveRequest, PostBankBindSaveRequest, PostPKBankBindSaveRequest } from "../userService/postBankBindSave";
+import { GetBindCardDropListResponse } from "../userService/GetBindCardDropList";
+import {GetUserProcessResponse} from "../loanService/GetUserProcessResponse";
+import {GetIndexRequest} from "../indexService/getIndexRequest";
+import {GetIndexResponse} from "../indexService/getIndexResponse";
 
 
 export const API = createApi({

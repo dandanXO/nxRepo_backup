@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Overlay, Title, Divider, Button } from "@frontend/mobile/shared/ui";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nSubmitOrderModal} from "./i18n/translations";
-import {GetLoanDetailRecommendProducts} from "../../../../services/api/old/getLoanDetail";
+import {GetLoanDetailRecommendProducts} from "../../../../services/rtk/old/getLoanDetail";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;

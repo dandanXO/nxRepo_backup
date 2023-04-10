@@ -11,7 +11,7 @@ import {
   usePostBankBindSaveMutation,
   usePostBankBindSaveToBangladeshMutation,
   usePostBankBindSaveToPKMutation
-} from "../../../services/api"
+} from "../../../services/rtk"
 import {renderByCountry} from "../../../modules/i18n";
 import {IndiaCountry} from "../../../domain/country/constants/IndiaCountry";
 import {PakistanCountry} from "../../../domain/country/constants/PakistanCountry";

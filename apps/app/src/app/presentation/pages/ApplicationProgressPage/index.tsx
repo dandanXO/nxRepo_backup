@@ -2,7 +2,7 @@ import {Navigation} from "../../components/layouts/Navigation";
 import {PageContent} from "../../components/layouts/PageContent";
 import {ProgressItem} from "./ProgressItem";
 import {useNavigate} from "react-router-dom";
-import {useLazyGetUserProcessQuery} from "../../../services/api";
+import {useLazyGetUserProcessQuery} from "../../../services/rtk";
 import {useEffect} from "react";
 import moment from "moment-timezone";
 

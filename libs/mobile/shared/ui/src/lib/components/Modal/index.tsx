@@ -49,6 +49,10 @@ class ModalWrapper extends React.Component<ModalWrapperProps> {
     );
   }
   static renderModalWrapperDOM(props: IModalWrapperProps, mode: string) {
+    // console.log("renderModalWrapperDOM.mode", mode)
+    // console.log("renderModalWrapperDOM.window.theme", window.theme)
+    // console.log("window.theme", window.theme)
+    // console.log("props.theme", props.theme)
     // NOTE: Modal List
     // const MODAL_ROOT_IDENTIFIER = "uni-modal-list";
     let modalRoot = document.querySelector(`.uni-modal-list`);

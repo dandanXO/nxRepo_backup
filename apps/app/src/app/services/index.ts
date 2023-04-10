@@ -2,7 +2,7 @@ import {getOpenIndexService} from "./indexService/getOpenIndexService";
 import {getIndexService} from "./indexService/getIndexService";
 import {GetUserInfoService} from "./userService/getUserInfoService";
 import {postApplyLoanService} from "./loanService/postApplyLoanService";
-import {getQuotaModelStatusService} from "./loanService/getQuotaModelStatus";
+import {getQuotaModelStatusService} from "./loanService/getQuotaModelStatusService";
 import {GetInitService} from "./appService/getInitService";
 import {GetBankCardList} from "./userService/getBankCardList";
 

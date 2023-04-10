@@ -31,8 +31,6 @@ import {LoanAgreementModal} from "../../modals/QRLoanAgreementModal";
 import {QuickRepaymentSummaryModal} from "../../modals/QuickRepaymentSummaryModal";
 import {QRSuccessModal} from "../../modals/QRSuccessModal";
 import moment from "moment-timezone";
-import {FeeRateKey, PlatformProduct} from "../../../services/indexService/getIndexService";
-import {ProductApplyDetail} from "../../../services/loanService/postApplyLoanService";
 import {Page} from "../../components/layouts/Page";
 import {Moment} from "moment";
 
@@ -44,6 +42,9 @@ import {AuthorizationModal} from "../../modals/AuthorizationModal";
 import {modalSlice} from "../../../usecaseFlow/reduxStore/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
 import {UseCaseActions} from "../../../usecaseFlow/usecaseAction/useCaseActions";
+import {FeeRateKey} from "../../../services/indexService/feeRateKey";
+import {PlatformProduct} from "../../../services/indexService/platformProduct";
+import {ProductApplyDetail} from "../../../services/loanService/productApplyDetail";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {

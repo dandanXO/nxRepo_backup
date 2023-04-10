@@ -4,7 +4,7 @@ import {formatPrice} from "../../../../../modules/formatPrice";
 import moment from "moment";
 import {ORDER_STATE} from "../../../../../domain/ORDER_STATE";
 import {useNavigate} from "react-router-dom";
-import {getToken} from "../../../../../services/api/base/getToken";
+import {getToken} from "../../../../../services/base/getToken";
 
 type Props = IndexPageProps;
 

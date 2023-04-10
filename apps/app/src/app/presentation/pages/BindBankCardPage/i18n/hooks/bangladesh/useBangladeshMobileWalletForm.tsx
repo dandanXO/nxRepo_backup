@@ -5,7 +5,7 @@ import {i18nBankBindAccountPage} from "../../translations";
 import {z} from "zod";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
-import {CustomAxiosError} from "../../../../../../services/api/base/axiosBaseQuery";
+import {CustomAxiosError} from "../../../../../../services/rtk/axiosBaseQuery";
 
 interface IUseBangladeshMobileWalletForm {
   triggerPostBankBindSaveToBangladeshMutation: any;

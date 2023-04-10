@@ -7,7 +7,7 @@ import React, {Dispatch, SetStateAction, useCallback, useEffect, useMemo, useSta
 import {IndexPageProps} from "../../../usecaseFlow/reduxStore";
 import {FinalProductsSummary, FinalProductType} from "../../pages/IndexPage";
 import {formatPrice} from "../../../modules/formatPrice";
-import {BankAccount} from "../../../services/api/types/getBankCardList";
+import {BankAccount} from "../../../services/rtk/types/getBankCardList";
 import Select, {IndicatorsContainerProps, components, DropdownIndicatorProps, IndicatorSeparatorProps, ControlProps } from 'react-select';
 
 type Props = IndexPageProps & {

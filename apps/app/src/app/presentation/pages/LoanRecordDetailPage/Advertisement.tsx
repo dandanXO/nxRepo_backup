@@ -8,8 +8,8 @@ import BannerWithCard from "./BannerWithCard";
 import * as Sentry from "@sentry/react";
 
 
-import {PostLoanSubmitOrderRequestBody} from "../../../services/api/old/postLoanSubmitOrder";
-import {CustomAxiosError} from "../../../services/api/base/axiosBaseQuery";
+import {PostLoanSubmitOrderRequestBody} from "../../../services/rtk/old/postLoanSubmitOrder";
+import {CustomAxiosError} from "../../../services/rtk/axiosBaseQuery";
 
 import ProductDetailModal from "../../../../../../mobile/src/app/components/modals/ProductDetailModal";
 import SubmitOrderModal from "../../../../../../mobile/src/app/components/modals/SubmitOrderModal";

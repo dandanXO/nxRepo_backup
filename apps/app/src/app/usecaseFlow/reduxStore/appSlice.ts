@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {GetInitServiceResponse} from "../../services/appService/getInitService";
+import {GetInitServiceResponse} from "../../services/appService/getInitServiceResponse";
 
 
 type InitailState = {

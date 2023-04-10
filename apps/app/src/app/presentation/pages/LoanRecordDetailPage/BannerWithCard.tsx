@@ -8,7 +8,7 @@ import {i18nLoanDetailsPage} from "./i18n/translations";
 import Card from "../../components/Card";
 import CardContent from "../../components/CardContent";
 
-import {GetLoanDetailRecommendProducts} from "../../../services/api/old/getLoanDetail";
+import {GetLoanDetailRecommendProducts} from "../../../services/rtk/old/getLoanDetail";
 
 const BannerWithCardStyled = styled.div`
     width: 100%;

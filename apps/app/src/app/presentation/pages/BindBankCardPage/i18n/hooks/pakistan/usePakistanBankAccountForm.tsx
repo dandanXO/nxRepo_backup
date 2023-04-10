@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {BankVendor, GetBindCardDropListResponse} from "../../../../../../services/api/old/GetBindCardDropList";
+import {BankVendor, GetBindCardDropListResponse} from "../../../../../../services/rtk/old/GetBindCardDropList";
 
 interface IUsePakistanBankAccountForm {
   // NOTE: 取得電子錢包列表
