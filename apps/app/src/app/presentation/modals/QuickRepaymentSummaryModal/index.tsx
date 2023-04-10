@@ -9,6 +9,7 @@ import {FinalProductsSummary, FinalProductType} from "../../pages/IndexPage";
 import {formatPrice} from "../../../modules/formatPrice";
 import Select, {IndicatorsContainerProps, components, DropdownIndicatorProps, IndicatorSeparatorProps, ControlProps } from 'react-select';
 import {BankAccount} from "../../../api/userService/BankAccount";
+import cx from "classnames";
 
 type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];
@@ -73,7 +74,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
   }, [props.selectedBankcardId, props.bankcardList])
 
   return (
-    <div className={"quick-repayment-modal z-10 w-screen h-screen bg-white p-4 fixed top-0 bottom-0 flex flex-col"}>
+    <div className={cx("quick-repayment-modal w-screen h-screen bg-white p-4 fixed top-0 bottom-0 flex flex-col")}>
       <div onClick={props.onClose}>
         <CloseButton/>
       </div>

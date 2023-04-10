@@ -509,45 +509,49 @@ export const IndexPage = () => {
 
       {/*NOTE: Quick Repay Modal*/}
       {modelState.quickRepaymentSummaryModal.show && (
-        <QuickRepaymentSummaryModal
-          state={indexPageState}
-          calculatingProducts={calculatingProducts || []}
-          calculatingSummary={calculatingSummary || {...initialFinalProductsSummary}}
-          bankcardList={modelState.quickRepaymentSummaryModal.bankcardList || []}
-          selectedBankcardId={modelState.quickRepaymentSummaryModal.selectedBankcardId}
-          onChangeBankcardID={(id: number) => {
-            dispatch(modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
-              selectedBankcardId: id
-            }))
-          }}
-          onClose={() => {
-            dispatch(modalSlice.actions.updateQuickRepaymentSummaryModal({
-              show: false,
-              confirm: false,
-            }))
-          }}
-          onConfirmApply={() => {
-            dispatch(modalSlice.actions.updateQuickRepaymentSummaryModal({
-              // NOTICE: 此處不關閉，來避免用戶提交中返回到首頁
-              show: true,
-              confirm: true,
-            }))
-          }}
-          onClickLoanAgreement={() => {
-            dispatch(modalSlice.actions.updateLoanAgreementModal({
-              show: true,
-            }))
-          }}
-        />
+        <div className={"z-10"}>
+          <QuickRepaymentSummaryModal
+            state={indexPageState}
+            calculatingProducts={calculatingProducts || []}
+            calculatingSummary={calculatingSummary || {...initialFinalProductsSummary}}
+            bankcardList={modelState.quickRepaymentSummaryModal.bankcardList || []}
+            selectedBankcardId={modelState.quickRepaymentSummaryModal.selectedBankcardId}
+            onChangeBankcardID={(id: number) => {
+              dispatch(modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
+                selectedBankcardId: id
+              }))
+            }}
+            onClose={() => {
+              dispatch(modalSlice.actions.updateQuickRepaymentSummaryModal({
+                show: false,
+                confirm: false,
+              }))
+            }}
+            onConfirmApply={() => {
+              dispatch(modalSlice.actions.updateQuickRepaymentSummaryModal({
+                // NOTICE: 此處不關閉，來避免用戶提交中返回到首頁
+                show: true,
+                confirm: true,
+              }))
+            }}
+            onClickLoanAgreement={() => {
+              dispatch(modalSlice.actions.updateLoanAgreementModal({
+                show: true,
+              }))
+            }}
+          />
+        </div>
       )}
 
       {/*NOTE: Quick Repay - RepaymentAgreementModal*/}
       {modelState.loanAgreementModal.show && (
-        <LoanAgreementModal onClose={() => {
-          dispatch(modalSlice.actions.updateLoanAgreementModal({
-            show: false,
-          }));
-        }}/>
+        <div className={"z-20"}>
+          <LoanAgreementModal onClose={() => {
+            dispatch(modalSlice.actions.updateLoanAgreementModal({
+              show: false,
+            }));
+          }}/>
+        </div>
       )}
 
       {/*NOTE: Quick Repay - SuccessModal*/}
