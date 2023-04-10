@@ -25,9 +25,12 @@ export function* AppSaga() {
     yield takeLatest(SystemCaseActions.SystemCountdownSaga.type, systemCountdownSaga)
     yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSata.type, systemRefreshableCountdownSata);
 
+
+    // NOTICE: flow
     yield put(SystemCaseActions.InitSaga());
+
   } catch (error) {
     // yield catchSagaError(error);
-    console.log("error", error);
+    console.error("error", error);
   }
 }

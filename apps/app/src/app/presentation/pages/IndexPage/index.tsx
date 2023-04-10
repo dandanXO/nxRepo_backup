@@ -88,10 +88,15 @@ export type PageState = {
   pageState: PageStateEnum;
 }
 export const IndexPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(UseCaseActions.UserViewIndexPageAction());
+  }, []);
+
   const indexPageState = useSelector((state: RootState) => state.indexPage);
   // const [hasClickReacquireCredit, setHasClickReacquireCredit] = useState(false);
 
-  const dispatch = useDispatch();
   const onClickReacquireCredit = useCallback(() => {
     // setHasClickReacquireCredit(!hasClickReacquireCredit);
     // dispatch(indexPageSlice.actions.reacquire({}));
@@ -296,9 +301,7 @@ export const IndexPage = () => {
 
   const {isLoading, isSuccess, isError} = useSelector((state: RootState) => state.indexPage.api.reacquire);
 
-  useEffect(() => {
-    dispatch(UseCaseActions.UserViewIndexPageAction());
-  }, []);
+
 
   const countdown = useSelector((state: RootState) => state.indexPage.timeout.riskControlDate);
   // console.log("countdown", countdown);
