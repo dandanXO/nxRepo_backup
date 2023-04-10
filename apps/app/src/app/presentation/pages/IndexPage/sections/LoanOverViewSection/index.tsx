@@ -65,12 +65,19 @@ export const LoanOverViewSection = (props: Props) => {
     },
   }
   const [series, setSeries] = useState<number[]>();
+
   useEffect(() => {
     if(props.state.indexAPI) {
-      const percent = (props.state.indexAPI?.availableAmount/props.state.indexAPI?.totalAmount) * 100;
+      let percent = (props.state.indexAPI?.availableAmount / props.state.indexAPI?.totalAmount) * 100;
+      // console.log("percent", percent);
+      // NOTICE: availableAmount: 999000, totalAmount: 1000000, 算出來是 99.9，但畫面缺口基本上分辨不出來有缺口
+      if(percent > 99) {
+        percent = 99
+      }
       setSeries([percent])
     }
   }, [props.state.indexAPI])
+
   return (
     <div>
       <div className={"font-medium mb-2"}>Loan Over View</div>

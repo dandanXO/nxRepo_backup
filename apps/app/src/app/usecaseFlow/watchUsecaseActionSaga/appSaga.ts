@@ -7,6 +7,7 @@ import {systemRefreshableCountdownSata} from "../usecaseActionSaga/systemUsecase
 import {UseCaseActions} from "../usecaseAction/useCaseActions";
 import {SystemCaseActions} from "../usecaseAction/systemCaseActions";
 import {systemInitSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemInitSaga";
+import {catchSagaError} from "../utils/catchSagaError";
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* AppSaga() {
@@ -24,7 +25,6 @@ export function* AppSaga() {
     yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCreditSaga)
     yield takeLatest(SystemCaseActions.SystemCountdownSaga.type, systemCountdownSaga)
     yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSata.type, systemRefreshableCountdownSata);
-
 
     // NOTICE: flow
     yield put(SystemCaseActions.InitSaga());
