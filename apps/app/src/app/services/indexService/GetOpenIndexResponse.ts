@@ -1,27 +1,5 @@
-import {runAxios} from "../base/runAxios";
+import {BannerResponse} from "./BannerResponse";
 
-export const getOpenIndexService = async (params: GetOpenIndexRequest) => {
-  const {data}: { data: GetOpenIndexResponse } = await runAxios(
-    "/api",
-    "/v3/open-index",
-    "get",
-    null,
-    params,
-  )
-  return data;
-}
-
-
-export type GetOpenIndexRequest = {
-  packageId: string;
-}
-export type BannerResponse = {
-  imageUrl?: string;
-  // 展示图片
-
-  jumpUrl?: string;
-  // 跳转URL
-}
 export type GetOpenIndexResponse = {
   banners: BannerResponse[];
   // Banner輪播广告橫幅

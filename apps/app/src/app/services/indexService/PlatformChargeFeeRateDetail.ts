@@ -1,10 +1,10 @@
-import {FeeRateKey} from "./feeRateKey";
+import {FeeRateKeyEnum} from "./FeeRateKeyEnum";
 
 export type PlatformChargeFeeRateDetail = {
   counting: number;
   // 费率占比%
 
-  key: FeeRateKey;
+  key: FeeRateKeyEnum;
   // KEY值
 
   title: string;

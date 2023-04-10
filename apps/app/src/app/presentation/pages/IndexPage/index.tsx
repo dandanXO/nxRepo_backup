@@ -42,8 +42,8 @@ import {AuthorizationModal} from "../../modals/AuthorizationModal";
 import {modalSlice} from "../../../usecaseFlow/reduxStore/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
 import {UseCaseActions} from "../../../usecaseFlow/usecaseAction/useCaseActions";
-import {FeeRateKey} from "../../../services/indexService/feeRateKey";
-import {PlatformProduct} from "../../../services/indexService/platformProduct";
+import {FeeRateKeyEnum} from "../../../services/indexService/FeeRateKeyEnum";
+import {PlatformProduct} from "../../../services/indexService/PlatformProduct";
 import {ProductApplyDetail} from "../../../services/loanService/ProductApplyDetail";
 
 export type FinalProductType = PlatformProduct & {
@@ -66,7 +66,7 @@ export type FinalProductsSummary = {
 }
 
 export type FeeRateKeyToPriceMapping = {
-  [key in FeeRateKey]: number
+  [key in FeeRateKeyEnum]: number
 };
 
 const initialFinalProductsSummary: FinalProductsSummary = {

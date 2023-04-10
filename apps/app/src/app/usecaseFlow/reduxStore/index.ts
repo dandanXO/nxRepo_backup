@@ -7,7 +7,7 @@ import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
 import {modalSlice} from "./modalSlice";
 import {AppSaga} from "../watchUsecaseActionSaga/appSaga";
 import {appSlice} from "./appSlice";
-import {FeeRateKey} from "../../services/indexService/feeRateKey";
+import {FeeRateKeyEnum} from "../../services/indexService/FeeRateKeyEnum";
 
 const logger = (store: any) => (next: any) => (action: any) => {
   if(action.type !== 'indexPage/updateRiskCountdown') {

@@ -7,7 +7,7 @@ import {RootState} from "../../reduxStore";
 import {modalSlice} from "../../reduxStore/modalSlice";
 import {UseCaseActions} from "../../usecaseAction/useCaseActions";
 import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
-import {GetIndexResponse} from "../../../services/indexService/getIndexResponse";
+import {GetIndexResponse} from "../../../services/indexService/GetIndexResponse";
 import {GetQuotaModelStatusRequest} from "../../../services/loanService/GetQuotaModelStatusRequest";
 import {GetQuotaModelStatusResponse} from "../../../services/loanService/GetQuotaModelStatusResponse";
 import {catchSagaError} from "../../utils/catchSagaError";

@@ -1,4 +1,4 @@
-export enum FeeRateKey {
+export enum FeeRateKeyEnum {
   "DAILY_FEE" = "DAILY_FEE",
   "GST" = "GST",
   "LOAN_AMOUNT" = "LOAN_AMOUNT",

@@ -1,16 +1,16 @@
 // NOTE: PageRedux
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import moment from "moment-timezone";
-import {GetOpenIndexResponse} from "../../services/indexService/getOpenIndexService";
 import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
 import {ORDER_STATE} from "../../domain/ORDER_STATE";
 import {RISK_CONTROL_STATE} from "../../domain/RISK_CONTROL_STATE";
 // import {getQuotaModelStatusActions} from "../usecaseSaga/userReacquireCreditSaga";
 import {getQuotaModelStatusAction} from "../usecaseActionSaga/userUsecaseSaga/userReacquireCreditSaga";
-import {PayableRecords} from "../../services/indexService/payableRecords";
-import {GetIndexResponse} from "../../services/indexService/getIndexResponse";
+import {PayableRecords} from "../../services/indexService/PayableRecords";
+import {GetIndexResponse} from "../../services/indexService/GetIndexResponse";
 import {GetQuotaModelStatusResponse} from "../../services/loanService/GetQuotaModelStatusResponse";
 import {GetUserInfoServiceResponse} from "../../services/userService/GetUserInfoServiceResponse";
+import {GetOpenIndexResponse} from "../../services/indexService/GetOpenIndexResponse";
 
 
 interface InitialState {
