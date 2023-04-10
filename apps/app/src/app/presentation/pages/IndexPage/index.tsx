@@ -46,6 +46,8 @@ import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
 import {PlatformProduct} from "../../../api/indexService/PlatformProduct";
 import {ProductApplyDetail} from "../../../api/loanService/ProductApplyDetail";
 
+import {chain, add, multiply, divide, subtract, evaluate} from "mathjs"
+
 export type FinalProductType = PlatformProduct & {
   calculating: {
     finalLoanPrice: number;
@@ -227,8 +229,10 @@ export const IndexPage = () => {
       if(keyFeeMapping) {
         currentSelectedProducts.map((product) => {
           // console.log("product", product);
-          const interestPrice = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.LOAN_INTEREST;
-          const disbursalPrice = product.calculating.finalLoanPrice * (1 - product.platformChargeFeeRate)
+          const interestPrice = chain(product.calculating.finalLoanPrice).multiply(product.platformChargeFeeRate).multiply(keyFeeMapping.LOAN_INTEREST).round().done();
+          // const disbursalPrice = product.calculating.finalLoanPrice * (1 - product.platformChargeFeeRate)
+          const disbursalPrice = chain(evaluate(`${product.calculating.finalLoanPrice} * (1 - ${product.platformChargeFeeRate})`)).round().done()
+
           const dueDate = moment().add(product.terms - 1, "days");
           const formatedDueDate = dueDate.format("MM-DD-YYYY");
 
@@ -239,17 +243,18 @@ export const IndexPage = () => {
           product.calculating.disbursalPrice = disbursalPrice;
           product.calculating.dueDate = formatedDueDate;
 
-          const processingFee = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.PROCESSING_FEE;
-          const serviceCharge = product.calculating.finalLoanPrice * product.platformChargeFeeRate * keyFeeMapping.SERVICE_FEE;
+          const processingFee = chain(product.calculating.finalLoanPrice).multiply(product.platformChargeFeeRate).multiply(keyFeeMapping.PROCESSING_FEE).round().done();
+          const serviceCharge = chain(product.calculating.finalLoanPrice).multiply(product.platformChargeFeeRate).multiply(keyFeeMapping.SERVICE_FEE).round().done();
 
           // console.log("processingFee", processingFee);
           // console.log("serviceCharge", serviceCharge);
 
-          finalProductsSummary.loanAmount = finalProductsSummary.loanAmount + product.calculating.finalLoanPrice
-          finalProductsSummary.interest = finalProductsSummary.interest + interestPrice;
-          finalProductsSummary.processingFee = finalProductsSummary.processingFee + processingFee
-          finalProductsSummary.serviceCharge = finalProductsSummary.serviceCharge + serviceCharge
-          finalProductsSummary.disbursalAmount = finalProductsSummary.disbursalAmount + disbursalPrice;
+          finalProductsSummary.loanAmount = chain(finalProductsSummary.loanAmount).add(product.calculating.finalLoanPrice).round().done()
+          finalProductsSummary.interest = chain(finalProductsSummary.interest).add(interestPrice).round().done()
+
+          finalProductsSummary.processingFee = chain(finalProductsSummary.processingFee).add(processingFee).round().done()
+          finalProductsSummary.serviceCharge = chain(finalProductsSummary.serviceCharge).add(serviceCharge).round().done()
+          finalProductsSummary.disbursalAmount = chain(finalProductsSummary.disbursalAmount).add(disbursalPrice).round().done()
 
           if(finalProductsSummary.repaymentDate) {
             const afterDueDate = dueDate.isAfter(finalProductsSummary.repaymentDate)

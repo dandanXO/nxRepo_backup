@@ -6,42 +6,32 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-
     "serve:min": "NODE_ENV=development pnpm nx serve:in mobile -c=development",
     "serve:mpk": "NODE_ENV=development pnpm nx serve:pk mobile -c=development",
     "serve:mbd": "NODE_ENV=development pnpm nx serve:bd mobile -c=development",
-
     "storybook:m-ui": "pnpm nx storybook mobile-shared-ui",
     "storybook:m": "pnpm nx storybook mobile",
-
     "build:min": "NODE_ENV=production pnpm nx run-many --target=build --projects=mobile  --configuration=production-in --verbose && rm -rf ./dist/apps/mobile/*.map ",
     "build:mpk": "NODE_ENV=production pnpm nx run-many --target=build --projects=mobile  --configuration=production-bk --verbose && rm -rf ./dist/apps/mobile/*.map ",
     "build:mbd": "NODE_ENV=production pnpm nx run-many --target=build --projects=mobile  --configuration=production-bd --verbose && rm -rf ./dist/apps/mobile/*.map ",
-
     "e2e:min": "NODE_ENV=development nx run mobile-e2e:e2e:dev-in",
     "e2e:mpk": "NODE_ENV=development nx run mobile-e2e:e2e:dev-pk",
     "e2e:mbd": "NODE_ENV=development nx run mobile-e2e:e2e:dev-bd",
-
     "e2e:min:w": "NODE_ENV=development nx run mobile-e2e:e2e:dev-in --watch",
     "e2e:mpk:w": "NODE_ENV=development nx run mobile-e2e:e2e:dev-pk --watch",
     "e2e:mbd:w": "NODE_ENV=development nx run mobile-e2e:e2e:dev-bd --watch",
-
     "e2e:min:w:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-in --watch --baseUrl=https://frontend.com",
     "e2e:mpk:w:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-pk --watch --baseUrl=https://frontend.com",
     "e2e:mbd:w:domain": "NODE_ENV=development nx run mobile-e2e:e2e:dev-bd --watch --baseUrl=https://frontend.com",
-
     "serve:ain": "NODE_ENV=development pnpm nx serve-in app -c=development",
     "serve:apk": "NODE_ENV=development pnpm nx serve-pk app -c=development",
     "serve:abd": "NODE_ENV=development pnpm nx serve-bd app -c=development",
-
     "build:ain": "NODE_ENV=production pnpm nx run-many --target=build --projects=app  --configuration=production-in --verbose && rm -rf ./dist/apps/app/*.map ",
     "build:apk": "NODE_ENV=production pnpm nx run-many --target=build --projects=app  --configuration=production-bk --verbose && rm -rf ./dist/apps/app/*.map ",
     "build:abd": "NODE_ENV=production pnpm nx run-many --target=build --projects=app  --configuration=production-bd --verbose && rm -rf ./dist/apps/app/*.map ",
-
     "e2e:ain": "NODE_ENV=development nx run app-e2e:e2e:dev-in",
     "e2e:apk": "NODE_ENV=development nx run app-e2e:e2e:dev-pk",
     "e2e:abd": "NODE_ENV=development nx run app-e2e:e2e:dev-bd",
-
     "e2e:ain:w": "NODE_ENV=development nx run app-e2e:e2e:dev-in --watch",
     "e2e:apk:w": "NODE_ENV=development nx run app-e2e:e2e:dev-pk --watch",
     "e2e:abd:w": "NODE_ENV=development nx run app-e2e:e2e:dev-bd --watch"
@@ -75,6 +65,7 @@
     "git-revision-webpack-plugin": "^5.0.0",
     "i18next": "^22.0.5",
     "js-cookie": "3.0.1",
+    "mathjs": "^11.8.0",
     "moment": "2.29.4",
     "moment-timezone": "^0.5.41",
     "next": "12.2.5",

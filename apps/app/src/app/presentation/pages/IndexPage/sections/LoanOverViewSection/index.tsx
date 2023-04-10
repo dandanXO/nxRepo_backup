@@ -69,6 +69,7 @@ export const LoanOverViewSection = (props: Props) => {
   useEffect(() => {
     if(props.state.indexAPI) {
       let percent = (props.state.indexAPI?.availableAmount / props.state.indexAPI?.totalAmount) * 100;
+
       // console.log("percent", percent);
       // NOTICE: availableAmount: 999000, totalAmount: 1000000, 算出來是 99.9，但畫面缺口基本上分辨不出來有缺口
       if(percent > 99) {
