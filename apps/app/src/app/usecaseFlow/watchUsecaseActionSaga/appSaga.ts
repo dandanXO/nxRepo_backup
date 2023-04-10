@@ -1,7 +1,7 @@
 import {takeLatest, put, all, fork} from "redux-saga/effects";
-import {userViewIndexPageSaga} from "../usecaseActionSaga/userUsecaseSaga/userViewIndexPageSaga";
-import {userApplyProductsSaga} from "../usecaseActionSaga/userUsecaseSaga/userApplyProductsSaga";
-import {userReacquireCreditSaga} from "../usecaseActionSaga/userUsecaseSaga/userReacquireCreditSaga";
+import {userViewIndexPageSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userViewIndexPageSaga";
+import {userApplyProductsSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userApplyProductsSaga";
+import {userReacquireCreditSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userReacquireCreditSaga";
 import {systemCountdownSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemCountdownSaga";
 import {systemRefreshableCountdownSata} from "../usecaseActionSaga/systemUsecaseSaga/systemRefreshableCountdownSata";
 import {UseCaseActions} from "../usecaseAction/useCaseActions";

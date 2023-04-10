@@ -9,7 +9,7 @@ import {
 import {environment} from "../../../../../environments/environment";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nProductDetailModal} from "./i18n/translations";
-import {GetLoanDetailRecommendProducts} from "../../../../services/rtk/old/getLoanDetail";
+import {GetLoanDetailRecommendProducts} from "../../../../api/rtk/old/getLoanDetail";
 import LoanBrand from "../../../components/LoanBrand";
 
 const ModalContentStyled = styled.div`

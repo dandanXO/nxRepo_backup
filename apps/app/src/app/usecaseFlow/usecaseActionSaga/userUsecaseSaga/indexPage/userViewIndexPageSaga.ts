@@ -1,14 +1,14 @@
 // NOTE: Action: UserApplyProduct
 import {call, put, select, fork, all} from "redux-saga/effects";
-import {Service} from "../../../services";
-import {indexPageSlice} from "../../reduxStore/indexPageSlice";
-import {USER_AUTH_STATE} from "../../../domain/USER_AUTH_STATE";
+import {Service} from "../../../../api";
+import {indexPageSlice} from "../../../reduxStore/indexPageSlice";
+import {USER_AUTH_STATE} from "../../../../domain/USER_AUTH_STATE";
 import moment from "moment-timezone";
-import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
-import {GetIndexResponse} from "../../../services/indexService/GetIndexResponse";
-import {GetUserInfoServiceResponse} from "../../../services/userService/GetUserInfoServiceResponse";
-import {catchSagaError} from "../../utils/catchSagaError";
-import {GetOpenIndexResponse} from "../../../services/indexService/GetOpenIndexResponse";
+import {SystemCaseActions} from "../../../usecaseAction/systemCaseActions";
+import {GetIndexResponse} from "../../../../api/indexService/GetIndexResponse";
+import {GetUserInfoServiceResponse} from "../../../../api/userService/GetUserInfoServiceResponse";
+import {catchSagaError} from "../../../utils/catchSagaError";
+import {GetOpenIndexResponse} from "../../../../api/indexService/GetOpenIndexResponse";
 
 
 export function* userViewIndexPageSaga(action: any) {

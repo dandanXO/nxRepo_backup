@@ -5,12 +5,12 @@ import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
 import {ORDER_STATE} from "../../domain/ORDER_STATE";
 import {RISK_CONTROL_STATE} from "../../domain/RISK_CONTROL_STATE";
 // import {getQuotaModelStatusActions} from "../usecaseSaga/userReacquireCreditSaga";
-import {getQuotaModelStatusAction} from "../usecaseActionSaga/userUsecaseSaga/userReacquireCreditSaga";
-import {PayableRecords} from "../../services/indexService/PayableRecords";
-import {GetIndexResponse} from "../../services/indexService/GetIndexResponse";
-import {GetQuotaModelStatusResponse} from "../../services/loanService/GetQuotaModelStatusResponse";
-import {GetUserInfoServiceResponse} from "../../services/userService/GetUserInfoServiceResponse";
-import {GetOpenIndexResponse} from "../../services/indexService/GetOpenIndexResponse";
+import {getQuotaModelStatusAction} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userReacquireCreditSaga";
+import {PayableRecords} from "../../api/indexService/PayableRecords";
+import {GetIndexResponse} from "../../api/indexService/GetIndexResponse";
+import {GetQuotaModelStatusResponse} from "../../api/loanService/GetQuotaModelStatusResponse";
+import {GetUserInfoServiceResponse} from "../../api/userService/GetUserInfoServiceResponse";
+import {GetOpenIndexResponse} from "../../api/indexService/GetOpenIndexResponse";
 
 
 interface InitialState {

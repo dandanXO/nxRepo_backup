@@ -3,10 +3,10 @@ import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 
 import { useCallback, useEffect, useState } from "react";
 import * as Sentry from "@sentry/react";
-import { CustomAxiosError } from "../../services/rtk/axiosBaseQuery";
-import { usePostRepayCreateMutation } from "../../services/rtk";
-import {PostRepayCreateRequest} from "../../services/loanService/PostRepayCreateRequest";
-import {PostRepayCreateResponse} from "../../services/loanService/PostRepayCreateResponse";
+import { CustomAxiosError } from "../../api/rtk/axiosBaseQuery";
+import { usePostRepayCreateMutation } from "../../api/rtk";
+import {PostRepayCreateRequest} from "../../api/loanService/PostRepayCreateRequest";
+import {PostRepayCreateResponse} from "../../api/loanService/PostRepayCreateResponse";
 
 const useRepayCreate = () => {
     const navigate = useNavigate();

@@ -8,7 +8,7 @@ import {IndexPageProps} from "../../../usecaseFlow/reduxStore";
 import {FinalProductsSummary, FinalProductType} from "../../pages/IndexPage";
 import {formatPrice} from "../../../modules/formatPrice";
 import Select, {IndicatorsContainerProps, components, DropdownIndicatorProps, IndicatorSeparatorProps, ControlProps } from 'react-select';
-import {BankAccount} from "../../../services/userService/BankAccount";
+import {BankAccount} from "../../../api/userService/BankAccount";
 
 type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];

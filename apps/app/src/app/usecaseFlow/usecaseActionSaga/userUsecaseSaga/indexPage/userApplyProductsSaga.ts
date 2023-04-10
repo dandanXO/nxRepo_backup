@@ -1,13 +1,13 @@
 // NOTE: Action: UserApplyProduct
-import {LoanServiceResponse} from "../../../services/loanService/service/postApplyLoanService";
+import {LoanServiceResponse} from "../../../../api/loanService/service/postApplyLoanService";
 import {call, put, select, take, race} from "redux-saga/effects";
-import {Service} from "../../../services";
-import {catchSagaError} from "../../utils/catchSagaError";
-import {InitialStateType, modalSlice} from "../../reduxStore/modalSlice";
+import {Service} from "../../../../api";
+import {catchSagaError} from "../../../utils/catchSagaError";
+import {InitialStateType, modalSlice} from "../../../reduxStore/modalSlice";
 import {PayloadAction} from "@reduxjs/toolkit";
-import {GetBankCardListResponse} from "../../../services/userService/GetBankCardListResponse";
-import {RootState} from "../../reduxStore";
-import {UseCaseActions, UserApplyProductActionPayload} from "../../usecaseAction/useCaseActions";
+import {GetBankCardListResponse} from "../../../../api/userService/GetBankCardListResponse";
+import {RootState} from "../../../reduxStore";
+import {UseCaseActions, UserApplyProductActionPayload} from "../../../usecaseAction/useCaseActions";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {

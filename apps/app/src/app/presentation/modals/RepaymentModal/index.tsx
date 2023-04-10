@@ -20,7 +20,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import { i18nRepaymentModal } from "./i18n/translations";
 import { environment } from "../../../../environments/environment";
 import { Link } from "react-router-dom";
-import { useLazyGetRepayTypesQuery } from "../../../services/rtk";
+import { useLazyGetRepayTypesQuery } from "../../../api/rtk";
 import useRepayCreate from "../../hooks/useRepayCreate";
 import useRepayTypes from "../../hooks/useRepayTypes";
 

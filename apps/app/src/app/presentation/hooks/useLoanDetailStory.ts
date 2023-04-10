@@ -3,15 +3,15 @@ import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
 
 import {useCallback, useEffect, useState} from "react";
 import * as Sentry from "@sentry/react";
-import {CustomAxiosError} from "../../services/rtk/axiosBaseQuery";
+import {CustomAxiosError} from "../../api/rtk/axiosBaseQuery";
 import {
   useGetLoanDetailQuery,
   useGetRepayTypesQuery,
   useLazyGetRepayTypesQuery,
   usePostRepayCreateMutation
 } from "../../../../../mobile/src/app/api";
-import {PostRepayCreateRequest} from "../../services/loanService/PostRepayCreateRequest";
-import {PostRepayCreateResponse} from "../../services/loanService/PostRepayCreateResponse";
+import {PostRepayCreateRequest} from "../../api/loanService/PostRepayCreateRequest";
+import {PostRepayCreateResponse} from "../../api/loanService/PostRepayCreateResponse";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();

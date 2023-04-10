@@ -1,8 +1,8 @@
 import {call, put} from "redux-saga/effects";
-import {Service} from "../../../services";
+import {Service} from "../../../api";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {appSlice} from "../../reduxStore/appSlice";
-import {GetInitServiceResponse} from "../../../services/appService/GetInitServiceResponse";
+import {GetInitServiceResponse} from "../../../api/appService/GetInitServiceResponse";
 import {catchSagaError} from "../../utils/catchSagaError";
 
 window["isInAndroid"] = ():boolean => typeof window["onUploadKycBackgroundData"] !== "undefined";

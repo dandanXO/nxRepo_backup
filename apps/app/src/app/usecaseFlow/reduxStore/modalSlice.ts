@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {BankAccount} from "../../services/userService/BankAccount";
+import {BankAccount} from "../../api/userService/BankAccount";
 
 export type InitialStateType = {
   authorizationModal: {

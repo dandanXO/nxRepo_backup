@@ -42,9 +42,9 @@ import {AuthorizationModal} from "../../modals/AuthorizationModal";
 import {modalSlice} from "../../../usecaseFlow/reduxStore/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
 import {UseCaseActions} from "../../../usecaseFlow/usecaseAction/useCaseActions";
-import {FeeRateKeyEnum} from "../../../services/indexService/FeeRateKeyEnum";
-import {PlatformProduct} from "../../../services/indexService/PlatformProduct";
-import {ProductApplyDetail} from "../../../services/loanService/ProductApplyDetail";
+import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
+import {PlatformProduct} from "../../../api/indexService/PlatformProduct";
+import {ProductApplyDetail} from "../../../api/loanService/ProductApplyDetail";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {

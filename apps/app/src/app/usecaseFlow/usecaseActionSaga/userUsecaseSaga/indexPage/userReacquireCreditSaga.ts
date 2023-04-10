@@ -1,16 +1,16 @@
 import {createAction, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import {call, put, delay, select, take} from "redux-saga/effects";
-import {Service} from "../../../services";
-import {indexPageSlice} from "../../reduxStore/indexPageSlice";
+import {Service} from "../../../../api";
+import {indexPageSlice} from "../../../reduxStore/indexPageSlice";
 import moment from "moment-timezone";
-import {RootState} from "../../reduxStore";
-import {modalSlice} from "../../reduxStore/modalSlice";
-import {UseCaseActions} from "../../usecaseAction/useCaseActions";
-import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
-import {GetIndexResponse} from "../../../services/indexService/GetIndexResponse";
-import {GetQuotaModelStatusRequest} from "../../../services/loanService/GetQuotaModelStatusRequest";
-import {GetQuotaModelStatusResponse} from "../../../services/loanService/GetQuotaModelStatusResponse";
-import {catchSagaError} from "../../utils/catchSagaError";
+import {RootState} from "../../../reduxStore";
+import {modalSlice} from "../../../reduxStore/modalSlice";
+import {UseCaseActions} from "../../../usecaseAction/useCaseActions";
+import {SystemCaseActions} from "../../../usecaseAction/systemCaseActions";
+import {GetIndexResponse} from "../../../../api/indexService/GetIndexResponse";
+import {GetQuotaModelStatusRequest} from "../../../../api/loanService/GetQuotaModelStatusRequest";
+import {GetQuotaModelStatusResponse} from "../../../../api/loanService/GetQuotaModelStatusResponse";
+import {catchSagaError} from "../../../utils/catchSagaError";
 
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import {Accordion, ListItem} from "@frontend/mobile/shared/ui";
 import Card from "../Card";
-import {GetLoanDetailChargeFeeDetail, GetLoanDetailResponse} from "../../../services/rtk/old/getLoanDetail";
+import {GetLoanDetailChargeFeeDetail, GetLoanDetailResponse} from "../../../api/rtk/old/getLoanDetail";
 import {environment} from "../../../../environments/environment";
 
 const LoanDetailStyled = styled.div`

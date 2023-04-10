@@ -1,7 +1,7 @@
 import axios, {AxiosError} from "axios";
 import {put} from "redux-saga/effects";
 import {APIBoundaryModuleSlice} from "../reduxStore/apiBoundaryModuleSlice";
-import {alertModal} from "../../services/base/alertModal";
+import {alertModal} from "../../api/base/alertModal";
 
 export function* catchSagaError(error: any) {
   // console.log("catchSagaError.error", error);

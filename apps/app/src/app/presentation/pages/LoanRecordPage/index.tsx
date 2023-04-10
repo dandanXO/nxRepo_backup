@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import PaymentItem from "./PaymentItem";
-import { useLazyGetLoanRecordListQuery } from "../../../services/rtk";
+import { useLazyGetLoanRecordListQuery } from "../../../api/rtk";
 import Tag from "../../components/Tag";
 import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router-dom";
 // @ts-ignore
 import { default as data } from './data.json';
 import {Page} from "../../components/layouts/Page";
-import {GetLoanRecordListRequest} from "../../../services/loanService/GetLoanRecordListRequest";
+import {GetLoanRecordListRequest} from "../../../api/loanService/GetLoanRecordListRequest";
 
 
 export const LoanRecordPage = () => {

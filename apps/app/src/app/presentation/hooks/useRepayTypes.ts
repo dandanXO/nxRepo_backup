@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 import { useCallback, useEffect, useState } from "react";
-import { useLazyGetRepayTypesQuery } from "../../services/rtk";
+import { useLazyGetRepayTypesQuery } from "../../api/rtk";
 
 type paymentMethodValueType = {
     type: string;
