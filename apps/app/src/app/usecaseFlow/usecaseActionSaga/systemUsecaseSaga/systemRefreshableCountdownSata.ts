@@ -2,21 +2,26 @@ import moment from "moment-timezone";
 import {put, select, delay} from "redux-saga/effects";
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {UseCaseActions} from "../../usecaseAction/useCaseActions";
+import {catchSagaError} from "../../utils/catchSagaError";
 
 export function *systemRefreshableCountdownSata(action: any) {
-  console.log("systemRefreshableCountdownSata.action", action);
+  try {
+    console.log("systemRefreshableCountdownSata.action", action);
 
-  let countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
-  while(countdown.end === false) {
-    yield delay(1000)
-    countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
-    // console.log("countdown", countdown.time);
-    yield put(indexPageSlice.actions.updateRefreshableCountdown(countdown.time));
+    let countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
+    while(countdown.end === false) {
+      yield delay(1000)
+      countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
+      // console.log("countdown", countdown.time);
+      yield put(indexPageSlice.actions.updateRefreshableCountdown(countdown.time));
+    }
+    // NOTICE: finished countdown
+    yield put(indexPageSlice.actions.expiredRefreshableCountdown({}));
+    // NOTE: 不主動問後端資訊
+    // yield put(UseCaseActions.UserViewIndexPageAction());
+  } catch (error) {
+    yield catchSagaError(error);
   }
-  // NOTICE: finished countdown
-  yield put(indexPageSlice.actions.expiredRefreshableCountdown({}));
-  // NOTE: 不主動問後端資訊
-  // yield put(UseCaseActions.UserViewIndexPageAction());
 }
 
 // NOTICE: 顯示倒數字串

@@ -7,7 +7,6 @@ export const getToken = (): string => {
     ? (parsedQueryString["token"] as string)
     : "";
   if (!TOKEN) {
-    // console.log("error");
     alertModal("TOKEN is missing")
   }
   return TOKEN;

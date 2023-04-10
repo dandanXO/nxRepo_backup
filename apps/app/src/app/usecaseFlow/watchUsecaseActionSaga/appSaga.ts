@@ -8,20 +8,26 @@ import {UseCaseActions} from "../usecaseAction/useCaseActions";
 import {SystemCaseActions} from "../usecaseAction/systemCaseActions";
 import {systemInitSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemInitSaga";
 
+// NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* AppSaga() {
-  // yield all([
+  try {
+    // yield all([
     // userViewIndexPageSaga,
     // systemInitSaga
-  // ])
-  // NOTE: 單獨這行會 stay this line
-  // yield systemInitSaga(null);
+    // ])
+    // NOTE: 單獨這行會 stay this line
+    // yield systemInitSaga(null);
 
-  yield takeLatest(SystemCaseActions.InitSaga.type, systemInitSaga);
-  yield takeLatest(UseCaseActions.UserViewIndexPageAction.type, userViewIndexPageSaga);
-  yield takeLatest(UseCaseActions.UserApplyProductAction.type, userApplyProductsSaga)
-  yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCreditSaga)
-  yield takeLatest(SystemCaseActions.SystemCountdownSaga.type, systemCountdownSaga)
-  yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSata.type, systemRefreshableCountdownSata);
+    yield takeLatest(SystemCaseActions.InitSaga.type, systemInitSaga);
+    yield takeLatest(UseCaseActions.UserViewIndexPageAction.type, userViewIndexPageSaga);
+    yield takeLatest(UseCaseActions.UserApplyProductAction.type, userApplyProductsSaga)
+    yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCreditSaga)
+    yield takeLatest(SystemCaseActions.SystemCountdownSaga.type, systemCountdownSaga)
+    yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSata.type, systemRefreshableCountdownSata);
 
-  yield put(SystemCaseActions.InitSaga());
+    yield put(SystemCaseActions.InitSaga());
+  } catch (error) {
+    // yield catchSagaError(error);
+    console.log("error", error);
+  }
 }

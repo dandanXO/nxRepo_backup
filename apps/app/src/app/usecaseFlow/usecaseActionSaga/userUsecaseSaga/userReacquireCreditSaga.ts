@@ -10,6 +10,7 @@ import {SystemCaseActions} from "../../usecaseAction/systemCaseActions";
 import {GetIndexResponse} from "../../../services/indexService/getIndexResponse";
 import {GetQuotaModelStatusRequest} from "../../../services/loanService/getQuotaModelStatusRequest";
 import {GetQuotaModelStatusResponse} from "../../../services/loanService/getQuotaModelStatusResponse";
+import {catchSagaError} from "../../utils/catchSagaError";
 
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);
@@ -103,6 +104,8 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
   } catch (error) {
     yield put(getQuotaModelStatusAction.failureAction())
     // yield put(getQuotaModelStatusActions.rejected);
+    yield catchSagaError(error);
   }
+
 
 }
