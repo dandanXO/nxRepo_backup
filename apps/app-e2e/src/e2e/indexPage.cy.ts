@@ -66,7 +66,7 @@ describe('IndexPage', () => {
       "indexH5Url":null,
       "couponH5Url":null
     }
-    cy.intercept("/api/v2/init?packageId**", )
+    cy.intercept("/api/v2/init?packageId**", initResponse)
   })
 
   afterEach(() => {
