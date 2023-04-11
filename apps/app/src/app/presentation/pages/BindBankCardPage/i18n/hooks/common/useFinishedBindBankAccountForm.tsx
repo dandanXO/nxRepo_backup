@@ -5,6 +5,7 @@ import {i18nBankBindAccountPage} from "../../translations";
 import * as Sentry from "@sentry/react";
 import {GetBindCardDropListResponse} from "../../../../../../api/rtk/old/GetBindCardDropList";
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
+import {AppFlag} from "../../../../../../app";
 
 type IUseFinishedBindBankAccountPage =  {
   // NOTICE: Common
@@ -90,7 +91,9 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         const error = new Error();
         error.name = requestName
         if(err) error.message = JSON.stringify(err)
-        Sentry.captureException(error);
+        if(AppFlag.enableSentry) {
+          Sentry.captureException(error);
+        }
       })
 
 

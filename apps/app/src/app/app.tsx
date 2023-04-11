@@ -7,6 +7,10 @@ import {AppRouter} from "./presentation/router";
 import {Provider} from "react-redux";
 import { appStore } from "./usecaseFlow/reduxStore";
 
+export const AppFlag = {
+  enableSentry: false,
+}
+
 // NOTICE: REFACTOR ME , 目前Modal.alert 只能從全局取得
 window.theme = getThemeConfig(environment.country);
 

@@ -1,7 +1,8 @@
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
-import {environment} from "./environments/environment";
-import {AppFlag} from "./app/App";
+import {environment} from "../../../environments/environment";
+import {AppFlag} from "../../app";
+
 
 export const isLocalhost = () => window.location.hostname === "localhost";
 

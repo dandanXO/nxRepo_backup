@@ -1,13 +1,14 @@
-import {ChargeFeeDetail} from "./ChargeFeeDetail";
+
 import {ApproveRecord} from "./ApproveRecord";
 import {RepayRecord} from "./RepayRecord";
+import {GetLoanDetailChargeFeeDetail} from "../rtk/old/getLoanDetail";
 
 export interface GetLoanRecord {
   applyDate?: string;                   // 申請日期
   approveRecords?: ApproveRecord[];     // 審核紀錄
   balance?: number;                     // 待還金額(status = UNPAID, OVERDUE才會有)
   bankCardNo?: string;                  // 銀行卡號
-  chargeFeeDetail?: ChargeFeeDetail;
+  chargeFeeDetail?: GetLoanDetailChargeFeeDetail;
   customerServiceEmail?: string;        // 客服Email
   customerServiceTime?: string;         // 客服服務時間
   dailyFee?: number;                    // 日息金額

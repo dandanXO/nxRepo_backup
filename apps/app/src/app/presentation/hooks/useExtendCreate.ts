@@ -6,6 +6,7 @@ import { CustomAxiosError } from "../../api/rtk/axiosBaseQuery";
 import { usePostRepayCreateMutation } from "../../api/rtk";
 import {PostRepayCreateRequest} from "../../api/loanService/PostRepayCreateRequest";
 import {PostRepayCreateResponse} from "../../api/loanService/PostRepayCreateResponse";
+import {AppFlag} from "../../app";
 
 const useExtendCreate = () => {
     const navigate = useNavigate();
@@ -31,7 +32,10 @@ const useExtendCreate = () => {
                 const error = new Error();
                 error.name = "postRepayCreate"
                 if (err) error.message = JSON.stringify(err)
-                Sentry.captureException(error);
+                if(AppFlag.enableSentry) {
+                  Sentry.captureException(error);
+                }
+
                 reject(err);
             })
 

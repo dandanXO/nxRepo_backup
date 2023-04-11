@@ -42,7 +42,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     // NOTICE: 根據是否擁有裝置權限，來開啟 AuthorizationModal
     // const hasAuthorization =  window.IndexTask.hasAuthorizationToUploadKyc();
 
-   
+
     // const hasAuthorization =  false;
     // if(!hasAuthorization) {
     //   // NOTE: Show Modal
@@ -69,7 +69,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     window["IndexTask"] &&
     window["IndexTask"]["uploadKycBackgroundData"] &&
     window["IndexTask"]["uploadKycBackgroundData"]();
-    
+
     const onUploadKycBackgroundData: boolean = yield select((state: RootState) => state.model.reacquireCreditAmountIsUploaded);
     if(!onUploadKycBackgroundData) return;
 

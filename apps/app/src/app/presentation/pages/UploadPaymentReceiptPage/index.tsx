@@ -17,6 +17,7 @@ import { PakistanCountry } from "../../../domain/country/constants/PakistanCount
 import { CustomAxiosError } from "../../../api/rtk/axiosBaseQuery";
 import { usePostRepayReceiptMutation } from "../../../api/rtk";
 import {PostRepayReceiptResponse} from "../../../api/rtk/old/PostRepayReceiptResponse";
+import {AppFlag} from "../../../app";
 export interface PostRepayReceiptRequestProps {
     formFile: any;
     orderNo: string;
@@ -54,7 +55,9 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
                     const error = new Error();
                     error.name = "postRepayReceipt"
                     if (err) error.message = JSON.stringify(err)
-                    Sentry.captureException(error);
+                    if(AppFlag.enableSentry) {
+                      Sentry.captureException(error);
+                    }
                 })
                 .finally(() => {
                     props.setIsUploading(false);

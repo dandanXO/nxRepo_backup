@@ -5,6 +5,7 @@ import Card from "../Card";
 import {GetLoanDetailChargeFeeDetail, GetLoanDetailResponse} from "../../../api/rtk/old/getLoanDetail";
 import {environment} from "../../../../environments/environment";
 
+
 const LoanDetailStyled = styled.div`
     text-align: center;
     .textTitle {
@@ -37,7 +38,7 @@ const renderDetailContent = (props?: GetLoanDetailChargeFeeDetail) => {
     const { items = [] } = props || {};
     return (
         <div className={"detailsContent"}>
-            {items.map((item) => {
+            {items.map((item: any) => {
                 const fieldType = item.fieldType === "CURRENCY" ? ` ${environment.currency} ` : "";
                 return (
                     <ListItem

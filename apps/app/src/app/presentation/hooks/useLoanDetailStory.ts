@@ -4,14 +4,15 @@ import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
 import {useCallback, useEffect, useState} from "react";
 import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../api/rtk/axiosBaseQuery";
+import {PostRepayCreateRequest} from "../../api/loanService/PostRepayCreateRequest";
+import {PostRepayCreateResponse} from "../../api/loanService/PostRepayCreateResponse";
+import {AppFlag} from "../../app";
 import {
   useGetLoanDetailQuery,
   useGetRepayTypesQuery,
   useLazyGetRepayTypesQuery,
   usePostRepayCreateMutation
-} from "../../../../../mobile/src/app/api";
-import {PostRepayCreateRequest} from "../../api/loanService/PostRepayCreateRequest";
-import {PostRepayCreateResponse} from "../../api/loanService/PostRepayCreateResponse";
+} from "../../api/rtk";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const useLoanDetailStory = () => {
       isLoading: isGetLoanDetailQueryLoading,
       isFetching: isGetLoanDetailQueryFetching
     } = useGetLoanDetailQuery({
-        orderNo: pageQueryString.orderNo,
+        orderNo: pageQueryString.orderNo || "",
     });
 
     // NOTE: useGetRepayTypesQuery
@@ -54,7 +55,7 @@ const useLoanDetailStory = () => {
 
     useEffect(() => {
       if(!repayTypes) return;
-      const methods = repayTypes.map(item => {
+      const methods = repayTypes.map((item: any) => {
         return item.payTypeAlias ? item.payTypeAlias :"";
       })
       setPaymentMethodList(methods);
@@ -78,7 +79,9 @@ const useLoanDetailStory = () => {
           const error = new Error();
           error.name = "postRepayCreate"
           if(err) error.message = JSON.stringify(err)
-          Sentry.captureException(error);
+          if(AppFlag.enableSentry) {
+            Sentry.captureException(error);
+          }
           reject(err);
         })
 

@@ -11,10 +11,11 @@ import LoanBrand from "../../../components/LoanBrand";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nExtensionDetailModal} from "./i18n/translations";
 import i18next from "i18next";
-import { GetLoanDetailResponse } from "apps/mobile/src/app/api/getLoanDetail";
 import { environment } from "apps/app/src/environments/environment";
-import {useGetLoanDetailQuery} from "../../../../../../../mobile/src/app/api";
+
 import recordStatusStyleProps from "../../../../modules/recordStatusColorMapper";
+import {GetLoanDetailResponse} from "../../../../api/rtk/old/getLoanDetail";
+import {useGetLoanDetailQuery} from "../../../../api/rtk"
 
 const ExtesionDetailStyled = styled.div`
     text-align: center;
@@ -204,7 +205,7 @@ type ExtensionDetailModalProps = GetLoanDetailResponse & {
 const ExtensionDetailModal = (props: ExtensionDetailModalProps) => {
     const { setShowExtensionModal, parentOrderNo } = props;
     const { currentData, isLoading, isFetching } = useGetLoanDetailQuery({
-        orderNo: parentOrderNo,
+        orderNo: parentOrderNo || "",
     });
 
     return (
@@ -212,15 +213,13 @@ const ExtensionDetailModal = (props: ExtensionDetailModalProps) => {
             <Overlay
                 show={true}
                 title={props.t("Notice") as string}
-                content={(hide: () => void) =>
-                    renderExtesionDetail({
-                      ...currentData,
-                      setShowExtensionModal,
-                      t: props.t,
-                      i18n: i18next,
-                      tReady: false,
-                    })
-                }
+                content={(hide: () => void) => renderExtesionDetail({
+                  ...currentData,
+                  setShowExtensionModal,
+                  t: props.t,
+                  i18n: i18next,
+                  tReady: false,
+                })}
                 enableTitleHorizontal={true}
                 enableClose={true}
                 onCancel={() => setShowExtensionModal(false)}
@@ -230,3 +229,4 @@ const ExtensionDetailModal = (props: ExtensionDetailModalProps) => {
 };
 
 export default withTranslation(i18nExtensionDetailModal.namespace)(ExtensionDetailModal);
+

@@ -1,10 +1,9 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosError, AxiosRequestConfig } from "axios";
-// import { Modal } from "@frontend/mobile/shared/ui";
-// import * as Sentry from "@sentry/react";
 import {alertModal} from "../base/alertModal";
 import {runAxios} from "../base/runAxios";
-
+import {AppFlag} from "../../app";
+import * as Sentry from "@sentry/react";
 
 export interface CustomAxiosError {
   status: any;
@@ -61,7 +60,9 @@ const axiosBaseQuery =
               },
               customError
             })
-            // Sentry.captureException(error);
+            if(AppFlag.enableSentry) {
+              Sentry.captureException(error);
+            }
             // console.info(error);
             // throw axiosError;
             // alertModal(err.message);

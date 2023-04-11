@@ -146,7 +146,8 @@ export const API = createApi({
 });
 
 export const {
-    useLazyGetIndexQuery,
+    useGetLoanDetailQuery,
+    useGetRepayTypesQuery,
     useLazyGetBankCardListQuery,
     useLazyGetLoanRecordListQuery,
     useLazyGetLoanDetailQuery,

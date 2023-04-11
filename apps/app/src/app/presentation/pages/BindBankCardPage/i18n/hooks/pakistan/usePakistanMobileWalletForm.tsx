@@ -8,6 +8,7 @@ import * as Sentry from "@sentry/react";
 import {processWalletDisplayName} from "./customization/processWalletDisplayName";
 import {GetBindCardDropListResponse, WalletVendor} from "../../../../../../api/rtk/old/GetBindCardDropList";
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
+import {AppFlag} from "../../../../../../app";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -116,7 +117,9 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         const error = new Error();
         error.name = "triggerPostBankBindSaveToPKMutation"
         if(err) error.message = JSON.stringify(err)
-        Sentry.captureException(error);
+        if(AppFlag.enableSentry) {
+          Sentry.captureException(error);
+        }
       })
   },[
     mobileData.isValidation,

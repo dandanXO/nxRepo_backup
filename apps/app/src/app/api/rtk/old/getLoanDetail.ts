@@ -64,7 +64,13 @@ export interface GetLoanDetailResponse {
      * @description 狀態
      * @enum {string}
      */
-    status?: "EXTEND" | "OVERDUE" | "PAY_OFF" | "PROCESSING" | "UNPAID";
+    status?:
+      "EXTEND"
+      | "OVERDUE"
+      | "PAY_OFF"
+      | "PROCESSING"
+      | "REJECTED"
+      | "UNPAID";
     /** @description 訂單總應還金额 */
     totalDueAmount?: number;
 }

@@ -6,6 +6,7 @@ import {z} from "zod";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
+import {AppFlag} from "../../../../../../app";
 
 interface IUseBangladeshMobileWalletForm {
   triggerPostBankBindSaveToBangladeshMutation: any;
@@ -152,7 +153,9 @@ export const useBangladeshMobileWalletForm = (props: IUseBangladeshMobileWalletF
         const error = new Error();
         error.name = "triggerPostBankBindSaveToBangladeshMutation"
         if(err) error.message = JSON.stringify(err)
-        Sentry.captureException(error);
+        if(AppFlag.enableSentry) {
+          Sentry.captureException(error);
+        }
       })
       .finally(() => {
         setIsFormPending(false);

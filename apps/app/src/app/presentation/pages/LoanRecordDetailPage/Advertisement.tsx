@@ -11,9 +11,11 @@ import * as Sentry from "@sentry/react";
 import {PostLoanSubmitOrderRequestBody} from "../../../api/rtk/old/PostLoanSubmitOrderRequestBody";
 import {CustomAxiosError} from "../../../api/rtk/axiosBaseQuery";
 
-import ProductDetailModal from "../../../../../../mobile/src/app/components/modals/ProductDetailModal";
-import SubmitOrderModal from "../../../../../../mobile/src/app/components/modals/SubmitOrderModal";
-import SubmitOrderSuccessModal from "../../../../../../mobile/src/app/components/modals/SubmitOrderSuccessModal";
+
+import {AppFlag} from "../../../app";
+import ProductDetailModal from "../../modals/old/ProductDetailModal";
+import SubmitOrderModal from "../../modals/old/SubmitOrderModal";
+import SubmitOrderSuccessModal from "../../modals/old/SubmitOrderSuccessModal";
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;
@@ -53,7 +55,9 @@ const Advertisement = (props: AdvertisementProps) => {
             const error = new Error();
             error.name = "postLoanSubmitOrder"
             if(err) error.message = JSON.stringify(err)
-            Sentry.captureException(error);
+            if(AppFlag.enableSentry) {
+              Sentry.captureException(error);
+            }
             setShowSubmitOrdereModal(false);
             reject("error")
           })

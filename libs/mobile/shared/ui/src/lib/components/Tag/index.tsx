@@ -30,7 +30,7 @@ const tagStatusProps: {
   },
 };
 interface tagPropsStyle {
-  status: 'EXTEND' | 'OVERDUE' | 'PAY_OFF' | 'PROCESSING' | 'UNPAID';
+  status: 'EXTEND' | 'OVERDUE' | 'PAY_OFF' | 'PROCESSING' | 'UNPAID' | 'REJECT' | 'REJECTED';
 }
 export default styled.div<tagPropsStyle>`
   padding: 2px 12px;
