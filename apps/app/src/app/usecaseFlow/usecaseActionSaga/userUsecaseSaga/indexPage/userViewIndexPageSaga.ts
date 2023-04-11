@@ -28,7 +28,7 @@ export function* userViewIndexPageSaga(action: any) {
         // NOTICE: 不能重刷，需等待重刷時間
         // console.log("不能重刷，需等待重刷時間")
         // const expireTime = moment(indexResponse.refreshableUntil);
-        yield put(SystemCaseActions.SystemRefreshableCountdownSata(indexResponse.refreshableUntil))
+        yield put(SystemCaseActions.SystemRefreshableCountdownSaga(indexResponse.refreshableUntil))
 
       } else {
         // NOTICE: 可以重刷

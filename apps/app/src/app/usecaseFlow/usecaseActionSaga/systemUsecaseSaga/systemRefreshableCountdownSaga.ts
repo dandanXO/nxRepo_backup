@@ -4,9 +4,9 @@ import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {UseCaseActions} from "../../usecaseAction/useCaseActions";
 import {catchSagaError} from "../../utils/catchSagaError";
 
-export function *systemRefreshableCountdownSata(action: any) {
+export function *systemRefreshableCountdownSaga(action: any) {
   try {
-    console.log("systemRefreshableCountdownSata.action", action);
+    console.log("systemRefreshableCountdownSaga.action", action);
 
     let countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
     while(countdown.end === false) {

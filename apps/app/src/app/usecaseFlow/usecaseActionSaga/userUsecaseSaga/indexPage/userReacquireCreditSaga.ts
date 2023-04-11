@@ -12,6 +12,8 @@ import {GetQuotaModelStatusRequest} from "../../../../api/loanService/GetQuotaMo
 import {GetQuotaModelStatusResponse} from "../../../../api/loanService/GetQuotaModelStatusResponse";
 import {catchSagaError} from "../../../utils/catchSagaError";
 
+
+
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);
   const successAction = createAction(`${type}/success`);
@@ -33,7 +35,7 @@ export const getQuotaModelStatusAction = createRequestAction("GGetQuotaModelStat
 // )
 
 window.onUploadKycBackgroundData = (uploaded: boolean) => {
-    appStore.dispatch(modalSlice.actions.updateReacquireCreditAmountIsUploaded(uploaded));
+    appStore.dispatch(SystemCaseActions.SystemReacquireCreditAmountUploadedSaga(uploaded));
 }
 
 export function* userReacquireCreditSaga(action: PayloadAction<null>) {
@@ -70,8 +72,8 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     window["IndexTask"]["uploadKycBackgroundData"] &&
     window["IndexTask"]["uploadKycBackgroundData"]();
 
-    const onUploadKycBackgroundData: boolean = yield select((state: RootState) => state.model.reacquireCreditAmountIsUploaded);
-    if(!onUploadKycBackgroundData) return;
+    const { payload: onUploadKycBackgroundData } = yield take(SystemCaseActions.SystemReacquireCreditAmountUploadedSaga);
+    if (!onUploadKycBackgroundData) return;
 
 
     yield put(getQuotaModelStatusAction.loadingAction())

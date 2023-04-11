@@ -153,7 +153,7 @@ describe('IndexPage', () => {
 
 
       "refreshable": false,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
 
 
       "riskReject": false,
@@ -297,7 +297,7 @@ describe('IndexPage', () => {
   //   //
   // })
 
-  it.only("status: 用戶已認證、有3天即將到期的訂單", () => {
+  it("status: 用戶已認證、有3天即將到期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -374,7 +374,7 @@ describe('IndexPage', () => {
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
@@ -439,9 +439,9 @@ describe('IndexPage', () => {
     const indexServiceResponse: IndexServiceResponse = {
       // NOTICE: 是否直接表明要不顯示按鈕? 但還有商品沒有選擇的條件
       "refreshable": false,
-      // NOTICE: 當 refreshable true, 但是 refreshOverRetry true 一樣不能重刷?
-      "refreshOverRetry": false,
-      // NOTICE: 情境1: 當 refreshable true, refreshOverRetry false 顯示能夠重刷的倒數計時。
+      // NOTICE: 當 refreshable true, 但是 noQuotaByRetryFewTimes true 一樣不能重刷?
+      "noQuotaByRetryFewTimes": false,
+      // NOTICE: 情境1: 當 refreshable true, noQuotaByRetryFewTimes false 顯示能夠重刷的倒數計時。
       // NOTICE: 情境2:  riskReject 為 true, 也是看下面的參數
       "riskReject": true,
       "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(50, "seconds"),
@@ -622,7 +622,7 @@ describe('IndexPage', () => {
       "needRiskKycUpdate": false,
       "riskReject": true,
       "refreshable": true,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
@@ -663,7 +663,7 @@ describe('IndexPage', () => {
 
   // NOTICE: 風控相關
   // NOTICE: 沒有應還訂單
-  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+  it.only("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -741,7 +741,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
@@ -813,7 +813,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("1", "days"),
@@ -986,7 +986,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": true,
+      "noQuotaByRetryFewTimes": true,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
@@ -1113,7 +1113,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
@@ -1177,10 +1177,6 @@ describe('IndexPage', () => {
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
 
-      // NOTICE: 刷新超過N次都没有额度
-      "noQuotaByRetryFewTimes": true,
-
-
       // NOTICE: 風控額度直接不足，無法執行重刷
       "noQuotaBalance": true,
       // NOTE: 下面如果給 false 就會出現 Loan View 了，後端不能給耶....
@@ -1190,7 +1186,7 @@ describe('IndexPage', () => {
       // "refreshable": false,
       // "refreshable": true,
 
-      "refreshOverRetry": true,
+      "noQuotaByRetryFewTimes": true,
       // "refreshableUntil": "2023-03-28T08:10:24",
       "refreshableUntil": null,
 
@@ -1333,10 +1329,8 @@ describe('IndexPage', () => {
       // NOTICE: 風控是否可重整
       "refreshable": true,
       // NOTICE: 風控是否已無法重整
-      "refreshOverRetry": false,
-
-      // NOTICE: 刷新超過N次都没有额度
       "noQuotaByRetryFewTimes": false,
+
 
 
       // NOTICE: 實際可用金額
@@ -1470,11 +1464,7 @@ describe('IndexPage', () => {
       // NOTICE: 風控是否可重整
       "refreshable": true,
       // NOTICE: 風控是否已無法重整
-      "refreshOverRetry": false,
-
-      // NOTICE: 刷新超過N次都没有额度
       "noQuotaByRetryFewTimes": false,
-
 
       // NOTICE: 實際可用金額
       "availableAmount": 0,
@@ -1568,7 +1558,7 @@ describe('IndexPage', () => {
     //   // NOTICE: 刷新超過N次都没有额度
     //   "noQuotaByRetryFewTimes": false,
     //   // NOTICE: 風控是否已無法重整
-    //   "refreshOverRetry": false,
+    //   "noQuotaByRetryFewTimes": false,
     //
     //
     //   // NOTICE: 實際可用金額
@@ -1675,14 +1665,10 @@ describe('IndexPage', () => {
       "refreshable": true,
 
       // NOTICE: 風控是否已無法重整 (refreshable 這時候 true | false 沒有意義)
-      "refreshOverRetry": true,
-
-      // NOTICE: 額度下次可刷新時間(refreshOverRetry 為 true，這時候就不會有時間)
-      "refreshableUntil": null,
-
-      // NOTICE: 刷新超過N次都没有额度
       "noQuotaByRetryFewTimes": true,
 
+      // NOTICE: 額度下次可刷新時間(noQuotaByRetryFewTimes 為 true，這時候就不會有時間)
+      "refreshableUntil": null,
 
       // NOTICE: 風控有無過期
       // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
@@ -1997,7 +1983,7 @@ describe('IndexPage', () => {
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
@@ -2116,7 +2102,7 @@ describe('IndexPage', () => {
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": false,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
@@ -2227,7 +2213,7 @@ describe('IndexPage', () => {
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": false,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
@@ -2433,7 +2419,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(10, "seconds"),
@@ -2507,7 +2493,7 @@ describe('IndexPage', () => {
         // NOTICE: 優先權最高
         "riskReject": false,
         "refreshable": true,
-        "refreshOverRetry": false,
+        "noQuotaByRetryFewTimes": false,
         "orderUnderReview": false,
         "refreshableUntil": "2023-03-28T08:10:24",
         // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("1", "days"),
@@ -2664,7 +2650,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": false,
+      "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(10, "seconds"),
@@ -2738,7 +2724,7 @@ describe('IndexPage', () => {
         // NOTICE: 優先權最高
         "riskReject": false,
         "refreshable": true,
-        "refreshOverRetry": false,
+        "noQuotaByRetryFewTimes": false,
         "orderUnderReview": false,
         "refreshableUntil": "2023-03-28T08:10:24",
         // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("1", "days"),

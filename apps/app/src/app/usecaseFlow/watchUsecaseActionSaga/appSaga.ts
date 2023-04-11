@@ -3,7 +3,7 @@ import {userViewIndexPageSaga} from "../usecaseActionSaga/userUsecaseSaga/indexP
 import {userApplyProductsSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userApplyProductsSaga";
 import {userReacquireCreditSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userReacquireCreditSaga";
 import {systemCountdownSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemCountdownSaga";
-import {systemRefreshableCountdownSata} from "../usecaseActionSaga/systemUsecaseSaga/systemRefreshableCountdownSata";
+import {systemRefreshableCountdownSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemRefreshableCountdownSaga";
 import {UseCaseActions} from "../usecaseAction/useCaseActions";
 import {SystemCaseActions} from "../usecaseAction/systemCaseActions";
 import {systemInitSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemInitSaga";
@@ -24,7 +24,7 @@ export function* AppSaga() {
     yield takeLatest(UseCaseActions.UserApplyProductAction.type, userApplyProductsSaga)
     yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCreditSaga)
     yield takeLatest(SystemCaseActions.SystemCountdownSaga.type, systemCountdownSaga)
-    yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSata.type, systemRefreshableCountdownSata);
+    yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSaga.type, systemRefreshableCountdownSaga);
 
     // NOTICE: flow
     yield put(SystemCaseActions.InitSaga());

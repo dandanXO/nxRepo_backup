@@ -18,7 +18,6 @@ export type InitialStateType = {
   QRSuccessModal: {
     show: boolean;
   },
-  reacquireCreditAmountIsUploaded: boolean;
 }
 
 const initialState: InitialStateType = {
@@ -38,7 +37,6 @@ const initialState: InitialStateType = {
   QRSuccessModal: {
     show: false,
   },
-  reacquireCreditAmountIsUploaded: false
 }
 
 export const modalSlice = createSlice({
@@ -73,9 +71,6 @@ export const modalSlice = createSlice({
     },
     updateQRSuccessModal: (state, action: PayloadAction<InitialStateType["QRSuccessModal"]>) => {
       state.QRSuccessModal.show = action.payload.show;
-    },
-    updateReacquireCreditAmountIsUploaded:(state, action: PayloadAction<InitialStateType["reacquireCreditAmountIsUploaded"]>) => {
-        state.reacquireCreditAmountIsUploaded= action.payload;
     },
   }
 })
