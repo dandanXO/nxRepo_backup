@@ -35,7 +35,7 @@ export const getQuotaModelStatusAction = createRequestAction("GGetQuotaModelStat
 // )
 
 window.onUploadKycBackgroundData = (uploaded: boolean) => {
-    appStore.dispatch(SystemCaseActions.SystemReacquireCreditAmountUploadedSaga(uploaded));
+    appStore.dispatch(SystemCaseActions.SystemKycBackgroundDataUploadedSaga(uploaded));
 }
 
 export function* userReacquireCreditSaga(action: PayloadAction<null>) {
@@ -72,7 +72,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     window["IndexTask"]["uploadKycBackgroundData"] &&
     window["IndexTask"]["uploadKycBackgroundData"]();
 
-    const { payload: onUploadKycBackgroundData } = yield take(SystemCaseActions.SystemReacquireCreditAmountUploadedSaga);
+    const { payload: onUploadKycBackgroundData } = yield take(SystemCaseActions.SystemKycBackgroundDataUploadedSaga);
     if (!onUploadKycBackgroundData) return;
 
 
