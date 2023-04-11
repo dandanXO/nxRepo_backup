@@ -14,6 +14,7 @@ import {PakistanUploadPaymentReceiptPage} from "./i18n/components/PakistanUpload
 import {renderByCountry} from "../../../i18n";
 import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../../api/base/axiosBaseQuery";
+import {AppFlag} from "../../../App";
 
 export interface PostRepayReceiptRequestProps {
     formFile: any;
@@ -50,7 +51,9 @@ const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
                   const error = new Error();
                   error.name = "postRepayReceipt"
                   if(err) error.message = JSON.stringify(err)
-                  Sentry.captureException(error);
+                  if(AppFlag.enableSentry) {
+                    Sentry.captureException(error);
+                  }
                 })
                 .finally(() => {
                     props.setIsUploading(false);

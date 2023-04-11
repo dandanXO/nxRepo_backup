@@ -5,6 +5,7 @@ import {useTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
+import {AppFlag} from "../../../../../../App";
 
 type IUseFinishedBindBankAccountPage =  {
   // NOTICE: Common
@@ -90,7 +91,9 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         const error = new Error();
         error.name = requestName
         if(err) error.message = JSON.stringify(err)
-        Sentry.captureException(error);
+        if(AppFlag.enableSentry) {
+          Sentry.captureException(error);
+        }
       })
 
 

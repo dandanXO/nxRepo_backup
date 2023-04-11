@@ -5,6 +5,7 @@ import queryString from "query-string";
 import { Modal } from "@frontend/mobile/shared/ui";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
+import {AppFlag} from "../../App";
 
 export interface CustomAxiosError {
   status: any;
@@ -122,7 +123,11 @@ const axiosBaseQuery =
               },
               customError
             })
-            Sentry.captureException(error);
+
+            if(AppFlag.enableSentry) {
+              Sentry.captureException(error);
+            }
+
             console.info(error);
             // throw axiosError;
             // alertModal(err.message);

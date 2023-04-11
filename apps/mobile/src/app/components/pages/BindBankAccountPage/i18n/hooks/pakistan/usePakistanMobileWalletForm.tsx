@@ -8,6 +8,7 @@ import i18next from "i18next";
 import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
 import {processWalletDisplayName} from "./customization/processWalletDisplayName";
+import {AppFlag} from "../../../../../../App";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -116,7 +117,9 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         const error = new Error();
         error.name = "triggerPostBankBindSaveToPKMutation"
         if(err) error.message = JSON.stringify(err)
-        Sentry.captureException(error);
+        if(AppFlag.enableSentry) {
+          Sentry.captureException(error);
+        }
       })
   },[
     mobileData.isValidation,

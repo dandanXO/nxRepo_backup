@@ -10,6 +10,7 @@ import {useCallback, useEffect, useState} from "react";
 import {PostRepayCreateRequestBody, PostRepayCreateResponse,} from "../api/postRepayCreate";
 import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../api/base/axiosBaseQuery";
+import {AppFlag} from "../App";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();
@@ -76,7 +77,9 @@ const useLoanDetailStory = () => {
           const error = new Error();
           error.name = "postRepayCreate"
           if(err) error.message = JSON.stringify(err)
-          Sentry.captureException(error);
+          if(AppFlag.enableSentry) {
+            Sentry.captureException(error);
+          };
           reject(err);
         })
 

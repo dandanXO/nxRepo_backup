@@ -10,6 +10,9 @@ import i18next from "i18next";
 import {AllLanguage} from "../environments/config/languages/IAllLanguage";
 import * as Sentry from "@sentry/react";
 
+export const AppFlag = {
+  enableSentry: false,
+}
 // console.log("environment.country", environment.country)
 
 // NOTICE: REFACTOR ME , 目前Modal.alert 只能從全局取得
@@ -30,7 +33,9 @@ if(environment.country === "bn") {
       const error = new Error();
       error.name = "changeLanguage"
       if(err) error.message = JSON.stringify(err)
-      Sentry.captureException(error);
+      if(AppFlag.enableSentry) {
+        Sentry.captureException(error);
+      }
     })
 }
 
