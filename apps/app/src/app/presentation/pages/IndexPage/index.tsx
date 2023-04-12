@@ -47,6 +47,7 @@ import {PlatformProduct} from "../../../api/indexService/PlatformProduct";
 import {ProductApplyDetail} from "../../../api/loanService/ProductApplyDetail";
 
 import {chain, add, multiply, divide, subtract, evaluate} from "mathjs"
+import {SystemCaseActions} from "../../../usecaseFlow/usecaseAction/systemCaseActions";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -93,6 +94,7 @@ export const IndexPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(SystemCaseActions.SystemGetUserInfoSaga());
     dispatch(UseCaseActions.UserViewIndexPageAction());
   }, []);
 
@@ -430,7 +432,7 @@ export const IndexPage = () => {
             indexPageState.order.state === ORDER_STATE.reject
           ) && (
               <>
-                <NoticeOrderOrQuotaRejectedSection days={refreshableCountdown.days}/>
+                <NoticeOrderOrQuotaRejectedSection/>
               </>
           )}
 
@@ -440,7 +442,7 @@ export const IndexPage = () => {
             indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
           ) && (
             <>
-              <NoticeUserAuthedEmptyQuotaSection hours={refreshableCountdown.hours}/>
+              <NoticeUserAuthedEmptyQuotaSection/>
             </>
           )}
 

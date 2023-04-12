@@ -18,7 +18,66 @@ import {GetRepayTypesRequest} from "../loanService/GetRepayTypesRequest";
 import {PostRepayReceiptResponse} from "../loanService/PostRepayReceiptResponse";
 import {PostRepayCreateRequest} from "../loanService/PostRepayCreateRequest";
 import {PostRepayCreateResponse} from "../loanService/PostRepayCreateResponse";
+import {GetOTPCodeRequest} from "../userService/service/GetOTPCodeService";
 
+
+export type LoginRequest = {
+  msgCode: string;
+  // 图片验证码
+
+  phoneNo: string
+  // 手机号码
+}
+
+export type LoginResponse = {
+  token: string;
+}
+export const APIV3 = createApi({
+  reducerPath: "apiv3",
+  baseQuery: axiosBaseQuery({
+    baseUrl: "/api/v3",
+  }),
+  // keepUnusedDataFor: 600,
+  // keepUnusedDataFor: 1,
+  // refetchOnMountOrArgChange: 60,
+  endpoints: (builder) => ({
+    // Login
+    login: builder.mutation<LoginResponse, LoginRequest>({
+      query: (query: LoginRequest) => ({
+        method: "post",
+        url: `/login`,
+        data: query,
+      }),
+      // NOTE: cannot work
+      // async onQueryStarted(arg, {
+      //   dispatch,
+      //   getState,
+      //   queryFulfilled,
+      //   requestId,
+      //   extra,
+      //   getCacheEntry }) {
+      //   // `onStart` side-effect
+      //   // dispatch(messageCreated('Fetching posts...'))
+      //   console.log("onQueryStarted.arg", arg);
+      // },
+      // NOTE: cannot work
+      // async onCacheEntryAdded(
+      //   arg,
+      //   {
+      //     dispatch,
+      //     getState,
+      //     extra,
+      //     requestId,
+      //     cacheEntryRemoved,
+      //     cacheDataLoaded,
+      //     getCacheEntry,
+      //   }
+      // ) {
+      //   console.log("onCacheEntryAdded.arg", arg);
+      // },
+    }),
+  }),
+});
 
 export const API = createApi({
     reducerPath: "api",
@@ -29,6 +88,15 @@ export const API = createApi({
     // keepUnusedDataFor: 1,
     // refetchOnMountOrArgChange: 60,
     endpoints: (builder) => ({
+        // NOTE: 取得 OTP
+        getOTPCode: builder.mutation<null, GetOTPCodeRequest>({
+          query: (query: GetOTPCodeRequest) => ({
+            method: "post",
+            url: `/login/otp-code`,
+            data: query,
+          }),
+        }),
+
         // NOTE: 借款首頁
         getIndex: builder.query<GetIndexResponse, GetIndexRequest>({
             query: (query: GetIndexRequest) => ({

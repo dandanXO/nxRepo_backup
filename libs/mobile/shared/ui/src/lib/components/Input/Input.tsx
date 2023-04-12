@@ -80,6 +80,7 @@ export interface InputProps {
   labelType?: "none" | "top" | "left";
   style?: any;
   ref?: any;
+  suffix?: string | React.ReactNode;
 }
 
 // NOTICE: 實際產出元件的 dot 特性
@@ -123,6 +124,7 @@ const Input: InputInterface = ({
   labelType = 'top',
   style,
  inputWidth,
+   suffix,
 }: InputProps) => {
   const forceUpdate = useForceUpdate();
 
@@ -459,6 +461,8 @@ const Input: InputInterface = ({
             // isThemeControlledByComponent={isThemeControlledByComponent}
             // themeType={themeType}
           />
+          {/*NOTICE: suffix*/}
+          {suffix}
           {/*<StyledLabel />*/}
           {/*FIXME:*/}
           {inputBefore && typeof valid === 'boolean' && (

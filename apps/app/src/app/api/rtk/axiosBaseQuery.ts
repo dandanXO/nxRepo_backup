@@ -27,11 +27,14 @@ const axiosBaseQuery =
     async ({ url, method, data, params, headers }) => {
         try {
             const resultData = runAxios(baseUrl, url, method, data, params, headers);
+            console.log("resultData", resultData);
             return resultData
         } catch (axiosError) {
-            // console.log("axiosError", axiosError);
+            console.log("axiosError1");
+            console.log("axiosError", axiosError);
             const err = axiosError as AxiosError;
-            // console.log("err.toJSON()", err.toJSON());
+            console.log("err.toJSON()", err.toJSON());
+
             const customError = JSON.parse(JSON.stringify(err.response?.data)) as {
                 code: number;
                 data?: {
@@ -63,9 +66,10 @@ const axiosBaseQuery =
             if(AppFlag.enableSentry) {
               Sentry.captureException(error);
             }
-            // console.info(error);
-            // throw axiosError;
-            // alertModal(err.message);
+            console.info("[app][api] error", error);
+
+            alertModal(err.message);
+
             return {
                 error: {
                     status: err.response?.status,

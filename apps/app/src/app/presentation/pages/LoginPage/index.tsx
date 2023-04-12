@@ -15,9 +15,9 @@ export const LoginPage = () => {
     return (
         <Page className="flex flex-col">
             <Navigation
-                back={() => navigate(-1)}
-                to={() => navigate('log-out-modal')}
-                toIcon={<div className={`text-slate-400`}>Exit</div>}
+                // back={() => navigate(-1)}
+                // to={() => navigate('log-out-modal')}
+                // toIcon={<div className={`text-slate-400`}>Exit</div>}
             />
             <div className={`px-4 grow flex flex-col`}>
                 <div className={`text-3xl font-bold`}>Create</div>
