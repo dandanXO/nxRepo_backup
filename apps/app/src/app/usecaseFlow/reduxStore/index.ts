@@ -1,6 +1,6 @@
 import {configureStore, PayloadAction} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
-import {API} from "../../api/rtk";
+import {API, APIV3} from "../../api/rtk";
 import {APIBoundaryModuleSlice} from "./apiBoundaryModuleSlice";
 import {indexPageSlice} from "./indexPageSlice";
 import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
@@ -8,6 +8,11 @@ import {modalSlice} from "./modalSlice";
 import {AppSaga} from "../watchUsecaseActionSaga/appSaga";
 import {appSlice} from "./appSlice";
 import {FeeRateKeyEnum} from "../../api/indexService/FeeRateKeyEnum";
+import { connectRouter } from 'connected-react-router'
+import { routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from 'history'
+
+export const history = createBrowserHistory()
 
 const logger = (store: any) => (next: any) => (action: any) => {
   if(action.type !== 'indexPage/updateRiskCountdown') {
@@ -30,14 +35,17 @@ export const appStore = configureStore({
     [appSlice.name]: appSlice.reducer,
     [modalSlice.name]: modalSlice.reducer,
     [API.reducerPath]: API.reducer,
+    [APIV3.reducerPath]: APIV3.reducer,
     [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
     [indexPageSlice.name]: indexPageSlice.reducer,
+    router: connectRouter(history) as any,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(logger)
       .concat(API.middleware)
-      .concat(sagaMiddleware),
+      .concat(sagaMiddleware)
+      .concat(routerMiddleware(history)) // for dispatching history actions)
 
 });
 
@@ -59,16 +67,15 @@ appStore.subscribe(() => {
 
 
 // NOTICE: Stubbing
-const INDIA_TIME_ZONE = "Asia/Kolkata";
-appStore.dispatch(indexPageSlice.actions.updateUserAPI({
-// appStore.dispatch(indexPageReducerAction.updateUserAPIAction({
-  "userName": "9013452123",
-  "status": USER_AUTH_STATE.success,
-  "demoAccount": false,
-  "oldUser": false,
-  "needUpdateKyc": false,
-  "organic": false
-}))
+// const INDIA_TIME_ZONE = "Asia/Kolkata";
+// appStore.dispatch(indexPageSlice.actions.updateUserAPI({
+//   "userName": "9013452123",
+//   "status": USER_AUTH_STATE.success,
+//   "demoAccount": false,
+//   "oldUser": false,
+//   "needUpdateKyc": false,
+//   "organic": false
+// }))
 
 // NOTE: 可借款
 // appStore.dispatch(indexPageSlice.actions.updateIndexAPI({

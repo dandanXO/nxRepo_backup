@@ -6,7 +6,7 @@ import {environment} from "../../../environments/environment";
 // NOTICE: 下面得 import 雖然 app.tsx 已經impoert
 window.theme = getThemeConfig(environment.country);
 
-export const alertModal = (message: string) => {
+export const alertModal = (message: string, title?: string) => {
   console.log("message", message);
   console.log("i18next.t(\"modal.Confirm\")", i18next.t("modal.Confirm"))
   console.log("window.theme.3", window.theme);
@@ -14,7 +14,7 @@ export const alertModal = (message: string) => {
     show: true,
     mask: true,
     theme: window.theme,
-    title: i18next.t("modal.Error") as string,
+    title: title || i18next.t("modal.Error") as string,
     content: message,
     confirmText: i18next.t("modal.Confirm") as string,
     maskClosable: true,

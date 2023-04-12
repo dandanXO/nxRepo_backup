@@ -10,24 +10,20 @@ import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 window["isInAndroid"] = ():boolean => typeof window["onUploadKycBackgroundData"] !== "undefined";
 // window["onUploadKycBackgroundData"];
 
-export function *systemInitSaga(action: PayloadAction<null>) {
+export function *systemInitSaga() {
   try {
     // FIXME:
     // NOTE: 是否啟用測試渠道(測試不好會出4)
     const packageId = window.isInAndroid() ? "packageId" : "abc.abc.com"
-    console.log("packageId", packageId);
+    // console.log("packageId", packageId);
 
     const response: GetInitServiceResponse = yield call(Service.AppService.getInit, {packageId});
     console.log("response", response);
 
     yield put(appSlice.actions.updateInit(response));
 
-
-    // NOTE: User
-    const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-    yield put(indexPageSlice.actions.updateUserAPI(userResponse));
-
   } catch (error) {
+    // NOTE: 這邊也能收到其他 action error
     yield catchSagaError(error);
   }
 }

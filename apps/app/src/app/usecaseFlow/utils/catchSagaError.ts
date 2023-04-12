@@ -16,7 +16,7 @@ export function* catchSagaError(error: any) {
     // }
     alertModal((axiosError?.response?.data as any).message as string)
   } else {
-    alertModal(error);
+    alertModal(error, "Warning");
   }
   yield false;
 }

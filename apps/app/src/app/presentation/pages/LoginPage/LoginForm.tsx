@@ -1,21 +1,39 @@
-import { Button, Input, InputValue } from "@frontend/mobile/shared/ui";
+import { Input, InputValue } from "@frontend/mobile/shared/ui";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
+import {useDispatch} from "react-redux";
+import {UseCaseActions} from "../../../usecaseFlow/usecaseAction/useCaseActions";
+import cx from "classnames";
+import {Button} from "../../components/layouts/Button";
+import {LoginPageSataActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPage/loginPageSaga";
 
 
 export const LoginForm = () => {
+    const dispatch = useDispatch();
 
     const [phoneNumberData, setPhoneNumberData] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
         errorMessage: "",
     });
+    const [enableGetOTP, setEnableGetOTP] = useState(false)
+    const [hasSendOTP, setHasSendOTP] = useState(false)
+    const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false)
+
     const [otpData, setOtpData] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
         errorMessage: "",
     });
+
+    const onClickGetOTP = () => {
+      dispatch(LoginPageSataActions.user.getOTP({
+        phone: phoneNumberData.data,
+      }))
+      setHasSendOTP(true)
+      setDoingCountdownSendOTP(true)
+    }
 
     const handleLogin = () => {
         if (phoneNumberData.data === '') {
@@ -36,18 +54,28 @@ export const LoginForm = () => {
         }
 
         if (phoneNumberData.isValidation && otpData.isValidation) {
-            console.log('handleLogin')
+            dispatch(LoginPageSataActions.user.login({
+              phone: phoneNumberData.data,
+              otp: otpData.data
+            }))
         }
-
     }
 
     return (
         <>
             <div className={`grow`}>
-
-
                 <div className={`text-slate-400`}>Phone Number</div>
                 <Input
+                    suffix={
+                      <Button dataTestingID={"getOTP"} text={!doingCountdownSendOTP ? "Get OTP" : "Resend(59s)"} bgColor={cx({
+                        "bg-[#F58B10]": enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
+                        "bg-[#D7D7D7]": !(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP),
+                      }, "ml-2 py-1")}
+                        onClick={() => {
+                          enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP()
+                        }}
+                      />
+                    }
                     label={'+91' as string}
                     labelType="left"
                     value={phoneNumberData.data}
@@ -61,6 +89,7 @@ export const LoginForm = () => {
                             isValidation: !isError,
                             errorMessage: isError ? '*Please enter the correct phone number.' : ''
                         });
+                        setEnableGetOTP(!isError)
                     }}
                     onChange={(event: any) => {
                         const value = event.target.value;
@@ -69,26 +98,31 @@ export const LoginForm = () => {
                                 data: '',
                                 isValidation: false,
                                 errorMessage: '*Please enter the correct phone number.'
-
                             });
+                          setEnableGetOTP(false)
+                        } else if (value.length !== 10) {
+                          setPhoneNumberData({
+                            data: value,
+                            isValidation: false,
+                            errorMessage: '*Please enter the correct phone number.'
+                          });
+                          setEnableGetOTP(false)
                         } else {
-                            // if (Number(value) > Number(balance)) {
-                            //     value = balance;
-                            // }
                             setPhoneNumberData(prev => {
                                 return {
                                     ...prev,
                                     data: value,
                                     isValidation: true,
+                                    errorMessage: ''
                                 }
                             });
+                            setEnableGetOTP(true)
                         }
                     }}
                 />
                 <div className={`text-slate-400 mt-4`}>OTP Verification Code</div>
                 <Input
-                    // label={'+91' as string}
-                    // labelType="left"
+                    labelType="none"
                     value={otpData.data}
                     disabled={false}
                     errorMessage={otpData.errorMessage}
@@ -114,7 +148,14 @@ export const LoginForm = () => {
                 />
             </div>
             <div className={`py-2`}>
-                <Button onClick={handleLogin}>{'Confirm'}</Button>
+
+              <Button dataTestingID={"apply"} text={"Confirm"} bgColor={cx({
+                "bg-[#F58B10]": true,
+              })}
+                onClick={() => {
+                  handleLogin()
+                }}
+              />
                 <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
                     <Link className="text-sm underline decoration-blue-500 text-blue-500 mx-1" to={'/privacy-policy-modal'}>Privacy Policy</Link>
                     You also consent to receive SMS messages.Please carefully read the above agreement,

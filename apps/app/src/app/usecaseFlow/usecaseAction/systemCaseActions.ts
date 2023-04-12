@@ -5,4 +5,5 @@ export const SystemCaseActions = {
   SystemCountdownSaga: createAction<string>("SystemCountdownSaga"),
   SystemRefreshableCountdownSaga: createAction<string>("SystemRefreshableCountdownSaga"),
   SystemKycBackgroundDataUploadedSaga: createAction<boolean>("SystemKycBackgroundDataUploadedSaga"),
+  SystemGetUserInfoSaga: createAction("SystemGetUserInfoSaga"),
 }

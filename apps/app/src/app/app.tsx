@@ -6,6 +6,8 @@ import {getThemeConfig} from "./modules/theme/getThemeConfig";
 import {AppRouter} from "./presentation/router";
 import {Provider} from "react-redux";
 import { appStore } from "./usecaseFlow/reduxStore";
+import {ConnectedRouter} from "connected-react-router";
+import {history} from "./usecaseFlow/reduxStore/index"
 
 export const AppFlag = {
   enableSentry: false,
@@ -22,9 +24,12 @@ export function App() {
   return (
     <div>
       <Provider store={appStore}>
-        <AppThemeProvider theme={window.theme}>
-          <AppRouter/>
-        </AppThemeProvider>
+        <ConnectedRouter history={history}>
+          <AppThemeProvider theme={window.theme}>
+            <AppRouter/>
+          </AppThemeProvider>
+        </ConnectedRouter>
+
       </Provider>
     </div>
   );

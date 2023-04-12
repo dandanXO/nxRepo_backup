@@ -1,4 +1,4 @@
-import {takeLatest, put, all, fork} from "redux-saga/effects";
+import {takeLatest, put, all, fork, call} from "redux-saga/effects";
 import {userViewIndexPageSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userViewIndexPageSaga";
 import {userApplyProductsSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userApplyProductsSaga";
 import {userReacquireCreditSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userReacquireCreditSaga";
@@ -7,7 +7,11 @@ import {systemRefreshableCountdownSaga} from "../usecaseActionSaga/systemUsecase
 import {UseCaseActions} from "../usecaseAction/useCaseActions";
 import {SystemCaseActions} from "../usecaseAction/systemCaseActions";
 import {systemInitSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemInitSaga";
-import {catchSagaError} from "../utils/catchSagaError";
+
+import {
+  loginPageSaga,
+} from "../usecaseActionSaga/userUsecaseSaga/loginPage/loginPageSaga";
+import {push} from "connected-react-router";
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* AppSaga() {
@@ -15,11 +19,21 @@ export function* AppSaga() {
     // yield all([
     // userViewIndexPageSaga,
     // systemInitSaga
+    //   loginPageSaga,
     // ])
     // NOTE: 單獨這行會 stay this line
     // yield systemInitSaga(null);
 
-    yield takeLatest(SystemCaseActions.InitSaga.type, systemInitSaga);
+    // yield takeLatest(SystemCaseActions.SystemGetUserInfoSaga.type, loginPageSaga)
+    yield all([
+      call(systemInitSaga),
+      call(loginPageSaga),
+    ])
+    // yield takeLatest(LoginPageSataActions.user.getOTP.type, userGetOTPSaga);
+    // yield takeLatest(LoginPageSataActions.user.login.type, userLoginSaga);
+
+    // yield takeLatest(SystemCaseActions.InitSaga.type, systemInitSaga);
+
     yield takeLatest(UseCaseActions.UserViewIndexPageAction.type, userViewIndexPageSaga);
     yield takeLatest(UseCaseActions.UserApplyProductAction.type, userApplyProductsSaga)
     yield takeLatest(UseCaseActions.UserReacquireCreditAction.type, userReacquireCreditSaga)
@@ -27,7 +41,7 @@ export function* AppSaga() {
     yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSaga.type, systemRefreshableCountdownSaga);
 
     // NOTICE: flow
-    yield put(SystemCaseActions.InitSaga());
+    // yield put(SystemCaseActions.InitSaga());
 
   } catch (error) {
     // yield catchSagaError(error);
