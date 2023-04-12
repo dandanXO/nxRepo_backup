@@ -11,27 +11,17 @@ import {systemInitSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemInitS
 import {
   loginPageSaga,
 } from "../usecaseActionSaga/userUsecaseSaga/loginPage/loginPageSaga";
-import {push} from "connected-react-router";
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* AppSaga() {
   try {
-    // yield all([
-    // userViewIndexPageSaga,
-    // systemInitSaga
-    //   loginPageSaga,
-    // ])
-    // NOTE: 單獨這行會 stay this line
-    // yield systemInitSaga(null);
-
-    // yield takeLatest(SystemCaseActions.SystemGetUserInfoSaga.type, loginPageSaga)
     yield all([
-      call(systemInitSaga),
-      call(loginPageSaga),
+      fork(systemInitSaga),
+      // fork(loginPageSaga),
     ])
+
     // yield takeLatest(LoginPageSataActions.user.getOTP.type, userGetOTPSaga);
     // yield takeLatest(LoginPageSataActions.user.login.type, userLoginSaga);
-
     // yield takeLatest(SystemCaseActions.InitSaga.type, systemInitSaga);
 
     yield takeLatest(UseCaseActions.UserViewIndexPageAction.type, userViewIndexPageSaga);

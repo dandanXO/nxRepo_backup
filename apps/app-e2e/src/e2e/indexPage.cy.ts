@@ -36,7 +36,8 @@ infoLog("env", Cypress.env());
 
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
-  cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
+  // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
+  cy.visit("/")
 }
 describe('IndexPage', () => {
   beforeEach(() => {
@@ -663,7 +664,7 @@ describe('IndexPage', () => {
 
   // NOTICE: 風控相關
   // NOTICE: 沒有應還訂單
-  it.only("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -908,7 +909,7 @@ describe('IndexPage', () => {
   })
 
   // NOTICE: 有應還訂單
-  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+  it.only("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -927,6 +928,27 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+
+      // NOTICE: 優先權最高
+      "riskReject": false,
+      "refreshable": true,
+      "noQuotaByRetryFewTimes": true,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+
+      "oldUserForceApply": false,
+
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 0,
@@ -983,24 +1005,7 @@ describe('IndexPage', () => {
         }
       ],
       "needRiskKycUpdate": false,
-      // NOTICE: 優先權最高
-      "riskReject": false,
-      "refreshable": true,
-      "noQuotaByRetryFewTimes": true,
-      "orderUnderReview": false,
-      "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
-      "oldUserForceApply": false,
-      "payableRecords": [
-        {
-          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
-          "productName": "AA LOAN",
-          "payableAmount": 1000,
-          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
-          "overdue": false,
-          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
-        }
-      ],
+
       "marquee": "我是跑馬燈...",
       "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
       "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",

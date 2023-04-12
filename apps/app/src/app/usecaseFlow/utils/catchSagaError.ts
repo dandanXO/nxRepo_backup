@@ -4,7 +4,7 @@ import {APIBoundaryModuleSlice} from "../reduxStore/apiBoundaryModuleSlice";
 import {alertModal} from "../../api/base/alertModal";
 
 export function* catchSagaError(error: any) {
-  // console.log("catchSagaError.error", error);
+  console.log("catchSagaError.error", error);
   if (axios.isAxiosError(error)) {
     const axiosError: AxiosError = error;
     // if (axiosError?.response?.status === 401) {

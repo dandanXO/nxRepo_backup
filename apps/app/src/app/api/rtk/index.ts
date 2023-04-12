@@ -37,9 +37,10 @@ export const APIV3 = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: "/api/v3",
   }),
-  // keepUnusedDataFor: 600,
+  // keepUnusedDataFor: 0,
   // keepUnusedDataFor: 1,
   // refetchOnMountOrArgChange: 60,
+
   endpoints: (builder) => ({
     // Login
     login: builder.mutation<LoginResponse, LoginRequest>({
@@ -61,20 +62,20 @@ export const APIV3 = createApi({
       //   console.log("onQueryStarted.arg", arg);
       // },
       // NOTE: cannot work
-      // async onCacheEntryAdded(
-      //   arg,
-      //   {
-      //     dispatch,
-      //     getState,
-      //     extra,
-      //     requestId,
-      //     cacheEntryRemoved,
-      //     cacheDataLoaded,
-      //     getCacheEntry,
-      //   }
-      // ) {
-      //   console.log("onCacheEntryAdded.arg", arg);
-      // },
+      async onCacheEntryAdded(
+        arg,
+        {
+          dispatch,
+          getState,
+          extra,
+          requestId,
+          cacheEntryRemoved,
+          cacheDataLoaded,
+          getCacheEntry,
+        }
+      ) {
+        console.log("onCacheEntryAdded.arg", arg);
+      },
     }),
   }),
 });

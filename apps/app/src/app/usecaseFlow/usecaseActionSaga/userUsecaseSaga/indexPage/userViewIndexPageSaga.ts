@@ -10,10 +10,20 @@ import {GetUserInfoServiceResponse} from "../../../../api/userService/GetUserInf
 import {catchSagaError} from "../../../utils/catchSagaError";
 import {GetOpenIndexResponse} from "../../../../api/indexService/GetOpenIndexResponse";
 import {RootState} from "../../../reduxStore";
+import {getToken} from "../../../../api/base/getToken";
 
 
 export function* userViewIndexPageSaga(action: any) {
   try {
+
+    const token: string = yield select((state: RootState) => state.app.token);
+    if(!token) {
+      // TODO: get token from querystring
+      // const token = getToken();
+
+      const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
+      yield put(indexPageSlice.actions.updateUserAPI(userResponse));
+    }
 
     const status: number = yield select((state: RootState) => state.indexPage.user.state);
     if (status === USER_AUTH_STATE.ready) {
