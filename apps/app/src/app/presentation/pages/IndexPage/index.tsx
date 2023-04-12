@@ -429,7 +429,8 @@ export const IndexPage = () => {
           {/*TODO:新客拒絕或是老客拒絕*/}
           {(
             indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.order.state === ORDER_STATE.reject
+            indexPageState.order.state === ORDER_STATE.reject && 
+            indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
           ) && (
               <>
                 <NoticeOrderOrQuotaRejectedSection/>
@@ -447,7 +448,8 @@ export const IndexPage = () => {
           )}
 
           {(
-            indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.user.state === USER_AUTH_STATE.success && 
+            indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
             (
               indexPageState.order.state === ORDER_STATE.reject ||
               indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota

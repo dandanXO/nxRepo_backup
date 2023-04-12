@@ -7,10 +7,11 @@ export function *systemCountdownSaga(action: any) {
   try {
     // console.log("systemCountdownSaga.action", action);
     let countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
+    yield put(indexPageSlice.actions.updateRiskCountdown(countdown.time));
+
     while(countdown.end === false && countdown.time !== "00:00:00") {
       yield delay(1000)
       countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
-      // console.log("countdown", countdown.time);
       yield put(indexPageSlice.actions.updateRiskCountdown(countdown.time));
     }
     // NOTICE: finished countdown
@@ -36,11 +37,11 @@ const getTimeInfoBetweenCurrentAndCountDown = (quotaExpireTime: string) => {
   const padStartZero = (number: number) => {
     return String(number).padStart(2, "0");
   }
-  const hours = duration.hours();
-  const minutes = duration.minutes();
-  const seconds = duration.seconds();
+  const hours = Math.max(duration.hours(), 0);
+  const minutes = Math.max(duration.minutes(), 0);
+  const seconds = Math.max(duration.seconds(), 0);
   const end = hours === 0 && minutes === 0 && seconds === 0;
-  const time = `${padStartZero(hours)} : ${padStartZero(minutes)} : ${padStartZero(seconds)}`;
+  const time = `${padStartZero(hours)}:${padStartZero(minutes)}:${padStartZero(seconds)}`;
   return {
     time,
     end,

@@ -436,8 +436,11 @@ describe('IndexPage', () => {
       console.log("info");
     })
 
+
+
+
     // NOTE: Given
-    const indexServiceResponse: IndexServiceResponse = {
+    const indexServiceResponse: IndexServiceResponse = () => ({
       // NOTICE: 是否直接表明要不顯示按鈕? 但還有商品沒有選擇的條件
       "refreshable": false,
       // NOTICE: 當 refreshable true, 但是 noQuotaByRetryFewTimes true 一樣不能重刷?
@@ -445,7 +448,7 @@ describe('IndexPage', () => {
       // NOTICE: 情境1: 當 refreshable true, noQuotaByRetryFewTimes false 顯示能夠重刷的倒數計時。
       // NOTICE: 情境2:  riskReject 為 true, 也是看下面的參數
       "riskReject": true,
-      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(50, "seconds"),
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(5, "seconds"),
 
       // NOTICE:
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
@@ -526,12 +529,26 @@ describe('IndexPage', () => {
       "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
       "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
       "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
-    }
-    cy.intercept("get", "/api/v3/index", {
-      statusCode: 200,
-      body: indexServiceResponse,
-    }).as("getIndex").then(() => {
-      console.log("index");
+    })
+    // cy.intercept("get", "/api/v3/index", {
+    //   statusCode: 200,
+    //   body: indexServiceResponse,
+    // }).as("getIndex").then(() => {
+    //   console.log("index");
+    // })
+
+    let indexCount = 0;
+    cy.intercept("get", "/api/v3/index", (req) => {
+        indexCount = indexCount + 1;
+        req.continue((res) => {
+        res.send({
+            statusCode: 200,
+            body: {
+              ...indexServiceResponse(),
+              indexCount,
+            },
+          })
+      })
     })
 
 
@@ -625,8 +642,8 @@ describe('IndexPage', () => {
       "refreshable": true,
       "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
-      "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(1, "seconds"),
+      "offerExpireTime": "2023-03-28T08:10:24",
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -1910,7 +1927,7 @@ describe('IndexPage', () => {
   })
 
 
-  it("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",

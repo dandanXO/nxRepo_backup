@@ -111,8 +111,10 @@ export const QuotaSliderStatus = (props: Props) => {
         {/*NOTE: ExclusiveLoanOffer*/}
         <div className={"px-1 py-2 bg-white rounded-lg relative top-1 shadow-md shadow-gray-300"}>
           <span className={"pr-2"}>Exclusive Personal Loan offer</span>
-          {/*<span className={"text-orange-500"}>13:20:29</span>*/}
-          <span className={"text-orange-500"}>{props.countdown}</span>
+          {/* <span className={"text-orange-500"}>{props.countdown}</span> */}
+          <span className={`${props.countdown === '00:00:00' ? 'text-slate-500' : 'text-orange-500'}`}>
+            {props.countdown}
+          </span>
         </div>
 
       </div>

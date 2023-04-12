@@ -88,7 +88,7 @@ const initialState: InitialState = {
   //   state: ""
   // }
   timeout: {
-    riskControlDate: "",
+    riskControlDate: "00:00:00",
     refreshableDate: {
       days: "",
       hours: "",
