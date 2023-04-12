@@ -17,8 +17,8 @@ export function *systemRefreshableCountdownSaga(action: any) {
     }
     // NOTICE: finished countdown
     yield put(indexPageSlice.actions.expiredRefreshableCountdown({}));
-    // NOTE: 不主動問後端資訊
-    // yield put(UseCaseActions.UserViewIndexPageAction());
+    // NOTE: 主動問後端資訊
+    yield put(UseCaseActions.UserViewIndexPageAction());
 
   } catch (error) {
     yield catchSagaError(error);
