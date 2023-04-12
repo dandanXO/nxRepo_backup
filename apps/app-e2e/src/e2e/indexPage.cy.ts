@@ -1927,7 +1927,7 @@ describe('IndexPage', () => {
   })
 
 
-  it.only("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
+  it("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
