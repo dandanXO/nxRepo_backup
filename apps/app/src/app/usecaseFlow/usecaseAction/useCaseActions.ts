@@ -1,6 +1,5 @@
 import {createAction} from "@reduxjs/toolkit";
 import {LoanServiceRequest} from "../../api/loanService/LoanServiceRequest";
-import {LoginPageSataActions} from "../usecaseActionSaga/userUsecaseSaga/loginPage/loginPageSaga";
 
 export type UserApplyProductActionPayload = Pick<LoanServiceRequest, "applyAmount" | "details">;
 

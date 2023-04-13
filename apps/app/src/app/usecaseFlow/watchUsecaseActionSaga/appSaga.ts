@@ -10,7 +10,7 @@ import {systemInitSaga} from "../usecaseActionSaga/systemUsecaseSaga/systemInitS
 
 import {
   loginPageSaga,
-} from "../usecaseActionSaga/userUsecaseSaga/loginPage/loginPageSaga";
+} from "../usecaseActionSaga/userUsecaseSaga/loginPageSaga";
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* AppSaga() {
