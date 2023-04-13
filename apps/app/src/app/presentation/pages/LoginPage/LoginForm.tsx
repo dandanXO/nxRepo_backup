@@ -1,6 +1,5 @@
 import { Input, InputValue } from "@frontend/mobile/shared/ui";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import cx from "classnames";
 import {Button} from "../../components/layouts/Button";
@@ -155,7 +154,7 @@ export const LoginForm = () => {
                 }}
               />
               <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
-                  <Link className="text-sm underline decoration-blue-500 text-blue-500 mx-1" to={'/privacy-policy-modal'}>Privacy Policy</Link>
+                  <div className="text-sm underline decoration-blue-500 text-blue-500 mx-1" onClick={() => navigate('/privacy-policy-modal')}>Privacy Policy</div>
                   You also consent to receive SMS messages.Please carefully read the above agreement,
                   agreed to check and enter the next step.
               </div>

@@ -10,6 +10,7 @@ import moment from "moment";
 import { useNavigate } from "react-router";
 import { getToken } from "../../../api/base/getToken";
 import {GetLoanRecord} from "../../../api/loanService/GetLoanRecord";
+import {PagePathEnum} from "../index";
 const PaymentItem = (props: GetLoanRecord) => {
 
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ const PaymentItem = (props: GetLoanRecord) => {
                 <div className="text-base font-bold mb-1">{`${environment.currency} ${loanAmount ?? ''}`}</div>
                 <div className="text-xs">{`Due ${moment(dueDate).format('L') ?? ''}`}</div>
             </div>
-            {status !== "PAY_OFF" && <Button onClick={()=>navigate(`/loan-record-detail?token=${getToken()}`,{ state: {orderNo} })} buttonText="Repay Detail" width={'w-20'} height={'h-8'} fontSize="xs" />}
+            {status !== "PAY_OFF" && <Button onClick={()=>navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: {orderNo} })} buttonText="Repay Detail" width={'w-20'} height={'h-8'} fontSize="xs" />}
         </div>
         <Divider />
         {collapse && <div className="px-3">

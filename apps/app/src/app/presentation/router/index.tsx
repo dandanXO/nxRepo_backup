@@ -1,36 +1,32 @@
-import React, {Suspense, useState} from "react";
+import React, {Suspense} from "react";
 
-import {
-  Routes,
-  Route,
-  useLocation,
-} from "react-router";
+import {Route, Routes, useLocation,} from "react-router";
 
-import { IndexPage } from "../pages/IndexPage";
-import { AuthPage } from "../pages/AuthPage";
-import { BankCardListPage } from "../pages/BankCardListPage";
-import { BindBankCardPage } from "../pages/BindBankCardPage";
-import { CustomerServicePage } from "../pages/CustomerServicePage";
-import { DisclosureStatementPage } from "../pages/DisclosureStatementPage";
-import { ExtendDetailsPage } from "../pages/ExtendDetailsPage";
-import { FinishedRepaymentPage } from "../pages/FinishedRepaymentPage";
-import { LoanRecordDetailPage } from "../pages/LoanRecordDetailPage";
-import { LoanRecordPage } from "../pages/LoanRecordPage";
-import { MyCouponListPage } from "../pages/MyCouponListPage";
-import { MyCouponPage } from "../pages/MyCouponPage";
-import { PartnerPage } from "../pages/PartnerPage";
-import { PersonalInfoPage } from "../pages/PersonalInfoPage";
-import { PrivacyPolicyPage } from "../pages/PrivacyPolicyPage";
-import { QuotaModelPage } from "../pages/QuotaModelPage";
-import { UploadedPaymentReceiptPage } from "../pages/UploadedPaymentReceiptPage";
-import { UploadPaymentReceiptPage } from "../pages/UploadPaymentReceiptPage";
-import { CategoryPage } from "../pages/__test__/CategoryPage";
+import {IndexPage} from "../pages/IndexPage";
+import {AuthPage} from "../pages/AuthPage";
+import {BankCardListPage} from "../pages/BankCardListPage";
+import {BindBankCardPage} from "../pages/BindBankCardPage";
+import {CustomerServicePage} from "../pages/CustomerServicePage";
+import {DisclosureStatementPage} from "../pages/DisclosureStatementPage";
+import {ExtendDetailsPage} from "../pages/ExtendDetailsPage";
+import {FinishedRepaymentPage} from "../pages/FinishedRepaymentPage";
+import {RepaymentDetailPage} from "../pages/RepaymentDetailPage";
+import {LoanRecordPage} from "../pages/RepaymentPage";
+import {MyCouponListPage} from "../pages/MyCouponListPage";
+import {MyCouponPage} from "../pages/MyCouponPage";
+import {PartnerPage} from "../pages/PartnerPage";
+import {PersonalInfoPage} from "../pages/PersonalInfoPage";
+import {PrivacyPolicyPage} from "../pages/PrivacyPolicyPage";
+import {QuotaModelPage} from "../pages/QuotaModelPage";
+import {UploadedPaymentReceiptPage} from "../pages/UploadedPaymentReceiptPage";
+import {UploadPaymentReceiptPage} from "../pages/UploadPaymentReceiptPage";
+import {CategoryPage} from "../pages/__test__/CategoryPage";
 import RepaymentModal from '../modals/RepaymentModal';
 import AmountRepaidModal from "../modals/AmountRepaidModal/AmountRepaidModal";
-import { ExtendConfirmModal } from "../modals/ExtendConfirmModal";
+import {ExtendConfirmModal} from "../modals/ExtendConfirmModal";
 import ExtendModal from "../modals/ExtendModal/ExtendModal";
 import {ApplicationProgressPage} from "../pages/ApplicationProgressPage";
-import { CustomerServiceModal } from "../modals/CustomerServiceModal";
+import {CustomerServiceModal} from "../modals/CustomerServiceModal";
 import {LogoutModal} from "../modals/LogoutModal";
 import {TabBar} from "../components/layouts/TabBar";
 import {APIBoundaryModal} from "../modals/APIBoundaryModal";
@@ -40,7 +36,6 @@ import {RootState} from "../../usecaseFlow/reduxStore";
 import {LoginPage} from '../pages/LoginPage';
 import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
 import {PagePathEnum} from "../pages";
-
 
 
 export const AppRouter = () => {
@@ -69,17 +64,17 @@ export const AppRouter = () => {
           <Route path="/extend-details" element={<ExtendDetailsPage />} />
           <Route path="/finished-repayment" element={<FinishedRepaymentPage />} />
 
-          <Route path="/loan-record-detail" element={<LoanRecordDetailPage />}>
+          <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
             <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
             <Route path="extend-modal" element={<ExtendModal />} />
             <Route path="repayment-modal" element={<RepaymentModal />} />
             <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
           </Route>
-          <Route path={PagePathEnum.PaymentPage} element={<LoanRecordPage />} />
+          <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
           <Route path="/my-coupon-list" element={<MyCouponListPage />} />
           <Route path="/mu-coupon" element={<MyCouponPage />} />
           <Route path="/partner" element={<PartnerPage />} />
-          <Route path="/personal-info" element={<PersonalInfoPage />} >
+          <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
@@ -91,9 +86,9 @@ export const AppRouter = () => {
         </Routes>
 
         {[
-          "/",
-          "/loan-record",
-          "/personal-info"
+          PagePathEnum.IndexPage as string,
+          PagePathEnum.RepaymentPage as string,
+          PagePathEnum.PersonalInfoPage as string,
         ].indexOf(location.pathname) > -1 && <TabBar hasOrder={payableRecords ? payableRecords?.length > 0 : false}/>}
 
         {apiBoundary.show && (
@@ -176,7 +171,7 @@ export const OuterRouter = () => {
 //     ]
 //   },
 //   {
-//     path: "/loan-record-detail",
+//     path: "repayment-detail",
 //     element: <LoanRecordDetailPage />,
 //     // errorElement: <ErrorPage />,
 //     children: [
@@ -341,7 +336,7 @@ export const OuterRouter = () => {
 //         <Route path="/extend-details" element={<ExtendDetailsPage />} />
 //         <Route path="/finished-repayment" element={<FinishedRepaymentPage />} />
 //
-//         <Route path="/loan-record-detail" element={<LoanRecordDetailPage />}>
+//         <Route path="/repayment-detail" element={<LoanRecordDetailPage />}>
 //           <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
 //           <Route path="extend-modal" element={<ExtendModal />} />
 //           <Route path="repayment-modal" element={<RepaymentModal />} />

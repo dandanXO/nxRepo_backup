@@ -13,6 +13,7 @@ import { GetLoanDetailResponse } from "../../../api/rtk/old/getLoanDetail";
 import recordStatusStyleProps from "../../../modules/recordStatusColorMapper";
 import {useLocation, useNavigate} from "react-router";
 import { stat } from "fs";
+import {PagePathEnum} from "../../pages";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
 `;
@@ -96,7 +97,7 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
                         </div>
                     );
                 }}
-                onCancel={() => navigate('/loan-record-detail')}
+                onCancel={() => navigate(PagePathEnum.RepaymentDetailPage)}
                 enableTitleHorizontal={true}
             ></Overlay>
         </div>

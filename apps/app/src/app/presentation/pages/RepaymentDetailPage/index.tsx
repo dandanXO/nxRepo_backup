@@ -12,7 +12,7 @@ import { environment } from "../../../../environments/environment";
 import { Navigation } from "../../components/layouts/Navigation";
 import moment from "moment";
 
-export const LoanRecordDetailPage = (props: any) => {
+export const RepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()
     const location = useLocation();
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetLoanDetailQuery({

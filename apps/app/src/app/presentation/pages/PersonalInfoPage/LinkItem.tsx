@@ -1,17 +1,24 @@
 import { FiChevronRight } from "react-icons/all";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router"
 
 interface LinkItem {
     title: string;
     to: string;
-    state?: object;
+    state?: any;
 }
 
 const LinkItem = (props: LinkItem) => {
-    return <Link className={`flex flex-row justify-between items-center py-1`} to={props.to} state={props.state}>
+    const navigate = useNavigate();
+    return (
+      <div className={`flex flex-row justify-between items-center py-1`} onClick={() => {
+        navigate(props.to, {
+          state: props.state,
+        })
+      }}>
         <div>{props.title}</div>
-      <FiChevronRight />
-    </Link>
+        <FiChevronRight />
+      </div>
+    )
 }
 
 export default LinkItem;

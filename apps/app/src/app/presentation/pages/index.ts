@@ -1,3 +1,6 @@
 export enum PagePathEnum {
-  PaymentPage = "/loan-record",
+  IndexPage = "/",
+  RepaymentPage = "/repayment",
+  PersonalInfoPage = "/personal-info",
+  RepaymentDetailPage = "/repayment-detail",
 }

@@ -1,6 +1,5 @@
 import {Page} from "../../components/layouts/Page";
 import { Navigation } from "../../components/layouts/Navigation";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import UserIcon from '../../components/images/UserIcon.svg';
 import { useSelector } from "react-redux";
@@ -13,6 +12,7 @@ import ListItem from "../../components/ListItem";
 import { getToken } from "../../../api/base/getToken";
 import { Outlet } from "react-router-dom";
 import {RootState} from "../../../usecaseFlow/reduxStore";
+import {PagePathEnum} from "../index";
 
 
 export const PersonalInfoPage = () => {
@@ -42,7 +42,7 @@ export const PersonalInfoPage = () => {
           <Button buttonText={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>} padding="py-1 px-2" />
         </div>
         <div className="m-4">
-          <Card><LinkItem title={'Bank Card'} to={`/bankcard-list?token${getToken()}`} /></Card>
+          <Card><LinkItem title={'Bank Card'} to={`/bankcard-list?token=${getToken()}`} /></Card>
           <Card>
             <LinkItem title={'Privacy Policy'} to={'/privacy-policy'} />
             <LinkItem title={'Disclosure Statement'} to={'/disclosure-statement'} />
@@ -58,9 +58,11 @@ export const PersonalInfoPage = () => {
                   <LinkItem title={'Disclosure Statement'} to={''} />
               </Card> */}
         </div>
-        <div className="text-center my-2"><Link to={'log-out-modal'}>Log out</Link></div>
+        <div className="text-center my-2">
+          <div onClick={() => navigate(`${PagePathEnum.PersonalInfoPage}/log-out-modal`)}>Log out</div>
+        </div>
 
-          <Outlet/>
+        <Outlet/>
       </Page>
     )
 }

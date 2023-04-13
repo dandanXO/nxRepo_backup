@@ -1,5 +1,4 @@
 import { Navigation } from "../../components/layouts/Navigation";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import MailIcon from '../../components/images/MailIcon.svg';
 import Button from "../../components/Button";
@@ -18,7 +17,10 @@ export const CustomerServicePage = () => {
                 <div>Service Time</div>
                 <div className="mb-16">10:00 a.m. - 6:00 p.m.</div>
                 <div className="mb-4"><a href={`mailto:${app?.init?.csEmail}`}><Button buttonText={'Contact By Mail'} padding="py-2 px-6" /></a></div>
-                <Link className="text-sm underline decoration-blue-500 text-blue-500" to={'customer-service-modal'}>Online Customer Service</Link>
+                <div className="text-sm underline decoration-blue-500 text-blue-500"
+                     onClick={() => {
+                       navigate('customer-service-modal');
+                     }}>Online Customer Service</div>
                <Outlet/>
             </div>
         </div>
