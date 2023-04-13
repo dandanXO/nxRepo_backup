@@ -3,7 +3,8 @@ import {put, take, takeLatest, call, all} from "redux-saga/effects";
 import {API, APIV3, LoginResponse} from "../../../../api/rtk";
 import {Md5} from 'ts-md5';
 import {AppRunningModeEnum, appSlice} from "../../../reduxStore/appSlice";
-import { push } from 'connected-react-router'
+import { push } from '@lagunovsky/redux-react-router'
+
 import {catchSagaError} from "../../../utils/catchSagaError";
 import {errorFallback} from "../../../utils/errorFallback";
 

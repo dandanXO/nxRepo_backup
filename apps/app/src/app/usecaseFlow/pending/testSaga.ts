@@ -2,7 +2,7 @@ import {select, spawn, call, put, all, fork, take, takeEvery, takeLeading, takeM
 import {userLoginAction, userLoginSaga} from "./userLoginSaga";
 import {userLogoutAction, userLogoutSaga} from "./userLogoutSaga";
 import {createAction} from "@reduxjs/toolkit";
-import { push } from 'connected-react-router'
+import { push } from '@lagunovsky/redux-react-router'
 
 export function *AppSaga() {
   // sagas will be executed in parallel.

@@ -1,3 +1,6 @@
+import "./app/modules/i18n";
+import "./app/modules/datetime/index";
+// import "./app/modules/window/onUploadKycBackgroundData"
 import { StrictMode } from 'react';
 
 // NOTE: windicss
@@ -8,9 +11,7 @@ import { StrictMode } from 'react';
 
 // NOTE: tailwind
 import "./style.css";
-
 import * as ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 
 import App from './app/app';
 
@@ -19,8 +20,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </StrictMode>
 );

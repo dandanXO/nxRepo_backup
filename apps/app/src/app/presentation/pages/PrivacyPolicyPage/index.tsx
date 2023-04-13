@@ -1,9 +1,9 @@
 import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router-dom";
+
 export const PrivacyPolicyPage = () => {
     const navigate = useNavigate();
     return (
-
         <div>
             <Navigation title={"Privacy Policy"} back={() => { navigate(-1) }} />
             <div className="p-4">

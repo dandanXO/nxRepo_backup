@@ -1,13 +1,13 @@
 import {environment} from "../environments/environment";
 import {AppThemeProvider} from "@frontend/mobile/shared/ui";
-import "./modules/i18n";
-import "./modules/datetime/index";
 import {getThemeConfig} from "./modules/theme/getThemeConfig";
 import {AppRouter} from "./presentation/router";
 import {Provider} from "react-redux";
-import { appStore } from "./usecaseFlow/reduxStore";
-import {ConnectedRouter} from "connected-react-router";
+import {appStore, RootState} from "./usecaseFlow/reduxStore";
 import {history} from "./usecaseFlow/reduxStore/index"
+import {ReduxRouter, ReduxRouterSelector} from "@lagunovsky/redux-react-router";
+import {BrowserRouter} from "react-router-dom";
+import React from "react";
 
 export const AppFlag = {
   enableSentry: false,
@@ -15,22 +15,24 @@ export const AppFlag = {
 
 // NOTICE: REFACTOR ME , 目前Modal.alert 只能從全局取得
 window.theme = getThemeConfig(environment.country);
+console.log("[APP] environment", environment);
+console.log("[APP] window.theme", window.theme);
 
-console.log("environment.country", environment.country);
-console.log("environment.themeConfig", environment.themeConfig);
-console.log("window.theme.2", window.theme);
+const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator
 
 export function App() {
   return (
     <div>
-      <Provider store={appStore}>
-        <ConnectedRouter history={history}>
-          <AppThemeProvider theme={window.theme}>
-            <AppRouter/>
-          </AppThemeProvider>
-        </ConnectedRouter>
-
-      </Provider>
+      <AppThemeProvider theme={window.theme}>
+        <Provider store={appStore}>
+          <ReduxRouter history={history} routerSelector={routerSelector}>
+            <BrowserRouter>
+              <AppRouter/>
+            </BrowserRouter>
+            {/*<RouterProvider router={appRouter as any} fallbackElement={<div>Loading...</div>} />*/}
+          </ReduxRouter>
+        </Provider>
+      </AppThemeProvider>
     </div>
   );
 }

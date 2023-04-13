@@ -34,9 +34,7 @@ export const getQuotaModelStatusAction = createRequestAction("GGetQuotaModelStat
 //   }
 // )
 
-window.onUploadKycBackgroundData = (uploaded: boolean) => {
-    appStore.dispatch(SystemCaseActions.SystemKycBackgroundDataUploadedSaga(uploaded));
-}
+
 
 export function* userReacquireCreditSaga(action: PayloadAction<null>) {
   try {

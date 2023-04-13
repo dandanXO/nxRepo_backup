@@ -7,6 +7,7 @@ import {UseCaseActions} from "../../../usecaseFlow/usecaseAction/useCaseActions"
 import cx from "classnames";
 import {Button} from "../../components/layouts/Button";
 import {LoginPageSataActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPage/loginPageSaga";
+import {push} from "@lagunovsky/redux-react-router";
 
 
 export const LoginForm = () => {
@@ -148,7 +149,6 @@ export const LoginForm = () => {
                 />
             </div>
             <div className={`py-2`}>
-
               <Button dataTestingID={"apply"} text={"Confirm"} bgColor={cx({
                 "bg-[#F58B10]": true,
               })}
@@ -156,11 +156,11 @@ export const LoginForm = () => {
                   handleLogin()
                 }}
               />
-                <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
-                    <Link className="text-sm underline decoration-blue-500 text-blue-500 mx-1" to={'/privacy-policy-modal'}>Privacy Policy</Link>
-                    You also consent to receive SMS messages.Please carefully read the above agreement,
-                    agreed to check and enter the next step.
-                </div>
+              <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
+                  <Link className="text-sm underline decoration-blue-500 text-blue-500 mx-1" to={'/privacy-policy-modal'}>Privacy Policy</Link>
+                  You also consent to receive SMS messages.Please carefully read the above agreement,
+                  agreed to check and enter the next step.
+              </div>
             </div>
 
         </>

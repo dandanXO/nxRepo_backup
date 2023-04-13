@@ -17,7 +17,7 @@ export function* AppSaga() {
   try {
     yield all([
       fork(systemInitSaga),
-      // fork(loginPageSaga),
+      fork(loginPageSaga),
     ])
 
     // yield takeLatest(LoginPageSataActions.user.getOTP.type, userGetOTPSaga);

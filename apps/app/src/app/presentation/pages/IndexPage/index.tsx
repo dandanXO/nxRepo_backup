@@ -22,7 +22,7 @@ import {LoanOverViewSection} from "./sections/LoanOverViewSection";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import cx from "classnames";
 import {NoticeUserReacquireOver3TimeSections} from "./sections/NoticeSection/NoticeUserReacquireOver3TimeSections";
-import {useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {Horizontal} from "../../components/layouts/Horizontal";
 import {Product} from "./sections/RecommendedProductsSection/Product";
 import {AiOutlineClose, MdExpandLess, MdExpandMore} from "react-icons/all";
@@ -429,7 +429,7 @@ export const IndexPage = () => {
           {/*TODO:新客拒絕或是老客拒絕*/}
           {(
             indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.order.state === ORDER_STATE.reject && 
+            indexPageState.order.state === ORDER_STATE.reject &&
             indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
           ) && (
               <>
@@ -448,7 +448,7 @@ export const IndexPage = () => {
           )}
 
           {(
-            indexPageState.user.state === USER_AUTH_STATE.success && 
+            indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
             (
               indexPageState.order.state === ORDER_STATE.reject ||

@@ -1,4 +1,4 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 import createSagaMiddleware from 'redux-saga'
 import {API, APIV3} from "../../api/rtk";
 import {APIBoundaryModuleSlice} from "./apiBoundaryModuleSlice";
@@ -6,12 +6,12 @@ import {indexPageSlice} from "./indexPageSlice";
 import {modalSlice} from "./modalSlice";
 import {AppSaga} from "../watchUsecaseActionSaga/appSaga";
 import {appSlice} from "./appSlice";
-import { connectRouter } from 'connected-react-router'
-import { routerMiddleware } from 'connected-react-router'
-import { createBrowserHistory } from 'history'
+import {createBrowserHistory} from 'history'
 import {alertModal} from "../../api/base/alertModal";
+import {createRouterMiddleware, createRouterReducer} from '@lagunovsky/redux-react-router'
 
 export const history = createBrowserHistory()
+const routerMiddleware = createRouterMiddleware(history)
 
 const logger = (store: any) => (next: any) => (action: any) => {
   if(action.type !== 'indexPage/updateRiskCountdown') {
@@ -32,29 +32,28 @@ const sagaMiddleware = createSagaMiddleware({
     console.log("[app][saga] error", error)
     // alertModal(errorInfo.sagaStack)
     alertModal("error")
-  }
-})
-
-const rootReducer = (history: any) => combineReducers({
-  router: connectRouter(history),
-  [appSlice.name]: appSlice.reducer,
-  [modalSlice.name]: modalSlice.reducer,
-  [API.reducerPath]: API.reducer,
-  [APIV3.reducerPath]: APIV3.reducer,
-  [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
-  [indexPageSlice.name]: indexPageSlice.reducer,
+  },
 })
 
 export const appStore = configureStore({
-  reducer: rootReducer(history),
+  reducer: {
+    navigator: createRouterReducer(history),
+    [appSlice.name]: appSlice.reducer,
+    [modalSlice.name]: modalSlice.reducer,
+    [API.reducerPath]: API.reducer,
+    [APIV3.reducerPath]: APIV3.reducer,
+    [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
+    [indexPageSlice.name]: indexPageSlice.reducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
+      .concat(routerMiddleware) // for dispatching history actions)
       .concat(logger)
       .concat(API.middleware)
+      .concat(APIV3.middleware)
       .concat(sagaMiddleware)
-      .concat(routerMiddleware(history)) // for dispatching history actions)
-
 });
+
 
 // NOTICE: then run the saga
 const rootSagaTask = sagaMiddleware.run(AppSaga)

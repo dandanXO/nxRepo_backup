@@ -14,6 +14,9 @@ import {GetQuotaModelStatusResponse} from "../../../app/src/app/api/loanService/
 import {GetUserInfoServiceResponse} from "../../../app/src/app/api/userService/GetUserInfoServiceResponse";
 import {GetOpenIndexResponse} from "../../../app/src/app/api/indexService/GetOpenIndexResponse";
 
+import { appStore } from "../../../app/src/app/usecaseFlow/reduxStore";
+import {SystemCaseActions} from "../../../app/src/app/usecaseFlow/usecaseAction/systemCaseActions";
+
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
 const infoLog = (message, rest) => {
@@ -37,9 +40,19 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/")
+  cy.visit("/", {
+    onBeforeLoad(win: Cypress.AUTWindow) {
+      // @ts-ignore
+      // cy.stub(win, "onUploadKycBackgroundData", function () {
+        // appStore.dispatch(SystemCaseActions.SystemKycBackgroundDataUploadedSaga(true));
+      // })
+      // Stub your functions here
+      // cy.stub(win, 'prompt').returns('my custom message')
+    }
+  })
 }
 describe('IndexPage', () => {
+
   beforeEach(() => {
     // cy.viewport("iphone-5")
     // NOTE: figma 360, 640
@@ -285,6 +298,10 @@ describe('IndexPage', () => {
     // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
   })
 
+  it("status: 用戶沒被拒絕，但風控額度回來額度直接為 0", () => {
+
+  })
+
   // NOTICE: 訂單相關
 
 
@@ -416,6 +433,125 @@ describe('IndexPage', () => {
     // NOTE: important 看到反灰無法點擊的 Apply Now Button
   })
 
+
+  it("status: 用戶已認證、有逾期的訂單", () => {
+    // NOTE: Given
+    const userServiceResponse: GetUserInfoServiceResponse = {
+      "userName": "9013452123",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": "PROCESSING_FEE"
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": "SERVICE_FEE"
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": "LOAN_INTEREST"
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "riskReject": false,
+      "refreshable": true,
+      "refreshOverRetry": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(-1, "second"),
+          "overdue": true,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+    cy.intercept("get", "/api/v3/index", {
+      statusCode: 200,
+      body: indexServiceResponse,
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+    visitIndexPage();
+    // NOTE: then
+    // 看到跑馬燈
+    // 看到 welcome 包含姓名、客服 Button
+    // NOTE: important 看到逾期的訊息資訊、提醒您需要優先還清逾期款項才能再借款
+    // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
+    // NOTE: important 看到反灰但無法使用的可借款額度拉霸、無法倒數計計時
+    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最左邊
+    // NOTE: important 倒數計時歸零
+    // 正常隨意顯示 Loan Over View
+    // NOTE: important 看到下方 tips 優先還款訊息
+    // NOTE: important 看到反灰無法點擊的 Apply Now Button
+    // NOTE: important 看到下方 Tab 的 Payment 有紅點提示
+  })
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   it("status: 用戶已認證、新訂單被拒絕。新客情境：被拒絕。", () => {
@@ -926,7 +1062,7 @@ describe('IndexPage', () => {
   })
 
   // NOTICE: 有應還訂單
-  it.only("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1057,7 +1193,7 @@ describe('IndexPage', () => {
 
 
   // NOTICE: 使用者自行點擊獲取額度
-  it("status: 用戶已認證、風控額度時間無效，使用者自己已經重新獲取信用額度過一次。", () => {
+  it.only("status: 用戶已認證、風控額度時間無效，使用者自己已經重新獲取信用額度過一次。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1155,6 +1291,11 @@ describe('IndexPage', () => {
       "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
       "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
     }
+
+    // NOTE: simulate for android situation
+    console.log(window)
+    // window["onUploadKycBackgroundData"](true);
+
     cy.intercept("get", "/api/v3/index", {
       statusCode: 200,
       body: indexServiceResponse,
