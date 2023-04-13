@@ -1,9 +1,9 @@
-import "./sentry";
+import "./app/sentry";
 // NOTE: [TypeScript style guide](https://ts.dev/style/#identifiers)
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app/App";
-import {isLocalhost} from "./sentry";
+import {isLocalhost} from "./app/sentry";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
