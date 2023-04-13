@@ -154,13 +154,6 @@ export const LoginForm = () => {
                   handleLogin()
                 }}
               />
-              <Button dataTestingID={"apply"} text={"Test"} bgColor={cx({
-                "bg-[#F58B10]": true,
-              })}
-                      onClick={() => {
-                        navigate("/my-coupon-list")
-                      }}
-              />
               <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
                   <Link className="text-sm underline decoration-blue-500 text-blue-500 mx-1" to={'/privacy-policy-modal'}>Privacy Policy</Link>
                   You also consent to receive SMS messages.Please carefully read the above agreement,

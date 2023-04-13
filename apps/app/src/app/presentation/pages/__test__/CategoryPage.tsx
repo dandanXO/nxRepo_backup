@@ -2,10 +2,21 @@ import {Link, Route} from "react-router-dom";
 import React from "react";
 import {ApplicationProgressPage} from "../ApplicationProgressPage";
 import {PagePathEnum} from "../index";
+import cx from "classnames";
+import {Button} from "../../components/layouts/Button";
+import {useNavigate} from "react-router";
 
 export const CategoryPage = () => {
+  const navigate = useNavigate();
   return (
     <div>
+      <Button dataTestingID={"apply"} text={"Test"} bgColor={cx({
+        "bg-[#F58B10]": true,
+      })}
+              onClick={() => {
+                navigate("/my-coupon-list")
+              }}
+      />
       <div><Link to="/">IndexPage</Link></div>
       <div><Link to="/login">Login</Link></div>
       <div><Link to="/application-progress">ApplicationProgressPage</Link></div>
