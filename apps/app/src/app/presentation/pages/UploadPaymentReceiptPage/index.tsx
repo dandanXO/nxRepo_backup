@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 
 import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 
 import { useUploadPaymentReceipt } from "./hooks/useUploadPaymentReceipt";
 import { WithTranslation, withTranslation } from "react-i18next";

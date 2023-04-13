@@ -24,6 +24,9 @@
       * 發生錯誤時，請與後端確認 swagger model 不能為中文名字，否則工具無法產生對應 ts file
   * Pages/Modals
     * 切換 page, modal 使用 saga 控制，來控制整個流程
+* react-router
+  * 得使用 react-router 的 useNavigate 做跳轉以及 useLocation
+    * 因使用 redux-react-router ，所以不能 import react-router-dom 的 useNavigate 
 * Core Library
   * 初期先不使用 storybook
 * e2e testing

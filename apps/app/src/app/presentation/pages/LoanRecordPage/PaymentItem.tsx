@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import ListItem from "../../components/ListItem";
 import { environment } from "../../../../environments/environment";
 import moment from "moment";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { getToken } from "../../../api/base/getToken";
 import {GetLoanRecord} from "../../../api/loanService/GetLoanRecord";
 const PaymentItem = (props: GetLoanRecord) => {

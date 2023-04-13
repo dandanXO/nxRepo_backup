@@ -1,8 +1,7 @@
 
 import React, { useEffect } from "react";
 import { Overlay } from "@frontend/mobile/shared/ui";
-import { environment } from "../../../../environments/environment";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import Button from "../../components/Button";
 
 

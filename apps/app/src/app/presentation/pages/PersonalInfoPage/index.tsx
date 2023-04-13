@@ -1,6 +1,7 @@
 import {Page} from "../../components/layouts/Page";
 import { Navigation } from "../../components/layouts/Navigation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import UserIcon from '../../components/images/UserIcon.svg';
 import { useSelector } from "react-redux";
 import cx from "classnames";

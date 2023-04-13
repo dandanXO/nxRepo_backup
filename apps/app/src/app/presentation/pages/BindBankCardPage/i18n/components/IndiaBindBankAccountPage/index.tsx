@@ -6,7 +6,7 @@ import { BankAccountForm } from "./BankAccountForm";
 import { useIndiaBankAccountForm } from "../../hooks/india/useIndiaBankAccountForm";
 import { useFinishedBindBankAccountForm } from "../../hooks/common/useFinishedBindBankAccountForm";
 import { Navigation } from "../../../../../components/layouts/Navigation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     const navigate = useNavigate();
     const {

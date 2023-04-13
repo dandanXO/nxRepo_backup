@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useLocationOrderQueryString } from "@frontend/mobile/shared/ui";
 import { useCallback, useEffect, useState } from "react";
 import * as Sentry from "@sentry/react";

@@ -1,6 +1,7 @@
 import {Link, Route} from "react-router-dom";
 import React from "react";
 import {ApplicationProgressPage} from "../ApplicationProgressPage";
+import {PagePathEnum} from "../index";
 
 export const CategoryPage = () => {
   return (
@@ -16,7 +17,7 @@ export const CategoryPage = () => {
       <div><Link to="/extend-details">ExtendDetailsPage</Link></div>
       <div><Link to="/finished-repayment">FinishedRepaymentPage</Link></div>
       <div><Link to="/loan-record-detail">LoanRecordDetailPage</Link></div>
-      <div><Link to="/loan-record">LoanRecordPage</Link></div>
+      <div><Link to={PagePathEnum.PaymentPage}>LoanRecordPage</Link></div>
       <div><Link to="/my-coupon-list">MyCouponListPage</Link></div>
       <div><Link to="/mu-coupon">MyCouponPage</Link></div>
       <div><Link to="/partner">PartnerPage</Link></div>

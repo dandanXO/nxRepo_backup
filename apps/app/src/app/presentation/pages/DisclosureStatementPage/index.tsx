@@ -1,5 +1,6 @@
 import { Navigation } from "../../components/layouts/Navigation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+
 export const DisclosureStatementPage = () => {
     const navigate = useNavigate();
     return (

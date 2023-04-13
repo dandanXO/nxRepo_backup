@@ -1,5 +1,5 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import Button from "../../components/Button";
+import { useNavigate, useLocation } from "react-router";
+
 import { Overlay } from "@frontend/mobile/shared/ui";
 import { Navigation } from "../../components/layouts/Navigation";
 import { useSelector } from "react-redux";

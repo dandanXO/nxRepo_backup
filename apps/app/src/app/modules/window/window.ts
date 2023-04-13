@@ -1,3 +1,6 @@
+import "./isInAndroid"
+import "./onUploadKycBackgroundData"
+
 export enum AndroidPage {
   LOGIN = "LOGIN",
   AUTH = "AUTH"
@@ -18,6 +21,4 @@ declare global {
   }
 }
 
-// window.IndexTask = window.IndexTask || {};
-// window.theme = window.theme || {};
 

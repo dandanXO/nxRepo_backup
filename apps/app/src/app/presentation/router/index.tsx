@@ -3,11 +3,8 @@ import React, {Suspense, useState} from "react";
 import {
   Routes,
   Route,
-} from "react-router";
-
-import {
   useLocation,
-} from "react-router-dom";
+} from "react-router";
 
 import { IndexPage } from "../pages/IndexPage";
 import { AuthPage } from "../pages/AuthPage";
@@ -42,6 +39,7 @@ import {RootState} from "../../usecaseFlow/reduxStore";
 
 import {LoginPage} from '../pages/LoginPage';
 import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
+import {PagePathEnum} from "../pages";
 
 
 
@@ -77,7 +75,7 @@ export const AppRouter = () => {
             <Route path="repayment-modal" element={<RepaymentModal />} />
             <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
           </Route>
-          <Route path="/loan-record" element={<LoanRecordPage />} />
+          <Route path={PagePathEnum.PaymentPage} element={<LoanRecordPage />} />
           <Route path="/my-coupon-list" element={<MyCouponListPage />} />
           <Route path="/mu-coupon" element={<MyCouponPage />} />
           <Route path="/partner" element={<PartnerPage />} />
@@ -105,7 +103,6 @@ export const AppRouter = () => {
     </>
   );
 };
-
 
 
 export const OuterRouter = () => {

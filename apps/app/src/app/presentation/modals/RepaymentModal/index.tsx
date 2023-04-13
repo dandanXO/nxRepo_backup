@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AdSVG from "./repayment_banner.svg";
 import Button from "../../components/Button";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router";
 
 
 import {

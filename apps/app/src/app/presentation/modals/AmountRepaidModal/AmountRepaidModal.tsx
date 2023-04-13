@@ -11,7 +11,7 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import { i18nAmountRepaidModal } from "./i18n/translations";
 import { GetLoanDetailResponse } from "../../../api/rtk/old/getLoanDetail";
 import recordStatusStyleProps from "../../../modules/recordStatusColorMapper";
-import { useNavigate, useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router";
 import { stat } from "fs";
 const ModalContentStyled = styled.div`
     padding: 0 12px;

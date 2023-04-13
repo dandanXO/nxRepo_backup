@@ -4,7 +4,7 @@ import { environment } from "../../../../environments/environment";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { i18nExtendModal } from "./i18n/translations";
 import { GetLoanDetailRepayConfirmDetail } from "../../../api/rtk/old/getLoanDetail";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import Button from "../../components/Button";
 import ListItem from "../../components/ListItem";
 import Divider from "../../components/Divider";

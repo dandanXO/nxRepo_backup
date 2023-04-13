@@ -14,7 +14,7 @@ import { I18UploadPaymentReceiptPageProps } from "../../types/I18UploadPaymentRe
 import { withTranslation } from "react-i18next";
 import { i18nUploadPaymentReceiptPage } from "../../translations";
 import { Navigation } from "../../../../../components/layouts/Navigation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)((props: I18UploadPaymentReceiptPageProps) => {

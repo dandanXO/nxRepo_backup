@@ -2,7 +2,7 @@ import axios, {AxiosError, AxiosRequestConfig} from "axios";
 import {getToken} from "./getToken";
 import {alertModal} from "./alertModal";
 
-const token = getToken();
+
 
 export const runAxios = async (
   baseUrl: string,
@@ -14,6 +14,9 @@ export const runAxios = async (
 ) => {
   // NOTICE: REFACTOR ME
   // NOTE: 這邊得 catch error, otherwise other place cannot handle
+
+  // NOTE: Dynamic get token
+  const token = getToken();
   try {
     const config = {
       url: baseUrl + url,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigation } from "../../components/layouts/Navigation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Page } from "../../components/layouts/Page";
 import { Input } from "@frontend/mobile/shared/ui";
 import { z } from "zod";

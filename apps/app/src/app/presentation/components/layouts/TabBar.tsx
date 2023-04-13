@@ -1,6 +1,8 @@
 import {MdOutlineAccountCircle, MdPayment, RiMoneyDollarCircleFill} from "react-icons/all";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router";
+
 import cx from "classnames";
+import {PagePathEnum} from "../../pages";
 
 type Props = {
   hasOrder: boolean;
@@ -21,12 +23,12 @@ export const TabBar = (props: Props) => {
         })}>Loan</div>
       </div>
       <div className={"flex-1 flex flex-col justify-center items-center relative"} onClick={() => {
-        navigate("/loan-record")
+        navigate(PagePathEnum.PaymentPage)
       }}>
-        <MdPayment color={location.pathname === "/loan-record" ? "#F58B10" : "#D7D7D7"} size={20}/>
+        <MdPayment color={location.pathname === PagePathEnum.PaymentPage ? "#F58B10" : "#D7D7D7"} size={20}/>
         <div className={cx({
-          "text-orange-300": location.pathname === "/loan-record",
-          "text-gray-300": location.pathname !== "/loan-record",
+          "text-orange-300": location.pathname === PagePathEnum.PaymentPage,
+          "text-gray-300": location.pathname !== PagePathEnum.PaymentPage,
         })}>Payment</div>
         {props.hasOrder && (
           <div className={"bg-[#F24822] w-2 h-2 rounded-full absolute right-1/3 top-2"}></div>

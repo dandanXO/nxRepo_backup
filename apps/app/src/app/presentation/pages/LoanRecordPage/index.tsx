@@ -3,7 +3,7 @@ import PaymentItem from "./PaymentItem";
 import { useLazyGetLoanRecordListQuery } from "../../../api/rtk";
 import Tag from "../../components/Tag";
 import { Navigation } from "../../components/layouts/Navigation";
-import {Outlet, useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router";
 // @ts-ignore
 import { default as data } from './data.json';
 import {Page} from "../../components/layouts/Page";

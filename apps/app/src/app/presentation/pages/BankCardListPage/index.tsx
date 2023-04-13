@@ -1,6 +1,6 @@
 import BankCard from "./BankCard";
 import NoDataIcon from '../../components/images/NoData.svg';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useLazyGetBankCardListQuery } from "../../../api/rtk";
 import { useEffect, useState } from "react";
 import { Navigation } from "../../components/layouts/Navigation";

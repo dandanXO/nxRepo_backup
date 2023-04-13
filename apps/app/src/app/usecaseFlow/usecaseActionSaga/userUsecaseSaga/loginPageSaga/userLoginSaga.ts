@@ -20,7 +20,7 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
       // console.log("data.payload.token", data.payload.token)
       yield put(appSlice.actions.updateMode(AppRunningModeEnum.WEB))
       yield put(appSlice.actions.updateToken(token))
-      yield put(push('/'));
+      yield put(push(`/?token=${token}`));
     }
   } catch (error) {
     // console.log("userLoginSaga.error", error);

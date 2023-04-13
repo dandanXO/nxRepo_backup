@@ -1,5 +1,6 @@
 import { Navigation } from "../../components/layouts/Navigation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import MailIcon from '../../components/images/MailIcon.svg';
 import Button from "../../components/Button";
 import { Outlet } from "react-router-dom";

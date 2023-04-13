@@ -1,4 +1,5 @@
-import { Link ,useNavigate,useLocation} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import Button from "../../components/Button";
 import {
     Overlay,
@@ -8,8 +9,8 @@ import {
     ListItem,
 } from "@frontend/mobile/shared/ui";
 export const ExtendConfirmModal = () => {
-    const navigate=useNavigate();
-    const location=useLocation();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     return (
         <Overlay

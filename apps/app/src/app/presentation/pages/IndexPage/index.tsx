@@ -22,7 +22,7 @@ import {LoanOverViewSection} from "./sections/LoanOverViewSection";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import cx from "classnames";
 import {NoticeUserReacquireOver3TimeSections} from "./sections/NoticeSection/NoticeUserReacquireOver3TimeSections";
-import {Outlet, useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router";
 import {Horizontal} from "../../components/layouts/Horizontal";
 import {Product} from "./sections/RecommendedProductsSection/Product";
 import {AiOutlineClose, MdExpandLess, MdExpandMore} from "react-icons/all";

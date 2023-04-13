@@ -5,11 +5,12 @@ import {useDispatch} from "react-redux";
 import cx from "classnames";
 import {Button} from "../../components/layouts/Button";
 import {LoginPageSataActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPageSaga";
+import { useNavigate } from "react-router";
 
 
 export const LoginForm = () => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const [phoneNumberData, setPhoneNumberData] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
@@ -152,6 +153,13 @@ export const LoginForm = () => {
                 onClick={() => {
                   handleLogin()
                 }}
+              />
+              <Button dataTestingID={"apply"} text={"Test"} bgColor={cx({
+                "bg-[#F58B10]": true,
+              })}
+                      onClick={() => {
+                        navigate("/my-coupon-list")
+                      }}
               />
               <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
                   <Link className="text-sm underline decoration-blue-500 text-blue-500 mx-1" to={'/privacy-policy-modal'}>Privacy Policy</Link>

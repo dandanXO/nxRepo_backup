@@ -1,6 +1,7 @@
 
 import {Overlay} from "@frontend/mobile/shared/ui";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+
 
 const PrivacyPolicyModal = (props: any) => {
     const navigate=useNavigate()

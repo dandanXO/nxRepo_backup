@@ -19,12 +19,17 @@ export function* userViewIndexPageSaga(action: any) {
 
     const token: string = yield select((state: RootState) => state.app.token);
     if(!token) {
+      console.log("[APP][MODE]: InAndroid Mode")
+      // NOTICE: App Mode: InAndroid Mode
       // TODO: get token from querystring
       // const token = getToken();
-
-      const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-      yield put(indexPageSlice.actions.updateUserAPI(userResponse));
+    } else {
+      console.log("[APP][MODE]: Web")
+      // NOTICE: App Mode: Web
     }
+
+    const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
+    yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
     const { riskControl } = yield select((state: RootState) => state.indexPage);
     const status: number = yield select((state: RootState) => state.indexPage.user.state);
