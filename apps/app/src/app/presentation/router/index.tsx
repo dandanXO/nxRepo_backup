@@ -5,6 +5,7 @@ import {Route, Routes, useLocation,} from "react-router";
 //  set to 'es2020', 'es2022', 'esnext', 'commonjs', 'amd', 'system', 'umd', 'node16', or 'nodenext'.
 import loadable from '@loadable/component'
 
+// NOTE: Page
 import {CategoryPage} from "../pages/__test__/CategoryPage";
 const IndexPage = loadable(() => import("../pages/IndexPage"));
 const AuthPage = loadable(() => import("../pages/AuthPage"));
@@ -24,23 +25,23 @@ const PrivacyPolicyPage = loadable(() => import("../pages/PrivacyPolicyPage"));
 const QuotaModelPage = loadable(() => import("../pages/QuotaModelPage"));
 const UploadedPaymentReceiptPage = loadable(() => import("../pages/UploadedPaymentReceiptPage"));
 const UploadPaymentReceiptPage = loadable(() => import("../pages/UploadPaymentReceiptPage"));
+const ApplicationProgressPage = loadable(() => import("../pages/ApplicationProgressPage"));
+const LoginPage = loadable(() => import('../pages/LoginPage'));
+
+// NOTE: Modal
 const RepaymentModal = loadable(() => import('../modals/RepaymentModal'));
 const AmountRepaidModal = loadable(() => import("../modals/AmountRepaidModal/AmountRepaidModal"));
 const ExtendConfirmModal = loadable(() => import("../modals/ExtendConfirmModal"));
 const ExtendModal = loadable(() => import("../modals/ExtendModal/ExtendModal"));
-const ApplicationProgressPage = loadable(() => import("../pages/ApplicationProgressPage"));
 const CustomerServiceModal = loadable(() => import("../modals/CustomerServiceModal"));
 const LogoutModal = loadable(() => import("../modals/LogoutModal"));
-
 const APIBoundaryModal = loadable(() => import("../modals/APIBoundaryModal"));
-const LoginPage = loadable(() => import('../pages/LoginPage'));
-
 const PrivacyPolicyModal = loadable(() => import("../modals/PrivacyPolicyModal"));
 
 import { useDispatch, useSelector } from "react-redux"
-
 import {TabBar} from "../components/layouts/TabBar";
 import {RootState} from "../../usecaseFlow/reduxStore";
+
 import {PagePathEnum} from "../pages/PagePathEnum";
 
 export const AppRouter = () => {
