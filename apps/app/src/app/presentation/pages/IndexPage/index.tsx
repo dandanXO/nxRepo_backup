@@ -279,11 +279,9 @@ export const IndexPage = () => {
 
   const applyDisable = useMemo(() => {
     let disable = false;
-
     // NOTICE: 主義下面判斷是否變成不能根據優先順序
     if(
       indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
-      indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder ||
       indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
       // NOTICE: 額度不足
       // REFACTOR ME
@@ -304,7 +302,7 @@ export const IndexPage = () => {
       indexPageState.user.state === USER_AUTH_STATE.ready,
       indexPageState.user.state === USER_AUTH_STATE.authing,
       indexPageState.user.state === USER_AUTH_STATE.reject,
-
+      (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able && indexPageState.order.state !==ORDER_STATE.hasInComingOverdueOrder && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder ),
     ].some(condition => condition === true);
   }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state])
 
@@ -399,7 +397,7 @@ export const IndexPage = () => {
               indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
               // NOTICE: 額度不足
               indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount === 0,
-            ].some(condition => condition === true) &&
+            ].some(condition => condition === true) && indexPageState.user.state === USER_AUTH_STATE.success && 
             (
             <div className={"mb-3"}>
               <LoanOverViewSection state={indexPageState}/>
@@ -466,7 +464,8 @@ export const IndexPage = () => {
       <div className={"sticky bottom-[63px] px-3 py-2"}>
         {/*TODO*/}
         {!applyHide &&
-          (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) && (
+        //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) && 
+          (
           <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={cx({
             "bg-[#F58B10]": !applyDisable,
             "bg-[#D7D7D7]": applyDisable,
@@ -485,7 +484,6 @@ export const IndexPage = () => {
             }} dataTestingID={"viewAppProgress"} text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
           </>
         )}
-
         {isLoading && (
           <div className={"text-xs text-gray-500 text-center mb-3"}>
             Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.
@@ -494,8 +492,14 @@ export const IndexPage = () => {
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {(
-          indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able ||
-          indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time
+          ( 
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able ||
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time
+          ) && 
+          (
+            indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
+            indexPageState.order.state !== ORDER_STATE.hasOverdueOrder
+          )
         ) && (
           <>
             <Button

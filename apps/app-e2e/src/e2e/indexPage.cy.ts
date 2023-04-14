@@ -145,6 +145,7 @@ describe('IndexPage', () => {
     indexPagePo.adBanner().should("be.visible")
   })
 
+  // FIGMA: User In progress (Android: Level 2)
   it("status: 用戶認證中", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -271,6 +272,7 @@ describe('IndexPage', () => {
     // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
   })
 
+  // User reject (Android: Level 1)
   it("status: 用戶認證被拒絕", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -298,10 +300,6 @@ describe('IndexPage', () => {
     // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
   })
 
-  it("status: 用戶沒被拒絕，但風控額度回來額度直接為 0", () => {
-
-  })
-
   // NOTICE: 訂單相關
 
 
@@ -315,7 +313,9 @@ describe('IndexPage', () => {
   //   //
   // })
 
-  it.only("status: 用戶已認證、有3天即將到期的訂單", () => {
+
+  // FIGMA: 首頁-認證完成-訂單成立-有即將到期單 (Android: Level 6)
+  it("status: 用戶已認證、有3天即將到期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -336,7 +336,7 @@ describe('IndexPage', () => {
     const indexServiceResponse: IndexServiceResponse = {
       "totalAmount": 15000,
       "usedAmount": 15000,
-      "availableAmount": 0,
+      "availableAmount": 900,
       "quotaBar": {
         "min": 0,
         "max": 0,
@@ -433,7 +433,7 @@ describe('IndexPage', () => {
     // NOTE: important 看到反灰無法點擊的 Apply Now Button
   })
 
-
+  // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
   it("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -455,7 +455,7 @@ describe('IndexPage', () => {
     const indexServiceResponse: IndexServiceResponse = {
       "totalAmount": 15000,
       "usedAmount": 15000,
-      "availableAmount": 0,
+      "availableAmount": 900,
       "quotaBar": {
         "min": 0,
         "max": 0,
@@ -514,7 +514,7 @@ describe('IndexPage', () => {
       "refreshOverRetry": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "seconds"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -554,7 +554,8 @@ describe('IndexPage', () => {
   })
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
-  it("status: 用戶已認證、新訂單被拒絕。新客情境：被拒絕。", () => {
+  // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
+  it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
 
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -698,125 +699,10 @@ describe('IndexPage', () => {
     // NOTE: important 根據可返回借款天數顯示倒數計時器
   })
 
-  it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
-
-    // NOTE: Given
-    const userServiceResponse: GetUserInfoServiceResponse = {
-      "userName": "9013452123",
-      "status": USER_AUTH_STATE.success,
-      "demoAccount": false,
-      "oldUser": false,
-      "needUpdateKyc": false,
-      "organic": false
-    }
-    cy.intercept("get", "/api/v2/login/info", {
-      statusCode: 200,
-      body: userServiceResponse,
-    }).as("getInfo").then(() => {
-      console.log("info");
-    })
-
-    // NOTE: Given
-    const indexServiceResponse: IndexServiceResponse = {
-      "totalAmount": 15000,
-      "usedAmount": 15000,
-      "availableAmount": 0,
-      "quotaBar": {
-        "min": 0,
-        "max": 0,
-        "current": 0,
-        "serial": 1000
-      },
-      "chargeFeeDetails": [
-        {
-          "title": "Processing Fee",
-          "counting": 0.4,
-          "key": "PROCESSING_FEE"
-        },
-        {
-          "title": "Service Fee",
-          "counting": 0.5,
-          "key": "SERVICE_FEE"
-        },
-        {
-          "title": "Interest Fee",
-          "counting": 0.1,
-          "key": "LOAN_INTEREST"
-        }
-      ],
-      "products": [
-        {
-          "productId": 1,
-          "productName": "AA LOAN",
-          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
-          "min": 2000,
-          "max": 5000,
-          "terms": 7,
-          "platformChargeFeeRate": 0.4
-        },
-        {
-          "productId": 2,
-          "productName": "BB LOAN",
-          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-          "min": 3000,
-          "max": 5000,
-          "terms": 7,
-          "platformChargeFeeRate": 0.4
-        },
-        {
-          "productId": 3,
-          "productName": "CC LOAN",
-          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
-          "min": 4000,
-          "max": 6000,
-          "terms": 7,
-          "platformChargeFeeRate": 0.4
-        }
-      ],
-      "needRiskKycUpdate": false,
-      "riskReject": true,
-      "refreshable": true,
-      "noQuotaByRetryFewTimes": false,
-      "orderUnderReview": false,
-      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(1, "seconds"),
-      "offerExpireTime": "2023-03-28T08:10:24",
-      "oldUserForceApply": false,
-      "payableRecords": [
-        {
-          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
-          "productName": "AA LOAN",
-          "payableAmount": 1000,
-          "dueDate": moment().tz(INDIA_TIME_ZONE).add(-1, "second"),
-          "overdue": true,
-          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
-        }
-      ],
-      "marquee": "我是跑馬燈...",
-      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
-      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
-      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
-    }
-    cy.intercept("get", "/api/v3/index", {
-      statusCode: 200,
-      body: indexServiceResponse,
-    }).as("getIndex").then(() => {
-      console.log("index");
-    })
-
-
-    visitIndexPage();
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到反灰無法使用的可借款額度拉霸、歸零的倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸按鈕在最右邊
-    // NOTE: important 看到訂單被拒絕訊息，可返回借款天數，新客為 90 天、老客為 7 天。
-    // NOTE: important 根據可返回借款天數顯示倒數計時器
-  })
-
 
   // NOTICE: 風控相關
   // NOTICE: 沒有應還訂單
+  // FIGMA: 首頁-認證完成-額度時間到期-需重新取得信用額度 (Android: Level 8)
   it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。沒有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -898,7 +784,7 @@ describe('IndexPage', () => {
       "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "seconds"),
       "oldUserForceApply": false,
       "payableRecords": [],
       "marquee": "我是跑馬燈...",
@@ -1062,6 +948,7 @@ describe('IndexPage', () => {
   })
 
   // NOTICE: 有應還訂單
+  // FIGMA: 首頁-認證完成-額度時間到期-需重新取得信用額度 (Android: Level 8)
   it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -1104,7 +991,7 @@ describe('IndexPage', () => {
 
       "totalAmount": 15000,
       "usedAmount": 15000,
-      "availableAmount": 0,
+      "availableAmount": 900,
       "quotaBar": {
         "min": 0,
         "max": 0,
@@ -1595,6 +1482,7 @@ describe('IndexPage', () => {
   })
 
 
+  //FIGMA: 首頁-認證完成-沒被拒，額度0的用戶 (Android: Level 4)
   it("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -1621,7 +1509,7 @@ describe('IndexPage', () => {
 
       // NOTICE: 風控有無過期
       // NOTE: 詢問後端，直接沒額度的風控有無過期??
-      // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days").format(),
+    //   "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days").format(),
       "offerExpireTime": null,
 
       // NOTICE: 風控是否可重整
@@ -1998,6 +1886,7 @@ describe('IndexPage', () => {
             },
           })
         } else if(indexCount === 2) {
+            console.log('indexCount',indexCount)
           res.send({
             statusCode: 200,
             body: {
@@ -2068,6 +1957,7 @@ describe('IndexPage', () => {
   })
 
 
+  //FIGMA: 首頁-認證完成-有效額度時間-額度不足 (Android: Level 7)
   it("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -2149,7 +2039,7 @@ describe('IndexPage', () => {
       "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(10, "seconds"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -2188,7 +2078,8 @@ describe('IndexPage', () => {
 
 
 
-  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 9)
+  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
