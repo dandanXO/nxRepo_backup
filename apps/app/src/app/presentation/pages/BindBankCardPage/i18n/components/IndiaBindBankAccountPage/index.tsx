@@ -68,9 +68,10 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                     upiData={upiData} onUPIIDChange={onUPIIDChange}
                     isFormPending={isFormPending || false}
                     confirm={() => {
-                        if (validateCommonForm() && validateIndiaForm()) {
-                            confirm();
-                        }
+                      // NOTE: validate and display errors
+                      const validation = validateCommonForm()
+                      const validation2 = validateIndiaForm();
+                      if(validation && validation2) confirm();
                     }}
                 />
             </CustomPage>
