@@ -50,8 +50,8 @@ export const useIndiaBankAccountForm = () => {
 
   // onIFSCChange
   const onIFSCChange = (event: any) => {
-    let data = event.target.value;
-    data = data.replace(/[^a-zA-Z0-9]/g, "");
+    const data = event.target.value;
+    // data = data.replace(/[^a-zA-Z0-9]/g, "");
     setIFSCData({
       ...ifscData,
       data,
