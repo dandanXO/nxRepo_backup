@@ -2,6 +2,7 @@ export interface GetDailyRiskControlListRequestQuery {
     endTime?: string;                 // 結束時間
     startTime?: string;               // 開始時間
     riskControlModel?: string;        // 风控名稱
+    isOldUser?: boolean;              // 新/老客
 }
 
 export interface GetDailyRiskControlListResponse {
