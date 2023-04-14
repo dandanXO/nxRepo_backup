@@ -20,7 +20,8 @@ const DailyRiskControlTable = () => {
     const initSearchList: GetDailyRiskControlListRequestQuery = {
         endTime: dayRange[1].format('YYYY-MM-DD 23:59:59'),
         startTime: dayRange[0].format('YYYY-MM-DD 00:00:00') ,
-        riskControlModel: ''
+        riskControlModel: '',
+        isOldUser: false
     }
 
     // state
@@ -67,10 +68,10 @@ const DailyRiskControlTable = () => {
     const columns: ProColumns<GetDailyRiskControlList>[] = [
         { title: '日期', dataIndex: 'dayRange', key: 'dayRange', valueType: 'dateRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: dayRange },
         { title: '风控名称', dataIndex: 'riskControlModel', key: 'riskControlModel', initialValue: "", valueEnum: providerListEnum, hideInTable: true },
-        { title: '新用户/老用户', dataIndex: 'isOldUser', key: 'isOldUser', initialValue: "false", valueEnum: {
+        { title: '新用户/老用户', dataIndex: 'isOldUser', key: 'isOldUser', initialValue: 'false', valueEnum: {
             '': { text: '不限' },
-            false: { text: '新用户' },
-            true: { text: '老用户' },
+            'false': { text: '新用户' },
+            'true': { text: '老用户' },
         }, hideInTable: true },
         { title: '日期', dataIndex: 'day', key: 'day', hideInSearch: true },
         { title: '风控请求数', dataIndex: 'requestCount', key: 'requestCount', hideInSearch: true },
