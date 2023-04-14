@@ -81,7 +81,7 @@ export const AppRouter = () => {
           <Route path="/quota-model" element={<QuotaModelPage />} />
           <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
           <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
-          <Route path="/log-out-modal" element={<LogoutModal />} />
+          {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
 

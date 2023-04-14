@@ -2,7 +2,7 @@ import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
 import MailIcon from '../../components/images/MailIcon.svg';
 import Button from "../../components/Button";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../usecaseFlow/reduxStore";
 

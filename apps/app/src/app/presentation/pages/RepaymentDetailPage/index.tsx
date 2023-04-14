@@ -3,7 +3,7 @@ import Divider from "../../components/Divider";
 import ListItem from "../../components/ListItem";
 import Button from "../../components/Button";
 import { AmountPaidIcon, } from "@frontend/mobile/shared/ui";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { useNavigate, useLocation } from "react-router";
 import { useLazyGetLoanDetailQuery } from "../../../api/rtk";
 import { useEffect, useState } from "react";
@@ -45,14 +45,26 @@ export const RepaymentDetailPage = (props: any) => {
                 <ListItem title={
                     <div className={`flex flex-row item-center items-center`}>
                         <div className={` mr-1`}>Amount Repaid</div>
-                        <Link to={{pathname: 'amount-repaid-record-modal'}} state={{repayRecords}}><img src={AmountPaidIcon} /></Link>
+                        <div onClick={() => {
+                          navigate('amount-repaid-record-modal', {
+                            state:repayRecords
+                          })}
+                        }><img src={AmountPaidIcon} /></div>
                     </div>
                 } text={`- ${environment.currency} ${paidAmount ?? ''}`} titleColor="text-slate-400" />
                 <Divider />
                 <ListItem title={'Repayment Amount'} text={`${environment.currency} ${totalRepayAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" />
                 <div className={`flex flex-row my-3`}>
-                    <Link to={{pathname: `extend-confirm-modal`}} state={{currentData}} className={`grow mr-1.5`}><Button buttonText={'Extend'} backgroundColor={'bg-orange-300'} width={`w-full`} /></Link>
-                    <Link to={{pathname: `repayment-modal`}} state={{currentData}} className={`grow ml-1.5`}><Button buttonText={'Repay'} width={`w-full`} /></Link>
+                    <div onClick={() => {
+                      navigate('extend-confirm-modal', {
+                        state: currentData
+                      })}
+                    } className={`grow mr-1.5`}><Button buttonText={'Extend'} backgroundColor={'bg-orange-300'} width={`w-full`} /></div>
+                    <div onClick={() => {
+                      navigate('repayment-modal', {
+                        state: currentData
+                      })}
+                    }  className={`grow ml-1.5`}><Button buttonText={'Repay'} width={`w-full`} /></div>
                 </div>
                 <div className={`text-xs text-gray-300`}>
                     <div>Attention：</div>
@@ -64,7 +76,11 @@ export const RepaymentDetailPage = (props: any) => {
                     </ul>
                 </div>
                 <div className={`flex my-3`}>
-                    <Link to={{ pathname: `/upload-payment-receipt` ,search:`?token=${getToken()}`}} state={{orderNo}}className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></Link>
+                    <div onClick={() => {
+                      navigate(`/upload-payment-receipt?token=${getToken()}`, {
+                        state: orderNo,
+                      })}
+                    } className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></div>
                 </div>
                 <div className={`text-xs text-gray-300`}>
                     After completing the repayment, take a screenshot and upload your repayment receipt here.

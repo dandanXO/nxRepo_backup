@@ -1,4 +1,4 @@
-import {Link, Route} from "react-router-dom";
+import {Route} from "react-router";
 import React from "react";
 import {ApplicationProgressPage} from "../ApplicationProgressPage";
 import {PagePathEnum} from "../index";
@@ -17,26 +17,26 @@ export const CategoryPage = () => {
             navigate("/my-coupon-list")
           }}
       />
-      <div><Link to="/">IndexPage</Link></div>
-      <div><Link to="/login">Login</Link></div>
-      <div><Link to="/application-progress">ApplicationProgressPage</Link></div>
-      <div><Link to="/auth">AuthPage</Link></div>
-      <div><Link to="/bankcard-list">BankCardListPage</Link></div>
-      <div><Link to="/bind-bankcard">BindBankCardPage</Link></div>
-      <div><Link to="/customer-service">CustomerServicePage</Link></div>
-      <div><Link to="/disclosure-statement">DisclosureStatementPage</Link></div>
-      <div><Link to="/extend-details">ExtendDetailsPage</Link></div>
-      <div><Link to="/finished-repayment">FinishedRepaymentPage</Link></div>
-      <div><Link to={PagePathEnum.RepaymentDetailPage}>LoanRecordDetailPage</Link></div>
-      <div><Link to={PagePathEnum.RepaymentPage}>PaymentPage</Link></div>
-      <div><Link to="/my-coupon-list">MyCouponListPage</Link></div>
-      <div><Link to="/mu-coupon">MyCouponPage</Link></div>
-      <div><Link to="/partner">PartnerPage</Link></div>
-      <div><Link to={PagePathEnum.PersonalInfoPage}>PersonalInfoPage</Link></div>
-      <div><Link to="/privacy-policy">PrivacyPolicyPage</Link></div>
-      <div><Link to="/quota-model">QuotaModelPage</Link></div>
-      <div><Link to="/uploaded-payment-receipt">UploadedPaymentReceiptPage</Link></div>
-      <div><Link to="/upload-payment-receipt">UploadPaymentReceiptPage</Link></div>
+      {/*<div><div to="/">IndexPage</div></div>*/}
+      {/*<div><div to="/login">Login</div></div>*/}
+      {/*<div><div to="/application-progress">ApplicationProgressPage</div></div>*/}
+      {/*<div><div to="/auth">AuthPage</div></div>*/}
+      {/*<div><div to="/bankcard-list">BankCardListPage</div></div>*/}
+      {/*<div><div to="/bind-bankcard">BindBankCardPage</div></div>*/}
+      {/*<div><div to="/customer-service">CustomerServicePage</div></div>*/}
+      {/*<div><div to="/disclosure-statement">DisclosureStatementPage</div></div>*/}
+      {/*<div><div to="/extend-details">ExtendDetailsPage</div></div>*/}
+      {/*<div><div to="/finished-repayment">FinishedRepaymentPage</div></div>*/}
+      {/*<div><div to={PagePathEnum.RepaymentDetailPage}>LoanRecordDetailPage</div></div>*/}
+      {/*<div><div to={PagePathEnum.RepaymentPage}>PaymentPage</div></div>*/}
+      {/*<div><div to="/my-coupon-list">MyCouponListPage</div></div>*/}
+      {/*<div><div to="/mu-coupon">MyCouponPage</div></div>*/}
+      {/*<div><div to="/partner">PartnerPage</div></div>*/}
+      {/*<div><div to={PagePathEnum.PersonalInfoPage}>PersonalInfoPage</div></div>*/}
+      {/*<div><div to="/privacy-policy">PrivacyPolicyPage</div></div>*/}
+      {/*<div><div to="/quota-model">QuotaModelPage</div></div>*/}
+      {/*<div><div to="/uploaded-payment-receipt">UploadedPaymentReceiptPage</div></div>*/}
+      {/*<div><div to="/upload-payment-receipt">UploadPaymentReceiptPage</div></div>*/}
     </div>
   )
 }

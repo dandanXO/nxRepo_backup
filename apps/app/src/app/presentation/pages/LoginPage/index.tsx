@@ -5,8 +5,7 @@ import { Page } from "../../components/layouts/Page";
 import { Input } from "@frontend/mobile/shared/ui";
 import { z } from "zod";
 import { LoginForm } from "./LoginForm";
-import { Outlet } from "react-router-dom";
-
+import { Outlet } from "react-router";
 
 export const LoginPage = () => {
 
