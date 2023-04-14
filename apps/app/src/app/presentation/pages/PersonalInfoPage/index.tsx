@@ -22,8 +22,6 @@ export const PersonalInfoPage = () => {
 
     return (
       <Page className="flex flex-col justify-between">
-          <Navigation title={""} back={() => { navigate(-1) }} />
-
         <div className={`flex flex-row justify-center items-center pb-4`}>
           <div className={`mr-3`}><img src={UserIcon} /></div>
           <div className={`flex flex-col justify-center items-center `}>

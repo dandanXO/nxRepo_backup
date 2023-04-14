@@ -15,9 +15,7 @@ export const ApplicationProgressPage = () => {
 
   return (
     <div>
-      <Navigation title={"Application progress"} back={() => {
-        navigate("/")
-      }}/>
+      <Navigation title={"Application progress"} back={() => { navigate(-1) }}/>
       <PageContent>
         {currentData?.map((news) => {
             return (

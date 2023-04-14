@@ -7,7 +7,8 @@ type Props = IndexPageProps & {
 };
 
 export const UserInfoSupportField = (props: Props) => {
-    const userName = props.state.user.userName.slice(0, 3) + "****" + props.state.user.userName.slice(7, 10);
+
+    const userName = props.state.user?.userName?.length >= 10 ? props.state.user.userName.slice(0, 3) + "****" + props.state.user.userName.slice(7, 10) : props.state.user.userName;
     const [isHideUserName, setIsHideUserName] = useState(true)
     return (
         <div className={"w-full flex flex-row justify-between "}>
