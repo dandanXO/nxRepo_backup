@@ -7,7 +7,8 @@ import { Navigation } from "../../components/layouts/Navigation";
 import { usePostBankCardMainMutation } from "../../../api/rtk";
 import { SetPrimarySuccessModal } from "./SetPrimarySuccessModal";
 import { getToken } from "../../../api/base/getToken";
-export const BankCardListPage = () => {
+
+const BankCardListPage = () => {
     const navigate = useNavigate();
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetBankCardListQuery({
@@ -67,3 +68,5 @@ export const BankCardListPage = () => {
         </div>
     )
 }
+
+export default BankCardListPage;

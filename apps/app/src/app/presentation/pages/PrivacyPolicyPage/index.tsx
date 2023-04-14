@@ -1,7 +1,7 @@
 import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
 
-export const PrivacyPolicyPage = () => {
+const PrivacyPolicyPage = () => {
     const navigate = useNavigate();
     return (
         <div>
@@ -12,3 +12,5 @@ export const PrivacyPolicyPage = () => {
         </div>
     )
 }
+
+export default PrivacyPolicyPage;

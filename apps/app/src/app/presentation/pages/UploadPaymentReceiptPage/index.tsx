@@ -93,4 +93,4 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
     ))
 };
 
-export const UploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(Uni18nUploadPaymentReceiptPage);
+export default withTranslation(i18nUploadPaymentReceiptPage.namespace)(Uni18nUploadPaymentReceiptPage);

@@ -1,10 +1,4 @@
-import "./app/modules/i18n";
-import "./app/modules/datetime/index";
-import "./app/modules/window/window"
-
 import { StrictMode } from 'react';
-
-
 // NOTE: tailwind
 import "./style.css";
 // TODO: windicss

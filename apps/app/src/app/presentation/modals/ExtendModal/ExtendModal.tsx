@@ -13,8 +13,7 @@ import useRepayTypes from "../../hooks/useRepayTypes";
 import moment from "moment";
 
 
-
-export const PureExtendModal = (props: any) => {
+const PureExtendModal = (props: any) => {
     const navigate = useNavigate();
     const location = useLocation();
     console.log('extend location', location)

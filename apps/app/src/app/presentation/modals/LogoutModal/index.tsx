@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 
 
 
-export const LogoutModal = (props: any) => {
+const LogoutModal = (props: any) => {
     const navigate = useNavigate();
     const location = useLocation();
     console.log('extend location', location)

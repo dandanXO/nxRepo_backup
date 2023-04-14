@@ -1,7 +1,7 @@
 import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
 
-export const DisclosureStatementPage = () => {
+const DisclosureStatementPage = () => {
     const navigate = useNavigate();
     return (
         <div>
@@ -12,3 +12,4 @@ export const DisclosureStatementPage = () => {
         </div>
     )
 }
+export default DisclosureStatementPage

@@ -90,7 +90,8 @@ export enum PageStateEnum {
 export type PageState = {
   pageState: PageStateEnum;
 }
-export const IndexPage = () => {
+
+const IndexPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -587,4 +588,5 @@ export const IndexPage = () => {
     </Page>
   )
 }
+export default IndexPage;
 

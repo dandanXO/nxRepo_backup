@@ -7,7 +7,7 @@ type Props = {
   title?: string;
   message?: string;
 }
-export const APIBoundaryModal = (props: Props) => {
+const APIBoundaryModal = (props: Props) => {
   const dispatch = useDispatch();
   const onClickOK = useCallback(() => {
     dispatch(APIBoundaryModuleSlice.actions.update({
@@ -38,3 +38,4 @@ export const APIBoundaryModal = (props: Props) => {
     </div>
   )
 }
+export default APIBoundaryModal;

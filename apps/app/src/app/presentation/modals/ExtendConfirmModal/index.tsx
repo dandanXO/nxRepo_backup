@@ -8,7 +8,8 @@ import {
     ListItem,
 } from "@frontend/mobile/shared/ui";
 import {PagePathEnum} from "../../pages/PagePathEnum";
-export const ExtendConfirmModal = () => {
+
+const ExtendConfirmModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -37,3 +38,5 @@ export const ExtendConfirmModal = () => {
 
     )
 }
+
+export default ExtendConfirmModal;

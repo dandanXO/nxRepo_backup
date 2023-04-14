@@ -5,8 +5,9 @@ import { useNavigate } from "react-router";
 import {useLazyGetUserProcessQuery} from "../../../api/rtk";
 import {useEffect} from "react";
 import moment from "moment-timezone";
+import CustomerServiceModal from "../../modals/CustomerServiceModal";
 
-export const ApplicationProgressPage = () => {
+const ApplicationProgressPage = () => {
   const navigate = useNavigate();
   const [trigger, {currentData}] = useLazyGetUserProcessQuery();
   useEffect(() => {
@@ -30,3 +31,5 @@ export const ApplicationProgressPage = () => {
     </div>
   )
 }
+
+export default ApplicationProgressPage;

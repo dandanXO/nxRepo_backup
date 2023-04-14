@@ -4,9 +4,10 @@ import { Overlay } from "@frontend/mobile/shared/ui";
 import { Navigation } from "../../components/layouts/Navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../usecaseFlow/reduxStore";
+import APIBoundaryModal from "../APIBoundaryModal";
 
 
-export const CustomerServiceModal = () => {
+const CustomerServiceModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -28,3 +29,4 @@ export const CustomerServiceModal = () => {
 
     )
 }
+export default CustomerServiceModal;

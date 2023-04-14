@@ -10,7 +10,7 @@ import {Page} from "../../components/layouts/Page";
 import {GetLoanRecordListRequest} from "../../../api/loanService/GetLoanRecordListRequest";
 
 
-export const LoanRecordPage = () => {
+const RepaymentPage = () => {
     console.log('config', data)
     const navigate = useNavigate();
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetLoanRecordListQuery({
@@ -58,3 +58,5 @@ export const LoanRecordPage = () => {
         </Page>
     )
 }
+
+export default RepaymentPage;

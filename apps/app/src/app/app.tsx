@@ -1,3 +1,7 @@
+import "./modules/i18n";
+import "./modules/datetime/index";
+import "./modules/window/window"
+
 import {environment} from "../environments/environment";
 import {AppThemeProvider} from "@frontend/mobile/shared/ui";
 import {getThemeConfig} from "./modules/theme/getThemeConfig";

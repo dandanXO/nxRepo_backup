@@ -1,6 +1,6 @@
 import {Route} from "react-router";
 import React from "react";
-import {ApplicationProgressPage} from "../ApplicationProgressPage";
+import ApplicationProgressPage from "../ApplicationProgressPage";
 import {PagePathEnum} from "../PagePathEnum";
 import cx from "classnames";
 import {Button} from "../../components/layouts/Button";

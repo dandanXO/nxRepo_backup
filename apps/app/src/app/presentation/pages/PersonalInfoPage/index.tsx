@@ -15,7 +15,7 @@ import {RootState} from "../../../usecaseFlow/reduxStore";
 import {PagePathEnum} from "../PagePathEnum";
 
 
-export const PersonalInfoPage = () => {
+const PersonalInfoPage = () => {
     const navigate = useNavigate();
     const { indexPage, app } = useSelector((state: RootState) => state)
     const { user } = indexPage;
@@ -64,3 +64,5 @@ export const PersonalInfoPage = () => {
       </Page>
     )
 }
+
+export default PersonalInfoPage;

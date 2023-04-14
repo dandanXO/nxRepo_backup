@@ -3,8 +3,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../usecaseFlow/reduxStore";
 
-
-export const PartnerPage = () => {
+const PartnerPage = () => {
     const navigate = useNavigate();
     const { init } = useSelector((state: RootState) => state.app)
     return (
@@ -13,3 +12,5 @@ export const PartnerPage = () => {
         </div>
     )
 }
+
+export default PartnerPage;

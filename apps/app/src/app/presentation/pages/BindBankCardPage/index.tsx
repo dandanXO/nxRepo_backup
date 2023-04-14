@@ -19,7 +19,7 @@ import {BangladeshCountry} from "../../../domain/country/constants/BangladeshCou
 import { useSelector } from "react-redux";
 
 
-export const BindBankCardPage = () => {
+const BindBankCardPage = () => {
     // NOTICE: Common
     // NOTE: cardholderName
     const pageQueryString = useLocationOrderQueryString();
@@ -82,3 +82,4 @@ export const BindBankCardPage = () => {
     ))
 };
 
+export default BindBankCardPage;

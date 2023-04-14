@@ -6,7 +6,7 @@ import { Outlet } from "react-router";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../usecaseFlow/reduxStore";
 
-export const CustomerServicePage = () => {
+const CustomerServicePage = () => {
     const navigate = useNavigate();
     const { app } = useSelector((state: RootState) => state);
     return (
@@ -26,3 +26,4 @@ export const CustomerServicePage = () => {
         </div>
     )
 }
+export default CustomerServicePage;

@@ -7,7 +7,7 @@ import { z } from "zod";
 import { LoginForm } from "./LoginForm";
 import { Outlet } from "react-router";
 
-export const LoginPage = () => {
+const LoginPage = () => {
 
     const navigate = useNavigate();
 
@@ -30,3 +30,5 @@ export const LoginPage = () => {
         </Page>
     )
 }
+
+export default LoginPage;
