@@ -10,13 +10,15 @@ import i18next from "i18next";
 import {AllLanguage} from "../environments/config/languages/IAllLanguage";
 import * as Sentry from "@sentry/react";
 
+
 export const AppFlag = {
   enableSentry: false,
+  // NOTE: V55隱藏產品推薦列表
+  hideLoanDetailRecommendProducts: location.hostname == "www.oasis-gold.com" || location.hostname == "www.oasis-gold-local.com",
 }
 // console.log("environment.country", environment.country)
 
 // NOTICE: REFACTOR ME , 目前Modal.alert 只能從全局取得
-
 // NOTICE: TS2339: Property 'theme' does not exist on type 'Window & typeof globalThis'.
 // @ts-ignore
 window.theme = getThemeConfig(environment.country);
