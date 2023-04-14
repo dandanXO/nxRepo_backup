@@ -7,7 +7,7 @@ import {catchSagaError} from "../../utils/catchSagaError";
 export function *systemInitSaga() {
   try {
     // NOTE: 是否啟用測試渠道(測試不好會出4)
-    const packageId = window.isInAndroid() ? "packageId" : "abc.abc.com"
+    const packageId = window.isInAndroid() ? "packageId" : "com.oasisgold.app.android"
     console.log("[APP] packageId", packageId);
 
     const response: GetInitServiceResponse = yield call(Service.AppService.getInit, {packageId});

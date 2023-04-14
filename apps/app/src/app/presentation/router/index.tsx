@@ -7,6 +7,7 @@ import loadable from '@loadable/component'
 
 // NOTE: Page
 import {CategoryPage} from "../pages/__test__/CategoryPage";
+import {ErrorPage} from "../pages/__test__/ErrorPage";
 const IndexPage = loadable(() => import("../pages/IndexPage"));
 const AuthPage = loadable(() => import("../pages/AuthPage"));
 const BankCardListPage = loadable(() => import("../pages/BankCardListPage"));
@@ -54,6 +55,7 @@ export const AppRouter = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes >
           <Route path="/category" element={<CategoryPage />} />
+          <Route path="/error" element={<ErrorPage />} />
           <Route path="/" element={<IndexPage />} />
           <Route path="/login" element={<LoginPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />

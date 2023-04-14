@@ -97,6 +97,7 @@
     "ts-node": "10.9.1",
     "tslib": "2.3.0",
     "umi-request": "1.4.0",
+    "use-error-boundary": "^2.0.6",
     "uuid": "8.3.2",
     "xstate": "^4.37.0",
     "zod": "3.18.0"
