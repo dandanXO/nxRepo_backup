@@ -315,7 +315,7 @@ describe('IndexPage', () => {
   //   //
   // })
 
-  it("status: 用戶已認證、有3天即將到期的訂單", () => {
+  it.only("status: 用戶已認證、有3天即將到期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -402,7 +402,7 @@ describe('IndexPage', () => {
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
-          "dueDate": moment().tz(INDIA_TIME_ZONE).add(3, "days").add("1", "minutes"),
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(2, "days").add("1", "minutes"),
           "overdue": false,
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         }
@@ -1193,7 +1193,7 @@ describe('IndexPage', () => {
 
 
   // NOTICE: 使用者自行點擊獲取額度
-  it.only("status: 用戶已認證、風控額度時間無效，使用者自己已經重新獲取信用額度過一次。", () => {
+  it("status: 用戶已認證、風控額度時間無效，使用者自己已經重新獲取信用額度過一次。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",

@@ -155,7 +155,7 @@ export const indexPageSlice = createSlice({
           const overdueDay = expireTime.diff(currentTime, "days");
           // const overdueHour = expireTime.diff(currentTime, "hours");
           // const overdueMinute = expireTime.diff(currentTime, "minute");
-          const isOverdueEqual3Days = overdueDay === 3
+          const isOverdueEqual3Days = overdueDay <= 3
           // console.log("currentTime", currentTime.format())
           // console.log("expireTime", expireTime.format())
           // console.log("overdueDay", overdueDay)
@@ -171,7 +171,6 @@ export const indexPageSlice = createSlice({
           state.order.state = ORDER_STATE.hasOverdueOrder;
         } else if (isAnyOrderComingOverdue) {
           // NOTICE: order
-          state.order.overdueOrComingOverdueOrder = null;
           state.order.state = ORDER_STATE.hasInComingOverdueOrder;
         } else if (action.payload.orderUnderReview == true) {
           // NOTICE: order

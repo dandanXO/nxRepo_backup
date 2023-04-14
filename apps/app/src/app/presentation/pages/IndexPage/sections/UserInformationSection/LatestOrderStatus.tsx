@@ -12,6 +12,7 @@ type Props = IndexPageProps;
 export const LatestOrderStatus = (props: Props) => {
   // NOTE: State1 - 到期前3天出現最近一期訂單提示用戶還款。
   // NOTE: State2 - 提醒您需要優先還清逾期款項才能再借款
+
   const navigate = useNavigate();
   return (
     <div className={"bg-white px-5 py-1.5 rounded-lg border border-orange-500 flex flex-col"}>
