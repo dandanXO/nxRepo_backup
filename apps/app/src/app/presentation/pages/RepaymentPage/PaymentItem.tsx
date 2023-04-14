@@ -10,7 +10,7 @@ import moment from "moment";
 import { useNavigate } from "react-router";
 import { getToken } from "../../../api/base/getToken";
 import {GetLoanRecord} from "../../../api/loanService/GetLoanRecord";
-import {PagePathEnum} from "../index";
+import {PagePathEnum} from "../PagePathEnum";
 const PaymentItem = (props: GetLoanRecord) => {
 
     const navigate = useNavigate();

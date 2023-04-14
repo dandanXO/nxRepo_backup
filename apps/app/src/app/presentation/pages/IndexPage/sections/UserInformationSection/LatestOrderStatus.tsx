@@ -5,7 +5,7 @@ import moment from "moment";
 import {ORDER_STATE} from "../../../../../domain/ORDER_STATE";
 import { useNavigate } from "react-router";
 import {getToken} from "../../../../../api/base/getToken";
-import {PagePathEnum} from "../../../index";
+import {PagePathEnum} from "../../../PagePathEnum";
 
 type Props = IndexPageProps;
 

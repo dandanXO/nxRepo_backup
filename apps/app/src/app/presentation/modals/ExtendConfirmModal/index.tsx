@@ -7,7 +7,7 @@ import {
 
     ListItem,
 } from "@frontend/mobile/shared/ui";
-import {PagePathEnum} from "../../pages";
+import {PagePathEnum} from "../../pages/PagePathEnum";
 export const ExtendConfirmModal = () => {
     const navigate = useNavigate();
     const location = useLocation();

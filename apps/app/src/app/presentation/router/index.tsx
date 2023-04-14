@@ -35,7 +35,7 @@ import {RootState} from "../../usecaseFlow/reduxStore";
 
 import {LoginPage} from '../pages/LoginPage';
 import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
-import {PagePathEnum} from "../pages";
+import {PagePathEnum} from "../pages/PagePathEnum";
 
 
 export const AppRouter = () => {

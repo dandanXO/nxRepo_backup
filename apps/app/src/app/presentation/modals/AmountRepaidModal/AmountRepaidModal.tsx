@@ -13,7 +13,7 @@ import { GetLoanDetailResponse } from "../../../api/rtk/old/getLoanDetail";
 import recordStatusStyleProps from "../../../modules/recordStatusColorMapper";
 import {useLocation, useNavigate} from "react-router";
 import { stat } from "fs";
-import {PagePathEnum} from "../../pages";
+import {PagePathEnum} from "../../pages/PagePathEnum";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
 `;

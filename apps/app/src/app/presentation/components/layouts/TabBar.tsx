@@ -2,7 +2,7 @@ import {MdOutlineAccountCircle, MdPayment, RiMoneyDollarCircleFill} from "react-
 import {useLocation, useNavigate} from "react-router";
 
 import cx from "classnames";
-import {PagePathEnum} from "../../pages";
+import {PagePathEnum} from "../../pages/PagePathEnum";
 import {getToken} from "../../../api/base/getToken";
 
 type Props = {
