@@ -18,7 +18,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../usecaseFlow/reduxStore";
 import {AuthenticationSection} from "./sections/AuthenticationSection";
 import {ADBannerSection} from "./sections/ADBannerSection";
-import {LoanOverViewSection} from "./sections/LoanOverViewSection";
+import {LoanOverViewSection} from "../../components/sections/LoanOverViewSection";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import cx from "classnames";
 import {NoticeUserReacquireOver3TimeSections} from "./sections/NoticeSection/NoticeUserReacquireOver3TimeSections";
@@ -398,7 +398,7 @@ const IndexPage = () => {
               indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
               // NOTICE: 額度不足
               indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount === 0,
-            ].some(condition => condition === true) && indexPageState.user.state === USER_AUTH_STATE.success && 
+            ].some(condition => condition === true) && indexPageState.user.state === USER_AUTH_STATE.success &&
             (
             <div className={"mb-3"}>
               <LoanOverViewSection state={indexPageState}/>
@@ -465,7 +465,7 @@ const IndexPage = () => {
       <div className={"sticky bottom-[63px] px-3 py-2"}>
         {/*TODO*/}
         {!applyHide &&
-        //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) && 
+        //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) &&
           (
           <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={cx({
             "bg-[#F58B10]": !applyDisable,
@@ -493,10 +493,10 @@ const IndexPage = () => {
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {(
-          ( 
+          (
             indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able ||
             indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time
-          ) && 
+          ) &&
           (
             indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
             indexPageState.order.state !== ORDER_STATE.hasOverdueOrder

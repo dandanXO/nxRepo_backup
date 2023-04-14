@@ -1,16 +1,16 @@
-import {IndexPageProps} from "../../../../../usecaseFlow/reduxStore";
-import {formatPrice} from "../../../../../modules/formatPrice";
+import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
+import {formatPrice} from "../../../../modules/formatPrice";
 import Chart from "react-apexcharts";
 import {useEffect, useRef, useState} from "react";
 import {ApexOptions} from "apexcharts";
-import {environment} from "../../../../../../environments/environment";
-import { ORDER_STATE } from "../../../../../../app/domain/ORDER_STATE";
-import { RISK_CONTROL_STATE } from "../../../../../../app/domain/RISK_CONTROL_STATE";
+import {environment} from "../../../../../environments/environment";
+import { ORDER_STATE } from "../../../../domain/ORDER_STATE";
+import { RISK_CONTROL_STATE } from "../../../../domain/RISK_CONTROL_STATE";
 
 type Props = IndexPageProps;
 
 export const LoanOverViewSection = (props: Props) => {
-  
+
   const isReacquireCreditAmount =
     props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
     props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
@@ -86,7 +86,7 @@ export const LoanOverViewSection = (props: Props) => {
       setSeries([percent])
     }
   }, [props.state.indexAPI])
-  
+
   return (
     <div>
       <div className={"font-medium mb-2"}>Loan Over View</div>
@@ -106,7 +106,7 @@ export const LoanOverViewSection = (props: Props) => {
             <div className={"absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-center"}>
               <div className="text">
                 <div>
-                    {environment.currency} 
+                    {environment.currency}
                     {isReacquireCreditAmount ? ' ***' : props.state.indexAPI?.availableAmount}
                 </div>
                 <div>Available Balance</div>
@@ -126,8 +126,8 @@ export const LoanOverViewSection = (props: Props) => {
           </div>
           <div className={"total-amount flex flex-col justify-end"}>
             <div className={"label font-light"}>Total Amount</div>
-            <div className={"price font-medium text-right"}>  
-             {environment.currency}  
+            <div className={"price font-medium text-right"}>
+             {environment.currency}
              {isReacquireCreditAmount ? ' ***** ' : formatPrice(props.state.indexAPI?.totalAmount || 0)}
             </div>
           </div>
