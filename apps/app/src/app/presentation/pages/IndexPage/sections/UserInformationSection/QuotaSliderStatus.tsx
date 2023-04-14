@@ -35,8 +35,9 @@ export const QuotaSliderStatus = (props: Props) => {
       props.state.order.state === ORDER_STATE.hasOverdueOrder,
       props.state.order.state === ORDER_STATE.reject,
       props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota,
+      props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
     ].some(item => item === true);
-  }, [props.state.user.state, props.state.order.state]);
+  }, [props.state.user.state, props.state.order.state, props.state.riskControl.state]);
 
 
   useEffect(() => {
@@ -74,7 +75,7 @@ export const QuotaSliderStatus = (props: Props) => {
                 "quota-slider-track" : !disable,
                 "quota-slider-track-disable": disable,
               })}
-              thumbClassName="quota-slider-thumb"
+              thumbClassName={"quota-slider-thumb"}
               thumbActiveClassName="active-quota-slider-thumb"
               renderThumb={(props: any, state: any) => {
                 // console.log("props", props);
