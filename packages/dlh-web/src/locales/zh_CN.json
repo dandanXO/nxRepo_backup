@@ -1251,7 +1251,7 @@
   "menu.order.pay.receipt": "还款补单",
   "menu.serviceChargeManage": "服务费率管理",
   "menu.userSourceUVStats": "渠道用户来源UV统计",
-  "menu.riskControlStatistic": "每日新用户风控标签统计",
+  "menu.riskControlStatistic": "每日用户风控标签统计",
   "menu.reloan.statistics": "用户复借统计",
   "menu.whiteList": "白名单",
   "menu.collectionConf": "代收代付订单",

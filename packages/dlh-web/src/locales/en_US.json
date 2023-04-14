@@ -1239,7 +1239,7 @@
   "menu.order.pay.receipt":"UTR List",
   "menu.serviceChargeManage": "Service Charge Mgmt",
   "menu.userSourceUVStats": "User Source UV Stats",
-  "menu.riskControlStatistic":"Daily New Customers Risk Control Level Stats",
+  "menu.riskControlStatistic":"Daily Customers Risk Control Level Stats",
   "menu.reloan.statistics": "Customers Repeat Borrowing Rate",
   "menu.whiteList": "Whitelist",
   "menu.collectionConf": "Collection & Payment",
