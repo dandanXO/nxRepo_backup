@@ -32,7 +32,7 @@ module.exports = (config, context) => {
         output: {
             filename: "[name].[contenthash].js",
             // sourceMapFilename: 'maps/[name].[contenthash].map.js',
-            // publicPath: "/v1"
+            publicPath: "/v1"
         },
         module: {
             rules: [
@@ -110,6 +110,12 @@ module.exports = (config, context) => {
             //   include: 'all'
             //   // include: 'initial'
             // }),
+            new HtmlWebpackPlugin({
+              // 配置 HTML 模板路徑與生成名稱 (第三步)
+              template: './src/index.html',
+              filename: 'index.html',
+              // publicPath: "/v2",
+            }),
             new webpack.DefinePlugin({
                 appInfo: {
                     VERSION: JSON.stringify(gitRevisionPlugin.version()),
@@ -142,14 +148,14 @@ module.exports = (config, context) => {
         //       verbose: true,
         //     })
         //   );
-        finalConfig.plugins.push(
-            new HtmlWebpackPlugin({
-                // 配置 HTML 模板路徑與生成名稱 (第三步)
-                template: "./src/index.html",
-                // filename: 'index.html',
-                // publicPath: "/v1",
-            })
-        );
+        // finalConfig.plugins.push(
+        //     new HtmlWebpackPlugin({
+        //         // 配置 HTML 模板路徑與生成名稱 (第三步)
+        //         template: "./src/index.html",
+        //         // filename: 'index.html',
+        //         // publicPath: "/v1",
+        //     })
+        // );
         finalConfig.plugins.push(
             new SentryCliPlugin({
                 debug: false,

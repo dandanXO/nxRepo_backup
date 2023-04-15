@@ -34,7 +34,7 @@ module.exports = (config, context) => {
     // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
     // devtool: "source-map",
     output: {
-      filename: '[name].[contenthash].js',
+      // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
       // NOTICE: fix(bundling): fix webpack publicPath: 'auto' behavior for esm builds #13186
       // https://github.com/nrwl/nx/pull/13186
@@ -123,12 +123,12 @@ module.exports = (config, context) => {
           BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
         },
       }),
-      // new HtmlWebpackPlugin({
-      //   // 配置 HTML 模板路徑與生成名稱 (第三步)
-      //   template: '../src/index.html',
-      //   filename: 'index.html',
-      //   publicPath: "/v2",
-      // }),
+      new HtmlWebpackPlugin({
+        // 配置 HTML 模板路徑與生成名稱 (第三步)
+        template: './src/index.html',
+        filename: 'index.html',
+        // publicPath: "/v2",
+      }),
       // new CleanWebpackPlugin({
       //   verbose: true,
       // }),
