@@ -340,7 +340,7 @@ const IndexPage = () => {
 
 
   const onClickToCustomerService = useCallback(() => {
-    navigate('/customer-service');
+    navigate('/v2/customer-service');
   }, []);
 
   return (
@@ -481,7 +481,7 @@ const IndexPage = () => {
         ) && (
           <>
             <Button onClick={() => {
-              navigate("/application-progress");
+              navigate("/v2/application-progress");
             }} dataTestingID={"viewAppProgress"} text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
           </>
         )}

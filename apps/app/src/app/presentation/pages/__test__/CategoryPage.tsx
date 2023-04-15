@@ -14,7 +14,7 @@ export const CategoryPage = () => {
         "bg-[#F58B10]": true,
       })}
           onClick={() => {
-            navigate("/my-coupon-list")
+            navigate("/v2/my-coupon-list")
           }}
       />
       {/*<div><div to="/">IndexPage</div></div>*/}

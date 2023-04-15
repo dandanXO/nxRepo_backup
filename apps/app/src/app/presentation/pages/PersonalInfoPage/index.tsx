@@ -42,14 +42,14 @@ const PersonalInfoPage = () => {
           <Button buttonText={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>} padding="py-1 px-2" />
         </div>
         <div className="m-4">
-          <Card><LinkItem title={'Bank Card'} to={`/bankcard-list?token=${getToken()}`} /></Card>
+          <Card><LinkItem title={'Bank Card'} to={`/v2/bankcard-list?token=${getToken()}`} /></Card>
           <Card>
-            <LinkItem title={'Privacy Policy'} to={'/privacy-policy'} />
-            <LinkItem title={'Disclosure Statement'} to={'/disclosure-statement'} />
+            <LinkItem title={'Privacy Policy'} to={'/v2/privacy-policy'} />
+            <LinkItem title={'Disclosure Statement'} to={'/v2/disclosure-statement'} />
           </Card>
           <Card>
-            {app?.init?.partnership ? (<LinkItem title={'Partner'} to={'/partner'} />) : <></>}
-            <LinkItem title={'Customer Service'} to={'/customer-service'} />
+            {app?.init?.partnership ? (<LinkItem title={'Partner'} to={'/v2/partner'} />) : <></>}
+            <LinkItem title={'Customer Service'} to={'/v2/customer-service'} />
           </Card>
           {/* <Card><LinkItem title={'Rate Us 5 starts'} to={''} /></Card> */}
           {/* <div>Setting</div>

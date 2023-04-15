@@ -57,7 +57,7 @@ const BankCardListPage = () => {
                             })}
                         </div>
                         <div className={`flex items-center justify-center flex-col`} >
-                            <div onClick={() => navigate(`/bind-bankcard?token=${getToken()}`)} className={`flex justify-center items-center border border-solid border-orange-500 text-orange-500 text-2xl w-6 h-6  rounded font-bold mb-3`}>
+                            <div onClick={() => navigate(`/v2/bind-bankcard?token=${getToken()}`)} className={`flex justify-center items-center border border-solid border-orange-500 text-orange-500 text-2xl w-6 h-6  rounded font-bold mb-3`}>
                                 +
                             </div>
                             <div className={`text-sm pb-8`}>Add A New Card</div>

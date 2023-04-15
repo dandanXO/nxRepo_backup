@@ -56,23 +56,23 @@ export const AppRouter = () => {
     <>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
         <Routes>
-          <Route path="/category" element={<CategoryPage />} />
-          <Route path="/error" element={<ErrorPage />} />
-          <Route path="/" element={<IndexPage />} />
-          <Route path="/login" element={<LoginPage />} >
+          <Route path="/v2/category" element={<CategoryPage />} />
+          <Route path="/v2/error" element={<ErrorPage />} />
+          <Route path="/v2" element={<IndexPage />} />
+          <Route path="/v2/login" element={<LoginPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
-          <Route path="/privacy-policy-modal" element={<PrivacyPolicyModal />} />
-          <Route path="/application-progress" element={<ApplicationProgressPage />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/bankcard-list" element={<BankCardListPage />} />
-          <Route path="/bind-bankcard" element={<BindBankCardPage />} />
-          <Route path="/customer-service" element={<CustomerServicePage />} >
+          <Route path="/v2/privacy-policy-modal" element={<PrivacyPolicyModal />} />
+          <Route path="/v2/application-progress" element={<ApplicationProgressPage />} />
+          <Route path="/v2/auth" element={<AuthPage />} />
+          <Route path="/v2/bankcard-list" element={<BankCardListPage />} />
+          <Route path="/v2/bind-bankcard" element={<BindBankCardPage />} />
+          <Route path="/v2/customer-service" element={<CustomerServicePage />} >
             <Route path="customer-service-modal" element={<CustomerServiceModal />} />
           </Route>
-          <Route path="/disclosure-statement" element={<DisclosureStatementPage />} />
-          <Route path="/extend-details" element={<ExtendDetailsPage />} />
-          <Route path="/finished-repayment" element={<FinishedRepaymentPage />} />
+          <Route path="/v2/disclosure-statement" element={<DisclosureStatementPage />} />
+          <Route path="/v2/extend-details" element={<ExtendDetailsPage />} />
+          <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />
 
           <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
             <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
@@ -81,16 +81,16 @@ export const AppRouter = () => {
             <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
           </Route>
           <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
-          <Route path="/my-coupon-list" element={<MyCouponListPage />} />
-          <Route path="/mu-coupon" element={<MyCouponPage />} />
-          <Route path="/partner" element={<PartnerPage />} />
+          <Route path="/v2/my-coupon-list" element={<MyCouponListPage />} />
+          <Route path="/v2/mu-coupon" element={<MyCouponPage />} />
+          <Route path="/v2/partner" element={<PartnerPage />} />
           <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
-          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="/quota-model" element={<QuotaModelPage />} />
-          <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
-          <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
+          <Route path="/v2/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/v2/quota-model" element={<QuotaModelPage />} />
+          <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
+          <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
           {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>

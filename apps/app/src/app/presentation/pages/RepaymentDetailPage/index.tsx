@@ -91,7 +91,7 @@ const RepaymentDetailPage = (props: any) => {
                 <div className={`flex my-3`}>
                     {/*TODO: 先兼容 querystring*/}
                     <div onClick={() => {
-                      navigate(`/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
+                      navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: orderNo,
                       })}
                     } className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></div>
