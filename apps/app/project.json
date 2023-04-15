@@ -1,10 +1,11 @@
 {
+  "name": "app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/app/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -19,7 +20,8 @@
         "styles": [],
         "scripts": [],
         "webpackConfig": "apps/app/build/webpack.config.js",
-        "postcssConfig": "apps/app/postcss.config.js"
+        "postcssConfig": "apps/app/postcss.config.js",
+        "isolatedConfig": true
       },
       "configurations": {
         "development": {
@@ -149,7 +151,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/app"],
+      "outputs": ["{workspaceRoot}/coverage/apps/app"],
       "options": {
         "jestConfig": "apps/app/jest.config.ts",
         "passWithNoTests": true

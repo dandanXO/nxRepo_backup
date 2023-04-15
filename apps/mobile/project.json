@@ -1,10 +1,11 @@
 {
+    "name": "mobile",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "apps/mobile/src",
     "projectType": "application",
     "targets": {
         "build": {
-            "executor": "@nrwl/web:webpack",
+            "executor": "@nrwl/webpack:webpack",
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "production",
             "options": {
@@ -21,7 +22,8 @@
                 ],
                 "styles": [],
                 "scripts": [],
-                "webpackConfig": "apps/mobile/webpack.config.js"
+                "webpackConfig": "apps/mobile/webpack.config.js",
+                "isolatedConfig": true
             },
             "configurations": {
                 "development": {
@@ -101,7 +103,7 @@
             }
         },
         "serve": {
-            "executor": "@nrwl/web:dev-server",
+            "executor": "@nrwl/webpack:dev-server",
             "defaultConfiguration": "development",
             "options": {
                 "buildTarget": "mobile:build",
@@ -241,7 +243,7 @@
         },
         "test": {
             "executor": "@nrwl/jest:jest",
-            "outputs": ["coverage/apps/mobile"],
+            "outputs": ["{workspaceRoot}/coverage/apps/mobile"],
             "options": {
                 "jestConfig": "apps/mobile/jest.config.ts",
                 "passWithNoTests": true
@@ -252,9 +254,7 @@
             "options": {
                 "uiFramework": "@storybook/react",
                 "port": 9000,
-                "config": {
-                    "configFolder": "apps/mobile/.storybook"
-                }
+                "configDir": "apps/mobile/.storybook"
             },
             "configurations": {
                 "ci": {
@@ -264,13 +264,11 @@
         },
         "build-storybook": {
             "executor": "@nrwl/storybook:build",
-            "outputs": ["{options.outputPath}"],
+            "outputs": ["{options.outputDir}"],
             "options": {
                 "uiFramework": "@storybook/react",
-                "outputPath": "dist/storybook/mobile",
-                "config": {
-                    "configFolder": "apps/mobile/.storybook"
-                }
+                "configDir": "apps/mobile/.storybook",
+                "outputDir": "dist/storybook/mobile"
             },
             "configurations": {
                 "ci": {

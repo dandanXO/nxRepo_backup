@@ -1,4 +1,5 @@
 {
+  "name": "mobile-shared-ui",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/mobile/shared/ui/src",
   "projectType": "library",
@@ -13,7 +14,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/mobile/shared/ui"],
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/shared/ui"],
       "options": {
         "jestConfig": "libs/mobile/shared/ui/jest.config.ts",
         "passWithNoTests": true
@@ -24,9 +25,7 @@
       "options": {
         "uiFramework": "@storybook/react",
         "port": 4400,
-        "config": {
-          "configFolder": "libs/mobile/shared/ui/.storybook"
-        }
+        "configDir": "libs/mobile/shared/ui/.storybook"
       },
       "configurations": {
         "ci": {
@@ -36,13 +35,11 @@
     },
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "uiFramework": "@storybook/react",
-        "outputPath": "dist/storybook/mobile-shared-ui",
-        "config": {
-          "configFolder": "libs/mobile/shared/ui/.storybook"
-        }
+        "configDir": "libs/mobile/shared/ui/.storybook",
+        "outputDir": "dist/storybook/mobile-shared-ui"
       },
       "configurations": {
         "ci": {

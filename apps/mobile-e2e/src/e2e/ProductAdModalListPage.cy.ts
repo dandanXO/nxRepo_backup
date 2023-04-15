@@ -201,7 +201,12 @@ describe("iphone-3一鍵快速借款", () => {
 
     // NOTE: 應該只呼叫一次
     // NOTICE: THEN: 用戶不能 Apply。
-    cy.get("@fetchProducts")
+    /**
+* TODO(@nrwl/cypress): Nesting Cypress commands in a should assertion now throws.
+* You should use .then() to chain commands instead.
+* More Info: https://docs.cypress.io/guides/references/migration-guide#-should
+**/
+cy.get("@fetchProducts")
       .should('have.length', 1)
       .then(() => {
         // NOTE: way1
