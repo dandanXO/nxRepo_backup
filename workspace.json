@@ -4,6 +4,8 @@
   "projects": {
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
+    "gateway": "apps/gateway",
+    "gateway-e2e": "apps/gateway-e2e",
     "mobile": "apps/mobile",
     "mobile-e2e": "apps/mobile-e2e",
     "mobile-shared-ui": "libs/mobile/shared/ui"

@@ -8,7 +8,9 @@ import loadable from '@loadable/component'
 // NOTE: Page
 import {CategoryPage} from "../pages/__test__/CategoryPage";
 import {ErrorPage} from "../pages/__test__/ErrorPage";
-const IndexPage = loadable(() => import("../pages/IndexPage"));
+
+// const IndexPage = loadable(() => import("../pages/IndexPage"));
+import IndexPage from "../pages/IndexPage";
 const AuthPage = loadable(() => import("../pages/AuthPage"));
 const BankCardListPage = loadable(() => import("../pages/BankCardListPage"));
 const BindBankCardPage = loadable(() => import("../pages/BindBankCardPage"));
@@ -39,11 +41,11 @@ const LogoutModal = loadable(() => import("../modals/LogoutModal"));
 const APIBoundaryModal = loadable(() => import("../modals/APIBoundaryModal"));
 const PrivacyPolicyModal = loadable(() => import("../modals/PrivacyPolicyModal"));
 
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import {TabBar} from "../components/layouts/TabBar";
 import {RootState} from "../../usecaseFlow/reduxStore";
-
 import {PagePathEnum} from "../pages/PagePathEnum";
+
 
 export const AppRouter = () => {
   const location = useLocation();
@@ -52,8 +54,8 @@ export const AppRouter = () => {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes >
+      {/*<Suspense fallback={<div>Loading...</div>}>*/}
+        <Routes>
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/" element={<IndexPage />} />
@@ -93,16 +95,22 @@ export const AppRouter = () => {
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
 
+        {/*<Page>*/}
+        {/*  prevent empty page*/}
+        {/*</Page>*/}
+
         {[
           PagePathEnum.IndexPage as string,
           PagePathEnum.RepaymentPage as string,
           PagePathEnum.PersonalInfoPage as string,
-        ].indexOf(location.pathname) > -1 && <TabBar hasOrder={payableRecords ? payableRecords?.length > 0 : false}/>}
+        ].indexOf(location.pathname) > -1 && (
+          <TabBar hasOrder={payableRecords ? payableRecords?.length > 0 : false}/>
+        )}
 
         {apiBoundary.show && (
           <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message}/>
         )}
-      </Suspense>
+      {/*</Suspense>*/}
     </>
   );
 };
