@@ -17,9 +17,9 @@ const Group: React.FC<GroupProps> = (props: GroupProps) => {
 };
 
 const StyledGroup = styled(Group)<GroupProps>`
-  ${StyledRadioBox} {
-    margin: 0 5px 0 0;
-  }
+  // ${StyledRadioBox} {
+  //   margin: 0 5px 0 0;
+  // }
   display: flex;
   /* display: flex;
   flex-direction: \${props => (typeof props.vertical === "undefined" || props.vertical ? "row" : "column")};

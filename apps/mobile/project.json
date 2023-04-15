@@ -12,6 +12,7 @@
                 "compiler": "babel",
                 "outputPath": "dist/apps/mobile",
                 "baseHref": "/",
+                "index": "apps/mobile/src/index.html",
                 "main": "apps/mobile/src/main.tsx",
                 "polyfills": "apps/mobile/src/polyfills.ts",
                 "tsConfig": "apps/mobile/tsconfig.app.json",
@@ -106,8 +107,7 @@
             "defaultConfiguration": "development",
             "options": {
                 "buildTarget": "mobile:build",
-                "hmr": true,
-                "proxyConfig": "apps/mobile/proxy.config.pk.json"
+                "hmr": true
             },
             "configurations": {
                 "development": {
@@ -149,8 +149,7 @@
             "configurations": {
                 "development": {
                     "buildTarget": "mobile:build:development-in",
-                    "hmr": true,
-                    "proxyConfig": "apps/mobile/proxy.config.in.json"
+                    "hmr": true
                 },
                 "production": {
                     "buildTarget": "mobile:build:production-in",
@@ -167,8 +166,7 @@
             "configurations": {
                 "development": {
                     "buildTarget": "mobile:build:development-pk",
-                    "hmr": true,
-                    "proxyConfig": "apps/mobile/proxy.config.pk.json"
+                    "hmr": true
                 },
                 "production": {
                     "buildTarget": "mobile:build:production-pk",
@@ -185,8 +183,7 @@
             "configurations": {
                 "development": {
                     "buildTarget": "mobile:build:development-bd",
-                    "hmr": true,
-                    "proxyConfig": "apps/mobile/proxy.config.bd.json"
+                    "hmr": true
                 },
                 "production": {
                     "buildTarget": "mobile:build:production-bd",
@@ -198,8 +195,7 @@
             "executor": "@nrwl/web:dev-server",
             "options": {
                 "defaultConfiguration": "development",
-                "buildTarget": "mobile:build:development-in",
-                "proxyConfig": "apps/mobile/proxy.config.in.json"
+                "buildTarget": "mobile:build:development-in"
             },
             "configurations": {
                 "development": {
@@ -211,8 +207,7 @@
             "executor": "@nrwl/web:dev-server",
             "options": {
                 "defaultConfiguration": "development",
-                "buildTarget": "mobile:build:development-pk",
-                "proxyConfig": "apps/mobile/proxy.config.pk.json"
+                "buildTarget": "mobile:build:development-pk"
             },
             "configurations": {
                 "development": {
@@ -224,8 +219,7 @@
             "executor": "@nrwl/web:dev-server",
             "options": {
                 "defaultConfiguration": "development",
-                "buildTarget": "mobile:build:development-bd",
-                "proxyConfig": "apps/mobile/proxy.config.bd.json"
+                "buildTarget": "mobile:build:development-bd"
             },
             "configurations": {
                 "development": {
