@@ -28,6 +28,9 @@ const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const PUBLIC_PATH = "/v2";
+const ASSET_OUTPUT_PATH = "asset";
+
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
     // devtool: false,
@@ -38,7 +41,8 @@ module.exports = (config, context) => {
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
       // NOTICE: fix(bundling): fix webpack publicPath: 'auto' behavior for esm builds #13186
       // https://github.com/nrwl/nx/pull/13186
-      publicPath: '/v2',
+      publicPath: PUBLIC_PATH,
+      assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
     },
     module: {
       rules: [

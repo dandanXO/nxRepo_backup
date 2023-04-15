@@ -1,10 +1,17 @@
-import {call, put} from "redux-saga/effects";
+import {call, put, takeLatest} from "redux-saga/effects";
 import {Service} from "../../../api";
 import {appSlice} from "../../reduxStore/appSlice";
 import {GetInitServiceResponse} from "../../../api/appService/GetInitServiceResponse";
 import {catchSagaError} from "../../utils/catchSagaError";
+import {errorFallback} from "../../utils/errorFallback";
+import {userGetOTPSaga} from "../userUsecaseSaga/loginPageSaga/userGetOTPSaga";
+import {LoginPageSataActions} from "../userUsecaseSaga/loginPageSaga";
 
 export function *systemInitSaga() {
+  yield takeLatest("systemInitSaga", errorFallback, systemStartInitSaga)
+}
+
+export function *systemStartInitSaga() {
   try {
     // NOTE: 是否啟用測試渠道(測試不好會出4)
     const packageId = window.isInAndroid() ? "packageId" : "com.oasisgold.app.android"

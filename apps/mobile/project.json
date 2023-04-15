@@ -29,7 +29,7 @@
                     "extractLicenses": false,
                     "optimization": false,
                     "sourceMap": true,
-                    "vendorChunk": true
+                    "vendorChunk": true,
                 },
                 "production": {
                     "fileReplacements": [
@@ -106,7 +106,7 @@
             "defaultConfiguration": "development",
             "options": {
                 "buildTarget": "mobile:build",
-                "hmr": true
+                "hmr": true,
             },
             "configurations": {
                 "development": {

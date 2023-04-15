@@ -24,57 +24,69 @@ const SentryCliPlugin = require("@sentry/webpack-plugin");
 
 // const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
+const PUBLIC_PATH = "/v1/";
+const ASSET_OUTPUT_PATH = "asset";
+
 module.exports = (config, context) => {
     const finalConfig = merge(config, {
         // devtool: false,
         // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
         devtool: "source-map",
         output: {
-            filename: "[name].[contenthash].js",
+            // filename: "[name].[contenthash].js",
             // sourceMapFilename: 'maps/[name].[contenthash].map.js',
-            publicPath: "/v1"
+            publicPath: PUBLIC_PATH,
+            // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`,
         },
         module: {
             rules: [
-                {
-                    test: /\.svg$/,
-                    oneOf: [
-                        // If coming from JS/TS or MDX file, then transform into React component using SVGR.
-                        {
-                            issuer: /\.(js|ts|md)x?$/,
-                            use: [
-                                {
-                                    loader: require.resolve("@svgr/webpack"),
-                                    options: {
-                                        svgo: false,
-                                        titleProp: true,
-                                        ref: true,
-                                    },
-                                },
-                                {
-                                    loader: require.resolve("url-loader"),
-                                    options: {
-                                        limit: 10000,
-                                        name: "[name].[hash:7].[ext]",
-                                        esModule: false,
-                                    },
-                                },
-                            ],
-                        },
-                        // Fallback to plain URL loader.
-                        {
-                            use: [
-                                {
-                                    loader: require.resolve("url-loader"),
-                                    options: {
-                                        limit: 10000,
-                                        name: "[name].[hash:7].[ext]",
-                                    },
-                                },
-                            ],
-                        },
-                    ],
+              // NOTE: Other Loader
+              {
+                test: /\.(css|less)$/,
+                use: [
+                  "style-loader",
+                  "css-loader",
+                  {
+                    loader: "less-loader",
+                    options: {
+                      lessOptions: {
+                        javascriptEnabled: true,
+                      },
+                    },
+                  },
+                ],
+              },
+              // NOTICE: 待釐清css preprocess
+              {
+                test: /\.(s[ac]ss)$/,
+                use: [
+                  "style-loader",
+                  "css-loader",
+                  'sass-loader',
+                ],
+              },
+              // NOTE: type: "asset/resource",
+              {
+                test: /\.(png|jpe?g|gif)$/,
+                type: "asset/resource",
+                generator: {
+                  filename: "static/img/[name].[contenthash:8][ext]",
                 },
+              },
+              {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                type: "asset/resource",
+                generator: {
+                  filename: "static/font/[name].[contenthash:8][ext]",
+                },
+              },
+              {
+                test: /\.ico$/,
+                type: "asset/resource",
+                generator: {
+                  filename: "static/ico/[name].[contenthash:8].ico",
+                },
+              },
             ],
         },
         devServer: {
