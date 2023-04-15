@@ -79,158 +79,158 @@
                     ]
                 },
                 "development-bd": {
-                  "extractLicenses": false,
-                  "optimization": false,
-                  "sourceMap": true,
-                  "vendorChunk": true,
-                  "fileReplacements": [
-                    {
-                      "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.bd.dev.ts"
-                    }
-                  ]
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.bd.dev.ts"
+                        }
+                    ]
                 },
                 "production-bd": {
-                  "fileReplacements": [
-                    {
-                      "replace": "apps/mobile/src/environments/environment.ts",
-                      "with": "apps/mobile/src/environments/environment.bd.prod.ts"
-                    }
-                  ]
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.bd.prod.ts"
+                        }
+                    ]
                 }
             }
         },
         "serve": {
-          "executor": "@nrwl/web:dev-server",
-          "defaultConfiguration": "development",
-          "options": {
-            "buildTarget": "mobile:build",
-            "hmr": true,
-            "proxyConfig": "apps/mobile/proxy.config.pk.json"
-          },
-          "configurations": {
-            "development": {
-              "buildTarget": "mobile:build:development"
+            "executor": "@nrwl/web:dev-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "mobile:build",
+                "hmr": true,
+                "proxyConfig": "apps/mobile/proxy.config.pk.json"
             },
-            "production": {
-              "buildTarget": "mobile:build:production",
-              "hmr": false
-            },
-            "development-in": {
-              "buildTarget": "mobile:build:development-in"
-            },
-            "production-in": {
-              "buildTarget": "mobile:build:production-in",
-              "hmr": false
-            },
-            "development-pk": {
-              "buildTarget": "mobile:build:development-pk"
-            },
-            "production-pk": {
-              "buildTarget": "mobile:build:production-pk",
-              "hmr": false
-            },
-            "development-bd": {
-              "buildTarget": "mobile:build:development-bd"
-            },
-            "production-bd": {
-              "buildTarget": "mobile:build:production-bd",
-              "hmr": false
+            "configurations": {
+                "development": {
+                    "buildTarget": "mobile:build:development"
+                },
+                "production": {
+                    "buildTarget": "mobile:build:production",
+                    "hmr": false
+                },
+                "development-in": {
+                    "buildTarget": "mobile:build:development-in"
+                },
+                "production-in": {
+                    "buildTarget": "mobile:build:production-in",
+                    "hmr": false
+                },
+                "development-pk": {
+                    "buildTarget": "mobile:build:development-pk"
+                },
+                "production-pk": {
+                    "buildTarget": "mobile:build:production-pk",
+                    "hmr": false
+                },
+                "development-bd": {
+                    "buildTarget": "mobile:build:development-bd"
+                },
+                "production-bd": {
+                    "buildTarget": "mobile:build:production-bd",
+                    "hmr": false
+                }
             }
-          }
         },
         "serve:in": {
-          "executor": "@nrwl/web:dev-server",
-          "defaultConfiguration": "development",
-          "options": {
-            "buildTarget": "mobile:build"
-          },
-          "configurations": {
-            "development": {
-              "buildTarget": "mobile:build:development-in",
-              "hmr": true,
-              "proxyConfig": "apps/mobile/proxy.config.in.json"
+            "executor": "@nrwl/web:dev-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "mobile:build"
             },
-            "production": {
-              "buildTarget": "mobile:build:production-in",
-              "hmr": false
+            "configurations": {
+                "development": {
+                    "buildTarget": "mobile:build:development-in",
+                    "hmr": true,
+                    "proxyConfig": "apps/mobile/proxy.config.in.json"
+                },
+                "production": {
+                    "buildTarget": "mobile:build:production-in",
+                    "hmr": false
+                }
             }
-          }
         },
         "serve:pk": {
-          "executor": "@nrwl/web:dev-server",
-          "defaultConfiguration": "development",
-          "options": {
-            "buildTarget": "mobile:build"
-          },
-          "configurations": {
-            "development": {
-              "buildTarget": "mobile:build:development-pk",
-              "hmr": true,
-              "proxyConfig": "apps/mobile/proxy.config.pk.json"
+            "executor": "@nrwl/web:dev-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "mobile:build"
             },
-            "production": {
-              "buildTarget": "mobile:build:production-pk",
-              "hmr": false
+            "configurations": {
+                "development": {
+                    "buildTarget": "mobile:build:development-pk",
+                    "hmr": true,
+                    "proxyConfig": "apps/mobile/proxy.config.pk.json"
+                },
+                "production": {
+                    "buildTarget": "mobile:build:production-pk",
+                    "hmr": false
+                }
             }
-          }
         },
         "serve:bd": {
-          "executor": "@nrwl/web:dev-server",
-          "defaultConfiguration": "development",
-          "options": {
-            "buildTarget": "mobile:build:development-bd"
-          },
-          "configurations": {
-            "development": {
-              "buildTarget": "mobile:build:development-bd",
-              "hmr": true,
-              "proxyConfig": "apps/mobile/proxy.config.bd.json"
+            "executor": "@nrwl/web:dev-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "mobile:build:development-bd"
             },
-            "production": {
-              "buildTarget": "mobile:build:production-bd",
-              "hmr": false
+            "configurations": {
+                "development": {
+                    "buildTarget": "mobile:build:development-bd",
+                    "hmr": true,
+                    "proxyConfig": "apps/mobile/proxy.config.bd.json"
+                },
+                "production": {
+                    "buildTarget": "mobile:build:production-bd",
+                    "hmr": false
+                }
             }
-          }
         },
         "serve2-in": {
-          "executor": "@nrwl/web:dev-server",
-          "options": {
-            "defaultConfiguration": "development",
-            "buildTarget": "mobile:build:development-in",
-            "proxyConfig": "apps/mobile/proxy.config.in.json"
-          },
-          "configurations": {
-            "development": {
-              "hmr": true
+            "executor": "@nrwl/web:dev-server",
+            "options": {
+                "defaultConfiguration": "development",
+                "buildTarget": "mobile:build:development-in",
+                "proxyConfig": "apps/mobile/proxy.config.in.json"
+            },
+            "configurations": {
+                "development": {
+                    "hmr": true
+                }
             }
-          }
         },
         "serve2-pk": {
-          "executor": "@nrwl/web:dev-server",
-          "options": {
-            "defaultConfiguration": "development",
-            "buildTarget": "mobile:build:development-pk",
-            "proxyConfig": "apps/mobile/proxy.config.pk.json"
-          },
-          "configurations": {
-            "development": {
-              "hmr": true
+            "executor": "@nrwl/web:dev-server",
+            "options": {
+                "defaultConfiguration": "development",
+                "buildTarget": "mobile:build:development-pk",
+                "proxyConfig": "apps/mobile/proxy.config.pk.json"
+            },
+            "configurations": {
+                "development": {
+                    "hmr": true
+                }
             }
-          }
         },
         "serve2-bd": {
-          "executor": "@nrwl/web:dev-server",
-          "options": {
-            "defaultConfiguration": "development",
-            "buildTarget": "mobile:build:development-bd",
-            "proxyConfig": "apps/mobile/proxy.config.bd.json"
-          },
-          "configurations": {
-            "development": {
-              "hmr": true
+            "executor": "@nrwl/web:dev-server",
+            "options": {
+                "defaultConfiguration": "development",
+                "buildTarget": "mobile:build:development-bd",
+                "proxyConfig": "apps/mobile/proxy.config.bd.json"
+            },
+            "configurations": {
+                "development": {
+                    "hmr": true
+                }
             }
-          }
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",

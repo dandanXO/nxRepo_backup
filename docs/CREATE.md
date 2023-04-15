@@ -45,3 +45,14 @@ nx build my-new-lib
 
 
 ```
+
+## Remove
+[@nrwl/workspace:remove](https://nx.dev/packages/workspace/generators/remove)
+```shell
+nx generate remove gateway
+#same
+nx g rm gateway
+# dry-run
+nx g remove gateway --dry-run
+
+```
