@@ -11,6 +11,7 @@ import Divider from "../../components/Divider";
 import useExtendCreate from "../../hooks/useExtendCreate";
 import useRepayTypes from "../../hooks/useRepayTypes";
 import moment from "moment";
+import {getOrderNo} from "../../../modules/location/getOrderNo";
 
 
 const PureExtendModal = (props: any) => {
@@ -19,7 +20,8 @@ const PureExtendModal = (props: any) => {
     console.log('extend location', location)
 
     const { t } = props;
-    const { productName = '', orderNo = '', dueDate = '', overdueDays = '', penaltyInterest = '', extendDate = '', extensionFee = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
+    const { productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', extendDate = '', extensionFee = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
+    const orderNo =  location.state.currentData?.orderNo || getOrderNo();
     const { handlePostExpendCreate } = useExtendCreate();
 
     const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();

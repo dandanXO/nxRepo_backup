@@ -77,7 +77,8 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
     } = useUploadPaymentReceipt({
         postRepayReceiptRequest,
         token: pageQueryString.token ? pageQueryString.token : "",
-        orderNo: location.state.orderNo ? location.state.orderNo : "",
+        // TODO: 先兼容
+        orderNo: pageQueryString.orderNo || location.state.orderNo || "",
     });
 
     return renderByCountry({

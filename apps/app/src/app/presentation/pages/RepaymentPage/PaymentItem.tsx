@@ -8,7 +8,7 @@ import ListItem from "../../components/ListItem";
 import { environment } from "../../../../environments/environment";
 import moment from "moment";
 import { useNavigate } from "react-router";
-import { getToken } from "../../../api/base/getToken";
+import { getToken } from "../../../modules/location/getToken";
 import {GetLoanRecord} from "../../../api/loanService/GetLoanRecord";
 import {PagePathEnum} from "../PagePathEnum";
 const PaymentItem = (props: GetLoanRecord) => {

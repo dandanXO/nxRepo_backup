@@ -78,7 +78,10 @@ const RepaymentModal = (props: any) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { handlePostRepayCreate } = useRepayCreate()
-    const { balance = '', orderNo = '' } = location.state.currentData;
+    // console.log("location.state", location.state);
+
+    const { balance = '', orderNo = '' } = location.state;
+
     const [radioValue, setRadioValue] = useState("balance");
     // NOTE: 變動數值
     const [balanceValue, setBalanceValue] = useState(balance);
@@ -143,8 +146,8 @@ const RepaymentModal = (props: any) => {
                                 if (Number(value) > Number(balance)) {
                                     value = balance;
                                 }
-                                console.log("[repay] onChange.value", value)
-                                console.log(value)
+                                // console.log("[repay] onChange.value", value)
+                                // console.log(value)
                                 setBalanceValue(value);
                             }
                         }}

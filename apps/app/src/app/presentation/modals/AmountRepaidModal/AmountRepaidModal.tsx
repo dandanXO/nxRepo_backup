@@ -60,7 +60,7 @@ const Record = (props: {
     );
 };
 const renderRecordList = (props: AmountRepaidRecordsProps) => {
-
+    console.log("props", props);
     const { repayRecords = [] } = props;
     return repayRecords?.map((i) => (
         <Record
@@ -75,7 +75,9 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
     const { repayRecords, t } = props;
     const navigate = useNavigate();
     const { state } = useLocation();
-    console.log('state',state)
+    console.log('AmountRepaidModal.state',state)
+    console.log('AmountRepaidModal.props',props)
+
     return (
         <div>
             <Overlay

@@ -11,8 +11,7 @@ import {GetLoanRecordListRequest} from "../../../api/loanService/GetLoanRecordLi
 
 
 const RepaymentPage = () => {
-    console.log('config', data)
-    const navigate = useNavigate();
+    // console.log('config', data)
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetLoanRecordListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -33,7 +32,7 @@ const RepaymentPage = () => {
     }, [listStatus])
 
     useEffect(() => {
-        console.log('loanrecord', currentData)
+        // console.log('loanrecord', currentData)
     }, [currentData])
 
     return (

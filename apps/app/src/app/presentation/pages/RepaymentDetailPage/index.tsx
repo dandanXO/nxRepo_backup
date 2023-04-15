@@ -7,10 +7,11 @@ import { Outlet } from "react-router";
 import { useNavigate, useLocation } from "react-router";
 import { useLazyGetLoanDetailQuery } from "../../../api/rtk";
 import { useEffect, useState } from "react";
-import { getToken } from "../../../api/base/getToken";
+import { getToken } from "../../../modules/location/getToken";
 import { environment } from "../../../../environments/environment";
 import { Navigation } from "../../components/layouts/Navigation";
 import moment from "moment";
+import {getOrderNo} from "../../../modules/location/getOrderNo";
 
 const RepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()
@@ -22,15 +23,16 @@ const RepaymentDetailPage = (props: any) => {
     });
 
     useEffect(() => {
-        triggerGetList({ orderNo: location.state.orderNo });
+        triggerGetList({ orderNo: location.state?.orderNo || getOrderNo() });
     }, [])
 
     useEffect(() => {
-
-        console.log('loanDetail', currentData)
+        // console.log('loanDetail', currentData)
     }, [currentData])
 
     const { status = '', productName = '', orderNo = '', dueDate = '', loanAmount = '', overdueDays = '', penaltyInterest = '', paidAmount = '', repayRecords = [], totalRepayAmount = '' } = currentData ?? {};
+
+    console.log("RepaymentDetailPage.repayRecords", repayRecords);
     return (
         <div>
             <Navigation title={"Repay Details"} back={() => {navigate(-1)}} />
@@ -42,29 +44,40 @@ const RepaymentDetailPage = (props: any) => {
                 <ListItem title={'Loan Amount'} text={`${environment.currency} ${loanAmount ?? ''}`} titleColor="text-slate-400" />
                 <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
                 <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
-                <ListItem title={
+
+                {repayRecords && repayRecords.length > 0 && (
+                  <ListItem title={
                     <div className={`flex flex-row item-center items-center`}>
-                        <div className={` mr-1`}>Amount Repaid</div>
-                        <div onClick={() => {
-                          navigate('amount-repaid-record-modal', {
-                            state:repayRecords
-                          })}
-                        }><img src={AmountPaidIcon} /></div>
+                      <div className={` mr-1`}>Amount Repaid</div>
+                      <div onClick={() => {
+                        navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+                          state: repayRecords
+                        })}
+                      }><img src={AmountPaidIcon} /></div>
                     </div>
-                } text={`- ${environment.currency} ${paidAmount ?? ''}`} titleColor="text-slate-400" />
+                  } text={`- ${environment.currency} ${paidAmount ?? ''}`} titleColor="text-slate-400" />
+                )}
+
                 <Divider />
                 <ListItem title={'Repayment Amount'} text={`${environment.currency} ${totalRepayAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" />
                 <div className={`flex flex-row my-3`}>
+
                     <div onClick={() => {
-                      navigate('extend-confirm-modal', {
+                      navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: currentData
                       })}
-                    } className={`grow mr-1.5`}><Button buttonText={'Extend'} backgroundColor={'bg-orange-300'} width={`w-full`} /></div>
+                    } className={`grow mr-1.5`}>
+                      <Button buttonText={'Extend'} backgroundColor={'bg-orange-300'} width={`w-full`} />
+                    </div>
+
                     <div onClick={() => {
-                      navigate('repayment-modal', {
+                      navigate(`repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: currentData
                       })}
-                    }  className={`grow ml-1.5`}><Button buttonText={'Repay'} width={`w-full`} /></div>
+                    }  className={`grow ml-1.5`}>
+                      <Button buttonText={'Repay'} width={`w-full`} />
+                    </div>
+
                 </div>
                 <div className={`text-xs text-gray-300`}>
                     <div>Attention：</div>
@@ -76,8 +89,9 @@ const RepaymentDetailPage = (props: any) => {
                     </ul>
                 </div>
                 <div className={`flex my-3`}>
+                    {/*TODO: 先兼容 querystring*/}
                     <div onClick={() => {
-                      navigate(`/upload-payment-receipt?token=${getToken()}`, {
+                      navigate(`/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: orderNo,
                       })}
                     } className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></div>

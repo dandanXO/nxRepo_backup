@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosRequestConfig} from "axios";
-import {getToken} from "./getToken";
+import {getToken} from "../../modules/location/getToken";
 import {alertModal} from "./alertModal";
 
 

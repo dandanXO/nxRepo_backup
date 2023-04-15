@@ -1,5 +1,5 @@
 import queryString from "query-string";
-import {alertModal} from "./alertModal";
+import {alertModal} from "../../api/base/alertModal";
 
 export const getToken = (): string => {
   const parsedQueryString = queryString.parse(window.location.search);

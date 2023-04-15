@@ -9,7 +9,7 @@ import { FiChevronRight } from "react-icons/all";
 import Card from "./Card";
 import LinkItem from "./LinkItem";
 import ListItem from "../../components/ListItem";
-import { getToken } from "../../../api/base/getToken";
+import { getToken } from "../../../modules/location/getToken";
 import { Outlet } from "react-router";
 import {RootState} from "../../../usecaseFlow/reduxStore";
 import {PagePathEnum} from "../PagePathEnum";
@@ -20,7 +20,7 @@ const PersonalInfoPage = () => {
     const navigate = useNavigate();
     const { indexPage, app } = useSelector((state: RootState) => state)
     const { user } = indexPage;
-    console.log(useSelector((state: RootState) => state))
+    // console.log(useSelector((state: RootState) => state))
 
     return (
       <Page className="flex flex-col ">
