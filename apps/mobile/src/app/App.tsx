@@ -13,8 +13,6 @@ import * as Sentry from "@sentry/react";
 
 export const AppFlag = {
   enableSentry: false,
-  // NOTE: V55隱藏產品推薦列表
-  hideLoanDetailRecommendProducts: location.hostname == "www.oasis-gold.com" || location.hostname == "www.oasis-gold-local.com",
 }
 // console.log("environment.country", environment.country)
 
