@@ -146,7 +146,7 @@ import {AndroidDebugPage} from "../components/pages/AndroidDebugPage";
 // https://developers.google.com/search/docs/advanced/guidelines/url-structure?hl=en&visit_id=637961283238394064-158551757&rd=1
 export const AppRouter = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={"/"}>
       <Pages/>
     </BrowserRouter>
   );
@@ -186,32 +186,32 @@ const Pages = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes >
-        <Route path="/" element={<IndexPage />}/>
+        <Route path="/v1" element={<IndexPage />}/>
         {/* NOTE: Android 會使用到的頁面，Backend API Response 會給 URL */}
-        <Route path="/bank-bind" element={<BindBankAccountPage />} />
+        <Route path="/v1/bank-bind" element={<BindBankAccountPage />} />
 
         {/* NOTE: Android 會使用到的頁面，Backend API Response 會給 URL */}
         {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-        <Route path="/loan-details" element={<LoanDetailsPage />} />
+        <Route path="/v1/loan-details" element={<LoanDetailsPage />} />
 
 
         {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-        <Route path="/extend-details" element={<ExtendDetailsPage />} />
+        <Route path="/v1/extend-details" element={<ExtendDetailsPage />} />
 
         {/*<Route path="/repayment-modal-advertisement" element={<div />} />*/}
-        <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />}/>
-        <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />}/>
+        <Route path="/v1/upload-payment-receipt" element={<UploadPaymentReceiptPage />}/>
+        <Route path="/v1/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />}/>
         {/*<Route path="/product-ad-modal-list-old" element={<OldProductAdModalListPage />}/>*/}
 
-        <Route path="/product-ad-modal-list" element={<ProductAdModalListPage />}/>
+        <Route path="/v1/product-ad-modal-list" element={<ProductAdModalListPage />}/>
 
         {/*NOTICE: ad 字眼容易被 Google 擋*/}
-        <Route path="/activity-list" element={<ActivityAdListPage />}/>
+        <Route path="/v1/activity-list" element={<ActivityAdListPage />}/>
         {/*<Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>*/}
-        <Route path="/news-section" element={<NewsSectionPage/>}/>
+        <Route path="/v1/news-section" element={<NewsSectionPage/>}/>
 
         {/* NOTE: Android 除錯專用頁面 */}
-        <Route path="/android-debug" element={<AndroidDebugPage/>}/>
+        <Route path="/v1/android-debug" element={<AndroidDebugPage/>}/>
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       {/*{state?.name && (*/}

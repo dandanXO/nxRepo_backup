@@ -26,6 +26,7 @@ const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 // const WindiCSSWebpackPlugin = require('windicss-webpack-plugin');
 
 const TerserPlugin = require("terser-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
@@ -34,7 +35,10 @@ module.exports = (config, context) => {
     // devtool: "source-map",
     output: {
       filename: "[name].[contenthash].js",
-      // sourceMapFilename: 'maps/[name].[contenthash].map.js',
+      // sourceMapFilename: 'maps/[name].[contenthash].map.js'
+      // NOTICE: fix(bundling): fix webpack publicPath: 'auto' behavior for esm builds #13186
+      // https://github.com/nrwl/nx/pull/13186
+      publicPath: "/testfdasf-v2",
     },
     module: {
       rules: [
@@ -132,24 +136,34 @@ module.exports = (config, context) => {
     ]
   });
   if(isProduction) {
-    finalConfig["optimization"] = {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-            format: {
-              comments: false,
-            },
-          },
-          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-          extractComments: false,
+    // 只要加就會掛掉
+    // finalConfig.plugins.push(
+    //   new HtmlWebpackPlugin({
+    //     // 配置 HTML 模板路徑與生成名稱 (第三步)
+    //     template: './src/index.html',
+    //     // filename: 'index.html',
+    //     // publicPath: "/v2",
+    //   }),
+    // )
 
-        })
-      ],
-    }
+    // finalConfig["optimization"] = {
+    //   minimize: true,
+    //   minimizer: [
+    //     new TerserPlugin({
+    //       terserOptions: {
+    //         compress: {
+    //           drop_console: true,
+    //         },
+    //         format: {
+    //           comments: false,
+    //         },
+    //       },
+    //       // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+    //       extractComments: false,
+    //
+    //     })
+    //   ],
+    // }
 
   //   finalConfig.plugins.push(
   //     new CleanWebpackPlugin({
@@ -178,7 +192,7 @@ module.exports = (config, context) => {
       }),
     )
   }
-  // console.log("finalConfig", finalConfig);
+  console.log("finalConfig", finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return finalConfig;
 };

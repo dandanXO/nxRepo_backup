@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV == "production";
 console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
 // console.log("isProduction: ", isProduction);
 
-// const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // get git info from command line
 // let commitHash = require('child_process')
@@ -32,6 +32,7 @@ module.exports = (config, context) => {
     output: {
       filename: "[name].[contenthash].js",
       // sourceMapFilename: 'maps/[name].[contenthash].map.js',
+      // publicPath: "/v1"
     },
     module: {
       rules: [
@@ -142,6 +143,14 @@ module.exports = (config, context) => {
   //     })
   //   );
     finalConfig.plugins.push(
+      new HtmlWebpackPlugin({
+        // 配置 HTML 模板路徑與生成名稱 (第三步)
+        template: './src/index.html',
+        // filename: 'index.html',
+        // publicPath: "/v1",
+      }),
+    )
+    finalConfig.plugins.push(
       new SentryCliPlugin({
         debug: false,
         authToken: '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
@@ -163,7 +172,7 @@ module.exports = (config, context) => {
       }),
     )
   }
-  // console.log("finalConfig", finalConfig);
+  console.log("finalConfig", finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return finalConfig;
 };

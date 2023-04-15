@@ -30,7 +30,7 @@ export function App() {
       <AppThemeProvider theme={window.theme}>
         <Provider store={appStore}>
           <ReduxRouter history={history} routerSelector={routerSelector}>
-            <BrowserRouter basename={"/v2"}>
+            <BrowserRouter basename={"/"}>
               <AppRouter/>
             </BrowserRouter>
             {/*<RouterProvider router={appRouter as any} fallbackElement={<div>Loading...</div>} />*/}
