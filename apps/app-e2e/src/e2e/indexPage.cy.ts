@@ -40,7 +40,7 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/", {
+  cy.visit("/v2", {
     onBeforeLoad(win: Cypress.AUTWindow) {
       // @ts-ignore
       // cy.stub(win, "onUploadKycBackgroundData", function () {
