@@ -114,7 +114,7 @@ const NewCustomersDailyConversionRatesTable = () => {
             title: '贷后统计', dataIndex: 'postLoan', key: 'postLoan', hideInSearch: true,
             children: [
                 { title: '已还款量', dataIndex: 'repayCount', key: 'repayCount', hideInSearch: true },
-                { title: '还款转化率', dataIndex: 'repayRate', key: 'repayRate', hideInSearch: true, tooltip: '还款转化率=新客还款量/还款数量' },
+                { title: '还款转化率', dataIndex: 'repayRate', key: 'repayRate', hideInSearch: true, tooltip: '还款转化率=新客还款量/新客放款量' },
             ]
         },
     ]
