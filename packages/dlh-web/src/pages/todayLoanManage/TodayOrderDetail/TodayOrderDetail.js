@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import styles from './TodayOrderDetail.less';
-import { CommonTable, FormModal, CopyModalMessage ,CopyText } from 'components';
+import { CommonTable, FormModal, CopyModalMessage ,CopyToLink } from 'components';
 import { todayOrderDetailAction } from './index';
 import AddUrgeModal from './AddUrgeModal/AddUrgeModal';
 import UrgeRecordModal from './UrgeRecordModal/UrgeRecordModal';
@@ -303,7 +303,7 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.amount.paid.currency" />：</span><span>{orderInfo['hasBackMoney']}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="windowPage.remain.due" />：</span><span>{orderInfo['surplusBackMoney']}</span></Col>
                         {/*<Col className={styles.col} lg={12} xl={8}><span className={styles.title}>展期费用(₹)：</span><span>{orderInfo['standOverMoney']}</span></Col>*/}
-                        <Col className={styles.col} lg={12} xl={8} style={{display:'flex'}}><span className={styles.title}><FormattedMessage id="page.table.appName" />：</span><CopyText text={orderInfo['appName']} acturalCopy={orderInfo['channelUrl']}/></Col>
+                        <Col className={styles.col} lg={12} xl={8} style={{display:'flex'}}><span className={styles.title}><FormattedMessage id="page.table.appName" />：</span><CopyToLink text={orderInfo['appName']} acturalCopy={orderInfo['channelUrl']} title={orderInfo['channelUrl']}/></Col>
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankName" />：</span><span>{bankInfo['bankName']}</span></Col>}
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankCardNo" />：</span><span>{bankInfo['bankCardNo']}</span></Col>}
 

@@ -45,12 +45,14 @@ const DailyRiskControlTable = () => {
 
     const getSearchParams = () => {
         // @ts-ignore
-        const {  dayRange,  riskControlModel = '', isOldUser = false } = formRef.current.getFieldValue();
+        const {  dayRange,  riskControlModel = '', isOldUser = false, registerDayRange } = formRef.current.getFieldValue();
         return{
             endTime: dayRange ? dayRange[1].format('YYYY-MM-DD 23:59:59') : '',
             startTime: dayRange ? dayRange[0].format('YYYY-MM-DD 00:00:00') : '',
             riskControlModel,
-            isOldUser
+            isOldUser,
+            registerStartTime: registerDayRange ? registerDayRange[0].format('YYYY-MM-DD 00:00:00') : '',
+            registerEndTime: registerDayRange ? registerDayRange[1].format('YYYY-MM-DD 23:59:59') : '',
         }
     }
 
@@ -73,6 +75,7 @@ const DailyRiskControlTable = () => {
             'false': { text: '新用户' },
             'true': { text: '老用户' },
         }, hideInTable: true },
+        { title: '注册日期', dataIndex: 'registerDayRange', key: 'registerDayRange', valueType: 'dateRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true },
         { title: '日期', dataIndex: 'day', key: 'day', hideInSearch: true },
         { title: '风控请求数', dataIndex: 'requestCount', key: 'requestCount', hideInSearch: true },
         { title: '成功回复数', dataIndex: 'successCount', key: 'successCount', hideInSearch: true },

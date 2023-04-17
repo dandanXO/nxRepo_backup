@@ -6,17 +6,17 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FormattedMessage } from "react-intl";
 import EllipsisText from './EllipsisText';
 import PropTypes from 'prop-types';
-function CopyToLink({ text, intl, title }) {
+function CopyToLink({ text, intl, title , acturalCopy=text }) {
 
     const handleCopy = () => {
         message.success(intl.formatMessage({ id: "page.table.copy.success" }), 2);
     }
     return (
         <div className={styles.copyToLink}>
-            <EllipsisText text={text} />
+            <EllipsisText text={text} title={title ? title : text}/>
             {text &&
-                <CopyToClipboard text={text} onCopy={handleCopy}>
-                    <Tooltip title={title ? title : <FormattedMessage id="page.table.copy" />}><Icon type={'copy'} /></Tooltip>
+                <CopyToClipboard text={acturalCopy} onCopy={handleCopy}>
+                    <Icon type={'copy'} />
                 </CopyToClipboard>
             }
         </div>
