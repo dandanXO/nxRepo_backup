@@ -1,11 +1,8 @@
 export interface GetLoanRecordListRequest {
   pageNumber?: number;
   pageSize?: number;
-  status: 'EXTEND'
+  status: 'UNPAID'
     | 'OVERDUE'
-    | 'PAY_OFF'
-    | 'PROCESSING'
-    | 'REJECTED'
-    | 'UNPAID';
+    | 'DONE'
   // token:string;
 }
