@@ -4,8 +4,8 @@ import { injectIntl } from "react-intl";
 import styles from "./CopyToLink.less";
 
 
-function EllipsisText({ text }) {
-    return <div className={styles.linkText}>{text && <Tooltip title={text}>{text}</Tooltip>}</div>
+function EllipsisText ({ text, title = text }) {
+    return <div className={styles.linkText}>{text && <Tooltip title={title}>{text}</Tooltip>}</div>
 }
 
 export default injectIntl(EllipsisText);
