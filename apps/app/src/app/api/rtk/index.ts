@@ -77,8 +77,21 @@ export const APIV3 = createApi({
         console.log("onCacheEntryAdded.arg", arg);
       },
     }),
+
+    // NOTE: /api/v3/loan/records 貸款紀錄列表
+    getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
+      query: (query: GetLoanRecordListRequest) => ({
+        method: "get",
+        url: `/loan/records`,
+        params: query,
+      }),
+    }),
   }),
 });
+
+export const {
+  useLazyGetLoanRecordListQuery,
+} = APIV3;
 
 export const API = createApi({
     reducerPath: "api",
@@ -114,14 +127,7 @@ export const API = createApi({
                 params: query,
             }),
         }),
-        // NOTE: /api/v2/loan/records 貸款紀錄列表
-        getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
-            query: (query: GetLoanRecordListRequest) => ({
-                method: "get",
-                url: `/loan/records`,
-                params: query,
-            }),
-        }),
+
         // NOTE: /api/v2/loan/detail 貸款訂單詳情
         getLoanDetail: builder.query<GetLoanDetailResponse, GetLoanDetailRequest>({
             query: (query: GetLoanDetailRequest) => ({
@@ -218,7 +224,7 @@ export const {
     useGetLoanDetailQuery,
     useGetRepayTypesQuery,
     useLazyGetBankCardListQuery,
-    useLazyGetLoanRecordListQuery,
+
     useLazyGetLoanDetailQuery,
     useLazyGetRepayTypesQuery,
     usePostRepayCreateMutation,

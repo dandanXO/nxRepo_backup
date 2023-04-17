@@ -104,14 +104,14 @@ module.exports = (config, context) => {
         // });
       },
       // NOTICE: replace by @nrwl/web:webpack
-      // proxy: {
-      //   //设置代理
-      //   "/api": {
-      //     target: "https://app.india-api-dev.com",
-      //     secure: false, // 協議是https的時候必須要寫
-      //     changeOrigin: true,
-      //   },
-      // },
+      proxy: {
+        //设置代理
+        "/api": {
+          target: "https://app.india-api-dev.com",
+          secure: false, // 協議是https的時候必須要寫
+          changeOrigin: true,
+        },
+      },
     },
     plugins: [
       // new PreloadWebpackPlugin({
