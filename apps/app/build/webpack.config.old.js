@@ -127,35 +127,21 @@ module.exports = (config, context) => {
           BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
         },
       }),
+      // new CleanWebpackPlugin({
+      //   verbose: true,
+      // }),
+    ],
+  });
+  if (isProduction) {
+    // 只要加就會掛掉
+    finalConfig.plugins.push(
       new HtmlWebpackPlugin({
         // 配置 HTML 模板路徑與生成名稱 (第三步)
         template: './src/index.html',
         filename: 'index.html',
         // publicPath: "/v2",
       }),
-      // new CleanWebpackPlugin({
-      //   verbose: true,
-      // }),
-      // new WindiCSSWebpackPlugin({
-      //   virtualModulePath: 'src',
-      //   server: {
-      //     port: 9999,
-      //     host: 'localhost'
-      //   }
-      // }),
-    ],
-  });
-  if (isProduction) {
-    // 只要加就會掛掉
-    // finalConfig.plugins.push(
-    //   new HtmlWebpackPlugin({
-    //     // 配置 HTML 模板路徑與生成名稱 (第三步)
-    //     template: './src/index.html',
-    //     // filename: 'index.html',
-    //     // publicPath: "/v2",
-    //   }),
-    // )
-
+    )
     // finalConfig["optimization"] = {
     //   minimize: true,
     //   minimizer: [
@@ -186,8 +172,8 @@ module.exports = (config, context) => {
         authToken:
           '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
         org: 'workshop-xs',
-        project: 'api-mobile',
-        include: './dist/apps/mobile',
+        project: 'api-app',
+        include: './dist/apps/app',
         ignoreFile: '.sentrycliignore',
         ignore: ['node_modules', 'webpack.config.js'],
         configFile: 'sentry.properties',
