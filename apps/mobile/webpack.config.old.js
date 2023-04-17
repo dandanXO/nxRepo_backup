@@ -27,6 +27,15 @@ const SentryCliPlugin = require("@sentry/webpack-plugin");
 const PUBLIC_PATH = "/v1/";
 const ASSET_OUTPUT_PATH = "asset";
 
+let proxyURL;
+if(process.env.NODE_COUNTRY === "in") {
+  proxyURL = "https://app.india-api-dev.com";
+} else if(process.env.NODE_COUNTRY === "pk") {
+  proxyURL = "https://app.pk-api-dev.com";
+} else if(process.env.NODE_COUNTRY === "bd") {
+  proxyURL = "https://app.bd-api-dev.com";
+}
+
 module.exports = (config, context) => {
     const finalConfig = merge(config, {
         // devtool: false,
@@ -105,15 +114,14 @@ module.exports = (config, context) => {
                 //   res.json(mockAPIResponse);
                 // });
             },
-            // NOTICE: replace by @nrwl/web:webpack
-            // proxy: {
-            //   //设置代理
-            //   "/api": {
-            //     target: "https://app.india-api-dev.com",
-            //     secure: false, // 協議是https的時候必須要寫
-            //     changeOrigin: true,
-            //   },
-            // },
+            proxy: {
+              //设置代理
+              "/api": {
+                target: proxyURL,
+                secure: false, // 協議是https的時候必須要寫
+                changeOrigin: true,
+              },
+            },
         },
         plugins: [
             // new PreloadWebpackPlugin({

@@ -107,11 +107,65 @@
         "isolatedConfig": true
       },
       "configurations": {
-        "development": {
+        "development-in": {
           "extractLicenses": false,
           "optimization": false,
           "sourceMap": true,
-          "vendorChunk": true
+          "vendorChunk": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/app/src/environments/environment.ts",
+              "with": "apps/app/src/environments/environment.in.dev.ts"
+            }
+          ]
+        },
+        "production-in": {
+          "fileReplacements": [
+            {
+              "replace": "apps/app/src/environments/environment.ts",
+              "with": "apps/app/src/environments/environment.in.prod.ts"
+            }
+          ]
+        },
+        "development-pk": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/app/src/environments/environment.ts",
+              "with": "apps/app/src/environments/environment.pk.dev.ts"
+            }
+          ]
+        },
+        "production-pk": {
+          "fileReplacements": [
+            {
+              "replace": "apps/app/src/environments/environment.ts",
+              "with": "apps/app/src/environments/environment.pk.prod.ts"
+            }
+          ]
+        },
+        "development-bd": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/app/src/environments/environment.ts",
+              "with": "apps/app/src/environments/environment.bd.dev.ts"
+            }
+          ]
+        },
+        "production-bd": {
+          "fileReplacements": [
+            {
+              "replace": "apps/app/src/environments/environment.ts",
+              "with": "apps/app/src/environments/environment.bd.prod.ts"
+            }
+          ]
         }
       }
     },
@@ -123,10 +177,10 @@
       },
       "configurations": {
         "development": {
-          "buildTarget": "app:serve-build:development"
+          "buildTarget": "app:serve-build:development-in"
         },
         "production": {
-          "buildTarget": "app:build:production",
+          "buildTarget": "app:build:production-in",
           "hmr": false
         }
       }
@@ -135,15 +189,14 @@
       "executor": "@nrwl/web:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "app:build",
         "hmr": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "app:build:development"
+          "buildTarget": "app:serve-build:development-pk"
         },
         "production": {
-          "buildTarget": "app:build:production",
+          "buildTarget": "app:build:production-pk",
           "hmr": false
         }
       }
@@ -152,15 +205,14 @@
       "executor": "@nrwl/web:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "app:build",
         "hmr": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "app:build:development"
+          "buildTarget": "app:serve-build:development-bd"
         },
         "production": {
-          "buildTarget": "app:build:production",
+          "buildTarget": "app:build:production-bd",
           "hmr": false
         }
       }
