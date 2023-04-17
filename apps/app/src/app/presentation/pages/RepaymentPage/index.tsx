@@ -19,7 +19,7 @@ const RepaymentPage = () => {
     });
     const statusEnum = {
         'Overdue': 'OVERDUE',
-        'Done': 'PAY_OFF',
+        'Done': 'DONE',
         'Unpaid': 'UNPAID',
         'Processing': 'PROCESSING',
         'Rejected': 'REJECTED',

@@ -1,7 +1,4 @@
 import Button from "../../components/Button";
-import UpArrow from './arrow_up_icon.svg';
-import DownArrow from './arrow_drop_down.svg';
-import Logo from './amount_paid_icon.svg';
 import Divider from "../../components/Divider";
 import { useEffect, useState } from "react";
 import ListItem from "../../components/ListItem";
@@ -11,6 +8,7 @@ import { useNavigate } from "react-router";
 import { getToken } from "../../../modules/location/getToken";
 import {GetLoanRecord} from "../../../api/loanService/GetLoanRecord";
 import {PagePathEnum} from "../PagePathEnum";
+import { RiArrowUpSLine, RiArrowDownSLine } from "react-icons/all";
 const PaymentItem = (props: GetLoanRecord) => {
 
     const navigate = useNavigate();
@@ -22,13 +20,13 @@ const PaymentItem = (props: GetLoanRecord) => {
     const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
 
     const statusEnum = {
-        'OVERDUE': { text: 'Overdue', color: 'text-red-500' },
-        'PAY_OFF': { text: 'Pay off', color: 'text-sky-400' },
-        'UNPAID': { text: 'Unpaid', color: '' },
-        'PROCESSING': { text: 'Processing', color: '' },
-        'REJECTED': { text: 'Rejected', color: '' },
-        'EXTEND': { text: 'Expend', color: 'text-sky-600' },
-    } as { [key: string]: { text: string; color: string } }
+        'OVERDUE': { text: 'Overdue', color: 'text-red-500', buttonText: 'Repay Details' },
+        'PAY_OFF': { text: 'Pay off', color: 'text-sky-400', buttonText: '' },
+        'UNPAID': { text: 'Unpaid', color: '', buttonText: 'Repay Details' },
+        'PROCESSING': { text: 'Processing', color: '', buttonText: 'Details' },
+        'REJECTED': { text: 'Reject', color: 'text-red-500', buttonText: 'Details' },
+        'EXTEND': { text: 'Expend', color: 'text-sky-600', buttonText: 'Repay Details' },
+    } as { [key: string]: { text: string; color: string, buttonText: string } }
 
 
     const [collapse, setCollapse] = useState(false);
@@ -48,7 +46,15 @@ const PaymentItem = (props: GetLoanRecord) => {
                 <div className="text-base font-bold mb-1">{`${environment.currency} ${loanAmount ?? ''}`}</div>
                 <div className="text-xs">{`Due ${moment(dueDate).format('L') ?? ''}`}</div>
             </div>
-            {status !== "PAY_OFF" && <Button onClick={()=>navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: {orderNo} })} buttonText="Repay Detail" width={'w-20'} height={'h-8'} fontSize="xs" />}
+            {status !== "PAY_OFF" &&
+                <Button
+                    onClick={() => navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } })}
+                    buttonText={status ? statusEnum[status].buttonText : ''}
+                    width={'w-20'}
+                    height={'h-8'}
+                    fontSize="xs"
+                />
+            }
         </div>
         <Divider />
         {collapse && <div className="px-3">
@@ -68,9 +74,9 @@ const PaymentItem = (props: GetLoanRecord) => {
             <div className={'text-xs text-slate-400 mr-2'}>{collapse ?'collapse':'expand'}</div>
             <div className={'w-2.5'}>
                 {collapse ? (
-                    <img src={UpArrow} alt="^" />
+                    <RiArrowUpSLine className="fill-gray-400"/>
                 ) : (
-                    <img src={DownArrow} alt="v" />
+                    <RiArrowDownSLine className="fill-gray-400"/>
                 )}
             </div>
         </div>
