@@ -3,6 +3,8 @@ export interface GetDailyRiskControlListRequestQuery {
     startTime?: string;               // 開始時間
     riskControlModel?: string;        // 风控名稱
     isOldUser?: boolean;              // 新/老客
+    registerStartTime?: string;       // 註冊開始時間
+    registerEndTime?: string;         // 註冊結束時間
 }
 
 export interface GetDailyRiskControlListResponse {
