@@ -7,7 +7,9 @@ const { merge } = require("webpack-merge");
 // const isProduction = process.env.NODE_ENV == "production";
 const isProduction = process.env.NODE_ENV == "production";
 console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
-// console.log("isProduction: ", isProduction);
+console.log("process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
+console.log("isProduction: ", isProduction);
+
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -195,6 +197,6 @@ module.exports = (config, context) => {
         );
     }
     console.log("finalConfig", finalConfig);
-    // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
+    console.log("process.env.NODE_ENV", process.env.NODE_ENV);
     return finalConfig;
 };

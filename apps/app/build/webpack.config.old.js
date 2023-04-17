@@ -13,8 +13,9 @@ infoLog('build');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const isProduction = process.env.NODE_ENV == 'production';
-console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
-console.log('process.env.NODE_COUNTRY:', process.env.NODE_COUNTRY);
+console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
+console.log("process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
+console.log("isProduction: ", isProduction);
 
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
