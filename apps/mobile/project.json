@@ -29,7 +29,7 @@
                     "extractLicenses": false,
                     "optimization": false,
                     "sourceMap": true,
-                    "vendorChunk": true,
+                    "vendorChunk": true
                 },
                 "production": {
                     "fileReplacements": [
@@ -109,6 +109,7 @@
             "compiler": "babel",
             "outputPath": "dist/apps/mobile",
             "baseHref": "/",
+            "index": "apps/mobile/src/index.html",
             "main": "apps/mobile/src/main.tsx",
             "polyfills": "apps/mobile/src/polyfills.ts",
             "tsConfig": "apps/mobile/tsconfig.app.json",
@@ -237,7 +238,7 @@
             }
         },
         "serve:in": {
-            "executor": "@nrwl/web:dev-server",
+            "executor": "@nrwl/webpack:dev-server",
             "defaultConfiguration": "development",
             "options": {
 
