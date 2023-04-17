@@ -30,6 +30,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const PUBLIC_PATH = "/v2";
+console.log("PUBLIC_PATH", PUBLIC_PATH);
+
 const ASSET_OUTPUT_PATH = "asset";
 
 let proxyURL;
