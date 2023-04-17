@@ -99,8 +99,8 @@ export const LoanOverViewSection = (props: Props) => {
               options={options.current}
               series={series}
               type="radialBar"
-              width="180"
-              height="180"
+              width="160"
+              height="160"
             />
 
             <div className={"absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-center"}>
