@@ -24,8 +24,9 @@ const SentryCliPlugin = require("@sentry/webpack-plugin");
 
 // const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
-const PUBLIC_PATH = "/v1/";
+const PUBLIC_PATH = !isProduction ? "/" : "/v1/";
 const ASSET_OUTPUT_PATH = "asset";
+console.log("PUBLIC_PATH", PUBLIC_PATH);
 
 let proxyURL;
 if(process.env.NODE_COUNTRY === "in") {
@@ -105,6 +106,9 @@ module.exports = (config, context) => {
             // NOTE: REFACTOR ME
             port: 4003,
             historyApiFallback: true,
+            static: {
+              directory: "/"
+            },
             onBeforeSetupMiddleware: function (devServer) {
                 if (!devServer) {
                     throw new Error("webpack-dev-server is not defined");
@@ -130,12 +134,6 @@ module.exports = (config, context) => {
             //   include: 'all'
             //   // include: 'initial'
             // }),
-            new HtmlWebpackPlugin({
-              // 配置 HTML 模板路徑與生成名稱 (第三步)
-              template: './src/index.html',
-              filename: 'index.html',
-              // publicPath: "/v2",
-            }),
             new webpack.DefinePlugin({
                 appInfo: {
                     VERSION: JSON.stringify(gitRevisionPlugin.version()),
@@ -168,14 +166,14 @@ module.exports = (config, context) => {
         //       verbose: true,
         //     })
         //   );
-        // finalConfig.plugins.push(
-        //   new HtmlWebpackPlugin({
+        finalConfig.plugins.push(
+          new HtmlWebpackPlugin({
             // 配置 HTML 模板路徑與生成名稱 (第三步)
-            // template: './src/index.html',
-            // filename: 'index.html',
+            template: './src/index.html',
+            filename: 'index.html',
             // publicPath: "/v2",
-          // }),
-        // );
+          }),
+        );
         finalConfig.plugins.push(
             new SentryCliPlugin({
                 debug: false,

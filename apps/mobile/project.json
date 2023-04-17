@@ -109,7 +109,7 @@
             "compiler": "babel",
             "outputPath": "dist/apps/mobile",
             "baseHref": "/",
-            "index": "apps/mobile/index.html",
+            "index": "apps/mobile/src/index.html",
             "main": "apps/mobile/src/main.tsx",
             "polyfills": "apps/mobile/src/polyfills.ts",
             "tsConfig": "apps/mobile/tsconfig.app.json",
