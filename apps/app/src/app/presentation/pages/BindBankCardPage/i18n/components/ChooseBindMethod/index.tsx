@@ -61,11 +61,6 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
     <Container>
       <Label>{t("Choose the method to receive the money")}</Label>
       <OptionContainer>
-        <Option onClick={() => props.changeOptionValueCallback(0)}>
-          <OptionIcon enable={props.value === 0}/>
-          <img style={{ width: 60, height: 60 }} src={environment.country === IAllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}/>
-          <Label>{t("Mobile wallet")}</Label>
-        </Option>
         <Option onClick={() => {
           if(!props.disable) props.changeOptionValueCallback(1)
         }} style={{
@@ -74,6 +69,11 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
           <OptionIcon enable={props.value === 1}/>
           <img style={{ width: 60, height: 60 }}  src={BankAccountSVG}/>
           <Label>{t("Bank account")}</Label>
+        </Option>
+        <Option onClick={() => props.changeOptionValueCallback(0)}>
+          <OptionIcon enable={props.value === 0}/>
+          <img style={{ width: 60, height: 60 }} src={environment.country === IAllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}/>
+          <Label>{t("Mobile wallet")}</Label>
         </Option>
       </OptionContainer>
     </Container>

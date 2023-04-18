@@ -9,6 +9,7 @@ import {processWalletDisplayName} from "./customization/processWalletDisplayName
 import {GetBindCardDropListResponse, WalletVendor} from "../../../../../../api/rtk/old/GetBindCardDropList";
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
 import {AppFlag} from "../../../../../../app";
+import { usePakistanIBanValidate } from "./usePakistanIBanValidate";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -23,7 +24,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   // NOTE: Wallet List
   // Wallet List - 電子錢包列表 Data
   const [walletDropList, setWalletDropList] = useState<(string| React.ReactNode)[]>([]);
-
+  const { iBanData, onIBanChange, onIbanBlur } = usePakistanIBanValidate()
   useEffect(() => {
     if(!props.bindCardDropListData) return;
     const walletList = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors && props.bindCardDropListData.availableWalletVendors.map((wallet: WalletVendor) => {
@@ -93,6 +94,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
       mobileWallet: true,
       mobileWalletAccount: mobileData.data,
       walletVendor: mobileWalletAccount && mobileWalletAccount.code || "",
+      iban: iBanData.data
     })
       .unwrap()
       .then((data: any) => {
@@ -127,6 +129,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     props.bindCardDropListData,
     props.triggerPostBankBindSaveToPKMutation,
     props.isPostBankBindSaveToPKMutationLoading,
+    iBanData.data
   ]);
 
   return {
@@ -138,7 +141,12 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     mobileData,
     onMobileDataChange,
     validateMobileWalletAccount,
+    //IBAN
+    iBanData, 
+    onIBanChange, 
+    onIbanBlur,
     // Form
     confirm,
+  
   }
 }

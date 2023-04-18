@@ -74,9 +74,13 @@ const BindBankCardPage = () => {
         />
       )
     }, (
-      <IndiaBindBankAccountPage
-        isLoadingPostBankBindSave={isLoadingPostBankBindSave}
-        postBankBindSave={postBankBindSave}
+        <PakistanBindBankAccountPage
+        isLoadingPostBankBindSaveToPK={isLoadingPostBankBindSaveToPK}
+        postBankBindSaveToPK={postBankBindSaveToPK}
+        isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
+        triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
+        triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
+        bindCardDropListData={bindCardDropListData}
         cardholderName={cardholderName ?? ""}
       />
     ))

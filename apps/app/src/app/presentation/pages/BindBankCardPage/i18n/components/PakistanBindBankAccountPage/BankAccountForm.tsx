@@ -49,24 +49,34 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
   return (
     <CustomForm>
       <Form>
-        <Label>{t("Cardholder Name")}</Label>
+        <Label>{t('Cardholder Name')}</Label>
 
         <Input
           className="mb"
-          labelType={"none"}
-          placeholder={t("Cardholder Name") as string}
+          labelType={'none'}
+          placeholder={t('Cardholder Name') as string}
           value={props.cardholderName}
           disabled
         />
+        <Label>{t('Your IBAN Number (24 digits)')}</Label>
+        <Input
+          className="mb"
+          labelType={'none'}
+          placeholder={'Ex. PK36FTBK0000111123456702'}
+          value={props.iBanData.data}
+          onChange={props.onIBanChange}
+          onBlur={props.onIbanBlur}
+          errorMessage={props.iBanData.errorMessage}
+        />
 
-        <Label>{t("Please select your bank name")}</Label>
+        <Label>{t('Please select your bank name')}</Label>
         <Select
           className="react-select-container mb"
           // defaultValue={props.bankDropList[0].value}
           value={props?.bankDropList[props.bankAccountValue]?.value}
           onChange={(item: any) => {
             // console.log(item)
-            props.onIFSCDropSelect(item.index)
+            props.onIFSCDropSelect(item.index);
           }}
           options={options}
         />
@@ -81,39 +91,45 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         {/*  maxItemCount={5.5}*/}
         {/*/>*/}
 
-        <Label>{t("Account Number",)}</Label>
+        <Label>{t('Account Number')}</Label>
         <Input
           className="mb"
-          labelType={"none"}
-          placeholder={t("Account Number") as string}
+          labelType={'none'}
+          placeholder={t('Account Number') as string}
           value={props.bankcardNoData.data}
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
         />
 
-        <Label>{t("Confirm Account Number")}</Label>
+        <Label>{t('Confirm Account Number')}</Label>
         <Input
           className="mb"
-          labelType={"none"}
-          placeholder={t("Confirm Account Number") as string}
+          labelType={'none'}
+          placeholder={t('Confirm Account Number') as string}
           value={props.confirmedBankcardNoData.data}
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
 
-        <Warning>{t("Unchangeable after linked, please check before submission.")}</Warning>
+        <Warning>
+          {t('Unchangeable after linked, please check before submission.')}
+        </Warning>
       </Form>
 
-      <Button onClick={() => {
-        // if(!props.isFormPending && props.confirm) {
-        //   console.log("request")
-        props.confirm && props.confirm()
-        // } else {
-        //   console.log("request2")
-        // }
-      }}>{t("Save")}</Button>
+      <Button
+        onClick={() => {
+          // if(!props.isFormPending && props.confirm) {
+          //   console.log("request")
+          props.confirm && props.confirm();
+          // } else {
+          //   console.log("request2")
+          // }
+        }}
+      >
+        {t('Save')}
+      </Button>
     </CustomForm>
   );
 }

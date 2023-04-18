@@ -27,6 +27,9 @@ type IMobileWalletForm = {
   // Form
   isFormPending: boolean;
   confirm: () => void;
+  iBanData: InputValue<string>;
+  onIBanChange: (event: any) => void;
+  onIbanBlur: (event: any) => void;
 };
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
@@ -46,6 +49,16 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       />
       <WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>
       <Label>{t("Select a mobile wallet")}</Label>
+      <Label>{t('Your IBAN Number (24 digits)')}</Label>
+        <Input
+          className="mb"
+          labelType={'none'}
+          placeholder={'Ex. PK36FTBK0000111123456702'}
+          value={props.iBanData.data}
+          onChange={props.onIBanChange}
+          onBlur={props.onIbanBlur}
+          errorMessage={props.iBanData.errorMessage}
+        />
       <Input
         className="mb"
         labelType={"left"}
