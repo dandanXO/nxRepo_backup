@@ -2,7 +2,6 @@ import * as React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import Card from './index';
 import {AppThemeProvider} from '../../../../../../../libs/mobile/shared/ui/src/lib/components';
-// import CardContent from '../../../../../../../../apps/mobile/src/app/components/CardContent';
 
 export default {
   title: 'Component/Card',

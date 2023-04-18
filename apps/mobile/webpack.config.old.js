@@ -103,10 +103,10 @@ module.exports = (config, context) => {
         },
         devServer: {
             hot: true,
-            // open: true,
+            open: true,
             host: "localhost",
             // NOTE: REFACTOR ME
-            port: 4003,
+            port: 4001,
             historyApiFallback: true,
             static: {
               directory: "/"

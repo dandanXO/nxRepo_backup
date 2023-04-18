@@ -103,10 +103,10 @@ module.exports = (config, context) => {
     },
     devServer: {
       hot: true,
-      open: false,
+      open: true,
       host: 'localhost',
       // NOTE: REFACTOR ME
-      port: 3000,
+      port: 4002,
       historyApiFallback: true,
       onBeforeSetupMiddleware: function (devServer) {
         if (!devServer) {

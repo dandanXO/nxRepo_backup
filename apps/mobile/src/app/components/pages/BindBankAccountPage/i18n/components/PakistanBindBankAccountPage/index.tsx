@@ -41,10 +41,10 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     mobileData,
     onMobileDataChange,
     validateMobileWalletAccount,
-    confirm: confirmMobileWallet,
+    iBanData: iBanDataMobileWallet,
     onIBanChange: onMobileWalletIBanChange,
     onIbanBlur: onMobileWalletIbanBlur,
-    iBanData: iBanDataMobileWallet,
+    confirm: confirmMobileWallet,
   } = usePakistanMobileWalletForm({
     isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
     triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
@@ -55,6 +55,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bankDropList,
     bankAccountValue,
     onIFSCDropSelect,
+    iBanData,
+    onIBanChange,
+    onIbanBlur,
     confirm: confirmBankAccount,
   } = usePakistanBankAccountForm({
     bindCardDropListData: props.bindCardDropListData,
@@ -80,6 +83,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bindCardDropListData: props.bindCardDropListData,
     // NOTE: 設定電子錢包列表
     bankAccountValue,
+    iBanData
   });
 
   return (
@@ -115,14 +119,14 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             bankAccountValue={bankAccountValue}
             bindCardDropListData={props.bindCardDropListData}
             onIFSCDropSelect={onIFSCDropSelect}
-            iBanData={iBanDataMobileWallet}
-            onIBanChange={onMobileWalletIBanChange}
-            onIbanBlur={onMobileWalletIbanBlur}
             confirm={() => {
               validateCommonForm();
-              confirm()
               confirmBankAccount();
+              confirm()
             }}
+            iBanData={iBanData}
+            onIBanChange={onIBanChange}
+            onIbanBlur={onIbanBlur}
           />
         )}
     </CustomPage>

@@ -10,9 +10,10 @@ import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import {environment} from "../../../../../../../environments/environment";
 import {IAllCountryIdentityName} from "../../../../../../../environments/config/IAllCountryIdentityName";
-import {renderByCountry} from "../../../../../../../../../app/src/app/modules/i18n";
-import {PakistanCountry} from "../../../../../../../../../app/src/app/domain/country/constants/PakistanCountry";
-import {BangladeshCountry} from "../../../../../../../../../app/src/app/domain/country/constants/BangladeshCountry";
+import { renderByCountry } from "../../../../../../i18n/renderByCountry";
+import {PakistanCountry} from "../../../../../../../environments/config/countries/PakistanCountry";
+import {BangladeshCountry} from "../../../../../../../environments/config/countries/BangladeshCountry";
+
 
 const Container = styled.div`
   margin-bottom: 20px;

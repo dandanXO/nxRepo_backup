@@ -9,7 +9,7 @@ const UploadedPaymentReceiptPage = () => {
     const pageQueryString = useLocationOrderQueryString();
     const navigateToLoanDetails = useCallback(() => {
         navigate(
-            `/v1/loan-details?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`
+            `/loan-details?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`
         );
     }, [pageQueryString.token, pageQueryString.orderNo]);
 
