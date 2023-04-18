@@ -16,63 +16,66 @@ export const LoanOverViewSection = (props: Props) => {
     props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
     props.state.order.state !== ORDER_STATE.hasOverdueOrder;
 
-  const options = useRef<ApexOptions>();
+  const options = useRef<{series: ApexOptions["series"], options: ApexOptions}>();
   options.current = {
-    labels: [""],
-    states: {
-      hover: {
-        filter: {
-          type: 'none',
+    series: [12],
+    options: {
+      labels: [""],
+      states: {
+        hover: {
+          filter: {
+            type: 'none',
+          }
+        },
+      },
+      fill: {
+        colors: isReacquireCreditAmount ? ["#AAAAAA"] : ["#78CB4D"]
+      },
+      plotOptions: {
+        radialBar: {
+          hollow: {
+            margin: 5,
+            size: '70%',
+            background: 'transparent',
+            image: undefined,
+            imageWidth: 150,
+            imageHeight: 150,
+            imageOffsetX: 0,
+            imageOffsetY: 0,
+            imageClipped: true,
+            position: 'front',
+            dropShadow: {
+              enabled: false,
+              top: 0,
+              left: 0,
+              blur: 3,
+              opacity: 0.5
+            }
+          },
+          track: {
+            background: "#E5E5E5",
+          },
+          dataLabels: {
+            show: false,
+            name: {
+              show: true,
+              color: "#888",
+              fontSize: "13px"
+            },
+            value: {
+              show: true,
+              color: "#111",
+              fontSize: "30px",
+              formatter: function (val) {
+                return String(val);
+              },
+            }
+          }
         }
       },
-    },
-    fill: {
-      colors: isReacquireCreditAmount ? ["#AAAAAA"] : ["#78CB4D"]
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          margin: 5,
-          size: '70%',
-          background: 'transparent',
-          image: undefined,
-          imageWidth: 150,
-          imageHeight: 150,
-          imageOffsetX: 0,
-          imageOffsetY: 0,
-          imageClipped: true,
-          position: 'front',
-          dropShadow: {
-            enabled: false,
-            top: 0,
-            left: 0,
-            blur: 3,
-            opacity: 0.5
-          }
-        },
-        track: {
-          background: "#E5E5E5",
-        },
-        dataLabels: {
-          show: false,
-          name: {
-            show: true,
-            color: "#888",
-            fontSize: "13px"
-          },
-          value: {
-            show: true,
-            color: "#111",
-            fontSize: "30px",
-            formatter: function (val) {
-              return String(val);
-            },
-          }
-        }
-      }
-    },
+    }
   }
-  const [series, setSeries] = useState<number[]>();
+  // const [series, setSeries] = useState<number[]>();
 
   useEffect(() => {
     if(props.state.indexAPI) {
@@ -83,7 +86,8 @@ export const LoanOverViewSection = (props: Props) => {
       if(percent > 99) {
         percent = 99
       }
-      setSeries([percent])
+      if(options.current) options.current.series = [percent];
+      // setSeries([percent])
     }
   }, [props.state.indexAPI])
 
@@ -91,13 +95,13 @@ export const LoanOverViewSection = (props: Props) => {
     <div>
       <div className={"font-medium mb-2"}>Loan Over View</div>
 
-      <div className={"w-full flex flex-row justify-between"}>
+      <div className={"w-full flex flex-row justify-around"}>
 
         <div className={"left relative"}>
           <div className="container relative">
             <Chart
-              options={options.current}
-              series={series}
+              options={options.current.options}
+              series={options.current.series}
               type="radialBar"
               width="160"
               height="160"
