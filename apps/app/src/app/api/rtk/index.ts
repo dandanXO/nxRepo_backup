@@ -110,7 +110,14 @@ export const API = createApi({
             data: query,
           }),
         }),
-
+        // NOTE: 登出
+        // logout: builder.mutation<null, LogoutRequest>({
+        //   query: (query: LogoutRequest) => ({
+        //     method: "post",
+        //     url: `/login/otp-code`,
+        //     data: query,
+        //   }),
+        // }),
         // NOTE: 借款首頁
         getIndex: builder.query<GetIndexResponse, GetIndexRequest>({
             query: (query: GetIndexRequest) => ({

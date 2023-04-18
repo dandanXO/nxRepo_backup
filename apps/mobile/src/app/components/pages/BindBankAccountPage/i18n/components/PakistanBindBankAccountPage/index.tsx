@@ -11,7 +11,7 @@ import {usePakistanMobileWalletForm} from "../../hooks/pakistan/usePakistanMobil
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
-  const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0|1>(0);
+  const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0|1>(1);
 
   const changeOptionValue = (value: 0|1) => {
     setChooseBindMethodValue(value);
@@ -21,21 +21,6 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     props.triggerGetBindCardDropListQuery();
   }, [])
 
-  const {
-    // Wallet List
-    walletDropList,
-    walletValue,
-    setWalletValue,
-    // Wallet Account
-    mobileData,
-    onMobileDataChange,
-    validateMobileWalletAccount,
-    confirm: confirmMobileWallet,
-  } = usePakistanMobileWalletForm({
-    isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
-    triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
-    bindCardDropListData: props.bindCardDropListData,
-  });
 
   const  {
     bankcardNoData,
@@ -48,9 +33,29 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   } = useBindBankAccountForm();
 
   const {
+    // Wallet List
+    walletDropList,
+    walletValue,
+    setWalletValue,
+    // Wallet Account
+    mobileData,
+    onMobileDataChange,
+    validateMobileWalletAccount,
+    confirm: confirmMobileWallet,
+    onIBanChange: onMobileWalletIBanChange,
+    onIbanBlur: onMobileWalletIbanBlur,
+    iBanData: iBanDataMobileWallet,
+  } = usePakistanMobileWalletForm({
+    isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
+    triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
+    bindCardDropListData: props.bindCardDropListData,
+  });
+
+  const {
     bankDropList,
     bankAccountValue,
     onIFSCDropSelect,
+    confirm: confirmBankAccount,
   } = usePakistanBankAccountForm({
     bindCardDropListData: props.bindCardDropListData,
   });
@@ -89,6 +94,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           onMobileDataChange={onMobileDataChange}
           validateMobileWalletAccount={validateMobileWalletAccount}
           isFormPending={isFormPending || false}
+          iBanData={iBanDataMobileWallet}
+          onIBanChange={onMobileWalletIBanChange}
+          onIbanBlur={onMobileWalletIbanBlur}
           confirm={() => {
             confirmMobileWallet();
           }}
@@ -107,7 +115,14 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             bankAccountValue={bankAccountValue}
             bindCardDropListData={props.bindCardDropListData}
             onIFSCDropSelect={onIFSCDropSelect}
-            confirm={() => { validateCommonForm() && confirm() }}
+            iBanData={iBanDataMobileWallet}
+            onIBanChange={onMobileWalletIBanChange}
+            onIbanBlur={onMobileWalletIbanBlur}
+            confirm={() => {
+              validateCommonForm();
+              confirm()
+              confirmBankAccount();
+            }}
           />
         )}
     </CustomPage>

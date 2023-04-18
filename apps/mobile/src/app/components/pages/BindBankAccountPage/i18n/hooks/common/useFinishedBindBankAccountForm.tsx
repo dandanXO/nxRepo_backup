@@ -24,6 +24,7 @@ type IUseFinishedBindBankAccountPage =  {
   bindCardDropListData?: GetBindCardDropListResponse;
   // NOTE: 設定電子錢包列表
   bankAccountValue?: number;
+  iBanData?: InputValue<any>;
 }
 
 export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
@@ -65,6 +66,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         // FIXME:
         bankName: targetBankAccount && targetBankAccount?.bankName || "",
         bankCode: targetBankAccount && targetBankAccount?.bankCode || "",
+        iban: props.iBanData?.data || "",
       }
       // console.log("requestBody", requestBody);
       request = props

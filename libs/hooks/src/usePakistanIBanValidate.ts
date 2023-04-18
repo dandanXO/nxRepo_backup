@@ -2,15 +2,15 @@ import React, {useCallback, useEffect, useState} from "react";
 import { InputValue } from "@frontend/mobile/shared/ui";
 import { t } from "i18next";
 
-
 // NOTE: 驗證 IBan Number
 export const usePakistanIBanValidate = () => {
-      // NOTE: FormInput - iBanNoData
-      const [iBanData, setIBanData] = useState<InputValue<string>>({
-        data: "",
-        isValidation: false,
-        errorMessage: "",
+    // NOTE: FormInput - iBanNoData
+    const [iBanData, setIBanData] = useState<InputValue<string>>({
+      data: "",
+      isValidation: false,
+      errorMessage: "",
     });
+
     const validateIban = useCallback(() => {
         const isValidateError = iBanData.data === '' || iBanData.data.length !== 24;
         setIBanData({
@@ -22,7 +22,6 @@ export const usePakistanIBanValidate = () => {
         });
 
     }, [iBanData.data])
-
 
     const onIBanChange = (event: any) => {
         const data = event.target.value;
@@ -40,5 +39,6 @@ export const usePakistanIBanValidate = () => {
     iBanData,
     onIBanChange,
     onIbanBlur,
+    validateIban,
   }
 };

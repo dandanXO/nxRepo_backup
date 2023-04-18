@@ -17,6 +17,7 @@ import {IndiaCountry} from "../../../domain/country/constants/IndiaCountry";
 import {PakistanCountry} from "../../../domain/country/constants/PakistanCountry";
 import {BangladeshCountry} from "../../../domain/country/constants/BangladeshCountry";
 import { useSelector } from "react-redux";
+import {environment} from "../../../../environments/environment";
 
 
 const BindBankCardPage = () => {

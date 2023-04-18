@@ -35,7 +35,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
 
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
-  const options = props.bankDropList.map((item: string, index: number) => {
+  const options = props.bankDropList?.map((item: string, index: number) => {
     return {value: item, label: item, index: index}
   });
 

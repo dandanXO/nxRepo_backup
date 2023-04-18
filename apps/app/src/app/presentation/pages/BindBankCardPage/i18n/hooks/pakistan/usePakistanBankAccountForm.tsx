@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {BankVendor, GetBindCardDropListResponse} from "../../../../../../api/rtk/old/GetBindCardDropList";
-import { usePakistanIBanValidate } from "./usePakistanIBanValidate";
+import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
 interface IUsePakistanBankAccountForm {
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
@@ -13,7 +13,8 @@ export const usePakistanBankAccountForm = (
 
   // NOTE: 帳號列表 Data
   const [bankDropList, setBankDropList] = useState<string[]>([]);
-  const { iBanData, onIBanChange, onIbanBlur } = usePakistanIBanValidate()
+  const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate()
+
 
   useEffect(() => {
     if(!props.bindCardDropListData) return;
@@ -30,6 +31,10 @@ export const usePakistanBankAccountForm = (
     setBankAccountValue(index);
   }, []);
 
+  const confirm = () => {
+    validateIban();
+  }
+
   return {
     bankDropList,
     bankAccountValue,
@@ -37,5 +42,6 @@ export const usePakistanBankAccountForm = (
     iBanData,
     onIBanChange,
     onIbanBlur,
+    confirm,
   }
 };

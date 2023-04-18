@@ -35,7 +35,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
 
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
-  const options = props.bankDropList.map((item: string, index: number) => {
+  const options = props.bankDropList?.map((item: string, index: number) => {
     return {value: item, label: item, index: index}
   });
 
@@ -57,6 +57,18 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           placeholder={t("Cardholder Name") as string}
           value={props.cardholderName}
           disabled
+        />
+
+        <Label>{t("Select a mobile wallet")}</Label>
+        <Label>{t('Your IBAN Number (24 digits)')}</Label>
+        <Input
+          className="mb"
+          labelType={'none'}
+          placeholder={'Ex. PK36FTBK0000111123456702'}
+          value={props.iBanData.data}
+          onChange={props.onIBanChange}
+          onBlur={props.onIbanBlur}
+          errorMessage={props.iBanData.errorMessage}
         />
 
         <Label>{t("Please select your bank name")}</Label>

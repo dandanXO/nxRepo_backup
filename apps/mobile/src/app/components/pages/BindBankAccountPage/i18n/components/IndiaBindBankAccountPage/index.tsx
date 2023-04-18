@@ -28,6 +28,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // NOTE: UPI
     upiData,
     onUPIIDChange,
+
   } = useIndiaBankAccountForm();
 
   const {

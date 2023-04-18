@@ -14,6 +14,7 @@ import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAcc
 import {renderByCountry} from "../../../i18n";
 import {BangladeshCountry} from "../../../../environments/config/countries/BangladeshCountry";
 import {BangladeshBindBankAccountPage} from "./i18n/components/BangladeshBindBankAccountPage";
+import {environment} from "../../../../environments/environment";
 
 const BindBankAccountPage = () => {
     // NOTICE: Common
