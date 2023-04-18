@@ -341,7 +341,7 @@ const IndexPage = () => {
 
 
   const onClickToCustomerService = useCallback(() => {
-    navigate('/v2/customer-service');
+    navigate(PagePathEnum.CustomerServicePage);
   }, []);
 
   return (

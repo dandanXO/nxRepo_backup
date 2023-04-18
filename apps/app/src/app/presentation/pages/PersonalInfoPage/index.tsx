@@ -43,21 +43,21 @@ const PersonalInfoPage = () => {
                     <Button buttonText={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>} padding="py-1 px-2" />
                 </div>)
             }
-           
+
             <div className="m-2">
                 {user.state === USER_AUTH_STATE.success && (
                     <div className={`shadow-[0_0px_8px_rgba(0,0,0,0.1)] m-2 p-4 rounded-md justify-end`}>
                         <LoanOverViewSection state={indexPage} />
                     </div>
                 )}
-                <Card><LinkItem title={'Bank Card'} to={`/bankcard-list?token=${getToken()}`} /></Card>
+                <Card><LinkItem title={'Bank Card'} to={`${PagePathEnum.BankcardListPage}?token=${getToken()}`} /></Card>
                 <Card>
-                    <LinkItem title={'Privacy Policy'} to={'/privacy-policy'} />
-                    <LinkItem title={'Disclosure Statement'} to={'/disclosure-statement'} />
+                    <LinkItem title={'Privacy Policy'} to={PagePathEnum.PrivacyPolicyPage} />
+                    <LinkItem title={'Disclosure Statement'} to={PagePathEnum.DisclosureStatementPage} />
                 </Card>
                 <Card>
                     {app?.init?.partnership ? (<LinkItem title={'Partner'} to={'/partner'} />) : <></>}
-                    <LinkItem title={'Customer Service'} to={'/customer-service'} />
+                    <LinkItem title={'Customer Service'} to={PagePathEnum.CustomerServicePage} />
                 </Card>
                 {/* <Card><LinkItem title={'Rate Us 5 starts'} to={''} /></Card> */}
                 {/* <div>Setting</div>

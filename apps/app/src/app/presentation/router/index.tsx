@@ -105,12 +105,12 @@ export const AppRouter = () => {
           <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
           <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
           <Route path="/v2/auth" element={<AuthPage />} />
-          <Route path="/v2/bankcard-list" element={<BankCardListPage />} />
+          <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
           <Route path="/v2/bind-bankcard" element={<BindBankCardPage />} />
-          <Route path="/v2/customer-service" element={<CustomerServicePage />} >
+          <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} >
             <Route path="customer-service-modal" element={<CustomerServiceModal />} />
           </Route>
-          <Route path="/v2/disclosure-statement" element={<DisclosureStatementPage />} />
+          <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
           <Route path="/v2/extend-details" element={<ExtendDetailsPage />} />
           <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />
 
@@ -127,7 +127,7 @@ export const AppRouter = () => {
           <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
-          <Route path="/v2/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
           <Route path="/v2/quota-model" element={<QuotaModelPage />} />
           <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
           <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
