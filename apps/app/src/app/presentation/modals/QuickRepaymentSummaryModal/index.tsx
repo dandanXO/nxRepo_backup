@@ -22,11 +22,10 @@ type Props = IndexPageProps & {
   onChangeBankcardID: (id: number) => void;
 }
 
-const IndicatorSeparator = ({
-    innerProps,
-  }: IndicatorSeparatorProps<any, true>) => {
+const IndicatorSeparator = (props: IndicatorSeparatorProps<any, true>) => {
+  console.log("IndicatorSeparator.props", props)
   return (
-    <span {...innerProps} className={"text-gray-400 font-light"}>change</span>
+    <span {...props.innerProps} className={"text-gray-400 font-light"}>change</span>
   )
 };
 

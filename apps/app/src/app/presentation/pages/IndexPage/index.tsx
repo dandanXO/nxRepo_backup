@@ -48,6 +48,7 @@ import {ProductApplyDetail} from "../../../api/loanService/ProductApplyDetail";
 
 import {chain, add, multiply, divide, subtract, evaluate} from "mathjs"
 import {SystemCaseActions} from "../../../usecaseFlow/usecaseAction/systemCaseActions";
+import {PagePathEnum} from "../PagePathEnum";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -481,7 +482,7 @@ const IndexPage = () => {
         ) && (
           <>
             <Button onClick={() => {
-              navigate("/v2/application-progress");
+              navigate(PagePathEnum.ApplicationProgressPage);
             }} dataTestingID={"viewAppProgress"} text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
           </>
         )}

@@ -25,13 +25,11 @@ const SentryCliPlugin = require('@sentry/webpack-plugin');
 
 const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
-// const WindiCSSWebpackPlugin = require('windicss-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const PUBLIC_PATH = "/v2";
-// const PUBLIC_PATH = !isProduction ? "/" : "/v2/";
+const PUBLIC_PATH = !isProduction ? "/" : "/v2/";
 console.log("PUBLIC_PATH", PUBLIC_PATH);
 
 const ASSET_OUTPUT_PATH = "asset";
@@ -53,52 +51,54 @@ module.exports = (config, context) => {
     output: {
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
-      // NOTICE: fix(bundling): fix webpack publicPath: 'auto' behavior for esm builds #13186
-      // https://github.com/nrwl/nx/pull/13186
       publicPath: PUBLIC_PATH,
-      assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
+      // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
     },
     module: {
       rules: [
-        {
-          test: /\.svg$/,
-          oneOf: [
-            // If coming from JS/TS or MDX file, then transform into React component using SVGR.
-            {
-              issuer: /\.(js|ts|md)x?$/,
-              use: [
-                {
-                  loader: require.resolve('@svgr/webpack'),
-                  options: {
-                    svgo: false,
-                    titleProp: true,
-                    ref: true,
-                  },
-                },
-                {
-                  loader: require.resolve('url-loader'),
-                  options: {
-                    limit: 10000,
-                    name: '[name].[hash:7].[ext]',
-                    esModule: false,
-                  },
-                },
-              ],
-            },
-            // Fallback to plain URL loader.
-            {
-              use: [
-                {
-                  loader: require.resolve('url-loader'),
-                  options: {
-                    limit: 10000,
-                    name: '[name].[hash:7].[ext]',
-                  },
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   test: /\.svg$/,
+        //   generator: {
+        //     publicPath: PUBLIC_PATH,
+        //     // outputPath: 'cdn-assets/',
+        //   },
+        //   oneOf: [
+        //     // If coming from JS/TS or MDX file, then transform into React component using SVGR.
+        //     {
+        //       issuer: /\.(js|ts|md)x?$/,
+        //       use: [
+        //         {
+        //           loader: require.resolve('@svgr/webpack'),
+        //           options: {
+        //             svgo: false,
+        //             titleProp: true,
+        //             ref: true,
+        //           },
+        //         },
+        //         {
+        //           loader: require.resolve('url-loader'),
+        //           options: {
+        //             limit: 10000,
+        //             name: '[name].[hash:7].[ext]',
+        //             esModule: false,
+        //           },
+        //         },
+        //       ],
+        //     },
+        //     // Fallback to plain URL loader.
+        //     {
+        //       use: [
+        //         {
+        //           loader: require.resolve('url-loader'),
+        //           options: {
+        //             limit: 10000,
+        //             name: '[name].[hash:7].[ext]',
+        //           },
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
       ],
     },
     devServer: {

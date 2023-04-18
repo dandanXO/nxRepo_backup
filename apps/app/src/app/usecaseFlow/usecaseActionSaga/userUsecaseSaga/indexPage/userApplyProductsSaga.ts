@@ -13,8 +13,6 @@ import {UseCaseActions, UserApplyProductActionPayload} from "../../../usecaseAct
 export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {
   // console.group("userApplyProductsSaga");
   // console.log("action", action);
-
-  // PayloadAction<LoanServiceRequest>
   // NOTICE: 防止錯誤後無法重新 watch
   try {
     // NOTE: 讀取相關總結資訊
@@ -53,26 +51,29 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
     }
 
     const selectedBankcardID: number = yield select((state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId);
-    const response: LoanServiceResponse = yield call(Service.LoanService.applyLoan, {
+    const { data: responseData, success }: {data: LoanServiceResponse; success: boolean} = yield call(Service.LoanService.applyLoan, {
       ...action.payload,
       bankId: selectedBankcardID,
     });
-    // console.log("applyLoan.response", response);
 
-    // NOTE: Refresh IndexPage view data
-    yield put(UseCaseActions.UserViewIndexPageAction());
+    // console.log("applyLoan.responseData", responseData);
 
-    // NOTE: Reset Summary Modal
-    yield put(modalSlice.actions.updateQuickRepaymentSummaryModal({
-      show: false,
-      confirm: false,
-      bankcardList: [],
-      selectedBankcardId: undefined,
-    }))
+    if(success) {
+      // NOTE: Refresh IndexPage view data
+      yield put(UseCaseActions.UserViewIndexPageAction());
 
-    yield put(modalSlice.actions.updateQRSuccessModal({
-      show: true,
-    }))
+      // NOTE: Reset Summary Modal
+      yield put(modalSlice.actions.updateQuickRepaymentSummaryModal({
+        show: false,
+        confirm: false,
+        bankcardList: [],
+        selectedBankcardId: undefined,
+      }))
+
+      yield put(modalSlice.actions.updateQRSuccessModal({
+        show: true,
+      }))
+    }
 
   } catch (error: any) {
     yield catchSagaError(error);

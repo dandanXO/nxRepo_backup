@@ -1,8 +1,6 @@
 import { StrictMode } from 'react';
 // NOTE: tailwind
 import "./style.css";
-// TODO: windicss
-
 import * as ReactDOM from 'react-dom/client';
 import App from './app/app';
 

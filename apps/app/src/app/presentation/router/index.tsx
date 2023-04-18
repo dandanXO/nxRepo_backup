@@ -98,12 +98,12 @@ export const AppRouter = () => {
         <Routes>
           <Route path="/v2/category" element={<CategoryPage />} />
           <Route path="/v2/error" element={<ErrorPage />} />
-          <Route path="/v2" element={<IndexPage />} />
-          <Route path="/v2/login" element={<LoginPage />} >
+          <Route path={PagePathEnum.LoginPage} element={<LoginPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
+          <Route path={PagePathEnum.IndexPage} element={<IndexPage />} />
           <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
-          <Route path="/v2/application-progress" element={<ApplicationProgressPage />} />
+          <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
           <Route path="/v2/auth" element={<AuthPage />} />
           <Route path="/v2/bankcard-list" element={<BankCardListPage />} />
           <Route path="/v2/bind-bankcard" element={<BindBankCardPage />} />
