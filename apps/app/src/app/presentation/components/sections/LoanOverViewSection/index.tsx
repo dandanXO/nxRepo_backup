@@ -16,9 +16,8 @@ export const LoanOverViewSection = (props: Props) => {
     props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
     props.state.order.state !== ORDER_STATE.hasOverdueOrder;
 
-  const options = useRef<{series: ApexOptions["series"], options: ApexOptions}>();
-  options.current = {
-    series: [12],
+  const [options, setOptions] = useState<{series: ApexOptions["series"], options: ApexOptions}>({
+    series: [],
     options: {
       labels: [""],
       states: {
@@ -74,20 +73,19 @@ export const LoanOverViewSection = (props: Props) => {
         }
       },
     }
-  }
-  // const [series, setSeries] = useState<number[]>();
+  });
 
   useEffect(() => {
     if(props.state.indexAPI) {
       let percent = (props.state.indexAPI?.availableAmount / props.state.indexAPI?.totalAmount) * 100;
-
-      // console.log("percent", percent);
       // NOTICE: availableAmount: 999000, totalAmount: 1000000, 算出來是 99.9，但畫面缺口基本上分辨不出來有缺口
-      if(percent > 99) {
+      if(percent > 99 && percent < 100) {
         percent = 99
       }
-      if(options.current) options.current.series = [percent];
-      // setSeries([percent])
+      setOptions({
+        ...options,
+        series: [percent],
+      })
     }
   }, [props.state.indexAPI])
 
@@ -100,8 +98,8 @@ export const LoanOverViewSection = (props: Props) => {
         <div className={"left relative"}>
           <div className="container relative">
             <Chart
-              options={options.current.options}
-              series={options.current.series}
+              options={options.options}
+              series={options.series}
               type="radialBar"
               width="160"
               height="160"
