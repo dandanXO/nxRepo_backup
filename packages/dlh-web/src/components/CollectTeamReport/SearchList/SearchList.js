@@ -60,7 +60,7 @@ class SearchList extends Component{
     loadDownloadLinkFlag();
     function loadDownloadLinkFlag() {
       axios({
-        url: '/hs/admin/collect-team-report/overdue/v2/download-is-prohibited',
+        url: '/hs/admin/collect-team-report/common/download-is-prohibited',
         method: 'get',
       }).then((res) => {
         _this.setState({
