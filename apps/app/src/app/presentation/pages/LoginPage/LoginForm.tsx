@@ -5,6 +5,7 @@ import cx from "classnames";
 import {Button} from "../../components/layouts/Button";
 import {LoginPageSataActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPageSaga";
 import { useNavigate } from "react-router";
+import {PagePathEnum} from "../PagePathEnum";
 
 
 export const LoginForm = () => {
@@ -154,7 +155,7 @@ export const LoginForm = () => {
                 }}
               />
               <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
-                  <div className="text-sm underline decoration-blue-500 text-blue-500 mx-1" onClick={() => navigate('/privacy-policy-modal')}>Privacy Policy</div>
+                  <div className="text-sm underline decoration-blue-500 text-blue-500 mx-1" onClick={() => navigate(PagePathEnum.PrivacyPolicyModal)}>Privacy Policy</div>
                   You also consent to receive SMS messages.Please carefully read the above agreement,
                   agreed to check and enter the next step.
               </div>

@@ -3,4 +3,7 @@ export enum PagePathEnum {
   RepaymentPage = "/v2/repayment",
   RepaymentDetailPage = "/v2/repayment-detail",
   PersonalInfoPage = "/v2/personal-info",
+
+  PrivacyPolicyModal = "/v2/privacy-policy-modal",
+
 }

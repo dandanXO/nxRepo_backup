@@ -35,15 +35,12 @@ export const runAxios = async (
     };
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // console.log(error.status)
-      // console.error(error.response);
-      // Do something with this error...
+      // console.log("error", error)
       alertModal((error.response as any).data?.message);
     } else {
-      // console.error(error);
+      // console.log(error);
       alertModal(JSON.stringify(error));
     }
-    // throw error;
     return {
       data: null,
     }

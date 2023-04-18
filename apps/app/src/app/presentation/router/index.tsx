@@ -102,7 +102,7 @@ export const AppRouter = () => {
           <Route path="/v2/login" element={<LoginPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
-          <Route path="/v2/privacy-policy-modal" element={<PrivacyPolicyModal />} />
+          <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
           <Route path="/v2/application-progress" element={<ApplicationProgressPage />} />
           <Route path="/v2/auth" element={<AuthPage />} />
           <Route path="/v2/bankcard-list" element={<BankCardListPage />} />
