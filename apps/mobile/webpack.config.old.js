@@ -26,8 +26,8 @@ const SentryCliPlugin = require("@sentry/webpack-plugin");
 
 // const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
-const PUBLIC_PATH = !isProduction ? "/" : "/v1/";
-const ASSET_OUTPUT_PATH = "asset";
+// const PUBLIC_PATH = !isProduction ? "/" : "/v1/";
+const PUBLIC_PATH = "/";
 console.log("PUBLIC_PATH", PUBLIC_PATH);
 
 let proxyURL;
