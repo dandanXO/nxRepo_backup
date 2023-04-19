@@ -42,6 +42,7 @@
       "application": {
         "style": "styled-components",
         "linter": "eslint",
+        "b``undler": "webpack",
         "babel": true
       },
       "component": {

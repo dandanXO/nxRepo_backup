@@ -7,7 +7,7 @@ import React from "react";
 import {IconContext} from "react-icons";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 import {renderByCountry} from "../../../../modules/i18n";
-import {AllCountryInstance} from "../../../../../../../../libs/shared/domain/src/country/constants/AllCountry";
+import {AllCountryInstance} from "../../../../../../../../libs/shared/domain/src/country/AllCountryInstance";
 
 interface I18nRepaymentStepsModalProps {
   setShowRepaymentSteps: React.Dispatch<React.SetStateAction<boolean>>;

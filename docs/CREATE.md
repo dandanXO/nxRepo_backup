@@ -20,6 +20,7 @@ nx g @nrwl/js:lib shared/domain --bundler=esbuild
 
 # And add a new react library as follows:
 nx g @nrwl/react:lib my-new-lib
+nx g @nrwl/react:lib shared/domain
 
 # Generating a Component for app
 nx g @nrwl/react:component my-new-component --project=my-new-app

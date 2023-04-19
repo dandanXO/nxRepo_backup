@@ -9,14 +9,10 @@ import {Label} from "../../../components/Label";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import {environment} from "../../../../../../../environments/environment";
-import {IAllCountryIdentityName} from "../../../../../../../../../../libs/shared/domain/src/country/constants/IAllCountryIdentityName";
+import {AllCountryIdentityName} from "../../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName";
 import {renderByCountry} from "../../../../../../modules/i18n";
-import {PakistanCountry} from "../../../../../../../../../../libs/shared/domain/src/country/constants/PakistanCountry";
-import {BangladeshCountry} from "../../../../../../../../../../libs/shared/domain/src/country/constants/BangladeshCountry";
-import {IndiaCountry} from "../../../../../../../../../../libs/shared/domain/src/country/constants/IndiaCountry";
-import {IndiaBindBankAccountPage} from "../IndiaBindBankAccountPage";
-import {PakistanBindBankAccountPage} from "../PakistanBindBankAccountPage";
-import {BangladeshBindBankAccountPage} from "../BangladeshBindBankAccountPage";
+import {PakistanCountry} from "../../../../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import {BangladeshCountry} from "../../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -67,7 +63,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
 
   const wallet = <Option onClick={() => props.changeOptionValueCallback(0)}>
     <OptionIcon enable={props.value === 0}/>
-    <img style={{ width: 60, height: 60 }} src={environment.country === IAllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}/>
+    <img style={{ width: 60, height: 60 }} src={environment.country === AllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}/>
     <Label>{t("Mobile wallet")}</Label>
   </Option>;
 

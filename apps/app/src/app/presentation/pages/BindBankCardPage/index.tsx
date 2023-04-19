@@ -13,11 +13,10 @@ import {
   usePostBankBindSaveToPKMutation
 } from "../../../api/rtk"
 import {renderByCountry} from "../../../modules/i18n";
-import {IndiaCountry} from "../../../../../../../libs/shared/domain/src/country/constants/IndiaCountry";
-import {PakistanCountry} from "../../../../../../../libs/shared/domain/src/country/constants/PakistanCountry";
-import {BangladeshCountry} from "../../../../../../../libs/shared/domain/src/country/constants/BangladeshCountry";
+import {IndiaCountry} from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
+import {PakistanCountry} from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import {BangladeshCountry} from "../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
 import { useSelector } from "react-redux";
-import {environment} from "../../../../environments/environment";
 
 
 const BindBankCardPage = () => {

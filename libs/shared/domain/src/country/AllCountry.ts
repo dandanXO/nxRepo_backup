@@ -1,6 +1,6 @@
 import {BangladeshCountry} from "./BangladeshCountry";
 import {PakistanCountry} from "./PakistanCountry";
-import {ICountry} from "../ICountry";
+import {ICountry} from "./types/ICountry";
 import {IndiaCountry} from "./IndiaCountry";
 
 export const AllCountry: ICountry[] = [
@@ -9,8 +9,3 @@ export const AllCountry: ICountry[] = [
   BangladeshCountry,
 ];
 
-export const AllCountryInstance = {
-  IndiaCountry,
-  PakistanCountry,
-  BangladeshCountry
-}

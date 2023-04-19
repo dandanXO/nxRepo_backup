@@ -12,9 +12,6 @@ import {environment} from "../../../../environments/environment";
 import {useLockRequest} from "../../hooks/useLockRequest";
 
 
-import { AllCountryInstance } from "../../../../../../../libs/shared/domain/src/country/constants/AllCountry";
-
-
 import ExtensionDetailModal from "../../modals/old/ExtensionDetailModal";
 
 import RepaymentModal from "../../modals/old/RepaymentModal";
@@ -25,6 +22,7 @@ import {I18nRepaymentStepsModal} from "../../modals/old/RepaymentStepsModal";
 import {CustomPage} from "../../pages/BindBankCardPage/components/CustomPage";
 import ExtendModal from "../../modals/ExtendModal/ExtendModal";
 import AmountPaidModal from "../../modals/AmountRepaidModal/AmountRepaidModal";
+import {AllCountryInstance} from "../../../../../../../libs/shared/domain/src/country/AllCountryInstance";
 
 
 

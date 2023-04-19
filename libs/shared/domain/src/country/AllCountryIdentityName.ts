@@ -1,4 +1,4 @@
-export enum IAllCountryIdentityName {
+export enum AllCountryIdentityName {
   IN = "in",
   PK = "pk",
   BN = "bn"
