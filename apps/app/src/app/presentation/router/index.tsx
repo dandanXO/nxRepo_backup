@@ -84,8 +84,6 @@ import {useDispatch, useSelector} from "react-redux"
 import {TabBar} from "../components/layouts/TabBar";
 import {RootState} from "../../usecaseFlow/reduxStore";
 import {PagePathEnum} from "../pages/PagePathEnum";
-import {IndexPageSagaAction} from "../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/indexPage";
-import {SystemCaseActions} from "../../usecaseFlow/usecaseActionSaga/systemUsecaseSaga/systemCaseActions";
 
 export const AppRouter = () => {
   const location = useLocation();
@@ -113,7 +111,7 @@ export const AppRouter = () => {
           <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
           <Route path="/v2/bind-bankcard" element={<BindBankCardPage />} />
           <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} />
-          <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} /> 
+          <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} />
           <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
           <Route path="/v2/extend-details" element={<ExtendDetailsPage />} />
           <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />

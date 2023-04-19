@@ -7,7 +7,6 @@ import {catchSagaError} from "../../utils/catchSagaError";
 import {GetUserInfoServiceResponse} from "../../../api/userService/GetUserInfoServiceResponse";
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {SystemCaseActions} from "./systemCaseActions";
-import {IndexPageSagaAction} from "../userUsecaseSaga/indexPage";
 
 
 export function *watchSystemInitSaga() {

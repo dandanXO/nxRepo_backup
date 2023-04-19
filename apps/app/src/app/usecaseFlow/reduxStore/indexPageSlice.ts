@@ -4,14 +4,12 @@ import moment from "moment-timezone";
 import {USER_AUTH_STATE} from "../../domain/user/USER_AUTH_STATE";
 import {ORDER_STATE} from "../../domain/order/ORDER_STATE";
 import {RISK_CONTROL_STATE} from "../../domain/risk/RISK_CONTROL_STATE";
-// import {getQuotaModelStatusActions} from "../usecaseSaga/userReacquireCreditSaga";
-import {getQuotaModelStatusAction} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userReacquireCreditSaga";
 import {PayableRecords} from "../../api/indexService/PayableRecords";
 import {GetIndexResponse} from "../../api/indexService/GetIndexResponse";
 import {GetQuotaModelStatusResponse} from "../../api/loanService/GetQuotaModelStatusResponse";
 import {GetUserInfoServiceResponse} from "../../api/userService/GetUserInfoServiceResponse";
 import {GetOpenIndexResponse} from "../../api/indexService/GetOpenIndexResponse";
-
+import {getQuotaModelStatusAction} from "../usecaseActionSaga/userUsecaseSaga/indexPageSaga/userReacquireCreditSaga";
 
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null,

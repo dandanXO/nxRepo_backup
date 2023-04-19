@@ -44,13 +44,13 @@ import {RISK_CONTROL_STATE} from "../../../domain/risk/RISK_CONTROL_STATE";
 import {AuthorizationModal} from "../../modals/AuthorizationModal";
 import {modalSlice} from "../../../usecaseFlow/reduxStore/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
-import {IndexPageSagaAction} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/indexPage";
 import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
 import {PlatformProduct} from "../../../api/indexService/PlatformProduct";
 import {ProductApplyDetail} from "../../../api/loanService/ProductApplyDetail";
 
 import {chain, add, multiply, divide, subtract, evaluate} from "mathjs"
 import {PagePathEnum} from "../PagePathEnum";
+import { IndexPageSagaAction } from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/indexPageSaga";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
