@@ -1,36 +1,44 @@
 // NOTE: Action: UserApplyProduct
 import {call, put, select, fork, all} from "redux-saga/effects";
 import {Service} from "../../../../api";
-import {indexPageSlice} from "../../../reduxStore/indexPageSlice";
+import {indexPageSlice, InitialState} from "../../../reduxStore/indexPageSlice";
 import {USER_AUTH_STATE} from "../../../../domain/USER_AUTH_STATE";
 import {SystemCaseActions} from "../../systemUsecaseSaga/systemCaseActions";
 import {GetIndexResponse} from "../../../../api/indexService/GetIndexResponse";
-import {GetUserInfoServiceResponse} from "../../../../api/userService/GetUserInfoServiceResponse";
 import {catchSagaError} from "../../../utils/catchSagaError";
 import {GetOpenIndexResponse} from "../../../../api/indexService/GetOpenIndexResponse";
 import {RootState} from "../../../reduxStore";
 import {RISK_CONTROL_STATE} from "../../../../domain/RISK_CONTROL_STATE";
-
+import {getToken} from "../../../../modules/location/getToken";
 
 export function* userViewIndexPageSaga(action: any) {
   try {
+    console.log("[app][saga] userViewIndexPageSaga");
 
-    const token: string = yield select((state: RootState) => state.app.token);
-    if(!token) {
-      console.log("[APP][MODE]: InAndroid Mode")
+    // const token: string = yield select((state: RootState) => state.app.token);
+    const token = getToken();
+
+    // if(!token) {
+      // console.log("[APP][MODE]: InAndroid Mode")
       // NOTICE: App Mode: InAndroid Mode
       // TODO: get token from querystring
-      // const token = getToken();
-    } else {
-      console.log("[APP][MODE]: Web")
+      // const querystringToken = getToken();
+    // } else {
+      // console.log("[APP][MODE]: Web")
       // NOTICE: App Mode: Web
-    }
+    // }
 
 
+    const indexPage: InitialState = yield select((state: RootState) => state.indexPage);
+    const status: number = yield select((state: RootState) => state.indexPage.user.state);
 
     const { riskControl } = yield select((state: RootState) => state.indexPage);
-    const status: number = yield select((state: RootState) => state.indexPage.user.state);
+
+    console.log("[app][saga] state.indexPage", indexPage);
+    console.log("[app][saga] status", status);
+
     if (status === USER_AUTH_STATE.ready) {
+
       const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, {packageId: "com.ylbu8.abha"});
       yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
 

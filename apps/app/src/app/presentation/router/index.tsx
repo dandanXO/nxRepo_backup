@@ -97,6 +97,7 @@ export const AppRouter = () => {
   useEffect(() => {
     dispatch(SystemCaseActions.InitSaga());
   }, [])
+
   return (
     <>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}

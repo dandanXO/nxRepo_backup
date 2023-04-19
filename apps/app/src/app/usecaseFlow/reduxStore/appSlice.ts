@@ -7,21 +7,26 @@ export enum AppRunningModeEnum {
   "InAndroid"
 }
 
-type InitailState = {
+export type InitailState = {
   init?: GetInitServiceResponse;
   mode: AppRunningModeEnum;
   token: string;
+  isInit: boolean;
 };
 
 const initialState: InitailState = {
   mode: AppRunningModeEnum.Unknown,
   token: "",
+  isInit: false,
 }
 
 export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
+    init: (state: InitailState, action: PayloadAction<null>) => {
+      state.isInit = true
+    },
     updateInit: (state: InitailState, action: PayloadAction<GetInitServiceResponse>) => {
       state.init = action.payload;
     },

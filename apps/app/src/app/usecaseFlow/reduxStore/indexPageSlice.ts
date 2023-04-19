@@ -13,7 +13,7 @@ import {GetUserInfoServiceResponse} from "../../api/userService/GetUserInfoServi
 import {GetOpenIndexResponse} from "../../api/indexService/GetOpenIndexResponse";
 
 
-interface InitialState {
+export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null,
   indexAPI: GetIndexResponse | null;
   sharedIndex: {

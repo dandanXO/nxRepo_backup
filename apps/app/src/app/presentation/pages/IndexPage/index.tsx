@@ -94,9 +94,7 @@ export type PageState = {
 const IndexPage = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(IndexPageSagaAction.UserViewIndexPageAction());
-  }, []);
+
 
   const indexPageState = useSelector((state: RootState) => state.indexPage);
 
@@ -338,6 +336,14 @@ const IndexPage = () => {
   const onClickToCustomerService = useCallback(() => {
     navigate(PagePathEnum.CustomerServicePage);
   }, []);
+
+  const isInitialized = useSelector((state: RootState) => state.app.isInit);
+
+  useEffect(() => {
+    if(isInitialized) {
+      dispatch(IndexPageSagaAction.UserViewIndexPageAction());
+    }
+  }, [isInitialized])
 
   return (
     <Page className={"flex flex-col"}>
