@@ -2,7 +2,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { delay, put } from "redux-saga/effects";
 import { catchSagaError } from "../../../utils/catchSagaError";
 import { UserResendSecondsActionPayload } from "./index";
-import { LoginPageSataActions } from "./index";
+import { LoginPageSagaActions } from "./index";
 import { loginSlice } from "./index";
 export function* userResendSaga(action: PayloadAction<UserResendSecondsActionPayload>) {
     try {
@@ -11,7 +11,7 @@ export function* userResendSaga(action: PayloadAction<UserResendSecondsActionPay
         if (resendSeconds !== 0) {
             yield delay(1000);
             resendSeconds -= 1;
-            yield put(LoginPageSataActions.system.resendSeconds({ resendSeconds }));
+            yield put(LoginPageSagaActions.system.resendSeconds({ resendSeconds }));
         }
     } catch (error) {
         yield catchSagaError(error)
