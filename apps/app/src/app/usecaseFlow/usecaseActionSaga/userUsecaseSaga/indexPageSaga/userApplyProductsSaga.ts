@@ -60,7 +60,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
     if(success) {
       // NOTE: Refresh IndexPage view data
-      yield put(IndexPageSagaAction.UserViewIndexPageAction());
+      yield put(IndexPageSagaAction.user.viewIndexPageAction());
 
       // NOTE: Reset Summary Modal
       yield put(modalSlice.actions.updateQuickRepaymentSummaryModal({

@@ -99,7 +99,7 @@ const IndexPage = () => {
   const isInitialized = useSelector((state: RootState) => state.app.isInit);
   useEffect(() => {
     if(isInitialized) {
-      dispatch(IndexPageSagaAction.UserViewIndexPageAction());
+      dispatch(IndexPageSagaAction.user.viewIndexPageAction());
     }
     return () => {
       if(!isInitialized) {
@@ -111,7 +111,7 @@ const IndexPage = () => {
   const indexPageState = useSelector((state: RootState) => state.indexPage);
 
   const onClickReacquireCredit = useCallback(() => {
-    dispatch(IndexPageSagaAction.UserReacquireCreditAction(null));
+    dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, [])
 
   // NOTE:
@@ -336,7 +336,7 @@ const IndexPage = () => {
       return simpleProduct;
     });
 
-    dispatch(IndexPageSagaAction.UserApplyProductAction({
+    dispatch(IndexPageSagaAction.user.applyProductAction({
       applyAmount: currentSelectedProductsPrice,
       // bankId: 11,
       details: simpleProducts,

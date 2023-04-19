@@ -1,18 +1,9 @@
-import {createAction, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
-import {call, put, delay, select, take} from "redux-saga/effects";
+import {createAction, PayloadAction} from "@reduxjs/toolkit";
+import {call, delay, put, take} from "redux-saga/effects";
 import {Service} from "../../../../api";
-import {indexPageSlice} from "../../../reduxStore/indexPageSlice";
-import moment from "moment-timezone";
-import {appStore, RootState} from "../../../reduxStore";
-import {modalSlice} from "../../../reduxStore/modalSlice";
 import {IndexPageSagaAction} from "./index";
-import {SystemCaseActions} from "../../systemUsecaseSaga/systemCaseActions";
-import {GetIndexResponse} from "../../../../api/indexService/GetIndexResponse";
-import {GetQuotaModelStatusRequest} from "../../../../api/loanService/GetQuotaModelStatusRequest";
 import {GetQuotaModelStatusResponse} from "../../../../api/loanService/GetQuotaModelStatusResponse";
 import {catchSagaError} from "../../../utils/catchSagaError";
-
-
 
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);
@@ -34,10 +25,10 @@ export const getQuotaModelStatusAction = createRequestAction("GGetQuotaModelStat
 //   }
 // )
 
-
-
 export function* userReacquireCreditSaga(action: PayloadAction<null>) {
   try {
+    console.log("[app][saga] userReacquireCreditSaga");
+
     // FIXME: refactor me
     // NOTICE: 根據是否擁有裝置權限，來開啟 AuthorizationModal
     // const hasAuthorization =  window.IndexTask.hasAuthorizationToUploadKyc();
@@ -70,7 +61,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     window["IndexTask"]["uploadKycBackgroundData"] &&
     window["IndexTask"]["uploadKycBackgroundData"]();
 
-    const { payload: onUploadKycBackgroundData } = yield take(SystemCaseActions.SystemKycBackgroundDataUploadedSaga);
+    const { payload: onUploadKycBackgroundData } = yield take(IndexPageSagaAction.system.KycBackgroundDataUploadedSaga);
     if (!onUploadKycBackgroundData) return;
 
 
@@ -111,7 +102,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       //   yield put(SystemCaseActions.SystemCountdownSaga(expiredTime))
       // }
 
-      yield put(IndexPageSagaAction.UserViewIndexPageAction());
+      yield put(IndexPageSagaAction.user.viewIndexPageAction());
 
     }
   } catch (error) {
