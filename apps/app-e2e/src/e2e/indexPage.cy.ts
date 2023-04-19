@@ -14,9 +14,6 @@ import {GetQuotaModelStatusResponse} from "../../../app/src/app/api/loanService/
 import {GetUserInfoServiceResponse} from "../../../app/src/app/api/userService/GetUserInfoServiceResponse";
 import {GetOpenIndexResponse} from "../../../app/src/app/api/indexService/GetOpenIndexResponse";
 
-import { appStore } from "../../../app/src/app/usecaseFlow/reduxStore";
-import {SystemCaseActions} from "../../../app/src/app/usecaseFlow/usecaseAction/systemCaseActions";
-
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
 const infoLog = (message, rest) => {

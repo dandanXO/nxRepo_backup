@@ -3,7 +3,7 @@ import {call, put, select, fork, all} from "redux-saga/effects";
 import {Service} from "../../../../api";
 import {indexPageSlice} from "../../../reduxStore/indexPageSlice";
 import {USER_AUTH_STATE} from "../../../../domain/USER_AUTH_STATE";
-import {SystemCaseActions} from "../../../usecaseAction/systemCaseActions";
+import {SystemCaseActions} from "../../systemUsecaseSaga/systemCaseActions";
 import {GetIndexResponse} from "../../../../api/indexService/GetIndexResponse";
 import {GetUserInfoServiceResponse} from "../../../../api/userService/GetUserInfoServiceResponse";
 import {catchSagaError} from "../../../utils/catchSagaError";
@@ -26,8 +26,7 @@ export function* userViewIndexPageSaga(action: any) {
       // NOTICE: App Mode: Web
     }
 
-    const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-    yield put(indexPageSlice.actions.updateUserAPI(userResponse));
+
 
     const { riskControl } = yield select((state: RootState) => state.indexPage);
     const status: number = yield select((state: RootState) => state.indexPage.user.state);

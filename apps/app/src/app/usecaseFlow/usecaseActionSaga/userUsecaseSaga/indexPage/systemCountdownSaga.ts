@@ -1,7 +1,7 @@
 import moment from "moment-timezone";
 import {put, select, delay} from "redux-saga/effects";
-import {indexPageSlice} from "../../reduxStore/indexPageSlice";
-import {catchSagaError} from "../../utils/catchSagaError";
+import {indexPageSlice} from "../../../reduxStore/indexPageSlice";
+import {catchSagaError} from "../../../utils/catchSagaError";
 
 export function *systemCountdownSaga(action: any) {
   try {

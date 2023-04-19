@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {useDispatch} from "react-redux";
 import cx from "classnames";
 import {Button} from "../../components/layouts/Button";
-import {LoginPageSataActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPageSaga";
+import {LoginPageSagaActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPageSaga";
 import { useNavigate } from "react-router";
 import {PagePathEnum} from "../PagePathEnum";
 
@@ -27,7 +27,7 @@ export const LoginForm = () => {
     });
 
     const onClickGetOTP = () => {
-      dispatch(LoginPageSataActions.user.getOTP({
+      dispatch(LoginPageSagaActions.user.getOTP({
         phone: phoneNumberData.data,
       }))
       setHasSendOTP(true)
@@ -53,7 +53,7 @@ export const LoginForm = () => {
         }
 
         if (phoneNumberData.isValidation && otpData.isValidation) {
-            dispatch(LoginPageSataActions.user.login({
+            dispatch(LoginPageSagaActions.user.login({
               phone: phoneNumberData.data,
               otp: otpData.data
             }))

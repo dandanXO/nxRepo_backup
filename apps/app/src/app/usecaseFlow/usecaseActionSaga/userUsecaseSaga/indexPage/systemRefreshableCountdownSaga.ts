@@ -1,8 +1,8 @@
 import moment from "moment-timezone";
 import {put, select, delay} from "redux-saga/effects";
-import {indexPageSlice} from "../../reduxStore/indexPageSlice";
-import {UseCaseActions} from "../../usecaseAction/useCaseActions";
-import {catchSagaError} from "../../utils/catchSagaError";
+import {indexPageSlice} from "../../../reduxStore/indexPageSlice";
+import {IndexPageSagaAction} from "./index";
+import {catchSagaError} from "../../../utils/catchSagaError";
 
 export function *systemRefreshableCountdownSaga(action: any) {
   try {
@@ -18,7 +18,7 @@ export function *systemRefreshableCountdownSaga(action: any) {
     // NOTICE: finished countdown
     yield put(indexPageSlice.actions.expiredRefreshableCountdown({}));
     // NOTE: 主動問後端資訊
-    yield put(UseCaseActions.UserViewIndexPageAction());
+    yield put(IndexPageSagaAction.UserViewIndexPageAction());
 
   } catch (error) {
     yield catchSagaError(error);

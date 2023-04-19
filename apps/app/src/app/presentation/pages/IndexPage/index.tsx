@@ -41,13 +41,12 @@ import {RISK_CONTROL_STATE} from "../../../domain/RISK_CONTROL_STATE";
 import {AuthorizationModal} from "../../modals/AuthorizationModal";
 import {modalSlice} from "../../../usecaseFlow/reduxStore/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
-import {UseCaseActions} from "../../../usecaseFlow/usecaseAction/useCaseActions";
+import {IndexPageSagaAction} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/indexPage";
 import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
 import {PlatformProduct} from "../../../api/indexService/PlatformProduct";
 import {ProductApplyDetail} from "../../../api/loanService/ProductApplyDetail";
 
 import {chain, add, multiply, divide, subtract, evaluate} from "mathjs"
-import {SystemCaseActions} from "../../../usecaseFlow/usecaseAction/systemCaseActions";
 import {PagePathEnum} from "../PagePathEnum";
 
 export type FinalProductType = PlatformProduct & {
@@ -96,17 +95,13 @@ const IndexPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(SystemCaseActions.SystemGetUserInfoSaga());
-    dispatch(UseCaseActions.UserViewIndexPageAction());
+    dispatch(IndexPageSagaAction.UserViewIndexPageAction());
   }, []);
 
   const indexPageState = useSelector((state: RootState) => state.indexPage);
-  // const [hasClickReacquireCredit, setHasClickReacquireCredit] = useState(false);
 
   const onClickReacquireCredit = useCallback(() => {
-    // setHasClickReacquireCredit(!hasClickReacquireCredit);
-    // dispatch(indexPageSlice.actions.reacquire({}));
-    dispatch(UseCaseActions.UserReacquireCreditAction(null));
+    dispatch(IndexPageSagaAction.UserReacquireCreditAction(null));
   }, [])
 
   // NOTE:
@@ -331,7 +326,7 @@ const IndexPage = () => {
       return simpleProduct;
     });
 
-    dispatch(UseCaseActions.UserApplyProductAction({
+    dispatch(IndexPageSagaAction.UserApplyProductAction({
       applyAmount: currentSelectedProductsPrice,
       // bankId: 11,
       details: simpleProducts,

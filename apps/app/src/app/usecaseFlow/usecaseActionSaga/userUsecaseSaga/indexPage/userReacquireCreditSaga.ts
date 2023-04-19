@@ -5,8 +5,8 @@ import {indexPageSlice} from "../../../reduxStore/indexPageSlice";
 import moment from "moment-timezone";
 import {appStore, RootState} from "../../../reduxStore";
 import {modalSlice} from "../../../reduxStore/modalSlice";
-import {UseCaseActions} from "../../../usecaseAction/useCaseActions";
-import {SystemCaseActions} from "../../../usecaseAction/systemCaseActions";
+import {IndexPageSagaAction} from "./index";
+import {SystemCaseActions} from "../../systemUsecaseSaga/systemCaseActions";
 import {GetIndexResponse} from "../../../../api/indexService/GetIndexResponse";
 import {GetQuotaModelStatusRequest} from "../../../../api/loanService/GetQuotaModelStatusRequest";
 import {GetQuotaModelStatusResponse} from "../../../../api/loanService/GetQuotaModelStatusResponse";
@@ -111,7 +111,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       //   yield put(SystemCaseActions.SystemCountdownSaga(expiredTime))
       // }
 
-      yield put(UseCaseActions.UserViewIndexPageAction());
+      yield put(IndexPageSagaAction.UserViewIndexPageAction());
 
     }
   } catch (error) {

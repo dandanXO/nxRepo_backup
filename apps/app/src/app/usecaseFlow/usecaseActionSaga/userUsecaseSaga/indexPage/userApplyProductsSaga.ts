@@ -7,7 +7,7 @@ import {InitialStateType, modalSlice} from "../../../reduxStore/modalSlice";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {GetBankCardListResponse} from "../../../../api/userService/GetBankCardListResponse";
 import {RootState} from "../../../reduxStore";
-import {UseCaseActions, UserApplyProductActionPayload} from "../../../usecaseAction/useCaseActions";
+import {IndexPageSagaAction, UserApplyProductActionPayload} from "./index";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {
@@ -60,7 +60,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
     if(success) {
       // NOTE: Refresh IndexPage view data
-      yield put(UseCaseActions.UserViewIndexPageAction());
+      yield put(IndexPageSagaAction.UserViewIndexPageAction());
 
       // NOTE: Reset Summary Modal
       yield put(modalSlice.actions.updateQuickRepaymentSummaryModal({

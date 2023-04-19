@@ -1,4 +1,4 @@
-import React, {Suspense} from "react";
+import React, {Suspense, useEffect} from "react";
 import {Route, Routes, useLocation,} from "react-router";
 
 // NOTE: Dynamic imports are only supported when the '--module' flag is
@@ -80,10 +80,12 @@ import APIBoundaryModal from "../modals/APIBoundaryModal";
 import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
 
 
-import { useSelector } from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {TabBar} from "../components/layouts/TabBar";
 import {RootState} from "../../usecaseFlow/reduxStore";
 import {PagePathEnum} from "../pages/PagePathEnum";
+import {IndexPageSagaAction} from "../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/indexPage";
+import {SystemCaseActions} from "../../usecaseFlow/usecaseActionSaga/systemUsecaseSaga/systemCaseActions";
 
 
 
@@ -92,6 +94,11 @@ export const AppRouter = () => {
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
   const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(SystemCaseActions.InitSaga());
+  })
   return (
     <>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
@@ -181,6 +188,8 @@ export const OuterRouter = () => {
     </div>
   )
 }
+
+
 
 // export const appRouterV2 = createBrowserRouter([
 //   // {
