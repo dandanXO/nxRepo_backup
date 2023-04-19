@@ -87,8 +87,6 @@ import {PagePathEnum} from "../pages/PagePathEnum";
 import {IndexPageSagaAction} from "../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/indexPage";
 import {SystemCaseActions} from "../../usecaseFlow/usecaseActionSaga/systemUsecaseSaga/systemCaseActions";
 
-
-
 export const AppRouter = () => {
   const location = useLocation();
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
@@ -98,7 +96,7 @@ export const AppRouter = () => {
 
   useEffect(() => {
     dispatch(SystemCaseActions.InitSaga());
-  })
+  }, [])
   return (
     <>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
