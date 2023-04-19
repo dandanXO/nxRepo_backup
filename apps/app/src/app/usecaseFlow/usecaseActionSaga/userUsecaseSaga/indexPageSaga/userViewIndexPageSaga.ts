@@ -10,6 +10,7 @@ import {GetOpenIndexResponse} from "../../../../api/indexService/GetOpenIndexRes
 import {RootState} from "../../../reduxStore";
 import {RISK_CONTROL_STATE} from "../../../../domain/risk/RISK_CONTROL_STATE";
 import {getToken} from "../../../../modules/location/getToken";
+import {systemCallGetUserInfoSaga} from "../sharedSaga/systemCallGetUserInfoSaga";
 
 export function* userViewIndexPageSaga(action: any) {
   try {
@@ -28,6 +29,7 @@ export function* userViewIndexPageSaga(action: any) {
       // NOTICE: App Mode: Web
     // }
 
+    yield call(systemCallGetUserInfoSaga);
 
     const indexPage: InitialState = yield select((state: RootState) => state.indexPage);
     const status: number = yield select((state: RootState) => state.indexPage.user.state);
@@ -38,13 +40,11 @@ export function* userViewIndexPageSaga(action: any) {
     console.log("[app][saga] status", status);
 
     if (status === USER_AUTH_STATE.ready) {
-
       const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, {packageId: "com.ylbu8.abha"});
       yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
 
     } else {
       const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
-
       yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
 
       if ((indexResponse.noQuotaBalance === true || indexResponse.riskReject === true)
@@ -77,6 +77,3 @@ export function* userViewIndexPageSaga(action: any) {
 
 }
 
-function *callGetUserInfoServiceSaga() {
-
-}

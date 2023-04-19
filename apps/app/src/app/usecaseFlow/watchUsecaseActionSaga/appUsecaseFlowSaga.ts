@@ -9,6 +9,7 @@ import {
   systemRefreshableCountdownSaga
 } from "../usecaseActionSaga/userUsecaseSaga/indexPageSaga/systemRefreshableCountdownSaga";
 import {watchIndexPageSaga} from "../usecaseActionSaga/userUsecaseSaga/indexPageSaga";
+import {watchPersonalInfoPageSaga} from "../usecaseActionSaga/userUsecaseSaga/personalInfoPageSaga";
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* AppUsecaseFlowSaga() {
@@ -20,6 +21,7 @@ export function* AppUsecaseFlowSaga() {
       watchSystemUseCaseSaga(),
       watchLoginPageSaga(),
       watchIndexPageSaga(),
+      watchPersonalInfoPageSaga(),
       //2.
       initSaga()
     ])

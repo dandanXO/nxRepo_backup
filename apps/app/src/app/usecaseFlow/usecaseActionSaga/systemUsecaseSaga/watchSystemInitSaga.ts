@@ -1,5 +1,4 @@
-import {Task} from "redux-saga";
-import {all, call, fork, put, take, cancel} from "redux-saga/effects";
+import {all, call, put, take} from "redux-saga/effects";
 import {Service} from "../../../api";
 import {appSlice} from "../../reduxStore/appSlice";
 import {GetInitServiceResponse} from "../../../api/appService/GetInitServiceResponse";
@@ -7,6 +6,7 @@ import {catchSagaError} from "../../utils/catchSagaError";
 import {GetUserInfoServiceResponse} from "../../../api/userService/GetUserInfoServiceResponse";
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {SystemCaseActions} from "./systemCaseActions";
+import {systemCallGetUserInfoSaga} from "../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga";
 
 
 export function *watchSystemInitSaga() {
@@ -30,11 +30,6 @@ function *callGetInit(packageId: string) {
   yield put(appSlice.actions.updateInit(response));
 }
 
-function *callGetUserInfo() {
-  const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-  yield put(indexPageSlice.actions.updateUserAPI(userResponse));
-}
-
 export function *systemStartInitSaga() {
   try {
     console.log("[app][saga] systemStartInitSaga")
@@ -47,10 +42,11 @@ export function *systemStartInitSaga() {
     const [response, userResponse]:[GetInitServiceResponse,GetUserInfoServiceResponse] = yield all(
       [
         call(Service.AppService.getInit, {packageId}),
-        call(Service.UserService.GetUserInfoService, {}),
+        // call(Service.UserService.GetUserInfoService, {}),
+        systemCallGetUserInfoSaga(),
       ]
     )
-    yield put(appSlice.actions.updateInit(response));
+    // yield put(appSlice.actions.updateInit(response));
     yield put(indexPageSlice.actions.updateUserAPI(userResponse));
     console.log("[app][saga][Service] AppService.getInit.response", response);
     console.log("[app][saga][Service] AppService.UserService.GetUserInfoService", userResponse);

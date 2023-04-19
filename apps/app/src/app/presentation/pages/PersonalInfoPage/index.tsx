@@ -1,23 +1,35 @@
-import { Page } from "../../components/layouts/Page";
-import { Navigation } from "../../components/layouts/Navigation";
-import { useNavigate } from "react-router";
+import {Page} from "../../components/layouts/Page";
+import {Outlet, useNavigate} from "react-router";
 import UserIcon from '../../components/images/UserIcon.svg';
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import cx from "classnames";
 import Button from "../../components/Button";
-import { FiChevronRight } from "react-icons/all";
+import {FiChevronRight} from "react-icons/all";
 import Card from "./Card";
 import LinkItem from "./LinkItem";
-import ListItem from "../../components/ListItem";
-import { getToken } from "../../../modules/location/getToken";
-import { Outlet } from "react-router";
-import { RootState } from "../../../usecaseFlow/reduxStore";
-import { PagePathEnum } from "../PagePathEnum";
-import { USER_AUTH_STATE } from "../../../domain/user/USER_AUTH_STATE";
-import { LoanOverViewSection } from "../../components/sections/LoanOverViewSection";
-
+import {getToken} from "../../../modules/location/getToken";
+import {RootState} from "../../../usecaseFlow/reduxStore";
+import {PagePathEnum} from "../PagePathEnum";
+import {USER_AUTH_STATE} from "../../../domain/user/USER_AUTH_STATE";
+import {LoanOverViewSection} from "../../components/sections/LoanOverViewSection";
+import {useEffect} from "react";
+import {PersonalInfoPageSagaActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/personalInfoPageSaga";
 
 const PersonalInfoPage = () => {
+    const dispatch = useDispatch();
+    const isInitialized = useSelector((state: RootState) => state.app.isInit);
+
+    useEffect(() => {
+      if(isInitialized) {
+        dispatch(PersonalInfoPageSagaActions.system.init());
+      }
+      return () => {
+        if(!isInitialized) {
+
+        }
+      }
+    }, [isInitialized])
+
     const navigate = useNavigate();
     const { indexPage, app } = useSelector((state: RootState) => state)
     const { user } = indexPage;
