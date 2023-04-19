@@ -1,9 +1,9 @@
-import {createAction} from "@reduxjs/toolkit";
+import {PayloadAction, createAction, createSlice} from "@reduxjs/toolkit";
 import {takeLatest} from "redux-saga/effects";
 import {errorFallback} from "../../../utils/errorFallback";
 import {userGetOTPSaga} from "./userGetOTPSaga";
 import {userLoginSaga} from "./userLoginSaga";
-
+import { userResendSaga } from "./userResendSaga";
 export type UserGetOTPActionPayload = {
   phone: string;
 }
@@ -13,6 +13,22 @@ export type UserLoginActionPayload = {
   otp: string;
 }
 
+export type UserResendSecondsActionPayload={
+    resendSeconds:number;
+}
+const initialState = {
+    resendSeconds: 60,
+}
+export const loginSlice = createSlice({
+    name: "login",
+    initialState,
+    reducers: {
+        updateResendSeconds: (state, action: PayloadAction<UserResendSecondsActionPayload['resendSeconds']>) => {
+            state.resendSeconds = action.payload;
+        },
+    }
+})
+  
 export const LoginPageSataActions = {
   user: {
     getOTP: createAction<UserGetOTPActionPayload>("LoginPageSataActions-getOTP"),
@@ -20,6 +36,7 @@ export const LoginPageSataActions = {
   },
   system: {
     init: createAction("LoginPageSataActions-system-init"),
+    resendSeconds:createAction<UserResendSecondsActionPayload>("LoginPageSataActions-resend-seconds"),
   }
 }
 
@@ -31,6 +48,7 @@ export function *loginPageSaga() {
   // yield takeLatest(LoginPageSataActions.user.login.type, userLoginSaga);
   yield takeLatest(LoginPageSataActions.user.getOTP.type, errorFallback, userGetOTPSaga)
   yield takeLatest(LoginPageSataActions.user.login.type, errorFallback, userLoginSaga)
+  yield takeLatest(LoginPageSataActions.system.resendSeconds.type, errorFallback, userResendSaga)
   // } catch (error) {
   //   yield catchSagaError(error)
   // }
