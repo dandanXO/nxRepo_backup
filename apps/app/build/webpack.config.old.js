@@ -34,7 +34,7 @@ console.log("PUBLIC_PATH", PUBLIC_PATH);
 
 const ASSET_OUTPUT_PATH = "asset";
 
-let proxyURL;
+let proxyURL= "https://app.india-api-dev.com";
 if(process.env.NODE_COUNTRY === "in") {
   proxyURL = "https://app.india-api-dev.com";
 } else if(process.env.NODE_COUNTRY === "pk") {

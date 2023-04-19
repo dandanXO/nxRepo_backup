@@ -48,7 +48,8 @@ import {ErrorPage} from "../pages/__test__/ErrorPage";
 import IndexPage from "../pages/IndexPage";
 import BankCardListPage from '../pages/BankCardListPage'
 import BindBankCardPage from '../pages/BindBankCardPage'
-import CustomerServicePage from '../pages/CustomerServicePage'
+import CustomerServicePage from '../pages/CustomerServicePage';
+import OnlineCustomerServicePage from "../pages/OnlineCustomerServicePage";
 
 import DisclosureStatementPage from '../pages/DisclosureStatementPage'
 import ExtendDetailsPage from '../pages/ExtendDetailsPage'
@@ -74,7 +75,6 @@ import RepaymentModal from '../modals/RepaymentModal'
 import AmountRepaidModal from "../modals/AmountRepaidModal/AmountRepaidModal";
 import ExtendConfirmModal from "../modals/ExtendConfirmModal";
 import ExtendModal from "../modals/ExtendModal/ExtendModal";
-import CustomerServiceModal from "../modals/CustomerServiceModal";
 import LogoutModal from "../modals/LogoutModal";
 import APIBoundaryModal from "../modals/APIBoundaryModal";
 import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
@@ -112,9 +112,8 @@ export const AppRouter = () => {
           <Route path="/v2/auth" element={<AuthPage />} />
           <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
           <Route path="/v2/bind-bankcard" element={<BindBankCardPage />} />
-          <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} >
-            <Route path="customer-service-modal" element={<CustomerServiceModal />} />
-          </Route>
+          <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} />
+          <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} /> 
           <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
           <Route path="/v2/extend-details" element={<ExtendDetailsPage />} />
           <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />
