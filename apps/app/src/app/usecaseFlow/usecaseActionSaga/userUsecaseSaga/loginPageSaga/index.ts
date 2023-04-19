@@ -25,6 +25,7 @@ export type UserLoginActionPayload = {
 }
 
 export function *watchLoginPageSaga() {
+  console.log("[app][appSaga] 1.3")
   // try {
   // NOTE: takeLatest 的 saga 壞過，就算裡面用 catch 之後還是無法重新啟用了. example: data.payload.token is undefined, need to use errorFallback,
   // NOTE: even use try-catch in loginPageSaga, even use try-catch in userGetOTPSaga or userLoginSaga

@@ -3,7 +3,7 @@ import {IndexServiceResponse} from "../../../app/src/app/api/service";
 
 import {indexPagePo} from "../support/indexPage.po";
 import moment from "moment-timezone"
-import {USER_AUTH_STATE} from "../../../app/src/app/domain/USER_AUTH_STATE";
+import {USER_AUTH_STATE} from "../../../app/src/app/domain/user/USER_AUTH_STATE";
 import {LoanServiceResponse} from "../../../app/src/app/api/loanService/service/postApplyLoanService";
 import {GetBankCardListResponse} from "../../../app/src/app/api/userService/GetBankCardListResponse";
 import {GetInitServiceResponse} from "../../../app/src/app/api/appService/GetInitServiceResponse";

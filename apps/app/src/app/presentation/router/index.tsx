@@ -92,11 +92,10 @@ export const AppRouter = () => {
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
   const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(SystemCaseActions.InitSaga());
-  }, [])
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(SystemCaseActions.InitSaga());
+  // }, [])
 
   return (
     <>

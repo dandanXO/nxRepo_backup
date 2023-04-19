@@ -12,7 +12,7 @@ import {environment} from "../../../../environments/environment";
 import {useLockRequest} from "../../hooks/useLockRequest";
 
 
-import { AllCountryInstance } from "../../../domain/country/constants/AllCountry";
+import { AllCountryInstance } from "../../../../../../../libs/shared/domain/src/country/constants/AllCountry";
 
 
 import ExtensionDetailModal from "../../modals/old/ExtensionDetailModal";

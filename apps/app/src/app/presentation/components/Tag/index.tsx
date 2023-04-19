@@ -16,3 +16,4 @@ const Tag = ({ isActive, onClick, text ,style}: ITagProps) => {
 }
 
 export default Tag;
+

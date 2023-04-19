@@ -6,4 +6,7 @@ export const SystemCaseActions = {
   SystemRefreshableCountdownSaga: createAction<string>("SystemRefreshableCountdownSaga"),
   SystemKycBackgroundDataUploadedSaga: createAction<boolean>("SystemKycBackgroundDataUploadedSaga"),
   SystemGetUserInfoSaga: createAction("SystemGetUserInfoSaga"),
+  Cancel: {
+    InitSaga: createAction("Cancel-InitSaga"),
+  }
 }

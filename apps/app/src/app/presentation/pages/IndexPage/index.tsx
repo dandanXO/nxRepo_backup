@@ -7,6 +7,9 @@ import {Button} from "../../components/layouts/Button";
 import {PageContent} from "../../components/layouts/PageContent";
 import {TipsSection} from "./sections/TipsSection";
 
+
+
+
 // import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
 import {NoticeUserRejectedSection} from "./sections/NoticeSection/NoticeUserRejectedSection";
 
@@ -34,9 +37,9 @@ import moment from "moment-timezone";
 import {Page} from "../../components/layouts/Page";
 import {Moment} from "moment";
 
-import {USER_AUTH_STATE} from "../../../domain/USER_AUTH_STATE";
-import {ORDER_STATE} from "../../../domain/ORDER_STATE";
-import {RISK_CONTROL_STATE} from "../../../domain/RISK_CONTROL_STATE";
+import {USER_AUTH_STATE} from "../../../domain/user/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../domain/order/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../../domain/risk/RISK_CONTROL_STATE";
 
 import {AuthorizationModal} from "../../modals/AuthorizationModal";
 import {modalSlice} from "../../../usecaseFlow/reduxStore/modalSlice";
@@ -93,8 +96,17 @@ export type PageState = {
 
 const IndexPage = () => {
   const dispatch = useDispatch();
+  const isInitialized = useSelector((state: RootState) => state.app.isInit);
+  useEffect(() => {
+    if(isInitialized) {
+      dispatch(IndexPageSagaAction.UserViewIndexPageAction());
+    }
+    return () => {
+      if(!isInitialized) {
 
-
+      }
+    }
+  }, [isInitialized])
 
   const indexPageState = useSelector((state: RootState) => state.indexPage);
 
@@ -336,14 +348,6 @@ const IndexPage = () => {
   const onClickToCustomerService = useCallback(() => {
     navigate(PagePathEnum.CustomerServicePage);
   }, []);
-
-  const isInitialized = useSelector((state: RootState) => state.app.isInit);
-
-  useEffect(() => {
-    if(isInitialized) {
-      dispatch(IndexPageSagaAction.UserViewIndexPageAction());
-    }
-  }, [isInitialized])
 
   return (
     <Page className={"flex flex-col"}>

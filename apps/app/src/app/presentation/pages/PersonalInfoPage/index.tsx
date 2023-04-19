@@ -13,7 +13,7 @@ import { getToken } from "../../../modules/location/getToken";
 import { Outlet } from "react-router";
 import { RootState } from "../../../usecaseFlow/reduxStore";
 import { PagePathEnum } from "../PagePathEnum";
-import { USER_AUTH_STATE } from "../../../domain/USER_AUTH_STATE";
+import { USER_AUTH_STATE } from "../../../domain/user/USER_AUTH_STATE";
 import { LoanOverViewSection } from "../../components/sections/LoanOverViewSection";
 
 

@@ -1,6 +1,6 @@
 import {IThemeConfig} from "@frontend/mobile/shared/ui";
-import {IAllCountryIdentityName} from "../../domain/country/constants/IAllCountryIdentityName";
-import {AllCountry} from "../../domain/country/constants/AllCountry";
+import {IAllCountryIdentityName} from "../../../../../../libs/shared/domain/src/country/constants/IAllCountryIdentityName";
+import {AllCountry} from "../../../../../../libs/shared/domain/src/country/constants/AllCountry";
 
 
 export const getThemeConfig = (targetCountry: IAllCountryIdentityName): IThemeConfig => {

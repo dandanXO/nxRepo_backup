@@ -4,8 +4,8 @@ import Chart from "react-apexcharts";
 import {useEffect, useRef, useState} from "react";
 import {ApexOptions} from "apexcharts";
 import {environment} from "../../../../../environments/environment";
-import { ORDER_STATE } from "../../../../domain/ORDER_STATE";
-import { RISK_CONTROL_STATE } from "../../../../domain/RISK_CONTROL_STATE";
+import { ORDER_STATE } from "../../../../domain/order/ORDER_STATE";
+import { RISK_CONTROL_STATE } from "../../../../domain/risk/RISK_CONTROL_STATE";
 
 type Props = IndexPageProps;
 

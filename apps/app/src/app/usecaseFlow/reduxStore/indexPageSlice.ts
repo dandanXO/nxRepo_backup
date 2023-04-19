@@ -1,9 +1,9 @@
 // NOTE: PageRedux
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import moment from "moment-timezone";
-import {USER_AUTH_STATE} from "../../domain/USER_AUTH_STATE";
-import {ORDER_STATE} from "../../domain/ORDER_STATE";
-import {RISK_CONTROL_STATE} from "../../domain/RISK_CONTROL_STATE";
+import {USER_AUTH_STATE} from "../../domain/user/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../domain/order/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../domain/risk/RISK_CONTROL_STATE";
 // import {getQuotaModelStatusActions} from "../usecaseSaga/userReacquireCreditSaga";
 import {getQuotaModelStatusAction} from "../usecaseActionSaga/userUsecaseSaga/indexPage/userReacquireCreditSaga";
 import {PayableRecords} from "../../api/indexService/PayableRecords";
