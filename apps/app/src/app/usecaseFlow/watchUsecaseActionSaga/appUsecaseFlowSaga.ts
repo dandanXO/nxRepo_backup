@@ -10,7 +10,7 @@ import {
 import {errorFallback} from "../utils/errorFallback";
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
-export function* AppSaga() {
+export function* AppUsecaseFlowSaga() {
   try {
     console.log("[app][appSaga] 1")
     yield all([

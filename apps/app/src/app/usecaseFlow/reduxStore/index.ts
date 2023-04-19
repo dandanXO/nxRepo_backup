@@ -4,7 +4,7 @@ import {API, APIV3} from "../../api/rtk";
 import {APIBoundaryModuleSlice} from "./apiBoundaryModuleSlice";
 import {indexPageSlice} from "./indexPageSlice";
 import {modalSlice} from "./modalSlice";
-import {AppSaga} from "../watchUsecaseActionSaga/appSaga";
+import {AppUsecaseFlowSaga} from "../watchUsecaseActionSaga/appUsecaseFlowSaga";
 import {appSlice} from "./appSlice";
 import {createBrowserHistory} from 'history'
 import {alertModal} from "../../api/base/alertModal";
@@ -56,7 +56,7 @@ export const appStore = configureStore({
 
 
 // NOTICE: then run the saga
-const rootSagaTask = sagaMiddleware.run(AppSaga)
+const rootSagaTask = sagaMiddleware.run(AppUsecaseFlowSaga)
 rootSagaTask.toPromise().catch((error => {
   // Error here is a fatal error.
   // None of the sagas down the road caught it.
