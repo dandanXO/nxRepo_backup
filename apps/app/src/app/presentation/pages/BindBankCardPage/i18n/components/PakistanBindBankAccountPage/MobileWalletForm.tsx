@@ -47,7 +47,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           props.setWalletValue(index);
         }}
       />
-      <WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>
+      {/*<WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>*/}
       <Label>{t("Select a mobile wallet")}</Label>
       <Label>{t('Your IBAN Number (24 digits)')}</Label>
       <Input
