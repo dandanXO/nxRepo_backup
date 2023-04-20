@@ -12,8 +12,8 @@ import { PakistanUploadPaymentReceiptPage } from "./i18n/components/PakistanUplo
 import * as Sentry from "@sentry/react";
 import { renderByCountry } from "../../../modules/i18n";
 
-import { IndiaCountry } from "../../../domain/country/constants/IndiaCountry";
-import { PakistanCountry } from "../../../domain/country/constants/PakistanCountry";
+import { IndiaCountry } from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
+import { PakistanCountry } from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
 import { CustomAxiosError } from "../../../api/rtk/axiosBaseQuery";
 import { usePostRepayReceiptMutation } from "../../../api/rtk";
 import {PostRepayReceiptResponse} from "../../../api/rtk/old/PostRepayReceiptResponse";

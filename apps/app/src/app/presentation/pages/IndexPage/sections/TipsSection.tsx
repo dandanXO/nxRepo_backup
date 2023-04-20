@@ -1,7 +1,7 @@
 import {IndexPageProps} from "../../../../usecaseFlow/reduxStore";
-import {USER_AUTH_STATE} from "../../../../domain/USER_AUTH_STATE";
-import {ORDER_STATE} from "../../../../domain/ORDER_STATE";
-import {RISK_CONTROL_STATE} from "../../../../domain/RISK_CONTROL_STATE";
+import {USER_AUTH_STATE} from "../../../../domain/user/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../../domain/order/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../../../domain/risk/RISK_CONTROL_STATE";
 
 type Props = IndexPageProps & {
   isLoading: boolean;
@@ -20,7 +20,7 @@ export const TipsSection = (props: Props) => {
 //     //   </div>
 //     <></>
 //     )
-//   } else 
+//   } else
 
   if(
     // TODO: 檢查下
@@ -42,13 +42,13 @@ export const TipsSection = (props: Props) => {
   } else if(
     props.state.user.state === USER_AUTH_STATE.success &&
     props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
-    props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder && 
+    props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
     props.state.order.state !== ORDER_STATE.hasOverdueOrder
   ){
     if(props.isLoading) {
       return null;
     }
-    
+
     messageComponent =  (
         <div className={"text-orange-400 bg-orange-50 text-sm text-center leading-4 font-light px-4 py-2 rounded-b-xl"}>
           {/*TODO: 有 & 沒有應還訂單時的文案*/}

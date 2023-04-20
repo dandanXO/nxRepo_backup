@@ -13,6 +13,7 @@ import * as Sentry from "@sentry/react";
 
 export const AppFlag = {
   enableSentry: false,
+  pagePrefix: "",
 }
 // console.log("environment.country", environment.country)
 

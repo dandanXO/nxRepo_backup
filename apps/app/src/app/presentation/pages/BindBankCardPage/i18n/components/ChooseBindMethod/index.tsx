@@ -9,7 +9,10 @@ import {Label} from "../../../components/Label";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import {environment} from "../../../../../../../environments/environment";
-import {IAllCountryIdentityName} from "../../../../../../domain/country/constants/IAllCountryIdentityName";
+import {AllCountryIdentityName} from "../../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName";
+import {renderByCountry} from "../../../../../../modules/i18n";
+import {PakistanCountry} from "../../../../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import {BangladeshCountry} from "../../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -57,25 +60,52 @@ type IChooseBindMethod = {
 
 export const ChooseBindMethod = (props: IChooseBindMethod) => {
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
+
+  const wallet = <Option onClick={() => props.changeOptionValueCallback(0)}>
+    <OptionIcon enable={props.value === 0}/>
+    <img style={{ width: 60, height: 60 }} src={environment.country === AllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}/>
+    <Label>{t("Mobile wallet")}</Label>
+  </Option>;
+
+  const bankcard = <Option onClick={() => {
+    if(!props.disable) props.changeOptionValueCallback(1)
+  }} style={{
+    background: props.disable ? "#D0D0D0": ""
+  }}>
+    <OptionIcon enable={props.value === 1}/>
+    <img style={{ width: 60, height: 60 }}  src={BankAccountSVG}/>
+    <Label>{t("Bank account")}</Label>
+  </Option>
+
   return (
     <Container>
       <Label>{t("Choose the method to receive the money")}</Label>
+
       <OptionContainer>
-        <Option onClick={() => props.changeOptionValueCallback(0)}>
-          <OptionIcon enable={props.value === 0}/>
-          <img style={{ width: 60, height: 60 }} src={environment.country === IAllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}/>
-          <Label>{t("Mobile wallet")}</Label>
-        </Option>
-        <Option onClick={() => {
-          if(!props.disable) props.changeOptionValueCallback(1)
-        }} style={{
-          background: props.disable ? "#D0D0D0": ""
-        }}>
-          <OptionIcon enable={props.value === 1}/>
-          <img style={{ width: 60, height: 60 }}  src={BankAccountSVG}/>
-          <Label>{t("Bank account")}</Label>
-        </Option>
+
+        {renderByCountry({
+          // NOTICE: default 0 index
+          [PakistanCountry.country]: (
+            <>
+              {bankcard}
+              {wallet}
+            </>
+          ),
+          [BangladeshCountry.country]: (
+            <>
+              {wallet}
+              {bankcard}
+            </>
+          ),
+        }, (
+          <>
+            {bankcard}
+            {wallet}
+          </>
+        ))}
+
       </OptionContainer>
+
     </Container>
   )
 }

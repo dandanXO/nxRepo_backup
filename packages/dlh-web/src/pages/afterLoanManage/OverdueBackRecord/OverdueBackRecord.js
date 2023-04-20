@@ -50,7 +50,7 @@ class OverdueBackRecord extends Component {
         this.state = {
             isSuperAdmin,
             allMerchants,
-            btnDisabled: false
+            btnDisabled: true
         };
         this.searchParams = {};
         this.searchStatus = {};
@@ -170,6 +170,19 @@ class OverdueBackRecord extends Component {
         const { getTableData, getPaymentData } = this.props;
         getTableData({ pageSize: 10, pageNum: 1 });
         getPaymentData();
+        const _this = this;
+
+        loadDownloadLinkFlag();
+        function loadDownloadLinkFlag() {
+          axios({
+            url: '/hs/admin/orderOverdue/download-is-prohibited',
+            method: 'get',
+          }).then((res) => {
+            _this.setState({
+              btnDisabled: res,
+            });
+          });
+        }
     }
 
     render() {

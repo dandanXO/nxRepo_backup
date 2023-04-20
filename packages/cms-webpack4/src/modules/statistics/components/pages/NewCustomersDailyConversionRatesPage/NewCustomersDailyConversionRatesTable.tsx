@@ -24,12 +24,12 @@ const NewCustomersDailyConversionRatesTable = () => {
         refetchOnReconnect: false
     });
     const [postDownload, { data, isSuccess: postDownloadIsSuccess }] = usePostNewCustomersDailyConversionRatesDownloadMutation();
-   
+
     const initDayRange = [moment().subtract(6, 'days'), moment()];
     const initSearchList: GetNewCustomersDailyConversionRatesRequestQuerystring = {
         channelId: '', endTime: initDayRange[1].format('YYYY-MM-DD 23:59:59'), merchantId: '', startTime: initDayRange[0].format('YYYY-MM-DD 00:00:00'), size: 10, page: 0
     }
-    
+
     // state
     const [searchList, setSearchList] = useState<GetNewCustomersDailyConversionRatesRequestQuerystring>(initSearchList);
 
@@ -114,7 +114,7 @@ const NewCustomersDailyConversionRatesTable = () => {
             title: '贷后统计', dataIndex: 'postLoan', key: 'postLoan', hideInSearch: true,
             children: [
                 { title: '已还款量', dataIndex: 'repayCount', key: 'repayCount', hideInSearch: true },
-                { title: '还款转化率', dataIndex: 'repayRate', key: 'repayRate', hideInSearch: true, tooltip: '还款转化率=新客还款量/注册量' },
+                { title: '还款转化率', dataIndex: 'repayRate', key: 'repayRate', hideInSearch: true, tooltip: '还款转化率=新客还款量/新客放款量' },
             ]
         },
     ]

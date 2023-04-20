@@ -1,3 +1,6 @@
+// @ts-ignore
+// __webpack_public_path__ = "/frontend-mobile";
+
 import "./app/sentry";
 // NOTE: [TypeScript style guide](https://ts.dev/style/#identifiers)
 import React from "react";

@@ -22,7 +22,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                 />
                 <Input
                     className="mb"
-                    label={t("IFSC Code") as string}
+                    label={t("IFSC Code (11 digits)") as string}
                     value={props.ifscData.data}
                     onChange={props.onIFSCChange}
                     onBlur={props.onIFSCBlur}

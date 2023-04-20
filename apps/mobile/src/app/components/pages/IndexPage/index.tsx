@@ -63,12 +63,9 @@ export default () => {
 
               <hr/>
 
-              <div>開發模式的 Proxy 得由 project.json 進行設定。</div>
-              <div>"proxyConfig": "apps/mobile/proxy.config.pk.json"</div>
-
             </div>
             <button onClick={() => {
-              window.open("http://localhost:4003/?showtranslations", "_blank");
+              window.open("http://localhost:4001/?showtranslations", "_blank");
             }}>showtranslations</button>
 
             <li>

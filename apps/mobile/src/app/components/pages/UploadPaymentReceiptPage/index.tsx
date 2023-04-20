@@ -30,9 +30,7 @@ const UploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) => {
     const navigate = useNavigate();
     const pageQueryString = useLocationOrderQueryString();
     const goToUploadedPaymentReceiptPage = useCallback(() => {
-        navigate(
-            `/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`
-        );
+        navigate(`/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`);
     }, [pageQueryString.token, pageQueryString.orderNo]);
     const postRepayReceiptRequest = useCallback(
         (props: PostRepayReceiptRequestProps) => {

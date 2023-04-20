@@ -31,21 +31,24 @@ export const runAxios = async (
     }
     const result = await axios(config);
     return {
+      success: true,
       data: result.data,
     };
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // console.log(error.status)
-      // console.error(error.response);
-      // Do something with this error...
+      // console.log("error", error)
       alertModal((error.response as any).data?.message);
+      return {
+        success: false,
+        data: (error.response as any).data,
+      }
     } else {
-      // console.error(error);
+      // console.log(error);
       alertModal(JSON.stringify(error));
     }
-    // throw error;
     return {
-      data: null,
+      success: false,
+      data: null
     }
   }
 }

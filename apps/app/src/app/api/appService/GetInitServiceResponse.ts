@@ -13,6 +13,12 @@ export interface GetInitServiceResponse {
   csEmail: string;
   // 平台客服信箱
 
+  csServiceTime:	string;
+  // 平台客服服务时间
+
+  csWhatsApp:	string;
+  // 平台WhatsApp号码
+
   i18nLastUpdateTime: number;
   // 多國語最後異動時間 unix time
 

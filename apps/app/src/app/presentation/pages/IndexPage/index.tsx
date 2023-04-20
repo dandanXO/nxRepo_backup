@@ -7,6 +7,9 @@ import {Button} from "../../components/layouts/Button";
 import {PageContent} from "../../components/layouts/PageContent";
 import {TipsSection} from "./sections/TipsSection";
 
+
+
+
 // import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
 import {NoticeUserRejectedSection} from "./sections/NoticeSection/NoticeUserRejectedSection";
 
@@ -34,20 +37,20 @@ import moment from "moment-timezone";
 import {Page} from "../../components/layouts/Page";
 import {Moment} from "moment";
 
-import {USER_AUTH_STATE} from "../../../domain/USER_AUTH_STATE";
-import {ORDER_STATE} from "../../../domain/ORDER_STATE";
-import {RISK_CONTROL_STATE} from "../../../domain/RISK_CONTROL_STATE";
-import {indexPageSlice} from "../../../usecaseFlow/reduxStore/indexPageSlice";
+import {USER_AUTH_STATE} from "../../../domain/user/USER_AUTH_STATE";
+import {ORDER_STATE} from "../../../domain/order/ORDER_STATE";
+import {RISK_CONTROL_STATE} from "../../../domain/risk/RISK_CONTROL_STATE";
+
 import {AuthorizationModal} from "../../modals/AuthorizationModal";
 import {modalSlice} from "../../../usecaseFlow/reduxStore/modalSlice";
 import {NoticeOrderOrQuotaRejectedSection} from "./sections/NoticeSection/NoticeOrderOrQuotaRejectedSection";
-import {UseCaseActions} from "../../../usecaseFlow/usecaseAction/useCaseActions";
 import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
 import {PlatformProduct} from "../../../api/indexService/PlatformProduct";
 import {ProductApplyDetail} from "../../../api/loanService/ProductApplyDetail";
 
 import {chain, add, multiply, divide, subtract, evaluate} from "mathjs"
-import {SystemCaseActions} from "../../../usecaseFlow/usecaseAction/systemCaseActions";
+import {PagePathEnum} from "../PagePathEnum";
+import { IndexPageSagaAction } from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/indexPageSaga";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -93,19 +96,22 @@ export type PageState = {
 
 const IndexPage = () => {
   const dispatch = useDispatch();
-
+  const isInitialized = useSelector((state: RootState) => state.app.isInit);
   useEffect(() => {
-    dispatch(SystemCaseActions.SystemGetUserInfoSaga());
-    dispatch(UseCaseActions.UserViewIndexPageAction());
-  }, []);
+    if(isInitialized) {
+      dispatch(IndexPageSagaAction.user.viewIndexPageAction());
+    }
+    return () => {
+      if(!isInitialized) {
+
+      }
+    }
+  }, [isInitialized])
 
   const indexPageState = useSelector((state: RootState) => state.indexPage);
-  // const [hasClickReacquireCredit, setHasClickReacquireCredit] = useState(false);
 
   const onClickReacquireCredit = useCallback(() => {
-    // setHasClickReacquireCredit(!hasClickReacquireCredit);
-    // dispatch(indexPageSlice.actions.reacquire({}));
-    dispatch(UseCaseActions.UserReacquireCreditAction(null));
+    dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, [])
 
   // NOTE:
@@ -330,7 +336,7 @@ const IndexPage = () => {
       return simpleProduct;
     });
 
-    dispatch(UseCaseActions.UserApplyProductAction({
+    dispatch(IndexPageSagaAction.user.applyProductAction({
       applyAmount: currentSelectedProductsPrice,
       // bankId: 11,
       details: simpleProducts,
@@ -340,7 +346,7 @@ const IndexPage = () => {
 
 
   const onClickToCustomerService = useCallback(() => {
-    navigate('/v2/customer-service');
+    navigate(PagePathEnum.CustomerServicePage);
   }, []);
 
   return (
@@ -481,7 +487,7 @@ const IndexPage = () => {
         ) && (
           <>
             <Button onClick={() => {
-              navigate("/v2/application-progress");
+              navigate(PagePathEnum.ApplicationProgressPage);
             }} dataTestingID={"viewAppProgress"} text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
           </>
         )}

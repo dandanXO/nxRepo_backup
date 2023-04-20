@@ -7,6 +7,7 @@ import {i18nBankBindAccountPage} from "../../translations";
 import {Button, Input} from "@frontend/mobile/shared/ui";
 import {IPakistanBankAccountForm} from "../../types/IBankAccountForm";
 import Select from 'react-select';
+import {FindIBANLinkText} from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -35,7 +36,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
 
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
-  const options = props.bankDropList.map((item: string, index: number) => {
+  const options = props.bankDropList?.map((item: string, index: number) => {
     return {value: item, label: item, index: index}
   });
 
@@ -50,7 +51,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
     <CustomForm>
       <Form>
         <Label>{t("Cardholder Name")}</Label>
-
         <Input
           className="mb"
           labelType={"none"}
@@ -58,6 +58,20 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           value={props.cardholderName}
           disabled
         />
+
+        <Label>{t('Your IBAN Number (24 digits)')}</Label>
+        <Input
+          className="mb"
+          labelType={'none'}
+          placeholder={'Ex. PK36FTBK0000111123456702'}
+          value={props.iBanData.data}
+          onChange={props.onIBanChange}
+          onBlur={props.onIbanBlur}
+          errorMessage={props.iBanData.errorMessage}
+        />
+        <div style={{ marginBottom: 16 }} onClick={() => props.openWebView && props.openWebView()}>
+          <FindIBANLinkText type={"bankcard"} />
+        </div>
 
         <Label>{t("Please select your bank name")}</Label>
         <Select
@@ -103,7 +117,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
 
-        <Warning>{t("Unchangeable after linked, please check before submission.")}</Warning>
+        <Warning>{t("After submitting the data, it cannot be modified. Please make sure the information is correct.")}</Warning>
       </Form>
 
       <Button onClick={() => {

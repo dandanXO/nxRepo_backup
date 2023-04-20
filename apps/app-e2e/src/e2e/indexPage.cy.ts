@@ -3,7 +3,7 @@ import {IndexServiceResponse} from "../../../app/src/app/api/service";
 
 import {indexPagePo} from "../support/indexPage.po";
 import moment from "moment-timezone"
-import {USER_AUTH_STATE} from "../../../app/src/app/domain/USER_AUTH_STATE";
+import {USER_AUTH_STATE} from "../../../app/src/app/domain/user/USER_AUTH_STATE";
 import {LoanServiceResponse} from "../../../app/src/app/api/loanService/service/postApplyLoanService";
 import {GetBankCardListResponse} from "../../../app/src/app/api/userService/GetBankCardListResponse";
 import {GetInitServiceResponse} from "../../../app/src/app/api/appService/GetInitServiceResponse";
@@ -13,9 +13,6 @@ import {SDKtaxCardOcr} from "../../../app/src/app/api/appService/SDKtaxCardOcr";
 import {GetQuotaModelStatusResponse} from "../../../app/src/app/api/loanService/GetQuotaModelStatusResponse";
 import {GetUserInfoServiceResponse} from "../../../app/src/app/api/userService/GetUserInfoServiceResponse";
 import {GetOpenIndexResponse} from "../../../app/src/app/api/indexService/GetOpenIndexResponse";
-
-import { appStore } from "../../../app/src/app/usecaseFlow/reduxStore";
-import {SystemCaseActions} from "../../../app/src/app/usecaseFlow/usecaseAction/systemCaseActions";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
@@ -40,7 +37,7 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/", {
+  cy.visit("/v2", {
     onBeforeLoad(win: Cypress.AUTWindow) {
       // @ts-ignore
       // cy.stub(win, "onUploadKycBackgroundData", function () {

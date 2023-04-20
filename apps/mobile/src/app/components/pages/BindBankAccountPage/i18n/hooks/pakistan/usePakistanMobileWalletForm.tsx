@@ -9,6 +9,7 @@ import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../../../../../api/base/axiosBaseQuery";
 import {processWalletDisplayName} from "./customization/processWalletDisplayName";
 import {AppFlag} from "../../../../../../App";
+import {usePakistanIBanValidate} from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -20,9 +21,13 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
 
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
+  const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate()
+
   // NOTE: Wallet List
   // Wallet List - 電子錢包列表 Data
   const [walletDropList, setWalletDropList] = useState<(string| React.ReactNode)[]>([]);
+
+
 
   useEffect(() => {
     if(!props.bindCardDropListData) return;
@@ -31,6 +36,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     });
     setWalletDropList(walletList);
   }, [props.bindCardDropListData]);
+
 
   // Wallet Selected - 選擇的電子錢包
   const [walletValue, setWalletValue] = useState(0);
@@ -82,7 +88,9 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   // NOTE: 點擊 Submit
   const confirm = useCallback(() => {
 
+    validateIban();
     validateMobileWalletAccount();
+
     if (!mobileData.isValidation) return;
 
     const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue];
@@ -127,6 +135,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     props.bindCardDropListData,
     props.triggerPostBankBindSaveToPKMutation,
     props.isPostBankBindSaveToPKMutationLoading,
+    iBanData.data,
   ]);
 
   return {
@@ -140,5 +149,6 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     validateMobileWalletAccount,
     // Form
     confirm,
+    iBanData, onIBanChange, onIbanBlur, validateIban
   }
 }

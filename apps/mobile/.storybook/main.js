@@ -3,7 +3,7 @@ const rootMain = require("../../../.storybook/main");
 module.exports = {
     ...rootMain,
     core: { ...rootMain.core, builder: "webpack5" },
-    addons: [...rootMain.addons],
+    addons: ["@storybook/addon-essentials", ...rootMain.addons],
     stories: [
         ...rootMain.stories,
         "../src/app/**/*.stories.mdx",

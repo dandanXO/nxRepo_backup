@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, DatePicker, Row, Col, Button, Select } from 'antd';
 import {injectIntl, FormattedMessage} from "react-intl";
+import {axios} from "utils";
 
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
@@ -13,7 +14,9 @@ const formItemLayout = {
 class SearchList extends Component{
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+          btnDisabled: true
+        };
     }
 
     submit = (e) => {
@@ -51,8 +54,25 @@ class SearchList extends Component{
       return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
 
+  componentDidMount () {
+    const _this = this;
+
+    loadDownloadLinkFlag();
+    function loadDownloadLinkFlag() {
+      axios({
+        url: '/hs/admin/collect-team-report/common/download-is-prohibited',
+        method: 'get',
+      }).then((res) => {
+        _this.setState({
+          btnDisabled: res,
+        });
+      });
+    }
+  }
+
     render() {
         const { form: { getFieldDecorator }, initTime, intl, isSuperAdmin } = this.props;
+        const { btnDisabled } = this.state;
         return (
             <div>
                 <Form onSubmit={this.submit}>
@@ -120,7 +140,7 @@ class SearchList extends Component{
                     </Row>
                     <Col span={24}>
                             <Form.Item style={{textAlign:'left'}}>
-                                <Button type={'danger'} onClick={this.downloadCollectReport}><FormattedMessage id="page.table.export" /></Button>
+                                <Button type={'danger'} disabled={btnDisabled} onClick={this.downloadCollectReport}><FormattedMessage id="page.table.export" /></Button>
                            </Form.Item>
                         </Col>
                 </Form>

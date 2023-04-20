@@ -19,7 +19,8 @@ import {PostRepayReceiptResponse} from "../loanService/PostRepayReceiptResponse"
 import {PostRepayCreateRequest} from "../loanService/PostRepayCreateRequest";
 import {PostRepayCreateResponse} from "../loanService/PostRepayCreateResponse";
 import {GetOTPCodeRequest} from "../userService/service/GetOTPCodeService";
-
+import { GetCouponApplicableListRequest } from "../userService/GetCouponApplicableListRequest";
+import { GetCouponApplicableListResponse } from "../userService/GetCouponApplicableListResponse";
 
 export type LoginRequest = {
   msgCode: string;
@@ -77,8 +78,30 @@ export const APIV3 = createApi({
         console.log("onCacheEntryAdded.arg", arg);
       },
     }),
+
+    // NOTE: /api/v3/loan/records 貸款紀錄列表
+    getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
+      query: (query: GetLoanRecordListRequest) => ({
+        method: "get",
+        url: `/loan/records`,
+        params: query,
+      }),
+    }),
+    // NOTE: /api/v3/coupon/applicable 取得可用优惠券列表
+    getCouponApplicableList: builder.query<GetCouponApplicableListResponse, GetCouponApplicableListRequest>({
+        query: (query: GetCouponApplicableListRequest) => ({
+          method: "get",
+          url: `/coupon/applicable`,
+          params: query,
+        }),
+    }),
   }),
 });
+
+export const {
+  useLazyGetLoanRecordListQuery,
+  useLazyGetCouponApplicableListQuery
+} = APIV3;
 
 export const API = createApi({
     reducerPath: "api",
@@ -97,7 +120,14 @@ export const API = createApi({
             data: query,
           }),
         }),
-
+        // NOTE: 登出
+        // logout: builder.mutation<null, LogoutRequest>({
+        //   query: (query: LogoutRequest) => ({
+        //     method: "post",
+        //     url: `/login/otp-code`,
+        //     data: query,
+        //   }),
+        // }),
         // NOTE: 借款首頁
         getIndex: builder.query<GetIndexResponse, GetIndexRequest>({
             query: (query: GetIndexRequest) => ({
@@ -114,14 +144,7 @@ export const API = createApi({
                 params: query,
             }),
         }),
-        // NOTE: /api/v2/loan/records 貸款紀錄列表
-        getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
-            query: (query: GetLoanRecordListRequest) => ({
-                method: "get",
-                url: `/loan/records`,
-                params: query,
-            }),
-        }),
+
         // NOTE: /api/v2/loan/detail 貸款訂單詳情
         getLoanDetail: builder.query<GetLoanDetailResponse, GetLoanDetailRequest>({
             query: (query: GetLoanDetailRequest) => ({
@@ -218,7 +241,7 @@ export const {
     useGetLoanDetailQuery,
     useGetRepayTypesQuery,
     useLazyGetBankCardListQuery,
-    useLazyGetLoanRecordListQuery,
+
     useLazyGetLoanDetailQuery,
     useLazyGetRepayTypesQuery,
     usePostRepayCreateMutation,

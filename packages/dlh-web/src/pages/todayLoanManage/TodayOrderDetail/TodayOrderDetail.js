@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import styles from './TodayOrderDetail.less';
-import { CommonTable, FormModal, CopyModalMessage  } from 'components';
+import { CommonTable, FormModal, CopyModalMessage ,CopyToLink } from 'components';
 import { todayOrderDetailAction } from './index';
 import AddUrgeModal from './AddUrgeModal/AddUrgeModal';
 import UrgeRecordModal from './UrgeRecordModal/UrgeRecordModal';
@@ -303,7 +303,7 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.amount.paid.currency" />：</span><span>{orderInfo['hasBackMoney']}</span></Col>
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="windowPage.remain.due" />：</span><span>{orderInfo['surplusBackMoney']}</span></Col>
                         {/*<Col className={styles.col} lg={12} xl={8}><span className={styles.title}>展期费用(₹)：</span><span>{orderInfo['standOverMoney']}</span></Col>*/}
-                        <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.appName" />：</span><span>{orderInfo['appName']}</span></Col>
+                        <Col className={styles.col} lg={12} xl={8} style={{display:'flex'}}><span className={styles.title}><FormattedMessage id="page.table.appName" />：</span><CopyToLink text={orderInfo['appName']} acturalCopy={orderInfo['channelUrl']} title={orderInfo['channelUrl']}/></Col>
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankName" />：</span><span>{bankInfo['bankName']}</span></Col>}
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankCardNo" />：</span><span>{bankInfo['bankCardNo']}</span></Col>}
 
@@ -512,7 +512,11 @@ class OrderDetail extends Component{
             }
         });
 
-        function loadHideContactIfNotDueFlag(){
+        function loadHideContactIfNotDueFlag () {
+            // 在參數配置配有“是否屏蔽當日到期前訂單通訊錄”開關，關掉連超管都看不到。
+            // 開關沒開 = 顯示   (不用管到不到期） (開關有開 hideContactIfNotDue = true  , 開關沒開 hideContactIfNotDue = false)
+            // 開關打開 + 有到期 = 顯示   (hideContactIfNotDue = true , isNotOverdue = false -> disabled = false)
+            // 開關打開 + 沒到期 = 不顯示 (hideContactIfNotDue = true , isNotOverdue = true -> disabled = true)
             axios({
                 url: '/hs/admin/orderToday/hideContactIfNotDue',
                 method: 'get'
@@ -557,7 +561,7 @@ class OrderDetail extends Component{
                     <TabPane tab={intl.formatMessage({id: "windowPage.customer.msg"})} key="2">
                         {this.renderUserInfo()}
                     </TabPane>
-                    <TabPane tab={intl.formatMessage({id: "windowPage.contact.list"})} key="3" disabled={ hideContactIfNotDue && this.isNotOverdue(orderData) }>
+                    <TabPane tab={intl.formatMessage({ id: "windowPage.contact.list" })} key="3" disabled={hideContactIfNotDue === false ? hideContactIfNotDue : hideContactIfNotDue && this.isNotOverdue(orderData)}>
                         {this.renderAddressBook()}
                     </TabPane>
                 </Tabs>
@@ -590,7 +594,7 @@ class OrderDetail extends Component{
             const today = moment().startOf('day');
             return today.isBefore(expireDate);
         }
-        return false;
+        return true;
     }
 
 }

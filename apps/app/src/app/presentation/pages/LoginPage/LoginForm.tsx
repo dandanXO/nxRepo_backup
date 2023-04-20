@@ -1,15 +1,19 @@
 import { Input, InputValue } from "@frontend/mobile/shared/ui";
 import React, { useEffect, useState } from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
 import cx from "classnames";
 import {Button} from "../../components/layouts/Button";
-import {LoginPageSataActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPageSaga";
+import {LoginPageSagaActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPageSaga";
 import { useNavigate } from "react-router";
+import {PagePathEnum} from "../PagePathEnum";
 
 
 export const LoginForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const {resendSeconds} = useSelector((state:any) => state.login)
+
     const [phoneNumberData, setPhoneNumberData] = useState<InputValue<string>>({
         data: "",
         isValidation: false,
@@ -26,12 +30,20 @@ export const LoginForm = () => {
     });
 
     const onClickGetOTP = () => {
-      dispatch(LoginPageSataActions.user.getOTP({
+      dispatch(LoginPageSagaActions.user.getOTP({
         phone: phoneNumberData.data,
       }))
+      dispatch(LoginPageSagaActions.system.resendSeconds({ resendSeconds: 60 }))
       setHasSendOTP(true)
       setDoingCountdownSendOTP(true)
     }
+
+    useEffect(() => {
+        if (resendSeconds === 0) {
+            setHasSendOTP(false)
+            setDoingCountdownSendOTP(false)
+        }
+    }, [resendSeconds])
 
     const handleLogin = () => {
         if (phoneNumberData.data === '') {
@@ -52,7 +64,7 @@ export const LoginForm = () => {
         }
 
         if (phoneNumberData.isValidation && otpData.isValidation) {
-            dispatch(LoginPageSataActions.user.login({
+            dispatch(LoginPageSagaActions.user.login({
               phone: phoneNumberData.data,
               otp: otpData.data
             }))
@@ -65,7 +77,7 @@ export const LoginForm = () => {
                 <div className={`text-slate-400`}>Phone Number</div>
                 <Input
                     suffix={
-                      <Button dataTestingID={"getOTP"} text={!doingCountdownSendOTP ? "Get OTP" : "Resend(59s)"} bgColor={cx({
+                      <Button dataTestingID={"getOTP"} text={!doingCountdownSendOTP ? "Get OTP" : `Resend ( ${resendSeconds}s )`} bgColor={cx({
                         "bg-[#F58B10]": enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
                         "bg-[#D7D7D7]": !(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP),
                       }, "ml-2 py-1")}
@@ -154,7 +166,7 @@ export const LoginForm = () => {
                 }}
               />
               <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
-                  <div className="text-sm underline decoration-blue-500 text-blue-500 mx-1" onClick={() => navigate('/privacy-policy-modal')}>Privacy Policy</div>
+                  <div className="text-sm underline decoration-blue-500 text-blue-500 mx-1" onClick={() => navigate(PagePathEnum.PrivacyPolicyModal)}>Privacy Policy</div>
                   You also consent to receive SMS messages.Please carefully read the above agreement,
                   agreed to check and enter the next step.
               </div>

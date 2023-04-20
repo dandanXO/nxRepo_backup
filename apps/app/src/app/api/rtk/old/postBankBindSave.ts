@@ -32,6 +32,9 @@ export interface PostPKBankBindSaveRequest {
 
   bankName: string;
   // 銀行名稱
+
+  
+  iban:string;
 }
 
 export interface PostBangladeshBankBindSaveRequest {
@@ -46,6 +49,7 @@ export interface PostBangladeshBankBindSaveRequest {
 
   walletVendor:	string;
   // 電子錢包商
+
 }
 export interface PostPKBankBindSaveResponse {
   //

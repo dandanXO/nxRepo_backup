@@ -93,7 +93,7 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
                                 <NoDataStyled>{t("No paid records yet")}</NoDataStyled>
                             ) : (
                                 <ModalContentStyled>
-                                    {renderRecordList(state.repayRecords)}
+                                    {renderRecordList(state)}
                                 </ModalContentStyled>
                             )}
                         </div>

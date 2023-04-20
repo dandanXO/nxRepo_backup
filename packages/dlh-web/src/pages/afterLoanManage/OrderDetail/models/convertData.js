@@ -8,6 +8,7 @@ const converData = (obj = {}) => {
         loanMoney: obj['deviceMoney'],
         applyTime: obj['applyTime'] ? moment(Number(obj['applyTime']) * 1000).format('YYYY-MM-DD HH:mm:ss') : '',
         appName: obj['appName'] || '',
+        channelUrl: obj['channelUrl'] || '',
         loanTime: obj['loanTime'] ? moment(Number(obj['loanTime']) * 1000).format('YYYY-MM-DD HH:mm:ss') : '',
         accountMoney: obj['lendMoney'],
         standOverNumber: obj['lengNum'],

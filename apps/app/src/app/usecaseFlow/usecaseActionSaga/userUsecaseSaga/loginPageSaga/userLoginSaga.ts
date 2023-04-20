@@ -5,6 +5,7 @@ import {AppRunningModeEnum, appSlice} from "../../../reduxStore/appSlice";
 import {push} from "@lagunovsky/redux-react-router";
 import {catchSagaError} from "../../../utils/catchSagaError";
 import {UserLoginActionPayload} from "./index";
+import {PagePathEnum} from "../../../../presentation/pages/PagePathEnum";
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {
@@ -20,7 +21,7 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
       // console.log("data.payload.token", data.payload.token)
       yield put(appSlice.actions.updateMode(AppRunningModeEnum.WEB))
       yield put(appSlice.actions.updateToken(token))
-      yield put(push(`/?token=${token}`));
+      yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));
     }
   } catch (error) {
     // console.log("userLoginSaga.error", error);

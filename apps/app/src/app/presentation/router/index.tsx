@@ -1,4 +1,4 @@
-import React, {Suspense} from "react";
+import React, {Suspense, useEffect} from "react";
 import {Route, Routes, useLocation,} from "react-router";
 
 // NOTE: Dynamic imports are only supported when the '--module' flag is
@@ -6,51 +6,94 @@ import {Route, Routes, useLocation,} from "react-router";
 import loadable from '@loadable/component'
 
 // NOTE: Page
+// import {CategoryPage} from "../pages/__test__/CategoryPage";
+// import {ErrorPage} from "../pages/__test__/ErrorPage";
+//
+// // const IndexPage = loadable(() => import("../pages/IndexPage"));
+// import IndexPage from "../pages/IndexPage";
+// const AuthPage = loadable(() => import("../pages/AuthPage"));
+// const BankCardListPage = loadable(() => import("../pages/BankCardListPage"));
+// const BindBankCardPage = loadable(() => import("../pages/BindBankCardPage"));
+// const CustomerServicePage = loadable(() => import("../pages/CustomerServicePage"));
+// const DisclosureStatementPage = loadable(() => import("../pages/DisclosureStatementPage"));
+// const ExtendDetailsPage = loadable(() => import("../pages/ExtendDetailsPage"));
+// const FinishedRepaymentPage = loadable(() => import("../pages/FinishedRepaymentPage"));
+// const RepaymentDetailPage = loadable(() => import("../pages/RepaymentDetailPage"));
+// const LoanRecordPage = loadable(() => import("../pages/RepaymentPage"));
+// const MyCouponListPage = loadable(() => import("../pages/MyCouponListPage"));
+// const MyCouponPage = loadable(() => import("../pages/MyCouponPage"));
+// const PartnerPage = loadable(() => import("../pages/PartnerPage"));
+// const PersonalInfoPage = loadable(() => import("../pages/PersonalInfoPage"));
+// const PrivacyPolicyPage = loadable(() => import("../pages/PrivacyPolicyPage"));
+// const QuotaModelPage = loadable(() => import("../pages/QuotaModelPage"));
+// const UploadedPaymentReceiptPage = loadable(() => import("../pages/UploadedPaymentReceiptPage"));
+// const UploadPaymentReceiptPage = loadable(() => import("../pages/UploadPaymentReceiptPage"));
+// const ApplicationProgressPage = loadable(() => import("../pages/ApplicationProgressPage"));
+// const LoginPage = loadable(() => import('../pages/LoginPage'));
+//
+// // NOTE: Modal
+// const RepaymentModal = loadable(() => import('../modals/RepaymentModal'));
+// const AmountRepaidModal = loadable(() => import("../modals/AmountRepaidModal/AmountRepaidModal"));
+// const ExtendConfirmModal = loadable(() => import("../modals/ExtendConfirmModal"));
+// const ExtendModal = loadable(() => import("../modals/ExtendModal/ExtendModal"));
+// const CustomerServiceModal = loadable(() => import("../modals/CustomerServiceModal"));
+// const LogoutModal = loadable(() => import("../modals/LogoutModal"));
+// const APIBoundaryModal = loadable(() => import("../modals/APIBoundaryModal"));
+// const PrivacyPolicyModal = loadable(() => import("../modals/PrivacyPolicyModal"));
+
+
 import {CategoryPage} from "../pages/__test__/CategoryPage";
 import {ErrorPage} from "../pages/__test__/ErrorPage";
 
-// const IndexPage = loadable(() => import("../pages/IndexPage"));
 import IndexPage from "../pages/IndexPage";
-const AuthPage = loadable(() => import("../pages/AuthPage"));
-const BankCardListPage = loadable(() => import("../pages/BankCardListPage"));
-const BindBankCardPage = loadable(() => import("../pages/BindBankCardPage"));
-const CustomerServicePage = loadable(() => import("../pages/CustomerServicePage"));
-const DisclosureStatementPage = loadable(() => import("../pages/DisclosureStatementPage"));
-const ExtendDetailsPage = loadable(() => import("../pages/ExtendDetailsPage"));
-const FinishedRepaymentPage = loadable(() => import("../pages/FinishedRepaymentPage"));
-const RepaymentDetailPage = loadable(() => import("../pages/RepaymentDetailPage"));
-const LoanRecordPage = loadable(() => import("../pages/RepaymentPage"));
-const MyCouponListPage = loadable(() => import("../pages/MyCouponListPage"));
-const MyCouponPage = loadable(() => import("../pages/MyCouponPage"));
-const PartnerPage = loadable(() => import("../pages/PartnerPage"));
-const PersonalInfoPage = loadable(() => import("../pages/PersonalInfoPage"));
-const PrivacyPolicyPage = loadable(() => import("../pages/PrivacyPolicyPage"));
-const QuotaModelPage = loadable(() => import("../pages/QuotaModelPage"));
-const UploadedPaymentReceiptPage = loadable(() => import("../pages/UploadedPaymentReceiptPage"));
-const UploadPaymentReceiptPage = loadable(() => import("../pages/UploadPaymentReceiptPage"));
-const ApplicationProgressPage = loadable(() => import("../pages/ApplicationProgressPage"));
-const LoginPage = loadable(() => import('../pages/LoginPage'));
+import BankCardListPage from '../pages/BankCardListPage'
+import BindBankCardPage from '../pages/BindBankCardPage'
+import CustomerServicePage from '../pages/CustomerServicePage';
+import OnlineCustomerServicePage from "../pages/OnlineCustomerServicePage";
+
+import DisclosureStatementPage from '../pages/DisclosureStatementPage'
+import ExtendDetailsPage from '../pages/ExtendDetailsPage'
+import FinishedRepaymentPage from '../pages/FinishedRepaymentPage'
+import RepaymentDetailPage from '../pages/RepaymentDetailPage'
+import LoanRecordPage from '../pages/RepaymentPage'
+
+import MyCouponListPage from '../pages/MyCouponListPage'
+import PartnerPage from '../pages/PartnerPage'
+import PersonalInfoPage from '../pages/PersonalInfoPage'
+import PrivacyPolicyPage from '../pages/PrivacyPolicyPage'
+
+import QuotaModelPage from '../pages/QuotaModelPage'
+import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage'
+import UploadPaymentReceiptPage from '../pages/UploadPaymentReceiptPage'
+import ApplicationProgressPage from '../pages/ApplicationProgressPage'
+import LoginPage from '../pages/LoginPage'
+import AuthPage from "../pages/AuthPage";
 
 // NOTE: Modal
-const RepaymentModal = loadable(() => import('../modals/RepaymentModal'));
-const AmountRepaidModal = loadable(() => import("../modals/AmountRepaidModal/AmountRepaidModal"));
-const ExtendConfirmModal = loadable(() => import("../modals/ExtendConfirmModal"));
-const ExtendModal = loadable(() => import("../modals/ExtendModal/ExtendModal"));
-const CustomerServiceModal = loadable(() => import("../modals/CustomerServiceModal"));
-const LogoutModal = loadable(() => import("../modals/LogoutModal"));
-const APIBoundaryModal = loadable(() => import("../modals/APIBoundaryModal"));
-const PrivacyPolicyModal = loadable(() => import("../modals/PrivacyPolicyModal"));
+import RepaymentModal from '../modals/RepaymentModal'
+import AmountRepaidModal from "../modals/AmountRepaidModal/AmountRepaidModal";
+import ExtendConfirmModal from "../modals/ExtendConfirmModal";
+import ExtendModal from "../modals/ExtendModal/ExtendModal";
+import LogoutModal from "../modals/LogoutModal";
+import APIBoundaryModal from "../modals/APIBoundaryModal";
+import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
+import RepamentCouponModal from "../modals/RepamentCouponModal";
 
-import { useSelector } from "react-redux"
+
+import {useDispatch, useSelector} from "react-redux"
 import {TabBar} from "../components/layouts/TabBar";
 import {RootState} from "../../usecaseFlow/reduxStore";
 import {PagePathEnum} from "../pages/PagePathEnum";
-
 
 export const AppRouter = () => {
   const location = useLocation();
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
   const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
+
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(SystemCaseActions.InitSaga());
+  // }, [])
 
   return (
     <>
@@ -58,19 +101,18 @@ export const AppRouter = () => {
         <Routes>
           <Route path="/v2/category" element={<CategoryPage />} />
           <Route path="/v2/error" element={<ErrorPage />} />
-          <Route path="/v2" element={<IndexPage />} />
-          <Route path="/v2/login" element={<LoginPage />} >
+          <Route path={PagePathEnum.LoginPage} element={<LoginPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
-          <Route path="/v2/privacy-policy-modal" element={<PrivacyPolicyModal />} />
-          <Route path="/v2/application-progress" element={<ApplicationProgressPage />} />
+          <Route path={PagePathEnum.IndexPage} element={<IndexPage />} />
+          <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
+          <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
           <Route path="/v2/auth" element={<AuthPage />} />
-          <Route path="/v2/bankcard-list" element={<BankCardListPage />} />
+          <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
           <Route path="/v2/bind-bankcard" element={<BindBankCardPage />} />
-          <Route path="/v2/customer-service" element={<CustomerServicePage />} >
-            <Route path="customer-service-modal" element={<CustomerServiceModal />} />
-          </Route>
-          <Route path="/v2/disclosure-statement" element={<DisclosureStatementPage />} />
+          <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} />
+          <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} />
+          <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
           <Route path="/v2/extend-details" element={<ExtendDetailsPage />} />
           <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />
 
@@ -79,15 +121,15 @@ export const AppRouter = () => {
             <Route path="extend-modal" element={<ExtendModal />} />
             <Route path="repayment-modal" element={<RepaymentModal />} />
             <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
+            <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
           </Route>
           <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
           <Route path="/v2/my-coupon-list" element={<MyCouponListPage />} />
-          <Route path="/v2/mu-coupon" element={<MyCouponPage />} />
           <Route path="/v2/partner" element={<PartnerPage />} />
           <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
-          <Route path="/v2/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
           <Route path="/v2/quota-model" element={<QuotaModelPage />} />
           <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
           <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
@@ -141,6 +183,8 @@ export const OuterRouter = () => {
     </div>
   )
 }
+
+
 
 // export const appRouterV2 = createBrowserRouter([
 //   // {

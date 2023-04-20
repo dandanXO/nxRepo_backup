@@ -19,7 +19,7 @@ const RepaymentPage = () => {
     });
     const statusEnum = {
         'Overdue': 'OVERDUE',
-        'Done': 'PAY_OFF',
+        'Done': 'DONE',
         'Unpaid': 'UNPAID',
         'Processing': 'PROCESSING',
         'Rejected': 'REJECTED',
@@ -40,7 +40,7 @@ const RepaymentPage = () => {
             <div className={`flex flex-row py-3 px-5 justify-between sticky top-[0px] bg-white`}>
                 {['Unpaid', 'Overdue', 'Done'].map(i => <Tag
                     key={i} onClick={() => setListStatus(i)} text={i}
-                    isActive={i === listStatus} style={` text-sm mx-1`} />)}
+                    active={i === listStatus} style={` text-sm mx-1`} />)}
             </div>
             {/* {// @ts-ignore
                 data?.content?.map((record, index) => {

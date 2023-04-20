@@ -13,9 +13,9 @@ import {
   usePostBankBindSaveToPKMutation
 } from "../../../api/rtk"
 import {renderByCountry} from "../../../modules/i18n";
-import {IndiaCountry} from "../../../domain/country/constants/IndiaCountry";
-import {PakistanCountry} from "../../../domain/country/constants/PakistanCountry";
-import {BangladeshCountry} from "../../../domain/country/constants/BangladeshCountry";
+import {IndiaCountry} from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
+import {PakistanCountry} from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import {BangladeshCountry} from "../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
 import { useSelector } from "react-redux";
 
 
@@ -24,7 +24,7 @@ const BindBankCardPage = () => {
     // NOTE: cardholderName
     const pageQueryString = useLocationOrderQueryString();
     // const cardholderName = pageQueryString.cardholderName;
-    const cardholderName = useSelector((state:any) => state.indexPage.user.userName);
+    const cardholderName = useSelector((state:any) => state.indexPage.user.userName) || pageQueryString.cardholderName;
 
     // NOTICE: India
     // NOTE: 綁定銀行卡
@@ -74,9 +74,13 @@ const BindBankCardPage = () => {
         />
       )
     }, (
-      <IndiaBindBankAccountPage
-        isLoadingPostBankBindSave={isLoadingPostBankBindSave}
-        postBankBindSave={postBankBindSave}
+        <PakistanBindBankAccountPage
+        isLoadingPostBankBindSaveToPK={isLoadingPostBankBindSaveToPK}
+        postBankBindSaveToPK={postBankBindSaveToPK}
+        isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
+        triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
+        triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
+        bindCardDropListData={bindCardDropListData}
         cardholderName={cardholderName ?? ""}
       />
     ))

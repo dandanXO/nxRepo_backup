@@ -50,7 +50,7 @@ class TodayBackRecord extends Component {
         this.state = {
             isSuperAdmin,
             allMerchants,
-            btnDisabled: false,
+            btnDisabled: true,
         };
         this.columns = [
           {
@@ -199,6 +199,20 @@ class TodayBackRecord extends Component {
         this.searchParams = convertParams(this.initSearchParams);
         getTableData(this.searchParams);
         getPaymentData();
+
+      const _this = this;
+
+      loadDownloadLinkFlag();
+      function loadDownloadLinkFlag() {
+        axios({
+          url: '/hs/admin/orderToday/download-is-prohibited',
+          method: 'get',
+        }).then((res) => {
+          _this.setState({
+            btnDisabled: res,
+          });
+        });
+      }
     }
 
     render() {

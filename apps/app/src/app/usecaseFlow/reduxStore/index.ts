@@ -4,11 +4,12 @@ import {API, APIV3} from "../../api/rtk";
 import {APIBoundaryModuleSlice} from "./apiBoundaryModuleSlice";
 import {indexPageSlice} from "./indexPageSlice";
 import {modalSlice} from "./modalSlice";
-import {AppSaga} from "../watchUsecaseActionSaga/appSaga";
 import {appSlice} from "./appSlice";
 import {createBrowserHistory} from 'history'
 import {alertModal} from "../../api/base/alertModal";
 import {createRouterMiddleware, createRouterReducer} from '@lagunovsky/redux-react-router'
+import {loginSlice} from "../usecaseActionSaga/userUsecaseSaga/loginPageSaga";
+import {AppSaga} from "../watchSaga/appSaga";
 
 export const history = createBrowserHistory()
 const routerMiddleware = createRouterMiddleware(history)
@@ -37,13 +38,15 @@ const sagaMiddleware = createSagaMiddleware({
 
 export const appStore = configureStore({
   reducer: {
-    navigator: createRouterReducer(history),
+    ["navigator"]: createRouterReducer(history),
     [appSlice.name]: appSlice.reducer,
     [modalSlice.name]: modalSlice.reducer,
     [API.reducerPath]: API.reducer,
     [APIV3.reducerPath]: APIV3.reducer,
     [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
     [indexPageSlice.name]: indexPageSlice.reducer,
+    [loginSlice.name]: loginSlice.reducer
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
