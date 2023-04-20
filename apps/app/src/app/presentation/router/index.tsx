@@ -58,7 +58,6 @@ import RepaymentDetailPage from '../pages/RepaymentDetailPage'
 import LoanRecordPage from '../pages/RepaymentPage'
 
 import MyCouponListPage from '../pages/MyCouponListPage'
-import MyCouponPage from '../pages/MyCouponPage'
 import PartnerPage from '../pages/PartnerPage'
 import PersonalInfoPage from '../pages/PersonalInfoPage'
 import PrivacyPolicyPage from '../pages/PrivacyPolicyPage'
@@ -78,6 +77,7 @@ import ExtendModal from "../modals/ExtendModal/ExtendModal";
 import LogoutModal from "../modals/LogoutModal";
 import APIBoundaryModal from "../modals/APIBoundaryModal";
 import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
+import RepamentCouponModal from "../modals/RepamentCouponModal";
 
 
 import {useDispatch, useSelector} from "react-redux"
@@ -121,10 +121,10 @@ export const AppRouter = () => {
             <Route path="extend-modal" element={<ExtendModal />} />
             <Route path="repayment-modal" element={<RepaymentModal />} />
             <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
+            <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
           </Route>
           <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
           <Route path="/v2/my-coupon-list" element={<MyCouponListPage />} />
-          <Route path="/v2/mu-coupon" element={<MyCouponPage />} />
           <Route path="/v2/partner" element={<PartnerPage />} />
           <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />

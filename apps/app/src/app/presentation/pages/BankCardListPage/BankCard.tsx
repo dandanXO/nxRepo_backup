@@ -14,7 +14,7 @@ const BankCard = ({ cardName, isMainCard, cardNo, handleSetPrimary }: IBankCard)
     return <div className={`m-4 border border-solid ${cardStyle} pl-6 pr-3 pt-4 pb-5 rounded-lg`}>
         <div className={`flex flex-row justify-between font-bold mb-3`}>
             <div className={`text-base`}>{cardName}</div>
-            <div className={`text-xs ${isMainCard ? 'text-orange-400' : ''}`}>{!isMainCard ? <Tag text='Set Primary' onClick={handleSetPrimary} isActive={isMainCard} /> : 'Primary'}</div>
+            <div className={`text-xs ${isMainCard ? 'text-orange-400' : ''}`}>{!isMainCard ? <Tag text='Set Primary' onClick={handleSetPrimary} active={isMainCard} /> : 'Primary'}</div>
         </div>
         <div>{cardNo}</div>
     </div>

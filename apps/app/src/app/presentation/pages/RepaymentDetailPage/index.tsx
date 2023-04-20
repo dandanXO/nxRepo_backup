@@ -51,7 +51,7 @@ const RepaymentDetailPage = (props: any) => {
                       <div className={` mr-1`}>Amount Repaid</div>
                       <div onClick={() => {
                         navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
-                          state: repayRecords
+                          state: {repayRecords}
                         })}
                       }><img src={AmountPaidIcon} /></div>
                     </div>
