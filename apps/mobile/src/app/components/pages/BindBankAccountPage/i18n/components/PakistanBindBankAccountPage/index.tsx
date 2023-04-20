@@ -8,10 +8,14 @@ import {useBindBankAccountForm} from "../../hooks/common/useBindBankAccountForm"
 import {usePakistanBankAccountForm} from "../../hooks/pakistan/usePakistanBankAccountForm";
 import {useFinishedBindBankAccountForm} from "../../hooks/common/useFinishedBindBankAccountForm";
 import {usePakistanMobileWalletForm} from "../../hooks/pakistan/usePakistanMobileWalletForm";
+import {WebViewModal} from "./WebViewModal";
+import {FindIBANLinkTextConstant} from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0|1>(1);
+
+  const [webURL, setWebURL] = useState<string>();
 
   const changeOptionValue = (value: 0|1) => {
     setChooseBindMethodValue(value);
@@ -104,6 +108,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           confirm={() => {
             confirmMobileWallet();
           }}
+          openWebView={() => {
+            setWebURL(FindIBANLinkTextConstant.wallet);
+          }}
         />
         ) : (
           <BankAccountForm
@@ -127,8 +134,13 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             iBanData={iBanData}
             onIBanChange={onIBanChange}
             onIbanBlur={onIbanBlur}
+            openWebView={() => {
+              setWebURL(FindIBANLinkTextConstant.bankcardURL);
+            }}
           />
         )}
+
+      {webURL && <WebViewModal url={webURL} onClickBack={() => setWebURL("")}/>}
     </CustomPage>
   );
 }

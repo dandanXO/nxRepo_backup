@@ -31,6 +31,7 @@ type IMobileWalletForm = {
   iBanData: InputValue<string>;
   onIBanChange: (event: any) => void;
   onIbanBlur: (event: any) => void;
+  openWebView: () => void;
 };
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
@@ -59,8 +60,8 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         onBlur={props.onIbanBlur}
         errorMessage={props.iBanData.errorMessage}
       />
-      <div style={{ marginBottom: 16 }}>
-        <FindIBANLinkText type={"wallet"} />
+      <div style={{ marginBottom: 16 }} onClick={() => props.openWebView()}>
+        <FindIBANLinkText type={"wallet"}/>
       </div>
 
       <Label>{t("Mobile Wallet Account")}</Label>

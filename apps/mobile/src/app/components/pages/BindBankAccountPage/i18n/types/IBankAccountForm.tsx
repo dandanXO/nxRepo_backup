@@ -37,4 +37,5 @@ export type IPakistanBankAccountForm = IBankAccountForm & {
   iBanData:any;
   onIBanChange: (event: any) => void;
   onIbanBlur: (event: any) => void;
+  openWebView?: () => void;
 }

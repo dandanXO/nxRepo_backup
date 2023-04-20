@@ -69,7 +69,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           onBlur={props.onIbanBlur}
           errorMessage={props.iBanData.errorMessage}
         />
-        <div style={{ marginBottom: 16 }}>
+        <div style={{ marginBottom: 16 }} onClick={() => props.openWebView && props.openWebView()}>
           <FindIBANLinkText type={"bankcard"} />
         </div>
 
