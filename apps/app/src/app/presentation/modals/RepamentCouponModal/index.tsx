@@ -4,8 +4,9 @@ import {  Overlay,
 } from "@frontend/mobile/shared/ui";
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/all";
 import Coupon from "../../components/Coupon";
-import { useState } from "react";
-import { ICouponProps } from '../../components/Coupon'
+import { useEffect, useState } from "react";
+import { ICouponProps } from '../../components/Coupon';
+import { useLazyGetCouponApplicableListQuery } from "../../../api/rtk";
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
     index: number;
@@ -13,7 +14,14 @@ type ICouponOption = ICouponProps & {
 const RepamentCouponModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
-
+    // const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetCouponApplicableListQuery({
+    //     pollingInterval: 0,
+    //     refetchOnFocus: false,
+    //     refetchOnReconnect: false
+    // });
+    // useEffect(() => {
+    //     triggerGetList({ isFullRepay: true, orderNo:'no-20136519450815031',paymentAmount:0,paymentMethod:'BANK_ACCOUNT'});
+    // }, [])
     const [checkedCoupon, setCheckedCoupon] = useState(0);
     const CouponOption = (props: ICouponOption) => {
         return (

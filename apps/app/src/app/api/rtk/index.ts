@@ -19,7 +19,8 @@ import {PostRepayReceiptResponse} from "../loanService/PostRepayReceiptResponse"
 import {PostRepayCreateRequest} from "../loanService/PostRepayCreateRequest";
 import {PostRepayCreateResponse} from "../loanService/PostRepayCreateResponse";
 import {GetOTPCodeRequest} from "../userService/service/GetOTPCodeService";
-
+import { GetCouponApplicableListRequest } from "../userService/GetCouponApplicableListRequest";
+import { GetCouponApplicableListResponse } from "../userService/GetCouponApplicableListResponse";
 
 export type LoginRequest = {
   msgCode: string;
@@ -86,11 +87,20 @@ export const APIV3 = createApi({
         params: query,
       }),
     }),
+    // NOTE: /api/v3/coupon/applicable 取得可用优惠券列表
+    getCouponApplicableList: builder.query<GetCouponApplicableListResponse, GetCouponApplicableListRequest>({
+        query: (query: GetCouponApplicableListRequest) => ({
+          method: "get",
+          url: `/coupon/applicable`,
+          params: query,
+        }),
+    }),
   }),
 });
 
 export const {
   useLazyGetLoanRecordListQuery,
+  useLazyGetCouponApplicableListQuery
 } = APIV3;
 
 export const API = createApi({
