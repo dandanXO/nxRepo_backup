@@ -5,6 +5,7 @@ import {Label} from "../../../components/Label";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import styled from "styled-components";
+import {FindIBANLinkText} from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
 
 const WalletDiscountHint = styled.div`
   line-height: 23px;
@@ -59,6 +60,9 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         onBlur={props.onIbanBlur}
         errorMessage={props.iBanData.errorMessage}
       />
+      <div style={{ marginBottom: 16 }}>
+        <FindIBANLinkText type={"wallet"} />
+      </div>
 
       <Input
         className="mb"

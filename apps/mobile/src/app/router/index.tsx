@@ -22,6 +22,7 @@ import ProductAdModalListPage from "../components/pages/ProductAdModalListPage";
 import ActivityAdListPage, {DemoActivityAdListPage} from "../components/pages/ActivityAdListPage";
 import NewsSectionPage from "../components/pages/NewsSectionPage";
 import {AndroidDebugPage} from "../components/pages/AndroidDebugPage";
+import {AppFlag} from "../App";
 
 
 // NOTE: Component - way2
@@ -152,106 +153,40 @@ export const AppRouter = () => {
   );
 };
 
-
 const Pages = () => {
-  // const location = useLocation();
-  // const showRepaymentStepsModal = location.state && location.state.name === STATE_REPAYMENT_STEPS;
-  // console.log("showRepaymentStepsModal", showRepaymentStepsModal);
-  // const state = location.state as { name?: Location };
-  const location = useLocation();
-
-  // useEffect(() => {
-  //   if(!location.pathname) return;
-  //
-  //   console.log("location", location);
-  //   const map = {
-  //     "/": LazyIndexPage,
-  //     "/loan-details": LazyLoanDetailsPage,
-  //     "/extend-details": LazyExtendDetailsPage,
-  //     "/bank-bind": LazyBindBankAccountPage,
-  //     "/upload-payment-receipt": LazyUploadPaymentReceiptPage,
-  //     "/uploaded-payment-receipt": LazyUploadedPaymentReceiptPage,
-  //     "/product-ad-modal-list": LazyProductAdModalListPage,
-  //     "/activity-list": LazyActivityAdListPage,
-  //     "/news-section": LazyNewsSectionPage,
-  //   } as any;
-  //   (map[location.pathname] as any).preload();
-  //
-  //   Object.keys(map).map(routeKey => {
-  //     (map[routeKey] as any).load();
-  //   })
-  //
-  // }, [location])
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes >
-        <Route path="/" element={<IndexPage />}/>
+        <Route path={`${AppFlag.pagePrefix}/`} element={<IndexPage />}/>
         {/* NOTE: Android 會使用到的頁面，Backend API Response 會給 URL */}
-        <Route path="/bank-bind" element={<BindBankAccountPage />} />
+        <Route path={`${AppFlag.pagePrefix}/bank-bind`} element={<BindBankAccountPage />} />
 
         {/* NOTE: Android 會使用到的頁面，Backend API Response 會給 URL */}
         {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-        <Route path="/loan-details" element={<LoanDetailsPage />} />
+        <Route path={`${AppFlag.pagePrefix}/loan-details`} element={<LoanDetailsPage />} />
 
 
         {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-        <Route path="/extend-details" element={<ExtendDetailsPage />} />
+        <Route path={`${AppFlag.pagePrefix}/extend-details`} element={<ExtendDetailsPage />} />
 
         {/*<Route path="/repayment-modal-advertisement" element={<div />} />*/}
-        <Route path="/upload-payment-receipt" element={<UploadPaymentReceiptPage />}/>
-        <Route path="/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />}/>
+        <Route path={`${AppFlag.pagePrefix}/upload-payment-receipt`} element={<UploadPaymentReceiptPage />}/>
+        <Route path={`${AppFlag.pagePrefix}/uploaded-payment-receipt`} element={<UploadedPaymentReceiptPage />}/>
         {/*<Route path="/product-ad-modal-list-old" element={<OldProductAdModalListPage />}/>*/}
 
-        <Route path="/product-ad-modal-list" element={<ProductAdModalListPage />}/>
+        <Route path={`${AppFlag.pagePrefix}/product-ad-modal-list`} element={<ProductAdModalListPage />}/>
 
         {/*NOTICE: ad 字眼容易被 Google 擋*/}
-        <Route path="/activity-list" element={<ActivityAdListPage />}/>
+        <Route path={`${AppFlag.pagePrefix}/activity-list`} element={<ActivityAdListPage />}/>
         {/*<Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>*/}
-        <Route path="/news-section" element={<NewsSectionPage/>}/>
+
+        <Route path={`${AppFlag.pagePrefix}/news-section`} element={<NewsSectionPage/>}/>
 
         {/* NOTE: Android 除錯專用頁面 */}
-        <Route path="/android-debug" element={<AndroidDebugPage/>}/>
+        <Route path={`${AppFlag.pagePrefix}/android-debug`} element={<AndroidDebugPage/>}/>
         <Route path="*" element={<div>Not Found</div>} />
+
       </Routes>
-      {/*{state?.name && (*/}
-      {/*  <Routes>*/}
-      {/*    <Route path={`/loan-details`} element={<I18nRepaymentStepsModal/>}/>*/}
-      {/*  </Routes>*/}
-      {/*)}*/}
     </Suspense>
   )
-
-  // return (
-  //   <Suspense fallback={<div>Loading...</div>}>
-  //     <Routes >
-  //       <Route path="/" element={<LazyIndexPage />}/>
-  //       {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-  //       <Route path="/loan-details" element={<LazyLoanDetailsPage />} />
-  //
-  //       {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-  //       <Route path="/extend-details" element={<LazyExtendDetailsPage />} />
-  //
-  //       {/*<Route path="/repayment-modal-advertisement" element={<div />} />*/}
-  //
-  //       <Route path="/bank-bind" element={<LazyBindBankAccountPage />} />
-  //       <Route path="/upload-payment-receipt" element={<LazyUploadPaymentReceiptPage />}/>
-  //       <Route path="/uploaded-payment-receipt" element={<LazyUploadedPaymentReceiptPage />}/>
-  //       {/*<Route path="/product-ad-modal-list-old" element={<OldProductAdModalListPage />}/>*/}
-  //
-  //       <Route path="/product-ad-modal-list" element={<LazyProductAdModalListPage />}/>
-  //
-  //       {/*NOTICE: ad 字眼容易被 Google 擋*/}
-  //       <Route path="/activity-list" element={<LazyActivityAdListPage />}/>
-  //       {/*<Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>*/}
-  //       <Route path="/news-section" element={<LazyNewsSectionPage/>}/>
-  //       <Route path="*" element={<div>Not Found</div>} />
-  //     </Routes>
-  //     {/*{state?.name && (*/}
-  //     {/*  <Routes>*/}
-  //     {/*    <Route path={`/loan-details`} element={<I18nRepaymentStepsModal/>}/>*/}
-  //     {/*  </Routes>*/}
-  //     {/*)}*/}
-  //   </Suspense>
-  // )
 }

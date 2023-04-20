@@ -7,6 +7,7 @@ import {i18nBankBindAccountPage} from "../../translations";
 import {Button, Input} from "@frontend/mobile/shared/ui";
 import {IPakistanBankAccountForm} from "../../types/IBankAccountForm";
 import Select from 'react-select';
+import {FindIBANLinkText} from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -70,6 +71,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           onBlur={props.onIbanBlur}
           errorMessage={props.iBanData.errorMessage}
         />
+        <div style={{ marginBottom: 16 }}>
+          <FindIBANLinkText type={"bankcard"} />
+        </div>
 
         <Label>{t("Please select your bank name")}</Label>
         <Select
