@@ -46,10 +46,10 @@ module.exports = (config, context) => {
         // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
         devtool: "source-map",
         output: {
-            // filename: "[name].[contenthash].js",
+            filename: "[name].[contenthash].js",
             // sourceMapFilename: 'maps/[name].[contenthash].map.js',
-            publicPath: PUBLIC_PATH,
             // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`,
+            publicPath: PUBLIC_PATH,
         },
         module: {
             rules: [
