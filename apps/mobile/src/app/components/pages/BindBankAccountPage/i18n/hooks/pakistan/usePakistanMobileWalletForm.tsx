@@ -135,6 +135,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     props.bindCardDropListData,
     props.triggerPostBankBindSaveToPKMutation,
     props.isPostBankBindSaveToPKMutationLoading,
+    iBanData.data,
   ]);
 
   return {
