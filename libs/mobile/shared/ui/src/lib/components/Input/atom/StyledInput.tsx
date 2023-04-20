@@ -119,6 +119,7 @@ export interface StyledInputProps {
 export const StyledTopInput = styled.input<StyledInputProps>`
   /* self */
   box-sizing: border-box;
+  width: 100%;
 
   //display: block;
   margin: 0;

@@ -37,7 +37,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
   return (
     <Form>
-      <Label>{t("Please select the of your mobile wallet")}</Label>
+      <Label>{t("Select a mobile wallet")}</Label>
       <Select
         className="mb"
         fixButtonWidth={"calc(100vw - 36px)"}
@@ -48,8 +48,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           props.setWalletValue(index);
         }}
       />
-      <WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>
-      <Label>{t("Select a mobile wallet")}</Label>
+      {/*<WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>*/}
       <Label>{t('Your IBAN Number (24 digits)')}</Label>
       <Input
         className="mb"
@@ -64,16 +63,18 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         <FindIBANLinkText type={"wallet"} />
       </div>
 
+      <Label>{t("Mobile Wallet Account")}</Label>
       <Input
         className="mb"
         labelType={"left"}
         label={"+92"}
-        placeholder={t("Wallet Account Number") as string}
+        placeholder={t("Wallet Account Account") as string}
         value={props.mobileData.data}
         onChange={props.onMobileDataChange}
         onBlur={props.validateMobileWalletAccount}
         errorMessage={props.mobileData.errorMessage}
       />
+
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
       <Button
         onClick={() => props.confirm()}

@@ -1,34 +1,35 @@
-console.info("[api-mobile][build]");
-
 const webpack = require("webpack");
 const { merge } = require("webpack-merge");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
+const SentryCliPlugin = require("@sentry/webpack-plugin");
+const getClientEnvironment = require("./getClientEnvironment");
+// const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 // const webpackConfig = require('@nrwl/react/plugins/webpack');
 // const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-// const isProduction = process.env.NODE_ENV == "production";
+
 const isProduction = process.env.NODE_ENV == "production";
-console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
-console.log("process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
-console.log("isProduction: ", isProduction);
-
-
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
-// get git info from command line
-// let commitHash = require('child_process')
-//   .execSync('git rev-parse --short HEAD')
-//   .toString()
-//   .trim();
-
-const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
 const gitRevisionPlugin = new GitRevisionPlugin();
+
+
+console.info("[mobile][build]");
+console.log("[mobile][build] process.env.NODE_ENV:", process.env.NODE_ENV);
+console.log("[mobile][build] process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
+console.log("[mobile][build] isProduction: ", isProduction);
+console.log("[mobile][build] getClientEnvironment", getClientEnvironment());
 // console.log("gitRevisionPlugin.commithash()", gitRevisionPlugin.commithash());
-const SentryCliPlugin = require("@sentry/webpack-plugin");
 
-// const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
-// const PUBLIC_PATH = !isProduction ? "/" : "/v1/";
-const PUBLIC_PATH = "/";
-console.log("PUBLIC_PATH", PUBLIC_PATH);
+
+
+// NOTE:
+let PUBLIC_PATH;
+if(process.env.NODE_COUNTRY === "in") {
+  PUBLIC_PATH = !isProduction ? "/" : "/v1/";
+} else {
+  PUBLIC_PATH = "/";
+}
+console.log("[mobile][build] PUBLIC_PATH", PUBLIC_PATH);
 
 let proxyURL;
 if(process.env.NODE_COUNTRY === "in") {
@@ -196,7 +197,6 @@ module.exports = (config, context) => {
             })
         );
     }
-    console.log("finalConfig", finalConfig);
-    console.log("process.env.NODE_ENV", process.env.NODE_ENV);
+    // console.log("[mobile][build] finalConfig", finalConfig);
     return finalConfig;
 };

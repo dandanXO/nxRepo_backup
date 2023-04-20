@@ -51,7 +51,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
     <CustomForm>
       <Form>
         <Label>{t("Cardholder Name")}</Label>
-
         <Input
           className="mb"
           labelType={"none"}
@@ -60,7 +59,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           disabled
         />
 
-        <Label>{t("Select a mobile wallet")}</Label>
         <Label>{t('Your IBAN Number (24 digits)')}</Label>
         <Input
           className="mb"
@@ -119,7 +117,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
 
-        <Warning>{t("Unchangeable after linked, please check before submission.")}</Warning>
+        <Warning>{t("After submitting the data, it cannot be modified. Please make sure the information is correct.")}</Warning>
       </Form>
 
       <Button onClick={() => {
