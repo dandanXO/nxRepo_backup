@@ -1,8 +1,8 @@
 import {useMemo} from "react";
 
 export const FindIBANLinkTextConstant = {
-  bankcardURL: "https://tinyurl.com/45vrsx48",
-  wallet: "https://tinyurl.com/2f4v2xmr",
+  bankcardURL: "https://tinyurl.com/2f4v2xmr",
+  wallet: "https://tinyurl.com/45vrsx48",
 }
 
 type IFindIBANLinkText = {
