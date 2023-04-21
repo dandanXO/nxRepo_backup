@@ -24,8 +24,12 @@ const WebViewHeader = styled.div`
 `
 const StyledIframe = styled.iframe`
   width: 100vw;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 56px);
+  //height: 1000px;
   border: 0;
+  position: fixed;
+  top: 56px;
+  background: #ffffff;
 `
 type IWebViewModal = {
   url: string;
@@ -39,8 +43,11 @@ export const WebViewModal = memo((props: IWebViewModal) => {
     }
     return (
       <WebviewContainer>
-        <WebViewHeader>
-          <IoIosArrowBack size={25} color={"#000000"} onClick={props.onClickBack}/>
+        <WebViewHeader onClick={props.onClickBack}>
+          <IoIosArrowBack size={25} color={"#000000"}/>
+          <div style={{ padding: "0 8px", fontWeight: "bold"}}>
+            Back
+          </div>
         </WebViewHeader>
         {/*{loading ? (*/}
         {/*  <div style={{ padding: 16}}>Loading...</div>*/}
