@@ -8,7 +8,7 @@ import {useBindBankAccountForm} from "../../hooks/common/useBindBankAccountForm"
 import {usePakistanBankAccountForm} from "../../hooks/pakistan/usePakistanBankAccountForm";
 import {useFinishedBindBankAccountForm} from "../../hooks/common/useFinishedBindBankAccountForm";
 import {usePakistanMobileWalletForm} from "../../hooks/pakistan/usePakistanMobileWalletForm";
-
+import { Outlet } from "react-router";
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0|1>(1);
@@ -88,6 +88,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
 
   return (
     <CustomPage>
+      <Outlet/>
       <ChooseBindMethod value={chooseBindMethodValue} changeOptionValueCallback={changeOptionValue} disable={props.bindCardDropListData?.showBankOption || false}/>
       {chooseBindMethodValue === 0 ? (
         <MobileWalletForm

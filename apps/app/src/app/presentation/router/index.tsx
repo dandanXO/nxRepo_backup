@@ -78,7 +78,7 @@ import LogoutModal from "../modals/LogoutModal";
 import APIBoundaryModal from "../modals/APIBoundaryModal";
 import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
 import RepamentCouponModal from "../modals/RepamentCouponModal";
-
+import IBANFinderModal from "../modals/IBANFinderModal";
 
 import {useDispatch, useSelector} from "react-redux"
 import {TabBar} from "../components/layouts/TabBar";
@@ -109,7 +109,9 @@ export const AppRouter = () => {
           <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
           <Route path="/v2/auth" element={<AuthPage />} />
           <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
-          <Route path="/v2/bind-bankcard" element={<BindBankCardPage />} />
+          <Route path="/v2/bind-bankcard" element={<BindBankCardPage />} >
+            <Route path="iban-finder-modal" element={<IBANFinderModal />} />
+          </Route>
           <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} />
           <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} />
           <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
