@@ -3,7 +3,6 @@ import { BrowserTracing } from "@sentry/tracing";
 import {environment} from "../environments/environment";
 import {AppFlag} from "./App";
 
-
 export const isLocalhost = () => window.location.hostname === "localhost";
 
 const getEnvironment = () => {

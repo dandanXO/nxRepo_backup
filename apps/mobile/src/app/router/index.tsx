@@ -157,33 +157,33 @@ const Pages = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes >
-        <Route path={`${AppFlag.pagePrefix}/`} element={<IndexPage />}/>
+        <Route path={`${AppFlag.pagePrefix}`} element={<IndexPage />}/>
         {/* NOTE: Android 會使用到的頁面，Backend API Response 會給 URL */}
-        <Route path={`${AppFlag.pagePrefix}/bank-bind`} element={<BindBankAccountPage />} />
+        <Route path={`${AppFlag.pagePrefix}bank-bind`} element={<BindBankAccountPage />} />
 
         {/* NOTE: Android 會使用到的頁面，Backend API Response 會給 URL */}
         {/* url: /loan-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-        <Route path={`${AppFlag.pagePrefix}/loan-details`} element={<LoanDetailsPage />} />
+        <Route path={`${AppFlag.pagePrefix}loan-details`} element={<LoanDetailsPage />} />
 
 
         {/* url: /extend-details?token=xxxxxxxx&orderNo=xxxxxxxx */}
-        <Route path={`${AppFlag.pagePrefix}/extend-details`} element={<ExtendDetailsPage />} />
+        <Route path={`${AppFlag.pagePrefix}extend-details`} element={<ExtendDetailsPage />} />
 
         {/*<Route path="/repayment-modal-advertisement" element={<div />} />*/}
-        <Route path={`${AppFlag.pagePrefix}/upload-payment-receipt`} element={<UploadPaymentReceiptPage />}/>
-        <Route path={`${AppFlag.pagePrefix}/uploaded-payment-receipt`} element={<UploadedPaymentReceiptPage />}/>
+        <Route path={`${AppFlag.pagePrefix}upload-payment-receipt`} element={<UploadPaymentReceiptPage />}/>
+        <Route path={`${AppFlag.pagePrefix}uploaded-payment-receipt`} element={<UploadedPaymentReceiptPage />}/>
         {/*<Route path="/product-ad-modal-list-old" element={<OldProductAdModalListPage />}/>*/}
 
-        <Route path={`${AppFlag.pagePrefix}/product-ad-modal-list`} element={<ProductAdModalListPage />}/>
+        <Route path={`${AppFlag.pagePrefix}product-ad-modal-list`} element={<ProductAdModalListPage />}/>
 
         {/*NOTICE: ad 字眼容易被 Google 擋*/}
-        <Route path={`${AppFlag.pagePrefix}/activity-list`} element={<ActivityAdListPage />}/>
+        <Route path={`${AppFlag.pagePrefix}activity-list`} element={<ActivityAdListPage />}/>
         {/*<Route path="/activity-list-dev" element={<DemoActivityAdListPage/>}/>*/}
 
-        <Route path={`${AppFlag.pagePrefix}/news-section`} element={<NewsSectionPage/>}/>
+        <Route path={`${AppFlag.pagePrefix}news-section`} element={<NewsSectionPage/>}/>
 
         {/* NOTE: Android 除錯專用頁面 */}
-        <Route path={`${AppFlag.pagePrefix}/android-debug`} element={<AndroidDebugPage/>}/>
+        <Route path={`${AppFlag.pagePrefix}android-debug`} element={<AndroidDebugPage/>}/>
         <Route path="*" element={<div>Not Found</div>} />
 
       </Routes>

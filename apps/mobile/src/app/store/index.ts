@@ -4,6 +4,9 @@ import createSagaMiddleware from 'redux-saga'
 import {personalRecommendActionsReducer} from "../components/pages/ProductAdModalListPage/redux";
 import AppSaga from "../components/pages/ProductAdModalListPage/saga";
 
+// NOTICE: create the saga middleware
+const sagaMiddleware = createSagaMiddleware()
+
 export const appStore = configureStore({
     reducer: {
         [API.reducerPath]: API.reducer,
@@ -13,9 +16,6 @@ export const appStore = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(API.middleware).concat(sagaMiddleware),
 });
-
-// NOTICE: create the saga middleware
-const sagaMiddleware = createSagaMiddleware()
 
 // NOTICE: then run the saga
 sagaMiddleware.run(AppSaga)

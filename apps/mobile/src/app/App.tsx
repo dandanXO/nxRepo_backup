@@ -13,9 +13,10 @@ import * as Sentry from "@sentry/react";
 
 export const AppFlag = {
   enableSentry: false,
-  pagePrefix: "",
+  pagePrefix: appInfo.PUBLIC_PATH,
 }
-// console.log("environment.country", environment.country)
+console.log("AppFlag.enableSentry", AppFlag.enableSentry)
+console.log("AppFlag.pagePrefix", AppFlag.pagePrefix)
 
 // NOTICE: REFACTOR ME , 目前Modal.alert 只能從全局取得
 // NOTICE: TS2339: Property 'theme' does not exist on type 'Window & typeof globalThis'.

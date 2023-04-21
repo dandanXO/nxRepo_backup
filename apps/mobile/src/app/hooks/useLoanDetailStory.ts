@@ -46,7 +46,7 @@ const useLoanDetailStory = () => {
 
     // NOTE: navigate
     const navigateToUploadPaymentReceiptPage = useCallback(() => {
-        navigate(`/upload-payment-receipt?token=${token}&orderNo=${orderNo}`);
+        navigate(`${AppFlag.pagePrefix}upload-payment-receipt?token=${token}&orderNo=${orderNo}`);
     }, [token, orderNo]);
 
     const [paymentMethodList, setPaymentMethodList] = useState<string[]>([]);

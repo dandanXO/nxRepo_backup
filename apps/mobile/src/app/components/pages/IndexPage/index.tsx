@@ -3,6 +3,7 @@ import { Page } from "@frontend/mobile/shared/ui";
 import {environment} from "../../../../environments/environment";
 import {useTranslation} from "react-i18next";
 import styled from "styled-components";
+import {AppFlag} from "../../../App";
 // import {useEffect} from "react";
 // import * as Sentry from "@sentry/react";
 
@@ -69,52 +70,52 @@ export default () => {
             }}>showtranslations</button>
 
             <li>
-              <Link to={"/activity-list?phoneNo=9049334242"}>ActivityAdList</Link>
+              <Link to={`${AppFlag.pagePrefix}activity-list?phoneNo=9049334242`}>ActivityAdList</Link>
             </li>
 
             <li>
-              <Link to={"/activity-list-dev"}>(DEV)ActivityAdList</Link>
+              <Link to={`${AppFlag.pagePrefix}activity-list-dev`}>(DEV)ActivityAdList</Link>
             </li>
 
             <li>
                 <Link
-                    to={"/bank-bind?token=" + getToken() + "&" + getCardholderName()}
+                    to={`${AppFlag.pagePrefix}bank-bind?token=` + getToken() + "&" + getCardholderName()}
                 >
                     bank-bind
                 </Link>
             </li>
             <li>
-                <Link to={"/loan-details?" + queryString()}>
+                <Link to={`${AppFlag.pagePrefix}loan-details?` + queryString()}>
                     loanDetailsPage
                 </Link>
             </li>
             <li>
-                <Link to={"/extend-details?" + queryString()}>
+                <Link to={`${AppFlag.pagePrefix}extend-details?` + queryString()}>
                     extendDetailsPage
                 </Link>
             </li>
             <li>
-                <Link to={"/upload-payment-receipt?" + queryString()}>
+                <Link to={`${AppFlag.pagePrefix}upload-payment-receipt?` + queryString()}>
                     UploadPaymentReceiptPage
                 </Link>
             </li>
             <li>
-                <Link to="/uploaded-payment-receipt">
+                <Link to={`${AppFlag.pagePrefix}uploaded-payment-receipt`}>
                     UploadedPaymentReceiptPage
                 </Link>
             </li>
             <li>
-                <Link to={"/product-ad-modal-list?token=" + getToken()}>
+                <Link to={`${AppFlag.pagePrefix}product-ad-modal-list?token=` + getToken()}>
                     ProductAdModalListPage
                 </Link>
             </li>
           <li>
-            <Link to={"/news-section"}>
+            <Link to={`${AppFlag.pagePrefix}news-section`}>
               NewsSection
             </Link>
           </li>
           <li>
-            <Link to={"/android-debug"}>
+            <Link to={`${AppFlag.pagePrefix}android-debug`}>
               Android Debug
             </Link>
           </li>

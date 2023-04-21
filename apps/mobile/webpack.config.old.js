@@ -20,8 +20,6 @@ console.log("[mobile][build] getClientEnvironment", getClientEnvironment());
 // console.log("gitRevisionPlugin.commithash()", gitRevisionPlugin.commithash());
 
 
-
-
 // NOTE:
 let PUBLIC_PATH;
 if(process.env.NODE_COUNTRY === "in") {
@@ -142,6 +140,7 @@ module.exports = (config, context) => {
                     VERSION: JSON.stringify(gitRevisionPlugin.version()),
                     COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
                     BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
+                    PUBLIC_PATH: JSON.stringify(PUBLIC_PATH),
                 },
             }),
             // new CleanWebpackPlugin({
