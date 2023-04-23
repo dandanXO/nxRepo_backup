@@ -4,7 +4,6 @@ import "./modules/window/window"
 
 import {environment} from "../environments/environment";
 import {AppThemeProvider} from "@frontend/mobile/shared/ui";
-import {getThemeConfig} from "./modules/theme/getThemeConfig";
 import {AppRouter} from "./presentation/router";
 import {Provider} from "react-redux";
 import {appStore, RootState} from "./usecaseFlow/reduxStore";
@@ -12,13 +11,13 @@ import {history} from "./usecaseFlow/reduxStore/index"
 import {ReduxRouter, ReduxRouterSelector} from "@lagunovsky/redux-react-router";
 import {BrowserRouter} from "react-router-dom";
 import React from "react";
+import {v55ThemeConfig} from "../environments/theme/india/v55";
 
 export const AppFlag = {
   enableSentry: false,
 }
+window.theme = v55ThemeConfig;
 
-// NOTICE: REFACTOR ME , 目前Modal.alert 只能從全局取得
-window.theme = getThemeConfig(environment.country);
 console.log("[APP] environment", environment);
 console.log("[APP] window.theme", window.theme);
 

@@ -26,4 +26,6 @@ module.exports = {
   error: {
     main: "#",
   },
+  white: "#ffffff",
+  black: "#000000",
 }

@@ -6,36 +6,36 @@ export interface IThemeConfig {
   fontSize: typeof fontSizeListToRem;
   fontFamily: string;
   page: {
-    bgColor: Colors;
+    bgColor: Colors | string;
   },
   button: {
     primary: {
-      main: Colors;
-      text: Colors;
+      main: Colors | string;
+      text: Colors | string;
     },
     secondary: {
-      main: Colors;
-      text: Colors;
+      main: Colors | string;
+      text: Colors | string;
     },
     info: {
-      main: Colors;
-      text: Colors;
+      main: Colors | string;
+      text: Colors | string;
     },
     link: {
-      main: Colors;
-      text: Colors;
+      main: Colors | string;
+      text: Colors | string;
     },
     ghost: {
-      main: Colors;
-      text: Colors;
-      border: Colors;
+      main: Colors | string;
+      text: Colors | string;
+      border: Colors | string;
     }
   },
   radio: {
-    color: Colors;
+    color: Colors | string;
   },
   card: {
-    color: Colors;
+    color: Colors | string;
   },
   repaymentAdsModal: {
     main: {
