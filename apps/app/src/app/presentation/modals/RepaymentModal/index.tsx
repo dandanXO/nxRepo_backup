@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import AdSVG from "./repayment_banner.svg";
-import Button from "../../components/Button";
-import { useNavigate, useLocation } from "react-router";
-
-
-import {
-    Horizontal,
-    NotificationButton,
-    RepayICON,
-    ListItem,
-    Title,
-    Overlay,
-    Radio,
-    Input,
-} from "@frontend/mobile/shared/ui";
+import {useLocation, useNavigate} from "react-router";
+import {Horizontal, Input, ListItem, Overlay, Radio,} from "@frontend/mobile/shared/ui";
 import Select from 'react-select';
-import { WithTranslation, withTranslation } from "react-i18next";
-import { i18nRepaymentModal } from "./i18n/translations";
-import { environment } from "../../../../environments/environment";
+import {withTranslation} from "react-i18next";
+import {i18nRepaymentModal} from "./i18n/translations";
+import {environment} from "../../../../environments/environment";
 import useRepayCreate from "../../hooks/useRepayCreate";
 import useRepayTypes from "../../hooks/useRepayTypes";
+import {Button} from "../../components/layouts/Button";
 
 export const RepaymentModalContainer = styled.div`
     color: #101010;
@@ -34,23 +23,6 @@ const MethodContainer = styled.div`
   margin-bottom: 18px;
 `;
 
-export const SectionButton = styled.div`
-    margin-bottom: 10px;
-`;
-
-export const RepayAndApplyButton = styled(NotificationButton)`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: ${(props) => props.theme.button.primary.text};
-    background: ${(props) => props.disable ? "#C0C0C0" : props.theme.button.primary.main};
-`;
-
-export const RepaymentButton = styled(RepayAndApplyButton)`
-    flex: 3 0 auto;
-    background: ${(props) => props.theme.button.secondary.main};
-    color: ${(props) => props.theme.button.secondary.text};
-`;
 
 const BoldText = styled.div`
   font-size: 16px;
@@ -63,7 +35,7 @@ const BoldText = styled.div`
 const PaymentMethodContainer = styled.div`
   margin-bottom: 18px;
   width:100%
-  div{
+  div {
     top:20px
   }
 `;
@@ -165,16 +137,16 @@ const RepaymentModal = (props: any) => {
                     <div className={`my-4`}><img className={`w-full`} src={AdSVG} /></div>
                     <div className={`flex flex-row my-3`}>
                         <div className={`mr-1.5 w-full`}>
-                            <Button onClick={() => {
-                                if (isRepayTypesFetching) return;
-                                navigate(-1);
-                            }} buttonText={props.t("Cancel")} backgroundColor={'bg-orange-300'} width={`w-full`} />
+                          <Button onClick={() => {
+                            if (isRepayTypesFetching) return;
+                            navigate(-1);
+                          }} text={props.t("Cancel")} className={`bg-primary-variant w-full`}/>
                         </div>
                         <div className={` ml-1.5 w-full`}>
-                            <Button onClick={() => {
-                                if (isRepayTypesFetching) return;
-                                handleConfirm();
-                            }} buttonText={'Repayment'} width={`w-full`} />
+                          <Button onClick={() => {
+                            if (isRepayTypesFetching) return;
+                            handleConfirm();
+                          }} text={props.t("Repayment")} className={`bg-primary-main w-full`}/>
                         </div>
                     </div>
                     <div className={`text-xs text-gray-300 text-left`}>

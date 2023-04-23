@@ -1,5 +1,7 @@
 const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind');
 const { join } = require('path');
+const colors = require('tailwindcss/colors')
+const customColors = require("./src/app/modules/theme/customColors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -16,13 +18,19 @@ module.exports = {
               marquee: {
                   '0%': {  transform: 'translateX(100%)' },
                   '100%': { transform: ' translateX(-200%)' },
-              }  
+              }
           },
           animation: {
               marquee: 'marquee 15s linear infinite',
           }
 
       },
+      // NOTE: Naming your colors
+      // https://tailwindcss.com/docs/customizing-colors#naming-your-colors
+      colors: {
+        ...colors,
+        ...customColors,
+      }
   },
   plugins: [
     // require("daisyui")

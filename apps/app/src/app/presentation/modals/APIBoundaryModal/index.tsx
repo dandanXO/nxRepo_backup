@@ -29,7 +29,7 @@ const APIBoundaryModal = (props: Props) => {
         </div>
 
         <div>
-          <Button text={"OK"} bgColor={"bg-[#F58B10]"} onClick={onClickOK}/>
+          <Button text={"OK"} className={"bg-[#F58B10]"} onClick={onClickOK}/>
         </div>
 
       </div>

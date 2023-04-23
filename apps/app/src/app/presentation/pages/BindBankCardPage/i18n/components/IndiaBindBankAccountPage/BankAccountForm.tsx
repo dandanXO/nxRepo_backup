@@ -1,10 +1,11 @@
-import { Button, Input } from "@frontend/mobile/shared/ui";
 import React from "react";
 import { IIndiaBankAccountForm } from "../../types/IBankAccountForm";
 import { Form } from "../../../components/Form";
 import { Paragraph } from "../../../components/Paragraph";
 import { useTranslation } from "react-i18next";
 import { i18nBankBindAccountPage } from "../../translations";
+import {Button} from "../../../../../components/layouts/Button";
+import {Input} from "@frontend/mobile/shared/ui";
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
     const { t } = useTranslation(i18nBankBindAccountPage.namespace)
@@ -51,7 +52,9 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                     onChange={props.onUPIIDChange}
                 />
             </Form>
-            <Button onClick={() => { !props.isFormPending && props.confirm() }}>{t("Save")}</Button>
+            {/*<Button onClick={() => { !props.isFormPending && props.confirm() }}>{t("Save")}</Button>*/}
+          {/*<Button text={t("Save")} onClick={() => { !props.isFormPending && props.confirm() }} bgColor={`bg-[${theme.primary.main}]`}/>*/}
+          <Button text={t("Save")} onClick={() => { !props.isFormPending && props.confirm() }} className={`bg-primary-main`}/>
         </>
     );
 }

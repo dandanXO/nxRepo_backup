@@ -1,7 +1,8 @@
 
 import Divider from "../../components/Divider";
 import ListItem from "../../components/ListItem";
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
+
 import { AmountPaidIcon, } from "@frontend/mobile/shared/ui";
 import { Outlet } from "react-router";
 import { useNavigate, useLocation } from "react-router";
@@ -12,6 +13,7 @@ import { environment } from "../../../../environments/environment";
 import { Navigation } from "../../components/layouts/Navigation";
 import moment from "moment";
 import {getOrderNo} from "../../../modules/location/getOrderNo";
+import {Button} from "../../components/layouts/Button";
 
 const RepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()
@@ -67,7 +69,7 @@ const RepaymentDetailPage = (props: any) => {
                         state: currentData
                       })}
                     } className={`grow mr-1.5`}>
-                      <Button buttonText={'Extend'} backgroundColor={'bg-orange-300'} width={`w-full`} />
+                      <Button text={"Extend"} className={`bg-primary-variant`}/>
                     </div>
 
                     <div onClick={() => {
@@ -75,7 +77,7 @@ const RepaymentDetailPage = (props: any) => {
                         state: currentData
                       })}
                     }  className={`grow ml-1.5`}>
-                      <Button buttonText={'Repay'} width={`w-full`} />
+                      <Button text={"Repay"} className={`bg-primary-main`}/>
                     </div>
 
                 </div>
@@ -94,7 +96,9 @@ const RepaymentDetailPage = (props: any) => {
                       navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: orderNo,
                       })}
-                    } className={`grow`}><Button buttonText={'Upload Receipt'} border={`border border-orange-600 border-solid`} color={`text-amber-500`} backgroundColor={'bg-none'} width={`w-full`} /></div>
+                    } className={`grow`}>
+                      <Button text={"Upload Receipt"} className={`border-primary-main border-[1.5px] border-solid text-primary-main w-full bg-none`}/>
+                    </div>
                 </div>
                 <div className={`text-xs text-gray-300`}>
                     After completing the repayment, take a screenshot and upload your repayment receipt here.

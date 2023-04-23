@@ -2,9 +2,14 @@ import { Modal } from "@frontend/mobile/shared/ui";
 import i18next from "i18next";
 import {getThemeConfig} from "../../modules/theme/getThemeConfig";
 import {environment} from "../../../environments/environment";
+const customColors = require("../../modules/theme/customColors");
 
 // NOTICE: 下面得 import 雖然 app.tsx 已經impoert
 window.theme = getThemeConfig(environment.country);
+window.theme.button.primary.main = customColors.primary.main;
+// window.theme.button.primary.text = customColors.primary.variant;
+// window.theme.button.secondary.main = customColors.secondary.main;
+// window.theme.button.secondary.text = customColors.secondary.variant;
 
 export const alertModal = (message: string, title?: string) => {
   console.log("message", message);

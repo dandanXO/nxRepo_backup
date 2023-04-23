@@ -27,7 +27,7 @@ export const QRSuccessModal = (props: Props) => {
         </div>
 
         <div>
-          <Button text={"OK"} bgColor={"bg-[#F58B10]"} onClick={onClickClose}/>
+          <Button text={"OK"} className={"bg-[#F58B10]"} onClick={onClickClose}/>
         </div>
 
       </div>
