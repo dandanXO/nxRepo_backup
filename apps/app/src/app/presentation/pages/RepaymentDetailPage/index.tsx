@@ -12,8 +12,14 @@ import { getToken } from "../../../modules/location/getToken";
 import { environment } from "../../../../environments/environment";
 import { Navigation } from "../../components/layouts/Navigation";
 import moment from "moment";
-import {getOrderNo} from "../../../modules/location/getOrderNo";
 import {Button} from "../../components/layouts/Button";
+import { getOrderNo } from "../../../modules/location/getOrderNo";
+import { renderByCountry } from "../../../modules/i18n";
+import { IndiaCountry } from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
+import { PakistanCountry } from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import { BangladeshCountry } from "../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
+import IndiaRepaymentDetailPage from "./i18n/IndiaRepaymentDetailPage";
+import PakistanRepaymentDetailPage from "./i18n/PakistanRepaymentDetailPage";
 
 const RepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()
@@ -28,84 +34,24 @@ const RepaymentDetailPage = (props: any) => {
         triggerGetList({ orderNo: location.state?.orderNo || getOrderNo() });
     }, [])
 
-    useEffect(() => {
-        // console.log('loanDetail', currentData)
-    }, [currentData])
-
-    const { status = '', productName = '', orderNo = '', dueDate = '', loanAmount = '', overdueDays = '', penaltyInterest = '', paidAmount = '', repayRecords = [], totalRepayAmount = '' } = currentData ?? {};
-
-    console.log("RepaymentDetailPage.repayRecords", repayRecords);
-    return (
-        <div>
-            <Navigation title={"Repay Details"} back={() => {navigate(-1)}} />
-            <div className={`text-sm text-center text-blue-500 bg-blue-200 py-2`}>Get more amount after instant payment</div>
-            <div className={`px-6 pt-3`}>
-                <ListItem title={'Product'} text={productName ?? ''} titleColor="text-slate-400" />
-                <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-slate-400" />
-                <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
-                <ListItem title={'Loan Amount'} text={`${environment.currency} ${loanAmount ?? ''}`} titleColor="text-slate-400" />
-                <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
-                <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
-
-                {repayRecords && repayRecords.length > 0 && (
-                  <ListItem title={
-                    <div className={`flex flex-row item-center items-center`}>
-                      <div className={` mr-1`}>Amount Repaid</div>
-                      <div onClick={() => {
-                        navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
-                          state: {repayRecords}
-                        })}
-                      }><img src={AmountPaidIcon} /></div>
-                    </div>
-                  } text={`- ${environment.currency} ${paidAmount ?? ''}`} titleColor="text-slate-400" />
-                )}
-
-                <Divider />
-                <ListItem title={'Repayment Amount'} text={`${environment.currency} ${totalRepayAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" />
-                <div className={`flex flex-row my-3`}>
-
-                    <div onClick={() => {
-                      navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
-                        state: currentData
-                      })}
-                    } className={`grow mr-1.5`}>
-                      <Button text={"Extend"} className={`bg-primary-variant`}/>
-                    </div>
-
-                    <div onClick={() => {
-                      navigate(`repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
-                        state: currentData
-                      })}
-                    }  className={`grow ml-1.5`}>
-                      <Button text={"Repay"} className={`bg-primary-main`}/>
-                    </div>
-
-                </div>
-                <div className={`text-xs text-gray-300`}>
-                    <div>Attention：</div>
-                    <ul className="list-decimal list-outside pl-3 pt-1">
-
-                        <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
-                        <li>Overdue for more than <span className={`text-rose-600`}>N days</span> will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.</li>
-                        <li>Email us if you have any questions about your responsibilities or for more information. <span className={`text-rose-600`}>mail@mail.com</span></li>
-                    </ul>
-                </div>
-                <div className={`flex my-3`}>
-                    {/*TODO: 先兼容 querystring*/}
-                    <div onClick={() => {
-                      navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
-                        state: orderNo,
-                      })}
-                    } className={`grow`}>
-                      <Button text={"Upload Receipt"} className={`border-primary-main border-[1.5px] border-solid text-primary-main w-full bg-none`}/>
-                    </div>
-                </div>
-                <div className={`text-xs text-gray-300`}>
-                    After completing the repayment, take a screenshot and upload your repayment receipt here.
-                </div>
-            </div>
-            <Outlet />
-        </div>
+    return (<div>
+        <Navigation title={"Repay Details"} back={() => { navigate(-1) }} />
+        <div className={`text-sm text-center text-blue-500 bg-blue-200 py-2`}>Get more amount after instant payment</div>
+        {/* NOTE: 目前印度與巴基斯坦樣式相同 (先使用巴基斯坦的版本) */}
+        <PakistanRepaymentDetailPage currentData={currentData}/>
+        {/* {
+            renderByCountry({
+                [IndiaCountry.country]: (
+                    <PakistanRepaymentDetailPage currentData={currentData}/>
+                ),
+                [PakistanCountry.country]: (
+                    <IndiaRepaymentDetailPage currentData={currentData}/>
+                   
+                )
+            }, (<PakistanRepaymentDetailPage currentData={currentData}/>))
+        } */}
+        <Outlet />
+    </div>
     )
 }
 
