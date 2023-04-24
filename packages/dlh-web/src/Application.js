@@ -29,7 +29,7 @@ export const SentryModule = {
       console.log("[api-dlh-web][sentry] isLocalhost", Application.isLocalhost());
 
       const sentryConfig = {
-        dsn: "https://eed8143e74e34bf994b409bf7e64c731@monitor.sijneokd.com/3",
+        dsn: "https://c10ab5774259474a9832879e2c3bfeae@web.sijneokd.com/2",
         integrations: [new BrowserTracing(), new Sentry.Replay(this.getReplayConfig())],
         environment: envName,
         // Set tracesSampleRate to 1.0 to capture 100%
