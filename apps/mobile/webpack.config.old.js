@@ -23,8 +23,7 @@ console.log("[mobile][build] getClientEnvironment", getClientEnvironment());
 // NOTE:
 let PUBLIC_PATH;
 if(process.env.NODE_COUNTRY === "in") {
-  // PUBLIC_PATH = !isProduction ? "/" : "/v1/";
-  PUBLIC_PATH = "/";
+  PUBLIC_PATH = !isProduction ? "/" : "/v1/";
 } else {
   PUBLIC_PATH = "/";
 }
