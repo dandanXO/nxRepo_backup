@@ -77,7 +77,7 @@ export const LoginForm = () => {
                 <div className={`text-slate-400`}>Phone Number</div>
                 <Input
                     suffix={
-                      <Button dataTestingID={"getOTP"} text={!doingCountdownSendOTP ? "Get OTP" : `Resend ( ${resendSeconds}s )`} bgColor={cx({
+                      <Button dataTestingID={"getOTP"} text={!doingCountdownSendOTP ? "Get OTP" : `Resend ( ${resendSeconds}s )`} className={cx({
                         "bg-[#F58B10]": enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
                         "bg-[#D7D7D7]": !(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP),
                       }, "ml-2 py-1")}
@@ -158,7 +158,7 @@ export const LoginForm = () => {
                 />
             </div>
             <div className={`py-2`}>
-              <Button dataTestingID={"apply"} text={"Confirm"} bgColor={cx({
+              <Button dataTestingID={"apply"} text={"Confirm"} className={cx({
                 "bg-[#F58B10]": true,
               })}
                 onClick={() => {

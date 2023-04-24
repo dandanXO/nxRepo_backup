@@ -1,4 +1,3 @@
-import {TabBar} from "../../components/layouts/TabBar";
 import {LoanInformationSection} from "./sections/LoanInformationSection";
 import {UserInformationSection} from "./sections/UserInformationSection";
 import {RecommendedProductsSection} from "./sections/RecommendedProductsSection";
@@ -473,7 +472,7 @@ const IndexPage = () => {
         {!applyHide &&
         //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) &&
           (
-          <Button dataTestingID={"apply"} text={"Apply Now"} bgColor={cx({
+          <Button dataTestingID={"apply"} text={"Apply Now"} className={cx({
             "bg-[#F58B10]": !applyDisable,
             "bg-[#D7D7D7]": applyDisable,
           })}
@@ -488,7 +487,7 @@ const IndexPage = () => {
           <>
             <Button onClick={() => {
               navigate(PagePathEnum.ApplicationProgressPage);
-            }} dataTestingID={"viewAppProgress"} text={"View Application Progress"} bgColor={"bg-[#F58B10]"}/>
+            }} dataTestingID={"viewAppProgress"} text={"View Application Progress"} className={"bg-[#F58B10]"}/>
           </>
         )}
         {isLoading && (
@@ -514,7 +513,7 @@ const IndexPage = () => {
               dataTestingID={"reacquireCredit"}
               text={"Reacquire Credit Amount"}
               loading={isLoading}
-              bgColor={cx({
+              className={cx({
                 "bg-[#F58B10]": indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
                 "bg-[#D7D7D7]": isLoading
               })}/>

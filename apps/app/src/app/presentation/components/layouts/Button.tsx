@@ -3,8 +3,8 @@ import {TestingProps} from "../../../modules/TestingProps";
 import { TailSpin } from 'react-loading-icons'
 
 type Props = {
-  text?: string;
-  bgColor?: string;
+  text: string;
+  className?: string;
   onClick?: () => void;
   loading?: boolean;
 } & TestingProps;
@@ -14,7 +14,8 @@ export const Button = (props: Props) => {
     <div
       onClick={props.onClick}
       data-testing-id={props.dataTestingID}
-      className={cx("rounded-lg p-2 text-white text-center shadow-md shadow-gray-400", props.bgColor)}
+      // shadow-md shadow-gray-400
+      className={cx("rounded-lg p-2 text-white text-center", props.className)}
     >
       {props.text}
       {props.loading && <TailSpin height={25} className={"inline-block"}/>}

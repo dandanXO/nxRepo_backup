@@ -204,7 +204,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
           <span>carefully.</span>
         </div>
 
-        <Button text={"Confirm"} bgColor={"bg-[#F58B10]"} onClick={props.onConfirmApply}/>
+        <Button text={"Confirm"} className={"bg-[#F58B10]"} onClick={props.onConfirmApply}/>
 
       </div>
 

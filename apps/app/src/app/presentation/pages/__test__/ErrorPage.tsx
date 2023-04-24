@@ -29,7 +29,7 @@ export const ErrorPage = () => {
       {didCatch ? (
         <div>
           <p>An error has been caught: {error.message}</p>
-          <Button dataTestingID={"apply"} text={"Reset Error"} bgColor={cx({
+          <Button dataTestingID={"apply"} text={"Reset Error"} className={cx({
             "bg-[#F58B10]": true,
           })}
             onClick={() => reset()}
@@ -51,7 +51,7 @@ export const ErrorPage = () => {
   //       <p>An error has been caught: {error.message}</p>
   //     ) : (
   //       <ErrorBoundary>
-  //         <Button dataTestingID={"apply"} text={"emit Error"} bgColor={cx({
+  //         <Button dataTestingID={"apply"} text={"emit Error"} className={cx({
   //           "bg-[#F58B10]": true,
   //         })}
   //           onClick={() => {
@@ -66,7 +66,7 @@ export const ErrorPage = () => {
   // NOTE: work
   return (
     <CustomErrorBoundary fallback={<p>Something went wrong</p>}>
-      <Button dataTestingID={"apply"} text={"emit Error"} bgColor={cx({
+      <Button dataTestingID={"apply"} text={"emit Error"} className={cx({
         "bg-[#F58B10]": true,
       })}
           onClick={() => {

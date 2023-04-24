@@ -3,15 +3,14 @@ import { Overlay } from "@frontend/mobile/shared/ui";
 import { environment } from "../../../../environments/environment";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { i18nExtendModal } from "./i18n/translations";
-import { GetLoanDetailRepayConfirmDetail } from "../../../api/rtk/old/getLoanDetail";
 import { useNavigate, useLocation } from "react-router";
-import Button from "../../components/Button";
 import ListItem from "../../components/ListItem";
 import Divider from "../../components/Divider";
 import useExtendCreate from "../../hooks/useExtendCreate";
 import useRepayTypes from "../../hooks/useRepayTypes";
 import moment from "moment";
 import {getOrderNo} from "../../../modules/location/getOrderNo";
+import {Button} from "../../components/layouts/Button";
 
 
 const PureExtendModal = (props: any) => {
@@ -62,8 +61,12 @@ const PureExtendModal = (props: any) => {
                                 text={`${environment.currency} ${extensionFee ?? ""}`}
                             />
                             <div className={`flex flex-row mt-6`}>
-                                <div className={`grow mr-1.5`}><Button onClick={() => navigate(-2)} buttonText={'Cancel'} backgroundColor={'bg-orange-300'} width={`w-full`} /></div>
-                                <div className={`grow ml-1.5`} ><Button onClick={handleConfirm} buttonText={'Confirm'} width={`w-full`} /></div>
+                                <div className={`grow mr-1.5`}>
+                                  <Button onClick={()=>navigate(-2)} text={'Cancel'} className={`bg-primary-variant w-full`}/>
+                                </div>
+                                <div className={`grow ml-1.5`} >
+                                  <Button onClick={handleConfirm} text={'Confirm'} className={`bg-primary-main w-full`}/>
+                                </div>
                             </div>
                         </div>
                     );

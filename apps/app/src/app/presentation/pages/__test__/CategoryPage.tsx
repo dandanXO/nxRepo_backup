@@ -10,7 +10,7 @@ export const CategoryPage = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <Button dataTestingID={"apply"} text={"Test"} bgColor={cx({
+      <Button dataTestingID={"apply"} text={"Test"} className={cx({
         "bg-[#F58B10]": true,
       })}
           onClick={() => {
