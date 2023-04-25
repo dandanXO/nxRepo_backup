@@ -41,8 +41,14 @@ export function *systemStartInitSaga() {
 
     // TODO:
     // NOTE: 是否啟用測試渠道(測試不好會出4)
-    const packageId = window.isInAndroid() ? "packageId" : "com.oasisgold.app.android"
+    // const packageId = window.isInAndroid() ? "packageId" : "com.oasisgold.app.android"
+    let packageId = "com.ind.kyc.application";
+    let appInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
+    if(appInfo) {
+      packageId = appInfo.packageId;
+    }
     console.log("[app][saga]  packageId", packageId);
+    yield put(appSlice.actions.updateAndroidInfo(appInfo));
 
     const [response, userResponse]:[GetInitServiceResponse,GetUserInfoServiceResponse] = yield all(
       [

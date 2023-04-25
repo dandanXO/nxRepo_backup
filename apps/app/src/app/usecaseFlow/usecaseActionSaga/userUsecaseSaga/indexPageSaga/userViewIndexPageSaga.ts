@@ -40,7 +40,8 @@ export function* userViewIndexPageSaga(action: any) {
     console.log("[app][saga] status", status);
 
     if (status === USER_AUTH_STATE.ready) {
-      const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, {packageId: "com.ylbu8.abha"});
+      const packageID: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId)
+      const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, { packageId: packageID });
       yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
 
     } else {
