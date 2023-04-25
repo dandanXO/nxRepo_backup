@@ -5,6 +5,7 @@ interface InputContainerProps {
   upperLabelType: boolean;
   isFocus?: boolean;
   disabled?: boolean;
+  outlineType?: string;
 }
 
 const upperLabelType = (upperLabelType: boolean) => {
@@ -37,11 +38,15 @@ export const InputContainer = styled.label<InputContainerProps>`
   position: relative;
   //width: ${(props) => props.width ?? 'auto'}px;
   display: flex;
+
   // Border
-  border: 1px solid #aaaaaa;
-  border-radius: 9px;
+  border:${(props) => props.outlineType === 'standard' ? 'none' : 'solid 1px #aaaaaa'};
+  border-bottom: 1px solid #aaaaaa;
+  border-radius: ${(props) => props.outlineType === 'standard' ? '0' : '9px'};
+
   // Padding
   padding: 10px 20px;
+  
   // Content
   height: 49px;
   box-sizing: border-box;

@@ -15,6 +15,11 @@ export const i18nRepaymentModal: i18nComponent = {
       "Attention": "Attention",
       "1. Before repayment, please make sure that youhave enough balance on your bank account.": "1. Before repayment, please make sure that youhave enough balance on your bank account.",
       "2. In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number after completing the repayment and return to the APP to upload your repayment receipt.": "2. In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number after completing the repayment and return to the APP to upload your repayment receipt.",
+      "Repay Full Amount": "Repay Full Amount",
+      "Partial Repayment": "Partial Repayment",
+      "Payment Amount (PKR)": "Payment Amount (PKR)",
+      "Coupon (PKR)": "Coupon (PKR)",
+      "Repayment Amount": "Repayment Amount"
     },
     bn_BD: {
       "Repayment": "পরিশোধের",
