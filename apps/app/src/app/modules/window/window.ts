@@ -6,6 +6,14 @@ export enum AndroidPage {
   AUTH = "AUTH"
 }
 
+export type AndroidAppInfo = {
+  domain: string;
+  environment: string;
+  packageId: string;
+  appName: string;
+  uiVersion: string;
+  token: string;
+}
 declare global {
   interface Window {
     // NOTICE: 與 APP 的交互
@@ -18,6 +26,9 @@ declare global {
     onUploadKycBackgroundData: (uploaded: boolean) => void;
     theme?: any;
     isInAndroid: () => boolean;
+    AppInfoTask: {
+      getAppInfo: () => AndroidAppInfo;
+    }
   }
 }
 

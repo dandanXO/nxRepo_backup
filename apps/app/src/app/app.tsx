@@ -11,7 +11,7 @@ import {history} from "./usecaseFlow/reduxStore/index"
 import {ReduxRouter, ReduxRouterSelector} from "@lagunovsky/redux-react-router";
 import {BrowserRouter} from "react-router-dom";
 import React from "react";
-import {v55ThemeConfig} from "../environments/theme/india/v55";
+import {v55ThemeConfig} from "../environments/theme/in/v55";
 
 export const AppFlag = {
   enableSentry: false,

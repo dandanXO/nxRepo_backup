@@ -7,6 +7,7 @@ import {GetUserInfoServiceResponse} from "../../../api/userService/GetUserInfoSe
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {SystemCaseActions} from "./systemCaseActions";
 import {systemCallGetUserInfoSaga} from "../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga";
+import {alertModal} from "../../../api/base/alertModal";
 
 
 export function *watchSystemInitSaga() {
@@ -33,6 +34,9 @@ function *callGetInit(packageId: string) {
 export function *systemStartInitSaga() {
   try {
     console.log("[app][saga] systemStartInitSaga")
+
+    const appInfo = window.AppInfoTask.getAppInfo()
+    alertModal(JSON.stringify(appInfo));
 
     // TODO:
     // NOTE: 是否啟用測試渠道(測試不好會出4)
