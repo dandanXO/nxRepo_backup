@@ -6,6 +6,9 @@ import {useLocation, useNavigate} from "react-router";
 import cx from "classnames";
 import {PagePathEnum} from "../../pages/PagePathEnum";
 import {getToken} from "../../../modules/location/getToken";
+import {useEffect, useState} from "react";
+import {DEFAULT_THEME} from "../../../../environments/theme";
+import {applyTheme} from "../../../modules/theme/utils";
 
 type Props = {
   hasOrder: boolean;
@@ -20,6 +23,14 @@ export const TabBar = (props: Props) => {
     }
     return location.pathname.indexOf(pageName) > -1
   }
+
+  const [theme, setTheme] = useState(DEFAULT_THEME);
+
+  useEffect(() => {
+    applyTheme("india", "v57");
+  }, [theme]);
+
+
   return (
     <div className={"h-16 bg-white border-t sticky bottom-0 flex flex-row"}>
       <div className={"flex-1 flex flex-col justify-center items-center"} onClick={() => {
@@ -54,6 +65,22 @@ export const TabBar = (props: Props) => {
           "text-gray-300": !isInPage(PagePathEnum.PersonalInfoPage),
         })}>Account</div>
       </div>
+
+
+      <div className={"flex-1 flex flex-col justify-center items-center"}  onClick={() => {
+        if(theme === "base") {
+          setTheme("dark")
+        } else {
+          setTheme("base")
+        }
+      }}>
+        <MdAccountBox color={isInPage(PagePathEnum.PersonalInfoPage) ? "#F58B10" : "#D7D7D7"} size={20}/>
+        <div className={cx({
+          "text-orange-300": isInPage(PagePathEnum.PersonalInfoPage),
+          "text-gray-300": !isInPage(PagePathEnum.PersonalInfoPage),
+        })}>Change Theme</div>
+      </div>
+
     </div>
   )
 }

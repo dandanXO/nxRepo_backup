@@ -8,7 +8,7 @@ export enum AndroidPage {
 
 export type AndroidAppInfo = {
   domain: string;
-  environment: string;
+  environment: "india" | "pakistan";
   packageId: string;
   appName: string;
   uiVersion: string;

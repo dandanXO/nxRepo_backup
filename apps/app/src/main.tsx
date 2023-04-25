@@ -8,6 +8,7 @@ import "./app/modules/datetime/index";
 import "./app/modules/window/IWindow"
 import App from './app/app';
 import "./style.css";
+import {applyTheme} from "./app/modules/theme/utils";
 
 export const AppFlag = {
   enableSentry: false,
@@ -29,12 +30,17 @@ if(!appInfo) {
 // NOTICE: 巴基斯坦 v56, uiVersion 則是變動的
 if(appInfo.uiVersion === "1") {
   if(appInfo.packageId === "com.ind.kyc.application") {
-    appInfo.uiVersion = "55"
-  } else {
-    appInfo.uiVersion = "56"
+    appInfo.environment = "india";
+    appInfo.uiVersion = "v55"
+    applyTheme("india", "v55");
+  } else if(appInfo.packageId === "com.ind.kyc.application") {
+    appInfo.environment = "pakistan";
+    appInfo.uiVersion = "v12"
   }
 }
 console.log("[app] appInfo", appInfo);
+
+applyTheme(appInfo.environment, appInfo.uiVersion);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
