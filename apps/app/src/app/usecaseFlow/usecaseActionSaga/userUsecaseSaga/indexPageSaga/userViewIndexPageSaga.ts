@@ -31,13 +31,7 @@ export function* userViewIndexPageSaga(action: any) {
 
     yield call(systemCallGetUserInfoSaga);
 
-    const indexPage: InitialState = yield select((state: RootState) => state.indexPage);
     const status: number = yield select((state: RootState) => state.indexPage.user.state);
-
-    const { riskControl } = yield select((state: RootState) => state.indexPage);
-
-    console.log("[app][saga] state.indexPage", indexPage);
-    console.log("[app][saga] status", status);
 
     if (status === USER_AUTH_STATE.ready) {
       const packageID: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId)
@@ -47,31 +41,20 @@ export function* userViewIndexPageSaga(action: any) {
     } else {
       const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
       yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
+      const { riskControl } = yield select((state: RootState) => state.indexPage);
 
-      if ((indexResponse.noQuotaBalance === true || indexResponse.riskReject === true)
+      if (
+        (indexResponse.noQuotaBalance === true || indexResponse.riskReject === true)
             && riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
         ) {
             // NOTICE: 不能重刷，需等待重刷時間
-            // console.log("不能重刷，需等待重刷時間")
-            // const expireTime = moment(indexResponse.refreshableUntil);
             yield put(SystemCaseActions.SystemRefreshableCountdownSaga(indexResponse.refreshableUntil))
 
         } else {
             // NOTICE: 可以重刷
-            // const currentTime = moment();
-            // const expireTime = moment(indexResponse.offerExpireTime);
-            // const isRiskControlOverdue = expireTime.isBefore(currentTime);
-            // console.log("currentTime.format", currentTime.format())
-            // console.log("expireTime.format", expireTime.format())
-            // if (!isRiskControlOverdue && indexResponse.availableAmount > 0) {
-            //     const expiredTime = indexResponse?.offerExpireTime;
-            //     yield put(SystemCaseActions.SystemCountdownSaga(expiredTime))
-            // }
-
             yield put(SystemCaseActions.SystemCountdownSaga(indexResponse?.offerExpireTime))
         }
     }
-
   } catch(error) {
     yield catchSagaError(error);
   }
