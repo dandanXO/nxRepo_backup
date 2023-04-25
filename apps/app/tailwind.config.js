@@ -1,7 +1,7 @@
 const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind');
 const { join } = require('path');
 const colors = require('tailwindcss/colors')
-const customColors = require("./src/app/modules/theme/customColors");
+const customColors = require("./src/environments/theme/india/55/tailwind.colors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

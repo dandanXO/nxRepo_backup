@@ -6,7 +6,8 @@ import {z} from "zod";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
-import {AppFlag} from "../../../../../../app";
+import {AppFlag} from "../../../../../../../main";
+
 
 interface IUseBangladeshMobileWalletForm {
   triggerPostBankBindSaveToBangladeshMutation: any;

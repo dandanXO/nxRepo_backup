@@ -8,8 +8,9 @@ import * as Sentry from "@sentry/react";
 import {processWalletDisplayName} from "./customization/processWalletDisplayName";
 import {GetBindCardDropListResponse, WalletVendor} from "../../../../../../api/rtk/old/GetBindCardDropList";
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
-import {AppFlag} from "../../../../../../app";
+
 import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
+import {AppFlag} from "../../../../../../../main";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;

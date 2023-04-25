@@ -2,8 +2,9 @@ import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosError, AxiosRequestConfig } from "axios";
 import {alertModal} from "../base/alertModal";
 import {runAxios} from "../base/runAxios";
-import {AppFlag} from "../../app";
+
 import * as Sentry from "@sentry/react";
+import {AppFlag} from "../../../main";
 
 export interface CustomAxiosError {
   status: any;

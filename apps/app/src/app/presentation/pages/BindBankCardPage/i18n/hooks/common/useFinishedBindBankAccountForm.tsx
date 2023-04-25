@@ -5,7 +5,8 @@ import {i18nBankBindAccountPage} from "../../translations";
 import * as Sentry from "@sentry/react";
 import {GetBindCardDropListResponse} from "../../../../../../api/rtk/old/GetBindCardDropList";
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
-import {AppFlag} from "../../../../../../app";
+import {AppFlag} from "../../../../../../../main";
+
 
 type IUseFinishedBindBankAccountPage =  {
   // NOTICE: Common

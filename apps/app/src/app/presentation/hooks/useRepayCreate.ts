@@ -7,7 +7,8 @@ import { CustomAxiosError } from "../../api/rtk/axiosBaseQuery";
 import { usePostRepayCreateMutation } from "../../api/rtk";
 import {PostRepayCreateRequest} from "../../api/loanService/PostRepayCreateRequest";
 import {PostRepayCreateResponse} from "../../api/loanService/PostRepayCreateResponse";
-import {AppFlag} from "../../app";
+import {AppFlag} from "../../../main";
+
 
 const useRepayCreate = () => {
     const navigate = useNavigate();

@@ -8,7 +8,7 @@ export const getToken = (): string => {
     : "";
   if (!TOKEN) {
     // alertModal("TOKEN is missing")
-    console.log("[APP] token", TOKEN);
+    console.log("[app] TOKEN is missing");
   }
   return TOKEN;
 };

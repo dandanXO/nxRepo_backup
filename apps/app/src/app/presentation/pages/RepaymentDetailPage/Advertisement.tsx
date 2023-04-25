@@ -12,10 +12,10 @@ import {PostLoanSubmitOrderRequestBody} from "../../../api/rtk/old/PostLoanSubmi
 import {CustomAxiosError} from "../../../api/rtk/axiosBaseQuery";
 
 
-import {AppFlag} from "../../../app";
 import ProductDetailModal from "../../modals/old/ProductDetailModal";
 import SubmitOrderModal from "../../modals/old/SubmitOrderModal";
 import SubmitOrderSuccessModal from "../../modals/old/SubmitOrderSuccessModal";
+import {AppFlag} from "../../../../main";
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;

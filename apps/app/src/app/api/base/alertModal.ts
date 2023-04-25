@@ -2,7 +2,7 @@ import { Modal } from "@frontend/mobile/shared/ui";
 import i18next from "i18next";
 import {getThemeConfig} from "../../modules/theme/getThemeConfig";
 import {environment} from "../../../environments/environment";
-const customColors = require("../../modules/theme/customColors");
+const customColors = require("../../../environments/theme/india/55/tailwind.colors");
 
 // NOTICE: 下面得 import 雖然 app.tsx 已經impoert
 window.theme = getThemeConfig(environment.country);
@@ -12,9 +12,9 @@ window.theme.button.primary.main = customColors.primary.main;
 // window.theme.button.secondary.text = customColors.secondary.variant;
 
 export const alertModal = (message: string, title?: string) => {
-  console.log("message", message);
-  console.log("i18next.t(\"modal.Confirm\")", i18next.t("modal.Confirm"))
-  console.log("window.theme.3", window.theme);
+  // console.log("message", message);
+  // console.log("i18next.t(\"modal.Confirm\")", i18next.t("modal.Confirm"))
+  // console.log("window.theme.3", window.theme);
   Modal.alert({
     show: true,
     mask: true,

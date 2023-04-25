@@ -7,11 +7,13 @@ import {GetUserInfoServiceResponse} from "../../../api/userService/GetUserInfoSe
 import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {SystemCaseActions} from "./systemCaseActions";
 import {systemCallGetUserInfoSaga} from "../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga";
-import {alertModal} from "../../../api/base/alertModal";
+
+import {IThemeConfig} from "@frontend/mobile/shared/ui";
+import {AndroidAppInfo} from "../../../modules/window/IWindow";
 
 
 export function *watchSystemInitSaga() {
-  console.log("[app][appSaga] 1.1")
+  console.log("[app][saga] 1.1")
   console.log("[app][saga] debug.watchSystemInitSaga")
 
   console.log("[app][saga] 接收初始化")
@@ -31,12 +33,11 @@ function *callGetInit(packageId: string) {
   yield put(appSlice.actions.updateInit(response));
 }
 
+
 export function *systemStartInitSaga() {
   try {
     console.log("[app][saga] systemStartInitSaga")
 
-    const appInfo = window.AppInfoTask.getAppInfo()
-    alertModal(JSON.stringify(appInfo));
 
     // TODO:
     // NOTE: 是否啟用測試渠道(測試不好會出4)

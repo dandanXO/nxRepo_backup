@@ -48,7 +48,7 @@ const RepaymentPage = () => {
                 })
             } */}
             {
-                currentData && currentData.content.length > 0 ?
+                currentData && currentData.content && currentData.content.length > 0 ?
                     currentData?.content?.map(record => {
                         return <PaymentItem {...record} />
                     })

@@ -1,8 +1,3 @@
-import "./modules/i18n";
-import "./modules/datetime/index";
-import "./modules/window/window"
-
-import {environment} from "../environments/environment";
 import {AppThemeProvider} from "@frontend/mobile/shared/ui";
 import {AppRouter} from "./presentation/router";
 import {Provider} from "react-redux";
@@ -11,15 +6,6 @@ import {history} from "./usecaseFlow/reduxStore/index"
 import {ReduxRouter, ReduxRouterSelector} from "@lagunovsky/redux-react-router";
 import {BrowserRouter} from "react-router-dom";
 import React from "react";
-import {v55ThemeConfig} from "../environments/theme/in/v55";
-
-export const AppFlag = {
-  enableSentry: false,
-}
-window.theme = v55ThemeConfig;
-
-console.log("[APP] environment", environment);
-console.log("[APP] window.theme", window.theme);
 
 const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator
 

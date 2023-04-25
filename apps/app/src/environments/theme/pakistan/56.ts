@@ -1,7 +1,7 @@
 import {Colors, fontSizeListToRem, IThemeConfig} from "@frontend/mobile/shared/ui";
-import customColors from "../../../app/modules/theme/customColors";
+import customColors from "../india/55/tailwind.colors";
 
-export const v55ThemeConfig: IThemeConfig = {
+export const themeConfig: IThemeConfig = {
   // NOTE: Commons
   color: Colors,
   fontSize: fontSizeListToRem,
