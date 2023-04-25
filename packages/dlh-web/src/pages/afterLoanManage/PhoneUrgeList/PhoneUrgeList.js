@@ -215,6 +215,20 @@ class PhoneUrgeList extends Component {
         params = {...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1};
         getTableData(params);
 
+        const _this = this;
+
+        loadDownloadLinkFlag();
+        function loadDownloadLinkFlag() {
+          axios({
+            url: '/hs/admin/orderOverdue/download-is-prohibited',
+            method: 'get',
+          }).then((res) => {
+            _this.setState({
+              btnDisabled: res,
+            });
+          });
+        }
+
     }
 
     render() {
