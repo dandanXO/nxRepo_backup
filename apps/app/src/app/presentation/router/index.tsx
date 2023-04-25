@@ -11,27 +11,27 @@ import {ErrorPage} from "../pages/__test__/ErrorPage";
 
 // const IndexPage = loadable(() => import("../pages/IndexPage"));
 import IndexPage from "../pages/IndexPage";
-const AuthPage = loadable(() => import("../pages/AuthPage"));
-const BankCardListPage = loadable(() => import("../pages/BankCardListPage"));
-const BindBankCardPage = loadable(() => import("../pages/BindBankCardPage"));
-const CustomerServicePage = loadable(() => import("../pages/CustomerServicePage"));
-const DisclosureStatementPage = loadable(() => import("../pages/DisclosureStatementPage"));
-const ExtendDetailsPage = loadable(() => import("../pages/ExtendDetailsPage"));
-const FinishedRepaymentPage = loadable(() => import("../pages/FinishedRepaymentPage"));
-const RepaymentDetailPage = loadable(() => import("../pages/RepaymentDetailPage"));
-const LoanRecordPage = loadable(() => import("../pages/RepaymentPage"));
-const MyCouponListPage = loadable(() => import("../pages/MyCouponListPage"));
+const AuthPage = loadable(() => import(/* webpackChunkName: "AuthPage" */ "../pages/AuthPage"));
+const BankCardListPage = loadable(() => import(/* webpackChunkName: "BankCardListPage" */ "../pages/BankCardListPage"));
+const BindBankCardPage = loadable(() => import(/* webpackChunkName: "BindBankCardPage" */ "../pages/BindBankCardPage"));
+const CustomerServicePage = loadable(() => import(/* webpackChunkName: "CustomerServicePage" */ "../pages/CustomerServicePage"));
+const DisclosureStatementPage = loadable(() => import(/* webpackChunkName: "DisclosureStatementPage" */ "../pages/DisclosureStatementPage"));
+const ExtendDetailsPage = loadable(() => import(/* webpackChunkName: "ExtendDetailsPage" */ "../pages/ExtendDetailsPage"));
+const FinishedRepaymentPage = loadable(() => import(/* webpackChunkName: "FinishedRepaymentPage" */ "../pages/FinishedRepaymentPage"));
+const RepaymentDetailPage = loadable(() => import(/* webpackChunkName: "RepaymentDetailPage" */ "../pages/RepaymentDetailPage"));
+const LoanRecordPage = loadable(() => import(/* webpackChunkName: "RepaymentPage" */ "../pages/RepaymentPage"));
+const MyCouponListPage = loadable(() => import(/* webpackChunkName: "MyCouponListPage" */ "../pages/MyCouponListPage"));
 // const MyCouponPage = loadable(() => import("../pages/MyCouponPage"));
-const OnlineCustomerServicePage = loadable(() => import("../pages/OnlineCustomerServicePage"));
+const OnlineCustomerServicePage = loadable(() => import(/* webpackChunkName: "OnlineCustomerServicePage" */ "../pages/OnlineCustomerServicePage"));
 
-const PartnerPage = loadable(() => import("../pages/PartnerPage"));
-const PersonalInfoPage = loadable(() => import("../pages/PersonalInfoPage"));
-const PrivacyPolicyPage = loadable(() => import("../pages/PrivacyPolicyPage"));
-const QuotaModelPage = loadable(() => import("../pages/QuotaModelPage"));
-const UploadedPaymentReceiptPage = loadable(() => import("../pages/UploadedPaymentReceiptPage"));
-const UploadPaymentReceiptPage = loadable(() => import("../pages/UploadPaymentReceiptPage"));
-const ApplicationProgressPage = loadable(() => import("../pages/ApplicationProgressPage"));
-const LoginPage = loadable(() => import('../pages/LoginPage'));
+const PartnerPage = loadable(() => import(/* webpackChunkName: "PartnerPage" */ "../pages/PartnerPage"));
+const PersonalInfoPage = loadable(() => import(/* webpackChunkName: "PersonalInfoPage" */ "../pages/PersonalInfoPage"));
+const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ "../pages/PrivacyPolicyPage"));
+const QuotaModelPage = loadable(() => import(/* webpackChunkName: "QuotaModelPage" */ "../pages/QuotaModelPage"));
+const UploadedPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ "../pages/UploadedPaymentReceiptPage"));
+const UploadPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ "../pages/UploadPaymentReceiptPage"));
+const ApplicationProgressPage = loadable(() => import(/* webpackChunkName: "ApplicationProgressPage" */ "../pages/ApplicationProgressPage"));
+const LoginPage = loadable(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
 //
 // // NOTE: Modal
 // const RepaymentModal = loadable(() => import('../modals/RepaymentModal'));

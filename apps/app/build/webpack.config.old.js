@@ -154,24 +154,24 @@ module.exports = (config, context) => {
     finalConfig.plugins.push(
       new BundleAnalyzerPlugin()
     )
-    finalConfig["optimization"] = {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-            format: {
-              comments: false,
-            },
-          },
-          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-          extractComments: false,
-
-        })
-      ],
-    }
+    // finalConfig["optimization"] = {
+    //   minimize: true,
+    //   minimizer: [
+    //     new TerserPlugin({
+    //       terserOptions: {
+    //         compress: {
+    //           drop_console: true,
+    //         },
+    //         format: {
+    //           comments: false,
+    //         },
+    //       },
+    //       // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+    //       extractComments: false,
+    //
+    //     })
+    //   ],
+    // }
   } else if(isProduction){
     // 只要加就會掛掉
     finalConfig.plugins.push(
