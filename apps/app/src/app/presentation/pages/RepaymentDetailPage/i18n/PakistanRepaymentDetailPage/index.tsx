@@ -18,7 +18,8 @@ const PakistanRepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()
     const location = useLocation();
     const { currentData } = props || {};
-    const { status='', productName = '', orderNo = '', dueDate = '',  overdueDays = '', paidAmount = '', repayRecords = [], totalRepayAmount = '', chargeFeeDetail = {} } = currentData ?? {};
+    const { status='', productName = '', orderNo = '', dueDate = '',  overdueDays = '', paidAmount = '', repayRecords = [],
+        totalRepayAmount = '', chargeFeeDetail = {}, extendDate = '', extensionFee = '', totalDueAmount = '' } = currentData ?? {};
     const { items = [] } = chargeFeeDetail ?? {};
 
     const getItems = (field: string) => {
@@ -51,6 +52,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-slate-400" />
                 <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-slate-400" />
                 <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
+                {status === 'EXTEND' && <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("MM-DD-YYYY") : ''} titleColor="text-slate-400" />}
                 {loanAmount &&  <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-slate-400" />}
                 <Divider />
                 {dailyFee && <ListItem title={'Daily Fee'} text={<Money money={dailyFee}/>} titleColor="text-slate-400" />}
@@ -59,6 +61,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 {loanInterest && <ListItem title={'Loan Interest'} text={<Money money={loanInterest}/>} titleColor="text-slate-400" />}
                 <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
                 <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+                {status === 'EXTEND' && <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-slate-400" />}
                 <Divider />
                 {reductionAmount && <ListItem title={'Reduction Amount'} text={<div className="flex"> - <Money money={reductionAmount}/></div>} titleColor="text-slate-400" />}
                 <ListItem
@@ -77,10 +80,21 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     text={<div className="flex"> - <Money money={paidAmount} /></div>} 
                 />
                 <Divider />
-                <ListItem title={'Repayment Amount'} text={<Money money={totalRepayAmount} />}
-                    titleColor={status === "OVERDUE" ? "text-red-500" : "text-slate-400"}
-                    fontWeight="font-bold"
-                />
+                {status !== 'EXTEND' &&
+                    (<ListItem
+                        title={'Repayment Amount'}
+                        text={<Money money={totalRepayAmount} />}
+                        titleColor={status === "OVERDUE" ? "text-red-500" : "text-black"}
+                        fontWeight="font-bold"
+                    />)}
+                {status === 'EXTEND' &&
+                    (<ListItem
+                        title={'Extension Payment'}
+                        text={<Money money={totalDueAmount} />}
+                        titleColor={"text-black"}
+                        fontWeight="font-bold"
+                    />)
+                }
                 <div className={`flex flex-row my-3`}>
 
                     <div onClick={() => {
