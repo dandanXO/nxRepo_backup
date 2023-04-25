@@ -1,7 +1,7 @@
 import cx from "classnames";
 import moment from "moment";
 import { GetCouponApplicableList } from "../../../api/userService/GetCouponApplicableListResponse";
-import {environment} from "../../../../environments/environment";
+import Money from "../Money.tsx";
 
 export type ICouponProps = GetCouponApplicableList & {
     layoutType?: number;
@@ -42,22 +42,22 @@ const Coupon = (props: ICouponProps) => {
         },
         2: {
             normal: {
-                font: `text-[#138641]`,
-                darkContent: 'border-[#138641] bg-[#B2E4C6]',
-                lightContent: 'border-[#138641] bg-[#F4FEF8]',
-                buttonBG: 'bg-[#138641]'
+                font: `text-primary-main`,
+                darkContent: 'border-primary-main bg-primary-main',
+                lightContent: 'border-primary-main bg-primary-assistant',
+                buttonBG: 'bg-primary-variant'
             },
             unUsable: {
-                font: `text-[#138641]`,
-                darkContent: 'border-[#138641] bg-[#B2E4C6]',
-                lightContent: 'border-[#138641] bg-[#F4FEF8]',
-                buttonBG: 'bg-[#138641]'
+                font: `text-primary-main`,
+                darkContent: 'border-primary-main bg-primary-main',
+                lightContent: 'border-primary-main bg-primary-assistant',
+                buttonBG: 'bg-primary-variant'
             },
             disabled: {
-                font: `text-[#C2C2C2]`,
-                darkContent: 'border-[#C2C2C2] bg-[#DFDFDF]',
-                lightContent: 'border-[#C2C2C2] bg-[#F9F9F9]',
-                buttonBG: 'bg-[#C2C2C2]'
+                font: `text-disabled-main`,
+                darkContent: 'border-disabled-main bg-[#DFDFDF]',
+                lightContent: 'border-disabled-main bg-[#F9F9F9]',
+                buttonBG: 'bg-disabled-main'
             },
         }
     }[layoutType]
@@ -82,8 +82,11 @@ const Coupon = (props: ICouponProps) => {
             'rounded-r-lg': layoutType === 2
         }, [typeStyle.darkContent])}
         >
-            <div className={`font-bold`}>{discountAmount} {environment.currency}</div>
-            <button onClick={props.onClick} disabled={status !== 'normal'}
+            <div className={cx(`font-bold`,{
+                "text-primary-variant": status !== 'disabled',
+                "text-disabled-main": status === 'disabled',
+            })}><Money money={discountAmount} /></div>
+            <button onClick={props.onClick} disabled={status !== 'normal'} //只有normal才能點擊
                 className={cx(`text-xs whitespace-nowrap px-2 py-1`, {
                     'rounded-md': layoutType === 2,
                     'text-white': layoutType === 2,
