@@ -32,53 +32,18 @@ const UploadedPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "U
 const UploadPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ "../pages/UploadPaymentReceiptPage"));
 const ApplicationProgressPage = loadable(() => import(/* webpackChunkName: "ApplicationProgressPage" */ "../pages/ApplicationProgressPage"));
 const LoginPage = loadable(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
-//
+
 // // NOTE: Modal
-// const RepaymentModal = loadable(() => import('../modals/RepaymentModal'));
-// const AmountRepaidModal = loadable(() => import("../modals/AmountRepaidModal/AmountRepaidModal"));
-// const ExtendConfirmModal = loadable(() => import("../modals/ExtendConfirmModal"));
-// const ExtendModal = loadable(() => import("../modals/ExtendModal/ExtendModal"));
+const RepaymentModal = loadable(() => import(/* webpackChunkName: "RepaymentModal" */ '../modals/RepaymentModal'));
+const AmountRepaidModal = loadable(() => import(/* webpackChunkName: "AmountRepaidModal" */ "../modals/AmountRepaidModal/AmountRepaidModal"));
+const ExtendConfirmModal = loadable(() => import(/* webpackChunkName: "ExtendConfirmModal" */ "../modals/ExtendConfirmModal"));
+const ExtendModal = loadable(() => import(/* webpackChunkName: "ExtendModal" */ "../modals/ExtendModal/ExtendModal"));
 // const CustomerServiceModal = loadable(() => import("../modals/CustomerServiceModal"));
-// const LogoutModal = loadable(() => import("../modals/LogoutModal"));
-// const APIBoundaryModal = loadable(() => import("../modals/APIBoundaryModal"));
-// const PrivacyPolicyModal = loadable(() => import("../modals/PrivacyPolicyModal"));
+const LogoutModal = loadable(() => import(/* webpackChunkName: "LogoutModal" */ "../modals/LogoutModal"));
+const APIBoundaryModal = loadable(() => import(/* webpackChunkName: "APIBoundaryModal" */ "../modals/APIBoundaryModal"));
+const PrivacyPolicyModal = loadable(() => import(/* webpackChunkName: "PrivacyPolicyModal" */ "../modals/PrivacyPolicyModal"));
 
-//
-// import {CategoryPage} from "../pages/__test__/CategoryPage";
-// import {ErrorPage} from "../pages/__test__/ErrorPage";
-//
-// import IndexPage from "../pages/IndexPage";
-// import BankCardListPage from '../pages/BankCardListPage'
-// import BindBankCardPage from '../pages/BindBankCardPage'
-// import CustomerServicePage from '../pages/CustomerServicePage';
-// import OnlineCustomerServicePage from "../pages/OnlineCustomerServicePage";
-//
-// import DisclosureStatementPage from '../pages/DisclosureStatementPage'
-// import ExtendDetailsPage from '../pages/ExtendDetailsPage'
-// import FinishedRepaymentPage from '../pages/FinishedRepaymentPage'
-// import RepaymentDetailPage from '../pages/RepaymentDetailPage'
-// import LoanRecordPage from '../pages/RepaymentPage'
-//
-// import MyCouponListPage from '../pages/MyCouponListPage'
-// import PartnerPage from '../pages/PartnerPage'
-// import PersonalInfoPage from '../pages/PersonalInfoPage'
-// import PrivacyPolicyPage from '../pages/PrivacyPolicyPage'
-//
-// import QuotaModelPage from '../pages/QuotaModelPage'
-// import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage'
-// import UploadPaymentReceiptPage from '../pages/UploadPaymentReceiptPage'
-// import ApplicationProgressPage from '../pages/ApplicationProgressPage'
-// import LoginPage from '../pages/LoginPage'
-// import AuthPage from "../pages/AuthPage";
 
-// NOTE: Modal
-import RepaymentModal from '../modals/RepaymentModal'
-import AmountRepaidModal from "../modals/AmountRepaidModal/AmountRepaidModal";
-import ExtendConfirmModal from "../modals/ExtendConfirmModal";
-import ExtendModal from "../modals/ExtendModal/ExtendModal";
-import LogoutModal from "../modals/LogoutModal";
-import APIBoundaryModal from "../modals/APIBoundaryModal";
-import PrivacyPolicyModal from "../modals/PrivacyPolicyModal";
 import RepamentCouponModal from "../modals/RepamentCouponModal";
 import IBANFinderModal from "../modals/IBANFinderModal";
 
