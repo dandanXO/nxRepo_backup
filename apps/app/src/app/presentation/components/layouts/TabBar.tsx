@@ -67,20 +67,6 @@ export const TabBar = (props: Props) => {
       </div>
 
 
-      <div className={"flex-1 flex flex-col justify-center items-center"}  onClick={() => {
-        if(theme === "base") {
-          setTheme("dark")
-        } else {
-          setTheme("base")
-        }
-      }}>
-        <MdAccountBox color={isInPage(PagePathEnum.PersonalInfoPage) ? "#F58B10" : "#D7D7D7"} size={20}/>
-        <div className={cx({
-          "text-orange-300": isInPage(PagePathEnum.PersonalInfoPage),
-          "text-gray-300": !isInPage(PagePathEnum.PersonalInfoPage),
-        })}>Change Theme</div>
-      </div>
-
     </div>
   )
 }
