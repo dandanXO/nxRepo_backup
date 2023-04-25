@@ -257,6 +257,20 @@ class PhoneUrgeList extends Component {
         let params = convertParams(this.initSearchParams);
         params = {...params, pageSize: pagination['pageSize'] || 10, pageNum: pagination['current'] || 1};
         getTableData(params);
+
+        const _this = this;
+        loadExportProhibitedFlag();
+        function loadExportProhibitedFlag() {
+        axios({
+          url: '/hs/admin/orderToday/download-is-prohibited',
+          method: 'get',
+        }).then((res) => {
+          _this.setState({
+            btnDisabled: res,
+          });
+        });
+      }
+
     }
 
     render() {
