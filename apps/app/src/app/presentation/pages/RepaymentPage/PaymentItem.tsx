@@ -8,7 +8,9 @@ import { useNavigate } from "react-router";
 import { getToken } from "../../../modules/location/getToken";
 import {GetLoanRecord} from "../../../api/loanService/GetLoanRecord";
 import {PagePathEnum} from "../PagePathEnum";
-import { RiArrowUpSLine, RiArrowDownSLine } from "react-icons/all";
+import {RiArrowUpSLine} from "@react-icons/all-files/ri/RiArrowUpSLine";
+import {RiArrowDownSLine} from "@react-icons/all-files/ri/RiArrowDownSLine";
+
 const PaymentItem = (props: GetLoanRecord) => {
 
     const navigate = useNavigate();

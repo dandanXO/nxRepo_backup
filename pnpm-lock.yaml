@@ -25,6 +25,7 @@ specifiers:
   '@nrwl/webpack': 15.9.2
   '@nrwl/workspace': 15.9.2
   '@pmmmwh/react-refresh-webpack-plugin': ^0.5.7
+  '@react-icons/all-files': ^4.1.0
   '@reduxjs/toolkit': 1.9.0
   '@sentry/react': ^7.28.0
   '@sentry/tracing': ^7.28.0
@@ -136,6 +137,7 @@ specifiers:
   use-error-boundary: ^2.0.6
   uuid: 8.3.2
   webpack: ^5.75.0
+  webpack-bundle-analyzer: ^4.8.0
   webpack-merge: 5.8.0
   xstate: ^4.37.0
   zod: 3.18.0
@@ -147,6 +149,7 @@ dependencies:
   '@canyuegongzi/t-cli': 1.2.18
   '@lagunovsky/redux-react-router': 4.3.0_p7dgmr6jmxexkkqdh5odlwkdqa
   '@loadable/component': 5.15.3_react@18.2.0
+  '@react-icons/all-files': 4.1.0_react@18.2.0
   '@reduxjs/toolkit': 1.9.0_k4ae6lp43ej6mezo3ztvx6pykq
   '@sentry/react': 7.28.0_react@18.2.0
   '@sentry/tracing': 7.28.0
@@ -280,6 +283,7 @@ devDependencies:
   typescript: 4.9.5
   url-loader: 4.1.1_webpack@5.79.0
   webpack: 5.79.0
+  webpack-bundle-analyzer: 4.8.0
   webpack-merge: 5.8.0
 
 packages:
@@ -4851,8 +4855,20 @@ packages:
       webpack: 5.79.0
     dev: true
 
+  /@polka/url/1.0.0-next.21:
+    resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
+    dev: true
+
   /@qixian.cs/path-to-regexp/6.1.0:
     resolution: {integrity: sha512-2jIiLiVZB1jnY7IIRQKtoV8Gnr7XIhk4mC88ONGunZE3hYt5IHUG4BE/6+JiTBjjEWQLBeWnZB8hGpppkufiVw==}
+    dev: false
+
+  /@react-icons/all-files/4.1.0_react@18.2.0:
+    resolution: {integrity: sha512-hxBI2UOuVaI3O/BhQfhtb4kcGn9ft12RWAFVMUeNjqqhLsHvFtzIkFaptBJpFDANTKoDfdVoHTKZDlwKCACbMQ==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@redux-saga/core/1.2.2:
@@ -7546,12 +7562,12 @@ packages:
       acorn: 7.4.1
     dev: true
 
-  /acorn-jsx/5.3.2_acorn@8.8.0:
+  /acorn-jsx/5.3.2_acorn@8.8.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      acorn: 8.8.0
+      acorn: 8.8.2
     dev: true
 
   /acorn-node/1.8.2:
@@ -11362,8 +11378,8 @@ packages:
     resolution: {integrity: sha512-DQmnRpLj7f6TgN/NYb0MTzJXL+vJF9h3pHy4JhCIs3zwcgez8xmGg3sXHcEO97BrmO2OSvCwMdfdlyl+E9KjOw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
-      acorn: 8.8.0
-      acorn-jsx: 5.3.2_acorn@8.8.0
+      acorn: 8.8.2
+      acorn-jsx: 5.3.2_acorn@8.8.2
       eslint-visitor-keys: 3.3.0
     dev: true
 
@@ -12212,7 +12228,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
@@ -12629,6 +12645,13 @@ packages:
     resolution: {integrity: sha512-qBr4OuELkhPenW6goKVXiv47US3clb3/IbuWF9KNKEijAy9oeHxU9IgzjvJhHkUzhaj7rOUD7+YGWqUjLp5oSA==}
     engines: {node: '>=4.x'}
     dev: false
+
+  /gzip-size/6.0.0:
+    resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
+    engines: {node: '>=10'}
+    dependencies:
+      duplexer: 0.1.2
+    dev: true
 
   /handle-thing/2.0.1:
     resolution: {integrity: sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==}
@@ -15823,6 +15846,11 @@ packages:
       mkdirp: 0.5.6
       rimraf: 2.7.1
       run-queue: 1.0.3
+    dev: true
+
+  /mrmime/1.0.1:
+    resolution: {integrity: sha512-hzzEagAgDyoU1Q6yg5uI+AorQgdvMCur3FcKf7NhMKWsaYg+RnbTyHRa/9IlLF9rf455MOCtcqqrQQ83pPP7Uw==}
+    engines: {node: '>=10'}
     dev: true
 
   /ms/2.0.0:
@@ -19412,6 +19440,15 @@ packages:
       is-arrayish: 0.3.2
     dev: false
 
+  /sirv/1.0.19:
+    resolution: {integrity: sha512-JuLThK3TnZG1TAKDwNIqNq6QA2afLOCcm+iE8D1Kj3GA40pSPsxQjjJl0J8X3tsR7T+CP1GavpzLwYkgVLWrZQ==}
+    engines: {node: '>= 10'}
+    dependencies:
+      '@polka/url': 1.0.0-next.21
+      mrmime: 1.0.1
+      totalist: 1.1.0
+    dev: true
+
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
     dev: true
@@ -20396,7 +20433,7 @@ packages:
     hasBin: true
     dependencies:
       '@jridgewell/source-map': 0.3.2
-      acorn: 8.8.0
+      acorn: 8.8.2
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -20553,6 +20590,11 @@ packages:
   /toidentifier/1.0.1:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
+    dev: true
+
+  /totalist/1.1.0:
+    resolution: {integrity: sha512-gduQwd1rOdDMGxFG1gEvhV88Oirdo2p+KjoYFU7k2g+i7n6AFFbDQ5kMPUsW0pNbfQsB/cwXvT1i4Bue0s9g5g==}
+    engines: {node: '>=6'}
     dev: true
 
   /tough-cookie/2.5.0:
@@ -21474,6 +21516,26 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
+  /webpack-bundle-analyzer/4.8.0:
+    resolution: {integrity: sha512-ZzoSBePshOKhr+hd8u6oCkZVwpVaXgpw23ScGLFpR6SjYI7+7iIWYarjN6OEYOfRt8o7ZyZZQk0DuMizJ+LEIg==}
+    engines: {node: '>= 10.13.0'}
+    hasBin: true
+    dependencies:
+      '@discoveryjs/json-ext': 0.5.7
+      acorn: 8.8.2
+      acorn-walk: 8.2.0
+      chalk: 4.1.2
+      commander: 7.2.0
+      gzip-size: 6.0.0
+      lodash: 4.17.21
+      opener: 1.5.2
+      sirv: 1.0.19
+      ws: 7.5.9
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: true
+
   /webpack-dev-middleware/3.7.3_webpack@4.46.0:
     resolution: {integrity: sha512-djelc/zGiz9nZj/U7PTBi2ViorGJXEWo/3ltkPbDyxCXhhEXkW0ce99falaok4TPj+AsxLiXJR0EBOb0zh9fKQ==}
     engines: {node: '>= 6'}
@@ -21896,6 +21958,19 @@ packages:
     dependencies:
       imurmurhash: 0.1.4
       signal-exit: 3.0.7
+    dev: true
+
+  /ws/7.5.9:
+    resolution: {integrity: sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==}
+    engines: {node: '>=8.3.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
     dev: true
 
   /ws/8.13.0:

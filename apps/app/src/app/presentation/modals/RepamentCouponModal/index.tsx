@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from "react-router";
 import { Overlay } from "@frontend/mobile/shared/ui";
-import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/all";
+import {MdRadioButtonChecked} from "@react-icons/all-files/md/MdRadioButtonChecked";
+import {MdRadioButtonUnchecked} from "@react-icons/all-files/md/MdRadioButtonUnchecked";
 import Coupon from "../../components/Coupon";
 import { useEffect, useState } from "react";
 import { ICouponProps } from '../../components/Coupon';

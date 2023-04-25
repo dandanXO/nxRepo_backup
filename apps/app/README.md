@@ -24,6 +24,11 @@
       * 發生錯誤時，請與後端確認 swagger model 不能為中文名字，否則工具無法產生對應 ts file
   * Pages/Modals
     * 切換 page, modal 使用 saga 控制，來控制整個流程
+  * react-icons
+    * [React Icons Imports everything even when included 2 or 3 icons #154](https://github.com/react-icons/react-icons/issues/154#issuecomment-895976123)
+    * [Doesn't tree shake when bundled with Webpack and Create React App #574](https://github.com/react-icons/react-icons/issues/574)
+    * [release @react-icons/all-files #593
+      ](https://github.com/react-icons/react-icons/issues/593)
 * react-router
   * 得使用 react-router 的 useNavigate 做跳轉以及 useLocation
     * 因使用 redux-react-router ，所以不能 import react-router-dom 的 useNavigate 

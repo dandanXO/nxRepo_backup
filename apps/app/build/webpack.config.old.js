@@ -15,6 +15,7 @@ const { merge } = require('webpack-merge');
 const isProduction = process.env.NODE_ENV == 'production';
 console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
 console.log("process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
+console.log("process.env.NOTE_ANALYZER:", process.env.NOTE_ANALYZER);
 console.log("isProduction: ", isProduction);
 
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
@@ -42,6 +43,9 @@ if(process.env.NODE_COUNTRY === "in") {
 } else if(process.env.NODE_COUNTRY === "bd") {
   proxyURL = "https://app.bd-api-dev.com";
 }
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
@@ -145,7 +149,30 @@ module.exports = (config, context) => {
       // }),
     ],
   });
-  if (isProduction) {
+
+  if(process.env.NOTE_ANALYZER && !isProduction) {
+    finalConfig.plugins.push(
+      new BundleAnalyzerPlugin()
+    )
+    finalConfig["optimization"] = {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+            format: {
+              comments: false,
+            },
+          },
+          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+          extractComments: false,
+
+        })
+      ],
+    }
+  } else if(isProduction){
     // 只要加就會掛掉
     finalConfig.plugins.push(
       new HtmlWebpackPlugin({

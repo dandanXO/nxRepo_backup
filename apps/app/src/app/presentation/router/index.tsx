@@ -6,30 +6,32 @@ import {Route, Routes, useLocation,} from "react-router";
 import loadable from '@loadable/component'
 
 // NOTE: Page
-// import {CategoryPage} from "../pages/__test__/CategoryPage";
-// import {ErrorPage} from "../pages/__test__/ErrorPage";
-//
-// // const IndexPage = loadable(() => import("../pages/IndexPage"));
-// import IndexPage from "../pages/IndexPage";
-// const AuthPage = loadable(() => import("../pages/AuthPage"));
-// const BankCardListPage = loadable(() => import("../pages/BankCardListPage"));
-// const BindBankCardPage = loadable(() => import("../pages/BindBankCardPage"));
-// const CustomerServicePage = loadable(() => import("../pages/CustomerServicePage"));
-// const DisclosureStatementPage = loadable(() => import("../pages/DisclosureStatementPage"));
-// const ExtendDetailsPage = loadable(() => import("../pages/ExtendDetailsPage"));
-// const FinishedRepaymentPage = loadable(() => import("../pages/FinishedRepaymentPage"));
-// const RepaymentDetailPage = loadable(() => import("../pages/RepaymentDetailPage"));
-// const LoanRecordPage = loadable(() => import("../pages/RepaymentPage"));
-// const MyCouponListPage = loadable(() => import("../pages/MyCouponListPage"));
+import {CategoryPage} from "../pages/__test__/CategoryPage";
+import {ErrorPage} from "../pages/__test__/ErrorPage";
+
+// const IndexPage = loadable(() => import("../pages/IndexPage"));
+import IndexPage from "../pages/IndexPage";
+const AuthPage = loadable(() => import("../pages/AuthPage"));
+const BankCardListPage = loadable(() => import("../pages/BankCardListPage"));
+const BindBankCardPage = loadable(() => import("../pages/BindBankCardPage"));
+const CustomerServicePage = loadable(() => import("../pages/CustomerServicePage"));
+const DisclosureStatementPage = loadable(() => import("../pages/DisclosureStatementPage"));
+const ExtendDetailsPage = loadable(() => import("../pages/ExtendDetailsPage"));
+const FinishedRepaymentPage = loadable(() => import("../pages/FinishedRepaymentPage"));
+const RepaymentDetailPage = loadable(() => import("../pages/RepaymentDetailPage"));
+const LoanRecordPage = loadable(() => import("../pages/RepaymentPage"));
+const MyCouponListPage = loadable(() => import("../pages/MyCouponListPage"));
 // const MyCouponPage = loadable(() => import("../pages/MyCouponPage"));
-// const PartnerPage = loadable(() => import("../pages/PartnerPage"));
-// const PersonalInfoPage = loadable(() => import("../pages/PersonalInfoPage"));
-// const PrivacyPolicyPage = loadable(() => import("../pages/PrivacyPolicyPage"));
-// const QuotaModelPage = loadable(() => import("../pages/QuotaModelPage"));
-// const UploadedPaymentReceiptPage = loadable(() => import("../pages/UploadedPaymentReceiptPage"));
-// const UploadPaymentReceiptPage = loadable(() => import("../pages/UploadPaymentReceiptPage"));
-// const ApplicationProgressPage = loadable(() => import("../pages/ApplicationProgressPage"));
-// const LoginPage = loadable(() => import('../pages/LoginPage'));
+const OnlineCustomerServicePage = loadable(() => import("../pages/OnlineCustomerServicePage"));
+
+const PartnerPage = loadable(() => import("../pages/PartnerPage"));
+const PersonalInfoPage = loadable(() => import("../pages/PersonalInfoPage"));
+const PrivacyPolicyPage = loadable(() => import("../pages/PrivacyPolicyPage"));
+const QuotaModelPage = loadable(() => import("../pages/QuotaModelPage"));
+const UploadedPaymentReceiptPage = loadable(() => import("../pages/UploadedPaymentReceiptPage"));
+const UploadPaymentReceiptPage = loadable(() => import("../pages/UploadPaymentReceiptPage"));
+const ApplicationProgressPage = loadable(() => import("../pages/ApplicationProgressPage"));
+const LoginPage = loadable(() => import('../pages/LoginPage'));
 //
 // // NOTE: Modal
 // const RepaymentModal = loadable(() => import('../modals/RepaymentModal'));
@@ -41,33 +43,33 @@ import loadable from '@loadable/component'
 // const APIBoundaryModal = loadable(() => import("../modals/APIBoundaryModal"));
 // const PrivacyPolicyModal = loadable(() => import("../modals/PrivacyPolicyModal"));
 
-
-import {CategoryPage} from "../pages/__test__/CategoryPage";
-import {ErrorPage} from "../pages/__test__/ErrorPage";
-
-import IndexPage from "../pages/IndexPage";
-import BankCardListPage from '../pages/BankCardListPage'
-import BindBankCardPage from '../pages/BindBankCardPage'
-import CustomerServicePage from '../pages/CustomerServicePage';
-import OnlineCustomerServicePage from "../pages/OnlineCustomerServicePage";
-
-import DisclosureStatementPage from '../pages/DisclosureStatementPage'
-import ExtendDetailsPage from '../pages/ExtendDetailsPage'
-import FinishedRepaymentPage from '../pages/FinishedRepaymentPage'
-import RepaymentDetailPage from '../pages/RepaymentDetailPage'
-import LoanRecordPage from '../pages/RepaymentPage'
-
-import MyCouponListPage from '../pages/MyCouponListPage'
-import PartnerPage from '../pages/PartnerPage'
-import PersonalInfoPage from '../pages/PersonalInfoPage'
-import PrivacyPolicyPage from '../pages/PrivacyPolicyPage'
-
-import QuotaModelPage from '../pages/QuotaModelPage'
-import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage'
-import UploadPaymentReceiptPage from '../pages/UploadPaymentReceiptPage'
-import ApplicationProgressPage from '../pages/ApplicationProgressPage'
-import LoginPage from '../pages/LoginPage'
-import AuthPage from "../pages/AuthPage";
+//
+// import {CategoryPage} from "../pages/__test__/CategoryPage";
+// import {ErrorPage} from "../pages/__test__/ErrorPage";
+//
+// import IndexPage from "../pages/IndexPage";
+// import BankCardListPage from '../pages/BankCardListPage'
+// import BindBankCardPage from '../pages/BindBankCardPage'
+// import CustomerServicePage from '../pages/CustomerServicePage';
+// import OnlineCustomerServicePage from "../pages/OnlineCustomerServicePage";
+//
+// import DisclosureStatementPage from '../pages/DisclosureStatementPage'
+// import ExtendDetailsPage from '../pages/ExtendDetailsPage'
+// import FinishedRepaymentPage from '../pages/FinishedRepaymentPage'
+// import RepaymentDetailPage from '../pages/RepaymentDetailPage'
+// import LoanRecordPage from '../pages/RepaymentPage'
+//
+// import MyCouponListPage from '../pages/MyCouponListPage'
+// import PartnerPage from '../pages/PartnerPage'
+// import PersonalInfoPage from '../pages/PersonalInfoPage'
+// import PrivacyPolicyPage from '../pages/PrivacyPolicyPage'
+//
+// import QuotaModelPage from '../pages/QuotaModelPage'
+// import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage'
+// import UploadPaymentReceiptPage from '../pages/UploadPaymentReceiptPage'
+// import ApplicationProgressPage from '../pages/ApplicationProgressPage'
+// import LoginPage from '../pages/LoginPage'
+// import AuthPage from "../pages/AuthPage";
 
 // NOTE: Modal
 import RepaymentModal from '../modals/RepaymentModal'

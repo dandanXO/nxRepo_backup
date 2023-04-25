@@ -1,4 +1,6 @@
-import {MdOutlineAccountCircle, MdPayment, RiMoneyDollarCircleFill} from "react-icons/all";
+import {MdPayment} from "@react-icons/all-files/md/MdPayment";
+import {MdAccountBox} from "@react-icons/all-files/md/MdAccountBox";
+import {RiMoneyDollarCircleFill} from "@react-icons/all-files/ri/RiMoneyDollarCircleFill";
 import {useLocation, useNavigate} from "react-router";
 
 import cx from "classnames";
@@ -46,7 +48,7 @@ export const TabBar = (props: Props) => {
       <div className={"flex-1 flex flex-col justify-center items-center"}  onClick={() => {
         navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`)
       }}>
-        <MdOutlineAccountCircle color={isInPage(PagePathEnum.PersonalInfoPage) ? "#F58B10" : "#D7D7D7"} size={20}/>
+        <MdAccountBox color={isInPage(PagePathEnum.PersonalInfoPage) ? "#F58B10" : "#D7D7D7"} size={20}/>
         <div className={cx({
           "text-orange-300": isInPage(PagePathEnum.PersonalInfoPage),
           "text-gray-300": !isInPage(PagePathEnum.PersonalInfoPage),

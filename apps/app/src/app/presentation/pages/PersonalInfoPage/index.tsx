@@ -4,7 +4,8 @@ import UserIcon from '../../components/images/UserIcon.svg';
 import {useDispatch, useSelector} from "react-redux";
 import cx from "classnames";
 import Button from "../../components/Button";
-import {FiChevronRight} from "react-icons/all";
+import {FiChevronRight} from "@react-icons/all-files/fi/FiChevronRight";
+
 import Card from "./Card";
 import LinkItem from "./LinkItem";
 import {getToken} from "../../../modules/location/getToken";
