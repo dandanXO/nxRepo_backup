@@ -7,6 +7,7 @@ import {i18nBankBindAccountPage} from "../../translations";
 import {Button, Input} from "@frontend/mobile/shared/ui";
 import {IPakistanBankAccountForm} from "../../types/IBankAccountForm";
 import Select from 'react-select';
+import { useNavigate } from "react-router";
 
 const Warning = styled.div`
   margin: 0 auto;
@@ -33,6 +34,7 @@ const CustomForm = styled.div`
 `
 export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
 
+  const navigate = useNavigate();
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
   const options = props.bankDropList?.map((item: string, index: number) => {
@@ -60,7 +62,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         />
         <Label>{t('Your IBAN Number (24 digits)')}</Label>
         <Input
-          className="mb"
+        //   className="mb"
           labelType={'none'}
           placeholder={'Ex. PK36FTBK0000111123456702'}
           value={props.iBanData.data}
@@ -68,7 +70,11 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           onBlur={props.onIbanBlur}
           errorMessage={props.iBanData.errorMessage}
         />
-
+        <div className="text-sm text-blue-500 underline leading-none whitespace-nowrap mb"
+             onClick={()=>navigate('iban-finder-modal',{state:'Bank'})}
+        >
+            {t('Click me to learn where can I find my IBAN number?')}
+        </div>
         <Label>{t('Please select your bank name')}</Label>
         <Select
           className="react-select-container mb"

@@ -5,6 +5,7 @@ import {Label} from "../../../components/Label";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 const WalletDiscountHint = styled.div`
   line-height: 23px;
@@ -34,6 +35,7 @@ type IMobileWalletForm = {
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
+  const navigate = useNavigate();
   return (
     <Form>
       <Label>{t("Please select the of your mobile wallet")}</Label>
@@ -48,10 +50,9 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         }}
       />
       {/*<WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>*/}
-      <Label>{t("Select a mobile wallet")}</Label>
       <Label>{t('Your IBAN Number (24 digits)')}</Label>
       <Input
-        className="mb"
+        // className="mb"
         labelType={'none'}
         placeholder={'Ex. PK36FTBK0000111123456702'}
         value={props.iBanData.data}
@@ -59,6 +60,11 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         onBlur={props.onIbanBlur}
         errorMessage={props.iBanData.errorMessage}
       />
+      <div className="text-sm text-blue-500 underline leading-none whitespace-nowrap mb"
+           onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}
+      >
+          {t('Click me to learn where can I find my IBAN number?')}
+      </div>
 
       <Input
         className="mb"
