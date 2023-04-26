@@ -36,11 +36,13 @@ export const runAxios = async (
     };
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // console.log("error", error)
-      alertModal((error.response as any).data?.message);
+       console.log("isAxiosError.error", error)
+      if((error.response as any).data?.code !== 404){
+        alertModal((error.response as any).data?.message);
+      }
       return {
         success: false,
-        data: (error.response as any).data,
+        data: (error.response as any).data?.data,
       }
     } else {
       // console.log(error);

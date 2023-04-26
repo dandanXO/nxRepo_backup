@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AdSVG from "../../repayment_banner.svg";
 import { useLocation, useNavigate } from "react-router";
-import { Horizontal, Input, ListItem, Overlay, Radio, } from "@frontend/mobile/shared/ui";
+import { Horizontal, Input, Overlay, Radio, } from "@frontend/mobile/shared/ui";
 import Select,{ StylesConfig } from 'react-select';
 import { withTranslation } from "react-i18next";
 import { i18nRepaymentModal } from "../translations";
@@ -13,6 +13,10 @@ import { IRepaymentModalProps } from "../../index";
 import { RiArrowRightSLine } from "@react-icons/all-files/ri/RiArrowRightSLine";
 import { getToken } from "apps/app/src/app/modules/location/getToken";
 import { PagePathEnum } from "../../../../pages/PagePathEnum";
+import cx from 'classnames';
+import moment from "moment";
+import ListItem from "../../../../components/ListItem";
+import Money from "../../../../components/Money.tsx";
 
 
 type paymentMethodValueType = {
@@ -24,6 +28,8 @@ type paymentMethodValueType = {
 const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
     const { radioValue, setRadioValue, balance, balanceValue, setBalanceValue, repayTypesList, isRepayTypesFetching, repayType, setRepayType, handleConfirm,orderNo } = props
     const navigate = useNavigate();
+    const location = useLocation();
+    const {coupon}=location.state;
     const selectStyles: StylesConfig = {
         control: (styles) => ({
             ...styles, 
@@ -43,6 +49,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             }
         }
     }
+
     return (
         <div className="text-left px-4">
             <div className="whitespace-nowrap mt-3 ml-[-2px]">
@@ -95,22 +102,41 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 <>
                     <div className="text-black mt-1">{props.t("Coupon (PKR)") as string}</div>
                     <div className="flex border-solid border-b border-[#aaaaaa] justify-center items-center pl-5 pr-4 py-1.5"
-                        onClick={() =>
-                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal??token=${getToken()}`,
-                                { state: { orderNo } })
-                        }
+                        onClick={() => {
+                            if (isRepayTypesFetching) return;
+                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`,
+                                { state: { ...location.state, paymentAmount: balance, paymentMethod: repayType.type, } })
+                        }}
                     >
-                        <div className="grow text-base ">Select</div>
+                    <div className={cx('grow text-base flex-nowrap flex justify-between', {
+                        'text-primary-main': coupon !== undefined && coupon !== null
+                    })}>
+                        {coupon ? (
+                            <div className="flex justify-between grow">
+                                <div className="self-center">- {coupon.discountAmount}</div>
+                                <div className="flex flex-col text-xs text-gray-400">
+                                    <div>expiration date</div>
+                                    <div className="">{coupon.expireTime ? moment(coupon.expireTime).format("MM-DD-YYYY") : ''}</div>
+                                </div>
+                            </div>) : (<div>Select</div>)
+
+                        }
                         <RiArrowRightSLine className="text-2xl fill-[#CCCCCC]" />
                     </div>
+                    </div>
+                    <div className="mt-3 font-bold">
+                    <ListItem title={'Repayment Amount'} text={<Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />} />
+                    </div>
+                    
                 </>
             }
+         
 
             <div className={`flex flex-row my-3`}>
                 <div className={`mr-1.5 w-full`}>
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
-                        navigate(-1);
+                        navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
                     }} text={props.t("Cancel")} className={`bg-primary-variant w-full`} />
                 </div>
                 <div className={` ml-1.5 w-full`}>

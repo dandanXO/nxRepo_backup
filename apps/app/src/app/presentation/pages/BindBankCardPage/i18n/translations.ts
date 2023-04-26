@@ -37,6 +37,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       "Your IBAN Number (24 digits)": "Your IBAN Number (24 digits)",
       "This field cannot be left blank.": "This field cannot be left blank.",
       "IBAN number must be 24 digits only.": "IBAN number must be 24 digits only.",
+      "Click me to learn where can I find my IBAN number?": "Click me to learn where can I find my IBAN number?",
 
 
       // NOTICE: Bangladesh

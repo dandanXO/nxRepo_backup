@@ -132,36 +132,6 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             onIbanBlur={onIbanBlur}
           />
         )}
-         {/* {chooseBindMethodValue === 1 ? (
-
-          <BankAccountForm
-            isFormPending={isFormPending || false}
-            cardholderName={props.cardholderName}
-            bankcardNoData={bankcardNoData}
-            onAccountNumberChange={onAccountNumberChange}
-            onAccountNumberBlur={onAccountNumberBlur}
-            confirmedBankcardNoData={confirmedBankcardNoData}
-            onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-            onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
-            bankDropList={bankDropList}
-            bankAccountValue={bankAccountValue}
-            bindCardDropListData={props.bindCardDropListData}
-            onIFSCDropSelect={onIFSCDropSelect}
-            confirm={() => { validateCommonForm() && confirm() }}
-          />
-        ):(<MobileWalletForm
-        walletDropList={walletDropList}
-        walletValue={walletValue}
-        setWalletValue={setWalletValue}
-        mobileData={mobileData}
-        onMobileDataChange={onMobileDataChange}
-        validateMobileWalletAccount={validateMobileWalletAccount}
-        isFormPending={isFormPending || false}
-        confirm={() => {
-          confirmMobileWallet();
-        }}
-      />
-      )} */}
     </CustomPage>
   );
 }
