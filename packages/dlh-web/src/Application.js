@@ -22,7 +22,7 @@ export const Application = {
 
 
 export const SentryModule = {
-  enable: false,
+  enable: true,
   isMonitoring: false,
   getReplayConfig: function () {
     return {
@@ -34,8 +34,8 @@ export const SentryModule = {
   init: function () {
     if(Application.isLocalhost()) {
       const envName = Application.getEnvironmentName();
-      console.log("[api-dlh-web][sentry] environment", envName);
-      console.log("[api-dlh-web][sentry] isLocalhost", Application.isLocalhost());
+      // console.log("[api-dlh-web][sentry] environment", envName);
+      // console.log("[api-dlh-web][sentry] isLocalhost", Application.isLocalhost());
 
       const sentryConfig = {
         dsn: "https://c10ab5774259474a9832879e2c3bfeae@web.sijneokd.com/2",
@@ -54,24 +54,27 @@ export const SentryModule = {
       }
       if(this.enable) {
         Sentry.init(sentryConfig);
-        this.startToMonitorClipboard();
+        // this.startToMonitorClipboard();
         this.startToMonitorContextmenu();
       }
       // NOTICE: Tag: can search these
       // Tag values have a maximum length of 200 characters and they cannot contain the newline (\n) character.
       // NOTICE: Context: cannot search these
 
+
+
     }
 
   },
   userLogin: function () {
+    if(!Cookies.get("loginInfo") || !Cookies.get("adminUser")) {
+      return;
+    }
+
     this.startToMonitorUser();
 
     const login = JSON.parse(Cookies.get("loginInfo")).data;
     const getInfo = JSON.parse(Cookies.get("adminUser")).data;
-    if(!login || !getInfo) {
-      return;
-    }
 
     const userInfo = {
       // NOTE: 使用地區、工作站(真假)
@@ -111,16 +114,7 @@ export const SentryModule = {
   userLogout: function () {
     Sentry.setUser(null);
   },
-  collectCopy: function (eventTitle) {
-    this.getSelection(eventTitle);
-  },
-  getSelection: function (eventTitle) {
-    const selection = window.getSelection().toString();
-    console.log("eventTitle", eventTitle);
-    console.log("selection", selection);
-
-    this.sendMessage(eventTitle, selection);
-
+  screenshot: function (eventTitle) {
     // html2canvas(document.getElementById('capture')).then(function(canvas) {
     //   const screenShotData = canvas.toDataURL("image/png", 0.5).replace("image/png", "image/octet-stream");
     //   scope.addAttachment({
@@ -137,46 +131,61 @@ export const SentryModule = {
     //   filename: `Copy-${Application.getEnvironmentName()}-Keyboard-${login.phoneNo}-${new Date().toISOString()}.png`,
     //   })
     // });
-
   },
-  sendMessage: async function (eventTitle, selection) {
+  getCommonTagsInfo: async function () {
+    const login = JSON.parse(Cookies.get("loginInfo")).data;
+    // const detectIncognitoResult = await detectIncognito();
+    return {
+      "user.phoneNo": login.phoneNo,
+    }
+  },
+  // NOTICE: 傳送訊息
+  sendMessage: async function (eventTitle, selectionContent) {
+    const that = this;
+    const copyContent = selectionContent.replace(/\n/g, " ");
+
     const detectIncognitoResult = await detectIncognito();
     // console.log("detectIncognitoResult.browserName", detectIncognitoResult.browserName);
-    console.log("detectIncognitoResult.isPrivate", detectIncognitoResult.isPrivate);
+    // console.log("detectIncognitoResult.isPrivate", detectIncognitoResult.isPrivate);
 
     Sentry.configureScope((scope) => {
 
       const login = JSON.parse(Cookies.get("loginInfo")).data;
       const getInfo = JSON.parse(Cookies.get("adminUser")).data;
 
-      const copyString = selection.replace(/\n/g, " ");
-
       // NOTE: copy content
-      if(copyString.length > 200) {
-        const copyStringFilePath = `Copy-${Application.getEnvironmentName()}-Keyboard-${login.phoneNo}-${new Date().toISOString()}.txt`;
+      if(selectionContent.length > 200) {
+
+        // NOTE: attachment
+        // const copyStringFilePath = `Copy-${Application.getEnvironmentName()}-Keyboard-${login.phoneNo}-${new Date().toISOString()}.txt`;
+        const copyStringFilePath = `Copy-Keyboard-${Application.getEnvironmentName()}-${login.phoneNo}-${new Date().toISOString()}.txt`;
+
         scope.addAttachment({
-          data: copyString,
+          data: copyContent,
           // attachmentType: "image/octet-stream",
           // contentType: "image/png",
           // contentType: "",
           filename: copyStringFilePath,
         })
+
+        // NOTE: message
         Sentry.captureMessage(eventTitle, {
           tags: {
             action: "keyboard-copy",
-            "user.phoneNo": login.phoneNo,
-            copyContent: copyStringFilePath,
+            ...that.getCommonTagsInfo(),
             privateMode: detectIncognitoResult.isPrivate,
+            copyContent: copyStringFilePath,
           },
           level: "info",
         })
       } else {
+        // NOTE: message
         Sentry.captureMessage(eventTitle, {
           tags: {
             action: "keyboard-copy",
-            "user.phoneNo": login.phoneNo,
-            copyContent: copyString,
+            ...that.getCommonTagsInfo(),
             privateMode: detectIncognitoResult.isPrivate,
+            copyContent: copyContent,
           },
           level: "info",
         })
@@ -184,42 +193,73 @@ export const SentryModule = {
       scope.clearAttachments();
     })
   },
+
+  // NOTICE: 取得選擇的文字，並傳送
+  collectCopy: async function (eventTitle) {
+    // NOTICE: screenshot
+    this.screenshot();
+
+    // NOTICE: selection
+    const selectionContent = window.getSelection().toString();
+    // console.log("eventTitle", eventTitle);
+    // console.log("selectionContent", selectionContent);
+
+    await this.sendMessage(eventTitle, selectionContent);
+  },
+
+  // NOTICE: 使用者選擇文字後，進行鍵盤複製
   startToMonitorUser: function () {
     const windowsKeys = ['ctrl+c', 'ctrl+v', 'ctrl+x'];
     const macKeys = ['command+c', 'command+v', 'command+x'];
+
     const bindUserClipboard = {
       "windows": windowsKeys.join(","),
       "mac": macKeys.join(","),
     }
-    const userActions = {
-      "copy": `Copy-${Application.getEnvironmentName()}-Keyboard`,
-      "pasta": `Pasta-${Application.getEnvironmentName()}-Keyboard`,
-      "cut": `Cut-${Application.getEnvironmentName()}-Keyboard`,
-    }
 
-    const login = JSON.parse(Cookies.get("loginInfo")).data;
-    const getInfo = JSON.parse(Cookies.get("adminUser")).data;
+    // const userActions = {
+    //   "copy": `Copy-Keyboard-${Application.getEnvironmentName()}`,
+    //   "pasta": `Pasta-Keyboard-${Application.getEnvironmentName()}`,
+    //   "cut": `Cut-Keyboard-${Application.getEnvironmentName()}`,
+    // }
+    const userActions = {
+      "copy": `Copy-Keyboard`,
+      "pasta": `Pasta-Keyboard`,
+      "cut": `Cut-Keyboard`,
+    }
 
     if(!this.isMonitoring) {
       this.isMonitoring = true;
-      hotkeys("*", function (event, handler){
-        console.log("handler", handler);
-      });
+
+      // hotkeys("*", function (event, handler){
+      //   console.log("handler", handler);
+      // });
 
       const that = this;
+
       hotkeys(bindUserClipboard.windows, function (event, handler){
         // console.log("handler.key", handler.key);
         switch (handler.key) {
           case windowsKeys[0]:
-            that.screenshot();
-            Sentry.captureMessage(userActions.copy, {
-              tags: {
-                action: "keyboard-copy",
-              },
-              level: "info",
-            })
+          {
+            // NOTICE: 先傳送選擇到的文字的事件
+            that.collectCopy(userActions.copy).then(() => {
+
+              // NOTICE: 再傳送鍵盤複製的事件
+              Sentry.captureMessage(userActions.copy, {
+                tags: {
+                  action: "keyboard-copy",
+                },
+                level: "info",
+              })
+
+            });
+
             break;
+          }
           case windowsKeys[1]:
+          {
+            // NOTICE: 傳送鍵盤貼上的事件
             Sentry.captureMessage(userActions.pasta, {
               tags: {
                 action: "keyboard-pasta",
@@ -227,14 +267,18 @@ export const SentryModule = {
               level: "info",
             })
             break;
+          }
           case windowsKeys[2]:
+          {
+            // NOTICE: 傳送鍵盤剪下的事件
             Sentry.captureMessage(userActions.cut, {
               tags: {
-                action: "keyboard-pasta",
+                action: "keyboard-cut",
               },
               level: "info",
             })
             break;
+          }
           default:
             break;
         }
@@ -242,8 +286,7 @@ export const SentryModule = {
       hotkeys(bindUserClipboard.mac, function (event, handler){
         switch (handler.key) {
           case macKeys[0]:
-            that.collectCopy(userActions.copy);
-            // that.screenshot();
+            that.collectCopy(userActions.copy).then(() => {});
             break;
           case macKeys[1]:
             Sentry.captureMessage(userActions.pasta, {
@@ -266,73 +309,116 @@ export const SentryModule = {
         }
       });
     } else {
-      console.log("register repeat!")
+      // console.log("register repeat!")
     }
 
   },
   stopToMonitorUser: function () {
 
   },
-  startToMonitorClipboard: function () {
-    const userActions = {
-      "copy": `Copy-${Application.getEnvironmentName()}-Clipboard`,
-      "pasta": `Pasta-${Application.getEnvironmentName()}-Clipboard`,
-      "cut": `Cut-${Application.getEnvironmentName()}-Clipboard`,
+
+  // NOTICE: 使用者選擇文字後，並不知道之後是否有利用右鍵進行複製
+  startToMonitorContextmenu: function () {
+    const that = this;
+
+    function callback() {
+      const selectionContent = document.getSelection().toString();
+      // const eventTitle = `SelectThenMouseup-${Application.getEnvironmentName()}`;
+      const eventTitle = `SelectThenMouseup`;
+      that.sendMessage(eventTitle, selectionContent).then(() => {
+
+      })
     }
 
+    let isSelecting = false;
+    let selection = null;
 
-    // document.addEventListener('copy', (e) => {
-    //   console.log("e.clipboardData.getData", e.clipboardData.getData("text"))
-    //   console.log("copy.e", e);
-    //   console.log("copy.target", e.target);
-    //   console.log("copy.target.innerText", e.target.innerText);
-    //   console.log("copy.target.innerHTML", e.target.innerHTML);
-    //   if(e && e.target && e.target.innerText) {
-    //     const data = {
-    //       tags: {
-    //         action: "clipboard-copy",
-    //         // NOTICE: Tag values have a maximum length of 200 characters and they cannot contain the newline (\n) character.
-    //         // copyContent: String(e.target),
-    //         copyContent: e.target.innerText,
-    //       },
-    //       level: "warning",
-    //     }
-    //     console.log("data", data);
-    //     Sentry.captureMessage(userActions.copy, data);
-    //   }
-    //
-    // })
+    function handleSelectStart(event) {
+      // console.log(event);
+      isSelecting = true;
+    }
 
-    // document.addEventListener('paste', (e) => {
-      // console.log("paste.e", e);
-      // console.log("paste.target", e.target);
-      // console.log("paste.target.innerText", e.target.innerText);
-      // console.log("paste.target.innerHTML", e.target.innerHTML);
-      // if(e && e.target && e.target.innerText) {
-      //   Sentry.captureMessage(userActions.pasta, {
-      //     tags: {
-      //       action: "clipboard-pasta",
-      //       // NOTICE: Tag values have a maximum length of 200 characters and they cannot contain the newline (\n) character.
-      //       // pastaContent: JSON.stringify(e.target.innerText),
-      //       // pastaContent: String(e.target),
-      //       pastaContent: e.target.innerText,
-      //     },
-      //     level: "info",
-      //   });
-      // }
-    // })
-  },
-  stopToMonitorClipboard: function () {
-    // document.removeEventListener('copy');
-    // document.removeEventListener('paste');
-  },
-  startToMonitorContextmenu: function () {
-      document.addEventListener('contextmenu', (event) => {
-        console.log("event", event)
-      });
-  },
-  stopToMonitorContextmenu: function () {
+    function handleMouseUp(event) {
+      // console.log(event, isSelecting);
+      if (isSelecting && !window.getSelection().isCollapsed) {
+        callback((selection = window.getSelection()));
+        isSelecting = false;
+      }
+    }
+
+    function handleSelectionChange(event) {
+      // console.log('change', isSelecting);
+      if (window.getSelection().isCollapsed && null !== selection) {
+        callback((selection = null));
+      }
+    }
+
+    window.addEventListener('selectstart', handleSelectStart);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('selectionchange', handleSelectionChange);
+
+    // document.onselectionchange = () => {
+    //   console.log(document.getSelection());
+    // };
+
 
   },
+  // stopToMonitorContextmenu: function () {
+  //
+  // },
+
+
+  // startToMonitorClipboard: function () {
+  //   // const userActions = {
+  //   //   "copy": `Copy-${Application.getEnvironmentName()}-Clipboard`,
+  //   //   "pasta": `Pasta-${Application.getEnvironmentName()}-Clipboard`,
+  //   //   "cut": `Cut-${Application.getEnvironmentName()}-Clipboard`,
+  //   // }
+  //
+  //   // document.addEventListener('copy', (e) => {
+  //   //   console.log("e.clipboardData.getData", e.clipboardData.getData("text"))
+  //   //   console.log("copy.e", e);
+  //   //   console.log("copy.target", e.target);
+  //   //   console.log("copy.target.innerText", e.target.innerText);
+  //   //   console.log("copy.target.innerHTML", e.target.innerHTML);
+  //   //   if(e && e.target && e.target.innerText) {
+  //   //     const data = {
+  //   //       tags: {
+  //   //         action: "clipboard-copy",
+  //   //         // NOTICE: Tag values have a maximum length of 200 characters and they cannot contain the newline (\n) character.
+  //   //         // copyContent: String(e.target),
+  //   //         copyContent: e.target.innerText,
+  //   //       },
+  //   //       level: "warning",
+  //   //     }
+  //   //     console.log("data", data);
+  //   //     Sentry.captureMessage(userActions.copy, data);
+  //   //   }
+  //   //
+  //   // })
+  //
+  //   // document.addEventListener('paste', (e) => {
+  //     // console.log("paste.e", e);
+  //     // console.log("paste.target", e.target);
+  //     // console.log("paste.target.innerText", e.target.innerText);
+  //     // console.log("paste.target.innerHTML", e.target.innerHTML);
+  //     // if(e && e.target && e.target.innerText) {
+  //     //   Sentry.captureMessage(userActions.pasta, {
+  //     //     tags: {
+  //     //       action: "clipboard-pasta",
+  //     //       // NOTICE: Tag values have a maximum length of 200 characters and they cannot contain the newline (\n) character.
+  //     //       // pastaContent: JSON.stringify(e.target.innerText),
+  //     //       // pastaContent: String(e.target),
+  //     //       pastaContent: e.target.innerText,
+  //     //     },
+  //     //     level: "info",
+  //     //   });
+  //     // }
+  //   // })
+  // },
+  // stopToMonitorClipboard: function () {
+  //   // document.removeEventListener('copy');
+  //   // document.removeEventListener('paste');
+  // },
 }
 window.SentryModule = SentryModule;
