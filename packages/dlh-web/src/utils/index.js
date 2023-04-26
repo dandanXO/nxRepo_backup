@@ -8,7 +8,8 @@ import { intlMsg } from '../locales/api/IntlMsg';
 import * as utilSaga from './saga';
 import * as utilAction from './action';
 import * as utilReducer from './reducer';
-
+import * as Sentry from "@sentry/react";
+import {sentryEnableFlag} from "../index"
 
 const msgArry = {
     1: <FormattedMessage id='prompt.infor' />
@@ -55,7 +56,13 @@ export const history = createHashHistory({ getUserConfirmation });
 
 //判断是否登录
 export const getLoginInfo = () => {
-    return Cookies.get("loginInfo") ? JSON.parse(Cookies.get("loginInfo")) : "";
+    if(Cookies.get("loginInfo")) {
+      const loginInfo = JSON.parse(Cookies.get("loginInfo"));
+      if(sentryEnableFlag) Sentry.setUser({ id: loginInfo.data.phoneNo });
+      return loginInfo;
+    } else {
+      return "";
+    }
 };
 
 //取得登入帳號資訊

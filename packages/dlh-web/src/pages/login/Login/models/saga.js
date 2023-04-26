@@ -4,7 +4,8 @@ import { postLogin, postLoginVerifyCodeData } from '../api';
 import { axios } from 'utils';
 import { history } from 'utils';
 import Cookies from 'js-cookie';
-
+import * as Sentry from "@sentry/react";
+import {sentryEnableFlag} from "../../../index"
 
 function* getCodeData(action) {
     const res = yield call(postLoginVerifyCodeData, action.params);
@@ -30,6 +31,8 @@ function* postLoginData (action) {
           // NOTICE: UseCase:GoToIndexPage
           history.push('/index');
         }
+
+        if(sentryEnableFlag) Sentry.setUser({ id: res.data.phoneNo });
 
         axios.defaults.headers["Authorization"] = res.data.token;
     }
