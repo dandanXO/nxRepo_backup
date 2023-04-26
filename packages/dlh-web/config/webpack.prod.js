@@ -79,7 +79,7 @@ const prodConfig = () =>  webpackMerge(baseConfig, {
                 sourceMap: true,
                 uglifyOptions: {
                     compress: {
-                        drop_console: true
+                        drop_console: false
                     }
                 }
             }),
