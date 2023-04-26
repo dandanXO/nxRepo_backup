@@ -5,7 +5,7 @@ import { axios } from 'utils';
 import { history } from 'utils';
 import Cookies from 'js-cookie';
 import * as Sentry from "@sentry/react";
-import {sentryEnableFlag} from "../../../index"
+import {sentryEnableFlag} from "../../../../index"
 
 function* getCodeData(action) {
     const res = yield call(postLoginVerifyCodeData, action.params);
