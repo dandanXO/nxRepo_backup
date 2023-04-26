@@ -12,6 +12,7 @@ import { Button } from "../../components/layouts/Button";
 import { getToken } from "../../../modules/location/getToken";
 import { PagePathEnum } from "../../pages/PagePathEnum";
 
+
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
     index: number;
@@ -30,9 +31,9 @@ const RepamentCouponModal = () => {
         triggerGetList({ isFullRepay: true, orderNo, paymentAmount, paymentMethod });
     }, [])
 
-    const applicableCouponList = currentData && currentData.length > 0 ? currentData?.filter(i => i.applicable === true) : [];
+    const applicableCouponList = currentData && currentData.length > 0 ? currentData?.filter(i => i.applicable === false) : [];
     const unApplicableCouponList = currentData && currentData.length > 0 ? currentData?.filter(i => i.applicable === false) : [];
-    const [checkedCoupon, setCheckedCoupon] = useState(0);
+    const [checkedCoupon, setCheckedCoupon] = useState(-1);
     // console.log('RepamentCouponModal-----------',location.state)
 
     const CouponOption = (props: ICouponOption) => {
@@ -43,6 +44,16 @@ const RepamentCouponModal = () => {
             </div>
         );
     };
+
+ 
+    const NotUsingCoupon = (props: ICouponOption) => {
+        return (
+            <div className={`flex justfy-center items-center ml-3 mt-2`} onClick={() => setCheckedCoupon(props.index)}>
+                <div className="grow text-left">Not using a coupon for this repayment.</div>
+                {props.isChecked ? <MdRadioButtonChecked className={`fill-sky-500`} /> : <MdRadioButtonUnchecked className={`fill-sky-500`} />}
+            </div>
+        )
+    }
 
     const renderNoCoupon = () => {
         return (
@@ -64,21 +75,28 @@ const RepamentCouponModal = () => {
                 <div className={`grow`}>
                     {applicableCouponList.length > 0 &&
                         (<>
+                       
                             <div className="text-sm font-bold text-left ml-2 ">Choose one coupon</div>
                             {
                                 applicableCouponList?.map((i, index) => {
                                     return (
-                                        <CouponOption
-                                            expireTime={i.expireTime}
-                                            discountAmount={i.discountAmount}
-                                            isChecked={index === checkedCoupon}
-                                            couponType={i.couponType}
-                                            couponName={i.couponName}
-                                            couponContent={i.couponContent}
-                                            index={index}
-                                            status="normal"
-                                            key={i.id}
-                                        />)
+                                        <>
+                                            {/* 不選優惠券 checkedCoupon & index給-1 */}
+                                            {index === 0 && <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon}/>}
+                                            <CouponOption
+                                                expireTime={i.expireTime}
+                                                discountAmount={i.discountAmount}
+                                                isChecked={index === checkedCoupon}
+                                                couponType={i.couponType}
+                                                couponName={i.couponName}
+                                                couponContent={i.couponContent}
+                                                index={index}
+                                                status="normal"
+                                                key={i.id}
+                                            />
+                                        </>
+                                    )
+                                      
                                 })
                             }
                             <div className="m-2 mb-3 bg-slate-100 h-3"></div>
@@ -108,7 +126,12 @@ const RepamentCouponModal = () => {
                         text={'Confirm'}
                         className="bg-primary-main w-full"
                         onClick={() => navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}`,
-                            { state: { ...location.state, coupon: checkedCoupon ? applicableCouponList[checkedCoupon] : null } })}
+                            {
+                                state: {
+                                    ...location.state,
+                                    coupon: applicableCouponList.length > 0 && checkedCoupon > -1 ? applicableCouponList[checkedCoupon] : null
+                                }
+                            })}
                     />
                 </div>
             </>

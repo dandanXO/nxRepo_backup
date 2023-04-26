@@ -42,13 +42,14 @@ const useRepayCreate = () => {
             })
 
     })
-    const handlePostRepayCreate = (isForceApplyAfterRepay: boolean, orderNo: string, repayAmount: number, payType: string) => {
+    const handlePostRepayCreate = (isForceApplyAfterRepay: boolean, orderNo: string, repayAmount: number, payType: string, couponRedeemNo: string) => {
         return postRepayCreateRequest({
             extend: false,
             forceApplyAfterRepay: isForceApplyAfterRepay,
             orderNo: orderNo,
             payType: payType,
             repayAmount: repayAmount,
+            couponRedeemNo: couponRedeemNo
         });
     }
 

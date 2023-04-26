@@ -50,7 +50,7 @@ const RepaymentPage = () => {
             {
                 currentData && currentData.content && currentData.content.length > 0 ?
                     currentData?.content?.map(record => {
-                        return <PaymentItem {...record} />
+                        return <PaymentItem {...record} key={record.orderNo}/>
                     })
                     : <div className="flex justify-center items-center p-3 grow">There are no orders currently</div>
             }
