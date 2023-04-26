@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import IoIosArrowBack from "@react-icons/all-files/io/IoIosArrowBack";
+import {IoIosArrowBack} from "@react-icons/all-files/io/IoIosArrowBack";
 import {useState, memo} from "react";
 
 const WebviewContainer = styled.div`
