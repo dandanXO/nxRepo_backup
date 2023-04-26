@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation,Navigate } from "react-router";
 import { Overlay } from "@frontend/mobile/shared/ui";
 import {MdRadioButtonChecked} from "@react-icons/all-files/md/MdRadioButtonChecked";
 import {MdRadioButtonUnchecked} from "@react-icons/all-files/md/MdRadioButtonUnchecked";
@@ -9,6 +9,8 @@ import { useLazyGetCouponApplicableListQuery } from "../../../api/rtk";
 import { Navigation } from "../../components/layouts/Navigation";
 import NoData from './NoData.svg';
 import { Button } from "../../components/layouts/Button";
+import { getToken } from "../../../modules/location/getToken";
+import { PagePathEnum } from "../../pages/PagePathEnum";
 
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
@@ -17,17 +19,22 @@ type ICouponOption = ICouponProps & {
 const RepamentCouponModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [triggerGetList, { currentData=[], isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetCouponApplicableListQuery({
+    const { orderNo, paymentAmount, paymentMethod } = location.state || {};
+    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetCouponApplicableListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
 
     useEffect(() => {
-        triggerGetList({ isFullRepay: true, orderNo: 'no-22066223416957878', paymentAmount: 0, paymentMethod: 'BANK_ACCOUNT' });
+        triggerGetList({ isFullRepay: true, orderNo, paymentAmount, paymentMethod });
     }, [])
 
+    const applicableCouponList = currentData && currentData.length > 0 ? currentData?.filter(i => i.applicable === true) : [];
+    const unApplicableCouponList = currentData && currentData.length > 0 ? currentData?.filter(i => i.applicable === false) : [];
     const [checkedCoupon, setCheckedCoupon] = useState(0);
+    // console.log('RepamentCouponModal-----------',location.state)
+
     const CouponOption = (props: ICouponOption) => {
         return (
             <div className={`flex justfy-center items-center`} onClick={() => setCheckedCoupon(props.index)}>
@@ -36,10 +43,6 @@ const RepamentCouponModal = () => {
             </div>
         );
     };
-
-    const applicableCouponList = currentData.length > 0 ? currentData?.filter(i => i.applicable === true) : [];
-    const unApplicableCouponList = currentData.length > 0 ? currentData?.filter(i => i.applicable === false) : [];
-
 
     const renderNoCoupon = () => {
         return (
@@ -74,6 +77,7 @@ const RepamentCouponModal = () => {
                                             couponContent={i.couponContent}
                                             index={index}
                                             status="normal"
+                                            key={i.id}
                                         />)
                                 })
                             }
@@ -92,6 +96,7 @@ const RepamentCouponModal = () => {
                                         couponName={i.couponName}
                                         couponContent={i.couponContent}
                                         status="unUsable"
+                                        key={i.id}
                                     />))
                                 }
                             </>
@@ -99,7 +104,12 @@ const RepamentCouponModal = () => {
                     }
                 </div>
                 <div className="p-2">
-                    <Button text={'Confirm'} className="bg-primary-main w-full" />
+                    <Button
+                        text={'Confirm'}
+                        className="bg-primary-main w-full"
+                        onClick={() => navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}`,
+                            { state: { ...location.state, coupon: checkedCoupon ? applicableCouponList[checkedCoupon] : null } })}
+                    />
                 </div>
             </>
         )
@@ -113,7 +123,7 @@ const RepamentCouponModal = () => {
                 return (
                     <div className={`flex flex-col h-[85vh]`}>
                         <div className={`ml-[-8px] `}><Navigation title={""} back={() => { navigate(-1) }} /></div>
-                        {currentData?.length === 0 ? renderNoCoupon() : renderCouponList()}
+                        {currentData && currentData.length > 0 ? renderCouponList() : renderNoCoupon()}
                     </div>
                 )
             }}

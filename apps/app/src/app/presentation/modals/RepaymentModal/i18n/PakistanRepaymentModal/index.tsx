@@ -24,6 +24,7 @@ type paymentMethodValueType = {
 const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
     const { radioValue, setRadioValue, balance, balanceValue, setBalanceValue, repayTypesList, isRepayTypesFetching, repayType, setRepayType, handleConfirm,orderNo } = props
     const navigate = useNavigate();
+    const location = useLocation();
     const selectStyles: StylesConfig = {
         control: (styles) => ({
             ...styles, 
@@ -95,10 +96,11 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 <>
                     <div className="text-black mt-1">{props.t("Coupon (PKR)") as string}</div>
                     <div className="flex border-solid border-b border-[#aaaaaa] justify-center items-center pl-5 pr-4 py-1.5"
-                        onClick={() =>
-                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal??token=${getToken()}`,
-                                { state: { orderNo } })
-                        }
+                        onClick={() => {
+                            if (isRepayTypesFetching) return;
+                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`,
+                                { state: { ...location.state, paymentAmount: balance, paymentMethod: repayType.type, } })
+                        }}
                     >
                         <div className="grow text-base ">Select</div>
                         <RiArrowRightSLine className="text-2xl fill-[#CCCCCC]" />
@@ -110,7 +112,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 <div className={`mr-1.5 w-full`}>
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
-                        navigate(-1);
+                        navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
                     }} text={props.t("Cancel")} className={`bg-primary-variant w-full`} />
                 </div>
                 <div className={` ml-1.5 w-full`}>
