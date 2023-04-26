@@ -9,7 +9,6 @@ import {riskManageAction} from './index';
 import {axios} from 'utils';
 import PropTypes from 'prop-types';
 import {FormattedMessage, injectIntl} from "react-intl";
-//import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const convertarams = (obj = {}) => {
     const {name = '', key = '', channelId = -99} = obj;

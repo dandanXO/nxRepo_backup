@@ -10,6 +10,7 @@ import * as utilAction from './action';
 import * as utilReducer from './reducer';
 import * as Sentry from "@sentry/react";
 import {sentryEnableFlag} from "../index"
+import {SentryModule} from "../Application";
 
 const msgArry = {
     1: <FormattedMessage id='prompt.infor' />
@@ -54,11 +55,11 @@ export const history = createHashHistory({ getUserConfirmation });
 // NOTICE: Mode: Single
 // export const history = createBrowserHistory({ getUserConfirmation });
 
-//判断是否登录
+//NOTICE 判断是否登录
 export const getLoginInfo = () => {
+    SentryModule.userLogin();
     if(Cookies.get("loginInfo")) {
       const loginInfo = JSON.parse(Cookies.get("loginInfo"));
-      if(sentryEnableFlag) Sentry.setUser({ id: loginInfo.data.phoneNo });
       return loginInfo;
     } else {
       return "";
@@ -83,6 +84,9 @@ export const getAllMerchants = () => {
 }
 
 export const userLogout = () => {
+
+  SentryModule.userLogout();
+
   Cookies.remove('loginInfo');
   Cookies.remove("adminUser");
   delete axios.defaults.headers["Authorization"];

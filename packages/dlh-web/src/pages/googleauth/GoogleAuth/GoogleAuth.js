@@ -5,8 +5,7 @@ import { Form, Row, Col, Input, Icon, Button ,Card} from 'antd';
 import Cookies from 'js-cookie';
 import { getLoginInfo, axios, getAdminUserInfo, userLogout } from 'utils';
 import styles from './GoogleAuth.less';
-import * as Sentry from "@sentry/react";
-import {sentryEnableFlag} from "../../../index"
+
 // NOTE: /hs/admin/auth/getInfo
 // Response
 // NOTE: res
@@ -130,7 +129,6 @@ class GoogleAuth extends Component{
                     if (Number(res.code) === 200) {
                         Cookies.set('loginInfo', res);
                         history.push('/index');
-                        if(sentryEnableFlag) Sentry.setUser({ id: res.data.phoneNo });
                     }
                 })
             }

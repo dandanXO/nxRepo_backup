@@ -10,7 +10,6 @@ import { serviceFeeManageAction } from './index';
 import { axios } from 'utils';
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
-//import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const convertarams = (obj = {}) => {
     const {  name = '', key = '',channelId=-99} = obj;
@@ -101,7 +100,7 @@ class ServiceFeeManage extends Component {
                 _this.setState({
                     channelList : data.records
                 });
-                
+
             }
         });
     }
@@ -151,7 +150,7 @@ class ServiceFeeManage extends Component {
                 }
             },
         ];
-        
+
         return (
             <div>
                 <SearchList handleSearch={this.handleSearch} channelList={channelList} searchParams={this.searchParams}/>

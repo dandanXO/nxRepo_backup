@@ -4,8 +4,7 @@ import { postLogin, postLoginVerifyCodeData } from '../api';
 import { axios } from 'utils';
 import { history } from 'utils';
 import Cookies from 'js-cookie';
-import * as Sentry from "@sentry/react";
-import {sentryEnableFlag} from "../../../../index"
+import {SentryModule} from "../../../../Application";
 
 function* getCodeData(action) {
     const res = yield call(postLoginVerifyCodeData, action.params);
@@ -25,14 +24,14 @@ function* postLoginData (action) {
     if (Number(res.code) === 200) {
         Cookies.set('loginInfo', res);
 
+        SentryModule.userLogin();
+
         if(res.data.googleAuthFlag && !res.data.passGoogleAuth) {
           history.push('/googleauth')
         } else {
           // NOTICE: UseCase:GoToIndexPage
           history.push('/index');
         }
-
-        if(sentryEnableFlag) Sentry.setUser({ id: res.data.phoneNo });
 
         axios.defaults.headers["Authorization"] = res.data.token;
     }
