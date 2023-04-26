@@ -52,8 +52,10 @@ export const SentryModule = {
       if(!Application.isLocalhost()) {
         sentryConfig.release = appInfo.COMMITHASH;
       }
+
       if(this.enable) {
         Sentry.init(sentryConfig);
+        console.log("[api-dlh-web] sentry.init");
         // this.startToMonitorClipboard();
         this.startToMonitorContextmenu();
       }
