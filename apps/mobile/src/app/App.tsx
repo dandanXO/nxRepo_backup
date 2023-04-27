@@ -14,6 +14,8 @@ import * as Sentry from "@sentry/react";
 export const AppFlag = {
   enableSentry: false,
   pagePrefix: appInfo.PUBLIC_PATH,
+  // NOTE: V55隱藏產品推薦列表
+  hideLoanDetailRecommendProducts: location.hostname == "www.scactus.com" || location.hostname == "scactus.com",
 }
 console.log("AppFlag.enableSentry", AppFlag.enableSentry)
 console.log("AppFlag.pagePrefix", AppFlag.pagePrefix)
