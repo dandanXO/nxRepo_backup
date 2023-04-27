@@ -26,6 +26,9 @@
     "serve:ain": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development",
     "serve:apk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve-pk app -c=development",
     "serve:abd": "cross-env NODE_ENV=development NODE_COUNTRY=bd pnpm nx serve-bd app -c=development",
+    "serve:ain:a": "cross-env NODE_ENV=development NODE_COUNTRY=in NOTE_ANALYZER=true pnpm nx serve-in app -c=development",
+    "serve:apk:a": "cross-env NODE_ENV=development NODE_COUNTRY=pk NOTE_ANALYZER=true pnpm nx serve-pk app -c=development",
+    "serve:abd:a": "cross-env NODE_ENV=development NODE_COUNTRY=bd NOTE_ANALYZER=true pnpm nx serve-bd app -c=development",
     "build:ain": "cross-env NODE_ENV=production NODE_COUNTRY=in pnpm nx run-many --target=build --projects=app  --configuration=production-in --verbose && rm -rf ./dist/apps/app/*.map ",
     "build:apk": "cross-env NODE_ENV=production NODE_COUNTRY=pk pnpm nx run-many --target=build --projects=app  --configuration=production-pk --verbose && rm -rf ./dist/apps/app/*.map ",
     "build:abd": "cross-env NODE_ENV=production NODE_COUNTRY=bd pnpm nx run-many --target=build --projects=app  --configuration=production-bd --verbose && rm -rf ./dist/apps/app/*.map ",
@@ -44,6 +47,7 @@
     "@canyuegongzi/t-cli": "^1.2.18",
     "@lagunovsky/redux-react-router": "^4.3.0",
     "@loadable/component": "^5.15.3",
+    "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "1.9.0",
     "@sentry/react": "^7.28.0",
     "@sentry/tracing": "^7.28.0",
@@ -181,6 +185,7 @@
     "typescript": "4.9.5",
     "url-loader": "^4.1.1",
     "webpack": "^5.75.0",
+    "webpack-bundle-analyzer": "^4.8.0",
     "webpack-merge": "5.8.0"
   },
   "engines": {

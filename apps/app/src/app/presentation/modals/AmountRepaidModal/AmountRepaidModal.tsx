@@ -87,7 +87,7 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
                 content={(hide: () => void) => {
                     return (
                         <div>
-                            <Title>{t("Amount RePaid Record")}</Title>
+                            <Title>{t("Amount Repaid Record")}</Title>
                             <Divider styleType="narrow" />
                             {state.repayRecords?.length === 0 ? (
                                 <NoDataStyled>{t("No paid records yet")}</NoDataStyled>

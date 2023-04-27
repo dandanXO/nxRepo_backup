@@ -45,10 +45,10 @@ const BankCardListPage = () => {
             {isSetPrimarySuccess && <SetPrimarySuccessModal setIsSetPrimarySuccess={setIsSetPrimarySuccess} />}
             <Navigation title={"Bank Card"} back={() => { navigate(-1) }} />
             {
-                currentData && currentData.bankAccounts.length !== 0 ?
+                currentData && currentData.bankAccounts && currentData.bankAccounts.length !== 0 ?
                     <>
                         <div className={`grow`}>
-                            {currentData && currentData?.bankAccounts?.map(card => {
+                            {currentData && currentData.bankAccounts && currentData.bankAccounts.map(card => {
                                 return <BankCard
                                     cardName={card.bankName ?? ''}
                                     isMainCard={card.main ?? false}

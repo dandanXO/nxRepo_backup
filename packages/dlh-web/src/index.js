@@ -8,8 +8,7 @@ import {initGlobalState, registerMicroApps, runAfterFirstMounted, setDefaultMoun
 import {isMicroApp} from "./microApp/isMicroApp";
 import {SentryModule} from "./Application";
 
-const flag = false;
-if(flag) SentryModule.init();
+SentryModule.init();
 
 ReactDOM.render(<App/>, document.querySelector('#root'));
 

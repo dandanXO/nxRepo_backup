@@ -1,27 +1,27 @@
 import {Colors, fontSizeListToRem, IThemeConfig} from "@frontend/mobile/shared/ui";
-import customColors from "../../../app/modules/theme/customColors";
+import theme from "./tailwind.theme";
 
-export const v55ThemeConfig: IThemeConfig = {
+export const themeConfig: IThemeConfig = {
   // NOTE: Commons
   color: Colors,
   fontSize: fontSizeListToRem,
   fontFamily: "Rubik",
   page: {
-    bgColor: customColors.white
+    bgColor: "#FFFFFF",
   },
   // NOTE: Component - button
   button: {
     primary: {
-      main: customColors.primary.main,
-      text: customColors.white
+      main: theme["primary_main"],
+      text: "#FFFFFF",
     },
     secondary: {
-      main: customColors.secondary.main,
-      text: customColors.primary.main,
+      main: theme["secondary_main"],
+      text: theme["primary_main"],
     },
     info: {
-      main: customColors.secondary.main,
-      text: customColors.white
+      main: theme["secondary_main"],
+      text: "#FFFFFF",
     },
     link: {
       main: Colors.none,
@@ -29,15 +29,15 @@ export const v55ThemeConfig: IThemeConfig = {
     },
     ghost: {
       main: Colors.none,
-      text: customColors.primary.main,
-      border: customColors.primary.main,
+      text: theme["primary_main"],
+      border: theme["primary_main"],
     }
   },
   radio: {
-    color: customColors.primary.main,
+    color: theme["primary_main"],
   },
   card: {
-    color: customColors.primary.main,
+    color: theme["primary_main"],
   },
   repaymentAdsModal: {
     main: {

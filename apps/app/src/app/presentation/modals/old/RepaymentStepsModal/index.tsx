@@ -4,8 +4,8 @@ import {useTranslation} from "react-i18next";
 
 import {i18nRepaymentStepsModalTranslations} from "./i18nTranslations";
 import React from "react";
-import {IconContext} from "react-icons";
-import {AiOutlineCloseCircle} from "react-icons/ai";
+import {IconContext} from "@react-icons/all-files";
+import {AiOutlineCloseCircle} from "@react-icons/all-files/ai/AiOutlineCloseCircle";
 import {renderByCountry} from "../../../../modules/i18n";
 import {AllCountryInstance} from "../../../../../../../../libs/shared/domain/src/country/AllCountryInstance";
 

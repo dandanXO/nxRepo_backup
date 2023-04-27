@@ -73,7 +73,7 @@ class Login extends Component{
                 text: <FormattedMessage id ="page.login.auth.code" defaultMessage="获取验证码"/>,
                 disabled: false,
             }, () => {
-                
+
                 dispatch(loginAction.lgCancelTimer(false));
             })
         }
@@ -112,7 +112,7 @@ class Login extends Component{
                                         rules: [{ required: true, message: intl.formatMessage({id:"page.login.password.empty"}) }],
                                         initialValue: ''
                                     })(
-                                        <Input  className={styles.antInputSt} type="text" placeholder={intl.formatMessage({id:"page.login.password"})} />
+                                        <Input  className={`${styles.antInputSt} sentry-mask`} type="text" placeholder={intl.formatMessage({id:"page.login.password"})} />
                                     )}
 
                                 </Form.Item>

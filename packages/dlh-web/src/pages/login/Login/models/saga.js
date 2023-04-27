@@ -4,7 +4,7 @@ import { postLogin, postLoginVerifyCodeData } from '../api';
 import { axios } from 'utils';
 import { history } from 'utils';
 import Cookies from 'js-cookie';
-
+import {SentryModule} from "../../../../Application";
 
 function* getCodeData(action) {
     const res = yield call(postLoginVerifyCodeData, action.params);
@@ -23,6 +23,8 @@ function* postLoginData (action) {
     const res = yield call(postLogin, action.params);
     if (Number(res.code) === 200) {
         Cookies.set('loginInfo', res);
+
+        SentryModule.userLogin();
 
         if(res.data.googleAuthFlag && !res.data.passGoogleAuth) {
           history.push('/googleauth')

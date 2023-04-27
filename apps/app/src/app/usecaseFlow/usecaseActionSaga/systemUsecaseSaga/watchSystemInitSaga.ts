@@ -8,9 +8,12 @@ import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {SystemCaseActions} from "./systemCaseActions";
 import {systemCallGetUserInfoSaga} from "../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga";
 
+import {IThemeConfig} from "@frontend/mobile/shared/ui";
+import {AndroidAppInfo} from "../../../modules/window/IWindow";
+
 
 export function *watchSystemInitSaga() {
-  console.log("[app][appSaga] 1.1")
+  console.log("[app][saga] 1.1")
   console.log("[app][saga] debug.watchSystemInitSaga")
 
   console.log("[app][saga] 接收初始化")
@@ -30,14 +33,22 @@ function *callGetInit(packageId: string) {
   yield put(appSlice.actions.updateInit(response));
 }
 
+
 export function *systemStartInitSaga() {
   try {
     console.log("[app][saga] systemStartInitSaga")
 
+
     // TODO:
     // NOTE: 是否啟用測試渠道(測試不好會出4)
-    const packageId = window.isInAndroid() ? "packageId" : "com.oasisgold.app.android"
+    // const packageId = window.isInAndroid() ? "packageId" : "com.oasisgold.app.android"
+    let packageId = "com.ind.kyc.application";
+    let appInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
+    if(appInfo) {
+      packageId = appInfo.packageId;
+    }
     console.log("[app][saga]  packageId", packageId);
+    yield put(appSlice.actions.updateAndroidInfo(appInfo));
 
     const [response, userResponse]:[GetInitServiceResponse,GetUserInfoServiceResponse] = yield all(
       [

@@ -1,9 +1,14 @@
-import {MdOutlineAccountCircle, MdPayment, RiMoneyDollarCircleFill} from "react-icons/all";
+import {MdPayment} from "@react-icons/all-files/md/MdPayment";
+import {MdAccountBox} from "@react-icons/all-files/md/MdAccountBox";
+import {RiMoneyDollarCircleFill} from "@react-icons/all-files/ri/RiMoneyDollarCircleFill";
 import {useLocation, useNavigate} from "react-router";
 
 import cx from "classnames";
 import {PagePathEnum} from "../../pages/PagePathEnum";
 import {getToken} from "../../../modules/location/getToken";
+import {useEffect, useState} from "react";
+import {DEFAULT_THEME} from "../../../../environments/theme";
+import {applyTheme} from "../../../modules/theme/utils";
 
 type Props = {
   hasOrder: boolean;
@@ -18,6 +23,14 @@ export const TabBar = (props: Props) => {
     }
     return location.pathname.indexOf(pageName) > -1
   }
+
+  const [theme, setTheme] = useState(DEFAULT_THEME);
+
+  useEffect(() => {
+    applyTheme("india", "v57");
+  }, [theme]);
+
+
   return (
     <div className={"h-16 bg-white border-t sticky bottom-0 flex flex-row"}>
       <div className={"flex-1 flex flex-col justify-center items-center"} onClick={() => {
@@ -46,12 +59,14 @@ export const TabBar = (props: Props) => {
       <div className={"flex-1 flex flex-col justify-center items-center"}  onClick={() => {
         navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`)
       }}>
-        <MdOutlineAccountCircle color={isInPage(PagePathEnum.PersonalInfoPage) ? "#F58B10" : "#D7D7D7"} size={20}/>
+        <MdAccountBox color={isInPage(PagePathEnum.PersonalInfoPage) ? "#F58B10" : "#D7D7D7"} size={20}/>
         <div className={cx({
           "text-orange-300": isInPage(PagePathEnum.PersonalInfoPage),
           "text-gray-300": !isInPage(PagePathEnum.PersonalInfoPage),
         })}>Account</div>
       </div>
+
+
     </div>
   )
 }

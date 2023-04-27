@@ -10,4 +10,6 @@ export interface PostRepayCreateRequest {
   repayAmount?: number;
   /** 还款结清后是否自动下单 */
   forceApplyAfterRepay?: boolean;
+  /** 优惠券编号 */
+  couponRedeemNo?:string;
 }

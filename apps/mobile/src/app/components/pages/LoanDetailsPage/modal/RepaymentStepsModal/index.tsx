@@ -6,8 +6,8 @@ import {useTranslation} from "react-i18next";
 
 import {i18nRepaymentStepsModalTranslations} from "./i18nTranslations";
 import React from "react";
-import {IconContext} from "react-icons";
-import {AiOutlineCloseCircle} from "react-icons/ai";
+import {IconContext} from "@react-icons/all-files";
+import {AiOutlineCloseCircle} from "@react-icons/all-files/ai/AiOutlineCloseCircle";
 
 interface I18nRepaymentStepsModalProps {
   setShowRepaymentSteps: React.Dispatch<React.SetStateAction<boolean>>;

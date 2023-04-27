@@ -1,7 +1,8 @@
 import {CloseButton} from "../../components/layouts/CloseButton";
 import {Horizontal} from "../../components/layouts/Horizontal";
 import {Product} from "../../pages/IndexPage/sections/RecommendedProductsSection/Product";
-import {MdExpandLess, MdExpandMore} from "react-icons/all";
+import {MdExpandLess} from "@react-icons/all-files/md/MdExpandLess";
+import {MdExpandMore} from "@react-icons/all-files/md/MdExpandMore";
 import {Button} from "../../components/layouts/Button";
 import React, {Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState} from "react";
 import {IndexPageProps} from "../../../usecaseFlow/reduxStore";

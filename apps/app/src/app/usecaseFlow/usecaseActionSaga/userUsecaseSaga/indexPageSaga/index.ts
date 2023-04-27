@@ -21,7 +21,7 @@ export const IndexPageSagaAction = {
 export type UserApplyProductActionPayload = Pick<LoanServiceRequest, "applyAmount" | "details">;
 
 export function *watchIndexPageSaga() {
-  console.log("[app][appSaga] 1.2")
+  console.log("[app][saga] 1.2")
   yield takeEvery(IndexPageSagaAction.user.viewIndexPageAction.type, errorFallback, userViewIndexPageSaga)
   yield takeLatest(IndexPageSagaAction.user.applyProductAction.type, errorFallback, userApplyProductsSaga)
   yield takeLatest(IndexPageSagaAction.user.reacquireCreditAction.type, errorFallback, userReacquireCreditSaga)

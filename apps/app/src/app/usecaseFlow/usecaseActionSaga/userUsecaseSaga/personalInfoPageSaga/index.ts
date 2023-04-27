@@ -11,6 +11,6 @@ export const PersonalInfoPageSagaActions = {
   }
 }
 export function *watchPersonalInfoPageSaga() {
-  console.log("[app][appSaga] 1.3")
+  console.log("[app][saga] 1.3")
   yield takeLatest(PersonalInfoPageSagaActions.system.init.type, errorFallback, systemCallGetUserInfoSaga)
 }

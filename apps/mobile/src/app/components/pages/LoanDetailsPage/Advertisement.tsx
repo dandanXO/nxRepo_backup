@@ -65,18 +65,21 @@ const Advertisement = (props: AdvertisementProps) => {
 
     return (
         <div>
-          <AdvertisementStyled>
-            <div className={"infoTitle"}>{props.t("More Recommend Loan")}</div>
-            {recommendProducts.map((ad) => (
-              <BannerWithCard
-                key={ad["productId"]}
-                adProps={ad}
-                setShowProductDetailModal={setShowProductDetailModal}
-                setProductDetails={setProductDetails}
-                setShowSubmitOrdereModal={setShowSubmitOrdereModal}
-              />
-            ))}
-          </AdvertisementStyled>
+          {!AppFlag.hideLoanDetailRecommendProducts && (
+            <AdvertisementStyled>
+              <div className={"infoTitle"}>{props.t("More Recommend Loan")}</div>
+              {recommendProducts.map((ad) => (
+                <BannerWithCard
+                  key={ad["productId"]}
+                  adProps={ad}
+                  setShowProductDetailModal={setShowProductDetailModal}
+                  setProductDetails={setProductDetails}
+                  setShowSubmitOrdereModal={setShowSubmitOrdereModal}
+                />
+              ))}
+            </AdvertisementStyled>
+          )}
+
             {showProductDetailModal && productDetails && (
                 <ProductDetailModal
                     recommendProducts={productDetails}

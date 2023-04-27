@@ -8,7 +8,9 @@ import { intlMsg } from '../locales/api/IntlMsg';
 import * as utilSaga from './saga';
 import * as utilAction from './action';
 import * as utilReducer from './reducer';
-
+import * as Sentry from "@sentry/react";
+import {sentryEnableFlag} from "../index"
+import {SentryModule} from "../Application";
 
 const msgArry = {
     1: <FormattedMessage id='prompt.infor' />
@@ -53,9 +55,15 @@ export const history = createHashHistory({ getUserConfirmation });
 // NOTICE: Mode: Single
 // export const history = createBrowserHistory({ getUserConfirmation });
 
-//判断是否登录
+//NOTICE 判断是否登录
 export const getLoginInfo = () => {
-    return Cookies.get("loginInfo") ? JSON.parse(Cookies.get("loginInfo")) : "";
+    SentryModule.userLogin();
+    if(Cookies.get("loginInfo")) {
+      const loginInfo = JSON.parse(Cookies.get("loginInfo"));
+      return loginInfo;
+    } else {
+      return "";
+    }
 };
 
 //取得登入帳號資訊
@@ -76,6 +84,9 @@ export const getAllMerchants = () => {
 }
 
 export const userLogout = () => {
+
+  SentryModule.userLogout();
+
   Cookies.remove('loginInfo');
   Cookies.remove("adminUser");
   delete axios.defaults.headers["Authorization"];

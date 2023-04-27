@@ -1,7 +1,7 @@
 const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind');
 const { join } = require('path');
 const colors = require('tailwindcss/colors')
-const customColors = require("./src/app/modules/theme/customColors");
+// const customColors = require("./src/environments/theme/india/v55/tailwind.colors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -22,14 +22,26 @@ module.exports = {
           },
           animation: {
               marquee: 'marquee 15s linear infinite',
-          }
-
+          },
       },
       // NOTE: Naming your colors
       // https://tailwindcss.com/docs/customizing-colors#naming-your-colors
       colors: {
         ...colors,
-        ...customColors,
+        // ...customColors,
+        primary: {
+          main: 'var(--primary_main)',
+          variant: 'var(--primary_variant)',
+          assistant: 'var(--primary_assistant)',
+        },
+        secondary: {
+          main: 'var(--secondary_main)',
+          variant: 'var(--secondary_variant)',
+        },
+        disabled: {
+          main: 'var(--disabled_main)',
+          variant: 'var(--disabled_variant)',
+        },
       }
   },
   plugins: [

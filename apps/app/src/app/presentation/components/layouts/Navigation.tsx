@@ -1,4 +1,4 @@
-import {IoChevronBack} from "react-icons/all";
+import {IoChevronBack} from "@react-icons/all-files/io5/IoChevronBack";
 
 interface Props {
   title?: string;

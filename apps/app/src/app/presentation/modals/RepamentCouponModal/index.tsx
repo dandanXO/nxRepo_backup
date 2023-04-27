@@ -1,13 +1,17 @@
-import { useNavigate, useLocation } from "react-router";
-import Button from "../../components/Button";
+import { useNavigate, useLocation,Navigate } from "react-router";
 import { Overlay } from "@frontend/mobile/shared/ui";
-import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/all";
+import {MdRadioButtonChecked} from "@react-icons/all-files/md/MdRadioButtonChecked";
+import {MdRadioButtonUnchecked} from "@react-icons/all-files/md/MdRadioButtonUnchecked";
 import Coupon from "../../components/Coupon";
 import { useEffect, useState } from "react";
 import { ICouponProps } from '../../components/Coupon';
 import { useLazyGetCouponApplicableListQuery } from "../../../api/rtk";
 import { Navigation } from "../../components/layouts/Navigation";
-import NoData from './NoData.svg'
+import NoData from './NoData.svg';
+import { Button } from "../../components/layouts/Button";
+import { getToken } from "../../../modules/location/getToken";
+import { PagePathEnum } from "../../pages/PagePathEnum";
+
 
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
@@ -16,6 +20,7 @@ type ICouponOption = ICouponProps & {
 const RepamentCouponModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { orderNo, paymentAmount, paymentMethod } = location.state || {};
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetCouponApplicableListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -23,10 +28,14 @@ const RepamentCouponModal = () => {
     });
 
     useEffect(() => {
-        triggerGetList({ isFullRepay: true, orderNo: 'no-20136519450815031', paymentAmount: 0, paymentMethod: 'BANK_ACCOUNT' });
+        triggerGetList({ isFullRepay: true, orderNo, paymentAmount, paymentMethod });
     }, [])
 
-    const [checkedCoupon, setCheckedCoupon] = useState(0);
+    const applicableCouponList = currentData && currentData.length > 0 ? currentData?.filter(i => i.applicable === false) : [];
+    const unApplicableCouponList = currentData && currentData.length > 0 ? currentData?.filter(i => i.applicable === false) : [];
+    const [checkedCoupon, setCheckedCoupon] = useState(-1);
+    // console.log('RepamentCouponModal-----------',location.state)
+
     const CouponOption = (props: ICouponOption) => {
         return (
             <div className={`flex justfy-center items-center`} onClick={() => setCheckedCoupon(props.index)}>
@@ -36,9 +45,15 @@ const RepamentCouponModal = () => {
         );
     };
 
-    const applicableCouponList = currentData?.filter(i => i.applicable === true) || [];
-    const unApplicableCouponList = currentData?.filter(i => i.applicable === false) || [];
-
+ 
+    const NotUsingCoupon = (props: ICouponOption) => {
+        return (
+            <div className={`flex justfy-center items-center ml-3 mt-2`} onClick={() => setCheckedCoupon(props.index)}>
+                <div className="grow text-left">Not using a coupon for this repayment.</div>
+                {props.isChecked ? <MdRadioButtonChecked className={`fill-sky-500`} /> : <MdRadioButtonUnchecked className={`fill-sky-500`} />}
+            </div>
+        )
+    }
 
     const renderNoCoupon = () => {
         return (
@@ -48,7 +63,7 @@ const RepamentCouponModal = () => {
                     <div className={`mt-5`}>There are currently no coupon</div>
                 </div>
                 <div className="p-2">
-                    <Button buttonText={'Back'} backgroundColor="bg-[#0C6D33]" width="w-full" onClick={()=> navigate(-1)}/>
+                    <Button text={'Back'} className="bg-primary-main w-full" onClick={()=> navigate(-1)}/>
                 </div>
             </>
         )
@@ -60,39 +75,64 @@ const RepamentCouponModal = () => {
                 <div className={`grow`}>
                     {applicableCouponList.length > 0 &&
                         (<>
+                       
                             <div className="text-sm font-bold text-left ml-2 ">Choose one coupon</div>
                             {
                                 applicableCouponList?.map((i, index) => {
                                     return (
-                                        <CouponOption
-                                            expireTime={i.expireTime}
-                                            discountAmount={i.discountAmount}
-                                            isChecked={index === checkedCoupon}
-                                            couponType={i.couponType}
-                                            couponName={i.couponName}
-                                            couponContent={i.couponContent}
-                                            index={index}
-                                            status="normal"
-                                        />)
+                                        <>
+                                            {/* 不選優惠券 checkedCoupon & index給-1 */}
+                                            {index === 0 && <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon}/>}
+                                            <CouponOption
+                                                expireTime={i.expireTime}
+                                                discountAmount={i.discountAmount}
+                                                isChecked={index === checkedCoupon}
+                                                couponType={i.couponType}
+                                                couponName={i.couponName}
+                                                couponContent={i.couponContent}
+                                                index={index}
+                                                status="normal"
+                                                key={i.id}
+                                            />
+                                        </>
+                                    )
+                                      
                                 })
                             }
                             <div className="m-2 mb-3 bg-slate-100 h-3"></div>
                         </>)
                     }
-                    <div className="text-sm font-bold text-left ml-2 ">Not applicable to usage conditions</div>
                     {
-                        unApplicableCouponList.map((i, index) => (<Coupon
-                            expireTime={i.expireTime}
-                            discountAmount={i.discountAmount}
-                            couponType={i.couponType}
-                            couponName={i.couponName}
-                            couponContent={i.couponContent}
-                            status="unUsable"
-                        />))
+                        unApplicableCouponList.length > 0 && (
+                            <>
+                                <div className="text-sm font-bold text-left ml-2 ">Not applicable to usage conditions</div>
+                                {
+                                    unApplicableCouponList.map((i, index) => (<Coupon
+                                        expireTime={i.expireTime}
+                                        discountAmount={i.discountAmount}
+                                        couponType={i.couponType}
+                                        couponName={i.couponName}
+                                        couponContent={i.couponContent}
+                                        status="unUsable"
+                                        key={i.id}
+                                    />))
+                                }
+                            </>
+                        )
                     }
                 </div>
                 <div className="p-2">
-                    <Button buttonText={'Confirm'} backgroundColor="bg-[#0C6D33]" width="w-full" />
+                    <Button
+                        text={'Confirm'}
+                        className="bg-primary-main w-full"
+                        onClick={() => navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}`,
+                            {
+                                state: {
+                                    ...location.state,
+                                    coupon: applicableCouponList.length > 0 && checkedCoupon > -1 ? applicableCouponList[checkedCoupon] : null
+                                }
+                            })}
+                    />
                 </div>
             </>
         )
@@ -106,7 +146,7 @@ const RepamentCouponModal = () => {
                 return (
                     <div className={`flex flex-col h-[85vh]`}>
                         <div className={`ml-[-8px] `}><Navigation title={""} back={() => { navigate(-1) }} /></div>
-                        {currentData?.length === 0 ? renderNoCoupon() : renderCouponList()}
+                        {currentData && currentData.length > 0 ? renderCouponList() : renderNoCoupon()}
                     </div>
                 )
             }}

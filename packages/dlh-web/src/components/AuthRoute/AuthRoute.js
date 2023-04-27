@@ -6,6 +6,7 @@ import {Icon, Spin} from 'antd';
 import {processRoutesForNewCMS} from "../../microApp/processRoutesForNewCMS";
 import {isMicroApp} from "../../microApp/isMicroApp";
 import Cookies from "js-cookie";
+import {SentryModule} from "../../Application";
 
 class AuthRoute extends Component {
     constructor(props, context) {
@@ -56,10 +57,18 @@ class AuthRoute extends Component {
       await Promise.all(pipes).then(() => {
         const menuData = pipes[0];
         const getInfoResponse = pipes[1];
+
+        console.log("getInfoResponse", getInfoResponse);
+
         Cookies.set("adminUser", getInfoResponse);
 
-        const isSuperAdmin = getInfoResponse.data.roleId === 1;
-        localStorage.setItem("isSuperAdmin", JSON.stringify(isSuperAdmin));
+        let isSuperAdmin = false
+        if(getInfoResponse && getInfoResponse.data && getInfoResponse.data.roleId === 1) {
+          isSuperAdmin = getInfoResponse.data.roleId === 1;
+          localStorage.setItem("isSuperAdmin", JSON.stringify(isSuperAdmin));
+        }
+
+        SentryModule.userLogin();
 
         this.setState({
           menu: menuData || [],

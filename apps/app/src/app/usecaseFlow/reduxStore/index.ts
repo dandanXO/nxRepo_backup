@@ -16,13 +16,13 @@ const routerMiddleware = createRouterMiddleware(history)
 
 const logger = (store: any) => (next: any) => (action: any) => {
   if(action.type !== 'indexPage/updateRiskCountdown') {
-    console.log('dispatching', action)
+    // console.log('dispatching', action)
   }
 
   const result: any = next(action)
 
   if(action.type !== 'indexPage/updateRiskCountdown') {
-    console.log('next state', store.getState())
+    // console.log('next state', store.getState())
   }
 
   return result
@@ -30,7 +30,7 @@ const logger = (store: any) => (next: any) => (action: any) => {
 
 const sagaMiddleware = createSagaMiddleware({
   onError(error: Error, errorInfo: { sagaStack: string }) {
-    console.log("[app][saga] error", error)
+    // console.log("[app][saga] error", error)
     // alertModal(errorInfo.sagaStack)
     alertModal("error")
   },

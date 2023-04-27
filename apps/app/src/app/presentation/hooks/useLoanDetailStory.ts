@@ -6,13 +6,14 @@ import * as Sentry from "@sentry/react";
 import {CustomAxiosError} from "../../api/rtk/axiosBaseQuery";
 import {PostRepayCreateRequest} from "../../api/loanService/PostRepayCreateRequest";
 import {PostRepayCreateResponse} from "../../api/loanService/PostRepayCreateResponse";
-import {AppFlag} from "../../app";
+
 import {
   useGetLoanDetailQuery,
   useGetRepayTypesQuery,
   useLazyGetRepayTypesQuery,
   usePostRepayCreateMutation
 } from "../../api/rtk";
+import {AppFlag} from "../../../main";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();

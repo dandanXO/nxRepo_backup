@@ -1,4 +1,5 @@
-import {MdExpandLess, MdExpandMore} from "react-icons/all";
+import {MdExpandLess} from "@react-icons/all-files/md/MdExpandLess";
+import {MdExpandMore} from "@react-icons/all-files/md/MdExpandMore";
 import {useCallback, useState} from "react";
 import {environment} from "../../../../../../environments/environment";
 import {formatPrice} from "../../../../../modules/formatPrice";

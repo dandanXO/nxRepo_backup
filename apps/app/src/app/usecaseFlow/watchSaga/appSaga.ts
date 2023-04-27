@@ -14,7 +14,7 @@ import {watchPersonalInfoPageSaga} from "../usecaseActionSaga/userUsecaseSaga/pe
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* AppSaga() {
   try {
-    console.log("[app][appSaga] 1")
+    console.log("[app][saga] 1")
     yield all([
       // 1.
       watchSystemInitSaga(),
@@ -25,7 +25,7 @@ export function* AppSaga() {
       //2.
       initSaga()
     ])
-    console.log("[app][appSaga] 3")
+    console.log("[app][saga] 3")
   } catch (error) {
     // yield catchSagaError(error);
     console.error("error", error);
@@ -33,12 +33,12 @@ export function* AppSaga() {
 }
 
 function *watchSystemUseCaseSaga() {
-  console.log("[app][appSaga] 1.4")
+  console.log("[app][saga] 1.4")
   yield takeLatest(SystemCaseActions.SystemCountdownSaga.type, errorFallback, systemCountdownSaga)
   yield takeLatest(SystemCaseActions.SystemRefreshableCountdownSaga.type,errorFallback, systemRefreshableCountdownSaga);
 }
 
 function *initSaga() {
-  console.log("[app][appSaga] 2")
+  console.log("[app][saga] 2")
   yield put(SystemCaseActions.InitSaga());
 }

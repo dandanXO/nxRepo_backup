@@ -5,7 +5,9 @@ import {i18nBankBindAccountPage} from "../../translations";
 import * as Sentry from "@sentry/react";
 import {GetBindCardDropListResponse} from "../../../../../../api/rtk/old/GetBindCardDropList";
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
-import {AppFlag} from "../../../../../../app";
+import {AppFlag} from "../../../../../../../main";
+
+
 
 type IUseFinishedBindBankAccountPage =  {
   // NOTICE: Common
@@ -30,7 +32,14 @@ type IUseFinishedBindBankAccountPage =  {
 export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
   const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
-  const navigateToAPP = useCallback(() => window.location.href = "innerh5://127.0.0.1", []);
+  const navigateToAPP = useCallback(() => {
+    window.location.href = "innerh5://127.0.0.1";
+
+    // if(window["IndexTask"] && window["IndexTask"]["navToPage"]) {
+    //   window["IndexTask"]["navToPage"](AndroidPage.AUTH);
+    // }
+
+  }, []);
 
   const confirm = useCallback(() => {
     if(props.isLoadingPostBankBindSaveToPK) return;
@@ -72,7 +81,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
       request = props
         .postBankBindSaveToPK(requestBody)
     }
-    return;
+
     request.unwrap()
       .then((data: any) => {
         // Notice: bind account successfully
