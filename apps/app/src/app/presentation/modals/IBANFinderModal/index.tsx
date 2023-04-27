@@ -2,7 +2,8 @@
 import React, { useEffect } from "react";
 import { Overlay } from "@frontend/mobile/shared/ui";
 import { useNavigate, useLocation } from "react-router";
-import IBan from './IBAN.svg'
+import IBan from '../../components/images/IBAN.svg';
+import Divider from "../../components/Divider";
 
 const IBANFinderModal = (props: any) => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const IBANFinderModal = (props: any) => {
     const MethodContent = ({ title, text }: { title: string, text: any }) => {
         return (
             <div className="mb-4">
-                <div className="text-base font-bold">{title}</div>
+                <div className="text-sm font-bold">{title}</div>
                 <div className="text-sm">{text}</div>
             </div>
 
@@ -21,7 +22,7 @@ const IBANFinderModal = (props: any) => {
     const TopicContent = ({ title, text }: { title: string, text: any }) => {
         return (
             <div >
-                <div className="text-base font-bold">{title}</div>
+                <div className="text-sm font-bold">{title}</div>
                 <div className="my-4 text-sm">{text}</div>
             </div>
 
@@ -30,14 +31,12 @@ const IBANFinderModal = (props: any) => {
 
     const renderByBank = () => {
         return (
-            <div className="text-black text-left">
-                <div className="text-base font-bold mt-3 mb-5">How to Get Bank Card IBAN Number?</div>
-                <div className="p-3 bg-slate-200 ">
+            <div className="text-black text-left p-5">
+                <div className="text-sm font-bold">How to Get Bank Card IBAN Number?</div>
+                <Divider/>
+                <div className="p-3 bg-[#F6F6F6] mt-3">
                     <MethodContent title={'Method 1: '} text={'You can usually find your IBAN number by logging into your online banking, or checking your bank statement.'} />
                     <MethodContent title={'Method 2: Online Search'} text={<a className="text-blue-500" href="https://wise.com/gb/iban/calculator">https://wise.com/gb/iban/calculator</a>} />
-
-                    <div className="text-sm font-bold"></div>
-
                 </div>
             </div>
         )
@@ -45,10 +44,10 @@ const IBANFinderModal = (props: any) => {
 
     const renderByWallet = () => {
         return (
-            <div className="text-black text-left">
-                <div className="text-base font-bold mt-3 mb-5">How to Get Easypaisa and JazzCash IBAN Number?</div>
-
-                <div className="p-3 bg-slate-200 ">
+            <div className="text-black text-left p-5">
+                <div className="text-sm font-bold">How to Get Easypaisa and JazzCash IBAN Number?</div>
+                <Divider/>
+                <div className="p-3 bg-[#F6F6F6] mt-3 ">
                     <TopicContent title={'How to Get Easypaisa IBAN Number'} text={'Here is how to get the IBAN Number of your Easypaisa account.'} />
                     <MethodContent title={'Method 1: How to Get Easypaisa IBAN Number Using App'}
                         text={
@@ -58,7 +57,7 @@ const IBANFinderModal = (props: any) => {
                                 <div>2. Next, you need to tap on the "My Account" option located in the bottom right corner of the screen.</div>
                                 <div>3. Here, you need to select "Account Information."</div>
                                 <div>4. On the new screen, you will see the Easypaisa IBAN Number of your account.</div>
-                                <div className="flex justify-center m-4 mb-8"><img className="w-2/3" src={IBan} /></div>
+                                <div className="my-2"><img className="" src={IBan} /></div>
                                 <div>This way you can easily get the IBAN Number of your Easypaisa account. Now, you can receive funds from across the world using the IBAN Number of your Easypaisa account.</div>
                             </div>
                         } />
@@ -103,6 +102,7 @@ const IBANFinderModal = (props: any) => {
     return (
         <div>
             <Overlay
+            contentNoStyle={true}
                 show={true}
                 title="Tips"
                 enableClose={true}
@@ -110,9 +110,9 @@ const IBANFinderModal = (props: any) => {
                 enableTitleHorizontal={true}
                 content={(hide: () => void) => {
                     return (
-                        <div className={`p-2`}>
-                            <div className="text-xl font-bold mb-2">Tips</div>
-                            <div className="border-b border-solid border-slate-300"></div>
+                        <div className={`h-screen `}>
+                            <div className="text-xl font-bold mb-3 ">Tips</div>
+                            <Divider/>
                             {location.state==='Bank'?renderByBank():renderByWallet()}
                         </div>
                     );

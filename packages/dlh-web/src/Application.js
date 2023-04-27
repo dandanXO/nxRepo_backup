@@ -6,6 +6,7 @@ import hotkeys from "hotkeys-js";
 // import ClipboardJS from "clipboard"
 import html2canvas from "html2canvas";
 import { detectIncognito } from "detectincognitojs";
+import devtools from 'devtools-detect';
 
 console.log("[api-dlh-web] conf", conf);
 
@@ -25,6 +26,10 @@ const UserActions = {
   "copyColumnText": `User Copy Column Text`,
   "pasta": `User Pasta`,
   "cut": `User Cut`,
+  "openDevtool": "User Open Devtool",
+  "closeDevtool": "User Close Devtool",
+  "blurBrowser": "User Blur Browser",
+  "focusBrowser": "User Focus Browser",
 }
 export const SentryModule = {
   enable: true,
@@ -117,6 +122,11 @@ export const SentryModule = {
             // ...that.getCommonTagsInfo(),
             // privateMode: detectIncognitoResult.isPrivate,
           },
+          contexts: {
+            userActionContext: {
+              selectContent: `extract less than 8kb from file. ${finalSelectionContent}`,
+            },
+          }
         })
       } else {
         // that.addBreadcrumb({
@@ -147,7 +157,7 @@ export const SentryModule = {
 
     function callback() {
       const selectionContent = document.getSelection().toString();
-      console.log("[sentry][user] selectionContent", selectionContent)
+      // console.log("[sentry][user] selectionContent", selectionContent)
       that.sendSelectionMessage(selectionContent).then(() => {
 
       })
@@ -334,6 +344,73 @@ export const SentryModule = {
   stopToMonitorUser: function () {
 
   },
+  startToMonitorBrowserActions: function () {
+    // NOTE: Page Visibility API , https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
+    // document.addEventListener("visibilitychange", function() {
+    //   // NOTICE: 可以偵測切換 Tab，全螢幕滑動
+    //   if (document.hidden){
+    //     console.log("Browser tab is hidden")
+    //   } else {
+    //     console.log("Browser tab is visible")
+    //   }
+    // });
+
+    window.addEventListener("visibilitychange", function() {
+      // NOTICE: 可以偵測 Browser 是否離開或顯示 、切換 Tab，全螢幕滑動
+      if (document.hidden){
+        // console.log("Browser is hidden")
+        Sentry.captureMessage(UserActions.blurBrowser, {
+          level: "info",
+          tags: {
+            userAction: "blurBrowser",
+          },
+        })
+      } else {
+        // console.log("Browser is visible")
+        Sentry.captureMessage(UserActions.focusBrowser, {
+          level: "info",
+          tags: {
+            userAction: "focusBrowser",
+          },
+        })
+      }
+    });
+
+    // NOTICE: 開啟使用者工具時，不會有此事件
+    // window.addEventListener("blur", (event) => {
+    //   console.log("Browser is blur");
+    // });
+
+    // NOTICE: 開啟使用者工具時，不會有此事件
+    // window.addEventListener("focus", () => {
+    //   console.log("Browser is focus");
+    // })
+
+    // NOTICE: 使用者是否開啟除錯工具
+    window.addEventListener('devtoolschange', event => {
+      // console.log('Is DevTools open:', event.detail.isOpen);
+      // console.log('DevTools orientation:', event.detail.orientation);
+      const idDevToolsOpen = event.detail.isOpen;
+
+      if(idDevToolsOpen) {
+        Sentry.captureMessage(UserActions.openDevtool, {
+          level: "warning",
+          tags: {
+            userAction: "openDevtool",
+          },
+        })
+      } else {
+        Sentry.captureMessage(UserActions.closeDevtool, {
+          level: "warning",
+          tags: {
+            userAction: "closeDevtool",
+          },
+        })
+      }
+
+    });
+
+  },
   userLogin: function () {
     if(!Cookies.get("loginInfo") || !Cookies.get("adminUser")) {
       return;
@@ -342,6 +419,7 @@ export const SentryModule = {
     if(!this.isMonitoring) {
       this.isMonitoring = true;
       this.settingUserInfo();
+      this.startToMonitorBrowserActions();
       this.startToMonitorUserMouseSelection();
       this.startToMonitorUserKeyboard();
     } else {
