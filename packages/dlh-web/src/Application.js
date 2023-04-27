@@ -84,9 +84,6 @@ export const SentryModule = {
   sendSelectionMessage: async function (selectionContent) {
     const that = this;
     const finalSelectionContent = selectionContent.replace(/\n/g, " ");
-    // const detectIncognitoResult = await detectIncognito();
-    // console.log("detectIncognitoResult.browserName", detectIncognitoResult.browserName);
-    // console.log("detectIncognitoResult.isPrivate", detectIncognitoResult.isPrivate);
 
     Sentry.configureScope((scope) => {
 
@@ -209,16 +206,26 @@ export const SentryModule = {
   //   await this.sendSelectionMessage(eventTitle, selectionContent);
   // },
 
-  settingUserInfo: function () {
+  settingUserInfo: async function () {
     const login = JSON.parse(Cookies.get("loginInfo")).data;
     const getInfo = JSON.parse(Cookies.get("adminUser")).data
     if(!login || !getInfo) return;
+
+    const detectIncognitoResult = await detectIncognito();
+    // console.log("detectIncognitoResult.browserName", detectIncognitoResult.browserName);
+    // console.log("detectIncognitoResult.isPrivate", detectIncognitoResult.isPrivate);
+
+    // const blockAdBlockInfo = blockAdBlock.check();
+    // console.log("blockAdBlockInfo", blockAdBlockInfo);
+
     const userInfo = {
       // NOTE: 使用地區、工作站(真假)
       // country: 編譯給定的 ENV
       "user.regionId": getInfo.regionId,
       "user.stationId": getInfo.stationId,
       // IP: sentry 預設會紀錄
+      // NOTE: 裝置
+      "user.isPrivate": detectIncognitoResult.isPrivate,
       // NOTE: 帳號授權資訊
       "user.passwordLogin": getInfo.passwordLogin,
       "user.googleAuthFlag": login.googleAuthFlag,
