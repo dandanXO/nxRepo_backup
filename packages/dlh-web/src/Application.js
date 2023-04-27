@@ -119,11 +119,6 @@ export const SentryModule = {
             // ...that.getCommonTagsInfo(),
             // privateMode: detectIncognitoResult.isPrivate,
           },
-          contexts: {
-            userActionContext: {
-              selectContent: `extract less than 8kb from file. ${finalSelectionContent}`,
-            },
-          }
         })
       } else {
         // that.addBreadcrumb({
@@ -278,10 +273,6 @@ export const SentryModule = {
         level: "info",
         tags: {
           userAction: "copy",
-        },
-        contexts: {
-          // NOTICE: device is reserved word
-          userDevice: "keyboard"
         }
       })
     }
@@ -295,10 +286,6 @@ export const SentryModule = {
         level: "info",
         tags: {
           userAction: "pasta",
-        },
-        contexts: {
-          // NOTICE: device is reserved word
-          userDevice: "keyboard"
         }
       })
     }
@@ -312,10 +299,6 @@ export const SentryModule = {
         level: "info",
         tags: {
           userAction: "cut",
-        },
-        contexts: {
-          // NOTICE: device is reserved word
-          userDevice: "keyboard"
         }
       })
     }
