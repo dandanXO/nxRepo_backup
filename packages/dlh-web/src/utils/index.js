@@ -143,7 +143,6 @@ axios.defaults.headers["Content-Type"] = "application/json";
 axios.interceptors.response.use(
     function (response) {
 
-
         const {
             data,
             config: { url }
@@ -213,8 +212,14 @@ axios.interceptors.response.use(
         return response["data"];
     },
     function (error) {
-        showModal(intlMsg("system.err"));
-        // console.log(error.response);
+        if(error && error.response && error.response.data && error.response.data.message) {
+          showModal(error.response.data.message);
+        } else {
+          showModal(intlMsg("system.err"));
+        }
+        if(error && error.response && error.response.data && error.response.data.code && error.response.data.code === 403) {
+          history.push("/login");
+        }
         return Promise.resolve(error);
     }
 );

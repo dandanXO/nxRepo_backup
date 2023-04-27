@@ -211,8 +211,8 @@ export const SentryModule = {
 
   settingUserInfo: function () {
     const login = JSON.parse(Cookies.get("loginInfo")).data;
-    const getInfo = JSON.parse(Cookies.get("adminUser")).data;
-
+    const getInfo = JSON.parse(Cookies.get("adminUser")).data
+    if(!login || !getInfo) return;
     const userInfo = {
       // NOTE: 使用地區、工作站(真假)
       // country: 編譯給定的 ENV
