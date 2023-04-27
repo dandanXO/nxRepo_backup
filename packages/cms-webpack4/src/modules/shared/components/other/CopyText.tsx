@@ -7,18 +7,8 @@ import {Application} from "../../Application";
 function CopyText({ text, actualCopy = text}) {
     const handleCopy = (copyContent: string) => {
         // console.log("copyContent", copyContent);
-        if(window["SentryModule"] && window["SentryModule"]["sendMessage"]) {
-            // const userActions = {
-            //     "copy": `Copy-ColumnCopy-${Application.getEnvironmentName()}`,
-            //     "pasta": `Pasta-ColumnCopy-${Application.getEnvironmentName()}`,
-            //     "cut": `Cut-ColumnCopy-${Application.getEnvironmentName()}`,
-            // }
-            const userActions = {
-                "copy": `Copy-ColumnCopy`,
-                "pasta": `Pasta-ColumnCopy`,
-                "cut": `Cut-ColumnCopy`,
-            }
-            window["SentryModule"]["sendMessage"](userActions.copy, copyContent)
+        if(window["SentryModule"] && window["SentryModule"]["sendCopyColumnTextMessage"]) {
+            window["SentryModule"]["sendCopyColumnTextMessage"](copyContent);
         }
     }
     return (
