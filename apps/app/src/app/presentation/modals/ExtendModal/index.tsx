@@ -11,6 +11,11 @@ import useRepayTypes from "../../hooks/useRepayTypes";
 import moment from "moment";
 import {getOrderNo} from "../../../modules/location/getOrderNo";
 import {Button} from "../../components/layouts/Button";
+import { renderByCountry } from "../../../modules/i18n";
+import { IndiaCountry } from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
+import { PakistanCountry } from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import IndiaExtendModal from "./i18n/IndiaExtendModal";
+import PakistanExtendModal from "./i18n/PakistanExtendModal";
 
 
 const PureExtendModal = (props: any) => {
@@ -60,7 +65,7 @@ const PureExtendModal = (props: any) => {
                                 title={t("Extension Fee") as string}
                                 text={`${environment.currency} ${extensionFee ?? ""}`}
                             />
-                            <div className={`flex flex-row mt-6`}>
+                            <div className={`flex flex-row mt-6 text-white`}>
                                 <div className={`grow mr-1.5`}>
                                   <Button onClick={()=>navigate(-2)} text={'Cancel'} className={`bg-primary-variant w-full`}/>
                                 </div>
@@ -70,6 +75,18 @@ const PureExtendModal = (props: any) => {
                             </div>
                         </div>
                     );
+                    // return renderByCountry({
+                    //     [IndiaCountry.country]: <IndiaExtendModal currentData={location.state.currentData} />,
+                    //     [PakistanCountry.country]: (
+                    //         <PakistanExtendModal
+                    //             currentData={location.state.currentData}
+                    //             repayTypesList={repayTypesList}
+                    //             repayType={repayType}
+                    //             setRepayType={setRepayType}
+                    //             handleConfirm={handleConfirm}
+                    //         />
+                    //     )
+                    // }, <IndiaExtendModal />)
                 }}
                 enableTitleHorizontal={true}
             ></Overlay>

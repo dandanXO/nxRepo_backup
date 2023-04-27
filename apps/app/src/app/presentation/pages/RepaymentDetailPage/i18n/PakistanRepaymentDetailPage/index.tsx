@@ -95,7 +95,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                         fontWeight="font-bold"
                     />)
                 }
-                <div className={`flex flex-row my-3`}>
+                <div className={`flex flex-row my-3 text-white`}>
 
                     <div onClick={() => {
                       navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
