@@ -11,8 +11,6 @@ import {ErrorPage} from "../pages/__test__/ErrorPage";
 
 // const IndexPage = loadable(() => import("../pages/IndexPage"));
 import IndexPage from "../pages/IndexPage";
-import RepamentCouponModal from "../modals/RepamentCouponModal";
-import IBANFinderModal from "../modals/IBANFinderModal";
 
 import {useSelector} from "react-redux"
 import {TabBar} from "../components/layouts/TabBar";
@@ -31,6 +29,7 @@ const LoanRecordPage = loadable(() => import(/* webpackChunkName: "RepaymentPage
 const MyCouponListPage = loadable(() => import(/* webpackChunkName: "MyCouponListPage" */ "../pages/MyCouponListPage"));
 // const MyCouponPage = loadable(() => import("../pages/MyCouponPage"));
 const OnlineCustomerServicePage = loadable(() => import(/* webpackChunkName: "OnlineCustomerServicePage" */ "../pages/OnlineCustomerServicePage"));
+const IBANFinderPage = loadable(() => import(/* webpackChunkName: "IBANFinderPage" */ "../pages/IBANFinderPage"));
 
 const PartnerPage = loadable(() => import(/* webpackChunkName: "PartnerPage" */ "../pages/PartnerPage"));
 const PersonalInfoPage = loadable(() => import(/* webpackChunkName: "PersonalInfoPage" */ "../pages/PersonalInfoPage"));
@@ -49,6 +48,8 @@ const ExtendModal = loadable(() => import(/* webpackChunkName: "ExtendModal" */ 
 const LogoutModal = loadable(() => import(/* webpackChunkName: "LogoutModal" */ "../modals/LogoutModal"));
 const APIBoundaryModal = loadable(() => import(/* webpackChunkName: "APIBoundaryModal" */ "../modals/APIBoundaryModal"));
 const PrivacyPolicyModal = loadable(() => import(/* webpackChunkName: "PrivacyPolicyModal" */ "../modals/PrivacyPolicyModal"));
+const RepamentCouponModal = loadable(() => import(/* webpackChunkName: "RepamentCouponModal" */ "../modals/RepamentCouponModal"));
+const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ "../modals/IBANFinderModal"));
 
 
 export const AppRouter = () => {
@@ -70,6 +71,7 @@ export const AppRouter = () => {
           <Route path={PagePathEnum.LoginPage} element={<LoginPage />} >
             <Route path="log-out-modal" element={<LogoutModal />} />
           </Route>
+          <Route path="/v2/iban-finder" element={<IBANFinderPage />} />
           <Route path={PagePathEnum.IndexPage} element={<IndexPage />} />
           <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
           <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
