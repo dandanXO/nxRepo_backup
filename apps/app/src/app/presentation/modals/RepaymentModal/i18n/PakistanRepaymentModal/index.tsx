@@ -105,7 +105,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                         onClick={() => {
                             if (isRepayTypesFetching) return;
                             navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`,
-                                { state: { ...location.state, paymentAmount: balance, paymentMethod: repayType.type, } })
+                                { state: { ...location.state, paymentAmount: balance, paymentMethod: repayType.value, } })
                         }}
                     >
                     <div className={cx('grow text-base flex-nowrap flex justify-between', {

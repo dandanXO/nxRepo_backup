@@ -60,7 +60,7 @@ const RepaymentModal = (props: any) => {
         /* props.setShowRepaymentModal(false);
         // other
         props.setShowRepaymentAdsModal(true); */
-        const payType = repayType && repayType.type;
+        const payType = repayType && repayType.value;
         const couponNo = radioValue==='balance' && location.state.coupon ? location.state.coupon.couponNo : null;
         handlePostRepayCreate(false, orderNo, balanceValue, payType, couponNo);
     };
