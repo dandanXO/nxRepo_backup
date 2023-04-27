@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useLazyGetRepayTypesQuery } from "../../api/rtk";
 
 type paymentMethodValueType = {
-    type: string;
+    value: string;
     label: string;
 };
 
@@ -20,7 +20,7 @@ const useRepayTypes = () => {
     useEffect(() => {
         if (repayTypesData !== undefined) {
             const options = repayTypesData && repayTypesData?.map((item: any) => {
-                return { type: item.payType, label: item.payTypeAlias }
+                return { value: item.payType, label: item.payTypeAlias }
             });
             setRepayTypesList(options);
             setRepayType(options[0])

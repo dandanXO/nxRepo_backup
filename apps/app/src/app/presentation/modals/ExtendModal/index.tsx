@@ -41,7 +41,7 @@ const PureExtendModal = (props: any) => {
                 repayConfirmDetail.extensionPayAmount
                 ? repayConfirmDetail.extensionPayAmount
                 : 0,
-           repayType && repayType.type
+           repayType && repayType.value
         );
     };
 
