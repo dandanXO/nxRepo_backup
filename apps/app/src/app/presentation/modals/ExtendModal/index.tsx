@@ -11,6 +11,11 @@ import useRepayTypes from "../../hooks/useRepayTypes";
 import moment from "moment";
 import {getOrderNo} from "../../../modules/location/getOrderNo";
 import {Button} from "../../components/layouts/Button";
+import { renderByCountry } from "../../../modules/i18n";
+import { IndiaCountry } from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
+import { PakistanCountry } from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import IndiaExtendModal from "./i18n/IndiaExtendModal";
+import PakistanExtendModal from "./i18n/PakistanExtendModal";
 
 
 const PureExtendModal = (props: any) => {
@@ -19,7 +24,8 @@ const PureExtendModal = (props: any) => {
     console.log('extend location', location)
 
     const { t } = props;
-    const { productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', extendDate = '', extensionFee = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
+
+    const { repayConfirmDetail: {extendDate, extensionFee, extensionPayAmount} ,productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
     const orderNo =  location.state.currentData?.orderNo || getOrderNo();
     const { handlePostExpendCreate } = useExtendCreate();
 
@@ -36,7 +42,7 @@ const PureExtendModal = (props: any) => {
                 repayConfirmDetail.extensionPayAmount
                 ? repayConfirmDetail.extensionPayAmount
                 : 0,
-           repayType && repayType.type
+           repayType && repayType.value
         );
     };
 
@@ -53,14 +59,14 @@ const PureExtendModal = (props: any) => {
                             <ListItem title={t("No.") as string} text={orderNo ?? ""} />
                             <ListItem title={t("Due Date") as string} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} />
                             <ListItem title={t("Overdue Days") as string} text={overdueDays ?? ""} />
-                            <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""} />
-                            <ListItem title={t("Extension Due Date") as string} text={extendDate ?? ""} />
+                            <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""}  textColor={"text-red-500"}/>
+                            <ListItem title={t("Extension Due Date") as string} text={extendDate ?? ""} textColor={"text-red-500"}/>
                             <Divider />
                             <ListItem fontWeight="font-bold"
                                 title={t("Extension Fee") as string}
-                                text={`${environment.currency} ${extensionFee ?? ""}`}
+                                text={`${environment.currency} ${extensionPayAmount ?? ""}`}
                             />
-                            <div className={`flex flex-row mt-6`}>
+                            <div className={`flex flex-row mt-6 text-white`}>
                                 <div className={`grow mr-1.5`}>
                                   <Button onClick={()=>navigate(-2)} text={'Cancel'} className={`bg-primary-variant w-full`}/>
                                 </div>
@@ -70,6 +76,18 @@ const PureExtendModal = (props: any) => {
                             </div>
                         </div>
                     );
+                    // return renderByCountry({
+                    //     [IndiaCountry.country]: <IndiaExtendModal currentData={location.state.currentData} />,
+                    //     [PakistanCountry.country]: (
+                    //         <PakistanExtendModal
+                    //             currentData={location.state.currentData}
+                    //             repayTypesList={repayTypesList}
+                    //             repayType={repayType}
+                    //             setRepayType={setRepayType}
+                    //             handleConfirm={handleConfirm}
+                    //         />
+                    //     )
+                    // }, <IndiaExtendModal />)
                 }}
                 enableTitleHorizontal={true}
             ></Overlay>

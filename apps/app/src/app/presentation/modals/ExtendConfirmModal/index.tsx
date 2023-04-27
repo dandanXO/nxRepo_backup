@@ -1,11 +1,10 @@
 import { useNavigate, useLocation } from "react-router";
-import {
-    Overlay,
-} from "@frontend/mobile/shared/ui";
-import {PagePathEnum} from "../../pages/PagePathEnum";
-import {getOrderNo} from "../../../modules/location/getOrderNo";
-import {getToken} from "../../../modules/location/getToken";
-import {Button} from "../../components/layouts/Button";
+import { Overlay } from "@frontend/mobile/shared/ui";
+import { renderByCountry } from "../../../modules/i18n";
+import { IndiaCountry } from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
+import { PakistanCountry } from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import IndiaExtendConfirmModal from "./i18n/IndiaExtendConfirmModal";
+import PakistanExtendConfirmModal from "./i18n/PakistanExtendConfirmModal";
 
 const ExtendConfirmModal = () => {
     const navigate = useNavigate();
@@ -15,22 +14,12 @@ const ExtendConfirmModal = () => {
         <Overlay
             show={true}
             enableClose={true}
-            onCancel={()=>navigate(-1)}
+            onCancel={() => navigate(-1)}
             content={(hide: () => void) => {
-                return <div className={`p-4`}> <div className="text-xl font-bold">Extend</div>
-                    <div className="font-bold my-6 leading-tight">Extensions are intended for situations where you are genuinely experiencing financial difficulties and are unable to fully repay the amount owed.</div>
-                    <div className="font-bold mb-4 leading-tight">We recommend that you prioritize full repayment when possible for a higher credit limit.</div>
-                    <div className={`flex flex-col`}>
-                      <Button onClick={() => {
-                        navigate(`${PagePathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
-                          state: {
-                            currentData: location.state,
-                          }
-                        })}
-                      } text={"Got it and go extension"} className={`bg-primary-main w-full mb-2`}/>
-                      <Button onClick={()=>navigate(-1)} text={'Next time'} className={`bg-primary-variant w-full`}/>
-                    </div>
-                </div>
+                return renderByCountry({
+                    [IndiaCountry.country]: <IndiaExtendConfirmModal />,
+                    [PakistanCountry.country]: <PakistanExtendConfirmModal />
+                }, <IndiaExtendConfirmModal />)
             }}
         />
 

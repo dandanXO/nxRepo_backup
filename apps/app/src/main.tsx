@@ -14,6 +14,9 @@ export const AppFlag = {
   enableSentry: false,
 }
 
+export const isInAndroid = window["isInAndroid"]();
+console.log("isInAndroid", isInAndroid);
+
 let appInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
 // NOTE: only H5 environment
 if(!appInfo) {

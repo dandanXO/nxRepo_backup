@@ -19,7 +19,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
     const location = useLocation();
     const { currentData } = props || {};
     const { status='', productName = '', orderNo = '', dueDate = '',  overdueDays = '', paidAmount = '', repayRecords = [],
-        totalRepayAmount = '', chargeFeeDetail = {}, extendDate = '', extensionFee = '', totalDueAmount = '' } = currentData ?? {};
+        totalRepayAmount = '', chargeFeeDetail = {}, extendDate = '', extensionFee = '', totalDueAmount = '', extendable } = currentData ?? {};
     const { items = [] } = chargeFeeDetail ?? {};
 
     const getItems = (field: string) => {
@@ -33,11 +33,9 @@ const PakistanRepaymentDetailPage = (props: any) => {
     const { value: gst } = getItems('GST');
     const { value: loanInterest } = getItems('LOAN_INTEREST');
     const { value: reductionAmount } = getItems('REDUCTION_AMOUNT');
-    const { value: penaltyInterest } = getItems('PENALTY_INTEREST'); 
+    const { value: penaltyInterest } = getItems('PENALTY_INTEREST');
 
-    console.log("RepaymentDetailPage.repayRecords PPPPPPPPKKKKKK", loanAmount);
 
-    
     const renderStatusTag = (status: string) => {
         return (
             <div className={`${Status(status)?.style} px-1`}>
@@ -55,8 +53,13 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 {status === 'EXTEND' && <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("MM-DD-YYYY") : ''} titleColor="text-slate-400" />}
                 {loanAmount &&  <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-slate-400" />}
                 <Divider />
+
+                {serviceFee && <ListItem title={'Service Charge'} text={<Money money={serviceFee}/>} titleColor="text-slate-400" />}
+
                 {dailyFee && <ListItem title={'Daily Fee'} text={<Money money={dailyFee}/>} titleColor="text-slate-400" />}
-                {serviceFee && <ListItem title={'Service Fee'} text={<Money money={serviceFee}/>} titleColor="text-slate-400" />}
+
+
+
                 {gst && <ListItem title={'GST'} text={<Money money={gst}/>} titleColor="text-slate-400" />}
                 {loanInterest && <ListItem title={'Loan Interest'} text={<Money money={loanInterest}/>} titleColor="text-slate-400" />}
                 <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
@@ -77,26 +80,20 @@ const PakistanRepaymentDetailPage = (props: any) => {
                             </div>
                         </div>
                     }
-                    text={<div className="flex"> - <Money money={paidAmount} /></div>} 
+                    text={<div className="flex"> - <Money money={paidAmount} /></div>}
                 />
                 <Divider />
+                {/*NOTE: 總應還金額*/}
                 {status !== 'EXTEND' &&
                     (<ListItem
                         title={'Repayment Amount'}
-                        text={<Money money={totalRepayAmount} />}
+                        text={<Money money={totalDueAmount} />}
                         titleColor={status === "OVERDUE" ? "text-red-500" : "text-black"}
                         fontWeight="font-bold"
                     />)}
-                {status === 'EXTEND' &&
-                    (<ListItem
-                        title={'Extension Payment'}
-                        text={<Money money={totalDueAmount} />}
-                        titleColor={"text-black"}
-                        fontWeight="font-bold"
-                    />)
-                }
-                <div className={`flex flex-row my-3`}>
+                <div className={`flex flex-row my-3 text-white`}>
 
+                  {extendable !== undefined && extendable && (
                     <div onClick={() => {
                       navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: currentData
@@ -104,6 +101,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     } className={`grow mr-1.5`}>
                       <Button text={"Extend"} className={`bg-primary-variant`}/>
                     </div>
+                  )}
 
                     <div onClick={() => {
                       navigate(`repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
@@ -114,7 +112,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     </div>
 
                 </div>
-               
+
                 {(status === "UNPAID" || status === "OVERDUE") &&
                     <>
                         <div className={`text-xs text-gray-300`}>

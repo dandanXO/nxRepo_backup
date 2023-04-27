@@ -44,7 +44,7 @@ const LoginPage = loadable(() => import(/* webpackChunkName: "LoginPage" */ '../
 const RepaymentModal = loadable(() => import(/* webpackChunkName: "RepaymentModal" */ '../modals/RepaymentModal'));
 const AmountRepaidModal = loadable(() => import(/* webpackChunkName: "AmountRepaidModal" */ "../modals/AmountRepaidModal/AmountRepaidModal"));
 const ExtendConfirmModal = loadable(() => import(/* webpackChunkName: "ExtendConfirmModal" */ "../modals/ExtendConfirmModal"));
-const ExtendModal = loadable(() => import(/* webpackChunkName: "ExtendModal" */ "../modals/ExtendModal/ExtendModal"));
+const ExtendModal = loadable(() => import(/* webpackChunkName: "ExtendModal" */ "../modals/ExtendModal"));
 const LogoutModal = loadable(() => import(/* webpackChunkName: "LogoutModal" */ "../modals/LogoutModal"));
 const APIBoundaryModal = loadable(() => import(/* webpackChunkName: "APIBoundaryModal" */ "../modals/APIBoundaryModal"));
 const PrivacyPolicyModal = loadable(() => import(/* webpackChunkName: "PrivacyPolicyModal" */ "../modals/PrivacyPolicyModal"));
