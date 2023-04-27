@@ -20,6 +20,7 @@ import { PakistanCountry } from "../../../../../../../libs/shared/domain/src/cou
 import { BangladeshCountry } from "../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
 import IndiaRepaymentDetailPage from "./i18n/IndiaRepaymentDetailPage";
 import PakistanRepaymentDetailPage from "./i18n/PakistanRepaymentDetailPage";
+import {isInAndroid} from "../../../../main";
 
 const RepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()
@@ -35,7 +36,7 @@ const RepaymentDetailPage = (props: any) => {
     }, [])
 
     return (<div>
-        <Navigation title={"Repay Details"} back={() => { navigate(-1) }} />
+        {!isInAndroid && <Navigation title={"Repay Details"} back={() => { navigate(-1) }} />}
         <div className={`text-sm text-center text-blue-500 bg-blue-200 py-2`}>Get more amount after instant payment</div>
         {/* NOTE: 目前印度與巴基斯坦樣式相同 (先使用巴基斯坦的版本) */}
         <PakistanRepaymentDetailPage currentData={currentData}/>
@@ -46,7 +47,7 @@ const RepaymentDetailPage = (props: any) => {
                 ),
                 [PakistanCountry.country]: (
                     <IndiaRepaymentDetailPage currentData={currentData}/>
-                   
+
                 )
             }, (<PakistanRepaymentDetailPage currentData={currentData}/>))
         } */}

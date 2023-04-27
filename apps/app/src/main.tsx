@@ -14,7 +14,7 @@ export const AppFlag = {
   enableSentry: false,
 }
 
-const isInAndroid = window["isInAndroid"]();
+export const isInAndroid = window["isInAndroid"]();
 console.log("isInAndroid", isInAndroid);
 
 let appInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
