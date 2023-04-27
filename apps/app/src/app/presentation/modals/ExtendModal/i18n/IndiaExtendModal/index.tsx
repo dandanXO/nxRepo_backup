@@ -17,7 +17,9 @@ const IndiaExtendModal = (props: any) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { t } = props;
-    const { productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', extendDate = '', extensionFee = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
+    const {
+      productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', extensionFee = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
+
     const orderNo = location.state.currentData?.orderNo || getOrderNo();
     const { handlePostExpendCreate } = useExtendCreate();
 
@@ -47,11 +49,11 @@ const IndiaExtendModal = (props: any) => {
             <ListItem title={t("Due Date") as string} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") : ''} />
             <ListItem title={t("Overdue Days") as string} text={overdueDays ?? ""} />
             <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""} />
-            <ListItem title={t("Extension Due Date") as string} text={extendDate ?? ""} textColor="text-primary-main" />
+            <ListItem title={t("Extension Due Date") as string} text={repayConfirmDetail.extendDate ?? ""} textColor="text-primary-main" />
             <Divider />
             <ListItem fontWeight="font-bold"
                 title={t("Extension Fee") as string}
-                text={`${environment.currency} ${extensionFee ?? ""}`}
+                text={`${environment.currency} ${repayConfirmDetail.extensionPayAmount ?? ""}`}
             />
             <div className={`flex flex-row mt-6`}>
                 <div className={`grow mr-1.5`}>

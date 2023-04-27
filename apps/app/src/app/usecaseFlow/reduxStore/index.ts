@@ -32,7 +32,7 @@ const sagaMiddleware = createSagaMiddleware({
   onError(error: Error, errorInfo: { sagaStack: string }) {
     // console.log("[app][saga] error", error)
     // alertModal(errorInfo.sagaStack)
-    alertModal("error")
+    // alertModal("error")
   },
 })
 

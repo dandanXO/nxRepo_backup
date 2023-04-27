@@ -35,6 +35,7 @@ const RepaymentDetailPage = (props: any) => {
         triggerGetList({ orderNo: location.state?.orderNo || getOrderNo() });
     }, [])
 
+
     return (<div>
         {!isInAndroid && <Navigation title={"Repay Details"} back={() => { navigate(-1) }} />}
         <div className={`text-sm text-center text-blue-500 bg-blue-200 py-2`}>Get more amount after instant payment</div>

@@ -24,7 +24,8 @@ const PureExtendModal = (props: any) => {
     console.log('extend location', location)
 
     const { t } = props;
-    const { productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', extendDate = '', extensionFee = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
+
+    const { repayConfirmDetail: {extendDate, extensionFee, extensionPayAmount} ,productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
     const orderNo =  location.state.currentData?.orderNo || getOrderNo();
     const { handlePostExpendCreate } = useExtendCreate();
 
@@ -58,12 +59,12 @@ const PureExtendModal = (props: any) => {
                             <ListItem title={t("No.") as string} text={orderNo ?? ""} />
                             <ListItem title={t("Due Date") as string} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} />
                             <ListItem title={t("Overdue Days") as string} text={overdueDays ?? ""} />
-                            <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""} />
-                            <ListItem title={t("Extension Due Date") as string} text={extendDate ?? ""} />
+                            <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""}  textColor={"text-red-500"}/>
+                            <ListItem title={t("Extension Due Date") as string} text={extendDate ?? ""} textColor={"text-red-500"}/>
                             <Divider />
                             <ListItem fontWeight="font-bold"
                                 title={t("Extension Fee") as string}
-                                text={`${environment.currency} ${extensionFee ?? ""}`}
+                                text={`${environment.currency} ${extensionPayAmount ?? ""}`}
                             />
                             <div className={`flex flex-row mt-6 text-white`}>
                                 <div className={`grow mr-1.5`}>

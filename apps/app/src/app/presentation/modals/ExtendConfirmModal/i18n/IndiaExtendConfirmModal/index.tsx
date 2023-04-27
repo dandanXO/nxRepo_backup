@@ -8,7 +8,8 @@ import { Button } from "../../../../components/layouts/Button";
 const IndiaExtendConfirmModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    // console.log("ExtendConfirmModal.location.state", location.state)
+    // console.log("ExtendConfirmModal.location.state", location.state);
+
     return (
         <div className={`p-4`}> <div className="text-xl font-bold">Extend</div>
             <div className="font-bold my-6 leading-tight">Extensions are intended for situations where you are genuinely experiencing financial difficulties and are unable to fully repay the amount owed.</div>
@@ -21,8 +22,8 @@ const IndiaExtendConfirmModal = () => {
                         }
                     })
                 }
-                } text={"Got it and go extension"} className={`bg-primary-main w-full mb-2`} />
-                <Button onClick={() => navigate(-1)} text={'Next time'} className={`bg-primary-variant w-full`} />
+                } text={"Got it and go extension"} className={`text-white bg-primary-main w-full mb-2`} />
+                <Button onClick={() => navigate(-1)} text={'Next time'} className={`text-white bg-primary-variant w-full`} />
             </div>
         </div>
     )

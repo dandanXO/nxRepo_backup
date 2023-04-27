@@ -183,7 +183,10 @@ axios.interceptors.response.use(
                 }, 1500);
                 return;
             }
-
+            if(data.message)  {
+              showModal(msg);
+              return;
+            }
             //数据格式{code:500, data:{msg:'aa'}} 或者{code:500,message:'aa'}
             const obj = data.data;
             let msg;

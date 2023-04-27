@@ -69,7 +69,7 @@ const axiosBaseQuery =
             }
             console.info("[app][api] error", error);
 
-            alertModal(err.message);
+            // alertModal(err.message);
 
             return {
                 error: {

@@ -14,9 +14,10 @@ export function* catchSagaError(error: any) {
     //     message: "Please login again.",
     //   }));
     // }
-    alertModal((axiosError?.response?.data as any).message as string)
+    // alertModal((axiosError?.response?.data as any).message as string)
   } else {
-    alertModal(error, "Warning");
+    // NOTICE: 可能不是純字串
+    // alertModal(error, "Warning");
   }
   yield false;
 }
