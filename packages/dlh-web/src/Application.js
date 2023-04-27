@@ -117,6 +117,11 @@ export const SentryModule = {
             // ...that.getCommonTagsInfo(),
             // privateMode: detectIncognitoResult.isPrivate,
           },
+          contexts: {
+            userActionContext: {
+              selectContent: `extract less than 8kb from file. ${finalSelectionContent}`,
+            },
+          }
         })
       } else {
         // that.addBreadcrumb({
@@ -147,7 +152,7 @@ export const SentryModule = {
 
     function callback() {
       const selectionContent = document.getSelection().toString();
-      console.log("[sentry][user] selectionContent", selectionContent)
+      // console.log("[sentry][user] selectionContent", selectionContent)
       that.sendSelectionMessage(selectionContent).then(() => {
 
       })
