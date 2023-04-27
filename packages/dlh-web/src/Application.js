@@ -280,7 +280,8 @@ export const SentryModule = {
           userAction: "copy",
         },
         contexts: {
-          device: "keyboard"
+          // NOTICE: device is reserved word
+          userDevice: "keyboard"
         }
       })
     }
@@ -296,7 +297,8 @@ export const SentryModule = {
           userAction: "pasta",
         },
         contexts: {
-          device: "keyboard"
+          // NOTICE: device is reserved word
+          userDevice: "keyboard"
         }
       })
     }
@@ -312,7 +314,8 @@ export const SentryModule = {
           userAction: "cut",
         },
         contexts: {
-          device: "keyboard"
+          // NOTICE: device is reserved word
+          userDevice: "keyboard"
         }
       })
     }
