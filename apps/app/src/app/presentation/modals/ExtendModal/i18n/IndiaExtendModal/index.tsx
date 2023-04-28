@@ -11,56 +11,36 @@ import useRepayTypes from "../../../../hooks/useRepayTypes";
 import moment from "moment";
 import { getOrderNo } from "../../../../../modules/location/getOrderNo";
 import { Button } from "../../../../components/layouts/Button";
+import Money from "../../../../components/Money.tsx";
 
 
 const IndiaExtendModal = (props: any) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { t } = props;
-    const {
-      productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', extensionFee = '', repayConfirmDetail = {} } = location.state.currentData ?? {};
+    const { repayConfirmDetail: { extendDate, extensionFee, extensionPayAmount='' }, orderNo = '', productName = '', dueDate = '', overdueDays = '', penaltyInterest = '' } = props.currentData ?? {};
 
-    const orderNo = location.state.currentData?.orderNo || getOrderNo();
-    const { handlePostExpendCreate } = useExtendCreate();
-
-    const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
-    useEffect(() => {
-        triggerGetList({ orderNo: orderNo });
-    }, [])
-
-    const handleConfirm = () => {
-        handlePostExpendCreate && handlePostExpendCreate(
-            false,
-            orderNo,
-            repayConfirmDetail &&
-                repayConfirmDetail.extensionPayAmount
-                ? repayConfirmDetail.extensionPayAmount
-                : 0,
-            repayType && repayType.value
-        );
-    };
 
     return (
-
         <div className={`p-2`}>
             <div className="text-xl font-bold mb-4">Extend</div>
             <ListItem title={t("Product") as string} text={productName ?? ""} />
             <ListItem title={t("No.") as string} text={orderNo ?? ""} />
             <ListItem title={t("Due Date") as string} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") : ''} />
             <ListItem title={t("Overdue Days") as string} text={overdueDays ?? ""} />
-            <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""} />
-            <ListItem title={t("Extension Due Date") as string} text={repayConfirmDetail.extendDate ?? ""} textColor="text-primary-main" />
+            <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""} textColor={"text-red-500"} />
+            <ListItem title={t("Extension Due Date") as string} text={extendDate ?? ""} textColor={"text-red-500"} />
             <Divider />
             <ListItem fontWeight="font-bold"
                 title={t("Extension Fee") as string}
-                text={`${environment.currency} ${repayConfirmDetail.extensionPayAmount ?? ""}`}
+                text={<Money money={extensionPayAmount}/>}
             />
-            <div className={`flex flex-row mt-6`}>
+            <div className={`flex flex-row mt-6 text-white`}>
                 <div className={`grow mr-1.5`}>
-                    <Button onClick={() => navigate(-2)} text={'Cancel'} className={`bg-primary-variant w-full text-white`} />
+                    <Button onClick={() => navigate(-2)} text={'Cancel'} className={`bg-primary-variant w-full`} />
                 </div>
                 <div className={`grow ml-1.5`} >
-                    <Button onClick={handleConfirm} text={'Confirm'} className={`bg-primary-main w-full text-white`} />
+                    <Button onClick={props.handleConfirm} text={'Confirm'} className={`bg-primary-main w-full`} />
                 </div>
             </div>
         </div>
