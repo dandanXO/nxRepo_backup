@@ -7,6 +7,7 @@ import { useIndiaBankAccountForm } from "../../hooks/india/useIndiaBankAccountFo
 import { useFinishedBindBankAccountForm } from "../../hooks/common/useFinishedBindBankAccountForm";
 import { Navigation } from "../../../../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
+import {isInAndroid} from "../../../../../../../main";
 export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     const navigate = useNavigate();
     const {
@@ -53,7 +54,8 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     });
 
     return (
-        <><Navigation title={"Bank Card"} back={() => { navigate(-1) }} />
+        <>
+          {!isInAndroid && <Navigation title={"Bank Card"} back={() => { navigate(-1) }} />}
             <CustomPage>
                 <BankAccountForm cardholderName={props.cardholderName}
                     ifscData={ifscData}
