@@ -156,21 +156,9 @@ export const StyledTopInput = styled.input<StyledInputProps>`
   border: 1px solid #aaaaaa;
   //background: #ffffff;
   background: inherit;
-  font-weight: 600;
-  font-size: 16px;
-  color: #101010;
+  //font-weight: 600;
+  //font-size: 16px;
 
-  // normal
-  /*
-    color: ${(props) =>
-    props.isThemeControlledByComponent
-      ? props.themeType === 'early'
-        ? '#5e5e5e'
-        : '#e2e2e2'
-      : props.theme.mode === 'early'
-      ? '#5e5e5e'
-      : '#e2e2e2'};
-    */
 
   &[type='search'] {
     box-sizing: border-box;
@@ -212,14 +200,6 @@ export const StyledTopInput = styled.input<StyledInputProps>`
       border-color: #d2d2d2;
     }
 
-    color: ${(props) =>
-      props.isThemeControlledByComponent
-        ? props.themeType === 'early'
-          ? '#999999'
-          : '#010101'
-        : props.theme.mode === 'early'
-        ? '#999999'
-        : '#010101'};
   }
 
   :disabled ~ label {
@@ -240,7 +220,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
 
   // placeholder
   ::placeholder {
-    color: #aaaaaa;
+    //color: #aaaaaa;
   }
 
   ${(props) => {
@@ -272,10 +252,10 @@ function isFocus(isFocus = false) {
 // input
 export const StyledInput2 = styled(StyledTopInput)<StyledInputProps>`
   //padding: 15px;
-  font-weight: 400;
-  text-align: right;
+  //font-weight: 400;
+  //text-align: right;
   //flex: 0 0 50%;
-  color: #101010;
+  //color: #101010;
   width: ${(props) => props.inputWidth ? props.inputWidth : "100px"};
   flex: 1;
 `;

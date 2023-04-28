@@ -46,16 +46,24 @@ const RepaymentModal = (props: any) => {
     const { balance = '', orderNo = '' } = location.state;
 
     const [radioValue, setRadioValue] = useState("balance");
+
     // NOTE: 變動數值
     const [balanceValue, setBalanceValue] = useState(balance);
 
     // NOTE: 付款方式
     const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
+
     useEffect(() => {
         triggerGetList({ orderNo: orderNo });
     }, [])
 
     const handleConfirm = () => {
+      // console.log("balanceValue");
+      // console.log(typeof balanceValue);
+      // console.log(balanceValue.trim() === "");
+        if(balanceValue === "") {
+          return;
+        }
         // self
         /* props.setShowRepaymentModal(false);
         // other
@@ -71,21 +79,24 @@ const RepaymentModal = (props: any) => {
             content={() => {
 
                 return (<>
-                    <div className="text-xl font-bold">{props.t("Repayment")}</div>
+                    <div className="text-lg font-bold text-black">{props.t("Repay")}</div>
                     {renderByCountry({
-                        [IndiaCountry.country]: <IndiaRepaymentModal
+                        [IndiaCountry.country]: (
+                          <IndiaRepaymentModal
                             radioValue={radioValue}
                             setRadioValue={setRadioValue}
+                            // NOTICE:
                             balance={balance}
                             balanceValue={balanceValue}
                             setBalanceValue={setBalanceValue}
-                            repayTypesList={repayTypesList}
                             isRepayTypesFetching={isRepayTypesFetching}
+                            repayTypesList={repayTypesList}
                             repayType={repayType}
                             setRepayType={setRepayType}
                             handleConfirm={handleConfirm}
                             orderNo={orderNo}
-                        />,
+                          />
+                        ),
                         [PakistanCountry.country]: <PakistanRepaymentModal
                             radioValue={radioValue}
                             setRadioValue={setRadioValue}

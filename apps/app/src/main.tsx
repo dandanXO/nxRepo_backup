@@ -38,7 +38,7 @@ if(!appInfo) {
       environment: "india",
       packageId: "com.pak.app.yesloan.android",
       appName: "dev_in",
-      uiVersion: "v12",
+      uiVersion: "v15",
       token: "",
     }
     applyTheme("pakistan", appInfo.uiVersion);

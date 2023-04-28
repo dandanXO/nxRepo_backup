@@ -82,6 +82,7 @@ export interface InputProps {
   ref?: any;
   suffix?: string | React.ReactNode;
   outlineType?: "outlined" | "standard"; //inputContainer (standard樣式為底線的)
+  moneyPrefix?: string;
 }
 
 // NOTICE: 實際產出元件的 dot 特性
@@ -126,7 +127,8 @@ const Input: InputInterface = ({
   style,
  inputWidth,
    suffix,
-   outlineType
+   outlineType,
+     moneyPrefix,
 }: InputProps) => {
   const forceUpdate = useForceUpdate();
 
@@ -300,8 +302,9 @@ const Input: InputInterface = ({
           outlineType={outlineType}
         >
           {LabelComponentElement}
-          <CustomInput
+          <div className={"money-prefix"} style={{ marginRight: 4}}>{moneyPrefix}</div>
 
+          <CustomInput
             inputWidth={inputWidth}
             // NOTICE: labelID
             disabled={disabled}

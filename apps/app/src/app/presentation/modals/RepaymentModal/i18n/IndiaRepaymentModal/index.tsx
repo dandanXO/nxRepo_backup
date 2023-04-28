@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AdSVG from "../../repayment_banner.svg";
 import { useLocation, useNavigate } from "react-router";
-import { Horizontal, Input, ListItem, Overlay, Radio, } from "@frontend/mobile/shared/ui";
+import {Horizontal, Input, InputValue, ListItem, Overlay, Radio,} from "@frontend/mobile/shared/ui";
 import Select from 'react-select';
 import { withTranslation } from "react-i18next";
 import { i18nRepaymentModal } from "../translations";
@@ -11,10 +11,11 @@ import { environment } from "../../../../../../environments/environment";
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from "../../../../components/layouts/Button";
 import { IRepaymentModalProps } from "../../index";
+import {formatPrice} from "../../../../../modules/formatPrice";
 
 export const RepaymentModalContainer = styled.div`
   color: #101010;
-  padding: 0 16px;
+  padding: 0 8px;
 `;
 const SectionBalance = styled.div`
   padding: 0 4px;
@@ -24,40 +25,28 @@ const MethodContainer = styled.div`
   margin-bottom: 18px;
 `;
 
-const BoldText = styled.div`
-  font-size: 16px;
-  font-weight: bold;
-  text-align: left;
-  margin-top: 12px;
-  margin-bottom: 8px;
-`;
-
-const PaymentMethodContainer = styled.div`
-  margin-bottom: 18px;
-  width: 100% div {
-    top: 20px;
-  }
-`;
-
-
-type paymentMethodValueType = {
-    type: string;
-    label: string;
-};
-
-
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
     const { radioValue, setRadioValue, balance, balanceValue, setBalanceValue, repayTypesList, isRepayTypesFetching, repayType, setRepayType, handleConfirm } = props
     const navigate = useNavigate();
 
+    // const [bankcardNoData, setBankcardNoData] = useState<InputValue<string>>({
+    //   data: "",
+    //   isValidation: false,
+    //   errorMessage: "",
+    // });
+    const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState("");
     return (
         <RepaymentModalContainer>
             <SectionBalance>
-                <ListItem
-                    title={props.t("Balance") as any}
-                    text={`${environment.currency} ${balance}`}
-                />
+                {/*<ListItem*/}
+                {/*    title={props.t("Balance") as any}*/}
+                {/*    text={```}*/}
+                {/*/>*/}
+                <div className="flex justify-between">
+                  <div className="font-medium">Balance</div>
+                  <div className="font-medium">{`${environment.currency} ${formatPrice(balance)}`}</div>
+                </div>
             </SectionBalance>
 
             <MethodContainer>
@@ -65,69 +54,68 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                     value={radioValue}
                     onCheck={(value: any) => {
                         setRadioValue(value);
+                        // console.log("balance");
+                        // console.log(balance);
                         if (value === "balance") {
-                            setBalanceValue(balance);
+                          setBalanceValue(balance);
                         }
                     }}
                 >
-                    <Radio value="balance">{props.t("Balance")}</Radio>
-                    <Radio value="custom">{props.t("Custom Amount")}</Radio>
+                    <Radio value="balance">{props.t("Pay Full")}</Radio>
+                    <Radio value="custom">{props.t("Pay Partial")}</Radio>
                 </Radio.Group>
             </MethodContainer>
 
             <Input
+                disabled={radioValue === "balance"}
                 label={props.t("Amount") as string}
                 labelType="left"
-                value={`${environment.currency} ${balanceValue}`}
-                disabled={radioValue === "balance"}
+                moneyPrefix={environment.currency}
+                value={`${balanceValue}`}
                 onChange={(event: any) => {
                     let value = event.target.value;
-                    value = value.replaceAll(`${environment.currency}`, "");
-                    // NOTE: if custom balance exceed max balance then setting max balance
-                    if (String(Number(value)) === "NaN" || String(value) === "0") {
-                        setBalanceValue(1);
+                    if(value === "") {
+                      setBalanceValueErrorMessage("This field cannot be left blank.")
+                    }  else if(!new RegExp("^[0-9]*$").test(value)) {
+                      setBalanceValueErrorMessage("Numbers only. Please try again.")
+                    } else if (Number(value) > Number(balance)) {
+                      // NOTE: 限制數字最大值
+                      setBalanceValueErrorMessage("Amount cannot be greater than the repayment balance.")
                     } else {
-                        if (Number(value) > Number(balance)) {
-                            value = balance;
-                        }
-                        // console.log("[repay] onChange.value", value)
-                        // console.log(value)
-                        setBalanceValue(value);
+                      setBalanceValueErrorMessage("")
                     }
+                    setBalanceValue(value);
                 }}
+                onBlur={() => {
+
+                }}
+                errorMessage={balanceValueErrorMessage === "" ? "" : balanceValueErrorMessage}
             />
-            <PaymentMethodContainer>
-                <BoldText>{props.t("Payment Method")}</BoldText>
-                <Select
-                    options={repayTypesList || []}
-                    value={repayType}
-                    onChange={(item) => {
-                        setRepayType(item as paymentMethodValueType);
-                    }}
-                />
-            </PaymentMethodContainer>
-            <div className={`my-4`}><img className={`w-full`} src={AdSVG} /></div>
+
             <div className={`flex flex-row my-3`}>
                 <div className={`mr-1.5 w-full`}>
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
                         navigate(-1);
-                    }} text={props.t("Cancel")} className={`bg-primary-variant w-full`} />
+                    }} text={props.t("Cancel")} className={`w-full border-[1.5px] border-solid border-primary-main bg-none text-primary-main `} />
                 </div>
                 <div className={` ml-1.5 w-full`}>
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
-                        handleConfirm();
-                    }} text={props.t("Repayment")} className={`bg-primary-main w-full`} />
+                        if(balanceValueErrorMessage === "") handleConfirm();
+                    }} text={props.t("Repay")} className={`bg-primary-main w-full text-white`} />
                 </div>
             </div>
-            <div className={`text-xs text-gray-300 text-left`}>
+
+            <div className={`text-xs text-gray-400 text-left`}>
                 <div>Attention：</div>
                 <ul className="list-decimal list-outside pl-3 pt-1">
                     <li>Before repayment, please make sure that you have enough  balance on your bank account.</li>
                     <li>In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number after completing the repayment and return to the APP to upload your repayment receipt.</li>
                 </ul>
             </div>
+
+            <div className={`my-4`}><img className={`w-full`} src={AdSVG} /></div>
         </RepaymentModalContainer>
 
     );

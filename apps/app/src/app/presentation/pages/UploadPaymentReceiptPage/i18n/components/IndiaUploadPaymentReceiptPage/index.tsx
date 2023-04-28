@@ -16,13 +16,14 @@ import { i18nUploadPaymentReceiptPage } from "../../translations";
 import { Navigation } from "../../../../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
 import {Page} from "../../../../../components/layouts/Page";
+import {isInAndroid} from "../../../../../../../main";
 
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)((props: I18UploadPaymentReceiptPageProps) => {
     const navigate = useNavigate();
     return (
         <Page>
-            <Navigation title={"Upload payment receipt"} back={() => { navigate(-1) }} />
+            {!isInAndroid && <Navigation title={"Upload payment receipt"} back={() => { navigate(-1) }} />}
 
             {props.isUploading && <UploadingFileModal />}
 
