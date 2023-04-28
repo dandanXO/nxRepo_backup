@@ -11,6 +11,7 @@ export const i18nUploadPaymentReceiptPage: i18nComponent = {
       // IndiaUploadPaymentReceiptPage
       "UTR": "UTR",
       // PakistanUploadPaymentReceiptPage
+      "Click to upload" : "Click to upload"
     },
     bn_BD: {
       // Common
