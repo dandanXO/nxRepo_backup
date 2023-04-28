@@ -48,8 +48,8 @@ const RepamentCouponModal = () => {
  
     const NotUsingCoupon = (props: ICouponOption) => {
         return (
-            <div className={`flex justfy-center items-center ml-3 mt-2`} onClick={() => setCheckedCoupon(props.index)}>
-                <div className="grow text-left">Not using a coupon for this repayment.</div>
+            <div className={`flex justfy-center items-center ml-2 mb-7`} onClick={() => setCheckedCoupon(props.index)}>
+                <div className="grow text-left text-xs">Not using a coupon for this repayment.</div>
                 {props.isChecked ? <MdRadioButtonChecked className={`fill-sky-500`} /> : <MdRadioButtonUnchecked className={`fill-sky-500`} />}
             </div>
         )
@@ -63,7 +63,7 @@ const RepamentCouponModal = () => {
                     <div className={`mt-5`}>There are currently no coupon</div>
                 </div>
                 <div className="p-2">
-                    <Button text={'Back'} className="bg-primary-main w-full" onClick={()=> navigate(-1)}/>
+                    <Button text={'Back'} className="bg-primary-main w-full text-white" onClick={()=> navigate(-1)}/>
                 </div>
             </>
         )
@@ -76,13 +76,14 @@ const RepamentCouponModal = () => {
                     {applicableCouponList.length > 0 &&
                         (<>
                        
-                            <div className="text-sm font-bold text-left ml-2 ">Choose one coupon</div>
+                       <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon}/>
+                            <div className="text-xs font-bold text-left ml-2 ">Choose one coupon</div>
                             {
                                 applicableCouponList?.map((i, index) => {
                                     return (
                                         <>
                                             {/* 不選優惠券 checkedCoupon & index給-1 */}
-                                            {index === 0 && <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon}/>}
+                                            {/* {index === 0 && <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon}/>} */}
                                             <CouponOption
                                                 expireTime={i.expireTime}
                                                 discountAmount={i.discountAmount}
@@ -99,13 +100,13 @@ const RepamentCouponModal = () => {
                                       
                                 })
                             }
-                            <div className="m-2 mb-3 bg-slate-100 h-3"></div>
+                            <div className="m-2 mb-4 bg-[#ECECEC] h-2 mx-[-20px]"></div>
                         </>)
                     }
                     {
                         unApplicableCouponList.length > 0 && (
                             <>
-                                <div className="text-sm font-bold text-left ml-2 ">Not applicable to usage conditions</div>
+                                <div className="text-xs font-bold text-left ml-2 ">Not applicable to usage conditions</div>
                                 {
                                     unApplicableCouponList.map((i, index) => (<Coupon
                                         expireTime={i.expireTime}
@@ -124,7 +125,7 @@ const RepamentCouponModal = () => {
                 <div className="p-2">
                     <Button
                         text={'Confirm'}
-                        className="bg-primary-main w-full"
+                        className="bg-primary-main w-full  text-white"
                         onClick={() => navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}`,
                             {
                                 state: {
