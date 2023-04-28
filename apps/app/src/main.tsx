@@ -35,10 +35,10 @@ if(!appInfo) {
   } else if(environment.country === "pk") {
     appInfo = {
       domain: "india-api-dev.com",
-      environment: "india",
+      environment: "pakistan",
       packageId: "com.pak.app.yesloan.android",
       appName: "dev_in",
-      uiVersion: "v12",
+      uiVersion: "v15",
       token: "",
     }
     applyTheme("pakistan", appInfo.uiVersion);

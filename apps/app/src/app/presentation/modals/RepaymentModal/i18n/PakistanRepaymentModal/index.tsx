@@ -11,7 +11,7 @@ import { environment } from "../../../../../../environments/environment";
 import { Button } from "../../../../components/layouts/Button";
 import { IRepaymentModalProps } from "../../index";
 import { RiArrowRightSLine } from "@react-icons/all-files/ri/RiArrowRightSLine";
-import { getToken } from "apps/app/src/app/modules/location/getToken";
+import { getToken } from "../../../../../modules/location/getToken";
 import { PagePathEnum } from "../../../../pages/PagePathEnum";
 import cx from 'classnames';
 import moment from "moment";
@@ -52,7 +52,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
 
     return (
         <div className="text-left px-4">
-            <div className="whitespace-nowrap mt-3 ml-[-2px]">
+            <div className="whitespace-nowrap mt-3 ml-[-4px] text-xs">
                 <Radio.Group
                     value={radioValue}
                     onCheck={(value: any) => {
@@ -66,7 +66,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                     <Radio value="custom">{props.t("Partial Repayment")}</Radio>
                 </Radio.Group>
             </div>
-            <div className="text-black mt-1">{props.t("Payment Amount (PKR)") as string}</div>
+            <div className="text-black mt-3 text-xs">{props.t("Payment Amount (PKR)") as string}</div>
             <Input
                 labelType="none"
                 outlineType="standard"
@@ -88,7 +88,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                     }
                 }}
             />
-            <div className="text-black">{props.t("Payment Method") as string}</div>
+            <div className="text-black mt-2.5 text-xs">{props.t("Payment Method") as string}</div>
             <Select
                 styles={selectStyles}
                 options={repayTypesList || []}
@@ -100,7 +100,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
            
             {radioValue !== 'custom' &&
                 <>
-                    <div className="text-black mt-1">{props.t("Coupon (PKR)") as string}</div>
+                    <div className="text-black mt-2.5 text-xs">{props.t("Coupon (PKR)") as string}</div>
                     <div className="flex border-solid border-b border-[#aaaaaa] justify-center items-center pl-5 pr-4 py-1.5"
                         onClick={() => {
                             if (isRepayTypesFetching) return;
@@ -133,20 +133,20 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
          
 
             <div className={`flex flex-row my-3`}>
-                <div className={`mr-1.5 w-full`}>
+                <div className={`mr-1.5 w-full `}>
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
                         navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
-                    }} text={props.t("Cancel")} className={`bg-primary-variant w-full`} />
+                    }} text={props.t("Cancel")} className={`border border-solid border-gray-500 text-gray-500  w-full font-bold`} />
                 </div>
                 <div className={` ml-1.5 w-full`}>
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
                         handleConfirm();
-                    }} text={props.t("Repayment")} className={`bg-primary-main w-full`} />
+                    }} text={props.t("Repay")} className={`bg-primary-main w-full text-white font-bold`} />
                 </div>
             </div>
-            <div className={`text-xs text-gray-300 text-left`}>
+            <div className={`text-xs text-gray-400 text-left`}>
                 <div>Attention：</div>
                 <ul className="list-decimal list-outside pl-3 pt-1">
                     <li>Before repayment, please make sure that you have enough  balance on your bank account.</li>
