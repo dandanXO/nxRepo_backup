@@ -78,9 +78,9 @@ export const LoginForm = () => {
                 <Input
                     suffix={
                       <Button dataTestingID={"getOTP"} text={!doingCountdownSendOTP ? "Get OTP" : `Resend ( ${resendSeconds}s )`} className={cx({
-                        "bg-[#F58B10]": enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
+                        "bg-[#F58B10] text-white": enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
                         "bg-[#D7D7D7]": !(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP),
-                      }, "ml-2 py-1")}
+                      }, "ml-2 py-1 px-2.5")}
                         onClick={() => {
                           enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP()
                         }}
@@ -158,15 +158,15 @@ export const LoginForm = () => {
                 />
             </div>
             <div className={`py-2`}>
-              <Button dataTestingID={"apply"} text={"Confirm"} className={cx({
+              <Button dataTestingID={"apply"} text={"Confirm"} className={cx('text-white',{
                 "bg-[#F58B10]": true,
               })}
                 onClick={() => {
                   handleLogin()
                 }}
               />
-              <div className="leading-none py-4 text-sm"> By continuing, you agree and acknowledge you have read the
-                  <div className="text-sm underline decoration-blue-500 text-blue-500 mx-1" onClick={() => navigate(PagePathEnum.PrivacyPolicyModal)}>Privacy Policy</div>
+              <div className="py-4 text-xs text-[#7B7B7B]"> By continuing, you agree and acknowledge you have read the
+                  <span className="underline decoration-blue-500 text-blue-500 mx-1" onClick={() => navigate(PagePathEnum.PrivacyPolicyModal)}>Privacy Policy</span>
                   You also consent to receive SMS messages.Please carefully read the above agreement,
                   agreed to check and enter the next step.
               </div>
