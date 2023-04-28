@@ -38,6 +38,8 @@ export const mapTheme = (variables: ITheme): IMappedTheme => {
 };
 
 export const applyTheme = (country: "india" | "pakistan", theme: string): void => {
+  // console.log("applyTheme.country", country);
+  // console.log("applyTheme.theme", theme);
   const themeObject: IMappedTheme = mapTheme(themes[country][theme]);
   if (!themeObject) return;
 

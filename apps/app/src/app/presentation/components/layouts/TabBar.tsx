@@ -24,13 +24,6 @@ export const TabBar = (props: Props) => {
     return location.pathname.indexOf(pageName) > -1
   }
 
-  const [theme, setTheme] = useState(DEFAULT_THEME);
-
-  useEffect(() => {
-    applyTheme("india", "v57");
-  }, [theme]);
-
-
   return (
     <div className={"h-16 bg-white border-t sticky bottom-0 flex flex-row"}>
       <div className={"flex-1 flex flex-col justify-center items-center"} onClick={() => {
