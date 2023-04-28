@@ -48,15 +48,18 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
                 />
               </div>
               <div className={`text-left font-bold text-sm mb-1`}>{props.t("Upload your repayment receipt(optional)")}</div>
+
               <UploadSection>
                 {!props.formFile ? (
                   <div>
                     <CameraSvgIconWrapper>
                       <I18CameraSvgIcon />
                     </CameraSvgIconWrapper>
+
                     <UploadSectionTitle>
                       {props.t("Upload from Photo Album")}
                     </UploadSectionTitle>
+
                     <Input
                       type="file"
                       id="file"
@@ -69,6 +72,8 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
                   <UploadSectionImg imageURL={props.imageSrc ? props.imageSrc : ""} />
                 )}
               </UploadSection>
+
+              <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
               <Button onClick={() => props.confirm()}>{props.t("Confirm")}</Button>
 
             </div>

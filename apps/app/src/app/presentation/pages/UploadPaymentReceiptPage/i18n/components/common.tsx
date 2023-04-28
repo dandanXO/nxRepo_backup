@@ -33,7 +33,7 @@ export const UploadSection = styled.label.attrs<{ for: string }>((props) => ({
     text-align: center;
     border-radius: 8px;
     border: 2px solid #555;
-    margin-bottom: 20px;
+    //margin-bottom: 20px;
     width: 100%;
 `;
 export const UploadSectionImg = styled.div<{

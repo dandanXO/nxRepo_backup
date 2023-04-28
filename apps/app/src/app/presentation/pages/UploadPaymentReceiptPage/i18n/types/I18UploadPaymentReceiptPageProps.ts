@@ -14,4 +14,5 @@ export type I18UploadPaymentReceiptPageProps = {
   // NOTE: FORM
   confirm: () => void;
   isUploading: boolean;
+  fileErrorMessage: string;
 } & WithTranslation;

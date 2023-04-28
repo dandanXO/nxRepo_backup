@@ -74,6 +74,7 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
         onFileChange,
         imageSrc,
         confirm,
+        fileErrorMessage,
     } = useUploadPaymentReceipt({
         postRepayReceiptRequest,
         token: pageQueryString.token ? pageQueryString.token : "",
@@ -83,13 +84,13 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
 
     return renderByCountry({
         [IndiaCountry.country]: (
-            <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm} />
+            <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm} fileErrorMessage={fileErrorMessage}/>
         ),
         [PakistanCountry.country]: (
-            <PakistanUploadPaymentReceiptPage isUploading={isUploading} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm} />
+            <PakistanUploadPaymentReceiptPage isUploading={isUploading} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm} fileErrorMessage={fileErrorMessage}/>
         ),
     }, (
-        <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm} />
+        <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm} fileErrorMessage={fileErrorMessage}/>
         // <PakistanUploadPaymentReceiptPage isUploading={isUploading} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
     ))
 };

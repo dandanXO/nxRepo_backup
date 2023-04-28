@@ -21,6 +21,7 @@ export const Page: ComponentStory<typeof IndiaUploadPaymentReceiptPage> = () => 
     onFileChange,
     imageSrc,
     confirm,
+    fileErrorMessage,
   } = useUploadPaymentReceipt({
     postRepayReceiptRequest: () => {
       // do nothing.
@@ -31,7 +32,7 @@ export const Page: ComponentStory<typeof IndiaUploadPaymentReceiptPage> = () => 
 
     return (
         <AppThemeProvider>
-            <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
+            <IndiaUploadPaymentReceiptPage isUploading={isUploading} utr={utr} setURT={setURT} validateUtr={validateUtr} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm} fileErrorMessage={fileErrorMessage}/>
         </AppThemeProvider>
     );
 };

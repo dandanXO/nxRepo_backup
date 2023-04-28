@@ -22,18 +22,26 @@ export const useUploadPaymentReceipt = (
     // const [isUtrValidated, setIsUtrValidated] = useState<boolean>(false);
     // const [utrErrorMessage, setUtrErrorMessage] = useState<string>("");
 
+  const [fileErrorMessage, setFileErrorMessage] = useState("");
+
     // NOTE: input 2/2 (optional)
     const [formFile, setFormFile] = useState<string>();
     const onFileChange = useCallback((event: any) => {
         const formFileValue = event.target.files[0];
-        // console.log("formFileValue: ", formFileValue);
-        setFormFile(formFileValue as any);
+        console.log("formFileValue: ", formFileValue);
+        if(formFileValue.type !== "image/jpeg" && formFileValue.type !== "image/png" && formFileValue.type !== "image/webp") {
+          setFileErrorMessage("Please upload correct photo file format.")
+        } else {
+          setFileErrorMessage("");
+          setFormFile(formFileValue as any);
 
-        const reader = new FileReader();
-        reader.onload = function (event) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            console.log("FileReader.event", event);
             setImageSrc(event?.target?.result as any);
-        };
-        reader.readAsDataURL(formFileValue as any);
+          };
+          reader.readAsDataURL(formFileValue as any);
+        }
     }, []);
 
     const [imageSrc, setImageSrc] = useState<string>();
@@ -90,6 +98,7 @@ export const useUploadPaymentReceipt = (
         onFileChange,
         imageSrc,
         confirm,
+        fileErrorMessage,
     }
 };
 
