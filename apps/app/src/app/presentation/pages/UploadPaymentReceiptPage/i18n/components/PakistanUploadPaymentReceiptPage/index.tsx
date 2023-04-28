@@ -21,17 +21,17 @@ export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymen
       <CustomPage>
         {props.isUploading && <UploadingFileModal/>}
 
-        <Title>{props.t("Upload your repayment receipt(optional)")}</Title>
+        <div className="text-sm text-left mb-2">{props.t("Upload your repayment receipt(optional)")}</div>
 
-        <UploadSection>
+        <div className="bg-[#F8F8F8] border-dashed border border-[#B7BBC5] h-[183px] flex justify-center items-center rounded-lg mb-4">
           {!props.formFile ? (
-            <div>
-              <CameraSvgIconWrapper>
+            <div className="flex flex-col justify-center items-center">
+              <div>
                 <I18CameraSvgIcon/>
-              </CameraSvgIconWrapper>
-              <UploadSectionTitle>
-                {props.t("Upload from Photo Album")}
-              </UploadSectionTitle>
+              </div>
+              <div className="text-sm mt-2 text-[#6B738A]">
+                {props.t("Click to upload")}
+              </div>
               <Input
                 type="file"
                 id="file"
@@ -43,7 +43,7 @@ export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymen
           ) : (
             <UploadSectionImg imageURL={props.imageSrc ? props.imageSrc : ""}/>
           )}
-        </UploadSection>
+        </div>
         <Button onClick={() => props.confirm()}>{props.t("Confirm")}</Button>
       </CustomPage>
     );
