@@ -143,7 +143,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
                         handleConfirm();
-                    }} text={props.t("Repay")} className={`bg-primary-main w-full text-white font-bold`} />
+                    }} text={props.t("Repay")} className={`bg-primary-main w-full text-white font-bold border border-solid border-primary-main`} />
                 </div>
             </div>
             <div className={`text-xs text-gray-400 text-left`}>
