@@ -27,12 +27,15 @@ const IndiaExtendModal = (props: any) => {
             <ListItem title={t("Product") as string} text={productName ?? ""} />
             <ListItem title={t("No.") as string} text={orderNo ?? ""} />
             <ListItem title={t("Due Date") as string} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") : ''} />
-            <ListItem title={t("Overdue Days") as string} text={overdueDays ?? ""} />
+            {/*NOTE: 展期費用*/}
+            <ListItem title={t("Extension Fee") as string} text={extensionFee ?? ""} />
+            <ListItem title={t("Overdue Days") as string} text={overdueDays ?? ""} textColor={overdueDays > 0 ? "text-red-500" : ""} />
+            {/*NOTE: 展期罰金*/}
             <ListItem title={t("Overdue Fee") as string} text={penaltyInterest ?? ""} textColor={"text-red-500"} />
-            <ListItem title={t("Extension Due Date") as string} text={extendDate ?? ""} textColor={"text-red-500"} />
+            <ListItem title={t("Extension Due Date") as string} text={moment(extendDate).format("MM-DD-YYYY") ?? ""} textColor={"text-primary-main"} />
             <Divider />
             <ListItem fontWeight="font-bold"
-                title={t("Extension Fee") as string}
+                title={t("Total Extension Fee") as string}
                 text={<Money money={extensionPayAmount}/>}
             />
             <div className={`flex flex-row mt-6 text-white`}>
