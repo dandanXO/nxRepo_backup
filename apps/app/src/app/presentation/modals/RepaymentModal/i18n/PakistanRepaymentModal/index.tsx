@@ -96,6 +96,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 onChange={(item) => {
                     setRepayType(item as paymentMethodValueType);
                 }}
+                isSearchable={false}
             />
            
             {radioValue !== 'custom' &&

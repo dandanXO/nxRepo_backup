@@ -13,7 +13,7 @@ const ExtendConfirmModal = () => {
     return (
         <Overlay
             show={true}
-            enableClose={true}
+            enableClose={false}
             onCancel={() => navigate(-1)}
             content={(hide: () => void) => {
                 return renderByCountry({

@@ -45,14 +45,15 @@ const PakistanExtendModal = (props: any) => {
                 onChange={(item: any) => {
                     props.setRepayType(item as paymentMethodValueType);
                 }}
+                isSearchable={false}
             />
 
             <div className={`flex flex-row mt-6 text-white`}>
                 <div className={`grow mr-1.5`}>
-                    <Button onClick={() => navigate(-2)} text={'Cancel'} className={`bg-primary-variant w-full`} />
+                    <Button onClick={() => navigate(-2)} text={'Cancel'} className={`border border-solid border-gray-500 text-gray-500  w-full`} />
                 </div>
                 <div className={`grow ml-1.5`} >
-                    <Button onClick={props.handleConfirm} text={'Confirm'} className={`bg-primary-main w-full`} />
+                    <Button onClick={props.handleConfirm} text={'Confirm'} className={`bg-primary-main border border-solid border-primary-main w-full`} />
                 </div>
             </div>
         </div>

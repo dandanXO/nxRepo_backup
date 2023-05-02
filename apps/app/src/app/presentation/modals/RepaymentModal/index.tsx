@@ -3,7 +3,6 @@ import styled from "styled-components";
 import AdSVG from "./repayment_banner.svg";
 import { useLocation, useNavigate } from "react-router";
 import { Horizontal, Input, ListItem, Overlay, Radio, } from "@frontend/mobile/shared/ui";
-import Select from 'react-select';
 import { withTranslation } from "react-i18next";
 import { i18nRepaymentModal } from "./i18n/translations";
 import { environment } from "../../../../environments/environment";
