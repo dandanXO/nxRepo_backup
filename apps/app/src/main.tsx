@@ -64,12 +64,11 @@ console.log("[app] appInfo", JSON.parse(JSON.stringify(appInfo)));
 applyTheme(appInfo.environment, "v" + appInfo.uiVersion);
 
 
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-import(`./environments/theme/v${appInfo.environment}/${appInfo.uiVersion}/theme`).then((content) => {
+import(`./environments/theme/${appInfo.environment}/v${appInfo.uiVersion}/theme`).then((content) => {
 
   const themeConfig = content.themeConfig;
   window.theme = themeConfig;
