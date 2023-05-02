@@ -27,7 +27,7 @@ const PaymentItem = (props: GetLoanRecord) => {
         'UNPAID': { text: 'Unpaid', color: '', buttonText: 'Repay Details' },
         'PROCESSING': { text: 'Processing', color: '', buttonText: 'Details' },
         'REJECTED': { text: 'Reject', color: 'text-red-500', buttonText: 'Details' },
-        'EXTEND': { text: 'Expend', color: 'text-sky-600', buttonText: 'Repay Details' },
+        'EXTEND': { text: 'Extend', color: 'text-sky-600', buttonText: 'Repay Details' },
     } as { [key: string]: { text: string; color: string, buttonText: string } }
 
 
