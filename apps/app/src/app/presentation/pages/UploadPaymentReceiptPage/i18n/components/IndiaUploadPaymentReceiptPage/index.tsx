@@ -73,7 +73,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
               </UploadSection>
 
               <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
-              <Button onClick={() => props.confirm()}>{props.t("Confirm")}</Button>
+              <Button onClick={() => props.confirm()}>{"Confirm"}</Button>
 
             </div>
         </Page>

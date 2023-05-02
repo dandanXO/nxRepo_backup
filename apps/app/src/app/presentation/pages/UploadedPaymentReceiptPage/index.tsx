@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
 import {useCallback} from "react";
 import {PureUploadedPaymentReceiptPage} from "./PureUploadedPaymentReceiptPage";
+import {PagePathEnum} from "../PagePathEnum";
 
 
 const UploadedPaymentReceiptPage = () => {
@@ -9,7 +10,7 @@ const UploadedPaymentReceiptPage = () => {
     const pageQueryString = useLocationOrderQueryString();
     const navigateToLoanDetails = useCallback(() => {
         navigate(
-            `/loan-details?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`
+            `${PagePathEnum.RepaymentDetailPage}?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`
         );
     }, [pageQueryString.token, pageQueryString.orderNo]);
 

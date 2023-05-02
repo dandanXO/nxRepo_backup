@@ -10,6 +10,7 @@ import {GetLoanRecord} from "../../../api/loanService/GetLoanRecord";
 import {PagePathEnum} from "../PagePathEnum";
 import {RiArrowUpSLine} from "@react-icons/all-files/ri/RiArrowUpSLine";
 import {RiArrowDownSLine} from "@react-icons/all-files/ri/RiArrowDownSLine";
+import {getOrderNo} from "../../../modules/location/getOrderNo";
 
 const PaymentItem = (props: GetLoanRecord) => {
 
@@ -50,7 +51,7 @@ const PaymentItem = (props: GetLoanRecord) => {
             </div>
             {status !== "PAY_OFF" &&
                 <Button
-                    onClick={() => navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } })}
+                    onClick={() => navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, { state: { orderNo } })}
                     buttonText={status ? statusEnum[status].buttonText : ''}
                     width={'w-20'}
                     height={'h-8'}

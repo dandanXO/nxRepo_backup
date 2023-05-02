@@ -3,6 +3,7 @@ import React, { useCallback, useState } from "react";
 import { z } from "zod";
 import { PostRepayReceiptRequestProps } from "../index";
 import { InputValue } from "../../../../modules/InputValue";
+import {environment} from "../../../../../environments/environment";
 
 
 interface PureUploadPaymentReceiptPageProps {
@@ -47,19 +48,26 @@ export const useUploadPaymentReceipt = (
     const [imageSrc, setImageSrc] = useState<string>();
 
     const confirm = useCallback(async () => {
-        // confirm 前檢查UTR的值
-        await validateUtr();
 
-        // FIXME: REFACTOR utr 巴基斯坦版本沒有
-        if (!utr.isValidation) return;
+        if(environment.country === "in") {
+          // india 才需要檢查
+          // confirm 前檢查UTR的值
+          await validateUtr();
+          // FIXME: REFACTOR utr 巴基斯坦版本沒有
+          if (!utr.isValidation) return;
+        }
+
         setIsUploading(true);
+
+        console.log("props", props);
         props.postRepayReceiptRequest({
-            orderNo: props.orderNo,
-            receipt: utr.data,
-            formFile: formFile,
-            setIsUploading,
+          orderNo: props.orderNo,
+          receipt: environment.country === "in" ? utr.data : "",
+          formFile: formFile,
+          setIsUploading,
         });
-    }, [utr.isValidation, utr, formFile]);
+
+    }, [utr, utr.data, utr.isValidation, formFile, props.orderNo]);
 
     const [isUploading, setIsUploading] = useState(false);
 

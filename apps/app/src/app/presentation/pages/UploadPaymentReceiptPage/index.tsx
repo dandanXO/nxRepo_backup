@@ -18,6 +18,7 @@ import { CustomAxiosError } from "../../../api/rtk/axiosBaseQuery";
 import { usePostRepayReceiptMutation } from "../../../api/rtk";
 import {PostRepayReceiptResponse} from "../../../api/rtk/old/PostRepayReceiptResponse";
 import {AppFlag} from "../../../../environments/flag";
+import {getOrderNo} from "../../../modules/location/getOrderNo";
 export interface PostRepayReceiptRequestProps {
     formFile: any;
     orderNo: string;
@@ -32,9 +33,11 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
     const navigate = useNavigate();
     const location = useLocation();
     const pageQueryString = useLocationOrderQueryString();
+    console.log("pageQueryString", pageQueryString);
+
     const goToUploadedPaymentReceiptPage = useCallback(() => {
         navigate(
-            `/uploaded-payment-receipt?token=${pageQueryString.token}`
+            `/v2/uploaded-payment-receipt?token=${pageQueryString.token}&orderNo=${getOrderNo()}`
         );
     }, [pageQueryString.token, location.state.orderNo]);
 
