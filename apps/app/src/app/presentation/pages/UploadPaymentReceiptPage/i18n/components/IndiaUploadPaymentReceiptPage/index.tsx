@@ -22,7 +22,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
     const navigate = useNavigate();
     return (
         <Page>
-            {!isInAndroid && <Navigation title={"Upload payment receipt"} back={() => { navigate(-1) }} />}
+            {!isInAndroid() && <Navigation title={"Upload payment receipt"} back={() => { navigate(-1) }} />}
 
             {props.isUploading && <UploadingFileModal />}
 

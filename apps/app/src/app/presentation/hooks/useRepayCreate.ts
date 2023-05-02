@@ -7,7 +7,7 @@ import { CustomAxiosError } from "../../api/rtk/axiosBaseQuery";
 import { usePostRepayCreateMutation } from "../../api/rtk";
 import {PostRepayCreateRequest} from "../../api/loanService/PostRepayCreateRequest";
 import {PostRepayCreateResponse} from "../../api/loanService/PostRepayCreateResponse";
-import {AppFlag} from "../../../main";
+import {AppFlag} from "../../../environments/flag";
 
 
 const useRepayCreate = () => {

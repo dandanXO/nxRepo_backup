@@ -13,7 +13,7 @@ import {
   useLazyGetRepayTypesQuery,
   usePostRepayCreateMutation
 } from "../../api/rtk";
-import {AppFlag} from "../../../main";
+import {AppFlag} from "../../../environments/flag";
 
 const useLoanDetailStory = () => {
     const navigate = useNavigate();

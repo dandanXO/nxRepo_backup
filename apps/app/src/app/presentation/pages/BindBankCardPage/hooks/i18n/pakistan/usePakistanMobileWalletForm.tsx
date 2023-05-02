@@ -10,7 +10,7 @@ import {GetBindCardDropListResponse, WalletVendor} from "../../../../../../api/r
 import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
 
 import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
-import {AppFlag} from "../../../../../../../main";
+import {AppFlag} from "../../../../../../../environments/flag";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;

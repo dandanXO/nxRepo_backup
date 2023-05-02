@@ -17,7 +17,7 @@ import { PakistanCountry } from "../../../../../../../libs/shared/domain/src/cou
 import { CustomAxiosError } from "../../../api/rtk/axiosBaseQuery";
 import { usePostRepayReceiptMutation } from "../../../api/rtk";
 import {PostRepayReceiptResponse} from "../../../api/rtk/old/PostRepayReceiptResponse";
-import {AppFlag} from "../../../../main";
+import {AppFlag} from "../../../../environments/flag";
 export interface PostRepayReceiptRequestProps {
     formFile: any;
     orderNo: string;

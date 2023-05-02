@@ -4,7 +4,7 @@ import {alertModal} from "../base/alertModal";
 import {runAxios} from "../base/runAxios";
 
 import * as Sentry from "@sentry/react";
-import {AppFlag} from "../../../main";
+import {AppFlag} from "../../../environments/flag";
 
 export interface CustomAxiosError {
   status: any;
