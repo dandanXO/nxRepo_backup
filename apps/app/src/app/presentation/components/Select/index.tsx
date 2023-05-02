@@ -10,7 +10,9 @@ const selectStyles: StylesConfig = {
         borderBottom: "1px solid #aaaaaa",
         span: {
             width: 0
-        }
+        },
+        textAlign:'left'
+        
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         return {

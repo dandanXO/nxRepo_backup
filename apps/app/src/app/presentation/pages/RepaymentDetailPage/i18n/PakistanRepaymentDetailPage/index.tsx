@@ -100,8 +100,8 @@ const PakistanRepaymentDetailPage = (props: any) => {
                       navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: currentData
                       })}
-                    } className={`grow mr-1.5`}>
-                      <Button text={"Extend"} className={`bg-primary-variant`}/>
+                    } className={`grow mr-1.5 `}>
+                      <Button text={"Extend"} className={`border border-solid border-primary-main text-primary-main`}/>
                     </div>
                   )}
 
@@ -112,7 +112,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     } className={cx(`grow`, {
                         'ml-1.5': extendable
                     })}>
-                      <Button text={"Repay"} className={`bg-primary-main`}/>
+                      <Button text={"Repay"} className={`bg-primary-main border border-solid border-primary-main`}/>
                     </div>
 
                 </div>

@@ -191,6 +191,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
                   label: bankcard.bankId,
                 }
               })}
+              isSearchable={false}
             />
 
           </div>
