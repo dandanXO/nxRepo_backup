@@ -18,8 +18,9 @@ export const isInAndroid = window["isInAndroid"]();
 // console.log("isInAndroid", isInAndroid);
 
 let appInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
-// console.log("appInfo", appInfo);
+console.log("appInfo", appInfo);
 
+// NOTICE: app team dev packageId 都是 com.ind.kyc.application
 // NOTE: only H5 environment
 if(!appInfo) {
   if(environment.country === "in") {
@@ -28,39 +29,40 @@ if(!appInfo) {
       environment: "india",
       packageId: "com.ind.kyc.application",
       appName: "dev_in",
-      uiVersion: "1",
+      uiVersion: "55",
       token: "",
     }
-    applyTheme("india", appInfo.uiVersion);
+    // applyTheme("india", "v" + appInfo.uiVersion);
   } else if(environment.country === "pk") {
     appInfo = {
       domain: "india-api-dev.com",
       environment: "pakistan",
       packageId: "com.pak.app.yesloan.android",
       appName: "dev_in",
-      uiVersion: "1",
+      uiVersion: "15",
       token: "",
     }
-    applyTheme("pakistan", appInfo.uiVersion);
+    // applyTheme("pakistan", "v" + appInfo.uiVersion);
   } else {
     new Error("appInfo is undefined");
   }
-}
+} else {
+  // NOTICE: 印度 v55, 巴基斯坦 v56 的 uiVersion 是寫死成 1 的
+  // NOTICE: 巴基斯坦 v56, uiVersion 則是變動的
+  if(appInfo.uiVersion === "1") {
+    if(appInfo.packageId === "com.ind.kyc.application") {
+      appInfo.environment = "india";
+      appInfo.uiVersion = "55"
 
-// NOTICE: 印度 v55, 巴基斯坦 v56 的 uiVersion 是寫死成 1 的
-// NOTICE: 巴基斯坦 v56, uiVersion 則是變動的
-if(appInfo.uiVersion === "1") {
-  if(appInfo.packageId === "com.ind.kyc.application") {
-    appInfo.environment = "india";
-    appInfo.uiVersion = "55"
-    applyTheme("india", appInfo.uiVersion);
-  } else if(appInfo.packageId === "com.pak.app.yesloan.android") {
-    appInfo.environment = "pakistan";
-    appInfo.uiVersion = "15"
-    applyTheme("pakistan", appInfo.uiVersion);
+    } else if(appInfo.packageId === "com.pak.app.yesloan.android") {
+      appInfo.environment = "pakistan";
+      appInfo.uiVersion = "15"
+    }
   }
 }
 console.log("[app] appInfo", JSON.parse(JSON.stringify(appInfo)));
+applyTheme(appInfo.environment, "v" + appInfo.uiVersion);
+
 
 
 const root = ReactDOM.createRoot(
