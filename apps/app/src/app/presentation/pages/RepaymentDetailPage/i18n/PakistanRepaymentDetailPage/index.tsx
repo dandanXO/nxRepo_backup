@@ -9,6 +9,8 @@ import Money from "../../../../components/Money.tsx";
 import {Button} from "../../../../components/layouts/Button";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 import {Status} from "../../../../../modules/statusEnum";
+import cx from 'classnames';
+
 
 const PakistanRepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()
@@ -63,7 +65,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
                 <Divider />
 
-                {reductionAmount && <ListItem title={'Reduction Amount'} text={<div className="flex"> - <Money money={reductionAmount}/></div>} titleColor="text-slate-400" />}
+                {reductionAmount && <ListItem title={'Reduction Amount'} text={<Money money={reductionAmount} isNagetive={true}/>} titleColor="text-slate-400" />}
 
                 <ListItem
                     titleColor="text-slate-400"
@@ -78,7 +80,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                             </div>
                         </div>
                     }
-                    text={<div className="flex"> - <Money money={paidAmount} /></div>}
+                    text={<Money money={paidAmount} isNagetive={true}/>}
                 />
 
                 <Divider />
@@ -107,7 +109,9 @@ const PakistanRepaymentDetailPage = (props: any) => {
                       navigate(`repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: currentData
                       })}
-                    }  className={`grow ml-1.5`}>
+                    } className={cx(`grow`, {
+                        'ml-1.5': extendable
+                    })}>
                       <Button text={"Repay"} className={`bg-primary-main`}/>
                     </div>
 
