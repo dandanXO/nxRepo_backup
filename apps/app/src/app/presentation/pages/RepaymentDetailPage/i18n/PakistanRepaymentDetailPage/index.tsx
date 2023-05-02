@@ -48,19 +48,23 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
                 {status === 'EXTEND' && <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("MM-DD-YYYY") : ''} titleColor="text-slate-400" />}
                 {loanAmount &&  <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-slate-400" />}
+
                 <Divider />
 
                 {serviceFee && <ListItem title={'Service Charge'} text={<Money money={serviceFee}/>} titleColor="text-slate-400" />}
-
                 {dailyFee && <ListItem title={'Daily Fee'} text={<Money money={dailyFee}/>} titleColor="text-slate-400" />}
-
                 {gst && <ListItem title={'GST'} text={<Money money={gst}/>} titleColor="text-slate-400" />}
                 {loanInterest && <ListItem title={'Loan Interest'} text={<Money money={loanInterest}/>} titleColor="text-slate-400" />}
+
                 <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
                 <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+
                 {status === 'EXTEND' && <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-slate-400" />}
+
                 <Divider />
+
                 {reductionAmount && <ListItem title={'Reduction Amount'} text={<div className="flex"> - <Money money={reductionAmount}/></div>} titleColor="text-slate-400" />}
+
                 <ListItem
                     titleColor="text-slate-400"
                     title={
@@ -76,8 +80,10 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     }
                     text={<div className="flex"> - <Money money={paidAmount} /></div>}
                 />
+
                 <Divider />
                 {/*NOTE: 總應還金額*/}
+
                 {status !== 'EXTEND' &&
                     (<ListItem
                         title={'Repayment Amount'}

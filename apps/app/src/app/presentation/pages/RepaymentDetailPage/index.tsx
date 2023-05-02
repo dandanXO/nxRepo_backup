@@ -28,8 +28,6 @@ const RepaymentDetailPage = (props: any) => {
     return (<div>
         {!isInAndroid && <Navigation title={"Repay Details"} back={() => { navigate(-1) }} />}
         <div className={`text-sm text-center bg-[#EDF4FF] text-[#3C64B1] py-2`}>Get more amount after instant payment</div>
-        {/* NOTE: 目前印度與巴基斯坦樣式相同 (先使用巴基斯坦的版本) */}
-
         {
             renderByCountry({
                 [IndiaCountry.country]: (
@@ -38,7 +36,10 @@ const RepaymentDetailPage = (props: any) => {
                 [PakistanCountry.country]: (
                   <PakistanRepaymentDetailPage currentData={currentData}/>
                 )
-            }, (<PakistanRepaymentDetailPage currentData={currentData}/>))
+            }, (
+              <IndiaRepaymentDetailPage currentData={currentData}/>
+              )
+            )
         }
         <Outlet />
     </div>

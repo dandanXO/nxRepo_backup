@@ -58,11 +58,13 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
         <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-black-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
         <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-black-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+
         {status === 'EXTEND' && <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-black-400" />}
 
         <Divider />
 
         {reductionAmount && <ListItem title={'Reduction Amount'} text={<div className="flex"> - <Money money={reductionAmount}/></div>} titleColor="text-black-400" />}
+
         <ListItem
           titleColor="text-black-400"
           title={
@@ -78,6 +80,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
           }
           text={<div className="flex"> - <Money money={paidAmount} /></div>}
         />
+
         <Divider />
 
         {/*NOTE: 總應還金額*/}
