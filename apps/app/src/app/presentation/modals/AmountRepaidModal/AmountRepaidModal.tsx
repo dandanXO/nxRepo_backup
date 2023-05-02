@@ -5,7 +5,6 @@ import {
     ListItem,
     flexCreator,
     Title,
-    Divider,
 } from "@frontend/mobile/shared/ui";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { i18nAmountRepaidModal } from "./i18n/translations";
@@ -14,19 +13,21 @@ import recordStatusStyleProps from "../../../modules/recordStatusColorMapper";
 import {useLocation, useNavigate} from "react-router";
 import { stat } from "fs";
 import {PagePathEnum} from "../../pages/PagePathEnum";
+import Divider from "../../components/Divider";
+import moment from "moment";
+import Money from "../../components/Money.tsx";
 const ModalContentStyled = styled.div`
     padding: 0 12px;
 `;
 
 const RecordStyled = styled.div<RecordStyledProps>`
     ${flexCreator("column", "center", "center")};
-    padding-top: 7px;
+    margin: 0 12px;
     .recordStatus {
         width: 100%;
         ${flexCreator("row", "flex-end", "center")};
         ${(props) => ({ ...recordStatusStyleProps[props.status] })}
         margin-top: -12px;
-        padding-bottom: 12px;
         text-align: right;
     }
 `;
@@ -45,18 +46,21 @@ interface RecordStyledProps {
 }
 const Record = (props: {
     repayDate: string;
-    repayAmount: number;
+    repayAmount: React.ReactElement;
     repayType: string;
 }) => {
     const { repayDate, repayAmount, repayType } = props;
     return (
-        <RecordStyled status={repayType}>
-            <ListItem title={repayDate} text={repayAmount} />
-            <div className={`recordStatus`}>
-                <div>{repayType}</div>
-            </div>
-            <Divider styleType="narrow" />
-        </RecordStyled>
+        <>
+            <RecordStyled status={repayType}>
+                <ListItem title={repayDate} text={repayAmount} />
+                <div className={`recordStatus`}>
+                    <div>{repayType}</div>
+                </div>
+            </RecordStyled>
+            <Divider />
+        </>
+       
     );
 };
 const renderRecordList = (props: AmountRepaidRecordsProps) => {
@@ -64,8 +68,8 @@ const renderRecordList = (props: AmountRepaidRecordsProps) => {
     const { repayRecords = [] } = props;
     return repayRecords?.map((i) => (
         <Record
-            repayDate={i.repayDate ? i.repayDate : ""}
-            repayAmount={i.repayAmount ? i.repayAmount : 0}
+            repayDate={i.repayDate ? moment(i.repayDate).format('DD-MM-YYYY') : ""}
+            repayAmount={<Money money={i.repayAmount ? i.repayAmount : 0}/>}
             repayType={i.repayType ? i.repayType : ""}
         />
     ));
@@ -84,11 +88,12 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
                 show={true}
                 enableClose={true}
                 title="Notice"
+                contentNoStyle={true}
                 content={(hide: () => void) => {
                     return (
                         <div>
-                            <Title>{t("Amount Repaid Record")}</Title>
-                            <Divider styleType="narrow" />
+                             <div className="text-sm font-bold mt-[-10px]">{t("Amount Repaid Record")}</div>
+                            <Divider/>
                             {state.repayRecords?.length === 0 ? (
                                 <NoDataStyled>{t("No paid records yet")}</NoDataStyled>
                             ) : (

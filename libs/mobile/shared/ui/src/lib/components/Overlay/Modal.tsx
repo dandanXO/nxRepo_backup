@@ -14,6 +14,11 @@ const ModalContent = styled(Content)`
   margin: 0;
 `;
 
+const ModalClose = styled.div`
+position: static;
+z-index: 999;
+`;
+
 type ModalContentFunction<T> = (args: any) => T;
 interface IModalProps {
   show?: boolean;
@@ -88,7 +93,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
         >
           <ModalPopup width={this.props.width} height={this.props.height} overflow={this.props.overflow}>
             {this.props.enableClose && (
-              <div
+              <ModalClose
                 onClick={() => {
                   console.log('close');
                   this.hidden();
@@ -96,7 +101,7 @@ class Modal extends React.Component<IModalProps, ModalState> {
                 }}
               >
                 <CloseButton />
-              </div>
+              </ModalClose>
             )}
             {/*<div>*/}
             {/*    <Title>{this.props.title}</Title>*/}
