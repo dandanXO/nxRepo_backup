@@ -1,8 +1,10 @@
 import {Form} from "../../Form";
-import {Button, Input, InputValue, Select} from "@frontend/mobile/shared/ui";
+import {Button, Input, InputValue } from "@frontend/mobile/shared/ui";
 import React from "react";
 import {Label} from "../../Label";
 import {useNavigate} from "react-router";
+import {selectStyles} from "../../../../../components/layouts/selectStyles";
+import Select from "../../../../../components/Select";
 
 type IMobileWalletForm = {
   // Wallet List
@@ -23,25 +25,32 @@ type IMobileWalletForm = {
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
   const navigate = useNavigate();
+  const options = props.walletDropList?.map((item: string, index: number) => {
+    return {value: item, label: item, index: index}
+  });
   return (
     <Form>
 
       <div>
-        <Label>{"Mobile Wallet"}</Label>
+        <Label className={"text-sm"}>{"Mobile Wallet"}</Label>
         <Select
-          className="mb"
-          fixButtonWidth={"calc(100vw - 36px)"}
-          dataSource={props.walletDropList}
-          defaultIndex={props.walletValue}
-          // FIXME: to controlled component
-          onSelect={(index:number) => {
-            props.setWalletValue(index);
+          styles={selectStyles}
+          className="react-select-container mb"
+          options={options}
+          // defaultValue={props.bankDropList[0].value}
+          value={props.walletDropList[props.walletValue].value}
+          onChange={(item: any) => {
+            console.log(item)
+            props.setWalletValue(item.index);
           }}
+          isSearchable={false}
+          placeholder={"Mobile Wallet"}
         />
+
       </div>
 
       <div>
-        <Label>{'Your IBAN Number (24 characters)'}</Label>
+        <Label className={"text-sm"}>{'Your IBAN Number (24 characters)'}</Label>
         <Input
           labelType={'none'}
           outlineType={"standard"}
@@ -59,7 +68,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       </div>
 
       <div>
-        <Label>{'Confirm Mobile Wallet Account'}</Label>
+        <Label className={"text-sm"}>{'Mobile Wallet Account'}</Label>
         <Input
           className="mb"
           labelType={"left"}
@@ -72,6 +81,22 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           errorMessage={props.mobileData.errorMessage}
         />
       </div>
+
+      <div>
+        <Label className={"text-sm"}>{'Confirm Mobile Wallet Account'}</Label>
+        <Input
+          className="mb"
+          labelType={"left"}
+          outlineType={"standard"}
+          label={"+92"}
+          placeholder={"Wallet Account Number"}
+          value={props.mobileData.data}
+          // onChange={props.onMobileDataChange}
+          // onBlur={props.validateMobileWalletAccount}
+          // errorMessage={props.mobileData.errorMessage}
+        />
+      </div>
+
 
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
       <Button

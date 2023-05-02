@@ -12,7 +12,7 @@ const selectStyles: StylesConfig = {
             width: 0
         },
         textAlign:'left'
-        
+
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         return {
@@ -28,13 +28,15 @@ const CustomSelect = (props: any) => {
     const selectStylesTypes = {
         'standard': selectStyles,
         'outlined': '',
-        '': ''
+        '': '',
     }[props?.type as string]
 
-    return (<Select
+    return (
+      <Select
         styles={props?.type ? selectStylesTypes :''}
         {...props}
-    />)
+      />
+    )
 }
 
 export default CustomSelect;

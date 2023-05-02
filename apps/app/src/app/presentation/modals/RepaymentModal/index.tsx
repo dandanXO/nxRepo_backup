@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import AdSVG from "./repayment_banner.svg";
-import { useLocation, useNavigate } from "react-router";
-import { Horizontal, Input, ListItem, Overlay, Radio, } from "@frontend/mobile/shared/ui";
-import { withTranslation } from "react-i18next";
-import { i18nRepaymentModal } from "./i18n/translations";
-import { environment } from "../../../../environments/environment";
+import React, {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router";
+import {Overlay,} from "@frontend/mobile/shared/ui";
+import {withTranslation} from "react-i18next";
+import {i18nRepaymentModal} from "./i18n/translations";
 import useRepayCreate from "../../hooks/useRepayCreate";
 import useRepayTypes from "../../hooks/useRepayTypes";
-import { Button } from "../../components/layouts/Button";
-import { renderByCountry } from "../../../modules/i18n";
-import { IndiaCountry } from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
-import { PakistanCountry } from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import {renderByCountry} from "../../../modules/i18n";
+import {IndiaCountry} from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
+import {PakistanCountry} from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
 import IndiaRepaymentModal from "./i18n/IndiaRepaymentModal";
 import PakistanRepaymentModal from "./i18n/PakistanRepaymentModal";
-
 
 
 type paymentMethodValueType = {

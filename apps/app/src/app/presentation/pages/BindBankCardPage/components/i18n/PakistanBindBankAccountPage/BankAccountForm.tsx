@@ -7,6 +7,7 @@ import {IPakistanBankAccountForm} from "../../../types/IBankAccountForm";
 import Select from 'react-select';
 import {useNavigate} from "react-router";
 import {Button} from "../../../../../components/layouts/Button";
+import {selectStyles} from "../../../../../components/layouts/selectStyles";
 
 const CustomForm = styled.div`
   .css-1s2u09g-control, .css-1pahdxg-control {
@@ -31,7 +32,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
       <Form>
 
         <div>
-          <Label>{'Cardholder Name'}</Label>
+          <Label className={"text-sm"}>{'Cardholder Name'}</Label>
           <Input
             className="mb"
             labelType={'none'}
@@ -43,7 +44,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         </div>
 
         <div>
-          <Label>{'Your IBAN Number (24 characters)'}</Label>
+          <Label className={"text-sm"}>{'Your IBAN Number (24 characters)'}</Label>
           <Input
             labelType={'none'}
             outlineType={"standard"}
@@ -61,26 +62,27 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         </div>
 
         <div>
-          <Label>{'Please select your bank name'}</Label>
+          <Label className={"text-sm"}>{'Bank Name'}</Label>
           <Select
+            styles={selectStyles}
             className="react-select-container mb"
             // defaultValue={props.bankDropList[0].value}
             value={props?.bankDropList[props.bankAccountValue]?.value}
             onChange={(item: any) => {
-              // console.log(item)
+              console.log(item)
               props.onIFSCDropSelect(item.index);
             }}
             options={options}
             isSearchable={false}
+            placeholder={"Select"}
           />
         </div>
 
         <div>
-          <Label>{'Account Number'}</Label>
+          <Label className={"text-sm"}>{'Account Number'}</Label>
           <Input
             className="mb"
-            labelType={'left'}
-            label={"+92"}
+            labelType={'none'}
             outlineType={"standard"}
             placeholder={'Account Number'}
             value={props.bankcardNoData.data}
@@ -91,11 +93,10 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         </div>
 
         <div>
-          <Label>{'Confirm Account Number'}</Label>
+          <Label className={"text-sm"}>{'Confirm Account Number'}</Label>
           <Input
             className="mb"
-            labelType={'left'}
-            label={"+92"}
+            labelType={'none'}
             outlineType={"standard"}
             placeholder={'Confirm Account Number'}
             value={props.confirmedBankcardNoData.data}

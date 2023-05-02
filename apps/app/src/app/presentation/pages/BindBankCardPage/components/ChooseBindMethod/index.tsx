@@ -12,7 +12,7 @@ import {renderByCountry} from "../../../../../modules/i18n";
 import {PakistanCountry} from "../../../../../../../../../libs/shared/domain/src/country/PakistanCountry";
 import {BangladeshCountry} from "../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
 import {IThemeConfig} from "@frontend/mobile/shared/ui";
-import {AiOutlineCheckCircle} from "@react-icons/all-files/ai/AiOutlineCheckCircle";
+import {AiFillCheckCircle} from "@react-icons/all-files/ai/AiFillCheckCircle";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -28,7 +28,7 @@ const StyledOptionIcon = styled.div`
 const OptionIcon = (props: { enable: boolean}) => {
   return (
     <StyledOptionIcon>
-      {!props.enable ? <AiOutlineCheckCircle size={25} color={"gray"}/> : <AiOutlineCheckCircle size={25} color={"#18A851"}/>}
+      {!props.enable ? <AiFillCheckCircle size={25} color={"#B7BBC5"} /> : <AiFillCheckCircle size={25} color={"#18A851"}/>}
     </StyledOptionIcon>
   )
 }
@@ -45,7 +45,7 @@ const Option = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
   border: ${(props: {theme: IThemeConfig; enable: boolean}) => {
-    return props.theme && props.enable ? `solid 1.5px ${props.theme.button.primary.main}` : "solid 1.5px #aaa"
+    return props.theme && props.enable ? `solid 1.5px ${props.theme.button.primary.main}` : "none"
   }};
   background-color: ${(props: {theme: IThemeConfig; enable: boolean}) => {
     return props.theme && props.enable ? "#fffdfd" : "#F0F1F3";
@@ -63,13 +63,12 @@ type IChooseBindMethod = {
 }
 
 export const ChooseBindMethod = (props: IChooseBindMethod) => {
-  const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
   const wallet = (
     <Option onClick={() => props.changeOptionValueCallback(0)} enable={props.value === 0}>
       <OptionIcon enable={props.value === 0}/>
       <img style={{ width: 60, height: 60, margin: "auto" }} src={environment.country === AllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}/>
-      <Label>{t("Mobile wallet")}</Label>
+      <Label className={props.value === 0 ? "text-primary-main" : ""}>{'Mobile wallet'}</Label>
     </Option>
   );
 
@@ -85,7 +84,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
     >
       <OptionIcon enable={props.value === 1}/>
       <img style={{ width: 60, height: 60, margin: "auto" }}  src={BankAccountSVG}/>
-      <Label>{t("Bank Card")}</Label>
+      <Label className={props.value === 1 ? "text-primary-main" : ""}>{'Bank Name'}</Label>
     </Option>
   )
 
@@ -101,12 +100,6 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
             <>
               {bankcard}
               {wallet}
-            </>
-          ),
-          [BangladeshCountry.country]: (
-            <>
-              {wallet}
-              {bankcard}
             </>
           ),
         }, (
