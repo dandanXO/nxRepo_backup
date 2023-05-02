@@ -1,9 +1,9 @@
-import {Form} from "../../../components/Form";
+import {Form} from "../../Form";
 import {Button, Input, InputValue, Select} from "@frontend/mobile/shared/ui";
 import React from "react";
-import {Label} from "../../../components/Label";
+import {Label} from "../../Label";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
-import {i18nBankBindAccountPage} from "../../translations";
+import {i18nBankBindAccountPage} from "../../../translations";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 

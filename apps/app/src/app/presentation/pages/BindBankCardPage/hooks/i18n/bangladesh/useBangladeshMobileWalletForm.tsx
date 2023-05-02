@@ -1,7 +1,7 @@
 import {useTranslation} from "react-i18next";
 import {useCallback, useEffect, useState} from "react";
 import {InputValue, Modal} from "@frontend/mobile/shared/ui";
-import {i18nBankBindAccountPage} from "../../translations";
+import {i18nBankBindAccountPage} from "../../../translations";
 import {z} from "zod";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";

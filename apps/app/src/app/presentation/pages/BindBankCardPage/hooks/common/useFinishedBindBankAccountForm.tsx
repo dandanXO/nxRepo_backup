@@ -3,9 +3,9 @@ import {InputValue, Modal} from "@frontend/mobile/shared/ui";
 import {useTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
 import * as Sentry from "@sentry/react";
-import {GetBindCardDropListResponse} from "../../../../../../api/rtk/old/GetBindCardDropList";
-import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
-import {AppFlag} from "../../../../../../../main";
+import {GetBindCardDropListResponse} from "../../../../../api/rtk/old/GetBindCardDropList";
+import {CustomAxiosError} from "../../../../../api/rtk/axiosBaseQuery";
+import {AppFlag} from "../../../../../../main";
 
 
 

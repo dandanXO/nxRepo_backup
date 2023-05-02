@@ -1,13 +1,15 @@
 import React from "react";
-import { IUseBindBankAccountPage } from "../../types/IUseBindBankAccountPage";
-import { CustomPage } from "../../../components/CustomPage";
-import { useBindBankAccountForm } from "../../hooks/common/useBindBankAccountForm";
+import { IUseBindBankAccountPage } from "../../../types/IUseBindBankAccountPage";
+import { CustomPage } from "../../CustomPage";
 import { BankAccountForm } from "./BankAccountForm";
-import { useIndiaBankAccountForm } from "../../hooks/india/useIndiaBankAccountForm";
-import { useFinishedBindBankAccountForm } from "../../hooks/common/useFinishedBindBankAccountForm";
 import { Navigation } from "../../../../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
 import {isInAndroid} from "../../../../../../../main";
+
+import { useBindBankAccountForm } from "../../../hooks/common/useBindBankAccountForm";
+import { useFinishedBindBankAccountForm } from "../../../hooks/common/useFinishedBindBankAccountForm";
+import { useIndiaBankAccountForm } from "../../../hooks/i18n/india/useIndiaBankAccountForm";
+
 export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     const navigate = useNavigate();
     const {
@@ -56,27 +58,27 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     return (
         <>
           {!isInAndroid && <Navigation title={"Bank Card"} back={() => { navigate(-1) }} />}
-            <CustomPage>
-                <BankAccountForm cardholderName={props.cardholderName}
-                    ifscData={ifscData}
-                    onIFSCChange={onIFSCChange}
-                    onIFSCBlur={onIFSCBlur}
-                    bankcardNoData={bankcardNoData}
-                    onAccountNumberChange={onAccountNumberChange}
-                    onAccountNumberBlur={onAccountNumberBlur}
-                    confirmedBankcardNoData={confirmedBankcardNoData}
-                    onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-                    onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
-                    upiData={upiData} onUPIIDChange={onUPIIDChange}
-                    isFormPending={isFormPending || false}
-                    confirm={() => {
-                      // NOTE: validate and display errors
-                      const validation = validateCommonForm()
-                      const validation2 = validateIndiaForm();
-                      if(validation && validation2) confirm();
-                    }}
-                />
-            </CustomPage>
+          <CustomPage>
+              <BankAccountForm cardholderName={props.cardholderName}
+                  ifscData={ifscData}
+                  onIFSCChange={onIFSCChange}
+                  onIFSCBlur={onIFSCBlur}
+                  bankcardNoData={bankcardNoData}
+                  onAccountNumberChange={onAccountNumberChange}
+                  onAccountNumberBlur={onAccountNumberBlur}
+                  confirmedBankcardNoData={confirmedBankcardNoData}
+                  onConfirmAccountNumberChange={onConfirmAccountNumberChange}
+                  onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
+                  upiData={upiData} onUPIIDChange={onUPIIDChange}
+                  isFormPending={isFormPending || false}
+                  confirm={() => {
+                    // NOTE: validate and display errors
+                    const validation = validateCommonForm()
+                    const validation2 = validateIndiaForm();
+                    if(validation && validation2) confirm();
+                  }}
+              />
+          </CustomPage>
         </>
 
     );

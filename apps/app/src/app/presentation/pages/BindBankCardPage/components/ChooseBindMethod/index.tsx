@@ -5,14 +5,14 @@ import MobileWalletSVG from "./ic_mobile_wallet_icon.svg";
 import BDMobileWalletSVG from "./bd_ic_mobile_wallet_icon.png";
 import unselectedSVG from "./ic_check_disable_icon.svg";
 import selectedSVG from "./ic_check_available_icon.svg";
-import {Label} from "../../../components/Label";
+import {Label} from "../Label";
 import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
 import {i18nBankBindAccountPage} from "../../translations";
-import {environment} from "../../../../../../../environments/environment";
-import {AllCountryIdentityName} from "../../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName";
-import {renderByCountry} from "../../../../../../modules/i18n";
-import {PakistanCountry} from "../../../../../../../../../../libs/shared/domain/src/country/PakistanCountry";
-import {BangladeshCountry} from "../../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
+import {environment} from "../../../../../../environments/environment";
+import {AllCountryIdentityName} from "../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName";
+import {renderByCountry} from "../../../../../modules/i18n";
+import {PakistanCountry} from "../../../../../../../../../libs/shared/domain/src/country/PakistanCountry";
+import {BangladeshCountry} from "../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
 
 const Container = styled.div`
   margin-bottom: 20px;

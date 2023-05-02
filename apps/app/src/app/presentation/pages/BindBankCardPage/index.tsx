@@ -2,10 +2,9 @@ import React from "react";
 
 import {useLocationOrderQueryString} from "@frontend/mobile/shared/ui";
 
-import {IndiaBindBankAccountPage} from "./i18n/components/IndiaBindBankAccountPage";
-import {PakistanBindBankAccountPage} from "./i18n/components/PakistanBindBankAccountPage";
+import {IndiaBindBankAccountPage} from "./components/i18n/IndiaBindBankAccountPage";
+import {PakistanBindBankAccountPage} from "./components/i18n/PakistanBindBankAccountPage";
 
-import {BangladeshBindBankAccountPage} from "./i18n/components/BangladeshBindBankAccountPage";
 import {
   useLazyGetBindCardDropListQuery,
   usePostBankBindSaveMutation,
@@ -34,9 +33,6 @@ const BindBankCardPage = () => {
     // NOTE: 綁定銀行卡
     const [postBankBindSaveToPK, { isLoading: isLoadingPostBankBindSaveToPK}] = usePostBankBindSaveToPKMutation();
 
-    // NOTICE: Bangladesh
-    // NOTE: 綁定手機
-    const [triggerPostBankBindSaveToBangladeshMutation] = usePostBankBindSaveToBangladeshMutation();
 
     // NOTE: 取得電子錢包列表(IN 沒有, PK 有, BD未來有)
     const [triggerGetBindCardDropListQuery, {currentData: bindCardDropListData,
@@ -67,12 +63,6 @@ const BindBankCardPage = () => {
           cardholderName={cardholderName ?? ""}
         />
       ),
-      // NOTICE: REFACTOR ME
-      [BangladeshCountry.country]: (
-        <BangladeshBindBankAccountPage
-          triggerPostBankBindSaveToBangladeshMutation={triggerPostBankBindSaveToBangladeshMutation}
-        />
-      )
     }, (
         <PakistanBindBankAccountPage
         isLoadingPostBankBindSaveToPK={isLoadingPostBankBindSaveToPK}

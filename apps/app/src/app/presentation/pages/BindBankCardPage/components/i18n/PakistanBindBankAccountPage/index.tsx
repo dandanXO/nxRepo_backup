@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {IUseBindBankAccountPage,} from "../../types/IUseBindBankAccountPage";
-import {CustomPage} from "../../../components/CustomPage";
-import {ChooseBindMethod} from "../ChooseBindMethod";
+import {IUseBindBankAccountPage,} from "../../../types/IUseBindBankAccountPage";
+import {CustomPage} from "../../CustomPage";
+import {ChooseBindMethod} from "../../ChooseBindMethod";
 import {MobileWalletForm} from "./MobileWalletForm";
 import {BankAccountForm} from "./BankAccountForm";
-import {useBindBankAccountForm} from "../../hooks/common/useBindBankAccountForm";
-import {usePakistanBankAccountForm} from "../../hooks/pakistan/usePakistanBankAccountForm";
-import {useFinishedBindBankAccountForm} from "../../hooks/common/useFinishedBindBankAccountForm";
-import {usePakistanMobileWalletForm} from "../../hooks/pakistan/usePakistanMobileWalletForm";
+import {useBindBankAccountForm} from "../../../hooks/common/useBindBankAccountForm";
+import {usePakistanBankAccountForm} from "../../../hooks/i18n/pakistan/usePakistanBankAccountForm";
+import {useFinishedBindBankAccountForm} from "../../../hooks/common/useFinishedBindBankAccountForm";
+import {usePakistanMobileWalletForm} from "../../../hooks/i18n/pakistan/usePakistanMobileWalletForm";
 import { Outlet } from "react-router";
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式

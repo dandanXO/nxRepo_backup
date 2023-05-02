@@ -1,9 +1,9 @@
 import React from "react";
-import { IIndiaBankAccountForm } from "../../types/IBankAccountForm";
-import { Form } from "../../../components/Form";
-import { Paragraph } from "../../../components/Paragraph";
+import { IIndiaBankAccountForm } from "../../../types/IBankAccountForm";
+import { Form } from "../../Form";
+import { Paragraph } from "../../Paragraph";
 import { useTranslation } from "react-i18next";
-import { i18nBankBindAccountPage } from "../../translations";
+import { i18nBankBindAccountPage } from "../../../translations";
 import {Button} from "../../../../../components/layouts/Button";
 import {Input} from "@frontend/mobile/shared/ui";
 

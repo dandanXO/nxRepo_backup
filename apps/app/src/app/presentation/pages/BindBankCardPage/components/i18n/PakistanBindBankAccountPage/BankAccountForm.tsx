@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import {useTranslation, withTranslation} from "react-i18next";
-import {Form} from "../../../components/Form";
-import {Label} from "../../../components/Label";
-import {i18nBankBindAccountPage} from "../../translations";
+import {Form} from "../../Form";
+import {Label} from "../../Label";
+import {i18nBankBindAccountPage} from "../../../translations";
 import {Button, Input} from "@frontend/mobile/shared/ui";
-import {IPakistanBankAccountForm} from "../../types/IBankAccountForm";
+import {IPakistanBankAccountForm} from "../../../types/IBankAccountForm";
 import Select from 'react-select';
 import { useNavigate } from "react-router";
 
