@@ -8,5 +8,5 @@ export const CustomPage = styled.div<{theme: IThemeConfig}>`
     // NOTICE: 底色
     // background: ${(props) => props.theme.page.bgColor};
     height: 100vh;
-    padding: 0 18px;
+    padding: 0 18px 8px;
 `;
