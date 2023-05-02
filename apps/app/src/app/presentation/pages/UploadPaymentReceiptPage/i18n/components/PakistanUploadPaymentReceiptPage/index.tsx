@@ -18,34 +18,35 @@ import {i18nUploadPaymentReceiptPage} from "../../translations";
 export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)((props: Omit<I18UploadPaymentReceiptPageProps, "utr" | "setURT" | "validateUtr">) => {
 
     return (
-      <CustomPage>
-        {props.isUploading && <UploadingFileModal/>}
-
-        <div className="text-sm text-left mb-2">{props.t("Upload your repayment receipt(optional)")}</div>
-
-        <div className="bg-[#F8F8F8] border-dashed border border-[#B7BBC5] h-[183px] flex justify-center items-center rounded-lg mb-4">
-          {!props.formFile ? (
-            <div className="flex flex-col justify-center items-center">
-              <div>
-                <I18CameraSvgIcon/>
-              </div>
-              <div className="text-sm mt-2 text-[#6B738A]">
-                {props.t("Click to upload")}
-              </div>
-              <Input
-                type="file"
-                id="file"
-                style={{display: "none"}}
-                value={props.formFile}
-                onInput={(event) => props.onFileChange(event)}
-              />
+        <CustomPage className={'h-screen'}>
+            {props.isUploading && <UploadingFileModal />}
+            <div>
+                <div className="text-sm text-left mb-2">{props.t("Upload your repayment receipt (optional)")}</div>
+                <div className="bg-[#F8F8F8] border-dashed border border-[#B7BBC5] h-[183px] flex justify-center items-center rounded-lg mb-4">
+                    {!props.formFile ? (
+                        <label className="flex flex-col justify-center items-center" htmlFor="file">
+                            <div>
+                                <I18CameraSvgIcon />
+                            </div>
+                            <div className="text-sm mt-2 text-[#6B738A]">
+                                {props.t("Click to upload")}
+                            </div>
+                            <Input
+                                type="file"
+                                id="file"
+                                style={{ display: "none" }}
+                                value={props.formFile}
+                                onChange={(event) => props.onFileChange(event)}
+                            />
+                        </label>
+                    ) 
+                    : (
+                        <UploadSectionImg imageURL={props.imageSrc ? props.imageSrc : ""} />
+                    )}
+                </div>
             </div>
-          ) : (
-            <UploadSectionImg imageURL={props.imageSrc ? props.imageSrc : ""}/>
-          )}
-        </div>
-        <Button onClick={() => props.confirm()}>{props.t("Confirm")}</Button>
-      </CustomPage>
+            <Button onClick={() => props.confirm()}>{props.t("Confirm")}</Button>
+        </CustomPage>
     );
   }
 )
