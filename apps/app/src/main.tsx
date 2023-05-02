@@ -28,7 +28,7 @@ if(!appInfo) {
       environment: "india",
       packageId: "com.ind.kyc.application",
       appName: "dev_in",
-      uiVersion: "v55",
+      uiVersion: "55",
       token: "",
     }
     applyTheme("india", appInfo.uiVersion);
@@ -38,7 +38,7 @@ if(!appInfo) {
       environment: "pakistan",
       packageId: "com.pak.app.yesloan.android",
       appName: "dev_in",
-      uiVersion: "v15",
+      uiVersion: "15",
       token: "",
     }
     applyTheme("pakistan", appInfo.uiVersion);
@@ -52,11 +52,11 @@ if(!appInfo) {
 if(appInfo.uiVersion === "1") {
   if(appInfo.packageId === "com.ind.kyc.application") {
     appInfo.environment = "india";
-    appInfo.uiVersion = "v55"
+    appInfo.uiVersion = "55"
     applyTheme("india", appInfo.uiVersion);
   } else if(appInfo.packageId === "com.pak.app.yesloan.android") {
     appInfo.environment = "pakistan";
-    appInfo.uiVersion = "v15"
+    appInfo.uiVersion = "15"
     applyTheme("pakistan", appInfo.uiVersion);
   }
 }
@@ -67,7 +67,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-import(`./environments/theme/${appInfo.environment}/${appInfo.uiVersion}/theme`).then((content) => {
+import(`./environments/theme/${appInfo.environment}/v${appInfo.uiVersion}/theme`).then((content) => {
 
   const themeConfig = content.themeConfig;
   window.theme = themeConfig;
