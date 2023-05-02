@@ -17,6 +17,8 @@ const Content = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-grow: 1;
+    
 `;
 
 const Title = styled.div`
@@ -34,6 +36,8 @@ const ControlSection = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    flex-grow: 1;
+    justify-content: end;
 `;
 
 type UploadedPaymentReceiptPage = {
