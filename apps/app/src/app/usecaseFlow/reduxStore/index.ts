@@ -8,7 +8,7 @@ import {appSlice} from "./appSlice";
 import {createBrowserHistory} from 'history'
 import {alertModal} from "../../api/base/alertModal";
 import {createRouterMiddleware, createRouterReducer} from '@lagunovsky/redux-react-router'
-import {loginSlice} from "../usecaseActionSaga/userUsecaseSaga/loginPageSaga";
+import {loginSlice} from "./loginSlice";
 import {AppSaga} from "../watchSaga/appSaga";
 
 export const history = createBrowserHistory()
