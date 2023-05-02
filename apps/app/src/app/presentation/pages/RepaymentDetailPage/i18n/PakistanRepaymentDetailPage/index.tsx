@@ -1,19 +1,15 @@
-
 import Divider from "../../../../components/Divider";
 import ListItem from "../../../../components/ListItem";
-import { AmountPaidIcon, } from "@frontend/mobile/shared/ui";
-import { Outlet } from "react-router";
-import { useNavigate, useLocation } from "react-router";
-import { useLazyGetLoanDetailQuery } from "../../../../../api/rtk";
-import { useEffect, useState } from "react";
-import { getToken } from "../../../../../modules/location/getToken";
+import {AmountPaidIcon,} from "@frontend/mobile/shared/ui";
+import {Outlet, useLocation, useNavigate} from "react-router";
+import {getToken} from "../../../../../modules/location/getToken";
 import moment from "moment";
 import {getOrderNo} from "../../../../../modules/location/getOrderNo";
 import Money from "../../../../components/Money.tsx";
 import {Button} from "../../../../components/layouts/Button";
-import { GetLoanDetailChargeFeeDetailItems } from "../../../../../api/rtk/old/getLoanDetail";
-import cx from "classnames";
-import { Status } from "../../../../../modules/statusEnum";
+import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
+import {Status} from "../../../../../modules/statusEnum";
+
 const PakistanRepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()
     const location = useLocation();
@@ -57,8 +53,6 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 {serviceFee && <ListItem title={'Service Charge'} text={<Money money={serviceFee}/>} titleColor="text-slate-400" />}
 
                 {dailyFee && <ListItem title={'Daily Fee'} text={<Money money={dailyFee}/>} titleColor="text-slate-400" />}
-
-
 
                 {gst && <ListItem title={'GST'} text={<Money money={gst}/>} titleColor="text-slate-400" />}
                 {loanInterest && <ListItem title={'Loan Interest'} text={<Money money={loanInterest}/>} titleColor="text-slate-400" />}
@@ -115,7 +109,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
                 {(status === "UNPAID" || status === "OVERDUE") &&
                     <>
-                        <div className={`text-xs text-gray-300`}>
+                        <div className={`text-xs text-gray-400`}>
                             <div>Attention：</div>
                             <ul className="list-decimal list-outside pl-3 pt-1">
                                 <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
@@ -125,7 +119,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                         </div>
                         <div className={`flex flex-col my-3`}>
                             <div className="h-2.5 bg-slate-200 mx-[-24px] my-2"></div>
-                            <div className={`text-xs text-gray-300 `}>
+                            <div className={`text-xs text-gray-400 `}>
                                 After completing the repayment, take a screenshot and upload your repayment receipt here.
                             </div>
                             {/*TODO: 先兼容 querystring*/}
