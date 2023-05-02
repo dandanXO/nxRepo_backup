@@ -19,7 +19,7 @@ import RepaymentAdsModal from "../../modals/old/RepaymentAdsModal";
 import RepaymentNoticeModal from "../../modals/old/RepaymentNoticeModal";
 import {I18nRepaymentStepsModal} from "../../modals/old/RepaymentStepsModal";
 
-import {CustomPage} from "../../pages/BindBankCardPage/components/CustomPage";
+import {CustomPage} from "../layouts/CustomPage";
 import AmountPaidModal from "../../modals/AmountRepaidModal/AmountRepaidModal";
 import {AllCountryInstance} from "../../../../../../../libs/shared/domain/src/country/AllCountryInstance";
 import ExtendModal from "../../modals/ExtendModal";

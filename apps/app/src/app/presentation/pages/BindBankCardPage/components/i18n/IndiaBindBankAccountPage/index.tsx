@@ -1,6 +1,6 @@
 import React from "react";
 import { IUseBindBankAccountPage } from "../../../types/IUseBindBankAccountPage";
-import { CustomPage } from "../../CustomPage";
+import { CustomPage } from "../../../../../components/layouts/CustomPage";
 import { BankAccountForm } from "./BankAccountForm";
 import { Navigation } from "../../../../../components/layouts/Navigation";
 import { useNavigate } from "react-router";

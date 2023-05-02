@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 import {Navigation} from "../../components/layouts/Navigation";
 import {isInAndroid} from "../../../modules/window/isInAndroid";
 import {useNavigate} from "react-router";
-import { CustomPage } from "./components/CustomPage";
+import { CustomPage } from "../../components/layouts/CustomPage";
 
 
 const BindBankCardPage = () => {
