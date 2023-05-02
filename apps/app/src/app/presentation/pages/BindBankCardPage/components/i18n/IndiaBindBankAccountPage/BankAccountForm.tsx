@@ -1,30 +1,28 @@
 import React from "react";
-import { IIndiaBankAccountForm } from "../../../types/IBankAccountForm";
-import { Form } from "../../Form";
-import { Paragraph } from "../../Paragraph";
-import { useTranslation } from "react-i18next";
-import { i18nBankBindAccountPage } from "../../../translations";
+import {IIndiaBankAccountForm} from "../../../types/IBankAccountForm";
+import {Form} from "../../Form";
+import {Paragraph} from "../../Paragraph";
 import {Button} from "../../../../../components/layouts/Button";
 import {Input} from "@frontend/mobile/shared/ui";
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
-    const { t } = useTranslation(i18nBankBindAccountPage.namespace)
+
     return (
         <>
             <Form>
                 <Paragraph className="text-sm">
-                    {t("For KYC, your Cardholder name and Aadhaar name should be match.")}
+                    {"For KYC, your Cardholder name and Aadhaar name should be match."}
                 </Paragraph>
 
                 <Input
                     className="mb"
-                    label={t("Cardholder Name") as string}
+                    label={"Cardholder Name"}
                     value={props.cardholderName}
                     disabled
                 />
                 <Input
                     className="mb"
-                    label={t("IFSC Code (11 digits)") as string}
+                    label={"IFSC Code (11 digits)"}
                     value={props.ifscData.data}
                     onChange={props.onIFSCChange}
                     onBlur={props.onIFSCBlur}
@@ -32,7 +30,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                 />
                 <Input
                     className="mb"
-                    label={t("Account Number") as string}
+                    label={"Account Number"}
                     value={props.bankcardNoData.data}
                     onChange={props.onAccountNumberChange}
                     onBlur={props.onAccountNumberBlur}
@@ -40,7 +38,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                 />
                 <Input
                     className="mb"
-                    label={t("Confirm Account Number") as string}
+                    label={"Confirm Account Number"}
                     value={props.confirmedBankcardNoData.data}
                     onChange={props.onConfirmAccountNumberChange}
                     onBlur={props.onConfirmAccountNumberBlur}
@@ -48,14 +46,14 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                 />
                 <Input
                     className="mb"
-                    label={t("UPI ID") as string}
+                    label={"UPI ID"}
                     value={props.upiData.data}
                     onChange={props.onUPIIDChange}
                 />
             </Form>
             {/*<Button onClick={() => { !props.isFormPending && props.confirm() }}>{t("Save")}</Button>*/}
           {/*<Button text={t("Save")} onClick={() => { !props.isFormPending && props.confirm() }} bgColor={`bg-[${theme.primary.main}]`}/>*/}
-          <Button text={t("Save")} onClick={() => { !props.isFormPending && props.confirm() }} className={`bg-primary-main`}/>
+          <Button text={"Save"} onClick={() => { !props.isFormPending && props.confirm() }} className={`bg-primary-main`}/>
         </>
     );
 }

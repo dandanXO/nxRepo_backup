@@ -9,6 +9,22 @@ import {usePakistanBankAccountForm} from "../../../hooks/i18n/pakistan/usePakist
 import {useFinishedBindBankAccountForm} from "../../../hooks/common/useFinishedBindBankAccountForm";
 import {usePakistanMobileWalletForm} from "../../../hooks/i18n/pakistan/usePakistanMobileWalletForm";
 import { Outlet } from "react-router";
+import styled from "styled-components";
+
+
+const Warning = styled.div`
+  //margin: 0 auto;
+  //width: 284px;
+  //font-size: 15px;
+  //font-weight: normal;
+  //font-stretch: normal;
+  //font-style: normal;
+  //line-height: 1.42;
+  //letter-spacing: normal;
+  //text-align: center;
+  //color: #f82626;
+`;
+
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0|1>(1);
@@ -87,9 +103,15 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   });
 
   return (
-    <CustomPage>
+    <>
       <Outlet/>
       <ChooseBindMethod value={chooseBindMethodValue} changeOptionValueCallback={changeOptionValue} disable={props.bindCardDropListData?.showBankOption || false}/>
+
+      <div className={"bg-[#E8F0FF] text-[#4285F4] rounded-md p-2 mb-2"}>
+        <div className={"underline font-medium"}>Once added, it cannot be edited anymore. </div>
+        <div>Please ensure that the account belongs to you, and that all information is correct and accurate.</div>
+      </div>
+
       {chooseBindMethodValue === 0 ? (
         <MobileWalletForm
           walletDropList={walletDropList}
@@ -132,6 +154,6 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             onIbanBlur={onIbanBlur}
           />
         )}
-    </CustomPage>
+    </>
   );
 }

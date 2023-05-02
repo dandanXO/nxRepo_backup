@@ -1,5 +1,6 @@
 import "./isInAndroid"
 import "./onUploadKycBackgroundData"
+import {IThemeConfig} from "@frontend/mobile/shared/ui";
 
 export enum AndroidPage {
   LOGIN = "LOGIN",
@@ -24,7 +25,7 @@ declare global {
       navToPage:  (androidPage: AndroidPage) => void;
     };
     onUploadKycBackgroundData: (uploaded: boolean) => void;
-    theme?: any;
+    theme?: IThemeConfig;
     AppInfoTask: {
       getAppInfo: () => AndroidAppInfo;
     }

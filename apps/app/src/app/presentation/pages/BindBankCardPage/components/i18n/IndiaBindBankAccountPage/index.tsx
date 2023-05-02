@@ -57,6 +57,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
 
     return (
         <>
+          {/*NOTICE: 這邊的用意是？*/}
           {!isInAndroid() && <Navigation title={"Bank Card"} back={() => { navigate(-1) }} />}
 
           <CustomPage>

@@ -2,7 +2,7 @@
 // import base from '../../../app/modules/theme/themes/base';
 
 export default {
-  primary_main : "green",
+  primary_main : "#18A851",
   primary_variant : "lightgreen",
   primary_assistant : "#DDF8FF",
 

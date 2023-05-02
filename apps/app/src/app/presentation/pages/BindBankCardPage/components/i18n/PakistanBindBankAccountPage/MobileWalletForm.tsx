@@ -2,19 +2,7 @@ import {Form} from "../../Form";
 import {Button, Input, InputValue, Select} from "@frontend/mobile/shared/ui";
 import React from "react";
 import {Label} from "../../Label";
-import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
-import {i18nBankBindAccountPage} from "../../../translations";
-import styled from "styled-components";
-import { useNavigate } from "react-router";
-
-const WalletDiscountHint = styled.div`
-  line-height: 23px;
-  background: #fff3b2;
-  color: #31a843;
-  font-size: 16px;
-  padding: 4px 12px;
-  margin-bottom: 17px;
-`
+import {useNavigate} from "react-router";
 
 type IMobileWalletForm = {
   // Wallet List
@@ -34,53 +22,62 @@ type IMobileWalletForm = {
 };
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
-  const {t} = useTranslation(i18nBankBindAccountPage.namespace);
   const navigate = useNavigate();
   return (
     <Form>
-      <Label>{t("Please select the of your mobile wallet")}</Label>
-      <Select
-        className="mb"
-        fixButtonWidth={"calc(100vw - 36px)"}
-        dataSource={props.walletDropList}
-        defaultIndex={props.walletValue}
-        // FIXME: to controlled component
-        onSelect={(index:number) => {
-          props.setWalletValue(index);
-        }}
-      />
-      {/*<WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>*/}
-      <Label>{t('Your IBAN Number (24 digits)')}</Label>
-      <Input
-        // className="mb"
-        labelType={'none'}
-        placeholder={'Ex. PK36FTBK0000111123456702'}
-        value={props.iBanData.data}
-        onChange={props.onIBanChange}
-        onBlur={props.onIbanBlur}
-        errorMessage={props.iBanData.errorMessage}
-      />
-      <div className="text-sm text-blue-500 underline leading-none whitespace-nowrap mb"
-           onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}
-      >
-          {t('Click me to learn where can I find my IBAN number?')}
+
+      <div>
+        <Label>{"Mobile Wallet"}</Label>
+        <Select
+          className="mb"
+          fixButtonWidth={"calc(100vw - 36px)"}
+          dataSource={props.walletDropList}
+          defaultIndex={props.walletValue}
+          // FIXME: to controlled component
+          onSelect={(index:number) => {
+            props.setWalletValue(index);
+          }}
+        />
       </div>
 
-      <Input
-        className="mb"
-        labelType={"left"}
-        label={"+92"}
-        placeholder={t("Wallet Account Number") as string}
-        value={props.mobileData.data}
-        onChange={props.onMobileDataChange}
-        onBlur={props.validateMobileWalletAccount}
-        errorMessage={props.mobileData.errorMessage}
-      />
+      <div>
+        <Label>{'Your IBAN Number (24 characters)'}</Label>
+        <Input
+          labelType={'none'}
+          outlineType={"standard"}
+          placeholder={'Ex. PK36FTBK0000111123456702'}
+          value={props.iBanData.data}
+          onChange={props.onIBanChange}
+          onBlur={props.onIbanBlur}
+          errorMessage={props.iBanData.errorMessage}
+        />
+        <div className="text-sm text-blue-500 underline leading-none whitespace-nowrap mb"
+             onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}
+        >
+          {'Click me to learn where can I find my IBAN number?'}
+        </div>
+      </div>
+
+      <div>
+        <Label>{'Confirm Mobile Wallet Account'}</Label>
+        <Input
+          className="mb"
+          labelType={"left"}
+          outlineType={"standard"}
+          label={"+92"}
+          placeholder={"Wallet Account Number"}
+          value={props.mobileData.data}
+          onChange={props.onMobileDataChange}
+          onBlur={props.validateMobileWalletAccount}
+          errorMessage={props.mobileData.errorMessage}
+        />
+      </div>
+
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
       <Button
         onClick={() => props.confirm()}
       >
-        {t("Save")}
+        {"Confirm and Add"}
       </Button>
     </Form>
   );

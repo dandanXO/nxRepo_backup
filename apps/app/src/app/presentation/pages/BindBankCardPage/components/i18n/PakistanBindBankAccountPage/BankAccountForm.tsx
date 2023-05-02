@@ -1,26 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import {useTranslation, withTranslation} from "react-i18next";
 import {Form} from "../../Form";
 import {Label} from "../../Label";
-import {i18nBankBindAccountPage} from "../../../translations";
-import {Button, Input} from "@frontend/mobile/shared/ui";
+import {Input} from "@frontend/mobile/shared/ui";
 import {IPakistanBankAccountForm} from "../../../types/IBankAccountForm";
 import Select from 'react-select';
-import { useNavigate } from "react-router";
-
-const Warning = styled.div`
-  margin: 0 auto;
-  width: 284px;
-  font-size: 15px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.42;
-  letter-spacing: normal;
-  text-align: center;
-  color: #f82626;
-`;
+import {useNavigate} from "react-router";
+import {Button} from "../../../../../components/layouts/Button";
 
 const CustomForm = styled.div`
   .css-1s2u09g-control, .css-1pahdxg-control {
@@ -35,108 +21,95 @@ const CustomForm = styled.div`
 export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
 
   const navigate = useNavigate();
-  const {t} = useTranslation(i18nBankBindAccountPage.namespace);
 
   const options = props.bankDropList?.map((item: string, index: number) => {
     return {value: item, label: item, index: index}
   });
 
-  // useEffect(() => {
-  //   if(props.bankDropList) {
-  // console.log("props.bankDropList", props.bankDropList)
-  // props.onIFSCDropSelect(0)
-  // }
-  // }, [props.bankDropList])
-
   return (
     <CustomForm>
       <Form>
-        <Label>{t('Cardholder Name')}</Label>
 
-        <Input
-          className="mb"
-          labelType={'none'}
-          placeholder={t('Cardholder Name') as string}
-          value={props.cardholderName}
-          disabled
-        />
-        <Label>{t('Your IBAN Number (24 digits)')}</Label>
-        <Input
-        //   className="mb"
-          labelType={'none'}
-          placeholder={'Ex. PK36FTBK0000111123456702'}
-          value={props.iBanData.data}
-          onChange={props.onIBanChange}
-          onBlur={props.onIbanBlur}
-          errorMessage={props.iBanData.errorMessage}
-        />
-        <div className="text-sm text-blue-500 underline leading-none whitespace-nowrap mb"
-             onClick={()=>navigate('iban-finder-modal',{state:'Bank'})}
-        >
-            {t('Click me to learn where can I find my IBAN number?')}
+        <div>
+          <Label>{'Cardholder Name'}</Label>
+          <Input
+            className="mb"
+            labelType={'none'}
+            outlineType={"standard"}
+            placeholder={'Cardholder Name'}
+            value={props.cardholderName}
+            disabled
+          />
         </div>
-        <Label>{t('Please select your bank name')}</Label>
-        <Select
-          className="react-select-container mb"
-          // defaultValue={props.bankDropList[0].value}
-          value={props?.bankDropList[props.bankAccountValue]?.value}
-          onChange={(item: any) => {
-            // console.log(item)
-            props.onIFSCDropSelect(item.index);
-          }}
-          options={options}
-          isSearchable={false}
-        />
 
-        {/*<Select*/}
-        {/*  className="mb"*/}
-        {/*  fixButtonWidth={"calc(100vw - 36px)"}*/}
-        {/*  dataSource={props.bankDropList}*/}
-        {/*  defaultIndex={props.bankAccountValue}*/}
-        {/*  // FIXME: to controlled component*/}
-        {/*  onSelect={(index: number) => props.onIFSCDropSelect(index)}*/}
-        {/*  maxItemCount={5.5}*/}
-        {/*/>*/}
+        <div>
+          <Label>{'Your IBAN Number (24 characters)'}</Label>
+          <Input
+            labelType={'none'}
+            outlineType={"standard"}
+            placeholder={'Ex. PK36FTBK0000111123456702'}
+            value={props.iBanData.data}
+            onChange={props.onIBanChange}
+            onBlur={props.onIbanBlur}
+            errorMessage={props.iBanData.errorMessage}
+          />
+          <div className="text-sm text-blue-500 underline leading-none whitespace-nowrap mb"
+               onClick={()=>navigate('iban-finder-modal',{state:'Bank'})}
+          >
+            {'Click me to learn where can I find my IBAN number?'}
+          </div>
+        </div>
 
-        <Label>{t('Account Number')}</Label>
-        <Input
-          className="mb"
-          labelType={'none'}
-          placeholder={t('Account Number') as string}
-          value={props.bankcardNoData.data}
-          onChange={props.onAccountNumberChange}
-          onBlur={props.onAccountNumberBlur}
-          errorMessage={props.bankcardNoData.errorMessage}
-        />
+        <div>
+          <Label>{'Please select your bank name'}</Label>
+          <Select
+            className="react-select-container mb"
+            // defaultValue={props.bankDropList[0].value}
+            value={props?.bankDropList[props.bankAccountValue]?.value}
+            onChange={(item: any) => {
+              // console.log(item)
+              props.onIFSCDropSelect(item.index);
+            }}
+            options={options}
+            isSearchable={false}
+          />
+        </div>
 
-        <Label>{t('Confirm Account Number')}</Label>
-        <Input
-          className="mb"
-          labelType={'none'}
-          placeholder={t('Confirm Account Number') as string}
-          value={props.confirmedBankcardNoData.data}
-          onChange={props.onConfirmAccountNumberChange}
-          onBlur={props.onConfirmAccountNumberBlur}
-          errorMessage={props.confirmedBankcardNoData.errorMessage}
-        />
+        <div>
+          <Label>{'Account Number'}</Label>
+          <Input
+            className="mb"
+            labelType={'none'}
+            outlineType={"standard"}
+            placeholder={'Account Number'}
+            value={props.bankcardNoData.data}
+            onChange={props.onAccountNumberChange}
+            onBlur={props.onAccountNumberBlur}
+            errorMessage={props.bankcardNoData.errorMessage}
+          />
+        </div>
 
-        <Warning>
-          {t('Unchangeable after linked, please check before submission.')}
-        </Warning>
+        <div>
+          <Label>{'Confirm Account Number'}</Label>
+          <Input
+            className="mb"
+            labelType={'none'}
+            outlineType={"standard"}
+            placeholder={'Confirm Account Number'}
+            value={props.confirmedBankcardNoData.data}
+            onChange={props.onConfirmAccountNumberChange}
+            onBlur={props.onConfirmAccountNumberBlur}
+            errorMessage={props.confirmedBankcardNoData.errorMessage}
+          />
+        </div>
+
+        <Button text={"Confirm and Add"} onClick={() => {
+          // !props.isFormPending && props.confirm
+          props.confirm && props.confirm();
+        }} className={"bg-primary-main text-white"}/>
+
       </Form>
 
-      <Button
-        onClick={() => {
-          // if(!props.isFormPending && props.confirm) {
-          //   console.log("request")
-          props.confirm && props.confirm();
-          // } else {
-          //   console.log("request2")
-          // }
-        }}
-      >
-        {t('Save')}
-      </Button>
     </CustomForm>
   );
 }
