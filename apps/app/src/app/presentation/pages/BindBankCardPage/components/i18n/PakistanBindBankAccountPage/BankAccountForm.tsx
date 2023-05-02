@@ -79,7 +79,8 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           <Label>{'Account Number'}</Label>
           <Input
             className="mb"
-            labelType={'none'}
+            labelType={'left'}
+            label={"+92"}
             outlineType={"standard"}
             placeholder={'Account Number'}
             value={props.bankcardNoData.data}
@@ -93,7 +94,8 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           <Label>{'Confirm Account Number'}</Label>
           <Input
             className="mb"
-            labelType={'none'}
+            labelType={'left'}
+            label={"+92"}
             outlineType={"standard"}
             placeholder={'Confirm Account Number'}
             value={props.confirmedBankcardNoData.data}
