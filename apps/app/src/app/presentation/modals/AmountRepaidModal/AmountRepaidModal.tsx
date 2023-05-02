@@ -2,16 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import {
     Overlay,
-    ListItem,
     flexCreator,
-    Title,
+    ListItem,
 } from "@frontend/mobile/shared/ui";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { i18nAmountRepaidModal } from "./i18n/translations";
 import { GetLoanDetailResponse } from "../../../api/rtk/old/getLoanDetail";
 import recordStatusStyleProps from "../../../modules/recordStatusColorMapper";
 import {useLocation, useNavigate} from "react-router";
-import { stat } from "fs";
 import {PagePathEnum} from "../../pages/PagePathEnum";
 import Divider from "../../components/Divider";
 import moment from "moment";
@@ -21,13 +19,13 @@ const ModalContentStyled = styled.div`
 `;
 
 const RecordStyled = styled.div<RecordStyledProps>`
-    ${flexCreator("column", "center", "center")};
-    margin: 0 12px;
+    margin: 0 16px -8px 16px ;
+    font-size: 12px;
     .recordStatus {
         width: 100%;
         ${flexCreator("row", "flex-end", "center")};
         ${(props) => ({ ...recordStatusStyleProps[props.status] })}
-        margin-top: -12px;
+        margin-top: -8px;
         text-align: right;
     }
 `;
@@ -53,7 +51,10 @@ const Record = (props: {
     return (
         <>
             <RecordStyled status={repayType}>
-                <ListItem title={repayDate} text={repayAmount} />
+                <div className={`flex justify-between my-1 text-black text-xs `} >
+                    <div>{repayDate}</div>
+                    <div>{repayAmount}</div>
+                </div>
                 <div className={`recordStatus`}>
                     <div>{repayType}</div>
                 </div>
