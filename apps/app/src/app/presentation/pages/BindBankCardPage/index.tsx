@@ -22,8 +22,7 @@ const BindBankCardPage = () => {
     // NOTICE: Common
     // NOTE: cardholderName
     const pageQueryString = useLocationOrderQueryString();
-    // const cardholderName = pageQueryString.cardholderName;
-    const cardholderName = useSelector((state:any) => state.indexPage.user.userName) || pageQueryString.cardholderName;
+    const cardholderName = pageQueryString.cardholderName || useSelector((state:any) => state.indexPage.user.userName)
 
     // NOTICE: India
     // NOTE: 綁定銀行卡

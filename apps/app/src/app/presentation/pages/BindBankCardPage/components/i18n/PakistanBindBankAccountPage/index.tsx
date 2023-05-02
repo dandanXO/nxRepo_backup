@@ -21,6 +21,16 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     props.triggerGetBindCardDropListQuery();
   }, [])
 
+  const  {
+    bankcardNoData,
+    onAccountNumberChange,
+    onAccountNumberBlur,
+    confirmedBankcardNoData,
+    onConfirmAccountNumberChange,
+    onConfirmAccountNumberBlur,
+    validate: validateCommonForm,
+  } = useBindBankAccountForm();
+
   const {
     // Wallet List
     walletDropList,
@@ -39,16 +49,6 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
     bindCardDropListData: props.bindCardDropListData,
   });
-
-  const  {
-    bankcardNoData,
-    onAccountNumberChange,
-    onAccountNumberBlur,
-    confirmedBankcardNoData,
-    onConfirmAccountNumberChange,
-    onConfirmAccountNumberBlur,
-    validate: validateCommonForm,
-  } = useBindBankAccountForm();
 
   const {
     bankDropList,

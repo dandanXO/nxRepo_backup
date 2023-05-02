@@ -34,11 +34,6 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
 
   const navigateToAPP = useCallback(() => {
     window.location.href = "innerh5://127.0.0.1";
-
-    // if(window["IndexTask"] && window["IndexTask"]["navToPage"]) {
-    //   window["IndexTask"]["navToPage"](AndroidPage.AUTH);
-    // }
-
   }, []);
 
   const confirm = useCallback(() => {
