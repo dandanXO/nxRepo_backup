@@ -28,7 +28,7 @@ if(!appInfo) {
       environment: "india",
       packageId: "com.ind.kyc.application",
       appName: "dev_in",
-      uiVersion: "55",
+      uiVersion: "1",
       token: "",
     }
     applyTheme("india", appInfo.uiVersion);
@@ -38,7 +38,7 @@ if(!appInfo) {
       environment: "pakistan",
       packageId: "com.pak.app.yesloan.android",
       appName: "dev_in",
-      uiVersion: "15",
+      uiVersion: "1",
       token: "",
     }
     applyTheme("pakistan", appInfo.uiVersion);
@@ -67,7 +67,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-import(`./environments/theme/${appInfo.environment}/v${appInfo.uiVersion}/theme`).then((content) => {
+import(`./environments/theme/v${appInfo.environment}/${appInfo.uiVersion}/theme`).then((content) => {
 
   const themeConfig = content.themeConfig;
   window.theme = themeConfig;
