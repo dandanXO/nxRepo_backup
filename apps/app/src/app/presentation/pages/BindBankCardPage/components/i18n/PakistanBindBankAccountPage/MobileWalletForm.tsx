@@ -60,7 +60,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           onBlur={props.onIbanBlur}
           errorMessage={props.iBanData.errorMessage}
         />
-        <div className="text-sm text-blue-500 underline leading-none whitespace-nowrap mb"
+        <div className="text-xs text-blue-500 underline leading-none whitespace-nowrap mb"
              onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}
         >
           {'Click me to learn where can I find my IBAN number?'}
