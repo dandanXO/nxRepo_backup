@@ -119,7 +119,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
                 {(status === "UNPAID" || status === "OVERDUE") &&
                     <>
-                        <div className={`text-xs text-gray-400`}>
+                        <div className={`text-xs text-gray-400 leading-none mb-4`}>
                             <div>Attention：</div>
                             <ul className="list-decimal list-outside pl-3 pt-1">
                                 <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
@@ -128,12 +128,12 @@ const PakistanRepaymentDetailPage = (props: any) => {
                             </ul>
                         </div>
                         <div className={`flex flex-col my-3`}>
-                            <div className="h-2.5 bg-slate-200 mx-[-24px] my-2"></div>
-                            <div className={`text-xs text-gray-400 `}>
-                                After completing the repayment, take a screenshot and upload your repayment receipt here.
+                            <div className="h-2.5 bg-[#ECECEC] mx-[-24px] "></div>
+                            <div className={`text-xs text-black leading-none my-3`}>
+                               After completing the repayment, take a screenshot and upload your repayment receipt here ▼
                             </div>
                             {/*TODO: 先兼容 querystring*/}
-                            <div className={`grow mt-2`} onClick={() => {
+                            <div className={`grow mb-2`} onClick={() => {
                                 navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
                                     state: orderNo,
                                 })
