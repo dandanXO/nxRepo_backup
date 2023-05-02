@@ -16,8 +16,7 @@ import { i18nUploadPaymentReceiptPage } from "../../translations";
 import { Navigation } from "../../../../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
 import {Page} from "../../../../../components/layouts/Page";
-import {isInAndroid} from "../../../../../../../main";
-
+import {isInAndroid} from "../../../../../../modules/window/isInAndroid";
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)((props: I18UploadPaymentReceiptPageProps) => {
     const navigate = useNavigate();

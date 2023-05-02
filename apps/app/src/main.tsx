@@ -9,13 +9,14 @@ import "./app/modules/window/IWindow"
 import App from './app/app';
 import "./style.css";
 import {applyTheme} from "./app/modules/theme/utils";
+import {isInAndroid} from "./app/modules/window/isInAndroid";
 
 export const AppFlag = {
   enableSentry: false,
 }
 
-export const isInAndroid = window["isInAndroid"]();
-// console.log("isInAndroid", isInAndroid);
+
+console.log("isInAndroid", isInAndroid);
 
 let appInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
 console.log("appInfo", appInfo);

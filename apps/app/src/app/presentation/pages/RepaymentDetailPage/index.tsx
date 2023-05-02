@@ -5,11 +5,11 @@ import {useEffect} from "react";
 import {Navigation} from "../../components/layouts/Navigation";
 import {getOrderNo} from "../../../modules/location/getOrderNo";
 import PakistanRepaymentDetailPage from "./i18n/PakistanRepaymentDetailPage";
-import {isInAndroid} from "../../../../main";
 import {renderByCountry} from "../../../modules/i18n";
 import {IndiaCountry} from "../../../../../../../libs/shared/domain/src/country/IndiaCountry";
 import {PakistanCountry} from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
 import IndiaRepaymentDetailPage from "./i18n/IndiaRepaymentDetailPage";
+import {isInAndroid} from "../../../modules/window/isInAndroid";
 
 const RepaymentDetailPage = (props: any) => {
     const navigate = useNavigate()

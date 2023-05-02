@@ -25,7 +25,7 @@ declare global {
     };
     onUploadKycBackgroundData: (uploaded: boolean) => void;
     theme?: any;
-    isInAndroid: () => boolean;
+    // isInAndroid: () => boolean;
     AppInfoTask: {
       getAppInfo: () => AndroidAppInfo;
     }
