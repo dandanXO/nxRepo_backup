@@ -1,2 +1,2 @@
 // NOTE: refactor me
-export const isInAndroid = ():boolean => typeof window["AppInfoTask"] !== "undefined";
+export const isInAndroid = ():boolean => typeof window["IndexTask"] !== "undefined";

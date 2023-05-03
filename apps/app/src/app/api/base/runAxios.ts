@@ -35,22 +35,13 @@ export const runAxios = async (
       data: result.data,
     };
   } catch (error) {
+    // console.log("error", error);
     if (axios.isAxiosError(error)) {
        // console.log("isAxiosError.error", error)
       if((error.response as any).data?.code !== 404 || (error.response as any).data?.code !== 401){
         alertModal((error.response as any).data?.message);
       }
-      return {
-        success: false,
-        data: (error.response as any).data?.data,
-      }
-    } else {
-      // console.log("error123", error);
-      // alertModal(JSON.stringify(error));
     }
-    return {
-      success: false,
-      data: null
-    }
+    throw error;
   }
 }

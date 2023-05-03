@@ -33,7 +33,6 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
     const navigate = useNavigate();
     const location = useLocation();
     const pageQueryString = useLocationOrderQueryString();
-    console.log("pageQueryString", pageQueryString);
 
     const goToUploadedPaymentReceiptPage = useCallback(() => {
         navigate(
