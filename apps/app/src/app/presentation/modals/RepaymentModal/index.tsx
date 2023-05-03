@@ -10,6 +10,7 @@ import {IndiaCountry} from "../../../../../../../libs/shared/domain/src/country/
 import {PakistanCountry} from "../../../../../../../libs/shared/domain/src/country/PakistanCountry";
 import IndiaRepaymentModal from "./i18n/IndiaRepaymentModal";
 import PakistanRepaymentModal from "./i18n/PakistanRepaymentModal";
+import {environment} from "../../../../environments/environment";
 
 
 type paymentMethodValueType = {
@@ -42,7 +43,7 @@ const RepaymentModal = (props: any) => {
     const [radioValue, setRadioValue] = useState("balance");
 
     // NOTE: 變動數值
-    const [balanceValue, setBalanceValue] = useState(balance);
+    const [balanceValue, setBalanceValue] = useState(`${environment.currency}${balance}`);
 
     // NOTE: 付款方式
     const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
@@ -64,7 +65,13 @@ const RepaymentModal = (props: any) => {
         props.setShowRepaymentAdsModal(true); */
         const payType = repayType && repayType.value;
         const couponNo = radioValue==='balance' && location.state.coupon ? location.state.coupon.couponNo : null;
-        handlePostRepayCreate(false, orderNo, balanceValue, payType, couponNo);
+        handlePostRepayCreate(
+          false,
+          orderNo,
+          parseInt(balanceValue.replace(`${environment.currency}`, "")),
+          payType,
+          couponNo
+        );
     };
 
     return (

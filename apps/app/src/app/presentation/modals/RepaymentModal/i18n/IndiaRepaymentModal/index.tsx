@@ -57,7 +57,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                         // console.log("balance");
                         // console.log(balance);
                         if (value === "balance") {
-                          setBalanceValue(balance);
+                          setBalanceValue(`${environment.currency}${balance}`);
                         }
                     }}
                 >
@@ -70,10 +70,11 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                 disabled={radioValue === "balance"}
                 label={props.t("Amount") as string}
                 labelType="left"
-                moneyPrefix={environment.currency}
                 value={`${balanceValue}`}
                 onChange={(event: any) => {
                     let value = event.target.value;
+                    value = value.replace(`${environment.currency}`, "");
+
                     if(value === "") {
                       setBalanceValueErrorMessage("This field cannot be left blank.")
                     }  else if(!new RegExp("^[0-9]*$").test(value)) {
@@ -84,7 +85,8 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                     } else {
                       setBalanceValueErrorMessage("")
                     }
-                    setBalanceValue(value);
+                    // setBalanceValue(value);
+                  setBalanceValue(`${environment.currency}${value}`);
                 }}
                 onBlur={() => {
 
