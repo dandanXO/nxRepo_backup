@@ -127,6 +127,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                   )}
 
                     <div onClick={() => {
+                      if (currentData === undefined) return;
                       navigate(`repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                         state: currentData
                       })}
@@ -155,6 +156,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                             </div>
                             {/*TODO: 先兼容 querystring*/}
                             <div className={`grow mb-2`} onClick={() => {
+                              
                                 navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
                                     state: orderNo,
                                 })

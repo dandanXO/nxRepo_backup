@@ -44,14 +44,14 @@ const Coupon = (props: ICouponProps) => {
             normal: {
                 font: 'text-primary-main',
                 darkContent: 'border-primary-main bg-[#B2E4C6]',
-                lightContent: 'border-primary-main bg-[#F4FEF8]',
+                lightContent: 'border-primary-main bg-primary-assistant',
                 buttonBG: 'bg-primary-main'
 
             },
             unUsable: {
                 font: 'text-primary-main',
                 darkContent: 'border-primary-main bg-[#B2E4C6]',
-                lightContent: 'border-primary-main bg-[#F4FEF8]',
+                lightContent: 'border-primary-main bg-primary-assistant',
                 buttonBG: 'bg-primary-main'
             },
             disabled: {

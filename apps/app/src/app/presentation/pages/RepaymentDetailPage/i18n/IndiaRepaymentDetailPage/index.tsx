@@ -137,7 +137,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
             </div>
           )}
           <div onClick={() => {
-            alertModal(JSON.stringify(window["IndexTask"]));
+            if (currentData === undefined) return;
             navigate(`repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
               state: currentData
             })}
