@@ -3,12 +3,16 @@
 
 export default {
   primary_main : "#18A851",
-  primary_variant : "lightgreen",
-  primary_assistant : "#DDF8FF",
+  primary_variant : "#138641",
+  primary_assistant : "#F4FEF8",
 
-  secondary_main : "orange",
-  secondary_variant : "lightorange",
+  secondary_main : "#F59729",
+  secondary_variant : "#C47921",
+  secondary_assistant : "#FEF5EA",
 
-  disabled_main : "#CCCFCE",
-  disabled_variant : "#7E8883",
+  tertiary_main : "#6FE486",
+  tertiary_variant : "#51C472",
+
+  disabled_main : "#E1E1E1",
+  disabled_variant : "#868686",
 };

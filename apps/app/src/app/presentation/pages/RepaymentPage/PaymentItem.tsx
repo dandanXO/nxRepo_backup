@@ -17,7 +17,9 @@ const PaymentItem = (props: GetLoanRecord) => {
     const navigate = useNavigate();
 
     // NOTE: 印度的時間格式要轉成 月/日/年
-    const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '', loanDate = '', repayRecords = [], overdueDays = '', penaltyInterest = '',totalRepayAmount='' } = props;
+    const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '',
+        loanDate = '', repayRecords = [], overdueDays = '', penaltyInterest = '', totalRepayAmount = '',
+        approveRecords = [] } = props;
 
 
     const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
@@ -37,6 +39,8 @@ const PaymentItem = (props: GetLoanRecord) => {
         setCollapse(!collapse);
     };
 
+    const navigateRoute = (status === 'REJECTED' || status === 'PROCESSING') ? PagePathEnum.OrderStatusPage : PagePathEnum.RepaymentDetailPage
+
     return <div className={`border-solid border-slate-200 border px-2 pt-4 pb-3 mx-4 mb-5 rounded-lg`}  onClick={handleCollapse}>
         <div className="flex flex-row justify-between mb-2 px-2">
             <div className="flex flex-row items-center">
@@ -51,7 +55,7 @@ const PaymentItem = (props: GetLoanRecord) => {
             </div>
             {status !== "PAY_OFF" &&
                 <Button
-                    onClick={() => navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, { state: { orderNo } })}
+                    onClick={() => navigate(`${navigateRoute}?token=${getToken()}`, { state: { orderNo, approveRecords } })}
                     buttonText={status ? statusEnum[status].buttonText : ''}
                     width={'w-20'}
                     height={'h-8'}
