@@ -30,7 +30,7 @@ const PakistanExtendModal = (props: any) => {
             />
             <ListItem
               title={"Due Date"}
-              text={dueDate ? moment(dueDate).format("MM-DD-YYYY") : ''}
+              text={dueDate ? moment(dueDate).format("DD-MM-YYYY") : ''}
             />
             <ListItem
               title={"Overdue Days"}
@@ -49,7 +49,7 @@ const PakistanExtendModal = (props: any) => {
             />
             <ListItem
               title={"Extension Due Date"}
-              text={moment(extendDate).format("MM-DD-YYYY") ?? ""}
+              text={moment(extendDate).format("DD-MM-YYYY") ?? ""}
               textColor={overdueDays > 0 ? "text-red-500" : ""}
             />
 

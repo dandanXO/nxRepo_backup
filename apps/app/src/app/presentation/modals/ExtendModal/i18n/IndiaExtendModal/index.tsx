@@ -28,7 +28,7 @@ const IndiaExtendModal = (props: any) => {
             />
             <ListItem
               title={"Due Date"}
-              text={dueDate ? moment(dueDate).format("MM-DD-YYYY") : ''}
+              text={dueDate ? moment(dueDate).format("DD-MM-YYYY") : ''}
             />
             {/*NOTE: 展期費用*/}
             <ListItem
@@ -48,7 +48,7 @@ const IndiaExtendModal = (props: any) => {
             />
             <ListItem
               title={"Extension Due Date"}
-              text={moment(extendDate).format("MM-DD-YYYY") ?? ""}
+              text={moment(extendDate).format("DD-MM-YYYY") ?? ""}
               textColor={"text-primary-main"}
             />
 

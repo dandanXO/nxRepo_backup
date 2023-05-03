@@ -105,7 +105,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                                   <div className="self-center">- {coupon.discountAmount}</div>
                                   <div className="flex flex-col text-xs text-gray-400">
                                       <div>expiration date</div>
-                                      <div className="">{coupon.expireTime ? moment(coupon.expireTime).format("MM-DD-YYYY") : ''}</div>
+                                      <div className="">{coupon.expireTime ? moment(coupon.expireTime).format("DD-MM-YYYY") : ''}</div>
                                   </div>
                               </div>) : (<div>Select</div>)
 

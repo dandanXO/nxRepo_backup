@@ -107,7 +107,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
             </div>
             <div className={"item font-light flex flex-row justify-between"}>
               <div className={"key"}>Repayment Date</div>
-              <div className={"value"}>{props.calculatingSummary.repaymentDate?.format("MM-DD-YYYY")}</div>
+              <div className={"value"}>{props.calculatingSummary.repaymentDate?.format("DD-MM-YYYY")}</div>
             </div>
           </div>
         </div>

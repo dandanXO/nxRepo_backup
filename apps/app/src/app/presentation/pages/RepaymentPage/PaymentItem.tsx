@@ -66,9 +66,9 @@ const PaymentItem = (props: GetLoanRecord) => {
         <Divider />
         {collapse && <div className="px-3">
             <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-slate-400" />
-            <ListItem title={'Loan Date'} text={loanDate ? moment(loanDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
-            <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />
-            {status === "PAY_OFF" && <ListItem title={'Repayment Date'} text={repaymentDate ? moment(repaymentDate).format("MM-DD-YYYY") :''} titleColor="text-slate-400" />}
+            <ListItem title={'Loan Date'} text={loanDate ? moment(loanDate).format("DD-MM-YYYY") :''} titleColor="text-slate-400" />
+            <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-slate-400" />
+            {status === "PAY_OFF" && <ListItem title={'Repayment Date'} text={repaymentDate ? moment(repaymentDate).format("DD-MM-YYYY") :''} titleColor="text-slate-400" />}
             {/* <ListItem title={'Loan Amount'} text={`${environment.currency} ${loanAmount ?? ''}`} titleColor="text-slate-400" /> */}
             <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             {/* <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} /> */}

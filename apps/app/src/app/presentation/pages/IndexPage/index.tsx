@@ -239,7 +239,7 @@ const IndexPage = () => {
           const disbursalPrice = chain(evaluate(`${product.calculating.finalLoanPrice} * (1 - ${product.platformChargeFeeRate})`)).round().done()
 
           const dueDate = moment().add(product.terms - 1, "days");
-          const formatedDueDate = dueDate.format("MM-DD-YYYY");
+          const formatedDueDate = dueDate.format("DD-MM-YYYY");
 
           // console.log("interestPrice", interestPrice);
           // console.log("disbursalPrice", disbursalPrice);

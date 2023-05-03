@@ -38,7 +38,7 @@ const useRepayCreate = () => {
                 if(AppFlag.enableSentry) {
                   Sentry.captureException(error);
                 }
-                reject(err);
+                // reject(err);
             })
 
     })

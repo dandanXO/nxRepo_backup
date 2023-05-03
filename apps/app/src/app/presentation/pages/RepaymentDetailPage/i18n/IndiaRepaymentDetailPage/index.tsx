@@ -45,8 +45,8 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <ListItem title={'Product'} text={productName ?? ''} titleColor="text-black-400" />
         <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-black-400" />
         <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-black-400" />
-        <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") :''} titleColor="text-black-400" />
-        {status === 'EXTEND' && <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("MM-DD-YYYY") : ''} titleColor="text-black-400" />}
+        <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-black-400" />
+        {status === 'EXTEND' && <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-black-400" />}
         {loanAmount &&  <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-black-400" />}
 
         <Divider />
