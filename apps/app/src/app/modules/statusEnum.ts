@@ -12,7 +12,7 @@ const statusEnum = {
     'UNPAID': { text: 'Unpaid', style: 'text-[#F58B10] bg-[#FFEBD6]' },
     'PROCESSING': { text: 'Processing', style: 'text-[#F4C535] bg-[#FFF2D1]' },
     'REJECTED': { text: 'Reject', style: 'text-[#F24822] bg-[#F9DDDC]' },
-    'EXTEND': { text: 'Expend', style: 'text-[#0091DE] bg-[#ECEFFD]' },
+    'EXTEND': { text: 'Extend', style: 'text-[#0091DE] bg-[#ECEFFD]' },
 } as IStatusEnum
 
 export const Status = (status: string) => {
