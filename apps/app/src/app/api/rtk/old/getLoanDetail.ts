@@ -88,13 +88,18 @@ export interface GetLoanDetailChargeFeeDetailItems {
     fieldType: "CURRENCY" | "TEXT";
     itemName: string;
     key:
-        | "DAILY_FEE"
-        | "GST"
-        | "LOAN_AMOUNT"
-        | "LOAN_INTEREST"
-        | "PENALTY_INTEREST"
-        | "REDUCTION_AMOUNT"
-        | "SERVICE_FEE";
+        "CREDIT_APPROVAL_FEE" |
+        "DAILY_FEE" |
+        "GATEWAY_FEE" |
+        "GST" |
+        "LOAN_AMOUNT" |
+        "LOAN_INTEREST" |
+        "MANAGEMENT_FEE" |
+        "PENALTY_INTEREST" |
+        "PROCESSING_FEE" |
+        "REDUCTION_AMOUNT" |
+        "SERVICE_FEE";
+
     value: string;
 }
 

@@ -253,7 +253,7 @@ function isFocus(isFocus = false) {
 export const StyledInput2 = styled(StyledTopInput)<StyledInputProps>`
   //padding: 15px;
   //font-weight: 400;
-  //text-align: right;
+  text-align: right;
   //flex: 0 0 50%;
   //color: #101010;
   width: ${(props) => props.inputWidth ? props.inputWidth : "100px"};

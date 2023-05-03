@@ -17,21 +17,34 @@ const PakistanRepaymentDetailPage = (props: any) => {
     const location = useLocation();
     const { currentData } = props || {};
     const { status='', productName = '', orderNo = '', dueDate = '',  overdueDays = '', paidAmount = '', repayRecords = [],
-        totalRepayAmount = '', chargeFeeDetail = {}, extendDate = '', extensionFee = '', totalDueAmount = '', extendable } = currentData ?? {};
+        totalRepayAmount = '', chargeFeeDetail = {}, extendDate = '', extensionFee = '', totalDueAmount = '', extendable,
+      reductionAmount,
+      penaltyInterest,
+      loanAmount,
+      dailyFee,
+    } = currentData ?? {};
     const { items = [] } = chargeFeeDetail ?? {};
 
     const getItems = (field: string) => {
         return items.filter((i: GetLoanDetailChargeFeeDetailItems) => i.key === field)[0] || {}
     }
 
-    // NOTE: 動態欄位
-    const { value: loanAmount } = getItems('LOAN_AMOUNT');
-    const { value: dailyFee } = getItems('DAILY_FEE');
+    // NOTE:
+    // 借的金額
+    // 實際拿的金額
+
+    // NOTE: 前置利息
     const { value: serviceFee } = getItems('SERVICE_FEE');
-    const { value: gst } = getItems('GST');
-    const { value: loanInterest } = getItems('LOAN_INTEREST');
-    const { value: reductionAmount } = getItems('REDUCTION_AMOUNT');
-    const { value: penaltyInterest } = getItems('PENALTY_INTEREST');
+    const { value: processingFee } = getItems('PROCESSING_FEE');
+
+    // NOTICE: 動態欄位，但後端一定要給
+    const { value: interest } = getItems('LOAN_INTEREST');
+
+
+    // NOTE: 後置利息
+    const { value: gatewayFee } = getItems('GATEWAY_FEE');
+    const { value: creditApprovalFee } = getItems('CREDIT_APPROVAL_FEE');
+    const { value: managementFee } = getItems('MANAGEMENT_FEE');
 
 
     const renderStatusTag = (status: string) => {
@@ -48,24 +61,32 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-slate-400" />
                 <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-slate-400" />
                 <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-slate-400" />
-                {status === 'EXTEND' && <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-slate-400" />}
-                {loanAmount &&  <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-slate-400" />}
+
+                {status === 'EXTEND' && (
+                  <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-slate-400" />
+                )}
+
+                <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-slate-400" />
+
+                {items.map((item: any) => {
+                  if(!item) return null;
+                  return <ListItem title={item.itemName} text={<Money money={item.value}/>} titleColor="text-black-400" />
+                })}
 
                 <Divider />
 
-                {serviceFee && <ListItem title={'Service Charge'} text={<Money money={serviceFee}/>} titleColor="text-slate-400" />}
-                {dailyFee && <ListItem title={'Daily Fee'} text={<Money money={dailyFee}/>} titleColor="text-slate-400" />}
-                {gst && <ListItem title={'GST'} text={<Money money={gst}/>} titleColor="text-slate-400" />}
-                {loanInterest && <ListItem title={'Loan Interest'} text={<Money money={loanInterest}/>} titleColor="text-slate-400" />}
+                <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-black-400" />
 
                 <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
                 <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
 
-                {status === 'EXTEND' && <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-slate-400" />}
+                {status === 'EXTEND' && (
+                  <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-slate-400" />
+                )}
 
                 <Divider />
 
-                {reductionAmount && <ListItem title={'Reduction Amount'} text={<Money money={reductionAmount} isNagetive={true}/>} titleColor="text-slate-400" />}
+                <ListItem title={'Reduction Amount'} text={<Money money={reductionAmount} isNagetive={true}/>} titleColor="text-slate-400" />
 
                 <ListItem
                     titleColor="text-slate-400"

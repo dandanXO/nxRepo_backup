@@ -9,28 +9,44 @@ import Money from "../../../../components/Money.tsx";
 import {Button} from "../../../../components/layouts/Button";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 import {Status} from "../../../../../modules/statusEnum";
+import {alertModal} from "../../../../../api/base/alertModal";
 
 const PakistanRepaymentDetailPage = (props: any) => {
   const navigate = useNavigate()
   const location = useLocation();
   const { currentData } = props || {};
-  const { status='', productName = '', orderNo = '', dueDate = '',  overdueDays = '', paidAmount = '', repayRecords = [],
-    totalRepayAmount = '', chargeFeeDetail = {}, extendDate = '', extensionFee = '', totalDueAmount = '', extendable } = currentData ?? {};
+  const {
+    status='', productName = '', orderNo = '', dueDate = '',  overdueDays = '', paidAmount = '', repayRecords = [],
+    totalRepayAmount = '', chargeFeeDetail = {}, extendDate = '', extensionFee = '', totalDueAmount = '', extendable,
+    reductionAmount,
+    penaltyInterest,
+    loanAmount,
+    dailyFee,
+  } = currentData ?? {};
   const { items = [] } = chargeFeeDetail ?? {};
 
   const getItems = (field: string) => {
     return items.filter((i: GetLoanDetailChargeFeeDetailItems) => i.key === field)[0] || {}
   }
+  console.log("getItems", items);
 
-  // NOTE: 動態欄位
-  const { value: loanAmount } = getItems('LOAN_AMOUNT');
-  const { value: dailyFee } = getItems('DAILY_FEE');
+  // NOTE: 新版 h5 要過濾掉之前android需要的欄位, LOAN_AMOUNT 也不會給
+
+  // NOTE: 前置利息
   const { value: serviceFee } = getItems('SERVICE_FEE');
-  const { value: gst } = getItems('GST');
-  const { value: loanInterest } = getItems('LOAN_INTEREST');
-  const { value: reductionAmount } = getItems('REDUCTION_AMOUNT');
-  const { value: penaltyInterest } = getItems('PENALTY_INTEREST');
+  const { value: processingFee } = getItems('PROCESSING_FEE');
 
+  // NOTICE: 動態欄位，但後端一定要給
+  const { value: interest } = getItems('LOAN_INTEREST');
+
+  // NOTE: 後置利息
+  const { value: gatewayFee } = getItems('GATEWAY_FEE');
+  const { value: creditApprovalFee } = getItems('CREDIT_APPROVAL_FEE');
+  const { value: managementFee } = getItems('MANAGEMENT_FEE');
+
+  // NOTE: 未知舊包參數
+  // const { value: serviceFee } = getItems('SERVICE_FEE');
+  // const { value: gst } = getItems('GST');
 
   const renderStatusTag = (status: string) => {
     return (
@@ -46,24 +62,41 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-black-400" />
         <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-black-400" />
         <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-black-400" />
-        {status === 'EXTEND' && <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-black-400" />}
-        {loanAmount &&  <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-black-400" />}
+
+        {status === 'EXTEND' && (
+          <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-black-400" />
+        )}
+
+        <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-black-400" />
+
+        {items.map((item: any) => {
+          if(!item) return null;
+          let minus = false;
+          if(item.key === "SERVICE_FEE" || item.key === "PROCESSING_FEE") {
+            minus = true
+          }
+          return (
+            <ListItem
+              title={item.itemName}
+              text={<Money money={minus ? "-" + item.value : item.value}/>}
+              titleColor="text-black-400" />
+          )
+        })}
 
         <Divider />
-        {/*TODO: figma 條目修改了*/}
-        {serviceFee && <ListItem title={'Service Charge'} text={<Money money={serviceFee}/>} titleColor="text-black-400" />}
-        {dailyFee && <ListItem title={'Daily Fee'} text={<Money money={dailyFee}/>} titleColor="text-black-400" />}
-        {gst && <ListItem title={'GST'} text={<Money money={gst}/>} titleColor="text-black-400" />}
-        {loanInterest && <ListItem title={'Loan Interest'} text={<Money money={loanInterest}/>} titleColor="text-black-400" />}
+
+        <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-black-400" />
 
         <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-black-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
         <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-black-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
 
-        {status === 'EXTEND' && <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-black-400" />}
+        {status === 'EXTEND' && (
+          <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-black-400" />
+        )}
 
         <Divider />
 
-        {reductionAmount && <ListItem title={'Reduction Amount'} text={<div className="flex"> - <Money money={reductionAmount}/></div>} titleColor="text-black-400" />}
+        <ListItem title={'Reduction Amount'} text={<div className="flex"> - <Money money={reductionAmount}/></div>} titleColor="text-black-400" />
 
         <ListItem
           titleColor="text-black-400"
@@ -104,6 +137,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
             </div>
           )}
           <div onClick={() => {
+            alertModal(JSON.stringify(window["IndexTask"]));
             navigate(`repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
               state: currentData
             })}

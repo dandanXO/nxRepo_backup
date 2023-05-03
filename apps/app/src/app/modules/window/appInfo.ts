@@ -1,6 +1,7 @@
 import {AndroidAppInfo} from "./IWindow";
 import {environment} from "../../../environments/environment";
 
+
 export let androidAPPInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
 
 // NOTICE: app team dev packageId 都是 com.ind.kyc.application
