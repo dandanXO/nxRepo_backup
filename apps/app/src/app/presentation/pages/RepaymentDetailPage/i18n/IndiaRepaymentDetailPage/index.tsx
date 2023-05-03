@@ -10,6 +10,7 @@ import {Button} from "../../../../components/layouts/Button";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 import {Status} from "../../../../../modules/statusEnum";
 import {alertModal} from "../../../../../api/base/alertModal";
+import cx from "classnames";
 
 const PakistanRepaymentDetailPage = (props: any) => {
   const navigate = useNavigate()
@@ -104,7 +105,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
             <div className={`flex flex-row item-center items-center`}>
               <div className={` mr-1`}>Amount Repaid</div>
               <div onClick={() => {
-                navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+                navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
                   state: { repayRecords }
                 })
               }}><img src={AmountPaidIcon} />
@@ -129,7 +130,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <div className={`flex flex-row my-3 text-white`}>
           {extendable !== undefined && extendable && (
             <div onClick={() => {
-              navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+              navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
                 state: currentData
               })}
             } className={`grow mr-1.5`}>
@@ -138,10 +139,12 @@ const PakistanRepaymentDetailPage = (props: any) => {
           )}
           <div onClick={() => {
             if (currentData === undefined) return;
-            navigate(`repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+            navigate(`repayment-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
               state: currentData
             })}
-          }  className={`grow ml-1.5`}>
+          }  className={cx(`grow`, {
+            'ml-1.5': extendable
+          })}>
             <Button text={"Repay"} className={`bg-primary-main`}/>
           </div>
         </div>
@@ -159,8 +162,8 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
             {/*TODO: 先兼容 querystring*/}
             <div className={`grow mt-2`} onClick={() => {
-              navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
-                state: orderNo,
+              navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                state: {orderNo},
               })
             }}>
               <Button text={"Upload Receipt"} className={`border-primary-main border-[1.5px] border-solid text-primary-main w-full bg-none`} />

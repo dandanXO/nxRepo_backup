@@ -48,29 +48,27 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
               </div>
               <div className={`text-left font-bold text-sm mb-1`}>{props.t("Upload your repayment receipt(optional)")}</div>
 
-              <UploadSection>
-                {!props.formFile ? (
-                  <div>
-                    <CameraSvgIconWrapper>
-                      <I18CameraSvgIcon />
-                    </CameraSvgIconWrapper>
-
-                    <UploadSectionTitle>
-                      {props.t("Upload from Photo Album")}
-                    </UploadSectionTitle>
-
+                <UploadSection>
+                    {!props.formFile ? (
+                        <div>
+                            <CameraSvgIconWrapper>
+                                <I18CameraSvgIcon />
+                            </CameraSvgIconWrapper>
+                            <UploadSectionTitle>
+                                {props.t("Upload from Photo Album")}
+                            </UploadSectionTitle>
+                        </div>) 
+                        : <img src={props.imageSrc ? props.imageSrc : ""} className={'h-[181px]'} alt="" />
+                    }
                     <Input
-                      type="file"
-                      id="file"
-                      style={{ display: "none" }}
-                      value={props.formFile}
-                      onInput={(event) => props.onFileChange(event)}
+                        type="file"
+                        id="file"
+                        style={{ display: "none" }}
+                        value={''}
+                        onInput={(event) => props.onFileChange(event)}
                     />
-                  </div>
-                ) : (
-                  <UploadSectionImg imageURL={props.imageSrc ? props.imageSrc : ""} />
-                )}
-              </UploadSection>
+
+                </UploadSection>
 
               <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
               <Button onClick={() => props.confirm()}>{"Confirm"}</Button>
