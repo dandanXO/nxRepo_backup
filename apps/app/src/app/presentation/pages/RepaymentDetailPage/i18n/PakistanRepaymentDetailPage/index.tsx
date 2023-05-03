@@ -22,12 +22,15 @@ const PakistanRepaymentDetailPage = (props: any) => {
       penaltyInterest,
       loanAmount,
       dailyFee,
+      balance,
+      orderAmount,
     } = currentData ?? {};
     const { items = [] } = chargeFeeDetail ?? {};
 
     const getItems = (field: string) => {
         return items.filter((i: GetLoanDetailChargeFeeDetailItems) => i.key === field)[0] || {}
     }
+
 
     // NOTE:
     // 借的金額
@@ -66,17 +69,33 @@ const PakistanRepaymentDetailPage = (props: any) => {
                   <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-slate-400" />
                 )}
 
-                <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-slate-400" />
+                <Divider />
 
-                {items.map((item: any) => {
+                {/*NOTICE: 合同金*/}
+                {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-slate-400" />*/}
+
+                <ListItem
+                  title={'Disbursal Amount'}
+                  text={
+                    <Money money={loanAmount}/>
+                  }
+                  titleColor="text-black-400"
+                />
+
+
+
+              {items.map((item: any) => {
                   if(!item) return null;
-                  return <ListItem title={item.itemName} text={<Money money={item.value}/>} titleColor="text-black-400" />
+                  return <ListItem
+                    title={item.itemName}
+                    text={<Money money={item.value}/>}
+                    titleColor="text-black-400" />
                 })}
+
 
                 <Divider />
 
                 <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-black-400" />
-
                 <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
                 <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
 
@@ -110,12 +129,12 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 {status !== 'EXTEND' &&
                     (<ListItem
                         title={'Repayment Amount'}
-                        text={<Money money={totalDueAmount} />}
+                        text={<Money money={balance} />}
                         titleColor={status === "OVERDUE" ? "text-red-500" : "text-black"}
                         fontWeight="font-bold"
                     />)}
-                <div className={`flex flex-row my-3 text-white`}>
 
+                <div className={`flex flex-row my-3 text-white`}>
                   {extendable !== undefined && extendable && (
                     <div onClick={() => {
                       navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
@@ -156,7 +175,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                             </div>
                             {/*TODO: 先兼容 querystring*/}
                             <div className={`grow mb-2`} onClick={() => {
-                              
+
                                 navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${getOrderNo()}`, {
                                     state: orderNo,
                                 })
@@ -166,9 +185,10 @@ const PakistanRepaymentDetailPage = (props: any) => {
                         </div>
                     </>
                 }
-
             </div>
+
             <Outlet />
+
         </div>
     )
 }

@@ -22,6 +22,8 @@ const PakistanRepaymentDetailPage = (props: any) => {
     penaltyInterest,
     loanAmount,
     dailyFee,
+    balance,
+    orderAmount,
   } = currentData ?? {};
   const { items = [] } = chargeFeeDetail ?? {};
 
@@ -67,26 +69,34 @@ const PakistanRepaymentDetailPage = (props: any) => {
           <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-black-400" />
         )}
 
-        <ListItem title={'Loan Amount'} text={<Money money={loanAmount}/>} titleColor="text-black-400" />
+        <Divider />
+
+        {/*NOTICE: 合同金*/}
+        {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-black-400" />*/}
+
+        <ListItem
+          title={'Disbursal Amount'}
+          text={
+            <Money money={loanAmount}/>
+          }
+          titleColor="text-black-400"
+        />
 
         {items.map((item: any) => {
           if(!item) return null;
-          let minus = false;
-          if(item.key === "SERVICE_FEE" || item.key === "PROCESSING_FEE") {
-            minus = true
-          }
           return (
             <ListItem
               title={item.itemName}
-              text={<Money money={minus ? "-" + item.value : item.value}/>}
+              text={<Money money={item.value}/>}
               titleColor="text-black-400" />
           )
         })}
 
+
+
         <Divider />
 
         <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-black-400" />
-
         <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-black-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
         <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-black-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
 
@@ -111,7 +121,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
               </div>
             </div>
           }
-          text={<div className="flex"> - <Money money={paidAmount} /></div>}
+          text={<Money money={paidAmount} isNagetive={true}/>}
         />
 
         <Divider />
@@ -120,7 +130,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
         {status !== 'EXTEND' &&
           (<ListItem
               title={'Repayment Amount'}
-              text={<Money money={totalDueAmount} />}
+              text={<Money money={balance} />}
               titleColor={status === "OVERDUE" ? "text-red-500" : "text-black"}
               fontWeight="font-bold"
             />
@@ -173,9 +183,10 @@ const PakistanRepaymentDetailPage = (props: any) => {
             </div>
           </>
         }
-
       </div>
+
       <Outlet />
+
     </div>
   )
 }

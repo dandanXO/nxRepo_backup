@@ -17,10 +17,11 @@ const PaymentItem = (props: GetLoanRecord) => {
     const navigate = useNavigate();
 
     // NOTE: 印度的時間格式要轉成 月/日/年
-    const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '',
+    const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '', orderAmount = '',
         loanDate = '', repayRecords = [], overdueDays = '', penaltyInterest = '', totalRepayAmount = '',
-        approveRecords = [] } = props;
-
+        approveRecords = [],
+      balance
+    } = props;
 
     const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
 
@@ -50,7 +51,8 @@ const PaymentItem = (props: GetLoanRecord) => {
         </div>
         <div className="flex flex-row justify-between px-2 items-center">
             <div className="flex flex-col ">
-                <div className="text-base font-bold mb-1">{`${environment.currency} ${loanAmount ?? ''}`}</div>
+                {/*{NOTE: 合同金: orderAmount}*/}
+                <div className="text-base font-bold mb-1">{`${environment.currency} ${orderAmount ?? ''}`}</div>
                 <div className="text-xs">{`Due ${moment(dueDate).format('L') ?? ''}`}</div>
             </div>
             {status !== "PAY_OFF" &&
@@ -73,7 +75,7 @@ const PaymentItem = (props: GetLoanRecord) => {
             <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             {/* <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} /> */}
             <Divider />
-            <ListItem title={'Repayment Amount'} text={`${environment.currency} ${totalRepayAmount ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+            <ListItem title={'Repayment Amount'} text={`${environment.currency} ${balance ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             <Divider />
         </div>}
 

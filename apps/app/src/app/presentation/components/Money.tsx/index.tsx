@@ -9,23 +9,18 @@ interface IMoney {
     currencyStyle?: string;
     moneyStyle?: string;
     isNagetive?: boolean;
+    isAdd?: boolean;
 }
 const Money = (props: IMoney) => {
-
     const price = formatPrice(Number(props.money || 0));
-    const currency = environment.currency;
-
     return (
-        renderByCountry({
-            [IndiaCountry.country]: (<div className="ml-1">{`${currency} ${price}`}</div>),
-            [PakistanCountry.country]: (
-                <div className="flex justify-center items-baseline">
-                    {props.isNagetive && <div className="mr-1">-</div>}
-                    <div className={`${props.moneyStyle} mr-1 `|| ''}>{price}</div>
-                    <div className={props.currencyStyle || ''}>{currency}</div>
-                </div>
-            ),
-        }, (<div className="ml-1">{`${currency} ${price}`}</div>))
+      <div className="flex justify-center items-baseline">
+        {props.isAdd && <div className="mr-1">+</div>}
+        {props.isNagetive && <div className="mr-1">-</div>}
+        {environment.country === IndiaCountry.country && <div className={props.currencyStyle || ''}>{environment.currency}</div>}
+        <div className={`${props.moneyStyle} mr-1 `|| ''}>{price}</div>
+        {environment.country === PakistanCountry.country && <div className={props.currencyStyle || ''}>{environment.currency}</div>}
+      </div>
     )
 }
 

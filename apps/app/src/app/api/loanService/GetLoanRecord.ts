@@ -19,6 +19,7 @@ export interface GetLoanRecord {
   iconUrl?: string;                     // Icon url
   loanAmount?: number;                  // 借款金额
   loanDate?: number;                    // 放款时间
+  orderAmount?: number;                 // 訂單合同金額
   orderNo?: string;                     // 單號
   originalDueDate?: string;             // 原始到期日期(status = EXTEND才會有)
   overdue?: boolean;                    // 是否逾期
