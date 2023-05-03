@@ -5,6 +5,8 @@ import Divider from "../../../../components/Divider";
 import moment from "moment";
 import {Button} from "../../../../components/layouts/Button";
 import Money from "../../../../components/Money.tsx";
+import {formatPrice} from "../../../../../modules/formatPrice";
+import {environment} from "../../../../../../environments/environment";
 
 
 const IndiaExtendModal = (props: any) => {
@@ -16,19 +18,45 @@ const IndiaExtendModal = (props: any) => {
     return (
         <div className={`p-2`}>
             <div className="text-xl font-bold mb-4">Extend</div>
-            <ListItem title={"Product"} text={productName ?? ""} />
-            <ListItem title={"No."} text={orderNo ?? ""} />
-            <ListItem title={"Due Date"} text={dueDate ? moment(dueDate).format("MM-DD-YYYY") : ''} />
+            <ListItem
+              title={"Product"}
+              text={productName ?? ""}
+            />
+            <ListItem
+              title={"No."}
+              text={orderNo ?? ""}
+            />
+            <ListItem
+              title={"Due Date"}
+              text={dueDate ? moment(dueDate).format("MM-DD-YYYY") : ''}
+            />
             {/*NOTE: 展期費用*/}
-            <ListItem title={"Extension Fee"} text={extensionFee ?? ""} />
-            <ListItem title={"Overdue Days"} text={overdueDays ?? ""} textColor={overdueDays > 0 ? "text-red-500" : ""} />
+            <ListItem
+              title={"Extension Fee"}
+              text={<Money money={extensionFee}/>}
+            />
+            <ListItem
+              title={"Overdue Days"}
+              text={overdueDays ?? ""}
+              textColor={overdueDays > 0 ? "text-red-500" : ""}
+            />
             {/*NOTE: 展期罰金*/}
-            <ListItem title={"Overdue Fee"} text={penaltyInterest ?? ""} textColor={"text-red-500"} />
-            <ListItem title={"Extension Due Date"} text={moment(extendDate).format("MM-DD-YYYY") ?? ""} textColor={"text-primary-main"} />
+            <ListItem
+              title={"Overdue Fee"}
+              text={<Money money={penaltyInterest}/>}
+              textColor={"text-red-500"}
+            />
+            <ListItem
+              title={"Extension Due Date"}
+              text={moment(extendDate).format("MM-DD-YYYY") ?? ""}
+              textColor={"text-primary-main"}
+            />
 
             <Divider />
 
-            <ListItem fontWeight="font-bold"
+            {/*NOTE: 總金額*/}
+            <ListItem
+                fontWeight="font-bold"
                 title={"Total Extension Fee"}
                 text={<Money money={extensionPayAmount}/>}
             />
