@@ -26,7 +26,7 @@ const RepaymentDetailPage = (props: any) => {
 
 
     return (<div>
-        {!isInAndroid() && <Navigation title={"Repay Details"} back={() => { navigate(-1) }} />}
+        {!isInAndroid() && <Navigation title={"Payment Details"} back={() => { navigate(-1) }} />}
         <div className={`text-sm text-center bg-[#EDF4FF] text-[#3C64B1] py-2`}>Get more amount after instant payment</div>
         {
             renderByCountry({
