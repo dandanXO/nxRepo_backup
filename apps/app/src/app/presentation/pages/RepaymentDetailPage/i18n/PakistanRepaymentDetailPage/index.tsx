@@ -60,55 +60,76 @@ const PakistanRepaymentDetailPage = (props: any) => {
     return (
         <div>
             <div className={`px-6 pt-3`}>
-                <ListItem title={'Product'} text={productName ?? ''} titleColor="text-slate-400" />
-                <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-slate-400" />
-                <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-slate-400" />
-                <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-slate-400" />
+                <ListItem title={'Product'} text={productName ?? ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary"/>
+                <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary"/>
+                <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary" />
+                <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-ctext-secondary" textColor="text-ctext-primary" />
 
                 {status === 'EXTEND' && (
-                  <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-slate-400" />
+                  <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary" />
                 )}
 
                 <Divider />
 
                 {/*NOTICE: 合同金*/}
-                {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-slate-400" />*/}
+                {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-ctext-secondary" />*/}
 
                 <ListItem
                   title={'Disbursal Amount'}
                   text={
                     <Money money={loanAmount}/>
                   }
-                  titleColor="text-black-400"
+                  titleColor="text-ctext-secondary"
+                  textColor="text-ctext-primary"
                 />
 
 
-
-              {items.map((item: any) => {
+                {items.map((item: any) => {
                   if(!item) return null;
                   return <ListItem
                     title={item.itemName}
                     text={<Money money={item.value}/>}
-                    titleColor="text-black-400" />
+                    titleColor="text-ctext-secondary"
+                    textColor="text-ctext-primary"
+                  />
                 })}
 
 
                 <Divider />
 
-                <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-black-400" />
-                <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
-                <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+                <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-ctext-secondary" textColor="text-ctext-primary"/>
+                <ListItem title={'Overdue Days'}
+                          text={overdueDays ?? ''}
+                          titleColor="text-ctext-secondary"
+                          textColor={status === 'OVERDUE' ? 'text-red-500' : "text-ctext-primary"}
+                />
+                <ListItem title={'Overdue Fee'}
+                          text={<Money money={penaltyInterest}/>}
+                          titleColor="text-ctext-secondary"
+                          textColor={status === 'OVERDUE' ? 'text-red-500' : "text-ctext-primary"}
+                />
 
                 {status === 'EXTEND' && (
-                  <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-slate-400" />
+                  <ListItem
+                    title={'Extension Fee'}
+                    text={<Money money={extensionFee}/>}
+                    titleColor="text-ctext-secondary"
+                    textColor="text-ctext-primary"
+                  />
                 )}
 
                 <Divider />
 
-                <ListItem title={'Reduction Amount'} text={<Money money={reductionAmount} isNagetive={true}/>} titleColor="text-slate-400" />
+                <ListItem
+                  title={'Reduction Amount'}
+                  text={<Money money={reductionAmount} isNagetive={true}/>
+                  }
+                  titleColor="text-ctext-secondary"
+                  textColor="text-ctext-primary"
+                />
 
                 <ListItem
-                    titleColor="text-slate-400"
+                    titleColor="text-ctext-secondary"
                     title={
                         <div className={`flex flex-row item-center items-center`}>
                             <div className={` mr-1`}>Amount Repaid</div>
@@ -121,6 +142,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                         </div>
                     }
                     text={<Money money={paidAmount} isNagetive={true}/>}
+                    textColor="text-ctext-primary"
                 />
 
                 <Divider />
@@ -130,8 +152,10 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     (<ListItem
                         title={'Repayment Amount'}
                         text={<Money money={balance} />}
-                        titleColor={status === "OVERDUE" ? "text-red-500" : "text-black"}
                         fontWeight="font-bold"
+                        titleColor={status === "OVERDUE" ? "text-red-500" : "text-black"}
+                        textColor="text-ctext-primary"
+
                     />)}
 
                 <div className={`flex flex-row my-3 text-white`}>
@@ -185,9 +209,6 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     </>
                 }
             </div>
-
-            <Outlet />
-
         </div>
     )
 }

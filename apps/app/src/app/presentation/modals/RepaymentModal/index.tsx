@@ -78,7 +78,6 @@ const RepaymentModal = (props: any) => {
         <Overlay
             show={true}
             content={() => {
-
                 return (<>
                     <div className="text-lg font-bold text-black">{props.t("Repay")}</div>
                     {renderByCountry({

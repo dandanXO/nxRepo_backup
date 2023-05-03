@@ -32,6 +32,8 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
     const location = useLocation();
     const {coupon}=location.state;
 
+  const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState("");
+
     return (
         <div className="text-left px-4">
             <div className="whitespace-nowrap mt-3 ml-[-4px] text-xs">
@@ -41,6 +43,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                         setRadioValue(value);
                         if (value === "balance") {
                             setBalanceValue(balance);
+                            setBalanceValue(`${environment.currency}${balance}`);
                         }
                     }}
                 >
@@ -58,19 +61,32 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 disabled={radioValue === "balance"}
                 onChange={(event: any) => {
                   let value = event.target.value;
-                  value = value.replaceAll(`${environment.currency}`, "");
-                  // NOTE: if custom balance exceed max balance then setting max balance
-                  if (String(Number(value)) === "NaN" || String(value) === "0") {
-                    setBalanceValue(1);
+                  // console.log("value", value);
+
+                  value = value.replace(`${environment.currency}`, "");
+
+                  if(value === "") {
+                    setBalanceValueErrorMessage("This field cannot be left blank.")
+                  }  else if(!new RegExp("^[0-9]*$").test(value)) {
+                    setBalanceValueErrorMessage("Numbers only. Please try again.")
+                  } else if (Number(value) > Number(balance)) {
+                    // NOTE: 限制數字最大值
+                    setBalanceValueErrorMessage("Amount cannot be greater than the repayment balance.")
                   } else {
-                    if (Number(value) > Number(balance)) {
-                      value = balance;
-                    }
-                    // console.log("[repay] onChange.value", value)
-                    // console.log(value)
-                    setBalanceValue(value);
+                    setBalanceValueErrorMessage("")
+                  }
+
+                  // setBalanceValue(value);
+                  if(value === environment.currency.slice(0, 2)) {
+
+                  } else {
+                    setBalanceValue(`${environment.currency}${value}`);
                   }
                 }}
+                onBlur={() => {
+
+                }}
+                errorMessage={balanceValueErrorMessage === "" ? "" : balanceValueErrorMessage}
               />
             </div>
 
@@ -113,14 +129,12 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                           <RiArrowRightSLine className="text-2xl fill-[#CCCCCC]" />
                       </div>
                     </div>
-
-                    <div className="mt-3 font-bold">
-                      <ListItem title={'Repayment Amount'} text={<Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />} />
-                    </div>
-
                 </>
             }
 
+            <div className="mt-3 font-bold">
+              <ListItem title={'Repayment Amount'} text={<Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />} />
+            </div>
 
             <div className={`flex flex-row my-3`}>
                 <div className={`mr-1.5 w-full `}>
@@ -132,7 +146,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 <div className={` ml-1.5 w-full`}>
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
-                        handleConfirm();
+                        if(balanceValueErrorMessage === "") handleConfirm();
                     }} text={props.t("Repay")} className={`bg-primary-main w-full text-white font-bold border border-solid border-primary-main`} />
                 </div>
             </div>

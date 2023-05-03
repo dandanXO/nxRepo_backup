@@ -188,8 +188,6 @@ const PakistanRepaymentDetailPage = (props: any) => {
         }
       </div>
 
-      <Outlet />
-
     </div>
   )
 }

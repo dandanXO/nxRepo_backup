@@ -90,7 +90,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
 
   return (
     <Container>
-      <Label>{"Choose the payment method"}</Label>
+      <div className={"mb-4 font-medium"}>{"Choose the payment method"}</div>
 
       <OptionContainer>
 

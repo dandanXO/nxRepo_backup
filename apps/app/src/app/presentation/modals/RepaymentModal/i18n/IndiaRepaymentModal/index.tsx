@@ -12,6 +12,8 @@ import { environment } from "../../../../../../environments/environment";
 import { Button } from "../../../../components/layouts/Button";
 import { IRepaymentModalProps } from "../../index";
 import {formatPrice} from "../../../../../modules/formatPrice";
+import {PagePathEnum} from "../../../../pages/PagePathEnum";
+import {getToken} from "../../../../../modules/location/getToken";
 
 export const RepaymentModalContainer = styled.div`
   color: #101010;
@@ -27,7 +29,7 @@ const MethodContainer = styled.div`
 
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
-    const { radioValue, setRadioValue, balance, balanceValue, setBalanceValue, repayTypesList, isRepayTypesFetching, repayType, setRepayType, handleConfirm } = props
+    const { radioValue, setRadioValue, balance, balanceValue, setBalanceValue, repayTypesList, isRepayTypesFetching, repayType, setRepayType, handleConfirm, orderNo } = props
     const navigate = useNavigate();
 
     // const [bankcardNoData, setBankcardNoData] = useState<InputValue<string>>({
@@ -98,7 +100,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                 <div className={`mr-1.5 w-full`}>
                     <Button onClick={() => {
                         if (isRepayTypesFetching) return;
-                        navigate(-1);
+                      navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
                     }} text={props.t("Cancel")} className={`border-[1.5px] border-solid border-primary-main bg-none text-primary-main `} />
                 </div>
                 <div className={` ml-1.5 w-full`}>

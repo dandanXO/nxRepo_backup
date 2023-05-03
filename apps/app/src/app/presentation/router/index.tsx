@@ -88,12 +88,13 @@ export const AppRouter = () => {
           <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />
 
           <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
-            <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
-            <Route path="extend-modal" element={<ExtendModal />} />
             <Route path="repayment-modal" element={<RepaymentModal />} />
             <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
+            <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
+            <Route path="extend-modal" element={<ExtendModal />} />
             <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
           </Route>
+          
           <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
           <Route path="/v2/my-coupon-list" element={<MyCouponListPage />} />
           <Route path="/v2/partner" element={<PartnerPage />} />
