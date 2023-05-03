@@ -37,7 +37,7 @@ export const LatestOrderStatus = (props: Props) => {
                 <div className={cx("font-normal text-sm", {
                   "text-gray-500": props.state.order.state === ORDER_STATE.hasInComingOverdueOrder,
                   "text-red-500": props.state.order.state === ORDER_STATE.hasOverdueOrder
-                })}>{moment(props.state.order.overdueOrComingOverdueOrder?.dueDate).format("DD-MM-YYYY")}</div>
+                })}>{moment(props.state.order.overdueOrComingOverdueOrder?.dueDate).format("MM-DD-YYYY")}</div>
               </div>
             </div>
           </div>
