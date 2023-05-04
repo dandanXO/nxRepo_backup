@@ -23,12 +23,13 @@ window["webkit"] = {
     AppInfoTask: {
       getAppInfo: {
         postMessage: function(appInfo: string) {
-          alertModal(appInfo);
+          alertModal("received from ios.appInfo:" + appInfo);
         }
       }
     }
   }
 }
+
 
 
 // NOTE: apply lib style-component theme
