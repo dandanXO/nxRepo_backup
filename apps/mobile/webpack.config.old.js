@@ -22,7 +22,9 @@ console.log("[mobile][build] getClientEnvironment", getClientEnvironment());
 
 // NOTE:
 let PUBLIC_PATH;
+// NOTE: for V2
 PUBLIC_PATH = !isProduction ? "/" : "/v1/";
+// NOTE: for V1
 // PUBLIC_PATH = !isProduction ? "/" : "/";
 
 console.log("[mobile][build] PUBLIC_PATH", PUBLIC_PATH);
