@@ -1,19 +1,14 @@
 import UploadingFileModal from "../../../modal/UploadingFileModal";
-import { Button, Input } from "@frontend/mobile/shared/ui";
+import { Input } from "@frontend/mobile/shared/ui";
 import I18CameraSvgIcon from "../I18CameraSvgIcon";
 import React from "react";
-import {
-    CameraSvgIconWrapper,
-    CustomPage,
-    Title,
-    UploadSection,
-    UploadSectionImg,
-    UploadSectionTitle
-} from "../common";
+import {CustomPage,} from "../common";
 
 import { I18UploadPaymentReceiptPageProps } from "../../types/I18UploadPaymentReceiptPageProps";
 import { withTranslation } from "react-i18next";
 import { i18nUploadPaymentReceiptPage } from "../../translations";
+import {EnumV15GradientButtonClassNames} from "../../../../../../../environments/theme/pakistan/v15/button";
+import {Button} from "../../../../../components/layouts/Button";
 
 export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)((props: Omit<I18UploadPaymentReceiptPageProps, "utr" | "setURT" | "validateUtr">) => {
     return (
@@ -44,7 +39,11 @@ export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymen
                     </label>
                 </div>
             </div>
-            <Button onClick={() => props.confirm()}>{props.t("Confirm")}</Button>
+            <Button
+              className={`${EnumV15GradientButtonClassNames}`}
+              text={"Confirm"}
+              onClick={() => props.confirm()}
+            />
         </CustomPage>
     );
 }

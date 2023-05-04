@@ -8,6 +8,7 @@ import Select from 'react-select';
 import {useNavigate} from "react-router";
 import {Button} from "../../../../../components/layouts/Button";
 import {selectStyles} from "../../../../../components/layouts/selectStyles";
+import {EnumV15GradientButtonClassNames} from "../../../../../../../environments/theme/pakistan/v15/button";
 
 const CustomForm = styled.div`
   .css-1s2u09g-control, .css-1pahdxg-control {
@@ -108,6 +109,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
 
         <Button
           text={"Confirm and Add"}
+          className={`${EnumV15GradientButtonClassNames}`}
           onClick={() => {
             // !props.isFormPending && props.confirm
             props.confirm && props.confirm();

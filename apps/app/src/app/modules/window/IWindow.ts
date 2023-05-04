@@ -8,12 +8,12 @@ export enum AndroidPage {
 }
 
 export type AndroidAppInfo = {
-  domain: string;
   environment: "india" | "pakistan";
   packageId: string;
-  appName: string;
   uiVersion: string;
   token: string;
+  domain: string;
+  appName: string;
 }
 
 // NOTICE:
@@ -35,8 +35,18 @@ declare global {
     theme?: IThemeConfig;
     AppInfoTask: {
       getAppInfo: () => AndroidAppInfo;
+    };
+    webkit: {
+      messageHandlers: {
+        AppInfoTask: {
+          getAppInfo: () => AndroidAppInfo;
+        };
+      }
     }
   }
 }
+
+
+
 
 

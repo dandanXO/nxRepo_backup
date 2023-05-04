@@ -1,9 +1,10 @@
 import {SuccessICON} from "./i18n/SuccessICON";
-import {Button, Page} from "@frontend/mobile/shared/ui";
+import {Page} from "@frontend/mobile/shared/ui";
 import UploadedPaymentReceiptPage from "./index";
 import styled from "styled-components";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {i18nUploadedPaymentReceiptPage} from "./i18n/translations";
+import {Button} from "../../components/layouts/Button";
 
 const CustomPage = styled(Page)`
     display: flex;
@@ -18,7 +19,7 @@ const Content = styled.div`
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    
+
 `;
 
 const Title = styled.div`
@@ -57,9 +58,7 @@ export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymen
         </Description>
       </Content>
       <ControlSection>
-        <Button onClick={() => props.navigateToLoanDetails()}>
-          {props.t("Done")}
-        </Button>
+        <Button text={"Done"} onClick={() => props.navigateToLoanDetails()}/>
       </ControlSection>
     </CustomPage>
   );

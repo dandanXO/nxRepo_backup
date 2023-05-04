@@ -104,7 +104,6 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                         navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
                       }}
                       text={props.t("Cancel")}
-                      className={`text-primary-main`}
                       type={"ghost"}
                     />
                 </div>

@@ -10,6 +10,7 @@ import {Button} from "../../../../components/layouts/Button";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 import {Status} from "../../../../../modules/statusEnum";
 import cx from 'classnames';
+import {EnumV15GradientButtonClassNames} from "../../../../../../environments/theme/pakistan/v15/button";
 
 
 const PakistanRepaymentDetailPage = (props: any) => {
@@ -177,7 +178,10 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     } className={cx(`grow`, {
                         'ml-1.5': extendable
                     })}>
-                      <Button text={"Repay"}/>
+                      <Button
+                        text={"Repay"}
+                        className={`${EnumV15GradientButtonClassNames}`}
+                      />
                     </div>
 
                 </div>

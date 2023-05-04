@@ -18,6 +18,7 @@ import moment from "moment";
 import ListItem from "../../../../components/ListItem";
 import Money from "../../../../components/Money.tsx";
 import { selectStyles } from "../../../../components/layouts/selectStyles";
+import {EnumV15GradientButtonClassNames} from "../../../../../../environments/theme/pakistan/v15/button";
 
 
 type paymentMethodValueType = {
@@ -150,7 +151,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 </div>
                 <div className={` ml-1.5 w-full`}>
                     <Button
-                      className={`w-full border-primary-main`}
+                      className={`w-full ${EnumV15GradientButtonClassNames}`}
                       text={props.t("Repay")}
                       onClick={() => {
                         if (isRepayTypesFetching) return;

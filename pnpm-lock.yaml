@@ -125,6 +125,7 @@ specifiers:
   stylus: ^0.55.0
   stylus-loader: ^7.1.0
   tailwindcss: 3.2.4
+  tailwindcss-classnames: ^3.0.7
   terser-webpack-plugin: ^5.3.7
   translation-check: ^1.0.2
   ts-jest: 29.0.5
@@ -199,6 +200,7 @@ dependencies:
   rxjs: 7.8.0
   sass-loader: 13.2.2_webpack@5.79.0
   styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
+  tailwindcss-classnames: 3.0.7
   translation-check: 1.0.2
   ts-md5: 1.3.1
   ts-node: 10.9.1_ellgaeuoqnti3hful2ny2iugba
@@ -3348,8 +3350,6 @@ packages:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
     requiresBuild: true
-    dev: true
-    optional: true
 
   /@cspotcode/source-map-support/0.8.1:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -9378,6 +9378,11 @@ packages:
       inherits: 2.0.4
       process-nextick-args: 2.0.1
       readable-stream: 2.3.7
+    dev: false
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
     dev: false
 
   /co/4.6.0:
@@ -20255,6 +20260,18 @@ packages:
       '@pkgr/utils': 2.3.1
       tslib: 2.5.0
     dev: true
+
+  /tailwindcss-classnames/3.0.7:
+    resolution: {integrity: sha512-VxAZK7NLS0AnckomXisp9imvBkifOGmZ7FM0EM0TEqIThmh5GP7OhPX3Job8VCLB5S5kA+OF7Qk87Y0iM/WnYw==}
+    hasBin: true
+    dependencies:
+      '@colors/colors': 1.5.0
+      clsx: 1.2.1
+      commander: 7.2.0
+      inquirer: 8.2.4
+      lodash: 4.17.21
+      tslib: 2.3.0
+    dev: false
 
   /tailwindcss/3.2.4_v776zzvn44o7tpgzieipaairwm:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}

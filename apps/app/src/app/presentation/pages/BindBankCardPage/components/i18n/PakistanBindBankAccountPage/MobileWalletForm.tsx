@@ -1,10 +1,12 @@
 import {Form} from "../../Form";
-import {Button, Input, InputValue } from "@frontend/mobile/shared/ui";
+import {Input, InputValue } from "@frontend/mobile/shared/ui";
 import React from "react";
 import {Label} from "../../Label";
 import {useNavigate} from "react-router";
 import {selectStyles} from "../../../../../components/layouts/selectStyles";
 import Select from "../../../../../components/Select";
+import {EnumV15GradientButtonClassNames} from "../../../../../../../environments/theme/pakistan/v15/button";
+import {Button} from "../../../../../components/layouts/Button";
 
 type IMobileWalletForm = {
   // Wallet List
@@ -97,13 +99,12 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         />
       </div>
 
-
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
       <Button
+        className={`${EnumV15GradientButtonClassNames}`}
+        text={"Confirm and Add"}
         onClick={() => props.confirm()}
-      >
-        {"Confirm and Add"}
-      </Button>
+      />
     </Form>
   );
 }
