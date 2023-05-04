@@ -17,14 +17,18 @@ import {applyTheme} from "./app/modules/theme/utils";
 applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
 
 // NOTICE: try for ios
-if(window["webkit"] &&
-  window["webkit"]["messageHandlers"] &&
-  window["webkit"]["messageHandlers"]["AppInfoTask"] &&
-  window["webkit"]["messageHandlers"]["AppInfoTask"]["getAppInfo"]
-)
-(window["webkit"]["messageHandlers"]["AppInfoTask"]["getAppInfo"] as any).postMessage = function(appInfo: string) {
-  alertModal(appInfo);
-};
+window["webkit"] = {
+  messageHandlers: {
+    AppInfoTask: {
+      getAppInfo: {
+        postMessage: function(appInfo: string) {
+          alertModal(appInfo);
+        }
+      }
+    }
+  }
+}
+
 
 // NOTE: apply lib style-component theme
 import(`./environments/theme/${androidAPPInfo.environment}/v${androidAPPInfo.uiVersion}/theme`).then((content) => {

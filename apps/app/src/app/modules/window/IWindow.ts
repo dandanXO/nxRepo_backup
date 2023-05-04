@@ -39,7 +39,9 @@ declare global {
     webkit: {
       messageHandlers: {
         AppInfoTask: {
-          getAppInfo: () => AndroidAppInfo;
+          getAppInfo: {
+            postMessage: (appInfo: string) => void;
+
         };
       }
     }
