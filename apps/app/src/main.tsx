@@ -14,6 +14,7 @@ import "./style.css";
 import App from './app/app';
 import {applyTheme} from "./app/modules/theme/utils";
 import {AndroidAppInfo} from "./app/modules/window/IWindow";
+import {IndiaCountry} from "../../../libs/shared/domain/src/country/IndiaCountry";
 
 const transformAppInfo = (appinfo?: AndroidAppInfo) => {
   let androidAPPInfo = appinfo;
@@ -65,7 +66,29 @@ const applySharedUIStyle = (androidAPPInfo: AndroidAppInfo) => {
   })
 }
 
+// NOTICE: testing android
+/*
+window.AppInfoTask.getAppInfo(JSON.stringify({
+  environment: "india",
+  packageId: "test",
+  uiVersion: "55",
+  token: "",
+  domain: "",
+  appName: "",
+}))
+*/
 
+// NOTICE: testing android
+/*
+window.AppInfoTask.getAppInfoFromIOS(JSON.stringify({
+  environment: "india",
+  packageId: "test",
+  uiVersion: "55",
+  token: "",
+  domain: "",
+  appName: "",
+}))
+*/
 
 window["AppInfoTask"] = {
   // NOTICE: app team dev packageId 都是 com.ind.kyc.application
@@ -121,7 +144,15 @@ const renderApp = () => {
   );
 
 }
-
-
 renderApp();
+
+// refactor me
+window.AppInfoTask.getAppInfoFromIOS(JSON.stringify({
+  environment: environment.countryName === IndiaCountry.countryName ? "india" : "pakistan",
+  packageId: "",
+  uiVersion: environment.countryName === IndiaCountry.countryName ? "55" : "15",
+  token: "",
+  domain: "",
+  appName: "",
+}));
 
