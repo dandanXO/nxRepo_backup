@@ -22,6 +22,10 @@ window["AppInfoTask"]["getAppInfoFromIOS"] = function (appInfo: string) {
   alertModal("received from ios.appInfo:" + appInfo);
 }
 
+window["AppInfoTask"]["getAppInfo"] = function (appInfo: string) {
+  alertModal("received from android.appInfo:" + appInfo);
+}
+
 
 
 // NOTE: apply lib style-component theme

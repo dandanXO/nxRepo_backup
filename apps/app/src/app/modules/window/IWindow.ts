@@ -34,7 +34,8 @@ declare global {
     onUploadKycBackgroundData: (uploaded: boolean) => void;
     theme?: IThemeConfig;
     AppInfoTask: {
-      getAppInfo: () => AndroidAppInfo;
+      // getAppInfo: () => AndroidAppInfo;
+      getAppInfo: (data: any) => void;
       getAppInfoFromIOS: (appInfo: string) => void;
     };
   }
