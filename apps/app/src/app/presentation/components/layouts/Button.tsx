@@ -14,7 +14,6 @@ type Props = {
 } & TestingProps;
 
 export const Button = (props: Props) => {
-  console.log("props", props);
   return (
     <div
       onClick={props.onClick}
@@ -25,7 +24,6 @@ export const Button = (props: Props) => {
         {"border border-solid border-primary-main bg-primary-main text-white": props.type === undefined},
         {"border border-solid border-cbg-tertiary-primary bg-cbg-tertiary text-ctext-tertiary": props.type === "secondary"},
         {"border-[1.5px] border-solid border-primary-main bg-none text-primary-main": props.type === "ghost"},
-
         props.className
       )}
     >

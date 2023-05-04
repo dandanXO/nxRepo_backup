@@ -5,15 +5,12 @@ import Divider from "../../../../components/Divider";
 import moment from "moment";
 import {Button} from "../../../../components/layouts/Button";
 import Money from "../../../../components/Money.tsx";
-import {formatPrice} from "../../../../../modules/formatPrice";
-import {environment} from "../../../../../../environments/environment";
-
 
 const IndiaExtendModal = (props: any) => {
     const navigate = useNavigate();
     const location = useLocation();
     // const { t } = props;
-    const { repayConfirmDetail: { extendDate, extensionFee, extensionPayAmount='' }, orderNo = '', productName = '', dueDate = '', overdueDays = '', penaltyInterest = '' } = props.currentData ?? {};
+    const { repayConfirmDetail: { extendDate, extensionFee, extensionPayAmount='' }, orderNo = '', productName = '', dueDate = '', overdueDays = '', penaltyInterest = '', paidAmount, reductionAmount } = props.currentData ?? {};
 
     return (
         <div className={`p-2`}>
@@ -46,6 +43,21 @@ const IndiaExtendModal = (props: any) => {
               text={<Money money={penaltyInterest}/>}
               textColor={"text-red-500"}
             />
+
+            {/*NOTE: 減免金額*/}
+            <ListItem
+              title={"Reduction Amount"}
+              text={<Money money={reductionAmount}/>}
+              textColor={"text-red-500"}
+            />
+
+            {/*NOTE: 已還金額*/}
+            <ListItem
+              title={"Amount Repaid"}
+              text={<Money money={paidAmount}/>}
+              textColor={"text-red-500"}
+            />
+
             <ListItem
               title={"Extension Due Date"}
               text={moment(extendDate).format("DD-MM-YYYY") ?? ""}
