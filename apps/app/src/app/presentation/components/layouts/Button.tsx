@@ -1,21 +1,33 @@
 import cx from "classnames";
 import {TestingProps} from "../../../modules/TestingProps";
 import { TailSpin } from 'react-loading-icons'
+import {PagePathEnum} from "../../pages/PagePathEnum";
+import {getToken} from "../../../modules/location/getToken";
+import React from "react";
 
 type Props = {
   text: string;
   className?: string;
   onClick?: () => void;
   loading?: boolean;
+  type?: "secondary" | "ghost" | undefined,
 } & TestingProps;
 
 export const Button = (props: Props) => {
+  console.log("props", props);
   return (
     <div
       onClick={props.onClick}
       data-testing-id={props.dataTestingID}
       // shadow-md shadow-gray-400
-      className={cx("rounded-md p-2 text-center", props.className)}
+      className={cx(
+        "rounded-md p-2 text-center font-bold",
+        {"border border-solid border-primary-main bg-primary-main text-white": props.type === undefined},
+        {"border border-solid border-cbg-tertiary-primary bg-cbg-tertiary text-ctext-tertiary": props.type === "secondary"},
+        {"border-[1.5px] border-solid border-primary-main bg-none text-primary-main": props.type === "ghost"},
+
+        props.className
+      )}
     >
       {props.text}
       {props.loading && <TailSpin height={25} className={"inline-block"}/>}

@@ -29,9 +29,9 @@ export const ErrorPage = () => {
       {didCatch ? (
         <div>
           <p>An error has been caught: {error.message}</p>
-          <Button dataTestingID={"apply"} text={"Reset Error"} className={cx({
-            "bg-[#F58B10]": true,
-          })}
+          <Button
+            dataTestingID={"apply"}
+            text={"Reset Error"}
             onClick={() => reset()}
           />
         </div>

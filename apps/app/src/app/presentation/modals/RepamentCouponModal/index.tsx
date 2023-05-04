@@ -45,7 +45,7 @@ const RepamentCouponModal = () => {
         );
     };
 
- 
+
     const NotUsingCoupon = (props: ICouponOption) => {
         return (
             <div className={`flex justfy-center items-center ml-2 mb-7`} onClick={() => setCheckedCoupon(props.index)}>
@@ -63,7 +63,7 @@ const RepamentCouponModal = () => {
                     <div className={`mt-5`}>There are currently no coupon</div>
                 </div>
                 <div className="p-2">
-                    <Button text={'Back'} className="bg-primary-main w-full text-white" onClick={()=> navigate(-1)}/>
+                    <Button text={'Back'} className="w-full" onClick={()=> navigate(-1)}/>
                 </div>
             </>
         )
@@ -75,7 +75,7 @@ const RepamentCouponModal = () => {
                 <div className={`grow`}>
                     {applicableCouponList.length > 0 &&
                         (<>
-                       
+
                        <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon}/>
                             <div className="text-xs font-bold text-left ml-2 ">Choose one coupon</div>
                             {
@@ -97,7 +97,7 @@ const RepamentCouponModal = () => {
                                             />
                                         </>
                                     )
-                                      
+
                                 })
                             }
                             <div className="m-2 mb-4 bg-[#ECECEC] h-2 mx-[-20px]"></div>

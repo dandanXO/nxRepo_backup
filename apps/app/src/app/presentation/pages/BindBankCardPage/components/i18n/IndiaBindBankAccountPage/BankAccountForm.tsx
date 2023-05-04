@@ -51,9 +51,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                     onChange={props.onUPIIDChange}
                 />
             </Form>
-            {/*<Button onClick={() => { !props.isFormPending && props.confirm() }}>{t("Save")}</Button>*/}
-          {/*<Button text={t("Save")} onClick={() => { !props.isFormPending && props.confirm() }} bgColor={`bg-[${theme.primary.main}]`}/>*/}
-          <Button text={"Save"} onClick={() => { !props.isFormPending && props.confirm() }} className={`bg-primary-main`}/>
+          <Button text={"Save"} onClick={() => { !props.isFormPending && props.confirm() }}/>
         </>
     );
 }

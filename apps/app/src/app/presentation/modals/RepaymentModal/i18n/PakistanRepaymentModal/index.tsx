@@ -138,16 +138,25 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
 
             <div className={`flex flex-row my-3`}>
                 <div className={`mr-1.5 w-full `}>
-                    <Button onClick={() => {
-                        if (isRepayTypesFetching) return;
-                        navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
-                    }} text={props.t("Cancel")} className={`border border-solid border-gray-500 text-gray-500  w-full font-bold`} />
+                  <Button
+                    type={"ghost"}
+                    className={`w-full`}
+                    text={props.t("Cancel")}
+                    onClick={() => {
+                      if (isRepayTypesFetching) return;
+                      navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
+                    }}
+                  />
                 </div>
                 <div className={` ml-1.5 w-full`}>
-                    <Button onClick={() => {
+                    <Button
+                      className={`w-full border-primary-main`}
+                      text={props.t("Repay")}
+                      onClick={() => {
                         if (isRepayTypesFetching) return;
                         if(balanceValueErrorMessage === "") handleConfirm();
-                    }} text={props.t("Repay")} className={`bg-primary-main w-full text-white font-bold border border-solid border-primary-main`} />
+                      }}
+                    />
                 </div>
             </div>
             <div className={`text-xs text-gray-400 text-left`}>

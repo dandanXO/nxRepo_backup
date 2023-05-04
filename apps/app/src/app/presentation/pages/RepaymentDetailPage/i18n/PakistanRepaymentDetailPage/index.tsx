@@ -165,7 +165,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                         state: currentData
                       })}
                     } className={`grow mr-1.5 `}>
-                      <Button text={"Extend"} className={`border border-solid border-primary-main text-primary-main`}/>
+                      <Button type={"ghost"} text={"Extend"}/>
                     </div>
                   )}
 
@@ -177,7 +177,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                     } className={cx(`grow`, {
                         'ml-1.5': extendable
                     })}>
-                      <Button text={"Repay"} className={`bg-primary-main border border-solid border-primary-main`}/>
+                      <Button text={"Repay"}/>
                     </div>
 
                 </div>
@@ -203,7 +203,11 @@ const PakistanRepaymentDetailPage = (props: any) => {
                                     state: {orderNo},
                                 })
                             }}>
-                                <Button text={"Upload Receipt"} className={`border-primary-main border-[1.5px] border-solid text-primary-main w-full bg-none`} />
+                              <Button
+                                type={"ghost"}
+                                className={`w-full`}
+                                text={"Upload Receipt"}
+                              />
                             </div>
                         </div>
                     </>

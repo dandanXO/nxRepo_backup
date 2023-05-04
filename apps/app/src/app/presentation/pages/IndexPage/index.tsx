@@ -469,10 +469,13 @@ const IndexPage = () => {
         {!applyHide &&
         //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) &&
           (
-          <Button dataTestingID={"apply"} text={"Apply Now"} className={cx({
-            "bg-[#F58B10]": !applyDisable,
-            "bg-[#D7D7D7]": applyDisable,
-          })}
+          <Button
+            dataTestingID={"apply"}
+            text={"Apply Now"}
+            className={cx({
+              "bg-[#F58B10]": !applyDisable,
+              "bg-[#D7D7D7]": applyDisable,
+            })}
             onClick={onClickApply}
           />
         )}

@@ -62,10 +62,10 @@ const IndiaExtendModal = (props: any) => {
             />
             <div className={`flex flex-row mt-6 text-white`}>
                 <div className={`grow mr-1.5`}>
-                    <Button onClick={() => navigate(-2)} text={'Cancel'} className={`bg-primary-variant w-full`} />
+                    <Button type={"secondary"} onClick={() => navigate(-2)} text={'Cancel'} className={`w-full`} />
                 </div>
                 <div className={`grow ml-1.5`} >
-                    <Button onClick={props.handleConfirm} text={'Confirm'} className={`bg-primary-main w-full`} />
+                    <Button onClick={props.handleConfirm} text={'Confirm'} className={`w-full`} />
                 </div>
             </div>
         </div>

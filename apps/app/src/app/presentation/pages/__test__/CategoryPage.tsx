@@ -10,12 +10,13 @@ export const CategoryPage = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <Button dataTestingID={"apply"} text={"Test"} className={cx({
-        "bg-[#F58B10]": true,
-      })}
-          onClick={() => {
-            navigate("/v2/my-coupon-list")
-          }}
+      <Button
+        dataTestingID={"apply"}
+        text={"Test"}
+
+        onClick={() => {
+          navigate("/v2/my-coupon-list")
+        }}
       />
       {/*<div><div to="/">IndexPage</div></div>*/}
       {/*<div><div to="/login">Login</div></div>*/}

@@ -144,9 +144,10 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 state: currentData
               })}
             } className={`grow mr-1.5`}>
-              <Button text={"Extend"} className={`bg-primary-variant`}/>
+              <Button type={"ghost"} text={"Extend"}/>
             </div>
           )}
+
           <div onClick={() => {
             if (currentData === undefined) return;
             navigate(`repayment-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
@@ -155,8 +156,9 @@ const PakistanRepaymentDetailPage = (props: any) => {
           }  className={cx(`grow`, {
             'ml-1.5': extendable
           })}>
-            <Button text={"Repay"} className={`bg-primary-main`}/>
+            <Button text={"Repay"}/>
           </div>
+
         </div>
 
         {(status === "UNPAID" || status === "OVERDUE") &&
@@ -176,7 +178,11 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 state: {orderNo},
               })
             }}>
-              <Button text={"Upload Receipt"} className={`border-primary-main border-[1.5px] border-solid text-primary-main w-full bg-none`} />
+              <Button
+                type={"ghost"}
+                className={`w-full`}
+                text={"Upload Receipt"}
+              />
             </div>
 
             <div className={`flex flex-col my-3`}>

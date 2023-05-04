@@ -98,10 +98,15 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
 
             <div className={`flex flex-row my-3`}>
                 <div className={`mr-1.5 w-full`}>
-                    <Button onClick={() => {
+                    <Button
+                      onClick={() => {
                         if (isRepayTypesFetching) return;
-                      navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
-                    }} text={props.t("Cancel")} className={`border-[1.5px] border-solid border-primary-main bg-none text-primary-main `} />
+                        navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,{ state: { orderNo } })
+                      }}
+                      text={props.t("Cancel")}
+                      className={`text-primary-main`}
+                      type={"ghost"}
+                    />
                 </div>
                 <div className={` ml-1.5 w-full`}>
                     <Button onClick={() => {

@@ -106,10 +106,13 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
           />
         </div>
 
-        <Button text={"Confirm and Add"} onClick={() => {
-          // !props.isFormPending && props.confirm
-          props.confirm && props.confirm();
-        }} className={"bg-primary-main text-white"}/>
+        <Button
+          text={"Confirm and Add"}
+          onClick={() => {
+            // !props.isFormPending && props.confirm
+            props.confirm && props.confirm();
+          }}
+        />
 
       </Form>
 
