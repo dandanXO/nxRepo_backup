@@ -18,16 +18,8 @@ import {applyTheme} from "./app/modules/theme/utils";
 applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
 
 // NOTICE: try for ios
-window["webkit"] = {
-  messageHandlers: {
-    AppInfoTask: {
-      getAppInfo: {
-        postMessage: function(appInfo: string) {
-          alertModal("received from ios.appInfo:" + appInfo);
-        }
-      }
-    }
-  }
+window["AppInfoTask"]["getAppInfoFromIOS"] = function (appInfo: string) {
+  alertModal("received from ios.appInfo:" + appInfo);
 }
 
 

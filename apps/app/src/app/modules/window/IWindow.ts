@@ -35,16 +35,8 @@ declare global {
     theme?: IThemeConfig;
     AppInfoTask: {
       getAppInfo: () => AndroidAppInfo;
+      getAppInfoFromIOS: (appInfo: string) => void;
     };
-    webkit: {
-      messageHandlers: {
-        AppInfoTask: {
-          getAppInfo: {
-            postMessage: (appInfo: string) => void;
-          }
-        }
-      }
-    }
   }
 }
 
