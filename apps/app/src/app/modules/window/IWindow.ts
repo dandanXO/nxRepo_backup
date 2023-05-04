@@ -36,8 +36,15 @@ declare global {
     AppInfoTask: {
       // getAppInfo: () => AndroidAppInfo;
       getAppInfo: (data: any) => void;
-      getAppInfoFromIOS: (appInfo: string) => void;
+      // getAppInfoFromIOS: (appInfo: string) => void;
     };
+    webkit: {
+      messageHandlers: {
+        AppInfoTask: {
+          getAppInfoFromIOS: (appInfo: string) => void;
+        };
+      }
+    }
   }
 }
 
