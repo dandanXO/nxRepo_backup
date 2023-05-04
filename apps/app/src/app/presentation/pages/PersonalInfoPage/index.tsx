@@ -3,7 +3,7 @@ import {Outlet, useNavigate} from "react-router";
 import UserIcon from '../../components/images/UserIcon.svg';
 import {useDispatch, useSelector} from "react-redux";
 import cx from "classnames";
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
 import {FiChevronRight} from "@react-icons/all-files/fi/FiChevronRight";
 
 import Card from "./Card";
@@ -15,6 +15,7 @@ import {USER_AUTH_STATE} from "../../../domain/user/USER_AUTH_STATE";
 import {LoanOverViewSection} from "../../components/sections/LoanOverViewSection";
 import {useEffect} from "react";
 import {PersonalInfoPageSagaActions} from "../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/personalInfoPageSaga";
+import {Button} from "../../components/layouts/Button";
 
 const PersonalInfoPage = () => {
     const dispatch = useDispatch();
@@ -53,7 +54,10 @@ const PersonalInfoPage = () => {
             {user.state === USER_AUTH_STATE.ready &&
                 (<div className={`flex flex-row justify-around items-center py-2 px-4 bg-orange-100`}>
                     <div>Verify now for highest amount</div>
-                    <Button buttonText={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>} padding="py-1 px-2" />
+                    <Button
+                      className={"py-1 px-2"}
+                      text={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>}
+                    />
                 </div>)
             }
 

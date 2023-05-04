@@ -6,7 +6,7 @@ import {getToken} from "../../../modules/location/getToken";
 import React from "react";
 
 type Props = {
-  text: string;
+  text: string | React.ReactNode;
   className?: string;
   onClick?: () => void;
   loading?: boolean;

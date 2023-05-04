@@ -1,9 +1,9 @@
 import { Navigation } from "../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
 import CustomerServiceIcon from '../../components/images/CustomerServiceIcon.svg';
-import Button from "../../components/Button";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../usecaseFlow/reduxStore";
+import {Button} from "../../components/layouts/Button";
 
 const CustomerServicePage = () => {
     const navigate = useNavigate();
@@ -16,7 +16,12 @@ const CustomerServicePage = () => {
                 <div>Service Time</div>
                 <div className="mt-2 font-bold">from Monday - Friday</div>
                 <div className="mb-4 font-bold">9:00 AM - 6:00 PM</div>
-                <div className="mb-4"><a href={`mailto:${app?.init?.csEmail || ''}`}><Button buttonText={'Contact By Mail'} padding="py-2 px-6" /></a></div>
+                <div className="mb-4">
+                  <a href={`mailto:${app?.init?.csEmail || ''}`}>
+
+                  <Button className={"py-2 px-6"} text={'Contact By Mail'}/>
+                  </a>
+                </div>
                 <div>{`Email: ${app?.init?.csEmail || ''}`}</div>
                 <div>{`Whatsapp: ${app?.init?.csWhatsApp || ''}`}</div>
                 <div>{`Phone: ${app?.init?.csContactNumber || ''}`}</div>

@@ -1,4 +1,4 @@
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
 import Divider from "../../components/Divider";
 import { useEffect, useState } from "react";
 import ListItem from "../../components/ListItem";
@@ -11,6 +11,7 @@ import {PagePathEnum} from "../PagePathEnum";
 import {RiArrowUpSLine} from "@react-icons/all-files/ri/RiArrowUpSLine";
 import {RiArrowDownSLine} from "@react-icons/all-files/ri/RiArrowDownSLine";
 import {getOrderNo} from "../../../modules/location/getOrderNo";
+import {Button} from "../../components/layouts/Button";
 
 const PaymentItem = (props: GetLoanRecord) => {
 
@@ -56,14 +57,13 @@ const PaymentItem = (props: GetLoanRecord) => {
                 <div className="text-xs">{`Due ${moment(dueDate).format('L') ?? ''}`}</div>
             </div>
             {status !== "PAY_OFF" &&
-                <Button
-                    onClick={() => navigate(`${navigateRoute}?token=${getToken()}`, { state: { orderNo, approveRecords } })}
-                    buttonText={status ? statusEnum[status].buttonText : ''}
-                    width={'w-20'}
-                    height={'h-8'}
-                    fontSize="xs"
-                />
+              <Button
+                text={status ? statusEnum[status].buttonText : ''}
+                className={"text-xs"}
+                onClick={() => navigate(`${navigateRoute}?token=${getToken()}`, { state: { orderNo, approveRecords } })}
+              />
             }
+
         </div>
         <Divider />
         {collapse && <div className="px-3">

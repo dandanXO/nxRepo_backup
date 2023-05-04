@@ -2,9 +2,7 @@
 import React, { useEffect } from "react";
 import { Overlay } from "@frontend/mobile/shared/ui";
 import { useNavigate, useLocation } from "react-router";
-import Button from "../../components/Button";
-
-
+import {Button} from "../../components/layouts/Button";
 
 
 const LogoutModal = (props: any) => {
@@ -28,8 +26,21 @@ const LogoutModal = (props: any) => {
                             <div className="text-xl font-bold mb-4">Confirm</div>
                             <div>{`Are you sure you want to exit ${appName}?`}</div>
                             <div className={`flex flex-row mt-6`}>
-                                <div className={`grow mr-1.5`}><Button onClick={() => navigate(-1)} buttonText={'Cancel'} backgroundColor={'bg-orange-300'} width={`w-full`} /></div>
-                                <div className={`grow ml-1.5`} ><Button onClick={() => navigate(-1)} buttonText={'Confirm'} width={`w-full`} /></div>
+                                <div className={`grow mr-1.5`}>
+                                  <Button
+                                    type={"secondary"}
+                                    className={"w-full"}
+                                    text={"Cancel"}
+                                    onClick={() => navigate(-1)}
+                                  />
+                                </div>
+                                <div className={`grow ml-1.5`} >
+                                  <Button
+                                    className={"w-full"}
+                                    text={"Confirm"}
+                                    onClick={() => navigate(-1)}
+                                  />
+                                </div>
                             </div>
                         </div>
                     );
