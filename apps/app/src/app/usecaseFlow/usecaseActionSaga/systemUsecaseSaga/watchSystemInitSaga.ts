@@ -10,7 +10,7 @@ import {systemCallGetUserInfoSaga} from "../userUsecaseSaga/sharedSaga/systemCal
 
 import {IThemeConfig} from "@frontend/mobile/shared/ui";
 import {AndroidAppInfo} from "../../../modules/window/IWindow";
-import {androidAPPInfo} from "../../../modules/window/appInfo";
+// import {androidAPPInfo} from "../../../modules/window/appInfo";
 
 
 export function *watchSystemInitSaga() {
@@ -42,14 +42,15 @@ export function *systemStartInitSaga() {
     // TODO:
     // NOTE: 是否啟用測試渠道(測試不好會出4)
     // const packageId = window.isInAndroid() ? "packageId" : "com.oasisgold.app.android"
-    // let packageId = "com.ind.kyc.application";
-    let packageId = androidAPPInfo.packageId;
-    let appInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
-    if(appInfo) {
-      packageId = appInfo.packageId;
-    }
-    console.log("[app][saga]  packageId", packageId);
-    yield put(appSlice.actions.updateAndroidInfo(appInfo));
+    let packageId = "com.ind.kyc.application";
+    // let packageId = androidAPPInfo.packageId;
+    // let appInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
+    // if(appInfo) {
+    //   packageId = appInfo.packageId;
+    // }
+    // console.log("[app][saga]  packageId", packageId);
+    // const appInfo = "com.oasisgold.app.android";
+    // yield put(appSlice.actions.updateAndroidInfo(appInfo));
 
     const [response, userResponse]:[GetInitServiceResponse,GetUserInfoServiceResponse] = yield all(
       [
