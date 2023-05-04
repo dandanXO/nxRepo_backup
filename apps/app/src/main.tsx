@@ -13,24 +13,11 @@ import {isInAndroid} from "./app/modules/window/isInAndroid";
 import "./style.css";
 import App from './app/app';
 import {applyTheme} from "./app/modules/theme/utils";
+import {AndroidAppInfo} from "./app/modules/window/IWindow";
 
+const transformAppInfo = (appinfo?: AndroidAppInfo) => {
+  let androidAPPInfo = appinfo;
 
-
-// NOTICE: try for ios
-window["AppInfoTask"]["getAppInfoFromIOS"] = function (appInfo: string) {
-  alertModal("received from ios.appInfo:" + appInfo);
-  let androidAPPInfo = JSON.parse(appInfo);
-  // NOTE: apply tailwind theme
-  applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
-
-}
-
-window["AppInfoTask"]["getAppInfo"] = function (appInfo: string) {
-  alertModal("received from android.appInfo:" + appInfo);
-  let androidAPPInfo = JSON.parse(appInfo);
-
-// NOTICE: app team dev packageId 都是 com.ind.kyc.application
-// NOTE: only H5 environment
   if(!androidAPPInfo) {
     if(environment.country === "in") {
       androidAPPInfo = {
@@ -67,36 +54,74 @@ window["AppInfoTask"]["getAppInfo"] = function (appInfo: string) {
       }
     }
   }
-  console.log("[app] androidAPPInfo", JSON.parse(JSON.stringify(androidAPPInfo)));
+  // console.log("[app] androidAPPInfo", JSON.parse(JSON.stringify(androidAPPInfo)));
+  return androidAPPInfo;
+}
 
-  // NOTE: apply tailwind theme
-  applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
-
-
-
-
-// NOTE: apply lib style-component theme
+const applySharedUIStyle = (androidAPPInfo: AndroidAppInfo) => {
   import(`./environments/theme/${androidAPPInfo.environment}/v${androidAPPInfo.uiVersion}/theme`).then((content) => {
     const themeConfig = content.themeConfig;
-
     window.theme = themeConfig;
-
-    console.log("[app] environment", environment);
-    console.log("[app] window.theme", window.theme);
-    console.log("isInAndroid", isInAndroid());
-
-    const root = ReactDOM.createRoot(
-      document.getElementById('root') as HTMLElement
-    );
-
-    root.render(
-      <StrictMode>
-        <App />
-      </StrictMode>
-    );
   })
+}
+
+
+
+window["AppInfoTask"] = {
+  // NOTICE: app team dev packageId 都是 com.ind.kyc.application
+  getAppInfo: function (appInfoStr: string) {
+    alertModal("received from android.appInfo:" + appInfoStr);
+    if(appInfoStr) {
+      let appInfo = JSON.parse(appInfoStr);
+      if(appInfo) {
+        const androidAPPInfo = transformAppInfo(appInfo);
+        if(androidAPPInfo) {
+          // NOTE: apply tailwind theme
+          applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
+          applySharedUIStyle(androidAPPInfo);
+        }
+      }
+    }
+  },
+
+  // NOTICE: try for ios
+  getAppInfoFromIOS: function (appInfoStr: string) {
+    alertModal("received from ios.appInfo:" + appInfoStr);
+    if(appInfoStr) {
+      let appInfo = JSON.parse(appInfoStr);
+      const androidAPPInfo = transformAppInfo(appInfo);
+      if(androidAPPInfo) {
+        // NOTE: apply tailwind theme
+        applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
+        applySharedUIStyle(androidAPPInfo);
+      }
+    }
+  },
+};
+
+const renderApp = () => {
+  // NOTE: apply default lib style-component theme
+  import(`./environments/theme/india/v55/theme`).then((content) => {
+    const themeConfig = content.themeConfig;
+    window.theme = themeConfig;
+  })
+
+  console.log("[app] environment", environment);
+  console.log("[app] window.theme", window.theme);
+  console.log("isInAndroid", isInAndroid());
+
+  const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+  );
+
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
 
 }
 
 
+renderApp();
 
