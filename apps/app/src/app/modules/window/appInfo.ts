@@ -1,8 +1,9 @@
 import {AndroidAppInfo} from "./IWindow";
 import {environment} from "../../../environments/environment";
-
+import {alertModal} from "../../api/base/alertModal";
 
 export let androidAPPInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
+alertModal(JSON.stringify(androidAPPInfo));
 
 // NOTICE: app team dev packageId 都是 com.ind.kyc.application
 // NOTE: only H5 environment

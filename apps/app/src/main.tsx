@@ -1,13 +1,14 @@
+import {environment} from "./environments/environment";
+import {androidAPPInfo} from "./app/modules/window/appInfo";
+
 import {alertModal} from "./app/api/base/alertModal";
 import {StrictMode} from 'react';
 import * as ReactDOM from 'react-dom/client';
-import {environment} from "./environments/environment";
 import "./app/modules/i18n";
 import "./app/modules/datetime/index";
 // NOTICE : 會引用 dispatch ，所以會先觸發 run root saga
 import "./app/modules/window/IWindow"
 import {isInAndroid} from "./app/modules/window/isInAndroid";
-import {androidAPPInfo} from "./app/modules/window/appInfo";
 
 import "./style.css";
 import App from './app/app';
