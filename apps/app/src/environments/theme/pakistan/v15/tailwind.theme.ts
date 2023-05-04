@@ -1,7 +1,9 @@
 // import { extend } from '../../../app/modules/theme/utils';
 // import base from '../../../app/modules/theme/themes/base';
 
-export default {
+import {ICustomTailwindTheme} from "../../../../app/modules/theme/ICustomTailwindTheme";
+
+const theme: ICustomTailwindTheme = {
   // NOTE: color
   primary_main : "#18A851",
   primary_variant : "#138641",
@@ -47,3 +49,5 @@ export default {
   custom_state_info_variant : "#E7F1FD",
 
 };
+
+export default theme;

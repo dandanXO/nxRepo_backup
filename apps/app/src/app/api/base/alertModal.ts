@@ -1,12 +1,12 @@
 import { Modal } from "@frontend/mobile/shared/ui";
 import i18next from "i18next";
-import {getThemeConfig} from "../../modules/theme/getThemeConfig";
+import {getThemeConfigByCountry} from "../../modules/theme/getThemeConfigByCountry";
 import {environment} from "../../../environments/environment";
 import theme from "../../../environments/theme/india/v55/tailwind.theme";
 // const customColors = require("../../../environments/theme/india/v55/tailwind.colors");
 
 // NOTICE: 下面得 import 雖然 app.tsx 已經impoert
-window.theme = getThemeConfig(environment.country);
+window.theme = getThemeConfigByCountry(environment.country);
 // window.theme.button.primary.main = customColors.primary.main;
 window.theme.button.primary.main = theme["primary_main"];
 

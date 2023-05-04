@@ -4,8 +4,7 @@ import {AllCountry} from "../../../../../../libs/shared/domain/src/country/AllCo
 import {IndiaCountry} from "../../../../../../libs/shared/domain/src/country/IndiaCountry";
 import {PakistanCountry} from "../../../../../../libs/shared/domain/src/country/PakistanCountry";
 
-
-export const getThemeConfig = (targetCountry: AllCountryIdentityName): IThemeConfig => {
+export const getThemeConfigByCountry = (targetCountry: AllCountryIdentityName): IThemeConfig => {
   const currentCountryList = AllCountry.filter(country => country.country === targetCountry)
   // return currentCountryList[0].themeConfig;
   return {
