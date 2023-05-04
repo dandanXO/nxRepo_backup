@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import { default as data } from './data.json';
 import {Page} from "../../components/layouts/Page";
 import {GetLoanRecordListRequest} from "../../../api/loanService/GetLoanRecordListRequest";
+import { environment } from "../../../../../src/environments/environment";
 
 
 const RepaymentPage = () => {
@@ -39,6 +40,7 @@ const RepaymentPage = () => {
         <Page className="flex flex-col">
             <div className={`flex flex-row py-3 px-5 justify-between sticky top-[0px] bg-white`}>
                 {['Unpaid', 'Overdue', 'Done'].map(i => <Tag
+                    layoutType={environment.country === 'in' ? 1 : 2}
                     key={i} onClick={() => setListStatus(i)} text={i}
                     active={i === listStatus} style={` text-sm mx-1`} />)}
             </div>

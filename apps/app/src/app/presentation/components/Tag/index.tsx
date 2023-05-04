@@ -31,25 +31,13 @@ const Tag = (props: ITag) => {
 
     const { layoutType = 1 } = props;
 
-    const layoutTypeStyle: any = {
-        1: {
-            normal: 'border-slate-400 bg-slate-100 text-slate-400',
-            active: 'border-orange-500 bg-orange-200 text-orange-600',
-        },
-        2: {
-            normal: 'border-[#B7BBC5] bg-[#FFFFFF] text-[#B7BBC5]',
-            active: 'border-[#18A851] bg-[#F4FEF8] text-[#18A851]',
-        }
-    }
-    cx.bind(layoutTypeStyle);
-
     return (
         <div onClick={props.onClick} className={cx(
             `font-sm border border-solid py-0.5 px-3 grow text-center ${props.style} `, {
-            "rounded-2xl": layoutType === 1,
-            "rounded-lg": [2, 3].some(type => type === layoutType),
-            [layoutTypeStyle[layoutType]['normal']]: props.active === false,
-            [layoutTypeStyle[layoutType]['active']]: props.active
+            "rounded-xl": layoutType === 1,
+            "rounded": [2, 3].some(type => type === layoutType),
+            'border-cstate-disable-main bg-cbg-secondary text-cstate-disable-main': props.active === false,
+            'border-primary-main bg-primary-assistant text-primary-main': props.active
         }, 
         )}
         >
