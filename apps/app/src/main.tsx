@@ -90,6 +90,25 @@ window.AppInfoTask.getAppInfoFromIOS(JSON.stringify({
 }))
 */
 
+window["webkit"] = {
+  messageHandlers: {
+    AppInfoTask: {
+      getAppInfoFromIOS: function (appInfoStr: string) {
+        alertModal("received from ios.appInfo:" + appInfoStr);
+        if(appInfoStr) {
+          let appInfo = JSON.parse(appInfoStr);
+          const androidAPPInfo = transformAppInfo(appInfo);
+          if(androidAPPInfo) {
+            // NOTE: apply tailwind theme
+            applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
+            applySharedUIStyle(androidAPPInfo);
+          }
+        }
+      }
+    }
+  }
+}
+
 window["AppInfoTask"] = {
   // NOTICE: app team dev packageId 都是 com.ind.kyc.application
   getAppInfo: function (appInfoStr: string) {
@@ -108,18 +127,18 @@ window["AppInfoTask"] = {
   },
 
   // NOTICE: try for ios
-  getAppInfoFromIOS: function (appInfoStr: string) {
-    alertModal("received from ios.appInfo:" + appInfoStr);
-    if(appInfoStr) {
-      let appInfo = JSON.parse(appInfoStr);
-      const androidAPPInfo = transformAppInfo(appInfo);
-      if(androidAPPInfo) {
-        // NOTE: apply tailwind theme
-        applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
-        applySharedUIStyle(androidAPPInfo);
-      }
-    }
-  },
+  // getAppInfoFromIOS: function (appInfoStr: string) {
+  //   alertModal("received from ios.appInfo:" + appInfoStr);
+  //   if(appInfoStr) {
+  //     let appInfo = JSON.parse(appInfoStr);
+  //     const androidAPPInfo = transformAppInfo(appInfo);
+  //     if(androidAPPInfo) {
+  //       // NOTE: apply tailwind theme
+  //       applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
+  //       applySharedUIStyle(androidAPPInfo);
+  //     }
+  //   }
+  // },
 };
 
 const renderApp = () => {
