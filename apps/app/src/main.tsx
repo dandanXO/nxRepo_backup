@@ -147,12 +147,18 @@ const renderApp = () => {
 renderApp();
 
 // refactor me
-window.AppInfoTask.getAppInfoFromIOS(JSON.stringify({
-  environment: environment.countryName === IndiaCountry.countryName ? "india" : "pakistan",
-  packageId: "",
-  uiVersion: environment.countryName === IndiaCountry.countryName ? "55" : "15",
-  token: "",
-  domain: "",
-  appName: "",
-}));
+// window.AppInfoTask.getAppInfoFromIOS(JSON.stringify({
+//   environment: environment.countryName === IndiaCountry.countryName ? "india" : "pakistan",
+//   packageId: "",
+//   uiVersion: environment.countryName === IndiaCountry.countryName ? "55" : "15",
+//   token: "",
+//   domain: "",
+//   appName: "",
+// }));
 
+const androidAPPInfo = transformAppInfo();
+if(androidAPPInfo) {
+  // NOTE: apply tailwind theme
+  applyTheme(androidAPPInfo.environment, "v" + androidAPPInfo.uiVersion);
+  applySharedUIStyle(androidAPPInfo);
+}
