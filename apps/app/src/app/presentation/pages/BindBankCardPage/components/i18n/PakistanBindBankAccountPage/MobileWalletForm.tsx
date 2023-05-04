@@ -38,7 +38,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           className="react-select-container mb"
           options={options}
           // defaultValue={props.bankDropList[0].value}
-          value={props.walletDropList[props.walletValue].value}
+          value={props.walletDropList[props.walletValue]}
           onChange={(item: any) => {
             console.log(item)
             props.setWalletValue(item.index);
