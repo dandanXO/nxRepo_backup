@@ -41,14 +41,12 @@ declare global {
         AppInfoTask: {
           getAppInfo: {
             postMessage: (appInfo: string) => void;
-
-        };
+          }
+        }
       }
     }
   }
 }
-
-
 
 
 
