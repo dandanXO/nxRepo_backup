@@ -11,12 +11,16 @@ import {Button} from "../../../../../components/layouts/Button";
 type IMobileWalletForm = {
   // Wallet List
   walletDropList: any;
-  walletValue: number;
+  walletValue: any;
   setWalletValue: any;
   // Wallet Account
   mobileData: InputValue<string>;
   onMobileDataChange: (event: any) => void;
-  validateMobileWalletAccount: (event: any) => void;
+  onMobileDataBlur: (event: any) => void;
+  // Confirm Wallet Account
+  confirmMobileData: InputValue<string>;
+  onConfirmMobileDataChange: (event: any) => void;
+  onConfirmMobileDataBlur: (event: any) => void;
   // Form
   isFormPending: boolean;
   confirm: () => void;
@@ -28,8 +32,9 @@ type IMobileWalletForm = {
 export const MobileWalletForm = (props: IMobileWalletForm) => {
   const navigate = useNavigate();
   const options = props.walletDropList?.map((item: string, index: number) => {
-    return {value: item, label: item, index: index}
+    return {value: index, label: item}
   });
+
   return (
     <Form>
 
@@ -40,10 +45,10 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           className="react-select-container mb"
           options={options}
           // defaultValue={props.bankDropList[0].value}
-          value={props.walletDropList[props.walletValue]}
+          value={props.walletValue}
           onChange={(item: any) => {
             console.log(item)
-            props.setWalletValue(item.index);
+            props.setWalletValue(item);
           }}
           isSearchable={false}
           placeholder={"Mobile Wallet"}
@@ -79,7 +84,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           placeholder={"Wallet Account Number"}
           value={props.mobileData.data}
           onChange={props.onMobileDataChange}
-          onBlur={props.validateMobileWalletAccount}
+          onBlur={props.onMobileDataBlur}
           errorMessage={props.mobileData.errorMessage}
         />
       </div>
@@ -92,10 +97,10 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           outlineType={"standard"}
           label={"+92"}
           placeholder={"Wallet Account Number"}
-          value={props.mobileData.data}
-          // onChange={props.onMobileDataChange}
-          // onBlur={props.validateMobileWalletAccount}
-          // errorMessage={props.mobileData.errorMessage}
+          value={props.confirmMobileData.data}
+          onChange={props.onConfirmMobileDataChange}
+          onBlur={props.onConfirmMobileDataBlur}
+          errorMessage={props.confirmMobileData.errorMessage}
         />
       </div>
 

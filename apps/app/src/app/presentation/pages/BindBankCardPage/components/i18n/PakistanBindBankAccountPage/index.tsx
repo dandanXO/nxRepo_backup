@@ -55,7 +55,11 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // Wallet Account
     mobileData,
     onMobileDataChange,
-    validateMobileWalletAccount,
+    onMobileDataBlur,
+    //confirm Wallet Account
+    confirmMobileData,
+    onConfirmMobileDataChange,
+    onConfirmMobileDataBlur,
     iBanData: iBanDataMobileWallet,
     onIBanChange: onMobileWalletIBanChange,
     onIbanBlur: onMobileWalletIbanBlur,
@@ -119,16 +123,17 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           setWalletValue={setWalletValue}
           mobileData={mobileData}
           onMobileDataChange={onMobileDataChange}
+          onMobileDataBlur={onMobileDataBlur}
+          confirmMobileData={confirmMobileData}
+          onConfirmMobileDataChange={onConfirmMobileDataChange}
+          onConfirmMobileDataBlur={onConfirmMobileDataBlur}
           iBanData={iBanDataMobileWallet}
           onIBanChange={onMobileWalletIBanChange}
           onIbanBlur={onMobileWalletIbanBlur}
-          validateMobileWalletAccount={validateMobileWalletAccount}
           isFormPending={isFormPending || false}
           confirm={() => {
             // country
             confirmMobileWallet();
-            // common
-            confirm();
           }}
         />
         ) : (
@@ -148,6 +153,8 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             confirm={() => {
               validateCommonForm();
               confirmBankAccount();
+              // common
+              confirm();
             }}
             iBanData={iBanData}
             onIBanChange={onIBanChange}

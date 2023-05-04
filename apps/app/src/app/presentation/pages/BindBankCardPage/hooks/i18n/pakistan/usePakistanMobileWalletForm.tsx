@@ -12,6 +12,7 @@ import {CustomAxiosError} from "../../../../../../api/rtk/axiosBaseQuery";
 import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
 import {AppFlag} from "../../../../../../../environments/flag";
 
+
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
   triggerPostBankBindSaveToPKMutation: any;
@@ -25,21 +26,29 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   // NOTE: Wallet List
   // Wallet List - 電子錢包列表 Data
   const [walletDropList, setWalletDropList] = useState<(string| React.ReactNode)[]>([]);
-  const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate()
+  const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate();
 
+  // Wallet Selected - 選擇的電子錢包
+  const [walletValue, setWalletValue] = useState<{ value: number, label: string }>({ value: 0, label: '' });
+  
   useEffect(() => {
     if(!props.bindCardDropListData) return;
     const walletList = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors && props.bindCardDropListData.availableWalletVendors.map((wallet: WalletVendor) => {
       return processWalletDisplayName(wallet);
     });
     setWalletDropList(walletList);
+    setWalletValue({ value: 0, label: walletList[0] })
   }, [props.bindCardDropListData]);
 
-  // Wallet Selected - 選擇的電子錢包
-  const [walletValue, setWalletValue] = useState(0);
 
   // Wallet Account
   const [mobileData, setMobileData] = useState<InputValue<string>>({
+    data: "",
+    isValidation: false,
+    errorMessage: "",
+  });
+
+  const [confirmMobileData, setConfirmMobileData] = useState<InputValue<string>>({
     data: "",
     isValidation: false,
     errorMessage: "",
@@ -54,10 +63,30 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
       ...mobileData,
       data,
     });
+  };
+
+  const onMobileDataBlur = () => {
+      validateMobileWalletAccount()
+      if(confirmMobileData.data.length>0){
+        validateConfirmMobileData();
+      }
   }
 
+const onConfirmMobileDataChange = (event: any) => {
+    let data = event.target.value;
+    data = data.replace(/[^0-9]/g, "");
+    setConfirmMobileData({
+      ...confirmMobileData,
+      data,
+    });
+}
+
+const onConfirmMobileDataBlur = () => {
+    validateConfirmMobileData();
+}
+
   // Wallet Account  - 驗證
-  const validateMobileWalletAccount = useCallback(() => {
+const validateMobileWalletAccount = useCallback(() => {
     const message = t("Account number should be 11 digits starting with 0.");
     const scheme = z
       .string()
@@ -82,15 +111,46 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   }, [mobileData.data]);
 
 
+  // Confirm Wallet Account  - 驗證
+  const validateConfirmMobileData = useCallback(() => {
+
+    const confirmMobile = confirmMobileData.data;
+    const mobile = mobileData.data;
+    const confirmMobileSchema = z.string().refine(
+        (confirmMobile) => confirmMobile === mobile, {
+        message: t('Please make sure your mobile number match.') as string
+    })
+    const result=confirmMobileSchema.safeParse(confirmMobile);
+    if (!result.success) {
+        const firstError = result.error.format();
+        const errorMessage = firstError._errors[0];
+        setConfirmMobileData({
+            ...confirmMobileData,
+            isValidation: false,
+            errorMessage,
+        });
+    } else {
+        setConfirmMobileData({
+            ...confirmMobileData,
+            isValidation: true,
+            errorMessage: '',
+        });
+    }
+
+  }, [mobileData.data, confirmMobileData.data]);
+
   // NOTE: 點擊 Submit
   const confirm = useCallback(() => {
 
     validateMobileWalletAccount();
+    validateConfirmMobileData();
     validateIban();
 
-    if (!mobileData.isValidation) return;
+    if (!mobileData.isValidation || !confirmMobileData.isValidation) return;
 
-    const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue];
+ 
+    const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue.value];
+
     if(props.isPostBankBindSaveToPKMutationLoading) return;
 
     props.triggerPostBankBindSaveToPKMutation({
@@ -130,6 +190,8 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   },[
     mobileData.isValidation,
     mobileData.data,
+    confirmMobileData.isValidation,
+    confirmMobileData.data,
     props.bindCardDropListData,
     props.triggerPostBankBindSaveToPKMutation,
     props.isPostBankBindSaveToPKMutationLoading,
@@ -144,7 +206,11 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     // Wallet Account
     mobileData,
     onMobileDataChange,
-    validateMobileWalletAccount,
+    onMobileDataBlur,
+    // Confrim Wallet Account
+    confirmMobileData,
+    onConfirmMobileDataChange,
+    onConfirmMobileDataBlur,
     //IBAN
     iBanData,
     onIBanChange,
