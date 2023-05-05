@@ -58,6 +58,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
       </div>
     )
   }
+  // console.log("status", status === "EXTEND")
   return (
     <div>
       <div className={`px-6 pt-3`}>
