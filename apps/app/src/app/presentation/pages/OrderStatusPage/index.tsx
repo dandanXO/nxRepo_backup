@@ -25,7 +25,7 @@ const OrderStatusPage = (props: any) => {
                     key={record.title}
                     title={record.title}
                     content={record.content}
-                    date={moment(record.createTime).format("MM-DD-YYYY HH:mm:ss")}
+                    date={moment(record.createTime).format("DD-MM-YYYY HH:mm:ss")}
                     isHightLight={index === 0}
                 />)
             })}

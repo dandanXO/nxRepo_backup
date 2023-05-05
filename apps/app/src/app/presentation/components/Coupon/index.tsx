@@ -77,7 +77,7 @@ const Coupon = (props: ICouponProps) => {
             <div className={`text-xs mb-1.5`}>{couponContent}</div>
             <div className={cx('text-xs flex', {
                 'text-red-500': isOverdueEqual3Days(expireTime)
-            })}>Expired time {moment(expireTime).format("MM-DD-YYYY")}</div>
+            })}>Expired time {moment(expireTime).format("DD-MM-YYYY")}</div>
         </div>
         <div className={cx(`flex flex-col border border-solid justify-center p-2 basis-16 grow`, {
             'rounded-r-lg': layoutType === 2

@@ -69,7 +69,7 @@ const renderRecordList = (props: AmountRepaidRecordsProps) => {
     const { repayRecords = [] } = props;
     return repayRecords?.map((i) => (
         <Record
-            repayDate={i.repayDate ? moment(i.repayDate).format("MM-DD-YYYY") : ""}
+            repayDate={i.repayDate ? moment(i.repayDate).format("DD-MM-YYYY") : ""}
             repayAmount={<Money money={i.repayAmount ? i.repayAmount : 0}/>}
             repayType={i.repayType ? i.repayType : ""}
         />

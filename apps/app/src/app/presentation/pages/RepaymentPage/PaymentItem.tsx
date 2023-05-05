@@ -17,7 +17,7 @@ const PaymentItem = (props: GetLoanRecord) => {
 
     const navigate = useNavigate();
 
-    // NOTE: 印度的時間格式要轉成 月/日/年
+    // NOTE: 印度的時間格式要轉成 日/月/年
     const { iconUrl = '', productName = '', status = '', loanAmount = '', dueDate = '', orderNo = '', orderAmount = '',
         loanDate = '', repayRecords = [], overdueDays = '', penaltyInterest = '', totalRepayAmount = '',
         approveRecords = [],

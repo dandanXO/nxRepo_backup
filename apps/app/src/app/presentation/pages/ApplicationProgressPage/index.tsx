@@ -22,7 +22,7 @@ const ApplicationProgressPage = () => {
               <ProgressItem
                 title={news.title}
                 content={news.content}
-                date={moment(news.addTime).format("MM-DD-YYYY HH:mm:ss")}
+                date={moment(news.addTime).format("DD-MM-YYYY HH:mm:ss")}
               />
             )
         })}
