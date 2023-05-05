@@ -30,7 +30,7 @@ const RepaymentDetailPage = (props: any) => {
     return (
       <div>
         {!isInAndroid() && <Navigation title={"Payment Details"} back={() => { navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`) }} />}
-        <div className={`text-sm text-center bg-cstate-info-variant text-cstate-info-main py-2`}>Get more amount after instant payment</div>
+        <div className={`text-sm text-center bg-primary-assistant text-primary-main py-2`}>Get more amount after instant payment</div>
         {
             renderByCountry({
                 [IndiaCountry.country]: (

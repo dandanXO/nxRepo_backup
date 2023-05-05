@@ -3,8 +3,6 @@ import { BrowserTracing } from "@sentry/tracing";
 import {environment} from "../../../environments/environment";
 import {AppFlag} from "../../../environments/flag";
 
-
-
 export const isLocalhost = () => window.location.hostname === "localhost";
 
 const getEnvironment = () => {
@@ -21,7 +19,7 @@ if(!isLocalhost()) {
       dsn: "https://c7460b88e57746c2804aec8514c3eef6@o4504354754985984.ingest.sentry.io/4505027128852480",
       integrations: [new BrowserTracing(), new Sentry.Replay()],
       environment: env,
-      release: appInfo.COMMITHASH,
+      release: AppInfo.COMMITHASH,
       // Set tracesSampleRate to 1.0 to capture 100%
       // of transactions for performance monitoring.
       // We recommend adjusting this value in production

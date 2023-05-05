@@ -16,6 +16,7 @@ const isProduction = process.env.NODE_ENV == 'production';
 console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
 console.log("process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
 console.log("process.env.NOTE_ANALYZER:", process.env.NOTE_ANALYZER);
+console.log("process.env.NOTE_UI_VERSION:", process.env.NOTE_UI_VERSION);
 console.log("isProduction: ", isProduction);
 
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
@@ -137,11 +138,13 @@ module.exports = (config, context) => {
       //   include: 'all'
       //   // include: 'initial'
       // }),
+      // NOTICE:
       new webpack.DefinePlugin({
-        appInfo: {
+        AppInfo: {
           VERSION: JSON.stringify(gitRevisionPlugin.version()),
           COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
           BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
+          UI_VERSION: process.env.NOTE_UI_VERSION,
         },
       }),
       // new CleanWebpackPlugin({

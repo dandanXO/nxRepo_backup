@@ -61,10 +61,10 @@ const PakistanRepaymentDetailPage = (props: any) => {
   return (
     <div>
       <div className={`px-6 pt-3`}>
-        <ListItem title={'Product'} text={productName ?? ''} titleColor="text-black-400" />
-        <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-black-400" />
-        <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-black-400" />
-        <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-black-400" />
+        <ListItem title={'Product'} text={productName ?? ''} titleColor="text-ctext-secondary" />
+        <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-ctext-secondary" />
+        <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-ctext-secondary" />
+        <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-ctext-secondary" />
 
         {status === 'EXTEND' && (
           <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-black-400" />
@@ -80,37 +80,37 @@ const PakistanRepaymentDetailPage = (props: any) => {
           text={
             <Money money={loanAmount}/>
           }
-          titleColor="text-black-400"
+          titleColor="text-ctext-secondary"
         />
 
-        {items.map((item: any) => {
+        {items.map((item: any, index: number) => {
           if(!item) return null;
           return (
             <ListItem
+              key={index}
               title={item.itemName}
               text={<Money money={item.value}/>}
-              titleColor="text-black-400" />
+              titleColor="text-ctext-secondary"
+            />
           )
         })}
 
-
-
         <Divider />
 
-        <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-black-400" />
-        <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-black-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
-        <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-black-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+        <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-ctext-secondary" />
+        <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-ctext-secondary" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+        <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-ctext-secondary" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
 
         {status === 'EXTEND' && (
-          <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-black-400" />
+          <ListItem title={'Extension Fee'} text={<Money money={extensionFee}/>} titleColor="text-ctext-secondary" />
         )}
 
         <Divider />
 
-        <ListItem title={'Reduction Amount'} text={<Money money={reductionAmount} isNagetive={true}/>} titleColor="text-black-400" />
+        <ListItem title={'Reduction Amount'} text={<Money money={reductionAmount} isNagetive={true}/>} titleColor="text-ctext-secondary" />
 
         <ListItem
-          titleColor="text-black-400"
+          titleColor="text-ctext-secondary"
           title={
             <div className={`flex flex-row item-center items-center`}>
               <div className={` mr-1`}>Amount Repaid</div>
