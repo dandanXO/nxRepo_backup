@@ -83,7 +83,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
           titleColor="text-ctext-secondary"
         />
 
-        {status !== "OVERDUE" && (
+        {status !== "EXTEND" && (
           items.map((item: any, index: number) => {
             if(!item) return null;
             return (
@@ -99,7 +99,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
         <Divider />
 
-        {status !== "OVERDUE" && (
+        {status !== "EXTEND" && (
           <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-ctext-secondary" />
         )}
 
