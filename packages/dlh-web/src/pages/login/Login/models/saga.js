@@ -1,8 +1,15 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
-import { lgGetCode,lgPostLogin, LG_POST_LOGIN, LG_GET_CODE, lgCancelTimer } from './actions';
+import {
+  lgGetCode,
+  lgPostLogin,
+  LG_POST_LOGIN,
+  LG_GET_CODE,
+  lgCancelTimer,
+  lgFirstLogin,
+  lgChangeLoading
+} from './actions';
 import { postLogin, postLoginVerifyCodeData } from '../api';
 import { axios } from 'utils';
-import { history } from 'utils';
 import Cookies from 'js-cookie';
 import {SentryModule} from "../../../../Application";
 
@@ -19,6 +26,7 @@ function* watchGetCodeData() {
 }
 
 function* postLoginData (action) {
+    yield put(lgChangeLoading(true))
 
     const res = yield call(postLogin, action.params);
     if (Number(res.code) === 200) {
@@ -26,14 +34,12 @@ function* postLoginData (action) {
 
         SentryModule.userLogin();
 
-        if(res.data.googleAuthFlag && !res.data.passGoogleAuth) {
-          history.push('/googleauth')
-        } else {
-          // NOTICE: UseCase:GoToIndexPage
-          history.push('/index');
-        }
+        yield put(lgFirstLogin(true))
+
 
         axios.defaults.headers["Authorization"] = res.data.token;
+    } else {
+      yield put(lgChangeLoading(false))
     }
 }
 
