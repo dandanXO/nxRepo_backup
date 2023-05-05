@@ -15,8 +15,8 @@ const { merge } = require('webpack-merge');
 const isProduction = process.env.NODE_ENV == 'production';
 console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
 console.log("process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
-console.log("process.env.NOTE_ANALYZER:", process.env.NOTE_ANALYZER);
-console.log("process.env.NOTE_UI_VERSION:", process.env.NOTE_UI_VERSION);
+console.log("process.env.NODE_ANALYZER:", process.env.NODE_ANALYZER);
+console.log("process.env.NODE_UI_VERSION:", process.env.NODE_UI_VERSION);
 console.log("isProduction: ", isProduction);
 
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
@@ -144,7 +144,7 @@ module.exports = (config, context) => {
           VERSION: JSON.stringify(gitRevisionPlugin.version()),
           COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
           BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
-          UI_VERSION: process.env.NOTE_UI_VERSION,
+          UI_VERSION: process.env.NODE_UI_VERSION,
         },
       }),
       // new CleanWebpackPlugin({
@@ -153,7 +153,7 @@ module.exports = (config, context) => {
     ],
   });
 
-  if(process.env.NOTE_ANALYZER && !isProduction) {
+  if(process.env.NODE_ANALYZER && !isProduction) {
     finalConfig.plugins.push(
       new BundleAnalyzerPlugin()
     )
