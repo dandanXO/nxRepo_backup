@@ -45,6 +45,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                         if (value === "balance") {
                             setBalanceValue(balance);
                             setBalanceValue(`${environment.currency}${balance}`);
+                            setBalanceValueErrorMessage("")
                         }
                     }}
                 >

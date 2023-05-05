@@ -60,6 +60,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                         // console.log(balance);
                         if (value === "balance") {
                           setBalanceValue(`${environment.currency}${balance}`);
+                          setBalanceValueErrorMessage("")
                         }
                     }}
                 >
