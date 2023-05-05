@@ -31,7 +31,7 @@ export type IIndiaBankAccountForm = IBankAccountForm & {
 
 export type IPakistanBankAccountForm = IBankAccountForm & {
   bankDropList: any;
-  bankAccountValue: number;
+  bankAccountValue: any;
   onIFSCDropSelect: (index: number) => void;
   bindCardDropListData: any;
   iBanData:any;

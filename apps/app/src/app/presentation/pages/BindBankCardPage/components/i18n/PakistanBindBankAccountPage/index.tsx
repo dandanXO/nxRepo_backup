@@ -151,10 +151,10 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             bindCardDropListData={props.bindCardDropListData}
             onIFSCDropSelect={onIFSCDropSelect}
             confirm={() => {
-              validateCommonForm();
-              confirmBankAccount();
+              const validation =  validateCommonForm(); // account Number
+              const validation2 = confirmBankAccount(); // Iban
               // common
-              confirm();
+              if(validation && validation2) confirm();
             }}
             iBanData={iBanData}
             onIBanChange={onIBanChange}

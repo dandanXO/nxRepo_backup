@@ -75,6 +75,7 @@ export const usePakistanIBanValidate = () => {
                 iBanData.data === '' ? t("This field cannot be left blank.") as string : t("IBAN number must be 24 digits only.") as string
                 : '',
         });
+        return !isValidateError;
     }, [iBanData.data])
 
     const onIBanChange = (event: any) => {

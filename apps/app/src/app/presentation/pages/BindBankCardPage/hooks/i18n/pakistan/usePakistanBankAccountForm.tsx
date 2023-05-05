@@ -15,7 +15,7 @@ export const usePakistanBankAccountForm = (
   // NOTE: 帳號列表 Data
   const [bankDropList, setBankDropList] = useState<string[]>([]);
   const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate()
-
+  const [bankAccountValue, setBankAccountValue] = useState<{ value: number, label: string }>({ value: 0, label: '' });
 
   useEffect(() => {
     if(!props.bindCardDropListData) return;
@@ -23,17 +23,18 @@ export const usePakistanBankAccountForm = (
       return wallet.bankName
     });
     setBankDropList(walletList);
+    setBankAccountValue({ value: 0, label: walletList[0] })
   }, [props.bindCardDropListData]);
 
   //NOTE: 選擇的帳號
-  const [bankAccountValue, setBankAccountValue] = useState(0);
 
-  const onIFSCDropSelect = useCallback((index: number) => {
+
+  const onIFSCDropSelect = useCallback((index:any) => {
     setBankAccountValue(index);
   }, []);
 
   const confirm = () => {
-    validateIban();
+    return validateIban();
   }
 
   return {

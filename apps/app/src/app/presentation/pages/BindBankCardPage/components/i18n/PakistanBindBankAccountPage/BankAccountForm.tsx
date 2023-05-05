@@ -14,7 +14,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
   const navigate = useNavigate();
 
   const options = props.bankDropList?.map((item: string, index: number) => {
-    return {value: item, label: item, index: index}
+    return {value: index, label: item}
   });
 
   return (
@@ -56,10 +56,11 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
             styles={selectStyles}
             className=" mb-2"
             // defaultValue={props.bankDropList[0].value}
-            value={props?.bankDropList[props.bankAccountValue]?.value}
+            // value={props?.bankDropList[props.bankAccountValue]?.value}
+            value={props.bankAccountValue}
             onChange={(item: any) => {
               console.log(item)
-              props.onIFSCDropSelect(item.index);
+              props.onIFSCDropSelect(item);
             }}
             options={options}
             isSearchable={false}
