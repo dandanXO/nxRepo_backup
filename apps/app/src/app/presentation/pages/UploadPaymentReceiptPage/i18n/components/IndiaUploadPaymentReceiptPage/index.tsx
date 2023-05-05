@@ -1,5 +1,5 @@
 import UploadingFileModal from "../../../modal/UploadingFileModal";
-import { Button, Input } from "@frontend/mobile/shared/ui";
+import { Input } from "@frontend/mobile/shared/ui";
 import I18CameraSvgIcon from "../I18CameraSvgIcon";
 import React from "react";
 import {
@@ -17,6 +17,7 @@ import { Navigation } from "../../../../../components/layouts/Navigation";
 import { useNavigate } from "react-router";
 import {Page} from "../../../../../components/layouts/Page";
 import {isInAndroid} from "../../../../../../modules/window/isInAndroid";
+import {Button} from "../../../../../components/layouts/Button";
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)((props: I18UploadPaymentReceiptPageProps) => {
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
                             <UploadSectionTitle>
                                 {props.t("Upload from Photo Album")}
                             </UploadSectionTitle>
-                        </div>) 
+                        </div>)
                         : <img src={props.imageSrc ? props.imageSrc : ""} className={'h-[181px]'} alt="" />
                     }
                     <Input
@@ -71,7 +72,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
                 </UploadSection>
 
               <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
-              <Button onClick={() => props.confirm()}>{"Confirm"}</Button>
+              <Button text={"Confirm"} onClick={() => props.confirm()}/>
 
             </div>
         </Page>

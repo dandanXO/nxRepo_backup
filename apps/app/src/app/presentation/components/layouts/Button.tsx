@@ -22,7 +22,7 @@ export const Button = (props: Props) => {
       className={cx(
         "rounded-md p-2 text-center font-bold",
         {"border border-solid border-primary-main bg-primary-main text-white": props.type === undefined},
-        {"border border-solid border-cbg-tertiary-primary bg-cbg-tertiary text-ctext-tertiary": props.type === "secondary"},
+        {"border border-solid border-cbg-tertiary-primary bg-primary-variant text-ctext-tertiary": props.type === "secondary"},
         {"border-[1.5px] border-solid border-primary-main bg-none text-primary-main": props.type === "ghost"},
         props.className
       )}

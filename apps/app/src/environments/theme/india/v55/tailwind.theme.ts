@@ -28,7 +28,6 @@ const theme: ICustomTailwindTheme = {
   custom_state_info_main : "#1376EF",
   custom_state_info_variant : "#E7F1FD",
 
-
   // NOTE: Background
   custom_bg_primary: "#FDFFFE",
   custom_bg_secondary: "#FFFFFF",

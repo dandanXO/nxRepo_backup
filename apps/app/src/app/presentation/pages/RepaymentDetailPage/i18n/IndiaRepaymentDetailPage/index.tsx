@@ -107,7 +107,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
         <Divider />
 
-        <ListItem title={'Reduction Amount'} text={<div className="flex"> - <Money money={reductionAmount}/></div>} titleColor="text-black-400" />
+        <ListItem title={'Reduction Amount'} text={<Money money={reductionAmount} isNagetive={true}/>} titleColor="text-black-400" />
 
         <ListItem
           titleColor="text-black-400"

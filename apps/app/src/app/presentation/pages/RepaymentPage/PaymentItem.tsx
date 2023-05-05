@@ -75,7 +75,7 @@ const PaymentItem = (props: GetLoanRecord) => {
             <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
             {/* <ListItem title={'Overdue Fee'} text={`${environment.currency} ${penaltyInterest ?? ''}`} titleColor="text-slate-400" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} /> */}
             <Divider />
-            <ListItem title={'Repayment Amount'} text={`${environment.currency} ${balance ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
+            {status !== 'REJECTED' && <ListItem title={'Repayment Amount'} text={`${environment.currency} ${balance ?? ''}`} titleColor="text-slate-400" fontWeight="font-bold" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />}
             <Divider />
         </div>}
 

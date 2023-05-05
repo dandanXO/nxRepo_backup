@@ -22,7 +22,6 @@ const BankCardListPage = loadable(() => import(/* webpackChunkName: "BankCardLis
 const BindBankCardPage = loadable(() => import(/* webpackChunkName: "BindBankCardPage" */ "../pages/BindBankCardPage"));
 const CustomerServicePage = loadable(() => import(/* webpackChunkName: "CustomerServicePage" */ "../pages/CustomerServicePage"));
 const DisclosureStatementPage = loadable(() => import(/* webpackChunkName: "DisclosureStatementPage" */ "../pages/DisclosureStatementPage"));
-const ExtendDetailsPage = loadable(() => import(/* webpackChunkName: "ExtendDetailsPage" */ "../pages/ExtendDetailsPage"));
 const FinishedRepaymentPage = loadable(() => import(/* webpackChunkName: "FinishedRepaymentPage" */ "../pages/FinishedRepaymentPage"));
 const RepaymentDetailPage = loadable(() => import(/* webpackChunkName: "RepaymentDetailPage" */ "../pages/RepaymentDetailPage"));
 const LoanRecordPage = loadable(() => import(/* webpackChunkName: "RepaymentPage" */ "../pages/RepaymentPage"));
@@ -84,7 +83,7 @@ export const AppRouter = () => {
           <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} />
           <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} />
           <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
-          <Route path="/v2/extend-details" element={<ExtendDetailsPage />} />
+
           <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />
 
           <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
@@ -94,7 +93,7 @@ export const AppRouter = () => {
             <Route path="extend-modal" element={<ExtendModal />} />
             <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
           </Route>
-          
+
           <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
           <Route path="/v2/my-coupon-list" element={<MyCouponListPage />} />
           <Route path="/v2/partner" element={<PartnerPage />} />

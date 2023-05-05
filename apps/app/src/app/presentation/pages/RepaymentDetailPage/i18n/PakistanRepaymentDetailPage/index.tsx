@@ -123,8 +123,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
                 <ListItem
                   title={'Reduction Amount'}
-                  text={<Money money={reductionAmount} isNagetive={true}/>
-                  }
+                  text={<Money money={reductionAmount} isNagetive={true}/>}
                   titleColor="text-ctext-secondary"
                   textColor="text-ctext-primary"
                 />

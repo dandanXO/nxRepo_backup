@@ -47,14 +47,14 @@ const IndiaExtendModal = (props: any) => {
             {/*NOTE: 減免金額*/}
             <ListItem
               title={"Reduction Amount"}
-              text={<Money money={reductionAmount}/>}
+              text={<Money money={reductionAmount} isNagetive={true}/>}
               textColor={"text-red-500"}
             />
 
             {/*NOTE: 已還金額*/}
             <ListItem
               title={"Amount Repaid"}
-              text={<Money money={paidAmount}/>}
+              text={<Money money={paidAmount} isNagetive={true}/>}
               textColor={"text-red-500"}
             />
 
@@ -74,7 +74,7 @@ const IndiaExtendModal = (props: any) => {
             />
             <div className={`flex flex-row mt-6 text-white`}>
                 <div className={`grow mr-1.5`}>
-                    <Button type={"secondary"} onClick={() => navigate(-2)} text={'Cancel'} className={`w-full`} />
+                    <Button type={"ghost"} onClick={() => navigate(-2)} text={'Cancel'} className={`w-full`} />
                 </div>
                 <div className={`grow ml-1.5`} >
                     <Button onClick={props.handleConfirm} text={'Confirm'} className={`w-full`} />
