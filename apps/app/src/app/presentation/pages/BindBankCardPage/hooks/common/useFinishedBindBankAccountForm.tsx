@@ -26,7 +26,7 @@ type IUseFinishedBindBankAccountPage =  {
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
   // NOTE: 設定電子錢包列表
-  bankAccountValue?: number;
+  bankAccountValue?: any;
 }
 
 export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
@@ -58,8 +58,8 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
       let targetBankAccount
       if(props.bindCardDropListData && props.bindCardDropListData.availableBanks) {
         // NOTICE: bankAccountValue 可能為 0
-        if(typeof props.bankAccountValue === "number") {
-          targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue];
+        if(typeof props.bankAccountValue?.value === "number") {
+          targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue.value];
         }
       }
       const requestBody = {
