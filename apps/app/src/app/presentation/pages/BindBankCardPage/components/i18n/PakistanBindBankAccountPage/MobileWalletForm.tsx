@@ -7,6 +7,7 @@ import { selectStyles } from "../../../../../components/layouts/selectStyles";
 import Select from "../../../../../components/Select";
 import { EnumV15GradientButtonClassNames } from "../../../../../../../environments/theme/pakistan/v15/button";
 import { Button } from "../../../../../components/layouts/Button";
+import { Page } from "../../../../../components/layouts/Page";
 
 type IMobileWalletForm = {
     // Wallet List
@@ -54,66 +55,64 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                 />
 
             </div>
+            <div className={"text-sm"}>{'Your IBAN Number (24 characters)'}</div>
+            <Input
+                labelType={'none'}
+                outlineType={"standard"}
+                placeholder={'Ex. PK36FTBK0000111123456702'}
+                value={props.iBanData.data}
+                onChange={props.onIBanChange}
+                onBlur={props.onIbanBlur}
+                errorMessage={props.iBanData.errorMessage}
+            />
+            <div className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
+                onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}
+            >
+                {'Click me to learn where can I find my IBAN number?'}
+            </div>
 
             <div>
-                <div className={"text-sm"}>{'Your IBAN Number (24 characters)'}</div>
+                <div className={"text-sm mb-0"}>{'Mobile Wallet Account'}</div>
                 <Input
-                    labelType={'none'}
+                    textAlign={'left'}
+                    className="mb-1"
+                    labelType={"left"}
                     outlineType={"standard"}
-                    placeholder={'Ex. PK36FTBK0000111123456702'}
-                    value={props.iBanData.data}
-                    onChange={props.onIBanChange}
-                    onBlur={props.onIbanBlur}
-                    errorMessage={props.iBanData.errorMessage}
+                    label={"+92"}
+                    placeholder={"Mobile Wallet Account"}
+                    value={props.mobileData.data}
+                    onChange={props.onMobileDataChange}
+                    onBlur={props.onMobileDataBlur}
+                    errorMessage={props.mobileData.errorMessage}
                 />
-                <div className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
-                    onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}
-                >
-                    {'Click me to learn where can I find my IBAN number?'}
-                </div>
+            </div>
 
-                <div>
-                    <div className={"text-sm mb-0"}>{'Mobile Wallet Account'}</div>
-                    <Input
-                        textAlign={'left'}
-                        className="mb-1"
-                        labelType={"left"}
-                        outlineType={"standard"}
-                        label={"+92"}
-                        placeholder={"Mobile Wallet Account"}
-                        value={props.mobileData.data}
-                        onChange={props.onMobileDataChange}
-                        onBlur={props.onMobileDataBlur}
-                        errorMessage={props.mobileData.errorMessage}
-                    />
-                </div>
+            <div>
+                <div className={"text-sm"}>{'Confirm Mobile Wallet Account'}</div>
+                <Input
+                    textAlign={'left'}
+                    className="mb"
+                    labelType={"left"}
+                    outlineType={"standard"}
+                    label={"+92"}
+                    placeholder={"Confirm Mobile Wallet Account"}
+                    value={props.confirmMobileData.data}
+                    onChange={props.onConfirmMobileDataChange}
+                    onBlur={props.onConfirmMobileDataBlur}
+                    errorMessage={props.confirmMobileData.errorMessage}
+                />
+            </div>
 
-                <div>
-                    <div className={"text-sm"}>{'Confirm Mobile Wallet Account'}</div>
-                    <Input
-                        textAlign={'left'}
-                        className="mb"
-                        labelType={"left"}
-                        outlineType={"standard"}
-                        label={"+92"}
-                        placeholder={"Confirm Mobile Wallet Account"}
-                        value={props.confirmMobileData.data}
-                        onChange={props.onConfirmMobileDataChange}
-                        onBlur={props.onConfirmMobileDataBlur}
-                        errorMessage={props.confirmMobileData.errorMessage}
-                    />
-                </div>
-
-                {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
-                <div className="grow flex flex-col justify-end mb-2">
-                    <Button
-                        className={`${EnumV15GradientButtonClassNames} `}
-                        text={"Confirm"}
-                        onClick={() => props.confirm()}
-                    />
-                </div>
+            {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
+            <div className="grow flex flex-col justify-end mb-2">
+                <Button
+                    className={`${EnumV15GradientButtonClassNames} `}
+                    text={"Confirm"}
+                    onClick={() => props.confirm()}
+                />
             </div>
         </div>
+
     );
 }
 
