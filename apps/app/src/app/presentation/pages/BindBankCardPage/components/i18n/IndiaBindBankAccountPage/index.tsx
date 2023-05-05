@@ -9,7 +9,7 @@ import { useBindBankAccountForm } from "../../../hooks/common/useBindBankAccount
 import { useFinishedBindBankAccountForm } from "../../../hooks/common/useFinishedBindBankAccountForm";
 import { useIndiaBankAccountForm } from "../../../hooks/i18n/india/useIndiaBankAccountForm";
 import {isInAndroid} from "../../../../../../modules/window/isInAndroid";
-
+import {Page} from '../../../../../components/layouts/Page'
 export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     const navigate = useNavigate();
     const {
@@ -60,7 +60,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           {/*NOTICE: 這邊的用意是？*/}
           {!isInAndroid() && <Navigation title={"Bank Card"} back={() => { navigate(-1) }} />}
 
-          <CustomPage>
+          <Page className="flex">
               <BankAccountForm cardholderName={props.cardholderName}
                   ifscData={ifscData}
                   onIFSCChange={onIFSCChange}
@@ -80,7 +80,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                     if(validation && validation2) confirm();
                   }}
               />
-          </CustomPage>
+          </Page>
         </>
 
     );

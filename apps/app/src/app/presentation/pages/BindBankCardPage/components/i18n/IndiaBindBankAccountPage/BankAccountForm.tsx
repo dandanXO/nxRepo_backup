@@ -7,20 +7,19 @@ import {Input} from "@frontend/mobile/shared/ui";
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
     return (
-        <>
-            <Form>
-                <Paragraph className="text-sm">
+        <div className="flex flex-col grow" >
+            <Form className="grow">
+                <div className="text-ctext-primary text-xs mb-1">
                     {"For KYC, your Cardholder name and Aadhaar name should be match."}
-                </Paragraph>
-
+                </div>
                 <Input
-                    className="mb"
+                    className="mb-3 text-sm"
                     label={"Cardholder Name"}
                     value={props.cardholderName}
                     disabled
                 />
                 <Input
-                    className="mb"
+                    className="mb-3 text-sm"
                     label={"IFSC Code (11 digits)"}
                     value={props.ifscData.data}
                     onChange={props.onIFSCChange}
@@ -28,7 +27,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                     errorMessage={props.ifscData.errorMessage}
                 />
                 <Input
-                    className="mb"
+                    className="mb-3 text-sm"
                     label={"Account Number"}
                     value={props.bankcardNoData.data}
                     onChange={props.onAccountNumberChange}
@@ -36,7 +35,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                     errorMessage={props.bankcardNoData.errorMessage}
                 />
                 <Input
-                    className="mb"
+                    className="mb-3 text-sm"
                     label={"Confirm Account Number"}
                     value={props.confirmedBankcardNoData.data}
                     onChange={props.onConfirmAccountNumberChange}
@@ -44,13 +43,16 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
                     errorMessage={props.confirmedBankcardNoData.errorMessage}
                 />
                 <Input
-                    className="mb"
+                    className="mb-4 text-sm"
                     label={"UPI ID"}
                     value={props.upiData.data}
                     onChange={props.onUPIIDChange}
                 />
             </Form>
-          <Button text={"Save"} onClick={() => { !props.isFormPending && props.confirm() }}/>
-        </>
+            <div className="mb-4">
+                <Button text={"Save"} onClick={() => { !props.isFormPending && props.confirm() }} />
+            </div>
+
+        </div>
     );
 }
