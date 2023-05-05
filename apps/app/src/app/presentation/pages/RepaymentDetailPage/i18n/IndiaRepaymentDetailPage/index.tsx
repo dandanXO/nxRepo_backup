@@ -83,21 +83,26 @@ const PakistanRepaymentDetailPage = (props: any) => {
           titleColor="text-ctext-secondary"
         />
 
-        {items.map((item: any, index: number) => {
-          if(!item) return null;
-          return (
-            <ListItem
-              key={index}
-              title={item.itemName}
-              text={<Money money={item.value}/>}
-              titleColor="text-ctext-secondary"
-            />
-          )
-        })}
+        {status !== "OVERDUE" && (
+          items.map((item: any, index: number) => {
+            if(!item) return null;
+            return (
+              <ListItem
+                key={index}
+                title={item.itemName}
+                text={<Money money={item.value}/>}
+                titleColor="text-ctext-secondary"
+              />
+            )
+          })
+        )}
 
         <Divider />
 
-        <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-ctext-secondary" />
+        {status !== "OVERDUE" && (
+          <ListItem title={'Daily Fee'} text={<div className="flex"><Money money={dailyFee}/></div>} titleColor="text-ctext-secondary" />
+        )}
+
         <ListItem title={'Overdue Days'} text={overdueDays ?? ''} titleColor="text-ctext-secondary" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
         <ListItem title={'Overdue Fee'} text={<Money money={penaltyInterest}/>} titleColor="text-ctext-secondary" textColor={status === 'OVERDUE' ? 'text-red-500' : ''} />
 
