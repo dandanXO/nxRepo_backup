@@ -22,7 +22,7 @@
   "page.login.phone.empty": "Phone No. is cannot empty",
   "page.login.password": "Please Enter Captcha Code",
   "page.login.password.empty": "Captcha Code is cannot empty",
-  "page.login.google.auth.code": "Please Enter Google Auth Code",
+  "page.login.google.auth.code": "Google Auth Code",
   "page.login.google.auth.code.empty":"Google Auth Code is not empty" ,
   "page.search.list.reg.time": "Register Time",
   "page.search.list.select": "Please Select",

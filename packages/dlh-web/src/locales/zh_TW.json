@@ -22,7 +22,7 @@
   "page.login.phone.empty": "手機號不能為空",
   "page.login.password": "請輸入驗證碼",
   "page.login.password.empty": "驗證碼不能為空",
-  "page.login.google.auth.code": "請輸入Google驗證碼",
+  "page.login.google.auth.code": "google驗證碼",
   "page.login.google.auth.code.empty":"Google驗證碼不能為空" ,
   "page.search.list.reg.time": "註冊時間",
   "page.search.list.select": "請選擇",
