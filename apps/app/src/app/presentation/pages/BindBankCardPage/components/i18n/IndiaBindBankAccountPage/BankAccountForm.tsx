@@ -6,7 +6,6 @@ import {Button} from "../../../../../components/layouts/Button";
 import {Input} from "@frontend/mobile/shared/ui";
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
-
     return (
         <>
             <Form>

@@ -10,18 +10,7 @@ import {Button} from "../../../../../components/layouts/Button";
 import {selectStyles} from "../../../../../components/layouts/selectStyles";
 import {EnumV15GradientButtonClassNames} from "../../../../../../../environments/theme/pakistan/v15/button";
 
-const CustomForm = styled.div`
-  .css-1s2u09g-control, .css-1pahdxg-control {
-    border-radius: 9px;
-    height: 49px;
-    border: 1px solid #aaaaaa;
-  }
-  .css-14el2xx-placeholder {
-    //font-weight: 600;
-  }
-`
 export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
-
   const navigate = useNavigate();
 
   const options = props.bankDropList?.map((item: string, index: number) => {
@@ -29,7 +18,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
   });
 
   return (
-    <CustomForm>
+    <div>
       <Form>
 
         <div>
@@ -117,7 +106,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         />
 
       </Form>
-
-    </CustomForm>
+    </div>
   );
 }
