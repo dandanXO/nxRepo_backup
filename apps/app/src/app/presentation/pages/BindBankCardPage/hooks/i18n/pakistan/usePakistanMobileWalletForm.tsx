@@ -30,7 +30,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
 
   // Wallet Selected - 選擇的電子錢包
   const [walletValue, setWalletValue] = useState<{ value: number, label: string }>({ value: 0, label: '' });
-  
+
   useEffect(() => {
     if(!props.bindCardDropListData) return;
     const walletList = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors && props.bindCardDropListData.availableWalletVendors.map((wallet: WalletVendor) => {
@@ -148,7 +148,7 @@ const validateMobileWalletAccount = useCallback(() => {
 
     if (!mobileData.isValidation || !confirmMobileData.isValidation) return;
 
- 
+
     const mobileWalletAccount = props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue.value];
 
     if(props.isPostBankBindSaveToPKMutationLoading) return;
@@ -160,10 +160,8 @@ const validateMobileWalletAccount = useCallback(() => {
       walletVendor: mobileWalletAccount && mobileWalletAccount.code || "",
       iban: iBanData.data
     })
-      .unwrap()
       .then((data: any) => {
-        // console.log("data:", data);
-
+        // console.log("data1:", data);
         // Notice: bind account successfully
         Modal.alert({
           show: true,
@@ -180,12 +178,14 @@ const validateMobileWalletAccount = useCallback(() => {
         });
       })
       .catch((err: CustomAxiosError) => {
-        const error = new Error();
-        error.name = "triggerPostBankBindSaveToPKMutation"
-        if(err) error.message = JSON.stringify(err)
-        if(AppFlag.enableSentry) {
-          Sentry.captureException(error);
-        }
+        // console.log("data2:", err);
+        // const error = new Error();
+        // error.name = "triggerPostBankBindSaveToPKMutation"
+        // if(err) error.message = JSON.stringify(err)
+        // console.log("error", error);
+        // if(AppFlag.enableSentry) {
+        //   Sentry.captureException(error);
+        // }
       })
   },[
     mobileData.isValidation,

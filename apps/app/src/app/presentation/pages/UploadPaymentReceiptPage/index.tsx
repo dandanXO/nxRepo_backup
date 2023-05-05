@@ -53,14 +53,15 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
                 .then((data: PostRepayReceiptResponse) => {
                     goToUploadedPaymentReceiptPage();
                 })
-                .catch((err: CustomAxiosError) => {
-                    const error = new Error();
-                    error.name = "postRepayReceipt"
-                    if (err) error.message = JSON.stringify(err)
-                    if(AppFlag.enableSentry) {
-                      Sentry.captureException(error);
-                    }
-                })
+                // .catch((err: CustomAxiosError) => {
+                //     const error = new Error();
+                //     error.name = "postRepayReceipt"
+                //     if (err) error.message = JSON.stringify(err)
+                //
+                //     if(AppFlag.enableSentry) {
+                //       Sentry.captureException(error);
+                //     }
+                // })
                 .finally(() => {
                     props.setIsUploading(false);
 

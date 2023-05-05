@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {BankVendor, GetBindCardDropListResponse} from "../../../../../../api/rtk/old/GetBindCardDropList";
 import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
+
 interface IUsePakistanBankAccountForm {
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;

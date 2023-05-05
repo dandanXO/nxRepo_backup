@@ -31,14 +31,14 @@ const useRepayCreate = () => {
                 resolve("");
             })
             .catch((err: CustomAxiosError) => {
-                const error = new Error();
-                error.name = "postRepayCreate"
-                if (err) error.message = JSON.stringify(err)
+                // const error = new Error();
+                // error.name = "postRepayCreate"
+                // if (err) error.message = JSON.stringify(err)
 
-                if(AppFlag.enableSentry) {
-                  Sentry.captureException(error);
-                }
-                // reject(err);
+                // if(AppFlag.enableSentry) {
+                //   Sentry.captureException(error);
+                // }
+                reject(err);
             })
 
     })

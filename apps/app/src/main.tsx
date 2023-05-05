@@ -1,3 +1,4 @@
+import "./app/modules/sentry";
 import {environment} from "./environments/environment";
 import {StrictMode} from 'react';
 import * as ReactDOM from 'react-dom/client';

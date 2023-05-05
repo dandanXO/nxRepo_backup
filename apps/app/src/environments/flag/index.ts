@@ -1,3 +1,3 @@
 export const AppFlag = {
-  enableSentry: false,
+  enableSentry: true,
 }

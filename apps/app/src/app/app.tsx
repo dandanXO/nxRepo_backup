@@ -1,4 +1,4 @@
-import {AppThemeProvider} from "@frontend/mobile/shared/ui";
+import {AppThemeProvider, IThemeConfig} from "@frontend/mobile/shared/ui";
 import {AppRouter} from "./presentation/router";
 import {Provider} from "react-redux";
 import {appStore, RootState} from "./usecaseFlow/reduxStore";
@@ -9,7 +9,11 @@ import React from "react";
 
 const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator
 
-export function App() {
+interface AppProps {
+
+}
+
+export function App(props: AppProps) {
   return (
     <div>
       <AppThemeProvider theme={window.theme}>

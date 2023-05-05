@@ -27,49 +27,49 @@ const axiosBaseQuery =
     > =>
     async ({ url, method, data, params, headers }) => {
         try {
-            const resultData = runAxios(baseUrl, url, method, data, params, headers);
-            console.log("resultData", resultData);
+            const resultData = await runAxios(baseUrl, url, method, data, params, headers);
+            console.log("[app] resultData:", resultData);
             return resultData
-        } catch (axiosError) {
-            console.log("axiosError1");
-            console.log("axiosError", axiosError);
-            const err = axiosError as AxiosError;
-            console.log("err.toJSON()", err.toJSON());
 
-            const customError = JSON.parse(JSON.stringify(err.response?.data)) as {
+        } catch (axiosError) {
+            // NOTE: err
+            const err:AxiosError = axiosError as AxiosError;
+            console.info("[app] err:", err);
+
+            // NOTICE: err.response.status !== 200
+            // NOTE: backendCustomError
+            const backendCustomError = err.response?.data as {
                 code: number;
                 data?: {
                   msg?: string;
                 };
                 message: string;
             };
-            const customErrorMessage = customError?.data?.msg || customError.message;
-            // console.log(err);
-            // console.log(error);
+            const backendCustomErrorMessage = backendCustomError?.data?.msg || backendCustomError.message;
+            console.info("[app] customErrorMessage:", backendCustomErrorMessage);
 
             // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
             if(err.config.url !== "/api/v2/loan/quota/refresh") {
-              alertModal(customErrorMessage);
+              alertModal(backendCustomErrorMessage);
             }
 
-            const error = new Error();
-            // NOTE: 後端客製化訊息
-            error.name = customError.message;
-            error.message = JSON.stringify({
+            // NOTE: frontendError
+            const frontendError = new Error();
+            frontendError.name = backendCustomErrorMessage;
+            frontendError.message = JSON.stringify({
               originalError: {
                 code: err.code,
                 message: err.message,
                 name: err.name,
                 stack: err.stack,
               },
-              customError
+              backendCustomError
             })
-            if(AppFlag.enableSentry) {
-              Sentry.captureException(error);
-            }
-            console.info("[app][api] error", error);
 
-            // alertModal(err.message);
+            if(AppFlag.enableSentry) {
+              Sentry.captureException(frontendError);
+            }
+            console.info("[app] frontendError:", frontendError);
 
             return {
                 error: {

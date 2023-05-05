@@ -30,12 +30,13 @@ const useExtendCreate = () => {
                 resolve("");
             })
             .catch((err: CustomAxiosError) => {
-                const error = new Error();
-                error.name = "postRepayCreate"
-                if (err) error.message = JSON.stringify(err)
-                if(AppFlag.enableSentry) {
-                  Sentry.captureException(error);
-                }
+                // const error = new Error();
+                // error.name = "postRepayCreate"
+                // if (err) error.message = JSON.stringify(err)
+                //
+                // if(AppFlag.enableSentry) {
+                //   Sentry.captureException(error);
+                // }
 
                 reject(err);
             })

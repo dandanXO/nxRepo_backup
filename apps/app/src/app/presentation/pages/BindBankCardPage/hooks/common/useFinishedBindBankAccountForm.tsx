@@ -95,12 +95,13 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         });
       })
       .catch((err: CustomAxiosError) => {
-        const error = new Error();
-        error.name = requestName
-        if(err) error.message = JSON.stringify(err)
-        if(AppFlag.enableSentry) {
-          Sentry.captureException(error);
-        }
+        // console.log("data3", err);
+        // const error = new Error();
+        // error.name = requestName
+        // if(err) error.message = JSON.stringify(err)
+        // if(AppFlag.enableSentry) {
+        //   Sentry.captureException(error);
+        // }
       })
 
 
