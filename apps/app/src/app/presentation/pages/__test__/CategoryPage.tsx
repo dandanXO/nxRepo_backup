@@ -5,6 +5,7 @@ import {PagePathEnum} from "../PagePathEnum";
 import cx from "classnames";
 import {Button} from "../../components/layouts/Button";
 import {useNavigate} from "react-router";
+import {environment} from "../../../../../../mobile/src/environments/environment";
 
 export const CategoryPage = () => {
   const navigate = useNavigate();
@@ -18,6 +19,29 @@ export const CategoryPage = () => {
           navigate("/v2/my-coupon-list")
         }}
       />
+
+      <div>
+        <header>{'Welcome to Mobile'}</header>
+
+        <hr/>
+
+        <div>
+          <div>App Info</div>
+          <div>Commit Hash: {AppInfo.COMMITHASH}</div>
+          <div>Version: {AppInfo.VERSION}</div>
+          <div>BRANCH: {AppInfo.BRANCH}</div>
+        </div>
+
+        <hr/>
+
+        <div>Country: {environment.countryName}</div>
+        <div>Environment: {environment.production ? "正式機" : "測試機"}</div>
+        <div>Language: {environment.language}</div>
+
+        <hr/>
+
+      </div>
+
       {/*<div><div to="/">IndexPage</div></div>*/}
       {/*<div><div to="/login">Login</div></div>*/}
       {/*<div><div to="/application-progress">ApplicationProgressPage</div></div>*/}
