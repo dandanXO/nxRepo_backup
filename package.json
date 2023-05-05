@@ -23,7 +23,7 @@
     "e2e:min:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-in --watch --baseUrl=https://frontend.com",
     "e2e:mpk:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-pk --watch --baseUrl=https://frontend.com",
     "e2e:mbd:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-bd --watch --baseUrl=https://frontend.com",
-    "serve:ain": "cross-env NODE_UI_VERSION=58 NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development",
+    "serve:ain": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development",
     "serve:apk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve-pk app -c=development",
     "serve:abd": "cross-env NODE_ENV=development NODE_COUNTRY=bd pnpm nx serve-bd app -c=development",
     "serve:ain:a": "cross-env NODE_ENV=development NODE_COUNTRY=in NODE_ANALYZER=true pnpm nx serve-in app -c=development",

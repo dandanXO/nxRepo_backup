@@ -84,7 +84,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
     >
       <OptionIcon enable={props.value === 1}/>
       <img style={{ width: 60, height: 60, margin: "auto" }}  src={BankAccountSVG}/>
-      <Label className={props.value === 1 ? "text-primary-main" : ""}>{'Bank Name'}</Label>
+      <Label className={props.value === 1 ? "text-primary-main" : ""}>{'Bank Card'}</Label>
     </Option>
   )
 
