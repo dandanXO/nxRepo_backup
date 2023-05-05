@@ -219,7 +219,7 @@ module.exports = (config, context) => {
         ignoreFile: '.sentrycliignore',
         ignore: ['node_modules', 'webpack.config.js'],
         org: 'sentry',
-        // project: 'api-app',
+        project: 'api-app',
         // configFile: 'sentry.properties',
         // setCommits: {
         //   auto: false,
