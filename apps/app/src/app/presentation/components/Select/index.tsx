@@ -14,10 +14,13 @@ const selectStyles: StylesConfig = {
         textAlign:'left'
 
     }),
+    //@ts-ignore
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         return {
             ...styles,
-            border: 0
+            border: 0,
+            color: isSelected ? '#fff' : '#000',
+            backgroundColor: isSelected ? styles.backgroundColor : null,
         }
     }
 }

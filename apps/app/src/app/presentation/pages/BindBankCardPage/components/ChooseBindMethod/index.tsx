@@ -15,7 +15,7 @@ import {IThemeConfig} from "@frontend/mobile/shared/ui";
 import {AiFillCheckCircle} from "@react-icons/all-files/ai/AiFillCheckCircle";
 
 const Container = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   cursor: pointer;
 `;
 
@@ -90,7 +90,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
 
   return (
     <Container>
-      <div className={"mb-4 font-medium"}>{"Choose the payment method"}</div>
+      <div className={"mb-1 font-bold"}>{"Choose the payment method"}</div>
 
       <OptionContainer>
 

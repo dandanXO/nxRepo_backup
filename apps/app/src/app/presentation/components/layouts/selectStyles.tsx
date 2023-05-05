@@ -13,10 +13,13 @@ export const selectStyles: StylesConfig = {
       width: 0
     }
   }),
+  //@ts-ignore
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {
       ...styles,
-      border: 0
+      border: 0,
+      color: isSelected ? '#fff' : '#000',
+      backgroundColor: isSelected ? styles.backgroundColor : null,
     }
   }
 }

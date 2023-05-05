@@ -82,6 +82,7 @@ export interface InputProps {
   ref?: any;
   suffix?: string | React.ReactNode;
   outlineType?: "outlined" | "standard"; //inputContainer (standard樣式為底線的)
+  textAlign?: 'right' | 'left' | 'center'
 }
 
 // NOTICE: 實際產出元件的 dot 特性
@@ -127,6 +128,7 @@ const Input: InputInterface = ({
  inputWidth,
    suffix,
    outlineType,
+   textAlign
 }: InputProps) => {
   const forceUpdate = useForceUpdate();
 
@@ -298,10 +300,12 @@ const Input: InputInterface = ({
           isFocus={isEdit}
           disabled={disabled}
           outlineType={outlineType}
+         
         >
           {LabelComponentElement}
 
           <CustomInput
+            textAlign={textAlign}
             inputWidth={inputWidth}
             // NOTICE: labelID
             disabled={disabled}

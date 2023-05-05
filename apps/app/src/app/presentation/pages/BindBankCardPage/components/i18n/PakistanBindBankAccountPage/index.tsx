@@ -111,11 +111,11 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
       <Outlet/>
       <ChooseBindMethod value={chooseBindMethodValue} changeOptionValueCallback={changeOptionValue} disable={props.bindCardDropListData?.showBankOption || false}/>
 
-      <div className={"bg-[#E8F0FF] text-[#4285F4] rounded-md px-3 py-2 mb-2 text-xs"}>
-        <span className={"underline font-medium"}>Once added, it cannot be edited anymore. </span>
+      <div className={"bg-cstate-info-variant text-cstate-info-main rounded-md px-3 py-2 mb-4 text-xs font-bold "}>
+      <span className={"underline font-bold"}>Once added, it cannot be edited anymore. </span>
         <span>Please ensure that the account belongs to you, and that all information is correct and accurate.</span>
       </div>
-
+       
       {chooseBindMethodValue === 0 ? (
         <MobileWalletForm
           walletDropList={walletDropList}

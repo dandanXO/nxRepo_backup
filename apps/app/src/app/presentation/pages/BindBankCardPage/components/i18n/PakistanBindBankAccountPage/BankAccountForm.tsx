@@ -18,13 +18,12 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
   });
 
   return (
-    <div>
-      <Form>
 
+      <div className="grow flex flex-col">
         <div>
-          <Label className={"text-sm"}>{'Cardholder Name'}</Label>
+          <div className={"text-sm"}>{'Cardholder Name'}</div>
           <Input
-            className="mb"
+            className="mb-2"
             labelType={'none'}
             outlineType={"standard"}
             placeholder={'Cardholder Name'}
@@ -34,7 +33,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         </div>
 
         <div>
-          <Label className={"text-sm"}>{'Your IBAN Number (24 characters)'}</Label>
+          <div className={"text-sm"}>{'Your IBAN Number (24 characters)'}</div>
           <Input
             labelType={'none'}
             outlineType={"standard"}
@@ -44,7 +43,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
             onBlur={props.onIbanBlur}
             errorMessage={props.iBanData.errorMessage}
           />
-          <div className="text-xs text-blue-500 underline leading-none whitespace-nowrap mb"
+          <div className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
                onClick={()=>navigate('iban-finder-modal',{state:'Bank'})}
           >
             {'Click me to learn where can I find my IBAN number?'}
@@ -52,10 +51,10 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         </div>
 
         <div>
-          <Label className={"text-sm"}>{'Bank Name'}</Label>
+          <div className={"text-sm"}>{'Bank Name'}</div>
           <Select
             styles={selectStyles}
-            className="react-select-container mb"
+            className=" mb-2"
             // defaultValue={props.bankDropList[0].value}
             value={props?.bankDropList[props.bankAccountValue]?.value}
             onChange={(item: any) => {
@@ -69,9 +68,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         </div>
 
         <div>
-          <Label className={"text-sm"}>{'Account Number'}</Label>
+          <div className={"text-sm"}>{'Account Number'}</div>
           <Input
-            className="mb"
+            className="mb-2"
             labelType={'none'}
             outlineType={"standard"}
             placeholder={'Account Number'}
@@ -83,9 +82,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
         </div>
 
         <div>
-          <Label className={"text-sm"}>{'Confirm Account Number'}</Label>
+          <div className={"text-sm"}>{'Confirm Account Number'}</div>
           <Input
-            className="mb"
+            className="mb-2"
             labelType={'none'}
             outlineType={"standard"}
             placeholder={'Confirm Account Number'}
@@ -95,17 +94,18 @@ export const BankAccountForm = (props: IPakistanBankAccountForm)  => {
             errorMessage={props.confirmedBankcardNoData.errorMessage}
           />
         </div>
-
+        <div className="grow flex flex-col justify-end mb-2">
         <Button
-          text={"Confirm and Add"}
+          text={"Confirm"}
           className={`${EnumV15GradientButtonClassNames}`}
           onClick={() => {
             // !props.isFormPending && props.confirm
             props.confirm && props.confirm();
           }}
         />
+        </div>
 
-      </Form>
-    </div>
+      </div>
+
   );
 }
