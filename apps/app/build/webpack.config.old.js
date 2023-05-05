@@ -222,10 +222,10 @@ module.exports = (config, context) => {
         project: 'api-app',
         // configFile: 'sentry.properties',
         // setCommits: {
-        //   auto: false,
-        // ignoreMissing: true,
-        // repo: "frontend",
-        // commit: gitRevisionPlugin.commithash(),
+          //   auto: false,
+          // ignoreMissing: true,
+          // repo: "frontend",
+          // commit: gitRevisionPlugin.commithash(),
         // }
       })
     );
