@@ -213,7 +213,7 @@ module.exports = (config, context) => {
     finalConfig.plugins.push(
       new SentryCliPlugin({
         url: "https://monitor.sijneokd.com",
-        authToken: '4a49d8eb6e164c86a8284b81294ed8d1',
+        authToken: '2c48e3e9a9464236a5b057ecbd5c2683b52f676f3c294a3eae6bfeb923b6815c',
         debug: true,
         include: './dist/apps/app',
         ignoreFile: '.sentrycliignore',
