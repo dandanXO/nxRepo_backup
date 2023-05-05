@@ -35,16 +35,17 @@ const getAppInfo = ():AndroidAppInfo => {
         environment: "india",
         packageId: "com.ind.kyc.application",
         appName: "dev_in",
-        uiVersion: String(AppInfo.UI_VERSION) || "55",
+        uiVersion: typeof AppInfo.UI_VERSION !== "undefined" ? String(AppInfo.UI_VERSION) : "55",
         token: "",
       }
     } else if(environment.country === "pk") {
+
       appInfo = {
         domain: "india-api-dev.com",
         environment: "pakistan",
         packageId: "com.pak.app.yesloan.android",
         appName: "dev_in",
-        uiVersion: String(AppInfo.UI_VERSION) || "15",
+        uiVersion: typeof AppInfo.UI_VERSION !== "undefined" ? String(AppInfo.UI_VERSION) : "15",
         token: "",
       }
     } else {
