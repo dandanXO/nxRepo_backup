@@ -67,7 +67,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <ListItem title={'Due Date'} text={dueDate ? moment(dueDate).format("DD-MM-YYYY") :''} titleColor="text-ctext-secondary" />
 
         {status === 'EXTEND' && (
-          <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-black-400" />
+          <ListItem title={'Extension Date'} text={extendDate ? moment(extendDate).format("DD-MM-YYYY") : ''} titleColor="text-ctext-secondary" />
         )}
 
         <Divider />

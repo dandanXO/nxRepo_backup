@@ -36,7 +36,7 @@ if(AppFlag.enableSentry) {
   const sentryConfig: Sentry.BrowserOptions = {
     // dsn: "https://c7460b88e57746c2804aec8514c3eef6@o4504354754985984.ingest.sentry.io/4505027128852480",
     // NOTE: self-hosting
-    dsn: "http://4a49d8eb6e164c86a8284b81294ed8d1@web.sijneokd.com/3",
+    dsn: "http://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3",
     environment: environmentName,
     integrations: [
       new BrowserTracing(),
