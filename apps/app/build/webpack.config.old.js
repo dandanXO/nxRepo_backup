@@ -210,25 +210,25 @@ module.exports = (config, context) => {
     //     })
     //   );
 
-    // finalConfig.plugins.push(
-    //   new SentryCliPlugin({
-    //     debug: false,
-    //     authToken:
-    //       '82a0bb80a6d641f3adb38163f31bc6d87e2fbd4ef0d64dde9ddfc135e3c0c6c0',
-    //     org: 'workshop-xs',
-    //     project: 'api-app',
-    //     include: './dist/apps/app',
-    //     ignoreFile: '.sentrycliignore',
-    //     ignore: ['node_modules', 'webpack.config.js'],
-    //     configFile: 'sentry.properties',
-    //     // setCommits: {
-    //     //   auto: false,
-    //     // ignoreMissing: true,
-    //     // repo: "frontend",
-    //     // commit: gitRevisionPlugin.commithash(),
-    //     // }
-    //   })
-    // );
+    finalConfig.plugins.push(
+      new SentryCliPlugin({
+        url: "https://monitor.sijneokd.com",
+        authToken: '4a49d8eb6e164c86a8284b81294ed8d1',
+        debug: true,
+        include: './dist/apps/app',
+        ignoreFile: '.sentrycliignore',
+        ignore: ['node_modules', 'webpack.config.js'],
+        // org: 'workshop-xs',
+        // project: 'api-app',
+        // configFile: 'sentry.properties',
+        // setCommits: {
+        //   auto: false,
+        // ignoreMissing: true,
+        // repo: "frontend",
+        // commit: gitRevisionPlugin.commithash(),
+        // }
+      })
+    );
 
   }
   console.log('finalConfig', finalConfig);
