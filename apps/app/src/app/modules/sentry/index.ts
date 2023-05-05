@@ -26,11 +26,11 @@ export const Application = {
 
 if(AppFlag.enableSentry) {
   const environmentName = Application.getEnvironmentName();
-  // const replayConfig = {
-  //   maskAllText: false,
-  //   maskAllInputs: false,
-  //   blockAllMedia: false,
-  // }
+  const replayConfig = {
+    maskAllText: false,
+    maskAllInputs: false,
+    blockAllMedia: false,
+  }
   // const replay = new Sentry.Replay(replayConfig);
   // replay.start();
   const sentryConfig: Sentry.BrowserOptions = {
@@ -41,7 +41,7 @@ if(AppFlag.enableSentry) {
     integrations: [
       new BrowserTracing(),
       // replay
-      new Sentry.Replay()
+      new Sentry.Replay(replayConfig)
     ],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
