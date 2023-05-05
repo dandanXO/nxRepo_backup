@@ -5,7 +5,8 @@ import {PagePathEnum} from "../PagePathEnum";
 import cx from "classnames";
 import {Button} from "../../components/layouts/Button";
 import {useNavigate} from "react-router";
-import {environment} from "../../../../../../mobile/src/environments/environment";
+import { environment } from "apps/app/src/environments/environment";
+
 
 export const CategoryPage = () => {
   const navigate = useNavigate();
