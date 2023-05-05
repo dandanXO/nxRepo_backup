@@ -218,7 +218,7 @@ module.exports = (config, context) => {
         include: './dist/apps/app',
         ignoreFile: '.sentrycliignore',
         ignore: ['node_modules', 'webpack.config.js'],
-        // org: 'workshop-xs',
+        org: 'sentry',
         // project: 'api-app',
         // configFile: 'sentry.properties',
         // setCommits: {
