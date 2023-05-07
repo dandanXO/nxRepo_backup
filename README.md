@@ -1,7 +1,5 @@
 # Frontend
 
-
-
 ## Scope
 
 - API Product
