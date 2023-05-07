@@ -4,7 +4,7 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm prettier"
+      "pre-commit": "echo 'pretter' && pnpm prettier"
     }
   },
   "scripts": {
