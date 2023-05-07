@@ -15,7 +15,7 @@ export const usePakistanBankAccountForm = (
   // NOTE: 帳號列表 Data
   const [bankDropList, setBankDropList] = useState<string[]>([]);
   const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate()
-  const [bankAccountValue, setBankAccountValue] = useState<{ value: number, label: string }>({ value: 0, label: '' });
+  const [bankAccountValue, setBankAccountValue] = useState<{ value: number, label: string }>();
 
   useEffect(() => {
     if(!props.bindCardDropListData) return;

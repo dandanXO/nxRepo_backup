@@ -10,8 +10,10 @@ import "./style.css";
 import App from './app/app';
 import {applyTheme} from "./app/modules/theme/utils";
 import {AndroidAppInfo} from "./app/modules/window/IWindow";
+import {SystemCaseActions} from "./app/usecaseFlow/usecaseActionSaga/systemUsecaseSaga/systemCaseActions";
+import {appStore} from "./app/usecaseFlow/reduxStore";
 
-const getAppInfo = ():AndroidAppInfo => {
+export const getAppInfo = ():AndroidAppInfo => {
   let appInfo
   // NOTE: Native Bridge
   if(window["AppInfoTask"] && window["AppInfoTask"]["getAppInfo"]) {
@@ -37,7 +39,7 @@ const getAppInfo = ():AndroidAppInfo => {
         packageId: "com.ind.kyc.application",
         appName: "dev_in",
         uiVersion: typeof AppInfo.UI_VERSION !== "undefined" ? String(AppInfo.UI_VERSION) : "55",
-        token: "",
+        token: null,
       }
     } else if(environment.country === "pk") {
 
@@ -47,7 +49,7 @@ const getAppInfo = ():AndroidAppInfo => {
         packageId: "com.pak.app.yesloan.android",
         appName: "dev_in",
         uiVersion: typeof AppInfo.UI_VERSION !== "undefined" ? String(AppInfo.UI_VERSION) : "15",
-        token: "",
+        token: null,
       }
     } else {
       new Error("前端請新增國家配置");
@@ -85,6 +87,14 @@ const applyCustomTheme = () => {
 const renderApp = () => {
 
   applyCustomTheme();
+
+  // NOTICE: init h5 mode
+  const androidAPPInfo = getAppInfo();
+  if(androidAPPInfo.token !== null) {
+    console.log("[app][saga] 2")
+    appStore.dispatch(SystemCaseActions.InitSaga());
+  }
+
 
   // NOTE: Render
   // console.log("[app] environment", environment);

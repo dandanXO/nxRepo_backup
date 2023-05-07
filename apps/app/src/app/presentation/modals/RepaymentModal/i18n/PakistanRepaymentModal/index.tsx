@@ -62,7 +62,6 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 value={balanceValue}
                 disabled={radioValue === "balance"}
                 onChange={(event: any) => {
-                  event.preventDefault();
                   let value = event.target.value;
                   // console.log("value", value);
                   value = value.replace(`${environment.currency}`, "");
