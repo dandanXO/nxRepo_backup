@@ -37,6 +37,8 @@ const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPol
 const QuotaModelPage = loadable(() => import(/* webpackChunkName: "QuotaModelPage" */ "../pages/QuotaModelPage"));
 const UploadedPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ "../pages/UploadedPaymentReceiptPage"));
 const UploadPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ "../pages/UploadPaymentReceiptPage"));
+const CouponModalContentAndroidWebviewPage = loadable(() => import(/* webpackChunkName: "CouponModalContentAndroidWebviewPage" */ "../pages/CouponModalContentAndroidWebviewPage"));
+
 const ApplicationProgressPage = loadable(() => import(/* webpackChunkName: "ApplicationProgressPage" */ "../pages/ApplicationProgressPage"));
 const LoginPage = loadable(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
 
@@ -106,6 +108,8 @@ export const AppRouter = () => {
           <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
           <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
           {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
+
+          <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage/>}/>
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
 
