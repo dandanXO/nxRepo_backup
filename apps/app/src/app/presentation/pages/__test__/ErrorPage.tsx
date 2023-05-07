@@ -1,27 +1,27 @@
-import {Route} from "react-router";
-import React from "react";
-import ApplicationProgressPage from "../ApplicationProgressPage";
-import {PagePathEnum} from "../PagePathEnum";
-import cx from "classnames";
-import {Button} from "../../components/layouts/Button";
-import {useNavigate} from "react-router";
+import { Route } from 'react-router';
+import React from 'react';
+import ApplicationProgressPage from '../ApplicationProgressPage';
+import { PagePathEnum } from '../PagePathEnum';
+import cx from 'classnames';
+import { Button } from '../../components/layouts/Button';
+import { useNavigate } from 'react-router';
 
-import useErrorBoundary from "use-error-boundary"
+import useErrorBoundary from 'use-error-boundary';
 
-import {ErrorBoundary as CustomErrorBoundary} from "../../../modules/ErrorBoundary"
+import { ErrorBoundary as CustomErrorBoundary } from '../../../modules/ErrorBoundary';
 
 const JustRenderMe = () => {
-  throw new Error("💥")
-}
+  throw new Error('💥');
+};
 
 export const ErrorPage = () => {
   const { ErrorBoundary, didCatch, error, reset } = useErrorBoundary({
     onDidCatch: (error, errorInfo) => {
       // For logging/reporting
-      console.log("error", error)
-      console.log("errorInfo", errorInfo)
+      console.log('error', error);
+      console.log('errorInfo', errorInfo);
     },
-  })
+  });
 
   // NOTE: work
   return (
@@ -30,19 +30,18 @@ export const ErrorPage = () => {
         <div>
           <p>An error has been caught: {error.message}</p>
           <Button
-            dataTestingID={"apply"}
-            text={"Reset Error"}
+            dataTestingID={'apply'}
+            text={'Reset Error'}
             onClick={() => reset()}
           />
         </div>
-
       ) : (
         <ErrorBoundary>
           <JustRenderMe />
         </ErrorBoundary>
       )}
     </>
-  )
+  );
 
   // NOTE: didn't work
   // return (
@@ -66,18 +65,20 @@ export const ErrorPage = () => {
   // NOTE: work
   return (
     <CustomErrorBoundary fallback={<p>Something went wrong</p>}>
-      <Button dataTestingID={"apply"} text={"emit Error"} className={cx({
-        "bg-[#F58B10]": true,
-      })}
-          onClick={() => {
-            try {
-              throw new Error("error");
-            } catch(error) {
-              console.log("error", error)
-            }
-          }}
+      <Button
+        dataTestingID={'apply'}
+        text={'emit Error'}
+        className={cx({
+          'bg-[#F58B10]': true,
+        })}
+        onClick={() => {
+          try {
+            throw new Error('error');
+          } catch (error) {
+            console.log('error', error);
+          }
+        }}
       />
     </CustomErrorBoundary>
-  )
-
-}
+  );
+};

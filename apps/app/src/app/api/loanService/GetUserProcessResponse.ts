@@ -1,5 +1,3 @@
-import {UserProcess} from "./UserProcess";
+import { UserProcess } from './UserProcess';
 
 export type GetUserProcessResponse = UserProcess[];
-
-

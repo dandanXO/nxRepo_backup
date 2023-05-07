@@ -7,7 +7,9 @@ export default {
     component: RepaymentAdsModal,
 } as ComponentMeta<typeof RepaymentAdsModal>;
 
-export const ModalRepayment: ComponentStory<typeof RepaymentAdsModal> = (args) => {
+export const ModalRepayment: ComponentStory<typeof RepaymentAdsModal> = (
+    args
+) => {
     return (
         <AppThemeProvider>
             <RepaymentAdsModal

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import {IThemeConfig, Page} from "@frontend/mobile/shared/ui";
+import { IThemeConfig, Page } from "@frontend/mobile/shared/ui";
 
-export const CustomPage = styled(Page)<{theme: IThemeConfig}>`
+export const CustomPage = styled(Page)<{ theme: IThemeConfig }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;

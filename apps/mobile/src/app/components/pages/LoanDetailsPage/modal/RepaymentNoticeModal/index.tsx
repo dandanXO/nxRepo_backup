@@ -1,8 +1,8 @@
 import { Modal } from "@frontend/mobile/shared/ui";
 import React from "react";
 import styled from "styled-components";
-import {withTranslation, WithTranslation} from "react-i18next";
-import {i18nRepaymentNoticeModal} from "./i18n/translations";
+import { withTranslation, WithTranslation } from "react-i18next";
+import { i18nRepaymentNoticeModal } from "./i18n/translations";
 
 const Container = styled.div`
     padding: 0 20px;
@@ -15,7 +15,7 @@ type RepaymentNoticeModalProps = {
     setShowRepaymentNoticeModal: React.Dispatch<React.SetStateAction<boolean>>;
     handlePostRepayCreate: any;
     repaymentUseCase: any;
-    balance: number ;
+    balance: number;
 } & WithTranslation;
 
 const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
@@ -23,9 +23,9 @@ const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
         console.log("[repay] RepaymentNoticeModal.value", props.balance);
         props.handlePostRepayCreate();
         props.repaymentUseCase({
-          isExtend: false,
-          isForceApplyAfterRepay: true,
-          repayAmount: props.balance,
+            isExtend: false,
+            isForceApplyAfterRepay: true,
+            repayAmount: props.balance,
         });
         props.setShowRepaymentNoticeModal(false);
     };
@@ -39,13 +39,19 @@ const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
                 content={
                     <Container>
                         <Paragraph>
-                          {props.t("Dear customer, thank you for your trust and prompt repayment.")}
+                            {props.t(
+                                "Dear customer, thank you for your trust and prompt repayment."
+                            )}
                         </Paragraph>
                         <Paragraph>
-                          {props.t("We have received your loan application again, and we will process it as soon as possible.")}
+                            {props.t(
+                                "We have received your loan application again, and we will process it as soon as possible."
+                            )}
                         </Paragraph>
                         <Paragraph>
-                          {props.t("After you have completed the repayment, you can return to APP and check all the loan history on the Loan Record page.")}
+                            {props.t(
+                                "After you have completed the repayment, you can return to APP and check all the loan history on the Loan Record page."
+                            )}
                         </Paragraph>
                     </Container>
                 }
@@ -59,4 +65,6 @@ const RepaymentNoticeModal = (props: RepaymentNoticeModalProps) => {
     );
 };
 
-export default withTranslation(i18nRepaymentNoticeModal.namespace)(RepaymentNoticeModal);
+export default withTranslation(i18nRepaymentNoticeModal.namespace)(
+    RepaymentNoticeModal
+);

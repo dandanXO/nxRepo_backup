@@ -2,10 +2,10 @@ import { Page } from "@frontend/mobile/shared/ui";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useGetLoanRecommendQuery } from "../../../api";
-import {HotSvgIcon} from "./i18n/HotSvgIcon";
-import {environment} from "../../../../environments/environment";
-import {useTranslation} from "react-i18next";
-import {i18nProductAdModalListPage} from "./i18n/translations";
+import { HotSvgIcon } from "./i18n/HotSvgIcon";
+import { environment } from "../../../../environments/environment";
+import { useTranslation } from "react-i18next";
+import { i18nProductAdModalListPage } from "./i18n/translations";
 
 const ProductAdStyled = styled.div`
     display: flex;
@@ -16,13 +16,13 @@ const ProductAdStyled = styled.div`
     .product {
         display: flex;
         margin-bottom: 8px;
-        .icon{
-          position: relative;
+        .icon {
+            position: relative;
         }
-        .hotIcon{
+        .hotIcon {
             position: absolute;
-            top:-30%;
-            left:-30%;
+            top: -30%;
+            left: -30%;
         }
         .logoIcon {
             width: 2.25rem;
@@ -50,56 +50,73 @@ interface ProductAdProps {
     term?: string;
 }
 
-const ProductAd = ({ logo, productName, loanQuota, interestRate, term }: ProductAdProps) => {
-  const {t} = useTranslation(i18nProductAdModalListPage.namespace);
-  return (
-      <ProductAdStyled>
-        <div className="product">
-          <div className="icon">
-            <div className="hotIcon"><HotSvgIcon/></div>
-            <img className="logoIcon" src={logo} alt="" /></div>
-          <div>
-            <div className="productName">{productName ? productName : ""}</div>
-            <div>{environment.currency} {loanQuota ? loanQuota : ""}</div>
-          </div>
-        </div>
-        <div className="productInfo">
-          <div>{t("interest")} : {interestRate ? interestRate : ""}</div>
-          <div>{t("terms")} : {term ? term : ""}</div>
-        </div>
-      </ProductAdStyled>
-    )
-}
-
+const ProductAd = ({
+    logo,
+    productName,
+    loanQuota,
+    interestRate,
+    term,
+}: ProductAdProps) => {
+    const { t } = useTranslation(i18nProductAdModalListPage.namespace);
+    return (
+        <ProductAdStyled>
+            <div className="product">
+                <div className="icon">
+                    <div className="hotIcon">
+                        <HotSvgIcon />
+                    </div>
+                    <img className="logoIcon" src={logo} alt="" />
+                </div>
+                <div>
+                    <div className="productName">
+                        {productName ? productName : ""}
+                    </div>
+                    <div>
+                        {environment.currency} {loanQuota ? loanQuota : ""}
+                    </div>
+                </div>
+            </div>
+            <div className="productInfo">
+                <div>
+                    {t("interest")} : {interestRate ? interestRate : ""}
+                </div>
+                <div>
+                    {t("terms")} : {term ? term : ""}
+                </div>
+            </div>
+        </ProductAdStyled>
+    );
+};
 
 const ProductAdModalListPage = () => {
-    const { currentData, isLoading, isFetching } = useGetLoanRecommendQuery({ count: '' });
-    useEffect(()=>{
-        if(!isLoading && currentData && currentData?.length>0){
+    const { currentData, isLoading, isFetching } = useGetLoanRecommendQuery({
+        count: "",
+    });
+    useEffect(() => {
+        if (!isLoading && currentData && currentData?.length > 0) {
             // @ts-ignore
             window["SyncTask"] &&
-            // @ts-ignore
-            window["SyncTask"]["recommendBannerIsNotEmpty"] &&
-            // @ts-ignore
-            window["SyncTask"]["recommendBannerIsNotEmpty"]();
+                // @ts-ignore
+                window["SyncTask"]["recommendBannerIsNotEmpty"] &&
+                // @ts-ignore
+                window["SyncTask"]["recommendBannerIsNotEmpty"]();
         }
-    },[isLoading]);
+    }, [isLoading]);
     return (
         <Page>
-            {!isLoading && currentData?.map((i) => (
-                <ProductAd
-                    key={i.productId}
-                    logo={i.logoUrl}
-                    productName={i.productName}
-                    loanQuota={i.loanQuota}
-                    interestRate={i.interestRate}
-                    term={i.term}
-                />
-            ))}
+            {!isLoading &&
+                currentData?.map((i) => (
+                    <ProductAd
+                        key={i.productId}
+                        logo={i.logoUrl}
+                        productName={i.productName}
+                        loanQuota={i.loanQuota}
+                        interestRate={i.interestRate}
+                        term={i.term}
+                    />
+                ))}
         </Page>
     );
 };
 
 export default ProductAdModalListPage;
-
-

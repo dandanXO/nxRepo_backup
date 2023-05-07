@@ -1,4 +1,4 @@
-import {BannerResponse} from "./BannerResponse";
+import { BannerResponse } from './BannerResponse';
 
 export type GetOpenIndexResponse = {
   banners: BannerResponse[];
@@ -26,4 +26,4 @@ export type GetOpenIndexResponse = {
 
   popupUrl: string;
   // 提醒弹跳H5页面or图片
-}
+};

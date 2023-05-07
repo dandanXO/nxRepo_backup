@@ -12,9 +12,9 @@ import {
     Button,
     ListItem,
 } from "@frontend/mobile/shared/ui";
-import {environment} from "../../../../environments/environment";
-import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nExtendModal} from "./i18n/translations";
+import { environment } from "../../../../environments/environment";
+import { WithTranslation, withTranslation } from "react-i18next";
+import { i18nExtendModal } from "./i18n/translations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -47,7 +47,11 @@ const ModalContentStyled = styled.div`
 type PureExtendModalProps = {
     repayConfirmDetail?: GetLoanDetailRepayConfirmDetail;
     setShowExtendModal: React.Dispatch<React.SetStateAction<boolean>>;
-    handlePostRepayCreate: (isExtend: boolean, isForceApplyAfterRepay: boolean, repayAmount: number) => void;
+    handlePostRepayCreate: (
+        isExtend: boolean,
+        isForceApplyAfterRepay: boolean,
+        repayAmount: number
+    ) => void;
 } & WithTranslation;
 
 export const PureExtendModal = (props: PureExtendModalProps) => {
@@ -137,14 +141,14 @@ export const PureExtendModal = (props: PureExtendModalProps) => {
                                     className={"cancelButton"}
                                     styleType="secondary"
                                 >
-                                  {t("Cancel")}
+                                    {t("Cancel")}
                                 </Button>
                                 <Button
                                     onClick={handleConfirm}
                                     className={"confirmButton"}
                                     styleType="primary"
                                 >
-                                  {t("Confirm")}
+                                    {t("Confirm")}
                                 </Button>
                             </div>
                         </ModalContentStyled>

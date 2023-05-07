@@ -1,7 +1,6 @@
-import {createAction} from "@reduxjs/toolkit";
+import { createAction } from '@reduxjs/toolkit';
 
-export const userLoginAction = createAction("userLogin");
-export function *userLoginSaga() {
+export const userLoginAction = createAction('userLogin');
+export function* userLoginSaga() {
   //
 }
-

@@ -11,8 +11,8 @@ export type GetUserInfoServiceResponse = {
   organic: boolean;
   // 是否为自然流量用户
 
-  status: 0 | 1 | 2 | 3,
+  status: 0 | 1 | 2 | 3;
   // 用戶狀態 0: 未認證, 1: 通過認證, 2: 審核中, 3: 審核拒絕
 
   userName: string;
-}
+};

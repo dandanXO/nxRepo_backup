@@ -1,5 +1,3 @@
 export const MainCardModal = () => {
-  return (
-    <div>MainCardModal</div>
-  )
-}
+  return <div>MainCardModal</div>;
+};

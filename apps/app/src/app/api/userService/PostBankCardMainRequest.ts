@@ -1,3 +1,3 @@
 export interface PostBankCardMainRequest {
-    bankId: number;
+  bankId: number;
 }

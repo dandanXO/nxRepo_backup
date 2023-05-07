@@ -1,7 +1,12 @@
-import {ActivityBanner} from "../service/types";
-import {AdTemplate3Card, IAdTemplate3Data} from "../../components/AdTemplate3";
+import { ActivityBanner } from "../service/types";
+import {
+    AdTemplate3Card,
+    IAdTemplate3Data,
+} from "../../components/AdTemplate3";
 
-export const getTemplate3AdTemplate1Data = (ads?: ActivityBanner<AdTemplate3Card, AdTemplate3Card>[]): IAdTemplate3Data | null => {
+export const getTemplate3AdTemplate1Data = (
+    ads?: ActivityBanner<AdTemplate3Card, AdTemplate3Card>[]
+): IAdTemplate3Data | null => {
     if (!ads) return null;
     return {
         brandCard: {
@@ -19,6 +24,6 @@ export const getTemplate3AdTemplate1Data = (ads?: ActivityBanner<AdTemplate3Card
             action: ads[1].action,
             actionName: ads[1].payload.actionName,
             actionUrl: ads[1].actionUrl,
-        }
-    }
-}
+        },
+    };
+};

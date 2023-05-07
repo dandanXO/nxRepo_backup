@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { GetLoanDetailRecommendProducts } from "../../../api/getLoanDetail";
 import { Overlay, Title, Divider, Button } from "@frontend/mobile/shared/ui";
-import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nSubmitOrderModal} from "./i18n/translations";
+import { WithTranslation, withTranslation } from "react-i18next";
+import { i18nSubmitOrderModal } from "./i18n/translations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -41,26 +41,28 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
     // const {startRequest, isRequestPending, endRequest} = useLockRequest("handleLoanSubmitOrder");
 
     const handleConfirm = () => {
-      // if(isRequestPending("handleLoanSubmitOrder")) {
-      //   return
-      // } else {
-      //   startRequest("handleLoanSubmitOrder")
-      // }
-        props.handleLoanSubmitOrder(
-            props.productDetails && props.productDetails.productId
-                ? props.productDetails.productId
-                : 0
-        ).then(()=> {
-          // @ts-ignore
-          window["SyncTask"] &&
-          // @ts-ignore
-          window["SyncTask"]["doExecuteSyncContactsTask"] &&
-          // @ts-ignore
-          window["SyncTask"]["doExecuteSyncContactsTask"]();
-
-        }).finally(() => {
-          // endRequest("handleLoanSubmitOrder");
-        })
+        // if(isRequestPending("handleLoanSubmitOrder")) {
+        //   return
+        // } else {
+        //   startRequest("handleLoanSubmitOrder")
+        // }
+        props
+            .handleLoanSubmitOrder(
+                props.productDetails && props.productDetails.productId
+                    ? props.productDetails.productId
+                    : 0
+            )
+            .then(() => {
+                // @ts-ignore
+                window["SyncTask"] &&
+                    // @ts-ignore
+                    window["SyncTask"]["doExecuteSyncContactsTask"] &&
+                    // @ts-ignore
+                    window["SyncTask"]["doExecuteSyncContactsTask"]();
+            })
+            .finally(() => {
+                // endRequest("handleLoanSubmitOrder");
+            });
     };
     return (
         <div>
@@ -77,10 +79,14 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
                                 {props?.productDetails?.productName ?? ""}
                             </div>
                             <Paragraph>
-                              {props.t("Are you sure you want to submit this loan application?")}
+                                {props.t(
+                                    "Are you sure you want to submit this loan application?"
+                                )}
                             </Paragraph>
                             <Paragraph>
-                              {props.t("The loan amount you can borrow based on the application information you submitted")}
+                                {props.t(
+                                    "The loan amount you can borrow based on the application information you submitted"
+                                )}
                             </Paragraph>
                             <div className={"sectionButtons"}>
                                 <Button
@@ -90,14 +96,14 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
                                     className={"cancelButton"}
                                     styleType="secondary"
                                 >
-                                  {props.t("Cancel")}
+                                    {props.t("Cancel")}
                                 </Button>
                                 <Button
                                     onClick={handleConfirm}
                                     className={"confirmButton"}
                                     styleType="primary"
                                 >
-                                  {props.t("Confirm")}
+                                    {props.t("Confirm")}
                                 </Button>
                             </div>
                         </ModalContentStyled>
@@ -109,4 +115,6 @@ export const PureSubmitOrderModal = (props: PureSubmitOrderModalProps) => {
     );
 };
 
-export default withTranslation(i18nSubmitOrderModal.namespace)(PureSubmitOrderModal);
+export default withTranslation(i18nSubmitOrderModal.namespace)(
+    PureSubmitOrderModal
+);

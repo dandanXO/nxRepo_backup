@@ -1,17 +1,19 @@
-import {AppThemeProvider, IThemeConfig} from "@frontend/mobile/shared/ui";
-import {AppRouter} from "./presentation/router";
-import {Provider} from "react-redux";
-import {appStore, RootState} from "./usecaseFlow/reduxStore";
-import {history} from "./usecaseFlow/reduxStore/index"
-import {ReduxRouter, ReduxRouterSelector} from "@lagunovsky/redux-react-router";
-import {BrowserRouter} from "react-router-dom";
-import React from "react";
+import { AppThemeProvider, IThemeConfig } from '@frontend/mobile/shared/ui';
+import { AppRouter } from './presentation/router';
+import { Provider } from 'react-redux';
+import { appStore, RootState } from './usecaseFlow/reduxStore';
+import { history } from './usecaseFlow/reduxStore/index';
+import {
+  ReduxRouter,
+  ReduxRouterSelector,
+} from '@lagunovsky/redux-react-router';
+import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
 
-const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator
+const routerSelector: ReduxRouterSelector<RootState> = (state) =>
+  state.navigator;
 
-interface AppProps {
-
-}
+interface AppProps {}
 
 export function App(props: AppProps) {
   return (
@@ -19,8 +21,8 @@ export function App(props: AppProps) {
       <AppThemeProvider theme={window.theme}>
         <Provider store={appStore}>
           <ReduxRouter history={history} routerSelector={routerSelector}>
-            <BrowserRouter basename={"/"}>
-              <AppRouter/>
+            <BrowserRouter basename={'/'}>
+              <AppRouter />
             </BrowserRouter>
             {/*<RouterProvider router={appRouter as any} fallbackElement={<div>Loading...</div>} />*/}
           </ReduxRouter>

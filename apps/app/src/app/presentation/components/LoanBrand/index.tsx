@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import { flexCreator } from "@frontend/mobile/shared/ui";
-import {environment} from "../../../../environments/environment";
+import { flexCreator } from '@frontend/mobile/shared/ui';
+import { environment } from '../../../../environments/environment';
 
 const LoanBrandStyled = styled.div<propsStyles>`
   ${flexCreator('row', 'flex-start', 'center')};
@@ -24,7 +24,7 @@ const LoanBrandStyled = styled.div<propsStyles>`
   }
   .balance {
     font-size: ${({ theme }) => theme.fontSize[18]};
-    color: ${({theme}) => theme.card.color}
+    color: ${({ theme }) => theme.card.color};
   }
 `;
 
@@ -40,15 +40,25 @@ interface propsStyles {
 }
 
 const LoanBrand = (props: LoanBrandProps) => {
-  const { iconUrl, productName, sizeType, balance, showCurrency = false } = props;
+  const {
+    iconUrl,
+    productName,
+    sizeType,
+    balance,
+    showCurrency = false,
+  } = props;
   return (
     <LoanBrandStyled className={'loanBrand'} sizeType={sizeType}>
       <div>
         <img src={iconUrl} alt="logo" />
       </div>
-      <div className={"loanBrandInfo"}>
-        <div className={"product"}>{productName}</div>
-        {showCurrency && (<div className={'balance'}>{environment.currency} {balance}</div>)}
+      <div className={'loanBrandInfo'}>
+        <div className={'product'}>{productName}</div>
+        {showCurrency && (
+          <div className={'balance'}>
+            {environment.currency} {balance}
+          </div>
+        )}
       </div>
     </LoanBrandStyled>
   );

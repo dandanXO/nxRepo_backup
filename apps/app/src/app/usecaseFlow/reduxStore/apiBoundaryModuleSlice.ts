@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type InitialStateType = {
   show: boolean;
@@ -7,17 +7,17 @@ type InitialStateType = {
 };
 const initialState: InitialStateType = {
   show: false,
-  title: "",
-  message: "",
-}
+  title: '',
+  message: '',
+};
 export const APIBoundaryModuleSlice = createSlice({
-  name: "APIBoundaryModule",
+  name: 'APIBoundaryModule',
   initialState,
   reducers: {
     update: (state, action: PayloadAction<InitialStateType>) => {
       state.show = action.payload.show;
       state.title = action.payload.title;
       state.message = action.payload.message;
-    }
-  }
+    },
+  },
 });

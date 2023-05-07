@@ -1,6 +1,6 @@
-import React from "react";
-import {WithTranslation} from "react-i18next";
-import {InputValue} from "@frontend/mobile/shared/ui";
+import React from 'react';
+import { WithTranslation } from 'react-i18next';
+import { InputValue } from '@frontend/mobile/shared/ui';
 
 export type I18UploadPaymentReceiptPageProps = {
   // NOTE: UTR

@@ -1,10 +1,9 @@
-import {SuccessICON} from "./i18n/SuccessICON";
-import {Button, Page} from "@frontend/mobile/shared/ui";
+import { SuccessICON } from "./i18n/SuccessICON";
+import { Button, Page } from "@frontend/mobile/shared/ui";
 import UploadedPaymentReceiptPage from "./index";
 import styled from "styled-components";
-import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nUploadedPaymentReceiptPage} from "./i18n/translations";
-
+import { WithTranslation, withTranslation } from "react-i18next";
+import { i18nUploadedPaymentReceiptPage } from "./i18n/translations";
 
 const CustomPage = styled(Page)`
     display: flex;
@@ -38,26 +37,28 @@ const ControlSection = styled.div`
 `;
 
 type UploadedPaymentReceiptPage = {
-  navigateToLoanDetails: () => void;
+    navigateToLoanDetails: () => void;
 } & WithTranslation;
 
-export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymentReceiptPage.namespace)((
-  props: UploadedPaymentReceiptPage
-) => {
-  return (
-    <CustomPage>
-      <Content>
-        <SuccessICON/>
-        <Title>{props.t("Upload payment receipt")}</Title>
-        <Description>
-          {props.t("Thank you. Your receipt has been uploaded successfully.")}
-        </Description>
-      </Content>
-      <ControlSection>
-        <Button onClick={() => props.navigateToLoanDetails()}>
-          {props.t("Done")}
-        </Button>
-      </ControlSection>
-    </CustomPage>
-  );
-})
+export const PureUploadedPaymentReceiptPage = withTranslation(
+    i18nUploadedPaymentReceiptPage.namespace
+)((props: UploadedPaymentReceiptPage) => {
+    return (
+        <CustomPage>
+            <Content>
+                <SuccessICON />
+                <Title>{props.t("Upload payment receipt")}</Title>
+                <Description>
+                    {props.t(
+                        "Thank you. Your receipt has been uploaded successfully."
+                    )}
+                </Description>
+            </Content>
+            <ControlSection>
+                <Button onClick={() => props.navigateToLoanDetails()}>
+                    {props.t("Done")}
+                </Button>
+            </ControlSection>
+        </CustomPage>
+    );
+});

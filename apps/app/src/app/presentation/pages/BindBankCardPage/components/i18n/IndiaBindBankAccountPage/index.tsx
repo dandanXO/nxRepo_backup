@@ -1,87 +1,92 @@
-import React from "react";
-import { IUseBindBankAccountPage } from "../../../types/IUseBindBankAccountPage";
-import { CustomPage } from "../../../../../components/layouts/CustomPage";
-import { BankAccountForm } from "./BankAccountForm";
-import { Navigation } from "../../../../../components/layouts/Navigation";
-import { useNavigate } from "react-router";
+import React from 'react';
+import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage';
+import { CustomPage } from '../../../../../components/layouts/CustomPage';
+import { BankAccountForm } from './BankAccountForm';
+import { Navigation } from '../../../../../components/layouts/Navigation';
+import { useNavigate } from 'react-router';
 
-import { useBindBankAccountForm } from "../../../hooks/common/useBindBankAccountForm";
-import { useFinishedBindBankAccountForm } from "../../../hooks/common/useFinishedBindBankAccountForm";
-import { useIndiaBankAccountForm } from "../../../hooks/i18n/india/useIndiaBankAccountForm";
-import {isInAndroid} from "../../../../../../modules/window/isInAndroid";
-import {Page} from '../../../../../components/layouts/Page'
+import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
+import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';
+import { useIndiaBankAccountForm } from '../../../hooks/i18n/india/useIndiaBankAccountForm';
+import { isInAndroid } from '../../../../../../modules/window/isInAndroid';
+import { Page } from '../../../../../components/layouts/Page';
 export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
-    const navigate = useNavigate();
-    const {
-        bankcardNoData,
-        onAccountNumberChange,
-        onAccountNumberBlur,
-        confirmedBankcardNoData,
-        onConfirmAccountNumberChange,
-        onConfirmAccountNumberBlur,
-        validate: validateCommonForm,
-    } = useBindBankAccountForm();
+  const navigate = useNavigate();
+  const {
+    bankcardNoData,
+    onAccountNumberChange,
+    onAccountNumberBlur,
+    confirmedBankcardNoData,
+    onConfirmAccountNumberChange,
+    onConfirmAccountNumberBlur,
+    validate: validateCommonForm,
+  } = useBindBankAccountForm();
 
-    const {
-        // NOTE: form
-        validate: validateIndiaForm,
-        // NOTE: IFSC
-        ifscData,
-        onIFSCChange,
-        onIFSCBlur,
-        // NOTE: UPI
-        upiData,
-        onUPIIDChange,
-    } = useIndiaBankAccountForm();
+  const {
+    // NOTE: form
+    validate: validateIndiaForm,
+    // NOTE: IFSC
+    ifscData,
+    onIFSCChange,
+    onIFSCBlur,
+    // NOTE: UPI
+    upiData,
+    onUPIIDChange,
+  } = useIndiaBankAccountForm();
 
-    const {
-        isFormPending,
-        confirm,
-    } = useFinishedBindBankAccountForm({
-        // NOTICE: Common
-        bankcardNoData,
+  const { isFormPending, confirm } = useFinishedBindBankAccountForm({
+    // NOTICE: Common
+    bankcardNoData,
 
-        // NOTICE: India
-        isLoadingPostBankBindSave: props.isLoadingPostBankBindSave || false,
-        postBankBindSave: props.postBankBindSave,
-        ifscData,
-        upiData,
+    // NOTICE: India
+    isLoadingPostBankBindSave: props.isLoadingPostBankBindSave || false,
+    postBankBindSave: props.postBankBindSave,
+    ifscData,
+    upiData,
 
-        // NOTICE: Pakistan
-        // postBankBindSaveToPK: props.postBankBindSaveToPK,
-        // NOTE: 取得電子錢包列表
-        // bindCardDropListData: props.bindCardDropListData,
-        // NOTE: 設定電子錢包列表
-        // bankAccountValue: props.bankAccountValue,
-    });
+    // NOTICE: Pakistan
+    // postBankBindSaveToPK: props.postBankBindSaveToPK,
+    // NOTE: 取得電子錢包列表
+    // bindCardDropListData: props.bindCardDropListData,
+    // NOTE: 設定電子錢包列表
+    // bankAccountValue: props.bankAccountValue,
+  });
 
-    return (
-        <>
-          {/*NOTICE: 這邊的用意是？*/}
-          {!isInAndroid() && <Navigation title={"Bank Card"} back={() => { navigate(-1) }} />}
+  return (
+    <>
+      {/*NOTICE: 這邊的用意是？*/}
+      {!isInAndroid() && (
+        <Navigation
+          title={'Bank Card'}
+          back={() => {
+            navigate(-1);
+          }}
+        />
+      )}
 
-          <Page className="flex">
-              <BankAccountForm cardholderName={props.cardholderName}
-                  ifscData={ifscData}
-                  onIFSCChange={onIFSCChange}
-                  onIFSCBlur={onIFSCBlur}
-                  bankcardNoData={bankcardNoData}
-                  onAccountNumberChange={onAccountNumberChange}
-                  onAccountNumberBlur={onAccountNumberBlur}
-                  confirmedBankcardNoData={confirmedBankcardNoData}
-                  onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-                  onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
-                  upiData={upiData} onUPIIDChange={onUPIIDChange}
-                  isFormPending={isFormPending || false}
-                  confirm={() => {
-                    // NOTE: validate and display errors
-                    const validation = validateCommonForm()
-                    const validation2 = validateIndiaForm();
-                    if(validation && validation2) confirm();
-                  }}
-              />
-          </Page>
-        </>
-
-    );
-}
+      <Page className="flex">
+        <BankAccountForm
+          cardholderName={props.cardholderName}
+          ifscData={ifscData}
+          onIFSCChange={onIFSCChange}
+          onIFSCBlur={onIFSCBlur}
+          bankcardNoData={bankcardNoData}
+          onAccountNumberChange={onAccountNumberChange}
+          onAccountNumberBlur={onAccountNumberBlur}
+          confirmedBankcardNoData={confirmedBankcardNoData}
+          onConfirmAccountNumberChange={onConfirmAccountNumberChange}
+          onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
+          upiData={upiData}
+          onUPIIDChange={onUPIIDChange}
+          isFormPending={isFormPending || false}
+          confirm={() => {
+            // NOTE: validate and display errors
+            const validation = validateCommonForm();
+            const validation2 = validateIndiaForm();
+            if (validation && validation2) confirm();
+          }}
+        />
+      </Page>
+    </>
+  );
+};

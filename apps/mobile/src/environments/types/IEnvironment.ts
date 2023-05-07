@@ -1,7 +1,6 @@
-import {ICountry} from "./ICountry";
+import { ICountry } from "./ICountry";
 
 export type IEnvironment = ICountry & {
-  // NOTE:
-  production: boolean;
-}
-
+    // NOTE:
+    production: boolean;
+};

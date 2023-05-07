@@ -1,4 +1,4 @@
-import {GetRepayTypesPayPlats} from "./GetRepayTypesPayPlats";
+import { GetRepayTypesPayPlats } from './GetRepayTypesPayPlats';
 
 export interface GetRepayTypesResponseObject {
   /** 支付平台 */

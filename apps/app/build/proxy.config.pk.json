@@ -1,7 +1,7 @@
 {
-    "/api/*": {
-        "target": "https://app.pk-api-dev.com",
-        "secure": true,
-        "changeOrigin": true
-    }
+  "/api/*": {
+    "target": "https://app.pk-api-dev.com",
+    "secure": true,
+    "changeOrigin": true
+  }
 }

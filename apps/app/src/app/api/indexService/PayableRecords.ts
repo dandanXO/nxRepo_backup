@@ -19,4 +19,4 @@ export type PayableRecords = {
 
   repayUrl: string;
   // 还款链结
-}
+};

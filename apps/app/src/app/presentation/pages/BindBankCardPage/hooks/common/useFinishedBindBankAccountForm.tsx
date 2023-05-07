@@ -1,15 +1,13 @@
-import {useCallback, useState} from "react";
-import {InputValue, Modal} from "@frontend/mobile/shared/ui";
-import {useTranslation} from "react-i18next";
-import {i18nBankBindAccountPage} from "../../translations";
-import * as Sentry from "@sentry/react";
-import {GetBindCardDropListResponse} from "../../../../../api/rtk/old/GetBindCardDropList";
-import {CustomAxiosError} from "../../../../../api/rtk/axiosBaseQuery";
-import {AppFlag} from "../../../../../../environments/flag";
+import { useCallback, useState } from 'react';
+import { InputValue, Modal } from '@frontend/mobile/shared/ui';
+import { useTranslation } from 'react-i18next';
+import { i18nBankBindAccountPage } from '../../translations';
+import * as Sentry from '@sentry/react';
+import { GetBindCardDropListResponse } from '../../../../../api/rtk/old/GetBindCardDropList';
+import { CustomAxiosError } from '../../../../../api/rtk/axiosBaseQuery';
+import { AppFlag } from '../../../../../../environments/flag';
 
-
-
-type IUseFinishedBindBankAccountPage =  {
+type IUseFinishedBindBankAccountPage = {
   // NOTICE: Common
   bankcardNoData: InputValue<string>;
 
@@ -27,36 +25,40 @@ type IUseFinishedBindBankAccountPage =  {
   bindCardDropListData?: GetBindCardDropListResponse;
   // NOTE: 設定電子錢包列表
   bankAccountValue?: any;
-}
+};
 
-export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
-  const {t} = useTranslation(i18nBankBindAccountPage.namespace);
+export const useFinishedBindBankAccountForm = (
+  props: IUseFinishedBindBankAccountPage
+) => {
+  const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   const navigateToAPP = useCallback(() => {
-    window.location.href = "innerh5://127.0.0.1";
+    window.location.href = 'innerh5://127.0.0.1';
   }, []);
 
   const confirm = useCallback(() => {
-    if(props.isLoadingPostBankBindSaveToPK) return;
+    if (props.isLoadingPostBankBindSaveToPK) return;
 
     // NOTE: FormRequest
     let request;
 
     // NOTICE: India
-    let requestName = ""
+    let requestName = '';
     if (props.postBankBindSave) {
-      requestName = "postBankBindSave"
-      request = props
-        .postBankBindSave({
-          bankAccount: props.bankcardNoData.data,
-          ifscCode: props.ifscData && props.ifscData.data,
-          upiId: props.upiData && props.upiData.data,
-        })
+      requestName = 'postBankBindSave';
+      request = props.postBankBindSave({
+        bankAccount: props.bankcardNoData.data,
+        ifscCode: props.ifscData && props.ifscData.data,
+        upiId: props.upiData && props.upiData.data,
+      });
     } else if (props.postBankBindSaveToPK) {
-      requestName = "postBankBindSaveToPK"
+      requestName = 'postBankBindSaveToPK';
       // NOTICE: Pakistan
-      let targetBankAccount
-      if(props.bindCardDropListData && props.bindCardDropListData.availableBanks) {
+      let targetBankAccount;
+      if (
+        props.bindCardDropListData &&
+        props.bindCardDropListData.availableBanks
+      ) {
         // NOTICE: bankAccountValue 可能為 0
         if(typeof props.bankAccountValue?.value === "number") {
           targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue.value];
@@ -65,27 +67,27 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
       const requestBody = {
         bankAccNr: props.bankcardNoData.data,
         mobileWallet: false,
-        mobileWalletAccount: "",
-        walletVendor: "",
+        mobileWalletAccount: '',
+        walletVendor: '',
         // FIXME:
-        bankName: targetBankAccount && targetBankAccount?.bankName || "",
-        bankCode: targetBankAccount && targetBankAccount?.bankCode || "",
-        iban: props.iBanData?.data || "",
-      }
-      console.log("requestBody", requestBody);
-      request = props
-        .postBankBindSaveToPK(requestBody)
+        bankName: (targetBankAccount && targetBankAccount?.bankName) || '',
+        bankCode: (targetBankAccount && targetBankAccount?.bankCode) || '',
+        iban: props.iBanData?.data || '',
+      };
+      console.log('requestBody', requestBody);
+      request = props.postBankBindSaveToPK(requestBody);
     }
 
-    request.unwrap()
+    request
+      .unwrap()
       .then((data: any) => {
         // Notice: bind account successfully
         Modal.alert({
           show: true,
           mask: true,
-          title: t("modal.Notice", {ns: "common"}) as string,
-          content: t("modal.Success", {ns: "common"}) as string,
-          confirmText: t("modal.Confirm", {ns: "common"}) as string,
+          title: t('modal.Notice', { ns: 'common' }) as string,
+          content: t('modal.Success', { ns: 'common' }) as string,
+          confirmText: t('modal.Confirm', { ns: 'common' }) as string,
           maskClosable: true,
           enableClose: false,
           enableIcon: false,
@@ -102,9 +104,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         // if(AppFlag.enableSentry) {
         //   Sentry.captureException(error);
         // }
-      })
-
-
+      });
   }, [
     props.postBankBindSave,
     props.postBankBindSaveToPK,
@@ -119,8 +119,9 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
   ]);
 
   return {
-    isFormPending: props.postBankBindSave ? props.isLoadingPostBankBindSave : props.isLoadingPostBankBindSaveToPK,
+    isFormPending: props.postBankBindSave
+      ? props.isLoadingPostBankBindSave
+      : props.isLoadingPostBankBindSaveToPK,
     confirm,
-  }
-
-}
+  };
+};

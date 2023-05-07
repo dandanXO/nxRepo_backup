@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {BankAccount} from "../../api/userService/BankAccount";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { BankAccount } from '../../api/userService/BankAccount';
 
 export type InitialStateType = {
   authorizationModal: {
@@ -17,8 +17,8 @@ export type InitialStateType = {
   };
   QRSuccessModal: {
     show: boolean;
-  },
-}
+  };
+};
 
 const initialState: InitialStateType = {
   authorizationModal: {
@@ -37,23 +37,29 @@ const initialState: InitialStateType = {
   QRSuccessModal: {
     show: false,
   },
-}
+};
 
 export const modalSlice = createSlice({
-  name: "model",
+  name: 'model',
   initialState,
   reducers: {
-    updateAuthorizationModal: (state, action: PayloadAction<InitialStateType["authorizationModal"]>) => {
+    updateAuthorizationModal: (
+      state,
+      action: PayloadAction<InitialStateType['authorizationModal']>
+    ) => {
       state.authorizationModal.show = action.payload.show;
       state.authorizationModal.confirm = action.payload.confirm;
     },
-    updateQuickRepaymentSummaryModal: (state, action: PayloadAction<InitialStateType["quickRepaymentSummaryModal"]>) => {
-
+    updateQuickRepaymentSummaryModal: (
+      state,
+      action: PayloadAction<InitialStateType['quickRepaymentSummaryModal']>
+    ) => {
       state.quickRepaymentSummaryModal.show = action.payload.show;
       state.quickRepaymentSummaryModal.confirm = action.payload.confirm;
 
-      if(action.payload.bankcardList) {
-        state.quickRepaymentSummaryModal.bankcardList = action.payload.bankcardList;
+      if (action.payload.bankcardList) {
+        state.quickRepaymentSummaryModal.bankcardList =
+          action.payload.bankcardList;
       }
       // NOTICE: 無法放在一起，會破壞監聽 confirm | cancel 的 saga
       // if(typeof action.payload.selectedBankcardId !== "undefined") {
@@ -61,16 +67,26 @@ export const modalSlice = createSlice({
       // }
     },
     // NOTICE: refactor me
-    updateQuickRepaymentSummaryModalSelectedID: (state, action: PayloadAction<{
-      selectedBankcardId?: number;
-    }>) => {
-      state.quickRepaymentSummaryModal.selectedBankcardId = action.payload.selectedBankcardId;
+    updateQuickRepaymentSummaryModalSelectedID: (
+      state,
+      action: PayloadAction<{
+        selectedBankcardId?: number;
+      }>
+    ) => {
+      state.quickRepaymentSummaryModal.selectedBankcardId =
+        action.payload.selectedBankcardId;
     },
-    updateLoanAgreementModal: (state, action: PayloadAction<InitialStateType["loanAgreementModal"]>) => {
+    updateLoanAgreementModal: (
+      state,
+      action: PayloadAction<InitialStateType['loanAgreementModal']>
+    ) => {
       state.loanAgreementModal.show = action.payload.show;
     },
-    updateQRSuccessModal: (state, action: PayloadAction<InitialStateType["QRSuccessModal"]>) => {
+    updateQRSuccessModal: (
+      state,
+      action: PayloadAction<InitialStateType['QRSuccessModal']>
+    ) => {
       state.QRSuccessModal.show = action.payload.show;
     },
-  }
-})
+  },
+});

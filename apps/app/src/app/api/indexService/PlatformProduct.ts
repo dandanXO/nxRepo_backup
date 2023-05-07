@@ -1,5 +1,5 @@
 export type PlatformProduct = {
-  logoUrl: string
+  logoUrl: string;
   // Logo URL
 
   max: number;
@@ -20,4 +20,4 @@ export type PlatformProduct = {
 
   terms: number;
   // 借款周期 ex: 2023-03-01 terms: 7d => 2023-03-07 23:59:59 (time before expired) 到期日为 2023-03-07
-}
+};

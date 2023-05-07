@@ -1,4 +1,4 @@
-import {CameraSvgIconProps} from "../CameraSvgIconProps";
+import { CameraSvgIconProps } from "../CameraSvgIconProps";
 
 const IndiaCameraSvgIcon = ({ fill = "#f58b10" }: CameraSvgIconProps) => {
     return (

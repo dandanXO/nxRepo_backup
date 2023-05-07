@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import React from "react";
-import {GetLoanDetailResponse} from "../../../api/getLoanDetail";
-import {AmountPaidIcon, Button, ListItem, Tag,} from "@frontend/mobile/shared/ui";
-import {environment} from "../../../../environments/environment";
-import {useTranslation} from "react-i18next";
-import {i18nComponents} from "../i18n/translations";
+import { GetLoanDetailResponse } from "../../../api/getLoanDetail";
+import {
+    AmountPaidIcon,
+    Button,
+    ListItem,
+    Tag,
+} from "@frontend/mobile/shared/ui";
+import { environment } from "../../../../environments/environment";
+import { useTranslation } from "react-i18next";
+import { i18nComponents } from "../i18n/translations";
 import LoanBrand from "../LoanBrand";
 import Card from "../Card";
 
@@ -48,19 +53,18 @@ const LoanInfoStyled = styled.div`
     }
 
     .payButtons {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 14px;
-      width: 100%;
-      .extendButton {
-        flex: 1 3;
-        margin-right: 12px;
-      }
-      .repayButton {
-        flex: 3 1;
-      }
+        display: flex;
+        justify-content: space-between;
+        padding: 0 14px;
+        width: 100%;
+        .extendButton {
+            flex: 1 3;
+            margin-right: 12px;
+        }
+        .repayButton {
+            flex: 3 1;
+        }
     }
-
 `;
 
 type LoanInfoProps = Pick<
@@ -79,8 +83,8 @@ type LoanInfoProps = Pick<
     setShowAmountPaidModal: React.Dispatch<React.SetStateAction<boolean>>;
     navigateToUploadPaymentReceiptPage: () => void;
 } & {
-  setShowExtendModal?: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowRepaymentModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowExtendModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowRepaymentModal?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const LoanInfo = (props: LoanInfoProps) => {
@@ -100,7 +104,7 @@ const LoanInfo = (props: LoanInfoProps) => {
         extendable,
     } = props;
 
-    const {t} = useTranslation(i18nComponents.namespace);
+    const { t } = useTranslation(i18nComponents.namespace);
 
     return (
         <LoanInfoStyled>
@@ -112,21 +116,22 @@ const LoanInfo = (props: LoanInfoProps) => {
 
             <div className="totalTitle">{t("Total Due")}</div>
 
-            <div className="totalText">{environment.currency} {totalDueAmount}</div>
+            <div className="totalText">
+                {environment.currency} {totalDueAmount}
+            </div>
 
             {status === "OVERDUE" && (
                 <div className={"errorText"}>
-                    {t("Your payment is now N days overdue.We kindly request that you immediately satisfy the balance in order to maintain a good loan relationship without affecting your loan credit.")}
+                    {t(
+                        "Your payment is now N days overdue.We kindly request that you immediately satisfy the balance in order to maintain a good loan relationship without affecting your loan credit."
+                    )}
                 </div>
             )}
 
             <Card isHot={false}>
                 <div className={"loanInfo-Card-Title"}>{t("General")}</div>
                 <div className={"loanInfo-Card-list"}>
-                    <ListItem
-                      title={t("No.") as string}
-                      text={orderNo || ""}
-                    />
+                    <ListItem title={t("No.") as string} text={orderNo || ""} />
                     <ListItem
                         title={t("State") as string}
                         text={
@@ -150,10 +155,11 @@ const LoanInfo = (props: LoanInfoProps) => {
                     />
 
                     {status !== "PAY_OFF" && (
-                        <ListItem title={t("Balance") as string} text={`${environment.currency} ${balance}`} />
+                        <ListItem
+                            title={t("Balance") as string}
+                            text={`${environment.currency} ${balance}`}
+                        />
                     )}
-
-
                 </div>
 
                 <React.Fragment>
@@ -169,29 +175,29 @@ const LoanInfo = (props: LoanInfoProps) => {
                     )}
                 </React.Fragment>
 
-              <div className={"payButtons"}>
-                {
-                  extendable !== undefined && extendable && (
+                <div className={"payButtons"}>
+                    {extendable !== undefined && extendable && (
+                        <Button
+                            onClick={() =>
+                                setShowExtendModal && setShowExtendModal(true)
+                            }
+                            className={"extendButton"}
+                            styleType="secondary"
+                        >
+                            {t("Extend")}
+                        </Button>
+                    )}
                     <Button
-                      onClick={() => setShowExtendModal && setShowExtendModal(true)}
-                      className={"extendButton"}
-                      styleType="secondary"
+                        onClick={() =>
+                            setShowRepaymentModal && setShowRepaymentModal(true)
+                        }
+                        className={"repayButton"}
+                        styleType="primary"
                     >
-                      {t("Extend")}
+                        {t("Repay")}
                     </Button>
-                  )
-                }
-                <Button
-                  onClick={() => setShowRepaymentModal && setShowRepaymentModal(true)}
-                  className={"repayButton"}
-                  styleType="primary"
-                >
-                  {t("Repay")}
-                </Button>
-              </div>
-
+                </div>
             </Card>
-
         </LoanInfoStyled>
     );
 };

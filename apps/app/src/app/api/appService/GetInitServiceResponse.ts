@@ -1,4 +1,4 @@
-import {SDKProvider} from "./SDKProvider";
+import { SDKProvider } from './SDKProvider';
 
 export interface GetInitServiceResponse {
   couponH5Url: string;
@@ -13,10 +13,10 @@ export interface GetInitServiceResponse {
   csEmail: string;
   // 平台客服信箱
 
-  csServiceTime:	string;
+  csServiceTime: string;
   // 平台客服服务时间
 
-  csWhatsApp:	string;
+  csWhatsApp: string;
   // 平台WhatsApp号码
 
   i18nLastUpdateTime: number;

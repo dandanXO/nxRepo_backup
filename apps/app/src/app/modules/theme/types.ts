@@ -6,10 +6,10 @@ export interface ITheme {
 export interface IThemes {
   india: {
     [key: string]: ITheme;
-  }
+  };
   pakistan: {
     [key: string]: ITheme;
-  }
+  };
 }
 
 export interface IMappedTheme {

@@ -1,42 +1,42 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import axiosBaseQuery from "./axiosBaseQuery";
-import { GetBankCardListResponse } from "../userService/GetBankCardListResponse";
-import { GetRepayTypesResponse } from "../loanService/GetRepayTypesResponse";
-import { PostBankCardMainRequest } from "../userService/PostBankCardMainRequest";
-import { GetBindCardDropListResponse } from "../userService/GetBindCardDropListResponse";
-import {GetUserProcessResponse} from "../loanService/GetUserProcessResponse";
-import {GetIndexRequest} from "../indexService/GetIndexRequest";
-import {GetIndexResponse} from "../indexService/GetIndexResponse";
-import {PostBankBindSaveRequest} from "../userService/PostBankBindSaveRequest";
-import {PostPKBankBindSaveRequest} from "../userService/PostPKBankBindSaveRequest";
-import {PostBangladeshBankBindSaveRequest} from "../userService/PostBangladeshBankBindSaveRequest";
-import {GetLoanDetailRequest} from "../loanService/GetLoanDetailRequest";
-import {GetLoanDetailResponse} from "../loanService/GetLoanDetailResponse";
-import {GetLoanRecordListRequest} from "../loanService/GetLoanRecordListRequest";
-import {GetLoanRecordListReponse} from "../loanService/GetLoanRecordListReponse";
-import {GetRepayTypesRequest} from "../loanService/GetRepayTypesRequest";
-import {PostRepayReceiptResponse} from "../loanService/PostRepayReceiptResponse";
-import {PostRepayCreateRequest} from "../loanService/PostRepayCreateRequest";
-import {PostRepayCreateResponse} from "../loanService/PostRepayCreateResponse";
-import {GetOTPCodeRequest} from "../userService/service/GetOTPCodeService";
-import { GetCouponApplicableListRequest } from "../userService/GetCouponApplicableListRequest";
-import { GetCouponApplicableListResponse } from "../userService/GetCouponApplicableListResponse";
+import { createApi } from '@reduxjs/toolkit/query/react';
+import axiosBaseQuery from './axiosBaseQuery';
+import { GetBankCardListResponse } from '../userService/GetBankCardListResponse';
+import { GetRepayTypesResponse } from '../loanService/GetRepayTypesResponse';
+import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
+import { GetBindCardDropListResponse } from '../userService/GetBindCardDropListResponse';
+import { GetUserProcessResponse } from '../loanService/GetUserProcessResponse';
+import { GetIndexRequest } from '../indexService/GetIndexRequest';
+import { GetIndexResponse } from '../indexService/GetIndexResponse';
+import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
+import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
+import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
+import { GetLoanDetailRequest } from '../loanService/GetLoanDetailRequest';
+import { GetLoanDetailResponse } from '../loanService/GetLoanDetailResponse';
+import { GetLoanRecordListRequest } from '../loanService/GetLoanRecordListRequest';
+import { GetLoanRecordListReponse } from '../loanService/GetLoanRecordListReponse';
+import { GetRepayTypesRequest } from '../loanService/GetRepayTypesRequest';
+import { PostRepayReceiptResponse } from '../loanService/PostRepayReceiptResponse';
+import { PostRepayCreateRequest } from '../loanService/PostRepayCreateRequest';
+import { PostRepayCreateResponse } from '../loanService/PostRepayCreateResponse';
+import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
+import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicableListRequest';
+import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
 
 export type LoginRequest = {
   msgCode: string;
   // 图片验证码
 
-  phoneNo: string
+  phoneNo: string;
   // 手机号码
-}
+};
 
 export type LoginResponse = {
   token: string;
-}
+};
 export const APIV3 = createApi({
-  reducerPath: "apiv3",
+  reducerPath: 'apiv3',
   baseQuery: axiosBaseQuery({
-    baseUrl: "/api/v3",
+    baseUrl: '/api/v3',
   }),
   // keepUnusedDataFor: 0,
   // keepUnusedDataFor: 1,
@@ -46,7 +46,7 @@ export const APIV3 = createApi({
     // Login
     login: builder.mutation<LoginResponse, LoginRequest>({
       query: (query: LoginRequest) => ({
-        method: "post",
+        method: 'post',
         url: `/login`,
         data: query,
       }),
@@ -75,181 +75,194 @@ export const APIV3 = createApi({
           getCacheEntry,
         }
       ) {
-        console.log("onCacheEntryAdded.arg", arg);
+        console.log('onCacheEntryAdded.arg', arg);
       },
     }),
 
     // NOTE: /api/v3/loan/records 貸款紀錄列表
-    getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
+    getLoanRecordList: builder.query<
+      GetLoanRecordListReponse,
+      GetLoanRecordListRequest
+    >({
       query: (query: GetLoanRecordListRequest) => ({
-        method: "get",
+        method: 'get',
         url: `/loan/records`,
         params: query,
       }),
     }),
     // NOTE: /api/v3/coupon/applicable 取得可用优惠券列表
-    getCouponApplicableList: builder.query<GetCouponApplicableListResponse, GetCouponApplicableListRequest>({
-        query: (query: GetCouponApplicableListRequest) => ({
-          method: "get",
-          url: `/coupon/applicable`,
-          params: query,
-        }),
+    getCouponApplicableList: builder.query<
+      GetCouponApplicableListResponse,
+      GetCouponApplicableListRequest
+    >({
+      query: (query: GetCouponApplicableListRequest) => ({
+        method: 'get',
+        url: `/coupon/applicable`,
+        params: query,
+      }),
     }),
   }),
 });
 
 export const {
   useLazyGetLoanRecordListQuery,
-  useLazyGetCouponApplicableListQuery
+  useLazyGetCouponApplicableListQuery,
 } = APIV3;
 
 export const API = createApi({
-    reducerPath: "api",
-    baseQuery: axiosBaseQuery({
-        baseUrl: "/api/v2",
+  reducerPath: 'api',
+  baseQuery: axiosBaseQuery({
+    baseUrl: '/api/v2',
+  }),
+  // keepUnusedDataFor: 600,
+  // keepUnusedDataFor: 1,
+  // refetchOnMountOrArgChange: 60,
+  endpoints: (builder) => ({
+    // NOTE: 取得 OTP
+    getOTPCode: builder.mutation<null, GetOTPCodeRequest>({
+      query: (query: GetOTPCodeRequest) => ({
+        method: 'post',
+        url: `/login/otp-code`,
+        data: query,
+      }),
     }),
-    // keepUnusedDataFor: 600,
-    // keepUnusedDataFor: 1,
-    // refetchOnMountOrArgChange: 60,
-    endpoints: (builder) => ({
-        // NOTE: 取得 OTP
-        getOTPCode: builder.mutation<null, GetOTPCodeRequest>({
-          query: (query: GetOTPCodeRequest) => ({
-            method: "post",
-            url: `/login/otp-code`,
-            data: query,
-          }),
-        }),
-        // NOTE: 登出
-        // logout: builder.mutation<null, LogoutRequest>({
-        //   query: (query: LogoutRequest) => ({
-        //     method: "post",
-        //     url: `/login/otp-code`,
-        //     data: query,
-        //   }),
-        // }),
-        // NOTE: 借款首頁
-        getIndex: builder.query<GetIndexResponse, GetIndexRequest>({
-            query: (query: GetIndexRequest) => ({
-                method: "getiyihkln.  ",
-                url: `/index`,
-                params: query,
-            }),
-        }),
-        // NOTE: /api/v2/user/bank-card 获取绑定银行卡
-        getBankCardList: builder.query<GetBankCardListResponse, null>({
-            query: (query: null) => ({
-                method: "get",
-                url: `/user/bank-card`,
-                params: query,
-            }),
-        }),
+    // NOTE: 登出
+    // logout: builder.mutation<null, LogoutRequest>({
+    //   query: (query: LogoutRequest) => ({
+    //     method: "post",
+    //     url: `/login/otp-code`,
+    //     data: query,
+    //   }),
+    // }),
+    // NOTE: 借款首頁
+    getIndex: builder.query<GetIndexResponse, GetIndexRequest>({
+      query: (query: GetIndexRequest) => ({
+        method: 'getiyihkln.  ',
+        url: `/index`,
+        params: query,
+      }),
+    }),
+    // NOTE: /api/v2/user/bank-card 获取绑定银行卡
+    getBankCardList: builder.query<GetBankCardListResponse, null>({
+      query: (query: null) => ({
+        method: 'get',
+        url: `/user/bank-card`,
+        params: query,
+      }),
+    }),
 
-        // NOTE: /api/v2/loan/detail 貸款訂單詳情
-        getLoanDetail: builder.query<GetLoanDetailResponse, GetLoanDetailRequest>({
-            query: (query: GetLoanDetailRequest) => ({
-                method: "get",
-                url: `/loan/detail`,
-                params: query,
-            }),
-        }),
-        // NOTE: 取得可用付款方式
-        getRepayTypes: builder.query<GetRepayTypesResponse, GetRepayTypesRequest>({
-            query: (query: GetRepayTypesRequest) => ({
-                method: "get",
-                url: `/repay/types`,
-                params: query,
-            }),
-        }),
-        // NOTE: 創建還款訂單
-        postRepayCreate: builder.mutation<PostRepayCreateResponse, PostRepayCreateRequest>({
-            query: (query: PostRepayCreateRequest) => ({
-                method: "post",
-                url: `/repay/create`,
-                data: query,
-            }),
-        }),
-        // NOTE: 取得還款證明
-        postRepayReceipt: builder.mutation<PostRepayReceiptResponse, FormData>({
-            query: (requestBody: FormData) => ({
-                method: "post",
-                url: `/repay/receipt`,
-                headers: {
-                    "Content-Type": "multipart/form-data;boundary=" + new Date().getTime(),
-                },
-                data: requestBody,
-            }),
-        }),
-        // NOTE: /api/v2/kyc/bank-card/main 绑定主卡
-        postBankCardMain: builder.mutation<null, PostBankCardMainRequest>({
-            query: (requestBody: PostBankCardMainRequest) => ({
-                method: "post",
-                url: `/kyc/bank-card/main`,
-                data: requestBody,
-            }),
-        }),
-        // NOTE: 绑定银行主卡或是電子錢包
-        postBankBindSave: builder.mutation<{}, PostBankBindSaveRequest>({
-            query: (requestBody: PostBankBindSaveRequest) => ({
-                method: "post",
-                url: `/bank-bind/save`,
-                data: requestBody,
-            }),
-        }),
-        // NOTICE: Pakistan - 绑定银行主卡或是電子錢包
-        postBankBindSaveToPK: builder.mutation<{}, PostPKBankBindSaveRequest>({
-            query: (requestBody: PostPKBankBindSaveRequest) => ({
-                method: "post",
-                url: `/bank-bind/save`,
-                data: requestBody,
-            }),
-        }),
-        // NOTICE: Bangladesh - 绑定银行主卡或是電子錢包
-        postBankBindSaveToBangladesh: builder.mutation<{}, PostBangladeshBankBindSaveRequest>({
-            query: (requestBody: PostBangladeshBankBindSaveRequest) => ({
-                method: "post",
-                url: `/bank-bind/save`,
-                data: requestBody,
-            }),
-        }),
-        // NOTICE: Pakstan - 获取绑卡页信息
-        getBindCardDropList: builder.query<GetBindCardDropListResponse, {}>({
-            query: () => ({
-              method: "get",
-              url: `/bank-bind/info`,
-            }),
-        }),
-        // NOTE: 取得還款證明
-        // post: builder.mutation<PostResponse, PostRequest>({
-        //     query: (requestBody: FormData) => ({
-        //         method: "post",
-        //         url: `/repay/receipt`,
-        //         data: requestBody,
-        //     }),
-        // }),
-        // NOTICE: 取得用戶審核紀錄
-        getUserProcess: builder.query<GetUserProcessResponse, {}>({
-          query: () => ({
-            method: "get",
-            url: `/bank-user/process`,
-          }),
-        }),
+    // NOTE: /api/v2/loan/detail 貸款訂單詳情
+    getLoanDetail: builder.query<GetLoanDetailResponse, GetLoanDetailRequest>({
+      query: (query: GetLoanDetailRequest) => ({
+        method: 'get',
+        url: `/loan/detail`,
+        params: query,
+      }),
     }),
+    // NOTE: 取得可用付款方式
+    getRepayTypes: builder.query<GetRepayTypesResponse, GetRepayTypesRequest>({
+      query: (query: GetRepayTypesRequest) => ({
+        method: 'get',
+        url: `/repay/types`,
+        params: query,
+      }),
+    }),
+    // NOTE: 創建還款訂單
+    postRepayCreate: builder.mutation<
+      PostRepayCreateResponse,
+      PostRepayCreateRequest
+    >({
+      query: (query: PostRepayCreateRequest) => ({
+        method: 'post',
+        url: `/repay/create`,
+        data: query,
+      }),
+    }),
+    // NOTE: 取得還款證明
+    postRepayReceipt: builder.mutation<PostRepayReceiptResponse, FormData>({
+      query: (requestBody: FormData) => ({
+        method: 'post',
+        url: `/repay/receipt`,
+        headers: {
+          'Content-Type':
+            'multipart/form-data;boundary=' + new Date().getTime(),
+        },
+        data: requestBody,
+      }),
+    }),
+    // NOTE: /api/v2/kyc/bank-card/main 绑定主卡
+    postBankCardMain: builder.mutation<null, PostBankCardMainRequest>({
+      query: (requestBody: PostBankCardMainRequest) => ({
+        method: 'post',
+        url: `/kyc/bank-card/main`,
+        data: requestBody,
+      }),
+    }),
+    // NOTE: 绑定银行主卡或是電子錢包
+    postBankBindSave: builder.mutation<{}, PostBankBindSaveRequest>({
+      query: (requestBody: PostBankBindSaveRequest) => ({
+        method: 'post',
+        url: `/bank-bind/save`,
+        data: requestBody,
+      }),
+    }),
+    // NOTICE: Pakistan - 绑定银行主卡或是電子錢包
+    postBankBindSaveToPK: builder.mutation<{}, PostPKBankBindSaveRequest>({
+      query: (requestBody: PostPKBankBindSaveRequest) => ({
+        method: 'post',
+        url: `/bank-bind/save`,
+        data: requestBody,
+      }),
+    }),
+    // NOTICE: Bangladesh - 绑定银行主卡或是電子錢包
+    postBankBindSaveToBangladesh: builder.mutation<
+      {},
+      PostBangladeshBankBindSaveRequest
+    >({
+      query: (requestBody: PostBangladeshBankBindSaveRequest) => ({
+        method: 'post',
+        url: `/bank-bind/save`,
+        data: requestBody,
+      }),
+    }),
+    // NOTICE: Pakstan - 获取绑卡页信息
+    getBindCardDropList: builder.query<GetBindCardDropListResponse, {}>({
+      query: () => ({
+        method: 'get',
+        url: `/bank-bind/info`,
+      }),
+    }),
+    // NOTE: 取得還款證明
+    // post: builder.mutation<PostResponse, PostRequest>({
+    //     query: (requestBody: FormData) => ({
+    //         method: "post",
+    //         url: `/repay/receipt`,
+    //         data: requestBody,
+    //     }),
+    // }),
+    // NOTICE: 取得用戶審核紀錄
+    getUserProcess: builder.query<GetUserProcessResponse, {}>({
+      query: () => ({
+        method: 'get',
+        url: `/bank-user/process`,
+      }),
+    }),
+  }),
 });
 
 export const {
-    useGetLoanDetailQuery,
-    useGetRepayTypesQuery,
-    useLazyGetBankCardListQuery,
+  useGetLoanDetailQuery,
+  useGetRepayTypesQuery,
+  useLazyGetBankCardListQuery,
 
-    useLazyGetLoanDetailQuery,
-    useLazyGetRepayTypesQuery,
-    usePostRepayCreateMutation,
-    usePostRepayReceiptMutation,
-    usePostBankCardMainMutation,
-    usePostBankBindSaveMutation,
-    usePostBankBindSaveToPKMutation,
-    usePostBankBindSaveToBangladeshMutation,
-    useLazyGetBindCardDropListQuery,
-    useLazyGetUserProcessQuery,
+  useLazyGetLoanDetailQuery,
+  useLazyGetRepayTypesQuery,
+  usePostRepayCreateMutation,
+  usePostRepayReceiptMutation,
+  usePostBankCardMainMutation,
+  usePostBankBindSaveMutation,
+  usePostBankBindSaveToPKMutation,
+  usePostBankBindSaveToBangladeshMutation,
+  useLazyGetBindCardDropListQuery,
+  useLazyGetUserProcessQuery,
 } = API;

@@ -10,10 +10,14 @@ import styled from "styled-components";
 import { GetLoanDetailResponse } from "../../../../../api/getLoanDetail";
 import { useGetLoanDetailQuery } from "../../../../../api";
 import recordStatusStyleProps from "../../../../../core/recordStatusColorMapper";
-import {environment} from "../../../../../../environments/environment";
+import { environment } from "../../../../../../environments/environment";
 import LoanBrand from "../../../../components/LoanBrand";
-import {useTranslation, WithTranslation, withTranslation} from "react-i18next";
-import {i18nExtensionDetailModal} from "./i18n/translations";
+import {
+    useTranslation,
+    WithTranslation,
+    withTranslation,
+} from "react-i18next";
+import { i18nExtensionDetailModal } from "./i18n/translations";
 import i18next from "i18next";
 
 const ExtesionDetailStyled = styled.div`
@@ -119,22 +123,37 @@ const renderExtesionDetail = (props: renderExtesionDetailProps) => {
                 />
             </div>
             <div className="totalTitle">{props.t("Extension Fee")}</div>
-            <div className="totalText">{environment.currency} {extensionFee ? extensionFee : ""} </div>
+            <div className="totalText">
+                {environment.currency} {extensionFee ? extensionFee : ""}{" "}
+            </div>
             <Divider />
             <div className={"loanInfo-Card-Title"}>{props.t("General")}</div>
             <div className={"loanInfo-Card-list"}>
-                <ListItem title={props.t("No.") as string} text={orderNo ? orderNo : ""} />
+                <ListItem
+                    title={props.t("No.") as string}
+                    text={orderNo ? orderNo : ""}
+                />
                 <ListItem
                     title={props.t("State") as string}
                     text={
-                        <Tag status={status ? status : props.t("EXTEND")}>{status}</Tag>
+                        <Tag status={status ? status : props.t("EXTEND")}>
+                            {status}
+                        </Tag>
                     }
                 />
-                <ListItem title={props.t("Amount Paid") as string} text={`${environment.currency} ${paidAmount}`} />
+                <ListItem
+                    title={props.t("Amount Paid") as string}
+                    text={`${environment.currency} ${paidAmount}`}
+                />
                 <RepayRecordStyled>
-                    <Accordion title={props.t("Amount Paid Record")} isCollapse={true}>
+                    <Accordion
+                        title={props.t("Amount Paid Record")}
+                        isCollapse={true}
+                    >
                         {repayRecords.length === 0 ? (
-                            <NoDataStyled>{props.t("No paid records yet")}</NoDataStyled>
+                            <NoDataStyled>
+                                {props.t("No paid records yet")}
+                            </NoDataStyled>
                         ) : (
                             repayRecords.map((record) => {
                                 return (
@@ -160,14 +179,20 @@ const renderExtesionDetail = (props: renderExtesionDetailProps) => {
                         )}
                     </Accordion>
                 </RepayRecordStyled>
-                <ListItem title={props.t("Balance") as string} text={`${environment.currency} ${balance}`} />
+                <ListItem
+                    title={props.t("Balance") as string}
+                    text={`${environment.currency} ${balance}`}
+                />
             </div>
             <Divider />
             <div className={"loanInfo-Card-Title"}>
                 {chargeFeeDetail?.title}
             </div>
             {chargeFeeDetail?.items.map((item) => {
-                const fieldType = item.fieldType === "CURRENCY" ? ` ${environment.currency} ` : "";
+                const fieldType =
+                    item.fieldType === "CURRENCY"
+                        ? ` ${environment.currency} `
+                        : "";
                 return (
                     <ListItem
                         title={item.itemName}
@@ -191,14 +216,19 @@ const renderExtesionDetail = (props: renderExtesionDetailProps) => {
             />
             {/* <ListItem title={"Due Date"} text={dueDate ? dueDate : ""} /> */}
             <Divider />
-            <div className={"loanInfo-Card-Title"}>{props.t("Link account")}</div>
-            <ListItem title={props.t("Bank card") as string} text={bankCardNo ? bankCardNo : ""} />
+            <div className={"loanInfo-Card-Title"}>
+                {props.t("Link account")}
+            </div>
+            <ListItem
+                title={props.t("Bank card") as string}
+                text={bankCardNo ? bankCardNo : ""}
+            />
         </ExtesionDetailStyled>
     );
 };
 
 type ExtensionDetailModalProps = GetLoanDetailResponse & {
-  setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowExtensionModal: React.Dispatch<React.SetStateAction<boolean>>;
 } & WithTranslation;
 
 const ExtensionDetailModal = (props: ExtensionDetailModalProps) => {
@@ -214,11 +244,11 @@ const ExtensionDetailModal = (props: ExtensionDetailModalProps) => {
                 title={props.t("Notice") as string}
                 content={(hide: () => void) =>
                     renderExtesionDetail({
-                      ...currentData,
-                      setShowExtensionModal,
-                      t: props.t,
-                      i18n: i18next,
-                      tReady: false,
+                        ...currentData,
+                        setShowExtensionModal,
+                        t: props.t,
+                        i18n: i18next,
+                        tReady: false,
                     })
                 }
                 enableTitleHorizontal={true}
@@ -229,4 +259,6 @@ const ExtensionDetailModal = (props: ExtensionDetailModalProps) => {
     );
 };
 
-export default withTranslation(i18nExtensionDetailModal.namespace)(ExtensionDetailModal);
+export default withTranslation(i18nExtensionDetailModal.namespace)(
+    ExtensionDetailModal
+);

@@ -10,18 +10,18 @@ $slider-button-inner-size: 10px;
 
   //NOTE: 拉霸按鈕左側捲軸
   .quota-slider-track-0 {
-    background: #FFFFFF;
+    background: #ffffff;
     height: $slider-height;
     border-radius: 8px;
   }
   //NOTE: 拉霸按鈕右側捲軸
   .quota-slider-track-1 {
-    background: #D37100;
+    background: #d37100;
     height: $slider-height;
     border-radius: 8px;
   }
   .quota-slider-track-disable-1 {
-    background: #FFFFFF;
+    background: #ffffff;
     height: $slider-height;
     border-radius: 8px;
   }
@@ -47,7 +47,7 @@ $slider-button-inner-size: 10px;
 
     // NOTE: 拉霸按鈕-內圓
     .quota-slider-thumb-inner {
-      background: #33AF85;
+      background: #33af85;
       width: $slider-button-inner-size;
       height: $slider-button-inner-size;
       border-radius: 50%;
@@ -64,4 +64,3 @@ $slider-button-inner-size: 10px;
     background: lightpink;
   }
 }
-

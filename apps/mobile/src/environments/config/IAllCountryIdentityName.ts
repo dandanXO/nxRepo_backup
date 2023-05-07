@@ -1,5 +1,5 @@
 export enum IAllCountryIdentityName {
-  IN = "in",
-  PK = "pk",
-  BN = "bn"
+    IN = "in",
+    PK = "pk",
+    BN = "bn",
 }

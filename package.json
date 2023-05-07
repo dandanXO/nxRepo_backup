@@ -6,6 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "prettier": "pnpm nx format:write --projects app,mobile",
     "serve:min": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve:in mobile -c=development",
     "serve:mpk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve:pk mobile -c=development",
     "serve:mbd": "cross-env NODE_ENV=development NODE_COUNTRY=bd pnpm nx serve:bd mobile -c=development",

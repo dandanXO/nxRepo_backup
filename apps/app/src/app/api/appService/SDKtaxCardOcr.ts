@@ -4,5 +4,5 @@ export enum SDKtaxCardOcr {
   ADV_IQA,
   ADV_IQC,
   GCT,
-  NONE
+  NONE,
 }

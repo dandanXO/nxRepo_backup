@@ -8,4 +8,4 @@ export type UserProcess = {
 
   title: string;
   // 標題
-}
+};

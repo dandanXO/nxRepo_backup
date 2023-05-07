@@ -1,5 +1,3 @@
 export const UploadingModal = () => {
-  return (
-    <div>UploadingModal</div>
-  )
-}
+  return <div>UploadingModal</div>;
+};

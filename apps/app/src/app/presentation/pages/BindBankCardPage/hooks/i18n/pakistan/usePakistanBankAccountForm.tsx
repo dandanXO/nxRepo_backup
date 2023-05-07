@@ -1,6 +1,9 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {BankVendor, GetBindCardDropListResponse} from "../../../../../../api/rtk/old/GetBindCardDropList";
-import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+  BankVendor,
+  GetBindCardDropListResponse,
+} from '../../../../../../api/rtk/old/GetBindCardDropList';
+import { usePakistanIBanValidate } from '../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate';
 
 interface IUsePakistanBankAccountForm {
   // NOTE: 取得電子錢包列表
@@ -45,5 +48,5 @@ export const usePakistanBankAccountForm = (
     onIBanChange,
     onIbanBlur,
     confirm,
-  }
+  };
 };

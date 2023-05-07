@@ -1,11 +1,11 @@
-import {configureStore} from "@reduxjs/toolkit";
-import {API} from "../api";
-import createSagaMiddleware from 'redux-saga'
-import {personalRecommendActionsReducer} from "../components/pages/ProductAdModalListPage/redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { API } from "../api";
+import createSagaMiddleware from "redux-saga";
+import { personalRecommendActionsReducer } from "../components/pages/ProductAdModalListPage/redux";
 import AppSaga from "../components/pages/ProductAdModalListPage/saga";
 
 // NOTICE: create the saga middleware
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
 export const appStore = configureStore({
     reducer: {
@@ -18,7 +18,7 @@ export const appStore = configureStore({
 });
 
 // NOTICE: then run the saga
-sagaMiddleware.run(AppSaga)
+sagaMiddleware.run(AppSaga);
 
 export type RootState = ReturnType<typeof appStore.getState>;
 export type AppDispatch = typeof appStore.dispatch;
@@ -26,4 +26,3 @@ export type AppDispatch = typeof appStore.dispatch;
 // NOTE: for testing
 // enable listener behavior for the store
 // setupListeners(appStore.dispatch)
-

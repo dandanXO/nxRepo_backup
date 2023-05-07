@@ -10,5 +10,4 @@ export type AvailableQuotaBar = {
 
   serial: number;
   // 拉霸額度間隔
-
-}
+};
