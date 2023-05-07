@@ -5,11 +5,11 @@ export interface GetBindCardDropListResponse {
 }
 
 export interface WalletVendor {
-  code:	string;
-  displayName:	string;
+  code: string;
+  displayName: string;
 }
 
 export interface BankVendor {
-  "bankCode": string;
-  "bankName": string;
+  bankCode: string;
+  bankName: string;
 }

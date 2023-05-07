@@ -8,4 +8,4 @@ export type GetQuotaModelStatusResponse = {
   offerExpireTime: string;
   // example: yyyy-MM-dd'T'HH:mm:ss
   // 额度有效时间
-}
+};

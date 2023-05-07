@@ -13,11 +13,11 @@ infoLog('build');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const isProduction = process.env.NODE_ENV == 'production';
-console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
-console.log("process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
-console.log("process.env.NODE_ANALYZER:", process.env.NODE_ANALYZER);
-console.log("process.env.NODE_UI_VERSION:", process.env.NODE_UI_VERSION);
-console.log("isProduction: ", isProduction);
+console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
+console.log('process.env.NODE_COUNTRY:', process.env.NODE_COUNTRY);
+console.log('process.env.NODE_ANALYZER:', process.env.NODE_ANALYZER);
+console.log('process.env.NODE_UI_VERSION:', process.env.NODE_UI_VERSION);
+console.log('isProduction: ', isProduction);
 
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
@@ -27,26 +27,25 @@ const SentryCliPlugin = require('@sentry/webpack-plugin');
 
 const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
-
 const TerserPlugin = require('terser-webpack-plugin');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const PUBLIC_PATH = !isProduction ? "/" : "/v2/";
-console.log("PUBLIC_PATH", PUBLIC_PATH);
+const PUBLIC_PATH = !isProduction ? '/' : '/v2/';
+console.log('PUBLIC_PATH', PUBLIC_PATH);
 
-const ASSET_OUTPUT_PATH = "asset";
+const ASSET_OUTPUT_PATH = 'asset';
 
-let proxyURL= "https://app.india-api-dev.com";
-if(process.env.NODE_COUNTRY === "in") {
-  proxyURL = "https://app.india-api-dev.com";
-} else if(process.env.NODE_COUNTRY === "pk") {
-  proxyURL = "https://app.pk-api-dev.com";
-} else if(process.env.NODE_COUNTRY === "bd") {
-  proxyURL = "https://app.bd-api-dev.com";
+let proxyURL = 'https://app.india-api-dev.com';
+if (process.env.NODE_COUNTRY === 'in') {
+  proxyURL = 'https://app.india-api-dev.com';
+} else if (process.env.NODE_COUNTRY === 'pk') {
+  proxyURL = 'https://app.pk-api-dev.com';
+} else if (process.env.NODE_COUNTRY === 'bd') {
+  proxyURL = 'https://app.bd-api-dev.com';
 }
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
@@ -124,7 +123,7 @@ module.exports = (config, context) => {
       },
       proxy: {
         //设置代理
-        "/api": {
+        '/api': {
           target: proxyURL,
           secure: false, // 協議是https的時候必須要寫
           changeOrigin: true,
@@ -153,10 +152,8 @@ module.exports = (config, context) => {
     ],
   });
 
-  if(process.env.NODE_ANALYZER && !isProduction) {
-    finalConfig.plugins.push(
-      new BundleAnalyzerPlugin()
-    )
+  if (process.env.NODE_ANALYZER && !isProduction) {
+    finalConfig.plugins.push(new BundleAnalyzerPlugin());
     // finalConfig["optimization"] = {
     //   minimize: true,
     //   minimizer: [
@@ -175,7 +172,7 @@ module.exports = (config, context) => {
     //     })
     //   ],
     // }
-  } else if(isProduction){
+  } else if (isProduction) {
     // 只要加就會掛掉
     finalConfig.plugins.push(
       new HtmlWebpackPlugin({
@@ -183,8 +180,8 @@ module.exports = (config, context) => {
         template: './src/index.html',
         filename: 'index.html',
         // publicPath: "/v2",
-      }),
-    )
+      })
+    );
     // finalConfig["optimization"] = {
     //   minimize: true,
     //   minimizer: [
@@ -212,8 +209,9 @@ module.exports = (config, context) => {
 
     finalConfig.plugins.push(
       new SentryCliPlugin({
-        url: "https://monitor.sijneokd.com",
-        authToken: '2c48e3e9a9464236a5b057ecbd5c2683b52f676f3c294a3eae6bfeb923b6815c',
+        url: 'https://monitor.sijneokd.com',
+        authToken:
+          '2c48e3e9a9464236a5b057ecbd5c2683b52f676f3c294a3eae6bfeb923b6815c',
         debug: true,
         include: './dist/apps/app',
         ignoreFile: '.sentrycliignore',
@@ -222,14 +220,13 @@ module.exports = (config, context) => {
         project: 'api-app',
         // configFile: 'sentry.properties',
         // setCommits: {
-          //   auto: false,
-          // ignoreMissing: true,
-          // repo: "frontend",
-          // commit: gitRevisionPlugin.commithash(),
+        //   auto: false,
+        // ignoreMissing: true,
+        // repo: "frontend",
+        // commit: gitRevisionPlugin.commithash(),
         // }
       })
     );
-
   }
   console.log('finalConfig', finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);

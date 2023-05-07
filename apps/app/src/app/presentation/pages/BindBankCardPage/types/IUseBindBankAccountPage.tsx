@@ -1,5 +1,8 @@
-import {GetBindCardDropListResponse} from "../../../../api/rtk/old/GetBindCardDropList";
-import {PostBankBindSaveRequest, PostPKBankBindSaveRequest} from "../../../../api/rtk/old/postBankBindSave";
+import { GetBindCardDropListResponse } from '../../../../api/rtk/old/GetBindCardDropList';
+import {
+  PostBankBindSaveRequest,
+  PostPKBankBindSaveRequest,
+} from '../../../../api/rtk/old/postBankBindSave';
 
 export type IUseBindBankAccountPage = {
   // NOTE: 綁定
@@ -14,21 +17,21 @@ export type IUseBindBankAccountPage = {
   // NOTE: 電子錢包
   // NOTE: 綁定電子錢包
   isPostBankBindSaveToPKMutationLoading?: boolean;
-  triggerPostBankBindSaveToPKMutation?: (requestBody: PostPKBankBindSaveRequest) => any;
+  triggerPostBankBindSaveToPKMutation?: (
+    requestBody: PostPKBankBindSaveRequest
+  ) => any;
 
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
 
   triggerGetBindCardDropListQuery?: any;
-
-}
+};
 
 export type IPakistanUseBindBankAccountPage = {
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
-}
-
+};
 
 export type IUseBindBankAccountPageForBangladesh = {
   triggerPostBankBindSaveToBangladeshMutation: any;
-}
+};

@@ -11,14 +11,15 @@ const getClientEnvironment = require("./getClientEnvironment");
 const isProduction = process.env.NODE_ENV == "production";
 const gitRevisionPlugin = new GitRevisionPlugin();
 
-
 console.info("[mobile][build]");
 console.log("[mobile][build] process.env.NODE_ENV:", process.env.NODE_ENV);
-console.log("[mobile][build] process.env.NODE_COUNTRY:", process.env.NODE_COUNTRY);
+console.log(
+    "[mobile][build] process.env.NODE_COUNTRY:",
+    process.env.NODE_COUNTRY
+);
 console.log("[mobile][build] isProduction: ", isProduction);
 console.log("[mobile][build] getClientEnvironment", getClientEnvironment());
 // console.log("gitRevisionPlugin.commithash()", gitRevisionPlugin.commithash());
-
 
 // NOTE:
 let PUBLIC_PATH;
@@ -30,12 +31,12 @@ PUBLIC_PATH = !isProduction ? "/" : "/v1/";
 console.log("[mobile][build] PUBLIC_PATH", PUBLIC_PATH);
 
 let proxyURL;
-if(process.env.NODE_COUNTRY === "in") {
-  proxyURL = "https://app.india-api-dev.com";
-} else if(process.env.NODE_COUNTRY === "pk") {
-  proxyURL = "https://app.pk-api-dev.com";
-} else if(process.env.NODE_COUNTRY === "bd") {
-  proxyURL = "https://app.bd-api-dev.com";
+if (process.env.NODE_COUNTRY === "in") {
+    proxyURL = "https://app.india-api-dev.com";
+} else if (process.env.NODE_COUNTRY === "pk") {
+    proxyURL = "https://app.pk-api-dev.com";
+} else if (process.env.NODE_COUNTRY === "bd") {
+    proxyURL = "https://app.bd-api-dev.com";
 }
 
 module.exports = (config, context) => {
@@ -51,53 +52,49 @@ module.exports = (config, context) => {
         },
         module: {
             rules: [
-              // NOTE: Other Loader
-              {
-                test: /\.(css|less)$/,
-                use: [
-                  "style-loader",
-                  "css-loader",
-                  {
-                    loader: "less-loader",
-                    options: {
-                      lessOptions: {
-                        javascriptEnabled: true,
-                      },
+                // NOTE: Other Loader
+                {
+                    test: /\.(css|less)$/,
+                    use: [
+                        "style-loader",
+                        "css-loader",
+                        {
+                            loader: "less-loader",
+                            options: {
+                                lessOptions: {
+                                    javascriptEnabled: true,
+                                },
+                            },
+                        },
+                    ],
+                },
+                // NOTICE: 待釐清css preprocess
+                {
+                    test: /\.(s[ac]ss)$/,
+                    use: ["style-loader", "css-loader", "sass-loader"],
+                },
+                // NOTE: type: "asset/resource",
+                {
+                    test: /\.(png|jpe?g|gif)$/,
+                    type: "asset/resource",
+                    generator: {
+                        filename: "static/img/[name].[contenthash:8][ext]",
                     },
-                  },
-                ],
-              },
-              // NOTICE: 待釐清css preprocess
-              {
-                test: /\.(s[ac]ss)$/,
-                use: [
-                  "style-loader",
-                  "css-loader",
-                  'sass-loader',
-                ],
-              },
-              // NOTE: type: "asset/resource",
-              {
-                test: /\.(png|jpe?g|gif)$/,
-                type: "asset/resource",
-                generator: {
-                  filename: "static/img/[name].[contenthash:8][ext]",
                 },
-              },
-              {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                type: "asset/resource",
-                generator: {
-                  filename: "static/font/[name].[contenthash:8][ext]",
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    type: "asset/resource",
+                    generator: {
+                        filename: "static/font/[name].[contenthash:8][ext]",
+                    },
                 },
-              },
-              {
-                test: /\.ico$/,
-                type: "asset/resource",
-                generator: {
-                  filename: "static/ico/[name].[contenthash:8].ico",
+                {
+                    test: /\.ico$/,
+                    type: "asset/resource",
+                    generator: {
+                        filename: "static/ico/[name].[contenthash:8].ico",
+                    },
                 },
-              },
             ],
         },
         devServer: {
@@ -108,7 +105,7 @@ module.exports = (config, context) => {
             port: 4001,
             historyApiFallback: true,
             static: {
-              directory: "/"
+                directory: "/",
             },
             onBeforeSetupMiddleware: function (devServer) {
                 if (!devServer) {
@@ -120,12 +117,12 @@ module.exports = (config, context) => {
                 // });
             },
             proxy: {
-              //设置代理
-              "/api": {
-                target: proxyURL,
-                secure: false, // 協議是https的時候必須要寫
-                changeOrigin: true,
-              },
+                //设置代理
+                "/api": {
+                    target: proxyURL,
+                    secure: false, // 協議是https的時候必須要寫
+                    changeOrigin: true,
+                },
             },
         },
         plugins: [
@@ -169,12 +166,12 @@ module.exports = (config, context) => {
         //     })
         //   );
         finalConfig.plugins.push(
-          new HtmlWebpackPlugin({
-            // 配置 HTML 模板路徑與生成名稱 (第三步)
-            template: './src/index.html',
-            filename: 'index.html',
-            // publicPath: "/v2",
-          }),
+            new HtmlWebpackPlugin({
+                // 配置 HTML 模板路徑與生成名稱 (第三步)
+                template: "./src/index.html",
+                filename: "index.html",
+                // publicPath: "/v2",
+            })
         );
         finalConfig.plugins.push(
             new SentryCliPlugin({

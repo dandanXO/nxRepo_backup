@@ -1,4 +1,4 @@
 export interface BankVendor {
-  "bankCode": string;
-  "bankName": string;
+  bankCode: string;
+  bankName: string;
 }

@@ -1,9 +1,9 @@
-import {createAction, PayloadAction} from "@reduxjs/toolkit";
-import {call, delay, put, take} from "redux-saga/effects";
-import {Service} from "../../../../api";
-import {IndexPageSagaAction} from "./index";
-import {GetQuotaModelStatusResponse} from "../../../../api/loanService/GetQuotaModelStatusResponse";
-import {catchSagaError} from "../../../utils/catchSagaError";
+import { createAction, PayloadAction } from '@reduxjs/toolkit';
+import { call, delay, put, take } from 'redux-saga/effects';
+import { Service } from '../../../../api';
+import { IndexPageSagaAction } from './index';
+import { GetQuotaModelStatusResponse } from '../../../../api/loanService/GetQuotaModelStatusResponse';
+import { catchSagaError } from '../../../utils/catchSagaError';
 
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);
@@ -13,9 +13,11 @@ const createRequestAction = (type: string) => {
     loadingAction,
     successAction,
     failureAction,
-  }
-}
-export const getQuotaModelStatusAction = createRequestAction("GGetQuotaModelStatus");
+  };
+};
+export const getQuotaModelStatusAction = createRequestAction(
+  'GGetQuotaModelStatus'
+);
 
 // export const getQuotaModelStatusActions = createAsyncThunk<GetQuotaModelStatusRequest>(
 //   '/api/v3/loan/quota-model-status',
@@ -27,12 +29,11 @@ export const getQuotaModelStatusAction = createRequestAction("GGetQuotaModelStat
 
 export function* userReacquireCreditSaga(action: PayloadAction<null>) {
   try {
-    console.log("[app][saga] userReacquireCreditSaga");
+    console.log('[app][saga] userReacquireCreditSaga');
 
     // FIXME: refactor me
     // NOTICE: 根據是否擁有裝置權限，來開啟 AuthorizationModal
     // const hasAuthorization =  window.IndexTask.hasAuthorizationToUploadKyc();
-
 
     // const hasAuthorization =  false;
     // if(!hasAuthorization) {
@@ -57,31 +58,35 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     //   window["IndexTask"]["uploadKycBackgroundData"]();
     // }
 
-    window["IndexTask"] &&
-    window["IndexTask"]["uploadKycBackgroundData"] &&
-    window["IndexTask"]["uploadKycBackgroundData"]();
+    window['IndexTask'] &&
+      window['IndexTask']['uploadKycBackgroundData'] &&
+      window['IndexTask']['uploadKycBackgroundData']();
 
-    const { payload: onUploadKycBackgroundData } = yield take(IndexPageSagaAction.system.KycBackgroundDataUploadedSaga);
+    const { payload: onUploadKycBackgroundData } = yield take(
+      IndexPageSagaAction.system.KycBackgroundDataUploadedSaga
+    );
     if (!onUploadKycBackgroundData) return;
 
-
-    yield put(getQuotaModelStatusAction.loadingAction())
+    yield put(getQuotaModelStatusAction.loadingAction());
     // yield put(getQuotaModelStatusActions.pending);
     // yield put(indexPageReducerAction.reacquire());
-    let data: GetQuotaModelStatusResponse = yield call(Service.LoanService.getQuotaModelStatus, {})
+    let data: GetQuotaModelStatusResponse = yield call(
+      Service.LoanService.getQuotaModelStatus,
+      {}
+    );
     // console.log("GetQuotaModelStatusResponse", data);
 
     let count = 0;
-    while(data.calculating === true && count <= 10) {
+    while (data.calculating === true && count <= 10) {
       // console.log("重新獲取中");
       yield delay(20 * 1000);
-      data = yield call(Service.LoanService.getQuotaModelStatus, {})
+      data = yield call(Service.LoanService.getQuotaModelStatus, {});
       // console.log("GetQuotaModelStatusResponse", data);
       count++;
     }
-    if(count > 10) {
+    if (count > 10) {
       // console.log("失敗")
-      yield put(getQuotaModelStatusAction.failureAction())
+      yield put(getQuotaModelStatusAction.failureAction());
       // yield put(getQuotaModelStatusActions.rejected);
     } else {
       // console.log("成功")
@@ -103,13 +108,10 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       // }
 
       yield put(IndexPageSagaAction.user.viewIndexPageAction());
-
     }
   } catch (error) {
-    yield put(getQuotaModelStatusAction.failureAction())
+    yield put(getQuotaModelStatusAction.failureAction());
     // yield put(getQuotaModelStatusActions.rejected);
     yield catchSagaError(error);
   }
-
-
 }

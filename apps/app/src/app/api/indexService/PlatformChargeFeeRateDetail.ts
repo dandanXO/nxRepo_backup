@@ -1,4 +1,4 @@
-import {FeeRateKeyEnum} from "./FeeRateKeyEnum";
+import { FeeRateKeyEnum } from './FeeRateKeyEnum';
 
 export type PlatformChargeFeeRateDetail = {
   counting: number;
@@ -9,4 +9,4 @@ export type PlatformChargeFeeRateDetail = {
 
   title: string;
   // 收取项目
-}
+};

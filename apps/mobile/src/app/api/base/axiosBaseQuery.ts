@@ -5,11 +5,11 @@ import queryString from "query-string";
 import { Modal } from "@frontend/mobile/shared/ui";
 import i18next from "i18next";
 import * as Sentry from "@sentry/react";
-import {AppFlag} from "../../App";
+import { AppFlag } from "../../App";
 
 export interface CustomAxiosError {
-  status: any;
-  data: any;
+    status: any;
+    data: any;
 }
 
 const alertModal = (message: string) =>
@@ -95,37 +95,40 @@ const axiosBaseQuery =
             console.log("axiosError", axiosError);
             const err = axiosError as AxiosError;
             // console.log("err.toJSON()", err.toJSON());
-            const customError = JSON.parse(JSON.stringify(err.response?.data)) as {
+            const customError = JSON.parse(
+                JSON.stringify(err.response?.data)
+            ) as {
                 code: number;
                 data?: {
-                  msg?: string;
+                    msg?: string;
                 };
                 message: string;
             };
-            const customErrorMessage = customError?.data?.msg || customError.message;
+            const customErrorMessage =
+                customError?.data?.msg || customError.message;
             // console.log(err);
             // console.log(error);
 
             // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
-            if(err.config.url !== "/api/v2/loan/quota/refresh") {
-              alertModal(customErrorMessage);
+            if (err.config.url !== "/api/v2/loan/quota/refresh") {
+                alertModal(customErrorMessage);
             }
 
             const error = new Error();
             // NOTE: 後端客製化訊息
             error.name = customError.message;
             error.message = JSON.stringify({
-              originalError: {
-                code: err.code,
-                message: err.message,
-                name: err.name,
-                stack: err.stack,
-              },
-              customError
-            })
+                originalError: {
+                    code: err.code,
+                    message: err.message,
+                    name: err.name,
+                    stack: err.stack,
+                },
+                customError,
+            });
 
-            if(AppFlag.enableSentry) {
-              Sentry.captureException(error);
+            if (AppFlag.enableSentry) {
+                Sentry.captureException(error);
             }
 
             console.info(error);

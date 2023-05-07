@@ -1,8 +1,8 @@
-import {createGlobalStyle} from "styled-components";
-import {IThemeConfig} from "@frontend/mobile/shared/ui";
+import { createGlobalStyle } from "styled-components";
+import { IThemeConfig } from "@frontend/mobile/shared/ui";
 
 interface IGlobalStyle {
-  theme: IThemeConfig
+    theme: IThemeConfig;
 }
 export const AppStyle = createGlobalStyle<IGlobalStyle>`
   body {

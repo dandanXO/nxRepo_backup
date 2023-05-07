@@ -4,4 +4,4 @@ export type BannerResponse = {
 
   jumpUrl?: string;
   // 跳转URL
-}
+};

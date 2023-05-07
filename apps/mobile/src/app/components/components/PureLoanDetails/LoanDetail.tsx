@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import React from "react";
-import {GetLoanDetailChargeFeeDetail, GetLoanDetailResponse,} from "../../../api/getLoanDetail";
-import {Accordion, ListItem} from "@frontend/mobile/shared/ui";
-import {environment} from "../../../../environments/environment";
+import {
+    GetLoanDetailChargeFeeDetail,
+    GetLoanDetailResponse,
+} from "../../../api/getLoanDetail";
+import { Accordion, ListItem } from "@frontend/mobile/shared/ui";
+import { environment } from "../../../../environments/environment";
 import Card from "../Card";
 
 const LoanDetailStyled = styled.div`
@@ -31,14 +34,17 @@ type LoanDetailProps = Pick<
     | "dueDate"
     | "bankCardNo"
     | "extendable"
->
+>;
 
 const renderDetailContent = (props?: GetLoanDetailChargeFeeDetail) => {
     const { items = [] } = props || {};
     return (
         <div className={"detailsContent"}>
             {items.map((item) => {
-                const fieldType = item.fieldType === "CURRENCY" ? ` ${environment.currency} ` : "";
+                const fieldType =
+                    item.fieldType === "CURRENCY"
+                        ? ` ${environment.currency} `
+                        : "";
                 return (
                     <ListItem
                         title={item.itemName}
@@ -66,8 +72,6 @@ const LoanDetail = (props: LoanDetailProps) => {
                     {renderDetailContent(props.chargeFeeDetail)}
                 </Accordion>
             </Card>
-
-
         </LoanDetailStyled>
     );
 };

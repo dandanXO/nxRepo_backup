@@ -1,16 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { GetLoanDetailRecommendProducts } from "../../../api/getLoanDetail";
-import {
-    Overlay,
-    ListItem,
-    Title,
-    Divider,
-} from "@frontend/mobile/shared/ui";
-import {environment} from "../../../../environments/environment";
+import { Overlay, ListItem, Title, Divider } from "@frontend/mobile/shared/ui";
+import { environment } from "../../../../environments/environment";
 import LoanBrand from "../../components/LoanBrand";
-import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nProductDetailModal} from "./i18n/translations";
+import { WithTranslation, withTranslation } from "react-i18next";
+import { i18nProductDetailModal } from "./i18n/translations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -79,7 +74,9 @@ const PureProductDetailModal = (props: PureProductDetailModalProps) => {
                                 }
                             />
                             <Divider />
-                            <div className={"info-title"}>{props.t("customer service") as string}</div>
+                            <div className={"info-title"}>
+                                {props.t("customer service") as string}
+                            </div>
                             <ListItem
                                 title={props.t("Service time") as string}
                                 text={props?.recommendProducts?.csTime ?? ""}
@@ -96,4 +93,6 @@ const PureProductDetailModal = (props: PureProductDetailModalProps) => {
     );
 };
 
-export default withTranslation(i18nProductDetailModal.namespace)(PureProductDetailModal);
+export default withTranslation(i18nProductDetailModal.namespace)(
+    PureProductDetailModal
+);

@@ -1,4 +1,4 @@
-import {IMappedTheme, ITheme} from "./types";
+import { IMappedTheme, ITheme } from './types';
 
 export const mapCustomTailwindTheme = (variables: ITheme): IMappedTheme => {
   // console.log("variables", variables);
@@ -25,12 +25,15 @@ export const mapCustomTailwindTheme = (variables: ITheme): IMappedTheme => {
 
     // NOTE: state
     '--custom_state_disable_main': variables['custom_state_disable_main'] || '',
-    '--custom_state_disable_variant': variables['custom_state_disable_variant'] || '',
+    '--custom_state_disable_variant':
+      variables['custom_state_disable_variant'] || '',
     '--custom_state_success_main': variables['custom_state_success_main'] || '',
     '--custom_state_warning_main': variables['custom_state_warning_main'] || '',
-    '--custom_state_warning_variant': variables['custom_state_warning_variant'] || '',
+    '--custom_state_warning_variant':
+      variables['custom_state_warning_variant'] || '',
     '--custom_state_error_main': variables['custom_state_error_main'] || '',
-    '--custom_state_error_variant': variables['custom_state_error_variant'] || '',
+    '--custom_state_error_variant':
+      variables['custom_state_error_variant'] || '',
     '--custom_state_info_main': variables['custom_state_info_main'] || '',
     '--custom_state_info_variant': variables['custom_state_info_variant'] || '',
   };

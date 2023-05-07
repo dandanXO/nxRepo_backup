@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import React, {useCallback, useState} from "react";
+import React, { useCallback, useState } from "react";
 import ProductDetailModal from "../../modals/ProductDetailModal";
 import SubmitOrderModal from "../../modals/SubmitOrderModal";
 import SubmitOrderSuccessModal from "../../modals/SubmitOrderSuccessModal";
-import {PostLoanSubmitOrderRequestBody} from "../../../api/postLoanSubmitOrder";
-import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nLoanDetailsPage} from "./i18n/translations";
+import { PostLoanSubmitOrderRequestBody } from "../../../api/postLoanSubmitOrder";
+import { WithTranslation, withTranslation } from "react-i18next";
+import { i18nLoanDetailsPage } from "./i18n/translations";
 import BannerWithCard from "./BannerWithCard";
 import * as Sentry from "@sentry/react";
-import {CustomAxiosError} from "../../../api/base/axiosBaseQuery";
-import {AppFlag} from "../../../App";
+import { CustomAxiosError } from "../../../api/base/axiosBaseQuery";
+import { AppFlag } from "../../../App";
 
 const AdvertisementStyled = styled.div`
     margin-top: 32px;
@@ -35,27 +35,31 @@ const Advertisement = (props: AdvertisementProps) => {
     const [showSubmitOrderSuccessModal, setShowSubmitOrderSuccessModal] =
         useState(false);
 
-    const postLoanSubmitOrderRequest = (requestBody: PostLoanSubmitOrderRequestBody): Promise<string> => new Promise((resolve, reject) => {
-        if(props.isPostLoanSubmitOrderLoading) return;
+    const postLoanSubmitOrderRequest = (
+        requestBody: PostLoanSubmitOrderRequestBody
+    ): Promise<string> =>
+        new Promise((resolve, reject) => {
+            if (props.isPostLoanSubmitOrderLoading) return;
 
-        props.postLoanSubmitOrder(requestBody)
-          .unwrap()
-          .then(() => {
-            setShowSubmitOrdereModal(false);
-            setShowSubmitOrderSuccessModal(true);
-            resolve("");
-          })
-          .catch((err: CustomAxiosError) => {
-            const error = new Error();
-            error.name = "postLoanSubmitOrder"
-            if(err) error.message = JSON.stringify(err)
-            if(AppFlag.enableSentry) {
-              Sentry.captureException(error);
-            }
-            setShowSubmitOrdereModal(false);
-            reject("error")
-          })
-    });
+            props
+                .postLoanSubmitOrder(requestBody)
+                .unwrap()
+                .then(() => {
+                    setShowSubmitOrdereModal(false);
+                    setShowSubmitOrderSuccessModal(true);
+                    resolve("");
+                })
+                .catch((err: CustomAxiosError) => {
+                    const error = new Error();
+                    error.name = "postLoanSubmitOrder";
+                    if (err) error.message = JSON.stringify(err);
+                    if (AppFlag.enableSentry) {
+                        Sentry.captureException(error);
+                    }
+                    setShowSubmitOrdereModal(false);
+                    reject("error");
+                });
+        });
 
     const handleLoanSubmitOrder = (productId: number): Promise<string> => {
         return postLoanSubmitOrderRequest({
@@ -65,20 +69,24 @@ const Advertisement = (props: AdvertisementProps) => {
 
     return (
         <div>
-          {!AppFlag.hideLoanDetailRecommendProducts && (
-            <AdvertisementStyled>
-              <div className={"infoTitle"}>{props.t("More Recommend Loan")}</div>
-              {recommendProducts.map((ad) => (
-                <BannerWithCard
-                  key={ad["productId"]}
-                  adProps={ad}
-                  setShowProductDetailModal={setShowProductDetailModal}
-                  setProductDetails={setProductDetails}
-                  setShowSubmitOrdereModal={setShowSubmitOrdereModal}
-                />
-              ))}
-            </AdvertisementStyled>
-          )}
+            {!AppFlag.hideLoanDetailRecommendProducts && (
+                <AdvertisementStyled>
+                    <div className={"infoTitle"}>
+                        {props.t("More Recommend Loan")}
+                    </div>
+                    {recommendProducts.map((ad) => (
+                        <BannerWithCard
+                            key={ad["productId"]}
+                            adProps={ad}
+                            setShowProductDetailModal={
+                                setShowProductDetailModal
+                            }
+                            setProductDetails={setProductDetails}
+                            setShowSubmitOrdereModal={setShowSubmitOrdereModal}
+                        />
+                    ))}
+                </AdvertisementStyled>
+            )}
 
             {showProductDetailModal && productDetails && (
                 <ProductDetailModal
@@ -104,5 +112,4 @@ const Advertisement = (props: AdvertisementProps) => {
     );
 };
 
-export default withTranslation(i18nLoanDetailsPage.namespace)(Advertisement)
-
+export default withTranslation(i18nLoanDetailsPage.namespace)(Advertisement);

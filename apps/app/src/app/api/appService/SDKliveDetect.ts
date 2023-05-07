@@ -3,5 +3,5 @@ export enum SDKliveDetect {
   ACCUAUTH,
   ADVANCE,
   GCT,
-  NONE
+  NONE,
 }

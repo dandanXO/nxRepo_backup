@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Page} from "@frontend/mobile/shared/ui";
+import { Page } from "@frontend/mobile/shared/ui";
 
 export const CameraSvgIconWrapper = styled.div`
     margin: 0 auto 10px;
@@ -22,7 +22,7 @@ export const Title = styled.div`
     text-align: center;
 `;
 export const UploadSection = styled.label.attrs<{ for: string }>((props) => ({
-  htmlFor: "file",
+    htmlFor: "file",
 }))`
     height: 183px;
     background-color: #919191;
@@ -37,7 +37,7 @@ export const UploadSection = styled.label.attrs<{ for: string }>((props) => ({
     width: 100%;
 `;
 export const UploadSectionImg = styled.div<{
-  imageURL: string;
+    imageURL: string;
 }>`
     width: 100%;
     background-image: ${(props) => `url(${props.imageURL})`};

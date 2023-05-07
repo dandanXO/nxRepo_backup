@@ -40,4 +40,4 @@ export type ICustomTailwindTheme = {
 
   custom_state_info_main: string;
   custom_state_info_variant: string;
-}
+};

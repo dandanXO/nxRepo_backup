@@ -53,7 +53,7 @@ function trimPreceding(length, nextValue, minDistance, min) {
 }
 
 function addHandlers(eventMap) {
-  Object.keys(eventMap).forEach(key => {
+  Object.keys(eventMap).forEach((key) => {
     if (typeof document !== 'undefined') {
       document.addEventListener(key, eventMap[key], false);
     }
@@ -61,7 +61,7 @@ function addHandlers(eventMap) {
 }
 
 function removeHandlers(eventMap) {
-  Object.keys(eventMap).forEach(key => {
+  Object.keys(eventMap).forEach((key) => {
     if (typeof document !== 'undefined') {
       document.removeEventListener(key, eventMap[key], false);
     }
@@ -138,14 +138,20 @@ class ReactSlider extends React.Component {
      * If an array is passed each value will determine the position of one thumb.
      * The values in the array must be sorted.
      */
-    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+    defaultValue: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.arrayOf(PropTypes.number),
+    ]),
 
     /**
      * Like `defaultValue` but for
      * [controlled components](http://facebook.github.io/react/docs/forms.html#controlled-components).
      */
     // eslint-disable-next-line zillow/react/require-default-props
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.arrayOf(PropTypes.number),
+    ]),
 
     /**
      * Determines whether the slider moves horizontally (from left to right)
@@ -260,7 +266,10 @@ class ReactSlider extends React.Component {
      * The length of the array must match the number of thumbs in the value array.
      */
     // eslint-disable-next-line zillow/react/require-default-props
-    ariaLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    ariaLabel: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
 
     /**
      * aria-labelledby for screen-readers to apply to the thumbs.
@@ -335,7 +344,7 @@ class ReactSlider extends React.Component {
     min: 0,
     max: 9999,
     step: 1,
-    pageFn: step => step * 10,
+    pageFn: (step) => step * 10,
     minDistance: 0,
     defaultValue: 0,
     orientation: 'horizontal',
@@ -350,9 +359,9 @@ class ReactSlider extends React.Component {
     snapDragDisabled: false,
     invert: false,
     marks: [],
-    renderThumb: props => <div {...props} />,
-    renderTrack: props => <div {...props} />,
-    renderMark: props => <span {...props} />,
+    renderThumb: (props) => <div {...props} />,
+    renderTrack: (props) => <div {...props} />,
+    renderMark: (props) => <span {...props} />,
   };
 
   constructor(props) {
@@ -406,7 +415,7 @@ class ReactSlider extends React.Component {
     }
 
     return {
-      value: value.map(item => trimAlignValue(item, props)),
+      value: value.map((item) => trimAlignValue(item, props)),
     };
   }
 
@@ -455,7 +464,7 @@ class ReactSlider extends React.Component {
     this.hasMoved = false;
   }
 
-  onMouseMove = e => {
+  onMouseMove = (e) => {
     // Prevent controlled updates from happening while mouse is moving
     this.setState({ pending: true });
 
@@ -465,7 +474,7 @@ class ReactSlider extends React.Component {
     this.move(newValue);
   };
 
-  onTouchMove = e => {
+  onTouchMove = (e) => {
     if (e.touches.length > 1) {
       return;
     }
@@ -492,7 +501,7 @@ class ReactSlider extends React.Component {
     this.move(newValue);
   };
 
-  onKeyDown = e => {
+  onKeyDown = (e) => {
     if (e.ctrlKey || e.shiftKey || e.altKey || e.metaKey) {
       return;
     }
@@ -534,7 +543,7 @@ class ReactSlider extends React.Component {
     }
   };
 
-  onSliderMouseDown = e => {
+  onSliderMouseDown = (e) => {
     // do nothing if disabled or right click
     if (this.props.disabled || e.button === 2) {
       return;
@@ -545,7 +554,7 @@ class ReactSlider extends React.Component {
 
     if (!this.props.snapDragDisabled) {
       const position = this.getMousePosition(e);
-      this.forceValueFromPosition(position[0], i => {
+      this.forceValueFromPosition(position[0], (i) => {
         this.start(i, position[0]);
         addHandlers(this.getMouseEventMap());
       });
@@ -554,7 +563,7 @@ class ReactSlider extends React.Component {
     pauseEvent(e);
   };
 
-  onSliderClick = e => {
+  onSliderClick = (e) => {
     if (this.props.disabled) {
       return;
     }
@@ -598,7 +607,10 @@ class ReactSlider extends React.Component {
 
   getTouchPosition(e) {
     const touch = e.touches[0];
-    return [touch[`page${this.axisKey()}`], touch[`page${this.orthogonalAxisKey()}`]];
+    return [
+      touch[`page${this.axisKey()}`],
+      touch[`page${this.orthogonalAxisKey()}`],
+    ];
   }
 
   getKeyDownEventMap() {
@@ -639,7 +651,7 @@ class ReactSlider extends React.Component {
   }
 
   // create the `keydown` handler for the i-th thumb
-  createOnKeyDown = i => e => {
+  createOnKeyDown = (i) => (e) => {
     if (this.props.disabled) {
       return;
     }
@@ -649,7 +661,7 @@ class ReactSlider extends React.Component {
   };
 
   // create the `mousedown` handler for the i-th thumb
-  createOnMouseDown = i => e => {
+  createOnMouseDown = (i) => (e) => {
     // do nothing if disabled or right click
     if (this.props.disabled || e.button === 2) {
       return;
@@ -665,7 +677,7 @@ class ReactSlider extends React.Component {
   };
 
   // create the `touchstart` handler for the i-th thumb
-  createOnTouchStart = i => e => {
+  createOnTouchStart = (i) => (e) => {
     if (this.props.disabled || e.touches.length > 1) {
       return;
     }
@@ -755,7 +767,8 @@ class ReactSlider extends React.Component {
     // The slider bounding rect is based on the viewport, so we must add the window scroll
     // offset to normalize the values.
     const windowOffset = window[`page${this.axisKey()}Offset`];
-    const sliderStart = windowOffset + (this.props.invert ? sliderMax : sliderMin);
+    const sliderStart =
+      windowOffset + (this.props.invert ? sliderMax : sliderMin);
 
     let pixelOffset = position - sliderStart;
     if (this.props.invert) {
@@ -813,9 +826,10 @@ class ReactSlider extends React.Component {
     // add to end
     zIndices.push(i);
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       startValue: prevState.value[i],
-      startPosition: position !== undefined ? position : prevState.startPosition,
+      startPosition:
+        position !== undefined ? position : prevState.startPosition,
       index: i,
       zIndices,
     }));
@@ -974,7 +988,9 @@ class ReactSlider extends React.Component {
     const obj = {
       position: 'absolute',
       willChange:
-        this.state.index >= 0 ? `${this.posMinKey()},${this.posMaxKey()}` : undefined,
+        this.state.index >= 0
+          ? `${this.posMinKey()},${this.posMaxKey()}`
+          : undefined,
     };
     obj[this.posMinKey()] = min;
     obj[this.posMaxKey()] = max;
@@ -989,22 +1005,22 @@ class ReactSlider extends React.Component {
   }
 
   renderThumb = (style, i) => {
-    const className = `${this.props.thumbClassName} ${this.props.thumbClassName}-${i} ${
-      this.state.index === i ? this.props.thumbActiveClassName : ''
-    }`;
+    const className = `${this.props.thumbClassName} ${
+      this.props.thumbClassName
+    }-${i} ${this.state.index === i ? this.props.thumbActiveClassName : ''}`;
 
     const props = {
-      'ref': r => {
+      ref: (r) => {
         this[`thumb${i}`] = r;
       },
-      'key': `${this.props.thumbClassName}-${i}`,
+      key: `${this.props.thumbClassName}-${i}`,
       className,
       style,
-      'onMouseDown': this.createOnMouseDown(i),
-      'onTouchStart': this.createOnTouchStart(i),
-      'onFocus': this.createOnKeyDown(i),
-      'tabIndex': 0,
-      'role': 'slider',
+      onMouseDown: this.createOnMouseDown(i),
+      onTouchStart: this.createOnTouchStart(i),
+      onFocus: this.createOnKeyDown(i),
+      tabIndex: 0,
+      role: 'slider',
       'aria-orientation': this.props.orientation,
       'aria-valuenow': this.state.value[i],
       'aria-valuemin': this.props.min,
@@ -1071,7 +1087,9 @@ class ReactSlider extends React.Component {
       tracks.push(this.renderTrack(i + 1, offset[i], offset[i + 1]));
     }
 
-    tracks.push(this.renderTrack(lastIndex + 1, offset[lastIndex], this.state.upperBound));
+    tracks.push(
+      this.renderTrack(lastIndex + 1, offset[lastIndex], this.state.upperBound)
+    );
 
     return tracks;
   }
@@ -1086,13 +1104,13 @@ class ReactSlider extends React.Component {
     } else if (typeof marks === 'number') {
       marks = Array.from({ length: range })
         .map((_, key) => key)
-        .filter(key => key % marks === 0);
+        .filter((key) => key % marks === 0);
     }
 
     return marks
       .map(parseFloat)
       .sort((a, b) => a - b)
-      .map(mark => {
+      .map((mark) => {
         const offset = this.calcOffset(mark);
 
         const props = {
@@ -1120,12 +1138,13 @@ class ReactSlider extends React.Component {
     return React.createElement(
       'div',
       {
-        ref: r => {
+        ref: (r) => {
           this.slider = r;
           this.resizeElementRef.current = r;
         },
         style: { position: 'relative' },
-        className: this.props.className + (this.props.disabled ? ' disabled' : ''),
+        className:
+          this.props.className + (this.props.disabled ? ' disabled' : ''),
         onMouseDown: this.onSliderMouseDown,
         onClick: this.onSliderClick,
       },

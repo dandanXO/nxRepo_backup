@@ -1,4 +1,3 @@
-
 // React Component User Action State: select, input
 // React Component RecommendProducts: api response product list -> (option)1. api response product list (component) -> (option) 2.redux
 // Form Validation
@@ -43,28 +42,24 @@ const inModule = {
   // component: {
   //
   // },
-  indiaPage: {
+  indiaPage: {},
+};
 
-  },
-}
-
-const bdModule = {
-
-}
+const bdModule = {};
 
 const reducer = {
   modalReducer: {
     apiModal: {
       zIndex: 0,
       show: false,
-      data: {}
+      data: {},
     },
     modal1V1: {
       zIndex: 0,
       show: false,
       data: {
         b: 1,
-      }
+      },
     },
     // modal1V2: {
     //   zIndex: 0,
@@ -106,15 +101,13 @@ const reducer = {
           shard: {},
         },
         component3: {},
-      }
+      },
     },
-    page2: {
-
-    }
+    page2: {},
   },
   module: {
     appInfo: {
-      packageId: {}
+      packageId: {},
     },
     theme: {},
   },
@@ -127,11 +120,7 @@ const reducer = {
     risk: {},
   },
   apiReducer: {
-    getIndexPage: {
-
-    },
-    getOpenIndexPage: {
-
-    }
+    getIndexPage: {},
+    getOpenIndexPage: {},
   },
-}
+};

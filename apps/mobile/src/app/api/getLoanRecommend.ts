@@ -1,10 +1,10 @@
-
 export interface GetLoanRecommendRequestQuerystring {
     /** 推荐笔数 */
     count?: string;
 }
 
-export interface GetLoanRecommendProductsResponse extends Array<GetLoanRecommendProducts> {
+export interface GetLoanRecommendProductsResponse
+    extends Array<GetLoanRecommendProducts> {
     data: GetLoanRecommendProducts[];
 }
 

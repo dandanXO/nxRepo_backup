@@ -1,7 +1,6 @@
-import {BankAccount} from "./BankAccount";
+import { BankAccount } from './BankAccount';
 
 export interface GetBankCardListResponse {
-    bankAccounts: BankAccount[];
-    tip: string;
+  bankAccounts: BankAccount[];
+  tip: string;
 }
-

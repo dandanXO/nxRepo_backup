@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import ProductDetailModal  from "./index";
+import ProductDetailModal from "./index";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
 import * as React from "react";
 

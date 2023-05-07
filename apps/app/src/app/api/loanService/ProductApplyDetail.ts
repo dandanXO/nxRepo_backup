@@ -4,4 +4,4 @@ export type ProductApplyDetail = {
 
   productId: number;
   // 產品編號
-}
+};

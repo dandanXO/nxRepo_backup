@@ -1,7 +1,7 @@
-import {PlatformChargeFeeRateDetail} from "./PlatformChargeFeeRateDetail";
-import {PayableRecords} from "./PayableRecords";
-import {PlatformProduct} from "./PlatformProduct";
-import {AvailableQuotaBar} from "./AvailableQuotaBar";
+import { PlatformChargeFeeRateDetail } from './PlatformChargeFeeRateDetail';
+import { PayableRecords } from './PayableRecords';
+import { PlatformProduct } from './PlatformProduct';
+import { AvailableQuotaBar } from './AvailableQuotaBar';
 
 export type GetIndexResponse = {
   availableAmount: number;
@@ -10,7 +10,7 @@ export type GetIndexResponse = {
   bankBindH5url: string;
   // H5银行绑卡URL
 
-  chargeFeeDetails: PlatformChargeFeeRateDetail[]
+  chargeFeeDetails: PlatformChargeFeeRateDetail[];
   // 平台费率项目占比(砍头金各项名目占比)
 
   customerServiceUrl: string;
@@ -51,7 +51,6 @@ export type GetIndexResponse = {
 
   quotaBar: AvailableQuotaBar;
 
-
   refreshable: boolean;
   // 可否刷新額度: 用戶有可能風控拒絕多次 不給重新刷新
 
@@ -67,4 +66,4 @@ export type GetIndexResponse = {
 
   usedAmount: number;
   // 已使用额度
-}
+};

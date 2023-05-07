@@ -1,6 +1,6 @@
 export type GetPersonalLoanRecommendRequestQuerystring = {
   count?: string;
-}
+};
 
 export type GetPersonalLoanRecommendResponse = {
   products: RecommendProduct[];
@@ -11,39 +11,39 @@ export type GetPersonalLoanRecommendResponse = {
   // 是否有已提交/处里中/审核中的申请
 
   riskReject?: boolean;
-}
+};
 
 export type RecommendProduct = {
-  approvedRate?:	string;
+  approvedRate?: string;
   // 广告通过率
 
-  approvedTime?:	string;
+  approvedTime?: string;
   // 广告通过时间
 
-  csContact?:	string;
+  csContact?: string;
   // 客服電話
 
-  csEmail?:	string;
+  csEmail?: string;
   // 產品客服郵件
 
-  interestRate?:	string;
+  interestRate?: string;
   // 建议借款服务费率
 
-  loanableAmount?:	number;
+  loanableAmount?: number;
   // 建议金额
 
-  logoUrl?:	string;
+  logoUrl?: string;
   // Logo icon
 
-  productId:	number;
+  productId: number;
   // 產品编号
 
-  productName?:	string;
+  productName?: string;
   // 產品名稱
 
-  terms?:	string;
+  terms?: string;
   // 建议借款周期
-}
+};
 
 export type PersonalQuotaBar = {
   current: number;
@@ -57,4 +57,4 @@ export type PersonalQuotaBar = {
 
   min: number;
   // 拉霸最低額度
-}
+};

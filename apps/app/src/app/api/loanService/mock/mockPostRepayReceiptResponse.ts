@@ -1,6 +1,6 @@
-import {PostRepayReceiptResponse} from "../PostRepayReceiptResponse";
+import { PostRepayReceiptResponse } from '../PostRepayReceiptResponse';
 
 export const mockPostRepayReceiptResponse: PostRepayReceiptResponse = {
-    receipt: "",
-    previewUrl: "",
+  receipt: '',
+  previewUrl: '',
 };

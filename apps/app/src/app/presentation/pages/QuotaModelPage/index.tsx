@@ -1,7 +1,5 @@
 const QuotaModelPage = () => {
-  return (
-    <div>QuotaModelPage</div>
-  )
-}
+  return <div>QuotaModelPage</div>;
+};
 
 export default QuotaModelPage;

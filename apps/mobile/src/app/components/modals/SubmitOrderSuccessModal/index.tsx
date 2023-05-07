@@ -1,8 +1,8 @@
 import { Modal } from "@frontend/mobile/shared/ui";
 import React from "react";
 import styled from "styled-components";
-import {WithTranslation, withTranslation} from "react-i18next";
-import {i18nSubmitOrderSuccessModal} from "./i18n/translations";
+import { WithTranslation, withTranslation } from "react-i18next";
+import { i18nSubmitOrderSuccessModal } from "./i18n/translations";
 
 const Container = styled.div`
     padding: 0 20px;
@@ -28,13 +28,17 @@ const SubmitOrderSuccessModal = (props: RepaymentNoticeModalProps) => {
                 content={
                     <Container>
                         <Paragraph>
-                          {props.t("Your submission has been received.")}
+                            {props.t("Your submission has been received.")}
                         </Paragraph>
                         <Paragraph>
-                          {props.t("Please wait while the loan is being reviewed.")}
+                            {props.t(
+                                "Please wait while the loan is being reviewed."
+                            )}
                         </Paragraph>
                         <Paragraph>
-                          {props.t("You can check all the loan history on the Loan Record page later.")}
+                            {props.t(
+                                "You can check all the loan history on the Loan Record page later."
+                            )}
                         </Paragraph>
                     </Container>
                 }
@@ -48,4 +52,6 @@ const SubmitOrderSuccessModal = (props: RepaymentNoticeModalProps) => {
     );
 };
 
-export default withTranslation(i18nSubmitOrderSuccessModal.namespace)(SubmitOrderSuccessModal);
+export default withTranslation(i18nSubmitOrderSuccessModal.namespace)(
+    SubmitOrderSuccessModal
+);

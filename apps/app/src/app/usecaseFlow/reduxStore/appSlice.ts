@@ -1,11 +1,11 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {GetInitServiceResponse} from "../../api/appService/GetInitServiceResponse";
-import {AndroidAppInfo} from "../../modules/window/IWindow";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { GetInitServiceResponse } from '../../api/appService/GetInitServiceResponse';
+import { AndroidAppInfo } from '../../modules/window/IWindow';
 
 export enum AppRunningModeEnum {
-  "Unknown" ,
-  "WEB" ,
-  "InAndroid"
+  'Unknown',
+  'WEB',
+  'InAndroid',
 }
 
 export type InitailState = {
@@ -18,29 +18,38 @@ export type InitailState = {
 
 const initialState: InitailState = {
   mode: AppRunningModeEnum.Unknown,
-  token: "",
+  token: '',
   isInit: false,
   androidAppInfo: null,
-}
+};
 
 export const appSlice = createSlice({
-  name: "app",
+  name: 'app',
   initialState,
   reducers: {
     init: (state: InitailState, action: PayloadAction<null>) => {
-      state.isInit = true
+      state.isInit = true;
     },
-    updateInit: (state: InitailState, action: PayloadAction<GetInitServiceResponse>) => {
+    updateInit: (
+      state: InitailState,
+      action: PayloadAction<GetInitServiceResponse>
+    ) => {
       state.init = action.payload;
     },
-    updateMode: (state: InitailState, action: PayloadAction<AppRunningModeEnum>) => {
+    updateMode: (
+      state: InitailState,
+      action: PayloadAction<AppRunningModeEnum>
+    ) => {
       state.mode = action.payload;
     },
     updateToken: (state: InitailState, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
-    updateAndroidInfo: (state: InitailState, action: PayloadAction<AndroidAppInfo>) => {
+    updateAndroidInfo: (
+      state: InitailState,
+      action: PayloadAction<AndroidAppInfo>
+    ) => {
       state.androidAppInfo = action.payload;
     },
-  }
-})
+  },
+});

@@ -7,9 +7,7 @@ export default {
     title: "Modal/AmountPaidModal",
     component: AmountPaidModal,
 } as ComponentMeta<typeof AmountPaidModal>;
-export const Template: ComponentStory<typeof AmountPaidModal> = (
-    args
-) => {
+export const Template: ComponentStory<typeof AmountPaidModal> = (args) => {
     const data = {
         balance: 0,
         repayAmount: 1380,

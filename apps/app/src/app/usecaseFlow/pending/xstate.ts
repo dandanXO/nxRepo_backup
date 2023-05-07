@@ -16,24 +16,24 @@ type UserEvent =
 
 type UserTypestate =
   | {
-  value: 'idle';
-  context: UserContext & {
-    user: undefined;
-    error: undefined;
-  };
-}
+      value: 'idle';
+      context: UserContext & {
+        user: undefined;
+        error: undefined;
+      };
+    }
   | {
-  value: 'loading';
-  context: UserContext;
-}
+      value: 'loading';
+      context: UserContext;
+    }
   | {
-  value: 'success';
-  context: UserContext & { user: User; error: undefined };
-}
+      value: 'success';
+      context: UserContext & { user: User; error: undefined };
+    }
   | {
-  value: 'failure';
-  context: UserContext & { user: undefined; error: string };
-};
+      value: 'failure';
+      context: UserContext & { user: undefined; error: string };
+    };
 
 const userMachine = createMachine<UserContext, UserEvent, UserTypestate>({
   id: 'user',
@@ -50,8 +50,8 @@ const userMachine = createMachine<UserContext, UserEvent, UserTypestate>({
     },
     failure: {
       /* ... */
-    }
-  }
+    },
+  },
 });
 
 const userService = interpret(userMachine);
@@ -59,6 +59,6 @@ const userService = interpret(userMachine);
 userService.subscribe((state) => {
   if (state.matches('success')) {
     // from the UserState typestate, `user` will be defined
-    console.log("name", state.context.user.name);
+    console.log('name', state.context.user.name);
   }
 });

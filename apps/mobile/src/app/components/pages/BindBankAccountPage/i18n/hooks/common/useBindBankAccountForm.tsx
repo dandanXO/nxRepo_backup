@@ -1,16 +1,16 @@
-import React, {useCallback, useState} from "react";
-import type {InputValue} from "@frontend/mobile/shared/ui";
-import {z} from "zod";
-import {useTranslation} from "react-i18next";
+import React, { useCallback, useState } from "react";
+import type { InputValue } from "@frontend/mobile/shared/ui";
+import { z } from "zod";
+import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import {i18nBankBindAccountPage} from "../../translations";
+import { i18nBankBindAccountPage } from "../../translations";
 
 const ValidationInfo = {
-  min1: i18next.t("This field cannot be left blank"),
+    min1: i18next.t("This field cannot be left blank"),
 };
 
 export const useBindBankAccountForm = () => {
-    const {t} = useTranslation(i18nBankBindAccountPage.namespace);
+    const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
     // NOTE: FormInput - bankcardNoData
     const [bankcardNoData, setBankcardNoData] = useState<InputValue<string>>({
@@ -23,10 +23,17 @@ export const useBindBankAccountForm = () => {
         const bankCardNoScheme = z
             .string()
             .min(1, ValidationInfo.min1)
-            .min(9, t("Account number must be between from 9 to 18 digits only.") as string)
+            .min(
+                9,
+                t(
+                    "Account number must be between from 9 to 18 digits only."
+                ) as string
+            )
             .max(
                 18,
-              t("Account number must be between from 9 to 18 digits only.") as string
+                t(
+                    "Account number must be between from 9 to 18 digits only."
+                ) as string
             );
         const result = bankCardNoScheme.safeParse(bankcardNoData.data);
         if (!result.success) {
@@ -47,28 +54,28 @@ export const useBindBankAccountForm = () => {
     }, [bankcardNoData.data]);
 
     const onAccountNumberChange = (event: any) => {
-      let data = event.target.value;
-      data = data.replace(/[^0-9]/g, "");
-      setBankcardNoData({
-        ...bankcardNoData,
-        data,
-      });
-    }
+        let data = event.target.value;
+        data = data.replace(/[^0-9]/g, "");
+        setBankcardNoData({
+            ...bankcardNoData,
+            data,
+        });
+    };
 
     const onAccountNumberBlur = () => {
-      validateBankcardNo();
-      if (String(confirmedBankcardNoData.data).length > 0) {
-        validateConfirmedBankcardNo();
-      }
-    }
+        validateBankcardNo();
+        if (String(confirmedBankcardNoData.data).length > 0) {
+            validateConfirmedBankcardNo();
+        }
+    };
 
     // NOTE: FormInput - confirmedBankcardNoData
     const [confirmedBankcardNoData, setConfirmedBankcardNoData] = useState<
-      InputValue<string>
-      >({
-      data: "",
-      isValidation: false,
-      errorMessage: "",
+        InputValue<string>
+    >({
+        data: "",
+        isValidation: false,
+        errorMessage: "",
     });
 
     const validateConfirmedBankcardNo = useCallback(() => {
@@ -79,8 +86,9 @@ export const useBindBankAccountForm = () => {
             .refine(
                 (confirmedBankcardNo) => confirmedBankcardNo === bankcardNo,
                 {
-                    message: t("Please make sure your account number match.") as string
-                  ,
+                    message: t(
+                        "Please make sure your account number match."
+                    ) as string,
                 }
             );
         const result = confirmedBankCardNoScheme.safeParse(confirmedBankcardNo);
@@ -102,28 +110,28 @@ export const useBindBankAccountForm = () => {
     }, [confirmedBankcardNoData.data, bankcardNoData.data]);
 
     const onConfirmAccountNumberChange = (event: any) => {
-      let data = event.target.value;
-      data = data.replace(/[^0-9]/g, "");
-      setConfirmedBankcardNoData({
-        ...confirmedBankcardNoData,
-        data,
-      });
-    }
+        let data = event.target.value;
+        data = data.replace(/[^0-9]/g, "");
+        setConfirmedBankcardNoData({
+            ...confirmedBankcardNoData,
+            data,
+        });
+    };
 
     const onConfirmAccountNumberBlur = () => {
-      validateConfirmedBankcardNo();
-    }
+        validateConfirmedBankcardNo();
+    };
 
     // NOTICE: reuse me
     const validate = useCallback(() => {
-
         // NOTE: FormInput
         validateBankcardNo();
         validateConfirmedBankcardNo();
-        return bankcardNoData.isValidation && confirmedBankcardNoData.isValidation
-
+        return (
+            bankcardNoData.isValidation && confirmedBankcardNoData.isValidation
+        );
     }, [
-      // NOTICE: REFACTOR ME
+        // NOTICE: REFACTOR ME
         bankcardNoData.isValidation,
         bankcardNoData.data,
         confirmedBankcardNoData.isValidation,
@@ -131,12 +139,12 @@ export const useBindBankAccountForm = () => {
     ]);
 
     return {
-      bankcardNoData,
-      onAccountNumberChange,
-      onAccountNumberBlur,
-      confirmedBankcardNoData,
-      onConfirmAccountNumberChange,
-      onConfirmAccountNumberBlur,
-      validate,
-    }
+        bankcardNoData,
+        onAccountNumberChange,
+        onAccountNumberBlur,
+        confirmedBankcardNoData,
+        onConfirmAccountNumberChange,
+        onConfirmAccountNumberBlur,
+        validate,
+    };
 };

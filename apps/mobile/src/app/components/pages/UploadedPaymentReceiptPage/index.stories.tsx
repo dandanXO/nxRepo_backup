@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AppThemeProvider } from "@frontend/mobile/shared/ui";
-import {PureUploadedPaymentReceiptPage} from "./PureUploadedPaymentReceiptPage";
+import { PureUploadedPaymentReceiptPage } from "./PureUploadedPaymentReceiptPage";
 export default {
     title: "Page/UploadedPaymentReceiptPage",
     component: PureUploadedPaymentReceiptPage,

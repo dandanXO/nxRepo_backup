@@ -102,102 +102,102 @@
             }
         },
         "serve-build": {
-          "executor": "@nrwl/webpack:webpack",
-          "outputs": ["{options.outputPath}"],
-          "defaultConfiguration": "production",
-          "options": {
-            "compiler": "babel",
-            "outputPath": "dist/apps/mobile",
-            "baseHref": "/",
-            "index": "apps/mobile/src/index.html",
-            "main": "apps/mobile/src/main.tsx",
-            "polyfills": "apps/mobile/src/polyfills.ts",
-            "tsConfig": "apps/mobile/tsconfig.app.json",
-            "assets": [
-              "apps/mobile/src/favicon.ico",
-              "apps/mobile/src/assets"
-            ],
-            "styles": [],
-            "scripts": [],
-            "webpackConfig": "apps/mobile/webpack.config.js",
-            "isolatedConfig": true
-          },
-          "configurations": {
-            "development": {
-              "extractLicenses": false,
-              "optimization": false,
-              "sourceMap": true,
-              "vendorChunk": true
+            "executor": "@nrwl/webpack:webpack",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "compiler": "babel",
+                "outputPath": "dist/apps/mobile",
+                "baseHref": "/",
+                "index": "apps/mobile/src/index.html",
+                "main": "apps/mobile/src/main.tsx",
+                "polyfills": "apps/mobile/src/polyfills.ts",
+                "tsConfig": "apps/mobile/tsconfig.app.json",
+                "assets": [
+                    "apps/mobile/src/favicon.ico",
+                    "apps/mobile/src/assets"
+                ],
+                "styles": [],
+                "scripts": [],
+                "webpackConfig": "apps/mobile/webpack.config.js",
+                "isolatedConfig": true
             },
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/mobile/src/environments/environment.ts",
-                  "with": "apps/mobile/src/environments/environment.prod.ts"
+            "configurations": {
+                "development": {
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true
+                },
+                "production": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.prod.ts"
+                        }
+                    ]
+                },
+                "development-in": {
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.in.dev.ts"
+                        }
+                    ]
+                },
+                "production-in": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.in.prod.ts"
+                        }
+                    ]
+                },
+                "development-pk": {
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.pk.dev.ts"
+                        }
+                    ]
+                },
+                "production-pk": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.pk.prod.ts"
+                        }
+                    ]
+                },
+                "development-bd": {
+                    "extractLicenses": false,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "vendorChunk": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.bd.dev.ts"
+                        }
+                    ]
+                },
+                "production-bd": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/mobile/src/environments/environment.ts",
+                            "with": "apps/mobile/src/environments/environment.bd.prod.ts"
+                        }
+                    ]
                 }
-              ]
-            },
-            "development-in": {
-              "extractLicenses": false,
-              "optimization": false,
-              "sourceMap": true,
-              "vendorChunk": true,
-              "fileReplacements": [
-                {
-                  "replace": "apps/mobile/src/environments/environment.ts",
-                  "with": "apps/mobile/src/environments/environment.in.dev.ts"
-                }
-              ]
-            },
-            "production-in": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/mobile/src/environments/environment.ts",
-                  "with": "apps/mobile/src/environments/environment.in.prod.ts"
-                }
-              ]
-            },
-            "development-pk": {
-              "extractLicenses": false,
-              "optimization": false,
-              "sourceMap": true,
-              "vendorChunk": true,
-              "fileReplacements": [
-                {
-                  "replace": "apps/mobile/src/environments/environment.ts",
-                  "with": "apps/mobile/src/environments/environment.pk.dev.ts"
-                }
-              ]
-            },
-            "production-pk": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/mobile/src/environments/environment.ts",
-                  "with": "apps/mobile/src/environments/environment.pk.prod.ts"
-                }
-              ]
-            },
-            "development-bd": {
-              "extractLicenses": false,
-              "optimization": false,
-              "sourceMap": true,
-              "vendorChunk": true,
-              "fileReplacements": [
-                {
-                  "replace": "apps/mobile/src/environments/environment.ts",
-                  "with": "apps/mobile/src/environments/environment.bd.dev.ts"
-                }
-              ]
-            },
-            "production-bd": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/mobile/src/environments/environment.ts",
-                  "with": "apps/mobile/src/environments/environment.bd.prod.ts"
-                }
-              ]
             }
-          }
         },
         "serve": {
             "executor": "@nrwl/webpack:dev-server",
@@ -240,43 +240,37 @@
         "serve:in": {
             "executor": "@nrwl/webpack:dev-server",
             "defaultConfiguration": "development",
-            "options": {
-
-            },
+            "options": {},
             "configurations": {
                 "development": {
-                  "buildTarget": "mobile:serve-build:development-in",
-                  "hmr": true
+                    "buildTarget": "mobile:serve-build:development-in",
+                    "hmr": true
                 },
                 "production": {
-                  "buildTarget": "mobile:serve-build:production-in",
-                  "hmr": false
+                    "buildTarget": "mobile:serve-build:production-in",
+                    "hmr": false
                 }
             }
         },
         "serve:pk": {
             "executor": "@nrwl/web:dev-server",
             "defaultConfiguration": "development",
-            "options": {
-
-            },
+            "options": {},
             "configurations": {
                 "development": {
                     "buildTarget": "mobile:serve-build:development-pk",
                     "hmr": true
                 },
                 "production": {
-                  "buildTarget": "mobile:serve-build:production-pk",
-                  "hmr": false
+                    "buildTarget": "mobile:serve-build:production-pk",
+                    "hmr": false
                 }
             }
         },
         "serve:bd": {
             "executor": "@nrwl/web:dev-server",
             "defaultConfiguration": "development",
-            "options": {
-
-            },
+            "options": {},
             "configurations": {
                 "development": {
                     "buildTarget": "mobile:serve-build:development-bd",

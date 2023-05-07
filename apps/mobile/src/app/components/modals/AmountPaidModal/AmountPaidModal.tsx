@@ -9,8 +9,8 @@ import {
     Title,
     Divider,
 } from "@frontend/mobile/shared/ui";
-import {withTranslation, WithTranslation} from "react-i18next";
-import {i18nAmountPaidModal} from "./i18n/translations";
+import { withTranslation, WithTranslation } from "react-i18next";
+import { i18nAmountPaidModal } from "./i18n/translations";
 
 const ModalContentStyled = styled.div`
     padding: 0 12px;
@@ -82,7 +82,9 @@ const AmountPaidModal = (props: AmountPaidRecordsProps) => {
                             <Title>{t("Amount Paid Record")}</Title>
                             <Divider styleType="narrow" />
                             {repayRecords?.length === 0 ? (
-                                <NoDataStyled>{t("No paid records yet")}</NoDataStyled>
+                                <NoDataStyled>
+                                    {t("No paid records yet")}
+                                </NoDataStyled>
                             ) : (
                                 <ModalContentStyled>
                                     {renderRecordList(props)}

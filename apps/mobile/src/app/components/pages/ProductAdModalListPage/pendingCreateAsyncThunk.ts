@@ -1,4 +1,3 @@
-
 // NOTE: Just for testing
 // https://redux-toolkit.js.org/api/createAsyncThunk
 // export const refreshToFetchLoanQuota = createAsyncThunk("/api/v2/loan/quota/refresh",

@@ -1,3 +1,3 @@
 export interface CameraSvgIconProps {
-  fill?: string;
+    fill?: string;
 }
