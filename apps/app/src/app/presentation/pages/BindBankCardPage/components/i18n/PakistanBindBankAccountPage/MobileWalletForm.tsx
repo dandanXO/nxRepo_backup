@@ -1,6 +1,6 @@
 import { Form } from '../../Form';
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
-import React, {ClipboardEvent} from 'react';
+import React, { ClipboardEvent } from 'react';
 import { Label } from '../../Label';
 import { useNavigate } from 'react-router';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
@@ -36,8 +36,8 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
     return { value: index, label: item };
   });
   const preventCopyPaste = (e: ClipboardEvent<any>) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
   return (
     <div className="grow flex flex-col">
       <div>

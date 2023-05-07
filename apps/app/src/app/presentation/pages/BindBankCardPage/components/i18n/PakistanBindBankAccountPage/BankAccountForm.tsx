@@ -1,4 +1,4 @@
-import React, {ClipboardEvent, } from 'react';
+import React, { ClipboardEvent } from 'react';
 
 import { Input } from '@frontend/mobile/shared/ui';
 import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
@@ -16,8 +16,8 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
   });
 
   const preventCopyPaste = (e: ClipboardEvent<any>) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   return (
     <div className="grow flex flex-col">
