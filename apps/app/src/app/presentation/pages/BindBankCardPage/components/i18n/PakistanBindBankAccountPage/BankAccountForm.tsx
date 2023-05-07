@@ -1,7 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Form } from '../../Form';
-import { Label } from '../../Label';
+import React, {ClipboardEvent, } from 'react';
+
 import { Input } from '@frontend/mobile/shared/ui';
 import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
 import Select from 'react-select';
@@ -16,6 +14,10 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
   const options = props.bankDropList?.map((item: string, index: number) => {
     return { value: index, label: item };
   });
+
+  const preventCopyPaste = (e: ClipboardEvent<any>) => {
+    e.preventDefault()
+  }
 
   return (
     <div className="grow flex flex-col">
@@ -41,6 +43,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onChange={props.onIBanChange}
           onBlur={props.onIbanBlur}
           errorMessage={props.iBanData.errorMessage}
+          onCopy={(e) => preventCopyPaste(e)}
+          onPaste={(e) => preventCopyPaste(e)}
+          onCut={(e) => preventCopyPaste(e)}
         />
         <div
           className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
@@ -79,6 +84,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
+          onCopy={(e) => preventCopyPaste(e)}
+          onPaste={(e) => preventCopyPaste(e)}
+          onCut={(e) => preventCopyPaste(e)}
         />
       </div>
 
@@ -93,6 +101,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
+          onCopy={(e) => preventCopyPaste(e)}
+          onPaste={(e) => preventCopyPaste(e)}
+          onCut={(e) => preventCopyPaste(e)}
         />
       </div>
       <div className="grow flex flex-col justify-end mb-2">
