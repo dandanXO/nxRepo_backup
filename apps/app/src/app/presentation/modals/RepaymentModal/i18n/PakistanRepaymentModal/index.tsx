@@ -62,9 +62,9 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 value={balanceValue}
                 disabled={radioValue === "balance"}
                 onChange={(event: any) => {
+                  event.preventDefault();
                   let value = event.target.value;
                   // console.log("value", value);
-
                   value = value.replace(`${environment.currency}`, "");
 
                   if(value === "") {
@@ -77,9 +77,8 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                   } else {
                     setBalanceValueErrorMessage("")
                   }
-
                   // setBalanceValue(value);
-                  if(value === environment.currency.slice(0, 2)) {
+                  if(value === "KR" || value === "PR" || value === "PKR" || value === "PK") {
 
                   } else {
                     setBalanceValue(`${environment.currency}${value}`);
