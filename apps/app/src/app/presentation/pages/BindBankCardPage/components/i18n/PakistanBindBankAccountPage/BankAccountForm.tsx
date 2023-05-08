@@ -24,7 +24,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Cardholder Name'}</div>
         <Input
-          className="mb-2"
+          className="mb-2 select-none	"
           labelType={'none'}
           outlineType={'standard'}
           placeholder={'Cardholder Name'}
@@ -36,6 +36,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>
         <Input
+          className={"select-none"}
           labelType={'none'}
           outlineType={'standard'}
           placeholder={'Ex. PK36FTBK0000111123456702'}
@@ -59,7 +60,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         <div className={'text-sm'}>{'Bank Name'}</div>
         <Select
           styles={selectStyles}
-          className=" mb-2"
+          className="mb-2 select-none"
           // defaultValue={props.bankDropList[0].value}
           // value={props?.bankDropList[props.bankAccountValue]?.value}
           value={props.bankAccountValue}
@@ -76,7 +77,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Account Number'}</div>
         <Input
-          className="mb-2"
+          className="mb-2 select-none"
           labelType={'none'}
           outlineType={'standard'}
           placeholder={'Account Number'}
@@ -93,7 +94,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Confirm Account Number'}</div>
         <Input
-          className="mb-2"
+          className="mb-2 select-none"
           labelType={'none'}
           outlineType={'standard'}
           placeholder={'Confirm Account Number'}
