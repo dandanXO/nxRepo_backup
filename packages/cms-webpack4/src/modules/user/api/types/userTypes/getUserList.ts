@@ -9,6 +9,7 @@ export interface GetUserListRequestQuerystring {
     nameTrue?: string;              // 姓名
     newMember?: boolean | string;   // 是否为新客
     noLoanAgain?: boolean;          // 結清未複借
+    hasVerifyNotApply?: boolean;    // 通过认证未申请
     noLoanAgainEndDays?: number;    // 結清未複借終止天數
     noLoanAgainStartDays?: number;  // 結清未複借起始天數
     phoneNo?: string;               // 手機號

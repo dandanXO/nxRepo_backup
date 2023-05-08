@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space,Tag ,Select, Tooltip,notification} from 'antd';
+import { Button, Form, InputNumber, Modal, Radio, Space, Tag, Select, Tooltip, notification, Checkbox } from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
 import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation, usePostUserBanReleaseMutation, useDeleteBlackListMutation, usePostUserManageQuotaLabelMutation } from '../../../api/UserApi';
 import moment from 'moment';
@@ -46,7 +46,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     const [setQuotaLabel, { isSuccess: isSetQuotaLabelSuccess }] = usePostUserManageQuotaLabelMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
-        addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
+        addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false, hasVerifyNotApply: false,
         noLoanAgainEndDays: 30, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", status: "", pageNum: 1, pageSize: 10
     }
     // redux
@@ -56,6 +56,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     // state
     const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
+    const [hasVerifyNotApply, setHasVerifyNotApply] = useState(false)
     const [isImportTelSale, setIsImportTelSale] = useState(false);
     const [isExportRemainOrder, setIsExportRemainOrder] = useState(false);
     const [modal, contextHolder] = Modal.useModal();
@@ -261,7 +262,6 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         {
             title: '结清未复借',
             dataIndex: 'noLoanAgain',
-            colSize: 6,
             hideInTable: true,
             renderFormItem: (text, { }, form) => {
                 return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain: searchParams.noLoanAgain || isNoLoanAgain }}>
@@ -270,6 +270,18 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                             <Radio.Button value={true}>是</Radio.Button>
                             <Radio.Button value={false}>否</Radio.Button>
                         </Radio.Group>
+                    </Form.Item>
+                </Form>
+            }
+        },
+        {
+            title: '通过认证未申请',
+            dataIndex: 'hasVerifyNotApply',
+            hideInTable: true,
+            renderFormItem: (text, { }, form) => {
+                return <Form form={form} name={'hasVerifyNotApply'} initialValues={{ hasVerifyNotApply: searchParams.hasVerifyNotApply || hasVerifyNotApply }}>
+                    <Form.Item>
+                        <Checkbox value={hasVerifyNotApply ? "false": "ture"} checked={hasVerifyNotApply} onChange={({ target:{ checked }})=> setHasVerifyNotApply(checked)} />
                     </Form.Item>
                 </Form>
             }
@@ -329,6 +341,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                             setSearchList(initSearchList);
                             setIsImportTelSale(false);
                             setIsNoLoanAgain(false);
+                            setHasVerifyNotApply(false);
                             setIsExportRemainOrder(false);
                         }}>{resetText}</Button>
                         <Button
