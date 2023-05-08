@@ -36,7 +36,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>
         <Input
-          name={"iban"}
+          name={'iban'}
           labelType={'none'}
           outlineType={'standard'}
           placeholder={'Ex. PK36FTBK0000111123456702'}
@@ -77,7 +77,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Account Number'}</div>
         <Input
-          name={"account"}
+          name={'account'}
           className="mb-2"
           labelType={'none'}
           outlineType={'standard'}
@@ -95,7 +95,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Confirm Account Number'}</div>
         <Input
-          name={"account_confirm"}
+          name={'account_confirm'}
           className="mb-2"
           labelType={'none'}
           outlineType={'standard'}

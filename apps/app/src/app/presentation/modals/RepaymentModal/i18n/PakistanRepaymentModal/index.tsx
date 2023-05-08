@@ -67,7 +67,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
       <div>
         <div className="text-black mt-3 text-xs">{'Payment Amount (PKR)'}</div>
         <Input
-          name={"amount"}
+          name={'amount'}
           labelType="none"
           outlineType="standard"
           value={balanceValue}

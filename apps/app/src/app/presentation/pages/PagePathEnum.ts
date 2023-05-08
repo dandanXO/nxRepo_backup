@@ -16,5 +16,3 @@ export enum PagePathEnum {
   DisclosureStatementPage = '/disclosure-statement',
   CustomerServicePage = '/customer-service',
 }
-
-

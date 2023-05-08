@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router';
 
 // NOTE: Dynamic imports are only supported when the '--module' flag is
@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 import { TabBar } from '../components/layouts/TabBar';
 import { RootState } from '../../usecaseFlow/reduxStore';
 import { PagePathEnum } from '../pages/PagePathEnum';
-import AppDataCollector from "../../AppDataCollector";
+import AppDataCollector from '../../AppDataCollector';
 
 const AuthPage = loadable(
   () => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage')
@@ -191,7 +191,6 @@ export const AppRouter = () => {
   // useEffect(() => {
   //   dispatch(SystemCaseActions.InitSaga());
   // }, [])
-
 
   return (
     <AppDataCollector>
