@@ -2,6 +2,9 @@
 
 1. Fixed widths
 2. Fixed heights
+3. [Dynamically build classnames in TailwindCss](https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss)
+   4. [Safelisting classes](https://tailwindcss.com/docs/content-configuration#safelisting-classes)
+      5. [tailwind-safelist-generator](https://www.npmjs.com/package/tailwind-safelist-generator)
 
 ---
 
