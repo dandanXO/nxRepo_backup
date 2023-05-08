@@ -132,7 +132,7 @@ class GoogleAuth extends Component{
                 }).then((res) => {
                     if (Number(res.code) === 200) {
                         Cookies.set('loginInfo', res);
-                        dispatch(loginAction.lgFirstLogin(false))
+                        dispatch(loginAction.lgSetGoogleAuth(false))
                         history.push('/index');
                     }
                 })
