@@ -86,6 +86,7 @@ export interface InputProps {
   onCopy?: (e: ClipboardEvent) => void;
   onPaste?: (e: ClipboardEvent) => void;
   onCut?: (e: ClipboardEvent) => void;
+  name?: string;
 }
 
 // NOTICE: 實際產出元件的 dot 特性
@@ -135,6 +136,7 @@ const Input: InputInterface = ({
   onCopy,
   onPaste,
   onCut,
+  name,
 }: InputProps) => {
   const forceUpdate = useForceUpdate();
 
@@ -316,6 +318,7 @@ const Input: InputInterface = ({
             // NOTICE: labelID
             disabled={disabled}
             id={labelID}
+            name={name}
             // isFocus={value.length > 0 && !isEdit}
             ref={targetRef}
             // Modal - Display

@@ -21,6 +21,7 @@ import { PostRepayCreateResponse } from '../loanService/PostRepayCreateResponse'
 import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
 import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicableListRequest';
 import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
+import {TraceBehaviorRequest} from "./TraceBehaviorRequest";
 
 export type LoginRequest = {
   msgCode: string;
@@ -101,12 +102,22 @@ export const APIV3 = createApi({
         params: query,
       }),
     }),
+
+    // NOTE:
+    postTraceBehavior: builder.mutation<null, TraceBehaviorRequest>({
+      query: (data: TraceBehaviorRequest) => ({
+        method: "post",
+        url: `/trace/behavior`,
+        params: data
+      })
+    })
   }),
 });
 
 export const {
   useLazyGetLoanRecordListQuery,
   useLazyGetCouponApplicableListQuery,
+  usePostTraceBehaviorMutation,
 } = APIV3;
 
 export const API = createApi({

@@ -8,6 +8,7 @@ export enum PagePathEnum {
   ApplicationProgressPage = '/v2/application-progress',
 
   BankcardListPage = '/v2/bankcard-list',
+  BindBankcard = '/v2/bind-bankcard',
 
   PrivacyPolicyPage = '/v2/privacy-policy',
   PrivacyPolicyModal = '/v2/privacy-policy-modal',
@@ -15,3 +16,5 @@ export enum PagePathEnum {
   DisclosureStatementPage = '/disclosure-statement',
   CustomerServicePage = '/customer-service',
 }
+
+
