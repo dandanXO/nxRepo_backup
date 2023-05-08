@@ -83,8 +83,5 @@ module.exports = {
   plugins: [
     // require("daisyui")
   ],
-  safelist: [
-    "border-l-2",
-    "border-dashed",
-  ]
+  safelist: ['border-l-2', 'border-dashed'],
 };
