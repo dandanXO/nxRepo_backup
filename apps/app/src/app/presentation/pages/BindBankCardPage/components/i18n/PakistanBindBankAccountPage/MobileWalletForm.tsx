@@ -58,7 +58,6 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       </div>
       <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>
       <Input
-        className={"select-none"}
         labelType={'none'}
         outlineType={'standard'}
         placeholder={'Ex. PK36FTBK0000111123456702'}
@@ -80,7 +79,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       <div>
         <div className={'text-sm mb-0'}>{'Mobile Wallet Account'}</div>
         <Input
-          className="mb-1 select-none"
+          className="mb-1"
           textAlign={'left'}
           labelType={'left'}
           outlineType={'standard'}
@@ -99,7 +98,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       <div>
         <div className={'text-sm'}>{'Confirm Mobile Wallet Account'}</div>
         <Input
-          className="mb select-none"
+          className="mb"
           textAlign={'left'}
           labelType={'left'}
           outlineType={'standard'}
@@ -126,3 +125,5 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
     </div>
   );
 };
+
+
