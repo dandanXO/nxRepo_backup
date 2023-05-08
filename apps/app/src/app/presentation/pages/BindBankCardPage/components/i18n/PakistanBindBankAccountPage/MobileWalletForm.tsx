@@ -125,5 +125,3 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
     </div>
   );
 };
-
-
