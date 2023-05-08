@@ -65,7 +65,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
   const renderStatusTag = (status: string) => {
     return (
-      <div className={`${Status(status)?.style} px-1`}>
+      <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>
         {Status(status)?.text}
       </div>
     );

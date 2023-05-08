@@ -12,6 +12,7 @@ import { RiArrowUpSLine } from '@react-icons/all-files/ri/RiArrowUpSLine';
 import { RiArrowDownSLine } from '@react-icons/all-files/ri/RiArrowDownSLine';
 import { getOrderNo } from '../../../modules/location/getOrderNo';
 import { Button } from '../../components/layouts/Button';
+import { Status } from '../../../modules/statusEnum';
 
 const PaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();
@@ -39,23 +40,6 @@ const PaymentItem = (props: GetLoanRecord) => {
       ? repayRecords[repayRecords.length - 1].repayDate
       : '';
 
-  const statusEnum = {
-    OVERDUE: {
-      text: 'Overdue',
-      color: 'text-red-500',
-      buttonText: 'Repay Details',
-    },
-    PAY_OFF: { text: 'Pay off', color: 'text-sky-400', buttonText: '' },
-    UNPAID: { text: 'Unpaid', color: '', buttonText: 'Repay Details' },
-    PROCESSING: { text: 'Processing', color: '', buttonText: 'Details' },
-    REJECTED: { text: 'Reject', color: 'text-red-500', buttonText: 'Details' },
-    EXTEND: {
-      text: 'Extend',
-      color: 'text-sky-600',
-      buttonText: 'Repay Details',
-    },
-  } as { [key: string]: { text: string; color: string; buttonText: string } };
-
   const [collapse, setCollapse] = useState(false);
   const handleCollapse = () => {
     setCollapse(!collapse);
@@ -78,8 +62,8 @@ const PaymentItem = (props: GetLoanRecord) => {
           </div>
           <div className="text-sm font-bold">{productName ?? ''}</div>
         </div>
-        <div className={`text-xs font-bold ${statusEnum[status].color}`}>
-          {status ? statusEnum[status].text : ''}
+        <div className={`text-xs font-bold ${Status(status).color}`}>
+          {status ? Status(status).text : ''}
         </div>
       </div>
       <div className="flex flex-row justify-between px-2 items-center">
@@ -94,7 +78,7 @@ const PaymentItem = (props: GetLoanRecord) => {
         </div>
         {status !== 'PAY_OFF' && (
           <Button
-            text={status ? statusEnum[status].buttonText : ''}
+            text={status ? Status(status).buttonText : ''}
             className={'text-xs'}
             onClick={() =>
               navigate(`${navigateRoute}?token=${getToken()}`, {
@@ -144,9 +128,8 @@ const PaymentItem = (props: GetLoanRecord) => {
             <ListItem
               title={'Repayment Amount'}
               text={`${environment.currency} ${balance ?? ''}`}
-              titleColor="text-slate-400"
+              titleColor={status === 'OVERDUE' ? Status(status).color : ''}
               fontWeight="font-bold"
-              textColor={status === 'OVERDUE' ? 'text-red-500' : ''}
             />
           )}
           <Divider />
