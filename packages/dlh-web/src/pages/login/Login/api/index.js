@@ -20,6 +20,7 @@ import { axios } from 'utils';
 const api = {
     loginVerifyCodeData: '/hs/admin/auth/sendVerifyCode',
     login: '/hs/admin/auth/login',
+    googleAuthQRCodeUrl: '/hs/admin/auth/getGoogleAuthQRCode'
 
 };
 // 取得登入驗證碼
@@ -32,4 +33,9 @@ const postLogin = (params) => {
     return axios.post(api.login, params)
 }
 
-export { postLoginVerifyCodeData, postLogin };
+// 取得GoogleAuthQRCodeUrl
+const getGoogleAuthQRCodeUrl = () => {
+  return axios.post(api.googleAuthQRCodeUrl)
+}
+
+export { postLoginVerifyCodeData, postLogin, getGoogleAuthQRCodeUrl };

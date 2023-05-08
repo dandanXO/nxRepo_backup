@@ -6,11 +6,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl} from "react-intl";
 
-import { userLogout } from 'utils';
+import { userLogout, axios } from 'utils';
 import {loginAction } from './index';
 import styles from './Login.less';
 import LanguageSwitch from '../../../locales/component/LanguageSwitch';
-import { axios, getLoginInfo} from "../../../utils";
 
 
 class Login extends Component{
@@ -54,33 +53,33 @@ class Login extends Component{
     }
 
     handleSubmit = (e) => {
-        const { firstLoggedIn, dispatch, form: { getFieldsValue } } = this.props;
+        const { needGoogleAuth, dispatch, form: { getFieldsValue } } = this.props;
         e.preventDefault();
 
-        if(!firstLoggedIn) {
-            // 尚未進行第一次登入
-            this.props.form.validateFields((err, values) => {
-              if (!err) {
-                const { phoneNumber, captcha } = getFieldsValue();
-                // NOTICE: UseCase:Login
-                dispatch(loginAction.lgPostLogin({
-                  phoneNo: phoneNumber,
-                  code: captcha
-                }));
-              }
-            });
-          } else {
-            // 已進行第一次登入
-            const { googleAuthCode } = getFieldsValue();
-            if(!googleAuthCode) {
-              // 尚未輸入google驗證碼，提示錯誤
-              this.setState({ ...this.state, googleAuthCodeRequired: true })
-            } else {
-              // 已輸入google 驗證碼，呼叫以google 驗證碼取得token API
-              dispatch(loginAction.lgChangeLoading(true))
-              this.verifyGoogleAuthCode(googleAuthCode)
+        if(!needGoogleAuth) {
+          // 尚未進行第一次登入
+          this.props.form.validateFields((err, values) => {
+            if (!err) {
+              const { phoneNumber, captcha } = getFieldsValue();
+              // NOTICE: UseCase:Login
+              dispatch(loginAction.lgPostLogin({
+                phoneNo: phoneNumber,
+                code: captcha
+              }));
             }
-        }
+          });
+        } else {
+          // 已進行第一次登入
+          const { googleAuthCode } = getFieldsValue();
+          if(!googleAuthCode) {
+            // 尚未輸入google驗證碼，提示錯誤
+            this.setState({ ...this.state, googleAuthCodeRequired: true })
+          } else {
+            // 已輸入google 驗證碼，呼叫以google 驗證碼取得token API
+            dispatch(loginAction.lgChangeLoading(true))
+            this.verifyGoogleAuthCode(googleAuthCode)
+          }
+      }
     }
 
     verifyGoogleAuthCode = (googleAuthCode) => {
@@ -92,7 +91,7 @@ class Login extends Component{
         const { dispatch, history } = this.props;
         if(Number(res.code) === 200) {
           Cookies.set('loginInfo', res);
-          dispatch(loginAction.lgFirstLogin(false))
+          dispatch(loginAction.lgSetGoogleAuth(false))
           history.push('/index')
         }
         dispatch(loginAction.lgChangeLoading(false))
@@ -100,44 +99,20 @@ class Login extends Component{
     }
 
     componentWillReceiveProps(nextProps) {
-        const { isCancelTimer, firstLoggedIn, form, dispatch, history } = nextProps;
+        const { isCancelTimer, needGoogleAuth, form, dispatch, history } = nextProps;
         const { getFieldsValue } = form;
 
-        // 第一次登入後判斷是否要進行Google驗證
-        if(firstLoggedIn && firstLoggedIn !== this.props.firstLoggedIn){
-          const hasLoginInfo = getLoginInfo()
-          const { data: { googleAuthFlag, passGoogleAuth } } = hasLoginInfo;
-
-          // 無需Google驗證碼，跳轉至Index頁面
-          if((googleAuthFlag && passGoogleAuth) || !googleAuthFlag){
-            dispatch(loginAction.lgFirstLogin(false))
+        // 判斷是否需要驗證Google Auth code
+        if(needGoogleAuth && needGoogleAuth !== this.props.needGoogleAuth){
+          const { googleAuthCode } = getFieldsValue();
+          if(!googleAuthCode) {
+            // 尚未輸入google驗證碼，提示錯誤
+            this.setState({ ...this.state, googleAuthCodeRequired: true })
             dispatch(loginAction.lgChangeLoading(false))
-            history.push("/index")
+          } else {
+            // 已輸入google 驗證碼，呼叫以google 驗證碼取得token API
+            this.verifyGoogleAuthCode(googleAuthCode)
           }
-
-          // 取得google驗證碼QR Code URL，若googleAuthUrl為空表示已綁定過裝置。
-          axios({
-            url: '/hs/admin/auth/getGoogleAuthQRCode',
-            method: 'post'
-          }).then((res) => {
-            const { googleAuthUrl } = res;
-            if(googleAuthUrl) {
-              // 需要Google Auth 需要綁定裝置，跳轉至google auth 頁面
-              dispatch(loginAction.lgSetGoogleAuthUrl(googleAuthUrl))
-              dispatch(loginAction.lgChangeLoading(false))
-              history.push('/googleauth')
-            }
-            // 已綁定過裝置，驗證Google auth code
-            const { googleAuthCode } = getFieldsValue();
-            if(!googleAuthCode) {
-              // 尚未輸入google驗證碼，提示錯誤
-              this.setState({ ...this.state, googleAuthCodeRequired: true })
-              dispatch(loginAction.lgChangeLoading(false))
-            } else {
-              // 已輸入google 驗證碼，呼叫以google 驗證碼取得token API
-              this.verifyGoogleAuthCode(googleAuthCode)
-            }
-          })
         }
 
         if(isCancelTimer && isCancelTimer !== this.props.isCancelTimer) {
@@ -230,7 +205,7 @@ const mapStateToProps = (state) => {
     return {
         btnLoading: loginManageState['btnLoading'],
         isCancelTimer: loginManageState['isCancelTimer'],
-        firstLoggedIn: loginManageState['firstLoggedIn'],
+        needGoogleAuth: loginManageState['needGoogleAuth'],
         googleAuthUrl: loginManageState['googleAuthUrl']
     }
 };
