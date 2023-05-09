@@ -24,8 +24,15 @@ export function* systemCallGetUserInfoSaga() {
       'user.status': getUserStatusName(userResponse.status),
       'user.needUpdateKyc': userResponse.needUpdateKyc,
     };
-    console.log('userInfo', userInfo);
+    // console.log('userInfo', userInfo);
     Sentry.setContext('Custom - User Info', userInfo);
+
+    const accountInfo = {
+      // NOTE: 帳號個人資訊
+      username: userResponse.userName,
+    };
+    // console.log("[sentry] accountInfo", accountInfo);
+    Sentry.setUser(accountInfo);
 
     return userResponse;
   } catch (error) {
