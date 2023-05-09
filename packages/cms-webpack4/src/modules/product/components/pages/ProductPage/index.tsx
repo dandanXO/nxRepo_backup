@@ -32,10 +32,6 @@ export const ProductPage = () => {
     // formRef,
   });
 
-  useEffect(() => {
-    triggerGetList(null);
-  }, []);
-
   return domLoaded ? (
     <PageContainer
       // loading

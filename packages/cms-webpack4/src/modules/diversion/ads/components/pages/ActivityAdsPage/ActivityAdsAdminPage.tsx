@@ -332,6 +332,7 @@ export const ActivityAdsAdminPage = () => {
                     hasAddForm={true}
                     onAddCallback={onAddItem}
                     searchable={false}
+                    rowKey="id"
                 />
 
                 <AdminFormCustomModal
