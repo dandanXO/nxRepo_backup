@@ -1,27 +1,9 @@
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import { environment } from '../../../environments/environment';
 import { AppFlag } from '../../../environments/flag';
+import { Application } from '../application';
 
-export const isLocalhost = () => window.location.hostname === 'localhost';
-
-const getEnvironment = () => {
-  const envMachine = isLocalhost() ? 'localhost' : 'production';
-  return `${envMachine}:${environment.countryName}`;
-};
-
-const env = getEnvironment();
-console.log('[Sentry] environment', env);
-
-export const Application = {
-  isLocalhost: function () {
-    return window.location.hostname === 'localhost';
-  },
-  getEnvironmentName: function () {
-    const envMachine = this.isLocalhost() ? 'localhost' : 'production';
-    return `${envMachine}:${environment.countryName}`;
-  },
-};
+const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
 
 if (AppFlag.enableSentry) {
   const environmentName = Application.getEnvironmentName();
@@ -35,7 +17,7 @@ if (AppFlag.enableSentry) {
   const sentryConfig: Sentry.BrowserOptions = {
     // dsn: "https://c7460b88e57746c2804aec8514c3eef6@o4504354754985984.ingest.sentry.io/4505027128852480",
     // NOTE: self-hosting
-    dsn: 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3',
+    dsn: DSN,
     environment: environmentName,
     integrations: [
       new BrowserTracing(),

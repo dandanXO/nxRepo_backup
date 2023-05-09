@@ -9,7 +9,6 @@ import {
 } from '@lagunovsky/redux-react-router';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
-import AppDataCollector from './AppDataCollector';
 
 const routerSelector: ReduxRouterSelector<RootState> = (state) =>
   state.navigator;

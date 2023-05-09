@@ -7,8 +7,13 @@ import { watchLoginPageSaga } from '../usecaseActionSaga/userUsecaseSaga/loginPa
 import { errorFallback } from '../utils/errorFallback';
 import { systemRefreshableCountdownSaga } from '../usecaseActionSaga/userUsecaseSaga/indexPageSaga/systemRefreshableCountdownSaga';
 import { watchIndexPageSaga } from '../usecaseActionSaga/userUsecaseSaga/indexPageSaga';
-import { watchPersonalInfoPageSaga } from '../usecaseActionSaga/userUsecaseSaga/personalInfoPageSaga';
+import {
+  PersonalInfoPageSagaActions,
+  watchPersonalInfoPageSaga,
+} from '../usecaseActionSaga/userUsecaseSaga/personalInfoPageSaga';
 import { getAppInfo } from '../../../main';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* AppSaga() {
@@ -22,8 +27,9 @@ export function* AppSaga() {
       watchIndexPageSaga(),
       watchPersonalInfoPageSaga(),
       //2.
-      // initSaga()
+      initSaga(),
     ]);
+
     console.log('[app][saga] 3');
   } catch (error) {
     // yield catchSagaError(error);
@@ -45,10 +51,11 @@ function* watchSystemUseCaseSaga() {
   );
 }
 
-// function *initSaga() {
-//   const androidAPPInfo = getAppInfo();
-//   if(androidAPPInfo.token !== "") {
-//     console.log("[app][saga] 2")
-//     yield put(SystemCaseActions.InitSaga());
-//   }
-// }
+function* initSaga() {
+  // const androidAPPInfo = getAppInfo();
+  // if(androidAPPInfo.token !== "") {
+  //   console.log("[app][saga] 2")
+  //   yield put(SystemCaseActions.InitSaga());
+  // }
+  yield put(PersonalInfoPageSagaActions.system.init());
+}

@@ -1,4 +1,6 @@
 import { runAxios } from '../../base/runAxios';
+import axios from 'axios';
+import { alertModal } from '../../base/alertModal';
 
 export type GetOTPCodeRequest = {
   appName: string;
@@ -18,12 +20,19 @@ export type GetOTPCodeRequest = {
 };
 
 export const GetOTPCodeService = async (request: GetOTPCodeRequest) => {
-  const { data } = await runAxios(
-    '/api',
-    '/v2/login/otp-code',
-    'post',
-    request,
-    {}
-  );
-  return data;
+  try {
+    const { data } = await runAxios(
+      '/api',
+      '/v2/login/otp-code',
+      'post',
+      request,
+      {}
+    );
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alertModal((error.response as any).data?.message);
+    }
+    return null;
+  }
 };
