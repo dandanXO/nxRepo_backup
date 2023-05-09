@@ -210,7 +210,7 @@ const ProductTable = (props: ProductTableProps) => {
                 //     console.log('value: ', value);
                 // },
             }}
-            rowKey="id"
+            rowKey="productId"
             search={{
                 labelWidth: 'auto',
                 // @ts-ignore

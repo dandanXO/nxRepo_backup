@@ -24,7 +24,7 @@ export const WatermarkPhoto = ({width = "300px", src = "", children}) => {
       {!children && (
         <React.Fragment>
           <div key={0} className={style.watermark__inner}>
-            {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: conf.waterMarkColor}}>{content}</div>)}
+            {Array.from({ length: 8 }, (num, i) => <div key={i} className={style.watermark__body} style={{ color: conf.waterMarkColor}}>{content}</div>)}
           </div>
           <div key={1} className={style.watermark__content}>
             <img src={src}/>
@@ -36,22 +36,22 @@ export const WatermarkPhoto = ({width = "300px", src = "", children}) => {
           {/*// NOTICE: 讓參數配置的 tag 可以被點擊*/}
           <div style={{ display: "flex", flexDirection: "row"}}>
             <div key={0} className={style.watermark__inner} style={{ left: "0", pointerEvents: "none" }}>
-              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
+              {Array.from({ length: 8 }, (num, i) => <div key={i} className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
             </div>
             <div key={1} className={style.watermark__inner} style={{ left: gap * 1, pointerEvents: "none" }}>
-              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
+              {Array.from({ length: 8 }, (num, i) => <div key={i} className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
             </div>
             <div key={2} className={style.watermark__inner} style={{ left: gap * 2, pointerEvents: "none" }}>
-              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
+              {Array.from({ length: 8 }, (num, i) => <div key={i} className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
             </div>
             <div key={3} className={style.watermark__inner} style={{ left: gap * 3, pointerEvents: "none" }}>
-              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
+              {Array.from({ length: 8 }, (num, i) => <div key={i} className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
             </div>
             <div key={4} className={style.watermark__inner} style={{ left: gap * 4, pointerEvents: "none" }}>
-              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
+              {Array.from({ length: 8 }, (num, i) => <div key={i} className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
             </div>
             <div key={5} className={style.watermark__inner} style={{ left: gap * 5, pointerEvents: "none" }}>
-              {Array.from({ length: 8 }, (num, i) => <div className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
+              {Array.from({ length: 8 }, (num, i) => <div key={i} className={style.watermark__body} style={{ color: "rgba(0,0,0,.1)" }}>{content}</div>)}
             </div>
           </div>
           {children}
