@@ -18,7 +18,7 @@ export const themes: IThemes = {
     v57,
     v58,
     v59,
-    v60
+    v60,
   },
   pakistan: {
     v15,
