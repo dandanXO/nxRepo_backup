@@ -1,7 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Form } from '../../Form';
-import { Label } from '../../Label';
+import React, { ClipboardEvent } from 'react';
+
 import { Input } from '@frontend/mobile/shared/ui';
 import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
 import Select from 'react-select';
@@ -16,6 +14,10 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
   const options = props.bankDropList?.map((item: string, index: number) => {
     return { value: index, label: item };
   });
+
+  const preventCopyPaste = (e: ClipboardEvent<any>) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="grow flex flex-col">
@@ -34,6 +36,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>
         <Input
+          name={'iban'}
           labelType={'none'}
           outlineType={'standard'}
           placeholder={'Ex. PK36FTBK0000111123456702'}
@@ -41,6 +44,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onChange={props.onIBanChange}
           onBlur={props.onIbanBlur}
           errorMessage={props.iBanData.errorMessage}
+          onCopy={(e) => preventCopyPaste(e)}
+          onPaste={(e) => preventCopyPaste(e)}
+          onCut={(e) => preventCopyPaste(e)}
         />
         <div
           className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
@@ -54,7 +60,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         <div className={'text-sm'}>{'Bank Name'}</div>
         <Select
           styles={selectStyles}
-          className=" mb-2"
+          className="mb-2"
           // defaultValue={props.bankDropList[0].value}
           // value={props?.bankDropList[props.bankAccountValue]?.value}
           value={props.bankAccountValue}
@@ -71,6 +77,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div>
         <div className={'text-sm'}>{'Account Number'}</div>
         <Input
+          name={'account'}
           className="mb-2"
           labelType={'none'}
           outlineType={'standard'}
@@ -79,12 +86,16 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
+          onCopy={(e) => preventCopyPaste(e)}
+          onPaste={(e) => preventCopyPaste(e)}
+          onCut={(e) => preventCopyPaste(e)}
         />
       </div>
 
       <div>
         <div className={'text-sm'}>{'Confirm Account Number'}</div>
         <Input
+          name={'account_confirm'}
           className="mb-2"
           labelType={'none'}
           outlineType={'standard'}
@@ -93,6 +104,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
+          onCopy={(e) => preventCopyPaste(e)}
+          onPaste={(e) => preventCopyPaste(e)}
+          onCut={(e) => preventCopyPaste(e)}
         />
       </div>
       <div className="grow flex flex-col justify-end mb-2">

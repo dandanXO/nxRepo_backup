@@ -1,6 +1,6 @@
 import { Form } from '../../Form';
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
-import React from 'react';
+import React, { ClipboardEvent } from 'react';
 import { Label } from '../../Label';
 import { useNavigate } from 'react-router';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
@@ -35,7 +35,9 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
   const options = props.walletDropList?.map((item: string, index: number) => {
     return { value: index, label: item };
   });
-
+  const preventCopyPaste = (e: ClipboardEvent<any>) => {
+    e.preventDefault();
+  };
   return (
     <div className="grow flex flex-col">
       <div>
@@ -56,6 +58,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       </div>
       <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>
       <Input
+        name={'iban'}
         labelType={'none'}
         outlineType={'standard'}
         placeholder={'Ex. PK36FTBK0000111123456702'}
@@ -63,6 +66,9 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         onChange={props.onIBanChange}
         onBlur={props.onIbanBlur}
         errorMessage={props.iBanData.errorMessage}
+        onCopy={(e) => preventCopyPaste(e)}
+        onPaste={(e) => preventCopyPaste(e)}
+        onCut={(e) => preventCopyPaste(e)}
       />
       <div
         className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
@@ -74,8 +80,9 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       <div>
         <div className={'text-sm mb-0'}>{'Mobile Wallet Account'}</div>
         <Input
-          textAlign={'left'}
+          name={'account'}
           className="mb-1"
+          textAlign={'left'}
           labelType={'left'}
           outlineType={'standard'}
           label={'+92'}
@@ -84,14 +91,18 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           onChange={props.onMobileDataChange}
           onBlur={props.onMobileDataBlur}
           errorMessage={props.mobileData.errorMessage}
+          onCopy={(e) => preventCopyPaste(e)}
+          onPaste={(e) => preventCopyPaste(e)}
+          onCut={(e) => preventCopyPaste(e)}
         />
       </div>
 
       <div>
         <div className={'text-sm'}>{'Confirm Mobile Wallet Account'}</div>
         <Input
-          textAlign={'left'}
+          name={'account_confirm'}
           className="mb"
+          textAlign={'left'}
           labelType={'left'}
           outlineType={'standard'}
           label={'+92'}
@@ -100,6 +111,9 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           onChange={props.onConfirmMobileDataChange}
           onBlur={props.onConfirmMobileDataBlur}
           errorMessage={props.confirmMobileData.errorMessage}
+          onCopy={(e) => preventCopyPaste(e)}
+          onPaste={(e) => preventCopyPaste(e)}
+          onCut={(e) => preventCopyPaste(e)}
         />
       </div>
 

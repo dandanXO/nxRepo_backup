@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { ClipboardEvent, useEffect, useMemo, useRef, useState } from 'react';
 import SuccessInputIcon from './atom/SuccessInputIcon';
 import ErrorInputIcon from './atom/ErrorInputIcon';
 import { InputLintContent } from './atom/InputLintContent';
@@ -83,6 +83,10 @@ export interface InputProps {
   suffix?: string | React.ReactNode;
   outlineType?: "outlined" | "standard"; //inputContainer (standard樣式為底線的)
   textAlign?: 'right' | 'left' | 'center'
+  onCopy?: (e: ClipboardEvent) => void;
+  onPaste?: (e: ClipboardEvent) => void;
+  onCut?: (e: ClipboardEvent) => void;
+  name?: string;
 }
 
 // NOTICE: 實際產出元件的 dot 特性
@@ -128,7 +132,11 @@ const Input: InputInterface = ({
  inputWidth,
    suffix,
    outlineType,
-   textAlign
+   textAlign,
+  onCopy,
+  onPaste,
+  onCut,
+  name,
 }: InputProps) => {
   const forceUpdate = useForceUpdate();
 
@@ -300,7 +308,7 @@ const Input: InputInterface = ({
           isFocus={isEdit}
           disabled={disabled}
           outlineType={outlineType}
-         
+
         >
           {LabelComponentElement}
 
@@ -310,6 +318,7 @@ const Input: InputInterface = ({
             // NOTICE: labelID
             disabled={disabled}
             id={labelID}
+            name={name}
             // isFocus={value.length > 0 && !isEdit}
             ref={targetRef}
             // Modal - Display
@@ -452,15 +461,15 @@ const Input: InputInterface = ({
             //     props.onKeyUp && props.onKeyUp(event);
             // }}
             // [Clipboard Events]
-            // onCopy={event => {
-            //     props.onCopy && props.onCopy(event);
-            // }}
-            // onCut={event => {
-            //     props.onCut && props.onCut(event);
-            // }}
-            // onPaste={event => {
-            //     props.onPaste && props.onPaste(event);
-            // }}
+            onCopy={(event: ClipboardEvent) => {
+                onCopy && onCopy(event);
+            }}
+            onCut={(event: ClipboardEvent) => {
+                onCut && onCut(event);
+            }}
+            onPaste={(event: ClipboardEvent) => {
+                onPaste && onPaste(event);
+            }}
             // NOTE:
             // onPressEnter
             // allowClear

@@ -43,6 +43,13 @@ const axiosBaseQuery =
       console.info('[app] err:', err);
 
       // NOTICE: err.response.status !== 200
+      // if (
+      //   (err.response as any).data?.code !== 404 ||
+      //   (err.response as any).data?.code !== 401
+      // ) {
+      //
+      // }
+
       // NOTE: backendCustomError
       const backendCustomError = err.response?.data as {
         code: number;
@@ -55,8 +62,12 @@ const axiosBaseQuery =
         backendCustomError?.data?.msg || backendCustomError.message;
       console.info('[app] customErrorMessage:', backendCustomErrorMessage);
 
+      console.log(err.config.url);
       // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
-      if (err.config.url !== '/api/v2/loan/quota/refresh') {
+      if (
+        err.config.url !== '/api/v2/loan/quota/refresh' &&
+        err.config.url !== '/api/v3/trace/behavior'
+      ) {
         alertModal(backendCustomErrorMessage);
       }
 

@@ -17,7 +17,7 @@ export const getAppInfo = (): AndroidAppInfo => {
   let appInfo;
   // NOTE: Native Bridge
   if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
-    let appInfoStr = window['AppInfoTask']['getAppInfo']();
+    const appInfoStr = window['AppInfoTask']['getAppInfo']();
     appInfo = JSON.parse(appInfoStr);
 
     // NOTICE: 印度 v55, 巴基斯坦 v56 的 uiVersion 是寫死成 1 的
