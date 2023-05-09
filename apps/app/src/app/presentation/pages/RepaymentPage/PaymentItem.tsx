@@ -79,7 +79,7 @@ const PaymentItem = (props: GetLoanRecord) => {
         {status !== 'PAY_OFF' && (
           <Button
             text={status ? Status(status).buttonText : ''}
-            className={'text-xs'}
+            className={'text-xs w-auto'}
             onClick={() =>
               navigate(`${navigateRoute}?token=${getToken()}`, {
                 state: { orderNo, approveRecords },
