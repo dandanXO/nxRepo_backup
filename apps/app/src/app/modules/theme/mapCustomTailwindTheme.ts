@@ -19,10 +19,6 @@ export const mapCustomTailwindTheme = (variables: ITheme): IMappedTheme => {
     '--custom_text_tertiary': variables['custom_text_tertiary'] || '',
     '--custom_text_placeholder': variables['custom_text_placeholder'] || '',
 
-    // NOTE: other
-    '--disabled_main': variables['disabled_main'] || '',
-    '--disabled_variant': variables['disabled_variant'] || '',
-
     // NOTE: state
     '--custom_state_disable_main': variables['custom_state_disable_main'] || '',
     '--custom_state_disable_variant':

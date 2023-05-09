@@ -40,10 +40,6 @@ const theme: ICustomTailwindTheme = {
   custom_text_secondary: '#757575',
   custom_text_tertiary: '#A3A3A3',
   custom_text_placeholder: '#AEAEAE',
-
-  // NOTE: Other
-  disabled_main: '#BCBCBC',
-  disabled_variant: '#757575',
 };
 
 export default theme;
