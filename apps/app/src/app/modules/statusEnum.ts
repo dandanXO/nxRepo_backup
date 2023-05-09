@@ -6,7 +6,7 @@ interface IStatusEnum {
         text: string;
         color: string;
         bg: string;
-        buttonText: string;
+        // buttonText: string;
     };
 }
 
@@ -17,42 +17,42 @@ const statusEnum = {
         text: 'Overdue',
         color: 'text-[#F24822]',
         bg: 'bg-[#F9DDDC]',
-        buttonText: 'Repay Details',
+        // buttonText: 'Repay Details',
     },
     PAY_OFF: {
         text: 'Pay off',
         color: 'text-[#A3A3A3]',
         bg: 'bg-[#E9ECEF]',
-        buttonText: '',
+        // buttonText: '',
     },
     UNPAID: {
         text: 'Unpaid',
         color: isIndia ? 'text-[#F7A84C]' : 'text-[#F58B10]',
         bg: 'bg-[#FFEBD6]',
-        buttonText: 'Repay Details',
+        // buttonText: 'Repay Details',
     },
     PROCESSING: {
         text: 'Processing',
         color: isIndia ? 'text-[#F6CF5B]' : 'text-[#F4C535]',
         bg: 'bg-[#FFF2D1]',
-        buttonText: 'Details',
+        // buttonText: 'Details',
     },
     REJECTED: {
         text: 'Reject',
         color: 'text-[#F24822]',
         bg: 'bg-[#F9DDDC]',
-        buttonText: 'Details',
+        // buttonText: 'Details',
     },
     EXTEND: {
         text: 'Extend',
         color: isIndia ? 'text-[#9046CF]' : 'text-[#0091DE]',
         bg: isIndia ? 'bg-[#F3ECFD]' : 'bg-[#ECEFFD]',
-        buttonText: 'Repay Details',
+        // buttonText: 'Repay Details',
     },
 } as IStatusEnum;
 
 export const Status = (status: string) => {
     return status
         ? statusEnum[status]
-        : { text: '', color: '', bg: '', buttonText: '' };
+        : { text: '', color: '', bg: '' };
 };

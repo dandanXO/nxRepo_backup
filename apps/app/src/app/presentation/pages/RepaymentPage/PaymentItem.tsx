@@ -76,17 +76,15 @@ const PaymentItem = (props: GetLoanRecord) => {
             moment(dueDate).format('L') ?? ''
           }`}</div>
         </div>
-        {status !== 'PAY_OFF' && (
-          <Button
-            text={status ? Status(status).buttonText : ''}
-            className={'text-xs w-auto'}
-            onClick={() =>
-              navigate(`${navigateRoute}?token=${getToken()}`, {
-                state: { orderNo, approveRecords },
-              })
-            }
-          />
-        )}
+        <Button
+          text={'Details'}
+          className={'text-xs w-auto'}
+          onClick={() =>
+            navigate(`${navigateRoute}?token=${getToken()}`, {
+              state: { orderNo, approveRecords },
+            })
+          }
+        />
       </div>
       <Divider />
       {collapse && (
