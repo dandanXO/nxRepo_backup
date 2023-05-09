@@ -38,7 +38,8 @@
     "e2e:abd": "cross-env NODE_ENV=development nx run app-e2e:e2e:dev-bd",
     "e2e:ain:w": "cross-env NODE_ENV=development nx run app-e2e:e2e:dev-in --watch",
     "e2e:apk:w": "cross-env NODE_ENV=development nx run app-e2e:e2e:dev-pk --watch",
-    "e2e:abd:w": "cross-env NODE_ENV=development nx run app-e2e:e2e:dev-bd --watch"
+    "e2e:abd:w": "cross-env NODE_ENV=development nx run app-e2e:e2e:dev-bd --watch",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -166,7 +167,7 @@
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "html-webpack-plugin": "5.5.0",
-    "husky": "8.0.0",
+    "husky": "^8.0.0",
     "jest": "29.4.3",
     "jest-environment-jsdom": "29.4.3",
     "less-loader": "11.1.0",

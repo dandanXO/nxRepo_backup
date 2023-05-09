@@ -7,6 +7,7 @@ import { Navigation } from '../../components/layouts/Navigation';
 import { usePostBankCardMainMutation } from '../../../api/rtk';
 import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
 import { getToken } from '../../../modules/location/getToken';
+import { PagePathEnum } from '../PagePathEnum';
 
 const BankCardListPage = () => {
   const navigate = useNavigate();
@@ -94,7 +95,9 @@ const BankCardListPage = () => {
           </div>
           <div className={`flex items-center justify-center flex-col`}>
             <div
-              onClick={() => navigate(`/v2/bind-bankcard?token=${getToken()}`)}
+              onClick={() =>
+                navigate(`${PagePathEnum.BindBankcard}?token=${getToken()}`)
+              }
               className={`flex justify-center items-center border border-solid border-orange-500 text-orange-500 text-2xl w-6 h-6  rounded font-bold mb-3`}
             >
               +

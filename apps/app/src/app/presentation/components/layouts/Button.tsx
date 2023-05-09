@@ -15,12 +15,12 @@ type Props = {
 
 export const Button = (props: Props) => {
   return (
-    <div
+    <button
       onClick={props.onClick}
       data-testing-id={props.dataTestingID}
       // shadow-md shadow-gray-400
       className={cx(
-        'rounded-md p-2 text-center font-bold',
+        'rounded-md p-2 text-center font-bold w-full',
         {
           'border border-solid border-primary-main bg-primary-main text-white':
             props.type === undefined,
@@ -38,6 +38,6 @@ export const Button = (props: Props) => {
     >
       {props.text}
       {props.loading && <TailSpin height={25} className={'inline-block'} />}
-    </div>
+    </button>
   );
 };
