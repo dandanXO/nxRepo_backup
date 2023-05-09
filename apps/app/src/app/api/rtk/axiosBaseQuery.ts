@@ -56,7 +56,7 @@ const axiosBaseQuery =
       console.info('[app] customErrorMessage:', backendCustomErrorMessage);
 
       // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
-      if (err.config.url !== '/api/v2/loan/quota/refresh') {
+      if (err.config.url !== '/api/v2/loan/quota/refresh' && err.config.url !== '/api/v3/trace/behavior') {
         alertModal(backendCustomErrorMessage);
       }
 
