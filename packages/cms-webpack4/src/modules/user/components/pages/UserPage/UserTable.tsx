@@ -281,7 +281,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             renderFormItem: (text, { }, form) => {
                 return <Form form={form} name={'hasVerifyNotApply'} initialValues={{ hasVerifyNotApply: searchParams.hasVerifyNotApply || hasVerifyNotApply }}>
                     <Form.Item>
-                        <Checkbox value={hasVerifyNotApply ? "false": "ture"} checked={hasVerifyNotApply} onChange={({ target:{ checked }})=> setHasVerifyNotApply(checked)} />
+                        <Checkbox value={hasVerifyNotApply ? "false": "true"} checked={hasVerifyNotApply} onChange={({ target:{ checked }})=> setHasVerifyNotApply(checked)} />
                     </Form.Item>
                 </Form>
             }
