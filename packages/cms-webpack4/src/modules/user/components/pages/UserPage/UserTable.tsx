@@ -46,7 +46,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     const [setQuotaLabel, { isSuccess: isSetQuotaLabelSuccess }] = usePostUserManageQuotaLabelMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
-        addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false, hasVerifyNotApply: false,
+        addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false, hasVerifyNotApply: false, hasVerifyThirdRisk: false,
         noLoanAgainEndDays: 30, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", status: "", pageNum: 1, pageSize: 10
     }
     // redux
@@ -56,7 +56,8 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     // state
     const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
-    const [hasVerifyNotApply, setHasVerifyNotApply] = useState(false)
+    const [hasVerifyNotApply, setHasVerifyNotApply] = useState(false);
+    const [hasVerifyThirdRisk, setHasVerifyThirdRisk] = useState(false);
     const [isImportTelSale, setIsImportTelSale] = useState(false);
     const [isExportRemainOrder, setIsExportRemainOrder] = useState(false);
     const [modal, contextHolder] = Modal.useModal();
@@ -282,6 +283,18 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                 return <Form form={form} name={'hasVerifyNotApply'} initialValues={{ hasVerifyNotApply: searchParams.hasVerifyNotApply || hasVerifyNotApply }}>
                     <Form.Item>
                         <Checkbox value={hasVerifyNotApply ? "false": "true"} checked={hasVerifyNotApply} onChange={({ target:{ checked }})=> setHasVerifyNotApply(checked)} />
+                    </Form.Item>
+                </Form>
+            }
+        },
+        {
+            title: '通过外部风控',
+            dataIndex: 'hasVerifyThirdRisk',
+            hideInTable: true,
+            renderFormItem: (text, { }, form) => {
+                return <Form form={form} name={'hasVerifyThirdRisk'} initialValues={{ hasVerifyThirdRisk: searchParams.hasVerifyThirdRisk || hasVerifyThirdRisk }}>
+                    <Form.Item>
+                        <Checkbox value={hasVerifyThirdRisk ? "false": "true"} checked={hasVerifyThirdRisk} onChange={({ target:{ checked }})=> setHasVerifyThirdRisk(checked)} />
                     </Form.Item>
                 </Form>
             }
