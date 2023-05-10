@@ -22,10 +22,6 @@ export type ICustomTailwindTheme = {
   custom_text_tertiary: string;
   custom_text_placeholder: string;
 
-  // NOTE: other
-  disabled_main: string;
-  disabled_variant: string;
-
   // NOTE: State
   custom_state_disable_main: string;
   custom_state_disable_variant: string;

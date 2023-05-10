@@ -111,7 +111,7 @@ export default Tag;
 
 interface ITags {
   items?: string[];
-  onClick?: () => void;
+  onClick?: any;
   layoutType?: number;
   style?: string;
 }
@@ -121,7 +121,7 @@ export const Tags = (props: ITags) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const handleClick = (index: number) => {
     setActiveIndex(index);
-    props.onClick && props.onClick();
+    props.onClick && props.onClick(index);
   };
   return (
     <div className="flex grow">

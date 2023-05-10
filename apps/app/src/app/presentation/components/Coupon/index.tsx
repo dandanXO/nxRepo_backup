@@ -7,6 +7,7 @@ export type ICouponProps = GetCouponApplicableList & {
   layoutType?: number;
   status?: string;
   onClick?: () => void;
+  buttonText?: string;
 };
 
 const isOverdueEqual3Days = (expiredTime: string) => {
@@ -25,17 +26,13 @@ const Coupon = (props: ICouponProps) => {
     couponContent = '',
     discountAmount = '',
     expireTime = '',
+    buttonText = 'USE NOW'
+    
   } = props;
   const layoutTypeStyle: any = {
     // type 1 for india , type 2 for pakistan
     1: {
       normal: {
-        font: `text-ctext-primary`,
-        darkContent: 'border-primary-main bg-primary-assistant',
-        lightContent: 'border-primary-main bg-primary-assistant',
-        buttonBG: 'bg-primary-main',
-      },
-      unUsable: {
         font: `text-ctext-primary`,
         darkContent: 'border-primary-main bg-primary-assistant',
         lightContent: 'border-primary-main bg-primary-assistant',
@@ -55,12 +52,6 @@ const Coupon = (props: ICouponProps) => {
         lightContent: 'border-primary-main bg-primary-assistant',
         buttonBG: 'bg-primary-main',
       },
-      unUsable: {
-        font: 'text-ctext-primary',
-        darkContent: 'border-primary-main bg-[#B2E4C6]',
-        lightContent: 'border-primary-main bg-primary-assistant',
-        buttonBG: 'bg-primary-main',
-      },
       disabled: {
         font: `text-cstate-disable-main`,
         darkContent: 'border-cstate-disable-main bg-[#DFDFDF]',
@@ -71,7 +62,7 @@ const Coupon = (props: ICouponProps) => {
   }[layoutType];
   cx.bind(layoutTypeStyle);
 
-  const typeStyle = layoutTypeStyle[status];
+  const typeStyle = status !== 'disabled' ? layoutTypeStyle['normal'] : layoutTypeStyle['disabled'];
 
   return (
     <div
@@ -108,7 +99,7 @@ const Coupon = (props: ICouponProps) => {
 
         <div
           className={cx(`font-bold`, 'text-xs', {
-            'text-primary-main': status !== 'disabled',
+            'text-primary-variant': status !== 'disabled',
             'text-cstate-disable-main': status === 'disabled',
           })}
         >
@@ -145,27 +136,32 @@ const Coupon = (props: ICouponProps) => {
       )}
       <div
         className={cx(
-          `flex flex-col justify-center p-2 basis-16 grow rounded-r-lg border border-l-0`,
+          `flex flex-col justify-center p-2 basis-16 grow rounded-r-lg border border-l-0 items-center`,
           [typeStyle.darkContent]
         )}
       >
-        <div className={cx(`font-bold mb-1.5 text-base `, [typeStyle.font])}>
+        <div className={cx(`font-bold mb-1.5 text-base `,{
+            'text-primary-main': status !== 'disabled',
+            'text-cstate-disable-main': status === 'disabled',
+        })}>
           <Money
             money={discountAmount}
             isNagetive={true}
-            moneyStyle={'text-lg'}
+            moneyStyle={`text-lg`}
             currencyStyle={`text-xs`}
           />
         </div>
         <button
-          onClick={props.onClick}
-          disabled={status !== 'normal'} //只有normal才能點擊
+        // NOTE:優惠券不需點擊 (點擊功能先做保留)
+        //   onClick={props.onClick}
+        //   disabled={status !== 'normal'} //只有normal才能點擊
+          disabled={true}
           className={cx(
-            `text-xs whitespace-nowrap px-2 py-1 rounded text-white`,
+            `text-xs whitespace-nowrap px-2 py-1 rounded text-white w-2/3`,
             [typeStyle.buttonBG]
           )}
         >
-          USE NOW
+          {buttonText}
         </button>
       </div>
     </div>

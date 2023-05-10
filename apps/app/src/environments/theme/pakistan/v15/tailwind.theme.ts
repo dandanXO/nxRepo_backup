@@ -27,10 +27,6 @@ const theme: ICustomTailwindTheme = {
   custom_text_tertiary: '#ADB3C0',
   custom_text_placeholder: '#CED1D9',
 
-  // NOTE: other
-  disabled_main: '#E1E1E1',
-  disabled_variant: '#868686',
-
   // NOTE: State
   custom_state_disable_main: '#E1E1E1',
   custom_state_disable_variant: '#57B8FF',

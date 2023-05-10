@@ -22,6 +22,8 @@ import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
 import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicableListRequest';
 import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
 import { TraceBehaviorRequest } from './TraceBehaviorRequest';
+import { GetCouponListRequest } from '../userService/GetCouponListRequest';
+import { GetCouponListResponse } from '../userService/GetCouponResponse';
 
 export type LoginRequest = {
   msgCode: string;
@@ -111,6 +113,15 @@ export const APIV3 = createApi({
         data: data,
       }),
     }),
+
+    // NOTE: /api/v3/coupon 個人列表取得优惠券列表
+    getCouponList: builder.query<GetCouponListResponse,GetCouponListRequest>({
+      query: (query: GetCouponListRequest) => ({
+        method: 'get',
+        url: `/coupon`,
+        params: query,
+      }),
+    }),
   }),
 });
 
@@ -118,6 +129,7 @@ export const {
   useLazyGetLoanRecordListQuery,
   useLazyGetCouponApplicableListQuery,
   usePostTraceBehaviorMutation,
+  useLazyGetCouponListQuery
 } = APIV3;
 
 export const API = createApi({

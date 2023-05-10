@@ -205,6 +205,18 @@ const PakistanRepaymentDetailPage = (props: any) => {
             title={'Repayment Amount'}
             text={<Money money={balance} />}
             titleColor={status === 'OVERDUE' ? 'text-red-500' : 'text-black'}
+            textColor={status === 'OVERDUE' ? 'text-red-500' : 'text-black'}
+            fontWeight="font-bold"
+          />
+        )}
+
+        {/*NOTE: 總展期金額 (Extension Fee + Overdue Fee) 欄位後端有提供 狀態為EXTEND -> totalRepayAmount */}
+        {status === 'EXTEND' && (
+          <ListItem
+            title={'Total Extension Fee'}
+            text={<Money money={totalRepayAmount} />}
+            titleColor="text-ctext-primary"
+            textColor="text-ctext-primary"
             fontWeight="font-bold"
           />
         )}
@@ -228,7 +240,8 @@ const PakistanRepaymentDetailPage = (props: any) => {
             </div>
           )}
 
-          <div
+        {status !== 'PAY_OFF' && status !== 'EXTEND' && 
+          (<div
             onClick={() => {
               if (currentData === undefined) return;
               navigate(
@@ -245,7 +258,8 @@ const PakistanRepaymentDetailPage = (props: any) => {
             })}
           >
             <Button text={'Repay'} />
-          </div>
+          </div>)
+        }
         </div>
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (

@@ -38,11 +38,6 @@ module.exports = {
         main: 'var(--secondary_main)',
         variant: 'var(--secondary_variant)',
       },
-      // NOTE: other
-      disabled: {
-        main: 'var(--disabled_main)',
-        variant: 'var(--disabled_variant)',
-      },
       cbg: {
         // NOTE: background
         primary: 'var(--custom_bg_primary)',

@@ -2,46 +2,42 @@ import { ICustomTailwindTheme } from '../../../../app/modules/theme/ICustomTailw
 
 const theme: ICustomTailwindTheme = {
   // NOTE: Color
-  primary_main: '#EFB214',
-  primary_variant: '#CD920E',
-  primary_assistant: '#FEF6CF',
+  primary_main: '#7281CE',
+  primary_variant: '#5361B1',
+  primary_assistant: '#E5EBFC',
 
-  secondary_main: '#75A5ED',
-  secondary_variant: '#5580CB',
-  secondary_assistant: '#E4F2FE',
+  secondary_main: '#0E71F7',
+  secondary_variant: '#0A57D4',
+  secondary_assistant: '#CEEBFE',
 
-  tertiary_main: '#FADB70',
-  tertiary_variant: '#D7B551',
+  tertiary_main: '#BBC5F1',
+  tertiary_variant: '#8894CF',
 
   // NOTE: State
-  custom_state_disable_main: '#BDBDBD',
-  custom_state_disable_variant: '#8F8F8F',
+  custom_state_disable_main: '#D9D9D9',
+  custom_state_disable_variant: '#8C8C8C',
 
-  custom_state_success_main: '#7FDD44',
+  custom_state_success_main: '#8CBC10',
 
-  custom_state_warning_main: '#C6BDFF',
-  custom_state_warning_variant: '#948ADB',
+  custom_state_warning_main: '#79CBFF',
+  custom_state_warning_variant: '#58A0DB',
 
-  custom_state_error_main: '#FF573D',
-  custom_state_error_variant: '#FF573D',
+  custom_state_error_main: '#FF5151',
+  custom_state_error_variant: '#FF5151',
 
-  custom_state_info_main: '#3FA2FF',
-  custom_state_info_variant: '#3FA2FF',
+  custom_state_info_main: '#3DC1E2',
+  custom_state_info_variant: '#3DC1E2',
 
   // NOTE: Background
-  custom_bg_primary: '#FCFBF9',
+  custom_bg_primary: '#FAF9FC',
   custom_bg_secondary: '#FFFFFF',
-  custom_bg_tertiary: '#FFFCF2',
+  custom_bg_tertiary: '#F9FAFF',
 
   // NOTE: Text
-  custom_text_primary: '#2C2C2C',
-  custom_text_secondary: '#727272',
-  custom_text_tertiary: '#A1A1A1',
-  custom_text_placeholder: '#AEAEAE',
-
-  // NOTE: Other
-  disabled_main: '#BDBDBD',
-  disabled_variant: '#8F8F8F',
+  custom_text_primary: '#1F1F1F',
+  custom_text_secondary: '#595959',
+  custom_text_tertiary: '#8C8C8C',
+  custom_text_placeholder: '#D9D9D9',
 };
 
 export default theme;
