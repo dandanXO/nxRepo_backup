@@ -1,25 +1,13 @@
-import { all, call, put, select, take } from 'redux-saga/effects';
+import { all, call, put, select } from 'redux-saga/effects';
 import { Service } from '../../../api';
 import { appSlice } from '../../../reduxStore/appSlice';
 import { GetInitServiceResponse } from '../../../api/appService/GetInitServiceResponse';
 import { catchSagaError } from '../../utils/catchSagaError';
 import { GetUserInfoServiceResponse } from '../../../api/userService/GetUserInfoServiceResponse';
 import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
-import { SystemCaseActions } from './systemCaseActions';
 import { systemCallGetUserInfoSaga } from '../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
 import { AndroidAppInfo } from '../../../modules/nativeAppInfo/persistent/androidAppInfo';
 import { RootState } from '../../../reduxStore';
-
-export function* watchSystemInitSaga() {
-  console.log('[app][saga] 1.1');
-  console.log('[app][saga] debug.watchSystemInitSaga');
-  console.log('[app][saga] 接收初始化');
-  yield take(SystemCaseActions.InitSaga.type);
-
-  console.log('[app][saga] 開始初始化');
-  yield call(systemStartInitSaga);
-  console.log('[app][saga] 完成初始化');
-}
 
 export function* systemStartInitSaga() {
   try {
