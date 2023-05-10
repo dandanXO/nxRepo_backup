@@ -92,13 +92,16 @@ const NewCustomersDailyConversionRatesTable = () => {
         {
             title: '风控', dataIndex: 'riskControl', key: 'riskControl', hideInSearch: true,
             children: [
-                { title: <CustomColumn text={'内部风控通过'} />, dataIndex: 'innerRiskControlPassCount', key: 'innerRiskControlPassCount',  tooltip: '反欺诈/基础风控' ,hideInSearch: true, render: (text, { innerRiskControlPassRate }) => <CustomColumn text={text} rate={innerRiskControlPassRate} /> },
+                { title: <CustomColumn text={'内部风控通过'} />, dataIndex: 'innerRiskControlPassCount', key: 'innerRiskControlPassCount', tooltip: '反欺诈/基础风控' ,hideInSearch: true, render: (text, { innerRiskControlPassRate }) => <CustomColumn text={text} rate={innerRiskControlPassRate} /> },
+                { title: <CustomColumn text={'提交订单用户数'} />, dataIndex: 'riskControlUserCount', key: 'riskControlUserCount', hideInSearch: true, render: (text, { riskControlUserRate }) => <CustomColumn text={text} rate={riskControlUserRate} /> },
+                { title: <CustomColumn text={'提交订单数'} />, dataIndex: 'riskControlOrderCount', key: 'riskControlOrderCount', hideInSearch: true, render: (text, { riskControlOrderRate }) => <CustomColumn text={text} rate={riskControlOrderRate} /> },
                 { title: <CustomColumn text={'外部风控通过'} />, dataIndex: 'outerRiskControlPassCount', key: 'outerRiskControlPassCount', tooltip: '风控模型分' , hideInSearch: true, render: (text, { outerRiskControlPassRate }) => <CustomColumn text={text} rate={outerRiskControlPassRate} /> },
             ]
         },
         {
             title: '贷前统计', dataIndex: 'preLoan', key: 'preLoan', hideInSearch: true,
             children: [
+                { title: '订单申请用户数', dataIndex: 'applyUserCount', key: 'applyUserCount', hideInSearch: true },
                 { title: '订单申请量', dataIndex: 'applyCount', key: 'applyCount', hideInSearch: true },
                 { title: '申请转化率', dataIndex: 'applyRate', key: 'applyRate', hideInSearch: true, tooltip: '申请转化率=订单申请量/注册量' },
             ]
@@ -106,6 +109,7 @@ const NewCustomersDailyConversionRatesTable = () => {
         {
             title: '贷中统计', dataIndex: 'inLoan', key: 'inLoan', hideInSearch: true,
             children: [
+                { title: '新客放款用户数', dataIndex: 'newLoanUserCount', key: 'newLoanUserCount', hideInSearch: true },
                 { title: '新客放款量', dataIndex: 'loanCount', key: 'loanCount', hideInSearch: true, tooltip: '新客放款量=待还款量' },
                 { title: '放款转化率', dataIndex: 'loanRate', key: 'loanRate', hideInSearch: true, tooltip: '放款转化率=新客放款量/注册量' },
             ]
@@ -113,6 +117,7 @@ const NewCustomersDailyConversionRatesTable = () => {
         {
             title: '贷后统计', dataIndex: 'postLoan', key: 'postLoan', hideInSearch: true,
             children: [
+                { title: '已还款用戶數', dataIndex: 'repayUserCount', key: 'repayUserCount', hideInSearch: true },
                 { title: '已还款量', dataIndex: 'repayCount', key: 'repayCount', hideInSearch: true },
                 { title: '还款转化率', dataIndex: 'repayRate', key: 'repayRate', hideInSearch: true, tooltip: '还款转化率=新客还款量/新客放款量' },
             ]
