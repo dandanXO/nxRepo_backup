@@ -1,4 +1,4 @@
-import { TimePartition } from '../../../../usecaseFlow/reduxStore/indexPageSlice';
+import { TimePartition } from '../../../../reduxStore/indexPageSlice';
 
 type Props = {
   refreshableCountdown: TimePartition;

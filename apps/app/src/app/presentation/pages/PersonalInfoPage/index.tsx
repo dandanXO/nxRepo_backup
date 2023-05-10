@@ -9,12 +9,12 @@ import { FiChevronRight } from '@react-icons/all-files/fi/FiChevronRight';
 import Card from './Card';
 import LinkItem from './LinkItem';
 import { getToken } from '../../../modules/location/getToken';
-import { RootState } from '../../../usecaseFlow/reduxStore';
+import { RootState } from '../../../reduxStore';
 import { PagePathEnum } from '../PagePathEnum';
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
 import { useEffect } from 'react';
-import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/personalInfoPageSaga';
+import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/type/userUsecaseSaga/personalInfoPageSaga';
 import { Button } from '../../components/layouts/Button';
 
 const PersonalInfoPage = () => {

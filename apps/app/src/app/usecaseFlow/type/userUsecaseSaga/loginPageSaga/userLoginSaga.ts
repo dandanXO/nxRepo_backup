@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { put, take } from 'redux-saga/effects';
 import { APIV3, LoginResponse } from '../../../../api/rtk';
-import { AppRunningModeEnum, appSlice } from '../../../reduxStore/appSlice';
+import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
 import { push } from '@lagunovsky/redux-react-router';
 import { catchSagaError } from '../../../utils/catchSagaError';
 import { UserLoginActionPayload } from './index';

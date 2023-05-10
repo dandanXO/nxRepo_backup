@@ -1,20 +1,11 @@
 import './isInAndroid';
 import './onUploadKycBackgroundData';
-import { IThemeConfig } from '@frontend/mobile/shared/ui';
+import {IThemeConfig} from '@frontend/mobile/shared/ui';
 
 export enum AndroidPage {
   LOGIN = 'LOGIN',
   AUTH = 'AUTH',
 }
-
-export type AndroidAppInfo = {
-  environment: 'india' | 'pakistan';
-  packageId: string;
-  uiVersion: string;
-  token: string;
-  domain: string;
-  appName: string;
-};
 
 // NOTICE:
 // 還款頁 沒有交互appinfo, pk V15 才有, 還款頁在印度v55沒有, 印度 v59 還款可以加，等待

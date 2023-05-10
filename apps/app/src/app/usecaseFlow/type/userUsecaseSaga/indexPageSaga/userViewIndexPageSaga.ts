@@ -4,13 +4,13 @@ import { Service } from '../../../../api';
 import {
   indexPageSlice,
   InitialState,
-} from '../../../reduxStore/indexPageSlice';
+} from '../../../../reduxStore/indexPageSlice';
 import { USER_AUTH_STATE } from '../../../../domain/user/USER_AUTH_STATE';
 import { SystemCaseActions } from '../../systemUsecaseSaga/systemCaseActions';
 import { GetIndexResponse } from '../../../../api/indexService/GetIndexResponse';
 import { catchSagaError } from '../../../utils/catchSagaError';
 import { GetOpenIndexResponse } from '../../../../api/indexService/GetOpenIndexResponse';
-import { RootState } from '../../../reduxStore';
+import { RootState } from '../../../../reduxStore';
 import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
 import { getToken } from '../../../../modules/location/getToken';
 import { systemCallGetUserInfoSaga } from '../sharedSaga/systemCallGetUserInfoSaga';

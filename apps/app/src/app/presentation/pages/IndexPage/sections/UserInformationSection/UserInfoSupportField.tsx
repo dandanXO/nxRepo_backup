@@ -5,7 +5,7 @@ import React, { useCallback, useState } from 'react';
 import {
   IndexPageProps,
   RootState,
-} from '../../../../../usecaseFlow/reduxStore';
+} from '../../../../../reduxStore';
 
 type Props = IndexPageProps & {
   onClickToCustomerService: () => void;

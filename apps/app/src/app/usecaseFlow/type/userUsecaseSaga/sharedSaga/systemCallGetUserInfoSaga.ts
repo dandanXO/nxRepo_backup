@@ -1,7 +1,7 @@
 import { GetUserInfoServiceResponse } from '../../../../api/userService/GetUserInfoServiceResponse';
 import { call, put } from 'redux-saga/effects';
 import { Service } from '../../../../api';
-import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
+import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import * as Sentry from '@sentry/react';
 
 export function* systemCallGetUserInfoSaga() {

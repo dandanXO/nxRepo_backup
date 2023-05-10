@@ -13,7 +13,7 @@ import IndiaRepaymentDetailPage from './i18n/IndiaRepaymentDetailPage';
 import { isInAndroid } from '../../../modules/window/isInAndroid';
 import { PagePathEnum } from '../PagePathEnum';
 import { useDispatch } from 'react-redux';
-import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/personalInfoPageSaga';
+import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/type/userUsecaseSaga/personalInfoPageSaga';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();

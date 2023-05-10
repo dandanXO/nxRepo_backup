@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GetInitServiceResponse } from '../../api/appService/GetInitServiceResponse';
-import { AndroidAppInfo } from '../../modules/window/IWindow';
+import { GetInitServiceResponse } from '../api/appService/GetInitServiceResponse';
+import {IAndroidAppInfo} from "../modules/nativeAppInfo/IAndroidAppInfo";
 
 export enum AppRunningModeEnum {
   'Unknown',
@@ -13,7 +13,7 @@ export type InitailState = {
   mode: AppRunningModeEnum;
   token: string;
   isInit: boolean;
-  androidAppInfo: null | AndroidAppInfo;
+  androidAppInfo: null | IAndroidAppInfo;
 };
 
 const initialState: InitailState = {
@@ -47,7 +47,7 @@ export const appSlice = createSlice({
     },
     updateAndroidInfo: (
       state: InitailState,
-      action: PayloadAction<AndroidAppInfo>
+      action: PayloadAction<IAndroidAppInfo>
     ) => {
       state.androidAppInfo = action.payload;
     },

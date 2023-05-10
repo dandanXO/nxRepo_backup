@@ -20,7 +20,7 @@ import { Navigation } from '../../components/layouts/Navigation';
 import { isInAndroid } from '../../../modules/window/isInAndroid';
 import { useNavigate } from 'react-router';
 import { CustomPage } from '../../components/layouts/CustomPage';
-import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/personalInfoPageSaga';
+import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/type/userUsecaseSaga/personalInfoPageSaga';
 
 const BindBankCardPage = () => {
   // NOTICE: Common

@@ -3,7 +3,8 @@ import { delay, put } from 'redux-saga/effects';
 import { catchSagaError } from '../../../utils/catchSagaError';
 import { UserResendSecondsActionPayload } from './index';
 import { LoginPageSagaActions } from './index';
-import { loginSlice } from '../../../reduxStore/loginSlice';
+import { loginSlice } from '../../../../reduxStore/loginSlice';
+
 export function* userResendSaga(
   action: PayloadAction<UserResendSecondsActionPayload>
 ) {

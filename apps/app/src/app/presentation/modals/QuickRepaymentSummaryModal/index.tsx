@@ -12,7 +12,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { IndexPageProps } from '../../../usecaseFlow/reduxStore';
+import { IndexPageProps } from '../../../reduxStore';
 import { FinalProductsSummary, FinalProductType } from '../../pages/IndexPage';
 import { formatPrice } from '../../../modules/formatPrice';
 import Select, {

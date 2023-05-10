@@ -2,7 +2,7 @@ import { Navigation } from '../../components/layouts/Navigation';
 import { useNavigate } from 'react-router';
 import CustomerServiceIcon from '../../components/images/CustomerServiceIcon.svg';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../usecaseFlow/reduxStore';
+import { RootState } from '../../../reduxStore';
 import { Button } from '../../components/layouts/Button';
 
 const CustomerServicePage = () => {
