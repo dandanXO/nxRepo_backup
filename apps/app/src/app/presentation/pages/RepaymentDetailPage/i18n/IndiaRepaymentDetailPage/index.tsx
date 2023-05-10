@@ -240,26 +240,26 @@ const PakistanRepaymentDetailPage = (props: any) => {
             </div>
           )}
 
-        {status !== 'PAY_OFF' && status !== 'EXTEND' && 
-          (<div
-            onClick={() => {
-              if (currentData === undefined) return;
-              navigate(
-                `repayment-modal?token=${getToken()}&orderNo=${
-                  orderNo ?? getOrderNo()
-                }`,
-                {
-                  state: currentData,
-                }
-              );
-            }}
-            className={cx(`grow`, {
-              'ml-1.5': extendable,
-            })}
-          >
-            <Button text={'Repay'} />
-          </div>)
-        }
+          {status !== 'PAY_OFF' && status !== 'EXTEND' && (
+            <div
+              onClick={() => {
+                if (currentData === undefined) return;
+                navigate(
+                  `repayment-modal?token=${getToken()}&orderNo=${
+                    orderNo ?? getOrderNo()
+                  }`,
+                  {
+                    state: currentData,
+                  }
+                );
+              }}
+              className={cx(`grow`, {
+                'ml-1.5': extendable,
+              })}
+            >
+              <Button text={'Repay'} />
+            </div>
+          )}
         </div>
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (

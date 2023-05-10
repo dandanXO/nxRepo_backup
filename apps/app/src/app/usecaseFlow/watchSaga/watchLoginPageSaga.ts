@@ -1,9 +1,9 @@
 import { takeLatest } from 'redux-saga/effects';
 import { errorFallback } from '../utils/errorFallback';
-import { userGetOTPSaga } from '../type/userUsecaseSaga/loginPageSaga/userGetOTPSaga';
-import { userLoginSaga } from '../type/userUsecaseSaga/loginPageSaga/userLoginSaga';
-import { userResendSaga } from '../type/userUsecaseSaga/loginPageSaga/userResendSaga';
-import { LoginPageSagaActions } from '../type/userUsecaseSaga/loginPageSaga';
+import { userGetOTPSaga } from '../../presentation/pages/LoginPage/userUsecaseSaga/userGetOTPSaga';
+import { userLoginSaga } from '../../presentation/pages/LoginPage/userUsecaseSaga/userLoginSaga';
+import { userResendSaga } from '../../presentation/pages/LoginPage/userUsecaseSaga/userResendSaga';
+import { LoginPageSagaActions } from '../../presentation/pages/LoginPage/userUsecaseSaga';
 
 export function* watchLoginPageSaga() {
   console.log('[app][saga] 1.3');

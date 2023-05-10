@@ -1,15 +1,9 @@
-import { useEffect, useState } from 'react';
 import { Navigation } from '../../components/layouts/Navigation';
-import { useNavigate } from 'react-router';
-import { Page } from '../../components/layouts/Page';
-import { Input } from '@frontend/mobile/shared/ui';
-import { z } from 'zod';
-import { LoginForm } from './LoginForm';
 import { Outlet } from 'react-router';
+import { Page } from '../../components/layouts/Page';
+import { LoginForm } from './LoginForm';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
   return (
     <Page className="flex flex-col">
       <Navigation

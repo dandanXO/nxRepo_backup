@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { delay, put } from 'redux-saga/effects';
-import { catchSagaError } from '../../../utils/catchSagaError';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { UserResendSecondsActionPayload } from './index';
 import { LoginPageSagaActions } from './index';
 import { loginSlice } from '../../../../reduxStore/loginSlice';

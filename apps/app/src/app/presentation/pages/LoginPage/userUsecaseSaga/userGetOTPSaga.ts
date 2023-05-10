@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { Md5 } from 'ts-md5';
 import { put } from 'redux-saga/effects';
 import { API } from '../../../../api/rtk';
-import { catchSagaError } from '../../../utils/catchSagaError';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { UserLoginActionPayload } from './index';
 
 export function* userGetOTPSaga(action: PayloadAction<UserLoginActionPayload>) {

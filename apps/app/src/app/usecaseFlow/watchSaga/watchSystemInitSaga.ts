@@ -1,6 +1,6 @@
 import { call, take } from 'redux-saga/effects';
 import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
-import { systemStartInitSaga } from '../type/systemUsecaseSaga/watchSystemInitSaga';
+import { systemStartInitSaga } from '../type/systemUsecaseSaga/systemStartInitSaga';
 
 export function* watchSystemInitSaga() {
   // console.log('[app][saga] 1.1');

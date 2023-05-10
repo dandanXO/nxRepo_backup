@@ -18,11 +18,15 @@ const Money = (props: IMoney) => {
       {props.isAdd && <div className="mr-1">+</div>}
       {props.isNagetive && <div className="mr-1">-</div>}
       {environment.country === IndiaCountry.country && (
-        <div className={`${props.currencyStyle || ''} mr-1`}>{environment.currency}</div>
+        <div className={`${props.currencyStyle || ''} mr-1`}>
+          {environment.currency}
+        </div>
       )}
       <div className={`${props.moneyStyle || ''}`}>{price}</div>
       {environment.country === PakistanCountry.country && (
-        <div className={`${props.currencyStyle || ''} ml-1`}>{environment.currency}</div>
+        <div className={`${props.currencyStyle || ''} ml-1`}>
+          {environment.currency}
+        </div>
       )}
     </div>
   );

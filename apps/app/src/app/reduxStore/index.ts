@@ -6,7 +6,7 @@ import { indexPageSlice } from './indexPageSlice';
 import { modalSlice } from './modalSlice';
 import { appSlice } from './appSlice';
 import { createBrowserHistory } from 'history';
-import { alertModal } from '../api/base/alertModal';
+
 import {
   createRouterMiddleware,
   createRouterReducer,

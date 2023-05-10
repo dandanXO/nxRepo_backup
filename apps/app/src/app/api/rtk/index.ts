@@ -115,7 +115,7 @@ export const APIV3 = createApi({
     }),
 
     // NOTE: /api/v3/coupon 個人列表取得优惠券列表
-    getCouponList: builder.query<GetCouponListResponse,GetCouponListRequest>({
+    getCouponList: builder.query<GetCouponListResponse, GetCouponListRequest>({
       query: (query: GetCouponListRequest) => ({
         method: 'get',
         url: `/coupon`,
@@ -129,7 +129,7 @@ export const {
   useLazyGetLoanRecordListQuery,
   useLazyGetCouponApplicableListQuery,
   usePostTraceBehaviorMutation,
-  useLazyGetCouponListQuery
+  useLazyGetCouponListQuery,
 } = APIV3;
 
 export const API = createApi({
