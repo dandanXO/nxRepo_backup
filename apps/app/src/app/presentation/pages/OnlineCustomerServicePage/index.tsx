@@ -1,7 +1,7 @@
 import { Navigation } from '../../components/layouts/Navigation';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../usecaseFlow/reduxStore';
+import { RootState } from '../../../reduxStore';
 import { Page } from '../../components/layouts/Page';
 
 const OnlineCustomerServicePage = () => {

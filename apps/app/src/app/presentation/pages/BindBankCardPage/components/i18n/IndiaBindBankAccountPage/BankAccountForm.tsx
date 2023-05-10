@@ -60,4 +60,3 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
     </div>
   );
 };
-

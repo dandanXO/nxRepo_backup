@@ -14,7 +14,7 @@ import IndexPage from '../pages/IndexPage';
 
 import { useSelector } from 'react-redux';
 import { TabBar } from '../components/layouts/TabBar';
-import { RootState } from '../../usecaseFlow/reduxStore';
+import { RootState } from '../../reduxStore';
 import { PagePathEnum } from '../pages/PagePathEnum';
 import AppDataCollector from '../../AppDataCollector';
 

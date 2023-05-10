@@ -26,8 +26,7 @@ const Coupon = (props: ICouponProps) => {
     couponContent = '',
     discountAmount = '',
     expireTime = '',
-    buttonText = 'USE NOW'
-    
+    buttonText = 'USE NOW',
   } = props;
   const layoutTypeStyle: any = {
     // type 1 for india , type 2 for pakistan
@@ -62,7 +61,10 @@ const Coupon = (props: ICouponProps) => {
   }[layoutType];
   cx.bind(layoutTypeStyle);
 
-  const typeStyle = status !== 'disabled' ? layoutTypeStyle['normal'] : layoutTypeStyle['disabled'];
+  const typeStyle =
+    status !== 'disabled'
+      ? layoutTypeStyle['normal']
+      : layoutTypeStyle['disabled'];
 
   return (
     <div
@@ -140,10 +142,12 @@ const Coupon = (props: ICouponProps) => {
           [typeStyle.darkContent]
         )}
       >
-        <div className={cx(`font-bold mb-1.5 text-base `,{
+        <div
+          className={cx(`font-bold mb-1.5 text-base `, {
             'text-primary-main': status !== 'disabled',
             'text-cstate-disable-main': status === 'disabled',
-        })}>
+          })}
+        >
           <Money
             money={discountAmount}
             isNagetive={true}
@@ -152,9 +156,9 @@ const Coupon = (props: ICouponProps) => {
           />
         </div>
         <button
-        // NOTE:優惠券不需點擊 (點擊功能先做保留)
-        //   onClick={props.onClick}
-        //   disabled={status !== 'normal'} //只有normal才能點擊
+          // NOTE:優惠券不需點擊 (點擊功能先做保留)
+          //   onClick={props.onClick}
+          //   disabled={status !== 'normal'} //只有normal才能點擊
           disabled={true}
           className={cx(
             `text-xs whitespace-nowrap px-2 py-1 rounded text-white w-2/3`,

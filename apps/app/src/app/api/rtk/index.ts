@@ -110,12 +110,12 @@ export const APIV3 = createApi({
       query: (data: TraceBehaviorRequest) => ({
         method: 'post',
         url: `/trace/behavior`,
-        params: data,
+        data: data,
       }),
     }),
 
     // NOTE: /api/v3/coupon 個人列表取得优惠券列表
-    getCouponList: builder.query<GetCouponListResponse,GetCouponListRequest>({
+    getCouponList: builder.query<GetCouponListResponse, GetCouponListRequest>({
       query: (query: GetCouponListRequest) => ({
         method: 'get',
         url: `/coupon`,
@@ -129,7 +129,7 @@ export const {
   useLazyGetLoanRecordListQuery,
   useLazyGetCouponApplicableListQuery,
   usePostTraceBehaviorMutation,
-  useLazyGetCouponListQuery
+  useLazyGetCouponListQuery,
 } = APIV3;
 
 export const API = createApi({

@@ -14,7 +14,7 @@ import { NoticeUserInProgressAuthStatusSections } from './sections/NoticeSection
 
 import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndReapplyInTimeSection';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../usecaseFlow/reduxStore';
+import { RootState } from '../../../reduxStore';
 import { AuthenticationSection } from './sections/AuthenticationSection';
 import { ADBannerSection } from './sections/ADBannerSection';
 import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
@@ -35,7 +35,7 @@ import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
 
 import { AuthorizationModal } from '../../modals/AuthorizationModal';
-import { modalSlice } from '../../../usecaseFlow/reduxStore/modalSlice';
+import { modalSlice } from '../../../reduxStore/modalSlice';
 import { NoticeOrderOrQuotaRejectedSection } from './sections/NoticeSection/NoticeOrderOrQuotaRejectedSection';
 import { FeeRateKeyEnum } from '../../../api/indexService/FeeRateKeyEnum';
 import { PlatformProduct } from '../../../api/indexService/PlatformProduct';
@@ -43,7 +43,7 @@ import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail'
 
 import { chain, add, multiply, divide, subtract, evaluate } from 'mathjs';
 import { PagePathEnum } from '../PagePathEnum';
-import { IndexPageSagaAction } from '../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/indexPageSaga';
+import { IndexPageSagaAction } from '../../../usecaseFlow/type/userUsecaseSaga/indexPageSaga';
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -90,6 +90,7 @@ export type PageState = {
 const IndexPage = () => {
   const dispatch = useDispatch();
   const isInitialized = useSelector((state: RootState) => state.app.isInit);
+
   useEffect(() => {
     if (isInitialized) {
       dispatch(IndexPageSagaAction.user.viewIndexPageAction());

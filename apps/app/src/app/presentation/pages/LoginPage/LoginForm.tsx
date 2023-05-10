@@ -2,16 +2,17 @@ import { Input, InputValue } from '@frontend/mobile/shared/ui';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cx from 'classnames';
-import { Button } from '../../components/layouts/Button';
-import { LoginPageSagaActions } from '../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPageSaga';
 import { useNavigate } from 'react-router';
+import {
+  LoginPageSagaActions,
+  LoginPageUserUseCaseSagaInstance,
+} from './userUsecaseSaga';
+import { Button } from '../../components/layouts/Button';
 import { PagePathEnum } from '../PagePathEnum';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { resendSeconds } = useSelector((state: any) => state.login);
 
   const [phoneNumberData, setPhoneNumberData] = useState<InputValue<string>>({
     data: '',
@@ -19,8 +20,10 @@ export const LoginForm = () => {
     errorMessage: '',
   });
   const [enableGetOTP, setEnableGetOTP] = useState(false);
-  const [hasSendOTP, setHasSendOTP] = useState(false);
+
   const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
+  const [hasSendOTP, setHasSendOTP] = useState(false);
+  const { resendSeconds } = useSelector((state: any) => state.login);
 
   const [otpData, setOtpData] = useState<InputValue<string>>({
     data: '',
@@ -29,14 +32,25 @@ export const LoginForm = () => {
   });
 
   const onClickGetOTP = () => {
+    setDoingCountdownSendOTP(true);
+    setHasSendOTP(true);
+
+    // dispatch(
+    //   LoginPageSagaActions.user.getOTP({
+    //     phone: phoneNumberData.data,
+    //   })
+    // );
     dispatch(
-      LoginPageSagaActions.user.getOTP({
+      LoginPageUserUseCaseSagaInstance.userGetOTP({
         phone: phoneNumberData.data,
       })
     );
-    dispatch(LoginPageSagaActions.system.resendSeconds({ resendSeconds: 60 }));
-    setHasSendOTP(true);
-    setDoingCountdownSendOTP(true);
+    // dispatch(LoginPageSagaActions.system.resendSeconds({ resendSeconds: 60 }));
+    dispatch(
+      LoginPageUserUseCaseSagaInstance.systemResendSeconds({
+        resendSeconds: 60,
+      })
+    );
   };
 
   useEffect(() => {
@@ -64,8 +78,14 @@ export const LoginForm = () => {
     }
 
     if (phoneNumberData.isValidation && otpData.isValidation) {
+      // dispatch(
+      //   LoginPageSagaActions.user.login({
+      //     phone: phoneNumberData.data,
+      //     otp: otpData.data,
+      //   })
+      // );
       dispatch(
-        LoginPageSagaActions.user.login({
+        LoginPageUserUseCaseSagaInstance.userLogin({
           phone: phoneNumberData.data,
           otp: otpData.data,
         })
