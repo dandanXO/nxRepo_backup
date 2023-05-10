@@ -16,6 +16,7 @@ const theme: ICustomTailwindTheme = {
   // NOTE: State
   custom_state_disable_main: '#BBBBBB',
   custom_state_disable_variant: '#8C8C8C',
+  custom_state_disable_assistant: '#ECECEC',
 
   custom_state_success_main: '#65D858',
 
@@ -23,23 +24,28 @@ const theme: ICustomTailwindTheme = {
   custom_state_warning_variant: '#DBC06C',
 
   custom_state_error_main: '#FC4961',
-  // NOTICE: v58 沒有??
   custom_state_error_variant: '#FF3D4D',
 
   custom_state_info_main: '#2B9FFF',
-  // NOTICE: v58 沒有??
   custom_state_info_variant: '#2D69FF',
 
   // NOTE: Background
   custom_bg_primary: '#F9FCFB',
   custom_bg_secondary: '#FFFFFF',
   custom_bg_tertiary: '#FFF6F2',
+  custom_bg_homepage_button: '#4092F6',
 
   // NOTE: Text
   custom_text_primary: '#2F2F2F',
   custom_text_secondary: '#757575',
   custom_text_tertiary: '#A3A3A3',
-  custom_text_placeholder: '#AEAEAE',
+  custom_text_divider: '#E8E8E8',
+
+  // NOTE: Text Fields
+  custom_text_fields_background_main: '#FFFFFF',
+  custom_text_fields_background_variant: '#EEEEEE', 
+  custom_text_fields_placeholder_main: '#AEAEAE', 
+  custom_text_fields_outline_main: '#AAAAAA', 
 };
 
 export default theme;

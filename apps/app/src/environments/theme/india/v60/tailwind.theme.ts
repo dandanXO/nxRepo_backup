@@ -16,6 +16,7 @@ const theme: ICustomTailwindTheme = {
   // NOTE: State
   custom_state_disable_main: '#BDBDBD',
   custom_state_disable_variant: '#8F8F8F',
+  custom_state_disable_assistant: '#ECECEC',
 
   custom_state_success_main: '#7FDD44',
 
@@ -32,12 +33,19 @@ const theme: ICustomTailwindTheme = {
   custom_bg_primary: '#FCFBF9',
   custom_bg_secondary: '#FFFFFF',
   custom_bg_tertiary: '#FFFCF2',
+  custom_bg_homepage_button: '#4073F6',
 
   // NOTE: Text
   custom_text_primary: '#2C2C2C',
   custom_text_secondary: '#727272',
   custom_text_tertiary: '#A1A1A1',
-  custom_text_placeholder: '#AEAEAE',
+  custom_text_divider: '#AEAEAE',
+
+  // NOTE: Text Fields
+  custom_text_fields_background_main: '#FFFFFF',
+  custom_text_fields_background_variant: '#EEEEEE', 
+  custom_text_fields_placeholder_main: '#AEAEAE', 
+  custom_text_fields_outline_main: '#AAAAAA', 
 };
 
 export default theme;
