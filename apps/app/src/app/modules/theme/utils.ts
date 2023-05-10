@@ -10,21 +10,25 @@ type Countries = 'india' | 'pakistan';
 export const applyTheme = (country: Countries, theme: string): void => {
   // console.log("applyTheme.country", country);
   // console.log("applyTheme.theme", theme);
-  let themeObject: IMappedTheme = mapCustomTailwindTheme(
-    themes[country][theme]
-  );
-  if (!themeObject) {
-    themeObject = mapCustomTailwindTheme(themes['india'][DEFAULT_THEME]);
-  }
 
-  const root = document.documentElement;
+  // NOTICE: 有找到 theme 才配置
+  if(themes[country] && themes[country][theme]) {
+    let themeObject: IMappedTheme = mapCustomTailwindTheme(
+      themes[country][theme]
+    );
 
-  Object.keys(themeObject).forEach((property) => {
-    if (property === 'name') {
-      return;
+    if (!themeObject) {
+      themeObject = mapCustomTailwindTheme(themes['india'][DEFAULT_THEME]);
     }
-    root.style.setProperty(property, themeObject[property]);
-  });
+
+    const root = document.documentElement;
+    Object.keys(themeObject).forEach((property) => {
+      if (property === 'name') {
+        return;
+      }
+      root.style.setProperty(property, themeObject[property]);
+    });
+  }
 };
 
 export const extend = (extending: ITheme, newTheme: ITheme): ITheme => {
