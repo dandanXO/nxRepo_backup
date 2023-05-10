@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cx from 'classnames';
 import { Button } from '../../components/layouts/Button';
-import { LoginPageSagaActions } from '../../../usecaseFlow/usecaseActionSaga/userUsecaseSaga/loginPageSaga';
+import { LoginPageSagaActions } from '../../../usecaseFlow/type/userUsecaseSaga/loginPageSaga';
 import { useNavigate } from 'react-router';
 import { PagePathEnum } from '../PagePathEnum';
 

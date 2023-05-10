@@ -1,6 +1,6 @@
-import { AndroidAppInfo } from './IWindow';
 import { environment } from '../../../environments/environment';
 import { alertModal } from '../../api/base/alertModal';
+import { IAndroidAppInfo } from '../nativeAppInfo/IAndroidAppInfo';
 
 // export let androidAPPInfo: AndroidAppInfo = window.AppInfoTask && window.AppInfoTask.getAppInfo && window.AppInfoTask.getAppInfo()
 // alertModal(JSON.stringify(androidAPPInfo));

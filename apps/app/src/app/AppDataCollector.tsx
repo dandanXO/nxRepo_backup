@@ -11,21 +11,30 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
 
   // NOTE: Page enter, leave, duration
   const location = useLocation();
+
   useEffect(() => {
+    // NOTICE: 目前巴基斯坦白牌需要增加
+    if (environment.country !== 'pk') return;
+
     // if(whitePage.indexOf(location.pathname) === -1) return
     const start = performance.now();
     console.log('[AppDataCollector] Page enter!', location.pathname, start);
+
     return () => {
+      // NOTICE: 目前巴基斯坦白牌需要增加
+      if (environment.country !== 'pk') return;
+
       const end = performance.now();
       const duration = end - start;
+
       // console.log('Page leave!', location.pathname, end);
       console.log(
         '[AppDataCollector] Page duration!',
         location.pathname,
         duration
       );
-      const eventID = `${location.pathname}`.toUpperCase();
 
+      const eventID = `${location.pathname}`.toUpperCase();
       postTraceBehaviour([
         {
           deviceCode: 'deviceCode',
@@ -40,6 +49,9 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
   }, [location]);
 
   const onAppElementEvent = (event: SyntheticEvent) => {
+    // NOTICE: 目前巴基斯坦白牌需要增加
+    if (environment.country !== 'pk') return;
+
     console.log('onAppElementClick.event', event);
     // console.log("onAppElementClick.event.target", event.target);
     // console.log("onAppElementClick.event.target.nodeName", (event.target as any)?.nodeName);
@@ -87,15 +99,11 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
     }
   };
 
-  // NOTICE: 目前巴基斯坦白牌需要增加
-  if (environment.country === 'pk') {
-    return (
-      <div onClick={onAppElementEvent} onBlur={onAppElementEvent}>
-        {props.children}
-      </div>
-    );
-  }
-  return null;
+  return (
+    <div onClick={onAppElementEvent} onBlur={onAppElementEvent}>
+      {props.children}
+    </div>
+  );
 };
 
 export default AppDataCollector;

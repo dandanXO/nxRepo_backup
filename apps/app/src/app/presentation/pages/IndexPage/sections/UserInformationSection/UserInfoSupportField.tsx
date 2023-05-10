@@ -2,10 +2,7 @@ import { RiCustomerServiceLine } from '@react-icons/all-files/ri/RiCustomerServi
 import { FiEye } from '@react-icons/all-files/fi/FiEye';
 import { FiEyeOff } from '@react-icons/all-files/fi/FiEyeOff';
 import React, { useCallback, useState } from 'react';
-import {
-  IndexPageProps,
-  RootState,
-} from '../../../../../usecaseFlow/reduxStore';
+import { IndexPageProps, RootState } from '../../../../../reduxStore';
 
 type Props = IndexPageProps & {
   onClickToCustomerService: () => void;

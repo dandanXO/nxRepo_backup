@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import cx from 'classnames';
-import { IndexPageProps } from '../../../../../usecaseFlow/reduxStore';
+import { IndexPageProps } from '../../../../../reduxStore';
 import { PageState, PageStateEnum } from '../../index';
 import { USER_AUTH_STATE } from '../../../../../domain/user/USER_AUTH_STATE';
 import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';

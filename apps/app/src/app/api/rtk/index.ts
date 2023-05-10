@@ -108,7 +108,7 @@ export const APIV3 = createApi({
       query: (data: TraceBehaviorRequest) => ({
         method: 'post',
         url: `/trace/behavior`,
-        params: data,
+        data: data,
       }),
     }),
   }),

@@ -1,4 +1,4 @@
-import { IndexPageProps } from '../../../usecaseFlow/reduxStore';
+import { IndexPageProps } from '../../../reduxStore';
 
 type Props = IndexPageProps;
 

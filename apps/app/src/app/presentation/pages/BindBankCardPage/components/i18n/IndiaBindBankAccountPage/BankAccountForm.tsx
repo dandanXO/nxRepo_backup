@@ -44,7 +44,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
         />
         <Input
           className="mb-4 text-sm"
-          label={'UPI ID'}
+          label={'UPI ID (Optional)'}
           value={props.upiData.data}
           onChange={props.onUPIIDChange}
         />

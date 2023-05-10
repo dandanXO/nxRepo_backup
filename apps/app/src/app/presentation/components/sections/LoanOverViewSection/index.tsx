@@ -1,4 +1,4 @@
-import { IndexPageProps } from '../../../../usecaseFlow/reduxStore';
+import { IndexPageProps } from '../../../../reduxStore';
 import { formatPrice } from '../../../../modules/formatPrice';
 import Chart from 'react-apexcharts';
 import { useEffect, useRef, useState } from 'react';
