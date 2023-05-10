@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GetInitServiceResponse } from '../api/appService/GetInitServiceResponse';
-import {IAndroidAppInfo} from "../modules/nativeAppInfo/IAndroidAppInfo";
+import { IAndroidAppInfo } from '../modules/nativeAppInfo/IAndroidAppInfo';
 
 export enum AppRunningModeEnum {
   'Unknown',

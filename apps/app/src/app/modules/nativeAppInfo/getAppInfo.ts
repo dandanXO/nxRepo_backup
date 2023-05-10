@@ -1,5 +1,5 @@
-import {IAndroidAppInfo} from "./IAndroidAppInfo";
-import {environment} from "../../../environments/environment";
+import { IAndroidAppInfo } from './IAndroidAppInfo';
+import { environment } from '../../../environments/environment';
 
 export const getAppInfo = (): IAndroidAppInfo => {
   let appInfo: IAndroidAppInfo = {
@@ -9,8 +9,8 @@ export const getAppInfo = (): IAndroidAppInfo => {
     appName: '',
     uiVersion: '',
     token: '',
-    mode: "H5"
-  }
+    mode: 'H5',
+  };
 
   // NOTE: Native Bridge
   if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
@@ -27,7 +27,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
         appInfo.uiVersion = '15';
       }
     }
-    appInfo.mode = "Webview"
+    appInfo.mode = 'Webview';
   } else {
     // NOTE: H5 or DEV Mode
     if (environment.country === 'in') {
@@ -41,7 +41,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
             ? String(AppInfo.UI_VERSION)
             : '55',
         token: null,
-        mode: "H5",
+        mode: 'H5',
       };
     } else if (environment.country === 'pk') {
       appInfo = {
@@ -54,7 +54,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
             ? String(AppInfo.UI_VERSION)
             : '15',
         token: null,
-        mode: "H5",
+        mode: 'H5',
       };
     } else {
       new Error('前端請新增國家配置');

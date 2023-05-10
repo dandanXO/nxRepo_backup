@@ -1,3 +1,3 @@
-import {getAppInfo} from "../getAppInfo";
+import { getAppInfo } from '../getAppInfo';
 
 export const AndroidAppInfo = getAppInfo();

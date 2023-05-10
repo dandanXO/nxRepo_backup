@@ -5,5 +5,5 @@ export type IAndroidAppInfo = {
   token: null | string;
   domain: string;
   appName: string;
-  mode: "Webview" | "H5"
+  mode: 'Webview' | 'H5';
 };

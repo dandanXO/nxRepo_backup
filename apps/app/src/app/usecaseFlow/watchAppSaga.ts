@@ -1,4 +1,4 @@
-import {all, call, put, takeLatest} from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { SystemCaseActions } from './type/systemUsecaseSaga/systemCaseActions';
 import { watchSystemInitSaga } from './type/systemUsecaseSaga/watchSystemInitSaga';
 import { systemCountdownSaga } from './type/userUsecaseSaga/indexPageSaga/systemCountdownSaga';
@@ -12,7 +12,7 @@ import {
   watchPersonalInfoPageSaga,
 } from './type/userUsecaseSaga/personalInfoPageSaga';
 
-import { Posthog } from "../modules/posthog"
+import { Posthog } from '../modules/posthog';
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* WatchAppSaga() {
@@ -58,5 +58,4 @@ function* initSaga() {
   // }
   yield call(Posthog.init, {});
   yield put(PersonalInfoPageSagaActions.system.init());
-
 }

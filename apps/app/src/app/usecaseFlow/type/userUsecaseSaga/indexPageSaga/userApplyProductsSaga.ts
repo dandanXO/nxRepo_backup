@@ -3,7 +3,10 @@ import { LoanServiceResponse } from '../../../../api/loanService/service/postApp
 import { call, put, select, take, race } from 'redux-saga/effects';
 import { Service } from '../../../../api';
 import { catchSagaError } from '../../../utils/catchSagaError';
-import { InitialStateType, modalSlice } from '../../../../reduxStore/modalSlice';
+import {
+  InitialStateType,
+  modalSlice,
+} from '../../../../reduxStore/modalSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { GetBankCardListResponse } from '../../../../api/userService/GetBankCardListResponse';
 import { RootState } from '../../../../reduxStore';

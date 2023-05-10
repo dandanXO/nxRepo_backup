@@ -1,4 +1,4 @@
-import {all, call, put, select, take} from 'redux-saga/effects';
+import { all, call, put, select, take } from 'redux-saga/effects';
 import { Service } from '../../../api';
 import { appSlice } from '../../../reduxStore/appSlice';
 import { GetInitServiceResponse } from '../../../api/appService/GetInitServiceResponse';
@@ -7,8 +7,8 @@ import { GetUserInfoServiceResponse } from '../../../api/userService/GetUserInfo
 import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
 import { SystemCaseActions } from './systemCaseActions';
 import { systemCallGetUserInfoSaga } from '../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
-import {AndroidAppInfo} from "../../../modules/nativeAppInfo/persistent/androidAppInfo";
-import {RootState} from "../../../reduxStore";
+import { AndroidAppInfo } from '../../../modules/nativeAppInfo/persistent/androidAppInfo';
+import { RootState } from '../../../reduxStore';
 
 export function* watchSystemInitSaga() {
   console.log('[app][saga] 1.1');
@@ -29,7 +29,9 @@ export function* systemStartInitSaga() {
     // const packageId = AndroidAppInfo.packageId;
     // console.log("[app][saga]  packageId", packageId);
     yield put(appSlice.actions.updateAndroidInfo(AndroidAppInfo));
-    const packageId: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId);
+    const packageId: string = yield select(
+      (state: RootState) => state.app.androidAppInfo?.packageId
+    );
 
     const [response, userResponse]: [
       GetInitServiceResponse,
@@ -56,13 +58,11 @@ export function* systemStartInitSaga() {
 
     console.log('[app][saga] systemStartInitSaga');
     yield put(appSlice.actions.init(null));
-
   } catch (error) {
     // NOTE: 這邊也能收到其他 action error
     yield catchSagaError(error);
   }
 }
-
 
 function* callGetInit(packageId: string) {
   const response: GetInitServiceResponse = yield call(
