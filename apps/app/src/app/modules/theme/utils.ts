@@ -12,7 +12,7 @@ export const applyTheme = (country: Countries, theme: string): void => {
   // console.log("applyTheme.theme", theme);
 
   // NOTICE: 有找到 theme 才配置
-  if (themes[country] && themes[country][theme]) {
+  if(themes[country] && themes[country][theme]) {
     let themeObject: IMappedTheme = mapCustomTailwindTheme(
       themes[country][theme]
     );

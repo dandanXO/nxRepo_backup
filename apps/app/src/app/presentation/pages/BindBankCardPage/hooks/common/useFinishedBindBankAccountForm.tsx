@@ -2,12 +2,12 @@ import { useCallback, useState } from 'react';
 import { InputValue, Modal } from '@frontend/mobile/shared/ui';
 import { useTranslation } from 'react-i18next';
 import { i18nBankBindAccountPage } from '../../translations';
-import * as Sentry from '@sentry/react';
 import {
   BankVendor,
   GetBindCardDropListResponse,
 } from '../../../../../api/rtk/old/GetBindCardDropList';
 import { BindBankCardPageEvents } from '../../event';
+import { SentryModule } from '../../../../../modules/sentry';
 
 type IUseFinishedBindBankAccountPage = {
   // NOTICE: Common
@@ -49,8 +49,8 @@ export const useFinishedBindBankAccountForm = (
     //   }
     // }
 
-    Sentry.captureMessage(BindBankCardPageEvents.UserBindBankcard.name, {
-      tags: BindBankCardPageEvents.UserBindBankcard.setTags(
+    SentryModule.captureMessage(BindBankCardPageEvents.UserBindBankcard.name, {
+      ...BindBankCardPageEvents.UserBindBankcard.getTags(
         'success',
         props.postBankBindSave
           ? {
@@ -134,12 +134,13 @@ export const useFinishedBindBankAccountForm = (
         });
       })
       .catch(() => {
-        Sentry.captureMessage(BindBankCardPageEvents.UserBindBankcard.name, {
-          tags: BindBankCardPageEvents.UserBindBankcard.setTags(
+        SentryModule.captureMessage(
+          BindBankCardPageEvents.UserBindBankcard.name,
+          BindBankCardPageEvents.UserBindBankcard.getTags(
             'failure',
             requestBody
-          ),
-        });
+          )
+        );
       });
   }, [
     props.postBankBindSave,

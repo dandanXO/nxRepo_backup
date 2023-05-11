@@ -1,7 +1,7 @@
 export const BindBankCardPageEvents = {
   UserBindBankcard: {
     name: 'UserBindBankcard',
-    setTags: (
+    getTags: (
       status: 'loading' | 'success' | 'failure',
       args: Record<string, any>
     ) => {

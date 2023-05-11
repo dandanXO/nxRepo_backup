@@ -49,7 +49,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
         domain: 'https://www.oasis-gold.com',
         environment: 'pakistan',
         packageId: 'com.pak.app.yesloan.android',
-        appName: 'dev_in',
+        appName: 'dev_pk',
         uiVersion:
           typeof AppInfo.UI_VERSION !== 'undefined'
             ? String(AppInfo.UI_VERSION)
