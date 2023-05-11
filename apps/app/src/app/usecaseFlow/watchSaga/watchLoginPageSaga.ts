@@ -3,7 +3,7 @@ import { errorFallback } from '../utils/errorFallback';
 import { userGetOTPSaga } from '../../presentation/pages/LoginPage/userUsecaseSaga/userGetOTPSaga';
 import { userLoginSaga } from '../../presentation/pages/LoginPage/userUsecaseSaga/userLoginSaga';
 import { userResendSaga } from '../../presentation/pages/LoginPage/userUsecaseSaga/userResendSaga';
-import { LoginPageSagaActions } from '../../presentation/pages/LoginPage/userUsecaseSaga';
+import { LoginPageUseCaseActionsInstance } from '../../presentation/pages/LoginPage/userUsecaseSaga';
 
 export function* watchLoginPageSaga() {
   console.log('[app][saga] 1.3');
@@ -13,17 +13,17 @@ export function* watchLoginPageSaga() {
   // yield takeLatest(LoginPageSataActions.user.getOTP.type, userGetOTPSaga);
   // yield takeLatest(LoginPageSataActions.user.login.type, userLoginSaga);
   yield takeLatest(
-    LoginPageSagaActions.user.getOTP.type,
+    LoginPageUseCaseActionsInstance.user.getOTP.type,
     errorFallback,
     userGetOTPSaga
   );
   yield takeLatest(
-    LoginPageSagaActions.user.login.type,
+    LoginPageUseCaseActionsInstance.user.login.type,
     errorFallback,
     userLoginSaga
   );
   yield takeLatest(
-    LoginPageSagaActions.system.resendSeconds.type,
+    LoginPageUseCaseActionsInstance.system.resendSeconds.type,
     errorFallback,
     userResendSaga
   );

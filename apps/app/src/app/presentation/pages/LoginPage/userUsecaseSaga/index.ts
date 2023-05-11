@@ -1,12 +1,9 @@
 import {
+  ActionCreatorWithPayload,
   createAction,
   PayloadAction,
   PayloadActionCreator,
 } from '@reduxjs/toolkit';
-
-interface IUserUseCaseSaga {
-  name?: string;
-}
 
 export type UserGetOTPActionPayload = {
   phone: string;
@@ -21,50 +18,39 @@ export type UserResendSecondsActionPayload = {
   resendSeconds: number;
 };
 
-interface ILoginPageUserUseCaseSaga extends IUserUseCaseSaga {
-  systemInit: PayloadActionCreator<any>;
-
-  userGetOTP: PayloadActionCreator<{
-    phone: string;
-  }>;
-  systemResendSeconds: PayloadActionCreator<{
-    resendSeconds: number;
-  }>;
-
-  userLogin: PayloadActionCreator<{
-    phone: string;
-    otp: string;
-  }>;
+// NOTICE:
+interface IUseCase {
+  name: string;
+  system: Record<string, PayloadActionCreator<any>>;
+  user: Record<string, PayloadActionCreator<any>>;
 }
 
-// NOTE: REFACTOR ME
-export const LoginPageSagaActions = {
+interface ILoginPageUseCase extends IUseCase {
+  system: {
+    init: PayloadActionCreator<any>;
+    resendSeconds: PayloadActionCreator<UserResendSecondsActionPayload>;
+  };
   user: {
+    getOTP: PayloadActionCreator<UserGetOTPActionPayload>;
+    login: PayloadActionCreator<UserLoginActionPayload>;
+  };
+}
+
+class LoginPageUseCaseActions implements ILoginPageUseCase {
+  name = 'LoginPageUseCaseActions';
+  system = {
+    init: createAction('LoginPageSataActions-system-init'),
+    resendSeconds: createAction<UserResendSecondsActionPayload>(
+      'LoginPageSataActions-resendSeconds'
+    ),
+  };
+  user = {
     getOTP: createAction<UserGetOTPActionPayload>(
       'LoginPageSataActions-getOTP'
     ),
     login: createAction<UserLoginActionPayload>(
       'LoginPageSataActions-user-login'
     ),
-  },
-  system: {
-    init: createAction('LoginPageSataActions-system-init'),
-    resendSeconds: createAction<UserResendSecondsActionPayload>(
-      'LoginPageSataActions-resend-seconds'
-    ),
-  },
-};
-
-class LoginPageUserUseCaseSaga implements ILoginPageUserUseCaseSaga {
-  systemInit = createAction('LoginPageSataActions-system-init');
-  userGetOTP = createAction<UserGetOTPActionPayload>(
-    'LoginPageSataActions-getOTP'
-  );
-  systemResendSeconds = createAction<UserResendSecondsActionPayload>(
-    'LoginPageSataActions-resend-seconds'
-  );
-  userLogin = createAction<UserLoginActionPayload>(
-    'LoginPageSataActions-user-login'
-  );
+  };
 }
-export const LoginPageUserUseCaseSagaInstance = new LoginPageUserUseCaseSaga();
+export const LoginPageUseCaseActionsInstance = new LoginPageUseCaseActions();

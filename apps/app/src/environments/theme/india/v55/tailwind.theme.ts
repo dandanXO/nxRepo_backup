@@ -27,7 +27,7 @@ const theme: ICustomTailwindTheme = {
   custom_state_error_variant: '#FF5349',
 
   custom_state_info_main: '#1376EF',
-  custom_state_info_variant: '#E7F1FD', 
+  custom_state_info_variant: '#E7F1FD',
 
   // NOTE: Background
   custom_bg_primary: '#FDFFFE',
@@ -43,9 +43,9 @@ const theme: ICustomTailwindTheme = {
 
   // NOTE: Text Fields
   custom_text_fields_background_main: '#FFFFFF',
-  custom_text_fields_background_variant: '#EEEEEE', 
-  custom_text_fields_placeholder_main: '#AEAEAE', 
-  custom_text_fields_outline_main: '#AAAAAA', 
+  custom_text_fields_background_variant: '#EEEEEE',
+  custom_text_fields_placeholder_main: '#AEAEAE',
+  custom_text_fields_outline_main: '#AAAAAA',
 };
 
 export default theme;
