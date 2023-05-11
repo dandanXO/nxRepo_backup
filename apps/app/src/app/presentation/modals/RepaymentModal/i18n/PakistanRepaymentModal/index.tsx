@@ -53,8 +53,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           onCheck={(value: any) => {
             setRadioValue(value);
             if (value === 'balance') {
-              setBalanceValue(balance);
-              setBalanceValue(`${environment.currency}${balance}`);
+              setBalanceValue(`${environment.currency} ${balance}`);
               setBalanceValueErrorMessage('');
             }
           }}
@@ -75,10 +74,10 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           onChange={(event: any) => {
             let value = event.target.value;
             // console.log("value", value);
-            value = value.replace(`${environment.currency}`, '');
+            value = value.replace(`${environment.currency}`, '').trim();
 
-            if (value === '') {
-              setBalanceValueErrorMessage('This field cannot be left blank.');
+            if (value === '' || Number(value) === 0) {
+              setBalanceValueErrorMessage('This field cannot be left blank or 0.');
             } else if (!new RegExp('^[0-9]*$').test(value)) {
               setBalanceValueErrorMessage('Numbers only. Please try again.');
             } else if (Number(value) > Number(balance)) {
@@ -96,8 +95,9 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
               value === 'PKR' ||
               value === 'PK'
             ) {
+                //
             } else {
-              setBalanceValue(`${environment.currency}${value}`);
+              setBalanceValue(`${environment.currency} ${value}`);
             }
           }}
           onBlur={() => {}}
@@ -167,18 +167,13 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         </>
       )}
 
-      <div className="mt-3 font-bold">
+      {radioValue !== 'custom' && (<div className="mt-3 font-bold">
         <ListItem
           title={'Repayment Amount'}
-          text={
-            <Money
-              money={
-                Number(balance) - Number(coupon ? coupon.discountAmount : 0)
-              }
-            />
-          }
+          text={<Money money={ Number(balance) - Number(coupon ? coupon.discountAmount : 0) }/>}
         />
       </div>
+      )}
 
       <div className={`flex flex-row my-3`}>
         <div className={`mr-1.5 w-full `}>

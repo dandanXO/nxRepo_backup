@@ -24,10 +24,10 @@ const theme: ICustomTailwindTheme = {
   custom_state_warning_variant: '#DBC06C',
 
   custom_state_error_main: '#FC4961',
-  custom_state_error_variant: '#FF3D4D',
+  custom_state_error_variant: '#FEE3DA',
 
   custom_state_info_main: '#2B9FFF',
-  custom_state_info_variant: '#2D69FF',
+  custom_state_info_variant: '#D4F4FF',
 
   // NOTE: Background
   custom_bg_primary: '#F9FCFB',

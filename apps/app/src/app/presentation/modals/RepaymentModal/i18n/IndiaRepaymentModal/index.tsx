@@ -79,7 +79,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
             // console.log("balance");
             // console.log(balance);
             if (value === 'balance') {
-              setBalanceValue(`${environment.currency}${balance}`);
+              setBalanceValue(`${environment.currency} ${balance}`);
               setBalanceValueErrorMessage('');
             }
           }}
@@ -96,10 +96,10 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         value={`${balanceValue}`}
         onChange={(event: any) => {
           let value = event.target.value;
-          value = value.replace(`${environment.currency}`, '');
+          value = value.replace(`${environment.currency} `, '').trim();
 
-          if (value === '') {
-            setBalanceValueErrorMessage('This field cannot be left blank.');
+          if (value === '' || Number(value) === 0) {
+            setBalanceValueErrorMessage('This field cannot be left blank or 0.');
           } else if (!new RegExp('^[0-9]*$').test(value)) {
             setBalanceValueErrorMessage('Numbers only. Please try again.');
           } else if (Number(value) > Number(balance)) {
@@ -110,8 +110,12 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           } else {
             setBalanceValueErrorMessage('');
           }
-          // setBalanceValue(value);
-          setBalanceValue(`${environment.currency}${value}`);
+
+          if (value.trim() === '₹') {
+              //
+          } else {
+            setBalanceValue(`${environment.currency} ${value}`);
+          }
         }}
         onBlur={() => {}}
         errorMessage={
