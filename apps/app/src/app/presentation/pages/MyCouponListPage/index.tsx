@@ -66,9 +66,6 @@ const MyCouponListPage = () => {
                     ? 'USED'
                     : 'EXPIRED'
                 }
-                layoutType={
-                  environment.country === IndiaCountry.country ? 1 : 2
-                }
               />
             );
           })

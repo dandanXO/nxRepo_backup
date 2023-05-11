@@ -128,9 +128,6 @@ const RepamentCouponModal = () => {
                       index={index}
                       status="normal"
                       key={i.id}
-                      layoutType={
-                        environment.country !== IndiaCountry.country ? 1 : 2
-                      }
                     />
                   </>
                 );
@@ -152,9 +149,6 @@ const RepamentCouponModal = () => {
                   couponContent={i.couponContent}
                   status="unUsable"
                   key={i.id}
-                  layoutType={
-                    environment.country === IndiaCountry.country ? 1 : 2
-                  }
                 />
               ))}
             </>
