@@ -3,10 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cx from 'classnames';
 import { useNavigate } from 'react-router';
-import {
-  LoginPageSagaActions,
-  LoginPageUserUseCaseSagaInstance,
-} from './userUsecaseSaga';
+import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 import { Button } from '../../components/layouts/Button';
 import { PagePathEnum } from '../PagePathEnum';
 
@@ -32,22 +29,16 @@ export const LoginForm = () => {
   });
 
   const onClickGetOTP = () => {
-    setDoingCountdownSendOTP(true);
-    setHasSendOTP(true);
+    // setDoingCountdownSendOTP(true);
+    // setHasSendOTP(true);
 
-    // dispatch(
-    //   LoginPageSagaActions.user.getOTP({
-    //     phone: phoneNumberData.data,
-    //   })
-    // );
     dispatch(
-      LoginPageUserUseCaseSagaInstance.userGetOTP({
+      LoginPageUseCaseActionsInstance.user.getOTP({
         phone: phoneNumberData.data,
       })
     );
-    // dispatch(LoginPageSagaActions.system.resendSeconds({ resendSeconds: 60 }));
     dispatch(
-      LoginPageUserUseCaseSagaInstance.systemResendSeconds({
+      LoginPageUseCaseActionsInstance.system.resendSeconds({
         resendSeconds: 60,
       })
     );
@@ -78,14 +69,8 @@ export const LoginForm = () => {
     }
 
     if (phoneNumberData.isValidation && otpData.isValidation) {
-      // dispatch(
-      //   LoginPageSagaActions.user.login({
-      //     phone: phoneNumberData.data,
-      //     otp: otpData.data,
-      //   })
-      // );
       dispatch(
-        LoginPageUserUseCaseSagaInstance.userLogin({
+        LoginPageUseCaseActionsInstance.user.login({
           phone: phoneNumberData.data,
           otp: otpData.data,
         })

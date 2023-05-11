@@ -1,8 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { delay, put } from 'redux-saga/effects';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { UserResendSecondsActionPayload } from './index';
-import { LoginPageSagaActions } from './index';
+import {
+  LoginPageUseCaseActionsInstance,
+  UserResendSecondsActionPayload,
+} from './index';
 import { loginSlice } from '../../../../reduxStore/loginSlice';
 
 export function* userResendSaga(
@@ -11,10 +13,13 @@ export function* userResendSaga(
   try {
     let resendSeconds = Number(action.payload.resendSeconds);
     yield put(loginSlice.actions.updateResendSeconds(resendSeconds));
+
     if (resendSeconds !== 0) {
       yield delay(1000);
       resendSeconds -= 1;
-      yield put(LoginPageSagaActions.system.resendSeconds({ resendSeconds }));
+      yield put(
+        LoginPageUseCaseActionsInstance.system.resendSeconds({ resendSeconds })
+      );
     }
   } catch (error) {
     yield catchSagaError(error);

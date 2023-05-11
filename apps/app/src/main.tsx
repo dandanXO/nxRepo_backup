@@ -24,15 +24,10 @@ const renderApp = () => {
   console.log('[app] environment', environment);
   console.log('[app] window.theme', window.theme);
   console.log('[app] isInAndroid', isInAndroid());
+  console.log('[app] AndroidAppInfo.mode', AndroidAppInfo.mode);
 
   // NOTICE: Theme
   applyCustomTheme(AndroidAppInfo);
-
-  // NOTICE: Initializing H5 Mode
-  if (AndroidAppInfo.mode === 'H5') {
-    console.log('[app][saga] 2');
-    appStore.dispatch(SystemCaseActions.InitSaga());
-  }
 
   // NOTE: Starting to render
   const root = ReactDOM.createRoot(
