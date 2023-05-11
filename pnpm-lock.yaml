@@ -29,6 +29,7 @@ specifiers:
   '@reduxjs/toolkit': 1.9.0
   '@sentry/react': ^7.28.0
   '@sentry/tracing': ^7.28.0
+  '@sentry/types': ^7.51.2
   '@sentry/webpack-plugin': ^1.20.0
   '@storybook/addon-essentials': 6.5.16
   '@storybook/builder-webpack5': 6.5.16
@@ -232,6 +233,7 @@ devDependencies:
   '@nrwl/webpack': 15.9.2_on4k4ojxzp3awmqdnptqln36ey
   '@nrwl/workspace': 15.9.2
   '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_6q7opvf66memguyoexukjey674
+  '@sentry/types': 7.51.2
   '@sentry/webpack-plugin': 1.20.0
   '@storybook/addon-essentials': 6.5.16_xz3uiij6y4qlztc4ocwzhbouve
   '@storybook/builder-webpack5': 6.5.16_qscorwrahvrma7vcrrb6izhmbu
@@ -5022,6 +5024,11 @@ packages:
     resolution: {integrity: sha512-F6tZldpvC3Lt8FPgJ6wRTcE7P9txIpHSBjyYz9wqFlVJx4IhBmrn6vZU1LvANUaK1jZZF2PW5tFRrVEnydfpqg==}
     engines: {node: '>=8'}
     dev: false
+
+  /@sentry/types/7.51.2:
+    resolution: {integrity: sha512-/hLnZVrcK7G5BQoD/60u9Qak8c9AvwV8za8TtYPJDUeW59GrqnqOkFji7RVhI7oH1OX4iBxV+9pAKzfYE6A6SA==}
+    engines: {node: '>=8'}
+    dev: true
 
   /@sentry/utils/7.28.0:
     resolution: {integrity: sha512-ag1RotlFSJnwUi/MYWY5iQ8aLcwrCBlD/qlGB43PvB3XGDl3e7E/pUy2bdblP7Q2uCKLVUBcudyaSgtvNqu9wA==}

@@ -13,11 +13,10 @@ import React from 'react';
 const routerSelector: ReduxRouterSelector<RootState> = (state) =>
   state.navigator;
 
-interface AppProps {}
-
-export function App(props: AppProps) {
+export function App() {
   return (
     <div>
+      {/*NOTICE: Refactor ME window.theme */}
       <AppThemeProvider theme={window.theme}>
         <Provider store={appStore}>
           <ReduxRouter history={history} routerSelector={routerSelector}>
