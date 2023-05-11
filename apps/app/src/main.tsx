@@ -20,6 +20,11 @@ import './app/modules/window/IWindow';
 import './style.css';
 import App from './app/app';
 
+// NOTICE: refactor me
+export const AppTempFlag = {
+  isWebview: true,
+};
+
 const renderApp = () => {
   // NOTE: Before rendering
   // console.log('[app] environment', environment);
@@ -27,6 +32,7 @@ const renderApp = () => {
   // console.log('[app] isInAndroid', isInAndroid());
   // console.log('[app] AndroidAppInfo', AndroidAppInfo);
 
+  // NOTICE: 印度 v58 開始才有, 巴基斯坦 v15 就有了
   if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
     const appInfoStr = window['AppInfoTask']['getAppInfo']();
     const originalAppInfo = JSON.parse(appInfoStr);
