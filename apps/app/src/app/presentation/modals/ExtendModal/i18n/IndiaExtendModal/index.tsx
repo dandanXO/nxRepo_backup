@@ -68,7 +68,7 @@ const IndiaExtendModal = (props: any) => {
 
       {/*NOTE: 總金額*/}
       <ListItem
-        fontWeight="font-bold"
+        className="font-bold"
         title={'Total Extension Fee'}
         text={<Money money={extensionPayAmount} />}
       />

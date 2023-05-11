@@ -26,7 +26,7 @@ export const Button = (props: Props) => {
             props.type === undefined,
         },
         {
-          'border border-solid border-cbg-tertiary-primary bg-primary-variant text-ctext-tertiary':
+          'border border-solid border-tertiary-main bg-tertiary-main text-white':
             props.type === 'secondary',
         },
         {

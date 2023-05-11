@@ -40,6 +40,10 @@ module.exports = {
         main: 'var(--secondary_main)',
         variant: 'var(--secondary_variant)',
       },
+      tertiary: {
+        main: 'var(--tertiary_main)',
+        variant: 'var(--tertiary_variant)',
+      },
       cbg: {
         // NOTE: background
         primary: 'var(--custom_bg_primary)',
