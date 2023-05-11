@@ -1,6 +1,8 @@
 import './app/modules/sentry';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
+import * as Sentry from '@sentry/react';
+
 // NOTE: ENV
 import { environment } from './environments/environment';
 
@@ -16,15 +18,17 @@ import './app/modules/window/IWindow';
 // NOTE: Other
 import './style.css';
 import App from './app/app';
-import { appStore } from './app/reduxStore';
-import { SystemCaseActions } from './app/usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 
 const renderApp = () => {
   // NOTE: Before rendering
   console.log('[app] environment', environment);
   console.log('[app] window.theme', window.theme);
-  console.log('[app] isInAndroid', isInAndroid());
-  console.log('[app] AndroidAppInfo.mode', AndroidAppInfo.mode);
+  // console.log('[app] isInAndroid', isInAndroid());
+  console.log('[app] AndroidAppInfo', AndroidAppInfo);
+
+  Sentry.captureMessage('App load AndroidAppInfo', {
+    extra: AndroidAppInfo,
+  });
 
   // NOTICE: Theme
   applyCustomTheme(AndroidAppInfo);
