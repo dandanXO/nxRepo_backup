@@ -1,7 +1,11 @@
+
+
+// NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
+import { SentryModule } from './app/modules/sentry';
+
 import './app/modules/sentry';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import * as Sentry from '@sentry/react';
 
 // NOTE: ENV
 import { environment } from './environments/environment';
@@ -17,7 +21,7 @@ import './app/modules/window/IWindow';
 // NOTE: Other
 import './style.css';
 import App from './app/app';
-import { SentryModule } from './app/modules/sentry';
+
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -26,20 +30,29 @@ const renderApp = () => {
   // console.log('[app] isInAndroid', isInAndroid());
   // console.log('[app] AndroidAppInfo', AndroidAppInfo);
 
-  SentryModule.captureMessage(
-    'App load AndroidAppInfo',
-    {
-      packageId: AndroidAppInfo.packageId,
-      uiVersion: AndroidAppInfo.uiVersion,
-      mode: AndroidAppInfo.mode,
-      appName: AndroidAppInfo.appName,
-    },
-    {
-      domain: AndroidAppInfo.domain,
-      environment: AndroidAppInfo.environment,
-      // theme: window.theme,
-    }
-  );
+  // NOTICE: 印度 v58 開始才有, 巴基斯坦 v15 就有了
+  if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
+    const appInfoStr = window['AppInfoTask']['getAppInfo']();
+    const originalAppInfo = JSON.parse(appInfoStr);
+
+    SentryModule.captureMessage(
+      'App load Original AndroidAppInfo',
+      {
+        packageId: originalAppInfo.packageId,
+        uiVersion: originalAppInfo.uiVersion,
+        mode: originalAppInfo.mode,
+        appName: originalAppInfo.appName,
+      },
+      {
+        domain: originalAppInfo.domain,
+        environment: originalAppInfo.environment,
+      }
+    );
+  } else {
+    SentryModule.captureMessage('App cannot load AndroidAppInfo');
+  }
+
+  SentryModule.captureMessage('App load AndroidAppInfo');
 
   // NOTICE: Theme
   applyCustomTheme(AndroidAppInfo);

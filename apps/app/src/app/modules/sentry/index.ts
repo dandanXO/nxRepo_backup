@@ -5,6 +5,8 @@ import { Application } from '../application';
 import { Extras } from '@sentry/types';
 import { getAppInfo } from '../nativeAppInfo/getAppInfo';
 import { Primitive } from '@sentry/types/types/misc';
+import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
+import { AndroidAppInfo } from '../nativeAppInfo/persistent/androidAppInfo';
 
 const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
 
@@ -41,8 +43,13 @@ if (AppFlag.enableSentry) {
   Sentry.init(sentryConfig);
 }
 
+function getUserStatusName(status: number) {
+  return ['未認證', '通過認證', '審核中', '審核拒絕'][status];
+}
+
 export class SentryModule {
   static appInfo = getAppInfo();
+
   static captureMessage(
     message: string,
     tags?: { [key: string]: Primitive },
@@ -50,6 +57,7 @@ export class SentryModule {
   ) {
     if (!AppFlag.enableSentry) return;
 
+    console.log('appInfo', SentryModule.appInfo);
     Sentry.captureMessage(message, {
       level: 'info',
       tags: {
@@ -60,9 +68,31 @@ export class SentryModule {
         ...tags,
       },
       extra: {
+        domain: AndroidAppInfo.domain,
+        environment: AndroidAppInfo.environment,
         ...extra,
       },
     });
+  }
+  static userLogin(userResponse: GetUserInfoServiceResponse) {
+    if (!AppFlag.enableSentry) return;
+    const userInfo = {
+      'user.demoAccount': userResponse.demoAccount,
+      'user.phoneNo': userResponse.userName,
+      'user.organic': userResponse.organic,
+      'user.oldUser': userResponse.oldUser,
+      'user.status': getUserStatusName(userResponse.status),
+      'user.needUpdateKyc': userResponse.needUpdateKyc,
+    };
+    // console.log('userInfo', userInfo);
+    Sentry.setContext('Custom - User Info', userInfo);
+
+    const accountInfo = {
+      // NOTE: 帳號個人資訊
+      username: userResponse.userName,
+    };
+    // console.log("[sentry] accountInfo", accountInfo);
+    Sentry.setUser(accountInfo);
   }
 }
 

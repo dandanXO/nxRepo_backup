@@ -147,13 +147,17 @@ const PakistanRepaymentDetailPage = (props: any) => {
           title={'Overdue Days'}
           text={overdueDays ?? ''}
           titleColor="text-ctext-secondary"
-          textColor={ status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+          textColor={
+            status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+          }
         />
         <ListItem
           title={'Overdue Fee'}
           text={<Money money={penaltyInterest} />}
           titleColor="text-ctext-secondary"
-          textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+          textColor={
+            status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+          }
         />
 
         {status === 'EXTEND' && (
@@ -206,8 +210,12 @@ const PakistanRepaymentDetailPage = (props: any) => {
             title={'Repayment Amount'}
             text={<Money money={balance} />}
             className="font-bold"
-            titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
-            textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+            titleColor={
+              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+            }
+            textColor={
+              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+            }
           />
         )}
 
