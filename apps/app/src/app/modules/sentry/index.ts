@@ -65,10 +65,10 @@ export class SentryModule {
         uiVersion: SentryModule.appInfo.uiVersion,
         mode: SentryModule.appInfo.mode,
         appName: SentryModule.appInfo.appName,
+        domain: AndroidAppInfo.domain,
         ...tags,
       },
       extra: {
-        domain: AndroidAppInfo.domain,
         environment: AndroidAppInfo.environment,
         ...extra,
       },

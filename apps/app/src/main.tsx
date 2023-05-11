@@ -42,10 +42,10 @@ const renderApp = () => {
         uiVersion: originalAppInfo.uiVersion,
         mode: originalAppInfo.mode,
         appName: originalAppInfo.appName,
+        environment: originalAppInfo.environment,
       },
       {
         domain: originalAppInfo.domain,
-        environment: originalAppInfo.environment,
       }
     );
   } else {
