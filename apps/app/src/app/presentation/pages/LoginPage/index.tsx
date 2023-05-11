@@ -2,12 +2,13 @@ import { Navigation } from '../../components/layouts/Navigation';
 import { Outlet } from 'react-router';
 import { Page } from '../../components/layouts/Page';
 import { LoginForm } from './LoginForm';
-import {AppTempFlag} from "../../../../main";
+
 import {useEffect} from "react";
+import {AppTempFlag} from "../../../modules/nativeAppInfo/getAppInfo";
 
 const LoginPage = () => {
   useEffect(() => {
-    AppTempFlag.isWebview = false;
+    AppTempFlag.isWebview = true;
   });
 
   return (

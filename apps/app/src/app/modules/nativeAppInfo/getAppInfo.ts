@@ -1,6 +1,11 @@
 import { IAndroidAppInfo } from './IAndroidAppInfo';
 import { environment } from '../../../environments/environment';
-import {AppTempFlag} from "../../../main";
+// import {AppTempFlag} from "../../../main";
+
+// NOTICE: refactor me
+export const AppTempFlag = {
+  isWebview: true,
+};
 
 export const getAppInfo = (): IAndroidAppInfo => {
 
