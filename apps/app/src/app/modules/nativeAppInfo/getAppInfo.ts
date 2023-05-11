@@ -8,7 +8,6 @@ export const AppTempFlag = {
 };
 
 export const getAppInfo = (): IAndroidAppInfo => {
-
   // NOTICE:
   // 還款頁 沒有交互appinfo, pk V15 才有, 還款頁在印度v55沒有, 印度 v59 還款可以加，等待
   // 綁卡業 沒有交互appinfo, pk V15 才有, 綁卡業在印度v55沒有，印度 v58 綁卡才開始有
@@ -16,7 +15,6 @@ export const getAppInfo = (): IAndroidAppInfo => {
   // IBAN 有交互 appinfo
   // NOTICE: 更新消息
   // 還款業、綁卡業 印度 v58 才有getInfo 交互
-
 
   let appInfo: IAndroidAppInfo = {
     domain: '',
@@ -48,19 +46,17 @@ export const getAppInfo = (): IAndroidAppInfo => {
   } else {
     // NOTE: H5 or DEV Mode
     if (environment.country === 'in') {
-
-      if(AppTempFlag.isWebview) {
+      if (AppTempFlag.isWebview) {
         // NOTICE: v 55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值
         appInfo = {
           domain: '', // NOTE: webview 不必要
           environment: 'india',
-          packageId: "unknown", // NOTE: webview 不必要
+          packageId: 'unknown', // NOTE: webview 不必要
           appName: 'unknown', // NOTE: webview 不必要
           uiVersion: '55', // NOTE: 換主題需要，但缺失
           token: null, // NOTE: webview 不必要
-          mode: "Webview",
+          mode: 'Webview',
         };
-
       } else {
         appInfo = {
           domain: 'https://www.oasis-gold.com',
@@ -72,14 +68,13 @@ export const getAppInfo = (): IAndroidAppInfo => {
               ? String(AppInfo.UI_VERSION)
               : '55',
           token: null,
-          mode: "H5",
+          mode: 'H5',
         };
       }
-
     } else if (environment.country === 'pk') {
-      if(AppTempFlag.isWebview) {
+      if (AppTempFlag.isWebview) {
         // 巴基斯坦 v15 不會有這情況
-        new Error("巴基斯坦 v15 不會有這情況");
+        new Error('巴基斯坦 v15 不會有這情況');
       } else {
         //NOTE: 純 H5
         appInfo = {
@@ -92,10 +87,9 @@ export const getAppInfo = (): IAndroidAppInfo => {
               ? String(AppInfo.UI_VERSION)
               : '15',
           token: null,
-          mode: "Webview",
+          mode: 'Webview',
         };
       }
-
     } else {
       new Error('前端請新增國家配置');
     }

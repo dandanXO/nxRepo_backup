@@ -99,7 +99,9 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           value = value.replace(`${environment.currency} `, '').trim();
 
           if (value === '' || Number(value) === 0) {
-            setBalanceValueErrorMessage('This field cannot be left blank or 0.');
+            setBalanceValueErrorMessage(
+              'This field cannot be left blank or 0.'
+            );
           } else if (!new RegExp('^[0-9]*$').test(value)) {
             setBalanceValueErrorMessage('Numbers only. Please try again.');
           } else if (Number(value) > Number(balance)) {
@@ -112,7 +114,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           }
 
           if (value.trim() === '₹') {
-              //
+            //
           } else {
             setBalanceValue(`${environment.currency} ${value}`);
           }

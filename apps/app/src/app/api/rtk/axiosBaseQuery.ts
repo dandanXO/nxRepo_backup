@@ -5,6 +5,8 @@ import { runAxios } from '../base/runAxios';
 
 import * as Sentry from '@sentry/react';
 import { AppFlag } from '../../../environments/flag';
+import { AndroidAppInfo } from '../../modules/nativeAppInfo/persistent/androidAppInfo';
+import { SentryModule } from '../../modules/sentry';
 
 export interface CustomAxiosError {
   status: any;
@@ -85,7 +87,18 @@ const axiosBaseQuery =
       });
 
       if (AppFlag.enableSentry) {
-        Sentry.captureException(frontendError);
+        Sentry.captureException(frontendError, {
+          tags: {
+            packageId: AndroidAppInfo.packageId,
+            uiVersion: AndroidAppInfo.uiVersion,
+            mode: AndroidAppInfo.mode,
+            appName: AndroidAppInfo.appName,
+            domain: AndroidAppInfo.domain,
+          },
+          extra: {
+            environment: AndroidAppInfo.environment,
+          },
+        });
       }
       console.info('[app] frontendError:', frontendError);
 

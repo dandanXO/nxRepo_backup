@@ -77,7 +77,9 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             value = value.replace(`${environment.currency}`, '').trim();
 
             if (value === '' || Number(value) === 0) {
-              setBalanceValueErrorMessage('This field cannot be left blank or 0.');
+              setBalanceValueErrorMessage(
+                'This field cannot be left blank or 0.'
+              );
             } else if (!new RegExp('^[0-9]*$').test(value)) {
               setBalanceValueErrorMessage('Numbers only. Please try again.');
             } else if (Number(value) > Number(balance)) {
@@ -95,7 +97,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
               value === 'PKR' ||
               value === 'PK'
             ) {
-                //
+              //
             } else {
               setBalanceValue(`${environment.currency} ${value}`);
             }
@@ -167,12 +169,19 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         </>
       )}
 
-      {radioValue !== 'custom' && (<div className="mt-3 font-bold">
-        <ListItem
-          title={'Repayment Amount'}
-          text={<Money money={ Number(balance) - Number(coupon ? coupon.discountAmount : 0) }/>}
-        />
-      </div>
+      {radioValue !== 'custom' && (
+        <div className="mt-3 font-bold">
+          <ListItem
+            title={'Repayment Amount'}
+            text={
+              <Money
+                money={
+                  Number(balance) - Number(coupon ? coupon.discountAmount : 0)
+                }
+              />
+            }
+          />
+        </div>
       )}
 
       <div className={`flex flex-row my-3`}>

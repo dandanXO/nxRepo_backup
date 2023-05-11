@@ -2,8 +2,7 @@ import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { AppFlag } from '../../../environments/flag';
 import { Application } from '../application';
-import { Extras } from '@sentry/types';
-import { getAppInfo } from '../nativeAppInfo/getAppInfo';
+import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
 import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
 import { AndroidAppInfo } from '../nativeAppInfo/persistent/androidAppInfo';
@@ -48,7 +47,7 @@ function getUserStatusName(status: number) {
 }
 
 export class SentryModule {
-  static appInfo = getAppInfo();
+  static captureException(exception: any, captureContext?: CaptureContext) {}
 
   static captureMessage(
     message: string,
@@ -57,14 +56,14 @@ export class SentryModule {
   ) {
     if (!AppFlag.enableSentry) return;
 
-    console.log('appInfo', SentryModule.appInfo);
+    console.log('appInfo', AndroidAppInfo);
     Sentry.captureMessage(message, {
       level: 'info',
       tags: {
-        packageId: SentryModule.appInfo.packageId,
-        uiVersion: SentryModule.appInfo.uiVersion,
-        mode: SentryModule.appInfo.mode,
-        appName: SentryModule.appInfo.appName,
+        packageId: AndroidAppInfo.packageId,
+        uiVersion: AndroidAppInfo.uiVersion,
+        mode: AndroidAppInfo.mode,
+        appName: AndroidAppInfo.appName,
         domain: AndroidAppInfo.domain,
         ...tags,
       },

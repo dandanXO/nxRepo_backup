@@ -71,8 +71,13 @@ const RepaymentModal = (props: any) => {
         // other
         props.setShowRepaymentAdsModal(true); */
     const payType = repayType && repayType.value;
-    const coupon = radioValue === 'balance' && location.state.coupon ? location.state.coupon : null;
-    const repaymentAmount = parseInt(balanceValue.replace(`${environment.currency}`, '').trim()) - Number(coupon?.discountAmount || 0);
+    const coupon =
+      radioValue === 'balance' && location.state.coupon
+        ? location.state.coupon
+        : null;
+    const repaymentAmount =
+      parseInt(balanceValue.replace(`${environment.currency}`, '').trim()) -
+      Number(coupon?.discountAmount || 0);
     handlePostRepayCreate(
       false,
       orderNo,

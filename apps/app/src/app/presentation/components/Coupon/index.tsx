@@ -11,20 +11,12 @@ export type ICouponProps = GetCouponApplicableList & {
 };
 
 const Coupon = (props: ICouponProps) => {
-  
-  return (
-     renderByCountry(
-        {
-          [IndiaCountry.country]: (
-            <IndiaCoupon {...props} />
-          ),
-          [PakistanCountry.country]: (
-            <PakistanCoupon {...props} />
-          ),
-        },
-        <IndiaCoupon {...props} />
-      )
-
+  return renderByCountry(
+    {
+      [IndiaCountry.country]: <IndiaCoupon {...props} />,
+      [PakistanCountry.country]: <PakistanCoupon {...props} />,
+    },
+    <IndiaCoupon {...props} />
   );
 };
 

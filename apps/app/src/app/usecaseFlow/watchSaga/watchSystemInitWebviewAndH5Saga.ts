@@ -6,12 +6,6 @@ import { appStore } from '../../reduxStore';
 import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
 
 export function* watchSystemInitWebviewAndH5Saga() {
-  // const androidAPPInfo = getAppInfo();
-  // if(androidAPPInfo.token !== "") {
-  //   console.log("[app][saga] 2")
-  //   yield put(SystemCaseActions.InitSaga());
-  // }
-
   if (AndroidAppInfo.mode === 'Webview') {
     yield put(PersonalInfoPageSagaActions.system.init());
   } else if (AndroidAppInfo.mode === 'H5') {

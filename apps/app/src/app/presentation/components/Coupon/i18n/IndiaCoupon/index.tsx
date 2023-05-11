@@ -3,7 +3,6 @@ import moment from 'moment';
 import Money from '../../../Money.tsx';
 import { ICouponProps } from '../..';
 
-
 const isOverdueEqual3Days = (expiredTime: string) => {
   const currentTime = moment();
   const expireTime = moment(expiredTime);
@@ -23,20 +22,19 @@ const IndiaCoupon = (props: ICouponProps) => {
   } = props;
   const layoutTypeStyle: any = {
     normal: {
-        font: `text-ctext-primary`,
-        darkContent: 'border-primary-main bg-primary-assistant',
-        lightContent: 'border-primary-main bg-primary-assistant',
-        buttonBG: 'bg-primary-main',
-      },
-      disabled: {
-        font: `text-cstate-disable-main`,
-        darkContent: 'border-cstate-disable-main bg-cstate-disable-assistant',
-        lightContent: 'border-cstate-disable-main bg-cstate-disable-assistant',
-        buttonBG: 'bg-cstate-disable-main',
-      },
-    
+      font: `text-ctext-primary`,
+      darkContent: 'border-primary-main bg-primary-assistant',
+      lightContent: 'border-primary-main bg-primary-assistant',
+      buttonBG: 'bg-primary-main',
+    },
+    disabled: {
+      font: `text-cstate-disable-main`,
+      darkContent: 'border-cstate-disable-main bg-cstate-disable-assistant',
+      lightContent: 'border-cstate-disable-main bg-cstate-disable-assistant',
+      buttonBG: 'bg-cstate-disable-main',
+    },
   };
-  
+
   const typeStyle =
     status !== 'disabled'
       ? layoutTypeStyle['normal']
@@ -52,24 +50,24 @@ const IndiaCoupon = (props: ICouponProps) => {
           [typeStyle.lightContent]
         )}
       >
-          <div
-            className={cx(
-              'absolute w-[20px] h-[10px] rounded-b-full  border border-solid top-[-1px]  right-[-11px] bg-white border-t-0 ',
-              {
-                'border-primary-main': status !== 'disabled',
-                'border-cstate-disable-main': status === 'disabled',
-              }
-            )}
-          ></div>
-          <div
-            className={cx(
-              'absolute w-[20px] h-[10px] rounded-t-full border border-solid border-primary-main bottom-[-1px] right-[-11px] bg-white border-b-0',
-              {
-                'border-primary-main': status !== 'disabled',
-                'border-cstate-disable-main': status === 'disabled',
-              }
-            )}
-          ></div>
+        <div
+          className={cx(
+            'absolute w-[20px] h-[10px] rounded-b-full  border border-solid top-[-1px]  right-[-11px] bg-white border-t-0 ',
+            {
+              'border-primary-main': status !== 'disabled',
+              'border-cstate-disable-main': status === 'disabled',
+            }
+          )}
+        ></div>
+        <div
+          className={cx(
+            'absolute w-[20px] h-[10px] rounded-t-full border border-solid border-primary-main bottom-[-1px] right-[-11px] bg-white border-b-0',
+            {
+              'border-primary-main': status !== 'disabled',
+              'border-cstate-disable-main': status === 'disabled',
+            }
+          )}
+        ></div>
 
         <div
           className={cx(`font-bold`, 'text-xs', {
@@ -97,15 +95,15 @@ const IndiaCoupon = (props: ICouponProps) => {
           Expired time {moment(expireTime).format('DD-MM-YYYY')}
         </div>
       </div>
-        <div
-          className={cx(
-            'w-[1px] border-l-[1px] border-0 border-dashed  border-solid border overflow-hidden',
-            {
-              'border-primary-main': status !== 'disabled',
-              'border-cstate-disable-main': status === 'disabled',
-            }
-          )}
-        ></div>
+      <div
+        className={cx(
+          'w-[1px] border-l-[1px] border-0 border-dashed  border-solid border overflow-hidden',
+          {
+            'border-primary-main': status !== 'disabled',
+            'border-cstate-disable-main': status === 'disabled',
+          }
+        )}
+      ></div>
       <div
         className={cx(
           `flex flex-col justify-center p-2 basis-16 grow rounded-r-lg border border-l-0 items-center`,
@@ -130,7 +128,10 @@ const IndiaCoupon = (props: ICouponProps) => {
           //   onClick={props.onClick}
           //   disabled={status !== 'normal'} //只有normal才能點擊
           disabled={true}
-          className={cx( `text-xs whitespace-nowrap px-2 py-1 rounded text-white w-2/3`, [typeStyle.buttonBG])}
+          className={cx(
+            `text-xs whitespace-nowrap px-2 py-1 rounded text-white w-2/3`,
+            [typeStyle.buttonBG]
+          )}
         >
           {buttonText}
         </button>

@@ -1,5 +1,3 @@
-
-
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 import { SentryModule } from './app/modules/sentry';
 
@@ -21,7 +19,6 @@ import './app/modules/window/IWindow';
 // NOTE: Other
 import './style.css';
 import App from './app/app';
-
 
 const renderApp = () => {
   // NOTE: Before rendering
