@@ -1,10 +1,10 @@
+import cx from 'classnames';
 type ListItemProps = {
   title?: string | React.ReactElement;
   text?: string | React.ReactElement | number;
   titleColor?: string;
   textColor?: string;
-  fontWeight?: string;
-  fontSize?: string;
+  className?: string;
 };
 
 const ListItem = (props: ListItemProps) => {
@@ -13,13 +13,10 @@ const ListItem = (props: ListItemProps) => {
     text,
     titleColor = 'text-black',
     textColor = '',
-    fontWeight = '',
-    fontSize = 'text-sm',
+    className = ''
   } = props;
   return (
-    <div
-      className={`${fontWeight} ${fontSize} flex flex-row justify-between mb-2 leading-none`}
-    >
+    <div className={cx(`flex flex-row justify-between text-sm mb-2 leading-none `,className)}>
       <div className={`${titleColor}`}>{title}</div>
       <div className={`${textColor === '' ? titleColor : textColor}`}>
         {text}

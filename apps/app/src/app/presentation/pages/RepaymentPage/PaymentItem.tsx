@@ -123,7 +123,7 @@ const PaymentItem = (props: GetLoanRecord) => {
               title={'Repayment Amount'}
               text={<Money money={balance ?? ''}/>}
               titleColor={status === 'OVERDUE' ? Status(status).color : ''}
-              fontWeight="font-bold"
+              className="font-bold"
             />
           )}
           <Divider />
