@@ -61,7 +61,9 @@ const PaymentItem = (props: GetLoanRecord) => {
           <div className="w-6 h-6 mr-2 ">
             <img src={iconUrl} alt="logo" />
           </div>
-          <div className="text-sm font-bold text-ctext-primary">{productName ?? ''}</div>
+          <div className="text-sm font-bold text-ctext-primary">
+            {productName ?? ''}
+          </div>
         </div>
         <div className={`text-xs font-bold ${Status(status).color}`}>
           {status ? Status(status).text : ''}
@@ -70,9 +72,13 @@ const PaymentItem = (props: GetLoanRecord) => {
       <div className="flex flex-row justify-between px-2 items-center">
         <div className="flex flex-col ">
           {/*{NOTE: 合同金: orderAmount}*/}
-          <div className="text-base font-bold mb-1 text-ctext-primary">{<Money money={orderAmount ?? ''}/>}</div>
+          <div className="text-base font-bold mb-1 text-ctext-primary">
+            {<Money money={orderAmount ?? ''} />}
+          </div>
           {/*{NOTE: 之後要補狀態色 }*/}
-          <div className="text-xs">{`Due ${ moment(dueDate).format('L') ?? ''}`}</div> 
+          <div className="text-xs">{`Due ${
+            moment(dueDate).format('L') ?? ''
+          }`}</div>
         </div>
         <Button
           text={'Details'}
@@ -105,7 +111,9 @@ const PaymentItem = (props: GetLoanRecord) => {
           {status === 'PAY_OFF' && (
             <ListItem
               title={'Repayment Date'}
-              text={ repaymentDate ? moment(repaymentDate).format('DD-MM-YYYY') : ''}
+              text={
+                repaymentDate ? moment(repaymentDate).format('DD-MM-YYYY') : ''
+              }
               titleColor="text-ctext-secondary"
             />
           )}
@@ -121,7 +129,7 @@ const PaymentItem = (props: GetLoanRecord) => {
           {status !== 'REJECTED' && (
             <ListItem
               title={'Repayment Amount'}
-              text={<Money money={balance ?? ''}/>}
+              text={<Money money={balance ?? ''} />}
               titleColor={status === 'OVERDUE' ? Status(status).color : ''}
               fontWeight="font-bold"
             />
