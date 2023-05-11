@@ -10,11 +10,22 @@ const UserApi = API.injectEndpoints({
     endpoints: (builder) => ({
         // NOTE: GET ​/hs​/admin​/user-manage​/user-list 获取用户列表
         getUserManageList: builder.query<GetUerListProps, GetUserListRequestQuerystring>({
-            query: (requestBody: GetUserListRequestQuerystring) => ({
-                url: `/user-manage/user-list`,
-                params: requestBody,
-                method: "get",
-            }),
+            query: (requestBody: GetUserListRequestQuerystring) => {
+                const finalRequestBody = {
+                    ...requestBody,
+                }
+                if(String(finalRequestBody.hasVerifyThirdRisk) === "false") {
+                    finalRequestBody.hasVerifyThirdRisk = undefined
+                }
+                if(String(finalRequestBody.hasVerifyNotApply) === "false") {
+                    finalRequestBody.hasVerifyNotApply = undefined
+                }
+                return {
+                    url: `/user-manage/user-list`,
+                    params: finalRequestBody,
+                    method: "get",
+                }
+            },
         }),
         // NOTE: POST /hs/admin/user-manage/black-list/add 添加用户至黑名单
         postBlackListAdd: builder.mutation<{}, PostBlackListRequestBody>({
