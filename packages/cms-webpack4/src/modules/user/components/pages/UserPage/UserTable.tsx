@@ -274,6 +274,27 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             }
         },
         {
+            title: '天数',
+            dataIndex: 'noLoanAgainDays',
+            key: 'noLoanAgainDays',
+            initialValue: '',
+            hideInTable: true,
+            renderFormItem: (item, { }, form) => {
+                return <Form form={form} key={'noLoanAgainDays'} initialValues={{ noLoanAgainStartDays: searchParams.noLoanAgainStartDays ||1, noLoanAgainEndDays:searchParams.noLoanAgainEndDays || 30 }} >
+                    <Form.Item style={{ whiteSpace: 'nowrap' }} >
+                        <Form.Item name="noLoanAgainStartDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px 0 0' }}>
+                            <InputNumber min={1} max={30} placeholder={"天"} disabled={!isNoLoanAgain} />
+                        </Form.Item>
+                        <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>~</Form.Item>
+                        <Form.Item name="noLoanAgainEndDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px' }}>
+                            <InputNumber min={1} max={30} placeholder={"天"} disabled={!isNoLoanAgain} />
+                        </Form.Item>
+                        <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
+                    </Form.Item>
+                </Form>
+            }
+        },
+        {
             title: '通过认证未申请',
             dataIndex: 'hasVerifyNotApply',
             hideInTable: true,
@@ -295,27 +316,6 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                 return <Form form={form} name='hasVerifyThirdRisk'>
                     <Form.Item >
                         <Checkbox value={checked === 'true' ?'false':'true'} checked={checked === 'true'} />
-                    </Form.Item>
-                </Form>
-            }
-        },
-        {
-            title: '天数',
-            dataIndex: 'noLoanAgainDays',
-            key: 'noLoanAgainDays',
-            initialValue: '',
-            hideInTable: true,
-            renderFormItem: (item, { }, form) => {
-                return <Form form={form} key={'noLoanAgainDays'} initialValues={{ noLoanAgainStartDays: searchParams.noLoanAgainStartDays ||1, noLoanAgainEndDays:searchParams.noLoanAgainEndDays || 30 }} >
-                    <Form.Item style={{ whiteSpace: 'nowrap' }} >
-                        <Form.Item name="noLoanAgainStartDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px 0 0' }}>
-                            <InputNumber min={1} max={30} placeholder={"天"} disabled={!isNoLoanAgain} />
-                        </Form.Item>
-                        <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>~</Form.Item>
-                        <Form.Item name="noLoanAgainEndDays" style={{ display: 'inline-block', width: '100px', margin: '0 8px' }}>
-                            <InputNumber min={1} max={30} placeholder={"天"} disabled={!isNoLoanAgain} />
-                        </Form.Item>
-                        <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
                     </Form.Item>
                 </Form>
             }
