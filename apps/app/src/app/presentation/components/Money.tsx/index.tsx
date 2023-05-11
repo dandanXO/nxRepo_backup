@@ -14,7 +14,7 @@ interface IMoney {
 const Money = (props: IMoney) => {
   const price = formatPrice(Number(props.money || 0));
   return (
-    <div className="flex items-baseline">
+    <div className="flex justify-center items-baseline">
       {props.isAdd && <div className="mr-1">+</div>}
       {props.isNagetive && <div className="mr-1">-</div>}
       {environment.country === IndiaCountry.country && (
