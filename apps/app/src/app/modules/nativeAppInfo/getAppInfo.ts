@@ -50,14 +50,14 @@ export const getAppInfo = (): IAndroidAppInfo => {
     if (environment.country === 'in') {
 
       if(AppTempFlag.isWebview) {
-        // NOTICE: v 55, v56, v57 都是使用假資料, 所以無法確認以下資訊
+        // NOTICE: v 55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值
         appInfo = {
-          domain: '',
+          domain: '', // NOTE: webview 不必要
           environment: 'india',
-          packageId: "",
-          appName: '',
-          uiVersion: '55',
-          token: null,
+          packageId: "unknown", // NOTE: webview 不必要
+          appName: 'unknown', // NOTE: webview 不必要
+          uiVersion: '55', // NOTE: 換主題需要，但缺失
+          token: null, // NOTE: webview 不必要
           mode: "Webview",
         };
 
