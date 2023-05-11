@@ -55,19 +55,23 @@ export class SentryModule {
   ) {
     if (!AppFlag.enableSentry) return;
 
-    Sentry.captureMessage(message, {
-      level: 'info',
-      tags: {
-        packageId: SentryModule.appInfo.packageId,
-        uiVersion: SentryModule.appInfo.uiVersion,
-        mode: SentryModule.appInfo.mode,
-        appName: SentryModule.appInfo.appName,
-        ...tags,
-      },
-      extra: {
-        ...extra,
-      },
-    });
+    if(SentryModule.appInfo && SentryModule.appInfo.packageId) {
+      Sentry.captureMessage(message, {
+        level: 'info',
+        tags: {
+          packageId: SentryModule.appInfo.packageId,
+          uiVersion: SentryModule.appInfo.uiVersion,
+          mode: SentryModule.appInfo.mode,
+          appName: SentryModule.appInfo.appName,
+          ...tags,
+        },
+        extra: {
+          ...extra,
+        },
+      });
+    }
+
+
   }
   static userLogin(userResponse: GetUserInfoServiceResponse, ) {
     if (!AppFlag.enableSentry) return;
