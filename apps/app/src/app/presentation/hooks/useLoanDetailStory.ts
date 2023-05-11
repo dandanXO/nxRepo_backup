@@ -84,9 +84,7 @@ const useLoanDetailStory = () => {
           // error.name = "postRepayCreate"
           // if(err) error.message = JSON.stringify(err)
           //
-          // if(AppFlag.enableSentry) {
           //   Sentry.captureException(error);
-          // }
           reject(err);
         });
     });

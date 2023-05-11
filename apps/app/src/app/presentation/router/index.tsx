@@ -11,7 +11,6 @@ import { ErrorPage } from '../pages/__test__/ErrorPage';
 
 // const IndexPage = loadable(() => import("../pages/IndexPage"));
 import IndexPage from '../pages/IndexPage';
-
 import { useSelector } from 'react-redux';
 import { TabBar } from '../components/layouts/TabBar';
 import { RootState } from '../../reduxStore';
@@ -186,11 +185,6 @@ export const AppRouter = () => {
   const payableRecords = useSelector(
     (state: RootState) => state.indexPage.indexAPI?.payableRecords
   );
-
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(SystemCaseActions.InitSaga());
-  // }, [])
 
   return (
     <AppDataCollector>

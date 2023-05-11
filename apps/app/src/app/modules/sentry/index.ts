@@ -2,6 +2,9 @@ import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { AppFlag } from '../../../environments/flag';
 import { Application } from '../application';
+import { Extras } from '@sentry/types';
+import { getAppInfo } from '../nativeAppInfo/getAppInfo';
+import { Primitive } from '@sentry/types/types/misc';
 
 const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
 
@@ -37,3 +40,30 @@ if (AppFlag.enableSentry) {
   }
   Sentry.init(sentryConfig);
 }
+
+export class SentryModule {
+  static appInfo = getAppInfo();
+  static captureMessage(
+    message: string,
+    tags?: { [key: string]: Primitive },
+    extra?: Extras
+  ) {
+    if (!AppFlag.enableSentry) return;
+
+    Sentry.captureMessage(message, {
+      level: 'info',
+      tags: {
+        packageId: SentryModule.appInfo.packageId,
+        uiVersion: SentryModule.appInfo.uiVersion,
+        mode: SentryModule.appInfo.mode,
+        appName: SentryModule.appInfo.appName,
+        ...tags,
+      },
+      extra: {
+        ...extra,
+      },
+    });
+  }
+}
+
+// export const SentryModuleInstance = new SentryModule();

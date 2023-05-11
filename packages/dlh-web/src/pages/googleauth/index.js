@@ -1,5 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
-import { GoogleAuth } from './GoogleAuth/GoogleAuth';
+import GoogleAuth from './GoogleAuth/GoogleAuth';
 import {combineReducers} from "redux";
 
 

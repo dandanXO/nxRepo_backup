@@ -5,6 +5,7 @@ import { Form, Row, Col, Input, Icon, Button ,Card} from 'antd';
 import Cookies from 'js-cookie';
 import { getLoginInfo, axios, getAdminUserInfo, userLogout } from 'utils';
 import styles from './GoogleAuth.less';
+import { loginAction } from "../../login/Login";
 
 // NOTE: /hs/admin/auth/getInfo
 // Response
@@ -74,7 +75,7 @@ class GoogleAuth extends Component{
     constructor(props){
         super(props);
         this.state = {
-            googleAuthUrl: '',
+            googleAuthUrl: props.googleAuthUrl,
             hasGoogleKey:''
         }
       }
@@ -96,16 +97,19 @@ class GoogleAuth extends Component{
         _this.setState({
             hasGoogleKey: hasGoogleKey
         })
-        axios({
+
+        if (!this.state.googleAuthUrl) {
+          axios({
             url: '/hs/admin/auth/getGoogleAuthQRCode',
             method: 'post'
-        }).then((res) => {
+          }).then((res) => {
             const { googleAuthUrl } = res;
             _this.setState({
-                googleAuthUrl: googleAuthUrl
+              googleAuthUrl: googleAuthUrl
             })
             // document.getElementById("googleAuthUrlImg").setAttribute("src",googleAuthUrl);
-        })
+          })
+        }
     }
 
     handleCancel = (e) => {
@@ -128,6 +132,7 @@ class GoogleAuth extends Component{
                 }).then((res) => {
                     if (Number(res.code) === 200) {
                         Cookies.set('loginInfo', res);
+                        dispatch(loginAction.lgSetGoogleAuth(false))
                         history.push('/index');
                     }
                 })
@@ -212,8 +217,9 @@ class GoogleAuth extends Component{
 }
 
 const mapStateToProps = (state) => {
+    const { loginState: { loginManageState } } = state;
     return {
-
+        googleAuthUrl: loginManageState['googleAuthUrl']
     }
 };
 

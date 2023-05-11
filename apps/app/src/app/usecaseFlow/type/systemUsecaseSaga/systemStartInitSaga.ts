@@ -17,6 +17,7 @@ export function* systemStartInitSaga() {
     // const packageId = AndroidAppInfo.packageId;
     // console.log("[app][saga]  packageId", packageId);
     yield put(appSlice.actions.updateAndroidInfo(AndroidAppInfo));
+
     const packageId: string = yield select(
       (state: RootState) => state.app.androidAppInfo?.packageId
     );

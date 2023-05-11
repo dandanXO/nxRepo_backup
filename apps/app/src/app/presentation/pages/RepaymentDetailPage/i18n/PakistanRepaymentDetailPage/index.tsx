@@ -65,7 +65,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
   const renderStatusTag = (status: string) => {
     return (
-      <div className={`${Status(status)?.style} px-1`}>
+      <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>
         {Status(status)?.text}
       </div>
     );
@@ -137,11 +137,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
         {status !== 'EXTEND' && (
           <ListItem
             title={'Daily Fee'}
-            text={
-              <div className="flex">
-                <Money money={dailyFee} />
-              </div>
-            }
+            text={<Money money={dailyFee} />}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
           />
@@ -151,17 +147,13 @@ const PakistanRepaymentDetailPage = (props: any) => {
           title={'Overdue Days'}
           text={overdueDays ?? ''}
           titleColor="text-ctext-secondary"
-          textColor={
-            status === 'OVERDUE' ? 'text-red-500' : 'text-ctext-primary'
-          }
+          textColor={ status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
         />
         <ListItem
           title={'Overdue Fee'}
           text={<Money money={penaltyInterest} />}
           titleColor="text-ctext-secondary"
-          textColor={
-            status === 'OVERDUE' ? 'text-red-500' : 'text-ctext-primary'
-          }
+          textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
         />
 
         {status === 'EXTEND' && (
@@ -209,14 +201,24 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
         <Divider />
         {/*NOTE: 總應還金額*/}
-
         {status !== 'EXTEND' && (
           <ListItem
             title={'Repayment Amount'}
             text={<Money money={balance} />}
-            fontWeight="font-bold"
-            titleColor={status === 'OVERDUE' ? 'text-red-500' : 'text-black'}
+            className="font-bold"
+            titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+            textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+          />
+        )}
+
+        {/*NOTE: 總展期金額 (Extension Fee + Overdue Fee) 欄位後端有提供 狀態為EXTEND -> totalRepayAmount */}
+        {status === 'EXTEND' && (
+          <ListItem
+            title={'Total Extension Fee'}
+            text={<Money money={totalRepayAmount} />}
+            titleColor="text-ctext-primary"
             textColor="text-ctext-primary"
+            className="font-bold"
           />
         )}
 
@@ -239,32 +241,34 @@ const PakistanRepaymentDetailPage = (props: any) => {
             </div>
           )}
 
-          <div
-            onClick={() => {
-              if (currentData === undefined) return;
-              navigate(
-                `repayment-modal?token=${getToken()}&orderNo=${
-                  orderNo ?? getOrderNo()
-                }`,
-                {
-                  state: currentData,
-                }
-              );
-            }}
-            className={cx(`grow`, {
-              'ml-1.5': extendable,
-            })}
-          >
-            <Button
-              text={'Repay'}
-              className={`${EnumV15GradientButtonClassNames}`}
-            />
-          </div>
+          {status !== 'PAY_OFF' && status !== 'EXTEND' && (
+            <div
+              onClick={() => {
+                if (currentData === undefined) return;
+                navigate(
+                  `repayment-modal?token=${getToken()}&orderNo=${
+                    orderNo ?? getOrderNo()
+                  }`,
+                  {
+                    state: currentData,
+                  }
+                );
+              }}
+              className={cx(`grow`, {
+                'ml-1.5': extendable,
+              })}
+            >
+              <Button
+                text={'Repay'}
+                className={`${EnumV15GradientButtonClassNames}`}
+              />
+            </div>
+          )}
         </div>
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (
           <>
-            <div className={`text-xs text-gray-400 leading-none mb-4`}>
+            <div className={`text-xs text-ctext-secondary leading-none mb-4`}>
               <div>Attention：</div>
               <ul className="list-decimal list-outside pl-3 pt-1">
                 <li>
@@ -286,8 +290,8 @@ const PakistanRepaymentDetailPage = (props: any) => {
               </ul>
             </div>
             <div className={`flex flex-col my-3`}>
-              <div className="h-2.5 bg-[#ECECEC] mx-[-24px] "></div>
-              <div className={`text-xs text-black leading-none my-3`}>
+              <div className="h-2.5 bg-cstate-disable-assistant mx-[-24px] "></div>
+              <div className={`text-xs text-ctext-primary leading-none my-3`}>
                 After completing the repayment, take a screenshot and upload
                 your repayment receipt here ▼
               </div>

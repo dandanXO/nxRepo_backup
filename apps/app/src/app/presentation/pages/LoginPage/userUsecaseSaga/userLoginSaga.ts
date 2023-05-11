@@ -3,9 +3,9 @@ import { put, take } from 'redux-saga/effects';
 import { APIV3, LoginResponse } from '../../../../api/rtk';
 import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
 import { push } from '@lagunovsky/redux-react-router';
-import { catchSagaError } from '../../../utils/catchSagaError';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { UserLoginActionPayload } from './index';
-import { PagePathEnum } from '../../../../presentation/pages/PagePathEnum';
+import { PagePathEnum } from '../../PagePathEnum';
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {

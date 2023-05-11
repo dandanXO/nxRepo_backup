@@ -16,6 +16,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
   if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
     const appInfoStr = window['AppInfoTask']['getAppInfo']();
     appInfo = JSON.parse(appInfoStr);
+
     // NOTICE: 印度 v55, 巴基斯坦 v56 的 uiVersion 是寫死成 1 的
     // NOTICE: 巴基斯坦 v56, uiVersion 則是變動的
     if (appInfo.uiVersion === '1') {
@@ -48,7 +49,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
         domain: 'https://www.oasis-gold.com',
         environment: 'pakistan',
         packageId: 'com.pak.app.yesloan.android',
-        appName: 'dev_in',
+        appName: 'dev_pk',
         uiVersion:
           typeof AppInfo.UI_VERSION !== 'undefined'
             ? String(AppInfo.UI_VERSION)

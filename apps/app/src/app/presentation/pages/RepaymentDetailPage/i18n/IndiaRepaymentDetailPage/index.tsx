@@ -12,7 +12,7 @@ import { Status } from '../../../../../modules/statusEnum';
 import { alertModal } from '../../../../../api/base/alertModal';
 import cx from 'classnames';
 
-const PakistanRepaymentDetailPage = (props: any) => {
+const IndiaRepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { currentData } = props || {};
@@ -46,7 +46,6 @@ const PakistanRepaymentDetailPage = (props: any) => {
       )[0] || {}
     );
   };
-  console.log('getItems', items);
 
   // NOTE: 新版 h5 要過濾掉之前android需要的欄位, LOAN_AMOUNT 也不會給
 
@@ -68,7 +67,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
   const renderStatusTag = (status: string) => {
     return (
-      <div className={`${Status(status)?.style} px-1`}>
+      <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>
         {Status(status)?.text}
       </div>
     );
@@ -80,29 +79,29 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <ListItem
           title={'Product'}
           text={productName ?? ''}
-          titleColor="text-ctext-secondary"
+          titleColor="text-ctext-primary"
         />
         <ListItem
           title={'Order No.'}
           text={orderNo ?? ''}
-          titleColor="text-ctext-secondary"
+          titleColor="text-ctext-primary"
         />
         <ListItem
           title={'Status'}
           text={status ? renderStatusTag(status) : ''}
-          titleColor="text-ctext-secondary"
+          titleColor="text-ctext-primary"
         />
         <ListItem
           title={'Due Date'}
           text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
-          titleColor="text-ctext-secondary"
+          titleColor="text-ctext-primary"
         />
 
         {status === 'EXTEND' && (
           <ListItem
             title={'Extension Date'}
             text={extendDate ? moment(extendDate).format('DD-MM-YYYY') : ''}
-            titleColor="text-ctext-secondary"
+            titleColor="text-ctext-primary"
           />
         )}
 
@@ -114,7 +113,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <ListItem
           title={'Disbursal Amount'}
           text={<Money money={loanAmount} />}
-          titleColor="text-ctext-secondary"
+          titleColor="text-ctext-primary"
         />
 
         {status !== 'EXTEND' &&
@@ -125,7 +124,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 key={index}
                 title={item.itemName}
                 text={<Money money={item.value} />}
-                titleColor="text-ctext-secondary"
+                titleColor="text-ctext-primary"
               />
             );
           })}
@@ -140,28 +139,27 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 <Money money={dailyFee} />
               </div>
             }
-            titleColor="text-ctext-secondary"
+            titleColor="text-ctext-primary"
           />
         )}
-
         <ListItem
           title={'Overdue Days'}
           text={overdueDays ?? ''}
-          titleColor="text-ctext-secondary"
-          textColor={status === 'OVERDUE' ? 'text-red-500' : ''}
+          titleColor="text-ctext-primary"
+          textColor={status === 'OVERDUE' ? Status(status).color : ''}
         />
         <ListItem
           title={'Overdue Fee'}
           text={<Money money={penaltyInterest} />}
-          titleColor="text-ctext-secondary"
-          textColor={status === 'OVERDUE' ? 'text-red-500' : ''}
+          titleColor="text-ctext-primary"
+          textColor={status === 'OVERDUE' ? Status(status).color : ''}
         />
 
         {status === 'EXTEND' && (
           <ListItem
             title={'Extension Fee'}
             text={<Money money={extensionFee} />}
-            titleColor="text-ctext-secondary"
+            titleColor="text-ctext-primary"
           />
         )}
 
@@ -170,11 +168,11 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <ListItem
           title={'Reduction Amount'}
           text={<Money money={reductionAmount} isNagetive={true} />}
-          titleColor="text-ctext-secondary"
+          titleColor="text-ctext-primary"
         />
 
         <ListItem
-          titleColor="text-ctext-secondary"
+          titleColor="text-ctext-primary"
           title={
             <div className={`flex flex-row item-center items-center`}>
               <div className={` mr-1`}>Amount Repaid</div>
@@ -204,8 +202,20 @@ const PakistanRepaymentDetailPage = (props: any) => {
           <ListItem
             title={'Repayment Amount'}
             text={<Money money={balance} />}
-            titleColor={status === 'OVERDUE' ? 'text-red-500' : 'text-black'}
-            fontWeight="font-bold"
+            titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+            textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+            className="font-bold"
+          />
+        )}
+
+        {/*NOTE: 總展期金額 (Extension Fee + Overdue Fee) 欄位後端有提供 狀態為EXTEND -> totalRepayAmount */}
+        {status === 'EXTEND' && (
+          <ListItem
+            title={'Total Extension Fee'}
+            text={<Money money={totalRepayAmount} />}
+            titleColor="text-ctext-primary"
+            textColor="text-ctext-primary"
+            className="font-bold"
           />
         )}
 
@@ -224,33 +234,35 @@ const PakistanRepaymentDetailPage = (props: any) => {
               }}
               className={`grow mr-1.5`}
             >
-              <Button type={'ghost'} text={'Extend'} />
+              <Button type={'secondary'} text={'Extend'} />
             </div>
           )}
 
-          <div
-            onClick={() => {
-              if (currentData === undefined) return;
-              navigate(
-                `repayment-modal?token=${getToken()}&orderNo=${
-                  orderNo ?? getOrderNo()
-                }`,
-                {
-                  state: currentData,
-                }
-              );
-            }}
-            className={cx(`grow`, {
-              'ml-1.5': extendable,
-            })}
-          >
-            <Button text={'Repay'} />
-          </div>
+          {status !== 'PAY_OFF' && status !== 'EXTEND' && (
+            <div
+              onClick={() => {
+                if (currentData === undefined) return;
+                navigate(
+                  `repayment-modal?token=${getToken()}&orderNo=${
+                    orderNo ?? getOrderNo()
+                  }`,
+                  {
+                    state: currentData,
+                  }
+                );
+              }}
+              className={cx(`grow`, {
+                'ml-1.5': extendable,
+              })}
+            >
+              <Button text={'Repay'} />
+            </div>
+          )}
         </div>
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (
           <>
-            <div className={`text-xs text-gray-400`}>
+            <div className={`text-xs text-ctext-secondary`}>
               <div>Attention：</div>
               <ul className="list-decimal list-outside pl-3 pt-1">
                 <li>
@@ -294,7 +306,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
             </div>
 
             <div className={`flex flex-col my-3`}>
-              <div className={`text-xs text-gray-400 `}>
+              <div className={`text-xs text-ctext-secondary `}>
                 After completing the repayment, take a screenshot and upload
                 your repayment receipt here.
               </div>
@@ -306,4 +318,4 @@ const PakistanRepaymentDetailPage = (props: any) => {
   );
 };
 
-export default PakistanRepaymentDetailPage;
+export default IndiaRepaymentDetailPage;

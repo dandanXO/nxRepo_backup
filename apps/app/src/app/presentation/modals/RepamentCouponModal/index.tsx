@@ -11,6 +11,8 @@ import NoData from './NoData.svg';
 import { Button } from '../../components/layouts/Button';
 import { getToken } from '../../../modules/location/getToken';
 import { PagePathEnum } from '../../pages/PagePathEnum';
+import { environment } from 'apps/app/src/environments/environment';
+import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 
 type ICouponOption = ICouponProps & {
   isChecked: boolean;
@@ -126,6 +128,9 @@ const RepamentCouponModal = () => {
                       index={index}
                       status="normal"
                       key={i.id}
+                      layoutType={
+                        environment.country !== IndiaCountry.country ? 1 : 2
+                      }
                     />
                   </>
                 );
@@ -147,6 +152,9 @@ const RepamentCouponModal = () => {
                   couponContent={i.couponContent}
                   status="unUsable"
                   key={i.id}
+                  layoutType={
+                    environment.country === IndiaCountry.country ? 1 : 2
+                  }
                 />
               ))}
             </>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space,Tag ,Select, Tooltip,notification} from 'antd';
+import { Button, Form, InputNumber, Modal, Radio, Space, Tag, Select, Tooltip, notification, Checkbox } from 'antd';
 import { GetUerListProps, UserListContent, GetUserListRequestQuerystring } from "../../../api/types/userTypes/getUserList";
 import { useLazyGetUserManageListQuery, useDeleteUserMutation, usePostUserBanMutation, usePostTelSaleMutation, usePostUserBanReleaseMutation, useDeleteBlackListMutation, usePostUserManageQuotaLabelMutation } from '../../../api/UserApi';
 import moment from 'moment';
@@ -46,7 +46,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     const [setQuotaLabel, { isSuccess: isSetQuotaLabelSuccess }] = usePostUserManageQuotaLabelMutation();
 
     const initSearchList: GetUserListRequestQuerystring = {
-        addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false,
+        addEndTime: "", addStartTime: "", appName: "", channelId: "", idcardNo: "", nameTrue: "", newMember: "", noLoanAgain: false, hasVerifyNotApply: false, hasVerifyThirdRisk: false,
         noLoanAgainEndDays: 30, noLoanAgainStartDays: 1, phoneNo: "", riskRank: "", status: "", pageNum: 1, pageSize: 10
     }
     // redux
@@ -261,7 +261,6 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
         {
             title: '结清未复借',
             dataIndex: 'noLoanAgain',
-            colSize: 6,
             hideInTable: true,
             renderFormItem: (text, { }, form) => {
                 return <Form form={form} name={'noLoanAgain'} initialValues={{ noLoanAgain: searchParams.noLoanAgain || isNoLoanAgain }}>
@@ -291,6 +290,32 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                             <InputNumber min={1} max={30} placeholder={"天"} disabled={!isNoLoanAgain} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
+                    </Form.Item>
+                </Form>
+            }
+        },
+        {
+            title: '通过认证未申请',
+            dataIndex: 'hasVerifyNotApply',
+            hideInTable: true,
+            renderFormItem: (text, { }, form) => {
+                const checked = form.getFieldValue('hasVerifyNotApply')
+                return <Form form={form} name='hasVerifyNotApply'>
+                    <Form.Item>
+                        <Checkbox value={checked === 'true' ?'false':'true'} checked={checked === 'true'} />
+                    </Form.Item>
+                </Form>
+            }
+        },
+        {
+            title: '通过外部风控',
+            dataIndex: 'hasVerifyThirdRisk',
+            hideInTable: true,
+            renderFormItem: (text, {}, form) => {
+                const checked = form.getFieldValue('hasVerifyThirdRisk')
+                return <Form form={form} name='hasVerifyThirdRisk'>
+                    <Form.Item >
+                        <Checkbox value={checked === 'true' ?'false':'true'} checked={checked === 'true'} />
                     </Form.Item>
                 </Form>
             }

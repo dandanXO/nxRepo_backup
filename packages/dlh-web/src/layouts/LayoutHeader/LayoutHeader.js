@@ -178,7 +178,7 @@ class LayoutHeader extends Component {
         return (
             <Header className={styles.headerWrapper}>
                 <div className={styles.logo}>
-                    <Icon type="pay-circle" theme="outlined" style={{ 'font-size': '20px' }} />
+                    <Icon type="pay-circle" theme="outlined" style={{ fontSize: '20px' }} />
                     <span className={styles.title}>{this.state.appName}</span>
                     <span className={styles.subTitle}><FormattedMessage id="page.login.admin" defaultMessage="后台管理系统" /></span>
                     <span className={styles.versionText}>{`version: ${appInfo.VERSION}`}</span>

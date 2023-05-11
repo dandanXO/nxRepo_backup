@@ -16,6 +16,7 @@ const theme: ICustomTailwindTheme = {
   // NOTE: State
   custom_state_disable_main: '#CCCFCE',
   custom_state_disable_variant: '#7E8883',
+  custom_state_disable_assistant: '#ECECEC',
 
   custom_state_success_main: '#75C623',
 
@@ -32,16 +33,19 @@ const theme: ICustomTailwindTheme = {
   custom_bg_primary: '#FDFFFE',
   custom_bg_secondary: '#FFFFFF',
   custom_bg_tertiary: '#F6FEF9',
+  custom_bg_homepage_button: '#4092F6', // 首頁按鈕 Get my limit
 
   // NOTE: Text
   custom_text_primary: '#1F1F1F',
   custom_text_secondary: '#898989',
   custom_text_tertiary: '#ADB3C0',
-  custom_text_placeholder: '#CED1D9',
+  custom_text_divider: '#E8E8E8',
 
-  // NOTE: Other
-  disabled_main: '#CCCFCE',
-  disabled_variant: '#7E8883',
+  // NOTE: Text Fields
+  custom_text_fields_background_main: '#FFFFFF',
+  custom_text_fields_background_variant: '#EEEEEE',
+  custom_text_fields_placeholder_main: '#AEAEAE',
+  custom_text_fields_outline_main: '#AAAAAA',
 };
 
 export default theme;

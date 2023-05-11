@@ -14,15 +14,19 @@ interface IMoney {
 const Money = (props: IMoney) => {
   const price = formatPrice(Number(props.money || 0));
   return (
-    <div className="flex justify-center items-baseline">
+    <div className="flex items-baseline">
       {props.isAdd && <div className="mr-1">+</div>}
       {props.isNagetive && <div className="mr-1">-</div>}
       {environment.country === IndiaCountry.country && (
-        <div className={props.currencyStyle || ''}>{environment.currency}</div>
+        <div className={`${props.currencyStyle || ''} mr-1`}>
+          {environment.currency}
+        </div>
       )}
-      <div className={`${props.moneyStyle} mr-1 ` || ''}>{price}</div>
+      <div className={`${props.moneyStyle || ''}`}>{price}</div>
       {environment.country === PakistanCountry.country && (
-        <div className={props.currencyStyle || ''}>{environment.currency}</div>
+        <div className={`${props.currencyStyle || ''} ml-1`}>
+          {environment.currency}
+        </div>
       )}
     </div>
   );

@@ -6,9 +6,6 @@ import { useLocation, useNavigate } from 'react-router';
 import cx from 'classnames';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { getToken } from '../../../modules/location/getToken';
-import { useEffect, useState } from 'react';
-import { DEFAULT_THEME } from '../../../../environments/theme/customTailwindTheme';
-import { applyTheme } from '../../../modules/theme/utils';
 
 type Props = {
   hasOrder: boolean;

@@ -194,9 +194,7 @@ export const usePakistanMobileWalletForm = (
         // error.name = "triggerPostBankBindSaveToPKMutation"
         // if(err) error.message = JSON.stringify(err)
         // console.log("error", error);
-        // if(AppFlag.enableSentry) {
         //   Sentry.captureException(error);
-        // }
       });
   }, [
     mobileData.isValidation,

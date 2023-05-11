@@ -22,6 +22,8 @@
   "page.login.phone.empty": "手机号不能为空",
   "page.login.password": "请输入验证码",
   "page.login.password.empty": "验证码不能为空",
+  "page.login.google.auth.code": "google验证码",
+  "page.login.google.auth.code.empty":"Google验证码不能为空" ,
   "page.search.list.reg.time": "注册时间",
   "page.search.list.select": "请选择",
   "page.search.list.select.empty": "请选择{text}",

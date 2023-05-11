@@ -21,7 +21,7 @@ export const usePakistanBankAccountForm = (
   const [bankAccountValue, setBankAccountValue] = useState<{
     value: number;
     label: string;
-  }>();
+  }>({ value: 0, label: '' });
 
   useEffect(() => {
     if (!props.bindCardDropListData) return;
