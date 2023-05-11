@@ -13,10 +13,15 @@ const ListItem = (props: ListItemProps) => {
     text,
     titleColor = 'text-black',
     textColor = '',
-    className = ''
+    className = '',
   } = props;
   return (
-    <div className={cx(`flex flex-row justify-between text-sm mb-2 leading-none `,className)}>
+    <div
+      className={cx(
+        `flex flex-row justify-between text-sm mb-2 leading-none `,
+        className
+      )}
+    >
       <div className={`${titleColor}`}>{title}</div>
       <div className={`${textColor === '' ? titleColor : textColor}`}>
         {text}

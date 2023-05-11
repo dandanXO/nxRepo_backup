@@ -2,10 +2,9 @@ import { GetUserInfoServiceResponse } from '../../../../api/userService/GetUserI
 import { call, put } from 'redux-saga/effects';
 import { Service } from '../../../../api';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
-import {SentryModule} from "../../../../modules/sentry";
+import { SentryModule } from '../../../../modules/sentry';
 
 export function* systemCallGetUserInfoSaga() {
-
   try {
     const userResponse: GetUserInfoServiceResponse = yield call(
       Service.UserService.GetUserInfoService,

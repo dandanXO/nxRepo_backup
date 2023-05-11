@@ -202,8 +202,12 @@ const IndiaRepaymentDetailPage = (props: any) => {
           <ListItem
             title={'Repayment Amount'}
             text={<Money money={balance} />}
-            titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
-            textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+            titleColor={
+              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+            }
+            textColor={
+              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+            }
             className="font-bold"
           />
         )}

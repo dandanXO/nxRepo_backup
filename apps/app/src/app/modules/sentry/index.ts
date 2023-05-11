@@ -5,7 +5,8 @@ import { Application } from '../application';
 import { Extras } from '@sentry/types';
 import { getAppInfo } from '../nativeAppInfo/getAppInfo';
 import { Primitive } from '@sentry/types/types/misc';
-import {GetUserInfoServiceResponse} from "../../api/userService/GetUserInfoServiceResponse";
+import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
+import { AndroidAppInfo } from '../nativeAppInfo/persistent/androidAppInfo';
 
 const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
 
@@ -48,6 +49,7 @@ function getUserStatusName(status: number) {
 
 export class SentryModule {
   static appInfo = getAppInfo();
+
   static captureMessage(
     message: string,
     tags?: { [key: string]: Primitive },
@@ -55,25 +57,24 @@ export class SentryModule {
   ) {
     if (!AppFlag.enableSentry) return;
 
-    if(SentryModule.appInfo && SentryModule.appInfo.packageId) {
-      Sentry.captureMessage(message, {
-        level: 'info',
-        tags: {
-          packageId: SentryModule.appInfo.packageId,
-          uiVersion: SentryModule.appInfo.uiVersion,
-          mode: SentryModule.appInfo.mode,
-          appName: SentryModule.appInfo.appName,
-          ...tags,
-        },
-        extra: {
-          ...extra,
-        },
-      });
-    }
-
-
+    console.log('appInfo', SentryModule.appInfo);
+    Sentry.captureMessage(message, {
+      level: 'info',
+      tags: {
+        packageId: SentryModule.appInfo.packageId,
+        uiVersion: SentryModule.appInfo.uiVersion,
+        mode: SentryModule.appInfo.mode,
+        appName: SentryModule.appInfo.appName,
+        ...tags,
+      },
+      extra: {
+        domain: AndroidAppInfo.domain,
+        environment: AndroidAppInfo.environment,
+        ...extra,
+      },
+    });
   }
-  static userLogin(userResponse: GetUserInfoServiceResponse, ) {
+  static userLogin(userResponse: GetUserInfoServiceResponse) {
     if (!AppFlag.enableSentry) return;
     const userInfo = {
       'user.demoAccount': userResponse.demoAccount,
