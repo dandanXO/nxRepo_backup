@@ -43,9 +43,9 @@ const theme: ICustomTailwindTheme = {
 
   // NOTE: Text Fields
   custom_text_fields_background_main: '#FFFFFF',
-  custom_text_fields_background_variant: '#EEEEEE', 
-  custom_text_fields_placeholder_main: '#D9D9D9', 
-  custom_text_fields_outline_main: '#AAAAAA', 
+  custom_text_fields_background_variant: '#EEEEEE',
+  custom_text_fields_placeholder_main: '#D9D9D9',
+  custom_text_fields_outline_main: '#AAAAAA',
 };
 
 export default theme;
