@@ -1,5 +1,6 @@
 import { IAndroidAppInfo } from './IAndroidAppInfo';
 import { environment } from '../../../environments/environment';
+import {SentryModule} from "../sentry";
 
 export const getAppInfo = (): IAndroidAppInfo => {
   let appInfo: IAndroidAppInfo = {
@@ -14,8 +15,10 @@ export const getAppInfo = (): IAndroidAppInfo => {
 
   // NOTE: Native Bridge
   if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
+
     const appInfoStr = window['AppInfoTask']['getAppInfo']();
     appInfo = JSON.parse(appInfoStr);
+
 
     // NOTICE: 印度 v55, 巴基斯坦 v56 的 uiVersion 是寫死成 1 的
     // NOTICE: 巴基斯坦 v56, uiVersion 則是變動的
@@ -30,6 +33,8 @@ export const getAppInfo = (): IAndroidAppInfo => {
     }
     appInfo.mode = 'Webview';
   } else {
+    SentryModule.captureMessage('App cannot load AndroidAppInfo');
+
     // NOTE: H5 or DEV Mode
     if (environment.country === 'in') {
       appInfo = {
