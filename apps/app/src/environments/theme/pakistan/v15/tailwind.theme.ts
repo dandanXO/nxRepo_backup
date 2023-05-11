@@ -2,7 +2,6 @@
 // import base from '../../../app/modules/theme/themes/base';
 
 import { ICustomTailwindTheme } from '../../../../app/modules/theme/ICustomTailwindTheme';
-import { EnumV15GradientButtonClassNames } from './button';
 const theme: ICustomTailwindTheme = {
   // NOTE: color
   primary_main: '#18A851',
@@ -36,7 +35,7 @@ const theme: ICustomTailwindTheme = {
   custom_bg_primary: '#FDFFFE',
   custom_bg_secondary: '#FFFFFF',
   custom_bg_tertiary: '#F6FEF9',
-  custom_bg_homepage_button: '#18A851',
+  custom_bg_homepage_button: 'linear-gradient(178.76deg, #18A851 1.58%, #138641 99.46%)', // 首頁按鈕 Get my limit
 
   // NOTE: text
   custom_text_primary: '#282A30',
