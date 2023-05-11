@@ -60,11 +60,12 @@ class Login extends Component{
           // 尚未進行第一次登入
           this.props.form.validateFields((err, values) => {
             if (!err) {
-              const { phoneNumber, captcha } = getFieldsValue();
+              const { phoneNumber, captcha, googleAuthCode } = getFieldsValue();
               // NOTICE: UseCase:Login
               dispatch(loginAction.lgPostLogin({
                 phoneNo: phoneNumber,
-                code: captcha
+                code: captcha,
+                googleAuthCode
               }));
             }
           });
