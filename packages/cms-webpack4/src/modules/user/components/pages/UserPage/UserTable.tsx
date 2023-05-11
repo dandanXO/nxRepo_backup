@@ -56,8 +56,6 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
     // state
     const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
     const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
-    const [hasVerifyNotApply, setHasVerifyNotApply] = useState(false);
-    const [hasVerifyThirdRisk, setHasVerifyThirdRisk] = useState(false);
     const [isImportTelSale, setIsImportTelSale] = useState(false);
     const [isExportRemainOrder, setIsExportRemainOrder] = useState(false);
     const [modal, contextHolder] = Modal.useModal();
@@ -280,9 +278,10 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             dataIndex: 'hasVerifyNotApply',
             hideInTable: true,
             renderFormItem: (text, { }, form) => {
-                return <Form form={form} name={'hasVerifyNotApply'} initialValues={{ hasVerifyNotApply: searchParams.hasVerifyNotApply || hasVerifyNotApply }}>
+                const checked = form.getFieldValue('hasVerifyNotApply')
+                return <Form form={form} name='hasVerifyNotApply'>
                     <Form.Item>
-                        <Checkbox value={hasVerifyNotApply ? "false": "true"} checked={hasVerifyNotApply} onChange={({ target:{ checked }})=> setHasVerifyNotApply(checked)} />
+                        <Checkbox value={checked === 'true' ?'false':'true'} checked={checked === 'true'} />
                     </Form.Item>
                 </Form>
             }
@@ -291,10 +290,11 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
             title: '通过外部风控',
             dataIndex: 'hasVerifyThirdRisk',
             hideInTable: true,
-            renderFormItem: (text, { }, form) => {
-                return <Form form={form} name={'hasVerifyThirdRisk'} initialValues={{ hasVerifyThirdRisk: searchParams.hasVerifyThirdRisk || hasVerifyThirdRisk }}>
-                    <Form.Item>
-                        <Checkbox value={hasVerifyThirdRisk ? "false": "true"} checked={hasVerifyThirdRisk} onChange={({ target:{ checked }})=> setHasVerifyThirdRisk(checked)} />
+            renderFormItem: (text, {}, form) => {
+                const checked = form.getFieldValue('hasVerifyThirdRisk')
+                return <Form form={form} name='hasVerifyThirdRisk'>
+                    <Form.Item >
+                        <Checkbox value={checked === 'true' ?'false':'true'} checked={checked === 'true'} />
                     </Form.Item>
                 </Form>
             }
@@ -354,8 +354,6 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                             setSearchList(initSearchList);
                             setIsImportTelSale(false);
                             setIsNoLoanAgain(false);
-                            setHasVerifyNotApply(false);
-                            setHasVerifyThirdRisk(false);
                             setIsExportRemainOrder(false);
                         }}>{resetText}</Button>
                         <Button
