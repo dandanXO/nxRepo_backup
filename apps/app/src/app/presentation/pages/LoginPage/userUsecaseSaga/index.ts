@@ -18,7 +18,6 @@ export type UserResendSecondsActionPayload = {
   resendSeconds: number;
 };
 
-
 // NOTICE:
 interface IUseCase {
   name: string;

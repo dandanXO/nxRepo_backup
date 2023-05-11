@@ -1,9 +1,9 @@
 import { call, put } from 'redux-saga/effects';
 import { Posthog } from '../../modules/posthog';
 import { PersonalInfoPageSagaActions } from '../type/userUsecaseSaga/personalInfoPageSaga';
-import {AndroidAppInfo} from "../../modules/nativeAppInfo/persistent/androidAppInfo";
-import {appStore} from "../../reduxStore";
-import {SystemCaseActions} from "../type/systemUsecaseSaga/systemCaseActions";
+import { AndroidAppInfo } from '../../modules/nativeAppInfo/persistent/androidAppInfo';
+import { appStore } from '../../reduxStore';
+import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
 
 export function* watchSystemInitWebviewAndH5Saga() {
   // const androidAPPInfo = getAppInfo();
@@ -12,9 +12,9 @@ export function* watchSystemInitWebviewAndH5Saga() {
   //   yield put(SystemCaseActions.InitSaga());
   // }
 
-  if(AndroidAppInfo.mode === "Webview") {
+  if (AndroidAppInfo.mode === 'Webview') {
     yield put(PersonalInfoPageSagaActions.system.init());
-  } else if(AndroidAppInfo.mode === "H5") {
+  } else if (AndroidAppInfo.mode === 'H5') {
     yield call(Posthog.init, {});
 
     // NOTICE: Initializing H5 Mode
