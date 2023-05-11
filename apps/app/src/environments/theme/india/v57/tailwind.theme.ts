@@ -33,7 +33,7 @@ const theme: ICustomTailwindTheme = {
   custom_bg_primary: '#FCFBF9',
   custom_bg_secondary: '#FFFFFF',
   custom_bg_tertiary: '#FDFDFC',
-  custom_bg_homepage_button: '#4092F6',
+  custom_bg_homepage_button: '#4092F6', // 首頁按鈕 Get my limit
 
   // NOTE: text
   custom_text_primary: '#000000',

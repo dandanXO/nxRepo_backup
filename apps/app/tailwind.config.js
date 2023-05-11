@@ -92,28 +92,13 @@ module.exports = {
   },
   plugins: [
     // require("daisyui")
-    plugin(function ({ addUtilities,addComponents,addVariant,e  }) {
-        // addVariant('abc',['bg-gradient-to-b from-[#18A851] to-[#138641]'])
-        // addVariant('data-active', ({ modifySelectors, separator }) => {
-        //     modifySelectors(({ className }) => {
-        //       return `.${e(`data-active${separator}${className}`)}[data-active="true"]
-
-        //       `;
-        //     })
-        //   });
-        //   addVariant('bbb-gradient', ['&:bg-gradient-to-b', '&:from-[#18A851]', '&:to-[#138641]'])
+    plugin(function ({ addUtilities, addComponents, addVariant, e }) {
         addComponents({
             '.open-index-button': {
-                backgroundColor:  'var(--custom_bg_homepage_button)',
+                background:'var(--custom_bg_homepage_button)'
             },
-           
         })
-        // addUtilities({
-        //     '.open-index-button': {
-        //         backgroundColor:  'var(--custom_bg_homepage_button)',
-        //     },
-        // })
-        
+      
     })
   ],
   safelist: ['border-l-2', 'border-dashed'],

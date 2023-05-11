@@ -355,6 +355,7 @@ const UserTable = ({ setShowModal,ispostBlackListSuccess }: UserTableProps) => {
                             setIsImportTelSale(false);
                             setIsNoLoanAgain(false);
                             setHasVerifyNotApply(false);
+                            setHasVerifyThirdRisk(false);
                             setIsExportRemainOrder(false);
                         }}>{resetText}</Button>
                         <Button
