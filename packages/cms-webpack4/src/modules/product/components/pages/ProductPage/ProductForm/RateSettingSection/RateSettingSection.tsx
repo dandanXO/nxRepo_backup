@@ -1,13 +1,13 @@
-import React, {CSSProperties} from "react";
+import React, {CSSProperties, useState} from "react";
 import { Divider, Form, Input, Typography, Row, Col, Space, Button, Collapse } from "antd";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {
   NumberValidator,
-} from "../../../../../shared/utils/validation/validator";
-import {maxOneUnitFloatReplacer} from "../../../../../shared/utils/format/maxOneUnitFloatReplacer";
-import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import PreAndPostInterestGroups from "../../../../../shared/components/other/PreAndPostInterestGroups";
+} from "../../../../../../shared/utils/validation/validator";
+import {maxOneUnitFloatReplacer} from "../../../../../../shared/utils/format/maxOneUnitFloatReplacer";
+import {CustomAntFormFieldError} from "../../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {FormInstance} from "antd/es";
+import {ProductInterestRatePairsModal} from "./ProductInterestRatePairsModal";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
@@ -20,6 +20,17 @@ interface RateSettingSectionProps {
 export const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>
 
 const RateSettingSection = (props: RateSettingSectionProps) => {
+  const [showProductInterestRatePairsModal, setShowProductInterestRatePairsModal] = useState(false)
+
+  const handleProductInterestRatePairsModalOnOK = () => {
+      setShowProductInterestRatePairsModal(false)
+  }
+
+  const handleProductInterestRatePairsModalOnClose = (e) => {
+      e.stopPropagation();
+      setShowProductInterestRatePairsModal(false)
+  }
+
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
       <React.Fragment>
@@ -170,23 +181,14 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                   </Form.Item>
 
 
-                  <Form.Item label="复贷利率" required tooltip={
-                      <div>
-                          <div>例如：</div>
-                          <div>起始期数1，前置利息10%，后置利息15%</div>
-                          <div>+起始期数4，前置利息8%，后置利息12%</div>
-                          <div>则1~3期费率同起始期数1</div>
-                          <div>第4期之后费率同起始期数4</div>
-                      </div>
-                  }>
-                      <PreAndPostInterestGroups
-                          form={props.form}
-                          fieldName={"productInterestRatePairs"}
-                          customAntFormFieldError={props.customAntFormFieldError}
-                          setCustomAntFormFieldError={props.setCustomAntFormFieldError}
-                          interestRatePairsTouchInput={props.interestRatePairsTouchInput}
-                      />
+                  <Form.Item label="复贷利率">
+                      <a style={{textDecoration:'underline'}} onClick={()=>setShowProductInterestRatePairsModal(true)}>配置</a>
                   </Form.Item>
+                  <ProductInterestRatePairsModal
+                      show={showProductInterestRatePairsModal}
+                      onOk={handleProductInterestRatePairsModalOnOK}
+                      handleCloseModal={handleProductInterestRatePairsModalOnClose}
+                  />
               </Panel>
           </Collapse>
       </React.Fragment>
