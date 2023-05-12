@@ -1,3 +1,5 @@
+import "./app/modules/errorHandler";
+
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 import { SentryModule } from './app/modules/sentry';
 
