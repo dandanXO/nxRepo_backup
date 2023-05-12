@@ -53,7 +53,10 @@ export const getAppInfo = (): IAndroidAppInfo => {
           environment: 'india',
           packageId: 'unknown', // NOTE: webview 不必要
           appName: 'unknown', // NOTE: webview 不必要
-          uiVersion: '55', // NOTE: 換主題需要，但缺失
+          uiVersion:
+            typeof AppInfo.UI_VERSION !== 'undefined'
+              ? String(AppInfo.UI_VERSION)
+              : '55',// NOTE: 換主題需要，但缺失
           token: null, // NOTE: webview 不必要
           mode: 'Webview',
         };
