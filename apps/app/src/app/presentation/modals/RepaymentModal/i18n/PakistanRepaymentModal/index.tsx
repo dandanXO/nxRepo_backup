@@ -114,7 +114,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         <Select
           styles={selectStyles}
           options={repayTypesList || []}
-        //   value={repayType}
+          value={repayType}
           onChange={(item) => {
             setRepayType(item as paymentMethodValueType);
           }}
@@ -204,9 +204,8 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             className={`w-full ${EnumV15GradientButtonClassNames}`}
             text={props.t('Repay')}
             onClick={() => {
-                if (isRepayTypesFetching) return;
-                if (repayType.value === '') return; 
-                if (balanceValueErrorMessage === '') handleConfirm();
+              if (isRepayTypesFetching) return;
+              if (balanceValueErrorMessage === '') handleConfirm();
             }}
           />
         </div>

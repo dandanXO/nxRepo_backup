@@ -1,6 +1,5 @@
 import React from 'react';
 import { StylesConfig } from 'react-select';
-
 export const selectStyles: StylesConfig = {
     control: (styles) => ({
         ...styles,
@@ -21,7 +20,6 @@ export const selectStyles: StylesConfig = {
             border: 0,
             color: isSelected ? '#fff' : '#000',
             backgroundColor: isSelected ? styles.backgroundColor : null,
-            
         };
     },
     dropdownIndicator: styles => ({
