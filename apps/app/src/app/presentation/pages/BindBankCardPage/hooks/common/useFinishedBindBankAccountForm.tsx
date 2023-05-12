@@ -8,6 +8,7 @@ import {
 } from '../../../../../api/rtk/old/GetBindCardDropList';
 import { BindBankCardPageEvents } from '../../event';
 import { SentryModule } from '../../../../../modules/sentry';
+import {changeLocationHref} from "../../../../../modules/errorHandler";
 
 type IUseFinishedBindBankAccountPage = {
   // NOTICE: Common
@@ -70,7 +71,7 @@ export const useFinishedBindBankAccountForm = (
       ),
     });
 
-    window.location.href = 'innerh5://127.0.0.1';
+    changeLocationHref('innerh5://127.0.0.1');
   };
 
   let targetBankAccount: BankVendor;
