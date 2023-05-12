@@ -7,6 +7,9 @@ import { Button } from '../../../../components/layouts/Button';
 import CustomSelect from '../../../../components/Select';
 import Money from '../../../../components/Money.tsx';
 import { Status } from '../../../../../modules/statusEnum';
+import Select from 'react-select';
+import { selectStyles } from '../../../../components/layouts/selectStyles';
+
 type paymentMethodValueType = {
   value: string;
   label: string;
@@ -106,8 +109,8 @@ const PakistanExtendModal = (props: any) => {
       <div className="text-black text-xs font-bold text-left">
         {'Payment Method'}
       </div>
-      <CustomSelect
-        type={'standard'}
+      <Select
+        styles={selectStyles}
         options={props.repayTypesList || []}
         value={props?.repayType}
         onChange={(item: any) => {
