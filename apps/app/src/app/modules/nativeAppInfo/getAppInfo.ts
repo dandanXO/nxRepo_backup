@@ -73,8 +73,17 @@ export const getAppInfo = (): IAndroidAppInfo => {
       }
     } else if (environment.country === 'pk') {
       if (AppTempFlag.isWebview) {
-        // 巴基斯坦 v15 不會有這情況
-        new Error('巴基斯坦 v15 不會有這情況');
+        // APP 巴基斯坦 v15 不會有這情況，除非是前端呼叫
+        // new Error('APP 巴基斯坦 v15 不會有這情況，除非是前端呼叫');
+        appInfo = {
+          domain: 'https://www.oasis-gold.com',
+          environment: 'pakistan',
+          packageId: 'com.pak.app.yesloan.android',
+          appName: 'dev_pk',
+          uiVersion: '15',
+          token: null,
+          mode: 'H5',
+        };
       } else {
         //NOTE: 純 H5
         appInfo = {
@@ -82,12 +91,9 @@ export const getAppInfo = (): IAndroidAppInfo => {
           environment: 'pakistan',
           packageId: 'com.pak.app.yesloan.android',
           appName: 'dev_pk',
-          uiVersion:
-            typeof AppInfo.UI_VERSION !== 'undefined'
-              ? String(AppInfo.UI_VERSION)
-              : '15',
+          uiVersion: '15',
           token: null,
-          mode: 'Webview',
+          mode: 'H5',
         };
       }
     } else {
