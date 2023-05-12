@@ -112,7 +112,7 @@ const PakistanExtendModal = (props: any) => {
       <Select
         styles={selectStyles}
         options={props.repayTypesList || []}
-        value={props?.repayType}
+        // value={props?.repayType}
         onChange={(item: any) => {
           props.setRepayType(item as paymentMethodValueType);
         }}
@@ -125,14 +125,16 @@ const PakistanExtendModal = (props: any) => {
             type={'ghost'}
             onClick={() => navigate(-2)}
             text={'Cancel'}
-            className={`w-full`}
           />
         </div>
         <div className={`grow ml-1.5`}>
           <Button
-            onClick={props.handleConfirm}
+            onClick={()=>{
+                if (props?.repayType.value !== '') {
+                    props.handleConfirm();
+                }
+            }}
             text={'Confirm'}
-            className={`w-full`}
           />
         </div>
       </div>

@@ -1,7 +1,5 @@
-import { themes } from 'apps/app/src/environments/theme/customTailwindTheme';
 import React from 'react';
 import { StylesConfig } from 'react-select';
-import { environment } from 'apps/app/src/environments/environment';
 
 export const selectStyles: StylesConfig = {
     control: (styles) => ({
@@ -14,6 +12,7 @@ export const selectStyles: StylesConfig = {
         span: {
             width: 0,
         },
+        textAlign:'left'
     }),
     //@ts-ignore
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -22,6 +21,7 @@ export const selectStyles: StylesConfig = {
             border: 0,
             color: isSelected ? '#fff' : '#000',
             backgroundColor: isSelected ? styles.backgroundColor : null,
+            
         };
     },
     dropdownIndicator: styles => ({

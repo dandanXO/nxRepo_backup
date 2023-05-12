@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLazyGetRepayTypesQuery } from '../../api/rtk';
+import { environment } from 'apps/app/src/environments/environment';
+import { IndiaCountry } from '../../../../../../libs/shared/domain/src/country/IndiaCountry';
+import { PakistanCountry } from '../../../../../../libs/shared/domain/src/country/PakistanCountry';
+
 
 type paymentMethodValueType = {
   value: string;
@@ -36,7 +40,8 @@ const useRepayTypes = () => {
           return { value: item.payType, label: item.payTypeAlias };
         });
       setRepayTypesList(options);
-      setRepayType(options[0]);
+      const initRepayType = environment.country === IndiaCountry.country ? options[0] : { value: '', label: '' };
+      setRepayType(initRepayType);
     }
   }, [isSuccess]);
 
