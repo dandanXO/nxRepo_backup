@@ -69,7 +69,7 @@ const PakistanExtendModal = (props: any) => {
         title={'Overdue Fee'}
         text={<Money money={penaltyInterest} />}
         titleColor="text-ctext-secondary"
-        textColor={status === 'OVERDUE' ? Status(status).color : ''}
+        textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
       />
 
       {/*NOTE: 減免金額*/}
