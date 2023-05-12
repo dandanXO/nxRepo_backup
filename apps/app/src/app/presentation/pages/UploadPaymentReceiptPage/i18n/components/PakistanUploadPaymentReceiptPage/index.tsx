@@ -26,11 +26,7 @@ export const PakistanUploadPaymentReceiptPage = withTranslation(
           <div className="text-sm text-left mb-2">
             {props.t('Upload your repayment receipt (optional)')}
           </div>
-          <div className="bg-[#F8F8F8] border-dashed border border-[#B7BBC5] h-[183px] flex justify-center items-center rounded-lg mb-4">
-            <label
-              className="flex flex-col justify-center items-center"
-              htmlFor="file"
-            >
+          <label  htmlFor="file" className="bg-[#F8F8F8] border-dashed border border-[#B7BBC5] h-[183px] flex flex-col justify-center items-center rounded-lg mb-4">
               {!props.formFile ? (
                 <>
                   <div>
@@ -54,8 +50,7 @@ export const PakistanUploadPaymentReceiptPage = withTranslation(
                 value={''}
                 onChange={(event) => props.onFileChange(event)}
               />
-            </label>
-          </div>
+          </label>
         </div>
         <Button
           className={`${EnumV15GradientButtonClassNames}`}
