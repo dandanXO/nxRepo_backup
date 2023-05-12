@@ -43,7 +43,7 @@ const BankCardListPage = () => {
         </div>
         <div className={`text-xs text-slate-500`}>
           {
-            'You must be verified to add a card, please return to the home page and click "Apply Now" to verify your eligibility.'
+            'You must be verified to add a card, please return to the home page and click "Get my limit" to verify your eligibility.'
           }
         </div>
       </div>
