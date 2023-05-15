@@ -14,11 +14,12 @@ export function* WatchAppSaga() {
   try {
     console.log('[app][saga] 1');
     yield all([
-      // NOTICE: run
+      // NOTICE: run init
       runSystemInitSaga(),
-      // NOTICE: watch
+      // NOTICE: watch common
       watchSystemInitSaga(),
       watchSystemUseCaseSaga(),
+      // NOTICE: watch pages
       watchLoginPageSaga(),
       watchIndexPageSaga(),
       watchPersonalInfoPageSaga(),

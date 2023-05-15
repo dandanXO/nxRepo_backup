@@ -19,21 +19,21 @@ import {catchSagaError} from "../utils/catchSagaError";
 export function* runSystemInitSaga() {
   try {
     if (AndroidAppInfo.mode === 'Webview') {
-
       // NOTICE: 事件太難追蹤了
       // yield put(PersonalInfoPageSagaActions.system.init());
 
       const location: Location = yield select((state: RootState) => state.navigator.location)
 
-      if(location.pathname === PagePathEnum.LoginPage) {
-        // NOTE: 登入頁面 (使用者輸入OTP 進行登入)
-
+      // NOTICE: 不需要登入頁面
+      if(location.pathname === PagePathEnum.IBANFinderPage) {
+        //
+      } else if(location.pathname === PagePathEnum.LoginPage) {
+        // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
       } else {
         const token = getToken();
         if(!token) return alertModal("Backend Error: Please be with token");
-
-
-        // NOTE: 還款頁面、綁卡頁面、IBAN 說明頁面 (使用 URL Querystring Token 進行登入)
+        // NOTICE: 直接進行登入
+        // NOTICE: 還款頁面、綁卡頁面、IBAN 說明頁面 (使用 URL Querystring Token 進行登入)
 
         // NOTE: 取得使用者資訊
         const userResponse: GetUserInfoServiceResponse = yield call(

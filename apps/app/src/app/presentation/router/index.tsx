@@ -208,7 +208,7 @@ export const AppRouter = () => {
         <Route path={PagePathEnum.LoginPage} element={<LoginPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
-        <Route path="/v2/iban-finder" element={<IBANFinderPage />} />
+        <Route path={PagePathEnum.IBANFinderPage} element={<IBANFinderPage />} />
         <Route path={PagePathEnum.IndexPage} element={<IndexPage />} />
         <Route
           path={PagePathEnum.PrivacyPolicyModal}
