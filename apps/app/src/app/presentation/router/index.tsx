@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import { TabBar } from '../components/layouts/TabBar';
 import { RootState } from '../../reduxStore';
 import { PagePathEnum } from '../pages/PagePathEnum';
-import AppDataCollector from '../../AppDataCollector';
+import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
 import {AndroidAppInfo} from "../../modules/nativeAppInfo/persistent/androidAppInfo";
 
 const AuthPage = loadable(

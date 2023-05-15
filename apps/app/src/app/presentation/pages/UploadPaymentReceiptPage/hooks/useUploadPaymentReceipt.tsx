@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { z } from 'zod';
 import { PostRepayReceiptRequestProps } from '../index';
-import { InputValue } from '../../../../modules/InputValue';
+import { InputValue } from '../../../../modules/form/InputValue';
 import { environment } from '../../../../../environments/environment';
 
 interface PureUploadPaymentReceiptPageProps {

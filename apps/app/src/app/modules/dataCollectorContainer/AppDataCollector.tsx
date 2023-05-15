@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { environment } from '../environments/environment';
-import { usePostTraceBehaviorMutation } from './api/rtk';
+import { environment } from '../../../environments/environment';
+import { usePostTraceBehaviorMutation } from '../../api/rtk';
 
 const AppDataCollector = (props: { children: React.ReactNode }) => {
   // const whitePage: string[] = [ PagePathEnum.RepaymentDetailPage, PagePathEnum.BindBankcard ]

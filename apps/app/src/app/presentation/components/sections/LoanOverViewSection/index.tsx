@@ -1,5 +1,5 @@
 import { IndexPageProps } from '../../../../reduxStore';
-import { formatPrice } from '../../../../modules/formatPrice';
+import { formatPrice } from '../../../../modules/format/formatPrice';
 import Chart from 'react-apexcharts';
 import { useEffect, useRef, useState } from 'react';
 import { ApexOptions } from 'apexcharts';

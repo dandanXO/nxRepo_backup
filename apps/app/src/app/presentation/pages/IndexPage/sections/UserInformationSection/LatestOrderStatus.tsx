@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import { IndexPageProps } from '../../../../../reduxStore';
-import { formatPrice } from '../../../../../modules/formatPrice';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
 import moment from 'moment';
 import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
 import { useNavigate } from 'react-router';
