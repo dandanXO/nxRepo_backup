@@ -102,6 +102,7 @@ export const usePakistanMobileWalletForm = (
 
   // Wallet Account  - 驗證
   const validateMobileWalletAccount = useCallback(() => {
+    // NOTICE: refactor
     const message = t('Account number should be 11 digits starting with 0.');
     const scheme = z.string().regex(/^0/, message).length(11, message);
     const result = scheme.safeParse(mobileData.data);
