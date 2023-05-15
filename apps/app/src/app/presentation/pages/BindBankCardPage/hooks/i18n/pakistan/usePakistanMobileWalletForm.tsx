@@ -165,11 +165,17 @@ export const usePakistanMobileWalletForm = (
 
     if (props.isPostBankBindSaveToPKMutationLoading) return;
 
+    let mobileDataValue = mobileData.data;
+    // NOTE: 用戶沒填0時，給後端自動補0
+    if(String(mobileData.data).charAt(0) !== "0") {
+      mobileDataValue = "0" + mobileData.data
+    }
+
     props
       .triggerPostBankBindSaveToPKMutation({
         bankAccNr: '',
         mobileWallet: true,
-        mobileWalletAccount: mobileData.data,
+        mobileWalletAccount: mobileDataValue,
         walletVendor: (mobileWalletAccount && mobileWalletAccount.code) || '',
         iban: iBanData.data,
       })
