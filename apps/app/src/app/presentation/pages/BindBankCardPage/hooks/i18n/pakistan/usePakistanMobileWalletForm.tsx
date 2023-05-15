@@ -105,7 +105,8 @@ export const usePakistanMobileWalletForm = (
     // NOTICE: refactor
     const message = t('Account number should be 11 digits starting with 0.');
     const scheme = z.string().regex(/^0/, message).length(11, message);
-    const result = scheme.safeParse(mobileData.data);
+    const scheme2 = z.string().length(10, message);
+    const result = z.union([scheme, scheme2]).safeParse(mobileData.data);
     if (!result.success) {
       const firstError = result.error.format();
       const errorMessage = firstError._errors[0];
