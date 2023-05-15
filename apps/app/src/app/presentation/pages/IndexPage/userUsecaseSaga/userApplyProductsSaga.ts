@@ -2,7 +2,7 @@
 import { LoanServiceResponse } from '../../../../api/loanService/service/postApplyLoanService';
 import { call, put, select, take, race } from 'redux-saga/effects';
 import { Service } from '../../../../api';
-import { catchSagaError } from '../../../utils/catchSagaError';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import {
   InitialStateType,
   modalSlice,

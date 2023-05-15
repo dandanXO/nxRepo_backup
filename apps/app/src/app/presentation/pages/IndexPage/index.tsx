@@ -43,7 +43,7 @@ import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail'
 
 import { chain, add, multiply, divide, subtract, evaluate } from 'mathjs';
 import { PagePathEnum } from '../PagePathEnum';
-import { IndexPageSagaAction } from '../../../usecaseFlow/type/userUsecaseSaga/indexPageSaga';
+import { IndexPageSagaAction } from './userUsecaseSaga';
 
 export type FinalProductType = PlatformProduct & {
   calculating: {

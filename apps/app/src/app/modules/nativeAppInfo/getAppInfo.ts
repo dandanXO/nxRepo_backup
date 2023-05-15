@@ -1,9 +1,11 @@
 import { IAndroidAppInfo } from './IAndroidAppInfo';
 import { environment } from '../../../environments/environment';
+import {AppFlag} from "../../../environments/flag";
 // import {AppTempFlag} from "../../../main";
 
 // NOTICE: refactor me
 export const AppTempFlag = {
+  // NOTE: 預設是在 android，首頁版、還款與綁卡版
   isWebview: true,
 };
 
@@ -46,7 +48,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
   } else {
     // NOTE: H5 or DEV Mode
     if (environment.country === 'in') {
-      if (AppTempFlag.isWebview) {
+      if (AppTempFlag.isWebview || AppFlag.isForceToWebview) {
         // NOTICE: v 55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值
         appInfo = {
           domain: '', // NOTE: webview 不必要
@@ -75,32 +77,25 @@ export const getAppInfo = (): IAndroidAppInfo => {
         };
       }
     } else if (environment.country === 'pk') {
-      if (AppTempFlag.isWebview) {
+      appInfo = {
+        domain: 'https://www.oasis-gold.com',
+        environment: 'pakistan',
+        packageId: 'com.pak.app.yesloan.android',
+        appName: 'dev_pk',
+        uiVersion: '15',
+        token: null,
+        mode: 'Webview',
+      };
+      if (AppTempFlag.isWebview || AppFlag.isForceToWebview) {
         // APP 巴基斯坦 v15 不會有這情況，除非是前端呼叫
         // new Error('APP 巴基斯坦 v15 不會有這情況，除非是前端呼叫');
-        appInfo = {
-          domain: 'https://www.oasis-gold.com',
-          environment: 'pakistan',
-          packageId: 'com.pak.app.yesloan.android',
-          appName: 'dev_pk',
-          uiVersion: '15',
-          token: null,
-          mode: 'H5',
-        };
+        appInfo.mode = 'Webview';
       } else {
         //NOTE: 純 H5
-        appInfo = {
-          domain: 'https://www.oasis-gold.com',
-          environment: 'pakistan',
-          packageId: 'com.pak.app.yesloan.android',
-          appName: 'dev_pk',
-          uiVersion: '15',
-          token: null,
-          mode: 'H5',
-        };
+        appInfo.mode = 'H5';
       }
     } else {
-      new Error('前端請新增國家配置');
+      throw new Error('前端請新增國家配置');
     }
   }
   return appInfo;

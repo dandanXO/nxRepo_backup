@@ -1,12 +1,13 @@
 import { takeEvery, takeLatest } from 'redux-saga/effects';
-import { errorFallback } from '../utils/errorFallback';
-import { userViewIndexPageSaga } from '../type/userUsecaseSaga/indexPageSaga/userViewIndexPageSaga';
-import { userApplyProductsSaga } from '../type/userUsecaseSaga/indexPageSaga/userApplyProductsSaga';
-import { userReacquireCreditSaga } from '../type/userUsecaseSaga/indexPageSaga/userReacquireCreditSaga';
-import { IndexPageSagaAction } from '../type/userUsecaseSaga/indexPageSaga';
+import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
+import { userViewIndexPageSaga } from './userViewIndexPageSaga';
+import { userApplyProductsSaga } from './userApplyProductsSaga';
+import { userReacquireCreditSaga } from './userReacquireCreditSaga';
+import { IndexPageSagaAction } from './index';
 
 export function* watchIndexPageSaga() {
   console.log('[app][saga] 1.2');
+
   yield takeEvery(
     IndexPageSagaAction.user.viewIndexPageAction.type,
     errorFallback,

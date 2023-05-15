@@ -1,22 +1,41 @@
 import { GetUserInfoServiceResponse } from '../../../../api/userService/GetUserInfoServiceResponse';
-import { call, put } from 'redux-saga/effects';
+import {call, put, select} from 'redux-saga/effects';
 import { Service } from '../../../../api';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { SentryModule } from '../../../../modules/sentry';
+import {getToken} from "../../../../modules/location/getToken";
+import {RootState} from "../../../../reduxStore";
+import {Action, Location} from "history";
+import {PagePathEnum} from "../../../../presentation/pages/PagePathEnum";
+import {catchSagaError} from "../../../utils/catchSagaError";
+
 
 export function* systemCallGetUserInfoSaga() {
   try {
-    const userResponse: GetUserInfoServiceResponse = yield call(
-      Service.UserService.GetUserInfoService,
-      {}
-    );
-    yield put(indexPageSlice.actions.updateUserAPI(userResponse));
+    // NOTE: 還款、綁卡版
+    // NOTE: 首頁開始
+    const token = getToken();
+    const location: Location = yield select((state: RootState) => state.navigator.location)
+    // const action: Action = yield select((state: RootState) => state.navigator.action)
+    // console.log("location", location);
+    // console.log("action", action);
 
-    SentryModule.userLogin(userResponse);
+    if(location.pathname !== PagePathEnum.LoginPage && token === "") {
+      return;
+    } else {
+      const userResponse: GetUserInfoServiceResponse = yield call(
+        Service.UserService.GetUserInfoService,
+        {}
+      );
+      yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
-    return userResponse;
+      SentryModule.userLogin(userResponse);
+
+      return userResponse;
+    }
+
   } catch (error) {
-    console.log('error', error);
-    return null;
+    yield catchSagaError(error);
+    return false;
   }
 }

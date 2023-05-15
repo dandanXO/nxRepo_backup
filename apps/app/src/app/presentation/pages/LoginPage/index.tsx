@@ -7,8 +7,9 @@ import { useEffect } from 'react';
 import { AppTempFlag } from '../../../modules/nativeAppInfo/getAppInfo';
 
 const LoginPage = () => {
+
   useEffect(() => {
-    AppTempFlag.isWebview = true;
+    AppTempFlag.isWebview = false;
   });
 
   return (

@@ -14,7 +14,7 @@ import { PagePathEnum } from '../PagePathEnum';
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
 import { useEffect } from 'react';
-import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/type/userUsecaseSaga/personalInfoPageSaga';
+import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 import { Button } from '../../components/layouts/Button';
 
 const PersonalInfoPage = () => {

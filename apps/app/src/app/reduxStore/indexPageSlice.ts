@@ -9,7 +9,7 @@ import { GetIndexResponse } from '../api/indexService/GetIndexResponse';
 import { GetQuotaModelStatusResponse } from '../api/loanService/GetQuotaModelStatusResponse';
 import { GetUserInfoServiceResponse } from '../api/userService/GetUserInfoServiceResponse';
 import { GetOpenIndexResponse } from '../api/indexService/GetOpenIndexResponse';
-import { getQuotaModelStatusAction } from '../usecaseFlow/type/userUsecaseSaga/indexPageSaga/userReacquireCreditSaga';
+import { getQuotaModelStatusAction } from '../presentation/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
 
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;

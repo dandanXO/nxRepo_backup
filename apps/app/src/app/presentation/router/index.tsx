@@ -16,6 +16,7 @@ import { TabBar } from '../components/layouts/TabBar';
 import { RootState } from '../../reduxStore';
 import { PagePathEnum } from '../pages/PagePathEnum';
 import AppDataCollector from '../../AppDataCollector';
+import {AndroidAppInfo} from "../../modules/nativeAppInfo/persistent/androidAppInfo";
 
 const AuthPage = loadable(
   () => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage')
@@ -178,6 +179,10 @@ const IBANFinderModal = loadable(
 );
 
 export const AppRouter = () => {
+  const isInit: boolean = useSelector(
+    (state: RootState) => state.app.isInit
+  );
+
   const location = useLocation();
   const apiBoundary = useSelector(
     (state: RootState) => state.APIBoundaryModule
@@ -185,6 +190,14 @@ export const AppRouter = () => {
   const payableRecords = useSelector(
     (state: RootState) => state.indexPage.indexAPI?.payableRecords
   );
+
+  // NOTICE: 純 H5 在用畫面阻擋
+  if(AndroidAppInfo.mode === 'H5') {
+    if(!isInit) {
+      // return <div>APP initialized wrongly</div>
+      return <div></div>
+    }
+  }
 
   return (
     <AppDataCollector>
