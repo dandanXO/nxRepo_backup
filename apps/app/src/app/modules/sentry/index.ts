@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { AppFlag } from '../../../environments/flag';
-import { Application } from '../application';
+import { Application } from '../environment';
 import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
 import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';

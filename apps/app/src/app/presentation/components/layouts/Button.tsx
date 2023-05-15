@@ -1,8 +1,6 @@
 import cx from 'classnames';
 import { TestingProps } from '../../../modules/TestingProps';
 import { TailSpin } from 'react-loading-icons';
-import { PagePathEnum } from '../../pages/PagePathEnum';
-import { getToken } from '../../../modules/location/getToken';
 import React from 'react';
 
 type Props = {

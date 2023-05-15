@@ -18,7 +18,7 @@ import { environment } from '../../../../../../environments/environment';
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from '../../../../components/layouts/Button';
 import { IRepaymentModalProps } from '../../index';
-import { formatPrice } from '../../../../../modules/formatPrice';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import { getToken } from '../../../../../modules/location/getToken';
 

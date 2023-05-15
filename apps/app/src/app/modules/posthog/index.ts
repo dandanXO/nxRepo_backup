@@ -1,5 +1,5 @@
 import posthog from 'posthog-js';
-import { Application } from '../application';
+import { Application } from '../environment';
 import { environment } from '../../../environments/environment';
 import { IndiaCountry } from '../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../libs/shared/domain/src/country/PakistanCountry';
