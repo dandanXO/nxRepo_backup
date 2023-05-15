@@ -46,7 +46,8 @@ export function* systemStartInitSaga() {
     // yield cancel(callGetUserInfoTask);
 
     console.log('[app][saga] systemStartInitSaga');
-    yield put(appSlice.actions.init(null));
+    yield put(appSlice.actions.init(true));
+
   } catch (error) {
     // NOTE: 這邊也能收到其他 action error
     yield catchSagaError(error);

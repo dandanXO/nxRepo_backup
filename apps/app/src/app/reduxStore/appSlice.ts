@@ -27,8 +27,8 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    init: (state: InitailState, action: PayloadAction<null>) => {
-      state.isInit = true;
+    init: (state: InitailState, action: PayloadAction<boolean>) => {
+      state.isInit = action.payload;
     },
     updateInit: (
       state: InitailState,

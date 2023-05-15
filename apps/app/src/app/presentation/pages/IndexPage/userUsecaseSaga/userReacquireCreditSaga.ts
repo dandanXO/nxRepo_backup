@@ -3,7 +3,7 @@ import { call, delay, put, take } from 'redux-saga/effects';
 import { Service } from '../../../../api';
 import { IndexPageSagaAction } from './index';
 import { GetQuotaModelStatusResponse } from '../../../../api/loanService/GetQuotaModelStatusResponse';
-import { catchSagaError } from '../../../utils/catchSagaError';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 
 const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);

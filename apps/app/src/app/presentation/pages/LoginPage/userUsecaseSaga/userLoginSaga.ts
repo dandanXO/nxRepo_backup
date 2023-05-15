@@ -27,7 +27,6 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
       yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));
     }
   } catch (error) {
-    // console.log("userLoginSaga.error", error);
     yield catchSagaError(error);
   }
 }

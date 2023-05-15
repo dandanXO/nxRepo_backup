@@ -1,26 +1,21 @@
 import moment from 'moment-timezone';
 import { put, select, delay } from 'redux-saga/effects';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
-import { IndexPageSagaAction } from './index';
-import { catchSagaError } from '../../../utils/catchSagaError';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 
-export function* systemRefreshableCountdownSaga(action: any) {
+export function* systemCountdownSaga(action: any) {
   try {
-    console.log('systemRefreshableCountdownSaga.action', action);
-
+    // console.log("systemCountdownSaga.action", action);
     let countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
-    while (countdown.end === false) {
+    yield put(indexPageSlice.actions.updateRiskCountdown(countdown.time));
+
+    while (countdown.end === false && countdown.time !== '00:00:00') {
       yield delay(1000);
       countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
-      // console.log("countdown", countdown.time);
-      yield put(
-        indexPageSlice.actions.updateRefreshableCountdown(countdown.time)
-      );
+      yield put(indexPageSlice.actions.updateRiskCountdown(countdown.time));
     }
     // NOTICE: finished countdown
-    yield put(indexPageSlice.actions.expiredRefreshableCountdown({}));
-    // NOTE: 主動問後端資訊
-    yield put(IndexPageSagaAction.user.viewIndexPageAction());
+    yield put(indexPageSlice.actions.expiredRiskCountdown({}));
   } catch (error) {
     yield catchSagaError(error);
   }
@@ -41,20 +36,15 @@ const getTimeInfoBetweenCurrentAndCountDown = (quotaExpireTime: string) => {
   const padStartZero = (number: number) => {
     return String(number).padStart(2, '0');
   };
-  const days = duration.days();
-  const hours = duration.hours();
-  const minutes = duration.minutes();
-  const seconds = duration.seconds();
+  const hours = Math.max(duration.hours(), 0);
+  const minutes = Math.max(duration.minutes(), 0);
+  const seconds = Math.max(duration.seconds(), 0);
   const end = hours === 0 && minutes === 0 && seconds === 0;
-  // const time = `${padStartZero(days)} : ${padStartZero(hours)} : ${padStartZero(minutes)} : ${padStartZero(seconds)}`;
+  const time = `${padStartZero(hours)}:${padStartZero(minutes)}:${padStartZero(
+    seconds
+  )}`;
   return {
-    // time: time,
-    time: {
-      days: padStartZero(days),
-      hours: padStartZero(hours),
-      minutes: padStartZero(minutes),
-      seconds: padStartZero(seconds),
-    },
+    time,
     end,
   };
 };

@@ -102,9 +102,11 @@ export const usePakistanMobileWalletForm = (
 
   // Wallet Account  - 驗證
   const validateMobileWalletAccount = useCallback(() => {
+    // NOTICE: refactor
     const message = t('Account number should be 11 digits starting with 0.');
     const scheme = z.string().regex(/^0/, message).length(11, message);
-    const result = scheme.safeParse(mobileData.data);
+    const scheme2 = z.string().length(10, message);
+    const result = z.union([scheme, scheme2]).safeParse(mobileData.data);
     if (!result.success) {
       const firstError = result.error.format();
       const errorMessage = firstError._errors[0];
@@ -163,11 +165,17 @@ export const usePakistanMobileWalletForm = (
 
     if (props.isPostBankBindSaveToPKMutationLoading) return;
 
+    let mobileDataValue = mobileData.data;
+    // NOTE: 用戶沒填0時，給後端自動補0
+    if(String(mobileData.data).charAt(0) !== "0") {
+      mobileDataValue = "0" + mobileData.data
+    }
+
     props
       .triggerPostBankBindSaveToPKMutation({
         bankAccNr: '',
         mobileWallet: true,
-        mobileWalletAccount: mobileData.data,
+        mobileWalletAccount: mobileDataValue,
         walletVendor: (mobileWalletAccount && mobileWalletAccount.code) || '',
         iban: iBanData.data,
       })

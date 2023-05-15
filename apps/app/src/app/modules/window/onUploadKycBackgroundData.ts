@@ -1,5 +1,5 @@
 import { appStore } from '../../reduxStore';
-import { IndexPageSagaAction } from '../../usecaseFlow/type/userUsecaseSaga/indexPageSaga';
+import { IndexPageSagaAction } from '../../presentation/pages/IndexPage/userUsecaseSaga';
 
 window.onUploadKycBackgroundData = (uploaded: boolean) => {
   appStore.dispatch(
