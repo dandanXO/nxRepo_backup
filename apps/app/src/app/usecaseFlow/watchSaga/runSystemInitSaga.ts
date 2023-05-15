@@ -1,6 +1,5 @@
 import {call, put, select} from 'redux-saga/effects';
 import { Posthog } from '../../modules/posthog';
-import { PersonalInfoPageSagaActions } from '../../presentation/pages/PersonalInfoPage/userUsecaseSaga';
 import { AndroidAppInfo } from '../../modules/nativeAppInfo/persistent/androidAppInfo';
 import {appStore, RootState} from '../../reduxStore';
 import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
@@ -13,7 +12,6 @@ import {indexPageSlice} from "../../reduxStore/indexPageSlice";
 import {SentryModule} from "../../modules/sentry";
 import {appSlice} from "../../reduxStore/appSlice";
 import {alertModal} from "../../api/base/alertModal";
-import * as Sentry from "@sentry/react";
 import {catchSagaError} from "../utils/catchSagaError";
 
 export function* runSystemInitSaga() {

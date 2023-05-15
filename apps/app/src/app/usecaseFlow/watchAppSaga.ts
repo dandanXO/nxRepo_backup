@@ -6,7 +6,7 @@ import { watchIndexPageSaga } from '../presentation/pages/IndexPage/userUsecaseS
 import { watchPersonalInfoPageSaga } from '../presentation/pages/PersonalInfoPage/userUsecaseSaga/watchPersonalInfoPageSaga';
 import {
   runSystemInitSaga,
-} from './watchSaga/watchSystemInitWebviewAndH5Saga';
+} from './watchSaga/runSystemInitSaga';
 import {catchSagaError} from "./utils/catchSagaError";
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
