@@ -91,16 +91,9 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
               setBalanceValueErrorMessage('');
             }
             // setBalanceValue(value);
-            if (
-              value === 'KR' ||
-              value === 'PR' ||
-              value === 'PKR' ||
-              value === 'PK'
-            ) {
-              //
-            } else {
-              setBalanceValue(`${environment.currency} ${value}`);
-            }
+            if (!value.includes(environment.currency)) {
+                setBalanceValue(`${environment.currency} ${value}`);
+            } 
           }}
           onBlur={() => {}}
           errorMessage={

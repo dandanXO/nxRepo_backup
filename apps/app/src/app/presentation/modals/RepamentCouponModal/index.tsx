@@ -53,8 +53,8 @@ const RepamentCouponModal = () => {
 
   const CouponOption = (props: ICouponOption) => {
     return (
-      <div
-        className={`flex justfy-center items-center`}
+      <a
+        className={`flex justfy-center items-center `}
         onClick={() => setCheckedCoupon(props.index)}
       >
         <Coupon {...props} />
@@ -63,14 +63,14 @@ const RepamentCouponModal = () => {
         ) : (
           <MdRadioButtonUnchecked className={`fill-sky-500`} />
         )}
-      </div>
+      </a>
     );
   };
 
   const NotUsingCoupon = (props: ICouponOption) => {
     return (
-      <div
-        className={`flex justfy-center items-center ml-2 mb-7`}
+      <a
+        className={`flex justfy-center items-center ml-2 mb-7 `}
         onClick={() => setCheckedCoupon(props.index)}
       >
         <div className="grow text-left text-xs">
@@ -81,7 +81,7 @@ const RepamentCouponModal = () => {
         ) : (
           <MdRadioButtonUnchecked className={`fill-sky-500`} />
         )}
-      </div>
+      </a>
     );
   };
 

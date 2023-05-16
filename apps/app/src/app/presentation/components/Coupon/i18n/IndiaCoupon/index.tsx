@@ -129,7 +129,7 @@ const IndiaCoupon = (props: ICouponProps) => {
           //   disabled={status !== 'normal'} //只有normal才能點擊
           disabled={true}
           className={cx(
-            `text-xs whitespace-nowrap px-2 py-1 rounded text-white w-2/3`,
+            `text-xs whitespace-nowrap px-2 py-1 rounded text-white `,
             [typeStyle.buttonBG]
           )}
         >
