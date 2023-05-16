@@ -7,11 +7,12 @@ import {AppModeEnum, AppModeModel} from "../../persistant/appModeModel";
 
 const getPosthogConfig = (): PosthogConfig | null => {
   // if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {
-  if(AppGlobal.mode  === AppModeEnum.SimpleWebView) {
+  if(AppGlobal.mode === AppModeEnum.SimpleWebView) {
     // NOTE: SimpleWebView: payment, bind bankcard
     return null;
   } else {
-    // NOTE: IndexWebview, PureH5
+    // NOTE: IndexWebview
+    // NOTE: PureH5
     if(AppEnvironment.isLocalhost()) {
       return posthogConfigs["dev"];
     } else {
