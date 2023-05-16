@@ -11,7 +11,9 @@ import { NativeAppInfo } from '../../persistant/nativeAppInfo';
 
 const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
 
-if (AppFlag.enableSentry) {
+let load = false;
+if (AppFlag.enableSentry && load === false) {
+  load = true;
   const environmentName = AppEnvironment.getEnvironmentName();
   const replayConfig = {
     maskAllText: false,
@@ -99,7 +101,8 @@ export class SentryModule {
     }
     if(AppFlag.enablePosthog) {
       posthog.identify(userResponse.userName, {
-
+        'user.demoAccount': userResponse.demoAccount,
+        'user.phoneNo': userResponse.userName,
       })
     }
   }

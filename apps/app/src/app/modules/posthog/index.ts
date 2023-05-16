@@ -4,7 +4,6 @@ import {posthogConfigs} from "../../../environments/theme/posthogConfigs";
 import {NativeAppInfo} from "../../persistant/nativeAppInfo";
 import {PosthogConfig} from "../../../environments/theme/india/v55/posthog";
 import {AppModeEnum, AppModeModel} from "../../persistant/appModeModel";
-import {AppFlag} from "../../../environments/flag";
 
 const getPosthogConfig = (): PosthogConfig | null => {
   if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {
@@ -30,6 +29,8 @@ export class Posthog {
   static init() {
     const config = getPosthogConfig();
     if(config) {
+      console.log("Posthog.init");
+
       posthog.init(config.token, config.config);
       // posthog.init(v55PosthogConfig.token, v55PosthogConfig.config);
       // posthog.capture('my event', { property: 'value' })
@@ -39,6 +40,6 @@ export class Posthog {
   }
 }
 
-if(AppFlag.enablePosthog) {
-  Posthog.init();
-}
+// if(AppFlag.enablePosthog) {
+//   Posthog.init();
+// }
