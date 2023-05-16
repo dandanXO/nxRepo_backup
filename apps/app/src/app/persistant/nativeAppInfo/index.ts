@@ -9,6 +9,9 @@ export const AppTempFlag = {
   isWebview: true,
 };
 
+export const AppGlobal = {
+  mode: "",
+}
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());
 

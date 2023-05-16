@@ -1,12 +1,13 @@
 import posthog from 'posthog-js';
 import { AppEnvironment } from '../appEnvironment';
 import {posthogConfigs} from "../../../environments/theme/posthogConfigs";
-import {NativeAppInfo} from "../../persistant/nativeAppInfo";
+import {AppGlobal, NativeAppInfo} from "../../persistant/nativeAppInfo";
 import {PosthogConfig} from "../../../environments/theme/india/v55/posthog";
 import {AppModeEnum, AppModeModel} from "../../persistant/appModeModel";
 
 const getPosthogConfig = (): PosthogConfig | null => {
-  if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {
+  // if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {
+  if(AppGlobal.mode  === AppModeEnum.SimpleWebView) {
     // NOTE: SimpleWebView: payment, bind bankcard
     return null;
   } else {
