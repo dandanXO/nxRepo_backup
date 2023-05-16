@@ -46,17 +46,12 @@ export const ProductInterestRatePairsModal = (
                 return firstFields.map((firstField, i) => {
                     return (
                         <Card
+                            key={firstField.name}
                             title={`风控标签：${riskLabelMap[firstField.name].label}`}
                             headStyle={{ border: "none" }}
                             bodyStyle={{ paddingTop: 0 }}
                             style={{ marginBottom: '20px' }}
                         >
-                            <Form.Item
-                                name={[firstField.name, 'riskRank']}
-                                style={{ display: "none" }}
-                            >
-                                <Input  />
-                            </Form.Item>
                             <PreAndPostInterestGroups
                                 form={form}
                                 customAntFormFieldError={customAntFormFieldError}
