@@ -35,7 +35,7 @@ if (AppFlag.enableSentry && load === false) {
       new BrowserTracing(),
       // replay
       new Sentry.Replay(replayConfig),
-      new posthog.SentryIntegration(posthog, WebpackSentryConfig.org, WebpackSentryConfig.projectId, WebpackSentryConfig.url),
+      new posthog.SentryIntegration(posthog, WebpackSentryConfig.org, WebpackSentryConfig.projectId, WebpackSentryConfig.url + "organizations/"),
     ],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
