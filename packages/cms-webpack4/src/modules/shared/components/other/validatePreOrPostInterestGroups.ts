@@ -20,7 +20,7 @@ export const validateplusAmount = (value, errorText) => {
 }
 export const validatePreOrPostInterestGroups = (groups) => {
     const validateErrors = groups?.map((field, index) => {
-    
+
         const numError = validateNum(field?.num, "请输入起始期数");
         const preInterestError = validateValue(field?.preInterest, "请输入前置利息");
         const postInterestError = validateValue(field?.postInterest, "请输入後置利息");

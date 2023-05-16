@@ -270,7 +270,12 @@ const Index = (props: ProductFormProps) => {
                 top: false,
                 enabled: true,
                 templateType: 1,
-                productInterestRatePairs: [],
+                productInterestRatePairs: [
+                    { riskRank: 'EXCELLENT', content: [{ riskRank: 'EXCELLENT', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+                    { riskRank: 'GOOD', content: [{ riskRank: 'GOOD', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+                    { riskRank: 'NORMAL', content: [{ riskRank: 'NORMAL', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+                    { riskRank: 'ORDINARY', content: [{ riskRank: 'ORDINARY', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+                ],
                 newGuestLoanQuotaSwitch: 1,
                 oldGuestLoanQuotaSwitch: 1,
                 newGuestProductDisplayStatus: 1,

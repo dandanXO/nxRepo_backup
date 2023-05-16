@@ -185,6 +185,10 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                       <a style={{textDecoration:'underline'}} onClick={()=>setShowProductInterestRatePairsModal(true)}>配置</a>
                   </Form.Item>
                   <ProductInterestRatePairsModal
+                      form={props.form}
+                      customAntFormFieldError={props.customAntFormFieldError}
+                      setCustomAntFormFieldError={props.setCustomAntFormFieldError}
+                      interestRatePairsTouchInput={props.interestRatePairsTouchInput}
                       show={showProductInterestRatePairsModal}
                       onOk={handleProductInterestRatePairsModalOnOK}
                       handleCloseModal={handleProductInterestRatePairsModalOnClose}

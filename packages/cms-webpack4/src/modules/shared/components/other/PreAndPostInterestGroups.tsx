@@ -5,6 +5,9 @@ import { maxOneUnitFloatReplacer } from '../../utils/format/maxOneUnitFloatRepla
 import { FormInstance, useWatch } from 'antd/lib/form/Form';
 import { CustomAntFormFieldError } from '../../utils/validation/CustomAntFormFieldError';
 import { validateValue, validateNum, validateplusAmount } from './validatePreOrPostInterestGroups';
+import {
+    riskLabelMap
+} from "../../../product/components/pages/ProductPage/ProductForm/RateSettingSection/ProductInterestRatePairsModal";
 
 
 export const CustomLabel = (props: { style?: CSSProperties, children: string | ReactElement | ReactElement[] }) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style }}>{props.children}</div>
@@ -15,115 +18,123 @@ interface PreAndPostInterestGroupsProps {
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     interestRatePairsTouchInput: any;
-    fieldName: string;
+    parentName: string;
+    groupName: string;
+    fieldName: [number, string];
 }
 
 function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
     const { form, customAntFormFieldError, setCustomAntFormFieldError, interestRatePairsTouchInput, fieldName } = props;
-    const interestRatePairs = form.getFieldsValue()[fieldName];
+    const interestRatePairs = form.getFieldsValue()[props.parentName];
 
     useEffect(() => {
-
         if (!interestRatePairsTouchInput) return
-        if (!interestRatePairs[0]) return
+        console.log(interestRatePairsTouchInput)
 
-        const touchIndex = interestRatePairsTouchInput[0]?.name[1];
-        const toucField = interestRatePairsTouchInput[0]?.name[2];
-        const touchValue = interestRatePairsTouchInput[0]?.value;
+    },[interestRatePairsTouchInput])
 
-        const isPreOrPostInterest = toucField === 'preInterest' || toucField === 'postInterest';
+    // useEffect(() => {
+    //
+    //     if (!interestRatePairsTouchInput) return
+    //     if (!interestRatePairs[0]) return
+    //
+    //     const touchIndex = interestRatePairsTouchInput[0]?.name[1];
+    //     const toucField = interestRatePairsTouchInput[0]?.name[2];
+    //     const touchValue = interestRatePairsTouchInput[0]?.value;
+    //
+    //     const isPreOrPostInterest = toucField === 'preInterest' || toucField === 'postInterest';
+    //
+    //     const preInterest = interestRatePairs[touchIndex]?.preInterest;
+    //     const postInterest = interestRatePairs[touchIndex]?.postInterest;
+    //
+    //     const isOver100 = Number(preInterest) + Number(postInterest) > 100;
+    //
+    //     if (toucField === 'num') {
+    //         setCustomAntFormFieldError(prev => {
+    //             const error = validateNum(touchValue, "请输入起始期数");
+    //             prev[fieldName][touchIndex] = {
+    //                 ...prev[fieldName][touchIndex],
+    //                 ['num']: {
+    //                     validateStatus: error ? "error" : "",
+    //                     help: error,
+    //                     value: touchValue,
+    //                 },
+    //             }
+    //             return {
+    //                 ...prev,
+    //                 [fieldName]: prev[fieldName]
+    //             }
+    //         })
+    //     }
+    //
+    //     if (toucField === 'plusAmount') {
+    //         setCustomAntFormFieldError(prev => {
+    //             const error = validateplusAmount(touchValue, "请输入提額金额");
+    //             prev[fieldName][touchIndex] = {
+    //                 ...prev[fieldName][touchIndex],
+    //                 ['plusAmount']: {
+    //                     validateStatus: error ? "error" : "",
+    //                     help: error,
+    //                     value: touchValue,
+    //                 },
+    //             }
+    //             return {
+    //                 ...prev,
+    //                 [fieldName]: prev[fieldName]
+    //             }
+    //         })
+    //     }
+    //
+    //     if (interestRatePairsTouchInput[0]?.name?.length > 1 && isPreOrPostInterest) {
+    //
+    //         const preOrPostInterestErrorText = toucField === 'preInterest' ? '前置' : '後置';
+    //         const preOrPostInterestrror = validateValue(touchValue, `请输入${preOrPostInterestErrorText}利息`);
+    //         const preInterestError = validateValue(preInterest, "请输入前置利息");
+    //         const postInterestError = validateValue(postInterest, "请输入後置利息");
+    //
+    //         setCustomAntFormFieldError(prev => {
+    //
+    //             if (preInterestError === '' && postInterestError === '') {
+    //                 prev[fieldName][touchIndex] = {
+    //                     ...prev[fieldName][touchIndex],
+    //                     preInterest: {
+    //                         validateStatus: isOver100 ? "error" : "",
+    //                         help: isOver100 ? "前置利息＋后置利息不得超过100%" : "",
+    //                     },
+    //                     postInterest: {
+    //                         validateStatus: isOver100 ? "error" : "",
+    //                         help: isOver100 ? "前置利息＋后置利息不得超过100%" : ""
+    //                     },
+    //                 }
+    //             } else {
+    //                 prev[fieldName][touchIndex] = {
+    //                     ...prev[fieldName][touchIndex],
+    //                     [toucField]: {
+    //                         validateStatus: preOrPostInterestrror ? "error" : "",
+    //                         help: preOrPostInterestrror,
+    //                         value: touchValue,
+    //                     },
+    //                 }
+    //             }
+    //             return {
+    //                 ...prev,
+    //                 [fieldName]: prev[fieldName]
+    //             }
+    //         })
+    //     }
+    // }, [interestRatePairsTouchInput])
 
-        const preInterest = interestRatePairs[touchIndex]?.preInterest;
-        const postInterest = interestRatePairs[touchIndex]?.postInterest;
-
-        const isOver100 = Number(preInterest) + Number(postInterest) > 100;
-
-        if (toucField === 'num') {
-            setCustomAntFormFieldError(prev => {
-                const error = validateNum(touchValue, "请输入起始期数");
-                prev[fieldName][touchIndex] = {
-                    ...prev[fieldName][touchIndex],
-                    ['num']: {
-                        validateStatus: error ? "error" : "",
-                        help: error,
-                        value: touchValue,
-                    },
-                }
-                return {
-                    ...prev,
-                    [fieldName]: prev[fieldName]
-                }
-            })
-        }
-
-        if (toucField === 'plusAmount') {
-            setCustomAntFormFieldError(prev => {
-                const error = validateplusAmount(touchValue, "请输入提額金额");
-                prev[fieldName][touchIndex] = {
-                    ...prev[fieldName][touchIndex],
-                    ['plusAmount']: {
-                        validateStatus: error ? "error" : "",
-                        help: error,
-                        value: touchValue,
-                    },
-                }
-                return {
-                    ...prev,
-                    [fieldName]: prev[fieldName]
-                }
-            })
-        }
-
-        if (interestRatePairsTouchInput[0]?.name?.length > 1 && isPreOrPostInterest) {
-
-            const preOrPostInterestErrorText = toucField === 'preInterest' ? '前置' : '後置';
-            const preOrPostInterestrror = validateValue(touchValue, `请输入${preOrPostInterestErrorText}利息`);
-            const preInterestError = validateValue(preInterest, "请输入前置利息");
-            const postInterestError = validateValue(postInterest, "请输入後置利息");
-
-            setCustomAntFormFieldError(prev => {
-
-                if (preInterestError === '' && postInterestError === '') {
-                    prev[fieldName][touchIndex] = {
-                        ...prev[fieldName][touchIndex],
-                        preInterest: {
-                            validateStatus: isOver100 ? "error" : "",
-                            help: isOver100 ? "前置利息＋后置利息不得超过100%" : "",
-                        },
-                        postInterest: {
-                            validateStatus: isOver100 ? "error" : "",
-                            help: isOver100 ? "前置利息＋后置利息不得超过100%" : ""
-                        },
-                    }
-                } else {
-                    prev[fieldName][touchIndex] = {
-                        ...prev[fieldName][touchIndex],
-                        [toucField]: {
-                            validateStatus: preOrPostInterestrror ? "error" : "",
-                            help: preOrPostInterestrror,
-                            value: touchValue,
-                        },
-                    }
-                }
-                return {
-                    ...prev,
-                    [fieldName]: prev[fieldName]
-                }
-            })
-        }
-    }, [interestRatePairsTouchInput])
-
-    const handleUpdateCustomAntFormFieldError = (index) => {
-
-        setCustomAntFormFieldError(prev => {
-            delete prev[fieldName][index];
-            const interestRatePairs = JSON.parse(JSON.stringify(prev[fieldName]))
-            const latestInterestRatePairs = Object.keys(interestRatePairs).reduce((init, curr, currIndex) => {
-                return { ...init, [currIndex]: interestRatePairs[curr] }
-            }, {})
-            return { ...prev, [fieldName]: latestInterestRatePairs }
-        })
-    }
+    // const handleUpdateCustomAntFormFieldError = (index) => {
+    //
+    //     setCustomAntFormFieldError(prev => {
+    //         delete prev[fieldName][index];
+    //         const interestRatePairs = JSON.parse(JSON.stringify(prev[fieldName]))
+    //         const latestInterestRatePairs = Object.keys(interestRatePairs).reduce((init, curr, currIndex) => {
+    //             return { ...init, [currIndex]: interestRatePairs[curr] }
+    //         }, {})
+    //         return { ...prev, [fieldName]: latestInterestRatePairs }
+    //     })
+    // }
 
     return (
         <Form.List name={fieldName}>
@@ -157,17 +168,25 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
 
                                 <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
                                     <Form.Item
+                                        { ...(index !== 0 ) && { initialValue : riskLabelMap[fieldName[0]].key }}
+                                        name={[name, props.groupName]}
+                                        style={{ display: "none" }}
+                                    >
+                                        <Input />
+                                    </Form.Item>
+                                    <Form.Item
+                                        {...(index !== 0) && {initialValue: ''}}
                                         {...restField}
                                         style={{ width: 125 }}
                                         name={[name, 'num']}
                                         validateStatus={customAntFormFieldError?.productInterestRatePairs?.[index]?.num?.validateStatus || ""}
                                         help={customAntFormFieldError?.productInterestRatePairs?.[index]?.num?.help || ""}
-                                        initialValue={''}
                                     >
                                         <Input placeholder="起始期数" />
                                     </Form.Item>
                                     <Form.Item
                                         style={{ width: 125 }}
+                                        {...(index !== 0) && {initialValue: ''}}
                                         {...restField}
                                         name={[name, 'preInterest']}
                                         validateStatus={customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.validateStatus || ""}
@@ -175,12 +194,12 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                         normalize={(value, prevValue, prevValues) => {
                                             return maxOneUnitFloatReplacer(value);
                                         }}
-                                        initialValue={''}
                                     >
                                         <Input placeholder="前置利息" suffix={"%"} />
                                     </Form.Item>
                                     <Form.Item
                                         {...restField}
+                                        {...(index !== 0) && {initialValue: ''}}
                                         style={{ width: 125 }}
                                         name={[name, 'postInterest']}
                                         validateStatus={customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.validateStatus || ""}
@@ -188,22 +207,21 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                         normalize={(value, prevValue, prevValues) => {
                                             return maxOneUnitFloatReplacer(value);
                                         }}
-                                        initialValue={''}
                                     >
                                         <Input placeholder="后置利息" suffix={"%"} />
                                     </Form.Item>
                                     <Form.Item
                                         {...restField}
+                                        {...(index !== 0) && {initialValue: ''}}
                                         style={{ width: 125 }}
                                         name={[name, 'plusAmount']}
                                         validateStatus={customAntFormFieldError?.productInterestRatePairs?.[index]?.plusAmount?.validateStatus || ""}
                                         help={customAntFormFieldError?.productInterestRatePairs?.[index]?.plusAmount?.help || ""}
-                                        initialValue={''}
                                     >
                                         <Input placeholder="提額金额" />
                                     </Form.Item>
                                     {index !== 0 && <MinusCircleOutlined onClick={() => {
-                                        handleUpdateCustomAntFormFieldError(index);
+                                        // handleUpdateCustomAntFormFieldError(index);
                                         remove(name);
                                     }} />}
                                 </Space>
