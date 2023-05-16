@@ -12,7 +12,7 @@ import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { GetOpenIndexResponse } from '../../../../api/indexService/GetOpenIndexResponse';
 import { RootState } from '../../../../reduxStore';
 import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
-import { getToken } from '../../../../modules/location/getToken';
+import { getToken } from '../../../../modules/querystring/getToken';
 import { systemCallGetUserInfoSaga } from '../../../../usecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
 
 export function* userViewIndexPageSaga(action: any) {

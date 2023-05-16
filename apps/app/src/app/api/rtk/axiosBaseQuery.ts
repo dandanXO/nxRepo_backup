@@ -5,8 +5,7 @@ import { runAxios } from '../base/runAxios';
 
 import * as Sentry from '@sentry/react';
 import { AppFlag } from '../../../environments/flag';
-import { AndroidAppInfo } from '../../modules/nativeAppInfo/persistent/androidAppInfo';
-import { SentryModule } from '../../modules/sentry';
+import {NativeAppInfo} from '../../persistant/nativeAppInfo';
 
 export interface CustomAxiosError {
   status: any;
@@ -89,14 +88,14 @@ const axiosBaseQuery =
       if (AppFlag.enableSentry) {
         Sentry.captureException(frontendError, {
           tags: {
-            packageId: AndroidAppInfo.packageId,
-            uiVersion: AndroidAppInfo.uiVersion,
-            mode: AndroidAppInfo.mode,
-            appName: AndroidAppInfo.appName,
-            domain: AndroidAppInfo.domain,
+            packageId: NativeAppInfo.packageId,
+            uiVersion: NativeAppInfo.uiVersion,
+            mode: NativeAppInfo.mode,
+            appName: NativeAppInfo.appName,
+            domain: NativeAppInfo.domain,
           },
           extra: {
-            environment: AndroidAppInfo.environment,
+            environment: NativeAppInfo.environment,
           },
         });
       }

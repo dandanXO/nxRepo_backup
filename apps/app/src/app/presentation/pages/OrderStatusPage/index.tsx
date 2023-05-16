@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
 import { useEffect } from 'react';
 import { Navigation } from '../../components/layouts/Navigation';
-import { getOrderNo } from '../../../modules/location/getOrderNo';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 
 import { isInAndroid } from '../../../modules/window/isInAndroid';
 import { OrderStatusItem } from './OrderStatusItem';

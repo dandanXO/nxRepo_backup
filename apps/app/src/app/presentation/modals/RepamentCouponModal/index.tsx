@@ -9,7 +9,7 @@ import { useLazyGetCouponApplicableListQuery } from '../../../api/rtk';
 import { Navigation } from '../../components/layouts/Navigation';
 import NoData from './NoData.svg';
 import { Button } from '../../components/layouts/Button';
-import { getToken } from '../../../modules/location/getToken';
+import { getToken } from '../../../modules/querystring/getToken';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { environment } from 'apps/app/src/environments/environment';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';

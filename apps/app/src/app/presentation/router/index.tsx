@@ -16,7 +16,7 @@ import { TabBar } from '../components/layouts/TabBar';
 import { RootState } from '../../reduxStore';
 import { PagePathEnum } from '../pages/PagePathEnum';
 import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
-import {AndroidAppInfo} from "../../modules/nativeAppInfo/persistent/androidAppInfo";
+import {NativeAppInfo} from "../../persistant/nativeAppInfo";
 
 const AuthPage = loadable(
   () => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage')
@@ -192,12 +192,13 @@ export const AppRouter = () => {
   );
 
   // NOTICE: 純 H5 在用畫面阻擋
-  if(AndroidAppInfo.mode === 'H5') {
-    if(!isInit) {
+  // if(NativeAppInfo.mode === 'H5' && !isInit) {
+    // if(!isInit) {
       // return <div>APP initialized wrongly</div>
-      return <div></div>
-    }
-  }
+      // return <div>H5 mode is initializing</div>
+    // }
+  // }
+
 
   return (
     <AppDataCollector>

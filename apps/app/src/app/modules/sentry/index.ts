@@ -1,16 +1,16 @@
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { AppFlag } from '../../../environments/flag';
-import { Application } from '../environment';
+import { AppEnvironment } from '../appEnvironment';
 import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
 import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
-import { AndroidAppInfo } from '../nativeAppInfo/persistent/androidAppInfo';
+import { NativeAppInfo } from '../../persistant/nativeAppInfo';
 
 const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
 
 if (AppFlag.enableSentry) {
-  const environmentName = Application.getEnvironmentName();
+  const environmentName = AppEnvironment.getEnvironmentName();
   const replayConfig = {
     maskAllText: false,
     maskAllInputs: false,
@@ -36,7 +36,7 @@ if (AppFlag.enableSentry) {
     replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
     replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   };
-  if (!Application.isLocalhost()) {
+  if (!AppEnvironment.isLocalhost()) {
     sentryConfig.release = AppInfo.COMMITHASH;
   }
   Sentry.init(sentryConfig);
@@ -56,19 +56,20 @@ export class SentryModule {
   ) {
     if (!AppFlag.enableSentry) return;
 
-    console.log('appInfo', AndroidAppInfo);
+    console.log('appInfo', NativeAppInfo);
+
     Sentry.captureMessage(message, {
       level: 'info',
       tags: {
-        packageId: AndroidAppInfo.packageId,
-        uiVersion: AndroidAppInfo.uiVersion,
-        mode: AndroidAppInfo.mode,
-        appName: AndroidAppInfo.appName,
-        domain: AndroidAppInfo.domain,
+        packageId: NativeAppInfo.packageId,
+        uiVersion: NativeAppInfo.uiVersion,
+        mode: NativeAppInfo.mode,
+        appName: NativeAppInfo.appName,
+        domain: NativeAppInfo.domain,
         ...tags,
       },
       extra: {
-        environment: AndroidAppInfo.environment,
+        environment: NativeAppInfo.environment,
         ...extra,
       },
     });

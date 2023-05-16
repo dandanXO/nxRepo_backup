@@ -3,7 +3,7 @@ import { Overlay } from '@frontend/mobile/shared/ui';
 import { useLocation, useNavigate } from 'react-router';
 import useExtendCreate from '../../hooks/useExtendCreate';
 import useRepayTypes from '../../hooks/useRepayTypes';
-import { getOrderNo } from '../../../modules/location/getOrderNo';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { renderByCountry } from '../../../modules/i18n';
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';

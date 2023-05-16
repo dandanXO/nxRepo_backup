@@ -11,7 +11,7 @@ import * as ReactDOM from 'react-dom/client';
 import { environment } from './environments/environment';
 
 // NOTE: Modules
-import { AndroidAppInfo } from './app/modules/nativeAppInfo/persistent/androidAppInfo';
+import { NativeAppInfo } from './app/persistant/nativeAppInfo';
 import { applyCustomTheme } from './app/modules/theme';
 import './app/modules/i18n';
 import './app/modules/timezone';
@@ -33,7 +33,6 @@ const renderApp = () => {
   if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
     const appInfoStr = window['AppInfoTask']['getAppInfo']();
     const originalAppInfo = JSON.parse(appInfoStr);
-
     SentryModule.captureMessage(
       'App load Original AndroidAppInfo',
       {
@@ -54,7 +53,7 @@ const renderApp = () => {
   SentryModule.captureMessage('App load AndroidAppInfo');
 
   // NOTICE: Theme
-  applyCustomTheme(AndroidAppInfo);
+  applyCustomTheme(NativeAppInfo);
 
   // NOTE: Starting to render
   const root = ReactDOM.createRoot(

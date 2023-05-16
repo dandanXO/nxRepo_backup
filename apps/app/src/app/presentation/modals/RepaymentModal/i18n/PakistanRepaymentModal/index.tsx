@@ -11,7 +11,7 @@ import { environment } from '../../../../../../environments/environment';
 import { Button } from '../../../../components/layouts/Button';
 import { IRepaymentModalProps } from '../../index';
 import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
-import { getToken } from '../../../../../modules/location/getToken';
+import { getToken } from '../../../../../modules/querystring/getToken';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import cx from 'classnames';
 import moment from 'moment';
