@@ -29,12 +29,13 @@ const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {URL, WebpackSentryConfig} = require("../src/app/modules/sentry");
 
 const PUBLIC_PATH = !isProduction ? '/' : '/v2/';
 console.log('PUBLIC_PATH', PUBLIC_PATH);
 
 const ASSET_OUTPUT_PATH = 'asset';
+
+const WebpackSentryConfig = require("../src/app/modules/sentry/WebpackSentryConfig.json");
 
 let proxyURL = 'https://app.india-api-dev.com';
 if (process.env.NODE_COUNTRY === 'in') {
