@@ -27,6 +27,8 @@ export function* runSystemInitSaga() {
 
     if (NativeAppInfo.mode === 'Webview') {
 
+      console.log("NativeAppInfo.mode === 'Webview'");
+
       const location: Location = yield select((state: RootState) => state.navigator.location)
 
       if(location.pathname === PagePathEnum.IndexPage) {
@@ -51,8 +53,12 @@ export function* runSystemInitSaga() {
       } else {
 
         const token = getToken();
+
+        console.log("token", token);
+
         alertModal(token);
         if(!token) return alertModal("Backend Error: Please be with token");
+
         // NOTICE: 直接進行登入
         // NOTICE: 還款頁面、綁卡頁面、IBAN 說明頁面 (使用 URL Querystring Token 進行登入)
 
