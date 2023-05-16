@@ -145,3 +145,4 @@ export const getAppInfo = (): IAndroidAppInfo => {
 };
 
 export const NativeAppInfo = getAppInfo();
+console.log("NativeAppInfo", NativeAppInfo);
