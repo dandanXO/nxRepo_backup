@@ -4,6 +4,7 @@ import {posthogConfigs} from "../../../environments/theme/posthogConfigs";
 import {NativeAppInfo} from "../../persistant/nativeAppInfo";
 import {PosthogConfig} from "../../../environments/theme/india/v55/posthog";
 import {AppModeEnum, AppModeModel} from "../../persistant/appModeModel";
+import {AppFlag} from "../../../environments/flag";
 
 const getPosthogConfig = (): PosthogConfig | null => {
   if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {
@@ -36,4 +37,8 @@ export class Posthog {
       throw new Error("尚未配置 Posthog")
     }
   }
+}
+
+if(AppFlag.enablePosthog) {
+  Posthog.init();
 }

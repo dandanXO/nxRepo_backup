@@ -1,9 +1,11 @@
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import { AppFlag } from '../../../environments/flag';
-import { AppEnvironment } from '../appEnvironment';
 import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
+import posthog from 'posthog-js'
+import { AppFlag } from '../../../environments/flag';
+import { AppEnvironment } from '../appEnvironment';
+
 import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
 
@@ -27,6 +29,7 @@ if (AppFlag.enableSentry) {
       new BrowserTracing(),
       // replay
       new Sentry.Replay(replayConfig),
+      new posthog.SentryIntegration(posthog),
     ],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
@@ -75,25 +78,33 @@ export class SentryModule {
     });
   }
   static userLogin(userResponse: GetUserInfoServiceResponse) {
-    if (!AppFlag.enableSentry) return;
-    const userInfo = {
-      'user.demoAccount': userResponse.demoAccount,
-      'user.phoneNo': userResponse.userName,
-      'user.organic': userResponse.organic,
-      'user.oldUser': userResponse.oldUser,
-      'user.status': getUserStatusName(userResponse.status),
-      'user.needUpdateKyc': userResponse.needUpdateKyc,
-    };
-    // console.log('userInfo', userInfo);
-    Sentry.setContext('Custom - User Info', userInfo);
+    if (AppFlag.enableSentry) {
+      const userInfo = {
+        'user.demoAccount': userResponse.demoAccount,
+        'user.phoneNo': userResponse.userName,
+        'user.organic': userResponse.organic,
+        'user.oldUser': userResponse.oldUser,
+        'user.status': getUserStatusName(userResponse.status),
+        'user.needUpdateKyc': userResponse.needUpdateKyc,
+      };
+      // console.log('userInfo', userInfo);
+      Sentry.setContext('Custom - User Info', userInfo);
 
-    const accountInfo = {
-      // NOTE: 帳號個人資訊
-      username: userResponse.userName,
-    };
-    // console.log("[sentry] accountInfo", accountInfo);
-    Sentry.setUser(accountInfo);
+      const accountInfo = {
+        // NOTE: 帳號個人資訊
+        username: userResponse.userName,
+      };
+      // console.log("[sentry] accountInfo", accountInfo);
+      Sentry.setUser(accountInfo);
+    }
+    if(AppFlag.enablePosthog) {
+      posthog.identify(userResponse.userName, {
+
+      })
+    }
   }
+
+
 }
 
 // export const SentryModuleInstance = new SentryModule();
