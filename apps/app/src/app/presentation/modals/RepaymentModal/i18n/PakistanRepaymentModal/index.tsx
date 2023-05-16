@@ -169,20 +169,15 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         </>
       )}
 
-      {radioValue !== 'custom' && (
-        <div className="mt-3 font-bold">
+      <div className="mt-3 font-bold">
           <ListItem
-            title={'Repayment Amount'}
-            text={
-              <Money
-                money={
-                  Number(balance) - Number(coupon ? coupon.discountAmount : 0)
-                }
-              />
-            }
-          />
-        </div>
-      )}
+              title={'Repayment Amount'}
+              text={radioValue !== 'custom' ?
+                  <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} /> :
+                  <Money money={balanceValue.replace(`${environment.currency}`, '').trim()} />
+              }
+           />
+      </div>
 
       <div className={`flex flex-row my-3`}>
         <div className={`mr-1.5 w-full `}>
