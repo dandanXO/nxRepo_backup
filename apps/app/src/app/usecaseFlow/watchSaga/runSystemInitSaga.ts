@@ -1,6 +1,6 @@
 import {call, put, select} from 'redux-saga/effects';
 import {Posthog} from '../../modules/posthog';
-import {NativeAppInfo} from '../../persistant/nativeAppInfo';
+import {AppGlobal, AppTempFlag, NativeAppInfo} from '../../persistant/nativeAppInfo';
 import {appStore, RootState} from '../../reduxStore';
 import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';
 import {getToken} from "../../modules/querystring/getToken";
@@ -14,6 +14,7 @@ import {appSlice} from "../../reduxStore/appSlice";
 import {alertModal} from "../../api/base/alertModal";
 import {catchSagaError} from "../utils/catchSagaError";
 import {AppModeEnum, AppModeModel} from "../../persistant/appModeModel";
+
 
 export function* runSystemInitSaga() {
   try {
@@ -33,14 +34,16 @@ export function* runSystemInitSaga() {
 
       if(location.pathname === PagePathEnum.IndexPage) {
         // NOTICE: IndexWebview
-        AppModeModel.setMode(AppModeEnum.IndexWebview);
+        // AppModeModel.setMode(AppModeEnum.IndexWebview);
+        AppGlobal.mode = AppModeEnum.IndexWebview;
 
         // NOTE: Posthog
         yield call(Posthog.init);
 
       } else {
         // NOTICE: SimpleWebView
-        AppModeModel.setMode(AppModeEnum.SimpleWebView)
+        // AppModeModel.setMode(AppModeEnum.SimpleWebView)
+        AppGlobal.mode = AppModeEnum.SimpleWebView;
       }
 
       // NOTICE: 不需要登入頁面
@@ -81,7 +84,8 @@ export function* runSystemInitSaga() {
     } else if (NativeAppInfo.mode === 'H5') {
       console.log("NativeAppInfo.mode === 'H5'");
 
-      AppModeModel.setMode(AppModeEnum.PureH5)
+      // AppModeModel.setMode(AppModeEnum.PureH5)
+      AppGlobal.mode = AppModeEnum.PureH5;
 
       // NOTE: Posthog
       yield call(Posthog.init);
