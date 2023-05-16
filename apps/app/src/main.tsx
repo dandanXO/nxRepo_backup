@@ -1,5 +1,5 @@
 import "./app/modules/errorHandler";
-
+import './app/modules/posthog';
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 import { SentryModule } from './app/modules/sentry';
 

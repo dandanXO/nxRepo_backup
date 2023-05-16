@@ -1,15 +1,22 @@
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import { AppFlag } from '../../../environments/flag';
-import { AppEnvironment } from '../appEnvironment';
 import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
+import posthog from 'posthog-js'
+import { AppFlag } from '../../../environments/flag';
+import { AppEnvironment } from '../appEnvironment';
+
 import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
+import {appStore, RootState} from "../../reduxStore";
 
+// NOTICE: refactor me
 const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
 
-if (AppFlag.enableSentry) {
+let load = false;
+
+if (AppFlag.enableSentry && load === false) {
+  load = true;
   const environmentName = AppEnvironment.getEnvironmentName();
   const replayConfig = {
     maskAllText: false,
@@ -27,6 +34,7 @@ if (AppFlag.enableSentry) {
       new BrowserTracing(),
       // replay
       new Sentry.Replay(replayConfig),
+      new posthog.SentryIntegration(posthog),
     ],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
@@ -58,6 +66,10 @@ export class SentryModule {
 
     console.log('appInfo', NativeAppInfo);
 
+    const appState: RootState = appStore.getState()
+    const user = appState?.indexPage?.user
+    // console.log("user", user);
+
     Sentry.captureMessage(message, {
       level: 'info',
       tags: {
@@ -66,6 +78,7 @@ export class SentryModule {
         mode: NativeAppInfo.mode,
         appName: NativeAppInfo.appName,
         domain: NativeAppInfo.domain,
+        "user.phoneNo": user.userName !== "" ? user.userName : "unknown",
         ...tags,
       },
       extra: {
@@ -75,25 +88,34 @@ export class SentryModule {
     });
   }
   static userLogin(userResponse: GetUserInfoServiceResponse) {
-    if (!AppFlag.enableSentry) return;
-    const userInfo = {
-      'user.demoAccount': userResponse.demoAccount,
-      'user.phoneNo': userResponse.userName,
-      'user.organic': userResponse.organic,
-      'user.oldUser': userResponse.oldUser,
-      'user.status': getUserStatusName(userResponse.status),
-      'user.needUpdateKyc': userResponse.needUpdateKyc,
-    };
-    // console.log('userInfo', userInfo);
-    Sentry.setContext('Custom - User Info', userInfo);
+    if (AppFlag.enableSentry) {
+      const userInfo = {
+        'user.demoAccount': userResponse.demoAccount,
+        'user.phoneNo': userResponse.userName,
+        'user.organic': userResponse.organic,
+        'user.oldUser': userResponse.oldUser,
+        'user.status': getUserStatusName(userResponse.status),
+        'user.needUpdateKyc': userResponse.needUpdateKyc,
+      };
+      // console.log('userInfo', userInfo);
+      Sentry.setContext('Custom - User Info', userInfo);
 
-    const accountInfo = {
-      // NOTE: 帳號個人資訊
-      username: userResponse.userName,
-    };
-    // console.log("[sentry] accountInfo", accountInfo);
-    Sentry.setUser(accountInfo);
+      const accountInfo = {
+        // NOTE: 帳號個人資訊
+        username: userResponse.userName,
+      };
+      // console.log("[sentry] accountInfo", accountInfo);
+      Sentry.setUser(accountInfo);
+    }
+    if(AppFlag.enablePosthog) {
+      posthog.identify(userResponse.userName, {
+        'user.demoAccount': userResponse.demoAccount,
+        'user.phoneNo': userResponse.userName,
+      })
+    }
   }
+
+
 }
 
 // export const SentryModuleInstance = new SentryModule();

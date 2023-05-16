@@ -18,10 +18,10 @@ import {AppModeEnum, AppModeModel} from "../../persistant/appModeModel";
 export function* runSystemInitSaga() {
   try {
 
-    if(AppModeModel.getMode()) {
-      console.log("[app] 已初始化")
-      return ;
-    }
+    // if(AppModeModel.getMode()) {
+    //   console.log("[app] 已初始化")
+    //   return ;
+    // }
 
     console.log("[app] 開始初始化")
 
@@ -32,6 +32,7 @@ export function* runSystemInitSaga() {
       if(location.pathname === PagePathEnum.IndexPage) {
         // NOTICE: IndexWebview
         AppModeModel.setMode(AppModeEnum.IndexWebview);
+
         // NOTE: Posthog
         yield call(Posthog.init);
 
@@ -50,6 +51,7 @@ export function* runSystemInitSaga() {
       } else {
 
         const token = getToken();
+        alertModal(token);
         if(!token) return alertModal("Backend Error: Please be with token");
         // NOTICE: 直接進行登入
         // NOTICE: 還款頁面、綁卡頁面、IBAN 說明頁面 (使用 URL Querystring Token 進行登入)
@@ -68,6 +70,7 @@ export function* runSystemInitSaga() {
       }
 
     } else if (NativeAppInfo.mode === 'H5') {
+      console.log("NativeAppInfo.mode === 'H5'");
 
       AppModeModel.setMode(AppModeEnum.PureH5)
 

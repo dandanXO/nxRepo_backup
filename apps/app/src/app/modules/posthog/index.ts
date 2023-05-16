@@ -29,6 +29,8 @@ export class Posthog {
   static init() {
     const config = getPosthogConfig();
     if(config) {
+      console.log("Posthog.init");
+
       posthog.init(config.token, config.config);
       // posthog.init(v55PosthogConfig.token, v55PosthogConfig.config);
       // posthog.capture('my event', { property: 'value' })
@@ -37,3 +39,7 @@ export class Posthog {
     }
   }
 }
+
+// if(AppFlag.enablePosthog) {
+//   Posthog.init();
+// }

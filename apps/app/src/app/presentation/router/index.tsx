@@ -16,7 +16,7 @@ import { TabBar } from '../components/layouts/TabBar';
 import { RootState } from '../../reduxStore';
 import { PagePathEnum } from '../pages/PagePathEnum';
 import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
-import {NativeAppInfo} from "../../persistant/nativeAppInfo";
+import posthog from "posthog-js";
 
 const AuthPage = loadable(
   () => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage')
@@ -199,6 +199,10 @@ export const AppRouter = () => {
     // }
   // }
 
+
+  React.useEffect(() => { // new
+    posthog.capture('$pageview')
+  }, [location]);
 
   return (
     <AppDataCollector>
