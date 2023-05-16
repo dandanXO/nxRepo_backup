@@ -29,6 +29,7 @@ const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {URL, WebpackSentryConfig} = require("../src/app/modules/sentry");
 
 const PUBLIC_PATH = !isProduction ? '/' : '/v2/';
 console.log('PUBLIC_PATH', PUBLIC_PATH);
@@ -51,7 +52,7 @@ module.exports = (config, context) => {
   const finalConfig = merge(config, {
     // devtool: false,
     // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
-    // devtool: "source-map",
+    devtool: "source-map",
     output: {
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
@@ -209,15 +210,14 @@ module.exports = (config, context) => {
 
     finalConfig.plugins.push(
       new SentryCliPlugin({
-        url: 'https://monitor.sijneokd.com',
-        authToken:
-          '2c48e3e9a9464236a5b057ecbd5c2683b52f676f3c294a3eae6bfeb923b6815c',
         debug: true,
+        url: WebpackSentryConfig.url,
+        authToken: WebpackSentryConfig.authToken,
+        org: WebpackSentryConfig.org,
+        project: WebpackSentryConfig.project,
         include: './dist/apps/app',
         ignoreFile: '.sentrycliignore',
         ignore: ['node_modules', 'webpack.config.js'],
-        org: 'sentry',
-        project: 'api-app',
         // configFile: 'sentry.properties',
         // setCommits: {
         //   auto: false,
