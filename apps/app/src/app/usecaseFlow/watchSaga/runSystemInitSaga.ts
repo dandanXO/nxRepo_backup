@@ -28,8 +28,6 @@ export function* runSystemInitSaga() {
 
     if (NativeAppInfo.mode === 'Webview') {
 
-      console.log("NativeAppInfo.mode === 'Webview'");
-
       const location: Location = yield select((state: RootState) => state.navigator.location)
 
       if(location.pathname === PagePathEnum.IndexPage) {
@@ -50,18 +48,13 @@ export function* runSystemInitSaga() {
       if(
         location.pathname === PagePathEnum.IBANFinderPage
       ) {
-        console.log("IBANFinderPage");
+        //
       } else if(location.pathname === PagePathEnum.LoginPage) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
-        console.log("LoginPage");
       } else {
-        console.log("OtherPage");
-
         const token = getToken();
-
-        console.log("token", token);
-
-        alertModal(token);
+        // console.log("token", token);
+        // alertModal(token);
 
         if(!token) return alertModal("Backend Error: Please be with token");
 
@@ -82,7 +75,6 @@ export function* runSystemInitSaga() {
       }
 
     } else if (NativeAppInfo.mode === 'H5') {
-      console.log("NativeAppInfo.mode === 'H5'");
 
       // AppModeModel.setMode(AppModeEnum.PureH5)
       AppGlobal.mode = AppModeEnum.PureH5;

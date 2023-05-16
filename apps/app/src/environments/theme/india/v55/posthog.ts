@@ -6,8 +6,8 @@ export type PosthogConfig = {
 }
 
 export const v55PosthogConfig: PosthogConfig = {
-  token: "",
+  token: "phc_XgUV9Wyjjny3nt7JVjEVlD3c4r4LJBkzb0w3Jb3I8Ov",
   config: {
-    api_host: "",
+    api_host: 'https://13.234.216.21:6600',
   }
 }
