@@ -6,21 +6,27 @@ import { catchSagaError } from '../../utils/catchSagaError';
 import { GetUserInfoServiceResponse } from '../../../api/userService/GetUserInfoServiceResponse';
 import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
 import { systemCallGetUserInfoSaga } from '../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
-import { AndroidAppInfo } from '../../../modules/nativeAppInfo/persistent/androidAppInfo';
+import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
 import { RootState } from '../../../reduxStore';
+import {getToken} from "../../../modules/querystring/getToken";
+import {alertModal} from "../../../api/base/alertModal";
 
 export function* systemStartInitSaga() {
-  try {
+  // try {
     console.log('[app][saga] systemStartInitSaga');
 
-    // NOTE: 是否啟用測試渠道(測試不好會出4)
     // const packageId = AndroidAppInfo.packageId;
     // console.log("[app][saga]  packageId", packageId);
-    yield put(appSlice.actions.updateAndroidInfo(AndroidAppInfo));
+    yield put(appSlice.actions.updateAndroidInfo(NativeAppInfo));
 
     const packageId: string = yield select(
       (state: RootState) => state.app.androidAppInfo?.packageId
     );
+
+    if(getToken() === "") {
+      console.log("missing token")
+      alertModal("missing token")
+    }
 
     const [response, userResponse]: [
       GetInitServiceResponse,
@@ -35,7 +41,7 @@ export function* systemStartInitSaga() {
     yield put(indexPageSlice.actions.updateUserAPI(userResponse));
     console.log('[app][saga][Service] AppService.getInit.response', response);
     console.log(
-      '[app][saga][Service] AppService.UserService.GetUserInfoService',
+      '[app][saga][Service] AppService.UserService.GetUserInfoService.userResponse',
       userResponse
     );
 
@@ -46,12 +52,14 @@ export function* systemStartInitSaga() {
     // yield cancel(callGetUserInfoTask);
 
     console.log('[app][saga] systemStartInitSaga');
+
     yield put(appSlice.actions.init(true));
 
-  } catch (error) {
+  // } catch (error) {
+  //   console.log("錯誤了", error)
     // NOTE: 這邊也能收到其他 action error
-    yield catchSagaError(error);
-  }
+    // yield catchSagaError(error);
+  // }
 }
 
 function* callGetInit(packageId: string) {

@@ -1,4 +1,4 @@
-import { IAndroidAppInfo } from '../nativeAppInfo/IAndroidAppInfo';
+import { IAndroidAppInfo } from '../../persistant/nativeAppInfo/types/IAndroidAppInfo';
 import { applyTheme } from './utils';
 
 const applyCustomSharedLibTheme = (androidAPPInfo: IAndroidAppInfo) => {

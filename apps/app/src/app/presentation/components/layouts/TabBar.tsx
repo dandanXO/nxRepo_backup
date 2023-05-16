@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import cx from 'classnames';
 import { PagePathEnum } from '../../pages/PagePathEnum';
-import { getToken } from '../../../modules/location/getToken';
+import { getToken } from '../../../modules/querystring/getToken';
 
 type Props = {
   hasOrder: boolean;

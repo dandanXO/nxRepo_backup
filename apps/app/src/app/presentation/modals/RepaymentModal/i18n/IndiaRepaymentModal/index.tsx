@@ -20,7 +20,7 @@ import { Button } from '../../../../components/layouts/Button';
 import { IRepaymentModalProps } from '../../index';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
-import { getToken } from '../../../../../modules/location/getToken';
+import { getToken } from '../../../../../modules/querystring/getToken';
 
 export const RepaymentModalContainer = styled.div`
   color: #101010;

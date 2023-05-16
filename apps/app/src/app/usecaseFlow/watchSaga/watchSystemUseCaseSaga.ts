@@ -16,4 +16,5 @@ export function* watchSystemUseCaseSaga() {
     errorFallback,
     systemRefreshableCountdownSaga
   );
+  console.log('[app][saga] 1.4 end');
 }

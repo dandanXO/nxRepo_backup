@@ -1,6 +1,6 @@
 import { environment } from '../../../environments/environment';
 
-export const Application = {
+export const AppEnvironment = {
   isLocalhost: function () {
     return window.location.hostname === 'localhost';
   },

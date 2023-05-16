@@ -16,16 +16,19 @@ export function* WatchAppSaga() {
     yield all([
       // NOTICE: run init
       runSystemInitSaga(),
+
       // NOTICE: watch common
       watchSystemInitSaga(),
       watchSystemUseCaseSaga(),
-      // NOTICE: watch pages
+
+      // NOTICE: watch by pages
       watchLoginPageSaga(),
       watchIndexPageSaga(),
       watchPersonalInfoPageSaga(),
     ]);
     console.log('[app][saga] 3');
   } catch (error) {
+    console.log("error", error);
     yield catchSagaError(error);
   }
 }

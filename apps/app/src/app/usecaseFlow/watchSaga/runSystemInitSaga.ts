@@ -1,9 +1,9 @@
 import {call, put, select} from 'redux-saga/effects';
-import { Posthog } from '../../modules/posthog';
-import { AndroidAppInfo } from '../../modules/nativeAppInfo/persistent/androidAppInfo';
+import {Posthog} from '../../modules/posthog';
+import {NativeAppInfo} from '../../persistant/nativeAppInfo';
 import {appStore, RootState} from '../../reduxStore';
-import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
-import {getToken} from "../../modules/location/getToken";
+import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';
+import {getToken} from "../../modules/querystring/getToken";
 import {Location} from "history";
 import {PagePathEnum} from "../../presentation/pages/PagePathEnum";
 import {GetUserInfoServiceResponse} from "../../api/userService/GetUserInfoServiceResponse";
@@ -13,17 +13,31 @@ import {SentryModule} from "../../modules/sentry";
 import {appSlice} from "../../reduxStore/appSlice";
 import {alertModal} from "../../api/base/alertModal";
 import {catchSagaError} from "../utils/catchSagaError";
+import {AppModeEnum, AppModeModel} from "../../persistant/appModeModel";
 
 export function* runSystemInitSaga() {
   try {
 
-    if (AndroidAppInfo.mode === 'Webview') {
+    if(AppModeModel.getMode()) {
+      console.log("[app] 已初始化")
+      return ;
+    }
+
+    console.log("[app] 開始初始化")
+
+    if (NativeAppInfo.mode === 'Webview') {
 
       const location: Location = yield select((state: RootState) => state.navigator.location)
 
       if(location.pathname === PagePathEnum.IndexPage) {
+        // NOTICE: IndexWebview
+        AppModeModel.setMode(AppModeEnum.IndexWebview);
         // NOTE: Posthog
-        yield call(Posthog.init, {});
+        yield call(Posthog.init);
+
+      } else {
+        // NOTICE: SimpleWebView
+        AppModeModel.setMode(AppModeEnum.SimpleWebView)
       }
 
       // NOTICE: 不需要登入頁面
@@ -53,13 +67,16 @@ export function* runSystemInitSaga() {
         yield put(appSlice.actions.init(true));
       }
 
-    } else if (AndroidAppInfo.mode === 'H5') {
+    } else if (NativeAppInfo.mode === 'H5') {
+
+      AppModeModel.setMode(AppModeEnum.PureH5)
 
       // NOTE: Posthog
-      yield call(Posthog.init, {});
+      yield call(Posthog.init);
 
       console.log('[app][saga] 2');
 
+      // NOTE: Only for H5
       appStore.dispatch(SystemCaseActions.InitSaga());
     }
   } catch (error) {

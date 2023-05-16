@@ -1,6 +1,5 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { getToken } from '../../modules/location/getToken';
-import { alertModal } from './alertModal';
+import axios, { AxiosRequestConfig } from 'axios';
+import { getToken } from '../../modules/querystring/getToken';
 
 export const runAxios = async (
   baseUrl: string,

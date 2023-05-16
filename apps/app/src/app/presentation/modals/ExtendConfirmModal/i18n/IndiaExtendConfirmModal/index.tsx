@@ -1,8 +1,8 @@
 import { useNavigate, useLocation } from 'react-router';
 
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
-import { getOrderNo } from '../../../../../modules/location/getOrderNo';
-import { getToken } from '../../../../../modules/location/getToken';
+import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../../../modules/querystring/getToken';
 import { Button } from '../../../../components/layouts/Button';
 
 const IndiaExtendConfirmModal = () => {

@@ -18,7 +18,7 @@ import { CustomAxiosError } from '../../../api/rtk/axiosBaseQuery';
 import { usePostRepayReceiptMutation } from '../../../api/rtk';
 import { PostRepayReceiptResponse } from '../../../api/rtk/old/PostRepayReceiptResponse';
 import { AppFlag } from '../../../../environments/flag';
-import { getOrderNo } from '../../../modules/location/getOrderNo';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 export interface PostRepayReceiptRequestProps {
   formFile: any;
   orderNo: string;
