@@ -32,7 +32,6 @@ export class Posthog {
     const config = getPosthogConfig();
     if(config) {
       console.log("Posthog.init");
-
       posthog.init(config.token, config.config);
       // posthog.init(v55PosthogConfig.token, v55PosthogConfig.config);
       // posthog.capture('my event', { property: 'value' })

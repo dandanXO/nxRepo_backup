@@ -70,23 +70,36 @@ export const getAppInfo = (): IAndroidAppInfo => {
           // if(AppTempFlag.isWebview) {
           //   console.log("1.包含線上版本: 印度 v55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值");
           // }
+          if(AppEnvironment.isDev()) {
+            appInfo = {
+              packageId: 'com.ind.kyc.application',
+              appName: 'dev_in',
+              environment: 'india',
+              uiVersion: '55',
+              domain: 'https://www.oasis-gold.com',
+              token: null,
+              // NOTICE: mode 的用途？
+              mode: 'Webview',
+            };
+          } else {
+            appInfo = {
+              // webview 不必要
+              domain: '',
+              // webview 不必要
+              environment: 'india',
+              // webview 不必要
+              packageId: 'unknown',
+              // webview 不必要
+              appName: 'unknown',
+              // NOTE: 換主題需要，但缺失
+              uiVersion: '55',
+              // webview 不必要
+              token: null,
+              // NOTE: required
+              mode: 'Webview',
+            };
+          }
 
-          appInfo = {
-            // webview 不必要
-            domain: '',
-            // webview 不必要
-            environment: 'india',
-            // webview 不必要
-            packageId: 'unknown',
-            // webview 不必要
-            appName: 'unknown',
-            // NOTE: 換主題需要，但缺失
-            uiVersion: '55',
-            // webview 不必要
-            token: null,
-            // NOTE: required
-            mode: 'Webview',
-          };
       }
 
 
