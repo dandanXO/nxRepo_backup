@@ -47,16 +47,19 @@ export function* runSystemInitSaga() {
       if(
         location.pathname === PagePathEnum.IBANFinderPage
       ) {
-        //
+        console.log("IBANFinderPage");
       } else if(location.pathname === PagePathEnum.LoginPage) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
+        console.log("LoginPage");
       } else {
+        console.log("OtherPage");
 
         const token = getToken();
 
         console.log("token", token);
 
         alertModal(token);
+
         if(!token) return alertModal("Backend Error: Please be with token");
 
         // NOTICE: 直接進行登入
@@ -89,6 +92,7 @@ export function* runSystemInitSaga() {
       appStore.dispatch(SystemCaseActions.InitSaga());
     }
   } catch (error) {
+    console.log(error);
     yield catchSagaError(error);
   }
 }
