@@ -704,6 +704,7 @@ describe('IndexPage', () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
+      // NOTICE: GIVEN: 用戶已認證
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -717,7 +718,6 @@ describe('IndexPage', () => {
       console.log("info");
     })
 
-    // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
       "totalAmount": 15000,
       "usedAmount": 15000,
@@ -775,14 +775,16 @@ describe('IndexPage', () => {
         }
       ],
       "needRiskKycUpdate": false,
-      // NOTICE: 優先權最高
+      // NOTE: 優先權最高
       "riskReject": false,
       "refreshable": true,
       "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
+      // NOTICE: GIVEN: 風控額度時間無效
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "seconds"),
       "oldUserForceApply": false,
+      // NOTICE: GIVEN: 沒有應還訂單
       "payableRecords": [],
       "marquee": "我是跑馬燈...",
       "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
@@ -896,6 +898,7 @@ describe('IndexPage', () => {
     //   body: getQuotaModelStatus,
     // })
 
+
     const getPendingQuotaModelStatus: GetQuotaModelStatusResponse = {
       calculating: true,
       effective: false,
@@ -906,6 +909,8 @@ describe('IndexPage', () => {
       effective: true,
       offerExpireTime: moment().tz(INDIA_TIME_ZONE).add("1", "days"),
     }
+
+    // NOTICE: 模擬要到第五次才成功取得有效風控額度資料
     let count = 1
     cy.intercept("get", "/api/v3/loan/quota-model-status", (req) => {
       req.continue(res => {
