@@ -4,6 +4,7 @@ import {posthogConfigs} from "../../../environments/theme/posthogConfigs";
 import {AppGlobal, NativeAppInfo} from "../../persistant/nativeAppInfo";
 import {PosthogConfig} from "../../../environments/theme/india/v55/posthog";
 import {AppModeEnum, AppModeModel} from "../../persistant/appModeModel";
+import {SentryModule} from "../sentry";
 
 const getPosthogConfig = (): PosthogConfig | null => {
   // if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {
@@ -36,7 +37,7 @@ export class Posthog {
       // posthog.init(v55PosthogConfig.token, v55PosthogConfig.config);
       // posthog.capture('my event', { property: 'value' })
     } else {
-      throw new Error("尚未配置 Posthog")
+      SentryModule.captureException("尚未配置 Posthog")
     }
   }
 }
