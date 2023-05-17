@@ -44,6 +44,7 @@ import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail'
 import { chain, add, multiply, divide, subtract, evaluate } from 'mathjs';
 import { PagePathEnum } from '../PagePathEnum';
 import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
+import {getToken} from "../../../modules/querystring/getToken";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -549,7 +550,7 @@ const IndexPage = () => {
         ) && (
           <Button
             onClick={() => {
-              navigate(PagePathEnum.ApplicationProgressPage);
+              navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
             }}
             dataTestingID={'viewAppProgress'}
             text={'View Application Progress'}
@@ -567,6 +568,7 @@ const IndexPage = () => {
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {
+          indexPageState.user.state !== USER_AUTH_STATE.authing &&
           (
             indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
             || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time

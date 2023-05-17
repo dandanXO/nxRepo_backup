@@ -22,7 +22,7 @@ const ApplicationProgressPage = () => {
         }}
       />
       <PageContent>
-        {currentData?.map((news) => {
+        {currentData && currentData?.map((news) => {
           return (
             <ProgressItem
               title={news.title}
@@ -31,6 +31,7 @@ const ApplicationProgressPage = () => {
             />
           );
         })}
+        {!currentData && <div>No Data</div>}
       </PageContent>
     </div>
   );

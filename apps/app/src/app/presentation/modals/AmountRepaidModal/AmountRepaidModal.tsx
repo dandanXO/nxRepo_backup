@@ -10,6 +10,7 @@ import { PagePathEnum } from '../../pages/PagePathEnum';
 import Divider from '../../components/Divider';
 import moment from 'moment';
 import Money from '../../components/Money.tsx';
+import {getToken} from "../../../modules/querystring/getToken";
 const ModalContentStyled = styled.div`
   padding: 0 12px;
 `;
@@ -102,7 +103,7 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
             </div>
           );
         }}
-        onCancel={() => navigate(PagePathEnum.RepaymentDetailPage)}
+        onCancel={() => navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`)}
         enableTitleHorizontal={true}
       ></Overlay>
     </div>

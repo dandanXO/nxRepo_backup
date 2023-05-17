@@ -38,7 +38,7 @@ export function *systemMainCountdownSaga() {
       );
     }
   } catch (error) {
-    catchSagaError(error);
+    yield catchSagaError(error);
   }
 
 }
