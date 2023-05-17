@@ -39,6 +39,8 @@ const axiosBaseQuery =
       console.log('[app] resultData:', resultData);
       return resultData;
     } catch (axiosError) {
+      console.log('error-2', axiosError);
+
       // NOTE: err
       const err: AxiosError = axiosError as AxiosError;
       console.info('[app] err:', err);
@@ -107,6 +109,7 @@ const axiosBaseQuery =
           data: err.response?.data || err.message,
         },
       };
+      // throw err;
     }
   };
 
