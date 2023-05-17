@@ -120,6 +120,7 @@ export const indexPageSlice = createSlice({
     },
     updateIndexAPI: (state, action: PayloadAction<GetIndexResponse>) => {
       // console.log("updateIndexAPI", state, action)
+
       state.indexAPI = action.payload;
       state.sharedIndex.marquee = action.payload.marquee;
 
