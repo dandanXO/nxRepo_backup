@@ -9,9 +9,9 @@ import { UploadSettingSection } from "./UploadSettingSection";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { GetAvailableMerchantResponse } from "../../../../service/product/response/getAvailableMerchantResponse";
 import OrderSettingSection from "./OrderSettingSection";
-import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
 
 interface ProductFormProps {
+    modal: any;
     productModalData: ProductFormModal;
     onFinish: (value: any) => void;
     form: any;
@@ -37,7 +37,7 @@ export const productInterestRatePairsInitialValue = [
 ]
 
 const Index = (props: ProductFormProps) => {
-    const { productModalData, onFinish, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
+    const { productModalData, onFinish, modal, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
 
     const layout = {
         labelCol: { span: 5 },
@@ -286,6 +286,7 @@ const Index = (props: ProductFormProps) => {
                 customAntFormFieldError={customAntFormFieldError}
             />
             <RateSettingSection
+                modal={modal}
                 form={form}
                 customAntFormFieldError={customAntFormFieldError}
                 setCustomAntFormFieldError={setCustomAntFormFieldError}

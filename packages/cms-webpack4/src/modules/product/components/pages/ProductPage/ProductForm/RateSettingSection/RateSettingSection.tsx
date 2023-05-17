@@ -11,10 +11,12 @@ import {
     validatePreOrPostInterestGroups
 } from "../../../../../../shared/components/other/validatePreOrPostInterestGroups";
 import { productInterestRatePairsInitialValue } from "../index";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
 interface RateSettingSectionProps {
+    modal: any;
     form: FormInstance;
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
@@ -24,6 +26,7 @@ export const CustomLabel = (props: {style?: CSSProperties, children: string}) =>
 
 const RateSettingSection = (props: RateSettingSectionProps) => {
   const [showProductInterestRatePairsModal, setShowProductInterestRatePairsModal] = useState(false)
+  const { confirm } = props.modal;
 
   const handleProductInterestRatePairsModalOnOK = () => {
       const { productInterestRatePairs } = props.form.getFieldsValue();
@@ -47,8 +50,22 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
 
   const handleProductInterestRatePairsModalOnClose = (e) => {
       e.stopPropagation();
-      props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue)
-      setShowProductInterestRatePairsModal(false)
+      confirm({
+          icon : null,
+          content: (
+              <div style={{ height: '20px', display: "flex" }}>
+                  <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
+                  <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将导致数据丢失。确定要离开吗？</div>
+              </div>
+          ),
+          onOk() {
+              props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue)
+              setShowProductInterestRatePairsModal(false)
+          },
+          onCancel() {
+              //
+          }
+      })
   }
 
     // console.log("customAntFormFieldError", props.customAntFormFieldError);

@@ -408,6 +408,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     }, []);
 
     return {
+        modal,
         productModalData,
         productFormData,
         setProductModalData,
