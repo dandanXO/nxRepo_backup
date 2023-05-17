@@ -3,7 +3,7 @@ import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
 import { userViewIndexPageSaga } from './userViewIndexPageSaga';
 import { userApplyProductsSaga } from './userApplyProductsSaga';
 import { userReacquireCreditSaga } from './userReacquireCreditSaga';
-import { IndexPageSagaAction } from './index';
+import { IndexPageSagaAction } from './indexPageActions';
 
 export function* watchIndexPageSaga() {
   console.log('[app][saga] 1.2');

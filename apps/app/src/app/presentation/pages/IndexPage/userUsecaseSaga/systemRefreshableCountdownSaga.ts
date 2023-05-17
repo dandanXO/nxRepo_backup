@@ -1,26 +1,32 @@
 import moment from 'moment-timezone';
 import { put, select, delay } from 'redux-saga/effects';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
-import { IndexPageSagaAction } from './index';
+import { IndexPageSagaAction } from './indexPageActions';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 
 export function* systemRefreshableCountdownSaga(action: any) {
-  try {
-    console.log('systemRefreshableCountdownSaga.action', action);
 
+  // NOTICE: 防止錯誤後無法重新 watch
+  try {
+    // console.log('systemRefreshableCountdownSaga.action', action);
     let countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
+
     while (countdown.end === false) {
       yield delay(1000);
       countdown = getTimeInfoBetweenCurrentAndCountDown(action.payload);
       // console.log("countdown", countdown.time);
+      // NOTE: 更新倒數顯示資料
       yield put(
         indexPageSlice.actions.updateRefreshableCountdown(countdown.time)
       );
     }
-    // NOTICE: finished countdown
+    // NOTE: 結束倒數計時
     yield put(indexPageSlice.actions.expiredRefreshableCountdown({}));
-    // NOTE: 主動問後端資訊
+
+    // TODO: refactor me
+    // NOTE: 主動問後端最新資料
     yield put(IndexPageSagaAction.user.viewIndexPageAction());
+
   } catch (error) {
     yield catchSagaError(error);
   }

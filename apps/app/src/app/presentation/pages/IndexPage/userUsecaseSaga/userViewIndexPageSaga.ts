@@ -14,13 +14,16 @@ import { RootState } from '../../../../reduxStore';
 import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
 import { getToken } from '../../../../modules/querystring/getToken';
 import { systemCallGetUserInfoSaga } from '../../../../usecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
+import {systemMainCountdownSaga} from "./systemMainCountdownSaga";
 
 export function* userViewIndexPageSaga(action: any) {
+
+  // NOTICE: 防止錯誤後無法重新 watch
   try {
     console.log('[app][saga] userViewIndexPageSaga');
 
     // const token: string = yield select((state: RootState) => state.app.token);
-    const token = getToken();
+    // const token = getToken();
 
     // if(!token) {
     // console.log("[APP][MODE]: InAndroid Mode")
@@ -38,6 +41,7 @@ export function* userViewIndexPageSaga(action: any) {
       (state: RootState) => state.indexPage.user.state
     );
 
+    // NOTE: 使用者尚未認證
     if (status === USER_AUTH_STATE.ready) {
       const packageID: string = yield select(
         (state: RootState) => state.app.androidAppInfo?.packageId
@@ -47,34 +51,19 @@ export function* userViewIndexPageSaga(action: any) {
         { packageId: packageID }
       );
       yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
+
     } else {
+      // NOTE: 使用者有進行過認證
       const indexResponse: GetIndexResponse = yield call(
         Service.IndexService.getIndex,
         {}
       );
       yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
-      const { riskControl } = yield select(
-        (state: RootState) => state.indexPage
-      );
 
-      if (
-        (indexResponse.noQuotaBalance === true ||
-          indexResponse.riskReject === true) &&
-        riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
-      ) {
-        // NOTICE: 不能重刷，需等待重刷時間
-        yield put(
-          SystemCaseActions.SystemRefreshableCountdownSaga(
-            indexResponse.refreshableUntil
-          )
-        );
-      } else {
-        // NOTICE: 可以重刷
-        yield put(
-          SystemCaseActions.SystemCountdownSaga(indexResponse?.offerExpireTime)
-        );
-      }
+      // NOTE: 是否系統執行非同步 - 倒數計時
+      yield call(systemMainCountdownSaga);
     }
+
   } catch (error) {
     yield catchSagaError(error);
   }

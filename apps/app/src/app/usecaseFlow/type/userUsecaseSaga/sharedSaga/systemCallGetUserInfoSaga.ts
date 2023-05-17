@@ -16,10 +16,11 @@ export function* systemCallGetUserInfoSaga() {
     const token = getToken();
     const location: Location = yield select((state: RootState) => state.navigator.location)
     // const action: Action = yield select((state: RootState) => state.navigator.action)
-    console.log("location", location);
+    // console.log("location", location);
     // console.log("action", action);
 
     if(location.pathname !== PagePathEnum.LoginPage && token === "") {
+      // NOTICE 登入頁不需要取得使用者資訊
       return;
     } else {
       const userResponse: GetUserInfoServiceResponse = yield call(
@@ -28,6 +29,7 @@ export function* systemCallGetUserInfoSaga() {
       );
       yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
+      // Sentry 識別登入行為
       SentryModule.userLogin(userResponse);
 
       return userResponse;
