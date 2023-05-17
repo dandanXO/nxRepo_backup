@@ -10,6 +10,12 @@ export const ORD_PARTIAL_REPAYMENT = 'ORD_PARTIAL_REPAYMENT';
 export const ORD_CHANGE_REPAYMENT_MODAL_VISIBLE = 'ORD_CHANGE_REPAYMENT_MODAL_VISIBLE';
 export const ORD_SET_MESSAGE_CONTENT = 'ORD_SET_MESSAGE_CONTENT';
 export const ORD_CHANGE_MESSAGE_MODAL_VISIBLE = 'ORD_CHANGE_MESSAGE_MODAL_VISIBLE';
+export const ORD_GET_DETAIL_TAB_CONTROL = 'ORD_GET_DETAIL_TAB_CONTROL';
+export const ORD_SET_DETAIL_TAB_CONTROL = 'ORD_SET_DETAIL_TAB_CONTROL';
+export const ORD_GET_ADDRESS_BOOK = 'ORD_GET_ADDRESS_BOOK';
+export const ORD_SET_ADDRESS_BOOK = 'ORD_SET_ADDRESS_BOOK';
+export const ORD_GET_SMS_MESSAGE = 'ORD_GET_SMS_MESSAGE';
+export const ORD_SET_SMS_MESSAGE = 'ORD_SET_SMS_MESSAGE';
 
 export const ordGetOrderDetail = (overdueParams, userParams) => ({ type: ORD_GET_ORDER_DETAIL, overdueParams, userParams });
 export const ordSetOrderDetail = (data) => ({ type: ORD_SET_ORDER_DETAIL, data });
@@ -23,3 +29,9 @@ export const ordPartialRepayment = (params) => ({ type: ORD_PARTIAL_REPAYMENT, p
 export const ordChangeRepaymentModalVisible =(option) => ({ type: ORD_CHANGE_REPAYMENT_MODAL_VISIBLE, option });
 export const ordSetMessageContent = (data) => ({ type: ORD_SET_MESSAGE_CONTENT, data });
 export const ordChangeMessageModalVisible =(option) => ({ type: ORD_CHANGE_MESSAGE_MODAL_VISIBLE, option });
+export const ordGetDetailTabControl = (params) => ({ type: ORD_GET_DETAIL_TAB_CONTROL, params });
+export const ordSetDetailTabControl = (data) => ({ type: ORD_SET_DETAIL_TAB_CONTROL, data });
+export const ordGetAddressBook = (params) => ({ type: ORD_GET_ADDRESS_BOOK, params });
+export const ordSetAddressBook = (data) => ({ type: ORD_SET_ADDRESS_BOOK, data });
+export const ordGetSmsMessage = (params) => ({ type: ORD_GET_SMS_MESSAGE, params });
+export const ordSetSmsMessage = (data) => ({ type: ORD_SET_SMS_MESSAGE, data });

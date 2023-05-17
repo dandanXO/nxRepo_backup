@@ -10,6 +10,12 @@ export const TORD_PARTIAL_REPAYMENT = 'TORD_PARTIAL_REPAYMENT';
 export const TORD_CHANGE_REPAYMENT_MODAL_VISIBLE = 'TORD_CHANGE_REPAYMENT_MODAL_VISIBLE';
 export const TORD_SET_MESSAGE_CONTENT = 'TORD_SET_MESSAGE_CONTENT';
 export const TORD_CHANGE_MESSAGE_MODAL_VISIBLE = 'TORD_CHANGE_MESSAGE_MODAL_VISIBLE';
+export const TORD_GET_DETAIL_TAB_CONTROL = 'TORD_GET_DETAIL_TAB_CONTROL';
+export const TORD_SET_DETAIL_TAB_CONTROL = 'TORD_SET_DETAIL_TAB_CONTROL';
+export const TORD_GET_ADDRESS_BOOK = 'TORD_GET_ADDRESS_BOOK';
+export const TORD_SET_ADDRESS_BOOK = 'TORD_SET_ADDRESS_BOOK';
+export const TORD_GET_SMS_MESSAGE = 'TORD_GET_SMS_MESSAGE';
+export const TORD_SET_SMS_MESSAGE = 'TORD_SET_SMS_MESSAGE';
 
 export const tordGetOrderDetail = (overdueParams, userParams) => ({ type: TORD_GET_ORDER_DETAIL, overdueParams, userParams });
 export const tordSetOrderDetail = (data) => ({ type: TORD_SET_ORDER_DETAIL, data });
@@ -23,3 +29,9 @@ export const torPartialRepayment = (params) => ({ type: TORD_PARTIAL_REPAYMENT, 
 export const tordChangeRepaymentModalVisible =(option) => ({ type: TORD_CHANGE_REPAYMENT_MODAL_VISIBLE, option });
 export const tordSetMessageContent = (data) => ({ type: TORD_SET_MESSAGE_CONTENT, data });
 export const tordChangeMessageModalVisible =(option) => ({ type: TORD_CHANGE_MESSAGE_MODAL_VISIBLE, option });
+export const tordGetDetailTabControl = (params) => ({ type: TORD_GET_DETAIL_TAB_CONTROL, params });
+export const tordSetDetailTabControl = (data) => ({ type: TORD_SET_DETAIL_TAB_CONTROL, data });
+export const tordGetAddressBook = (params) => ({ type: TORD_GET_ADDRESS_BOOK, params });
+export const tordSetAddressBook = (data) => ({ type: TORD_SET_ADDRESS_BOOK, data });
+export const tordGetSmsMessage = (params) => ({ type: TORD_GET_SMS_MESSAGE, params });
+export const tordSetSmsMessage = (data) => ({ type: TORD_SET_SMS_MESSAGE, data });

@@ -4,17 +4,23 @@
 import { axios } from 'utils';
 const api = {
     orderDetail: '/hs/admin/orderOverdue/detail',
-    userContacts: '/hs/admin/user/contacts',
+    userContacts: '/hs/admin/collect-overdue/user-contacts',
+    userSmsLogs: '/hs/admin/collect-overdue/user-sms-logs',
     operator: '/hs/admin/user/contactDetail',
     urgeRecord: '/hs/admin/overdueCollection/list',
     addRecord: '/hs/admin/overdueCollection/add',
-    partialRepayment: '/hs/admin/orderOverdue/partial-repayment'
+    partialRepayment: '/hs/admin/orderOverdue/partial-repayment',
+    detailTabControl: '/hs/admin/commons/admin-switch'
+
 };
 const getOrderDetail = (params) => {
     return axios.post(api.orderDetail, params);
 }
 const getUserContacts = (params) => {
-    return axios.post(api.userContacts, params);
+    return axios.get(api.userContacts, { params: params });
+}
+const getUserSmsLogs = (params) => {
+    return axios.get(api.userSmsLogs,  {params: params });
 }
 const getOperator = (params) => {
     return axios.post(api.operator, params);
@@ -30,4 +36,8 @@ const partialRepayment = (params) => {
     return axios.post(api.partialRepayment, params);
 }
 
-export { getOrderDetail, getUserContacts, getOperator, getUrgeRecord, addUrgeRecord, partialRepayment };
+const getDetailTabControl = () => {
+    return axios.get(api.detailTabControl);
+}
+
+export { getOrderDetail, getUserContacts, getUserSmsLogs, getOperator, getUrgeRecord, addUrgeRecord, partialRepayment, getDetailTabControl };

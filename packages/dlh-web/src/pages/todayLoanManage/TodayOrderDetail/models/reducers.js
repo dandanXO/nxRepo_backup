@@ -1,4 +1,15 @@
-import { TORD_SET_ORDER_DETAIL, TORD_CHANGE_MODAL_VISIBLE, TORD_SET_URGE_RECORD, TORD_CHANGE_RECORD_MODAL, TORD_CHANGE_REPAYMENT_MODAL_VISIBLE,TORD_SET_MESSAGE_CONTENT,TORD_CHANGE_MESSAGE_MODAL_VISIBLE } from './actions';
+import {
+    TORD_SET_ORDER_DETAIL,
+    TORD_CHANGE_MODAL_VISIBLE,
+    TORD_SET_URGE_RECORD,
+    TORD_CHANGE_RECORD_MODAL,
+    TORD_CHANGE_REPAYMENT_MODAL_VISIBLE,
+    TORD_SET_MESSAGE_CONTENT,
+    TORD_CHANGE_MESSAGE_MODAL_VISIBLE,
+    TORD_SET_DETAIL_TAB_CONTROL,
+    TORD_SET_ADDRESS_BOOK,
+    TORD_SET_SMS_MESSAGE,
+} from './actions';
 
 const initState = {
     orderData: {},
@@ -6,8 +17,17 @@ const initState = {
     recordVisible: false,
     repaymentVisible: false,
     recordData: [],
-    messageContent:'',
-    messageVisible:false
+    messageContent: '',
+    messageVisible: false,
+    detailTabControl:{},
+    addressBook: {
+        data: [],
+        pagination: {},
+    },
+    smsMessage: {
+        data: [],
+        pagination: {},
+    },
 };
 const todayOrderDetailState = (state = initState, action) => {
     switch (action.type) {
@@ -25,8 +45,14 @@ const todayOrderDetailState = (state = initState, action) => {
             return { ...state, messageContent: action.data };
         case TORD_CHANGE_MESSAGE_MODAL_VISIBLE:
             return { ...state, messageVisible: action.option };
+        case TORD_SET_DETAIL_TAB_CONTROL:
+            return { ...state, detailTabControl: action.data };
+        case TORD_SET_ADDRESS_BOOK:
+            return { ...state, addressBook: action.data };
+        case TORD_SET_SMS_MESSAGE:
+            return { ...state, smsMessage: action.data };
         default:
             return state;
     }
-}
+};
 export default todayOrderDetailState;
