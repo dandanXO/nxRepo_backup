@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { getToken } from '../../modules/querystring/getToken';
+import {AppEnvironment} from "../../modules/appEnvironment";
+import {SentryModule} from "../../modules/sentry";
 
 export const runAxios = async (
   baseUrl: string,
@@ -27,6 +29,14 @@ export const runAxios = async (
       },
     };
     const result = await axios(config);
+    console.log("runAxios.result", result)
+
+    if(AppEnvironment.isDev()) {
+      SentryModule.captureMessage("url", {}, {
+        params,
+        data,
+      })
+    }
     return {
       success: true,
       data: result.data,
