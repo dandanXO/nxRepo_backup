@@ -1,29 +1,47 @@
-import {AppEnvironment} from "../../../../modules/appEnvironment";
 import {alertModal} from "../../../../api/base/alertModal";
 import {AndroidPage} from "../../../../modules/window/IWindow";
-import {NativeAppInfo} from "../../../../persistant/nativeAppInfo";
-
+import {AppGlobal, isInApp, NativeAppInfo} from "../../../../persistant/nativeAppInfo";
 import {catchSagaError} from "../../../../usecaseFlow/utils/catchSagaError";
 
 export function *userLogoutSaga() {
   try {
-    if(AppEnvironment.isLocalhost()) {
-      // NOTE: 省略 Native APP 交互
-      alertModal("本地端不交互: 實際會跳轉到 Native APP 登入畫面");
 
-    } else if(window["IndexTask"] && window["IndexTask"]["navToPage"]) {
-      window["IndexTask"]["navToPage"](AndroidPage.LOGIN)
+    let message = null;
 
-    } else if(NativeAppInfo.mode === "H5") {
-      alertModal("PureH5 尚未實作");
+    // TODO: refactor h5=>PureH5
+    if(NativeAppInfo.mode === "H5") {
+      // TODO: 單純 API 登出
 
-    } else if(NativeAppInfo.mode === "Webview"){
-      const message = "Native Error: window[\"IndexTask\"][\"navToPage\"] function is missing";
-      throw new Error(message)
+    } else if(NativeAppInfo.mode === "Webview") {
 
-    } else {
-      throw new Error("NativeAppInfo.mode is missing")
+      if(AppGlobal.mode === "SimpleWebView") {
+        message = "注意: SimpleWebView 不會有此 flow"
+
+      } else if(AppGlobal.mode === "IndexWebview") {
+
+        if(window["IndexTask"] && window["IndexTask"]["navToPage"] && isInApp()) {
+          // NOTE: 呼叫 Native APP 登出
+          window["IndexTask"]["navToPage"](AndroidPage.LOGIN)
+
+        } else {
+          if(isInApp()) {
+            message = "Native Error: window[\"IndexTask\"][\"navToPage\"] function is missing";
+          } else {
+            // TODO: 單純 API 登出
+          }
+
+        }
+      } else if(AppGlobal.mode === "None") {
+        message ='注意: AppGlobal.mode === "None"'
+
+      }
     }
+
+    if(message) {
+      alertModal(message);
+      throw new Error(message);
+    }
+
   } catch (error) {
     yield catchSagaError(error);
   }
