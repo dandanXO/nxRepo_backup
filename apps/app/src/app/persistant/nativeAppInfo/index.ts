@@ -9,6 +9,9 @@ export const AppTempFlag = {
   isWebview: true,
 };
 
+export const AppGlobal = {
+  mode: "",
+}
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());
 
@@ -28,6 +31,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
     uiVersion: '',
     token: '',
     mode: 'H5',
+    phoneNo: '',
   };
 
 
@@ -52,6 +56,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
           uiVersion: uiVersion,
           token: null,
           mode: 'H5',
+          phoneNo: '後端API沒給',
         };
 
         if(AppFlag.isForceToWebview) {
@@ -67,23 +72,38 @@ export const getAppInfo = (): IAndroidAppInfo => {
           // if(AppTempFlag.isWebview) {
           //   console.log("1.包含線上版本: 印度 v55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值");
           // }
+          if(AppEnvironment.isDev()) {
+            appInfo = {
+              packageId: 'com.ind.kyc.application',
+              appName: 'dev_in',
+              environment: 'india',
+              uiVersion: '55',
+              domain: 'https://www.oasis-gold.com',
+              token: null,
+              // NOTICE: mode 的用途？
+              mode: 'Webview',
+              phoneNo: '後端API沒給',
+            };
+          } else {
+            appInfo = {
+              // webview 不必要
+              domain: '',
+              // webview 不必要
+              environment: 'india',
+              // webview 不必要
+              packageId: 'unknown',
+              // webview 不必要
+              appName: 'unknown',
+              // NOTE: 換主題需要，但缺失
+              uiVersion: '55',
+              // webview 不必要
+              token: null,
+              // NOTE: required
+              mode: 'Webview',
+              phoneNo: '後端API沒給',
+            };
+          }
 
-          appInfo = {
-            // webview 不必要
-            domain: '',
-            // webview 不必要
-            environment: 'india',
-            // webview 不必要
-            packageId: 'unknown',
-            // webview 不必要
-            appName: 'unknown',
-            // NOTE: 換主題需要，但缺失
-            uiVersion: '55',
-            // webview 不必要
-            token: null,
-            // NOTE: required
-            mode: 'Webview',
-          };
       }
 
 
@@ -101,6 +121,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
         uiVersion: '15',
         token: null,
         mode: 'Webview',
+        phoneNo: '後端API沒給',
       };
 
       // NOTE: AppTempFlag.isWebview 此時沒有值, 無法判斷

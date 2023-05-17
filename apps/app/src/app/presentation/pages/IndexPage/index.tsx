@@ -43,7 +43,8 @@ import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail'
 
 import { chain, add, multiply, divide, subtract, evaluate } from 'mathjs';
 import { PagePathEnum } from '../PagePathEnum';
-import { IndexPageSagaAction } from './userUsecaseSaga';
+import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
+import {getToken} from "../../../modules/querystring/getToken";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -526,62 +527,67 @@ const IndexPage = () => {
         </PageContent>
       </div>
 
+
       <div className={'sticky bottom-[63px] px-3 py-2'}>
-        {/*TODO*/}
+        {/*// NOTE: Button - Apply Now*/}
         {!applyHide && (
           //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) &&
           <Button
+            onClick={onClickApply}
             dataTestingID={'apply'}
             text={'Apply Now'}
             className={cx({
               'bg-[#F58B10]': !applyDisable,
               'bg-[#D7D7D7]': applyDisable,
             })}
-            onClick={onClickApply}
           />
         )}
 
-        {(indexPageState.user.state === USER_AUTH_STATE.authing ||
-          indexPageState.user.state === USER_AUTH_STATE.reject) && (
-          <>
-            <Button
-              onClick={() => {
-                navigate(PagePathEnum.ApplicationProgressPage);
-              }}
-              dataTestingID={'viewAppProgress'}
-              text={'View Application Progress'}
-              className={'bg-[#F58B10]'}
-            />
-          </>
+        {/*// NOTE: Button - View Application Progress*/}
+        {(
+          indexPageState.user.state === USER_AUTH_STATE.authing
+          || indexPageState.user.state === USER_AUTH_STATE.reject
+        ) && (
+          <Button
+            onClick={() => {
+              navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
+            }}
+            dataTestingID={'viewAppProgress'}
+            text={'View Application Progress'}
+            className={'bg-[#F58B10]'}
+          />
         )}
+
         {isLoading && (
           <div className={'text-xs text-gray-500 text-center mb-3'}>
             Please wait patiently for 30 seconds to two minutes while we review
             the maximum amount you can borrow as quickly as possible.
           </div>
         )}
+
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
-        {(indexPageState.riskControl.state ===
-          RISK_CONTROL_STATE.expired_refresh_able ||
-          indexPageState.riskControl.state ===
-            RISK_CONTROL_STATE.expired_refresh_one_time) &&
-          indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-          indexPageState.order.state !== ORDER_STATE.hasOverdueOrder && (
-            <>
-              <Button
-                onClick={onClickReacquireCredit}
-                dataTestingID={'reacquireCredit'}
-                text={'Reacquire Credit Amount'}
-                loading={isLoading}
-                className={cx({
-                  'bg-[#F58B10]':
-                    indexPageState.riskControl.state ===
-                    RISK_CONTROL_STATE.expired_refresh_able,
-                  'bg-[#D7D7D7]': isLoading,
-                })}
-              />
-            </>
+        {
+          indexPageState.user.state !== USER_AUTH_STATE.authing &&
+          (
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
+            || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time
+          )
+          && indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder
+          && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder
+          && (
+            <Button
+              onClick={onClickReacquireCredit}
+              dataTestingID={'reacquireCredit'}
+              text={'Reacquire Credit Amount'}
+              loading={isLoading}
+              className={cx({
+                'bg-[#F58B10]':
+                  indexPageState.riskControl.state ===
+                  RISK_CONTROL_STATE.expired_refresh_able,
+                'bg-[#D7D7D7]': isLoading,
+              })}
+            />
           )}
       </div>
 

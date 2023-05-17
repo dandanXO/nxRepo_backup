@@ -2,10 +2,8 @@ import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 import { alertModal } from '../base/alertModal';
 import { runAxios } from '../base/runAxios';
-
-import * as Sentry from '@sentry/react';
 import { AppFlag } from '../../../environments/flag';
-import {NativeAppInfo} from '../../persistant/nativeAppInfo';
+import {SentryModule} from "../../modules/sentry";
 
 export interface CustomAxiosError {
   status: any;
@@ -39,6 +37,8 @@ const axiosBaseQuery =
       console.log('[app] resultData:', resultData);
       return resultData;
     } catch (axiosError) {
+      console.log('error-2', axiosError);
+
       // NOTE: err
       const err: AxiosError = axiosError as AxiosError;
       console.info('[app] err:', err);
@@ -86,18 +86,7 @@ const axiosBaseQuery =
       });
 
       if (AppFlag.enableSentry) {
-        Sentry.captureException(frontendError, {
-          tags: {
-            packageId: NativeAppInfo.packageId,
-            uiVersion: NativeAppInfo.uiVersion,
-            mode: NativeAppInfo.mode,
-            appName: NativeAppInfo.appName,
-            domain: NativeAppInfo.domain,
-          },
-          extra: {
-            environment: NativeAppInfo.environment,
-          },
-        });
+        SentryModule.captureException(frontendError);
       }
       console.info('[app] frontendError:', frontendError);
 
@@ -107,6 +96,7 @@ const axiosBaseQuery =
           data: err.response?.data || err.message,
         },
       };
+      // throw err;
     }
   };
 

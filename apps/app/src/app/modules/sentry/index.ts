@@ -9,6 +9,7 @@ import { AppEnvironment } from '../appEnvironment';
 import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
 import {appStore, RootState} from "../../reduxStore";
+import WebpackSentryConfig from "./WebpackSentryConfig.json";
 
 // NOTICE: refactor me
 const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
@@ -34,7 +35,7 @@ if (AppFlag.enableSentry && load === false) {
       new BrowserTracing(),
       // replay
       new Sentry.Replay(replayConfig),
-      new posthog.SentryIntegration(posthog),
+      new posthog.SentryIntegration(posthog, WebpackSentryConfig.org, WebpackSentryConfig.projectId, WebpackSentryConfig.url + "organizations/"),
     ],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
@@ -55,7 +56,22 @@ function getUserStatusName(status: number) {
 }
 
 export class SentryModule {
-  static captureException(exception: any, captureContext?: CaptureContext) {}
+  static captureException(exception: any, captureContext?: CaptureContext) {
+    Sentry.captureException(exception, {
+      tags: {
+        packageId: NativeAppInfo.packageId,
+        uiVersion: NativeAppInfo.uiVersion,
+        mode: NativeAppInfo.mode,
+        appName: NativeAppInfo.appName,
+        domain: NativeAppInfo.domain,
+      },
+      extra: {
+        environment: NativeAppInfo.environment,
+      },
+      ...captureContext,
+    });
+
+  }
 
   static captureMessage(
     message: string,
@@ -112,6 +128,8 @@ export class SentryModule {
         'user.demoAccount': userResponse.demoAccount,
         'user.phoneNo': userResponse.userName,
       })
+      // posthog.reset(true)
+
     }
   }
 

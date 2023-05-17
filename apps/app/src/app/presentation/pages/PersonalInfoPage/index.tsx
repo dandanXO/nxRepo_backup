@@ -16,6 +16,7 @@ import { LoanOverViewSection } from '../../components/sections/LoanOverViewSecti
 import { useEffect } from 'react';
 import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 import { Button } from '../../components/layouts/Button';
+import {IndexPageSagaAction} from "../IndexPage/userUsecaseSaga/indexPageActions";
 
 const PersonalInfoPage = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ const PersonalInfoPage = () => {
   const navigate = useNavigate();
   const { indexPage, app } = useSelector((state: RootState) => state);
   const { user } = indexPage;
+
+  const onClickVerify = () => {
+    dispatch(IndexPageSagaAction.user.authenticateSaga());
+  }
 
   return (
     <Page className="flex flex-col ">
@@ -66,6 +71,7 @@ const PersonalInfoPage = () => {
         >
           <div>Verify now for highest amount</div>
           <Button
+            onClick={onClickVerify}
             className={'py-1 px-2'}
             text={
               <div className="flex flex-row items-center">

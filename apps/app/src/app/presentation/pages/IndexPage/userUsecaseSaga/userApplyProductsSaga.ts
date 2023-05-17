@@ -10,7 +10,7 @@ import {
 import { PayloadAction } from '@reduxjs/toolkit';
 import { GetBankCardListResponse } from '../../../../api/userService/GetBankCardListResponse';
 import { RootState } from '../../../../reduxStore';
-import { IndexPageSagaAction, UserApplyProductActionPayload } from './index';
+import { IndexPageSagaAction, UserApplyProductActionPayload } from './indexPageActions';
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 export function* userApplyProductsSaga(
@@ -18,6 +18,7 @@ export function* userApplyProductsSaga(
 ) {
   // console.group("userApplyProductsSaga");
   // console.log("action", action);
+
   // NOTICE: 防止錯誤後無法重新 watch
   try {
     // NOTE: 讀取相關總結資訊

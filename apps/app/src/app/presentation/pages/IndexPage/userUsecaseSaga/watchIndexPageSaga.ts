@@ -3,7 +3,8 @@ import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
 import { userViewIndexPageSaga } from './userViewIndexPageSaga';
 import { userApplyProductsSaga } from './userApplyProductsSaga';
 import { userReacquireCreditSaga } from './userReacquireCreditSaga';
-import { IndexPageSagaAction } from './index';
+import { IndexPageSagaAction } from './indexPageActions';
+import {userAuthenticateSaga} from "./UserAuthenticateSaga";
 
 export function* watchIndexPageSaga() {
   console.log('[app][saga] 1.2');
@@ -23,4 +24,9 @@ export function* watchIndexPageSaga() {
     errorFallback,
     userReacquireCreditSaga
   );
+  yield takeLatest(
+    IndexPageSagaAction.user.authenticateSaga.type,
+    errorFallback,
+    userAuthenticateSaga,
+  )
 }

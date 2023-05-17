@@ -22,5 +22,6 @@ declare global {
       // getAppInfo: () => AndroidAppInfo;
       getAppInfo: () => string;
     };
+    reduxStore: any;
   }
 }

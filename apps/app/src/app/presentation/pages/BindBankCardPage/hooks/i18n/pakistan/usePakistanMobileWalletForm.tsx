@@ -13,7 +13,7 @@ import {
 import { CustomAxiosError } from '../../../../../../api/rtk/axiosBaseQuery';
 
 import { usePakistanIBanValidate } from '../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate';
-import { AppFlag } from '../../../../../../../environments/flag';
+import {SentryModule} from "../../../../../../modules/sentry";
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -167,7 +167,7 @@ export const usePakistanMobileWalletForm = (
 
     let mobileDataValue = mobileData.data;
     // NOTE: 用戶沒填0時，給後端自動補0
-    if(String(mobileData.data).charAt(0) !== "0") {
+    if(String(mobileData.data).charAt(0) !== "0" || String(mobileData.data).length === 10) {
       mobileDataValue = "0" + mobileData.data
     }
 
@@ -180,29 +180,35 @@ export const usePakistanMobileWalletForm = (
         iban: iBanData.data,
       })
       .then((data: any) => {
-        // console.log("data1:", data);
-        // Notice: bind account successfully
-        Modal.alert({
-          show: true,
-          mask: true,
-          title: i18next.t('modal.Notice', { ns: 'common' }) as string,
-          content: i18next.t('modal.Success', { ns: 'common' }) as string,
-          confirmText: i18next.t('modal.Confirm', { ns: 'common' }) as string,
-          maskClosable: true,
-          enableClose: false,
-          enableIcon: false,
-          onConfirm: () => {
-            window.location.href = 'innerh5://127.0.0.1';
-          },
-        });
+        console.log("data:", data);
+        // TODO: refactor me
+        if(data && data.error) {
+          SentryModule.captureException(data.error);
+        } else {
+          // Notice: bind account successfully
+          Modal.alert({
+            show: true,
+            mask: true,
+            title: i18next.t('modal.Notice', { ns: 'common' }) as string,
+            content: i18next.t('modal.Success', { ns: 'common' }) as string,
+            confirmText: i18next.t('modal.Confirm', { ns: 'common' }) as string,
+            maskClosable: true,
+            enableClose: false,
+            enableIcon: false,
+            onConfirm: () => {
+              window.location.href = 'innerh5://127.0.0.1';
+            },
+          });
+        }
       })
-      .catch((err: CustomAxiosError) => {
-        // console.log("data2:", err);
+      .catch((error: CustomAxiosError) => {
+        console.log("error:", error);
         // const error = new Error();
         // error.name = "triggerPostBankBindSaveToPKMutation"
         // if(err) error.message = JSON.stringify(err)
         // console.log("error", error);
-        //   Sentry.captureException(error);
+        //   SentryModule.captureException(error);
+        SentryModule.captureException(error);
       });
   }, [
     mobileData.isValidation,
