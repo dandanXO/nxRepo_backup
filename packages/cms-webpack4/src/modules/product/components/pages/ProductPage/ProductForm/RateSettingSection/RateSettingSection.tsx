@@ -1,6 +1,5 @@
 import React, {CSSProperties, useState} from "react";
-import { Divider, Form, Input, Typography, Row, Col, Space, Button, Collapse } from "antd";
-import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
+import { Form, Input, Typography, Collapse } from "antd";
 import {
   NumberValidator,
 } from "../../../../../../shared/utils/validation/validator";
@@ -8,6 +7,9 @@ import {maxOneUnitFloatReplacer} from "../../../../../../shared/utils/format/max
 import {CustomAntFormFieldError} from "../../../../../../shared/utils/validation/CustomAntFormFieldError";
 import {FormInstance} from "antd/es";
 import {ProductInterestRatePairsModal} from "./ProductInterestRatePairsModal";
+import {
+    validatePreOrPostInterestGroups
+} from "../../../../../../shared/components/other/validatePreOrPostInterestGroups";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
@@ -23,7 +25,23 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
   const [showProductInterestRatePairsModal, setShowProductInterestRatePairsModal] = useState(false)
 
   const handleProductInterestRatePairsModalOnOK = () => {
-      setShowProductInterestRatePairsModal(false)
+      const { productInterestRatePairs } = props.form.getFieldsValue();
+      const { validateMap: productInterestRatePairsValidationMap, hasError} = validatePreOrPostInterestGroups(productInterestRatePairs, true, 'content')
+
+      props.setCustomAntFormFieldError(
+          prev => {
+              const finalMap = Object.keys(productInterestRatePairsValidationMap).length > 0
+                  ? productInterestRatePairsValidationMap
+                  : prev.productInterestRatePairs;
+              return {
+                  ...prev,
+                  productInterestRatePairs: finalMap as any,
+              }
+          }
+      )
+      if (!hasError) {
+          setShowProductInterestRatePairsModal(false)
+      }
   }
 
   const handleProductInterestRatePairsModalOnClose = (e) => {
@@ -179,7 +197,6 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                       </Form.Item>
                       <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
                   </Form.Item>
-
 
                   <Form.Item label="复贷利率">
                       <a style={{textDecoration:'underline'}} onClick={()=>setShowProductInterestRatePairsModal(true)}>配置</a>

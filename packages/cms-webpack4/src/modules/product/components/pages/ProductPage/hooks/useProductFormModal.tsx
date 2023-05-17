@@ -246,29 +246,26 @@ export const useProductFormModal = (props: ProductFormModal) => {
         // console.log("onFinish.values", JSON.stringify(values));
 
         let isNotFinish = false;
-        
-        // NOTICE：判斷前置／後置欄位是否有錯誤訊息　（有錯誤不送表單）
+
+        // NOTICE：判斷欄位是否有錯誤訊息　（有錯誤不送表單）
         Object.keys(customAntFormFieldError).map(key => {
             if (key !== 'productInterestRatePairs' && customAntFormFieldError[key]['validateStatus'] !== '') {
                 isNotFinish = true;
             }
         })
-        Object.values(customAntFormFieldError['productInterestRatePairs']).map(field => {
-            Object.keys(field).map(i => {
-                if (field[i]['validateStatus'] !== '') {
-                    isNotFinish = true;
-                }
-            })
-        })
 
         if (isNotFinish) return;
 
-        const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
-            num: i.num,
-            postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
-            preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3)),
-            plusAmount: Number(i.plusAmount),
-        }))
+        const productInterestRatePairs = values?.productInterestRatePairs?.reduce((acc, current) => {
+            const productInterestRatePairsGroups = current['content'].map((part) => ({
+                num: part.num,
+                postInterest: Number((Number(part.postInterest) * 0.01).toFixed(3)),
+                preInterest: Number((Number(part.preInterest) * 0.01).toFixed(3)),
+                plusAmount: Number(part.plusAmount),
+                riskRank: part.riskRank
+            }))
+            return [...acc, ...productInterestRatePairsGroups]
+        }, [])
 
         const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
             ...i,

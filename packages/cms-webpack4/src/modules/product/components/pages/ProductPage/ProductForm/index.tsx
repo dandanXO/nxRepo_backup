@@ -231,8 +231,6 @@ const Index = (props: ProductFormProps) => {
                     map = validatePreAndPostInterestRateSumBelow100(renewPreInterestRateField[0].value, renewPostInterestRateField[0].value, map, 'renewPreInterestRate', 'renewPostInterestRate')
                 }
 
-                let productInterestRatePairsValidationMap = {}
-
                 // 送出表單時欄位檢查
                 if (changedFields.length > 1) {
                     map = {
@@ -243,24 +241,15 @@ const Index = (props: ProductFormProps) => {
                         ...validatePreOrPostInterestRateField(renewPostInterestRateField[0].value, "请输入後置利息", map, 'renewPostInterestRate'),
                     };
 
-                    // NOTICE: 复贷利率
-                    const { productInterestRatePairs } = props.form.getFieldsValue();
-                    productInterestRatePairsValidationMap = validatePreOrPostInterestGroups(productInterestRatePairs);
                 }
 
 
                 setCustomAntFormFieldError(prev => {
-                    const finalMap = Object.keys(productInterestRatePairsValidationMap).length > 0
-                        ? productInterestRatePairsValidationMap
-                        : prev.productInterestRatePairs;
                     return {
                         ...prev,
                         ...map,
-                        productInterestRatePairs: finalMap as any,
                     }
                 })
-
-
 
             }}
             initialValues={{
