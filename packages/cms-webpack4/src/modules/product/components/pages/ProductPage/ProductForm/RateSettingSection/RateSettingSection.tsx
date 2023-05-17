@@ -10,6 +10,7 @@ import {ProductInterestRatePairsModal} from "./ProductInterestRatePairsModal";
 import {
     validatePreOrPostInterestGroups
 } from "../../../../../../shared/components/other/validatePreOrPostInterestGroups";
+import { productInterestRatePairsInitialValue } from "../index";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
@@ -46,6 +47,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
 
   const handleProductInterestRatePairsModalOnClose = (e) => {
       e.stopPropagation();
+      props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue)
       setShowProductInterestRatePairsModal(false)
   }
 

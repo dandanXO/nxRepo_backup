@@ -29,6 +29,13 @@ interface ProductFormProps {
 
 let isOnChange = false;
 
+export const productInterestRatePairsInitialValue = [
+    { content: [{ riskRank: 'EXCELLENT', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { content: [{ riskRank: 'GOOD', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { content: [{ riskRank: 'NORMAL', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { content: [{ riskRank: 'ORDINARY', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+]
+
 const Index = (props: ProductFormProps) => {
     const { productModalData, onFinish, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
 
@@ -259,12 +266,7 @@ const Index = (props: ProductFormProps) => {
                 top: false,
                 enabled: true,
                 templateType: 1,
-                productInterestRatePairs: [
-                    { content: [{ riskRank: 'EXCELLENT', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-                    { content: [{ riskRank: 'GOOD', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-                    { content: [{ riskRank: 'NORMAL', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-                    { content: [{ riskRank: 'ORDINARY', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-                ],
+                productInterestRatePairs: productInterestRatePairsInitialValue,
                 newGuestLoanQuotaSwitch: 1,
                 oldGuestLoanQuotaSwitch: 1,
                 newGuestProductDisplayStatus: 1,
