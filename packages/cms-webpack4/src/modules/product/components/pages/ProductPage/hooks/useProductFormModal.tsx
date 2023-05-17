@@ -55,6 +55,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         postInterestRate: { validateStatus: "", help: "" },
         renewPostInterestRate: { validateStatus: "", help: "" },
         renewPreInterestRate: { validateStatus: "", help: "" },
+        productInterestRatePairsChecked: {},
         productInterestRatePairs: {}
     }
 
@@ -253,6 +254,16 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 isNotFinish = true;
             }
         })
+
+        if (!values?.productInterestRatePairsChecked) {
+            setCustomAntFormFieldError((prev) => ({
+                ...prev,
+                productInterestRatePairsChecked: {
+                    help: '此字段为必填项'
+                }
+            }))
+            isNotFinish = true;
+        }
 
         if (isNotFinish) return;
 

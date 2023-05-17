@@ -11,7 +11,7 @@ import {
     validatePreOrPostInterestGroups
 } from "../../../../../../shared/components/other/validatePreOrPostInterestGroups";
 import { productInterestRatePairsInitialValue } from "../index";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { CheckCircleFilled, ExclamationCircleOutlined } from "@ant-design/icons";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
@@ -46,6 +46,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
       )
       if (!hasError) {
           messageAPI.success('已储存');
+          props.form.setFieldValue('productInterestRatePairsChecked', true)
           setShowProductInterestRatePairsModal(false);
       }
   }
@@ -73,6 +74,8 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
           }
       })
   }
+
+  const productInterestRatePairCheckedError = props.customAntFormFieldError['productInterestRatePairsChecked']['help']
 
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
@@ -224,8 +227,34 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                       <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
                   </Form.Item>
 
-                  <Form.Item label="复贷利率">
-                      <a style={{textDecoration:'underline'}} onClick={()=>setShowProductInterestRatePairsModal(true)}>配置</a>
+                  <Form.Item
+                      label="复贷利率"
+                      name='productInterestRatePairsChecked'
+                      initialValue={false}
+                  >
+                      <div>
+                          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                              <a
+                                  style={{ textDecoration:'underline' }}
+                                  onClick={()=>{
+                                      props.setCustomAntFormFieldError((prev) => ({
+                                          ...prev,
+                                          productInterestRatePairsChecked: {}
+                                      }))
+                                      setShowProductInterestRatePairsModal(true)
+                                  }}
+                              >
+                                  配置
+                              </a>
+                              <CheckCircleFilled style={{ color: `${!props.form.getFieldValue('productInterestRatePairsChecked') ? '#D9D9D9': '#52C41A'}` }} />
+                          </div>
+                          {
+                              productInterestRatePairCheckedError &&
+                              <div style={{ position: 'absolute', color:'red', top: '23px' }}>
+                                  {productInterestRatePairCheckedError}
+                              </div>
+                          }
+                      </div>
                   </Form.Item>
                   <ProductInterestRatePairsModal
                       form={props.form}
