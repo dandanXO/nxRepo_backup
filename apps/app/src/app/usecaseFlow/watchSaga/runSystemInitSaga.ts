@@ -54,13 +54,12 @@ export function* runSystemInitSaga() {
       } else {
         const token = getToken();
         // console.log("token", token);
-        // alertModal(token);
-
-        if(!token) return alertModal("Backend Error: Please be with token");
+        if(!token) {
+          return alertModal("Please come with token");
+        }
 
         // NOTICE: 直接進行登入
         // NOTICE: 還款頁面、綁卡頁面、IBAN 說明頁面 (使用 URL Querystring Token 進行登入)
-
         // NOTE: 取得使用者資訊
         const userResponse: GetUserInfoServiceResponse = yield call(
           Service.UserService.GetUserInfoService,
