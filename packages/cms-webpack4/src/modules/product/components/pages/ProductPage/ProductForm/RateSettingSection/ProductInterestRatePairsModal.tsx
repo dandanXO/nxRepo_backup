@@ -52,9 +52,9 @@ export const ProductInterestRatePairsModal = (
                             bodyStyle={{ paddingTop: 0 }}
                             style={{ marginBottom: '20px' }}
                             extra={<Button onClick={()=>{
-                                const fieldValue = form.getFieldValue('productInterestRatePairs')
-                                fieldValue[firstField.name] = { content: [{ riskRank: riskLabelMap[firstField.name].key, num: '', preInterest: '', postInterest: '', plusAmount: '' }]}
-                                form.setFieldValue('productInterestRatePairs', fieldValue)
+                                const fieldValue = form.getFieldValue('productInterestRatePairs');
+                                fieldValue[firstField.name] = { content: [{ riskRank: riskLabelMap[firstField.name].key, num: '', preInterest: '', postInterest: '', plusAmount: '' }]};
+                                form.setFieldValue('productInterestRatePairs', fieldValue);
                             }}>清除重填</Button>}
                         >
                             <PreAndPostInterestGroups

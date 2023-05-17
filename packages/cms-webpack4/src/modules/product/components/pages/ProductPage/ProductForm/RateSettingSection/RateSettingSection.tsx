@@ -1,5 +1,5 @@
 import React, {CSSProperties, useState} from "react";
-import { Form, Input, Typography, Collapse } from "antd";
+import {Form, Input, Typography, Collapse, message } from "antd";
 import {
   NumberValidator,
 } from "../../../../../../shared/utils/validation/validator";
@@ -27,6 +27,7 @@ export const CustomLabel = (props: {style?: CSSProperties, children: string}) =>
 const RateSettingSection = (props: RateSettingSectionProps) => {
   const [showProductInterestRatePairsModal, setShowProductInterestRatePairsModal] = useState(false)
   const { confirm } = props.modal;
+  const [messageAPI, contextHolder] = message.useMessage();
 
   const handleProductInterestRatePairsModalOnOK = () => {
       const { productInterestRatePairs } = props.form.getFieldsValue();
@@ -44,7 +45,8 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
           }
       )
       if (!hasError) {
-          setShowProductInterestRatePairsModal(false)
+          messageAPI.success('已储存');
+          setShowProductInterestRatePairsModal(false);
       }
   }
 
@@ -59,8 +61,12 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
               </div>
           ),
           onOk() {
-              props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue)
-              setShowProductInterestRatePairsModal(false)
+              props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue);
+              props.setCustomAntFormFieldError(prev => ({
+                  ...prev,
+                  productInterestRatePairs: {}
+              }))
+              setShowProductInterestRatePairsModal(false);
           },
           onCancel() {
               //
@@ -71,6 +77,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
       <React.Fragment>
+          {contextHolder}
           <Collapse ghost defaultActiveKey={["1"]}>
               <Panel header="费率设定" key="1">
                   <Paragraph style={{ margin: "0 0 0 100px" }}>
