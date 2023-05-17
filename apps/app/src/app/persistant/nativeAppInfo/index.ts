@@ -31,6 +31,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
     uiVersion: '',
     token: '',
     mode: 'H5',
+    phoneNo: '',
   };
 
 
@@ -55,6 +56,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
           uiVersion: uiVersion,
           token: null,
           mode: 'H5',
+          phoneNo: '後端API沒給',
         };
 
         if(AppFlag.isForceToWebview) {
@@ -80,6 +82,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
               token: null,
               // NOTICE: mode 的用途？
               mode: 'Webview',
+              phoneNo: '後端API沒給',
             };
           } else {
             appInfo = {
@@ -97,6 +100,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
               token: null,
               // NOTE: required
               mode: 'Webview',
+              phoneNo: '後端API沒給',
             };
           }
 
@@ -117,6 +121,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
         uiVersion: '15',
         token: null,
         mode: 'Webview',
+        phoneNo: '後端API沒給',
       };
 
       // NOTE: AppTempFlag.isWebview 此時沒有值, 無法判斷

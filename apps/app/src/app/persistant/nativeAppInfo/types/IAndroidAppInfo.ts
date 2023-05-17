@@ -6,4 +6,5 @@ export type IAndroidAppInfo = {
   domain: string;
   appName: string;
   mode: 'Webview' | 'H5';
+  phoneNo: string;
 };
