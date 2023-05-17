@@ -62,7 +62,7 @@ const Uni18nUploadPaymentReceiptPage = (
         //     error.name = "postRepayReceipt"
         //     if (err) error.message = JSON.stringify(err)
         //
-        //       Sentry.captureException(error);
+        //       SentryModule.captureException(error);
         // })
         .finally(() => {
           props.setIsUploading(false);
