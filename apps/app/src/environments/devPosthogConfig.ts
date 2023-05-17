@@ -3,8 +3,8 @@ import {Properties} from "posthog-js";
 
 export const commonPosthogConfig:PosthogConfig["config"] = {
   sanitize_properties: (properties: Properties, event_name: string) => {
-    console.log("[posthog] event_name", event_name);
-    console.log("[posthog] properties", properties);
+    // console.log("[posthog] event_name", event_name);
+    // console.log("[posthog] properties", properties);
     // NOTICE: filter querystring
     if(properties && properties["$current_url"]) {
       const removeFirstIndex = String(properties["$current_url"]).indexOf("?token=");
