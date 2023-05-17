@@ -18,7 +18,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
 
     // if(whitePage.indexOf(location.pathname) === -1) return
     const start = performance.now();
-    console.log('[AppDataCollector] Page enter!', location.pathname, start);
+    // console.log('[AppDataCollector] Page enter!', location.pathname, start);
 
     return () => {
       // NOTICE: 目前巴基斯坦白牌需要增加
@@ -28,11 +28,11 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
       const duration = end - start;
 
       // console.log('Page leave!', location.pathname, end);
-      console.log(
-        '[AppDataCollector] Page duration!',
-        location.pathname,
-        duration
-      );
+      // console.log(
+      //   '[AppDataCollector] Page duration!',
+      //   location.pathname,
+      //   duration
+      // );
 
       const eventID = `${location.pathname}`.toUpperCase();
       postTraceBehaviour([
@@ -52,7 +52,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
     // NOTICE: 目前巴基斯坦白牌需要增加
     if (environment.country !== 'pk') return;
 
-    console.log('onAppElementClick.event', event);
+    // console.log('onAppElementClick.event', event);
     // console.log("onAppElementClick.event.target", event.target);
     // console.log("onAppElementClick.event.target.nodeName", (event.target as any)?.nodeName);
     const pageName = location.pathname.replace('/v2', '');
@@ -63,8 +63,8 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
         const eventID = `${pageName}_CLICK_${
           (event.target as any)?.innerText
         }`.toUpperCase();
-        console.log('[AppDataCollector] CLICK.button');
-        console.log('[AppDataCollector] CLICK.button.eventID', eventID);
+        // console.log('[AppDataCollector] CLICK.button');
+        // console.log('[AppDataCollector] CLICK.button.eventID', eventID);
         postTraceBehaviour([
           {
             deviceCode: 'deviceCode',
@@ -83,8 +83,8 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
         const eventID = `${pageName}_INPUT_${
           (event.target as any)?.name
         }`.toUpperCase();
-        console.log('[AppDataCollector] Input.value:', value);
-        console.log('[AppDataCollector] Input.eventID:', eventID);
+        // console.log('[AppDataCollector] Input.value:', value);
+        // console.log('[AppDataCollector] Input.eventID:', eventID);
         postTraceBehaviour([
           {
             deviceCode: 'deviceCode',
