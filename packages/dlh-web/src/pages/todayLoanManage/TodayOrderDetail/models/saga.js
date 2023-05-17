@@ -5,6 +5,9 @@ import {
     TORD_LOOK_URGE_RECORD,
     TORD_GET_URGE_RECORD,
     TORD_PARTIAL_REPAYMENT,
+    TORD_GET_DETAIL_TAB_CONTROL,
+    TORD_GET_ADDRESS_BOOK,
+    TORD_GET_SMS_MESSAGE,
     tordChangeRrecordModal,
     tordSetUrgeRecord,
     tordChangeModalVisible,
@@ -14,9 +17,12 @@ import {
     ordGetOrderDetail,
     tordChangeRepaymentModalVisible,
     tordSetMessageContent,
-    tordChangeMessageModalVisible
+    tordChangeMessageModalVisible,
+    tordSetDetailTabControl,
+    tordSetAddressBook,
+    tordSetSmsMessage
 } from './actions';
-import { getOperator, getOrderDetail, getUserContacts, addUrgeRecord, getUrgeRecord, partialRepayment } from '../api';
+import { getOperator, getOrderDetail, getUserContacts, getUserSmsLogs, addUrgeRecord, getUrgeRecord, partialRepayment, getDetailTabControl } from '../api';
 import { converData, userConvertData } from './convertData';
 const detailSelector = (state) => state.todayLoanManageState.todayOrderDetailState.orderData;
 
@@ -35,21 +41,45 @@ function* getOperatorData(action) {
 }
 function* getContactsData(action) {
     try {
-        const resContacts = yield call(getUserContacts, action.userParams);
-        if(Number(resContacts.code) === 200) {
-            const detail = yield select(detailSelector);
-            const orderInfo = { ...detail, addressBook: resContacts['data'] || [] };
-            yield put(tordSetOrderDetail(orderInfo));
+        const res = yield call(getUserContacts, action.params);
+        const obj = {
+            data: res.records || [],
+            pagination: {
+                total: res.totalRecords,
+                current: res.records.length === 0 ? 0 : res.currentPage,
+            }
         }
+        yield put(tordSetAddressBook(obj));
     } catch (e) {
         console.log(e);
     }
-
 }
 
+function* watchGetContactsData() {
+    yield takeEvery(TORD_GET_ADDRESS_BOOK, getContactsData);
+}
+
+function* getSmsLogsData(action) {
+    try {
+        const res = yield call(getUserSmsLogs, action.params);
+        const obj = {
+            data: res.records || [],
+            pagination: {
+                total: res.totalRecords,
+                current: res.records.length === 0 ? 0 : res.currentPage,
+            }
+        }
+        yield put(tordSetSmsMessage(obj));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function* watchGetSmsLogsData() {
+    yield takeEvery(TORD_GET_SMS_MESSAGE, getSmsLogsData);
+}
 
 function* getDetail(action) {
-    yield fork(getContactsData, action);
     try{
         const resDetail = yield call(getOrderDetail, action.overdueParams);
         if(Number(resDetail.code) === 200) {
@@ -141,6 +171,19 @@ function* watchPartialRepayment() {
     yield takeEvery(TORD_PARTIAL_REPAYMENT, sendPartialRepayment);
 }
 
+//取得detail頁 tab的開關
+function* getDetailTabControlData(action) {
+    try {
+        const res = yield call(getDetailTabControl);
+        yield put(tordSetDetailTabControl(res.todayCollect));
+    } catch (e) {
+        console.log(e);
+    }
+}
+function* watchGetDetailTabControlData() {
+    yield takeEvery(TORD_GET_DETAIL_TAB_CONTROL, getDetailTabControlData);
+}
+
 
 export default function* root() {
     yield all([
@@ -148,6 +191,9 @@ export default function* root() {
         fork(watchLookUrgeRecord),
         fork(watchAddUrgeList),
         fork(watchGetAllUrgeRecord),
-        fork(watchPartialRepayment)
+        fork(watchPartialRepayment),
+        fork(watchGetDetailTabControlData),
+        fork(watchGetContactsData),
+        fork(watchGetSmsLogsData)
     ])
 }
