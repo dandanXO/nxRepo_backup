@@ -56,7 +56,22 @@ function getUserStatusName(status: number) {
 }
 
 export class SentryModule {
-  static captureException(exception: any, captureContext?: CaptureContext) {}
+  static captureException(exception: any, captureContext?: CaptureContext) {
+    Sentry.captureException(exception, {
+      tags: {
+        packageId: NativeAppInfo.packageId,
+        uiVersion: NativeAppInfo.uiVersion,
+        mode: NativeAppInfo.mode,
+        appName: NativeAppInfo.appName,
+        domain: NativeAppInfo.domain,
+      },
+      extra: {
+        environment: NativeAppInfo.environment,
+      },
+      ...captureContext,
+    });
+
+  }
 
   static captureMessage(
     message: string,
