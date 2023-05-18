@@ -91,6 +91,12 @@ const NewCustomersDailyConversionRatesTable = () => {
         },
         { title: <CustomColumn text={'完成认证用户数'} />, dataIndex: 'allCertifiedCount', key: 'allCertifiedCount', hideInSearch: true, render: (text, { allCertifiedRate }) => <CustomColumn text={text} rate={allCertifiedRate} /> },
         {
+            title: '完成认证', dataIndex: 'allCertified', key: 'allCertified', hideInSearch: true,
+            children: [
+                { title: <CustomColumn text={'完成认证用户数'}/>, dataIndex: 'allCertifiedCount', key: 'allCertifiedCount', hideInSearch: true, render: (text, { allCertifiedRate }) => <CustomColumn text={text} rate={allCertifiedRate} /> },
+            ]
+        },
+        {
             title: '提交', dataIndex: 'submit', key: 'submit', hideInSearch: true,
             children: [
                 { title: <CustomColumn text={'提交用户数'}/>, dataIndex: 'submitOrderUserCount', key: 'submitOrderUserCount', hideInSearch: true, render: (text, { submitOrderUserRate }) => <CustomColumn text={text} rate={submitOrderUserRate} /> },
