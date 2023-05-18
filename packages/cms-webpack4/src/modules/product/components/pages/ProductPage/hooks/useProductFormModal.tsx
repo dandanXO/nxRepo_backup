@@ -33,6 +33,9 @@ export interface ProductFormUploads {
 export const useProductFormModal = (props: ProductFormModal) => {
 
     const [modal, contextHolder] = Modal.useModal();
+    const [tempFormData, setTempFormData] = useState({
+        productInterestRatePairs: undefined
+    });
 
     const [productModalData, setProductModalData] = useState<ProductFormModal>({
         show: props.show,
@@ -99,6 +102,23 @@ export const useProductFormModal = (props: ProductFormModal) => {
             form.resetFields();
             setCustomAntFormFieldError(initCustomAntFormFieldError);
         } else {
+            const productInterestRatePairs = productFormData.productInterestRatePairs.reduce((acc, current)=> {
+                if (!current['riskRank']) return acc;
+
+                const groupIndex = productInterestRatePairsGroupIndexMap[current['riskRank']]
+                acc[groupIndex]['content'] = [
+                    ...acc[groupIndex]['content'],
+                    {
+                        ...current,
+                        preInterest: fixedFloatNumberToFixed3(current.preInterest * 100),
+                        postInterest: fixedFloatNumberToFixed3(current.postInterest * 100),
+                    }
+                ]
+                return acc
+            }, [{ content: [] }, { content: [] }, { content: [] }, { content: [] }])
+
+            setTempFormData({ productInterestRatePairs })
+
             form.setFieldsValue({
                 merchantId: currentMerchant?.name,
                 productName: productFormData.productName,
@@ -164,26 +184,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 dummy: productFormData.dummy,
                 extensionRate: `${fixedFloatNumberToFixed3(Number(productFormData.extensionRate) * 100)}`,
                 overdueRate: `${fixedFloatNumberToFixed3(Number(productFormData.overdueRate) * 100)}`,
-                productInterestRatePairs: productFormData.productInterestRatePairs.reduce((acc, current)=> {
-                    if (!current['riskRank']) return acc;
-
-                    const groupIndex = productInterestRatePairsGroupIndexMap[current['riskRank']]
-                    acc[groupIndex]['content'] = [
-                        ...acc[groupIndex]['content'],
-                        {
-                            ...current,
-                            preInterest: fixedFloatNumberToFixed3(current.preInterest * 100),
-                            postInterest: fixedFloatNumberToFixed3(current.postInterest * 100),
-                        }
-                    ]
-                    return acc
-                }, [{ content: [] }, { content: [] }, { content: [] }, { content: [] }]),
                 productInterestRatePairsChecked: productFormData.productInterestRatePairs.length > 0,
                 top: productFormData.top,
                 tags: productFormData.tags.split(","),
                 templateType: productFormData.templateType,
                 weight: productFormData.weight,
                 enabled: productFormData.enabled,
+                productInterestRatePairs
             })
         }
 
@@ -275,7 +282,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
         if (isNotFinish) return;
 
-        const productInterestRatePairs = values?.productInterestRatePairs?.reduce((acc, current) => {
+        let productInterestRatePairs = values?.productInterestRatePairs || tempFormData.productInterestRatePairs
+        productInterestRatePairs = productInterestRatePairs?.reduce((acc, current) => {
             const productInterestRatePairsGroups = current['content'].map((part) => ({
                 num: part.num,
                 postInterest: Number((Number(part.postInterest) * 0.01).toFixed(3)),
