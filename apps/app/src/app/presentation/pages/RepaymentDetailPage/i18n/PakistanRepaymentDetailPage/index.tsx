@@ -36,6 +36,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
     dailyFee,
     balance,
     orderAmount,
+    applyDate = ''
   } = currentData ?? {};
   const { items = [] } = chargeFeeDetail ?? {};
 
@@ -88,6 +89,12 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <ListItem
           title={'Status'}
           text={status ? renderStatusTag(status) : ''}
+          titleColor="text-ctext-secondary"
+          textColor="text-ctext-primary"
+        />
+        <ListItem
+          title={'Apply Date'}
+          text={applyDate ? moment(applyDate).format('DD-MM-YYYY') : ''}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
         />
@@ -307,6 +314,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
               <div
                 className={`grow mb-2`}
                 onClick={() => {
+                    console.log('Upload Receipt---------',orderNo)
                   navigate(
                     `/v2/upload-payment-receipt?token=${getToken()}&orderNo=${
                       orderNo ?? getOrderNo()

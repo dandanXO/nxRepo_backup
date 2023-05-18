@@ -11,6 +11,9 @@ import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/ge
 import { Status } from '../../../../../modules/statusEnum';
 import { alertModal } from '../../../../../api/base/alertModal';
 import cx from 'classnames';
+import { isInAndroid } from '../../../../../modules/window/isInAndroid';
+import { Navigation } from '../../../../components/layouts/Navigation';
+import { PagePathEnum } from '../../../PagePathEnum';
 
 const IndiaRepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
@@ -36,6 +39,7 @@ const IndiaRepaymentDetailPage = (props: any) => {
     dailyFee,
     balance,
     orderAmount,
+    applyDate = ''
   } = currentData ?? {};
   const { items = [] } = chargeFeeDetail ?? {};
 
@@ -89,6 +93,11 @@ const IndiaRepaymentDetailPage = (props: any) => {
         <ListItem
           title={'Status'}
           text={status ? renderStatusTag(status) : ''}
+          titleColor="text-ctext-primary"
+        />
+        <ListItem
+          title={'Apply Date'}
+          text={applyDate ? moment(applyDate).format('DD-MM-YYYY') : ''}
           titleColor="text-ctext-primary"
         />
         <ListItem
@@ -287,34 +296,33 @@ const IndiaRepaymentDetailPage = (props: any) => {
                 </li>
               </ul>
             </div>
-
-            {/*TODO: 先兼容 querystring*/}
-            <div
-              className={`grow mt-2`}
-              onClick={() => {
-                navigate(
-                  `/v2/upload-payment-receipt?token=${getToken()}&orderNo=${
-                    orderNo ?? getOrderNo()
-                  }`,
-                  {
-                    state: { orderNo },
-                  }
-                );
-              }}
-            >
-              <Button
-                type={'ghost'}
-                className={`w-full`}
-                text={'Upload Receipt'}
-              />
-            </div>
-
             <div className={`flex flex-col my-3`}>
-              <div className={`text-xs text-ctext-secondary `}>
+              <div className="h-2.5 bg-cstate-disable-assistant mx-[-24px] "></div>
+              <div className={`text-xs text-ctext-primary leading-none my-3`}>
                 After completing the repayment, take a screenshot and upload
-                your repayment receipt here.
+                your repayment receipt here ▼
               </div>
-            </div>
+              {/*TODO: 先兼容 querystring*/}
+              <div
+                className={`grow mb-2`}
+                onClick={() => {
+                  navigate(
+                    `/v2/upload-payment-receipt?token=${getToken()}&orderNo=${
+                      orderNo ?? getOrderNo()
+                    }`,
+                    {
+                      state: { orderNo },
+                    }
+                  );
+                }}
+              >
+                <Button
+                  type={'ghost'}
+                  className={`w-full`}
+                  text={'Upload Receipt'}
+                />
+              </div>
+            </div>      
           </>
         )}
       </div>
