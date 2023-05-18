@@ -231,6 +231,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                       label="复贷利率"
                       name='productInterestRatePairsChecked'
                       initialValue={false}
+                      required
                   >
                       <div>
                           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '5px' }}>

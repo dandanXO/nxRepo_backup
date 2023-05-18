@@ -29,6 +29,13 @@ interface ProductFormProps {
 
 let isOnChange = false;
 
+export const productInterestRatePairsGroupIndexMap = {
+    EXCELLENT: 0,
+    GOOD: 1,
+    NORMAL: 2,
+    ORDINARY: 3
+}
+
 export const productInterestRatePairsInitialValue = [
     { content: [{ riskRank: 'EXCELLENT', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
     { content: [{ riskRank: 'GOOD', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},

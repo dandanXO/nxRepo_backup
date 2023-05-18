@@ -10,6 +10,7 @@ import {
 import moment from "moment/moment";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { ProductTypes } from "../../../../service/product/domain/productTypes";
+import { productInterestRatePairsGroupIndexMap } from "../ProductForm";
 export interface ProductFormModal {
     show: boolean;
     isEdit?: boolean
@@ -163,15 +164,21 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 dummy: productFormData.dummy,
                 extensionRate: `${fixedFloatNumberToFixed3(Number(productFormData.extensionRate) * 100)}`,
                 overdueRate: `${fixedFloatNumberToFixed3(Number(productFormData.overdueRate) * 100)}`,
-                productInterestRatePairs: productFormData.productInterestRatePairs.map((ratePair) => {
-                    return {
-                        num: ratePair.num,
-                        preInterest: fixedFloatNumberToFixed3(ratePair.preInterest * 100),
-                        postInterest: fixedFloatNumberToFixed3(ratePair.postInterest * 100),
-                        plusAmount: ratePair.plusAmount,
-                    }
-                }),
+                productInterestRatePairs: productFormData.productInterestRatePairs.reduce((acc, current)=> {
+                    if (!current['riskRank']) return acc;
 
+                    const groupIndex = productInterestRatePairsGroupIndexMap[current['riskRank']]
+                    acc[groupIndex]['content'] = [
+                        ...acc[groupIndex]['content'],
+                        {
+                            ...current,
+                            preInterest: fixedFloatNumberToFixed3(current.preInterest * 100),
+                            postInterest: fixedFloatNumberToFixed3(current.postInterest * 100),
+                        }
+                    ]
+                    return acc
+                }, [{ content: [] }, { content: [] }, { content: [] }, { content: [] }]),
+                productInterestRatePairsChecked: productFormData.productInterestRatePairs.length > 0,
                 top: productFormData.top,
                 tags: productFormData.tags.split(","),
                 templateType: productFormData.templateType,
