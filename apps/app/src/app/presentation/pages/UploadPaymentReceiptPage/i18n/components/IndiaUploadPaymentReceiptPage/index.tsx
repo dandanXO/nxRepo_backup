@@ -13,27 +13,15 @@ import {
 import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
 import { withTranslation } from 'react-i18next';
 import { i18nUploadPaymentReceiptPage } from '../../translations';
-import { Navigation } from '../../../../../components/layouts/Navigation';
-import { useNavigate } from 'react-router';
 import { Page } from '../../../../../components/layouts/Page';
-import { isInAndroid } from '../../../../../../modules/window/isInAndroid';
 import { Button } from '../../../../../components/layouts/Button';
+
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(
   i18nUploadPaymentReceiptPage.namespace
 )((props: I18UploadPaymentReceiptPageProps) => {
-  const navigate = useNavigate();
   return (
     <Page>
-      {!isInAndroid() && (
-        <Navigation
-          title={'Upload payment receipt'}
-          back={() => {
-            navigate(-1);
-          }}
-        />
-      )}
-
       {props.isUploading && <UploadingFileModal />}
 
       <div className={'px-4'}>

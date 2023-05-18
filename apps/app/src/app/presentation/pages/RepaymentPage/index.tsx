@@ -45,8 +45,10 @@ const RepaymentPage = () => {
 
     return (
         <Page className="flex flex-col">
+            <div className='text-center'><Navigation title='Payment'/></div>
+            
             <div
-                className={`flex flex-row py-3 px-5 justify-between sticky top-[0px] bg-white`}
+                className={`flex flex-row pb-3 px-5 justify-between sticky top-[0px] bg-white`}
             >
                 {['Unpaid', 'Overdue', 'Done'].map((i) => (
                     <Tag

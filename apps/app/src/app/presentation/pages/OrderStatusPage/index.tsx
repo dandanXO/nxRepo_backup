@@ -10,6 +10,8 @@ import { OrderStatusItem } from './OrderStatusItem';
 import moment from 'moment';
 import { ApproveRecord } from '../../../api/loanService/ApproveRecord';
 import { PageContent } from '../../components/layouts/PageContent';
+import { PagePathEnum } from '../PagePathEnum';
+import { getToken } from '../../../modules/querystring/getToken';
 
 const OrderStatusPage = (props: any) => {
   const navigate = useNavigate();
@@ -20,9 +22,9 @@ const OrderStatusPage = (props: any) => {
     <div>
       {!isInAndroid() && (
         <Navigation
-          title={'Repay Details'}
+          title={'Order Status'}
           back={() => {
-            navigate(-1);
+            navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
           }}
         />
       )}
