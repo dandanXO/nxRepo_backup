@@ -10,7 +10,7 @@ import {
 import moment from "moment/moment";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { ProductTypes } from "../../../../service/product/domain/productTypes";
-import { productInterestRatePairsGroupIndexMap } from "../ProductForm";
+import { productInterestRatePairsGroupIndexMap, productInterestRatePairsInitialValue } from "../ProductForm";
 export interface ProductFormModal {
     show: boolean;
     isEdit?: boolean
@@ -102,10 +102,14 @@ export const useProductFormModal = (props: ProductFormModal) => {
             form.resetFields();
             setCustomAntFormFieldError(initCustomAntFormFieldError);
         } else {
-            const productInterestRatePairs = productFormData.productInterestRatePairs.reduce((acc, current)=> {
+            let productInterestRatePairs = productFormData.productInterestRatePairs.reduce((acc, current)=> {
                 if (!current['riskRank']) return acc;
 
                 const groupIndex = productInterestRatePairsGroupIndexMap[current['riskRank']]
+                acc[groupIndex] = {
+                    'content': [],
+                    ...acc[groupIndex]
+                }
                 acc[groupIndex]['content'] = [
                     ...acc[groupIndex]['content'],
                     {
@@ -115,7 +119,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
                     }
                 ]
                 return acc
-            }, [{ content: [] }, { content: [] }, { content: [] }, { content: [] }])
+            }, [])
+
+            if (productInterestRatePairs.length === 0)  productInterestRatePairs = productInterestRatePairsInitialValue;
 
             setTempFormData({ productInterestRatePairs })
 
