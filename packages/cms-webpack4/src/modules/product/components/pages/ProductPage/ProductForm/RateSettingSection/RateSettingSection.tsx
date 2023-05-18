@@ -239,7 +239,10 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                                   onClick={()=>{
                                       props.setCustomAntFormFieldError((prev) => ({
                                           ...prev,
-                                          productInterestRatePairsChecked: {}
+                                          productInterestRatePairsChecked: {
+                                              validateStatus: '',
+                                              help: '',
+                                          }
                                       }))
                                       setShowProductInterestRatePairsModal(true)
                                   }}
