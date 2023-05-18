@@ -37,7 +37,10 @@ export const runAxios = async (
           params,
           data,
         },
-        response: result,
+        response: {
+          ...result,
+          data: JSON.parse(JSON.stringify(result.data)),
+        },
       })
     }
     return {

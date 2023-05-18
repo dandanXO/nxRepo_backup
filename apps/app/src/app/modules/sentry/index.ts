@@ -60,7 +60,7 @@ const getUserPhoneNo = () => {
   return NativeAppInfo.phoneNo ? NativeAppInfo.phoneNo : "unknown";
 }
 
-function getCommonTagsSaga() {
+function getCommonTags() {
   const appState: RootState = appStore.getState()
   const user = appState?.indexPage?.user
 
@@ -77,11 +77,14 @@ function getCommonTagsSaga() {
 
 export class SentryModule {
   static captureException(exception: any, captureContext?: CaptureContext, tags?: { [key: string]: Primitive },) {
-    getCommonTagsSaga();
+    if (AppEnvironment.isLocalhost()) return;
+    if (!AppFlag.enableSentry) return;
+
+    const commonTags = getCommonTags();
 
     Sentry.captureException(exception, {
       tags: {
-
+        ...commonTags,
         ...tags,
       },
       extra: {
@@ -97,6 +100,7 @@ export class SentryModule {
     tags?: { [key: string]: Primitive },
     extra?: Extras
   ) {
+    if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
     console.log('appInfo', NativeAppInfo);
@@ -105,16 +109,12 @@ export class SentryModule {
     const user = appState?.indexPage?.user
     // console.log("user", user);
 
+    const commonTags = getCommonTags();
+
     Sentry.captureMessage(message, {
       level: 'info',
       tags: {
-        packageId: NativeAppInfo.packageId,
-        uiVersion: NativeAppInfo.uiVersion,
-        mode: NativeAppInfo.mode,
-        appName: NativeAppInfo.appName,
-        domain: NativeAppInfo.domain,
-        "user.userName": user.userName !== "" ? user.userName : "unknown",
-        "user.phoneNo": getUserPhoneNo(),
+        ...commonTags,
         ...tags,
       },
       extra: {
@@ -123,7 +123,10 @@ export class SentryModule {
       },
     });
   }
+
   static userLogin(userResponse: GetUserInfoServiceResponse) {
+    if (AppEnvironment.isLocalhost()) return;
+
     if (AppFlag.enableSentry) {
       const userInfo = {
         "user.phoneNo": getUserPhoneNo(),
