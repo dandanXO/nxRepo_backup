@@ -37,7 +37,7 @@ export function* systemStartInitSaga() {
       systemCallGetUserInfoSaga(),
     ]);
 
-    // yield put(appSlice.actions.updateInit(response));
+    yield put(appSlice.actions.updateInit(response));
     yield put(indexPageSlice.actions.updateUserAPI(userResponse));
     console.log('[app][saga][Service] AppService.getInit.response', response);
     console.log(

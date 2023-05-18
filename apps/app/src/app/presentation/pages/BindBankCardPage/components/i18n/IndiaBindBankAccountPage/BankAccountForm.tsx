@@ -10,7 +10,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
     <div className="flex flex-col grow">
       <Form className="grow">
         <div className="text-ctext-primary text-xs mb-1">
-          {'For KYC, your Cardholder name and Aadhaar name should be match.'}
+          {'For KYC, your Cardholder name and PAN card name should be match.'}
         </div>
         <Input
           className="mb-3 text-sm"
@@ -51,7 +51,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
       </Form>
       <div className="mb-4">
         <Button
-          text={'Save'}
+          text={'Confirm'}
           onClick={() => {
             !props.isFormPending && props.confirm();
           }}
