@@ -33,8 +33,11 @@ export const runAxios = async (
 
     if(AppEnvironment.isDev()) {
       SentryModule.captureMessage(`API: ${method} ${url}`, {}, {
-        params,
-        data,
+        request: {
+          params,
+          data,
+        },
+        response: result,
       })
     }
     return {
