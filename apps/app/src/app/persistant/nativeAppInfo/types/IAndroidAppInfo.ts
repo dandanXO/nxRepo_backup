@@ -5,6 +5,8 @@ export type IAndroidAppInfo = {
   token: null | string;
   domain: string;
   appName: string;
-  mode: 'Webview' | 'H5';
   phoneNo: string;
+  // TODO: refactor me
+  // NOTE: 前端判斷出來的
+  mode: 'Webview' | 'H5';
 };

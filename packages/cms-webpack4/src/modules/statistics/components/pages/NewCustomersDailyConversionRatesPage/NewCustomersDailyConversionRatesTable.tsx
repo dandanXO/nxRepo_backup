@@ -89,6 +89,13 @@ const NewCustomersDailyConversionRatesTable = () => {
                 { title: <CustomColumn text={'绑卡认证'} />, dataIndex: 'bankCount', key: 'bankCount', hideInSearch: true, render: (text, { bankRate }) => <CustomColumn text={text} rate={bankRate} /> },
             ]
         },
+        { title: <CustomColumn text={'完成认证用户数'} />, dataIndex: 'allCertifiedCount', key: 'allCertifiedCount', hideInSearch: true, render: (text, { allCertifiedRate }) => <CustomColumn text={text} rate={allCertifiedRate} /> },
+        {
+            title: '完成认证', dataIndex: 'allCertified', key: 'allCertified', hideInSearch: true,
+            children: [
+                { title: <CustomColumn text={'完成认证用户数'}/>, dataIndex: 'allCertifiedCount', key: 'allCertifiedCount', hideInSearch: true, render: (text, { allCertifiedRate }) => <CustomColumn text={text} rate={allCertifiedRate} /> },
+            ]
+        },
         {
             title: '提交', dataIndex: 'submit', key: 'submit', hideInSearch: true,
             children: [
@@ -184,14 +191,23 @@ const NewCustomersDailyConversionRatesTable = () => {
                         <div>
                             {customColumns.map((tag, index) => {
                                 if (tag.key === 'registerCount') return
-                                return <CheckableTag
-                                    style={{ marginTop: '4px', marginBottom: '4px' }}
-                                    key={tag.key}
-                                    checked={selectedTags.indexOf(tag.key) > -1}
-                                    onChange={(checked) => handleChange(tag.key, checked)}
-                                >
-                                    {tag.key === 'otpCount' ? 'OTP短信' : tag.title}
-                                </CheckableTag>
+
+                                let tagKey = tag.title;
+                                if (tag.key === "otpCount") {
+                                    tagKey = 'OTP短信';
+                                } else if (tag.key === "allCertifiedCount") {
+                                    tagKey = '完成认证';
+                                }
+                                return (
+                                    <CheckableTag
+                                        style={{ marginTop: '4px', marginBottom: '4px' }}
+                                        key={tag.key}
+                                        checked={selectedTags.indexOf(tag.key) > -1}
+                                        onChange={(checked) => handleChange(tag.key, checked)}
+                                    >
+                                        {tagKey}
+                                    </CheckableTag>
+                                )
                             })}
                         </div>
                     </Space>

@@ -126,9 +126,9 @@ const PersonalInfoPage = () => {
       </div>
       <div className="text-center my-2">
         <div
-          onClick={() =>
+          onClick={() => {
             navigate(`${PagePathEnum.PersonalInfoPage}/log-out-modal`)
-          }
+          }}
         >
           Log out
         </div>

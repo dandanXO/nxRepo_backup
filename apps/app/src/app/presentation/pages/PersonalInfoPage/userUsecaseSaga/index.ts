@@ -1,8 +1,12 @@
 import { createAction } from '@reduxjs/toolkit';
 
 export const PersonalInfoPageSagaActions = {
-  user: {},
+  user: {
+    logout: createAction('userLogoutSaga'),
+  },
   system: {
     init: createAction('PersonalInfoPageSagaActions-system-init'),
   },
 };
+
+

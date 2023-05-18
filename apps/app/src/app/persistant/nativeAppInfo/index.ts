@@ -1,7 +1,8 @@
-import { IAndroidAppInfo } from './types/IAndroidAppInfo';
-import { environment } from '../../../environments/environment';
+import {IAndroidAppInfo} from './types/IAndroidAppInfo';
+import {environment} from '../../../environments/environment';
 import {AppFlag} from "../../../environments/flag";
 import {AppEnvironment} from "../../modules/appEnvironment";
+import {AppModeEnum} from "../appModeModel";
 
 // NOTICE: refactor me
 export const AppTempFlag = {
@@ -9,9 +10,21 @@ export const AppTempFlag = {
   isWebview: true,
 };
 
-export const AppGlobal = {
-  mode: "",
+export const AppGlobal: { mode: AppModeEnum; } = {
+  mode: AppModeEnum.None,
 }
+
+export const isInApp = (): boolean => {
+  const rules = [
+    'WebView',
+    '(iPhone|iPod|iPad)(?!.*Safari/)',
+    'Android.*(wv)',
+  ];
+  const regex = new RegExp(`(${rules.join('|')})`, 'ig');
+  const useragent = navigator.userAgent || navigator.vendor
+  return Boolean(useragent.match(regex));
+}
+
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());
 
@@ -34,9 +47,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
     phoneNo: '',
   };
 
-
   // if (AppModeModel.getMode() === AppModeEnum.IndexWebview || AppFlag.isForceToWebview) {
-
   if(!window['AppInfoTask'] || !window['AppInfoTask']['getAppInfo']) {
 
     if (environment.country === 'in') {
@@ -47,7 +58,6 @@ export const getAppInfo = (): IAndroidAppInfo => {
         const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '55';
 
         // NOTICE: 3.只會有開發機的 IndexWebview 或是 PureH5, 但目前分不清楚是哪個模式
-
         appInfo = {
           domain: 'https://www.oasis-gold.com',
           environment: 'india',
@@ -59,6 +69,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
           phoneNo: '後端API沒給',
         };
 
+        // NOTE: 不需要模擬
         if(AppFlag.isForceToWebview) {
           appInfo.mode = "Webview";
           console.log("2.包含本地端強制模擬 webview");
@@ -67,12 +78,11 @@ export const getAppInfo = (): IAndroidAppInfo => {
       } else {
         // NOTICE: 線上環境
         // NOTICE: 1.包含線上版本: DEV, 印度 v55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值
+        if(AppEnvironment.isDev()) {
 
-          // NOTE: AppTempFlag.isWebview 此時沒有值, 無法判斷
-          // if(AppTempFlag.isWebview) {
-          //   console.log("1.包含線上版本: 印度 v55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值");
-          // }
-          if(AppEnvironment.isDev()) {
+          // NOTE: 這邊目前可能是瀏覽器直接打開或 App 開啟沒有 getinfo 的mode
+          if(isInApp()) {
+            // NOTE: 這邊後續要判斷是 SimpleWebview or Webview
             appInfo = {
               packageId: 'com.ind.kyc.application',
               appName: 'dev_in',
@@ -85,6 +95,40 @@ export const getAppInfo = (): IAndroidAppInfo => {
               phoneNo: '後端API沒給',
             };
           } else {
+            appInfo = {
+              packageId: 'com.ind.kyc.application',
+              appName: 'dev_in',
+              environment: 'india',
+              uiVersion: '55',
+              domain: 'https://www.oasis-gold.com',
+              token: null,
+              // NOTICE: mode 的用途？
+              mode: 'H5',
+              phoneNo: '後端API沒給',
+            };
+          }
+
+        } else {
+          if(isInApp()) {
+            appInfo = {
+              // webview 不必要
+              domain: '',
+              // webview 不必要
+              environment: 'india',
+              // webview 不必要
+              packageId: 'unknown',
+              // webview 不必要
+              appName: 'unknown',
+              // NOTE: 換主題需要，但缺失
+              uiVersion: '55',
+              // webview 不必要
+              token: null,
+              // NOTE: required
+              mode: 'Webview',
+              phoneNo: '後端API沒給',
+            };
+          } else {
+            // NOTE: 線上環境直接用瀏覽器開
             appInfo = {
               // webview 不必要
               domain: '',
@@ -103,6 +147,8 @@ export const getAppInfo = (): IAndroidAppInfo => {
               phoneNo: '後端API沒給',
             };
           }
+
+        }
 
       }
 
@@ -124,15 +170,6 @@ export const getAppInfo = (): IAndroidAppInfo => {
         phoneNo: '後端API沒給',
       };
 
-      // NOTE: AppTempFlag.isWebview 此時沒有值, 無法判斷
-      // if(
-      //   AppTempFlag.isWebview
-      //   || AppFlag.isForceToWebview
-      // ) {
-      //   appInfo.mode = 'Webview';
-      // } else {
-      //   appInfo.mode = 'H5';
-      // }
 
     } else {
       throw new Error('前端請新增國家配置');
@@ -158,6 +195,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
       }
     }
     appInfo.mode = 'Webview';
+    // NOTE: 後續得判斷是 SimpleWebview 或 Webview
 
   }
 

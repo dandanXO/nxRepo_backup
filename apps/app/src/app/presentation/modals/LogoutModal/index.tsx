@@ -2,16 +2,20 @@ import React, { useEffect } from 'react';
 import { Overlay } from '@frontend/mobile/shared/ui';
 import { useNavigate, useLocation } from 'react-router';
 import { Button } from '../../components/layouts/Button';
+import {PersonalInfoPageSagaActions} from "../../pages/PersonalInfoPage/userUsecaseSaga";
+import {useDispatch} from "react-redux";
 
 const LogoutModal = (props: any) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log('extend location', location);
+  // console.log('extend location', location);
 
   const appName = 'App Name';
-  const handleLogout = () => {
-    console.log('log out');
+  const onClickConfirm = () => {
+    dispatch(PersonalInfoPageSagaActions.user.logout());
   };
+
   return (
     <div>
       <Overlay
@@ -35,7 +39,7 @@ const LogoutModal = (props: any) => {
                   <Button
                     className={'w-full'}
                     text={'Confirm'}
-                    onClick={() => navigate(-1)}
+                    onClick={onClickConfirm}
                   />
                 </div>
               </div>

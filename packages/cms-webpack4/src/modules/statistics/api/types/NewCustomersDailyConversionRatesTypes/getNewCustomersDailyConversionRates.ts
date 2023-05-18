@@ -4,7 +4,7 @@ export interface GetNewCustomersDailyConversionRatesRequestQuerystring {
     endTime?: string;                 // 结束时间
     startTime?: string;               // 开始时间
     merchantId?: number | '';         // 商戶Id
-    
+
     // api是舊的，要接 page跟size(而不是swagger上面寫pageNumber、pageSize)
     page?: number;
     size?: number;
@@ -17,7 +17,8 @@ export interface GetNewCustomersDailyConversionRatesResponse {
     records: NewCustomersDailyConversionRates[];
 }
 export interface NewCustomersDailyConversionRates {
-
+    allCertifiedCount?: string;             // 完成全部认证数
+    allCertifiedRate?:	string;             // 完成全部认率
     applyCount?: string;                    // 订单申请量
     applyRate?: string;                     // 申请转化率
     appsCount?: string;                     // AppList认证數
