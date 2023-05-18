@@ -72,7 +72,7 @@ const PersonalInfoPage = () => {
           <div>Verify now for highest amount</div>
           <Button
             onClick={onClickVerify}
-            className={'py-1 px-2'}
+            className={'py-1 px-2  w-auto'}
             text={
               <div className="flex flex-row items-center">
                 Verify Now{<FiChevronRight className="ml-1" />}
