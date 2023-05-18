@@ -11,6 +11,7 @@ import moment from "moment/moment";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { ProductTypes } from "../../../../service/product/domain/productTypes";
 import { productInterestRatePairsGroupIndexMap, productInterestRatePairsInitialValue } from "../ProductForm";
+import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
 export interface ProductFormModal {
     show: boolean;
     isEdit?: boolean
@@ -34,7 +35,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     const [modal, contextHolder] = Modal.useModal();
     const [tempFormData, setTempFormData] = useState({
-        productInterestRatePairs: undefined
+        productInterestRatePairs: productInterestRatePairsInitialValue
     });
 
     const [productModalData, setProductModalData] = useState<ProductFormModal>({
@@ -125,6 +126,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
             setTempFormData({ productInterestRatePairs })
 
+            const { hasError } = validatePreOrPostInterestGroups(productInterestRatePairs, true, 'content');
+
             form.setFieldsValue({
                 merchantId: currentMerchant?.name,
                 productName: productFormData.productName,
@@ -190,7 +193,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 dummy: productFormData.dummy,
                 extensionRate: `${fixedFloatNumberToFixed3(Number(productFormData.extensionRate) * 100)}`,
                 overdueRate: `${fixedFloatNumberToFixed3(Number(productFormData.overdueRate) * 100)}`,
-                productInterestRatePairsChecked: productFormData.productInterestRatePairs.length > 0,
+                productInterestRatePairsChecked: !hasError,
                 top: productFormData.top,
                 tags: productFormData.tags.split(","),
                 templateType: productFormData.templateType,
@@ -441,6 +444,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     }, []);
 
     return {
+        tempFormData,
         modal,
         productModalData,
         productFormData,

@@ -12,6 +12,7 @@ import OrderSettingSection from "./OrderSettingSection";
 
 interface ProductFormProps {
     modal: any;
+    tempFormData: any;
     productModalData: ProductFormModal;
     onFinish: (value: any) => void;
     form: any;
@@ -24,7 +25,6 @@ interface ProductFormProps {
     enableReLoanAmount: boolean;
     setEnableLoanAmount: any;
     setEnableReLoanAmount: any;
-
 }
 
 let isOnChange = false;
@@ -44,7 +44,7 @@ export const productInterestRatePairsInitialValue = [
 ]
 
 const Index = (props: ProductFormProps) => {
-    const { productModalData, onFinish, modal, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
+    const { productModalData, onFinish, modal, tempFormData, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
 
     const layout = {
         labelCol: { span: 5 },
@@ -295,6 +295,7 @@ const Index = (props: ProductFormProps) => {
             <RateSettingSection
                 modal={modal}
                 form={form}
+                tempFormData={tempFormData}
                 customAntFormFieldError={customAntFormFieldError}
                 setCustomAntFormFieldError={setCustomAntFormFieldError}
                 interestRatePairsTouchInput={interestRatePairsTouchInput}

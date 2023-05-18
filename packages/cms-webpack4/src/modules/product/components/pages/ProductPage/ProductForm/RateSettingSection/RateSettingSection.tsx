@@ -18,6 +18,7 @@ const { Panel } = Collapse;
 interface RateSettingSectionProps {
     modal: any;
     form: FormInstance;
+    tempFormData: any;
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     interestRatePairsTouchInput: any
@@ -25,7 +26,7 @@ interface RateSettingSectionProps {
 export const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>
 
 const RateSettingSection = (props: RateSettingSectionProps) => {
-  const [showProductInterestRatePairsModal, setShowProductInterestRatePairsModal] = useState(false)
+  const [showProductInterestRatePairsModal, setShowProductInterestRatePairsModal] = useState(false);
   const { confirm } = props.modal;
   const [messageAPI, contextHolder] = message.useMessage();
 
@@ -63,6 +64,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
           ),
           onOk() {
               props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue);
+              props.form.setFieldValue('productInterestRatePairsChecked', false);
               props.setCustomAntFormFieldError(prev => ({
                   ...prev,
                   productInterestRatePairs: {}
@@ -75,7 +77,19 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
       })
   }
 
+  const handleProductInterestRateSettingOnClick = () => {
+      props.setCustomAntFormFieldError((prev) => ({
+          ...prev,
+          productInterestRatePairsChecked: {
+              validateStatus: '',
+              help: '',
+          }
+      }))
+      setShowProductInterestRatePairsModal(true)
+  }
+
   const productInterestRatePairCheckedError = props.customAntFormFieldError['productInterestRatePairsChecked']['help']
+  const productInterestRatePairsChecked = props.form.getFieldValue('productInterestRatePairsChecked')
 
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
@@ -230,28 +244,13 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                   <Form.Item
                       label="复贷利率"
                       name='productInterestRatePairsChecked'
-                      initialValue={false}
                       required
                   >
-                      <div>
-                          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                              <a
-                                  style={{ textDecoration:'underline' }}
-                                  onClick={()=>{
-                                      props.setCustomAntFormFieldError((prev) => ({
-                                          ...prev,
-                                          productInterestRatePairsChecked: {
-                                              validateStatus: '',
-                                              help: '',
-                                          }
-                                      }))
-                                      setShowProductInterestRatePairsModal(true)
-                                  }}
-                              >
-                                  配置
-                              </a>
-                              <CheckCircleFilled style={{ color: `${!props.form.getFieldValue('productInterestRatePairsChecked') ? '#D9D9D9': '#52C41A'}` }} />
-                          </div>
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                          <a style={{ textDecoration:'underline' }} onClick={handleProductInterestRateSettingOnClick}>
+                              配置
+                          </a>
+                          <CheckCircleFilled style={{ color: `${productInterestRatePairsChecked ? '#52C41A' : '#D9D9D9'}` }} />
                           {
                               productInterestRatePairCheckedError &&
                               <div style={{ position: 'absolute', color:'red', top: '23px' }}>

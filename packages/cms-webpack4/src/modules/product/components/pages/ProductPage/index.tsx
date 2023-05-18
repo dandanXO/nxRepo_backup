@@ -16,7 +16,7 @@ export const ProductPage = () => {
   const {
     productModalData, setProductModalData,
     form, handleCloseModal, merchantList,
-    modal,
+    modal, tempFormData,
     onFinish, setCustomAntFormFieldError,
     customAntFormFieldError,
     triggerGetList, productListData,
@@ -68,6 +68,7 @@ export const ProductPage = () => {
           onOk={onFormSubmit}
         >
           <ProductForm modal={modal}
+                       tempFormData={tempFormData}
                        productModalData={productModalData}
                        onFinish={onFinish}
                        form={form}
