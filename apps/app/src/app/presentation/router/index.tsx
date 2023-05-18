@@ -310,7 +310,7 @@ export const AppRouter = () => {
         PagePathEnum.IndexPage as string,
         PagePathEnum.RepaymentPage as string,
         PagePathEnum.PersonalInfoPage as string,
-        PagePathEnum.PersonalInfoPage + "log-out-modal",
+        PagePathEnum.PersonalInfoPage + "/log-out-modal",
       ].indexOf(location.pathname) > -1 && (
         <TabBar
           hasOrder={payableRecords ? payableRecords?.length > 0 : false}
