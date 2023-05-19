@@ -186,7 +186,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
 
                 return {
                     ...prev,
-                    [[parentName][fieldName[0]]] : groupLatestInterestRatePairs
+                    [parentName] : groupLatestInterestRatePairs
                 }
             })
         } else {
