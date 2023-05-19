@@ -201,22 +201,22 @@ module.exports = (config, context) => {
       })
     );
     finalConfig["optimization"] = {
-      minimize: false,
-      // minimizer: [
-      //   new TerserPlugin({
-      //     terserOptions: {
-      //       compress: {
-      //         drop_console: true,
-      //       },
-      //       format: {
-      //         comments: false,
-      //       },
-      //     },
-      //     // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-      //     extractComments: false,
-      //
-      //   })
-      // ],
+      // minimize: false,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+            format: {
+              comments: false,
+            },
+          },
+          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+          extractComments: false,
+
+        })
+      ],
     }
 
     //   finalConfig.plugins.push(
