@@ -51,17 +51,22 @@ module.exports = (config, context) => {
   const finalConfig = merge(config, {
     // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
 
+
+
+
+
     // NOTE: Android 9 失敗
     // devtool: false,
-    // NOTE: Android 9 失敗
-    // devtool: "source-map",
+    devtool: "eval",
     // NOTE: Android 9 成功
-    // devtool: "eval-source-map",
-    // NOTE: Android 9 成功
-    // devtool: "eval-source-map",
+    // devtool: "eval-cheap-source-map",
     // NOTE: Android 9 成功
     // devtool: "eval-cheap-module-source-map",
-    devtool: "eval-cheap-source-map",
+    // NOTE: Android 9 成功
+    // devtool: "eval-source-map",
+
+    // NOTE: Android 9 失敗
+    // devtool: "source-map",
     output: {
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
