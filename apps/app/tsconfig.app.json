@@ -5,6 +5,7 @@
     "types": ["node"],
     "module": "es2020",
     "lib": [
+      "dom",
       "es5",
       "es2015",
       "es2016",
