@@ -89,7 +89,6 @@ const NewCustomersDailyConversionRatesTable = () => {
                 { title: <CustomColumn text={'绑卡认证'} />, dataIndex: 'bankCount', key: 'bankCount', hideInSearch: true, render: (text, { bankRate }) => <CustomColumn text={text} rate={bankRate} /> },
             ]
         },
-        { title: <CustomColumn text={'完成认证用户数'} />, dataIndex: 'allCertifiedCount', key: 'allCertifiedCount', hideInSearch: true, render: (text, { allCertifiedRate }) => <CustomColumn text={text} rate={allCertifiedRate} /> },
         {
             title: '完成认证', dataIndex: 'allCertified', key: 'allCertified', hideInSearch: true,
             children: [
