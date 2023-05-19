@@ -54,7 +54,6 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
   }
 
   const handleProductInterestRatePairsModalOnClose = (e) => {
-      e.stopPropagation();
       confirm({
           icon : null,
           content: (
