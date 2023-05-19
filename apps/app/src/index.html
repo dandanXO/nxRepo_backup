@@ -9,18 +9,6 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <script>
-      window.onerror = (message, source, lineno, colno, error) => {
-        console.log("debug.window.onerror");
-        console.log(`message: ${message}`);
-        console.log(`source: ${source}`);
-        console.log(`lineno: ${lineno}`);
-        console.log(`colno: ${colno}`);
-        console.log(`error: ${error}`);
-
-        return true;
-      };
-    </script>
   </head>
   <body>
     <div id="root"></div>

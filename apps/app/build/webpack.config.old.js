@@ -1,3 +1,5 @@
+const path = require("path");
+
 // NOTICE: refactor me
 const APP_IDENTIFICATION = '[apps/app]';
 const infoLog = (message, rest) => {
@@ -51,10 +53,6 @@ module.exports = (config, context) => {
   const finalConfig = merge(config, {
     // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
 
-
-
-
-
     // NOTE: Android 9 失敗
     // devtool: false,
     // NOTE: Android 9 成功
@@ -70,6 +68,12 @@ module.exports = (config, context) => {
     // devtool: "source-map",
     // NOTE: Android 9 失敗
     // devtool: "inline-source-map",
+
+    entry: {
+      main: path.resolve(__dirname, "../src/main.tsx"),
+      polyfills: path.resolve(__dirname, "../src/polyfills.ts"),
+      errorhandler: path.resolve(__dirname, "../errorEntry/index.ts"),
+    },
     output: {
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
@@ -198,26 +202,28 @@ module.exports = (config, context) => {
         template: './src/index.html',
         filename: 'index.html',
         // publicPath: "/v2",
+        chunks: ["errorhandler", "main", "polyfills"],
       })
     );
-    finalConfig["optimization"] = {
-      // minimize: false,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-            format: {
-              comments: false,
-            },
-          },
-          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-          extractComments: false,
-
-        })
-      ],
-    }
+    // NOTICE: 使用以下android 8 is ok
+    // finalConfig["optimization"] = {
+    //   // minimize: false,
+    //   minimizer: [
+    //     new TerserPlugin({
+    //       terserOptions: {
+    //         compress: {
+    //           drop_console: true,
+    //         },
+    //         format: {
+    //           comments: false,
+    //         },
+    //       },
+    //       // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+    //       extractComments: false,
+    //
+    //     })
+    //   ],
+    // }
 
     //   finalConfig.plugins.push(
     //     new CleanWebpackPlugin({
