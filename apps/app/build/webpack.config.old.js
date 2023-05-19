@@ -235,25 +235,25 @@ module.exports = (config, context) => {
     //     })
     //   );
 
-    finalConfig.plugins.push(
-      new SentryCliPlugin({
-        debug: true,
-        url: WebpackSentryConfig.url,
-        authToken: WebpackSentryConfig.authToken,
-        org: WebpackSentryConfig.org,
-        project: WebpackSentryConfig.project,
-        include: './dist/apps/app',
-        ignoreFile: '.sentrycliignore',
-        ignore: ['node_modules', 'webpack.config.js'],
-        // configFile: 'sentry.properties',
-        // setCommits: {
-        //   auto: false,
-        // ignoreMissing: true,
-        // repo: "frontend",
-        // commit: gitRevisionPlugin.commithash(),
-        // }
-      })
-    );
+    // finalConfig.plugins.push(
+    //   new SentryCliPlugin({
+    //     debug: true,
+    //     url: WebpackSentryConfig.url,
+    //     authToken: WebpackSentryConfig.authToken,
+    //     org: WebpackSentryConfig.org,
+    //     project: WebpackSentryConfig.project,
+    //     include: './dist/apps/app',
+    //     ignoreFile: '.sentrycliignore',
+    //     ignore: ['node_modules', 'webpack.config.js'],
+    //     // configFile: 'sentry.properties',
+    //     // setCommits: {
+    //     //   auto: false,
+    //     // ignoreMissing: true,
+    //     // repo: "frontend",
+    //     // commit: gitRevisionPlugin.commithash(),
+    //     // }
+    //   })
+    // );
   }
   console.log('finalConfig', finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
