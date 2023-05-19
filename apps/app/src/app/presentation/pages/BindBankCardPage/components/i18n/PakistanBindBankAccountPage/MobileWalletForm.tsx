@@ -84,7 +84,6 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           textAlign={'left'}
           labelType={'left'}
           outlineType={'standard'}
-          label={'+92'}
           placeholder={'Mobile Wallet Account'}
           value={props.mobileData.data}
           onChange={props.onMobileDataChange}
