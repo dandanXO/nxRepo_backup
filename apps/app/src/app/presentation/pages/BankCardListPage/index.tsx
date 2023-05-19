@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Navigation } from '../../components/layouts/Navigation';
 import { usePostBankCardMainMutation } from '../../../api/rtk';
 import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
-import { getToken } from '../../../modules/location/getToken';
+import { getToken } from '../../../modules/querystring/getToken';
 import { PagePathEnum } from '../PagePathEnum';
 
 const BankCardListPage = () => {

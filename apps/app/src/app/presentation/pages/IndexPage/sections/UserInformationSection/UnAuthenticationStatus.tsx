@@ -1,5 +1,5 @@
 import { IndexPageProps } from '../../../../../reduxStore';
-import { formatPrice } from '../../../../../modules/formatPrice';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
 
 type Props = IndexPageProps;
 
@@ -8,7 +8,8 @@ export const UnAuthenticationStatus = (props: Props) => {
     <div className={'text-center'}>
       <div className={'text-white'}>Maximum Loan Amount up to</div>
       <div data-testing-id="loanableAmount" className={'text-white text-4xl'}>
-        ₹ {props.state.openIndexAPI?.loanQuotaAmount}
+        {/*// NOTICE: 資料會包含 ₹*/}
+        {props.state.openIndexAPI?.loanQuotaAmount}
       </div>
     </div>
   );

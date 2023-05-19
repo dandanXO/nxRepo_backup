@@ -16,11 +16,16 @@ const OnlineCustomerServicePage = () => {
           navigate(-1);
         }}
       />
-      <iframe
-        className={`w-full grow`}
-        src={indexPage?.indexAPI?.customerServiceUrl}
-        title=""
-      />
+      {indexPage?.indexAPI?.customerServiceUrl ? (
+        <iframe
+          className={`w-full grow`}
+          src={indexPage?.indexAPI?.customerServiceUrl}
+          title=""
+        />
+      ): <div>
+        Didn't supported it
+      </div>}
+
     </Page>
   );
 };

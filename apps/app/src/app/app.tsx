@@ -13,6 +13,7 @@ import React from 'react';
 const routerSelector: ReduxRouterSelector<RootState> = (state) =>
   state.navigator;
 
+window["reduxStore"] = appStore;
 export function App() {
   return (
     <div>

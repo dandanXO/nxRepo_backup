@@ -73,7 +73,7 @@ export const changeLocationHref = (exportUrl: string) => {
   //   },
   // });
   // console.log("frontendError", frontendError);
-  // Sentry.captureException(frontendError, {
+  // SentryModule.captureException(frontendError, {
   //   tags: {
   //     packageId: AndroidAppInfo.packageId,
   //     uiVersion: AndroidAppInfo.uiVersion,

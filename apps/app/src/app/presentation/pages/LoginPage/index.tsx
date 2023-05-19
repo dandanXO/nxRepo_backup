@@ -3,14 +3,7 @@ import { Outlet } from 'react-router';
 import { Page } from '../../components/layouts/Page';
 import { LoginForm } from './LoginForm';
 
-import { useEffect } from 'react';
-import { AppTempFlag } from '../../../modules/nativeAppInfo/getAppInfo';
-
 const LoginPage = () => {
-  useEffect(() => {
-    AppTempFlag.isWebview = true;
-  });
-
   return (
     <Page className="flex flex-col">
       <Navigation

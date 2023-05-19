@@ -8,14 +8,15 @@ import { FiChevronRight } from '@react-icons/all-files/fi/FiChevronRight';
 
 import Card from './Card';
 import LinkItem from './LinkItem';
-import { getToken } from '../../../modules/location/getToken';
+import { getToken } from '../../../modules/querystring/getToken';
 import { RootState } from '../../../reduxStore';
 import { PagePathEnum } from '../PagePathEnum';
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
 import { useEffect } from 'react';
-import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/type/userUsecaseSaga/personalInfoPageSaga';
+import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 import { Button } from '../../components/layouts/Button';
+import {IndexPageSagaAction} from "../IndexPage/userUsecaseSaga/indexPageActions";
 
 const PersonalInfoPage = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ const PersonalInfoPage = () => {
   const navigate = useNavigate();
   const { indexPage, app } = useSelector((state: RootState) => state);
   const { user } = indexPage;
+
+  const onClickVerify = () => {
+    dispatch(IndexPageSagaAction.user.authenticateSaga());
+  }
 
   return (
     <Page className="flex flex-col ">
@@ -66,7 +71,8 @@ const PersonalInfoPage = () => {
         >
           <div>Verify now for highest amount</div>
           <Button
-            className={'py-1 px-2'}
+            onClick={onClickVerify}
+            className={'py-1 px-2  w-auto'}
             text={
               <div className="flex flex-row items-center">
                 Verify Now{<FiChevronRight className="ml-1" />}
@@ -120,9 +126,9 @@ const PersonalInfoPage = () => {
       </div>
       <div className="text-center my-2">
         <div
-          onClick={() =>
+          onClick={() => {
             navigate(`${PagePathEnum.PersonalInfoPage}/log-out-modal`)
-          }
+          }}
         >
           Log out
         </div>

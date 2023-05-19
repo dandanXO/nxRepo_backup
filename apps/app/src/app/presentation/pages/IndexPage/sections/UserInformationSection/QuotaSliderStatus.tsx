@@ -1,6 +1,6 @@
 import ReactSlider from './ReactSlider';
 import React, { useEffect, useMemo, useState, SetStateAction } from 'react';
-import { formatPrice } from '../../../../../modules/formatPrice';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { IndexPageProps } from '../../../../../reduxStore';
 import { environment } from '../../../../../../environments/environment';
 import cx from 'classnames';

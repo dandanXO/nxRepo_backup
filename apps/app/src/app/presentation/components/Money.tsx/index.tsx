@@ -1,4 +1,4 @@
-import { formatPrice } from '../../../modules/formatPrice';
+import { formatPrice } from '../../../modules/format/formatPrice';
 import { renderByCountry } from '../../../modules/i18n';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';

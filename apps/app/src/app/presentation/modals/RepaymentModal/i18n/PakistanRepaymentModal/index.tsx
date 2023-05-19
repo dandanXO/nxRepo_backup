@@ -11,7 +11,7 @@ import { environment } from '../../../../../../environments/environment';
 import { Button } from '../../../../components/layouts/Button';
 import { IRepaymentModalProps } from '../../index';
 import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
-import { getToken } from '../../../../../modules/location/getToken';
+import { getToken } from '../../../../../modules/querystring/getToken';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import cx from 'classnames';
 import moment from 'moment';
@@ -91,16 +91,9 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
               setBalanceValueErrorMessage('');
             }
             // setBalanceValue(value);
-            if (
-              value === 'KR' ||
-              value === 'PR' ||
-              value === 'PKR' ||
-              value === 'PK'
-            ) {
-              //
-            } else {
-              setBalanceValue(`${environment.currency} ${value}`);
-            }
+            if (!value.includes(environment.currency)) {
+                setBalanceValue(`${environment.currency} ${value}`);
+            } 
           }}
           onBlur={() => {}}
           errorMessage={
@@ -169,20 +162,15 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         </>
       )}
 
-      {radioValue !== 'custom' && (
-        <div className="mt-3 font-bold">
+      <div className="mt-3 font-bold">
           <ListItem
-            title={'Repayment Amount'}
-            text={
-              <Money
-                money={
-                  Number(balance) - Number(coupon ? coupon.discountAmount : 0)
-                }
-              />
-            }
-          />
-        </div>
-      )}
+              title={'Repayment Amount'}
+              text={radioValue !== 'custom' ?
+                  <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} /> :
+                  <Money money={balanceValue.replace(`${environment.currency}`, '').trim()} />
+              }
+           />
+      </div>
 
       <div className={`flex flex-row my-3`}>
         <div className={`mr-1.5 w-full `}>

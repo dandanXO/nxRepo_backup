@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GetInitServiceResponse } from '../api/appService/GetInitServiceResponse';
-import { IAndroidAppInfo } from '../modules/nativeAppInfo/IAndroidAppInfo';
+import { IAndroidAppInfo } from '../persistant/nativeAppInfo/types/IAndroidAppInfo';
 
 export enum AppRunningModeEnum {
   'Unknown',
@@ -27,8 +27,8 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    init: (state: InitailState, action: PayloadAction<null>) => {
-      state.isInit = true;
+    init: (state: InitailState, action: PayloadAction<boolean>) => {
+      state.isInit = action.payload;
     },
     updateInit: (
       state: InitailState,

@@ -15,7 +15,8 @@ import { useSelector } from 'react-redux';
 import { TabBar } from '../components/layouts/TabBar';
 import { RootState } from '../../reduxStore';
 import { PagePathEnum } from '../pages/PagePathEnum';
-import AppDataCollector from '../../AppDataCollector';
+import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
+import posthog from "posthog-js";
 
 const AuthPage = loadable(
   () => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage')
@@ -178,6 +179,10 @@ const IBANFinderModal = loadable(
 );
 
 export const AppRouter = () => {
+  const isInit: boolean = useSelector(
+    (state: RootState) => state.app.isInit
+  );
+
   const location = useLocation();
   const apiBoundary = useSelector(
     (state: RootState) => state.APIBoundaryModule
@@ -185,6 +190,19 @@ export const AppRouter = () => {
   const payableRecords = useSelector(
     (state: RootState) => state.indexPage.indexAPI?.payableRecords
   );
+
+  // NOTICE: 純 H5 在用畫面阻擋
+  // if(NativeAppInfo.mode === 'H5' && !isInit) {
+    // if(!isInit) {
+      // return <div>APP initialized wrongly</div>
+      // return <div>H5 mode is initializing</div>
+    // }
+  // }
+
+
+  React.useEffect(() => { // new
+    posthog.capture('$pageview')
+  }, [location]);
 
   return (
     <AppDataCollector>
@@ -195,7 +213,7 @@ export const AppRouter = () => {
         <Route path={PagePathEnum.LoginPage} element={<LoginPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
-        <Route path="/v2/iban-finder" element={<IBANFinderPage />} />
+        <Route path={PagePathEnum.IBANFinderPage} element={<IBANFinderPage />} />
         <Route path={PagePathEnum.IndexPage} element={<IndexPage />} />
         <Route
           path={PagePathEnum.PrivacyPolicyModal}
@@ -287,10 +305,12 @@ export const AppRouter = () => {
       {/*  prevent empty page*/}
       {/*</Page>*/}
 
+      {/*TODO: refactor me*/}
       {[
         PagePathEnum.IndexPage as string,
         PagePathEnum.RepaymentPage as string,
         PagePathEnum.PersonalInfoPage as string,
+        PagePathEnum.PersonalInfoPage + "/log-out-modal",
       ].indexOf(location.pathname) > -1 && (
         <TabBar
           hasOrder={payableRecords ? payableRecords?.length > 0 : false}

@@ -36,7 +36,7 @@ const useRepayCreate = () => {
           // error.name = "postRepayCreate"
           // if (err) error.message = JSON.stringify(err)
 
-          //   Sentry.captureException(error);
+          //   SentryModule.captureException(error);
           reject(err);
         });
     });

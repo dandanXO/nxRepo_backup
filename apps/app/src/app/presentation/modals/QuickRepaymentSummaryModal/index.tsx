@@ -14,7 +14,7 @@ import React, {
 } from 'react';
 import { IndexPageProps } from '../../../reduxStore';
 import { FinalProductsSummary, FinalProductType } from '../../pages/IndexPage';
-import { formatPrice } from '../../../modules/formatPrice';
+import { formatPrice } from '../../../modules/format/formatPrice';
 import Select, {
   IndicatorsContainerProps,
   components,

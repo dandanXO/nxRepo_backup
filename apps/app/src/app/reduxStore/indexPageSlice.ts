@@ -9,7 +9,8 @@ import { GetIndexResponse } from '../api/indexService/GetIndexResponse';
 import { GetQuotaModelStatusResponse } from '../api/loanService/GetQuotaModelStatusResponse';
 import { GetUserInfoServiceResponse } from '../api/userService/GetUserInfoServiceResponse';
 import { GetOpenIndexResponse } from '../api/indexService/GetOpenIndexResponse';
-import { getQuotaModelStatusAction } from '../usecaseFlow/type/userUsecaseSaga/indexPageSaga/userReacquireCreditSaga';
+import { getQuotaModelStatusAction } from '../presentation/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
+import {NativeAppInfo} from "../persistant/nativeAppInfo";
 
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;
@@ -104,7 +105,9 @@ export const indexPageSlice = createSlice({
       state,
       action: PayloadAction<GetUserInfoServiceResponse>
     ) => {
-      state.user.userName = action.payload.userName;
+      // state.user.userName = action.payload.userName;
+      state.user.userName = NativeAppInfo.phoneNo;
+
       if (action.payload.status === 0) {
         state.user.state = USER_AUTH_STATE.ready;
       } else if (action.payload.status === 1) {
@@ -116,7 +119,8 @@ export const indexPageSlice = createSlice({
       }
     },
     updateIndexAPI: (state, action: PayloadAction<GetIndexResponse>) => {
-      // console.log("updateIndexAPI", state, action)
+      console.log("updateIndexAPI", state, action)
+
       state.indexAPI = action.payload;
       state.sharedIndex.marquee = action.payload.marquee;
 

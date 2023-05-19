@@ -18,21 +18,13 @@ import { environment } from '../../../../../../environments/environment';
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from '../../../../components/layouts/Button';
 import { IRepaymentModalProps } from '../../index';
-import { formatPrice } from '../../../../../modules/formatPrice';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
-import { getToken } from '../../../../../modules/location/getToken';
-
-export const RepaymentModalContainer = styled.div`
-  color: #101010;
-  padding: 0 8px;
-`;
-const SectionBalance = styled.div`
-  padding: 0 4px;
-`;
-
-const MethodContainer = styled.div`
-  margin-bottom: 18px;
-`;
+import { getToken } from '../../../../../modules/querystring/getToken';
+import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
+import cx from 'classnames';
+import moment from 'moment';
+import Money from '../../../../components/Money.tsx';
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {
@@ -56,22 +48,18 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   //   errorMessage: "",
   // });
   const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState('');
+  const location = useLocation()
+  const { coupon } = location.state;
   return (
-    <RepaymentModalContainer>
-      <SectionBalance>
-        {/*<ListItem*/}
-        {/*    title={props.t("Balance") as any}*/}
-        {/*    text={```}*/}
-        {/*/>*/}
-        <div className="flex justify-between">
-          <div className="font-medium">Balance</div>
-          <div className="font-medium">{`${environment.currency} ${formatPrice(
-            balance
-          )}`}</div>
+    <div className='px-2 text-ctext-primary'>
+      <div className='px-1 font-2xl'>
+        <div className="flex justify-between text-sm font-bold">
+          <div>Balance</div>
+          <div>{<Money money={balance}/>}</div>
         </div>
-      </SectionBalance>
+      </div>
 
-      <MethodContainer>
+      <div className='mb-1.5'>
         <Radio.Group
           value={radioValue}
           onCheck={(value: any) => {
@@ -87,7 +75,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           <Radio value="balance">{props.t('Pay Full')}</Radio>
           <Radio value="custom">{props.t('Pay Partial')}</Radio>
         </Radio.Group>
-      </MethodContainer>
+      </div>
 
       <Input
         disabled={radioValue === 'balance'}
@@ -113,26 +101,69 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
             setBalanceValueErrorMessage('');
           }
 
-          if (value.trim() === '₹') {
-            //
-          } else {
+          if (!value.includes(environment.currency)) {
             setBalanceValue(`${environment.currency} ${value}`);
-          }
+          } 
         }}
         onBlur={() => {}}
         errorMessage={
           balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage
         }
       />
+      {radioValue !== 'custom' && (
+          <a
+            className="flex w-full border-solid border border-[#aaaaaa] justify-center items-center pl-5 py-2.5 rounded-lg mt-1"
+            onClick={() => {
+              if (isRepayTypesFetching) return;
 
+              navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`,
+                {
+                  state: {
+                    ...location.state,
+                    paymentAmount: balance,
+                    paymentMethod: repayType.value,
+                  },
+                }
+              );
+            }}
+          >
+            <div className={cx('grow text-base flex-nowrap flex justify-between')}>
+            <div className='self-center'>Coupon</div>
+              {coupon ? (
+                <div className="flex flex-col justify-between grow items-end my-[-4px]">
+                  <div className="text-sm text-primary-main">{<Money money={coupon.discountAmount} isNagetive={true}/>}</div>
+                  <div className="text-xs text-ctext-tertiary">
+                    <div>expiration date: {coupon.expireTime
+                        ? moment(coupon.expireTime).format('DD-MM-YYYY')
+                        : ''}</div>
+                  </div>
+                </div>
+              ) : (
+                    <div className='text-cTextFields-placeholder-main'>Select</div>
+              )}
+              
+            </div>
+            <RiArrowRightSLine className="text-xl fill-ctext-primary mx-1" />
+          </a>
+
+      )}
+       <div className="mt-3 font-bold">
+          <ListItem
+              title={'Repayment Amount'}
+              text={radioValue !== 'custom' ?
+                  <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} /> :
+                  <Money money={balanceValue.replace(`${environment.currency}`, '').trim()} />
+              }
+           />
+      </div>
       <div className={`flex flex-row my-3`}>
         <div className={`mr-1.5 w-full`}>
           <Button
             onClick={() => {
-              if (isRepayTypesFetching) return;
+            //   if (isRepayTypesFetching) return;
               navigate(
                 `${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,
-                { state: { orderNo } }
+                  { state: { orderNo } }
               );
             }}
             text={props.t('Cancel')}
@@ -169,7 +200,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
       <div className={`my-4`}>
         <img className={`w-full`} src={AdSVG} />
       </div>
-    </RepaymentModalContainer>
+    </div>
   );
 };
 

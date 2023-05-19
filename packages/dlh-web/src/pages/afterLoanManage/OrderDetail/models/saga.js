@@ -5,6 +5,9 @@ import {
     ORD_LOOK_URGE_RECORD,
     ORD_GET_URGE_RECORD,
     ORD_PARTIAL_REPAYMENT,
+    ORD_GET_DETAIL_TAB_CONTROL,
+    ORD_GET_ADDRESS_BOOK,
+    ORD_GET_SMS_MESSAGE,
     ordChangeRrecordModal,
     ordSetUrgeRecord,
     ordChangeModalVisible,
@@ -14,9 +17,12 @@ import {
     ordGetOrderDetail,
     ordChangeRepaymentModalVisible,
     ordSetMessageContent,
-    ordChangeMessageModalVisible
+    ordChangeMessageModalVisible,
+    ordSetDetailTabControl,
+    ordSetAddressBook,
+    ordSetSmsMessage
 } from './actions';
-import { getOperator, getOrderDetail, getUserContacts, addUrgeRecord, getUrgeRecord, partialRepayment } from '../api';
+import { getOperator, getOrderDetail, getUserContacts, getUserSmsLogs, addUrgeRecord, getUrgeRecord, partialRepayment, getDetailTabControl } from '../api';
 import { converData, userConvertData } from './convertData';
 const detailSelector = (state) => state.afterLoanManageState.orderDetailState.orderData;
 
@@ -35,21 +41,46 @@ function* getOperatorData(action) {
 }
 function* getContactsData(action) {
     try {
-        const resContacts = yield call(getUserContacts, action.userParams);
-        if(Number(resContacts.code) === 200) {
-            const detail = yield select(detailSelector);
-            const orderInfo = { ...detail, addressBook: resContacts['data'] || [] };
-            yield put(ordSetOrderDetail(orderInfo));
+        const res = yield call(getUserContacts, action.params);
+        const obj = {
+            data: res.records || [],
+            pagination: {
+                total: res.totalRecords,
+                current: res.records.length === 0 ? 0 : res.currentPage,
+            }
         }
+        yield put(ordSetAddressBook(obj));
     } catch (e) {
         console.log(e);
     }
-
 }
 
+function* watchGetContactsData() {
+    yield takeEvery(ORD_GET_ADDRESS_BOOK, getContactsData);
+}
+
+function* getSmsLogsData(action) {
+    try {
+        const res = yield call(getUserSmsLogs, action.params);
+
+        const obj = {
+            data: res.records || [],
+            pagination: {
+                total: res.totalRecords,
+                current: res.records.length === 0 ? 0 : res.currentPage,
+            }
+        }
+        yield put(ordSetSmsMessage(obj));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function* watchGetSmsLogsData() {
+    yield takeEvery(ORD_GET_SMS_MESSAGE, getSmsLogsData);
+}
 
 function* getDetail(action) {
-    yield fork(getContactsData, action);
     try{
         const resDetail = yield call(getOrderDetail, action.overdueParams);
         // const resOperator = yield call(getOperator, action.userParams);
@@ -153,12 +184,29 @@ function* watchPartialRepayment() {
     yield takeEvery(ORD_PARTIAL_REPAYMENT, sendPartialRepayment);
 }
 
+//取得detail頁 tab的開關
+function* getDetailTabControlData(action) {
+    try {
+        const res = yield call(getDetailTabControl);
+        yield put(ordSetDetailTabControl(res.overDueCollect));
+    } catch (e) {
+        console.log(e);
+    }
+}
+function* watchGetDetailTabControlData() {
+    yield takeEvery(ORD_GET_DETAIL_TAB_CONTROL, getDetailTabControlData);
+}
+
+
 export default function* root() {
     yield all([
         fork(watchGetDetail),
         fork(watchLookUrgeRecord),
         fork(watchAddUrgeList),
         fork(watchGetAllUrgeRecord),
-        fork(watchPartialRepayment)
+        fork(watchPartialRepayment),
+        fork(watchGetDetailTabControlData),
+        fork(watchGetContactsData),
+        fork(watchGetSmsLogsData)
     ])
 }

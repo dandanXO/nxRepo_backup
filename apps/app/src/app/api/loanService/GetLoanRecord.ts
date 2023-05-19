@@ -14,6 +14,7 @@ export interface GetLoanRecord {
   detailH5lUrl?: string; // Loan Detail H5 URL
   dueDate?: string; // 到期日期
   extendDate?: string; // 展期日期(status = EXTEND才會有)
+  extension?: string;  // 是否为展期中
   extensionFee?: number; // 展期費用(status = EXTEND才會有)
   iconUrl?: string; // Icon url
   loanAmount?: number; // 借款金额

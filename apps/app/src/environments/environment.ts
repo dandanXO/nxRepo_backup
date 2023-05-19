@@ -3,7 +3,7 @@
 // NOTE: [Define Environment Variables](https://nx.dev/recipes/environment-variables/define-environment-variables)
 // console.log("process.env.NX_TEST_GENERAL", process.env.NX_VERBOSE_LOGGING)
 // console.log("process.env.NX_TEST_SINGLE", process.env.NX_SERVE)
-import { IEnvironment } from '../app/modules/IEnvironment';
+import { IEnvironment } from '../app/modules/appEnvironment/IEnvironment';
 import { IndiaCountry } from '../../../../libs/shared/domain/src/country/IndiaCountry';
 
 export const environment: IEnvironment = {

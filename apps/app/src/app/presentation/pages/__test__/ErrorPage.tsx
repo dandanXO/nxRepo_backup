@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 
 import useErrorBoundary from 'use-error-boundary';
 
-import { ErrorBoundary as CustomErrorBoundary } from '../../../modules/ErrorBoundary';
+import { ErrorBoundary as CustomErrorBoundary } from '../../../modules/errorHandler/ErrorBoundary';
 
 const JustRenderMe = () => {
   throw new Error('💥');
