@@ -260,15 +260,18 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                           }
                       </div>
                   </Form.Item>
-                  <ProductInterestRatePairsModal
-                      form={props.form}
-                      customAntFormFieldError={props.customAntFormFieldError}
-                      setCustomAntFormFieldError={props.setCustomAntFormFieldError}
-                      interestRatePairsTouchInput={props.interestRatePairsTouchInput}
-                      show={showProductInterestRatePairsModal}
-                      onOk={handleProductInterestRatePairsModalOnOK}
-                      handleCloseModal={handleProductInterestRatePairsModalOnClose}
-                  />
+                  {
+                      showProductInterestRatePairsModal && (
+                      <ProductInterestRatePairsModal
+                          form={props.form}
+                          customAntFormFieldError={props.customAntFormFieldError}
+                          setCustomAntFormFieldError={props.setCustomAntFormFieldError}
+                          interestRatePairsTouchInput={props.interestRatePairsTouchInput}
+                          show={showProductInterestRatePairsModal}
+                          onOk={handleProductInterestRatePairsModalOnOK}
+                          handleCloseModal={handleProductInterestRatePairsModalOnClose}
+                      />)
+                  }
               </Panel>
           </Collapse>
       </React.Fragment>
