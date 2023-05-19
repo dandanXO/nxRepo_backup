@@ -52,6 +52,7 @@ module.exports = (config, context) => {
     // devtool: false,
     // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
     // devtool: "source-map",
+    devtool: "eval-source-map",
     output: {
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
