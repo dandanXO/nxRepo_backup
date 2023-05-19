@@ -9,6 +9,7 @@ import { UploadSettingSection } from "./UploadSettingSection";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { GetAvailableMerchantResponse } from "../../../../service/product/response/getAvailableMerchantResponse";
 import OrderSettingSection from "./OrderSettingSection";
+import { productInterestRatesContentKey } from "../../../../service/product/domain/productInterestRatePair";
 
 interface ProductFormProps {
     modal: any;
@@ -29,18 +30,11 @@ interface ProductFormProps {
 
 let isOnChange = false;
 
-export const productInterestRatePairsGroupIndexMap = {
-    EXCELLENT: 0,
-    GOOD: 1,
-    NORMAL: 2,
-    ORDINARY: 3
-}
-
 export const productInterestRatePairsInitialValue = [
-    { content: [{ riskRank: 'EXCELLENT', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-    { content: [{ riskRank: 'GOOD', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-    { content: [{ riskRank: 'NORMAL', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-    { content: [{ riskRank: 'ORDINARY', num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
 ]
 
 const Index = (props: ProductFormProps) => {

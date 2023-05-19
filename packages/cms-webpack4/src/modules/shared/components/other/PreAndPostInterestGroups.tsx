@@ -5,9 +5,6 @@ import { maxOneUnitFloatReplacer } from '../../utils/format/maxOneUnitFloatRepla
 import { FormInstance, useWatch } from 'antd/lib/form/Form';
 import { CustomAntFormFieldError } from '../../utils/validation/CustomAntFormFieldError';
 import { validateValue, validateNum, validateplusAmount } from './validatePreOrPostInterestGroups';
-import {
-    riskLabelMap
-} from "../../../product/components/pages/ProductPage/ProductForm/RateSettingSection/ProductInterestRatePairsModal";
 
 
 export const CustomLabel = (props: { style?: CSSProperties, children: string | ReactElement | ReactElement[] }) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style }}>{props.children}</div>
@@ -19,7 +16,6 @@ interface PreAndPostInterestGroupsProps {
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     interestRatePairsTouchInput: any;
     parentName?: string;
-    groupName?: string;
     fieldName: string | [number, string];
 }
 
@@ -244,15 +240,6 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                     )}
 
                                     <Space key={key} size={8} style={{ marginBottom: 0 }} align="baseline">
-                                        { isMultiGroup && (
-                                            <Form.Item
-                                                { ...(index !== 0 ) && { initialValue : riskLabelMap[fieldName[0]].key }}
-                                                name={[name, props.groupName]}
-                                                style={{ display: "none" }}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                        )}
                                         <Form.Item
                                             {...(index !== 0 || !isMultiGroup) && {initialValue: ''}}
                                             {...restField}

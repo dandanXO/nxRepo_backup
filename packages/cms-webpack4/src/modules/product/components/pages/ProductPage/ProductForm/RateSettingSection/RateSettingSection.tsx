@@ -12,6 +12,7 @@ import {
 } from "../../../../../../shared/components/other/validatePreOrPostInterestGroups";
 import { productInterestRatePairsInitialValue } from "../index";
 import { CheckCircleFilled, ExclamationCircleOutlined } from "@ant-design/icons";
+import { productInterestRatesContentKey } from "../../../../../service/product/domain/productInterestRatePair";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
@@ -32,7 +33,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
 
   const handleProductInterestRatePairsModalOnOK = () => {
       const { productInterestRatePairs } = props.form.getFieldsValue();
-      const { validateMap: productInterestRatePairsValidationMap, hasError} = validatePreOrPostInterestGroups(productInterestRatePairs, true, 'content')
+      const { validateMap: productInterestRatePairsValidationMap, hasError} = validatePreOrPostInterestGroups(productInterestRatePairs, true, productInterestRatesContentKey)
 
       props.setCustomAntFormFieldError(
           prev => {

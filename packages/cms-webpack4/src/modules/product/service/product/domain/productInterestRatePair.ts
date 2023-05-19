@@ -1,10 +1,11 @@
 export type BaseRiskRank = 'EXCELLENT' | 'GOOD' | 'NORMAL' | 'ORDINARY'
 export type RiskRank = BaseRiskRank | 'REJECT'
 
-
+export const productInterestRatesContentKey = 'interestRates'
 
 export interface ProductInterestRatePair {
-    interestRates: [
+    riskRank: RiskRank
+    [productInterestRatesContentKey]: [
         {
             num: number;          // 提额次数
             postInterest: number; // 后置利率
@@ -12,5 +13,4 @@ export interface ProductInterestRatePair {
             plusAmount: number;   // 借款額度提額
         }
     ],
-    riskRank: RiskRank
 }

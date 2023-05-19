@@ -3,7 +3,10 @@ import { FormInstance } from 'antd/lib/form/Form'
 import { CustomAntFormFieldError } from "../../../../../../shared/utils/validation/CustomAntFormFieldError";
 import React from "react";
 import PreAndPostInterestGroups from "../../../../../../shared/components/other/PreAndPostInterestGroups";
-import {BaseRiskRank, RiskRank} from "../../../../../service/product/domain/productInterestRatePair";
+import {
+    productInterestRatesConvertToBackendMap
+} from "../../hooks/useProductFormModal";
+import { productInterestRatesContentKey } from "../../../../../service/product/domain/productInterestRatePair";
 
 interface ProductInterestRatePairsModalProps {
     form: FormInstance
@@ -14,33 +17,6 @@ interface ProductInterestRatePairsModalProps {
     onOk: () => void;
     handleCloseModal: (event) => void;
 }
-
-export const riskLabelMap:{ label:string, key: RiskRank }[] = [
-    { label: '极好', key: 'EXCELLENT'},
-    { label: '良好', key: 'GOOD'},
-    { label: '正常', key: 'NORMAL'},
-    { label: '普通', key: 'ORDINARY'},
-]
-
-export const riskRankLabelAndSortMap: { [key in BaseRiskRank] : { label: string, sort: number} } = {
-    EXCELLENT: {
-        label: '极好',
-        sort: 0,
-    },
-    GOOD: {
-        label: '良好',
-        sort: 1
-    },
-    NORMAL: {
-        label: '正常',
-        sort: 2
-    },
-    ORDINARY: {
-        label: '普通',
-        sort: 3
-    }
-};
-
 
 export const ProductInterestRatePairsModal = (
     {
@@ -67,13 +43,13 @@ export const ProductInterestRatePairsModal = (
                     return (
                         <Card
                             key={firstField.name}
-                            title={`风控标签：${riskLabelMap[firstField.name].label}`}
+                            title={`风控标签：${productInterestRatesConvertToBackendMap[firstField.name].label}`}
                             headStyle={{ border: "none" }}
                             bodyStyle={{ paddingTop: 0 }}
                             style={{ marginBottom: '20px' }}
                             extra={<Button onClick={()=>{
                                 const fieldValue = form.getFieldValue('productInterestRatePairs');
-                                fieldValue[firstField.name] = { content: [{ riskRank: riskLabelMap[firstField.name].key, num: '', preInterest: '', postInterest: '', plusAmount: '' }]};
+                                fieldValue[firstField.name] = { [productInterestRatesContentKey]: [{ preInterest: '', postInterest: '', plusAmount: '' }]};
                                 form.setFieldValue('productInterestRatePairs', fieldValue);
                             }}>清除重填</Button>}
                         >
@@ -83,8 +59,7 @@ export const ProductInterestRatePairsModal = (
                                 setCustomAntFormFieldError={setCustomAntFormFieldError}
                                 interestRatePairsTouchInput={interestRatePairsTouchInput}
                                 parentName='productInterestRatePairs'
-                                groupName='riskRank'
-                                fieldName={[firstField.name, 'content']} />
+                                fieldName={[firstField.name, productInterestRatesContentKey]} />
                         </Card>
                     )
                 })

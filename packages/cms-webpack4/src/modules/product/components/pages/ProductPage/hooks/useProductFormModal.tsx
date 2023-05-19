@@ -12,7 +12,10 @@ import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/
 import { ProductTypes } from "../../../../service/product/domain/productTypes";
 import { productInterestRatePairsInitialValue } from "../ProductForm";
 import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
-import { riskRankLabelAndSortMap } from "../ProductForm/RateSettingSection/ProductInterestRatePairsModal";
+import {
+    BaseRiskRank,
+    productInterestRatesContentKey
+} from "../../../../service/product/domain/productInterestRatePair";
 export interface ProductFormModal {
     show: boolean;
     isEdit?: boolean
@@ -32,6 +35,43 @@ export interface ProductFormUploads {
     logoFileList: UploadFile[];
     backgroundImgFileList: UploadFile[];
 }
+
+export const productInterestRatesConvertToBackendMap: { [key in number]: { label : string, key : BaseRiskRank } } = {
+    0 : {
+        label: '极好',
+        key: "EXCELLENT"
+    },
+    1 : {
+        label: '良好',
+        key: 'GOOD'
+    },
+    2 : {
+        label: '正常',
+        key: "NORMAL"
+    },
+    3 : {
+        label: '普通',
+        key: "ORDINARY"
+    }
+}
+
+const productInterestRatesConvertToFrontendMap: { [key in BaseRiskRank]? : { label: string, sort: number} } =
+    Object.keys(productInterestRatesConvertToBackendMap).reduce((acc, current) => ({
+    ...acc,
+    [productInterestRatesConvertToBackendMap[current].key] : {
+        label: productInterestRatesConvertToBackendMap[current].label,
+        sort: Number(current),
+    }
+}), {})
+/*
+    productInterestRatesConvertToFrontendMap like {
+        EXCELLENT : {
+            label : 极好,
+            sort : 0
+        }
+    }
+ */
+
 export const useProductFormModal = (props: ProductFormModal) => {
 
     const [modal, contextHolder] = Modal.useModal();
@@ -106,8 +146,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
         } else {
             let productInterestRatePairs = productFormData.productInterestRatePairs.reduce((acc, current)=> {
                 if (current.riskRank === 'REJECT') return acc;
-                const groupIndex = riskRankLabelAndSortMap[current.riskRank].sort
-                const interestRates = current.interestRates.reduce((interestRatesAcc, interestRatesCurrent) => [
+                const groupIndex = productInterestRatesConvertToFrontendMap[current.riskRank].sort
+                let interestRates = current[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => [
                     ...interestRatesAcc,
                     {
                         ...interestRatesCurrent,
@@ -116,19 +156,19 @@ export const useProductFormModal = (props: ProductFormModal) => {
                     }
                 ], []);
 
-                if (interestRates.length === 0) return acc;
+                if (interestRates.length === 0) {
+                    interestRates = [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]
+                }
 
                 acc[groupIndex] = {
-                    content: interestRates
+                    [productInterestRatesContentKey]: interestRates
                 }
                 return acc;
             }, []);
 
-            if (productInterestRatePairs.length === 0)  productInterestRatePairs = productInterestRatePairsInitialValue;
-
             setTempFormData({ productInterestRatePairs })
 
-            const { hasError } = validatePreOrPostInterestGroups(productInterestRatePairs, true, 'content');
+            const { hasError } = validatePreOrPostInterestGroups(productInterestRatePairs, true, productInterestRatesContentKey);
 
             form.setFieldsValue({
                 merchantId: currentMerchant?.name,
@@ -294,16 +334,15 @@ export const useProductFormModal = (props: ProductFormModal) => {
         if (isNotFinish) return;
 
         let productInterestRatePairs = values?.productInterestRatePairs || tempFormData.productInterestRatePairs
-        productInterestRatePairs = productInterestRatePairs?.reduce((acc, current) => {
-            const productInterestRatePairsGroups = current['content'].map((part) => ({
-                num: part.num,
-                postInterest: Number((Number(part.postInterest) * 0.01).toFixed(3)),
-                preInterest: Number((Number(part.preInterest) * 0.01).toFixed(3)),
-                plusAmount: Number(part.plusAmount),
-                riskRank: part.riskRank
-            }))
-            return [...acc, ...productInterestRatePairsGroups]
-        }, [])
+        productInterestRatePairs = productInterestRatePairs.reduce((acc, current, index) => (
+            [
+                ...acc,
+                {
+                    riskRank: productInterestRatesConvertToBackendMap[index].key,
+                    [productInterestRatesContentKey]: current[productInterestRatesContentKey]
+                }
+            ]
+        ), [])
 
         const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
             ...i,
