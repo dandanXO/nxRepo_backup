@@ -4,7 +4,16 @@
     "outDir": "../../dist/out-tsc",
     "types": ["node"],
     "module": "es2020",
-    "lib": ["ES2021"],
+    "lib": [
+      "es5",
+      "es2015",
+      "es2016",
+      "es2017",
+      "es2018",
+      "es2019",
+      "es2020",
+      "es2021"
+    ],
     "strict": true,
     "allowJs": true
   },
