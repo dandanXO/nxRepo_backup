@@ -29,6 +29,21 @@ export const ProductInterestRatePairsModal = (
         handleCloseModal
     }:ProductInterestRatePairsModalProps) => {
 
+    const handleClearFields = (groupIndex) => {
+        const fieldValue = form.getFieldValue('productInterestRatePairs');
+        fieldValue[groupIndex] = { [productInterestRatesContentKey]: [{ preInterest: '', postInterest: '', plusAmount: '' }]};
+        form.setFieldValue('productInterestRatePairs', fieldValue);
+        setCustomAntFormFieldError((prev) =>(
+            {
+                ...prev,
+                productInterestRatePairs: {
+                    ...prev['productInterestRatePairs'],
+                    [groupIndex]: {}
+                }
+            }
+        ))
+    }
+
     return <Modal
         open={show}
         title='复贷利率'
@@ -47,11 +62,7 @@ export const ProductInterestRatePairsModal = (
                             headStyle={{ border: "none" }}
                             bodyStyle={{ paddingTop: 0 }}
                             style={{ marginBottom: '20px' }}
-                            extra={<Button onClick={()=>{
-                                const fieldValue = form.getFieldValue('productInterestRatePairs');
-                                fieldValue[firstField.name] = { [productInterestRatesContentKey]: [{ preInterest: '', postInterest: '', plusAmount: '' }]};
-                                form.setFieldValue('productInterestRatePairs', fieldValue);
-                            }}>清除重填</Button>}
+                            extra={<Button onClick={()=>handleClearFields(firstField.name)}>清除重填</Button>}
                         >
                             <PreAndPostInterestGroups
                                 form={form}
