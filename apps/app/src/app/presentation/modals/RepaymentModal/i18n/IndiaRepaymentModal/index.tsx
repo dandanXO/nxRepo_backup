@@ -160,10 +160,10 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         <div className={`mr-1.5 w-full`}>
           <Button
             onClick={() => {
-              if (isRepayTypesFetching) return;
+            //   if (isRepayTypesFetching) return;
               navigate(
                 `${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,
-                { state: { orderNo } }
+                  { state: { orderNo } }
               );
             }}
             text={props.t('Cancel')}

@@ -39,7 +39,7 @@ export const PakistanUploadPaymentReceiptPage = withTranslation(
               ) : (
                 <img
                   src={props.imageSrc ? props.imageSrc : ''}
-                  className={'h-[181px]'}
+                  className={'h-[181px] object-contain'}
                   alt=""
                 />
               )}

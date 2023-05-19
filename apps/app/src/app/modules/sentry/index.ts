@@ -55,15 +55,37 @@ function getUserStatusName(status: number) {
   return ['未認證', '通過認證', '審核中', '審核拒絕'][status];
 }
 
+
+const getUserPhoneNo = () => {
+  return NativeAppInfo.phoneNo ? NativeAppInfo.phoneNo : "unknown";
+}
+
+function getCommonTags() {
+  const appState: RootState = appStore.getState()
+  const user = appState?.indexPage?.user
+
+  return {
+    packageId: NativeAppInfo.packageId,
+    uiVersion: NativeAppInfo.uiVersion,
+    mode: NativeAppInfo.mode,
+    appName: NativeAppInfo.appName,
+    domain: NativeAppInfo.domain,
+    "user.userName": user.userName !== "" ? user.userName : "unknown",
+    "user.phoneNo": getUserPhoneNo(),
+  }
+}
+
 export class SentryModule {
-  static captureException(exception: any, captureContext?: CaptureContext) {
+  static captureException(exception: any, captureContext?: CaptureContext, tags?: { [key: string]: Primitive },) {
+    if (AppEnvironment.isLocalhost()) return;
+    if (!AppFlag.enableSentry) return;
+
+    const commonTags = getCommonTags();
+
     Sentry.captureException(exception, {
       tags: {
-        packageId: NativeAppInfo.packageId,
-        uiVersion: NativeAppInfo.uiVersion,
-        mode: NativeAppInfo.mode,
-        appName: NativeAppInfo.appName,
-        domain: NativeAppInfo.domain,
+        ...commonTags,
+        ...tags,
       },
       extra: {
         environment: NativeAppInfo.environment,
@@ -78,6 +100,7 @@ export class SentryModule {
     tags?: { [key: string]: Primitive },
     extra?: Extras
   ) {
+    if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
     console.log('appInfo', NativeAppInfo);
@@ -86,15 +109,12 @@ export class SentryModule {
     const user = appState?.indexPage?.user
     // console.log("user", user);
 
+    const commonTags = getCommonTags();
+
     Sentry.captureMessage(message, {
       level: 'info',
       tags: {
-        packageId: NativeAppInfo.packageId,
-        uiVersion: NativeAppInfo.uiVersion,
-        mode: NativeAppInfo.mode,
-        appName: NativeAppInfo.appName,
-        domain: NativeAppInfo.domain,
-        "user.phoneNo": user.userName !== "" ? user.userName : "unknown",
+        ...commonTags,
         ...tags,
       },
       extra: {
@@ -103,11 +123,15 @@ export class SentryModule {
       },
     });
   }
+
   static userLogin(userResponse: GetUserInfoServiceResponse) {
+    if (AppEnvironment.isLocalhost()) return;
+
     if (AppFlag.enableSentry) {
       const userInfo = {
+        "user.phoneNo": getUserPhoneNo(),
+        'user.userName': userResponse.userName,
         'user.demoAccount': userResponse.demoAccount,
-        'user.phoneNo': userResponse.userName,
         'user.organic': userResponse.organic,
         'user.oldUser': userResponse.oldUser,
         'user.status': getUserStatusName(userResponse.status),
@@ -123,10 +147,11 @@ export class SentryModule {
       // console.log("[sentry] accountInfo", accountInfo);
       Sentry.setUser(accountInfo);
     }
+
     if(AppFlag.enablePosthog) {
-      posthog.identify(userResponse.userName, {
+      posthog.identify(getUserPhoneNo(), {
+        "user.phoneNo": getUserPhoneNo(),
         'user.demoAccount': userResponse.demoAccount,
-        'user.phoneNo': userResponse.userName,
       })
       // posthog.reset(true)
 

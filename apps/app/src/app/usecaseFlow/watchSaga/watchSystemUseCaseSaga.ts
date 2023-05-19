@@ -30,10 +30,7 @@ export function* watchSystemUseCaseSaga() {
 }
 
 function *routerOnLocationChangedSaga(action: LocationChangeAction) {
-  const userStatus: USER_AUTH_STATE = yield select((state: RootState) => state.indexPage.user.state);
-  if(action?.payload.location.pathname === PagePathEnum.RepaymentPage && userStatus === USER_AUTH_STATE.ready) {
-    yield put(IndexPageSagaAction.user.authenticateSaga());
-  }
+  console.log("Action", action)
 }
 
 function *routerCallHistoryMethodSaga(action: any) {

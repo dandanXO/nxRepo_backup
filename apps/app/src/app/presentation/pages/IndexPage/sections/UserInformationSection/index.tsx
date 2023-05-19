@@ -34,7 +34,7 @@ export const UserInformationSection = (props: Props) => {
           <div className={'w-full mb-3'}>
             <LatestOrderStatus state={props.state} />
           </div>
-        )}
+      )}
 
       <StatusContainer state={props.state} pageState={props.pageState}>
         {props.state.user.state === USER_AUTH_STATE.ready && (

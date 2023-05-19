@@ -537,8 +537,7 @@ const IndexPage = () => {
             dataTestingID={'apply'}
             text={'Apply Now'}
             className={cx({
-              'bg-[#F58B10]': !applyDisable,
-              'bg-[#D7D7D7]': applyDisable,
+              'bg-cstate-disable-main border-cstate-disable-main': applyDisable,
             })}
           />
         )}
@@ -554,7 +553,6 @@ const IndexPage = () => {
             }}
             dataTestingID={'viewAppProgress'}
             text={'View Application Progress'}
-            className={'bg-[#F58B10]'}
           />
         )}
 
@@ -582,10 +580,10 @@ const IndexPage = () => {
               text={'Reacquire Credit Amount'}
               loading={isLoading}
               className={cx({
-                'bg-[#F58B10]':
+                'bg-primary-main':
                   indexPageState.riskControl.state ===
                   RISK_CONTROL_STATE.expired_refresh_able,
-                'bg-[#D7D7D7]': isLoading,
+                  'bg-cstate-disable-main border-cstate-disable-main': isLoading,
               })}
             />
           )}

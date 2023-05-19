@@ -1,16 +1,16 @@
-import {AndroidPage} from "../../../../modules/window/IWindow";
-import {AppEnvironment} from "../../../../modules/appEnvironment";
-import {catchSagaError} from "../../../../usecaseFlow/utils/catchSagaError";
 import {alertModal} from "../../../../api/base/alertModal";
-import {AppGlobal, AppTempFlag, isInApp, NativeAppInfo} from "../../../../persistant/nativeAppInfo";
-import {AppFlag} from "../../../../../environments/flag";
+import {AndroidPage} from "../../../../modules/window/IWindow";
+import {AppGlobal, isInApp, NativeAppInfo} from "../../../../persistant/nativeAppInfo";
+import {catchSagaError} from "../../../../usecaseFlow/utils/catchSagaError";
 
-export function *userAuthenticateSaga() {
-
+export function *userLogoutSaga() {
   try {
+
     let message = null;
+
+    // TODO: refactor h5=>PureH5
     if(NativeAppInfo.mode === "H5") {
-      message = "注意: H5 不會有此 flow，因為只有老客";
+      // TODO: 單純 API 登出
 
     } else if(NativeAppInfo.mode === "Webview") {
 
@@ -20,13 +20,14 @@ export function *userAuthenticateSaga() {
       } else if(AppGlobal.mode === "IndexWebview") {
 
         if(window["IndexTask"] && window["IndexTask"]["navToPage"] && isInApp()) {
-          window["IndexTask"]["navToPage"](AndroidPage.AUTH)
+          // NOTE: 呼叫 Native APP 登出
+          window["IndexTask"]["navToPage"](AndroidPage.LOGIN)
 
         } else {
           if(isInApp()) {
             message = "Native Error: window[\"IndexTask\"][\"navToPage\"] function is missing";
           } else {
-            message = "電腦模擬 Webview 所以不會跳到 Native APP";
+            // TODO: 單純 API 登出
           }
 
         }

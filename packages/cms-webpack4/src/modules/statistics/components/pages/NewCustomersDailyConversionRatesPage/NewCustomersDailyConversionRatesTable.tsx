@@ -89,16 +89,23 @@ const NewCustomersDailyConversionRatesTable = () => {
                 { title: <CustomColumn text={'绑卡认证'} />, dataIndex: 'bankCount', key: 'bankCount', hideInSearch: true, render: (text, { bankRate }) => <CustomColumn text={text} rate={bankRate} /> },
             ]
         },
+        { title: <CustomColumn text={'完成认证用户数'} />, dataIndex: 'allCertifiedCount', key: 'allCertifiedCount', hideInSearch: true, render: (text, { allCertifiedRate }) => <CustomColumn text={text} rate={allCertifiedRate} /> },
+        {
+            title: '完成认证', dataIndex: 'allCertified', key: 'allCertified', hideInSearch: true,
+            children: [
+                { title: <CustomColumn text={'完成认证用户数'}/>, dataIndex: 'allCertifiedCount', key: 'allCertifiedCount', hideInSearch: true, render: (text, { allCertifiedRate }) => <CustomColumn text={text} rate={allCertifiedRate} /> },
+            ]
+        },
         {
             title: '提交', dataIndex: 'submit', key: 'submit', hideInSearch: true,
             children: [
-                { title: <CustomColumn text={'提交用户数'}/>, dataIndex: 'submitOrderUserCount', key: 'submitOrderUserCount', hideInSearch: true, render: (text, { submitOrderUserRate }) => <CustomColumn text={text} rate={submitOrderUserRate} /> },
+                { title: <CustomColumn text={'提交用户数'}/>, dataIndex: 'submitOrderUserCount', key: 'submitOrderUserCount', tooltip: "提交用户数包含内部风控通过以及包含内部风控不通过", hideInSearch: true, render: (text, { submitOrderUserRate }) => <CustomColumn text={text} rate={submitOrderUserRate} /> },
             ]
         },
         {
             title: '风控', dataIndex: 'riskControl', key: 'riskControl', hideInSearch: true,
             children: [
-                { title: <CustomColumn text={'内部风控通过'} />, dataIndex: 'innerRiskControlPassCount', key: 'innerRiskControlPassCount', tooltip: '反欺诈/基础风控' ,hideInSearch: true, render: (text, { innerRiskControlPassRate }) => <CustomColumn text={text} rate={innerRiskControlPassRate} /> },
+                { title: <CustomColumn text={'内部风控通过'} />, dataIndex: 'innerRiskControlPassCount', key: 'innerRiskControlPassCount', tooltip: '内部风控通过数包含有提交的用户以及没有提交的用户' ,hideInSearch: true, render: (text, { innerRiskControlPassRate }) => <CustomColumn text={text} rate={innerRiskControlPassRate} /> },
                 { title: <CustomColumn text={'外部风控用户数'} />, dataIndex: 'riskControlUserCount', key: 'riskControlUserCount', hideInSearch: true, render: (text, { riskControlUserRate }) => <CustomColumn text={text} rate={riskControlUserRate} /> },
                 { title: <CustomColumn text={'外部风控通过'} />, dataIndex: 'outerRiskControlPassCount', key: 'outerRiskControlPassCount', tooltip: '提交订单后且通过的用户数' , hideInSearch: true, render: (text, { outerRiskControlPassRate }) => <CustomColumn text={text} rate={outerRiskControlPassRate} /> },
             ]
@@ -184,14 +191,23 @@ const NewCustomersDailyConversionRatesTable = () => {
                         <div>
                             {customColumns.map((tag, index) => {
                                 if (tag.key === 'registerCount') return
-                                return <CheckableTag
-                                    style={{ marginTop: '4px', marginBottom: '4px' }}
-                                    key={tag.key}
-                                    checked={selectedTags.indexOf(tag.key) > -1}
-                                    onChange={(checked) => handleChange(tag.key, checked)}
-                                >
-                                    {tag.key === 'otpCount' ? 'OTP短信' : tag.title}
-                                </CheckableTag>
+
+                                let tagKey = tag.title;
+                                if (tag.key === "otpCount") {
+                                    tagKey = 'OTP短信';
+                                } else if (tag.key === "allCertifiedCount") {
+                                    tagKey = '完成认证';
+                                }
+                                return (
+                                    <CheckableTag
+                                        style={{ marginTop: '4px', marginBottom: '4px' }}
+                                        key={tag.key}
+                                        checked={selectedTags.indexOf(tag.key) > -1}
+                                        onChange={(checked) => handleChange(tag.key, checked)}
+                                    >
+                                        {tagKey}
+                                    </CheckableTag>
+                                )
                             })}
                         </div>
                     </Space>

@@ -20,7 +20,7 @@ export function* runSystemInitSaga() {
   try {
 
     // if(AppModeModel.getMode()) {
-    if(AppGlobal.mode !== "") {
+    if(AppGlobal.mode !== "None") {
       console.log("[app] 已初始化")
       return
     }

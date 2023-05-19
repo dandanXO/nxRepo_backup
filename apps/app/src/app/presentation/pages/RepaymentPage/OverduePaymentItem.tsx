@@ -14,6 +14,9 @@ import { Button } from '../../components/layouts/Button';
 import { Status } from '../../../modules/statusEnum';
 import Money from '../../components/Money.tsx';
 import cx from 'classnames'
+import {CardCollapseSection} from "./CardCollapseSection";
+import {CardContentSection} from "./CardContentSection";
+import {CardHeaderSection} from "./CardHeaderSection";
 
 const OverduePaymentItem = (props: GetLoanRecord) => {
     const navigate = useNavigate();
@@ -46,36 +49,26 @@ const OverduePaymentItem = (props: GetLoanRecord) => {
             className={`border-solid border-ctext-divider border pb-2 mx-4 mb-5 rounded-lg`}
             onClick={handleCollapse}
         >
-            <div className={`flex flex-row justify-between items-center mb-2 px-3 py-2 rounded-t-lg ${statusBackground}`}>
-                <div className="flex flex-row items-center">
-                    <div className="w-6 h-6 mr-2 ">
-                        <img src={iconUrl} alt="logo" />
-                    </div>
-                    <div className="text-sm font-bold text-ctext-primary">
-                        {productName ?? ''}
-                    </div>
-                </div>
-                <div className={`text-xs font-bold ${statusColor}`}>Overdue</div>
-            </div>
-            <div className="flex flex-row justify-between px-3 items-center">
-                <div className={"flex flex-col"}>
-                    <div className={'text-xs'}>Loan Amount</div>
-                    {/*{NOTE: 合同金: orderAmount}*/}
-                    <div className={"text-lg font-bold my-1 leading-none text-ctext-primary"}>
-                        {<Money money={orderAmount ?? ''} />}
-                    </div>
-                    <div className={`${statusColor} text-xs`}>{`Due ${moment(dueDate).format('DD-MM-YYYY') ?? ''}`}</div>
-                </div>
-                <Button
-                    text={'Details'}
-                    className={'text-xs w-auto px-4'}
-                    onClick={() =>
-                        navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, {
-                            state: { orderNo, approveRecords },
-                        })
-                    }
-                />
-            </div>
+
+          <CardHeaderSection
+            statusBackground={statusBackground}
+            iconUrl={iconUrl}
+            productName={productName}
+            statusColor={statusColor}
+            statusName={"Overdue"}
+          />
+
+          <CardContentSection
+            amountName={"Loan Amount"}
+            orderAmount={orderAmount}
+            onClick={() =>
+              navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, {
+                state: { orderNo, approveRecords },
+            })}
+            statusColor={statusColor}
+          />
+
+
             <div className="px-3"> <Divider /></div>
             {collapse && (
                 <div className={cx('px-3')}>
@@ -115,18 +108,7 @@ const OverduePaymentItem = (props: GetLoanRecord) => {
                 </div>
             )}
 
-            <div className={'flex flex-row items-center justify-center '}>
-                <div className={'text-xs text-ctext-secondary mr-2'}>
-                    {collapse ? 'collapse' : 'expand'}
-                </div>
-                <div className={'w-2.5'}>
-                    {collapse ? (
-                        <RiArrowUpSLine className="fill-ctext-secondary" />
-                    ) : (
-                        <RiArrowDownSLine className="fill-ctext-secondary" />
-                    )}
-                </div>
-            </div>
+          <CardCollapseSection collapse={collapse}/>
         </div>
     );
 };

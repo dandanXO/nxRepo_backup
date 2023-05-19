@@ -45,8 +45,10 @@ const RepaymentPage = () => {
 
     return (
         <Page className="flex flex-col">
+            <div className='text-center'><Navigation title='Payment'/></div>
+            
             <div
-                className={`flex flex-row py-3 px-5 justify-between sticky top-[0px] bg-white`}
+                className={`flex flex-row pb-3 px-5 justify-between sticky top-[0px] bg-white`}
             >
                 {['Unpaid', 'Overdue', 'Done'].map((i) => (
                     <Tag
@@ -67,12 +69,12 @@ const RepaymentPage = () => {
             {currentData && currentData.content && currentData.content.length > 0 ? (
                 currentData?.content?.map((record) => {
                     return record?.status && {
+                        PROCESSING: <ProcessingPaymentItem {...record} key={record.orderNo} />,
+                        REJECTED: <RejectPaymentItem {...record} key={record.orderNo} />,
+                        UNPAID: <UnpaidPaymentItem {...record} key={record.orderNo} />,
+                        PAY_OFF: <PayoffPaymentItem {...record} key={record.orderNo} />,
                         EXTEND: <ExtendPaymentItem {...record} key={record.orderNo} />,
                         OVERDUE: <OverduePaymentItem {...record} key={record.orderNo} />,
-                        PROCESSING: <ProcessingPaymentItem {...record} key={record.orderNo} />,
-                        PAY_OFF: <PayoffPaymentItem {...record} key={record.orderNo} />,
-                        UNPAID: <UnpaidPaymentItem {...record} key={record.orderNo} />,
-                        REJECTED: <RejectPaymentItem {...record} key={record.orderNo} />,
                     }[record?.status]
                 })
             ) : (

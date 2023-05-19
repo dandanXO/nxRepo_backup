@@ -1,11 +1,15 @@
-import { MdPayment } from '@react-icons/all-files/md/MdPayment';
-import { MdAccountBox } from '@react-icons/all-files/md/MdAccountBox';
-import { RiMoneyDollarCircleFill } from '@react-icons/all-files/ri/RiMoneyDollarCircleFill';
-import { useLocation, useNavigate } from 'react-router';
+import {MdPayment} from '@react-icons/all-files/md/MdPayment';
+import {MdAccountBox} from '@react-icons/all-files/md/MdAccountBox';
+import {RiMoneyDollarCircleFill} from '@react-icons/all-files/ri/RiMoneyDollarCircleFill';
+import {useLocation, useNavigate} from 'react-router';
 
 import cx from 'classnames';
-import { PagePathEnum } from '../../pages/PagePathEnum';
-import { getToken } from '../../../modules/querystring/getToken';
+import {PagePathEnum} from '../../pages/PagePathEnum';
+import {getToken} from '../../../modules/querystring/getToken';
+import {USER_AUTH_STATE} from "../../../domain/user/USER_AUTH_STATE";
+import {RootState} from "../../../reduxStore";
+import {useDispatch, useSelector} from "react-redux";
+import {IndexPageSagaAction} from "../../pages/IndexPage/userUsecaseSaga/indexPageActions";
 
 type Props = {
   hasOrder: boolean;
@@ -13,6 +17,7 @@ type Props = {
 export const TabBar = (props: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   // console.log("location", location);
   const isInPage = (pageName: PagePathEnum, exact?: boolean) => {
     if (pageName === PagePathEnum.IndexPage) {
@@ -20,7 +25,7 @@ export const TabBar = (props: Props) => {
     }
     return location.pathname.indexOf(pageName) > -1;
   };
-
+  const userStatus: USER_AUTH_STATE = useSelector((state: RootState) => state.indexPage.user.state);
   return (
     <div className={'h-16 bg-white border-t sticky bottom-0 flex flex-row'}>
       <div
@@ -46,7 +51,11 @@ export const TabBar = (props: Props) => {
       <div
         className={'flex-1 flex flex-col justify-center items-center relative'}
         onClick={() => {
-          navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
+          if(userStatus === USER_AUTH_STATE.ready) {
+            dispatch(IndexPageSagaAction.user.authenticateSaga());
+          } else {
+            navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
+          }
         }}
       >
         <MdPayment
