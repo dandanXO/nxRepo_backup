@@ -273,7 +273,6 @@ class OrderDetail extends Component{
     //渲染订单信息
     renderOrderCard = () => {
         const { orderData: { orderInfo = {} }, intl } = this.props;
-        console.log(orderInfo);
         const info = orderInfo['icloud'] || {};
         const isOlduserStyle = orderInfo['isOlduser'] === '是' ? { color: 'red' } : {};
         const standOverNumberStyle = Number(orderInfo.standOverNumber) > 0 ? { color: 'red' } : {};
@@ -343,6 +342,7 @@ class OrderDetail extends Component{
     //渲染客户信息
     renderUserInfo = () => {
         const { orderData: { userInfo = {} }, intl } = this.props;
+ 
         return (
             <div>
                 <Card className={styles.cardBackground} type={'inner'} title={intl.formatMessage({id : "windowPage.person.info"})}>
@@ -433,7 +433,12 @@ class OrderDetail extends Component{
         const columns = [
             { title: intl.formatMessage({id : "page.search.list.name"}), dataIndex: 'name', key: 'name' },
             { title: intl.formatMessage({id : "page.search.list.mobile"}), dataIndex: 'phone', key: 'phone' },
-            { title: intl.formatMessage({id : "page.table.last.add.time"}), dataIndex: 'lastUpdateTime', key: 'lastUpdateTime' }
+            {
+                title: intl.formatMessage({ id: "page.table.last.add.time" }), dataIndex: 'lastUpdateTime', key: 'lastUpdateTime',
+                render (text) {
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
+                }
+            }
         ];
         return (
             <CommonTable columns={columns} dataSource={data}  pagination={pagination} handlePageChange={this.handleAddressBookChange} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
@@ -453,7 +458,12 @@ class OrderDetail extends Component{
             { title: intl.formatMessage({id : "page.table.send.number"}), dataIndex: 'phone', key: 'phone' },
             { title: intl.formatMessage({id : "page.table.content"}), dataIndex: 'content', key: 'content' ,width:'50%'},
             { title: intl.formatMessage({id : "page.table.sending.type"}), dataIndex: 'direction', key: 'direction' },
-            { title: intl.formatMessage({id : "page.table.sending.time"}), dataIndex: 'time', key: 'time' },
+            {
+                title: intl.formatMessage({ id: "page.table.sending.time" }), dataIndex: 'time', key: 'time',
+                render (text) {
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
+                }
+            },
         ];
         return (
             <CommonTable columns={columns} dataSource={data}  pagination={pagination} handlePageChange={this.handleSmsMessageChange} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
@@ -505,13 +515,14 @@ class OrderDetail extends Component{
     }
 
     componentDidMount() {
-        const { match, location: { state }, getOrderData, getAllUrgeRecord ,getDetailTabControl , getAddressBook,getSmsMessage} = this.props;
+        const {match, location: { state }, getOrderData, getAllUrgeRecord ,getDetailTabControl , getAddressBook,getSmsMessage} = this.props;
         const userId = state ? state['userId'] : '';
         const params = match['params']['id'] || '';
+       
         getOrderData({ overdueId: params }, { userId });
         getAllUrgeRecord({ overdueId: params });
         const _this = this;
-        
+
         // 取得後台使用者開關 (是否可查看 tab -通訊錄 & 手機短信)
         getDetailTabControl();
         getAddressBook({ userId, pageNum: 1, pageSize: 10 });

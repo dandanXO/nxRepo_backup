@@ -427,9 +427,14 @@ class OrderDetail extends Component{
     renderAddressBook = () => {
         const { addressBook:{data=[],pagination={}}  ,intl } = this.props;
         const columns = [
-            { title: intl.formatMessage({id : "page.search.list.name"}), dataIndex: 'name', key: 'name' },
-            { title: intl.formatMessage({id : "page.search.list.mobile"}), dataIndex: 'phone', key: 'phone' },
-            { title: intl.formatMessage({id : "page.table.last.add.time"}), dataIndex: 'lastUpdateTime', key: 'lastUpdateTime' }
+            { title: intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'name', key: 'name' },
+            { title: intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phone', key: 'phone' },
+            {
+                title: intl.formatMessage({ id: "page.table.last.add.time" }), dataIndex: 'lastUpdateTime', key: 'lastUpdateTime',
+                render (text) {
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
+                }
+            }
         ];
         return (
             <CommonTable columns={columns} dataSource={data}  pagination={pagination} handlePageChange={this.handleAddressBookChange} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
@@ -448,7 +453,12 @@ class OrderDetail extends Component{
             { title: intl.formatMessage({id : "page.table.send.number"}), dataIndex: 'phone', key: 'phone' },
             { title: intl.formatMessage({id : "page.table.content"}), dataIndex: 'content', key: 'content' ,width:'50%'},
             { title: intl.formatMessage({id : "page.table.sending.type"}), dataIndex: 'direction', key: 'direction' },
-            { title: intl.formatMessage({id : "page.table.sending.time"}), dataIndex: 'time', key: 'time' },
+            {
+                title: intl.formatMessage({ id: "page.table.sending.time" }), dataIndex: 'time', key: 'time',
+                render (text) {
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
+                }
+            },
         ];
         return (
             <CommonTable columns={columns} dataSource={data}  pagination={pagination} handlePageChange={this.handleSmsMessageChange} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
