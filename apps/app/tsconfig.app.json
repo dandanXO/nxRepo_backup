@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "types": ["node"],
-    "module": "es2022",
+    "module": "es2020",
+    "lib": ["ES2021"],
     "strict": true,
     "allowJs": true
   },
