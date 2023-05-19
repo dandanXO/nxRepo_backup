@@ -107,7 +107,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>(initCustomAntFormFieldError)
     const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
-    const [postProductCreate, { isLoading }] = usePostProductCreateMutation();
+    const [postProductCreate, { isLoading, isSuccess: isPostProductCreateSuccess }] = usePostProductCreateMutation();
     const [putProduct, { isSuccess: isPutProductSuccess }] = usePutProductEditMutation();
 
     useEffect(() => {
@@ -511,6 +511,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
         setTriggerFetchTableList,
         triggerGetList,
         productListData,
+        isPostProductCreateSuccess,
+        isPutProductSuccess,
         // onAutoFinishedForm,
         onFormSubmit,
         enableLoanAmount,
