@@ -57,7 +57,7 @@ module.exports = (config, context) => {
     // devtool: "source-map",
     // NOTE: Android 9 成功
     // devtool: "eval-source-map",
-    devtool: "cheap-module-eval-source-map",
+    devtool: "cheap-module-source-map",
     output: {
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
