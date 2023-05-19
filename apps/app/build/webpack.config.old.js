@@ -213,26 +213,26 @@ module.exports = (config, context) => {
     //     })
     //   );
 
-    finalConfig.plugins.push(
-      new SentryCliPlugin({
-        url: 'https://monitor.sijneokd.com',
-        authToken:
-          '2c48e3e9a9464236a5b057ecbd5c2683b52f676f3c294a3eae6bfeb923b6815c',
-        debug: true,
-        include: './dist/apps/app',
-        ignoreFile: '.sentrycliignore',
-        ignore: ['node_modules', 'webpack.config.js'],
-        org: 'sentry',
-        project: 'api-app',
-        // configFile: 'sentry.properties',
-        // setCommits: {
-        //   auto: false,
-        // ignoreMissing: true,
-        // repo: "frontend",
-        // commit: gitRevisionPlugin.commithash(),
-        // }
-      })
-    );
+    // finalConfig.plugins.push(
+    //   new SentryCliPlugin({
+    //     url: 'https://monitor.sijneokd.com',
+    //     authToken:
+    //       '2c48e3e9a9464236a5b057ecbd5c2683b52f676f3c294a3eae6bfeb923b6815c',
+    //     debug: true,
+    //     include: './dist/apps/app',
+    //     ignoreFile: '.sentrycliignore',
+    //     ignore: ['node_modules', 'webpack.config.js'],
+    //     org: 'sentry',
+    //     project: 'api-app',
+    //     // configFile: 'sentry.properties',
+    //     // setCommits: {
+    //     //   auto: false,
+    //     // ignoreMissing: true,
+    //     // repo: "frontend",
+    //     // commit: gitRevisionPlugin.commithash(),
+    //     // }
+    //   })
+    // );
   }
   console.log('finalConfig', finalConfig);
   // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
