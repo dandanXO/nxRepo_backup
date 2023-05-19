@@ -57,7 +57,8 @@ module.exports = (config, context) => {
 
     // NOTE: Android 9 失敗
     // devtool: false,
-    devtool: "eval",
+    // NOTE: Android 9 成功
+    // devtool: "eval",
     // NOTE: Android 9 成功
     // devtool: "eval-cheap-source-map",
     // NOTE: Android 9 成功
@@ -67,6 +68,7 @@ module.exports = (config, context) => {
 
     // NOTE: Android 9 失敗
     // devtool: "source-map",
+    devtool: "inline-source-map",
     output: {
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
