@@ -3,7 +3,7 @@ import { FormInstance } from 'antd/lib/form/Form'
 import { CustomAntFormFieldError } from "../../../../../../shared/utils/validation/CustomAntFormFieldError";
 import React from "react";
 import PreAndPostInterestGroups from "../../../../../../shared/components/other/PreAndPostInterestGroups";
-import { RiskRank } from "../../../../../service/product/domain/productInterestRatePair";
+import {BaseRiskRank, RiskRank} from "../../../../../service/product/domain/productInterestRatePair";
 
 interface ProductInterestRatePairsModalProps {
     form: FormInstance
@@ -21,6 +21,26 @@ export const riskLabelMap:{ label:string, key: RiskRank }[] = [
     { label: '正常', key: 'NORMAL'},
     { label: '普通', key: 'ORDINARY'},
 ]
+
+export const riskRankLabelAndSortMap: { [key in BaseRiskRank] : { label: string, sort: number} } = {
+    EXCELLENT: {
+        label: '极好',
+        sort: 0,
+    },
+    GOOD: {
+        label: '良好',
+        sort: 1
+    },
+    NORMAL: {
+        label: '正常',
+        sort: 2
+    },
+    ORDINARY: {
+        label: '普通',
+        sort: 3
+    }
+};
+
 
 export const ProductInterestRatePairsModal = (
     {

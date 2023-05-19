@@ -10,8 +10,9 @@ import {
 import moment from "moment/moment";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { ProductTypes } from "../../../../service/product/domain/productTypes";
-import { productInterestRatePairsGroupIndexMap, productInterestRatePairsInitialValue } from "../ProductForm";
+import { productInterestRatePairsInitialValue } from "../ProductForm";
 import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
+import { riskRankLabelAndSortMap } from "../ProductForm/RateSettingSection/ProductInterestRatePairsModal";
 export interface ProductFormModal {
     show: boolean;
     isEdit?: boolean
@@ -104,23 +105,24 @@ export const useProductFormModal = (props: ProductFormModal) => {
             setCustomAntFormFieldError(initCustomAntFormFieldError);
         } else {
             let productInterestRatePairs = productFormData.productInterestRatePairs.reduce((acc, current)=> {
-                if (!current['riskRank']) return acc;
-
-                const groupIndex = productInterestRatePairsGroupIndexMap[current['riskRank']]
-                acc[groupIndex] = {
-                    'content': [],
-                    ...acc[groupIndex]
-                }
-                acc[groupIndex]['content'] = [
-                    ...acc[groupIndex]['content'],
+                if (current.riskRank === 'REJECT') return acc;
+                const groupIndex = riskRankLabelAndSortMap[current.riskRank].sort
+                const interestRates = current.interestRates.reduce((interestRatesAcc, interestRatesCurrent) => [
+                    ...interestRatesAcc,
                     {
-                        ...current,
-                        preInterest: fixedFloatNumberToFixed3(current.preInterest * 100),
-                        postInterest: fixedFloatNumberToFixed3(current.postInterest * 100),
+                        ...interestRatesCurrent,
+                        preInterest: fixedFloatNumberToFixed3(interestRatesCurrent.preInterest * 100),
+                        postInterest: fixedFloatNumberToFixed3(interestRatesCurrent.postInterest * 100),
                     }
-                ]
-                return acc
-            }, [])
+                ], []);
+
+                if (interestRates.length === 0) return acc;
+
+                acc[groupIndex] = {
+                    content: interestRates
+                }
+                return acc;
+            }, []);
 
             if (productInterestRatePairs.length === 0)  productInterestRatePairs = productInterestRatePairsInitialValue;
 
