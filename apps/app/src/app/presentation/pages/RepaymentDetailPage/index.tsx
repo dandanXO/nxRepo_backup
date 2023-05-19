@@ -12,8 +12,6 @@ import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/cou
 import IndiaRepaymentDetailPage from './i18n/IndiaRepaymentDetailPage';
 import { isInAndroid } from '../../../modules/window/isInAndroid';
 import { PagePathEnum } from '../PagePathEnum';
-import { useDispatch } from 'react-redux';
-import { PersonalInfoPageSagaActions } from '../PersonalInfoPage/userUsecaseSaga';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
@@ -41,11 +39,13 @@ const RepaymentDetailPage = (props: any) => {
           }}
         />
       )}
-      <div
-        className={`text-sm text-center bg-primary-assistant text-primary-main py-2`}
-      >
-        Get more amount after instant payment
-      </div>
+      {currentData &&
+              currentData?.status !== "PAY_OFF" &&
+              currentData?.status !== "EXTEND" &&
+        <div className={`text-sm text-center bg-primary-assistant text-primary-main py-2`}>
+            Get more amount after instant payment
+        </div>
+      }
       {renderByCountry(
         {
           [IndiaCountry.country]: (

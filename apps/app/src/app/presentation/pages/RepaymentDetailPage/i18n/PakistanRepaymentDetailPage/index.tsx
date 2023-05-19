@@ -39,6 +39,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
     applyDate = ''
   } = currentData ?? {};
   const { items = [] } = chargeFeeDetail ?? {};
+  const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
 
   const getItems = (field: string) => {
     return (
@@ -105,6 +106,16 @@ const PakistanRepaymentDetailPage = (props: any) => {
           textColor="text-ctext-primary"
         />
 
+        {status === 'PAY_OFF' && (
+          <ListItem
+            title={'Repayment Date'}
+            text={repaymentDate ? moment(repaymentDate).format('DD-MM-YYYY') : ''}
+            titleColor="text-ctext-secondary"
+            textColor="text-ctext-primary"
+          />
+        )}
+
+
         {status === 'EXTEND' && (
           <ListItem
             title={'Extension Date'}
@@ -119,12 +130,15 @@ const PakistanRepaymentDetailPage = (props: any) => {
         {/*NOTICE: 合同金*/}
         {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-ctext-secondary" />*/}
 
-        <ListItem
-          title={'Disbursal Amount'}
-          text={<Money money={loanAmount} />}
-          titleColor="text-ctext-secondary"
-          textColor="text-ctext-primary"
-        />
+       
+        {status !== 'EXTEND' && (
+          <ListItem
+            title={'Disbursal Amount'}
+            text={<Money money={loanAmount} />}
+            titleColor="text-ctext-secondary"
+            textColor="text-ctext-primary"
+            />
+        )}
 
         {status !== 'EXTEND' &&
           items.map((item: any) => {
@@ -137,14 +151,21 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 textColor="text-ctext-primary"
               />
             );
-          })}
-
-        <Divider />
+        })}
 
         {status !== 'EXTEND' && (
           <ListItem
             title={'Daily Fee'}
             text={<Money money={dailyFee} />}
+            titleColor="text-ctext-secondary"
+            textColor="text-ctext-primary"
+          />
+        )}
+
+        {status === 'EXTEND' && (
+          <ListItem
+            title={'Extension Fee'}
+            text={<Money money={extensionFee} />}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
           />
@@ -167,14 +188,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
           }
         />
 
-        {status === 'EXTEND' && (
-          <ListItem
-            title={'Extension Fee'}
-            text={<Money money={extensionFee} />}
-            titleColor="text-ctext-secondary"
-            textColor="text-ctext-primary"
-          />
-        )}
+
 
         <Divider />
 
