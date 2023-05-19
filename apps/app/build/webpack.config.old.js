@@ -51,7 +51,7 @@ module.exports = (config, context) => {
   const finalConfig = merge(config, {
     // devtool: false,
     // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
-    devtool: "source-map",
+    // devtool: "source-map",
     // devtool: "eval-source-map",
     output: {
       // filename: '[name].[contenthash].js',
