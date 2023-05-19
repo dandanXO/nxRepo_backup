@@ -334,15 +334,27 @@ export const useProductFormModal = (props: ProductFormModal) => {
         if (isNotFinish) return;
 
         let productInterestRatePairs = values?.productInterestRatePairs || tempFormData.productInterestRatePairs
-        productInterestRatePairs = productInterestRatePairs.reduce((acc, current, index) => (
-            [
+        productInterestRatePairs = productInterestRatePairs.reduce((acc, current, index) => {
+            const interestRates = current[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => (
+                [
+                    ...interestRatesAcc,
+                    {
+                        ...interestRatesCurrent,
+                        postInterest: Number((Number(interestRatesCurrent.postInterest) * 0.01).toFixed(3)),
+                        preInterest: Number((Number(interestRatesCurrent.preInterest) * 0.01).toFixed(3)),
+                        plusAmount: Number(interestRatesCurrent.plusAmount),
+                    }
+                ]
+            ), [])
+
+            return [
                 ...acc,
                 {
                     riskRank: productInterestRatesConvertToBackendMap[index].key,
-                    [productInterestRatesContentKey]: current[productInterestRatesContentKey]
+                    [productInterestRatesContentKey]: interestRates
                 }
             ]
-        ), [])
+        }, [])
 
         const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
             ...i,
