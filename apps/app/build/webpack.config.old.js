@@ -68,7 +68,9 @@ module.exports = (config, context) => {
 
     // NOTE: Android 9 失敗
     // devtool: "source-map",
+    // NOTE: Android 9 失敗
     devtool: "inline-source-map",
+    sourceMap: true,
     output: {
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
