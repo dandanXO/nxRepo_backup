@@ -67,7 +67,6 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         onBlur={props.onIbanBlur}
         errorMessage={props.iBanData.errorMessage}
         onCopy={(e) => preventCopyPaste(e)}
-        onPaste={(e) => preventCopyPaste(e)}
         onCut={(e) => preventCopyPaste(e)}
       />
       <div
@@ -110,7 +109,6 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           onBlur={props.onConfirmMobileDataBlur}
           errorMessage={props.confirmMobileData.errorMessage}
           onCopy={(e) => preventCopyPaste(e)}
-          onPaste={(e) => preventCopyPaste(e)}
           onCut={(e) => preventCopyPaste(e)}
         />
       </div>

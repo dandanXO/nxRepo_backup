@@ -86,7 +86,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
           onCopy={(e) => preventCopyPaste(e)}
-          onPaste={(e) => preventCopyPaste(e)}
           onCut={(e) => preventCopyPaste(e)}
         />
       </div>
@@ -104,7 +103,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
           onCopy={(e) => preventCopyPaste(e)}
-          onPaste={(e) => preventCopyPaste(e)}
           onCut={(e) => preventCopyPaste(e)}
         />
       </div>
