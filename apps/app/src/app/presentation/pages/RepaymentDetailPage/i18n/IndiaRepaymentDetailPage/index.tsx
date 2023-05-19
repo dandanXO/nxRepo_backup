@@ -42,7 +42,7 @@ const IndiaRepaymentDetailPage = (props: any) => {
     applyDate = ''
   } = currentData ?? {};
   const { items = [] } = chargeFeeDetail ?? {};
-
+  const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
   const getItems = (field: string) => {
     return (
       items.filter(
@@ -106,6 +106,14 @@ const IndiaRepaymentDetailPage = (props: any) => {
           titleColor="text-ctext-primary"
         />
 
+        {status === 'PAY_OFF' && (
+          <ListItem
+            title={'Repayment Date'}
+            text={repaymentDate ? moment(repaymentDate).format('DD-MM-YYYY') : ''}
+            titleColor="text-ctext-primary"
+          />
+        )}
+
         {status === 'EXTEND' && (
           <ListItem
             title={'Extension Date'}
@@ -119,11 +127,13 @@ const IndiaRepaymentDetailPage = (props: any) => {
         {/*NOTICE: 合同金*/}
         {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-black-400" />*/}
 
-        <ListItem
-          title={'Disbursal Amount'}
-          text={<Money money={loanAmount} />}
-          titleColor="text-ctext-primary"
-        />
+        {status !== 'EXTEND' && (
+          <ListItem
+            title={'Disbursal Amount'}
+            text={<Money money={loanAmount} />}
+            titleColor="text-ctext-primary"
+            />
+        )}
 
         {status !== 'EXTEND' &&
           items.map((item: any, index: number) => {
@@ -138,8 +148,6 @@ const IndiaRepaymentDetailPage = (props: any) => {
             );
           })}
 
-        <Divider />
-
         {status !== 'EXTEND' && (
           <ListItem
             title={'Daily Fee'}
@@ -148,6 +156,13 @@ const IndiaRepaymentDetailPage = (props: any) => {
                 <Money money={dailyFee} />
               </div>
             }
+            titleColor="text-ctext-primary"
+          />
+        )}
+        {status === 'EXTEND' && (
+          <ListItem
+            title={'Extension Fee'}
+            text={<Money money={extensionFee} />}
             titleColor="text-ctext-primary"
           />
         )}
@@ -164,13 +179,7 @@ const IndiaRepaymentDetailPage = (props: any) => {
           textColor={status === 'OVERDUE' ? Status(status).color : ''}
         />
 
-        {status === 'EXTEND' && (
-          <ListItem
-            title={'Extension Fee'}
-            text={<Money money={extensionFee} />}
-            titleColor="text-ctext-primary"
-          />
-        )}
+
 
         <Divider />
 
