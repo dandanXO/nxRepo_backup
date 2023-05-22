@@ -265,8 +265,7 @@ class TodayList extends Component {
     handleLookDetail = (id, userId) => {
         const {history: {push}} = this.props;
         push({
-            pathname: `/todayList/${id}`,
-            state: { userId }
+            pathname: `/todayList/${id}/${userId}`,
         })
     }
 
@@ -397,7 +396,7 @@ class TodayList extends Component {
             <div>
                 <SearchList
                     handleSubmit={this.handleSearch}
-                    params={searchParams} 
+                    params={searchParams}
                     personData={todayCollectorList}
                     productSelect={productSelect}
                     btnDisabled={btnDisabled}
@@ -405,7 +404,7 @@ class TodayList extends Component {
                     exportRecord={this.exportRecord}
                     stageSelect={stageSelect}
                 />
-              
+
                 <CommonTable
                     columns={this.columns}
                     pagination={pageInfo}
@@ -453,7 +452,7 @@ const mapStateToProps = (state) => {
         // 催收人員列表
         todayCollector: todayListState['todayCollector'],
         todayCollectorList: todayListState['collectorList'],
-        
+
 
     }
 }
@@ -476,7 +475,7 @@ const mapDispatchToProps = (dispatch) => {
         // 催收人員列表
         getTodayCollector: todayListAction.todlGetTodayCollector,
         getCollectorList: todayListAction.todlGetCollectorList,
-        
+
     }, dispatch);
 }
 
