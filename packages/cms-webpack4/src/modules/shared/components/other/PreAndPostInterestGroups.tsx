@@ -215,11 +215,11 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                         {fields.map(({ key, name, ...restField }, index) => {
                             const columnErrors = isMultiGroup ? errors?.[fieldName[0]]?.[index] : errors?.[index]
                             return (
-                                <React.Fragment key={key}>
+                                <Form.Item key={key} style={{ marginBottom: 0 }}>
                                     {index === 0 && (
                                         <Input.Group compact>
                                             <div>
-                                                <CustomLabel style={{ width: 125 }}>
+                                                <CustomLabel style={{ width: 120 }}>
                                                     <Space>起始期数
                                                         <Tooltip title={
                                                             <div>
@@ -232,9 +232,9 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                                         </Tooltip>
                                                     </Space>
                                                 </CustomLabel>
-                                                <CustomLabel style={{ width: 125 }}>前置利息</CustomLabel>
-                                                <CustomLabel style={{ width: 125 }}>后置利息</CustomLabel>
-                                                <CustomLabel style={{ width: 125 }}>提額金额</CustomLabel>
+                                                <CustomLabel style={{ width: 120 }}>前置利息</CustomLabel>
+                                                <CustomLabel style={{ width: 120 }}>后置利息</CustomLabel>
+                                                <CustomLabel style={{ width: 120 }}>提額金额</CustomLabel>
                                             </div>
                                         </Input.Group>
                                     )}
@@ -243,7 +243,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                         <Form.Item
                                             {...(index !== 0 || !isMultiGroup) && {initialValue: ''}}
                                             {...restField}
-                                            style={{ width: 125 }}
+                                            style={{ width: 120 }}
                                             name={[name, 'num']}
                                             validateStatus={columnErrors?.num?.validateStatus || ""}
                                             help={columnErrors?.num?.help || ""}
@@ -251,7 +251,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                             <Input placeholder="起始期数" />
                                         </Form.Item>
                                         <Form.Item
-                                            style={{ width: 125 }}
+                                            style={{ width: 120 }}
                                             {...(index !== 0 || !isMultiGroup) && {initialValue: ''}}
                                             {...restField}
                                             name={[name, 'preInterest']}
@@ -266,7 +266,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                         <Form.Item
                                             {...restField}
                                             {...(index !== 0 || !isMultiGroup) && {initialValue: ''}}
-                                            style={{ width: 125 }}
+                                            style={{ width: 120 }}
                                             name={[name, 'postInterest']}
                                             validateStatus={columnErrors?.postInterest?.validateStatus || ""}
                                             help={columnErrors?.postInterest?.help || ""}
@@ -279,7 +279,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                         <Form.Item
                                             {...restField}
                                             {...(index !== 0 || !isMultiGroup) && {initialValue: ''}}
-                                            style={{ width: 125 }}
+                                            style={{ width: 120 }}
                                             name={[name, 'plusAmount']}
                                             validateStatus={columnErrors?.plusAmount?.validateStatus || ""}
                                             help={columnErrors?.plusAmount?.help || ""}
@@ -291,7 +291,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                             remove(name);
                                         }} />}
                                     </Space>
-                                </React.Fragment>
+                                </Form.Item>
                             )
                         })}
                         <Form.Item>
