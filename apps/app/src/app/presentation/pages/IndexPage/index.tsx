@@ -7,10 +7,10 @@ import { PageContent } from '../../components/layouts/PageContent';
 import { TipsSection } from './sections/TipsSection';
 
 // import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
-import { NoticeUserRejectedSection } from './sections/NoticeSection/NoticeUserRejectedSection';
+import { NoticeUserRejectedSection } from './noticeSections/NoticeUserRejectedSection';
 
-import { NoticeUserAuthedEmptyQuotaSection } from './sections/NoticeSection/NoticeUserAuthedEmptyQuotaSection';
-import { NoticeUserInProgressAuthStatusSections } from './sections/NoticeSection/NoticeUserInProgressAuthStatusSections';
+import { NoticeUserAuthedEmptyQuotaSection } from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
+import { NoticeUserInProgressAuthStatusSections } from './noticeSections/NoticeUserInProgressAuthStatusSections';
 
 import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndReapplyInTimeSection';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ import { ADBannerSection } from './sections/ADBannerSection';
 import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import cx from 'classnames';
-import { NoticeUserReacquireOver3TimeSections } from './sections/NoticeSection/NoticeUserReacquireOver3TimeSections';
+import { NoticeUserReacquireOver3TimeSections } from './noticeSections/NoticeUserReacquireOver3TimeSections';
 import { useNavigate } from 'react-router';
 import { Horizontal } from '../../components/layouts/Horizontal';
 import { LoanAgreementModal } from '../../modals/QRLoanAgreementModal';
@@ -36,7 +36,7 @@ import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
 
 import { AuthorizationModal } from '../../modals/AuthorizationModal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
-import { NoticeOrderOrQuotaRejectedSection } from './sections/NoticeSection/NoticeOrderOrQuotaRejectedSection';
+import { NoticeOrderOrQuotaRejectedSection } from './noticeSections/NoticeOrderOrQuotaRejectedSection';
 import { FeeRateKeyEnum } from '../../../api/indexService/FeeRateKeyEnum';
 import { PlatformProduct } from '../../../api/indexService/PlatformProduct';
 import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail';
