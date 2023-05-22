@@ -17,7 +17,7 @@ import { OverdueCollectTeamReport, overdueCollectTeamReportState, overdueCollect
 const afterLoanManageRoutes = [
     { path: '/waitRepayment', component: WaitRepayment },
     { path: '/overdueList', component: OverdueList, exact: true },
-    { path: '/overdueList/:id', component: OrderDetail },
+    { path: '/overdueList/:id/:uid', component: OrderDetail },
     { path: '/overdueOrderDistribute', component: OverdueOrderDistribute },
     { path: '/overdueBackRecord', component: OverdueBackRecord },
     { path: '/phoneUrgeList', component: PhoneUrgeList, exact: true },
