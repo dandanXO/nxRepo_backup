@@ -88,7 +88,6 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
   }
 
   const productInterestRatePairCheckedError = props.customAntFormFieldError['productInterestRatePairsChecked']['help']
-  const productInterestRatePairsChecked = props.form.getFieldValue('productInterestRatePairsChecked')
 
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
@@ -241,22 +240,33 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                   </Form.Item>
 
                   <Form.Item
-                      label="复贷利率"
                       name='productInterestRatePairsChecked'
-                      required
+                      style={{ display : 'none'}}
                   >
-                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                          <a style={{ textDecoration:'underline' }} onClick={handleProductInterestRateSettingOnClick}>
-                              配置
-                          </a>
-                          <CheckCircleFilled style={{ color: `${productInterestRatePairsChecked ? '#52C41A' : '#D9D9D9'}` }} />
-                          {
-                              productInterestRatePairCheckedError &&
-                              <div style={{ position: 'absolute', color:'red', top: '23px' }}>
-                                  {productInterestRatePairCheckedError}
+                      <Input />
+                  </Form.Item>
+                  <Form.Item
+                      label="复贷利率"
+                      required
+                      dependencies={['productInterestRatePairsChecked']}
+                  >
+                      {({getFieldValue}) => {
+                          const productInterestRatePairsChecked = getFieldValue('productInterestRatePairsChecked')
+                          return (
+                              <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                  <a style={{ textDecoration:'underline' }} onClick={handleProductInterestRateSettingOnClick}>
+                                      配置
+                                  </a>
+                                  <CheckCircleFilled style={{ color: `${productInterestRatePairsChecked ? '#52C41A' : '#D9D9D9'}` }} />
+                                  {
+                                      productInterestRatePairCheckedError &&
+                                      <div style={{ position: 'absolute', color:'red', top: '23px' }}>
+                                          {productInterestRatePairCheckedError}
+                                      </div>
+                                  }
                               </div>
-                          }
-                      </div>
+                          )
+                      }}
                   </Form.Item>
                   {
                       showProductInterestRatePairsModal && (
