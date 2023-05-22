@@ -37,8 +37,6 @@ console.log('PUBLIC_PATH', PUBLIC_PATH);
 
 const ASSET_OUTPUT_PATH = 'asset';
 
-const WebpackSentryConfig = require("../src/app/modules/sentry/WebpackSentryConfig.json");
-
 let proxyURL = 'https://app.india-api-dev.com';
 if (process.env.NODE_COUNTRY === 'in') {
   proxyURL = 'https://app.india-api-dev.com';
