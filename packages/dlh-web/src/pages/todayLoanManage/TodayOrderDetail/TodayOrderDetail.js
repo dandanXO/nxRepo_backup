@@ -419,8 +419,8 @@ class OrderDetail extends Component{
     }
 
     handleAddressBookChange = (info) => {
-        const { location: { state }, getAddressBook } = this.props;
-        const userId = state ? state['userId'] : '';
+        const { match, getAddressBook } = this.props;
+        const userId = match['params']['uid']
         getAddressBook({ userId, pageNum: info.current, pageSize: info.pageSize })
     }
     //渲染通讯录
@@ -442,8 +442,8 @@ class OrderDetail extends Component{
     }
 
     handleSmsMessageChange = (info) => {
-        const { location: { state }, getSmsMessage } = this.props;
-        const userId = state ? state['userId'] : '';
+        const { getSmsMessage, match } = this.props;
+        const userId = match['params']['uid']
         getSmsMessage({ userId, pageNum: info.current, pageSize: info.pageSize })
     }
     //渲染通讯录
@@ -511,9 +511,10 @@ class OrderDetail extends Component{
 
 
     componentDidMount () {
-        const { match, location: { state }, getOrderData, getAllUrgeRecord, getDetailTabControl, getAddressBook, getSmsMessage } = this.props;
-        const userId = state ? state['userId'] : '';
+        const { match, getOrderData, getAllUrgeRecord, getDetailTabControl, getAddressBook, getSmsMessage } = this.props;
+        const userId = match['params']['uid']
         const params = match['params']['id'] || '';
+
         getOrderData({ overdueId: params }, { userId });
         getAllUrgeRecord({ overdueId: params });
         const _this = this;
@@ -599,7 +600,7 @@ class OrderDetail extends Component{
         );
     }
 
-   
+
 
 }
 
