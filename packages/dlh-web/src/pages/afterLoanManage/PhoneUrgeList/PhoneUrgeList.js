@@ -188,8 +188,7 @@ class PhoneUrgeList extends Component {
     handleLookDetail = (id, userId) => {
         const {history: {push}} = this.props;
         push({
-            pathname: `/phoneUrgeList/${id}`,
-            state: { userId }
+            pathname: `/phoneUrgeList/${id}/${userId}`,
         })
     }
 

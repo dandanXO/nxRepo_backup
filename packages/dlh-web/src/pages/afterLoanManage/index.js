@@ -21,7 +21,7 @@ const afterLoanManageRoutes = [
     { path: '/overdueOrderDistribute', component: OverdueOrderDistribute },
     { path: '/overdueBackRecord', component: OverdueBackRecord },
     { path: '/phoneUrgeList', component: PhoneUrgeList, exact: true },
-    { path: '/phoneUrgeList/:id', component: OrderDetail },
+    { path: '/phoneUrgeList/:id/:uid', component: OrderDetail },
     { path: '/overdueDisStatistics1', component: OverdueDisStatistics1 },
     { path: '/overdueDisStatistics2', component: OverdueDisStatistics2 },
     { path: '/overdue-reduction', component: OverdueReduction },

@@ -13,7 +13,7 @@ const todayLoanManageRoutes = [
     { path: '/todayOrderDistribute', component: TodayOrderDistribute },
     { path: '/todayBackRecord', component: TodayBackRecord },
     { path: '/todayPhoneUrgeList', component: TodayPhoneUrgeList, exact: true },
-    { path: '/todayPhoneUrgeList/:id', component: TodayOrderDetail },
+    { path: '/todayPhoneUrgeList/:id/:uid', component: TodayOrderDetail },
     { path: '/collect-team-report-today', component: TodayCollectTeamReport }
 ];
 
