@@ -1,5 +1,9 @@
 import { NoticeSectionContainer } from './index';
-type Props = {};
+
+type Props = {
+  //
+};
+
 export const NoticeUserAuthedEmptyQuotaSection = (props: Props) => {
   return (
     <NoticeSectionContainer>

@@ -3,6 +3,7 @@ import { TimePartition } from '../../../../reduxStore/indexPageSlice';
 type Props = {
   refreshableCountdown: TimePartition;
 };
+
 export const WelcomeBackAndReapplyInTimeSection = (props: Props) => {
   return (
     <div className={'w-full flex flex-col items-center'}>

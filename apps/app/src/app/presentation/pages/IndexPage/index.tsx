@@ -90,31 +90,35 @@ export type PageState = {
 
 const IndexPage = () => {
   const dispatch = useDispatch();
-  const isInitialized = useSelector((state: RootState) => state.app.isInit);
 
+  // NOTE: isInitialized
+  const isInitialized = useSelector((state: RootState) => state.app.isInit);
   useEffect(() => {
     if (isInitialized) {
       dispatch(IndexPageSagaAction.user.viewIndexPageAction());
     }
     return () => {
       if (!isInitialized) {
+        //
       }
     };
   }, [isInitialized]);
 
   const indexPageState = useSelector((state: RootState) => state.indexPage);
 
-  const onClickReacquireCredit = useCallback(() => {
-    dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
-  }, []);
-
-  // NOTE:
+  // NOTE: unknow | UserAuthing | UserRejected
   let finalPageState = PageStateEnum.unknow;
   if (indexPageState.user.state === USER_AUTH_STATE.authing) {
     finalPageState = PageStateEnum.UserAuthing;
   } else if (indexPageState.user.state === USER_AUTH_STATE.reject) {
     finalPageState = PageStateEnum.UserRejected;
   }
+
+  // NOTE: User Event
+  const onClickReacquireCredit = useCallback(() => {
+    dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
+  }, []);
+
 
   const navigate = useNavigate();
 
@@ -329,7 +333,7 @@ const IndexPage = () => {
     }
   }, [indexPageState.indexAPI?.products, quotaBarTargetPrice]);
 
-  const modelState = useSelector((state: RootState) => state.model);
+
 
   const applyDisable = useMemo(() => {
     let disable = false;
@@ -374,7 +378,8 @@ const IndexPage = () => {
     indexPageState.user.state,
   ]);
 
-  const { isLoading, isSuccess, isError } = useSelector(
+  // NOTE: 是否重新獲取額度中
+  const { isLoading: isReacquireLoading, isSuccess, isError } = useSelector(
     (state: RootState) => state.indexPage.api.reacquire
   );
 
@@ -388,7 +393,9 @@ const IndexPage = () => {
   );
   // console.log("refreshableCountdown", refreshableCountdown);
 
-  // NOTICE: refactor me
+
+  // NOTE: User Event
+  // TODO: refactor me
   const onClickApply = useCallback(() => {
     // NOTICE: empty guard
     if (!calculatingProducts) return;
@@ -416,6 +423,9 @@ const IndexPage = () => {
     navigate(PagePathEnum.CustomerServicePage);
   }, []);
 
+  // NOTE: Modal
+  const modelState = useSelector((state: RootState) => state.model);
+
   return (
     <Page className={'flex flex-col'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
@@ -426,6 +436,10 @@ const IndexPage = () => {
         </div>
 
         <div className={'mb-5'}>
+          {/*NOTE: 顯示歡迎與是否顯示使用者與客服按鈕*/}
+          {/*NOTE: 顯示即將逾期與逾期的狀態*/}
+          {/*NOTE: 顯示尚未驗證CTA*/}
+          {/*NOTE: 是否顯示 QuotaSlider*/}
           <UserInformationSection
             state={indexPageState}
             pageState={finalPageState}
@@ -436,96 +450,121 @@ const IndexPage = () => {
         </div>
 
         <PageContent>
+
+          {/*NOTE: 用戶尚未認證*/}
           {indexPageState.user.state === USER_AUTH_STATE.ready && (
             <>
               <div className={'mb-3'}>
                 <LoanInformationSection state={indexPageState} />
               </div>
+
               <div className={'mb-3'}>
                 <AuthenticationSection />
               </div>
+
               <div className={'mb-3'}>
-                {/*TODO*/}
                 <ADBannerSection state={indexPageState} />
               </div>
+
             </>
           )}
 
-          {indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.riskControl.state === RISK_CONTROL_STATE.valid && (
+          {/*NOTE: 用戶認證成功*/}
+          {
+            indexPageState.user.state === USER_AUTH_STATE.success
+            && indexPageState.riskControl.state === RISK_CONTROL_STATE.valid
+            && (
               <div className={'mb-4 mt-6'}>
+                {/*NOTE: 顯示推薦產品列表*/}
                 <RecommendedProductsSection
                   state={indexPageState}
                   calculatingProducts={calculatingProducts || []}
                 />
                 <Horizontal />
               </div>
-            )}
+            )
+          }
 
-          {[
-            indexPageState.riskControl.state === RISK_CONTROL_STATE.valid,
-            indexPageState.riskControl.state ===
-              RISK_CONTROL_STATE.expired_refresh_able,
-            indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
-            indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
-            // NOTICE: 額度不足
-            indexPageState.indexAPI?.noQuotaBalance === false &&
-              indexPageState.indexAPI?.availableAmount === 0,
-          ].some((condition) => condition === true) &&
-            indexPageState.user.state === USER_AUTH_STATE.success && (
+          {/*NOTE: 顯示可用額度圓餅雷達圖*/}
+          {
+            // NOTE: 符合其中條件
+            [
+              indexPageState.riskControl.state === RISK_CONTROL_STATE.valid,
+              indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
+              indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
+              indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
+              // NOTICE: 額度不足
+              indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount === 0,
+            ].some((condition) => condition === true)
+            && indexPageState.user.state === USER_AUTH_STATE.success
+            && (
               <div className={'mb-3'}>
                 <LoanOverViewSection state={indexPageState} />
               </div>
-            )}
+            )
+          }
 
-          {/*TODO: Remove me by identify state*/}
+          {/*TODO: refactor me*/}
           <div className={'mb-3'}>
-            <TipsSection state={indexPageState} isLoading={isLoading} />
+            <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
 
+          {/*TODO: 用戶認證中或用戶拒絕*/}
           {indexPageState.user.state === USER_AUTH_STATE.authing ? (
             <NoticeUserInProgressAuthStatusSections />
           ) : indexPageState.user.state === USER_AUTH_STATE.reject ? (
             <NoticeUserRejectedSection />
           ) : null}
 
-          {indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.riskControl.state ===
-              RISK_CONTROL_STATE.expired_refresh_over_3 && (
+
+          {/*TODO: refactor me*/}
+          {
+            indexPageState.user.state === USER_AUTH_STATE.success
+            && indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3
+            && (
               <NoticeUserReacquireOver3TimeSections />
-            )}
+            )
+          }
 
+          {/*TODO: refactor me*/}
           {/*TODO:新客拒絕或是老客拒絕*/}
-          {indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.order.state === ORDER_STATE.reject &&
-            indexPageState.riskControl.state !==
-              RISK_CONTROL_STATE.expired_refresh_able && (
-              <>
-                <NoticeOrderOrQuotaRejectedSection />
-              </>
-            )}
+          {
+            indexPageState.user.state === USER_AUTH_STATE.success
+            && indexPageState.order.state === ORDER_STATE.reject
+            && indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
+            && (
+              <NoticeOrderOrQuotaRejectedSection />
+            )
+          }
 
-          {/*TODO: 檢查下*/}
-          {indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.riskControl.state ===
-              RISK_CONTROL_STATE.empty_quota && (
-              <>
-                <NoticeUserAuthedEmptyQuotaSection />
-              </>
-            )}
+          {/*NOTE: 用戶通過認證，但沒有可用額度*/}
+          {
+            indexPageState.user.state === USER_AUTH_STATE.success
+            && indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
+            && (
+              <NoticeUserAuthedEmptyQuotaSection />
+            )
+          }
 
-          {indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.riskControl.state !==
-              RISK_CONTROL_STATE.expired_refresh_able &&
-            (indexPageState.order.state === ORDER_STATE.reject ||
-              indexPageState.riskControl.state ===
-                RISK_CONTROL_STATE.empty_quota) && (
+          {/*TODO: refactor me*/}
+          {/*NOTE: 顯示下次可借款倒數計時*/}
+          {
+            indexPageState.user.state === USER_AUTH_STATE.success
+            && indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
+            && (
+              indexPageState.order.state === ORDER_STATE.reject
+              || indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
+            )
+            && (
               <WelcomeBackAndReapplyInTimeSection
                 refreshableCountdown={refreshableCountdown}
               />
-            )}
+            )
+          }
+
         </PageContent>
       </div>
+
 
 
       <div className={'sticky bottom-[63px] px-3 py-2'}>
@@ -542,6 +581,7 @@ const IndexPage = () => {
           />
         )}
 
+        {/*TODO: refactor*/}
         {/*// NOTE: Button - View Application Progress*/}
         {(
           indexPageState.user.state === USER_AUTH_STATE.authing
@@ -556,13 +596,14 @@ const IndexPage = () => {
           />
         )}
 
-        {isLoading && (
+        {isReacquireLoading && (
           <div className={'text-xs text-gray-500 text-center mb-3'}>
             Please wait patiently for 30 seconds to two minutes while we review
             the maximum amount you can borrow as quickly as possible.
           </div>
         )}
 
+        {/*TODO: refactor*/}
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {
@@ -578,16 +619,20 @@ const IndexPage = () => {
               onClick={onClickReacquireCredit}
               dataTestingID={'reacquireCredit'}
               text={'Reacquire Credit Amount'}
-              loading={isLoading}
+              loading={isReacquireLoading}
               className={cx({
                 'bg-primary-main':
                   indexPageState.riskControl.state ===
                   RISK_CONTROL_STATE.expired_refresh_able,
-                  'bg-cstate-disable-main border-cstate-disable-main': isLoading,
+                  'bg-cstate-disable-main border-cstate-disable-main': isReacquireLoading,
               })}
             />
           )}
       </div>
+
+
+
+      {/*NOTE: Modals*/}
 
       {/*NOTE: Quick Repay Modal*/}
       {modelState.quickRepaymentSummaryModal.show && (

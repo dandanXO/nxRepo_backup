@@ -14,6 +14,24 @@ export const LatestOrderStatus = (props: Props) => {
   // NOTE: State2 - 提醒您需要優先還清逾期款項才能再借款
 
   const navigate = useNavigate();
+
+  // NOTE: User Event
+  const onUserClickToRepay = () => {
+    navigate(
+      `${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,
+      {
+        state: {
+          orderNo:
+          props.state.order.overdueOrComingOverdueOrder?.orderNo,
+        },
+      }
+    );
+  }
+
+  // TODO: refactor
+  const hasOverdueOrder = props.state.order.state === ORDER_STATE.hasOverdueOrder;
+  const hasInComingOverdueOrder = props.state.order.state === ORDER_STATE.hasInComingOverdueOrder
+
   return (
     <div
       className={
@@ -35,7 +53,8 @@ export const LatestOrderStatus = (props: Props) => {
 
           <div className={'bottom flex flex-col'}>
             <div className={'flex flex-row'}>
-              {props.state.order.state === ORDER_STATE.hasOverdueOrder && (
+              {/*NOTE: 顯示逾期文字*/}
+              {hasOverdueOrder && (
                 <div
                   className={
                     'h-5 px-2 text-white text-sm bg-red-500 rounded-lg mr-1'
@@ -45,67 +64,53 @@ export const LatestOrderStatus = (props: Props) => {
                 </div>
               )}
               <div className={'flex flex-row'}>
+                {/*NOTE: 顯示逾期時間文字*/}
                 <div
                   className={cx('font-light text-sm mr-2', {
-                    'text-gray-400':
-                      props.state.order.state ===
-                      ORDER_STATE.hasInComingOverdueOrder,
-                    'text-red-500':
-                      props.state.order.state === ORDER_STATE.hasOverdueOrder,
+                    'text-gray-400': hasInComingOverdueOrder,
+                    'text-red-500': hasOverdueOrder,
                   })}
                 >
                   Due Date
                 </div>
+                {/*NOTE: 顯示逾期時間*/}
                 <div
                   className={cx('font-normal text-sm', {
-                    'text-gray-500':
-                      props.state.order.state ===
-                      ORDER_STATE.hasInComingOverdueOrder,
-                    'text-red-500':
-                      props.state.order.state === ORDER_STATE.hasOverdueOrder,
+                    'text-gray-500': hasInComingOverdueOrder,
+                    'text-red-500': hasOverdueOrder,
                   })}
                 >
-                  {moment(
-                    props.state.order.overdueOrComingOverdueOrder?.dueDate
-                  ).format('DD-MM-YYYY')}
+                  {moment(props.state.order.overdueOrComingOverdueOrder?.dueDate).format('DD-MM-YYYY')}
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className={'right'}>
           <div
+            data-testing-id={"repay"}
             className={'text-blue-800'}
-            onClick={() => {
-              navigate(
-                `${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,
-                {
-                  state: {
-                    orderNo:
-                      props.state.order.overdueOrComingOverdueOrder?.orderNo,
-                  },
-                }
-              );
-            }}
+            onClick={onUserClickToRepay}
           >
             Repay
           </div>
         </div>
+
       </div>
-      {props.state.order.state === ORDER_STATE.hasOverdueOrder && (
+
+      {/*NOTE: 逾期*/}
+      {
+        hasOverdueOrder
+        && (
         <>
           <div className={'w-full border-t-[1px] my-2 border-gray-400'} />
-          <div
-            className={cx('font-light text-sm text-gray-400 leading-4 mr-2', [
-              'text-red-500',
-              props.state.order.state === ORDER_STATE.hasOverdueOrder,
-            ])}
-          >
-            Remind you to prioritize paying off overdue payments before you can
-            borrow again.
+          <div className={cx('font-light text-sm text-gray-400 leading-4 mr-2 text-red-500')}>
+            Remind you to prioritize paying off overdue payments before you can borrow again.
           </div>
         </>
       )}
+
     </div>
   );
 };

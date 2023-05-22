@@ -8,7 +8,8 @@ type Props = IndexPageProps & {
   onClickToCustomerService: () => void;
 };
 
-export const UserInfoSupportField = (props: Props) => {
+export const UserInfoSupportSection = (props: Props) => {
+  // TODO: refactor
   const userName =
     props.state.user?.userName?.length >= 10
       ? props.state.user.userName.slice(0, 3) +
@@ -16,22 +17,31 @@ export const UserInfoSupportField = (props: Props) => {
         props.state.user.userName.slice(7, 10)
       : props.state.user.userName;
   const [isHideUserName, setIsHideUserName] = useState(true);
+
+  // NOTE: User Event
+  const onClickHideUserName = () => {
+    setIsHideUserName(!isHideUserName);
+  }
+
   return (
     <div className={'w-full flex flex-row justify-between '}>
       <div className={'left-section flex flex-row items-center'}>
+        {/*NOTE: 顯示用戶名 */}
         <div data-testing-id="welcome" className={'welcome pr-2 font-medium'}>
           Welcome {isHideUserName ? userName : props.state.user.userName}
         </div>
-        <div
-          className={'hide-icon'}
-          onClick={() => setIsHideUserName(!isHideUserName)}
+        {/*NOTE: 是否隱藏用戶名稱 Button*/}
+        <a
+          data-test-id={"hide-icon"}
+          onClick={onClickHideUserName}
         >
           {isHideUserName ? <FiEyeOff /> : <FiEye />}
-        </div>
+        </a>
       </div>
       <div className={'right-section'}>
+        {/*NOTE: 客服 Button*/}
         <div
-          className={'contact-icon'}
+          data-test-id={"contact-icon"}
           onClick={props.onClickToCustomerService}
         >
           <RiCustomerServiceLine />

@@ -14,18 +14,11 @@ type Props = IndexPageProps & {
 };
 
 export const QuotaSliderStatus = (props: Props) => {
-  const [currentQuotaValue, setCurrentQuotaValue] = useState(0);
-  const [currentQuotaLabelValue, setCurrentQuotaLabelValue] = useState('');
-  const [maxQuotaValue, setMaxQuotaValue] = useState('');
-  const [disableQuotaBar, setDisableQuotaBar] = useState(false);
-  // console.log("currentQuotaValue", currentQuotaValue)
-  // console.log("maxQuotaValue", maxQuotaValue);
 
-  useEffect(() => {
-    setMaxQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.max || 0));
-  }, [props.state.indexAPI?.quotaBar.max]);
-
-  const disable = useMemo(() => {
+  // TODO: refactor
+  // NOTE: 是否禁用 quota slider
+  const disableQuotaSlider = useMemo(() => {
+    // NOTE: 符合其中條件就進用 Quota Slider
     return [
       props.state.user.state === USER_AUTH_STATE.authing,
       props.state.user.state === USER_AUTH_STATE.reject,
@@ -41,13 +34,28 @@ export const QuotaSliderStatus = (props: Props) => {
     props.state.riskControl.state,
   ]);
 
+
+  const [currentQuotaValue, setCurrentQuotaValue] = useState(0);
+  const [currentQuotaLabelValue, setCurrentQuotaLabelValue] = useState('');
+  const [maxQuotaValue, setMaxQuotaValue] = useState('');
+  const [disableQuotaBar, setDisableQuotaBar] = useState(false);
+  // console.log("currentQuotaValue", currentQuotaValue)
+  // console.log("maxQuotaValue", maxQuotaValue);
+
   useEffect(() => {
-    if (disable) {
+    setMaxQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.max || 0));
+  }, [props.state.indexAPI?.quotaBar.max]);
+
+
+  useEffect(() => {
+    // NOTE: 禁用 Quota Slider
+    if (disableQuotaSlider) {
       setCurrentQuotaLabelValue('****');
       setMaxQuotaValue('****');
       setDisableQuotaBar(true);
       props.setQuotaBarTargetPrice(0);
     } else {
+      // NOTE: 啟用 Quota Slider
       setCurrentQuotaValue(props.state.indexAPI?.quotaBar.current || 0);
       setCurrentQuotaLabelValue(
         formatPrice(props.state.indexAPI?.quotaBar.current || 0)
@@ -55,8 +63,10 @@ export const QuotaSliderStatus = (props: Props) => {
       setDisableQuotaBar(false);
       props.setQuotaBarTargetPrice(props.state.indexAPI?.quotaBar.current || 0);
     }
-  }, [disable, props.state.indexAPI?.quotaBar]);
+  }, [disableQuotaSlider, props.state.indexAPI?.quotaBar]);
 
+
+  // NOTE: 與 Parent 溝通
   useEffect(() => {
     props.setQuotaBarTargetPrice(currentQuotaValue);
   }, [currentQuotaValue]);
@@ -78,8 +88,8 @@ export const QuotaSliderStatus = (props: Props) => {
             <ReactSlider
               className="quota-slider"
               trackClassName={cx({
-                'quota-slider-track': !disable,
-                'quota-slider-track-disable': disable,
+                'quota-slider-track': !disableQuotaSlider,
+                'quota-slider-track-disable': disableQuotaSlider,
               })}
               thumbClassName={'quota-slider-thumb'}
               thumbActiveClassName="active-quota-slider-thumb"
@@ -90,8 +100,8 @@ export const QuotaSliderStatus = (props: Props) => {
                   <div {...props}>
                     <div
                       className={cx({
-                        'quota-slider-thumb-inner': !disable,
-                        'quota-slider-thumb-inner-disable': disable,
+                        'quota-slider-thumb-inner': !disableQuotaSlider,
+                        'quota-slider-thumb-inner-disable': disableQuotaSlider,
                       })}
                     ></div>
                   </div>
@@ -123,7 +133,6 @@ export const QuotaSliderStatus = (props: Props) => {
           }
         >
           <span className={'pr-2'}>Exclusive Personal Loan offer</span>
-          {/* <span className={"text-orange-500"}>{props.countdown}</span> */}
           <span
             className={`${
               props.countdown === '00:00:00'

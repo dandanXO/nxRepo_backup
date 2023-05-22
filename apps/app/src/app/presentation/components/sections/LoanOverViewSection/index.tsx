@@ -1,7 +1,7 @@
 import { IndexPageProps } from '../../../../reduxStore';
 import { formatPrice } from '../../../../modules/format/formatPrice';
 import Chart from 'react-apexcharts';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ApexOptions } from 'apexcharts';
 import { environment } from '../../../../../environments/environment';
 import { ORDER_STATE } from '../../../../domain/order/ORDER_STATE';
@@ -10,6 +10,7 @@ import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
 type Props = IndexPageProps;
 
 export const LoanOverViewSection = (props: Props) => {
+
   const isReacquireCreditAmount =
     props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
     props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&

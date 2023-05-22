@@ -66,7 +66,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
           uiVersion: uiVersion,
           token: null,
           mode: 'H5',
-          phoneNo: '後端API沒給',
+          phoneNo: '後端API沒給三二一',
         };
 
         // NOTE: 不需要模擬
@@ -92,7 +92,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
               token: null,
               // NOTICE: mode 的用途？
               mode: 'Webview',
-              phoneNo: '後端API沒給',
+              phoneNo: '後端API沒給三二一',
             };
           } else {
             appInfo = {
@@ -104,7 +104,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
               token: null,
               // NOTICE: mode 的用途？
               mode: 'H5',
-              phoneNo: '後端API沒給',
+              phoneNo: '後端API沒給三二一',
             };
           }
 
@@ -125,7 +125,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
               token: null,
               // NOTE: required
               mode: 'Webview',
-              phoneNo: '後端API沒給',
+              phoneNo: '後端API沒給三二一',
             };
           } else {
             // NOTE: 線上環境直接用瀏覽器開
@@ -144,7 +144,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
               token: null,
               // NOTE: required
               mode: 'Webview',
-              phoneNo: '後端API沒給',
+              phoneNo: '後端API沒給三二一',
             };
           }
 
@@ -167,7 +167,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
         uiVersion: '15',
         token: null,
         mode: 'Webview',
-        phoneNo: '後端API沒給',
+        phoneNo: '後端API沒給三二一',
       };
 
 

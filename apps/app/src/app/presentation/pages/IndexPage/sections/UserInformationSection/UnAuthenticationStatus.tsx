@@ -1,5 +1,4 @@
 import { IndexPageProps } from '../../../../../reduxStore';
-import { formatPrice } from '../../../../../modules/format/formatPrice';
 
 type Props = IndexPageProps;
 

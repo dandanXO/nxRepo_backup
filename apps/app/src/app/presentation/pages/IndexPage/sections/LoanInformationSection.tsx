@@ -4,7 +4,6 @@ import { IndexPageProps } from '../../../../reduxStore';
 
 type Props = IndexPageProps;
 
-// TODO
 export const LoanInformationSection = (props: Props) => {
   return (
     <div
@@ -12,11 +11,13 @@ export const LoanInformationSection = (props: Props) => {
       className={'ad flex flex-row justify-around'}
     >
       <div className={'flex flex-row'}>
+
         <div className={'flex flex-col justify-center'}>
           <div className={'mr-3'}>
             <GiPowderBag size={30} />
           </div>
         </div>
+
         <div className={'info pt-1'}>
           <div className={'name'}>Interest rate</div>
           {/*NOTICE: FIX to text-md because admin*/}
@@ -24,13 +25,17 @@ export const LoanInformationSection = (props: Props) => {
             {props.state.openIndexAPI?.interestRate}
           </div>
         </div>
+
       </div>
+
       <div className={'flex flex-row justify-center'}>
+
         <div className={'flex flex-col justify-center'}>
           <div className={'mr-3'}>
             <AiOutlineFieldTime size={30} />
           </div>
         </div>
+
         <div className={'info pt-1'}>
           <div className={'name'}>Loan Term</div>
           {/*NOTICE: FIX to text-md because admin*/}
@@ -38,6 +43,7 @@ export const LoanInformationSection = (props: Props) => {
             {props.state.openIndexAPI?.loanTerms}
           </div>
         </div>
+
       </div>
     </div>
   );
