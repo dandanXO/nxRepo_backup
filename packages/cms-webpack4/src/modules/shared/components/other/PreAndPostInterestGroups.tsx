@@ -22,7 +22,7 @@ interface PreAndPostInterestGroupsProps {
 function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
     const { form, customAntFormFieldError, setCustomAntFormFieldError, interestRatePairsTouchInput, fieldName, parentName } = props;
     const isMultiGroup = Array.isArray(fieldName)
-    let interestRatePairs = form.getFieldsValue()[isMultiGroup?parentName:fieldName];
+    let interestRatePairs = form.getFieldValue(isMultiGroup?parentName:fieldName);
 
     useEffect(() => {
         if (!interestRatePairsTouchInput) return
