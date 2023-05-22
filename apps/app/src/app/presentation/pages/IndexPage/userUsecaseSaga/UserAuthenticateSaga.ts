@@ -1,9 +1,7 @@
 import {AndroidPage} from "../../../../modules/window/IWindow";
-import {AppEnvironment} from "../../../../modules/appEnvironment";
 import {catchSagaError} from "../../../../usecaseFlow/utils/catchSagaError";
 import {alertModal} from "../../../../api/base/alertModal";
-import {AppGlobal, AppTempFlag, isInApp, NativeAppInfo} from "../../../../persistant/nativeAppInfo";
-import {AppFlag} from "../../../../../environments/flag";
+import {AppGlobal, isInApp, NativeAppInfo} from "../../../../persistant/nativeAppInfo";
 
 export function *userAuthenticateSaga() {
 

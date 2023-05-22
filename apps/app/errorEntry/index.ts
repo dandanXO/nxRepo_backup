@@ -1,9 +1,9 @@
 import * as Sentry from "@sentry/react";
-import {Application} from "../src/app/modules/application";
 import sentryEnv from "../src/environments/sentry.json";
-import {AndroidAppInfo} from "../src/app/modules/nativeAppInfo/persistent/androidAppInfo";
+import {AppEnvironment} from "../src/app/modules/appEnvironment";
 
-const environmentName = Application.getEnvironmentName();
+const environmentName = AppEnvironment.getEnvironmentName();
+
 const sentryConfig: Sentry.BrowserOptions = {
   dsn: sentryEnv.DSN,
   environment: environmentName,
