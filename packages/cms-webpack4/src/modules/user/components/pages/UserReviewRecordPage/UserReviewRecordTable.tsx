@@ -98,8 +98,8 @@ const UserReviewRecordTable = () => {
                                     phoneNo,
                                     userName,
                                     reviewStatus: reviewStatus === '' ? '' : Number(reviewStatus),
-                                    reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD HH:mm:ss') : '',
-                                    reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD HH:mm:ss') : '',
+                                    reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
+                                    reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     operatorId,
                                     pageNum: 1,
                                 })
