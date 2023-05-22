@@ -19,7 +19,6 @@ const { Panel } = Collapse;
 interface RateSettingSectionProps {
     modal: any;
     form: FormInstance;
-    tempFormData: any;
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     interestRatePairsTouchInput: any

@@ -13,7 +13,6 @@ import { productInterestRatesContentKey } from "../../../../service/product/doma
 
 interface ProductFormProps {
     modal: any;
-    tempFormData: any;
     productModalData: ProductFormModal;
     onFinish: (value: any) => void;
     form: any;
@@ -38,7 +37,7 @@ export const productInterestRatePairsInitialValue = [
 ]
 
 const Index = (props: ProductFormProps) => {
-    const { productModalData, onFinish, modal, tempFormData, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
+    const { productModalData, onFinish, modal, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
 
     const layout = {
         labelCol: { span: 5 },
@@ -289,7 +288,6 @@ const Index = (props: ProductFormProps) => {
             <RateSettingSection
                 modal={modal}
                 form={form}
-                tempFormData={tempFormData}
                 customAntFormFieldError={customAntFormFieldError}
                 setCustomAntFormFieldError={setCustomAntFormFieldError}
                 interestRatePairsTouchInput={interestRatePairsTouchInput}

@@ -75,9 +75,6 @@ const productInterestRatesConvertToFrontendMap: { [key in BaseRiskRank]? : { lab
 export const useProductFormModal = (props: ProductFormModal) => {
 
     const [modal, contextHolder] = Modal.useModal();
-    const [tempFormData, setTempFormData] = useState({
-        productInterestRatePairs: productInterestRatePairsInitialValue
-    });
 
     const [productModalData, setProductModalData] = useState<ProductFormModal>({
         show: props.show,
@@ -165,8 +162,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 }
                 return acc;
             }, []);
-
-            setTempFormData({ productInterestRatePairs })
 
             const { hasError } = validatePreOrPostInterestGroups(productInterestRatePairs, true, productInterestRatesContentKey);
 
@@ -333,8 +328,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
         if (isNotFinish) return;
 
-        let productInterestRatePairs = values?.productInterestRatePairs || tempFormData.productInterestRatePairs
-        productInterestRatePairs = productInterestRatePairs.reduce((acc, current, index) => {
+        const productInterestRatePairs = form.getFieldValue('productInterestRatePairs').reduce((acc, current, index) => {
             const interestRates = current[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => (
                 [
                     ...interestRatesAcc,
@@ -497,7 +491,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
     }, []);
 
     return {
-        tempFormData,
         modal,
         productModalData,
         productFormData,
