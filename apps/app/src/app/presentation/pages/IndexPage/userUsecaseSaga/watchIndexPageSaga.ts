@@ -4,7 +4,7 @@ import { userViewIndexPageSaga } from './userViewIndexPageSaga';
 import { userApplyProductsSaga } from './userApplyProductsSaga';
 import { userReacquireCreditSaga } from './userReacquireCreditSaga';
 import { IndexPageSagaAction } from './indexPageActions';
-import {userAuthenticateSaga} from "./UserAuthenticateSaga";
+import {userAuthenticateSaga} from "./userAuthenticateSaga";
 
 export function* watchIndexPageSaga() {
   console.log('[app][saga] 1.2');

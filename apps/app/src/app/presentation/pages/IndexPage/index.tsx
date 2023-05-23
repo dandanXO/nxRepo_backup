@@ -334,7 +334,6 @@ const IndexPage = () => {
   }, [indexPageState.indexAPI?.products, quotaBarTargetPrice]);
 
 
-
   const applyDisable = useMemo(() => {
     let disable = false;
     // NOTICE: 主義下面判斷是否變成不能根據優先順序
@@ -430,6 +429,7 @@ const IndexPage = () => {
     <Page className={'flex flex-col'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
+      {/*NOTE: 頭部與內容*/}
       <div className={'flex grow flex-col'}>
         <div>
           <MarqueeSection state={indexPageState} />
@@ -565,8 +565,7 @@ const IndexPage = () => {
         </PageContent>
       </div>
 
-
-
+      {/*NOTE: 底部*/}
       <div className={'sticky bottom-[63px] px-3 py-2'}>
         {/*// NOTE: Button - Apply Now*/}
         {!applyHide && (
@@ -607,8 +606,8 @@ const IndexPage = () => {
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {
-          indexPageState.user.state !== USER_AUTH_STATE.authing &&
-          (
+          indexPageState.user.state !== USER_AUTH_STATE.authing
+          && (
             indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
             || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time
           )
@@ -630,10 +629,7 @@ const IndexPage = () => {
           )}
       </div>
 
-
-
       {/*NOTE: Modals*/}
-
       {/*NOTE: Quick Repay Modal*/}
       {modelState.quickRepaymentSummaryModal.show && (
         <div className={'z-10'}>
@@ -736,3 +732,4 @@ const IndexPage = () => {
   );
 };
 export default IndexPage;
+
