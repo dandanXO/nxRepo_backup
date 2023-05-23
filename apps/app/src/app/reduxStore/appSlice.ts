@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { GetInitServiceResponse } from '../api/appService/GetInitServiceResponse';
 import { IAndroidAppInfo } from '../persistant/nativeAppInfo/types/IAndroidAppInfo';
 

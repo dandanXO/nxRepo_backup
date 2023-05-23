@@ -1,6 +1,7 @@
 import { takeLatest } from 'redux-saga/effects';
-import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
+
 import { systemCallGetUserInfoSaga } from '../../../../usecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
+import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
 import { PersonalInfoPageSagaActions } from './index';
 import { userLogoutSaga } from './userLogoutSaga';
 

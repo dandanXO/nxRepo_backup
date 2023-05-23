@@ -1,5 +1,6 @@
-import { Overlay } from '@frontend/mobile/shared/ui';
 import { useNavigate } from 'react-router';
+
+import { Overlay } from '@frontend/mobile/shared/ui';
 
 const PrivacyPolicyModal = (props: any) => {
   const navigate = useNavigate();

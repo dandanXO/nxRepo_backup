@@ -1,5 +1,6 @@
 import { AiOutlineFieldTime } from '@react-icons/all-files/ai/AiOutlineFieldTime';
 import { GiPowderBag } from '@react-icons/all-files/gi/GiPowderBag';
+
 import { IndexPageProps } from '../../../../reduxStore';
 
 type Props = IndexPageProps;

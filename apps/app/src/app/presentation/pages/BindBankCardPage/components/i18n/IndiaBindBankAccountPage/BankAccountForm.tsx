@@ -1,9 +1,11 @@
 import React from 'react';
+
+import { Input } from '@frontend/mobile/shared/ui';
+
+import { Button } from '../../../../../components/layouts/Button';
 import { IIndiaBankAccountForm } from '../../../types/IBankAccountForm';
 import { Form } from '../../Form';
 import { Paragraph } from '../../Paragraph';
-import { Button } from '../../../../../components/layouts/Button';
-import { Input } from '@frontend/mobile/shared/ui';
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
   return (

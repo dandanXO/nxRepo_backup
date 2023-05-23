@@ -1,18 +1,20 @@
-import { useNavigate, useLocation, Navigate } from 'react-router';
-import { Overlay } from '@frontend/mobile/shared/ui';
 import { MdRadioButtonChecked } from '@react-icons/all-files/md/MdRadioButtonChecked';
 import { MdRadioButtonUnchecked } from '@react-icons/all-files/md/MdRadioButtonUnchecked';
-import Coupon from '../../components/Coupon';
-import { useEffect, useState } from 'react';
-import { ICouponProps } from '../../components/Coupon';
-import { useLazyGetCouponApplicableListQuery } from '../../../api/rtk';
-import { Navigation } from '../../components/layouts/Navigation';
-import NoData from './NoData.svg';
-import { Button } from '../../components/layouts/Button';
-import { getToken } from '../../../modules/querystring/getToken';
-import { PagePathEnum } from '../../pages/PagePathEnum';
 import { environment } from 'apps/app/src/environments/environment';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
+import { useEffect, useState } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router';
+
+import { Overlay } from '@frontend/mobile/shared/ui';
+
+import { useLazyGetCouponApplicableListQuery } from '../../../api/rtk';
+import { getToken } from '../../../modules/querystring/getToken';
+import Coupon from '../../components/Coupon';
+import { ICouponProps } from '../../components/Coupon';
+import { Button } from '../../components/layouts/Button';
+import { Navigation } from '../../components/layouts/Navigation';
+import { PagePathEnum } from '../../pages/PagePathEnum';
+import NoData from './NoData.svg';
 
 type ICouponOption = ICouponProps & {
   isChecked: boolean;

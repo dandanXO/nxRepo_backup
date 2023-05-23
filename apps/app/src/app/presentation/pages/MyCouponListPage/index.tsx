@@ -1,11 +1,12 @@
+import { environment } from 'apps/app/src/environments/environment';
+import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { useEffect, useState } from 'react';
-import { Tags } from '../../components/Tag';
-import { Page } from '../../components/layouts/Page';
+
 import { useLazyGetCouponListQuery } from '../../../api/rtk';
 import { GetCouponListRequest } from '../../../api/userService/GetCouponListRequest';
 import Coupon from '../../components/Coupon';
-import { environment } from 'apps/app/src/environments/environment';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
+import { Tags } from '../../components/Tag';
+import { Page } from '../../components/layouts/Page';
 
 const MyCouponListPage = () => {
   const [listStatus, setListStatus] = useState('Usable');

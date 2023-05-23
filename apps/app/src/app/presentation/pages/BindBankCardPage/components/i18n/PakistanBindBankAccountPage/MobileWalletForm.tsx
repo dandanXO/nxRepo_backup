@@ -1,13 +1,15 @@
-import { Form } from '../../Form';
-import { Input, InputValue } from '@frontend/mobile/shared/ui';
 import React, { ClipboardEvent } from 'react';
-import { Label } from '../../Label';
 import { useNavigate } from 'react-router';
-import { selectStyles } from '../../../../../components/layouts/selectStyles';
 import Select from 'react-select';
+
+import { Input, InputValue } from '@frontend/mobile/shared/ui';
+
 import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
 import { Button } from '../../../../../components/layouts/Button';
 import { Page } from '../../../../../components/layouts/Page';
+import { selectStyles } from '../../../../../components/layouts/selectStyles';
+import { Form } from '../../Form';
+import { Label } from '../../Label';
 
 type IMobileWalletForm = {
   // Wallet List

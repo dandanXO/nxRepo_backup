@@ -1,50 +1,45 @@
-import { LoanInformationSection } from './sections/LoanInformationSection';
-import { UserInformationSection } from './sections/UserInformationSection';
-import { RecommendedProductsSection } from './sections/RecommendedProductsSection';
-import { MarqueeSection } from './sections/MarqueeSection';
-import { Button } from '../../components/layouts/Button';
-import { PageContent } from '../../components/layouts/PageContent';
-import { TipsSection } from './sections/TipsSection';
-
-// import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
-import { NoticeUserRejectedSection } from './noticeSections/NoticeUserRejectedSection';
-
-import { NoticeUserAuthedEmptyQuotaSection } from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
-import { NoticeUserInProgressAuthStatusSections } from './noticeSections/NoticeUserInProgressAuthStatusSections';
-
-import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndReapplyInTimeSection';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../reduxStore';
-import { AuthenticationSection } from './sections/AuthenticationSection';
-import { ADBannerSection } from './sections/ADBannerSection';
-import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
-import { useCallback, useEffect, useMemo, useState } from 'react';
 import cx from 'classnames';
-import { NoticeUserReacquireOver3TimeSections } from './noticeSections/NoticeUserReacquireOver3TimeSections';
-import { useNavigate } from 'react-router';
-import { Horizontal } from '../../components/layouts/Horizontal';
-import { LoanAgreementModal } from '../../modals/QRLoanAgreementModal';
-import { QuickRepaymentSummaryModal } from '../../modals/QuickRepaymentSummaryModal';
-import { QRSuccessModal } from '../../modals/QRSuccessModal';
-import moment from 'moment-timezone';
-import { Page } from '../../components/layouts/Page';
+import { add, chain, divide, evaluate, multiply, subtract } from 'mathjs';
 import { Moment } from 'moment';
+import moment from 'moment-timezone';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
-import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
-import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
-import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
-
-import { AuthorizationModal } from '../../modals/AuthorizationModal';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { NoticeOrderOrQuotaRejectedSection } from './noticeSections/NoticeOrderOrQuotaRejectedSection';
 import { FeeRateKeyEnum } from '../../../api/indexService/FeeRateKeyEnum';
 import { PlatformProduct } from '../../../api/indexService/PlatformProduct';
 import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail';
-
-import { chain, add, multiply, divide, subtract, evaluate } from 'mathjs';
-import { PagePathEnum } from '../PagePathEnum';
-import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
+import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
+import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
+import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 import { getToken } from '../../../modules/querystring/getToken';
+import { RootState } from '../../../reduxStore';
+import { modalSlice } from '../../../reduxStore/modalSlice';
+import { Button } from '../../components/layouts/Button';
+import { Horizontal } from '../../components/layouts/Horizontal';
+import { Page } from '../../components/layouts/Page';
+import { PageContent } from '../../components/layouts/PageContent';
+import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
+import { AuthorizationModal } from '../../modals/AuthorizationModal';
+import { LoanAgreementModal } from '../../modals/QRLoanAgreementModal';
+import { QRSuccessModal } from '../../modals/QRSuccessModal';
+import { QuickRepaymentSummaryModal } from '../../modals/QuickRepaymentSummaryModal';
+import { PagePathEnum } from '../PagePathEnum';
+import { NoticeOrderOrQuotaRejectedSection } from './noticeSections/NoticeOrderOrQuotaRejectedSection';
+import { NoticeUserAuthedEmptyQuotaSection } from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
+import { NoticeUserInProgressAuthStatusSections } from './noticeSections/NoticeUserInProgressAuthStatusSections';
+import { NoticeUserReacquireOver3TimeSections } from './noticeSections/NoticeUserReacquireOver3TimeSections';
+// import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
+import { NoticeUserRejectedSection } from './noticeSections/NoticeUserRejectedSection';
+import { ADBannerSection } from './sections/ADBannerSection';
+import { AuthenticationSection } from './sections/AuthenticationSection';
+import { LoanInformationSection } from './sections/LoanInformationSection';
+import { MarqueeSection } from './sections/MarqueeSection';
+import { RecommendedProductsSection } from './sections/RecommendedProductsSection';
+import { TipsSection } from './sections/TipsSection';
+import { UserInformationSection } from './sections/UserInformationSection';
+import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndReapplyInTimeSection';
+import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
 
 export type FinalProductType = PlatformProduct & {
   calculating: {

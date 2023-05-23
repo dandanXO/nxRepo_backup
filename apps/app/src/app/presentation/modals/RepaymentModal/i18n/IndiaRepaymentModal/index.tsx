@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import AdSVG from '../../repayment_banner.svg';
-import { useLocation, useNavigate } from 'react-router';
-import { Horizontal, Input, InputValue, ListItem, Overlay, Radio } from '@frontend/mobile/shared/ui';
-import Select from 'react-select';
-import { withTranslation } from 'react-i18next';
-import { i18nRepaymentModal } from '../translations';
-import { environment } from '../../../../../../environments/environment';
-// import useRepayCreate from "../../hooks/useRepayCreate";
-// import useRepayTypes from "../../hooks/useRepayTypes";
-import { Button } from '../../../../components/layouts/Button';
-import { IRepaymentModalProps } from '../../index';
-import { formatPrice } from '../../../../../modules/format/formatPrice';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
-import { getToken } from '../../../../../modules/querystring/getToken';
 import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import cx from 'classnames';
 import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { withTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
+import Select from 'react-select';
+import styled from 'styled-components';
+
+import { Horizontal, Input, InputValue, ListItem, Overlay, Radio } from '@frontend/mobile/shared/ui';
+
+import { environment } from '../../../../../../environments/environment';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
+import { getToken } from '../../../../../modules/querystring/getToken';
 import Money from '../../../../components/Money.tsx';
+// import useRepayCreate from "../../hooks/useRepayCreate";
+// import useRepayTypes from "../../hooks/useRepayTypes";
+import { Button } from '../../../../components/layouts/Button';
+import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { IRepaymentModalProps } from '../../index';
+import AdSVG from '../../repayment_banner.svg';
+import { i18nRepaymentModal } from '../translations';
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {

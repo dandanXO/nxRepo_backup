@@ -1,8 +1,9 @@
-import { formatPrice } from '../../../modules/format/formatPrice';
-import { renderByCountry } from '../../../modules/i18n';
+import { environment } from 'apps/app/src/environments/environment';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
-import { environment } from 'apps/app/src/environments/environment';
+
+import { formatPrice } from '../../../modules/format/formatPrice';
+import { renderByCountry } from '../../../modules/i18n';
 
 interface IMoney {
   money: number | string;

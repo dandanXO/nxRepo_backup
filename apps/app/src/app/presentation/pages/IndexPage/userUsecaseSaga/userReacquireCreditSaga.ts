@@ -1,12 +1,13 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, take } from 'redux-saga/effects';
+
 import { Service } from '../../../../api';
-import { IndexPageSagaAction } from './indexPageActions';
-import { GetQuotaModelStatusResponse } from '../../../../api/loanService/GetQuotaModelStatusResponse';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { alertModal } from '../../../../api/base/alertModal';
+import { GetQuotaModelStatusResponse } from '../../../../api/loanService/GetQuotaModelStatusResponse';
 import { AppEnvironment } from '../../../../modules/appEnvironment';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { createRequestAction } from '../../../../usecaseFlow/utils/createRequestAction';
+import { IndexPageSagaAction } from './indexPageActions';
 
 // NOTE:
 export const getQuotaModelStatusAction = createRequestAction('GGetQuotaModelStatus');

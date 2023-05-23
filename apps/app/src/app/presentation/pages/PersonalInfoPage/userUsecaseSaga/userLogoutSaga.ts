@@ -1,6 +1,6 @@
 import { alertModal } from '../../../../api/base/alertModal';
 import { AndroidPage } from '../../../../modules/window/IWindow';
-import { AppGlobal, isInApp, NativeAppInfo } from '../../../../persistant/nativeAppInfo';
+import { AppGlobal, NativeAppInfo, isInApp } from '../../../../persistant/nativeAppInfo';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 
 export function* userLogoutSaga() {

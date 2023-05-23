@@ -1,8 +1,10 @@
-import React, { useCallback, useState } from 'react';
-import type { InputValue } from '@frontend/mobile/shared/ui';
-import { z } from 'zod';
-import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { z } from 'zod';
+
+import type { InputValue } from '@frontend/mobile/shared/ui';
+
 import { i18nBankBindAccountPage } from '../../translations';
 
 const ValidationInfo = {

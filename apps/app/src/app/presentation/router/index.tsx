@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router';
-
 // NOTE: Dynamic imports are only supported when the '--module' flag is
 //  set to 'es2020', 'es2022', 'esnext', 'commonjs', 'amd', 'system', 'umd', 'node16', or 'nodenext'.
 import loadable from '@loadable/component';
+import posthog from 'posthog-js';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Route, Routes, useLocation } from 'react-router';
 
+import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
+import { RootState } from '../../reduxStore';
+import { TabBar } from '../components/layouts/TabBar';
+// const IndexPage = loadable(() => import("../pages/IndexPage"));
+import IndexPage from '../pages/IndexPage';
+import { PagePathEnum } from '../pages/PagePathEnum';
 // NOTE: Page
 import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
-
-// const IndexPage = loadable(() => import("../pages/IndexPage"));
-import IndexPage from '../pages/IndexPage';
-import { useSelector } from 'react-redux';
-import { TabBar } from '../components/layouts/TabBar';
-import { RootState } from '../../reduxStore';
-import { PagePathEnum } from '../pages/PagePathEnum';
-import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
-import posthog from 'posthog-js';
 
 const AuthPage = loadable(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
 const BankCardListPage = loadable(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));

@@ -1,9 +1,10 @@
-import { ReactNode } from 'react';
 import cx from 'classnames';
-import { IndexPageProps } from '../../../../../reduxStore';
-import { PageState, PageStateEnum } from '../../index';
+import { ReactNode } from 'react';
+
 import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../../../../../domain/risk/RISK_CONTROL_STATE';
+import { IndexPageProps } from '../../../../../reduxStore';
+import { PageState, PageStateEnum } from '../../index';
 
 type Props = {
   children?: ReactNode;

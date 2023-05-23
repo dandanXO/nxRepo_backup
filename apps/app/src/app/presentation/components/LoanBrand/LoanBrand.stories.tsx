@@ -1,7 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import LoanBrand from './index';
-import { AppThemeProvider } from '@frontend/mobile/shared/ui';
 import * as React from 'react';
+
+import { AppThemeProvider } from '@frontend/mobile/shared/ui';
+
+import LoanBrand from './index';
 
 export default {
   title: 'Business Component/LoanBrand',

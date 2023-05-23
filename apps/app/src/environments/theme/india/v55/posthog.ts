@@ -1,4 +1,5 @@
 import { PostHogConfig } from 'posthog-js';
+
 import { commonPosthogConfig } from '../../../devPosthogConfig';
 
 export type PosthogConfig = {

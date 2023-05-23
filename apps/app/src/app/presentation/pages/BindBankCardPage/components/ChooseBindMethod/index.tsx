@@ -1,18 +1,20 @@
+import { AiFillCheckCircle } from '@react-icons/all-files/ai/AiFillCheckCircle';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+
+import { IThemeConfig } from '@frontend/mobile/shared/ui';
+
+import { AllCountryIdentityName } from '../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName';
+import { BangladeshCountry } from '../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry';
+import { PakistanCountry } from '../../../../../../../../../libs/shared/domain/src/country/PakistanCountry';
+import { environment } from '../../../../../../environments/environment';
+import { renderByCountry } from '../../../../../modules/i18n';
+import { i18nBankBindAccountPage } from '../../translations';
+import { Label } from '../Label';
+import BDMobileWalletSVG from './bd_ic_mobile_wallet_icon.png';
 import BankAccountSVG from './ic_bank_account_icon.svg';
 import MobileWalletSVG from './ic_mobile_wallet_icon.svg';
-import BDMobileWalletSVG from './bd_ic_mobile_wallet_icon.png';
-import { Label } from '../Label';
-import { useTranslation } from 'react-i18next';
-import { i18nBankBindAccountPage } from '../../translations';
-import { environment } from '../../../../../../environments/environment';
-import { AllCountryIdentityName } from '../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName';
-import { renderByCountry } from '../../../../../modules/i18n';
-import { PakistanCountry } from '../../../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { BangladeshCountry } from '../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry';
-import { IThemeConfig } from '@frontend/mobile/shared/ui';
-import { AiFillCheckCircle } from '@react-icons/all-files/ai/AiFillCheckCircle';
 
 const Container = styled.div`
   margin-bottom: 8px;

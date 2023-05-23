@@ -1,21 +1,22 @@
 // import Button from "../../components/Button";
-import Divider from '../../components/Divider';
-import { useEffect, useState } from 'react';
-import ListItem from '../../components/ListItem';
-import moment from 'moment';
-import { useNavigate } from 'react-router';
-import { getToken } from '../../../modules/querystring/getToken';
-import { GetLoanRecord } from '../../../api/loanService/GetLoanRecord';
-import { PagePathEnum } from '../PagePathEnum';
-import { RiArrowUpSLine } from '@react-icons/all-files/ri/RiArrowUpSLine';
 import { RiArrowDownSLine } from '@react-icons/all-files/ri/RiArrowDownSLine';
-import { Button } from '../../components/layouts/Button';
-import { Status } from '../../../modules/statusEnum';
-import Money from '../../components/Money.tsx';
+import { RiArrowUpSLine } from '@react-icons/all-files/ri/RiArrowUpSLine';
 import cx from 'classnames';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import { GetLoanRecord } from '../../../api/loanService/GetLoanRecord';
+import { getToken } from '../../../modules/querystring/getToken';
+import { Status } from '../../../modules/statusEnum';
+import Divider from '../../components/Divider';
+import ListItem from '../../components/ListItem';
+import Money from '../../components/Money.tsx';
+import { Button } from '../../components/layouts/Button';
+import { PagePathEnum } from '../PagePathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
-import { CardHeaderSection } from './CardHeaderSection';
 import { CardContentSection } from './CardContentSection';
+import { CardHeaderSection } from './CardHeaderSection';
 
 const PayoffPaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();

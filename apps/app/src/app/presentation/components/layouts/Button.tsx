@@ -1,7 +1,8 @@
 import cx from 'classnames';
-import { TestingProps } from '../../../modules/TestingProps';
-import { TailSpin } from 'react-loading-icons';
 import React from 'react';
+import { TailSpin } from 'react-loading-icons';
+
+import { TestingProps } from '../../../modules/TestingProps';
 
 type Props = {
   text: string | React.ReactNode;

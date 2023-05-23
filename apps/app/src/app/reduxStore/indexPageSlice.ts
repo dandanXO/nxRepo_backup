@@ -1,16 +1,17 @@
 // NOTE: PageRedux
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment-timezone';
-import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
-import { ORDER_STATE } from '../domain/order/ORDER_STATE';
-import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
-import { PayableRecords } from '../api/indexService/PayableRecords';
+
 import { GetIndexResponse } from '../api/indexService/GetIndexResponse';
+import { GetOpenIndexResponse } from '../api/indexService/GetOpenIndexResponse';
+import { PayableRecords } from '../api/indexService/PayableRecords';
 import { GetQuotaModelStatusResponse } from '../api/loanService/GetQuotaModelStatusResponse';
 import { GetUserInfoServiceResponse } from '../api/userService/GetUserInfoServiceResponse';
-import { GetOpenIndexResponse } from '../api/indexService/GetOpenIndexResponse';
-import { getQuotaModelStatusAction } from '../presentation/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
+import { ORDER_STATE } from '../domain/order/ORDER_STATE';
+import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
+import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
 import { NativeAppInfo } from '../persistant/nativeAppInfo';
+import { getQuotaModelStatusAction } from '../presentation/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
 
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;

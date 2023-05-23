@@ -1,19 +1,20 @@
-import { call, put, select } from 'redux-saga/effects';
-import { Posthog } from '../../modules/posthog';
-import { AppGlobal, AppTempFlag, NativeAppInfo } from '../../persistant/nativeAppInfo';
-import { appStore, RootState } from '../../reduxStore';
-import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
-import { getToken } from '../../modules/querystring/getToken';
 import { Location } from 'history';
-import { PagePathEnum } from '../../presentation/pages/PagePathEnum';
-import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
+import { call, put, select } from 'redux-saga/effects';
+
 import { Service } from '../../api';
-import { indexPageSlice } from '../../reduxStore/indexPageSlice';
-import { SentryModule } from '../../modules/sentry';
-import { appSlice } from '../../reduxStore/appSlice';
 import { alertModal } from '../../api/base/alertModal';
-import { catchSagaError } from '../utils/catchSagaError';
+import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
+import { Posthog } from '../../modules/posthog';
+import { getToken } from '../../modules/querystring/getToken';
+import { SentryModule } from '../../modules/sentry';
 import { AppModeEnum, AppModeModel } from '../../persistant/appModeModel';
+import { AppGlobal, AppTempFlag, NativeAppInfo } from '../../persistant/nativeAppInfo';
+import { PagePathEnum } from '../../presentation/pages/PagePathEnum';
+import { RootState, appStore } from '../../reduxStore';
+import { appSlice } from '../../reduxStore/appSlice';
+import { indexPageSlice } from '../../reduxStore/indexPageSlice';
+import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
+import { catchSagaError } from '../utils/catchSagaError';
 
 export function* runSystemInitSaga() {
   try {

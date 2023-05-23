@@ -1,16 +1,17 @@
-import { useTranslation } from 'react-i18next';
-import { useCallback, useEffect, useState } from 'react';
-import { InputValue, Modal } from '@frontend/mobile/shared/ui';
-import { i18nBankBindAccountPage } from '../../../translations';
-import { z } from 'zod';
-import i18next from 'i18next';
 import * as Sentry from '@sentry/react';
-import { processWalletDisplayName } from './customization/processWalletDisplayName';
-import { GetBindCardDropListResponse, WalletVendor } from '../../../../../../api/rtk/old/GetBindCardDropList';
-import { CustomAxiosError } from '../../../../../../api/rtk/axiosBaseQuery';
+import i18next from 'i18next';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { z } from 'zod';
+
+import { InputValue, Modal } from '@frontend/mobile/shared/ui';
 
 import { usePakistanIBanValidate } from '../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate';
+import { CustomAxiosError } from '../../../../../../api/rtk/axiosBaseQuery';
+import { GetBindCardDropListResponse, WalletVendor } from '../../../../../../api/rtk/old/GetBindCardDropList';
 import { SentryModule } from '../../../../../../modules/sentry';
+import { i18nBankBindAccountPage } from '../../../translations';
+import { processWalletDisplayName } from './customization/processWalletDisplayName';
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;

@@ -1,8 +1,8 @@
-import { IAndroidAppInfo } from './types/IAndroidAppInfo';
 import { environment } from '../../../environments/environment';
 import { AppFlag } from '../../../environments/flag';
 import { AppEnvironment } from '../../modules/appEnvironment';
 import { AppModeEnum } from '../appModeModel';
+import { IAndroidAppInfo } from './types/IAndroidAppInfo';
 
 // NOTICE: refactor me
 export const AppTempFlag = {

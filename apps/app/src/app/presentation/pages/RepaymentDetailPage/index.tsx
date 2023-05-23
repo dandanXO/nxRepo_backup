@@ -1,17 +1,18 @@
 // import Button from "../../components/Button";
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
 import { useEffect } from 'react';
-import { Navigation } from '../../components/layouts/Navigation';
-import { getOrderNo } from '../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../modules/querystring/getToken';
-import PakistanRepaymentDetailPage from './i18n/PakistanRepaymentDetailPage';
-import { renderByCountry } from '../../../modules/i18n';
+import { Outlet, useLocation, useNavigate } from 'react-router';
+
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import IndiaRepaymentDetailPage from './i18n/IndiaRepaymentDetailPage';
+import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
+import { renderByCountry } from '../../../modules/i18n';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../modules/querystring/getToken';
 import { isInAndroid } from '../../../modules/window/isInAndroid';
+import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
+import IndiaRepaymentDetailPage from './i18n/IndiaRepaymentDetailPage';
+import PakistanRepaymentDetailPage from './i18n/PakistanRepaymentDetailPage';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();

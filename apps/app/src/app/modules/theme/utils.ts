@@ -1,6 +1,6 @@
 import { DEFAULT_THEME, themes } from '../../../environments/theme/customTailwindTheme';
-import { IMappedTheme, ITheme } from './types';
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
+import { IMappedTheme, ITheme } from './types';
 
 type Countries = 'india' | 'pakistan';
 

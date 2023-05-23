@@ -1,9 +1,10 @@
-import { GetCouponApplicableList } from '../../../api/userService/GetCouponApplicableListResponse';
-import { renderByCountry } from '../../../modules/i18n';
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
+import { GetCouponApplicableList } from '../../../api/userService/GetCouponApplicableListResponse';
+import { renderByCountry } from '../../../modules/i18n';
 import IndiaCoupon from './i18n/IndiaCoupon';
 import PakistanCoupon from './i18n/PakistanCoupon';
+
 export type ICouponProps = GetCouponApplicableList & {
   status?: string;
   onClick?: () => void;

@@ -1,6 +1,6 @@
+import { GetLoanDetailChargeFeeDetail } from '../rtk/old/getLoanDetail';
 import { ApproveRecord } from './ApproveRecord';
 import { RepayRecord } from './RepayRecord';
-import { GetLoanDetailChargeFeeDetail } from '../rtk/old/getLoanDetail';
 
 export interface GetLoanRecord {
   applyDate?: string; // 申請日期

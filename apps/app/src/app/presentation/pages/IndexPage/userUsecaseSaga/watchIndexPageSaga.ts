@@ -1,10 +1,11 @@
 import { takeEvery, takeLatest } from 'redux-saga/effects';
+
 import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
-import { userViewIndexPageSaga } from './userViewIndexPageSaga';
-import { userApplyProductsSaga } from './userApplyProductsSaga';
-import { userReacquireCreditSaga } from './userReacquireCreditSaga';
 import { IndexPageSagaAction } from './indexPageActions';
+import { userApplyProductsSaga } from './userApplyProductsSaga';
 import { userAuthenticateSaga } from './userAuthenticateSaga';
+import { userReacquireCreditSaga } from './userReacquireCreditSaga';
+import { userViewIndexPageSaga } from './userViewIndexPageSaga';
 
 export function* watchIndexPageSaga() {
   console.log('[app][saga] 1.2');

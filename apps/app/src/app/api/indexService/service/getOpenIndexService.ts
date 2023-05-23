@@ -1,8 +1,9 @@
+import axios from 'axios';
+
+import { alertModal } from '../../base/alertModal';
 import { runAxios } from '../../base/runAxios';
 import { GetOpenIndexRequest } from '../GetOpenIndexRequest';
 import { GetOpenIndexResponse } from '../GetOpenIndexResponse';
-import axios from 'axios';
-import { alertModal } from '../../base/alertModal';
 
 export const getOpenIndexService = async (params: GetOpenIndexRequest) => {
   try {

@@ -1,15 +1,16 @@
 import { all, call, put, select } from 'redux-saga/effects';
+
 import { Service } from '../../../api';
-import { appSlice } from '../../../reduxStore/appSlice';
 import { GetInitServiceResponse } from '../../../api/appService/GetInitServiceResponse';
-import { catchSagaError } from '../../utils/catchSagaError';
+import { alertModal } from '../../../api/base/alertModal';
 import { GetUserInfoServiceResponse } from '../../../api/userService/GetUserInfoServiceResponse';
-import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
-import { systemCallGetUserInfoSaga } from '../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
+import { getToken } from '../../../modules/querystring/getToken';
 import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
 import { RootState } from '../../../reduxStore';
-import { getToken } from '../../../modules/querystring/getToken';
-import { alertModal } from '../../../api/base/alertModal';
+import { appSlice } from '../../../reduxStore/appSlice';
+import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
+import { catchSagaError } from '../../utils/catchSagaError';
+import { systemCallGetUserInfoSaga } from '../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
 
 export function* systemStartInitSaga() {
   // try {

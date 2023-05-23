@@ -1,12 +1,13 @@
 import React, { ClipboardEvent } from 'react';
+import { useNavigate } from 'react-router';
+import Select from 'react-select';
 
 import { Input } from '@frontend/mobile/shared/ui';
-import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
-import Select from 'react-select';
-import { useNavigate } from 'react-router';
+
+import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
 import { Button } from '../../../../../components/layouts/Button';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
-import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
+import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {
   const navigate = useNavigate();

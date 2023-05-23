@@ -1,8 +1,9 @@
 import moment from 'moment-timezone';
-import { put, select, delay } from 'redux-saga/effects';
+import { delay, put, select } from 'redux-saga/effects';
+
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
-import { IndexPageSagaAction } from './indexPageActions';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
+import { IndexPageSagaAction } from './indexPageActions';
 
 export function* systemRefreshableCountdownSaga(action: any) {
   // NOTICE: 防止錯誤後無法重新 watch

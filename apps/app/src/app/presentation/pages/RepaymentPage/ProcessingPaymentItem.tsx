@@ -1,17 +1,18 @@
 // import Button from "../../components/Button";
-import Divider from '../../components/Divider';
-import { useState } from 'react';
-import ListItem from '../../components/ListItem';
-import moment from 'moment';
-import { useNavigate } from 'react-router';
-import { getToken } from '../../../modules/querystring/getToken';
-import { GetLoanRecord } from '../../../api/loanService/GetLoanRecord';
-import { PagePathEnum } from '../PagePathEnum';
-import { Status } from '../../../modules/statusEnum';
 import cx from 'classnames';
-import { CardHeaderSection } from './CardHeaderSection';
+import moment from 'moment';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import { GetLoanRecord } from '../../../api/loanService/GetLoanRecord';
+import { getToken } from '../../../modules/querystring/getToken';
+import { Status } from '../../../modules/statusEnum';
+import Divider from '../../components/Divider';
+import ListItem from '../../components/ListItem';
+import { PagePathEnum } from '../PagePathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
+import { CardHeaderSection } from './CardHeaderSection';
 
 const ProcessingPaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();

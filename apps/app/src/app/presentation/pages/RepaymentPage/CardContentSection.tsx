@@ -1,7 +1,8 @@
+import moment from 'moment/moment';
+
 import Money from '../../components/Money.tsx';
 import { Button } from '../../components/layouts/Button';
 import { PagePathEnum } from '../PagePathEnum';
-import moment from 'moment/moment';
 
 type ICardContentSection = {
   amountName: string;

@@ -1,22 +1,22 @@
-import { Page } from '../../components/layouts/Page';
-import { Outlet, useNavigate } from 'react-router';
-import UserIcon from '../../components/images/UserIcon.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import cx from 'classnames';
 // import Button from "../../components/Button";
 import { FiChevronRight } from '@react-icons/all-files/fi/FiChevronRight';
+import cx from 'classnames';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router';
 
-import Card from './Card';
-import LinkItem from './LinkItem';
+import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 import { getToken } from '../../../modules/querystring/getToken';
 import { RootState } from '../../../reduxStore';
-import { PagePathEnum } from '../PagePathEnum';
-import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
-import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
-import { useEffect } from 'react';
-import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
+import UserIcon from '../../components/images/UserIcon.svg';
 import { Button } from '../../components/layouts/Button';
+import { Page } from '../../components/layouts/Page';
+import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
 import { IndexPageSagaAction } from '../IndexPage/userUsecaseSaga/indexPageActions';
+import { PagePathEnum } from '../PagePathEnum';
+import Card from './Card';
+import LinkItem from './LinkItem';
+import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 
 const PersonalInfoPage = () => {
   const dispatch = useDispatch();

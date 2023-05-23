@@ -1,7 +1,7 @@
 // import { extend } from '../../../app/modules/theme/utils';
 // import base from '../../../app/modules/theme/themes/base';
-
 import { ICustomTailwindTheme } from '../../../../app/modules/theme/ICustomTailwindTheme';
+
 const theme: ICustomTailwindTheme = {
   // NOTE: color
   primary_main: '#18A851',

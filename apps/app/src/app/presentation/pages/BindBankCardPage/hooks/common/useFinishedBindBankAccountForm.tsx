@@ -1,11 +1,13 @@
 import { useCallback, useState } from 'react';
-import { InputValue, Modal } from '@frontend/mobile/shared/ui';
 import { useTranslation } from 'react-i18next';
-import { i18nBankBindAccountPage } from '../../translations';
+
+import { InputValue, Modal } from '@frontend/mobile/shared/ui';
+
 import { BankVendor, GetBindCardDropListResponse } from '../../../../../api/rtk/old/GetBindCardDropList';
-import { BindBankCardPageEvents } from '../../event';
-import { SentryModule } from '../../../../../modules/sentry';
 import { changeLocationHref } from '../../../../../modules/errorHandler';
+import { SentryModule } from '../../../../../modules/sentry';
+import { BindBankCardPageEvents } from '../../event';
+import { i18nBankBindAccountPage } from '../../translations';
 
 type IUseFinishedBindBankAccountPage = {
   // NOTICE: Common

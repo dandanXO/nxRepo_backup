@@ -1,6 +1,7 @@
-import { RiArrowUpSLine } from '@react-icons/all-files/ri/RiArrowUpSLine';
 import { RiArrowDownSLine } from '@react-icons/all-files/ri/RiArrowDownSLine';
+import { RiArrowUpSLine } from '@react-icons/all-files/ri/RiArrowUpSLine';
 import { ReactElement, useState } from 'react';
+
 import Divider from '../../components/Divider';
 
 interface ICollapseItemProps {

@@ -1,14 +1,15 @@
-import { StatusContainer } from './StatusContainer';
 import React from 'react';
-import './style.scss';
-import { QuotaSliderStatus } from './QuotaSliderStatus';
-import { LatestOrderStatus } from './LatestOrderStatus';
-import { UserInfoSupportSection } from './UserInfoSupportSection';
-import { IndexPageProps } from '../../../../../reduxStore';
-import { UnAuthenticationStatus } from './UnAuthenticationStatus';
-import { PageState } from '../../index';
-import { USER_AUTH_STATE } from '../../../../../domain/user/USER_AUTH_STATE';
+
 import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
+import { USER_AUTH_STATE } from '../../../../../domain/user/USER_AUTH_STATE';
+import { IndexPageProps } from '../../../../../reduxStore';
+import { PageState } from '../../index';
+import { LatestOrderStatus } from './LatestOrderStatus';
+import { QuotaSliderStatus } from './QuotaSliderStatus';
+import { StatusContainer } from './StatusContainer';
+import { UnAuthenticationStatus } from './UnAuthenticationStatus';
+import { UserInfoSupportSection } from './UserInfoSupportSection';
+import './style.scss';
 
 type Props = IndexPageProps &
   PageState & {

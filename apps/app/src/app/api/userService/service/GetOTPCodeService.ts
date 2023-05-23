@@ -1,6 +1,7 @@
-import { runAxios } from '../../base/runAxios';
 import axios from 'axios';
+
 import { alertModal } from '../../base/alertModal';
+import { runAxios } from '../../base/runAxios';
 
 export type GetOTPCodeRequest = {
   appName: string;

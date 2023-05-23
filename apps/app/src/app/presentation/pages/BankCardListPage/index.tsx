@@ -1,13 +1,14 @@
-import BankCard from './BankCard';
-import NoDataIcon from '../../components/images/NoData.svg';
-import { useNavigate } from 'react-router';
-import { useLazyGetBankCardListQuery } from '../../../api/rtk';
 import { useEffect, useState } from 'react';
-import { Navigation } from '../../components/layouts/Navigation';
+import { useNavigate } from 'react-router';
+
+import { useLazyGetBankCardListQuery } from '../../../api/rtk';
 import { usePostBankCardMainMutation } from '../../../api/rtk';
-import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
 import { getToken } from '../../../modules/querystring/getToken';
+import NoDataIcon from '../../components/images/NoData.svg';
+import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
+import BankCard from './BankCard';
+import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
 
 const BankCardListPage = () => {
   const navigate = useNavigate();

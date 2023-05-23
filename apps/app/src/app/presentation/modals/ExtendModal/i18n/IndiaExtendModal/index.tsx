@@ -1,11 +1,12 @@
+import moment from 'moment';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import ListItem from '../../../../components/ListItem';
-import Divider from '../../../../components/Divider';
-import moment from 'moment';
-import { Button } from '../../../../components/layouts/Button';
-import Money from '../../../../components/Money.tsx';
+
 import { Status } from '../../../../../modules/statusEnum';
+import Divider from '../../../../components/Divider';
+import ListItem from '../../../../components/ListItem';
+import Money from '../../../../components/Money.tsx';
+import { Button } from '../../../../components/layouts/Button';
 
 const IndiaExtendModal = (props: any) => {
   const navigate = useNavigate();

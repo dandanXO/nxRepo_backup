@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router';
+
 import { Overlay } from '@frontend/mobile/shared/ui';
-import { useNavigate, useLocation } from 'react-router';
+
 import { Button } from '../../components/layouts/Button';
 import { PersonalInfoPageSagaActions } from '../../pages/PersonalInfoPage/userUsecaseSaga';
-import { useDispatch } from 'react-redux';
 
 const LogoutModal = (props: any) => {
   const dispatch = useDispatch();

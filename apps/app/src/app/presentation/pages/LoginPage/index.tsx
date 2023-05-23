@@ -1,5 +1,6 @@
-import { Navigation } from '../../components/layouts/Navigation';
 import { Outlet } from 'react-router';
+
+import { Navigation } from '../../components/layouts/Navigation';
 import { Page } from '../../components/layouts/Page';
 import { LoginForm } from './LoginForm';
 

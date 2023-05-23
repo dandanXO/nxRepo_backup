@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
 import cx from 'classnames';
+import { ReactNode } from 'react';
+
 type Props = {
   children: ReactNode;
   className?: string;

@@ -1,24 +1,26 @@
+import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
+import cx from 'classnames';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import AdSVG from '../../repayment_banner.svg';
-import { useLocation, useNavigate } from 'react-router';
-import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
-import Select, { StylesConfig } from 'react-select';
 import { withTranslation } from 'react-i18next';
-import { i18nRepaymentModal } from '../translations';
+import { useLocation, useNavigate } from 'react-router';
+import Select, { StylesConfig } from 'react-select';
+
+import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
+
 import { environment } from '../../../../../../environments/environment';
+import { EnumV15GradientButtonClassNames } from '../../../../../../environments/theme/pakistan/v15/button';
+import { getToken } from '../../../../../modules/querystring/getToken';
+import ListItem from '../../../../components/ListItem';
+import Money from '../../../../components/Money.tsx';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from '../../../../components/layouts/Button';
-import { IRepaymentModalProps } from '../../index';
-import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
-import { getToken } from '../../../../../modules/querystring/getToken';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
-import cx from 'classnames';
-import moment from 'moment';
-import ListItem from '../../../../components/ListItem';
-import Money from '../../../../components/Money.tsx';
 import { selectStyles } from '../../../../components/layouts/selectStyles';
-import { EnumV15GradientButtonClassNames } from '../../../../../../environments/theme/pakistan/v15/button';
+import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { IRepaymentModalProps } from '../../index';
+import AdSVG from '../../repayment_banner.svg';
+import { i18nRepaymentModal } from '../translations';
 
 type paymentMethodValueType = {
   type: string;

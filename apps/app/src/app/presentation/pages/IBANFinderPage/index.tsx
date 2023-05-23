@@ -1,6 +1,6 @@
+import IBan from '../../components/images/IBAN.svg';
 import { Page } from '../../components/layouts/Page';
 import CollapseItem from './CollapseItem';
-import IBan from '../../components/images/IBAN.svg';
 
 const IBANFinderPage = () => {
   const MethodContent = ({ title, text }: { title: string; text: any }) => {

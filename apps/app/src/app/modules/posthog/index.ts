@@ -1,9 +1,10 @@
 import posthog from 'posthog-js';
-import { AppEnvironment } from '../appEnvironment';
-import { posthogConfigs } from '../../../environments/theme/posthogConfigs';
-import { AppGlobal, NativeAppInfo } from '../../persistant/nativeAppInfo';
+
 import { PosthogConfig } from '../../../environments/theme/india/v55/posthog';
+import { posthogConfigs } from '../../../environments/theme/posthogConfigs';
 import { AppModeEnum, AppModeModel } from '../../persistant/appModeModel';
+import { AppGlobal, NativeAppInfo } from '../../persistant/nativeAppInfo';
+import { AppEnvironment } from '../appEnvironment';
 import { SentryModule } from '../sentry';
 
 const getPosthogConfig = (): PosthogConfig | null => {

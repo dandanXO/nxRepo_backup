@@ -1,11 +1,13 @@
-import { Input, InputValue } from '@frontend/mobile/shared/ui';
+import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import cx from 'classnames';
 import { useNavigate } from 'react-router';
-import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
+
+import { Input, InputValue } from '@frontend/mobile/shared/ui';
+
 import { Button } from '../../components/layouts/Button';
 import { PagePathEnum } from '../PagePathEnum';
+import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();

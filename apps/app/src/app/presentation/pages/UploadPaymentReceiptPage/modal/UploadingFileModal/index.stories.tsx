@@ -1,5 +1,7 @@
-import { AppThemeProvider } from '@frontend/mobile/shared/ui';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import { AppThemeProvider } from '@frontend/mobile/shared/ui';
+
 import UploadingFileModal from './index';
 
 export default {

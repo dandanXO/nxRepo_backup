@@ -1,12 +1,13 @@
 // NOTE: Action: UserApplyProduct
-import { LoanServiceResponse } from '../../../../api/loanService/service/postApplyLoanService';
-import { call, put, select, take, race } from 'redux-saga/effects';
-import { Service } from '../../../../api';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { InitialStateType, modalSlice } from '../../../../reduxStore/modalSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { call, put, race, select, take } from 'redux-saga/effects';
+
+import { Service } from '../../../../api';
+import { LoanServiceResponse } from '../../../../api/loanService/service/postApplyLoanService';
 import { GetBankCardListResponse } from '../../../../api/userService/GetBankCardListResponse';
 import { RootState } from '../../../../reduxStore';
+import { InitialStateType, modalSlice } from '../../../../reduxStore/modalSlice';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { IndexPageSagaAction, UserApplyProductActionPayload } from './indexPageActions';
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁

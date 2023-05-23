@@ -1,10 +1,12 @@
-import { SuccessICON } from './i18n/SuccessICON';
-import { Page } from '@frontend/mobile/shared/ui';
-import UploadedPaymentReceiptPage from './index';
-import styled from 'styled-components';
 import { WithTranslation, withTranslation } from 'react-i18next';
-import { i18nUploadedPaymentReceiptPage } from './i18n/translations';
+import styled from 'styled-components';
+
+import { Page } from '@frontend/mobile/shared/ui';
+
 import { Button } from '../../components/layouts/Button';
+import { SuccessICON } from './i18n/SuccessICON';
+import { i18nUploadedPaymentReceiptPage } from './i18n/translations';
+import UploadedPaymentReceiptPage from './index';
 
 const CustomPage = styled(Page)`
   display: flex;

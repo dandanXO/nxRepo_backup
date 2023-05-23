@@ -1,7 +1,8 @@
+import axios from 'axios';
+
+import { alertModal } from '../../base/alertModal';
 import { runAxios } from '../../base/runAxios';
 import { LoanServiceRequest } from '../LoanServiceRequest';
-import axios from 'axios';
-import { alertModal } from '../../base/alertModal';
 
 export const postApplyLoanService = async (req: LoanServiceRequest) => {
   try {

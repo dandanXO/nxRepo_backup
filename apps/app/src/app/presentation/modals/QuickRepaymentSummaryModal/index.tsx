@@ -1,22 +1,23 @@
-import { CloseButton } from '../../components/layouts/CloseButton';
-import { Horizontal } from '../../components/layouts/Horizontal';
-import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
 import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
-import { Button } from '../../components/layouts/Button';
+import cx from 'classnames';
 import React, { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
-import { IndexPageProps } from '../../../reduxStore';
-import { FinalProductsSummary, FinalProductType } from '../../pages/IndexPage';
-import { formatPrice } from '../../../modules/format/formatPrice';
 import Select, {
-  IndicatorsContainerProps,
-  components,
+  ControlProps,
   DropdownIndicatorProps,
   IndicatorSeparatorProps,
-  ControlProps,
+  IndicatorsContainerProps,
+  components,
 } from 'react-select';
+
 import { BankAccount } from '../../../api/userService/BankAccount';
-import cx from 'classnames';
+import { formatPrice } from '../../../modules/format/formatPrice';
+import { IndexPageProps } from '../../../reduxStore';
+import { Button } from '../../components/layouts/Button';
+import { CloseButton } from '../../components/layouts/CloseButton';
+import { Horizontal } from '../../components/layouts/Horizontal';
+import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
+import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
 
 type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];

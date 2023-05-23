@@ -1,5 +1,7 @@
-import { useNavigate, useLocation } from 'react-router';
-import { Overlay, Title, Divider, ListItem } from '@frontend/mobile/shared/ui';
+import { useLocation, useNavigate } from 'react-router';
+
+import { Divider, ListItem, Overlay, Title } from '@frontend/mobile/shared/ui';
+
 import { Button } from '../../components/layouts/Button';
 
 type SetPrimarySuccessModalProps = {

@@ -1,8 +1,9 @@
 import { put, select } from 'redux-saga/effects';
-import { RootState } from '../../../../reduxStore';
-import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
-import { SystemCaseActions } from '../../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
+
 import { GetIndexResponse } from '../../../../api/indexService/GetIndexResponse';
+import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
+import { RootState } from '../../../../reduxStore';
+import { SystemCaseActions } from '../../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 
 export function* systemMainCountdownSaga() {

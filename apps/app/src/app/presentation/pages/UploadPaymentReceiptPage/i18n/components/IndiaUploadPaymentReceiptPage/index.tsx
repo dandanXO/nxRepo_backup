@@ -1,14 +1,15 @@
-import UploadingFileModal from '../../../modal/UploadingFileModal';
-import { Input } from '@frontend/mobile/shared/ui';
-import I18CameraSvgIcon from '../I18CameraSvgIcon';
 import React from 'react';
-import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../common';
-
-import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
 import { withTranslation } from 'react-i18next';
-import { i18nUploadPaymentReceiptPage } from '../../translations';
-import { Page } from '../../../../../components/layouts/Page';
+
+import { Input } from '@frontend/mobile/shared/ui';
+
 import { Button } from '../../../../../components/layouts/Button';
+import { Page } from '../../../../../components/layouts/Page';
+import UploadingFileModal from '../../../modal/UploadingFileModal';
+import { i18nUploadPaymentReceiptPage } from '../../translations';
+import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
+import I18CameraSvgIcon from '../I18CameraSvgIcon';
+import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../common';
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(
   (props: I18UploadPaymentReceiptPageProps) => {

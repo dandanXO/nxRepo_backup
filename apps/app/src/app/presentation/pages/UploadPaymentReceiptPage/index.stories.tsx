@@ -1,7 +1,9 @@
-import { AppThemeProvider } from '@frontend/mobile/shared/ui';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
 import React from 'react';
+
+import { AppThemeProvider } from '@frontend/mobile/shared/ui';
+
+import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
 import { IndiaUploadPaymentReceiptPage } from './i18n/components/IndiaUploadPaymentReceiptPage';
 
 export default {

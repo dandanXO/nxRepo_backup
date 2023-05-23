@@ -1,14 +1,15 @@
-import UploadingFileModal from '../../../modal/UploadingFileModal';
-import { Input } from '@frontend/mobile/shared/ui';
-import I18CameraSvgIcon from '../I18CameraSvgIcon';
 import React from 'react';
-import { CustomPage } from '../common';
-
-import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
 import { withTranslation } from 'react-i18next';
-import { i18nUploadPaymentReceiptPage } from '../../translations';
+
+import { Input } from '@frontend/mobile/shared/ui';
+
 import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
 import { Button } from '../../../../../components/layouts/Button';
+import UploadingFileModal from '../../../modal/UploadingFileModal';
+import { i18nUploadPaymentReceiptPage } from '../../translations';
+import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
+import I18CameraSvgIcon from '../I18CameraSvgIcon';
+import { CustomPage } from '../common';
 
 export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(
   (props: Omit<I18UploadPaymentReceiptPageProps, 'utr' | 'setURT' | 'validateUtr'>) => {

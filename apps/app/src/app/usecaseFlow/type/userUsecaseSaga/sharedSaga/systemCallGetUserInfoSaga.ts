@@ -1,12 +1,13 @@
-import { GetUserInfoServiceResponse } from '../../../../api/userService/GetUserInfoServiceResponse';
-import { call, put, select } from 'redux-saga/effects';
-import { Service } from '../../../../api';
-import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
-import { SentryModule } from '../../../../modules/sentry';
-import { getToken } from '../../../../modules/querystring/getToken';
-import { RootState } from '../../../../reduxStore';
 import { Action, Location } from 'history';
+import { call, put, select } from 'redux-saga/effects';
+
+import { Service } from '../../../../api';
+import { GetUserInfoServiceResponse } from '../../../../api/userService/GetUserInfoServiceResponse';
+import { getToken } from '../../../../modules/querystring/getToken';
+import { SentryModule } from '../../../../modules/sentry';
 import { PagePathEnum } from '../../../../presentation/pages/PagePathEnum';
+import { RootState } from '../../../../reduxStore';
+import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../utils/catchSagaError';
 
 export function* systemCallGetUserInfoSaga() {

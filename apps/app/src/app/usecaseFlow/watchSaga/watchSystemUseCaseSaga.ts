@@ -1,17 +1,18 @@
-import { put, select, takeLatest } from 'redux-saga/effects';
-import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
-import { errorFallback } from '../utils/errorFallback';
-import { systemCountdownSaga } from '../../presentation/pages/IndexPage/userUsecaseSaga/systemCountdownSaga';
-import { systemRefreshableCountdownSaga } from '../../presentation/pages/IndexPage/userUsecaseSaga/systemRefreshableCountdownSaga';
 import {
   LocationChangeAction,
-  ROUTER_ON_LOCATION_CHANGED,
   ROUTER_CALL_HISTORY_METHOD,
+  ROUTER_ON_LOCATION_CHANGED,
 } from '@lagunovsky/redux-react-router';
-import { PagePathEnum } from '../../presentation/pages/PagePathEnum';
-import { RootState } from '../../reduxStore';
+import { put, select, takeLatest } from 'redux-saga/effects';
+
 import { USER_AUTH_STATE } from '../../domain/user/USER_AUTH_STATE';
 import { IndexPageSagaAction } from '../../presentation/pages/IndexPage/userUsecaseSaga/indexPageActions';
+import { systemCountdownSaga } from '../../presentation/pages/IndexPage/userUsecaseSaga/systemCountdownSaga';
+import { systemRefreshableCountdownSaga } from '../../presentation/pages/IndexPage/userUsecaseSaga/systemRefreshableCountdownSaga';
+import { PagePathEnum } from '../../presentation/pages/PagePathEnum';
+import { RootState } from '../../reduxStore';
+import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
+import { errorFallback } from '../utils/errorFallback';
 
 export function* watchSystemUseCaseSaga() {
   console.log('[app][saga] 1.4');

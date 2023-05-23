@@ -1,16 +1,18 @@
+import cx from 'classnames';
+import moment from 'moment';
+import { Outlet, useLocation, useNavigate } from 'react-router';
+
+import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
+
+import { EnumV15GradientButtonClassNames } from '../../../../../../environments/theme/pakistan/v15/button';
+import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/getLoanDetail';
+import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../../../modules/querystring/getToken';
+import { Status } from '../../../../../modules/statusEnum';
 import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
-import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { getToken } from '../../../../../modules/querystring/getToken';
-import moment from 'moment';
-import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/getLoanDetail';
-import { Status } from '../../../../../modules/statusEnum';
-import cx from 'classnames';
-import { EnumV15GradientButtonClassNames } from '../../../../../../environments/theme/pakistan/v15/button';
 
 const PakistanRepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();

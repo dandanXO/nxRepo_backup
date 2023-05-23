@@ -1,8 +1,10 @@
-import { useNavigate, useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
+
 import { Overlay } from '@frontend/mobile/shared/ui';
-import { renderByCountry } from '../../../modules/i18n';
+
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
+import { renderByCountry } from '../../../modules/i18n';
 import IndiaExtendConfirmModal from './i18n/IndiaExtendConfirmModal';
 import PakistanExtendConfirmModal from './i18n/PakistanExtendConfirmModal';
 

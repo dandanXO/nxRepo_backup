@@ -1,4 +1,4 @@
-import { ActionCreatorWithPayload, createAction, PayloadAction, PayloadActionCreator } from '@reduxjs/toolkit';
+import { ActionCreatorWithPayload, PayloadAction, PayloadActionCreator, createAction } from '@reduxjs/toolkit';
 
 export type UserGetOTPActionPayload = {
   phone: string;

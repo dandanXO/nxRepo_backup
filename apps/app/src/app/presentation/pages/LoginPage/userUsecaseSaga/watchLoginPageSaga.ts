@@ -1,9 +1,10 @@
 import { takeLatest } from 'redux-saga/effects';
+
 import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
+import { LoginPageUseCaseActionsInstance } from './index';
 import { userGetOTPSaga } from './userGetOTPSaga';
 import { userLoginSaga } from './userLoginSaga';
 import { userResendSaga } from './userResendSaga';
-import { LoginPageUseCaseActionsInstance } from './index';
 
 export function* watchLoginPageSaga() {
   console.log('[app][saga] 1.3');

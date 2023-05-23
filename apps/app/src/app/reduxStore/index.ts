@@ -1,15 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
-import { API, APIV3 } from '../api/rtk';
-import { APIBoundaryModuleSlice } from './apiBoundaryModuleSlice';
-import { indexPageSlice } from './indexPageSlice';
-import { modalSlice } from './modalSlice';
-import { appSlice } from './appSlice';
-import { createBrowserHistory } from 'history';
-
 import { createRouterMiddleware, createRouterReducer } from '@lagunovsky/redux-react-router';
-import { loginSlice } from './loginSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import { createBrowserHistory } from 'history';
+import createSagaMiddleware from 'redux-saga';
+
+import { API, APIV3 } from '../api/rtk';
 import { WatchAppSaga } from '../usecaseFlow/watchAppSaga';
+import { APIBoundaryModuleSlice } from './apiBoundaryModuleSlice';
+import { appSlice } from './appSlice';
+import { indexPageSlice } from './indexPageSlice';
+import { loginSlice } from './loginSlice';
+import { modalSlice } from './modalSlice';
 
 export const history = createBrowserHistory();
 const routerMiddleware = createRouterMiddleware(history);

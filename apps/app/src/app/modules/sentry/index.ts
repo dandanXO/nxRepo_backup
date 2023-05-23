@@ -3,12 +3,12 @@ import { BrowserTracing } from '@sentry/tracing';
 import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
 import posthog from 'posthog-js';
-import { AppFlag } from '../../../environments/flag';
-import { AppEnvironment } from '../appEnvironment';
 
+import { AppFlag } from '../../../environments/flag';
 import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
-import { appStore, RootState } from '../../reduxStore';
+import { RootState, appStore } from '../../reduxStore';
+import { AppEnvironment } from '../appEnvironment';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
 
 // NOTICE: refactor me

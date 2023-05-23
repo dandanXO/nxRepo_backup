@@ -1,23 +1,22 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
-import { IndiaBindBankAccountPage } from './components/i18n/IndiaBindBankAccountPage';
-import { PakistanBindBankAccountPage } from './components/i18n/PakistanBindBankAccountPage';
-
+import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
+import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import {
   useLazyGetBindCardDropListQuery,
   usePostBankBindSaveMutation,
   usePostBankBindSaveToPKMutation,
 } from '../../../api/rtk';
 import { renderByCountry } from '../../../modules/i18n';
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { useSelector } from 'react-redux';
-import { Navigation } from '../../components/layouts/Navigation';
 import { isInAndroid } from '../../../modules/window/isInAndroid';
-import { useNavigate } from 'react-router';
 import { CustomPage } from '../../components/layouts/CustomPage';
+import { Navigation } from '../../components/layouts/Navigation';
+import { IndiaBindBankAccountPage } from './components/i18n/IndiaBindBankAccountPage';
+import { PakistanBindBankAccountPage } from './components/i18n/PakistanBindBankAccountPage';
 
 const BindBankCardPage = () => {
   // NOTICE: Common

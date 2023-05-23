@@ -1,7 +1,7 @@
-import { AndroidPage } from '../../../../modules/window/IWindow';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { alertModal } from '../../../../api/base/alertModal';
-import { AppGlobal, isInApp, NativeAppInfo } from '../../../../persistant/nativeAppInfo';
+import { AndroidPage } from '../../../../modules/window/IWindow';
+import { AppGlobal, NativeAppInfo, isInApp } from '../../../../persistant/nativeAppInfo';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 
 export function* userAuthenticateSaga() {
   try {

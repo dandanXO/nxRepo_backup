@@ -1,6 +1,6 @@
-import { Product } from './Product';
 import { IndexPageProps } from '../../../../../reduxStore';
 import { FinalProductType } from '../../index';
+import { Product } from './Product';
 
 type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];

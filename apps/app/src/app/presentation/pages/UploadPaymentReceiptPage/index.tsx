@@ -1,28 +1,27 @@
+import * as Sentry from '@sentry/react';
 import React, { useCallback } from 'react';
+import { WithTranslation, withTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
-import { useNavigate, useLocation } from 'react-router';
-
-import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
-import { WithTranslation, withTranslation } from 'react-i18next';
-import { i18nUploadPaymentReceiptPage } from './i18n/translations';
-import { IndiaUploadPaymentReceiptPage } from './i18n/components/IndiaUploadPaymentReceiptPage';
-import { PakistanUploadPaymentReceiptPage } from './i18n/components/PakistanUploadPaymentReceiptPage';
-
-import * as Sentry from '@sentry/react';
-import { renderByCountry } from '../../../modules/i18n';
 
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { CustomAxiosError } from '../../../api/rtk/axiosBaseQuery';
-import { usePostRepayReceiptMutation } from '../../../api/rtk';
-import { PostRepayReceiptResponse } from '../../../api/rtk/old/PostRepayReceiptResponse';
 import { AppFlag } from '../../../../environments/flag';
+import { usePostRepayReceiptMutation } from '../../../api/rtk';
+import { CustomAxiosError } from '../../../api/rtk/axiosBaseQuery';
+import { PostRepayReceiptResponse } from '../../../api/rtk/old/PostRepayReceiptResponse';
+import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../modules/querystring/getToken';
 import { isInAndroid } from '../../../modules/window/isInAndroid';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
-import { getToken } from '../../../modules/querystring/getToken';
+import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
+import { IndiaUploadPaymentReceiptPage } from './i18n/components/IndiaUploadPaymentReceiptPage';
+import { PakistanUploadPaymentReceiptPage } from './i18n/components/PakistanUploadPaymentReceiptPage';
+import { i18nUploadPaymentReceiptPage } from './i18n/translations';
+
 export interface PostRepayReceiptRequestProps {
   formFile: any;
   orderNo: string;

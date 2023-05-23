@@ -4,9 +4,9 @@
 // //     text: string | number;
 // //     style?: string;
 // // }
-
-import { useEffect, useState } from 'react';
 import cx from 'classnames';
+import { useEffect, useState } from 'react';
+
 // // const Tag = ({ isActive, onClick, text ,style}: ITagProps) => {
 
 // //     const tagStyle = isActive ? 'border-orange-500 bg-orange-200 text-orange-600' : 'border-slate-400 bg-slate-100 text-slate-400';

@@ -1,9 +1,10 @@
-import { Navigation } from '../../components/layouts/Navigation';
-import { useNavigate } from 'react-router';
-import CustomerServiceIcon from '../../components/images/CustomerServiceIcon.svg';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+
 import { RootState } from '../../../reduxStore';
+import CustomerServiceIcon from '../../components/images/CustomerServiceIcon.svg';
 import { Button } from '../../components/layouts/Button';
+import { Navigation } from '../../components/layouts/Navigation';
 
 const CustomerServicePage = () => {
   const navigate = useNavigate();

@@ -1,9 +1,10 @@
+import * as Sentry from '@sentry/react';
 import axios, { AxiosError } from 'axios';
 import { put } from 'redux-saga/effects';
-import { APIBoundaryModuleSlice } from '../../reduxStore/apiBoundaryModuleSlice';
+
 import { alertModal } from '../../api/base/alertModal';
-import * as Sentry from '@sentry/react';
 import { SentryModule } from '../../modules/sentry';
+import { APIBoundaryModuleSlice } from '../../reduxStore/apiBoundaryModuleSlice';
 
 export function* catchSagaError(error: any) {
   // console.log('catchSagaError.error', error);

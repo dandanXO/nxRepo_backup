@@ -1,7 +1,8 @@
-import { RiCustomerServiceLine } from '@react-icons/all-files/ri/RiCustomerServiceLine';
 import { FiEye } from '@react-icons/all-files/fi/FiEye';
 import { FiEyeOff } from '@react-icons/all-files/fi/FiEyeOff';
+import { RiCustomerServiceLine } from '@react-icons/all-files/ri/RiCustomerServiceLine';
 import React, { useCallback, useState } from 'react';
+
 import { IndexPageProps, RootState } from '../../../../../reduxStore';
 
 type Props = IndexPageProps & {

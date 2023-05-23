@@ -1,10 +1,10 @@
 import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
+import cx from 'classnames';
 import { useCallback, useState } from 'react';
+
 import { environment } from '../../../../../../environments/environment';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
-
-import cx from 'classnames';
 import { FinalProductType } from '../../index';
 
 type Props = {

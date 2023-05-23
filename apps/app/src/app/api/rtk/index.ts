@@ -1,29 +1,30 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import axiosBaseQuery from './axiosBaseQuery';
-import { GetBankCardListResponse } from '../userService/GetBankCardListResponse';
-import { GetRepayTypesResponse } from '../loanService/GetRepayTypesResponse';
-import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
-import { GetBindCardDropListResponse } from '../userService/GetBindCardDropListResponse';
-import { GetUserProcessResponse } from '../loanService/GetUserProcessResponse';
+
 import { GetIndexRequest } from '../indexService/GetIndexRequest';
 import { GetIndexResponse } from '../indexService/GetIndexResponse';
-import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
-import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
-import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
 import { GetLoanDetailRequest } from '../loanService/GetLoanDetailRequest';
 import { GetLoanDetailResponse } from '../loanService/GetLoanDetailResponse';
-import { GetLoanRecordListRequest } from '../loanService/GetLoanRecordListRequest';
 import { GetLoanRecordListReponse } from '../loanService/GetLoanRecordListReponse';
+import { GetLoanRecordListRequest } from '../loanService/GetLoanRecordListRequest';
 import { GetRepayTypesRequest } from '../loanService/GetRepayTypesRequest';
-import { PostRepayReceiptResponse } from '../loanService/PostRepayReceiptResponse';
+import { GetRepayTypesResponse } from '../loanService/GetRepayTypesResponse';
+import { GetUserProcessResponse } from '../loanService/GetUserProcessResponse';
 import { PostRepayCreateRequest } from '../loanService/PostRepayCreateRequest';
 import { PostRepayCreateResponse } from '../loanService/PostRepayCreateResponse';
-import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
+import { PostRepayReceiptResponse } from '../loanService/PostRepayReceiptResponse';
+import { GetBankCardListResponse } from '../userService/GetBankCardListResponse';
+import { GetBindCardDropListResponse } from '../userService/GetBindCardDropListResponse';
 import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicableListRequest';
 import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
-import { TraceBehaviorRequest } from './TraceBehaviorRequest';
 import { GetCouponListRequest } from '../userService/GetCouponListRequest';
 import { GetCouponListResponse } from '../userService/GetCouponResponse';
+import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
+import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
+import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
+import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
+import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
+import { TraceBehaviorRequest } from './TraceBehaviorRequest';
+import axiosBaseQuery from './axiosBaseQuery';
 
 export type LoginRequest = {
   msgCode: string;

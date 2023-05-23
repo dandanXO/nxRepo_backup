@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { getToken } from '../../modules/querystring/getToken';
+
 import { AppEnvironment } from '../../modules/appEnvironment';
+import { getToken } from '../../modules/querystring/getToken';
 import { SentryModule } from '../../modules/sentry';
 
 export const runAxios = async (

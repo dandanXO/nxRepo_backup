@@ -1,5 +1,6 @@
-import { PosthogConfig } from './theme/india/v55/posthog';
 import { Properties } from 'posthog-js';
+
+import { PosthogConfig } from './theme/india/v55/posthog';
 
 export const commonPosthogConfig: PosthogConfig['config'] = {
   sanitize_properties: (properties: Properties, event_name: string) => {

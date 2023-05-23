@@ -1,7 +1,8 @@
 import cx from 'classnames';
 import moment from 'moment';
-import Money from '../../../Money.tsx';
+
 import { ICouponProps } from '../..';
+import Money from '../../../Money.tsx';
 
 const isOverdueEqual3Days = (expiredTime: string) => {
   const currentTime = moment();

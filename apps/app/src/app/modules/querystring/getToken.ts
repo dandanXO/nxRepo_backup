@@ -1,4 +1,5 @@
 import queryString from 'query-string';
+
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
 
 export const getToken = (): string => {

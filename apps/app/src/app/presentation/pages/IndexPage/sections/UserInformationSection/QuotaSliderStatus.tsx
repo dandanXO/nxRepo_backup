@@ -1,12 +1,13 @@
-import ReactSlider from './ReactSlider';
-import React, { useEffect, useMemo, useState, SetStateAction } from 'react';
-import { formatPrice } from '../../../../../modules/format/formatPrice';
-import { IndexPageProps } from '../../../../../reduxStore';
-import { environment } from '../../../../../../environments/environment';
 import cx from 'classnames';
-import { USER_AUTH_STATE } from '../../../../../domain/user/USER_AUTH_STATE';
+import React, { SetStateAction, useEffect, useMemo, useState } from 'react';
+
+import { environment } from '../../../../../../environments/environment';
 import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../../../../../domain/risk/RISK_CONTROL_STATE';
+import { USER_AUTH_STATE } from '../../../../../domain/user/USER_AUTH_STATE';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
+import { IndexPageProps } from '../../../../../reduxStore';
+import ReactSlider from './ReactSlider';
 
 type Props = IndexPageProps & {
   setQuotaBarTargetPrice: React.Dispatch<React.SetStateAction<number>>;

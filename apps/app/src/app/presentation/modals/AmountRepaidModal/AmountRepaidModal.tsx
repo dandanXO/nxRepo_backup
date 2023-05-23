@@ -1,16 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Overlay, flexCreator, ListItem } from '@frontend/mobile/shared/ui';
-import { withTranslation, WithTranslation } from 'react-i18next';
-import { i18nAmountRepaidModal } from './i18n/translations';
-import { GetLoanDetailResponse } from '../../../api/rtk/old/getLoanDetail';
-import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
-import { useLocation, useNavigate } from 'react-router';
-import { PagePathEnum } from '../../pages/PagePathEnum';
-import Divider from '../../components/Divider';
 import moment from 'moment';
-import Money from '../../components/Money.tsx';
+import React from 'react';
+import { WithTranslation, withTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
+import styled from 'styled-components';
+
+import { ListItem, Overlay, flexCreator } from '@frontend/mobile/shared/ui';
+
+import { GetLoanDetailResponse } from '../../../api/rtk/old/getLoanDetail';
 import { getToken } from '../../../modules/querystring/getToken';
+import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
+import Divider from '../../components/Divider';
+import Money from '../../components/Money.tsx';
+import { PagePathEnum } from '../../pages/PagePathEnum';
+import { i18nAmountRepaidModal } from './i18n/translations';
+
 const ModalContentStyled = styled.div`
   padding: 0 12px;
 `;

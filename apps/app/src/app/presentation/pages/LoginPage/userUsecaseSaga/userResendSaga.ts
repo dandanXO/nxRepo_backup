@@ -1,8 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { delay, put } from 'redux-saga/effects';
+
+import { loginSlice } from '../../../../reduxStore/loginSlice';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { LoginPageUseCaseActionsInstance, UserResendSecondsActionPayload } from './index';
-import { loginSlice } from '../../../../reduxStore/loginSlice';
 
 export function* userResendSaga(action: PayloadAction<UserResendSecondsActionPayload>) {
   try {

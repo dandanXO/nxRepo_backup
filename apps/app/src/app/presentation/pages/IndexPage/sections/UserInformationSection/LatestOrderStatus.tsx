@@ -1,10 +1,11 @@
 import cx from 'classnames';
-import { IndexPageProps } from '../../../../../reduxStore';
-import { formatPrice } from '../../../../../modules/format/formatPrice';
 import moment from 'moment';
-import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
 import { useNavigate } from 'react-router';
+
+import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { getToken } from '../../../../../modules/querystring/getToken';
+import { IndexPageProps } from '../../../../../reduxStore';
 import { PagePathEnum } from '../../../PagePathEnum';
 
 type Props = IndexPageProps;

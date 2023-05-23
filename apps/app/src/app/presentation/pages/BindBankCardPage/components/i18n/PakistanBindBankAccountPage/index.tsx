@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage';
-import { CustomPage } from '../../../../../components/layouts/CustomPage';
-import { ChooseBindMethod } from '../../ChooseBindMethod';
-import { MobileWalletForm } from './MobileWalletForm';
-import { BankAccountForm } from './BankAccountForm';
-import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
-import { usePakistanBankAccountForm } from '../../../hooks/i18n/pakistan/usePakistanBankAccountForm';
-import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';
-import { usePakistanMobileWalletForm } from '../../../hooks/i18n/pakistan/usePakistanMobileWalletForm';
 import { Outlet } from 'react-router';
 import styled from 'styled-components';
+
+import { CustomPage } from '../../../../../components/layouts/CustomPage';
+import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
+import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';
+import { usePakistanBankAccountForm } from '../../../hooks/i18n/pakistan/usePakistanBankAccountForm';
+import { usePakistanMobileWalletForm } from '../../../hooks/i18n/pakistan/usePakistanMobileWalletForm';
+import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage';
+import { ChooseBindMethod } from '../../ChooseBindMethod';
+import { BankAccountForm } from './BankAccountForm';
+import { MobileWalletForm } from './MobileWalletForm';
 
 const Warning = styled.div`
   //margin: 0 auto;

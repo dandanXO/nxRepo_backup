@@ -1,11 +1,12 @@
+import { push } from '@lagunovsky/redux-react-router';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { put, take } from 'redux-saga/effects';
+
 import { APIV3, LoginResponse } from '../../../../api/rtk';
 import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
-import { push } from '@lagunovsky/redux-react-router';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { UserLoginActionPayload } from './index';
 import { PagePathEnum } from '../../PagePathEnum';
+import { UserLoginActionPayload } from './index';
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {

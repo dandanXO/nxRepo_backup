@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+
 import { Overlay } from '@frontend/mobile/shared/ui';
-import { useNavigate, useLocation } from 'react-router';
-import IBan from '../../components/images/IBAN.svg';
+
 import Divider from '../../components/Divider';
+import IBan from '../../components/images/IBAN.svg';
 
 const IBANFinderModal = (props: any) => {
   const navigate = useNavigate();

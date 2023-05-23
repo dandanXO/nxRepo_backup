@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import { Overlay } from '@frontend/mobile/shared/ui';
 import { withTranslation } from 'react-i18next';
-import { i18nRepaymentModal } from './i18n/translations';
-import useRepayCreate from '../../hooks/useRepayCreate';
-import useRepayTypes from '../../hooks/useRepayTypes';
-import { renderByCountry } from '../../../modules/i18n';
+import { useLocation, useNavigate } from 'react-router';
+
+import { Overlay } from '@frontend/mobile/shared/ui';
+
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
+import { environment } from '../../../../environments/environment';
+import { renderByCountry } from '../../../modules/i18n';
+import useRepayCreate from '../../hooks/useRepayCreate';
+import useRepayTypes from '../../hooks/useRepayTypes';
 import IndiaRepaymentModal from './i18n/IndiaRepaymentModal';
 import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
-import { environment } from '../../../../environments/environment';
+import { i18nRepaymentModal } from './i18n/translations';
 
 type paymentMethodValueType = {
   type: string;

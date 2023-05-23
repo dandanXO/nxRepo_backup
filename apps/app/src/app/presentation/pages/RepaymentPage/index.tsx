@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import { environment } from '../../../../../src/environments/environment';
+import { GetLoanRecordListRequest } from '../../../api/loanService/GetLoanRecordListRequest';
 import { useLazyGetLoanRecordListQuery } from '../../../api/rtk';
 import Tag from '../../components/Tag';
 import { Navigation } from '../../components/layouts/Navigation';
-import { useNavigate } from 'react-router';
-// @ts-ignore
-import { default as data } from './data.json';
 import { Page } from '../../components/layouts/Page';
-import { GetLoanRecordListRequest } from '../../../api/loanService/GetLoanRecordListRequest';
-import { environment } from '../../../../../src/environments/environment';
 import ExtendPaymentItem from './ExtendPaymentItem';
 import OverduePaymentItem from './OverduePaymentItem';
 import PayoffPaymentItem from './PayoffPaymentItem';
 import ProcessingPaymentItem from './ProcessingPaymentItem';
 import RejectPaymentItem from './RejectPaymentItem';
 import UnpaidPaymentItem from './UnpaidPaymentItem';
+// @ts-ignore
+import { default as data } from './data.json';
 
 const RepaymentPage = () => {
   // console.log('config', data)
