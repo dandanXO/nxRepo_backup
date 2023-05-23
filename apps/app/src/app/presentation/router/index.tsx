@@ -34,7 +34,6 @@ const RepaymentDetailPage = loadable(
 const LoanRecordPage = loadable(() => import(/* webpackChunkName: "RepaymentPage" */ '../pages/RepaymentPage'));
 const OrderStatusPage = loadable(() => import(/* webpackChunkName: "OrderStatusPage" */ '../pages/OrderStatusPage'));
 const MyCouponListPage = loadable(() => import(/* webpackChunkName: "MyCouponListPage" */ '../pages/MyCouponListPage'));
-// const MyCouponPage = loadable(() => import("../pages/MyCouponPage"));
 const OnlineCustomerServicePage = loadable(
   () => import(/* webpackChunkName: "OnlineCustomerServicePage" */ '../pages/OnlineCustomerServicePage')
 );
@@ -138,7 +137,7 @@ export const AppRouter = () => {
         </Route>
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
-        <Route path="/v2/my-coupon-list" element={<MyCouponListPage />} />
+        <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
         <Route path="/v2/partner" element={<PartnerPage />} />
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />

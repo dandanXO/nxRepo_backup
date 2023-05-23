@@ -1,7 +1,6 @@
-import { environment } from 'apps/app/src/environments/environment';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { useEffect, useState } from 'react';
 
+import NoDataImage from '../../../../assets/NoData.svg';
 import { useLazyGetCouponListQuery } from '../../../api/rtk';
 import { GetCouponListRequest } from '../../../api/userService/GetCouponListRequest';
 import Coupon from '../../components/Coupon';
@@ -42,24 +41,28 @@ const MyCouponListPage = () => {
           onClick={(i: any) => setListStatus(['Usable', 'Used', 'Expired'][i])}
         />
       </div>
-      <div className="mx-4">
+
+      <div className="mx-4 grow flex flex-col justify-center items-center ">
         {currentData && currentData.records && currentData.records.length > 0 ? (
-          currentData?.records?.map((i) => {
+          currentData?.records?.map((coupon) => {
             return (
               <Coupon
-                expireTime={i.expiredTime}
-                discountAmount={i.discountAmount}
-                couponType={i.couponType}
-                couponName={i.couponName}
-                couponContent={i.couponContent}
+                key={coupon.couponId}
+                expireTime={coupon.expiredTime || ''}
+                discountAmount={coupon.discountAmount || ''}
+                couponType={coupon.couponType || ''}
+                couponName={coupon.couponName || ''}
+                couponContent={coupon.couponContent || ''}
                 status={listStatus === 'Usable' ? 'normal' : 'disabled'}
-                key={i.couponId}
-                buttonText={listStatus === 'Usable' ? 'USE NOW' : i.redeemed ? 'USED' : 'EXPIRED'}
+                buttonText={listStatus === 'Usable' ? 'USE NOW' : coupon.redeemed ? 'USED' : 'EXPIRED'}
               />
             );
           })
         ) : (
-          <div className="flex grow items-center justify-center p-3">There are no orders currently</div>
+          <div className="flex flex-col items-center justify-center p-3 mt-5">
+            <img src={NoDataImage} alt="" />
+            <div className={`mt-5`}>There are currently no coupon</div>
+          </div>
         )}
       </div>
     </Page>
