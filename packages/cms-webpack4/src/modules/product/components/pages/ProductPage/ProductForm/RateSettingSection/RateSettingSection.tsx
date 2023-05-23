@@ -21,6 +21,7 @@ interface RateSettingSectionProps {
     form: FormInstance;
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
+    setInterestRatePairsTouchInput: React.Dispatch<any>;
     interestRatePairsTouchInput: any;
 }
 export const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>
@@ -47,7 +48,8 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
       )
       if (!hasError) {
           messageAPI.success('已储存');
-          props.form.setFieldValue('productInterestRatePairsChecked', true)
+          props.form.setFieldValue('productInterestRatePairsChecked', true);
+          props.setInterestRatePairsTouchInput(null);
           setShowProductInterestRatePairsModal(false);
       }
   }
@@ -60,7 +62,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
               content: (
                   <div style={{ height: '20px', display: "flex" }}>
                       <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
-                      <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将导致数据丢失。确定要离开吗？</div>
+                      <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将不会储存已变更的资料。确定要离开吗？</div>
                   </div>
               ),
               onOk() {

@@ -291,6 +291,7 @@ const Index = (props: ProductFormProps) => {
                 customAntFormFieldError={customAntFormFieldError}
                 setCustomAntFormFieldError={setCustomAntFormFieldError}
                 interestRatePairsTouchInput={interestRatePairsTouchInput}
+                setInterestRatePairsTouchInput={setInterestRatePairsTouchInput}
             />
             <UploadSettingSection />
         </Form>
