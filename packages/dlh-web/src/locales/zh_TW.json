@@ -137,7 +137,6 @@
   "page.search.list.config.name": "配置名稱",
   "page.search.list.config.name.enter": "請輸入配置名稱",
   "page.search.list.collect.team.report.days.violation": "查詢日期不可超過{days}天",
-  "page.search.loan.time": "借款時間",
   "page.search.format.incorrect": "格式不正確",
   "page.search.list.belonging.channel": "所屬渠道",
   "page.search.list.finish.time": "完成時間",

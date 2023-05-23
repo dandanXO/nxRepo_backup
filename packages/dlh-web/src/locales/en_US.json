@@ -142,7 +142,6 @@
   "page.search.clear.no.repeat.loan": "Whether cleared and no repeat loan",
   "page.search.clear.no.repeat.loan.days": "Cleared and no repeat loan days",
   "page.search.list.collect.team.report.days.violation": "Do not query over {days} days",
-  "page.search.loan.time": "Loan Time",
   "page.search.format.incorrect": "Format Incorrect",
   "page.search.list.collection.platId": "collection platId",
   "page.search.list.collection.mchNo": "collection mchNo",

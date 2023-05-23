@@ -38,11 +38,11 @@ function TelSaleStatisticsPage ({
     useEffect(() => {
         getCollectorList();
     }, []);
-    
+
     useEffect(() => {
         getStatisticsList({ ...searchParams })
     }, [searchParams])
-   
+
     const columns = [
 
         { title: intl.formatMessage({ id: "page.search.customer.service" }), dataIndex: 'collectorName', key: 'collectorName', render (text) { return <CopyText text={text} /> } },
@@ -70,17 +70,13 @@ function TelSaleStatisticsPage ({
 
 
     const handleSearch = (obj) => {
-        const { loanTime, assignedTime, registerTime, collectorId } = obj
+        const { assignedTime, collectorId } = obj
         const convertStartTime = (time) => time ? time.format('YYYY-MM-DD 00:00:00') : '';
         const convertEndTime = (time) => time ? time.format('YYYY-MM-DD 23:59:59'): '';
-        
+
         setSearchParams({
-            loanStartTime: convertStartTime(loanTime[0]),
-            loanEndTime: convertEndTime(loanTime[1]),
             assignedStartTime: convertStartTime(assignedTime[0]),
             assignedEndTime: convertEndTime(assignedTime[1]),
-            registerStartTime: convertStartTime(registerTime[0]),
-            registerEndTime: convertEndTime(registerTime[1]),
             collectorId
         });
     }
@@ -94,7 +90,7 @@ function TelSaleStatisticsPage ({
                 columns={columns}
                 loading={loading}
             />
-          
+
         </div>
     );
 }
