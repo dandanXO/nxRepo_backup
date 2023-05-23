@@ -70,8 +70,8 @@ module.exports = (config, context) => {
     // NOTE: Android 9 失敗
     // devtool: "inline-source-map",
     // blank page 錯誤依舊 [NOTE: WebPack 5 and old chrome (webview 38) #954](https://github.com/hodgef/simple-keyboard/issues/954)
-    target: ['web', 'es5'],
-
+    // target: ['web', 'es5'],
+    target: "browserslist",
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
       polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
