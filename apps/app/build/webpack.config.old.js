@@ -69,7 +69,9 @@ module.exports = (config, context) => {
     // devtool: "source-map",
     // NOTE: Android 9 失敗
     // devtool: "inline-source-map",
-    target: ['web', 'es5'],
+    // blank page 錯誤依舊 [NOTE: WebPack 5 and old chrome (webview 38) #954](https://github.com/hodgef/simple-keyboard/issues/954)
+    // target: ['web', 'es5'],
+
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
       polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
@@ -208,21 +210,21 @@ module.exports = (config, context) => {
     );
     // NOTICE: 使用以下android 8 is ok
     finalConfig['optimization'] = {
-      // minimize: false,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-            format: {
-              comments: false,
-            },
-          },
-          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-          extractComments: false,
-        }),
-      ],
+      minimize: false,
+      // minimizer: [
+      //   new TerserPlugin({
+      //     terserOptions: {
+      //       compress: {
+      //         drop_console: true,
+      //       },
+      //       format: {
+      //         comments: false,
+      //       },
+      //     },
+      //     // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+      //     extractComments: false,
+      //   }),
+      // ],
     };
 
     // exclude: ['specific-entry.js'], // 替换 specific-entry.js 为你想排除的入口点文件名
