@@ -20,7 +20,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
   };
 
   return (
-    <div className="grow flex flex-col">
+    <div className="flex grow flex-col">
       <div>
         <div className={'text-sm'}>{'Cardholder Name'}</div>
         <Input
@@ -48,7 +48,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onCut={(e) => preventCopyPaste(e)}
         />
         <div
-          className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
+          className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"
           onClick={() => navigate('iban-finder-modal', { state: 'Bank' })}
         >
           {'Click me to learn where can I find my IBAN number?'}
@@ -106,7 +106,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onCut={(e) => preventCopyPaste(e)}
         />
       </div>
-      <div className="grow flex flex-col justify-end mb-2">
+      <div className="mb-2 flex grow flex-col justify-end">
         <Button
           text={'Confirm'}
           className={`${EnumV15GradientButtonClassNames}`}

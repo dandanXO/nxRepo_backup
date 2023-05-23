@@ -518,7 +518,7 @@ const IndexPage = () => {
         )}
 
         {isReacquireLoading && (
-          <div className={'text-xs text-gray-500 text-center mb-3'}>
+          <div className={'mb-3 text-center text-xs text-gray-500'}>
             Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as
             quickly as possible.
           </div>

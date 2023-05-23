@@ -44,8 +44,8 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const location = useLocation();
   const { coupon } = location.state;
   return (
-    <div className="px-2 text-ctext-primary">
-      <div className="px-1 font-2xl">
+    <div className="text-ctext-primary px-2">
+      <div className="font-2xl px-1">
         <div className="flex justify-between text-sm font-bold">
           <div>Balance</div>
           <div>{<Money money={balance} />}</div>
@@ -99,7 +99,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
       />
       {radioValue !== 'custom' && (
         <a
-          className="flex w-full border-solid border border-[#aaaaaa] justify-center items-center pl-5 py-2.5 rounded-lg mt-1"
+          className="mt-1 flex w-full items-center justify-center rounded-lg border border-solid border-[#aaaaaa] py-2.5 pl-5"
           onClick={() => {
             if (isRepayTypesFetching) return;
 
@@ -112,14 +112,14 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
             });
           }}
         >
-          <div className={cx('grow text-base flex-nowrap flex justify-between')}>
+          <div className={cx('flex grow flex-nowrap justify-between text-base')}>
             <div className="self-center">Coupon</div>
             {coupon ? (
-              <div className="flex flex-col justify-between grow items-end my-[-4px]">
-                <div className="text-sm text-primary-main">
+              <div className="my-[-4px] flex grow flex-col items-end justify-between">
+                <div className="text-primary-main text-sm">
                   {<Money money={coupon.discountAmount} isNagetive={true} />}
                 </div>
-                <div className="text-xs text-ctext-tertiary">
+                <div className="text-ctext-tertiary text-xs">
                   <div>expiration date: {coupon.expireTime ? moment(coupon.expireTime).format('DD-MM-YYYY') : ''}</div>
                 </div>
               </div>
@@ -127,7 +127,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
               <div className="text-cTextFields-placeholder-main">Select</div>
             )}
           </div>
-          <RiArrowRightSLine className="text-xl fill-ctext-primary mx-1" />
+          <RiArrowRightSLine className="fill-ctext-primary mx-1 text-xl" />
         </a>
       )}
       <div className="mt-3 font-bold">
@@ -142,7 +142,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           }
         />
       </div>
-      <div className={`flex flex-row my-3`}>
+      <div className={`my-3 flex flex-row`}>
         <div className={`mr-1.5 w-full`}>
           <Button
             onClick={() => {
@@ -160,14 +160,14 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
               if (balanceValueErrorMessage === '') handleConfirm();
             }}
             text={props.t('Repay')}
-            className={`border-[1.5px] border-solid border-primary-main bg-primary-main text-white`}
+            className={`border-primary-main bg-primary-main border-[1.5px] border-solid text-white`}
           />
         </div>
       </div>
 
-      <div className={`text-xs text-gray-400 text-left`}>
+      <div className={`text-left text-xs text-gray-400`}>
         <div>Attention：</div>
-        <ul className="list-decimal list-outside pl-3 pt-1">
+        <ul className="list-outside list-decimal pl-3 pt-1">
           <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
           <li>
             In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number

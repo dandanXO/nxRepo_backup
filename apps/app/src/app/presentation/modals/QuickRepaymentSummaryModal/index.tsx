@@ -32,7 +32,7 @@ type Props = IndexPageProps & {
 const IndicatorSeparator = (props: IndicatorSeparatorProps<any, true>) => {
   console.log('IndicatorSeparator.props', props);
   return (
-    <span {...props.innerProps} className={'text-gray-400 font-light'}>
+    <span {...props.innerProps} className={'font-light text-gray-400'}>
       change
     </span>
   );
@@ -79,7 +79,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
   }, [props.selectedBankcardId, props.bankcardList]);
 
   return (
-    <div className={cx('quick-repayment-modal w-screen h-screen bg-white p-4 fixed top-0 bottom-0 flex flex-col')}>
+    <div className={cx('quick-repayment-modal fixed top-0 bottom-0 flex h-screen w-screen flex-col bg-white p-4')}>
       <div onClick={props.onClose}>
         <CloseButton />
       </div>
@@ -90,27 +90,27 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
         <div className={'flex flex-col'}>
           <div className={'text-md font-medium'}>Summary Details</div>
           <div className={'item-list'}>
-            <div className={'item font-light flex flex-row justify-between'}>
+            <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Loan Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.loanAmount)}</div>
             </div>
-            <div className={'item font-light flex flex-row justify-between'}>
+            <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Interest</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.interest)}</div>
             </div>
-            <div className={'item font-light flex flex-row justify-between'}>
+            <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Processing Fee</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.processingFee)}</div>
             </div>
-            <div className={'item font-light flex flex-row justify-between'}>
+            <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Service Charge</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.serviceCharge)}</div>
             </div>
-            <div className={'item font-light flex flex-row justify-between'}>
+            <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Disbursal Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.disbursalAmount)}</div>
             </div>
-            <div className={'item font-light flex flex-row justify-between'}>
+            <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Repayment Date</div>
               <div className={'value'}>{props.calculatingSummary.repaymentDate?.format('DD-MM-YYYY')}</div>
             </div>
@@ -121,8 +121,8 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
       <Horizontal />
 
       <div className={'products '}>
-        <div className={'text-md font-medium mb-2'}>Your Products</div>
-        <div className={'flex flex-col h-[200px] overflow-auto'}>
+        <div className={'text-md mb-2 font-medium'}>Your Products</div>
+        <div className={'flex h-[200px] flex-col overflow-auto'}>
           {props.calculatingProducts.map((product, index) => {
             return <Product key={index} product={product} />;
           })}
@@ -135,7 +135,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
         <div className={'bankcard'}>
           <div className={'text-md font-medium'}>Bank Card</div>
 
-          <div className={'flex flex-row justify-between items-center relative'}>
+          <div className={'relative flex flex-row items-center justify-between'}>
             {/*<div className={"card-number text-sm"}>**** **** **** 0000</div>*/}
             {/*<div className={"card-number text-sm"}>{props.bankcardList[0].bankId}</div>*/}
             {/*<div className={"change text-gray-400 flex flex-row justify-between"} onClick={onClickExpandBankcard}>*/}
@@ -199,7 +199,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
 
         <Horizontal />
 
-        <div className={'text-xs font-light text-gray-400 mb-2'}>
+        <div className={'mb-2 text-xs font-light text-gray-400'}>
           <span>By continuing, I have read and agree</span>
           <span className={'text-blue-500 underline'} onClick={props.onClickLoanAgreement}>
             {' '}

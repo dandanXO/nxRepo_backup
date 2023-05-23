@@ -36,7 +36,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
               errorMessage={props.utr.errorMessage}
             />
           </div>
-          <div className={`text-left font-bold text-sm mb-1`}>{props.t('Upload your repayment receipt(optional)')}</div>
+          <div className={`mb-1 text-left text-sm font-bold`}>{props.t('Upload your repayment receipt(optional)')}</div>
 
           <UploadSection>
             {!props.formFile ? (

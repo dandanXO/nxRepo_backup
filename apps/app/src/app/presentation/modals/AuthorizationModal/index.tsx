@@ -14,11 +14,11 @@ export const AuthorizationModal = (props: Props) => {
   return (
     <div
       className={
-        'loan-agreement-modal z-10 w-screen h-screen bg-black bg-opacity-80 p-5 fixed top-0 bottom-0 flex flex-col justify-center items-center'
+        'loan-agreement-modal fixed top-0 bottom-0 z-10 flex h-screen w-screen flex-col items-center justify-center bg-black bg-opacity-80 p-5'
       }
     >
-      <div className={'modal-inner w-11/12 px-3 py-4 bg-white rounded-lg'}>
-        <div className={'font-medium mb-3 flex flex-col items-center relative'}>
+      <div className={'modal-inner w-11/12 rounded-lg bg-white px-3 py-4'}>
+        <div className={'relative mb-3 flex flex-col items-center font-medium'}>
           <div className={'z-10'} onClick={onClickClose}>
             <CloseButton />
           </div>
@@ -26,7 +26,7 @@ export const AuthorizationModal = (props: Props) => {
           <div className={'header-subtitle text-xs text-gray-500'}>may request access to</div>
         </div>
 
-        <div className={'flex flex-col font-light h-[400px] overflow-auto'}>
+        <div className={'flex h-[400px] flex-col overflow-auto font-light'}>
           <div className={'mb-3'}>
             <div className={'title'}>Contact</div>
             <div className={'content text-xs text-gray-500'}>

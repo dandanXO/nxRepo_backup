@@ -143,7 +143,7 @@ export const LoginForm = () => {
             }
           }}
         />
-        <div className={`text-slate-400 mt-4`}>OTP Verification Code</div>
+        <div className={`mt-4 text-slate-400`}>OTP Verification Code</div>
         <Input
           labelType="none"
           value={otpData.data}
@@ -185,7 +185,7 @@ export const LoginForm = () => {
           {' '}
           By continuing, you agree and acknowledge you have read the
           <span
-            className="underline decoration-blue-500 text-blue-500 mx-1"
+            className="mx-1 text-blue-500 underline decoration-blue-500"
             onClick={() => navigate(PagePathEnum.PrivacyPolicyModal)}
           >
             Privacy Policy

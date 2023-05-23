@@ -13,7 +13,7 @@ type Props = {
 export const StatusContainer = (props: Props) => {
   return (
     <div
-      className={cx('loan-amount flex flex-col p-2 w-full rounded-t-lg', {
+      className={cx('loan-amount flex w-full flex-col rounded-t-lg p-2', {
         'bg-[#D9D9D9]':
           props.pageState === PageStateEnum.UserAuthing ||
           props.pageState === PageStateEnum.UserRejected ||

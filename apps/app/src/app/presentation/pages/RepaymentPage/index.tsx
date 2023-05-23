@@ -47,7 +47,7 @@ const RepaymentPage = () => {
         <Navigation title="Payment" />
       </div>
 
-      <div className={`flex flex-row pb-3 px-5 justify-between sticky top-[0px] bg-white`}>
+      <div className={`sticky top-[0px] flex flex-row justify-between bg-white px-5 pb-3`}>
         {['Unpaid', 'Overdue', 'Done'].map((i) => (
           <Tag
             layoutType={environment.country === 'in' ? 1 : 2}
@@ -79,7 +79,7 @@ const RepaymentPage = () => {
           );
         })
       ) : (
-        <div className="flex justify-center items-center p-3 grow">There are no orders currently</div>
+        <div className="flex grow items-center justify-center p-3">There are no orders currently</div>
       )}
     </Page>
   );

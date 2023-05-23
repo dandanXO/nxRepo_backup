@@ -28,12 +28,12 @@ const BankCardListPage = () => {
 
   const renderNodata = () => {
     return (
-      <div className={`grow flex flex-col px-8 items-center justify-center grow text-center`}>
+      <div className={`flex grow grow flex-col items-center justify-center px-8 text-center`}>
         <div className={`flex w-40 justify-center`}>
           {' '}
           <img src={NoDataIcon} />{' '}
         </div>
-        <div className={`w-40 mb-5 mt-12 font-bold`}>{'No bank card added'}</div>
+        <div className={`mb-5 mt-12 w-40 font-bold`}>{'No bank card added'}</div>
         <div className={`text-xs text-slate-500`}>
           {
             'You must be verified to add a card, please return to the home page and click "Get my limit" to verify your eligibility.'
@@ -56,7 +56,7 @@ const BankCardListPage = () => {
   };
 
   return (
-    <div className={`flex flex-col h-screen`}>
+    <div className={`flex h-screen flex-col`}>
       {isSetPrimarySuccess && <SetPrimarySuccessModal setIsSetPrimarySuccess={setIsSetPrimarySuccess} />}
       <Navigation
         title={'Bank Card'}
@@ -80,14 +80,14 @@ const BankCardListPage = () => {
                 );
               })}
           </div>
-          <div className={`flex items-center justify-center flex-col`}>
+          <div className={`flex flex-col items-center justify-center`}>
             <div
               onClick={() => navigate(`${PagePathEnum.BindBankcard}?token=${getToken()}`)}
-              className={`flex justify-center items-center border border-solid border-orange-500 text-orange-500 text-2xl w-6 h-6  rounded font-bold mb-3`}
+              className={`mb-3 flex h-6 w-6 items-center justify-center rounded border border-solid border-orange-500  text-2xl font-bold text-orange-500`}
             >
               +
             </div>
-            <div className={`text-sm pb-8`}>Add A New Card</div>
+            <div className={`pb-8 text-sm`}>Add A New Card</div>
           </div>
         </>
       ) : (

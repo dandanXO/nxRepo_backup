@@ -19,11 +19,11 @@ type ICardContentSection = {
 export const CardContentSection = (props: ICardContentSection) => {
   const orderAmountStyleClass = props.orderAmountStyleClass ? props.orderAmountStyleClass : 'text-ctext-primary';
   return (
-    <div className="flex flex-row justify-between px-3 items-center">
+    <div className="flex flex-row items-center justify-between px-3">
       <div className={'flex flex-col'}>
         <div className={`text-xs ${props.amountNameStyleClass}`}>{props.amountName}</div>
         {/*{NOTE: 合同金: orderAmount}*/}
-        <div className={`text-lg font-bold my-1 leading-none ${orderAmountStyleClass}`}>
+        <div className={`my-1 text-lg font-bold leading-none ${orderAmountStyleClass}`}>
           {<Money money={props.orderAmount ?? ''} />}
         </div>
 
@@ -34,7 +34,7 @@ export const CardContentSection = (props: ICardContentSection) => {
         )}
       </div>
 
-      <Button text={'Details'} className={'text-xs w-auto px-4'} onClick={props.onClick} />
+      <Button text={'Details'} className={'w-auto px-4 text-xs'} onClick={props.onClick} />
     </div>
   );
 };

@@ -6,7 +6,7 @@ const IBANFinderPage = () => {
   const MethodContent = ({ title, text }: { title: string; text: any }) => {
     return (
       <div className="mb-5">
-        <div className="text-xs font-bold mb-1">{title}</div>
+        <div className="mb-1 text-xs font-bold">{title}</div>
         <div className="text-xs">{text}</div>
       </div>
     );
@@ -47,7 +47,7 @@ const IBANFinderPage = () => {
               </div>
               <div>3. Here, you need to select "Account Information."</div>
               <div>4. On the new screen, you will see the Easypaisa IBAN Number of your account.</div>
-              <div className="flex justify-center m-4 mb-8">
+              <div className="m-4 mb-8 flex justify-center">
                 <img className="w-2/3" src={IBan} />
               </div>
               <div>
@@ -106,7 +106,7 @@ const IBANFinderPage = () => {
   };
 
   return (
-    <Page className="flex flex-col m-5">
+    <Page className="m-5 flex flex-col">
       <CollapseItem title={'How to Get Bank Card IBAN Number?'} content={renderBankCardContent()} isCollapse={false} />
       <CollapseItem title={'How to Get Easypaisa IBAN Number?'} content={renderEasypaisaContent()} isCollapse={false} />
       <CollapseItem title={'How to Get JazzCash IBAN Number?'} content={renderJazzCashContent()} isCollapse={false} />

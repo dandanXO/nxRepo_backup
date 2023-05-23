@@ -24,13 +24,13 @@ const LogoutModal = (props: any) => {
         content={(hide: () => void) => {
           return (
             <div className={`p-2`}>
-              <div className="text-xl font-bold mb-4">Confirm</div>
+              <div className="mb-4 text-xl font-bold">Confirm</div>
               <div>{`Are you sure you want to exit ${appName}?`}</div>
-              <div className={`flex flex-row mt-6`}>
-                <div className={`grow mr-1.5`}>
+              <div className={`mt-6 flex flex-row`}>
+                <div className={`mr-1.5 grow`}>
                   <Button type={'secondary'} className={'w-full'} text={'Cancel'} onClick={() => navigate(-1)} />
                 </div>
-                <div className={`grow ml-1.5`}>
+                <div className={`ml-1.5 grow`}>
                   <Button className={'w-full'} text={'Confirm'} onClick={onClickConfirm} />
                 </div>
               </div>

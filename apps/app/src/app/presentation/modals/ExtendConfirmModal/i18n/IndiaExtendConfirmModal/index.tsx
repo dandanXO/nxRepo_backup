@@ -14,16 +14,16 @@ const IndiaExtendConfirmModal = () => {
     <div className={`p-4`}>
       {' '}
       <div className="text-xl font-bold">Extend</div>
-      <div className="font-bold my-6 leading-tight">
+      <div className="my-6 font-bold leading-tight">
         Extensions are intended for situations where you are genuinely experiencing financial difficulties and are
         unable to fully repay the amount owed.
       </div>
-      <div className="font-bold mb-4 leading-tight">
+      <div className="mb-4 font-bold leading-tight">
         We recommend that you prioritize full repayment when possible for a higher credit limit.
       </div>
       <div className={`flex flex-col`}>
         <Button
-          className={`w-full mb-2`}
+          className={`mb-2 w-full`}
           text={'Got it and go extension'}
           onClick={() => {
             navigate(`${PagePathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {

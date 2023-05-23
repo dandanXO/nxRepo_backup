@@ -42,16 +42,16 @@ const PersonalInfoPage = () => {
 
   return (
     <Page className="flex flex-col ">
-      <div className={`flex flex-row justify-center items-center my-4`}>
+      <div className={`my-4 flex flex-row items-center justify-center`}>
         <div className={`mr-3`}>
           <img src={UserIcon} />
         </div>
-        <div className={`flex flex-col justify-center items-center `}>
+        <div className={`flex flex-col items-center justify-center `}>
           <div className={`font-bold`}>{user.userName}</div>
           <div
-            className={cx('rounded-2xl py-1 px-4 grow text-center leading-none text-sm mt-1', {
-              'border-orange-500 text-orange-500 border': user.state !== USER_AUTH_STATE.success,
-              'border-emerald-500 text-emerald-500 border': user.state === USER_AUTH_STATE.success,
+            className={cx('mt-1 grow rounded-2xl py-1 px-4 text-center text-sm leading-none', {
+              'border border-orange-500 text-orange-500': user.state !== USER_AUTH_STATE.success,
+              'border border-emerald-500 text-emerald-500': user.state === USER_AUTH_STATE.success,
             })}
           >
             {user.state !== USER_AUTH_STATE.success ? 'Not Verified' : 'Verified'}
@@ -59,11 +59,11 @@ const PersonalInfoPage = () => {
         </div>
       </div>
       {user.state === USER_AUTH_STATE.ready && (
-        <div className={`flex flex-row justify-around items-center py-2 px-4 bg-orange-100`}>
+        <div className={`flex flex-row items-center justify-around bg-orange-100 py-2 px-4`}>
           <div>Verify now for highest amount</div>
           <Button
             onClick={onClickVerify}
-            className={'py-1 px-2  w-auto'}
+            className={'w-auto py-1  px-2'}
             text={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>}
           />
         </div>
@@ -71,7 +71,7 @@ const PersonalInfoPage = () => {
 
       <div className="m-2">
         {user.state === USER_AUTH_STATE.success && (
-          <div className={`shadow-[0_0px_8px_rgba(0,0,0,0.1)] m-2 p-4 rounded-md justify-end`}>
+          <div className={`m-2 justify-end rounded-md p-4 shadow-[0_0px_8px_rgba(0,0,0,0.1)]`}>
             <LoanOverViewSection state={indexPage} />
           </div>
         )}
@@ -93,7 +93,7 @@ const PersonalInfoPage = () => {
                   <LinkItem title={'Disclosure Statement'} to={''} />
               </Card> */}
       </div>
-      <div className="text-center my-2">
+      <div className="my-2 text-center">
         <div
           onClick={() => {
             navigate(`${PagePathEnum.PersonalInfoPage}/log-out-modal`);

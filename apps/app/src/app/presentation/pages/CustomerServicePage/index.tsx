@@ -16,7 +16,7 @@ const CustomerServicePage = () => {
           navigate(-1);
         }}
       />
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center">
         <div className="mt-16 mb-4">
           <img src={CustomerServiceIcon} alt="" />
         </div>
@@ -32,7 +32,7 @@ const CustomerServicePage = () => {
         <div>{`Whatsapp: ${app?.init?.csWhatsApp || ''}`}</div>
         <div>{`Phone: ${app?.init?.csContactNumber || ''}`}</div>
         <div
-          className="text-sm underline decoration-blue-500 text-blue-500 mt-10"
+          className="mt-10 text-sm text-blue-500 underline decoration-blue-500"
           onClick={() => {
             navigate('/v2/online-customer-service');
           }}

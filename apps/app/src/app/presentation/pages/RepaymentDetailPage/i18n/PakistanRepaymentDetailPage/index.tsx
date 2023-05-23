@@ -186,7 +186,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
         <ListItem
           titleColor="text-ctext-secondary"
           title={
-            <div className={`flex flex-row item-center items-center`}>
+            <div className={`item-center flex flex-row items-center`}>
               <div className={` mr-1`}>Amount Repaid</div>
               <div
                 onClick={() => {
@@ -226,7 +226,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
           />
         )}
 
-        <div className={`flex flex-row my-3 text-white`}>
+        <div className={`my-3 flex flex-row text-white`}>
           {extendable !== undefined && extendable && (
             <div
               onClick={() => {
@@ -234,7 +234,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
                   state: currentData,
                 });
               }}
-              className={`grow mr-1.5 `}
+              className={`mr-1.5 grow `}
             >
               <Button type={'ghost'} text={'Extend'} />
             </div>
@@ -259,9 +259,9 @@ const PakistanRepaymentDetailPage = (props: any) => {
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (
           <>
-            <div className={`text-xs text-ctext-secondary leading-none mb-4`}>
+            <div className={`text-ctext-secondary mb-4 text-xs leading-none`}>
               <div>Attention：</div>
-              <ul className="list-decimal list-outside pl-3 pt-1">
+              <ul className="list-outside list-decimal pl-3 pt-1">
                 <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
                 <li>
                   Overdue for more than <span className={`text-primary-main`}>N days</span> will not be able to extend
@@ -274,14 +274,14 @@ const PakistanRepaymentDetailPage = (props: any) => {
                 </li>
               </ul>
             </div>
-            <div className={`flex flex-col my-3`}>
-              <div className="h-2.5 bg-cstate-disable-assistant mx-[-24px] "></div>
-              <div className={`text-xs text-ctext-primary leading-none my-3`}>
+            <div className={`my-3 flex flex-col`}>
+              <div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div>
+              <div className={`text-ctext-primary my-3 text-xs leading-none`}>
                 After completing the repayment, take a screenshot and upload your repayment receipt here ▼
               </div>
               {/*TODO: 先兼容 querystring*/}
               <div
-                className={`grow mb-2`}
+                className={`mb-2 grow`}
                 onClick={() => {
                   console.log('Upload Receipt---------', orderNo);
                   navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {

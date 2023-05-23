@@ -25,7 +25,7 @@ const IndiaExtendModal = (props: any) => {
 
   return (
     <div className={`p-2`}>
-      <div className="text-xl font-bold mb-4 text-ctext-primary">Extend</div>
+      <div className="text-ctext-primary mb-4 text-xl font-bold">Extend</div>
       <ListItem title={'Product'} text={productName ?? ''} titleColor="text-ctext-primary" />
       <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-ctext-primary" />
       <ListItem
@@ -73,16 +73,16 @@ const IndiaExtendModal = (props: any) => {
 
       {/*NOTE: 總金額*/}
       <ListItem
-        className="font-bold mt-3"
+        className="mt-3 font-bold"
         title={'Total Extension Fee'}
         text={<Money money={extensionPayAmount} />}
         titleColor="text-ctext-primary"
       />
-      <div className={`flex flex-row mt-6 text-white`}>
-        <div className={`grow mr-1.5`}>
+      <div className={`mt-6 flex flex-row text-white`}>
+        <div className={`mr-1.5 grow`}>
           <Button type={'ghost'} onClick={() => navigate(-2)} text={'Cancel'} />
         </div>
-        <div className={`grow ml-1.5`}>
+        <div className={`ml-1.5 grow`}>
           <Button onClick={props.handleConfirm} text={'Confirm'} />
         </div>
       </div>

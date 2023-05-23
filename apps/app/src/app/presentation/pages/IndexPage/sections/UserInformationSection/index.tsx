@@ -21,15 +21,15 @@ export const UserInformationSection = (props: Props) => {
   const hasInComingOverdueOrder = props.state.order.state === ORDER_STATE.hasInComingOverdueOrder;
   const hasOverdueOrder = props.state.order.state === ORDER_STATE.hasOverdueOrder;
   return (
-    <div className={'h-42 bg-orange-100 px-3 pt-2 flex flex-col items-center'}>
-      <div className={'w-full mb-3'}>
+    <div className={'h-42 flex flex-col items-center bg-orange-100 px-3 pt-2'}>
+      <div className={'mb-3 w-full'}>
         {/*NOTE: 顯示歡迎與是否顯示使用者與客服按鈕*/}
         <UserInfoSupportSection state={props.state} onClickToCustomerService={props.onClickToCustomerService} />
       </div>
 
       {/*NOTE: 顯示即將逾期與逾期的狀態*/}
       {props.state.user.state === USER_AUTH_STATE.success && (hasInComingOverdueOrder || hasOverdueOrder) && (
-        <div className={'w-full mb-3'}>
+        <div className={'mb-3 w-full'}>
           <LatestOrderStatus state={props.state} />
         </div>
       )}

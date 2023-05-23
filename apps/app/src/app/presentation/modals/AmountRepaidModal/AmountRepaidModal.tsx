@@ -44,7 +44,7 @@ const Record = (props: { repayDate: string; repayAmount: React.ReactElement; rep
   return (
     <>
       <RecordStyled status={repayType}>
-        <div className={`flex justify-between my-1 text-black text-xs `}>
+        <div className={`my-1 flex justify-between text-xs text-black `}>
           <div>{repayDate}</div>
           <div>{repayAmount}</div>
         </div>
@@ -85,7 +85,7 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
         content={(hide: () => void) => {
           return (
             <div>
-              <div className="text-sm font-bold mt-[-10px]">{t('Amount Repaid Record')}</div>
+              <div className="mt-[-10px] text-sm font-bold">{t('Amount Repaid Record')}</div>
               <Divider />
               {state.repayRecords?.length === 0 ? (
                 <NoDataStyled>{t('No paid records yet')}</NoDataStyled>

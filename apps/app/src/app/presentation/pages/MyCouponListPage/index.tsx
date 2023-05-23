@@ -33,7 +33,7 @@ const MyCouponListPage = () => {
 
   return (
     <Page className="flex flex-col">
-      <div className={`flex flex-row py-3 px-5 justify-between sticky top-[0px] bg-white`}>
+      <div className={`sticky top-[0px] flex flex-row justify-between bg-white py-3 px-5`}>
         <Tags
           items={['Usable', 'Used', 'Expired']}
           layoutType={2}
@@ -58,7 +58,7 @@ const MyCouponListPage = () => {
             );
           })
         ) : (
-          <div className="flex justify-center items-center p-3 grow">There are no orders currently</div>
+          <div className="flex grow items-center justify-center p-3">There are no orders currently</div>
         )}
       </div>
     </Page>

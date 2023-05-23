@@ -29,11 +29,11 @@ export const LatestOrderStatus = (props: Props) => {
   const hasInComingOverdueOrder = props.state.order.state === ORDER_STATE.hasInComingOverdueOrder;
 
   return (
-    <div className={'bg-white px-5 py-1.5 rounded-lg border border-orange-500 flex flex-col'}>
-      <div className={'flex flex-row justify-between items-center'}>
+    <div className={'flex flex-col rounded-lg border border-orange-500 bg-white px-5 py-1.5'}>
+      <div className={'flex flex-row items-center justify-between'}>
         <div className={'left'}>
           <div className={'top flex flex-row'}>
-            <div className={'font-light mr-2'}>Loan Order</div>
+            <div className={'mr-2 font-light'}>Loan Order</div>
             <div className={'font-medium'}>
               ₹ {formatPrice(props.state.order.overdueOrComingOverdueOrder?.payableAmount || 0)}
             </div>
@@ -43,12 +43,12 @@ export const LatestOrderStatus = (props: Props) => {
             <div className={'flex flex-row'}>
               {/*NOTE: 顯示逾期文字*/}
               {hasOverdueOrder && (
-                <div className={'h-5 px-2 text-white text-sm bg-red-500 rounded-lg mr-1'}>Overdue</div>
+                <div className={'mr-1 h-5 rounded-lg bg-red-500 px-2 text-sm text-white'}>Overdue</div>
               )}
               <div className={'flex flex-row'}>
                 {/*NOTE: 顯示逾期時間文字*/}
                 <div
-                  className={cx('font-light text-sm mr-2', {
+                  className={cx('mr-2 text-sm font-light', {
                     'text-gray-400': hasInComingOverdueOrder,
                     'text-red-500': hasOverdueOrder,
                   })}
@@ -57,7 +57,7 @@ export const LatestOrderStatus = (props: Props) => {
                 </div>
                 {/*NOTE: 顯示逾期時間*/}
                 <div
-                  className={cx('font-normal text-sm', {
+                  className={cx('text-sm font-normal', {
                     'text-gray-500': hasInComingOverdueOrder,
                     'text-red-500': hasOverdueOrder,
                   })}
@@ -79,8 +79,8 @@ export const LatestOrderStatus = (props: Props) => {
       {/*NOTE: 逾期*/}
       {hasOverdueOrder && (
         <>
-          <div className={'w-full border-t-[1px] my-2 border-gray-400'} />
-          <div className={cx('font-light text-sm text-gray-400 leading-4 mr-2 text-red-500')}>
+          <div className={'my-2 w-full border-t-[1px] border-gray-400'} />
+          <div className={cx('mr-2 text-sm font-light leading-4 text-gray-400 text-red-500')}>
             Remind you to prioritize paying off overdue payments before you can borrow again.
           </div>
         </>

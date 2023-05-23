@@ -13,18 +13,18 @@ const PakistanExtendConfirmModal = () => {
     <div className={`p-4`}>
       {' '}
       <div className="text-xl font-bold">Extend</div>
-      <div className="font-bold my-6 leading-tight">
+      <div className="my-6 font-bold leading-tight">
         Extensions are intended for situations where you are genuinely experiencing financial difficulties and are
         unable to fully repay the amount owed.
       </div>
-      <div className="font-bold mb-6 leading-tight">
+      <div className="mb-6 font-bold leading-tight">
         We recommend that you prioritize full repayment when possible for a higher credit limit.
       </div>
       <div className={`flex flex-row `}>
-        <Button onClick={() => navigate(-1)} text={'Next time'} className={`w-full mr-1`} />
+        <Button onClick={() => navigate(-1)} text={'Next time'} className={`mr-1 w-full`} />
         <Button
           type={'ghost'}
-          className={`w-full ml-1`}
+          className={`ml-1 w-full`}
           text={'Go extension'}
           onClick={() => {
             navigate(`${PagePathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {

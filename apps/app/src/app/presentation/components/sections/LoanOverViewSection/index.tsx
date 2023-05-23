@@ -93,9 +93,9 @@ export const LoanOverViewSection = (props: Props) => {
 
   return (
     <div>
-      <div className={'font-medium mb-2'}>Loan Over View</div>
+      <div className={'mb-2 font-medium'}>Loan Over View</div>
 
-      <div className={'w-full flex flex-row justify-around'}>
+      <div className={'flex w-full flex-row justify-around'}>
         <div className={'left relative'}>
           <div className="container relative">
             <Chart options={options.options} series={options.series} type="radialBar" width="160" height="160" />
@@ -112,10 +112,10 @@ export const LoanOverViewSection = (props: Props) => {
           </div>
         </div>
 
-        <div className={'right flex flex-col justify-center items-end'}>
-          <div className={'used-amount flex flex-col justify-end items-end'}>
-            <div className={'label flex flex-row justify-between items-center'}>
-              <div className={'label-color w-4 h-1.5 bg-[#E5E5E5] rounded mr-2'}></div>
+        <div className={'right flex flex-col items-end justify-center'}>
+          <div className={'used-amount flex flex-col items-end justify-end'}>
+            <div className={'label flex flex-row items-center justify-between'}>
+              <div className={'label-color mr-2 h-1.5 w-4 rounded bg-[#E5E5E5]'}></div>
               <div className={'label-price font-light'}>Used Amount</div>
             </div>
             <div className={'price font-medium'}>
@@ -125,7 +125,7 @@ export const LoanOverViewSection = (props: Props) => {
           </div>
           <div className={'total-amount flex flex-col justify-end'}>
             <div className={'label font-light'}>Total Amount</div>
-            <div className={'price font-medium text-right'}>
+            <div className={'price text-right font-medium'}>
               {environment.currency}
               {isReacquireCreditAmount ? ' ***** ' : formatPrice(props.state.indexAPI?.totalAmount || 0)}
             </div>

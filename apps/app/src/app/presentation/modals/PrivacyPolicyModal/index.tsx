@@ -13,7 +13,7 @@ const PrivacyPolicyModal = (props: any) => {
       content={() => {
         return (
           <div>
-            <div className={`text-xl font-bold text-left ml-1 mb-3`}>Privacy Policy</div>
+            <div className={`ml-1 mb-3 text-left text-xl font-bold`}>Privacy Policy</div>
             <div>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fringilla sollicitudin volutpat maecenas
               velit et. Mauris faucibus faucibus sit purus id nunc purus vitae dolor. Eget aliquet sed mattis dui, duis

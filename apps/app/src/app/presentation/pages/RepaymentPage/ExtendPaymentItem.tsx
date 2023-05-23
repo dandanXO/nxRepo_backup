@@ -43,7 +43,7 @@ const ExtendPaymentItem = (props: GetLoanRecord) => {
   const statusBackground = Status('EXTEND').bg;
 
   return (
-    <div className={`border-solid border-ctext-divider border pb-2 mx-4 mb-5 rounded-lg`} onClick={handleCollapse}>
+    <div className={`border-ctext-divider mx-4 mb-5 rounded-lg border border-solid pb-2`} onClick={handleCollapse}>
       <CardHeaderSection
         statusBackground={statusBackground}
         iconUrl={iconUrl}

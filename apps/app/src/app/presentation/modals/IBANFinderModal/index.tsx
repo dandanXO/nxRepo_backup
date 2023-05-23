@@ -28,10 +28,10 @@ const IBANFinderModal = (props: any) => {
 
   const renderByBank = () => {
     return (
-      <div className="text-black text-left p-5">
+      <div className="p-5 text-left text-black">
         <div className="text-sm font-bold">How to Get Bank Card IBAN Number?</div>
         <Divider />
-        <div className="p-3 bg-[#F6F6F6] mt-3">
+        <div className="mt-3 bg-[#F6F6F6] p-3">
           <MethodContent
             title={'Method 1: '}
             text={
@@ -53,10 +53,10 @@ const IBANFinderModal = (props: any) => {
 
   const renderByWallet = () => {
     return (
-      <div className="text-black text-left p-5">
+      <div className="p-5 text-left text-black">
         <div className="text-sm font-bold">How to Get Easypaisa and JazzCash IBAN Number?</div>
         <Divider />
-        <div className="p-3 bg-[#F6F6F6] mt-3 ">
+        <div className="mt-3 bg-[#F6F6F6] p-3 ">
           <TopicContent
             title={'How to Get Easypaisa IBAN Number'}
             text={'Here is how to get the IBAN Number of your Easypaisa account.'}
@@ -96,7 +96,7 @@ const IBANFinderModal = (props: any) => {
               </div>
             }
           />
-          <div className="border border-dashed border-black my-10"></div>
+          <div className="my-10 border border-dashed border-black"></div>
           <TopicContent
             title={'How to Get JazzCash IBAN Number?'}
             text={'Here is how to find the JazzCash IBAN Number of your account.'}
@@ -140,7 +140,7 @@ const IBANFinderModal = (props: any) => {
         content={(hide: () => void) => {
           return (
             <div className={`h-screen `}>
-              <div className="text-xl font-bold mb-3 ">Tips</div>
+              <div className="mb-3 text-xl font-bold ">Tips</div>
               <Divider />
               {location.state === 'Bank' ? renderByBank() : renderByWallet()}
             </div>

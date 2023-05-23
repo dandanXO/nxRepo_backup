@@ -7,9 +7,9 @@ import { Input } from '@frontend/mobile/shared/ui';
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
   return (
-    <div className="flex flex-col grow">
+    <div className="flex grow flex-col">
       <Form className="grow">
-        <div className="text-ctext-primary text-xs mb-1">
+        <div className="text-ctext-primary mb-1 text-xs">
           {'For KYC, your Cardholder name and PAN card name should be match.'}
         </div>
         <Input className="mb-3 text-sm" label={'Cardholder Name'} value={props.cardholderName} disabled />

@@ -22,7 +22,7 @@ export const UserInfoSupportSection = (props: Props) => {
   };
 
   return (
-    <div className={'w-full flex flex-row justify-between '}>
+    <div className={'flex w-full flex-row justify-between '}>
       <div className={'left-section flex flex-row items-center'}>
         {/*NOTE: 顯示用戶名 */}
         <div data-testing-id="welcome" className={'welcome pr-2 font-medium'}>

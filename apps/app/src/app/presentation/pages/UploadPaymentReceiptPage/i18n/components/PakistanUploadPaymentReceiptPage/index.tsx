@@ -16,17 +16,17 @@ export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymen
       <CustomPage className={'h-screen'}>
         {props.isUploading && <UploadingFileModal />}
         <div>
-          <div className="text-sm text-left mb-2">{props.t('Upload your repayment receipt (optional)')}</div>
+          <div className="mb-2 text-left text-sm">{props.t('Upload your repayment receipt (optional)')}</div>
           <label
             htmlFor="file"
-            className="bg-[#F8F8F8] border-dashed border border-[#B7BBC5] h-[183px] flex flex-col justify-center items-center rounded-lg mb-4"
+            className="mb-4 flex h-[183px] flex-col items-center justify-center rounded-lg border border-dashed border-[#B7BBC5] bg-[#F8F8F8]"
           >
             {!props.formFile ? (
               <>
                 <div>
                   <I18CameraSvgIcon />
                 </div>
-                <div className="text-sm mt-2 text-[#6B738A]">{props.t('Click to upload')}</div>
+                <div className="mt-2 text-sm text-[#6B738A]">{props.t('Click to upload')}</div>
               </>
             ) : (
               <img src={props.imageSrc ? props.imageSrc : ''} className={'h-[181px] object-contain'} alt="" />

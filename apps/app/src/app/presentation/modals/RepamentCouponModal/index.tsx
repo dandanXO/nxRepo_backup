@@ -47,7 +47,7 @@ const RepamentCouponModal = () => {
 
   const CouponOption = (props: ICouponOption) => {
     return (
-      <a className={`flex justfy-center items-center `} onClick={() => setCheckedCoupon(props.index)}>
+      <a className={`justfy-center flex items-center `} onClick={() => setCheckedCoupon(props.index)}>
         <Coupon {...props} />
         {props.isChecked ? (
           <MdRadioButtonChecked className={`fill-sky-500`} />
@@ -60,7 +60,7 @@ const RepamentCouponModal = () => {
 
   const NotUsingCoupon = (props: ICouponOption) => {
     return (
-      <a className={`flex justfy-center items-center ml-2 mb-7 `} onClick={() => setCheckedCoupon(props.index)}>
+      <a className={`justfy-center ml-2 mb-7 flex items-center `} onClick={() => setCheckedCoupon(props.index)}>
         <div className="grow text-left text-xs">Not using a coupon for this repayment.</div>
         {props.isChecked ? (
           <MdRadioButtonChecked className={`fill-sky-500`} />
@@ -74,7 +74,7 @@ const RepamentCouponModal = () => {
   const renderNoCoupon = () => {
     return (
       <>
-        <div className={`grow flex flex-col justify-center items-center`}>
+        <div className={`flex grow flex-col items-center justify-center`}>
           <img src={NoData} alt="" />
           <div className={`mt-5`}>There are currently no coupon</div>
         </div>
@@ -92,7 +92,7 @@ const RepamentCouponModal = () => {
           {applicableCouponList.length > 0 && (
             <>
               <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon} />
-              <div className="text-xs font-bold text-left ml-2 ">Choose one coupon</div>
+              <div className="ml-2 text-left text-xs font-bold ">Choose one coupon</div>
               {applicableCouponList?.map((i, index) => {
                 return (
                   <>
@@ -112,12 +112,12 @@ const RepamentCouponModal = () => {
                   </>
                 );
               })}
-              <div className="m-2 mb-4 bg-[#ECECEC] h-2 mx-[-20px]"></div>
+              <div className="m-2 mx-[-20px] mb-4 h-2 bg-[#ECECEC]"></div>
             </>
           )}
           {unApplicableCouponList.length > 0 && (
             <>
-              <div className="text-xs font-bold text-left ml-2 ">Not applicable to usage conditions</div>
+              <div className="ml-2 text-left text-xs font-bold ">Not applicable to usage conditions</div>
               {unApplicableCouponList.map((i, index) => (
                 <Coupon
                   expireTime={i.expireTime}
@@ -157,7 +157,7 @@ const RepamentCouponModal = () => {
       onCancel={() => navigate(-1)}
       content={(hide: () => void) => {
         return (
-          <div className={`flex flex-col h-[85vh]`}>
+          <div className={`flex h-[85vh] flex-col`}>
             <div className={`ml-[-8px] `}>
               <Navigation
                 title={''}
