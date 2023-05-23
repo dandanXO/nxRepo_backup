@@ -178,6 +178,13 @@ const IBANFinderModal = loadable(
     )
 );
 
+const SystemCouponModal = loadable(
+    () =>
+      import(
+        /* webpackChunkName: "SystemCouponModal" */ '../modals/SystemCouponModal'
+      )
+  );
+
 export const AppRouter = () => {
   const isInit: boolean = useSelector(
     (state: RootState) => state.app.isInit
@@ -297,6 +304,10 @@ export const AppRouter = () => {
         <Route
           path="/v2/coupon-modal-content"
           element={<CouponModalContentAndroidWebviewPage />}
+        />
+        <Route
+          path="/v2/system-coupon-modal"
+          element={<SystemCouponModal />}
         />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>

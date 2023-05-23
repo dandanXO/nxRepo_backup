@@ -24,6 +24,7 @@ import { GetCouponApplicableListResponse } from '../userService/GetCouponApplica
 import { TraceBehaviorRequest } from './TraceBehaviorRequest';
 import { GetCouponListRequest } from '../userService/GetCouponListRequest';
 import { GetCouponListResponse } from '../userService/GetCouponResponse';
+import { GetNotificationResponse } from '../indexService/GetNotificationResponse';
 
 export type LoginRequest = {
   msgCode: string;
@@ -122,6 +123,15 @@ export const APIV3 = createApi({
         params: query,
       }),
     }),
+
+    // NOTE: /api/v3/notification 取得推送用户讯息
+    getNotificationList: builder.query<GetNotificationResponse, null>({
+        query: (query: null) => ({
+          method: 'get',
+          url: `/notification`,
+          params: query,
+        }),
+      }),
   }),
 });
 
@@ -130,6 +140,7 @@ export const {
   useLazyGetCouponApplicableListQuery,
   usePostTraceBehaviorMutation,
   useLazyGetCouponListQuery,
+  useLazyGetNotificationListQuery
 } = APIV3;
 
 export const API = createApi({
