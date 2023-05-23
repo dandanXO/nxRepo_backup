@@ -21,7 +21,7 @@ interface RateSettingSectionProps {
     form: FormInstance;
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
-    interestRatePairsTouchInput: any
+    interestRatePairsTouchInput: any;
 }
 export const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style}}>{props.children}</div>
 
@@ -53,27 +53,33 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
   }
 
   const handleProductInterestRatePairsModalOnClose = (e) => {
-      confirm({
-          icon : null,
-          content: (
-              <div style={{ height: '20px', display: "flex" }}>
-                  <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
-                  <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将导致数据丢失。确定要离开吗？</div>
-              </div>
-          ),
-          onOk() {
-              props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue);
-              props.form.setFieldValue('productInterestRatePairsChecked', false);
-              props.setCustomAntFormFieldError(prev => ({
-                  ...prev,
-                  productInterestRatePairs: {}
-              }))
-              setShowProductInterestRatePairsModal(false);
-          },
-          onCancel() {
-              //
-          }
-      })
+      if(props.interestRatePairsTouchInput){
+          // 有修改過複貸利率，按取消或X要提示會清空資料
+          confirm({
+              icon : null,
+              content: (
+                  <div style={{ height: '20px', display: "flex" }}>
+                      <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
+                      <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将导致数据丢失。确定要离开吗？</div>
+                  </div>
+              ),
+              onOk() {
+                  props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue);
+                  props.form.setFieldValue('productInterestRatePairsChecked', false);
+                  props.setCustomAntFormFieldError(prev => ({
+                      ...prev,
+                      productInterestRatePairs: {}
+                  }))
+                  setShowProductInterestRatePairsModal(false);
+              },
+              onCancel() {
+                  //
+              }
+          })
+      } else {
+          // 沒有修改過複貸利率，按取消或X不清除資料，直接關閉Modal
+          setShowProductInterestRatePairsModal(false);
+      }
   }
 
   const handleProductInterestRateSettingOnClick = () => {
