@@ -1,7 +1,8 @@
 import cx from 'classnames';
-import { TestingProps } from '../../../modules/TestingProps';
-import { TailSpin } from 'react-loading-icons';
 import React from 'react';
+import { TailSpin } from 'react-loading-icons';
+
+import { TestingProps } from '../../../modules/TestingProps';
 
 type Props = {
   text: string | React.ReactNode;
@@ -18,18 +19,15 @@ export const Button = (props: Props) => {
       data-testing-id={props.dataTestingID}
       // shadow-md shadow-gray-400
       className={cx(
-        'rounded-md p-2 text-center font-bold w-full',
+        'w-full rounded-md p-2 text-center font-bold',
         {
-          'border border-solid border-primary-main bg-primary-main text-white':
-            props.type === undefined,
+          'border-primary-main bg-primary-main border border-solid text-white': props.type === undefined,
         },
         {
-          'border border-solid border-tertiary-main bg-tertiary-main text-white':
-            props.type === 'secondary',
+          'border-tertiary-main bg-tertiary-main border border-solid text-white': props.type === 'secondary',
         },
         {
-          'border-[1.5px] border-solid border-primary-main bg-none text-primary-main':
-            props.type === 'ghost',
+          'border-primary-main text-primary-main border-[1.5px] border-solid bg-none': props.type === 'ghost',
         },
         props.className
       )}

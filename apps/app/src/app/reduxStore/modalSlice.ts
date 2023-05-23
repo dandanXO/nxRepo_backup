@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { BankAccount } from '../api/userService/BankAccount';
 
 export type InitialStateType = {
@@ -43,10 +44,7 @@ export const modalSlice = createSlice({
   name: 'model',
   initialState,
   reducers: {
-    updateAuthorizationModal: (
-      state,
-      action: PayloadAction<InitialStateType['authorizationModal']>
-    ) => {
+    updateAuthorizationModal: (state, action: PayloadAction<InitialStateType['authorizationModal']>) => {
       state.authorizationModal.show = action.payload.show;
       state.authorizationModal.confirm = action.payload.confirm;
     },
@@ -58,8 +56,7 @@ export const modalSlice = createSlice({
       state.quickRepaymentSummaryModal.confirm = action.payload.confirm;
 
       if (action.payload.bankcardList) {
-        state.quickRepaymentSummaryModal.bankcardList =
-          action.payload.bankcardList;
+        state.quickRepaymentSummaryModal.bankcardList = action.payload.bankcardList;
       }
       // NOTICE: 無法放在一起，會破壞監聽 confirm | cancel 的 saga
       // if(typeof action.payload.selectedBankcardId !== "undefined") {
@@ -73,19 +70,12 @@ export const modalSlice = createSlice({
         selectedBankcardId?: number;
       }>
     ) => {
-      state.quickRepaymentSummaryModal.selectedBankcardId =
-        action.payload.selectedBankcardId;
+      state.quickRepaymentSummaryModal.selectedBankcardId = action.payload.selectedBankcardId;
     },
-    updateLoanAgreementModal: (
-      state,
-      action: PayloadAction<InitialStateType['loanAgreementModal']>
-    ) => {
+    updateLoanAgreementModal: (state, action: PayloadAction<InitialStateType['loanAgreementModal']>) => {
       state.loanAgreementModal.show = action.payload.show;
     },
-    updateQRSuccessModal: (
-      state,
-      action: PayloadAction<InitialStateType['QRSuccessModal']>
-    ) => {
+    updateQRSuccessModal: (state, action: PayloadAction<InitialStateType['QRSuccessModal']>) => {
       state.QRSuccessModal.show = action.payload.show;
     },
   },

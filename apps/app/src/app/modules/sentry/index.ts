@@ -2,14 +2,14 @@ import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
-import posthog from 'posthog-js'
-import { AppFlag } from '../../../environments/flag';
-import { AppEnvironment } from '../appEnvironment';
+import posthog from 'posthog-js';
 
+import { AppFlag } from '../../../environments/flag';
 import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
-import {appStore, RootState} from "../../reduxStore";
-import WebpackSentryConfig from "./WebpackSentryConfig.json";
+import { RootState, appStore } from '../../reduxStore';
+import { AppEnvironment } from '../appEnvironment';
+import WebpackSentryConfig from './WebpackSentryConfig.json';
 
 // NOTICE: refactor me
 const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
@@ -35,7 +35,12 @@ if (AppFlag.enableSentry && load === false) {
       new BrowserTracing(),
       // replay
       new Sentry.Replay(replayConfig),
-      new posthog.SentryIntegration(posthog, WebpackSentryConfig.org, WebpackSentryConfig.projectId, WebpackSentryConfig.url + "organizations/"),
+      new posthog.SentryIntegration(
+        posthog,
+        WebpackSentryConfig.org,
+        WebpackSentryConfig.projectId,
+        WebpackSentryConfig.url + 'organizations/'
+      ),
     ],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
@@ -55,14 +60,13 @@ function getUserStatusName(status: number) {
   return ['未認證', '通過認證', '審核中', '審核拒絕'][status];
 }
 
-
 const getUserPhoneNo = () => {
-  return NativeAppInfo.phoneNo ? NativeAppInfo.phoneNo : "unknown";
-}
+  return NativeAppInfo.phoneNo ? NativeAppInfo.phoneNo : 'unknown';
+};
 
 function getCommonTags() {
-  const appState: RootState = appStore.getState()
-  const user = appState?.indexPage?.user
+  const appState: RootState = appStore.getState();
+  const user = appState?.indexPage?.user;
 
   return {
     packageId: NativeAppInfo.packageId,
@@ -70,13 +74,13 @@ function getCommonTags() {
     mode: NativeAppInfo.mode,
     appName: NativeAppInfo.appName,
     domain: NativeAppInfo.domain,
-    "user.userName": user.userName !== "" ? user.userName : "unknown",
-    "user.phoneNo": getUserPhoneNo(),
-  }
+    'user.userName': user.userName !== '' ? user.userName : 'unknown',
+    'user.phoneNo': getUserPhoneNo(),
+  };
 }
 
 export class SentryModule {
-  static captureException(exception: any, captureContext?: CaptureContext, tags?: { [key: string]: Primitive },) {
+  static captureException(exception: any, captureContext?: CaptureContext, tags?: { [key: string]: Primitive }) {
     if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
@@ -92,21 +96,16 @@ export class SentryModule {
       },
       ...captureContext,
     });
-
   }
 
-  static captureMessage(
-    message: string,
-    tags?: { [key: string]: Primitive },
-    extra?: Extras
-  ) {
+  static captureMessage(message: string, tags?: { [key: string]: Primitive }, extra?: Extras) {
     if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
     console.log('appInfo', NativeAppInfo);
 
-    const appState: RootState = appStore.getState()
-    const user = appState?.indexPage?.user
+    const appState: RootState = appStore.getState();
+    const user = appState?.indexPage?.user;
     // console.log("user", user);
 
     const commonTags = getCommonTags();
@@ -129,7 +128,7 @@ export class SentryModule {
 
     if (AppFlag.enableSentry) {
       const userInfo = {
-        "user.phoneNo": getUserPhoneNo(),
+        'user.phoneNo': getUserPhoneNo(),
         'user.userName': userResponse.userName,
         'user.demoAccount': userResponse.demoAccount,
         'user.organic': userResponse.organic,
@@ -148,17 +147,14 @@ export class SentryModule {
       Sentry.setUser(accountInfo);
     }
 
-    if(AppFlag.enablePosthog) {
+    if (AppFlag.enablePosthog) {
       posthog.identify(getUserPhoneNo(), {
-        "user.phoneNo": getUserPhoneNo(),
+        'user.phoneNo': getUserPhoneNo(),
         'user.demoAccount': userResponse.demoAccount,
-      })
+      });
       // posthog.reset(true)
-
     }
   }
-
-
 }
 
 // export const SentryModuleInstance = new SentryModule();

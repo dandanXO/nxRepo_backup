@@ -1,18 +1,20 @@
+import { AiFillCheckCircle } from '@react-icons/all-files/ai/AiFillCheckCircle';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+
+import { IThemeConfig } from '@frontend/mobile/shared/ui';
+
+import { AllCountryIdentityName } from '../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName';
+import { BangladeshCountry } from '../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry';
+import { PakistanCountry } from '../../../../../../../../../libs/shared/domain/src/country/PakistanCountry';
+import { environment } from '../../../../../../environments/environment';
+import { renderByCountry } from '../../../../../modules/i18n';
+import { i18nBankBindAccountPage } from '../../translations';
+import { Label } from '../Label';
+import BDMobileWalletSVG from './bd_ic_mobile_wallet_icon.png';
 import BankAccountSVG from './ic_bank_account_icon.svg';
 import MobileWalletSVG from './ic_mobile_wallet_icon.svg';
-import BDMobileWalletSVG from './bd_ic_mobile_wallet_icon.png';
-import { Label } from '../Label';
-import { useTranslation } from 'react-i18next';
-import { i18nBankBindAccountPage } from '../../translations';
-import { environment } from '../../../../../../environments/environment';
-import { AllCountryIdentityName } from '../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName';
-import { renderByCountry } from '../../../../../modules/i18n';
-import { PakistanCountry } from '../../../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { BangladeshCountry } from '../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry';
-import { IThemeConfig } from '@frontend/mobile/shared/ui';
-import { AiFillCheckCircle } from '@react-icons/all-files/ai/AiFillCheckCircle';
 
 const Container = styled.div`
   margin-bottom: 8px;
@@ -48,9 +50,7 @@ const Option = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
   border: ${(props: { theme: IThemeConfig; enable: boolean }) => {
-    return props.theme && props.enable
-      ? `solid 1.5px ${props.theme.button.primary.main}`
-      : 'none';
+    return props.theme && props.enable ? `solid 1.5px ${props.theme.button.primary.main}` : 'none';
   }};
   background-color: ${(props: { theme: IThemeConfig; enable: boolean }) => {
     return props.theme && props.enable ? '#fffdfd' : '#F0F1F3';
@@ -69,22 +69,13 @@ type IChooseBindMethod = {
 
 export const ChooseBindMethod = (props: IChooseBindMethod) => {
   const wallet = (
-    <Option
-      onClick={() => props.changeOptionValueCallback(0)}
-      enable={props.value === 0}
-    >
+    <Option onClick={() => props.changeOptionValueCallback(0)} enable={props.value === 0}>
       <OptionIcon enable={props.value === 0} />
       <img
         style={{ width: 60, height: 60, margin: 'auto' }}
-        src={
-          environment.country === AllCountryIdentityName.BN
-            ? BDMobileWalletSVG
-            : MobileWalletSVG
-        }
+        src={environment.country === AllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}
       />
-      <Label className={props.value === 0 ? 'text-primary-main' : ''}>
-        {'Mobile wallet'}
-      </Label>
+      <Label className={props.value === 0 ? 'text-primary-main' : ''}>{'Mobile wallet'}</Label>
     </Option>
   );
 
@@ -100,13 +91,8 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
       }}
     >
       <OptionIcon enable={props.value === 1} />
-      <img
-        style={{ width: 60, height: 60, margin: 'auto' }}
-        src={BankAccountSVG}
-      />
-      <Label className={props.value === 1 ? 'text-primary-main' : ''}>
-        {'Bank Card'}
-      </Label>
+      <img style={{ width: 60, height: 60, margin: 'auto' }} src={BankAccountSVG} />
+      <Label className={props.value === 1 ? 'text-primary-main' : ''}>{'Bank Card'}</Label>
     </Option>
   );
 

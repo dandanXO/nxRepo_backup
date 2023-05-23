@@ -1,8 +1,9 @@
-import { formatPrice } from '../../../modules/format/formatPrice';
-import { renderByCountry } from '../../../modules/i18n';
+import { environment } from 'apps/app/src/environments/environment';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
-import { environment } from 'apps/app/src/environments/environment';
+
+import { formatPrice } from '../../../modules/format/formatPrice';
+import { renderByCountry } from '../../../modules/i18n';
 
 interface IMoney {
   money: number | string;
@@ -18,15 +19,11 @@ const Money = (props: IMoney) => {
       {props.isAdd && <div className="mr-1">+</div>}
       {props.isNagetive && <div className="mr-1">-</div>}
       {environment.country === IndiaCountry.country && (
-        <div className={`${props.currencyStyle || ''} mr-1`}>
-          {environment.currency}
-        </div>
+        <div className={`${props.currencyStyle || ''} mr-1`}>{environment.currency}</div>
       )}
       <div className={`${props.moneyStyle || ''}`}>{price}</div>
       {environment.country === PakistanCountry.country && (
-        <div className={`${props.currencyStyle || ''} ml-1`}>
-          {environment.currency}
-        </div>
+        <div className={`${props.currencyStyle || ''} ml-1`}>{environment.currency}</div>
       )}
     </div>
   );

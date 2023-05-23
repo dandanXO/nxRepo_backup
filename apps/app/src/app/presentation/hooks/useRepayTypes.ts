@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useLazyGetRepayTypesQuery } from '../../api/rtk';
 
+import { useLazyGetRepayTypesQuery } from '../../api/rtk';
 
 type paymentMethodValueType = {
   value: string;
@@ -10,23 +10,14 @@ type paymentMethodValueType = {
 const useRepayTypes = () => {
   const [
     triggerGetList,
-    {
-      currentData: repayTypesData,
-      isLoading,
-      isFetching: isRepayTypesFetching,
-      isSuccess,
-      isError,
-      isUninitialized,
-    },
+    { currentData: repayTypesData, isLoading, isFetching: isRepayTypesFetching, isSuccess, isError, isUninitialized },
   ] = useLazyGetRepayTypesQuery({
     pollingInterval: 0,
     refetchOnFocus: false,
     refetchOnReconnect: false,
   });
 
-  const [repayTypesList, setRepayTypesList] = useState<
-    paymentMethodValueType[]
-  >([]);
+  const [repayTypesList, setRepayTypesList] = useState<paymentMethodValueType[]>([]);
   const [repayType, setRepayType] = useState(repayTypesList[0]);
 
   useEffect(() => {

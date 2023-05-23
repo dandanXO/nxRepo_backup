@@ -1,11 +1,12 @@
-import { Route } from 'react-router';
+import { environment } from 'apps/app/src/environments/environment';
+import cx from 'classnames';
 import React from 'react';
+import { Route } from 'react-router';
+import { useNavigate } from 'react-router';
+
+import { Button } from '../../components/layouts/Button';
 import ApplicationProgressPage from '../ApplicationProgressPage';
 import { PagePathEnum } from '../PagePathEnum';
-import cx from 'classnames';
-import { Button } from '../../components/layouts/Button';
-import { useNavigate } from 'react-router';
-import { environment } from 'apps/app/src/environments/environment';
 
 export const CategoryPage = () => {
   const navigate = useNavigate();

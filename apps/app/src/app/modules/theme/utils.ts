@@ -1,9 +1,6 @@
-import {
-  DEFAULT_THEME,
-  themes,
-} from '../../../environments/theme/customTailwindTheme';
-import { IMappedTheme, ITheme } from './types';
+import { DEFAULT_THEME, themes } from '../../../environments/theme/customTailwindTheme';
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
+import { IMappedTheme, ITheme } from './types';
 
 type Countries = 'india' | 'pakistan';
 
@@ -13,9 +10,7 @@ export const applyTheme = (country: Countries, theme: string): void => {
 
   // NOTICE: 有找到 theme 才配置
   if (themes[country] && themes[country][theme]) {
-    let themeObject: IMappedTheme = mapCustomTailwindTheme(
-      themes[country][theme]
-    );
+    let themeObject: IMappedTheme = mapCustomTailwindTheme(themes[country][theme]);
 
     if (!themeObject) {
       themeObject = mapCustomTailwindTheme(themes['india'][DEFAULT_THEME]);

@@ -1,17 +1,19 @@
+import cx from 'classnames';
+import moment from 'moment';
+import { Outlet, useLocation, useNavigate } from 'react-router';
+
+import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
+
+import { alertModal } from '../../../../../api/base/alertModal';
+import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/getLoanDetail';
+import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../../../modules/querystring/getToken';
+import { Status } from '../../../../../modules/statusEnum';
+import { isInAndroid } from '../../../../../modules/window/isInAndroid';
 import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
-import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { getToken } from '../../../../../modules/querystring/getToken';
-import moment from 'moment';
-import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/getLoanDetail';
-import { Status } from '../../../../../modules/statusEnum';
-import { alertModal } from '../../../../../api/base/alertModal';
-import cx from 'classnames';
-import { isInAndroid } from '../../../../../modules/window/isInAndroid';
 import { Navigation } from '../../../../components/layouts/Navigation';
 import { PagePathEnum } from '../../../PagePathEnum';
 
@@ -39,16 +41,12 @@ const IndiaRepaymentDetailPage = (props: any) => {
     dailyFee,
     balance,
     orderAmount,
-    applyDate = ''
+    applyDate = '',
   } = currentData ?? {};
   const { items = [] } = chargeFeeDetail ?? {};
   const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
   const getItems = (field: string) => {
-    return (
-      items.filter(
-        (i: GetLoanDetailChargeFeeDetailItems) => i.key === field
-      )[0] || {}
-    );
+    return items.filter((i: GetLoanDetailChargeFeeDetailItems) => i.key === field)[0] || {};
   };
 
   // NOTE: 新版 h5 要過濾掉之前android需要的欄位, LOAN_AMOUNT 也不會給
@@ -70,31 +68,15 @@ const IndiaRepaymentDetailPage = (props: any) => {
   // const { value: gst } = getItems('GST');
 
   const renderStatusTag = (status: string) => {
-    return (
-      <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>
-        {Status(status)?.text}
-      </div>
-    );
+    return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
   };
   // console.log("status", status === "EXTEND")
   return (
     <div>
       <div className={`px-6 pt-3`}>
-        <ListItem
-          title={'Product'}
-          text={productName ?? ''}
-          titleColor="text-ctext-primary"
-        />
-        <ListItem
-          title={'Order No.'}
-          text={orderNo ?? ''}
-          titleColor="text-ctext-primary"
-        />
-        <ListItem
-          title={'Status'}
-          text={status ? renderStatusTag(status) : ''}
-          titleColor="text-ctext-primary"
-        />
+        <ListItem title={'Product'} text={productName ?? ''} titleColor="text-ctext-primary" />
+        <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-ctext-primary" />
+        <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-ctext-primary" />
         <ListItem
           title={'Apply Date'}
           text={applyDate ? moment(applyDate).format('DD-MM-YYYY') : ''}
@@ -128,11 +110,7 @@ const IndiaRepaymentDetailPage = (props: any) => {
         {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-black-400" />*/}
 
         {status !== 'EXTEND' && (
-          <ListItem
-            title={'Disbursal Amount'}
-            text={<Money money={loanAmount} />}
-            titleColor="text-ctext-primary"
-            />
+          <ListItem title={'Disbursal Amount'} text={<Money money={loanAmount} />} titleColor="text-ctext-primary" />
         )}
 
         {status !== 'EXTEND' &&
@@ -160,11 +138,7 @@ const IndiaRepaymentDetailPage = (props: any) => {
           />
         )}
         {status === 'EXTEND' && (
-          <ListItem
-            title={'Extension Fee'}
-            text={<Money money={extensionFee} />}
-            titleColor="text-ctext-primary"
-          />
+          <ListItem title={'Extension Fee'} text={<Money money={extensionFee} />} titleColor="text-ctext-primary" />
         )}
         <ListItem
           title={'Overdue Days'}
@@ -179,8 +153,6 @@ const IndiaRepaymentDetailPage = (props: any) => {
           textColor={status === 'OVERDUE' ? Status(status).color : ''}
         />
 
-
-
         <Divider />
 
         <ListItem
@@ -192,18 +164,13 @@ const IndiaRepaymentDetailPage = (props: any) => {
         <ListItem
           titleColor="text-ctext-primary"
           title={
-            <div className={`flex flex-row item-center items-center`}>
+            <div className={`item-center flex flex-row items-center`}>
               <div className={` mr-1`}>Amount Repaid</div>
               <div
                 onClick={() => {
-                  navigate(
-                    `amount-repaid-record-modal?token=${getToken()}&orderNo=${
-                      orderNo ?? getOrderNo()
-                    }`,
-                    {
-                      state: { repayRecords },
-                    }
-                  );
+                  navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                    state: { repayRecords },
+                  });
                 }}
               >
                 <img src={AmountPaidIcon} />
@@ -220,12 +187,8 @@ const IndiaRepaymentDetailPage = (props: any) => {
           <ListItem
             title={'Repayment Amount'}
             text={<Money money={balance} />}
-            titleColor={
-              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
-            }
-            textColor={
-              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
-            }
+            titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+            textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
             className="font-bold"
           />
         )}
@@ -241,20 +204,15 @@ const IndiaRepaymentDetailPage = (props: any) => {
           />
         )}
 
-        <div className={`flex flex-row my-3 text-white`}>
+        <div className={`my-3 flex flex-row text-white`}>
           {extendable !== undefined && extendable && (
             <div
               onClick={() => {
-                navigate(
-                  `extend-confirm-modal?token=${getToken()}&orderNo=${
-                    orderNo ?? getOrderNo()
-                  }`,
-                  {
-                    state: currentData,
-                  }
-                );
+                navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                  state: currentData,
+                });
               }}
-              className={`grow mr-1.5`}
+              className={`mr-1.5 grow`}
             >
               <Button type={'secondary'} text={'Extend'} />
             </div>
@@ -264,14 +222,9 @@ const IndiaRepaymentDetailPage = (props: any) => {
             <div
               onClick={() => {
                 if (currentData === undefined) return;
-                navigate(
-                  `repayment-modal?token=${getToken()}&orderNo=${
-                    orderNo ?? getOrderNo()
-                  }`,
-                  {
-                    state: currentData,
-                  }
-                );
+                navigate(`repayment-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                  state: currentData,
+                });
               }}
               className={cx(`grow`, {
                 'ml-1.5': extendable,
@@ -284,54 +237,38 @@ const IndiaRepaymentDetailPage = (props: any) => {
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (
           <>
-            <div className={`text-xs text-ctext-secondary`}>
+            <div className={`text-ctext-secondary text-xs`}>
               <div>Attention：</div>
-              <ul className="list-decimal list-outside pl-3 pt-1">
+              <ul className="list-outside list-decimal pl-3 pt-1">
+                <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
                 <li>
-                  Before repayment, please make sure that you have enough
-                  balance on your bank account.
-                </li>
-                <li>
-                  Overdue for more than{' '}
-                  <span className={`text-primary-main`}>N days</span> will not
-                  be able to extend or re-loan，please ensure you make
-                  repayments on time to maintain uninterrupted access to our
+                  Overdue for more than <span className={`text-primary-main`}>N days</span> will not be able to extend
+                  or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our
                   services.
                 </li>
                 <li>
-                  Email us if you have any questions about your responsibilities
-                  or for more information.{' '}
+                  Email us if you have any questions about your responsibilities or for more information.{' '}
                   <span className={`text-primary-main`}>mail@mail.com</span>
                 </li>
               </ul>
             </div>
-            <div className={`flex flex-col my-3`}>
-              <div className="h-2.5 bg-cstate-disable-assistant mx-[-24px] "></div>
-              <div className={`text-xs text-ctext-primary leading-none my-3`}>
-                After completing the repayment, take a screenshot and upload
-                your repayment receipt here ▼
+            <div className={`my-3 flex flex-col`}>
+              <div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div>
+              <div className={`text-ctext-primary my-3 text-xs leading-none`}>
+                After completing the repayment, take a screenshot and upload your repayment receipt here ▼
               </div>
               {/*TODO: 先兼容 querystring*/}
               <div
-                className={`grow mb-2`}
+                className={`mb-2 grow`}
                 onClick={() => {
-                  navigate(
-                    `/v2/upload-payment-receipt?token=${getToken()}&orderNo=${
-                      orderNo ?? getOrderNo()
-                    }`,
-                    {
-                      state: { orderNo },
-                    }
-                  );
+                  navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                    state: { orderNo },
+                  });
                 }}
               >
-                <Button
-                  type={'ghost'}
-                  className={`w-full`}
-                  text={'Upload Receipt'}
-                />
+                <Button type={'ghost'} className={`w-full`} text={'Upload Receipt'} />
               </div>
-            </div>      
+            </div>
           </>
         )}
       </div>

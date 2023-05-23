@@ -1,4 +1,4 @@
-import {createAction} from "@reduxjs/toolkit";
+import { createAction } from '@reduxjs/toolkit';
 
 export const createRequestAction = (type: string) => {
   const loadingAction = createAction(`${type}/loading`);

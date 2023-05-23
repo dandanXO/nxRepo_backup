@@ -8,5 +8,3 @@ export const PersonalInfoPageSagaActions = {
     init: createAction('PersonalInfoPageSagaActions-system-init'),
   },
 };
-
-

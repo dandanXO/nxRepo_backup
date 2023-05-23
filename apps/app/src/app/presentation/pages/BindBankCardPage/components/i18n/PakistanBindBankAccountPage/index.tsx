@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage';
-import { CustomPage } from '../../../../../components/layouts/CustomPage';
-import { ChooseBindMethod } from '../../ChooseBindMethod';
-import { MobileWalletForm } from './MobileWalletForm';
-import { BankAccountForm } from './BankAccountForm';
-import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
-import { usePakistanBankAccountForm } from '../../../hooks/i18n/pakistan/usePakistanBankAccountForm';
-import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';
-import { usePakistanMobileWalletForm } from '../../../hooks/i18n/pakistan/usePakistanMobileWalletForm';
 import { Outlet } from 'react-router';
 import styled from 'styled-components';
+
+import { CustomPage } from '../../../../../components/layouts/CustomPage';
+import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
+import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';
+import { usePakistanBankAccountForm } from '../../../hooks/i18n/pakistan/usePakistanBankAccountForm';
+import { usePakistanMobileWalletForm } from '../../../hooks/i18n/pakistan/usePakistanMobileWalletForm';
+import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage';
+import { ChooseBindMethod } from '../../ChooseBindMethod';
+import { BankAccountForm } from './BankAccountForm';
+import { MobileWalletForm } from './MobileWalletForm';
 
 const Warning = styled.div`
   //margin: 0 auto;
@@ -64,10 +65,8 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     onIbanBlur: onMobileWalletIbanBlur,
     confirm: confirmMobileWallet,
   } = usePakistanMobileWalletForm({
-    isPostBankBindSaveToPKMutationLoading:
-      props.isPostBankBindSaveToPKMutationLoading || false,
-    triggerPostBankBindSaveToPKMutation:
-      props.triggerPostBankBindSaveToPKMutation,
+    isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
+    triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
     bindCardDropListData: props.bindCardDropListData,
   });
 
@@ -112,18 +111,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         disable={props.bindCardDropListData?.showBankOption || false}
       />
 
-      <div
-        className={
-          'bg-cstate-info-variant text-cstate-info-main rounded-md px-3 py-2 mb-4 text-xs font-bold '
-        }
-      >
-        <span className={'underline font-bold'}>
-          Once added, it cannot be edited anymore.{' '}
-        </span>
-        <span>
-          Please ensure that the account belongs to you, and that all
-          information is correct and accurate.
-        </span>
+      <div className={'bg-cstate-info-variant text-cstate-info-main mb-4 rounded-md px-3 py-2 text-xs font-bold '}>
+        <span className={'font-bold underline'}>Once added, it cannot be edited anymore. </span>
+        <span>Please ensure that the account belongs to you, and that all information is correct and accurate.</span>
       </div>
 
       {chooseBindMethodValue === 0 ? (

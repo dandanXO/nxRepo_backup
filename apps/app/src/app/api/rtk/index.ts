@@ -1,30 +1,31 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import axiosBaseQuery from './axiosBaseQuery';
-import { GetBankCardListResponse } from '../userService/GetBankCardListResponse';
-import { GetRepayTypesResponse } from '../loanService/GetRepayTypesResponse';
-import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
-import { GetBindCardDropListResponse } from '../userService/GetBindCardDropListResponse';
-import { GetUserProcessResponse } from '../loanService/GetUserProcessResponse';
+
 import { GetIndexRequest } from '../indexService/GetIndexRequest';
 import { GetIndexResponse } from '../indexService/GetIndexResponse';
-import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
-import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
-import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
 import { GetLoanDetailRequest } from '../loanService/GetLoanDetailRequest';
 import { GetLoanDetailResponse } from '../loanService/GetLoanDetailResponse';
-import { GetLoanRecordListRequest } from '../loanService/GetLoanRecordListRequest';
 import { GetLoanRecordListReponse } from '../loanService/GetLoanRecordListReponse';
+import { GetLoanRecordListRequest } from '../loanService/GetLoanRecordListRequest';
 import { GetRepayTypesRequest } from '../loanService/GetRepayTypesRequest';
-import { PostRepayReceiptResponse } from '../loanService/PostRepayReceiptResponse';
+import { GetRepayTypesResponse } from '../loanService/GetRepayTypesResponse';
+import { GetUserProcessResponse } from '../loanService/GetUserProcessResponse';
 import { PostRepayCreateRequest } from '../loanService/PostRepayCreateRequest';
 import { PostRepayCreateResponse } from '../loanService/PostRepayCreateResponse';
-import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
+import { PostRepayReceiptResponse } from '../loanService/PostRepayReceiptResponse';
+import { GetBankCardListResponse } from '../userService/GetBankCardListResponse';
+import { GetBindCardDropListResponse } from '../userService/GetBindCardDropListResponse';
 import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicableListRequest';
 import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
-import { TraceBehaviorRequest } from './TraceBehaviorRequest';
 import { GetCouponListRequest } from '../userService/GetCouponListRequest';
 import { GetCouponListResponse } from '../userService/GetCouponResponse';
 import { GetNotificationResponse } from '../indexService/GetNotificationResponse';
+import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
+import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
+import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
+import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
+import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
+import { TraceBehaviorRequest } from './TraceBehaviorRequest';
+import axiosBaseQuery from './axiosBaseQuery';
 
 export type LoginRequest = {
   msgCode: string;
@@ -69,25 +70,14 @@ export const APIV3 = createApi({
       // NOTE: cannot work
       async onCacheEntryAdded(
         arg,
-        {
-          dispatch,
-          getState,
-          extra,
-          requestId,
-          cacheEntryRemoved,
-          cacheDataLoaded,
-          getCacheEntry,
-        }
+        { dispatch, getState, extra, requestId, cacheEntryRemoved, cacheDataLoaded, getCacheEntry }
       ) {
         console.log('onCacheEntryAdded.arg', arg);
       },
     }),
 
     // NOTE: /api/v3/loan/records 貸款紀錄列表
-    getLoanRecordList: builder.query<
-      GetLoanRecordListReponse,
-      GetLoanRecordListRequest
-    >({
+    getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
       query: (query: GetLoanRecordListRequest) => ({
         method: 'get',
         url: `/loan/records`,
@@ -95,10 +85,7 @@ export const APIV3 = createApi({
       }),
     }),
     // NOTE: /api/v3/coupon/applicable 取得可用优惠券列表
-    getCouponApplicableList: builder.query<
-      GetCouponApplicableListResponse,
-      GetCouponApplicableListRequest
-    >({
+    getCouponApplicableList: builder.query<GetCouponApplicableListResponse, GetCouponApplicableListRequest>({
       query: (query: GetCouponApplicableListRequest) => ({
         method: 'get',
         url: `/coupon/applicable`,
@@ -202,10 +189,7 @@ export const API = createApi({
       }),
     }),
     // NOTE: 創建還款訂單
-    postRepayCreate: builder.mutation<
-      PostRepayCreateResponse,
-      PostRepayCreateRequest
-    >({
+    postRepayCreate: builder.mutation<PostRepayCreateResponse, PostRepayCreateRequest>({
       query: (query: PostRepayCreateRequest) => ({
         method: 'post',
         url: `/repay/create`,
@@ -218,8 +202,7 @@ export const API = createApi({
         method: 'post',
         url: `/repay/receipt`,
         headers: {
-          'Content-Type':
-            'multipart/form-data;boundary=' + new Date().getTime(),
+          'Content-Type': 'multipart/form-data;boundary=' + new Date().getTime(),
         },
         data: requestBody,
       }),
@@ -249,10 +232,7 @@ export const API = createApi({
       }),
     }),
     // NOTICE: Bangladesh - 绑定银行主卡或是電子錢包
-    postBankBindSaveToBangladesh: builder.mutation<
-      {},
-      PostBangladeshBankBindSaveRequest
-    >({
+    postBankBindSaveToBangladesh: builder.mutation<{}, PostBangladeshBankBindSaveRequest>({
       query: (requestBody: PostBangladeshBankBindSaveRequest) => ({
         method: 'post',
         url: `/bank-bind/save`,

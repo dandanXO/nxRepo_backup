@@ -1,10 +1,8 @@
-import { AppModeEnum } from "../../persistant/appModeModel";
-
+import { AppModeEnum } from '../../persistant/appModeModel';
 
 export type AppMode = null | AppModeEnum.SimpleWebView | AppModeEnum.IndexWebview | AppModeEnum.PureH5;
 
 export class AppStorage {
-
   static set(key: string, value: any) {
     localStorage.setItem(key, value);
   }
@@ -12,21 +10,19 @@ export class AppStorage {
     return localStorage.getItem(key);
   }
   static remove(key: string) {
-    localStorage.removeItem(key)
+    localStorage.removeItem(key);
   }
 }
 
-
-
-function isLocalStorageAvailable(){
+function isLocalStorageAvailable() {
   const test = 'test';
   try {
     localStorage.setItem(test, test);
     localStorage.removeItem(test);
     return true;
-  } catch(e) {
+  } catch (e) {
     return false;
   }
 }
 
-console.log("[app][ability] isLocalStorageAvailable", isLocalStorageAvailable())
+console.log('[app][ability] isLocalStorageAvailable', isLocalStorageAvailable());

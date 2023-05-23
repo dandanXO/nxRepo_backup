@@ -1,11 +1,13 @@
-import { Input, InputValue } from '@frontend/mobile/shared/ui';
+import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import cx from 'classnames';
 import { useNavigate } from 'react-router';
-import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
+
+import { Input, InputValue } from '@frontend/mobile/shared/ui';
+
 import { Button } from '../../components/layouts/Button';
 import { PagePathEnum } from '../PagePathEnum';
+import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -86,28 +88,16 @@ export const LoginForm = () => {
           suffix={
             <Button
               dataTestingID={'getOTP'}
-              text={
-                !doingCountdownSendOTP
-                  ? 'Get OTP'
-                  : `Resend ( ${resendSeconds}s )`
-              }
+              text={!doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
               className={cx(
                 {
-                  'bg-[#F58B10] text-white':
-                    enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
-                  'bg-[#D7D7D7]': !(
-                    enableGetOTP &&
-                    !hasSendOTP &&
-                    !doingCountdownSendOTP
-                  ),
+                  'bg-[#F58B10] text-white': enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
+                  'bg-[#D7D7D7]': !(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP),
                 },
                 'ml-2 py-1 px-2.5'
               )}
               onClick={() => {
-                enableGetOTP &&
-                  !hasSendOTP &&
-                  !doingCountdownSendOTP &&
-                  onClickGetOTP();
+                enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
               }}
             />
           }
@@ -122,9 +112,7 @@ export const LoginForm = () => {
             setPhoneNumberData({
               data: value,
               isValidation: !isError,
-              errorMessage: isError
-                ? '*Please enter the correct phone number.'
-                : '',
+              errorMessage: isError ? '*Please enter the correct phone number.' : '',
             });
             setEnableGetOTP(!isError);
           }}
@@ -157,7 +145,7 @@ export const LoginForm = () => {
             }
           }}
         />
-        <div className={`text-slate-400 mt-4`}>OTP Verification Code</div>
+        <div className={`mt-4 text-slate-400`}>OTP Verification Code</div>
         <Input
           labelType="none"
           value={otpData.data}
@@ -170,8 +158,7 @@ export const LoginForm = () => {
               setOtpData({
                 data: '',
                 isValidation: false,
-                errorMessage:
-                  '*Please confirm the code you received and try again.',
+                errorMessage: '*Please confirm the code you received and try again.',
               });
             } else {
               setOtpData((prev) => {
@@ -200,13 +187,13 @@ export const LoginForm = () => {
           {' '}
           By continuing, you agree and acknowledge you have read the
           <span
-            className="underline decoration-blue-500 text-blue-500 mx-1"
+            className="mx-1 text-blue-500 underline decoration-blue-500"
             onClick={() => navigate(PagePathEnum.PrivacyPolicyModal)}
           >
             Privacy Policy
           </span>
-          You also consent to receive SMS messages.Please carefully read the
-          above agreement, agreed to check and enter the next step.
+          You also consent to receive SMS messages.Please carefully read the above agreement, agreed to check and enter
+          the next step.
         </div>
       </div>
     </>

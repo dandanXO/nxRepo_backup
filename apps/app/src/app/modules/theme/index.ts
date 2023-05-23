@@ -2,12 +2,12 @@ import { IAndroidAppInfo } from '../../persistant/nativeAppInfo/types/IAndroidAp
 import { applyTheme } from './utils';
 
 const applyCustomSharedLibTheme = (androidAPPInfo: IAndroidAppInfo) => {
-  import(
-    `../../../environments/theme/${androidAPPInfo.environment}/v${androidAPPInfo.uiVersion}/theme`
-  ).then((content) => {
-    const themeConfig = content.themeConfig;
-    window.theme = themeConfig;
-  });
+  import(`../../../environments/theme/${androidAPPInfo.environment}/v${androidAPPInfo.uiVersion}/theme`).then(
+    (content) => {
+      const themeConfig = content.themeConfig;
+      window.theme = themeConfig;
+    }
+  );
 };
 
 const applyDefaultCustomTailwindTheme = (androidAPPInfo: IAndroidAppInfo) => {

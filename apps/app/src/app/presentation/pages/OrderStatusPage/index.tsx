@@ -1,17 +1,17 @@
 // import Button from "../../components/Button";
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
-import { useEffect } from 'react';
-import { Navigation } from '../../components/layouts/Navigation';
-import { getOrderNo } from '../../../modules/querystring/getOrderNo';
-
-import { isInAndroid } from '../../../modules/window/isInAndroid';
-import { OrderStatusItem } from './OrderStatusItem';
 import moment from 'moment';
+import { useEffect } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router';
+
 import { ApproveRecord } from '../../../api/loanService/ApproveRecord';
+import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../modules/querystring/getToken';
+import { isInAndroid } from '../../../modules/window/isInAndroid';
+import { Navigation } from '../../components/layouts/Navigation';
 import { PageContent } from '../../components/layouts/PageContent';
 import { PagePathEnum } from '../PagePathEnum';
-import { getToken } from '../../../modules/querystring/getToken';
+import { OrderStatusItem } from './OrderStatusItem';
 
 const OrderStatusPage = (props: any) => {
   const navigate = useNavigate();

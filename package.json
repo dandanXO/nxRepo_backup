@@ -24,7 +24,6 @@
     "e2e:min:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-in --watch --baseUrl=https://frontend.com",
     "e2e:mpk:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-pk --watch --baseUrl=https://frontend.com",
     "e2e:mbd:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-bd --watch --baseUrl=https://frontend.com",
-
     "serve:ain:58": "cross-env NODE_UI_VERSION=58 NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development",
     "serve:ain": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development",
     "serve:apk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve-pk app -c=development",
@@ -143,6 +142,7 @@
     "@svgr/webpack": "^6.1.2",
     "@testing-library/cypress": "^9.0.0",
     "@testing-library/react": "14.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/jest": "29.4.4",
     "@types/loadable__component": "^5.13.4",
     "@types/node": "18.14.2",
@@ -181,6 +181,7 @@
     "nx": "15.9.2",
     "postcss": "8.4.19",
     "prettier": "2.6.2",
+    "prettier-plugin-tailwindcss": "^0.3.0",
     "react-refresh": "^0.10.0",
     "react-test-renderer": "18.2.0",
     "style-loader": "^3.3.0",

@@ -1,13 +1,14 @@
+import moment from 'moment';
 import React from 'react';
 import { useNavigate } from 'react-router';
-import ListItem from '../../../../components/ListItem';
-import Divider from '../../../../components/Divider';
-import moment from 'moment';
-import { Button } from '../../../../components/layouts/Button';
-import CustomSelect from '../../../../components/Select';
-import Money from '../../../../components/Money.tsx';
-import { Status } from '../../../../../modules/statusEnum';
 import Select from 'react-select';
+
+import { Status } from '../../../../../modules/statusEnum';
+import Divider from '../../../../components/Divider';
+import ListItem from '../../../../components/ListItem';
+import Money from '../../../../components/Money.tsx';
+import CustomSelect from '../../../../components/Select';
+import { Button } from '../../../../components/layouts/Button';
 import { selectStyles } from '../../../../components/layouts/selectStyles';
 
 type paymentMethodValueType = {
@@ -30,19 +31,14 @@ const PakistanExtendModal = (props: any) => {
 
   return (
     <div className={`p-2`}>
-      <div className="text-xl font-bold mb-4 text-ctext-primary">Extend</div>
+      <div className="text-ctext-primary mb-4 text-xl font-bold">Extend</div>
       <ListItem
         title={'Product'}
         text={productName ?? ''}
         titleColor="text-ctext-secondary"
         textColor="text-ctext-primary"
       />
-      <ListItem
-        title={'No.'}
-        text={orderNo ?? ''}
-        titleColor="text-ctext-secondary"
-        textColor="text-ctext-primary"
-      />
+      <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary" />
       <ListItem
         title={'Due Date'}
         text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
@@ -60,9 +56,7 @@ const PakistanExtendModal = (props: any) => {
         title={'Overdue Days'}
         text={overdueDays ?? ''}
         titleColor="text-ctext-secondary"
-        textColor={
-          status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
-        }
+        textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
       />
       {/*NOTE: 展期罰金*/}
       <ListItem
@@ -99,16 +93,14 @@ const PakistanExtendModal = (props: any) => {
 
       {/*NOTE: 總金額*/}
       <ListItem
-        className="font-bold mt-3"
+        className="mt-3 font-bold"
         title={'Total Extension Fee' as string}
         text={<Money money={extensionPayAmount} />}
         titleColor="text-ctext-primary"
       />
 
-      <div className="mt-6  mb-5 bg-cstate-disable-main h-2 mx-[-20px]"></div>
-      <div className="text-black text-xs font-bold text-left">
-        {'Payment Method'}
-      </div>
+      <div className="bg-cstate-disable-main  mx-[-20px] mt-6 mb-5 h-2"></div>
+      <div className="text-left text-xs font-bold text-black">{'Payment Method'}</div>
       <Select
         styles={selectStyles}
         options={props.repayTypesList || []}
@@ -119,19 +111,12 @@ const PakistanExtendModal = (props: any) => {
         isSearchable={false}
       />
 
-      <div className={`flex flex-row mt-6 text-white`}>
-        <div className={`grow mr-1.5`}>
-          <Button
-            type={'ghost'}
-            onClick={() => navigate(-2)}
-            text={'Cancel'}
-          />
+      <div className={`mt-6 flex flex-row text-white`}>
+        <div className={`mr-1.5 grow`}>
+          <Button type={'ghost'} onClick={() => navigate(-2)} text={'Cancel'} />
         </div>
-        <div className={`grow ml-1.5`}>
-          <Button
-            onClick={props.handleConfirm}
-            text={'Confirm'}
-          />
+        <div className={`ml-1.5 grow`}>
+          <Button onClick={props.handleConfirm} text={'Confirm'} />
         </div>
       </div>
     </div>

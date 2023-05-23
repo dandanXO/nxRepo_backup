@@ -9,10 +9,7 @@ export const SystemCaseActions = {
   // TODO: refactor me to indexPage
   SystemCountdownSaga: createAction<string>('SystemCountdownSaga'),
   // TODO: refactor me to indexPage
-  SystemRefreshableCountdownSaga: createAction<string>(
-    'SystemRefreshableCountdownSaga'
-  ),
+  SystemRefreshableCountdownSaga: createAction<string>('SystemRefreshableCountdownSaga'),
 
   SystemGetUserInfoSaga: createAction('SystemGetUserInfoSaga'),
-
 };

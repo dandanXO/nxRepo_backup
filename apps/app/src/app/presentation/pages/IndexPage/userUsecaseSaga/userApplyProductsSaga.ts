@@ -1,21 +1,17 @@
 // NOTE: Action: UserApplyProduct
-import { LoanServiceResponse } from '../../../../api/loanService/service/postApplyLoanService';
-import { call, put, select, take, race } from 'redux-saga/effects';
-import { Service } from '../../../../api';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import {
-  InitialStateType,
-  modalSlice,
-} from '../../../../reduxStore/modalSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { call, put, race, select, take } from 'redux-saga/effects';
+
+import { Service } from '../../../../api';
+import { LoanServiceResponse } from '../../../../api/loanService/service/postApplyLoanService';
 import { GetBankCardListResponse } from '../../../../api/userService/GetBankCardListResponse';
 import { RootState } from '../../../../reduxStore';
+import { InitialStateType, modalSlice } from '../../../../reduxStore/modalSlice';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { IndexPageSagaAction, UserApplyProductActionPayload } from './indexPageActions';
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
-export function* userApplyProductsSaga(
-  action: PayloadAction<UserApplyProductActionPayload>
-) {
+export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {
   // console.group("userApplyProductsSaga");
   // console.log("action", action);
 
@@ -26,10 +22,7 @@ export function* userApplyProductsSaga(
     // const getBankCardListAction = API.endpoints.getBankCardList.initiate(null) as any;
     // yield put(getBankCardListAction)
     // NOTE: way2
-    const data: GetBankCardListResponse = yield call(
-      Service.UserService.GetBankCardList,
-      null
-    );
+    const data: GetBankCardListResponse = yield call(Service.UserService.GetBankCardList, null);
     console.log('data', data);
 
     // NOTE: Popup Summary Modal - confirm | cancel | (see loan agreement model)
@@ -58,8 +51,9 @@ export function* userApplyProductsSaga(
     const {
       type,
       payload: { show, confirm },
-    }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> =
-      yield take(modalSlice.actions.updateQuickRepaymentSummaryModal);
+    }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+      modalSlice.actions.updateQuickRepaymentSummaryModal
+    );
     if (!confirm) {
       // console.log("cancel");
       return;
@@ -68,13 +62,9 @@ export function* userApplyProductsSaga(
     }
 
     const selectedBankcardID: number = yield select(
-      (state: RootState) =>
-        state.model.quickRepaymentSummaryModal.selectedBankcardId
+      (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
     );
-    const {
-      data: responseData,
-      success,
-    }: { data: LoanServiceResponse; success: boolean } = yield call(
+    const { data: responseData, success }: { data: LoanServiceResponse; success: boolean } = yield call(
       Service.LoanService.applyLoan,
       {
         ...action.payload,

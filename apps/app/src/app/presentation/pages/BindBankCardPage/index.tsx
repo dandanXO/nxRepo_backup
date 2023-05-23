@@ -1,41 +1,36 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
-import { IndiaBindBankAccountPage } from './components/i18n/IndiaBindBankAccountPage';
-import { PakistanBindBankAccountPage } from './components/i18n/PakistanBindBankAccountPage';
-
+import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
+import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import {
   useLazyGetBindCardDropListQuery,
   usePostBankBindSaveMutation,
   usePostBankBindSaveToPKMutation,
 } from '../../../api/rtk';
 import { renderByCountry } from '../../../modules/i18n';
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { useSelector } from 'react-redux';
-import { Navigation } from '../../components/layouts/Navigation';
 import { isInAndroid } from '../../../modules/window/isInAndroid';
-import { useNavigate } from 'react-router';
 import { CustomPage } from '../../components/layouts/CustomPage';
+import { Navigation } from '../../components/layouts/Navigation';
+import { IndiaBindBankAccountPage } from './components/i18n/IndiaBindBankAccountPage';
+import { PakistanBindBankAccountPage } from './components/i18n/PakistanBindBankAccountPage';
 
 const BindBankCardPage = () => {
   // NOTICE: Common
   // NOTE: cardholderName
   const pageQueryString = useLocationOrderQueryString();
-  const cardholderName =
-    pageQueryString.cardholderName ||
-    useSelector((state: any) => state.indexPage.user.userName);
+  const cardholderName = pageQueryString.cardholderName || useSelector((state: any) => state.indexPage.user.userName);
 
   // NOTICE: India
   // NOTE: 綁定銀行卡
-  const [postBankBindSave, { isLoading: isLoadingPostBankBindSave }] =
-    usePostBankBindSaveMutation();
+  const [postBankBindSave, { isLoading: isLoadingPostBankBindSave }] = usePostBankBindSaveMutation();
 
   // NOTICE: Pakistan
   // NOTE: 綁定銀行卡
-  const [postBankBindSaveToPK, { isLoading: isLoadingPostBankBindSaveToPK }] =
-    usePostBankBindSaveToPKMutation();
+  const [postBankBindSaveToPK, { isLoading: isLoadingPostBankBindSaveToPK }] = usePostBankBindSaveToPKMutation();
 
   // NOTE: 取得電子錢包列表(IN 沒有, PK 有, BD未來有)
   const [
@@ -48,10 +43,8 @@ const BindBankCardPage = () => {
   ] = useLazyGetBindCardDropListQuery({});
 
   // NOTE: 綁定電子錢包
-  const [
-    triggerPostBankBindSaveToPKMutation,
-    { isLoading: isPostBankBindSaveToPKMutationLoading },
-  ] = usePostBankBindSaveToPKMutation();
+  const [triggerPostBankBindSaveToPKMutation, { isLoading: isPostBankBindSaveToPKMutationLoading }] =
+    usePostBankBindSaveToPKMutation();
 
   const navigate = useNavigate();
 
@@ -80,15 +73,9 @@ const BindBankCardPage = () => {
               <PakistanBindBankAccountPage
                 isLoadingPostBankBindSaveToPK={isLoadingPostBankBindSaveToPK}
                 postBankBindSaveToPK={postBankBindSaveToPK}
-                isPostBankBindSaveToPKMutationLoading={
-                  isPostBankBindSaveToPKMutationLoading
-                }
-                triggerPostBankBindSaveToPKMutation={
-                  triggerPostBankBindSaveToPKMutation
-                }
-                triggerGetBindCardDropListQuery={
-                  triggerGetBindCardDropListQuery
-                }
+                isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
+                triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
+                triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
                 bindCardDropListData={bindCardDropListData}
                 cardholderName={cardholderName ?? ''}
               />
@@ -97,12 +84,8 @@ const BindBankCardPage = () => {
           <PakistanBindBankAccountPage
             isLoadingPostBankBindSaveToPK={isLoadingPostBankBindSaveToPK}
             postBankBindSaveToPK={postBankBindSaveToPK}
-            isPostBankBindSaveToPKMutationLoading={
-              isPostBankBindSaveToPKMutationLoading
-            }
-            triggerPostBankBindSaveToPKMutation={
-              triggerPostBankBindSaveToPKMutation
-            }
+            isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
+            triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
             triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
             bindCardDropListData={bindCardDropListData}
             cardholderName={cardholderName ?? ''}

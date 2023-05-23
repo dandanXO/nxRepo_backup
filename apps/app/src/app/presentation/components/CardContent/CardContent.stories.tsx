@@ -1,6 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import CardContent from './index';
+
 import { AppThemeProvider } from '@frontend/mobile/shared/ui';
+
+import CardContent from './index';
 
 export default {
   title: 'Business Component/CardContent',
