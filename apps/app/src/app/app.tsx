@@ -1,19 +1,17 @@
-import { AppThemeProvider, IThemeConfig } from '@frontend/mobile/shared/ui';
-import { AppRouter } from './presentation/router';
-import { Provider } from 'react-redux';
-import { appStore, RootState } from './reduxStore';
-import { history } from './reduxStore/index';
-import {
-  ReduxRouter,
-  ReduxRouterSelector,
-} from '@lagunovsky/redux-react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { ReduxRouter, ReduxRouterSelector } from '@lagunovsky/redux-react-router';
 import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-const routerSelector: ReduxRouterSelector<RootState> = (state) =>
-  state.navigator;
+import { AppThemeProvider, IThemeConfig } from '@frontend/mobile/shared/ui';
 
-window["reduxStore"] = appStore;
+import { AppRouter } from './presentation/router';
+import { RootState, appStore } from './reduxStore';
+import { history } from './reduxStore/index';
+
+const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator;
+
+window['reduxStore'] = appStore;
 export function App() {
   return (
     <div>

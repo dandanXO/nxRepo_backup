@@ -1,9 +1,10 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
+
+import { AppFlag } from '../../../environments/flag';
+import { SentryModule } from '../../modules/sentry';
 import { alertModal } from '../base/alertModal';
 import { runAxios } from '../base/runAxios';
-import { AppFlag } from '../../../environments/flag';
-import {SentryModule} from "../../modules/sentry";
 
 export interface CustomAxiosError {
   status: any;
@@ -26,14 +27,7 @@ const axiosBaseQuery =
   > =>
   async ({ url, method, data, params, headers }) => {
     try {
-      const resultData = await runAxios(
-        baseUrl,
-        url,
-        method,
-        data,
-        params,
-        headers
-      );
+      const resultData = await runAxios(baseUrl, url, method, data, params, headers);
       console.log('[app] resultData:', resultData);
       return resultData;
     } catch (axiosError) {
@@ -59,16 +53,12 @@ const axiosBaseQuery =
         };
         message: string;
       };
-      const backendCustomErrorMessage =
-        backendCustomError?.data?.msg || backendCustomError.message;
+      const backendCustomErrorMessage = backendCustomError?.data?.msg || backendCustomError.message;
       console.info('[app] customErrorMessage:', backendCustomErrorMessage);
 
       console.log(err.config.url);
       // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
-      if (
-        err.config.url !== '/api/v2/loan/quota/refresh' &&
-        err.config.url !== '/api/v3/trace/behavior'
-      ) {
+      if (err.config.url !== '/api/v2/loan/quota/refresh' && err.config.url !== '/api/v3/trace/behavior') {
         alertModal(backendCustomErrorMessage);
       }
 

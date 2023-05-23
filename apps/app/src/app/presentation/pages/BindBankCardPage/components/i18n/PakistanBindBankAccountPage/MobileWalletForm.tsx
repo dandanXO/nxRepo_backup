@@ -1,13 +1,15 @@
-import { Form } from '../../Form';
-import { Input, InputValue } from '@frontend/mobile/shared/ui';
 import React, { ClipboardEvent } from 'react';
-import { Label } from '../../Label';
 import { useNavigate } from 'react-router';
-import { selectStyles } from '../../../../../components/layouts/selectStyles';
 import Select from 'react-select';
+
+import { Input, InputValue } from '@frontend/mobile/shared/ui';
+
 import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
 import { Button } from '../../../../../components/layouts/Button';
 import { Page } from '../../../../../components/layouts/Page';
+import { selectStyles } from '../../../../../components/layouts/selectStyles';
+import { Form } from '../../Form';
+import { Label } from '../../Label';
 
 type IMobileWalletForm = {
   // Wallet List
@@ -39,7 +41,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
     e.preventDefault();
   };
   return (
-    <div className="grow flex flex-col">
+    <div className="flex grow flex-col">
       <div>
         <div className={'text-sm'}>{'Mobile Wallet'}</div>
         <Select
@@ -70,14 +72,14 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         onCut={(e) => preventCopyPaste(e)}
       />
       <div
-        className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
+        className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"
         onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}
       >
         {'Click me to learn where can I find my IBAN number?'}
       </div>
 
       <div>
-        <div className={'text-sm mb-0'}>{'Mobile Wallet Account'}</div>
+        <div className={'mb-0 text-sm'}>{'Mobile Wallet Account'}</div>
         <Input
           name={'account'}
           className="mb-1"
@@ -113,12 +115,8 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       </div>
 
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
-      <div className="grow flex flex-col justify-end mb-2">
-        <Button
-          className={`${EnumV15GradientButtonClassNames} `}
-          text={'Confirm'}
-          onClick={() => props.confirm()}
-        />
+      <div className="mb-2 flex grow flex-col justify-end">
+        <Button className={`${EnumV15GradientButtonClassNames} `} text={'Confirm'} onClick={() => props.confirm()} />
       </div>
     </div>
   );

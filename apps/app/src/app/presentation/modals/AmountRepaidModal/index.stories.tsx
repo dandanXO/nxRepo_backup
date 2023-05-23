@@ -1,7 +1,9 @@
-import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import AmountPaidModal from './AmountRepaidModal';
+import * as React from 'react';
+
 import { AppThemeProvider } from '@frontend/mobile/shared/ui';
+
+import AmountPaidModal from './AmountRepaidModal';
 
 export default {
   title: 'Modal/AmountPaidModal',

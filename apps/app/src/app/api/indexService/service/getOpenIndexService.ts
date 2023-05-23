@@ -1,18 +1,13 @@
+import axios from 'axios';
+
+import { alertModal } from '../../base/alertModal';
 import { runAxios } from '../../base/runAxios';
 import { GetOpenIndexRequest } from '../GetOpenIndexRequest';
 import { GetOpenIndexResponse } from '../GetOpenIndexResponse';
-import axios from 'axios';
-import { alertModal } from '../../base/alertModal';
 
 export const getOpenIndexService = async (params: GetOpenIndexRequest) => {
   try {
-    const { data }: { data: GetOpenIndexResponse } = await runAxios(
-      '/api',
-      '/v3/open-index',
-      'get',
-      null,
-      params
-    );
+    const { data }: { data: GetOpenIndexResponse } = await runAxios('/api', '/v3/open-index', 'get', null, params);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

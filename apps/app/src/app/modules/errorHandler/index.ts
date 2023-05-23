@@ -1,18 +1,23 @@
 // NOTICE: sync
-window.addEventListener('error', (event) => {
-  // filter js error
-  const target = event.target || event.srcElement;
-  const isElementTarget = target instanceof HTMLScriptElement || target instanceof HTMLLinkElement || target instanceof HTMLImageElement;
-  if (!isElementTarget) return false;
+window.addEventListener(
+  'error',
+  (event) => {
+    // filter js error
+    const target = event.target || event.srcElement;
+    const isElementTarget =
+      target instanceof HTMLScriptElement || target instanceof HTMLLinkElement || target instanceof HTMLImageElement;
+    if (!isElementTarget) return false;
 
-  const url = (target as any)?.src || (target as any)?.href;
-  console.log("debug.window.addEventListener.error.url", url);
+    const url = (target as any)?.src || (target as any)?.href;
+    console.log('debug.window.addEventListener.error.url', url);
 
-  return true;
-}, true);
+    return true;
+  },
+  true
+);
 
 window.onerror = (message, source, lineno, colno, error) => {
-  console.log("debug.window.onerror");
+  console.log('debug.window.onerror');
   console.log(`message: ${message}`);
   console.log(`source: ${source}`);
   console.log(`lineno: ${lineno}`);
@@ -23,15 +28,15 @@ window.onerror = (message, source, lineno, colno, error) => {
 };
 
 // NOTICE: async
-window.addEventListener('rejectionhandled', event => {
-  console.log("debug.addEventListener.rejectionhandled");
+window.addEventListener('rejectionhandled', (event) => {
+  console.log('debug.addEventListener.rejectionhandled');
   // NOTE: 詳細錯誤訊息
   console.log(event);
   console.log(event.reason);
 });
 
-window.onunhandledrejection = event => {
-  console.log("debug.window.onunhandledrejection");
+window.onunhandledrejection = (event) => {
+  console.log('debug.window.onunhandledrejection');
   event.preventDefault();
 
   console.log(event);
@@ -86,4 +91,4 @@ export const changeLocationHref = (exportUrl: string) => {
   //   },
   // })
   window.location.href = exportUrl;
-}
+};

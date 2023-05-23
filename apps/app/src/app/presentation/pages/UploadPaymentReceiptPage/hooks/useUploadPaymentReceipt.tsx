@@ -1,18 +1,16 @@
 import React, { useCallback, useState } from 'react';
-
 import { z } from 'zod';
-import { PostRepayReceiptRequestProps } from '../index';
-import { InputValue } from '../../../../modules/form/InputValue';
+
 import { environment } from '../../../../../environments/environment';
+import { InputValue } from '../../../../modules/form/InputValue';
+import { PostRepayReceiptRequestProps } from '../index';
 
 interface PureUploadPaymentReceiptPageProps {
   postRepayReceiptRequest: (props: PostRepayReceiptRequestProps) => void;
   token: string;
   orderNo: string;
 }
-export const useUploadPaymentReceipt = (
-  props: PureUploadPaymentReceiptPageProps
-) => {
+export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps) => {
   // NOTE: input 1/2
   const [utr, setURT] = useState<InputValue<string>>({
     data: '',

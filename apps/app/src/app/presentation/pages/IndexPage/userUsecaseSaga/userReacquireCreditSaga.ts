@@ -1,20 +1,18 @@
-import {PayloadAction} from '@reduxjs/toolkit';
-import {call, delay, put, take} from 'redux-saga/effects';
-import {Service} from '../../../../api';
-import {IndexPageSagaAction} from './indexPageActions';
-import {GetQuotaModelStatusResponse} from '../../../../api/loanService/GetQuotaModelStatusResponse';
-import {catchSagaError} from '../../../../usecaseFlow/utils/catchSagaError';
-import {alertModal} from "../../../../api/base/alertModal";
-import {AppEnvironment} from "../../../../modules/appEnvironment";
-import {createRequestAction} from "../../../../usecaseFlow/utils/createRequestAction";
+import { PayloadAction } from '@reduxjs/toolkit';
+import { call, delay, put, take } from 'redux-saga/effects';
+
+import { Service } from '../../../../api';
+import { alertModal } from '../../../../api/base/alertModal';
+import { GetQuotaModelStatusResponse } from '../../../../api/loanService/GetQuotaModelStatusResponse';
+import { AppEnvironment } from '../../../../modules/appEnvironment';
+import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
+import { createRequestAction } from '../../../../usecaseFlow/utils/createRequestAction';
+import { IndexPageSagaAction } from './indexPageActions';
 
 // NOTE:
-export const getQuotaModelStatusAction = createRequestAction(
-  'GGetQuotaModelStatus'
-);
+export const getQuotaModelStatusAction = createRequestAction('GGetQuotaModelStatus');
 
 export function* userReacquireCreditSaga(action: PayloadAction<null>) {
-
   // NOTICE: 防止錯誤後無法重新 watch
   try {
     console.log('[app][saga] userReacquireCreditSaga');
@@ -46,16 +44,19 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     // }
 
     // NOTICE: 本地模式跳過與 Native APP 交互
-    if(AppEnvironment.isLocalhost()) {
+    if (AppEnvironment.isLocalhost()) {
       // NOTE: 跳過交互
     } else {
-
       // NOTE: 呼叫 Native APP 進行背景資料上傳
-      if(window['IndexTask'] && window['IndexTask']['uploadKycBackgroundData'] && window['IndexTask']['uploadKycBackgroundData']) {
-        window['IndexTask']['uploadKycBackgroundData']()
+      if (
+        window['IndexTask'] &&
+        window['IndexTask']['uploadKycBackgroundData'] &&
+        window['IndexTask']['uploadKycBackgroundData']
+      ) {
+        window['IndexTask']['uploadKycBackgroundData']();
       } else {
-        const message = "Native Error: uploadKycBackgroundData function is missing.";
-        alertModal(message)
+        const message = 'Native Error: uploadKycBackgroundData function is missing.';
+        alertModal(message);
         // NOTICE: 新增邏輯錯誤
         throw new Error(message);
       }
@@ -66,25 +67,21 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       );
       if (!onUploadKycBackgroundData) {
         // NOTICE: 使用者拒絕授權結束流程
-        throw new Error("User refuses to authenticate")
+        throw new Error('User refuses to authenticate');
       }
-
     }
 
     // NOTE: 第一次取得風控模型資料
     // NOTICE: 要根據此狀態將 UI Blocking
     yield put(getQuotaModelStatusAction.loadingAction());
 
-    let data: GetQuotaModelStatusResponse = yield call(
-      Service.LoanService.getQuotaModelStatus,
-      {}
-    );
+    let data: GetQuotaModelStatusResponse = yield call(Service.LoanService.getQuotaModelStatus, {});
     // console.log("GetQuotaModelStatusResponse", data);
 
     // NOTE: 系統每 20 秒取得風控模型資料，超過十次則停止請求
     let count = 0;
     const delayMinutesTime = 20;
-    const maxRetryTime = 10
+    const maxRetryTime = 10;
 
     const isContinuingFetching = data.calculating === true && count <= maxRetryTime;
     while (isContinuingFetching) {
@@ -100,8 +97,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       yield put(getQuotaModelStatusAction.failureAction());
       // yield put(getQuotaModelStatusActions.rejected);
       // NOTICE: 新增業務邏輯錯誤
-      throw new Error(`System fetch quotaModalState over ${maxRetryTime} times per ${delayMinutesTime}s`)
-
+      throw new Error(`System fetch quotaModalState over ${maxRetryTime} times per ${delayMinutesTime}s`);
     } else {
       yield put(getQuotaModelStatusAction.successAction());
       // yield put(getQuotaModelStatusActions.fulfilled);
@@ -110,11 +106,9 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
 
     // TODO:
     // NOTICE: 要根據此狀態將 UI release
-
   } catch (error) {
     yield put(getQuotaModelStatusAction.failureAction());
     // yield put(getQuotaModelStatusActions.rejected);
     yield catchSagaError(error);
-
   }
 }

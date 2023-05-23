@@ -1,9 +1,10 @@
 import { takeLatest } from 'redux-saga/effects';
+
 import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
+import { LoginPageUseCaseActionsInstance } from './index';
 import { userGetOTPSaga } from './userGetOTPSaga';
 import { userLoginSaga } from './userLoginSaga';
 import { userResendSaga } from './userResendSaga';
-import { LoginPageUseCaseActionsInstance } from './index';
 
 export function* watchLoginPageSaga() {
   console.log('[app][saga] 1.3');
@@ -14,21 +15,9 @@ export function* watchLoginPageSaga() {
   // yield takeLatest(LoginPageSataActions.user.getOTP.type, userGetOTPSaga);
   // yield takeLatest(LoginPageSataActions.user.login.type, userLoginSaga);
 
-  yield takeLatest(
-    LoginPageUseCaseActionsInstance.user.getOTP.type,
-    errorFallback,
-    userGetOTPSaga
-  );
-  yield takeLatest(
-    LoginPageUseCaseActionsInstance.user.login.type,
-    errorFallback,
-    userLoginSaga
-  );
-  yield takeLatest(
-    LoginPageUseCaseActionsInstance.system.resendSeconds.type,
-    errorFallback,
-    userResendSaga
-  );
+  yield takeLatest(LoginPageUseCaseActionsInstance.user.getOTP.type, errorFallback, userGetOTPSaga);
+  yield takeLatest(LoginPageUseCaseActionsInstance.user.login.type, errorFallback, userLoginSaga);
+  yield takeLatest(LoginPageUseCaseActionsInstance.system.resendSeconds.type, errorFallback, userResendSaga);
   // } catch (error) {
   //   yield catchSagaError(error)
   // }

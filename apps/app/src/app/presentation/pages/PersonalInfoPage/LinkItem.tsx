@@ -11,7 +11,7 @@ const LinkItem = (props: LinkItem) => {
   const navigate = useNavigate();
   return (
     <div
-      className={`flex flex-row justify-between items-center py-1`}
+      className={`flex flex-row items-center justify-between py-1`}
       onClick={() => {
         navigate(props.to, {
           state: props.state,

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { Page } from '@frontend/mobile/shared/ui';
 
 export const CameraSvgIconWrapper = styled.div`

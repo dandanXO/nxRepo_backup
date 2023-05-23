@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { IThemeConfig, Page } from '@frontend/mobile/shared/ui';
 
 export const CustomPage = styled.div<{ theme: IThemeConfig }>`

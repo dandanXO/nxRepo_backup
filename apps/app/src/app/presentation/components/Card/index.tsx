@@ -1,7 +1,9 @@
-import styled from 'styled-components';
 import React from 'react';
-import { flexCreator } from '@frontend/mobile/shared/ui';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+
+import { flexCreator } from '@frontend/mobile/shared/ui';
+
 import { i18nComponents } from '../i18n/translations';
 
 const CardStyled = styled.div`
@@ -42,8 +44,7 @@ const HotTag = styled(triangle)`
     height: 20px;
   }
   :before {
-    transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707)
-      translate(0, -50%);
+    transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707) translate(0, -50%);
   }
   :after {
     transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414) translate(50%);

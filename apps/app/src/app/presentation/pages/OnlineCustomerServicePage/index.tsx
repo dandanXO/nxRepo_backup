@@ -1,7 +1,8 @@
-import { Navigation } from '../../components/layouts/Navigation';
-import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+
 import { RootState } from '../../../reduxStore';
+import { Navigation } from '../../components/layouts/Navigation';
 import { Page } from '../../components/layouts/Page';
 
 const OnlineCustomerServicePage = () => {
@@ -17,15 +18,10 @@ const OnlineCustomerServicePage = () => {
         }}
       />
       {indexPage?.indexAPI?.customerServiceUrl ? (
-        <iframe
-          className={`w-full grow`}
-          src={indexPage?.indexAPI?.customerServiceUrl}
-          title=""
-        />
-      ): <div>
-        Didn't supported it
-      </div>}
-
+        <iframe className={`w-full grow`} src={indexPage?.indexAPI?.customerServiceUrl} title="" />
+      ) : (
+        <div>Didn't supported it</div>
+      )}
     </Page>
   );
 };

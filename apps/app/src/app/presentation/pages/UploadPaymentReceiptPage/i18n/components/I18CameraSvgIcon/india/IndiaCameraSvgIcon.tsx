@@ -12,14 +12,7 @@ const IndiaCameraSvgIcon = () => {
     >
       <defs>
         <clipPath id="a">
-          <rect
-            width="50"
-            height="50"
-            transform="translate(2527 886)"
-            fill="none"
-            stroke="#707070"
-            strokeWidth="1"
-          />
+          <rect width="50" height="50" transform="translate(2527 886)" fill="none" stroke="#707070" strokeWidth="1" />
         </clipPath>
       </defs>
       <g transform="translate(-2527 -886)" clipPath="url(#a)">

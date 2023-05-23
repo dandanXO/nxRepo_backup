@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import { Overlay } from '@frontend/mobile/shared/ui';
 import { withTranslation } from 'react-i18next';
-import { i18nRepaymentModal } from './i18n/translations';
-import useRepayCreate from '../../hooks/useRepayCreate';
-import useRepayTypes from '../../hooks/useRepayTypes';
-import { renderByCountry } from '../../../modules/i18n';
+import { useLocation, useNavigate } from 'react-router';
+
+import { Overlay } from '@frontend/mobile/shared/ui';
+
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
+import { environment } from '../../../../environments/environment';
+import { renderByCountry } from '../../../modules/i18n';
+import useRepayCreate from '../../hooks/useRepayCreate';
+import useRepayTypes from '../../hooks/useRepayTypes';
 import IndiaRepaymentModal from './i18n/IndiaRepaymentModal';
 import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
-import { environment } from '../../../../environments/environment';
+import { i18nRepaymentModal } from './i18n/translations';
 
 type paymentMethodValueType = {
   type: string;
@@ -42,18 +44,10 @@ const RepaymentModal = (props: any) => {
   const [radioValue, setRadioValue] = useState('balance');
 
   // NOTE: 變動數值
-  const [balanceValue, setBalanceValue] = useState(
-    `${environment.currency} ${balance}`
-  );
+  const [balanceValue, setBalanceValue] = useState(`${environment.currency} ${balance}`);
 
   // NOTE: 付款方式
-  const {
-    triggerGetList,
-    isRepayTypesFetching,
-    repayTypesList,
-    repayType,
-    setRepayType,
-  } = useRepayTypes();
+  const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
 
   useEffect(() => {
     triggerGetList({ orderNo: orderNo });
@@ -71,20 +65,10 @@ const RepaymentModal = (props: any) => {
         // other
         props.setShowRepaymentAdsModal(true); */
     const payType = repayType && repayType.value;
-    const coupon =
-      radioValue === 'balance' && location.state.coupon
-        ? location.state.coupon
-        : null;
+    const coupon = radioValue === 'balance' && location.state.coupon ? location.state.coupon : null;
     const repaymentAmount =
-      parseInt(balanceValue.replace(`${environment.currency}`, '').trim()) -
-      Number(coupon?.discountAmount || 0);
-    handlePostRepayCreate(
-      false,
-      orderNo,
-      repaymentAmount,
-      payType,
-      coupon?.couponNo || null
-    );
+      parseInt(balanceValue.replace(`${environment.currency}`, '').trim()) - Number(coupon?.discountAmount || 0);
+    handlePostRepayCreate(false, orderNo, repaymentAmount, payType, coupon?.couponNo || null);
   };
 
   return (
@@ -93,9 +77,7 @@ const RepaymentModal = (props: any) => {
       content={() => {
         return (
           <>
-            <div className="text-lg font-bold text-black">
-              {props.t('Repay')}
-            </div>
+            <div className="text-lg font-bold text-black">{props.t('Repay')}</div>
             {renderByCountry(
               {
                 [IndiaCountry.country]: (

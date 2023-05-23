@@ -1,6 +1,7 @@
-import * as Sentry from "@sentry/react";
-import sentryEnv from "../src/environments/sentry.json";
-import {AppEnvironment} from "../src/app/modules/appEnvironment";
+import * as Sentry from '@sentry/react';
+
+import { AppEnvironment } from '../src/app/modules/appEnvironment';
+import sentryEnv from '../src/environments/sentry.json';
 
 const environmentName = AppEnvironment.getEnvironmentName();
 
@@ -12,7 +13,7 @@ sentryConfig.release = AppInfo.COMMITHASH;
 Sentry.init(sentryConfig);
 
 window.onerror = (message, source, lineno, colno, error) => {
-  console.log("debug.window.onerror");
+  console.log('debug.window.onerror');
   console.log(`message: ${message}`);
   console.log(`source: ${source}`);
   console.log(`lineno: ${lineno}`);
@@ -20,7 +21,7 @@ window.onerror = (message, source, lineno, colno, error) => {
   console.log(`error: ${error}`);
 
   const frontendError = new Error();
-  frontendError.name = "window.onerror";
+  frontendError.name = 'window.onerror';
   frontendError.message = JSON.stringify({
     message,
     source,

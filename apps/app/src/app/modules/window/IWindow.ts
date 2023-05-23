@@ -1,6 +1,7 @@
+import { IThemeConfig } from '@frontend/mobile/shared/ui';
+
 import './isInAndroid';
 import './onUploadKycBackgroundData';
-import { IThemeConfig } from '@frontend/mobile/shared/ui';
 
 export enum AndroidPage {
   LOGIN = 'LOGIN',

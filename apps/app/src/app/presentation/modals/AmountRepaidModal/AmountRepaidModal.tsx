@@ -1,16 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Overlay, flexCreator, ListItem } from '@frontend/mobile/shared/ui';
-import { withTranslation, WithTranslation } from 'react-i18next';
-import { i18nAmountRepaidModal } from './i18n/translations';
-import { GetLoanDetailResponse } from '../../../api/rtk/old/getLoanDetail';
-import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
-import { useLocation, useNavigate } from 'react-router';
-import { PagePathEnum } from '../../pages/PagePathEnum';
-import Divider from '../../components/Divider';
 import moment from 'moment';
+import React from 'react';
+import { WithTranslation, withTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
+import styled from 'styled-components';
+
+import { ListItem, Overlay, flexCreator } from '@frontend/mobile/shared/ui';
+
+import { GetLoanDetailResponse } from '../../../api/rtk/old/getLoanDetail';
+import { getToken } from '../../../modules/querystring/getToken';
+import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
+import Divider from '../../components/Divider';
 import Money from '../../components/Money.tsx';
-import {getToken} from "../../../modules/querystring/getToken";
+import { PagePathEnum } from '../../pages/PagePathEnum';
+import { i18nAmountRepaidModal } from './i18n/translations';
+
 const ModalContentStyled = styled.div`
   padding: 0 12px;
 `;
@@ -39,16 +42,12 @@ type AmountRepaidRecordsProps = Pick<GetLoanDetailResponse, 'repayRecords'> & {
 interface RecordStyledProps {
   status: string;
 }
-const Record = (props: {
-  repayDate: string;
-  repayAmount: React.ReactElement;
-  repayType: string;
-}) => {
+const Record = (props: { repayDate: string; repayAmount: React.ReactElement; repayType: string }) => {
   const { repayDate, repayAmount, repayType } = props;
   return (
     <>
       <RecordStyled status={repayType}>
-        <div className={`flex justify-between my-1 text-black text-xs `}>
+        <div className={`my-1 flex justify-between text-xs text-black `}>
           <div>{repayDate}</div>
           <div>{repayAmount}</div>
         </div>
@@ -89,16 +88,12 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
         content={(hide: () => void) => {
           return (
             <div>
-              <div className="text-sm font-bold mt-[-10px]">
-                {t('Amount Repaid Record')}
-              </div>
+              <div className="mt-[-10px] text-sm font-bold">{t('Amount Repaid Record')}</div>
               <Divider />
               {state.repayRecords?.length === 0 ? (
                 <NoDataStyled>{t('No paid records yet')}</NoDataStyled>
               ) : (
-                <ModalContentStyled>
-                  {renderRecordList(state)}
-                </ModalContentStyled>
+                <ModalContentStyled>{renderRecordList(state)}</ModalContentStyled>
               )}
             </div>
           );
@@ -110,6 +105,4 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
   );
 };
 
-export default withTranslation(i18nAmountRepaidModal.namespace)(
-  AmountRepaidModal
-);
+export default withTranslation(i18nAmountRepaidModal.namespace)(AmountRepaidModal);

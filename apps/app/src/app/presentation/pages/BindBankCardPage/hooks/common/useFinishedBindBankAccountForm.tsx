@@ -1,14 +1,13 @@
 import { useCallback, useState } from 'react';
-import { InputValue, Modal } from '@frontend/mobile/shared/ui';
 import { useTranslation } from 'react-i18next';
-import { i18nBankBindAccountPage } from '../../translations';
-import {
-  BankVendor,
-  GetBindCardDropListResponse,
-} from '../../../../../api/rtk/old/GetBindCardDropList';
-import { BindBankCardPageEvents } from '../../event';
+
+import { InputValue, Modal } from '@frontend/mobile/shared/ui';
+
+import { BankVendor, GetBindCardDropListResponse } from '../../../../../api/rtk/old/GetBindCardDropList';
+import { changeLocationHref } from '../../../../../modules/errorHandler';
 import { SentryModule } from '../../../../../modules/sentry';
-import {changeLocationHref} from "../../../../../modules/errorHandler";
+import { BindBankCardPageEvents } from '../../event';
+import { i18nBankBindAccountPage } from '../../translations';
 
 type IUseFinishedBindBankAccountPage = {
   // NOTICE: Common
@@ -30,9 +29,7 @@ type IUseFinishedBindBankAccountPage = {
   bankAccountValue?: any;
 };
 
-export const useFinishedBindBankAccountForm = (
-  props: IUseFinishedBindBankAccountPage
-) => {
+export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   const navigateToAPP = () => {
@@ -79,8 +76,7 @@ export const useFinishedBindBankAccountForm = (
   if (props.bindCardDropListData && props.bindCardDropListData.availableBanks) {
     // NOTICE: bankAccountValue 可能為 0
     if (typeof props.bankAccountValue?.value === 'number') {
-      targetBankAccount =
-        props.bindCardDropListData.availableBanks[props.bankAccountValue.value];
+      targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue.value];
     }
   }
 
@@ -137,10 +133,7 @@ export const useFinishedBindBankAccountForm = (
       .catch(() => {
         SentryModule.captureMessage(
           BindBankCardPageEvents.UserBindBankcard.name,
-          BindBankCardPageEvents.UserBindBankcard.getTags(
-            'failure',
-            requestBody
-          )
+          BindBankCardPageEvents.UserBindBankcard.getTags('failure', requestBody)
         );
       });
   }, [
@@ -157,9 +150,7 @@ export const useFinishedBindBankAccountForm = (
   ]);
 
   return {
-    isFormPending: props.postBankBindSave
-      ? props.isLoadingPostBankBindSave
-      : props.isLoadingPostBankBindSaveToPK,
+    isFormPending: props.postBankBindSave ? props.isLoadingPostBankBindSave : props.isLoadingPostBankBindSaveToPK,
     confirm,
   };
 };
