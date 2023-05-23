@@ -1,6 +1,6 @@
 {
     "parser": "@typescript-eslint/parser",
-    "ignorePatterns": ["!**/*", "cypress/**/*"],
+    "ignorePatterns": ["!**/*"],
     "plugins": [
         "react",
         "@typescript-eslint"
