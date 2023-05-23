@@ -1,5 +1,13 @@
 {
+
   "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "debug": true,
+        "browserslistEnv": ".browserslistrc"
+      }
+    ],
     [
       "@nrwl/react/babel",
       {
@@ -8,7 +16,6 @@
     ]
   ],
   "plugins": [
-    "@babel/plugin-transform-async-to-generator",
     ["styled-components", { "pure": true, "ssr": true }]
   ]
 }
