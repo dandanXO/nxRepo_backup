@@ -8,7 +8,7 @@ import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
 import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
-import { isInAndroid } from '../../../modules/window/isInAndroid';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import IndiaRepaymentDetailPage from './i18n/IndiaRepaymentDetailPage';
@@ -30,7 +30,7 @@ const RepaymentDetailPage = (props: any) => {
 
   return (
     <div>
-      {!isInAndroid() && (
+      {!isShowNavigation() && (
         <Navigation
           title={'Payment Details'}
           back={() => {

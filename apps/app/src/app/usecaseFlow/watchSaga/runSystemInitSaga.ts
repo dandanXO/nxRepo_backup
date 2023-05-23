@@ -1,5 +1,5 @@
 import { Location } from 'history';
-import {call, fork, put, select, all} from 'redux-saga/effects';
+import { all, call, fork, put, select } from 'redux-saga/effects';
 
 import { Service } from '../../api';
 import { alertModal } from '../../api/base/alertModal';
@@ -80,13 +80,12 @@ export function* runSystemInitSaga() {
       // TODO: refactor me
       try {
         // NOTE: Posthog
-        yield call(Posthog.init)
+        yield call(Posthog.init);
       } catch (error) {
         console.log(error);
         // NOTICE: 以下這行會導致上層 saga 中斷
         // yield catchSagaError(error);
       }
-
 
       // NOTE: Only for H5
       appStore.dispatch(SystemCaseActions.InitSaga());

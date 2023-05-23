@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import NoDataImage from '../../../../assets/NoData.svg';
 import { useLazyGetCouponListQuery } from '../../../api/rtk';
 import { GetCouponListRequest } from '../../../api/userService/GetCouponListRequest';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import Coupon from '../../components/Coupon';
 import { Tags } from '../../components/Tag';
+import { Navigation } from '../../components/layouts/Navigation';
 import { Page } from '../../components/layouts/Page';
 
 const MyCouponListPage = () => {
+  const navigate = useNavigate();
   const [listStatus, setListStatus] = useState('Usable');
 
   const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
@@ -33,6 +37,15 @@ const MyCouponListPage = () => {
 
   return (
     <Page className="flex flex-col">
+      {!isShowNavigation() && (
+        <Navigation
+          title={'My Coupon'}
+          back={() => {
+            navigate(-1);
+          }}
+        />
+      )}
+
       <div className={`sticky top-[0px] flex flex-row justify-between bg-white py-3 px-5`}>
         <Tags
           items={['Usable', 'Used', 'Expired']}
