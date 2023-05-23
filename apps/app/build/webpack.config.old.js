@@ -69,7 +69,7 @@ module.exports = (config, context) => {
     // devtool: "source-map",
     // NOTE: Android 9 失敗
     // devtool: "inline-source-map",
-
+    target: ['es5'],
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
       polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
