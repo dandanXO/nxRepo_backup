@@ -86,11 +86,8 @@ const RepamentCouponModal = loadable(
 const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ '../modals/IBANFinderModal'));
 
 const SystemCouponModal = loadable(
-    () =>
-      import(
-        /* webpackChunkName: "SystemCouponModal" */ '../modals/SystemCouponModal'
-      )
-  );
+  () => import(/* webpackChunkName: "SystemCouponModal" */ '../modals/SystemCouponModal')
+);
 
 export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
@@ -157,14 +154,8 @@ export const AppRouter = () => {
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
 
-        <Route
-          path="/v2/coupon-modal-content"
-          element={<CouponModalContentAndroidWebviewPage />}
-        />
-        <Route
-          path="/v2/system-coupon-modal"
-          element={<SystemCouponModal />}
-        />
+        <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
+        <Route path="/v2/system-coupon-modal" element={<SystemCouponModal />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
 

@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { GetIndexRequest } from '../indexService/GetIndexRequest';
 import { GetIndexResponse } from '../indexService/GetIndexResponse';
+import { GetNotificationResponse } from '../indexService/GetNotificationResponse';
 import { GetLoanDetailRequest } from '../loanService/GetLoanDetailRequest';
 import { GetLoanDetailResponse } from '../loanService/GetLoanDetailResponse';
 import { GetLoanRecordListReponse } from '../loanService/GetLoanRecordListReponse';
@@ -18,7 +19,6 @@ import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicab
 import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
 import { GetCouponListRequest } from '../userService/GetCouponListRequest';
 import { GetCouponListResponse } from '../userService/GetCouponResponse';
-import { GetNotificationResponse } from '../indexService/GetNotificationResponse';
 import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
 import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
 import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
@@ -113,12 +113,12 @@ export const APIV3 = createApi({
 
     // NOTE: /api/v3/notification 取得推送用户讯息
     getNotificationList: builder.query<GetNotificationResponse, null>({
-        query: (query: null) => ({
-          method: 'get',
-          url: `/notification`,
-          params: query,
-        }),
+      query: (query: null) => ({
+        method: 'get',
+        url: `/notification`,
+        params: query,
       }),
+    }),
   }),
 });
 
@@ -127,7 +127,7 @@ export const {
   useLazyGetCouponApplicableListQuery,
   usePostTraceBehaviorMutation,
   useLazyGetCouponListQuery,
-  useLazyGetNotificationListQuery
+  useLazyGetNotificationListQuery,
 } = APIV3;
 
 export const API = createApi({
