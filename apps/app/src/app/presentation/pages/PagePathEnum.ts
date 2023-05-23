@@ -17,4 +17,3 @@ export enum PagePathEnum {
   CustomerServicePage = '/v2/customer-service',
   IBANFinderPage = '/v2/iban-finder',
 }
-

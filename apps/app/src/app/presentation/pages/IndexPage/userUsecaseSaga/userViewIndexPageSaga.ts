@@ -1,10 +1,7 @@
 // NOTE: Action: UserApplyProduct
 import { call, put, select, fork, all } from 'redux-saga/effects';
 import { Service } from '../../../../api';
-import {
-  indexPageSlice,
-  InitialState,
-} from '../../../../reduxStore/indexPageSlice';
+import { indexPageSlice, InitialState } from '../../../../reduxStore/indexPageSlice';
 import { USER_AUTH_STATE } from '../../../../domain/user/USER_AUTH_STATE';
 import { SystemCaseActions } from '../../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 import { GetIndexResponse } from '../../../../api/indexService/GetIndexResponse';
@@ -14,10 +11,9 @@ import { RootState } from '../../../../reduxStore';
 import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
 import { getToken } from '../../../../modules/querystring/getToken';
 import { systemCallGetUserInfoSaga } from '../../../../usecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
-import {systemMainCountdownSaga} from "./systemMainCountdownSaga";
+import { systemMainCountdownSaga } from './systemMainCountdownSaga';
 
 export function* userViewIndexPageSaga(action: any) {
-
   // NOTICE: 防止錯誤後無法重新 watch
   try {
     console.log('[app][saga] userViewIndexPageSaga');
@@ -37,33 +33,23 @@ export function* userViewIndexPageSaga(action: any) {
 
     yield call(systemCallGetUserInfoSaga);
 
-    const status: number = yield select(
-      (state: RootState) => state.indexPage.user.state
-    );
+    const status: number = yield select((state: RootState) => state.indexPage.user.state);
 
     // NOTE: 使用者尚未認證
     if (status === USER_AUTH_STATE.ready) {
-      const packageID: string = yield select(
-        (state: RootState) => state.app.androidAppInfo?.packageId
-      );
-      const openIndexResponse: GetOpenIndexResponse = yield call(
-        Service.IndexService.getOpenIndex,
-        { packageId: packageID }
-      );
+      const packageID: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId);
+      const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, {
+        packageId: packageID,
+      });
       yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
-
     } else {
       // NOTE: 使用者有進行過認證
-      const indexResponse: GetIndexResponse = yield call(
-        Service.IndexService.getIndex,
-        {}
-      );
+      const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
       yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
 
       // NOTE: 是否系統執行非同步 - 倒數計時
       yield call(systemMainCountdownSaga);
     }
-
   } catch (error) {
     yield catchSagaError(error);
   }

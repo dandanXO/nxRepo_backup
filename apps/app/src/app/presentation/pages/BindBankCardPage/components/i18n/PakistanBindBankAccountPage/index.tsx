@@ -64,10 +64,8 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     onIbanBlur: onMobileWalletIbanBlur,
     confirm: confirmMobileWallet,
   } = usePakistanMobileWalletForm({
-    isPostBankBindSaveToPKMutationLoading:
-      props.isPostBankBindSaveToPKMutationLoading || false,
-    triggerPostBankBindSaveToPKMutation:
-      props.triggerPostBankBindSaveToPKMutation,
+    isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
+    triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
     bindCardDropListData: props.bindCardDropListData,
   });
 
@@ -112,18 +110,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         disable={props.bindCardDropListData?.showBankOption || false}
       />
 
-      <div
-        className={
-          'bg-cstate-info-variant text-cstate-info-main rounded-md px-3 py-2 mb-4 text-xs font-bold '
-        }
-      >
-        <span className={'underline font-bold'}>
-          Once added, it cannot be edited anymore.{' '}
-        </span>
-        <span>
-          Please ensure that the account belongs to you, and that all
-          information is correct and accurate.
-        </span>
+      <div className={'bg-cstate-info-variant text-cstate-info-main rounded-md px-3 py-2 mb-4 text-xs font-bold '}>
+        <span className={'underline font-bold'}>Once added, it cannot be edited anymore. </span>
+        <span>Please ensure that the account belongs to you, and that all information is correct and accurate.</span>
       </div>
 
       {chooseBindMethodValue === 0 ? (

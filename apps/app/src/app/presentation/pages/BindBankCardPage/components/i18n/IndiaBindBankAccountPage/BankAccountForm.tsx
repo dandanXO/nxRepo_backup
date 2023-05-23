@@ -12,12 +12,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
         <div className="text-ctext-primary text-xs mb-1">
           {'For KYC, your Cardholder name and PAN card name should be match.'}
         </div>
-        <Input
-          className="mb-3 text-sm"
-          label={'Cardholder Name'}
-          value={props.cardholderName}
-          disabled
-        />
+        <Input className="mb-3 text-sm" label={'Cardholder Name'} value={props.cardholderName} disabled />
         <Input
           className="mb-3 text-sm"
           label={'IFSC Code (11 digits)'}
@@ -42,12 +37,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
-        <Input
-          className="mb-4 text-sm"
-          label={'UPI ID'}
-          value={props.upiData.data}
-          onChange={props.onUPIIDChange}
-        />
+        <Input className="mb-4 text-sm" label={'UPI ID'} value={props.upiData.data} onChange={props.onUPIIDChange} />
       </Form>
       <div className="mb-4">
         <Button

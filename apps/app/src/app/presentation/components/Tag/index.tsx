@@ -32,17 +32,12 @@ const Tag = (props: ITag) => {
   return (
     <div
       onClick={props.onClick}
-      className={cx(
-        `font-sm border border-solid py-0.5 px-3 grow text-center ${props.style} `,
-        {
-          'rounded-xl': layoutType === 1,
-          rounded: [2, 3].some((type) => type === layoutType),
-          'border-cstate-disable-main bg-cbg-secondary text-cstate-disable-main':
-            props.active === false,
-          'border-primary-main bg-primary-assistant text-primary-main':
-            props.active,
-        }
-      )}
+      className={cx(`font-sm border border-solid py-0.5 px-3 grow text-center ${props.style} `, {
+        'rounded-xl': layoutType === 1,
+        rounded: [2, 3].some((type) => type === layoutType),
+        'border-cstate-disable-main bg-cbg-secondary text-cstate-disable-main': props.active === false,
+        'border-primary-main bg-primary-assistant text-primary-main': props.active,
+      })}
     >
       {props.text}
     </div>

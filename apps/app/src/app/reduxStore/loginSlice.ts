@@ -10,10 +10,7 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    updateResendSeconds: (
-      state,
-      action: PayloadAction<UserResendSecondsActionPayload['resendSeconds']>
-    ) => {
+    updateResendSeconds: (state, action: PayloadAction<UserResendSecondsActionPayload['resendSeconds']>) => {
       state.resendSeconds = action.payload;
     },
   },

@@ -1,19 +1,19 @@
-import {AppMode, AppStorage} from "../modules/localstorage";
+import { AppMode, AppStorage } from '../modules/localstorage';
 
 export enum AppModeEnum {
-  "SimpleWebView" = "SimpleWebView",
-  "IndexWebview" = "IndexWebview",
-  "PureH5" = "PureH5",
-  "None" ="None"
+  'SimpleWebView' = 'SimpleWebView',
+  'IndexWebview' = 'IndexWebview',
+  'PureH5' = 'PureH5',
+  'None' = 'None',
 }
 
 export class AppModeModel {
   static setMode(mode: AppMode) {
-    AppStorage.set("appMode", mode ? mode : "");
+    AppStorage.set('appMode', mode ? mode : '');
   }
 
   static getMode(): string {
-    const modeStr = localStorage.getItem('appMode') || ""
+    const modeStr = localStorage.getItem('appMode') || '';
     return modeStr;
   }
 
@@ -31,7 +31,7 @@ export class AppModeModel {
   // }
 
   static clear(key: string) {
-    localStorage.removeItem(key)
+    localStorage.removeItem(key);
   }
 }
 

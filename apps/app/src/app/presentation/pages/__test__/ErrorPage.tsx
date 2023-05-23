@@ -29,11 +29,7 @@ export const ErrorPage = () => {
       {didCatch ? (
         <div>
           <p>An error has been caught: {error.message}</p>
-          <Button
-            dataTestingID={'apply'}
-            text={'Reset Error'}
-            onClick={() => reset()}
-          />
+          <Button dataTestingID={'apply'} text={'Reset Error'} onClick={() => reset()} />
         </div>
       ) : (
         <ErrorBoundary>

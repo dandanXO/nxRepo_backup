@@ -10,14 +10,12 @@ import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 const MyCouponListPage = () => {
   const [listStatus, setListStatus] = useState('Usable');
 
-  const [
-    triggerGetList,
-    { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized },
-  ] = useLazyGetCouponListQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+  const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
+    useLazyGetCouponListQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
   const statusEnum = {
     Usable: 'UNUSED',
@@ -35,9 +33,7 @@ const MyCouponListPage = () => {
 
   return (
     <Page className="flex flex-col">
-      <div
-        className={`flex flex-row py-3 px-5 justify-between sticky top-[0px] bg-white`}
-      >
+      <div className={`flex flex-row py-3 px-5 justify-between sticky top-[0px] bg-white`}>
         <Tags
           items={['Usable', 'Used', 'Expired']}
           layoutType={2}
@@ -46,9 +42,7 @@ const MyCouponListPage = () => {
         />
       </div>
       <div className="mx-4">
-        {currentData &&
-        currentData.records &&
-        currentData.records.length > 0 ? (
+        {currentData && currentData.records && currentData.records.length > 0 ? (
           currentData?.records?.map((i) => {
             return (
               <Coupon
@@ -59,20 +53,12 @@ const MyCouponListPage = () => {
                 couponContent={i.couponContent}
                 status={listStatus === 'Usable' ? 'normal' : 'disabled'}
                 key={i.couponId}
-                buttonText={
-                  listStatus === 'Usable'
-                    ? 'USE NOW'
-                    : i.redeemed
-                    ? 'USED'
-                    : 'EXPIRED'
-                }
+                buttonText={listStatus === 'Usable' ? 'USE NOW' : i.redeemed ? 'USED' : 'EXPIRED'}
               />
             );
           })
         ) : (
-          <div className="flex justify-center items-center p-3 grow">
-            There are no orders currently
-          </div>
+          <div className="flex justify-center items-center p-3 grow">There are no orders currently</div>
         )}
       </div>
     </Page>

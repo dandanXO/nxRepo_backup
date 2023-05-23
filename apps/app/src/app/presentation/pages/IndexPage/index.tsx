@@ -44,7 +44,7 @@ import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail'
 import { chain, add, multiply, divide, subtract, evaluate } from 'mathjs';
 import { PagePathEnum } from '../PagePathEnum';
 import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
-import {getToken} from "../../../modules/querystring/getToken";
+import { getToken } from '../../../modules/querystring/getToken';
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -119,17 +119,13 @@ const IndexPage = () => {
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, []);
 
-
   const navigate = useNavigate();
 
   // NOTICE: 推薦產品
   const [quotaBarTargetPrice, setQuotaBarTargetPrice] = useState(0);
-  const [calculatingProducts, setCalculatingProducts] =
-    useState<FinalProductType[]>();
-  const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] =
-    useState(0);
-  const [calculatingSummary, setCalculatingSummary] =
-    useState<FinalProductsSummary>();
+  const [calculatingProducts, setCalculatingProducts] = useState<FinalProductType[]>();
+  const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] = useState(0);
+  const [calculatingSummary, setCalculatingSummary] = useState<FinalProductsSummary>();
 
   // console.log("calculatingProducts", calculatingProducts);
 
@@ -151,8 +147,7 @@ const IndexPage = () => {
         } else {
           // console.log("currentTotalPrice", currentSelectedProductsPrice)
           // NOTE: 假如加入此商品沒爆掉。
-          const tempCurrentSelectedProductsPrice =
-            currentSelectedProductsPrice + product.max;
+          const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
 
           if (tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
             // NOTE: 實際加入此商品
@@ -170,8 +165,7 @@ const IndexPage = () => {
             // console.log("add product.max", product.max);
 
             // NOTE: 實際加入後商品的總額
-            currentSelectedProductsPrice =
-              currentSelectedProductsPrice + product.max;
+            currentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
             // console.log("added product currentTotalPrice", currentSelectedProductsPrice)
           } else {
             // 不能再借了
@@ -186,8 +180,7 @@ const IndexPage = () => {
 
       // NOTICE: second round
       // 還差多少要補
-      const remainDistributingQuota =
-        quotaBarTargetPrice - currentSelectedProductsPrice;
+      const remainDistributingQuota = quotaBarTargetPrice - currentSelectedProductsPrice;
       // console.log("最後要補的總商品金額", remainDistributingQuota);
 
       // 目前商品無法滿足，往下找並且計算範圍
@@ -199,11 +192,7 @@ const IndexPage = () => {
       while (processSuccess && nextIndex <= maxIndex) {
         const nextProduct = indexPageState.indexAPI?.products[nextIndex];
         // console.log("nextProduct", nextProduct);
-        if (
-          nextProduct &&
-          nextProduct.min <= remainDistributingQuota &&
-          remainDistributingQuota < nextProduct.max
-        ) {
+        if (nextProduct && nextProduct.min <= remainDistributingQuota && remainDistributingQuota < nextProduct.max) {
           // console.log("目前商品可以不借到 max 來達到滿足")
           // console.log("只借: ", remainDistributingQuota);
           // NOTE: 實際商品最後借到的金額
@@ -218,8 +207,7 @@ const IndexPage = () => {
             },
           };
           currentSelectedProducts.push(finalProduct);
-          currentSelectedProductsPrice =
-            currentSelectedProductsPrice + remainDistributingQuota;
+          currentSelectedProductsPrice = currentSelectedProductsPrice + remainDistributingQuota;
           processSuccess = false;
         } else {
           // console.log("下個產品最小金額無法滿足剩餘要借的")
@@ -229,16 +217,12 @@ const IndexPage = () => {
       // console.log("currentSelectedProducts", currentSelectedProducts);
       // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice);
 
-      const keyFeeMapping: any =
-        indexPageState.indexAPI?.chargeFeeDetails.reduce(
-          (previousMap, currentValue) => {
-            return {
-              ...previousMap,
-              [currentValue.key]: currentValue.counting,
-            };
-          },
-          {}
-        );
+      const keyFeeMapping: any = indexPageState.indexAPI?.chargeFeeDetails.reduce((previousMap, currentValue) => {
+        return {
+          ...previousMap,
+          [currentValue.key]: currentValue.counting,
+        };
+      }, {});
       // console.log("keyFeeMapping", keyFeeMapping);
 
       const finalProductsSummary = { ...initialFinalProductsSummary };
@@ -253,9 +237,7 @@ const IndexPage = () => {
             .done();
           // const disbursalPrice = product.calculating.finalLoanPrice * (1 - product.platformChargeFeeRate)
           const disbursalPrice = chain(
-            evaluate(
-              `${product.calculating.finalLoanPrice} * (1 - ${product.platformChargeFeeRate})`
-            )
+            evaluate(`${product.calculating.finalLoanPrice} * (1 - ${product.platformChargeFeeRate})`)
           )
             .round()
             .done();
@@ -284,40 +266,27 @@ const IndexPage = () => {
           // console.log("processingFee", processingFee);
           // console.log("serviceCharge", serviceCharge);
 
-          finalProductsSummary.loanAmount = chain(
-            finalProductsSummary.loanAmount
-          )
+          finalProductsSummary.loanAmount = chain(finalProductsSummary.loanAmount)
             .add(product.calculating.finalLoanPrice)
             .round()
             .done();
-          finalProductsSummary.interest = chain(finalProductsSummary.interest)
-            .add(interestPrice)
-            .round()
-            .done();
+          finalProductsSummary.interest = chain(finalProductsSummary.interest).add(interestPrice).round().done();
 
-          finalProductsSummary.processingFee = chain(
-            finalProductsSummary.processingFee
-          )
+          finalProductsSummary.processingFee = chain(finalProductsSummary.processingFee)
             .add(processingFee)
             .round()
             .done();
-          finalProductsSummary.serviceCharge = chain(
-            finalProductsSummary.serviceCharge
-          )
+          finalProductsSummary.serviceCharge = chain(finalProductsSummary.serviceCharge)
             .add(serviceCharge)
             .round()
             .done();
-          finalProductsSummary.disbursalAmount = chain(
-            finalProductsSummary.disbursalAmount
-          )
+          finalProductsSummary.disbursalAmount = chain(finalProductsSummary.disbursalAmount)
             .add(disbursalPrice)
             .round()
             .done();
 
           if (finalProductsSummary.repaymentDate) {
-            const afterDueDate = dueDate.isAfter(
-              finalProductsSummary.repaymentDate
-            );
+            const afterDueDate = dueDate.isAfter(finalProductsSummary.repaymentDate);
             if (afterDueDate) {
               finalProductsSummary.repaymentDate = dueDate;
             }
@@ -333,7 +302,6 @@ const IndexPage = () => {
     }
   }, [indexPageState.indexAPI?.products, quotaBarTargetPrice]);
 
-
   const applyDisable = useMemo(() => {
     let disable = false;
     // NOTICE: 主義下面判斷是否變成不能根據優先順序
@@ -348,50 +316,35 @@ const IndexPage = () => {
       disable = true;
     }
     return disable;
-  }, [
-    indexPageState.user.state,
-    indexPageState.order.state,
-    indexPageState.riskControl.state,
-    calculatingProducts,
-  ]);
+  }, [indexPageState.user.state, indexPageState.order.state, indexPageState.riskControl.state, calculatingProducts]);
 
   const applyHide = useMemo(() => {
     return [
       indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
-      indexPageState.riskControl.state ===
-        RISK_CONTROL_STATE.expired_refresh_one_time,
-      indexPageState.riskControl.state ===
-        RISK_CONTROL_STATE.expired_refresh_over_3,
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time,
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3,
       indexPageState.order.state === ORDER_STATE.reject,
       indexPageState.user.state === USER_AUTH_STATE.ready,
       indexPageState.user.state === USER_AUTH_STATE.authing,
       indexPageState.user.state === USER_AUTH_STATE.reject,
-      indexPageState.riskControl.state ===
-        RISK_CONTROL_STATE.expired_refresh_able &&
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
         indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
         indexPageState.order.state !== ORDER_STATE.hasOverdueOrder,
     ].some((condition) => condition === true);
-  }, [
-    indexPageState.riskControl.state,
-    indexPageState.order.state,
-    indexPageState.user.state,
-  ]);
+  }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state]);
 
   // NOTE: 是否重新獲取額度中
-  const { isLoading: isReacquireLoading, isSuccess, isError } = useSelector(
-    (state: RootState) => state.indexPage.api.reacquire
-  );
+  const {
+    isLoading: isReacquireLoading,
+    isSuccess,
+    isError,
+  } = useSelector((state: RootState) => state.indexPage.api.reacquire);
 
-  const countdown = useSelector(
-    (state: RootState) => state.indexPage.timeout.riskControlDate
-  );
+  const countdown = useSelector((state: RootState) => state.indexPage.timeout.riskControlDate);
   // console.log("countdown", countdown);
 
-  const refreshableCountdown = useSelector(
-    (state: RootState) => state.indexPage.timeout.refreshableDate
-  );
+  const refreshableCountdown = useSelector((state: RootState) => state.indexPage.timeout.refreshableDate);
   // console.log("refreshableCountdown", refreshableCountdown);
-
 
   // NOTE: User Event
   // TODO: refactor me
@@ -399,15 +352,13 @@ const IndexPage = () => {
     // NOTICE: empty guard
     if (!calculatingProducts) return;
 
-    const simpleProducts: ProductApplyDetail[] = calculatingProducts.map(
-      (product) => {
-        const simpleProduct: ProductApplyDetail = {
-          applyAmount: product.calculating.finalLoanPrice,
-          productId: product.productId,
-        };
-        return simpleProduct;
-      }
-    );
+    const simpleProducts: ProductApplyDetail[] = calculatingProducts.map((product) => {
+      const simpleProduct: ProductApplyDetail = {
+        applyAmount: product.calculating.finalLoanPrice,
+        productId: product.productId,
+      };
+      return simpleProduct;
+    });
 
     dispatch(
       IndexPageSagaAction.user.applyProductAction({
@@ -450,7 +401,6 @@ const IndexPage = () => {
         </div>
 
         <PageContent>
-
           {/*NOTE: 用戶尚未認證*/}
           {indexPageState.user.state === USER_AUTH_STATE.ready && (
             <>
@@ -465,25 +415,18 @@ const IndexPage = () => {
               <div className={'mb-3'}>
                 <ADBannerSection state={indexPageState} />
               </div>
-
             </>
           )}
 
           {/*NOTE: 用戶認證成功*/}
-          {
-            indexPageState.user.state === USER_AUTH_STATE.success
-            && indexPageState.riskControl.state === RISK_CONTROL_STATE.valid
-            && (
+          {indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.valid && (
               <div className={'mb-4 mt-6'}>
                 {/*NOTE: 顯示推薦產品列表*/}
-                <RecommendedProductsSection
-                  state={indexPageState}
-                  calculatingProducts={calculatingProducts || []}
-                />
+                <RecommendedProductsSection state={indexPageState} calculatingProducts={calculatingProducts || []} />
                 <Horizontal />
               </div>
-            )
-          }
+            )}
 
           {/*NOTE: 顯示可用額度圓餅雷達圖*/}
           {
@@ -495,13 +438,12 @@ const IndexPage = () => {
               indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
               // NOTICE: 額度不足
               indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount === 0,
-            ].some((condition) => condition === true)
-            && indexPageState.user.state === USER_AUTH_STATE.success
-            && (
-              <div className={'mb-3'}>
-                <LoanOverViewSection state={indexPageState} />
-              </div>
-            )
+            ].some((condition) => condition === true) &&
+              indexPageState.user.state === USER_AUTH_STATE.success && (
+                <div className={'mb-3'}>
+                  <LoanOverViewSection state={indexPageState} />
+                </div>
+              )
           }
 
           {/*TODO: refactor me*/}
@@ -516,52 +458,34 @@ const IndexPage = () => {
             <NoticeUserRejectedSection />
           ) : null}
 
-
           {/*TODO: refactor me*/}
-          {
-            indexPageState.user.state === USER_AUTH_STATE.success
-            && indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3
-            && (
+          {indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3 && (
               <NoticeUserReacquireOver3TimeSections />
-            )
-          }
+            )}
 
           {/*TODO: refactor me*/}
           {/*TODO:新客拒絕或是老客拒絕*/}
-          {
-            indexPageState.user.state === USER_AUTH_STATE.success
-            && indexPageState.order.state === ORDER_STATE.reject
-            && indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
-            && (
+          {indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.order.state === ORDER_STATE.reject &&
+            indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able && (
               <NoticeOrderOrQuotaRejectedSection />
-            )
-          }
+            )}
 
           {/*NOTE: 用戶通過認證，但沒有可用額度*/}
-          {
-            indexPageState.user.state === USER_AUTH_STATE.success
-            && indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
-            && (
+          {indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota && (
               <NoticeUserAuthedEmptyQuotaSection />
-            )
-          }
+            )}
 
           {/*TODO: refactor me*/}
           {/*NOTE: 顯示下次可借款倒數計時*/}
-          {
-            indexPageState.user.state === USER_AUTH_STATE.success
-            && indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
-            && (
-              indexPageState.order.state === ORDER_STATE.reject
-              || indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota
-            )
-            && (
-              <WelcomeBackAndReapplyInTimeSection
-                refreshableCountdown={refreshableCountdown}
-              />
-            )
-          }
-
+          {indexPageState.user.state === USER_AUTH_STATE.success &&
+            indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
+            (indexPageState.order.state === ORDER_STATE.reject ||
+              indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota) && (
+              <WelcomeBackAndReapplyInTimeSection refreshableCountdown={refreshableCountdown} />
+            )}
         </PageContent>
       </div>
 
@@ -582,10 +506,8 @@ const IndexPage = () => {
 
         {/*TODO: refactor*/}
         {/*// NOTE: Button - View Application Progress*/}
-        {(
-          indexPageState.user.state === USER_AUTH_STATE.authing
-          || indexPageState.user.state === USER_AUTH_STATE.reject
-        ) && (
+        {(indexPageState.user.state === USER_AUTH_STATE.authing ||
+          indexPageState.user.state === USER_AUTH_STATE.reject) && (
           <Button
             onClick={() => {
               navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
@@ -597,33 +519,27 @@ const IndexPage = () => {
 
         {isReacquireLoading && (
           <div className={'text-xs text-gray-500 text-center mb-3'}>
-            Please wait patiently for 30 seconds to two minutes while we review
-            the maximum amount you can borrow as quickly as possible.
+            Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as
+            quickly as possible.
           </div>
         )}
 
         {/*TODO: refactor*/}
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
-        {
-          indexPageState.user.state !== USER_AUTH_STATE.authing
-          && (
-            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
-            || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time
-          )
-          && indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder
-          && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder
-          && (
+        {indexPageState.user.state !== USER_AUTH_STATE.authing &&
+          (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able ||
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
+          indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
+          indexPageState.order.state !== ORDER_STATE.hasOverdueOrder && (
             <Button
               onClick={onClickReacquireCredit}
               dataTestingID={'reacquireCredit'}
               text={'Reacquire Credit Amount'}
               loading={isReacquireLoading}
               className={cx({
-                'bg-primary-main':
-                  indexPageState.riskControl.state ===
-                  RISK_CONTROL_STATE.expired_refresh_able,
-                  'bg-cstate-disable-main border-cstate-disable-main': isReacquireLoading,
+                'bg-primary-main': indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
+                'bg-cstate-disable-main border-cstate-disable-main': isReacquireLoading,
               })}
             />
           )}
@@ -636,15 +552,9 @@ const IndexPage = () => {
           <QuickRepaymentSummaryModal
             state={indexPageState}
             calculatingProducts={calculatingProducts || []}
-            calculatingSummary={
-              calculatingSummary || { ...initialFinalProductsSummary }
-            }
-            bankcardList={
-              modelState.quickRepaymentSummaryModal.bankcardList || []
-            }
-            selectedBankcardId={
-              modelState.quickRepaymentSummaryModal.selectedBankcardId
-            }
+            calculatingSummary={calculatingSummary || { ...initialFinalProductsSummary }}
+            bankcardList={modelState.quickRepaymentSummaryModal.bankcardList || []}
+            selectedBankcardId={modelState.quickRepaymentSummaryModal.selectedBankcardId}
             onChangeBankcardID={(id: number) => {
               dispatch(
                 modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
@@ -732,4 +642,3 @@ const IndexPage = () => {
   );
 };
 export default IndexPage;
-

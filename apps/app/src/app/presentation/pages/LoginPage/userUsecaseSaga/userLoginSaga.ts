@@ -17,8 +17,7 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
       }) as any
     );
 
-    const data: { meta: any; payload: LoginResponse; type: string } =
-      yield take(APIV3.endpoints.login.matchFulfilled);
+    const data: { meta: any; payload: LoginResponse; type: string } = yield take(APIV3.endpoints.login.matchFulfilled);
     if (data.payload.token) {
       const token = data.payload.token;
       // console.log("data.payload.token", data.payload.token)

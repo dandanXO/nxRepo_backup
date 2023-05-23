@@ -22,11 +22,7 @@ const APIBoundaryModal = (props: Props) => {
         'loan-agreement-modal z-10 w-screen h-screen bg-black bg-opacity-80 p-5 sticky top-0 bottom-0 flex flex-col justify-center items-center'
       }
     >
-      <div
-        className={
-          'modal-inner w-11/12 px-3 py-4 bg-white rounded-lg text-center'
-        }
-      >
+      <div className={'modal-inner w-11/12 px-3 py-4 bg-white rounded-lg text-center'}>
         <div className={'font-medium mb-3 flex flex-col items-center'}>
           <div>{props.title}</div>
         </div>

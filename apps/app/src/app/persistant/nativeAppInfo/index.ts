@@ -1,8 +1,8 @@
-import {IAndroidAppInfo} from './types/IAndroidAppInfo';
-import {environment} from '../../../environments/environment';
-import {AppFlag} from "../../../environments/flag";
-import {AppEnvironment} from "../../modules/appEnvironment";
-import {AppModeEnum} from "../appModeModel";
+import { IAndroidAppInfo } from './types/IAndroidAppInfo';
+import { environment } from '../../../environments/environment';
+import { AppFlag } from '../../../environments/flag';
+import { AppEnvironment } from '../../modules/appEnvironment';
+import { AppModeEnum } from '../appModeModel';
 
 // NOTICE: refactor me
 export const AppTempFlag = {
@@ -10,20 +10,16 @@ export const AppTempFlag = {
   isWebview: true,
 };
 
-export const AppGlobal: { mode: AppModeEnum; } = {
+export const AppGlobal: { mode: AppModeEnum } = {
   mode: AppModeEnum.None,
-}
+};
 
 export const isInApp = (): boolean => {
-  const rules = [
-    'WebView',
-    '(iPhone|iPod|iPad)(?!.*Safari/)',
-    'Android.*(wv)',
-  ];
+  const rules = ['WebView', '(iPhone|iPod|iPad)(?!.*Safari/)', 'Android.*(wv)'];
   const regex = new RegExp(`(${rules.join('|')})`, 'ig');
-  const useragent = navigator.userAgent || navigator.vendor
+  const useragent = navigator.userAgent || navigator.vendor;
   return Boolean(useragent.match(regex));
-}
+};
 
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());
@@ -48,12 +44,9 @@ export const getAppInfo = (): IAndroidAppInfo => {
   };
 
   // if (AppModeModel.getMode() === AppModeEnum.IndexWebview || AppFlag.isForceToWebview) {
-  if(!window['AppInfoTask'] || !window['AppInfoTask']['getAppInfo']) {
-
+  if (!window['AppInfoTask'] || !window['AppInfoTask']['getAppInfo']) {
     if (environment.country === 'in') {
-
-      if(AppEnvironment.isLocalhost()) {
-
+      if (AppEnvironment.isLocalhost()) {
         // NOTICE: 本地開發
         const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '55';
 
@@ -70,18 +63,16 @@ export const getAppInfo = (): IAndroidAppInfo => {
         };
 
         // NOTE: 不需要模擬
-        if(AppFlag.isForceToWebview) {
-          appInfo.mode = "Webview";
-          console.log("2.包含本地端強制模擬 webview");
+        if (AppFlag.isForceToWebview) {
+          appInfo.mode = 'Webview';
+          console.log('2.包含本地端強制模擬 webview');
         }
-
       } else {
         // NOTICE: 線上環境
         // NOTICE: 1.包含線上版本: DEV, 印度 v55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值
-        if(AppEnvironment.isDev()) {
-
+        if (AppEnvironment.isDev()) {
           // NOTE: 這邊目前可能是瀏覽器直接打開或 App 開啟沒有 getinfo 的mode
-          if(isInApp()) {
+          if (isInApp()) {
             // NOTE: 這邊後續要判斷是 SimpleWebview or Webview
             appInfo = {
               packageId: 'com.ind.kyc.application',
@@ -107,9 +98,8 @@ export const getAppInfo = (): IAndroidAppInfo => {
               phoneNo: '後端API沒給三二一',
             };
           }
-
         } else {
-          if(isInApp()) {
+          if (isInApp()) {
             appInfo = {
               // webview 不必要
               domain: '',
@@ -147,12 +137,8 @@ export const getAppInfo = (): IAndroidAppInfo => {
               phoneNo: '後端API沒給三二一',
             };
           }
-
         }
-
       }
-
-
     } else if (environment.country === 'pk') {
       // NOTICE: 這邊只會有本地 PureH5, IndexWebview 兩種情況
 
@@ -169,15 +155,12 @@ export const getAppInfo = (): IAndroidAppInfo => {
         mode: 'Webview',
         phoneNo: '後端API沒給三二一',
       };
-
-
     } else {
       throw new Error('前端請新增國家配置');
     }
-
   } else {
     // NOTICE: 印度 v58 開始才有, 巴基斯坦 v15 就有了
-    console.log("印度 v58 開始才有, 巴基斯坦 v15 就有了");
+    console.log('印度 v58 開始才有, 巴基斯坦 v15 就有了');
 
     // getAppInfo
     const appInfoStr = window['AppInfoTask']['getAppInfo']();
@@ -196,12 +179,10 @@ export const getAppInfo = (): IAndroidAppInfo => {
     }
     appInfo.mode = 'Webview';
     // NOTE: 後續得判斷是 SimpleWebview 或 Webview
-
   }
-
 
   return appInfo;
 };
 
 export const NativeAppInfo = getAppInfo();
-console.log("NativeAppInfo", NativeAppInfo);
+console.log('NativeAppInfo', NativeAppInfo);

@@ -18,13 +18,7 @@ const PureExtendModal = (props: any) => {
   const orderNo = location.state.currentData?.orderNo || getOrderNo();
   const { handlePostExpendCreate } = useExtendCreate();
 
-  const {
-    triggerGetList,
-    isRepayTypesFetching,
-    repayTypesList,
-    repayType,
-    setRepayType,
-  } = useRepayTypes();
+  const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
   useEffect(() => {
     triggerGetList({ orderNo: orderNo });
   }, []);
@@ -35,9 +29,7 @@ const PureExtendModal = (props: any) => {
       handlePostExpendCreate(
         false,
         orderNo,
-        repayConfirmDetail && repayConfirmDetail.extensionPayAmount
-          ? repayConfirmDetail.extensionPayAmount
-          : 0,
+        repayConfirmDetail && repayConfirmDetail.extensionPayAmount ? repayConfirmDetail.extensionPayAmount : 0,
         repayType && repayType.value
       );
   };

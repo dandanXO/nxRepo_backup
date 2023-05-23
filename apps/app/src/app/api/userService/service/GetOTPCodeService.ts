@@ -21,13 +21,7 @@ export type GetOTPCodeRequest = {
 
 export const GetOTPCodeService = async (request: GetOTPCodeRequest) => {
   try {
-    const { data } = await runAxios(
-      '/api',
-      '/v2/login/otp-code',
-      'post',
-      request,
-      {}
-    );
+    const { data } = await runAxios('/api', '/v2/login/otp-code', 'post', request, {});
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

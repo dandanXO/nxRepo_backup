@@ -17,15 +17,10 @@ const OnlineCustomerServicePage = () => {
         }}
       />
       {indexPage?.indexAPI?.customerServiceUrl ? (
-        <iframe
-          className={`w-full grow`}
-          src={indexPage?.indexAPI?.customerServiceUrl}
-          title=""
-        />
-      ): <div>
-        Didn't supported it
-      </div>}
-
+        <iframe className={`w-full grow`} src={indexPage?.indexAPI?.customerServiceUrl} title="" />
+      ) : (
+        <div>Didn't supported it</div>
+      )}
     </Page>
   );
 };

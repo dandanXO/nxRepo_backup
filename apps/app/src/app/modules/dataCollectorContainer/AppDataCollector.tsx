@@ -6,8 +6,7 @@ import { usePostTraceBehaviorMutation } from '../../api/rtk';
 const AppDataCollector = (props: { children: React.ReactNode }) => {
   // const whitePage: string[] = [ PagePathEnum.RepaymentDetailPage, PagePathEnum.BindBankcard ]
 
-  const [postTraceBehaviour, { isLoading, isSuccess, isError }] =
-    usePostTraceBehaviorMutation();
+  const [postTraceBehaviour, { isLoading, isSuccess, isError }] = usePostTraceBehaviorMutation();
 
   // NOTE: Page enter, leave, duration
   const location = useLocation();
@@ -60,9 +59,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
     // NOTE: Click
     if (event.type === 'click') {
       if ((event.target as any)?.nodeName === 'BUTTON') {
-        const eventID = `${pageName}_CLICK_${
-          (event.target as any)?.innerText
-        }`.toUpperCase();
+        const eventID = `${pageName}_CLICK_${(event.target as any)?.innerText}`.toUpperCase();
         // console.log('[AppDataCollector] CLICK.button');
         // console.log('[AppDataCollector] CLICK.button.eventID', eventID);
         postTraceBehaviour([
@@ -80,9 +77,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
       // NOTE: Input
       if ((event.target as any)?.nodeName === 'INPUT') {
         const value = (event.target as any)?.value;
-        const eventID = `${pageName}_INPUT_${
-          (event.target as any)?.name
-        }`.toUpperCase();
+        const eventID = `${pageName}_INPUT_${(event.target as any)?.name}`.toUpperCase();
         // console.log('[AppDataCollector] Input.value:', value);
         // console.log('[AppDataCollector] Input.eventID:', eventID);
         postTraceBehaviour([

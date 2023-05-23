@@ -1,4 +1,4 @@
-import "./app/modules/errorHandler";
+import './app/modules/errorHandler';
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 import { SentryModule } from './app/modules/sentry';
 import './app/modules/posthog';
@@ -56,9 +56,7 @@ const renderApp = () => {
   applyCustomTheme(NativeAppInfo);
 
   // NOTE: Starting to render
-  const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-  );
+  const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
   root.render(
     <StrictMode>

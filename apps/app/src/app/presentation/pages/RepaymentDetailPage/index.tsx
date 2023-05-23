@@ -16,14 +16,12 @@ import { PagePathEnum } from '../PagePathEnum';
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [
-    triggerGetList,
-    { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized },
-  ] = useLazyGetLoanDetailQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+  const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
+    useLazyGetLoanDetailQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
   useEffect(() => {
     triggerGetList({ orderNo: location.state?.orderNo || getOrderNo() });
@@ -39,21 +37,15 @@ const RepaymentDetailPage = (props: any) => {
           }}
         />
       )}
-      {currentData &&
-              currentData?.status !== "PAY_OFF" &&
-              currentData?.status !== "EXTEND" &&
+      {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
         <div className={`text-sm text-center bg-primary-assistant text-primary-main py-2`}>
-            Get more amount after instant payment
+          Get more amount after instant payment
         </div>
-      }
+      )}
       {renderByCountry(
         {
-          [IndiaCountry.country]: (
-            <IndiaRepaymentDetailPage currentData={currentData} />
-          ),
-          [PakistanCountry.country]: (
-            <PakistanRepaymentDetailPage currentData={currentData} />
-          ),
+          [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} />,
+          [PakistanCountry.country]: <PakistanRepaymentDetailPage currentData={currentData} />,
         },
         <IndiaRepaymentDetailPage currentData={currentData} />
       )}

@@ -14,21 +14,9 @@ export function* watchLoginPageSaga() {
   // yield takeLatest(LoginPageSataActions.user.getOTP.type, userGetOTPSaga);
   // yield takeLatest(LoginPageSataActions.user.login.type, userLoginSaga);
 
-  yield takeLatest(
-    LoginPageUseCaseActionsInstance.user.getOTP.type,
-    errorFallback,
-    userGetOTPSaga
-  );
-  yield takeLatest(
-    LoginPageUseCaseActionsInstance.user.login.type,
-    errorFallback,
-    userLoginSaga
-  );
-  yield takeLatest(
-    LoginPageUseCaseActionsInstance.system.resendSeconds.type,
-    errorFallback,
-    userResendSaga
-  );
+  yield takeLatest(LoginPageUseCaseActionsInstance.user.getOTP.type, errorFallback, userGetOTPSaga);
+  yield takeLatest(LoginPageUseCaseActionsInstance.user.login.type, errorFallback, userLoginSaga);
+  yield takeLatest(LoginPageUseCaseActionsInstance.system.resendSeconds.type, errorFallback, userResendSaga);
   // } catch (error) {
   //   yield catchSagaError(error)
   // }

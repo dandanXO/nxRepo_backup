@@ -7,10 +7,7 @@ import { modalSlice } from './modalSlice';
 import { appSlice } from './appSlice';
 import { createBrowserHistory } from 'history';
 
-import {
-  createRouterMiddleware,
-  createRouterReducer,
-} from '@lagunovsky/redux-react-router';
+import { createRouterMiddleware, createRouterReducer } from '@lagunovsky/redux-react-router';
 import { loginSlice } from './loginSlice';
 import { WatchAppSaga } from '../usecaseFlow/watchAppSaga';
 

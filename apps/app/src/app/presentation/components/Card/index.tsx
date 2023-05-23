@@ -42,8 +42,7 @@ const HotTag = styled(triangle)`
     height: 20px;
   }
   :before {
-    transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707)
-      translate(0, -50%);
+    transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707) translate(0, -50%);
   }
   :after {
     transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414) translate(50%);

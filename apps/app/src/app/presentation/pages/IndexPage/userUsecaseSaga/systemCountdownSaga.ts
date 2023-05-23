@@ -4,7 +4,6 @@ import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 
 export function* systemCountdownSaga(action: any) {
-
   // NOTICE: 防止錯誤後無法重新 watch
   try {
     // console.log("systemCountdownSaga.action", action);
@@ -22,7 +21,6 @@ export function* systemCountdownSaga(action: any) {
 
     // NOTE: 結束倒數計時
     yield put(indexPageSlice.actions.expiredRiskCountdown({}));
-
   } catch (error) {
     yield catchSagaError(error);
   }
@@ -47,9 +45,7 @@ const getTimeInfoBetweenCurrentAndCountDown = (quotaExpireTime: string) => {
   const minutes = Math.max(duration.minutes(), 0);
   const seconds = Math.max(duration.seconds(), 0);
   const end = hours === 0 && minutes === 0 && seconds === 0;
-  const time = `${padStartZero(hours)}:${padStartZero(minutes)}:${padStartZero(
-    seconds
-  )}`;
+  const time = `${padStartZero(hours)}:${padStartZero(minutes)}:${padStartZero(seconds)}`;
   return {
     time,
     end,

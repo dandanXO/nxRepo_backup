@@ -17,37 +17,25 @@ export const LatestOrderStatus = (props: Props) => {
 
   // NOTE: User Event
   const onUserClickToRepay = () => {
-    navigate(
-      `${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,
-      {
-        state: {
-          orderNo:
-          props.state.order.overdueOrComingOverdueOrder?.orderNo,
-        },
-      }
-    );
-  }
+    navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, {
+      state: {
+        orderNo: props.state.order.overdueOrComingOverdueOrder?.orderNo,
+      },
+    });
+  };
 
   // TODO: refactor
   const hasOverdueOrder = props.state.order.state === ORDER_STATE.hasOverdueOrder;
-  const hasInComingOverdueOrder = props.state.order.state === ORDER_STATE.hasInComingOverdueOrder
+  const hasInComingOverdueOrder = props.state.order.state === ORDER_STATE.hasInComingOverdueOrder;
 
   return (
-    <div
-      className={
-        'bg-white px-5 py-1.5 rounded-lg border border-orange-500 flex flex-col'
-      }
-    >
+    <div className={'bg-white px-5 py-1.5 rounded-lg border border-orange-500 flex flex-col'}>
       <div className={'flex flex-row justify-between items-center'}>
         <div className={'left'}>
           <div className={'top flex flex-row'}>
             <div className={'font-light mr-2'}>Loan Order</div>
             <div className={'font-medium'}>
-              ₹{' '}
-              {formatPrice(
-                props.state.order.overdueOrComingOverdueOrder?.payableAmount ||
-                  0
-              )}
+              ₹ {formatPrice(props.state.order.overdueOrComingOverdueOrder?.payableAmount || 0)}
             </div>
           </div>
 
@@ -55,13 +43,7 @@ export const LatestOrderStatus = (props: Props) => {
             <div className={'flex flex-row'}>
               {/*NOTE: 顯示逾期文字*/}
               {hasOverdueOrder && (
-                <div
-                  className={
-                    'h-5 px-2 text-white text-sm bg-red-500 rounded-lg mr-1'
-                  }
-                >
-                  Overdue
-                </div>
+                <div className={'h-5 px-2 text-white text-sm bg-red-500 rounded-lg mr-1'}>Overdue</div>
               )}
               <div className={'flex flex-row'}>
                 {/*NOTE: 顯示逾期時間文字*/}
@@ -88,21 +70,14 @@ export const LatestOrderStatus = (props: Props) => {
         </div>
 
         <div className={'right'}>
-          <div
-            data-testing-id={"repay"}
-            className={'text-blue-800'}
-            onClick={onUserClickToRepay}
-          >
+          <div data-testing-id={'repay'} className={'text-blue-800'} onClick={onUserClickToRepay}>
             Repay
           </div>
         </div>
-
       </div>
 
       {/*NOTE: 逾期*/}
-      {
-        hasOverdueOrder
-        && (
+      {hasOverdueOrder && (
         <>
           <div className={'w-full border-t-[1px] my-2 border-gray-400'} />
           <div className={cx('font-light text-sm text-gray-400 leading-4 mr-2 text-red-500')}>
@@ -110,7 +85,6 @@ export const LatestOrderStatus = (props: Props) => {
           </div>
         </>
       )}
-
     </div>
   );
 };

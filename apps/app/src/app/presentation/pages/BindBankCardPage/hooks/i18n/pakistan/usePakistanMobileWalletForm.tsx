@@ -6,14 +6,11 @@ import { z } from 'zod';
 import i18next from 'i18next';
 import * as Sentry from '@sentry/react';
 import { processWalletDisplayName } from './customization/processWalletDisplayName';
-import {
-  GetBindCardDropListResponse,
-  WalletVendor,
-} from '../../../../../../api/rtk/old/GetBindCardDropList';
+import { GetBindCardDropListResponse, WalletVendor } from '../../../../../../api/rtk/old/GetBindCardDropList';
 import { CustomAxiosError } from '../../../../../../api/rtk/axiosBaseQuery';
 
 import { usePakistanIBanValidate } from '../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate';
-import {SentryModule} from "../../../../../../modules/sentry";
+import { SentryModule } from '../../../../../../modules/sentry';
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -21,18 +18,13 @@ interface IUsePakistanMobileWalletForm {
   bindCardDropListData?: GetBindCardDropListResponse;
 }
 
-export const usePakistanMobileWalletForm = (
-  props: IUsePakistanMobileWalletForm
-) => {
+export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm) => {
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   // NOTE: Wallet List
   // Wallet List - 電子錢包列表 Data
-  const [walletDropList, setWalletDropList] = useState<
-    (string | React.ReactNode)[]
-  >([]);
-  const { iBanData, onIBanChange, onIbanBlur, validateIban } =
-    usePakistanIBanValidate();
+  const [walletDropList, setWalletDropList] = useState<(string | React.ReactNode)[]>([]);
+  const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate();
 
   // Wallet Selected - 選擇的電子錢包
   const [walletValue, setWalletValue] = useState<{
@@ -45,11 +37,9 @@ export const usePakistanMobileWalletForm = (
     const walletList =
       props.bindCardDropListData &&
       props.bindCardDropListData.availableWalletVendors &&
-      props.bindCardDropListData.availableWalletVendors.map(
-        (wallet: WalletVendor) => {
-          return processWalletDisplayName(wallet);
-        }
-      );
+      props.bindCardDropListData.availableWalletVendors.map((wallet: WalletVendor) => {
+        return processWalletDisplayName(wallet);
+      });
     setWalletDropList(walletList);
     setWalletValue({ value: 0, label: walletList[0] });
   }, [props.bindCardDropListData]);
@@ -61,9 +51,7 @@ export const usePakistanMobileWalletForm = (
     errorMessage: '',
   });
 
-  const [confirmMobileData, setConfirmMobileData] = useState<
-    InputValue<string>
-  >({
+  const [confirmMobileData, setConfirmMobileData] = useState<InputValue<string>>({
     data: '',
     isValidation: false,
     errorMessage: '',
@@ -128,11 +116,9 @@ export const usePakistanMobileWalletForm = (
   const validateConfirmMobileData = useCallback(() => {
     const confirmMobile = confirmMobileData.data;
     const mobile = mobileData.data;
-    const confirmMobileSchema = z
-      .string()
-      .refine((confirmMobile) => confirmMobile === mobile, {
-        message: t('Please make sure your mobile number match.') as string,
-      });
+    const confirmMobileSchema = z.string().refine((confirmMobile) => confirmMobile === mobile, {
+      message: t('Please make sure your mobile number match.') as string,
+    });
     const result = confirmMobileSchema.safeParse(confirmMobile);
     if (!result.success) {
       const firstError = result.error.format();
@@ -160,15 +146,14 @@ export const usePakistanMobileWalletForm = (
     if (!mobileData.isValidation || !confirmMobileData.isValidation) return;
 
     const mobileWalletAccount =
-      props.bindCardDropListData &&
-      props.bindCardDropListData.availableWalletVendors[walletValue.value];
+      props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue.value];
 
     if (props.isPostBankBindSaveToPKMutationLoading) return;
 
     let mobileDataValue = mobileData.data;
     // NOTE: 用戶沒填0時，給後端自動補0
-    if(String(mobileData.data).charAt(0) !== "0" || String(mobileData.data).length === 10) {
-      mobileDataValue = "0" + mobileData.data
+    if (String(mobileData.data).charAt(0) !== '0' || String(mobileData.data).length === 10) {
+      mobileDataValue = '0' + mobileData.data;
     }
 
     props
@@ -180,9 +165,9 @@ export const usePakistanMobileWalletForm = (
         iban: iBanData.data,
       })
       .then((data: any) => {
-        console.log("data:", data);
+        console.log('data:', data);
         // TODO: refactor me
-        if(data && data.error) {
+        if (data && data.error) {
           SentryModule.captureException(data.error);
         } else {
           // Notice: bind account successfully
@@ -202,7 +187,7 @@ export const usePakistanMobileWalletForm = (
         }
       })
       .catch((error: CustomAxiosError) => {
-        console.log("error:", error);
+        console.log('error:', error);
         // const error = new Error();
         // error.name = "triggerPostBankBindSaveToPKMutation"
         // if(err) error.message = JSON.stringify(err)

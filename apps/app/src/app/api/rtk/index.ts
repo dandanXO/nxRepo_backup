@@ -68,25 +68,14 @@ export const APIV3 = createApi({
       // NOTE: cannot work
       async onCacheEntryAdded(
         arg,
-        {
-          dispatch,
-          getState,
-          extra,
-          requestId,
-          cacheEntryRemoved,
-          cacheDataLoaded,
-          getCacheEntry,
-        }
+        { dispatch, getState, extra, requestId, cacheEntryRemoved, cacheDataLoaded, getCacheEntry }
       ) {
         console.log('onCacheEntryAdded.arg', arg);
       },
     }),
 
     // NOTE: /api/v3/loan/records 貸款紀錄列表
-    getLoanRecordList: builder.query<
-      GetLoanRecordListReponse,
-      GetLoanRecordListRequest
-    >({
+    getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
       query: (query: GetLoanRecordListRequest) => ({
         method: 'get',
         url: `/loan/records`,
@@ -94,10 +83,7 @@ export const APIV3 = createApi({
       }),
     }),
     // NOTE: /api/v3/coupon/applicable 取得可用优惠券列表
-    getCouponApplicableList: builder.query<
-      GetCouponApplicableListResponse,
-      GetCouponApplicableListRequest
-    >({
+    getCouponApplicableList: builder.query<GetCouponApplicableListResponse, GetCouponApplicableListRequest>({
       query: (query: GetCouponApplicableListRequest) => ({
         method: 'get',
         url: `/coupon/applicable`,
@@ -191,10 +177,7 @@ export const API = createApi({
       }),
     }),
     // NOTE: 創建還款訂單
-    postRepayCreate: builder.mutation<
-      PostRepayCreateResponse,
-      PostRepayCreateRequest
-    >({
+    postRepayCreate: builder.mutation<PostRepayCreateResponse, PostRepayCreateRequest>({
       query: (query: PostRepayCreateRequest) => ({
         method: 'post',
         url: `/repay/create`,
@@ -207,8 +190,7 @@ export const API = createApi({
         method: 'post',
         url: `/repay/receipt`,
         headers: {
-          'Content-Type':
-            'multipart/form-data;boundary=' + new Date().getTime(),
+          'Content-Type': 'multipart/form-data;boundary=' + new Date().getTime(),
         },
         data: requestBody,
       }),
@@ -238,10 +220,7 @@ export const API = createApi({
       }),
     }),
     // NOTICE: Bangladesh - 绑定银行主卡或是電子錢包
-    postBankBindSaveToBangladesh: builder.mutation<
-      {},
-      PostBangladeshBankBindSaveRequest
-    >({
+    postBankBindSaveToBangladesh: builder.mutation<{}, PostBangladeshBankBindSaveRequest>({
       query: (requestBody: PostBangladeshBankBindSaveRequest) => ({
         method: 'post',
         url: `/bank-bind/save`,

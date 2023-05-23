@@ -10,7 +10,7 @@ import { PagePathEnum } from '../../pages/PagePathEnum';
 import Divider from '../../components/Divider';
 import moment from 'moment';
 import Money from '../../components/Money.tsx';
-import {getToken} from "../../../modules/querystring/getToken";
+import { getToken } from '../../../modules/querystring/getToken';
 const ModalContentStyled = styled.div`
   padding: 0 12px;
 `;
@@ -39,11 +39,7 @@ type AmountRepaidRecordsProps = Pick<GetLoanDetailResponse, 'repayRecords'> & {
 interface RecordStyledProps {
   status: string;
 }
-const Record = (props: {
-  repayDate: string;
-  repayAmount: React.ReactElement;
-  repayType: string;
-}) => {
+const Record = (props: { repayDate: string; repayAmount: React.ReactElement; repayType: string }) => {
   const { repayDate, repayAmount, repayType } = props;
   return (
     <>
@@ -89,16 +85,12 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
         content={(hide: () => void) => {
           return (
             <div>
-              <div className="text-sm font-bold mt-[-10px]">
-                {t('Amount Repaid Record')}
-              </div>
+              <div className="text-sm font-bold mt-[-10px]">{t('Amount Repaid Record')}</div>
               <Divider />
               {state.repayRecords?.length === 0 ? (
                 <NoDataStyled>{t('No paid records yet')}</NoDataStyled>
               ) : (
-                <ModalContentStyled>
-                  {renderRecordList(state)}
-                </ModalContentStyled>
+                <ModalContentStyled>{renderRecordList(state)}</ModalContentStyled>
               )}
             </div>
           );
@@ -110,6 +102,4 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
   );
 };
 
-export default withTranslation(i18nAmountRepaidModal.namespace)(
-  AmountRepaidModal
-);
+export default withTranslation(i18nAmountRepaidModal.namespace)(AmountRepaidModal);

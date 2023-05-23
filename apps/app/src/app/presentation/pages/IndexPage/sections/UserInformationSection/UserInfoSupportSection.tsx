@@ -12,16 +12,14 @@ export const UserInfoSupportSection = (props: Props) => {
   // TODO: refactor
   const userName =
     props.state.user?.userName?.length >= 10
-      ? props.state.user.userName.slice(0, 3) +
-        '****' +
-        props.state.user.userName.slice(7, 10)
+      ? props.state.user.userName.slice(0, 3) + '****' + props.state.user.userName.slice(7, 10)
       : props.state.user.userName;
   const [isHideUserName, setIsHideUserName] = useState(true);
 
   // NOTE: User Event
   const onClickHideUserName = () => {
     setIsHideUserName(!isHideUserName);
-  }
+  };
 
   return (
     <div className={'w-full flex flex-row justify-between '}>
@@ -31,19 +29,13 @@ export const UserInfoSupportSection = (props: Props) => {
           Welcome {isHideUserName ? userName : props.state.user.userName}
         </div>
         {/*NOTE: 是否隱藏用戶名稱 Button*/}
-        <a
-          data-test-id={"hide-icon"}
-          onClick={onClickHideUserName}
-        >
+        <a data-test-id={'hide-icon'} onClick={onClickHideUserName}>
           {isHideUserName ? <FiEyeOff /> : <FiEye />}
         </a>
       </div>
       <div className={'right-section'}>
         {/*NOTE: 客服 Button*/}
-        <div
-          data-test-id={"contact-icon"}
-          onClick={props.onClickToCustomerService}
-        >
+        <div data-test-id={'contact-icon'} onClick={props.onClickToCustomerService}>
           <RiCustomerServiceLine />
         </div>
       </div>

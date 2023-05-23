@@ -15,37 +15,25 @@ const IndiaExtendConfirmModal = () => {
       {' '}
       <div className="text-xl font-bold">Extend</div>
       <div className="font-bold my-6 leading-tight">
-        Extensions are intended for situations where you are genuinely
-        experiencing financial difficulties and are unable to fully repay the
-        amount owed.
+        Extensions are intended for situations where you are genuinely experiencing financial difficulties and are
+        unable to fully repay the amount owed.
       </div>
       <div className="font-bold mb-4 leading-tight">
-        We recommend that you prioritize full repayment when possible for a
-        higher credit limit.
+        We recommend that you prioritize full repayment when possible for a higher credit limit.
       </div>
       <div className={`flex flex-col`}>
         <Button
           className={`w-full mb-2`}
           text={'Got it and go extension'}
           onClick={() => {
-            navigate(
-              `${
-                PagePathEnum.RepaymentDetailPage
-              }/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
-              {
-                state: {
-                  currentData: location.state,
-                },
-              }
-            );
+            navigate(`${PagePathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+              state: {
+                currentData: location.state,
+              },
+            });
           }}
         />
-        <Button
-          type={'ghost'}
-          className={`w-full`}
-          text={'Next time'}
-          onClick={() => navigate(-1)}
-        />
+        <Button type={'ghost'} className={`w-full`} text={'Next time'} onClick={() => navigate(-1)} />
       </div>
     </div>
   );

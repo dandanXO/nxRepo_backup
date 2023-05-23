@@ -22,14 +22,12 @@ const RepamentCouponModal = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { orderNo, paymentAmount, paymentMethod } = location.state || {};
-  const [
-    triggerGetList,
-    { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized },
-  ] = useLazyGetCouponApplicableListQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+  const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
+    useLazyGetCouponApplicableListQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
   useEffect(() => {
     triggerGetList({
@@ -41,22 +39,15 @@ const RepamentCouponModal = () => {
   }, []);
 
   const applicableCouponList =
-    currentData && currentData.length > 0
-      ? currentData?.filter((i) => i.applicable === true)
-      : [];
+    currentData && currentData.length > 0 ? currentData?.filter((i) => i.applicable === true) : [];
   const unApplicableCouponList =
-    currentData && currentData.length > 0
-      ? currentData?.filter((i) => i.applicable === false)
-      : [];
+    currentData && currentData.length > 0 ? currentData?.filter((i) => i.applicable === false) : [];
   const [checkedCoupon, setCheckedCoupon] = useState(-1);
   // console.log('RepamentCouponModal-----------',location.state)
 
   const CouponOption = (props: ICouponOption) => {
     return (
-      <a
-        className={`flex justfy-center items-center `}
-        onClick={() => setCheckedCoupon(props.index)}
-      >
+      <a className={`flex justfy-center items-center `} onClick={() => setCheckedCoupon(props.index)}>
         <Coupon {...props} />
         {props.isChecked ? (
           <MdRadioButtonChecked className={`fill-sky-500`} />
@@ -69,13 +60,8 @@ const RepamentCouponModal = () => {
 
   const NotUsingCoupon = (props: ICouponOption) => {
     return (
-      <a
-        className={`flex justfy-center items-center ml-2 mb-7 `}
-        onClick={() => setCheckedCoupon(props.index)}
-      >
-        <div className="grow text-left text-xs">
-          Not using a coupon for this repayment.
-        </div>
+      <a className={`flex justfy-center items-center ml-2 mb-7 `} onClick={() => setCheckedCoupon(props.index)}>
+        <div className="grow text-left text-xs">Not using a coupon for this repayment.</div>
         {props.isChecked ? (
           <MdRadioButtonChecked className={`fill-sky-500`} />
         ) : (
@@ -93,11 +79,7 @@ const RepamentCouponModal = () => {
           <div className={`mt-5`}>There are currently no coupon</div>
         </div>
         <div className="p-2">
-          <Button
-            text={'Back'}
-            className="w-full"
-            onClick={() => navigate(-1)}
-          />
+          <Button text={'Back'} className="w-full" onClick={() => navigate(-1)} />
         </div>
       </>
     );
@@ -110,9 +92,7 @@ const RepamentCouponModal = () => {
           {applicableCouponList.length > 0 && (
             <>
               <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon} />
-              <div className="text-xs font-bold text-left ml-2 ">
-                Choose one coupon
-              </div>
+              <div className="text-xs font-bold text-left ml-2 ">Choose one coupon</div>
               {applicableCouponList?.map((i, index) => {
                 return (
                   <>
@@ -137,9 +117,7 @@ const RepamentCouponModal = () => {
           )}
           {unApplicableCouponList.length > 0 && (
             <>
-              <div className="text-xs font-bold text-left ml-2 ">
-                Not applicable to usage conditions
-              </div>
+              <div className="text-xs font-bold text-left ml-2 ">Not applicable to usage conditions</div>
               {unApplicableCouponList.map((i, index) => (
                 <Coupon
                   expireTime={i.expireTime}
@@ -159,20 +137,13 @@ const RepamentCouponModal = () => {
             text={'Confirm'}
             className="bg-primary-main w-full  text-white"
             onClick={() =>
-              navigate(
-                `${
-                  PagePathEnum.RepaymentDetailPage
-                }/repayment-modal?token=${getToken()}`,
-                {
-                  state: {
-                    ...location.state,
-                    coupon:
-                      applicableCouponList.length > 0 && checkedCoupon > -1
-                        ? applicableCouponList[checkedCoupon]
-                        : null,
-                  },
-                }
-              )
+              navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}`, {
+                state: {
+                  ...location.state,
+                  coupon:
+                    applicableCouponList.length > 0 && checkedCoupon > -1 ? applicableCouponList[checkedCoupon] : null,
+                },
+              })
             }
           />
         </div>
@@ -195,9 +166,7 @@ const RepamentCouponModal = () => {
                 }}
               />
             </div>
-            {currentData && currentData.length > 0
-              ? renderCouponList()
-              : renderNoCoupon()}
+            {currentData && currentData.length > 0 ? renderCouponList() : renderNoCoupon()}
           </div>
         );
       }}

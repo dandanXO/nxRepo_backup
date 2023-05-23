@@ -1,8 +1,4 @@
-import {
-  Colors,
-  fontSizeListToRem,
-  IThemeConfig,
-} from '@frontend/mobile/shared/ui';
+import { Colors, fontSizeListToRem, IThemeConfig } from '@frontend/mobile/shared/ui';
 import theme from './tailwind.theme';
 
 export const themeConfig: IThemeConfig = {

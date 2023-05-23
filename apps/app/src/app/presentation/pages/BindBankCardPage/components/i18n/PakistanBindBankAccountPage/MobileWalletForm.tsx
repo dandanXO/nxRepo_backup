@@ -114,11 +114,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
 
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
       <div className="grow flex flex-col justify-end mb-2">
-        <Button
-          className={`${EnumV15GradientButtonClassNames} `}
-          text={'Confirm'}
-          onClick={() => props.confirm()}
-        />
+        <Button className={`${EnumV15GradientButtonClassNames} `} text={'Confirm'} onClick={() => props.confirm()} />
       </div>
     </div>
   );

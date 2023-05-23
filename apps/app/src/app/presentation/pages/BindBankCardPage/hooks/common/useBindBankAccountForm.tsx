@@ -23,14 +23,8 @@ export const useBindBankAccountForm = () => {
     const bankCardNoScheme = z
       .string()
       .min(1, ValidationInfo.min1)
-      .min(
-        9,
-        t('Account number must be between from 9 to 18 digits only.') as string
-      )
-      .max(
-        18,
-        t('Account number must be between from 9 to 18 digits only.') as string
-      );
+      .min(9, t('Account number must be between from 9 to 18 digits only.') as string)
+      .max(18, t('Account number must be between from 9 to 18 digits only.') as string);
     const result = bankCardNoScheme.safeParse(bankcardNoData.data);
     if (!result.success) {
       const firstError = result.error.format();
@@ -66,9 +60,7 @@ export const useBindBankAccountForm = () => {
   };
 
   // NOTE: FormInput - confirmedBankcardNoData
-  const [confirmedBankcardNoData, setConfirmedBankcardNoData] = useState<
-    InputValue<string>
-  >({
+  const [confirmedBankcardNoData, setConfirmedBankcardNoData] = useState<InputValue<string>>({
     data: '',
     isValidation: false,
     errorMessage: '',
@@ -77,11 +69,9 @@ export const useBindBankAccountForm = () => {
   const validateConfirmedBankcardNo = useCallback(() => {
     const confirmedBankcardNo = confirmedBankcardNoData.data;
     const bankcardNo = bankcardNoData.data;
-    const confirmedBankCardNoScheme = z
-      .string()
-      .refine((confirmedBankcardNo) => confirmedBankcardNo === bankcardNo, {
-        message: t('Please make sure your account number match.') as string,
-      });
+    const confirmedBankCardNoScheme = z.string().refine((confirmedBankcardNo) => confirmedBankcardNo === bankcardNo, {
+      message: t('Please make sure your account number match.') as string,
+    });
     const result = confirmedBankCardNoScheme.safeParse(confirmedBankcardNo);
     if (!result.success) {
       const firstError = result.error.format();

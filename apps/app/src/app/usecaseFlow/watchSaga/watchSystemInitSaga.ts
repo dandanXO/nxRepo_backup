@@ -1,7 +1,7 @@
 import { call, take } from 'redux-saga/effects';
 import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
 import { systemStartInitSaga } from '../type/systemUsecaseSaga/systemStartInitSaga';
-import {catchSagaError} from "../utils/catchSagaError";
+import { catchSagaError } from '../utils/catchSagaError';
 
 export function* watchSystemInitSaga() {
   try {
@@ -15,8 +15,7 @@ export function* watchSystemInitSaga() {
     console.log('[app][saga] 1.1 end');
   } catch (error) {
     // NOTE: prevent parent broken
-    console.log("error",error);
+    console.log('error', error);
     yield catchSagaError(error);
   }
-
 }

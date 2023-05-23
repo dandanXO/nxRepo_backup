@@ -53,28 +53,28 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   });
 
   return (
-      <Page className="flex">
-        <BankAccountForm
-          cardholderName={props.cardholderName}
-          ifscData={ifscData}
-          onIFSCChange={onIFSCChange}
-          onIFSCBlur={onIFSCBlur}
-          bankcardNoData={bankcardNoData}
-          onAccountNumberChange={onAccountNumberChange}
-          onAccountNumberBlur={onAccountNumberBlur}
-          confirmedBankcardNoData={confirmedBankcardNoData}
-          onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-          onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
-          upiData={upiData}
-          onUPIIDChange={onUPIIDChange}
-          isFormPending={isFormPending || false}
-          confirm={() => {
-            // NOTE: validate and display errors
-            const validation = validateCommonForm();
-            const validation2 = validateIndiaForm();
-            if (validation && validation2) confirm();
-          }}
-        />
-      </Page>
+    <Page className="flex">
+      <BankAccountForm
+        cardholderName={props.cardholderName}
+        ifscData={ifscData}
+        onIFSCChange={onIFSCChange}
+        onIFSCBlur={onIFSCBlur}
+        bankcardNoData={bankcardNoData}
+        onAccountNumberChange={onAccountNumberChange}
+        onAccountNumberBlur={onAccountNumberBlur}
+        confirmedBankcardNoData={confirmedBankcardNoData}
+        onConfirmAccountNumberChange={onConfirmAccountNumberChange}
+        onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
+        upiData={upiData}
+        onUPIIDChange={onUPIIDChange}
+        isFormPending={isFormPending || false}
+        confirm={() => {
+          // NOTE: validate and display errors
+          const validation = validateCommonForm();
+          const validation2 = validateIndiaForm();
+          if (validation && validation2) confirm();
+        }}
+      />
+    </Page>
   );
 };

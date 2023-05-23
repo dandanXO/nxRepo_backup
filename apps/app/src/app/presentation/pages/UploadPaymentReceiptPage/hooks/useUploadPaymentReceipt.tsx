@@ -10,9 +10,7 @@ interface PureUploadPaymentReceiptPageProps {
   token: string;
   orderNo: string;
 }
-export const useUploadPaymentReceipt = (
-  props: PureUploadPaymentReceiptPageProps
-) => {
+export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps) => {
   // NOTE: input 1/2
   const [utr, setURT] = useState<InputValue<string>>({
     data: '',

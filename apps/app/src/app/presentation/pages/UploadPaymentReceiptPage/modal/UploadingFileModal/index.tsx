@@ -55,9 +55,7 @@ const UploadingFileModal = () => {
               <StyledLoading />
             </div>
             <Description className={`mb-6`}>
-              {t(
-                'Your file is uploading, please keep your network connection is active and wait for few minutes'
-              )}
+              {t('Your file is uploading, please keep your network connection is active and wait for few minutes')}
             </Description>
           </Container>
         );

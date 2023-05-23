@@ -3,12 +3,10 @@ import { GetQuotaModelStatusRequest } from '../GetQuotaModelStatusRequest';
 import { GetQuotaModelStatusResponse } from '../GetQuotaModelStatusResponse';
 import axios from 'axios';
 import { alertModal } from '../../base/alertModal';
-import {createAsyncThunk} from "@reduxjs/toolkit";
-import {Service} from "../../index";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Service } from '../../index';
 
-export const getQuotaModelStatusService = async (
-  request: GetQuotaModelStatusRequest
-) => {
+export const getQuotaModelStatusService = async (request: GetQuotaModelStatusRequest) => {
   try {
     const { data }: { data: GetQuotaModelStatusResponse } = await runAxios(
       '/api',
@@ -29,7 +27,7 @@ export const getQuotaModelStatusService = async (
 export const getQuotaModelStatusActions = createAsyncThunk<GetQuotaModelStatusRequest>(
   '/api/v3/loan/quota-model-status',
   async (thunkAPI) => {
-    const response: GetQuotaModelStatusResponse | null = await Service.LoanService.getQuotaModelStatus({})
+    const response: GetQuotaModelStatusResponse | null = await Service.LoanService.getQuotaModelStatus({});
     return response;
   }
-)
+);

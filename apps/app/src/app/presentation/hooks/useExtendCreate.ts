@@ -16,8 +16,7 @@ const useExtendCreate = () => {
   const token = pageQueryString.token;
 
   // NOTE: usePostRepayCreateMutation
-  const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =
-    usePostRepayCreateMutation();
+  const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] = usePostRepayCreateMutation();
 
   const postRepayCreateRequest = (props: PostRepayCreateRequest) =>
     new Promise((resolve, reject) => {

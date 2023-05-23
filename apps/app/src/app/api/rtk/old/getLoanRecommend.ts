@@ -3,8 +3,7 @@ export interface GetLoanRecommendRequestQuerystring {
   count?: string;
 }
 
-export interface GetLoanRecommendProductsResponse
-  extends Array<GetLoanRecommendProducts> {
+export interface GetLoanRecommendProductsResponse extends Array<GetLoanRecommendProducts> {
   data: GetLoanRecommendProducts[];
 }
 

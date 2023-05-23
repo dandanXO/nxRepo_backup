@@ -77,28 +77,22 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             value = value.replace(`${environment.currency}`, '').trim();
 
             if (value === '' || Number(value) === 0) {
-              setBalanceValueErrorMessage(
-                'This field cannot be left blank or 0.'
-              );
+              setBalanceValueErrorMessage('This field cannot be left blank or 0.');
             } else if (!new RegExp('^[0-9]*$').test(value)) {
               setBalanceValueErrorMessage('Numbers only. Please try again.');
             } else if (Number(value) > Number(balance)) {
               // NOTE: 限制數字最大值
-              setBalanceValueErrorMessage(
-                'Amount cannot be greater than the repayment balance.'
-              );
+              setBalanceValueErrorMessage('Amount cannot be greater than the repayment balance.');
             } else {
               setBalanceValueErrorMessage('');
             }
             // setBalanceValue(value);
             if (!value.includes(environment.currency)) {
-                setBalanceValue(`${environment.currency} ${value}`);
-            } 
+              setBalanceValue(`${environment.currency} ${value}`);
+            }
           }}
           onBlur={() => {}}
-          errorMessage={
-            balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage
-          }
+          errorMessage={balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage}
         />
       </div>
 
@@ -122,18 +116,13 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             className="flex border-solid border-b border-[#aaaaaa] justify-center items-center pl-5 pr-4 py-1.5"
             onClick={() => {
               if (isRepayTypesFetching) return;
-              navigate(
-                `${
-                  PagePathEnum.RepaymentDetailPage
-                }/repayment-coupon-modal?token=${getToken()}`,
-                {
-                  state: {
-                    ...location.state,
-                    paymentAmount: balance,
-                    paymentMethod: repayType.value,
-                  },
-                }
-              );
+              navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`, {
+                state: {
+                  ...location.state,
+                  paymentAmount: balance,
+                  paymentMethod: repayType.value,
+                },
+              });
             }}
           >
             <div
@@ -146,11 +135,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                   <div className="self-center">- {coupon.discountAmount}</div>
                   <div className="flex flex-col text-xs text-gray-400">
                     <div>expiration date</div>
-                    <div className="">
-                      {coupon.expireTime
-                        ? moment(coupon.expireTime).format('DD-MM-YYYY')
-                        : ''}
-                    </div>
+                    <div className="">{coupon.expireTime ? moment(coupon.expireTime).format('DD-MM-YYYY') : ''}</div>
                   </div>
                 </div>
               ) : (
@@ -163,13 +148,16 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
       )}
 
       <div className="mt-3 font-bold">
-          <ListItem
-              title={'Repayment Amount'}
-              text={radioValue !== 'custom' ?
-                  <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} /> :
-                  <Money money={balanceValue.replace(`${environment.currency}`, '').trim()} />
-              }
-           />
+        <ListItem
+          title={'Repayment Amount'}
+          text={
+            radioValue !== 'custom' ? (
+              <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />
+            ) : (
+              <Money money={balanceValue.replace(`${environment.currency}`, '').trim()} />
+            )
+          }
+        />
       </div>
 
       <div className={`flex flex-row my-3`}>
@@ -180,10 +168,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             text={props.t('Cancel')}
             onClick={() => {
               if (isRepayTypesFetching) return;
-              navigate(
-                `${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`,
-                { state: { orderNo } }
-              );
+              navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } });
             }}
           />
         </div>
@@ -201,14 +186,10 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
       <div className={`text-xs text-gray-400 text-left`}>
         <div>Attention：</div>
         <ul className="list-decimal list-outside pl-3 pt-1">
+          <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
           <li>
-            Before repayment, please make sure that you have enough balance on
-            your bank account.
-          </li>
-          <li>
-            To protect your rights, we strongly recommend that you take a
-            screenshot of the repayment details after completing the repayment,
-            and upload your screenshot to the app.
+            To protect your rights, we strongly recommend that you take a screenshot of the repayment details after
+            completing the repayment, and upload your screenshot to the app.
           </li>
         </ul>
       </div>
@@ -219,6 +200,4 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
   );
 };
 
-export default withTranslation(i18nRepaymentModal.namespace)(
-  PakistanRepaymentModal
-);
+export default withTranslation(i18nRepaymentModal.namespace)(PakistanRepaymentModal);

@@ -5,8 +5,7 @@ import { RootState } from '../../../reduxStore';
 
 const PrivacyPolicyPage = () => {
   const navigate = useNavigate();
-  const domain: string =
-    useSelector((state: RootState) => state.app.androidAppInfo?.domain) || '';
+  const domain: string = useSelector((state: RootState) => state.app.androidAppInfo?.domain) || '';
   const url = domain + '/privacy.html';
 
   return (

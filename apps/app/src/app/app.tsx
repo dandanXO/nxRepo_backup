@@ -3,17 +3,13 @@ import { AppRouter } from './presentation/router';
 import { Provider } from 'react-redux';
 import { appStore, RootState } from './reduxStore';
 import { history } from './reduxStore/index';
-import {
-  ReduxRouter,
-  ReduxRouterSelector,
-} from '@lagunovsky/redux-react-router';
+import { ReduxRouter, ReduxRouterSelector } from '@lagunovsky/redux-react-router';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 
-const routerSelector: ReduxRouterSelector<RootState> = (state) =>
-  state.navigator;
+const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator;
 
-window["reduxStore"] = appStore;
+window['reduxStore'] = appStore;
 export function App() {
   return (
     <div>

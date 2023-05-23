@@ -12,11 +12,7 @@ const fileIcon = require('../../../../../../../libs/mobile/shared/ui/src/lib/com
 
 const Template: ComponentStory<typeof LoanBrand> = (args) => (
   <AppThemeProvider>
-    <LoanBrand
-      iconUrl={fileIcon}
-      productName="productName"
-      sizeType={'small'}
-    />
+    <LoanBrand iconUrl={fileIcon} productName="productName" sizeType={'small'} />
   </AppThemeProvider>
 );
 

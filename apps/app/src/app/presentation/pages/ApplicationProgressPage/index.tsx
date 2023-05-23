@@ -22,15 +22,16 @@ const ApplicationProgressPage = () => {
         }}
       />
       <PageContent>
-        {currentData && currentData?.map((news) => {
-          return (
-            <ProgressItem
-              title={news.title}
-              content={news.content}
-              date={moment(news.addTime).format('DD-MM-YYYY HH:mm:ss')}
-            />
-          );
-        })}
+        {currentData &&
+          currentData?.map((news) => {
+            return (
+              <ProgressItem
+                title={news.title}
+                content={news.content}
+                date={moment(news.addTime).format('DD-MM-YYYY HH:mm:ss')}
+              />
+            );
+          })}
         {!currentData && <div>No Data</div>}
       </PageContent>
     </div>

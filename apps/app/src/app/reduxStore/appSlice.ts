@@ -30,25 +30,16 @@ export const appSlice = createSlice({
     init: (state: InitailState, action: PayloadAction<boolean>) => {
       state.isInit = action.payload;
     },
-    updateInit: (
-      state: InitailState,
-      action: PayloadAction<GetInitServiceResponse>
-    ) => {
+    updateInit: (state: InitailState, action: PayloadAction<GetInitServiceResponse>) => {
       state.init = action.payload;
     },
-    updateMode: (
-      state: InitailState,
-      action: PayloadAction<AppRunningModeEnum>
-    ) => {
+    updateMode: (state: InitailState, action: PayloadAction<AppRunningModeEnum>) => {
       state.mode = action.payload;
     },
     updateToken: (state: InitailState, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
-    updateAndroidInfo: (
-      state: InitailState,
-      action: PayloadAction<IAndroidAppInfo>
-    ) => {
+    updateAndroidInfo: (state: InitailState, action: PayloadAction<IAndroidAppInfo>) => {
       state.androidAppInfo = action.payload;
     },
   },

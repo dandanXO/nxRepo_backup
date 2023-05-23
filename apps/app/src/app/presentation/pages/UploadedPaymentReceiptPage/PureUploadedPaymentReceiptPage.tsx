@@ -44,21 +44,19 @@ type UploadedPaymentReceiptPage = {
   navigateToLoanDetails: () => void;
 } & WithTranslation;
 
-export const PureUploadedPaymentReceiptPage = withTranslation(
-  i18nUploadedPaymentReceiptPage.namespace
-)((props: UploadedPaymentReceiptPage) => {
-  return (
-    <CustomPage>
-      <Content>
-        <SuccessICON />
-        <Title>{props.t('Upload payment receipt')}</Title>
-        <Description>
-          {props.t('Thank you. Your receipt has been uploaded successfully.')}
-        </Description>
-      </Content>
-      <ControlSection>
-        <Button text={'Done'} onClick={() => props.navigateToLoanDetails()} />
-      </ControlSection>
-    </CustomPage>
-  );
-});
+export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymentReceiptPage.namespace)(
+  (props: UploadedPaymentReceiptPage) => {
+    return (
+      <CustomPage>
+        <Content>
+          <SuccessICON />
+          <Title>{props.t('Upload payment receipt')}</Title>
+          <Description>{props.t('Thank you. Your receipt has been uploaded successfully.')}</Description>
+        </Content>
+        <ControlSection>
+          <Button text={'Done'} onClick={() => props.navigateToLoanDetails()} />
+        </ControlSection>
+      </CustomPage>
+    );
+  }
+);

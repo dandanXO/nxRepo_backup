@@ -86,28 +86,16 @@ export const LoginForm = () => {
           suffix={
             <Button
               dataTestingID={'getOTP'}
-              text={
-                !doingCountdownSendOTP
-                  ? 'Get OTP'
-                  : `Resend ( ${resendSeconds}s )`
-              }
+              text={!doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
               className={cx(
                 {
-                  'bg-[#F58B10] text-white':
-                    enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
-                  'bg-[#D7D7D7]': !(
-                    enableGetOTP &&
-                    !hasSendOTP &&
-                    !doingCountdownSendOTP
-                  ),
+                  'bg-[#F58B10] text-white': enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
+                  'bg-[#D7D7D7]': !(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP),
                 },
                 'ml-2 py-1 px-2.5'
               )}
               onClick={() => {
-                enableGetOTP &&
-                  !hasSendOTP &&
-                  !doingCountdownSendOTP &&
-                  onClickGetOTP();
+                enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
               }}
             />
           }
@@ -122,9 +110,7 @@ export const LoginForm = () => {
             setPhoneNumberData({
               data: value,
               isValidation: !isError,
-              errorMessage: isError
-                ? '*Please enter the correct phone number.'
-                : '',
+              errorMessage: isError ? '*Please enter the correct phone number.' : '',
             });
             setEnableGetOTP(!isError);
           }}
@@ -170,8 +156,7 @@ export const LoginForm = () => {
               setOtpData({
                 data: '',
                 isValidation: false,
-                errorMessage:
-                  '*Please confirm the code you received and try again.',
+                errorMessage: '*Please confirm the code you received and try again.',
               });
             } else {
               setOtpData((prev) => {
@@ -205,8 +190,8 @@ export const LoginForm = () => {
           >
             Privacy Policy
           </span>
-          You also consent to receive SMS messages.Please carefully read the
-          above agreement, agreed to check and enter the next step.
+          You also consent to receive SMS messages.Please carefully read the above agreement, agreed to check and enter
+          the next step.
         </div>
       </div>
     </>

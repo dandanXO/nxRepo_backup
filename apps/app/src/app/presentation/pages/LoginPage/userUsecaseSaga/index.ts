@@ -1,9 +1,4 @@
-import {
-  ActionCreatorWithPayload,
-  createAction,
-  PayloadAction,
-  PayloadActionCreator,
-} from '@reduxjs/toolkit';
+import { ActionCreatorWithPayload, createAction, PayloadAction, PayloadActionCreator } from '@reduxjs/toolkit';
 
 export type UserGetOTPActionPayload = {
   phone: string;
@@ -40,17 +35,11 @@ class LoginPageUseCaseActions implements ILoginPageUseCase {
   name = 'LoginPageUseCaseActions';
   system = {
     init: createAction('LoginPageSataActions-system-init'),
-    resendSeconds: createAction<UserResendSecondsActionPayload>(
-      'LoginPageSataActions-resendSeconds'
-    ),
+    resendSeconds: createAction<UserResendSecondsActionPayload>('LoginPageSataActions-resendSeconds'),
   };
   user = {
-    getOTP: createAction<UserGetOTPActionPayload>(
-      'LoginPageSataActions-getOTP'
-    ),
-    login: createAction<UserLoginActionPayload>(
-      'LoginPageSataActions-user-login'
-    ),
+    getOTP: createAction<UserGetOTPActionPayload>('LoginPageSataActions-getOTP'),
+    login: createAction<UserLoginActionPayload>('LoginPageSataActions-user-login'),
   };
 }
 export const LoginPageUseCaseActionsInstance = new LoginPageUseCaseActions();

@@ -1,8 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  BankVendor,
-  GetBindCardDropListResponse,
-} from '../../../../../../api/rtk/old/GetBindCardDropList';
+import { BankVendor, GetBindCardDropListResponse } from '../../../../../../api/rtk/old/GetBindCardDropList';
 import { usePakistanIBanValidate } from '../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate';
 
 interface IUsePakistanBankAccountForm {
@@ -11,13 +8,10 @@ interface IUsePakistanBankAccountForm {
 }
 
 // NOTE: 巴基斯坦多家銀行專用 - 帳號列表 Data
-export const usePakistanBankAccountForm = (
-  props: IUsePakistanBankAccountForm
-) => {
+export const usePakistanBankAccountForm = (props: IUsePakistanBankAccountForm) => {
   // NOTE: 帳號列表 Data
   const [bankDropList, setBankDropList] = useState<string[]>([]);
-  const { iBanData, onIBanChange, onIbanBlur, validateIban } =
-    usePakistanIBanValidate();
+  const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate();
   const [bankAccountValue, setBankAccountValue] = useState<{
     value: number;
     label: string;

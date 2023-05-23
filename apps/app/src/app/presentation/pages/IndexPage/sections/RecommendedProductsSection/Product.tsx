@@ -27,27 +27,16 @@ export const Product = (props: Props) => {
           <div className={'font-light'}>{props.product.productName}</div>
         </div>
         <div className={'right flex flex-row items-center'}>
-          <div className={'font-light'}>
-            ₹ {formatPrice(props.product.calculating.finalLoanPrice)}
-          </div>
-          {expand ? (
-            <MdExpandLess size={30} color={'#AAAAAA'} />
-          ) : (
-            <MdExpandMore size={30} color={'#AAAAAA'} />
-          )}
+          <div className={'font-light'}>₹ {formatPrice(props.product.calculating.finalLoanPrice)}</div>
+          {expand ? <MdExpandLess size={30} color={'#AAAAAA'} /> : <MdExpandMore size={30} color={'#AAAAAA'} />}
         </div>
       </div>
       {expand && (
-        <div
-          className={
-            'expandable-brand bg-[#F3F3F3] text-[#707070] p-2 flex flex-col'
-          }
-        >
+        <div className={'expandable-brand bg-[#F3F3F3] text-[#707070] p-2 flex flex-col'}>
           <div className={'item flex flex-row justify-between mb-1 font-light'}>
             <div className={'key'}>Interest</div>
             <div className={'value'}>
-              {environment.currency}{' '}
-              {formatPrice(props.product.calculating.interestPrice)}
+              {environment.currency} {formatPrice(props.product.calculating.interestPrice)}
             </div>
           </div>
 
@@ -59,8 +48,7 @@ export const Product = (props: Props) => {
           <div className={'item flex flex-row justify-between mb-1 font-light'}>
             <div className={'key'}>Disbursal Amount </div>
             <div className={'value'}>
-              {environment.currency}{' '}
-              {formatPrice(props.product.calculating.disbursalPrice)}
+              {environment.currency} {formatPrice(props.product.calculating.disbursalPrice)}
             </div>
           </div>
 

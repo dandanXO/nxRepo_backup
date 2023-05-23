@@ -37,12 +37,7 @@ const PakistanExtendModal = (props: any) => {
         titleColor="text-ctext-secondary"
         textColor="text-ctext-primary"
       />
-      <ListItem
-        title={'No.'}
-        text={orderNo ?? ''}
-        titleColor="text-ctext-secondary"
-        textColor="text-ctext-primary"
-      />
+      <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary" />
       <ListItem
         title={'Due Date'}
         text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
@@ -60,9 +55,7 @@ const PakistanExtendModal = (props: any) => {
         title={'Overdue Days'}
         text={overdueDays ?? ''}
         titleColor="text-ctext-secondary"
-        textColor={
-          status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
-        }
+        textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
       />
       {/*NOTE: 展期罰金*/}
       <ListItem
@@ -106,9 +99,7 @@ const PakistanExtendModal = (props: any) => {
       />
 
       <div className="mt-6  mb-5 bg-cstate-disable-main h-2 mx-[-20px]"></div>
-      <div className="text-black text-xs font-bold text-left">
-        {'Payment Method'}
-      </div>
+      <div className="text-black text-xs font-bold text-left">{'Payment Method'}</div>
       <Select
         styles={selectStyles}
         options={props.repayTypesList || []}
@@ -121,17 +112,10 @@ const PakistanExtendModal = (props: any) => {
 
       <div className={`flex flex-row mt-6 text-white`}>
         <div className={`grow mr-1.5`}>
-          <Button
-            type={'ghost'}
-            onClick={() => navigate(-2)}
-            text={'Cancel'}
-          />
+          <Button type={'ghost'} onClick={() => navigate(-2)} text={'Cancel'} />
         </div>
         <div className={`grow ml-1.5`}>
-          <Button
-            onClick={props.handleConfirm}
-            text={'Confirm'}
-          />
+          <Button onClick={props.handleConfirm} text={'Confirm'} />
         </div>
       </div>
     </div>

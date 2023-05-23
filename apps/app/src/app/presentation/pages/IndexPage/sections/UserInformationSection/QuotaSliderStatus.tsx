@@ -14,7 +14,6 @@ type Props = IndexPageProps & {
 };
 
 export const QuotaSliderStatus = (props: Props) => {
-
   // TODO: refactor
   // NOTE: 是否禁用 quota slider
   const disableQuotaSlider = useMemo(() => {
@@ -28,12 +27,7 @@ export const QuotaSliderStatus = (props: Props) => {
       props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota,
       props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
     ].some((item) => item === true);
-  }, [
-    props.state.user.state,
-    props.state.order.state,
-    props.state.riskControl.state,
-  ]);
-
+  }, [props.state.user.state, props.state.order.state, props.state.riskControl.state]);
 
   const [currentQuotaValue, setCurrentQuotaValue] = useState(0);
   const [currentQuotaLabelValue, setCurrentQuotaLabelValue] = useState('');
@@ -46,7 +40,6 @@ export const QuotaSliderStatus = (props: Props) => {
     setMaxQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.max || 0));
   }, [props.state.indexAPI?.quotaBar.max]);
 
-
   useEffect(() => {
     // NOTE: 禁用 Quota Slider
     if (disableQuotaSlider) {
@@ -57,14 +50,11 @@ export const QuotaSliderStatus = (props: Props) => {
     } else {
       // NOTE: 啟用 Quota Slider
       setCurrentQuotaValue(props.state.indexAPI?.quotaBar.current || 0);
-      setCurrentQuotaLabelValue(
-        formatPrice(props.state.indexAPI?.quotaBar.current || 0)
-      );
+      setCurrentQuotaLabelValue(formatPrice(props.state.indexAPI?.quotaBar.current || 0));
       setDisableQuotaBar(false);
       props.setQuotaBarTargetPrice(props.state.indexAPI?.quotaBar.current || 0);
     }
   }, [disableQuotaSlider, props.state.indexAPI?.quotaBar]);
-
 
   // NOTE: 與 Parent 溝通
   useEffect(() => {
@@ -76,9 +66,7 @@ export const QuotaSliderStatus = (props: Props) => {
       <div className={'h-[60px]'}>
         <div className={'flex flex-col justify-center items-center mb'}>
           <div className="w-full flex flex-row justify-between mb-2">
-            <div className="text-white text-sm font-light">
-              You can get up to
-            </div>
+            <div className="text-white text-sm font-light">You can get up to</div>
             <div className="text-white font-medium">
               {environment.currency} {currentQuotaLabelValue} / {maxQuotaValue}
             </div>
@@ -127,19 +115,9 @@ export const QuotaSliderStatus = (props: Props) => {
         </div>
 
         {/*NOTE: ExclusiveLoanOffer*/}
-        <div
-          className={
-            'px-1 py-2 bg-white rounded-lg relative top-1 shadow-md shadow-gray-300'
-          }
-        >
+        <div className={'px-1 py-2 bg-white rounded-lg relative top-1 shadow-md shadow-gray-300'}>
           <span className={'pr-2'}>Exclusive Personal Loan offer</span>
-          <span
-            className={`${
-              props.countdown === '00:00:00'
-                ? 'text-slate-500'
-                : 'text-orange-500'
-            }`}
-          >
+          <span className={`${props.countdown === '00:00:00' ? 'text-slate-500' : 'text-orange-500'}`}>
             {props.countdown}
           </span>
         </div>
