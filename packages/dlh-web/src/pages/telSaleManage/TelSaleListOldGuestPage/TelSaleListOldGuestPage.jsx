@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Cookies from "js-cookie";
 import styles from './TelSaleListOldGuestPage.less';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -25,11 +26,15 @@ function TelSaleListOldGuestPage ({
 
     const [searchParams, setSearchParams] = useState({ assignedStartTime: "", assignedEndTime: "", status: "", userPhone: "", collectorId: "" })
     const [selectedRow, setSelectedRow] = useState([]);
+
+    const loginInfo = JSON.parse(Cookies.get('adminUser'))
+    const { roleId } = loginInfo['data']
+
     useEffect(() => {
         getPersonOrGroupList();
         getCollectorList()
     }, []);
-    
+
     useEffect(() => {
         getTelSaleList({ ...searchParams },'old')
     }, [searchParams])
@@ -96,7 +101,8 @@ function TelSaleListOldGuestPage ({
     return (
         <div className={''}>
             <SearchList handleSearch={handleSearch} time={[]} collectors={collectorList}/>
-            <Button type={'primary'} onClick={handleModalVisible}><FormattedMessage id="page.table.redistribute.order"/></Button>
+            {/* 一般電銷人員不顯示重新分配訂單按紐 */}
+            {![26].includes(roleId) && <Button type={'primary'} onClick={handleModalVisible}><FormattedMessage id="page.table.redistribute.order"/></Button>}
             <CommonTable
                 rowKey={(record, index) => record.id}
                 rowSelection={rowSelection}
