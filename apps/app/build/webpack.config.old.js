@@ -205,7 +205,7 @@ module.exports = (config, context) => {
         template: './src/index.html',
         filename: 'index.html',
         // publicPath: "/v2",
-        chunks: ['errorhandler', 'main', 'polyfills'],
+        chunks: ['polyfills','errorhandler', 'main'],
       })
     );
     // NOTICE: 使用以下android 8 is ok
