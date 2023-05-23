@@ -30,7 +30,7 @@ export const runAxios = async (
       },
     };
     const result = await axios(config);
-    console.log('runAxios.result', result);
+    // console.log('runAxios.result', result);
 
     if (AppEnvironment.isDev()) {
       SentryModule.captureMessage(
