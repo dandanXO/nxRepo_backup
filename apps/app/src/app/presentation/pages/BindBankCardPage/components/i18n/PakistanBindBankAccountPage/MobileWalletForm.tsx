@@ -1,6 +1,6 @@
 import React, { ClipboardEvent } from 'react';
 import { useNavigate } from 'react-router';
-// import Select from 'react-select';
+import Select from 'react-select';
 
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
 
@@ -44,19 +44,19 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
     <div className="flex grow flex-col">
       <div>
         <div className={'text-sm'}>{'Mobile Wallet'}</div>
-        {/*<Select*/}
-        {/*  styles={selectStyles}*/}
-        {/*  className="react-select-container mb-2"*/}
-        {/*  options={options}*/}
-        {/*  // defaultValue={props.bankDropList[0].value}*/}
-        {/*  value={props.walletValue}*/}
-        {/*  onChange={(item: any) => {*/}
-        {/*    console.log(item);*/}
-        {/*    props.setWalletValue(item);*/}
-        {/*  }}*/}
-        {/*  isSearchable={false}*/}
-        {/*  placeholder={'Mobile Wallet'}*/}
-        {/*/>*/}
+        <Select
+          styles={selectStyles}
+          className="react-select-container mb-2"
+          options={options}
+          // defaultValue={props.bankDropList[0].value}
+          value={props.walletValue}
+          onChange={(item: any) => {
+            console.log(item);
+            props.setWalletValue(item);
+          }}
+          isSearchable={false}
+          placeholder={'Mobile Wallet'}
+        />
       </div>
       <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>
       <Input

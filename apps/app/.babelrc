@@ -1,6 +1,5 @@
 {
   "presets": [
-    "@babel/preset-react",
     [
       "@babel/preset-env",
       {
@@ -25,6 +24,7 @@
     ]
   ],
   "plugins": [
+    ["@babel/plugin-transform-async-to-generator"],
     ["styled-components", { "pure": true, "ssr": true }]
   ]
 }

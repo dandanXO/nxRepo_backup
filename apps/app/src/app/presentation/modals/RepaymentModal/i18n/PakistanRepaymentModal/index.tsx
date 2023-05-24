@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
-// import Select, { StylesConfig } from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 
 import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
 
@@ -100,15 +100,15 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
 
       <div>
         <div className="mt-2.5 text-xs text-black">{'Payment Method'}</div>
-        {/*<Select*/}
-        {/*  styles={selectStyles}*/}
-        {/*  options={repayTypesList || []}*/}
-        {/*  value={repayType}*/}
-        {/*  onChange={(item) => {*/}
-        {/*    setRepayType(item as paymentMethodValueType);*/}
-        {/*  }}*/}
-        {/*  isSearchable={false}*/}
-        {/*/>*/}
+        <Select
+          styles={selectStyles}
+          options={repayTypesList || []}
+          value={repayType}
+          onChange={(item) => {
+            setRepayType(item as paymentMethodValueType);
+          }}
+          isSearchable={false}
+        />
       </div>
 
       {radioValue !== 'custom' && (

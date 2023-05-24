@@ -1,5 +1,4 @@
-import "./polyfills"
-// NOTICE: caught Refere nceError: Cannot access 'SentryModule' before initialization
+// NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 import { SentryModule } from './app/modules/sentry';
 import "./app/modules/errorHandler";
 import './app/modules/posthog';
@@ -21,7 +20,7 @@ import './app/modules/window/IWindow';
 
 // NOTE: Other
 import './style.css';
-import Application from './app/app';
+import App from './app/app';
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -61,7 +60,7 @@ const renderApp = () => {
 
   root.render(
     <StrictMode>
-      <Application />
+      <App />
     </StrictMode>
   );
 };

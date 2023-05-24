@@ -76,7 +76,7 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     yield put(getQuotaModelStatusAction.loadingAction());
 
     let data: GetQuotaModelStatusResponse = yield call(Service.LoanService.getQuotaModelStatus, {});
-    console.log("GetQuotaModelStatusResponse", data);
+    // console.log("GetQuotaModelStatusResponse", data);
 
     // NOTE: 系統每 20 秒取得風控模型資料，超過十次則停止請求
     let count = 0;
