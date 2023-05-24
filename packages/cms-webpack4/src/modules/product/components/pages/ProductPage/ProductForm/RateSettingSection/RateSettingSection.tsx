@@ -34,6 +34,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
   const { confirm } = props.modal;
   const [messageAPI, contextHolder] = message.useMessage();
   const [tempProductInterestRatePairs, setTempProductInterestRatePairs] = useState<ProductInterestRate[]>([])
+  const [everResetField, setEverResetField] = useState(false);
 
   const handleProductInterestRatePairsModalOnOK = () => {
       const { productInterestRatePairs } = props.form.getFieldsValue();
@@ -60,26 +61,32 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
   }
 
   const handleProductInterestRatePairsModalOnClose = (e) => {
-      confirm({
-          icon : null,
-          content: (
-              <div style={{ height: '20px', display: "flex" }}>
-                  <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
-                  <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将不会储存已变更的资料。确定要离开吗？</div>
-              </div>
-          ),
-          onOk() {
-              props.form.setFieldValue('productInterestRatePairs', tempProductInterestRatePairs);
-              props.setCustomAntFormFieldError(prev => ({
-                  ...prev,
-                  productInterestRatePairs: {}
-              }))
-              setShowProductInterestRatePairsModal(false);
-          },
-          onCancel() {
-              //
-          }
-      })
+      // 有修改過欄位才要跳彈窗
+      if(props.interestRatePairsTouchInput || everResetField) {
+          confirm({
+              icon : null,
+              content: (
+                  <div style={{ height: '20px', display: "flex" }}>
+                      <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
+                      <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将不会储存已变更的资料。确定要离开吗？</div>
+                  </div>
+              ),
+              onOk() {
+                  props.form.setFieldValue('productInterestRatePairs', tempProductInterestRatePairs);
+                  props.setCustomAntFormFieldError(prev => ({
+                      ...prev,
+                      productInterestRatePairs: {}
+                  }))
+                  props.setInterestRatePairsTouchInput(null);
+                  setShowProductInterestRatePairsModal(false);
+              },
+              onCancel() {
+                  //
+              }
+          })
+      } else {
+          setShowProductInterestRatePairsModal(false);
+      }
   }
 
   const handleProductInterestRateSettingOnClick = () => {
@@ -293,6 +300,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                           show={showProductInterestRatePairsModal}
                           onOk={handleProductInterestRatePairsModalOnOK}
                           handleCloseModal={handleProductInterestRatePairsModalOnClose}
+                          setEverResetField={setEverResetField}
                       />)
                   }
               </Panel>

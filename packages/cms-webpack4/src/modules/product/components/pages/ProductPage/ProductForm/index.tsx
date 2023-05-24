@@ -23,7 +23,7 @@ interface ProductFormProps {
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     show: boolean;
-
+    productFetched: boolean;
     enableLoanAmount: boolean;
     enableReLoanAmount: boolean;
     setEnableLoanAmount: any;

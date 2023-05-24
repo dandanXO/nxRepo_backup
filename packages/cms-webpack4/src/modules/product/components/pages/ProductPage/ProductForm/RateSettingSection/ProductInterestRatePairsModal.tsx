@@ -12,6 +12,7 @@ interface ProductInterestRatePairsModalProps {
     form: FormInstance
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>
+    setEverResetField: React.Dispatch<boolean>;
     interestRatePairsTouchInput: any;
     show: boolean
     onOk: () => void;
@@ -26,13 +27,15 @@ export const ProductInterestRatePairsModal = (
         interestRatePairsTouchInput,
         show,
         onOk,
-        handleCloseModal
+        handleCloseModal,
+        setEverResetField
     }:ProductInterestRatePairsModalProps) => {
 
     const handleClearFields = (groupIndex) => {
         const fieldValue = form.getFieldValue('productInterestRatePairs');
         fieldValue[groupIndex] = { [productInterestRatesContentKey]: [{ preInterest: '', postInterest: '', plusAmount: '' }]};
         form.setFieldValue('productInterestRatePairs', fieldValue);
+        setEverResetField(true);
         setCustomAntFormFieldError((prev) =>(
             {
                 ...prev,

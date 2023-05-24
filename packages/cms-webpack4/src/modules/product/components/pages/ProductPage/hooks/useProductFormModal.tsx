@@ -84,6 +84,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
     const [triggerFetchTableList, setTriggerFetchTableList] = useState<any>();
     // console.log("productModalData", productModalData);
 
+    const [productFetched, setProductFetched] = useState(false);
+
 
     // NOTICE: form
     const [form] = Form.useForm();
@@ -237,6 +239,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 enabled: productFormData.enabled,
                 productInterestRatePairs
             })
+            setProductFetched(true);
         }
 
         // console.log("productFormData", productFormData);
@@ -261,6 +264,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
             // console.log("responseData", responseData);
             // console.log(responseData?.message)
             // console.log(responseData?.code)
+            setProductFetched(false);
             setProductModalData({
                 show: false,
                 // ...responseData,
@@ -493,6 +497,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         modal,
         productModalData,
         productFormData,
+        productFetched,
         setProductModalData,
         handleCloseModal,
         onFinish,
