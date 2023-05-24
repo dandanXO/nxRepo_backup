@@ -12,7 +12,7 @@ import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
 import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
 import { NativeAppInfo } from '../persistant/nativeAppInfo';
 import { getQuotaModelStatusAction } from '../presentation/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
-
+import { GetNotificationResponse } from '../api/indexService/GetNotificationResponse';
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;
   indexAPI: GetIndexResponse | null;
@@ -48,6 +48,7 @@ export interface InitialState {
       seconds: string;
     };
   };
+  notification: GetNotificationResponse;
 }
 
 export type TimePartition = {
@@ -96,6 +97,7 @@ const initialState: InitialState = {
       seconds: '',
     },
   },
+  notification:[]
 };
 
 export const indexPageSlice = createSlice({
@@ -240,6 +242,10 @@ export const indexPageSlice = createSlice({
     // NOTICE: 取消可重刷取得逾期的計時器
     expiredRefreshableCountdown: (state, action) => {
       state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+    },
+    // NOTICE: 取得推送用戶數訊息
+    updateNotification:(state, action) => {
+        state.notification = action.payload;
     },
   },
   extraReducers: (builder) => {

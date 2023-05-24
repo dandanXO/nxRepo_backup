@@ -5,6 +5,8 @@ import { RootState } from '../../../reduxStore';
 import CustomerServiceIcon from '../../components/images/CustomerServiceIcon.svg';
 import { Button } from '../../components/layouts/Button';
 import { Navigation } from '../../components/layouts/Navigation';
+import { PagePathEnum } from '../PagePathEnum';
+import { getToken } from '../../../modules/querystring/getToken';
 
 const CustomerServicePage = () => {
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ const CustomerServicePage = () => {
       <Navigation
         title={'Customer Service'}
         back={() => {
-          navigate(-1);
+          navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
         }}
       />
       <div className="flex flex-col items-center justify-center">

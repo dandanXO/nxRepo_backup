@@ -1,4 +1,4 @@
-import { all, call, put, select } from 'redux-saga/effects';
+import { all, call, put, select ,take} from 'redux-saga/effects';
 
 import { Service } from '../../../api';
 import { GetInitServiceResponse } from '../../../api/appService/GetInitServiceResponse';
@@ -11,6 +11,7 @@ import { appSlice } from '../../../reduxStore/appSlice';
 import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../utils/catchSagaError';
 import { systemCallGetUserInfoSaga } from '../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
+import { systemFetchCouponSaga } from './systemFetchCouponSaga';
 
 export function* systemStartInitSaga() {
   // try {
@@ -31,6 +32,7 @@ export function* systemStartInitSaga() {
     call(Service.AppService.getInit, { packageId }),
     // call(Service.UserService.GetUserInfoService, {}),
     systemCallGetUserInfoSaga(),
+    systemFetchCouponSaga()
   ]);
 
   yield put(appSlice.actions.updateInit(response));

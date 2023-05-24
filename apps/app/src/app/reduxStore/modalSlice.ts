@@ -19,6 +19,13 @@ export type InitialStateType = {
   QRSuccessModal: {
     show: boolean;
   };
+  systemCouponModal: {
+    show: boolean;
+    title: string;
+    text: string;
+    webUrl: string;
+    action: string;
+  }
 };
 
 const initialState: InitialStateType = {
@@ -38,6 +45,13 @@ const initialState: InitialStateType = {
   QRSuccessModal: {
     show: false,
   },
+  systemCouponModal: {
+    show: false,
+    title: '',
+    text: '',
+    webUrl: '',
+    action: '',
+  }
 };
 
 export const modalSlice = createSlice({
@@ -77,6 +91,13 @@ export const modalSlice = createSlice({
     },
     updateQRSuccessModal: (state, action: PayloadAction<InitialStateType['QRSuccessModal']>) => {
       state.QRSuccessModal.show = action.payload.show;
+    },
+    updateSystemCouponModal: (state, action: PayloadAction<InitialStateType['systemCouponModal']>) => {
+      state.systemCouponModal.show = action.payload.show;
+      state.systemCouponModal.title = action.payload.title;
+      state.systemCouponModal.text = action.payload.text;
+      state.systemCouponModal.webUrl = action.payload.webUrl;
+      state.systemCouponModal.action = action.payload.action;
     },
   },
 });

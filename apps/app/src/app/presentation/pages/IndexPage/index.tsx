@@ -40,6 +40,7 @@ import { TipsSection } from './sections/TipsSection';
 import { UserInformationSection } from './sections/UserInformationSection';
 import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndReapplyInTimeSection';
 import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
+import SystemCouponModal from '../../modals/SystemCouponModal';
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -370,7 +371,6 @@ const IndexPage = () => {
 
   // NOTE: Modal
   const modelState = useSelector((state: RootState) => state.model);
-
   return (
     <Page className={'flex flex-col'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
@@ -633,6 +633,11 @@ const IndexPage = () => {
           }}
         />
       )}
+      
+      {/*NOTE: 優惠券通知 */}
+      {modelState.systemCouponModal.show && (<SystemCouponModal/>)} 
+
+     
     </Page>
   );
 };

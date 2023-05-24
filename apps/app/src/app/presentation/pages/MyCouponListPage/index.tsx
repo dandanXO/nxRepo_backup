@@ -7,9 +7,14 @@ import { GetCouponListRequest } from '../../../api/userService/GetCouponListRequ
 import Coupon from '../../components/Coupon';
 import { Tags } from '../../components/Tag';
 import { Page } from '../../components/layouts/Page';
+import { Navigation } from '../../components/layouts/Navigation';
+import { useNavigate } from 'react-router';
+import { PagePathEnum } from '../PagePathEnum';
+import { getToken } from '../../../modules/querystring/getToken';
 
 const MyCouponListPage = () => {
   const [listStatus, setListStatus] = useState('Usable');
+  const navigate = useNavigate();
 
   const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
     useLazyGetCouponListQuery({
@@ -34,6 +39,12 @@ const MyCouponListPage = () => {
 
   return (
     <Page className="flex flex-col">
+       <Navigation
+        title={'My Coupon'}
+        back={() => {
+          navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+        }}
+      />
       <div className={`sticky top-[0px] flex flex-row justify-between bg-white py-3 px-5`}>
         <Tags
           items={['Usable', 'Used', 'Expired']}

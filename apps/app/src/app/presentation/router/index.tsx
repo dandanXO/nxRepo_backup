@@ -85,10 +85,6 @@ const RepamentCouponModal = loadable(
 );
 const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ '../modals/IBANFinderModal'));
 
-const SystemCouponModal = loadable(
-  () => import(/* webpackChunkName: "SystemCouponModal" */ '../modals/SystemCouponModal')
-);
-
 export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
@@ -142,7 +138,7 @@ export const AppRouter = () => {
         </Route>
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
-        <Route path="/v2/my-coupon-list" element={<MyCouponListPage />} />
+        <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
         <Route path="/v2/partner" element={<PartnerPage />} />
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
@@ -155,7 +151,6 @@ export const AppRouter = () => {
         {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
 
         <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
-        <Route path="/v2/system-coupon-modal" element={<SystemCouponModal />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
 
