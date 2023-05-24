@@ -84,7 +84,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
     const [triggerFetchTableList, setTriggerFetchTableList] = useState<any>();
     // console.log("productModalData", productModalData);
 
-    const [productFetched, setProductFetched] = useState(false);
+    const [productFetchTag, setProductFetchTag] = useState(false);
 
 
     // NOTICE: form
@@ -131,6 +131,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         if (!productFormData) return;
         if (!merchantList) return;
 
+        setProductFetchTag(!productFetchTag);
 
         setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false)
         setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false)
@@ -239,7 +240,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 enabled: productFormData.enabled,
                 productInterestRatePairs
             })
-            setProductFetched(true);
         }
 
         // console.log("productFormData", productFormData);
@@ -264,7 +264,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
             // console.log("responseData", responseData);
             // console.log(responseData?.message)
             // console.log(responseData?.code)
-            setProductFetched(false);
             setProductModalData({
                 show: false,
                 // ...responseData,
