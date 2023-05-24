@@ -11,7 +11,10 @@
         "modules": false,
         "forceAllTransforms": true,
         "spec": true,
-        "loose": true
+        "loose": true,
+        "include": [
+
+        ]
       }
     ],
     [
@@ -47,6 +50,12 @@
         "corejs": 3
       }
     ],
-    ["styled-components", { "pure": true, "ssr": true }]
+    ["styled-components", { "pure": true, "ssr": true }],
+    [
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      {
+        "noDocumentAll": true
+      }
+    ]
   ]
 }
