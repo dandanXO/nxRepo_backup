@@ -74,8 +74,8 @@ module.exports = (config, context) => {
     // target: "browserslist",
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
-      polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
-      errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
+      // polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
+      // errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
     },
     output: {
       // filename: '[name].[contenthash].js',
@@ -198,14 +198,13 @@ module.exports = (config, context) => {
     //   ],
     // }
   } else if (isProduction) {
-    // 只要加就會掛掉
     finalConfig.plugins.push(
       new HtmlWebpackPlugin({
         // 配置 HTML 模板路徑與生成名稱 (第三步)
         template: './src/index.html',
         filename: 'index.html',
         // publicPath: "/v2",
-        chunks: ['polyfills','errorhandler', 'main'],
+        // chunks: ['polyfills','errorhandler', 'main'],
       })
     );
     // NOTICE: 使用以下android 8 is ok
