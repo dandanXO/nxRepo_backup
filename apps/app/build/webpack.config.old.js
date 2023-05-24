@@ -74,8 +74,8 @@ module.exports = (config, context) => {
     // target: "browserslist",
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
-      // polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
-      // errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
+      polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
+      errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
     },
     output: {
       // filename: '[name].[contenthash].js',
@@ -179,24 +179,24 @@ module.exports = (config, context) => {
 
   if (process.env.NODE_ANALYZER && !isProduction) {
     finalConfig.plugins.push(new BundleAnalyzerPlugin());
-    // finalConfig["optimization"] = {
-    //   minimize: true,
-    //   minimizer: [
-    //     new TerserPlugin({
-    //       terserOptions: {
-    //         compress: {
-    //           drop_console: true,
-    //         },
-    //         format: {
-    //           comments: false,
-    //         },
-    //       },
-    //       // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-    //       extractComments: false,
-    //
-    //     })
-    //   ],
-    // }
+    finalConfig["optimization"] = {
+      // minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+            format: {
+              comments: false,
+            },
+          },
+          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+          extractComments: false,
+
+        })
+      ],
+    }
   } else if (isProduction) {
     finalConfig.plugins.push(
       new HtmlWebpackPlugin({
@@ -204,7 +204,7 @@ module.exports = (config, context) => {
         template: './src/index.html',
         filename: 'index.html',
         // publicPath: "/v2",
-        // chunks: ['polyfills','errorhandler', 'main'],
+        chunks: ['polyfills','errorhandler', 'main'],
       })
     );
     // NOTICE: 使用以下android 8 is ok

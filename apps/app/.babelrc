@@ -7,10 +7,9 @@
         "useBuiltIns": "usage",
         "corejs": {
           "version": "3.8",
-          "proposals": false
+          "proposals": true
         },
         "targets": [
-          "last 2 version",
           "chrome >= 58",
           "android >= 58",
           "not IE 9-11"
@@ -25,6 +24,7 @@
     ]
   ],
   "plugins": [
+    ["@babel/plugin-transform-async-to-generator"],
     ["styled-components", { "pure": true, "ssr": true }]
   ]
 }
