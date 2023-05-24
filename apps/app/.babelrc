@@ -4,11 +4,13 @@
       "@babel/preset-env",
       {
         "debug": true,
-        "browserslistEnv": ".browserslistrc",
-        "targets": {
-          "chrome": "58",
-          "android": "7"
-        }
+        "useBuiltIns": false,
+        "targets": [
+          "last 2 version",
+          "chrome >= 58",
+          "android >= 58",
+          "not IE 9-11"
+        ]
       }
     ],
     [

@@ -256,6 +256,5 @@ module.exports = (config, context) => {
   }
   console.log('finalConfig', finalConfig);
   console.log('finalConfig.module.rules', finalConfig.module.rules);
-  // console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return finalConfig;
 };
