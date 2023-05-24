@@ -9,11 +9,10 @@
           "version": "3.8",
           "proposals": true
         },
-        "targets": [
-          "chrome >= 58",
-          "android >= 58",
-          "not IE 9-11"
-        ],
+        "targets": {
+          "android": "53",
+          "chrome": "53"
+        },
         "modules": false
       }
     ],
@@ -25,6 +24,7 @@
     ]
   ],
   "plugins": [
+    ["@babel/plugin-transform-destructuring"],
     ["@babel/plugin-transform-async-to-generator"],
     ["styled-components", { "pure": true, "ssr": true }]
   ]
