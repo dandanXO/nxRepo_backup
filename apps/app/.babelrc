@@ -10,8 +10,8 @@
           "proposals": true
         },
         "targets": {
-          "android": "56",
-          "chrome": "56"
+          "android": "53",
+          "chrome": "53"
         },
         "modules": false
       }
