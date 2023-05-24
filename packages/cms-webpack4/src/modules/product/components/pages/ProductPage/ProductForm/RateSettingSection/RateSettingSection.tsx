@@ -79,6 +79,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                   }))
                   props.setInterestRatePairsTouchInput(null);
                   setShowProductInterestRatePairsModal(false);
+                  setEverResetField(false);
               },
               onCancel() {
                   //
