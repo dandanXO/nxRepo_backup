@@ -1,6 +1,6 @@
 import React, { ClipboardEvent } from 'react';
 import { useNavigate } from 'react-router';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 import { Input } from '@frontend/mobile/shared/ui';
 
@@ -58,20 +58,20 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
 
       <div>
         <div className={'text-sm'}>{'Bank Name'}</div>
-        <Select
-          styles={selectStyles}
-          className="mb-2"
-          // defaultValue={props.bankDropList[0].value}
-          // value={props?.bankDropList[props.bankAccountValue]?.value}
-          value={props.bankAccountValue}
-          onChange={(item: any) => {
-            // console.log(item)
-            props.onIFSCDropSelect(item);
-          }}
-          options={options}
-          isSearchable={false}
-          placeholder={'Select'}
-        />
+        {/*<Select*/}
+        {/*  styles={selectStyles}*/}
+        {/*  className="mb-2"*/}
+        {/*  // defaultValue={props.bankDropList[0].value}*/}
+        {/*  // value={props?.bankDropList[props.bankAccountValue]?.value}*/}
+        {/*  value={props.bankAccountValue}*/}
+        {/*  onChange={(item: any) => {*/}
+        {/*    // console.log(item)*/}
+        {/*    props.onIFSCDropSelect(item);*/}
+        {/*  }}*/}
+        {/*  options={options}*/}
+        {/*  isSearchable={false}*/}
+        {/*  placeholder={'Select'}*/}
+        {/*/>*/}
       </div>
 
       <div>

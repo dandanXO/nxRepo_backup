@@ -53,7 +53,6 @@ const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConf
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
     // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
-
     // NOTE: Android 9 失敗
     // devtool: false,
     // NOTE: Android 9 成功
@@ -76,6 +75,8 @@ module.exports = (config, context) => {
       main: path.resolve(__dirname, '../src/main.tsx'),
       polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
       errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
+      // reactSlider: path.resolve(__dirname, '../../../node_modules/react-slider'),
+      // reduxjs: path.resolve(__dirname, '../../../node_modules/.pnpm/@floating-ui+core@1.0.2/node_modules/@floating-ui/dist/core/dist),
     },
     output: {
       // filename: '[name].[contenthash].js',
@@ -85,6 +86,34 @@ module.exports = (config, context) => {
     },
     module: {
       rules: [
+        {
+          test: /\.(ts|tsx|js|jsx)$/,
+          include: [
+            path.resolve(__dirname, '../src'),
+            path.resolve(__dirname, '../../../libs'),
+            // path.resolve(__dirname, '../../../node_modules/react-slider')
+            // path.resolve(__dirname, '../../../node_modules/@reduxjs'),
+            // path.resolve(__dirname, '../../../node_modules/next'),
+            // path.resolve(__dirname, '../../../node_modules/nx'),
+            // path.resolve(__dirname, '../../../node_modules'),
+            // path.resolve(__dirname, '../../../node_modules/@reduxjs/toolkit/dist'),
+            // path.resolve(__dirname, '../../../node_modules/react-select'),
+            // path.resolve(__dirname, '../../../node_modules/.pnpm/@floating-ui+core@1.0.2'),
+            // path.resolve(__dirname, '../../../node_modules/.pnpm/@floating-ui+dom'),
+            // path.resolve(__dirname, '../../../node_modules/.pnpm/node_modules/@floating-ui'),
+            // path.resolve(__dirname, '../../../node_modules/.pnpm/@floating-ui+core@1.0.2/node_modules/@floating-ui/dist/core/dist'),
+          ],
+          exclude: /node_modules/,
+          use: [
+            // 'thread-loader',
+            {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: false
+              }
+            }
+          ]
+        },
         // {
         //   test: /\.svg$/,
         //   generator: {
@@ -155,6 +184,7 @@ module.exports = (config, context) => {
         },
       },
     },
+
     plugins: [
       // new PreloadWebpackPlugin({
       //   rel: 'preload',
@@ -179,24 +209,7 @@ module.exports = (config, context) => {
 
   if (process.env.NODE_ANALYZER && !isProduction) {
     finalConfig.plugins.push(new BundleAnalyzerPlugin());
-    finalConfig["optimization"] = {
-      // minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-            format: {
-              comments: false,
-            },
-          },
-          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-          extractComments: false,
 
-        })
-      ],
-    }
   } else if (isProduction) {
     finalConfig.plugins.push(
       new HtmlWebpackPlugin({
@@ -204,7 +217,7 @@ module.exports = (config, context) => {
         template: './src/index.html',
         filename: 'index.html',
         // publicPath: "/v2",
-        chunks: ['polyfills','errorhandler', 'main'],
+        chunks: ['polyfills','errorhandler', 'main', 'vendors', 'reduxjs'],
       })
     );
     // NOTICE: 使用以下android 8 is ok
@@ -224,6 +237,47 @@ module.exports = (config, context) => {
       //     extractComments: false,
       //   }),
       // ],
+
+      splitChunks: {
+        cacheGroups: {
+          // reactLib: {
+          //   test: /\/node_modules\/@reduxjs\/toolkit/,
+          //   name: 'reactLib',
+          //   minChunks: 1,
+          //   priority: 2,
+          //   chunks: 'all',
+          // },
+          vendors: {
+            test: /[\\/]node_modules[\\/](?!@floating-ui+core@1.0.2)/,
+            name: 'vendors',
+            minChunks: 1,
+            priority: 1,
+            chunks: 'all',
+          },
+        },
+      },
+      // splitChunks: {
+      //   chunks: 'async',
+      //   minSize: 20000,
+      //   minRemainingSize: 0,
+      //   minChunks: 1,
+      //   maxAsyncRequests: 30,
+      //   maxInitialRequests: 30,
+      //   enforceSizeThreshold: 50000,
+      //   cacheGroups: {
+      //     defaultVendors: {
+      //       test: /[\\/]node_modules[\\/]/,
+      //       priority: -10,
+      //       reuseExistingChunk: true,
+      //     },
+      //     default: {
+      //       minChunks: 2,
+      //       priority: -20,
+      //       reuseExistingChunk: true,
+      //     },
+      //   },
+      // },
+      // minimize: true,
     };
 
     // exclude: ['specific-entry.js'], // 替换 specific-entry.js 为你想排除的入口点文件名
@@ -256,5 +310,6 @@ module.exports = (config, context) => {
   }
   console.log('finalConfig', finalConfig);
   console.log('finalConfig.module.rules', finalConfig.module.rules);
+  console.log('finalConfig.optimization.splitChunks.cacheGroups', finalConfig.optimization.splitChunks.cacheGroups);
   return finalConfig;
 };

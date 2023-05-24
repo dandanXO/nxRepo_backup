@@ -323,8 +323,8 @@ const IndexPage = () => {
       indexPageState.user.state === USER_AUTH_STATE.authing,
       indexPageState.user.state === USER_AUTH_STATE.reject,
       indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
-        indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-        indexPageState.order.state !== ORDER_STATE.hasOverdueOrder,
+      (indexPageState.order.state == ORDER_STATE.hasInComingOverdueOrder ||
+        indexPageState.order.state == ORDER_STATE.hasOverdueOrder)
     ].some((condition) => condition === true);
   }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state]);
 
@@ -524,9 +524,7 @@ const IndexPage = () => {
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {indexPageState.user.state !== USER_AUTH_STATE.authing &&
           (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able ||
-            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
-          indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-          indexPageState.order.state !== ORDER_STATE.hasOverdueOrder && (
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) && (
             <Button
               onClick={onClickReacquireCredit}
               dataTestingID={'reacquireCredit'}

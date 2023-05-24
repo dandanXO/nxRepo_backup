@@ -22,7 +22,7 @@ export const QuotaSliderStatus = (props: Props) => {
     return [
       props.state.user.state === USER_AUTH_STATE.authing,
       props.state.user.state === USER_AUTH_STATE.reject,
-      props.state.order.state === ORDER_STATE.hasInComingOverdueOrder,
+      // props.state.order.state === ORDER_STATE.hasInComingOverdueOrder,
       props.state.order.state === ORDER_STATE.hasOverdueOrder,
       props.state.order.state === ORDER_STATE.reject,
       props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota,

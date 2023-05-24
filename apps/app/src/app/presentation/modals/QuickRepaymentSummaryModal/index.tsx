@@ -2,13 +2,13 @@ import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
 import React, { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
-import Select, {
-  ControlProps,
-  DropdownIndicatorProps,
-  IndicatorSeparatorProps,
-  IndicatorsContainerProps,
-  components,
-} from 'react-select';
+// import Select, {
+//   ControlProps,
+//   DropdownIndicatorProps,
+//   IndicatorSeparatorProps,
+//   IndicatorsContainerProps,
+//   components,
+// } from 'react-select';
 
 import { BankAccount } from '../../../api/userService/BankAccount';
 import { formatPrice } from '../../../modules/format/formatPrice';
@@ -29,29 +29,29 @@ type Props = IndexPageProps & {
   selectedBankcardId?: number;
   onChangeBankcardID: (id: number) => void;
 };
-
-const IndicatorSeparator = (props: IndicatorSeparatorProps<any, true>) => {
-  console.log('IndicatorSeparator.props', props);
-  return (
-    <span {...props.innerProps} className={'font-light text-gray-400'}>
-      change
-    </span>
-  );
-};
-
-const DropdownIndicator = (props: DropdownIndicatorProps<any, true>) => {
-  // console.log("DropdownIndicator.props", props);
-  // console.log("selectProps", props.selectProps.menuIsOpen);
-  return (
-    <components.DropdownIndicator {...props}>
-      {props.selectProps.menuIsOpen ? (
-        <MdExpandLess size={30} color={'#AAAAAA'} />
-      ) : (
-        <MdExpandMore size={30} color={'#AAAAAA'} />
-      )}
-    </components.DropdownIndicator>
-  );
-};
+//
+// const IndicatorSeparator = (props: IndicatorSeparatorProps<any, true>) => {
+//   console.log('IndicatorSeparator.props', props);
+//   return (
+//     <span {...props.innerProps} className={'font-light text-gray-400'}>
+//       change
+//     </span>
+//   );
+// };
+//
+// const DropdownIndicator = (props: DropdownIndicatorProps<any, true>) => {
+//   // console.log("DropdownIndicator.props", props);
+//   // console.log("selectProps", props.selectProps.menuIsOpen);
+//   return (
+//     <components.DropdownIndicator {...props}>
+//       {props.selectProps.menuIsOpen ? (
+//         <MdExpandLess size={30} color={'#AAAAAA'} />
+//       ) : (
+//         <MdExpandMore size={30} color={'#AAAAAA'} />
+//       )}
+//     </components.DropdownIndicator>
+//   );
+// };
 
 type OptionType = {
   label: number | undefined;
@@ -150,51 +150,51 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
             {/*  </div>*/}
             {/*</div>*/}
 
-            <Select
-              menuPlacement={'top'}
-              styles={{
-                // container: (baseStyles, state) => {
-                //   return {
-                //     ...baseStyles,
-                //   }
-                // },
-                control: (baseStyles, state) => {
-                  return {
-                    ...baseStyles,
-                    borderColor: 'white',
-                    '&:hover': {
-                      borderColor: 'white',
-                    },
-                    boxShadow: 'none',
-                  };
-                },
-                // indicatorsContainer: (baseStyles, state) => {
-                //   return {
-                //     ...baseStyles,
-                //   }
-                // },
-              }}
-              components={{
-                // Control: ControlComponent,
-                // IndicatorsContainer,
-                IndicatorSeparator,
-                DropdownIndicator,
-              }}
-              className="w-full"
-              value={optionValue}
-              onChange={(item: any) => {
-                console.log(item);
-                setOptionValue(item);
-                props.onChangeBankcardID(item.value);
-              }}
-              options={props.bankcardList.map((bankcard, index) => {
-                return {
-                  value: bankcard.bankId,
-                  label: bankcard.bankId,
-                };
-              })}
-              isSearchable={false}
-            />
+            {/*<Select*/}
+            {/*  menuPlacement={'top'}*/}
+            {/*  styles={{*/}
+            {/*    // container: (baseStyles, state) => {*/}
+            {/*    //   return {*/}
+            {/*    //     ...baseStyles,*/}
+            {/*    //   }*/}
+            {/*    // },*/}
+            {/*    control: (baseStyles, state) => {*/}
+            {/*      return {*/}
+            {/*        ...baseStyles,*/}
+            {/*        borderColor: 'white',*/}
+            {/*        '&:hover': {*/}
+            {/*          borderColor: 'white',*/}
+            {/*        },*/}
+            {/*        boxShadow: 'none',*/}
+            {/*      };*/}
+            {/*    },*/}
+            {/*    // indicatorsContainer: (baseStyles, state) => {*/}
+            {/*    //   return {*/}
+            {/*    //     ...baseStyles,*/}
+            {/*    //   }*/}
+            {/*    // },*/}
+            {/*  }}*/}
+            {/*  components={{*/}
+            {/*    // Control: ControlComponent,*/}
+            {/*    // IndicatorsContainer,*/}
+            {/*    IndicatorSeparator,*/}
+            {/*    DropdownIndicator,*/}
+            {/*  }}*/}
+            {/*  className="w-full"*/}
+            {/*  value={optionValue}*/}
+            {/*  onChange={(item: any) => {*/}
+            {/*    console.log(item);*/}
+            {/*    setOptionValue(item);*/}
+            {/*    props.onChangeBankcardID(item.value);*/}
+            {/*  }}*/}
+            {/*  options={props.bankcardList.map((bankcard, index) => {*/}
+            {/*    return {*/}
+            {/*      value: bankcard.bankId,*/}
+            {/*      label: bankcard.bankId,*/}
+            {/*    };*/}
+            {/*  })}*/}
+            {/*  isSearchable={false}*/}
+            {/*/>*/}
           </div>
         </div>
 
