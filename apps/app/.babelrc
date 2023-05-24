@@ -9,11 +9,11 @@
           "version": "3.8",
           "proposals": true
         },
-        "targets": [
-          "chrome >= 58",
-          "android >= 58",
-          "not IE 9-11"
-        ],
+        "targets": {
+          "android": ["> 4.4"],
+          "android-coverage": ["> 0.99%"],
+          "chrome": [">= 58"]
+        },
         "modules": false
       }
     ],
