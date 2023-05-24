@@ -28,6 +28,7 @@
         "mocha": true
     },
     "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
         "no-console": [0],
         "rest-spread-spacing": [2],
         "key-spacing": [2],
