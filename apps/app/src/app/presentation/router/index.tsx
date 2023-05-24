@@ -84,56 +84,6 @@ const RepamentCouponModal = loadable(
 );
 const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ '../modals/IBANFinderModal'));
 
-const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/v2/category" element={<CategoryPage />} />
-      <Route path="/v2/error" element={<ErrorPage />} />
-      <Route path={PagePathEnum.LoginPage} element={<LoginPage />}>
-        <Route path="log-out-modal" element={<LogoutModal />} />
-      </Route>
-      <Route path={PagePathEnum.IBANFinderPage} element={<IBANFinderPage />} />
-      <Route path={PagePathEnum.IndexPage} element={<IndexPage />} />
-      <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
-      <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
-      <Route path="/v2/auth" element={<AuthPage />} />
-      <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
-      <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}>
-        <Route path="iban-finder-modal" element={<IBANFinderModal />} />
-      </Route>
-      <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} />
-      <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} />
-      <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
-
-      <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />
-
-      <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
-        <Route path="repayment-modal" element={<RepaymentModal />} />
-        <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
-        <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
-        <Route path="extend-modal" element={<ExtendModal />} />
-        <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
-      </Route>
-
-      <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
-      <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
-      <Route path="/v2/partner" element={<PartnerPage />} />
-      <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
-        <Route path="log-out-modal" element={<LogoutModal />} />
-      </Route>
-      <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
-      <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
-      <Route path="/v2/quota-model" element={<QuotaModelPage />} />
-      <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
-      <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
-      {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
-
-      <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
-      <Route path="*" element={<div>Not Found</div>} />
-    </Routes>
-  )
-}
-
 export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
@@ -203,7 +153,6 @@ export const AppRouter = () => {
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
 
-      <AppRoutes/>
       {/*<Page>*/}
       {/*  prevent empty page*/}
       {/*</Page>*/}

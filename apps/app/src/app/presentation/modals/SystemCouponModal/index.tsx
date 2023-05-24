@@ -1,13 +1,11 @@
 import { useLocation, useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { stat } from 'fs';
 import { RootState } from '../../../reduxStore';
 import { Button } from '../../components/layouts/Button';
 import CouponImageSource from '../../../../assets/coupon.png';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { modalSlice } from '../../../reduxStore/modalSlice';
-import { NotificationResponse } from '../../../api/indexService/NotificationResponse';
 import { SystemCaseActions } from '../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 
 const SystemCouponModal = () => {
@@ -25,6 +23,16 @@ const SystemCouponModal = () => {
     //    FORWARD_LOAN_RECORD (導去還款列表頁)
     //    MESSAGE (顯示下一則訊息)
     const isForwardBrowser = systemCouponModal.action === 'FORWARD_BROWSER';
+
+    const handleCancel = () => {
+        dispatch(modalSlice.actions.updateSystemCouponModal({
+            show: false,
+            title: '',
+            text: '',
+            webUrl: '',
+            action: '',
+        }))
+    }
 
     const handleOnClick = () => {
 
@@ -57,8 +65,9 @@ const SystemCouponModal = () => {
                         (<div>{systemCouponModal.text}</div>)
                     }
                 </div>
-                <div>
-                    <Button text={'OK'} onClick={handleOnClick} />
+                <div className='flex'>
+                    <Button className='mr-1' text={'Cancel'} type={'ghost'} onClick={handleCancel} />
+                    <Button className='ml-1' text={'Next'} onClick={handleOnClick} />
                 </div>
             </div>
         </div>

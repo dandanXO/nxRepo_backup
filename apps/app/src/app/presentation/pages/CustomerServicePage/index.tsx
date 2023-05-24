@@ -7,18 +7,20 @@ import { Button } from '../../components/layouts/Button';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 
 const CustomerServicePage = () => {
   const navigate = useNavigate();
   const { app, indexPage } = useSelector((state: RootState) => state);
   return (
     <div>
-      <Navigation
-        title={'Customer Service'}
-        back={() => {
-          navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
-        }}
-      />
+      {!isShowNavigation() && (
+        <Navigation
+            title={'Customer Service'}
+            back={() => {
+                navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+            }}
+      />)}
       <div className="flex flex-col items-center justify-center">
         <div className="mt-16 mb-4">
           <img src={CustomerServiceIcon} alt="" />
