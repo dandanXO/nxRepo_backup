@@ -16,7 +16,8 @@ const getPosthogConfig = (): PosthogConfig | null => {
     // NOTE: IndexWebview
     // NOTE: PureH5
     if (AppEnvironment.isLocalhost()) {
-      return posthogConfigs['dev'];
+      return null;
+      // return posthogConfigs['dev'];
     } else {
       // NOTE: REFACTOR ME
       // NOTE: 根據 APP 渠道 去分:

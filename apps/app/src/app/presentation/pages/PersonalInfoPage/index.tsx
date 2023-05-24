@@ -19,7 +19,9 @@ import LinkItem from './LinkItem';
 import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 
 const PersonalInfoPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const isInitialized = useSelector((state: RootState) => state.app.isInit);
 
   useEffect(() => {
@@ -28,16 +30,21 @@ const PersonalInfoPage = () => {
     }
     return () => {
       if (!isInitialized) {
+        //
       }
     };
   }, [isInitialized]);
 
-  const navigate = useNavigate();
   const { indexPage, app } = useSelector((state: RootState) => state);
   const { user } = indexPage;
 
-  const onClickVerify = () => {
+  // NOTE: User Event
+  const onUserClickToVerify = () => {
     dispatch(IndexPageSagaAction.user.authenticateSaga());
+  };
+
+  const onUserClickToLogout = () => {
+    navigate(`${PagePathEnum.PersonalInfoPage}/log-out-modal`);
   };
 
   return (
@@ -47,7 +54,7 @@ const PersonalInfoPage = () => {
           <img src={UserIcon} />
         </div>
         <div className={`flex flex-col items-center justify-center `}>
-          <div className={`font-bold`}>{user.userName}</div>
+          <div className={`font-bold`}>{user.maskUserName}</div>
           <div
             className={cx('mt-1 grow rounded-2xl py-1 px-4 text-center text-sm leading-none', {
               'border border-orange-500 text-orange-500': user.state !== USER_AUTH_STATE.success,
@@ -58,11 +65,13 @@ const PersonalInfoPage = () => {
           </div>
         </div>
       </div>
+
+      {/*NOTE: 使用者尚未認證*/}
       {user.state === USER_AUTH_STATE.ready && (
         <div className={`flex flex-row items-center justify-around bg-orange-100 py-2 px-4`}>
           <div>Verify now for highest amount</div>
           <Button
-            onClick={onClickVerify}
+            onClick={onUserClickToVerify}
             className={'w-auto py-1  px-2'}
             text={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>}
           />
@@ -70,37 +79,40 @@ const PersonalInfoPage = () => {
       )}
 
       <div className="m-2">
+        {/*NOTE: 是否顯示可用度雷達圓餅圖*/}
         {user.state === USER_AUTH_STATE.success && (
           <div className={`m-2 justify-end rounded-md p-4 shadow-[0_0px_8px_rgba(0,0,0,0.1)]`}>
             <LoanOverViewSection state={indexPage} />
           </div>
         )}
+        {/*NOTE: 顯示綁卡項目*/}
         <Card>
           <LinkItem title={'Bank Card'} to={`${PagePathEnum.BankcardListPage}?token=${getToken()}`} />
         </Card>
+
         <Card>
           <LinkItem title={'Privacy Policy'} to={PagePathEnum.PrivacyPolicyPage} />
           <LinkItem title={'Disclosure Statement'} to={PagePathEnum.DisclosureStatementPage} />
         </Card>
+
         <Card>
+          {/*NOTE: 是否顯示合作夥伴*/}
           {app?.init?.partnership ? <LinkItem title={'Partner'} to={'/partner'} /> : <></>}
+          {/*NOTE: 顯示客服*/}
           <LinkItem title={'Customer Service'} to={PagePathEnum.CustomerServicePage} />
         </Card>
+
+        <Card>
+          <LinkItem title={'My coupon'} to={`${PagePathEnum.MyCouponListPage}?token=${getToken()}`} />
+        </Card>
+
+        {/*NOTE: 五星好評*/}
+
         {/* <Card><LinkItem title={'Rate Us 5 starts'} to={''} /></Card> */}
-        {/* <div>Setting</div>
-              <Card>
-                  <ListItem title={'Privacy Policy'} text={''} />
-                  <LinkItem title={'Disclosure Statement'} to={''} />
-              </Card> */}
       </div>
+
       <div className="my-2 text-center">
-        <div
-          onClick={() => {
-            navigate(`${PagePathEnum.PersonalInfoPage}/log-out-modal`);
-          }}
-        >
-          Log out
-        </div>
+        <div onClick={onUserClickToLogout}>Log out</div>
       </div>
 
       <Outlet />

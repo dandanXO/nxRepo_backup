@@ -1,11 +1,9 @@
 import { environment } from 'apps/app/src/environments/environment';
-import cx from 'classnames';
 import React from 'react';
-import { Route } from 'react-router';
 import { useNavigate } from 'react-router';
 
+import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../components/layouts/Button';
-import ApplicationProgressPage from '../ApplicationProgressPage';
 import { PagePathEnum } from '../PagePathEnum';
 
 export const CategoryPage = () => {
@@ -16,7 +14,7 @@ export const CategoryPage = () => {
         dataTestingID={'apply'}
         text={'Test'}
         onClick={() => {
-          navigate('/v2/my-coupon-list');
+          navigate(`${PagePathEnum.MyCouponListPage}?token=${getToken()}`);
         }}
       />
 

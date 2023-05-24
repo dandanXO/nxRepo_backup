@@ -22,6 +22,7 @@ export interface InitialState {
   user: {
     state: USER_AUTH_STATE;
     userName: string;
+    maskUserName: string;
   };
   order: {
     state: ORDER_STATE;
@@ -67,6 +68,7 @@ const initialState: InitialState = {
   user: {
     state: USER_AUTH_STATE.ready,
     userName: '',
+    maskUserName: '',
   },
   order: {
     state: ORDER_STATE.empty,
@@ -107,6 +109,10 @@ export const indexPageSlice = createSlice({
     updateUserAPI: (state, action: PayloadAction<GetUserInfoServiceResponse>) => {
       // state.user.userName = action.payload.userName;
       state.user.userName = NativeAppInfo.phoneNo;
+      state.user.maskUserName =
+        NativeAppInfo?.phoneNo?.length >= 10
+          ? NativeAppInfo?.phoneNo?.slice(0, 3) + '****' + NativeAppInfo?.phoneNo?.slice(7, 10)
+          : NativeAppInfo?.phoneNo;
 
       if (action.payload.status === 0) {
         state.user.state = USER_AUTH_STATE.ready;

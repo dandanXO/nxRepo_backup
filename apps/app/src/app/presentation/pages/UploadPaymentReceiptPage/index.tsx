@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/react';
 import React, { useCallback } from 'react';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
@@ -7,14 +6,12 @@ import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { AppFlag } from '../../../../environments/flag';
 import { usePostRepayReceiptMutation } from '../../../api/rtk';
-import { CustomAxiosError } from '../../../api/rtk/axiosBaseQuery';
 import { PostRepayReceiptResponse } from '../../../api/rtk/old/PostRepayReceiptResponse';
 import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
-import { isInAndroid } from '../../../modules/window/isInAndroid';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
@@ -74,7 +71,7 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
     });
   return (
     <div>
-      {!isInAndroid() && (
+      {!isShowNavigation() && (
         <Navigation
           title={'Upload payment receipt'}
           back={() => {
