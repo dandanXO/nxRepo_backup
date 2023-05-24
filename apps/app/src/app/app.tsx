@@ -1,7 +1,7 @@
 import {ReduxRouter, ReduxRouterSelector} from '@lagunovsky/redux-react-router';
 import React from 'react';
 import {Provider} from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
+import {MemoryRouter} from 'react-router';
 
 import {AppThemeProvider} from '@frontend/mobile/shared/ui';
 
@@ -21,9 +21,9 @@ export function App() {
       <AppThemeProvider theme={window.theme}>
         <Provider store={appStore}>
           <ReduxRouter history={history} routerSelector={routerSelector}>
-            <BrowserRouter basename={'/'}>
+            <MemoryRouter basename={'/'}>
               <AppRouter />
-            </BrowserRouter>
+            </MemoryRouter>
             {/*<RouterProvider router={appRouter as any} fallbackElement={<div>Loading...</div>} />*/}
           </ReduxRouter>
         </Provider>

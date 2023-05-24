@@ -102,6 +102,8 @@ module.exports = (config, context) => {
             // path.resolve(__dirname, '../../../node_modules/.pnpm/@floating-ui+dom'),
             // path.resolve(__dirname, '../../../node_modules/.pnpm/node_modules/@floating-ui'),
             // path.resolve(__dirname, '../../../node_modules/.pnpm/@floating-ui+core@1.0.2/node_modules/@floating-ui/dist/core/dist'),
+            // path.resolve(__dirname, '../../../node_modules/react-router-dom'),
+
           ],
           exclude: /node_modules/,
           use: [
