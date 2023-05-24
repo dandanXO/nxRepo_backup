@@ -10,7 +10,6 @@ import {
 import moment from "moment/moment";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { ProductTypes } from "../../../../service/product/domain/productTypes";
-import { productInterestRatePairsInitialValue } from "../ProductForm";
 import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
 import {
     BaseRiskRank,
@@ -148,8 +147,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
                     ...interestRatesAcc,
                     {
                         ...interestRatesCurrent,
-                        preInterest: fixedFloatNumberToFixed3(interestRatesCurrent.preInterest * 100),
-                        postInterest: fixedFloatNumberToFixed3(interestRatesCurrent.postInterest * 100),
+                        preInterest: fixedFloatNumberToFixed3(Number(interestRatesCurrent.preInterest) * 100),
+                        postInterest: fixedFloatNumberToFixed3(Number(interestRatesCurrent.postInterest) * 100),
                     }
                 ], []);
 

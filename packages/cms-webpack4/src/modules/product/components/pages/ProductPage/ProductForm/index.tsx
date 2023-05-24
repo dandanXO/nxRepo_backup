@@ -9,7 +9,10 @@ import { UploadSettingSection } from "./UploadSettingSection";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { GetAvailableMerchantResponse } from "../../../../service/product/response/getAvailableMerchantResponse";
 import OrderSettingSection from "./OrderSettingSection";
-import { productInterestRatesContentKey } from "../../../../service/product/domain/productInterestRatePair";
+import {
+    ProductInterestRate,
+    productInterestRatesContentKey
+} from "../../../../service/product/domain/productInterestRatePair";
 
 interface ProductFormProps {
     modal: any;
@@ -29,7 +32,7 @@ interface ProductFormProps {
 
 let isOnChange = false;
 
-export const productInterestRatePairsInitialValue = [
+export const productInterestRatePairsInitialValue: ProductInterestRate[] = [
     { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
     { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
     { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},

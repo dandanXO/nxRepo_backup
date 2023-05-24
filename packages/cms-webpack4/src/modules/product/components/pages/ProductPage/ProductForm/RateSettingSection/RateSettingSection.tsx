@@ -1,4 +1,4 @@
-import React, {CSSProperties, useState} from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import {Form, Input, Typography, Collapse, message } from "antd";
 import {
   NumberValidator,
@@ -12,7 +12,10 @@ import {
 } from "../../../../../../shared/components/other/validatePreOrPostInterestGroups";
 import { productInterestRatePairsInitialValue } from "../index";
 import { CheckCircleFilled, ExclamationCircleOutlined } from "@ant-design/icons";
-import { productInterestRatesContentKey } from "../../../../../service/product/domain/productInterestRatePair";
+import {
+    ProductInterestRate,
+    productInterestRatesContentKey
+} from "../../../../../service/product/domain/productInterestRatePair";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
@@ -30,6 +33,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
   const [showProductInterestRatePairsModal, setShowProductInterestRatePairsModal] = useState(false);
   const { confirm } = props.modal;
   const [messageAPI, contextHolder] = message.useMessage();
+  const [tempProductInterestRatePairs, setTempProductInterestRatePairs] = useState<ProductInterestRate[]>([])
 
   const handleProductInterestRatePairsModalOnOK = () => {
       const { productInterestRatePairs } = props.form.getFieldsValue();
@@ -50,38 +54,32 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
           messageAPI.success('已储存');
           props.form.setFieldValue('productInterestRatePairsChecked', true);
           props.setInterestRatePairsTouchInput(null);
+          setTempProductInterestRatePairs([...productInterestRatePairs])
           setShowProductInterestRatePairsModal(false);
       }
   }
 
   const handleProductInterestRatePairsModalOnClose = (e) => {
-      if(props.interestRatePairsTouchInput){
-          // 有修改過複貸利率，按取消或X要提示會清空資料
-          confirm({
-              icon : null,
-              content: (
-                  <div style={{ height: '20px', display: "flex" }}>
-                      <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
-                      <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将不会储存已变更的资料。确定要离开吗？</div>
-                  </div>
-              ),
-              onOk() {
-                  props.form.setFieldValue('productInterestRatePairs', productInterestRatePairsInitialValue);
-                  props.form.setFieldValue('productInterestRatePairsChecked', false);
-                  props.setCustomAntFormFieldError(prev => ({
-                      ...prev,
-                      productInterestRatePairs: {}
-                  }))
-                  setShowProductInterestRatePairsModal(false);
-              },
-              onCancel() {
-                  //
-              }
-          })
-      } else {
-          // 沒有修改過複貸利率，按取消或X不清除資料，直接關閉Modal
-          setShowProductInterestRatePairsModal(false);
-      }
+      confirm({
+          icon : null,
+          content: (
+              <div style={{ height: '20px', display: "flex" }}>
+                  <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
+                  <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将不会储存已变更的资料。确定要离开吗？</div>
+              </div>
+          ),
+          onOk() {
+              props.form.setFieldValue('productInterestRatePairs', tempProductInterestRatePairs);
+              props.setCustomAntFormFieldError(prev => ({
+                  ...prev,
+                  productInterestRatePairs: {}
+              }))
+              setShowProductInterestRatePairsModal(false);
+          },
+          onCancel() {
+              //
+          }
+      })
   }
 
   const handleProductInterestRateSettingOnClick = () => {
@@ -94,6 +92,15 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
       }))
       setShowProductInterestRatePairsModal(true)
   }
+
+  useEffect(() => {
+      // 複貸利率Modal未開表示不是在編輯複貸利率更動複貸利率欄位資料
+      if (!showProductInterestRatePairsModal) {
+          const productInterestRatePairs = props.form.getFieldValue('productInterestRatePairs')
+          setTempProductInterestRatePairs([...productInterestRatePairs])
+      }
+
+  }, [props.form.getFieldValue('productInterestRatePairs')])
 
   const productInterestRatePairCheckedError = props.customAntFormFieldError['productInterestRatePairsChecked']['help']
 
