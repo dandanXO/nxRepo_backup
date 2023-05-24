@@ -13,7 +13,8 @@
           "chrome >= 58",
           "android >= 58",
           "not IE 9-11"
-        ]
+        ],
+        "modules": false
       }
     ],
     [

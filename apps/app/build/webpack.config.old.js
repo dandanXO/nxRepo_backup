@@ -52,84 +52,38 @@ const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConf
 
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
-    // devtool: !isProduction ? "cheap-module-eval-source-map" : "source-map",
-
-    // NOTE: Android 9 失敗
-    // devtool: false,
-    // NOTE: Android 9 成功
-    // devtool: "eval",
-    // NOTE: Android 9 成功
-    // devtool: "eval-cheap-source-map",
-    // NOTE: Android 9 成功
-    // devtool: "eval-cheap-module-source-map",
-    // NOTE: Android 9 成功
-    // devtool: "eval-source-map",
-
-    // NOTE: Android 9 失敗
-    // devtool: "source-map",
-    // NOTE: Android 9 失敗
-    // devtool: "inline-source-map",
-    // blank page 錯誤依舊 [NOTE: WebPack 5 and old chrome (webview 38) #954](https://github.com/hodgef/simple-keyboard/issues/954)
-    // target: ['web', 'es5'],
-    // target: "browserslist",
+    devtool: "source-map",
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
       polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
       errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
     },
     output: {
+      publicPath: PUBLIC_PATH,
       // filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
-      publicPath: PUBLIC_PATH,
       // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
     },
-    module: {
-      rules: [
-        // {
-        //   test: /\.svg$/,
-        //   generator: {
-        //     publicPath: PUBLIC_PATH,
-        //     // outputPath: 'cdn-assets/',
-        //   },
-        //   oneOf: [
-        //     // If coming from JS/TS or MDX file, then transform into React component using SVGR.
-        //     {
-        //       issuer: /\.(js|ts|md)x?$/,
-        //       use: [
-        //         {
-        //           loader: require.resolve('@svgr/webpack'),
-        //           options: {
-        //             svgo: false,
-        //             titleProp: true,
-        //             ref: true,
-        //           },
-        //         },
-        //         {
-        //           loader: require.resolve('url-loader'),
-        //           options: {
-        //             limit: 10000,
-        //             name: '[name].[hash:7].[ext]',
-        //             esModule: false,
-        //           },
-        //         },
-        //       ],
-        //     },
-        //     // Fallback to plain URL loader.
-        //     {
-        //       use: [
-        //         {
-        //           loader: require.resolve('url-loader'),
-        //           options: {
-        //             limit: 10000,
-        //             name: '[name].[hash:7].[ext]',
-        //           },
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
-      ],
-    },
+    plugins: [
+      // new PreloadWebpackPlugin({
+      //   rel: 'preload',
+      //   // include: 'asyncChunks'
+      //   include: 'all'
+      //   // include: 'initial'
+      // }),
+      // NOTICE:
+      new webpack.DefinePlugin({
+        AppInfo: {
+          VERSION: JSON.stringify(gitRevisionPlugin.version()),
+          COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
+          BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
+          UI_VERSION: process.env.NODE_UI_VERSION,
+        },
+      }),
+      // new CleanWebpackPlugin({
+      //   verbose: true,
+      // }),
+    ],
     devServer: {
       hot: true,
       open: true,
@@ -155,48 +109,12 @@ module.exports = (config, context) => {
         },
       },
     },
-    plugins: [
-      // new PreloadWebpackPlugin({
-      //   rel: 'preload',
-      //   // include: 'asyncChunks'
-      //   include: 'all'
-      //   // include: 'initial'
-      // }),
-      // NOTICE:
-      new webpack.DefinePlugin({
-        AppInfo: {
-          VERSION: JSON.stringify(gitRevisionPlugin.version()),
-          COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
-          BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
-          UI_VERSION: process.env.NODE_UI_VERSION,
-        },
-      }),
-      // new CleanWebpackPlugin({
-      //   verbose: true,
-      // }),
-    ],
   });
 
+  // NOTICE: Environment
   if (process.env.NODE_ANALYZER && !isProduction) {
     finalConfig.plugins.push(new BundleAnalyzerPlugin());
-    finalConfig["optimization"] = {
-      // minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-            format: {
-              comments: false,
-            },
-          },
-          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-          extractComments: false,
 
-        })
-      ],
-    }
   } else if (isProduction) {
     finalConfig.plugins.push(
       new HtmlWebpackPlugin({
@@ -208,32 +126,28 @@ module.exports = (config, context) => {
       })
     );
     // NOTICE: 使用以下android 8 is ok
-    finalConfig['optimization'] = {
-      minimize: false,
-      // minimizer: [
-      //   new TerserPlugin({
-      //     terserOptions: {
-      //       compress: {
-      //         drop_console: true,
-      //       },
-      //       format: {
-      //         comments: false,
-      //       },
-      //     },
-      //     // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-      //     extractComments: false,
-      //   }),
-      // ],
-    };
-
-    // exclude: ['specific-entry.js'], // 替换 specific-entry.js 为你想排除的入口点文件名
-
+    // finalConfig['optimization'] = {
+    //   minimize: false,
+    //   minimizer: [
+    //     new TerserPlugin({
+    //       terserOptions: {
+    //         compress: {
+    //           drop_console: true,
+    //         },
+    //         format: {
+    //           comments: false,
+    //         },
+    //       },
+    //       // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+    //       extractComments: false,
+    //     }),
+    //   ],
+    // };
     //   finalConfig.plugins.push(
     //     new CleanWebpackPlugin({
     //       verbose: true,
     //     })
     //   );
-
     finalConfig.plugins.push(
       new SentryCliPlugin({
         debug: true,
