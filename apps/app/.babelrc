@@ -4,16 +4,13 @@
       "@babel/preset-env",
       {
         "debug": true,
+        "bugfixes": true,
         "useBuiltIns": "usage",
-        "corejs": {
-          "version": "3.8",
-          "proposals": true
-        },
-        "targets": {
-          "android": "53",
-          "chrome": "53"
-        },
-        "modules": false
+        "corejs": 3,
+        "targets": "cover 100%",
+        "modules": false,
+        "forceAllTransforms": true,
+        "spec": true
       }
     ],
     [
@@ -24,8 +21,12 @@
     ]
   ],
   "plugins": [
-    ["@babel/plugin-transform-destructuring"],
-    ["@babel/plugin-transform-async-to-generator"],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": 3
+      }
+    ],
     ["styled-components", { "pure": true, "ssr": true }]
   ]
 }
