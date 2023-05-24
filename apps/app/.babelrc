@@ -22,6 +22,16 @@
   ],
   "plugins": [
     [
+      "@babel/plugin-transform-spread",
+      {
+        "loose": true,
+        "assumptions": {
+          "iterableIsArray": true,
+          "arrayLikeIsIterable": true
+        }
+      }
+    ],
+    [
       "@babel/plugin-transform-runtime",
       {
         "corejs": 3

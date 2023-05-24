@@ -77,10 +77,9 @@ module.exports = (config, context) => {
       //   verbose: true,
       // }),
     ],
-    target: ["web", "es5"],
     output: {
       publicPath: PUBLIC_PATH,
-      // filename: '[name].[contenthash].js',
+      filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
       // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
     },
