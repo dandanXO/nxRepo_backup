@@ -497,7 +497,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         modal,
         productModalData,
         productFormData,
-        productFetched,
         setProductModalData,
         handleCloseModal,
         onFinish,
