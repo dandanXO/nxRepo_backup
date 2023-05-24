@@ -54,7 +54,9 @@
     [
       "@babel/plugin-proposal-nullish-coalescing-operator",
       {
-        "noDocumentAll": true
+        "assumptions": {
+          "noDocumentAll": true
+        }
       }
     ]
   ]
