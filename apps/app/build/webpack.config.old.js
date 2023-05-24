@@ -57,6 +57,27 @@ module.exports = (config, context) => {
       main: path.resolve(__dirname, '../src/main.tsx'),
       errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
     },
+    module: {
+      rules: [
+        {
+          test: /\.(ts|tsx|js|jsx)$/,
+          // include: [
+          //   path.resolve(__dirname, '../src'),
+          //   path.resolve(__dirname, '../../../libs'),
+          // ],
+          // exclude: /node_modules/,
+          use: [
+            // 'thread-loader',
+            {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: false
+              }
+            }
+          ]
+        },
+      ],
+    },
     plugins: [
       // new PreloadWebpackPlugin({
       //   rel: 'preload',
@@ -77,6 +98,7 @@ module.exports = (config, context) => {
       //   verbose: true,
       // }),
     ],
+    // target: ["web", "es5"],
     output: {
       publicPath: PUBLIC_PATH,
       filename: '[name].[contenthash].js',

@@ -10,7 +10,8 @@
         "targets": "cover 100%",
         "modules": false,
         "forceAllTransforms": true,
-        "spec": true
+        "spec": true,
+        "loose": true
       }
     ],
     [
@@ -28,6 +29,15 @@
         "assumptions": {
           "iterableIsArray": true,
           "arrayLikeIsIterable": true
+        }
+      }
+    ],
+    [
+      "@babel/plugin-proposal-object-rest-spread",
+      {
+        "loose": true,
+        "assumptions": {
+          "setSpreadProperties": true
         }
       }
     ],
