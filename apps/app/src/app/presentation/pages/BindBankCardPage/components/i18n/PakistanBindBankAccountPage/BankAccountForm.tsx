@@ -106,7 +106,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onCut={(e) => preventCopyPaste(e)}
         />
       </div>
-      <div className="grow flex flex-col justify-end mb-2">
+      <div className="pb-4">
         <Button
           text={'Confirm'}
           className={`${EnumV15GradientButtonClassNames}`}

@@ -39,7 +39,8 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
     e.preventDefault();
   };
   return (
-    <div className="grow flex flex-col">
+    <>
+    <div className="flex grow flex-col">
       <div>
         <div className={'text-sm'}>{'Mobile Wallet'}</div>
         <Select
@@ -111,15 +112,10 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           onCut={(e) => preventCopyPaste(e)}
         />
       </div>
-
-      {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
-      <div className="grow flex flex-col justify-end mb-2">
-        <Button
-          className={`${EnumV15GradientButtonClassNames} `}
-          text={'Confirm'}
-          onClick={() => props.confirm()}
-        />
-      </div>
     </div>
+    <div className="pb-4">
+      <Button className={`${EnumV15GradientButtonClassNames} `} text={'Confirm'} onClick={() => props.confirm()} />
+    </div>
+  </>
   );
 };
