@@ -84,9 +84,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
     const [triggerFetchTableList, setTriggerFetchTableList] = useState<any>();
     // console.log("productModalData", productModalData);
 
-    const [productFetchTag, setProductFetchTag] = useState(false);
-
-
     // NOTICE: form
     const [form] = Form.useForm();
 
@@ -130,8 +127,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         // console.log("merchantList", merchantList);
         if (!productFormData) return;
         if (!merchantList) return;
-
-        setProductFetchTag(!productFetchTag);
 
         setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false)
         setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false)

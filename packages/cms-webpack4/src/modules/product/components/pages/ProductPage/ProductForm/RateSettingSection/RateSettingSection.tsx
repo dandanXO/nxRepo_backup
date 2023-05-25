@@ -35,6 +35,9 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
   const [tempProductInterestRatePairs, setTempProductInterestRatePairs] = useState<ProductInterestRate[]>([])
   const [everResetField, setEverResetField] = useState(false);
 
+  const productInterestRatePairCheckedError = props.customAntFormFieldError['productInterestRatePairsChecked']['help']
+  const productInterestRatePairsChecked = Form.useWatch('productInterestRatePairsChecked', props.form)
+
   const handleProductInterestRatePairsModalOnOK = () => {
       const { productInterestRatePairs } = props.form.getFieldsValue();
       const { validateMap: productInterestRatePairsValidationMap, hasError} = validatePreOrPostInterestGroups(productInterestRatePairs, true, productInterestRatesContentKey)
@@ -100,17 +103,14 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
       setShowProductInterestRatePairsModal(true)
   }
 
+  // 不使用Form.useWatch取得productInterestRatePairs作為deps是因為沒有render過的欄位用useWatch取得不到值
   useEffect(() => {
-      // 複貸利率Modal未開表示不是在編輯複貸利率更動複貸利率欄位資料
       if (!showProductInterestRatePairsModal) {
           const productInterestRatePairs = props.form.getFieldValue('productInterestRatePairs')
           setTempProductInterestRatePairs([...productInterestRatePairs])
       }
 
   }, [props.form.getFieldValue('productInterestRatePairs')])
-
-  const productInterestRatePairCheckedError = props.customAntFormFieldError['productInterestRatePairsChecked']['help']
-  const productInterestRatePairsChecked = props.form.getFieldValue('productInterestRatePairsChecked')
 
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
   return (
@@ -262,12 +262,6 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                       <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
                   </Form.Item>
 
-                  <Form.Item
-                      name='productInterestRatePairsChecked'
-                      style={{ display : 'none'}}
-                  >
-                      <Input />
-                  </Form.Item>
                   <Form.Item
                       label="复贷利率"
                       name='productInterestRatePairsChecked'
