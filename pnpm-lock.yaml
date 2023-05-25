@@ -127,6 +127,7 @@ specifiers:
   react-test-renderer: 18.2.0
   redux-saga: ^1.2.2
   regenerator-runtime: 0.13.7
+  resize-observer-polyfill: ^1.5.1
   rxjs: ^7.8.0
   sass-loader: ^13.2.2
   style-loader: ^3.3.2
@@ -295,6 +296,7 @@ devDependencies:
   prettier-plugin-tailwindcss: 0.3.0_2bym3v2qweviqwilhomtzn3vtm
   react-refresh: 0.10.0
   react-test-renderer: 18.2.0_react@18.2.0
+  resize-observer-polyfill: 1.5.1
   style-loader: 3.3.2_webpack@5.79.0
   stylus: 0.55.0
   stylus-loader: 7.1.0_fsumzd6xfgzaz7ez4d6yvyuaxm
@@ -17910,7 +17912,6 @@ packages:
 
   /resize-observer-polyfill/1.5.1:
     resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
-    dev: false
 
   /resolve-cwd/3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}

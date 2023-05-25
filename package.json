@@ -187,6 +187,7 @@
     "prettier-plugin-tailwindcss": "^0.3.0",
     "react-refresh": "^0.10.0",
     "react-test-renderer": "18.2.0",
+    "resize-observer-polyfill": "^1.5.1",
     "style-loader": "^3.3.2",
     "stylus": "^0.55.0",
     "stylus-loader": "^7.1.0",
