@@ -57,6 +57,19 @@ module.exports = (config, context) => {
       main: path.resolve(__dirname, '../src/main.tsx'),
       errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
     },
+    // resolve: {
+    //   // NOTICE: important
+    //   modules: [
+    //     /* assuming that one up is where your node_modules sit,
+    //        relative to the currently executing script
+    //     */
+    //     path.join(__dirname, '../../../node_modules')
+    //   ],
+    //   extensions: [
+    //     '.ts',
+    //     '.js' // add this
+    //   ]
+    // },
     module: {
       rules: [
         {
@@ -65,7 +78,7 @@ module.exports = (config, context) => {
           //   path.resolve(__dirname, '../src'),
           //   path.resolve(__dirname, '../../../libs'),
           // ],
-          // exclude: /node_modules/,
+          exclude: /node_modules/,
           use: [
             // 'thread-loader',
             {
