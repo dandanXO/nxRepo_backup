@@ -176,15 +176,15 @@ module.exports = (config, context) => {
     finalConfig.plugins.push(new BundleAnalyzerPlugin());
 
   } else if (isProduction) {
-    // finalConfig.plugins.push(
-    //   new HtmlWebpackPlugin({
-    //     // 配置 HTML 模板路徑與生成名稱 (第三步)
-    //     template: './src/index.html',
-    //     filename: 'index.html',
-    //     // publicPath: "/v2",
-    //     chunks: ['errorhandler', 'main'],
-    //   })
-    // );
+    finalConfig.plugins.push(
+      new HtmlWebpackPlugin({
+        // 配置 HTML 模板路徑與生成名稱 (第三步)
+        template: './src/index.html',
+        filename: 'index.html',
+        // publicPath: "/v2",
+        chunks: ['errorhandler', 'main', 'vendors', 'nx'],
+      })
+    );
     // NOTICE: 使用以下android 8 is ok
     finalConfig['optimization'] = {
       minimize: false,
