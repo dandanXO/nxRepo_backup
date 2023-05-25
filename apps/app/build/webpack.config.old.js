@@ -55,14 +55,28 @@ module.exports = (config, context) => {
     devtool: "source-map",
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
-      polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
       errorhandler: path.resolve(__dirname, '../errorEntry/index.ts'),
     },
-    output: {
-      publicPath: PUBLIC_PATH,
-      // filename: '[name].[contenthash].js',
-      // sourceMapFilename: 'maps/[name].[contenthash].map.js'
-      // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
+    module: {
+      rules: [
+        {
+          test: /\.(ts|tsx|js|jsx)$/,
+          // include: [
+          //   path.resolve(__dirname, '../src'),
+          //   path.resolve(__dirname, '../../../libs'),
+          // ],
+          // exclude: /node_modules/,
+          use: [
+            // 'thread-loader',
+            {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: false
+              }
+            }
+          ]
+        },
+      ],
     },
     plugins: [
       // new PreloadWebpackPlugin({
@@ -84,6 +98,13 @@ module.exports = (config, context) => {
       //   verbose: true,
       // }),
     ],
+    // target: ["web", "es5"],
+    output: {
+      publicPath: PUBLIC_PATH,
+      filename: '[name].[contenthash].js',
+      // sourceMapFilename: 'maps/[name].[contenthash].map.js'
+      // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
+    },
     devServer: {
       hot: true,
       open: true,
@@ -122,7 +143,7 @@ module.exports = (config, context) => {
         template: './src/index.html',
         filename: 'index.html',
         // publicPath: "/v2",
-        chunks: ['polyfills','errorhandler', 'main'],
+        chunks: ['errorhandler', 'main'],
       })
     );
     // NOTICE: 使用以下android 8 is ok

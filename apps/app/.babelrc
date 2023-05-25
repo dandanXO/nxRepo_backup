@@ -4,16 +4,17 @@
       "@babel/preset-env",
       {
         "debug": true,
+        "bugfixes": true,
         "useBuiltIns": "usage",
-        "corejs": {
-          "version": "3.8",
-          "proposals": true
-        },
-        "targets": {
-          "android": "53",
-          "chrome": "53"
-        },
-        "modules": false
+        "corejs": 3,
+        "targets": "cover 100%",
+        "modules": false,
+        "forceAllTransforms": true,
+        "spec": true,
+        "loose": true,
+        "include": [
+
+        ]
       }
     ],
     [
@@ -24,8 +25,39 @@
     ]
   ],
   "plugins": [
-    ["@babel/plugin-transform-destructuring"],
-    ["@babel/plugin-transform-async-to-generator"],
-    ["styled-components", { "pure": true, "ssr": true }]
+    [
+      "@babel/plugin-transform-spread",
+      {
+        "loose": true,
+        "assumptions": {
+          "iterableIsArray": true,
+          "arrayLikeIsIterable": true
+        }
+      }
+    ],
+    [
+      "@babel/plugin-proposal-object-rest-spread",
+      {
+        "loose": true,
+        "assumptions": {
+          "setSpreadProperties": true
+        }
+      }
+    ],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": 3
+      }
+    ],
+    ["styled-components", { "pure": true, "ssr": true }],
+    [
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      {
+        "assumptions": {
+          "noDocumentAll": true
+        }
+      }
+    ]
   ]
 }
