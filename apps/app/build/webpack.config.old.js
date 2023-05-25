@@ -277,6 +277,7 @@ module.exports = (config, context) => {
     );
   }
   console.log('finalConfig', finalConfig);
+  console.log('finalConfig.optimization.splitChunks.cacheGroups', finalConfig.optimization.splitChunks.cacheGroups);
   console.log('finalConfig.module.rules', finalConfig.module.rules);
   // finalConfig.module.rules = [
   //   finalConfig.module.rules[0],
