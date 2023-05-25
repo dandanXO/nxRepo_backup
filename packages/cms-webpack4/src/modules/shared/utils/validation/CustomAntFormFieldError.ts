@@ -1,4 +1,4 @@
-import {ValidateStatus} from "antd/es/form/FormItem";
+import { ValidateStatus } from "antd/es/form/FormItem";
 
 export type CustomAntFormFieldError = {
     [field: string]: {

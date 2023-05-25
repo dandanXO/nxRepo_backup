@@ -2,7 +2,7 @@
 import { PageContainer } from '@ant-design/pro-components';
 import NewCustomersDailyConversionRatesTable from './NewCustomersDailyConversionRatesTable';
 
-import {Route} from "antd/es/breadcrumb/Breadcrumb";
+import { Route } from "antd/es/breadcrumb/Breadcrumb";
 
 const NewCustomersDailyConversionRatesPage = () => {
     // NOTE: breadcrumb
@@ -13,7 +13,7 @@ const NewCustomersDailyConversionRatesPage = () => {
         ) : (
             <span>{route.breadcrumbName}</span>
         );
-    }
+    };
     return (
         <PageContainer
             header={{
@@ -28,10 +28,10 @@ const NewCustomersDailyConversionRatesPage = () => {
                 },
             }}
         >
-             <NewCustomersDailyConversionRatesTable  />
+            <NewCustomersDailyConversionRatesTable  />
         </PageContainer>
-    )
-}
+    );
+};
 
 export default NewCustomersDailyConversionRatesPage;
 

@@ -1,36 +1,36 @@
-import {AdminTable} from "../../../../shared/components/common/AdminTable";
-import {ProColumns, ProFormInstance} from "@ant-design/pro-components";
+import { AdminTable } from "../../../../shared/components/common/AdminTable";
+import { ProColumns, ProFormInstance } from "@ant-design/pro-components";
 import {
     GetNewCustomerRiskPaymentRateListRequest,
     RiskPaymentRateResponseRiskPaymentRateResponse,
     useLazyGetNewCustomerRiskPaymentRateListQuery
 } from "../../../api/NewCustomerRepaymentRateApi";
-import {useCallback, useEffect, useRef, useState} from "react";
-import {FormInstance} from "antd";
-import {Button} from "antd/es";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { FormInstance } from "antd";
+import { Button } from "antd/es";
 import queryString from "query-string";
-import {ConstantRiskRankEnum} from "../../../../shared/constants/constantRiskRankEnum";
+import { ConstantRiskRankEnum } from "../../../../shared/constants/constantRiskRankEnum";
 import useGetProviderEnum from "../../../../shared/hooks/common/useGetProviderEnum";
 
 export const RepaymentRateTable = () => {
 
-    const [triggerGetNewCustomerRiskPaymentRateList, {data, currentData, isLoading, isFetching, isSuccess, isError}] = useLazyGetNewCustomerRiskPaymentRateListQuery();
+    const [triggerGetNewCustomerRiskPaymentRateList, { data, currentData, isLoading, isFetching, isSuccess, isError }] = useLazyGetNewCustomerRiskPaymentRateListQuery();
 
     const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
         endTime: "",          // 結束時間
         riskControlModel: "", // 风控名稱
         riskRank: "",         // 風控標籤
         startTime: "",         // 開始時間
-        newMember:""
-    })
+        newMember: ""
+    });
     useEffect(() => {
         triggerGetNewCustomerRiskPaymentRateList(null);
         triggerGetProviderList(null);
-    }, [])
+    }, []);
 
     const triggerGetList = useCallback(() => {
-        triggerGetNewCustomerRiskPaymentRateList(formState)
-    }, [formState])
+        triggerGetNewCustomerRiskPaymentRateList(formState);
+    }, [formState]);
 
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
 
@@ -77,7 +77,7 @@ export const RepaymentRateTable = () => {
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
-            render:(text)=>formatNumber(text)
+            render: (text)=>formatNumber(text)
         },
         {
             key: 'pendingRepaymentCount',
@@ -102,7 +102,7 @@ export const RepaymentRateTable = () => {
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
-            render:(text)=>formatNumber(text)
+            render: (text)=>formatNumber(text)
         },
         {
             key: 'finishCount',
@@ -127,7 +127,7 @@ export const RepaymentRateTable = () => {
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
-            render:(text)=>formatNumber(text)
+            render: (text)=>formatNumber(text)
         },
         {
             key: 'overdueCount',
@@ -152,7 +152,7 @@ export const RepaymentRateTable = () => {
             hideInSearch: true,
             hideInTable: false,
             initialValue: "",
-            render:(text)=>formatNumber(text)
+            render: (text)=>formatNumber(text)
         },
         // NOTE: only search
         {
@@ -186,7 +186,7 @@ export const RepaymentRateTable = () => {
                 false: { text: '否' },
             },
         },
-    ]
+    ];
     const formRef = useRef<ProFormInstance>();
     const getSearchParams = () => {
         // @ts-ignore
@@ -195,16 +195,16 @@ export const RepaymentRateTable = () => {
             riskControlModel, riskRank, newMember,
             startTime: fakeLoanDate ? fakeLoanDate[0].format('YYYY-MM-DD 00:00:00') : '',
             endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : ''
-        }
-    }
+        };
+    };
 
     const onClickHandleExport = () => {
         const searchParams = getSearchParams();
         const searchQueryString = queryString.stringify(searchParams);
         window.open(`/hs/admin/statistics/new-customer-risk-payment-rate/download?${searchQueryString}`);
-        setFormState(searchParams)
+        setFormState(searchParams);
         triggerGetNewCustomerRiskPaymentRateList(searchParams);
-    }
+    };
 
     return (
         <AdminTable <RiskPaymentRateResponseRiskPaymentRateResponse>
@@ -228,5 +228,5 @@ export const RepaymentRateTable = () => {
             hasAddForm={false}
             hasEditForm={false}
         />
-    )
-}
+    );
+};

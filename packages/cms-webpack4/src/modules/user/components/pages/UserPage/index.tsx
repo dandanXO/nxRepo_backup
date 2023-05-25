@@ -1,35 +1,33 @@
-import { useEffect, useState } from 'react';
-import type { ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, InputNumber, Modal, Radio, Space ,Tabs} from 'antd';
+import { useState } from 'react';
+import { Form ,Tabs } from 'antd';
 import UserTable from './UserTable';
 import AddBlackListModal from './AddBlackListModal';
 import { usePostBlackListAddMutation } from '../../../api/UserApi';
 import UserQuotaLabelTable from './UserQuotaLabelTable';
 
 import AdminPage from '../../../../shared/components/common/AdminPage';
-const UserManage = () => {
-    const [showModal, setShowModal] = useState({show:false,userId:''});
+const UserManage = (): JSX.Element => {
+    const [showModal, setShowModal] = useState({ show: false,userId: '' });
     const [form] = Form.useForm();
-    const [postBlackListAdd, { isLoading, isSuccess:ispostBlackListSuccess }] = usePostBlackListAddMutation();
+    const [postBlackListAdd, {  isSuccess: isPostBlackListSuccess }] = usePostBlackListAddMutation();
 
     const onFinish = (values: any) => {
         postBlackListAdd({ ...values, userId: showModal.userId });
         form.resetFields();
-        setShowModal({ show: false, userId: "" })
+        setShowModal({ show: false, userId: "" });
     };
 
 
 
     const handleCloseModal = () => {
-        setShowModal({ show: false, userId: "" })
-        form.resetFields()
-    }
+        setShowModal({ show: false, userId: "" });
+        form.resetFields();
+    };
 
-    const Tabitems = [
-        { label: '用户管理列表', key: '用户管理列表', children: <UserTable setShowModal={setShowModal} ispostBlackListSuccess={ispostBlackListSuccess}/> }, 
+    const TabItems = [
+        { label: '用户管理列表', key: '用户管理列表', children: <UserTable setShowModal={setShowModal} isPostBlackListSuccess={isPostBlackListSuccess}/> },
         { label: '用户额度标签', key: '用户额度标签', children: <UserQuotaLabelTable/> },
-      ];
+    ];
 
     return (
         <AdminPage
@@ -49,13 +47,13 @@ const UserManage = () => {
             }}
         >
             <>
-                <Tabs items={Tabitems} />
+                <Tabs items={TabItems} />
                 <AddBlackListModal showModal={showModal.show} handleCloseModal={handleCloseModal} onFinish={onFinish} form={form} />
             </>
 
         </AdminPage>
-    )
-}
+    );
+};
 
 export default UserManage;
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Modal} from "antd";
+import { Button, Modal } from "antd";
 
 interface AdminFormModalTemplateProps{
     show: boolean;
@@ -23,20 +23,20 @@ const AdminFormModal = (props: AdminFormModalTemplateProps = {
     return (
         <Modal
             title={!props.isEdit ? (
-                    <span>
-                      <span style={{ marginRight: 8 }}>{props.addTitle ? props.addTitle : `添加${props.title}`}</span>
-                        {props.autoComplete && (
-                            <Button onClick={props.onAutoCompleteTemplate}>自动填入范本资料</Button>
-                        )}
-                    </span>
-                ) : (
-                    <span>
-                        <span style={{ marginRight: 8 }}>{props.editTitle ? props.editTitle : `修改${props.title}`}</span>
-                        {props.autoComplete && (
-                            <Button onClick={props.onAutoCompleteTemplate}>自动填入范本资料</Button>
-                        )}
-                    </span>
-                )
+                <span>
+                    <span style={{ marginRight: 8 }}>{props.addTitle ? props.addTitle : `添加${props.title}`}</span>
+                    {props.autoComplete && (
+                        <Button onClick={props.onAutoCompleteTemplate}>自动填入范本资料</Button>
+                    )}
+                </span>
+            ) : (
+                <span>
+                    <span style={{ marginRight: 8 }}>{props.editTitle ? props.editTitle : `修改${props.title}`}</span>
+                    {props.autoComplete && (
+                        <Button onClick={props.onAutoCompleteTemplate}>自动填入范本资料</Button>
+                    )}
+                </span>
+            )
             }
             open={props.show}
             onCancel={props.handleCloseModal}
@@ -46,7 +46,7 @@ const AdminFormModal = (props: AdminFormModalTemplateProps = {
         >
             {props.children}
         </Modal>
-    )
-}
+    );
+};
 
 export default AdminFormModal;

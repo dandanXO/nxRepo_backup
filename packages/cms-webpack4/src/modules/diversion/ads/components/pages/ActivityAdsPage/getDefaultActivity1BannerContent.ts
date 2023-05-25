@@ -8,4 +8,4 @@ export const getDefaultActivity1BannerContent = (index: number) => ({
         description2: "原利息35%",
         actionName: "點我借款 >",
     },
-})
+});

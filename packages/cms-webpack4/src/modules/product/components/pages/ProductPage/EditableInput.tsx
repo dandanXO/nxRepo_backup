@@ -16,9 +16,9 @@ interface EditableInputProps {
 export const EditableInput = ({ productId, name, rules, placeholder, initValue, handleSave, }: EditableInputProps) => {
 
 
-    const inputRef = useRef(null)
+    const inputRef = useRef(null);
     const [form] = Form.useForm();
-    const [inputValue, setInputValue] = useState<string | number>(initValue)
+    const [inputValue, setInputValue] = useState<string | number>(initValue);
     const handleEdit = (e) => {
 
         const fieldValue = Object.values(form.getFieldsValue())[0] as string | number;
@@ -30,10 +30,10 @@ export const EditableInput = ({ productId, name, rules, placeholder, initValue, 
             handleSave(productId, { [name]: Number(fieldValue) });
             setInputValue(fieldValue);
         }
-    }
+    };
     useEffect(() => {
         form.setFieldsValue({ [name]: initValue });
-    }, [initValue])
+    }, [initValue]);
 
 
 
@@ -48,7 +48,7 @@ export const EditableInput = ({ productId, name, rules, placeholder, initValue, 
             />
         </Form.Item>
 
-    </Form>
+    </Form>;
 
 
-}
+};

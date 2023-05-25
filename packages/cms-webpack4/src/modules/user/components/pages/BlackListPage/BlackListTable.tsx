@@ -24,7 +24,7 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
 
     const initSearchList: GetBlackListRequestQuerystring = {
         addTimeEnd: "", addTimeStart: "", idcardNo: "", operatorId: "", phoneNo: "", userNameTrue: "", pageNum: 1, pageSize: 10
-    }
+    };
 
     // state
     const [BlackList, setBlackList] = useState<GetBlackListProps>({ records: [] });
@@ -32,17 +32,17 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList, isPostBlackListSuccess])
+    }, [searchList, isPostBlackListSuccess]);
 
     useEffect(() => {
         if (currentData !== undefined) {
             setBlackList(currentData);
         }
-    }, [currentData])
+    }, [currentData]);
 
     const pageOnChange = (current, pageSize) => {
-        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
-    }
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
+    };
 
 
     const columns: ProColumns<BlackListReponse>[] = [
@@ -54,10 +54,10 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "" },
         { title: '姓名', dataIndex: 'userNameTrue', key: 'userNameTrue', initialValue: "" },
         { title: '身份证号', dataIndex: 'idcardNo', key: 'idcardNo', initialValue: "" },
-        { title: '备注', dataIndex: 'reason', key: 'reason', hideInSearch: true},
+        { title: '备注', dataIndex: 'reason', key: 'reason', hideInSearch: true },
         { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },
 
-    ]
+    ];
 
 
     return (
@@ -75,7 +75,7 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
                         <Button onClick={() => {
                             // @ts-ignore
                             form.resetFields();
-                            setSearchList(initSearchList)
+                            setSearchList(initSearchList);
                         }}>{resetText}</Button>
                         <Button
                             type={'primary'}
@@ -83,13 +83,13 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
                                 // @ts-ignore
                                 const { addTimeRange, idcardNo, operatorName, phoneNo, userNameTrue } = form.getFieldValue();
                                 // @ts-ignore
-                                console.log(form.getFieldValue())
+                                console.log(form.getFieldValue());
                                 setSearchList({
                                     ...searchList,
                                     addTimeEnd: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addTimeStart: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     idcardNo,
-                                    operatorId:operatorName,
+                                    operatorId: operatorName,
                                     phoneNo,
                                     userNameTrue,
                                     pageNum: 1,
@@ -115,8 +115,8 @@ const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableP
             }}
         />
 
-    )
-}
+    );
+};
 
 export default BlackListTable;
 

@@ -10,7 +10,7 @@ export interface GetUserQuotaLabelListRequestQuerystring {
 
 export interface GetUserQuotaLabelListResponse {
     records: UserQuotaLabel[];
-};
+}
 
 export interface UserQuotaLabel {
     createTime?: string;       // 创建时间

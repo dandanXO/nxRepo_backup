@@ -1,4 +1,4 @@
-import {API} from "./index";
+import { API } from "./index";
 import { UserQuotaLabelSelect } from "./commonSelectTypes/getUserQuotaLabelSelect";
 
 const UserQuotaLabelApi = API.injectEndpoints({
@@ -13,7 +13,7 @@ const UserQuotaLabelApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetUserQuotaLabelSelectQuery
 } = UserQuotaLabelApi;

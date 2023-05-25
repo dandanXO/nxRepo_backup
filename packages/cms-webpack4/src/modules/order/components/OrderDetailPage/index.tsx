@@ -6,8 +6,8 @@ import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import LoanInfo from '../../../shared/components/userInfo/LoanInfo';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
-import {Link, useParams} from "react-router-dom";
-import {itemRender} from "../../../shared/components/common/itemRender";
+import { Link, useParams } from "react-router-dom";
+import { itemRender } from "../../../shared/components/common/itemRender";
 
 const OrderDetailPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
@@ -25,7 +25,7 @@ const OrderDetailPage = () => {
         { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId}/> },
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId}/> },
         { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId}/> },
-      ];
+    ];
 
     return domLoaded ? (
         <div>

@@ -1,4 +1,4 @@
-import {API} from "./index";
+import { API } from "./index";
 import { ProviderSelect } from "./commonSelectTypes/getProviderSelect";
 
 const ProviderListApi = API.injectEndpoints({
@@ -13,7 +13,7 @@ const ProviderListApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useGetProviderListQuery,
     useLazyGetProviderListQuery

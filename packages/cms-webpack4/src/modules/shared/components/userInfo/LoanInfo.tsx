@@ -4,35 +4,35 @@ import { GetUserOrders } from '../../api/userInfoTypes/getUserOrders';
 import { UserId } from '../../domain/UserId';
 import { useLazyGetUserOrdersListQuery } from '../../api/UserInfoApi';
 import { useEffect, useState } from 'react';
-const LoanInfo = ({userId}:UserId) => {
+const LoanInfo = ({ userId }:UserId) => {
 
     const [triggerGetList, { currentData, isLoading, isFetching,isSuccess }] = useLazyGetUserOrdersListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [pageable,setPagealbe]=useState({ userId,pageNum: 1, pageSize: 10 })
-    const [loanInfo,setLoanInfo]=useState<any>()
+    const [pageable,setPagealbe] = useState({ userId,pageNum: 1, pageSize: 10 });
+    const [loanInfo,setLoanInfo] = useState<any>();
     useEffect(() => {
-        triggerGetList(pageable)
+        triggerGetList(pageable);
     }, [pageable]);
 
     useEffect(()=>{
-        if(currentData!==undefined){
-            setLoanInfo(currentData)
+        if(currentData !== undefined){
+            setLoanInfo(currentData);
         }
-    },[currentData])
+    },[currentData]);
 
 
     const pageOnChange = (current, pageSize) => {
-        setPagealbe({ ...pageable, pageNum: current, pageSize: pageSize })
-    }
+        setPagealbe({ ...pageable, pageNum: current, pageSize: pageSize });
+    };
     const columns: ProColumns<GetUserOrders>[] = [
 
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo' },
         { title: '借款产品', dataIndex: 'productName', key: 'productName' },
-        { title: '借款金额', dataIndex: 'deviceMoney', key: 'deviceMoney', align: 'right'},
-        { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney' , align: 'right'},
+        { title: '借款金额', dataIndex: 'deviceMoney', key: 'deviceMoney', align: 'right' },
+        { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney' , align: 'right' },
         { title: '放款时间', dataIndex: 'loanTime', key: 'loanTime', valueType: 'dateTime' },
         {
             title: '状态', dataIndex: 'status', key: 'status', valueType: 'select', initialValue: '',
@@ -51,27 +51,27 @@ const LoanInfo = ({userId}:UserId) => {
         { title: '申请时间', dataIndex: 'applyTime', key: 'applyTime', valueType: 'dateTime' },
         { title: '还款时间', dataIndex: 'payTime', key: 'payTime', valueType: 'dateTime' },
         { title: '到期時間', dataIndex: 'expireTime', key: 'expireTime', valueType: 'dateTime' },
-    ]
+    ];
 
-  return (
+    return (
 
-      <ProTable<GetUserOrders>
-          columns={columns}
-          dataSource={!isLoading && loanInfo?.records || []}
-          loading={isLoading}
-          rowKey="id"
-          search={false}
-          pagination={{
-              showSizeChanger: true,
-              defaultPageSize: 10,
-              onChange: pageOnChange,
-              total: loanInfo?.totalRecords,
-              current: loanInfo?.records?.length === 0 ? 0 : loanInfo?.currentPage,
-          }}
-      />
+        <ProTable<GetUserOrders>
+            columns={columns}
+            dataSource={!isLoading && loanInfo?.records || []}
+            loading={isLoading}
+            rowKey="id"
+            search={false}
+            pagination={{
+                showSizeChanger: true,
+                defaultPageSize: 10,
+                onChange: pageOnChange,
+                total: loanInfo?.totalRecords,
+                current: loanInfo?.records?.length === 0 ? 0 : loanInfo?.currentPage,
+            }}
+        />
 
-    )
-}
+    );
+};
 
 export default LoanInfo;
 

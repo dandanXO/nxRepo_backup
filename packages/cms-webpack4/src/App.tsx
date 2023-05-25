@@ -1,17 +1,17 @@
-import React, {useEffect} from 'react';
-import {Provider} from "react-redux";
-import {appStore} from "./modules/shared/store";
+import React, { useEffect } from 'react';
+import { Provider } from "react-redux";
+import { appStore } from "./modules/shared/store";
 import "./modules/shared/styles/app.less";
-import {AppRouter} from "./AppRouter";
+import { AppRouter } from "./AppRouter";
 require('antd/dist/antd.less');
-import "./modules/shared/i18n"
+import "./modules/shared/i18n";
 
 // import * as Sentry from "@sentry/react";
 // import { BrowserTracing } from "@sentry/tracing";
 import { WaterMark } from '@ant-design/pro-components';
 import moment from "moment/moment";
 
-import {getAdminUser} from "./modules/shared/storage/getUserInfo";
+import { getAdminUser } from "./modules/shared/storage/getUserInfo";
 
 // IN
 // "timezone":"Asia/Kolkata"
@@ -40,7 +40,7 @@ function App() {
         window.addEventListener('main-app-hashchange', (e) => {
             console.log("[MicroApp] [receive] event main-app-hashchange", event);
         }, false);
-    }, [])
+    }, []);
 
     const adminUserInfo = getAdminUser();
     const phoneNo = adminUserInfo.data.phoneNo;

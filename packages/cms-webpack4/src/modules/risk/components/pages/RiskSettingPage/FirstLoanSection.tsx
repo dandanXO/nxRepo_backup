@@ -22,7 +22,7 @@ const FirstLoanSection = (props: FirstLoanSectionProps) => {
             return { ...prev, [curr]: props.customAntFormFieldError[curr] };
         }, {});
         props.setCustomAntFormFieldError(errorList);
-    }
+    };
 
     const [modal, contextHolder] = Modal.useModal();
 
@@ -33,7 +33,7 @@ const FirstLoanSection = (props: FirstLoanSectionProps) => {
         const { firstLoan } = props.form.getFieldsValue();
 
         const isLoanFormNotFilled = firstLoan.map(loan => {
-            return Object.keys(loan).filter(field => field !== 'id').every(i => loan[i] === undefined)
+            return Object.keys(loan).filter(field => field !== 'id').every(i => loan[i] === undefined);
         }).every(i => i === true);
 
         if (!isLoanFormNotFilled) {
@@ -47,15 +47,15 @@ const FirstLoanSection = (props: FirstLoanSectionProps) => {
                     props.form.setFieldsValue({ rankStrategy });
                     props.setCustomAntFormFieldError(props.customAntFormFieldError);
                 }
-            })
+            });
         }
 
-    }
+    };
 
     return (
         <React.Fragment>
 
-            <Divider style={{color:'#00000073'}} orientation="left">新客配置</Divider>
+            <Divider style={{ color: '#00000073' }} orientation="left">新客配置</Divider>
             <Form.Item label={"分数类型"} name={"rankStrategy"} required>
                 <Radio.Group onChange={rankStratOnChange} >
                     <Radio value={'KEY_VALUE'}>值</Radio>
@@ -89,7 +89,7 @@ const FirstLoanSection = (props: FirstLoanSectionProps) => {
             </Form.Item>
             {contextHolder}
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default FirstLoanSection;

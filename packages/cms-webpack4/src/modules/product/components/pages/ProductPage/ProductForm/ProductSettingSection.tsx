@@ -1,8 +1,8 @@
-import {Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadProps ,Collapse} from "antd";
-import {UploadOutlined} from "@ant-design/icons";
+import { Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadProps ,Collapse } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import React from "react";
-import {EmailValidator, NumberValidator} from "../../../../../shared/utils/validation/validator";
-import {cannotTypeFloat} from "../../../../../shared/utils/format/cannotTypeFloat";
+import { EmailValidator, NumberValidator } from "../../../../../shared/utils/validation/validator";
+import { cannotTypeFloat } from "../../../../../shared/utils/format/cannotTypeFloat";
 const { Panel } = Collapse;
 interface ProductSettingSectionProps {
     setLogo: React.Dispatch<React.SetStateAction<string>>;
@@ -13,60 +13,60 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
     const [messageApi, contextHolder] = message.useMessage();
 
     // NOTE: uploadLogoProps
-  const uploadLogoProps: UploadProps = {
-    name: 'file',
-    action: '/hs/admin/product-manage/icon/upload',
-    beforeUpload: file => {
-      const isPNG = file.type === 'image/png';
-      if (!isPNG) {
-        messageApi.error(`${file.name} is not a png file`);
-      }
-      return isPNG || Upload.LIST_IGNORE;
-    },
+    const uploadLogoProps: UploadProps = {
+        name: 'file',
+        action: '/hs/admin/product-manage/icon/upload',
+        beforeUpload: file => {
+            const isPNG = file.type === 'image/png';
+            if (!isPNG) {
+                messageApi.error(`${file.name} is not a png file`);
+            }
+            return isPNG || Upload.LIST_IGNORE;
+        },
 
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        // console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        messageApi.success(`${info.file.name} file uploaded successfully`);
-        props.setLogo(info.file.response.url);
-      } else if (info.file.status === 'error') {
-        messageApi.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                // console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                messageApi.success(`${info.file.name} file uploaded successfully`);
+                props.setLogo(info.file.response.url);
+            } else if (info.file.status === 'error') {
+                messageApi.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
     // NOTE: uploadBackgroundImgProps
-  const uploadBackgroundImgProps: UploadProps = {
-    name: 'file',
-    action: '/hs/admin/product-manage/icon/upload',
-    beforeUpload: file => {
-      const isPNG = file.type === 'image/png';
-      if (!isPNG) {
-          messageApi.error(`${file.name} is not a png file`);
-      }
-      return isPNG || Upload.LIST_IGNORE;
-    },
+    const uploadBackgroundImgProps: UploadProps = {
+        name: 'file',
+        action: '/hs/admin/product-manage/icon/upload',
+        beforeUpload: file => {
+            const isPNG = file.type === 'image/png';
+            if (!isPNG) {
+                messageApi.error(`${file.name} is not a png file`);
+            }
+            return isPNG || Upload.LIST_IGNORE;
+        },
 
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        // console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-          messageApi.success(`${info.file.name} file uploaded successfully`);
-        props.setBackgroundImg(info.file.response.url);
-      } else if (info.file.status === 'error') {
-          messageApi.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                // console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                messageApi.success(`${info.file.name} file uploaded successfully`);
+                props.setBackgroundImg(info.file.response.url);
+            } else if (info.file.status === 'error') {
+                messageApi.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
 
     const getValueFromEvent = e => {
         if (Array.isArray(e)) {
             return e;
         }
         return e && e.fileList;
-    }
+    };
 
 
     return (
@@ -288,6 +288,6 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                 </Panel>
             </Collapse>
         </React.Fragment>
-  )
-}
+    );
+};
 export default ProductSettingSection;

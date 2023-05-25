@@ -2,7 +2,7 @@
 import { PageContainer } from '@ant-design/pro-components';
 import LoginAccountManageTable from './LoginAccountManageTable';
 
-import {Route} from "antd/es/breadcrumb/Breadcrumb";
+import { Route } from "antd/es/breadcrumb/Breadcrumb";
 
 const LoginAccountManagePage = () => {
     // NOTE: breadcrumb
@@ -13,7 +13,7 @@ const LoginAccountManagePage = () => {
         ) : (
             <span>{route.breadcrumbName}</span>
         );
-    }
+    };
     return (
         <PageContainer
             header={{
@@ -28,10 +28,10 @@ const LoginAccountManagePage = () => {
                 },
             }}
         >
-             <LoginAccountManageTable  />
+            <LoginAccountManageTable  />
         </PageContainer>
-    )
-}
+    );
+};
 
 export default LoginAccountManagePage;
 

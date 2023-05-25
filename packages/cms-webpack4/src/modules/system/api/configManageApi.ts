@@ -13,7 +13,7 @@ const ConfigListApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetConfigListQuery
 } = ConfigListApi;

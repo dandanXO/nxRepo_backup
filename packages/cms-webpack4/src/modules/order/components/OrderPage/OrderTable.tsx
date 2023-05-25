@@ -9,7 +9,7 @@ import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../.
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
-import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
@@ -21,9 +21,9 @@ const OrderTable = () => {
     const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
     const initSearchList = {
-        merchantName:'', appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '',
+        merchantName: '', appName: '', applyTimeEnd: '', applyTimeStart: '', channelId: '', expireTimeEnd: '', expireTimeStart: '', isLeng: '', isOldUser: '',
         loanTimeEnd: '', loanTimeStart: '', orderNo: '', productName: '', rcProvider: '', status: '', userPhone: '', userTrueName: '', pageNum: 1, pageSize: 10
-    }
+    };
     // redux
     const history = useHistory();
 
@@ -40,35 +40,35 @@ const OrderTable = () => {
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList])
+    }, [searchList]);
 
     useEffect(() => {
         if(isSuperAdmin){
             triggerGetMerchantList(null);
             triggerGetChannelList(null);
             triggerGetProviderList(null);
-        };
-    }, [isSuperAdmin])
+        }
+    }, [isSuperAdmin]);
 
     useEffect(() => {
         if (currentData !== undefined) {
             setOrderList(currentData);
         }
-    }, [currentData])
+    }, [currentData]);
 
     const handleToUserDetail = (userId, orderId, orderNo) => {
         history.push(`order-detail/${userId}/${orderId}/${orderNo}`);
         handleToDetailPage('/order-detail', '/order');
-    }
+    };
 
     const pageOnChange = (current, pageSize) => {
-        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
-    }
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
+    };
 
     const handleExportOrderList = () => {
         const searchQueryString = queryString.stringify(searchList);
         window.open(`/hs/admin/order/list/download?${searchQueryString}`);
-    }
+    };
 
     const statusEnum = appInfo.COUNTRY !== 'Bangladesh' ? {
         '': { text: '不限' },
@@ -101,12 +101,12 @@ const OrderTable = () => {
             align: 'left',
             width: ProColumnsOperationConstant.width["1"],
             render: (text, record, _, action) => {
-                return <a key="editable" onClick={() => handleToUserDetail(record.userId, record.id, record.orderNo)} >查看</a>
+                return <a key="editable" onClick={() => handleToUserDetail(record.userId, record.id, record.orderNo)} >查看</a>;
             }
         },
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "", render: (text) => <CopyText text={text} /> },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.userPhone || "" , render: (text) => <CopyText text={text} />},
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" , render: (text) => <CopyText text={text} />},
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.userPhone || "" , render: (text) => <CopyText text={text} /> },
+        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" , render: (text) => <CopyText text={text} /> },
         {
             title: '老客下单', dataIndex: 'isOldUser', valueType: 'select', key: 'isOldUser', initialValue: searchParams.isOldUser || "",
             width: '50px', align: 'center', valueEnum: {
@@ -116,7 +116,7 @@ const OrderTable = () => {
             },
         },
         { title: 'APP名称', dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || "", render: (text) => <CopyText text={text} /> },
-        { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "" , render: (text) => <CopyText text={text} />},
+        { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "" , render: (text) => <CopyText text={text} /> },
         {
             title: '订单状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: searchParams.status || "",
             valueEnum: statusEnum,
@@ -125,17 +125,17 @@ const OrderTable = () => {
                 return statusEnum[status] ? <Tag color={tagStatus.color}>{tagStatus.text}</Tag> : '-';
             },
         },
-        { title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: { true: { text: '是' }, false: { text: '否' } } ,width:'50px',align:'center'},
+        { title: '空放订单', dataIndex: 'dummy', key: 'dummy', hideInSearch: true, valueEnum: { true: { text: '是' }, false: { text: '否' } } ,width: '50px',align: 'center' },
         { title: '申请金额', dataIndex: 'deviceMoney', key: 'deviceMoney', hideInSearch: true, initialValue: searchParams.deviceMoney || "", align: 'right' },
         { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney', hideInSearch: true, initialValue: searchParams.lendMoney || "", align: 'right' },
         { title: '借款期限(天)', dataIndex: 'lendDays', key: 'lendDays', hideInSearch: true, initialValue: searchParams.lendDays || "", align: 'center',width: '80px' },
-        { title: '申请时间', dataIndex: 'applyTime', key: 'applyTime', hideInSearch: true, valueType: 'dateTime',width:'100px', },
+        { title: '申请时间', dataIndex: 'applyTime', key: 'applyTime', hideInSearch: true, valueType: 'dateTime',width: '100px', },
         {
             title: '申请时间', dataIndex: 'applyTimeRange', valueType: 'dateRange', key: 'applyTimeRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
             initialValue: (searchParams.applyTimeStart === undefined || searchParams.applyTimeStart === "") ? "" : [moment(searchParams.applyTimeStart), moment(searchParams.applyTimeEnd)]
         },
-        { title: '放款时间', dataIndex: 'loanTime', key: 'loanTime', hideInSearch: true, valueType: 'dateTime',width:'100px', },
+        { title: '放款时间', dataIndex: 'loanTime', key: 'loanTime', hideInSearch: true, valueType: 'dateTime',width: '100px', },
         {
             title: '放款时间', dataIndex: 'loanTimeRange', valueType: 'dateRange', key: 'loanTimeRange',
             fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true,
@@ -157,19 +157,19 @@ const OrderTable = () => {
             },
         },
 
-    ]
+    ];
     if (isSuperAdmin) {
         columns.splice(1, 0, {
             title: '商户名', dataIndex: 'merchantName', key: 'merchantName', valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantName || '',
             width: ProColumnsOperationConstant.width["2"],
-        })
+        });
         columns.splice(6, 0,
             { title: '申请渠道', dataIndex: 'channelId', valueType: 'select', key: 'channelId', valueEnum: channelListEnum, initialValue: searchParams.channelId || '', hideInTable: true },
             { title: '申请渠道', dataIndex: 'channelName', valueType: 'select', key: 'channelName', hideInSearch: true }
-        )
+        );
         columns.push(
-            { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.rcProvider || "", valueEnum: providerListEnum,}
-        )
+            { title: '风控应用', dataIndex: 'riskModelName', key: 'riskModelName', initialValue: searchParams.rcProvider || "", valueEnum: providerListEnum, }
+        );
 
     }
 
@@ -188,14 +188,14 @@ const OrderTable = () => {
                         <Button onClick={() => {
                             //  form.resetFields();
                             // @ts-ignore
-                            form.setFieldsValue({...initSearchList, applyTimeRange: '', expireDateRange: '', loanTimeRange: '', riskModelName: '', phoneNo: '', userName: '', merchantName: ''})
+                            form.setFieldsValue({ ...initSearchList, applyTimeRange: '', expireDateRange: '', loanTimeRange: '', riskModelName: '', phoneNo: '', userName: '', merchantName: '' });
                             setSearchList(initSearchList);
                         }}>{resetText}</Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { appName, applyTimeRange, channelId, expireDateRange, isLeng, isOldUser, loanTimeRange, orderNo, productName, riskModelName, status, phoneNo, userName ,merchantName=''} = form.getFieldValue();
+                                const { appName, applyTimeRange, channelId, expireDateRange, isLeng, isOldUser, loanTimeRange, orderNo, productName, riskModelName, status, phoneNo, userName ,merchantName = '' } = form.getFieldValue();
                                 const merchant = merchantName  ? merchantListEnum.get(merchantName)?.text : '';
                                 setSearchList({
                                     ...searchList,
@@ -217,7 +217,7 @@ const OrderTable = () => {
                                     userTrueName: userName,
                                     merchantName: isSuperAdmin ? merchant : '',
                                     pageNum: 1,
-                                })
+                                });
                                 form.submit();
                             }}
                         >
@@ -241,8 +241,8 @@ const OrderTable = () => {
             }}
         />
 
-    )
-}
+    );
+};
 
 export default OrderTable;
 

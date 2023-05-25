@@ -39,7 +39,7 @@ const WhiteListApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetWhiteListQuery,
     usePostWhiteListMutation,

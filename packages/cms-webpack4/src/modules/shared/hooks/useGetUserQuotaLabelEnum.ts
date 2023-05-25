@@ -3,7 +3,7 @@ import { useLazyGetUserQuotaLabelSelectQuery } from "../api/userQuotaLabelApi";
 const useGetUserQuotaLabelEnum = () => {
 
     // 注册渠道
-    const [triggerGetUserQuotaLable, { currentData: userQuotaLableData, isSuccess: isUserQuotaLableDataSuccess ,isFetching}] = useLazyGetUserQuotaLabelSelectQuery({
+    const [triggerGetUserQuotaLable, { currentData: userQuotaLableData, isSuccess: isUserQuotaLableDataSuccess ,isFetching }] = useLazyGetUserQuotaLabelSelectQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -26,22 +26,22 @@ const useGetUserQuotaLabelEnum = () => {
 
     useEffect(() => {
         if (userQuotaLableData) {
-            let userQuotaLablEnumData = new Map().set('', { text: '不限', color: colorEnum['blue'] });
+            const userQuotaLablEnumData = new Map().set('', { text: '不限', color: colorEnum['blue'] });
             userQuotaLableData && userQuotaLableData?.map((i) => {
-                return userQuotaLablEnumData.set(i.id, { text: i.labelName, color: colorEnum[i.labelColor].color, id: i.id })
+                return userQuotaLablEnumData.set(i.id, { text: i.labelName, color: colorEnum[i.labelColor].color, id: i.id });
             });
 
-            let userQuotaLablSelectData = userQuotaLableData?.map((i) => {
-                return { value: i.id, label: i.labelName }
+            const userQuotaLablSelectData = userQuotaLableData?.map((i) => {
+                return { value: i.id, label: i.labelName };
             });
 
             setUserQuotaLablEnum(userQuotaLablEnumData);
             setUserQuotaLablSelect([{ value: '', label: '额度标签' }, ...userQuotaLablSelectData, { value: 0, label: '移除配置' }]);
         }
-    }, [isFetching])
+    }, [isFetching]);
 
 
-    return { triggerGetUserQuotaLable, userQuotaLablEnum, userQuotaLablSelect, colorEnum }
-}
+    return { triggerGetUserQuotaLable, userQuotaLablEnum, userQuotaLablSelect, colorEnum };
+};
 
 export default useGetUserQuotaLabelEnum;

@@ -3,7 +3,7 @@ import React from "react";
 import { NumberValidator } from "../../../../../shared/utils/validation/validator";
 import { FormInstance } from "antd/es";
 import CustomLabel from "../../../../../shared/components/other/CustomLabel";
-import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 const { Panel } = Collapse;
 interface LoanSettingSectionProps {
     form: FormInstance;
@@ -40,15 +40,15 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
 
                     <Form.Item label="最高金额上限" required>
                         <Form.Item name="maxAmount" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
-                         rules={[
-                            {
-                                transform: (value) => Number(value),
-                                validator: async (_, value) => NumberValidator(_, value)({
-                                    min: 1,
-                                    minMessage: "请输入大于0的整数",
-                                })
-                            },
-                        ]}
+                            rules={[
+                                {
+                                    transform: (value) => Number(value),
+                                    validator: async (_, value) => NumberValidator(_, value)({
+                                        min: 1,
+                                        minMessage: "请输入大于0的整数",
+                                    })
+                                },
+                            ]}
                         >
                             <Input allowClear placeholder={"最高金额上限"} prefix="₹" />
                         </Form.Item>
@@ -116,7 +116,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                                             </Form.Item>
                                         </Input.Group>
                                     </Form.Item>
-                                )
+                                );
                             })}
                         </Form.Item>}
                     </Form.Item>
@@ -149,7 +149,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
             </Collapse>
 
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default LoanSettingSection;

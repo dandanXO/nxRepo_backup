@@ -1,10 +1,10 @@
-import {AdTemplate1, IAdTemplate1Data} from "./components/AdTemplate1";
-import {AdTemplate2} from "./components/AdTemplate2";
-import {AdTemplate3} from "./components/AdTemplate3";
+import { AdTemplate1, IAdTemplate1Data } from "./components/AdTemplate1";
+import { AdTemplate2 } from "./components/AdTemplate2";
+import { AdTemplate3 } from "./components/AdTemplate3";
 import styled from "styled-components";
 import queryString from "query-string";
 import Android260x720 from "./720.svg";
-import {ActivityBanner} from "../../export/service/types";
+import { ActivityBanner } from "../../export/service/types";
 // import {MockAdTemplate1Data} from "./mock/MockAdTemplate1Data";
 // import {MockAdTemplate2Data} from "./mock/MockAdTemplate2Data";
 // import {MockAdTemplate3Data} from "./mock/MockAdTemplate3Data";
@@ -34,7 +34,7 @@ const CategoryText = styled.div`
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 11px;
-`
+`;
 const parsedQueryString = queryString.parse(window.location.search);
 
 
@@ -47,29 +47,29 @@ interface IActivityAdListPage {
 
 export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
     // console.log("DemoActivityAdListPage.props:z", props)
-  const type = parsedQueryString.type || props.type;
-  let adTemplate;
-  switch (type) {
+    const type = parsedQueryString.type || props.type;
+    let adTemplate;
+    switch (type) {
     case "1": {
-      adTemplate = <AdTemplate1 data={props.data}/>;
-      break;
+        adTemplate = <AdTemplate1 data={props.data}/>;
+        break;
     }
     case "2": {
-      adTemplate = <AdTemplate2 data={props.data as any}/>
-      break;
+        adTemplate = <AdTemplate2 data={props.data as any}/>;
+        break;
     }
     case "3": {
-      adTemplate = <AdTemplate3 data={props.data as any}/>
-      break;
+        adTemplate = <AdTemplate3 data={props.data as any}/>;
+        break;
     }
     default:
-      adTemplate = <div>读取中</div>;
-      break;
-  }
-  return (
-    <Page>
-        <CategoryText>Theme Activities</CategoryText>
-        {props && adTemplate}
-    </Page>
-  )
-}
+        adTemplate = <div>读取中</div>;
+        break;
+    }
+    return (
+        <Page>
+            <CategoryText>Theme Activities</CategoryText>
+            {props && adTemplate}
+        </Page>
+    );
+};

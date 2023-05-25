@@ -13,7 +13,7 @@ const UserReviewRecordApi = API.injectEndpoints({
         }),
 
     })
-})
+});
 export const {
     useLazyGetUserReviewRecordListQuery,
 } = UserReviewRecordApi;

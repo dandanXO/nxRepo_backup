@@ -1,7 +1,7 @@
-import {AdTemplateCard} from "../index";
-import {AdContainer} from "./AdContainer";
+import { AdTemplateCard } from "../index";
+import { AdContainer } from "./AdContainer";
 import styled from "styled-components";
-import {onClickToAction} from "./AdClick";
+import { onClickToAction } from "./AdClick";
 
 export interface IAdTemplate3Data {
     brandCard: AdTemplate3Card;
@@ -17,7 +17,7 @@ export interface AdTemplate3Card extends AdTemplateCard{
 const AdTemplate3Container = styled(AdContainer)`
     flex-direction: column;
     justify-content: space-between;
-`
+`;
 const Card = styled.div<{bgColor: string}>`
     // NOTE: Self
     box-sizing: border-box;
@@ -36,7 +36,7 @@ const Title = styled.div<{color: string}>`
     font-size: 12px;
     font-weight: 500;
     color: ${props => props.color};
-`
+`;
 const Description = styled.div`
     display: flex;
     flex-direction: row;
@@ -47,13 +47,13 @@ const Description1 = styled.span<{color: string}>`
     font-weight: 500;
     color: ${props => props.color};
     margin-right: 8px;
-`
+`;
 const Description2 = styled.span<{color: string}>`
     font-size: 14px;
     font-weight: 500;
     color: ${props => props.color};
     align-self: center;
-`
+`;
 const Button = styled.div<{bgColor: string; color: string}>`
     box-sizing: border-box;
     border-radius: 10px;
@@ -68,13 +68,13 @@ const Button = styled.div<{bgColor: string; color: string}>`
     display: flex;
     flex-direction: row;
     align-items: center;
-`
+`;
 
 interface IAdTemplate3 {
     data: IAdTemplate3Data | null;
 }
 export const AdTemplate3 = (props: IAdTemplate3) => {
-    console.log("AdTemplate3.props: ", props)
+    console.log("AdTemplate3.props: ", props);
     return (
         <AdTemplate3Container>
             {/*NOTE: Brand*/}
@@ -108,6 +108,6 @@ export const AdTemplate3 = (props: IAdTemplate3) => {
                 </Button>
             </Card>
         </AdTemplate3Container>
-    )
-}
+    );
+};
 

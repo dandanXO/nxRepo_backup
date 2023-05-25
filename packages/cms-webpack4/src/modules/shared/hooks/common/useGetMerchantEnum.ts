@@ -12,19 +12,19 @@ const useGetMerchantEnum = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [merchantListEnum, setMerchantListEnum] = useState(null)
+    const [merchantListEnum, setMerchantListEnum] = useState(null);
 
     useEffect(() => {
         if (isSuperAdmin && merchantListData) {
-            let merchantList = new Map().set('', { text: '不限' });
+            const merchantList = new Map().set('', { text: '不限' });
             merchantListData && merchantListData?.map((i) => {
-                return merchantList.set(i.merchantId, { text: i.name })
+                return merchantList.set(i.merchantId, { text: i.name });
             });
-            setMerchantListEnum(merchantList)
+            setMerchantListEnum(merchantList);
         }
-    }, [isMerchantListDataSuccess])
+    }, [isMerchantListDataSuccess]);
 
-    return { triggerGetMerchantList, merchantListEnum }
-}
+    return { triggerGetMerchantList, merchantListEnum };
+};
 
 export default useGetMerchantEnum;

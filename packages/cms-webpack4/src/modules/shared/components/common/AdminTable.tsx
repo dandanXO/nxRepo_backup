@@ -1,7 +1,7 @@
-import {Button, FormInstance, Space, Table} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
-import {ProColumns, ProTable} from "@ant-design/pro-components";
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import { Button, FormInstance, Space, Table } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { ProColumns, ProTable } from "@ant-design/pro-components";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 export interface ModalContent {
     show: boolean;
@@ -58,32 +58,32 @@ interface ActionType {
 }
 
 export const AdminTable = <TableListItemDataType,>({
-                                                       tableHeaderColumns,
-                                                       loading,
-                                                       tableDatasource,
-                                                       onSearchClick,
-                                                       setShowModalContent,
-                                                       hasAddForm = true,
-                                                       hasEditForm = true,
-                                                       searchable = true,
-                                                       addText = ButtonsText.AddText,
-                                                       onAddCallback,
-                                                       isSearchFromClient = true,
-                                                       onFormSearchCallback,
-                                                       onFormResetCallback,
-                                                       triggerToRefreshList,
-                                                       headerTitle,
-                                                       // onSubmit,
-                                                       // onReset,
-                                                       // onLoad,
-                                                       rowKey = "",
-                                                       rowSelection,
-                                                       form,
-                                                       toolBarRender = null,
-                                                       currentPage,
-                                                       total,
-                                                       pageOnChange,
-                                                       formRef
+    tableHeaderColumns,
+    loading,
+    tableDatasource,
+    onSearchClick,
+    setShowModalContent,
+    hasAddForm = true,
+    hasEditForm = true,
+    searchable = true,
+    addText = ButtonsText.AddText,
+    onAddCallback,
+    isSearchFromClient = true,
+    onFormSearchCallback,
+    onFormResetCallback,
+    triggerToRefreshList,
+    headerTitle,
+    // onSubmit,
+    // onReset,
+    // onLoad,
+    rowKey = "",
+    rowSelection,
+    form,
+    toolBarRender = null,
+    currentPage,
+    total,
+    pageOnChange,
+    formRef
 
 }: AdminTableTemplateProps<TableListItemDataType>) => {
 
@@ -149,7 +149,7 @@ export const AdminTable = <TableListItemDataType,>({
                     </Button>
                 </Space>
             ),
-        }
+        };
     }, [tableDatasource, onSearchClick]);
 
     const [currentPaginationPageSize, setCurrentPaginationPageSize] = useState(10);
@@ -188,11 +188,11 @@ export const AdminTable = <TableListItemDataType,>({
             // alwaysShowAlert={true}
             rowSelection={rowSelection}
             // rowSelection={{
-                // 自定义选择项参考: https://ant.design/components/table-cn/#components-table-demo-row-selection-custom
-                // 注释该行则默认不显示下拉选项
-                // selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
-                // defaultSelectedRowKeys: [1],
-                // ...rowSelection,
+            // 自定义选择项参考: https://ant.design/components/table-cn/#components-table-demo-row-selection-custom
+            // 注释该行则默认不显示下拉选项
+            // selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+            // defaultSelectedRowKeys: [1],
+            // ...rowSelection,
             // }}
             // dateFormatter="string"
             dateFormatter={(value, valueType) => {
@@ -202,11 +202,11 @@ export const AdminTable = <TableListItemDataType,>({
             // NOTE: Unknow
             headerTitle={
                 headerTitle ? headerTitle :
-                <>
-                    {hasAddForm && (
-                        <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback && onAddCallback()}>{addText}</Button>
-                    )}
-                </>
+                    <>
+                        {hasAddForm && (
+                            <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback && onAddCallback()}>{addText}</Button>
+                        )}
+                    </>
             }
             toolBarRender={toolBarRender}
             // NOTE: Antd Design
@@ -248,5 +248,5 @@ export const AdminTable = <TableListItemDataType,>({
             rowKey={rowKey}
 
         />
-    )
-}
+    );
+};

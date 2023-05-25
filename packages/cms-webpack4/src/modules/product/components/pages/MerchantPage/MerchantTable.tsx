@@ -5,7 +5,7 @@ import { ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
 import { useLazyGetMerchantManageListQuery } from "../../../service/merchant/MerchantApi";
 import { GetMerchantListResponse } from "../../../service/merchant/getMerchantList";
-import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 
 interface MerchantTableProps {
     postMerchantSuccess?: boolean;
@@ -39,7 +39,7 @@ const MerchantTable = ({
 
     useEffect(() => {
         setMerchantList(currentData);
-    }, [currentData])
+    }, [currentData]);
 
     const columns: ProColumns<GetMerchantListResponse>[] = [
         {
@@ -49,7 +49,7 @@ const MerchantTable = ({
             render: (text, record, _, action) => [
                 <a key="editable" onClick={() => {
                     setIsEdit(true);
-                    setMerchantModalVisible(true)
+                    setMerchantModalVisible(true);
                     form.setFieldsValue(record);
                 }}>修改</a>,
             ],
@@ -70,7 +70,7 @@ const MerchantTable = ({
         { title: '创建时间', dataIndex: 'createTime', hideInSearch: true, key: 'createTime', valueType: 'dateTime' },
         { title: '更新時間', dataIndex: 'updateTime', hideInSearch: true, key: 'updateTime', valueType: 'dateTime' },
 
-    ]
+    ];
 
 
     return (
@@ -122,8 +122,8 @@ const MerchantTable = ({
             }}
         />
 
-    )
-}
+    );
+};
 
 export default MerchantTable;
 

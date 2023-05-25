@@ -11,20 +11,20 @@ const useGetAppNamesEnum = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [appNamesEnum, setAppNamesEnum] = useState(null)
+    const [appNamesEnum, setAppNamesEnum] = useState(null);
 
     useEffect(() => {
 
-        let appNames = new Map().set('', { text: '不限' });
+        const appNames = new Map().set('', { text: '不限' });
         currentData && currentData?.map((i) => {
-            return appNames.set(i, { text: i })
+            return appNames.set(i, { text: i });
         });
-        setAppNamesEnum(appNames)
+        setAppNamesEnum(appNames);
 
-    }, [isSuccess])
+    }, [isSuccess]);
 
 
-    return { triggerGetAppNames, appNamesEnum }
-}
+    return { triggerGetAppNames, appNamesEnum };
+};
 
 export default useGetAppNamesEnum;

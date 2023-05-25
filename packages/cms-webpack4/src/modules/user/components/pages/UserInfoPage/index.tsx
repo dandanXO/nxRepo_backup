@@ -5,13 +5,13 @@ import UserInfo from '../../../../shared/components/userInfo/UserInfo';
 import AddressBook from '../../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
 import LoanInfo from '../../../../shared/components/userInfo/LoanInfo';
-import {Link, useParams} from "react-router-dom";
-import {Route} from "antd/es/breadcrumb/Breadcrumb";
-import {itemRender} from "../../../../shared/components/common/itemRender";
+import { Link, useParams } from "react-router-dom";
+import { Route } from "antd/es/breadcrumb/Breadcrumb";
+import { itemRender } from "../../../../shared/components/common/itemRender";
 const UserInfoPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();
-    const userId = Number(urlParams.userId)
+    const userId = Number(urlParams.userId);
 
     useEffect(() => {
         setDomLoaded(true);
@@ -22,7 +22,7 @@ const UserInfoPage = () => {
         { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId}/> },
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId}/> },
         { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId}/> },
-      ];
+    ];
 
     return domLoaded ? (
         <div>

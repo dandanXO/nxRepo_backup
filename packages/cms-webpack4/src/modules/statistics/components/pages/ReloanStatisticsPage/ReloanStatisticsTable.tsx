@@ -27,15 +27,15 @@ const ReloanStatisticsTable = () => {
     });
 
     const initSearchList: GetReloanStatisticsListRequestQuerystring = {
-        appName: '', repayEndDate: '', merchantId: '', repayStartDate: '', productId:''
-    }
+        appName: '', repayEndDate: '', merchantId: '', repayStartDate: '', productId: ''
+    };
 
     // // state
     const [searchList, setSearchList] = useState<GetReloanStatisticsListRequestQuerystring>(initSearchList);
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList])
+    }, [searchList]);
 
     useEffect(() => {
         if (isSuperAdmin) {
@@ -49,13 +49,13 @@ const ReloanStatisticsTable = () => {
         { title: 'APP名称', dataIndex: 'appName', key: 'appName', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: appNamesEnum, fieldProps: { showSearch: true } },
         { title: '产品名称', dataIndex: 'productId', key: 'productId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: productNamesEnum, fieldProps: { showSearch: true } },
         { title: '到期时间', dataIndex: 'dateRange', key: 'dateRange', valueType: 'dateRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: "" },
-        { title: '到期日', dataIndex: 'expireDate', key: 'expireDate', hideInSearch: true, width:'100px'}
-    ]
+        { title: '到期日', dataIndex: 'expireDate', key: 'expireDate', hideInSearch: true, width: '100px' }
+    ];
 
     if (isSuperAdmin) {
         columns.splice(0, 0, {
             title: '商户名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true }
-        })
+        });
     }
 
     const customColumns:any[] = [
@@ -112,7 +112,7 @@ const ReloanStatisticsTable = () => {
                 { title: '用户复借率', dataIndex: 'userReLoanRate', key: 'userReLoanRate', hideInSearch: true, tooltip: '用户复借率=复借用戶数/还款用戶总数', className: '' },
             ]
         },
-    ]
+    ];
 
     const formRef = useRef<ProFormInstance>();
     const subTitleTypes = ['totalColumn', 'newCustomer', 'oldCustomer'];
@@ -132,7 +132,7 @@ const ReloanStatisticsTable = () => {
             ? subTitleTypes.filter((t) => [...selectedSubTags, tag].includes(t))
             : selectedSubTags.filter((t) => t !== tag);
         setSelectedSubTags(nextSelectedTags);
-    }
+    };
 
     useEffect(() => {
         const selectedColumns = customColumns
@@ -141,9 +141,9 @@ const ReloanStatisticsTable = () => {
                 ...i,
                 children: i.children.filter(child => child.className === '' ? child : selectedSubTags.indexOf(child.className) > -1)
             }))
-            .filter(col => col.children.length > 0)
-        setTagColumns(selectedColumns)
-    }, [selectedTags, selectedSubTags])
+            .filter(col => col.children.length > 0);
+        setTagColumns(selectedColumns);
+    }, [selectedTags, selectedSubTags]);
 
 
     const getSearchParams = () => {
@@ -155,15 +155,15 @@ const ReloanStatisticsTable = () => {
             productId,
             repayEndDate: dateRange ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
             repayStartDate: dateRange ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
-        }
-    }
+        };
+    };
 
     const handleExport = () => {
         const searchParams = getSearchParams();
         const searchQueryString = queryString.stringify(searchParams);
         window.open(`/hs/admin/statistics/reloan-statistics/download?${searchQueryString}`);
-        setSearchList({...searchParams });
-    }
+        setSearchList({ ...searchParams });
+    };
 
     return (
 
@@ -181,7 +181,7 @@ const ReloanStatisticsTable = () => {
                             {'显示群组'}<Tooltip title={'反选可隐藏该群组'}><ExclamationCircleOutlined /></Tooltip>{':'}
                             <div>
                                 {customColumns.map((tag, index) => {
-                                    if (tag.key === 'registerCount') return
+                                    if (tag.key === 'registerCount') return;
                                     return <CheckableTag
                                         style={{ marginTop: '4px', marginBottom: '4px' }}
                                         key={tag.key}
@@ -189,7 +189,7 @@ const ReloanStatisticsTable = () => {
                                         onChange={(checked) => handleTagsChange(tag.key, checked)}
                                     >
                                         {tag.key === 'otpCount' ? 'OTP短信' : tag.title}
-                                    </CheckableTag>
+                                    </CheckableTag>;
                                 })}
                             </div>
                         </Space>
@@ -203,7 +203,7 @@ const ReloanStatisticsTable = () => {
                                         totalColumn: { title: '总计' },
                                         newCustomer: { title: '新客' },
                                         oldCustomer: { title: '老客' },
-                                    }
+                                    };
                                     return <CheckableTag
                                         style={{ marginTop: '4px', marginBottom: '4px' }}
                                         key={tag}
@@ -211,7 +211,7 @@ const ReloanStatisticsTable = () => {
                                         onChange={(checked) => handleSubTagsChange(tag, checked)}
                                     >
                                         {type[tag].title}
-                                    </CheckableTag>
+                                    </CheckableTag>;
                                 })}
                             </div>
                         </Space>
@@ -227,7 +227,7 @@ const ReloanStatisticsTable = () => {
                         <Button
                             onClick={() => {
                                 // @ts-ignore
-                                form.setFieldsValue({...initSearchList,dateRange: ''});
+                                form.setFieldsValue({ ...initSearchList,dateRange: '' });
                                 setSearchList(initSearchList);
                             }}
                         >
@@ -236,7 +236,7 @@ const ReloanStatisticsTable = () => {
                         <Button
                             type={'primary'}
                             onClick={() => {
-                                setSearchList({...getSearchParams()});
+                                setSearchList({ ...getSearchParams() });
                                 form.submit();
                             }}
                         >
@@ -258,7 +258,7 @@ const ReloanStatisticsTable = () => {
 
         </ProTable>
     );
-}
+};
 
 export default ReloanStatisticsTable;
 

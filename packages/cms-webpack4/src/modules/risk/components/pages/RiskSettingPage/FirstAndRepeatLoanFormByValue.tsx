@@ -43,7 +43,7 @@ function FirstAndRepeatLoanFormByValue(props: FormProps) {
                         <Form.Item name={[props.type, index, "loanCount"]} style={{ margin: '0 8px 0 0', width: 120 }}
                             help={(props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.help}
                             validateStatus={(props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.validateStatus}
-                            rules={[{ required: true, message: "请输入笔数"}]}
+                            rules={[{ required: true, message: "请输入笔数" }]}
                         >
                             <Input placeholder={"笔数"} />
                         </Form.Item>
@@ -63,11 +63,11 @@ function FirstAndRepeatLoanFormByValue(props: FormProps) {
                         </Form.Item>
                     </Input.Group>
                 </Form.Item>
-            )
+            );
         })}
 
-    </>
+    </>;
 
 }
 
-export default FirstAndRepeatLoanFormByValue
+export default FirstAndRepeatLoanFormByValue;

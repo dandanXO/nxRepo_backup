@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Modal, Spin, Input, Radio } from "antd";
+import React from "react";
+import { Form, Modal, Input, Radio } from "antd";
 
 interface UserReviewModalProps {
     showModal?: boolean;
@@ -8,7 +8,7 @@ interface UserReviewModalProps {
     form?: any;
 }
 
-const UsesrReviewModal = ((props: UserReviewModalProps) => {
+const UserReviewModal = ((props: UserReviewModalProps): JSX.Element => {
     const { showModal, handleCloseModal, onFinish, form } = props;
 
     const layout = {
@@ -19,7 +19,7 @@ const UsesrReviewModal = ((props: UserReviewModalProps) => {
         { label: '审核通过', value: 1 },
         { label: '审核不通过', value: 0 },
         { label: '进入黑名单', value: 2 },
-    ]
+    ];
 
 
     return (
@@ -39,8 +39,8 @@ const UsesrReviewModal = ((props: UserReviewModalProps) => {
                 </Form.Item>
             </Form>
         </Modal>
-    )
-})
+    );
+});
 
-export default UsesrReviewModal;
+export default UserReviewModal;
 

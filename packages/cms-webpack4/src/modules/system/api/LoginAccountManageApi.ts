@@ -1,5 +1,5 @@
 import { API } from "../../shared/api";
-import { GetLoginAccountListRequestQuery, GetLoginAccountListResponse} from "./types/LoginAccountManageTypes/getLoginAccountList";
+import { GetLoginAccountListRequestQuery, GetLoginAccountListResponse } from "./types/LoginAccountManageTypes/getLoginAccountList";
 import { PostLogoutRequestBody } from "./types/LoginAccountManageTypes/postLogout";
 
 const LoginAccountManageApi = API.injectEndpoints({
@@ -22,7 +22,7 @@ const LoginAccountManageApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetLoginAccountListQuery,
     usePostLogoutMutation

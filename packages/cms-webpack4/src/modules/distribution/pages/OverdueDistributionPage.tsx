@@ -1,10 +1,10 @@
 
-import {AdminTable} from "../../shared/components/common/AdminTable";
+import { AdminTable } from "../../shared/components/common/AdminTable";
 import AdminPage from "../../shared/components/common/AdminPage";
-import React, {useEffect, useRef, useState} from "react";
-import {ProColumns} from "@ant-design/pro-components";
-import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, Form, FormInstance, message, Space, Table} from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { ProColumns } from "@ant-design/pro-components";
+import { useAdminFormModal } from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
+import { Button, Form, FormInstance, message, Space, Table } from "antd";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
@@ -12,16 +12,16 @@ import {
     Stage,
 } from "../types/index";
 
-import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
+import { StageContainer, StageItem, StagePanel, StageTitle, StageTotal } from "../components/Stage/stage";
 import {
     useGetOverdueProductNamesQuery,
     useLazyGetOverdueSummaryQuery,
     useLazyGetOverdueDistributionQuery,
     usePostOverdueDistributionSelectedMutation, usePostOverdueDistributionStageMutation
 } from "../services/OverdueDistributionAPI";
-import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
+import { CommonOrderDistributionModal } from "../modals/CommonOrderDistributionModal";
 import moment from "moment";
-import {useForm} from "antd/es/form/Form";
+import { useForm } from "antd/es/form/Form";
 import CopyText from "../../shared/components/other/CopyText";
 
 type StageData = {
@@ -29,30 +29,30 @@ type StageData = {
 };
 
 export const OverdueDistributionPage = () => {
-    const [triggerFetchSummary, {data: summaryResponseData}] = useLazyGetOverdueSummaryQuery();
+    const [triggerFetchSummary, { data: summaryResponseData }] = useLazyGetOverdueSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData>({});
 
     useEffect(() => {
-        let summaryData = {}
+        const summaryData = {};
         summaryResponseData?.summaries?.map((item, current) => {
             summaryData[item.stage] = {
                 todoTotal: item?.todoTotal,
                 doneTotal: item?.doneTotal,
-            }
-        })
+            };
+        });
         // console.log("summaryData", summaryData);
         setSummaryData(summaryData);
-    }, [summaryResponseData])
+    }, [summaryResponseData]);
 
-    const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetOverdueProductNamesQuery(null);
+    const { currentData: productList, isSuccess: isGetProductNamesSuccess } = useGetOverdueProductNamesQuery(null);
 
     const productListMap = new Map().set('', { text: '全部' });
     productList?.map((i) => {
-        return productListMap.set(i.productId, { text: i.productName })
+        return productListMap.set(i.productId, { text: i.productName });
     });
 
 
-    const stageEnum = {}
+    const stageEnum = {};
     Object.keys(summaryData).map((key, currentValue) => {
         stageEnum[key] = {
             [Stage.S1]: "S1",
@@ -61,7 +61,7 @@ export const OverdueDistributionPage = () => {
             [Stage.S4]: "S4",
             [Stage.S5]: "S5",
         }[key];
-    })
+    });
     // console.log("summaryData", summaryData);
     // console.log("stageEnum", stageEnum);
     const columns: ProColumns<CollectDistributionQueryResponse, "text">[] = [
@@ -183,7 +183,7 @@ export const OverdueDistributionPage = () => {
             hideInSearch: true,
         },
 
-    ]
+    ];
 
     // NOTE: GET list and item
     const [triggerGetList, {
@@ -195,7 +195,7 @@ export const OverdueDistributionPage = () => {
         stage: Stage.S1,
         pageNum: 1,
         pageSize: 10,
-    })
+    });
 
 
 
@@ -214,7 +214,7 @@ export const OverdueDistributionPage = () => {
 
     const handleModalClose = () => {
         setShowModal(false);
-    }
+    };
 
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -227,7 +227,7 @@ export const OverdueDistributionPage = () => {
             setSelectedRow([]);
             triggerFetchSummary(null);
             triggerGetList(formState);
-        }
+        };
         if(isSelectedByOrder) {
             // console.log("orderIds", selectedRow);
             postDistributionSelected({
@@ -237,8 +237,8 @@ export const OverdueDistributionPage = () => {
                 refresh();
                 messageApi.success("分配成功");
             }).catch((error) => {
-                messageApi.error("分配失敗")
-            })
+                messageApi.error("分配失敗");
+            });
         } else {
             // console.log("stage", distributionStage);
             postDistributionStage({
@@ -248,10 +248,10 @@ export const OverdueDistributionPage = () => {
                 refresh();
                 messageApi.success("分配成功");
             }).catch((error) => {
-                messageApi.error("分配失敗")
-            })
+                messageApi.error("分配失敗");
+            });
         }
-    }
+    };
 
     // 紀錄目前選擇階段
     const [searchedStage, setSearchedStage] = useState(Stage.S1);
@@ -266,15 +266,15 @@ export const OverdueDistributionPage = () => {
         // console.log("pageOnChange.current", current)
         // console.log("pageOnChange.pageSize", pageSize)
         // console.log("pageOnChange.formState", formState)
-        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize }
-        setFormState(newFormStage)
+        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize };
+        setFormState(newFormStage);
         triggerGetList(newFormStage);
-    }
+    };
 
     const refresh = () => {
         // console.log("pageOnChange.formState", formState)
         triggerGetList(formState);
-    }
+    };
 
     return (
         <AdminPage navigator={{
@@ -288,7 +288,7 @@ export const OverdueDistributionPage = () => {
             },
             self: {
                 path: "",
-                breadcrumbName:"逾期订单分配"
+                breadcrumbName: "逾期订单分配"
             }
         }}>
             <>
@@ -388,14 +388,14 @@ export const OverdueDistributionPage = () => {
                             finalFormData.expireStartTime = searchFormState.dateRange[0].format('YYYY-MM-DDT00:00:00');
                             finalFormData.expireEndTime = searchFormState.dateRange[1].format('YYYY-MM-DDT23:59:59');
                         }
-                        delete finalFormData["dateRange"]
+                        delete finalFormData["dateRange"];
 
                         // 設定最終查詢
                         setFormState({
                             // ...formState,
                             ...finalFormData
-                        })
-                        triggerGetList(finalFormData)
+                        });
+                        triggerGetList(finalFormData);
                     }}
                     onFormResetCallback={(form: FormInstance) => {
                         setFormState({
@@ -403,14 +403,14 @@ export const OverdueDistributionPage = () => {
                             dateRange: null,
                             expireStartTime: null,
                             expireEndTime: null,
-                        })
+                        });
                         const searchFormState = form.getFieldsValue();
                         form.setFieldsValue({
                             ...searchFormState,
                             dateRange: null,
                             expireStartTime: null,
                             expireEndTime: null,
-                        })
+                        });
                     }}
                     triggerToRefreshList={refresh}
                     rowKey={"orderId"}
@@ -441,5 +441,5 @@ export const OverdueDistributionPage = () => {
                 />
             </>
         </AdminPage>
-    )
-}
+    );
+};

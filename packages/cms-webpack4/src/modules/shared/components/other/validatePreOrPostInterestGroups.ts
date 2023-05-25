@@ -1,23 +1,23 @@
 
-function equalRangeBelow100(str: string, min: number = 0, max: number = 100) {
-    return Number(str) < min || Number(str) > max
+function equalRangeBelow100(str: string, min = 0, max = 100) {
+    return Number(str) < min || Number(str) > max;
 }
 export const validateValue = (value, errorText) => {
     return value !== 0 && !value ? errorText
         : isNaN(value) ? "请输入數字"
             : equalRangeBelow100(value) ? "请输入0-100间数字" : '';
-}
+};
 
 export const validateNum = (value, errorText) => {
     return value !== 0 && !value ? errorText
         : isNaN(value) ? "请输入數字"
             : Number(value) < 1 ? "请输入大于1的整数" : '';
-}
+};
 export const validateplusAmount = (value, errorText) => {
     return value !== 0 && !value ? errorText
         : isNaN(value) ? "请输入數字"
             : Number(value) < 0 ? "请输入大于0的整数" : '';
-}
+};
 export const validatePreOrPostInterestGroups = (groups) => {
     const validateErrors = groups?.map((field, index) => {
     
@@ -50,17 +50,17 @@ export const validatePreOrPostInterestGroups = (groups) => {
                 value: field?.plusAmount,
             },
         };
-    })
+    });
 
-    let finalMap = {}
+    const finalMap = {};
     if (validateErrors) {
         Object.keys(validateErrors).map((key, index) => {
             finalMap[key] = {
                 ...finalMap[key],
                 ...validateErrors[key]
             };
-        })
+        });
     }
-    return finalMap
+    return finalMap;
 
-}
+};

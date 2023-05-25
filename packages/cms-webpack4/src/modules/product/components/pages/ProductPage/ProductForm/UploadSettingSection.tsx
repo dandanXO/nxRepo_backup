@@ -1,14 +1,14 @@
-import {Divider, Form, Input, Radio, Switch, Select, Collapse} from "antd";
+import { Divider, Form, Input, Radio, Switch, Select, Collapse } from "antd";
 
-import React, {useMemo} from "react";
-import {NumberValidator, TagValidator } from "../../../../../shared/utils/validation/validator";
+import React, { useMemo } from "react";
+import { NumberValidator, TagValidator } from "../../../../../shared/utils/validation/validator";
 
 const { Option } = Select;
 const { Panel } = Collapse;
 export function UploadSettingSection() {
-  const handleChange = (value: string) => {
+    const handleChange = (value: string) => {
     // console.log(`selected ${value}`);
-  };
+    };
     return <>
         <Collapse ghost defaultActiveKey={["1"]}>
             <Panel header="上架设定" key="1">

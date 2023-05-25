@@ -1,4 +1,4 @@
-import {API} from "../../shared/api";
+import { API } from "../../shared/api";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
@@ -61,7 +61,7 @@ export const TodayDistributionAPI = API.injectEndpoints({
         }),
 
     })
-})
+});
 
 
 export const {
@@ -71,4 +71,4 @@ export const {
     useLazyGetCollectorQuery,
     usePostDistributionSelectedMutation,
     usePostDistributionStageMutation,
-} = TodayDistributionAPI
+} = TodayDistributionAPI;

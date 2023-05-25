@@ -1,4 +1,4 @@
-import {CustomAntFormFieldError} from "./CustomAntFormFieldError";
+import { CustomAntFormFieldError } from "./CustomAntFormFieldError";
 
 abstract class Validation {
     private isEntityValid?: boolean;
@@ -25,7 +25,7 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
                 if(props[key] !== undefined) {
                     this[key] = props[key];
                 }
-            })
+            });
         }
         return this;
     }
@@ -34,7 +34,7 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
         isEntityValid: boolean;
         fieldsMessage: CustomAntFormFieldError;
     } {
-        let result
+        let result;
         if(changedFieldName) {
             // NOTE: Single Field - onFieldsChange
             result = this.schema.partial().safeParse(this);
@@ -54,11 +54,11 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
                         help: errorMessage,
                         value: this[field],
                     },
-                }
-            })
+                };
+            });
         }
 
-        const errorFields = (result as any).error && (result as any).error.issues && (result as any).error.issues.map(issue => issue.path[0]) || []
+        const errorFields = (result as any).error && (result as any).error.issues && (result as any).error.issues.map(issue => issue.path[0]) || [];
 
         if(this.fieldsMessage) {
             Object.keys(this.fieldsMessage).map(fieldKey => {
@@ -70,7 +70,7 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
                             help: "",
                             value: this[fieldKey],
                         }
-                    }
+                    };
                 }
             });
 
@@ -82,7 +82,7 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
         return {
             isEntityValid: this.isEntityValid,
             fieldsMessage: this.fieldsMessage,
-        }
+        };
     }
 }
 

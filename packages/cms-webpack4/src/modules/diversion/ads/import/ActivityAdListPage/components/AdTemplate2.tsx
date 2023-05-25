@@ -1,5 +1,5 @@
-import {AdTemplateCard} from "../index";
-import {AdContainer} from "./AdContainer";
+import { AdTemplateCard } from "../index";
+import { AdContainer } from "./AdContainer";
 import styled from "styled-components";
 import {
     onClickToAction
@@ -12,7 +12,7 @@ const makeStyleEllipsisOverflowText = () => {
         white-space: nowrap;
         text-overflow: ellipsis;
     `;
-}
+};
 
 export interface IAdTemplate2Data {
     type?: "adTemplate2",
@@ -35,7 +35,7 @@ export interface AdTemplate2Card extends AdTemplateCard{
 const AdTemplate2Container = styled(AdContainer)`
     display: flex;
     flex-direction: row;
-`
+`;
 const BrandCard = styled.div`
     display: flex;
     flex-direction: column;
@@ -45,21 +45,21 @@ const BrandCard = styled.div`
     width: 120px;
     height: 120px;
     margin-right: 8px;
-`
+`;
 const Title1 = styled.div`
     font-size: 12px;
     font-weight: 500;
     color: #845e3a;
     // NOTICE:
     ${makeStyleEllipsisOverflowText()};
-`
+`;
 const Title2 = styled.div`
     font-size: 16px;
     font-weight: 500;
     color: #845e3a;
     // NOTICE:
     ${makeStyleEllipsisOverflowText()};
-`
+`;
 const Price = styled.div`
     margin-bottom: 12px;
     // NOTICE:
@@ -70,12 +70,12 @@ const PriceUnit = styled.span`
     font-weight: 500;
     color: #ef7e3a;
     margin-right: 4px;
-`
+`;
 const PriceValue = styled.span`
     font-size: 21px;
     font-weight: 500;
     color: #ef7e3a;
-`
+`;
 const Button = styled.div<{bgColor: string}>`
     border-radius: 10px;
     display: inline-block;
@@ -89,7 +89,7 @@ const Button = styled.div<{bgColor: string}>`
     background-color: ${props => props.bgColor || "#ef7e3a"};
     // NOTICE:
     ${makeStyleEllipsisOverflowText()};
-`
+`;
 
 const CardContainer = styled.div`
     display: flex;
@@ -139,25 +139,25 @@ export const AdTemplate2 = (props: IAdTemplate2) => {
             <CardContainer>
                 {/*NOTE: Top*/}
                 <Card bgColor={"#e4f6ef"}
-                      onClick={() => onClickToAction({
-                          action: props.data?.topCard.action,
-                          actionUrl: props.data?.topCard.actionUrl,
-                      })}
+                    onClick={() => onClickToAction({
+                        action: props.data?.topCard.action,
+                        actionUrl: props.data?.topCard.actionUrl,
+                    })}
                 >
                     <Title color={"#469c7d"}>{props.data?.topCard.title}</Title>
                     <Button bgColor={"#59c19e"}>{props.data?.topCard.actionName}</Button>
                 </Card>
                 {/*NOTE: Bottom*/}
                 <Card bgColor={"#f2f4fa"}
-                      onClick={() => onClickToAction({
-                          action: props.data?.bottomCard.action,
-                          actionUrl: props.data?.bottomCard.actionUrl,
-                      })}
+                    onClick={() => onClickToAction({
+                        action: props.data?.bottomCard.action,
+                        actionUrl: props.data?.bottomCard.actionUrl,
+                    })}
                 >
                     <Title color={"#485d8c"}>{props.data?.bottomCard.title}</Title>
                     <Button bgColor={"#5175aa"}>{props.data?.bottomCard.actionName}</Button>
                 </Card>
             </CardContainer>
         </AdTemplate2Container>
-    )
-}
+    );
+};

@@ -1,4 +1,4 @@
-import React, { CSSProperties ,ReactNode,ReactElement} from 'react';
+import React, { CSSProperties ,ReactNode,ReactElement } from 'react';
 const CustomLabel = (props: { style?: CSSProperties; children: string | ReactElement | ReactElement[] }) => (
     <div
         style={{

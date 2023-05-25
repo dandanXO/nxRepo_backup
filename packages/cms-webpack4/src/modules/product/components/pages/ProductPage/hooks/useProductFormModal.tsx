@@ -56,9 +56,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
         renewPostInterestRate: { validateStatus: "", help: "" },
         renewPreInterestRate: { validateStatus: "", help: "" },
         productInterestRatePairs: {}
-    }
+    };
 
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>(initCustomAntFormFieldError)
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>(initCustomAntFormFieldError);
     const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
     const [postProductCreate, { isLoading }] = usePostProductCreateMutation();
     const [putProduct, { isSuccess: isPutProductSuccess }] = usePutProductEditMutation();
@@ -69,8 +69,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
         }
         triggerGetProduct({
             productId: productModalData.productId,
-        })
-    }, [productModalData.productId])
+        });
+    }, [productModalData.productId]);
 
 
     const [enableLoanAmount, setEnableLoanAmount] = useState<boolean>(false);
@@ -87,8 +87,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
         if (!merchantList) return;
 
 
-        setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false)
-        setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false)
+        setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false);
+        setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false);
 
 
         const currentMerchant = merchantList?.find(merchant => merchant.merchantId === productFormData.merchantId);
@@ -168,7 +168,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
                         preInterest: fixedFloatNumberToFixed3(ratePair.preInterest * 100),
                         postInterest: fixedFloatNumberToFixed3(ratePair.postInterest * 100),
                         plusAmount: ratePair.plusAmount,
-                    }
+                    };
                 }),
 
                 top: productFormData.top,
@@ -176,11 +176,11 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 templateType: productFormData.templateType,
                 weight: productFormData.weight,
                 enabled: productFormData.enabled,
-            })
+            });
         }
 
         // console.log("productFormData", productFormData);
-    }, [isFetching])
+    }, [isFetching]);
 
 
     const [triggerGetList, { currentData: productListData }] = useLazyGetProductManageListQuery({
@@ -195,7 +195,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
             values = {
                 ...values,
                 productId: productModalData.productId,
-            }
+            };
         }
         action(values).unwrap().then((responseData) => {
             // console.log("responseData", responseData);
@@ -228,18 +228,18 @@ export const useProductFormModal = (props: ProductFormModal) => {
             modal.error({
                 title: "error",
                 content: error.data.message
-            })
-        })
+            });
+        });
         // }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
     }, [productModalData.isEdit, productModalData.productId, postProductCreate, putProduct, setProductModalData, form, triggerGetList]);
 
 
     const fixedFloatNumberToFixed3 = (number: number): number => {
         return Number(number.toFixed(3));
-    }
+    };
     const strToFloatNumberWithFixed3 = (str: string): number => {
         return Number((Number(str) * 0.01).toFixed(3));
-    }
+    };
 
 
     const onFinish = (values: any) => {
@@ -252,14 +252,14 @@ export const useProductFormModal = (props: ProductFormModal) => {
             if (key !== 'productInterestRatePairs' && customAntFormFieldError[key]['validateStatus'] !== '') {
                 isNotFinish = true;
             }
-        })
+        });
         Object.values(customAntFormFieldError['productInterestRatePairs']).map(field => {
             Object.keys(field).map(i => {
                 if (field[i]['validateStatus'] !== '') {
                     isNotFinish = true;
                 }
-            })
-        })
+            });
+        });
 
         if (isNotFinish) return;
 
@@ -268,12 +268,12 @@ export const useProductFormModal = (props: ProductFormModal) => {
             postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
             preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3)),
             plusAmount: Number(i.plusAmount),
-        }))
+        }));
 
         const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
             ...i,
             loanAmount: Number(i.loanAmount),
-        }))
+        }));
 
         let creatProductData: ProductTypes = {
             merchantId: Number(values.merchantId),
@@ -328,13 +328,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
             templateType: values.templateType,
             weight: values.weight === undefined ? 0 : Number(values.weight),
             enabled: values.enabled,
-        }
+        };
         if (!productModalData.isEdit) {
             // console.log("新增")
             creatProductData = {
                 ...creatProductData,
                 // adminUsername: values.adminUsername,
-            }
+            };
         } else {
             // console.log("Edit")
         }
@@ -345,12 +345,12 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     const handleCloseModal = (e: any) => {
         e.stopPropagation();
-        form.resetFields()
+        form.resetFields();
         setProductModalData({
             show: false,
-        })
-        setCustomAntFormFieldError(initCustomAntFormFieldError)
-    }
+        });
+        setCustomAntFormFieldError(initCustomAntFormFieldError);
+    };
 
     // const onAutoFinishedForm = useCallback(() => {
     //   form.setFieldsValue({
@@ -430,5 +430,5 @@ export const useProductFormModal = (props: ProductFormModal) => {
         setEnableLoanAmount,
         setEnableReLoanAmount,
         contextHolder,
-    }
-}
+    };
+};

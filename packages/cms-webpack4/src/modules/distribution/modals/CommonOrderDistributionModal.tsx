@@ -1,13 +1,13 @@
-import {Button, Form, Modal, Select} from "antd";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {useForm} from "antd/es/form/Form";
-import {TreeCheckbox} from "../components/TreeCheckbox";
-import {useLazyGetCollectorQuery} from "../services/TodayDistributionAPI";
-import {normalizeCollector} from "../components/TreeCheckbox/normalizeCollector";
-import {Stage} from "../types";
-import {Typography} from "antd/es";
-import {StageData} from "../pages/TodayDistributionPage";
-import {useLazyGetOverdueCollectorQuery} from "../services/OverdueDistributionAPI";
+import { Button, Form, Modal, Select } from "antd";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useForm } from "antd/es/form/Form";
+import { TreeCheckbox } from "../components/TreeCheckbox";
+import { useLazyGetCollectorQuery } from "../services/TodayDistributionAPI";
+import { normalizeCollector } from "../components/TreeCheckbox/normalizeCollector";
+import { Stage } from "../types";
+import { Typography } from "antd/es";
+import { StageData } from "../pages/TodayDistributionPage";
+import { useLazyGetOverdueCollectorQuery } from "../services/OverdueDistributionAPI";
 
 interface OrderDistributionModalProps {
     show: boolean;
@@ -60,7 +60,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         const data = collectors.filter((item, index) => collectors.indexOf(item) === index);
         // console.log("collectors", data)
         setCheckedCollector(data);
-    }
+    };
 
     const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T0 : Stage.S1);
     // console.log("summaryData", props?.summaryData);
@@ -70,7 +70,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
 
     useEffect(() => {
         if(props.show) {
-            let stage = props.type === "today" ? Stage.T0 : Stage.S1;
+            const stage = props.type === "today" ? Stage.T0 : Stage.S1;
             // NOTE:預設逾期等级
             setDistributionStage(stage);
             form.setFieldsValue({
@@ -80,16 +80,16 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
             props.setDistributionStage(stage);
 
         }
-    }, [props.searchedStage, props.show])
+    }, [props.searchedStage, props.show]);
 
     // console.log("distributionStage", distributionStage);
 
     const treeCheckboxData = useMemo(() => {
         const data = props.type === "today" ? currentData : currentOverdueData;
 
-        let restrictedStageArray = []
+        let restrictedStageArray = [];
 
-        let stage = props.isSelectedByOrder ? props.searchedStage : distributionStage;
+        const stage = props.isSelectedByOrder ? props.searchedStage : distributionStage;
 
         if(props.type === "today") {
             if(stage == Stage.T0) {
@@ -110,14 +110,14 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                 restrictedStageArray = [Stage.S1, Stage.S2, Stage.S3, Stage.S4];
             }
             if (props.hasS5 && distributionStage !== Stage.S5) {
-                restrictedStageArray.push(Stage.S5)
+                restrictedStageArray.push(Stage.S5);
             }
         }
 
         // console.log("props.searchedStage", props.searchedStage);
         const checkedData = normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
         // console.log("checkedData", checkedData);
-        return checkedData
+        return checkedData;
     }, [props.type, currentData, currentOverdueData, props.hasS5, props.searchedStage, distributionStage]);
 
     const handleSelectedAllCollector = useCallback(() => {
@@ -143,7 +143,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                         <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>
                         <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
                     </React.Fragment>
-                )
+                );
             } else {
                 return (
                     <React.Fragment>
@@ -153,12 +153,12 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                         <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>
                         {props.hasS5 && <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>}
                     </React.Fragment>
-                )
+                );
             }
         }
-    }
+    };
 
-    let stage = props.isSelectedByOrder ? props.searchedStage : distributionStage;
+    const stage = props.isSelectedByOrder ? props.searchedStage : distributionStage;
     return (
         <Modal
             title={"分配订单"}
@@ -181,7 +181,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                             <Select placeholder={"选择"} defaultValue={distributionStage} onSelect={(value) => {
                                 // console.log("value", value);
                                 setDistributionStage(value);
-                                props.setDistributionStage(value)
+                                props.setDistributionStage(value);
                             }}>
                                 {renderOptionsComponent()}
                             </Select>
@@ -195,8 +195,8 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
             )}
             {props?.summaryData[stage]?.todoTotal > 0 && (
                 <div>
-                    <Button style={{marginRight: 8}} onClick={handleSelectedAllCollector}>全选</Button>
-                    <Button style={{marginRight: 8}} onClick={handleUnselectedAllCollector}>清空重选</Button>
+                    <Button style={{ marginRight: 8 }} onClick={handleSelectedAllCollector}>全选</Button>
+                    <Button style={{ marginRight: 8 }} onClick={handleUnselectedAllCollector}>清空重选</Button>
                     <Typography.Text>已选择 {checkedCollector.length} 个催收人员</Typography.Text>
                 </div>
             )}
@@ -211,5 +211,5 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                 />
             )}
         </Modal>
-    )
-}
+    );
+};

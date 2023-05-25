@@ -1,7 +1,7 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import AdminPage from "../../../../shared/components/common/AdminPage";
-import {ProColumns} from "@ant-design/pro-components";
-import {GetProductListResponseProduct} from "../../../../product/service/product/domain/getProductList";
+import { ProColumns } from "@ant-design/pro-components";
+import { GetProductListResponseProduct } from "../../../../product/service/product/domain/getProductList";
 import {
     useLazyGetRiskManageListQuery,
     useLazyGetRiskManageQuery,
@@ -9,15 +9,15 @@ import {
     usePostRiskManageCreateMutation,
     usePutRiskManageCreateMutation
 } from "../../../service/RiskApi";
-import {useForm} from "antd/es/form/Form";
-import {AdminTable, ModalContent} from "../../../../shared/components/common/AdminTable";
+import { useForm } from "antd/es/form/Form";
+import { AdminTable, ModalContent } from "../../../../shared/components/common/AdminTable";
 import RiskSettingForm from "./RiskSettingForm";
 import RiskSettingModal from "./RiskSettingModal";
-import {GetRiskManageResponse} from "../../../service/response/GetRiskManageResponse";
-import {RiskManageList} from "../../../domain/vo/RiskManageList";
-import {MssRiskRankVo} from "../../../domain/vo/MssRiskRankVo";
+import { GetRiskManageResponse } from "../../../service/response/GetRiskManageResponse";
+import { RiskManageList } from "../../../domain/vo/RiskManageList";
+import { MssRiskRankVo } from "../../../domain/vo/MssRiskRankVo";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 
 
 export type FormResponseData = GetRiskManageResponse;
@@ -43,7 +43,7 @@ export const RiskSettingPage = () => {
 
     useEffect(() => {
         setLoading(isFetching);
-    }, [isFetching])
+    }, [isFetching]);
 
     // NOTE: Edit
     const [editID, setEditID] = useState<number>();
@@ -66,7 +66,7 @@ export const RiskSettingPage = () => {
                             });
                             setCustomAntFormFieldError({});
                         }}>修改</a>,
-                    ]
+                    ];
                 },
                 width: ProColumnsOperationConstant.width["1"],
             },
@@ -105,7 +105,7 @@ export const RiskSettingPage = () => {
     }, []);
 
     // NOTICE: Form
-    const [form] = useForm()
+    const [form] = useForm();
 
     // NOTICE: Modal
     // NOTE: autoComplete
@@ -114,7 +114,7 @@ export const RiskSettingPage = () => {
             modelName: String(new Date().getTime()),
             remark: "remark",
             // firstLoan: [
-             //     {providerRank: 'A', loanCount: '8000'},
+            //     {providerRank: 'A', loanCount: '8000'},
             //     {providerRank: 'B', loanCount: '6000'},
             //     {providerRank: 'C', loanCount: '4000'},
             //     {providerRank: 'D', loanCount: '2000'},
@@ -132,7 +132,7 @@ export const RiskSettingPage = () => {
                 { max: 49, min: 39, loanCount: 3000, balance: '99', providerRank: 'B' },
                 { max: 38, min: 32, loanCount: 2000, balance: '88', providerRank: 'C' },
                 { max: 31, min: 22, loanCount: 1000, balance: '77', providerRank: 'D' },
-                { max: 21, min: 12, loanCount:0, balance: '66', providerRank: 'E' }
+                { max: 21, min: 12, loanCount: 0, balance: '66', providerRank: 'E' }
             ],
             repeatLoan: [
                 { max: 50, min: 58, loanCount: 4000, balance: '200', providerRank: 'A' },
@@ -144,14 +144,14 @@ export const RiskSettingPage = () => {
             riskModelName: 1,
             useRcQuota: true,
             enabled: true,
-        }
-        form.setFieldsValue(mockRequest)
-    }, [form])
+        };
+        form.setFieldsValue(mockRequest);
+    }, [form]);
 
     // NOTE: OK
     const onOk = useCallback(() => {
         form.submit();
-    }, [form])
+    }, [form]);
 
     // NOTICE: Modal
     const [showModalContent, setShowModalContent] = useState<ModalContent>({
@@ -168,10 +168,10 @@ export const RiskSettingPage = () => {
         return {
             useRcQuota: true,
             enabled: true,
-            rankStrategy:'KEY_VALUE',
-            oldRankStrategy:'KEY_VALUE'
+            rankStrategy: 'KEY_VALUE',
+            oldRankStrategy: 'KEY_VALUE'
         } as DeepPartial<FormResponseData>;
-    }, [])
+    }, []);
 
     // NOTE: 2. Get Data
     // NOTE: 2.1 Menus
@@ -195,7 +195,7 @@ export const RiskSettingPage = () => {
     useEffect(() => {
         const loading = isRiskMenuLoading || isRiskLoading;
         setLoading(loading);
-    }, [isRiskMenuLoading, isRiskLoading])
+    }, [isRiskMenuLoading, isRiskLoading]);
 
 
 
@@ -205,7 +205,7 @@ export const RiskSettingPage = () => {
                 modelId: String(editID),
             });
         }
-    }, [showModalContent.isEdit])
+    }, [showModalContent.isEdit]);
 
 
     // NOTE: 3. Set form fields from data
@@ -215,7 +215,7 @@ export const RiskSettingPage = () => {
         if(!showModalContent.isEdit) return;
 
         if(!currentFormData) return;
-        const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName)
+        const targetMenu = currentRiskMenuData.filter(menu => menu.riskModelName === currentFormData.riskModelName);
         const id = targetMenu && targetMenu[0] && targetMenu[0].id || undefined;
         form.setFieldsValue({
             modelName: currentFormData.modelName,
@@ -228,16 +228,16 @@ export const RiskSettingPage = () => {
             remark: currentFormData.remark,
             oldRankStrategy: currentFormData.oldRankStrategy,
             rankStrategy: currentFormData.rankStrategy,
-        })
+        });
 
-    }, [showModalContent.isEdit, currentFormData])
+    }, [showModalContent.isEdit, currentFormData]);
 
 
     // NOTE: POST or Put form data
     const [triggerPostRisk, { data: postRiskData, isLoading: isPostRiskLoading , isSuccess: isPostRiskSuccess }] = usePostRiskManageCreateMutation();
     const [triggerPutRisk, { data: putRiskData, isLoading: isPutRiskLoading, isSuccess: isPutRiskSuccess }] = usePutRiskManageCreateMutation();
 
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>({})
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>({});
 
 
     // 比對 最高可放款笔数、最高可借总额大小值
@@ -252,12 +252,12 @@ export const RiskSettingPage = () => {
         const prevField = Number(loan[prevIndex][field]);
         const nextField = Number(loan[nextIndex][field]);
 
-        let comparePrev = isFirstField ? loanCount < nextField : loanCount > prevField;
-        let compareNext = isLastField ? loanCount > nextField : loanCount < nextField;
+        const comparePrev = isFirstField ? loanCount < nextField : loanCount > prevField;
+        const compareNext = isLastField ? loanCount > nextField : loanCount < nextField;
 
         return comparePrev || compareNext;
 
-    }
+    };
 
     // 比對 最大值、最小值，最小值會依下一階的最大值連動並自動填入 (分數類型:範圍)
     const compareMinAndMax = (index, loanLength, loan, field, formType) => {
@@ -271,7 +271,7 @@ export const RiskSettingPage = () => {
         const prevField = Number(loan[prevIndex][field]);
         const nextField = Number(loan[nextIndex][field]);
 
-        if(field==='max'){
+        if(field === 'max'){
             setMinValue(formType, index);
         }
 
@@ -279,8 +279,8 @@ export const RiskSettingPage = () => {
         const compareNext = isLastField ? loanCount >= nextField : loanCount <= nextField;
         const isMaxOrMinError = max <= min;
 
-        return comparePrev || compareNext || isMaxOrMinError
-    }
+        return comparePrev || compareNext || isMaxOrMinError;
+    };
 
     const errorMessage = (validateType) => {
 
@@ -298,26 +298,26 @@ export const RiskSettingPage = () => {
                     <div>{"▪ 填写示例1：良好等级的值应>正常等级的值、并<极好等级的值。其他依此类推。"}</div>
                     <div>{"▪ 填写示例2：极好等级的最高可放款笔数和最高可借总额数值应≥良好等级的值。其他依此类推。"}</div>
                 </div>
-            : <div>
+                : <div>
                     <div>{"以上填写格式可能有以下错误，请再次检查并修正："}</div>
                     <div>{"▪ 所有字段必须由大至小填写≥0的整数。"}</div>
                     <div>{"▪ 除”超过逾期天数”字段之外，极好等级的值应≥良好等级的值。其他依此类推。"}</div>
-                </div>
+                </div>;
 
-    }
+    };
 
     const validateFirstAndRepeatLoanForm = (formType, loan,validateType) => {
 
         let formFieldError = {};
         let isFormError = false;
-        const errorText={
-            loanCount:'笔数',
-            min:'值',
-            max:'值',
-            balance:'最高可借总额',
-            overdueDaysReject:'超過逾期天数',
-            repaymentCount:'笔数',
-        }
+        const errorText = {
+            loanCount: '笔数',
+            min: '值',
+            max: '值',
+            balance: '最高可借总额',
+            overdueDaysReject: '超過逾期天数',
+            repaymentCount: '笔数',
+        };
 
         loan.map((i, index) => {
 
@@ -344,9 +344,9 @@ export const RiskSettingPage = () => {
                             help: validateError.errorMessage
                         },
                     }
-                }
-                return compareError
-            })
+                };
+                return compareError;
+            });
 
             if (isError.includes(true)) {
                 isFormError = true;
@@ -360,13 +360,13 @@ export const RiskSettingPage = () => {
                         help: isFormError ? errorMessage(validateType) : '',
                     },
                 }
-            }
+            };
 
-        })
+        });
 
         setCustomAntFormFieldError(prev => ({ ...prev, ...formFieldError }));
         return isFormError;
-    }
+    };
 
     const validateTypeSelector = (formType, changedField) => {
 
@@ -375,17 +375,17 @@ export const RiskSettingPage = () => {
         const loan = formType === 'firstLoan' ? firstLoan : repeatLoan;
         const isLoanFormNotFilled = loan.map(i => Object.keys(i).filter(key => key !== "min" && key !== "autoLoan").map(field => i[field]).includes(undefined)).includes(true);
         const validateForm = isLoanFormNotFilled ? changedField : loan;
-        return validateFirstAndRepeatLoanForm(formType, validateForm, validateType)
+        return validateFirstAndRepeatLoanForm(formType, validateForm, validateType);
 
-    }
+    };
     const validateField = (fieldValue,placeholder) => {
         const isValidateError = fieldValue < 0 || isNaN(fieldValue) || fieldValue === '';
-        const errorMessage = fieldValue < 0 || isNaN(fieldValue) ? '请输入大于0的整数' : (fieldValue === ''||fieldValue === undefined)  ? `请输入${placeholder}` : '';
+        const errorMessage = fieldValue < 0 || isNaN(fieldValue) ? '请输入大于0的整数' : (fieldValue === '' || fieldValue === undefined)  ? `请输入${placeholder}` : '';
         return {
             isValidateError,
             errorMessage
-        }
-    }
+        };
+    };
 
 
     // 分數類型:範圍 - 填完最大值，自動填入最小值
@@ -393,15 +393,15 @@ export const RiskSettingPage = () => {
         const { firstLoan, repeatLoan } = form.getFieldsValue();
         if (index !== 0 || index === firstLoan.length - 1) {
             if (formType === 'firstLoan') {
-                Object.assign(firstLoan[index - 1], { ...firstLoan[index - 1], min: Number(firstLoan[index].max) })
+                Object.assign(firstLoan[index - 1], { ...firstLoan[index - 1], min: Number(firstLoan[index].max) });
                 form.setFieldsValue({ firstLoan });
             }
             if (formType === 'repeatLoan') {
-                Object.assign(repeatLoan[index - 1], { ...repeatLoan[index - 1], min: Number(repeatLoan[index].max) })
+                Object.assign(repeatLoan[index - 1], { ...repeatLoan[index - 1], min: Number(repeatLoan[index].max) });
                 form.setFieldsValue({ repeatLoan });
             }
         }
-    }
+    };
 
     // NOTE: onFieldsChange
     const onFieldsChange = useCallback((changedFields, allFields) => {
@@ -411,17 +411,17 @@ export const RiskSettingPage = () => {
         const field = changedFields[0].name[2];
         const value = changedFields[0].value;
 
-        const changedField = [{ [field]: value, index: fieldIndex }]
+        const changedField = [{ [field]: value, index: fieldIndex }];
 
         if (field === 'max') {
-            setMinValue(formType, fieldIndex)
+            setMinValue(formType, fieldIndex);
         }
 
         if (formType === 'firstLoan' || formType === 'repeatLoan') {
-            validateTypeSelector(formType, changedField)
+            validateTypeSelector(formType, changedField);
         }
 
-    }, [])
+    }, []);
 
 
     // NOTICE: Form.3 onFinish
@@ -474,7 +474,7 @@ export const RiskSettingPage = () => {
                         balance: Number(record.balance),
 
                         // 还款笔数阀值
-                        repaymentCount:formType === "REPAY_COUNT" && index!==4  ? Number(record.repaymentCount) : null,
+                        repaymentCount: formType === "REPAY_COUNT" && index !== 4  ? Number(record.repaymentCount) : null,
 
                         // 逾期天数超过N天拒绝
                         overdueDaysReject: formType === "REPAY_COUNT" && index === 4 ? Number(record.overdueDaysReject) : null,
@@ -483,14 +483,14 @@ export const RiskSettingPage = () => {
                         autoLoan: record.autoLoan
                         
 
-                    } as MssRiskRankVo
+                    } as MssRiskRankVo;
 
                     // NOTE: Edit
                     if(isEdit) {
                         fields[key][index]["modelId"] = modelId;
                         fields[key][index]["id"] = record.id;
                     }
-                })
+                });
             } else if(key === "riskModelName") {
                 fields["riskModelName"] = riskModelName;
             }
@@ -518,17 +518,17 @@ export const RiskSettingPage = () => {
             setShowModalContent({
                 show: false,
                 isEdit: false,
-            })
-        })
-    }, [showModalContent.isEdit, editID, currentRiskMenuData])
+            });
+        });
+    }, [showModalContent.isEdit, editID, currentRiskMenuData]);
 
     // NOTICE: Form.4 onFinishFailed
     const onFinishFailed = useCallback(() => {
-    }, [])
+    }, []);
 
     // NOTICE: Form.5 onValuesChange
     const onValuesChange = useCallback((changedFields, allFields) => {
-    }, [])
+    }, []);
 
 
     const onAddCallback = useCallback(() => {
@@ -537,7 +537,7 @@ export const RiskSettingPage = () => {
             show: true,
             isEdit: false,
         });
-    }, [])
+    }, []);
 
 
     // NOTE: Post | PUT Data
@@ -554,7 +554,7 @@ export const RiskSettingPage = () => {
                 },
                 self: {
                     path: "",
-                    breadcrumbName:"风控配置"
+                    breadcrumbName: "风控配置"
                 }
             }}
             // searchable={false}
@@ -599,5 +599,5 @@ export const RiskSettingPage = () => {
                 </RiskSettingModal>
             </>
         </AdminPage>
-    )
-}
+    );
+};

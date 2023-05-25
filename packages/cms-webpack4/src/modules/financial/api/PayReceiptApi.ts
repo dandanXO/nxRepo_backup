@@ -14,7 +14,7 @@ const PayReceiptApi = API.injectEndpoints({
             }),
         }),
         // NOTE: POST /hs/admin/pay-receipt/confirm 确认还款明细
-         postPayReceiptConfirm: builder.mutation<null, PostPayRecieptConfirmRequest>({
+        postPayReceiptConfirm: builder.mutation<null, PostPayRecieptConfirmRequest>({
             query: (requestBody: PostPayRecieptConfirmRequest) => ({
                 url: `/pay-receipt/confirm`,
                 method: "post",
@@ -22,7 +22,7 @@ const PayReceiptApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetPayReceiptListQuery,
     usePostPayReceiptConfirmMutation

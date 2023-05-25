@@ -9,20 +9,20 @@ const useGetChannelEnum = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [channelListEnum, setChannelListEnum] = useState(null)
+    const [channelListEnum, setChannelListEnum] = useState(null);
 
     useEffect(() => {
         if (channelListData) {
-            let channelList = new Map().set('', { text: '不限' });
+            const channelList = new Map().set('', { text: '不限' });
             channelListData && channelListData?.map((i) => {
-                return channelList.set(i.channelId, { text: i.name })
+                return channelList.set(i.channelId, { text: i.name });
             });
-            setChannelListEnum(channelList)
+            setChannelListEnum(channelList);
         }
-    }, [isChannelListDataSuccess])
+    }, [isChannelListDataSuccess]);
 
 
-    return { triggerGetChannelList, channelListEnum }
-}
+    return { triggerGetChannelList, channelListEnum };
+};
 
 export default useGetChannelEnum;

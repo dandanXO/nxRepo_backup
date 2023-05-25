@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Modal, Spin, Input, Radio } from "antd";
+import { Form, Modal,  Input } from "antd";
 
 interface AddBlackLisModalProps {
     showModal?: boolean;
@@ -9,7 +9,7 @@ interface AddBlackLisModalProps {
 }
 
 
-const AddWhiteListModal = ((props: AddBlackLisModalProps) => {
+const AddWhiteListModal = ((props: AddBlackLisModalProps): JSX.Element => {
     const { showModal, handleCloseModal, form, onFinish } = props;
 
     const layout = {
@@ -30,8 +30,8 @@ const AddWhiteListModal = ((props: AddBlackLisModalProps) => {
                 </Form.Item>
             </Form>
         </Modal>
-    )
-})
+    );
+});
 
 export default AddWhiteListModal;
 

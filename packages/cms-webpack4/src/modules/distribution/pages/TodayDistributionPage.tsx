@@ -1,9 +1,9 @@
-import {AdminTable} from "../../shared/components/common/AdminTable";
+import { AdminTable } from "../../shared/components/common/AdminTable";
 import AdminPage from "../../shared/components/common/AdminPage";
-import React, {useEffect, useState} from "react";
-import {ProColumns} from "@ant-design/pro-components";
-import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, FormInstance, Space, Table, message} from "antd";
+import React, { useEffect, useState } from "react";
+import { ProColumns } from "@ant-design/pro-components";
+import { useAdminFormModal } from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
+import { Button, FormInstance, Space, Table, message } from "antd";
 import CopyText from "../../shared/components/other/CopyText";
 import {
     useGetProductNamesQuery,
@@ -17,23 +17,23 @@ import  {
     CollectDistributionQueryResponse,
     DistributionSummary,
     Stage,
-} from "../types/index"
+} from "../types/index";
 
-import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
-import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
+import { StageContainer, StageItem, StagePanel, StageTitle, StageTotal } from "../components/Stage/stage";
+import { CommonOrderDistributionModal } from "../modals/CommonOrderDistributionModal";
 
 export type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
 }
 
 export const TodayDistributionPage = () => {
-    const [triggerFetchSummary, {data: summaryResponseData}] = useLazyGetSummaryQuery();
+    const [triggerFetchSummary, { data: summaryResponseData }] = useLazyGetSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData | null>({
-        [Stage.T_1] : {
+        [Stage.T_1]: {
             todoTotal: 0,
             doneTotal: 0,
         },
-        [Stage.T0] : {
+        [Stage.T0]: {
             todoTotal: 0,
             doneTotal: 0,
         },
@@ -43,22 +43,22 @@ export const TodayDistributionPage = () => {
         const t1 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.T_1)[0];
         const t0 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.T0)[0];
         setSummaryData({
-            [Stage.T_1] : {
+            [Stage.T_1]: {
                 todoTotal: t1?.todoTotal,
                 doneTotal: t1?.doneTotal,
             },
-            [Stage.T0] : {
+            [Stage.T0]: {
                 todoTotal: t0?.todoTotal,
                 doneTotal: t0?.doneTotal,
             },
-        })
-    }, [summaryResponseData])
+        });
+    }, [summaryResponseData]);
 
-    const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetProductNamesQuery(null);
+    const { currentData: productList, isSuccess: isGetProductNamesSuccess } = useGetProductNamesQuery(null);
 
     const productListMap = new Map().set('', { text: '全部' });
     productList?.map((i) => {
-        return productListMap.set(i.productId, { text: i.productName })
+        return productListMap.set(i.productId, { text: i.productName });
     });
 
 
@@ -164,7 +164,7 @@ export const TodayDistributionPage = () => {
             },
             valueType: 'select',
         },
-    ]
+    ];
 
     // NOTE: GET list and item
     const [triggerGetList, {
@@ -176,7 +176,7 @@ export const TodayDistributionPage = () => {
         stage: Stage.T0,
         pageNum: 1,
         pageSize: 10,
-    })
+    });
 
     useEffect(() => {
         triggerFetchSummary(null);
@@ -194,7 +194,7 @@ export const TodayDistributionPage = () => {
 
     const handleModalClose = () => {
         setShowModal(false);
-    }
+    };
 
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -206,7 +206,7 @@ export const TodayDistributionPage = () => {
             setSelectedRow([]);
             triggerFetchSummary(null);
             triggerGetList(formState);
-        }
+        };
 
         setShowModal(false);
         if(isSelectedByOrder) {
@@ -218,8 +218,8 @@ export const TodayDistributionPage = () => {
                 refresh();
                 messageApi.success("分配成功");
             }).catch((error) => {
-                messageApi.error("分配失敗")
-            })
+                messageApi.error("分配失敗");
+            });
         } else {
             // console.log("stage", selectedDistributionStage);
             postDistributionStage({
@@ -229,10 +229,10 @@ export const TodayDistributionPage = () => {
                 refresh();
                 messageApi.success("分配成功");
             }).catch((error) => {
-                messageApi.error("分配失敗")
-            })
+                messageApi.error("分配失敗");
+            });
         }
-    }
+    };
 
     const [searchedStage, setSearchedStage] = useState(Stage.T0);
 
@@ -246,15 +246,15 @@ export const TodayDistributionPage = () => {
         // console.log("pageOnChange.current", current)
         // console.log("pageOnChange.pageSize", pageSize)
         // console.log("pageOnChange.formState", formState)
-        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize }
-        setFormState(newFormStage)
+        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize };
+        setFormState(newFormStage);
         triggerGetList(newFormStage);
-    }
+    };
 
     const refresh = () => {
         // console.log("pageOnChange.formState", formState)
         triggerGetList(formState);
-    }
+    };
 
 
 
@@ -272,7 +272,7 @@ export const TodayDistributionPage = () => {
             },
             self: {
                 path: "",
-                breadcrumbName:"当日订单分配"
+                breadcrumbName: "当日订单分配"
             }
         }}>
             <>
@@ -329,9 +329,9 @@ export const TodayDistributionPage = () => {
                             ...formState,
                             ...searchFormState,
                         };
-                        setFormState(searchForm)
+                        setFormState(searchForm);
                         // console.log("searchForm", searchForm)
-                        triggerGetList(searchForm)
+                        triggerGetList(searchForm);
                     }}
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
@@ -361,5 +361,5 @@ export const TodayDistributionPage = () => {
                 />
             </>
         </AdminPage>
-    )
-}
+    );
+};

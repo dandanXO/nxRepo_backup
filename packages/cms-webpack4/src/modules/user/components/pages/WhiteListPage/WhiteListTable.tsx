@@ -1,58 +1,58 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
+import { Button, Modal, Space } from 'antd';
 import { GetWhiteListRequestQuerystring, GetWhiteListProps, WhiteListReponse } from '../../../api/types/whiteListTypes/getWhtieList';
 import { useLazyGetWhiteListQuery, useDeleteWhiteListMutation, useDeleteWhiteListAllMutation } from '../../../api/WhiteListApi';
 import { PlusOutlined } from '@ant-design/icons';
 import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
 
 interface WhiteLisTableProps {
-    setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
+    setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
     isPostWhiteListSuccess:boolean;
 }
 
-const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTableProps) => {
+const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTableProps): JSX.Element => {
 
     const { operatorListEnum } = useValuesEnums();
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetWhiteListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetWhiteListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
 
-    const [deleteWhiteList,{isSuccess:isDeleteWhiteListSuccess}]=useDeleteWhiteListMutation();
-    const [deleteWhiteListAll,{isSuccess:isDeleteWhiteListAllSuccess}]=useDeleteWhiteListAllMutation();
+    const [deleteWhiteList,{ isSuccess: isDeleteWhiteListSuccess }] = useDeleteWhiteListMutation();
+    const [deleteWhiteListAll,{ isSuccess: isDeleteWhiteListAllSuccess }] = useDeleteWhiteListAllMutation();
 
 
     const initSearchList: GetWhiteListRequestQuerystring = {
         addTimeEnd: "", addTimeStart: "", operatorId: "",  phoneNo: "", pageNum: 1, pageSize: 10
-    }
+    };
 
     // state
     const [whiteList, setWhiteList] = useState<GetWhiteListProps>({ records: [] });
     const [searchList, setSearchList] = useState<GetWhiteListRequestQuerystring>(initSearchList);
     const [deleteModal, deleteContextHolder] = Modal.useModal();
     const [selectedRow, setSelectedRow] = useState([]);
-    const [buttonDisabled,setButtonDisbaled]=useState(true)
+    const [buttonDisabled,setButtonDisbaled] = useState(true);
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList,isPostWhiteListSuccess,isDeleteWhiteListSuccess,isDeleteWhiteListAllSuccess])
+    }, [searchList,isPostWhiteListSuccess,isDeleteWhiteListSuccess,isDeleteWhiteListAllSuccess]);
 
     useEffect(() => {
         if (currentData !== undefined) {
             setWhiteList(currentData);
         }
-    }, [currentData])
+    }, [currentData]);
 
     const pageOnChange = (current, pageSize) => {
-        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
-    }
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
+    };
 
 
     const onSelectChange = (selectedRowKeys) => {
-        setButtonDisbaled(selectedRowKeys.length === 0 ? true : false)
+        setButtonDisbaled(selectedRowKeys.length === 0);
         setSelectedRow(selectedRowKeys);
 
     };
@@ -66,28 +66,28 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
         { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "" },
         { title: '操作人', dataIndex: 'operatorName', key: 'operatorName', valueType: 'select', valueEnum: operatorListEnum, initialValue: "" },
 
-    ]
+    ];
 
-    const handleDelete=()=>{
+    const handleDelete = ()=>{
         deleteModal.confirm({
-            content:"确认要删除已选取的数据吗？",
+            content: "确认要删除已选取的数据吗？",
             onOk(){
-                deleteWhiteList({ids:selectedRow});
+                deleteWhiteList({ ids: selectedRow });
                 onSelectChange([]);
             }
-        })
-    }
+        });
+    };
 
-    const handleDeleteAll=()=>{
+    const handleDeleteAll = ()=>{
         deleteModal.confirm({
-            content:"确认要清除所有白名单数据吗？",
+            content: "确认要清除所有白名单数据吗？",
             onOk(){
                 deleteWhiteListAll(null);
                 onSelectChange([]);
             }
-        })
+        });
 
-    }
+    };
     return (
         <ProTable<WhiteListReponse>
             columns={columns}
@@ -112,7 +112,7 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
                         <Button onClick={() => {
                             // @ts-ignore
                             form.resetFields();
-                            setSearchList(initSearchList)
+                            setSearchList(initSearchList);
                             onSelectChange([]);
                         }}>{resetText}</Button>
                         <Button
@@ -124,7 +124,7 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
                                     ...searchList,
                                     addTimeEnd: addTimeRange[1] ? addTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     addTimeStart: addTimeRange[0] ? addTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
-                                    operatorId:operatorName,
+                                    operatorId: operatorName,
                                     phoneNo,
                                     pageNum: 1,
                                 });
@@ -150,8 +150,8 @@ const WhiteListTable = ({ setShowModal,isPostWhiteListSuccess }: WhiteLisTablePr
             }}
         />
 
-    )
-}
+    );
+};
 
 export default WhiteListTable;
 

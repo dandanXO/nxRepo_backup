@@ -23,7 +23,7 @@ const MerchantApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     usePostMerchantCreateMutation,
     usePutMerchantEditMutation

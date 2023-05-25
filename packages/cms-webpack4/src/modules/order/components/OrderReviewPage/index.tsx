@@ -20,10 +20,10 @@ const OrderReviewPage = () => {
                 },
             }}
         >
-             <OrderReviewTable  />
+            <OrderReviewTable  />
         </PageContainer>
-    )
-}
+    );
+};
 
 export default OrderReviewPage;
 

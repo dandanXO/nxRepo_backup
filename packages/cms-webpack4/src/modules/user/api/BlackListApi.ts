@@ -22,7 +22,7 @@ const BlackListApi = API.injectEndpoints({
         }),
 
     })
-})
+});
 export const {
     useLazyGetBlackListQuery,
     usePostBlackListMutation

@@ -1,9 +1,9 @@
-import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip ,Space} from "antd";
+import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip ,Space } from "antd";
 import React from "react";
 import TextArea from "antd/es/input/TextArea";
-import {AdminForm} from "../../../../shared/components/common/AdminForm";
-import {Store} from "antd/es/form/interface"
-import {RiskModelMenu} from "../../../domain/vo/RiskModelMenu";
+import { AdminForm } from "../../../../shared/components/common/AdminForm";
+import { Store } from "antd/es/form/interface";
+import { RiskModelMenu } from "../../../domain/vo/RiskModelMenu";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import RepeatLoanSection from "./RepeatLoanSection";
 import FirstLoanSection from "./FirstLoanSection";
@@ -86,6 +86,6 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
             </Form.Item>
         </AdminForm>
     );
-}
+};
 
 export default RiskSettingForm;

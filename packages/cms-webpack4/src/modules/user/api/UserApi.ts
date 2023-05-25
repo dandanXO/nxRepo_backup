@@ -13,18 +13,18 @@ const UserApi = API.injectEndpoints({
             query: (requestBody: GetUserListRequestQuerystring) => {
                 const finalRequestBody = {
                     ...requestBody,
-                }
+                };
                 if(String(finalRequestBody.hasVerifyThirdRisk) === "false") {
-                    finalRequestBody.hasVerifyThirdRisk = undefined
+                    finalRequestBody.hasVerifyThirdRisk = undefined;
                 }
                 if(String(finalRequestBody.hasVerifyNotApply) === "false") {
-                    finalRequestBody.hasVerifyNotApply = undefined
+                    finalRequestBody.hasVerifyNotApply = undefined;
                 }
                 return {
                     url: `/user-manage/user-list`,
                     params: finalRequestBody,
                     method: "get",
-                }
+                };
             },
         }),
         // NOTE: POST /hs/admin/user-manage/black-list/add 添加用户至黑名单
@@ -83,7 +83,7 @@ const UserApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetUserManageListQuery,
     usePostBlackListAddMutation,

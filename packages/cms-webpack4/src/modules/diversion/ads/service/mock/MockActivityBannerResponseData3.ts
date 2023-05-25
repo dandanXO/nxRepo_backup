@@ -1,6 +1,6 @@
 
-import {AdTemplate3Card} from "../../import/ActivityAdListPage/components/AdTemplate3";
-import {ActivityBannerResponse} from "../../export/service/types";
+import { AdTemplate3Card } from "../../import/ActivityAdListPage/components/AdTemplate3";
+import { ActivityBannerResponse } from "../../export/service/types";
 
 export const MockActivityBannerResponseData3: ActivityBannerResponse<AdTemplate3Card, AdTemplate3Card> = {
     name: "Ads Name",
@@ -38,4 +38,4 @@ export const MockActivityBannerResponseData3: ActivityBannerResponse<AdTemplate3
             },
         },
     ],
-}
+};

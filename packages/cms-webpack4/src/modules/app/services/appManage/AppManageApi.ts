@@ -1,10 +1,10 @@
 import { API } from "../../../shared/api";
-import {GetAllAppConfigurationResponse} from "./response/GetAllAppConfigurationResponse";
-import {GetAppConfigurationResponse} from "./response/GetAppConfigurationResponse";
-import {GetAppConfigurationRequest} from "./request/GetAppConfigurationRequest";
-import {CreateAppConfigurationRequest} from "./request/CreateAppConfigurationRequest";
-import {UpdateAppConfigurationRequest} from "./request/UpdateAppConfigurationRequest";
-import {DeleteAppConfigurationRequest} from "./request/DeleteAppConfigurationRequest";
+import { GetAllAppConfigurationResponse } from "./response/GetAllAppConfigurationResponse";
+import { GetAppConfigurationResponse } from "./response/GetAppConfigurationResponse";
+import { GetAppConfigurationRequest } from "./request/GetAppConfigurationRequest";
+import { CreateAppConfigurationRequest } from "./request/CreateAppConfigurationRequest";
+import { UpdateAppConfigurationRequest } from "./request/UpdateAppConfigurationRequest";
+import { DeleteAppConfigurationRequest } from "./request/DeleteAppConfigurationRequest";
 
 const AppManageApi = API.injectEndpoints({
     overrideExisting: false,
@@ -51,7 +51,7 @@ const AppManageApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 
 export const {
     useLazyGetAllAppConfigurationQuery,

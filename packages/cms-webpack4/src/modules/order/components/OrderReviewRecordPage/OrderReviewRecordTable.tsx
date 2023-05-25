@@ -8,21 +8,21 @@ import { useLazyGetOrderReviewRecordListQuery } from '../../api/OrderReviewRecor
 import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring } from '../../api/types/getOrderReviewRecordList';
 import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
-import {enumObjectToMap} from '../../../shared/utils/format/enumObjectToMap';
+import { enumObjectToMap } from '../../../shared/utils/format/enumObjectToMap';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
-import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../shared/components/common/ProColumnsOperationConstant";
 import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
 
 
 const OrderReviewRecordTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
-    const {  merchantListEnum} = useValuesEnums();
-    const { triggerGetOperatorList ,orderReviewRecordOperatorEnum} = useGetOrderReviewRecordOperatorEnum();
+    const {  merchantListEnum } = useValuesEnums();
+    const { triggerGetOperatorList ,orderReviewRecordOperatorEnum } = useGetOrderReviewRecordOperatorEnum();
     const initSearchList: GetOrderReviewRecordListRequestQuerystring = {
         appName: '', merchantId: '', operatorId: '', orderNo: '', phoneNo: '', productName: '', reviewStatus: '', reviewTimeEnd: '',
         reviewTimeStart: '', userName: '', pageNum: 1, pageSize: 10
-    }
+    };
 
     const [searchList, setSearchList] = useState(initSearchList);
     const [recordList, setRecordList] = useState<GetOrderReviewRecordListProps>({ records: [] });
@@ -37,7 +37,7 @@ const OrderReviewRecordTable = () => {
     useEffect(() => {
         triggerGetList(searchList);
         triggerGetOperatorList(null);
-    }, [searchList])
+    }, [searchList]);
 
     useEffect(() => {
         if (currentData !== undefined) {
@@ -47,15 +47,15 @@ const OrderReviewRecordTable = () => {
 
 
     const pageOnChange = (current, pageSize) => {
-        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
-    }
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
+    };
 
     const handleExportOrderList = () => {
         const searchQueryString = queryString.stringify(searchList);
         window.open(`/hs/admin/order-review-record/list/download?${searchQueryString}`);
-    }
+    };
 
-      const statusEnum =  appInfo.COUNTRY !== 'Bangladesh' ? {
+    const statusEnum =  appInfo.COUNTRY !== 'Bangladesh' ? {
         '': { text: '不限' },
         '0': { text: '机审异常', color: 'lightgray' },
         '1': { text: '机审通过', color: 'blue' },
@@ -63,7 +63,7 @@ const OrderReviewRecordTable = () => {
         '6': { text: '审核通过', color: 'green' },
         '7': { text: '审核拒绝', color: 'red' },
         '8': { text: '放款拒绝', color: 'lightgray' },
-    }:{
+    } : {
         '': { text: '不限' },
         '0': { text: '机审异常', color: 'lightgray' },
         '1': { text: '机审通过', color: 'blue' },
@@ -84,16 +84,16 @@ const OrderReviewRecordTable = () => {
         { title: '审核状态', dataIndex: 'reviewStatus', key: 'reviewStatus', valueType: 'select', initialValue: "", valueEnum: enumObjectToMap(statusEnum) },
         { title: '审核时间', dataIndex: 'reviewTime', key: 'reviewTime', hideInSearch: true, valueType: 'dateTime', width: '100px', },
         { title: '审核时间', dataIndex: 'reviewTimeRange', valueType: 'dateRange', key: 'reviewTimeRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: "" },
-        { title: '操作人', dataIndex: 'operator', key: 'operator',  initialValue: "" , hideInSearch: true},
+        { title: '操作人', dataIndex: 'operator', key: 'operator',  initialValue: "" , hideInSearch: true },
         { title: '操作人', dataIndex: 'operatorId', key: 'operatorId', hideInTable: true, valueType: 'select', valueEnum: orderReviewRecordOperatorEnum, initialValue: "" },
         { title: '备注', dataIndex: 'remark', key: 'remark', hideInSearch: true, render: (text) => <CopyText text={text} /> },
-    ]
+    ];
 
     if(isSuperAdmin){
         columns.unshift({
             title: '商户名', dataIndex: 'merchantName', key: 'merchantName', valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
             width: ProColumnsOperationConstant.width["2"], render: (text) => <CopyText text={text} />, hideInSearch: true
-        }, { title: '商戶名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: "", valueEnum: merchantListEnum },)
+        }, { title: '商戶名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: "", valueEnum: merchantListEnum },);
     }
     return (
         <ProTable<OrderReviewRecordListResponse>
@@ -107,7 +107,7 @@ const OrderReviewRecordTable = () => {
                 optionRender: ({ searchText, resetText }, { form }) => (
                     <Space>
                         <Button onClick={() => {
-                             form.resetFields();
+                            form.resetFields();
                             // @ts-ignore
                             setSearchList(initSearchList);
                         }}>{resetText}</Button>
@@ -122,7 +122,7 @@ const OrderReviewRecordTable = () => {
                                     reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
                                     reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
                                     pageNum: 1,
-                                })
+                                });
                                 form.submit();
                             }}
                         >
@@ -146,8 +146,8 @@ const OrderReviewRecordTable = () => {
             }}
         />
 
-    )
-}
+    );
+};
 
 export default OrderReviewRecordTable;
 

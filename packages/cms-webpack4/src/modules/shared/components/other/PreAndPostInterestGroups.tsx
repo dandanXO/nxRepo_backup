@@ -7,7 +7,7 @@ import { CustomAntFormFieldError } from '../../utils/validation/CustomAntFormFie
 import { validateValue, validateNum, validateplusAmount } from './validatePreOrPostInterestGroups';
 
 
-export const CustomLabel = (props: { style?: CSSProperties, children: string | ReactElement | ReactElement[] }) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style }}>{props.children}</div>
+export const CustomLabel = (props: { style?: CSSProperties, children: string | ReactElement | ReactElement[] }) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style }}>{props.children}</div>;
 
 
 interface PreAndPostInterestGroupsProps {
@@ -24,8 +24,8 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
 
     useEffect(() => {
 
-        if (!interestRatePairsTouchInput) return
-        if (!interestRatePairs[0]) return
+        if (!interestRatePairsTouchInput) return;
+        if (!interestRatePairs[0]) return;
 
         const touchIndex = interestRatePairsTouchInput[0]?.name[1];
         const toucField = interestRatePairsTouchInput[0]?.name[2];
@@ -48,12 +48,12 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                         help: error,
                         value: touchValue,
                     },
-                }
+                };
                 return {
                     ...prev,
                     [fieldName]: prev[fieldName]
-                }
-            })
+                };
+            });
         }
 
         if (toucField === 'plusAmount') {
@@ -66,12 +66,12 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                         help: error,
                         value: touchValue,
                     },
-                }
+                };
                 return {
                     ...prev,
                     [fieldName]: prev[fieldName]
-                }
-            })
+                };
+            });
         }
 
         if (interestRatePairsTouchInput[0]?.name?.length > 1 && isPreOrPostInterest) {
@@ -94,7 +94,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                             validateStatus: isOver100 ? "error" : "",
                             help: isOver100 ? "前置利息＋后置利息不得超过100%" : ""
                         },
-                    }
+                    };
                 } else {
                     prev[fieldName][touchIndex] = {
                         ...prev[fieldName][touchIndex],
@@ -103,27 +103,27 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                             help: preOrPostInterestrror,
                             value: touchValue,
                         },
-                    }
+                    };
                 }
                 return {
                     ...prev,
                     [fieldName]: prev[fieldName]
-                }
-            })
+                };
+            });
         }
-    }, [interestRatePairsTouchInput])
+    }, [interestRatePairsTouchInput]);
 
     const handleUpdateCustomAntFormFieldError = (index) => {
 
         setCustomAntFormFieldError(prev => {
             delete prev[fieldName][index];
-            const interestRatePairs = JSON.parse(JSON.stringify(prev[fieldName]))
+            const interestRatePairs = JSON.parse(JSON.stringify(prev[fieldName]));
             const latestInterestRatePairs = Object.keys(interestRatePairs).reduce((init, curr, currIndex) => {
-                return { ...init, [currIndex]: interestRatePairs[curr] }
-            }, {})
-            return { ...prev, [fieldName]: latestInterestRatePairs }
-        })
-    }
+                return { ...init, [currIndex]: interestRatePairs[curr] };
+            }, {});
+            return { ...prev, [fieldName]: latestInterestRatePairs };
+        });
+    };
 
     return (
         <Form.List name={fieldName}>
@@ -215,10 +215,10 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                             </Button>
                         </Form.Item>
                     </>
-                )
+                );
             }}
         </Form.List>
-    )
+    );
 }
 
 export default PreAndPostInterestGroups;

@@ -1,5 +1,5 @@
-import {API} from "../../../shared/api";
-import {AdsScenarioType} from "../export/types/IAdsScenario";
+import { API } from "../../../shared/api";
+import { AdsScenarioType } from "../export/types/IAdsScenario";
 
 export interface ActivityBannerVoRes {
     action:string;
@@ -83,7 +83,7 @@ const AdsApi = API.injectEndpoints({
             })
         }),
     })
-})
+});
 
 export const {
     useLazyGetActivityQuery,

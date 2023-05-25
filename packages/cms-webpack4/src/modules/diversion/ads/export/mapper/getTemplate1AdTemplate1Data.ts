@@ -1,4 +1,4 @@
-import {ActivityBanner} from "../service/types";
+import { ActivityBanner } from "../service/types";
 import {
     AdTemplate1BrandCard,
     AdTemplate1Card,
@@ -30,7 +30,7 @@ export const getTemplate1AdTemplate1Data = (ads?: ActivityBanner<AdTemplate1Bran
                 title: item?.payload?.title,
                 description1: (item?.payload as AdTemplate1Card)?.description1,
                 description2: (item?.payload as AdTemplate1Card)?.description2,
-            }
+            };
         })
-    }
-}
+    };
+};

@@ -7,7 +7,7 @@ import App from './App';
 let root;
 
 function render(props) {
-    console.log("render.props", props)
+    console.log("render.props", props);
     // NOTICE: 17
     const { container } = props;
     ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));
@@ -37,10 +37,10 @@ function storeTest(props) {
 }
 
 if (!window["__POWERED_BY_QIANKUN__"]) {
-    console.log("[cms-webpack4] 不在 qiankun 內")
+    console.log("[cms-webpack4] 不在 qiankun 內");
     render({});
 } else {
-    console.log("[cms-webpack4] 在 qiankun 內")
+    console.log("[cms-webpack4] 在 qiankun 內");
 }
 
 export async function bootstrap() {
@@ -48,7 +48,7 @@ export async function bootstrap() {
 }
 
 export async function update(props) {
-    console.log('[cms-webpack4] update props', props)
+    console.log('[cms-webpack4] update props', props);
 }
 
 export async function mount(props) {

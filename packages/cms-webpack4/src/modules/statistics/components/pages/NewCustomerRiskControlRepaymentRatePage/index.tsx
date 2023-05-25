@@ -1,5 +1,5 @@
 import AdminPage from "../../../../shared/components/common/AdminPage";
-import {RepaymentRateTable} from "./RepaymentRateTable";
+import { RepaymentRateTable } from "./RepaymentRateTable";
 
 export const NewCustomerRiskControlRepaymentRatePage = () => {
     return (
@@ -10,5 +10,5 @@ export const NewCustomerRiskControlRepaymentRatePage = () => {
         }}>
             <RepaymentRateTable/>
         </AdminPage>
-    )
-}
+    );
+};

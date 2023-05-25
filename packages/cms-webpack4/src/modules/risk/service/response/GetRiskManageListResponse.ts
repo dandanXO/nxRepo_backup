@@ -1,3 +1,3 @@
-import {RiskManageList} from "../../domain/vo/RiskManageList";
+import { RiskManageList } from "../../domain/vo/RiskManageList";
 
 export type GetRiskManageListResponse = RiskManageList[];

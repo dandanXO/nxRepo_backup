@@ -11,20 +11,20 @@ const useGetProductNamesEnum = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [productNamesEnum, setProductNamesEnum] = useState(null)
+    const [productNamesEnum, setProductNamesEnum] = useState(null);
 
     useEffect(() => {
 
-        let productNames = new Map().set('', { text: '不限' });
+        const productNames = new Map().set('', { text: '不限' });
         currentData && currentData?.map((i) => {
-            return productNames.set(i.productId, { text: i.productName })
+            return productNames.set(i.productId, { text: i.productName });
         });
-        setProductNamesEnum(productNames)
+        setProductNamesEnum(productNames);
 
-    }, [isSuccess])
+    }, [isSuccess]);
 
 
-    return { triggerGetProductNames, productNamesEnum }
-}
+    return { triggerGetProductNames, productNamesEnum };
+};
 
 export default useGetProductNamesEnum;

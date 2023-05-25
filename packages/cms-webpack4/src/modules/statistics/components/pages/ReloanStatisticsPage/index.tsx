@@ -2,7 +2,7 @@
 import { PageContainer } from '@ant-design/pro-components';
 import ReloanStatisticsTable from './ReloanStatisticsTable';
 
-import {Route} from "antd/es/breadcrumb/Breadcrumb";
+import { Route } from "antd/es/breadcrumb/Breadcrumb";
 
 const ReloanStatisticsPage = () => {
     // NOTE: breadcrumb
@@ -13,7 +13,7 @@ const ReloanStatisticsPage = () => {
         ) : (
             <span>{route.breadcrumbName}</span>
         );
-    }
+    };
     return (
         <PageContainer
             header={{
@@ -28,10 +28,10 @@ const ReloanStatisticsPage = () => {
                 },
             }}
         >
-             <ReloanStatisticsTable  />
+            <ReloanStatisticsTable  />
         </PageContainer>
-    )
-}
+    );
+};
 
 export default ReloanStatisticsPage;
 

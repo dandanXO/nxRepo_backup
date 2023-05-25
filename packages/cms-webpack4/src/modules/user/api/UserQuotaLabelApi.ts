@@ -33,14 +33,14 @@ const UserQuotaLabelApi = API.injectEndpoints({
         }),
         // NOTE: DELTETE /hs/admin/user-quota-label 刪除 - 額度標籤
         deleteUserQuotaLabel: builder.mutation<{}, DeletetUserQuotaLabelQuery>({
-            query: ({id}: DeletetUserQuotaLabelQuery) => ({
+            query: ({ id }: DeletetUserQuotaLabelQuery) => ({
                 url: `/user-quota-label/${id}`,
                 method: "delete",
                 // params: arg,
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetUserQuotaLabelListQuery,
     usePostUserQuotaLabelMutation,

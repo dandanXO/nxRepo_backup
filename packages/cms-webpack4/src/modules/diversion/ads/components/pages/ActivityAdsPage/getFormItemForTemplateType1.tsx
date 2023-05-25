@@ -1,19 +1,19 @@
-import {ActivityBanner} from "../../../export/service/types";
-import {AdTemplate1BrandCard, AdTemplate1Card} from "../../../import/ActivityAdListPage/components/AdTemplate1";
-import {Button, Col, Divider, Form, Input, Row, Select} from "antd";
-import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
+import { ActivityBanner } from "../../../export/service/types";
+import { AdTemplate1BrandCard, AdTemplate1Card } from "../../../import/ActivityAdListPage/components/AdTemplate1";
+import { Button, Col, Divider, Form, Input, Row, Select } from "antd";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import React from "react";
-import {getDefaultActivity1BannerContent} from "./getDefaultActivity1BannerContent";
+import { getDefaultActivity1BannerContent } from "./getDefaultActivity1BannerContent";
 
 export const getFormItemForTemplateType1 = (templateType: number, ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]) => {
     return (
         <Form.Item label="广告列表" required>
             <Form.List name="contents">
-                {(fields, {add, remove}) => {
+                {(fields, { add, remove }) => {
                     // console.log("fields", fields);
                     return (
                         <>
-                            <Divider orientation="left" style={{color: "#ec606a"}}>主打广告</Divider>
+                            <Divider orientation="left" style={{ color: "#ec606a" }}>主打广告</Divider>
                             <Row
                                 gutter={[8, 8]}
                             >
@@ -54,18 +54,18 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                     </Form.Item>
                                 </Col>
                             </Row>
-                            {fields.map(({key, name, ...restField}, index) => {
-                                console.log("name", name)
+                            {fields.map(({ key, name, ...restField }, index) => {
+                                console.log("name", name);
                                 if (index === 0) return null;
                                 return (
                                     <div key={index}>
                                         <Divider orientation="left" style={{}}>广告 - {index + 1}</Divider>
                                         <Row key={key}
-                                             gutter={[8, 8]}
-                                             style={{
-                                                 // borderBottom: "1px solid #aaa",
-                                                 // marginBottom: 16
-                                             }}
+                                            gutter={[8, 8]}
+                                            style={{
+                                                // borderBottom: "1px solid #aaa",
+                                                // marginBottom: 16
+                                            }}
                                         >
                                             <Col span={23}>
                                                 <Row
@@ -76,7 +76,7 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                                             label={"广告标题"}
                                                             {...restField}
                                                             name={[name, 'payload', 'title']}
-                                                            rules={[{required: true}]}
+                                                            rules={[{ required: true }]}
                                                         >
                                                             <Input placeholder="广告标题"/>
                                                         </Form.Item>
@@ -86,7 +86,7 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                                             label={"广告说明1"}
                                                             {...restField}
                                                             name={[name, 'payload', 'description1']}
-                                                            rules={[{required: true}]}
+                                                            rules={[{ required: true }]}
                                                         >
                                                             <Input placeholder="广告说明1"/>
                                                         </Form.Item>
@@ -96,7 +96,7 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                                             label={"广告说明2"}
                                                             {...restField}
                                                             name={[name, 'payload', 'description2']}
-                                                            rules={[{required: true}]}
+                                                            rules={[{ required: true }]}
                                                         >
                                                             <Input placeholder="广告说明2"/>
                                                         </Form.Item>
@@ -106,7 +106,7 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                                             label={"按钮名称"}
                                                             {...restField}
                                                             name={[name, 'payload', 'actionName']}
-                                                            rules={[{required: true}]}
+                                                            rules={[{ required: true }]}
                                                         >
                                                             <Input placeholder="按钮名称"/>
                                                         </Form.Item>
@@ -116,7 +116,7 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                                             label={"按钮动作"}
                                                             {...restField}
                                                             name={[name, 'action']}
-                                                            rules={[{required: true}]}
+                                                            rules={[{ required: true }]}
                                                         >
                                                             <Select>
                                                                 <Select.Option
@@ -132,24 +132,24 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                                                         <Form.Item
                                                             noStyle
                                                             shouldUpdate={(prevValues, curValues) => {
-                                                                console.log("prevValues")
-                                                                console.log(prevValues)
-                                                                console.log("curValues")
-                                                                console.log(curValues)
-                                                                return prevValues.contents[name]?.action !== curValues.contents[name]?.action
+                                                                console.log("prevValues");
+                                                                console.log(prevValues);
+                                                                console.log("curValues");
+                                                                console.log(curValues);
+                                                                return prevValues.contents[name]?.action !== curValues.contents[name]?.action;
                                                             }}
                                                         >
-                                                            {({getFieldValue}) => {
-                                                                let action = getFieldValue(['contents', name, 'action']);
+                                                            {({ getFieldValue }) => {
+                                                                const action = getFieldValue(['contents', name, 'action']);
                                                                 // console.log("action", action)
                                                                 if (action == "POP_URL") {
                                                                     return (
                                                                         <Form.Item name={[name, 'actionUrl']}
-                                                                                   label="目标网址"
-                                                                                   rules={[{required: true}]}>
+                                                                            label="目标网址"
+                                                                            rules={[{ required: true }]}>
                                                                             <Input placeholder="目标网址"/>
                                                                         </Form.Item>
-                                                                    )
+                                                                    );
                                                                 } else {
                                                                     return null;
                                                                 }
@@ -169,7 +169,7 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
 
                                         </Row>
                                     </div>
-                                )
+                                );
                             })}
                             <Row/>
 
@@ -187,9 +187,9 @@ export const getFormItemForTemplateType1 = (templateType: number, ads?: Activity
                             </Row>
 
                         </>
-                    )
+                    );
                 }}
             </Form.List>
         </Form.Item>
-    )
-}
+    );
+};

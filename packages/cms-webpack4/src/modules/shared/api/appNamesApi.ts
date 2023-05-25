@@ -12,7 +12,7 @@ const AppNamesApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetAppNamesQuery
 } = AppNamesApi;

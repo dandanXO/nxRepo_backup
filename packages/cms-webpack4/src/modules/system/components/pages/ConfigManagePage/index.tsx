@@ -16,11 +16,11 @@ const ConfigManagePage = () => {
             }}
         >
             <>
-<ConfigManageTab/>
+                <ConfigManageTab/>
             </>
         </AdminPage>
     );
-}
+};
 
 export default ConfigManagePage;
 

@@ -2,9 +2,9 @@
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import {Button, PaginationProps, Space, Switch} from 'antd';
+import { Button, PaginationProps, Space, Switch } from 'antd';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import {GetProductListResponse, Product} from '../../../service/product/ProductApi';
+import { GetProductListResponse, Product } from '../../../service/product/ProductApi';
 import { ProductFormModal } from "./hooks/useProductFormModal";
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
@@ -34,16 +34,16 @@ const ProductTable = (props: ProductTableProps) => {
         if (isSuperAdmin) {
             triggerGetMerchantList(null);
         }
-    }, [props.productListData])
+    }, [props.productListData]);
 
 
     useEffect(() => {
-        props.triggerGetList(searchList)
-    }, [searchList, patchProductSuccess])
+        props.triggerGetList(searchList);
+    }, [searchList, patchProductSuccess]);
 
     const handleEditProductList = (productId, inputValue) => {
         patchProduct({ productId, ...inputValue });
-    }
+    };
 
     const columns = useMemo(() => {
 
@@ -61,7 +61,7 @@ const ProductTable = (props: ProductTableProps) => {
                 ],
                 width: ProColumnsOperationConstant.width["1"],
             },
-            { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" ,render: (text) => <CopyText text={text} />},
+            { key: 'productName', title: '产品名称', dataIndex: 'productName', initialValue: "" ,render: (text) => <CopyText text={text} /> },
             { key: 'logo', title: 'Logo', dataIndex: 'logo', valueType: 'image', hideInSearch: true },
             { key: 'loanTerm', title: '期限(天)', dataIndex: 'loanTerm', hideInSearch: true },
 
@@ -73,7 +73,7 @@ const ProductTable = (props: ProductTableProps) => {
                 render: (text, record) => {
                     return (
                         <div>{Number(Number(record.preInterestRate) * 100).toFixed(1)}/{Number(Number(record.renewPreInterestRate) * 100).toFixed(1)}</div>
-                    )
+                    );
                 }
             },
             {
@@ -84,7 +84,7 @@ const ProductTable = (props: ProductTableProps) => {
                 render: (text, record) => {
                     return (
                         <div>{Number(Number(record.postInterestRate) * 100).toFixed(1)}/{Number(Number(record.renewPostInterestRate) * 100).toFixed(1)}</div>
-                    )
+                    );
                 }
             },
 
@@ -93,14 +93,14 @@ const ProductTable = (props: ProductTableProps) => {
                     return (
                         <Switch
                             onChange={(checked) => {
-                                handleEditProductList(record.productId, {newGuestProductDisplayStatus: checked});
+                                handleEditProductList(record.productId, { newGuestProductDisplayStatus: checked });
                             }}
                             checkedChildren="是"
                             unCheckedChildren="否"
                             checked={record.newGuestProductDisplayStatus}
                         />
                     );
-                }},
+                } },
             {
                 key: 'newGuestMaxThreshold', title: '新客订单上限', dataIndex: 'newGuestMaxThreshold', initialValue: "", hideInSearch: true,
                 width: ProColumnsOperationConstant.width["4"], render: (text, record) => {
@@ -115,7 +115,7 @@ const ProductTable = (props: ProductTableProps) => {
                                 maxMessage: "不可超过99999",
                             })
                         }}
-                    />
+                    />;
                 }
             },
             { key: 'renewProductDisplayStatus', title: '次新客优先满足', dataIndex: 'renewProductDisplayStatus', hideInSearch: true,
@@ -123,13 +123,13 @@ const ProductTable = (props: ProductTableProps) => {
                     return (
                         <Switch
                             onChange={(checked) => {
-                                handleEditProductList(record.productId, {renewProductDisplayStatus: checked});
+                                handleEditProductList(record.productId, { renewProductDisplayStatus: checked });
                             }}
                             checkedChildren="是"
                             unCheckedChildren="否"
                             checked={record.renewProductDisplayStatus}
                         />
-                    )
+                    );
                 }
             },
             {
@@ -146,7 +146,7 @@ const ProductTable = (props: ProductTableProps) => {
                                 maxMessage: "不可超过99999",
                             })
                         }}
-                    />
+                    />;
                 }
             },
             {
@@ -160,7 +160,7 @@ const ProductTable = (props: ProductTableProps) => {
                                 max: 99,
                                 maxMessage: "不可超过99",
                             })
-                        }} />
+                        }} />;
                 }
             },
             {
@@ -176,7 +176,7 @@ const ProductTable = (props: ProductTableProps) => {
             columns.splice(1, 0, {
                 title: '商户名', dataIndex: 'merchantId', key: 'merchantId', valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
                 width: ProColumnsOperationConstant.width["2"]
-            })
+            });
         }
         return columns;
 
@@ -225,7 +225,7 @@ const ProductTable = (props: ProductTableProps) => {
                             type={'primary'}
                             onClick={() => {
                                 const { productName, enabled, merchantId = '' } = form.getFieldsValue();
-                                setSearchList({productName, enabled, merchantId});
+                                setSearchList({ productName, enabled, merchantId });
                                 form.submit();
                             }}
                         >

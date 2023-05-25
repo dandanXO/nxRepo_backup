@@ -33,7 +33,7 @@ const ProductApi = API.injectEndpoints({
             query: (requestBody: GetProductListRequestQuery) => ({
                 url: `/product-manage/list`,
                 method: "get",
-                params:requestBody
+                params: requestBody
                 // data: requestBody
             }),
         }),
@@ -82,7 +82,7 @@ const ProductApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 
 export const {
     useGetAvailableMerchantListQuery,

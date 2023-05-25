@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
-import { Tabs ,Collapse,List,Form,Button,Input} from 'antd';
+import { Tabs ,Collapse,List,Form,Button,Input } from 'antd';
 import { ConfigResponse,ConfigList } from '../../../api/types/configManageTypes/getConfigList';
 import { useLazyGetConfigListQuery } from '../../../api/configManageApi';
 
@@ -16,54 +16,54 @@ const ConfigManageTab = () => {
         refetchOnReconnect: false
     });
     useEffect(() => {
-        triggerGetList(null)
+        triggerGetList(null);
     }, []);
 
-    console.log(currentData)
+    console.log(currentData);
 
-    const CollapseCard = ({configData}) => {
-        const {configs,group}=configData;
-        console.log('configs',configData,configData['group'])
+    const CollapseCard = ({ configData }) => {
+        const { configs,group } = configData;
+        console.log('configs',configData,configData['group']);
         return <Collapse>
             <Collapse.Panel header={groupLabels(group)} key={group}>
                 <List
                     itemLayout="horizontal"
                     dataSource={configs}
                     renderItem={(item:ConfigList) => {
-                        console.log('item-------', item)
+                        console.log('item-------', item);
                         return (
                             <List.Item>
-                            <div  dangerouslySetInnerHTML={{ __html: item.name }}></div>
-                            {/* {item.inputType==="text" && renderConfigTypes(item)} */}
-                            {renderConfigTypes(item)}
+                                <div  dangerouslySetInnerHTML={{ __html: item.name }}></div>
+                                {/* {item.inputType==="text" && renderConfigTypes(item)} */}
+                                {renderConfigTypes(item)}
                                  
                             </List.Item>
                             
-                        )
+                        );
                     }}
                 />
             </Collapse.Panel>
-        </Collapse>
+        </Collapse>;
 
-    }
+    };
 
     const saveValue = (key, channelId, value) => {
         // const { updateSystemData } = props;
         // updateSystemData({ key, channelId, value });
-        console.log('123132',key, channelId, value)
+        console.log('123132',key, channelId, value);
     };
    
     const renderConfigTypes = (props) => {
-        console.log('props', props)
+        console.log('props', props);
         const { inputType, key, channelId } = props;
         const inputProps = {
             ...props,
             // key: key,
             inputKey: key,
             saveValue: saveValue
-        }
+        };
 
-        return <ConfigInput  {...inputProps} />
+        return <ConfigInput  {...inputProps} />;
         // return inputType === "tag" ? (<ConfigTag  {...inputProps} />) :
         //     inputType === "switch" ? (<ConfigSwitch {...inputProps} />) :
         //         inputType === "radio" ? (<ConfigRadio  {...inputProps} />) :
@@ -75,7 +75,7 @@ const ConfigManageTab = () => {
             'loan_setting': '放款设置',
             'system_setting': '系统设置',
             'risk_setting': '风控设置'
-        }
+        };
         return groupLabels[group] || group ;
     };
     // const tabs = [
@@ -85,7 +85,7 @@ const ConfigManageTab = () => {
     //     // { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId}/> },
     //   ];
 
-      const [tabs,setTabs]=useState([]);
+    const [tabs,setTabs] = useState([]);
 
     // const tabsList = 
 
@@ -94,12 +94,12 @@ const ConfigManageTab = () => {
     useEffect(() => {
         if (currentData !== undefined) {
             const tabList = currentData?.map((curr) => {
-                return { label: groupLabels(curr.group), key: curr.group, children: <CollapseCard configData={curr} /> }
-            })
-            setTabs(tabList)
+                return { label: groupLabels(curr.group), key: curr.group, children: <CollapseCard configData={curr} /> };
+            });
+            setTabs(tabList);
         }
-    }, [currentData])
+    }, [currentData]);
 
-    return <Tabs items={tabs}/>
+    return <Tabs items={tabs}/>;
 };
 export default ConfigManageTab;

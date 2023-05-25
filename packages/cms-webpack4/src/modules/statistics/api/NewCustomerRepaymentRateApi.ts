@@ -77,7 +77,7 @@ const NewCustomerRepaymentRateApi = API.injectEndpoints({
         //     }),
         // }),
     })
-})
+});
 
 export const {
     useLazyGetNewCustomerRiskPaymentRateListQuery,

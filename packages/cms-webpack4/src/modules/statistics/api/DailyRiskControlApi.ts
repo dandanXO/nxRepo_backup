@@ -14,7 +14,7 @@ const DailyRiskControlApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetDailyRiskControlListQuery
 } = DailyRiskControlApi;

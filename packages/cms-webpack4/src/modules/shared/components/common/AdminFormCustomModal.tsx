@@ -1,7 +1,7 @@
 import React from "react";
-import {FormInstance} from "antd";
+import { FormInstance } from "antd";
 import AdminFormModal from "./AdminFormModal";
-import {ModalContent} from "./AdminTable";
+import { ModalContent } from "./AdminTable";
 
 interface AdminFormCustomModalProps {
     // NOTE: Modal
@@ -34,7 +34,7 @@ export const AdminFormCustomModal = (props: AdminFormCustomModalProps) => {
                 props.setShowModalContent({
                     show: false,
                     isEdit: false,
-                })
+                });
                 props.onCloseModal();
             }}
             onOk={props.onOk}
@@ -43,5 +43,5 @@ export const AdminFormCustomModal = (props: AdminFormCustomModalProps) => {
         >
             {props.children}
         </AdminFormModal>
-    )
-}
+    );
+};

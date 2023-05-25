@@ -4,11 +4,11 @@ export const selectRandomRows = (list, randomValue, rowKey) => {
     const listLength = list?.length;
     const selectLength = Number(listLength * Number(randomValue) / 100).toFixed();
     if (Number(selectLength) === 0) return;
-    let selectArray = []
+    const selectArray = [];
     const rowKeyList = list.map(i => i[rowKey]);
 
     for (let i = 0; i < Number(selectLength); i++) {
-        let randomSelect = Math.random() * rowKeyList.length | 0;
+        const randomSelect = Math.random() * rowKeyList.length | 0;
         if (selectArray.includes(rowKeyList[randomSelect])) {
             i--;
         } else {
@@ -17,4 +17,4 @@ export const selectRandomRows = (list, randomValue, rowKey) => {
     }
 
     return selectArray;
-}
+};

@@ -20,10 +20,10 @@ const OrderFinalReviewPage = () => {
                 },
             }}
         >
-             <OrderFinalReviewTable  />
+            <OrderFinalReviewTable  />
         </PageContainer>
-    )
-}
+    );
+};
 
 export default OrderFinalReviewPage;
 

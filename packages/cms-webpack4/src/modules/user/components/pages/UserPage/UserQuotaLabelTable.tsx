@@ -22,8 +22,8 @@ export default () => {
 
     const initSearchList: GetUserQuotaLabelListRequestQuerystring = {
         labelId: '', pageSize: 1000, pageNum: 1
-    }
-    const [searchList, setSearchList] = useState(initSearchList)
+    };
+    const [searchList, setSearchList] = useState(initSearchList);
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserQuotaLabelListQuery({
         pollingInterval: 0,
@@ -39,13 +39,13 @@ export default () => {
 
         // 取得用戶額度標籤下拉選單
         triggerGetUserQuotaLable(null);
-    }, [searchList, isAddSuccess, isDeteleSuccess, isEditSuccess])
+    }, [searchList, isAddSuccess, isDeteleSuccess, isEditSuccess]);
 
     useEffect(() => {
         if (currentData !== undefined) {
-            setDataSource(currentData.records)
+            setDataSource(currentData.records);
         }
-    }, [currentData])
+    }, [currentData]);
 
     const columns: ProColumns<UserQuotaLabel>[] = [
         { title: '额度标签', dataIndex: 'id', valueType: 'select', valueEnum: userQuotaLablEnum, hideInTable: true, initialValue: '', fieldProps: { showSearch: true } },
@@ -54,7 +54,7 @@ export default () => {
             valueType: 'option',
             width: 150,
             render: (text, record, _, action) => [
-                <a key="editable" onClick={() => { action?.startEditable?.(record.id) }}>修改</a>,
+                <a key="editable" onClick={() => { action?.startEditable?.(record.id); }}>修改</a>,
                 <Popconfirm
                     placement="top"
                     title={'删除此行?'}
@@ -142,7 +142,7 @@ export default () => {
                         <Space>
                             <Button onClick={() => {
                                 // @ts-ignore
-                                form.setFieldsValue({ ...initSearchList })
+                                form.setFieldsValue({ ...initSearchList });
                                 setSearchList(initSearchList);
 
                             }}>{resetText}</Button>
@@ -151,7 +151,7 @@ export default () => {
                                 onClick={() => {
                                     // @ts-ignore
                                     const { id } = form.getFieldsValue();
-                                    setSearchList({ ...searchList, labelId:id, pageNum: 1 })
+                                    setSearchList({ ...searchList, labelId: id, pageNum: 1 });
                                     form.submit();
                                 }}
                             >
@@ -176,14 +176,14 @@ export default () => {
                             labelColor,
                             loanCount: Number(loanCount),
                             balance: Number(balance)
-                        }
-                        isEdit ? EditUserQuotaLabel({ id: Number(row.id), ...saveQuotaLabel }) : AddUserQuotaLabel(saveQuotaLabel)
+                        };
+                        isEdit ? EditUserQuotaLabel({ id: Number(row.id), ...saveQuotaLabel }) : AddUserQuotaLabel(saveQuotaLabel);
                     },
 
                     onChange: setEditableRowKeys,
                     actionRender: (row, config, dom) => {
                         const isEdit = dataSource.some(i => i.id === Number(row.id));
-                        return isEdit ? [dom.save, dom.delete, dom.cancel] : [dom.save, dom.delete]
+                        return isEdit ? [dom.save, dom.delete, dom.cancel] : [dom.save, dom.delete];
                     }
                 }}
              

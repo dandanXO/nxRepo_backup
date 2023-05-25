@@ -1,10 +1,10 @@
-import {API} from "../../shared/api";
-import {GetRiskManageRequest} from "./request/GetRiskManageRequest";
-import {PutRiskManageCreateRequest} from "./request/PutRiskManageCreateRequest";
-import {PostRiskManageCreateRequest} from "./request/PostRiskManageCreateRequest";
-import {RiskModelMenuResponse} from "./response/RiskModelMenuResponse";
-import {GetRiskManageListResponse} from "./response/GetRiskManageListResponse";
-import {RiskManageModel} from "../domain/vo/RiskManageModel";
+import { API } from "../../shared/api";
+import { GetRiskManageRequest } from "./request/GetRiskManageRequest";
+import { PutRiskManageCreateRequest } from "./request/PutRiskManageCreateRequest";
+import { PostRiskManageCreateRequest } from "./request/PostRiskManageCreateRequest";
+import { RiskModelMenuResponse } from "./response/RiskModelMenuResponse";
+import { GetRiskManageListResponse } from "./response/GetRiskManageListResponse";
+import { RiskManageModel } from "../domain/vo/RiskManageModel";
 
 const ProductApi = API.injectEndpoints({
     overrideExisting: false,
@@ -14,13 +14,13 @@ const ProductApi = API.injectEndpoints({
             GetRiskManageListResponse,
             null
             >({
-            query: () => ({
-                url: `/risk-manage/list`,
-                params: {
-                },
-                method: "get",
+                query: () => ({
+                    url: `/risk-manage/list`,
+                    params: {
+                    },
+                    method: "get",
+                }),
             }),
-        }),
 
         // NOTE: GET /hs/admin/risk-manage/risk-model-menu 风控模组下拉选单
         getRiskModelMenu: builder.query<RiskModelMenuResponse, {}>({
@@ -57,7 +57,7 @@ const ProductApi = API.injectEndpoints({
         }),
 
     })
-})
+});
 
 export const {
     useLazyGetRiskManageListQuery,

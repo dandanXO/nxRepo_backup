@@ -22,4 +22,4 @@ export const MockChannelTag = {
 
     name: String(new Date().getTime()),
     // APP設定名称
-}
+};

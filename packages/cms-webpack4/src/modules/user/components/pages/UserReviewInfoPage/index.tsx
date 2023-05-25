@@ -5,17 +5,17 @@ import UserInfo from '../../../../shared/components/userInfo/UserInfo';
 import AddressBook from '../../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
 import { useParams } from "react-router-dom";
-import UsesrReviewModal from './UserReviewModal';
+import UserReviewModal from './UserReviewModal';
 import {  useHistory } from "react-router-dom";
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
-import {itemRender} from "../../../../shared/components/common/itemRender";
-const UserReviewInfoPage = () => {
+import { itemRender } from "../../../../shared/components/common/itemRender";
+const UserReviewInfoPage = ():JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();
-    const userId = Number(urlParams.userId)
+    const userId = Number(urlParams.userId);
     const [form] = Form.useForm();
-    const [showModal,setShowModal]=useState(false);
-    const [postUserReview, { data, isLoading, isSuccess }] = usePostUserReviewMutation();
+    const [showModal,setShowModal] = useState(false);
+    const [postUserReview, { data, isSuccess }] = usePostUserReviewMutation();
     const history = useHistory();
     const [modal, contextHolder] = Modal.useModal();
     useEffect(() => {
@@ -28,10 +28,10 @@ const UserReviewInfoPage = () => {
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId} /> },
     ];
 
-    const handleCloseModal=()=>{
+    const handleCloseModal = ()=>{
         form.resetFields();
         setShowModal(false);
-    }
+    };
 
     useEffect(() => {
         setShowModal(false);
@@ -56,14 +56,14 @@ const UserReviewInfoPage = () => {
                             </List.Item>
                         )}
                     />
-            })
+            });
         }
 
-    }, [isSuccess])
+    }, [isSuccess]);
 
-    const onFinish=()=>{
-        postUserReview({userIds:[userId],...form.getFieldsValue()})
-    }
+    const onFinish = ()=>{
+        postUserReview({ userIds: [userId],...form.getFieldsValue() });
+    };
 
     return domLoaded ? (
         <div>
@@ -91,7 +91,7 @@ const UserReviewInfoPage = () => {
                 ]}
             >
                 <Tabs items={tabs} />
-                <UsesrReviewModal showModal={showModal} handleCloseModal={handleCloseModal} form={form} onFinish={onFinish}/>
+                <UserReviewModal showModal={showModal} handleCloseModal={handleCloseModal} form={form} onFinish={onFinish}/>
                 {contextHolder}
             </PageContainer>
         </div>

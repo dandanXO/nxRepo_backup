@@ -13,7 +13,7 @@ const SmsConfigPage = () => {
 
     const onFinish = (values: any) => {
         const formValues = isEdit ? { merchantId: values.merchantId, ...values } : values;
-        handleAddOrEdit(formValues)
+        handleAddOrEdit(formValues);
     };
 
     return (
@@ -41,7 +41,7 @@ const SmsConfigPage = () => {
             </>
         </AdminPage>
     );
-}
+};
 
 export default SmsConfigPage;
 

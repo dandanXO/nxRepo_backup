@@ -8,7 +8,7 @@ import { useParams,useHistory } from "react-router-dom";
 import OrderFinalReviewModal from './OrderFinalReviewModal';
 import { usePostOrderFinalReviewMutation } from '../../api/OrderFinalReviewApi';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
-import {itemRender} from "../../../shared/components/common/itemRender";
+import { itemRender } from "../../../shared/components/common/itemRender";
 
 const OrderFinalReviewDetailPage = () => {
     const [domLoaded, setDomLoaded] = useState(false);
@@ -17,7 +17,7 @@ const OrderFinalReviewDetailPage = () => {
     const orderId = Number(urlParams.orderId);
     const orderNo = urlParams.orderNo;
     const [form] = Form.useForm();
-    const [showModal,setShowModal]=useState(false);
+    const [showModal,setShowModal] = useState(false);
     const [postOrderFinalReview, { data, isLoading, isSuccess }] = usePostOrderFinalReviewMutation();
     const [errorModal, errorContextHolder] = Modal.useModal();
     const history = useHistory();
@@ -33,10 +33,10 @@ const OrderFinalReviewDetailPage = () => {
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId} /> },
     ];
 
-    const handleCloseModal=()=>{
+    const handleCloseModal = ()=>{
         form.resetFields();
         setShowModal(false);
-    }
+    };
 
     const onFinish = () => {
         const { status } = form.getFieldsValue();
@@ -45,7 +45,7 @@ const OrderFinalReviewDetailPage = () => {
             1: ``,
             2: '终审拒绝且拉黑',
             3: '终审拒绝7天'
-        }
+        };
         postOrderFinalReview({ orderNos: [orderNo], ...form.getFieldsValue(), reason: reasonText[status] })
             .unwrap()
             .then((payload) => {
@@ -56,9 +56,9 @@ const OrderFinalReviewDetailPage = () => {
                 errorModal.error({
                     title: 'Error',
                     content: `审核失败`
-                })
-            })
-    }
+                });
+            });
+    };
 
     return domLoaded ? (
         <div>

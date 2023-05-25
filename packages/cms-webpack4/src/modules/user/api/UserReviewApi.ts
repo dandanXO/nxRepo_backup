@@ -23,7 +23,7 @@ const UserReviewApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetUserReviewListQuery,
     usePostUserReviewMutation

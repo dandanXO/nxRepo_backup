@@ -1,12 +1,12 @@
 import AdminPage from "../../../../../shared/components/common/AdminPage";
-import {AdminTable} from "../../../../../shared/components/common/AdminTable";
-import {ProColumns} from "@ant-design/pro-components";
-import React, {useCallback, useEffect, useMemo} from "react";
-import {AdsTemplateData} from "../../../data/AdsTemplateData";
-import {AdsScenarioData} from "../../../data/AdsScenarioData";
-import {ProColumnsOperationConstant} from "../../../../../shared/components/common/ProColumnsOperationConstant";
-import {AdminFormCustomModal} from "../../../../../shared/components/common/AdminFormCustomModal";
-import {ActivityAdsForm} from "./ActivityAdsForm";
+import { AdminTable } from "../../../../../shared/components/common/AdminTable";
+import { ProColumns } from "@ant-design/pro-components";
+import React, { useCallback, useEffect, useMemo } from "react";
+import { AdsTemplateData } from "../../../data/AdsTemplateData";
+import { AdsScenarioData } from "../../../data/AdsScenarioData";
+import { ProColumnsOperationConstant } from "../../../../../shared/components/common/ProColumnsOperationConstant";
+import { AdminFormCustomModal } from "../../../../../shared/components/common/AdminFormCustomModal";
+import { ActivityAdsForm } from "./ActivityAdsForm";
 import {
     ActivityModel,
     useDeleteActivityMutation,
@@ -15,11 +15,11 @@ import {
     usePostActivityMutation,
     usePutActivityMutation
 } from "../../../service/AdsApi";
-import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";
-import {Form} from "antd";
-import {CommonResponseError} from "../../../../../shared/api/CommonResponseError";
-import {DefaultFormByTemplateType} from "./DefaultFormByTemplateType";
-import {useAdminFormModal} from "./useAdminFormModal";
+import { IActivityAdsPageFormStore } from "../../../export/types/IAdsFormStore";
+import { Form } from "antd";
+import { CommonResponseError } from "../../../../../shared/api/CommonResponseError";
+import { DefaultFormByTemplateType } from "./DefaultFormByTemplateType";
+import { useAdminFormModal } from "./useAdminFormModal";
 
 export const ActivityAdsAdminPage = () => {
 
@@ -73,7 +73,7 @@ export const ActivityAdsAdminPage = () => {
                         // userBrowseDeleteChannelSettingUseCase(record)
                         onDeleteItem(record);
                     }}>刪除</a>,
-                ]
+                ];
             },
             width: ProColumnsOperationConstant.width["2"],
         },
@@ -94,11 +94,11 @@ export const ActivityAdsAdminPage = () => {
             initialValue: 'all',
             valueEnum: {
                 "all": { text: '全部', status: 'Default' },
-                [AdsScenarioData[0]['value']]: { text: AdsScenarioData[0].name},
-                [AdsScenarioData[1]['value']]: { text: AdsScenarioData[1].name},
-                [AdsScenarioData[2]['value']]: { text: AdsScenarioData[2].name},
-                [AdsScenarioData[3]['value']]: { text: AdsScenarioData[3].name},
-                [AdsScenarioData[4]['value']]: { text: AdsScenarioData[4].name},
+                [AdsScenarioData[0]['value']]: { text: AdsScenarioData[0].name },
+                [AdsScenarioData[1]['value']]: { text: AdsScenarioData[1].name },
+                [AdsScenarioData[2]['value']]: { text: AdsScenarioData[2].name },
+                [AdsScenarioData[3]['value']]: { text: AdsScenarioData[3].name },
+                [AdsScenarioData[4]['value']]: { text: AdsScenarioData[4].name },
 
             },
             width: 200,
@@ -110,9 +110,9 @@ export const ActivityAdsAdminPage = () => {
             initialValue: 'all',
             valueEnum: {
                 "all": { text: '全部', status: 'Default' },
-                "1": { text: AdsTemplateData[0].name},
-                "2": { text: AdsTemplateData[1].name},
-                "3": { text: AdsTemplateData[2].name},
+                "1": { text: AdsTemplateData[0].name },
+                "2": { text: AdsTemplateData[1].name },
+                "3": { text: AdsTemplateData[2].name },
             },
             // width: 80,
             hideInSearch: true,
@@ -129,7 +129,7 @@ export const ActivityAdsAdminPage = () => {
             width: 80,
             hideInSearch: true,
         },
-    ]
+    ];
 
     const adminModalTitle = "活动广告管理";
 
@@ -146,7 +146,7 @@ export const ActivityAdsAdminPage = () => {
     // }, [templateType]);
 
     const initialValues = useMemo(() => {
-       return {} as DeepPartial<IActivityAdsPageFormStore>
+        return {} as DeepPartial<IActivityAdsPageFormStore>;
     }, [showModalContent.isEdit]);
 
     useEffect(() => {
@@ -161,7 +161,7 @@ export const ActivityAdsAdminPage = () => {
                 form.setFieldsValue({});
             }
         }
-    }, [showModalContent.show])
+    }, [showModalContent.show]);
 
     // NOTE: System reload EditChannelSetting
     const systemReloadEditUseCase = useCallback((currentFormData) => {
@@ -171,16 +171,16 @@ export const ActivityAdsAdminPage = () => {
         // const id = targetMenu && targetMenu[0] && targetMenu[0].id || undefined;
 
         // NOTE: form - main data
-        form.setFieldsValue(currentFormData)
-    }, [showModalContent.isEdit, currentFormData])
+        form.setFieldsValue(currentFormData);
+    }, [showModalContent.isEdit, currentFormData]);
 
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
         if(showModalContent.isEdit && currentFormData) {
-            systemReloadEditUseCase(currentFormData)
+            systemReloadEditUseCase(currentFormData);
         }
-    }, [showModalContent.isEdit, currentFormData])
+    }, [showModalContent.isEdit, currentFormData]);
 
 
     // NOTE: onFieldsChange
@@ -215,7 +215,7 @@ export const ActivityAdsAdminPage = () => {
             // NOTE: 切換 action 將 actionUrl 原本值清空
             if(key === "action") {
                 originalValues[index].actionUrl = "";
-                originalValues[index].payload.action = value
+                originalValues[index].payload.action = value;
                 originalValues[index].payload.actionUrl = "";
             }
             form.setFieldValue("contents", originalValues);
@@ -245,12 +245,12 @@ export const ActivityAdsAdminPage = () => {
             //     },
             // });
         }
-    }, [])
+    }, []);
 
     // Form - Finish
     const onFormFinish = useCallback(() => {
         userEditedChannelSettingUseCase();
-    }, [showModalContent.isEdit, editID])
+    }, [showModalContent.isEdit, editID]);
 
     // NOTE: user Edited ChannelSetting
     const userEditedChannelSettingUseCase = useCallback(() => {
@@ -281,7 +281,7 @@ export const ActivityAdsAdminPage = () => {
             setShowModalContent({
                 show: false,
                 isEdit: false,
-            })
+            });
 
             // Reset TableList
             triggerGetList && triggerGetList(null);
@@ -295,19 +295,19 @@ export const ActivityAdsAdminPage = () => {
                 onCancel: () => {},
                 content: error.data.message
             });
-        })
-    }, [showModalContent.isEdit, editID])
+        });
+    }, [showModalContent.isEdit, editID]);
 
 
     // NOTICE: UseCase
     // NOTE: User browse AllChannelSettings
     const userBrowseAllActivitiesUseCase = useCallback(() => {
         triggerGetList(null);
-    }, [])
+    }, []);
 
     useEffect(() => {
-        userBrowseAllActivitiesUseCase()
-    }, [])
+        userBrowseAllActivitiesUseCase();
+    }, []);
 
 
     return (
@@ -322,7 +322,7 @@ export const ActivityAdsAdminPage = () => {
             },
             self: {
                 path: "",
-                breadcrumbName:"活动广告管理"
+                breadcrumbName: "活动广告管理"
             }
         }}>
             <>
@@ -357,5 +357,5 @@ export const ActivityAdsAdminPage = () => {
                 <div>{contextHolder}</div>
             </>
         </AdminPage>
-    )
-}
+    );
+};

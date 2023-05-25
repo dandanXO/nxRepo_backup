@@ -32,8 +32,8 @@ const AddBlackListModal = ((props: AddBlackLisModalProps) => {
             </Form>
             {/* </Spin> */}
         </Modal>
-    )
-})
+    );
+});
 
 export default AddBlackListModal;
 

@@ -3,7 +3,7 @@ import { Form, Modal, Spin ,Input ,Radio } from "antd";
 import { FormModalProps } from "../../../../shared/domain/FormModal";
 
 const SmsConfigModal = (props: FormModalProps) => {
-    const { isEdit, showModal, isSuccess, onFinish, form, setShowModal } = props
+    const { isEdit, showModal, isSuccess, onFinish, form, setShowModal } = props;
     const layout = {
         labelCol: { span: 6 },
         wrapperCol: { span: 16 },
@@ -44,7 +44,7 @@ const SmsConfigModal = (props: FormModalProps) => {
                 </Form>
             </Spin>
         </Modal>
-    )
-}
+    );
+};
 
 export default SmsConfigModal ;

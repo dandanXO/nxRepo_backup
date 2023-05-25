@@ -23,7 +23,7 @@ const OrderFinalReviewApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetOrderFinalReviewListQuery,
     usePostOrderFinalReviewMutation

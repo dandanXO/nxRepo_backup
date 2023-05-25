@@ -1,7 +1,7 @@
 import React from "react";
-import {FormInstance} from "antd";
+import { FormInstance } from "antd";
 import AdminFormModal from "../../../../shared/components/common/AdminFormModal";
-import {ModalContent} from "../../../../shared/components/common/AdminTable";
+import { ModalContent } from "../../../../shared/components/common/AdminTable";
 
 interface RiskSettingModelProps {
     showModalContent: ModalContent;
@@ -26,7 +26,7 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
                 props.setShowModalContent({
                     show: false,
                     isEdit: false,
-                })
+                });
             }}
             onOk={props.onOk}
             // autoComplete={true}
@@ -35,6 +35,6 @@ const RiskSettingModal = (props: RiskSettingModelProps) => {
             {props.children}
 
         </AdminFormModal>
-    )
-}
+    );
+};
 export default RiskSettingModal;

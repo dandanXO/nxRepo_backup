@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {RootState} from "../store";
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface searchParamsState {
     searchParams: any;
@@ -13,7 +13,7 @@ const initialState: searchParamsState = {
     previousPathname: "",
     pathname: "",
     selectedRow: []
-}
+};
 
 const searchParamsSlice = createSlice({
     name: 'searchParams',
@@ -30,8 +30,8 @@ const searchParamsSlice = createSlice({
             state.previousPathname = action.payload.previousPathname;
         }
     }
-})
+});
 
-export const { setSearchParams ,setPathname,setSelectedRow} = searchParamsSlice.actions;
+export const { setSearchParams ,setPathname,setSelectedRow } = searchParamsSlice.actions;
 export const selectSearchParams = (state: RootState) => state.searchParams;
-export default searchParamsSlice.reducer
+export default searchParamsSlice.reducer;

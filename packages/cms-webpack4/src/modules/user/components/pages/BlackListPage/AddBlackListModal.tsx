@@ -30,8 +30,8 @@ const AddBlackListModal = ((props: AddBlackLisModalProps) => {
                 </Form.Item>
             </Form>
         </Modal>
-    )
-})
+    );
+});
 
 export default AddBlackListModal;
 

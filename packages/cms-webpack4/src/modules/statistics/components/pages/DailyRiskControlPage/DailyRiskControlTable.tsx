@@ -22,10 +22,10 @@ const DailyRiskControlTable = () => {
         startTime: dayRange[0].format('YYYY-MM-DD 00:00:00') ,
         riskControlModel: '',
         isOldUser: false
-    }
+    };
 
     // state
-    const [searchList, setSearchList] =useState(initSearchList)
+    const [searchList, setSearchList] = useState(initSearchList);
 
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetDailyRiskControlListQuery({
@@ -36,7 +36,7 @@ const DailyRiskControlTable = () => {
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList])
+    }, [searchList]);
 
     useEffect(() => {
         triggerGetProviderList(null);
@@ -53,15 +53,15 @@ const DailyRiskControlTable = () => {
             isOldUser,
             registerStartTime: registerDayRange ? registerDayRange[0].format('YYYY-MM-DD 00:00:00') : '',
             registerEndTime: registerDayRange ? registerDayRange[1].format('YYYY-MM-DD 23:59:59') : '',
-        }
-    }
+        };
+    };
 
     const handleExportDailyRiskControlList = () => {
         const searchParams = getSearchParams();
         const searchQueryString = queryString.stringify(searchParams);
         window.open(`hs/admin/statistics/risk-control/download?${searchQueryString}`);
         setSearchList(searchParams);
-    }
+    };
 
     // title 總計的欄位
     const { day = '', requestCount = '', successCount = '', excellentCount = '', excellentRate = '', goodCount = '', goodRate = '', normalCount = '',
@@ -84,10 +84,10 @@ const DailyRiskControlTable = () => {
         { title: '正常', dataIndex: 'normalCount', key: 'normalCount', hideInSearch: true, render: (text, { normalRate }) => `${text}(${normalRate})` },
         { title: '普通', dataIndex: 'ordinaryCount', key: 'ordinaryCount', hideInSearch: true, render: (text, { ordinaryRate }) => `${text}(${ordinaryRate})` },
         { title: '拒绝', dataIndex: 'rejectCount', key: 'rejectCount', hideInSearch: true, render: (text, { rejectRate }) => `${text}(${rejectRate})` },
-    ]
+    ];
 
     const initColumnsStateMap = columns.reduce((prev, curr) => {
-        return curr.hideInSearch ? { ...prev, ...{ [`${curr.key}`]: { show: true } } } : { ...prev }
+        return curr.hideInSearch ? { ...prev, ...{ [`${curr.key}`]: { show: true } } } : { ...prev };
     }, {}) as Record<string, ColumnsState>;
 
     const [columnsStateMap, setColumnsStateMap] = useState<Record<string, ColumnsState>>({ ...initColumnsStateMap });
@@ -106,7 +106,7 @@ const DailyRiskControlTable = () => {
                         <Button onClick={() => {
                             //  form.resetFields();
                             // @ts-ignore
-                            form.setFieldsValue({ ...initSearchList })
+                            form.setFieldsValue({ ...initSearchList });
                             setSearchList(initSearchList);
                         }}>{resetText}</Button>
                         <Button
@@ -153,8 +153,8 @@ const DailyRiskControlTable = () => {
             }}
         />
 
-    )
-}
+    );
+};
 
 export default DailyRiskControlTable;
 

@@ -15,7 +15,7 @@ const DailyRiskControlPage = () => {
             </>
         </AdminPage>
     );
-}
+};
 
 export default DailyRiskControlPage;
 

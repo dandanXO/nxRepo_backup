@@ -1,5 +1,5 @@
-import {API} from "./index";
-import {ChannelSelect} from "./commonSelectTypes/getChannelSelect";
+import { API } from "./index";
+import { ChannelSelect } from "./commonSelectTypes/getChannelSelect";
 
 const ChannelListApi = API.injectEndpoints({
     overrideExisting: false,
@@ -13,7 +13,7 @@ const ChannelListApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useGetChannelListQuery,
     useLazyGetChannelListQuery

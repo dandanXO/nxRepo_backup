@@ -1,9 +1,9 @@
-import {useCallback, useState} from "react";
-import {ModalContent} from "../../../../../shared/components/common/AdminTable";
-import {useForm} from "antd/es/form/Form";
-import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import {Modal} from "antd/es";
-import {ActivityModel} from "../../../service/AdsApi";
+import { useCallback, useState } from "react";
+import { ModalContent } from "../../../../../shared/components/common/AdminTable";
+import { useForm } from "antd/es/form/Form";
+import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import { Modal } from "antd/es";
+import { ActivityModel } from "../../../service/AdsApi";
 
 type IUseAdminTable = {
     triggerGetList: any;
@@ -21,19 +21,19 @@ export const useAdminFormModal = (props: IUseAdminTable) => {
     });
 
     // NOTICE: Form
-    const [form] = useForm()
+    const [form] = useForm();
 
     const [editID, setEditID] = useState<number>();
 
     // Form - Validation
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>();
 
     // NOTICE: Modal - Create, Edit
     const [modal, contextHolder] = Modal.useModal();
     // Modal - OK
     const onModalOk = useCallback(() => {
         form.submit();
-    }, [form])
+    }, [form]);
 
     // Modal - Close
     const onCloseModal = useCallback(() => {
@@ -42,8 +42,8 @@ export const useAdminFormModal = (props: IUseAdminTable) => {
     }, []);
 
     const onAddItem = useCallback(() => {
-        userAdd()
-    }, [])
+        userAdd();
+    }, []);
 
 
     // NOTE: User add ChannelSetting
@@ -66,7 +66,7 @@ export const useAdminFormModal = (props: IUseAdminTable) => {
         setShowModalContent({
             show: true,
             isEdit: true,
-        })
+        });
         props.triggerGet({
             id: record.id,
         });
@@ -80,8 +80,8 @@ export const useAdminFormModal = (props: IUseAdminTable) => {
 
     const onDeleteModalOK = useCallback((editID: number) => {
         // NOTICE: need dependency array
-        userDeleteChannelSettingUseCase(editID)
-    }, [])
+        userDeleteChannelSettingUseCase(editID);
+    }, []);
 
     // NOTE: User delete ChannelSetting
     const userDeleteChannelSettingUseCase = useCallback((editID: number) => {
@@ -91,12 +91,12 @@ export const useAdminFormModal = (props: IUseAdminTable) => {
         }).unwrap().then(() => {
             setShowDeletedModal(false);
             props.triggerGetList(null);
-        })
+        });
     }, []);
 
     const onDeleteModalCancel = useCallback(() => {
         setShowDeletedModal(false);
-    }, [])
+    }, []);
 
     // userBrowseDeleteChannelSettingUseCase
     const onDeleteItem = useCallback((record: ActivityModel) => {
@@ -107,7 +107,7 @@ export const useAdminFormModal = (props: IUseAdminTable) => {
             // onOk: onDeleteModalOK,
             onCancel: onDeleteModalCancel,
         });
-    }, [])
+    }, []);
 
 
     return {
@@ -124,5 +124,5 @@ export const useAdminFormModal = (props: IUseAdminTable) => {
         onDeleteItem,
         contextHolder,
 
-    }
-}
+    };
+};

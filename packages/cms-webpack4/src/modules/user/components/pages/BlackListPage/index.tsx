@@ -15,13 +15,13 @@ const BlackListPage = () => {
     const onFinish = (values: any) => {
         postBlackList(values);
         form.resetFields();
-        setShowModal(false)
+        setShowModal(false);
     };
 
     const handleCloseModal = () => {
-        setShowModal(false)
-        form.resetFields()
-    }
+        setShowModal(false);
+        form.resetFields();
+    };
 
     return (
         <AdminPage
@@ -51,7 +51,7 @@ const BlackListPage = () => {
             </>
         </AdminPage>
     );
-}
+};
 
 export default BlackListPage;
 

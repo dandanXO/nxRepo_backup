@@ -1,8 +1,8 @@
-import {AdminFormCustomModal} from "../../../../../shared/components/common/AdminFormCustomModal";
-import {ChannelSettingTagForm} from "./ChannelSettingTagForm";
+import { AdminFormCustomModal } from "../../../../../shared/components/common/AdminFormCustomModal";
+import { ChannelSettingTagForm } from "./ChannelSettingTagForm";
 import React from "react";
 
-import {FormInstance} from "antd";
+import { FormInstance } from "antd";
 
 export interface ChannelSettingTagFormModalProps {
     // modal
@@ -44,5 +44,5 @@ export const ChannelSettingTagFormModal = (props: ChannelSettingTagFormModalProp
                 customAntFormFieldError={props.customAntFormFieldError}
             />
         </AdminFormCustomModal>
-    )
-}
+    );
+};

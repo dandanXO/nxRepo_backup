@@ -6,4 +6,4 @@ export const  ProColumnsOperationConstant = {
         4: 150,
         5: 180,
     }
-}
+};

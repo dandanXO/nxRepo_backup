@@ -13,7 +13,7 @@ const ProductNamesApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetProductNamesQuery
 } = ProductNamesApi;

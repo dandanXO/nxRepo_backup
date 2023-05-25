@@ -14,20 +14,20 @@ const useGetOrderReviewRecordOperatorEnum = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [orderReviewRecordOperatorEnum, setOrderReviewRecordOperatorEnum] = useState(null)
+    const [orderReviewRecordOperatorEnum, setOrderReviewRecordOperatorEnum] = useState(null);
 
     useEffect(() => {
 
-        let operatorList = new Map().set('', { text: '不限' });
+        const operatorList = new Map().set('', { text: '不限' });
         operatorListData && operatorListData?.map((i) => {
-            return operatorList.set(i.operatorId, { text: i.operatorName })
+            return operatorList.set(i.operatorId, { text: i.operatorName });
         });
-        setOrderReviewRecordOperatorEnum(operatorList)
+        setOrderReviewRecordOperatorEnum(operatorList);
 
-    }, [isSuccess])
+    }, [isSuccess]);
 
 
-    return { triggerGetOperatorList, orderReviewRecordOperatorEnum }
-}
+    return { triggerGetOperatorList, orderReviewRecordOperatorEnum };
+};
 
 export default useGetOrderReviewRecordOperatorEnum;

@@ -12,7 +12,7 @@ const MerchantListApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetMerchantListQuery,
     useGetMerchantListQuery

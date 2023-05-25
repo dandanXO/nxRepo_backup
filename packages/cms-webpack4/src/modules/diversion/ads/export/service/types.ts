@@ -1,4 +1,4 @@
-import {AdsScenarioType} from "../types/IAdsScenario";
+import { AdsScenarioType } from "../types/IAdsScenario";
 
 export type ActivityBanner<T1, T2> = {
     action: "APPLY_LOAN" | "POP_URL";

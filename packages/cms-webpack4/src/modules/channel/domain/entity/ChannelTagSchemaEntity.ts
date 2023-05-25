@@ -1,5 +1,5 @@
-import {z} from "zod";
-import {SchemaEntity} from "../../../shared/utils/validation/SchemaEntity";
+import { z } from "zod";
+import { SchemaEntity } from "../../../shared/utils/validation/SchemaEntity";
 
 
 // NOTICE: VO Input Schema
@@ -13,8 +13,8 @@ const POSITIVE_NUMBER_MESSAGE = "请输入正整数";
 const customZodStringRules = (name: string) => {
     return z.string({
         required_error: `${REQUIRED_MESSAGE}${name}`
-    })
-}
+    });
+};
 const customZodNumberRules = (name: string) => z.number({
     required_error: `${REQUIRED_MESSAGE}${name}`,
     invalid_type_error: POSITIVE_NUMBER_MESSAGE,
@@ -45,7 +45,7 @@ export const ChannelTagSchema = z.object({
 
     name: customZodStringRules("渠道配置标签").min(1, REQUIRED_MESSAGE + "渠道配置标签"),
     // APP設定名称
-})
+});
 
 // NOTICE: SchemaType
 export type IChannelTagSchema = z.infer<typeof ChannelTagSchema>;
@@ -59,30 +59,30 @@ export class ChannelTagSchemaEntity extends SchemaEntity<IChannelTagSchema> {
     // TODO: REFACTOR ME
     transformToEntityData(sourceData: any): IChannelTagSchema {
         return {
-            auditAcc	:sourceData.auditAcc,
+            auditAcc: sourceData.auditAcc,
             // google audit acc
 
             auditAccOtpCode: sourceData.auditAccOtpCode,
             // google audit 登入验证码
 
-            auditLoanAmount	:!isNaN(sourceData.auditLoanAmount) ? Number(sourceData.auditLoanAmount) : sourceData.auditLoanAmount,
+            auditLoanAmount: !isNaN(sourceData.auditLoanAmount) ? Number(sourceData.auditLoanAmount) : sourceData.auditLoanAmount,
             // 审核的借款金额
 
-            auditQuota	:!isNaN(sourceData.auditQuota) ? Number(sourceData.auditQuota) : sourceData.auditQuota,
+            auditQuota: !isNaN(sourceData.auditQuota) ? Number(sourceData.auditQuota) : sourceData.auditQuota,
             // 审核的订单额度
 
-            auditServiceFee	:!isNaN(sourceData.auditServiceFee) ? Number(sourceData.auditServiceFee) : sourceData.auditServiceFee,
+            auditServiceFee: !isNaN(sourceData.auditServiceFee) ? Number(sourceData.auditServiceFee) : sourceData.auditServiceFee,
             // 审核的服务费
 
-            auditTaxFee	:!isNaN(sourceData.auditTaxFee) ? Number(sourceData.auditTaxFee) : sourceData.auditTaxFee,
+            auditTaxFee: !isNaN(sourceData.auditTaxFee) ? Number(sourceData.auditTaxFee) : sourceData.auditTaxFee,
             // 审核的利息
 
-            auditTerm	:!isNaN(sourceData.auditTerm) ? Number(sourceData.auditTerm) : sourceData.auditTerm,
+            auditTerm: !isNaN(sourceData.auditTerm) ? Number(sourceData.auditTerm) : sourceData.auditTerm,
             // 审核的天数
 
-            name	:sourceData.name,
+            name: sourceData.name,
             // APP設定名称
-        }
+        };
         // return this;
     }
 }

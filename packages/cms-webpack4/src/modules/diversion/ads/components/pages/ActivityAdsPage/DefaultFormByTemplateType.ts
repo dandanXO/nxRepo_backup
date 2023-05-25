@@ -1,4 +1,4 @@
-import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";
+import { IActivityAdsPageFormStore } from "../../../export/types/IAdsFormStore";
 
 export const DefaultFormByTemplateType = {
     "1": {
@@ -131,4 +131,4 @@ export const DefaultFormByTemplateType = {
             },
         ],
     } as DeepPartial<IActivityAdsPageFormStore>
-}
+};

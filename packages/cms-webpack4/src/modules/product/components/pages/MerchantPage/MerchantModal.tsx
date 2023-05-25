@@ -12,7 +12,7 @@ interface MerchantModalProps {
 }
 
 const MerchantModal = (props: MerchantModalProps) => {
-    const { isEdit, isMerchantEditing, isMerchantCreating, merchantModalVisible, handleCloseModal, onFinish, form } = props
+    const { isEdit, isMerchantEditing, isMerchantCreating, merchantModalVisible, handleCloseModal, onFinish, form } = props;
     const layout = {
         labelCol: { span: 4 },
         wrapperCol: { span: 16 },
@@ -59,7 +59,7 @@ const MerchantModal = (props: MerchantModalProps) => {
             </Spin>
         </Modal>
 
-    )
-}
+    );
+};
 
 export default MerchantModal ;

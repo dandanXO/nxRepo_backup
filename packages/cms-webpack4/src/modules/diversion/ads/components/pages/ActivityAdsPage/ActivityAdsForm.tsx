@@ -1,15 +1,15 @@
-import {Form, FormInstance, Input, Select, Switch, Typography} from "antd";
+import { Form, FormInstance, Input, Select, Switch, Typography } from "antd";
 import React from "react";
-import {AdminForm} from "../../../../../shared/components/common/AdminForm";
-import {DemoActivityAdListPage} from "../../../import/ActivityAdListPage";
+import { AdminForm } from "../../../../../shared/components/common/AdminForm";
+import { DemoActivityAdListPage } from "../../../import/ActivityAdListPage";
 import styled from "styled-components";
-import {IActivityAdsPageFormStore} from "../../../export/types/IAdsFormStore";
-import {getFormItemForTemplateType} from "./getFormItemForTemplateType";
-import {getTemplate1AdTemplate1Data} from "../../../export/mapper/getTemplate1AdTemplate1Data";
-import {getTemplate2AdTemplate1Data} from "../../../export/mapper/getTemplate2AdTemplate1Data";
-import {getTemplate3AdTemplate1Data} from "../../../export/mapper/getTemplate3AdTemplate1Data";
-import {AdsTemplateData} from "../../../data/AdsTemplateData";
-import {AdsScenarioData} from "../../../data/AdsScenarioData";
+import { IActivityAdsPageFormStore } from "../../../export/types/IAdsFormStore";
+import { getFormItemForTemplateType } from "./getFormItemForTemplateType";
+import { getTemplate1AdTemplate1Data } from "../../../export/mapper/getTemplate1AdTemplate1Data";
+import { getTemplate2AdTemplate1Data } from "../../../export/mapper/getTemplate2AdTemplate1Data";
+import { getTemplate3AdTemplate1Data } from "../../../export/mapper/getTemplate3AdTemplate1Data";
+import { AdsTemplateData } from "../../../data/AdsTemplateData";
+import { AdsScenarioData } from "../../../data/AdsScenarioData";
 
 const { Title, Text } = Typography;
 
@@ -44,13 +44,13 @@ const FormContainer = styled.div`
     flex-direction: row;
     width: 1000px;
     margin: 0 auto;
-`
+`;
 const Preview = styled.div`
     //position: sticky;
     //top: 0;
     //left: 0;
     height: 640px;
-`
+`;
 
 export const ActivityAdsForm = (props: IActivityAdsForm) => {
 
@@ -80,7 +80,7 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
             <FormContainer>
                 <Preview>
                     <Title level={5}>预览</Title>
-                    <div style={{ textAlign: "center"}}>
+                    <div style={{ textAlign: "center" }}>
                         <Text>观赏首页广告</Text>
                     </div>
                     <Container>
@@ -116,20 +116,20 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
                         <Select
                             disabled={props.isEdit}
                             placeholder={'选择'}
-                                onClick={() => {
-                                    // props.modal.confirm({
-                                    //     title: "切換版型會遺失目前的內容",
-                                    //     // NOTICE: 得用下面寫法否則 editID 會找不到
-                                    //     onOk:  () => {
-                                    //         // console.log("defaultFormValues: ", defaultFormValues);
-                                    //         // form.setFieldsValue(defaultFormValues);
-                                    //     },
-                                    //     // onOk: onDeleteModalOK,
-                                    //     onCancel: () => {
-                                    //
-                                    //     },
-                                    // });
-                                }}
+                            onClick={() => {
+                                // props.modal.confirm({
+                                //     title: "切換版型會遺失目前的內容",
+                                //     // NOTICE: 得用下面寫法否則 editID 會找不到
+                                //     onOk:  () => {
+                                //         // console.log("defaultFormValues: ", defaultFormValues);
+                                //         // form.setFieldsValue(defaultFormValues);
+                                //     },
+                                //     // onOk: onDeleteModalOK,
+                                //     onCancel: () => {
+                                //
+                                //     },
+                                // });
+                            }}
                         >
                             {AdsTemplateData &&
                                 AdsTemplateData.map((template, index) => {
@@ -177,5 +177,5 @@ export const ActivityAdsForm = (props: IActivityAdsForm) => {
             </FormContainer>
         </AdminForm>
     );
-}
+};
 

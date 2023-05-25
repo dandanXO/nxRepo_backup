@@ -17,17 +17,17 @@ const useAddOrEditFormModal = (postAddData,putEditData) => {
 
     const [showModal, setShowModal] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
-    const [postModalForm, { isLoading, isSuccess }] = isEdit ?   putEditData():postAddData();
+    const [postModalForm, { isLoading, isSuccess }] = isEdit ?   putEditData() : postAddData();
     const [form] = Form.useForm();
 
     useEffect(() => {
         form.resetFields();
-    }, [showModal])
+    }, [showModal]);
 
     const handleAddOrEdit = (values) => {
         postModalForm(values);
-        setShowModal(false)
-    }
+        setShowModal(false);
+    };
 
     return {
         form,
@@ -37,7 +37,7 @@ const useAddOrEditFormModal = (postAddData,putEditData) => {
         setIsEdit,
         handleAddOrEdit,
         isSuccess,
-    }
-}
+    };
+};
 
 export default useAddOrEditFormModal;

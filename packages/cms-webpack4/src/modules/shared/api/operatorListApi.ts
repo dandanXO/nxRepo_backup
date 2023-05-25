@@ -34,7 +34,7 @@ const OperatorListApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetOperatorListQuery,
     useGetOperatorListQuery,

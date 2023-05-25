@@ -16,7 +16,7 @@ const PayReceiptPage = () => {
             </>
         </AdminPage>
     );
-}
+};
 
 export default PayReceiptPage;
 

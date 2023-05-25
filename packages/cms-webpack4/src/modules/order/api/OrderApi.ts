@@ -13,7 +13,7 @@ const OrderApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetOrderListQuery
 } = OrderApi;

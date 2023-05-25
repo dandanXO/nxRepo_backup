@@ -6,4 +6,4 @@ export const ConstantRiskRankEnum = {
     'NORMAL': { text: '正常', color: 'blue' },
     'ORDINARY': { text: '普通', color: 'gold' },
     'REJECT': { text: '拒绝', color: 'lightGray' },
-}
+};

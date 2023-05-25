@@ -12,7 +12,7 @@ const ReloanStatisticsApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetReloanStatisticsListQuery
 } = ReloanStatisticsApi;

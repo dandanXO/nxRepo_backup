@@ -22,7 +22,7 @@ const OrderReviewRecordPage = () => {
             </>
         </AdminPage>
     );
-}
+};
 
 export default OrderReviewRecordPage;
 

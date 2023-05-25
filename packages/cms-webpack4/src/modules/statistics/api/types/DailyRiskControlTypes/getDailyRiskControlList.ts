@@ -10,7 +10,7 @@ export interface GetDailyRiskControlListRequestQuery {
 export interface GetDailyRiskControlListResponse {
     total: GetDailyRiskControlList;
     list: GetDailyRiskControlList[];
-};
+}
 
 export interface GetDailyRiskControlList {
     day?: string;              // 日期

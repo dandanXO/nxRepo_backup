@@ -54,7 +54,7 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                         <Form.Item name={[props.type, index, index === 4 ? "overdueDaysReject" : "repaymentCount"]} style={{ margin: '0 8px 0 0', width: 130 }}
                             validateStatus={(props.customAntFormFieldError?.[`${props.type}_repaymentCount_${index}`] as any)?.validateStatus}
                             help={(props.customAntFormFieldError?.[`${props.type}_repaymentCount_${index}`] as any)?.help}
-                            rules={[{ required: true,message:`请输入${index === 4 ? "超過逾期天数" : "笔数"}` }]}
+                            rules={[{ required: true,message: `请输入${index === 4 ? "超過逾期天数" : "笔数"}` }]}
                         >
                             <Input placeholder={index === 4 ? "超過逾期天数" : "笔数"} suffix={index === 4 ? "天" : ""} />
                         </Form.Item>
@@ -83,9 +83,9 @@ function FirstAndRepeatLoanFormByCount(props: FormProps) {
                     </Input.Group>
                 </Form.Item>
 
-            )
+            );
         })}
-    </>
+    </>;
 
 }
 

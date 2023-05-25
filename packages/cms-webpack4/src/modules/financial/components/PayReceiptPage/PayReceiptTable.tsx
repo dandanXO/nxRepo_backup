@@ -14,13 +14,13 @@ const PayReceiptTable = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
-    const initSearchList :GetPayReceiptListRequestQuerystring= {
+    const initSearchList :GetPayReceiptListRequestQuerystring = {
         createTimeEnd: '', createTimeStart: '', merchantId: '', orderNo: '', phoneNo: '', status: 0, userName: '', utr: '', pageNum: 1, pageSize: 10
-    }
+    };
 
     // state
-    const [searchList, setSearchList] =useState(initSearchList)
-    const [selectedList,setSelectedList]=useState([])
+    const [searchList, setSearchList] = useState(initSearchList);
+    const [selectedList,setSelectedList] = useState([]);
     const [modal, contextHolder] = Modal.useModal();
     // api
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetPayReceiptListQuery({
@@ -34,17 +34,17 @@ const PayReceiptTable = () => {
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList,isPostPayReceiptSuccess])
+    }, [searchList,isPostPayReceiptSuccess]);
 
     useEffect(() => {
         if(isSuperAdmin){
             triggerGetMerchantList(null);
-        };
-    }, [isSuperAdmin])
+        }
+    }, [isSuperAdmin]);
 
     const pageOnChange = (current, pageSize) => {
-        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
-    }
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
+    };
 
     const onSelectChange = (selectedRowKeys) => {
         setSelectedList(selectedRowKeys);
@@ -60,7 +60,7 @@ const PayReceiptTable = () => {
                     .catch((error) => {});
             }
         });
-    }
+    };
 
     const statusEnum = {
         '': { text: '不限' },
@@ -68,9 +68,9 @@ const PayReceiptTable = () => {
         '1': { text: '已确认', color: 'green' },
     };
 
-    const utrOrReceiptimgColumn: ProColumns = (appInfo.COUNTRY !== 'Pakistan'  && appInfo.COUNTRY !=='Bangladesh')
+    const utrOrReceiptimgColumn: ProColumns = (appInfo.COUNTRY !== 'Pakistan'  && appInfo.COUNTRY !== 'Bangladesh')
         ? { title: 'UTR', dataIndex: 'utr', key: 'utr', initialValue: "", render: (text) => <CopyText text={text} /> }
-        : { title: '还款明细', dataIndex: 'receiptImageUrl', key: 'receiptImageUrl', valueType: 'image', hideInSearch: true ,align:'center'}
+        : { title: '还款明细', dataIndex: 'receiptImageUrl', key: 'receiptImageUrl', valueType: 'image', hideInSearch: true ,align: 'center' };
 
     const columns: ProColumns<PayReceiptList>[] = [
         {
@@ -80,7 +80,7 @@ const PayReceiptTable = () => {
             align: 'left',
             width: '50px',
             render: (text, record, _, action) => {
-                return <a key="editable" onClick={() => handlePayReceiptConfirm([record.orderNo])} >确认</a>
+                return <a key="editable" onClick={() => handlePayReceiptConfirm([record.orderNo])} >确认</a>;
             }
         },
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: "", render: (text) => <CopyText text={text} /> },
@@ -106,14 +106,14 @@ const PayReceiptTable = () => {
         },
         { title: '更新时间', dataIndex: 'updateTime', key: 'updateTime', valueType: "dateTime", hideInSearch: true },
 
-    ]
+    ];
     if (isSuperAdmin) {
         columns.splice(1, 0, {
             title: '商户名', dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true, width: ProColumnsOperationConstant.width["2"],
         }, {
-            title: '商户名', dataIndex: 'merchantId', key: 'merchantId', valueEnum: merchantListEnum, valueType: 'select', initialValue:  '',
+            title: '商户名', dataIndex: 'merchantId', key: 'merchantId', valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
             hideInTable: true
-        })
+        });
     }
 
     return (
@@ -125,7 +125,7 @@ const PayReceiptTable = () => {
                 selectedRowKeys: selectedList,
                 onChange: onSelectChange,
             }}
-            rowKey={({orderNo})=>orderNo}
+            rowKey={({ orderNo })=>orderNo}
             search={{
                 labelWidth: 'auto',
                 // @ts-ignore
@@ -135,14 +135,14 @@ const PayReceiptTable = () => {
                         <Button onClick={() => {
                             //  form.resetFields();
                             // @ts-ignore
-                            form.setFieldsValue({...initSearchList, createTimeRange: ''})
+                            form.setFieldsValue({ ...initSearchList, createTimeRange: '' });
                             setSearchList(initSearchList);
                         }}>{resetText}</Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const {  createTimeRange, merchantId='', orderNo, phoneNo, status, userName, utr=''} = form.getFieldValue();
+                                const {  createTimeRange, merchantId = '', orderNo, phoneNo, status, userName, utr = '' } = form.getFieldValue();
                                 setSearchList({
                                     ...searchList,
                                     createTimeEnd: createTimeRange ? createTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
@@ -150,7 +150,7 @@ const PayReceiptTable = () => {
                                     status: status === '' ? '' : Number(status),
                                     merchantId, orderNo, phoneNo, userName, utr, pageNum: 1,
 
-                                })
+                                });
                                 form.submit();
                             }}
                         >
@@ -174,8 +174,8 @@ const PayReceiptTable = () => {
             }}
         />
 
-    )
-}
+    );
+};
 
 export default PayReceiptTable;
 

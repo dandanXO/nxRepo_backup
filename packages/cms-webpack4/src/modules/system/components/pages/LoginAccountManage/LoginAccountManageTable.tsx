@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, Modal, Radio, Space, List ,AutoComplete} from 'antd';
+import { Button, Form, Input, Modal, Radio, Space, List ,AutoComplete } from 'antd';
 import { LoginAccountList, GetLoginAccountListRequestQuery } from '../../../api/types/LoginAccountManageTypes/getLoginAccountList';
 import { usePostLogoutMutation, useLazyGetLoginAccountListQuery } from '../../../api/LoginAccountManageApi';
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
@@ -24,35 +24,35 @@ const LoginAccountManageTable = () => {
 
     const initSearchList: GetLoginAccountListRequestQuery = {
         accountNumber: '', ip: '', lastActiveEndTime: '', lastActiveStartTime: '', lastLoginEndTime: '', lastLoginStartTime: '', loginLocation: '', merchantId: '',
-    }
+    };
 
     // state
     const [searchList, setSearchList] = useState<GetLoginAccountListRequestQuery>(initSearchList);
     const [modal, contextHolder] = Modal.useModal();
     const [selectedRow, setSelectedRow] = useState([]);
-    const [buttonDisabled, setButtonDisbaled] = useState(true)
+    const [buttonDisabled, setButtonDisbaled] = useState(true);
     const [expandRow, setExpandRow] = useState([]);
 
 
     const onSelectChange = (selectedRowKeys) => {
-        setButtonDisbaled(selectedRowKeys.length === 0 ? true : false)
-        console.log(selectedRowKeys)
+        setButtonDisbaled(selectedRowKeys.length === 0 ? true : false);
+        console.log(selectedRowKeys);
         setSelectedRow(selectedRowKeys);
     };
 
     const onExpandChange = (expandRowKeys) => {
-        setExpandRow(expandRowKeys)
-    }
+        setExpandRow(expandRowKeys);
+    };
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList, postLogoutIsSuccess])
+    }, [searchList, postLogoutIsSuccess]);
 
     useEffect(() => {
         if (isSuperAdmin) {
             triggerGetMerchantList(null);
-        };
-    }, [isSuperAdmin])
+        }
+    }, [isSuperAdmin]);
 
     const handleLogoutAll = () => {
         modal.confirm({
@@ -61,11 +61,11 @@ const LoginAccountManageTable = () => {
                 const logoutAccounts = currentData
                     .filter(i => selectedRow.includes(i.accountNumber))
                     .map(account => account.tokens)
-                    .reduce((prev, curr) => [...prev, ...curr], [])
+                    .reduce((prev, curr) => [...prev, ...curr], []);
                 postLogout({ tokens: logoutAccounts }).unwrap().then(() => { onSelectChange([]); });
             }
         });
-    }
+    };
 
 
     const handleLogout = (confirmType, record) => {
@@ -78,7 +78,7 @@ const LoginAccountManageTable = () => {
                     .unwrap().then(() => onSelectChange(selectedRow.filter(i => i !== record.accountNumber)));
             }
         });
-    }
+    };
 
 
     const columns: ProColumns<LoginAccountList>[] = [
@@ -102,14 +102,14 @@ const LoginAccountManageTable = () => {
             fieldProps: { placeholder: ['开始时间', '结束时间'], minuteStep: 15, secondStep: 10 }, hideInTable: true, initialValue: ""
         },
 
-    ]
+    ];
 
     if (isSuperAdmin) {
         columns.splice(1, 0, {
             title: '商户名', dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true, width: ProColumnsOperationConstant.width["2"], render: (text) => <CopyText text={text} />
         }, {
             title: '商户名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true }
-        })
+        });
     }
 
     const expandedRowRender = (data) => {
@@ -182,7 +182,7 @@ const LoginAccountManageTable = () => {
                             onClick={() => {
                                 // @ts-ignore
                                 const { merchantId = '', accountNumber, ip, loginLocation, lastActiveTimeRange, lastLoginTimeRange } = form.getFieldValue();
-                                console.log(lastLoginTimeRange)
+                                console.log(lastLoginTimeRange);
                                 setSearchList({
                                     merchantId, accountNumber, ip, loginLocation,
                                     lastActiveEndTime: lastActiveTimeRange[1] ? lastActiveTimeRange[1].format('YYYY-MM-DD HH:mm:ss') : '',
@@ -212,7 +212,7 @@ const LoginAccountManageTable = () => {
 
         </ProTable>
     );
-}
+};
 
 export default LoginAccountManageTable;
 

@@ -1,12 +1,12 @@
 import React from "react";
 import Form from "antd/es/form";
-import {Select, Typography, Input, Collapse, Space} from "antd/es";
+import { Select, Typography, Input, Collapse, Space } from "antd/es";
 const { Panel } = Collapse;
 const { Text } = Typography;
 const { Option } = Select;
-import {AdminForm, AdminFormProps} from "../../../../shared/components/common/AdminForm";
-import {Switch} from "antd";
-import {AppConfiguration} from "../../../services/appManage/domain/AppConfiguration";
+import { AdminForm, AdminFormProps } from "../../../../shared/components/common/AdminForm";
+import { Switch } from "antd";
+import { AppConfiguration } from "../../../services/appManage/domain/AppConfiguration";
 import "./style.less";
 
 type AppManageFormProps = {
@@ -34,7 +34,7 @@ export const AppManageForm = (props: AppManageFormProps) => {
             </Form.Item>
 
             <Form.Item label="PackageID" name={"packageId"} rules={[{ required: true }]}
-               extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
+                extra={"设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。"}
             >
                 <Input placeholder={"PackageID"} disabled={props.isEdit}/>
             </Form.Item>
@@ -64,11 +64,11 @@ export const AppManageForm = (props: AppManageFormProps) => {
                         </Form.Item>
 
                         <Input.Group>
-                            <Form.Item name="showPartnership" label="显示合作伙伴开关" valuePropName="checked" style={{marginRight: 20}} colon={false}>
+                            <Form.Item name="showPartnership" label="显示合作伙伴开关" valuePropName="checked" style={{ marginRight: 20 }} colon={false}>
                                 <Switch checkedChildren="是" unCheckedChildren="否"/>
                             </Form.Item>
 
-                            <Form.Item name={"partnershipUrl"} style={{ width: 400}}>
+                            <Form.Item name={"partnershipUrl"} style={{ width: 400 }}>
                                 <Input placeholder={"合作伙伴H5 URL"} disabled={hasPartnershipUrl}/>
                             </Form.Item>
                         </Input.Group>
@@ -100,5 +100,5 @@ export const AppManageForm = (props: AppManageFormProps) => {
             </Collapse>
 
         </AdminForm>
-    )
-}
+    );
+};

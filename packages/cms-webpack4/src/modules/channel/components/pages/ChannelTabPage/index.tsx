@@ -1,14 +1,14 @@
 import AdminPage from "../../../../shared/components/common/AdminPage";
-import {Tabs} from "antd";
-import {ChannelSettingTabPage} from "./ChannelSettingTab";
-import {ChannelSettingTagTabPage} from "./ChannelSettingTagTab";
-import {useState} from "react";
+import { Tabs } from "antd";
+import { ChannelSettingTabPage } from "./ChannelSettingTab";
+import { ChannelSettingTagTabPage } from "./ChannelSettingTagTab";
+import { useState } from "react";
 
 export const ChannelTabPage = () => {
     const [activeKey, setActiveKey] = useState("channel");
     const tabs = [
-        { key: 'channel', label: '渠道配置列表', children: <ChannelSettingTabPage active={activeKey === "channel"}/>, forceRender: false},
-        { key: 'channel-tag', label: '渠道配置标签管理', children: <ChannelSettingTagTabPage active={activeKey === "channel-tag"}/>, forceRender: false},
+        { key: 'channel', label: '渠道配置列表', children: <ChannelSettingTabPage active={activeKey === "channel"}/>, forceRender: false },
+        { key: 'channel-tag', label: '渠道配置标签管理', children: <ChannelSettingTagTabPage active={activeKey === "channel-tag"}/>, forceRender: false },
     ];
     return (
         <AdminPage
@@ -23,13 +23,13 @@ export const ChannelTabPage = () => {
                 },
                 self: {
                     path: "",
-                    breadcrumbName:"渠道配置"
+                    breadcrumbName: "渠道配置"
                 }
             }}
         >
             <Tabs items={tabs} onChange={(activeKey) => {
-                setActiveKey(activeKey)
+                setActiveKey(activeKey);
             }}/>
         </AdminPage>
-    )
-}
+    );
+};

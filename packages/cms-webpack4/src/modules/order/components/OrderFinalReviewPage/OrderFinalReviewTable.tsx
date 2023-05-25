@@ -11,12 +11,12 @@ import { OrderReviewTypes } from '../../api/types/domain/OrderReviewTypes';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { selectRandomRows } from '../../utils/selectRandomRows';
 import CopyText from '../../../shared/components/other/CopyText';
-import {ProColumnsOperationConstant} from "../../../shared/components/common/ProColumnsOperationConstant";
+import { ProColumnsOperationConstant } from "../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
 import useGetProviderEnum from '../../../shared/hooks/common/useGetProviderEnum';
-import {ConstantRiskRankEnum} from "../../../shared/constants/constantRiskRankEnum";
+import { ConstantRiskRankEnum } from "../../../shared/constants/constantRiskRankEnum";
 const OrderFinalReviewTable = () => {
 
 
@@ -38,13 +38,13 @@ const OrderFinalReviewTable = () => {
     const initSearchList: GetOrderReviewListRequestQuerystring = {
         merchantId: "", addEndTime: "", addStartTime: "", appName: "", applyChannel: "", oldMember: "", orderNo: "",
         phoneNo: "", productName: "", provider: "", riskRank: "", userName: "", pageNum: 1, pageSize: 10
-    }
+    };
 
     // state
     const [orderReviewList, setOrderReviewList] = useState<GetOrderReviewListProps>({ records: [] });
     const [modal, contextHolder] = Modal.useModal();
     const [errorModal, errorContextHolder] = Modal.useModal();
-    const [buttonDisabled, setButtonDisbaled] = useState(true)
+    const [buttonDisabled, setButtonDisbaled] = useState(true);
     const [randomInputValue, setRandomInputValue] = useState<number | string>("");
     const { searchList, setSearchList, handleToDetailPage, searchParams, selectedList, setSelectedList } = usePageSearchParams({ searchListParams: initSearchList });
     // redux
@@ -52,49 +52,49 @@ const OrderFinalReviewTable = () => {
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList,postOrderReviewIsSuccess])
+    }, [searchList,postOrderReviewIsSuccess]);
 
     useEffect(() => {
         if(isSuperAdmin){
             triggerGetMerchantList(null);
             triggerGetChannelList(null);
             triggerGetProviderList(null);
-        };
-    }, [isSuperAdmin])
+        }
+    }, [isSuperAdmin]);
 
     useEffect(() => {
         setButtonDisbaled(selectedList.length > 0 ? false : true);
         setRandomInputValue(selectedList.length === 0 ? "" : randomInputValue);
-    }, [selectedList])
+    }, [selectedList]);
 
     useEffect(() => {
         if (currentData !== undefined) {
-            setOrderReviewList(currentData)
+            setOrderReviewList(currentData);
         }
-    }, [currentData])
+    }, [currentData]);
 
 
     const handleToUserDetail = (userId, orderId, orderNo) => {
         history.push(`order-final-review-detail/${userId}/${orderId}/${orderNo}`);
-        handleToDetailPage('/order-final-review-detail', '/order-final-review', selectedList)
-    }
+        handleToDetailPage('/order-final-review-detail', '/order-final-review', selectedList);
+    };
 
     const pageOnChange = (current, pageSize) => {
-        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
-    }
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
+    };
 
     const onSelectChange = (selectedRowKeys) => {
         setSelectedList(selectedRowKeys);
     };
 
     const handleReviewAll = (status) => {
-        const confirmText = { 0: '拒绝', 1: '通过', 2: '拒绝且拉黑', 3: '拒绝' }
-        const reasonText={
-            0:`批次审核不通过`,
-            1:`批次审核通过`,
-            2:'批次审核拒绝且拉黑',
-            3:'批次审核拒绝'
-        }
+        const confirmText = { 0: '拒绝', 1: '通过', 2: '拒绝且拉黑', 3: '拒绝' };
+        const reasonText = {
+            0: `批次审核不通过`,
+            1: `批次审核通过`,
+            2: '批次审核拒绝且拉黑',
+            3: '批次审核拒绝'
+        };
         modal.confirm({
             title: `确认全部订单审核${confirmText[status]}吗？`,
             content: status === 3 ? `审核拒绝后，用戶7天之内无法再申请任何订单。7天后，订单会自动拉回。` : '',
@@ -106,36 +106,36 @@ const OrderFinalReviewTable = () => {
                         errorModal.error({
                             title: 'Error',
                             content: `审核${confirmText[status]}失败`
-                        })
+                        });
                     });
             }
         });
-    }
+    };
 
     const handleRandomInputOnchange = (e) => {
 
         const inputValue = e.target.value;
         if (inputValue === "") {
-            setRandomInputValue("")
+            setRandomInputValue("");
             return;
         }
 
         if (!isNaN(inputValue)) {
             setRandomInputValue(
                 inputValue > 100 ? 100 :
-                inputValue < 0 ? 0 :
-                Number(inputValue).toFixed()
-            )
+                    inputValue < 0 ? 0 :
+                        Number(inputValue).toFixed()
+            );
         } else {
             setRandomInputValue(0);
         }
-    }
+    };
 
     const handleSelectRandomRows = () => {
         const selectArray = selectRandomRows(orderReviewList?.records, randomInputValue, 'orderNo');
-        if (!selectArray) return
+        if (!selectArray) return;
         onSelectChange(selectArray);
-    }
+    };
 
 
     const columns: ProColumns<OrderReviewTypes>[] = [
@@ -148,9 +148,9 @@ const OrderFinalReviewTable = () => {
             ],
             width: ProColumnsOperationConstant.width["1"],
         },
-        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" , render: (text) => <CopyText text={text} />},
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" , render: (text) => <CopyText text={text} />},
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" , render: (text) => <CopyText text={text} />},
+        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: searchParams.orderNo || "" , render: (text) => <CopyText text={text} /> },
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || "" , render: (text) => <CopyText text={text} /> },
+        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || "" , render: (text) => <CopyText text={text} /> },
         {
             title: '老客下单', dataIndex: 'oldMember', valueType: 'select', key: 'oldMember', initialValue: searchParams.oldMember || "",
             valueEnum: {
@@ -159,7 +159,7 @@ const OrderFinalReviewTable = () => {
                 false: { text: '否' },
             },
         },
-        { title: 'APP名称', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} />},
+        { title: 'APP名称', dataIndex: 'appName',  key: 'appName', initialValue: searchParams.appName || "" , render: (text) => <CopyText text={text} /> },
         { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: searchParams.productName || "", render: (text) => <CopyText text={text} />  },
         { title: '风控标签', dataIndex: 'riskRank', valueType: 'select', key: 'riskRank', valueEnum: ConstantRiskRankEnum, initialValue: searchParams.riskRank || "" },
         {
@@ -180,16 +180,16 @@ const OrderFinalReviewTable = () => {
                     : [moment(searchParams.searchList.addStartTime), moment(searchParams.searchList.addEndTime)]
         },
 
-    ]
+    ];
 
     if (isSuperAdmin) {
         columns.splice(1, 0, {
             title: '商户名', dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true, width: ProColumnsOperationConstant.width["2"]
         }, {
             title: '商户名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, valueEnum: merchantListEnum, valueType: 'select', initialValue: searchParams.merchantId || '',
-        })
-        columns.splice(6, 0, { title: '申请渠道', dataIndex: 'applyChannel', valueType: 'select', key: 'applyChannel', valueEnum: channelListEnum, initialValue: searchParams.applyChannel || '' })
-        columns.splice(10, 0, { title: '风控应用', dataIndex: 'provider', valueType: 'select', key: 'provider', valueEnum: providerListEnum, initialValue: searchParams.provider || '' })
+        });
+        columns.splice(6, 0, { title: '申请渠道', dataIndex: 'applyChannel', valueType: 'select', key: 'applyChannel', valueEnum: channelListEnum, initialValue: searchParams.applyChannel || '' });
+        columns.splice(10, 0, { title: '风控应用', dataIndex: 'provider', valueType: 'select', key: 'provider', valueEnum: providerListEnum, initialValue: searchParams.provider || '' });
     }
     return (
         <ProTable<OrderReviewTypes>
@@ -200,7 +200,7 @@ const OrderFinalReviewTable = () => {
                 selectedRowKeys: selectedList,
                 onChange: onSelectChange,
             }}
-            rowKey={({orderNo})=>orderNo}
+            rowKey={({ orderNo })=>orderNo}
             headerTitle={
                 <Space>
                     <Button key="passButton" type="primary" ghost disabled={buttonDisabled} onClick={() => handleReviewAll(1)}>全部通过</Button>
@@ -248,7 +248,7 @@ const OrderFinalReviewTable = () => {
                             type={'primary'}
                             onClick={() => {
                                 // @ts-ignore
-                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantId='' } = form.getFieldValue();
+                                const { phoneNo, applyChannel, riskRank, userName, addTimeRange,appName,oldMember,orderNo,productName,provider,merchantId = '' } = form.getFieldValue();
                                 // const merchant = merchantName ? merchantListEnum?.get(merchantName)?.text : '';
                                 setSearchList({
                                     ...searchList,
@@ -291,7 +291,7 @@ const OrderFinalReviewTable = () => {
 
         </ProTable>
     );
-}
+};
 
 export default OrderFinalReviewTable;
 

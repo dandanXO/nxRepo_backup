@@ -20,10 +20,10 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
         const errorKeys = Object.keys(props.customAntFormFieldError);
         const removeRepeatLoanError = errorKeys.filter((i) => i.indexOf("repeatLoan") < 0);
         const errorList = removeRepeatLoanError.reduce((prev, curr) => {
-          return { ...prev, [curr]: props.customAntFormFieldError[curr] };
+            return { ...prev, [curr]: props.customAntFormFieldError[curr] };
         }, {});
         props.setCustomAntFormFieldError(errorList);
-    }
+    };
 
     const [modal, contextHolder] = Modal.useModal();
 
@@ -31,7 +31,7 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
         resetErrorMessage();
         const { repeatLoan } = props.form.getFieldsValue();
         const isLoanFormNotFilled = repeatLoan.map(loan => {
-            return Object.keys(loan).filter(field => field !== 'id').every(i => loan[i] === undefined)
+            return Object.keys(loan).filter(field => field !== 'id').every(i => loan[i] === undefined);
         }).every(i => i === true);
         if (!isLoanFormNotFilled) {
             modal.confirm({
@@ -44,12 +44,12 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
                     props.form.setFieldsValue({ oldRankStrategy });
                     props.setCustomAntFormFieldError(props.customAntFormFieldError);
                 }
-            })
+            });
         }
-    }
+    };
     return (
         <React.Fragment>
-            <Divider style={{color:'#00000073'}} orientation="left">复借配置</Divider>
+            <Divider style={{ color: '#00000073' }} orientation="left">复借配置</Divider>
             <Form.Item label={"分数类型"} name={"oldRankStrategy"} required>
                 <Radio.Group onChange={oldRankStratOnChange} >
                     <Radio value={'KEY_VALUE'}>值</Radio>
@@ -92,7 +92,7 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
             </Form.Item>
             {contextHolder}
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default RepeatLoanSection;

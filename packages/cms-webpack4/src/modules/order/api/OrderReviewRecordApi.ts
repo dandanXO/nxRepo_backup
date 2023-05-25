@@ -13,7 +13,7 @@ const OrderReviewRecordApi = API.injectEndpoints({
         }),
 
     })
-})
+});
 export const {
     useLazyGetOrderReviewRecordListQuery,
 } = OrderReviewRecordApi;

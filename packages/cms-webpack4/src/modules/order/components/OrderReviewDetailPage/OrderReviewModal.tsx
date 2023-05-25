@@ -22,7 +22,7 @@ const OrderReviewModal = ((props: OrderReviewModalProps) => {
         { label: '审核通过', value: 1 },
         { label: '拒绝且拉黑', value: 2 },
         { label: '拒绝7天', value: 3 },
-    ]
+    ];
 
 
     return (
@@ -42,8 +42,8 @@ const OrderReviewModal = ((props: OrderReviewModalProps) => {
                 </Form.Item>
             </Form>
         </Modal>
-    )
-})
+    );
+});
 
 export default OrderReviewModal;
 

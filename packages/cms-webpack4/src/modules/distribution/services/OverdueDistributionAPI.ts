@@ -1,4 +1,4 @@
-import {API} from "../../shared/api";
+import { API } from "../../shared/api";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
@@ -59,7 +59,7 @@ export const OverdueDistributionAPI = API.injectEndpoints({
         }),
 
     })
-})
+});
 
 export const {
     useLazyGetOverdueSummaryQuery,
@@ -68,4 +68,4 @@ export const {
     usePostOverdueDistributionSelectedMutation,
     usePostOverdueDistributionStageMutation,
     useLazyGetOverdueCollectorQuery,
-} = OverdueDistributionAPI
+} = OverdueDistributionAPI;

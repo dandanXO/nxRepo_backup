@@ -1,9 +1,9 @@
 // NOTICE: 以下會儲存在資料庫，異動得請後端 執行 migrating，盡量固定
-import {AdTemplateCard} from "../../index";
+import { AdTemplateCard } from "../../index";
 import styled from "styled-components";
 import MainCardImg from "./promotions_bg@2x.png";
-import {AdContainer} from "../AdContainer";
-import {onClickToAction} from "../AdClick";
+import { AdContainer } from "../AdContainer";
+import { onClickToAction } from "../AdClick";
 
 // NOTE: Data
 export interface IAdTemplate1Data {
@@ -29,7 +29,7 @@ export interface AdTemplate1Card extends AdTemplateCard {
 
 const AdTemplateContainer = styled(AdContainer)`
   overflow: scroll;
-`
+`;
 const ContainerContent = styled.div`
   display: flex;
   flex-direction: row;
@@ -45,12 +45,12 @@ const BaseAdTemplate1BrandCardUI = styled.div`
   width: 120px;
   height: 120px;
   text-align: center;
-`
+`;
 const StyledAdTemplate1BrandCardUI = styled(BaseAdTemplate1BrandCardUI)`
   //background: #ec606a;
   background-image: url(${MainCardImg});
   background-size: 120px 120px;
-`
+`;
 const StyledBrandTitle = styled.div`
   color: #ffffff;
   font-size: 11px;
@@ -71,7 +71,7 @@ const StyledPrice = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-`
+`;
 const StyledBrandPriceUnit = styled.div`
   color: #ffffff;
   font-size: 14px;
@@ -88,7 +88,7 @@ const StyledBrandDescription = styled.div`
 
 const StyledAdTemplate1CardUI = styled(BaseAdTemplate1BrandCardUI)`
   background: #ffffff;
-`
+`;
 const StyledTitle = styled.div`
   color: #000000;
   font-size: 11px;
@@ -132,17 +132,17 @@ interface IAdTemplate1BrandCardUI {
 }
 
 const AdTemplate1BrandCardUI = (props: IAdTemplate1BrandCardUI) => {
-  return (
-    <StyledAdTemplate1BrandCardUI>
-      <StyledBrandTitle>{props.data?.title}</StyledBrandTitle>
-      <StyledPrice>
-        <StyledBrandPriceUnit>{props.data?.priceUnit}</StyledBrandPriceUnit>
-        <StyledBrandPriceValue>{props.data?.price}</StyledBrandPriceValue>
-      </StyledPrice>
-      <StyledBrandDescription>{props.data?.description}</StyledBrandDescription>
-    </StyledAdTemplate1BrandCardUI>
-  )
-}
+    return (
+        <StyledAdTemplate1BrandCardUI>
+            <StyledBrandTitle>{props.data?.title}</StyledBrandTitle>
+            <StyledPrice>
+                <StyledBrandPriceUnit>{props.data?.priceUnit}</StyledBrandPriceUnit>
+                <StyledBrandPriceValue>{props.data?.price}</StyledBrandPriceValue>
+            </StyledPrice>
+            <StyledBrandDescription>{props.data?.description}</StyledBrandDescription>
+        </StyledAdTemplate1BrandCardUI>
+    );
+};
 
 // NOTE:
 interface IAdTemplate1CardUI {
@@ -150,15 +150,15 @@ interface IAdTemplate1CardUI {
   onClick: any;
 }
 const AdTemplate1CardUI = (props: IAdTemplate1CardUI) => {
-  return (
-    <StyledAdTemplate1CardUI onClick={props.onClick}>
-      <StyledTitle>{props.data?.title}</StyledTitle>
-      <StyledDescription1>{props.data?.description1}</StyledDescription1>
-      <StyledDescription2>{props.data?.description2}</StyledDescription2>
-      <StyledActionName>{props.data?.actionName}</StyledActionName>
-    </StyledAdTemplate1CardUI>
-  )
-}
+    return (
+        <StyledAdTemplate1CardUI onClick={props.onClick}>
+            <StyledTitle>{props.data?.title}</StyledTitle>
+            <StyledDescription1>{props.data?.description1}</StyledDescription1>
+            <StyledDescription2>{props.data?.description2}</StyledDescription2>
+            <StyledActionName>{props.data?.actionName}</StyledActionName>
+        </StyledAdTemplate1CardUI>
+    );
+};
 
 
 
@@ -168,20 +168,20 @@ interface IAdTemplate1 {
 }
 
 export const AdTemplate1 = (props: IAdTemplate1) => {
-    console.log("AdTemplate1: ", props)
+    console.log("AdTemplate1: ", props);
     return (
         <AdTemplateContainer>
             <ContainerContent>
                 <AdTemplate1BrandCardUI data={props.data?.brandCard}/>
                 {props.data?.cards?.map((data, index) => {
                     return <AdTemplate1CardUI key={index} data={data}
-                          onClick={() => onClickToAction({
-                              action: data.action,
-                              actionUrl: data.actionUrl,
-                          })}
-                    />
+                        onClick={() => onClickToAction({
+                            action: data.action,
+                            actionUrl: data.actionUrl,
+                        })}
+                    />;
                 })}
             </ContainerContent>
         </AdTemplateContainer>
-    )
-}
+    );
+};

@@ -41,11 +41,11 @@ i18next
         // debug: true,
     }, (err, t) => {
         if(err) {
-            console.log("i18next-err:", err)
+            console.log("i18next-err:", err);
         }
-        console.log("i18next-callback:", t('Welcome to CMS', {ns: "common"}));
-        console.log("i18next-callback:", t('Welcome', {ns: "module1"}));
-        console.log("i18next-callback:", t('Welcome', {ns: "module2"}));
+        console.log("i18next-callback:", t('Welcome to CMS', { ns: "common" }));
+        console.log("i18next-callback:", t('Welcome', { ns: "module1" }));
+        console.log("i18next-callback:", t('Welcome', { ns: "module2" }));
     });
 
 // NOTE: HOW to change language

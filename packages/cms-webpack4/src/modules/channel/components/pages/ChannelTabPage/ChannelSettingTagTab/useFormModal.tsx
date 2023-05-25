@@ -1,7 +1,7 @@
-import {ChannelTagSchemaEntity, IChannelTagSchema} from "../../../../domain/entity/ChannelTagSchemaEntity";
-import {useCallback, useMemo, useState} from "react";
-import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import {FormInstance} from "antd";
+import { ChannelTagSchemaEntity, IChannelTagSchema } from "../../../../domain/entity/ChannelTagSchemaEntity";
+import { useCallback, useMemo, useState } from "react";
+import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import { FormInstance } from "antd";
 
 export interface FormModalHookProps {
     showModalContent: {
@@ -26,15 +26,15 @@ export const useFormModal = (props: FormModalHookProps) => {
     const formInitialValues = useMemo(() => {
         // NOTE: select and switch need initialValue if you want to select one
         return {} as DeepPartial<{}>;
-    }, [])
+    }, []);
 
     // Form - onFieldsChange
     const onFormFieldsChange = useCallback((changedFields, allFields) => {
         userEditingChannelSettingUseCase(changedFields);
-    }, [])
+    }, []);
 
     // Form - Validation
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>();
 
     // NOTE: User is editing ChannelSetting
     const userEditingChannelSettingUseCase = useCallback((changedFields) => {
@@ -56,12 +56,12 @@ export const useFormModal = (props: FormModalHookProps) => {
             ...customAntFormFieldError,
             ...validData.fieldsMessage,
         });
-    }, [])
+    }, []);
 
     // Form - Finish
     const onFormFinish = useCallback(() => {
         userEditedChannelSettingUseCase();
-    }, [props.showModalContent.isEdit, props.editID])
+    }, [props.showModalContent.isEdit, props.editID]);
 
     // NOTE: user Edited ChannelSetting
     const userEditedChannelSettingUseCase = useCallback(() => {
@@ -90,15 +90,15 @@ export const useFormModal = (props: FormModalHookProps) => {
             props.setShowModalContent({
                 show: false,
                 isEdit: false,
-            })
+            });
 
             // Reset TableList
             props.triggerGetList && props.triggerGetList(null);
 
             props.formSuccessCallback && props.formSuccessCallback();
 
-        })
-    }, [props.showModalContent.isEdit, props.editID])
+        });
+    }, [props.showModalContent.isEdit, props.editID]);
 
     // NOTE: System validate ChannelSetting
     const systemValidateChannelSettingUseCase = useCallback(() => {
@@ -110,7 +110,7 @@ export const useFormModal = (props: FormModalHookProps) => {
             if (fields[key] === undefined) {
                 props.form.setFieldValue(key, "");
             }
-        })
+        });
 
         // NOTICE: need
         const data = channelTagSchemaEntity.transformToEntityData(fields);
@@ -121,13 +121,13 @@ export const useFormModal = (props: FormModalHookProps) => {
             ...validData.fieldsMessage,
         });
         return validData.isEntityValid;
-    }, [])
+    }, []);
 
     // NOTICE: Modal - Create, Edit
     // Modal - OK
     const onModalOk = useCallback(() => {
         props.form.submit();
-    }, [props.form])
+    }, [props.form]);
 
     // Modal - Close
     const onCloseModal = useCallback(() => {
@@ -145,5 +145,5 @@ export const useFormModal = (props: FormModalHookProps) => {
         onModalOk,
         onCloseModal,
 
-    }
-}
+    };
+};

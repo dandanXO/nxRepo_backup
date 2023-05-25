@@ -28,7 +28,7 @@ const NewCustomersDailyConversionRatesTable = () => {
     const initDayRange = [moment().subtract(6, 'days'), moment()];
     const initSearchList: GetNewCustomersDailyConversionRatesRequestQuerystring = {
         channelId: '', endTime: initDayRange[1].format('YYYY-MM-DD 23:59:59'), merchantId: '', startTime: initDayRange[0].format('YYYY-MM-DD 00:00:00'), size: 10, page: 0
-    }
+    };
 
     // state
     const [searchList, setSearchList] = useState<GetNewCustomersDailyConversionRatesRequestQuerystring>(initSearchList);
@@ -36,7 +36,7 @@ const NewCustomersDailyConversionRatesTable = () => {
 
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList])
+    }, [searchList]);
 
     useEffect(() => {
         if (isSuperAdmin) {
@@ -49,8 +49,8 @@ const NewCustomersDailyConversionRatesTable = () => {
         return <div>
             <div>{text}</div>
             <div>({rate})</div>
-        </div>
-    }
+        </div>;
+    };
 
     const columns: ProColumns<NewCustomersDailyConversionRates>[] = [
 
@@ -60,12 +60,12 @@ const NewCustomersDailyConversionRatesTable = () => {
         },
         { title: '日期', dataIndex: 'day', key: 'day', hideInSearch: true },
         { title: '渠道来源', dataIndex: 'channelId', key: 'channelId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: channelListEnum, fieldProps: { showSearch: true } },
-    ]
+    ];
 
     if (isSuperAdmin) {
         columns.splice(0, 0, {
             title: '商户名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true }
-        })
+        });
     }
 
     const customColumns = [
@@ -133,18 +133,18 @@ const NewCustomersDailyConversionRatesTable = () => {
                 { title: '还款转化率', dataIndex: 'repayRate', key: 'repayRate', hideInSearch: true, tooltip: '还款转化率=新客还款量/新客放款量' },
             ]
         },
-    ]
+    ];
     const formRef = useRef<ProFormInstance>();
     const getSearchParams = () => {
         // @ts-ignore
-        const { merchantId = '', channelId = '', dateRange='' } = formRef.current.getFieldValue();
+        const { merchantId = '', channelId = '', dateRange = '' } = formRef.current.getFieldValue();
         return {
             merchantId,
             channelId,
             endTime: dateRange ? dateRange[1].format('YYYY-MM-DD 23:59:59') : '',
             startTime: dateRange ? dateRange[0].format('YYYY-MM-DD 00:00:00') : '',
-        }
-    }
+        };
+    };
 
     const [selectedTags, setSelectedTags] = useState<string[]>(customColumns.map(i => i['key']));
     const [tagColumns, setTagColumns] = useState<Object[]>(customColumns);
@@ -153,14 +153,14 @@ const NewCustomersDailyConversionRatesTable = () => {
         const nextSelectedTags = checked
             ? customColumns.map(i => i['key']).filter((t) => [...selectedTags, tag].includes(t))
             : selectedTags.filter((t) => t !== tag);
-        const selectedColumns = customColumns.filter(i => nextSelectedTags.indexOf(i.key) > -1)
-        setTagColumns(selectedColumns)
+        const selectedColumns = customColumns.filter(i => nextSelectedTags.indexOf(i.key) > -1);
+        setTagColumns(selectedColumns);
         setSelectedTags(nextSelectedTags);
     };
 
     const pageOnChange = (current, pageSize) => {
-        setSearchList({ ...searchList, page: current-1, size: pageSize })
-    }
+        setSearchList({ ...searchList, page: current - 1, size: pageSize });
+    };
 
 
 
@@ -169,7 +169,7 @@ const NewCustomersDailyConversionRatesTable = () => {
         const searchQueryString = queryString.stringify(searchParams);
         window.open(`/hs/admin/statistics/dayRegisterStatisticDownLoad?${searchQueryString}`);
         setSearchList({ ...searchList, ...searchParams, page: 0 });
-    }
+    };
 
     return (
 
@@ -189,7 +189,7 @@ const NewCustomersDailyConversionRatesTable = () => {
                         {':'}
                         <div>
                             {customColumns.map((tag, index) => {
-                                if (tag.key === 'registerCount') return
+                                if (tag.key === 'registerCount') return;
 
                                 let tagKey = tag.title;
                                 if (tag.key === "otpCount") {
@@ -206,7 +206,7 @@ const NewCustomersDailyConversionRatesTable = () => {
                                     >
                                         {tagKey}
                                     </CheckableTag>
-                                )
+                                );
                             })}
                         </div>
                     </Space>
@@ -261,7 +261,7 @@ const NewCustomersDailyConversionRatesTable = () => {
 
         </ProTable>
     );
-}
+};
 
 export default NewCustomersDailyConversionRatesTable;
 

@@ -1,22 +1,22 @@
-import {useDispatch, useSelector} from "react-redux";
-import {selectSearchParams, setSearchParams,setSelectedRow} from "./modules/shared/utils/searchParamsSlice";
-import React, {useEffect} from "react";
-import {ConfigProvider} from "antd";
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectSearchParams, setSearchParams,setSelectedRow } from "./modules/shared/utils/searchParamsSlice";
+import React, { useEffect } from "react";
+import { ConfigProvider } from "antd";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import IndexPage from "./modules/shared/components/pages/IndexPage";
-import {MerchantPage} from "./modules/product/components/pages/MerchantPage";
-import {ProductPage} from "./modules/product/components/pages/ProductPage";
+import { MerchantPage } from "./modules/product/components/pages/MerchantPage";
+import { ProductPage } from "./modules/product/components/pages/ProductPage";
 import UserPage from "./modules/user/components/pages/UserPage";
-import {RiskSettingPage} from "./modules/risk/components/pages/RiskSettingPage";
+import { RiskSettingPage } from "./modules/risk/components/pages/RiskSettingPage";
 import UserInfoPage from "./modules/user/components/pages/UserInfoPage";
-import {createHashHistory} from "history";
-import {ChannelTabPage} from "./modules/channel/components/pages/ChannelTabPage";
+import { createHashHistory } from "history";
+import { ChannelTabPage } from "./modules/channel/components/pages/ChannelTabPage";
 import UserReviewPage from "./modules/user/components/pages/UserReviewPage";
 import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPage";
 import UserReviewRecordPage from "./modules/user/components/pages/UserReviewRecordPage";
 import WhiteListPage from "./modules/user/components/pages/WhiteListPage";
 import BlackListPage from "./modules/user/components/pages/BlackListPage";
-import {AppManagePage} from "./modules/app/components/pages/AppManagePage";
+import { AppManagePage } from "./modules/app/components/pages/AppManagePage";
 import ConfigManagePage from "./modules/system/components/pages/ConfigManagePage";
 import OrderPage from "./modules/order/components/OrderPage";
 import OrderDetailPage from "./modules/order/components/OrderDetailPage";
@@ -26,11 +26,11 @@ import OrderFinalReviewPage from "./modules/order/components/OrderFinalReviewPag
 import OrderFinalReviewDetailPage from "./modules/order/components/OrderFinalReviewDetailPage";
 import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordPage";
 import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
-import {ActivityAdsAdminPage} from "./modules/diversion/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
+import { ActivityAdsAdminPage } from "./modules/diversion/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
 import PayReceiptPage from "./modules/financial/components/PayReceiptPage";
-import DailyRiskControlPage from "./modules/statistics/components/pages/DailyRiskControlPage"
-import {TodayDistributionPage} from "./modules/distribution/pages/TodayDistributionPage";
-import {OverdueDistributionPage} from "./modules/distribution/pages/OverdueDistributionPage";
+import DailyRiskControlPage from "./modules/statistics/components/pages/DailyRiskControlPage";
+import { TodayDistributionPage } from "./modules/distribution/pages/TodayDistributionPage";
+import { OverdueDistributionPage } from "./modules/distribution/pages/OverdueDistributionPage";
 import {
     NewCustomerRiskControlRepaymentRatePage
 } from "./modules/statistics/components/pages/NewCustomerRiskControlRepaymentRatePage";
@@ -41,10 +41,10 @@ const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
     basename: Basename,
-})
+});
 
 export const AppRouter = () => {
-    const {pathname,previousPathname} = useSelector(selectSearchParams);
+    const { pathname,previousPathname } = useSelector(selectSearchParams);
     const dispatch = useDispatch();
     useEffect(() => {
         // Listen for changes to the current location.
@@ -52,14 +52,14 @@ export const AppRouter = () => {
 
             if (location.pathname.indexOf(pathname) + location.pathname.indexOf(previousPathname) <= -2) {
                 dispatch(setSearchParams({}));
-                dispatch(setSelectedRow([]))
+                dispatch(setSelectedRow([]));
             }
 
-        })
+        });
         return () => {
             unlisten();
-        }
-    })
+        };
+    });
 
     return (
         <ConfigProvider prefixCls="ant4">
@@ -108,7 +108,7 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/order-review-detail/:userId/:orderId/:orderNo" component={OrderReviewDetailPage} />
                     {/*// @ts-ignore*/}
-                     {/*// @ts-ignore*/}
+                    {/*// @ts-ignore*/}
                     <Route path="/order-final-review" component={OrderFinalReviewPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/order-final-review-detail/:userId/:orderId/:orderNo" component={OrderFinalReviewDetailPage} />
@@ -138,5 +138,5 @@ export const AppRouter = () => {
             </Router>
 
         </ConfigProvider>
-    )
-}
+    );
+};

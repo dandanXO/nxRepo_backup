@@ -1,6 +1,6 @@
 import { API } from "../../shared/api";
 import { GetNewCustomersDailyConversionRatesRequestQuerystring, GetNewCustomersDailyConversionRatesProps } from "./types/NewCustomersDailyConversionRatesTypes/getNewCustomersDailyConversionRates";
-import { PostNewCustomersDailyConversionRatesDownloadRequestBody } from './types/NewCustomersDailyConversionRatesTypes/postNewCustomersDailyConversionRatesDownload'
+import { PostNewCustomersDailyConversionRatesDownloadRequestBody } from './types/NewCustomersDailyConversionRatesTypes/postNewCustomersDailyConversionRatesDownload';
 const NewCustomersDailyConversionRatesApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
@@ -23,7 +23,7 @@ const NewCustomersDailyConversionRatesApi = API.injectEndpoints({
             }),
         }),
     })
-})
+});
 export const {
     useLazyGetNewCustomersDailyConversionRatesQuery,
     usePostNewCustomersDailyConversionRatesDownloadMutation

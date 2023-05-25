@@ -10,20 +10,20 @@ const useGetProviderEnum = () => {
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [providerListEnum, setProviderListEnum] = useState(null)
+    const [providerListEnum, setProviderListEnum] = useState(null);
 
     useEffect(() => {
         if (providerListData) {
-            let providerList = new Map().set('', { text: '不限' });
+            const providerList = new Map().set('', { text: '不限' });
             providerListData && providerListData?.map((i) => {
-                return providerList.set(i.code, { text: i.displayName })
+                return providerList.set(i.code, { text: i.displayName });
             });
-            setProviderListEnum(providerList)
+            setProviderListEnum(providerList);
         }
 
-    }, [isProviderListDataSuccess])
+    }, [isProviderListDataSuccess]);
 
-    return { triggerGetProviderList, providerListEnum }
-}
+    return { triggerGetProviderList, providerListEnum };
+};
 
 export default useGetProviderEnum;
