@@ -12,7 +12,7 @@ import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/
 import { ProductTypes } from "../../../../service/product/domain/productTypes";
 import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
 import {
-    BaseRiskRank,
+    BaseRiskRank, ProductInterestRate, ProductInterestRatesContent,
     productInterestRatesContentKey
 } from "../../../../service/product/domain/productInterestRatePair";
 export interface ProductFormModal {
@@ -143,10 +143,10 @@ export const useProductFormModal = (props: ProductFormModal) => {
             form.resetFields();
             setCustomAntFormFieldError(initCustomAntFormFieldError);
         } else {
-            let productInterestRatePairs = productFormData.productInterestRatePairs.reduce((acc, current)=> {
+            let productInterestRatePairs: ProductInterestRate[] = productFormData.productInterestRatePairs.reduce((acc, current)=> {
                 if (current.riskRank === 'REJECT') return acc;
                 const groupIndex = productInterestRatesConvertToFrontendMap[current.riskRank].sort
-                let interestRates = current[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => [
+                let interestRates: ProductInterestRatesContent[] = current[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => [
                     ...interestRatesAcc,
                     {
                         ...interestRatesCurrent,

@@ -10,7 +10,6 @@ import {ProductInterestRatePairsModal} from "./ProductInterestRatePairsModal";
 import {
     validatePreOrPostInterestGroups
 } from "../../../../../../shared/components/other/validatePreOrPostInterestGroups";
-import { productInterestRatePairsInitialValue } from "../index";
 import { CheckCircleFilled, ExclamationCircleOutlined } from "@ant-design/icons";
 import {
     ProductInterestRate,
