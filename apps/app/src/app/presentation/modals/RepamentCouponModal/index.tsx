@@ -35,7 +35,7 @@ const RepamentCouponModal = () => {
         });
     }, []);
 
-    const applicableCouponList = currentData && currentData.length > 0 ? currentData?.filter((i) => i.applicable === false) : [];
+    const applicableCouponList = currentData && currentData.length > 0 ? currentData?.filter((i) => i.applicable === true) : [];
     const unApplicableCouponList = currentData && currentData.length > 0 ? currentData?.filter((i) => i.applicable === false) : [];
     const [checkedCoupon, setCheckedCoupon] = useState(-1);
 
