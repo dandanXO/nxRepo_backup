@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
-import { PageContainer } from '@ant-design/pro-components';
-import { Tabs ,Collapse,List,Form,Button,Input } from 'antd';
-import { ConfigResponse,ConfigList } from '../../../api/types/configManageTypes/getConfigList';
+import { Tabs ,Collapse,List } from 'antd';
+import { ConfigList } from '../../../api/types/configManageTypes/getConfigList';
 import { useLazyGetConfigListQuery } from '../../../api/configManageApi';
 
 import ConfigInput from './components/ConfigInput';
 
 // const { ConfigInput, ConfigSwitch, ConfigTag, ConfigRadio } = ConfigTypes;
-const ConfigManageTab = () => {
-   
+const ConfigManageTab = (): JSX.Element => {
+
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetConfigListQuery({
+    const [triggerGetList, { currentData }] = useLazyGetConfigListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -36,9 +35,9 @@ const ConfigManageTab = () => {
                                 <div  dangerouslySetInnerHTML={{ __html: item.name }}></div>
                                 {/* {item.inputType==="text" && renderConfigTypes(item)} */}
                                 {renderConfigTypes(item)}
-                                 
+
                             </List.Item>
-                            
+
                         );
                     }}
                 />
@@ -52,10 +51,10 @@ const ConfigManageTab = () => {
         // updateSystemData({ key, channelId, value });
         console.log('123132',key, channelId, value);
     };
-   
+
     const renderConfigTypes = (props) => {
         console.log('props', props);
-        const { inputType, key, channelId } = props;
+        const { key } = props;
         const inputProps = {
             ...props,
             // key: key,
@@ -87,7 +86,7 @@ const ConfigManageTab = () => {
 
     const [tabs,setTabs] = useState([]);
 
-    // const tabsList = 
+    // const tabsList =
 
     //   console.log(tabsList)
 

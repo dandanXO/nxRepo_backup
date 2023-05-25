@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Form, InputNumber, Modal, Radio, Space,Tag,Input, } from 'antd';
+import React, {  useState } from "react";
+import { Button, Form,  Space,Input, } from 'antd';
 import { ConfigList } from "../../../../api/types/configManageTypes/getConfigList";
 import { CheckOutlined,CloseOutlined  } from '@ant-design/icons';
 const { TextArea } = Input;
@@ -8,13 +8,13 @@ type ConfigInputProps=ConfigList&{
     inputKey:string;
 }
 
-function ConfigInput(props:ConfigInputProps){
+function ConfigInput(props:ConfigInputProps): JSX.Element {
     const { value,inputType,channelId,saveValue,inputKey } = props;
 
     const [form] = Form.useForm();
     const [isEdit,setIsEdit] = useState(false);
-    
-    const handleOnChange = (e)=>{
+
+    const handleOnChange = ()=>{
         setIsEdit(true);
     };
 

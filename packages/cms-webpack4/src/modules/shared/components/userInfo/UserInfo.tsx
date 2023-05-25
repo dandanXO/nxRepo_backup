@@ -25,7 +25,7 @@ type UserInfoProps = {
 
 
 
-const UserInfo = ({ userId, type }: UserInfoProps) => {
+const UserInfo = ({ userId, type }: UserInfoProps): JSX.Element => {
 
     const adminUserInfo = getAdminUser();
     const collector = adminUserInfo.data.phoneNo;
@@ -50,7 +50,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
         }
     }, [currentData]);
 
-    const { personaInfoVo, userImage, userKycInfoVo, userDevice, emergencyContacts, userThirdInfo, userRiskControlInfo ,userRiskControlInfos } = userDetail;
+    const { personaInfoVo, userImage, userKycInfoVo, userDevice, emergencyContacts, userThirdInfo ,userRiskControlInfos } = userDetail;
     const { channelName = "", phoneNo = "", appName = "", nameTrue = "", gender = "", idcardNo = "", fatherName = "", birth = "", panId = "", email = "", education = "", marriageStatus = "", position = "", salaryRange = "", address = "", bankCardNo = "", ifscCode = "", addTime = "", userSource = "" } = personaInfoVo;
     const { idcardBackPhoto = "", idcardFrontPhoto = "", idcardPortraitPhoto = "", panPhoto = "" } = userImage;
     const { pan = "", idcard = "", isAuth = "", emergency = "", liveness = "", bank = "", kycFinishTime = "" } = userKycInfoVo;
@@ -68,7 +68,7 @@ const UserInfo = ({ userId, type }: UserInfoProps) => {
             width: '60%',
             content: <WaterMark width={250} zIndex={100} content={[collector, moment().format('YYYY-MM-DD-HH:mm:ss')]}
                 fontSize={32} fontColor={warterMarkColor} fontFamily={'Arial Black'}>
-                <img src={img || "-"} width={'100%'} onContextMenu={(e) => e.preventDefault()} />
+                <img alt='avatar' src={img || "-"} width={'100%'} onContextMenu={(e) => e.preventDefault()} />
             </WaterMark>,
             className: 'modalImg'
         });

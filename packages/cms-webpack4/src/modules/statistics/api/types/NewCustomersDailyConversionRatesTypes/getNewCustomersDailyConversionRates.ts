@@ -55,7 +55,10 @@ export interface NewCustomersDailyConversionRates {
     repayRate?: string;                     // 還款转化率
     yysCount?: string;                      // yysCount
     yysRate?: string;                       // yysRate
-
+    submitOrderUserCount: string            // 提交用户数
+    submitOrderUserRate: string             // 提交用户数百分比
+    riskControlUserCount: string            // 外部风控用户数
+    riskControlUserRate: string             // 外部风控用户数百分比
 }
 
 export type GetNewCustomersDailyConversionRatesProps = GetNewCustomersDailyConversionRatesResponse & GetPageableResponse;

@@ -33,5 +33,5 @@ const searchParamsSlice = createSlice({
 });
 
 export const { setSearchParams ,setPathname,setSelectedRow } = searchParamsSlice.actions;
-export const selectSearchParams = (state: RootState) => state.searchParams;
+export const selectSearchParams = (state: RootState): any => state.searchParams;
 export default searchParamsSlice.reducer;

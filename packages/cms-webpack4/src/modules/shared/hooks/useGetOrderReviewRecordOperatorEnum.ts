@@ -1,12 +1,10 @@
-
 import { useEffect, useState } from "react";
 import { useLazyGetOrderReveiwRecordOperatorListQuery } from "../api/operatorListApi";
-import { getIsSuperAdmin } from "../storage/getUserInfo";
 
-const useGetOrderReviewRecordOperatorEnum = () => {
-
-    const isSuperAdmin = getIsSuperAdmin();
-
+const useGetOrderReviewRecordOperatorEnum = (): {
+    triggerGetOperatorList: any,
+    orderReviewRecordOperatorEnum: Record<any, any>
+} => {
 
     // 訂單審核紀錄操作人
     const [triggerGetOperatorList, { currentData: operatorListData, isSuccess }] = useLazyGetOrderReveiwRecordOperatorListQuery({

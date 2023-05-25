@@ -1,5 +1,4 @@
 import React from "react";
-import { FormInstance } from "antd";
 import AdminFormModal from "./AdminFormModal";
 import { ModalContent } from "./AdminTable";
 
@@ -19,7 +18,7 @@ interface AdminFormCustomModalProps {
 
 }
 
-export const AdminFormCustomModal = (props: AdminFormCustomModalProps) => {
+export const AdminFormCustomModal = (props: AdminFormCustomModalProps): JSX.Element => {
 
     return (
         <AdminFormModal

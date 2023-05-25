@@ -1,4 +1,4 @@
-import React, { lazy, useState,useEffect } from "react";
+import React from "react";
 import { Divider, Form, FormInstance, Space, Radio, Tooltip, Modal } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import FirstAndRepeatLoanFormByValue from "./FirstAndRepeatLoanFormByValue";
@@ -7,13 +7,13 @@ import FirstAndRepeatLoanFormByCount from "./FirstAndRepeatLoanFormByCount";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
 
 interface RepeatLoanSectionProps{
-    isEdit:boolean;
-    customAntFormFieldError:CustomAntFormFieldError;
-    setCustomAntFormFieldError:React.Dispatch<React.SetStateAction<Object>>;
+    isEdit: boolean;
+    customAntFormFieldError: CustomAntFormFieldError;
+    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
     form: FormInstance;
 }
 
-const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
+const RepeatLoanSection = (props: RepeatLoanSectionProps): JSX.Element => {
     const oldRankStrategy = Form.useWatch('oldRankStrategy', props.form);
 
     const resetErrorMessage = () => {
@@ -27,7 +27,7 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps) => {
 
     const [modal, contextHolder] = Modal.useModal();
 
-    const oldRankStratOnChange = (e) => {
+    const oldRankStratOnChange = () => {
         resetErrorMessage();
         const { repeatLoan } = props.form.getFieldsValue();
         const isLoanFormNotFilled = repeatLoan.map(loan => {

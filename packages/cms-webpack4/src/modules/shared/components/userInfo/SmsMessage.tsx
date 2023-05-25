@@ -4,8 +4,8 @@ import { useLazyGetUserSMSListQuery } from "../../api/UserInfoApi";
 import { GetUserSms } from '../../api/userInfoTypes/getUserSms';
 import { UserId } from '../../domain/UserId';
 import { useEffect, useState } from 'react';
-const SmsMessage = ({ userId }:UserId) => {
-    const [triggerGetList, { currentData, isLoading, isFetching,isSuccess }] = useLazyGetUserSMSListQuery({
+const SmsMessage = ({ userId }:UserId): JSX.Element => {
+    const [triggerGetList, { currentData, isLoading }] = useLazyGetUserSMSListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

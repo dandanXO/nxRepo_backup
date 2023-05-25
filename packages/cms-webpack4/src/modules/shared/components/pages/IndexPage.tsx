@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export function IndexPage() {
+export function IndexPage(): JSX.Element {
     return (
         <div>
             <div>

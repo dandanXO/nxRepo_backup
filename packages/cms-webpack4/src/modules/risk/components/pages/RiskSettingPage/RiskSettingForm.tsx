@@ -1,4 +1,4 @@
-import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip ,Space } from "antd";
+import { Form, FormInstance, Input, Select, Switch } from "antd";
 import React from "react";
 import TextArea from "antd/es/input/TextArea";
 import { AdminForm } from "../../../../shared/components/common/AdminForm";
@@ -16,10 +16,10 @@ interface RiskSettingFormProps {
     onFinish: () => void;
     currentRiskMenuData: Array<RiskModelMenu>;
     customAntFormFieldError: CustomAntFormFieldError;
-    setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<Object>>;
+    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
 }
 
-const RiskSettingForm = (props: RiskSettingFormProps) => {
+const RiskSettingForm = (props: RiskSettingFormProps): JSX.Element => {
     // NOTE:
     return (
         <AdminForm

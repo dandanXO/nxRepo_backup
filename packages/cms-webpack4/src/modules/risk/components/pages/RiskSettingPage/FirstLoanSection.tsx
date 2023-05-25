@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Divider, Form, FormInstance, Radio, Tooltip, Modal } from "antd";
+import React from "react";
+import { Divider, Form, FormInstance, Radio, Modal } from "antd";
 import FirstAndRepeatLoanFormByValue from "./FirstAndRepeatLoanFormByValue";
 import FirstAndRepeatLoanFormByScore from "./FirstAndRepeatLoanFormByScore";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
@@ -7,11 +7,11 @@ import { CustomAntFormFieldError } from "../../../../shared/utils/validation/Cus
 interface FirstLoanSectionProps {
     isEdit: boolean;
     customAntFormFieldError: CustomAntFormFieldError;
-    setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<Object>>;
+    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
     form: FormInstance;
 }
 
-const FirstLoanSection = (props: FirstLoanSectionProps) => {
+const FirstLoanSection = (props: FirstLoanSectionProps): JSX.Element => {
 
     const rankStrategy = Form.useWatch('rankStrategy', props.form);
 
@@ -26,7 +26,7 @@ const FirstLoanSection = (props: FirstLoanSectionProps) => {
 
     const [modal, contextHolder] = Modal.useModal();
 
-    const rankStratOnChange = (e) => {
+    const rankStratOnChange = () => {
 
         resetErrorMessage();
 

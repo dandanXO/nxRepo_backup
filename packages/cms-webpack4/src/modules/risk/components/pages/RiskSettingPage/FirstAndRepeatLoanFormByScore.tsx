@@ -1,8 +1,6 @@
-import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space, Checkbox } from "antd";
+import { Form, Input, Checkbox } from "antd";
 import CustomLabel from "../../../../shared/components/other/CustomLabel";
-import { NumberValidator } from "../../../../shared/utils/validation/validator";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import { useState } from "react";
 
 interface FormProps{
     isEdit:boolean;
@@ -10,8 +8,8 @@ interface FormProps{
     type?:string;
 }
 
-function FirstAndRepeatLoanFormByScore(props:FormProps) {
-    
+function FirstAndRepeatLoanFormByScore(props:FormProps): JSX.Element {
+
     return <>
         {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
             return (
@@ -50,7 +48,7 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                                 help={(props.customAntFormFieldError?.[`${props.type}_min_${index}`] as any)?.help}
                                 rules={[{ required: true, message: "请输入值" }]}
                             >
-                                <Input placeholder={"值"} disabled={index !== 4 ? true : false} />
+                                <Input placeholder={"值"} disabled={index !== 4} />
                             </Form.Item>
                         </Form.Item>
 

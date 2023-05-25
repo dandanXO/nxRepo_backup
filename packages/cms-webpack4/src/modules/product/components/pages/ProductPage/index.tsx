@@ -6,7 +6,7 @@ import { ProductModal } from "./ProductModal";
 import ProductForm from "./ProductForm";
 import { itemRender } from "../../../../shared/components/common/itemRender";
 
-export const ProductPage = () => {
+export const ProductPage = (): JSX.Element => {
 
     const [domLoaded, setDomLoaded] = useState(false);
     useEffect(() => {

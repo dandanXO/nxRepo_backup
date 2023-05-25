@@ -1,20 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ColumnsState, ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Modal, Space, Table, Tag } from 'antd';
+import { Button, Space, Table } from 'antd';
 import { useLazyGetDailyRiskControlListQuery } from '../../../api/DailyRiskControlApi';
 import { GetDailyRiskControlListRequestQuery, GetDailyRiskControlList } from '../../../api/types/DailyRiskControlTypes/getDailyRiskControlList';
-import CopyText from '../../../../shared/components/other/CopyText';
-import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
 import useGetProviderEnum from '../../../../shared/hooks/common/useGetProviderEnum';
-import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
 import moment from 'moment';
 import queryString from "query-string";
 
-const DailyRiskControlTable = () => {
+const DailyRiskControlTable = (): JSX.Element => {
 
-    const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
     const dayRange = [moment().subtract(7, 'days'), moment()];
     const initSearchList: GetDailyRiskControlListRequestQuery = {
@@ -28,7 +23,7 @@ const DailyRiskControlTable = () => {
     const [searchList, setSearchList] = useState(initSearchList);
 
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetDailyRiskControlListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetDailyRiskControlListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

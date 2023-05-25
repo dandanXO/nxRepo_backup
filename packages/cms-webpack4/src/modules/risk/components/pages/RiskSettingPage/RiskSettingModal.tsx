@@ -11,7 +11,7 @@ interface RiskSettingModelProps {
     onAutoCompleteTemplate?: () => void;
     children: React.ReactElement;
 }
-const RiskSettingModal = (props: RiskSettingModelProps) => {
+const RiskSettingModal = (props: RiskSettingModelProps): JSX.Element => {
 
     return (
         <AdminFormModal

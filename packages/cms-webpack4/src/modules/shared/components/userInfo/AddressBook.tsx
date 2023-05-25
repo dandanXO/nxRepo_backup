@@ -1,14 +1,12 @@
-
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { useGetUserContactsListQuery,useLazyGetUserContactsListQuery } from '../../api/UserInfoApi';
+import { useLazyGetUserContactsListQuery } from '../../api/UserInfoApi';
 import { UserId } from "../../domain/UserId";
 import { GetUserContacts } from "../../api/userInfoTypes/getUserContacts";
 import { useEffect, useState } from 'react';
-import usePageable from '../../hooks/usePageable';
-const AddressBook = (({ userId }: UserId) => {
+const AddressBook = (({ userId }: UserId): JSX.Element => {
 
-    const [triggerGetList, { currentData, isLoading, isFetching,isSuccess }] = useLazyGetUserContactsListQuery({
+    const [triggerGetList, { currentData, isLoading, isFetching }] = useLazyGetUserContactsListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

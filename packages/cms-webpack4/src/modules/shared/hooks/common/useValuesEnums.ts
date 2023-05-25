@@ -1,12 +1,18 @@
 import { useGetChannelListQuery } from "../../api/channelListApi";
-import { useGetOperatorListQuery ,useLazyGetOperatorListQuery } from "../../api/operatorListApi";
+import { useLazyGetOperatorListQuery } from "../../api/operatorListApi";
 import { useGetProviderListQuery } from "../../api/providerApi";
-import { useGetMerchantListQuery,useLazyGetMerchantListQuery } from "../../api/merchantListApi";
+import { useLazyGetMerchantListQuery } from "../../api/merchantListApi";
 import { useEffect, useState } from "react";
 import { getIsSuperAdmin } from "../../storage/getUserInfo";
 import { ConstantRiskRankEnum } from "../../constants/constantRiskRankEnum";
 
-const useValuesEnums = () => {
+const useValuesEnums = (): {
+    channelListEnum:Record<any, any>,
+    riskRankEnum: Record<any, any>,
+    operatorListEnum: Record<any, any>,
+    providerListEnum: Record<any, any>,
+    merchantListEnum: Record<any, any>
+} => {
 
     const isSuperAdmin = getIsSuperAdmin();
 
@@ -56,7 +62,7 @@ const useValuesEnums = () => {
 
 
     // 可用商戶
-    const [triggerGetMerchantList, { currentData: merchantListData, isLoading, isFetching, isSuccess: isMerchantListDataSuccess, isError, isUninitialized }] = useLazyGetMerchantListQuery({
+    const [triggerGetMerchantList, { currentData: merchantListData, isSuccess: isMerchantListDataSuccess }] = useLazyGetMerchantListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

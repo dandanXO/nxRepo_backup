@@ -1,8 +1,10 @@
-
 import { useLazyGetProviderListQuery } from "../../api/providerApi";
 import { useEffect, useState } from "react";
 
-const useGetProviderEnum = () => {
+const useGetProviderEnum = (): {
+    triggerGetProviderList: any,
+    providerListEnum: Record<any, any>
+} => {
 
     // 风控应用
     const [triggerGetProviderList, { currentData: providerListData, isSuccess: isProviderListDataSuccess }] = useLazyGetProviderListQuery({

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import AdminPage from "../../../../shared/components/common/AdminPage";
 import { ProColumns } from "@ant-design/pro-components";
 import { GetProductListResponseProduct } from "../../../../product/service/product/domain/getProductList";
@@ -22,14 +22,14 @@ import { ProColumnsOperationConstant } from "../../../../shared/components/commo
 
 export type FormResponseData = GetRiskManageResponse;
 
-export const RiskSettingPage = () => {
+export const RiskSettingPage = (): JSX.Element => {
 
     // NOTE: UI Loading
     const [loading, setLoading] = useState(false);
 
 
     // NOTE: Fetch
-    const [triggerGetList, { currentData, isLoading, isFetching }] = useLazyGetRiskManageListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetRiskManageListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -55,7 +55,7 @@ export const RiskSettingPage = () => {
                 key: 'option',
                 title: '操作',
                 valueType: 'option',
-                render: (text, record, _, action) => {
+                render: (text, record) => {
                     return [
                         <a key="editable" onClick={() => {
                             // console.log("record", record);
@@ -109,44 +109,44 @@ export const RiskSettingPage = () => {
 
     // NOTICE: Modal
     // NOTE: autoComplete
-    const onAutoCompleteTemplate = useCallback(() => {
-        const mockRequest = {
-            modelName: String(new Date().getTime()),
-            remark: "remark",
-            // firstLoan: [
-            //     {providerRank: 'A', loanCount: '8000'},
-            //     {providerRank: 'B', loanCount: '6000'},
-            //     {providerRank: 'C', loanCount: '4000'},
-            //     {providerRank: 'D', loanCount: '2000'},
-            //     {providerRank: 'E', loanCount: '0'},
-            // ],
-            // repeatLoan: [
-            //     {providerRank: 'A', loanCount: '8000'},
-            //     {providerRank: 'B', loanCount: '6000'},
-            //     {providerRank: 'C', loanCount: '4000'},
-            //     {providerRank: 'D', loanCount: '2000'},
-            //     {providerRank: 'E', loanCount: '0'},
-            // ],
-            firstLoan: [
-                { max: 50, min: 58, loanCount: '4000', balance: '200', providerRank: 'A' },
-                { max: 49, min: 39, loanCount: 3000, balance: '99', providerRank: 'B' },
-                { max: 38, min: 32, loanCount: 2000, balance: '88', providerRank: 'C' },
-                { max: 31, min: 22, loanCount: 1000, balance: '77', providerRank: 'D' },
-                { max: 21, min: 12, loanCount: 0, balance: '66', providerRank: 'E' }
-            ],
-            repeatLoan: [
-                { max: 50, min: 58, loanCount: 4000, balance: '200', providerRank: 'A' },
-                { max: 49, min: 39, loanCount: 3000, balance: '99', providerRank: 'B' },
-                { max: 38, min: 32, loanCount: 2000, balance: '88', providerRank: 'C' },
-                { max: 31, min: 22, loanCount: 1000, balance: '77', providerRank: 'D' },
-                { max: 21, min: 12, loanCount: 0, balance: '66', providerRank: 'E' }
-            ],
-            riskModelName: 1,
-            useRcQuota: true,
-            enabled: true,
-        };
-        form.setFieldsValue(mockRequest);
-    }, [form]);
+    // const onAutoCompleteTemplate = useCallback(() => {
+    //     const mockRequest = {
+    //         modelName: String(new Date().getTime()),
+    //         remark: "remark",
+    //         // firstLoan: [
+    //         //     {providerRank: 'A', loanCount: '8000'},
+    //         //     {providerRank: 'B', loanCount: '6000'},
+    //         //     {providerRank: 'C', loanCount: '4000'},
+    //         //     {providerRank: 'D', loanCount: '2000'},
+    //         //     {providerRank: 'E', loanCount: '0'},
+    //         // ],
+    //         // repeatLoan: [
+    //         //     {providerRank: 'A', loanCount: '8000'},
+    //         //     {providerRank: 'B', loanCount: '6000'},
+    //         //     {providerRank: 'C', loanCount: '4000'},
+    //         //     {providerRank: 'D', loanCount: '2000'},
+    //         //     {providerRank: 'E', loanCount: '0'},
+    //         // ],
+    //         firstLoan: [
+    //             { max: 50, min: 58, loanCount: '4000', balance: '200', providerRank: 'A' },
+    //             { max: 49, min: 39, loanCount: 3000, balance: '99', providerRank: 'B' },
+    //             { max: 38, min: 32, loanCount: 2000, balance: '88', providerRank: 'C' },
+    //             { max: 31, min: 22, loanCount: 1000, balance: '77', providerRank: 'D' },
+    //             { max: 21, min: 12, loanCount: 0, balance: '66', providerRank: 'E' }
+    //         ],
+    //         repeatLoan: [
+    //             { max: 50, min: 58, loanCount: 4000, balance: '200', providerRank: 'A' },
+    //             { max: 49, min: 39, loanCount: 3000, balance: '99', providerRank: 'B' },
+    //             { max: 38, min: 32, loanCount: 2000, balance: '88', providerRank: 'C' },
+    //             { max: 31, min: 22, loanCount: 1000, balance: '77', providerRank: 'D' },
+    //             { max: 21, min: 12, loanCount: 0, balance: '66', providerRank: 'E' }
+    //         ],
+    //         riskModelName: 1,
+    //         useRcQuota: true,
+    //         enabled: true,
+    //     };
+    //     form.setFieldsValue(mockRequest);
+    // }, [form]);
 
     // NOTE: OK
     const onOk = useCallback(() => {
@@ -184,7 +184,7 @@ export const RiskSettingPage = () => {
 
 
     // NOTE: 2.2 Risks
-    const [triggerGetRisk , { data: previousRiskData, currentData: currentFormData, isLoading: isRiskLoading, isFetching: isRiskFetching, isSuccess: isRiskSuccess }] = useLazyGetRiskManageQuery();
+    const [triggerGetRisk , { currentData: currentFormData, isLoading: isRiskLoading }] = useLazyGetRiskManageQuery();
     // console.log("isRiskFetching", isRiskFetching);
     // console.log("currentRiskMenuData", currentRiskMenuData);
     // console.log("currentFormData", currentFormData);
@@ -234,8 +234,8 @@ export const RiskSettingPage = () => {
 
 
     // NOTE: POST or Put form data
-    const [triggerPostRisk, { data: postRiskData, isLoading: isPostRiskLoading , isSuccess: isPostRiskSuccess }] = usePostRiskManageCreateMutation();
-    const [triggerPutRisk, { data: putRiskData, isLoading: isPutRiskLoading, isSuccess: isPutRiskSuccess }] = usePutRiskManageCreateMutation();
+    const [triggerPostRisk] = usePostRiskManageCreateMutation();
+    const [triggerPutRisk] = usePutRiskManageCreateMutation();
 
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>({});
 
@@ -404,7 +404,7 @@ export const RiskSettingPage = () => {
     };
 
     // NOTE: onFieldsChange
-    const onFieldsChange = useCallback((changedFields, allFields) => {
+    const onFieldsChange = useCallback((changedFields) => {
 
         const formType = changedFields[0].name[0];
         const fieldIndex = changedFields[0].name[1];
@@ -481,7 +481,7 @@ export const RiskSettingPage = () => {
 
                         // 自動放款
                         autoLoan: record.autoLoan
-                        
+
 
                     } as MssRiskRankVo;
 
@@ -495,7 +495,7 @@ export const RiskSettingPage = () => {
                 fields["riskModelName"] = riskModelName;
             }
 
-           
+
         });
         // NOTE: Edit
         if(isEdit) {
@@ -510,7 +510,7 @@ export const RiskSettingPage = () => {
         // console.log("fields", fields);
 
         // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
+        triggerAPI(fields).unwrap().then(() => {
             form.resetFields();
 
             triggerGetList(null);
@@ -521,15 +521,6 @@ export const RiskSettingPage = () => {
             });
         });
     }, [showModalContent.isEdit, editID, currentRiskMenuData]);
-
-    // NOTICE: Form.4 onFinishFailed
-    const onFinishFailed = useCallback(() => {
-    }, []);
-
-    // NOTICE: Form.5 onValuesChange
-    const onValuesChange = useCallback((changedFields, allFields) => {
-    }, []);
-
 
     const onAddCallback = useCallback(() => {
         setCustomAntFormFieldError({});
@@ -565,7 +556,7 @@ export const RiskSettingPage = () => {
                     tableHeaderColumns={columns}
                     tableDatasource={currentData}
                     loading={loading}
-                    onSearchClick={(props: RiskManageList) => {
+                    onSearchClick={() => {
                         return [];
                     }}
                     // NOTE: 新增

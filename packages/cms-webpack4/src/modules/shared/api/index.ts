@@ -8,11 +8,7 @@ const baseUrl = "/hs/admin";
 export const API = createApi({
     reducerPath: "api",
     baseQuery: axiosBaseQuery({ baseUrl }),
-    endpoints: (builder) => ({
+    endpoints: () => ({
 
     }),
 });
-
-export const {
-
-} = API;

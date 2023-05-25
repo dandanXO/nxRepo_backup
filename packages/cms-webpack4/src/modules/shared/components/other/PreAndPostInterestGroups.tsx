@@ -1,13 +1,13 @@
-import React, { useEffect, useState, CSSProperties, ReactElement } from 'react';
-import { Divider, Form, Input, Typography, Row, Col, Space, Button, Collapse, Tooltip } from "antd";
+import React, { useEffect, CSSProperties, ReactElement } from 'react';
+import {  Form, Input, Space, Button, Tooltip } from "antd";
 import { InfoCircleOutlined, MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { maxOneUnitFloatReplacer } from '../../utils/format/maxOneUnitFloatReplacer';
-import { FormInstance, useWatch } from 'antd/lib/form/Form';
+import { FormInstance } from 'antd/lib/form/Form';
 import { CustomAntFormFieldError } from '../../utils/validation/CustomAntFormFieldError';
 import { validateValue, validateNum, validateplusAmount } from './validatePreOrPostInterestGroups';
 
 
-export const CustomLabel = (props: { style?: CSSProperties, children: string | ReactElement | ReactElement[] }) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style }}>{props.children}</div>;
+export const CustomLabel = (props: { style?: CSSProperties, children: string | ReactElement | ReactElement[] }): JSX.Element => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style }}>{props.children}</div>;
 
 
 interface PreAndPostInterestGroupsProps {
@@ -18,7 +18,7 @@ interface PreAndPostInterestGroupsProps {
     fieldName: string;
 }
 
-function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
+function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps): JSX.Element {
     const { form, customAntFormFieldError, setCustomAntFormFieldError, interestRatePairsTouchInput, fieldName } = props;
     const interestRatePairs = form.getFieldsValue()[fieldName];
 
@@ -172,7 +172,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                         name={[name, 'preInterest']}
                                         validateStatus={customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.validateStatus || ""}
                                         help={customAntFormFieldError?.productInterestRatePairs?.[index]?.preInterest?.help || ""}
-                                        normalize={(value, prevValue, prevValues) => {
+                                        normalize={(value) => {
                                             return maxOneUnitFloatReplacer(value);
                                         }}
                                         initialValue={''}
@@ -185,7 +185,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
                                         name={[name, 'postInterest']}
                                         validateStatus={customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.validateStatus || ""}
                                         help={customAntFormFieldError?.productInterestRatePairs?.[index]?.postInterest?.help || ""}
-                                        normalize={(value, prevValue, prevValues) => {
+                                        normalize={(value) => {
                                             return maxOneUnitFloatReplacer(value);
                                         }}
                                         initialValue={''}

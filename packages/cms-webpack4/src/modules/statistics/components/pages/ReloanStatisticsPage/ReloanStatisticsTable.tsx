@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, Modal, Radio, Space, List, Tag, Tooltip } from 'antd';
+import { Button, Space, Tag, Tooltip } from 'antd';
 import { GetReloanStatisticsListRequestQuerystring, GetReloanStatisticsList, } from '../../../api/types/ReloanStatisticsTypes/getReloanStatisticsList';
 import { useLazyGetReloanStatisticsListQuery } from '../../../api/ReloanStatisticsApi';
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
@@ -12,7 +12,7 @@ import useGetProductNamesEnum from '../../../../shared/hooks/common/useGetProduc
 import queryString from "query-string";
 
 const { CheckableTag } = Tag;
-const ReloanStatisticsTable = () => {
+const ReloanStatisticsTable = (): JSX.Element => {
 
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
@@ -20,7 +20,7 @@ const ReloanStatisticsTable = () => {
     const { triggerGetProductNames, productNamesEnum } = useGetProductNamesEnum();
 
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetReloanStatisticsListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetReloanStatisticsListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -180,7 +180,7 @@ const ReloanStatisticsTable = () => {
                         <Space>
                             {'显示群组'}<Tooltip title={'反选可隐藏该群组'}><ExclamationCircleOutlined /></Tooltip>{':'}
                             <div>
-                                {customColumns.map((tag, index) => {
+                                {customColumns.map((tag) => {
                                     if (tag.key === 'registerCount') return;
                                     return <CheckableTag
                                         style={{ marginTop: '4px', marginBottom: '4px' }}
@@ -198,7 +198,7 @@ const ReloanStatisticsTable = () => {
                         <Space>
                             {'显示统计类别'}<Tooltip title={'反选可隐藏该群组'}><ExclamationCircleOutlined /></Tooltip>{':'}
                             <div>
-                                {subTitleTypes.map((tag, index) => {
+                                {subTitleTypes.map((tag) => {
                                     const type = {
                                         totalColumn: { title: '总计' },
                                         newCustomer: { title: '新客' },

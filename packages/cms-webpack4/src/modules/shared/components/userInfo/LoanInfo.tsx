@@ -4,9 +4,9 @@ import { GetUserOrders } from '../../api/userInfoTypes/getUserOrders';
 import { UserId } from '../../domain/UserId';
 import { useLazyGetUserOrdersListQuery } from '../../api/UserInfoApi';
 import { useEffect, useState } from 'react';
-const LoanInfo = ({ userId }:UserId) => {
+const LoanInfo = ({ userId }:UserId): JSX.Element => {
 
-    const [triggerGetList, { currentData, isLoading, isFetching,isSuccess }] = useLazyGetUserOrdersListQuery({
+    const [triggerGetList, { currentData, isLoading }] = useLazyGetUserOrdersListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

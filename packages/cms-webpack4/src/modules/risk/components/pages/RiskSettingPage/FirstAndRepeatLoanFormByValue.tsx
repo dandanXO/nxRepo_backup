@@ -1,14 +1,12 @@
-import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space, Checkbox } from "antd";
+import { Form, Input, Checkbox } from "antd";
 import CustomLabel from "../../../../shared/components/other/CustomLabel";
-import { NumberValidator } from "../../../../shared/utils/validation/validator";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import { InfoCircleOutlined } from "@ant-design/icons";
 interface FormProps {
     isEdit: boolean;
     customAntFormFieldError: CustomAntFormFieldError;
     type?: string;
 }
-function FirstAndRepeatLoanFormByValue(props: FormProps) {
+function FirstAndRepeatLoanFormByValue(props: FormProps): JSX.Element {
     return <>
         {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
             return (

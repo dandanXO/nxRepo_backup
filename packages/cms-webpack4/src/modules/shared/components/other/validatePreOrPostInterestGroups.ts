@@ -1,26 +1,27 @@
+import { ProductInterestRatePair } from "../../../product/service/product/domain/productInterestRatePair";
 
 function equalRangeBelow100(str: string, min = 0, max = 100) {
     return Number(str) < min || Number(str) > max;
 }
-export const validateValue = (value, errorText) => {
+export const validateValue = (value: number, errorText: string): string => {
     return value !== 0 && !value ? errorText
         : isNaN(value) ? "请输入數字"
-            : equalRangeBelow100(value) ? "请输入0-100间数字" : '';
+            : equalRangeBelow100(value.toString()) ? "请输入0-100间数字" : '';
 };
 
-export const validateNum = (value, errorText) => {
+export const validateNum = (value: number, errorText: string): string => {
     return value !== 0 && !value ? errorText
         : isNaN(value) ? "请输入數字"
             : Number(value) < 1 ? "请输入大于1的整数" : '';
 };
-export const validateplusAmount = (value, errorText) => {
+export const validateplusAmount = (value: number, errorText: string): string => {
     return value !== 0 && !value ? errorText
         : isNaN(value) ? "请输入數字"
             : Number(value) < 0 ? "请输入大于0的整数" : '';
 };
-export const validatePreOrPostInterestGroups = (groups) => {
-    const validateErrors = groups?.map((field, index) => {
-    
+export const validatePreOrPostInterestGroups = (groups: ProductInterestRatePair[]): Record<any, any> => {
+    const validateErrors = groups?.map((field) => {
+
         const numError = validateNum(field?.num, "请输入起始期数");
         const preInterestError = validateValue(field?.preInterest, "请输入前置利息");
         const postInterestError = validateValue(field?.postInterest, "请输入後置利息");
@@ -54,7 +55,7 @@ export const validatePreOrPostInterestGroups = (groups) => {
 
     const finalMap = {};
     if (validateErrors) {
-        Object.keys(validateErrors).map((key, index) => {
+        Object.keys(validateErrors).map((key) => {
             finalMap[key] = {
                 ...finalMap[key],
                 ...validateErrors[key]

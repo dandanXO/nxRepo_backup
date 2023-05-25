@@ -1,9 +1,11 @@
-
 import { useEffect, useState } from "react";
 import { useLazyGetAppNamesQuery } from '../api/appNamesApi';
 
 
-const useGetAppNamesEnum = () => {
+const useGetAppNamesEnum = (): {
+    triggerGetAppNames: any,
+    appNamesEnum: Record<any, any>
+} => {
 
     // 产品列表下拉选单
     const [triggerGetAppNames, { currentData, isSuccess }] = useLazyGetAppNamesQuery({

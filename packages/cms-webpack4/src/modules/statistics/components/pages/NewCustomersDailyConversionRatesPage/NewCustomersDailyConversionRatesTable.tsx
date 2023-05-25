@@ -1,29 +1,29 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, Modal, Radio, Space, List, Tag, Tooltip } from 'antd';
-import { GetNewCustomersDailyConversionRatesRequestQuerystring, NewCustomersDailyConversionRates, GetNewCustomersDailyConversionRatesProps } from '../../../api/types/NewCustomersDailyConversionRatesTypes/getNewCustomersDailyConversionRates';
-import { useLazyGetNewCustomersDailyConversionRatesQuery,usePostNewCustomersDailyConversionRatesDownloadMutation } from '../../../api/NewCustomersDailyConversionRatesApi';
+import { Button, Space,  Tag, Tooltip } from 'antd';
+import { GetNewCustomersDailyConversionRatesRequestQuerystring, NewCustomersDailyConversionRates } from '../../../api/types/NewCustomersDailyConversionRatesTypes/getNewCustomersDailyConversionRates';
+import { useLazyGetNewCustomersDailyConversionRatesQuery } from '../../../api/NewCustomersDailyConversionRatesApi';
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
 import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
 import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import queryString from "query-string";
 import moment from 'moment';
+import { Key } from "antd/es/table/interface";
 
 const { CheckableTag } = Tag;
-const NewCustomersDailyConversionRatesTable = () => {
+const NewCustomersDailyConversionRatesTable = (): JSX.Element => {
 
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetNewCustomersDailyConversionRatesQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetNewCustomersDailyConversionRatesQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [postDownload, { data, isSuccess: postDownloadIsSuccess }] = usePostNewCustomersDailyConversionRatesDownloadMutation();
 
     const initDayRange = [moment().subtract(6, 'days'), moment()];
     const initSearchList: GetNewCustomersDailyConversionRatesRequestQuerystring = {
@@ -68,7 +68,7 @@ const NewCustomersDailyConversionRatesTable = () => {
         });
     }
 
-    const customColumns = [
+    const customColumns: ProColumns<NewCustomersDailyConversionRates>[] = [
         { title: 'OTP发送量', dataIndex: 'otpCount', key: 'otpCount', hideInSearch: true },
         { title: <CustomColumn text={'注册量'} />, dataIndex: 'registerCount', key: 'registerCount', hideInSearch: true, tooltip: '注册百分比=注册量/短信发送数', render: (text, { registerRate }) => <CustomColumn text={text} rate={registerRate} /> },
         {
@@ -146,9 +146,9 @@ const NewCustomersDailyConversionRatesTable = () => {
         };
     };
 
-    const [selectedTags, setSelectedTags] = useState<string[]>(customColumns.map(i => i['key']));
-    const [tagColumns, setTagColumns] = useState<Object[]>(customColumns);
-    const handleChange = (tag: string, checked: boolean) => {
+    const [selectedTags, setSelectedTags] = useState<Key[]>(customColumns.map(i => i['key']));
+    const [tagColumns, setTagColumns] = useState<ProColumns<NewCustomersDailyConversionRates>[]>(customColumns);
+    const handleChange = (tag: Key, checked: boolean) => {
 
         const nextSelectedTags = checked
             ? customColumns.map(i => i['key']).filter((t) => [...selectedTags, tag].includes(t))
@@ -188,7 +188,7 @@ const NewCustomersDailyConversionRatesTable = () => {
                         </Tooltip>
                         {':'}
                         <div>
-                            {customColumns.map((tag, index) => {
+                            {customColumns.map((tag) => {
                                 if (tag.key === 'registerCount') return;
 
                                 let tagKey = tag.title;

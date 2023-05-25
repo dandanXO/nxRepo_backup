@@ -2,9 +2,9 @@
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, PaginationProps, Space, Switch } from 'antd';
+import { Button, Space, Switch } from 'antd';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { GetProductListResponse, Product } from '../../../service/product/ProductApi';
+import { Product } from '../../../service/product/ProductApi';
 import { ProductFormModal } from "./hooks/useProductFormModal";
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
@@ -21,7 +21,7 @@ interface ProductTableProps {
     productListData?: any;
 }
 
-const ProductTable = (props: ProductTableProps) => {
+const ProductTable = (props: ProductTableProps): JSX.Element => {
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const [patchProduct, { isSuccess: patchProductSuccess }] = usePatchProductEditMutation();
@@ -52,7 +52,7 @@ const ProductTable = (props: ProductTableProps) => {
                 title: '操作',
                 valueType: 'option',
                 key: 'option',
-                render: (text, record, _, action) => [
+                render: (text, record) => [
                     <a key="editable" onClick={() => props.setProductModalData({
                         show: true,
                         isEdit: true,
@@ -89,7 +89,7 @@ const ProductTable = (props: ProductTableProps) => {
             },
 
             { key: 'newGuestProductDisplayStatus', title: '新客优先满足', dataIndex: 'newGuestProductDisplayStatus', hideInSearch: true,
-                render: (text, record,index) => {
+                render: (text, record) => {
                     return (
                         <Switch
                             onChange={(checked) => {

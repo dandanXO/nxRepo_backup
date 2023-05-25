@@ -1,7 +1,11 @@
 import { useLazyGetChannelListQuery } from "../api/channelListApi";
 import { useEffect, useState } from "react";
 
-const useGetChannelEnum = () => {
+const useGetChannelEnum = (): {
+    triggerGetChannelList: any,
+    channelListEnum: Record<any, any>
+
+} => {
 
     // 注册渠道
     const [triggerGetChannelList, { currentData: channelListData, isSuccess: isChannelListDataSuccess }] = useLazyGetChannelListQuery({

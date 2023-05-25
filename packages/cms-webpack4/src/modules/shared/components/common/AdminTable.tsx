@@ -1,7 +1,7 @@
-import { Button, FormInstance, Space, Table } from "antd";
+import { Button, FormInstance, Space } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 export interface ModalContent {
     show: boolean;
@@ -15,9 +15,8 @@ export enum ButtonsText {
     AddText = "添加",
 }
 
-
 interface AdminTableTemplateProps<TableListItemDataType> {
-    tableHeaderColumns:  ProColumns<TableListItemDataType, "text">[];
+    tableHeaderColumns:  ProColumns<TableListItemDataType>[];
     loading?: boolean;
     tableDatasource: TableListItemDataType[];
     onSearchClick?: (searchInputKeys: any) => TableListItemDataType[];
@@ -47,24 +46,12 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     formRef?:any;
 }
 
-interface ActionType {
-    reload: (resetPageIndex?: boolean) => void;
-    reloadAndRest: () => void;
-    reset: () => void;
-    clearSelected?: () => void;
-    startEditable: (rowKey: string) => boolean;
-    cancelEditable: (rowKey: string) => boolean;
-
-}
-
 export const AdminTable = <TableListItemDataType,>({
     tableHeaderColumns,
     loading,
     tableDatasource,
     onSearchClick,
-    setShowModalContent,
     hasAddForm = true,
-    hasEditForm = true,
     searchable = true,
     addText = ButtonsText.AddText,
     onAddCallback,
@@ -85,10 +72,7 @@ export const AdminTable = <TableListItemDataType,>({
     pageOnChange,
     formRef
 
-}: AdminTableTemplateProps<TableListItemDataType>) => {
-
-    // NOTE: actionRef
-    const actionRef = useRef<ActionType>();
+}: AdminTableTemplateProps<TableListItemDataType>): JSX.Element => {
 
     // NOTE: cachedTableHeaderColumns
     // const [cachedTableHeaderColumns, setCachedTableHeaderColumns] = useState<ProColumns<TableListItemDataType, "text">[]>()
@@ -195,7 +179,7 @@ export const AdminTable = <TableListItemDataType,>({
             // ...rowSelection,
             // }}
             // dateFormatter="string"
-            dateFormatter={(value, valueType) => {
+            dateFormatter={(value) => {
                 // console.log('====>', value, valueType);
                 return value.format('YYYY-MM-DD HH:mm:ss');
             }}

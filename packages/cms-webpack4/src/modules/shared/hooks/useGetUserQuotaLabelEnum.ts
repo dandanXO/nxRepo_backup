@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { useLazyGetUserQuotaLabelSelectQuery } from "../api/userQuotaLabelApi";
-const useGetUserQuotaLabelEnum = () => {
+import { DefaultOptionType } from "rc-select/lib/Select";
+const useGetUserQuotaLabelEnum = (): {
+    triggerGetUserQuotaLable: any,
+    userQuotaLablEnum: Record<any, any>,
+    userQuotaLablSelect: DefaultOptionType[],
+    colorEnum: Record<any, any>
+} => {
 
     // 注册渠道
-    const [triggerGetUserQuotaLable, { currentData: userQuotaLableData, isSuccess: isUserQuotaLableDataSuccess ,isFetching }] = useLazyGetUserQuotaLabelSelectQuery({
+    const [triggerGetUserQuotaLable, { currentData: userQuotaLableData ,isFetching }] = useLazyGetUserQuotaLabelSelectQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

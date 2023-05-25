@@ -1,9 +1,11 @@
-
 import { useEffect, useState } from "react";
 import { useLazyGetProductNamesQuery } from "../../api/productNameApi";
 
 
-const useGetProductNamesEnum = () => {
+const useGetProductNamesEnum = (): {
+    triggerGetProductNames: any,
+    productNamesEnum: Record<any, any>
+} => {
 
     // 产品列表下拉选单
     const [triggerGetProductNames, { currentData, isSuccess }] = useLazyGetProductNamesQuery({

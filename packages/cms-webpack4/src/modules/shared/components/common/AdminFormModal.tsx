@@ -19,7 +19,7 @@ interface AdminFormModalTemplateProps{
 const AdminFormModal = (props: AdminFormModalTemplateProps = {
     show: false,
     isEdit: false,
-}) => {
+}): JSX.Element => {
     return (
         <Modal
             title={!props.isEdit ? (

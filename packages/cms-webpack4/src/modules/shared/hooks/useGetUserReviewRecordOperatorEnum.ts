@@ -1,9 +1,12 @@
-
 import { useEffect, useState } from "react";
 import { useLazyGetUserReveiwRecordOperatorListQuery } from "../api/operatorListApi";
+import { ProSchemaValueEnumMap } from "@ant-design/pro-components";
 
 
-const useGetUserReviewRecordOperatorEnum = () => {
+const useGetUserReviewRecordOperatorEnum = (): {
+    triggerGetOperatorList: any,
+    userReviewRecordOperatorEnum: ProSchemaValueEnumMap
+} => {
 
     // 用戶審核紀錄操作人
     const [triggerGetOperatorList, { currentData: operatorListData, isSuccess }] = useLazyGetUserReveiwRecordOperatorListQuery({

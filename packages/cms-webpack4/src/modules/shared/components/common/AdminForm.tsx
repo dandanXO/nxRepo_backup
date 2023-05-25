@@ -16,7 +16,7 @@ export interface AdminFormProps {
     style?: CSSStyleRule;
 }
 
-export const AdminForm = (props: AdminFormProps) => {
+export const AdminForm = (props: AdminFormProps): JSX.Element => {
     return (
         <Form
             style={props.style as any}

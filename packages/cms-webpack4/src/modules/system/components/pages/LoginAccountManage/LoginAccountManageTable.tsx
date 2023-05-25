@@ -1,7 +1,8 @@
+
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, Modal, Radio, Space, List ,AutoComplete } from 'antd';
+import { Button, Modal,  Space } from 'antd';
 import { LoginAccountList, GetLoginAccountListRequestQuery } from '../../../api/types/LoginAccountManageTypes/getLoginAccountList';
 import { usePostLogoutMutation, useLazyGetLoginAccountListQuery } from '../../../api/LoginAccountManageApi';
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
@@ -9,18 +10,18 @@ import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
 import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
 import CopyText from '../../../../shared/components/other/CopyText';
 
-const LoginAccountManageTable = () => {
+const LoginAccountManageTable = (): JSX.Element => {
 
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
 
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetLoginAccountListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetLoginAccountListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [postLogout, { data, isSuccess: postLogoutIsSuccess }] = usePostLogoutMutation();
+    const [postLogout, {  isSuccess: postLogoutIsSuccess }] = usePostLogoutMutation();
 
     const initSearchList: GetLoginAccountListRequestQuery = {
         accountNumber: '', ip: '', lastActiveEndTime: '', lastActiveStartTime: '', lastLoginEndTime: '', lastLoginStartTime: '', loginLocation: '', merchantId: '',
@@ -30,12 +31,12 @@ const LoginAccountManageTable = () => {
     const [searchList, setSearchList] = useState<GetLoginAccountListRequestQuery>(initSearchList);
     const [modal, contextHolder] = Modal.useModal();
     const [selectedRow, setSelectedRow] = useState([]);
-    const [buttonDisabled, setButtonDisbaled] = useState(true);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
     const [expandRow, setExpandRow] = useState([]);
 
 
     const onSelectChange = (selectedRowKeys) => {
-        setButtonDisbaled(selectedRowKeys.length === 0 ? true : false);
+        setButtonDisabled(selectedRowKeys.length === 0);
         console.log(selectedRowKeys);
         setSelectedRow(selectedRowKeys);
     };
@@ -86,7 +87,7 @@ const LoginAccountManageTable = () => {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => [<a key="editable" onClick={() => handleLogout('account', record)} >踢出</a>],
+            render: (text, record) => [<a key="editable" onClick={() => handleLogout('account', record)} >踢出</a>],
             width: '50px',
         },
         { title: '手机号/登入帐号', dataIndex: 'accountNumber', key: 'accountNumber', initialValue: "", render: (text) => <CopyText text={text} /> },
@@ -125,7 +126,7 @@ const LoginAccountManageTable = () => {
                         title: '操作',
                         valueType: 'option',
                         key: 'option',
-                        render: (text, record, _, action) => [<a key="editable" onClick={() => handleLogout('ip', record)} >踢出</a>],
+                        render: (text, record) => [<a key="editable" onClick={() => handleLogout('ip', record)} >踢出</a>],
                         width: ProColumnsOperationConstant.width["1"],
                     },
                 ]}

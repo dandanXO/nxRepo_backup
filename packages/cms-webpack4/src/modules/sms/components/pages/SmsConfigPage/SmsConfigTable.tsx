@@ -1,16 +1,15 @@
-
-import { ProColumns, ProProvider } from '@ant-design/pro-components';
+import { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { useGetUserContactsListQuery ,useLazyGetUserContactsListQuery } from '../../../../shared/api/UserInfoApi';
+import { useLazyGetUserContactsListQuery } from '../../../../shared/api/UserInfoApi';
 import { GetUserContacts } from '../../../../shared/api/userInfoTypes/getUserContacts';
 import { useEffect, useState } from 'react';
 import { FormModalProps } from '../../../../shared/domain/FormModal';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
-const SmsConfigTable = ((props:FormModalProps & {isAddOrEditSuccess?:boolean}) => {
+const SmsConfigTable = ((props:FormModalProps & {isAddOrEditSuccess?:boolean}): JSX.Element => {
 
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess }] = useLazyGetUserContactsListQuery({
+    const [triggerGetList, { currentData, isLoading, isFetching }] = useLazyGetUserContactsListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -50,7 +49,7 @@ const SmsConfigTable = ((props:FormModalProps & {isAddOrEditSuccess?:boolean}) =
             key: 'option',
             align: 'left',
             width: ProColumnsOperationConstant.width["2"],
-            render: (text, record, _, action) => {
+            render: () => {
                 return [
                     <a key="editable" onClick={handleEdit} >修改</a>,
                     <a key="editable" onClick={() => props.setShowModal(true)} >删除</a>];

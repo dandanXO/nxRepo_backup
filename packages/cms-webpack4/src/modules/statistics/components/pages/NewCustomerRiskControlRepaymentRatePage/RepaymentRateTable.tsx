@@ -12,9 +12,9 @@ import queryString from "query-string";
 import { ConstantRiskRankEnum } from "../../../../shared/constants/constantRiskRankEnum";
 import useGetProviderEnum from "../../../../shared/hooks/common/useGetProviderEnum";
 
-export const RepaymentRateTable = () => {
+export const RepaymentRateTable = (): JSX.Element => {
 
-    const [triggerGetNewCustomerRiskPaymentRateList, { data, currentData, isLoading, isFetching, isSuccess, isError }] = useLazyGetNewCustomerRiskPaymentRateListQuery();
+    const [triggerGetNewCustomerRiskPaymentRateList, { currentData, isFetching }] = useLazyGetNewCustomerRiskPaymentRateListQuery();
 
     const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
         endTime: "",          // 結束時間
@@ -35,7 +35,7 @@ export const RepaymentRateTable = () => {
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
 
     const formatNumber = (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-    const tableHeaderColumns: ProColumns<RiskPaymentRateResponseRiskPaymentRateResponse, "text">[] = [
+    const tableHeaderColumns: ProColumns<RiskPaymentRateResponseRiskPaymentRateResponse>[] = [
         {
             key: 'expireTime',
             title: '到期日',
@@ -215,7 +215,7 @@ export const RepaymentRateTable = () => {
                 form.resetFields();
                 triggerGetNewCustomerRiskPaymentRateList(null);
             }}
-            onFormSearchCallback={(form: FormInstance) => {
+            onFormSearchCallback={() => {
                 const searchForm = getSearchParams();
                 setFormState(searchForm);
                 triggerGetNewCustomerRiskPaymentRateList(searchForm);

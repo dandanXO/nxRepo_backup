@@ -1,12 +1,12 @@
-
+import React from "react";
 import { PageContainer } from '@ant-design/pro-components';
 import ReloanStatisticsTable from './ReloanStatisticsTable';
 
 import { Route } from "antd/es/breadcrumb/Breadcrumb";
 
-const ReloanStatisticsPage = () => {
+const ReloanStatisticsPage = (): JSX.Element => {
     // NOTE: breadcrumb
-    const itemRender = (route: Route, params: any, routes: Route[], paths: string[]): React.ReactNode => {
+    const itemRender = (route: Route, params: any, routes: Route[]): React.ReactNode => {
         const last = routes.indexOf(route) === routes.length - 1;
         return last ? (
             <span>{route.breadcrumbName}</span>

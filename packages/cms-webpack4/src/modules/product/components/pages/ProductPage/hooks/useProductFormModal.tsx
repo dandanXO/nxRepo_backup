@@ -1,6 +1,8 @@
-import { Form, Modal, UploadFile } from "antd";
+import { Form, FormInstance, Modal } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import {
+    GetProductListResponse,
+    Product,
     useGetAvailableMerchantListQuery,
     useLazyGetProductManageListQuery,
     useLazyGetProductQuery,
@@ -18,18 +20,25 @@ export interface ProductFormModal {
     formRef?: any;
 }
 
-
-export interface FormUploadFileList {
-    uid: string;
-    name: string;
-    url: string;
-}
-
-export interface ProductFormUploads {
-    logoFileList: UploadFile[];
-    backgroundImgFileList: UploadFile[];
-}
-export const useProductFormModal = (props: ProductFormModal) => {
+export const useProductFormModal = (props: ProductFormModal): {
+    productModalData: ProductFormModal,
+    productFormData: Product,
+    setProductModalData: React.Dispatch<ProductFormModal>,
+    handleCloseModal: (e) => void,
+    onFinish: (value: any) => void,
+    form: FormInstance,
+    merchantList: any,
+    customAntFormFieldError: CustomAntFormFieldError,
+    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>,
+    triggerGetList: any,
+    productListData: GetProductListResponse,
+    onFormSubmit: () => void,
+    enableLoanAmount: boolean,
+    enableReLoanAmount: boolean,
+    setEnableLoanAmount: React.Dispatch<boolean>,
+    setEnableReLoanAmount: React.Dispatch<boolean>,
+    contextHolder: React.ReactElement
+} => {
 
     const [modal, contextHolder] = Modal.useModal();
 
@@ -39,14 +48,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
         productId: props.productId,
         triggerTableGetList: props.triggerTableGetList
     });
-    const [triggerFetchTableList, setTriggerFetchTableList] = useState<any>();
     // console.log("productModalData", productModalData);
 
 
     // NOTICE: form
     const [form] = Form.useForm();
 
-    const [triggerGetProduct, { data, currentData: productFormData, isLoading: isGetProductLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetProductQuery({
+    const [triggerGetProduct, {  currentData: productFormData, isFetching }] = useLazyGetProductQuery({
 
     });
 
@@ -59,9 +67,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
     };
 
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>(initCustomAntFormFieldError);
-    const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
-    const [postProductCreate, { isLoading }] = usePostProductCreateMutation();
-    const [putProduct, { isSuccess: isPutProductSuccess }] = usePutProductEditMutation();
+    const { currentData: merchantList } = useGetAvailableMerchantListQuery(null);
+    const [postProductCreate] = usePostProductCreateMutation();
+    const [putProduct] = usePutProductEditMutation();
 
     useEffect(() => {
         if (!productModalData.productId) {
@@ -197,7 +205,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 productId: productModalData.productId,
             };
         }
-        action(values).unwrap().then((responseData) => {
+        action(values).unwrap().then(() => {
             // console.log("responseData", responseData);
             // console.log(responseData?.message)
             // console.log(responseData?.code)
@@ -246,8 +254,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
         // console.log("onFinish.values", JSON.stringify(values));
 
         let isNotFinish = false;
-        
-        // NOTICE：判斷前置／後置欄位是否有錯誤訊息　（有錯誤不送表單）
+
+        // NOTICE：判斷前置／後置欄位是否有錯誤訊息(有錯誤不送表單）
         Object.keys(customAntFormFieldError).map(key => {
             if (key !== 'productInterestRatePairs' && customAntFormFieldError[key]['validateStatus'] !== '') {
                 isNotFinish = true;
@@ -268,11 +276,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
             postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
             preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3)),
             plusAmount: Number(i.plusAmount),
-        }));
-
-        const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
-            ...i,
-            loanAmount: Number(i.loanAmount),
         }));
 
         let creatProductData: ProductTypes = {
@@ -420,7 +423,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         merchantList,
         customAntFormFieldError,
         setCustomAntFormFieldError,
-        setTriggerFetchTableList,
         triggerGetList,
         productListData,
         // onAutoFinishedForm,

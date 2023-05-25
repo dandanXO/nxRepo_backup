@@ -1,7 +1,7 @@
 import AdminPage from "../../../../shared/components/common/AdminPage";
 import { RepaymentRateTable } from "./RepaymentRateTable";
 
-export const NewCustomerRiskControlRepaymentRatePage = () => {
+export const NewCustomerRiskControlRepaymentRatePage = (): JSX.Element => {
     return (
         <AdminPage navigator={{
             ancestor: { path: '/', breadcrumbName: '首页' },

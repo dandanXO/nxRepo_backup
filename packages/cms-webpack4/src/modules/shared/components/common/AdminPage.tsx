@@ -32,7 +32,7 @@ export interface AdminTableTemplateProps {
 }
 
 // NOTICE: [TypeScript + React: Typing Generic forwardRefs](https://fettblog.eu/typescript-react-generic-forward-refs/)
-const AdminPage = (props: AdminTableTemplateProps) => {
+const AdminPage = (props: AdminTableTemplateProps): JSX.Element => {
 
     // // NOTE: Modal
     // const [showModalContent, setShowModalContent] = useState<ModalContent>({

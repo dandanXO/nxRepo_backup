@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Modal, Spin ,Input ,Radio } from "antd";
 import { FormModalProps } from "../../../../shared/domain/FormModal";
 
-const SmsConfigModal = (props: FormModalProps) => {
+const SmsConfigModal = (props: FormModalProps): JSX.Element => {
     const { isEdit, showModal, isSuccess, onFinish, form, setShowModal } = props;
     const layout = {
         labelCol: { span: 6 },

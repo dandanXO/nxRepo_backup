@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 interface ProductModalProps{
   isEdit?: boolean;
@@ -10,7 +10,7 @@ interface ProductModalProps{
   children?: React.ReactElement;
 }
 
-const ProductModal = (props: ProductModalProps) =>
+const ProductModal = (props: ProductModalProps): JSX.Element =>
 {
     return (
         <Modal

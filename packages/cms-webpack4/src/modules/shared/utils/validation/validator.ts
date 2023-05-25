@@ -1,25 +1,10 @@
 import { z } from "zod";
+import { RuleObject, StoreValue } from 'rc-field-form/lib/interface';
 
 const RequireNumberMessage = (number = 0) => `请输入大于${number}的整数`;
 interface Validator {
   name?: string;
 }
-export const PipeValidator = (_, value) => (pipes: Promise<unknown>[]) => {
-    // console.log("_", _)
-    // console.log("value", value)
-    // console.log("pipes", pipes);
-    return Promise.all(pipes).then(values => {
-    // console.log(values); // [3, 1337, "foo"]
-        return Promise.resolve();
-    }).catch((error) => {
-        return Promise.reject(error);
-    });
-
-};
-
-export const CustomValidator = (validatorFun) => new Promise((resolve, reject)=> {
-    return validatorFun(resolve, reject);
-});
 
 interface ValidateNumber extends Validator{
   required?: boolean;
@@ -30,24 +15,8 @@ interface ValidateNumber extends Validator{
   max?: number;
   maxMessage?: string;
 }
-export const NewNumberValidatorPromise = (value, params: ValidateNumber): Promise<unknown> => {
-    const scheme = z
-        .number({
-            invalid_type_error: params.typeErrorMessage || RequireNumberMessage(),
-        })
-        .min(params.min, params.minMessage || RequireNumberMessage(params.min))
-        .max(params.max, params.maxMessage);
-    const result = scheme.safeParse(value);
-    if (!result.success) {
-        const firstError = (result as any).error.format();
-        const errorMessage = firstError._errors[0];
-        return Promise.reject(errorMessage);
-    } else {
-        return Promise.resolve();
-    }
-};
 
-export const NumberValidator = (_, value) => (params: ValidateNumber) => {
+export const NumberValidator = (_: RuleObject, value: StoreValue) => (params: ValidateNumber): Promise<string> => {
     // console.log("value", value);
     // console.log("params", params);
     if(params.required) {
@@ -62,6 +31,7 @@ export const NumberValidator = (_, value) => (params: ValidateNumber) => {
 
     const scheme = z
         .number({
+            // eslint-disable-next-line camelcase
             invalid_type_error: params.typeErrorMessage || RequireNumberMessage(),
         })
         .min(params.min, params.minMessage || RequireNumberMessage(params.min))
@@ -80,7 +50,7 @@ interface ValidateEmail extends Validator {
   required?: boolean,
   requiredMessage?: string;
 }
-export const EmailValidator = (_, value) => (params: ValidateEmail) => {
+export const EmailValidator = (_: RuleObject, value: StoreValue) => (params: ValidateEmail): Promise<string|void> | Promise<void> => {
     const scheme = z
         .string({})
         .email({ message: params.typeErrorMessage || "请输入正确的邮箱格式" });
@@ -103,7 +73,7 @@ interface ValidateTag extends Validator {
     message?: string;
   }
 
-export const TagValidator = (_, value) => (params: ValidateTag) => {
+export const TagValidator = (_: RuleObject, value: StoreValue) => (params: ValidateTag): Promise<string|void> | Promise<void> => {
     // console.log("TagValidator.value", value);
     const scheme = z.string().array()
         .min(1, params.typeErrorMessage)

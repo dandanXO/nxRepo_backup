@@ -1,7 +1,6 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosError, AxiosRequestConfig } from "axios";
 import axios from "axios";
-import { Modal } from "antd";
 
 // const alertModal = (message: string) => {
 // const modal = Modal.error({

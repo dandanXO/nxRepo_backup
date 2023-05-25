@@ -1,20 +1,27 @@
-
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { setSearchParams, setPathname, selectSearchParams, setSelectedRow } from '../utils/searchParamsSlice';
 import { useDispatch, useSelector } from "react-redux";
+import { Key } from "antd/es/table/interface";
 
 interface usePageSearchParamsProps {
-    searchListParams?: {}
+    searchListParams?: unknown
 }
 
-const usePageSearchParams = (props: usePageSearchParamsProps) => {
+const usePageSearchParams = (props: usePageSearchParamsProps): {
+    searchList: Record<any, any>,
+    setSearchList: React.Dispatch<unknown>,
+    handleToDetailPage: (pathname: string, previousPathname: string, selectedRowParams?: Array<unknown>) => void,
+    searchParams: Record<any, any>,
+    selectedList: string[],
+    setSelectedList: React.Dispatch<Key[]>
+} => {
 
     const { searchListParams } = props;
 
     const dispatch = useDispatch();
     const { searchParams = {}, selectedRow = [] } = useSelector(selectSearchParams);
 
-    const [searchList, setSearchList] = useState<any>(searchListParams);
+    const [searchList, setSearchList] = useState<unknown>(searchListParams);
     const [selectedList, setSelectedList] = useState([]);
     useEffect(() => {
         setSearchList(Object.keys(searchParams).length > 0 ? searchParams : searchListParams);
