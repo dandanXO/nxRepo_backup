@@ -5,7 +5,7 @@
       {
         "debug": true,
         "bugfixes": true,
-        "useBuiltIns": "entry",
+        "useBuiltIns": false,
         "corejs": 3,
         "targets": "cover 99%",
         "forceAllTransforms": true,
@@ -24,7 +24,7 @@
         "corejs": {
           "version": 3,
           "proposals": false,
-          "useBuiltIns": "entry",
+          "useBuiltIns": false,
           "helpers": true,
           "regenerator": true,
           "absoluteRuntime": true
@@ -32,6 +32,7 @@
       }
     ],
     ["styled-components", { "pure": true, "ssr": true }]
+
 
   ]
 }
