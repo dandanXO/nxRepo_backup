@@ -119,6 +119,14 @@ export const useProductFormModal = (props: ProductFormModal) => {
     const [enableReLoanAmount, setEnableReLoanAmount] = useState<boolean>(false);
 
 
+    useEffect(() => {
+        if(!productModalData.show) {
+            setEnableLoanAmount(false);
+            setEnableReLoanAmount(false);
+            return;
+        }
+    }, [productModalData.show])
+
 
     useEffect(() => {
         if (isFetching) return;
