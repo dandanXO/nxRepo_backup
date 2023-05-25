@@ -38,6 +38,7 @@ module.exports = {
         new ESLintPlugin({
             eslintPath: require.resolve('eslint'),
             context: path.resolve(__dirname, '../src'),
+            overrideConfigFile: path.resolve(__dirname, '../.eslintrc'),
             extensions: ['js', 'jsx', 'ts', 'tsx'],
             emitWarning: true, // 發出警告而不是錯誤
             emitError: false, // 不中斷打包過程
