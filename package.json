@@ -33,7 +33,7 @@
     "serve:ain:a": "cross-env NODE_ENV=development NODE_COUNTRY=in NODE_ANALYZER=true pnpm nx serve-in app -c=development",
     "serve:apk:a": "cross-env NODE_ENV=development NODE_COUNTRY=pk NODE_ANALYZER=true pnpm nx serve-pk app -c=development",
     "serve:abd:a": "cross-env NODE_ENV=development NODE_COUNTRY=bd NODE_ANALYZER=true pnpm nx serve-bd app -c=development",
-    "build:ain": "cross-env NODE_ENV=production NODE_COUNTRY=in pnpm nx run-many --target=build --projects=app  --configuration=production-in --verbose && rm -rf ./dist/apps/app/*.map ",
+    "build:ain": "rm ./node_modules/react-apexcharts/.babelrc && cross-env NODE_ENV=production NODE_COUNTRY=in pnpm nx run-many --target=build --projects=app  --configuration=production-in --verbose && rm -rf ./dist/apps/app/*.map ",
     "build:apk": "cross-env NODE_ENV=production NODE_COUNTRY=pk pnpm nx run-many --target=build --projects=app  --configuration=production-pk --verbose && rm -rf ./dist/apps/app/*.map ",
     "build:abd": "cross-env NODE_ENV=production NODE_COUNTRY=bd pnpm nx run-many --target=build --projects=app  --configuration=production-bd --verbose && rm -rf ./dist/apps/app/*.map ",
     "e2e:ain": "cross-env NODE_ENV=development nx run app-e2e:e2e:dev-in",
