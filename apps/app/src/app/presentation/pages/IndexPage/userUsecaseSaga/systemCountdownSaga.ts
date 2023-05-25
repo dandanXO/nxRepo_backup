@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import { delay, put, select } from 'redux-saga/effects';
+import { delay, put } from 'redux-saga/effects';
 
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';

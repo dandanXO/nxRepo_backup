@@ -1,3 +1,4 @@
+import "./polyfills";
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 import { SentryModule } from './app/modules/sentry';
 import "./app/modules/errorHandler";
