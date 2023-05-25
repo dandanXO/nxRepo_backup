@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space } from 'antd';
+import { Button, Space } from 'antd';
 import { GetBlackListProps,GetBlackListRequestQuerystring,BlackListReponse } from '../../../api/types/blackListTypes/getBlackList';
 import { useLazyGetBlackListQuery } from '../../../api/BlackListApi';
 import { PlusOutlined } from '@ant-design/icons';
 import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
 
 interface BlackLisTableProps {
-    setShowModal?: React.Dispatch<React.SetStateAction<Object>>;
+    setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
     isPostBlackListSuccess: boolean;
 }
 
-const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableProps) => {
+const BlackListTable = ({ setShowModal, isPostBlackListSuccess }: BlackLisTableProps): JSX.Element => {
 
     const { operatorListEnum } = useValuesEnums();
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetBlackListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetBlackListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

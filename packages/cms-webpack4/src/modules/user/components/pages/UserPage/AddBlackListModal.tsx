@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Modal, Spin, Input, Radio } from "antd";
+import { Form, Modal, Input } from "antd";
 
 interface AddBlackLisModalProps {
     showModal?: boolean;
@@ -9,7 +9,7 @@ interface AddBlackLisModalProps {
 }
 
 
-const AddBlackListModal = ((props: AddBlackLisModalProps) => {
+const AddBlackListModal = ((props: AddBlackLisModalProps):JSX.Element => {
     const { showModal, handleCloseModal, form, onFinish } = props;
 
     const layout = {

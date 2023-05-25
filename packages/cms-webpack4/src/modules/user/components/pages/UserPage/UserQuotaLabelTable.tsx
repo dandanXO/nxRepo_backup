@@ -1,5 +1,5 @@
-import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { EditableProTable, ProCard, ProFormField, ProFormRadio } from '@ant-design/pro-components';
+import { ProColumns } from '@ant-design/pro-components';
+import { EditableProTable } from '@ant-design/pro-components';
 import React, { useEffect, useState } from 'react';
 import {
     useLazyGetUserQuotaLabelListQuery,
@@ -9,30 +9,30 @@ import {
 } from '../../../api/UserQuotaLabelApi';
 import useGetUserQuotaLabelEnum from '../../../../shared/hooks/useGetUserQuotaLabelEnum';
 import { Button, Popconfirm, Space } from 'antd';
-import { GetUserQuotaLabelListRequestQuerystring, GetUserQuotaLabelListProps, GetUserQuotaLabelListResponse, UserQuotaLabel } from '../../../api/types/userQuotaLabelTypes/getUserQuotaLabelList';
+import { GetUserQuotaLabelListRequestQuerystring, UserQuotaLabel } from '../../../api/types/userQuotaLabelTypes/getUserQuotaLabelList';
 import { NumberValidator } from '../../../../shared/utils/validation/validator';
 
 
 
-export default () => {
+export default (): JSX.Element => {
     const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
     const [dataSource, setDataSource] = useState<UserQuotaLabel[]>([]);
 
-    const { triggerGetUserQuotaLable, userQuotaLablEnum, userQuotaLablSelect, colorEnum } = useGetUserQuotaLabelEnum();
+    const { triggerGetUserQuotaLable, userQuotaLablEnum, colorEnum } = useGetUserQuotaLabelEnum();
 
     const initSearchList: GetUserQuotaLabelListRequestQuerystring = {
         labelId: '', pageSize: 1000, pageNum: 1
     };
     const [searchList, setSearchList] = useState(initSearchList);
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetUserQuotaLabelListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetUserQuotaLabelListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [AddUserQuotaLabel, { isSuccess: isAddSuccess, isLoading: isAdding, }] = usePostUserQuotaLabelMutation();
-    const [EditUserQuotaLabel, { isSuccess: isEditSuccess, isLoading: isEditing, }] = usePutUserQuotaLabelMutation();
-    const [deleteUserQuotaLabel, { isSuccess: isDeteleSuccess, isLoading: isDeleting, }] = useDeleteUserQuotaLabelMutation();
+    const [AddUserQuotaLabel, { isSuccess: isAddSuccess }] = usePostUserQuotaLabelMutation();
+    const [EditUserQuotaLabel, { isSuccess: isEditSuccess }] = usePutUserQuotaLabelMutation();
+    const [deleteUserQuotaLabel, { isSuccess: isDeteleSuccess }] = useDeleteUserQuotaLabelMutation();
 
     useEffect(() => {
         triggerGetList(searchList);
@@ -73,7 +73,7 @@ export default () => {
         },
         {
             title: '用户额度标签', dataIndex: 'quotaLabel', hideInSearch: true,
-            formItemProps: (form, { rowIndex }) => {
+            formItemProps: () => {
                 return {
                     rules: [{ required: true, message: '此项为必填项' }]
                 };
@@ -81,7 +81,7 @@ export default () => {
         },
         {
             title: '标签顏色', key: 'labelColor', dataIndex: 'labelColor', valueType: 'select', valueEnum: colorEnum, hideInSearch: true, initialValue: 'blue',
-            formItemProps: (form, { rowIndex }) => {
+            formItemProps: () => {
                 return {
                     rules: [{ required: true }]
                 };
@@ -89,7 +89,7 @@ export default () => {
         },
         {
             title: '可借笔数', dataIndex: 'loanCount', key: 'loanCount', hideInSearch: true,
-            formItemProps: (form, { rowIndex }) => {
+            formItemProps: () => {
                 return {
                     rules: [
                         {
@@ -107,7 +107,7 @@ export default () => {
         },
         {
             title: '可借额度', dataIndex: 'balance', key: 'balance', hideInSearch: true,
-            formItemProps: (form, { rowIndex }) => {
+            formItemProps: () => {
                 return {
                     rules: [
                         {
@@ -186,7 +186,7 @@ export default () => {
                         return isEdit ? [dom.save, dom.delete, dom.cancel] : [dom.save, dom.delete];
                     }
                 }}
-             
+
             />
         </>
     );
