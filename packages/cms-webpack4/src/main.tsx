@@ -1,13 +1,12 @@
+import App from './App';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-import App from './App';
 
 // TODO: 18
 // let root;
 
 function render(props) {
-    console.log("render.props", props);
+    console.log('render.props', props);
     // NOTICE: 17
     const { container } = props;
     ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));
@@ -23,11 +22,13 @@ function render(props) {
     // console.log("1");
     // root.render(<App />);
     // console.log("2");
-
 }
 
 function storeTest(props) {
-    props.onGlobalStateChange((value, prev) => console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev), true);
+    props.onGlobalStateChange(
+        (value, prev) => console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev),
+        true,
+    );
     props.setGlobalState({
         ignore: props.name,
         user: {
@@ -36,11 +37,11 @@ function storeTest(props) {
     });
 }
 
-if (!window["__POWERED_BY_QIANKUN__"]) {
-    console.log("[cms-webpack4] 不在 qiankun 內");
+if (!window['__POWERED_BY_QIANKUN__']) {
+    console.log('[cms-webpack4] 不在 qiankun 內');
     render({});
 } else {
-    console.log("[cms-webpack4] 在 qiankun 內");
+    console.log('[cms-webpack4] 在 qiankun 內');
 }
 
 export async function bootstrap(): Promise<void> {

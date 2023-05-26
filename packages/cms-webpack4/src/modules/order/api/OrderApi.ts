@@ -1,5 +1,5 @@
-import { API } from "../../shared/api";
-import { GetOrderListRequestQuerystring, GetOrderListProps } from "./types/getOrderList";
+import { API } from '../../shared/api';
+import { GetOrderListProps, GetOrderListRequestQuerystring } from './types/getOrderList';
 
 const OrderApi = API.injectEndpoints({
     overrideExisting: false,
@@ -9,11 +9,9 @@ const OrderApi = API.injectEndpoints({
             query: (requestBody: GetOrderListRequestQuerystring) => ({
                 url: `/order/list`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
+    }),
 });
-export const {
-    useLazyGetOrderListQuery
-} = OrderApi;
+export const { useLazyGetOrderListQuery } = OrderApi;

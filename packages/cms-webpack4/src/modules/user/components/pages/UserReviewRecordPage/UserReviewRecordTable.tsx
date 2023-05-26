@@ -1,30 +1,39 @@
-import { useEffect, useState } from 'react';
+import CopyText from '../../../../shared/components/other/CopyText';
+import useGetUserReviewRecordOperatorEnum from '../../../../shared/hooks/useGetUserReviewRecordOperatorEnum';
+import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
+import { useLazyGetUserReviewRecordListQuery } from '../../../api/UserReviewRecordApi';
+import {
+    GetUserReviewRecordListProps,
+    GetUserReviewRecordListRequestQuerystring,
+    UserReviewRecordList,
+} from '../../../api/types/userReviewRecordTypes/getUserReviewRecordList';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
-import useGetUserReviewRecordOperatorEnum from '../../../../shared/hooks/useGetUserReviewRecordOperatorEnum';
-import { useLazyGetUserReviewRecordListQuery } from '../../../api/UserReviewRecordApi';
-import { UserReviewRecordList, GetUserReviewRecordListRequestQuerystring, GetUserReviewRecordListProps } from '../../../api/types/userReviewRecordTypes/getUserReviewRecordList';
-import CopyText from '../../../../shared/components/other/CopyText';
-import queryString from "query-string";
-import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
+import queryString from 'query-string';
+import { useEffect, useState } from 'react';
 
 const UserReviewRecordTable = (): JSX.Element => {
-
-    const { triggerGetOperatorList, userReviewRecordOperatorEnum  } = useGetUserReviewRecordOperatorEnum();
-    const initSearchList:GetUserReviewRecordListRequestQuerystring = {
-        operatorId: '', phoneNo: '', reviewStatus: '', reviewTimeEnd: '', reviewTimeStart: '', userName: '', pageNum: 1, pageSize: 10
+    const { triggerGetOperatorList, userReviewRecordOperatorEnum } = useGetUserReviewRecordOperatorEnum();
+    const initSearchList: GetUserReviewRecordListRequestQuerystring = {
+        operatorId: '',
+        phoneNo: '',
+        reviewStatus: '',
+        reviewTimeEnd: '',
+        reviewTimeStart: '',
+        userName: '',
+        pageNum: 1,
+        pageSize: 10,
     };
 
     const [searchList, setSearchList] = useState<GetUserReviewRecordListRequestQuerystring>(initSearchList);
-    const [recordList,setRecordList] = useState<GetUserReviewRecordListProps>({ records: [] });
+    const [recordList, setRecordList] = useState<GetUserReviewRecordListProps>({ records: [] });
     // api
     const [triggerGetList, { currentData, isFetching }] = useLazyGetUserReviewRecordListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
-        refetchOnReconnect: false
+        refetchOnReconnect: false,
     });
-
 
     useEffect(() => {
         triggerGetList(searchList);
@@ -36,10 +45,9 @@ const UserReviewRecordTable = (): JSX.Element => {
         }
     }, [currentData]);
 
-    useEffect(()=>{
+    useEffect(() => {
         triggerGetOperatorList(null);
-    },[]);
-
+    }, []);
 
     const pageOnChange = (current, pageSize) => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
@@ -61,14 +69,55 @@ const UserReviewRecordTable = (): JSX.Element => {
     };
 
     const columns: ProColumns<UserReviewRecordList>[] = [
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '审核状态', dataIndex: 'reviewStatus', valueType: 'select', key: 'reviewStatus', initialValue: "", valueEnum: enumObjectToMap(statusEnum) },
-        { title: '审核时间', dataIndex: 'reviewTime', key: 'reviewTime', hideInSearch: true, valueType: 'dateTime',  },
-        { title: '审核时间', dataIndex: 'reviewTimeRange', valueType: 'dateRange', key: 'reviewTimeRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: "" },
-        { title: '操作人', dataIndex: 'operatorId', key: 'operatorId', valueType: 'select', valueEnum: userReviewRecordOperatorEnum, initialValue: "" , hideInTable: true },
+        {
+            title: '手机号',
+            dataIndex: 'phoneNo',
+            key: 'phoneNo',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '姓名',
+            dataIndex: 'userName',
+            key: 'userName',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '审核状态',
+            dataIndex: 'reviewStatus',
+            valueType: 'select',
+            key: 'reviewStatus',
+            initialValue: '',
+            valueEnum: enumObjectToMap(statusEnum),
+        },
+        { title: '审核时间', dataIndex: 'reviewTime', key: 'reviewTime', hideInSearch: true, valueType: 'dateTime' },
+        {
+            title: '审核时间',
+            dataIndex: 'reviewTimeRange',
+            valueType: 'dateRange',
+            key: 'reviewTimeRange',
+            fieldProps: { placeholder: ['开始时间', '结束时间'] },
+            hideInTable: true,
+            initialValue: '',
+        },
+        {
+            title: '操作人',
+            dataIndex: 'operatorId',
+            key: 'operatorId',
+            valueType: 'select',
+            valueEnum: userReviewRecordOperatorEnum,
+            initialValue: '',
+            hideInTable: true,
+        },
         { title: '操作人', dataIndex: 'operator', key: 'operator', hideInSearch: true },
-        { title: '备注', dataIndex: 'remark', key: 'remark', hideInSearch: true, render: (text) => <CopyText text={text} /> },
+        {
+            title: '备注',
+            dataIndex: 'remark',
+            key: 'remark',
+            hideInSearch: true,
+            render: (text) => <CopyText text={text} />,
+        },
     ];
     return (
         <ProTable<UserReviewRecordList>
@@ -81,24 +130,33 @@ const UserReviewRecordTable = (): JSX.Element => {
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
                     <Space>
-                        <Button onClick={() => {
-                            //  form.resetFields();
-                            // @ts-ignore
-                            form.setFieldsValue({ ...initSearchList, reviewTimeRange: '' });
-                            setSearchList(initSearchList);
-                        }}>{resetText}</Button>
+                        <Button
+                            onClick={() => {
+                                //  form.resetFields();
+                                // @ts-ignore
+                                form.setFieldsValue({ ...initSearchList, reviewTimeRange: '' });
+                                setSearchList(initSearchList);
+                            }}
+                        >
+                            {resetText}
+                        </Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
-                                // @ts-ignore
-                                const { reviewTimeRange, phoneNo, userName, reviewStatus, operatorId } = form.getFieldValue();
+                                const { reviewTimeRange, phoneNo, userName, reviewStatus, operatorId } =
+                                    // @ts-ignore
+                                    form.getFieldValue();
                                 setSearchList({
                                     ...searchList,
                                     phoneNo,
                                     userName,
                                     reviewStatus: reviewStatus === '' ? '' : Number(reviewStatus),
-                                    reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    reviewTimeEnd: reviewTimeRange
+                                        ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59')
+                                        : '',
+                                    reviewTimeStart: reviewTimeRange
+                                        ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00')
+                                        : '',
                                     operatorId,
                                     pageNum: 1,
                                 });
@@ -111,11 +169,14 @@ const UserReviewRecordTable = (): JSX.Element => {
                 ),
             }}
             options={{
-                setting: { listsHeight: 400, },
+                setting: { listsHeight: 400 },
                 reload: () => triggerGetList(searchList),
-
             }}
-            toolBarRender={() => [<Button onClick={handleExportUserRecordList} type='primary'>导出</Button>]}
+            toolBarRender={() => [
+                <Button onClick={handleExportUserRecordList} type="primary">
+                    导出
+                </Button>,
+            ]}
             pagination={{
                 showSizeChanger: true,
                 defaultPageSize: 10,
@@ -124,9 +185,7 @@ const UserReviewRecordTable = (): JSX.Element => {
                 current: recordList?.records?.length === 0 ? 0 : recordList.currentPage,
             }}
         />
-
     );
 };
 
 export default UserReviewRecordTable;
-

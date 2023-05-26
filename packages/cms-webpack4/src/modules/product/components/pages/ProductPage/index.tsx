@@ -1,24 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import ProductTable from "./ProductTable";
+import { itemRender } from '../../../../shared/components/common/itemRender';
+import ProductForm from './ProductForm';
+import { ProductModal } from './ProductModal';
+import ProductTable from './ProductTable';
+import { useProductFormModal } from './hooks/useProductFormModal';
 import { PageContainer } from '@ant-design/pro-components';
-import { useProductFormModal } from "./hooks/useProductFormModal";
-import { ProductModal } from "./ProductModal";
-import ProductForm from "./ProductForm";
-import { itemRender } from "../../../../shared/components/common/itemRender";
+import React, { useEffect, useState } from 'react';
 
 export const ProductPage = (): JSX.Element => {
-
     const [domLoaded, setDomLoaded] = useState(false);
     useEffect(() => {
         setDomLoaded(true);
     }, []);
 
     const {
-        productModalData, setProductModalData,
-        form, handleCloseModal, merchantList,
-        onFinish, setCustomAntFormFieldError,
+        productModalData,
+        setProductModalData,
+        form,
+        handleCloseModal,
+        merchantList,
+        onFinish,
+        setCustomAntFormFieldError,
         customAntFormFieldError,
-        triggerGetList, productListData,
+        triggerGetList,
+        productListData,
         // onAutoFinishedForm,
         onFormSubmit,
         enableLoanAmount,
@@ -29,7 +33,7 @@ export const ProductPage = (): JSX.Element => {
     } = useProductFormModal({
         show: false,
         isEdit: false,
-    // formRef,
+        // formRef,
     });
 
     return domLoaded ? (
@@ -56,7 +60,11 @@ export const ProductPage = (): JSX.Element => {
                 },
             }}
         >
-            <ProductTable triggerGetList={triggerGetList} productListData={productListData} setProductModalData={setProductModalData} />
+            <ProductTable
+                triggerGetList={triggerGetList}
+                productListData={productListData}
+                setProductModalData={setProductModalData}
+            />
 
             {productModalData.show && (
                 <ProductModal
@@ -66,7 +74,8 @@ export const ProductPage = (): JSX.Element => {
                     isEdit={productModalData.isEdit}
                     onOk={onFormSubmit}
                 >
-                    <ProductForm productModalData={productModalData}
+                    <ProductForm
+                        productModalData={productModalData}
                         onFinish={onFinish}
                         form={form}
                         merchantList={merchantList}

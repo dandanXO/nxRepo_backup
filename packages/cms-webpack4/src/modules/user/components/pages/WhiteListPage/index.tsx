@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Form } from 'antd';
 import AdminPage from '../../../../shared/components/common/AdminPage';
-import WhiteListTable from './WhiteListTable';
-import AddWhiteListModal from './AddWhiteListModal';
 import { usePostWhiteListMutation } from '../../../api/WhiteListApi';
+import AddWhiteListModal from './AddWhiteListModal';
+import WhiteListTable from './WhiteListTable';
+import { Form } from 'antd';
+import { useState } from 'react';
 
-const WhiteListPage = ():JSX.Element => {
+const WhiteListPage = (): JSX.Element => {
     const [showModal, setShowModal] = useState(false);
     const [form] = Form.useForm();
-    const [postWhiteList, {  isSuccess }] = usePostWhiteListMutation();
+    const [postWhiteList, { isSuccess }] = usePostWhiteListMutation();
 
     const onFinish = (values: any) => {
         console.log(values);
@@ -40,7 +40,7 @@ const WhiteListPage = ():JSX.Element => {
             }}
         >
             <>
-                <WhiteListTable setShowModal={setShowModal} isPostWhiteListSuccess={isSuccess}/>
+                <WhiteListTable setShowModal={setShowModal} isPostWhiteListSuccess={isSuccess} />
                 <AddWhiteListModal
                     showModal={showModal}
                     handleCloseModal={handleCloseModal}
@@ -53,4 +53,3 @@ const WhiteListPage = ():JSX.Element => {
 };
 
 export default WhiteListPage;
-

@@ -1,19 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
+import useGetProductNamesEnum from '../../../../shared/hooks/common/useGetProductNamesEnum';
+import useGetAppNamesEnum from '../../../../shared/hooks/useGetAppNamesEnum';
+import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
+import { useLazyGetReloanStatisticsListQuery } from '../../../api/ReloanStatisticsApi';
+import {
+    GetReloanStatisticsList,
+    GetReloanStatisticsListRequestQuerystring,
+} from '../../../api/types/ReloanStatisticsTypes/getReloanStatisticsList';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Space, Tag, Tooltip } from 'antd';
-import { GetReloanStatisticsListRequestQuerystring, GetReloanStatisticsList, } from '../../../api/types/ReloanStatisticsTypes/getReloanStatisticsList';
-import { useLazyGetReloanStatisticsListQuery } from '../../../api/ReloanStatisticsApi';
-import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
-import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import useGetAppNamesEnum from '../../../../shared/hooks/useGetAppNamesEnum';
-import useGetProductNamesEnum from '../../../../shared/hooks/common/useGetProductNamesEnum';
-import queryString from "query-string";
+import queryString from 'query-string';
+import { useEffect, useRef, useState } from 'react';
 
 const { CheckableTag } = Tag;
 const ReloanStatisticsTable = (): JSX.Element => {
-
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const { triggerGetAppNames, appNamesEnum } = useGetAppNamesEnum();
@@ -23,11 +25,15 @@ const ReloanStatisticsTable = (): JSX.Element => {
     const [triggerGetList, { currentData, isFetching }] = useLazyGetReloanStatisticsListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
-        refetchOnReconnect: false
+        refetchOnReconnect: false,
     });
 
     const initSearchList: GetReloanStatisticsListRequestQuerystring = {
-        appName: '', repayEndDate: '', merchantId: '', repayStartDate: '', productId: ''
+        appName: '',
+        repayEndDate: '',
+        merchantId: '',
+        repayStartDate: '',
+        productId: '',
     };
 
     // // state
@@ -46,83 +52,247 @@ const ReloanStatisticsTable = (): JSX.Element => {
     }, [isSuperAdmin]);
 
     const columns: ProColumns<GetReloanStatisticsList>[] = [
-        { title: 'APP名称', dataIndex: 'appName', key: 'appName', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: appNamesEnum, fieldProps: { showSearch: true } },
-        { title: '产品名称', dataIndex: 'productId', key: 'productId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: productNamesEnum, fieldProps: { showSearch: true } },
-        { title: '到期时间', dataIndex: 'dateRange', key: 'dateRange', valueType: 'dateRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: "" },
-        { title: '到期日', dataIndex: 'expireDate', key: 'expireDate', hideInSearch: true, width: '100px' }
+        {
+            title: 'APP名称',
+            dataIndex: 'appName',
+            key: 'appName',
+            hideInTable: true,
+            initialValue: '',
+            valueType: 'select',
+            valueEnum: appNamesEnum,
+            fieldProps: { showSearch: true },
+        },
+        {
+            title: '产品名称',
+            dataIndex: 'productId',
+            key: 'productId',
+            hideInTable: true,
+            initialValue: '',
+            valueType: 'select',
+            valueEnum: productNamesEnum,
+            fieldProps: { showSearch: true },
+        },
+        {
+            title: '到期时间',
+            dataIndex: 'dateRange',
+            key: 'dateRange',
+            valueType: 'dateRange',
+            fieldProps: { placeholder: ['开始时间', '结束时间'] },
+            hideInTable: true,
+            initialValue: '',
+        },
+        { title: '到期日', dataIndex: 'expireDate', key: 'expireDate', hideInSearch: true, width: '100px' },
     ];
 
     if (isSuperAdmin) {
         columns.splice(0, 0, {
-            title: '商户名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: '', valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true }
+            title: '商户名',
+            dataIndex: 'merchantId',
+            key: 'merchantId',
+            hideInTable: true,
+            initialValue: '',
+            valueType: 'select',
+            valueEnum: merchantListEnum,
+            fieldProps: { showSearch: true },
         });
     }
 
-    const customColumns:any[] = [
+    const customColumns: any[] = [
         {
-            title: '到期订单数', dataIndex: 'expireOrder', key: 'expireOrder', hideInSearch: true,
+            title: '到期订单数',
+            dataIndex: 'expireOrder',
+            key: 'expireOrder',
+            hideInSearch: true,
             children: [
-                { title: '到期总订单数', dataIndex: 'expireDateOrderCount', key: 'expireDateOrderCount', hideInSearch: true, className: 'totalColumn' },
-                { title: '新客到期订单数', dataIndex: 'expireDateNewUserOrderCount', key: 'expireDateNewUserOrderCount', hideInSearch: true, className: 'newCustomer' },
-                { title: '老客到期订单数', dataIndex: 'expireDateOldUserOrderCount', key: 'expireDateOldUserOrderCount', hideInSearch: true, className: 'oldCustomer' },
-            ]
+                {
+                    title: '到期总订单数',
+                    dataIndex: 'expireDateOrderCount',
+                    key: 'expireDateOrderCount',
+                    hideInSearch: true,
+                    className: 'totalColumn',
+                },
+                {
+                    title: '新客到期订单数',
+                    dataIndex: 'expireDateNewUserOrderCount',
+                    key: 'expireDateNewUserOrderCount',
+                    hideInSearch: true,
+                    className: 'newCustomer',
+                },
+                {
+                    title: '老客到期订单数',
+                    dataIndex: 'expireDateOldUserOrderCount',
+                    key: 'expireDateOldUserOrderCount',
+                    hideInSearch: true,
+                    className: 'oldCustomer',
+                },
+            ],
         },
         {
-            title: '到期用户数', dataIndex: 'expireUser', key: 'expireUser', hideInSearch: true,
+            title: '到期用户数',
+            dataIndex: 'expireUser',
+            key: 'expireUser',
+            hideInSearch: true,
             children: [
-                { title: '到期总用户数', dataIndex: 'expireDateOrderUserCount', key: 'expireDateOrderUserCount', hideInSearch: true, className: 'totalColumn' },
-                { title: '新客到期用户数', dataIndex: 'expireDateNewUserOrderUserCount', key: 'expireDateNewUserOrderUserCount', hideInSearch: true, className: 'newCustomer' },
-                { title: '老客到期用户数', dataIndex: 'expireDateOldUserOrderUserCount', key: 'expireDateOldUserOrderUserCount', hideInSearch: true, className: 'oldCustomer'  },
-            ]
+                {
+                    title: '到期总用户数',
+                    dataIndex: 'expireDateOrderUserCount',
+                    key: 'expireDateOrderUserCount',
+                    hideInSearch: true,
+                    className: 'totalColumn',
+                },
+                {
+                    title: '新客到期用户数',
+                    dataIndex: 'expireDateNewUserOrderUserCount',
+                    key: 'expireDateNewUserOrderUserCount',
+                    hideInSearch: true,
+                    className: 'newCustomer',
+                },
+                {
+                    title: '老客到期用户数',
+                    dataIndex: 'expireDateOldUserOrderUserCount',
+                    key: 'expireDateOldUserOrderUserCount',
+                    hideInSearch: true,
+                    className: 'oldCustomer',
+                },
+            ],
         },
         {
-            title: '还款订单数', dataIndex: 'repayOrder', key: 'repayOrder', hideInSearch: true,
+            title: '还款订单数',
+            dataIndex: 'repayOrder',
+            key: 'repayOrder',
+            hideInSearch: true,
             children: [
-                { title: '还款总订单数', dataIndex: 'expireDateRepayOrderCount', key: 'expireDateRepayOrderCount', hideInSearch: true, className: 'totalColumn' },
-                { title: '新客还款订单数', dataIndex: 'expireDateNewUserRepayOrderCount', key: 'expireDateNewUserRepayOrderCount', hideInSearch: true, className: 'newCustomer' },
-                { title: '老客还款订单数', dataIndex: 'expireDateOldUserOrderRepayCount', key: 'expireDateOldUserOrderRepayCount', hideInSearch: true, className: 'oldCustomer'  },
-            ]
+                {
+                    title: '还款总订单数',
+                    dataIndex: 'expireDateRepayOrderCount',
+                    key: 'expireDateRepayOrderCount',
+                    hideInSearch: true,
+                    className: 'totalColumn',
+                },
+                {
+                    title: '新客还款订单数',
+                    dataIndex: 'expireDateNewUserRepayOrderCount',
+                    key: 'expireDateNewUserRepayOrderCount',
+                    hideInSearch: true,
+                    className: 'newCustomer',
+                },
+                {
+                    title: '老客还款订单数',
+                    dataIndex: 'expireDateOldUserOrderRepayCount',
+                    key: 'expireDateOldUserOrderRepayCount',
+                    hideInSearch: true,
+                    className: 'oldCustomer',
+                },
+            ],
         },
         {
-            title: '还款用户数', dataIndex: 'repayUser', key: 'repayUser', hideInSearch: true,
+            title: '还款用户数',
+            dataIndex: 'repayUser',
+            key: 'repayUser',
+            hideInSearch: true,
             children: [
-                { title: '还款总用户数', dataIndex: 'expireDateRepayOrderUserCount', key: 'expireDateOrderUserCount', hideInSearch: true, className: 'totalColumn' },
-                { title: '新客还款用户数', dataIndex: 'expireDateRepayNewUserOrderUserCount', key: 'expireDateNewUserOrderUserCount', hideInSearch: true, className: 'newCustomer' },
-                { title: '老客还款用户数', dataIndex: 'expireDateRepayOldUserOrderUserCount', key: 'expireDateOldUserOrderCount', hideInSearch: true, className: 'oldCustomer'  },
-            ]
+                {
+                    title: '还款总用户数',
+                    dataIndex: 'expireDateRepayOrderUserCount',
+                    key: 'expireDateOrderUserCount',
+                    hideInSearch: true,
+                    className: 'totalColumn',
+                },
+                {
+                    title: '新客还款用户数',
+                    dataIndex: 'expireDateRepayNewUserOrderUserCount',
+                    key: 'expireDateNewUserOrderUserCount',
+                    hideInSearch: true,
+                    className: 'newCustomer',
+                },
+                {
+                    title: '老客还款用户数',
+                    dataIndex: 'expireDateRepayOldUserOrderUserCount',
+                    key: 'expireDateOldUserOrderCount',
+                    hideInSearch: true,
+                    className: 'oldCustomer',
+                },
+            ],
         },
         {
-            title: '纯新客订单数', dataIndex: 'newUserOrder', key: 'newUserOrder', hideInSearch: true,
+            title: '纯新客订单数',
+            dataIndex: 'newUserOrder',
+            key: 'newUserOrder',
+            hideInSearch: true,
             children: [
-                { title: '纯新客订单数', dataIndex: 'addDateNewUserOrderCount', key: 'addDateNewUserOrderCount', hideInSearch: true, className: '' },
-            ]
+                {
+                    title: '纯新客订单数',
+                    dataIndex: 'addDateNewUserOrderCount',
+                    key: 'addDateNewUserOrderCount',
+                    hideInSearch: true,
+                    className: '',
+                },
+            ],
         },
         {
-            title: '订单复借统计', dataIndex: 'reloanOrder', key: 'reloanOrder', hideInSearch: true,
+            title: '订单复借统计',
+            dataIndex: 'reloanOrder',
+            key: 'reloanOrder',
+            hideInSearch: true,
             children: [
-                { title: '次新客订单数', dataIndex: 'addDateRenewOrderCount', key: 'addDateRenewOrderCount', hideInSearch: true, className: '' },
-                { title: '复借订单数', dataIndex: 'addDateReLoanOrderCount', key: 'addDateReLoanOrderCount', hideInSearch: true, className: '' },
-                { title: '订单复借率', dataIndex: 'orderReLoanRate', key: 'orderReLoanRate', hideInSearch: true, className: '' , tooltip: '订单复借率=复借订单数/还款订单总数' },
-            ]
+                {
+                    title: '次新客订单数',
+                    dataIndex: 'addDateRenewOrderCount',
+                    key: 'addDateRenewOrderCount',
+                    hideInSearch: true,
+                    className: '',
+                },
+                {
+                    title: '复借订单数',
+                    dataIndex: 'addDateReLoanOrderCount',
+                    key: 'addDateReLoanOrderCount',
+                    hideInSearch: true,
+                    className: '',
+                },
+                {
+                    title: '订单复借率',
+                    dataIndex: 'orderReLoanRate',
+                    key: 'orderReLoanRate',
+                    hideInSearch: true,
+                    className: '',
+                    tooltip: '订单复借率=复借订单数/还款订单总数',
+                },
+            ],
         },
         {
-            title: '用户复借统计', dataIndex: 'reloanUser', key: 'reloanUser', hideInSearch: true,
+            title: '用户复借统计',
+            dataIndex: 'reloanUser',
+            key: 'reloanUser',
+            hideInSearch: true,
             children: [
-                { title: '复借用户数', dataIndex: 'reLoanUserCount', key: 'reLoanUserCount', hideInSearch: true, className: '' },
-                { title: '用户复借率', dataIndex: 'userReLoanRate', key: 'userReLoanRate', hideInSearch: true, tooltip: '用户复借率=复借用戶数/还款用戶总数', className: '' },
-            ]
+                {
+                    title: '复借用户数',
+                    dataIndex: 'reLoanUserCount',
+                    key: 'reLoanUserCount',
+                    hideInSearch: true,
+                    className: '',
+                },
+                {
+                    title: '用户复借率',
+                    dataIndex: 'userReLoanRate',
+                    key: 'userReLoanRate',
+                    hideInSearch: true,
+                    tooltip: '用户复借率=复借用戶数/还款用戶总数',
+                    className: '',
+                },
+            ],
         },
     ];
 
     const formRef = useRef<ProFormInstance>();
     const subTitleTypes = ['totalColumn', 'newCustomer', 'oldCustomer'];
     const [tagColumns, setTagColumns] = useState<any[]>(customColumns);
-    const [selectedTags, setSelectedTags] = useState<string[]>(customColumns.map(i => i['key']));
+    const [selectedTags, setSelectedTags] = useState<string[]>(customColumns.map((i) => i['key']));
     const [selectedSubTags, setSelectedSubTags] = useState<string[]>(subTitleTypes);
 
     const handleTagsChange = (tag: string, checked: boolean) => {
         const nextSelectedTags = checked
-            ? customColumns.map(i => i['key']).filter((t) => [...selectedTags, tag].includes(t))
+            ? customColumns.map((i) => i['key']).filter((t) => [...selectedTags, tag].includes(t))
             : selectedTags.filter((t) => t !== tag);
         setSelectedTags(nextSelectedTags);
     };
@@ -136,15 +306,16 @@ const ReloanStatisticsTable = (): JSX.Element => {
 
     useEffect(() => {
         const selectedColumns = customColumns
-            .filter(i => selectedTags.indexOf(i.key) > -1)
-            .map(i => ({
+            .filter((i) => selectedTags.indexOf(i.key) > -1)
+            .map((i) => ({
                 ...i,
-                children: i.children.filter(child => child.className === '' ? child : selectedSubTags.indexOf(child.className) > -1)
+                children: i.children.filter((child) =>
+                    child.className === '' ? child : selectedSubTags.indexOf(child.className) > -1,
+                ),
             }))
-            .filter(col => col.children.length > 0);
+            .filter((col) => col.children.length > 0);
         setTagColumns(selectedColumns);
     }, [selectedTags, selectedSubTags]);
-
 
     const getSearchParams = () => {
         // @ts-ignore
@@ -166,7 +337,6 @@ const ReloanStatisticsTable = (): JSX.Element => {
     };
 
     return (
-
         <ProTable<GetReloanStatisticsList>
             formRef={formRef}
             bordered
@@ -178,25 +348,35 @@ const ReloanStatisticsTable = (): JSX.Element => {
                 <div>
                     <div>
                         <Space>
-                            {'显示群组'}<Tooltip title={'反选可隐藏该群组'}><ExclamationCircleOutlined /></Tooltip>{':'}
+                            {'显示群组'}
+                            <Tooltip title={'反选可隐藏该群组'}>
+                                <ExclamationCircleOutlined />
+                            </Tooltip>
+                            {':'}
                             <div>
                                 {customColumns.map((tag) => {
                                     if (tag.key === 'registerCount') return;
-                                    return <CheckableTag
-                                        style={{ marginTop: '4px', marginBottom: '4px' }}
-                                        key={tag.key}
-                                        checked={selectedTags.indexOf(tag.key) > -1}
-                                        onChange={(checked) => handleTagsChange(tag.key, checked)}
-                                    >
-                                        {tag.key === 'otpCount' ? 'OTP短信' : tag.title}
-                                    </CheckableTag>;
+                                    return (
+                                        <CheckableTag
+                                            style={{ marginTop: '4px', marginBottom: '4px' }}
+                                            key={tag.key}
+                                            checked={selectedTags.indexOf(tag.key) > -1}
+                                            onChange={(checked) => handleTagsChange(tag.key, checked)}
+                                        >
+                                            {tag.key === 'otpCount' ? 'OTP短信' : tag.title}
+                                        </CheckableTag>
+                                    );
                                 })}
                             </div>
                         </Space>
                     </div>
                     <div>
                         <Space>
-                            {'显示统计类别'}<Tooltip title={'反选可隐藏该群组'}><ExclamationCircleOutlined /></Tooltip>{':'}
+                            {'显示统计类别'}
+                            <Tooltip title={'反选可隐藏该群组'}>
+                                <ExclamationCircleOutlined />
+                            </Tooltip>
+                            {':'}
                             <div>
                                 {subTitleTypes.map((tag) => {
                                     const type = {
@@ -204,30 +384,31 @@ const ReloanStatisticsTable = (): JSX.Element => {
                                         newCustomer: { title: '新客' },
                                         oldCustomer: { title: '老客' },
                                     };
-                                    return <CheckableTag
-                                        style={{ marginTop: '4px', marginBottom: '4px' }}
-                                        key={tag}
-                                        checked={selectedSubTags.indexOf(tag) > -1}
-                                        onChange={(checked) => handleSubTagsChange(tag, checked)}
-                                    >
-                                        {type[tag].title}
-                                    </CheckableTag>;
+                                    return (
+                                        <CheckableTag
+                                            style={{ marginTop: '4px', marginBottom: '4px' }}
+                                            key={tag}
+                                            checked={selectedSubTags.indexOf(tag) > -1}
+                                            onChange={(checked) => handleSubTagsChange(tag, checked)}
+                                        >
+                                            {type[tag].title}
+                                        </CheckableTag>
+                                    );
                                 })}
                             </div>
                         </Space>
                     </div>
-
                 </div>
             }
             search={{
                 labelWidth: 'auto',
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
-                    <Space >
+                    <Space>
                         <Button
                             onClick={() => {
                                 // @ts-ignore
-                                form.setFieldsValue({ ...initSearchList,dateRange: '' });
+                                form.setFieldsValue({ ...initSearchList, dateRange: '' });
                                 setSearchList(initSearchList);
                             }}
                         >
@@ -245,7 +426,11 @@ const ReloanStatisticsTable = (): JSX.Element => {
                     </Space>
                 ),
             }}
-            toolBarRender={() => [<Button onClick={handleExport} type='primary'>导出</Button>]}
+            toolBarRender={() => [
+                <Button onClick={handleExport} type="primary">
+                    导出
+                </Button>,
+            ]}
             options={{
                 setting: false,
                 reload: () => triggerGetList(searchList),
@@ -254,11 +439,8 @@ const ReloanStatisticsTable = (): JSX.Element => {
                 showSizeChanger: true,
                 defaultPageSize: 10,
             }}
-        >
-
-        </ProTable>
+        ></ProTable>
     );
 };
 
 export default ReloanStatisticsTable;
-

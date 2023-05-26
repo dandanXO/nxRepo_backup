@@ -1,12 +1,12 @@
-import React from "react";
-import { Divider, Form, FormInstance, Space, Radio, Tooltip, Modal } from "antd";
-import { InfoCircleOutlined } from "@ant-design/icons";
-import FirstAndRepeatLoanFormByValue from "./FirstAndRepeatLoanFormByValue";
-import FirstAndRepeatLoanFormByScore from "./FirstAndRepeatLoanFormByScore";
-import FirstAndRepeatLoanFormByCount from "./FirstAndRepeatLoanFormByCount";
-import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
+import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
+import FirstAndRepeatLoanFormByCount from './FirstAndRepeatLoanFormByCount';
+import FirstAndRepeatLoanFormByScore from './FirstAndRepeatLoanFormByScore';
+import FirstAndRepeatLoanFormByValue from './FirstAndRepeatLoanFormByValue';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Divider, Form, FormInstance, Modal, Radio, Space, Tooltip } from 'antd';
+import React from 'react';
 
-interface RepeatLoanSectionProps{
+interface RepeatLoanSectionProps {
     isEdit: boolean;
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
@@ -18,7 +18,7 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps): JSX.Element => {
 
     const resetErrorMessage = () => {
         const errorKeys = Object.keys(props.customAntFormFieldError);
-        const removeRepeatLoanError = errorKeys.filter((i) => i.indexOf("repeatLoan") < 0);
+        const removeRepeatLoanError = errorKeys.filter((i) => i.indexOf('repeatLoan') < 0);
         const errorList = removeRepeatLoanError.reduce((prev, curr) => {
             return { ...prev, [curr]: props.customAntFormFieldError[curr] };
         }, {});
@@ -30,28 +30,34 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps): JSX.Element => {
     const oldRankStratOnChange = () => {
         resetErrorMessage();
         const { repeatLoan } = props.form.getFieldsValue();
-        const isLoanFormNotFilled = repeatLoan.map(loan => {
-            return Object.keys(loan).filter(field => field !== 'id').every(i => loan[i] === undefined);
-        }).every(i => i === true);
+        const isLoanFormNotFilled = repeatLoan
+            .map((loan) => {
+                return Object.keys(loan)
+                    .filter((field) => field !== 'id')
+                    .every((i) => loan[i] === undefined);
+            })
+            .every((i) => i === true);
         if (!isLoanFormNotFilled) {
             modal.confirm({
-                title: "切换分数类型将会清空现有的数据，确定仍要切换吗？",
+                title: '切换分数类型将会清空现有的数据，确定仍要切换吗？',
                 onOk() {
-                    const isResetRepeatLoan = props.isEdit ? repeatLoan.map(i => ({ id: i.id })) : [];
+                    const isResetRepeatLoan = props.isEdit ? repeatLoan.map((i) => ({ id: i.id })) : [];
                     props.form.setFieldsValue({ repeatLoan: isResetRepeatLoan });
                 },
                 onCancel() {
                     props.form.setFieldsValue({ oldRankStrategy });
                     props.setCustomAntFormFieldError(props.customAntFormFieldError);
-                }
+                },
             });
         }
     };
     return (
         <React.Fragment>
-            <Divider style={{ color: '#00000073' }} orientation="left">复借配置</Divider>
-            <Form.Item label={"分数类型"} name={"oldRankStrategy"} required>
-                <Radio.Group onChange={oldRankStratOnChange} >
+            <Divider style={{ color: '#00000073' }} orientation="left">
+                复借配置
+            </Divider>
+            <Form.Item label={'分数类型'} name={'oldRankStrategy'} required>
+                <Radio.Group onChange={oldRankStratOnChange}>
                     <Radio value={'KEY_VALUE'}>值</Radio>
                     <Radio value={'SCORE'}>范围</Radio>
                     <Radio value={'REPAY_COUNT'}>
@@ -63,9 +69,10 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps): JSX.Element => {
                         </Space>
                     </Radio>
                 </Radio.Group>
-
             </Form.Item>
-            <Form.Item label={"复借分数"} required
+            <Form.Item
+                label={'复借分数'}
+                required
                 tooltip={
                     <div>
                         <div>填写规则：</div>
@@ -77,12 +84,15 @@ const RepeatLoanSection = (props: RepeatLoanSectionProps): JSX.Element => {
                     </div>
                 }
                 help={(props.customAntFormFieldError?.[`repeatLoan_error`] as any)?.help}
-                validateStatus={(props.customAntFormFieldError?.[`repeatLoan_error`] as any)?.validateStatus}>
-                {{
-                    'KEY_VALUE': <FirstAndRepeatLoanFormByValue {...props} type="repeatLoan" />,
-                    'SCORE': <FirstAndRepeatLoanFormByScore {...props} type="repeatLoan"/>,
-                    'REPAY_COUNT': <FirstAndRepeatLoanFormByCount {...props} type="repeatLoan"/>
-                }[oldRankStrategy]}
+                validateStatus={(props.customAntFormFieldError?.[`repeatLoan_error`] as any)?.validateStatus}
+            >
+                {
+                    {
+                        KEY_VALUE: <FirstAndRepeatLoanFormByValue {...props} type="repeatLoan" />,
+                        SCORE: <FirstAndRepeatLoanFormByScore {...props} type="repeatLoan" />,
+                        REPAY_COUNT: <FirstAndRepeatLoanFormByCount {...props} type="repeatLoan" />,
+                    }[oldRankStrategy]
+                }
             </Form.Item>
             <Form.Item label={'复借规则'} name="oldUseRcQuota" required initialValue={true}>
                 <Radio.Group>

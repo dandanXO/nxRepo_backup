@@ -1,5 +1,5 @@
 // NOTICE: REFACTOR to utils
-import { ActivityBannerResponse } from "../service/types";
+import { ActivityBannerResponse } from '../service/types';
 
 // export interface IAdsFormStore extends Store {
 //     name: string;
@@ -17,8 +17,3 @@ import { ActivityBannerResponse } from "../service/types";
 // }
 
 export type IActivityAdsPageFormStore = ActivityBannerResponse<any, any>;
-
-
-
-
-

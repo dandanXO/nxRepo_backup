@@ -1,8 +1,11 @@
-import { API } from "../../shared/api";
-import { GetUserQuotaLabelListProps, GetUserQuotaLabelListRequestQuerystring } from "./types/userQuotaLabelTypes/getUserQuotaLabelList";
-import { PostUserQuotaLabelRequestBody } from "./types/userQuotaLabelTypes/postUserQuotaLabel";
-import { PutUserQuotaLabelRequestBody } from "./types/userQuotaLabelTypes/putUserQuotaLabel";
-import { DeletetUserQuotaLabelQuery } from "./types/userQuotaLabelTypes/deleteUserQuotaLabel";
+import { API } from '../../shared/api';
+import { DeletetUserQuotaLabelQuery } from './types/userQuotaLabelTypes/deleteUserQuotaLabel';
+import {
+    GetUserQuotaLabelListProps,
+    GetUserQuotaLabelListRequestQuerystring,
+} from './types/userQuotaLabelTypes/getUserQuotaLabelList';
+import { PostUserQuotaLabelRequestBody } from './types/userQuotaLabelTypes/postUserQuotaLabel';
+import { PutUserQuotaLabelRequestBody } from './types/userQuotaLabelTypes/putUserQuotaLabel';
 
 const UserQuotaLabelApi = API.injectEndpoints({
     overrideExisting: false,
@@ -12,14 +15,14 @@ const UserQuotaLabelApi = API.injectEndpoints({
             query: (requestBody: GetUserQuotaLabelListRequestQuerystring) => ({
                 url: `/user-quota-label`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: POST /hs/admin/user-quota-label 新增 - 額度標籤
         postUserQuotaLabel: builder.mutation<{}, PostUserQuotaLabelRequestBody>({
             query: (requestBody: PostUserQuotaLabelRequestBody) => ({
                 url: `/user-quota-label`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -27,7 +30,7 @@ const UserQuotaLabelApi = API.injectEndpoints({
         putUserQuotaLabel: builder.mutation<{}, PutUserQuotaLabelRequestBody>({
             query: (requestBody: PutUserQuotaLabelRequestBody) => ({
                 url: `/user-quota-label`,
-                method: "put",
+                method: 'put',
                 data: requestBody,
             }),
         }),
@@ -35,15 +38,15 @@ const UserQuotaLabelApi = API.injectEndpoints({
         deleteUserQuotaLabel: builder.mutation<{}, DeletetUserQuotaLabelQuery>({
             query: ({ id }: DeletetUserQuotaLabelQuery) => ({
                 url: `/user-quota-label/${id}`,
-                method: "delete",
+                method: 'delete',
                 // params: arg,
             }),
         }),
-    })
+    }),
 });
 export const {
     useLazyGetUserQuotaLabelListQuery,
     usePostUserQuotaLabelMutation,
     usePutUserQuotaLabelMutation,
-    useDeleteUserQuotaLabelMutation
+    useDeleteUserQuotaLabelMutation,
 } = UserQuotaLabelApi;

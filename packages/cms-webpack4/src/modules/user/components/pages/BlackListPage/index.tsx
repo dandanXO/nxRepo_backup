@@ -1,14 +1,14 @@
-import {  useState } from 'react';
-import {  Form } from 'antd';
 import AdminPage from '../../../../shared/components/common/AdminPage';
-import BlackListTable from './BlackListTable';
-import AddBlackListModal from './AddBlackListModal';
 import { usePostBlackListMutation } from '../../../api/BlackListApi';
+import AddBlackListModal from './AddBlackListModal';
+import BlackListTable from './BlackListTable';
+import { Form } from 'antd';
+import { useState } from 'react';
 
 const BlackListPage = (): JSX.Element => {
     const [showModal, setShowModal] = useState(false);
     const [form] = Form.useForm();
-    const [postBlackList, {  isSuccess }] = usePostBlackListMutation();
+    const [postBlackList, { isSuccess }] = usePostBlackListMutation();
 
     const onFinish = (values: any) => {
         postBlackList(values);
@@ -39,7 +39,7 @@ const BlackListPage = (): JSX.Element => {
             }}
         >
             <>
-                <BlackListTable setShowModal={setShowModal} isPostBlackListSuccess={isSuccess}/>
+                <BlackListTable setShowModal={setShowModal} isPostBlackListSuccess={isSuccess} />
                 <AddBlackListModal
                     showModal={showModal}
                     handleCloseModal={handleCloseModal}
@@ -52,4 +52,3 @@ const BlackListPage = (): JSX.Element => {
 };
 
 export default BlackListPage;
-

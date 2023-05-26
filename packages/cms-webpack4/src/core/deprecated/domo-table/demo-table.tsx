@@ -1,25 +1,25 @@
+import { ProColumnsOperationConstant } from '../../../modules/shared/components/common/ProColumnsOperationConstant';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Space, Tag } from 'antd';
 import { useRef } from 'react';
 import request from 'umi-request';
-import { ProColumnsOperationConstant } from "../../../modules/shared/components/common/ProColumnsOperationConstant";
 
 type GithubIssueItem = {
-  url: string;
-  id: number;
-  number: number;
-  title: string;
-  labels: {
-    name: string;
-    color: string;
-  }[];
-  state: string;
-  comments: number;
-  created_at: string;
-  updated_at: string;
-  closed_at?: string;
+    url: string;
+    id: number;
+    number: number;
+    title: string;
+    labels: {
+        name: string;
+        color: string;
+    }[];
+    state: string;
+    comments: number;
+    created_at: string;
+    updated_at: string;
+    closed_at?: string;
 };
 
 const columns: ProColumns<GithubIssueItem>[] = [
@@ -34,10 +34,10 @@ const columns: ProColumns<GithubIssueItem>[] = [
                     action?.startEditable?.(record.id);
                 }}
             >
-        修改
+                修改
             </a>,
             <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-        删除
+                删除
             </a>,
             <TableDropdown
                 key="actionGroup"
@@ -48,7 +48,7 @@ const columns: ProColumns<GithubIssueItem>[] = [
                 ]}
             />,
         ],
-        width: ProColumnsOperationConstant.width["2"],
+        width: ProColumnsOperationConstant.width['2'],
     },
     {
         dataIndex: 'index',
@@ -166,10 +166,10 @@ const demoTable = () => {
             request={async (params = {}, sort, filter) => {
                 console.log(sort, filter);
                 return request<{
-          data: GithubIssueItem[];
-        }>('https://proapi.azurewebsites.net/github/issues', {
-            params,
-        });
+                    data: GithubIssueItem[];
+                }>('https://proapi.azurewebsites.net/github/issues', {
+                    params,
+                });
             }}
             editable={{
                 type: 'multiple',
@@ -209,8 +209,8 @@ const demoTable = () => {
             dateFormatter="string"
             toolBarRender={() => [
                 <Button key="button" icon={<PlusOutlined />} type="primary">
-          新建
-                </Button>
+                    新建
+                </Button>,
             ]}
         />
     );

@@ -1,41 +1,43 @@
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
+import { useLazyGetUserOrdersListQuery } from '../../api/UserInfoApi';
 import { GetUserOrders } from '../../api/userInfoTypes/getUserOrders';
 import { UserId } from '../../domain/UserId';
-import { useLazyGetUserOrdersListQuery } from '../../api/UserInfoApi';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import { useEffect, useState } from 'react';
-const LoanInfo = ({ userId }:UserId): JSX.Element => {
 
+const LoanInfo = ({ userId }: UserId): JSX.Element => {
     const [triggerGetList, { currentData, isLoading }] = useLazyGetUserOrdersListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
-        refetchOnReconnect: false
+        refetchOnReconnect: false,
     });
-    const [pageable,setPagealbe] = useState({ userId,pageNum: 1, pageSize: 10 });
-    const [loanInfo,setLoanInfo] = useState<any>();
+    const [pageable, setPagealbe] = useState({ userId, pageNum: 1, pageSize: 10 });
+    const [loanInfo, setLoanInfo] = useState<any>();
     useEffect(() => {
         triggerGetList(pageable);
     }, [pageable]);
 
-    useEffect(()=>{
-        if(currentData !== undefined){
+    useEffect(() => {
+        if (currentData !== undefined) {
             setLoanInfo(currentData);
         }
-    },[currentData]);
-
+    }, [currentData]);
 
     const pageOnChange = (current, pageSize) => {
         setPagealbe({ ...pageable, pageNum: current, pageSize: pageSize });
     };
     const columns: ProColumns<GetUserOrders>[] = [
-
         { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo' },
         { title: '借款产品', dataIndex: 'productName', key: 'productName' },
         { title: '借款金额', dataIndex: 'deviceMoney', key: 'deviceMoney', align: 'right' },
-        { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney' , align: 'right' },
+        { title: '到帐金额', dataIndex: 'lendMoney', key: 'lendMoney', align: 'right' },
         { title: '放款时间', dataIndex: 'loanTime', key: 'loanTime', valueType: 'dateTime' },
         {
-            title: '状态', dataIndex: 'status', key: 'status', valueType: 'select', initialValue: '',
+            title: '状态',
+            dataIndex: 'status',
+            key: 'status',
+            valueType: 'select',
+            initialValue: '',
             valueEnum: {
                 '': { text: '不限', color: '' },
                 '0': { text: '审核中', color: 'blue' },
@@ -54,10 +56,9 @@ const LoanInfo = ({ userId }:UserId): JSX.Element => {
     ];
 
     return (
-
         <ProTable<GetUserOrders>
             columns={columns}
-            dataSource={!isLoading && loanInfo?.records || []}
+            dataSource={(!isLoading && loanInfo?.records) || []}
             loading={isLoading}
             rowKey="id"
             search={false}
@@ -69,9 +70,7 @@ const LoanInfo = ({ userId }:UserId): JSX.Element => {
                 current: loanInfo?.records?.length === 0 ? 0 : loanInfo?.currentPage,
             }}
         />
-
     );
 };
 
 export default LoanInfo;
-

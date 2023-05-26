@@ -1,3 +1,3 @@
 export const cannotTypeFloat = (value: string): string => {
-    return value.replace(/^(\d+)\.(\d)*$/,'$1');
+    return value.replace(/^(\d+)\.(\d)*$/, '$1');
 };

@@ -1,13 +1,13 @@
-import { Button, Form, Modal, Select } from "antd";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useForm } from "antd/es/form/Form";
-import { TreeCheckbox } from "../components/TreeCheckbox";
-import { useLazyGetCollectorQuery } from "../services/TodayDistributionAPI";
-import { normalizeCollector } from "../components/TreeCheckbox/normalizeCollector";
-import { Stage } from "../types";
-import { Typography } from "antd/es";
-import { StageData } from "../pages/TodayDistributionPage";
-import { useLazyGetOverdueCollectorQuery } from "../services/OverdueDistributionAPI";
+import { TreeCheckbox } from '../components/TreeCheckbox';
+import { normalizeCollector } from '../components/TreeCheckbox/normalizeCollector';
+import { StageData } from '../pages/TodayDistributionPage';
+import { useLazyGetOverdueCollectorQuery } from '../services/OverdueDistributionAPI';
+import { useLazyGetCollectorQuery } from '../services/TodayDistributionAPI';
+import { Stage } from '../types';
+import { Button, Form, Modal, Select } from 'antd';
+import { Typography } from 'antd/es';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 interface OrderDistributionModalProps {
     show: boolean;
@@ -18,31 +18,34 @@ interface OrderDistributionModalProps {
     // NOTE: 依階段分配模式，回傳所選的逾期等级
     setDistributionStage: (distributionStage: Stage) => void;
     summaryData?: StageData;
-    type: "today" | "overdue",
+    type: 'today' | 'overdue';
     stage?: string;
     searchedStage: Stage;
     hasS5?: boolean;
 }
 export const CommonOrderDistributionModal = (props: OrderDistributionModalProps): JSX.Element => {
+    const [
+        triggerGetCollector,
+        {
+            // data,
+            currentData,
+        },
+    ] = useLazyGetCollectorQuery();
 
-
-    const [triggerGetCollector , {
-        // data,
-        currentData
-    }] = useLazyGetCollectorQuery();
-
-    const [triggerGetOverdueCollector , {
-        // data,
-        currentData: currentOverdueData,
-    }] = useLazyGetOverdueCollectorQuery();
+    const [
+        triggerGetOverdueCollector,
+        {
+            // data,
+            currentData: currentOverdueData,
+        },
+    ] = useLazyGetOverdueCollectorQuery();
 
     useEffect(() => {
-        if(props.type === "today") {
+        if (props.type === 'today') {
             triggerGetCollector(null);
         } else {
             triggerGetOverdueCollector(null);
         }
-
     }, [props.type]);
 
     const [checkedCollector, setCheckedCollector] = useState([]);
@@ -57,15 +60,14 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         setCheckedCollector(data);
     };
 
-    const [distributionStage, setDistributionStage] = useState(props.type === "today" ? Stage.T0 : Stage.S1);
+    const [distributionStage, setDistributionStage] = useState(props.type === 'today' ? Stage.T0 : Stage.S1);
     // console.log("summaryData", props?.summaryData);
     // console.log("props.searchedStage", props.searchedStage);
     // console.log("distributionStage", distributionStage);
 
-
     useEffect(() => {
-        if(props.show) {
-            const stage = props.type === "today" ? Stage.T0 : Stage.S1;
+        if (props.show) {
+            const stage = props.type === 'today' ? Stage.T0 : Stage.S1;
             // NOTE:預設逾期等级
             setDistributionStage(stage);
             form.setFieldsValue({
@@ -73,21 +75,20 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
             });
             // NOTE: callback
             props.setDistributionStage(stage);
-
         }
     }, [props.searchedStage, props.show]);
 
     // console.log("distributionStage", distributionStage);
 
     const treeCheckboxData = useMemo(() => {
-        const data = props.type === "today" ? currentData : currentOverdueData;
+        const data = props.type === 'today' ? currentData : currentOverdueData;
 
         let restrictedStageArray = [];
 
         const stage = props.isSelectedByOrder ? props.searchedStage : distributionStage;
 
-        if(props.type === "today") {
-            if(stage == Stage.T0) {
+        if (props.type === 'today') {
+            if (stage == Stage.T0) {
                 restrictedStageArray = [Stage.T_1];
             } else if (stage == Stage.T_1) {
                 restrictedStageArray = [Stage.T0];
@@ -115,9 +116,9 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
     }, [props.type, currentData, currentOverdueData, props.hasS5, props.searchedStage, distributionStage]);
 
     const handleSelectedAllCollector = useCallback(() => {
-        setSelectedRowKeys(treeCheckboxData["allKey"]);
-        setCheckedJob(treeCheckboxData["allCollectorKey"]);
-        setCheckedCollector(treeCheckboxData["allCollectorKey"]);
+        setSelectedRowKeys(treeCheckboxData['allKey']);
+        setCheckedJob(treeCheckboxData['allCollectorKey']);
+        setCheckedCollector(treeCheckboxData['allCollectorKey']);
     }, [treeCheckboxData]);
 
     const handleUnselectedAllCollector = useCallback(() => {
@@ -126,26 +127,41 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         setCheckedCollector([]);
     }, []);
 
-
     const [form] = useForm();
 
     const renderOptionsComponent = () => {
-        if(!props.isSelectedByOrder) {
-            if(props.type === "today") {
+        if (!props.isSelectedByOrder) {
+            if (props.type === 'today') {
                 return (
                     <React.Fragment>
-                        <Select.Option key={1} value={Stage.T_1}>T-1</Select.Option>
-                        <Select.Option key={2} value={Stage.T0}>{Stage.T0}</Select.Option>
+                        <Select.Option key={1} value={Stage.T_1}>
+                            T-1
+                        </Select.Option>
+                        <Select.Option key={2} value={Stage.T0}>
+                            {Stage.T0}
+                        </Select.Option>
                     </React.Fragment>
                 );
             } else {
                 return (
                     <React.Fragment>
-                        <Select.Option key={1} value={Stage.S1}>{Stage.S1}</Select.Option>
-                        <Select.Option key={2} value={Stage.S2}>{Stage.S2}</Select.Option>
-                        <Select.Option key={3} value={Stage.S3}>{Stage.S3}</Select.Option>
-                        <Select.Option key={4} value={Stage.S4}>{Stage.S4}</Select.Option>
-                        {props.hasS5 && <Select.Option key={5} value={Stage.S5}>{Stage.S5}</Select.Option>}
+                        <Select.Option key={1} value={Stage.S1}>
+                            {Stage.S1}
+                        </Select.Option>
+                        <Select.Option key={2} value={Stage.S2}>
+                            {Stage.S2}
+                        </Select.Option>
+                        <Select.Option key={3} value={Stage.S3}>
+                            {Stage.S3}
+                        </Select.Option>
+                        <Select.Option key={4} value={Stage.S4}>
+                            {Stage.S4}
+                        </Select.Option>
+                        {props.hasS5 && (
+                            <Select.Option key={5} value={Stage.S5}>
+                                {Stage.S5}
+                            </Select.Option>
+                        )}
                     </React.Fragment>
                 );
             }
@@ -155,7 +171,7 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
     const stage = props.isSelectedByOrder ? props.searchedStage : distributionStage;
     return (
         <Modal
-            title={"分配订单"}
+            title={'分配订单'}
             open={props.show}
             onCancel={() => {
                 props.handleCloseModal();
@@ -172,11 +188,15 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                 <div>
                     <Form form={form}>
                         <Form.Item name="stage" label="逾期等级" rules={[{ required: true }]}>
-                            <Select placeholder={"选择"} defaultValue={distributionStage} onSelect={(value) => {
-                                // console.log("value", value);
-                                setDistributionStage(value);
-                                props.setDistributionStage(value);
-                            }}>
+                            <Select
+                                placeholder={'选择'}
+                                defaultValue={distributionStage}
+                                onSelect={(value) => {
+                                    // console.log("value", value);
+                                    setDistributionStage(value);
+                                    props.setDistributionStage(value);
+                                }}
+                            >
                                 {renderOptionsComponent()}
                             </Select>
                         </Form.Item>
@@ -184,13 +204,16 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
                             {props?.summaryData[distributionStage]?.todoTotal}
                         </Form.Item>
                     </Form>
-
                 </div>
             )}
             {props?.summaryData[stage]?.todoTotal > 0 && (
                 <div>
-                    <Button style={{ marginRight: 8 }} onClick={handleSelectedAllCollector}>全选</Button>
-                    <Button style={{ marginRight: 8 }} onClick={handleUnselectedAllCollector}>清空重选</Button>
+                    <Button style={{ marginRight: 8 }} onClick={handleSelectedAllCollector}>
+                        全选
+                    </Button>
+                    <Button style={{ marginRight: 8 }} onClick={handleUnselectedAllCollector}>
+                        清空重选
+                    </Button>
                     <Typography.Text>已选择 {checkedCollector.length} 个催收人员</Typography.Text>
                 </div>
             )}

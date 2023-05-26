@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { itemRender } from '../../../../shared/components/common/itemRender';
+import AddressBook from '../../../../shared/components/userInfo/AddressBook';
+import LoanInfo from '../../../../shared/components/userInfo/LoanInfo';
+import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
+import UserInfo from '../../../../shared/components/userInfo/UserInfo';
 import { PageContainer } from '@ant-design/pro-components';
 import { Tabs } from 'antd';
-import UserInfo from '../../../../shared/components/userInfo/UserInfo';
-import AddressBook from '../../../../shared/components/userInfo/AddressBook';
-import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
-import LoanInfo from '../../../../shared/components/userInfo/LoanInfo';
-import {  useParams } from "react-router-dom";
-import { itemRender } from "../../../../shared/components/common/itemRender";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 const UserInfoPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();
@@ -17,10 +18,10 @@ const UserInfoPage = (): JSX.Element => {
     }, []);
 
     const tabs = [
-        { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId}/> }, // 务必填写 key
-        { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId}/> },
-        { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId}/> },
-        { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId}/> },
+        { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId} /> }, // 务必填写 key
+        { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId} /> },
+        { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId} /> },
+        { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId} /> },
     ];
 
     return domLoaded ? (
@@ -32,17 +33,16 @@ const UserInfoPage = (): JSX.Element => {
                     breadcrumb: {
                         itemRender: itemRender,
                         routes: [
-                            { path: "/", breadcrumbName: '首页' },
+                            { path: '/', breadcrumbName: '首页' },
                             { path: null, breadcrumbName: '用户管理' },
-                            { path: "/user", breadcrumbName: '用户管理' },
+                            { path: '/user', breadcrumbName: '用户管理' },
                             { path: null, breadcrumbName: '用户详细信息' },
                         ],
                     },
                 }}
             >
-                <Tabs items={tabs}/>
+                <Tabs items={tabs} />
             </PageContainer>
-
         </div>
     ) : null;
 };

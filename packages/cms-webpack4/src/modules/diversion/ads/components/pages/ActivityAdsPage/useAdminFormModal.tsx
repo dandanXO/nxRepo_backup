@@ -1,36 +1,37 @@
-import React, { useCallback, useState } from "react";
-import { ModalContent } from "../../../../../shared/components/common/AdminTable";
-import { useForm } from "antd/es/form/Form";
-import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import { Modal } from "antd/es";
-import { ActivityModel } from "../../../service/AdsApi";
-import { FormInstance } from "antd";
+import { ModalContent } from '../../../../../shared/components/common/AdminTable';
+import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
+import { ActivityModel } from '../../../service/AdsApi';
+import { FormInstance } from 'antd';
+import { Modal } from 'antd/es';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useState } from 'react';
 
 type IUseAdminTable = {
     triggerGetList: any;
     triggerGet?: any;
     triggerDelete?: any;
     // currentFormData: any;
-}
-export const useAdminFormModal = (props: IUseAdminTable): {
+};
+export const useAdminFormModal = (
+    props: IUseAdminTable,
+): {
     showModalContent: {
-        show: boolean,
-        isEdit: boolean
-    },
-    setShowModalContent: React.Dispatch<{ show: boolean, isEdit: boolean }>,
-    onModalOk: () => void,
-    onCloseModal: () => void,
-    customAntFormFieldError: CustomAntFormFieldError,
-    showDeleteModal: boolean,
-    modal: any,
-    editID: number,
-    form: FormInstance,
-    onAddItem: () => void,
-    onEditItem: (record: ActivityModel) =>  void,
-    onDeleteItem: (record: ActivityModel) => void,
-    contextHolder: React.ReactElement
+        show: boolean;
+        isEdit: boolean;
+    };
+    setShowModalContent: React.Dispatch<{ show: boolean; isEdit: boolean }>;
+    onModalOk: () => void;
+    onCloseModal: () => void;
+    customAntFormFieldError: CustomAntFormFieldError;
+    showDeleteModal: boolean;
+    modal: any;
+    editID: number;
+    form: FormInstance;
+    onAddItem: () => void;
+    onEditItem: (record: ActivityModel) => void;
+    onDeleteItem: (record: ActivityModel) => void;
+    contextHolder: React.ReactElement;
 } => {
-
     // NOTICE: Action: Create or Edit
     // NOTE: Modal
     const [showModalContent, setShowModalContent] = useState<ModalContent>({
@@ -63,7 +64,6 @@ export const useAdminFormModal = (props: IUseAdminTable): {
         userAdd();
     }, []);
 
-
     // NOTE: User add ChannelSetting
     const userAdd = useCallback(() => {
         setEditID(undefined);
@@ -72,7 +72,6 @@ export const useAdminFormModal = (props: IUseAdminTable): {
             isEdit: false,
         });
     }, []);
-
 
     // NOTE: User browse EditChannelSetting
     //     userBrowseEditChannelSettingUseCase
@@ -104,12 +103,15 @@ export const useAdminFormModal = (props: IUseAdminTable): {
     // NOTE: User delete ChannelSetting
     const userDeleteChannelSettingUseCase = useCallback((editID: number) => {
         // NOTE:
-        props.triggerDelete({
-            id: editID,
-        }).unwrap().then(() => {
-            setShowDeletedModal(false);
-            props.triggerGetList(null);
-        });
+        props
+            .triggerDelete({
+                id: editID,
+            })
+            .unwrap()
+            .then(() => {
+                setShowDeletedModal(false);
+                props.triggerGetList(null);
+            });
     }, []);
 
     const onDeleteModalCancel = useCallback(() => {
@@ -119,14 +121,13 @@ export const useAdminFormModal = (props: IUseAdminTable): {
     // userBrowseDeleteChannelSettingUseCase
     const onDeleteItem = useCallback((record: ActivityModel) => {
         modal.confirm({
-            title: "确认要删除此笔数据吗?",
+            title: '确认要删除此笔数据吗?',
             // NOTICE: 得用下面寫法否則 editID 會找不到
             onOk: () => onDeleteModalOK(record.id),
             // onOk: onDeleteModalOK,
             onCancel: onDeleteModalCancel,
         });
     }, []);
-
 
     return {
         showModalContent,
@@ -142,6 +143,5 @@ export const useAdminFormModal = (props: IUseAdminTable): {
         onEditItem,
         onDeleteItem,
         contextHolder,
-
     };
 };

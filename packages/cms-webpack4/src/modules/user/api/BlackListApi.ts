@@ -1,6 +1,7 @@
-import { API } from "../../shared/api";
-import { GetBlackListProps,GetBlackListRequestQuerystring } from "./types/blackListTypes/getBlackList";
-import { PostBlackListRequestBody } from "./types/userTypes/postBlackList";
+import { API } from '../../shared/api';
+import { GetBlackListProps, GetBlackListRequestQuerystring } from './types/blackListTypes/getBlackList';
+import { PostBlackListRequestBody } from './types/userTypes/postBlackList';
+
 const BlackListApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
@@ -9,22 +10,17 @@ const BlackListApi = API.injectEndpoints({
             query: (requestBody: GetBlackListRequestQuerystring) => ({
                 url: `/black-list`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: POST /hs/admin/black-list/batch 批次新增黑名單
         postBlackList: builder.mutation<null, PostBlackListRequestBody>({
             query: (requestBody: PostBlackListRequestBody) => ({
                 url: `/black-list/batch`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
-
-    })
+    }),
 });
-export const {
-    useLazyGetBlackListQuery,
-    usePostBlackListMutation
-
-} = BlackListApi;
+export const { useLazyGetBlackListQuery, usePostBlackListMutation } = BlackListApi;

@@ -1,5 +1,4 @@
-import { Form, FormInstance, Modal } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
+import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
 import {
     GetProductListResponse,
     Product,
@@ -7,66 +6,67 @@ import {
     useLazyGetProductManageListQuery,
     useLazyGetProductQuery,
     usePostProductCreateMutation,
-    usePutProductEditMutation
-} from "../../../../service/product/ProductApi";
-import moment from "moment/moment";
-import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import { ProductTypes } from "../../../../service/product/domain/productTypes";
+    usePutProductEditMutation,
+} from '../../../../service/product/ProductApi';
+import { ProductTypes } from '../../../../service/product/domain/productTypes';
+import { Form, FormInstance, Modal } from 'antd';
+import moment from 'moment/moment';
+import React, { useCallback, useEffect, useState } from 'react';
+
 export interface ProductFormModal {
     show: boolean;
-    isEdit?: boolean
-    productId?: number
+    isEdit?: boolean;
+    productId?: number;
     triggerTableGetList?: any;
     formRef?: any;
 }
 
-export const useProductFormModal = (props: ProductFormModal): {
-    productModalData: ProductFormModal,
-    productFormData: Product,
-    setProductModalData: React.Dispatch<ProductFormModal>,
-    handleCloseModal: (e) => void,
-    onFinish: (value: any) => void,
-    form: FormInstance,
-    merchantList: any,
-    customAntFormFieldError: CustomAntFormFieldError,
-    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>,
-    triggerGetList: any,
-    productListData: GetProductListResponse,
-    onFormSubmit: () => void,
-    enableLoanAmount: boolean,
-    enableReLoanAmount: boolean,
-    setEnableLoanAmount: React.Dispatch<boolean>,
-    setEnableReLoanAmount: React.Dispatch<boolean>,
-    contextHolder: React.ReactElement
+export const useProductFormModal = (
+    props: ProductFormModal,
+): {
+    productModalData: ProductFormModal;
+    productFormData: Product;
+    setProductModalData: React.Dispatch<ProductFormModal>;
+    handleCloseModal: (e) => void;
+    onFinish: (value: any) => void;
+    form: FormInstance;
+    merchantList: any;
+    customAntFormFieldError: CustomAntFormFieldError;
+    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
+    triggerGetList: any;
+    productListData: GetProductListResponse;
+    onFormSubmit: () => void;
+    enableLoanAmount: boolean;
+    enableReLoanAmount: boolean;
+    setEnableLoanAmount: React.Dispatch<boolean>;
+    setEnableReLoanAmount: React.Dispatch<boolean>;
+    contextHolder: React.ReactElement;
 } => {
-
     const [modal, contextHolder] = Modal.useModal();
 
     const [productModalData, setProductModalData] = useState<ProductFormModal>({
         show: props.show,
         isEdit: props.isEdit,
         productId: props.productId,
-        triggerTableGetList: props.triggerTableGetList
+        triggerTableGetList: props.triggerTableGetList,
     });
     // console.log("productModalData", productModalData);
-
 
     // NOTICE: form
     const [form] = Form.useForm();
 
-    const [triggerGetProduct, {  currentData: productFormData, isFetching }] = useLazyGetProductQuery({
-
-    });
+    const [triggerGetProduct, { currentData: productFormData, isFetching }] = useLazyGetProductQuery({});
 
     const initCustomAntFormFieldError = {
-        preInterestRate: { validateStatus: "", help: "" },
-        postInterestRate: { validateStatus: "", help: "" },
-        renewPostInterestRate: { validateStatus: "", help: "" },
-        renewPreInterestRate: { validateStatus: "", help: "" },
-        productInterestRatePairs: {}
+        preInterestRate: { validateStatus: '', help: '' },
+        postInterestRate: { validateStatus: '', help: '' },
+        renewPostInterestRate: { validateStatus: '', help: '' },
+        renewPreInterestRate: { validateStatus: '', help: '' },
+        productInterestRatePairs: {},
     };
 
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>(initCustomAntFormFieldError);
+    const [customAntFormFieldError, setCustomAntFormFieldError] =
+        useState<CustomAntFormFieldError>(initCustomAntFormFieldError);
     const { currentData: merchantList } = useGetAvailableMerchantListQuery(null);
     const [postProductCreate] = usePostProductCreateMutation();
     const [putProduct] = usePutProductEditMutation();
@@ -80,11 +80,8 @@ export const useProductFormModal = (props: ProductFormModal): {
         });
     }, [productModalData.productId]);
 
-
     const [enableLoanAmount, setEnableLoanAmount] = useState<boolean>(false);
     const [enableReLoanAmount, setEnableReLoanAmount] = useState<boolean>(false);
-
-
 
     useEffect(() => {
         if (isFetching) return;
@@ -94,12 +91,10 @@ export const useProductFormModal = (props: ProductFormModal): {
         if (!productFormData) return;
         if (!merchantList) return;
 
-
         setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false);
         setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false);
 
-
-        const currentMerchant = merchantList?.find(merchant => merchant.merchantId === productFormData.merchantId);
+        const currentMerchant = merchantList?.find((merchant) => merchant.merchantId === productFormData.merchantId);
 
         if (!productModalData.productId) {
             form.resetFields();
@@ -114,32 +109,42 @@ export const useProductFormModal = (props: ProductFormModal): {
                 // NOTICE: 後端移除
                 // adminPassword: null,
                 logo: productFormData.logo,
-                logoUpload: [{
-                    uid: '1',
-                    name: productFormData.logo && productFormData.logo.split("/") && productFormData.logo.split("/")[productFormData.logo.length - 1],
-                    url: productFormData.logo,
-                }],
+                logoUpload: [
+                    {
+                        uid: '1',
+                        name:
+                            productFormData.logo &&
+                            productFormData.logo.split('/') &&
+                            productFormData.logo.split('/')[productFormData.logo.length - 1],
+                        url: productFormData.logo,
+                    },
+                ],
                 backgroundImg: productFormData.backgroundImg,
-                backgroundImgUpload: [{
-                    uid: '1',
-                    name: productFormData.backgroundImg && productFormData.backgroundImg.split("/") && productFormData.backgroundImg.split("/")[productFormData.backgroundImg.length - 1],
-                    url: productFormData.backgroundImg,
-                }],
+                backgroundImgUpload: [
+                    {
+                        uid: '1',
+                        name:
+                            productFormData.backgroundImg &&
+                            productFormData.backgroundImg.split('/') &&
+                            productFormData.backgroundImg.split('/')[productFormData.backgroundImg.length - 1],
+                        url: productFormData.backgroundImg,
+                    },
+                ],
 
-                amountRangeLow: productFormData.amountRange.split("-")[0],
-                amountRangeHigh: productFormData.amountRange.split("-")[1],
-                interestRangeLow: productFormData.interestRange.split(" - ")[0],
-                interestRangeHigh: productFormData.interestRange?.split(" - ")[1]?.split("% / day")[0],
-                termRangeLow: productFormData.termRange.split("-")[0],
-                termRangeHigh: productFormData.termRange.split("-")[1].split("Days")[0],
-                approveRate: `${productFormData.approveRate.split("%")[0]}`,
-                approveTime: productFormData.approveTime.split(" ")[0],
-                approveTimeUnit: productFormData.approveTime.split(" ")[1],
+                amountRangeLow: productFormData.amountRange.split('-')[0],
+                amountRangeHigh: productFormData.amountRange.split('-')[1],
+                interestRangeLow: productFormData.interestRange.split(' - ')[0],
+                interestRangeHigh: productFormData.interestRange?.split(' - ')[1]?.split('% / day')[0],
+                termRangeLow: productFormData.termRange.split('-')[0],
+                termRangeHigh: productFormData.termRange.split('-')[1].split('Days')[0],
+                approveRate: `${productFormData.approveRate.split('%')[0]}`,
+                approveTime: productFormData.approveTime.split(' ')[0],
+                approveTimeUnit: productFormData.approveTime.split(' ')[1],
                 csContact: productFormData.csContact,
                 csEmail: productFormData.csEmail,
                 csTime: [
-                    moment(productFormData.csTime.split(" - ")[0], 'h:mm'),
-                    moment(productFormData.csTime.split(" - ")[1], 'h:mm'),
+                    moment(productFormData.csTime.split(' - ')[0], 'h:mm'),
+                    moment(productFormData.csTime.split(' - ')[1], 'h:mm'),
                 ],
                 loanTerm: productFormData.loanTerm,
 
@@ -153,7 +158,6 @@ export const useProductFormModal = (props: ProductFormModal): {
 
                 riskRankLoanAmount: productFormData.riskRankLoanAmount,
 
-
                 newGuestMaxThreshold: productFormData.newGuestMaxThreshold,
                 renewMaxThreshold: productFormData.renewMaxThreshold,
 
@@ -161,7 +165,9 @@ export const useProductFormModal = (props: ProductFormModal): {
                 postInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.postInterestRate) * 100)}`,
 
                 renewPreInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.renewPreInterestRate) * 100)}`,
-                renewPostInterestRate: `${fixedFloatNumberToFixed3(Number(productFormData.renewPostInterestRate) * 100)}`,
+                renewPostInterestRate: `${fixedFloatNumberToFixed3(
+                    Number(productFormData.renewPostInterestRate) * 100,
+                )}`,
 
                 newGuestProductDisplayStatus: productFormData.newGuestProductDisplayStatus,
                 renewProductDisplayStatus: productFormData.renewProductDisplayStatus,
@@ -180,7 +186,7 @@ export const useProductFormModal = (props: ProductFormModal): {
                 }),
 
                 top: productFormData.top,
-                tags: productFormData.tags.split(","),
+                tags: productFormData.tags.split(','),
                 templateType: productFormData.templateType,
                 weight: productFormData.weight,
                 enabled: productFormData.enabled,
@@ -190,57 +196,69 @@ export const useProductFormModal = (props: ProductFormModal): {
         // console.log("productFormData", productFormData);
     }, [isFetching]);
 
-
     const [triggerGetList, { currentData: productListData }] = useLazyGetProductManageListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
-        refetchOnReconnect: false
+        refetchOnReconnect: false,
     });
 
-    const handlePostProductCreate = useCallback((values) => {
-        const action = !productModalData.isEdit ? postProductCreate : putProduct;
-        if (productModalData.isEdit) {
-            values = {
-                ...values,
-                productId: productModalData.productId,
-            };
-        }
-        action(values).unwrap().then(() => {
-            // console.log("responseData", responseData);
-            // console.log(responseData?.message)
-            // console.log(responseData?.code)
-            setProductModalData({
-                show: false,
-                // ...responseData,
-            });
+    const handlePostProductCreate = useCallback(
+        (values) => {
+            const action = !productModalData.isEdit ? postProductCreate : putProduct;
+            if (productModalData.isEdit) {
+                values = {
+                    ...values,
+                    productId: productModalData.productId,
+                };
+            }
+            action(values)
+                .unwrap()
+                .then(() => {
+                    // console.log("responseData", responseData);
+                    // console.log(responseData?.message)
+                    // console.log(responseData?.code)
+                    setProductModalData({
+                        show: false,
+                        // ...responseData,
+                    });
 
-            // console.log("props.formRef", props.formRef);
-            // props.formRef.current.resetFields();
-            // console.log()
-            // console.log("form", form)
-            form.resetFields();
+                    // console.log("props.formRef", props.formRef);
+                    // props.formRef.current.resetFields();
+                    // console.log()
+                    // console.log("form", form)
+                    form.resetFields();
 
-            // else {
-            //   Modal.error({
-            //     title: "Error",
-            //     content: responseData?.message
-            //   });
-            // }
+                    // else {
+                    //   Modal.error({
+                    //     title: "Error",
+                    //     content: responseData?.message
+                    //   });
+                    // }
 
-            // if(triggerFetchTableList) {
-            //   return triggerFetchTableList(null)
-            // }
-            triggerGetList(null);
-        }).catch((error) => {
-            // console.log(error)
-            modal.error({
-                title: "error",
-                content: error.data.message
-            });
-        });
-        // }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
-    }, [productModalData.isEdit, productModalData.productId, postProductCreate, putProduct, setProductModalData, form, triggerGetList]);
-
+                    // if(triggerFetchTableList) {
+                    //   return triggerFetchTableList(null)
+                    // }
+                    triggerGetList(null);
+                })
+                .catch((error) => {
+                    // console.log(error)
+                    modal.error({
+                        title: 'error',
+                        content: error.data.message,
+                    });
+                });
+            // }, [productModalData.isEdit, postProductCreate, putProduct, triggerFetchTableList]);
+        },
+        [
+            productModalData.isEdit,
+            productModalData.productId,
+            postProductCreate,
+            putProduct,
+            setProductModalData,
+            form,
+            triggerGetList,
+        ],
+    );
 
     const fixedFloatNumberToFixed3 = (number: number): number => {
         return Number(number.toFixed(3));
@@ -249,20 +267,19 @@ export const useProductFormModal = (props: ProductFormModal): {
         return Number((Number(str) * 0.01).toFixed(3));
     };
 
-
     const onFinish = (values: any) => {
         // console.log("onFinish.values", JSON.stringify(values));
 
         let isNotFinish = false;
 
         // NOTICE：判斷前置／後置欄位是否有錯誤訊息(有錯誤不送表單）
-        Object.keys(customAntFormFieldError).map(key => {
+        Object.keys(customAntFormFieldError).map((key) => {
             if (key !== 'productInterestRatePairs' && customAntFormFieldError[key]['validateStatus'] !== '') {
                 isNotFinish = true;
             }
         });
-        Object.values(customAntFormFieldError['productInterestRatePairs']).map(field => {
-            Object.keys(field).map(i => {
+        Object.values(customAntFormFieldError['productInterestRatePairs']).map((field) => {
+            Object.keys(field).map((i) => {
                 if (field[i]['validateStatus'] !== '') {
                     isNotFinish = true;
                 }
@@ -271,7 +288,7 @@ export const useProductFormModal = (props: ProductFormModal): {
 
         if (isNotFinish) return;
 
-        const productInterestRatePairs = values?.productInterestRatePairs?.map(i => ({
+        const productInterestRatePairs = values?.productInterestRatePairs?.map((i) => ({
             num: i.num,
             postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
             preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3)),
@@ -319,7 +336,6 @@ export const useProductFormModal = (props: ProductFormModal): {
             newGuestProductDisplayStatus: values.newGuestProductDisplayStatus,
             renewProductDisplayStatus: values.renewProductDisplayStatus,
 
-
             dailyRate: strToFloatNumberWithFixed3(values.dailyRate),
             extensionRate: strToFloatNumberWithFixed3(values.extensionRate),
             overdueRate: strToFloatNumberWithFixed3(values.overdueRate),
@@ -327,7 +343,7 @@ export const useProductFormModal = (props: ProductFormModal): {
             productInterestRatePairs: productInterestRatePairs,
 
             top: values.top,
-            tags: values.tags.join(","),
+            tags: values.tags.join(','),
             templateType: values.templateType,
             weight: values.weight === undefined ? 0 : Number(values.weight),
             enabled: values.enabled,

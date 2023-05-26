@@ -1,8 +1,7 @@
 import AdminPage from '../../../shared/components/common/AdminPage';
 import PayReceiptTable from './PayReceiptTable';
+
 const PayReceiptPage = (): JSX.Element => {
-
-
     return (
         <AdminPage
             navigator={{
@@ -12,11 +11,10 @@ const PayReceiptPage = (): JSX.Element => {
             }}
         >
             <>
-                <PayReceiptTable/>
+                <PayReceiptTable />
             </>
         </AdminPage>
     );
 };
 
 export default PayReceiptPage;
-

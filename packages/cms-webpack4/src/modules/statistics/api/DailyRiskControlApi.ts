@@ -1,6 +1,8 @@
-import { API } from "../../shared/api";
-import { GetDailyRiskControlListRequestQuery,GetDailyRiskControlListResponse } from "./types/DailyRiskControlTypes/getDailyRiskControlList";
-
+import { API } from '../../shared/api';
+import {
+    GetDailyRiskControlListRequestQuery,
+    GetDailyRiskControlListResponse,
+} from './types/DailyRiskControlTypes/getDailyRiskControlList';
 
 const DailyRiskControlApi = API.injectEndpoints({
     overrideExisting: false,
@@ -10,11 +12,9 @@ const DailyRiskControlApi = API.injectEndpoints({
             query: (requestBody: GetDailyRiskControlListRequestQuery) => ({
                 url: `/statistics/risk-control`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
+    }),
 });
-export const {
-    useLazyGetDailyRiskControlListQuery
-} = DailyRiskControlApi;
+export const { useLazyGetDailyRiskControlListQuery } = DailyRiskControlApi;

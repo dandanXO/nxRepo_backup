@@ -1,6 +1,6 @@
-import React from "react";
-import AdminFormModal from "./AdminFormModal";
-import { ModalContent } from "./AdminTable";
+import AdminFormModal from './AdminFormModal';
+import { ModalContent } from './AdminTable';
+import React from 'react';
 
 interface AdminFormCustomModalProps {
     // NOTE: Modal
@@ -15,11 +15,9 @@ interface AdminFormCustomModalProps {
     autoComplete?: boolean;
     // NOTE: Custom
     width?: string;
-
 }
 
 export const AdminFormCustomModal = (props: AdminFormCustomModalProps): JSX.Element => {
-
     return (
         <AdminFormModal
             // width={"600px"}

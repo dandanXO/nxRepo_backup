@@ -1,43 +1,49 @@
-import { useEffect, useState } from 'react';
+import { ProColumnsOperationConstant } from '../../../shared/components/common/ProColumnsOperationConstant';
+import CopyText from '../../../shared/components/other/CopyText';
+import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
+import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
+import { enumObjectToMap } from '../../../shared/utils/format/enumObjectToMap';
+import { useLazyGetPayReceiptListQuery, usePostPayReceiptConfirmMutation } from '../../api/PayReceiptApi';
+import { GetPayReceiptListRequestQuerystring, PayReceiptList } from '../../api/types/PayReceiptTypes/getPayReceiptList';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Modal, Space, Tag } from 'antd';
-import { useLazyGetPayReceiptListQuery, usePostPayReceiptConfirmMutation } from '../../api/PayReceiptApi';
-import { PayReceiptList, GetPayReceiptListRequestQuerystring } from '../../api/types/PayReceiptTypes/getPayReceiptList';
-import CopyText from '../../../shared/components/other/CopyText';
-import { ProColumnsOperationConstant } from "../../../shared/components/common/ProColumnsOperationConstant";
-import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
-import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
-import { enumObjectToMap } from '../../../shared/utils/format/enumObjectToMap';
+import { useEffect, useState } from 'react';
 
 const PayReceiptTable = (): JSX.Element => {
-
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
-    const initSearchList :GetPayReceiptListRequestQuerystring = {
-        createTimeEnd: '', createTimeStart: '', merchantId: '', orderNo: '', phoneNo: '', status: 0, userName: '', utr: '', pageNum: 1, pageSize: 10
+    const initSearchList: GetPayReceiptListRequestQuerystring = {
+        createTimeEnd: '',
+        createTimeStart: '',
+        merchantId: '',
+        orderNo: '',
+        phoneNo: '',
+        status: 0,
+        userName: '',
+        utr: '',
+        pageNum: 1,
+        pageSize: 10,
     };
 
     // state
     const [searchList, setSearchList] = useState(initSearchList);
-    const [selectedList,setSelectedList] = useState([]);
+    const [selectedList, setSelectedList] = useState([]);
     const [modal, contextHolder] = Modal.useModal();
     // api
     const [triggerGetList, { currentData, isFetching }] = useLazyGetPayReceiptListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
-        refetchOnReconnect: false
+        refetchOnReconnect: false,
     });
     const [postPayReceipt, { isSuccess: isPostPayReceiptSuccess }] = usePostPayReceiptConfirmMutation();
 
-
-
     useEffect(() => {
         triggerGetList(searchList);
-    }, [searchList,isPostPayReceiptSuccess]);
+    }, [searchList, isPostPayReceiptSuccess]);
 
     useEffect(() => {
-        if(isSuperAdmin){
+        if (isSuperAdmin) {
             triggerGetMerchantList(null);
         }
     }, [isSuperAdmin]);
@@ -60,7 +66,7 @@ const PayReceiptTable = (): JSX.Element => {
                     .catch(() => {
                         //
                     });
-            }
+            },
         });
     };
 
@@ -70,9 +76,23 @@ const PayReceiptTable = (): JSX.Element => {
         '1': { text: '已确认', color: 'green' },
     };
 
-    const utrOrReceiptimgColumn: ProColumns = (appInfo.COUNTRY !== 'Pakistan'  && appInfo.COUNTRY !== 'Bangladesh')
-        ? { title: 'UTR', dataIndex: 'utr', key: 'utr', initialValue: "", render: (text) => <CopyText text={text} /> }
-        : { title: '还款明细', dataIndex: 'receiptImageUrl', key: 'receiptImageUrl', valueType: 'image', hideInSearch: true ,align: 'center' };
+    const utrOrReceiptimgColumn: ProColumns =
+        appInfo.COUNTRY !== 'Pakistan' && appInfo.COUNTRY !== 'Bangladesh'
+            ? {
+                  title: 'UTR',
+                  dataIndex: 'utr',
+                  key: 'utr',
+                  initialValue: '',
+                  render: (text) => <CopyText text={text} />,
+              }
+            : {
+                  title: '还款明细',
+                  dataIndex: 'receiptImageUrl',
+                  key: 'receiptImageUrl',
+                  valueType: 'image',
+                  hideInSearch: true,
+                  align: 'center',
+              };
 
     const columns: ProColumns<PayReceiptList>[] = [
         {
@@ -82,16 +102,55 @@ const PayReceiptTable = (): JSX.Element => {
             align: 'left',
             width: '50px',
             render: (text, record) => {
-                return <a key="editable" onClick={() => handlePayReceiptConfirm([record.orderNo])} >确认</a>;
-            }
+                return (
+                    <a key="editable" onClick={() => handlePayReceiptConfirm([record.orderNo])}>
+                        确认
+                    </a>
+                );
+            },
         },
-        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: 'APP名称', dataIndex: 'appName', key: 'appName', hideInSearch: true, render: (text) => <CopyText text={text} /> },
-        { title: '产品名称', dataIndex: 'productName', key: 'productName', hideInSearch: true, render: (text) => <CopyText text={text} /> },
         {
-            title: '确认状态', dataIndex: 'status', valueType: 'select', key: 'status', initialValue: "0", align: 'center',
+            title: '订单编号',
+            dataIndex: 'orderNo',
+            key: 'orderNo',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '手机号',
+            dataIndex: 'phoneNo',
+            key: 'phoneNo',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '姓名',
+            dataIndex: 'userName',
+            key: 'userName',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: 'APP名称',
+            dataIndex: 'appName',
+            key: 'appName',
+            hideInSearch: true,
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '产品名称',
+            dataIndex: 'productName',
+            key: 'productName',
+            hideInSearch: true,
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '确认状态',
+            dataIndex: 'status',
+            valueType: 'select',
+            key: 'status',
+            initialValue: '0',
+            align: 'center',
             valueEnum: enumObjectToMap(statusEnum),
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
@@ -103,19 +162,37 @@ const PayReceiptTable = (): JSX.Element => {
         { title: '操作人', dataIndex: 'operator', key: 'operator', hideInSearch: true },
         { title: '建立时间', dataIndex: 'createTime', key: 'createTime', hideInSearch: true, valueType: 'dateTime' },
         {
-            title: '建立时间', dataIndex: 'createTimeRange', valueType: 'dateRange', key: 'createTimeRange',
-            fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: ""
+            title: '建立时间',
+            dataIndex: 'createTimeRange',
+            valueType: 'dateRange',
+            key: 'createTimeRange',
+            fieldProps: { placeholder: ['开始时间', '结束时间'] },
+            hideInTable: true,
+            initialValue: '',
         },
-        { title: '更新时间', dataIndex: 'updateTime', key: 'updateTime', valueType: "dateTime", hideInSearch: true },
-
+        { title: '更新时间', dataIndex: 'updateTime', key: 'updateTime', valueType: 'dateTime', hideInSearch: true },
     ];
     if (isSuperAdmin) {
-        columns.splice(1, 0, {
-            title: '商户名', dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true, width: ProColumnsOperationConstant.width["2"],
-        }, {
-            title: '商户名', dataIndex: 'merchantId', key: 'merchantId', valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
-            hideInTable: true
-        });
+        columns.splice(
+            1,
+            0,
+            {
+                title: '商户名',
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                hideInSearch: true,
+                width: ProColumnsOperationConstant.width['2'],
+            },
+            {
+                title: '商户名',
+                dataIndex: 'merchantId',
+                key: 'merchantId',
+                valueEnum: merchantListEnum,
+                valueType: 'select',
+                initialValue: '',
+                hideInTable: true,
+            },
+        );
     }
 
     return (
@@ -127,31 +204,51 @@ const PayReceiptTable = (): JSX.Element => {
                 selectedRowKeys: selectedList,
                 onChange: onSelectChange,
             }}
-            rowKey={({ orderNo })=>orderNo}
+            rowKey={({ orderNo }) => orderNo}
             search={{
                 labelWidth: 'auto',
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
                     <Space>
                         {contextHolder}
-                        <Button onClick={() => {
-                            //  form.resetFields();
-                            // @ts-ignore
-                            form.setFieldsValue({ ...initSearchList, createTimeRange: '' });
-                            setSearchList(initSearchList);
-                        }}>{resetText}</Button>
+                        <Button
+                            onClick={() => {
+                                //  form.resetFields();
+                                // @ts-ignore
+                                form.setFieldsValue({ ...initSearchList, createTimeRange: '' });
+                                setSearchList(initSearchList);
+                            }}
+                        >
+                            {resetText}
+                        </Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
-                                // @ts-ignore
-                                const {  createTimeRange, merchantId = '', orderNo, phoneNo, status, userName, utr = '' } = form.getFieldValue();
+                                const {
+                                    createTimeRange,
+                                    merchantId = '',
+                                    orderNo,
+                                    phoneNo,
+                                    status,
+                                    userName,
+                                    utr = '',
+                                    // @ts-ignore
+                                } = form.getFieldValue();
                                 setSearchList({
                                     ...searchList,
-                                    createTimeEnd: createTimeRange ? createTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    createTimeStart: createTimeRange ? createTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    createTimeEnd: createTimeRange
+                                        ? createTimeRange[1].format('YYYY-MM-DD 23:59:59')
+                                        : '',
+                                    createTimeStart: createTimeRange
+                                        ? createTimeRange[0].format('YYYY-MM-DD 00:00:00')
+                                        : '',
                                     status: status === '' ? '' : Number(status),
-                                    merchantId, orderNo, phoneNo, userName, utr, pageNum: 1,
-
+                                    merchantId,
+                                    orderNo,
+                                    phoneNo,
+                                    userName,
+                                    utr,
+                                    pageNum: 1,
                                 });
                                 form.submit();
                             }}
@@ -162,11 +259,19 @@ const PayReceiptTable = (): JSX.Element => {
                 ),
             }}
             options={{
-                setting: { listsHeight: 400, },
+                setting: { listsHeight: 400 },
                 reload: () => triggerGetList(searchList),
-
             }}
-            headerTitle={<Button type="primary" ghost onClick={() => handlePayReceiptConfirm(selectedList)} disabled={selectedList.length === 0}>全部确认</Button>}
+            headerTitle={
+                <Button
+                    type="primary"
+                    ghost
+                    onClick={() => handlePayReceiptConfirm(selectedList)}
+                    disabled={selectedList.length === 0}
+                >
+                    全部确认
+                </Button>
+            }
             pagination={{
                 showSizeChanger: true,
                 defaultPageSize: 10,
@@ -175,9 +280,7 @@ const PayReceiptTable = (): JSX.Element => {
                 current: currentData?.records?.length === 0 ? 0 : currentData?.currentPage,
             }}
         />
-
     );
 };
 
 export default PayReceiptTable;
-

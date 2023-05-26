@@ -1,9 +1,9 @@
-import { API } from "../../shared/api";
-import { GetUerListProps, GetUserListRequestQuerystring } from "./types/userTypes/getUserList";
-import { PostBlackListRequestBody } from "./types/userTypes/postBlackList";
-import { UserId } from "../../shared/domain/UserId";
+import { API } from '../../shared/api';
+import { UserId } from '../../shared/domain/UserId';
+import { GetUerListProps, GetUserListRequestQuerystring } from './types/userTypes/getUserList';
+import { PostBlackListRequestBody } from './types/userTypes/postBlackList';
+import { PostQuotaLabelRequestBody } from './types/userTypes/postQuotaLabel';
 import { PostTelSaleRequestQuerystring } from './types/userTypes/postTelSale';
-import { PostQuotaLabelRequestBody } from "./types/userTypes/postQuotaLabel";
 
 const UserApi = API.injectEndpoints({
     overrideExisting: false,
@@ -14,16 +14,16 @@ const UserApi = API.injectEndpoints({
                 const finalRequestBody = {
                     ...requestBody,
                 };
-                if(String(finalRequestBody.hasVerifyThirdRisk) === "false") {
+                if (String(finalRequestBody.hasVerifyThirdRisk) === 'false') {
                     finalRequestBody.hasVerifyThirdRisk = undefined;
                 }
-                if(String(finalRequestBody.hasVerifyNotApply) === "false") {
+                if (String(finalRequestBody.hasVerifyNotApply) === 'false') {
                     finalRequestBody.hasVerifyNotApply = undefined;
                 }
                 return {
                     url: `/user-manage/user-list`,
                     params: finalRequestBody,
-                    method: "get",
+                    method: 'get',
                 };
             },
         }),
@@ -31,7 +31,7 @@ const UserApi = API.injectEndpoints({
         postBlackListAdd: builder.mutation<{}, PostBlackListRequestBody>({
             query: (requestBody: PostBlackListRequestBody) => ({
                 url: `/user-manage/black-list/add`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -39,7 +39,7 @@ const UserApi = API.injectEndpoints({
         deleteUser: builder.mutation<{}, UserId>({
             query: (requestBody: UserId) => ({
                 url: `/user-manage/user`,
-                method: "delete",
+                method: 'delete',
                 data: requestBody,
             }),
         }),
@@ -47,7 +47,7 @@ const UserApi = API.injectEndpoints({
         postUserBan: builder.mutation<{}, UserId>({
             query: (requestBody: UserId) => ({
                 url: `/user-manage/user-ban`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -55,7 +55,7 @@ const UserApi = API.injectEndpoints({
         postUserBanRelease: builder.mutation<{}, UserId>({
             query: (requestBody: UserId) => ({
                 url: `/user-manage/user-ban/release`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -63,7 +63,7 @@ const UserApi = API.injectEndpoints({
         postTelSale: builder.mutation<{}, PostTelSaleRequestQuerystring>({
             query: (requestBody: PostTelSaleRequestQuerystring) => ({
                 url: `/user-manage/tel-sale`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -71,18 +71,18 @@ const UserApi = API.injectEndpoints({
         deleteBlackList: builder.mutation<null, UserId>({
             query: (requestBody: UserId) => ({
                 url: `/user-manage/black-list/${requestBody.userId}`,
-                method: "delete",
+                method: 'delete',
             }),
         }),
         // NOTE: POST /hs/admin/user-manage/quota-label 配置額度標籤
         postUserManageQuotaLabel: builder.mutation<{}, PostQuotaLabelRequestBody>({
             query: (requestBody: PostQuotaLabelRequestBody) => ({
                 url: `/user-manage/quota-label`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
-    })
+    }),
 });
 export const {
     useLazyGetUserManageListQuery,
@@ -92,5 +92,5 @@ export const {
     usePostUserBanReleaseMutation,
     usePostTelSaleMutation,
     useDeleteBlackListMutation,
-    usePostUserManageQuotaLabelMutation
+    usePostUserManageQuotaLabelMutation,
 } = UserApi;

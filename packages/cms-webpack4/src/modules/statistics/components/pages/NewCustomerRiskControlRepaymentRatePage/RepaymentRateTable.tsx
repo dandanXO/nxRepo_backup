@@ -1,27 +1,27 @@
-import { AdminTable } from "../../../../shared/components/common/AdminTable";
-import { ProColumns, ProFormInstance } from "@ant-design/pro-components";
+import { AdminTable } from '../../../../shared/components/common/AdminTable';
+import { ConstantRiskRankEnum } from '../../../../shared/constants/constantRiskRankEnum';
+import useGetProviderEnum from '../../../../shared/hooks/common/useGetProviderEnum';
 import {
     GetNewCustomerRiskPaymentRateListRequest,
     RiskPaymentRateResponseRiskPaymentRateResponse,
-    useLazyGetNewCustomerRiskPaymentRateListQuery
-} from "../../../api/NewCustomerRepaymentRateApi";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { FormInstance } from "antd";
-import { Button } from "antd/es";
-import queryString from "query-string";
-import { ConstantRiskRankEnum } from "../../../../shared/constants/constantRiskRankEnum";
-import useGetProviderEnum from "../../../../shared/hooks/common/useGetProviderEnum";
+    useLazyGetNewCustomerRiskPaymentRateListQuery,
+} from '../../../api/NewCustomerRepaymentRateApi';
+import { ProColumns, ProFormInstance } from '@ant-design/pro-components';
+import { FormInstance } from 'antd';
+import { Button } from 'antd/es';
+import queryString from 'query-string';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const RepaymentRateTable = (): JSX.Element => {
-
-    const [triggerGetNewCustomerRiskPaymentRateList, { currentData, isFetching }] = useLazyGetNewCustomerRiskPaymentRateListQuery();
+    const [triggerGetNewCustomerRiskPaymentRateList, { currentData, isFetching }] =
+        useLazyGetNewCustomerRiskPaymentRateListQuery();
 
     const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
-        endTime: "",          // 結束時間
-        riskControlModel: "", // 风控名稱
-        riskRank: "",         // 風控標籤
-        startTime: "",         // 開始時間
-        newMember: ""
+        endTime: '', // 結束時間
+        riskControlModel: '', // 风控名稱
+        riskRank: '', // 風控標籤
+        startTime: '', // 開始時間
+        newMember: '',
     });
     useEffect(() => {
         triggerGetNewCustomerRiskPaymentRateList(null);
@@ -42,7 +42,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'expireTime',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
             valueType: 'date',
         },
         {
@@ -51,7 +51,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'fakeLoanDate',
             hideInSearch: false,
             hideInTable: true,
-            initialValue: "",
+            initialValue: '',
             valueType: 'dateRange',
         },
         {
@@ -60,7 +60,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'totalCount',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'totalLendUsers',
@@ -68,7 +68,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'totalLendUsers',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'totalLendMoney',
@@ -76,8 +76,8 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'totalLendMoney',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
-            render: (text)=>formatNumber(text)
+            initialValue: '',
+            render: (text) => formatNumber(text),
         },
         {
             key: 'pendingRepaymentCount',
@@ -85,7 +85,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'pendingRepaymentCount',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'pendingRepaymentUsers',
@@ -93,7 +93,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'pendingRepaymentUsers',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'pendingRepaymentMoney',
@@ -101,8 +101,8 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'pendingRepaymentMoney',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
-            render: (text)=>formatNumber(text)
+            initialValue: '',
+            render: (text) => formatNumber(text),
         },
         {
             key: 'finishCount',
@@ -110,7 +110,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'finishCount',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'finishUsers',
@@ -118,7 +118,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'finishUsers',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'finishMoney',
@@ -126,8 +126,8 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'finishMoney',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
-            render: (text)=>formatNumber(text)
+            initialValue: '',
+            render: (text) => formatNumber(text),
         },
         {
             key: 'overdueCount',
@@ -135,7 +135,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'overdueCount',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'overdueUsers',
@@ -143,7 +143,7 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'overdueUsers',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'overdueMoney',
@@ -151,8 +151,8 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'overdueMoney',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
-            render: (text)=>formatNumber(text)
+            initialValue: '',
+            render: (text) => formatNumber(text),
         },
         // NOTE: only search
         {
@@ -160,11 +160,11 @@ export const RepaymentRateTable = (): JSX.Element => {
             hideInTable: true,
             title: '风控应用',
             dataIndex: 'riskControlModel',
-            initialValue: "",
+            initialValue: '',
             valueEnum: providerListEnum,
             fieldProps: {
                 allowClear: false,
-            }
+            },
         },
         {
             key: 'riskRank',
@@ -173,13 +173,18 @@ export const RepaymentRateTable = (): JSX.Element => {
             dataIndex: 'riskRank',
             valueType: 'select',
             valueEnum: ConstantRiskRankEnum,
-            initialValue: "",
+            initialValue: '',
             fieldProps: {
                 allowClear: false,
-            }
+            },
         },
         {
-            title: '是否新客', dataIndex: 'newMember', valueType: 'select', key: 'newMember', initialValue: "", hideInTable: true,
+            title: '是否新客',
+            dataIndex: 'newMember',
+            valueType: 'select',
+            key: 'newMember',
+            initialValue: '',
+            hideInTable: true,
             valueEnum: {
                 '': { text: '不限' },
                 true: { text: '是' },
@@ -192,9 +197,11 @@ export const RepaymentRateTable = (): JSX.Element => {
         // @ts-ignore
         const { fakeLoanDate = '', riskControlModel = '', riskRank = '', newMember } = formRef.current.getFieldValue();
         return {
-            riskControlModel, riskRank, newMember,
+            riskControlModel,
+            riskRank,
+            newMember,
             startTime: fakeLoanDate ? fakeLoanDate[0].format('YYYY-MM-DD 00:00:00') : '',
-            endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : ''
+            endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : '',
         };
     };
 
@@ -207,11 +214,11 @@ export const RepaymentRateTable = (): JSX.Element => {
     };
 
     return (
-        <AdminTable <RiskPaymentRateResponseRiskPaymentRateResponse>
+        <AdminTable<RiskPaymentRateResponseRiskPaymentRateResponse>
             formRef={formRef}
             searchable={true}
             isSearchFromClient={false}
-            onFormResetCallback={(form: FormInstance)=>{
+            onFormResetCallback={(form: FormInstance) => {
                 form.resetFields();
                 triggerGetNewCustomerRiskPaymentRateList(null);
             }}
@@ -220,7 +227,11 @@ export const RepaymentRateTable = (): JSX.Element => {
                 setFormState(searchForm);
                 triggerGetNewCustomerRiskPaymentRateList(searchForm);
             }}
-            toolBarRender={() => [<Button onClick={onClickHandleExport} type='primary'>导出</Button>]}
+            toolBarRender={() => [
+                <Button onClick={onClickHandleExport} type="primary">
+                    导出
+                </Button>,
+            ]}
             tableHeaderColumns={tableHeaderColumns}
             tableDatasource={currentData}
             triggerToRefreshList={triggerGetList}

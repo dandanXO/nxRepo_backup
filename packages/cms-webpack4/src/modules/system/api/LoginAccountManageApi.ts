@@ -1,6 +1,9 @@
-import { API } from "../../shared/api";
-import { GetLoginAccountListRequestQuery, GetLoginAccountListResponse } from "./types/LoginAccountManageTypes/getLoginAccountList";
-import { PostLogoutRequestBody } from "./types/LoginAccountManageTypes/postLogout";
+import { API } from '../../shared/api';
+import {
+    GetLoginAccountListRequestQuery,
+    GetLoginAccountListResponse,
+} from './types/LoginAccountManageTypes/getLoginAccountList';
+import { PostLogoutRequestBody } from './types/LoginAccountManageTypes/postLogout';
 
 const LoginAccountManageApi = API.injectEndpoints({
     overrideExisting: false,
@@ -10,20 +13,17 @@ const LoginAccountManageApi = API.injectEndpoints({
             query: (requestBody: GetLoginAccountListRequestQuery) => ({
                 url: `/user/account/manage`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: POST /hs/admin/user/account/logout 登出帳號
         postLogout: builder.mutation<null, PostLogoutRequestBody>({
             query: (requestBody: null) => ({
                 url: `/user/account/logout`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
-    })
+    }),
 });
-export const {
-    useLazyGetLoginAccountListQuery,
-    usePostLogoutMutation
-} = LoginAccountManageApi;
+export const { useLazyGetLoginAccountListQuery, usePostLogoutMutation } = LoginAccountManageApi;

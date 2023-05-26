@@ -1,10 +1,10 @@
-import { API } from "../../../shared/api";
-import { GetAllAppConfigurationResponse } from "./response/GetAllAppConfigurationResponse";
-import { GetAppConfigurationResponse } from "./response/GetAppConfigurationResponse";
-import { GetAppConfigurationRequest } from "./request/GetAppConfigurationRequest";
-import { CreateAppConfigurationRequest } from "./request/CreateAppConfigurationRequest";
-import { UpdateAppConfigurationRequest } from "./request/UpdateAppConfigurationRequest";
-import { DeleteAppConfigurationRequest } from "./request/DeleteAppConfigurationRequest";
+import { API } from '../../../shared/api';
+import { CreateAppConfigurationRequest } from './request/CreateAppConfigurationRequest';
+import { DeleteAppConfigurationRequest } from './request/DeleteAppConfigurationRequest';
+import { GetAppConfigurationRequest } from './request/GetAppConfigurationRequest';
+import { UpdateAppConfigurationRequest } from './request/UpdateAppConfigurationRequest';
+import { GetAllAppConfigurationResponse } from './response/GetAllAppConfigurationResponse';
+import { GetAppConfigurationResponse } from './response/GetAppConfigurationResponse';
 
 const AppManageApi = API.injectEndpoints({
     overrideExisting: false,
@@ -14,7 +14,7 @@ const AppManageApi = API.injectEndpoints({
         getAllAppConfiguration: builder.query<GetAllAppConfigurationResponse, {}>({
             query: () => ({
                 url: `/app-manage/all`,
-                method: "get",
+                method: 'get',
                 params: {},
             }),
         }),
@@ -22,35 +22,35 @@ const AppManageApi = API.injectEndpoints({
         getAppConfiguration: builder.query<GetAppConfigurationResponse, GetAppConfigurationRequest>({
             query: (arg: GetAppConfigurationRequest) => ({
                 url: `/app-manage/${arg.id}`,
-                method: "get",
+                method: 'get',
             }),
         }),
         // 新增 APP 配置
         createAppConfiguration: builder.mutation<{}, CreateAppConfigurationRequest>({
             query: (arg: CreateAppConfigurationRequest) => ({
                 url: `/app-manage`,
-                method: "post",
+                method: 'post',
                 data: arg,
-            })
+            }),
         }),
         // 更新 APP 配置
         updateAppConfiguration: builder.mutation<{}, UpdateAppConfigurationRequest>({
             query: (arg: UpdateAppConfigurationRequest) => ({
                 url: `/app-manage`,
-                method: "put",
+                method: 'put',
                 data: arg,
-            })
+            }),
         }),
         // 刪除 APP 配置
         deleteAppConfiguration: builder.mutation<null, DeleteAppConfigurationRequest>({
             query: (arg: DeleteAppConfigurationRequest) => ({
                 url: `/app-manage`,
-                method: "delete",
+                method: 'delete',
                 params: {},
                 data: arg,
             }),
         }),
-    })
+    }),
 });
 
 export const {

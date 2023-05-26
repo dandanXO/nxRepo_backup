@@ -2,8 +2,6 @@ import AdminPage from '../../../shared/components/common/AdminPage';
 import OrderTable from './OrderTable';
 
 const OrderPage = (): JSX.Element => {
-
-
     return (
         <AdminPage
             navigator={{
@@ -22,11 +20,10 @@ const OrderPage = (): JSX.Element => {
             }}
         >
             <>
-                <OrderTable/>
+                <OrderTable />
             </>
         </AdminPage>
     );
 };
 
 export default OrderPage;
-

@@ -1,7 +1,7 @@
-import { DistributeCollectByStageResponse, Stage } from "../../types";
+import { DistributeCollectByStageResponse, Stage } from '../../types';
 
 export const normalizeCollector = (data: DistributeCollectByStageResponse[], restrictedStages: Stage[]): any[] => {
-    if(!data) return [];
+    if (!data) return [];
     const allStageKey = [];
     const allMerchantKey = [];
     const allTeamKey = [];
@@ -24,8 +24,8 @@ export const normalizeCollector = (data: DistributeCollectByStageResponse[], res
                     allTeamKey.push(teamKey);
                     return {
                         key: teamKey,
-                        title: team.team === null ? "催收團隊-未分類" : "催收團隊-" + team.team,
-                        level: "team",
+                        title: team.team === null ? '催收團隊-未分類' : '催收團隊-' + team.team,
+                        level: 'team',
                         checkboxData: newCollectors,
                     };
                 });
@@ -33,8 +33,8 @@ export const normalizeCollector = (data: DistributeCollectByStageResponse[], res
                 allMerchantKey.push(merchantKey);
                 return {
                     key: merchantKey,
-                    title: "商戶-" + merchant.merchant,
-                    level: "merchant",
+                    title: '商戶-' + merchant.merchant,
+                    level: 'merchant',
                     children: newTeams,
                 };
             });
@@ -42,12 +42,12 @@ export const normalizeCollector = (data: DistributeCollectByStageResponse[], res
             allStageKey.push(stageKey);
             return {
                 key: stageKey,
-                title: "催收階段 " + stage.stage,
-                level: "stage",
+                title: '催收階段 ' + stage.stage,
+                level: 'stage',
                 children: newMerchants,
             };
         });
-    newData["allKey"] = allStageKey.concat(allMerchantKey).concat(allTeamKey);
-    newData["allCollectorKey"] = allCollectors;
+    newData['allKey'] = allStageKey.concat(allMerchantKey).concat(allTeamKey);
+    newData['allCollectorKey'] = allCollectors;
     return newData;
 };

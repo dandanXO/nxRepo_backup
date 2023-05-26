@@ -1,7 +1,7 @@
-import { GetPageableResponse } from "../commonReponse";
+import { GetPageableResponse } from '../commonReponse';
 
-export interface GetUserSmsResponse{
-    records:GetUserSms[]
+export interface GetUserSmsResponse {
+    records: GetUserSms[];
 }
 export interface GetUserSms {
     content?: string;

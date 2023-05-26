@@ -1,3 +1,3 @@
-import { RiskModelMenu } from "../../domain/vo/RiskModelMenu";
+import { RiskModelMenu } from '../../domain/vo/RiskModelMenu';
 
 export type RiskModelMenuResponse = Array<RiskModelMenu>;

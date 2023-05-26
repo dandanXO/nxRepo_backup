@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react';
-import { PageContainer } from '@ant-design/pro-components';
-import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from "../../../service/merchant/MerchantApi";
-import { Form } from "antd";
+import { itemRender } from '../../../../shared/components/common/itemRender';
+import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from '../../../service/merchant/MerchantApi';
 import MerchantModal from './MerchantModal';
 import MerchantTable from './MerchantTable';
-import { itemRender } from "../../../../shared/components/common/itemRender";
+import { PageContainer } from '@ant-design/pro-components';
+import { Form } from 'antd';
+import { useEffect, useState } from 'react';
 
 export const MerchantPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);
-    const [postMerchantCreate, { isLoading: isMerchantCreating, isSuccess: postMerchantSuccess }] = usePostMerchantCreateMutation();
-    const [putMerchantEdit, { isLoading: isMerchantEditing, isSuccess: putMerchantSuccess }] = usePutMerchantEditMutation();
+    const [postMerchantCreate, { isLoading: isMerchantCreating, isSuccess: postMerchantSuccess }] =
+        usePostMerchantCreateMutation();
+    const [putMerchantEdit, { isLoading: isMerchantEditing, isSuccess: putMerchantSuccess }] =
+        usePutMerchantEditMutation();
     const [merchantModalVisible, setMerchantModalVisible] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [form] = Form.useForm();
@@ -19,7 +21,7 @@ export const MerchantPage = (): JSX.Element => {
     }, []);
 
     const onFinish = (values: any) => {
-        if(isEdit && !values.password){
+        if (isEdit && !values.password) {
             delete values.password;
         }
         isEdit ? putMerchantEdit(values) : postMerchantCreate({ merchantId: values.merchantId, ...values });
@@ -31,7 +33,6 @@ export const MerchantPage = (): JSX.Element => {
         form.resetFields();
     };
 
-
     return domLoaded ? (
         <PageContainer
             header={{
@@ -39,7 +40,7 @@ export const MerchantPage = (): JSX.Element => {
                 breadcrumb: {
                     itemRender: itemRender,
                     routes: [
-                        { path: "/", breadcrumbName: '首页' },
+                        { path: '/', breadcrumbName: '首页' },
                         { path: null, breadcrumbName: '产品管理' },
                         { path: null, breadcrumbName: '商戶管理' },
                     ],
@@ -65,5 +66,3 @@ export const MerchantPage = (): JSX.Element => {
         </PageContainer>
     ) : null;
 };
-
-

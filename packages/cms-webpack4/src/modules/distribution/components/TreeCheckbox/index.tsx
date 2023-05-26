@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Table, Checkbox } from "antd";
-import styled from "styled-components";
+import { Checkbox, Table } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 
 const TreeCheckboxStyle = styled.div`
     background: lightskyblue;
@@ -21,7 +21,6 @@ const TreeCheckboxStyle = styled.div`
         order: 2;
     }
 
-
     // 階段
     .ant4-table-row-level-0 {
         display: flex;
@@ -38,7 +37,6 @@ const TreeCheckboxStyle = styled.div`
                 min-width: 0;
             }
         }
-
     }
 
     //商戶
@@ -88,7 +86,6 @@ const TreeCheckboxStyle = styled.div`
         background: #fff;
     }
 
-
     // 隱藏催收下方 tr
     .hide-expand-icon + tr.ant4-table-expanded-row-level-1 {
         display: none;
@@ -106,8 +103,7 @@ const TreeCheckboxStyle = styled.div`
     }
 `;
 
-const columns = [{ title: "title", dataIndex: "title", key: "title" }];
-
+const columns = [{ title: 'title', dataIndex: 'title', key: 'title' }];
 
 interface TreeCheckboxProps {
     data: any;
@@ -118,12 +114,12 @@ interface TreeCheckboxProps {
     setCheckedJob: any;
 }
 
-export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
+export const TreeCheckbox = (props: TreeCheckboxProps): JSX.Element => {
     const initialData = useRef([]);
 
     const [data, setData] = useState();
     useEffect(() => {
-        if(props.data) {
+        if (props.data) {
             initialData.current = [...props.data]; //设置初始化值
             setData(props.data);
         }
@@ -136,7 +132,7 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
     }, [props.checkedJob]);
 
     const checkChange = (e) => {
-    // console.log("checkChange.e", e)
+        // console.log("checkChange.e", e)
 
         const parentRowsKey = [];
 
@@ -145,12 +141,15 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
 
         data.forEach((stage) => {
             // console.log("stage", stage)
-            stage.children.forEach(merchant => {
+            stage.children.forEach((merchant) => {
                 // console.log("merchant", merchant)
                 merchant.children.forEach((team) => {
-                    const isFind = team && team.checkboxData && team.checkboxData.find((collector) => {
-                        return collector.key === e.target.value;
-                    });
+                    const isFind =
+                        team &&
+                        team.checkboxData &&
+                        team.checkboxData.find((collector) => {
+                            return collector.key === e.target.value;
+                        });
                     if (isFind) {
                         parentRowsKey.push(stage.key);
                         parentRowsKey.push(merchant.key);
@@ -160,7 +159,6 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
             });
         });
         // console.log("parentRowsKey", parentRowsKey);
-
 
         // NOTE: 全部催收階段
         // const allStage = data && data.map((i) => i.key);
@@ -175,7 +173,8 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
         // console.log("currentAllMerchant", currentAllMerchant);
 
         // NOTE: 當前選擇全部商戶
-        const currentSelectedAllMerchant = currentSelectedStage && currentSelectedStage.children.find((d) => d.key === parentRowsKey[1]);
+        const currentSelectedAllMerchant =
+            currentSelectedStage && currentSelectedStage.children.find((d) => d.key === parentRowsKey[1]);
         // console.log("currentSelectedAllMerchant", currentSelectedAllMerchant);
 
         // NOTE: 全部 Team
@@ -184,11 +183,12 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
 
         // NOTE: 當前選擇 Team
         let currentSelectedTeam;
-        currentSelectedAllMerchant && currentSelectedAllMerchant.children.map((team) => {
-            if(team.key === parentRowsKey[2]) {
-                currentSelectedTeam = team;
-            }
-        });
+        currentSelectedAllMerchant &&
+            currentSelectedAllMerchant.children.map((team) => {
+                if (team.key === parentRowsKey[2]) {
+                    currentSelectedTeam = team;
+                }
+            });
 
         // console.log("currentSelectedTeam", currentSelectedTeam);
 
@@ -196,8 +196,6 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
         // 0 催收階段
         // 1 商戶
         if (e.target.checked) {
-
-
             // NOTE: 當前商戶有不論選擇的全部人員
             const currentAllCollector = currentSelectedTeam && currentSelectedTeam.checkboxData.map((i) => i.key);
             // console.log("currentAllCollector", currentAllCollector);
@@ -207,13 +205,13 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
             props.setCheckedJob(newCheckedJob);
 
             // 判斷全部已選人員
-            const checkedAllCollector = newCheckedJob.filter(o => currentAllCollector.indexOf(o) > -1);
+            const checkedAllCollector = newCheckedJob.filter((o) => currentAllCollector.indexOf(o) > -1);
             // console.log("已選人員", checkedAllCollector);
 
             let newSelectedRowKeys = [...props.selectedRowKeys];
 
             // NOTE: 人員全選，team 單選
-            if(checkedAllCollector.length === currentAllCollector.length) {
+            if (checkedAllCollector.length === currentAllCollector.length) {
                 newSelectedRowKeys = [...props.selectedRowKeys, parentRowsKey[2]];
                 // NOTE: 把 team 塞入陣列
                 // setSelectedRowKeys(newSelectedRowKeys);
@@ -224,11 +222,10 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
             // NOTE: 判斷已選 team
             // let selectedAllMerchantArray = newSelectedRowKeys.filter(o => currentAllMerchant.filter(p => o === p))
             // selectedAllMerchantArray = selectedAllMerchantArray.filter(o => currentAllMerchant.indexOf(o) > -1);
-            const selectedAllTeam = newSelectedRowKeys.filter(o => currentAllTeam.indexOf(o) > -1);
+            const selectedAllTeam = newSelectedRowKeys.filter((o) => currentAllTeam.indexOf(o) > -1);
             // console.log("已選 team", selectedAllTeam);
 
-
-            if(selectedAllTeam.length === currentAllTeam.length) {
+            if (selectedAllTeam.length === currentAllTeam.length) {
                 // NOTE: 把商戶塞入陣列
                 // console.log("把商戶塞入陣列: ", parentRowsKey[1]);
                 newSelectedRowKeys = [...newSelectedRowKeys, parentRowsKey[1]];
@@ -237,51 +234,45 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
 
             // setSelectedRowKeys(newSelectedRowKeys);
 
-
             // NOTE: 判斷已選 商戶
-            const selectedAllMerchant = newSelectedRowKeys.filter(o => currentAllMerchant.indexOf(o) > -1);
+            const selectedAllMerchant = newSelectedRowKeys.filter((o) => currentAllMerchant.indexOf(o) > -1);
             // console.log("已選 merchant", selectedAllMerchant);
 
-            if(selectedAllMerchant.length === currentAllMerchant.length) {
+            if (selectedAllMerchant.length === currentAllMerchant.length) {
                 // NOTE: 把催收塞入陣列
                 // console.log("把催收塞入陣列: ", parentRowsKey[0]);
                 newSelectedRowKeys = [...newSelectedRowKeys, parentRowsKey[0]];
             }
             // console.log("newSelectedRowKeys", newSelectedRowKeys);
             props.setSelectedRowKeys(newSelectedRowKeys);
-
         } else {
             // console.log("取消 parentRowsKey", parentRowsKey);
 
             // NOTE: 取消人員後
-            props.setCheckedJob(
-                [...props.checkedJob].filter((d) => d !== e.target.value)
-            );
+            props.setCheckedJob([...props.checkedJob].filter((d) => d !== e.target.value));
 
             let newSelectedRowKeys = [...props.selectedRowKeys];
 
             // NOTE: 取消人員後，取消 team 選擇
             if (~props.selectedRowKeys.indexOf(parentRowsKey[2])) {
-                newSelectedRowKeys =  newSelectedRowKeys.filter((d) => d !== parentRowsKey[2]);
+                newSelectedRowKeys = newSelectedRowKeys.filter((d) => d !== parentRowsKey[2]);
                 // console.log("1.newSelectedRowKeys", newSelectedRowKeys);
             }
 
             // NOTE: 取消team後，取消商戶選擇
             if (~props.selectedRowKeys.indexOf(parentRowsKey[1])) {
-                newSelectedRowKeys =  newSelectedRowKeys.filter((d) => d !== parentRowsKey[1]);
+                newSelectedRowKeys = newSelectedRowKeys.filter((d) => d !== parentRowsKey[1]);
                 // console.log("2.newSelectedRowKeys", newSelectedRowKeys);
             }
 
             // NOTE: 取消商戶後，取消階段選擇
             if (~props.selectedRowKeys.indexOf(parentRowsKey[0])) {
-                newSelectedRowKeys =  newSelectedRowKeys.filter((d) => d !== parentRowsKey[0]);
+                newSelectedRowKeys = newSelectedRowKeys.filter((d) => d !== parentRowsKey[0]);
                 // console.log("3.newSelectedRowKeys", newSelectedRowKeys);
             }
             // console.log("4.newSelectedRowKeys", newSelectedRowKeys);
             props.setSelectedRowKeys(newSelectedRowKeys);
-
         }
-
     };
 
     // console.log("selectedRowKeys", selectedRowKeys);
@@ -289,14 +280,12 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
     // console.log("checkedJob", checkedJob);
     //控制表格的展开收起
     const onExpand = (expanded, record) => {
-    // console.log("onExpand.record", record);
-    //expanded： true展开，false：关闭
+        // console.log("onExpand.record", record);
+        //expanded： true展开，false：关闭
         if (expanded) {
             setExpandedRowKeys([...expandedRowKeys, record.key]);
         } else {
-            setExpandedRowKeys(
-                [...expandedRowKeys].filter((d) => d !== record.key)
-            );
+            setExpandedRowKeys([...expandedRowKeys].filter((d) => d !== record.key));
         }
     };
 
@@ -331,33 +320,40 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
     //     }
     // };
     const expandedRowRender = (record) => {
-    // console.log("expandedRowRender.record", record);
-    // console.log("expandedRowRender.index", index);
-    // console.log("expandedRowRender.indent", indent);
-    // console.log("expandedRowRender.expanded", expanded);
-        if(!record.checkboxData) return;
+        // console.log("expandedRowRender.record", record);
+        // console.log("expandedRowRender.index", index);
+        // console.log("expandedRowRender.indent", indent);
+        // console.log("expandedRowRender.expanded", expanded);
+        if (!record.checkboxData) return;
         return (
-            <div style={{
-                paddingLeft: 0, boxSizing: "border-box"
-            }}>
+            <div
+                style={{
+                    paddingLeft: 0,
+                    boxSizing: 'border-box',
+                }}
+            >
                 <div>
-                    <Checkbox.Group value={props.checkedJob} style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        flexWrap: "wrap"
-                    }}>
-                        {record.checkboxData && record.checkboxData.map((item) => {
-                            return (
-                                <Checkbox
-                                    key={item.key}
-                                    value={item.key}
-                                    onChange={checkChange}
-                                    style={{ flex: "0 1 auto", marginLeft: 8, width: "20%" }}
-                                >
-                                    {item.title}
-                                </Checkbox>
-                            );
-                        })}
+                    <Checkbox.Group
+                        value={props.checkedJob}
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            flexWrap: 'wrap',
+                        }}
+                    >
+                        {record.checkboxData &&
+                            record.checkboxData.map((item) => {
+                                return (
+                                    <Checkbox
+                                        key={item.key}
+                                        value={item.key}
+                                        onChange={checkChange}
+                                        style={{ flex: '0 1 auto', marginLeft: 8, width: '20%' }}
+                                    >
+                                        {item.title}
+                                    </Checkbox>
+                                );
+                            })}
                     </Checkbox.Group>
                 </div>
             </div>
@@ -372,17 +368,16 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
             // console.log("nativeEvent", nativeEvent);
             // console.log("selectedRowKeys", selectedRowKeys);
 
-            if(record.level === "stage") {
-
-                const allMerchantKey = record.children.map(merchant => merchant.key);
+            if (record.level === 'stage') {
+                const allMerchantKey = record.children.map((merchant) => merchant.key);
 
                 const allTeamKey = [];
-                record.children.map(merchant => merchant.children.map(team => allTeamKey.push(team.key)));
+                record.children.map((merchant) => merchant.children.map((team) => allTeamKey.push(team.key)));
 
                 let allCollector = [];
-                record.children.map(merchant => {
-                    merchant.children.map(team => {
-                        const currentAllPerson = team.checkboxData.map(collector => collector.key);
+                record.children.map((merchant) => {
+                    merchant.children.map((team) => {
+                        const currentAllPerson = team.checkboxData.map((collector) => collector.key);
                         allCollector = [...allCollector, ...currentAllPerson];
                     });
                 });
@@ -390,43 +385,43 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
                 // 催收階段
                 // console.log("催收階段")
 
-                if(selected) {
+                if (selected) {
                     const newSelectedRowKeys = [...props.selectedRowKeys, record.key, ...allMerchantKey, ...allTeamKey];
                     props.setSelectedRowKeys(newSelectedRowKeys);
                     props.setCheckedJob([...props.checkedJob, ...allCollector]);
                 } else {
-                    const allMerchantKey = record.children.map(merchant => merchant.key);
+                    const allMerchantKey = record.children.map((merchant) => merchant.key);
                     props.setSelectedRowKeys(
                         props.selectedRowKeys
-                            .filter(key => key !== record.key)
-                            .filter(key => allMerchantKey.indexOf(key) === -1)
-                            .filter(key => allTeamKey.indexOf(key) === -1)
+                            .filter((key) => key !== record.key)
+                            .filter((key) => allMerchantKey.indexOf(key) === -1)
+                            .filter((key) => allTeamKey.indexOf(key) === -1),
                     );
-                    props.setCheckedJob(
-                        props.checkedJob.filter(collector => allCollector.indexOf(collector) === -1)
-                    );
+                    props.setCheckedJob(props.checkedJob.filter((collector) => allCollector.indexOf(collector) === -1));
                 }
-            } else if(record.level === "merchant"){
+            } else if (record.level === 'merchant') {
                 // 商戶階段
                 // console.log("商戶階段")
                 // if(!record.checkboxData) return;
 
                 const allTeamKey = [];
-                record.children.map(team => allTeamKey.push(team.key));
+                record.children.map((team) => allTeamKey.push(team.key));
 
                 // merchant 下的 collector
                 const currentAllCollector = [];
-                record.children.map(team => {
-                    team.checkboxData.map(collector => {
+                record.children.map((team) => {
+                    team.checkboxData.map((collector) => {
                         currentAllCollector.push(collector.key);
                     });
                 });
 
                 // 商戶都選擇後，加入催收階段
-                const stage = initialData.current.filter(stage => stage.children.find(merchant => merchant.key === record.key))[0];
-                const allMerchantKey = stage.children.map(team => team.key);
+                const stage = initialData.current.filter((stage) =>
+                    stage.children.find((merchant) => merchant.key === record.key),
+                )[0];
+                const allMerchantKey = stage.children.map((team) => team.key);
 
-                if(selected) {
+                if (selected) {
                     // self, team
                     let newSelectedRowKeys = [...props.selectedRowKeys, record.key, ...allTeamKey];
                     props.setCheckedJob([...props.checkedJob, ...currentAllCollector]);
@@ -435,71 +430,68 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
                     // console.log("allMerchantKey", allMerchantKey);
                     // console.log("selectedRowKeys", selectedRowKeys);
 
-                    const selectedMerchantKeys = newSelectedRowKeys.filter(merchantKey => allMerchantKey.indexOf(merchantKey) > -1);
+                    const selectedMerchantKeys = newSelectedRowKeys.filter(
+                        (merchantKey) => allMerchantKey.indexOf(merchantKey) > -1,
+                    );
                     // console.log("selectedMerchantKeys", selectedMerchantKeys);
 
-                    if(selectedMerchantKeys.length === allMerchantKey.length) {
+                    if (selectedMerchantKeys.length === allMerchantKey.length) {
                         newSelectedRowKeys = [...newSelectedRowKeys, record.key, stage.key, ...allTeamKey];
                     }
 
                     props.setSelectedRowKeys(newSelectedRowKeys);
-
                 } else {
                     // self
                     props.setSelectedRowKeys(
                         props.selectedRowKeys
-                            .filter(key => key !== record.key)
-                            .filter(key => allTeamKey.indexOf(key) === -1)
-                            .filter(key => key !== stage.key)
+                            .filter((key) => key !== record.key)
+                            .filter((key) => allTeamKey.indexOf(key) === -1)
+                            .filter((key) => key !== stage.key),
                     );
 
                     // collector
                     props.setCheckedJob(
-                        props.checkedJob.filter(collector => currentAllCollector.indexOf(collector) === -1)
+                        props.checkedJob.filter((collector) => currentAllCollector.indexOf(collector) === -1),
                     );
-
                 }
-
-            } else if(record.level === "team") {
-
-                const currentAllCollector = record.checkboxData.map(collector => collector.key);
+            } else if (record.level === 'team') {
+                const currentAllCollector = record.checkboxData.map((collector) => collector.key);
 
                 let currentMerchant;
-                initialData.current.filter(stage =>
-                    stage.children.map(merchant => {
-                        merchant.children.filter(team => {
-                            if(team.key === record.key) {
+                initialData.current.filter((stage) =>
+                    stage.children.map((merchant) => {
+                        merchant.children.filter((team) => {
+                            if (team.key === record.key) {
                                 currentMerchant = merchant;
                             }
                         });
-                    }));
+                    }),
+                );
                 // console.log("currentMerchant", currentMerchant);
 
                 let tempStage;
-                initialData.current.map(stage => {
-                    stage.children.map(
-                        merchant => {
-                            merchant.children.map((team => {
-                                if(team.key === record.key) {
-                                    // merchantKey = merchant.key;
-                                    tempStage = stage;
-                                }
-                            }));
-                        }
-                    );
+                initialData.current.map((stage) => {
+                    stage.children.map((merchant) => {
+                        merchant.children.map((team) => {
+                            if (team.key === record.key) {
+                                // merchantKey = merchant.key;
+                                tempStage = stage;
+                            }
+                        });
+                    });
                 });
 
                 // console.log("tempStage", tempStage);
 
-                if(selected) {
+                if (selected) {
                     let newSelectedRowKeys = [...props.selectedRowKeys, record.key];
 
                     props.setCheckedJob([...props.checkedJob, ...currentAllCollector]);
 
                     //當 team 全部被選，merchant 要被勾選
-                    const allTeam = currentMerchant.children.map(team => team.key);
+                    const allTeam = currentMerchant.children.map((team) => team.key);
                     const selectedTeam = newSelectedRowKeys
-                        .filter(selectedTeamkey => allTeam.indexOf(selectedTeamkey) > -1)
+                        .filter((selectedTeamkey) => allTeam.indexOf(selectedTeamkey) > -1)
                         .filter((item, index, arr) => {
                             return arr.indexOf(item) === index;
                         });
@@ -507,37 +499,34 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
                     // console.log("allTeam", allTeam);
                     // console.log("selectedTeam", selectedTeam);
 
-                    if(selectedTeam.length === allTeam.length) {
+                    if (selectedTeam.length === allTeam.length) {
                         newSelectedRowKeys = [...newSelectedRowKeys, currentMerchant.key];
                     } else {
-                        newSelectedRowKeys = newSelectedRowKeys.filter(key => key !== currentMerchant.key);
+                        newSelectedRowKeys = newSelectedRowKeys.filter((key) => key !== currentMerchant.key);
                     }
 
                     //當 team勾選 商戶也勾選，催收也要勾選
                     // let merchantKey
 
+                    const allMerchantKey = tempStage.children.map((merchant) => merchant.key);
 
-                    const allMerchantKey = tempStage.children.map(merchant => merchant.key);
-
-                    const selectedAllMerchant = newSelectedRowKeys.filter(key => allMerchantKey.indexOf(key) > -1);
+                    const selectedAllMerchant = newSelectedRowKeys.filter((key) => allMerchantKey.indexOf(key) > -1);
                     // console.log("allMerchantKey", allMerchantKey);
                     // console.log("selectedAllMerchant", selectedAllMerchant);
 
-                    if(selectedAllMerchant.length === allMerchantKey.length) {
+                    if (selectedAllMerchant.length === allMerchantKey.length) {
                         newSelectedRowKeys = [...newSelectedRowKeys, tempStage.key];
                     } else {
-                        newSelectedRowKeys = newSelectedRowKeys.filter(key => key !== tempStage.key);
+                        newSelectedRowKeys = newSelectedRowKeys.filter((key) => key !== tempStage.key);
                     }
                     props.setSelectedRowKeys(newSelectedRowKeys);
 
                     // console.log("newSelectedRowKeys", newSelectedRowKeys);
-
                 } else {
-
                     const newSelectedRowKeys = props.selectedRowKeys
-                        .filter(key => key !== record.key)
-                        .filter(key => key !== currentMerchant.key)
-                        .filter(key => key !== tempStage.key);
+                        .filter((key) => key !== record.key)
+                        .filter((key) => key !== currentMerchant.key)
+                        .filter((key) => key !== tempStage.key);
 
                     // console.log("selectedRowKeys", selectedRowKeys);
                     // console.log("newSelectedRowKeys", newSelectedRowKeys);
@@ -546,21 +535,19 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
 
                     // collector
                     props.setCheckedJob(
-                        props.checkedJob.filter(collector => currentAllCollector.indexOf(collector) === -1)
+                        props.checkedJob.filter((collector) => currentAllCollector.indexOf(collector) === -1),
                     );
                 }
-
             }
-
-        }
+        },
     };
 
-    if(!data) return null;
+    if (!data) return null;
 
     return (
         <TreeCheckboxStyle
             style={{
-                background: "#fff",
+                background: '#fff',
                 padding: 24,
                 // boxSizing: "border-box",
             }}
@@ -577,9 +564,8 @@ export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
                 pagination={false}
                 rowSelection={rowSelection}
                 indentSize={40}
-                rowClassName={record => record.checkboxData ? '' : 'hide-expand-icon'}
+                rowClassName={(record) => (record.checkboxData ? '' : 'hide-expand-icon')}
             />
         </TreeCheckboxStyle>
     );
 };
-

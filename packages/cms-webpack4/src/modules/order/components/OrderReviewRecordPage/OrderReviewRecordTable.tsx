@@ -1,26 +1,38 @@
-import { useEffect, useState } from 'react';
+import { ProColumnsOperationConstant } from '../../../shared/components/common/ProColumnsOperationConstant';
+import CopyText from '../../../shared/components/other/CopyText';
+import useValuesEnums from '../../../shared/hooks/common/useValuesEnums';
+import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
+import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
+import { enumObjectToMap } from '../../../shared/utils/format/enumObjectToMap';
+import { useLazyGetOrderReviewRecordListQuery } from '../../api/OrderReviewRecordApi';
+import {
+    GetOrderReviewRecordListProps,
+    GetOrderReviewRecordListRequestQuerystring,
+    OrderReviewRecordListResponse,
+} from '../../api/types/getOrderReviewRecordList';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
-import useValuesEnums from '../../../shared/hooks/common/useValuesEnums';
-import { useLazyGetOrderReviewRecordListQuery } from '../../api/OrderReviewRecordApi';
-import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring } from '../../api/types/getOrderReviewRecordList';
-import CopyText from '../../../shared/components/other/CopyText';
-import queryString from "query-string";
-import { enumObjectToMap } from '../../../shared/utils/format/enumObjectToMap';
-import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
-import { ProColumnsOperationConstant } from "../../../shared/components/common/ProColumnsOperationConstant";
-import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
-
+import queryString from 'query-string';
+import { useEffect, useState } from 'react';
 
 const OrderReviewRecordTable = (): JSX.Element => {
-
     const isSuperAdmin = getIsSuperAdmin();
-    const {  merchantListEnum } = useValuesEnums();
-    const { triggerGetOperatorList ,orderReviewRecordOperatorEnum } = useGetOrderReviewRecordOperatorEnum();
+    const { merchantListEnum } = useValuesEnums();
+    const { triggerGetOperatorList, orderReviewRecordOperatorEnum } = useGetOrderReviewRecordOperatorEnum();
     const initSearchList: GetOrderReviewRecordListRequestQuerystring = {
-        appName: '', merchantId: '', operatorId: '', orderNo: '', phoneNo: '', productName: '', reviewStatus: '', reviewTimeEnd: '',
-        reviewTimeStart: '', userName: '', pageNum: 1, pageSize: 10
+        appName: '',
+        merchantId: '',
+        operatorId: '',
+        orderNo: '',
+        phoneNo: '',
+        productName: '',
+        reviewStatus: '',
+        reviewTimeEnd: '',
+        reviewTimeStart: '',
+        userName: '',
+        pageNum: 1,
+        pageSize: 10,
     };
 
     const [searchList, setSearchList] = useState(initSearchList);
@@ -30,7 +42,7 @@ const OrderReviewRecordTable = (): JSX.Element => {
     const [triggerGetList, { currentData, isFetching }] = useLazyGetOrderReviewRecordListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
-        refetchOnReconnect: false
+        refetchOnReconnect: false,
     });
 
     useEffect(() => {
@@ -44,7 +56,6 @@ const OrderReviewRecordTable = (): JSX.Element => {
         }
     }, [currentData]);
 
-
     const pageOnChange = (current, pageSize) => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
     };
@@ -54,45 +65,131 @@ const OrderReviewRecordTable = (): JSX.Element => {
         window.open(`/hs/admin/order-review-record/list/download?${searchQueryString}`);
     };
 
-    const statusEnum =  appInfo.COUNTRY !== 'Bangladesh' ? {
-        '': { text: '不限' },
-        '0': { text: '机审异常', color: 'lightgray' },
-        '1': { text: '机审通过', color: 'blue' },
-        '2': { text: '机审拒绝', color: 'orange' },
-        '6': { text: '审核通过', color: 'green' },
-        '7': { text: '审核拒绝', color: 'red' },
-        '8': { text: '放款拒绝', color: 'lightgray' },
-    } : {
-        '': { text: '不限' },
-        '0': { text: '机审异常', color: 'lightgray' },
-        '1': { text: '机审通过', color: 'blue' },
-        '2': { text: '机审拒绝', color: 'orange' },
-        '3': { text: '复审通过', color: 'lime' },
-        '4': { text: '复审拒绝', color: 'red' },
-        '6': { text: '终审通过', color: 'green' },
-        '7': { text: '终审拒绝', color: 'red' },
-        '8': { text: '放款拒绝', color: 'lightgray' },
-    };
+    const statusEnum =
+        appInfo.COUNTRY !== 'Bangladesh'
+            ? {
+                  '': { text: '不限' },
+                  '0': { text: '机审异常', color: 'lightgray' },
+                  '1': { text: '机审通过', color: 'blue' },
+                  '2': { text: '机审拒绝', color: 'orange' },
+                  '6': { text: '审核通过', color: 'green' },
+                  '7': { text: '审核拒绝', color: 'red' },
+                  '8': { text: '放款拒绝', color: 'lightgray' },
+              }
+            : {
+                  '': { text: '不限' },
+                  '0': { text: '机审异常', color: 'lightgray' },
+                  '1': { text: '机审通过', color: 'blue' },
+                  '2': { text: '机审拒绝', color: 'orange' },
+                  '3': { text: '复审通过', color: 'lime' },
+                  '4': { text: '复审拒绝', color: 'red' },
+                  '6': { text: '终审通过', color: 'green' },
+                  '7': { text: '终审拒绝', color: 'red' },
+                  '8': { text: '放款拒绝', color: 'lightgray' },
+              };
 
     const columns: ProColumns<OrderReviewRecordListResponse>[] = [
-        { title: '订单编号', dataIndex: 'orderNo', key: 'orderNo', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: 'APP名称', dataIndex: 'appName', key: 'appName', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '产品名称', dataIndex: 'productName', key: 'productName', initialValue: "", render: (text) => <CopyText text={text} /> },
-        { title: '审核状态', dataIndex: 'reviewStatus', key: 'reviewStatus', valueType: 'select', initialValue: "", valueEnum: enumObjectToMap(statusEnum) },
-        { title: '审核时间', dataIndex: 'reviewTime', key: 'reviewTime', hideInSearch: true, valueType: 'dateTime', width: '100px', },
-        { title: '审核时间', dataIndex: 'reviewTimeRange', valueType: 'dateRange', key: 'reviewTimeRange', fieldProps: { placeholder: ['开始时间', '结束时间'] }, hideInTable: true, initialValue: "" },
-        { title: '操作人', dataIndex: 'operator', key: 'operator',  initialValue: "" , hideInSearch: true },
-        { title: '操作人', dataIndex: 'operatorId', key: 'operatorId', hideInTable: true, valueType: 'select', valueEnum: orderReviewRecordOperatorEnum, initialValue: "" },
-        { title: '备注', dataIndex: 'remark', key: 'remark', hideInSearch: true, render: (text) => <CopyText text={text} /> },
+        {
+            title: '订单编号',
+            dataIndex: 'orderNo',
+            key: 'orderNo',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '手机号',
+            dataIndex: 'phoneNo',
+            key: 'phoneNo',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '姓名',
+            dataIndex: 'userName',
+            key: 'userName',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: 'APP名称',
+            dataIndex: 'appName',
+            key: 'appName',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '产品名称',
+            dataIndex: 'productName',
+            key: 'productName',
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
+        },
+        {
+            title: '审核状态',
+            dataIndex: 'reviewStatus',
+            key: 'reviewStatus',
+            valueType: 'select',
+            initialValue: '',
+            valueEnum: enumObjectToMap(statusEnum),
+        },
+        {
+            title: '审核时间',
+            dataIndex: 'reviewTime',
+            key: 'reviewTime',
+            hideInSearch: true,
+            valueType: 'dateTime',
+            width: '100px',
+        },
+        {
+            title: '审核时间',
+            dataIndex: 'reviewTimeRange',
+            valueType: 'dateRange',
+            key: 'reviewTimeRange',
+            fieldProps: { placeholder: ['开始时间', '结束时间'] },
+            hideInTable: true,
+            initialValue: '',
+        },
+        { title: '操作人', dataIndex: 'operator', key: 'operator', initialValue: '', hideInSearch: true },
+        {
+            title: '操作人',
+            dataIndex: 'operatorId',
+            key: 'operatorId',
+            hideInTable: true,
+            valueType: 'select',
+            valueEnum: orderReviewRecordOperatorEnum,
+            initialValue: '',
+        },
+        {
+            title: '备注',
+            dataIndex: 'remark',
+            key: 'remark',
+            hideInSearch: true,
+            render: (text) => <CopyText text={text} />,
+        },
     ];
 
-    if(isSuperAdmin){
-        columns.unshift({
-            title: '商户名', dataIndex: 'merchantName', key: 'merchantName', valueEnum: merchantListEnum, valueType: 'select', initialValue: '',
-            width: ProColumnsOperationConstant.width["2"], render: (text) => <CopyText text={text} />, hideInSearch: true
-        }, { title: '商戶名', dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, initialValue: "", valueEnum: merchantListEnum },);
+    if (isSuperAdmin) {
+        columns.unshift(
+            {
+                title: '商户名',
+                dataIndex: 'merchantName',
+                key: 'merchantName',
+                valueEnum: merchantListEnum,
+                valueType: 'select',
+                initialValue: '',
+                width: ProColumnsOperationConstant.width['2'],
+                render: (text) => <CopyText text={text} />,
+                hideInSearch: true,
+            },
+            {
+                title: '商戶名',
+                dataIndex: 'merchantId',
+                key: 'merchantId',
+                hideInTable: true,
+                initialValue: '',
+                valueEnum: merchantListEnum,
+            },
+        );
     }
     return (
         <ProTable<OrderReviewRecordListResponse>
@@ -105,21 +202,46 @@ const OrderReviewRecordTable = (): JSX.Element => {
                 // @ts-ignore
                 optionRender: ({ searchText, resetText }, { form }) => (
                     <Space>
-                        <Button onClick={() => {
-                            form.resetFields();
-                            // @ts-ignore
-                            setSearchList(initSearchList);
-                        }}>{resetText}</Button>
+                        <Button
+                            onClick={() => {
+                                form.resetFields();
+                                // @ts-ignore
+                                setSearchList(initSearchList);
+                            }}
+                        >
+                            {resetText}
+                        </Button>
                         <Button
                             type={'primary'}
                             onClick={() => {
-                                // @ts-ignore
-                                const { appName, merchantId = '', operatorId, orderNo, phoneNo, productName, reviewStatus, userName, reviewTimeRange } = form.getFieldValue();
+                                const {
+                                    appName,
+                                    merchantId = '',
+                                    operatorId,
+                                    orderNo,
+                                    phoneNo,
+                                    productName,
+                                    reviewStatus,
+                                    userName,
+                                    reviewTimeRange,
+                                    // @ts-ignore
+                                } = form.getFieldValue();
                                 setSearchList({
                                     ...searchList,
-                                    appName, merchantId, operatorId, orderNo, phoneNo, productName, reviewStatus, userName,
-                                    reviewTimeEnd: reviewTimeRange ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    reviewTimeStart: reviewTimeRange ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
+                                    appName,
+                                    merchantId,
+                                    operatorId,
+                                    orderNo,
+                                    phoneNo,
+                                    productName,
+                                    reviewStatus,
+                                    userName,
+                                    reviewTimeEnd: reviewTimeRange
+                                        ? reviewTimeRange[1].format('YYYY-MM-DD 23:59:59')
+                                        : '',
+                                    reviewTimeStart: reviewTimeRange
+                                        ? reviewTimeRange[0].format('YYYY-MM-DD 00:00:00')
+                                        : '',
                                     pageNum: 1,
                                 });
                                 form.submit();
@@ -131,11 +253,14 @@ const OrderReviewRecordTable = (): JSX.Element => {
                 ),
             }}
             options={{
-                setting: { listsHeight: 400, },
+                setting: { listsHeight: 400 },
                 reload: () => triggerGetList(searchList),
-
             }}
-            toolBarRender={() => [<Button onClick={handleExportOrderList} type='primary'>导出</Button>]}
+            toolBarRender={() => [
+                <Button onClick={handleExportOrderList} type="primary">
+                    导出
+                </Button>,
+            ]}
             pagination={{
                 showSizeChanger: true,
                 defaultPageSize: 10,
@@ -144,9 +269,7 @@ const OrderReviewRecordTable = (): JSX.Element => {
                 current: recordList?.records?.length === 0 ? 0 : recordList.currentPage,
             }}
         />
-
     );
 };
 
 export default OrderReviewRecordTable;
-

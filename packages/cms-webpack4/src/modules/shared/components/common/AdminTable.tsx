@@ -1,22 +1,21 @@
-import { Button, FormInstance, Space } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import { ProColumns, ProTable } from "@ant-design/pro-components";
-import React, { useEffect, useMemo, useState } from "react";
+import { PlusOutlined } from '@ant-design/icons';
+import { ProColumns, ProTable } from '@ant-design/pro-components';
+import { Button, FormInstance, Space } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
 
 export interface ModalContent {
     show: boolean;
     isEdit: boolean;
 }
 
-
 export enum ButtonsText {
-    SearchText= "查詢",
-    ResetText = "重置",
-    AddText = "添加",
+    SearchText = '查詢',
+    ResetText = '重置',
+    AddText = '添加',
 }
 
 interface AdminTableTemplateProps<TableListItemDataType> {
-    tableHeaderColumns:  ProColumns<TableListItemDataType>[];
+    tableHeaderColumns: ProColumns<TableListItemDataType>[];
     loading?: boolean;
     tableDatasource: TableListItemDataType[];
     onSearchClick?: (searchInputKeys: any) => TableListItemDataType[];
@@ -40,10 +39,10 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     rowSelection?: any;
     form?: any;
     toolBarRender?: any;
-    currentPage?:number;
+    currentPage?: number;
     pageOnChange?: (current: any, pageSize: number) => void;
     total?: number;
-    formRef?:any;
+    formRef?: any;
 }
 
 export const AdminTable = <TableListItemDataType,>({
@@ -63,17 +62,15 @@ export const AdminTable = <TableListItemDataType,>({
     // onSubmit,
     // onReset,
     // onLoad,
-    rowKey = "",
+    rowKey = '',
     rowSelection,
     form,
     toolBarRender = null,
     currentPage,
     total,
     pageOnChange,
-    formRef
-
+    formRef,
 }: AdminTableTemplateProps<TableListItemDataType>): JSX.Element => {
-
     // NOTE: cachedTableHeaderColumns
     // const [cachedTableHeaderColumns, setCachedTableHeaderColumns] = useState<ProColumns<TableListItemDataType, "text">[]>()
     // useEffect(() => {
@@ -107,23 +104,25 @@ export const AdminTable = <TableListItemDataType,>({
             // @ts-ignore
             optionRender: ({ searchText, resetText }, { form }) => (
                 <Space>
-                    <Button onClick={() => {
-                        form.resetFields();
-                        setCachedDatasource(tableDatasource);
-                        onFormResetCallback(form);
-                    }}>
+                    <Button
+                        onClick={() => {
+                            form.resetFields();
+                            setCachedDatasource(tableDatasource);
+                            onFormResetCallback(form);
+                        }}
+                    >
                         {resetText}
                     </Button>
                     <Button
                         type={'primary'}
                         onClick={() => {
-                            if(onSearchClick && isSearchFromClient) {
+                            if (onSearchClick && isSearchFromClient) {
                                 const searchInputKeys = form.getFieldsValue();
                                 const searchedDataSource = onSearchClick(searchInputKeys);
                                 setCachedDatasource(searchedDataSource);
                                 form.submit();
                             }
-                            if(!isSearchFromClient && onFormSearchCallback) {
+                            if (!isSearchFromClient && onFormSearchCallback) {
                                 onFormSearchCallback(form);
                                 form.submit();
                             }
@@ -138,10 +137,8 @@ export const AdminTable = <TableListItemDataType,>({
 
     const [currentPaginationPageSize, setCurrentPaginationPageSize] = useState(10);
 
-
     return (
         <ProTable<TableListItemDataType>
-
             // Table action 的引用，便于自定义触发
             // actionRef={actionRef}
             // 可以获取到查询表单的 form 实例，用于一些灵活的配置
@@ -152,13 +149,15 @@ export const AdminTable = <TableListItemDataType,>({
             // onDataSourceChange={(dataSource: T[]) => void}
             // editable={{ type: 'multiple', }}
             // tableClassName={tableClassName}
-            columnsState={{
-                // defaultValue:Record<string, ColumnsState>;
-                // value: Record<string, ColumnsState>;
-                // persistenceKey: 'pro-table-singe-demos',
-                // persistenceType: 'localStorage',
-                // onChange(value:Record<string, ColumnsState>)=>void
-            }}
+            columnsState={
+                {
+                    // defaultValue:Record<string, ColumnsState>;
+                    // value: Record<string, ColumnsState>;
+                    // persistenceKey: 'pro-table-singe-demos',
+                    // persistenceType: 'localStorage',
+                    // onChange(value:Record<string, ColumnsState>)=>void
+                }
+            }
             // rowKey="id"
             // @ts-ignore
             search={!searchable ? false : searchConfig}
@@ -167,7 +166,7 @@ export const AdminTable = <TableListItemDataType,>({
                     listsHeight: 400,
                 },
                 // NOTICE: refresh icon
-                reload: ()=> triggerToRefreshList(),
+                reload: () => triggerToRefreshList(),
             }}
             // alwaysShowAlert={true}
             rowSelection={rowSelection}
@@ -185,12 +184,22 @@ export const AdminTable = <TableListItemDataType,>({
             }}
             // NOTE: Unknow
             headerTitle={
-                headerTitle ? headerTitle :
+                headerTitle ? (
+                    headerTitle
+                ) : (
                     <>
                         {hasAddForm && (
-                            <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback && onAddCallback()}>{addText}</Button>
+                            <Button
+                                key="button"
+                                icon={<PlusOutlined />}
+                                type="primary"
+                                onClick={() => onAddCallback && onAddCallback()}
+                            >
+                                {addText}
+                            </Button>
                         )}
                     </>
+                )
             }
             toolBarRender={toolBarRender}
             // NOTE: Antd Design
@@ -212,7 +221,6 @@ export const AdminTable = <TableListItemDataType,>({
                 onChange: pageOnChange,
                 // 页码或 pageSize 改变的回调，参数是改变后的页码及每页条数
                 // onChange: (page) => console.log(page),
-
             }}
             form={form}
             loading={loading}
@@ -230,7 +238,6 @@ export const AdminTable = <TableListItemDataType,>({
             // showHiddenNum={false}
             // 用來標示選取的key
             rowKey={rowKey}
-
         />
     );
 };

@@ -36,7 +36,6 @@
         "space-infix-ops": [2],
         "object-curly-spacing": ["error", "always"],
         "semi": ["error", "always"],
-        "indent": [2, 4],
         "quotes": [0, "single"],
         "space-before-blocks": [0, "always"],
         "eqeqeq": 0,

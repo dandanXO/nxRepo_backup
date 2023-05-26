@@ -1,8 +1,8 @@
-import { API } from "../../../shared/api";
-import { AdsScenarioType } from "../export/types/IAdsScenario";
+import { API } from '../../../shared/api';
+import { AdsScenarioType } from '../export/types/IAdsScenario';
 
 export interface ActivityBannerVoRes {
-    action:string;
+    action: string;
     // 按钮事件
 
     actionUrl: string;
@@ -37,14 +37,14 @@ export interface ActivityModel {
 
 export type GetActivityRequest = {
     id: number;
-}
+};
 export type GetActivityResponse = ActivityModel;
 export type GetActivitiesResponse = ActivityModel[];
 export type PostActivityRequest = ActivityModel;
 export type PutActivityRequest = ActivityModel;
 
 interface DeleteActivityRequest {
-    id: number
+    id: number;
 }
 
 const AdsApi = API.injectEndpoints({
@@ -54,35 +54,35 @@ const AdsApi = API.injectEndpoints({
             query: (arg: GetActivityRequest) => ({
                 url: `/activity?id=${arg.id}`,
                 method: 'get',
-            })
+            }),
         }),
         getActivities: builder.query<GetActivitiesResponse, null>({
             query: () => ({
                 url: `/activity/list`,
                 method: 'get',
-            })
+            }),
         }),
         postActivity: builder.mutation<null, PostActivityRequest>({
             query: (arg: PostActivityRequest) => ({
                 url: `/activity`,
-                method: "post",
-                data: arg
-            })
+                method: 'post',
+                data: arg,
+            }),
         }),
         putActivity: builder.mutation<null, PutActivityRequest>({
             query: (arg: PutActivityRequest) => ({
                 url: `/activity`,
-                method: "put",
-                data: arg
-            })
+                method: 'put',
+                data: arg,
+            }),
         }),
         deleteActivity: builder.mutation<null, DeleteActivityRequest>({
             query: (arg: DeleteActivityRequest) => ({
                 url: `/activity/${arg.id}`,
-                method: "delete",
-            })
+                method: 'delete',
+            }),
         }),
-    })
+    }),
 });
 
 export const {

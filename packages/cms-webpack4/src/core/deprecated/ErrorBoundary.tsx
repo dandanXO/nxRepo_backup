@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 class ErrorBoundaryProps {
-  children?: React.ReactNode;
-  errorComponent: React.ReactNode;
+    children?: React.ReactNode;
+    errorComponent: React.ReactNode;
 }
 interface ErrorBoundaryState {
-  hasError: boolean;
+    hasError: boolean;
 }
 class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
     constructor(props) {
@@ -14,13 +14,12 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     }
 
     static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
+        // Update state so the next render will show the fallback UI.
         return { hasError: true };
     }
 
-
     componentDidCatch(error, errorInfo) {
-    // You can also log the error to an error reporting service
+        // You can also log the error to an error reporting service
         console.log(error, errorInfo);
     }
 

@@ -1,5 +1,5 @@
-import { API } from "./index";
-import { UserQuotaLabelSelect } from "./commonSelectTypes/getUserQuotaLabelSelect";
+import { UserQuotaLabelSelect } from './commonSelectTypes/getUserQuotaLabelSelect';
+import { API } from './index';
 
 const UserQuotaLabelApi = API.injectEndpoints({
     overrideExisting: false,
@@ -9,11 +9,9 @@ const UserQuotaLabelApi = API.injectEndpoints({
             query: () => ({
                 url: `/user-quota-label/drop-menu`,
                 params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
+    }),
 });
-export const {
-    useLazyGetUserQuotaLabelSelectQuery
-} = UserQuotaLabelApi;
+export const { useLazyGetUserQuotaLabelSelectQuery } = UserQuotaLabelApi;

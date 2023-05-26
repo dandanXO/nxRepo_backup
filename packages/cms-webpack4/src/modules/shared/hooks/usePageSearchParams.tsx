@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { setSearchParams, setPathname, selectSearchParams, setSelectedRow } from '../utils/searchParamsSlice';
-import { useDispatch, useSelector } from "react-redux";
-import { Key } from "antd/es/table/interface";
+import { selectSearchParams, setPathname, setSearchParams, setSelectedRow } from '../utils/searchParamsSlice';
+import { Key } from 'antd/es/table/interface';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface usePageSearchParamsProps {
-    searchListParams?: unknown
+    searchListParams?: unknown;
 }
 
-const usePageSearchParams = (props: usePageSearchParamsProps): {
-    searchList: Record<any, any>,
-    setSearchList: React.Dispatch<unknown>,
-    handleToDetailPage: (pathname: string, previousPathname: string, selectedRowParams?: Array<unknown>) => void,
-    searchParams: Record<any, any>,
-    selectedList: string[],
-    setSelectedList: React.Dispatch<Key[]>
+const usePageSearchParams = (
+    props: usePageSearchParamsProps,
+): {
+    searchList: Record<any, any>;
+    setSearchList: React.Dispatch<unknown>;
+    handleToDetailPage: (pathname: string, previousPathname: string, selectedRowParams?: Array<unknown>) => void;
+    searchParams: Record<any, any>;
+    selectedList: string[];
+    setSelectedList: React.Dispatch<Key[]>;
 } => {
-
     const { searchListParams } = props;
 
     const dispatch = useDispatch();
@@ -27,7 +28,6 @@ const usePageSearchParams = (props: usePageSearchParamsProps): {
         setSearchList(Object.keys(searchParams).length > 0 ? searchParams : searchListParams);
         setSelectedList(selectedRow.length > 0 ? selectedRow : selectedList);
     }, [searchParams, selectedRow]);
-
 
     const handleToDetailPage = (pathname, previousPathname, selectedRowParams = []) => {
         dispatch(setPathname({ pathname: pathname, previousPathname: previousPathname }));
@@ -41,8 +41,7 @@ const usePageSearchParams = (props: usePageSearchParamsProps): {
         handleToDetailPage,
         searchParams,
         selectedList,
-        setSelectedList
-
+        setSelectedList,
     };
 };
 

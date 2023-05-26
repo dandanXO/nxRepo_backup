@@ -1,7 +1,7 @@
-import { ChannelTagSchemaEntity, IChannelTagSchema } from "../../../../domain/entity/ChannelTagSchemaEntity";
-import { useCallback, useMemo, useState } from "react";
-import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import { FormInstance } from "antd";
+import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
+import { ChannelTagSchemaEntity, IChannelTagSchema } from '../../../../domain/entity/ChannelTagSchemaEntity';
+import { FormInstance } from 'antd';
+import { useCallback, useMemo, useState } from 'react';
 
 export interface FormModalHookProps {
     showModalContent: {
@@ -17,15 +17,16 @@ export interface FormModalHookProps {
     formSuccessCallback?: () => void;
 }
 
-export const useFormModal = (props: FormModalHookProps): {
-    formInitialValues: Record<any, any>,
-    onFormFieldsChange: (changedFields: any) => void,
-    onFormFinish: () => void,
-    customAntFormFieldError: CustomAntFormFieldError,
-    onModalOk: () => void,
-    onCloseModal: () => void,
+export const useFormModal = (
+    props: FormModalHookProps,
+): {
+    formInitialValues: Record<any, any>;
+    onFormFieldsChange: (changedFields: any) => void;
+    onFormFinish: () => void;
+    customAntFormFieldError: CustomAntFormFieldError;
+    onModalOk: () => void;
+    onCloseModal: () => void;
 } => {
-
     // NOTICE:
     const channelTagSchemaEntity = new ChannelTagSchemaEntity();
 
@@ -52,7 +53,7 @@ export const useFormModal = (props: FormModalHookProps): {
 
         // NOTICE: need
         const sourceData: IChannelTagSchema = {
-            [changedFields[0].name[0]]: changedFields[0].value
+            [changedFields[0].name[0]]: changedFields[0].value,
         } as IChannelTagSchema;
 
         // NOTICE: need
@@ -80,31 +81,32 @@ export const useFormModal = (props: FormModalHookProps): {
 
         // NOTICE: MODE - Edit
         if (props.showModalContent.isEdit) {
-            fields["id"] = props.editID;
+            fields['id'] = props.editID;
         }
 
         // NOTE: Create or Edit
         const triggerAPI = (!props.showModalContent.isEdit ? props.triggerPost : props.triggerPut) as any;
 
         // NOTE: Request
-        triggerAPI(fields).unwrap().then(() => {
-            // console.log("responseData", responseData);
+        triggerAPI(fields)
+            .unwrap()
+            .then(() => {
+                // console.log("responseData", responseData);
 
-            // Reset Form
-            props.form.resetFields();
+                // Reset Form
+                props.form.resetFields();
 
-            // Close Modal
-            props.setShowModalContent({
-                show: false,
-                isEdit: false,
+                // Close Modal
+                props.setShowModalContent({
+                    show: false,
+                    isEdit: false,
+                });
+
+                // Reset TableList
+                props.triggerGetList && props.triggerGetList(null);
+
+                props.formSuccessCallback && props.formSuccessCallback();
             });
-
-            // Reset TableList
-            props.triggerGetList && props.triggerGetList(null);
-
-            props.formSuccessCallback && props.formSuccessCallback();
-
-        });
     }, [props.showModalContent.isEdit, props.editID]);
 
     // NOTE: System validate ChannelSetting
@@ -113,9 +115,9 @@ export const useFormModal = (props: FormModalHookProps): {
         const fields = props.form.getFieldsValue();
 
         // NOTICE: need to prevent restored validation
-        Object.keys(fields).map(key => {
+        Object.keys(fields).map((key) => {
             if (fields[key] === undefined) {
-                props.form.setFieldValue(key, "");
+                props.form.setFieldValue(key, '');
             }
         });
 
@@ -151,6 +153,5 @@ export const useFormModal = (props: FormModalHookProps): {
         // modal
         onModalOk,
         onCloseModal,
-
     };
 };

@@ -1,5 +1,5 @@
-import { useLoginMutation } from "../api/SessionApi";
-import { useEffect } from "react";
+import { useLoginMutation } from '../api/SessionApi';
+import { useEffect } from 'react';
 
 const useAutoLogin = () => {
     const [triggerLogin, { isSuccess: isLoginSuccess }] = useLoginMutation();
@@ -10,15 +10,14 @@ const useAutoLogin = () => {
             console.log("[Debug][iframe] i'm master");
             if (!isLoginSuccess) {
                 triggerLogin({
-                    phoneNo: "19888888888",
-                    code: "123456"
+                    phoneNo: '19888888888',
+                    code: '123456',
                 });
             }
         } else {
             // Not top level. An iframe, popup or something
-            console.log("[Debug][iframe] inner parent window");
+            console.log('[Debug][iframe] inner parent window');
         }
-
     }, [triggerLogin, isLoginSuccess]);
 
     return { isLoginSuccess };

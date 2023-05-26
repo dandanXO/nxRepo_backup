@@ -1,8 +1,6 @@
-
-
 export interface GetProductListResponseProduct {
     /** 后台管理者账号*/
-     adminUsername?: string;
+    adminUsername?: string;
     /** 广告放款额度 */
     amountRange?: string;
     /** 广告放款通过率 */
@@ -76,9 +74,9 @@ export interface GetProductListResponseProduct {
     /** 权重 */
     weight?: number;
     /** 创建时间 */
-    createTime?:string;
+    createTime?: string;
     /** 修改时间 */
-    updateTime?:string;
+    updateTime?: string;
 }
 
 export interface GetProductInterestRatePairs {

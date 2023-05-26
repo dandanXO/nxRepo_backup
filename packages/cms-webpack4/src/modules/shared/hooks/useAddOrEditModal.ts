@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Form, FormInstance } from "antd";
-import { UseMutation } from "@reduxjs/toolkit/dist/query/react/buildHooks";
+import { UseMutation } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { Form, FormInstance } from 'antd';
+import React, { useEffect, useState } from 'react';
 
-const useAddOrEditFormModal = (postAddData: UseMutation<any>,putEditData: UseMutation<any>): {
-    form: FormInstance,
-    showModal: boolean,
-    setShowModal: React.Dispatch<boolean>,
-    isEdit: boolean,
-    setIsEdit: React.Dispatch<boolean>,
-    handleAddOrEdit: (values: FormDataEntryValue) => void,
-    isSuccess: boolean
+const useAddOrEditFormModal = (
+    postAddData: UseMutation<any>,
+    putEditData: UseMutation<any>,
+): {
+    form: FormInstance;
+    showModal: boolean;
+    setShowModal: React.Dispatch<boolean>;
+    isEdit: boolean;
+    setIsEdit: React.Dispatch<boolean>;
+    handleAddOrEdit: (values: FormDataEntryValue) => void;
+    isSuccess: boolean;
 } => {
-
     const [showModal, setShowModal] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
-    const [postModalForm, { isSuccess }] = isEdit ?   putEditData() : postAddData();
+    const [postModalForm, { isSuccess }] = isEdit ? putEditData() : postAddData();
     const [form] = Form.useForm();
 
     useEffect(() => {

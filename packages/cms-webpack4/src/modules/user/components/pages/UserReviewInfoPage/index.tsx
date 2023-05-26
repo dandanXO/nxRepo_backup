@@ -1,20 +1,21 @@
-import { useEffect, useState } from 'react';
-import { PageContainer } from '@ant-design/pro-components';
-import { Tabs, Button ,Form,Modal,List } from 'antd';
-import UserInfo from '../../../../shared/components/userInfo/UserInfo';
+import { itemRender } from '../../../../shared/components/common/itemRender';
 import AddressBook from '../../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
-import { useParams } from "react-router-dom";
-import UserReviewModal from './UserReviewModal';
-import {  useHistory } from "react-router-dom";
+import UserInfo from '../../../../shared/components/userInfo/UserInfo';
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
-import { itemRender } from "../../../../shared/components/common/itemRender";
-const UserReviewInfoPage = ():JSX.Element => {
+import UserReviewModal from './UserReviewModal';
+import { PageContainer } from '@ant-design/pro-components';
+import { Button, Form, List, Modal, Tabs } from 'antd';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
+const UserReviewInfoPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string }>();
     const userId = Number(urlParams.userId);
     const [form] = Form.useForm();
-    const [showModal,setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [postUserReview, { data, isSuccess }] = usePostUserReviewMutation();
     const history = useHistory();
     const [modal, contextHolder] = Modal.useModal();
@@ -28,14 +29,14 @@ const UserReviewInfoPage = ():JSX.Element => {
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId} /> },
     ];
 
-    const handleCloseModal = ()=>{
+    const handleCloseModal = () => {
         form.resetFields();
         setShowModal(false);
     };
 
     useEffect(() => {
         setShowModal(false);
-        if(data && data.length === 0){
+        if (data && data.length === 0) {
             history.push('/user-review');
         }
 
@@ -43,33 +44,30 @@ const UserReviewInfoPage = ():JSX.Element => {
         if (data && data.length !== 0) {
             modal.error({
                 title: 'Error',
-                content:
+                content: (
                     <List
                         itemLayout="horizontal"
                         dataSource={data}
-                        renderItem={item => (
+                        renderItem={(item) => (
                             <List.Item>
-                                <List.Item.Meta
-                                    title={`用户ID - ${item.userId}`}
-                                    description={item.errorMessage}
-                                />
+                                <List.Item.Meta title={`用户ID - ${item.userId}`} description={item.errorMessage} />
                             </List.Item>
                         )}
                     />
+                ),
             });
         }
-
     }, [isSuccess]);
 
-    const onFinish = ()=>{
-        postUserReview({ userIds: [userId],...form.getFieldsValue() });
+    const onFinish = () => {
+        postUserReview({ userIds: [userId], ...form.getFieldsValue() });
     };
 
     return domLoaded ? (
         <div>
             <PageContainer
                 style={{
-                    paddingBottom: 65
+                    paddingBottom: 65,
                 }}
                 // loading
                 header={{
@@ -78,20 +76,29 @@ const UserReviewInfoPage = ():JSX.Element => {
                     breadcrumb: {
                         itemRender: itemRender,
                         routes: [
-                            { path: '/', breadcrumbName: '首页', },
-                            { path: null, breadcrumbName: '用户管理', },
-                            { path: '/user-review', breadcrumbName: '用户终审', },
-                            { path: null, breadcrumbName: '审核', },
+                            { path: '/', breadcrumbName: '首页' },
+                            { path: null, breadcrumbName: '用户管理' },
+                            { path: '/user-review', breadcrumbName: '用户终审' },
+                            { path: null, breadcrumbName: '审核' },
                         ],
                     },
                 }}
                 footer={[
-                    <Button key="cancel" type='ghost' onClick={()=>history.goBack()}>取消</Button>,
-                    <Button key="submit" type="primary" onClick={()=>setShowModal(true)}>审核</Button>,
+                    <Button key="cancel" type="ghost" onClick={() => history.goBack()}>
+                        取消
+                    </Button>,
+                    <Button key="submit" type="primary" onClick={() => setShowModal(true)}>
+                        审核
+                    </Button>,
                 ]}
             >
                 <Tabs items={tabs} />
-                <UserReviewModal showModal={showModal} handleCloseModal={handleCloseModal} form={form} onFinish={onFinish}/>
+                <UserReviewModal
+                    showModal={showModal}
+                    handleCloseModal={handleCloseModal}
+                    form={form}
+                    onFinish={onFinish}
+                />
                 {contextHolder}
             </PageContainer>
         </div>

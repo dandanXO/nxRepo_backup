@@ -1,48 +1,31 @@
-import { AdminTable, ModalContent } from "../../../../shared/components/common/AdminTable";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { ProColumns } from "@ant-design/pro-components";
-import { FormInstance } from "antd";
-import { AdminFormCustomModal } from "../../../../shared/components/common/AdminFormCustomModal";
-import { useForm } from "antd/es/form/Form";
-import AdminPage from "../../../../shared/components/common/AdminPage";
-import { AppConfigurationListItem } from "../../../services/appManage/domain/AppConfigurationListItem";
+import { AdminFormCustomModal } from '../../../../shared/components/common/AdminFormCustomModal';
+import AdminPage from '../../../../shared/components/common/AdminPage';
+import { AdminTable, ModalContent } from '../../../../shared/components/common/AdminTable';
+import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
 import {
     useCreateAppConfigurationMutation,
     useDeleteAppConfigurationMutation,
     useLazyGetAllAppConfigurationQuery,
     useLazyGetAppConfigurationQuery,
-    useUpdateAppConfigurationMutation
-} from "../../../services/appManage/AppManageApi";
-import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
-import { AppManageForm } from "./AppManageForm";
-import { Modal } from "antd/es";
+    useUpdateAppConfigurationMutation,
+} from '../../../services/appManage/AppManageApi';
+import { AppConfigurationListItem } from '../../../services/appManage/domain/AppConfigurationListItem';
+import { AppManageForm } from './AppManageForm';
+import { ProColumns } from '@ant-design/pro-components';
+import { FormInstance } from 'antd';
+import { Modal } from 'antd/es';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 const i18n = {
-    "AppManagePage": {
-        add: "添加",
-        modalTitle: "APP配置",
-    }
+    AppManagePage: {
+        add: '添加',
+        modalTitle: 'APP配置',
+    },
 };
-export const idCardOcrList = [
-    "NONE",
-    "ACCUAUTH",
-    "ADV_IQA",
-    "ADV_IQC",
-    "GCT",
-];
-export const liveDetectList = [
-    "NONE",
-    "ACCUAUTH",
-    "ADVANCE",
-    "GCT",
-];
-export const taxCardOcrList = [
-    "NONE",
-    "ACCUAUTH",
-    "ADV_IQA",
-    "ADV_IQC",
-    "GCT",
-];
+export const idCardOcrList = ['NONE', 'ACCUAUTH', 'ADV_IQA', 'ADV_IQC', 'GCT'];
+export const liveDetectList = ['NONE', 'ACCUAUTH', 'ADVANCE', 'GCT'];
+export const taxCardOcrList = ['NONE', 'ACCUAUTH', 'ADV_IQA', 'ADV_IQC', 'GCT'];
 
 export const AppManagePage = (): JSX.Element => {
     // NOTICE: Action: List
@@ -65,13 +48,11 @@ export const AppManagePage = (): JSX.Element => {
         // console.log(form.getFieldsValue() )
 
         userBrowseAndSearchAllItemsUseCase(fields);
-
     }, []);
 
     const onFormResetCallback = useCallback(() => {
         userBrowseAndSearchAllItemsUseCase({});
     }, []);
-
 
     const [triggerDelete] = useDeleteAppConfigurationMutation();
 
@@ -87,19 +68,20 @@ export const AppManagePage = (): JSX.Element => {
         // NOTE:
         triggerDelete({
             id: editID,
-        }).unwrap().then(() => {
-            triggerGetList(null);
-        });
+        })
+            .unwrap()
+            .then(() => {
+                triggerGetList(null);
+            });
     }, []);
 
     const onDeleteModalCancel = useCallback(() => {
         //
     }, []);
 
-
     const userBrowseDeleteChannelSettingUseCase = useCallback((record: AppConfigurationListItem) => {
         modal.confirm({
-            title: "确认要删除此笔数据吗?",
+            title: '确认要删除此笔数据吗?',
             // NOTICE: 得用下面寫法否則 editID 會找不到
             onOk: () => onDeleteModalOK(record.id),
             // onOk: onDeleteModalOK,
@@ -117,20 +99,30 @@ export const AppManagePage = (): JSX.Element => {
                 valueType: 'option',
                 render: (text, record) => {
                     return [
-                        <a key="editable" onClick={() => {
-                            userBrowseEditChannelSettingUseCase(record);
-                        }}>修改</a>,
-                        <a key="deletable" onClick={() => {
-                            userBrowseDeleteChannelSettingUseCase(record);
-                        }}>刪除</a>,
+                        <a
+                            key="editable"
+                            onClick={() => {
+                                userBrowseEditChannelSettingUseCase(record);
+                            }}
+                        >
+                            修改
+                        </a>,
+                        <a
+                            key="deletable"
+                            onClick={() => {
+                                userBrowseDeleteChannelSettingUseCase(record);
+                            }}
+                        >
+                            刪除
+                        </a>,
                     ];
                 },
-                width: ProColumnsOperationConstant.width["2"],
+                width: ProColumnsOperationConstant.width['2'],
             },
-            { key: 'appName', title: 'APP名称', dataIndex: 'appName', initialValue: "" },
-            { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: "", hideInSearch: true, },
-            { key: 'createTime', title: '创建时间', dataIndex: 'createTime', initialValue: "", hideInSearch: true },
-            { key: 'updateTime', title: '更新时间', dataIndex: 'updateTime', initialValue: "", hideInSearch: true, },
+            { key: 'appName', title: 'APP名称', dataIndex: 'appName', initialValue: '' },
+            { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: '', hideInSearch: true },
+            { key: 'createTime', title: '创建时间', dataIndex: 'createTime', initialValue: '', hideInSearch: true },
+            { key: 'updateTime', title: '更新时间', dataIndex: 'updateTime', initialValue: '', hideInSearch: true },
         ];
         setColumns(columns);
     }, []);
@@ -148,17 +140,17 @@ export const AppManagePage = (): JSX.Element => {
         userBrowseAndSearchAllItemsUseCase({});
     }, []);
 
-
     // NOTE: GET list and item
-    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] = useLazyGetAllAppConfigurationQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
+    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] =
+        useLazyGetAllAppConfigurationQuery({
+            pollingInterval: 0,
+            refetchOnFocus: false,
+            refetchOnReconnect: false,
+        });
     const [currentTableListData, setCurrentTableListData] = useState<AppConfigurationListItem[]>();
     useEffect(() => {
-        if(!currentItemListData) return;
-        const data = currentItemListData.map(item => {
+        if (!currentItemListData) return;
+        const data = currentItemListData.map((item) => {
             return {
                 ...item,
             };
@@ -177,7 +169,6 @@ export const AppManagePage = (): JSX.Element => {
     //     refetchOnFocus: false,
     //     refetchOnReconnect: false
     // });
-
 
     // NOTE: User add Item
     const userAddItemUseCase = useCallback(() => {
@@ -243,7 +234,7 @@ export const AppManagePage = (): JSX.Element => {
         const fields = form.getFieldsValue();
 
         // NOTICE: MODE - Edit
-        if(showModalContent.isEdit) {
+        if (showModalContent.isEdit) {
             fields['id'] = editID;
             delete fields['packageId'];
         }
@@ -252,28 +243,28 @@ export const AppManagePage = (): JSX.Element => {
         const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
 
         // NOTE: Request
-        triggerAPI(fields).unwrap().then(() => {
-            // console.log("responseData", responseData);
+        triggerAPI(fields)
+            .unwrap()
+            .then(() => {
+                // console.log("responseData", responseData);
 
-            // Reset Form
-            form.resetFields();
+                // Reset Form
+                form.resetFields();
 
-            // Close Modal
-            setShowModalContent({
-                show: false,
-                isEdit: false,
+                // Close Modal
+                setShowModalContent({
+                    show: false,
+                    isEdit: false,
+                });
+
+                // Reset TableList
+                triggerGetList({});
             });
-
-            // Reset TableList
-            triggerGetList({});
-
-        });
     }, [showModalContent.isEdit, editID]);
 
     // NOTE: POST , PUT and DELETE
     const [triggerPost] = useCreateAppConfigurationMutation();
     const [triggerPut] = useUpdateAppConfigurationMutation();
-
 
     // NOTE: User browse EditChannelSetting
     const userBrowseEditChannelSettingUseCase = useCallback((record: AppConfigurationListItem) => {
@@ -289,36 +280,39 @@ export const AppManagePage = (): JSX.Element => {
             id: record.id,
         });
     }, []);
-    const [triggerGet , { currentData: currentFormData }] = useLazyGetAppConfigurationQuery();
+    const [triggerGet, { currentData: currentFormData }] = useLazyGetAppConfigurationQuery();
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
-        if(showModalContent.isEdit && currentFormData) {
+        if (showModalContent.isEdit && currentFormData) {
             systemReloadEditChannelSettingUseCase(currentFormData);
         }
     }, [showModalContent.isEdit, currentFormData]);
 
     // NOTE: System reload EditChannelSetting
-    const systemReloadEditChannelSettingUseCase = useCallback((currentFormData) => {
-        // NOTE: form - main data
-        form.setFieldsValue(currentFormData);
-    }, [showModalContent.isEdit, currentFormData]);
+    const systemReloadEditChannelSettingUseCase = useCallback(
+        (currentFormData) => {
+            // NOTE: form - main data
+            form.setFieldsValue(currentFormData);
+        },
+        [showModalContent.isEdit, currentFormData],
+    );
 
     return (
         <AdminPage
             navigator={{
                 ancestor: {
-                    path: "",
-                    breadcrumbName: "首页",
+                    path: '',
+                    breadcrumbName: '首页',
                 },
                 parent: {
-                    path: "",
-                    breadcrumbName: "APP配置",
+                    path: '',
+                    breadcrumbName: 'APP配置',
                 },
                 self: {
-                    path: "",
-                    breadcrumbName: "APP配置"
-                }
+                    path: '',
+                    breadcrumbName: 'APP配置',
+                },
             }}
         >
             <>
@@ -337,25 +331,33 @@ export const AppManagePage = (): JSX.Element => {
                     onSearchClick={(searchInputKeys: any) => {
                         // console.log("searchInputKeys", searchInputKeys);
                         let temp = currentTableListData;
-                        Object.keys(searchInputKeys).map(key => {
+                        Object.keys(searchInputKeys).map((key) => {
                             const searchInputValue = searchInputKeys[key];
-                            if(searchInputValue !== "") {
-                                temp = temp.filter(item => item[key] === searchInputValue);
+                            if (searchInputValue !== '') {
+                                temp = temp.filter((item) => item[key] === searchInputValue);
                             }
                         });
                         return temp;
                     }}
                 />
                 <AdminFormCustomModal
-                    width={"600px"}
+                    width={'600px'}
                     title={i18n.AppManagePage.modalTitle}
                     showModalContent={showModalContent}
                     setShowModalContent={setShowModalContent}
                     onOk={onModalOk}
                     onCloseModal={onCloseModal}
                 >
-                    <AppManageForm isEdit={showModalContent.isEdit} form={form} initialValues={formInitialValues} onFieldsChange={onFormFieldsChange} onFinish={onFormFinish}
-                        taxCardOcrList={taxCardOcrList} idCardOcrList={idCardOcrList} liveDetectList={liveDetectList}/>
+                    <AppManageForm
+                        isEdit={showModalContent.isEdit}
+                        form={form}
+                        initialValues={formInitialValues}
+                        onFieldsChange={onFormFieldsChange}
+                        onFinish={onFormFinish}
+                        taxCardOcrList={taxCardOcrList}
+                        idCardOcrList={idCardOcrList}
+                        liveDetectList={liveDetectList}
+                    />
                 </AdminFormCustomModal>
 
                 {/*NOTICE: Delete Modal*/}

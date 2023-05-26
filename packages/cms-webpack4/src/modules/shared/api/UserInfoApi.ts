@@ -1,10 +1,10 @@
-import { API } from "./index";
-import { GetUserInfoRequestQuerystring } from "./userInfoTypes/getUserInfoRequestString";
-import { GetUserDetailResponse, GetUserDetailRequestQuerystring } from "./userInfoTypes/getUserDetail";
-import { GetUserSmsProps } from "./userInfoTypes/getUserSms";
-import { GetUserContactsProps } from "./userInfoTypes/getUserContacts";
-import { GetUserOrdersProps } from "./userInfoTypes/getUserOrders";
-import { GetOrderDetailResponse ,GetOrderDetailRequestQuerystring } from "./userInfoTypes/getOrderDetail";
+import { API } from './index';
+import { GetOrderDetailRequestQuerystring, GetOrderDetailResponse } from './userInfoTypes/getOrderDetail';
+import { GetUserContactsProps } from './userInfoTypes/getUserContacts';
+import { GetUserDetailRequestQuerystring, GetUserDetailResponse } from './userInfoTypes/getUserDetail';
+import { GetUserInfoRequestQuerystring } from './userInfoTypes/getUserInfoRequestString';
+import { GetUserOrdersProps } from './userInfoTypes/getUserOrders';
+import { GetUserSmsProps } from './userInfoTypes/getUserSms';
 
 const UserInfoApi = API.injectEndpoints({
     overrideExisting: false,
@@ -14,7 +14,7 @@ const UserInfoApi = API.injectEndpoints({
             query: (requestBody: GetUserDetailRequestQuerystring) => ({
                 url: `/user-manage/user-detail`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: GET /hs/admin/user-manage/user-sms-logs 短信记录
@@ -22,7 +22,7 @@ const UserInfoApi = API.injectEndpoints({
             query: (requestBody: GetUserInfoRequestQuerystring) => ({
                 url: `/user-manage/user-sms-logs`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: GET /hs/admin/user-manage/user-contacts 通讯录
@@ -30,7 +30,7 @@ const UserInfoApi = API.injectEndpoints({
             query: (requestBody: GetUserInfoRequestQuerystring) => ({
                 url: `/user-manage/user-contacts`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: GET ​/hs​/admin​/user-manage/orders 借款信息
@@ -38,7 +38,7 @@ const UserInfoApi = API.injectEndpoints({
             query: (requestBody: GetUserInfoRequestQuerystring) => ({
                 url: `/user-manage/orders`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: GET /hs/admin/order/detail/{orderId} 訂單詳情
@@ -46,10 +46,10 @@ const UserInfoApi = API.injectEndpoints({
             query: ({ orderId }: GetOrderDetailRequestQuerystring) => ({
                 url: `/order/detail/${orderId}`,
                 params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
+    }),
 });
 export const {
     useGetUserDetailQuery,
@@ -61,5 +61,5 @@ export const {
     useLazyGetUserContactsListQuery,
     useLazyGetUserSMSListQuery,
     useLazyGetUserOrdersListQuery,
-    useLazyGetOrderDetailQuery
+    useLazyGetOrderDetailQuery,
 } = UserInfoApi;

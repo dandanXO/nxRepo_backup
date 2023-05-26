@@ -1,5 +1,5 @@
-import { API } from "./index";
-import { ProductNameSelect } from "./commonSelectTypes/getProductNameSelect";
+import { ProductNameSelect } from './commonSelectTypes/getProductNameSelect';
+import { API } from './index';
 
 const ProductNamesApi = API.injectEndpoints({
     overrideExisting: false,
@@ -9,11 +9,9 @@ const ProductNamesApi = API.injectEndpoints({
             query: () => ({
                 url: `/commons/product-names`,
                 params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
+    }),
 });
-export const {
-    useLazyGetProductNamesQuery
-} = ProductNamesApi;
+export const { useLazyGetProductNamesQuery } = ProductNamesApi;
