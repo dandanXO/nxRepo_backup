@@ -26,10 +26,10 @@ function TelSaleStatisticsPage ({
         initTime[1].format('YYYY-MM-DD 23:59:59')
     ]
     const [searchParams, setSearchParams] = useState({
-        assignedStartTime: "",
-        assignedEndTime: "",
-        loanStartTime: convertInitTime[0],
-        loanEndTime: convertInitTime[1],
+        assignedStartTime: convertInitTime[0],
+        assignedEndTime: convertInitTime[1],
+        loanStartTime: "",
+        loanEndTime: "",
         registerStartTime: "",
         registerEndTime: "",
         collectorId: "",

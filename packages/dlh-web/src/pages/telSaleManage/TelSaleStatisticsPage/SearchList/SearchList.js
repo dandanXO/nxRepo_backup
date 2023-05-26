@@ -32,7 +32,9 @@ class SearchList extends Component{
                       <Col lg={12} xl={6}>
                         <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.loan.time"})}>
                           {
-                            getFieldDecorator('loanTime')(
+                            getFieldDecorator('loanTime', {
+                              initialValue: []
+                            })(
                               <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]}/>
                             )
                           }
@@ -52,7 +54,9 @@ class SearchList extends Component{
                       <Col lg={12} xl={6}>
                         <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.reg.time"})}>
                           {
-                            getFieldDecorator('registerTime')(
+                            getFieldDecorator('registerTime', {
+                              initialValue: []
+                            })(
                               <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]}/>
                             )
                           }
