@@ -1,3 +1,5 @@
+import { Input } from '@frontend/mobile/shared/ui';
+import { InputValue } from 'apps/app/src/app/modules/form/InputValue';
 import React, { ClipboardEvent } from 'react';
 import { useNavigate } from 'react-router';
 import Select from 'react-select';
