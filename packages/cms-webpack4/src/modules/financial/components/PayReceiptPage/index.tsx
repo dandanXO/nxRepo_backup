@@ -1,6 +1,6 @@
 import AdminPage from '../../../shared/components/common/AdminPage';
 import PayReceiptTable from './PayReceiptTable';
-const PayReceiptPage = () => {
+const PayReceiptPage = (): JSX.Element => {
 
 
     return (

@@ -73,7 +73,7 @@ const Button = styled.div<{bgColor: string; color: string}>`
 interface IAdTemplate3 {
     data: IAdTemplate3Data | null;
 }
-export const AdTemplate3 = (props: IAdTemplate3) => {
+export const AdTemplate3 = (props: IAdTemplate3): JSX.Element => {
     console.log("AdTemplate3.props: ", props);
     return (
         <AdTemplate3Container>

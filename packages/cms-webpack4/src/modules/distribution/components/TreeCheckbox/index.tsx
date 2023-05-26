@@ -3,8 +3,8 @@ import { Table, Checkbox } from "antd";
 import styled from "styled-components";
 
 const TreeCheckboxStyle = styled.div`
-  background: lightskyblue;
-  text-align: left;
+    background: lightskyblue;
+    text-align: left;
 
     // 催收階段
     .ant4-table-cell {
@@ -22,81 +22,88 @@ const TreeCheckboxStyle = styled.div`
     }
 
 
+    // 階段
+    .ant4-table-row-level-0 {
+        display: flex;
+        text-align: left;
+        //font-weight: 700;
+        td {
+            min-width: 800px;
 
-  // 階段
-  .ant4-table-row-level-0 {
-      display: flex;
-    text-align: left;
-    //font-weight: 700;
-      td {
-          min-width: 800px;
-          &.ant4-table-row-expand-icon-cell {
-              min-width: 0px;
-          }
-          &.ant4-table-selection-column {
-              min-width: 0px;
-          }
-      }
+            &.ant4-table-row-expand-icon-cell {
+                min-width: 0;
+            }
 
-  }
+            &.ant4-table-selection-column {
+                min-width: 0;
+            }
+        }
 
-  //商戶
-  .ant4-table-row-level-1 {
-      display: flex;
-    padding-left: 30px;
-    //min-width: 1000px;
-    text-align: left;
-    td {
-      min-width: 770px;
-      &.ant4-table-row-expand-icon-cell {
-        min-width: 0px;
-      }
-      &.ant4-table-selection-column {
-        min-width: 0px;
-      }
     }
-  }
 
-  //團隊
-  .ant4-table-row-level-2 {
-      display: flex;
-    padding-left: 51px;
-    text-align: left;
-    td {
-      min-width: 750px;
-      &.ant4-table-row-expand-icon-cell {
-        min-width: 0px;
-      }
-      &.ant4-table-selection-column {
-        min-width: 0px;
-      }
+    //商戶
+    .ant4-table-row-level-1 {
+        display: flex;
+        padding-left: 30px;
+        //min-width: 1000px;
+        text-align: left;
+
+        td {
+            min-width: 770px;
+
+            &.ant4-table-row-expand-icon-cell {
+                min-width: 0;
+            }
+
+            &.ant4-table-selection-column {
+                min-width: 0;
+            }
+        }
     }
-  }
 
-  // 催收人
-  .ant4-table-expanded-row-level-3 {
-      display: flex;
-      flex-flow: column;
-      padding-left: 105px;
-      background: #fff;
-  }
+    //團隊
+    .ant4-table-row-level-2 {
+        display: flex;
+        padding-left: 51px;
+        text-align: left;
 
+        td {
+            min-width: 750px;
 
-  // 隱藏催收下方 tr
-  .hide-expand-icon + tr.ant4-table-expanded-row-level-1 {
-    display: none;
-  }
+            &.ant4-table-row-expand-icon-cell {
+                min-width: 0;
+            }
 
-  // 隱藏團隊下方 tr
-  .hide-expand-icon + tr.ant4-table-expanded-row-level-2 {
-    display: none;
-  }
-
-  tr {
-    td {
-      border: 0px;
+            &.ant4-table-selection-column {
+                min-width: 0;
+            }
+        }
     }
-  }
+
+    // 催收人
+    .ant4-table-expanded-row-level-3 {
+        display: flex;
+        flex-flow: column;
+        padding-left: 105px;
+        background: #fff;
+    }
+
+
+    // 隱藏催收下方 tr
+    .hide-expand-icon + tr.ant4-table-expanded-row-level-1 {
+        display: none;
+    }
+
+    // 隱藏團隊下方 tr
+    .hide-expand-icon + tr.ant4-table-expanded-row-level-2 {
+        display: none;
+    }
+
+    tr {
+        td {
+            border: 0;
+        }
+    }
 `;
 
 const columns = [{ title: "title", dataIndex: "title", key: "title" }];
@@ -111,7 +118,7 @@ interface TreeCheckboxProps {
     setCheckedJob: any;
 }
 
-export const TreeCheckbox =  (props: TreeCheckboxProps) => {
+export const TreeCheckbox =  (props: TreeCheckboxProps): JSX.Element => {
     const initialData = useRef([]);
 
     const [data, setData] = useState();
@@ -156,7 +163,7 @@ export const TreeCheckbox =  (props: TreeCheckboxProps) => {
 
 
         // NOTE: 全部催收階段
-        const allStage = data && data.map((i) => i.key);
+        // const allStage = data && data.map((i) => i.key);
         // console.log("allStage", allStage);
 
         // NOTE: 當前選擇催收階段
@@ -293,37 +300,37 @@ export const TreeCheckbox =  (props: TreeCheckboxProps) => {
         }
     };
 
-    // console.log("checkedJob", checkedJob);
-    const onClick = (e, record) => {
-        console.log("onClick.record", record);
-        //存在搜索时，需要进行处理selectParentData
-        const initialParent = initialData.current.find(
-            (d) => d.key === record.key
-        );
-        const selectParentData = initialParent.checkboxData
-            ? initialParent.checkboxData.map((d) => d.key)
-            : [];
-        if (e.target.checked) {
-            //向选中数组中添加key值
-            props.setSelectedRowKeys([...props.selectedRowKeys, record.key]);
-            //更新child数组，将selectParentData中的数据全部过滤添加
-            props.setCheckedJob(Array.from(new Set([...props.checkedJob, ...selectParentData])));
-        } else {
-            //从父级数组中移除key值
-            props.setSelectedRowKeys(
-                [...props.selectedRowKeys].filter((d) => d !== record.key)
-            );
-            //更新child数组，将selectParentData中的数据全部过滤掉
-            const newArr = [];
-            [...props.checkedJob].forEach((v) => {
-                if (selectParentData.indexOf(v) === -1) {
-                    newArr.push(v);
-                }
-            });
-            props.setCheckedJob(newArr);
-        }
-    };
-    const expandedRowRender = (record, index, indent, expanded) => {
+    // // console.log("checkedJob", checkedJob);
+    // const onClick = (e, record) => {
+    //     console.log("onClick.record", record);
+    //     //存在搜索时，需要进行处理selectParentData
+    //     const initialParent = initialData.current.find(
+    //         (d) => d.key === record.key
+    //     );
+    //     const selectParentData = initialParent.checkboxData
+    //         ? initialParent.checkboxData.map((d) => d.key)
+    //         : [];
+    //     if (e.target.checked) {
+    //         //向选中数组中添加key值
+    //         props.setSelectedRowKeys([...props.selectedRowKeys, record.key]);
+    //         //更新child数组，将selectParentData中的数据全部过滤添加
+    //         props.setCheckedJob(Array.from(new Set([...props.checkedJob, ...selectParentData])));
+    //     } else {
+    //         //从父级数组中移除key值
+    //         props.setSelectedRowKeys(
+    //             [...props.selectedRowKeys].filter((d) => d !== record.key)
+    //         );
+    //         //更新child数组，将selectParentData中的数据全部过滤掉
+    //         const newArr = [];
+    //         [...props.checkedJob].forEach((v) => {
+    //             if (selectParentData.indexOf(v) === -1) {
+    //                 newArr.push(v);
+    //             }
+    //         });
+    //         props.setCheckedJob(newArr);
+    //     }
+    // };
+    const expandedRowRender = (record) => {
     // console.log("expandedRowRender.record", record);
     // console.log("expandedRowRender.index", index);
     // console.log("expandedRowRender.indent", indent);
@@ -358,7 +365,7 @@ export const TreeCheckbox =  (props: TreeCheckboxProps) => {
     };
     const rowSelection = {
         selectedRowKeys: props.selectedRowKeys,
-        onSelect: (record, selected, selectedRows, nativeEvent) => {
+        onSelect: (record, selected) => {
             // console.log("record", record);
             // console.log("selected", selected);
             // console.log("selectedRows", selectedRows);

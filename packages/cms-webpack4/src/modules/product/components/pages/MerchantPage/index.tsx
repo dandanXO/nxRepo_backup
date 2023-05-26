@@ -6,7 +6,7 @@ import MerchantModal from './MerchantModal';
 import MerchantTable from './MerchantTable';
 import { itemRender } from "../../../../shared/components/common/itemRender";
 
-export const MerchantPage = () => {
+export const MerchantPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);
     const [postMerchantCreate, { isLoading: isMerchantCreating, isSuccess: postMerchantSuccess }] = usePostMerchantCreateMutation();
     const [putMerchantEdit, { isLoading: isMerchantEditing, isSuccess: putMerchantSuccess }] = usePutMerchantEditMutation();

@@ -6,10 +6,10 @@ import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import LoanInfo from '../../../shared/components/userInfo/LoanInfo';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { itemRender } from "../../../shared/components/common/itemRender";
 
-const OrderDetailPage = () => {
+const OrderDetailPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string, orderId: string}>();
     const userId = Number(urlParams.userId);

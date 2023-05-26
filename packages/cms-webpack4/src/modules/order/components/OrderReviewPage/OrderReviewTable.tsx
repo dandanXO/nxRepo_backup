@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, Modal, Radio, Space, List, Tooltip } from 'antd';
+import { Button, Input, Modal, Space, Tooltip } from 'antd';
 import moment from 'moment';
-import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { useLazyGetOrderReviewListQuery, usePostOrderReviewMutation } from '../../api/OrderReviewApi';
 import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from '../../api/types/getOrderReviewList';
@@ -17,7 +17,7 @@ import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum'
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
 import useGetProviderEnum from '../../../shared/hooks/common/useGetProviderEnum';
 import { ConstantRiskRankEnum } from "../../../shared/constants/constantRiskRankEnum";
-const OrderReviewTable = () => {
+const OrderReviewTable = (): JSX.Element => {
 
     const isSuperAdmin = getIsSuperAdmin();
 
@@ -27,12 +27,12 @@ const OrderReviewTable = () => {
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
 
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetOrderReviewListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetOrderReviewListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const [postOrderReview, { data, isSuccess: postOrderReviewIsSuccess }] = usePostOrderReviewMutation();
+    const [postOrderReview, { isSuccess: postOrderReviewIsSuccess }] = usePostOrderReviewMutation();
 
     const initSearchList: GetOrderReviewListRequestQuerystring = {
         merchantId: "", addEndTime: "", addStartTime: "", appName: "", applyChannel: "", oldMember: "", orderNo: "",
@@ -62,7 +62,7 @@ const OrderReviewTable = () => {
     }, [isSuperAdmin]);
 
     useEffect(() => {
-        setButtonDisbaled(selectedList.length > 0 ? false : true);
+        setButtonDisbaled(selectedList.length <= 0);
         setRandomInputValue(selectedList.length === 0 ? "" : randomInputValue);
     }, [selectedList]);
 
@@ -101,7 +101,7 @@ const OrderReviewTable = () => {
                 postOrderReview({ orderNos: selectedList, status: status, reason: reasonText[status] })
                     .unwrap()
                     .then()
-                    .catch((error) => {
+                    .catch(() => {
                         errorModal.error({
                             title: 'Error',
                             content: `审核${confirmText[status]}失败`
@@ -141,7 +141,7 @@ const OrderReviewTable = () => {
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => [
+            render: (text, record) => [
                 <a key="editable" onClick={() => handleToUserDetail(record.userId,record.id,record.orderNo)} >审核</a>
             ],
             width: ProColumnsOperationConstant.width["1"],

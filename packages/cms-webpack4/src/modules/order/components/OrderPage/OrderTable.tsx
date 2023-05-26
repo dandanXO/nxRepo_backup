@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
+import { Button, Space, Tag } from 'antd';
 import moment from 'moment';
-import { HashRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
-import { GetOrderListResponse, GetOrderListProps, OrderListResponse } from '../../api/types/getOrderList';
+import { GetOrderListProps, OrderListResponse } from '../../api/types/getOrderList';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import CopyText from '../../../shared/components/other/CopyText';
 import queryString from "query-string";
@@ -14,7 +14,7 @@ import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import useGetChannelEnum from '../../../shared/hooks/useGetChannelEnum';
 import useGetProviderEnum from '../../../shared/hooks/common/useGetProviderEnum';
-const OrderTable = () => {
+const OrderTable = (): JSX.Element => {
 
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
@@ -32,7 +32,7 @@ const OrderTable = () => {
     const { searchList, setSearchList, handleToDetailPage, searchParams } = usePageSearchParams({ searchListParams: initSearchList });
 
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetOrderListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetOrderListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -100,7 +100,7 @@ const OrderTable = () => {
             key: 'option',
             align: 'left',
             width: ProColumnsOperationConstant.width["1"],
-            render: (text, record, _, action) => {
+            render: (text, record) => {
                 return <a key="editable" onClick={() => handleToUserDetail(record.userId, record.id, record.orderNo)} >查看</a>;
             }
         },

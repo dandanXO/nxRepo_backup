@@ -1,4 +1,4 @@
-export const selectRandomRows = (list, randomValue, rowKey) => {
+export const selectRandomRows = (list: any[], randomValue: string | number, rowKey: string): any[] => {
 
     if (list === undefined) return;
     const listLength = list?.length;

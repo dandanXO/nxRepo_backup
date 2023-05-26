@@ -31,7 +31,7 @@ const i18n = {
 interface ChannelSettingTabPageProps {
     active: boolean;
 }
-export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
+export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.Element => {
 
     // NOTICE: Action: List
     // NOTE: Table
@@ -70,7 +70,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
         userBrowseAndSearchAllItemsUseCase({});
     }, []);
 
-    const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData, isLoading: isLoadingAllChannelSettingTagDropMenuData, isFetching: isFetchingAllChannelSettingTagDropMenuData }] = useLazyGetAllChannelSettingTagDropMenuQuery({
+    const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData }] = useLazyGetAllChannelSettingTagDropMenuQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

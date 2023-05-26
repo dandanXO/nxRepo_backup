@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
-import { Tabs, Button ,Form,Modal,List } from 'antd';
+import { Tabs, Button ,Form,Modal } from 'antd';
 import UserInfo from '../../../shared/components/userInfo/UserInfo';
 import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
@@ -10,7 +10,7 @@ import { usePostOrderFinalReviewMutation } from '../../api/OrderFinalReviewApi';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
 import { itemRender } from "../../../shared/components/common/itemRender";
 
-const OrderFinalReviewDetailPage = () => {
+const OrderFinalReviewDetailPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);
     const urlParams = useParams<{ userId: string, orderId: string,orderNo: string }>();
     const userId = Number(urlParams.userId);
@@ -18,7 +18,7 @@ const OrderFinalReviewDetailPage = () => {
     const orderNo = urlParams.orderNo;
     const [form] = Form.useForm();
     const [showModal,setShowModal] = useState(false);
-    const [postOrderFinalReview, { data, isLoading, isSuccess }] = usePostOrderFinalReviewMutation();
+    const [postOrderFinalReview] = usePostOrderFinalReviewMutation();
     const [errorModal, errorContextHolder] = Modal.useModal();
     const history = useHistory();
 
@@ -48,11 +48,11 @@ const OrderFinalReviewDetailPage = () => {
         };
         postOrderFinalReview({ orderNos: [orderNo], ...form.getFieldsValue(), reason: reasonText[status] })
             .unwrap()
-            .then((payload) => {
+            .then(() => {
                 setShowModal(false);
                 history.push('/order-final-review');
             })
-            .catch((error) => {
+            .catch(() => {
                 errorModal.error({
                     title: 'Error',
                     content: `审核失败`

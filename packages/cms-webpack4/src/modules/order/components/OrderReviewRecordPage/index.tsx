@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react';
-import type { ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
 import AdminPage from '../../../shared/components/common/AdminPage';
 import OrderReviewRecordTable from './OrderReviewRecordTable';
 
 
-const OrderReviewRecordPage = () => {
+const OrderReviewRecordPage = (): JSX.Element => {
 
 
     return (

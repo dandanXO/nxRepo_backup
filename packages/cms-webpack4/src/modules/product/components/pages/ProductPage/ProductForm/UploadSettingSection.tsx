@@ -1,14 +1,10 @@
-import { Divider, Form, Input, Radio, Switch, Select, Collapse } from "antd";
+import { Form, Input, Radio, Switch, Select, Collapse } from "antd";
 
-import React, { useMemo } from "react";
-import { NumberValidator, TagValidator } from "../../../../../shared/utils/validation/validator";
+import React from "react";
+import { TagValidator } from "../../../../../shared/utils/validation/validator";
 
-const { Option } = Select;
 const { Panel } = Collapse;
-export function UploadSettingSection() {
-    const handleChange = (value: string) => {
-    // console.log(`selected ${value}`);
-    };
+export function UploadSettingSection(): JSX.Element {
     return <>
         <Collapse ghost defaultActiveKey={["1"]}>
             <Panel header="上架设定" key="1">
@@ -45,7 +41,7 @@ export function UploadSettingSection() {
                         </div>
                     }
                 >
-                    <Select mode="tags" style={{ width: '100%' }} placeholder="热门产品文字标签" onChange={handleChange} />
+                    <Select mode="tags" style={{ width: '100%' }} placeholder="热门产品文字标签" />
                 </Form.Item>
 
                 <Form.Item name="templateType" label="借款模板">

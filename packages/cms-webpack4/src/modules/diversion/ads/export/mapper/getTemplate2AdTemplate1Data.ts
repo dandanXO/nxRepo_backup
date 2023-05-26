@@ -5,13 +5,13 @@ import {
 } from "../../import/ActivityAdListPage/components/AdTemplate2";
 
 
-function instanceOfBrandCard2(obj: any): obj is AdTemplate2BrandCard {
-    return 'priceUnit' in obj;
-}
-
-function instanceOfCard2(obj: any): obj is AdTemplate2Card {
-    return 'title' in obj;
-}
+// function instanceOfBrandCard2(obj: any): obj is AdTemplate2BrandCard {
+//     return 'priceUnit' in obj;
+// }
+//
+// function instanceOfCard2(obj: any): obj is AdTemplate2Card {
+//     return 'title' in obj;
+// }
 
 export const getTemplate2AdTemplate1Data = (ads?: ActivityBanner<AdTemplate2BrandCard, AdTemplate2Card>[]): IAdTemplate2Data | null => {
     if (!ads) return null;

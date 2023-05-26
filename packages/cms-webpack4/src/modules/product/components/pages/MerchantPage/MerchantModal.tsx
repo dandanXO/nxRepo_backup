@@ -11,7 +11,7 @@ interface MerchantModalProps {
     form?: any;
 }
 
-const MerchantModal = (props: MerchantModalProps) => {
+const MerchantModal = (props: MerchantModalProps): JSX.Element => {
     const { isEdit, isMerchantEditing, isMerchantCreating, merchantModalVisible, handleCloseModal, onFinish, form } = props;
     const layout = {
         labelCol: { span: 4 },

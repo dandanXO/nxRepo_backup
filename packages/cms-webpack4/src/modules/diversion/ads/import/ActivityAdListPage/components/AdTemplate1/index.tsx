@@ -167,7 +167,7 @@ interface IAdTemplate1 {
   data: IAdTemplate1Data | null;
 }
 
-export const AdTemplate1 = (props: IAdTemplate1) => {
+export const AdTemplate1 = (props: IAdTemplate1): JSX.Element => {
     console.log("AdTemplate1: ", props);
     return (
         <AdTemplateContainer>

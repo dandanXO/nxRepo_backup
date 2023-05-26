@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Modal, Spin, Input, Radio } from "antd";
+import React from "react";
+import { Form, Modal, Input, Radio } from "antd";
 
 interface OrderFinalReviewModalProps {
     showModal?: boolean;
@@ -8,7 +8,7 @@ interface OrderFinalReviewModalProps {
     form?: any;
 }
 
-const OrderFinalReviewModal = ((props: OrderFinalReviewModalProps) => {
+const OrderFinalReviewModal = ((props: OrderFinalReviewModalProps): JSX.Element => {
     const { showModal, handleCloseModal, onFinish, form } = props;
 
     const layout = {

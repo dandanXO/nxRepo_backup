@@ -52,7 +52,7 @@ const Preview = styled.div`
     height: 640px;
 `;
 
-export const ActivityAdsForm = (props: IActivityAdsForm) => {
+export const ActivityAdsForm = (props: IActivityAdsForm): JSX.Element => {
 
     const templateType = Form.useWatch('templateType', props.form);
     // console.log("templateType", templateType);

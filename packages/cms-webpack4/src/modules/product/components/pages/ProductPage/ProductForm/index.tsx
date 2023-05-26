@@ -1,5 +1,5 @@
 import { ProductFormModal } from "../hooks/useProductFormModal";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Form } from "antd";
 import BaseSettingSection from "./BaseSettingSection";
 import ProductSettingSection from "./ProductSettingSection";
@@ -27,9 +27,7 @@ interface ProductFormProps {
 
 }
 
-const isOnChange = false;
-
-const Index = (props: ProductFormProps) => {
+const Index = (props: ProductFormProps): JSX.Element => {
     const { productModalData, onFinish, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
 
     const layout = {
@@ -48,15 +46,6 @@ const Index = (props: ProductFormProps) => {
             backgroundImg: url
         });
     }, [form]);
-
-    const validateRateValue = (rate) => {
-        return Number(rate) > 100 || Number(rate) < 0 || rate === '' || isNaN(Number(rate));
-    };
-
-    const getChangedField = (allFields: any[], fieldName: string) => {
-        const field = allFields.filter(field => field.name.toString() === fieldName)[0];
-        return field;
-    };
 
     const compareCount = (index, loanLength, loan, field) => {
 
@@ -117,13 +106,13 @@ const Index = (props: ProductFormProps) => {
 
         setCustomAntFormFieldError(prev => ({ ...prev, ...formFieldError }));
     };
-    
+
     function equalRangeBelow100(str: string, min = 0, max = 100) {
         return Number(str) < min || Number(str) > max;
     }
 
     const isValueValidate = (value) => {
-        return !value || isNaN(value) || equalRangeBelow100(value); 
+        return !value || isNaN(value) || equalRangeBelow100(value);
     };
     const validatePreOrPostInterestRateField = (value, errorText, map, field) => {
 
@@ -156,8 +145,8 @@ const Index = (props: ProductFormProps) => {
             },
         };
     };
-    
-    
+
+
     // NOTICE: preInterestRate
     let map = {};
     const [interestRatePairsTouchInput, setInterestRatePairsTouchInput] = useState(null);
@@ -186,17 +175,17 @@ const Index = (props: ProductFormProps) => {
                 if (changedFields[0].name[0] === "productInterestRatePairs") {
                     setInterestRatePairsTouchInput(changedFields);
                 }
-              
+
                 // NOTICE: 新客利息
                 const preInterestRateField = allFields.filter(field => field.name && field.name[0] === "preInterestRate");
                 const postInterestRateField = allFields.filter(field => field.name && field.name[0] === "postInterestRate");
                 const inValidPreInterestRateUnit = isValueValidate(preInterestRateField[0].value);
                 const inValidPostInterestRateUnit = isValueValidate(postInterestRateField[0].value);
-              
+
                 // NOTICE:  inValidPreInterestUnit
                 if (changedFields[0].touched && changedFields[0].name[0] === "preInterestRate") {
                     map = validatePreOrPostInterestRateField(preInterestRateField[0].value, "请输入前置利息", map, 'preInterestRate');
-              
+
                 }
 
                 // NOTICE:  inValidPostInterestUnit
@@ -204,11 +193,11 @@ const Index = (props: ProductFormProps) => {
                     map = validatePreOrPostInterestRateField(postInterestRateField[0].value, "请输入後置利息", map, 'postInterestRate');
                 }
 
-               
+
                 if ( !inValidPreInterestRateUnit && !inValidPostInterestRateUnit) {
                     map = validatePreAndPostInterestRateSumBelow100(preInterestRateField[0].value, postInterestRateField[0].value, map, 'preInterestRate', 'postInterestRate');
                 }
-               
+
                 // NOTICE: 次新客利息
                 const renewPreInterestRateField = allFields.filter(field => field.name && field.name[0] === "renewPreInterestRate");
                 const renewPostInterestRateField = allFields.filter(field => field.name && field.name[0] === "renewPostInterestRate");
@@ -224,7 +213,7 @@ const Index = (props: ProductFormProps) => {
                 // NOTICE:  inValidPostInterestUnit
                 if (changedFields[0].touched && changedFields[0].name[0] === "renewPostInterestRate") {
                     map =  validatePreOrPostInterestRateField(renewPostInterestRateField[0].value, "请输入後置利息", map, 'renewPostInterestRate');
-             
+
                 }
 
                 if (!inValidRenewPreInterestRateUnit && !inValidRenewPostInterestRateUnit) {
@@ -247,7 +236,7 @@ const Index = (props: ProductFormProps) => {
                     const { productInterestRatePairs } = props.form.getFieldsValue();
                     productInterestRatePairsValidationMap = validatePreOrPostInterestGroups(productInterestRatePairs);
                 }
-              
+
 
                 setCustomAntFormFieldError(prev => {
                     const finalMap = Object.keys(productInterestRatePairsValidationMap).length > 0

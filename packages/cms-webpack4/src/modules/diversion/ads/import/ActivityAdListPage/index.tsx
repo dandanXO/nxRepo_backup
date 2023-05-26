@@ -4,7 +4,6 @@ import { AdTemplate3 } from "./components/AdTemplate3";
 import styled from "styled-components";
 import queryString from "query-string";
 import Android260x720 from "./720.svg";
-import { ActivityBanner } from "../../export/service/types";
 // import {MockAdTemplate1Data} from "./mock/MockAdTemplate1Data";
 // import {MockAdTemplate2Data} from "./mock/MockAdTemplate2Data";
 // import {MockAdTemplate3Data} from "./mock/MockAdTemplate3Data";
@@ -45,7 +44,7 @@ interface IActivityAdListPage {
     data: IAdTemplate1Data;
 }
 
-export const DemoActivityAdListPage = (props: IActivityAdListPage) => {
+export const DemoActivityAdListPage = (props: IActivityAdListPage): JSX.Element => {
     // console.log("DemoActivityAdListPage.props:z", props)
     const type = parsedQueryString.type || props.type;
     let adTemplate;

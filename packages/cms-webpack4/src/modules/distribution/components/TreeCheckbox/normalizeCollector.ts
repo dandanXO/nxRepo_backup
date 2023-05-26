@@ -1,6 +1,6 @@
 import { DistributeCollectByStageResponse, Stage } from "../../types";
 
-export const normalizeCollector = (data: DistributeCollectByStageResponse[], restrictedStages: Stage[]) => {
+export const normalizeCollector = (data: DistributeCollectByStageResponse[], restrictedStages: Stage[]): any[] => {
     if(!data) return [];
     const allStageKey = [];
     const allMerchantKey = [];

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button, Form, InputNumber, Modal, Radio, Space, Tag } from 'antd';
-import moment from 'moment';
+import { Button, Space } from 'antd';
 import useValuesEnums from '../../../shared/hooks/common/useValuesEnums';
 import { useLazyGetOrderReviewRecordListQuery } from '../../api/OrderReviewRecordApi';
 import { GetOrderReviewRecordListProps, OrderReviewRecordListResponse, GetOrderReviewRecordListRequestQuerystring } from '../../api/types/getOrderReviewRecordList';
@@ -14,7 +13,7 @@ import { ProColumnsOperationConstant } from "../../../shared/components/common/P
 import useGetOrderReviewRecordOperatorEnum from '../../../shared/hooks/useGetOrderReviewRecordOperatorEnum';
 
 
-const OrderReviewRecordTable = () => {
+const OrderReviewRecordTable = (): JSX.Element => {
 
     const isSuperAdmin = getIsSuperAdmin();
     const {  merchantListEnum } = useValuesEnums();
@@ -28,7 +27,7 @@ const OrderReviewRecordTable = () => {
     const [recordList, setRecordList] = useState<GetOrderReviewRecordListProps>({ records: [] });
 
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetOrderReviewRecordListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetOrderReviewRecordListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false

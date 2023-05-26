@@ -1,16 +1,14 @@
-
 import { AdminTable } from "../../shared/components/common/AdminTable";
 import AdminPage from "../../shared/components/common/AdminPage";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProColumns } from "@ant-design/pro-components";
-import { useAdminFormModal } from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import { Button, Form, FormInstance, message, Space, Table } from "antd";
+import { Button, FormInstance, message, Space, Table } from "antd";
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
     DistributionSummary,
     Stage,
-} from "../types/index";
+} from "../types";
 
 import { StageContainer, StageItem, StagePanel, StageTitle, StageTotal } from "../components/Stage/stage";
 import {
@@ -20,21 +18,19 @@ import {
     usePostOverdueDistributionSelectedMutation, usePostOverdueDistributionStageMutation
 } from "../services/OverdueDistributionAPI";
 import { CommonOrderDistributionModal } from "../modals/CommonOrderDistributionModal";
-import moment from "moment";
-import { useForm } from "antd/es/form/Form";
 import CopyText from "../../shared/components/other/CopyText";
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
 };
 
-export const OverdueDistributionPage = () => {
+export const OverdueDistributionPage = (): JSX.Element => {
     const [triggerFetchSummary, { data: summaryResponseData }] = useLazyGetOverdueSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData>({});
 
     useEffect(() => {
         const summaryData = {};
-        summaryResponseData?.summaries?.map((item, current) => {
+        summaryResponseData?.summaries?.map((item) => {
             summaryData[item.stage] = {
                 todoTotal: item?.todoTotal,
                 doneTotal: item?.doneTotal,
@@ -44,7 +40,7 @@ export const OverdueDistributionPage = () => {
         setSummaryData(summaryData);
     }, [summaryResponseData]);
 
-    const { currentData: productList, isSuccess: isGetProductNamesSuccess } = useGetOverdueProductNamesQuery(null);
+    const { currentData: productList } = useGetOverdueProductNamesQuery(null);
 
     const productListMap = new Map().set('', { text: '全部' });
     productList?.map((i) => {
@@ -53,7 +49,7 @@ export const OverdueDistributionPage = () => {
 
 
     const stageEnum = {};
-    Object.keys(summaryData).map((key, currentValue) => {
+    Object.keys(summaryData).map((key) => {
         stageEnum[key] = {
             [Stage.S1]: "S1",
             [Stage.S2]: "S2",
@@ -236,7 +232,7 @@ export const OverdueDistributionPage = () => {
             }).then(() => {
                 refresh();
                 messageApi.success("分配成功");
-            }).catch((error) => {
+            }).catch(() => {
                 messageApi.error("分配失敗");
             });
         } else {
@@ -247,7 +243,7 @@ export const OverdueDistributionPage = () => {
             }).then(() => {
                 refresh();
                 messageApi.success("分配成功");
-            }).catch((error) => {
+            }).catch(() => {
                 messageApi.error("分配失敗");
             });
         }

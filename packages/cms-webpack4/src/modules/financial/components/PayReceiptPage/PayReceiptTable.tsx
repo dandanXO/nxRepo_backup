@@ -10,7 +10,7 @@ import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import { enumObjectToMap } from '../../../shared/utils/format/enumObjectToMap';
 
-const PayReceiptTable = () => {
+const PayReceiptTable = (): JSX.Element => {
 
     const isSuperAdmin = getIsSuperAdmin();
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
@@ -23,7 +23,7 @@ const PayReceiptTable = () => {
     const [selectedList,setSelectedList] = useState([]);
     const [modal, contextHolder] = Modal.useModal();
     // api
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetPayReceiptListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetPayReceiptListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -57,7 +57,9 @@ const PayReceiptTable = () => {
                 postPayReceipt({ orderNos: orderNo })
                     .unwrap()
                     .then(() => setSelectedList([]))
-                    .catch((error) => {});
+                    .catch(() => {
+                        //
+                    });
             }
         });
     };
@@ -79,7 +81,7 @@ const PayReceiptTable = () => {
             key: 'option',
             align: 'left',
             width: '50px',
-            render: (text, record, _, action) => {
+            render: (text, record) => {
                 return <a key="editable" onClick={() => handlePayReceiptConfirm([record.orderNo])} >确认</a>;
             }
         },

@@ -1,25 +1,25 @@
-
-import { Form, Input, Modal } from "antd";
+import { Form, Input } from "antd";
 import { useEffect, useRef, useState } from "react";
+import { Rule } from 'rc-field-form/lib/interface';
 
 interface EditableInputProps {
     productId?: number;
     name?: string;
     initValue?: string | number;
-    rules?: object;
+    rules?: Rule;
     placeholder?: string;
-    handleSave?: (productId: number, fieldValue: object) => void;
+    handleSave?: (productId: number, fieldValue: Record<any, any>) => void;
 
 }
 
 
-export const EditableInput = ({ productId, name, rules, placeholder, initValue, handleSave, }: EditableInputProps) => {
+export const EditableInput = ({ productId, name, rules, placeholder, initValue, handleSave, }: EditableInputProps): JSX.Element => {
 
 
     const inputRef = useRef(null);
     const [form] = Form.useForm();
     const [inputValue, setInputValue] = useState<string | number>(initValue);
-    const handleEdit = (e) => {
+    const handleEdit = () => {
 
         const fieldValue = Object.values(form.getFieldsValue())[0] as string | number;
         if (Number(inputValue) === Number(fieldValue)) return;

@@ -23,17 +23,12 @@ interface OrderDistributionModalProps {
     searchedStage: Stage;
     hasS5?: boolean;
 }
-export const CommonOrderDistributionModal = (props: OrderDistributionModalProps) => {
+export const CommonOrderDistributionModal = (props: OrderDistributionModalProps): JSX.Element => {
 
 
     const [triggerGetCollector , {
         // data,
-        currentData,
-        isLoading,
-        isFetching,
-        isSuccess,
-        isError,
-        isUninitialized,
+        currentData
     }] = useLazyGetCollectorQuery();
 
     const [triggerGetOverdueCollector , {
@@ -115,9 +110,8 @@ export const CommonOrderDistributionModal = (props: OrderDistributionModalProps)
         }
 
         // console.log("props.searchedStage", props.searchedStage);
-        const checkedData = normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
         // console.log("checkedData", checkedData);
-        return checkedData;
+        return normalizeCollector(data, [Stage.NONE, ...restrictedStageArray]);
     }, [props.type, currentData, currentOverdueData, props.hasS5, props.searchedStage, distributionStage]);
 
     const handleSelectedAllCollector = useCallback(() => {

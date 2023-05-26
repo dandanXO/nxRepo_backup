@@ -6,13 +6,14 @@ import {
 } from "../../import/ActivityAdListPage/components/AdTemplate1";
 
 // NOTICE: Interface type check with Typescript https://stackoverflow.com/questions/14425568/interface-type-check-with-typescript
-function instanceOfBrandCard(obj: any): obj is AdTemplate1BrandCard {
-    return 'priceUnit' in obj;
-}
+// function instanceOfBrandCard(obj: any): obj is AdTemplate1BrandCard {
+//     return 'priceUnit' in obj;
+// }
+//
+// function instanceOfCard(obj: any): obj is AdTemplate1Card {
+//     return 'description1' in obj;
+// }
 
-function instanceOfCard(obj: any): obj is AdTemplate1Card {
-    return 'description1' in obj;
-}
 export const getTemplate1AdTemplate1Data = (ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]): IAdTemplate1Data | null => {
     if (!ads) return null;
     return {

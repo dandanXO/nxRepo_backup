@@ -2,7 +2,6 @@ import { AdminTable } from "../../shared/components/common/AdminTable";
 import AdminPage from "../../shared/components/common/AdminPage";
 import React, { useEffect, useState } from "react";
 import { ProColumns } from "@ant-design/pro-components";
-import { useAdminFormModal } from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
 import { Button, FormInstance, Space, Table, message } from "antd";
 import CopyText from "../../shared/components/other/CopyText";
 import {
@@ -17,7 +16,7 @@ import  {
     CollectDistributionQueryResponse,
     DistributionSummary,
     Stage,
-} from "../types/index";
+} from "../types";
 
 import { StageContainer, StageItem, StagePanel, StageTitle, StageTotal } from "../components/Stage/stage";
 import { CommonOrderDistributionModal } from "../modals/CommonOrderDistributionModal";
@@ -26,7 +25,7 @@ export type StageData = {
     [stage: string]: Omit<DistributionSummary, "stage">;
 }
 
-export const TodayDistributionPage = () => {
+export const TodayDistributionPage = (): JSX.Element => {
     const [triggerFetchSummary, { data: summaryResponseData }] = useLazyGetSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData | null>({
         [Stage.T_1]: {
@@ -54,7 +53,7 @@ export const TodayDistributionPage = () => {
         });
     }, [summaryResponseData]);
 
-    const { currentData: productList, isSuccess: isGetProductNamesSuccess } = useGetProductNamesQuery(null);
+    const { currentData: productList } = useGetProductNamesQuery(null);
 
     const productListMap = new Map().set('', { text: '全部' });
     productList?.map((i) => {
@@ -217,7 +216,7 @@ export const TodayDistributionPage = () => {
             }).then(() => {
                 refresh();
                 messageApi.success("分配成功");
-            }).catch((error) => {
+            }).catch(() => {
                 messageApi.error("分配失敗");
             });
         } else {
@@ -228,7 +227,7 @@ export const TodayDistributionPage = () => {
             }).then(() => {
                 refresh();
                 messageApi.success("分配成功");
-            }).catch((error) => {
+            }).catch(() => {
                 messageApi.error("分配失敗");
             });
         }

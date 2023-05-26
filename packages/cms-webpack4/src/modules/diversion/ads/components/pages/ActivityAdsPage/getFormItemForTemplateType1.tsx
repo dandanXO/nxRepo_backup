@@ -5,7 +5,7 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import React from "react";
 import { getDefaultActivity1BannerContent } from "./getDefaultActivity1BannerContent";
 
-export const getFormItemForTemplateType1 = (templateType: number, ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]) => {
+export const getFormItemForTemplateType1 = (templateType: number, ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]): JSX.Element => {
     return (
         <Form.Item label="广告列表" required>
             <Form.List name="contents">

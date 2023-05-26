@@ -1,4 +1,4 @@
-import { Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadProps ,Collapse } from "antd";
+import { Button, Form, Input, message, Select, TimePicker, Upload, UploadProps ,Collapse } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import React from "react";
 import { EmailValidator, NumberValidator } from "../../../../../shared/utils/validation/validator";
@@ -8,7 +8,7 @@ interface ProductSettingSectionProps {
     setLogo: React.Dispatch<React.SetStateAction<string>>;
     setBackgroundImg: React.Dispatch<React.SetStateAction<string>>;
 }
-const ProductSettingSection = (props: ProductSettingSectionProps) => {
+const ProductSettingSection = (props: ProductSettingSectionProps): JSX.Element => {
 
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -137,7 +137,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                                     })
                                 },
                             ]}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return cannotTypeFloat(value);
                             }}
                         >
@@ -154,7 +154,7 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                                     })
                                 },
                             ]}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return cannotTypeFloat(value);
                             }}
                         >

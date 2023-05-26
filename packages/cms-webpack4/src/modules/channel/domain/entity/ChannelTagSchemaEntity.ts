@@ -12,11 +12,14 @@ const POSITIVE_NUMBER_MESSAGE = "请输入正整数";
 // NOTE: custom rules
 const customZodStringRules = (name: string) => {
     return z.string({
+        // eslint-disable-next-line camelcase
         required_error: `${REQUIRED_MESSAGE}${name}`
     });
 };
 const customZodNumberRules = (name: string) => z.number({
+    // eslint-disable-next-line camelcase
     required_error: `${REQUIRED_MESSAGE}${name}`,
+    // eslint-disable-next-line camelcase
     invalid_type_error: POSITIVE_NUMBER_MESSAGE,
 }).positive(POSITIVE_NUMBER_MESSAGE);
 
@@ -57,7 +60,7 @@ export class ChannelTagSchemaEntity extends SchemaEntity<IChannelTagSchema> {
         super(ChannelTagSchema);
     }
     // TODO: REFACTOR ME
-    transformToEntityData(sourceData: any): IChannelTagSchema {
+    transformToEntityData(sourceData: IChannelTagSchema): IChannelTagSchema {
         return {
             auditAcc: sourceData.auditAcc,
             // google audit acc

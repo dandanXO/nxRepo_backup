@@ -1,6 +1,5 @@
 import React, { CSSProperties } from "react";
-import { Divider, Form, Input, Typography, Row, Col, Space, Button, Collapse } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { Form, Input, Typography, Collapse } from "antd";
 import {
     NumberValidator,
 } from "../../../../../shared/utils/validation/validator";
@@ -17,9 +16,9 @@ interface RateSettingSectionProps {
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     interestRatePairsTouchInput: any
 }
-export const CustomLabel = (props: {style?: CSSProperties, children: string}) => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style }}>{props.children}</div>;
+export const CustomLabel = (props: {style?: CSSProperties, children: string}): JSX.Element => <div style={{ marginRight: 8, width: 123, height: 32, lineHeight: "32px", display: "inline-block", ...props.style }}>{props.children}</div>;
 
-const RateSettingSection = (props: RateSettingSectionProps) => {
+const RateSettingSection = (props: RateSettingSectionProps): JSX.Element => {
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
     return (
         <React.Fragment>
@@ -45,7 +44,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                         <Form.Item name="preInterestRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                             validateStatus={(props?.customAntFormFieldError?.preInterestRate as any).validateStatus}
                             help={(props?.customAntFormFieldError?.preInterestRate as any).help}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return maxOneUnitFloatReplacer(value);
                             }}
                         >
@@ -56,7 +55,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                         <Form.Item name="postInterestRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                             validateStatus={(props?.customAntFormFieldError?.postInterestRate as any).validateStatus}
                             help={(props?.customAntFormFieldError?.postInterestRate as any).help}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return maxOneUnitFloatReplacer(value);
                             }}
                         >
@@ -78,7 +77,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                         <Form.Item name="renewPreInterestRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                             validateStatus={(props?.customAntFormFieldError?.renewPreInterestRate as any).validateStatus}
                             help={(props?.customAntFormFieldError?.renewPreInterestRate as any).help}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return maxOneUnitFloatReplacer(value);
                             }}
                         >
@@ -89,7 +88,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                         <Form.Item name="renewPostInterestRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                             validateStatus={(props?.customAntFormFieldError?.renewPostInterestRate as any).validateStatus}
                             help={(props?.customAntFormFieldError?.renewPostInterestRate as any).help}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return maxOneUnitFloatReplacer(value);
                             }}
                         >
@@ -114,7 +113,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                                     })
                                 },
                             ]}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return maxOneUnitFloatReplacer(value);
                             }}
                         >
@@ -137,7 +136,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                                     })
                                 },
                             ]}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return maxOneUnitFloatReplacer(value);
                             }}
                         >
@@ -160,7 +159,7 @@ const RateSettingSection = (props: RateSettingSectionProps) => {
                                     })
                                 },
                             ]}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return maxOneUnitFloatReplacer(value);
                             }}
                         >

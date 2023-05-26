@@ -3,7 +3,7 @@ import React from "react";
 import { NumberValidator } from "../../../../../shared/utils/validation/validator";
 const { Panel } = Collapse;
 
-const OrderSettingSection = (props) => {
+const OrderSettingSection = (): JSX.Element => {
     return (
         <React.Fragment>
             <Collapse ghost defaultActiveKey={["1"]}>

@@ -1,4 +1,4 @@
-import { Form, Input, UploadFile } from "antd";
+import { Form, Input } from "antd";
 import React from "react";
 import { Select } from 'antd';
 import { GetAvailableMerchantResponse } from "../../../../service/product/response/getAvailableMerchantResponse";
@@ -8,7 +8,7 @@ interface BaseSettingSectionProps {
   merchantList?: GetAvailableMerchantResponse[];
   isEdit: boolean;
 }
-const BaseSettingSection = (props: BaseSettingSectionProps) => {
+const BaseSettingSection = (props: BaseSettingSectionProps): JSX.Element => {
     if(!props.merchantList) return null;
     // console.log("props.merchantList", props.merchantList);
 

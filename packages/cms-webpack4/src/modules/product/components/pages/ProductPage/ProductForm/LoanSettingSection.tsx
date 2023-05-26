@@ -1,4 +1,4 @@
-import { Divider, Form, Input, Radio, Switch, Collapse } from "antd";
+import { Form, Input, Radio, Switch, Collapse } from "antd";
 import React from "react";
 import { NumberValidator } from "../../../../../shared/utils/validation/validator";
 import { FormInstance } from "antd/es";
@@ -14,7 +14,7 @@ interface LoanSettingSectionProps {
 }
 
 
-const LoanSettingSection = (props: LoanSettingSectionProps) => {
+const LoanSettingSection = (props: LoanSettingSectionProps): JSX.Element => {
 
     return (
         <React.Fragment>

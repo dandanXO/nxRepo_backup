@@ -117,7 +117,7 @@ const Title = styled.div<{color: string}>`
 interface IAdTemplate2 {
     data: IAdTemplate2Data | null;
 }
-export const AdTemplate2 = (props: IAdTemplate2) => {
+export const AdTemplate2 = (props: IAdTemplate2): JSX.Element => {
     // console.log("props", props)
     return (
         <AdTemplate2Container>

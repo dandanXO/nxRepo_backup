@@ -21,13 +21,11 @@ import { CommonResponseError } from "../../../../../shared/api/CommonResponseErr
 import { DefaultFormByTemplateType } from "./DefaultFormByTemplateType";
 import { useAdminFormModal } from "./useAdminFormModal";
 
-export const ActivityAdsAdminPage = () => {
+export const ActivityAdsAdminPage = (): JSX.Element => {
 
     // NOTE: GET list and item
     const [triggerGetList, {
         currentData: currentItemListData,
-        isLoading: isGetListLoading,
-        isFetching: isGetListFetching
     }] = useLazyGetActivitiesQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -35,10 +33,10 @@ export const ActivityAdsAdminPage = () => {
     });
 
     // NOTE: POST , PUT and DELETE
-    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetActivityQuery();
-    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = usePostActivityMutation();
-    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutActivityMutation();
-    const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteActivityMutation();
+    const [triggerGet , {  currentData: currentFormData }] = useLazyGetActivityQuery();
+    const [triggerPost] = usePostActivityMutation();
+    const [triggerPut] = usePutActivityMutation();
+    const [triggerDelete] = useDeleteActivityMutation();
 
 
     const {
@@ -64,7 +62,7 @@ export const ActivityAdsAdminPage = () => {
             key: 'option',
             title: '操作',
             valueType: 'option',
-            render: (text, record, _, action) => {
+            render: (text, record) => {
                 return [
                     <a key="editable" onClick={() => {
                         // userBrowseEditChannelSettingUseCase(record);
@@ -136,7 +134,7 @@ export const ActivityAdsAdminPage = () => {
     // const initialValues = MockFormStore;
 
     const templateType = Form.useWatch('templateType', form);
-    // console.log("templateType", templateType);
+    console.log("templateType", templateType);
 
     // const initialValues = useMemo(() => {
     //     // NOTICE: select and switch need initialValue if you want to select one
@@ -184,7 +182,7 @@ export const ActivityAdsAdminPage = () => {
 
 
     // NOTE: onFieldsChange
-    const onFieldsChange = useCallback((changedFields, allFields) => {
+    const onFieldsChange = useCallback((changedFields) => {
         // console.log("onFieldsChange.changedFields[0].name[0]", changedFields[0].name[0])
         // NOTICE: change form field value
 
@@ -222,8 +220,8 @@ export const ActivityAdsAdminPage = () => {
         }
 
         if(changedFields[0].name[0] === "templateType") {
-            const index = changedFields[0].name[1];
-            const key = changedFields[0].name[2];
+            // const index = changedFields[0].name[1];
+            // const key = changedFields[0].name[2];
             const value = changedFields[0].value;
             // console.log("templateType.value", value);
             // console.log("DefaultFormByTemplateType", DefaultFormByTemplateType);
@@ -271,7 +269,7 @@ export const ActivityAdsAdminPage = () => {
         // console.log("fields", fields);
 
         // // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
+        triggerAPI(fields).unwrap().then(() => {
             // console.log("responseData", responseData);
 
             // Reset Form
@@ -290,9 +288,13 @@ export const ActivityAdsAdminPage = () => {
             modal.error({
                 title: "Error",
                 // NOTICE: 得用下面寫法否則 editID 會找不到
-                onOk: () => {},
+                onOk: () => {
+                    //
+                },
                 // onOk: onDeleteModalOK,
-                onCancel: () => {},
+                onCancel: () => {
+                    //
+                },
                 content: error.data.message
             });
         });

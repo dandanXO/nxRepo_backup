@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
@@ -22,9 +22,9 @@ const MerchantTable = ({
     setMerchantModalVisible,
     form
 }: MerchantTableProps
-) => {
+): JSX.Element => {
 
-    const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] = useLazyGetMerchantManageListQuery({
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetMerchantManageListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -46,7 +46,7 @@ const MerchantTable = ({
             title: '操作',
             valueType: 'option',
             key: 'option',
-            render: (text, record, _, action) => [
+            render: (text, record) => [
                 <a key="editable" onClick={() => {
                     setIsEdit(true);
                     setMerchantModalVisible(true);

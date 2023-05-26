@@ -18,7 +18,7 @@ const onClickToPopup = (url: string) => {
     // @ts-ignore
     window["SyncTask"]["thematicActivitiesPopup"](url);
 };
-export  const onClickToAction = (event: {action: "POP_URL" | "APPLY_LOAN" | undefined; actionUrl: string | undefined;}) => {
+export  const onClickToAction = (event: {action: "POP_URL" | "APPLY_LOAN" | undefined; actionUrl: string | undefined;}): void => {
     if(event.action === "POP_URL") {
         onClickToPopup(event.actionUrl || "");
     } else if(event.action === "APPLY_LOAN") {

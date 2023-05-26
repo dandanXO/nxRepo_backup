@@ -1,9 +1,10 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { ModalContent } from "../../../../../shared/components/common/AdminTable";
 import { useForm } from "antd/es/form/Form";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { Modal } from "antd/es";
 import { ActivityModel } from "../../../service/AdsApi";
+import { FormInstance } from "antd";
 
 type IUseAdminTable = {
     triggerGetList: any;
@@ -11,7 +12,24 @@ type IUseAdminTable = {
     triggerDelete?: any;
     // currentFormData: any;
 }
-export const useAdminFormModal = (props: IUseAdminTable) => {
+export const useAdminFormModal = (props: IUseAdminTable): {
+    showModalContent: {
+        show: boolean,
+        isEdit: boolean
+    },
+    setShowModalContent: React.Dispatch<{ show: boolean, isEdit: boolean }>,
+    onModalOk: () => void,
+    onCloseModal: () => void,
+    customAntFormFieldError: CustomAntFormFieldError,
+    showDeleteModal: boolean,
+    modal: any,
+    editID: number,
+    form: FormInstance,
+    onAddItem: () => void,
+    onEditItem: (record: ActivityModel) =>  void,
+    onDeleteItem: (record: ActivityModel) => void,
+    contextHolder: React.ReactElement
+} => {
 
     // NOTICE: Action: Create or Edit
     // NOTE: Modal
@@ -115,7 +133,8 @@ export const useAdminFormModal = (props: IUseAdminTable) => {
         setShowModalContent,
         onModalOk,
         onCloseModal,
-
+        customAntFormFieldError,
+        showDeleteModal,
         modal,
         editID,
         form,

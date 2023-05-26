@@ -1,14 +1,16 @@
-import { ActivityBanner } from "../../../export/service/types";
-import { AdTemplate1BrandCard, AdTemplate1Card } from "../../../import/ActivityAdListPage/components/AdTemplate1";
+// import { ActivityBanner } from "../../../export/service/types";
+// import { AdTemplate1BrandCard, AdTemplate1Card } from "../../../import/ActivityAdListPage/components/AdTemplate1";
 import { Col, Divider, Form, Input, Row, Select } from "antd";
 import React from "react";
 
-export const getFormItemForTemplateType2 = (templateType: number, ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]) => {
+export const getFormItemForTemplateType2 = (
+    // templateType: number, ads?: ActivityBanner<AdTemplate1BrandCard, AdTemplate1Card>[]
+): JSX.Element => {
     const adTitles = ["左侧广告", "右上广告", "右下广告"];
     return (
         <Form.Item label="广告列表" required>
             <Form.List name="contents">
-                {(fields, { add, remove }) => {
+                {(fields) => {
                     // console.log("fields", fields);
                     return (
                         <>
