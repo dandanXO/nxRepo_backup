@@ -5,5 +5,5 @@
  */
 import 'core-js/stable';
 // import 'regenerator-runtime/runtime';
-import 'resize-observer-polyfill';
-
+import ResizeObserver from 'resize-observer-polyfill'
+window.ResizeObserver = ResizeObserver
