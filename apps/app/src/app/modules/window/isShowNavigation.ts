@@ -4,6 +4,6 @@
 import { AppModeEnum } from '../../persistant/appModeModel';
 import { AppGlobal } from '../../persistant/nativeAppInfo';
 
-export const isInAndroid = (): boolean => {
-  return AppGlobal.mode === AppModeEnum.SimpleWebView ? true : false;
+export const isShowNavigation = (): boolean => {
+  return AppGlobal.mode !== AppModeEnum.PureH5;
 };

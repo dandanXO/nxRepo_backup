@@ -1,21 +1,17 @@
 import cx from 'classnames';
 import moment from 'moment';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { alertModal } from '../../../../../api/base/alertModal';
 import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/getLoanDetail';
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../modules/statusEnum';
-import { isInAndroid } from '../../../../../modules/window/isInAndroid';
 import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
-import { Navigation } from '../../../../components/layouts/Navigation';
-import { PagePathEnum } from '../../../PagePathEnum';
 
 const IndiaRepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();

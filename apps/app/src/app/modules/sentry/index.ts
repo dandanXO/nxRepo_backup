@@ -147,13 +147,18 @@ export class SentryModule {
       Sentry.setUser(accountInfo);
     }
 
-    if (AppFlag.enablePosthog) {
-      posthog.identify(getUserPhoneNo(), {
-        'user.phoneNo': getUserPhoneNo(),
-        'user.demoAccount': userResponse.demoAccount,
-      });
-      // posthog.reset(true)
-    }
+      try {
+          if (AppFlag.enablePosthog) {
+              posthog.identify(getUserPhoneNo(), {
+                  "user.phoneNo": getUserPhoneNo(),
+                  'user.demoAccount': userResponse.demoAccount,
+              })
+              // posthog.reset(true)
+          }
+      } catch (e){
+          console.log(e)
+      }
+
   }
 }
 

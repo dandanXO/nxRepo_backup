@@ -1,6 +1,5 @@
 import { IThemeConfig } from '@frontend/mobile/shared/ui';
 
-import './isInAndroid';
 import './onUploadKycBackgroundData';
 
 export enum AndroidPage {
