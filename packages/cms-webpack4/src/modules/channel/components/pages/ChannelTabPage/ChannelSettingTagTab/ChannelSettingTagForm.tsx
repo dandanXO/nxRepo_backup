@@ -9,7 +9,7 @@ type ChannelSettingTagFormProps = {
     id?: number;
 } & AdminFormProps;
 
-export const ChannelSettingTagForm = (props: ChannelSettingTagFormProps) => {
+export const ChannelSettingTagForm = (props: ChannelSettingTagFormProps): JSX.Element => {
 
     return (
         <AdminForm

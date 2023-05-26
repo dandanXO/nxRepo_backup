@@ -43,12 +43,12 @@ const history = createHashHistory({
     basename: Basename,
 });
 
-export const AppRouter = () => {
+export const AppRouter = (): JSX.Element => {
     const { pathname,previousPathname } = useSelector(selectSearchParams);
     const dispatch = useDispatch();
     useEffect(() => {
         // Listen for changes to the current location.
-        const unlisten = history.listen((location, action) => {
+        const unlisten = history.listen((location) => {
 
             if (location.pathname.indexOf(pathname) + location.pathname.indexOf(previousPathname) <= -2) {
                 dispatch(setSearchParams({}));

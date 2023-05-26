@@ -10,6 +10,7 @@ import { getTemplate2AdTemplate1Data } from "../../../export/mapper/getTemplate2
 import { getTemplate3AdTemplate1Data } from "../../../export/mapper/getTemplate3AdTemplate1Data";
 import { AdsTemplateData } from "../../../data/AdsTemplateData";
 import { AdsScenarioData } from "../../../data/AdsScenarioData";
+import { DeepPartial } from "../../../../../shared/types/custom";
 
 const { Title, Text } = Typography;
 

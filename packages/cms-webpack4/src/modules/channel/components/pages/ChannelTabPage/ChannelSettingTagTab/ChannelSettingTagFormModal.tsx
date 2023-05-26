@@ -21,7 +21,7 @@ export interface ChannelSettingTagFormModalProps {
     customAntFormFieldError: any;
 }
 
-export const ChannelSettingTagFormModal = (props: ChannelSettingTagFormModalProps) => {
+export const ChannelSettingTagFormModal = (props: ChannelSettingTagFormModalProps): JSX.Element => {
     {/*NOTICE: Create, Edit Modal*/
     }
     return (

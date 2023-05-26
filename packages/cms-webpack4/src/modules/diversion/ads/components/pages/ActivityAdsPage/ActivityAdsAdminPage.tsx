@@ -20,6 +20,7 @@ import { Form } from "antd";
 import { CommonResponseError } from "../../../../../shared/api/CommonResponseError";
 import { DefaultFormByTemplateType } from "./DefaultFormByTemplateType";
 import { useAdminFormModal } from "./useAdminFormModal";
+import { DeepPartial } from "../../../../../shared/types/custom";
 
 export const ActivityAdsAdminPage = (): JSX.Element => {
 

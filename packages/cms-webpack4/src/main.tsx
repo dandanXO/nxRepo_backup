@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 import App from './App';
 
 // TODO: 18
-let root;
+// let root;
 
 function render(props) {
     console.log("render.props", props);
@@ -43,22 +43,22 @@ if (!window["__POWERED_BY_QIANKUN__"]) {
     console.log("[cms-webpack4] 在 qiankun 內");
 }
 
-export async function bootstrap() {
+export async function bootstrap(): Promise<void> {
     console.log('[cms-webpack4] react app bootstraped');
 }
 
-export async function update(props) {
+export async function update(props: Record<any, any>): Promise<void> {
     console.log('[cms-webpack4] update props', props);
 }
 
-export async function mount(props) {
+export async function mount(props: Record<any, any>): Promise<void> {
     console.log('[cms-webpack4] mount props', props);
     storeTest(props);
     render(props);
 }
 
 // [Updates to Client Rendering APIs](https://zh-hant.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-client-rendering-apis)
-export async function unmount(props) {
+export async function unmount(props: Record<any, any>): Promise<void> {
     console.log('[cms-webpack4] unmount props', props);
     // NOTICE: 17
     const { container } = props;

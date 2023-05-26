@@ -33,11 +33,11 @@ import { getAdminUser } from "./modules/shared/storage/getUserInfo";
 // });
 
 
-function App() {
+function App(): JSX.Element {
 
     useEffect(() => {
         // Listen for the event.
-        window.addEventListener('main-app-hashchange', (e) => {
+        window.addEventListener('main-app-hashchange', () => {
             console.log("[MicroApp] [receive] event main-app-hashchange", event);
         }, false);
     }, []);

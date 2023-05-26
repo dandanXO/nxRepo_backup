@@ -4,7 +4,7 @@ import { ChannelSettingTabPage } from "./ChannelSettingTab";
 import { ChannelSettingTagTabPage } from "./ChannelSettingTagTab";
 import { useState } from "react";
 
-export const ChannelTabPage = () => {
+export const ChannelTabPage = (): JSX.Element => {
     const [activeKey, setActiveKey] = useState("channel");
     const tabs = [
         { key: 'channel', label: '渠道配置列表', children: <ChannelSettingTabPage active={activeKey === "channel"}/>, forceRender: false },

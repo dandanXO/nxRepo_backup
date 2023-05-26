@@ -17,7 +17,14 @@ export interface FormModalHookProps {
     formSuccessCallback?: () => void;
 }
 
-export const useFormModal = (props: FormModalHookProps) => {
+export const useFormModal = (props: FormModalHookProps): {
+    formInitialValues: Record<any, any>,
+    onFormFieldsChange: (changedFields: any) => void,
+    onFormFinish: () => void,
+    customAntFormFieldError: CustomAntFormFieldError,
+    onModalOk: () => void,
+    onCloseModal: () => void,
+} => {
 
     // NOTICE:
     const channelTagSchemaEntity = new ChannelTagSchemaEntity();
@@ -25,11 +32,11 @@ export const useFormModal = (props: FormModalHookProps) => {
     // Form - Initial Data
     const formInitialValues = useMemo(() => {
         // NOTE: select and switch need initialValue if you want to select one
-        return {} as DeepPartial<{}>;
+        return {} as Record<any, any>;
     }, []);
 
     // Form - onFieldsChange
-    const onFormFieldsChange = useCallback((changedFields, allFields) => {
+    const onFormFieldsChange = useCallback((changedFields) => {
         userEditingChannelSettingUseCase(changedFields);
     }, []);
 
@@ -80,7 +87,7 @@ export const useFormModal = (props: FormModalHookProps) => {
         const triggerAPI = (!props.showModalContent.isEdit ? props.triggerPost : props.triggerPut) as any;
 
         // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
+        triggerAPI(fields).unwrap().then(() => {
             // console.log("responseData", responseData);
 
             // Reset Form

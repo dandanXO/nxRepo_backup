@@ -4,7 +4,6 @@ import { ProColumns } from "@ant-design/pro-components";
 import { FormInstance } from "antd";
 import { AdminFormCustomModal } from "../../../../shared/components/common/AdminFormCustomModal";
 import { useForm } from "antd/es/form/Form";
-import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import AdminPage from "../../../../shared/components/common/AdminPage";
 import { AppConfigurationListItem } from "../../../services/appManage/domain/AppConfigurationListItem";
 import {
@@ -16,7 +15,6 @@ import {
 } from "../../../services/appManage/AppManageApi";
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
 import { AppManageForm } from "./AppManageForm";
-import { ChannelTagVO } from "../../../../channel/domain/vo/ChannelTagVO";
 import { Modal } from "antd/es";
 
 const i18n = {
@@ -46,7 +44,7 @@ export const taxCardOcrList = [
     "GCT",
 ];
 
-export const AppManagePage = () => {
+export const AppManagePage = (): JSX.Element => {
     // NOTICE: Action: List
     // NOTE: Table
     const [columns, setColumns] = useState<ProColumns<AppConfigurationListItem>[]>();
@@ -75,7 +73,7 @@ export const AppManagePage = () => {
     }, []);
 
 
-    const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteAppConfigurationMutation();
+    const [triggerDelete] = useDeleteAppConfigurationMutation();
 
     const [modal, contextHolder] = Modal.useModal();
 
@@ -95,7 +93,7 @@ export const AppManagePage = () => {
     }, []);
 
     const onDeleteModalCancel = useCallback(() => {
-
+        //
     }, []);
 
 
@@ -117,7 +115,7 @@ export const AppManagePage = () => {
                 key: 'option',
                 title: '操作',
                 valueType: 'option',
-                render: (text, record, _, action) => {
+                render: (text, record) => {
                     return [
                         <a key="editable" onClick={() => {
                             userBrowseEditChannelSettingUseCase(record);
@@ -152,7 +150,7 @@ export const AppManagePage = () => {
 
 
     // NOTE: GET list and item
-    const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllAppConfigurationQuery({
+    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] = useLazyGetAllAppConfigurationQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -209,7 +207,6 @@ export const AppManagePage = () => {
     // Modal - Close
     const onCloseModal = useCallback(() => {
         form.resetFields();
-        setCustomAntFormFieldError({});
     }, []);
 
     // Form - Initial Data
@@ -225,11 +222,11 @@ export const AppManagePage = () => {
             taxCardOcr: taxCardOcrList[0],
             liveDetect: liveDetectList[0],
             idCardOcr: idCardOcrList[0],
-        } as DeepPartial<{}>;
+        };
     }, []);
 
     // Form - onFieldsChange
-    const onFormFieldsChange = useCallback((changedFields, allFields) => {
+    const onFormFieldsChange = useCallback(() => {
         // userEditingChannelSettingUseCase(changedFields);
     }, []);
 
@@ -254,9 +251,8 @@ export const AppManagePage = () => {
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
 
-
         // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
+        triggerAPI(fields).unwrap().then(() => {
             // console.log("responseData", responseData);
 
             // Reset Form
@@ -275,11 +271,9 @@ export const AppManagePage = () => {
     }, [showModalContent.isEdit, editID]);
 
     // NOTE: POST , PUT and DELETE
-    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateAppConfigurationMutation();
-    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = useUpdateAppConfigurationMutation();
+    const [triggerPost] = useCreateAppConfigurationMutation();
+    const [triggerPut] = useUpdateAppConfigurationMutation();
 
-    // Form - Validation
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>();
 
     // NOTE: User browse EditChannelSetting
     const userBrowseEditChannelSettingUseCase = useCallback((record: AppConfigurationListItem) => {
@@ -295,7 +289,7 @@ export const AppManagePage = () => {
             id: record.id,
         });
     }, []);
-    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetAppConfigurationQuery();
+    const [triggerGet , { currentData: currentFormData }] = useLazyGetAppConfigurationQuery();
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {

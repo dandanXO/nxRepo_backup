@@ -18,6 +18,7 @@ import { UpdateChannelRequest } from "../../../../service/request/UpdateChannelR
 import { ChannelSettingTagFormModal } from "../ChannelSettingTagTab/ChannelSettingTagFormModal";
 import { useFormModal } from "../ChannelSettingTagTab/useFormModal";
 import { ProColumnsOperationConstant } from "../../../../../shared/components/common/ProColumnsOperationConstant";
+import { DeepPartial } from "../../../../../shared/types/custom";
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;
@@ -100,7 +101,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.E
                 key: 'option',
                 title: '操作',
                 valueType: 'option',
-                render: (text, record, _, action) => {
+                render: (text, record) => {
                     return [
                         <a key="editable" onClick={() => {
                             userBrowseEditChannelSettingUseCase(record);
@@ -160,7 +161,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.E
 
 
     // NOTE: GET list and item
-    const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllChannelQuery({
+    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] = useLazyGetAllChannelQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -177,7 +178,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.E
         setCurrentTableListData(data);
     }, [currentItemListData]);
 
-    const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData, isLoading: isLoadingAllRiskDropMenuData, isFetching: isFetchingAllRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
+    const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -222,11 +223,11 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.E
         // NOTE: select and switch need initialValue if you want to select one
         return {
             enabled: true
-        } as DeepPartial<{}>;
+        } as DeepPartial<{ enabled: boolean }>;
     }, []);
 
     // Form - onFieldsChange
-    const onFormFieldsChange = useCallback((changedFields, allFields) => {
+    const onFormFieldsChange = useCallback(() => {
         // userEditingChannelSettingUseCase(changedFields);
     }, []);
 
@@ -259,7 +260,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.E
 
 
         // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
+        triggerAPI(fields).unwrap().then(() => {
             // console.log("responseData", responseData);
 
             // Reset Form
@@ -278,8 +279,8 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.E
     }, [showModalContent.isEdit, editID]);
 
     // NOTE: POST , PUT and DELETE
-    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateChannelMutation();
-    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = useUpdateChannelMutation();
+    const [triggerPost] = useCreateChannelMutation();
+    const [triggerPut] = useUpdateChannelMutation();
 
     // Form - Validation
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>();
@@ -298,7 +299,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.E
             id: record.id,
         });
     }, []);
-    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetChannelQuery();
+    const [triggerGet , { currentData: currentFormData }] = useLazyGetChannelQuery();
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
@@ -321,7 +322,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps): JSX.E
         isEdit: false,
     });
     const [tagForm] = useForm();
-    const [triggerPostTag, { data: postTagData, isLoading: isPostTagLoading , isSuccess: isPostTagSuccess }] = useCreateTagMutation();
+    const [triggerPostTag] = useCreateTagMutation();
     const {
         // form
         formInitialValues: tagFormInitialValues,

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { InfoCircleOutlined } from "@ant-design/icons";
 import { ProColumns } from "@ant-design/pro-components";
 import { AdminTable, ModalContent } from "../../../../../shared/components/common/AdminTable";
 import {
@@ -19,7 +18,7 @@ import { ProColumnsOperationConstant } from "../../../../../shared/components/co
 interface ChannelSettingTagTabPageProps {
     active: boolean;
 }
-export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) => {
+export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps): JSX.Element => {
 
     // NOTICE: Action: List
     // NOTE: Table
@@ -51,6 +50,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
 
     // NOTICE: Modal - Delete
     const [showDeleteModal, setShowDeletedModal] = useState(false);
+    console.log(showDeleteModal);
 
     const onDeleteModalOK = useCallback((editID: number) => {
         // NOTICE: need dependency array
@@ -78,7 +78,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
                 key: 'option',
                 title: '操作',
                 valueType: 'option',
-                render: (text, record, _, action) => {
+                render: (text, record) => {
                     return [
                         <a key="editable" onClick={() => {
                             userBrowseEditChannelSettingUseCase(record);
@@ -113,7 +113,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
     }, []);
 
     // NOTE: GET list and item
-    const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
+    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] = useLazyGetAllTagQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -140,7 +140,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
             id: record.id,
         });
     }, []);
-    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetTagQuery();
+    const [triggerGet , { currentData: currentFormData }] = useLazyGetTagQuery();
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
@@ -172,8 +172,8 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
 
 
     // NOTE: POST , PUT and DELETE
-    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateTagMutation();
-    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = usePutTagMutation();
+    const [triggerPost] = useCreateTagMutation();
+    const [triggerPut] = usePutTagMutation();
 
 
     // NOTE: User browse DeleteChannelSetting
@@ -191,7 +191,9 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
             modal.warning({
                 title: "此配置标签已在使用中，不能刪除。",
                 content: <>若尚有任何疑问，请与技术联系</>,
-                onOk: () => {},
+                onOk: () => {
+                    //
+                },
                 okText: "知道了",
             });
         }
@@ -208,7 +210,7 @@ export const ChannelSettingTagTabPage = (props: ChannelSettingTagTabPageProps) =
         });
     }, []);
 
-    const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteTagMutation();
+    const [triggerDelete] = useDeleteTagMutation();
 
     const {
         // form

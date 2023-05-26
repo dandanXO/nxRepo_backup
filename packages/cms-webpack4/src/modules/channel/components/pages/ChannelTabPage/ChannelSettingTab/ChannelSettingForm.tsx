@@ -19,7 +19,7 @@ type ChannelSettingFormProps = {
     setShowTagModalContent: () => void;
 };
 
-export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
+export const ChannelSettingForm = (props: ChannelSettingFormProps): JSX.Element => {
 
     const selectRef = useRef();
     return (
@@ -83,7 +83,7 @@ export const ChannelSettingForm = (props: ChannelSettingFormProps) => {
                                 {menu}
                                 <Divider style={{ margin: '8px 0' }} />
                                 <Space style={{ padding: '0 8px 4px' }}>
-                                    <Button type="text" icon={<PlusOutlined />} onClick={(e) => {
+                                    <Button type="text" icon={<PlusOutlined />} onClick={() => {
                                         // e.preventDefault();
                                         // e.stopPropagation();
                                         // if(selectRef && selectRef.current) {

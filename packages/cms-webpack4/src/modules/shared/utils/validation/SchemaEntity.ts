@@ -1,4 +1,5 @@
 import { CustomAntFormFieldError } from "./CustomAntFormFieldError";
+import { z } from "zod";
 
 abstract class Validation {
     private isEntityValid?: boolean;
@@ -15,11 +16,11 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
 
     private schema: any;
 
-    constructor(schema: any) {
+    constructor(schema: z.infer<any>) {
         this.schema = schema;
     }
 
-    setProperties(props: ISchemaEntity) {
+    setProperties(props: ISchemaEntity): SchemaEntity<ISchemaEntity> {
         if(props) {
             Object.keys(props).map(key => {
                 if(props[key] !== undefined) {

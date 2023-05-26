@@ -1,12 +1,10 @@
 import React from "react";
 import Form from "antd/es/form";
-import { Select, Typography, Input, Collapse, Space } from "antd/es";
+import { Select, Input, Collapse } from "antd/es";
 const { Panel } = Collapse;
-const { Text } = Typography;
 const { Option } = Select;
 import { AdminForm, AdminFormProps } from "../../../../shared/components/common/AdminForm";
 import { Switch } from "antd";
-import { AppConfiguration } from "../../../services/appManage/domain/AppConfiguration";
 import "./style.less";
 
 type AppManageFormProps = {
@@ -18,8 +16,8 @@ type AppManageFormProps = {
     taxCardOcrList: string[];
 };
 
-export const AppManageForm = (props: AppManageFormProps) => {
-    const hasPartnershipUrl = Form.useWatch('showPartnership', props.form) ? false : true;
+export const AppManageForm = (props: AppManageFormProps): JSX.Element => {
+    const hasPartnershipUrl = !Form.useWatch('showPartnership', props.form);
     return (
         <AdminForm
             form={props.form}

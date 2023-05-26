@@ -18,6 +18,7 @@ import { RiskManageList } from "../../../domain/vo/RiskManageList";
 import { MssRiskRankVo } from "../../../domain/vo/MssRiskRankVo";
 import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
 import { ProColumnsOperationConstant } from "../../../../shared/components/common/ProColumnsOperationConstant";
+import { DeepPartial } from "../../../../shared/types/custom";
 
 
 export type FormResponseData = GetRiskManageResponse;
