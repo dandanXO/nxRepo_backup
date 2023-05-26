@@ -33,12 +33,12 @@ export const Product = (props: Props) => {
       </div>
       {expand && (
         <div className={'expandable-brand flex flex-col bg-[#F3F3F3] p-2 text-[#707070]'}>
-          <div className={'item mb-1 flex flex-row justify-between font-light'}>
+          {/* <div className={'item mb-1 flex flex-row justify-between font-light'}>
             <div className={'key'}>Interest</div>
             <div className={'value'}>
               {environment.currency} {formatPrice(props.product.calculating.interestPrice)}
             </div>
-          </div>
+          </div> */}
 
           <div className={'item mb-1 flex flex-row justify-between font-light'}>
             <div className={'key'}>Terms</div>

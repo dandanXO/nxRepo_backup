@@ -54,7 +54,7 @@ const DropdownIndicator = (props: DropdownIndicatorProps<any, true>) => {
 };
 
 type OptionType = {
-  label: number | undefined;
+  label: string | undefined;
   value: number | undefined;
 };
 
@@ -73,7 +73,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
     console.log('bankcard', bankcard);
     if (bankcard) {
       setOptionValue({
-        label: bankcard.bankId,
+        label: bankcard.bankAccount,
         value: bankcard.bankId,
       });
     }
@@ -87,7 +87,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
       <div className={'header'}>
         <div className={'text-xl font-medium'}>My Loan Orders</div>
       </div>
-      <div className={'summary flex-1'}>
+      <div className={'summary'}>
         <div className={'flex flex-col'}>
           <div className={'text-md font-medium'}>Summary Details</div>
           <div className={'item-list'}>
@@ -95,7 +95,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               <div className={'key'}>Loan Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.loanAmount)}</div>
             </div>
-            <div className={'item flex flex-row justify-between font-light'}>
+            {/* <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Interest</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.interest)}</div>
             </div>
@@ -106,7 +106,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Service Charge</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.serviceCharge)}</div>
-            </div>
+            </div> */}
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Disbursal Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.disbursalAmount)}</div>
@@ -122,8 +122,8 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
       <Horizontal />
 
       <div className={'products '}>
-        <div className={'text-md mb-2 font-medium'}>Your Products</div>
-        <div className={'flex h-[200px] flex-col overflow-auto'}>
+        <div className={'text-md mb-2 font-medium '}>Your Products</div>
+        <div className={'flex min-h-[150px] flex-col overflow-auto'}>
           {props.calculatingProducts.map((product, index) => {
             return <Product key={index} product={product} />;
           })}
@@ -132,7 +132,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
 
       <Horizontal />
 
-      <div className={'footer flex-1'}>
+      <div className={'footer flex-1 flex flex-col justify-between'}>
         <div className={'bankcard'}>
           <div className={'text-md font-medium'}>Bank Card</div>
 
@@ -190,16 +190,14 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               options={props.bankcardList.map((bankcard, index) => {
                 return {
                   value: bankcard.bankId,
-                  label: bankcard.bankId,
+                  label: bankcard.bankAccount,
                 };
               })}
               isSearchable={false}
             />
           </div>
-        </div>
-
+          
         <Horizontal />
-
         <div className={'mb-2 text-xs font-light text-gray-400'}>
           <span>By continuing, I have read and agree</span>
           <span className={'text-blue-500 underline'} onClick={props.onClickLoanAgreement}>
@@ -208,8 +206,14 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
           </span>
           <span>carefully.</span>
         </div>
-
+        </div>
+        <div>
         <Button text={'Confirm'} onClick={props.onConfirmApply} />
+        </div>
+
+
+      
+        
       </div>
     </div>
   );
