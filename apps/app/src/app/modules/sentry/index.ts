@@ -11,36 +11,29 @@ import { RootState, appStore } from '../../reduxStore';
 import { AppEnvironment } from '../appEnvironment';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
 
-// NOTICE: refactor me
-const DSN = 'https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3';
+// NOTE: 初始化
+let loaded = false;
 
-let load = false;
+if (AppFlag.enableSentry && loaded === false) {
+  loaded = true;
 
-if (AppFlag.enableSentry && load === false) {
-  load = true;
   const environmentName = AppEnvironment.getEnvironmentName();
+
   const replayConfig = {
     maskAllText: false,
     maskAllInputs: false,
     blockAllMedia: false,
   };
+
   // const replay = new Sentry.Replay(replayConfig);
   // replay.start();
+
   const sentryConfig: Sentry.BrowserOptions = {
-    // dsn: "https://c7460b88e57746c2804aec8514c3eef6@o4504354754985984.ingest.sentry.io/4505027128852480",
     // NOTE: self-hosting
-    dsn: DSN,
+    dsn: WebpackSentryConfig.dsn,
     environment: environmentName,
     integrations: [
       new BrowserTracing(),
-      // replay
-      new Sentry.Replay(replayConfig),
-      new posthog.SentryIntegration(
-        posthog,
-        WebpackSentryConfig.org,
-        WebpackSentryConfig.projectId,
-        WebpackSentryConfig.url + 'organizations/'
-      ),
     ],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
@@ -50,33 +43,38 @@ if (AppFlag.enableSentry && load === false) {
     replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
     replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   };
+
+  // NOTE: AppFlag.enableSentryReplay
+  if(AppFlag.enableSentryReplay && Array.isArray(sentryConfig.integrations)) {
+    sentryConfig.integrations.push(new Sentry.Replay(replayConfig))
+  }
+
+  // NOTE: AppFlag.// NOTE: AppFlag.enableSentryReplay
+  if(
+    AppFlag.enablePosthog &&
+    sentryConfig && sentryConfig.integrations && Array.isArray(sentryConfig.integrations)
+  ) {
+    sentryConfig.integrations.push(new posthog.SentryIntegration(
+      posthog,
+      WebpackSentryConfig.org,
+      WebpackSentryConfig.projectId,
+      WebpackSentryConfig.url + 'organizations/'
+    ))
+  }
+  // NOTE: AppEnvironment.isLocalhost()
   if (!AppEnvironment.isLocalhost()) {
     sentryConfig.release = AppInfo.COMMITHASH;
   }
+
   Sentry.init(sentryConfig);
-}
 
-function getUserStatusName(status: number) {
-  return ['未認證', '通過認證', '審核中', '審核拒絕'][status];
-}
-
-const getUserPhoneNo = () => {
-  return NativeAppInfo.phoneNo ? NativeAppInfo.phoneNo : 'unknown';
-};
-
-function getCommonTags() {
-  const appState: RootState = appStore.getState();
-  const user = appState?.indexPage?.user;
-
-  return {
-    packageId: NativeAppInfo.packageId,
-    uiVersion: NativeAppInfo.uiVersion,
-    mode: NativeAppInfo.mode,
-    appName: NativeAppInfo.appName,
-    domain: NativeAppInfo.domain,
-    'user.userName': user.userName !== '' ? user.userName : 'unknown',
-    'user.phoneNo': getUserPhoneNo(),
-  };
+  // TODO:
+  // NOTE: Sentry Replay 會新增 Tags
+  // const accountInfo = {
+    // phoneNo: login.phoneNo,
+  // }
+  // console.log("[sentry] accountInfo", accountInfo);
+  // Sentry.setUser(accountInfo);
 }
 
 export class SentryModule {
@@ -123,6 +121,7 @@ export class SentryModule {
     });
   }
 
+  // TODO: 目前只有 PureH5 有 setContext and setUser
   static userLogin(userResponse: GetUserInfoServiceResponse) {
     if (AppEnvironment.isLocalhost()) return;
 
@@ -160,6 +159,30 @@ export class SentryModule {
       }
 
   }
+}
+
+
+function getUserStatusName(status: number) {
+  return ['未認證', '通過認證', '審核中', '審核拒絕'][status];
+}
+
+const getUserPhoneNo = () => {
+  return NativeAppInfo.phoneNo ? NativeAppInfo.phoneNo : 'unknown';
+};
+
+function getCommonTags() {
+  const appState: RootState = appStore.getState();
+  const user = appState?.indexPage?.user;
+
+  return {
+    packageId: NativeAppInfo.packageId,
+    uiVersion: NativeAppInfo.uiVersion,
+    mode: NativeAppInfo.mode,
+    appName: NativeAppInfo.appName,
+    domain: NativeAppInfo.domain,
+    'user.userName': user.userName !== '' ? user.userName : 'unknown',
+    'user.phoneNo': getUserPhoneNo(),
+  };
 }
 
 // export const SentryModuleInstance = new SentryModule();
