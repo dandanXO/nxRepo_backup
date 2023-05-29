@@ -18,6 +18,7 @@ import { CloseButton } from '../../components/layouts/CloseButton';
 import { Horizontal } from '../../components/layouts/Horizontal';
 import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
 import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
+import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
 
 type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];
@@ -31,7 +32,7 @@ type Props = IndexPageProps & {
 };
 
 const IndicatorSeparator = (props: IndicatorSeparatorProps<any, true>) => {
-  console.log('IndicatorSeparator.props', props);
+  // console.log('IndicatorSeparator.props', props);
   return (
     <span {...props.innerProps} className={'font-light text-gray-400'}>
       change
@@ -95,18 +96,30 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               <div className={'key'}>Loan Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.loanAmount)}</div>
             </div>
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Interest</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.interest)}</div>
-            </div>
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Processing Fee</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.processingFee)}</div>
-            </div>
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Service Charge</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.serviceCharge)}</div>
-            </div>
+
+            {/*TODO: refactor me*/}
+            {props.state.indexAPI?.chargeFeeDetails.map((key) => {
+              const keyMapValue: Record<FeeRateKeyEnum, any> = {
+                [FeeRateKeyEnum.LOAN_INTEREST]: formatPrice(props.calculatingSummary.interest),
+                [FeeRateKeyEnum.PROCESSING_FEE]: formatPrice(props.calculatingSummary.processingFee),
+                [FeeRateKeyEnum.SERVICE_FEE]: formatPrice(props.calculatingSummary.serviceCharge),
+                [FeeRateKeyEnum.DAILY_FEE]: 0,
+                [FeeRateKeyEnum.GST]: 0,
+                [FeeRateKeyEnum.LOAN_AMOUNT]: 0,
+                [FeeRateKeyEnum.PENALTY_INTEREST]: 0,
+                [FeeRateKeyEnum.REDUCTION_AMOUNT]: 0,
+              }
+              // console.log("keyMapValue", keyMapValue);
+              const value = keyMapValue[key.key] || 0;
+              // console.log("value", value);
+              return (
+                <div className={'item flex flex-row justify-between font-light'}>
+                  <div className={'key'}>{key.title}</div>
+                  <div className={'value'}>₹ {value}</div>
+                </div>
+              )
+            })}
+
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Disbursal Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.disbursalAmount)}</div>

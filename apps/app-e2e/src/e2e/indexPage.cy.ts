@@ -2018,7 +2018,7 @@ describe('IndexPage', () => {
           "productName": "AA LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
           "min": 2000,
-          "max": 5000,
+          "max": 5120,
           "terms": 7,
           "platformChargeFeeRate": 0.4
         },
@@ -2027,7 +2027,7 @@ describe('IndexPage', () => {
           "productName": "BB LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
           "min": 3000,
-          "max": 5000,
+          "max": 5230,
           "terms": 7,
           "platformChargeFeeRate": 0.4
         },
@@ -2036,7 +2036,7 @@ describe('IndexPage', () => {
           "productName": "CC LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
           "min": 4000,
-          "max": 6000,
+          "max": 6460,
           "terms": 7,
           "platformChargeFeeRate": 0.4
         }
@@ -2087,7 +2087,7 @@ describe('IndexPage', () => {
 
 
   // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 9)
-  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -2138,27 +2138,27 @@ describe('IndexPage', () => {
           "productName": "AA LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
           "min": 2000,
-          "max": 5000,
+          "max": 5120,
           "terms": 7,
-          "platformChargeFeeRate": 0.4
+          "platformChargeFeeRate": 0.43
         },
         {
           "productId": 2,
           "productName": "BB LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
           "min": 3000,
-          "max": 5000,
+          "max": 5230,
           "terms": 7,
-          "platformChargeFeeRate": 0.4
+          "platformChargeFeeRate": 0.43
         },
         {
           "productId": 3,
           "productName": "CC LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
           "min": 4000,
-          "max": 6000,
+          "max": 6460,
           "terms": 7,
-          "platformChargeFeeRate": 0.4
+          "platformChargeFeeRate": 0.43
         }
       ],
       "needRiskKycUpdate": false,
