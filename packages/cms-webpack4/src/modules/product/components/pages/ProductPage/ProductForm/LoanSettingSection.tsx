@@ -91,7 +91,6 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                             <Select
                                 placeholder='选择'
                                 mode="tags"
-                                style={{ width: 160 }}
                                 showArrow
                             >
                                 {productRiskList.map((part) => <Option key={part}>{part}</Option>)}
@@ -140,12 +139,10 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                         <Form.Item
                             label={<div style={{ marginLeft : 11 }}>混合风控<span style={{ marginLeft: 5, color: 'darkgrey'}}>(选填)</span></div>}
                             name="oldGuestLoanMixedRisk"
-                            style={{ display: 'inline-block' }}
                         >
                             <Select
                                 placeholder='选择'
                                 mode="tags"
-                                style={{ width: 160 }}
                                 showArrow
                             >
                                 {productRiskList.map((part) => <Option key={part}>{part}</Option>)}
