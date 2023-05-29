@@ -5,7 +5,8 @@ import {
     useLazyGetProductManageListQuery,
     useLazyGetProductQuery,
     usePostProductCreateMutation,
-    usePutProductEditMutation
+    usePutProductEditMutation,
+    useGetProductRiskDropdownQuery,
 } from "../../../../service/product/ProductApi";
 import moment from "moment/moment";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
@@ -102,6 +103,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>(initCustomAntFormFieldError)
     const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
+    const { currentData: productRiskList } = useGetProductRiskDropdownQuery(null);
     const [postProductCreate, { isLoading, isSuccess: isPostProductCreateSuccess }] = usePostProductCreateMutation();
     const [putProduct, { isSuccess: isPutProductSuccess }] = usePutProductEditMutation();
 
@@ -504,6 +506,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         onFinish,
         form,
         merchantList,
+        productRiskList,
         customAntFormFieldError,
         setCustomAntFormFieldError,
         setTriggerFetchTableList,

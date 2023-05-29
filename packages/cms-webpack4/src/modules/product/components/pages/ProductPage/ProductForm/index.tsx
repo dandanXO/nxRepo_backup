@@ -20,6 +20,7 @@ interface ProductFormProps {
     onFinish: (value: any) => void;
     form: any;
     merchantList: GetAvailableMerchantResponse[];
+    productRiskList: string[];
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     show: boolean;
@@ -286,6 +287,7 @@ const Index = (props: ProductFormProps) => {
                 enableReLoanAmount={props.enableReLoanAmount}
                 isEdit={productModalData.isEdit}
                 customAntFormFieldError={customAntFormFieldError}
+                productRiskList={props.productRiskList}
             />
             <RateSettingSection
                 modal={modal}
