@@ -1,9 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-import { isInAndroid } from '../../../../../../modules/window/isInAndroid';
-import { CustomPage } from '../../../../../components/layouts/CustomPage';
-import { Navigation } from '../../../../../components/layouts/Navigation';
 import { Page } from '../../../../../components/layouts/Page';
 import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
 import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';

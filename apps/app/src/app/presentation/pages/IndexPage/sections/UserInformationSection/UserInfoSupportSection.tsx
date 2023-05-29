@@ -11,10 +11,7 @@ type Props = IndexPageProps & {
 
 export const UserInfoSupportSection = (props: Props) => {
   // TODO: refactor
-  const userName =
-    props.state.user?.userName?.length >= 10
-      ? props.state.user.userName.slice(0, 3) + '****' + props.state.user.userName.slice(7, 10)
-      : props.state.user.userName;
+  const userName = props.state.user?.maskUserName;
   const [isHideUserName, setIsHideUserName] = useState(true);
 
   // NOTE: User Event

@@ -8,7 +8,7 @@ import { Navigation } from '../../components/layouts/Navigation';
 
 const CustomerServicePage = () => {
   const navigate = useNavigate();
-  const { app } = useSelector((state: RootState) => state);
+  const { app, indexPage } = useSelector((state: RootState) => state);
   return (
     <div>
       <Navigation
@@ -32,14 +32,17 @@ const CustomerServicePage = () => {
         <div>{`Email: ${app?.init?.csEmail || ''}`}</div>
         <div>{`Whatsapp: ${app?.init?.csWhatsApp || ''}`}</div>
         <div>{`Phone: ${app?.init?.csContactNumber || ''}`}</div>
-        <div
-          className="mt-10 text-sm text-blue-500 underline decoration-blue-500"
-          onClick={() => {
-            navigate('/v2/online-customer-service');
-          }}
-        >
-          Online Customer Service
-        </div>
+
+        {indexPage?.indexAPI?.customerServiceUrl && (
+          <div
+            className="mt-10 text-sm text-blue-500 underline decoration-blue-500"
+            onClick={() => {
+              navigate('/v2/online-customer-service');
+            }}
+          >
+            Online Customer Service
+          </div>
+        )}
       </div>
     </div>
   );

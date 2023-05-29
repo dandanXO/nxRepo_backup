@@ -1,20 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { Overlay } from '@frontend/mobile/shared/ui';
 
+import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
 import { Button } from '../../components/layouts/Button';
 import { PersonalInfoPageSagaActions } from '../../pages/PersonalInfoPage/userUsecaseSaga';
 
-const LogoutModal = (props: any) => {
+const LogoutModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  // console.log('extend location', location);
 
-  const appName = 'App Name';
-  const onClickConfirm = () => {
+  const appName = NativeAppInfo.appName;
+
+  // NOTE: User Event
+  const onUserClickToConfirm = () => {
     dispatch(PersonalInfoPageSagaActions.user.logout());
   };
 
@@ -33,14 +34,14 @@ const LogoutModal = (props: any) => {
                   <Button type={'secondary'} className={'w-full'} text={'Cancel'} onClick={() => navigate(-1)} />
                 </div>
                 <div className={`ml-1.5 grow`}>
-                  <Button className={'w-full'} text={'Confirm'} onClick={onClickConfirm} />
+                  <Button className={'w-full'} text={'Confirm'} onClick={onUserClickToConfirm} />
                 </div>
               </div>
             </div>
           );
         }}
         // enableTitleHorizontal={true}
-      ></Overlay>
+      />
     </div>
   );
 };

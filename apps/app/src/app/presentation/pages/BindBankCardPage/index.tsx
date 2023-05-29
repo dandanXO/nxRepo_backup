@@ -12,7 +12,7 @@ import {
   usePostBankBindSaveToPKMutation,
 } from '../../../api/rtk';
 import { renderByCountry } from '../../../modules/i18n';
-import { isInAndroid } from '../../../modules/window/isInAndroid';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { CustomPage } from '../../components/layouts/CustomPage';
 import { Navigation } from '../../components/layouts/Navigation';
 import { IndiaBindBankAccountPage } from './components/i18n/IndiaBindBankAccountPage';
@@ -50,7 +50,7 @@ const BindBankCardPage = () => {
 
   return (
     <>
-      {!isInAndroid() && (
+      {!isShowNavigation() && (
         <Navigation
           title={'Add New Card'}
           back={() => {
