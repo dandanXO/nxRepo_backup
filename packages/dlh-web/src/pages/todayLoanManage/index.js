@@ -9,11 +9,11 @@ import { TodayCollectTeamReport, todayCollectTeamReportState, todayCollectTeamRe
 
 const todayLoanManageRoutes = [
     { path: '/todayList', component: TodayList, exact: true },
-    { path: '/todayList/:id', component: TodayOrderDetail },
+    { path: '/todayList/:id/:uid', component: TodayOrderDetail },
     { path: '/todayOrderDistribute', component: TodayOrderDistribute },
     { path: '/todayBackRecord', component: TodayBackRecord },
     { path: '/todayPhoneUrgeList', component: TodayPhoneUrgeList, exact: true },
-    { path: '/todayPhoneUrgeList/:id', component: TodayOrderDetail },
+    { path: '/todayPhoneUrgeList/:id/:uid', component: TodayOrderDetail },
     { path: '/collect-team-report-today', component: TodayCollectTeamReport }
 ];
 

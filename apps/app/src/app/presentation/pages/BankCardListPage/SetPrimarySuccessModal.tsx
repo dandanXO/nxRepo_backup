@@ -1,5 +1,7 @@
-import { useNavigate, useLocation } from 'react-router';
-import { Overlay, Title, Divider, ListItem } from '@frontend/mobile/shared/ui';
+import { useLocation, useNavigate } from 'react-router';
+
+import { Divider, ListItem, Overlay, Title } from '@frontend/mobile/shared/ui';
+
 import { Button } from '../../components/layouts/Button';
 
 type SetPrimarySuccessModalProps = {
@@ -17,15 +19,9 @@ export const SetPrimarySuccessModal = (props: SetPrimarySuccessModalProps) => {
       content={(hide: () => void) => {
         return (
           <div className={`px-6 py-3`}>
-            <div className="font-bold mt-8 mb-14 text-lg">
-              Main card set up successfully!
-            </div>
+            <div className="mt-8 mb-14 text-lg font-bold">Main card set up successfully!</div>
             <div>
-              <Button
-                className={'w-full'}
-                text={'OK'}
-                onClick={() => props.setIsSetPrimarySuccess(false)}
-              />
+              <Button className={'w-full'} text={'OK'} onClick={() => props.setIsSetPrimarySuccess(false)} />
             </div>
           </div>
         );

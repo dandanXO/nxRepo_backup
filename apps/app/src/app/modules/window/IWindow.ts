@@ -1,6 +1,6 @@
-import './isInAndroid';
-import './onUploadKycBackgroundData';
 import { IThemeConfig } from '@frontend/mobile/shared/ui';
+
+import './onUploadKycBackgroundData';
 
 export enum AndroidPage {
   LOGIN = 'LOGIN',
@@ -22,5 +22,6 @@ declare global {
       // getAppInfo: () => AndroidAppInfo;
       getAppInfo: () => string;
     };
+    reduxStore: any;
   }
 }

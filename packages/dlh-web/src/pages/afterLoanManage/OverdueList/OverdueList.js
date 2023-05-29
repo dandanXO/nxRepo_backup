@@ -248,7 +248,7 @@ class OverdueList extends Component {
         const {setSearchParams, getTableData} = this.props;
         setSearchParams(obj);
         const searchStatus = this.convertParams(obj);
-     
+
         axios({
             url: "/hs/admin/collect-overdue/download",
             method: "get",
@@ -272,8 +272,7 @@ class OverdueList extends Component {
     handleLookDetail = (id, userId) => {
         const {history: {push}} = this.props;
         push({
-            pathname: `/overdueList/${id}`,
-            state: { userId }
+            pathname: `/overdueList/${id}/${userId}`,
         })
     }
 
@@ -379,7 +378,7 @@ class OverdueList extends Component {
     }
 
     render() {
-     
+
         const {
             tableData: {data, pagination},
             loading,
@@ -457,7 +456,7 @@ const mapStateToProps = (state) => {
         collectorModalLoading: overdueListState['collector']['modalLoading'],
         collectorVisible: overdueListState['collector']['visible'],
         collectorModalData: overdueListState['collector']['modalData'],
-      
+
     }
 }
 const mapDispatchToProps = (dispatch) => {

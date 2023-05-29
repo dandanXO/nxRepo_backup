@@ -1,6 +1,8 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { getToken } from '../../modules/location/getToken';
-import { alertModal } from './alertModal';
+import axios, { AxiosRequestConfig } from 'axios';
+
+import { AppEnvironment } from '../../modules/appEnvironment';
+import { getToken } from '../../modules/querystring/getToken';
+import { SentryModule } from '../../modules/sentry';
 
 export const runAxios = async (
   baseUrl: string,
@@ -28,21 +30,39 @@ export const runAxios = async (
       },
     };
     const result = await axios(config);
+    // console.log('runAxios.result', result);
+
+    if (AppEnvironment.isDev()) {
+      SentryModule.captureMessage(
+        `API: ${method} ${url}`,
+        {},
+        {
+          request: {
+            params,
+            data,
+          },
+          response: {
+            ...result,
+            data: JSON.parse(JSON.stringify(result.data)),
+          },
+        }
+      );
+    }
     return {
       success: true,
       data: result.data,
     };
   } catch (error) {
     // console.log('error', error);
-    // if (axios.isAxiosError(error)) {
-    //   // console.log("isAxiosError.error", error)
-    //   if (
-    //     (error.response as any).data?.code !== 404 ||
-    //     (error.response as any).data?.code !== 401
-    //   ) {
-    //     alertModal((error.response as any).data?.message);
-    //   }
-    // }
+    if (axios.isAxiosError(error)) {
+      // console.log("isAxiosError.error", error)
+      // if (
+      // (error.response as any).data?.code !== 404 ||
+      // (error.response as any).data?.code !== 401
+      // ) {
+      // alertModal((error.response as any).data?.message);
+      // }
+    }
     throw error;
   }
 };

@@ -28,8 +28,6 @@ class OrderDetail extends Component{
         this.state = {
             remark: '',
             isShowBtn,
-            hidenTag:'0',
-            hideContactIfNotDue: true,
             repaymentLinkIsProhibited: false,
         };
         const _this = this;
@@ -420,40 +418,63 @@ class OrderDetail extends Component{
         );
     }
 
+    handleAddressBookChange = (info) => {
+        const { match, getAddressBook } = this.props;
+        const userId = match['params']['uid']
+        getAddressBook({ userId, pageNum: info.current, pageSize: info.pageSize })
+    }
+    //渲染通讯录
     renderAddressBook = () => {
-        const { orderData: { addressBook = [] } } = this.props;
+        const { addressBook:{data=[],pagination={}}  ,intl } = this.props;
         const columns = [
-            { title: <FormattedMessage id="page.search.list.name" />, dataIndex: 'contactsName', key: 'contactsName' },
-            { title: <FormattedMessage id="page.search.list.mobile" />, dataIndex: 'contactsPhone', key: 'contactsPhone' }
+            { title: intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'name', key: 'name' },
+            { title: intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'phone', key: 'phone' },
+            {
+                title: intl.formatMessage({ id: "page.table.last.add.time" }), dataIndex: 'lastUpdateTime', key: 'lastUpdateTime',
+                render (text) {
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
+                }
+            }
         ];
-        const { hidenTag } = this.state;
-        console.log("hidenTag" + hidenTag);
-        console.log("hidenTagx" + hidenTag !== 1);
-        if(hidenTag==='1')return;
-        if(hidenTag !== '1'){
-            return (
-                <CommonTable columns={columns} dataSource={addressBook} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
-            );
-        }else{
-            return (<div></div>);
-        }
+        return (
+            <CommonTable columns={columns} dataSource={data}  pagination={pagination} handlePageChange={this.handleAddressBookChange} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
+        );
+    }
+
+    handleSmsMessageChange = (info) => {
+        const { getSmsMessage, match } = this.props;
+        const userId = match['params']['uid']
+        getSmsMessage({ userId, pageNum: info.current, pageSize: info.pageSize })
+    }
+    //渲染通讯录
+    renderSmsMessage = () => {
+        const { smsMessage: { data = [], pagination = {} }, intl } = this.props;
+        const columns = [
+            { title: intl.formatMessage({id : "page.table.send.number"}), dataIndex: 'phone', key: 'phone' },
+            { title: intl.formatMessage({id : "page.table.content"}), dataIndex: 'content', key: 'content' ,width:'50%'},
+            { title: intl.formatMessage({id : "page.table.sending.type"}), dataIndex: 'direction', key: 'direction' },
+            {
+                title: intl.formatMessage({ id: "page.table.sending.time" }), dataIndex: 'time', key: 'time',
+                render (text) {
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
+                }
+            },
+        ];
+        return (
+            <CommonTable columns={columns} dataSource={data}  pagination={pagination} handlePageChange={this.handleSmsMessageChange} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
+        );
     }
     //渲染运营商信息
     renderOperatorMsg = () => {
         const { orderData: { operator = {} } } = this.props;
-        const { hidenTag } = this.state;
-        if(hidenTag==='1')return;
-        if(hidenTag !== '1'){
-            return (
-                <div>
-                    <CommonTable columns={this.phoneRecordColumns} dataSource={operator['photoRecord'] || []} title={() => <div><FormattedMessage id="windowPage.call.record" /></div>}/>
-                    {/*<CommonTable columns={this.msgRecordColumns} dataSource={operator['msgRecord'] || []} title={() => <div>短信记录</div>}/>*/}
-                </div>
-            );
-        }else{
-            return (<div></div>);
-        }
+        return (
+            <div>
+                <CommonTable columns={this.phoneRecordColumns} dataSource={operator['photoRecord'] || []} title={() => <div><FormattedMessage id="windowPage.call.record" /></div>} />
+                {/*<CommonTable columns={this.msgRecordColumns} dataSource={operator['msgRecord'] || []} title={() => <div>短信记录</div>}/>*/}
+            </div>
+        );
     }
+
     //关闭添加催收记录弹窗
     urgeModalCancel = () => {
         const { changeVisible } = this.props;
@@ -489,43 +510,24 @@ class OrderDetail extends Component{
     }
 
 
-    componentDidMount() {
-        const { match, location: { state }, getOrderData, getAllUrgeRecord } = this.props;
-        const userId = state ? state['userId'] : '';
+    componentDidMount () {
+        const { match, getOrderData, getAllUrgeRecord, getDetailTabControl, getAddressBook, getSmsMessage } = this.props;
+        const userId = match['params']['uid']
         const params = match['params']['id'] || '';
+
         getOrderData({ overdueId: params }, { userId });
         getAllUrgeRecord({ overdueId: params });
         const _this = this;
 
-        loadHideContactIfNotDueFlag();
-
+        // 取得後台使用者開關 (是否可查看 tab -通訊錄 & 手機短信)
+        // 在參數配置配有 "是否屏蔽當日到期前訂單通訊錄" 開關。
+        // 開關沒開 = 顯示   (不用管到不到期） (開關有開 detailTabControl.contactSwitch = true  , 開關沒開 detailTabControl.contactSwitch = false)
+        // 開關打開 + 有到期 = 顯示   (detailTabControl.contactSwitch = true , isNotOverdue = false -> disabled = false)
+        // 開關打開 + 沒到期 = 不顯示 (detailTabControl.contactSwitch = true , isNotOverdue = true -> disabled = true)
+        getDetailTabControl();
+        getAddressBook({ userId, pageNum: 1, pageSize: 10 });
+        getSmsMessage({ userId, pageNum: 1, pageSize: 10 });
         loadRepaymentLinkFlag();
-
-        axios({
-            url: '/hs/admin/orderToday/hidenYysAndContacts',
-            method: 'get'
-        }).then((res) => {
-            if(res && res.code == '200') {
-                _this.setState({
-                    hidenTag: res.hidenTag
-                });
-            }
-        });
-
-        function loadHideContactIfNotDueFlag () {
-            // 在參數配置配有“是否屏蔽當日到期前訂單通訊錄”開關，關掉連超管都看不到。
-            // 開關沒開 = 顯示   (不用管到不到期） (開關有開 hideContactIfNotDue = true  , 開關沒開 hideContactIfNotDue = false)
-            // 開關打開 + 有到期 = 顯示   (hideContactIfNotDue = true , isNotOverdue = false -> disabled = false)
-            // 開關打開 + 沒到期 = 不顯示 (hideContactIfNotDue = true , isNotOverdue = true -> disabled = true)
-            axios({
-                url: '/hs/admin/orderToday/hideContactIfNotDue',
-                method: 'get'
-            }).then((res) => {
-                _this.setState({
-                    hideContactIfNotDue: res
-                });
-            });
-        }
 
         function loadRepaymentLinkFlag() {
           axios({
@@ -548,10 +550,20 @@ class OrderDetail extends Component{
         return text.substring(text.indexOf('[ ') + 1, text.indexOf(' ]'))
     }
 
+    isNotOverdue = (orderData) => {
+        if(orderData && orderData.orderInfo && orderData.orderInfo.expireTime){
+            const expireDate = moment(orderData.orderInfo.expireTime ).startOf('day');
+            const today = moment().startOf('day');
+            return today.isBefore(expireDate);
+        }
+        return true;
+    }
+
     render() {
         const ele = this.renderBtn();
-        const { visible, recordVisible, recordData, intl,repaymentVisible,orderData,messageContent,messageVisible,changeMessageVisible } = this.props;
-        const { remark, hideContactIfNotDue } = this.state;
+        const { visible, recordVisible, recordData, intl,repaymentVisible,orderData,messageContent,messageVisible,changeMessageVisible,detailTabControl } = this.props;
+        const { contactSwitch, smsSwitch } = detailTabControl;
+        const { remark } = this.state;
         return (
             <div>
                 <Tabs animated={false} tabBarExtraContent={ele}>
@@ -561,8 +573,11 @@ class OrderDetail extends Component{
                     <TabPane tab={intl.formatMessage({id: "windowPage.customer.msg"})} key="2">
                         {this.renderUserInfo()}
                     </TabPane>
-                    <TabPane tab={intl.formatMessage({ id: "windowPage.contact.list" })} key="3" disabled={hideContactIfNotDue === false ? hideContactIfNotDue : hideContactIfNotDue && this.isNotOverdue(orderData)}>
+                    <TabPane tab={intl.formatMessage({ id: "windowPage.contact.list" })} key="3" disabled={contactSwitch === false ? contactSwitch : contactSwitch && this.isNotOverdue(orderData)}>
                         {this.renderAddressBook()}
+                    </TabPane>
+                    <TabPane tab={intl.formatMessage({ id: "windowPage.sms.list" })} key="4" disabled={smsSwitch === false ? smsSwitch : smsSwitch && this.isNotOverdue(orderData)}>
+                        {this.renderSmsMessage()}
                     </TabPane>
                 </Tabs>
                 <AddUrgeModal intl={intl} visible={visible} handleCancel={this.urgeModalCancel} handleOk={this.urgeHandleOk} remark={remark}/>
@@ -585,17 +600,7 @@ class OrderDetail extends Component{
         );
     }
 
-    isNotOverdue = (orderData) => {
-        if (Object.keys(orderData).length === 0) {
-            return this.state.hideContactIfNotDue;
-        }
-        if(orderData && orderData.orderInfo && orderData.orderInfo.expireTime){
-            const expireDate = moment(orderData.orderInfo.expireTime ).startOf('day');
-            const today = moment().startOf('day');
-            return today.isBefore(expireDate);
-        }
-        return true;
-    }
+
 
 }
 
@@ -657,6 +662,9 @@ const mapStateToProps = (state) => {
         repaymentVisible:todayOrderDetailState['repaymentVisible'],
         messageContent:todayOrderDetailState['messageContent'],
         messageVisible:todayOrderDetailState['messageVisible'],
+        detailTabControl:todayOrderDetailState['detailTabControl'],
+        addressBook:todayOrderDetailState['addressBook'],
+        smsMessage:todayOrderDetailState['smsMessage'],
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -671,7 +679,10 @@ const mapDispatchToProps = (dispatch) => {
         sendPartialRepayment:todayOrderDetailAction.torPartialRepayment,
         changeRepaymentVisible:todayOrderDetailAction.tordChangeRepaymentModalVisible,
         setMessageContent:todayOrderDetailAction.tordSetMessageContent,
-        changeMessageVisible:todayOrderDetailAction.tordChangeMessageModalVisible
+        changeMessageVisible:todayOrderDetailAction.tordChangeMessageModalVisible,
+        getDetailTabControl:todayOrderDetailAction.tordGetDetailTabControl,
+        getAddressBook: todayOrderDetailAction.tordGetAddressBook,
+        getSmsMessage: todayOrderDetailAction.tordGetSmsMessage
     }, dispatch);
 };
 

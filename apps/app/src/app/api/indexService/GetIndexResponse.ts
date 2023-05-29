@@ -1,7 +1,7 @@
-import { PlatformChargeFeeRateDetail } from './PlatformChargeFeeRateDetail';
-import { PayableRecords } from './PayableRecords';
-import { PlatformProduct } from './PlatformProduct';
 import { AvailableQuotaBar } from './AvailableQuotaBar';
+import { PayableRecords } from './PayableRecords';
+import { PlatformChargeFeeRateDetail } from './PlatformChargeFeeRateDetail';
+import { PlatformProduct } from './PlatformProduct';
 
 export type GetIndexResponse = {
   availableAmount: number;

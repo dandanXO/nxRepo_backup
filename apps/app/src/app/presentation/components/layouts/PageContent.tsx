@@ -4,5 +4,5 @@ interface Props {
   children?: ReactNode;
 }
 export const PageContent = (props: Props) => {
-  return <div className={'px-5 overflow-auto'}>{props.children}</div>;
+  return <div className={'overflow-auto px-5'}>{props.children}</div>;
 };

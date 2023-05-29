@@ -1,6 +1,6 @@
+import { GetLoanDetailChargeFeeDetail } from '../rtk/old/getLoanDetail';
 import { RepayConfirmDetail } from './RepayConfirmDetail';
 import { RepayRecord } from './RepayRecord';
-import { GetLoanDetailChargeFeeDetail } from '../rtk/old/getLoanDetail';
 
 export interface GetLoanDetailResponse {
   applyDate?: string; // 申請日期
@@ -31,13 +31,7 @@ export interface GetLoanDetailResponse {
   repayConfirmDetail?: RepayConfirmDetail;
   repayRecords: RepayRecord[]; // 還款紀錄
   serviceCharge?: number; // 服務費金額(砍頭金)
-  status?:
-    | 'EXTEND'
-    | 'OVERDUE'
-    | 'PAY_OFF'
-    | 'PROCESSING'
-    | 'REJECTED'
-    | 'UNPAID'; //狀態
+  status?: 'EXTEND' | 'OVERDUE' | 'PAY_OFF' | 'PROCESSING' | 'REJECTED' | 'UNPAID'; //狀態
   totalDueAmount?: number; // 訂單總應還金额 (status=UNPAID, OVERDUE才會有)
   totalRepayAmount?: number; // 實際還款金额 summary of repayRecords (status=EXTEND)
 }

@@ -1,19 +1,19 @@
+import * as Sentry from '@sentry/react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
-import { useCallback, useEffect, useState } from 'react';
-import * as Sentry from '@sentry/react';
-import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
+import { AppFlag } from '../../../environments/flag';
 import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateRequest';
 import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateResponse';
-
 import {
   useGetLoanDetailQuery,
   useGetRepayTypesQuery,
   useLazyGetRepayTypesQuery,
   usePostRepayCreateMutation,
 } from '../../api/rtk';
-import { AppFlag } from '../../../environments/flag';
+import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
 
 const useLoanDetailStory = () => {
   const navigate = useNavigate();
@@ -36,10 +36,7 @@ const useLoanDetailStory = () => {
     isFetching: isRepayTypesFetching,
   } = useGetRepayTypesQuery({ orderNo: pageQueryString.orderNo });
 
-  const [
-    triggerGetRepayTypesQuery,
-    { currentData: repayTypes2, isLoading, isFetching },
-  ] = useLazyGetRepayTypesQuery({
+  const [triggerGetRepayTypesQuery, { currentData: repayTypes2, isLoading, isFetching }] = useLazyGetRepayTypesQuery({
     pollingInterval: 0,
     refetchOnFocus: false,
     refetchOnReconnect: false,
@@ -65,8 +62,7 @@ const useLoanDetailStory = () => {
   }, [repayTypes]);
 
   // NOTE: usePostRepayCreateMutation
-  const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =
-    usePostRepayCreateMutation();
+  const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] = usePostRepayCreateMutation();
 
   const postRepayCreateRequest = (props: PostRepayCreateRequest) =>
     new Promise((resolve, reject) => {
@@ -84,15 +80,11 @@ const useLoanDetailStory = () => {
           // error.name = "postRepayCreate"
           // if(err) error.message = JSON.stringify(err)
           //
-          //   Sentry.captureException(error);
+          //   SentryModule.captureException(error);
           reject(err);
         });
     });
-  const handlePostRepayCreate = (
-    isExtend: boolean,
-    isForceApplyAfterRepay: boolean,
-    repayAmount: number
-  ) => {
+  const handlePostRepayCreate = (isExtend: boolean, isForceApplyAfterRepay: boolean, repayAmount: number) => {
     return postRepayCreateRequest({
       extend: isExtend,
       forceApplyAfterRepay: isForceApplyAfterRepay,

@@ -1,12 +1,10 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
+
+import { AppFlag } from '../../../environments/flag';
+import { SentryModule } from '../../modules/sentry';
 import { alertModal } from '../base/alertModal';
 import { runAxios } from '../base/runAxios';
-
-import * as Sentry from '@sentry/react';
-import { AppFlag } from '../../../environments/flag';
-import { AndroidAppInfo } from '../../modules/nativeAppInfo/persistent/androidAppInfo';
-import { SentryModule } from '../../modules/sentry';
 
 export interface CustomAxiosError {
   status: any;
@@ -29,17 +27,12 @@ const axiosBaseQuery =
   > =>
   async ({ url, method, data, params, headers }) => {
     try {
-      const resultData = await runAxios(
-        baseUrl,
-        url,
-        method,
-        data,
-        params,
-        headers
-      );
+      const resultData = await runAxios(baseUrl, url, method, data, params, headers);
       console.log('[app] resultData:', resultData);
       return resultData;
     } catch (axiosError) {
+      console.log('error-2', axiosError);
+
       // NOTE: err
       const err: AxiosError = axiosError as AxiosError;
       console.info('[app] err:', err);
@@ -60,16 +53,12 @@ const axiosBaseQuery =
         };
         message: string;
       };
-      const backendCustomErrorMessage =
-        backendCustomError?.data?.msg || backendCustomError.message;
+      const backendCustomErrorMessage = backendCustomError?.data?.msg || backendCustomError.message;
       console.info('[app] customErrorMessage:', backendCustomErrorMessage);
 
       console.log(err.config.url);
       // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
-      if (
-        err.config.url !== '/api/v2/loan/quota/refresh' &&
-        err.config.url !== '/api/v3/trace/behavior'
-      ) {
+      if (err.config.url !== '/api/v2/loan/quota/refresh' && err.config.url !== '/api/v3/trace/behavior') {
         alertModal(backendCustomErrorMessage);
       }
 
@@ -87,18 +76,7 @@ const axiosBaseQuery =
       });
 
       if (AppFlag.enableSentry) {
-        Sentry.captureException(frontendError, {
-          tags: {
-            packageId: AndroidAppInfo.packageId,
-            uiVersion: AndroidAppInfo.uiVersion,
-            mode: AndroidAppInfo.mode,
-            appName: AndroidAppInfo.appName,
-            domain: AndroidAppInfo.domain,
-          },
-          extra: {
-            environment: AndroidAppInfo.environment,
-          },
-        });
+        SentryModule.captureException(frontendError);
       }
       console.info('[app] frontendError:', frontendError);
 
@@ -108,6 +86,7 @@ const axiosBaseQuery =
           data: err.response?.data || err.message,
         },
       };
+      // throw err;
     }
   };
 

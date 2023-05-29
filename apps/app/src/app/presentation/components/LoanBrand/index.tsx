@@ -1,6 +1,8 @@
-import styled from 'styled-components';
 import React from 'react';
+import styled from 'styled-components';
+
 import { flexCreator } from '@frontend/mobile/shared/ui';
+
 import { environment } from '../../../../environments/environment';
 
 const LoanBrandStyled = styled.div<propsStyles>`
@@ -8,10 +10,7 @@ const LoanBrandStyled = styled.div<propsStyles>`
   font-size: ${({ theme }) => theme.fontSize[16]};
 
   img {
-    width: ${(props) =>
-      props.sizeType === 'small'
-        ? props.theme.fontSize[24]
-        : props.theme.fontSize[38]};
+    width: ${(props) => (props.sizeType === 'small' ? props.theme.fontSize[24] : props.theme.fontSize[38])};
     margin-right: 12px;
     border-radius: 8px;
   }
@@ -40,13 +39,7 @@ interface propsStyles {
 }
 
 const LoanBrand = (props: LoanBrandProps) => {
-  const {
-    iconUrl,
-    productName,
-    sizeType,
-    balance,
-    showCurrency = false,
-  } = props;
+  const { iconUrl, productName, sizeType, balance, showCurrency = false } = props;
   return (
     <LoanBrandStyled className={'loanBrand'} sizeType={sizeType}>
       <div>

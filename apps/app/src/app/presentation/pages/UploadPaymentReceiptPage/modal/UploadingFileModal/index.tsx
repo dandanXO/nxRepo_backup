@@ -1,10 +1,13 @@
-import { Overlay } from '@frontend/mobile/shared/ui';
 import React from 'react';
-import styled from 'styled-components';
-import { StyledLoading } from '@frontend/mobile/shared/ui';
 import { useTranslation } from 'react-i18next';
-import { i18nUploadingFileModal } from './i18n/translations';
+import styled from 'styled-components';
+
+import { Overlay } from '@frontend/mobile/shared/ui';
+import { StyledLoading } from '@frontend/mobile/shared/ui';
+
 import Divider from '../../../../components/Divider';
+import { i18nUploadingFileModal } from './i18n/translations';
+
 const Container = styled.div`
   padding: 8px;
   font-size: 16px;
@@ -55,9 +58,7 @@ const UploadingFileModal = () => {
               <StyledLoading />
             </div>
             <Description className={`mb-6`}>
-              {t(
-                'Your file is uploading, please keep your network connection is active and wait for few minutes'
-              )}
+              {t('Your file is uploading, please keep your network connection is active and wait for few minutes')}
             </Description>
           </Container>
         );

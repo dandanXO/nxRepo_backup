@@ -1,7 +1,8 @@
-import "./app/modules/errorHandler";
-
+import "./polyfills";
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 import { SentryModule } from './app/modules/sentry';
+import "./app/modules/errorHandler";
+import './app/modules/posthog';
 
 import './app/modules/sentry';
 import { StrictMode } from 'react';
@@ -11,10 +12,10 @@ import * as ReactDOM from 'react-dom/client';
 import { environment } from './environments/environment';
 
 // NOTE: Modules
-import { AndroidAppInfo } from './app/modules/nativeAppInfo/persistent/androidAppInfo';
+import { NativeAppInfo } from './app/persistant/nativeAppInfo';
 import { applyCustomTheme } from './app/modules/theme';
 import './app/modules/i18n';
-import './app/modules/datetime/index';
+import './app/modules/timezone';
 // NOTICE : 會引用 dispatch ，所以會先觸發 run root saga
 import './app/modules/window/IWindow';
 
@@ -33,7 +34,6 @@ const renderApp = () => {
   if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
     const appInfoStr = window['AppInfoTask']['getAppInfo']();
     const originalAppInfo = JSON.parse(appInfoStr);
-
     SentryModule.captureMessage(
       'App load Original AndroidAppInfo',
       {
@@ -54,12 +54,10 @@ const renderApp = () => {
   SentryModule.captureMessage('App load AndroidAppInfo');
 
   // NOTICE: Theme
-  applyCustomTheme(AndroidAppInfo);
+  applyCustomTheme(NativeAppInfo);
 
   // NOTE: Starting to render
-  const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-  );
+  const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
   root.render(
     <StrictMode>

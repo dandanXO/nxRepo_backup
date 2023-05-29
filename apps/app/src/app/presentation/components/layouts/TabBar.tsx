@@ -1,11 +1,15 @@
-import { MdPayment } from '@react-icons/all-files/md/MdPayment';
 import { MdAccountBox } from '@react-icons/all-files/md/MdAccountBox';
+import { MdPayment } from '@react-icons/all-files/md/MdPayment';
 import { RiMoneyDollarCircleFill } from '@react-icons/all-files/ri/RiMoneyDollarCircleFill';
+import cx from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
-import cx from 'classnames';
+import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
+import { getToken } from '../../../modules/querystring/getToken';
+import { RootState } from '../../../reduxStore';
+import { IndexPageSagaAction } from '../../pages/IndexPage/userUsecaseSaga/indexPageActions';
 import { PagePathEnum } from '../../pages/PagePathEnum';
-import { getToken } from '../../../modules/location/getToken';
 
 type Props = {
   hasOrder: boolean;
@@ -13,6 +17,7 @@ type Props = {
 export const TabBar = (props: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   // console.log("location", location);
   const isInPage = (pageName: PagePathEnum, exact?: boolean) => {
     if (pageName === PagePathEnum.IndexPage) {
@@ -20,19 +25,16 @@ export const TabBar = (props: Props) => {
     }
     return location.pathname.indexOf(pageName) > -1;
   };
-
+  const userStatus: USER_AUTH_STATE = useSelector((state: RootState) => state.indexPage.user.state);
   return (
-    <div className={'h-16 bg-white border-t sticky bottom-0 flex flex-row'}>
+    <div className={'absolute left-0 right-0 bottom-0 flex h-16 flex-row border-t bg-white'}>
       <div
-        className={'flex-1 flex flex-col justify-center items-center'}
+        className={'flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
           navigate(`${PagePathEnum.IndexPage}?token=${getToken()}`);
         }}
       >
-        <RiMoneyDollarCircleFill
-          color={isInPage(PagePathEnum.IndexPage) ? '#F58B10' : '#D7D7D7'}
-          size={20}
-        />
+        <RiMoneyDollarCircleFill color={isInPage(PagePathEnum.IndexPage) ? '#F58B10' : '#D7D7D7'} size={20} />
         <div
           className={cx({
             'text-orange-300': isInPage(PagePathEnum.IndexPage),
@@ -44,15 +46,16 @@ export const TabBar = (props: Props) => {
       </div>
 
       <div
-        className={'flex-1 flex flex-col justify-center items-center relative'}
+        className={'relative flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
-          navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
+          if (userStatus === USER_AUTH_STATE.ready) {
+            dispatch(IndexPageSagaAction.user.authenticateSaga());
+          } else {
+            navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
+          }
         }}
       >
-        <MdPayment
-          color={isInPage(PagePathEnum.RepaymentPage) ? '#F58B10' : '#D7D7D7'}
-          size={20}
-        />
+        <MdPayment color={isInPage(PagePathEnum.RepaymentPage) ? '#F58B10' : '#D7D7D7'} size={20} />
         <div
           className={cx({
             'text-orange-300': isInPage(PagePathEnum.RepaymentPage),
@@ -61,27 +64,16 @@ export const TabBar = (props: Props) => {
         >
           Payment
         </div>
-        {props.hasOrder && (
-          <div
-            className={
-              'bg-[#F24822] w-2 h-2 rounded-full absolute right-1/3 top-2'
-            }
-          ></div>
-        )}
+        {props.hasOrder && <div className={'absolute right-1/3 top-2 h-2 w-2 rounded-full bg-[#F24822]'}></div>}
       </div>
 
       <div
-        className={'flex-1 flex flex-col justify-center items-center'}
+        className={'flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
           navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
         }}
       >
-        <MdAccountBox
-          color={
-            isInPage(PagePathEnum.PersonalInfoPage) ? '#F58B10' : '#D7D7D7'
-          }
-          size={20}
-        />
+        <MdAccountBox color={isInPage(PagePathEnum.PersonalInfoPage) ? '#F58B10' : '#D7D7D7'} size={20} />
         <div
           className={cx({
             'text-orange-300': isInPage(PagePathEnum.PersonalInfoPage),

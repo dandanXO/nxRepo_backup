@@ -1,7 +1,9 @@
-import * as React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import Card from './index';
+import * as React from 'react';
+
 import { AppThemeProvider } from '@frontend/mobile/shared/ui';
+
+import Card from './index';
 
 export default {
   title: 'Component/Card',

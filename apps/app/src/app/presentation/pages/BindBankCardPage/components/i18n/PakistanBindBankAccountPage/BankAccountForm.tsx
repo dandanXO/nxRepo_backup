@@ -1,12 +1,13 @@
 import React, { ClipboardEvent } from 'react';
+import { useNavigate } from 'react-router';
+import Select from 'react-select';
 
 import { Input } from '@frontend/mobile/shared/ui';
-import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
-import Select from 'react-select';
-import { useNavigate } from 'react-router';
+
+import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
 import { Button } from '../../../../../components/layouts/Button';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
-import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
+import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
   };
 
   return (
-    <div className="grow flex flex-col">
+    <div className="flex grow flex-col">
       <div>
         <div className={'text-sm'}>{'Cardholder Name'}</div>
         <Input
@@ -45,11 +46,10 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onBlur={props.onIbanBlur}
           errorMessage={props.iBanData.errorMessage}
           onCopy={(e) => preventCopyPaste(e)}
-          onPaste={(e) => preventCopyPaste(e)}
           onCut={(e) => preventCopyPaste(e)}
         />
         <div
-          className="text-xs text-cstate-info-main underline leading-none whitespace-nowrap mb-2"
+          className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"
           onClick={() => navigate('iban-finder-modal', { state: 'Bank' })}
         >
           {'Click me to learn where can I find my IBAN number?'}
@@ -87,7 +87,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onBlur={props.onAccountNumberBlur}
           errorMessage={props.bankcardNoData.errorMessage}
           onCopy={(e) => preventCopyPaste(e)}
-          onPaste={(e) => preventCopyPaste(e)}
           onCut={(e) => preventCopyPaste(e)}
         />
       </div>
@@ -105,11 +104,10 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
           onCopy={(e) => preventCopyPaste(e)}
-          onPaste={(e) => preventCopyPaste(e)}
           onCut={(e) => preventCopyPaste(e)}
         />
       </div>
-      <div className="grow flex flex-col justify-end mb-2">
+      <div className="pb-4">
         <Button
           text={'Confirm'}
           className={`${EnumV15GradientButtonClassNames}`}

@@ -1,8 +1,11 @@
-import { Modal } from '@frontend/mobile/shared/ui';
 import i18next from 'i18next';
-import { getThemeConfigByCountry } from '../../modules/theme/getThemeConfigByCountry';
+
+import { Modal } from '@frontend/mobile/shared/ui';
+
 import { environment } from '../../../environments/environment';
 import theme from '../../../environments/theme/india/v55/tailwind.theme';
+import { getThemeConfigByCountry } from '../../modules/theme/getThemeConfigByCountry';
+
 // const customColors = require("../../../environments/theme/india/v55/tailwind.colors");
 
 // NOTICE: 下面得 import 雖然 app.tsx 已經impoert

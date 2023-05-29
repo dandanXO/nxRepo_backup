@@ -1,12 +1,14 @@
-import { useNavigate } from 'react-router';
-import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
-import { useCallback, useEffect, useState } from 'react';
 import * as Sentry from '@sentry/react';
-import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
-import { usePostRepayCreateMutation } from '../../api/rtk';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+
+import { AppFlag } from '../../../environments/flag';
 import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateRequest';
 import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateResponse';
-import { AppFlag } from '../../../environments/flag';
+import { usePostRepayCreateMutation } from '../../api/rtk';
+import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
 
 const useExtendCreate = () => {
   const navigate = useNavigate();
@@ -16,8 +18,7 @@ const useExtendCreate = () => {
   const token = pageQueryString.token;
 
   // NOTE: usePostRepayCreateMutation
-  const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =
-    usePostRepayCreateMutation();
+  const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] = usePostRepayCreateMutation();
 
   const postRepayCreateRequest = (props: PostRepayCreateRequest) =>
     new Promise((resolve, reject) => {
@@ -35,7 +36,7 @@ const useExtendCreate = () => {
           // error.name = "postRepayCreate"
           // if (err) error.message = JSON.stringify(err)
           //
-          //   Sentry.captureException(error);
+          //   SentryModule.captureException(error);
           reject(err);
         });
     });

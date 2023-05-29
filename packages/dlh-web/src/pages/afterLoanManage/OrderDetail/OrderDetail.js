@@ -273,7 +273,6 @@ class OrderDetail extends Component{
     //渲染订单信息
     renderOrderCard = () => {
         const { orderData: { orderInfo = {} }, intl } = this.props;
-        console.log(orderInfo);
         const info = orderInfo['icloud'] || {};
         const isOlduserStyle = orderInfo['isOlduser'] === '是' ? { color: 'red' } : {};
         const standOverNumberStyle = Number(orderInfo.standOverNumber) > 0 ? { color: 'red' } : {};
@@ -343,6 +342,7 @@ class OrderDetail extends Component{
     //渲染客户信息
     renderUserInfo = () => {
         const { orderData: { userInfo = {} }, intl } = this.props;
+
         return (
             <div>
                 <Card className={styles.cardBackground} type={'inner'} title={intl.formatMessage({id : "windowPage.person.info"})}>
@@ -420,17 +420,56 @@ class OrderDetail extends Component{
         );
     }
 
+
+
+    handleAddressBookChange = (info) => {
+        const { match, getAddressBook } = this.props;
+        const userId = match['params']['uid']
+        getAddressBook({ userId, pageNum: info.current, pageSize: info.pageSize })
+    }
     //渲染通讯录
     renderAddressBook = () => {
-        const { orderData: { addressBook = [] } ,intl } = this.props;
+        const { addressBook:{data=[],pagination={}}  ,intl } = this.props;
         const columns = [
-            { title: intl.formatMessage({id : "page.search.list.name"}), dataIndex: 'contactsName', key: 'contactsName' },
-            { title: intl.formatMessage({id : "page.search.list.mobile"}), dataIndex: 'contactsPhone', key: 'contactsPhone' }
+            { title: intl.formatMessage({id : "page.search.list.name"}), dataIndex: 'name', key: 'name' },
+            { title: intl.formatMessage({id : "page.search.list.mobile"}), dataIndex: 'phone', key: 'phone' },
+            {
+                title: intl.formatMessage({ id: "page.table.last.add.time" }), dataIndex: 'lastUpdateTime', key: 'lastUpdateTime',
+                render (text) {
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
+                }
+            }
         ];
         return (
-            <CommonTable columns={columns} dataSource={addressBook} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
+            <CommonTable columns={columns} dataSource={data}  pagination={pagination} handlePageChange={this.handleAddressBookChange} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
         );
     }
+
+
+    handleSmsMessageChange = (info) => {
+        const { match, getSmsMessage } = this.props;
+        const userId = match['params']['uid']
+        getSmsMessage({ userId, pageNum: info.current, pageSize: info.pageSize })
+    }
+    //渲染通讯录
+    renderSmsMessage = () => {
+        const { smsMessage: { data = [], pagination = {} }, intl } = this.props;
+        const columns = [
+            { title: intl.formatMessage({id : "page.table.send.number"}), dataIndex: 'phone', key: 'phone' },
+            { title: intl.formatMessage({id : "page.table.content"}), dataIndex: 'content', key: 'content' ,width:'50%'},
+            { title: intl.formatMessage({id : "page.table.sending.type"}), dataIndex: 'direction', key: 'direction' },
+            {
+                title: intl.formatMessage({ id: "page.table.sending.time" }), dataIndex: 'time', key: 'time',
+                render (text) {
+                    return moment(text).format('YYYY-MM-DD HH:mm:ss');
+                }
+            },
+        ];
+        return (
+            <CommonTable columns={columns} dataSource={data}  pagination={pagination} handlePageChange={this.handleSmsMessageChange} title={() => <div><FormattedMessage id="windowPage.contat.list.info" /></div>}/>
+        );
+    }
+
     //渲染运营商信息
     renderOperatorMsg = () => {
         const { orderData: { operator = {} } } = this.props;
@@ -476,12 +515,20 @@ class OrderDetail extends Component{
     }
 
     componentDidMount() {
-        const { match, location: { state }, getOrderData, getAllUrgeRecord } = this.props;
-        const userId = state ? state['userId'] : '';
+        const {match, getOrderData, getAllUrgeRecord ,getDetailTabControl , getAddressBook,getSmsMessage} = this.props;
+        const userId = match['params']['uid']
         const params = match['params']['id'] || '';
+
         getOrderData({ overdueId: params }, { userId });
         getAllUrgeRecord({ overdueId: params });
         const _this = this;
+
+        // 取得後台使用者開關 (是否可查看 tab -通訊錄 & 手機短信)
+        getDetailTabControl();
+        getAddressBook({ userId, pageNum: 1, pageSize: 10 });
+        getSmsMessage({ userId, pageNum: 1, pageSize: 10 });
+
+
 
         loadRepaymentLinkFlag();
 
@@ -497,6 +544,7 @@ class OrderDetail extends Component{
           });
         }
     }
+
     componentWillUnmount() {
         const { setOrderData } = this.props;
         setOrderData({});
@@ -508,7 +556,7 @@ class OrderDetail extends Component{
 
     render() {
         const ele = this.renderBtn();
-        const { visible, recordVisible, recordData, intl, repaymentVisible, messageVisible, messageContent,changeMessageVisible } = this.props;
+        const { visible, recordVisible, recordData, intl, repaymentVisible, messageVisible, messageContent,changeMessageVisible,detailTabControl } = this.props;
         const { remark } = this.state;
         return (
             <div>
@@ -519,8 +567,11 @@ class OrderDetail extends Component{
                     <TabPane tab={intl.formatMessage({id : "windowPage.customer.msg"})} key="2">
                         {this.renderUserInfo()}
                     </TabPane>
-                    <TabPane tab={intl.formatMessage({id : "windowPage.contact.list"})} key="3">
+                    <TabPane tab={intl.formatMessage({id : "windowPage.contact.list"})} key="3" disabled={detailTabControl.contactSwitch}>
                         {this.renderAddressBook()}
+                    </TabPane>
+                    <TabPane tab={intl.formatMessage({id : "windowPage.sms.list"})} key="4"  disabled={detailTabControl.smsSwitch}>
+                        {this.renderSmsMessage()}
                     </TabPane>
                 </Tabs>
                 <AddUrgeModal intl={intl} visible={visible} handleCancel={this.urgeModalCancel} handleOk={this.urgeHandleOk} remark={remark}/>
@@ -601,6 +652,9 @@ const mapStateToProps = (state) => {
         repaymentVisible:orderDetailState['repaymentVisible'],
         messageContent:orderDetailState['messageContent'],
         messageVisible:orderDetailState['messageVisible'],
+        detailTabControl:orderDetailState['detailTabControl'],
+        addressBook:orderDetailState['addressBook'],
+        smsMessage:orderDetailState['smsMessage'],
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -615,7 +669,10 @@ const mapDispatchToProps = (dispatch) => {
         changeRepaymentVisible: orderDetailAction.ordChangeRepaymentModalVisible,
         sendPartialRepayment:orderDetailAction.ordPartialRepayment,
         setMessageContent:orderDetailAction.ordSetMessageContent,
-        changeMessageVisible:orderDetailAction.ordChangeMessageModalVisible
+        changeMessageVisible:orderDetailAction.ordChangeMessageModalVisible,
+        getDetailTabControl:orderDetailAction.ordGetDetailTabControl,
+        getAddressBook: orderDetailAction.ordGetAddressBook,
+        getSmsMessage: orderDetailAction.ordGetSmsMessage
     }, dispatch);
 };
 

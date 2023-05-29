@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export type UserResendSecondsActionPayload = {
   resendSeconds: number;
@@ -10,10 +10,7 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    updateResendSeconds: (
-      state,
-      action: PayloadAction<UserResendSecondsActionPayload['resendSeconds']>
-    ) => {
+    updateResendSeconds: (state, action: PayloadAction<UserResendSecondsActionPayload['resendSeconds']>) => {
       state.resendSeconds = action.payload;
     },
   },

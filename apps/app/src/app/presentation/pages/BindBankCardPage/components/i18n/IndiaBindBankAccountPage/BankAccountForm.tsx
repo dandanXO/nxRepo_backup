@@ -1,23 +1,20 @@
 import React from 'react';
+
+import { Input } from '@frontend/mobile/shared/ui';
+
+import { Button } from '../../../../../components/layouts/Button';
 import { IIndiaBankAccountForm } from '../../../types/IBankAccountForm';
 import { Form } from '../../Form';
 import { Paragraph } from '../../Paragraph';
-import { Button } from '../../../../../components/layouts/Button';
-import { Input } from '@frontend/mobile/shared/ui';
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
   return (
-    <div className="flex flex-col grow">
+    <div className="flex grow flex-col">
       <Form className="grow">
-        <div className="text-ctext-primary text-xs mb-1">
-          {'For KYC, your Cardholder name and Aadhaar name should be match.'}
+        <div className="text-ctext-primary mb-1 text-xs">
+          {'For KYC, your Cardholder name and PAN card name should be match.'}
         </div>
-        <Input
-          className="mb-3 text-sm"
-          label={'Cardholder Name'}
-          value={props.cardholderName}
-          disabled
-        />
+        <Input className="mb-3 text-sm" label={'Cardholder Name'} value={props.cardholderName} disabled />
         <Input
           className="mb-3 text-sm"
           label={'IFSC Code (11 digits)'}
@@ -42,16 +39,11 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
-        <Input
-          className="mb-4 text-sm"
-          label={'UPI ID'}
-          value={props.upiData.data}
-          onChange={props.onUPIIDChange}
-        />
+        <Input className="mb-4 text-sm" label={'UPI ID'} value={props.upiData.data} onChange={props.onUPIIDChange} />
       </Form>
       <div className="mb-4">
         <Button
-          text={'Save'}
+          text={'Confirm'}
           onClick={() => {
             !props.isFormPending && props.confirm();
           }}

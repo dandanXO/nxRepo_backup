@@ -8,11 +8,7 @@ interface Props {
 }
 export const Navigation = (props: Props) => {
   return (
-    <div
-      className={
-        'navigation h-14 bg-white flex flex-row justify-between items-center sticky top-0 px-3 z-10'
-      }
-    >
+    <div className={'navigation sticky top-0 z-10 flex h-14 flex-row items-center justify-between bg-white px-3'}>
       {props.back && (
         <div
           onClick={() => {
@@ -22,7 +18,7 @@ export const Navigation = (props: Props) => {
           {typeof props.back !== 'undefined' && <IoChevronBack size={20} />}
         </div>
       )}
-      <div className={'font-normal font-medium grow mx-3'}>{props.title}</div>
+      <div className={'mx-3 grow font-normal font-medium'}>{props.title}</div>
       {props.to && (
         <div
           onClick={() => {

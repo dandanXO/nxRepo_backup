@@ -1,14 +1,13 @@
-import { Route } from 'react-router';
-import React from 'react';
-import ApplicationProgressPage from '../ApplicationProgressPage';
-import { PagePathEnum } from '../PagePathEnum';
 import cx from 'classnames';
-import { Button } from '../../components/layouts/Button';
+import React from 'react';
+import { Route } from 'react-router';
 import { useNavigate } from 'react-router';
-
 import useErrorBoundary from 'use-error-boundary';
 
-import { ErrorBoundary as CustomErrorBoundary } from '../../../modules/ErrorBoundary';
+import { ErrorBoundary as CustomErrorBoundary } from '../../../modules/errorHandler/ErrorBoundary';
+import { Button } from '../../components/layouts/Button';
+import ApplicationProgressPage from '../ApplicationProgressPage';
+import { PagePathEnum } from '../PagePathEnum';
 
 const JustRenderMe = () => {
   throw new Error('💥');
@@ -29,11 +28,7 @@ export const ErrorPage = () => {
       {didCatch ? (
         <div>
           <p>An error has been caught: {error.message}</p>
-          <Button
-            dataTestingID={'apply'}
-            text={'Reset Error'}
-            onClick={() => reset()}
-          />
+          <Button dataTestingID={'apply'} text={'Reset Error'} onClick={() => reset()} />
         </div>
       ) : (
         <ErrorBoundary>

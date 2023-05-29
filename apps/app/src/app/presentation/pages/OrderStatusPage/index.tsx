@@ -1,15 +1,13 @@
-// import Button from "../../components/Button";
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
-import { useEffect } from 'react';
-import { Navigation } from '../../components/layouts/Navigation';
-import { getOrderNo } from '../../../modules/location/getOrderNo';
-
-import { isInAndroid } from '../../../modules/window/isInAndroid';
-import { OrderStatusItem } from './OrderStatusItem';
 import moment from 'moment';
+import { useLocation, useNavigate } from 'react-router';
+
 import { ApproveRecord } from '../../../api/loanService/ApproveRecord';
+import { getToken } from '../../../modules/querystring/getToken';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
+import { Navigation } from '../../components/layouts/Navigation';
 import { PageContent } from '../../components/layouts/PageContent';
+import { PagePathEnum } from '../PagePathEnum';
+import { OrderStatusItem } from './OrderStatusItem';
 
 const OrderStatusPage = (props: any) => {
   const navigate = useNavigate();
@@ -18,11 +16,11 @@ const OrderStatusPage = (props: any) => {
 
   return (
     <div>
-      {!isInAndroid() && (
+      {!isShowNavigation() && (
         <Navigation
-          title={'Repay Details'}
+          title={'Order Status'}
           back={() => {
-            navigate(-1);
+            navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
           }}
         />
       )}

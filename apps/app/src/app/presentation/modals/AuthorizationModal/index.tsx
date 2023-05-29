@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
-import { Horizontal } from '../../components/layouts/Horizontal';
+
 import { CloseButton } from '../../components/layouts/CloseButton';
+import { Horizontal } from '../../components/layouts/Horizontal';
 
 type Props = {
   onClose: () => void;
@@ -14,21 +15,19 @@ export const AuthorizationModal = (props: Props) => {
   return (
     <div
       className={
-        'loan-agreement-modal z-10 w-screen h-screen bg-black bg-opacity-80 p-5 fixed top-0 bottom-0 flex flex-col justify-center items-center'
+        'loan-agreement-modal fixed top-0 bottom-0 z-10 flex h-screen w-screen flex-col items-center justify-center bg-black bg-opacity-80 p-5'
       }
     >
-      <div className={'modal-inner w-11/12 px-3 py-4 bg-white rounded-lg'}>
-        <div className={'font-medium mb-3 flex flex-col items-center relative'}>
+      <div className={'modal-inner w-11/12 rounded-lg bg-white px-3 py-4'}>
+        <div className={'relative mb-3 flex flex-col items-center font-medium'}>
           <div className={'z-10'} onClick={onClickClose}>
             <CloseButton />
           </div>
           <div className={'header-title'}>Authorization</div>
-          <div className={'header-subtitle text-xs text-gray-500'}>
-            may request access to
-          </div>
+          <div className={'header-subtitle text-xs text-gray-500'}>may request access to</div>
         </div>
 
-        <div className={'flex flex-col font-light h-[400px] overflow-auto'}>
+        <div className={'flex h-[400px] flex-col overflow-auto font-light'}>
           <div className={'mb-3'}>
             <div className={'title'}>Contact</div>
             <div className={'content text-xs text-gray-500'}>
@@ -39,43 +38,38 @@ export const AuthorizationModal = (props: Props) => {
           <div className={'mb-3'}>
             <div className={'title'}>SMS</div>
             <div className={'content text-xs text-gray-500'}>
-              We need your authorization to collect and upload SMS data to
-              assist us in using the information you provide for credit scoring
-              and risk assessment.{' '}
+              We need your authorization to collect and upload SMS data to assist us in using the information you
+              provide for credit scoring and risk assessment.{' '}
             </div>
           </div>
 
           <div className={'mb-3'}>
             <div className={'title'}>AppList</div>
             <div className={'content text-xs text-gray-500'}>
-              We need your authorization to collect and upload the AppList to
-              assist us in using the information you provide for credit scoring
-              and risk assessment.{' '}
+              We need your authorization to collect and upload the AppList to assist us in using the information you
+              provide for credit scoring and risk assessment.{' '}
             </div>
           </div>
 
           <div className={'mb-3'}>
             <div className={'title'}>Photo</div>
             <div className={'content text-xs text-gray-500'}>
-              We need your authorization to collect and upload photos to assist
-              us in using the information you provide for credit scoring and
-              risk assessment.{' '}
+              We need your authorization to collect and upload photos to assist us in using the information you provide
+              for credit scoring and risk assessment.{' '}
             </div>
           </div>
 
           <div className={'mb-3'}>
             <div className={'title'}>Phone State</div>
             <div className={'content text-xs text-gray-500'}>
-              We need your authorization to collect and upload the phone state
-              to assist us in using the information you provide for credit
-              scoring and risk assessment.{' '}
+              We need your authorization to collect and upload the phone state to assist us in using the information you
+              provide for credit scoring and risk assessment.{' '}
             </div>
           </div>
 
           <div className={'description text-xs'}>
-            We will only begin to access the data once you allow the permission,
-            and will continue to collect and upload the data until your
-            application is successfully submitted.
+            We will only begin to access the data once you allow the permission, and will continue to collect and upload
+            the data until your application is successfully submitted.
           </div>
         </div>
 

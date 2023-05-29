@@ -1,15 +1,17 @@
 // NOTE: PageRedux
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment-timezone';
-import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
-import { ORDER_STATE } from '../domain/order/ORDER_STATE';
-import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
-import { PayableRecords } from '../api/indexService/PayableRecords';
+
 import { GetIndexResponse } from '../api/indexService/GetIndexResponse';
+import { GetOpenIndexResponse } from '../api/indexService/GetOpenIndexResponse';
+import { PayableRecords } from '../api/indexService/PayableRecords';
 import { GetQuotaModelStatusResponse } from '../api/loanService/GetQuotaModelStatusResponse';
 import { GetUserInfoServiceResponse } from '../api/userService/GetUserInfoServiceResponse';
-import { GetOpenIndexResponse } from '../api/indexService/GetOpenIndexResponse';
-import { getQuotaModelStatusAction } from '../usecaseFlow/type/userUsecaseSaga/indexPageSaga/userReacquireCreditSaga';
+import { ORDER_STATE } from '../domain/order/ORDER_STATE';
+import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
+import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
+import { NativeAppInfo } from '../persistant/nativeAppInfo';
+import { getQuotaModelStatusAction } from '../presentation/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
 
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;
@@ -20,6 +22,7 @@ export interface InitialState {
   user: {
     state: USER_AUTH_STATE;
     userName: string;
+    maskUserName: string;
   };
   order: {
     state: ORDER_STATE;
@@ -64,6 +67,7 @@ const initialState: InitialState = {
   user: {
     state: USER_AUTH_STATE.ready,
     userName: '',
+    maskUserName: '',
   },
   order: {
     state: ORDER_STATE.empty,
@@ -100,11 +104,14 @@ export const indexPageSlice = createSlice({
   name: 'indexPage',
   initialState,
   reducers: {
-    updateUserAPI: (
-      state,
-      action: PayloadAction<GetUserInfoServiceResponse>
-    ) => {
-      state.user.userName = action.payload.userName;
+    updateUserAPI: (state, action: PayloadAction<GetUserInfoServiceResponse>) => {
+      // state.user.userName = action.payload.userName;
+      state.user.userName = NativeAppInfo.phoneNo;
+      state.user.maskUserName =
+        NativeAppInfo?.phoneNo?.length >= 10
+          ? NativeAppInfo?.phoneNo?.slice(0, 3) + '****' + NativeAppInfo?.phoneNo?.slice(7, 10)
+          : NativeAppInfo?.phoneNo;
+
       if (action.payload.status === 0) {
         state.user.state = USER_AUTH_STATE.ready;
       } else if (action.payload.status === 1) {
@@ -116,7 +123,8 @@ export const indexPageSlice = createSlice({
       }
     },
     updateIndexAPI: (state, action: PayloadAction<GetIndexResponse>) => {
-      // console.log("updateIndexAPI", state, action)
+      console.log('updateIndexAPI', state, action);
+
       state.indexAPI = action.payload;
       state.sharedIndex.marquee = action.payload.marquee;
 
@@ -147,25 +155,22 @@ export const indexPageSlice = createSlice({
           return order.overdue;
         });
 
-        const isAnyOrderComingOverdue = action.payload.payableRecords.some(
-          (order) => {
-            const currentTime = moment();
-            const expireTime = moment(order.dueDate);
-            const overdueDay = expireTime.diff(currentTime, 'days');
-            // const overdueHour = expireTime.diff(currentTime, "hours");
-            // const overdueMinute = expireTime.diff(currentTime, "minute");
-            const isOverdueEqual3Days = overdueDay <= 3;
-            // console.log("currentTime", currentTime.format())
-            // console.log("expireTime", expireTime.format())
-            // console.log("overdueDay", overdueDay)
-            // console.log("overdueHour", overdueHour)
-            // console.log("overdueMinute", overdueMinute)
-            // console.log("isOverdueEqual3Days", isOverdueEqual3Days);
-            if (isOverdueEqual3Days)
-              state.order.overdueOrComingOverdueOrder = order;
-            return isOverdueEqual3Days;
-          }
-        );
+        const isAnyOrderComingOverdue = action.payload.payableRecords.some((order) => {
+          const currentTime = moment();
+          const expireTime = moment(order.dueDate);
+          const overdueDay = expireTime.diff(currentTime, 'days');
+          // const overdueHour = expireTime.diff(currentTime, "hours");
+          // const overdueMinute = expireTime.diff(currentTime, "minute");
+          const isOverdueEqual3Days = overdueDay <= 3;
+          // console.log("currentTime", currentTime.format())
+          // console.log("expireTime", expireTime.format())
+          // console.log("overdueDay", overdueDay)
+          // console.log("overdueHour", overdueHour)
+          // console.log("overdueMinute", overdueMinute)
+          // console.log("isOverdueEqual3Days", isOverdueEqual3Days);
+          if (isOverdueEqual3Days) state.order.overdueOrComingOverdueOrder = order;
+          return isOverdueEqual3Days;
+        });
 
         // NOTICE: 訂單優先判斷
         if (isOrderOverdue) {
@@ -187,10 +192,7 @@ export const indexPageSlice = createSlice({
       // NOTE: 2.風控沒過，沒額度的重刷
 
       // NOTICE: 風控判斷
-      if (
-        typeof action.payload.offerExpireTime !== 'undefined' &&
-        isRiskControlOverdue
-      ) {
+      if (typeof action.payload.offerExpireTime !== 'undefined' && isRiskControlOverdue) {
         // NOTE: 可重刷
         if (action.payload.refreshable === true) {
           if (action.payload.noQuotaByRetryFewTimes === false) {
@@ -248,26 +250,17 @@ export const indexPageSlice = createSlice({
   },
   extraReducers: (builder) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    builder.addCase(
-      getQuotaModelStatusAction.loadingAction.type,
-      (state, action) => {
-        state.api.reacquire.isLoading = true;
-        // state.api.reacquire.isFetching = true;
-      }
-    ),
-      builder.addCase(
-        getQuotaModelStatusAction.successAction.type,
-        (state, action) => {
-          state.api.reacquire.isLoading = false;
-          state.api.reacquire.isSuccess = true;
-        }
-      ),
-      builder.addCase(
-        getQuotaModelStatusAction.failureAction.type,
-        (state, action) => {
-          state.api.reacquire.isLoading = false;
-          state.api.reacquire.isError = true;
-        }
-      );
+    builder.addCase(getQuotaModelStatusAction.loadingAction.type, (state, action) => {
+      state.api.reacquire.isLoading = true;
+      // state.api.reacquire.isFetching = true;
+    }),
+      builder.addCase(getQuotaModelStatusAction.successAction.type, (state, action) => {
+        state.api.reacquire.isLoading = false;
+        state.api.reacquire.isSuccess = true;
+      }),
+      builder.addCase(getQuotaModelStatusAction.failureAction.type, (state, action) => {
+        state.api.reacquire.isLoading = false;
+        state.api.reacquire.isError = true;
+      });
   },
 });

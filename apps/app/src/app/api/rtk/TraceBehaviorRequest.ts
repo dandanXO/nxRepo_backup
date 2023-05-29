@@ -1,14 +1,7 @@
 export type TraceBehaviorRequest = BehaviorLogRequest[];
 
 export type BehaviorLogRequest = {
-  actionType:
-    | 'CLICK'
-    | 'EXIT'
-    | 'INPUT'
-    | 'LAUNCH'
-    | 'SCROLL'
-    | 'VISIT'
-    | 'ZOOM';
+  actionType: 'CLICK' | 'EXIT' | 'INPUT' | 'LAUNCH' | 'SCROLL' | 'VISIT' | 'ZOOM';
   // 客户行为
   content?: string;
   // 输入框内容(仅输入行为，其他为缺失)

@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
 import cx from 'classnames';
-import { IndexPageProps } from '../../../../../reduxStore';
-import { PageState, PageStateEnum } from '../../index';
-import { USER_AUTH_STATE } from '../../../../../domain/user/USER_AUTH_STATE';
+import { ReactNode } from 'react';
+
 import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../../../../../domain/risk/RISK_CONTROL_STATE';
+import { IndexPageProps } from '../../../../../reduxStore';
+import { PageState, PageStateEnum } from '../../index';
 
 type Props = {
   children?: ReactNode;
@@ -14,7 +14,7 @@ type Props = {
 export const StatusContainer = (props: Props) => {
   return (
     <div
-      className={cx('loan-amount flex flex-col p-2 w-full rounded-t-lg', {
+      className={cx('loan-amount flex w-full flex-col rounded-t-lg p-2', {
         'bg-[#D9D9D9]':
           props.pageState === PageStateEnum.UserAuthing ||
           props.pageState === PageStateEnum.UserRejected ||
@@ -22,8 +22,7 @@ export const StatusContainer = (props: Props) => {
           props.state.order.state === ORDER_STATE.hasOverdueOrder ||
           props.state.order.state === ORDER_STATE.reject ||
           props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
-          props.state.riskControl.state ===
-            RISK_CONTROL_STATE.expired_refresh_able,
+          props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
         'bg-orange-400':
           props.pageState !== PageStateEnum.UserAuthing &&
           props.pageState !== PageStateEnum.UserRejected &&
@@ -31,8 +30,7 @@ export const StatusContainer = (props: Props) => {
           props.state.order.state !== ORDER_STATE.hasOverdueOrder &&
           props.state.order.state !== ORDER_STATE.reject &&
           props.state.riskControl.state !== RISK_CONTROL_STATE.empty_quota &&
-          props.state.riskControl.state !==
-            RISK_CONTROL_STATE.expired_refresh_able,
+          props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able,
       })}
     >
       {props.children}

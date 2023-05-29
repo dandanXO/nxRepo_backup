@@ -1,5 +1,6 @@
-import { Button } from '../../components/layouts/Button';
 import { useCallback } from 'react';
+
+import { Button } from '../../components/layouts/Button';
 
 type Props = {
   onClose: () => void;
@@ -11,26 +12,19 @@ export const QRSuccessModal = (props: Props) => {
   return (
     <div
       className={
-        'loan-agreement-modal z-10 w-screen h-screen bg-black bg-opacity-80 p-5 sticky top-0 bottom-0 flex flex-col justify-center items-center'
+        'loan-agreement-modal sticky top-0 bottom-0 z-10 flex h-screen w-screen flex-col items-center justify-center bg-black bg-opacity-80 p-5'
       }
     >
-      <div
-        className={
-          'modal-inner w-11/12 px-3 py-4 bg-white rounded-lg text-center'
-        }
-      >
-        <div className={'font-medium mb-3 flex flex-col items-center'}>
+      <div className={'modal-inner w-11/12 rounded-lg bg-white px-3 py-4 text-center'}>
+        <div className={'mb-3 flex flex-col items-center font-medium'}>
           <div>Your loan application</div>
           <div>has been submitted</div>
         </div>
 
-        <div className={'flex flex-col mb-3 font-light'}>
-          <div className={'mb-3'}>
-            The loan amount will be based on the latest review result.
-          </div>
+        <div className={'mb-3 flex flex-col font-light'}>
+          <div className={'mb-3'}>The loan amount will be based on the latest review result.</div>
           <div>
-            Please be patient and wait for the review result. You can check the
-            order in the loan records later.
+            Please be patient and wait for the review result. You can check the order in the loan records later.
           </div>
         </div>
 

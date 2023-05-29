@@ -1,11 +1,44 @@
 {
   "presets": [
     [
-      "@nrwl/react/babel",
+      "@babel/preset-env",
       {
-        "runtime": "automatic"
+        "debug": true,
+        "bugfixes": true,
+        "useBuiltIns": false,
+        "corejs": {
+          "version": 3,
+          "proposals": true
+        },
+        "targets": "cover 99%",
+        "forceAllTransforms": true,
+        "spec": true,
+        "loose": true,
+        "include": [
+
+        ]
       }
     ]
   ],
-  "plugins": [["styled-components", { "pure": true, "ssr": true }]]
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": {
+          "version": 3,
+          "proposals": true,
+          "useBuiltIns": false,
+          "helpers": true,
+          "regenerator": true,
+          "absoluteRuntime": true
+        }
+      }
+    ],
+    ["styled-components", { "pure": true, "ssr": true }],
+    [
+      "@loadable/babel-plugin"
+    ]
+
+
+  ]
 }

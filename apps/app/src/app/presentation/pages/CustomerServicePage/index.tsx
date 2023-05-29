@@ -1,13 +1,14 @@
-import { Navigation } from '../../components/layouts/Navigation';
-import { useNavigate } from 'react-router';
-import CustomerServiceIcon from '../../components/images/CustomerServiceIcon.svg';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+
 import { RootState } from '../../../reduxStore';
+import CustomerServiceIcon from '../../components/images/CustomerServiceIcon.svg';
 import { Button } from '../../components/layouts/Button';
+import { Navigation } from '../../components/layouts/Navigation';
 
 const CustomerServicePage = () => {
   const navigate = useNavigate();
-  const { app } = useSelector((state: RootState) => state);
+  const { app, indexPage } = useSelector((state: RootState) => state);
   return (
     <div>
       <Navigation
@@ -16,7 +17,7 @@ const CustomerServicePage = () => {
           navigate(-1);
         }}
       />
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center">
         <div className="mt-16 mb-4">
           <img src={CustomerServiceIcon} alt="" />
         </div>
@@ -31,14 +32,17 @@ const CustomerServicePage = () => {
         <div>{`Email: ${app?.init?.csEmail || ''}`}</div>
         <div>{`Whatsapp: ${app?.init?.csWhatsApp || ''}`}</div>
         <div>{`Phone: ${app?.init?.csContactNumber || ''}`}</div>
-        <div
-          className="text-sm underline decoration-blue-500 text-blue-500 mt-10"
-          onClick={() => {
-            navigate('/v2/online-customer-service');
-          }}
-        >
-          Online Customer Service
-        </div>
+
+        {indexPage?.indexAPI?.customerServiceUrl && (
+          <div
+            className="mt-10 text-sm text-blue-500 underline decoration-blue-500"
+            onClick={() => {
+              navigate('/v2/online-customer-service');
+            }}
+          >
+            Online Customer Service
+          </div>
+        )}
       </div>
     </div>
   );

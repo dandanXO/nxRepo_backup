@@ -14,8 +14,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Account number must be between from 9 to 18 digits only.':
         'Account number must be between from 9 to 18 digits only.',
       'Confirm Account Number': 'Confirm Account Number',
-      'Please make sure your account number match.':
-        'Please make sure your account number match.',
+      'Please make sure your account number match.': 'Please make sure your account number match.',
       'Unchangeable after linked, please check before submission.':
         'Unchangeable after linked, please check before submission.',
 
@@ -29,32 +28,26 @@ export const i18nBankBindAccountPage: i18nComponent = {
 
       // NOTICE: Pakistan
       // NOTE: Mobile Wallet
-      'Choose the method to receive the money':
-        'Choose the method to receive the money',
+      'Choose the method to receive the money': 'Choose the method to receive the money',
       'Mobile wallet': 'Mobile wallet',
       'Bank account': 'Bank account',
-      'Please select the of your mobile wallet':
-        'Please select the of your mobile wallet',
+      'Please select the of your mobile wallet': 'Please select the of your mobile wallet',
       'Your mobile wallet account': 'Your mobile wallet account',
       'Wallet Account Number': 'Wallet Account Number',
-      'Account number should be 11 digits starting with 0.':
-        'Account number should be 11 digits starting with 0.',
+      'Account number should be 11 digits starting with 0.': 'Account number should be 11 digits starting with 0.',
       // NOTE: Bank Account
       'Select a mobile wallet': 'Select a mobile wallet',
       'Your IBAN Number (24 digits)': 'Your IBAN Number (24 digits)',
       'This field cannot be left blank.': 'This field cannot be left blank.',
-      'IBAN number must be 24 digits only.':
-        'IBAN number must be 24 digits only.',
-      'Click me to learn where can I find my IBAN number?':
-        'Click me to learn where can I find my IBAN number?',
+      'IBAN number must be 24 digits only.': 'IBAN number must be 24 digits only.',
+      'Click me to learn where can I find my IBAN number?': 'Click me to learn where can I find my IBAN number?',
 
       // NOTICE: Bangladesh
       // NOTE: Mobile Wallet
       'Your mobile wallet number': 'Your mobile wallet number',
       'Confirm your number': 'Confirm your number',
       'Phone number should be 10 digits.': 'Phone number should be 10 digits.',
-      'Please make sure your mobile number match.':
-        'Please make sure your mobile number match.',
+      'Please make sure your mobile number match.': 'Please make sure your mobile number match.',
     },
     bn_BD: {
       // NOTICE: common
@@ -95,10 +88,8 @@ export const i18nBankBindAccountPage: i18nComponent = {
 
       'Your mobile wallet number': '১। আপনার মোবাইল ওয়ালেট নম্বর',
       'Confirm your number': '২। আপনার নম্বরটি নিশ্চিত করুন',
-      'Phone number should be 10 digits.':
-        'ফোন নম্বরটি 10 ​​সংখ্যার হওয়া উচিত।',
-      'Please make sure your mobile number match.':
-        'আপনার মোবাইল নম্বর মেলে তা নিশ্চিত করুন.',
+      'Phone number should be 10 digits.': 'ফোন নম্বরটি 10 ​​সংখ্যার হওয়া উচিত।',
+      'Please make sure your mobile number match.': 'আপনার মোবাইল নম্বর মেলে তা নিশ্চিত করুন.',
     },
   },
 };

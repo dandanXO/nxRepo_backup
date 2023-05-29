@@ -1,31 +1,28 @@
 // import Button from "../../components/Button";
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
 import { useEffect } from 'react';
-import { Navigation } from '../../components/layouts/Navigation';
-import { getOrderNo } from '../../../modules/location/getOrderNo';
-import { getToken } from '../../../modules/location/getToken';
-import PakistanRepaymentDetailPage from './i18n/PakistanRepaymentDetailPage';
-import { renderByCountry } from '../../../modules/i18n';
+import { Outlet, useLocation, useNavigate } from 'react-router';
+
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import IndiaRepaymentDetailPage from './i18n/IndiaRepaymentDetailPage';
-import { isInAndroid } from '../../../modules/window/isInAndroid';
+import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
+import { renderByCountry } from '../../../modules/i18n';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../modules/querystring/getToken';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
+import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
-import { useDispatch } from 'react-redux';
-import { PersonalInfoPageSagaActions } from '../../../usecaseFlow/type/userUsecaseSaga/personalInfoPageSaga';
+import IndiaRepaymentDetailPage from './i18n/IndiaRepaymentDetailPage';
+import PakistanRepaymentDetailPage from './i18n/PakistanRepaymentDetailPage';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [
-    triggerGetList,
-    { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized },
-  ] = useLazyGetLoanDetailQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+  const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
+    useLazyGetLoanDetailQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
   useEffect(() => {
     triggerGetList({ orderNo: location.state?.orderNo || getOrderNo() });
@@ -33,7 +30,7 @@ const RepaymentDetailPage = (props: any) => {
 
   return (
     <div>
-      {!isInAndroid() && (
+      {!isShowNavigation() && (
         <Navigation
           title={'Payment Details'}
           back={() => {
@@ -41,19 +38,15 @@ const RepaymentDetailPage = (props: any) => {
           }}
         />
       )}
-      <div
-        className={`text-sm text-center bg-primary-assistant text-primary-main py-2`}
-      >
-        Get more amount after instant payment
-      </div>
+      {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
+        <div className={`bg-primary-assistant text-primary-main py-2 text-center text-sm`}>
+          Get more amount after instant payment
+        </div>
+      )}
       {renderByCountry(
         {
-          [IndiaCountry.country]: (
-            <IndiaRepaymentDetailPage currentData={currentData} />
-          ),
-          [PakistanCountry.country]: (
-            <PakistanRepaymentDetailPage currentData={currentData} />
-          ),
+          [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} />,
+          [PakistanCountry.country]: <PakistanRepaymentDetailPage currentData={currentData} />,
         },
         <IndiaRepaymentDetailPage currentData={currentData} />
       )}
