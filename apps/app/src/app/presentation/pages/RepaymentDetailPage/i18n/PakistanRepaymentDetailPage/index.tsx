@@ -122,7 +122,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         )}
 
         {status !== 'EXTEND' &&
-          finalItems.map((item: any) => {
+          finalItems?.map((item: any) => {
             if (!item) return null;
             return (
               <ListItem
