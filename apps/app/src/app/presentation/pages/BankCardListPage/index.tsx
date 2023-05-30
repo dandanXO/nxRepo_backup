@@ -9,6 +9,7 @@ import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import BankCard from './BankCard';
 import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
+import { MdAdd } from '@react-icons/all-files/md/MdAdd';
 
 const BankCardListPage = () => {
   const navigate = useNavigate();
@@ -82,12 +83,12 @@ const BankCardListPage = () => {
               })}
           </div>
           <div className={`flex flex-col items-center justify-center`}>
-            <div
+            <button
               onClick={() => navigate(`${PagePathEnum.BindBankcard}?token=${getToken()}`)}
-              className={`mb-3 flex h-6 w-6 items-center justify-center rounded border border-solid border-orange-500  text-2xl font-bold text-orange-500`}
+              className={`mb-3 flex h-6 w-6 items-center justify-center rounded border-2 border-solid border-primary-main  text-2xl font-bold text-primary-main`}
             >
-              +
-            </div>
+              <MdAdd className='fill-primary-main'/>
+            </button>
             <div className={`pb-8 text-sm`}>Add A New Card</div>
           </div>
         </>
