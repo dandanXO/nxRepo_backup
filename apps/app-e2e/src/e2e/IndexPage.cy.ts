@@ -1,5 +1,6 @@
 // NOTICE: refactor me
-import {IndexServiceResponse} from "../../../app/src/app/api/service";
+// import {IndexServiceResponse} from "../../../app/src/app/api/service";
+import {GetIndexResponse as IndexServiceResponse} from "../../../app/src/app/api/indexService/GetIndexResponse";
 
 import {indexPagePo} from "../support/indexPage.po";
 import moment from "moment-timezone"
@@ -50,6 +51,7 @@ function visitIndexPage() {
     }
   })
 }
+
 describe('IndexPage', () => {
 
   beforeEach(() => {

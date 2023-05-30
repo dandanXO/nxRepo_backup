@@ -14,9 +14,16 @@ import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
 
-const PakistanRepaymentDetailPage = (props: any) => {
+import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanDetailResponse';
+
+import {useMemo} from "react";
+import {useDynamicChargeFeeList} from "../../useDynamicChargeFeeList";
+
+type IRepaymentDetailPage = {
+  currentData?: GetLoanDetailResponse;
+}
+const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { currentData } = props || {};
   const {
     status = '',
@@ -27,45 +34,49 @@ const PakistanRepaymentDetailPage = (props: any) => {
     paidAmount = '',
     repayRecords = [],
     totalRepayAmount = '',
-    chargeFeeDetail = {},
+    chargeFeeDetail,
     extendDate = '',
     extensionFee = '',
     totalDueAmount = '',
     extendable,
-    reductionAmount,
-    penaltyInterest,
-    loanAmount,
-    dailyFee,
-    balance,
-    orderAmount,
+    reductionAmount = 0,
+    penaltyInterest = 0,
+    loanAmount = 0,
+    dailyFee = 0,
+    balance = 0,
     applyDate = '',
   } = currentData ?? {};
-  const { items = [] } = chargeFeeDetail ?? {};
+  const { items } = chargeFeeDetail ?? {};
+
   const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
 
-  const getItems = (field: string) => {
-    return items.filter((i: GetLoanDetailChargeFeeDetailItems) => i.key === field)[0] || {};
-  };
 
   // NOTE:
   // 借的金額
   // 實際拿的金額
 
   // NOTE: 前置利息
-  const { value: serviceFee } = getItems('SERVICE_FEE');
-  const { value: processingFee } = getItems('PROCESSING_FEE');
+  // serviceFee
+  // processingFee
 
   // NOTICE: 動態欄位，但後端一定要給
-  const { value: interest } = getItems('LOAN_INTEREST');
+  // interest
 
   // NOTE: 後置利息
-  const { value: gatewayFee } = getItems('GATEWAY_FEE');
-  const { value: creditApprovalFee } = getItems('CREDIT_APPROVAL_FEE');
-  const { value: managementFee } = getItems('MANAGEMENT_FEE');
+  // GATEWAY_FEE
+  // CREDIT_APPROVAL_FEE
+  // MANAGEMENT_FEE
+
+  // NOTE: 未知舊包參數
+  // const { value: serviceFee } = getItems('SERVICE_FEE');
+  // const { value: gst } = getItems('GST');
+
+  const finalItems = useDynamicChargeFeeList(props.currentData?.chargeFeeDetail?.items || undefined);
 
   const renderStatusTag = (status: string) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
   };
+
   return (
     <div>
       <div className={`px-6 pt-3`}>
@@ -133,7 +144,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
         )}
 
         {status !== 'EXTEND' &&
-          items.map((item: any) => {
+          finalItems.map((item: any) => {
             if (!item) return null;
             return (
               <ListItem

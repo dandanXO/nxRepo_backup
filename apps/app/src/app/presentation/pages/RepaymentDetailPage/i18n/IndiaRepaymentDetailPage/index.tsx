@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/getLoanDetail';
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../modules/statusEnum';
@@ -12,10 +11,17 @@ import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
+import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanDetailResponse';
+import {useMemo} from "react";
+import {useDynamicChargeFeeList} from "../../useDynamicChargeFeeList";
+import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 
-const IndiaRepaymentDetailPage = (props: any) => {
+type IRepaymentDetailPage = {
+  currentData?: GetLoanDetailResponse;
+}
+const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
-  const location = useLocation();
+
   const { currentData } = props || {};
   const {
     status = '',
@@ -26,42 +32,40 @@ const IndiaRepaymentDetailPage = (props: any) => {
     paidAmount = '',
     repayRecords = [],
     totalRepayAmount = '',
-    chargeFeeDetail = {},
+    chargeFeeDetail,
     extendDate = '',
     extensionFee = '',
     totalDueAmount = '',
     extendable,
-    reductionAmount,
-    penaltyInterest,
-    loanAmount,
-    dailyFee,
-    balance,
-    orderAmount,
+    reductionAmount = 0,
+    penaltyInterest = 0,
+    loanAmount  = 0,
+    dailyFee = 0,
+    balance = 0,
     applyDate = '',
   } = currentData ?? {};
-  const { items = [] } = chargeFeeDetail ?? {};
+  const { items } = chargeFeeDetail ?? {};
   const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
-  const getItems = (field: string) => {
-    return items.filter((i: GetLoanDetailChargeFeeDetailItems) => i.key === field)[0] || {};
-  };
 
   // NOTE: 新版 h5 要過濾掉之前android需要的欄位, LOAN_AMOUNT 也不會給
 
   // NOTE: 前置利息
-  const { value: serviceFee } = getItems('SERVICE_FEE');
-  const { value: processingFee } = getItems('PROCESSING_FEE');
+  // serviceFee
+  // processingFee
 
   // NOTICE: 動態欄位，但後端一定要給
-  const { value: interest } = getItems('LOAN_INTEREST');
+  // interest
 
   // NOTE: 後置利息
-  const { value: gatewayFee } = getItems('GATEWAY_FEE');
-  const { value: creditApprovalFee } = getItems('CREDIT_APPROVAL_FEE');
-  const { value: managementFee } = getItems('MANAGEMENT_FEE');
+  // GATEWAY_FEE
+  // CREDIT_APPROVAL_FEE
+  // MANAGEMENT_FEE
 
   // NOTE: 未知舊包參數
   // const { value: serviceFee } = getItems('SERVICE_FEE');
   // const { value: gst } = getItems('GST');
+
+  const finalItems = useDynamicChargeFeeList(props.currentData?.chargeFeeDetail?.items || undefined);
 
   const renderStatusTag = (status: string) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
@@ -70,9 +74,21 @@ const IndiaRepaymentDetailPage = (props: any) => {
   return (
     <div>
       <div className={`px-6 pt-3`}>
-        <ListItem title={'Product'} text={productName ?? ''} titleColor="text-ctext-primary" />
-        <ListItem title={'Order No.'} text={orderNo ?? ''} titleColor="text-ctext-primary" />
-        <ListItem title={'Status'} text={status ? renderStatusTag(status) : ''} titleColor="text-ctext-primary" />
+        <ListItem
+          title={'Product'}
+          text={productName ?? ''}
+          titleColor="text-ctext-primary"
+        />
+        <ListItem
+          title={'Order No.'}
+          text={orderNo ?? ''}
+          titleColor="text-ctext-primary"
+        />
+        <ListItem
+          title={'Status'}
+          text={status ? renderStatusTag(status) : ''}
+          titleColor="text-ctext-primary"
+        />
         <ListItem
           title={'Apply Date'}
           text={applyDate ? moment(applyDate).format('DD-MM-YYYY') : ''}
@@ -106,11 +122,15 @@ const IndiaRepaymentDetailPage = (props: any) => {
         {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-black-400" />*/}
 
         {status !== 'EXTEND' && (
-          <ListItem title={'Disbursal Amount'} text={<Money money={loanAmount} />} titleColor="text-ctext-primary" />
+          <ListItem
+            title={'Disbursal Amount'}
+            text={<Money money={loanAmount} />}
+            titleColor="text-ctext-primary"
+          />
         )}
 
         {status !== 'EXTEND' &&
-          items.map((item: any, index: number) => {
+          finalItems?.map((item: GetLoanDetailChargeFeeDetailItems, index: number) => {
             if (!item) return null;
             return (
               <ListItem

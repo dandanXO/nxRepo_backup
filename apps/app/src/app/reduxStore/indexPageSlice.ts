@@ -204,6 +204,7 @@ export const indexPageSlice = createSlice({
           // NOTE: 不可重刷
         } else {
           // NOTE: 可能是尚有額度
+          // NOTE: 下方 code 不需要
           // if (action.payload.noQuotaByRetryFewTimes === true) {
           //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
           // } else {
@@ -219,6 +220,7 @@ export const indexPageSlice = createSlice({
       } else if (!isRiskControlOverdue && action.payload.availableAmount > 0) {
         state.riskControl.state = RISK_CONTROL_STATE.valid;
       }
+
       // REFACTOR ME: 額度不足
       // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
       //
@@ -237,7 +239,6 @@ export const indexPageSlice = createSlice({
     },
     expiredRiskCountdown: (state, action) => {
       // state.riskControl.state = RISK_CONTROL_STATE.expired;
-      state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
     },
     // NOTICE: 可重刷取得逾期的計時器
     updateRefreshableCountdown: (state, action) => {
@@ -245,6 +246,7 @@ export const indexPageSlice = createSlice({
     },
     // NOTICE: 取消可重刷取得逾期的計時器
     expiredRefreshableCountdown: (state, action) => {
+      // 根據後端條件決定是否能不能重刷下方倒數
       state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
     },
   },
