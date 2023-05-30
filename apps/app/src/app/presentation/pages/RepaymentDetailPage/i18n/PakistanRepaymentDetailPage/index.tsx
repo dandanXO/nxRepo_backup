@@ -17,7 +17,7 @@ import { Button } from '../../../../components/layouts/Button';
 import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanDetailResponse';
 
 import {useMemo} from "react";
-import {useDynamicChargeFeeList} from "../../useDynamicChargeFeeList";
+import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -46,30 +46,8 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     balance = 0,
     applyDate = '',
   } = currentData ?? {};
-  const { items } = chargeFeeDetail ?? {};
 
   const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
-
-
-  // NOTE:
-  // 借的金額
-  // 實際拿的金額
-
-  // NOTE: 前置利息
-  // serviceFee
-  // processingFee
-
-  // NOTICE: 動態欄位，但後端一定要給
-  // interest
-
-  // NOTE: 後置利息
-  // GATEWAY_FEE
-  // CREDIT_APPROVAL_FEE
-  // MANAGEMENT_FEE
-
-  // NOTE: 未知舊包參數
-  // const { value: serviceFee } = getItems('SERVICE_FEE');
-  // const { value: gst } = getItems('GST');
 
   const finalItems = useDynamicChargeFeeList(props.currentData?.chargeFeeDetail?.items || undefined);
 
