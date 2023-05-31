@@ -1,5 +1,4 @@
 import cx from 'classnames';
-import { add, chain, divide, evaluate, multiply, subtract } from 'mathjs';
 import { Moment } from 'moment';
 import moment from 'moment-timezone';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -40,6 +39,7 @@ import { TipsSection } from './sections/TipsSection';
 import { UserInformationSection } from './sections/UserInformationSection';
 import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndReapplyInTimeSection';
 import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
+import {computeNumber} from "../../../modules/computeNumber";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -226,17 +226,14 @@ const IndexPage = () => {
       if (keyFeeMapping) {
         currentSelectedProducts.map((product) => {
           // console.log("product", product);
-          const interestPrice = chain(product.calculating.finalLoanPrice)
-            .multiply(product.platformChargeFeeRate)
-            .multiply(keyFeeMapping.LOAN_INTEREST)
-            .round()
-            .done();
-          // const disbursalPrice = product.calculating.finalLoanPrice * (1 - product.platformChargeFeeRate)
-          const disbursalPrice = chain(
-            evaluate(`${product.calculating.finalLoanPrice} * (1 - ${product.platformChargeFeeRate})`)
-          )
-            .round()
-            .done();
+
+          const interestPrice = computeNumber(product.calculating.finalLoanPrice, "*", product.platformChargeFeeRate)
+            .next("*", keyFeeMapping.LOAN_INTEREST)
+            .result;
+
+
+          const price = computeNumber(1, "-", product.platformChargeFeeRate).result
+          const disbursalPrice = computeNumber(product.calculating.finalLoanPrice, "*", price).result;
 
           const dueDate = moment().add(product.terms - 1, 'days');
           const formatedDueDate = dueDate.format('DD-MM-YYYY');
@@ -248,50 +245,37 @@ const IndexPage = () => {
           product.calculating.disbursalPrice = disbursalPrice;
           product.calculating.dueDate = formatedDueDate;
 
-          const processingFee = chain(product.calculating.finalLoanPrice)
-            .multiply(product.platformChargeFeeRate)
-            .multiply(keyFeeMapping.PROCESSING_FEE)
-            .round()
-            .done();
+          const processingFee = computeNumber(product.calculating.finalLoanPrice, "*", product.platformChargeFeeRate)
+            .next("*", keyFeeMapping.PROCESSING_FEE)
+            .result;
 
-          const serviceCharge = chain(product.calculating.finalLoanPrice)
-            .multiply(product.platformChargeFeeRate)
-            .multiply(keyFeeMapping.SERVICE_FEE)
-            .round()
-            .done();
+          const serviceCharge = computeNumber(product.calculating.finalLoanPrice, "*", product.platformChargeFeeRate)
+            .next("*", keyFeeMapping.SERVICE_FEE)
+            .result;
 
           // console.log("processingFee", processingFee);
           // console.log("serviceCharge", serviceCharge);
 
+          finalProductsSummary.loanAmount = computeNumber(finalProductsSummary.loanAmount, "+", product.calculating.finalLoanPrice)
+            .result;
 
-          finalProductsSummary.loanAmount = chain(finalProductsSummary.loanAmount)
-            .add(product.calculating.finalLoanPrice)
-            .round()
-            .done();
 
           // NOTE: 前置利息
-          finalProductsSummary.interest = chain(finalProductsSummary.interest)
-            .add(interestPrice)
-            // .round()
-            .done();
+          finalProductsSummary.interest = computeNumber(finalProductsSummary.interest, "+", interestPrice)
+            .result;
+
 
           // NOTE: 前置利息
-          finalProductsSummary.processingFee = chain(finalProductsSummary.processingFee)
-            .add(processingFee)
-            // .round()
-            .done();
+          finalProductsSummary.processingFee = computeNumber(finalProductsSummary.processingFee, "+", processingFee)
+            .result;
 
           // NOTE: 前置利息
-          finalProductsSummary.serviceCharge = chain(finalProductsSummary.serviceCharge)
-            .add(serviceCharge)
-            // .round()
-            .done();
+          finalProductsSummary.serviceCharge = computeNumber(finalProductsSummary.serviceCharge, "+", serviceCharge)
+            .result;
 
+          finalProductsSummary.disbursalAmount = computeNumber(finalProductsSummary.disbursalAmount, "+", disbursalPrice)
+            .result;
 
-          finalProductsSummary.disbursalAmount = chain(finalProductsSummary.disbursalAmount)
-            .add(disbursalPrice)
-            .round()
-            .done();
 
           if (finalProductsSummary.repaymentDate) {
             const afterDueDate = dueDate.isAfter(finalProductsSummary.repaymentDate);

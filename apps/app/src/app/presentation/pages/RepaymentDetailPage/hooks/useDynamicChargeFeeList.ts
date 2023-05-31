@@ -1,5 +1,6 @@
 import {GetLoanDetailResponse} from "../../../../api/loanService/GetLoanDetailResponse";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../api/rtk/old/getLoanDetail";
+import {computeNumber} from "../../../../modules/computeNumber";
 
 export const useDynamicChargeFeeList = (originalTtems?: GetLoanDetailResponse["chargeFeeDetail"]["items"]) => {
   // NOTE: 新版 h5 要過濾掉之前android需要的欄位, LOAN_AMOUNT 也不會給
@@ -32,16 +33,22 @@ export const useDynamicChargeFeeList = (originalTtems?: GetLoanDetailResponse["c
 
     items.map((item: GetLoanDetailChargeFeeDetailItems) => {
       if(item.key !== lastChargeFeeKey) {
-        const remain = parseFloat(item.value) % 10;
-        item.value = String(parseFloat(item.value) - remain);
-        totalRemain = totalRemain + remain;
+        const floatNumber = Number(item.value);
+        const number = Math.floor(floatNumber);
+        const float = computeNumber(floatNumber,"-", number).result;
+        const ignoreOnesDigits = number % 10;
+        const finalNumber = computeNumber(floatNumber, "-", ignoreOnesDigits).next("-", float).result;
+        const remain = computeNumber(ignoreOnesDigits, "+", float).result;
+
+        item.value = finalNumber.toString()
+        totalRemain = computeNumber(totalRemain, "+", remain).result
       }
     })
-
+    // console.log("totalRemain", totalRemain);
     if(lastChargeFeeKey) {
       const item = items.find((item: GetLoanDetailChargeFeeDetailItems) => item.key === lastChargeFeeKey)
       if(item) {
-        item.value = String(parseFloat(item.value) + totalRemain);
+        item.value = computeNumber(item.value, "+", totalRemain).result;
         totalRemain = 0;
       }
     }
