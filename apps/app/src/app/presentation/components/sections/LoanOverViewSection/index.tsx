@@ -12,9 +12,10 @@ type Props = IndexPageProps;
 
 export const LoanOverViewSection = (props: Props) => {
   const isReacquireCreditAmount =
-    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
-    props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-    props.state.order.state !== ORDER_STATE.hasOverdueOrder;
+    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able 
+    // props.state.order.state !== ORDER_STATE.reject
+    // props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
+    // props.state.order.state !== ORDER_STATE.hasOverdueOrder;
   const [options, setOptions] = useState<{
     series: ApexOptions['series'];
     options: ApexOptions;

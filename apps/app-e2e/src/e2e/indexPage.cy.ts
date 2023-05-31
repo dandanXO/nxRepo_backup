@@ -437,6 +437,7 @@ describe('IndexPage', () => {
   })
 
   // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
+  // NOTE: 風控額度到期的時間未到，訂單逾期直接不倒數
   it("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -456,6 +457,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "noQuotaBalance": false,
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 900,
@@ -511,6 +513,7 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "noQuotaByRetryFewTimes": false,
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": true,
@@ -581,6 +584,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = () => ({
+      "noQuotaBalance": false,
       // NOTICE: 是否直接表明要不顯示按鈕? 但還有商品沒有選擇的條件
       "refreshable": false,
       // NOTICE: 當 refreshable true, 但是 noQuotaByRetryFewTimes true 一樣不能重刷?
@@ -991,6 +995,7 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
+      "noQuotaBalance":false,
       "noQuotaByRetryFewTimes": true,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
@@ -2086,7 +2091,7 @@ describe('IndexPage', () => {
 
 
 
-  // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 9)
+  // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 10)
   it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {

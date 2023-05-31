@@ -139,11 +139,12 @@ export const indexPageSlice = createSlice({
 
       // NOTE: 會有其他條件同時相符，所以這邊用if優先權最高-直接第一
       if (action.payload.riskReject === true) {
-        // NOTICE: 新客直接被擋或是老客額度被擋，但前端直接視為 ORDER_STATE.reject，
+        // NOTICE: 新客直接被擋或是老客額度被擋，但前端直接視為 RISK_CONTROL_STATE.order_reject
         // NOTICE: order
-        state.order.state = ORDER_STATE.reject;
-        state.order.overdueOrComingOverdueOrder = null;
-      } else if (action.payload.payableRecords.length === 0) {
+        state.riskControl.state = RISK_CONTROL_STATE.order_reject;
+        // state.order.overdueOrComingOverdueOrder = null;
+      }
+      if (action.payload.payableRecords.length === 0) {
         // NOTICE: order
         state.order.state = ORDER_STATE.empty;
         state.order.overdueOrComingOverdueOrder = null;
@@ -237,7 +238,7 @@ export const indexPageSlice = createSlice({
     },
     expiredRiskCountdown: (state, action) => {
       // state.riskControl.state = RISK_CONTROL_STATE.expired;
-      state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+    //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
     },
     // NOTICE: 可重刷取得逾期的計時器
     updateRefreshableCountdown: (state, action) => {
