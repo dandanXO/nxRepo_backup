@@ -96,18 +96,19 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.loanAmount)}</div>
             </div>
 
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Interest</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.interest)}</div>
-            </div>
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Processing Fee</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.processingFee)}</div>
-            </div>
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Service Charge</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.serviceCharge)}</div>
-            </div>
+            {/*NOTE: 暫時隱藏*/}
+            {/*<div className={'item flex flex-row justify-between font-light'}>*/}
+            {/*  <div className={'key'}>Interest</div>*/}
+            {/*  <div className={'value'}>₹ {formatPrice(props.calculatingSummary.interest)}</div>*/}
+            {/*</div>*/}
+            {/*<div className={'item flex flex-row justify-between font-light'}>*/}
+            {/*  <div className={'key'}>Processing Fee</div>*/}
+            {/*  <div className={'value'}>₹ {formatPrice(props.calculatingSummary.processingFee)}</div>*/}
+            {/*</div>*/}
+            {/*<div className={'item flex flex-row justify-between font-light'}>*/}
+            {/*  <div className={'key'}>Service Charge</div>*/}
+            {/*  <div className={'value'}>₹ {formatPrice(props.calculatingSummary.serviceCharge)}</div>*/}
+            {/*</div>*/}
 
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Disbursal Amount</div>
