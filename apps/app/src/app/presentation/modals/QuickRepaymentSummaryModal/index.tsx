@@ -31,7 +31,7 @@ type Props = IndexPageProps & {
 };
 
 const IndicatorSeparator = (props: IndicatorSeparatorProps<any, true>) => {
-  console.log('IndicatorSeparator.props', props);
+  // console.log('IndicatorSeparator.props', props);
   return (
     <span {...props.innerProps} className={'font-light text-gray-400'}>
       change
@@ -80,7 +80,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
   }, [props.selectedBankcardId, props.bankcardList]);
 
   return (
-    <div className={cx('quick-repayment-modal fixed top-0 bottom-0 flex h-screen w-screen flex-col bg-white p-4')}>
+    <div className={cx('quick-repayment-modal fixed top-0 bottom-0 h-screen w-screen  bg-white p-4')}>
       <div onClick={props.onClose}>
         <CloseButton />
       </div>
@@ -95,7 +95,8 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               <div className={'key'}>Loan Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.loanAmount)}</div>
             </div>
-            {/* <div className={'item flex flex-row justify-between font-light'}>
+
+            <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Interest</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.interest)}</div>
             </div>
@@ -106,7 +107,8 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Service Charge</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.serviceCharge)}</div>
-            </div> */}
+            </div>
+
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Disbursal Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.disbursalAmount)}</div>
@@ -121,21 +123,20 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
 
       <Horizontal />
 
-      <div className={'products '}>
+      <div className={'products'}>
         <div className={'text-md mb-2 font-medium '}>Your Products</div>
-        <div className={'flex min-h-[150px] flex-col overflow-auto'}>
+        <div className={'min-h-[260px] h-[260px] overflow-scroll flex flex-col'}>
           {props.calculatingProducts.map((product, index) => {
             return <Product key={index} product={product} />;
           })}
         </div>
       </div>
 
-      <Horizontal />
+      <div className={'absolute bottom-[10px] bg-white flex-1 flex flex-col justify-between'}>
+        <Horizontal />
 
-      <div className={'footer flex-1 flex flex-col justify-between'}>
         <div className={'bankcard'}>
           <div className={'text-md font-medium'}>Bank Card</div>
-
           <div className={'relative flex flex-row items-center justify-between'}>
             {/*<div className={"card-number text-sm"}>**** **** **** 0000</div>*/}
             {/*<div className={"card-number text-sm"}>{props.bankcardList[0].bankId}</div>*/}
@@ -196,25 +197,26 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               isSearchable={false}
             />
           </div>
-          
-        <Horizontal />
-        <div className={'mb-2 text-xs font-light text-gray-400'}>
-          <span>By continuing, I have read and agree</span>
-          <span className={'text-blue-500 underline'} onClick={props.onClickLoanAgreement}>
+
+          <Horizontal />
+
+          <div className={'mb-2 text-xs font-light text-gray-400'}>
+            <span>By continuing, I have read and agree</span>
+            <span className={'text-blue-500 underline'} onClick={props.onClickLoanAgreement}>
             {' '}
-            Loan Agreement{' '}
+              Loan Agreement{' '}
           </span>
-          <span>carefully.</span>
+            <span>carefully.</span>
+          </div>
         </div>
-        </div>
+
         <div>
-        <Button text={'Confirm'} onClick={props.onConfirmApply} />
+          <Button text={'Confirm'} onClick={props.onConfirmApply} />
         </div>
 
-
-      
-        
       </div>
+
+
     </div>
   );
 };

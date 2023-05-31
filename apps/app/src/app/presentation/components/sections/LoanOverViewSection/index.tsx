@@ -116,19 +116,19 @@ export const LoanOverViewSection = (props: Props) => {
         </div>
 
         <div className={'right flex flex-col items-end justify-center'}>
-          <div className={'used-amount flex flex-col items-end justify-end'}>
+          <div className={'used-amount flex flex-col items-start justify-end'}>
             <div className={'label flex flex-row items-center justify-between'}>
               <div className={'label-color mr-2 h-1.5 w-4 rounded bg-[#E5E5E5]'}></div>
               <div className={'label-price font-light'}>Used Amount</div>
             </div>
-            <div className={'price font-medium'}>
+            <div className={'price font-light w-full pl-6'}>
               {environment.currency}
               {formatPrice(props.state.indexAPI?.usedAmount || 0)}
             </div>
           </div>
           <div className={'total-amount flex flex-col justify-end'}>
             <div className={'label font-light'}>Total Amount</div>
-            <div className={'price text-right font-medium'}>
+            <div className={'price font-light'}>
               {environment.currency}
               {isReacquireCreditAmount ? ' ***** ' : formatPrice(props.state.indexAPI?.totalAmount || 0)}
             </div>

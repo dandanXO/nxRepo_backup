@@ -37,9 +37,6 @@ export const QuotaSliderStatus = (props: Props) => {
   // console.log("currentQuotaValue", currentQuotaValue)
   // console.log("maxQuotaValue", maxQuotaValue);
 
-  useEffect(() => {
-    setMaxQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.max || 0));
-  }, [props.state.indexAPI?.quotaBar.max]);
 
   useEffect(() => {
     // NOTE: 禁用 Quota Slider
@@ -52,6 +49,7 @@ export const QuotaSliderStatus = (props: Props) => {
       // NOTE: 啟用 Quota Slider
       setCurrentQuotaValue(props.state.indexAPI?.quotaBar.current || 0);
       setCurrentQuotaLabelValue(formatPrice(props.state.indexAPI?.quotaBar.current || 0));
+      setMaxQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.max || 0));
       setDisableQuotaBar(false);
       props.setQuotaBarTargetPrice(props.state.indexAPI?.quotaBar.current || 0);
     }

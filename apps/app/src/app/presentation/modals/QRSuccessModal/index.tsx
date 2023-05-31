@@ -16,7 +16,7 @@ export const QRSuccessModal = (props: Props) => {
       }
     >
       <div className={'modal-inner w-11/12 rounded-lg bg-white px-3 py-4 text-center'}>
-        <div className={'mb-3 flex flex-col items-center font-bold text-base'}>
+        <div className={'mb-3 flex flex-col items-center font-normal text-base'}>
           <div>Successful Application</div>
         </div>
 
