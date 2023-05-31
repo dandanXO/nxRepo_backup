@@ -141,7 +141,7 @@ const IndexPage = () => {
           // NOTE: 已經完成任務，忽略執行
         } else {
           // console.log("currentTotalPrice", currentSelectedProductsPrice)
-          // NOTE: 假如加入此商品沒爆掉。
+          // NOTE: 假如加入此商品總額度沒爆掉。
           const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
 
           if (tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
@@ -163,7 +163,7 @@ const IndexPage = () => {
             currentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
             // console.log("added product currentTotalPrice", currentSelectedProductsPrice)
           } else {
-            // 不能再借了
+            // NOTE: 不能再借了
             firstRoundFinalIndex = index;
             processSuccess = true;
           }
@@ -220,6 +220,7 @@ const IndexPage = () => {
       }, {});
       // console.log("keyFeeMapping", keyFeeMapping);
 
+
       const finalProductsSummary = { ...initialFinalProductsSummary };
       // console.log("finalProductsSummary", finalProductsSummary);
       if (keyFeeMapping) {
@@ -252,6 +253,7 @@ const IndexPage = () => {
             .multiply(keyFeeMapping.PROCESSING_FEE)
             .round()
             .done();
+
           const serviceCharge = chain(product.calculating.finalLoanPrice)
             .multiply(product.platformChargeFeeRate)
             .multiply(keyFeeMapping.SERVICE_FEE)
@@ -261,20 +263,31 @@ const IndexPage = () => {
           // console.log("processingFee", processingFee);
           // console.log("serviceCharge", serviceCharge);
 
+
           finalProductsSummary.loanAmount = chain(finalProductsSummary.loanAmount)
             .add(product.calculating.finalLoanPrice)
             .round()
             .done();
-          finalProductsSummary.interest = chain(finalProductsSummary.interest).add(interestPrice).round().done();
 
+          // NOTE: 前置利息
+          finalProductsSummary.interest = chain(finalProductsSummary.interest)
+            .add(interestPrice)
+            // .round()
+            .done();
+
+          // NOTE: 前置利息
           finalProductsSummary.processingFee = chain(finalProductsSummary.processingFee)
             .add(processingFee)
-            .round()
+            // .round()
             .done();
+
+          // NOTE: 前置利息
           finalProductsSummary.serviceCharge = chain(finalProductsSummary.serviceCharge)
             .add(serviceCharge)
-            .round()
+            // .round()
             .done();
+
+
           finalProductsSummary.disbursalAmount = chain(finalProductsSummary.disbursalAmount)
             .add(disbursalPrice)
             .round()
@@ -290,7 +303,43 @@ const IndexPage = () => {
           }
         });
       }
+
+      const lastChargeFeeKeyIndex = indexPageState.indexAPI?.chargeFeeDetails.length - 1
+      const lastChargeFeeKey: any = indexPageState.indexAPI?.chargeFeeDetails[lastChargeFeeKeyIndex].key;
+      // console.log("finalProductsSummary.1", JSON.parse(JSON.stringify(finalProductsSummary)));
+      // console.log("lastChargeFeeKey", lastChargeFeeKey);
+
+      if(lastChargeFeeKey) {
+
+        const keyFeeMappingPrice: any = {
+          "LOAN_INTEREST": finalProductsSummary.interest,
+          "PROCESSING_FEE": finalProductsSummary.processingFee,
+          "SERVICE_FEE": finalProductsSummary.serviceCharge,
+        }
+
+        let totalRemain = 0
+        Object.keys(keyFeeMappingPrice).map((key: string) => {
+          if(key !== lastChargeFeeKey) {
+            const remain = keyFeeMappingPrice[key] % 10;
+            keyFeeMappingPrice[key] = keyFeeMappingPrice[key] - remain;
+            totalRemain = totalRemain + remain;
+          }
+        })
+
+        if(lastChargeFeeKey) {
+          keyFeeMappingPrice[lastChargeFeeKey] = keyFeeMappingPrice[lastChargeFeeKey] +  totalRemain;
+          totalRemain = 0;
+        }
+
+        finalProductsSummary.interest = keyFeeMappingPrice["LOAN_INTEREST"];
+        finalProductsSummary.processingFee = keyFeeMappingPrice["PROCESSING_FEE"];
+        finalProductsSummary.serviceCharge = keyFeeMappingPrice["SERVICE_FEE"];
+
+        // console.log("finalProductsSummary.2", JSON.parse(JSON.stringify(finalProductsSummary)));
+      }
+
       // console.log("finalProductsSummary", finalProductsSummary);
+
       setCalculatingSummary(finalProductsSummary);
       setCalculatingProducts(currentSelectedProducts);
       setCurrentSelectedProductsPrice(currentSelectedProductsPrice);
