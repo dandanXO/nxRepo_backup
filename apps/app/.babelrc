@@ -34,7 +34,10 @@
         }
       }
     ],
-    ["styled-components", { "pure": true, "ssr": true }]
+    ["styled-components", { "pure": true, "ssr": true }],
+    [
+      "@loadable/babel-plugin"
+    ]
 
 
   ]

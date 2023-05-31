@@ -1,5 +1,6 @@
 export const AppFlag = {
   enableSentry: true,
-  enablePosthog: true,
+  enableSentryReplay: true,
+  enablePosthog: false,
   isForceToWebview: false,
 };

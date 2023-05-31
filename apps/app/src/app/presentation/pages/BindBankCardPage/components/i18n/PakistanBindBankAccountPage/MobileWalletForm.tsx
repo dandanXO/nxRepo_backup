@@ -1,15 +1,11 @@
+import { Input } from '@frontend/mobile/shared/ui';
+import { InputValue } from 'apps/app/src/app/modules/form/InputValue';
 import React, { ClipboardEvent } from 'react';
 import { useNavigate } from 'react-router';
 import Select from 'react-select';
-
-import { Input, InputValue } from '@frontend/mobile/shared/ui';
-
 import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
 import { Button } from '../../../../../components/layouts/Button';
-import { Page } from '../../../../../components/layouts/Page';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
-import { Form } from '../../Form';
-import { Label } from '../../Label';
 
 type IMobileWalletForm = {
   // Wallet List
@@ -115,7 +111,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       </div>
 
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
-      <div className="mb-2 flex grow flex-col justify-end">
+      <div className="py-2">
         <Button className={`${EnumV15GradientButtonClassNames} `} text={'Confirm'} onClick={() => props.confirm()} />
       </div>
     </div>
