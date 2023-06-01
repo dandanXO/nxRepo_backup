@@ -172,21 +172,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
             const { hasError } = validatePreOrPostInterestGroups(productInterestRatePairs, true, productInterestRatesContentKey);
 
-            // NOTICE 後端回應初貸混合風控與複貸混合風控是包在prodRiskProvider的list之中，結構為
-            // [object, ...]， object的結構為
-            // { enable: true, isOldUser: ture, provider: "BATEI"}，
-            // enable：是否啟用，都帶ture，isOldUser：true為複貸false為初貸，provider：風控商名稱
-            // 需轉為Filed name為newGuestLoanMixedRisk與oldGuestLoanMixedRisk的tags mode Select 的Field value 中，
-            const { newGuestLoanMixedRisk, oldGuestLoanMixedRisk } = productFormData.prodRiskProvider?.reduce((acc, current) => {
-                if(current.isOldUser === false) { // 初貸
-                    acc['newGuestLoanMixedRisk'] = acc['newGuestLoanMixedRisk'].concat(current.provider)
-                } else if (current.isOldUser === true) { // 複貸
-                    acc['oldGuestLoanMixedRisk'] = acc['oldGuestLoanMixedRisk'].concat(current.provider)
-                }
-
-                return acc
-            }, { newGuestLoanMixedRisk: [], oldGuestLoanMixedRisk: [] }) || { newGuestLoanMixedRisk: [], oldGuestLoanMixedRisk: [] };
-
             form.setFieldsValue({
                 merchantId: currentMerchant?.name,
                 productName: productFormData.productName,
@@ -258,9 +243,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 templateType: productFormData.templateType,
                 weight: productFormData.weight,
                 enabled: productFormData.enabled,
-                productInterestRatePairs,
-                newGuestLoanMixedRisk,
-                oldGuestLoanMixedRisk
+                productInterestRatePairs
             })
         }
 
@@ -374,13 +357,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
             ]
         }, [])
 
-        // NOTICE 需將newGuestLoanMixedRisk與oldGuestLoanMixedRisk的資料轉為後端prodRiskProvider的格式
-        const newGuestLoanMixedRisks = values.newGuestLoanMixedRisk.reduce(
-            (acc, current)=> ([...acc, { isOldUser: false, provider: current}]), [])
-
-        const oldGuestLoanMixedRisk = values.oldGuestLoanMixedRisk.reduce(
-            (acc, current)=> ([...acc, { isOldUser: true, provider: current}]), [])
-
         const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
             ...i,
             loanAmount: Number(i.loanAmount),
@@ -411,8 +387,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
             maxAmount: Number(values.maxAmount),
             extensible: values.extensible,
             extensibleOverdueDays: Number(values.extensibleOverdueDays),
-
-            prodRiskProvider: newGuestLoanMixedRisks.concat(oldGuestLoanMixedRisk),
 
             newGuestLoanQuotaSwitch: values.newGuestLoanQuotaSwitch,
             oldGuestLoanQuotaSwitch: values.oldGuestLoanQuotaSwitch,

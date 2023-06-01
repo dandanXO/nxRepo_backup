@@ -274,8 +274,6 @@ const Index = (props: ProductFormProps) => {
                 oldGuestLoanQuotaSwitch: 1,
                 newGuestProductDisplayStatus: 1,
                 renewProductDisplayStatus: 1,
-                newGuestLoanMixedRisk: [],
-                oldGuestLoanMixedRisk: [],
             }}
         >
             <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit} />

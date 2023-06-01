@@ -31,11 +31,6 @@ export interface ProductTypes {
     maxAmount?: number;              // 最高可借金额
     merchantId?: number;             // 商户流水号
 
-    prodRiskProvider: {             // 混和風控额度
-        isOldUser: boolean,         // 初貸(新客) : false , 複貸(次新客) :true
-        provider: string            // 風控選項
-    } [];
-
     newGuestLoanAmount?: number;
     // 初始贷款额度
 
