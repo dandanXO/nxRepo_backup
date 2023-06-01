@@ -14,11 +14,11 @@ export interface GetLoanRecord {
   detailH5lUrl?: string; // Loan Detail H5 URL
   dueDate?: string; // 到期日期
   extendDate?: string; // 展期日期(status = EXTEND才會有)
-  extension?: string; // 是否为展期中
+  extension?: boolean; // 是否为展期中
   extensionFee?: number; // 展期費用(status = EXTEND才會有)
   iconUrl?: string; // Icon url
   loanAmount?: number; // 借款金额
-  loanDate?: number; // 放款时间
+  loanDate?: string; // 放款时间
   orderAmount?: number; // 訂單合同金額
   orderNo?: string; // 單號
   originalDueDate?: string; // 原始到期日期(status = EXTEND才會有)

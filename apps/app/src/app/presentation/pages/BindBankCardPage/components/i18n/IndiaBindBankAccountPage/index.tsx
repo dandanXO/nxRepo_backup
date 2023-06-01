@@ -1,9 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-import { isInAndroid } from '../../../../../../modules/window/isInAndroid';
-import { CustomPage } from '../../../../../components/layouts/CustomPage';
-import { Navigation } from '../../../../../components/layouts/Navigation';
 import { Page } from '../../../../../components/layouts/Page';
 import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
 import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';
@@ -54,7 +51,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   });
 
   return (
-    <Page className="flex">
+    <div className="flex">
       <BankAccountForm
         cardholderName={props.cardholderName}
         ifscData={ifscData}
@@ -76,6 +73,6 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           if (validation && validation2) confirm();
         }}
       />
-    </Page>
+    </div>
   );
 };

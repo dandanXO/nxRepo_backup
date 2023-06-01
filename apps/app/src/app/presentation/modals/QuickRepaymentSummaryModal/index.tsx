@@ -18,6 +18,7 @@ import { CloseButton } from '../../components/layouts/CloseButton';
 import { Horizontal } from '../../components/layouts/Horizontal';
 import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
 import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
+import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
 
 type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];
@@ -31,7 +32,7 @@ type Props = IndexPageProps & {
 };
 
 const IndicatorSeparator = (props: IndicatorSeparatorProps<any, true>) => {
-  console.log('IndicatorSeparator.props', props);
+  // console.log('IndicatorSeparator.props', props);
   return (
     <span {...props.innerProps} className={'font-light text-gray-400'}>
       change
@@ -54,7 +55,7 @@ const DropdownIndicator = (props: DropdownIndicatorProps<any, true>) => {
 };
 
 type OptionType = {
-  label: number | undefined;
+  label: string | undefined;
   value: number | undefined;
 };
 
@@ -70,24 +71,24 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
     const bankcard = props.bankcardList.find((bankcard) => {
       return bankcard.bankId === props.selectedBankcardId;
     });
-    console.log('bankcard', bankcard);
+    // console.log('bankcard', bankcard);
     if (bankcard) {
       setOptionValue({
-        label: bankcard.bankId,
+        label: bankcard.bankAccount,
         value: bankcard.bankId,
       });
     }
   }, [props.selectedBankcardId, props.bankcardList]);
 
   return (
-    <div className={cx('quick-repayment-modal fixed top-0 bottom-0 flex h-screen w-screen flex-col bg-white p-4')}>
+    <div className={cx('quick-repayment-modal fixed top-0 bottom-0 h-screen w-screen  bg-white p-4')}>
       <div onClick={props.onClose}>
         <CloseButton />
       </div>
       <div className={'header'}>
         <div className={'text-xl font-medium'}>My Loan Orders</div>
       </div>
-      <div className={'summary flex-1'}>
+      <div className={'summary'}>
         <div className={'flex flex-col'}>
           <div className={'text-md font-medium'}>Summary Details</div>
           <div className={'item-list'}>
@@ -95,18 +96,36 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               <div className={'key'}>Loan Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.loanAmount)}</div>
             </div>
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Interest</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.interest)}</div>
-            </div>
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Processing Fee</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.processingFee)}</div>
-            </div>
-            <div className={'item flex flex-row justify-between font-light'}>
-              <div className={'key'}>Service Charge</div>
-              <div className={'value'}>₹ {formatPrice(props.calculatingSummary.serviceCharge)}</div>
-            </div>
+
+            {/*TODO: refactor me*/}
+            {props.state.indexAPI?.chargeFeeDetails.map((key) => {
+              if(
+                key.key === FeeRateKeyEnum.LOAN_INTEREST ||
+                key.key === FeeRateKeyEnum.PROCESSING_FEE ||
+                key.key === FeeRateKeyEnum.SERVICE_FEE) {
+                return null;
+              }
+              const keyMapValue: Record<FeeRateKeyEnum, any> = {
+                [FeeRateKeyEnum.LOAN_INTEREST]: formatPrice(props.calculatingSummary.interest),
+                [FeeRateKeyEnum.PROCESSING_FEE]: formatPrice(props.calculatingSummary.processingFee),
+                [FeeRateKeyEnum.SERVICE_FEE]: formatPrice(props.calculatingSummary.serviceCharge),
+                [FeeRateKeyEnum.DAILY_FEE]: 0,
+                [FeeRateKeyEnum.GST]: 0,
+                [FeeRateKeyEnum.LOAN_AMOUNT]: 0,
+                [FeeRateKeyEnum.PENALTY_INTEREST]: 0,
+                [FeeRateKeyEnum.REDUCTION_AMOUNT]: 0,
+              }
+              // console.log("keyMapValue", keyMapValue);
+              const value = keyMapValue[key.key] || 0;
+              // console.log("value", value);
+              return (
+                <div className={'item flex flex-row justify-between font-light'}>
+                  <div className={'key'}>{key.title}</div>
+                  <div className={'value'}>₹ {value}</div>
+                </div>
+              )
+            })}
+
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Disbursal Amount</div>
               <div className={'value'}>₹ {formatPrice(props.calculatingSummary.disbursalAmount)}</div>
@@ -121,21 +140,20 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
 
       <Horizontal />
 
-      <div className={'products '}>
-        <div className={'text-md mb-2 font-medium'}>Your Products</div>
-        <div className={'flex h-[200px] flex-col overflow-auto'}>
+      <div className={'products'}>
+        <div className={'text-md mb-2 font-medium '}>Your Products</div>
+        <div className={'min-h-[260px] h-[260px] overflow-scroll flex flex-col'}>
           {props.calculatingProducts.map((product, index) => {
             return <Product key={index} product={product} />;
           })}
         </div>
       </div>
 
-      <Horizontal />
+      <div className={'absolute bottom-[10px] bg-white flex-1 flex flex-col justify-between'}>
+        <Horizontal />
 
-      <div className={'footer flex-1'}>
         <div className={'bankcard'}>
           <div className={'text-md font-medium'}>Bank Card</div>
-
           <div className={'relative flex flex-row items-center justify-between'}>
             {/*<div className={"card-number text-sm"}>**** **** **** 0000</div>*/}
             {/*<div className={"card-number text-sm"}>{props.bankcardList[0].bankId}</div>*/}
@@ -183,34 +201,39 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               className="w-full"
               value={optionValue}
               onChange={(item: any) => {
-                console.log(item);
+                // console.log(item);
                 setOptionValue(item);
                 props.onChangeBankcardID(item.value);
               }}
               options={props.bankcardList.map((bankcard, index) => {
                 return {
                   value: bankcard.bankId,
-                  label: bankcard.bankId,
+                  label: bankcard.bankAccount,
                 };
               })}
               isSearchable={false}
             />
           </div>
-        </div>
 
-        <Horizontal />
+          <Horizontal />
 
-        <div className={'mb-2 text-xs font-light text-gray-400'}>
-          <span>By continuing, I have read and agree</span>
-          <span className={'text-blue-500 underline'} onClick={props.onClickLoanAgreement}>
+          <div className={'mb-2 text-xs font-light text-gray-400'}>
+            <span>By continuing, I have read and agree</span>
+            <span className={'text-blue-500 underline'} onClick={props.onClickLoanAgreement}>
             {' '}
-            Loan Agreement{' '}
+              Loan Agreement{' '}
           </span>
-          <span>carefully.</span>
+            <span>carefully.</span>
+          </div>
         </div>
 
-        <Button text={'Confirm'} onClick={props.onConfirmApply} />
+        <div>
+          <Button text={'Confirm'} onClick={props.onConfirmApply} />
+        </div>
+
       </div>
+
+
     </div>
   );
 };

@@ -22,6 +22,7 @@ export interface InitialState {
   user: {
     state: USER_AUTH_STATE;
     userName: string;
+    maskUserName: string;
   };
   order: {
     state: ORDER_STATE;
@@ -66,6 +67,7 @@ const initialState: InitialState = {
   user: {
     state: USER_AUTH_STATE.ready,
     userName: '',
+    maskUserName: '',
   },
   order: {
     state: ORDER_STATE.empty,
@@ -105,6 +107,10 @@ export const indexPageSlice = createSlice({
     updateUserAPI: (state, action: PayloadAction<GetUserInfoServiceResponse>) => {
       // state.user.userName = action.payload.userName;
       state.user.userName = NativeAppInfo.phoneNo;
+      state.user.maskUserName =
+        NativeAppInfo?.phoneNo?.length >= 10
+          ? NativeAppInfo?.phoneNo?.slice(0, 3) + '****' + NativeAppInfo?.phoneNo?.slice(7, 10)
+          : NativeAppInfo?.phoneNo;
 
       if (action.payload.status === 0) {
         state.user.state = USER_AUTH_STATE.ready;
@@ -117,7 +123,7 @@ export const indexPageSlice = createSlice({
       }
     },
     updateIndexAPI: (state, action: PayloadAction<GetIndexResponse>) => {
-      console.log('updateIndexAPI', state, action);
+      // console.log('updateIndexAPI', state, action);
 
       state.indexAPI = action.payload;
       state.sharedIndex.marquee = action.payload.marquee;
@@ -133,11 +139,12 @@ export const indexPageSlice = createSlice({
 
       // NOTE: 會有其他條件同時相符，所以這邊用if優先權最高-直接第一
       if (action.payload.riskReject === true) {
-        // NOTICE: 新客直接被擋或是老客額度被擋，但前端直接視為 ORDER_STATE.reject，
+        // NOTICE: 新客直接被擋或是老客額度被擋，但前端直接視為 RISK_CONTROL_STATE.order_reject
         // NOTICE: order
-        state.order.state = ORDER_STATE.reject;
-        state.order.overdueOrComingOverdueOrder = null;
-      } else if (action.payload.payableRecords.length === 0) {
+        state.riskControl.state = RISK_CONTROL_STATE.order_reject;
+        // state.order.overdueOrComingOverdueOrder = null;
+      }
+      if (action.payload.payableRecords.length === 0) {
         // NOTICE: order
         state.order.state = ORDER_STATE.empty;
         state.order.overdueOrComingOverdueOrder = null;
@@ -198,6 +205,7 @@ export const indexPageSlice = createSlice({
           // NOTE: 不可重刷
         } else {
           // NOTE: 可能是尚有額度
+          // NOTE: 下方 code 不需要
           // if (action.payload.noQuotaByRetryFewTimes === true) {
           //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
           // } else {
@@ -213,6 +221,7 @@ export const indexPageSlice = createSlice({
       } else if (!isRiskControlOverdue && action.payload.availableAmount > 0) {
         state.riskControl.state = RISK_CONTROL_STATE.valid;
       }
+
       // REFACTOR ME: 額度不足
       // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
       //
@@ -231,7 +240,7 @@ export const indexPageSlice = createSlice({
     },
     expiredRiskCountdown: (state, action) => {
       // state.riskControl.state = RISK_CONTROL_STATE.expired;
-      state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+    //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
     },
     // NOTICE: 可重刷取得逾期的計時器
     updateRefreshableCountdown: (state, action) => {
@@ -239,6 +248,7 @@ export const indexPageSlice = createSlice({
     },
     // NOTICE: 取消可重刷取得逾期的計時器
     expiredRefreshableCountdown: (state, action) => {
+      // 根據後端條件決定是否能不能重刷下方倒數
       state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
     },
   },

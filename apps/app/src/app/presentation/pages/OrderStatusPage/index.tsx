@@ -1,13 +1,9 @@
-// import Button from "../../components/Button";
 import moment from 'moment';
-import { useEffect } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import { ApproveRecord } from '../../../api/loanService/ApproveRecord';
-import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
-import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
-import { isInAndroid } from '../../../modules/window/isInAndroid';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PageContent } from '../../components/layouts/PageContent';
 import { PagePathEnum } from '../PagePathEnum';
@@ -20,7 +16,7 @@ const OrderStatusPage = (props: any) => {
 
   return (
     <div>
-      {!isInAndroid() && (
+      {!isShowNavigation() && (
         <Navigation
           title={'Order Status'}
           back={() => {

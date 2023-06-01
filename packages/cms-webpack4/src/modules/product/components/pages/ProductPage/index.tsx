@@ -5,6 +5,7 @@ import {useProductFormModal} from "./hooks/useProductFormModal";
 import {ProductModal} from "./ProductModal";
 import ProductForm from "./ProductForm";
 import {itemRender} from "../../../../shared/components/common/itemRender";
+import { message } from "antd";
 
 export const ProductPage = () => {
 
@@ -15,22 +16,27 @@ export const ProductPage = () => {
 
   const {
     productModalData, setProductModalData,
-    form, handleCloseModal, merchantList,
+    form, handleCloseModal, merchantList, productRiskList,
+    modal,
     onFinish, setCustomAntFormFieldError,
-    customAntFormFieldError,
+    customAntFormFieldError, isPutProductSuccess, isPostProductCreateSuccess,
     triggerGetList, productListData,
     // onAutoFinishedForm,
     onFormSubmit,
-      enableLoanAmount,
-      enableReLoanAmount,
-      setEnableLoanAmount,
-      setEnableReLoanAmount,
       contextHolder,
   } = useProductFormModal({
     show: false,
     isEdit: false,
     // formRef,
   });
+
+  const [messageAPI, messageContextHolder] = message.useMessage();
+
+  useEffect(() => {
+      if(isPutProductSuccess || isPostProductCreateSuccess){
+          messageAPI.success('已储存');
+      }
+  }, [isPutProductSuccess, isPutProductSuccess])
 
   return domLoaded ? (
     <PageContainer
@@ -56,6 +62,7 @@ export const ProductPage = () => {
         },
       }}
     >
+      {messageContextHolder}
       <ProductTable triggerGetList={triggerGetList} productListData={productListData} setProductModalData={setProductModalData} />
 
       {productModalData.show && (
@@ -66,17 +73,15 @@ export const ProductPage = () => {
           isEdit={productModalData.isEdit}
           onOk={onFormSubmit}
         >
-          <ProductForm productModalData={productModalData}
+          <ProductForm modal={modal}
+                       productModalData={productModalData}
                        onFinish={onFinish}
                        form={form}
                        merchantList={merchantList}
+                       productRiskList={productRiskList}
                        customAntFormFieldError={customAntFormFieldError}
                        setCustomAntFormFieldError={setCustomAntFormFieldError}
                        show={productModalData.show}
-                       enableLoanAmount={enableLoanAmount}
-                       enableReLoanAmount={enableReLoanAmount}
-                       setEnableLoanAmount={setEnableLoanAmount}
-                       setEnableReLoanAmount={setEnableReLoanAmount}
             />
         </ProductModal>
       )}

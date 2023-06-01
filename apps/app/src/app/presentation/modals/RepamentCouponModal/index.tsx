@@ -1,20 +1,17 @@
 import { MdRadioButtonChecked } from '@react-icons/all-files/md/MdRadioButtonChecked';
 import { MdRadioButtonUnchecked } from '@react-icons/all-files/md/MdRadioButtonUnchecked';
-import { environment } from 'apps/app/src/environments/environment';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import { Overlay } from '@frontend/mobile/shared/ui';
 
+import NoDataImage from '../../../../assets/NoData.svg';
 import { useLazyGetCouponApplicableListQuery } from '../../../api/rtk';
 import { getToken } from '../../../modules/querystring/getToken';
-import Coupon from '../../components/Coupon';
-import { ICouponProps } from '../../components/Coupon';
+import Coupon, { ICouponProps } from '../../components/Coupon';
 import { Button } from '../../components/layouts/Button';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../../pages/PagePathEnum';
-import NoData from './NoData.svg';
 
 type ICouponOption = ICouponProps & {
   isChecked: boolean;
@@ -73,13 +70,19 @@ const RepamentCouponModal = () => {
     );
   };
 
+  const NoCouponSection = () => {
+    return (
+      <div className={`flex grow flex-col items-center justify-center`}>
+        <img src={NoDataImage} alt="" />
+        <div className={`mt-5`}>There are currently no coupon</div>
+      </div>
+    );
+  };
+
   const renderNoCoupon = () => {
     return (
       <>
-        <div className={`flex grow flex-col items-center justify-center`}>
-          <img src={NoData} alt="" />
-          <div className={`mt-5`}>There are currently no coupon</div>
-        </div>
+        <NoCouponSection />
         <div className="p-2">
           <Button text={'Back'} className="w-full" onClick={() => navigate(-1)} />
         </div>

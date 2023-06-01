@@ -1,23 +1,27 @@
+import "./polyfills";
+// NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
+import { SentryModule } from './app/modules/sentry';
+import "./app/modules/errorHandler";
+import './app/modules/posthog';
+
+import './app/modules/sentry';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
-import App from './app/app';
-import './app/modules/errorHandler';
-import './app/modules/i18n';
-import './app/modules/posthog';
-// NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
-import { SentryModule } from './app/modules/sentry';
-import './app/modules/sentry';
+// NOTE: ENV
+import { environment } from './environments/environment';
+
+// NOTE: Modules
+import { NativeAppInfo } from './app/persistant/nativeAppInfo';
 import { applyCustomTheme } from './app/modules/theme';
+import './app/modules/i18n';
 import './app/modules/timezone';
 // NOTICE : 會引用 dispatch ，所以會先觸發 run root saga
 import './app/modules/window/IWindow';
-// NOTE: Modules
-import { NativeAppInfo } from './app/persistant/nativeAppInfo';
-// NOTE: ENV
-import { environment } from './environments/environment';
+
 // NOTE: Other
 import './style.css';
+import App from './app/app';
 
 const renderApp = () => {
   // NOTE: Before rendering

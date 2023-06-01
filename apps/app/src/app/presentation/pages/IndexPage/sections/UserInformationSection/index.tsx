@@ -28,13 +28,14 @@ export const UserInformationSection = (props: Props) => {
         <UserInfoSupportSection state={props.state} onClickToCustomerService={props.onClickToCustomerService} />
       </div>
 
-      {/*NOTE: 顯示即將逾期與逾期的狀態*/}
-      {props.state.user.state === USER_AUTH_STATE.success && (hasInComingOverdueOrder || hasOverdueOrder) && (
-        <div className={'mb-3 w-full'}>
-          <LatestOrderStatus state={props.state} />
-        </div>
-      )}
-
+        {/*NOTE: 顯示即將逾期與逾期的狀態*/}
+        {(props.state.user.state !== USER_AUTH_STATE.ready && props.state.user.state !== USER_AUTH_STATE.authing) &&
+         (hasInComingOverdueOrder || hasOverdueOrder) && (
+            <div className={'mb-3 w-full'}>
+                <LatestOrderStatus state={props.state} />
+            </div>
+         )
+        }
       <StatusContainer state={props.state} pageState={props.pageState}>
         {/*NOTE: 用戶尚未驗證*/}
         {/*NOTE: 顯示尚未驗證CTA*/}

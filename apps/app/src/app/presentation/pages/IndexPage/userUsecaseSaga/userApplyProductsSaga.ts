@@ -23,7 +23,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
     // yield put(getBankCardListAction)
     // NOTE: way2
     const data: GetBankCardListResponse = yield call(Service.UserService.GetBankCardList, null);
-    console.log('data', data);
+    // console.log('data', data);
 
     // NOTE: Popup Summary Modal - confirm | cancel | (see loan agreement model)
     yield put(

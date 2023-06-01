@@ -4,33 +4,39 @@ import { Form } from "antd";
 import BaseSettingSection from "./BaseSettingSection";
 import ProductSettingSection from "./ProductSettingSection";
 import LoanSettingSection from "./LoanSettingSection";
-import RateSettingSection from "./RateSettingSection";
+import RateSettingSection from "./RateSettingSection/RateSettingSection";
 import { UploadSettingSection } from "./UploadSettingSection";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
 import { GetAvailableMerchantResponse } from "../../../../service/product/response/getAvailableMerchantResponse";
 import OrderSettingSection from "./OrderSettingSection";
-import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
+import {
+    ProductInterestRate,
+    productInterestRatesContentKey
+} from "../../../../service/product/domain/productInterestRatePair";
 
 interface ProductFormProps {
+    modal: any;
     productModalData: ProductFormModal;
     onFinish: (value: any) => void;
     form: any;
     merchantList: GetAvailableMerchantResponse[];
+    productRiskList: string[];
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     show: boolean;
-
-    enableLoanAmount: boolean;
-    enableReLoanAmount: boolean;
-    setEnableLoanAmount: any;
-    setEnableReLoanAmount: any;
-
 }
 
 let isOnChange = false;
 
+export const productInterestRatePairsInitialValue: ProductInterestRate[] = [
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
+]
+
 const Index = (props: ProductFormProps) => {
-    const { productModalData, onFinish, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
+    const { productModalData, onFinish, modal, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
 
     const layout = {
         labelCol: { span: 5 },
@@ -117,13 +123,13 @@ const Index = (props: ProductFormProps) => {
 
         setCustomAntFormFieldError(prev => ({ ...prev, ...formFieldError }));
     }
-    
+
     function equalRangeBelow100(str: string, min: number = 0, max: number = 100) {
         return Number(str) < min || Number(str) > max
     }
 
     const isValueValidate = (value) => {
-        return !value || isNaN(value) || equalRangeBelow100(value) 
+        return !value || isNaN(value) || equalRangeBelow100(value)
     }
     const validatePreOrPostInterestRateField = (value, errorText, map, field) => {
 
@@ -156,8 +162,8 @@ const Index = (props: ProductFormProps) => {
             },
         }
     }
-    
-    
+
+
     // NOTICE: preInterestRate
     let map = {}
     const [interestRatePairsTouchInput, setInterestRatePairsTouchInput] = useState(null);
@@ -175,28 +181,20 @@ const Index = (props: ProductFormProps) => {
                     validateRiskRankLoanAmount(validateForm);
                 }
 
-                if (changedFields[0].name[0] === "newGuestLoanQuotaSwitch") {
-                    props.setEnableLoanAmount(changedFields[0].value === 0)
-                }
-
-                if (changedFields[0].name[0] === "oldGuestLoanQuotaSwitch") {
-                    props.setEnableReLoanAmount(changedFields[0].value === 0)
-                }
-
                 if (changedFields[0].name[0] === "productInterestRatePairs") {
                     setInterestRatePairsTouchInput(changedFields)
                 }
-              
+
                 // NOTICE: 新客利息
                 const preInterestRateField = allFields.filter(field => field.name && field.name[0] === "preInterestRate");
                 const postInterestRateField = allFields.filter(field => field.name && field.name[0] === "postInterestRate");
                 let inValidPreInterestRateUnit = isValueValidate(preInterestRateField[0].value);
                 let inValidPostInterestRateUnit = isValueValidate(postInterestRateField[0].value);
-              
+
                 // NOTICE:  inValidPreInterestUnit
                 if (changedFields[0].touched && changedFields[0].name[0] === "preInterestRate") {
                     map = validatePreOrPostInterestRateField(preInterestRateField[0].value, "请输入前置利息", map, 'preInterestRate');
-              
+
                 }
 
                 // NOTICE:  inValidPostInterestUnit
@@ -204,11 +202,11 @@ const Index = (props: ProductFormProps) => {
                     map = validatePreOrPostInterestRateField(postInterestRateField[0].value, "请输入後置利息", map, 'postInterestRate');
                 }
 
-               
+
                 if ( !inValidPreInterestRateUnit && !inValidPostInterestRateUnit) {
                     map = validatePreAndPostInterestRateSumBelow100(preInterestRateField[0].value, postInterestRateField[0].value, map, 'preInterestRate', 'postInterestRate')
                 }
-               
+
                 // NOTICE: 次新客利息
                 const renewPreInterestRateField = allFields.filter(field => field.name && field.name[0] === "renewPreInterestRate")
                 const renewPostInterestRateField = allFields.filter(field => field.name && field.name[0] === "renewPostInterestRate")
@@ -224,14 +222,12 @@ const Index = (props: ProductFormProps) => {
                 // NOTICE:  inValidPostInterestUnit
                 if (changedFields[0].touched && changedFields[0].name[0] === "renewPostInterestRate") {
                     map =  validatePreOrPostInterestRateField(renewPostInterestRateField[0].value, "请输入後置利息", map, 'renewPostInterestRate');
-             
+
                 }
 
                 if (!inValidRenewPreInterestRateUnit && !inValidRenewPostInterestRateUnit) {
                     map = validatePreAndPostInterestRateSumBelow100(renewPreInterestRateField[0].value, renewPostInterestRateField[0].value, map, 'renewPreInterestRate', 'renewPostInterestRate')
                 }
-
-                let productInterestRatePairsValidationMap = {}
 
                 // 送出表單時欄位檢查
                 if (changedFields.length > 1) {
@@ -243,24 +239,15 @@ const Index = (props: ProductFormProps) => {
                         ...validatePreOrPostInterestRateField(renewPostInterestRateField[0].value, "请输入後置利息", map, 'renewPostInterestRate'),
                     };
 
-                    // NOTICE: 复贷利率
-                    const { productInterestRatePairs } = props.form.getFieldsValue();
-                    productInterestRatePairsValidationMap = validatePreOrPostInterestGroups(productInterestRatePairs);
                 }
-              
+
 
                 setCustomAntFormFieldError(prev => {
-                    const finalMap = Object.keys(productInterestRatePairsValidationMap).length > 0
-                        ? productInterestRatePairsValidationMap
-                        : prev.productInterestRatePairs;
                     return {
                         ...prev,
                         ...map,
-                        productInterestRatePairs: finalMap as any,
                     }
                 })
-
-
 
             }}
             initialValues={{
@@ -270,11 +257,11 @@ const Index = (props: ProductFormProps) => {
                 top: false,
                 enabled: true,
                 templateType: 1,
-                productInterestRatePairs: [],
-                newGuestLoanQuotaSwitch: 1,
-                oldGuestLoanQuotaSwitch: 1,
+                productInterestRatePairs: productInterestRatePairsInitialValue,
                 newGuestProductDisplayStatus: 1,
                 renewProductDisplayStatus: 1,
+                newGuestLoanMixedRisk: [],
+                oldGuestLoanMixedRisk: [],
             }}
         >
             <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit} />
@@ -284,16 +271,17 @@ const Index = (props: ProductFormProps) => {
             />
             <OrderSettingSection />
             <LoanSettingSection form={form}
-                enableLoanAmount={props.enableLoanAmount}
-                enableReLoanAmount={props.enableReLoanAmount}
                 isEdit={productModalData.isEdit}
                 customAntFormFieldError={customAntFormFieldError}
+                productRiskList={props.productRiskList}
             />
             <RateSettingSection
+                modal={modal}
                 form={form}
                 customAntFormFieldError={customAntFormFieldError}
                 setCustomAntFormFieldError={setCustomAntFormFieldError}
                 interestRatePairsTouchInput={interestRatePairsTouchInput}
+                setInterestRatePairsTouchInput={setInterestRatePairsTouchInput}
             />
             <UploadSettingSection />
         </Form>

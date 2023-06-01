@@ -27,7 +27,7 @@ export const TabBar = (props: Props) => {
   };
   const userStatus: USER_AUTH_STATE = useSelector((state: RootState) => state.indexPage.user.state);
   return (
-    <div className={'sticky bottom-0 flex h-16 flex-row border-t bg-white'}>
+    <div className={'fixed left-0 right-0 bottom-0 flex h-16 flex-row border-t bg-white'}>
       <div
         className={'flex flex-1 flex-col items-center justify-center'}
         onClick={() => {

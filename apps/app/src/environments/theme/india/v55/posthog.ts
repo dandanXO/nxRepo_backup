@@ -14,3 +14,20 @@ export const v55PosthogConfig: PosthogConfig = {
     api_host: 'https://13.234.216.21:6600',
   },
 };
+
+const person = {
+  name: "andy",
+  age: 11,
+}
+const {name, age} = person
+console.log("name", name);
+
+function *test() {
+  yield 1;
+  yield 2;
+}
+console.log("test", test());
+console.log("test", test());
+console.log("test", test());
+
+console.log("??", person ?? "yes" );
