@@ -8,6 +8,7 @@ import { Input, InputValue } from '@frontend/mobile/shared/ui';
 import { Button } from '../../components/layouts/Button';
 import { PagePathEnum } from '../PagePathEnum';
 import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
+import {NativeAppInfo} from "../../../persistant/nativeAppInfo";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -183,17 +184,16 @@ export const LoginForm = () => {
             handleLogin();
           }}
         />
+
         <div className="py-4 text-xs text-[#7B7B7B]">
-          {' '}
-          By continuing, you agree and acknowledge you have read the
+          By continuing, you agree to our
           <span
             className="mx-1 text-blue-500 underline decoration-blue-500"
             onClick={() => navigate(PagePathEnum.PrivacyPolicyModal)}
           >
             Privacy Policy
           </span>
-          You also consent to receive SMS messages.Please carefully read the above agreement, agreed to check and enter
-          the next step.
+          . “{NativeAppInfo.appName}” will send an SMS message to verify your phone number and account.
         </div>
       </div>
     </>
