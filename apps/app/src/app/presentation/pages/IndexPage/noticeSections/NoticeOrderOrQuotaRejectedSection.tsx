@@ -3,8 +3,8 @@ import { NoticeSectionContainer } from './index';
 type Props = {};
 export const NoticeOrderOrQuotaRejectedSection = (props: Props) => {
   return (
-    <NoticeSectionContainer>
-      <div className={'mb-2 text-orange-500'}>Your application has not been approved</div>
+    <NoticeSectionContainer dataTestingID="noticeOrderOrQuotaRejected">
+      <div className={'mb-2 text-orange-500'}>Your application was not approved</div>
 
       <div className={'paragraph mb-3 font-light'}>
         Sorry, we regret to inform you that your loan application did not meet approval criteria.

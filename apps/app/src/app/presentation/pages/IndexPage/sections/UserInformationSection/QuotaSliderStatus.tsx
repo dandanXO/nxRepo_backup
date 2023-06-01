@@ -61,19 +61,19 @@ export const QuotaSliderStatus = (props: Props) => {
   useEffect(() => {
     props.setQuotaBarTargetPrice(currentQuotaValue);
   }, [currentQuotaValue]);
-
   return (
-    <div className={'mb-4 text-center'}>
+    <div className={'mb-4 text-center'} data-testing-id={'quotaSlider'} data-testing-disable={disableQuotaSlider}>
       <div className={'h-[60px]'}>
         <div className={'mb flex flex-col items-center justify-center'}>
           <div className="mb-2 flex w-full flex-row justify-between">
             <div className="text-sm font-light text-white">You can get up to</div>
             <div className="font-medium text-white">
-              {environment.currency} {currentQuotaLabelValue} / {maxQuotaValue}
+              {environment.currency} 
+              <span data-testing-id='current-quota-value'>{currentQuotaLabelValue}</span> / <span data-testing-id='max-quota-value'>{maxQuotaValue}</span>
             </div>
           </div>
 
-          <div className="slider mb-1">
+          <div className="slider mb-1"data-testing-disable={disableQuotaSlider}>
             <ReactSlider
               className="quota-slider"
               trackClassName={cx({
@@ -118,7 +118,7 @@ export const QuotaSliderStatus = (props: Props) => {
         {/*NOTE: ExclusiveLoanOffer*/}
         <div className={'relative top-1 rounded-lg bg-white px-1 py-2 shadow-md shadow-gray-300'}>
           <span className={'pr-2'}>Exclusive Personal Loan offer</span>
-          <span className={`${props.countdown === '00:00:00' ? 'text-slate-500' : 'text-orange-500'}`}>
+          <span data-testing-id={'quota-countdown'} className={`${props.countdown === '00:00:00' ? 'text-slate-500' : 'text-orange-500'}`}>
             {props.countdown}
           </span>
         </div>

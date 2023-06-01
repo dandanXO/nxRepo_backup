@@ -2,8 +2,8 @@ import { NoticeSectionContainer } from './index';
 
 export const NoticeUserRejectedSection = () => {
   return (
-    <NoticeSectionContainer>
-      <div className={'mb-2 text-orange-500'}>Your application has not been approved</div>
+    <NoticeSectionContainer dataTestingID="noticeUserRejected">
+      <div  className={'mb-2 text-orange-500'}>Your application was not approved</div>
 
       <div className={'paragraph mb-3 font-light'}>
         We regret to inform you that we cannot offer you any loans due to your credit score being below our standards.

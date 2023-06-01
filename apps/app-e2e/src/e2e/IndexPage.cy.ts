@@ -79,7 +79,9 @@ describe('IndexPage', () => {
       "loginFirst":false,
       "kycFirst":false,
       "indexH5Url":null,
-      "couponH5Url":null
+      "couponH5Url":null,
+      "csServiceTime":"MON - FRI, 9:00 AM - 6:00 PM", 
+      "csWhatsApp":null,
     }
     cy.intercept("/api/v2/init?packageId**", initResponse)
   })
@@ -278,10 +280,11 @@ describe('IndexPage', () => {
   })
 
   // User reject (Android: Level 1)
-  it("status: 用戶認證被拒絕", () => {
+  it.only("status: 用戶認證被拒絕", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
-      "userName": "9013452123",
+    //   "userName": "9013452123",
+      "userName":"後端API沒給三二一",
       "status": USER_AUTH_STATE.reject,
       "demoAccount": false,
       "oldUser": false,
@@ -296,13 +299,42 @@ describe('IndexPage', () => {
     })
     visitIndexPage();
 
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到反灰無法使用的可借款額度拉霸、歸零的倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸按鈕在最右邊
-    // NOTE: important 看到用戶認證被拒絕訊息
-    // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible");
+      
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(userServiceResponse.userName);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(userServiceResponse.userName.slice(0, 3) + '****' + userServiceResponse.userName.slice(7, 10) || userServiceResponse.userName)
+      });
+
+      // NOTE: important 看到反灰無法拖拉使用的可借款額霸、看到文字顯示最低與最高範圍為 ****
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr','data-testing-disable').should('eq','true');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class",'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
+    
+      // NOTE: important 歸零的倒數計計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
+      
+      // NOTE: important 看到用戶認證被拒絕訊息
+      indexPagePo.noticeUserRejected().should("be.visible");
+      indexPagePo.noticeUserRejected().contains(`Your application was not approved`);
+      indexPagePo.noticeUserRejected().contains(`We regret to inform you that we cannot offer you any loans due to your credit score being below our standards.`);
+      indexPagePo.noticeUserRejected().contains(`If you have any questions, please contact our customer service center.`);
+      
+      // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
+      indexPagePo.applyButton().should('not.exist');
+      indexPagePo.reacquireCreditButton().should('not.exist');
+      indexPagePo.viewAppProgressButton().should("be.visible").contains('View Application Progress');
   })
 
   // NOTICE: 訂單相關
@@ -2089,7 +2121,7 @@ describe('IndexPage', () => {
 
 
   // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 9)
-  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
