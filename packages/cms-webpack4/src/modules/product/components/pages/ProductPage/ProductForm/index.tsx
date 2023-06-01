@@ -24,6 +24,10 @@ interface ProductFormProps {
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
     show: boolean;
+    enableLoanAmount: boolean;
+    enableReLoanAmount: boolean;
+    setEnableLoanAmount: any;
+    setEnableReLoanAmount: any;
 }
 
 let isOnChange = false;
@@ -181,6 +185,14 @@ const Index = (props: ProductFormProps) => {
                     validateRiskRankLoanAmount(validateForm);
                 }
 
+                if (changedFields[0].name[0] === "newGuestLoanQuotaSwitch") {
+                    props.setEnableLoanAmount(changedFields[0].value === 0)
+                }
+
+                if (changedFields[0].name[0] === "oldGuestLoanQuotaSwitch") {
+                    props.setEnableReLoanAmount(changedFields[0].value === 0)
+                }
+
                 if (changedFields[0].name[0] === "productInterestRatePairs") {
                     setInterestRatePairsTouchInput(changedFields)
                 }
@@ -258,6 +270,8 @@ const Index = (props: ProductFormProps) => {
                 enabled: true,
                 templateType: 1,
                 productInterestRatePairs: productInterestRatePairsInitialValue,
+                newGuestLoanQuotaSwitch: 1,
+                oldGuestLoanQuotaSwitch: 1,
                 newGuestProductDisplayStatus: 1,
                 renewProductDisplayStatus: 1,
                 newGuestLoanMixedRisk: [],
@@ -271,6 +285,8 @@ const Index = (props: ProductFormProps) => {
             />
             <OrderSettingSection />
             <LoanSettingSection form={form}
+                enableLoanAmount={props.enableLoanAmount}
+                enableReLoanAmount={props.enableReLoanAmount}
                 isEdit={productModalData.isEdit}
                 customAntFormFieldError={customAntFormFieldError}
                 productRiskList={props.productRiskList}

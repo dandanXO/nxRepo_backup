@@ -23,6 +23,10 @@ export const ProductPage = () => {
     triggerGetList, productListData,
     // onAutoFinishedForm,
     onFormSubmit,
+      enableLoanAmount,
+      enableReLoanAmount,
+      setEnableLoanAmount,
+      setEnableReLoanAmount,
       contextHolder,
   } = useProductFormModal({
     show: false,
@@ -82,6 +86,10 @@ export const ProductPage = () => {
                        customAntFormFieldError={customAntFormFieldError}
                        setCustomAntFormFieldError={setCustomAntFormFieldError}
                        show={productModalData.show}
+                       enableLoanAmount={enableLoanAmount}
+                       enableReLoanAmount={enableReLoanAmount}
+                       setEnableLoanAmount={setEnableLoanAmount}
+                       setEnableReLoanAmount={setEnableReLoanAmount}
             />
         </ProductModal>
       )}
