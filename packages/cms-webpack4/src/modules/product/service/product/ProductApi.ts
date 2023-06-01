@@ -81,13 +81,6 @@ const ProductApi = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
-        // NOTE: GET /hs/admin/product-manage/risk/dropdown 混和風控下拉選單
-        getProductRiskDropdown: builder.query<string[], null>({
-            query: () => ({
-                url: '/product-manage/risk/dropdown',
-                method: 'get'
-            })
-        })
     })
 })
 
@@ -97,6 +90,5 @@ export const {
     useLazyGetProductQuery,
     usePostProductCreateMutation,
     usePutProductEditMutation,
-    usePatchProductEditMutation,
-    useGetProductRiskDropdownQuery,
+    usePatchProductEditMutation
 } = ProductApi;

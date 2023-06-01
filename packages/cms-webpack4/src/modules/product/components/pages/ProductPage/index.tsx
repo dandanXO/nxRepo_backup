@@ -16,7 +16,7 @@ export const ProductPage = () => {
 
   const {
     productModalData, setProductModalData,
-    form, handleCloseModal, merchantList, productRiskList,
+    form, handleCloseModal, merchantList,
     modal,
     onFinish, setCustomAntFormFieldError,
     customAntFormFieldError, isPutProductSuccess, isPostProductCreateSuccess,
@@ -82,7 +82,6 @@ export const ProductPage = () => {
                        onFinish={onFinish}
                        form={form}
                        merchantList={merchantList}
-                       productRiskList={productRiskList}
                        customAntFormFieldError={customAntFormFieldError}
                        setCustomAntFormFieldError={setCustomAntFormFieldError}
                        show={productModalData.show}
