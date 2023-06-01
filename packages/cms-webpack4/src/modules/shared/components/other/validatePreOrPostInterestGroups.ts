@@ -1,4 +1,4 @@
-import { ProductInterestRatePair } from '../../../product/service/product/domain/productInterestRatePair';
+import { ProductInterestRate } from '../../../product/service/product/domain/productInterestRatePair';
 
 function equalRangeBelow100(str: string, min = 0, max = 100) {
     return Number(str) < min || Number(str) > max;
@@ -81,7 +81,7 @@ const convertErrorsArrayToMap = (errors) => {
 };
 
 export const validatePreOrPostInterestGroups = (
-    groups: ProductInterestRatePair[],
+    groups: ProductInterestRate[],
     isMultiGroup = false,
     multiGroupName = '',
 ): Record<any, any> => {
