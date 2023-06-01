@@ -7,12 +7,16 @@ import {
     useLazyGetProductQuery,
     usePostProductCreateMutation,
     usePutProductEditMutation,
-} from '../../../../service/product/ProductApi';
-import { ProductTypes } from '../../../../service/product/domain/productTypes';
-import { Form, FormInstance, Modal } from 'antd';
-import moment from 'moment/moment';
-import React, { useCallback, useEffect, useState } from 'react';
-
+    useGetProductRiskDropdownQuery,
+} from "../../../../service/product/ProductApi";
+import moment from "moment/moment";
+import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import { ProductTypes } from "../../../../service/product/domain/productTypes";
+import { validatePreOrPostInterestGroups } from "../../../../../shared/components/other/validatePreOrPostInterestGroups";
+import {
+    BaseRiskRank, ProductInterestRate, ProductInterestRatesContent,
+    productInterestRatesContentKey
+} from "../../../../service/product/domain/productInterestRatePair";
 export interface ProductFormModal {
     show: boolean;
     isEdit?: boolean;
@@ -21,27 +25,56 @@ export interface ProductFormModal {
     formRef?: any;
 }
 
-export const useProductFormModal = (
-    props: ProductFormModal,
-): {
-    productModalData: ProductFormModal;
-    productFormData: Product;
-    setProductModalData: React.Dispatch<ProductFormModal>;
-    handleCloseModal: (e) => void;
-    onFinish: (value: any) => void;
-    form: FormInstance;
-    merchantList: any;
-    customAntFormFieldError: CustomAntFormFieldError;
-    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
-    triggerGetList: any;
-    productListData: GetProductListResponse;
-    onFormSubmit: () => void;
-    enableLoanAmount: boolean;
-    enableReLoanAmount: boolean;
-    setEnableLoanAmount: React.Dispatch<boolean>;
-    setEnableReLoanAmount: React.Dispatch<boolean>;
-    contextHolder: React.ReactElement;
-} => {
+
+export interface FormUploadFileList {
+    uid: string;
+    name: string;
+    url: string;
+}
+
+export interface ProductFormUploads {
+    logoFileList: UploadFile[];
+    backgroundImgFileList: UploadFile[];
+}
+
+export const productInterestRatesConvertToBackendMap: { [key in number]: { label : string, key : BaseRiskRank } } = {
+    0 : {
+        label: '极好',
+        key: "EXCELLENT"
+    },
+    1 : {
+        label: '良好',
+        key: 'GOOD'
+    },
+    2 : {
+        label: '正常',
+        key: "NORMAL"
+    },
+    3 : {
+        label: '普通',
+        key: "ORDINARY"
+    }
+}
+
+const productInterestRatesConvertToFrontendMap: { [key in BaseRiskRank]? : { label: string, sort: number} } =
+    Object.keys(productInterestRatesConvertToBackendMap).reduce((acc, current) => ({
+    ...acc,
+    [productInterestRatesConvertToBackendMap[current].key] : {
+        label: productInterestRatesConvertToBackendMap[current].label,
+        sort: Number(current),
+    }
+}), {})
+/*
+    productInterestRatesConvertToFrontendMap like {
+        EXCELLENT : {
+            label : 极好,
+            sort : 0
+        }
+    }
+ */
+
+export const useProductFormModal = (props: ProductFormModal) => {
+
     const [modal, contextHolder] = Modal.useModal();
 
     const [productModalData, setProductModalData] = useState<ProductFormModal>({
@@ -58,18 +91,19 @@ export const useProductFormModal = (
     const [triggerGetProduct, { currentData: productFormData, isFetching }] = useLazyGetProductQuery({});
 
     const initCustomAntFormFieldError = {
-        preInterestRate: { validateStatus: '', help: '' },
-        postInterestRate: { validateStatus: '', help: '' },
-        renewPostInterestRate: { validateStatus: '', help: '' },
-        renewPreInterestRate: { validateStatus: '', help: '' },
-        productInterestRatePairs: {},
-    };
+        preInterestRate: { validateStatus: "", help: "" },
+        postInterestRate: { validateStatus: "", help: "" },
+        renewPostInterestRate: { validateStatus: "", help: "" },
+        renewPreInterestRate: { validateStatus: "", help: "" },
+        productInterestRatePairsChecked: { validateStatus: "", help: ""},
+        productInterestRatePairs: {}
+    }
 
-    const [customAntFormFieldError, setCustomAntFormFieldError] =
-        useState<CustomAntFormFieldError>(initCustomAntFormFieldError);
-    const { currentData: merchantList } = useGetAvailableMerchantListQuery(null);
-    const [postProductCreate] = usePostProductCreateMutation();
-    const [putProduct] = usePutProductEditMutation();
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>(initCustomAntFormFieldError)
+    const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
+    const { currentData: productRiskList } = useGetProductRiskDropdownQuery(null);
+    const [postProductCreate, { isLoading, isSuccess: isPostProductCreateSuccess }] = usePostProductCreateMutation();
+    const [putProduct, { isSuccess: isPutProductSuccess }] = usePutProductEditMutation();
 
     useEffect(() => {
         if (!productModalData.productId) {
@@ -77,11 +111,8 @@ export const useProductFormModal = (
         }
         triggerGetProduct({
             productId: productModalData.productId,
-        });
-    }, [productModalData.productId]);
-
-    const [enableLoanAmount, setEnableLoanAmount] = useState<boolean>(false);
-    const [enableReLoanAmount, setEnableReLoanAmount] = useState<boolean>(false);
+        })
+    }, [productModalData.productId])
 
     useEffect(() => {
         if (isFetching) return;
@@ -91,15 +122,51 @@ export const useProductFormModal = (
         if (!productFormData) return;
         if (!merchantList) return;
 
-        setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false);
-        setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false);
-
-        const currentMerchant = merchantList?.find((merchant) => merchant.merchantId === productFormData.merchantId);
+        const currentMerchant = merchantList?.find(merchant => merchant.merchantId === productFormData.merchantId);
 
         if (!productModalData.productId) {
             form.resetFields();
             setCustomAntFormFieldError(initCustomAntFormFieldError);
         } else {
+            let productInterestRatePairs: ProductInterestRate[] = productFormData.productInterestRatePairs.reduce((acc, current)=> {
+                if (current.riskRank === 'REJECT') return acc;
+                const groupIndex = productInterestRatesConvertToFrontendMap[current.riskRank].sort
+                let interestRates: ProductInterestRatesContent[] = current[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => [
+                    ...interestRatesAcc,
+                    {
+                        ...interestRatesCurrent,
+                        preInterest: fixedFloatNumberToFixed3(Number(interestRatesCurrent.preInterest) * 100),
+                        postInterest: fixedFloatNumberToFixed3(Number(interestRatesCurrent.postInterest) * 100),
+                    }
+                ], []);
+
+                if (interestRates.length === 0) {
+                    interestRates = [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]
+                }
+
+                acc[groupIndex] = {
+                    [productInterestRatesContentKey]: interestRates
+                }
+                return acc;
+            }, []);
+
+            const { hasError } = validatePreOrPostInterestGroups(productInterestRatePairs, true, productInterestRatesContentKey);
+
+            // NOTICE 後端回應初貸混合風控與複貸混合風控是包在prodRiskProvider的list之中，結構為
+            // [object, ...]， object的結構為
+            // { enable: true, isOldUser: ture, provider: "BATEI"}，
+            // enable：是否啟用，都帶ture，isOldUser：true為複貸false為初貸，provider：風控商名稱
+            // 需轉為Filed name為newGuestLoanMixedRisk與oldGuestLoanMixedRisk的tags mode Select 的Field value 中，
+            const { newGuestLoanMixedRisk, oldGuestLoanMixedRisk } = productFormData.prodRiskProvider?.reduce((acc, current) => {
+                if(current.isOldUser === false) { // 初貸
+                    acc['newGuestLoanMixedRisk'] = acc['newGuestLoanMixedRisk'].concat(current.provider)
+                } else if (current.isOldUser === true) { // 複貸
+                    acc['oldGuestLoanMixedRisk'] = acc['oldGuestLoanMixedRisk'].concat(current.provider)
+                }
+
+                return acc
+            }, { newGuestLoanMixedRisk: [], oldGuestLoanMixedRisk: [] }) || { newGuestLoanMixedRisk: [], oldGuestLoanMixedRisk: [] };
+
             form.setFieldsValue({
                 merchantId: currentMerchant?.name,
                 productName: productFormData.productName,
@@ -152,8 +219,6 @@ export const useProductFormModal = (
                 extensible: productFormData.extensible,
                 extensibleOverdueDays: productFormData.extensibleOverdueDays,
 
-                newGuestLoanQuotaSwitch: productFormData.newGuestLoanQuotaSwitch === true ? 1 : 0,
-                oldGuestLoanQuotaSwitch: productFormData.oldGuestLoanQuotaSwitch === true ? 1 : 0,
                 oldGuestLoanAmount: productFormData.oldGuestLoanAmount,
 
                 riskRankLoanAmount: productFormData.riskRankLoanAmount,
@@ -176,21 +241,16 @@ export const useProductFormModal = (
                 dummy: productFormData.dummy,
                 extensionRate: `${fixedFloatNumberToFixed3(Number(productFormData.extensionRate) * 100)}`,
                 overdueRate: `${fixedFloatNumberToFixed3(Number(productFormData.overdueRate) * 100)}`,
-                productInterestRatePairs: productFormData.productInterestRatePairs.map((ratePair) => {
-                    return {
-                        num: ratePair.num,
-                        preInterest: fixedFloatNumberToFixed3(ratePair.preInterest * 100),
-                        postInterest: fixedFloatNumberToFixed3(ratePair.postInterest * 100),
-                        plusAmount: ratePair.plusAmount,
-                    };
-                }),
-
+                productInterestRatePairsChecked: !hasError,
                 top: productFormData.top,
                 tags: productFormData.tags.split(','),
                 templateType: productFormData.templateType,
                 weight: productFormData.weight,
                 enabled: productFormData.enabled,
-            });
+                productInterestRatePairs,
+                newGuestLoanMixedRisk,
+                oldGuestLoanMixedRisk
+            })
         }
 
         // console.log("productFormData", productFormData);
@@ -272,28 +332,59 @@ export const useProductFormModal = (
 
         let isNotFinish = false;
 
-        // NOTICE：判斷前置／後置欄位是否有錯誤訊息(有錯誤不送表單）
-        Object.keys(customAntFormFieldError).map((key) => {
+        // NOTICE：判斷欄位是否有錯誤訊息　（有錯誤不送表單）
+        Object.keys(customAntFormFieldError).map(key => {
             if (key !== 'productInterestRatePairs' && customAntFormFieldError[key]['validateStatus'] !== '') {
                 isNotFinish = true;
             }
-        });
-        Object.values(customAntFormFieldError['productInterestRatePairs']).map((field) => {
-            Object.keys(field).map((i) => {
-                if (field[i]['validateStatus'] !== '') {
-                    isNotFinish = true;
+        })
+
+        if (!values?.productInterestRatePairsChecked) {
+            setCustomAntFormFieldError((prev) => ({
+                ...prev,
+                productInterestRatePairsChecked: {
+                    help: '此字段为必填项',
+                    validateStatus: 'error',
                 }
-            });
-        });
+            }))
+            isNotFinish = true;
+        }
 
         if (isNotFinish) return;
 
-        const productInterestRatePairs = values?.productInterestRatePairs?.map((i) => ({
-            num: i.num,
-            postInterest: Number((Number(i.postInterest) * 0.01).toFixed(3)),
-            preInterest: Number((Number(i.preInterest) * 0.01).toFixed(3)),
-            plusAmount: Number(i.plusAmount),
-        }));
+        const productInterestRatePairs = form.getFieldValue('productInterestRatePairs').reduce((acc, current, index) => {
+            const interestRates = current[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => (
+                [
+                    ...interestRatesAcc,
+                    {
+                        ...interestRatesCurrent,
+                        postInterest: Number((Number(interestRatesCurrent.postInterest) * 0.01).toFixed(3)),
+                        preInterest: Number((Number(interestRatesCurrent.preInterest) * 0.01).toFixed(3)),
+                        plusAmount: Number(interestRatesCurrent.plusAmount),
+                    }
+                ]
+            ), [])
+
+            return [
+                ...acc,
+                {
+                    riskRank: productInterestRatesConvertToBackendMap[index].key,
+                    [productInterestRatesContentKey]: interestRates
+                }
+            ]
+        }, [])
+
+        // NOTICE 需將newGuestLoanMixedRisk與oldGuestLoanMixedRisk的資料轉為後端prodRiskProvider的格式
+        const newGuestLoanMixedRisks = values.newGuestLoanMixedRisk.reduce(
+            (acc, current)=> ([...acc, { isOldUser: false, provider: current}]), [])
+
+        const oldGuestLoanMixedRisk = values.oldGuestLoanMixedRisk.reduce(
+            (acc, current)=> ([...acc, { isOldUser: true, provider: current}]), [])
+
+        const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
+            ...i,
+            loanAmount: Number(i.loanAmount),
+        }))
 
         let creatProductData: ProductTypes = {
             merchantId: Number(values.merchantId),
@@ -321,8 +412,8 @@ export const useProductFormModal = (
             extensible: values.extensible,
             extensibleOverdueDays: Number(values.extensibleOverdueDays),
 
-            newGuestLoanQuotaSwitch: values.newGuestLoanQuotaSwitch,
-            oldGuestLoanQuotaSwitch: values.oldGuestLoanQuotaSwitch,
+            prodRiskProvider: newGuestLoanMixedRisks.concat(oldGuestLoanMixedRisk),
+
             riskRankLoanAmount: values.riskRankLoanAmount,
             oldGuestLoanAmount: values.oldGuestLoanAmount,
             renewMaxThreshold: Number(values.renewMaxThreshold),
@@ -430,6 +521,7 @@ export const useProductFormModal = (
     }, []);
 
     return {
+        modal,
         productModalData,
         productFormData,
         setProductModalData,
@@ -437,16 +529,15 @@ export const useProductFormModal = (
         onFinish,
         form,
         merchantList,
+        productRiskList,
         customAntFormFieldError,
         setCustomAntFormFieldError,
         triggerGetList,
         productListData,
+        isPostProductCreateSuccess,
+        isPutProductSuccess,
         // onAutoFinishedForm,
         onFormSubmit,
-        enableLoanAmount,
-        enableReLoanAmount,
-        setEnableLoanAmount,
-        setEnableReLoanAmount,
         contextHolder,
     };
 };

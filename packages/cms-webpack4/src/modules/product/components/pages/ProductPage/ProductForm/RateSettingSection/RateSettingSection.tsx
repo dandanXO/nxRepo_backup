@@ -1,17 +1,29 @@
-import PreAndPostInterestGroups from '../../../../../shared/components/other/PreAndPostInterestGroups';
-import { maxOneUnitFloatReplacer } from '../../../../../shared/utils/format/maxOneUnitFloatReplacer';
-import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
-import { NumberValidator } from '../../../../../shared/utils/validation/validator';
-import { Collapse, Form, Input, Typography } from 'antd';
-import { FormInstance } from 'antd/es';
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useEffect, useState } from "react";
+import {Form, Input, Typography, Collapse, message } from "antd";
+import {
+  NumberValidator,
+} from "../../../../../../shared/utils/validation/validator";
+import {maxOneUnitFloatReplacer} from "../../../../../../shared/utils/format/maxOneUnitFloatReplacer";
+import {CustomAntFormFieldError} from "../../../../../../shared/utils/validation/CustomAntFormFieldError";
+import {FormInstance} from "antd/es";
+import {ProductInterestRatePairsModal} from "./ProductInterestRatePairsModal";
+import {
+    validatePreOrPostInterestGroups
+} from "../../../../../../shared/components/other/validatePreOrPostInterestGroups";
+import { CheckCircleFilled, ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+    ProductInterestRate,
+    productInterestRatesContentKey
+} from "../../../../../service/product/domain/productInterestRatePair";
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;
 interface RateSettingSectionProps {
+    modal: any;
     form: FormInstance;
     customAntFormFieldError: CustomAntFormFieldError;
     setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<CustomAntFormFieldError>>;
+    setInterestRatePairsTouchInput: React.Dispatch<any>;
     interestRatePairsTouchInput: any;
 }
 export const CustomLabel = (props: { style?: CSSProperties; children: string }): JSX.Element => (
@@ -23,22 +35,102 @@ export const CustomLabel = (props: { style?: CSSProperties; children: string }):
 );
 
 const RateSettingSection = (props: RateSettingSectionProps): JSX.Element => {
+  const [showProductInterestRatePairsModal, setShowProductInterestRatePairsModal] = useState(false);
+  const { confirm } = props.modal;
+  const [messageAPI, contextHolder] = message.useMessage();
+  const [tempProductInterestRatePairs, setTempProductInterestRatePairs] = useState<ProductInterestRate[]>([])
+  const [everResetField, setEverResetField] = useState(false);
+
+  const productInterestRatePairCheckedError = props.customAntFormFieldError['productInterestRatePairsChecked']['help']
+  const productInterestRatePairsChecked = Form.useWatch('productInterestRatePairsChecked', props.form)
+
+  const handleProductInterestRatePairsModalOnOK = () => {
+      const { productInterestRatePairs } = props.form.getFieldsValue();
+      const { validateMap: productInterestRatePairsValidationMap, hasError} = validatePreOrPostInterestGroups(productInterestRatePairs, true, productInterestRatesContentKey)
+
+      props.setCustomAntFormFieldError(
+          prev => {
+              const finalMap = Object.keys(productInterestRatePairsValidationMap).length > 0
+                  ? productInterestRatePairsValidationMap
+                  : prev.productInterestRatePairs;
+              return {
+                  ...prev,
+                  productInterestRatePairs: finalMap as any,
+              }
+          }
+      )
+      if (!hasError) {
+          messageAPI.success('已储存');
+          props.form.setFieldValue('productInterestRatePairsChecked', true);
+          props.setInterestRatePairsTouchInput(null);
+          setTempProductInterestRatePairs([...productInterestRatePairs])
+          setShowProductInterestRatePairsModal(false);
+      }
+  }
+
+  const handleProductInterestRatePairsModalOnClose = (e) => {
+      // 有修改過欄位才要跳彈窗
+      if(props.interestRatePairsTouchInput || everResetField) {
+          confirm({
+              icon : null,
+              content: (
+                  <div style={{ height: '20px', display: "flex" }}>
+                      <ExclamationCircleOutlined style={{ color: '#FAAD14', display: "block", fontSize: '20px', marginRight: '10px' }} />
+                      <div style={{ lineHeight: '20px' }}>您的表单填写尚未完成，离开将不会储存已变更的资料。确定要离开吗？</div>
+                  </div>
+              ),
+              onOk() {
+                  props.form.setFieldValue('productInterestRatePairs', tempProductInterestRatePairs);
+                  props.setCustomAntFormFieldError(prev => ({
+                      ...prev,
+                      productInterestRatePairs: {}
+                  }))
+                  props.setInterestRatePairsTouchInput(null);
+                  setShowProductInterestRatePairsModal(false);
+                  setEverResetField(false);
+              },
+              onCancel() {
+                  //
+              }
+          })
+      } else {
+          setShowProductInterestRatePairsModal(false);
+      }
+  }
+
+  const handleProductInterestRateSettingOnClick = () => {
+      props.setCustomAntFormFieldError((prev) => ({
+          ...prev,
+          productInterestRatePairsChecked: {
+              validateStatus: '',
+              help: '',
+          }
+      }))
+      setShowProductInterestRatePairsModal(true)
+  }
+
+  // 不使用Form.useWatch取得productInterestRatePairs作為deps是因為沒有render過的欄位用useWatch取得不到值
+  useEffect(() => {
+      if (!showProductInterestRatePairsModal) {
+          const productInterestRatePairs = props.form.getFieldValue('productInterestRatePairs')
+          setTempProductInterestRatePairs([...productInterestRatePairs])
+      }
+
+  }, [props.form.getFieldValue('productInterestRatePairs')])
+
     // console.log("customAntFormFieldError", props.customAntFormFieldError);
-    return (
-        <React.Fragment>
-            <Collapse ghost defaultActiveKey={['1']}>
-                <Panel header="费率设定" key="1">
-                    <Paragraph style={{ margin: '0 0 0 100px' }}>
-                        <span>填写规则：</span>
-                        <ul>
-                            <li>
-                                所有费率至多填写至<Text strong>小数点后第一位</Text>，例如：20 或 20.5
-                            </li>
-                            <li>
-                                <Text strong>前置利息+后置利息</Text>不得超过100%
-                            </li>
-                        </ul>
-                    </Paragraph>
+  return (
+      <React.Fragment>
+          {contextHolder}
+          <Collapse ghost defaultActiveKey={["1"]}>
+              <Panel header="费率设定" key="1">
+                  <Paragraph style={{ margin: "0 0 0 100px" }}>
+                      <span>填写规则：</span>
+                      <ul>
+                          <li>所有费率至多填写至<Text strong>小数点后第一位</Text>，例如：20 或 20.5</li>
+                          <li><Text strong>前置利息+后置利息</Text>不得超过100%</li>
+                      </ul>
+                  </Paragraph>
 
                     <Form.Item label="新客利息" required>
                         <Input.Group compact>
@@ -201,31 +293,41 @@ const RateSettingSection = (props: RateSettingSectionProps): JSX.Element => {
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
                     </Form.Item>
 
-                    <Form.Item
-                        label="复贷利率"
-                        required
-                        tooltip={
-                            <div>
-                                <div>例如：</div>
-                                <div>起始期数1，前置利息10%，后置利息15%</div>
-                                <div>+起始期数4，前置利息8%，后置利息12%</div>
-                                <div>则1~3期费率同起始期数1</div>
-                                <div>第4期之后费率同起始期数4</div>
-                            </div>
-                        }
-                    >
-                        <PreAndPostInterestGroups
-                            form={props.form}
-                            fieldName={'productInterestRatePairs'}
-                            customAntFormFieldError={props.customAntFormFieldError}
-                            setCustomAntFormFieldError={props.setCustomAntFormFieldError}
-                            interestRatePairsTouchInput={props.interestRatePairsTouchInput}
-                        />
-                    </Form.Item>
-                </Panel>
-            </Collapse>
-        </React.Fragment>
-    );
-};
+                  <Form.Item
+                      label="复贷利率"
+                      name='productInterestRatePairsChecked'
+                      required
+                  >
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                          <a style={{ textDecoration:'underline' }} onClick={handleProductInterestRateSettingOnClick}>
+                              配置
+                          </a>
+                          <CheckCircleFilled style={{ color: `${productInterestRatePairsChecked ? '#52C41A' : '#D9D9D9'}` }} />
+                          {
+                              productInterestRatePairCheckedError &&
+                              <div style={{ position: 'absolute', color:'red', top: '23px' }}>
+                                  {productInterestRatePairCheckedError}
+                              </div>
+                          }
+                      </div>
+                  </Form.Item>
+                  {
+                      showProductInterestRatePairsModal && (
+                      <ProductInterestRatePairsModal
+                          form={props.form}
+                          customAntFormFieldError={props.customAntFormFieldError}
+                          setCustomAntFormFieldError={props.setCustomAntFormFieldError}
+                          interestRatePairsTouchInput={props.interestRatePairsTouchInput}
+                          show={showProductInterestRatePairsModal}
+                          onOk={handleProductInterestRatePairsModalOnOK}
+                          handleCloseModal={handleProductInterestRatePairsModalOnClose}
+                          setEverResetField={setEverResetField}
+                      />)
+                  }
+              </Panel>
+          </Collapse>
+      </React.Fragment>
+  )
+}
 
 export default RateSettingSection;

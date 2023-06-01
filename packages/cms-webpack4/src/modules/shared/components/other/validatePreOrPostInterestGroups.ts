@@ -3,44 +3,22 @@ import { ProductInterestRatePair } from '../../../product/service/product/domain
 function equalRangeBelow100(str: string, min = 0, max = 100) {
     return Number(str) < min || Number(str) > max;
 }
-export const validateValue = (value: number, errorText: string): string => {
-    return value !== 0 && !value
-        ? errorText
-        : isNaN(value)
-        ? '请输入數字'
-        : equalRangeBelow100(value.toString())
-        ? '请输入0-100间数字'
-        : '';
-};
+export const validateplusAmount = (value, errorText) => {
+    return value !== 0 && !value ? errorText
+        : isNaN(value) ? "请输入數字"
+            : Number(value) < 0 ? "请输入大于0的整数" : '';
+}
 
-export const validateNum = (value: number, errorText: string): string => {
-    return value !== 0 && !value
-        ? errorText
-        : isNaN(value)
-        ? '请输入數字'
-        : Number(value) < 1
-        ? '请输入大于1的整数'
-        : '';
-};
-export const validateplusAmount = (value: number, errorText: string): string => {
-    return value !== 0 && !value
-        ? errorText
-        : isNaN(value)
-        ? '请输入數字'
-        : Number(value) < 0
-        ? '请输入大于0的整数'
-        : '';
-};
-export const validatePreOrPostInterestGroups = (groups: ProductInterestRatePair[]): Record<any, any> => {
-    const validateErrors = groups?.map((field) => {
-        const numError = validateNum(field?.num, '请输入起始期数');
-        const preInterestError = validateValue(field?.preInterest, '请输入前置利息');
-        const postInterestError = validateValue(field?.postInterest, '请输入後置利息');
-        const plusAmounteError = validateplusAmount(field?.plusAmount, '请输入提額金额');
+const genErrors = (field) => {
+    const numError = validateNum(field?.num, "请输入起始期数");
+    const preInterestError = validateValue(field?.preInterest, "请输入前置利息");
+    const postInterestError = validateValue(field?.postInterest, "请输入後置利息");
+    const plusAmountError = validateplusAmount(field?.plusAmount, "请输入提額金额");
 
-        const isOver100 = Number(field?.preInterest) + Number(field?.postInterest) > 100;
+    const isOver100 = Number(field?.preInterest) + Number(field?.postInterest) > 100;
 
-        return {
+    return {
+        errors: {
             num: {
                 validateStatus: numError ? 'error' : '',
                 help: numError,
@@ -57,21 +35,44 @@ export const validatePreOrPostInterestGroups = (groups: ProductInterestRatePair[
                 value: field?.postInterest,
             },
             plusAmount: {
-                validateStatus: plusAmounteError ? 'error' : '',
-                help: plusAmounteError,
+                validateStatus: plusAmountError ? 'error' : '',
+                help: plusAmountError,
                 value: field?.plusAmount,
             },
-        };
-    });
-
-    const finalMap = {};
-    if (validateErrors) {
-        Object.keys(validateErrors).map((key) => {
-            finalMap[key] = {
-                ...finalMap[key],
-                ...validateErrors[key],
-            };
-        });
+        },
+        hasError: (numError || preInterestError || postInterestError || plusAmountError) !== '' || isOver100
     }
-    return finalMap;
-};
+}
+
+const convertErrorsArrayToMap = (errors) => {
+    const resultMap = {}
+    Object.keys(errors).map((key, index) => {
+        resultMap[key] = {
+            ...resultMap[key],
+            ...errors[key]
+        };
+    })
+    return resultMap
+}
+
+export const validatePreOrPostInterestGroups = (groups, isMultiGroup = false, multiGroupName = '') => {
+    let hasError = false
+    const validateErrors = isMultiGroup
+        ? groups?.map((part) => part[multiGroupName]?.map((field) => {
+            const result = genErrors(field)
+            hasError = result.hasError || hasError
+            return result.errors
+        }))
+        : groups?.map((field, index) => {
+            const result = genErrors(field)
+            hasError = result.hasError || hasError
+            return result.errors
+        });
+    let validateMap = {}
+    if (validateErrors) {
+        validateMap = isMultiGroup ? convertErrorsArrayToMap(validateErrors.map((part) => convertErrorsArrayToMap(part))) : convertErrorsArrayToMap(validateErrors)
+    }
+
+    return { validateMap, hasError }
+
+}
