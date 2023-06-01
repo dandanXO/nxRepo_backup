@@ -1,9 +1,10 @@
-import { Divider, Form, Input, Radio, Switch, Collapse, Select } from "antd";
-import React from "react";
-import { NumberValidator } from "../../../../../shared/utils/validation/validator";
-import { FormInstance } from "antd/es";
-import CustomLabel from "../../../../../shared/components/other/CustomLabel";
-import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
+import CustomLabel from '../../../../../shared/components/other/CustomLabel';
+import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
+import { NumberValidator } from '../../../../../shared/utils/validation/validator';
+import { Collapse, Form, Input, Select, Switch } from 'antd';
+import { FormInstance } from 'antd/es';
+import React from 'react';
+
 const { Panel } = Collapse;
 interface LoanSettingSectionProps {
     form: FormInstance;
@@ -15,7 +16,7 @@ interface LoanSettingSectionProps {
 const { Option } = Select;
 
 const LoanSettingSection = (props: LoanSettingSectionProps): JSX.Element => {
-    if(!props.productRiskList) return null;
+    if (!props.productRiskList) return null;
 
     const { productRiskList } = props;
 
@@ -106,32 +107,47 @@ const LoanSettingSection = (props: LoanSettingSectionProps): JSX.Element => {
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天后，不得展期</Form.Item>
                     </Form.Item>
 
-                    <Form.Item label="初贷初始额度" tooltip='混合风控列出的风控商会同时运作。混合风控可复选风控商，其中有勾选的会依风控；没有勾选的会依系统规则。'>
+                    <Form.Item
+                        label="初贷初始额度"
+                        tooltip="混合风控列出的风控商会同时运作。混合风控可复选风控商，其中有勾选的会依风控；没有勾选的会依系统规则。"
+                    >
                         <Form.Item
-                            label={<div style={{ marginLeft : 11 }}>混合风控<span style={{ marginLeft: 5, color: 'darkgrey'}}>(选填)</span></div>}
+                            label={
+                                <div style={{ marginLeft: 11 }}>
+                                    混合风控<span style={{ marginLeft: 5, color: 'darkgrey' }}>(选填)</span>
+                                </div>
+                            }
                             name="newGuestLoanMixedRisk"
                         >
-                            <Select
-                                placeholder='选择'
-                                mode="tags"
-                                showArrow
-                            >
-                                {productRiskList.map((part) => <Option key={part}>{part}</Option>)}
+                            <Select placeholder="选择" mode="tags" showArrow>
+                                {productRiskList.map((part) => (
+                                    <Option key={part}>{part}</Option>
+                                ))}
                             </Select>
                         </Form.Item>
                         <Form.Item
-                            label='系统规则'
+                            label="系统规则"
                             style={{ margin: '0' }}
                             help={(props.customAntFormFieldError?.[`riskRankLoanAmount_error`] as any)?.help}
-                            validateStatus={(props.customAntFormFieldError?.[`riskRankLoanAmount_error`] as any)?.validateStatus}
+                            validateStatus={
+                                (props.customAntFormFieldError?.[`riskRankLoanAmount_error`] as any)?.validateStatus
+                            }
                             required
                         >
-                            {[["极好", "EXCELLENT"], ["良好", "GOOD"], ["正常", "NORMAL"], ["普通", "ORDINARY"], ["拒绝", "REJECT"]].map((levelTag, index) => {
+                            {[
+                                ['极好', 'EXCELLENT'],
+                                ['良好', 'GOOD'],
+                                ['正常', 'NORMAL'],
+                                ['普通', 'ORDINARY'],
+                                ['拒绝', 'REJECT'],
+                            ].map((levelTag, index) => {
                                 return (
                                     <Form.Item key={index}>
                                         {index === 0 && (
                                             <div>
-                                                <CustomLabel style={{ margin: '0 8px 0 0', width: 76 }}>风控商等级</CustomLabel>
+                                                <CustomLabel style={{ margin: '0 8px 0 0', width: 76 }}>
+                                                    风控商等级
+                                                </CustomLabel>
                                                 <CustomLabel style={{ width: 120 }}>初始额度</CustomLabel>
                                             </div>
                                         )}
@@ -139,54 +155,80 @@ const LoanSettingSection = (props: LoanSettingSectionProps): JSX.Element => {
                                             <Form.Item style={{ margin: '0 8px 0 0', width: 76 }}>
                                                 <Input placeholder={levelTag[0]} disabled />
                                             </Form.Item>
-                                            <Form.Item name={['riskRankLoanAmount', index, 'riskRank']} initialValue={levelTag[1]} style={{ display: "none" }}>
+                                            <Form.Item
+                                                name={['riskRankLoanAmount', index, 'riskRank']}
+                                                initialValue={levelTag[1]}
+                                                style={{ display: 'none' }}
+                                            >
                                                 <Input />
                                             </Form.Item>
-                                            <Form.Item name={['riskRankLoanAmount', index, "loanAmount"]} style={{ margin: '0 8px 0 0', width: 120 }}
-                                                       help={(props.customAntFormFieldError?.[`riskRankLoanAmount_${index}`] as any)?.help}
-                                                       validateStatus={(props.customAntFormFieldError?.[`riskRankLoanAmount_${index}`] as any)?.validateStatus}
-                                                       rules={[{ required: true, message: "请输入初始额度" }]}
+                                            <Form.Item
+                                                name={['riskRankLoanAmount', index, 'loanAmount']}
+                                                style={{ margin: '0 8px 0 0', width: 120 }}
+                                                help={
+                                                    (
+                                                        props.customAntFormFieldError?.[
+                                                            `riskRankLoanAmount_${index}`
+                                                        ] as any
+                                                    )?.help
+                                                }
+                                                validateStatus={
+                                                    (
+                                                        props.customAntFormFieldError?.[
+                                                            `riskRankLoanAmount_${index}`
+                                                        ] as any
+                                                    )?.validateStatus
+                                                }
+                                                rules={[{ required: true, message: '请输入初始额度' }]}
                                             >
-                                                <Input placeholder={"初始额度"} />
+                                                <Input placeholder={'初始额度'} />
                                             </Form.Item>
                                         </Input.Group>
                                     </Form.Item>
-                                )
+                                );
                             })}
                         </Form.Item>
                     </Form.Item>
 
-                    <Form.Item label="复贷初始额度" tooltip='混合风控列出的风控商会同时运作。混合风控可复选风控商，其中有勾选的会依风控；没有勾选的会依系统规则。'>
-
+                    <Form.Item
+                        label="复贷初始额度"
+                        tooltip="混合风控列出的风控商会同时运作。混合风控可复选风控商，其中有勾选的会依风控；没有勾选的会依系统规则。"
+                    >
                         <Form.Item
-                            label={<div style={{ marginLeft : 11 }}>混合风控<span style={{ marginLeft: 5, color: 'darkgrey'}}>(选填)</span></div>}
+                            label={
+                                <div style={{ marginLeft: 11 }}>
+                                    混合风控<span style={{ marginLeft: 5, color: 'darkgrey' }}>(选填)</span>
+                                </div>
+                            }
                             name="oldGuestLoanMixedRisk"
                         >
-                            <Select
-                                placeholder='选择'
-                                mode="tags"
-                                showArrow
-                            >
-                                {productRiskList.map((part) => <Option key={part}>{part}</Option>)}
+                            <Select placeholder="选择" mode="tags" showArrow>
+                                {productRiskList.map((part) => (
+                                    <Option key={part}>{part}</Option>
+                                ))}
                             </Select>
                         </Form.Item>
 
                         <Form.Item
-                            label='系统规则'
+                            label="系统规则"
                             name="oldGuestLoanAmount"
                             style={{ width: '240px' }}
                             rules={[
                                 {
-                                    validator: async (_, value) => NumberValidator(_, value)({
-                                        required: true,
-                                        requiredErrorMessage: "请输入复贷初始额度",
-                                        typeErrorMessage: "请输入大于0的整数",
-                                    })
+                                    validator: async (_, value) =>
+                                        NumberValidator(
+                                            _,
+                                            value,
+                                        )({
+                                            required: true,
+                                            requiredErrorMessage: '请输入复贷初始额度',
+                                            typeErrorMessage: '请输入大于0的整数',
+                                        }),
                                 },
                             ]}
                             required
                         >
-                            <Input placeholder={"复贷初始额度"} />
+                            <Input placeholder={'复贷初始额度'} />
                         </Form.Item>
                     </Form.Item>
                 </Panel>

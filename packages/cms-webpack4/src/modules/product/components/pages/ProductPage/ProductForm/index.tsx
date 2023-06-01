@@ -1,18 +1,18 @@
-import { ProductFormModal } from "../hooks/useProductFormModal";
-import React, { useCallback, useEffect, useState } from "react";
-import { Form } from "antd";
-import BaseSettingSection from "./BaseSettingSection";
-import ProductSettingSection from "./ProductSettingSection";
-import LoanSettingSection from "./LoanSettingSection";
-import RateSettingSection from "./RateSettingSection/RateSettingSection";
-import { UploadSettingSection } from "./UploadSettingSection";
-import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import { GetAvailableMerchantResponse } from "../../../../service/product/response/getAvailableMerchantResponse";
-import OrderSettingSection from "./OrderSettingSection";
+import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
 import {
     ProductInterestRate,
-    productInterestRatesContentKey
-} from "../../../../service/product/domain/productInterestRatePair";
+    productInterestRatesContentKey,
+} from '../../../../service/product/domain/productInterestRatePair';
+import { GetAvailableMerchantResponse } from '../../../../service/product/response/getAvailableMerchantResponse';
+import { ProductFormModal } from '../hooks/useProductFormModal';
+import BaseSettingSection from './BaseSettingSection';
+import LoanSettingSection from './LoanSettingSection';
+import OrderSettingSection from './OrderSettingSection';
+import ProductSettingSection from './ProductSettingSection';
+import RateSettingSection from './RateSettingSection/RateSettingSection';
+import { UploadSettingSection } from './UploadSettingSection';
+import { Form } from 'antd';
+import React, { useCallback, useState } from 'react';
 
 interface ProductFormProps {
     modal: any;
@@ -26,17 +26,23 @@ interface ProductFormProps {
     show: boolean;
 }
 
-let isOnChange = false;
-
 export const productInterestRatePairsInitialValue: ProductInterestRate[] = [
-    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }]},
-]
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }] },
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }] },
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }] },
+    { [productInterestRatesContentKey]: [{ num: '', preInterest: '', postInterest: '', plusAmount: '' }] },
+];
 
 const Index = (props: ProductFormProps): JSX.Element => {
-    const { productModalData, onFinish, modal, form, merchantList, customAntFormFieldError, setCustomAntFormFieldError } = props;
+    const {
+        productModalData,
+        onFinish,
+        modal,
+        form,
+        merchantList,
+        customAntFormFieldError,
+        setCustomAntFormFieldError,
+    } = props;
 
     const layout = {
         labelCol: { span: 5 },
@@ -197,14 +203,6 @@ const Index = (props: ProductFormProps): JSX.Element => {
                     validateRiskRankLoanAmount(validateForm);
                 }
 
-                if (changedFields[0].name[0] === 'newGuestLoanQuotaSwitch') {
-                    props.setEnableLoanAmount(changedFields[0].value === 0);
-                }
-
-                if (changedFields[0].name[0] === 'oldGuestLoanQuotaSwitch') {
-                    props.setEnableReLoanAmount(changedFields[0].value === 0);
-                }
-
                 if (changedFields[0].name[0] === 'productInterestRatePairs') {
                     setInterestRatePairsTouchInput(changedFields);
                 }
@@ -318,17 +316,14 @@ const Index = (props: ProductFormProps): JSX.Element => {
                             'renewPostInterestRate',
                         ),
                     };
-
                 }
 
-
-                setCustomAntFormFieldError(prev => {
+                setCustomAntFormFieldError((prev) => {
                     return {
                         ...prev,
                         ...map,
-                    }
-                })
-
+                    };
+                });
             }}
             initialValues={{
                 // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
@@ -347,7 +342,8 @@ const Index = (props: ProductFormProps): JSX.Element => {
             <BaseSettingSection merchantList={merchantList} isEdit={productModalData.isEdit} />
             <ProductSettingSection setLogo={setLogo} setBackgroundImg={setBackgroundImg} />
             <OrderSettingSection />
-            <LoanSettingSection form={form}
+            <LoanSettingSection
+                form={form}
                 isEdit={productModalData.isEdit}
                 customAntFormFieldError={customAntFormFieldError}
                 productRiskList={props.productRiskList}

@@ -89,7 +89,7 @@ const ProductApi = API.injectEndpoints({
             })
         })
     })
-})
+});
 
 export const {
     useGetAvailableMerchantListQuery,

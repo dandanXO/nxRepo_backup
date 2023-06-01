@@ -1,7 +1,7 @@
 export type BaseRiskRank = 'EXCELLENT' | 'GOOD' | 'NORMAL' | 'ORDINARY'
 export type RiskRank = BaseRiskRank | 'REJECT'
 
-export const productInterestRatesContentKey = 'interestRates'
+export const productInterestRatesContentKey = 'interestRates';
 
 export type ProductInterestRatesContent = {
     num: number | string;          // 提额次数

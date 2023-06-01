@@ -43,7 +43,7 @@ export const ProductPage = (): JSX.Element => {
       if(isPutProductSuccess || isPostProductCreateSuccess){
           messageAPI.success('已储存');
       }
-  }, [isPutProductSuccess, isPutProductSuccess])
+  }, [isPutProductSuccess, isPutProductSuccess]);
 
   return domLoaded ? (
     <PageContainer
@@ -94,5 +94,5 @@ export const ProductPage = (): JSX.Element => {
       )}
         <div>{contextHolder}</div>
     </PageContainer>
-  ): null;
+  ) : null;
 };
