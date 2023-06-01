@@ -32,6 +32,9 @@ class IndexPagePo {
     noticeUserRejected() {
         return cy.get("[data-testing-id='noticeUserRejected']");
     }
+    noticeUserInProgress() {
+        return cy.get("[data-testing-id='noticeUserInProgress']");
+    }
     noticeOrderOrQuotaRejected() {
         return cy.get("[data-testing-id='noticeOrderOrQuotaRejected']");
     }
