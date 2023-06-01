@@ -2089,7 +2089,7 @@ describe('IndexPage', () => {
 
 
   // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 9)
-  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",

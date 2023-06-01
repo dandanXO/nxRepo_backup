@@ -30,7 +30,7 @@ export const TipsSection = (props: Props) => {
     props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_one_time &&
     props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_over_3 &&
     props.state.indexAPI?.availableAmount === 0 &&
-    props.state.order.state !== ORDER_STATE.reject
+    props.state.riskControl.state !== RISK_CONTROL_STATE.order_reject
   ) {
     messageComponent = (
       <div className={'rounded-b-xl bg-orange-50 px-4 py-2 text-center text-sm font-light leading-4 text-orange-400'}>
@@ -43,16 +43,20 @@ export const TipsSection = (props: Props) => {
     );
   } else if (
     props.state.user.state === USER_AUTH_STATE.success &&
-    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
-    props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-    props.state.order.state !== ORDER_STATE.hasOverdueOrder
+    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
+    //  &&
+    // props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
+    // props.state.order.state !== ORDER_STATE.hasOverdueOrder
   ) {
     if (props.isLoading) {
       return null;
     }
 
+    if (props.state.order.state !== ORDER_STATE.empty && props.state.order.state !== ORDER_STATE.normal) {
+         return messageComponent;
+    }
     messageComponent = (
-      <div className={'rounded-b-xl bg-orange-50 px-4 py-2 text-center text-sm font-light leading-4 text-orange-400'}>
+        <div className={'rounded-b-xl bg-orange-50 px-4 py-2 text-center text-sm font-light leading-4 text-orange-400'}>
         {/*TODO: 有 & 沒有應還訂單時的文案*/}
         <div className={'mb-2'}>The available credit limit has expired, please reacquire credit amount.</div>
         {/*TODO: 有應還訂單時的文案*/}

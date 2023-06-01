@@ -35,8 +35,8 @@ export function* systemStartInitSaga() {
 
   yield put(appSlice.actions.updateInit(response));
   yield put(indexPageSlice.actions.updateUserAPI(userResponse));
-  console.log('[app][saga][Service] AppService.getInit.response', response);
-  console.log('[app][saga][Service] AppService.UserService.GetUserInfoService.userResponse', userResponse);
+  // console.log('[app][saga][Service] AppService.getInit.response', response);
+  // console.log('[app][saga][Service] AppService.UserService.GetUserInfoService.userResponse', userResponse);
 
   // const callGetInitTask:Task = yield fork(callGetInit, packageId)
   // const callGetUserInfoTask:Task = yield fork(callGetUserInfo)
@@ -44,7 +44,7 @@ export function* systemStartInitSaga() {
   // yield cancel(callGetInitTask);
   // yield cancel(callGetUserInfoTask);
 
-  console.log('[app][saga] systemStartInitSaga');
+  // console.log('[app][saga] systemStartInitSaga');
 
   yield put(appSlice.actions.init(true));
 

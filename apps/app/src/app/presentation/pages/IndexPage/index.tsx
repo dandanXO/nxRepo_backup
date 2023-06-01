@@ -17,7 +17,6 @@ import { RootState } from '../../../reduxStore';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { Button } from '../../components/layouts/Button';
 import { Horizontal } from '../../components/layouts/Horizontal';
-import { Page } from '../../components/layouts/Page';
 import { PageContent } from '../../components/layouts/PageContent';
 import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
 import { AuthorizationModal } from '../../modals/AuthorizationModal';
@@ -29,7 +28,6 @@ import { NoticeOrderOrQuotaRejectedSection } from './noticeSections/NoticeOrderO
 import { NoticeUserAuthedEmptyQuotaSection } from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
 import { NoticeUserInProgressAuthStatusSections } from './noticeSections/NoticeUserInProgressAuthStatusSections';
 import { NoticeUserReacquireOver3TimeSections } from './noticeSections/NoticeUserReacquireOver3TimeSections';
-// import {NoticeOrderRejectedSection} from "./sections/NoticeSection/NoticeOrderRejectedSection";
 import { NoticeUserRejectedSection } from './noticeSections/NoticeUserRejectedSection';
 import { ADBannerSection } from './sections/ADBannerSection';
 import { AuthenticationSection } from './sections/AuthenticationSection';
@@ -122,7 +120,7 @@ const IndexPage = () => {
   const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] = useState(0);
   const [calculatingSummary, setCalculatingSummary] = useState<FinalProductsSummary>();
 
-  // console.log("calculatingProducts", calculatingProducts);
+//   console.log("calculatingProducts", calculatingProducts);
 
   // NOTE: setCalculatingProducts
   useEffect(() => {
@@ -131,6 +129,7 @@ const IndexPage = () => {
     if (indexPageState.indexAPI?.products && quotaBarTargetPrice > 0) {
       let currentSelectedProductsPrice = 0;
       // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice)
+
 
       const currentSelectedProducts: FinalProductType[] = [];
       let processSuccess = false;
@@ -143,7 +142,6 @@ const IndexPage = () => {
           // console.log("currentTotalPrice", currentSelectedProductsPrice)
           // NOTE: 假如加入此商品總額度沒爆掉。
           const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
-
           if (tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
             // NOTE: 實際加入此商品
             const finalProduct: FinalProductType = {
@@ -157,6 +155,7 @@ const IndexPage = () => {
               },
             };
             currentSelectedProducts.push(finalProduct);
+
             // console.log("add product.max", product.max);
 
             // NOTE: 實際加入後商品的總額
@@ -367,13 +366,15 @@ const IndexPage = () => {
       indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota,
       indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time,
       indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3,
-      indexPageState.order.state === ORDER_STATE.reject,
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.order_reject,
       indexPageState.user.state === USER_AUTH_STATE.ready,
       indexPageState.user.state === USER_AUTH_STATE.authing,
       indexPageState.user.state === USER_AUTH_STATE.reject,
       indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
-        indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-        indexPageState.order.state !== ORDER_STATE.hasOverdueOrder,
+      (indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder
+        ||indexPageState.order.state === ORDER_STATE.normal
+        ||indexPageState.order.state === ORDER_STATE.empty
+      ),
     ].some((condition) => condition === true);
   }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state]);
 
@@ -421,7 +422,7 @@ const IndexPage = () => {
   const modelState = useSelector((state: RootState) => state.model);
 
   return (
-    <Page className={'flex flex-col'}>
+    <div className={'flex flex-col overflow-auto max-h-[90vh] pb-20'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
       {/*NOTE: 頭部與內容*/}
@@ -464,7 +465,8 @@ const IndexPage = () => {
 
           {/*NOTE: 用戶認證成功*/}
           {indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.riskControl.state === RISK_CONTROL_STATE.valid && (
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.valid &&
+            indexPageState.order.state !== ORDER_STATE.hasOverdueOrder  &&(
               <div className={'mb-4 mt-6'}>
                 {/*NOTE: 顯示推薦產品列表*/}
                 <RecommendedProductsSection state={indexPageState} calculatingProducts={calculatingProducts || []} />
@@ -478,13 +480,13 @@ const IndexPage = () => {
             [
               indexPageState.riskControl.state === RISK_CONTROL_STATE.valid,
               indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
-              indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
-              indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
-              // NOTICE: 額度不足
-              indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount === 0,
+              //   indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
+              //   indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
+              // NOTE: 首頁-認證完成-有效額度時間-額度不足 || 有額度
+              indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount >= 0,
             ].some((condition) => condition === true) &&
               indexPageState.user.state === USER_AUTH_STATE.success && (
-                <div className={'mb-3'}>
+                <div className={'mb-3 pt-5'}>
                   <LoanOverViewSection state={indexPageState} />
                 </div>
               )
@@ -511,8 +513,9 @@ const IndexPage = () => {
           {/*TODO: refactor me*/}
           {/*TODO:新客拒絕或是老客拒絕*/}
           {indexPageState.user.state === USER_AUTH_STATE.success &&
-            indexPageState.order.state === ORDER_STATE.reject &&
-            indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able && (
+            indexPageState.riskControl.state === RISK_CONTROL_STATE.order_reject &&
+            // indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
+            (
               <NoticeOrderOrQuotaRejectedSection />
             )}
 
@@ -526,7 +529,7 @@ const IndexPage = () => {
           {/*NOTE: 顯示下次可借款倒數計時*/}
           {indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
-            (indexPageState.order.state === ORDER_STATE.reject ||
+            (indexPageState.riskControl.state === RISK_CONTROL_STATE.order_reject ||
               indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota) && (
               <WelcomeBackAndReapplyInTimeSection refreshableCountdown={refreshableCountdown} />
             )}
@@ -534,7 +537,7 @@ const IndexPage = () => {
       </div>
 
       {/*NOTE: 底部*/}
-      <div className={'sticky bottom-[63px] px-3 py-2'}>
+      <div className={'absolute w-full bottom-[63px] px-3 py-2'}>
         {/*// NOTE: Button - Apply Now*/}
         {!applyHide && (
           //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) &&
@@ -572,10 +575,11 @@ const IndexPage = () => {
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {indexPageState.user.state !== USER_AUTH_STATE.authing &&
-          (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able ||
-            indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
-          indexPageState.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-          indexPageState.order.state !== ORDER_STATE.hasOverdueOrder && (
+          (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
+            || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
+          ( indexPageState.order.state === ORDER_STATE.empty
+            || indexPageState.order.state === ORDER_STATE.normal
+            || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder) && (
             <Button
               onClick={onClickReacquireCredit}
               dataTestingID={'reacquireCredit'}
@@ -682,7 +686,7 @@ const IndexPage = () => {
           }}
         />
       )}
-    </Page>
+    </div>
   );
 };
 export default IndexPage;

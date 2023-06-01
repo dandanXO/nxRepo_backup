@@ -16,12 +16,11 @@ export const QRSuccessModal = (props: Props) => {
       }
     >
       <div className={'modal-inner w-11/12 rounded-lg bg-white px-3 py-4 text-center'}>
-        <div className={'mb-3 flex flex-col items-center font-medium'}>
-          <div>Your loan application</div>
-          <div>has been submitted</div>
+        <div className={'mb-3 flex flex-col items-center font-normal text-base'}>
+          <div>Successful Application</div>
         </div>
 
-        <div className={'mb-3 flex flex-col font-light'}>
+        <div className={'mb-5 flex flex-col font-light font-sm text-ctext-secondary leading-none'}>
           <div className={'mb-3'}>The loan amount will be based on the latest review result.</div>
           <div>
             Please be patient and wait for the review result. You can check the order in the loan records later.
