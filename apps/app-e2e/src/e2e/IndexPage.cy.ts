@@ -1,5 +1,6 @@
 // NOTICE: refactor me
-import {IndexServiceResponse} from "../../../app/src/app/api/service";
+// import {IndexServiceResponse} from "../../../app/src/app/api/service";
+import {GetIndexResponse as IndexServiceResponse} from "../../../app/src/app/api/indexService/GetIndexResponse";
 
 import {indexPagePo} from "../support/indexPage.po";
 import moment from "moment-timezone"
@@ -50,6 +51,7 @@ function visitIndexPage() {
     }
   })
 }
+
 describe('IndexPage', () => {
 
   beforeEach(() => {
@@ -2018,7 +2020,7 @@ describe('IndexPage', () => {
           "productName": "AA LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
           "min": 2000,
-          "max": 5000,
+          "max": 5120,
           "terms": 7,
           "platformChargeFeeRate": 0.4
         },
@@ -2027,7 +2029,7 @@ describe('IndexPage', () => {
           "productName": "BB LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
           "min": 3000,
-          "max": 5000,
+          "max": 5230,
           "terms": 7,
           "platformChargeFeeRate": 0.4
         },
@@ -2036,7 +2038,7 @@ describe('IndexPage', () => {
           "productName": "CC LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
           "min": 4000,
-          "max": 6000,
+          "max": 6460,
           "terms": 7,
           "platformChargeFeeRate": 0.4
         }
@@ -2138,27 +2140,27 @@ describe('IndexPage', () => {
           "productName": "AA LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
           "min": 2000,
-          "max": 5000,
+          "max": 5120,
           "terms": 7,
-          "platformChargeFeeRate": 0.4
+          "platformChargeFeeRate": 0.43
         },
         {
           "productId": 2,
           "productName": "BB LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
           "min": 3000,
-          "max": 5000,
+          "max": 5230,
           "terms": 7,
-          "platformChargeFeeRate": 0.4
+          "platformChargeFeeRate": 0.43
         },
         {
           "productId": 3,
           "productName": "CC LOAN",
           "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
           "min": 4000,
-          "max": 6000,
+          "max": 6460,
           "terms": 7,
-          "platformChargeFeeRate": 0.4
+          "platformChargeFeeRate": 0.43
         }
       ],
       "needRiskKycUpdate": false,

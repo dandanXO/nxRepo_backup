@@ -28,7 +28,7 @@ const axiosBaseQuery =
   async ({ url, method, data, params, headers }) => {
     try {
       const resultData = await runAxios(baseUrl, url, method, data, params, headers);
-      console.log('[app] resultData:', resultData);
+      // console.log('[app] resultData:', resultData);
       return resultData;
     } catch (axiosError) {
       console.log('error-2', axiosError);

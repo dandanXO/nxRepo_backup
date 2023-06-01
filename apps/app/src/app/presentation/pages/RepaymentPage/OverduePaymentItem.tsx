@@ -63,12 +63,14 @@ const OverduePaymentItem = (props: GetLoanRecord) => {
           })
         }
         statusColor={statusColor}
+        dueDate={dueDate}
       />
 
       <div className="px-3">
         {' '}
         <Divider />
       </div>
+
       {collapse && (
         <div className={cx('px-3')}>
           <ListItem key={'OrderNo.'} title={'Order No.'} text={orderNo ?? ''} titleColor={'text-ctext-secondary'} />

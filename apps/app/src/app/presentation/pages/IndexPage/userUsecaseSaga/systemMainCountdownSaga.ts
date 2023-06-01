@@ -5,6 +5,7 @@ import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
 import { RootState } from '../../../../reduxStore';
 import { SystemCaseActions } from '../../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
+import { ORDER_STATE } from 'apps/app/src/app/domain/order/ORDER_STATE';
 
 export function* systemMainCountdownSaga() {
   // NOTICE: 防止錯誤後無法重新 watch
@@ -12,8 +13,9 @@ export function* systemMainCountdownSaga() {
     // NOTE: Does System need to run countdown
     const indexResponse: GetIndexResponse = yield select((state: RootState) => state.indexPage.indexAPI);
 
-    const { riskControl } = yield select((state: RootState) => state.indexPage);
-
+    const { riskControl ,order} = yield select((state: RootState) => state.indexPage);
+    if( order.state === ORDER_STATE.hasOverdueOrder) return;
+    
     if (
       // NOTE: 用戶沒通過認證
       (indexResponse.riskReject === true ||
@@ -26,6 +28,7 @@ export function* systemMainCountdownSaga() {
       yield put(SystemCaseActions.SystemRefreshableCountdownSaga(indexResponse.refreshableUntil));
     } else {
       // NOTICE: 可以重刷
+     
       yield put(SystemCaseActions.SystemCountdownSaga(indexResponse?.offerExpireTime));
     }
   } catch (error) {
