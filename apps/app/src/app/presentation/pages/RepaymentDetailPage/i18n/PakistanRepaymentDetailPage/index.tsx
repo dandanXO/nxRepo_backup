@@ -285,7 +285,7 @@ const PakistanRepaymentDetailPage = (props: any) => {
               <div
                 className={`mb-2 grow`}
                 onClick={() => {
-                  console.log('Upload Receipt---------', orderNo);
+                  // console.log('Upload Receipt---------', orderNo);
                   navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
                     state: { orderNo },
                   });

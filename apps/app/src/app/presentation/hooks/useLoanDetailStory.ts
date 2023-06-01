@@ -66,11 +66,11 @@ const useLoanDetailStory = () => {
 
   const postRepayCreateRequest = (props: PostRepayCreateRequest) =>
     new Promise((resolve, reject) => {
-      console.log('[repay] postRepayCreateRequest.props', props);
+      // console.log('[repay] postRepayCreateRequest.props', props);
       postRepayCreate(props)
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
-          console.log('data', data);
+          // console.log('data', data);
           // NOTICE: 跳轉至付款頁面
           window.location.href = data.nextUrl;
           resolve('');

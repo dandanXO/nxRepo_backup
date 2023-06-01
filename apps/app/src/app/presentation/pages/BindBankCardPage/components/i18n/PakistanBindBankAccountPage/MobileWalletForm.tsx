@@ -47,7 +47,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           // defaultValue={props.bankDropList[0].value}
           value={props.walletValue}
           onChange={(item: any) => {
-            console.log(item);
+            // console.log(item);
             props.setWalletValue(item);
           }}
           isSearchable={false}

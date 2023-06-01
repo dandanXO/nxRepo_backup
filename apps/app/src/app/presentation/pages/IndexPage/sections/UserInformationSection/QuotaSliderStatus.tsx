@@ -61,11 +61,11 @@ export const QuotaSliderStatus = (props: Props) => {
 
   return (
     <div className={'mb-4 text-center'}>
-      <div className={'h-[60px]'}>
+      <div className={'h-[80px]'}>
         <div className={'mb flex flex-col items-center justify-center'}>
-          <div className="mb-2 flex w-full flex-row justify-between">
-            <div className="text-sm font-light text-white">You can get up to</div>
-            <div className="font-medium text-white">
+          <div className="mb-2 flex w-full flex-col justify-between">
+            <div className="text-sm font-light text-white text-left">You can get up to</div>
+            <div className="font-medium text-white text-right">
               {environment.currency} {currentQuotaLabelValue} / {maxQuotaValue}
             </div>
           </div>

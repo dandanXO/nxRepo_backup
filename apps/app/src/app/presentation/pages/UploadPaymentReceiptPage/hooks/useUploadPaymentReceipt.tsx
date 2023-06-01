@@ -26,7 +26,7 @@ export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps
   const [formFile, setFormFile] = useState<string>();
   const onFileChange = useCallback((event: any) => {
     const formFileValue = event.target.files[0];
-    console.log('formFileValue: ', formFileValue);
+    // console.log('formFileValue: ', formFileValue);
     if (
       formFileValue.type !== 'image/jpeg' &&
       formFileValue.type !== 'image/png' &&
@@ -39,7 +39,7 @@ export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps
 
       const reader = new FileReader();
       reader.onload = function (event) {
-        console.log('FileReader.event', event);
+        // console.log('FileReader.event', event);
         setImageSrc(event?.target?.result as any);
       };
       reader.readAsDataURL(formFileValue as any);
@@ -59,7 +59,7 @@ export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps
 
     setIsUploading(true);
 
-    console.log('props', props);
+    // console.log('props', props);
     props.postRepayReceiptRequest({
       orderNo: props.orderNo,
       receipt: environment.country === 'in' ? utr.data : '',

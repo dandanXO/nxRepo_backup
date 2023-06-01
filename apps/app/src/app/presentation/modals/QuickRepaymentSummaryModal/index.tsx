@@ -70,7 +70,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
     const bankcard = props.bankcardList.find((bankcard) => {
       return bankcard.bankId === props.selectedBankcardId;
     });
-    console.log('bankcard', bankcard);
+    // console.log('bankcard', bankcard);
     if (bankcard) {
       setOptionValue({
         label: bankcard.bankAccount,
@@ -185,7 +185,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
               className="w-full"
               value={optionValue}
               onChange={(item: any) => {
-                console.log(item);
+                // console.log(item);
                 setOptionValue(item);
                 props.onChangeBankcardID(item.value);
               }}

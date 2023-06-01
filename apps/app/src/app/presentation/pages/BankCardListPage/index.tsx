@@ -52,7 +52,7 @@ const BankCardListPage = () => {
         setIsSetPrimarySuccess(true);
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
       });
   };
 

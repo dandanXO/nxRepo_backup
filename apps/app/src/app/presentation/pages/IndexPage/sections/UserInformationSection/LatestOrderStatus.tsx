@@ -7,6 +7,7 @@ import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import { IndexPageProps } from '../../../../../reduxStore';
 import { PagePathEnum } from '../../../PagePathEnum';
+import Divider from "../../../../components/Divider";
 
 type Props = IndexPageProps;
 
@@ -35,7 +36,7 @@ export const LatestOrderStatus = (props: Props) => {
         <div className={'left'}>
           <div className={'top flex flex-row'}>
             <div className={'mr-2 font-light text-ctext-primary'}>Loan Order</div>
-            <div className={'font-bold text-ctext-primary'}>
+            <div className={'font-light text-ctext-primary'}>
               ₹ {formatPrice(props.state.order.overdueOrComingOverdueOrder?.payableAmount || 0)}
             </div>
           </div>
@@ -71,7 +72,7 @@ export const LatestOrderStatus = (props: Props) => {
         </div>
 
         <div className={'right'}>
-          <div data-testing-id={'repay'} className={'text-cstate-info-main font-bold'} onClick={onUserClickToRepay}>
+          <div data-testing-id={'repay'} className={'text-cstate-info-main font-light'} onClick={onUserClickToRepay}>
             Repay
           </div>
         </div>
@@ -80,6 +81,7 @@ export const LatestOrderStatus = (props: Props) => {
       {/*NOTE: 逾期*/}
       {hasOverdueOrder && (
         <>
+          {/*TODO: refactor me*/}
           <div className={'my-2 w-full border-t-[1px] border-ctext-divider'} />
           <div className={cx('mr-2 text-sm font-light leading-4 text-gray-400 text-cstate-error-main')}>
             Remind you to prioritize paying off overdue payments before you can borrow again.

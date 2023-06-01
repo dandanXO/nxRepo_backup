@@ -15,7 +15,7 @@ export const getQuotaModelStatusAction = createRequestAction('GGetQuotaModelStat
 export function* userReacquireCreditSaga(action: PayloadAction<null>) {
   // NOTICE: 防止錯誤後無法重新 watch
   try {
-    console.log('[app][saga] userReacquireCreditSaga');
+    // console.log('[app][saga] userReacquireCreditSaga');
 
     // TODO: PureH5 mode
     // 根據是否擁有裝置權限，來開啟 AuthorizationModal
