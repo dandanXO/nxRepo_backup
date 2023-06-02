@@ -3,7 +3,7 @@ import {
     BankVendor,
     GetBindCardDropListResponse,
 } from "../../../../../../api/GetBindCardDropList";
-import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
+import { usePakistanIBanValidate } from "../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate";
 
 interface IUsePakistanBankAccountForm {
     // NOTE: 取得電子錢包列表

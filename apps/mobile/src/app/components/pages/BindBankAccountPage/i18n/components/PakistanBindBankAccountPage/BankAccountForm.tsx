@@ -7,7 +7,7 @@ import { i18nBankBindAccountPage } from "../../translations";
 import { Button, Input } from "@frontend/mobile/shared/ui";
 import { IPakistanBankAccountForm } from "../../types/IBankAccountForm";
 import Select from "react-select";
-import { FindIBANLinkText } from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
+import { FindIBANLinkText } from "../../../../../../../../../../libs/shared/component/src/atoms/FindIBANLinkText";
 
 const Warning = styled.div`
     margin: 0 auto;

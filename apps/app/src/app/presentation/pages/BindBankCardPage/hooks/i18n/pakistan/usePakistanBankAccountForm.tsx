@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { usePakistanIBanValidate } from '../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate';
+import { usePakistanIBanValidate } from '../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate';
 import { BankVendor, GetBindCardDropListResponse } from '../../../../../../api/rtk/old/GetBindCardDropList';
 
 interface IUsePakistanBankAccountForm {
