@@ -11,7 +11,7 @@ Git 調整一下版本控制 Flow:
 
 2.  (every one) (optional) 測試機單獨測試 feature branch
     feature/frontend-XXX 完成後，可以使用 jenkins 去針對單獨 branch 去做測試機的部署，先讓測試人員進行測試。
-    Note: 測試時請注意測試機目前的branch，避免覆蓋
+    Note: 測試時請注意測試機目前的branch，避免覆蓋。
 
 3. (every one) 測試機測試 dev branch
    使用 gitlab 去提交 feature/frontend-XXX  的 merge request 。
