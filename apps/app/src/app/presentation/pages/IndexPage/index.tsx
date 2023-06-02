@@ -673,9 +673,6 @@ const IndexPage = () => {
 
       {/*NOTE: 優惠券通知 */}
       {modelState.systemCouponModal.show && (<SystemCouponModal/>)}
-
-
-    </Page>
     </div>
   );
 };
