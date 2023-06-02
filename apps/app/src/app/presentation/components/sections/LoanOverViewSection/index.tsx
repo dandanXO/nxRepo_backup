@@ -12,10 +12,10 @@ type Props = IndexPageProps;
 
 export const LoanOverViewSection = (props: Props) => {
   const isReacquireCreditAmount =
-    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
-    props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-    props.state.order.state !== ORDER_STATE.hasOverdueOrder;
-
+    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able 
+    // props.state.order.state !== ORDER_STATE.reject
+    // props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
+    // props.state.order.state !== ORDER_STATE.hasOverdueOrder;
   const [options, setOptions] = useState<{
     series: ApexOptions['series'];
     options: ApexOptions;
@@ -86,11 +86,15 @@ export const LoanOverViewSection = (props: Props) => {
         percent = 99;
       }
       setOptions({
-        ...options,
+        options: {
+            ...options,
+            fill: { colors: isReacquireCreditAmount ? ['#AAAAAA'] : ['#78CB4D']}
+        },
         series: [percent],
       });
     }
-  }, [props.state.indexAPI]);
+  }, [props.state.indexAPI,isReacquireCreditAmount]);
+
 
   return (
     <div>
@@ -100,7 +104,6 @@ export const LoanOverViewSection = (props: Props) => {
         <div className={'left relative'}>
           <div className="container relative">
             <Chart options={options.options} series={options.series} type="radialBar" width="160" height="160" />
-
             <div className={'absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-center'}>
               <div className="text">
                 <div>
@@ -114,19 +117,19 @@ export const LoanOverViewSection = (props: Props) => {
         </div>
 
         <div className={'right flex flex-col items-end justify-center'}>
-          <div className={'used-amount flex flex-col items-end justify-end'}>
+          <div className={'used-amount flex flex-col items-start justify-end'}>
             <div className={'label flex flex-row items-center justify-between'}>
               <div className={'label-color mr-2 h-1.5 w-4 rounded bg-[#E5E5E5]'}></div>
               <div className={'label-price font-light'}>Used Amount</div>
             </div>
-            <div className={'price font-medium'}>
+            <div className={'price font-light w-full pl-6'}>
               {environment.currency}
               {formatPrice(props.state.indexAPI?.usedAmount || 0)}
             </div>
           </div>
           <div className={'total-amount flex flex-col justify-end'}>
             <div className={'label font-light'}>Total Amount</div>
-            <div className={'price text-right font-medium'}>
+            <div className={'price font-light'}>
               {environment.currency}
               {isReacquireCreditAmount ? ' ***** ' : formatPrice(props.state.indexAPI?.totalAmount || 0)}
             </div>

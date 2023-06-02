@@ -12,7 +12,6 @@ describe("RepaymentPage", () => {
 
   it("Unpaid", () => {
 
-
     const response: GetLoanDetailResponse & {isMock: boolean} = {
       "isMock": true,
       "productName": "AA LOAN",
@@ -51,19 +50,19 @@ describe("RepaymentPage", () => {
           {
             "itemName": "Service Charge",
             "key": "SERVICE_FEE",
-            "value": "181",
+            "value": "181.01",
             "fieldType": "CURRENCY"
           },
           {
             "itemName": "Processing Fee",
             "key": "PROCESSING_FEE",
-            "value": "902",
+            "value": "902.02",
             "fieldType": "CURRENCY"
           },
           {
             "itemName": "Interest",
             "key": "LOAN_INTEREST",
-            "value": "123",
+            "value": "123.03",
             "fieldType": "CURRENCY"
           }
         ]

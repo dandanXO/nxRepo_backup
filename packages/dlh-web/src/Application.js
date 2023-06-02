@@ -1281,6 +1281,11 @@ export const SentryModule = {
     })
   },
   init: function () {
+    if(!this.enable) {
+      console.log("Sentry is disable")
+      return;
+    }
+
     const envName = Application.getEnvironmentName();
     // console.log("[api-dlh-web][sentry] environment", envName);
     // console.log("[api-dlh-web][sentry] isLocalhost", Application.isLocalhost());
@@ -1300,16 +1305,15 @@ export const SentryModule = {
       tracesSampleRate: 1.0,
       // Session Replay
       replaysSessionSampleRate: 1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
-      replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+      replaysOnErrorSampleRate: 1.0
+      , // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
     }
     if(!Application.isLocalhost()) {
       sentryConfig.release = appInfo.COMMITHASH;
     }
 
-    if(this.enable) {
-      Sentry.init(sentryConfig);
-      console.log("[api-dlh-web] sentry.init");
-    }
+    Sentry.init(sentryConfig);
+    console.log("[api-dlh-web] sentry.init");
     // NOTICE: Tag: can search these
     // Tag values have a maximum length of 200 characters and they cannot contain the newline (\n) character.
     // NOTICE: Context: cannot search these

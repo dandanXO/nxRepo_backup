@@ -17,7 +17,7 @@ import { systemMainCountdownSaga } from './systemMainCountdownSaga';
 export function* userViewIndexPageSaga(action: any) {
   // NOTICE: 防止錯誤後無法重新 watch
   try {
-    console.log('[app][saga] userViewIndexPageSaga');
+    // console.log('[app][saga] userViewIndexPageSaga');
 
     // const token: string = yield select((state: RootState) => state.app.token);
     // const token = getToken();

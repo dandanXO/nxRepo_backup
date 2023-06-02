@@ -12,4 +12,6 @@ export const SystemCaseActions = {
   SystemRefreshableCountdownSaga: createAction<string>('SystemRefreshableCountdownSaga'),
 
   SystemGetUserInfoSaga: createAction('SystemGetUserInfoSaga'),
+
+  SystemFetchCouponSaga:createAction('SystemFetchCouponSaga'),
 };

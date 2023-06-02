@@ -166,7 +166,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         iban: iBanData.data,
       })
       .then((data: any) => {
-        console.log('data:', data);
+        // console.log('data:', data);
         // TODO: refactor me
         if (data && data.error) {
           SentryModule.captureException(data.error);
@@ -188,7 +188,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         }
       })
       .catch((error: CustomAxiosError) => {
-        console.log('error:', error);
+        // console.log('error:', error);
         // const error = new Error();
         // error.name = "triggerPostBankBindSaveToPKMutation"
         // if(err) error.message = JSON.stringify(err)
