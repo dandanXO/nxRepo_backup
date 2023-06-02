@@ -5,7 +5,7 @@ type Props = {
 } & TestingProps;
 
 export const NoticeSectionContainer = (props: Props) => {
-    return <div data-testing-id={props.dataTestingID} className={'mt-3 flex flex-col justify-center px-3 text-center align-middle'}>
+    return <div data-testing-id={props.dataTestingID} className={'mt-8 flex flex-col justify-center px-3 text-center align-middle'}>
         {props.children}
     </div>;
 };

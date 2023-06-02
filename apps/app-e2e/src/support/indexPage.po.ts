@@ -41,7 +41,9 @@ class IndexPagePo {
     noticeUserReacquireOver3Time() {
         return cy.get("[data-testing-id='noticeUserReacquireOver3Time']");
     }
-
+    welcomBackTimer(){
+        return cy.get("[data-testing-id='welcomBackTimer']");
+    }
 }
 
 export const indexPagePo = new IndexPagePo();

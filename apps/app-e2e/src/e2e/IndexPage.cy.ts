@@ -18,7 +18,7 @@ import {Simulate} from "react-dom/test-utils";
 import waiting = Simulate.waiting;
 import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
 import { FeeRateKeyEnum } from "apps/app/src/app/api/indexService/FeeRateKeyEnum";
-
+import { getTimeInfoBetweenCurrentAndCountDown } from "@frontend/shared/date";
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
 const infoLog = (message, rest) => {
@@ -155,7 +155,7 @@ describe('IndexPage', () => {
   })
 
   // FIGMA: User In progress (Android: Level 2)
-  it.only("status: 用戶認證中", () => {
+  it("status: 用戶認證中", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
     //   "userName": "9013452123",
@@ -715,11 +715,12 @@ describe('IndexPage', () => {
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
-  it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
+  it.only("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
 
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
-      "userName": "9013452123",
+    //   "userName": "9013452123",
+      "userName":"後端API沒給三二一",
       "status": USER_AUTH_STATE.success,
       "demoAccount": false,
       "oldUser": false,
@@ -737,7 +738,8 @@ describe('IndexPage', () => {
 
 
     // NOTE: Given
-    const indexServiceResponse: IndexServiceResponse = () => ({
+    const indexServiceResponse: ()=> IndexServiceResponse = () => ({
+
       // NOTICE: 是否直接表明要不顯示按鈕? 但還有商品沒有選擇的條件
       "refreshable": false,
       // NOTICE: 當 refreshable true, 但是 noQuotaByRetryFewTimes true 一樣不能重刷?
@@ -745,7 +747,7 @@ describe('IndexPage', () => {
       // NOTICE: 情境1: 當 refreshable true, noQuotaByRetryFewTimes false 顯示能夠重刷的倒數計時。
       // NOTICE: 情境2:  riskReject 為 true, 也是看下面的參數
       "riskReject": true,
-      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(5, "seconds"),
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(4, "days"),
 
       // NOTICE:
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
@@ -767,12 +769,12 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
@@ -814,6 +816,7 @@ describe('IndexPage', () => {
 
       "payableRecords": [
         {
+          "orderNo": "",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -849,14 +852,52 @@ describe('IndexPage', () => {
     })
 
 
-    visitIndexPage();
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到反灰無法使用的可借款額度拉霸、歸零的倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸按鈕在最右邊
-    // NOTE: important 看到訂單被拒絕訊息，可返回借款天數，新客為 90 天、老客為 7 天。
-    // NOTE: important 根據可返回借款天數顯示倒數計時器
+      visitIndexPage();
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse().marquee);
+
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(userServiceResponse.userName);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(userServiceResponse.userName.slice(0, 3) + '****' + userServiceResponse.userName.slice(7, 10) || userServiceResponse.userName)
+      });
+
+      // NOTE: important 看到反灰無法拖拉使用的可借款額霸、看到文字顯示最低與最高範圍為 ****
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'true');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
+      
+      // NOTE: important 歸零的倒數計計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
+
+      // NOTE: important 看到訂單被拒絕訊息，可返回借款天數，新客為 90 天、老客為 7 天。
+      indexPagePo.noticeOrderOrQuotaRejected().should("be.visible");
+      indexPagePo.noticeOrderOrQuotaRejected().contains('We apologize for the inconvenience');
+      indexPagePo.noticeOrderOrQuotaRejected().contains("We are currently unable to process your loan application. This does not mean that your credit is bad; it is simply due to a high number of current applicants, making it difficult for us to meet everyone's needs immediately.");
+      indexPagePo.noticeOrderOrQuotaRejected().contains('Tip: Repaying loans on time can help prioritize your loan application.');
+      indexPagePo.noticeOrderOrQuotaRejected().contains('You are welcome to try applying again after the countdown is complete.');
+
+      // NOTE: important 根據可返回借款天數顯示倒數計時器
+      indexPagePo.welcomBackTimer().should("be.visible").contains('Welcome back and reapply in');
+      const refreshableUntil = indexServiceResponse().refreshableUntil;
+      const conutDown1s = getTimePartInfoBetweenCurrentAndCountDown(refreshableUntil);
+      cy.clock().then((clock) => {
+          indexPagePo.welcomBackTimer().find("[data-testing-id='welcomBackTimer-days']").should("be.visible").contains(conutDown1s.time.days)
+          indexPagePo.welcomBackTimer().find("[data-testing-id='welcomBackTimer-hours']").should("be.visible").contains(conutDown1s.time.hours)
+          indexPagePo.welcomBackTimer().find("[data-testing-id='welcomBackTimer-minutes']").should("be.visible").contains(conutDown1s.time.minutes)
+          //  indexPagePo.welcomBackTimer().find("[data-testing-id='welcomBackTimer-seconds']").contains(conutDown1s.time.seconds);
+          clock.restore()
+      })
+
   })
 
 
