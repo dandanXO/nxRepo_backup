@@ -17,6 +17,7 @@ import {GetOpenIndexResponse} from "../../../app/src/app/api/indexService/GetOpe
 import {Simulate} from "react-dom/test-utils";
 import waiting = Simulate.waiting;
 import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
+import { FeeRateKeyEnum } from "apps/app/src/app/api/indexService/FeeRateKeyEnum";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
@@ -154,10 +155,11 @@ describe('IndexPage', () => {
   })
 
   // FIGMA: User In progress (Android: Level 2)
-  it("status: 用戶認證中", () => {
+  it.only("status: 用戶認證中", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
-      "userName": "9013452123",
+    //   "userName": "9013452123",
+      "userName":"後端API沒給三二一",
       "status": USER_AUTH_STATE.authing,
       "demoAccount": false,
       "oldUser": false,
@@ -174,10 +176,10 @@ describe('IndexPage', () => {
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
 
-
+      "loanAgreementUrl": "",
+      "noQuotaBalance":false,
       "refreshable": false,
       "noQuotaByRetryFewTimes": false,
-
 
       "riskReject": false,
       "refreshableUntil": "2023-03-28T08:10:24",
@@ -197,17 +199,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -243,9 +245,9 @@ describe('IndexPage', () => {
       "orderUnderReview": false,
       "oldUserForceApply": false,
 
-
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -266,22 +268,46 @@ describe('IndexPage', () => {
       console.log("index");
     })
 
-    visitIndexPage();
+      visitIndexPage();
 
-    // NOTE: then
-    // 看到跑馬燈
-    indexPagePo.marquee().should("be.visible");
-    // 看到 welcome 包含姓名、客服 Button
-    // indexPagePo.welcome().contains(userServiceResponse.userName)
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(userServiceResponse.userName);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(userServiceResponse.userName.slice(0, 3) + '****' + userServiceResponse.userName.slice(7, 10) || userServiceResponse.userName)
+      });
 
-    // NOTE: important 看到反灰無法使用的可借款額度拉霸、歸零的倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸按鈕在最右邊
-    // NOTE: important 看到用戶認證中訊息
-    // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
+      // NOTE: important 看到反灰無法拖拉使用的可借款額霸、看到文字顯示最低與最高範圍為 ****
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'true');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
+      // NOTE: important 歸零的倒數計計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
+
+      // NOTE: important 看到用戶認證中訊息
+      indexPagePo.noticeUserInProgress().should("be.visible");
+      indexPagePo.noticeUserInProgress().contains("Under review");
+      indexPagePo.noticeUserInProgress().contains("Your submitted order has been successfully received.");
+      indexPagePo.noticeUserInProgress().contains("Please wait patiently for review.");
+
+      // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
+      indexPagePo.applyButton().should('not.exist');
+      indexPagePo.reacquireCreditButton().should('not.exist');
+      indexPagePo.viewAppProgressButton().should("be.visible").contains('View Application Progress');
   })
 
   // User reject (Android: Level 1)
-  it.only("status: 用戶認證被拒絕", () => {
+  it("status: 用戶認證被拒絕", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
     //   "userName": "9013452123",
@@ -298,11 +324,107 @@ describe('IndexPage', () => {
     }).as("getInfo").then(() => {
       console.log("info");
     })
+
+    // NOTE: Given
+    const indexServiceResponse: IndexServiceResponse = {
+
+        "loanAgreementUrl": "",
+        "noQuotaBalance":false,
+        "refreshable": false,
+        "noQuotaByRetryFewTimes": false,
+
+        "riskReject": false,
+        "refreshableUntil": "2023-03-28T08:10:24",
+
+        "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+
+        "totalAmount": 15000,
+        "usedAmount": 15000,
+        "availableAmount": 0,
+        "quotaBar": {
+          "min": 0,
+          "max": 0,
+          "current": 0,
+          "serial": 1000
+        },
+        "chargeFeeDetails": [
+          {
+            "title": "Processing Fee",
+            "counting": 0.4,
+            "key": FeeRateKeyEnum.PROCESSING_FEE
+          },
+          {
+            "title": "Service Fee",
+            "counting": 0.5,
+            "key": FeeRateKeyEnum.SERVICE_FEE
+          },
+          {
+            "title": "Interest Fee",
+            "counting": 0.1,
+            "key": FeeRateKeyEnum.LOAN_INTEREST
+          }
+        ],
+        "products": [
+          {
+            "productId": 1,
+            "productName": "AA LOAN",
+            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+            "min": 2000,
+            "max": 5000,
+            "terms": 7,
+            "platformChargeFeeRate": 0.4
+          },
+          {
+            "productId": 2,
+            "productName": "BB LOAN",
+            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+            "min": 3000,
+            "max": 5000,
+            "terms": 7,
+            "platformChargeFeeRate": 0.4
+          },
+          {
+            "productId": 3,
+            "productName": "CC LOAN",
+            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+            "min": 4000,
+            "max": 6000,
+            "terms": 7,
+            "platformChargeFeeRate": 0.4
+          }
+        ],
+        "needRiskKycUpdate": false,
+        "orderUnderReview": false,
+        "oldUserForceApply": false,
+
+
+        "payableRecords": [
+          {
+            "orderNo":"",
+            "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+            "productName": "AA LOAN",
+            "payableAmount": 1000,
+            "dueDate": "2023-03-29",
+            "overdue": false,
+            "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+          }
+        ],
+        "marquee": "我是跑馬燈...",
+        "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+        "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+        "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+      }
+      cy.intercept("get", "/api/v3/index", {
+        statusCode: 200,
+        body: indexServiceResponse,
+      }).as("getIndex").then(() => {
+        console.log("index");
+      })
     visitIndexPage();
 
       // NOTE: then
       // NOTE: important 看到跑馬燈
-      indexPagePo.marquee().should("be.visible");
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
 
       // NOTE: important 看到 welcome 包含姓名、客服 Button
       indexPagePo.welcome().should("be.visible");
