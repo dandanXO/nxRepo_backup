@@ -7,8 +7,10 @@ import { GetCouponListRequest } from '../../../api/userService/GetCouponListRequ
 import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import Coupon from '../../components/Coupon';
 import { Tags } from '../../components/Tag';
-import { Navigation } from '../../components/layouts/Navigation';
 import { Page } from '../../components/layouts/Page';
+import { Navigation } from '../../components/layouts/Navigation';
+import { PagePathEnum } from '../PagePathEnum';
+import { getToken } from '../../../modules/querystring/getToken';
 
 const MyCouponListPage = () => {
   const navigate = useNavigate();
@@ -41,7 +43,7 @@ const MyCouponListPage = () => {
         <Navigation
           title={'My Coupon'}
           back={() => {
-            navigate(-1);
+            navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
           }}
         />
       )}
@@ -55,8 +57,8 @@ const MyCouponListPage = () => {
         />
       </div>
 
-      <div className="mx-4 grow flex flex-col justify-center items-center ">
-        {currentData && currentData.records && currentData.records.length > 0 ? (
+      <div className="mx-5 flex flex-col justify-center items-center ">
+        {currentData && currentData.records && currentData.records.length >0 ? (
           currentData?.records?.map((coupon) => {
             return (
               <Coupon
@@ -72,7 +74,7 @@ const MyCouponListPage = () => {
             );
           })
         ) : (
-          <div className="flex flex-col items-center justify-center p-3 mt-5">
+          <div className="flex h-[50vh] flex-col items-center justify-center p-3 mt-5">
             <img src={NoDataImage} alt="" />
             <div className={`mt-5`}>There are currently no coupon</div>
           </div>

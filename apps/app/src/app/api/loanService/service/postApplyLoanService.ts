@@ -12,7 +12,7 @@ export const postApplyLoanService = async (req: LoanServiceRequest) => {
       'post',
       req
     );
-    console.log('data', data);
+    // console.log('data', data);
     return {
       data,
       success,

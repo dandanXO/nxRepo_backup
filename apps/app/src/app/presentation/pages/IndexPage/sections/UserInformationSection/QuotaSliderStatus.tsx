@@ -22,11 +22,10 @@ export const QuotaSliderStatus = (props: Props) => {
     return [
       props.state.user.state === USER_AUTH_STATE.authing,
       props.state.user.state === USER_AUTH_STATE.reject,
-      props.state.order.state === ORDER_STATE.hasInComingOverdueOrder,
       props.state.order.state === ORDER_STATE.hasOverdueOrder,
-      props.state.order.state === ORDER_STATE.reject,
-      props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota,
+      props.state.riskControl.state === RISK_CONTROL_STATE.order_reject,
       props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
+      props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota,
     ].some((item) => item === true);
   }, [props.state.user.state, props.state.order.state, props.state.riskControl.state]);
 
@@ -37,9 +36,6 @@ export const QuotaSliderStatus = (props: Props) => {
   // console.log("currentQuotaValue", currentQuotaValue)
   // console.log("maxQuotaValue", maxQuotaValue);
 
-  useEffect(() => {
-    setMaxQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.max || 0));
-  }, [props.state.indexAPI?.quotaBar.max]);
 
   useEffect(() => {
     // NOTE: 禁用 Quota Slider
@@ -52,6 +48,7 @@ export const QuotaSliderStatus = (props: Props) => {
       // NOTE: 啟用 Quota Slider
       setCurrentQuotaValue(props.state.indexAPI?.quotaBar.current || 0);
       setCurrentQuotaLabelValue(formatPrice(props.state.indexAPI?.quotaBar.current || 0));
+      setMaxQuotaValue(formatPrice(props.state.indexAPI?.quotaBar.max || 0));
       setDisableQuotaBar(false);
       props.setQuotaBarTargetPrice(props.state.indexAPI?.quotaBar.current || 0);
     }
@@ -63,12 +60,12 @@ export const QuotaSliderStatus = (props: Props) => {
   }, [currentQuotaValue]);
   return (
     <div className={'mb-4 text-center'} data-testing-id={'quotaSlider'} data-testing-disable={disableQuotaSlider}>
-      <div className={'h-[60px]'}>
+      <div className={'h-[80px]'}>
         <div className={'mb flex flex-col items-center justify-center'}>
-          <div className="mb-2 flex w-full flex-row justify-between">
-            <div className="text-sm font-light text-white">You can get up to</div>
-            <div className="font-medium text-white">
-              {environment.currency} 
+          <div className="mb-2 flex w-full flex-col justify-between">
+            <div className="text-sm font-light text-white text-left">You can get up to</div>
+            <div className="font-medium text-white text-right">
+              {environment.currency}
               <span data-testing-id='current-quota-value'>{currentQuotaLabelValue}</span> / <span data-testing-id='max-quota-value'>{maxQuotaValue}</span>
             </div>
           </div>

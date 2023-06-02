@@ -1,5 +1,6 @@
 import { getInitService } from './appService/service/getInitService';
 import { getIndexService } from './indexService/service/getIndexService';
+import { getNotificationService } from './indexService/service/getNotificationService';
 import { getOpenIndexService } from './indexService/service/getOpenIndexService';
 import { getQuotaModelStatusService } from './loanService/service/getQuotaModelStatusService';
 import { postApplyLoanService } from './loanService/service/postApplyLoanService';
@@ -14,6 +15,7 @@ export const Service = {
   IndexService: {
     getOpenIndex: getOpenIndexService,
     getIndex: getIndexService,
+    getNotification: getNotificationService
   },
   UserService: {
     GetUserInfoService: getUserInfoService,
@@ -23,4 +25,5 @@ export const Service = {
     applyLoan: postApplyLoanService,
     getQuotaModelStatus: getQuotaModelStatusService,
   },
+
 };
