@@ -9,7 +9,7 @@ import { usePakistanBankAccountForm } from "../../hooks/pakistan/usePakistanBank
 import { useFinishedBindBankAccountForm } from "../../hooks/common/useFinishedBindBankAccountForm";
 import { usePakistanMobileWalletForm } from "../../hooks/pakistan/usePakistanMobileWalletForm";
 import { WebViewModal } from "./WebViewModal";
-import { FindIBANLinkTextConstant } from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
+import { FindIBANLinkTextConstant } from "../../../../../../../../../../libs/shared/component/src/atoms/FindIBANLinkText";
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // NOTE: 選擇支付方式

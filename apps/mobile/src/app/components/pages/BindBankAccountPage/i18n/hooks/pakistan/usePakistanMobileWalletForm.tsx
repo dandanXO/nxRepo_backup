@@ -12,7 +12,7 @@ import * as Sentry from "@sentry/react";
 import { CustomAxiosError } from "../../../../../../api/base/axiosBaseQuery";
 import { processWalletDisplayName } from "./customization/processWalletDisplayName";
 import { AppFlag } from "../../../../../../App";
-import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
+import { usePakistanIBanValidate } from "../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate";
 
 interface IUsePakistanMobileWalletForm {
     isPostBankBindSaveToPKMutationLoading: boolean;

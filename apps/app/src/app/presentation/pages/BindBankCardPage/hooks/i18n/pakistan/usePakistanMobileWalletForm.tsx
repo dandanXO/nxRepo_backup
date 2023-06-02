@@ -6,7 +6,7 @@ import { z } from 'zod';
 
 import { InputValue, Modal } from '@frontend/mobile/shared/ui';
 
-import { usePakistanIBanValidate } from '../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate';
+import { usePakistanIBanValidate } from '../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate';
 import { CustomAxiosError } from '../../../../../../api/rtk/axiosBaseQuery';
 import { GetBindCardDropListResponse, WalletVendor } from '../../../../../../api/rtk/old/GetBindCardDropList';
 import { SentryModule } from '../../../../../../modules/sentry';

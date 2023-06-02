@@ -9,7 +9,7 @@ import {
 } from "react-i18next";
 import { i18nBankBindAccountPage } from "../../translations";
 import styled from "styled-components";
-import { FindIBANLinkText } from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
+import { FindIBANLinkText } from "../../../../../../../../../../libs/shared/component/src/atoms/FindIBANLinkText";
 
 const WalletDiscountHint = styled.div`
     line-height: 23px;
