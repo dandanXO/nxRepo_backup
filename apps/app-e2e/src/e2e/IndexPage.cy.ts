@@ -16,6 +16,7 @@ import {GetUserInfoServiceResponse} from "../../../app/src/app/api/userService/G
 import {GetOpenIndexResponse} from "../../../app/src/app/api/indexService/GetOpenIndexResponse";
 import {Simulate} from "react-dom/test-utils";
 import waiting = Simulate.waiting;
+import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
@@ -80,7 +81,7 @@ describe('IndexPage', () => {
       "kycFirst":false,
       "indexH5Url":null,
       "couponH5Url":null,
-      "csServiceTime":"MON - FRI, 9:00 AM - 6:00 PM", 
+      "csServiceTime":"MON - FRI, 9:00 AM - 6:00 PM",
       "csWhatsApp":null,
     }
     cy.intercept("/api/v2/init?packageId**", initResponse)
@@ -302,7 +303,7 @@ describe('IndexPage', () => {
       // NOTE: then
       // NOTE: important 看到跑馬燈
       indexPagePo.marquee().should("be.visible");
-      
+
       // NOTE: important 看到 welcome 包含姓名、客服 Button
       indexPagePo.welcome().should("be.visible");
       indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
@@ -321,16 +322,16 @@ describe('IndexPage', () => {
       indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class",'disabled');
       indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
       indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
-    
+
       // NOTE: important 歸零的倒數計計時
       indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
-      
+
       // NOTE: important 看到用戶認證被拒絕訊息
       indexPagePo.noticeUserRejected().should("be.visible");
       indexPagePo.noticeUserRejected().contains(`Your application was not approved`);
       indexPagePo.noticeUserRejected().contains(`We regret to inform you that we cannot offer you any loans due to your credit score being below our standards.`);
       indexPagePo.noticeUserRejected().contains(`If you have any questions, please contact our customer service center.`);
-      
+
       // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
       indexPagePo.applyButton().should('not.exist');
       indexPagePo.reacquireCreditButton().should('not.exist');

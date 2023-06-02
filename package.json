@@ -54,6 +54,7 @@
     "@canyuegongzi/t-cli": "^1.2.18",
     "@lagunovsky/redux-react-router": "^4.3.0",
     "@loadable/component": "^5.15.3",
+    "@nrwl/nx-darwin-x64": "^15.9.3",
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "1.9.0",
     "@sentry/react": "^7.28.0",
