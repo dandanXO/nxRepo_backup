@@ -6,8 +6,8 @@ Git 調整一下版本控制 Flow:
    收到 jira 新功能需求，並創建新分支，並將 jira 更改狀態為 in progress:
    1.1.基本上:從 master branch 創建新分支 feature/frontend-XXX。
    Note: 此新分支只能 merge 穩定版本的 master branch。
-   1.2. 新 featureB branch 依賴尚未合併到 master 的 featureB branch
-   請基於 尚未合併到 master 的 featureA branch  新開一條，featureB branch
+   1.2. 新 featureB branch 依賴尚未合併到 master 的 featureB branch。
+   請基於 尚未合併到 master 的 featureA branch  新開一條，featureB branch。
 
 2.  (every one) (optional) 測試機單獨測試 feature branch
     feature/frontend-XXX 完成後，可以使用 jenkins 去針對單獨 branch 去做測試機的部署，先讓測試人員進行測試。
