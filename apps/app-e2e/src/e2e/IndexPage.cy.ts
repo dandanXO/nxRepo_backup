@@ -715,7 +715,7 @@ describe('IndexPage', () => {
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
-  it.only("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
+  it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
 
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -738,16 +738,17 @@ describe('IndexPage', () => {
 
 
     // NOTE: Given
-    const indexServiceResponse: ()=> IndexServiceResponse = () => ({
+    const indexServiceResponse = (): IndexServiceResponse => ({
 
       // NOTICE: 是否直接表明要不顯示按鈕? 但還有商品沒有選擇的條件
       "refreshable": false,
       // NOTICE: 當 refreshable true, 但是 noQuotaByRetryFewTimes true 一樣不能重刷?
       "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance":false,
       // NOTICE: 情境1: 當 refreshable true, noQuotaByRetryFewTimes false 顯示能夠重刷的倒數計時。
       // NOTICE: 情境2:  riskReject 為 true, 也是看下面的參數
       "riskReject": true,
-      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(4, "days"),
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(30, "minutes"),
 
       // NOTICE:
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
@@ -779,9 +780,10 @@ describe('IndexPage', () => {
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
+      "loanAgreementUrl":"",
       "products": [
         {
           "productId": 1,
@@ -811,8 +813,6 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
-
-
 
       "payableRecords": [
         {
@@ -888,9 +888,10 @@ describe('IndexPage', () => {
 
       // NOTE: important 根據可返回借款天數顯示倒數計時器
       indexPagePo.welcomBackTimer().should("be.visible").contains('Welcome back and reapply in');
-      const refreshableUntil = indexServiceResponse().refreshableUntil;
-      const conutDown1s = getTimePartInfoBetweenCurrentAndCountDown(refreshableUntil);
+     
       cy.clock().then((clock) => {
+          const refreshableUntil = moment(indexServiceResponse().refreshableUntil).add(-1, "seconds");
+          const conutDown1s = getTimePartInfoBetweenCurrentAndCountDown(refreshableUntil);
           indexPagePo.welcomBackTimer().find("[data-testing-id='welcomBackTimer-days']").should("be.visible").contains(conutDown1s.time.days)
           indexPagePo.welcomBackTimer().find("[data-testing-id='welcomBackTimer-hours']").should("be.visible").contains(conutDown1s.time.hours)
           indexPagePo.welcomBackTimer().find("[data-testing-id='welcomBackTimer-minutes']").should("be.visible").contains(conutDown1s.time.minutes)
@@ -1689,7 +1690,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-沒被拒，額度0的用戶 (Android: Level 4)
-  it("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新。", () => {
+  it.only("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1707,7 +1708,7 @@ describe('IndexPage', () => {
     })
 
     // NOTE: Given
-    const getFirstIndexServiceResponse: IndexServiceResponse = (seconds: number) => ({
+    const getFirstIndexServiceResponse = (seconds: number): IndexServiceResponse => ({
       // NOTICE: 風控額度直接不足，無法執行重刷
       "noQuotaBalance": true,
       // NOTICE: 額度下次可刷新時間
@@ -1757,6 +1758,7 @@ describe('IndexPage', () => {
           "key": "LOAN_INTEREST"
         }
       ],
+      "loanAgreementUrl":"",
       "products": [
         {
           "productId": 1,
@@ -1788,6 +1790,7 @@ describe('IndexPage', () => {
       ],
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -1904,17 +1907,17 @@ describe('IndexPage', () => {
 
 
     // NOTE: 第 2 次看到需要重等刷新時間
-    const secondIndexServiceResponse: IndexServiceResponse = () => getFirstIndexServiceResponse(10);
+    const secondIndexServiceResponse= (): IndexServiceResponse  => getFirstIndexServiceResponse(10);
     // NOTE: 第 2 次看到重刷按鈕
     // const secondRefreshableIndexServiceResponse: IndexServiceResponse = () => getFirstRefreshableIndexServiceResponse();
 
     // NOTE: 第 3 次看到需要重等刷新時間
-    const thirdIndexServiceResponse: IndexServiceResponse = () => getFirstIndexServiceResponse(10);
+    const thirdIndexServiceResponse = () : IndexServiceResponse=> getFirstIndexServiceResponse(10);
     // NOTE: 第 3 次看到重刷按鈕
     // const thirdRefreshableIndexServiceResponse: IndexServiceResponse = () => getFirstRefreshableIndexServiceResponse();
 
     // NOTE: 看到無法再次重刷的畫面
-    const getNotRefreshableIndexServiceResponse: IndexServiceResponse = () => ({
+    const getNotRefreshableIndexServiceResponse = () : IndexServiceResponse=> ({
       // NOTICE: 風控額度直接不足，無法執行重刷
       "noQuotaBalance": true,
 
@@ -2000,6 +2003,7 @@ describe('IndexPage', () => {
       ],
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
