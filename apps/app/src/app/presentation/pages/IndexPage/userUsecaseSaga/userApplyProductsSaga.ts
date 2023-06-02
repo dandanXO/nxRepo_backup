@@ -17,53 +17,63 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
   // NOTICE: 防止錯誤後無法重新 watch
   try {
-    // NOTE: 讀取相關總結資訊
-    // NOTE: way1
-    // const getBankCardListAction = API.endpoints.getBankCardList.initiate(null) as any;
-    // yield put(getBankCardListAction)
-    // NOTE: way2
-    const data: GetBankCardListResponse = yield call(Service.UserService.GetBankCardList, null);
-    // console.log('data', data);
 
-    // NOTE: Popup Summary Modal - confirm | cancel | (see loan agreement model)
-    yield put(
-      modalSlice.actions.updateQuickRepaymentSummaryModal({
-        show: true,
-        confirm: false,
-        bankcardList: data.bankAccounts,
-      })
-    );
+    const oldUserForceApply = true;
 
-    yield put(
-      modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
-        selectedBankcardId: data.bankAccounts[0].bankId,
-      })
-    );
+    // NOTE: 老客強下開關不需要彈跳 SummaryModal
+    if(!oldUserForceApply) {
+      // NOTE: 讀取相關總結資訊
+      // NOTE: way1
+      // const getBankCardListAction = API.endpoints.getBankCardList.initiate(null) as any;
+      // yield put(getBankCardListAction)
+      // NOTE: way2
+      const data: GetBankCardListResponse = yield call(Service.UserService.GetBankCardList, null);
+      // console.log('data', data);
 
-    // const [result, result2] = yield race([
-    //   take(modalSlice.actions.updateQuickRepaymentSummaryModal),
-    //   take(modalSlice.actions.updateLoanAgreementModal),
-    // ])
-    // console.log("result", result);
-    // console.log("result2", result2);
+      // const oldUserForceApply: boolean = yield select((state: RootState) => state.indexPage.indexAPI?.oldUserForceApply);
 
-    // NOTE: Waiting for user to confirm | cancel | (see loan agreement modal)
-    const {
-      type,
-      payload: { show, confirm },
-    }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
-      modalSlice.actions.updateQuickRepaymentSummaryModal
-    );
-    if (!confirm) {
-      // console.log("cancel");
-      return;
-    } else {
-      // console.log("applyLoan");
+      // NOTE: Popup Summary Modal - confirm | cancel | (see loan agreement model)
+      yield put(
+        modalSlice.actions.updateQuickRepaymentSummaryModal({
+          show: true,
+          confirm: false,
+          bankcardList: data.bankAccounts,
+        })
+      );
+
+      yield put(
+        modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
+          selectedBankcardId: data.bankAccounts[0].bankId,
+        })
+      );
+
+      // const [result, result2] = yield race([
+      //   take(modalSlice.actions.updateQuickRepaymentSummaryModal),
+      //   take(modalSlice.actions.updateLoanAgreementModal),
+      // ])
+      // console.log("result", result);
+      // console.log("result2", result2);
+
+      // NOTE: Waiting for user to confirm | cancel | (see loan agreement modal)
+      const {
+        type,
+        payload: { show, confirm },
+      }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+        modalSlice.actions.updateQuickRepaymentSummaryModal
+      );
+      if (!confirm) {
+        // console.log("cancel");
+        return;
+      } else {
+        // console.log("applyLoan");
+      }
+
     }
 
     const selectedBankcardID: number = yield select(
       (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
     );
+
     const { data: responseData, success }: { data: LoanServiceResponse; success: boolean } = yield call(
       Service.LoanService.applyLoan,
       {
