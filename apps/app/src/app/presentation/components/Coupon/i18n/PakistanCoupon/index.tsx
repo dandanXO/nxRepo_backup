@@ -39,7 +39,7 @@ const PakistanCoupon = (props: ICouponProps) => {
   const typeStyle = status !== 'disabled' ? layoutTypeStyle['normal'] : layoutTypeStyle['disabled'];
 
   return (
-    <div className={cx(`m-2 flex grow  `, { 'opacity-50': status === 'unUsable' })}>
+    <div className={cx(`mb-3 flex grow w-full`, { 'opacity-50': status === 'unUsable' })}>
       <div
         className={cx(`relative flex grow flex-col  rounded-l-lg  border border-r-0 p-2 text-left `, [
           typeStyle.lightContent,
@@ -62,7 +62,7 @@ const PakistanCoupon = (props: ICouponProps) => {
             'text-ctext-tertiary': status === 'disabled',
           })}
         >
-          Expired time {moment(expireTime).format('DD-MM-YYYY')}
+          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${moment(expireTime).format('DD-MM-YYYY')}`}
         </div>
       </div>
       <div
@@ -71,12 +71,12 @@ const PakistanCoupon = (props: ICouponProps) => {
         ])}
       >
         <div
-          className={cx(`mb-1.5 text-base font-bold `, {
+          className={cx(`mb-1.5 text-base font-bold mr-1`, {
             'text-primary-main': status !== 'disabled',
             'text-[#C0C0C0]': status === 'disabled',
           })}
         >
-          <Money money={discountAmount} isNagetive={true} moneyStyle={`text-lg`} currencyStyle={`text-xs`} />
+          <Money money={discountAmount} isNagetive={true} moneyStyle={`text-base`} currencyStyle={`text-xs`} />
         </div>
         <button
           // NOTE:優惠券不需點擊 (點擊功能先做保留)

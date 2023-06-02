@@ -9,6 +9,7 @@ import { USER_AUTH_STATE } from '../../domain/user/USER_AUTH_STATE';
 import { IndexPageSagaAction } from '../../presentation/pages/IndexPage/userUsecaseSaga/indexPageActions';
 import { systemCountdownSaga } from '../../presentation/pages/IndexPage/userUsecaseSaga/systemCountdownSaga';
 import { systemRefreshableCountdownSaga } from '../../presentation/pages/IndexPage/userUsecaseSaga/systemRefreshableCountdownSaga';
+import { systemFetchCouponSaga } from '../type/systemUsecaseSaga/systemFetchCouponSaga';
 import { PagePathEnum } from '../../presentation/pages/PagePathEnum';
 import { RootState } from '../../reduxStore';
 import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
@@ -22,6 +23,7 @@ export function* watchSystemUseCaseSaga() {
     errorFallback,
     systemRefreshableCountdownSaga
   );
+  yield takeLatest(SystemCaseActions.SystemFetchCouponSaga.type, errorFallback, systemFetchCouponSaga);
 
   yield takeLatest(ROUTER_ON_LOCATION_CHANGED, errorFallback, routerOnLocationChangedSaga);
   yield takeLatest(ROUTER_CALL_HISTORY_METHOD, errorFallback, routerCallHistoryMethodSaga);
