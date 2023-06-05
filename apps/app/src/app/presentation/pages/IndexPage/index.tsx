@@ -467,7 +467,7 @@ const IndexPage = () => {
               //   indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
               //   indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
               // NOTE: 首頁-認證完成-有效額度時間-額度不足 || 有額度
-              indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount >= 0,
+            //   indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount >= 0,
             ].some((condition) => condition === true) &&
               indexPageState.user.state === USER_AUTH_STATE.success && (
                 <div className={'mb-3 pt-5'}>
