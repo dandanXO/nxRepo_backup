@@ -8,6 +8,7 @@ import { getToken } from '../../../../../modules/querystring/getToken';
 import { IndexPageProps } from '../../../../../reduxStore';
 import { PagePathEnum } from '../../../PagePathEnum';
 import Divider from "../../../../components/Divider";
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 type Props = IndexPageProps;
 
@@ -64,7 +65,7 @@ export const LatestOrderStatus = (props: Props) => {
                     'text-cstate-error-main': hasOverdueOrder,
                   })}
                 >
-                  {moment(props.state.order.overdueOrComingOverdueOrder?.dueDate).format('DD-MM-YYYY')}
+                  {formatDate(moment(props.state.order.overdueOrComingOverdueOrder?.dueDate))}
                 </div>
               </div>
             </div>

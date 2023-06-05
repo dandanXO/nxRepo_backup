@@ -19,6 +19,7 @@ import { Horizontal } from '../../components/layouts/Horizontal';
 import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
 import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
 import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
+import {formatDate} from "../../../modules/format/formatDate";
 
 type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];
@@ -132,7 +133,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
             </div>
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Repayment Date</div>
-              <div className={'value'}>{props.calculatingSummary.repaymentDate?.format('DD-MM-YYYY')}</div>
+              <div className={'value'}>{props.calculatingSummary.repaymentDate ? formatDate(props.calculatingSummary.repaymentDate): ""}</div>
             </div>
           </div>
         </div>

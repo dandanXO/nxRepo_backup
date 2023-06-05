@@ -39,6 +39,7 @@ import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndRea
 import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
 import SystemCouponModal from '../../modals/SystemCouponModal';
 import {computeNumber} from "../../../modules/computeNumber";
+import {formatDate} from "../../../modules/format/formatDate";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -236,7 +237,7 @@ const IndexPage = () => {
           const disbursalPrice = computeNumber(product.calculating.finalLoanPrice, "*", price).result;
 
           const dueDate = moment().add(product.terms - 1, 'days');
-          const formatedDueDate = dueDate.format('DD-MM-YYYY');
+          const formatedDueDate = formatDate(dueDate)
 
           // console.log("interestPrice", interestPrice);
           // console.log("disbursalPrice", disbursalPrice);

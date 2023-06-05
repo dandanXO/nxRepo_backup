@@ -10,6 +10,7 @@ import Money from '../../../../components/Money.tsx';
 import CustomSelect from '../../../../components/Select';
 import { Button } from '../../../../components/layouts/Button';
 import { selectStyles } from '../../../../components/layouts/selectStyles';
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 type paymentMethodValueType = {
   value: string;
@@ -41,7 +42,7 @@ const PakistanExtendModal = (props: any) => {
       <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary" />
       <ListItem
         title={'Due Date'}
-        text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
+        text={dueDate ? formatDate(moment(dueDate)) : ''}
         titleColor="text-ctext-secondary"
         textColor="text-ctext-primary"
       />
@@ -84,7 +85,7 @@ const PakistanExtendModal = (props: any) => {
 
       <ListItem
         title={'Extension Due Date'}
-        text={extendDate ? moment(extendDate).format('DD-MM-YYYY') : ''}
+        text={extendDate ? formatDate(moment(extendDate)) : ''}
         titleColor="text-ctext-secondary"
         textColor="text-primary-main"
       />
