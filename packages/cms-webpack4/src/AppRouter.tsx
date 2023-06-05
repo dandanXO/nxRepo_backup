@@ -37,6 +37,8 @@ import {
 import LoginAccountManagePage from "./modules/system/components/pages/LoginAccountManage";
 import NewCustomersDailyConversionRatesPage from "./modules/statistics/components/pages/NewCustomersDailyConversionRatesPage";
 import ReloanStatisticsPage from "./modules/statistics/components/pages/ReloanStatisticsPage";
+import { CurrentDayPhoneUrgeListPage } from "./modules/currentDayUrge/components/pages/CurrentDayPhoneUrgeListPage";
+import { OverduePhoneUrgeListPage } from "./modules/overdueUrge/components/pages/OverduePhoneUrgeListPage";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -125,7 +127,11 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path={"/today-distribution"} component={TodayDistributionPage}/>
                     {/*// @ts-ignore*/}
+                    <Route path={"/todayLoanManage/todayPhoneUrgeList"} component={CurrentDayPhoneUrgeListPage}/>
+                    {/*// @ts-ignore*/}
                     <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/afterLoanManage/phoneUrgeList"} component={OverduePhoneUrgeListPage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/new-customer-repayment-rate"} component={NewCustomerRiskControlRepaymentRatePage}/>
                     {/*// @ts-ignore*/}
