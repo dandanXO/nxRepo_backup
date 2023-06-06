@@ -1,3 +1,5 @@
+
+
 import { environment } from '../../../environments/environment';
 import { AppFlag } from '../../../environments/flag';
 import { AppEnvironment } from '../../modules/appEnvironment';
@@ -20,6 +22,22 @@ export const isInApp = (): boolean => {
   const useragent = navigator.userAgent || navigator.vendor;
   return Boolean(useragent.match(regex));
 };
+
+if (window.Cypress) {
+    // window.appReady = true
+    window.AppInfoTask = {
+      getAppInfo: () => JSON.stringify({
+        domain: 'https://www.oasis-gold.com',
+        environment: 'india',
+        packageId: 'com.ind.kyc.application',
+        appName: 'Local APP',
+        uiVersion: "56",
+        token: null,
+        mode: 'H5',
+        phoneNo: '1234567890',
+      })
+    }
+}
 
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());

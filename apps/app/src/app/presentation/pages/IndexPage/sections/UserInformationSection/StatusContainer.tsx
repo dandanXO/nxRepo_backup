@@ -21,14 +21,16 @@ export const StatusContainer = (props: Props) => {
           props.state.order.state === ORDER_STATE.hasOverdueOrder ||
           props.state.riskControl.state === RISK_CONTROL_STATE.order_reject ||
           props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
-          props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able ,
+          props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able||
+          props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3 ,
         'bg-orange-400':
           props.pageState !== PageStateEnum.UserAuthing &&
           props.pageState !== PageStateEnum.UserRejected &&
           props.state.order.state !== ORDER_STATE.hasOverdueOrder &&
           props.state.riskControl.state !== RISK_CONTROL_STATE.order_reject &&
           props.state.riskControl.state !== RISK_CONTROL_STATE.empty_quota && 
-          props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able,
+          props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able && 
+          props.state.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_over_3,
       })}
     >
       {props.children}

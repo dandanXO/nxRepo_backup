@@ -38,6 +38,9 @@ class IndexPagePo {
     noticeOrderOrQuotaRejected() {
         return cy.get("[data-testing-id='noticeOrderOrQuotaRejected']");
     }
+    noticeUserAuthedEmptyQuotae() {
+        return cy.get("[data-testing-id='noticeUserAuthedEmptyQuota']");
+    }
     noticeUserReacquireOver3Time() {
         return cy.get("[data-testing-id='noticeUserReacquireOver3Time']");
     }

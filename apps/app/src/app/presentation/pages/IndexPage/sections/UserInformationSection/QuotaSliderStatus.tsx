@@ -25,6 +25,7 @@ export const QuotaSliderStatus = (props: Props) => {
       props.state.order.state === ORDER_STATE.hasOverdueOrder,
       props.state.riskControl.state === RISK_CONTROL_STATE.order_reject,
       props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
+      props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3,
       props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota,
     ].some((item) => item === true);
   }, [props.state.user.state, props.state.order.state, props.state.riskControl.state]);

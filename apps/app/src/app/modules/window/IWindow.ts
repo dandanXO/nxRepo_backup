@@ -23,5 +23,6 @@ declare global {
       getAppInfo: () => string;
     };
     reduxStore: any;
+    Cypress?: any;
   }
 }

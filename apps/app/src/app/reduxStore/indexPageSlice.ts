@@ -200,10 +200,11 @@ export const indexPageSlice = createSlice({
         if (action.payload.refreshable === true) {
           if (action.payload.noQuotaByRetryFewTimes === false) {
             state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
-          } else {
-            // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
-          }
+          } 
+        //   else {
+        //     // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
+        //     state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+        //   }
           // NOTE: 不可重刷
         } else {
           // NOTE: 可能是尚有額度
@@ -217,7 +218,10 @@ export const indexPageSlice = createSlice({
       }
 
       // NOTICE: 會有過期, 但是 noQuotaBalance 為 true 嗎?
-      if (action.payload.noQuotaBalance === true) {
+      if (action.payload.noQuotaByRetryFewTimes === true) {
+        // NOTE: 優先度最後
+        state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+      } else if (action.payload.noQuotaBalance === true) {
         // NOTE: 優先度最後
         state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
       } else if (!isRiskControlOverdue && action.payload.availableAmount > 0) {
@@ -251,7 +255,7 @@ export const indexPageSlice = createSlice({
     // NOTICE: 取消可重刷取得逾期的計時器
     expiredRefreshableCountdown: (state, action) => {
       // 根據後端條件決定是否能不能重刷下方倒數
-      state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+    //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
     },
     // NOTICE: 取得推送用戶數訊息
     updateNotification:(state, action) => {
