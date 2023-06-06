@@ -176,7 +176,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
-
+      "hiddenLoanDetail": false,
       "loanAgreementUrl": "",
       "noQuotaBalance":false,
       "refreshable": false,
@@ -328,7 +328,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
-
+        "hiddenLoanDetail": false,
         "loanAgreementUrl": "",
         "noQuotaBalance":false,
         "refreshable": false,
@@ -495,6 +495,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 900,
@@ -614,6 +615,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "noQuotaByRetryFewTimes": false,
       "totalAmount": 15000,
       "usedAmount": 15000,
@@ -672,11 +674,11 @@ describe('IndexPage', () => {
       ],
       "needRiskKycUpdate": false,
       "riskReject": false,
-      "refreshable": true,
+      "refreshable": false,
       "refreshOverRetry": false,
       "orderUnderReview": false,
-      "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "seconds"),
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(1, "day"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "day"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -692,7 +694,7 @@ describe('IndexPage', () => {
       "marquee": "我是跑馬燈...",
       "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
       "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
-      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp",
     }
     cy.intercept("get", "/api/v3/index", {
       statusCode: 200,
@@ -927,6 +929,7 @@ describe('IndexPage', () => {
     })
 
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 0,
@@ -1001,6 +1004,7 @@ describe('IndexPage', () => {
     }
 
     const validIndexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "totalAmount": 15000,
       "usedAmount": 13000,
       "availableAmount": 2000,
@@ -1178,6 +1182,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
       "payableRecords": [
         {
@@ -1309,6 +1314,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 0,
@@ -1436,6 +1442,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
 
       // NOTICE: 風控額度直接不足，無法執行重刷
       "noQuotaBalance": true,
@@ -1578,6 +1585,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       // NOTICE: 風控額度直接不足，無法執行重刷
       "noQuotaBalance": true,
       // NOTICE: 額度下次可刷新時間
@@ -2117,6 +2125,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "noQuotaBalance": false,
       "totalAmount": 15000,
       "usedAmount": 15000,
@@ -2238,6 +2247,7 @@ describe('IndexPage', () => {
 
     // // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "totalAmount": 20000,
       "usedAmount": 1000,
       "availableAmount": 19000,
@@ -2349,6 +2359,7 @@ describe('IndexPage', () => {
 
     // NOTE: 模擬 Apply 重新獲取額度
     const appliedIndexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "totalAmount": 20000,
       "usedAmount": 16000,
       "availableAmount": 4000,
@@ -2554,6 +2565,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "totalAmount": 15000,
       "usedAmount": 13000,
       "availableAmount": 2000,
@@ -2785,6 +2797,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
       "totalAmount": 50000,
       "usedAmount": 0,
       "availableAmount": 50000,
