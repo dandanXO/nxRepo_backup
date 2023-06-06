@@ -634,6 +634,7 @@ describe('IndexPage', () => {
 
       // NOTE: important 看到可點擊的 Apply Now Button
       indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+      indexPagePo.applyButton().invoke('attr', 'data-testing-disable').should('eq', 'false');
       indexPagePo.reacquireCreditButton().should('not.exist');
       indexPagePo.viewAppProgressButton().should("not.exist");
   })
@@ -2417,6 +2418,7 @@ describe('IndexPage', () => {
       
       // NOTE: important 看到反灰無法點擊的 Apply Now Button
       indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+      indexPagePo.applyButton().invoke('attr', 'data-testing-disable').should('eq', 'true');
       indexPagePo.reacquireCreditButton().should('not.exist');
       indexPagePo.viewAppProgressButton().should("not.exist");
       
@@ -2425,7 +2427,7 @@ describe('IndexPage', () => {
 
 
   // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 10)
-  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -2776,6 +2778,7 @@ describe('IndexPage', () => {
 
       // NOTE: important 看到可點擊的 Apply Now Button
       indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+      indexPagePo.applyButton().invoke('attr', 'data-testing-disable').should('eq', 'false');
       indexPagePo.reacquireCreditButton().should('not.exist');
       indexPagePo.viewAppProgressButton().should("not.exist");
 
@@ -2785,7 +2788,7 @@ describe('IndexPage', () => {
 
 
  
-  it("status: 用戶已認證、風控額度時間有效，但10秒到期，額度足夠。額度太小，沒有商品可以滿足。無法點擊 Apply Now", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，但10秒到期，額度足夠。額度太小，沒有商品可以滿足。無法點擊 Apply Now", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -3008,15 +3011,45 @@ describe('IndexPage', () => {
     })
 
 
-    visitIndexPage();
+      visitIndexPage();
 
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到不反灰，可借款額度拉霸最低與最高都是正常值、繼續倒數計計時
-    // NOTE: important 看到推薦的產品列表
-    // 正常隨意顯示 Loan Over View
-    // NOTE: important 可以點擊 Apply Now Button
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
+      });
+      // NOTE: important 看到不反灰、可使用的借款額度拉霸、看到文字顯示最低與最高金額
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'false');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("not.have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.current));
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.max));
+      // NOTE: important 倒數計時正在計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible");
+
+      // NOTE: important 看到推薦的產品列表
+      indexPagePo.recommendedProducts().should("be.visible");
+
+      // 正常隨意顯示 Loan Over View
+      indexPagePo.loanOverView().should("be.visible");
+
+      // NOTE: important 看到不可點擊的 Apply Now Button
+      indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+      indexPagePo.applyButton().invoke('attr', 'data-testing-disable').should('eq', 'true');
+      indexPagePo.reacquireCreditButton().should('not.exist');
+      indexPagePo.viewAppProgressButton().should("not.exist");
+
+      // NOTE: important tips 訊息不會出現
+      indexPagePo.tips().should("not.be.visible")
   })
 
   it("status: 用戶已認證、風控額度時間有效，但10秒到期，額度足夠。重新刷新額度給十秒逾期。使用者第一次刷新有額度沒借款。第二與第三次都有額度沒借款，不給他刷新額度。", () => {
