@@ -15,7 +15,6 @@ type Props = {
 
 export const Button = (props: Props) => {
   const disable = typeof props.disable === "undefined" ? false : props.disable;
-  console.log("props.text", props.text, props.disable)
   return (
     <button
       onClick={props.onClick}

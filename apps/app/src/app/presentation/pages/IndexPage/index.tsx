@@ -423,7 +423,6 @@ const IndexPage = () => {
   // NOTE: Modal
   const modelState = useSelector((state: RootState) => state.model);
 
-  console.log("fdsafda", indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder)
   return (
     <div className={'flex flex-col overflow-auto max-h-[90vh] pb-20'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
