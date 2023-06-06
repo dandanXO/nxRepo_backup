@@ -115,14 +115,15 @@ const IndexPage = () => {
       || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
     ( indexPageState.order.state === ORDER_STATE.empty
       || indexPageState.order.state === ORDER_STATE.normal
-      || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder || indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+      || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder 
+      || indexPageState.order.state === ORDER_STATE.hasOverdueOrder
     );
 
   const disableClickReacquireCredit = !(indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder);
   const onClickReacquireCredit = useCallback(() => {
     if(disableClickReacquireCredit) return;
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
-  }, []);
+  }, [disableClickReacquireCredit]);
 
 
 
@@ -385,7 +386,7 @@ const IndexPage = () => {
     isError,
   } = useSelector((state: RootState) => state.indexPage.api.reacquire);
 
-  console.log("isReacquireLoading", isReacquireLoading);
+//   console.log("isReacquireLoading", isReacquireLoading);
 
   const countdown = useSelector((state: RootState) => state.indexPage.timeout.riskControlDate);
   // console.log("countdown", countdown);
@@ -584,7 +585,7 @@ const IndexPage = () => {
               dataTestingID={'reacquireCredit'}
               text={'Reacquire Credit Amount'}
               loading={isReacquireLoading}
-              disable={disableClickReacquireCredit}
+              disable={isReacquireLoading ? isReacquireLoading : disableClickReacquireCredit}
             />
           )}
       </div>

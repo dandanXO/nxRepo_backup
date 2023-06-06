@@ -20,6 +20,9 @@ import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
 import { FeeRateKeyEnum } from "apps/app/src/app/api/indexService/FeeRateKeyEnum";
 import { getTimeInfoBetweenCurrentAndCountDown } from "@frontend/shared/date";
 import { NativeAppInfo } from "apps/app/src/app/persistant/nativeAppInfo";
+import { ORDER_STATE } from "apps/app/src/app/domain/order/ORDER_STATE";
+import {formatPrice} from "../../../../apps/app/src/app/modules/format/formatPrice"
+
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
 const infoLog = (message, rest) => {
@@ -476,7 +479,7 @@ describe('IndexPage', () => {
 
 
   // FIGMA: 首頁-認證完成-訂單成立-有即將到期單 (Android: Level 6)
-  it("status: 用戶已認證、有3天即將到期的訂單", () => {
+  it("status: 用戶已認證、有3天即將到期的訂單，仍有額度可再借產品", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -509,17 +512,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -561,6 +564,7 @@ describe('IndexPage', () => {
       "oldUserForceApply": false,
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -581,22 +585,61 @@ describe('IndexPage', () => {
       console.log("index");
     })
 
-    visitIndexPage();
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到逾期的訊息資訊
-    // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-    // NOTE: important 看到不反灰但無法使用的可借款額度拉霸、無法倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最左邊
-    // NOTE: important 倒數計時歸零
-    // 正常隨意顯示 Loan Over View
-    // NOTE: important 看到下方 tips 優先還款訊息
-    // NOTE: important 看到反灰無法點擊的 Apply Now Button
+      visitIndexPage();
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
+      });
+      // NOTE: important 看到即期的訊息資訊
+      indexPagePo.orderNotice().should("be.visible");
+      indexPagePo.orderNotice().invoke("attr", "data-order-status").should('eq', ORDER_STATE.hasInComingOverdueOrder.toString());
+      indexPagePo.orderNotice()
+          .should("be.visible")
+          .and('contain', 'Loan Order')
+          .and('contain', formatPrice(indexServiceResponse.payableRecords[0].payableAmount))
+          .and('contain', 'Due Date')
+          .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
+
+      // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
+      indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
+          cy.url().should('include', '/repayment-detail');
+      }).then(() => {
+          cy.go(-1)
+      })
+
+      // NOTE: important 看到不反灰、可使用的借款額度拉霸、看到文字顯示最低與最高金額
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'false');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("not.have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.current));
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.max));
+      // NOTE: important 倒數計時正在計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible");
+      
+      // 正常隨意顯示 Loan Over View
+      indexPagePo.loanOverView().should("be.visible");
+
+      // NOTE: important tips 訊息不會出現
+      indexPagePo.tips().should("not.be.visible")
+
+      // NOTE: important 看到可點擊的 Apply Now Button
+      indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+      indexPagePo.reacquireCreditButton().should('not.exist');
+      indexPagePo.viewAppProgressButton().should("not.exist");
   })
 
-  // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
-  it("status: 用戶已認證、有逾期的訂單", () => {
+    // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
+    it.only("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -615,7 +658,9 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
-      "hiddenLoanDetail": false,
+      "hiddenLoanDetail":false,
+      "loanAgreementUrl":"",
+      "noQuotaBalance":false,
       "noQuotaByRetryFewTimes": false,
       "totalAmount": 15000,
       "usedAmount": 15000,
@@ -630,17 +675,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -674,11 +719,10 @@ describe('IndexPage', () => {
       ],
       "needRiskKycUpdate": false,
       "riskReject": false,
-      "refreshable": false,
-      "refreshOverRetry": false,
+      "refreshable": true,
       "orderUnderReview": false,
-      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(1, "day"),
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "day"),
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(2, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -694,7 +738,7 @@ describe('IndexPage', () => {
       "marquee": "我是跑馬燈...",
       "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
       "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
-      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
     }
     cy.intercept("get", "/api/v3/index", {
       statusCode: 200,
@@ -705,19 +749,62 @@ describe('IndexPage', () => {
 
     visitIndexPage();
     // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
+    // NOTE: important 看到跑馬燈
+    indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+    
+    // NOTE: important 看到 welcome 包含姓名、客服 Button
+    indexPagePo.welcome().should("be.visible");
+    indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+    indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+
     // NOTE: important 看到逾期的訊息資訊、提醒您需要優先還清逾期款項才能再借款
+    indexPagePo.orderNotice().should("be.visible");
+    indexPagePo.orderNotice().invoke("attr", "data-order-status").should('eq', ORDER_STATE.hasOverdueOrder.toString());
+    indexPagePo.orderNotice()
+        .should("be.visible")
+        .and('contain', 'Loan Order')
+        .and('contain', formatPrice(indexServiceResponse.payableRecords[0].payableAmount))
+        .and('contain', 'Overdue')
+        .and('contain', 'Due Date')
+        .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
+        .and('contain', 'Remind you to prioritize paying off overdue payments before you can borrow again.');
+  
     // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-    // NOTE: important 看到反灰但無法使用的可借款額度拉霸、無法倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最左邊
-    // NOTE: important 倒數計時歸零
+    indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
+        cy.url().should('include', '/repayment-detail');
+    }).then(() => {
+        cy.go(-1)
+    })
+
+    // NOTE: important 看到反灰但無法使用的可借款額度拉霸、無法倒數計計時、看到文字顯示最低與最高範圍為 ****
+    indexPagePo.quotaSlider().should("be.visible");
+    indexPagePo.quotaSlider().invoke('attr','data-testing-disable').should('eq','true');
+    indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class",'disabled');
+    indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
+    indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
+
+    // NOTE: important 歸零的倒數計計時
+    indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
+    
     // 正常隨意顯示 Loan Over View
-    // NOTE: important 看到下方 tips 優先還款訊息
+    indexPagePo.loanOverView().should("be.visible");
+
+    // NOTE: important 看到下方 tips 優先還款訊息 (圖沒有)
+
     // NOTE: important 看到反灰無法點擊的 Apply Now Button
+    indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+    indexPagePo.applyButton().invoke('attr', 'data-testing-disable').should('eq', 'true');
+    indexPagePo.reacquireCreditButton().should('not.exist');
+    indexPagePo.viewAppProgressButton().should('not.exist');
+
     // NOTE: important 看到下方 Tab 的 Payment 有紅點提示
+    indexPagePo.tabPayment().should("be.visible");
+    indexPagePo.tabPayment().find("[data-testing-id='tab-payment-notice']").should("be.visible");
+
   })
 
+
+  
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
   it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
@@ -744,7 +831,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse = (): IndexServiceResponse => ({
-
+      "hiddenLoanDetail": false,
       // NOTICE: 是否直接表明要不顯示按鈕? 但還有商品沒有選擇的條件
       "refreshable": false,
       // NOTICE: 當 refreshable true, 但是 noQuotaByRetryFewTimes true 一樣不能重刷?
@@ -943,17 +1030,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -985,11 +1072,13 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl": "",
       "needRiskKycUpdate": false,
       // NOTE: 優先權最高
       "riskReject": false,
       "refreshable": true,
       "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       // NOTICE: GIVEN: 風控額度時間無效
@@ -1018,17 +1107,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -1060,11 +1149,13 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl": "",
       "needRiskKycUpdate": false,
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
       "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("1", "days"),
@@ -1141,23 +1232,57 @@ describe('IndexPage', () => {
       count++;
     })
 
-    visitIndexPage();
+      visitIndexPage();
 
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到不反灰但無法使用的可借款額度拉霸、無法倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最中間
-    // 正常隨意顯示 Loan Over View
-    // NOTE: important 顯示文案：我們建議您在重新申請更高的信用額度之前優先還款。
-    // NOTE: important 看到 Reacquire Credit Limit Button 可以點選。
-    // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
-    // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。
-    // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
+      });
 
-    // NOTICE: 還缺
-    // refresh 回來有風控時間有效、但額度不足
-    // refresh 回來有風控時間有效、額度足夠
+      // NOTE: important 看到反灰無法拖拉使用的可借款額霸、看到文字顯示最低與最高範圍為 ****
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'true');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
+      
+      // NOTE: important 歸零的倒數計計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
+      
+      // 正常隨意顯示 Loan Over View
+      indexPagePo.loanOverView().should("be.visible");
+
+      // NOTE: important 顯示文案：我們建議您在重新申請更高的信用額度之前優先還款。
+      indexPagePo.tips().should("be.visible")
+          .and('contain', 'Tips')
+          .and('contain', 'The available credit limit has expired, please reacquire credit amount.')
+      // NOTE: important 看到 Reacquire Credit Limit Button 可以點選。
+      indexPagePo.applyButton().should("not.exist");
+      indexPagePo.reacquireCreditButton().should('be.visible').contains('Reacquire Credit Amount');
+      indexPagePo.viewAppProgressButton().should("not.exist");
+
+      // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
+      indexPagePo.reacquireCreditButton().click().then(() => {
+        indexPagePo.reacquireCreditButton().invoke('attr', 'data-testing-loading').should('eq', 'true')
+      })
+
+      // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。 (實際不會跳出無法測試)
+      
+      // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
+
+      // NOTICE: 還缺
+      // refresh 回來有風控時間有效、但額度不足
+      // refresh 回來有風控時間有效、額度足夠
 
   })
 
@@ -1186,6 +1311,7 @@ describe('IndexPage', () => {
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "days"),
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -1198,12 +1324,11 @@ describe('IndexPage', () => {
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
-      "noQuotaByRetryFewTimes": true,
+      "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-
       "oldUserForceApply": false,
-
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 900,
@@ -1217,17 +1342,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -1259,6 +1384,7 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl": "",
       "needRiskKycUpdate": false,
 
       "marquee": "我是跑馬燈...",
@@ -1268,28 +1394,56 @@ describe('IndexPage', () => {
     }
     cy.intercept("get", "/api/v3/index", {
       statusCode: 200,
-      body: indexServiceResponse,
+        body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+        console.log("index");
     })
 
 
-    visitIndexPage();
+      visitIndexPage();
 
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到不反灰但無法使用的可借款額度拉霸、無法倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最中間
-    // 正常隨意顯示 Loan Over View
-    // NOTE: important 顯示文案：我們建議您在重新申請更高的信用額度之前優先還款。
-    // NOTE: important 看到 Reacquire Credit Limit Button 可以點選。
-    // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
-    // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。
-    // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
+      });
 
-    // NOTICE: refresh 回來有風控時間有效、但額度不足
-    // NOTICE: refresh 回來有風控時間有效、額度足夠
+      // NOTE: important 看到反灰無法拖拉使用的可借款額霸、看到文字顯示最低與最高範圍為 ****
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'true');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
+      // NOTE: important 歸零的倒數計計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
+
+      // 正常隨意顯示 Loan Over View
+      indexPagePo.loanOverView().should("be.visible");
+
+      // NOTE: important 顯示文案：我們建議您在重新申請更高的信用額度之前優先還款。
+      indexPagePo.orderNotice().should("be.visible");
+
+      // NOTE: important 看到 Reacquire Credit Limit Button 可以點選。
+      indexPagePo.applyButton().should("not.exist");
+      indexPagePo.reacquireCreditButton().should('be.visible').contains('Reacquire Credit Amount');
+      indexPagePo.viewAppProgressButton().should("not.exist");
+
+      // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
+
+      // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。
+      // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
+
+      // NOTICE: refresh 回來有風控時間有效、但額度不足
+      // NOTICE: refresh 回來有風控時間有效、額度足夠
 
   })
 
@@ -1328,17 +1482,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -1381,6 +1535,7 @@ describe('IndexPage', () => {
       "oldUserForceApply": false,
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -1482,17 +1637,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -1529,6 +1684,7 @@ describe('IndexPage', () => {
       "oldUserForceApply": false,
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -1622,17 +1778,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -1666,6 +1822,7 @@ describe('IndexPage', () => {
       ],
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -1701,7 +1858,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-沒被拒，額度0的用戶 (Android: Level 4)
-  it.only("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新 -> 連續3次”額度0”就拒掉 (僅模擬一次)。", () => {
+  it("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新 -> 連續3次”額度0”就拒掉 (僅模擬一次)。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1720,6 +1877,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const getFirstIndexServiceResponse = (seconds: number): IndexServiceResponse => ({
+      "hiddenLoanDetail": false,
       // NOTICE: 風控額度直接不足，無法執行重刷
       "noQuotaBalance": true,
       // NOTICE: 額度下次可刷新時間
@@ -1737,7 +1895,7 @@ describe('IndexPage', () => {
 
 
       // NOTICE: 實際可用金額
-      "availableAmount": 0,
+      "availableAmount": 900,
       "totalAmount": 0,
       "usedAmount": 0,
       "quotaBar": {
@@ -1836,14 +1994,15 @@ describe('IndexPage', () => {
     const getNotRefreshableIndexServiceResponse = () : IndexServiceResponse=> ({
       // NOTICE: 風控是否已無法重整 (refreshable 這時候 true | false 沒有意義)
       // 風控三次額度被拒，noQuotaByRetryFewTimes -> true (僅要看這個參數，其他條件不管)
+      "hiddenLoanDetail":false,
       "noQuotaByRetryFewTimes": true,
-      "noQuotaBalance": true,
-      "refreshable": true,
+      "noQuotaBalance": false,
+      "refreshable": false,
       // NOTICE: 額度下次可刷新時間(noQuotaByRetryFewTimes 為 true，這時候就不會有時間)
       "refreshableUntil": null,
       // NOTICE: 風控有無過期
       // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
-      "offerExpireTime": null,
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
 
       // NOTICE: 是否需要風控更新
       "needRiskKycUpdate": false,
@@ -2059,7 +2218,6 @@ describe('IndexPage', () => {
       cy.intercept("get", "/api/v3/index", (req) => {
           indexCount = indexCount + 1;
           req.continue((res) => {
-
               res.send({
                   statusCode: 200,
                   body: {
@@ -2068,7 +2226,7 @@ describe('IndexPage', () => {
                   }
               })
              // NOTE: important 看到跑馬燈
-             indexPagePo.marquee().should("be.visible").contains(firstIndexServiceResponse().marquee);
+             indexPagePo.marquee().should("be.visible").contains(notRefreshableIndexServiceResponse().marquee);
 
              // NOTE: important 看到 welcome 包含姓名、客服 Button
              indexPagePo.welcome().should("be.visible");
@@ -2106,7 +2264,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-有效額度時間-額度不足 (Android: Level 7)
-  it("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
+  it("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -2140,17 +2298,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -2182,16 +2340,18 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl": "",
       "needRiskKycUpdate": false,
       "riskReject": false,
-      "refreshable": true,
+      "refreshable": false,
       "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(10, "seconds"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -2213,16 +2373,47 @@ describe('IndexPage', () => {
     })
 
 
-    visitIndexPage();
+      visitIndexPage();
 
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到不反灰但可借款額度拉霸最低與最高都是0、繼續倒數計計時
-    // 正常隨意顯示 Loan Over View
-    // NOTE: important 看到下方 tips 額度不足相關訊息
-    // NOTE: important 看到反灰無法點擊的 Apply Now Button
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
+      });
 
+      // NOTE: important 看到不反灰但可借款額度拉霸最低與最高都是0
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'false');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("not.have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains(0);
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains(0);
+
+      // NOTE: important 倒數計時正在計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible");
+
+      // 正常隨意顯示 Loan Over View
+      indexPagePo.loanOverView().should("be.visible");
+
+      // NOTE: important 看到下方 tips 額度不足相關訊息
+      indexPagePo.tips().should("be.visible")
+      .and('contain', 'Tips')
+      .and('contain', 'Your current preferential loan quota has been used up.')
+      .and('contain', 'Remind you to prioritize repayment to obtain a higher credit limit, and wait for the next round of preferential loan plans.')
+      
+      // NOTE: important 看到反灰無法點擊的 Apply Now Button
+      indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+      indexPagePo.reacquireCreditButton().should('not.exist');
+      indexPagePo.viewAppProgressButton().should("not.exist");
+      
   })
 
 
@@ -2261,17 +2452,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -2313,6 +2504,7 @@ describe('IndexPage', () => {
       "oldUserForceApply": false,
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -2321,6 +2513,7 @@ describe('IndexPage', () => {
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         },
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "BB LOAN",
           "payableAmount": 2000,
@@ -2329,6 +2522,7 @@ describe('IndexPage', () => {
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         },
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "CC LOAN",
           "payableAmount": 3000,
@@ -2337,6 +2531,7 @@ describe('IndexPage', () => {
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         },
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "DD LOAN",
           "payableAmount": 4000,
@@ -2373,17 +2568,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -2425,6 +2620,7 @@ describe('IndexPage', () => {
       "oldUserForceApply": false,
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -2433,6 +2629,7 @@ describe('IndexPage', () => {
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         },
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "BB LOAN",
           "payableAmount": 2000,
@@ -2441,6 +2638,7 @@ describe('IndexPage', () => {
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         },
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "CC LOAN",
           "payableAmount": 3000,
@@ -2449,6 +2647,7 @@ describe('IndexPage', () => {
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         },
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "DD LOAN",
           "payableAmount": 4000,
@@ -2579,17 +2778,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -2650,21 +2849,21 @@ describe('IndexPage', () => {
           "serial": 1000
         },
         "chargeFeeDetails": [
-          {
-            "title": "Processing Fee",
-            "counting": 0.4,
-            "key": "PROCESSING_FEE"
-          },
-          {
-            "title": "Service Fee",
-            "counting": 0.5,
-            "key": "SERVICE_FEE"
-          },
-          {
-            "title": "Interest Fee",
-            "counting": 0.1,
-            "key": "LOAN_INTEREST"
-          }
+            {
+              "title": "Processing Fee",
+              "counting": 0.4,
+              "key": FeeRateKeyEnum.PROCESSING_FEE
+            },
+            {
+              "title": "Service Fee",
+              "counting": 0.5,
+              "key": FeeRateKeyEnum.SERVICE_FEE
+            },
+            {
+              "title": "Interest Fee",
+              "counting": 0.1,
+              "key": FeeRateKeyEnum.LOAN_INTEREST
+            }
         ],
         "products": [
           {
@@ -2811,17 +3010,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -2853,11 +3052,13 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl":"",
       "needRiskKycUpdate": false,
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
       "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(10, "seconds"),
@@ -2882,21 +3083,21 @@ describe('IndexPage', () => {
           "serial": 1000
         },
         "chargeFeeDetails": [
-          {
-            "title": "Processing Fee",
-            "counting": 0.4,
-            "key": "PROCESSING_FEE"
-          },
-          {
-            "title": "Service Fee",
-            "counting": 0.5,
-            "key": "SERVICE_FEE"
-          },
-          {
-            "title": "Interest Fee",
-            "counting": 0.1,
-            "key": "LOAN_INTEREST"
-          }
+            {
+              "title": "Processing Fee",
+              "counting": 0.4,
+              "key": FeeRateKeyEnum.PROCESSING_FEE
+            },
+            {
+              "title": "Service Fee",
+              "counting": 0.5,
+              "key": FeeRateKeyEnum.SERVICE_FEE
+            },
+            {
+              "title": "Interest Fee",
+              "counting": 0.1,
+              "key": FeeRateKeyEnum.LOAN_INTEREST
+            }
         ],
         "products": [
           {
@@ -3021,3 +3222,4 @@ describe('IndexPage', () => {
   })
 
 });
+

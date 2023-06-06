@@ -71,7 +71,7 @@ export const TipsSection = (props: Props) => {
   }
 
   return (
-    <div className={''}>
+    <div className={''} data-testing-id={'tips'}>
       {messageComponent && (
         <div className={'inline-block rounded-t-xl bg-yellow-400 px-2 py-1 text-sm text-white'}>Tips</div>
       )}

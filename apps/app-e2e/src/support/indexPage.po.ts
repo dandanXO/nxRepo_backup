@@ -53,6 +53,9 @@ class IndexPagePo {
     welcomBackTimer(){
         return cy.get("[data-testing-id='welcomBackTimer']");
     }
+    tips(){
+        return cy.get("[data-testing-id='tips']");
+    }
     tabPayment() {
         return cy.get("[data-testing-id='tab-payment']");
     }

@@ -20,6 +20,7 @@ export const Button = (props: Props) => {
       onClick={props.onClick}
       data-testing-id={props.dataTestingID}
       data-testing-disable={props.dataTestingDisable}
+      data-testing-loading={props.loading}
       // shadow-md shadow-gray-400
       className={cx(
         'w-full rounded-md p-2 text-center font-bold border-solid',
