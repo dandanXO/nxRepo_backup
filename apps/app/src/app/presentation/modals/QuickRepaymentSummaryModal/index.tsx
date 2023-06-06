@@ -100,11 +100,14 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
 
             {/*TODO: refactor me*/}
             {props.state.indexAPI?.chargeFeeDetails.map((key) => {
-              if(
-                key.key === FeeRateKeyEnum.LOAN_INTEREST ||
-                key.key === FeeRateKeyEnum.PROCESSING_FEE ||
-                key.key === FeeRateKeyEnum.SERVICE_FEE) {
-                return null;
+              // NOTE: 是否隐藏借款详情
+              if(props.state.indexAPI?.hiddenLoanDetail) {
+                if(
+                  key.key === FeeRateKeyEnum.LOAN_INTEREST ||
+                  key.key === FeeRateKeyEnum.PROCESSING_FEE ||
+                  key.key === FeeRateKeyEnum.SERVICE_FEE) {
+                  return null;
+                }
               }
               const keyMapValue: Record<FeeRateKeyEnum, any> = {
                 [FeeRateKeyEnum.LOAN_INTEREST]: formatPrice(props.calculatingSummary.interest),
