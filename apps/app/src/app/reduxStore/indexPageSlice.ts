@@ -185,48 +185,39 @@ export const indexPageSlice = createSlice({
       }
 
       // NOTICE: 風控判斷
-      // NOTE: 會有其他條件同時相符，所以這邊用if優先權最高-直接第一
       if (action.payload.riskReject === true) {
-        // NOTICE: 新客直接被擋或是老客額度被擋，但前端直接視為 RISK_CONTROL_STATE.order_reject
-        // NOTICE: order
         state.riskControl.state = RISK_CONTROL_STATE.order_reject;
-        // state.order.overdueOrComingOverdueOrder = null;
+
       } else if (action.payload.noQuotaBalance === true) {
-        // NOTE: 直接無法取得風控額度
         state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
 
-      } else if (action.payload.refreshable === true) {
-
-        if (action.payload.noQuotaByRetryFewTimes === false) {
-          const currentTime = moment();
-          const refreshableUntilTime = moment(action.payload.refreshableUntil);
-
-          if(refreshableUntilTime.isBefore(currentTime)) {
+      } else if(isRiskControlOverdue) {
+        if (action.payload.refreshable === true) {
+          if (action.payload.noQuotaByRetryFewTimes === false) {
             state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+
           } else {
             console.log("防禦型設計-理論上不會遇到.1")
           }
         } else {
-          console.log("防禦型設計-理論上不會遇到.2")
-        }
+          if (action.payload.noQuotaByRetryFewTimes === true) {
+            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
 
-      } else if(action.payload.refreshable === false) {
-        if (action.payload.noQuotaByRetryFewTimes === true) {
-          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
-
-          if (isRiskControlOverdue) {
-            console.log("防禦型設計-理論上不會遇到.3")
-
-          } else if (!isRiskControlOverdue && action.payload.availableAmount >= 0) {
-            state.riskControl.state = RISK_CONTROL_STATE.valid;
           } else {
-            console.log("防禦型設計-理論上不會遇到.4")
+            if (action.payload.availableAmount >= 0) {
+              state.riskControl.state = RISK_CONTROL_STATE.valid;
+
+            } else {
+              console.log("防禦型設計-理論上不會遇到.2")
+            }
           }
+        }
+      } else {
+        if (action.payload.availableAmount >= 0) {
+          state.riskControl.state = RISK_CONTROL_STATE.valid;
         } else {
           state.riskControl.state = RISK_CONTROL_STATE.valid;
         }
-      } else {
-        console.log("防禦型設計-理論上不會遇到.5")
       }
 
     },
