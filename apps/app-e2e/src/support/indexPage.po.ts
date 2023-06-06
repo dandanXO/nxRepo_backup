@@ -11,6 +11,9 @@ class IndexPagePo {
     quotaSlider() {
         return cy.get("[data-testing-id='quotaSlider']")
     }
+    recommendedProducts(){
+        return cy.get("[data-testing-id='recommended-products']")
+    }
     loanOverView() {
         return cy.get("[data-testing-id='loanOverView']")
     }

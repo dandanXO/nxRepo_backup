@@ -1288,7 +1288,7 @@ describe('IndexPage', () => {
 
   // NOTICE: 有應還訂單
   // FIGMA: 首頁-認證完成-額度時間到期-需重新取得信用額度 (Android: Level 8)
-  it.only("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1444,7 +1444,6 @@ describe('IndexPage', () => {
       indexPagePo.reacquireCreditButton().click().then(() => {
           indexPagePo.reacquireCreditButton().invoke('attr', 'data-testing-loading').should('eq', 'true')
       })
-
 
       // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。
       // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
@@ -2425,8 +2424,8 @@ describe('IndexPage', () => {
 
 
 
-  // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 9)
-  it("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
+  // FIGMA: 首頁-認證完成-有效額度時間-尚有額度 (Android: Level 10)
+  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -2505,10 +2504,12 @@ describe('IndexPage', () => {
       "riskReject": false,
       "refreshable": false,
       "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
+      "loanAgreementUrl":"",
       "payableRecords": [
         {
           "orderNo":"",
@@ -2617,10 +2618,12 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl":"",
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": false,
       "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
@@ -2738,19 +2741,50 @@ describe('IndexPage', () => {
       })
     })
 
-    visitIndexPage();
+      visitIndexPage();
 
 
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到不反灰，可借款額度拉霸最低與最高都是正常值、繼續倒數計計時
-    // NOTE: important 看到推薦的產品列表
-    // 正常隨意顯示 Loan Over View
-    // NOTE: important 可以點擊 Apply Now Button
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
+      });
+
+      // NOTE: important 看到不反灰，可借款額度拉霸最低與最高都是正常值
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'false');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("not.have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.current));
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.max));
+      // NOTE: important 倒數計時正在計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible");
+
+      // NOTE: important 看到推薦的產品列表
+      indexPagePo.recommendedProducts().should("be.visible");
+
+      // 正常隨意顯示 Loan Over View
+      indexPagePo.loanOverView().should("be.visible");
+
+      // NOTE: important 看到可點擊的 Apply Now Button
+      indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+      indexPagePo.reacquireCreditButton().should('not.exist');
+      indexPagePo.viewAppProgressButton().should("not.exist");
+
+      // NOTE: important tips 訊息不會出現
+      indexPagePo.tips().should("not.be.visible")
   })
 
 
+ 
   it("status: 用戶已認證、風控額度時間有效，但10秒到期，額度足夠。額度太小，沒有商品可以滿足。無法點擊 Apply Now", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -2774,12 +2808,12 @@ describe('IndexPage', () => {
       "hiddenLoanDetail": false,
       "totalAmount": 15000,
       "usedAmount": 13000,
-      "availableAmount": 2000,
+      "availableAmount": 1000,
       "quotaBar": {
-        "min": 1000,
-        "max": 2000,
+        "min": 100,
+        "max": 1000,
         "current": 1000,
-        "serial": 1000
+        "serial": 100
       },
       "chargeFeeDetails": [
         {
@@ -2827,11 +2861,13 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl":"",
       "needRiskKycUpdate": false,
       // NOTICE: 優先權最高
       "riskReject": false,
       "refreshable": true,
       "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(10, "seconds"),
