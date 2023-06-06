@@ -878,7 +878,7 @@ describe('IndexPage', () => {
       indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class", 'disabled');
       indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
       indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
-      
+
       // NOTE: important 歸零的倒數計計時
       indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
 
@@ -891,7 +891,7 @@ describe('IndexPage', () => {
 
       // NOTE: important 根據可返回借款天數顯示倒數計時器
       indexPagePo.welcomBackTimer().should("be.visible").contains('Welcome back and reapply in');
-     
+
       cy.clock().then((clock) => {
           const refreshableUntil = moment(indexServiceResponse().refreshableUntil).add(-1, "seconds");
           const conutDown1s = getTimePartInfoBetweenCurrentAndCountDown(refreshableUntil);
@@ -1717,15 +1717,16 @@ describe('IndexPage', () => {
       // NOTICE: 額度下次可刷新時間
       "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(seconds, "seconds").format(),
 
+      // NOTICE: 風控是否可重整
+      "refreshable": true,
+      // NOTICE: 風控是否已無法重整
+      "noQuotaByRetryFewTimes": false,
+
       // NOTICE: 風控有無過期
       // NOTE: 詢問後端，直接沒額度的風控有無過期??
       // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days").format(),
       "offerExpireTime": null,
 
-      // NOTICE: 風控是否可重整
-      "refreshable": true,
-      // NOTICE: 風控是否已無法重整
-      "noQuotaByRetryFewTimes": false,
 
       // NOTICE: 實際可用金額
       "availableAmount": 0,
@@ -1805,7 +1806,7 @@ describe('IndexPage', () => {
       "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
       "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
     })
-   
+
 
     // NOTE: 第 1 次看到需要重等刷新時間
     const firstIndexServiceResponse = () => getFirstIndexServiceResponse(10);

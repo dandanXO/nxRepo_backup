@@ -190,48 +190,35 @@ export const indexPageSlice = createSlice({
         }
       }
 
-      // NOTE: 與後端對規則
-      // NOTE: 1.風控到期後的重刷
-      // NOTE: 2.風控沒過，沒額度的重刷
 
       // NOTICE: 風控判斷
-      if (typeof action.payload.offerExpireTime !== 'undefined' && isRiskControlOverdue) {
-        // NOTE: 可重刷
-        if (action.payload.refreshable === true) {
-          if (action.payload.noQuotaByRetryFewTimes === false) {
-            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
-          } 
-        //   else {
-        //     // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-        //     state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
-        //   }
-          // NOTE: 不可重刷
-        } else {
-          // NOTE: 可能是尚有額度
-          // NOTE: 下方 code 不需要
-          // if (action.payload.noQuotaByRetryFewTimes === true) {
-          //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-          // } else {
-          //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-          // }
-        }
-      }
 
-      // NOTICE: 會有過期, 但是 noQuotaBalance 為 true 嗎?
-      if (action.payload.noQuotaByRetryFewTimes === true) {
-        // NOTE: 優先度最後
-        state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
-      } else if (action.payload.noQuotaBalance === true) {
-        // NOTE: 優先度最後
+      // NOTE: 直接無法取得風控額度
+      if (action.payload.noQuotaBalance === true) {
         state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
-      } else if (!isRiskControlOverdue && action.payload.availableAmount > 0) {
-        state.riskControl.state = RISK_CONTROL_STATE.valid;
+
+      } else if (action.payload.refreshable === true) {
+
+        if (action.payload.noQuotaByRetryFewTimes === false) {
+          const currentTime = moment();
+          const refreshableUntilTime = moment(action.payload.refreshableUntil);
+
+          if(refreshableUntilTime.isBefore(currentTime)) {
+            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+          } else {
+            // NOTE: 防禦型設計-理論上不會遇到
+          }
+        } else {
+          // NOTE: 防禦型設計-理論上不會遇到
+        }
+
+      } else if(action.payload.refreshable === false){
+        state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+
+      } else if (!isRiskControlOverdue && action.payload.availableAmount >= 0) {
+          state.riskControl.state = RISK_CONTROL_STATE.valid;
       }
 
-      // REFACTOR ME: 額度不足
-      // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
-      //
-      // }
     },
     updateOpenAPI: (state, action: PayloadAction<GetOpenIndexResponse>) => {
       state.openIndexAPI = action.payload;

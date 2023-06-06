@@ -10,9 +10,12 @@ type Props = {
   onClick?: () => void;
   loading?: boolean;
   type?: 'secondary' | 'ghost' | undefined;
+  disable?: boolean;
 } & TestingProps;
 
 export const Button = (props: Props) => {
+  const disable = typeof props.disable === "undefined" ? false : props.disable;
+  console.log("props.text", props.text, props.disable)
   return (
     <button
       onClick={props.onClick}
@@ -21,13 +24,16 @@ export const Button = (props: Props) => {
       className={cx(
         'w-full rounded-md p-2 text-center font-bold border-solid',
         {
-          'border-primary-main bg-primary-main border text-white': props.type === undefined,
+          'border-primary-main bg-primary-main border text-white': props.type === undefined && !disable,
         },
         {
           'border-tertiary-main bg-tertiary-main border text-white': props.type === 'secondary',
         },
         {
           'border-primary-main text-primary-main border-[1.5px] bg-none': props.type === 'ghost',
+        },
+        {
+          'bg-cstate-disable-main border-cstate-disable-main text-white': props.disable === true,
         },
         props.className
       )}
