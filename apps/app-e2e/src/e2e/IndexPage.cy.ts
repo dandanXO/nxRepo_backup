@@ -478,7 +478,7 @@ describe('IndexPage', () => {
 
 
   // FIGMA: 首頁-認證完成-訂單成立-有即將到期單 (Android: Level 6)
-  it("status: 用戶已認證、有3天即將到期的訂單", () => {
+  it.only("status: 用戶已認證、有3天即將到期的訂單，仍有額度可再借產品", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -501,9 +501,9 @@ describe('IndexPage', () => {
       "usedAmount": 15000,
       "availableAmount": 900,
       "quotaBar": {
-        "min": 0,
-        "max": 0,
-        "current": 0,
+        "min": 1000,
+        "max": 20000,
+        "current":2000,
         "serial": 1000
       },
       "chargeFeeDetails": [
@@ -552,13 +552,15 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl":"",
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": true,
       "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -583,22 +585,58 @@ describe('IndexPage', () => {
       console.log("index");
     })
 
-    visitIndexPage();
-    // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
-    // NOTE: important 看到逾期的訊息資訊
-    // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-    // NOTE: important 看到不反灰但無法使用的可借款額度拉霸、無法倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最左邊
-    // NOTE: important 倒數計時歸零
-    // 正常隨意顯示 Loan Over View
-    // NOTE: important 看到下方 tips 優先還款訊息
-    // NOTE: important 看到反灰無法點擊的 Apply Now Button
+      visitIndexPage();
+      // NOTE: then
+      // NOTE: important 看到跑馬燈
+      indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+      // NOTE: important 看到 welcome 包含姓名、客服 Button
+      indexPagePo.welcome().should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+      indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+      // action: 點擊 hide-icon ( 眼睛 )
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
+      });
+      indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
+      });
+      // NOTE: important 看到即期的訊息資訊
+      indexPagePo.orderNotice().should("be.visible");
+      indexPagePo.orderNotice().invoke("attr", "data-order-status").should('eq', ORDER_STATE.hasInComingOverdueOrder.toString());
+      indexPagePo.orderNotice()
+          .should("be.visible")
+          .and('contain', 'Loan Order')
+          .and('contain', formatPrice(indexServiceResponse.payableRecords[0].payableAmount))
+          .and('contain', 'Due Date')
+          .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
+
+      // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
+      indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
+          cy.url().should('include', '/repayment-detail');
+      }).then(() => {
+          cy.go(-1)
+      })
+
+      // NOTE: important 看到不反灰、可使用的借款額度拉霸、看到文字顯示最低與最高金額
+      indexPagePo.quotaSlider().should("be.visible");
+      indexPagePo.quotaSlider().invoke('attr', 'data-testing-disable').should('eq', 'false');
+      indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("not.have.class", 'disabled');
+      indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.current));
+      indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.max));
+      // NOTE: important 倒數計時正在計時
+      indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible");
+      
+      // 正常隨意顯示 Loan Over View
+      indexPagePo.loanOverView().should("be.visible");
+
+      // NOTE: important 看到可點擊的 Apply Now Button
+      indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+      indexPagePo.reacquireCreditButton().should('not.exist');
+      indexPagePo.viewAppProgressButton().should("not.exist");
   })
 
   // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
-  it.only("status: 用戶已認證、有逾期的訂單", () => {
+  it("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -617,7 +655,7 @@ describe('IndexPage', () => {
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
-      "noQuotaByRetryFewTimes": false,
+      
       "totalAmount": 15000,
       "usedAmount": 15000,
       "availableAmount": 900,
@@ -673,11 +711,14 @@ describe('IndexPage', () => {
           "platformChargeFeeRate": 0.4
         }
       ],
+      "loanAgreementUrl":"",
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": true,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
+      "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance": false,
       "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
