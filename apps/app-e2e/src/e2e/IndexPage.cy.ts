@@ -1701,7 +1701,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-沒被拒，額度0的用戶 (Android: Level 4)
-  it.only("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新 -> 連續3次”額度0”就拒掉 (僅模擬一次)。", () => {
+  it("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新 -> 連續3次”額度0”就拒掉 (僅模擬一次)。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
