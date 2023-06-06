@@ -21,6 +21,7 @@ import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 type paymentMethodValueType = {
   type: string;
@@ -137,7 +138,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                   <div className="self-center">- {coupon.discountAmount}</div>
                   <div className="flex flex-col text-xs text-gray-400">
                     <div>expiration date</div>
-                    <div className="">{coupon.expireTime ? moment(coupon.expireTime).format('DD-MM-YYYY') : ''}</div>
+                    <div className="">{coupon.expireTime ? formatDate(moment(coupon.expireTime)) : ''}</div>
                   </div>
                 </div>
               ) : (

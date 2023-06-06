@@ -20,6 +20,7 @@ import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {
@@ -122,7 +123,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                   {<Money money={coupon.discountAmount} isNagetive={true} />}
                 </div>
                 <div className="text-ctext-tertiary text-xs">
-                  <div>expiration date: {coupon.expireTime ? moment(coupon.expireTime).format('DD-MM-YYYY') : ''}</div>
+                  <div>expiration date: {coupon.expireTime ? formatDate(moment(coupon.expireTime)) : ''}</div>
                 </div>
               </div>
             ) : (

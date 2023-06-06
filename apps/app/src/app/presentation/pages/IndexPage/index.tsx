@@ -1,44 +1,45 @@
 import cx from 'classnames';
-import { Moment } from 'moment';
+import {Moment} from 'moment';
 import moment from 'moment-timezone';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { FeeRateKeyEnum } from '../../../api/indexService/FeeRateKeyEnum';
-import { PlatformProduct } from '../../../api/indexService/PlatformProduct';
-import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail';
-import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
-import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
-import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
-import { getToken } from '../../../modules/querystring/getToken';
-import { RootState } from '../../../reduxStore';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { Button } from '../../components/layouts/Button';
-import { Horizontal } from '../../components/layouts/Horizontal';
-import { PageContent } from '../../components/layouts/PageContent';
-import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
-import { AuthorizationModal } from '../../modals/AuthorizationModal';
-import { LoanAgreementModal } from '../../modals/QRLoanAgreementModal';
-import { QRSuccessModal } from '../../modals/QRSuccessModal';
-import { QuickRepaymentSummaryModal } from '../../modals/QuickRepaymentSummaryModal';
-import { PagePathEnum } from '../PagePathEnum';
-import { NoticeOrderOrQuotaRejectedSection } from './noticeSections/NoticeOrderOrQuotaRejectedSection';
-import { NoticeUserAuthedEmptyQuotaSection } from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
-import { NoticeUserInProgressAuthStatusSections } from './noticeSections/NoticeUserInProgressAuthStatusSections';
-import { NoticeUserReacquireOver3TimeSections } from './noticeSections/NoticeUserReacquireOver3TimeSections';
-import { NoticeUserRejectedSection } from './noticeSections/NoticeUserRejectedSection';
-import { ADBannerSection } from './sections/ADBannerSection';
-import { AuthenticationSection } from './sections/AuthenticationSection';
-import { LoanInformationSection } from './sections/LoanInformationSection';
-import { MarqueeSection } from './sections/MarqueeSection';
-import { RecommendedProductsSection } from './sections/RecommendedProductsSection';
-import { TipsSection } from './sections/TipsSection';
-import { UserInformationSection } from './sections/UserInformationSection';
-import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndReapplyInTimeSection';
-import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
+import {FeeRateKeyEnum} from '../../../api/indexService/FeeRateKeyEnum';
+import {PlatformProduct} from '../../../api/indexService/PlatformProduct';
+import {ProductApplyDetail} from '../../../api/loanService/ProductApplyDetail';
+import {ORDER_STATE} from '../../../domain/order/ORDER_STATE';
+import {RISK_CONTROL_STATE} from '../../../domain/risk/RISK_CONTROL_STATE';
+import {USER_AUTH_STATE} from '../../../domain/user/USER_AUTH_STATE';
+import {getToken} from '../../../modules/querystring/getToken';
+import {RootState} from '../../../reduxStore';
+import {modalSlice} from '../../../reduxStore/modalSlice';
+import {Button} from '../../components/layouts/Button';
+import {Horizontal} from '../../components/layouts/Horizontal';
+import {PageContent} from '../../components/layouts/PageContent';
+import {LoanOverViewSection} from '../../components/sections/LoanOverViewSection';
+import {AuthorizationModal} from '../../modals/AuthorizationModal';
+import {LoanAgreementModal} from '../../modals/QRLoanAgreementModal';
+import {QRSuccessModal} from '../../modals/QRSuccessModal';
+import {QuickRepaymentSummaryModal} from '../../modals/QuickRepaymentSummaryModal';
+import {PagePathEnum} from '../PagePathEnum';
+import {NoticeOrderOrQuotaRejectedSection} from './noticeSections/NoticeOrderOrQuotaRejectedSection';
+import {NoticeUserAuthedEmptyQuotaSection} from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
+import {NoticeUserInProgressAuthStatusSections} from './noticeSections/NoticeUserInProgressAuthStatusSections';
+import {NoticeUserReacquireOver3TimeSections} from './noticeSections/NoticeUserReacquireOver3TimeSections';
+import {NoticeUserRejectedSection} from './noticeSections/NoticeUserRejectedSection';
+import {ADBannerSection} from './sections/ADBannerSection';
+import {AuthenticationSection} from './sections/AuthenticationSection';
+import {LoanInformationSection} from './sections/LoanInformationSection';
+import {MarqueeSection} from './sections/MarqueeSection';
+import {RecommendedProductsSection} from './sections/RecommendedProductsSection';
+import {TipsSection} from './sections/TipsSection';
+import {UserInformationSection} from './sections/UserInformationSection';
+import {WelcomeBackAndReapplyInTimeSection} from './sections/WelcomeBackAndReapplyInTimeSection';
+import {IndexPageSagaAction} from './userUsecaseSaga/indexPageActions';
 import SystemCouponModal from '../../modals/SystemCouponModal';
 import {computeNumber} from "../../../modules/computeNumber";
+import {formatDate} from "../../../modules/format/formatDate";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -109,9 +110,22 @@ const IndexPage = () => {
   }
 
   // NOTE: User Event
+  const isShowReacquireButton = indexPageState.user.state !== USER_AUTH_STATE.authing &&
+    (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
+      || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
+    ( indexPageState.order.state === ORDER_STATE.empty
+      || indexPageState.order.state === ORDER_STATE.normal
+      || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder || indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+    );
+
+  const disableClickReacquireCredit = !(indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder);
   const onClickReacquireCredit = useCallback(() => {
+    if(disableClickReacquireCredit) return;
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, []);
+
+
+
 
   const navigate = useNavigate();
 
@@ -236,7 +250,7 @@ const IndexPage = () => {
           const disbursalPrice = computeNumber(product.calculating.finalLoanPrice, "*", price).result;
 
           const dueDate = moment().add(product.terms - 1, 'days');
-          const formatedDueDate = dueDate.format('DD-MM-YYYY');
+          const formatedDueDate = formatDate(dueDate)
 
           // console.log("interestPrice", interestPrice);
           // console.log("disbursalPrice", disbursalPrice);
@@ -355,11 +369,12 @@ const IndexPage = () => {
       indexPageState.user.state === USER_AUTH_STATE.ready,
       indexPageState.user.state === USER_AUTH_STATE.authing,
       indexPageState.user.state === USER_AUTH_STATE.reject,
-      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
-      (indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder
-        ||indexPageState.order.state === ORDER_STATE.normal
-        ||indexPageState.order.state === ORDER_STATE.empty
-      ),
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
+      indexPageState.order.state === ORDER_STATE.hasOverdueOrder  && isShowReacquireButton,
+      // (indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+      //   ||indexPageState.order.state === ORDER_STATE.normal
+      //   ||indexPageState.order.state === ORDER_STATE.empty
+      // ),
     ].some((condition) => condition === true);
   }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state]);
 
@@ -369,6 +384,8 @@ const IndexPage = () => {
     isSuccess,
     isError,
   } = useSelector((state: RootState) => state.indexPage.api.reacquire);
+
+  console.log("isReacquireLoading", isReacquireLoading);
 
   const countdown = useSelector((state: RootState) => state.indexPage.timeout.riskControlDate);
   // console.log("countdown", countdown);
@@ -405,6 +422,7 @@ const IndexPage = () => {
 
   // NOTE: Modal
   const modelState = useSelector((state: RootState) => state.model);
+
   return (
     <div className={'flex flex-col overflow-auto max-h-[90vh] pb-20'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
@@ -450,6 +468,7 @@ const IndexPage = () => {
           {/*NOTE: 用戶認證成功*/}
           {indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.riskControl.state === RISK_CONTROL_STATE.valid &&
+            (indexPageState.indexAPI?.availableAmount ?? 0) > 0 &&
             indexPageState.order.state !== ORDER_STATE.hasOverdueOrder  &&(
               <div className={'mb-4 mt-6'}>
                 {/*NOTE: 顯示推薦產品列表*/}
@@ -559,21 +578,13 @@ const IndexPage = () => {
         {/*TODO: refactor*/}
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
-        {indexPageState.user.state !== USER_AUTH_STATE.authing &&
-          (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
-            || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
-          ( indexPageState.order.state === ORDER_STATE.empty
-            || indexPageState.order.state === ORDER_STATE.normal
-            || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder) && (
+        {isShowReacquireButton && (
             <Button
               onClick={onClickReacquireCredit}
               dataTestingID={'reacquireCredit'}
               text={'Reacquire Credit Amount'}
               loading={isReacquireLoading}
-              className={cx({
-                'bg-primary-main': indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
-                'bg-cstate-disable-main border-cstate-disable-main': isReacquireLoading,
-              })}
+              disable={disableClickReacquireCredit}
             />
           )}
       </div>

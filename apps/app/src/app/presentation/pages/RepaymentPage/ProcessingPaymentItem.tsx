@@ -13,6 +13,7 @@ import { PagePathEnum } from '../PagePathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
+import {formatDate} from "../../../modules/format/formatDate";
 
 const ProcessingPaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ const ProcessingPaymentItem = (props: GetLoanRecord) => {
           <ListItem
             key={'ApplyDate'}
             title={'Apply Date'}
-            text={applyDate ? moment(applyDate).format('DD-MM-YYYY') : ''}
+            text={applyDate ? formatDate(moment(applyDate)) : ''}
             titleColor={'text-ctext-secondary'}
           />
           <Divider />

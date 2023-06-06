@@ -7,7 +7,7 @@ import { SystemCaseActions } from '../../../../usecaseFlow/type/systemUsecaseSag
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { ORDER_STATE } from 'apps/app/src/app/domain/order/ORDER_STATE';
 
-export function* systemMainCountdownSaga() {
+export function* systemCountdownManagerSaga() {
   // NOTICE: 防止錯誤後無法重新 watch
   try {
     // NOTE: Does System need to run countdown
@@ -15,7 +15,7 @@ export function* systemMainCountdownSaga() {
 
     const { riskControl ,order} = yield select((state: RootState) => state.indexPage);
 
-    
+
     if (
       // NOTE: 用戶沒通過認證
       (indexResponse.riskReject === true ||

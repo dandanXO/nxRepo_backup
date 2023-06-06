@@ -3,6 +3,7 @@ import moment from 'moment';
 
 import { ICouponProps } from '../..';
 import Money from '../../../Money.tsx';
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 const isOverdueEqual3Days = (expiredTime: string) => {
   const currentTime = moment();
@@ -80,8 +81,8 @@ const IndiaCoupon = (props: ICouponProps) => {
             'text-ctext-secondary': status !== 'disabled' && !isOverdueEqual3Days(expireTime),
             'text-cstate-disable-main': status === 'disabled',
           })}
-        >  
-          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${moment(expireTime).format('DD-MM-YYYY')}`}
+        >
+          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${formatDate(moment(expireTime))}`}
         </div>
       </div>
       <div

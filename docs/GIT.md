@@ -20,3 +20,5 @@ Git 調整一下版本控制 Flow:
 主要針對代碼品質去做 code review 的反饋，反饋修正後會合併回 dev。
 並部署 jenkins 去針對 dev branch 的在測試機環境下進行測試。
 Note: 並將 jira 更改狀態為 testing，變更指派人為 後台(Joan), App(Lewis)。
+
+

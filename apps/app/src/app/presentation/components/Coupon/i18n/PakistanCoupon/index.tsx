@@ -62,7 +62,7 @@ const PakistanCoupon = (props: ICouponProps) => {
             'text-ctext-tertiary': status === 'disabled',
           })}
         >
-          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${moment(expireTime).format('DD-MM-YYYY')}`}
+          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${moment(expireTime)}`}
         </div>
       </div>
       <div
