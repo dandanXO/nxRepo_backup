@@ -113,3 +113,6 @@ window.onerror = function(message, source, lineno, colno, error) {
   console.log("[window][onError] error", error)
   console.groupEnd();
 }
+
+// 初始化 state
+export const qiankunActions = initGlobalState({});

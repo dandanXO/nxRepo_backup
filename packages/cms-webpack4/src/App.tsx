@@ -4,7 +4,7 @@ import {appStore} from "./modules/shared/store";
 import "./modules/shared/styles/app.less";
 import {AppRouter} from "./AppRouter";
 require('antd/dist/antd.less');
-import "./modules/shared/i18n"
+import './i18n'
 
 // import * as Sentry from "@sentry/react";
 // import { BrowserTracing } from "@sentry/tracing";
