@@ -470,7 +470,8 @@ const IndexPage = () => {
           {indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.riskControl.state === RISK_CONTROL_STATE.valid &&
             (indexPageState.indexAPI?.availableAmount ?? 0) > 0 &&
-            indexPageState.order.state !== ORDER_STATE.hasOverdueOrder  &&(
+            indexPageState.order.state !== ORDER_STATE.hasOverdueOrder  &&
+            (indexPageState.indexAPI?.products?.length?? 0) > 0  && (
               <div className={'mb-4 mt-6'}>
                 {/*NOTE: 顯示推薦產品列表*/}
                 <RecommendedProductsSection state={indexPageState} calculatingProducts={calculatingProducts || []} />

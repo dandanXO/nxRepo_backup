@@ -68,6 +68,12 @@ export const TipsSection = (props: Props) => {
         )}
       </div>
     );
+  } else if (props.state.indexAPI?.products !== undefined && props.state.indexAPI?.products?.length === 0) {
+      messageComponent = (
+          <div className={'rounded-b-xl bg-orange-50 px-4 py-2 text-center text-sm font-light leading-4 text-orange-400'}>
+              There are currently no products available for borrowing. Please return after countdown ends.
+          </div>
+      );
   }
 
   return (
