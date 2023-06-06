@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import {Moment} from 'moment';
 import moment from 'moment-timezone';
 import {useCallback, useEffect, useMemo, useState} from 'react';
@@ -118,9 +117,10 @@ const IndexPage = () => {
       || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder || indexPageState.order.state === ORDER_STATE.hasOverdueOrder
     );
 
-  const disableClickReacquireCredit = !(indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder);
+  const disableClickReacquireCredit = !(indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder) ;
+  // && !(indexPageState.riskControl.state === RISK_CONTROL_STATE.valid);
+
   const onClickReacquireCredit = useCallback(() => {
-    if(disableClickReacquireCredit) return;
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, []);
 
@@ -545,12 +545,10 @@ const IndexPage = () => {
         {!applyHide && (
           //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) &&
           <Button
-            onClick={onClickApply}
             dataTestingID={'apply'}
             text={'Apply Now'}
-            className={cx({
-              'bg-cstate-disable-main border-cstate-disable-main': applyDisable,
-            })}
+            disable={applyDisable}
+            onClick={() => !applyDisable && onClickApply()}
           />
         )}
 
@@ -579,11 +577,11 @@ const IndexPage = () => {
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
         {isShowReacquireButton && (
             <Button
-              onClick={onClickReacquireCredit}
               dataTestingID={'reacquireCredit'}
               text={'Reacquire Credit Amount'}
               loading={isReacquireLoading}
               disable={disableClickReacquireCredit}
+              onClick={() => !disableClickReacquireCredit && onClickReacquireCredit()}
             />
           )}
       </div>
