@@ -560,7 +560,7 @@ describe('IndexPage', () => {
       "noQuotaByRetryFewTimes": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -639,7 +639,7 @@ describe('IndexPage', () => {
   })
 
     // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
-    it.only("status: 用戶已認證、有逾期的訂單", () => {
+    it("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1288,7 +1288,7 @@ describe('IndexPage', () => {
 
   // NOTICE: 有應還訂單
   // FIGMA: 首頁-認證完成-額度時間到期-需重新取得信用額度 (Android: Level 8)
-  it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
+  it.only("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -1429,8 +1429,11 @@ describe('IndexPage', () => {
       // 正常隨意顯示 Loan Over View
       indexPagePo.loanOverView().should("be.visible");
 
-      // NOTE: important 顯示文案：我們建議您在重新申請更高的信用額度之前優先還款。
-      indexPagePo.orderNotice().should("be.visible");
+      // NOTE: important 顯示文案：有應還訂單時的文案。
+      indexPagePo.tips().should("be.visible")
+      .and('contain', 'Tips')
+      .and('contain', 'The available credit limit has expired, please reacquire credit amount.')
+      .and('contain', 'Before reacquire credit amount, we strongly suggest that you prioritize repayment before you can reapply for a higher credit limit.')
 
       // NOTE: important 看到 Reacquire Credit Limit Button 可以點選。
       indexPagePo.applyButton().should("not.exist");
@@ -1438,6 +1441,10 @@ describe('IndexPage', () => {
       indexPagePo.viewAppProgressButton().should("not.exist");
 
       // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
+      indexPagePo.reacquireCreditButton().click().then(() => {
+          indexPagePo.reacquireCreditButton().invoke('attr', 'data-testing-loading').should('eq', 'true')
+      })
+
 
       // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。
       // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
