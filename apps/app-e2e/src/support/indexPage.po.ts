@@ -5,8 +5,14 @@ class IndexPagePo {
     welcome() {
         return cy.get("[data-testing-id='welcome']")
     }
+    orderNotice(){
+        return cy.get("[data-testing-id='orderNotice']")
+    }
     quotaSlider() {
         return cy.get("[data-testing-id='quotaSlider']")
+    }
+    loanOverView() {
+        return cy.get("[data-testing-id='loanOverView']")
     }
     loanableAmount() {
         return cy.get("[data-testing-id='loanableAmount']")
@@ -46,6 +52,9 @@ class IndexPagePo {
     }
     welcomBackTimer(){
         return cy.get("[data-testing-id='welcomBackTimer']");
+    }
+    tabPayment() {
+        return cy.get("[data-testing-id='tab-payment']");
     }
 }
 

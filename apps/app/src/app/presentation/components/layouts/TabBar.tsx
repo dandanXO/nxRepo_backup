@@ -48,6 +48,7 @@ export const TabBar = (props: Props) => {
       </div>
 
       <div
+        data-testing-id={'tab-payment'}
         className={'relative flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
           if (userStatus === USER_AUTH_STATE.ready) {
@@ -66,7 +67,7 @@ export const TabBar = (props: Props) => {
         >
           Payment
         </div>
-        {props.hasOrder && <div className={'absolute right-1/3 top-2 h-2 w-2 rounded-full bg-[#F24822]'}></div>}
+        {props.hasOrder && <div data-testing-id={'tab-payment-notice'} className={'absolute right-1/3 top-2 h-2 w-2 rounded-full bg-[#F24822]'}></div>}
       </div>
 
       <div

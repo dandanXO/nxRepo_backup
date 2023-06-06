@@ -20,6 +20,8 @@ import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
 import { FeeRateKeyEnum } from "apps/app/src/app/api/indexService/FeeRateKeyEnum";
 import { getTimeInfoBetweenCurrentAndCountDown } from "@frontend/shared/date";
 import { NativeAppInfo } from "apps/app/src/app/persistant/nativeAppInfo";
+import { ORDER_STATE } from "apps/app/src/app/domain/order/ORDER_STATE";
+import {formatPrice} from "../../../../apps/app/src/app/modules/format/formatPrice"
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
 const infoLog = (message, rest) => {
@@ -43,7 +45,7 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/v2?token=246b4469e1004505a5a45f29b4a569a1", {
+  cy.visit("/v2?token=266031851e044dbca4df3d076baf83bb", {
     onBeforeLoad(win: Cypress.AUTWindow) {
       // @ts-ignore
       // cy.stub(win, "onUploadKycBackgroundData", function () {
@@ -508,17 +510,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -560,6 +562,7 @@ describe('IndexPage', () => {
       "oldUserForceApply": false,
       "payableRecords": [
         {
+          "orderNo":"",
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
@@ -595,7 +598,7 @@ describe('IndexPage', () => {
   })
 
   // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
-  it("status: 用戶已認證、有逾期的訂單", () => {
+  it.only("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -628,17 +631,17 @@ describe('IndexPage', () => {
         {
           "title": "Processing Fee",
           "counting": 0.4,
-          "key": "PROCESSING_FEE"
+          "key": FeeRateKeyEnum.PROCESSING_FEE
         },
         {
           "title": "Service Fee",
           "counting": 0.5,
-          "key": "SERVICE_FEE"
+          "key": FeeRateKeyEnum.SERVICE_FEE
         },
         {
           "title": "Interest Fee",
           "counting": 0.1,
-          "key": "LOAN_INTEREST"
+          "key": FeeRateKeyEnum.LOAN_INTEREST
         }
       ],
       "products": [
@@ -673,10 +676,9 @@ describe('IndexPage', () => {
       "needRiskKycUpdate": false,
       "riskReject": false,
       "refreshable": true,
-      "refreshOverRetry": false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "seconds"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -703,17 +705,58 @@ describe('IndexPage', () => {
 
     visitIndexPage();
     // NOTE: then
-    // 看到跑馬燈
-    // 看到 welcome 包含姓名、客服 Button
+    // NOTE: important 看到跑馬燈
+    indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+    
+    // NOTE: important 看到 welcome 包含姓名、客服 Button
+    indexPagePo.welcome().should("be.visible");
+    indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
+    indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
+
     // NOTE: important 看到逾期的訊息資訊、提醒您需要優先還清逾期款項才能再借款
+    indexPagePo.orderNotice().should("be.visible");
+    indexPagePo.orderNotice().invoke("attr", "data-order-status").should('eq', ORDER_STATE.hasOverdueOrder.toString());
+    indexPagePo.orderNotice()
+        .should("be.visible")
+        .and('contain', 'Loan Order')
+        .and('contain', formatPrice(indexServiceResponse.payableRecords[0].payableAmount))
+        .and('contain', 'Overdue')
+        .and('contain', 'Due Date')
+        .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
+        .and('contain', 'Remind you to prioritize paying off overdue payments before you can borrow again.');
+  
     // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-    // NOTE: important 看到反灰但無法使用的可借款額度拉霸、無法倒數計計時
-    // NOTE: important 看到文字顯示最低與最高範圍為 ****、拉霸歸零到最左邊
-    // NOTE: important 倒數計時歸零
+    indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
+        cy.url().should('include', '/repayment-detail');
+    }).then(() => {
+        cy.go(-1)
+    })
+
+    // NOTE: important 看到反灰但無法使用的可借款額度拉霸、無法倒數計計時、看到文字顯示最低與最高範圍為 ****
+    indexPagePo.quotaSlider().should("be.visible");
+    indexPagePo.quotaSlider().invoke('attr','data-testing-disable').should('eq','true');
+    indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class",'disabled');
+    indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
+    indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
+
+    // NOTE: important 歸零的倒數計計時
+    indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
+    
     // 正常隨意顯示 Loan Over View
-    // NOTE: important 看到下方 tips 優先還款訊息
+    indexPagePo.loanOverView().should("be.visible");
+
+    // NOTE: important 看到下方 tips 優先還款訊息 (圖沒有)
+
     // NOTE: important 看到反灰無法點擊的 Apply Now Button
+    indexPagePo.applyButton().should('be.visible').contains('Apply Now');
+    indexPagePo.applyButton().invoke('attr', 'data-testing-disable').should('eq', 'true');
+    indexPagePo.reacquireCreditButton().should('not.exist');
+    indexPagePo.viewAppProgressButton().should('not.exist');
+
     // NOTE: important 看到下方 Tab 的 Payment 有紅點提示
+    indexPagePo.tabPayment().should("be.visible");
+    indexPagePo.tabPayment().find("[data-testing-id='tab-payment-notice']").should("be.visible");
+
   })
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
@@ -1693,7 +1736,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-沒被拒，額度0的用戶 (Android: Level 4)
-  it.only("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新 -> 連續3次”額度0”就拒掉 (僅模擬一次)。", () => {
+  it("status: 用戶已認證、但風控額度直接不足。再等 10 秒就能刷新 -> 連續3次”額度0”就拒掉 (僅模擬一次)。", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -2097,7 +2140,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-有效額度時間-額度不足 (Android: Level 7)
-  it("status: 用戶已認證、風控額度時間有效，但能借額度不足", () => {
+  it("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",

@@ -98,7 +98,7 @@ export const LoanOverViewSection = (props: Props) => {
 
   return (
     <div>
-      <div className={'mb-2 font-medium'}>Loan Over View</div>
+      <div className={'mb-2 font-medium'} data-testing-id="loanOverView">Loan Over View</div>
 
       <div className={'flex w-full flex-row justify-around'}>
         <div className={'left relative'}>

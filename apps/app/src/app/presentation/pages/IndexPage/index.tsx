@@ -380,8 +380,8 @@ const IndexPage = () => {
   // TODO: refactor me
   const onClickApply = useCallback(() => {
     // NOTICE: empty guard
-    if (!calculatingProducts) return;
 
+    if (!calculatingProducts) return;
     const simpleProducts: ProductApplyDetail[] = calculatingProducts.map((product) => {
       const simpleProduct: ProductApplyDetail = {
         applyAmount: product.calculating.finalLoanPrice,
@@ -528,6 +528,7 @@ const IndexPage = () => {
           <Button
             onClick={onClickApply}
             dataTestingID={'apply'}
+            dataTestingDisable={applyDisable}
             text={'Apply Now'}
             className={cx({
               'bg-cstate-disable-main border-cstate-disable-main': applyDisable,

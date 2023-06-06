@@ -31,7 +31,7 @@ export const LatestOrderStatus = (props: Props) => {
   const hasInComingOverdueOrder = props.state.order.state === ORDER_STATE.hasInComingOverdueOrder;
 
   return (
-    <div className={'flex flex-col rounded-lg border border-primary-main bg-white px-5 py-1.5'}>
+    <div className={'flex flex-col rounded-lg border border-primary-main bg-white px-5 py-1.5'} data-testing-id="orderNotice" data-order-status={props.state.order.state}>
       <div className={'flex flex-row items-center justify-between'}>
         <div className={'left'}>
           <div className={'top flex flex-row'}>
