@@ -139,6 +139,10 @@ module.exports = (config, context) => {
       // new CleanWebpackPlugin({
       //   verbose: true,
       // }),
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^\.\/locale$/,
+        contextRegExp: /moment$/,
+      }),
       new MomentTimezoneDataPlugin({
         matchZones: ["Asia/Kolkata", "Asia/Karachi", "Asia/Dhaka"],
       }),
