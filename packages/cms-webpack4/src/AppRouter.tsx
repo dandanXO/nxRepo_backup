@@ -130,7 +130,7 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path={"/today-distribution"} component={TodayDistributionPage}/>
                     {/*// @ts-ignore*/}
-                    <Route path={"/todayLoanManage/todayPhoneUrgeList"} component={TodayPhoneUrgeList}/>
+                    <Route exact path={"/todayLoanManage/todayPhoneUrgeList"} component={TodayPhoneUrgeList}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/todayLoanManage/todayPhoneUrgeList/detail/:userId/:orderId"} component={TodayPhoneUrgeListDetail}/>
                     {/*// @ts-ignore*/}
