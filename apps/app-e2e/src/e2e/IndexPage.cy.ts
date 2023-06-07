@@ -17,6 +17,8 @@ import {GetOpenIndexResponse} from "../../../app/src/app/api/indexService/GetOpe
 import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
 import {FeeRateKeyEnum} from "apps/app/src/app/api/indexService/FeeRateKeyEnum";
 import {NativeAppInfo} from "apps/app/src/app/persistant/nativeAppInfo";
+import {useLazyGetUserProcessQuery} from "../../../app/src/app/api/rtk";
+import {GetUserProcessResponse} from "../../../app/src/app/api/loanService/GetUserProcessResponse";
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
@@ -413,12 +415,35 @@ describe('IndexPage', () => {
         "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
         "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
       }
+
       cy.intercept("get", "/api/v3/index", {
         statusCode: 200,
         body: indexServiceResponse,
       }).as("getIndex").then(() => {
         console.log("index");
       })
+
+
+    const getUserProcessResponse: GetUserProcessResponse = [
+      {
+        "id": 239,
+        "title": "passed",
+        "content": "Congratulations! Your eligibility assessment is approved, loan now!",
+        "addTime": 1669696080
+      },
+      {
+        "id": 238,
+        "title": "pending",
+        "content": "Your eligibility assessment is in progress!",
+        "addTime": 1669695853
+      }
+    ]
+
+    cy.intercept("get", "api/v2/user/process", {
+      statusCode: 200,
+      body: getUserProcessResponse,
+    });
+
     visitIndexPage();
 
       // NOTE: then
