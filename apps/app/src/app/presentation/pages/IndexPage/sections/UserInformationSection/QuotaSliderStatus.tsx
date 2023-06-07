@@ -65,9 +65,9 @@ export const QuotaSliderStatus = (props: Props) => {
         <div className={'mb flex flex-col items-center justify-center'}>
           <div className="mb-2 flex w-full flex-col justify-between">
             <div className="text-sm font-light text-white text-left">You can get up to</div>
-            <div className="font-medium text-white text-right">
+            <div className="font-bold text-white text-right text-2xl">
               {environment.currency}
-              <span data-testing-id='current-quota-value'>{currentQuotaLabelValue}</span> / <span data-testing-id='max-quota-value'>{maxQuotaValue}</span>
+              <span data-testing-id='current-quota-value'> {currentQuotaLabelValue}</span> / <span data-testing-id='max-quota-value'>{maxQuotaValue}</span>
             </div>
           </div>
 
@@ -107,7 +107,7 @@ export const QuotaSliderStatus = (props: Props) => {
             />
           </div>
 
-          <div className="flex w-full flex-row justify-between">
+          <div className="flex w-full flex-row justify-between mt-2">
             <span className="text-xs font-light text-white">MIN</span>
             <span className="text-xs font-light text-white">MAX</span>
           </div>
@@ -115,8 +115,8 @@ export const QuotaSliderStatus = (props: Props) => {
 
         {/*NOTE: ExclusiveLoanOffer*/}
         <div className={'relative top-1 rounded-lg bg-white px-1 py-2 shadow-md shadow-gray-300'}>
-          <span className={'pr-2'}>Exclusive Personal Loan offer</span>
-          <span data-testing-id={'quota-countdown'} className={`${props.countdown === '00:00:00' ? 'text-slate-500' : 'text-orange-500'}`}>
+          <span className={'pr-2 text-ctext-primary'}>Exclusive Personal Loan offer</span>
+          <span data-testing-id={'quota-countdown'} className={`${props.countdown === '00:00:00' ? 'text-cstate-disable-main' : 'text-primary-main'} font-bold`}>
             {props.countdown}
           </span>
         </div>
