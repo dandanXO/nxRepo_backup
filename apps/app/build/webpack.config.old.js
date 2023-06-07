@@ -54,7 +54,7 @@ const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 
 
 module.exports = (config, context) => {
-  const finalConfig = merge(config, {
+  let finalConfig = merge(config, {
     devtool: "source-map",
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
@@ -95,6 +95,53 @@ module.exports = (config, context) => {
         //       }
         //     }
         //   ]
+        // },
+        // {
+        //   test: /\.svg$/,
+        //   loader: 'svg-inline-loader'
+        // },
+        // {
+        //   test: /\.svg$/,
+        //   generator: {
+        //     // publicPath: PUBLIC_PATH,
+        //     // outputPath: 'cdn-assets/',
+        //   },
+        //   oneOf: [
+        //     // If coming from JS/TS or MDX file, then transform into React component using SVGR.
+        //     {
+        //       issuer: /\.(js|ts|md)x?$/,
+        //       use: [
+        //         {
+        //           loader: require.resolve('@svgr/webpack'),
+        //           options: {
+        //             svgo: false,
+        //             titleProp: true,
+        //             ref: true,
+        //           },
+        //         },
+        //         {
+        //           loader: require.resolve('url-loader'),
+        //           options: {
+        //             limit: 10000,
+        //             name: '[name].[hash:7].[ext]',
+        //             esModule: false,
+        //           },
+        //         },
+        //       ],
+        //     },
+        //     // Fallback to plain URL loader.
+        //     {
+        //       use: [
+        //         {
+        //           loader: require.resolve('url-loader'),
+        //           options: {
+        //             limit: 10000,
+        //             name: '[name].[hash:7].[ext]',
+        //           },
+        //         },
+        //       ],
+        //     },
+        //   ],
         // },
         {
           test: /\.(ts|js|mjs)x?$/,
@@ -181,23 +228,22 @@ module.exports = (config, context) => {
     },
   });
 
-  // NOTICE: Environment
-  if (process.env.NODE_ANALYZER && !isProduction) {
-    finalConfig.plugins.push(new BundleAnalyzerPlugin());
-
-  } else if (isProduction) {
-    finalConfig.plugins.push(
-      new HtmlWebpackPlugin({
-        // 配置 HTML 模板路徑與生成名稱 (第三步)
-        template: './src/index.html',
-        filename: 'index.html',
-        // publicPath: "/v2",
-        // chunks: ['errorhandler', 'main', 'vendors', 'nx'],
-      })
-    );
-    // NOTICE: 使用以下android 8 is ok
-    finalConfig['optimization'] = {
-      minimize: false,
+  finalConfig = merge(finalConfig, {
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+            format: {
+              comments: false,
+            },
+          },
+          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+          extractComments: false,
+        }),
+      ],
       splitChunks: {
         cacheGroups: {
           // reactLib: {
@@ -224,43 +270,27 @@ module.exports = (config, context) => {
           },
         },
       },
-      // splitChunks: {
-      //   chunks: 'async',
-      //   minSize: 20000,
-      //   minRemainingSize: 0,
-      //   minChunks: 1,
-      //   maxAsyncRequests: 30,
-      //   maxInitialRequests: 30,
-      //   enforceSizeThreshold: 50000,
-      //   cacheGroups: {
-      //     defaultVendors: {
-      //       test: /[\\/]node_modules[\\/]/,
-      //       priority: -10,
-      //       reuseExistingChunk: true,
-      //     },
-      //     default: {
-      //       minChunks: 2,
-      //       priority: -20,
-      //       reuseExistingChunk: true,
-      //     },
-      //   },
-      // },
-      // minimize: true,
-      // minimizer: [
-      //   new TerserPlugin({
-      //     terserOptions: {
-      //       compress: {
-      //         drop_console: true,
-      //       },
-      //       format: {
-      //         comments: false,
-      //       },
-      //     },
-      //     // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-      //     extractComments: false,
-      //   }),
-      // ],
-    };
+    },
+
+  })
+  // NOTICE: Environment
+  if (process.env.NODE_ANALYZER) {
+    finalConfig.plugins.push(new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+    }));
+
+  } else if (isProduction) {
+    finalConfig.plugins.push(
+      new HtmlWebpackPlugin({
+        // 配置 HTML 模板路徑與生成名稱 (第三步)
+        // template: './src/index.html',
+        // filename: 'index.html',
+        // publicPath: "/v2",
+        // chunks: ['errorhandler', 'main', 'vendors', 'nx'],
+      })
+    );
+
+
       // finalConfig.plugins.push(
       //   new CleanWebpackPlugin({
       //     verbose: true,
