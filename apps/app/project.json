@@ -94,7 +94,7 @@
         "compiler": "babel",
         "outputPath": "dist/apps/app",
         "baseHref": "/",
-        "index": "apps/app/src/index.html",
+        "index": "apps/app/src/index.ejs",
         "main": "apps/app/src/main.tsx",
         "tsConfig": "apps/app/tsconfig.app.json",
         "assets": ["apps/app/src/favicon.ico", "apps/app/src/assets"],
