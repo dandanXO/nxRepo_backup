@@ -50,6 +50,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConfig.json');
 
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
+
+
 module.exports = (config, context) => {
   const finalConfig = merge(config, {
     devtool: "source-map",
@@ -136,6 +139,9 @@ module.exports = (config, context) => {
       // new CleanWebpackPlugin({
       //   verbose: true,
       // }),
+      new MomentTimezoneDataPlugin({
+        matchZones: ["Asia/Kolkata", "Asia/Karachi", "Asia/Dhaka"],
+      }),
     ],
     // target: ["web", "es5"],
     output: {

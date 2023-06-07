@@ -1,5 +1,6 @@
 import {AllCountryIdentityName} from "../AllCountryIdentityName";
 import {IAllLanguage} from "../../language/types/IAllLanguage";
+import {IAllTimezone} from "../AllTimezone";
 
 export interface ICountry {
   // NOTE: just for debugging
@@ -7,4 +8,5 @@ export interface ICountry {
   country: AllCountryIdentityName;
   currency: string;
   language: IAllLanguage;
+  timezone: IAllTimezone;
 }

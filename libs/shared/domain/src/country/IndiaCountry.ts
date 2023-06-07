@@ -7,4 +7,5 @@ export const IndiaCountry: ICountry = {
   countryName: "India",
   currency: "₹",
   language: "en_US",
+  timezone: 'Asia/Kolkata',
 };
