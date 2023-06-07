@@ -1,10 +1,12 @@
 type IAllLanguage = "zh-CN" | "en-US";
 
+type Translation<T> = {
+    [key: string]: Translation<T> | T
+}
+
 export interface i18nComponent {
     namespace: string;
     translation: {
-        [key in IAllLanguage]: {
-            [key: string]: string;
-        };
+        [key in IAllLanguage]: Translation<string>;
     };
 }

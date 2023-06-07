@@ -37,8 +37,11 @@ import {
 import LoginAccountManagePage from "./modules/system/components/pages/LoginAccountManage";
 import NewCustomersDailyConversionRatesPage from "./modules/statistics/components/pages/NewCustomersDailyConversionRatesPage";
 import ReloanStatisticsPage from "./modules/statistics/components/pages/ReloanStatisticsPage";
-import { PhoneUrgeList } from "./modules/afterLoanManage/components/pages/phoneUrgeList";
-import { TodayPhoneUrgeList } from "./modules/todayLoanManage/components/pages/todayPhoneUrgeList";
+import { PhoneUrgeList } from "./modules/afterLoanManage/components/PhoneUrgeList";
+import { TodayPhoneUrgeList } from "./modules/todayLoanManage/components/TodayPhoneUrgeList";
+import {
+    TodayPhoneUrgeListDetail
+} from "./modules/todayLoanManage/components/TodayPhoneUrgeList/TodayPhoneUrgeListDetail";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -128,6 +131,8 @@ export const AppRouter = () => {
                     <Route path={"/today-distribution"} component={TodayDistributionPage}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/todayLoanManage/todayPhoneUrgeList"} component={TodayPhoneUrgeList}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/todayLoanManage/todayPhoneUrgeList/detail/:userId/:orderId"} component={TodayPhoneUrgeListDetail}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
                     {/*// @ts-ignore*/}

@@ -1,14 +1,14 @@
-import { i18nComponent } from "../../../../../../i18n/i18nComponent";
+import { i18nComponent } from "../../../../../i18n/i18nComponent";
 
 
 export const i18nTodayPhoneUrgeList: i18nComponent = {
     namespace: 'i18nTodayPhoneUrgeList',
     translation: {
         "zh-CN": {
-            addUrgeRecord: '逾期天数'
+            addUrgeRecord: '逾期天数',
         },
         "en-US": {
-            addUrgeRecord: 'Days Overdue'
+            addUrgeRecord: 'Days Overdue',
         }
     }
 }
