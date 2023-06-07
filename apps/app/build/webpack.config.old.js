@@ -246,13 +246,22 @@ module.exports = (config, context) => {
       ],
       splitChunks: {
         cacheGroups: {
-          // reactLib: {
-          //   test: /\/node_modules\/@reduxjs\/toolkit/,
-          //   name: 'reactLib',
-          //   minChunks: 1,
-          //   priority: 2,
-          //   chunks: 'all',
-          // },
+          // NOTE: default
+          common: {
+            name: 'common',
+            chunks: 'async',
+            minChunks: 2,
+            enforce: true,
+            priority: 5
+          },
+          // NOTE: custom
+          sentry: {
+            test: /[\\/]node_modules[\\/]@sentry*[\\/]/,
+            name: 'sentry',
+            minChunks: 1,
+            priority: 2,
+            chunks: 'all',
+          },
           vendors: {
             // test: /[\\/]node_modules[\\/](?!@floating-ui+core@1.0.2)/,
             test: /[\\/]node_modules[\\/]/,
@@ -261,13 +270,21 @@ module.exports = (config, context) => {
             priority: 1,
             chunks: 'all',
           },
-          nx: {
-            test: /[\\/]node_modules[\\/]nx/,
-            name: 'nx',
-            minChunks: 1,
-            priority: 2,
-            chunks: 'all',
-          },
+          // reactLib: {
+          //   test: /\/node_modules\/@reduxjs\/toolkit/,
+          //   name: 'reactLib',
+          //   minChunks: 1,
+          //   priority: 2,
+          //   chunks: 'all',
+          // },
+          // nx: {
+          //   test: /[\\/]node_modules[\\/]nx/,
+          //   name: 'nx',
+          //   minChunks: 1,
+          //   priority: 2,
+          //   chunks: 'all',
+          // },
+
         },
       },
     },
