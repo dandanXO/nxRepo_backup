@@ -567,11 +567,9 @@ const IndexPage = () => {
             text={'View Application Progress'}
           />
         )}
-
         {isReacquireLoading && (
-          <div className={'mb-3 text-center text-xs text-gray-500'}>
-            Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as
-            quickly as possible.
+          <div data-testing-id={'notice-reacquireLoading'} className={'mb-3 text-center text-xs text-gray-500'}>
+            Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.
           </div>
         )}
 
