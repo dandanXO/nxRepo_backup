@@ -124,7 +124,9 @@ const IndexPage = () => {
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, []);
 
-
+const onUserClickViewApplicationProgress = () => {
+  navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
+}
 
 
   const navigate = useNavigate();
@@ -557,9 +559,7 @@ const IndexPage = () => {
         {(indexPageState.user.state === USER_AUTH_STATE.authing ||
           indexPageState.user.state === USER_AUTH_STATE.reject) && (
           <Button
-            onClick={() => {
-              navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
-            }}
+            onClick={onUserClickViewApplicationProgress}
             dataTestingID={'viewAppProgress'}
             text={'View Application Progress'}
           />

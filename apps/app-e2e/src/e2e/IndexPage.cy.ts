@@ -306,7 +306,7 @@ describe('IndexPage', () => {
   })
 
   // User reject (Android: Level 1)
-  it("status: 用戶認證被拒絕", () => {
+  it.only("status: 用戶認證被拒絕", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
     //   "userName": "9013452123",
@@ -3019,7 +3019,7 @@ describe('IndexPage', () => {
   })
 
   // NOTE: 狀態轉移情境
-  it.only("status: 用戶已認證、風控額度時間有效，額度足夠。借款到沒有可用額度。", () => {
+  it("status: 用戶已認證、風控額度時間有效，額度足夠。借款到沒有可用額度。", () => {
     // NOTICE: 目前先手動模擬
 
     // NOTE: Given: 用戶已認證

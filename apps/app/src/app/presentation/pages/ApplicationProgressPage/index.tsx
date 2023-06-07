@@ -10,6 +10,7 @@ import { ProgressItem } from './ProgressItem';
 const ApplicationProgressPage = () => {
   const navigate = useNavigate();
   const [trigger, { currentData }] = useLazyGetUserProcessQuery();
+
   useEffect(() => {
     trigger({});
   }, []);
@@ -32,8 +33,9 @@ const ApplicationProgressPage = () => {
                 date={moment(news.addTime).format('DD-MM-YYYY HH:mm:ss')}
               />
             );
-          })}
-        {!currentData && <div>No Data</div>}
+          })
+        }
+        {/*{!currentData && <div>No Data</div>}*/}
       </PageContent>
     </div>
   );
