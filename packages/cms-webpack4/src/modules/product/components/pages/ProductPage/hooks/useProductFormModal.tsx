@@ -334,7 +334,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         if (isNotFinish) return;
 
         const productInterestRatePairs = form.getFieldValue('productInterestRatePairs').reduce((acc, current, index) => {
-            const interestRates = cuit purrent[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => (
+            const interestRates = current[productInterestRatesContentKey].reduce((interestRatesAcc, interestRatesCurrent) => (
                 [
                     ...interestRatesAcc,
                     {
