@@ -97,7 +97,7 @@ describe('IndexPage', () => {
   })
 
   // TODO: 得與後端即時取得訪客帳號
-  it.skip("status: 用戶未認證", () => {
+  it("status: 用戶未認證", () => {
     // NOTE: Given - 訪客
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -463,14 +463,14 @@ describe('IndexPage', () => {
       indexPagePo.noticeUserRejected().contains(`If you have any questions, please contact our customer service center.`);
 
       // NOTE: important tips 訊息不會出現
-      indexPagePo.tips().should("not.be.visible");
+      indexPagePo.tips().should("not.exist");
 
       // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
       indexPagePo.applyButton().should('not.exist');
       indexPagePo.reacquireCreditButton().should('not.exist');
       indexPagePo.viewAppProgressButton().should("be.visible").contains('View Application Progress');
 
-      
+
   })
 
   // NOTICE: 訂單相關
@@ -636,12 +636,12 @@ describe('IndexPage', () => {
       indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains(formatPrice(indexServiceResponse.quotaBar.max));
       // NOTE: important 倒數計時正在計時
       indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible");
-      
+
       // 正常隨意顯示 Loan Over View
       indexPagePo.loanOverView().should("be.visible");
 
       // NOTE: important tips 訊息不會出現
-      indexPagePo.tips().should("not.be.visible");
+      indexPagePo.tips().should("not.exist");
 
       // NOTE: important 看到可點擊的 Apply Now Button
       indexPagePo.applyButton().should('be.visible').contains('Apply Now');
@@ -766,7 +766,7 @@ describe('IndexPage', () => {
     // NOTE: then
     // NOTE: important 看到跑馬燈
     indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
-    
+
     // NOTE: important 看到 welcome 包含姓名、客服 Button
     indexPagePo.welcome().should("be.visible");
     indexPagePo.welcome().find("[data-testing-id='hide-icon']").should("be.visible");
@@ -783,7 +783,7 @@ describe('IndexPage', () => {
         .and('contain', 'Due Date')
         .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
         .and('contain', 'Remind you to prioritize paying off overdue payments before you can borrow again.');
-  
+
     // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
     indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
         cy.url().should('include', '/repayment-detail');
@@ -800,14 +800,14 @@ describe('IndexPage', () => {
 
     // NOTE: important 歸零的倒數計計時
     indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
-    
+
     // 正常隨意顯示 Loan Over View
     indexPagePo.loanOverView().should("be.visible");
 
     // NOTE: important 看到下方 tips 優先還款訊息 (圖沒有)
 
     // NOTE: important 下方 tips 訊息不會出現
-    indexPagePo.tips().should("not.be.visible");
+    indexPagePo.tips().should("not.exist");
 
     // NOTE: important 看到反灰無法點擊的 Apply Now Button
     indexPagePo.applyButton().should('be.visible').contains('Apply Now');
@@ -822,7 +822,7 @@ describe('IndexPage', () => {
   })
 
 
-  
+
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
   it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
@@ -1273,10 +1273,10 @@ describe('IndexPage', () => {
       indexPagePo.quotaSlider().find(".quota-slider").should("be.visible").should("have.class", 'disabled');
       indexPagePo.quotaSlider().find("[data-testing-id='current-quota-value']").should("be.visible").contains('****');
       indexPagePo.quotaSlider().find("[data-testing-id='max-quota-value']").should("be.visible").contains('****');
-      
+
       // NOTE: important 歸零的倒數計計時
       indexPagePo.quotaSlider().find("[data-testing-id='quota-countdown']").should("be.visible").contains('00:00:00');
-      
+
       // 正常隨意顯示 Loan Over View
       indexPagePo.loanOverView().should("be.visible");
 
@@ -1298,7 +1298,7 @@ describe('IndexPage', () => {
       })
 
       // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。 (實際不會跳出無法測試)
-      
+
       // NOTE: important 等待 20 秒 會取得結果，沒結果繼續等待 20秒，以此類推。
 
       // NOTICE: 還缺
@@ -1337,7 +1337,7 @@ describe('IndexPage', () => {
           "productName": "AA LOAN",
           "payableAmount": 1000,
           "dueDate": moment().tz(INDIA_TIME_ZONE).add(3, "days"),
-          "overdue": true,
+          "overdue": false,
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         }
       ],
@@ -1784,7 +1784,7 @@ describe('IndexPage', () => {
 
       // NOTE: important 不顯示 有/無應還訂單時的文案。
       indexPagePo.tips().should("not.exist");
- 
+
       // NOTE: important 看到 Reacquire Credit Amount Button 不可以點選。
       indexPagePo.applyButton().should("not.exist");
       indexPagePo.reacquireCreditButton().should('be.visible').contains('Reacquire Credit Amount')
@@ -2761,13 +2761,13 @@ describe('IndexPage', () => {
       .and('contain', 'Tips')
       .and('contain', 'Your current preferential loan quota has been used up.')
       .and('contain', 'Remind you to prioritize repayment to obtain a higher credit limit, and wait for the next round of preferential loan plans.')
-      
+
       // NOTE: important 看到反灰無法點擊的 Apply Now Button
       indexPagePo.applyButton().should('be.visible').contains('Apply Now');
       indexPagePo.applyButton().invoke('attr', 'data-testing-disable').should('eq', 'true');
       indexPagePo.reacquireCreditButton().should('not.exist');
       indexPagePo.viewAppProgressButton().should("not.exist");
-      
+
   })
 
 
@@ -3129,11 +3129,11 @@ describe('IndexPage', () => {
       indexPagePo.viewAppProgressButton().should("not.exist");
 
       // NOTE: important tips 訊息不會出現
-      indexPagePo.tips().should("not.be.visible");
+      indexPagePo.tips().should("not.exist");
   })
 
 
- 
+
   it("status: 用戶已認證、風控額度時間有效，但10秒到期，額度足夠。額度太小，沒有商品可以滿足。無法點擊 Apply Now", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -3395,7 +3395,7 @@ describe('IndexPage', () => {
       indexPagePo.viewAppProgressButton().should("not.exist");
 
       // NOTE: important tips 訊息不會出現
-      indexPagePo.tips().should("not.exist")
+      indexPagePo.tips().should("not.exist");
   })
 
   // FIGMA: 首頁-認證完成-額度時間尚未到期-用戶尚有額度-沒有可借產品 (Android: Level 9)

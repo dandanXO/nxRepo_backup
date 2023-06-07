@@ -76,6 +76,8 @@ export const TipsSection = (props: Props) => {
       );
   }
 
+  if(!messageComponent) return null;
+
   return (
     <div className={''} data-testing-id={'tips'}>
       {messageComponent && (
