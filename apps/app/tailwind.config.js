@@ -105,7 +105,7 @@ module.exports = {
       //   addVariant('bbb-gradient', ['&:bg-gradient-to-b', '&:from-[#18A851]', '&:to-[#138641]'])
       addComponents({
         '.open-index-button': {
-          backgroundColor: 'var(--custom_bg_homepage_button)',
+          background: 'var(--custom_bg_homepage_button)',
         },
       });
       // addUtilities({
