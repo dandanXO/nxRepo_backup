@@ -90,6 +90,7 @@ export const AppRouter = () => {
   const location = useLocation();
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
   const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
+  const isOrderOverdue = payableRecords && payableRecords?.some((order) => order.overdue === true);
 
   // NOTICE: 純 H5 在用畫面阻擋
   // if(NativeAppInfo.mode === 'H5' && !isInit) {
@@ -163,7 +164,7 @@ export const AppRouter = () => {
         PagePathEnum.RepaymentPage as string,
         PagePathEnum.PersonalInfoPage as string,
         PagePathEnum.PersonalInfoPage + '/log-out-modal',
-      ].indexOf(location.pathname) > -1 && <TabBar hasOrder={payableRecords ? payableRecords?.length > 0 : false} />}
+       ].indexOf(location.pathname) > -1 && <TabBar hasOrder={isOrderOverdue ?? false} />}
 
       {apiBoundary.show && <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message} />}
       {/*</Suspense>*/}

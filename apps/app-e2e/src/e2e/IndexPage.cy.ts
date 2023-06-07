@@ -283,10 +283,10 @@ describe('IndexPage', () => {
       indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
       // action: 點擊 hide-icon ( 眼睛 )
       indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
-          indexPagePo.welcome().contains(userServiceResponse.userName);
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
       });
       indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
-          indexPagePo.welcome().contains(userServiceResponse.userName.slice(0, 3) + '****' + userServiceResponse.userName.slice(7, 10) || userServiceResponse.userName)
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
       });
 
       // NOTE: important 看到反灰無法拖拉使用的可借款額霸、看到文字顯示最低與最高範圍為 ****
@@ -308,9 +308,13 @@ describe('IndexPage', () => {
       indexPagePo.applyButton().should('not.exist');
       indexPagePo.reacquireCreditButton().should('not.exist');
       indexPagePo.viewAppProgressButton().should("be.visible").contains('View Application Progress');
+
+      // NOTE: important tips 訊息不會出現
+      indexPagePo.tips().should("not.be.visible")
   })
 
   // User reject (Android: Level 1)
+  // 新客/老客用戶被拒
   it("status: 用戶認證被拒絕", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -436,10 +440,10 @@ describe('IndexPage', () => {
       indexPagePo.welcome().find("[data-testing-id='contact-icon']").should("be.visible");
       // action: 點擊 hide-icon ( 眼睛 )
       indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
-          indexPagePo.welcome().contains(userServiceResponse.userName);
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo);
       });
       indexPagePo.welcome().find("[data-testing-id='hide-icon']").click().then(() => {
-          indexPagePo.welcome().contains(userServiceResponse.userName.slice(0, 3) + '****' + userServiceResponse.userName.slice(7, 10) || userServiceResponse.userName)
+          indexPagePo.welcome().contains(NativeAppInfo.phoneNo.slice(0, 3) + '****' + NativeAppInfo.phoneNo.slice(7, 10))
       });
 
       // NOTE: important 看到反灰無法拖拉使用的可借款額霸、看到文字顯示最低與最高範圍為 ****
@@ -458,10 +462,15 @@ describe('IndexPage', () => {
       indexPagePo.noticeUserRejected().contains(`We regret to inform you that we cannot offer you any loans due to your credit score being below our standards.`);
       indexPagePo.noticeUserRejected().contains(`If you have any questions, please contact our customer service center.`);
 
+      // NOTE: important tips 訊息不會出現
+      indexPagePo.tips().should("not.be.visible");
+
       // NOTE: important 看不到 Apply Button 、可點選 View Application Progress
       indexPagePo.applyButton().should('not.exist');
       indexPagePo.reacquireCreditButton().should('not.exist');
       indexPagePo.viewAppProgressButton().should("be.visible").contains('View Application Progress');
+
+      
   })
 
   // NOTICE: 訂單相關
@@ -808,7 +817,7 @@ describe('IndexPage', () => {
   
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
-  it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
+  it.only("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
 
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -3053,7 +3062,7 @@ describe('IndexPage', () => {
   })
 
   // FIGMA: 首頁-認證完成-額度時間尚未到期-用戶尚有額度-沒有可借產品 (Android: Level 9)
-  it.only("status: 用戶已認證、風控額度時間有效，但10秒到期，用戶尚有額度，但沒有可以借的產品。無法點擊 Apply Now", () => {
+  it("status: 用戶已認證、風控額度時間有效，但10秒到期，用戶尚有額度，但沒有可以借的產品。無法點擊 Apply Now", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
