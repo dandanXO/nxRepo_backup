@@ -14,12 +14,13 @@ import {SDKtaxCardOcr} from "../../../app/src/app/api/appService/SDKtaxCardOcr";
 import {GetQuotaModelStatusResponse} from "../../../app/src/app/api/loanService/GetQuotaModelStatusResponse";
 import {GetUserInfoServiceResponse} from "../../../app/src/app/api/userService/GetUserInfoServiceResponse";
 import {GetOpenIndexResponse} from "../../../app/src/app/api/indexService/GetOpenIndexResponse";
-import {Simulate} from "react-dom/test-utils";
-import waiting = Simulate.waiting;
 import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
-import { FeeRateKeyEnum } from "apps/app/src/app/api/indexService/FeeRateKeyEnum";
+import {FeeRateKeyEnum} from "apps/app/src/app/api/indexService/FeeRateKeyEnum";
+import {NativeAppInfo} from "apps/app/src/app/persistant/nativeAppInfo";
+import {useLazyGetUserProcessQuery} from "../../../app/src/app/api/rtk";
+import {GetUserProcessResponse} from "../../../app/src/app/api/loanService/GetUserProcessResponse";
+
 import { getTimeInfoBetweenCurrentAndCountDown } from "@frontend/shared/date";
-import { NativeAppInfo } from "apps/app/src/app/persistant/nativeAppInfo";
 import { ORDER_STATE } from "apps/app/src/app/domain/order/ORDER_STATE";
 import {formatPrice} from "../../../../apps/app/src/app/modules/format/formatPrice"
 
@@ -422,12 +423,35 @@ describe('IndexPage', () => {
         "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
         "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
       }
+
       cy.intercept("get", "/api/v3/index", {
         statusCode: 200,
         body: indexServiceResponse,
       }).as("getIndex").then(() => {
         console.log("index");
       })
+
+
+    const getUserProcessResponse: GetUserProcessResponse = [
+      {
+        "id": 239,
+        "title": "passed",
+        "content": "Congratulations! Your eligibility assessment is approved, loan now!",
+        "addTime": 1669696080
+      },
+      {
+        "id": 238,
+        "title": "pending",
+        "content": "Your eligibility assessment is in progress!",
+        "addTime": 1669695853
+      }
+    ]
+
+    cy.intercept("get", "api/v2/user/process", {
+      statusCode: 200,
+      body: getUserProcessResponse,
+    });
+
     visitIndexPage();
 
       // NOTE: then
@@ -571,7 +595,7 @@ describe('IndexPage', () => {
       "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -3884,5 +3908,313 @@ describe('IndexPage', () => {
     // NOTE: important 點絢 confirm 可看到可關閉 Popup 顯示借貸已申請畫面
   })
 
+  // NOTE: 狀態轉移情境
+  it("status: 用戶已認證、風控額度時間有效，額度足夠。借款到沒有可用額度。", () => {
+    // NOTICE: 目前先手動模擬
+
+    // NOTE: Given: 用戶已認證
+    const userServiceResponse: GetUserInfoServiceResponse = {
+      "userName": "9013452123",
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+    // NOTE: Given: 風控額度時間有效，額度足夠。
+    const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
+      "totalAmount": 20000,
+      "usedAmount": 18000,
+      "availableAmount": 2000,
+      "quotaBar": {
+        "min": 1000,
+        "max": 2000,
+        "current": 2000,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": FeeRateKeyEnum.PROCESSING_FEE
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": FeeRateKeyEnum.SERVICE_FEE
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": FeeRateKeyEnum.LOAN_INTEREST
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5120,
+          "terms": 7,
+          "platformChargeFeeRate": 0.43
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5230,
+          "terms": 7,
+          "platformChargeFeeRate": 0.43
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6460,
+          "terms": 7,
+          "platformChargeFeeRate": 0.43
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "riskReject": false,
+      "refreshable": false,
+      "noQuotaByRetryFewTimes": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(5, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "BB LOAN",
+          "payableAmount": 2000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(6, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "CC LOAN",
+          "payableAmount": 3000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "DD LOAN",
+          "payableAmount": 4000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(8, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+
+    // NOTE: Given: 模擬打開借款 Modal取得銀行卡
+    const getBankCardListResponse:GetBankCardListResponse = {
+      bankAccounts: [
+        {
+          bankAccount: "帳戶 1",
+          bankId: 1000000001,
+          bankName: "AA Bank",
+          holderName: userServiceResponse.userName,
+          main: true,
+        },
+        {
+          bankAccount: "帳戶 2",
+          bankId: 1000000002,
+          bankName: "AA Bank",
+          holderName: userServiceResponse.userName,
+          main: false,
+        },
+        {
+          bankAccount: "帳戶 3",
+          bankId: 1000000003,
+          bankName: "AA Bank",
+          holderName: userServiceResponse.userName,
+          main: false,
+        },
+      ],
+      tip: "tips....",
+    }
+
+    // NOTE: Given: 模擬延遲 Apply
+    const loanServiceResponse:LoanServiceResponse = {
+
+    }
+    // NOTE: Given: 模擬 Apply 後，重新刷新首頁
+    const appliedIndexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
+      "totalAmount": 20000,
+      "usedAmount": 20000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 0
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": FeeRateKeyEnum.PROCESSING_FEE
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": FeeRateKeyEnum.SERVICE_FEE
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": FeeRateKeyEnum.LOAN_INTEREST
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5120,
+          "terms": 7,
+          "platformChargeFeeRate": 0.43
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5230,
+          "terms": 7,
+          "platformChargeFeeRate": 0.43
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6460,
+          "terms": 7,
+          "platformChargeFeeRate": 0.43
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "riskReject": false,
+      "refreshable": false,
+      "noQuotaByRetryFewTimes": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+      "oldUserForceApply": false,
+      "payableRecords": [
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(5, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "BB LOAN",
+          "payableAmount": 2000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(6, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "CC LOAN",
+          "payableAmount": 3000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(7, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+        {
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "DD LOAN",
+          "payableAmount": 4000,
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(8, "days"),
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        },
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+
+
+    // NOTE: 攔截 /api/v3/login/info
+    cy.intercept("get", "/api/v2/login/info", {
+      statusCode: 200,
+      body: userServiceResponse,
+    }).as("getInfo").then(() => {
+      console.log("info");
+    })
+
+    // NOTE: 攔截 /api/v3/index
+    let indexCount = 0
+    cy.intercept("get", "/api/v3/index", (req) => {
+      indexCount++;
+      req.continue((res) => {
+        if(indexCount === 1) {
+          res.send({
+            statusCode: 200,
+            body: indexServiceResponse,
+          });
+        } else {
+          res.send({
+            statusCode: 200,
+            body: appliedIndexServiceResponse
+          });
+        }
+      })
+    })
+
+    // NOTE: 攔截 /api/v2/user/bank-card
+    cy.intercept("get", "/api/v2/user/bank-card", (req) => {
+      req.continue((res) => {
+        res.setDelay(1000).send({
+          statusCode: 200,
+          body: getBankCardListResponse,
+        })
+      })
+    })
+
+    // NOTE: 攔截 /api/v3/loan/apply
+    cy.intercept("post", "/api/v3/loan/apply", (req) => {
+      req.continue((res) => {
+        res.setDelay(4000).send({
+          statusCode: 200,
+          body: loanServiceResponse,
+        })
+      })
+    })
+
+    // NOTE: 訪問首頁
+    visitIndexPage();
+  })
 });
 
