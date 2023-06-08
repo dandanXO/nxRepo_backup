@@ -1,30 +1,25 @@
 import React, { useEffect } from "react";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
-import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
-import { useTranslation } from "react-i18next";
-import { i18nTodayPhoneUrgeList } from "./i18n/translations";
-import { useHistory, useLocation } from "react-router-dom";
 import { Button, Space, Tag, Tooltip, Typography } from "antd";
-import { TodayPhoneUrgeListItem } from "../../api/types/getTodayPhoneUrgeList";
+import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
+import { useLazyGetOverDuePhoneUrgeListQuery } from "../../api/OverDuePhoneUrgeApi";
+import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
+import { useGetOverDueCollectorListQuery } from "../../api/OverDueCollectorApi";
+import { useTranslation } from "react-i18next";
+import { i18nOverDuePhoneUrgeList } from "./i18n/translations";
+import { useHistory, useLocation } from "react-router-dom";
+import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
+import { currentDayOverDueStageEnum, overDueStageEnum } from "../../../shared/constants/overDueStageEnum.constant";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment-timezone";
-import { currentDayOverDueStageEnum } from "../../../shared/constants/overDueStageEnum.constant";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
-import { useLazyGetTodayPhoneUrgeListQuery } from "../../api/TodayPhoneUrgeApi";
-import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
-import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
-import { useGetTodayCollectorListQuery } from "../../api/TodayCollectorApi";
+import { OverDuePhoneUrgeListItem } from "../../api/types/getOverDuePhoneUrgeList";
 
 const { Text } = Typography
 
 const initSearchList = {
     appName: '', collectorId: '', followUpResult: '', merchantId: '', overDueTag: '', overdueDays: '', phone: '', stage: '', userName: '', pageNum: 1, pageSize: 10
 }
-
-const searchFormLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
 
 const searchSpan  = {
     xs: 24,
@@ -35,20 +30,24 @@ const searchSpan  = {
     xxl: 8,
 }
 
-export const TodayPhoneUrgeListTable = () => {
+const searchFormLayout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
 
+export const OverDuePhoneUrgeListTable = () => {
     const { searchList, searchParams, setSearchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
-    const [ triggerGetList, { currentData: currentTodayPhoneUrgeListResponse, isFetching: todayPhoneUrgeListFetching}] = useLazyGetTodayPhoneUrgeListQuery({
+    const [ triggerGetList, { currentData: overDuePhoneUrgeListResponse, isFetching: overDuePhoneUrgeListFetching }] = useLazyGetOverDuePhoneUrgeListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
-    });
+    })
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum()
-    const { data: collectorData } = useGetTodayCollectorListQuery(null);
-
-    const { t }= useTranslation(i18nTodayPhoneUrgeList.namespace)
+    const { data: collectorData } = useGetOverDueCollectorListQuery(null);
+    const { t } = useTranslation(i18nOverDuePhoneUrgeList.namespace)
     const history = useHistory();
     const location = useLocation();
+
     const currentPath = location.pathname;
     const isSuperAdmin = getIsSuperAdmin();
 
@@ -105,8 +104,8 @@ export const TodayPhoneUrgeListTable = () => {
             key: 'stage',
             initialValue: searchParams.stage || '',
             valueType: 'select',
-            valueEnum: { '': { text: t('noRestriction') }, ...currentDayOverDueStageEnum},
-            render: (_, { stage }) => <Typography>{currentDayOverDueStageEnum[stage].text}</Typography>,
+            valueEnum: { '': { text: t('noRestriction') }, ...overDueStageEnum},
+            render: (_, { stage }) => <Typography>{overDueStageEnum[stage].text}</Typography>,
             fieldProps: {
                 allowClear: false
             }
@@ -162,7 +161,7 @@ export const TodayPhoneUrgeListTable = () => {
             orderLabel: 'NewLoan',
             userName: 'RESHIN T RASHEED',
             phone: '9746567027',
-            stage: 'T_1',
+            stage: 'S1',
             overdueDays: 0,
             outstandingBalance: '1000',
             lastOpenAppTime: '2023-06-07T09:20:11',
@@ -200,9 +199,9 @@ export const TodayPhoneUrgeListTable = () => {
         }
     }, [isSuperAdmin])
 
-    return <ProTable<TodayPhoneUrgeListItem>
-        loading={todayPhoneUrgeListFetching}
-        // dataSource={currentTodayPhoneUrgeListResponse?.records || []}
+    return <ProTable<OverDuePhoneUrgeListItem>
+        loading={overDuePhoneUrgeListFetching}
+        // dataSource={overDuePhoneUrgeListResponse?.records || [] }
         dataSource={mockDataList}
         columns={columns}
         rowKey='overDueId'
@@ -244,8 +243,8 @@ export const TodayPhoneUrgeListTable = () => {
             showSizeChanger: true,
             defaultPageSize: 10,
             onChange: pageOnChange,
-            total: currentTodayPhoneUrgeListResponse?.totalRecords,
-            current: currentTodayPhoneUrgeListResponse?.records?.length === 0 ? 0 : currentTodayPhoneUrgeListResponse?.currentPage,
+            total: overDuePhoneUrgeListResponse?.totalRecords,
+            current: overDuePhoneUrgeListResponse?.records?.length === 0 ? 0 : overDuePhoneUrgeListResponse?.currentPage,
         }}
     />
 }

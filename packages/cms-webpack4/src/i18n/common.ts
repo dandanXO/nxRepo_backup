@@ -8,7 +8,9 @@ export const i18nCommon: i18nComponent = {
             menu: {
                 homePage: '首页',
                 currentDayOverdueCall: '当日催收',
-                currentDayOverdueCallList: '当日电催列表'
+                currentDayOverdueCallList: '当日电催列表',
+                overdueCollection: '逾期催收',
+                overdueCallList: '逾期电催列表'
             }
         },
         "en-US": {
@@ -16,7 +18,9 @@ export const i18nCommon: i18nComponent = {
             menu: {
                 homePage: 'Home',
                 currentDayOverdueCall: 'CurrentDay Collection',
-                currentDayOverdueCallList: 'CurrentDay Overdue Call List'
+                currentDayOverdueCallList: 'CurrentDay Overdue Call List',
+                overdueCollection: 'Overdue Collection',
+                overdueCallList: 'Overdue Call List'
             }
         }
     }

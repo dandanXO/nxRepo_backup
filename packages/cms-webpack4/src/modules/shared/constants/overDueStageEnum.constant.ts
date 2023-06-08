@@ -3,7 +3,7 @@ export const currentDayOverDueStageEnum = {
     T_1: { text: 'T-1'}
 }
 
-export const OverDueStageEnum = {
+export const overDueStageEnum = {
     S1: { text: 'S1'},
     S2: { text: 'S2'},
     S3: { text: 'S3'},
