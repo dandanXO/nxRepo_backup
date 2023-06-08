@@ -42,6 +42,9 @@ import { TodayPhoneUrgeList } from "./modules/todayLoanManage/components/TodayPh
 import {
     TodayPhoneUrgeListDetail
 } from "./modules/todayLoanManage/components/TodayPhoneUrgeList/TodayPhoneUrgeListDetail";
+import {
+    OverDuePhoneUrgeListDetail
+} from "./modules/afterLoanManage/components/PhoneUrgeList/OverDuePhoneUrgeListDetail";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -136,7 +139,9 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
                     {/*// @ts-ignore*/}
-                    <Route path={"/afterLoanManage/phoneUrgeList"} component={PhoneUrgeList}/>
+                    <Route exact path={"/afterLoanManage/phoneUrgeList"} component={PhoneUrgeList}/>
+                    {/*// @ts-ignore*/}
+                    <Route path={"/afterLoanManage/phoneUrgeList/detail/:userId/:orderId"} component={OverDuePhoneUrgeListDetail}/>
                     {/*// @ts-ignore*/}
                     <Route path={"/new-customer-repayment-rate"} component={NewCustomerRiskControlRepaymentRatePage}/>
                     {/*// @ts-ignore*/}
