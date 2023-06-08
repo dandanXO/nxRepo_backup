@@ -14,12 +14,25 @@ import { useLazyGetTodayPhoneUrgeListQuery } from "../../api/TodayPhoneUrgeApi";
 import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
 
+const { Text } = Typography
+
 const initSearchList = {
     appName: '', collectorId: '', followUpResult: '', merchantId: '', overDueTag: '', overdueDays: '', phone: '', stage: '', userName: '', pageNum: 1, pageSize: 10
 }
 
-const { Text } = Typography
+const searchFormLayout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
 
+const searchSpan  = {
+    xs: 24,
+    sm: 24,
+    md: 12,
+    lg: 12,
+    xl: 8,
+    xxl: 8,
+}
 
 export const TodayPhoneUrgeListTable = () => {
 
@@ -88,7 +101,8 @@ export const TodayPhoneUrgeListTable = () => {
             key: 'stage',
             valueType: 'select',
             valueEnum: currentDayOverDueStageEnum,
-            render: (_, { stage }) => <Typography>{currentDayOverDueStageEnum[stage].text}</Typography> },
+            render: (_, { stage }) => <Typography>{currentDayOverDueStageEnum[stage].text}</Typography>,
+        },
         { title: t('overdueDays'), dataIndex: 'overdueDays', key: 'overdueDays' },
         { title: t('outstandingBalance'), dataIndex: 'outstandingBalance', key: 'outstandingBalance', hideInSearch: true,  render: (_, { outstandingBalance }) => <Typography>{formatPrice(Number(outstandingBalance) || 0)}</Typography>},
         { title: t('lastOpenAppTime'), dataIndex: 'lastOpenAppTime', key: 'lastOpenAppTime', hideInSearch: true, render: (_, { lastOpenAppTime }) => <Typography>{moment(lastOpenAppTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
@@ -166,5 +180,10 @@ export const TodayPhoneUrgeListTable = () => {
         dataSource={mockDataList}
         columns={columns}
         rowKey='overDueId'
+        search={{
+            span: searchSpan,
+            labelWidth: 'auto'
+        }}
+        form={{ ...searchFormLayout }}
     />
 }
