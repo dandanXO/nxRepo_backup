@@ -85,6 +85,31 @@ const RepamentCouponModal = loadable(
 );
 const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
 
+
+// NOTICE: prefetch chrome, firefox cannot work
+// https://stackoverflow.com/questions/59074046/why-are-my-prefetched-scripts-not-being-used-webpack
+// https://stackoverflow.com/questions/64068567/link-prefetch-not-working-properly-script-is-fetched-again-on-navigation/76362114#76362114
+// https://www.webhek.com/post/preload-prefetch-and-priorities-in-chrome/
+// https://github.com/jantimon/html-webpack-plugin/issues/1317
+// https://www.technipages.com/google-chrome-prefetch/
+
+
+// NOTE: preload
+BindBankCardPage.preload();
+RepaymentDetailPage.preload();
+// UploadedPaymentReceiptPage.preload();
+// UploadPaymentReceiptPage.preload();
+// CouponModalContentAndroidWebviewPage.preload();
+// RepaymentModal.preload();
+// AmountRepaidModal.preload();
+// ExtendConfirmModal.preload();
+// ExtendModal.preload();
+// RepamentCouponModal.preload();
+IBANFinderModal.preload();
+
+
+
+
 export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
