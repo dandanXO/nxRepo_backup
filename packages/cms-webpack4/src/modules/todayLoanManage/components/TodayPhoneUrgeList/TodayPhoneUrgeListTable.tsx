@@ -13,6 +13,7 @@ import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import { useLazyGetTodayPhoneUrgeListQuery } from "../../api/TodayPhoneUrgeApi";
 import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
+import { useGetTodayCollectorListQuery } from "../../api/TodayCollectorApi";
 
 const { Text } = Typography
 
@@ -43,6 +44,12 @@ export const TodayPhoneUrgeListTable = () => {
         refetchOnReconnect: false
     });
     const { triggerGetMerchantList, merchantListEnum} = useGetMerchantEnum()
+    const { data: collectorData } = useGetTodayCollectorListQuery(null);
+
+    const collectorListEnum = collectorData?.reduce((acc, current)=> {
+        acc.set(current.collectorId, { text: current.collectorName})
+        return acc
+    }, new Map().set('', { text: '不限' }))
 
     const { t }= useTranslation(i18nTodayPhoneUrgeList.namespace)
     const history = useHistory();
@@ -137,7 +144,8 @@ export const TodayPhoneUrgeListTable = () => {
         },
         { title: t('trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true },
         { title: t('recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
-        { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName' },
+        { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName', hideInSearch: true },
+        { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
     ]
     if(isSuperAdmin) {
         columns.splice(1,0,{
