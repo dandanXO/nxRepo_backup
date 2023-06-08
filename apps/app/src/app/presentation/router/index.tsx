@@ -12,13 +12,14 @@ import { TabBar } from '../components/layouts/TabBar';
 // const IndexPage = loadable(() => import("../pages/IndexPage"));
 import IndexPage from '../pages/IndexPage';
 import { PagePathEnum } from '../pages/PagePathEnum';
+
 // NOTE: Page
 import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
 
 const AuthPage = loadable(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
 const BankCardListPage = loadable(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));
-const BindBankCardPage = loadable(() => import(/* webpackChunkName: "BindBankCardPage" */ '../pages/BindBankCardPage'));
+const BindBankCardPage = loadable(() => import(/* webpackChunkName: "BindBankCardPage" */ /* webpackPrefetch: true */'../pages/BindBankCardPage'));
 const CustomerServicePage = loadable(
   () => import(/* webpackChunkName: "CustomerServicePage" */ '../pages/CustomerServicePage')
 );
@@ -29,7 +30,7 @@ const FinishedRepaymentPage = loadable(
   () => import(/* webpackChunkName: "FinishedRepaymentPage" */ '../pages/FinishedRepaymentPage')
 );
 const RepaymentDetailPage = loadable(
-  () => import(/* webpackChunkName: "RepaymentDetailPage" */ '../pages/RepaymentDetailPage')
+  () => import(/* webpackChunkName: "RepaymentDetailPage" */ /* webpackPrefetch: true */ '../pages/RepaymentDetailPage')
 );
 const LoanRecordPage = loadable(() => import(/* webpackChunkName: "RepaymentPage" */ '../pages/RepaymentPage'));
 const OrderStatusPage = loadable(() => import(/* webpackChunkName: "OrderStatusPage" */ '../pages/OrderStatusPage'));
@@ -46,15 +47,15 @@ const PrivacyPolicyPage = loadable(
 );
 const QuotaModelPage = loadable(() => import(/* webpackChunkName: "QuotaModelPage" */ '../pages/QuotaModelPage'));
 const UploadedPaymentReceiptPage = loadable(
-  () => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ '../pages/UploadedPaymentReceiptPage')
+  () => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadedPaymentReceiptPage')
 );
 const UploadPaymentReceiptPage = loadable(
-  () => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ '../pages/UploadPaymentReceiptPage')
+  () => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadPaymentReceiptPage')
 );
 const CouponModalContentAndroidWebviewPage = loadable(
   () =>
     import(
-      /* webpackChunkName: "CouponModalContentAndroidWebviewPage" */ '../pages/CouponModalContentAndroidWebviewPage'
+      /* webpackChunkName: "CouponModalContentAndroidWebviewPage" */ /* webpackPrefetch: true */ '../pages/CouponModalContentAndroidWebviewPage'
     )
 );
 
@@ -64,14 +65,14 @@ const ApplicationProgressPage = loadable(
 const LoginPage = loadable(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
 
 // // NOTE: Modal
-const RepaymentModal = loadable(() => import(/* webpackChunkName: "RepaymentModal" */ '../modals/RepaymentModal'));
+const RepaymentModal = loadable(() => import(/* webpackChunkName: "RepaymentModal" */ /* webpackPrefetch: true */ '../modals/RepaymentModal'));
 const AmountRepaidModal = loadable(
-  () => import(/* webpackChunkName: "AmountRepaidModal" */ '../modals/AmountRepaidModal/AmountRepaidModal')
+  () => import(/* webpackChunkName: "AmountRepaidModal" */ /* webpackPrefetch: true */ '../modals/AmountRepaidModal/AmountRepaidModal')
 );
 const ExtendConfirmModal = loadable(
-  () => import(/* webpackChunkName: "ExtendConfirmModal" */ '../modals/ExtendConfirmModal')
+  () => import(/* webpackChunkName: "ExtendConfirmModal" */ /* webpackPrefetch: true */ '../modals/ExtendConfirmModal')
 );
-const ExtendModal = loadable(() => import(/* webpackChunkName: "ExtendModal" */ '../modals/ExtendModal'));
+const ExtendModal = loadable(() => import(/* webpackChunkName: "ExtendModal" */ /* webpackPrefetch: true */ '../modals/ExtendModal'));
 const LogoutModal = loadable(() => import(/* webpackChunkName: "LogoutModal" */ '../modals/LogoutModal'));
 const APIBoundaryModal = loadable(
   () => import(/* webpackChunkName: "APIBoundaryModal" */ '../modals/APIBoundaryModal')
@@ -80,9 +81,9 @@ const PrivacyPolicyModal = loadable(
   () => import(/* webpackChunkName: "PrivacyPolicyModal" */ '../modals/PrivacyPolicyModal')
 );
 const RepamentCouponModal = loadable(
-  () => import(/* webpackChunkName: "RepamentCouponModal" */ '../modals/RepamentCouponModal')
+  () => import(/* webpackChunkName: "RepamentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepamentCouponModal')
 );
-const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ '../modals/IBANFinderModal'));
+const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
 
 export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);

@@ -111,12 +111,6 @@ module.exports = (config, context) => {
       ],
     },
     plugins: [
-      // new PreloadWebpackPlugin({
-      //   rel: 'preload',
-      //   // include: 'asyncChunks'
-      //   include: 'all'
-      //   // include: 'initial'
-      // }),
       new webpack.IgnorePlugin({
         resourceRegExp: /^\.\/locale$/,
         contextRegExp: /moment$/,
@@ -139,6 +133,12 @@ module.exports = (config, context) => {
         chunks: ['runtime', 'vendors', 'common', 'sentry', 'main'],
         // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main', 'errorhandler'],
       }),
+      // new PreloadWebpackPlugin({
+      //   rel: 'preload',
+      //   // include: 'asyncChunks'
+      //   include: 'all'
+      //   // include: 'initial'
+      // }),
       // new CleanWebpackPlugin({
       //   verbose: true,
       // }),
