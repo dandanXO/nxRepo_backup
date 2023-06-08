@@ -91,6 +91,9 @@ export const TodayPhoneUrgeListTable = () => {
             render: (_, { orderLabel }) => {
                 const orderLabelStatus = orderLabelEnum[orderLabel];
                 return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus.color}>{orderLabelStatus.text}</Tag>: '-'}</div>
+            },
+            fieldProps: {
+                allowClear: false
             }
         },
         { title: t('userName'), dataIndex: 'userName', key: 'userName' },
@@ -102,6 +105,9 @@ export const TodayPhoneUrgeListTable = () => {
             valueType: 'select',
             valueEnum: currentDayOverDueStageEnum,
             render: (_, { stage }) => <Typography>{currentDayOverDueStageEnum[stage].text}</Typography>,
+            fieldProps: {
+                allowClear: false
+            }
         },
         { title: t('overdueDays'), dataIndex: 'overdueDays', key: 'overdueDays' },
         { title: t('outstandingBalance'), dataIndex: 'outstandingBalance', key: 'outstandingBalance', hideInSearch: true,  render: (_, { outstandingBalance }) => <Typography>{formatPrice(Number(outstandingBalance) || 0)}</Typography>},
@@ -118,6 +124,9 @@ export const TodayPhoneUrgeListTable = () => {
             render: (_, { followUpResult }) => {
                 const followUpResultStatus = followUpResultEnum[followUpResult]
                 return <Text style={{ color: followUpResultStatus.color }}>{followUpResultStatus.text}</Text>
+            },
+            fieldProps: {
+                allowClear: false
             }
         },
         {
