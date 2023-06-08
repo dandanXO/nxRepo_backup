@@ -155,7 +155,7 @@ const LoanSettingSection = (props: LoanSettingSectionProps) => {
                         <Form.Item
                             label='系统规则'
                             name="oldGuestLoanAmount"
-                            style={{ width: '180px' }}
+                            style={{ width: '240px' }}
                             rules={[
                                 {
                                     validator: async (_, value) => NumberValidator(_, value)({
