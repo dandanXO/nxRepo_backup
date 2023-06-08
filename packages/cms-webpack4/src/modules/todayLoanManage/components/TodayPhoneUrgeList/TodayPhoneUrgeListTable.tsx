@@ -4,7 +4,7 @@ import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
 import { useTranslation } from "react-i18next";
 import { i18nTodayPhoneUrgeList } from "./i18n/translations";
 import { useHistory, useLocation } from "react-router-dom";
-import { Tag, Tooltip, Typography } from "antd";
+import { Button, Space, Tag, Tooltip, Typography } from "antd";
 import { TodayPhoneUrgeListItem } from "../../api/types/getTodayPhoneUrgeList";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment-timezone";
@@ -37,19 +37,14 @@ const searchSpan  = {
 
 export const TodayPhoneUrgeListTable = () => {
 
-    const { searchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
+    const { searchList, setSearchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
     const [ triggerGetList, { currentData: currentTodayPhoneUrgeList, isFetching: todayHoneUrgeListFetching}] = useLazyGetTodayPhoneUrgeListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     });
-    const { triggerGetMerchantList, merchantListEnum} = useGetMerchantEnum()
+    const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum()
     const { data: collectorData } = useGetTodayCollectorListQuery(null);
-
-    const collectorListEnum = collectorData?.reduce((acc, current)=> {
-        acc.set(current.collectorId, { text: current.collectorName})
-        return acc
-    }, new Map().set('', { text: '不限' }))
 
     const { t }= useTranslation(i18nTodayPhoneUrgeList.namespace)
     const history = useHistory();
@@ -57,13 +52,20 @@ export const TodayPhoneUrgeListTable = () => {
     const currentPath = location.pathname;
     const isSuperAdmin = getIsSuperAdmin();
 
+    const collectorListEnum = collectorData?.reduce((acc, current)=> {
+        acc.set(current.collectorId, { text: current.collectorName})
+        return acc
+    }, new Map().set('', { text: t('noRestriction') }))
+
     const orderLabelEnum = {
+        '': { text: t('noRestriction')  },
         'NewLoan': { text: t('orderLabelStatus.newLoan'), color:'orange'},
         'ReLoan': { text: t('orderLabelStatus.reLoan'), color: 'blue'},
         'Extension': { text: t('orderLabelStatus.extension'), color: 'green'}
     }
 
     const followUpResultEnum = {
+        '': { text: t('noRestriction') },
         Promise: { text: t('followUpResultStatus.Promise'), color: '#1890FF'},
         FinancialDifficulties: { text: t('followUpResultStatus.FinancialDifficulties'), color: '#13C2C2'},
         Missed: { text: t('followUpResultStatus.Missed'), color: '#EE6416D9'},
@@ -71,11 +73,6 @@ export const TodayPhoneUrgeListTable = () => {
         InvalidPhoneNumber: { text: t('followUpResultStatus.InvalidPhoneNumber'), color: 'black'},
         BadAttitude: { text: t('followUpResultStatus.BadAttitude'), color: 'black'},
         Other: { text: t('followUpResultStatus.Other'), color: 'black'},
-    }
-
-    const handleClickPromote = (userId:number, orderId: number ) => {
-        history.push(`${currentPath}/detail/${userId}/${orderId}`)
-        handleToDetailPage(`${currentPath}/detail`, currentPath)
     }
 
     const columns: ProColumns[] = [
@@ -93,16 +90,13 @@ export const TodayPhoneUrgeListTable = () => {
             title: t('orderLabel'),
             dataIndex: 'orderLabel',
             key: 'orderLabel',
-            valueType: 'select',
-            valueEnum: orderLabelEnum,
             render: (_, { orderLabel }) => {
                 const orderLabelStatus = orderLabelEnum[orderLabel];
                 return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus.color}>{orderLabelStatus.text}</Tag>: '-'}</div>
             },
-            fieldProps: {
-                allowClear: false
-            }
+            hideInSearch: true
         },
+        { title: t('orderLabel'), dataIndex: 'overDueTag', key: 'overDueTag', hideInTable: true, valueType: 'select', valueEnum: orderLabelEnum, fieldProps: { allowClear:  false } },
         { title: t('userName'), dataIndex: 'userName', key: 'userName' },
         { title: t('phone'), dataIndex: 'phone', key: 'phone', render: (_, { phone }) => <Typography>{phone.substring(0, 3) + "*".repeat(phone.length - 6) + phone.substring(phone.length - 3)}</Typography>},
         {
@@ -181,9 +175,18 @@ export const TodayPhoneUrgeListTable = () => {
         }
     ]
 
+    const handleClickPromote = (userId:number, orderId: number ) => {
+        history.push(`${currentPath}/detail/${userId}/${orderId}`)
+        handleToDetailPage(`${currentPath}/detail`, currentPath)
+    }
+
+    const pageOnChange = (current, pageSize) => {
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
+    }
+
     useEffect(() => {
         triggerGetList(searchList);
-    }, [triggerGetList])
+    }, [searchList])
 
     useEffect(() => {
         if(isSuperAdmin) {
@@ -199,8 +202,44 @@ export const TodayPhoneUrgeListTable = () => {
         rowKey='overDueId'
         search={{
             span: searchSpan,
-            labelWidth: 'auto'
+            labelWidth: 'auto',
+            optionRender: ({ searchText, resetText }, { form }) => [
+                <Space>
+                    <Button
+                        onClick={()=>{
+                            form.setFieldsValue({ ...initSearchList })
+                            setSearchList(initSearchList)
+                        }}
+                    >
+                        {resetText}
+                    </Button>
+                    <Button
+                        type='primary'
+                        onClick={()=> {
+                            const { collectorId, merchantId, overdueDays, ...restField } = form.getFieldsValue();
+                            setSearchList({
+                                ...searchList,
+                                ...restField,
+                                collectorId: collectorId ? Number(collectorId): undefined,
+                                merchantId: merchantId ? Number(merchantId): undefined,
+                                overdueDays: overdueDays ? Number(overdueDays): undefined,
+                            })
+                        }}
+                    >
+                        {searchText}
+                    </Button>
+                </Space>]
         }}
         form={{ ...searchFormLayout }}
+        options={{
+            reload: () => triggerGetList(searchList),
+        }}
+        pagination={{
+            showSizeChanger: true,
+            defaultPageSize: 10,
+            onChange: pageOnChange,
+            total: currentTodayPhoneUrgeList?.totalRecords,
+            current: currentTodayPhoneUrgeList?.records?.length === 0 ? 0 : currentTodayPhoneUrgeList?.currentPage,
+        }}
     />
 }

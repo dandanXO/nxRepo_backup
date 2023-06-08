@@ -1,10 +1,12 @@
 import { useLazyGetMerchantListQuery } from "../../api/merchantListApi";
 import { useEffect, useState } from "react";
 import { getIsSuperAdmin } from "../../storage/getUserInfo";
+import { useTranslation } from "react-i18next";
 
 const useGetMerchantEnum = () => {
 
     const isSuperAdmin = getIsSuperAdmin();
+    const { t } = useTranslation();
 
     // 可用商戶
     const [triggerGetMerchantList, { currentData: merchantListData, isLoading, isFetching, isSuccess: isMerchantListDataSuccess, isError, isUninitialized }] = useLazyGetMerchantListQuery({
@@ -16,7 +18,7 @@ const useGetMerchantEnum = () => {
 
     useEffect(() => {
         if (isSuperAdmin && merchantListData) {
-            let merchantList = new Map().set('', { text: '不限' });
+            let merchantList = new Map().set('', { text: t('noRestriction') });
             merchantListData && merchantListData?.map((i) => {
                 return merchantList.set(i.merchantId, { text: i.name })
             });

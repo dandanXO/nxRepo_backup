@@ -4,6 +4,7 @@ export const i18nCommon: i18nComponent = {
     namespace: 'common',
     translation: {
         "zh-CN": {
+            noRestriction: '不限',
             menu: {
                 homePage: '首页',
                 currentDayOverdueCall: '当日催收',
@@ -11,6 +12,7 @@ export const i18nCommon: i18nComponent = {
             }
         },
         "en-US": {
+            noRestriction: 'No Restriction',
             menu: {
                 homePage: 'Home',
                 currentDayOverdueCall: 'CurrentDay Collection',
