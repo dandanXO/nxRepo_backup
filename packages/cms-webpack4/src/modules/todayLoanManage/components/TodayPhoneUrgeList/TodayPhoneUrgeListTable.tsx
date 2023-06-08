@@ -37,7 +37,7 @@ const searchSpan  = {
 
 export const TodayPhoneUrgeListTable = () => {
 
-    const { searchList, setSearchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
+    const { searchList, searchParams, setSearchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
     const [ triggerGetList, { currentData: currentTodayPhoneUrgeList, isFetching: todayHoneUrgeListFetching}] = useLazyGetTodayPhoneUrgeListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -85,7 +85,7 @@ export const TodayPhoneUrgeListTable = () => {
             },
         },
         { title: t('orderNo'), dataIndex: 'orderNo', key: 'orderNo', hideInSearch: true },
-        { title: t('appName'), dataIndex: 'appName', key: 'appName' },
+        { title: t('appName'), dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || '' },
         {
             title: t('orderLabel'),
             dataIndex: 'orderLabel',
@@ -96,21 +96,22 @@ export const TodayPhoneUrgeListTable = () => {
             },
             hideInSearch: true
         },
-        { title: t('orderLabel'), dataIndex: 'overDueTag', key: 'overDueTag', hideInTable: true, valueType: 'select', valueEnum: orderLabelEnum, fieldProps: { allowClear:  false } },
-        { title: t('userName'), dataIndex: 'userName', key: 'userName' },
-        { title: t('phone'), dataIndex: 'phone', key: 'phone', render: (_, { phone }) => <Typography>{phone.substring(0, 3) + "*".repeat(phone.length - 6) + phone.substring(phone.length - 3)}</Typography>},
+        { title: t('orderLabel'), dataIndex: 'overDueTag', key: 'overDueTag', initialValue: searchParams.overDueTag || '', hideInTable: true, valueType: 'select', valueEnum: orderLabelEnum, fieldProps: { allowClear:  false } },
+        { title: t('userName'), dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || '' },
+        { title: t('phone'), dataIndex: 'phone', key: 'phone', initialValue: searchParams.phone || '', render: (_, { phone }) => <Typography>{phone.substring(0, 3) + "*".repeat(phone.length - 6) + phone.substring(phone.length - 3)}</Typography>},
         {
             title: t('stage'),
             dataIndex: 'stage',
             key: 'stage',
+            initialValue: searchParams.stage || '',
             valueType: 'select',
-            valueEnum: currentDayOverDueStageEnum,
+            valueEnum: { '': { text: t('noRestriction') }, ...currentDayOverDueStageEnum},
             render: (_, { stage }) => <Typography>{currentDayOverDueStageEnum[stage].text}</Typography>,
             fieldProps: {
                 allowClear: false
             }
         },
-        { title: t('overdueDays'), dataIndex: 'overdueDays', key: 'overdueDays' },
+        { title: t('overdueDays'), dataIndex: 'overdueDays', key: 'overdueDays', initialValue: searchParams.overdueDays || '' },
         { title: t('outstandingBalance'), dataIndex: 'outstandingBalance', key: 'outstandingBalance', hideInSearch: true,  render: (_, { outstandingBalance }) => <Typography>{formatPrice(Number(outstandingBalance) || 0)}</Typography>},
         { title: t('lastOpenAppTime'), dataIndex: 'lastOpenAppTime', key: 'lastOpenAppTime', hideInSearch: true, render: (_, { lastOpenAppTime }) => <Typography>{moment(lastOpenAppTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
         { title: t('latestRepaymentCodeAcquisitionTime'), dataIndex: 'latestRepaymentCodeAcquisitionTime', key: 'latestRepaymentCodeAcquisitionTime', hideInSearch: true, render: (_, { latestRepaymentCodeAcquisitionTime }) => <Typography>{moment(latestRepaymentCodeAcquisitionTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
@@ -120,6 +121,7 @@ export const TodayPhoneUrgeListTable = () => {
             title: t('followUpResult'),
             dataIndex: 'followUpResult',
             key: 'followUpResult',
+            initialValue: searchParams.followUpResult || '',
             valueType: 'select',
             valueEnum: followUpResultEnum,
             render: (_, { followUpResult }) => {
@@ -138,15 +140,15 @@ export const TodayPhoneUrgeListTable = () => {
         },
         { title: t('trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true },
         { title: t('recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
-        { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName', hideInSearch: true },
-        { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
+        { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName', initialValue: searchParams.collectorName || '', hideInSearch: true },
+        { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
     ]
     if(isSuperAdmin) {
         columns.splice(1,0,{
             title: t('merchantName'), dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true
         })
         columns.splice(2,0,{
-            title: t('merchantName'), dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true, allowClear: false}
+            title: t('merchantName'), dataIndex: 'merchantId', key: 'merchantId', initialValue: searchParams.merchantId || '', hideInTable: true, valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true, allowClear: false}
         })
     }
 
@@ -185,7 +187,11 @@ export const TodayPhoneUrgeListTable = () => {
     }
 
     useEffect(() => {
-        triggerGetList(searchList);
+        if(Object.keys(searchParams).length === 0) {
+            triggerGetList(searchList);
+        } else if (JSON.stringify(searchParams) === JSON.stringify(searchList)) {
+            triggerGetList(searchList);
+        }
     }, [searchList])
 
     useEffect(() => {
