@@ -15,6 +15,8 @@ infoLog('build');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const isProduction = process.env.NODE_ENV == 'production';
+const isDashboard = process.env.NODE_DASHBOARD;
+
 console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 console.log('process.env.NODE_COUNTRY:', process.env.NODE_COUNTRY);
 console.log('process.env.NODE_ANALYZER:', process.env.NODE_ANALYZER);
@@ -35,7 +37,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PUBLIC_PATH = !isProduction ? '/' : '/v2/';
 console.log('PUBLIC_PATH', PUBLIC_PATH);
 
-const ASSET_OUTPUT_PATH = 'asset';
+const ASSET_OUTPUT_PATH = 'images';
 
 let proxyURL = 'https://app.india-api-dev.com';
 if (process.env.NODE_COUNTRY === 'in') {
@@ -51,7 +53,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConfig.json');
 
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const DashboardPlugin = require("webpack-dashboard/plugin");
 
+// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+// const smp = new SpeedMeasurePlugin();
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
@@ -74,75 +80,6 @@ module.exports = (config, context) => {
     // },
     module: {
       rules: [
-        // {
-        //   test: /\.(ts|tsx|js|jsx)$/,
-        //   // include: [
-        //   //   path.resolve(__dirname, '../src'),
-        //   //   path.resolve(__dirname, '../../../libs'),
-        //   // ],
-        //   "exclude": [
-        //     // \\ for Windows, / for macOS and Linux
-        //     /node_modules[\\/]core-js/,
-        //     /node_modules[\\/]webpack[\\/]buildin/,
-        //     // /node_modules/,
-        //   ],
-        //   use: [
-        //     // 'thread-loader',
-        //     {
-        //       loader: 'babel-loader',
-        //       options: {
-        //         cacheDirectory: false
-        //       }
-        //     }
-        //   ]
-        // },
-        // {
-        //   test: /\.svg$/,
-        //   loader: 'svg-inline-loader'
-        // },
-        // {
-        //   test: /\.svg$/,
-        //   generator: {
-        //     // publicPath: PUBLIC_PATH,
-        //     // outputPath: 'cdn-assets/',
-        //   },
-        //   oneOf: [
-        //     // If coming from JS/TS or MDX file, then transform into React component using SVGR.
-        //     {
-        //       issuer: /\.(js|ts|md)x?$/,
-        //       use: [
-        //         {
-        //           loader: require.resolve('@svgr/webpack'),
-        //           options: {
-        //             svgo: false,
-        //             titleProp: true,
-        //             ref: true,
-        //           },
-        //         },
-        //         {
-        //           loader: require.resolve('url-loader'),
-        //           options: {
-        //             limit: 10000,
-        //             name: '[name].[hash:7].[ext]',
-        //             esModule: false,
-        //           },
-        //         },
-        //       ],
-        //     },
-        //     // Fallback to plain URL loader.
-        //     {
-        //       use: [
-        //         {
-        //           loader: require.resolve('url-loader'),
-        //           options: {
-        //             limit: 10000,
-        //             name: '[name].[hash:7].[ext]',
-        //           },
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
         {
           test: /\.(ts|js|mjs)x?$/,
           // include: [
@@ -157,6 +94,12 @@ module.exports = (config, context) => {
             // /node_modules[\\/].pnpm\/@floating-ui+core@1.0.2[\\/]node_modules[\\/]@floating-ui[\\/]core[\\/]dist[\\/]floating-ui.core.browser.min.mjs/,
           ],
           use: [
+            // {
+            //   loader: 'babel-loader',
+            //   options: {
+            //     cacheDirectory: false
+            //   }
+            // },
             {
               loader: path.join(__dirname, './custom/my-loader.js'),
               options: {
@@ -199,7 +142,7 @@ module.exports = (config, context) => {
       publicPath: PUBLIC_PATH,
       filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
-      // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
+      assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`,
     },
     devServer: {
       hot: true,
@@ -242,6 +185,53 @@ module.exports = (config, context) => {
           },
           // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
           extractComments: false,
+        }),
+        new ImageMinimizerPlugin({
+          minimizer: {
+            implementation: ImageMinimizerPlugin.imageminMinify,
+            filter: (source, sourcePath) => {
+              var svgRegExp = new RegExp('.svg$', 'g');
+              if(svgRegExp.test(sourcePath)) {
+                console.log("sourcePath", sourcePath);
+                return true
+              } else {
+                return false;
+              }
+            },
+            options: {
+              // Lossless optimization with custom option
+              // Feel free to experiment with options for better result for you
+              plugins: [
+                // ["gifsicle", { interlaced: true }],
+                // ["jpegtran", { progressive: true }],
+                // ["optipng", { optimizationLevel: 5 }],
+                // Svgo configuration here https://github.com/svg/svgo#configuration
+                [
+                  "svgo",
+                  {
+                    plugins: [
+                      {
+                        name: "preset-default",
+                        params: {
+                          overrides: {
+                            removeViewBox: false,
+                            addAttributesToSVGElement: {
+                              params: {
+                                attributes: [
+                                  { xmlns: "http://www.w3.org/2000/svg" },
+                                ],
+                              },
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+
         }),
       ],
       splitChunks: {
@@ -295,19 +285,18 @@ module.exports = (config, context) => {
     finalConfig.plugins.push(new BundleAnalyzerPlugin({
       analyzerMode: "static",
     }));
+  }
 
-  } else if (isProduction) {
+  if (isProduction) {
     finalConfig.plugins.push(
       new HtmlWebpackPlugin({
         // 配置 HTML 模板路徑與生成名稱 (第三步)
         // template: './src/index.html',
-        // filename: 'index.html',
+        filename: 'index.html',
         // publicPath: "/v2",
         // chunks: ['errorhandler', 'main', 'vendors', 'nx'],
       })
     );
-
-
       // finalConfig.plugins.push(
       //   new CleanWebpackPlugin({
       //     verbose: true,
@@ -333,17 +322,35 @@ module.exports = (config, context) => {
       })
     );
   }
-  console.log('finalConfig', finalConfig);
+
+  if(isDashboard) {
+    finalConfig.plugins.push(
+      new DashboardPlugin()
+    )
+  }
+
+  // console.log('finalConfig', finalConfig);
   console.log('finalConfig.optimization.splitChunks.cacheGroups', finalConfig.optimization.splitChunks.cacheGroups);
-  console.log('finalConfig.module.rules', finalConfig.module.rules);
-  // finalConfig.module.rules = [
-  //   finalConfig.module.rules[0],
-  //   finalConfig.module.rules[1],
-  //   finalConfig.module.rules[3],
-  //   finalConfig.module.rules[4],
-  //   finalConfig.module.rules[5],
-  //   finalConfig.module.rules[6],
-  // ]
-  console.log('finalConfig.module.rules', finalConfig.module.rules);
-  return finalConfig;
+  // console.log('finalConfig.module.rules', finalConfig.module.rules);
+
+  finalConfig.module.rules.map((rule) => {
+    console.log('finalConfig.module.rule', rule);
+    if(rule.oneOf) {
+      rule.oneOf.map((one) => {
+        console.log('finalConfig.module.rule.one', one);
+      })
+    }
+  })
+
+  if(!isProduction) {
+    // finalConfig = smp.wrap(finalConfig);
+    console.log('finalConfig.plugins', finalConfig.plugins);
+    console.log('finalConfig', finalConfig);
+    return finalConfig
+  } else {
+    console.log('finalConfig.plugins', finalConfig.plugins);
+    console.log('finalConfig', finalConfig);
+    return finalConfig;
+  }
+
 };
