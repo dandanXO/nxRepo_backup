@@ -117,7 +117,10 @@ module.exports = (config, context) => {
       //   include: 'all'
       //   // include: 'initial'
       // }),
-      // NOTICE:
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^\.\/locale$/,
+        contextRegExp: /moment$/,
+      }),
       new webpack.DefinePlugin({
         AppInfo: {
           VERSION: JSON.stringify(gitRevisionPlugin.version()),
@@ -126,16 +129,19 @@ module.exports = (config, context) => {
           UI_VERSION: process.env.NODE_UI_VERSION,
         },
       }),
-      // new CleanWebpackPlugin({
-      //   verbose: true,
-      // }),
-      new webpack.IgnorePlugin({
-        resourceRegExp: /^\.\/locale$/,
-        contextRegExp: /moment$/,
-      }),
       new MomentTimezoneDataPlugin({
         matchZones: ["Asia/Kolkata", "Asia/Karachi", "Asia/Dhaka"],
       }),
+      new HtmlWebpackPlugin({
+        // 配置 HTML 模板路徑與生成名稱 (第三步)
+        template: path.resolve(__dirname, '../src/index.html'),
+        // publicPath: "/v2",
+        chunks: ['runtime', 'vendors', 'common', 'sentry', 'main'],
+        // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main', 'errorhandler'],
+      }),
+      // new CleanWebpackPlugin({
+      //   verbose: true,
+      // }),
     ],
     // target: ["web", "es5"],
     output: {
@@ -278,8 +284,8 @@ module.exports = (config, context) => {
         },
       },
     },
-
   })
+
   // NOTICE: Environment
   if (process.env.NODE_ANALYZER) {
     finalConfig.plugins.push(new BundleAnalyzerPlugin({
@@ -288,15 +294,6 @@ module.exports = (config, context) => {
   }
 
   if (isProduction) {
-    finalConfig.plugins.push(
-      new HtmlWebpackPlugin({
-        // 配置 HTML 模板路徑與生成名稱 (第三步)
-        // template: './src/index.html',
-        filename: 'index.html',
-        // publicPath: "/v2",
-        // chunks: ['errorhandler', 'main', 'vendors', 'nx'],
-      })
-    );
       // finalConfig.plugins.push(
       //   new CleanWebpackPlugin({
       //     verbose: true,
