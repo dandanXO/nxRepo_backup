@@ -81,7 +81,7 @@ export const TipsSection = (props: Props) => {
   return (
     <div className={''} data-testing-id={'tips'}>
       {messageComponent && (
-        <div className={'inline-block rounded-t-xl bg-secondary-variant px-2 py-1 text-sm text-white'}>Tips</div>
+        <div className={'inline-block rounded-t-xl bg-secondary-variant px-3 py-1 text-xs text-white font-bold'}>Tips</div>
       )}
       {messageComponent}
     </div>
