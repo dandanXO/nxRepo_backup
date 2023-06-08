@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
 import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
 import { useTranslation } from "react-i18next";
@@ -10,9 +10,12 @@ import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment-timezone";
 import { currentDayOverDueStageEnum } from "../../../shared/constants/overDueStageEnum.constant";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
+import { useLazyGetTodayPhoneUrgeListQuery } from "../../api/TodayPhoneUrgeApi";
+import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
+import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
 
 const initSearchList = {
-    merchantName:'', pageNum: 1, pageSize: 10
+    appName: '', collectorId: '', followUpResult: '', merchantId: '', overDueTag: '', overdueDays: '', phone: '', stage: '', userName: '', pageNum: 1, pageSize: 10
 }
 
 const { Text } = Typography
@@ -20,11 +23,19 @@ const { Text } = Typography
 
 export const TodayPhoneUrgeListTable = () => {
 
-    const { handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
+    const { searchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
+    const [ triggerGetList, { currentData: currentTodayPhoneUrgeList, isFetching: todayHoneUrgeListFetching}] = useLazyGetTodayPhoneUrgeListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false
+    });
+    const { triggerGetMerchantList, merchantListEnum} = useGetMerchantEnum()
+
     const { t }= useTranslation(i18nTodayPhoneUrgeList.namespace)
     const history = useHistory();
     const location = useLocation();
     const currentPath = location.pathname;
+    const isSuperAdmin = getIsSuperAdmin();
 
     const orderLabelEnum = {
         'NewLoan': { text: t('orderLabelStatus.newLoan'), color:'orange'},
@@ -56,7 +67,6 @@ export const TodayPhoneUrgeListTable = () => {
                 return <a key="editable" onClick={() => handleClickPromote(record.userId, record.overDueId)} >{t('followUp')}</a>
             },
         },
-        { title: t('merchantName'), dataIndex: 'merchantName', key: 'merchantName' },
         { title: t('orderNo'), dataIndex: 'orderNo', key: 'orderNo', hideInSearch: true },
         { title: t('appName'), dataIndex: 'appName', key: 'appName' },
         {
@@ -106,8 +116,16 @@ export const TodayPhoneUrgeListTable = () => {
         { title: t('recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
         { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName' },
     ]
+    if(isSuperAdmin) {
+        columns.splice(1,0,{
+            title: t('merchantName'), dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true
+        })
+        columns.splice(2,0,{
+            title: t('merchantName'), dataIndex: 'merchantId', key: 'merchantId', hideInTable: true, valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true, allowClear: false}
+        })
+    }
 
-    const dataList = [
+    const mockDataList = [
         {
             overDueId: 4256,
             userId: 151395,
@@ -132,8 +150,20 @@ export const TodayPhoneUrgeListTable = () => {
         }
     ]
 
+    useEffect(() => {
+        triggerGetList(searchList);
+    }, [triggerGetList])
+
+    useEffect(() => {
+        if(isSuperAdmin) {
+            triggerGetMerchantList(null)
+        }
+    }, [isSuperAdmin])
+
     return <ProTable<TodayPhoneUrgeListItem>
-        dataSource={dataList}
+        loading={todayHoneUrgeListFetching}
+        // dataSource={currentTodayPhoneUrgeList?.records || []}
+        dataSource={mockDataList}
         columns={columns}
         rowKey='overDueId'
     />

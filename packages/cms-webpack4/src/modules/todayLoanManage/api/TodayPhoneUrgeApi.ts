@@ -1,5 +1,8 @@
 import { API } from "../../shared/api";
-import { GetTodayPhoneUrgeListQueryString, GetTodayPhoneUrgeListResponse } from "./types/getTodayPhoneUrgeList";
+import {
+    GetTodayPhoneUrgeListQueryString,
+    GetTodayPhoneUrgeListResponse,
+} from "./types/getTodayPhoneUrgeList";
 
 
 const TodayPhoneUrgeApi = API.injectEndpoints({
