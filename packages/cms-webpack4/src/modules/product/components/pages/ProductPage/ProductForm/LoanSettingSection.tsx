@@ -7,8 +7,6 @@ import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/Cu
 const { Panel } = Collapse;
 interface LoanSettingSectionProps {
     form: FormInstance;
-    enableLoanAmount: boolean;
-    enableReLoanAmount: boolean;
     isEdit: boolean;
     customAntFormFieldError: CustomAntFormFieldError;
     productRiskList: string[];

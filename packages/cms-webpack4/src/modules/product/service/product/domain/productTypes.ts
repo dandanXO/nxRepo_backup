@@ -39,9 +39,6 @@ export interface ProductTypes {
     newGuestLoanAmount?: number;
     // 初始贷款额度
 
-    newGuestLoanQuotaSwitch?: boolean;
-    // 初始贷款额度开关 0: 系统规则 1: 风控返回
-
     newGuestMaxThreshold?: number;
     // 新客最大放款量
 
@@ -50,10 +47,6 @@ export interface ProductTypes {
 
     oldGuestLoanAmount?: number;
     // 复贷初始额度
-
-    oldGuestLoanQuotaSwitch?: boolean;
-    // 复贷初始额度 0: 系统规则 1: 风控返回
-
 
     overdueRate?: number;            // 逾期费率(天)
     postInterestRate?: number;       // 后置利率

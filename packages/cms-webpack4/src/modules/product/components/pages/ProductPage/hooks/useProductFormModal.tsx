@@ -116,20 +116,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         })
     }, [productModalData.productId])
 
-
-    const [enableLoanAmount, setEnableLoanAmount] = useState<boolean>(false);
-    const [enableReLoanAmount, setEnableReLoanAmount] = useState<boolean>(false);
-
-
-    useEffect(() => {
-        if(!productModalData.show) {
-            setEnableLoanAmount(false);
-            setEnableReLoanAmount(false);
-            return;
-        }
-    }, [productModalData.show])
-
-
     useEffect(() => {
         if (isFetching) return;
         // if(!productModalData.productId) return;
@@ -137,10 +123,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         // console.log("merchantList", merchantList);
         if (!productFormData) return;
         if (!merchantList) return;
-
-        setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false)
-        setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false)
-
 
         const currentMerchant = merchantList?.find(merchant => merchant.merchantId === productFormData.merchantId);
 
@@ -229,8 +211,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 extensible: productFormData.extensible,
                 extensibleOverdueDays: productFormData.extensibleOverdueDays,
 
-                newGuestLoanQuotaSwitch: productFormData.newGuestLoanQuotaSwitch === true ? 1 : 0,
-                oldGuestLoanQuotaSwitch: productFormData.oldGuestLoanQuotaSwitch === true ? 1 : 0,
                 oldGuestLoanAmount: productFormData.oldGuestLoanAmount,
 
                 riskRankLoanAmount: productFormData.riskRankLoanAmount,
@@ -414,8 +394,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
             prodRiskProvider: newGuestLoanMixedRisks.concat(oldGuestLoanMixedRisk),
 
-            newGuestLoanQuotaSwitch: values.newGuestLoanQuotaSwitch,
-            oldGuestLoanQuotaSwitch: values.oldGuestLoanQuotaSwitch,
             riskRankLoanAmount: values.riskRankLoanAmount,
             oldGuestLoanAmount: values.oldGuestLoanAmount,
             renewMaxThreshold: Number(values.renewMaxThreshold),
@@ -542,10 +520,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         isPutProductSuccess,
         // onAutoFinishedForm,
         onFormSubmit,
-        enableLoanAmount,
-        enableReLoanAmount,
-        setEnableLoanAmount,
-        setEnableReLoanAmount,
         contextHolder,
     }
 }
