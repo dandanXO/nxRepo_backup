@@ -13,7 +13,10 @@
       "noImplicitAny": false,
       "allowJs": true,
       "jsx": "react-jsx",
-      "strict": false
+      "strict": false,
+      "paths": {
+          "react": ["./node_modules/@types/react"]
+      }
   },
   "include": [
       "src/**/*.ts",
