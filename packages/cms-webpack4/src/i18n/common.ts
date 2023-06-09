@@ -10,7 +10,17 @@ export const i18nCommon: i18nComponent = {
                 currentDayOverdueCall: '当日催收',
                 currentDayOverdueCallList: '当日电催列表',
                 overdueCollection: '逾期催收',
-                overdueCallList: '逾期电催列表'
+                overdueCallList: '逾期电催列表',
+            },
+            breadcrumb: {
+                orderDetails: '订单详情',
+                overDueDetails: '订单详情'
+            },
+            tabLabel: {
+                orderInfo: '订单信息',
+                userInfo: '用户信息',
+                contractList: '通讯录',
+                smsMessage: '手机短信'
             }
         },
         "en-US": {
@@ -20,7 +30,17 @@ export const i18nCommon: i18nComponent = {
                 currentDayOverdueCall: 'CurrentDay Collection',
                 currentDayOverdueCallList: 'CurrentDay Overdue Call List',
                 overdueCollection: 'Overdue Collection',
-                overdueCallList: 'Overdue Call List'
+                overdueCallList: 'Overdue Call List',
+            },
+            breadcrumb: {
+                orderDetails: 'Order Details',
+                overDueDetails: 'Overdue Details'
+            },
+            tabLabel: {
+                orderInfo: 'Order Information',
+                userInfo: 'User Info',
+                contractList: 'Contact List',
+                smsMessage: 'SMS Message'
             }
         }
     }
