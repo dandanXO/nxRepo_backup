@@ -180,20 +180,20 @@ module.exports = (config, context) => {
   finalConfig = merge(finalConfig, {
     optimization: {
       minimizer: [
-        new TerserPlugin({
-          parallel: true,
-          minify: TerserPlugin.terserMinify,
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-            format: {
-              comments: false,
-            },
-          },
-          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-          extractComments: false,
-        }),
+        // new TerserPlugin({
+        //   parallel: true,
+        //   minify: TerserPlugin.terserMinify,
+        //   terserOptions: {
+        //     compress: {
+        //       drop_console: true,
+        //     },
+        //     format: {
+        //       comments: false,
+        //     },
+        //   },
+        //   // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+        //   extractComments: false,
+        // }),
         new ImageMinimizerPlugin({
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
