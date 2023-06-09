@@ -1,0 +1,13 @@
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { TodayPhoneUrgeList } from "../components/TodayPhoneUrgeList";
+import { OrderDetail } from "../components/TodayPhoneUrgeList/OrderDetail";
+
+const TodayLoanManageRoutes = () => (
+    <Switch>
+        <Route exact path={"/todayLoanManage/todayPhoneUrgeList"} component={TodayPhoneUrgeList}/>
+        <Route path={"/todayLoanManage/todayPhoneUrgeList/detail/:userId/:orderId"} component={OrderDetail}/>
+    </Switch>
+)
+
+export default TodayLoanManageRoutes;

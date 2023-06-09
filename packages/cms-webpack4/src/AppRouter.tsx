@@ -37,14 +37,8 @@ import {
 import LoginAccountManagePage from "./modules/system/components/pages/LoginAccountManage";
 import NewCustomersDailyConversionRatesPage from "./modules/statistics/components/pages/NewCustomersDailyConversionRatesPage";
 import ReloanStatisticsPage from "./modules/statistics/components/pages/ReloanStatisticsPage";
-import { PhoneUrgeList } from "./modules/afterLoanManage/components/PhoneUrgeList";
-import { TodayPhoneUrgeList } from "./modules/todayLoanManage/components/TodayPhoneUrgeList";
-import {
-    TodayPhoneUrgeListDetail
-} from "./modules/todayLoanManage/components/TodayPhoneUrgeList/TodayPhoneUrgeListDetail";
-import {
-    OverDuePhoneUrgeListDetail
-} from "./modules/afterLoanManage/components/PhoneUrgeList/OverDuePhoneUrgeListDetail";
+import { TodayLoanManageRoutes } from "./modules/todayLoanManage/routes";
+import { AfterLoanManageRoutes } from "./modules/afterLoanManage/routes";
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -133,15 +127,8 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path={"/today-distribution"} component={TodayDistributionPage}/>
                     {/*// @ts-ignore*/}
-                    <Route exact path={"/todayLoanManage/todayPhoneUrgeList"} component={TodayPhoneUrgeList}/>
-                    {/*// @ts-ignore*/}
-                    <Route path={"/todayLoanManage/todayPhoneUrgeList/detail/:userId/:orderId"} component={TodayPhoneUrgeListDetail}/>
-                    {/*// @ts-ignore*/}
                     <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
-                    {/*// @ts-ignore*/}
-                    <Route exact path={"/afterLoanManage/phoneUrgeList"} component={PhoneUrgeList}/>
-                    {/*// @ts-ignore*/}
-                    <Route path={"/afterLoanManage/phoneUrgeList/detail/:userId/:orderId"} component={OverDuePhoneUrgeListDetail}/>
+
                     {/*// @ts-ignore*/}
                     <Route path={"/new-customer-repayment-rate"} component={NewCustomerRiskControlRepaymentRatePage}/>
                     {/*// @ts-ignore*/}
@@ -151,6 +138,12 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path={"/reloanStatistics"} component={ReloanStatisticsPage}/>
                 </Switch>
+
+                {/*逾期催收*/}
+                <AfterLoanManageRoutes />
+
+                {/*當日催收*/}
+                <TodayLoanManageRoutes />
             </Router>
 
         </ConfigProvider>
