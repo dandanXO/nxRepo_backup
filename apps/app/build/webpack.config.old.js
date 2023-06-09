@@ -181,6 +181,8 @@ module.exports = (config, context) => {
     optimization: {
       minimizer: [
         new TerserPlugin({
+          parallel: true,
+          minify: TerserPlugin.terserMinify,
           terserOptions: {
             compress: {
               drop_console: true,
