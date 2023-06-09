@@ -191,7 +191,12 @@ class RepeatLoan extends Component {
 
     onClickBatchReLoan = () => {
         const { selectKeys, intl, batchReLoan, getTableData, tableData: { data } } = this.props;
-        
+         //是否有选中订单
+         const isSelected = selectKeys.length > 0;
+         if (!isSelected) {
+             message.warn(intl.formatMessage({ id: "windowPage.select.order" }));
+             return;
+         }
         Modal.confirm({
             title: intl.formatMessage({ id: "page.table.reloan.all.orders.confirm" }),
             content: intl.formatMessage({ id: "page.table.reloan.all.orders.confirm.content" }),
@@ -199,12 +204,7 @@ class RepeatLoan extends Component {
             cancelText: intl.formatMessage({ id: "page.table.cancel" }),
             icon: <Icon type="info-circle" theme="twoTone" twoToneColor={'#FAAD14'} />,
             onOk: () => {
-                //是否有选中订单
-                const isSelected = selectKeys.length > 0;
-                if (!isSelected) {
-                    message.warn(intl.formatMessage({ id: "windowPage.select.order" }));
-                    return;
-                }
+               
                 this.setState({ batchReloanBtnDisabled: true });
                 let selectedOrderNos = data.filter(row => selectKeys.includes(row.id)).map(row => row.orderNo);
                 batchReLoan({ orderNos: selectedOrderNos }, () => {
@@ -220,6 +220,13 @@ class RepeatLoan extends Component {
         const _this = this;
         const { selectKeys, intl, batchRefuseLoan, getTableData, tableData: { data } } = this.props;
        
+         // 是否有选中订单
+         const isSelected = selectKeys.length > 0;
+         if (!isSelected) {
+             message.warn(intl.formatMessage({ id: "windowPage.select.order" }));
+             return;
+         }
+
         Modal.confirm({
             title: intl.formatMessage({ id: "page.table.quit.lending.all.orders.confirm" }),
             content: intl.formatMessage({ id: "page.table.quit.lending.all.orders.confirm.content" }),
@@ -227,12 +234,7 @@ class RepeatLoan extends Component {
             cancelText: intl.formatMessage({ id: "page.table.cancel" }),
             icon: <Icon type="info-circle" theme="twoTone" twoToneColor={'#FAAD14'} />,
             onOk: () => {
-                // 是否有选中订单
-                const isSelected = selectKeys.length > 0;
-                if (!isSelected) {
-                    message.warn(intl.formatMessage({ id: "windowPage.select.order" }));
-                    return;
-                }
+               
                 _this.setState({ batchLoanRefuseDisabled: true });
 
                 let selectedOrderNos = data.filter(row => selectKeys.includes(row.id)).map(row => row.orderNo);
