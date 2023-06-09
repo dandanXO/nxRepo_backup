@@ -12,6 +12,7 @@ import {
     RPL_REPEAT_PAY,
     RPL_BATCH_RELOAN,
     RPL_REFUSE_LOAN,
+    RPL_SUSPEND_LOAN,
     rplChangeModalLoading,
     rplChangeModalVisible,
     rplChangeTableLoading,
@@ -19,26 +20,23 @@ import {
     rplSetTableData,
     rplChangeSelectKey,
 } from './actions';
-import { listData, listDetail, listPay, listBatchPay, refuseLoan } from '../api';
+import { listData, listDetail, listPay, listBatchPay, refuseLoan, suspendLoan } from '../api';
 import React from 'react';
 
 function* getTableData(action) {
     yield put(rplChangeTableLoading(true));
     try {
         const res = yield call(listData, action.params);
-        if (Number(res.code) === 200) {
-            const { data } = res;
-            const obj = {
-                data: data['records'] || [],
-                pagination: {
-                    total: data['totalRecords'],
-                    current: data['currentPage']
-                }
+        const obj = {
+            data: res.records || [],
+            pagination: {
+                total: res.totalRecords,
+                current: res.records.length === 0 ? 0 : res.currentPage,
             }
-            yield put(rplSetTableData(obj));
-            // 取消勾选
-            yield put(rplChangeSelectKey([]));
         }
+        yield put(rplSetTableData(obj));
+        // 取消勾选
+        yield put(rplChangeSelectKey([]));
     } catch (e) {
 
     }
@@ -138,12 +136,30 @@ function* watchBatchRefuse() {
 }
 
 
+function* batchSuspendLoan(action) {
+    let hide = message.loading('', 0);
+    try {
+        yield call(suspendLoan, action.params);
+        action.callback && action.callback();
+        hide && hide();
+    } catch (e) {
+        action.callback && action.callback();
+        hide && hide();
+    }
+}
+
+function* watchBatchSuspend() {
+    yield takeEvery(RPL_SUSPEND_LOAN, batchSuspendLoan);
+}
+
+
 export default function* root() {
     yield all([
         fork(watchGetTableData),
         fork(watchGetDetail),
         fork(watchRepeatPayLoan),
         fork(watchBatchRepeatPayLoan),
-        fork(watchBatchRefuse)
+        fork(watchBatchRefuse),
+        fork(watchBatchSuspend)
     ]);
 }
