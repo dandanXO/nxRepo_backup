@@ -15,6 +15,7 @@ export const RPL_REPEAT_PAY = 'RPL_REPEAT_PAY';
 export const RPL_CHANGE_SELECTED_KEY = 'RPL_CHANGE_SELECTED_KEY';
 export const RPL_BATCH_RELOAN = 'RPL_BATCH_RELOAN';
 export const RPL_REFUSE_LOAN = 'RPL_REFUSE_LOAN';
+export const RPL_SUSPEND_LOAN = 'RPL_SUSPEND_LOAN';
 
 export const rplGetTableData = (params, callback) => ({ type: RPL_GET_TABLE_DATA, params, callback });
 export const rplSetTableData = (data) => ({ type: RPL_SET_TABLE_DATA, data });
@@ -27,3 +28,4 @@ export const rplRepeatPay = (params, callback) => ({ type: RPL_REPEAT_PAY, param
 export const rplChangeSelectKey = (data) => ({ type: RPL_CHANGE_SELECTED_KEY, data });
 export const rplBatchReLoan = (params, callback) => ({ type: RPL_BATCH_RELOAN, params, callback });
 export const rplRefuseLoan = (params, callback) => ({ type: RPL_REFUSE_LOAN, params, callback });
+export const rplSuspendLoan = (params, callback) => ({ type: RPL_SUSPEND_LOAN, params, callback });
