@@ -153,7 +153,7 @@
   "page.search.list.suspend": "掛起",
   "page.search.list.suspend.tips": "suspend，暂停重新放款的意思",
   "page.table.suspend.time": "掛起時間",
-  "page.table.suspend.disbursement": "掛起重新放款",
+  "page.table.suspend.disbursement": "挂起重新绑卡",
   "page.table.card.data.update.time": "綁卡異動時間",
   "page.table.reloan.all.orders.confirm": "確認將全部訂單重新放款嗎？",
   "page.table.reloan.all.orders.confirm.content": "設定重新放款後，訂單狀態會被還原為還款中",

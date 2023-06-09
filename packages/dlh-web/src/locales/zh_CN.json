@@ -155,7 +155,7 @@
   "page.search.list.suspend": "挂起",
   "page.search.list.suspend.tips": "suspend，暂停重新放款的意思",
   "page.table.suspend.time": "挂起时间",
-  "page.table.suspend.disbursement": "挂起重新放款",
+  "page.table.suspend.disbursement": "挂起重新绑卡",
   "page.table.card.data.update.time": "绑卡异动时间",
   "page.table.reloan.all.orders.confirm": "确认将全部订单重新放款吗？",
   "page.table.reloan.all.orders.confirm.content": "设定重新放款后，订单状态会被还原为还款中",
