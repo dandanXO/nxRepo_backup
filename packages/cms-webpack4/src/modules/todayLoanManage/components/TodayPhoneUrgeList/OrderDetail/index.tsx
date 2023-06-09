@@ -27,8 +27,8 @@ export const OrderDetail = () => {
     ]
 
     const tabsItems = [
-        { label: t('tabLabel.orderInfo'), key: 'orderInfo', children: <ContentOptionalTab items={orderInfoCardItems} />},
-        { label: t('tabLabel.userInfo'), key: 'userInfo', children: <ContentOptionalTab items={userInfoCardItems} dataHook={{ hook: useGetUserDetailQuery, params: { userId } }} />}
+        { label: t('tab.orderInfo'), key: 'orderInfo', children: <ContentOptionalTab items={orderInfoCardItems} />},
+        { label: t('tab.userInfo'), key: 'userInfo', children: <ContentOptionalTab items={userInfoCardItems} dataHook={{ hook: useGetUserDetailQuery, params: { userId } }} />}
     ]
 
 

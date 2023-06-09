@@ -23,12 +23,12 @@ export const ContentOptionalTab = ({
 
 
     return (
-        <React.Fragment>
+        <div style={{ margin: '16px' }}>
             {
                 items?.map((part) => {
                     return <React.Fragment key={part.key}>{part.render(props)}</React.Fragment>
                 })
             }
-        </React.Fragment>
+        </div>
     )
 }
