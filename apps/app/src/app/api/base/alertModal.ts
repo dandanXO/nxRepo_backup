@@ -9,9 +9,9 @@ import { getThemeConfigByCountry } from '../../modules/theme/getThemeConfigByCou
 // const customColors = require("../../../environments/theme/india/v55/tailwind.colors");
 
 // NOTICE: 下面得 import 雖然 app.tsx 已經impoert
-window.theme = getThemeConfigByCountry(environment.country);
+// window.theme = getThemeConfigByCountry(environment.country);
 // window.theme.button.primary.main = customColors.primary.main;
-window.theme.button.primary.main = theme['primary_main'];
+// window.theme.button.primary.main = theme['primary_main'];
 
 // window.theme.button.primary.text = customColors.primary.variant;
 // window.theme.button.secondary.main = customColors.secondary.main;
