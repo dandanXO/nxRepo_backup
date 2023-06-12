@@ -46,5 +46,11 @@ export interface IThemeConfig {
       bg: string;
       text: string;
     }
+  },
+  input?:{
+    disable: Colors | string;
+    error: Colors | string;
+    placeholder: Colors | string;
+    outline: Colors | string;
   }
 }
