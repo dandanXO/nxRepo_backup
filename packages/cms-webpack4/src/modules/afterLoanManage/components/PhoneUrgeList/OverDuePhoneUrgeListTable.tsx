@@ -14,6 +14,7 @@ import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment-timezone";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import { OverDuePhoneUrgeListItem } from "../../api/types/getOverDuePhoneUrgeList";
+import {useOrderLabelEnum} from "../../../shared/constants/useOrderLabelEnum";
 
 const { Text } = Typography
 
@@ -44,9 +45,12 @@ export const OverDuePhoneUrgeListTable = () => {
     })
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum()
     const { data: collectorData } = useGetOverDueCollectorListQuery(null);
+
     const { t } = useTranslation(i18nOverDuePhoneUrgeList.namespace)
+    const { OrderLabelEnum } = useOrderLabelEnum();
     const history = useHistory();
     const location = useLocation();
+
 
     const currentPath = location.pathname;
     const isSuperAdmin = getIsSuperAdmin();
@@ -55,13 +59,6 @@ export const OverDuePhoneUrgeListTable = () => {
         acc.set(current.collectorId, { text: current.collectorName})
         return acc
     }, new Map().set('', { text: t('noRestriction') }))
-
-    const orderLabelEnum = {
-        '': { text: t('noRestriction')  },
-        'NewLoan': { text: t('orderLabelStatus.newLoan'), color:'orange'},
-        'ReLoan': { text: t('orderLabelStatus.reLoan'), color: 'blue'},
-        'Extension': { text: t('orderLabelStatus.extension'), color: 'green'}
-    }
 
     const followUpResultEnum = {
         '': { text: t('noRestriction') },
@@ -90,12 +87,12 @@ export const OverDuePhoneUrgeListTable = () => {
             dataIndex: 'orderLabel',
             key: 'orderLabel',
             render: (_, { orderLabel }) => {
-                const orderLabelStatus = orderLabelEnum[orderLabel];
+                const orderLabelStatus = OrderLabelEnum[orderLabel];
                 return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus.color}>{orderLabelStatus.text}</Tag>: '-'}</div>
             },
             hideInSearch: true
         },
-        { title: t('orderLabel'), dataIndex: 'overDueTag', key: 'overDueTag', initialValue: searchParams.overDueTag || '', hideInTable: true, valueType: 'select', valueEnum: orderLabelEnum, fieldProps: { allowClear:  false } },
+        { title: t('orderLabel'), dataIndex: 'overDueTag', key: 'overDueTag', initialValue: searchParams.overDueTag || '', hideInTable: true, valueType: 'select', valueEnum: OrderLabelEnum, fieldProps: { allowClear:  false } },
         { title: t('userName'), dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || '' },
         { title: t('phone'), dataIndex: 'phone', key: 'phone', initialValue: searchParams.phone || '', render: (_, { phone }) => <Typography>{phone.substring(0, 3) + "*".repeat(phone.length - 6) + phone.substring(phone.length - 3)}</Typography>},
         {

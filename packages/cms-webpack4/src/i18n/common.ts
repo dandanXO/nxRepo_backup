@@ -21,6 +21,18 @@ export const i18nCommon: i18nComponent = {
                 userInfo: '用户信息',
                 contractList: '通讯录',
                 smsMessage: '手机短信'
+            },
+            message: {
+                copySuccess: '链接已复制'
+            },
+            orderStatus: {
+                overDue: '已逾期',
+                completed: '已完成',
+            },
+            orderLabelStatus: {
+                newLoan: '首贷',
+                reLoan: '复贷',
+                extension: '展期'
             }
         },
         "en-US": {
@@ -41,6 +53,18 @@ export const i18nCommon: i18nComponent = {
                 userInfo: 'User Info',
                 contractList: 'Contact List',
                 smsMessage: 'SMS Message'
+            },
+            message: {
+                copySuccess: 'Link Copied'
+            },
+            orderStatus: {
+                overDue: 'Overdue',
+                completed: 'Complete',
+            },
+            orderLabelStatus: {
+                newLoan: 'New Loan',
+                reLoan: 'Re-Loan',
+                extension: 'Extension'
             }
         }
     }

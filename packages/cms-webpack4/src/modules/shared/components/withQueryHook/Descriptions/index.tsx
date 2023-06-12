@@ -12,7 +12,7 @@ interface IDescriptions {
     descriptions: {
         key: string,
         dataIndex: string; // [useQuery 返回的object的key，多層用.區隔]
-        render?: React.FC<any>
+        render?: (value:any, data: any) => React.ReactElement
     }[],
     hook?: UseQuery<any>,
     params?: any,
@@ -31,7 +31,14 @@ export const Descriptions = ({
         <InformationCard title={t(titleKey)}>
             <AntDescriptions size="small" bordered>
                 {descriptions.map((part) => {
-                    return <Item key={part.key} label={t(part.key)}>{data[part.dataIndex] || '-'}</Item>
+
+                    return (
+                        <Item key={part.key} label={t(part.key)}>{
+                            (part.render && part.render(data[part.dataIndex], data)) ||
+                            data[part.dataIndex] ||
+                            '-'}
+                        </Item>
+                    )
                 })}
             </AntDescriptions>
         </InformationCard>
