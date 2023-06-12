@@ -89,6 +89,7 @@ module.exports = (config, context) => {
             // \\ for Windows, / for macOS and Linux
             /node_modules[\\/]core-js/,
             /node_modules[\\/]webpack[\\/]buildin/,
+            /node_modules[\\/]react-apexcharts/
             // /node_modules/,
             // node_modules/.pnpm/@floating-ui+core@1.0.2/node_modules/@floating-ui/core/dist/floating-ui.core.browser.min.mjs
             // /node_modules[\\/].pnpm\/@floating-ui+core@1.0.2[\\/]node_modules[\\/]@floating-ui[\\/]core[\\/]dist[\\/]floating-ui.core.browser.min.mjs/,
@@ -180,20 +181,20 @@ module.exports = (config, context) => {
   finalConfig = merge(finalConfig, {
     optimization: {
       minimizer: [
-        // new TerserPlugin({
-        //   parallel: true,
-        //   minify: TerserPlugin.terserMinify,
-        //   terserOptions: {
-        //     compress: {
-        //       drop_console: true,
-        //     },
-        //     format: {
-        //       comments: false,
-        //     },
-        //   },
-        //   // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-        //   extractComments: false,
-        // }),
+        new TerserPlugin({
+          parallel: true,
+          minify: TerserPlugin.terserMinify,
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+            format: {
+              comments: false,
+            },
+          },
+          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+          extractComments: false,
+        }),
         new ImageMinimizerPlugin({
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
@@ -263,6 +264,7 @@ module.exports = (config, context) => {
           vendors: {
             // test: /[\\/]node_modules[\\/](?!@floating-ui+core@1.0.2)/,
             test: /[\\/]node_modules[\\/]/,
+
             name: 'vendors',
             minChunks: 1,
             priority: 1,
