@@ -152,7 +152,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           onIFSCDropSelect={onIFSCDropSelect}
           confirm={() => {
             const validation = validateCommonForm(); // account Number
-            const validation2 = confirmBankAccount(); // Iban
+            const validation2 = confirmBankAccount(); // Iban & Bank Name
             // common
             if (validation && validation2) confirm();
           }}

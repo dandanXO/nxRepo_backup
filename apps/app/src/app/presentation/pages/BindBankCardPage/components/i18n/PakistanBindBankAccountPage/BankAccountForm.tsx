@@ -63,15 +63,16 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           className="mb-2"
           // defaultValue={props.bankDropList[0].value}
           // value={props?.bankDropList[props.bankAccountValue]?.value}
-          value={props.bankAccountValue}
           onChange={(item: any) => {
-            // console.log(item)
             props.onIFSCDropSelect(item);
           }}
           options={options}
           isSearchable={false}
           placeholder={'Select'}
         />
+        {props.bankAccountValue.isValidation &&
+            <div className='ml-5 text-cstate-error-main'>{props.bankAccountValue.errorMessage}</div>
+        }
       </div>
 
       <div>
