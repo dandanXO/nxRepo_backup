@@ -21,10 +21,6 @@ export const i18nCommon: i18nComponent = {
                 userInfo: '用户信息',
                 contractList: '通讯录',
                 smsMessage: '手机短信'
-            },
-            infoCard: {
-                orderInfo: '订单信息',
-                orderNum: '订单编号',
             }
         },
         "en-US": {
@@ -45,10 +41,6 @@ export const i18nCommon: i18nComponent = {
                 userInfo: 'User Info',
                 contractList: 'Contact List',
                 smsMessage: 'SMS Message'
-            },
-            infoCard: {
-                orderInfo: 'Order Information',
-                orderNum: 'Order Number',
             }
         }
     }

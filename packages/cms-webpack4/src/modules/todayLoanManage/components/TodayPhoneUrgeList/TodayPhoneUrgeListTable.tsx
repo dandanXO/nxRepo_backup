@@ -13,7 +13,7 @@ import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import { useLazyGetTodayPhoneUrgeListQuery } from "../../api/TodayPhoneUrgeApi";
 import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
-import { useGetTodayCollectorListQuery } from "../../api/TodayCollectorApi";
+import { useGetTodayCollectorListQuery } from "../../api/CollectTodayApi";
 
 const { Text } = Typography
 
@@ -92,7 +92,7 @@ export const TodayPhoneUrgeListTable = () => {
             key: 'orderLabel',
             render: (_, { orderLabel }) => {
                 const orderLabelStatus = orderLabelEnum[orderLabel];
-                return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus.color}>{orderLabelStatus.text}</Tag>: '-'}</div>
+                return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus?.color}>{orderLabelStatus?.text}</Tag>: '-'}</div>
             },
             hideInSearch: true
         },
@@ -106,7 +106,7 @@ export const TodayPhoneUrgeListTable = () => {
             initialValue: searchParams.stage || '',
             valueType: 'select',
             valueEnum: { '': { text: t('noRestriction') }, ...currentDayOverDueStageEnum},
-            render: (_, { stage }) => <Typography>{currentDayOverDueStageEnum[stage].text}</Typography>,
+            render: (_, { stage }) => <Typography>{currentDayOverDueStageEnum[stage]?.text}</Typography>,
             fieldProps: {
                 allowClear: false
             }
@@ -126,7 +126,7 @@ export const TodayPhoneUrgeListTable = () => {
             valueEnum: followUpResultEnum,
             render: (_, { followUpResult }) => {
                 const followUpResultStatus = followUpResultEnum[followUpResult]
-                return <Text style={{ color: followUpResultStatus.color }}>{followUpResultStatus.text}</Text>
+                return <Text style={{ color: followUpResultStatus?.color }}>{followUpResultStatus?.text}</Text>
             },
             fieldProps: {
                 allowClear: false
@@ -202,8 +202,8 @@ export const TodayPhoneUrgeListTable = () => {
 
     return <ProTable<TodayPhoneUrgeListItem>
         loading={todayPhoneUrgeListFetching}
-        // dataSource={currentTodayPhoneUrgeListResponse?.records || []}
-        dataSource={mockDataList}
+        dataSource={currentTodayPhoneUrgeListResponse?.records || []}
+        // dataSource={mockDataList}
         columns={columns}
         rowKey='overDueId'
         search={{

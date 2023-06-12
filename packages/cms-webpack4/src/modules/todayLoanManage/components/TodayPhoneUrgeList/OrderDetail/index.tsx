@@ -4,11 +4,9 @@ import { PageContainer } from "@ant-design/pro-components";
 import { useTranslation } from "react-i18next";
 import { itemRender } from "../../../../shared/components/common/itemRender";
 import { Tabs } from "antd";
-import { ContentOptionalTab } from "../../../../shared/components/ContentOptionalTab";
-import {
-    useGetUserDetailQuery
-} from "../../../../shared/api/UserInfoApi";
-import { CollectionRecordCard, OrderInfoCard, RegisterInfoCard } from "../../../../shared/components/infoCards";
+import {Descriptions} from "../../../../shared/components/withQueryHook";
+import {useGetCollectTodayOrderDetailQuery, useGetCollectTodayUserDetailQuery} from "../../../api/CollectTodayApi";
+import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
 
 export const OrderDetail = () => {
     const urlParams=useParams<{ userId: string, orderId: string}>()
@@ -16,19 +14,39 @@ export const OrderDetail = () => {
 
     const userId = Number(urlParams.userId);
     const orderId = Number(urlParams.orderId);
+    const isSuperAdmin = getIsSuperAdmin();
 
-    const orderInfoCardItems = [
-        { key: 'orderInfo', render: () => <OrderInfoCard orderId={orderId} /> },
-        { key: 'collectRecord', render: () => <CollectionRecordCard orderId={orderId} />}
+    const orderInfoDescriptions = [
+        { key: 'orderNumber', dataIndex: 'orderNumber' },
+        { key: 'mobileNumber', dataIndex: 'mobileNumber' },
+        { key: 'channel', dataIndex: 'channel' },
+    ]
+    if(isSuperAdmin) {
+        orderInfoDescriptions.splice(0, 0, {
+            key: 'merchantName', dataIndex: 'merchantName'
+        })
+    }
+
+    const registerDescriptions = [
+        { key: 'phoneNo', dataIndex: 'result.name' },
     ]
 
-    const userInfoCardItems = [
-        { key: 'registerInfo', render: (props) => <RegisterInfoCard {...props} /> }
-    ]
+    const OrderInfoTab = () => (
+        <div style={{ margin: '16px' }}>
+            <Descriptions titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{orderId}} />
+        </div>
+    )
+
+    const UserInfoTab = () => (
+        <div style={{ margin: '16px' }}>
+            <Descriptions titleKey={'registerInfo'} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+        </div>
+    )
+
 
     const tabsItems = [
-        { label: t('tab.orderInfo'), key: 'orderInfo', children: <ContentOptionalTab items={orderInfoCardItems} />},
-        { label: t('tab.userInfo'), key: 'userInfo', children: <ContentOptionalTab items={userInfoCardItems} dataHook={{ hook: useGetUserDetailQuery, params: { userId } }} />}
+        { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
+        { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> }
     ]
 
 
