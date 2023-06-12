@@ -1,21 +1,5 @@
 import i18next from 'i18next';
-
 import { Modal } from '@frontend/mobile/shared/ui';
-
-import { environment } from '../../../environments/environment';
-import theme from '../../../environments/theme/india/v55/tailwind.theme';
-import { getThemeConfigByCountry } from '../../modules/theme/getThemeConfigByCountry';
-
-// const customColors = require("../../../environments/theme/india/v55/tailwind.colors");
-
-// NOTICE: 下面得 import 雖然 app.tsx 已經impoert
-window.theme = getThemeConfigByCountry(environment.country);
-// window.theme.button.primary.main = customColors.primary.main;
-window.theme.button.primary.main = theme['primary_main'];
-
-// window.theme.button.primary.text = customColors.primary.variant;
-// window.theme.button.secondary.main = customColors.secondary.main;
-// window.theme.button.secondary.text = customColors.secondary.variant;
 
 export const alertModal = (message: string, title?: string) => {
   // console.log("message", message);

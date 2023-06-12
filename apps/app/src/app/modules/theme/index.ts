@@ -5,7 +5,7 @@ const applyCustomSharedLibTheme = (androidAPPInfo: IAndroidAppInfo) => {
   import(
     /* webpackMode: "lazy" */
     /* webpackChunkName: "theme" */
-    `../../../environments/theme/${androidAPPInfo.environment}/v${androidAPPInfo.uiVersion}/theme`).then(
+    `../../../environments/theme/styledComponentTheme`).then(
     (content) => {
       window.theme = content.themeConfig;
     }

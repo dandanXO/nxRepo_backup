@@ -1,6 +1,6 @@
 import { Colors, IThemeConfig, fontSizeListToRem } from '@frontend/mobile/shared/ui';
 
-import theme from './tailwind.theme';
+import theme from './india/v55/tailwind.theme';
 
 export const themeConfig: IThemeConfig = {
   // NOTE: Commons
@@ -50,4 +50,5 @@ export const themeConfig: IThemeConfig = {
       text: '#FFFFFF',
     },
   },
+
 };
