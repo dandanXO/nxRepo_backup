@@ -22,7 +22,7 @@ type IUseFinishedBindBankAccountPage = {
   // NOTICE: Pakistan
   isLoadingPostBankBindSaveToPK?: boolean;
   postBankBindSaveToPK?: any;
-  iBanData?: InputValue<any>;
+  // iBanData?: InputValue<any>;
   // NOTE: 取得電子錢包列表
   bindCardDropListData?: GetBindCardDropListResponse;
   // NOTE: 設定電子錢包列表
@@ -106,7 +106,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
         // FIXME:
         bankName: (targetBankAccount && targetBankAccount?.bankName) || '',
         bankCode: (targetBankAccount && targetBankAccount?.bankCode) || '',
-        iban: props.iBanData?.data || '',
+        // iban: props.iBanData?.data || '',
       };
       // console.log('requestBody', requestBody);
       request = props.postBankBindSaveToPK(requestBody);
@@ -146,7 +146,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
     props.bankAccountValue,
     props.isLoadingPostBankBindSave,
     props.isLoadingPostBankBindSaveToPK,
-    props.iBanData && props.iBanData.data,
+    // props.iBanData && props.iBanData.data,
   ]);
 
   return {

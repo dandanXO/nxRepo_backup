@@ -12,7 +12,7 @@ interface IUsePakistanBankAccountForm {
 export const usePakistanBankAccountForm = (props: IUsePakistanBankAccountForm) => {
   // NOTE: 帳號列表 Data
   const [bankDropList, setBankDropList] = useState<string[]>([]);
-  const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate();
+  // const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate();
   const [bankAccountValue, setBankAccountValue] = useState<{
     value: number;
     label: string;
@@ -37,16 +37,16 @@ export const usePakistanBankAccountForm = (props: IUsePakistanBankAccountForm) =
   }, []);
 
   const confirm = () => {
-    return validateIban();
+    // return validateIban();
   };
 
   return {
     bankDropList,
     bankAccountValue,
     onIFSCDropSelect,
-    iBanData,
-    onIBanChange,
-    onIbanBlur,
+    // iBanData,
+    // onIBanChange,
+    // onIbanBlur,
     confirm,
   };
 };
