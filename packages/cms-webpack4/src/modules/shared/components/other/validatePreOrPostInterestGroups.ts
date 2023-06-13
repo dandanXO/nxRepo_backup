@@ -16,7 +16,7 @@ export const validateNum = (value, errorText) => {
 export const validateplusAmount = (value, errorText) => {
     return value !== 0 && !value ? errorText
         : isNaN(value) ? "请输入數字"
-            : Number(value) < 0 ? "请输入大于0的整数" : '';
+            : Number(value) <= 0 ? "请输入大于0的整数" : '';
 }
 
 const genErrors = (field) => {
