@@ -95,7 +95,7 @@ module.exports = {
   plugins: [
     // require("daisyui")
     plugin(function ({ addUtilities, addComponents, addVariant, e }) {
-    
+
       addComponents({
           '.open-index-button': {
               backgroundColor: 'var(--custom_bg_homepage_button)',
