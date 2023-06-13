@@ -4,7 +4,7 @@ import { PageContainer } from "@ant-design/pro-components";
 import { useTranslation } from "react-i18next";
 import { itemRender } from "../../../../shared/components/common/itemRender";
 import {Tabs, Tag} from "antd";
-import {DescriptionsCard} from "../../../../shared/components/withQueryHook";
+import {DescriptionsCard} from "../../../../shared/components/withQueryHook/Cards";
 import {useGetCollectTodayOrderDetailQuery, useGetCollectTodayUserDetailQuery} from "../../../api/CollectTodayApi";
 import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
 import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";

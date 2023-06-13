@@ -1,9 +1,9 @@
 import React from "react";
 import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {useTranslation} from "react-i18next";
-import {i18nDescriptionsCard} from "./i18n/translations";
-import {InformationCard} from "../../Cards";
+import {InformationCard} from "../../../Cards";
 import {Descriptions as AntDescriptions } from "antd";
+import {i18nCards} from "../../../i18n/cards/translations";
 
 const { Item } = AntDescriptions;
 
@@ -22,7 +22,7 @@ export const DescriptionsCard = ({
    titleKey, descriptions, hook, params = {}
 }:IDescriptionsCardProps) => {
 
-    const { t } = useTranslation(i18nDescriptionsCard.namespace)
+    const { t } = useTranslation(i18nCards.namespace)
     const { data, isFetching } = hook(params)
 
     if(isFetching) return null;
