@@ -5,7 +5,7 @@ export interface GetTodayPhoneUrgeListQueryString {
     collectorId?: number;   // 跟進人員ID
     followUpResult?: string;    // 跟進結果
     merchantId?: number;    // 商戶ID
-    overDueTag?: string;    // 逾期訂單標籤
+    orderLabel?: string;    // 逾期訂單標籤
     overdueDays?: number;   // 逾期天數
     phone?: string;     // 用户手机号
     stage?: string;     // 催收阶段(逾期阶段)
@@ -28,7 +28,7 @@ export interface TodayPhoneUrgeListItem {
     orderLabel?: string,    // 订单标签
     orderNo?: string,       // 订单编号
     outstandingBalance?: string,    // 当前帐单金额
-    overDueId?: number,     // 逾期訂單ID
+    collectId?: number,     // 催收ID
     overdueDays?: number,   // 逾期天数
     phone?: string,     // 手机号
     ptpTime?: string,   // PTP时间

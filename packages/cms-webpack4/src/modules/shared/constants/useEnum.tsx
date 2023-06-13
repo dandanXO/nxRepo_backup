@@ -46,5 +46,16 @@ export const useEnum = () => {
         T_1: { text: 'T-1'}
     }
 
-    return { OrderLabelEnum, OrderStatusEnum, CurrentDayOverDueStageEnum, OverDueStageEnum}
+    const FollowUpResultEnum = {
+        '': { text: t('noRestriction') },
+        Promise: { text: t('followUpResultStatus.Promise'), color: '#1890FF'},
+        FinancialDifficulties: { text: t('followUpResultStatus.FinancialDifficulties'), color: '#13C2C2'},
+        Missed: { text: t('followUpResultStatus.Missed'), color: 'orange'},
+        TurnedOff: { text: t('followUpResultStatus.TurnedOff'), color: 'orange'},
+        InvalidPhoneNumber: { text: t('followUpResultStatus.InvalidPhoneNumber'), color: 'black'},
+        BadAttitude: { text: t('followUpResultStatus.BadAttitude'), color: 'black'},
+        Other: { text: t('followUpResultStatus.Other'), color: 'black'},
+    }
+
+    return { OrderLabelEnum, OrderStatusEnum, CurrentDayOverDueStageEnum, OverDueStageEnum, FollowUpResultEnum}
 }

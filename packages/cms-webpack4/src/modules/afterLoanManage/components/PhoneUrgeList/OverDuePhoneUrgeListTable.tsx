@@ -18,7 +18,7 @@ import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
 const { Text } = Typography
 
 const initSearchList = {
-    appName: '', collectorId: '', followUpResult: '', merchantId: '', overDueTag: '', overdueDays: '', phone: '', stage: '', userName: '', pageNum: 1, pageSize: 10
+    appName: '', collectorId: '', followUpResult: '', merchantId: '', orderLabel: '', overdueDays: '', phone: '', stage: '', userName: '', pageNum: 1, pageSize: 10
 }
 
 const searchSpan  = {
@@ -46,7 +46,7 @@ export const OverDuePhoneUrgeListTable = () => {
     const { data: collectorData } = useGetOverDueCollectorListQuery(null);
 
     const { t } = useTranslation(i18nUrgeCollection.namespace)
-    const { OrderLabelEnum, OverDueStageEnum } = useEnum();
+    const { OrderLabelEnum, OverDueStageEnum, FollowUpResultEnum } = useEnum();
     const history = useHistory();
     const location = useLocation();
 
@@ -58,17 +58,6 @@ export const OverDuePhoneUrgeListTable = () => {
         acc.set(current.collectorId, { text: current.collectorName})
         return acc
     }, new Map().set('', { text: t('noRestriction') }))
-
-    const followUpResultEnum = {
-        '': { text: t('noRestriction') },
-        Promise: { text: t('followUpResultStatus.Promise'), color: '#1890FF'},
-        FinancialDifficulties: { text: t('followUpResultStatus.FinancialDifficulties'), color: '#13C2C2'},
-        Missed: { text: t('followUpResultStatus.Missed'), color: 'orange'},
-        TurnedOff: { text: t('followUpResultStatus.TurnedOff'), color: 'orange'},
-        InvalidPhoneNumber: { text: t('followUpResultStatus.InvalidPhoneNumber'), color: 'black'},
-        BadAttitude: { text: t('followUpResultStatus.BadAttitude'), color: 'black'},
-        Other: { text: t('followUpResultStatus.Other'), color: 'black'},
-    }
 
     const columns: ProColumns[] = [
         {
@@ -85,13 +74,15 @@ export const OverDuePhoneUrgeListTable = () => {
             title: t('orderLabel'),
             dataIndex: 'orderLabel',
             key: 'orderLabel',
+            initialValue: searchParams.orderLabel || '',
+            valueType: 'select',
+            valueEnum: OrderLabelEnum,
+            fieldProps: { allowClear:  false },
             render: (_, { orderLabel }) => {
                 const orderLabelStatus = OrderLabelEnum[orderLabel];
                 return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus.color}>{orderLabelStatus.text}</Tag>: '-'}</div>
             },
-            hideInSearch: true
         },
-        { title: t('orderLabel'), dataIndex: 'overDueTag', key: 'overDueTag', initialValue: searchParams.overDueTag || '', hideInTable: true, valueType: 'select', valueEnum: OrderLabelEnum, fieldProps: { allowClear:  false } },
         { title: t('userName'), dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || '' },
         { title: t('phone'), dataIndex: 'phone', key: 'phone', initialValue: searchParams.phone || '', render: (_, { phone }) => <Typography>{phone.substring(0, 3) + "*".repeat(phone.length - 6) + phone.substring(phone.length - 3)}</Typography>},
         {
@@ -118,9 +109,9 @@ export const OverDuePhoneUrgeListTable = () => {
             key: 'followUpResult',
             initialValue: searchParams.followUpResult || '',
             valueType: 'select',
-            valueEnum: followUpResultEnum,
+            valueEnum: FollowUpResultEnum,
             render: (_, { followUpResult }) => {
-                const followUpResultStatus = followUpResultEnum[followUpResult]
+                const followUpResultStatus = FollowUpResultEnum[followUpResult]
                 return <Text style={{ color: followUpResultStatus.color }}>{followUpResultStatus.text}</Text>
             },
             fieldProps: {

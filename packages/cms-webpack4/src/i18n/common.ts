@@ -33,6 +33,19 @@ export const i18nCommon: i18nComponent = {
                 newLoan: '首贷',
                 reLoan: '复贷',
                 extension: '展期'
+            },
+            followUpResultStatus: {
+                Promise: 'PTP',
+                FinancialDifficulties: '财务困难',
+                Missed: '未接',
+                TurnedOff: '关机',
+                InvalidPhoneNumber: '无效号码',
+                BadAttitude: '态度恶劣',
+                Other: '其他',
+            },
+            pagination : {
+                showingRange: "共 {{total}} 笔",
+                itemPerPage: ' / 页',
             }
         },
         "en-US": {
@@ -65,6 +78,19 @@ export const i18nCommon: i18nComponent = {
                 newLoan: 'New Loan',
                 reLoan: 'Re-Loan',
                 extension: 'Extension'
+            },
+            followUpResultStatus: {
+                Promise: 'PTP',
+                FinancialDifficulties: 'Financial Difficulties',
+                Missed: 'Missed',
+                TurnedOff: 'Turned Off',
+                InvalidPhoneNumber: 'Invalid Phone Number',
+                BadAttitude: 'Bad Attitude',
+                Other: 'Other',
+            },
+            pagination : {
+                showingRange : "Total {{total}} Record(s)",
+                itemPerPage: ' / Page',
             }
         }
     }

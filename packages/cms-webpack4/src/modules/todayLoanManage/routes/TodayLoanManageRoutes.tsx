@@ -6,7 +6,7 @@ import { OrderDetail } from "../components/TodayPhoneUrgeList/OrderDetail";
 const TodayLoanManageRoutes = () => (
     <Switch>
         <Route exact path={"/todayLoanManage/todayPhoneUrgeList"} component={TodayPhoneUrgeList}/>
-        <Route path={"/todayLoanManage/todayPhoneUrgeList/detail/:userId/:orderId"} component={OrderDetail}/>
+        <Route path={"/todayLoanManage/todayPhoneUrgeList/detail/:userId/:collectId"} component={OrderDetail}/>
     </Switch>
 )
 

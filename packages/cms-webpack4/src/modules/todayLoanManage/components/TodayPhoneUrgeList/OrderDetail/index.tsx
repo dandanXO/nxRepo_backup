@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { PageContainer } from "@ant-design/pro-components";
 import { useTranslation } from "react-i18next";
 import { itemRender } from "../../../../shared/components/common/itemRender";
-import {Tabs, Tag} from "antd";
+import {Tabs, Tag, Tooltip} from "antd";
 import {DescriptionsCard} from "../../../../shared/components/withQueryHook/Cards";
 import {
     useGetCollectTodayOrderDetailQuery,
@@ -15,14 +15,17 @@ import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";
 import {formatPrice} from "../../../../shared/utils/format/formatPrice";
 import {useEnum} from "../../../../shared/constants/useEnum";
 import {TableCard} from "../../../../shared/components/withQueryHook/Cards/TableCard";
+import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
+import moment from "moment-timezone";
+import {InfoCircleOutlined} from "@ant-design/icons";
 
 export const OrderDetail = () => {
-    const urlParams=useParams<{ userId: string, orderId: string}>()
-    const { t } = useTranslation();
-    const { OrderStatusEnum, OrderLabelEnum} = useEnum();
+    const urlParams=useParams<{ userId: string, collectId: string}>()
+    const { t } = useTranslation(i18nUrgeCollection.namespace);
+    const { OrderStatusEnum, OrderLabelEnum, FollowUpResultEnum} = useEnum();
 
     const userId = Number(urlParams.userId);
-    const orderId = Number(urlParams.orderId);
+    const collectId = Number(urlParams.collectId);
     const isSuperAdmin = getIsSuperAdmin();
 
     const orderInfoDescriptions = [
@@ -48,14 +51,37 @@ export const OrderDetail = () => {
         })
     }
 
+    const collectRecordColumns = [
+        { title: t('trackingTime'), key: 'trackingTime', dataIndex: 'trackingTime', render: (_, { trackingTime }) =><div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+        { title: t('stage'), key: 'overdueStage', dataIndex: 'overdueStage' },
+        { title: t('contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson' },
+        { title: t('phone'), key: 'mobileNumber', dataIndex: 'mobileNumber' },
+        {
+            title: t('followUpResult'),
+            key: 'followUpResult',
+            dataIndex: 'followUpResult',
+            render: (_, { followUpResult }) => {
+                const followUpResultStatus = FollowUpResultEnum[followUpResult]
+                return <div>{followUpResultStatus.text}</div>
+            }
+        },
+        {
+            title: ()=><div>{t('ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
+            key: 'ptpTime',
+            dataIndex: 'ptpTime'
+        },
+        { title: t('trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord' },
+        { title: t('collectorName'), key: 'collector', dataIndex: 'collector' },
+    ]
+
     const registerDescriptions = [
         { key: 'phoneNo', dataIndex: 'result.name' },
     ]
 
     const OrderInfoTab = () => (
         <div style={{ margin: '16px' }}>
-            <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{orderId}} />
-            <TableCard titleKey='urgeRecord' columns={[]} hook={useLazyGetCollectTodayCollectRecordQuery} />
+            <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{collectId}} />
+            <TableCard titleKey='urgeRecord' columns={collectRecordColumns} hook={useLazyGetCollectTodayCollectRecordQuery} queryBody={{collectId}} rowKey='' />
         </div>
     )
 

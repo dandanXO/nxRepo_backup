@@ -2,7 +2,7 @@ import { API } from "../../shared/api";
 import { GetTodayCollectorListResponse } from "./types/getTodayCollectorList";
 import {GetOrderDetailQueryString, GetOrderDetailResponse} from "./types/getOrderDetail";
 import {GetUserDetailQueryString, GetUserDetailResponse} from "./types/getUserDetail";
-import {GetTodayCollectRecordQueryObject, GetTodayCollectRecordResponse} from "./types/getTodayCollectRecord";
+import {GetTodayCollectRecordQueryString, GetTodayCollectRecordResponse} from "./types/getTodayCollectRecord";
 
 
 const CollectTodayApi = API.injectEndpoints({
@@ -18,7 +18,7 @@ const CollectTodayApi = API.injectEndpoints({
         // [GET] 获取當日催收訂單詳情
         getCollectTodayOrderDetail: builder.query<GetOrderDetailResponse, GetOrderDetailQueryString>({
             query: (requestBody: GetOrderDetailQueryString) => ({
-                url: `/collect-overdue/detail/${requestBody.orderId}`,
+                url: `/collect-today/detail/${requestBody.collectId}`,
                 method: 'get'
             })
         }),
@@ -31,12 +31,15 @@ const CollectTodayApi = API.injectEndpoints({
             })
         }),
         // [GET] 获取當日催收催收紀錄
-        getCollectTodayCollectRecord: builder.query<GetTodayCollectRecordResponse, GetTodayCollectRecordQueryObject>({
-            query: (requestBody: GetTodayCollectRecordQueryObject) => ({
-                url: `/collect-overdue/collect-records/${requestBody.body.overdueId}`,
-                params: requestBody.string,
-                method: 'get'
-            })
+        getCollectTodayCollectRecord: builder.query<GetTodayCollectRecordResponse, GetTodayCollectRecordQueryString>({
+            query: (requestBody: GetTodayCollectRecordQueryString) => {
+                const { collectId, ...rest} = requestBody;
+                return ({
+                    url: `/collect-today/collect-records/${collectId}`,
+                    params: rest,
+                    method: 'get'
+                })
+            }
         })
     })
 })

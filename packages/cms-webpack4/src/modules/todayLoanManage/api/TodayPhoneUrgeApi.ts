@@ -11,7 +11,7 @@ const TodayPhoneUrgeApi = API.injectEndpoints({
         // [GET] 當日電催列表
         getTodayPhoneUrgeList: builder.query<GetTodayPhoneUrgeListResponse, GetTodayPhoneUrgeListQueryString>({
             query: (requestBody: GetTodayPhoneUrgeListQueryString) => ({
-                url: '/collect-overdue/phone-urge/list',
+                url: '/collect-today/phone-urge/list',
                 params: requestBody,
                 method: 'get'
             })

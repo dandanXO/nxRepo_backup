@@ -5,7 +5,7 @@ export interface GetOverDuePhoneUrgeListQueryString {
     collectorId?: number;   // 跟進人員ID
     followUpResult?: string;    // 跟進結果
     merchantId?: number;    // 商戶ID
-    overDueTag?: string;    // 逾期訂單標籤
+    orderLabel?: string;    // 逾期訂單標籤
     overdueDays?: number;   // 逾期天數
     phone?: string;     // 用户手机号
     stage?: string;     // 催收阶段(逾期阶段)

@@ -26,20 +26,13 @@ export const i18nUrgeCollection: i18nComponent = {
             followUpCount: '跟进次数',
             contactable: '是否可联',
             followUpResult: '跟进结果',
-            followUpResultStatus: {
-                Promise: 'PTP',
-                FinancialDifficulties: '财务困难',
-                Missed: '未接',
-                TurnedOff: '关机',
-                InvalidPhoneNumber: '无效号码',
-                BadAttitude: '态度恶劣',
-                Other: '其他',
-            },
             ptpTime: 'PTP时间',
             ptpTimeTooltip: 'PTP = Promise To Pay\n承诺还款',
             trackingRecord: '跟进纪录',
             recentTrackingTime: '上次跟进时间',
             collectorName: '跟进人',
+            trackingTime: '跟进时间',
+            contactPerson: '跟进对象'
         },
         "en-US": {
             function: 'Function',
@@ -63,20 +56,13 @@ export const i18nUrgeCollection: i18nComponent = {
             followUpCount: 'Follow-up Count',
             contactable: 'Contactable',
             followUpResult: 'Follow-up Result',
-            followUpResultStatus: {
-                Promise: 'PTP',
-                FinancialDifficulties: 'Financial Difficulties',
-                Missed: 'Missed',
-                TurnedOff: 'Turned Off',
-                InvalidPhoneNumber: 'Invalid Phone Number',
-                BadAttitude: 'Bad Attitude',
-                Other: 'Other',
-            },
             ptpTime: 'PTP Time',
             ptpTimeTooltip: 'PTP = Promise To Pay',
             trackingRecord: 'Tracking Record',
             recentTrackingTime: 'Recent Tracking Time',
             collectorName: 'Collector',
+            trackingTime: 'Tracking Time',
+            contactPerson: 'Contact Person'
         }
     }
 }
