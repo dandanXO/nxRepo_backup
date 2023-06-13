@@ -4,7 +4,7 @@ import { PageContainer } from "@ant-design/pro-components";
 import { useTranslation } from "react-i18next";
 import { itemRender } from "../../../../shared/components/common/itemRender";
 import {Tabs, Tag} from "antd";
-import {Descriptions} from "../../../../shared/components/withQueryHook";
+import {DescriptionsCard} from "../../../../shared/components/withQueryHook";
 import {useGetCollectTodayOrderDetailQuery, useGetCollectTodayUserDetailQuery} from "../../../api/CollectTodayApi";
 import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
 import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";
@@ -49,13 +49,13 @@ export const OrderDetail = () => {
 
     const OrderInfoTab = () => (
         <div style={{ margin: '16px' }}>
-            <Descriptions titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{orderId}} />
+            <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{orderId}} />
         </div>
     )
 
     const UserInfoTab = () => (
         <div style={{ margin: '16px' }}>
-            <Descriptions titleKey={'registerInfo'} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+            <DescriptionsCard titleKey={'registerInfo'} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
         </div>
     )
 

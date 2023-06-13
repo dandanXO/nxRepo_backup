@@ -1,8 +1,8 @@
-import { i18nComponent } from "../../../../../i18n/i18nComponent";
+import {i18nComponent} from "../i18nComponent";
 
 
-export const i18nOverDuePhoneUrgeList: i18nComponent = {
-    namespace: 'i18nOverDuePhoneUrgeList',
+export const i18nUrgeCollection: i18nComponent = {
+    namespace: 'i18nUrgeCollection',
     translation: {
         "zh-CN": {
             function: '操作',

@@ -6,7 +6,6 @@ import { useLazyGetOverDuePhoneUrgeListQuery } from "../../api/OverDuePhoneUrgeA
 import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
 import { useGetOverDueCollectorListQuery } from "../../api/OverDueCollectorApi";
 import { useTranslation } from "react-i18next";
-import { i18nOverDuePhoneUrgeList } from "./i18n/translations";
 import { useHistory, useLocation } from "react-router-dom";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
@@ -14,6 +13,7 @@ import moment from "moment-timezone";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import { OverDuePhoneUrgeListItem } from "../../api/types/getOverDuePhoneUrgeList";
 import {useEnum} from "../../../shared/constants/useEnum";
+import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
 
 const { Text } = Typography
 
@@ -45,7 +45,7 @@ export const OverDuePhoneUrgeListTable = () => {
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum()
     const { data: collectorData } = useGetOverDueCollectorListQuery(null);
 
-    const { t } = useTranslation(i18nOverDuePhoneUrgeList.namespace)
+    const { t } = useTranslation(i18nUrgeCollection.namespace)
     const { OrderLabelEnum, OverDueStageEnum } = useEnum();
     const history = useHistory();
     const location = useLocation();

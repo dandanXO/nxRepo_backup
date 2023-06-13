@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
 import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
 import { useTranslation } from "react-i18next";
-import { i18nTodayPhoneUrgeList } from "./i18n/translations";
 import { useHistory, useLocation } from "react-router-dom";
 import { Button, Space, Tag, Tooltip, Typography } from "antd";
 import { TodayPhoneUrgeListItem } from "../../api/types/getTodayPhoneUrgeList";
@@ -14,6 +13,7 @@ import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum"
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
 import { useGetTodayCollectorListQuery } from "../../api/CollectTodayApi";
 import {useEnum} from "../../../shared/constants/useEnum";
+import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
 
 const { Text } = Typography
 
@@ -46,7 +46,7 @@ export const TodayPhoneUrgeListTable = () => {
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum()
     const { data: collectorData } = useGetTodayCollectorListQuery(null);
 
-    const { t }= useTranslation(i18nTodayPhoneUrgeList.namespace)
+    const { t }= useTranslation(i18nUrgeCollection.namespace)
     const { OrderLabelEnum, CurrentDayOverDueStageEnum } = useEnum();
     const history = useHistory();
     const location = useLocation();

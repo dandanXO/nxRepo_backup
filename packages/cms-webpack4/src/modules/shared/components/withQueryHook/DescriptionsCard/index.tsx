@@ -1,13 +1,13 @@
 import React from "react";
 import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {useTranslation} from "react-i18next";
-import {i18nDescriptions} from "./i18n/translations";
+import {i18nDescriptionsCard} from "./i18n/translations";
 import {InformationCard} from "../../Cards";
 import {Descriptions as AntDescriptions } from "antd";
 
 const { Item } = AntDescriptions;
 
-interface IDescriptions {
+interface IDescriptionsCardProps {
     titleKey: string,
     descriptions: {
         key: string,
@@ -18,11 +18,11 @@ interface IDescriptions {
     params?: any,
 }
 
-export const Descriptions = ({
+export const DescriptionsCard = ({
    titleKey, descriptions, hook, params = {}
-}:IDescriptions) => {
+}:IDescriptionsCardProps) => {
 
-    const { t } = useTranslation(i18nDescriptions.namespace)
+    const { t } = useTranslation(i18nDescriptionsCard.namespace)
     const { data, isFetching } = hook(params)
 
     if(isFetching) return null;

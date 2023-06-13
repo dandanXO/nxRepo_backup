@@ -10,8 +10,8 @@ const amountUnitMap = {
 const amountUnit = amountUnitMap[appInfo.COUNTRY]
 
 
-export const i18nDescriptions: i18nComponent = {
-    namespace: 'i18nDescriptions',
+export const i18nDescriptionsCard: i18nComponent = {
+    namespace: 'i18nDescriptionsCard',
     translation: {
         "zh-CN": {
             orderInfo: '订单信息',

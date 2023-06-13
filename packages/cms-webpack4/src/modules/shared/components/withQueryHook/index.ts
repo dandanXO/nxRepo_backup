@@ -1,1 +1,1 @@
-export { Descriptions } from './Descriptions'
+export { DescriptionsCard } from './DescriptionsCard'
