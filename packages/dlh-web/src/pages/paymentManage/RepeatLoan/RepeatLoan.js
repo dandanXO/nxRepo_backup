@@ -87,6 +87,14 @@ class RepeatLoan extends Component {
                 title: props.intl.formatMessage({ id: "page.table.card.data.update.time" }),
                 dataIndex: 'lastBindBankCardTime',
                 key: 'lastBindBankCardTime',
+                render(text, record) {
+                  const lastBindBankCardTimeIsAfterSuspendTime  = moment(text).isAfter(moment(record.suspendTime));
+                  if(lastBindBankCardTimeIsAfterSuspendTime) {
+                    return <div style={{color: "#1890FF"}}>{text}</div>
+                  } else {
+                    return text;
+                  }
+                }
             },
             {
                 title: props.intl.formatMessage({ id: "page.search.list.appication.time" }),
@@ -204,7 +212,7 @@ class RepeatLoan extends Component {
             cancelText: intl.formatMessage({ id: "page.table.cancel" }),
             icon: <Icon type="info-circle" theme="twoTone" twoToneColor={'#FAAD14'} />,
             onOk: () => {
-               
+
                 this.setState({ batchReloanBtnDisabled: true });
                 let selectedOrderNos = data.filter(row => selectKeys.includes(row.id)).map(row => row.orderNo);
                 batchReLoan({ orderNos: selectedOrderNos }, () => {
@@ -219,7 +227,7 @@ class RepeatLoan extends Component {
     loanBatchRefuse = () => {
         const _this = this;
         const { selectKeys, intl, batchRefuseLoan, getTableData, tableData: { data } } = this.props;
-       
+
          // 是否有选中订单
          const isSelected = selectKeys.length > 0;
          if (!isSelected) {
@@ -234,7 +242,7 @@ class RepeatLoan extends Component {
             cancelText: intl.formatMessage({ id: "page.table.cancel" }),
             icon: <Icon type="info-circle" theme="twoTone" twoToneColor={'#FAAD14'} />,
             onOk: () => {
-               
+
                 _this.setState({ batchLoanRefuseDisabled: true });
 
                 let selectedOrderNos = data.filter(row => selectKeys.includes(row.id)).map(row => row.orderNo);
