@@ -10,7 +10,7 @@ export const AuthenticationSection = () => {
   };
   return (
     <div className={'authentication'}>
-      <Button onClick={onClick} dataTestingID={'limit-button'} text={'Get my limit'} />
+      <Button className='open-index-button border-0' onClick={onClick} dataTestingID={'limit-button'} text={'Get my limit'} />
     </div>
   );
 };

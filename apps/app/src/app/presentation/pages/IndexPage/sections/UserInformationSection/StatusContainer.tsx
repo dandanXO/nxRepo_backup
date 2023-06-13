@@ -15,7 +15,7 @@ export const StatusContainer = (props: Props) => {
   return (
     <div
       className={cx('loan-amount flex w-full flex-col rounded-t-lg p-2', {
-        'bg-[#D9D9D9]':
+        'bg-cstate-disable-main':
           props.pageState === PageStateEnum.UserAuthing ||
           props.pageState === PageStateEnum.UserRejected ||
           props.state.order.state === ORDER_STATE.hasOverdueOrder ||
@@ -23,7 +23,7 @@ export const StatusContainer = (props: Props) => {
           props.state.riskControl.state === RISK_CONTROL_STATE.empty_quota ||
           props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able||
           props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_over_3 ,
-        'bg-orange-400':
+        'bg-primary-main':
           props.pageState !== PageStateEnum.UserAuthing &&
           props.pageState !== PageStateEnum.UserRejected &&
           props.state.order.state !== ORDER_STATE.hasOverdueOrder &&

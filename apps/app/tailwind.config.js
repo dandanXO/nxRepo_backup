@@ -36,6 +36,7 @@ module.exports = {
       secondary: {
         main: 'var(--secondary_main)',
         variant: 'var(--secondary_variant)',
+        assistant: 'var(--secondary_assistant)',
       },
       tertiary: {
         main: 'var(--tertiary_main)',
@@ -94,25 +95,66 @@ module.exports = {
   plugins: [
     // require("daisyui")
     plugin(function ({ addUtilities, addComponents, addVariant, e }) {
-      // addVariant('abc',['bg-gradient-to-b from-[#18A851] to-[#138641]'])
-      // addVariant('data-active', ({ modifySelectors, separator }) => {
-      //     modifySelectors(({ className }) => {
-      //       return `.${e(`data-active${separator}${className}`)}[data-active="true"]
 
-      //       `;
-      //     })
-      //   });
-      //   addVariant('bbb-gradient', ['&:bg-gradient-to-b', '&:from-[#18A851]', '&:to-[#138641]'])
       addComponents({
-        '.open-index-button': {
-          backgroundColor: 'var(--custom_bg_homepage_button)',
-        },
-      });
-      // addUtilities({
-      //     '.open-index-button': {
-      //         backgroundColor:  'var(--custom_bg_homepage_button)',
-      //     },
-      // })
+          '.open-index-button': {
+              backgroundColor: 'var(--custom_bg_homepage_button)',
+          },
+          // 拉霸
+          '.slider': {
+              width: '100%',
+              '.quota-slider': {
+                  height: '5px',
+              },
+              '.quota-slider-track-1': {
+                  background: 'var(--primary_variant)',
+                  height: '5px',
+                  borderRadius: '8px',
+              },
+              '.quota-slider-track-0': {
+                  background: 'var(--custom_bg_secondary)',
+                  height: '5px',
+                  borderRadius: '8px',
+              },
+              '.quota-slider-track-disable-1': {
+                  background: 'var(--custom_bg_secondary)',
+                  height: '5px',
+                  borderRadius: '8px',
+              },
+              // NOTE: 拉霸按鈕
+              '.quota-slider-thumb': {
+                  '&:focus': {
+                      outline: 'none',
+                      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                  },
+                  background: '#fff',
+                  width: '18px',
+                  height: '18px',
+
+                  top: '-7px',
+                  textAlign: 'center',
+                  lineHeight: '25px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+
+                  // NOTE: 拉霸按鈕-內圓
+                  '.quota-slider-thumb-inner': {
+                      background: 'var(--custom_state_success_main)',
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                  },
+                  '.quota-slider-thumb-inner-disable': {
+                      background: 'var(--custom_state_disable_main)',
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                  },
+              }
+          }
+      })
     }),
   ],
   safelist: ['border-l-2', 'border-dashed'],
