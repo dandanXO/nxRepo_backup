@@ -10,6 +10,7 @@ const { Item } = AntDescriptions;
 interface IDescriptionsCardProps {
     titleKey: string,
     descriptions: {
+        titleTooltip?: React.ReactNode,
         key: string,
         dataIndex: string; // [useQuery 返回的object的key，多層用.區隔]
         render?: (value:any, data: any) => React.ReactElement
@@ -33,7 +34,7 @@ export const DescriptionsCard = ({
                 {descriptions.map((part) => {
 
                     return (
-                        <Item key={part.key} label={t(part.key)}>{
+                        <Item key={part.key} label={(part.titleTooltip && <div>{t(part.key)}{part.titleTooltip}</div>) || t(part.key)}>{
                             (part.render && part.render(data[part.dataIndex], data)) ||
                             data[part.dataIndex] ||
                             '-'}

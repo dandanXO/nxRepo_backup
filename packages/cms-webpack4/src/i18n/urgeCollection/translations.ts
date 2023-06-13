@@ -32,7 +32,10 @@ export const i18nUrgeCollection: i18nComponent = {
             recentTrackingTime: '上次跟进时间',
             collectorName: '跟进人',
             trackingTime: '跟进时间',
-            contactPerson: '跟进对象'
+            contactPerson: '跟进对象',
+            tooltip: {
+                amountDue: '应还金额=申请金额*(1+后置费率)'
+            }
         },
         "en-US": {
             function: 'Function',
@@ -62,7 +65,10 @@ export const i18nUrgeCollection: i18nComponent = {
             recentTrackingTime: 'Recent Tracking Time',
             collectorName: 'Collector',
             trackingTime: 'Tracking Time',
-            contactPerson: 'Contact Person'
+            contactPerson: 'Contact Person',
+            tooltip: {
+                amountDue: '=Loan Amount*(1+Post-Fee Rate)'
+            }
         }
     }
 }

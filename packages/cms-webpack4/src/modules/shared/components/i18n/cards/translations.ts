@@ -50,7 +50,7 @@ export const i18nCards: i18nComponent = {
             orderLabel: 'Order Label',
             loanAmount: 'Loan Amount',
             disburseAmount: `Disbursal Amount(${amountUnit})`,
-            amountDue: `Disbursal Amount(${amountUnit})`,
+            amountDue: `Amount Due(${amountUnit})`,
             reductionAmount: `Reduction Amount(${amountUnit})`,
             amountPaid: `Amount Paid(${amountUnit})`,
             outstandingBalance: `Outstanding Balance(${amountUnit})`,
