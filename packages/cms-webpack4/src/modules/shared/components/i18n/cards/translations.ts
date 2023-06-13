@@ -35,6 +35,8 @@ export const i18nCards: i18nComponent = {
             expirationTime: '到期时间',
             mobileNumber: '手机号',
 
+            urgeRecord: '催收纪录',
+
             registerInfo: '注册信息',
         },
         "en-US": {
@@ -59,6 +61,8 @@ export const i18nCards: i18nComponent = {
             reviewTime: 'Review Time',
             expirationTime: 'Expiration Time',
             mobileNumber: 'Mobile Number',
+
+            urgeRecord: 'Collections Record',
 
             registerInfo: 'Registration information',
         }

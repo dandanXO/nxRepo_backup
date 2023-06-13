@@ -5,11 +5,16 @@ import { useTranslation } from "react-i18next";
 import { itemRender } from "../../../../shared/components/common/itemRender";
 import {Tabs, Tag} from "antd";
 import {DescriptionsCard} from "../../../../shared/components/withQueryHook/Cards";
-import {useGetCollectTodayOrderDetailQuery, useGetCollectTodayUserDetailQuery} from "../../../api/CollectTodayApi";
+import {
+    useGetCollectTodayOrderDetailQuery,
+    useGetCollectTodayUserDetailQuery,
+    useLazyGetCollectTodayCollectRecordQuery
+} from "../../../api/CollectTodayApi";
 import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
 import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";
 import {formatPrice} from "../../../../shared/utils/format/formatPrice";
 import {useEnum} from "../../../../shared/constants/useEnum";
+import {TableCard} from "../../../../shared/components/withQueryHook/Cards/TableCard";
 
 export const OrderDetail = () => {
     const urlParams=useParams<{ userId: string, orderId: string}>()
@@ -50,6 +55,7 @@ export const OrderDetail = () => {
     const OrderInfoTab = () => (
         <div style={{ margin: '16px' }}>
             <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{orderId}} />
+            <TableCard titleKey='urgeRecord' columns={[]} hook={useLazyGetCollectTodayCollectRecordQuery} />
         </div>
     )
 
