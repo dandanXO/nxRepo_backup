@@ -1,5 +1,4 @@
-import { i18nComponent } from "../../../../../../i18n/i18nComponent";
-
+import {i18nComponent} from "../../../../../i18n/i18nComponent";
 
 const amountUnitMap = {
     India: '₹',
@@ -10,8 +9,8 @@ const amountUnitMap = {
 const amountUnit = amountUnitMap[appInfo.COUNTRY]
 
 
-export const i18nDescriptionsCard: i18nComponent = {
-    namespace: 'i18nDescriptionsCard',
+export const i18nCards: i18nComponent = {
+    namespace: 'i18nCards',
     translation: {
         "zh-CN": {
             orderInfo: '订单信息',
