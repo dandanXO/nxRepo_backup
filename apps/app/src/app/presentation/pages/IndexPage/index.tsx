@@ -474,7 +474,7 @@ const onUserClickViewApplicationProgress = () => {
             (indexPageState.indexAPI?.availableAmount ?? 0) > 0 &&
             indexPageState.order.state !== ORDER_STATE.hasOverdueOrder  &&
             (indexPageState.indexAPI?.products?.length?? 0) > 0  && (
-              <div className={'mb-4 mt-6'}>
+              <div className={'mt-6 mb-[-20px]'}>
                 {/*NOTE: 顯示推薦產品列表*/}
                 <RecommendedProductsSection state={indexPageState} calculatingProducts={calculatingProducts || []} />
                 <Horizontal />
@@ -493,7 +493,7 @@ const onUserClickViewApplicationProgress = () => {
             //   indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount >= 0,
             ].some((condition) => condition === true) &&
               indexPageState.user.state === USER_AUTH_STATE.success && (
-                <div className={'mb-3 pt-5'}>
+                <div className={'mb-3 mt-8'}>
                   <LoanOverViewSection state={indexPageState} />
                 </div>
               )
@@ -544,7 +544,7 @@ const onUserClickViewApplicationProgress = () => {
       </div>
 
       {/*NOTE: 底部*/}
-      <div className={'absolute w-full bottom-[63px] px-3 py-2'}>
+      <div className={'absolute w-full bottom-[63px] px-3 py-2 '}>
         {/*// NOTE: Button - Apply Now*/}
         {!applyHide && (
           //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) &&
@@ -568,7 +568,7 @@ const onUserClickViewApplicationProgress = () => {
           />
         )}
         {isReacquireLoading && (
-          <div data-testing-id={'notice-reacquireLoading'} className={'mb-3 text-center text-xs text-gray-500'}>
+          <div data-testing-id={'notice-reacquireLoading'} className={'mb-3 text-center text-xs text-ctext-secondary'}>
             Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.
           </div>
         )}

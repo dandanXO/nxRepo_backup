@@ -538,7 +538,7 @@ describe('IndexPage', () => {
       "quotaBar": {
         "min": 1000,
         "max": 10000,
-        "current": 10000,
+        "current": 5000,
         "serial": 1000
       },
       "chargeFeeDetails": [
