@@ -9,12 +9,11 @@ import { useTranslation } from "react-i18next";
 import { i18nOverDuePhoneUrgeList } from "./i18n/translations";
 import { useHistory, useLocation } from "react-router-dom";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
-import { currentDayOverDueStageEnum, overDueStageEnum } from "../../../shared/constants/overDueStageEnum.constant";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment-timezone";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import { OverDuePhoneUrgeListItem } from "../../api/types/getOverDuePhoneUrgeList";
-import {useOrderLabelEnum} from "../../../shared/constants/useOrderLabelEnum";
+import {useEnum} from "../../../shared/constants/useEnum";
 
 const { Text } = Typography
 
@@ -47,7 +46,7 @@ export const OverDuePhoneUrgeListTable = () => {
     const { data: collectorData } = useGetOverDueCollectorListQuery(null);
 
     const { t } = useTranslation(i18nOverDuePhoneUrgeList.namespace)
-    const { OrderLabelEnum } = useOrderLabelEnum();
+    const { OrderLabelEnum, OverDueStageEnum } = useEnum();
     const history = useHistory();
     const location = useLocation();
 
@@ -101,8 +100,8 @@ export const OverDuePhoneUrgeListTable = () => {
             key: 'stage',
             initialValue: searchParams.stage || '',
             valueType: 'select',
-            valueEnum: { '': { text: t('noRestriction') }, ...overDueStageEnum},
-            render: (_, { stage }) => <Typography>{overDueStageEnum[stage].text}</Typography>,
+            valueEnum: { '': { text: t('noRestriction') }, ...OverDueStageEnum},
+            render: (_, { stage }) => <Typography>{OverDueStageEnum[stage].text}</Typography>,
             fieldProps: {
                 allowClear: false
             }

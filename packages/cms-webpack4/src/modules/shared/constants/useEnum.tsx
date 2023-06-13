@@ -1,7 +1,14 @@
 import {useTranslation} from "react-i18next";
 
-export const useOrderStatusEnum = () => {
-    const { t } = useTranslation();
+export const useEnum = () => {
+    const { t }  = useTranslation()
+
+    const OrderLabelEnum = {
+        '': { text: t('noRestriction')  },
+        'NewLoan': { text: t('orderLabelStatus.newLoan'), color:'orange'},
+        'ReLoan': { text: t('orderLabelStatus.reLoan'), color: 'blue'},
+        'Extension': { text: t('orderLabelStatus.extension'), color: 'green'}
+    }
 
     const OrderStatusEnum = appInfo.COUNTRY !== 'Bangladesh' ? {
         '': { text: t('noRestriction') },
@@ -26,5 +33,18 @@ export const useOrderStatusEnum = () => {
         '12': { text: t('orderStatus.overDue'), color: 'orange' },
     }
 
-    return { OrderStatusEnum }
+    const OverDueStageEnum = {
+        S1: { text: 'S1'},
+        S2: { text: 'S2'},
+        S3: { text: 'S3'},
+        S4: { text: 'S4'},
+        S5: { text: 'S5'},
+    }
+
+    const CurrentDayOverDueStageEnum = {
+        T0: { text: 'T0'},
+        T_1: { text: 'T-1'}
+    }
+
+    return { OrderLabelEnum, OrderStatusEnum, CurrentDayOverDueStageEnum, OverDueStageEnum}
 }

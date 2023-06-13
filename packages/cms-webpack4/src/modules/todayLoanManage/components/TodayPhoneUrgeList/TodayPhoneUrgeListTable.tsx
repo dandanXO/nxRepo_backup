@@ -8,13 +8,12 @@ import { Button, Space, Tag, Tooltip, Typography } from "antd";
 import { TodayPhoneUrgeListItem } from "../../api/types/getTodayPhoneUrgeList";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment-timezone";
-import { currentDayOverDueStageEnum } from "../../../shared/constants/overDueStageEnum.constant";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import { useLazyGetTodayPhoneUrgeListQuery } from "../../api/TodayPhoneUrgeApi";
 import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
 import { useGetTodayCollectorListQuery } from "../../api/CollectTodayApi";
-import {useOrderLabelEnum} from "../../../shared/constants/useOrderLabelEnum";
+import {useEnum} from "../../../shared/constants/useEnum";
 
 const { Text } = Typography
 
@@ -48,7 +47,7 @@ export const TodayPhoneUrgeListTable = () => {
     const { data: collectorData } = useGetTodayCollectorListQuery(null);
 
     const { t }= useTranslation(i18nTodayPhoneUrgeList.namespace)
-    const { OrderLabelEnum } = useOrderLabelEnum();
+    const { OrderLabelEnum, CurrentDayOverDueStageEnum } = useEnum();
     const history = useHistory();
     const location = useLocation();
 
@@ -102,8 +101,8 @@ export const TodayPhoneUrgeListTable = () => {
             key: 'stage',
             initialValue: searchParams.stage || '',
             valueType: 'select',
-            valueEnum: { '': { text: t('noRestriction') }, ...currentDayOverDueStageEnum},
-            render: (_, { stage }) => <Typography>{currentDayOverDueStageEnum[stage]?.text}</Typography>,
+            valueEnum: { '': { text: t('noRestriction') }, ...CurrentDayOverDueStageEnum},
+            render: (_, { stage }) => <Typography>{CurrentDayOverDueStageEnum[stage]?.text}</Typography>,
             fieldProps: {
                 allowClear: false
             }

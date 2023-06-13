@@ -8,15 +8,13 @@ import {Descriptions} from "../../../../shared/components/withQueryHook";
 import {useGetCollectTodayOrderDetailQuery, useGetCollectTodayUserDetailQuery} from "../../../api/CollectTodayApi";
 import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
 import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";
-import {useOrderLabelEnum} from "../../../../shared/constants/useOrderLabelEnum";
-import {useOrderStatusEnum} from "../../../../shared/constants/useOrderStatusEnum";
 import {formatPrice} from "../../../../shared/utils/format/formatPrice";
+import {useEnum} from "../../../../shared/constants/useEnum";
 
 export const OrderDetail = () => {
     const urlParams=useParams<{ userId: string, orderId: string}>()
     const { t } = useTranslation();
-    const { OrderLabelEnum } = useOrderLabelEnum();
-    const { OrderStatusEnum} = useOrderStatusEnum();
+    const { OrderStatusEnum, OrderLabelEnum} = useEnum();
 
     const userId = Number(urlParams.userId);
     const orderId = Number(urlParams.orderId);
