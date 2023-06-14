@@ -106,11 +106,13 @@ module.exports = {
               '.quota-slider': {
                   height: '5px',
               },
+              //NOTE: 拉霸按鈕右側捲軸
               '.quota-slider-track-1': {
                   background: 'var(--primary_variant)',
                   height: '5px',
                   borderRadius: '8px',
               },
+              //NOTE: 拉霸按鈕左側捲軸
               '.quota-slider-track-0': {
                   background: 'var(--custom_bg_secondary)',
                   height: '5px',

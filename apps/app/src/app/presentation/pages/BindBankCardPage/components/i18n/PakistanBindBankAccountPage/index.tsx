@@ -74,9 +74,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bankDropList,
     bankAccountValue,
     onIFSCDropSelect,
-    iBanData,
-    onIBanChange,
-    onIbanBlur,
+    // iBanData,
+    // onIBanChange,
+    // onIbanBlur,
     confirm: confirmBankAccount,
   } = usePakistanBankAccountForm({
     bindCardDropListData: props.bindCardDropListData,
@@ -99,7 +99,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bindCardDropListData: props.bindCardDropListData,
     // NOTE: 設定電子錢包列表
     bankAccountValue,
-    iBanData,
+    // iBanData,
   });
 
   return (
@@ -152,13 +152,12 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           onIFSCDropSelect={onIFSCDropSelect}
           confirm={() => {
             const validation = validateCommonForm(); // account Number
-            const validation2 = confirmBankAccount(); // Iban
             // common
-            if (validation && validation2) confirm();
+            if (validation) confirm();
           }}
-          iBanData={iBanData}
-          onIBanChange={onIBanChange}
-          onIbanBlur={onIbanBlur}
+          // iBanData={iBanData}
+          // onIBanChange={onIBanChange}
+          // onIbanBlur={onIbanBlur}
         />
       )}
     </>
