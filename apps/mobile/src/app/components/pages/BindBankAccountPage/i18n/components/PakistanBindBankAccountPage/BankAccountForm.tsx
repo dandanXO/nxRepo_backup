@@ -86,7 +86,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         props.onIFSCDropSelect(item.index);
                     }}
                     options={options}
-                    isSearchable={false}
+                    isSearchable={true}
                 />
 
                 {/*<Select*/}
