@@ -428,7 +428,8 @@ const onUserClickViewApplicationProgress = () => {
   const modelState = useSelector((state: RootState) => state.model);
 
   return (
-    <div className={'flex flex-col overflow-auto max-h-[90vh] pb-20'}>
+    <div className={'flex flex-col'}>
+      <div className={'flex flex-col overflow-auto max-h-[90vh] w-full absolute top-0'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
       {/*NOTE: 頭部與內容*/}
@@ -501,7 +502,7 @@ const onUserClickViewApplicationProgress = () => {
           }
 
           {/*TODO: refactor me*/}
-          <div className={'mb-3'}>
+          <div className={'my-6 pb-10'}>
             <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
 
@@ -543,6 +544,7 @@ const onUserClickViewApplicationProgress = () => {
             )}
         </PageContent>
       </div>
+    </div>
 
       {/*NOTE: 底部*/}
       <div className={'absolute w-full bottom-[63px] px-3 py-2 '}>
