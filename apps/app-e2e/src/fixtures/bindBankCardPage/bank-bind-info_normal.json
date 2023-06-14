@@ -1,0 +1,142 @@
+{
+  "statusCode": 200,
+  "body": {
+    "showBankOption": false,
+    "availableWalletVendors": [
+      {
+        "displayName": "Easypaisa",
+        "code": "Easypaisa"
+      },
+      {
+        "displayName": "JazzCash",
+        "code": "JAZZCASH"
+      }
+    ],
+    "availableBanks": [
+      {
+        "bankCode": "070",
+        "bankName": "NATIONAL BANK OF PAKISTAN"
+      },
+      {
+        "bankCode": "093",
+        "bankName": "APNA MICRO FINANCE BANK"
+      },
+      {
+        "bankCode": "094",
+        "bankName": "MOBILINK MICRO FINANCE BANK(JAZZCASH)"
+      },
+      {
+        "bankCode": "053",
+        "bankName": "BANK ALFALAH LIMITED"
+      },
+      {
+        "bankCode": "098",
+        "bankName": "FINCA MICRO FINANCE BANK"
+      },
+      {
+        "bankCode": "054",
+        "bankName": "HABIB BANK LIMITED"
+      },
+      {
+        "bankCode": "013",
+        "bankName": "DUBAI ISLAMIC BANK PAKISTAN LIMITED"
+      },
+      {
+        "bankCode": "014",
+        "bankName": "ALLIED BANK LIMITED"
+      },
+      {
+        "bankCode": "059",
+        "bankName": "NIB BANK LIMITED"
+      },
+      {
+        "bankCode": "016",
+        "bankName": "ALBARKA ISLAMIC BANK"
+      },
+      {
+        "bankCode": "038",
+        "bankName": "STANDARD CHARTERED BANK LTD"
+      },
+      {
+        "bankCode": "017",
+        "bankName": "ASKARI BANK LIMITED"
+      },
+      {
+        "bankCode": "039",
+        "bankName": "U MICRO FINANCE BANK"
+      },
+      {
+        "bankCode": "018",
+        "bankName": "JS BANK LIMITED"
+      },
+      {
+        "bankCode": "081",
+        "bankName": "SUMMIT BANK LIMITED"
+      },
+      {
+        "bankCode": "060",
+        "bankName": "FAYSAL BANK LIMITED"
+      },
+      {
+        "bankCode": "083",
+        "bankName": "THE BANK OF PUNJAB"
+      },
+      {
+        "bankCode": "062",
+        "bankName": "MCB BANK LIMITED"
+      },
+      {
+        "bankCode": "085",
+        "bankName": "SONERI BANK LIMITED"
+      },
+      {
+        "bankCode": "064",
+        "bankName": "HABIB METROPOLITAN BANK LIMITED"
+      },
+      {
+        "bankCode": "086",
+        "bankName": "UNITED BANK LIMITED"
+      },
+      {
+        "bankCode": "021",
+        "bankName": "BANKISLAMI PAKISTAN LIMITED"
+      },
+      {
+        "bankCode": "043",
+        "bankName": "SINDH BANK LIMITED"
+      },
+      {
+        "bankCode": "044",
+        "bankName": "MCB ISLAMIC"
+      },
+      {
+        "bankCode": "066",
+        "bankName": "SILKBANK LIMITED"
+      },
+      {
+        "bankCode": "023",
+        "bankName": "BANK AL HABIB LIMITED"
+      },
+      {
+        "bankCode": "089",
+        "bankName": "MEEZAN BANK"
+      },
+      {
+        "bankCode": "046",
+        "bankName": "CITI BANK N.A"
+      },
+      {
+        "bankCode": "047",
+        "bankName": "FIRST WOMEN BANK LIMITED"
+      },
+      {
+        "bankCode": "027",
+        "bankName": "TAMEER MICROFINANCE BANK(easypaisa)"
+      },
+      {
+        "bankCode": "028",
+        "bankName": "SAMBA BANK LIMITED"
+      }
+    ]
+  }
+}

@@ -4236,10 +4236,10 @@ describe('IndexPage', () => {
     })
 
     // NOTE: Given
-    const indexServiceResponse: IndexServiceResponse = require("../fixtures/index_level10.json");
+    const indexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10.json");
 
     // NOTE: Given Order overdue
-    const overdueIndexServiceResponse: IndexServiceResponse = require("../fixtures/index_level10_overdue.json");
+    const overdueIndexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10_overdue.json");
 
 
     let indexCount = 0;
