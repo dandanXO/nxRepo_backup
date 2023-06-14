@@ -25,8 +25,7 @@ const CollectTodayApi = API.injectEndpoints({
         // [GET] 获取當日催收使用者詳情
         getCollectTodayUserDetail: builder.query<GetUserDetailResponse, GetUserDetailQueryString>({
             query: (requestBody: GetUserDetailQueryString) => ({
-                url: '/collect-today/user-detail',
-                params: requestBody,
+                url: `/collect-overdue/user-info/${requestBody.userId}`,
                 method: 'get'
             })
         }),

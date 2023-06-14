@@ -15,8 +15,8 @@ interface IDescriptionsCardProps {
         dataIndex: string; // [useQuery 返回的object的key，多層用.區隔]
         render?: (value:any, data: any) => React.ReactElement
     }[],
-    hook?: UseQuery<any>,
-    params?: any,
+    hook: UseQuery<any>,
+    params: any,
 }
 
 export const DescriptionsCard = ({
@@ -32,11 +32,11 @@ export const DescriptionsCard = ({
         <InformationCard title={t(titleKey)}>
             <AntDescriptions size="small" bordered>
                 {descriptions.map((part) => {
-
+                    const value = part.dataIndex.split('.').reduce((acc, current) => acc[current], data)
                     return (
                         <Item key={part.key} label={(part.titleTooltip && <div>{t(part.key)}{part.titleTooltip}</div>) || t(part.key)}>{
-                            (part.render && part.render(data[part.dataIndex], data)) ||
-                            data[part.dataIndex] ||
+                            (part.render && part.render(value, data)) ||
+                            value ||
                             '-'}
                         </Item>
                     )

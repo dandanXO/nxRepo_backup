@@ -38,6 +38,33 @@ export const i18nCards: i18nComponent = {
             urgeRecord: '催收纪录',
 
             registerInfo: '注册信息',
+            userId: '用户ID',
+            registerChannel: '注册渠道',
+            packageName: '注册包名',
+            registerTime: '注册时间',
+            userSource: '用户来源',
+
+            personalInfo: '个人信息',
+            userName: '姓名',
+            gender: '性别',
+            idCardNo: '身份证号',
+            fatherName: '父亲姓名',
+            birthDay: '出生日期',
+            panId: '税务证号',
+            education: '教育程度',
+            maritalStatus: '婚姻状况',
+            email: 'Email',
+            occupation: '职业',
+            salaryRange: '薪资范围',
+            address: '家庭地址',
+
+            emergencyContact: '紧急联络人',
+            contactName: '联络人姓名',
+            relationShip: '与本人关系',
+            contactType: '联络人名称',
+            contactPhone: '联络人电话',
+            uploadTime: '上传时间',
+
         },
         "en-US": {
             orderInfo: 'Order Information',
@@ -65,6 +92,33 @@ export const i18nCards: i18nComponent = {
             urgeRecord: 'Collections Record',
 
             registerInfo: 'Registration information',
+            userId: 'User ID',
+            registerChannel: 'Channel',
+            packageName: 'Package Name',
+            registerTime: 'Registration Time',
+            userSource: 'User Source',
+
+            personalInfo: 'Personal information',
+            userName: 'User Name',
+            gender: 'Gender',
+            idCardNo: 'ID Number',
+            fatherName: 'Father\'s Name',
+            birthDay: 'Date of birth',
+            panId: 'PAN Number',
+            education: 'Education',
+            maritalStatus: 'Marital Status',
+            email: 'Email',
+            occupation: 'Occupation',
+            salaryRange: 'Salary Range',
+            address: 'Address',
+
+            emergencyContact: 'Emergency Contact',
+            contactName: 'Contact Name',
+            relationShip: 'Relationship',
+            contactType: 'Contact',
+            contactPhone: 'Contact Number',
+            uploadTime: 'Upload Time',
+
         }
     }
 }

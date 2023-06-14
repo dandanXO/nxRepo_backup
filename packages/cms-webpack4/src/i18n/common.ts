@@ -43,6 +43,11 @@ export const i18nCommon: i18nComponent = {
                 BadAttitude: '态度恶劣',
                 Other: '其他',
             },
+            contact: {
+                borrower: '本人',
+                list: '通讯录',
+                emergency: '紧急联络人{{count}}',
+            },
             pagination : {
                 showingRange: "共 {{total}} 笔",
                 itemPerPage: ' / 页',
@@ -87,6 +92,11 @@ export const i18nCommon: i18nComponent = {
                 InvalidPhoneNumber: 'Invalid Phone Number',
                 BadAttitude: 'Bad Attitude',
                 Other: 'Other',
+            },
+            contact: {
+              borrower: 'Borrower',
+              list: 'Contact List',
+              emergency: 'Emergency Contact{{count}}',
             },
             pagination : {
                 showingRange : "Total {{total}} Record(s)",

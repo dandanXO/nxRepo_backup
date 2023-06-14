@@ -53,7 +53,7 @@ export const TableCard = ({
             <ProTable
                 bordered
                 loading={isFetching}
-                dataSource={currentData?.records || []}
+                dataSource={currentData?.records}
                 columns={columns}
                 search={false}
                 toolBarRender={false}

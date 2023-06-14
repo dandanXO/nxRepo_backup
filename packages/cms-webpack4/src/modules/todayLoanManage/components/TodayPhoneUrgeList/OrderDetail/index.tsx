@@ -4,7 +4,7 @@ import { PageContainer } from "@ant-design/pro-components";
 import { useTranslation } from "react-i18next";
 import { itemRender } from "../../../../shared/components/common/itemRender";
 import {Tabs, Tag, Tooltip} from "antd";
-import {DescriptionsCard} from "../../../../shared/components/withQueryHook/Cards";
+import {DescriptionsCard, SinglePageTableCard, TableCard} from "../../../../shared/components/withQueryHook/Cards";
 import {
     useGetCollectTodayOrderDetailQuery,
     useGetCollectTodayUserDetailQuery,
@@ -14,15 +14,21 @@ import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
 import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";
 import {formatPrice} from "../../../../shared/utils/format/formatPrice";
 import {useEnum} from "../../../../shared/constants/useEnum";
-import {TableCard} from "../../../../shared/components/withQueryHook/Cards/TableCard";
 import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
 import moment from "moment-timezone";
 import {InfoCircleOutlined} from "@ant-design/icons";
+import {i18nCards} from "../../../../shared/components/i18n/cards/translations";
 
 export const OrderDetail = () => {
     const urlParams=useParams<{ userId: string, collectId: string}>()
     const { t } = useTranslation(i18nUrgeCollection.namespace);
-    const { OrderStatusEnum, OrderLabelEnum, FollowUpResultEnum} = useEnum();
+    const { t: cardsT } = useTranslation(i18nCards.namespace);
+    const {
+        OrderStatusEnum,
+        OrderLabelEnum,
+        FollowUpResultEnum,
+        EmergencyContactEnum
+    } = useEnum();
 
     const userId = Number(urlParams.userId);
     const collectId = Number(urlParams.collectId);
@@ -80,26 +86,56 @@ export const OrderDetail = () => {
     ]
 
     const registerDescriptions = [
-        { key: 'phoneNo', dataIndex: 'result.name' },
+        { key: 'userId', dataIndex: 'personaInfo.userId' },
+        { key: 'registerChannel', dataIndex: 'personaInfo.channelName' },
+        { key: 'packageName', dataIndex: 'personaInfo.appName' },
+        { key: 'mobileNumber', dataIndex: 'personaInfo.phoneNo' },
+        { key: 'registerTime', dataIndex: 'personaInfo.addTime', render: (_, { personaInfo }) => <div>{moment(personaInfo.addTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+        { key: 'userSource', dataIndex: 'personaInfo.userSource' },
+    ]
+
+    const personalDescriptions = [
+        { key: 'userName', dataIndex: 'personaInfo.nameTrue' },
+        { key: 'gender', dataIndex: 'personaInfo.gender' },
+        { key: 'idCardNo', dataIndex: 'personaInfo.idcardNo' },
+        { key: 'fatherName', dataIndex: 'personaInfo.fatherName' },
+        { key: 'birthDay', dataIndex: 'personaInfo.birth' },
+        { key: 'panId', dataIndex: 'personaInfo.panId' },
+        { key: 'education', dataIndex: 'personaInfo.education' },
+        { key: 'maritalStatus', dataIndex: 'personaInfo.marriageStatus' },
+        { key: 'email', dataIndex: 'personaInfo.email' },
+        { key: 'occupation', dataIndex: 'personaInfo.position' },
+        { key: 'salaryRange', dataIndex: 'personaInfo.salaryRange' },
+        { key: 'address', dataIndex: 'personaInfo.address' },
+    ]
+
+    const emergencyContactColumns = [
+        { title: cardsT('contactType'), key: 'contact', dataIndex: 'contact', render: (_, { contact }) => <div>{EmergencyContactEnum[contact] && EmergencyContactEnum[contact].text}</div>  },
+        { title: cardsT('relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
+        { title: cardsT('contactName'), key: 'contactName', dataIndex: 'contactName' },
+        { title: cardsT('contactName'), key: 'contactPhone', dataIndex: 'contactPhone' },
+        { title: cardsT('uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
     ]
 
     const OrderInfoTab = () => (
         <div style={{ margin: '16px' }}>
             <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{collectId}} />
-            <TableCard titleKey='urgeRecord' columns={collectRecordColumns} hook={useLazyGetCollectTodayCollectRecordQuery} queryBody={{collectId}} rowKey='' />
+            <TableCard titleKey='urgeRecord' columns={collectRecordColumns} hook={useLazyGetCollectTodayCollectRecordQuery} queryBody={{collectId}} rowKey='id' />
         </div>
     )
 
     const UserInfoTab = () => (
         <div style={{ margin: '16px' }}>
             <DescriptionsCard titleKey={'registerInfo'} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+            <DescriptionsCard titleKey={'personalInfo'} descriptions={personalDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+            <SinglePageTableCard titleKey={'emergencyContact'} columns={emergencyContactColumns} hook={useGetCollectTodayUserDetailQuery} params={{userId}} rowKey='contact' dataSourceKey='emergencyContacts' />
         </div>
     )
 
 
     const tabsItems = [
+        { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
         { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
-        { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> }
     ]
 
 

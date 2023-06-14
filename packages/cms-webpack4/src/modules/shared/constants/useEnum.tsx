@@ -57,5 +57,19 @@ export const useEnum = () => {
         Other: { text: t('followUpResultStatus.Other'), color: 'black'},
     }
 
-    return { OrderLabelEnum, OrderStatusEnum, CurrentDayOverDueStageEnum, OverDueStageEnum, FollowUpResultEnum}
+    const EmergencyContactEnum = {
+        BORROWER: { text : t('contact.borrower') },
+        CONTACT_LIST: { text: t('contact.list') },
+        EMERGENCY_CONTACT1: { text: t('contact.emergency', { count: 1 }) },
+        EMERGENCY_CONTACT2: { text: t('contact.emergency', { count: 2 }) },
+    }
+
+    return {
+        OrderLabelEnum,
+        OrderStatusEnum,
+        CurrentDayOverDueStageEnum,
+        OverDueStageEnum,
+        FollowUpResultEnum,
+        EmergencyContactEnum
+    }
 }
