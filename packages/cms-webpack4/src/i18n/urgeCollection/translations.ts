@@ -36,7 +36,8 @@ export const i18nUrgeCollection: i18nComponent = {
             contactName: '姓名',
             tooltip: {
                 amountDue: '应还金额=申请金额*(1+后置费率)'
-            }
+            },
+            addUrge: '添加催收纪录'
         },
         "en-US": {
             function: 'Function',
@@ -70,7 +71,8 @@ export const i18nUrgeCollection: i18nComponent = {
             contactName: 'Contact Name',
             tooltip: {
                 amountDue: '=Loan Amount*(1+Post-Fee Rate)'
-            }
+            },
+            addUrge: 'Add Collection Record'
         }
     }
 }

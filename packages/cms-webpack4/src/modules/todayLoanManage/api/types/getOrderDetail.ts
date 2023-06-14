@@ -1,5 +1,5 @@
 export type GetOrderDetailQueryString = {
-    collectId?: number;
+    collectId?: string;
 }
 
 export type GetOrderDetailResponse = {

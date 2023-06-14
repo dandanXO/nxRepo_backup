@@ -1,60 +1,65 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { PageContainer } from "@ant-design/pro-components";
-import { useTranslation } from "react-i18next";
-import { itemRender } from "../../../../shared/components/common/itemRender";
-import {Tabs, Tag, Tooltip} from "antd";
+import React, {useMemo, useState} from "react";
+import {useTranslation} from "react-i18next";
+import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
+import {useEnum} from "../../../shared/constants/useEnum";
+import {useGetAdminSwitchQuery} from "../../../shared/api/commonApi";
+import {
+    useGetCollectTodayOrderDetailQuery,
+    useGetCollectTodayUserDetailQuery,
+    useLazyGetCollectTodayCollectRecordQuery, useLazyGetCollectTodayContactListQuery, useLazyGetCollectTodaySMSLogQuery
+} from "../../api/CollectTodayApi";
+import {getIsSuperAdmin} from "../../../shared/storage/getUserInfo";
+import moment from "moment-timezone";
+import {CopyTextIcon} from "../../../shared/components/other/CopyTextIcon";
+import {Button, Tabs, Tag, Tooltip} from "antd";
+import {formatPrice} from "../../../shared/utils/format/formatPrice";
+import {InfoCircleOutlined} from "@ant-design/icons";
 import {
     DescriptionsCard,
     PhotoCard,
     SinglePageTableCard,
     TableCard
-} from "../../../../shared/components/withQueryHook/Cards";
-import {
-    useGetCollectTodayOrderDetailQuery,
-    useGetCollectTodayUserDetailQuery,
-    useLazyGetCollectTodayCollectRecordQuery, useLazyGetCollectTodayContactListQuery, useLazyGetCollectTodaySMSLogQuery
-} from "../../../api/CollectTodayApi";
-import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
-import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";
-import {formatPrice} from "../../../../shared/utils/format/formatPrice";
-import {useEnum} from "../../../../shared/constants/useEnum";
-import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
-import moment from "moment-timezone";
-import {InfoCircleOutlined} from "@ant-design/icons";
-import {useGetAdminSwitchQuery} from "../../../../shared/api/commonApi";
+} from "../../../shared/components/withQueryHook/Cards";
+import {UrgeModal} from "./UrgeModal";
 
-export const OrderDetail = () => {
-    const { t } = useTranslation(i18nUrgeCollection.namespace);
-    const urlParams=useParams<{ userId: string, collectId: string}>()
+interface IOrderDetailContentProps {
+    userId: string;
+    collectId: string
+}
 
-    const userId = Number(urlParams.userId);
-    const collectId = Number(urlParams.collectId);
+export const OrderDetailContent = ({
+    userId, collectId
+}: IOrderDetailContentProps) => {
+    const [showModal, setShowModal] = useState(false)
 
-    // 取得後台使用者開關 (是否可查看 tab -通訊錄 & 手機短信)
-    // 在參數配置配有 "是否屏蔽當日到期前訂單通訊錄" 開關。
-    // 開關沒開 = 顯示   (不用管到不到期） (開關有開 todayCollect.contactSwitch = true  , 開關沒開 todayCollect.contactSwitch = false)
-    // 開關打開 + 有到期 = 顯示   (detailTabControl.contactSwitch = true , isNotOverdue = false -> addTab = true)
-    // 開關打開 + 沒到期 = 不顯示 (detailTabControl.contactSwitch = true , isNotOverdue = true -> addTab = false)
     const { data: adminSwitch, isFetching: adminSwitchFetching } = useGetAdminSwitchQuery(null);
     const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectTodayOrderDetailQuery({collectId});
 
-    const Content = () => {
-        console.log(orderInfo)
-        const {
-            OrderStatusEnum,
-            OrderLabelEnum,
-            FollowUpResultEnum,
-            EmergencyContactEnum
-        } = useEnum();
+    const { t } = useTranslation(i18nUrgeCollection.namespace)
+    const {
+        OrderStatusEnum,
+        OrderLabelEnum,
+        FollowUpResultEnum,
+        EmergencyContactEnum
+    } = useEnum();
+
+    const fetched = !orderInfoFetching && !adminSwitchFetching
+
+    const renderTab = useMemo(() => {
+
+        if(!fetched) return null
 
         const isSuperAdmin = getIsSuperAdmin();
+
+        // 取得後台使用者開關 (是否可查看 tab -通訊錄 & 手機短信)
+        // 在參數配置配有 "是否屏蔽當日到期前訂單通訊錄" 開關。
+        // 開關沒開 = 顯示   (不用管到不到期） (開關有開 todayCollect.contactSwitch = true  , 開關沒開 todayCollect.contactSwitch = false)
+        // 開關打開 + 有到期 = 顯示   (detailTabControl.contactSwitch = true , isNotOverdue = false -> addTab = true)
+        // 開關打開 + 沒到期 = 不顯示 (detailTabControl.contactSwitch = true , isNotOverdue = true -> addTab = false)
         const contactSwitch = adminSwitch.todayCollect.contactSwitch;
         const smsSwitch = adminSwitch.todayCollect.smsSwitch;
-
         const overDueDate = moment(orderInfo.expireTime).startOf('day')
         const isOverDue = !moment().startOf('day').isBefore(overDueDate)
-
         const showContactListTab = !contactSwitch || isOverDue
         const showSMSTab = !smsSwitch || isOverDue
 
@@ -179,51 +184,48 @@ export const OrderDetail = () => {
             </div>
         )
 
+        const ContactListTab = () => (
+            <div style={{ margin: '16px' }}>
+                <TableCard  columns={contactListColumns} hook={useLazyGetCollectTodayContactListQuery} queryBody={{userId}} rowKey='phone' />
+            </div>
+        )
+
+        const SMSMessageTab = () => (
+            <div style={{ margin: '16px' }}>
+                <TableCard columns={smsLogsColumns} hook={useLazyGetCollectTodaySMSLogQuery} queryBody={{userId}} rowKey='id' />
+            </div>
+        )
+
         let tabsItems = [
             { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
             { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
         ]
 
         if (showContactListTab) {
-            const ContactListTab = () => (
-                <div style={{ margin: '16px' }}>
-                    <TableCard  columns={contactListColumns} hook={useLazyGetCollectTodayContactListQuery} queryBody={{userId}} rowKey='phone' />
-                </div>
-            )
-           tabsItems = [...tabsItems, { label: t('tab.contractList'), key: 'contactList', children: <ContactListTab /> }]
+            tabsItems = [...tabsItems, { label: t('tab.contractList'), key: 'contactList', children: <ContactListTab /> }]
         }
-
         if (showSMSTab) {
-            const SMSMessageTab = () => (
-                <div style={{ margin: '16px' }}>
-                    <TableCard columns={smsLogsColumns} hook={useLazyGetCollectTodaySMSLogQuery} queryBody={{userId}} rowKey='id' />
-                </div>
-            )
             tabsItems = [...tabsItems, { label: t('tab.smsMessage'), key: 'smsMessage', children: <SMSMessageTab /> }]
-
         }
 
-        return <Tabs items={tabsItems} />
-    }
-
+        return (
+            <Tabs
+                items={tabsItems}
+                tabBarExtraContent={
+                <Button
+                    type='primary'
+                    onClick={()=>setShowModal(true)}
+                >
+                    {t('addUrge')}
+                </Button>}
+            />
+        )
+    }, [fetched])
 
     return (
-        <PageContainer
-            loading={orderInfoFetching || adminSwitchFetching}
-            header={{
-                ghost: true,
-                breadcrumb: {
-                    itemRender: itemRender,
-                    routes: [
-                        { path: "/", breadcrumbName: t('menu.homePage') },
-                        { path: null, breadcrumbName: t('menu.currentDayOverdueCall') },
-                        { path: "/todayLoanManage/todayPhoneUrgeList", breadcrumbName: t('menu.currentDayOverdueCallList') },
-                        { path: null, breadcrumbName: t('breadcrumb.orderDetails') },
-                    ],
-                },
-            }}
-        >
-            <Content />
-        </PageContainer>
+        <React.Fragment>
+            <UrgeModal open={showModal} handleCloseModal={()=>setShowModal(false)}/>
+            {renderTab}
+        </React.Fragment>
     )
 }
