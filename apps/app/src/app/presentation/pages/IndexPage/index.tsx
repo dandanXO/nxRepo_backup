@@ -122,6 +122,7 @@ const IndexPage = () => {
   // && !(indexPageState.riskControl.state === RISK_CONTROL_STATE.valid);
 
   const onClickReacquireCredit = useCallback(() => {
+    console.log('onClickReacquireCredit--------')
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, [disableClickReacquireCredit]);
 
@@ -581,8 +582,8 @@ const onUserClickViewApplicationProgress = () => {
               dataTestingID={'reacquireCredit'}
               text={'Reacquire Credit Amount'}
               loading={isReacquireLoading}
-              disable={disableClickReacquireCredit}
-              onClick={() => !disableClickReacquireCredit && onClickReacquireCredit()}
+              disable={isReacquireLoading || disableClickReacquireCredit}
+              onClick={() => (!isReacquireLoading && !disableClickReacquireCredit) && onClickReacquireCredit()}
             />
           )}
       </div>
