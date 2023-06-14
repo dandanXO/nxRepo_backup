@@ -60,9 +60,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     confirmMobileData,
     onConfirmMobileDataChange,
     onConfirmMobileDataBlur,
-    iBanData: iBanDataMobileWallet,
-    onIBanChange: onMobileWalletIBanChange,
-    onIbanBlur: onMobileWalletIbanBlur,
+    // iBanData: iBanDataMobileWallet,
+    // onIBanChange: onMobileWalletIBanChange,
+    // onIbanBlur: onMobileWalletIbanBlur,
     confirm: confirmMobileWallet,
   } = usePakistanMobileWalletForm({
     isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
@@ -127,9 +127,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           confirmMobileData={confirmMobileData}
           onConfirmMobileDataChange={onConfirmMobileDataChange}
           onConfirmMobileDataBlur={onConfirmMobileDataBlur}
-          iBanData={iBanDataMobileWallet}
-          onIBanChange={onMobileWalletIBanChange}
-          onIbanBlur={onMobileWalletIbanBlur}
+          // iBanData={iBanDataMobileWallet}
+          // onIBanChange={onMobileWalletIBanChange}
+          // onIbanBlur={onMobileWalletIbanBlur}
           isFormPending={isFormPending || false}
           confirm={() => {
             // country
@@ -152,8 +152,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           onIFSCDropSelect={onIFSCDropSelect}
           confirm={() => {
             const validation = validateCommonForm(); // account Number
+            const validation2 = confirmBankAccount(); // Iban
             // common
-            if (validation) confirm();
+            if (validation && validation2) confirm();
           }}
           // iBanData={iBanData}
           // onIBanChange={onIBanChange}
