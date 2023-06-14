@@ -24,8 +24,8 @@ import { getTimeInfoBetweenCurrentAndCountDown } from "@frontend/shared/date";
 import { ORDER_STATE } from "apps/app/src/app/domain/order/ORDER_STATE";
 import {formatPrice} from "../../../../apps/app/src/app/modules/format/formatPrice"
 
-import * as index_level10 from "../fixtures/index_level10.json"
-import * as index_level10_overdue from "../fixtures/index_level10_overdue.json"
+import index_level10 from "../fixtures/index_level10.json"
+import index_level10_overdue from "../fixtures/index_level10_overdue.json"
 
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
