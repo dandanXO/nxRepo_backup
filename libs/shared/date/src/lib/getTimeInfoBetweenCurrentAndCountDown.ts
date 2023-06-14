@@ -1,6 +1,9 @@
 // NOTICE: 顯示倒數字串
 import moment from "moment-timezone";
 export const getTimeInfoBetweenCurrentAndCountDown = (quotaExpireTime: string) => {
+  
+  if (quotaExpireTime === '') return { time: '00:00:00', end: true }
+  
   // NOTICE: REFACTOR ME
   const currentTime = moment();
   // console.log("[test] currentTime.format", currentTime.format("YYYY-MM-DD HH:mm:ss"));

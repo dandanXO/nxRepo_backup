@@ -27,9 +27,9 @@ export function* systemCountdownManagerSaga() {
       // NOTICE: 不能重刷，需等待重刷時間
       yield put(SystemCaseActions.SystemRefreshableCountdownSaga(indexResponse.refreshableUntil));
     } else {
-      // NOTICE: 可以重刷
-      if( order.state === ORDER_STATE.hasOverdueOrder) return;
-      yield put(SystemCaseActions.SystemCountdownSaga(indexResponse?.offerExpireTime));
+        // NOTICE: 可以重刷
+        const offerExpireTime = order.state === ORDER_STATE.hasOverdueOrder ? '' : indexResponse?.offerExpireTime;
+        yield put(SystemCaseActions.SystemCountdownSaga(offerExpireTime));
     }
   } catch (error) {
     yield catchSagaError(error);
