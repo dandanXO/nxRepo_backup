@@ -65,6 +65,26 @@ export const i18nCards: i18nComponent = {
             contactPhone: '联络人电话',
             uploadTime: '上传时间',
 
+            identityInfo: '身份信息',
+            idcardFrontPhoto: {
+                India: 'Aadhaar card 正面',
+                Pakistan: 'CNIC卡正面',
+                Bangladesh: 'NID卡正面'
+            },
+            idcardBackPhoto: {
+                India: 'Aadhaar card 反面',
+                Pakistan: 'CNIC卡反面',
+                Bangladesh: 'NID卡反面'
+            },
+            idcardPortraitPhoto: {
+                India: '人像',
+                Pakistan: '人像',
+                Bangladesh: '人像'
+            },
+            panPhoto: {
+                India: 'PAN卡',
+            },
+
         },
         "en-US": {
             orderInfo: 'Order Information',
@@ -118,6 +138,26 @@ export const i18nCards: i18nComponent = {
             contactType: 'Contact',
             contactPhone: 'Contact Number',
             uploadTime: 'Upload Time',
+
+            identityInfo: 'Identity Information',
+            idcardFrontPhoto: {
+                India: 'Front side of Aadheaar card',
+                Pakistan: 'Front side of CNIC',
+                Bangladesh: 'Front side of NID'
+            },
+            idcardBackPhoto: {
+                India: 'Back side of Aadheaar card',
+                Pakistan: 'Back side of CNIC',
+                Bangladesh: 'Back side of NID'
+            },
+            idcardPortraitPhoto: {
+                India: 'Portrait',
+                Pakistan: 'Portrait',
+                Bangladesh: 'Portrait'
+            },
+            panPhoto: {
+                India: 'PAN card',
+            },
 
         }
     }

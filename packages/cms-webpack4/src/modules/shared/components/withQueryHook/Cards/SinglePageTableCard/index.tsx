@@ -17,7 +17,7 @@ interface ISinglePageTableCardProps {
     rowKey?: string,
     hook: UseQuery<QueryDefinition<any, any, any, any>>,
     params: any,
-    dataSourceKey?: string
+    dataSourceKey?: string // 當dataSource包在response的某key時需要帶入
 }
 
 export const SinglePageTableCard = ({
@@ -37,6 +37,7 @@ export const SinglePageTableCard = ({
                 search={false}
                 toolBarRender={false}
                 pagination={false}
+                rowKey={rowKey}
             />
         </InformationCard>
     )

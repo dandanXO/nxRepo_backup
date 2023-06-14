@@ -4,7 +4,12 @@ import { PageContainer } from "@ant-design/pro-components";
 import { useTranslation } from "react-i18next";
 import { itemRender } from "../../../../shared/components/common/itemRender";
 import {Tabs, Tag, Tooltip} from "antd";
-import {DescriptionsCard, SinglePageTableCard, TableCard} from "../../../../shared/components/withQueryHook/Cards";
+import {
+    DescriptionsCard,
+    PhotoCard,
+    SinglePageTableCard,
+    TableCard
+} from "../../../../shared/components/withQueryHook/Cards";
 import {
     useGetCollectTodayOrderDetailQuery,
     useGetCollectTodayUserDetailQuery,
@@ -117,6 +122,11 @@ export const OrderDetail = () => {
         { title: cardsT('uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
     ]
 
+    let identityPhotoRows = ['idcardFrontPhoto', 'idcardBackPhoto', 'idcardPortraitPhoto']
+    if(appInfo.COUNTRY === 'India') {
+        identityPhotoRows = ['panPhoto', ...identityPhotoRows]
+    }
+
     const OrderInfoTab = () => (
         <div style={{ margin: '16px' }}>
             <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{collectId}} />
@@ -127,6 +137,7 @@ export const OrderDetail = () => {
     const UserInfoTab = () => (
         <div style={{ margin: '16px' }}>
             <DescriptionsCard titleKey={'registerInfo'} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+            <PhotoCard titleKey={'identityInfo'} rows={identityPhotoRows} hook={useGetCollectTodayUserDetailQuery} params={{userId}} dataSourceKey='userImage'/>
             <DescriptionsCard titleKey={'personalInfo'} descriptions={personalDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
             <SinglePageTableCard titleKey={'emergencyContact'} columns={emergencyContactColumns} hook={useGetCollectTodayUserDetailQuery} params={{userId}} rowKey='contact' dataSourceKey='emergencyContacts' />
         </div>
@@ -134,8 +145,8 @@ export const OrderDetail = () => {
 
 
     const tabsItems = [
-        { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
         { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
+        { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
     ]
 
 
