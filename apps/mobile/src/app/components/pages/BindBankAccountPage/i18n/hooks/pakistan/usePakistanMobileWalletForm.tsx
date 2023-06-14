@@ -12,7 +12,7 @@ import * as Sentry from "@sentry/react";
 import { CustomAxiosError } from "../../../../../../api/base/axiosBaseQuery";
 import { processWalletDisplayName } from "./customization/processWalletDisplayName";
 import { AppFlag } from "../../../../../../App";
-import { usePakistanIBanValidate } from "../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate";
+// import { usePakistanIBanValidate } from "../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate";
 
 interface IUsePakistanMobileWalletForm {
     isPostBankBindSaveToPKMutationLoading: boolean;
@@ -25,8 +25,8 @@ export const usePakistanMobileWalletForm = (
 ) => {
     const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
-    const { iBanData, onIBanChange, onIbanBlur, validateIban } =
-        usePakistanIBanValidate();
+    // const { iBanData, onIBanChange, onIbanBlur, validateIban } =
+    //     usePakistanIBanValidate();
 
     // NOTE: Wallet List
     // Wallet List - 電子錢包列表 Data
@@ -94,7 +94,7 @@ export const usePakistanMobileWalletForm = (
 
     // NOTE: 點擊 Submit
     const confirm = useCallback(() => {
-        validateIban();
+        // validateIban();
         validateMobileWalletAccount();
 
         if (!mobileData.isValidation) return;
@@ -111,7 +111,7 @@ export const usePakistanMobileWalletForm = (
                 mobileWalletAccount: mobileData.data,
                 walletVendor:
                     (mobileWalletAccount && mobileWalletAccount.code) || "",
-                iban: iBanData.data,
+                // iban: iBanData.data,
             })
             .unwrap()
             .then((data: any) => {
@@ -152,7 +152,7 @@ export const usePakistanMobileWalletForm = (
         props.bindCardDropListData,
         props.triggerPostBankBindSaveToPKMutation,
         props.isPostBankBindSaveToPKMutationLoading,
-        iBanData.data,
+        // iBanData.data,
     ]);
 
     return {
@@ -166,9 +166,9 @@ export const usePakistanMobileWalletForm = (
         validateMobileWalletAccount,
         // Form
         confirm,
-        iBanData,
-        onIBanChange,
-        onIbanBlur,
-        validateIban,
+        // iBanData,
+        // onIBanChange,
+        // onIbanBlur,
+        // validateIban,
     };
 };

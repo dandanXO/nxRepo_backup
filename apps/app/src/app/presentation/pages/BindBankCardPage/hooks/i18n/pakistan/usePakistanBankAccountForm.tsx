@@ -38,6 +38,7 @@ export const usePakistanBankAccountForm = (props: IUsePakistanBankAccountForm) =
 
   const confirm = () => {
     // return validateIban();
+    return true
   };
 
   return {
