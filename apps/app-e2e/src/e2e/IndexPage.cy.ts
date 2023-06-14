@@ -24,9 +24,6 @@ import { getTimeInfoBetweenCurrentAndCountDown } from "@frontend/shared/date";
 import { ORDER_STATE } from "apps/app/src/app/domain/order/ORDER_STATE";
 import {formatPrice} from "../../../../apps/app/src/app/modules/format/formatPrice"
 
-import index_level10 from "../fixtures/index_level10.json"
-import index_level10_overdue from "../fixtures/index_level10_overdue.json"
-
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
 const infoLog = (message, rest) => {
@@ -4238,12 +4235,11 @@ describe('IndexPage', () => {
       console.log("info");
     })
 
-
     // NOTE: Given
-    const indexServiceResponse: IndexServiceResponse = index_level10
+    const indexServiceResponse: IndexServiceResponse = require("../fixtures/index_level10.json");
 
     // NOTE: Given Order overdue
-    const overdueIndexServiceResponse: IndexServiceResponse = index_level10_overdue
+    const overdueIndexServiceResponse: IndexServiceResponse = require("../fixtures/index_level10_overdue.json");
 
 
     let indexCount = 0;
