@@ -3,5 +3,5 @@ export type GetOrderDetailQueryString = {
 }
 
 export type GetOrderDetailResponse = {
-
+    expireTime: string
 };

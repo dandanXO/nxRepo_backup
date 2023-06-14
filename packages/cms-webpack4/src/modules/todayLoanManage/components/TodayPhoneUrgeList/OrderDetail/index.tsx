@@ -22,161 +22,189 @@ import {useEnum} from "../../../../shared/constants/useEnum";
 import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
 import moment from "moment-timezone";
 import {InfoCircleOutlined} from "@ant-design/icons";
+import {useGetAdminSwitchQuery} from "../../../../shared/api/commonApi";
 
 export const OrderDetail = () => {
-    const urlParams=useParams<{ userId: string, collectId: string}>()
     const { t } = useTranslation(i18nUrgeCollection.namespace);
-    const {
-        OrderStatusEnum,
-        OrderLabelEnum,
-        FollowUpResultEnum,
-        EmergencyContactEnum
-    } = useEnum();
+    const urlParams=useParams<{ userId: string, collectId: string}>()
 
     const userId = Number(urlParams.userId);
     const collectId = Number(urlParams.collectId);
-    const isSuperAdmin = getIsSuperAdmin();
 
-    const orderInfoDescriptions = [
-        { key: 'orderNumber', dataIndex: 'orderNumber' },
-        { key: 'mobileNumber', dataIndex: 'mobileNumber' },
-        { key: 'channel', dataIndex: 'channel' },
-        { key: 'appName', dataIndex: 'appName', render: (value, { channelUrl }) => <div>{value}<CopyTextIcon text={channelUrl}/></div> },
-        { key: 'productName', dataIndex: 'productName' },
-        { key: 'orderStatus', dataIndex: 'orderStatus', render: (value) => <Tag color={OrderStatusEnum[value].color}>{t(OrderStatusEnum[value].text)}</Tag> },
-        { key: 'orderLabel', dataIndex: 'orderLabel', render:(value) => <Tag color={OrderLabelEnum[value].color}>{t(OrderLabelEnum[value].text)}</Tag> },
-        { key: 'loanAmount', dataIndex: 'loanAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
-        { key: 'disburseAmount', dataIndex: 'disburseAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
-        {
-            titleTooltip: <Tooltip title={t('tooltip.amountDue')}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf', margin: '0 5px' }} /></Tooltip>,
-            key: 'amountDue',
-            dataIndex: 'amountDue',
-            render: (value) => <div>{formatPrice(value) || 0 }</div>
-        },
-        { key: 'reductionAmount', dataIndex: 'reductionAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
-        { key: 'amountPaid', dataIndex: 'amountPaid', render: (value) => <div>{formatPrice(value) || 0 }</div> },
-        { key: 'outstandingBalance', dataIndex: 'outstandingBalance', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
-        { key: 'extensionAmount', dataIndex: 'extensionAmount', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
-        { key: 'daysOverdue', dataIndex: 'daysOverdue', render: (value) => <div style={{color: '#FF4D4F'}}>{value}</div> },
-    ]
-    if(isSuperAdmin) {
-        orderInfoDescriptions.splice(0, 0, {
-            key: 'merchantName', dataIndex: 'merchantName'
-        })
+    // 取得後台使用者開關 (是否可查看 tab -通訊錄 & 手機短信)
+    // 在參數配置配有 "是否屏蔽當日到期前訂單通訊錄" 開關。
+    // 開關沒開 = 顯示   (不用管到不到期） (開關有開 todayCollect.contactSwitch = true  , 開關沒開 todayCollect.contactSwitch = false)
+    // 開關打開 + 有到期 = 顯示   (detailTabControl.contactSwitch = true , isNotOverdue = false -> addTab = true)
+    // 開關打開 + 沒到期 = 不顯示 (detailTabControl.contactSwitch = true , isNotOverdue = true -> addTab = false)
+    const { data: adminSwitch, isFetching: adminSwitchFetching } = useGetAdminSwitchQuery(null);
+    const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectTodayOrderDetailQuery({collectId});
+
+    const Content = () => {
+        const {
+            OrderStatusEnum,
+            OrderLabelEnum,
+            FollowUpResultEnum,
+            EmergencyContactEnum
+        } = useEnum();
+
+        const isSuperAdmin = getIsSuperAdmin();
+        const contactSwitch = adminSwitch.todayCollect.contactSwitch;
+        const smsSwitch = adminSwitch.todayCollect.smsSwitch;
+
+        const overDueDate = moment(orderInfo.expireTime).startOf('day')
+        const isOverDue = !moment().startOf('day').isBefore(overDueDate)
+
+        const showContactListTab = !contactSwitch || isOverDue
+        const showSMSTab = !smsSwitch || isOverDue
+
+        const orderInfoDescriptions = [
+            { key: 'orderNumber', dataIndex: 'orderNumber' },
+            { key: 'mobileNumber', dataIndex: 'mobileNumber' },
+            { key: 'channel', dataIndex: 'channel' },
+            { key: 'appName', dataIndex: 'appName', render: (value, { channelUrl }) => <div>{value}<CopyTextIcon text={channelUrl}/></div> },
+            { key: 'productName', dataIndex: 'productName' },
+            { key: 'orderStatus', dataIndex: 'orderStatus', render: (value) => <Tag color={OrderStatusEnum[value].color}>{t(OrderStatusEnum[value].text)}</Tag> },
+            { key: 'orderLabel', dataIndex: 'orderLabel', render:(value) => <Tag color={OrderLabelEnum[value].color}>{t(OrderLabelEnum[value].text)}</Tag> },
+            { key: 'loanAmount', dataIndex: 'loanAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
+            { key: 'disburseAmount', dataIndex: 'disburseAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
+            {
+                titleTooltip: <Tooltip title={t('tooltip.amountDue')}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf', margin: '0 5px' }} /></Tooltip>,
+                key: 'amountDue',
+                dataIndex: 'amountDue',
+                render: (value) => <div>{formatPrice(value) || 0 }</div>
+            },
+            { key: 'reductionAmount', dataIndex: 'reductionAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
+            { key: 'amountPaid', dataIndex: 'amountPaid', render: (value) => <div>{formatPrice(value) || 0 }</div> },
+            { key: 'outstandingBalance', dataIndex: 'outstandingBalance', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
+            { key: 'extensionAmount', dataIndex: 'extensionAmount', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
+            { key: 'daysOverdue', dataIndex: 'daysOverdue', render: (value) => <div style={{color: '#FF4D4F'}}>{value}</div> },
+        ]
+        if(isSuperAdmin) {
+            orderInfoDescriptions.splice(0, 0, {
+                key: 'merchantName', dataIndex: 'merchantName'
+            })
+        }
+
+        const collectRecordColumns = [
+            { title: t('trackingTime'), key: 'trackingTime', dataIndex: 'trackingTime', render: (_, { trackingTime }) =><div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('stage'), key: 'overdueStage', dataIndex: 'overdueStage' },
+            { title: t('contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson' },
+            { title: t('phone'), key: 'mobileNumber', dataIndex: 'mobileNumber' },
+            {
+                title: t('followUpResult'),
+                key: 'followUpResult',
+                dataIndex: 'followUpResult',
+                render: (_, { followUpResult }) => {
+                    const followUpResultStatus = FollowUpResultEnum[followUpResult]
+                    return <div>{followUpResultStatus.text}</div>
+                }
+            },
+            {
+                title: ()=><div>{t('ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
+                key: 'ptpTime',
+                dataIndex: 'ptpTime'
+            },
+            { title: t('trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord' },
+            { title: t('collectorName'), key: 'collector', dataIndex: 'collector' },
+        ]
+
+        const registerDescriptions = [
+            { key: 'userId', dataIndex: 'personaInfo.userId' },
+            { key: 'registerChannel', dataIndex: 'personaInfo.channelName' },
+            { key: 'packageName', dataIndex: 'personaInfo.appName' },
+            { key: 'mobileNumber', dataIndex: 'personaInfo.phoneNo' },
+            { key: 'registerTime', dataIndex: 'personaInfo.addTime', render: (_, { personaInfo }) => <div>{moment(personaInfo.addTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { key: 'userSource', dataIndex: 'personaInfo.userSource' },
+        ]
+
+        const personalDescriptions = [
+            { key: 'userName', dataIndex: 'personaInfo.nameTrue' },
+            { key: 'gender', dataIndex: 'personaInfo.gender' },
+            { key: 'idCardNo', dataIndex: 'personaInfo.idcardNo' },
+            { key: 'fatherName', dataIndex: 'personaInfo.fatherName' },
+            { key: 'birthDay', dataIndex: 'personaInfo.birth' },
+            { key: 'panId', dataIndex: 'personaInfo.panId' },
+            { key: 'education', dataIndex: 'personaInfo.education' },
+            { key: 'maritalStatus', dataIndex: 'personaInfo.marriageStatus' },
+            { key: 'email', dataIndex: 'personaInfo.email' },
+            { key: 'occupation', dataIndex: 'personaInfo.position' },
+            { key: 'salaryRange', dataIndex: 'personaInfo.salaryRange' },
+            { key: 'address', dataIndex: 'personaInfo.address' },
+        ]
+
+        const emergencyContactColumns = [
+            { title: t('table.contactType'), key: 'contact', dataIndex: 'contact', render: (_, { contact }) => <div>{EmergencyContactEnum[contact] && EmergencyContactEnum[contact].text}</div>  },
+            { title: t('table.relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
+            { title: t('table.contactName'), key: 'contactName', dataIndex: 'contactName' },
+            { title: t('table.contactPhone'), key: 'contactPhone', dataIndex: 'contactPhone' },
+            { title: t('table.uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+        ]
+
+        let identityPhotoRows = ['idcardFrontPhoto', 'idcardBackPhoto', 'idcardPortraitPhoto']
+        if(appInfo.COUNTRY === 'India') {
+            identityPhotoRows = ['panPhoto', ...identityPhotoRows]
+        }
+
+        const contactListColumns = [
+            { title: t('table.contactName'), key: 'name', dataIndex: 'name' },
+            { title: t('table.phone'), key: 'phone', dataIndex: 'phone' },
+            { title: t('table.lastAddedTime'), key: 'lastUpdateTime', dataIndex: 'lastUpdateTime', render: (_, { lastUpdateTime }) => <div>{moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+        ]
+
+        const smsLogsColumns = [
+            { title: t('table.sendPhoneNumber'), key: 'phone', dataIndex: 'phone' },
+            { title: t('table.smsContent'), key: 'content', dataIndex: 'content' },
+            { title: t('table.smsSendType'), key: 'content', dataIndex: 'direction' },
+            { title: t('table.sendTime'), key: 'time', dataIndex: 'time', render: (_, { time }) => <div>{moment(time).format('YYYY-MM-DD HH:mm:ss')}</div> },
+        ]
+
+        const OrderInfoTab = () => (
+            <div style={{ margin: '16px' }}>
+                <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{collectId}} />
+                <TableCard titleKey='urgeRecord' columns={collectRecordColumns} hook={useLazyGetCollectTodayCollectRecordQuery} queryBody={{collectId}} rowKey='id' />
+            </div>
+        )
+
+        const UserInfoTab = () => (
+            <div style={{ margin: '16px' }}>
+                <DescriptionsCard titleKey={'registerInfo'} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+                <PhotoCard titleKey={'identityInfo'} rows={identityPhotoRows} hook={useGetCollectTodayUserDetailQuery} params={{userId}} dataSourceKey='userImage'/>
+                <DescriptionsCard titleKey={'personalInfo'} descriptions={personalDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+                <SinglePageTableCard titleKey={'emergencyContact'} columns={emergencyContactColumns} hook={useGetCollectTodayUserDetailQuery} params={{userId}} rowKey='contact' dataSourceKey='emergencyContacts' />
+            </div>
+        )
+
+        let tabsItems = [
+            { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
+            { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
+        ]
+
+        if (showContactListTab) {
+            const ContactListTab = () => (
+                <div style={{ margin: '16px' }}>
+                    <TableCard  columns={contactListColumns} hook={useLazyGetCollectTodayContactListQuery} queryBody={{userId}} rowKey='phone' />
+                </div>
+            )
+           tabsItems = [...tabsItems, { label: t('tab.contractList'), key: 'contactList', children: <ContactListTab /> }]
+        }
+
+        if (showSMSTab) {
+            const SMSMessageTab = () => (
+                <div style={{ margin: '16px' }}>
+                    <TableCard columns={smsLogsColumns} hook={useLazyGetCollectTodaySMSLogQuery} queryBody={{userId}} rowKey='id' />
+                </div>
+            )
+            tabsItems = [...tabsItems, { label: t('tab.smsMessage'), key: 'smsMessage', children: <SMSMessageTab /> }]
+
+        }
+
+        return <Tabs items={tabsItems} />
     }
-
-    const collectRecordColumns = [
-        { title: t('trackingTime'), key: 'trackingTime', dataIndex: 'trackingTime', render: (_, { trackingTime }) =><div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-        { title: t('stage'), key: 'overdueStage', dataIndex: 'overdueStage' },
-        { title: t('contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson' },
-        { title: t('phone'), key: 'mobileNumber', dataIndex: 'mobileNumber' },
-        {
-            title: t('followUpResult'),
-            key: 'followUpResult',
-            dataIndex: 'followUpResult',
-            render: (_, { followUpResult }) => {
-                const followUpResultStatus = FollowUpResultEnum[followUpResult]
-                return <div>{followUpResultStatus.text}</div>
-            }
-        },
-        {
-            title: ()=><div>{t('ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
-            key: 'ptpTime',
-            dataIndex: 'ptpTime'
-        },
-        { title: t('trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord' },
-        { title: t('collectorName'), key: 'collector', dataIndex: 'collector' },
-    ]
-
-    const registerDescriptions = [
-        { key: 'userId', dataIndex: 'personaInfo.userId' },
-        { key: 'registerChannel', dataIndex: 'personaInfo.channelName' },
-        { key: 'packageName', dataIndex: 'personaInfo.appName' },
-        { key: 'mobileNumber', dataIndex: 'personaInfo.phoneNo' },
-        { key: 'registerTime', dataIndex: 'personaInfo.addTime', render: (_, { personaInfo }) => <div>{moment(personaInfo.addTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-        { key: 'userSource', dataIndex: 'personaInfo.userSource' },
-    ]
-
-    const personalDescriptions = [
-        { key: 'userName', dataIndex: 'personaInfo.nameTrue' },
-        { key: 'gender', dataIndex: 'personaInfo.gender' },
-        { key: 'idCardNo', dataIndex: 'personaInfo.idcardNo' },
-        { key: 'fatherName', dataIndex: 'personaInfo.fatherName' },
-        { key: 'birthDay', dataIndex: 'personaInfo.birth' },
-        { key: 'panId', dataIndex: 'personaInfo.panId' },
-        { key: 'education', dataIndex: 'personaInfo.education' },
-        { key: 'maritalStatus', dataIndex: 'personaInfo.marriageStatus' },
-        { key: 'email', dataIndex: 'personaInfo.email' },
-        { key: 'occupation', dataIndex: 'personaInfo.position' },
-        { key: 'salaryRange', dataIndex: 'personaInfo.salaryRange' },
-        { key: 'address', dataIndex: 'personaInfo.address' },
-    ]
-
-    const emergencyContactColumns = [
-        { title: t('table.contactType'), key: 'contact', dataIndex: 'contact', render: (_, { contact }) => <div>{EmergencyContactEnum[contact] && EmergencyContactEnum[contact].text}</div>  },
-        { title: t('table.relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
-        { title: t('table.contactName'), key: 'contactName', dataIndex: 'contactName' },
-        { title: t('table.contactPhone'), key: 'contactPhone', dataIndex: 'contactPhone' },
-        { title: t('table.uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-    ]
-
-    let identityPhotoRows = ['idcardFrontPhoto', 'idcardBackPhoto', 'idcardPortraitPhoto']
-    if(appInfo.COUNTRY === 'India') {
-        identityPhotoRows = ['panPhoto', ...identityPhotoRows]
-    }
-
-    const contactListColumns = [
-        { title: t('table.contactName'), key: 'name', dataIndex: 'name' },
-        { title: t('table.phone'), key: 'phone', dataIndex: 'phone' },
-        { title: t('table.lastAddedTime'), key: 'lastUpdateTime', dataIndex: 'lastUpdateTime', render: (_, { lastUpdateTime }) => <div>{moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-    ]
-
-    const smsLogsColumns = [
-        { title: t('table.sendPhoneNumber'), key: 'phone', dataIndex: 'phone' },
-        { title: t('table.smsContent'), key: 'content', dataIndex: 'content' },
-        { title: t('table.smsSendType'), key: 'content', dataIndex: 'direction' },
-        { title: t('table.sendTime'), key: 'time', dataIndex: 'time', render: (_, { time }) => <div>{moment(time).format('YYYY-MM-DD HH:mm:ss')}</div> },
-    ]
-
-    const OrderInfoTab = () => (
-        <div style={{ margin: '16px' }}>
-            <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{collectId}} />
-            <TableCard titleKey='urgeRecord' columns={collectRecordColumns} hook={useLazyGetCollectTodayCollectRecordQuery} queryBody={{collectId}} rowKey='id' />
-        </div>
-    )
-
-    const UserInfoTab = () => (
-        <div style={{ margin: '16px' }}>
-            <DescriptionsCard titleKey={'registerInfo'} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
-            <PhotoCard titleKey={'identityInfo'} rows={identityPhotoRows} hook={useGetCollectTodayUserDetailQuery} params={{userId}} dataSourceKey='userImage'/>
-            <DescriptionsCard titleKey={'personalInfo'} descriptions={personalDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
-            <SinglePageTableCard titleKey={'emergencyContact'} columns={emergencyContactColumns} hook={useGetCollectTodayUserDetailQuery} params={{userId}} rowKey='contact' dataSourceKey='emergencyContacts' />
-        </div>
-    )
-
-    const ContactListTab = () => (
-        <div style={{ margin: '16px' }}>
-            <TableCard  columns={contactListColumns} hook={useLazyGetCollectTodayContactListQuery} queryBody={{userId}} rowKey='phone' />
-        </div>
-    )
-
-    const SMSMessageTab = () => (
-        <div style={{ margin: '16px' }}>
-            <TableCard columns={smsLogsColumns} hook={useLazyGetCollectTodaySMSLogQuery} queryBody={{userId}} rowKey='id' />
-        </div>
-    )
-
-
-    const tabsItems = [
-        { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
-        { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
-        { label: t('tab.contractList'), key: 'contactList', children: <ContactListTab /> },
-        { label: t('tab.smsMessage'), key: 'smsMessage', children: <SMSMessageTab /> },
-    ]
 
 
     return (
         <PageContainer
+            loading={orderInfoFetching || adminSwitchFetching}
             header={{
                 ghost: true,
                 breadcrumb: {
@@ -190,7 +218,7 @@ export const OrderDetail = () => {
                 },
             }}
         >
-            <Tabs items={tabsItems} />
+            <Content />
         </PageContainer>
     )
 }

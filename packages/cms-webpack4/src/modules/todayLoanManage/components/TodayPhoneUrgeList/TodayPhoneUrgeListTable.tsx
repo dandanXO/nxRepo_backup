@@ -139,31 +139,6 @@ export const TodayPhoneUrgeListTable = () => {
         })
     }
 
-    const mockDataList = [
-        {
-            overDueId: 14270,
-            userId: 1000632,
-            merchantName: '此商戶勿動',
-            orderNo: 'no-26633851756610752',
-            appName: 'longingloan',
-            orderLabel: 'NewLoan',
-            userName: 'RESHIN T RASHEED',
-            phone: '9746567027',
-            stage: 'T_1',
-            overdueDays: 0,
-            outstandingBalance: '1000',
-            lastOpenAppTime: '2023-06-07T09:20:11',
-            latestRepaymentCodeAcquisitionTime: '2024-06-07T09:20:11',
-            followUpCount: 0,
-            contactable: true,
-            followUpResult: 'Missed',
-            ptpTime: '09:20',
-            trackingRecord: 'Borrower facing financial hardship due to job loss and medical expenses.',
-            recentTrackingTime: '2023-06-07T09:20:11',
-            collectorName: 'Ted'
-        }
-    ]
-
     const handleClickPromote = (userId:number, orderId: number ) => {
         history.push(`${currentPath}/detail/${userId}/${orderId}`)
         handleToDetailPage(`${currentPath}/detail`, currentPath)
@@ -190,7 +165,6 @@ export const TodayPhoneUrgeListTable = () => {
     return <ProTable<TodayPhoneUrgeListItem>
         loading={todayPhoneUrgeListFetching}
         dataSource={currentTodayPhoneUrgeListResponse?.records || []}
-        // dataSource={mockDataList}
         columns={columns}
         rowKey='overDueId'
         search={{
