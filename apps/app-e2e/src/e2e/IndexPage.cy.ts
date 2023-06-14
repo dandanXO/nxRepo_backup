@@ -24,6 +24,9 @@ import { getTimeInfoBetweenCurrentAndCountDown } from "@frontend/shared/date";
 import { ORDER_STATE } from "apps/app/src/app/domain/order/ORDER_STATE";
 import {formatPrice} from "../../../../apps/app/src/app/modules/format/formatPrice"
 
+import * as index_level10 from "../fixtures/index_level10.json"
+import * as index_level10_overdue from "../fixtures/index_level10_overdue.json"
+
 const INDIA_TIME_ZONE = "Asia/Kolkata";
 const APP_IDENTIFICATION = "[apps/app][e2e]";
 const infoLog = (message, rest) => {
@@ -4218,3 +4221,54 @@ describe('IndexPage', () => {
   })
 });
 
+
+it.only("status: level10 => level10 overdue", () => {
+  // NOTE: Given
+  const userServiceResponse: GetUserInfoServiceResponse = {
+    "userName": "9013452123",
+    "status": USER_AUTH_STATE.success,
+    "demoAccount": false,
+    "oldUser": false,
+    "needUpdateKyc": false,
+    "organic": false
+  }
+  cy.intercept("get", "/api/v2/login/info", {
+    statusCode: 200,
+    body: userServiceResponse,
+  }).as("getInfo").then(() => {
+    console.log("info");
+  })
+
+
+  // NOTE: Given
+  const indexServiceResponse: IndexServiceResponse = index_level10
+
+  // NOTE: Given Order overdue
+  const overdueIndexServiceResponse: IndexServiceResponse = index_level10_overdue
+
+
+  let indexCount = 0;
+  cy.intercept("get", "/api/v3/index", (res) => {
+    res.continue((req) => {
+      if(indexCount === 0) {
+        console.log("[首頁]1")
+        req.send({
+          statusCode: 200,
+          body: indexServiceResponse,
+        })
+      } else {
+        console.log("[首頁]2")
+        req.send({
+          statusCode: 200,
+          body: overdueIndexServiceResponse,
+        })
+      }
+      indexCount++;
+    })
+  }).as("getIndex").then(() => {
+    console.log("index");
+  })
+
+  visitIndexPage();
+
+})
