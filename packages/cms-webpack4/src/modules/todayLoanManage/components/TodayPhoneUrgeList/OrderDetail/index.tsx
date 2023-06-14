@@ -13,7 +13,7 @@ import {
 import {
     useGetCollectTodayOrderDetailQuery,
     useGetCollectTodayUserDetailQuery,
-    useLazyGetCollectTodayCollectRecordQuery
+    useLazyGetCollectTodayCollectRecordQuery, useLazyGetCollectTodayContactListQuery
 } from "../../../api/CollectTodayApi";
 import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
 import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";
@@ -127,6 +127,12 @@ export const OrderDetail = () => {
         identityPhotoRows = ['panPhoto', ...identityPhotoRows]
     }
 
+    const contactListColumns = [
+        { title: t('contactName'), key: 'name', dataIndex: 'name' },
+        { title: t('phone'), key: 'phone', dataIndex: 'phone' },
+        { title: t('lastAddedTime'), key: 'lastUpdateTime', dataIndex: 'lastUpdateTime', render: (_, { lastUpdateTime }) => <div>{moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+    ]
+
     const OrderInfoTab = () => (
         <div style={{ margin: '16px' }}>
             <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{collectId}} />
@@ -143,10 +149,17 @@ export const OrderDetail = () => {
         </div>
     )
 
+    const ContactListTab = () => (
+        <div style={{ margin: '16px' }}>
+            <TableCard  columns={contactListColumns} hook={useLazyGetCollectTodayContactListQuery} queryBody={{userId}} />
+        </div>
+    )
+
 
     const tabsItems = [
         { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
         { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
+        { label: t('tab.contractList'), key: 'contactList', children: <ContactListTab /> },
     ]
 
 

@@ -3,6 +3,10 @@ import { GetTodayCollectorListResponse } from "./types/getTodayCollectorList";
 import {GetOrderDetailQueryString, GetOrderDetailResponse} from "./types/getOrderDetail";
 import {GetUserDetailQueryString, GetUserDetailResponse} from "./types/getUserDetail";
 import {GetTodayCollectRecordQueryString, GetTodayCollectRecordResponse} from "./types/getTodayCollectRecord";
+import {
+    GetTodayCollectContactListQueryString,
+    GetTodayCollectContactListResponse
+} from "./types/getTodayCollectContactList";
 
 
 const CollectTodayApi = API.injectEndpoints({
@@ -25,7 +29,7 @@ const CollectTodayApi = API.injectEndpoints({
         // [GET] 获取當日催收使用者詳情
         getCollectTodayUserDetail: builder.query<GetUserDetailResponse, GetUserDetailQueryString>({
             query: (requestBody: GetUserDetailQueryString) => ({
-                url: `/collect-overdue/user-info/${requestBody.userId}`,
+                url: `/collect-today/user-info/${requestBody.userId}`,
                 method: 'get'
             })
         }),
@@ -39,6 +43,16 @@ const CollectTodayApi = API.injectEndpoints({
                     method: 'get'
                 })
             }
+        }),
+        // [GET] 获取當日催收通讯录
+        getCollectTodayContactList: builder.query<GetTodayCollectContactListResponse, GetTodayCollectContactListQueryString>({
+            query: (requestBody: GetTodayCollectContactListQueryString) => {
+                return ({
+                    url: `/collect-today/user-contacts`,
+                    params: requestBody,
+                    method: 'get'
+                })
+            }
         })
     })
 })
@@ -47,5 +61,6 @@ export const {
     useGetTodayCollectorListQuery,
     useGetCollectTodayUserDetailQuery,
     useGetCollectTodayOrderDetailQuery,
-    useLazyGetCollectTodayCollectRecordQuery
+    useLazyGetCollectTodayCollectRecordQuery,
+    useLazyGetCollectTodayContactListQuery
 } = CollectTodayApi;

@@ -7,7 +7,7 @@ import {UseLazyQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {QueryDefinition} from "@reduxjs/toolkit/query";
 
 interface ITableCardProps {
-    titleKey: string,
+    titleKey?: string,
     columns: {
         title: string | (() => React.ReactElement),
         key: string,
