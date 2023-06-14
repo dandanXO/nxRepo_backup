@@ -40,6 +40,7 @@ export const OrderDetail = () => {
     const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectTodayOrderDetailQuery({collectId});
 
     const Content = () => {
+        console.log(orderInfo)
         const {
             OrderStatusEnum,
             OrderLabelEnum,
@@ -78,6 +79,10 @@ export const OrderDetail = () => {
             { key: 'outstandingBalance', dataIndex: 'outstandingBalance', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
             { key: 'extensionAmount', dataIndex: 'extensionAmount', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
             { key: 'daysOverdue', dataIndex: 'daysOverdue', render: (value) => <div style={{color: '#FF4D4F'}}>{value}</div> },
+            { key: 'overDueFee', dataIndex: 'overdueFee', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
+            { key: 'applicationTime', dataIndex: 'applicationTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { key: 'reviewTime', dataIndex: 'reviewTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { key: 'expirationTime', dataIndex: 'expireTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
         ]
         if(isSuperAdmin) {
             orderInfoDescriptions.splice(0, 0, {
