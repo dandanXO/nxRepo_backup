@@ -34,7 +34,6 @@ export const i18nUrgeCollection: i18nComponent = {
             trackingTime: '跟进时间',
             contactPerson: '跟进对象',
             contactName: '姓名',
-            lastAddedTime: '最后添加时间',
             tooltip: {
                 amountDue: '应还金额=申请金额*(1+后置费率)'
             }
@@ -69,7 +68,6 @@ export const i18nUrgeCollection: i18nComponent = {
             trackingTime: 'Tracking Time',
             contactPerson: 'Contact Person',
             contactName: 'Contact Name',
-            lastAddedTime: 'Last Added Time',
             tooltip: {
                 amountDue: '=Loan Amount*(1+Post-Fee Rate)'
             }

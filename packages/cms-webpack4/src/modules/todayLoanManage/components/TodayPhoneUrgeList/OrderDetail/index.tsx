@@ -13,7 +13,7 @@ import {
 import {
     useGetCollectTodayOrderDetailQuery,
     useGetCollectTodayUserDetailQuery,
-    useLazyGetCollectTodayCollectRecordQuery, useLazyGetCollectTodayContactListQuery
+    useLazyGetCollectTodayCollectRecordQuery, useLazyGetCollectTodayContactListQuery, useLazyGetCollectTodaySMSLogQuery
 } from "../../../api/CollectTodayApi";
 import {getIsSuperAdmin} from "../../../../shared/storage/getUserInfo";
 import {CopyTextIcon} from "../../../../shared/components/other/CopyTextIcon";
@@ -22,12 +22,10 @@ import {useEnum} from "../../../../shared/constants/useEnum";
 import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
 import moment from "moment-timezone";
 import {InfoCircleOutlined} from "@ant-design/icons";
-import {i18nCards} from "../../../../shared/components/i18n/cards/translations";
 
 export const OrderDetail = () => {
     const urlParams=useParams<{ userId: string, collectId: string}>()
     const { t } = useTranslation(i18nUrgeCollection.namespace);
-    const { t: cardsT } = useTranslation(i18nCards.namespace);
     const {
         OrderStatusEnum,
         OrderLabelEnum,
@@ -115,11 +113,11 @@ export const OrderDetail = () => {
     ]
 
     const emergencyContactColumns = [
-        { title: cardsT('contactType'), key: 'contact', dataIndex: 'contact', render: (_, { contact }) => <div>{EmergencyContactEnum[contact] && EmergencyContactEnum[contact].text}</div>  },
-        { title: cardsT('relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
-        { title: cardsT('contactName'), key: 'contactName', dataIndex: 'contactName' },
-        { title: cardsT('contactName'), key: 'contactPhone', dataIndex: 'contactPhone' },
-        { title: cardsT('uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+        { title: t('table.contactType'), key: 'contact', dataIndex: 'contact', render: (_, { contact }) => <div>{EmergencyContactEnum[contact] && EmergencyContactEnum[contact].text}</div>  },
+        { title: t('table.relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
+        { title: t('table.contactName'), key: 'contactName', dataIndex: 'contactName' },
+        { title: t('table.contactPhone'), key: 'contactPhone', dataIndex: 'contactPhone' },
+        { title: t('table.uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
     ]
 
     let identityPhotoRows = ['idcardFrontPhoto', 'idcardBackPhoto', 'idcardPortraitPhoto']
@@ -128,9 +126,16 @@ export const OrderDetail = () => {
     }
 
     const contactListColumns = [
-        { title: t('contactName'), key: 'name', dataIndex: 'name' },
-        { title: t('phone'), key: 'phone', dataIndex: 'phone' },
-        { title: t('lastAddedTime'), key: 'lastUpdateTime', dataIndex: 'lastUpdateTime', render: (_, { lastUpdateTime }) => <div>{moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+        { title: t('table.contactName'), key: 'name', dataIndex: 'name' },
+        { title: t('table.phone'), key: 'phone', dataIndex: 'phone' },
+        { title: t('table.lastAddedTime'), key: 'lastUpdateTime', dataIndex: 'lastUpdateTime', render: (_, { lastUpdateTime }) => <div>{moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+    ]
+
+    const smsLogsColumns = [
+        { title: t('table.sendPhoneNumber'), key: 'phone', dataIndex: 'phone' },
+        { title: t('table.smsContent'), key: 'content', dataIndex: 'content' },
+        { title: t('table.smsSendType'), key: 'content', dataIndex: 'direction' },
+        { title: t('table.sendTime'), key: 'time', dataIndex: 'time', render: (_, { time }) => <div>{moment(time).format('YYYY-MM-DD HH:mm:ss')}</div> },
     ]
 
     const OrderInfoTab = () => (
@@ -151,7 +156,13 @@ export const OrderDetail = () => {
 
     const ContactListTab = () => (
         <div style={{ margin: '16px' }}>
-            <TableCard  columns={contactListColumns} hook={useLazyGetCollectTodayContactListQuery} queryBody={{userId}} />
+            <TableCard  columns={contactListColumns} hook={useLazyGetCollectTodayContactListQuery} queryBody={{userId}} rowKey='phone' />
+        </div>
+    )
+
+    const SMSMessageTab = () => (
+        <div style={{ margin: '16px' }}>
+            <TableCard columns={smsLogsColumns} hook={useLazyGetCollectTodaySMSLogQuery} queryBody={{userId}} rowKey='id' />
         </div>
     )
 
@@ -160,6 +171,7 @@ export const OrderDetail = () => {
         { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
         { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
         { label: t('tab.contractList'), key: 'contactList', children: <ContactListTab /> },
+        { label: t('tab.smsMessage'), key: 'smsMessage', children: <SMSMessageTab /> },
     ]
 
 

@@ -57,13 +57,7 @@ export const i18nCards: i18nComponent = {
             occupation: '职业',
             salaryRange: '薪资范围',
             address: '家庭地址',
-
             emergencyContact: '紧急联络人',
-            contactName: '联络人姓名',
-            relationShip: '与本人关系',
-            contactType: '联络人名称',
-            contactPhone: '联络人电话',
-            uploadTime: '上传时间',
 
             identityInfo: '身份信息',
             idcardFrontPhoto: {
@@ -131,13 +125,7 @@ export const i18nCards: i18nComponent = {
             occupation: 'Occupation',
             salaryRange: 'Salary Range',
             address: 'Address',
-
             emergencyContact: 'Emergency Contact',
-            contactName: 'Contact Name',
-            relationShip: 'Relationship',
-            contactType: 'Contact',
-            contactPhone: 'Contact Number',
-            uploadTime: 'Upload Time',
 
             identityInfo: 'Identity Information',
             idcardFrontPhoto: {

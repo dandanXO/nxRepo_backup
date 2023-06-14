@@ -51,6 +51,19 @@ export const i18nCommon: i18nComponent = {
             pagination : {
                 showingRange: "共 {{total}} 笔",
                 itemPerPage: ' / 页',
+            },
+            table: {
+                sendPhoneNumber: '发送号码',
+                contactName: '联络人姓名',
+                contactPhone: '联络人电话',
+                lastAddedTime: '最后添加时间',
+                phone: '手机号',
+                uploadTime: '上传时间',
+                relationShip: '与本人关系',
+                contactType: '联络人名称',
+                smsContent: '内容',
+                smsSendType: '发送类型',
+                sendTime: '发送时间',
             }
         },
         "en-US": {
@@ -101,6 +114,19 @@ export const i18nCommon: i18nComponent = {
             pagination : {
                 showingRange : "Total {{total}} Record(s)",
                 itemPerPage: ' / Page',
+            },
+            table: {
+                sendPhoneNumber: 'Phone Number',
+                contactName: 'Contact Name',
+                contactPhone: 'Contact Number',
+                lastAddedTime: 'Last Added Time',
+                phone: 'Mobile Number',
+                uploadTime: 'Upload Time',
+                relationShip: 'Relationship',
+                contactType: 'Contact',
+                smsContent: 'SMS Content',
+                smsSendType: 'Sending Type',
+                sendTime: 'Sending Time',
             }
         }
     }

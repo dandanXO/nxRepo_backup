@@ -7,6 +7,7 @@ import {
     GetTodayCollectContactListQueryString,
     GetTodayCollectContactListResponse
 } from "./types/getTodayCollectContactList";
+import {GetTodayCollectSMSLogsQueryString, GetTodayCollectSMSLogsResponse} from "./types/getTodayCollectSMSLogs";
 
 
 const CollectTodayApi = API.injectEndpoints({
@@ -53,6 +54,16 @@ const CollectTodayApi = API.injectEndpoints({
                     method: 'get'
                 })
             }
+        }),
+        // [GET] 获取當日催收短信记录
+        getCollectTodaySMSLog: builder.query<GetTodayCollectSMSLogsResponse, GetTodayCollectSMSLogsQueryString>({
+            query: (requestBody: GetTodayCollectSMSLogsQueryString) => {
+                return ({
+                    url: `/collect-today/user-sms-logs`,
+                    params: requestBody,
+                    method: 'get'
+                })
+            }
         })
     })
 })
@@ -62,5 +73,6 @@ export const {
     useGetCollectTodayUserDetailQuery,
     useGetCollectTodayOrderDetailQuery,
     useLazyGetCollectTodayCollectRecordQuery,
-    useLazyGetCollectTodayContactListQuery
+    useLazyGetCollectTodayContactListQuery,
+    useLazyGetCollectTodaySMSLogQuery
 } = CollectTodayApi;
