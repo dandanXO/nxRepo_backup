@@ -1,5 +1,9 @@
 import {useTranslation} from "react-i18next";
 
+export type TContactPerson = 'BORROWER' | 'EMERGENCY_CONTACT1' | 'EMERGENCY_CONTACT2' | 'CONTACT_LIST'
+export type TFollowUpResult = 'Promise' | 'FinancialDifficulties' | 'Missed' | 'TurnedOff' | 'InvalidPhoneNumber' | 'BadAttitude' | 'Other'
+export type TGenerateRePayLink = 'NONE' | 'PARTIAL_REPAYMENT' | 'REPAYMENT_LINK' | 'EXTENSION_LINK'
+
 export const useEnum = () => {
     const { t }  = useTranslation()
 
@@ -46,7 +50,7 @@ export const useEnum = () => {
         T_1: { text: 'T-1'}
     }
 
-    const FollowUpResultEnum = {
+    const FollowUpResultEnum : Record<TFollowUpResult & '', { text: string, color?: string }> = {
         '': { text: t('noRestriction') },
         Promise: { text: t('followUpResultStatus.Promise'), color: '#1890FF'},
         FinancialDifficulties: { text: t('followUpResultStatus.FinancialDifficulties'), color: '#13C2C2'},
@@ -57,11 +61,18 @@ export const useEnum = () => {
         Other: { text: t('followUpResultStatus.Other'), color: 'black'},
     }
 
-    const EmergencyContactEnum = {
+    const EmergencyContactEnum: Record<TContactPerson, { text: string }> = {
         BORROWER: { text : t('contact.borrower') },
-        CONTACT_LIST: { text: t('contact.list') },
         EMERGENCY_CONTACT1: { text: t('contact.emergency', { count: 1 }) },
         EMERGENCY_CONTACT2: { text: t('contact.emergency', { count: 2 }) },
+        CONTACT_LIST: { text: t('contact.list') },
+    }
+
+    const GenerateRePayLinkEnum: Record<TGenerateRePayLink, { text: string }> = {
+        NONE: { text : t('none') },
+        PARTIAL_REPAYMENT: { text : t('partialRepay') },
+        REPAYMENT_LINK: { text : t('repayLink') },
+        EXTENSION_LINK: { text : t('extensionLink') },
     }
 
     return {
@@ -70,6 +81,7 @@ export const useEnum = () => {
         CurrentDayOverDueStageEnum,
         OverDueStageEnum,
         FollowUpResultEnum,
-        EmergencyContactEnum
+        EmergencyContactEnum,
+        GenerateRePayLinkEnum
     }
 }

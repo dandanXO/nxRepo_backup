@@ -3,6 +3,7 @@ import {
     GetTodayPhoneUrgeListQueryString,
     GetTodayPhoneUrgeListResponse,
 } from "./types/getTodayPhoneUrgeList";
+import {PostTodayPhoneUrgeRecordRequest} from "./types/postTodayPhoneUrgeRecord";
 
 
 const TodayPhoneUrgeApi = API.injectEndpoints({
@@ -15,10 +16,19 @@ const TodayPhoneUrgeApi = API.injectEndpoints({
                 params: requestBody,
                 method: 'get'
             })
+        }),
+        // [POST] 新增當日催收紀錄
+        postTodayPhoneUrgeRecord: builder.mutation<{}, PostTodayPhoneUrgeRecordRequest>({
+            query: (requestBody: PostTodayPhoneUrgeRecordRequest) => ({
+                url: '',
+                method: 'post',
+                data: requestBody
+            })
         })
     })
 })
 
 export const {
-    useLazyGetTodayPhoneUrgeListQuery
+    useLazyGetTodayPhoneUrgeListQuery,
+    usePostTodayPhoneUrgeRecordMutation
 } = TodayPhoneUrgeApi;

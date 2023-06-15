@@ -30,7 +30,7 @@ interface IOrderDetailContentProps {
 export const OrderDetailContent = ({
     userId, collectId
 }: IOrderDetailContentProps) => {
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(true)
 
     const { data: adminSwitch, isFetching: adminSwitchFetching } = useGetAdminSwitchQuery(null);
     const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectTodayOrderDetailQuery({collectId});
@@ -224,7 +224,7 @@ export const OrderDetailContent = ({
 
     return (
         <React.Fragment>
-            <UrgeModal open={showModal} handleCloseModal={()=>setShowModal(false)}/>
+            <UrgeModal collectId={collectId} userId={userId} open={showModal} handleCloseModal={()=>setShowModal(false)}/>
             {renderTab}
         </React.Fragment>
     )

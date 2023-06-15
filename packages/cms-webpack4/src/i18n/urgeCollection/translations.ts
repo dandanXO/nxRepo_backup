@@ -35,9 +35,12 @@ export const i18nUrgeCollection: i18nComponent = {
             contactPerson: '跟进对象',
             contactName: '姓名',
             tooltip: {
-                amountDue: '应还金额=申请金额*(1+后置费率)'
+                amountDue: '应还金额=申请金额*(1+后置费率)',
+                repayLink: '若用户删除App时，可生成还款或展期链结，提供给用户'
             },
-            addUrge: '添加催收纪录'
+            addUrge: '添加催收纪录',
+            generateLink: '生成链结',
+            repayAmount: '还款金额',
         },
         "en-US": {
             function: 'Function',
@@ -70,9 +73,12 @@ export const i18nUrgeCollection: i18nComponent = {
             contactPerson: 'Contact Person',
             contactName: 'Contact Name',
             tooltip: {
-                amountDue: '=Loan Amount*(1+Post-Fee Rate)'
+                amountDue: '=Loan Amount*(1+Post-Fee Rate)',
+                repayLink: 'If users delete the app, the repayment or extension link can be generated and provided to them.'
             },
-            addUrge: 'Add Collection Record'
+            addUrge: 'Add Collection Record',
+            generateLink: 'Generate Link',
+            repayAmount: 'Repayment amount'
         }
     }
 }

@@ -64,7 +64,15 @@ export const i18nCommon: i18nComponent = {
                 smsContent: '内容',
                 smsSendType: '发送类型',
                 sendTime: '发送时间',
-            }
+            },
+            placeholder: {
+                select: '选择'
+            },
+            none: '无',
+            partialRepay: '发起部分还款',
+            repayLink: '生成还款链接',
+            extensionLink: '生成展期链接',
+            keyIn: '请输入',
         },
         "en-US": {
             noRestriction: 'No Restriction',
@@ -127,7 +135,15 @@ export const i18nCommon: i18nComponent = {
                 smsContent: 'SMS Content',
                 smsSendType: 'Sending Type',
                 sendTime: 'Sending Time',
-            }
+            },
+            placeholder: {
+                select: 'Select'
+            },
+            none: 'None',
+            partialRepay: 'Partial Repayment',
+            repayLink: 'Repayment Link',
+            extensionLink: 'Extension Link',
+            keyIn: 'Must enter ',
         }
     }
 }
