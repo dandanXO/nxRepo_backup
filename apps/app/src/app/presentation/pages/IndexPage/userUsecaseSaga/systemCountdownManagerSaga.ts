@@ -26,6 +26,8 @@ export function* systemCountdownManagerSaga() {
     ) {
       // NOTICE: 不能重刷，需等待重刷時間
       yield put(SystemCaseActions.SystemRefreshableCountdownSaga(indexResponse.refreshableUntil));
+      // NOTICE: 清掉風控額度到數時間
+      yield put(SystemCaseActions.SystemCountdownSaga(''));
     } else {
         // NOTICE: 可以重刷
         const offerExpireTime = order.state === ORDER_STATE.hasOverdueOrder ? '' : indexResponse?.offerExpireTime;
