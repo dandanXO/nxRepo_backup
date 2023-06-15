@@ -39,6 +39,15 @@ import NewCustomersDailyConversionRatesPage from "./modules/statistics/component
 import ReloanStatisticsPage from "./modules/statistics/components/pages/ReloanStatisticsPage";
 import { TodayLoanManageRoutes } from "./modules/todayLoanManage/routes";
 import { AfterLoanManageRoutes } from "./modules/afterLoanManage/routes";
+import en_US from 'antd/es/locale/en_US'
+import zh_CN from 'antd/es/locale/zh_CN'
+import i18next from "i18next";
+
+const langMap = {
+    "zh-CN": zh_CN,
+    "en-US": en_US
+}
+
 const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -64,7 +73,7 @@ export const AppRouter = () => {
     })
 
     return (
-        <ConfigProvider prefixCls="ant4">
+        <ConfigProvider prefixCls="ant4" locale={langMap[i18next.language]}>
             {/* NOTICE: [Its instance type 'BrowserRouter' is not a valid JSX element](https://stackoverflow.com/questions/71843747/its-instance-type-browserrouter-is-not-a-valid-jsx-element)*/}
             {/*<Router basename={window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/'}>*/}
             {/*// @ts-ignore*/}
