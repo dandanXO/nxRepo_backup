@@ -135,14 +135,14 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             );
           })}
 
-        {status !== 'EXTEND' && (
+        {/* {status !== 'EXTEND' && (
           <ListItem
             title={'Daily Fee'}
             text={<Money money={dailyFee} />}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
           />
-        )}
+        )} */}
 
         {status === 'EXTEND' && (
           <ListItem
