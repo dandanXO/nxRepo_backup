@@ -595,7 +595,7 @@ describe('IndexPage', () => {
       "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -1360,7 +1360,7 @@ describe('IndexPage', () => {
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
-          "dueDate": moment().tz(INDIA_TIME_ZONE).add(3, "days"),
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(4, "days"),
           "overdue": false,
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         }

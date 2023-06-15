@@ -429,7 +429,7 @@ const onUserClickViewApplicationProgress = () => {
 
   return (
     <div className={'flex flex-col'}>
-      <div className={'flex flex-col overflow-auto max-h-[90vh] w-full absolute top-0'}>
+      <div className={'flex flex-col overflow-auto max-h-[90vh] w-full absolute top-0 pb-10'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
       {/*NOTE: 頭部與內容*/}
@@ -495,17 +495,18 @@ const onUserClickViewApplicationProgress = () => {
             //   indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount >= 0,
             ].some((condition) => condition === true) &&
               indexPageState.user.state === USER_AUTH_STATE.success && (
-                <div className={'mb-3 mt-8'}>
+                <div className={'mt-8'}>
                   <LoanOverViewSection state={indexPageState} />
                 </div>
               )
           }
 
           {/*TODO: refactor me*/}
-          <div className={'my-6 pb-10'}>
+          <div>
             <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
 
+        
           {/*TODO: 用戶認證中或用戶拒絕*/}
           {indexPageState.user.state === USER_AUTH_STATE.authing ? (
             <NoticeUserInProgressAuthStatusSections />

@@ -155,7 +155,7 @@ export const indexPageSlice = createSlice({
         const isAnyOrderComingOverdue = action.payload.payableRecords.some((order) => {
           const currentTime = moment();
           const expireTime = moment(order.dueDate);
-          const overdueDay = expireTime.diff(currentTime, 'days');
+          const overdueDay = expireTime.diff(currentTime, 'days', true);
           // const overdueHour = expireTime.diff(currentTime, "hours");
           // const overdueMinute = expireTime.diff(currentTime, "minute");
           const isOverdueEqual3Days = overdueDay <= 3;

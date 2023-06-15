@@ -79,7 +79,7 @@ export const TipsSection = (props: Props) => {
   if(!messageComponent) return null;
 
   return (
-    <div className={''} data-testing-id={'tips'}>
+    <div className={'my-6 '} data-testing-id={'tips'}>
       {messageComponent && (
         <div className={'inline-block rounded-t-xl bg-secondary-variant px-3 py-1 text-xs text-white font-bold'}>Tips</div>
       )}
