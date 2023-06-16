@@ -56,7 +56,7 @@ export const TipsSection = (props: Props) => {
          return messageComponent;
     }
     messageComponent = (
-        <div className={'rounded-b-xl bg-secondary-varient px-4 py-3 text-center text-sm font-light leading-4 text-secondary-variant'}>
+      <div className={'rounded-b-xl bg-secondary-assistant px-4 py-3 text-center text-sm font-light leading-4 text-secondary-variant'}>
         {/*TODO: 有 & 沒有應還訂單時的文案*/}
         <div className={'mb-2'}>The available credit limit has expired, please reacquire credit amount.</div>
         {/*TODO: 有應還訂單時的文案*/}

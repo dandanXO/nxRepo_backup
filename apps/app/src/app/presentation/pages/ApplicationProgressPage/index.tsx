@@ -6,6 +6,7 @@ import { useLazyGetUserProcessQuery } from '../../../api/rtk';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PageContent } from '../../components/layouts/PageContent';
 import { ProgressItem } from './ProgressItem';
+import {formatDate} from "../../../modules/format/formatDate";
 
 const ApplicationProgressPage = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const ApplicationProgressPage = () => {
               <ProgressItem
                 title={news.title}
                 content={news.content}
-                date={moment(news.addTime).format('DD-MM-YYYY HH:mm:ss')}
+                date={formatDate(moment.unix(Number(news.addTime)))}
               />
             );
           })

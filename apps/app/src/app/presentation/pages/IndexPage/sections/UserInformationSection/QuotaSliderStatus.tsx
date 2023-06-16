@@ -71,7 +71,7 @@ export const QuotaSliderStatus = (props: Props) => {
             </div>
           </div>
 
-          <div className="slider mb-1"data-testing-disable={disableQuotaSlider}>
+          <div className="slider mb-1" data-testing-disable={disableQuotaSlider}>
             <ReactSlider
               className="quota-slider"
               trackClassName={cx({

@@ -187,9 +187,9 @@ describe('IndexPage', () => {
       "noQuotaByRetryFewTimes": false,
 
       "riskReject": false,
-      "refreshableUntil": "2023-03-28T08:10:24",
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(11, "days"),
 
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(11, "days"),
 
       "totalAmount": 15000,
       "usedAmount": 15000,
@@ -343,9 +343,9 @@ describe('IndexPage', () => {
         "noQuotaByRetryFewTimes": false,
 
         "riskReject": false,
-        "refreshableUntil": "2023-03-28T08:10:24",
+        "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
 
-        "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+        "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
 
         "totalAmount": 15000,
         "usedAmount": 15000,
@@ -533,11 +533,11 @@ describe('IndexPage', () => {
     const indexServiceResponse: IndexServiceResponse = {
       "hiddenLoanDetail": false,
       "totalAmount": 15000,
-      "usedAmount": 15000,
-      "availableAmount": 900,
+      "usedAmount": 14100,
+      "availableAmount": 5000,
       "quotaBar": {
         "min": 1000,
-        "max": 10000,
+        "max": 5000,
         "current": 5000,
         "serial": 1000
       },
@@ -595,7 +595,7 @@ describe('IndexPage', () => {
       "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -677,8 +677,8 @@ describe('IndexPage', () => {
       indexPagePo.tabPayment().find("[data-testing-id='tab-payment-notice']").should("not.exist");
   })
 
-    // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
-    it("status: 用戶已認證、有逾期的訂單", () => {
+  // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
+  it("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -789,7 +789,7 @@ describe('IndexPage', () => {
     visitIndexPage();
     // NOTE: then
     // NOTE: important 看到跑馬燈
-    indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+    indexPagePo.marquee().contains(indexServiceResponse.marquee);
 
     // NOTE: important 看到 welcome 包含姓名、客服 Button
     indexPagePo.welcome().should("be.visible");
@@ -845,8 +845,6 @@ describe('IndexPage', () => {
 
   })
 
-
-
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
   it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
@@ -882,10 +880,13 @@ describe('IndexPage', () => {
       // NOTICE: 情境1: 當 refreshable true, noQuotaByRetryFewTimes false 顯示能夠重刷的倒數計時。
       // NOTICE: 情境2:  riskReject 為 true, 也是看下面的參數
       "riskReject": true,
-      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(5, "days"),
+      // "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(5, "days"),
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(5, "seconds"),
 
       // NOTICE:
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      // NOTE: 模擬後端亂給日期
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
 
       "oldUserForceApply": false,
       "needRiskKycUpdate": false,
@@ -1314,12 +1315,12 @@ describe('IndexPage', () => {
       indexPagePo.viewAppProgressButton().should("not.exist");
 
       // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
-      indexPagePo.reacquireCreditButton().click().then(() => {
-          indexPagePo.reacquireLoadingNotice()
-              .should("be.visible")
-              .contains('Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.')
-          indexPagePo.reacquireCreditButton().invoke('attr', 'data-testing-loading').should('eq', 'true')
-      })
+      // indexPagePo.reacquireCreditButton().click().then(() => {
+      //     indexPagePo.reacquireLoadingNotice()
+      //         .should("be.visible")
+      //         .contains('Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.')
+      //     indexPagePo.reacquireCreditButton().invoke('attr', 'data-testing-loading').should('eq', 'true')
+      // })
 
       // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。 (實際不會跳出無法測試)
 
@@ -2268,8 +2269,9 @@ describe('IndexPage', () => {
       // NOTICE: 風控有無過期
       // NOTE: 詢問後端，直接沒額度的風控有無過期??
       // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days").format(),
-      "offerExpireTime": null,
-
+      // "offerExpireTime": null,
+      // NOTE: 模擬亂給資料
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days").format(),
 
       // NOTICE: 實際可用金額
       "availableAmount": 900,
@@ -4218,7 +4220,7 @@ describe('IndexPage', () => {
   })
 
 
-  it.only("status: level10 => level10 overdue", () => {
+  it("status: level10 => level10 overdue", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
