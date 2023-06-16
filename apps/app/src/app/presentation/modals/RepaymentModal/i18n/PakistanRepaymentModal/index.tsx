@@ -49,7 +49,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
   const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState('');
 
   return (
-    <div className="px-4 text-left">
+    <div className="px-4 text-left text-ctext-primary">
       <div className="mt-3 ml-[-4px] whitespace-nowrap text-xs">
         <Radio.Group
           value={radioValue}
@@ -67,7 +67,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
       </div>
 
       <div>
-        <div className="mt-3 text-xs text-black">{'Payment Amount (PKR)'}</div>
+        <div className="mt-3 text-xs">{'Payment Amount (PKR)'}</div>
         <Input
           name={'amount'}
           labelType="none"
@@ -100,7 +100,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
       </div>
 
       <div>
-        <div className="mt-2.5 text-xs text-black">{'Payment Method'}</div>
+        <div className="mt-1.5 text-xs">{'Payment Method'}</div>
         <Select
           styles={selectStyles}
           options={repayTypesList || []}
@@ -114,7 +114,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
 
       {radioValue !== 'custom' && (
         <>
-          <div className="mt-2.5 text-xs text-black">{'Coupon (PKR)'}</div>
+          <div className="mt-2.5 text-xs">{'Coupon (PKR)'}</div>
           <div
             className="flex items-center justify-center border-b border-solid border-[#aaaaaa] py-1.5 pl-5 pr-4"
             onClick={() => {
@@ -136,7 +136,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
               {coupon ? (
                 <div className="flex grow justify-between">
                   <div className="self-center">- {coupon.discountAmount}</div>
-                  <div className="flex flex-col text-xs text-gray-400">
+                  <div className="flex flex-col text-xs text-ctext-secondary">
                     <div>expiration date</div>
                     <div className="">{coupon.expireTime ? formatDate(moment(coupon.expireTime)) : ''}</div>
                   </div>
@@ -186,7 +186,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           />
         </div>
       </div>
-      <div className={`text-left text-xs text-gray-400`}>
+      <div className={`text-left text-xs text-ctext-secondary font-bold leading-none`}>
         <div>Attention：</div>
         <ul className="list-outside list-decimal pl-3 pt-1">
           <li>Before repayment, please make sure that you have enough balance on your bank account.</li>

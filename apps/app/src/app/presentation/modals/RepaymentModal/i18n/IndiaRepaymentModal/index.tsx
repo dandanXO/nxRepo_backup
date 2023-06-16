@@ -133,7 +133,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           <RiArrowRightSLine className="fill-ctext-primary mx-1 text-xl" />
         </a>
       )}
-      <div className="mt-3 font-bold">
+      <div className="mt-4 font-bold">
         <ListItem
           title={'Repayment Amount'}
           text={
@@ -168,7 +168,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         </div>
       </div>
 
-      <div className={`text-left text-xs text-gray-400`}>
+      <div className={`text-left text-xs text-ctext-secondary`}>
         <div>Attention：</div>
         <ul className="list-outside list-decimal pl-3 pt-1">
           <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
