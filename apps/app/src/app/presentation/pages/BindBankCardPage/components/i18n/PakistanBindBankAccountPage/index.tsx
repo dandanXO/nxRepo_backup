@@ -11,6 +11,10 @@ import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage'
 import { ChooseBindMethod } from '../../ChooseBindMethod';
 import { BankAccountForm } from './BankAccountForm';
 import { MobileWalletForm } from './MobileWalletForm';
+import ConfirmBindBankCardModal from 'apps/app/src/app/presentation/modals/ConfirmBindBankCardModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'apps/app/src/app/reduxStore';
+import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 
 const Warning = styled.div`
   //margin: 0 auto;
@@ -28,6 +32,8 @@ const Warning = styled.div`
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0 | 1>(1);
+  const dispatch = useDispatch();
+  const modalState = useSelector((state: RootState) => state.model);
 
   const changeOptionValue = (value: 0 | 1) => {
     setChooseBindMethodValue(value);
@@ -132,8 +138,24 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           // onIbanBlur={onMobileWalletIbanBlur}
           isFormPending={isFormPending || false}
           confirm={() => {
-            // country
-            confirmMobileWallet();
+            const validation = confirmMobileWallet();
+            if (validation) {
+              dispatch(
+                modalSlice.actions.updatebindBankcardModal({
+                    show: true,
+                    confirm: false,
+                    paymentMethod: chooseBindMethodValue,
+                    cardholderName: '',
+                    bankName: '',
+                    bankAccNr: '',
+                    mobileWallet: true,
+                    mobileWalletAccount: mobileData.data,
+                    walletVendor: walletValue?.value ?? '',
+                    walletName: walletValue?.label ?? '',
+                    bankCode: bankAccountValue.value,
+                })
+              );
+            }
           }}
         />
       ) : (
@@ -154,13 +176,30 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             const validation = validateCommonForm(); // account Number
             const validation2 = confirmBankAccount(); // Iban
             // common
-            if (validation && validation2) confirm();
+            if (validation && validation2) {
+              dispatch(
+                modalSlice.actions.updatebindBankcardModal({
+                   show: true,
+                   confirm: false,
+                   paymentMethod: chooseBindMethodValue,
+                   cardholderName: props.cardholderName,
+                   bankName: bankDropList[bankAccountValue.value],
+                   bankAccNr: bankcardNoData.data,
+                   mobileWallet: false,
+                   mobileWalletAccount: '',
+                   walletVendor: '',
+                   walletName: '',
+                   bankCode: bankAccountValue.value,
+                })
+              );
+            }
           }}
           // iBanData={iBanData}
           // onIBanChange={onIBanChange}
           // onIbanBlur={onIbanBlur}
         />
       )}
+      {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal state={modalState.bindBankcardModal}/>}
     </>
   );
 };
