@@ -1,6 +1,6 @@
 import { GetPageableResponse } from "../../../shared/api/commonReponse";
 
-export interface GetTodayPhoneUrgeListQueryString {
+export interface GetCollectTodayPhoneUrgeListQueryString {
     appName?: string;   // APP名稱
     collectorId?: number;   // 跟進人員ID
     followUpResult?: string;    // 跟進結果
@@ -12,11 +12,11 @@ export interface GetTodayPhoneUrgeListQueryString {
     userName?: string;  // 用户姓名
 }
 
-export interface GetTodayPhoneUrgeListResponse extends GetPageableResponse {
-    records: TodayPhoneUrgeListItem[];
+export interface GetCollectTodayPhoneUrgeListResponse extends GetPageableResponse {
+    records: CollectTodayPhoneUrgeListItem[];
 }
 
-export interface TodayPhoneUrgeListItem {
+export interface CollectTodayPhoneUrgeListItem {
     appName?: string,       // APP名称
     collectorName?: string,     // 跟进人
     contactable?: boolean,      // 是否可联

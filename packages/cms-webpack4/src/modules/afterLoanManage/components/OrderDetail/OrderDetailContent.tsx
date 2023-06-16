@@ -21,7 +21,7 @@ import {
     useGetCollectOverDueUserDetailQuery,
     useLazyGetCollectOverDueContactListQuery,
     useLazyGetCollectOverDueSMSLogQuery,
-    useLazyGetCollectOverDueUrgeRecordQuery
+    useLazyGetCollectOverDueCollectRecordQuery
 } from "../../api/CollectOverDueApi";
 
 interface IOrderDetailContentProps {
@@ -30,8 +30,8 @@ interface IOrderDetailContentProps {
 }
 
 export const OrderDetailContent = ({
-                                       userId, collectId
-                                   }: IOrderDetailContentProps) => {
+   userId, collectId
+}: IOrderDetailContentProps) => {
     const [showModal, setShowModal] = useState(false)
     const [showCopied, setShowCopied] = useState(false)
     const [refreshTabTag, setRefreshTabTag] = useState(false)
@@ -204,7 +204,7 @@ export const OrderDetailContent = ({
         const OrderInfoTab = () => (
             <div style={{ margin: '16px' }}>
                 <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectOverDueOrderDetailQuery} params={{collectId}} />
-                <TableCard titleKey='urgeRecord' columns={collectRecordColumns} hook={useLazyGetCollectOverDueUrgeRecordQuery} queryBody={{collectId}} rowKey='id' />
+                <TableCard titleKey='urgeRecord' columns={collectRecordColumns} hook={useLazyGetCollectOverDueCollectRecordQuery} queryBody={{collectId}} rowKey='id' />
             </div>
         )
 

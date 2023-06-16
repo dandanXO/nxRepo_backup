@@ -4,16 +4,16 @@ import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
 import { Button, Space, Tag, Tooltip, Typography } from "antd";
-import { TodayPhoneUrgeListItem } from "../../api/types/getTodayPhoneUrgeList";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
-import { useLazyGetTodayPhoneUrgeListQuery } from "../../api/TodayPhoneUrgeApi";
 import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
 import { useGetTodayCollectorListQuery } from "../../api/CollectTodayApi";
 import {useEnum} from "../../../shared/constants/useEnum";
 import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
+import {CollectTodayPhoneUrgeListItem} from "../../api/types/getCollectTodayPhoneUrgeList";
+import {useLazyGetCollectTodayPhoneUrgeListQuery} from "../../api/CollectTodayPhoneUrgeApi";
 
 const { Text } = Typography
 
@@ -38,7 +38,7 @@ const searchSpan  = {
 export const TodayPhoneUrgeListTable = () => {
 
     const { searchList, searchParams, setSearchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
-    const [ triggerGetList, { currentData: currentTodayPhoneUrgeListResponse, isFetching: todayPhoneUrgeListFetching}] = useLazyGetTodayPhoneUrgeListQuery({
+    const [ triggerGetList, { currentData: currentTodayPhoneUrgeListResponse, isFetching: todayPhoneUrgeListFetching}] = useLazyGetCollectTodayPhoneUrgeListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
@@ -162,7 +162,7 @@ export const TodayPhoneUrgeListTable = () => {
         }
     }, [isSuperAdmin])
 
-    return <ProTable<TodayPhoneUrgeListItem>
+    return <ProTable<CollectTodayPhoneUrgeListItem>
         loading={todayPhoneUrgeListFetching}
         dataSource={currentTodayPhoneUrgeListResponse?.records || []}
         columns={columns}

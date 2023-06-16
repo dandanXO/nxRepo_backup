@@ -1,10 +1,10 @@
 import {TContactPerson, TFollowUpResult, TGenerateRePayLink} from "../../../shared/constants/useEnum";
 
-export interface PostTodayPhoneUrgeRecordResponse {
+export interface PostCollectTodayPhoneUrgeRecordResponse {
     remark?: string
 }
 
-export interface PostTodayPhoneUrgeRecordRequest {
+export interface PostCollectTodayPhoneUrgeRecordRequest {
     collectId: number,
     userId: number,
     contactPerson: TContactPerson,

@@ -4,9 +4,9 @@ import {useTranslation} from "react-i18next";
 import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
 import {useEnum} from "../../../../shared/constants/useEnum";
 import TextArea from "antd/es/input/TextArea";
-import {usePostTodayPhoneUrgeRecordMutation} from "../../../api/TodayPhoneUrgeApi";
 import {HelperFormItem} from "../../../../shared/components/FormItem";
 import {formatPrice} from "../../../../shared/utils/format/formatPrice";
+import {usePostCollectTodayPhoneUrgeRecordMutation} from "../../../api/CollectTodayPhoneUrgeApi";
 
 
 const { Item } = Form
@@ -29,7 +29,7 @@ export const UrgeModal = ({
     open, handleCloseModal, collectId, userId, onAdded
 }: IUrgeModalProps) => {
     const { t } = useTranslation(i18nUrgeCollection.namespace)
-    const [ postTodayPhoneUrgeRecord, { isLoading }] = usePostTodayPhoneUrgeRecordMutation();
+    const [ postTodayPhoneUrgeRecord, { isLoading }] = usePostCollectTodayPhoneUrgeRecordMutation();
     const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum(i18nUrgeCollection.namespace)
     const [ form] = Form.useForm();
 

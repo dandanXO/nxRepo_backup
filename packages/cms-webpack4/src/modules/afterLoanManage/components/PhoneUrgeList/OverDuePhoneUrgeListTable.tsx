@@ -65,7 +65,7 @@ export const OverDuePhoneUrgeListTable = () => {
             key: 'operate',
             valueType: "option",
             render: (_, record,) => {
-                return <a key="editable" onClick={() => handleClickPromote(record.userId, record.overDueId)} >{t('followUp')}</a>
+                return <a key="editable" onClick={() => handleClickPromote(record.userId, record.collectId)} >{t('followUp')}</a>
             },
         },
         { title: t('orderNo'), dataIndex: 'orderNo', key: 'orderNo', hideInSearch: true },

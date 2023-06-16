@@ -9,14 +9,14 @@ import {
     GetCollectOverDueUserDetailResponse
 } from "./types/getCollectOverDueUserDetail";
 import {
-    GetCollectOverDueUrgeRecordQueryString,
-    GetCollectOverDueUrgeRecordResponse
-} from "./types/getCollectOverDueUrgeRecord";
-import {
     GetCollectOverDueContactListQueryString,
     GetCollectOverDueContactListResponse
 } from "./types/getCollectOverDueContactList";
 import {GetCollectOverDueSMSLogsQueryString, GetCollectOverDueSMSLogsResponse} from "./types/getCollectOverDueSMSLogs";
+import {
+    GetCollectOverDueCollectRecordQueryString,
+    GetCollectOverDueCollectRecordResponse
+} from "./types/getCollectOverDueCollectRecord";
 
 
 const CollectOverDueApi = API.injectEndpoints({
@@ -44,8 +44,8 @@ const CollectOverDueApi = API.injectEndpoints({
             })
         }),
         // [GET] 催收紀錄列表
-        getCollectOverDueUrgeRecord: builder.query<GetCollectOverDueUrgeRecordResponse, GetCollectOverDueUrgeRecordQueryString>({
-            query: (requestBody: GetCollectOverDueUrgeRecordQueryString) => {
+        getCollectOverDueCollectRecord: builder.query<GetCollectOverDueCollectRecordResponse, GetCollectOverDueCollectRecordQueryString>({
+            query: (requestBody: GetCollectOverDueCollectRecordQueryString) => {
                 const { collectId, ...rest} = requestBody;
                 return ({
                     url: `/collect-overdue/collect-records/${collectId}`,
@@ -81,7 +81,7 @@ export const {
     useGetCollectOverDueCollectorListQuery,
     useGetCollectOverDueUserDetailQuery,
     useGetCollectOverDueOrderDetailQuery,
-    useLazyGetCollectOverDueUrgeRecordQuery,
+    useLazyGetCollectOverDueCollectRecordQuery,
     useLazyGetCollectOverDueContactListQuery,
     useLazyGetCollectOverDueSMSLogQuery,
 } = CollectOverDueApi;
