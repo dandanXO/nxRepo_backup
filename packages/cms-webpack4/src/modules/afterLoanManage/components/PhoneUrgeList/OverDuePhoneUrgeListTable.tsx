@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
 import { Button, Space, Tag, Tooltip, Typography } from "antd";
 import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
-import { useLazyGetOverDuePhoneUrgeListQuery } from "../../api/OverDuePhoneUrgeApi";
 import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
-import { useGetOverDueCollectorListQuery } from "../../api/OverDueCollectorApi";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
-import { OverDuePhoneUrgeListItem } from "../../api/types/getOverDuePhoneUrgeList";
 import {useEnum} from "../../../shared/constants/useEnum";
 import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
+import {useGetCollectOverDueCollectorListQuery} from "../../api/CollectOverDueApi";
+import {useLazyGetCollectOverDuePhoneUrgeListQuery} from "../../api/OverDuePhoneUrgeApi";
+import {CollectOverDuePhoneUrgeListItem} from "../../api/types/getCollectOverDuePhoneUrgeList";
 
 const { Text } = Typography
 
@@ -37,13 +37,13 @@ const searchFormLayout = {
 
 export const OverDuePhoneUrgeListTable = () => {
     const { searchList, searchParams, setSearchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
-    const [ triggerGetList, { currentData: overDuePhoneUrgeListResponse, isFetching: overDuePhoneUrgeListFetching }] = useLazyGetOverDuePhoneUrgeListQuery({
+    const [ triggerGetList, { currentData: overDuePhoneUrgeListResponse, isFetching: overDuePhoneUrgeListFetching }] = useLazyGetCollectOverDuePhoneUrgeListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false
     })
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum()
-    const { data: collectorData } = useGetOverDueCollectorListQuery(null);
+    const { data: collectorData } = useGetCollectOverDueCollectorListQuery(null);
 
     const { t } = useTranslation(i18nUrgeCollection.namespace)
     const { OrderLabelEnum, OverDueStageEnum, FollowUpResultEnum } = useEnum();
@@ -80,7 +80,7 @@ export const OverDuePhoneUrgeListTable = () => {
             fieldProps: { allowClear:  false },
             render: (_, { orderLabel }) => {
                 const orderLabelStatus = OrderLabelEnum[orderLabel];
-                return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus.color}>{orderLabelStatus.text}</Tag>: '-'}</div>
+                return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus?.color}>{orderLabelStatus?.text}</Tag>: '-'}</div>
             },
         },
         { title: t('userName'), dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || '' },
@@ -92,7 +92,7 @@ export const OverDuePhoneUrgeListTable = () => {
             initialValue: searchParams.stage || '',
             valueType: 'select',
             valueEnum: { '': { text: t('noRestriction') }, ...OverDueStageEnum},
-            render: (_, { stage }) => <Typography>{OverDueStageEnum[stage].text}</Typography>,
+            render: (_, { stage }) => <Typography>{OverDueStageEnum[stage]?.text}</Typography>,
             fieldProps: {
                 allowClear: false
             }
@@ -112,7 +112,7 @@ export const OverDuePhoneUrgeListTable = () => {
             valueEnum: FollowUpResultEnum,
             render: (_, { followUpResult }) => {
                 const followUpResultStatus = FollowUpResultEnum[followUpResult]
-                return <Text style={{ color: followUpResultStatus.color }}>{followUpResultStatus.text}</Text>
+                return <Text style={{ color: followUpResultStatus?.color }}>{followUpResultStatus?.text}</Text>
             },
             fieldProps: {
                 allowClear: false
@@ -161,7 +161,7 @@ export const OverDuePhoneUrgeListTable = () => {
         }
     }, [isSuperAdmin])
 
-    return <ProTable<OverDuePhoneUrgeListItem>
+    return <ProTable<CollectOverDuePhoneUrgeListItem>
         loading={overDuePhoneUrgeListFetching}
         dataSource={overDuePhoneUrgeListResponse?.records || [] }
         columns={columns}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { PhoneUrgeList } from "../components/PhoneUrgeList";
-import { OrderDetail } from "../components/PhoneUrgeList/OrderDetail";
+import { OrderDetail } from "../components/OrderDetail";
 
 const AfterLoanManageRoutes = () => (
     <Switch>

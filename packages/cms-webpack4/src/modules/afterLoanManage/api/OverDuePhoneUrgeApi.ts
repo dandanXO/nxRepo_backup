@@ -1,22 +1,36 @@
 import { API } from "../../shared/api";
-import { GetOverDuePhoneUrgeListQueryString, GetOverDuePhoneUrgeListResponse } from "./types/getOverDuePhoneUrgeList";
+import {
+    GetCollectOverDuePhoneUrgeListQueryString,
+    GetCollectOverDuePhoneUrgeListResponse
+} from "./types/getCollectOverDuePhoneUrgeList";
+import {
+    PostCollectOverDuePhoneUrgeRecordRequest,
+    PostCollectOverDuePhoneUrgeRecordResponse
+} from "./types/postCollectOverDuePhoneUrgeRecord";
 
-
-
-const OverDuePhoneUrgeApi = API.injectEndpoints({
+const CollectOverDuePhoneUrgeApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // [GET] 逾期電催列表
-        getOverDuePhoneUrgeList: builder.query<GetOverDuePhoneUrgeListResponse, GetOverDuePhoneUrgeListQueryString>({
-            query: (requestBody: GetOverDuePhoneUrgeListQueryString) => ({
+        getCollectOverDuePhoneUrgeList: builder.query<GetCollectOverDuePhoneUrgeListResponse, GetCollectOverDuePhoneUrgeListQueryString>({
+            query: (requestBody: GetCollectOverDuePhoneUrgeListQueryString) => ({
                 url: '/collect-overdue/phone-urge/list',
                 params: requestBody,
                 method: 'get'
+            })
+        }),
+        // [POST] 新增逾期催收紀錄
+        postCollectOverDuePhoneUrgeRecord: builder.mutation<PostCollectOverDuePhoneUrgeRecordResponse, PostCollectOverDuePhoneUrgeRecordRequest>({
+            query: (requestBody: PostCollectOverDuePhoneUrgeRecordRequest) => ({
+                url: '/collect-overdue/collect-records',
+                method: 'post',
+                data: requestBody
             })
         })
     })
 })
 
 export const {
-    useLazyGetOverDuePhoneUrgeListQuery
-} = OverDuePhoneUrgeApi;
+    useLazyGetCollectOverDuePhoneUrgeListQuery,
+    usePostCollectOverDuePhoneUrgeRecordMutation
+} = CollectOverDuePhoneUrgeApi;
