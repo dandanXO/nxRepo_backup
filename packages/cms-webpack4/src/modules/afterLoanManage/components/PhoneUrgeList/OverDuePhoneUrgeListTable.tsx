@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
 import { getIsSuperAdmin } from "../../../shared/storage/getUserInfo";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
-import moment from "moment-timezone";
+import moment from "moment";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import { OverDuePhoneUrgeListItem } from "../../api/types/getOverDuePhoneUrgeList";
 import {useEnum} from "../../../shared/constants/useEnum";

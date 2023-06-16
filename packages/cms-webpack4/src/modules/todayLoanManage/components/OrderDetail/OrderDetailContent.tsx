@@ -9,7 +9,7 @@ import {
     useLazyGetCollectTodayCollectRecordQuery, useLazyGetCollectTodayContactListQuery, useLazyGetCollectTodaySMSLogQuery
 } from "../../api/CollectTodayApi";
 import {getIsSuperAdmin} from "../../../shared/storage/getUserInfo";
-import moment from "moment-timezone";
+import moment from "moment";
 import {CopyTextIcon} from "../../../shared/components/other/CopyTextIcon";
 import {Button, message, Modal, Tabs, Tag, Tooltip} from "antd";
 import {formatPrice} from "../../../shared/utils/format/formatPrice";

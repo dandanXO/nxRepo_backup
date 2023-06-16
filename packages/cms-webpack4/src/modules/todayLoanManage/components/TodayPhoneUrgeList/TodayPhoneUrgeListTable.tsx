@@ -6,7 +6,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { Button, Space, Tag, Tooltip, Typography } from "antd";
 import { TodayPhoneUrgeListItem } from "../../api/types/getTodayPhoneUrgeList";
 import { formatPrice } from "../../../shared/utils/format/formatPrice";
-import moment from "moment-timezone";
+import moment from "moment";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import { useLazyGetTodayPhoneUrgeListQuery } from "../../api/TodayPhoneUrgeApi";
 import useGetMerchantEnum from "../../../shared/hooks/common/useGetMerchantEnum";
