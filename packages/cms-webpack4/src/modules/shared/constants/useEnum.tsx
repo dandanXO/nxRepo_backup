@@ -4,8 +4,8 @@ export type TContactPerson = 'BORROWER' | 'EMERGENCY_CONTACT1' | 'EMERGENCY_CONT
 export type TFollowUpResult = 'Promise' | 'FinancialDifficulties' | 'Missed' | 'TurnedOff' | 'InvalidPhoneNumber' | 'BadAttitude' | 'Other'
 export type TGenerateRePayLink = 'NONE' | 'PARTIAL_REPAYMENT' | 'REPAYMENT_LINK' | 'EXTENSION_LINK'
 
-export const useEnum = () => {
-    const { t }  = useTranslation()
+export const useEnum = (translationNameSpase?:string) => {
+    const { t }  = useTranslation(translationNameSpase)
 
     const OrderLabelEnum = {
         '': { text: t('noRestriction')  },
@@ -68,11 +68,11 @@ export const useEnum = () => {
         CONTACT_LIST: { text: t('contact.list') },
     }
 
-    const GenerateRePayLinkEnum: Record<TGenerateRePayLink, { text: string }> = {
+    const GenerateRePayLinkEnum: Record<TGenerateRePayLink, { text: string, copyLabel?: 'string' }> = {
         NONE: { text : t('none') },
-        PARTIAL_REPAYMENT: { text : t('partialRepay') },
-        REPAYMENT_LINK: { text : t('repayLink') },
-        EXTENSION_LINK: { text : t('extensionLink') },
+        PARTIAL_REPAYMENT: { text : t('partialRepay.button'), copyLabel: t('partialRepay.copyLabel') },
+        REPAYMENT_LINK: { text : t('repayLink.button'), copyLabel: t('repayLink.copyLabel') },
+        EXTENSION_LINK: { text : t('extensionLink.button'), copyLabel: t('extensionLink.copyLabel') },
     }
 
     return {

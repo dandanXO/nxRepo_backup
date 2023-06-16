@@ -5,6 +5,9 @@ import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translation
 import {useEnum} from "../../../../shared/constants/useEnum";
 import TextArea from "antd/es/input/TextArea";
 import {usePostTodayPhoneUrgeRecordMutation} from "../../../api/TodayPhoneUrgeApi";
+import {reject} from "ramda";
+import {HelperFormItem} from "../../../../shared/components/FormItem";
+import moment from "moment-timezone";
 
 
 const { Item } = Form
@@ -19,15 +22,16 @@ interface IUrgeModalProps {
     collectId: string;
     userId: string;
     open: boolean;
-    handleCloseModal: () => void
+    handleCloseModal: () => void,
+    onAdded: (generateLinkType, link:string) => void
 }
 
 export const UrgeModal = ({
-    open, handleCloseModal, collectId, userId
+    open, handleCloseModal, collectId, userId, onAdded
 }: IUrgeModalProps) => {
     const { t } = useTranslation(i18nUrgeCollection.namespace)
-    const [ postTodayPhoneUrgeRecord] = usePostTodayPhoneUrgeRecordMutation();
-    const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum()
+    const [ postTodayPhoneUrgeRecord, { isLoading }] = usePostTodayPhoneUrgeRecordMutation();
+    const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum(i18nUrgeCollection.namespace)
     const [ form] = Form.useForm();
 
     const onOk = () => {
@@ -35,15 +39,92 @@ export const UrgeModal = ({
     }
 
     const onFinish = () => {
-        const { ptpTime , ...rest } = form.getFieldsValue()
-        const requestBody = {
-            ptpTime: ptpTime.format('HH:mm'),
-            userId,
-            collectId,
+        const { ptpTime, generateLink, ...rest } = form.getFieldsValue()
+        let requestBody = {
+            userId: Number(userId),
+            collectId: Number(collectId),
+            ptpTime: ptpTime.format('HH:mm') || '',
+            generateLink: generateLink || 'NONE',
             ...rest
         }
-        console.log(requestBody)
+
+        postTodayPhoneUrgeRecord(requestBody).unwrap().then((response) => {
+            onAdded(requestBody.generateLink, response.remark)
+            form.resetFields();
+        })
     }
+
+    const RePayLink = (generateLinkLabel, generateLinkTooltip, partialMoneyLabel ) => (
+        <>
+            <Item
+                {...layout}
+                name='generateLink'
+                label={t('generateLink')}
+                tooltip={t('tooltip.repayLink')}
+                required
+            >
+                <Group buttonStyle='solid'>
+                    {Object.keys(GenerateRePayLinkEnum).map((part) => {
+                        if (part == '') return null
+                        return (
+                            <Button
+                                key={part}
+                                value={part}
+                                style={{ marginBottom: '10px'}}
+                            >
+                                {GenerateRePayLinkEnum[part].text}
+                            </Button>
+                        )
+                    })}
+                </Group>
+            </Item>
+            <Item
+                dependencies={['generateLink']}
+                noStyle
+            >
+                {
+                    ({getFieldValue}) => {
+                        const generateLink = getFieldValue('generateLink')
+                        if(generateLink !== 'PARTIAL_REPAYMENT') return null
+
+                        return (
+                            <Item
+                                {...layout}
+                                label={t('repayAmount')}
+                                name='partialMoney'
+                                required
+                                rules={[
+                                    { required: true }
+                                ]}
+                                style={{ marginTop: '-10px' }}
+                            >
+                                <Input style={{ width: '200px'}} />
+                            </Item>
+                        )
+                    }
+                }
+            </Item>
+        </>
+    )
+
+    const PTPTime = () => (
+        <Item
+            {...layout}
+            name='ptpTime'
+            label={t('ptpTime')}
+            required
+            rules={[
+                { required: true,  message: `${t('keyIn')}${t('ptpTime')}` },
+            ]}
+            style={{ marginTop: '-10px' }}
+        >
+            <TimePicker
+                placeholder={t('placeholder.select')}
+                format={'HH:mm'}
+                minuteStep={15}
+            />
+        </Item>
+    )
 
     return open && (
         <Modal
@@ -55,8 +136,11 @@ export const UrgeModal = ({
             onOk={onOk}
             maskClosable={false}
             width='752px'
+            confirmLoading={isLoading}
+            cancelButtonProps={{ disabled : isLoading }}
         >
             <Form
+                disabled={isLoading}
                 form={form}
                 initialValues={{
                     contactPerson: 'BORROWER',
@@ -113,95 +197,35 @@ export const UrgeModal = ({
 
                 <Item
                     dependencies={['followUpResult']}
-                    style={{ marginTop: '-10px', marginBottom: '-10px'}}
+                    noStyle
                 >
                     {
                         ({getFieldValue}) => {
                             const followResult = getFieldValue('followUpResult')
-                            if(followResult !== 'Promise') return null
+                            if((followResult !== 'Promise' && followResult !== 'Other')) return null
                             return (
                                 <>
-                                    <Item
-                                        {...layout}
-                                        name='ptpTime'
-                                        label={t('ptpTime')}
-                                        required
-                                        rules={[
-                                            { required: true,  message: `${t('keyIn')}${t('ptpTime')}` },
-                                        ]}
-                                    >
-                                        <TimePicker
-                                            placeholder={t('placeholder.select')}
-                                            format={'HH:mm'}
-                                            minuteStep={15}
-                                        />
-                                    </Item>
-
-                                    <Item
-                                        {...layout}
-                                        name='generateLink'
-                                        label={t('generateLink')}
-                                        tooltip={t('tooltip.repayLink')}
-                                        required
-                                    >
-                                        <Group buttonStyle='solid'>
-                                            {Object.keys(GenerateRePayLinkEnum).map((part) => {
-                                                if (part == '') return null
-                                                return (
-                                                    <Button
-                                                        key={part}
-                                                        value={part}
-                                                        style={{ marginBottom: '10px'}}
-                                                    >
-                                                        {GenerateRePayLinkEnum[part].text}
-                                                    </Button>
-                                                )
-                                            })}
-                                        </Group>
-                                    </Item>
-                                    <Item
-                                        dependencies={['generateLink']}
-                                        style={{ marginTop: '-10px', marginBottom: '-10px'}}
-                                    >
-                                        {
-                                            ({getFieldValue}) => {
-                                                const generateLink = getFieldValue('generateLink')
-                                                if(generateLink !== 'PARTIAL_REPAYMENT') return
-
-                                                return (
-                                                    <Item
-                                                        label={t('partialMoney')}
-                                                        name='partialMoney'
-                                                        required
-                                                        rules={[
-                                                            { required: true }
-                                                        ]}
-                                                    >
-                                                        <Input />
-                                                    </Item>
-                                                )
-                                            }
-                                        }
-                                    </Item>
+                                    {(followResult === 'Promise') && <PTPTime />}
+                                    {(followResult === 'Promise' || followResult === 'Other') && <RePayLink />}
                                 </>
                             )
                         }
                     }
                 </Item>
 
-                <Item
-                    {...layout}
-                    label={t('trackingRecord')}
+                <HelperFormItem
+                    layout={layout}
                     name='trackingRecord'
+                    form={form}
+                    label={t('trackingRecord')}
+                    help={t('addTrackingRecordHelp')}
                     required
                     rules={[
-                        { required: true, message: `${t('keyIn')}${t('trackingRecord')}` }
+                        { required: true, message: `${t('keyIn')}${t('trackingRecord')}` },
                     ]}
-                    style={{ marginTop: '-10px'}}
                 >
-                    <TextArea autoSize={{ minRows:6 }}  />
-                </Item>
-
+                    <TextArea autoSize={{ minRows:6 }} />
+                </HelperFormItem>
             </Form>
         </Modal>
     )

@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
 import {useEnum} from "../../../shared/constants/useEnum";
@@ -11,7 +11,7 @@ import {
 import {getIsSuperAdmin} from "../../../shared/storage/getUserInfo";
 import moment from "moment-timezone";
 import {CopyTextIcon} from "../../../shared/components/other/CopyTextIcon";
-import {Button, Tabs, Tag, Tooltip} from "antd";
+import {Button, message, Modal, Tabs, Tag, Tooltip} from "antd";
 import {formatPrice} from "../../../shared/utils/format/formatPrice";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {
@@ -30,7 +30,12 @@ interface IOrderDetailContentProps {
 export const OrderDetailContent = ({
     userId, collectId
 }: IOrderDetailContentProps) => {
-    const [showModal, setShowModal] = useState(true)
+    const [showModal, setShowModal] = useState(false)
+    const [showCopied, setShowCopied] = useState(false)
+    const [refreshTabTag, setRefreshTabTag] = useState(false)
+
+    const [messageApi, messageContextHolder]= message.useMessage();
+    const [modalApi, modalContextHolder] = Modal.useModal();
 
     const { data: adminSwitch, isFetching: adminSwitchFetching } = useGetAdminSwitchQuery(null);
     const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectTodayOrderDetailQuery({collectId});
@@ -40,12 +45,38 @@ export const OrderDetailContent = ({
         OrderStatusEnum,
         OrderLabelEnum,
         FollowUpResultEnum,
-        EmergencyContactEnum
-    } = useEnum();
+        EmergencyContactEnum,
+        GenerateRePayLinkEnum
+    } = useEnum(i18nUrgeCollection.namespace);
 
     const fetched = !orderInfoFetching && !adminSwitchFetching
 
-    const renderTab = useMemo(() => {
+    const onUrgeRecordAdded = (generateLinkType, link) => {
+        setShowModal(false)
+        messageApi.success(t('saved'))
+        if(generateLinkType !== 'NONE') {
+            modalApi.confirm({
+                title: GenerateRePayLinkEnum[generateLinkType].copyLabel,
+                icon: null,
+                content: link,
+                okText: t('clickToCopy'),
+                onOk: () => {
+                    navigator.clipboard.writeText(link)
+                    setShowCopied(true)
+                }
+            })
+        }
+        setRefreshTabTag(!refreshTabTag)
+    }
+
+    useEffect(() => {
+        if(showCopied) {
+            messageApi.success(t('linkCopied')).then(() => setShowCopied(false))
+        }
+    }, [showCopied])
+
+    const tabsItems = useMemo(() => {
+        console.log('get Tabs Items')
 
         if(!fetched) return null
 
@@ -208,24 +239,37 @@ export const OrderDetailContent = ({
             tabsItems = [...tabsItems, { label: t('tab.smsMessage'), key: 'smsMessage', children: <SMSMessageTab /> }]
         }
 
+        return tabsItems
+    }, [fetched])
+
+    const Tab = useCallback(() => {
+        if (!tabsItems) return null
         return (
             <Tabs
                 items={tabsItems}
                 tabBarExtraContent={
-                <Button
-                    type='primary'
-                    onClick={()=>setShowModal(true)}
-                >
-                    {t('addUrge')}
-                </Button>}
+                    <Button
+                        type='primary'
+                        onClick={()=>setShowModal(true)}
+                    >
+                        {t('addUrge')}
+                    </Button>}
             />
         )
-    }, [fetched])
+    }, [tabsItems, refreshTabTag])
 
     return (
         <React.Fragment>
-            <UrgeModal collectId={collectId} userId={userId} open={showModal} handleCloseModal={()=>setShowModal(false)}/>
-            {renderTab}
+            {messageContextHolder}
+            {modalContextHolder}
+            <UrgeModal
+                collectId={collectId}
+                userId={userId}
+                open={showModal}
+                handleCloseModal={()=>setShowModal(false)}
+                onAdded={onUrgeRecordAdded}
+            />
+            <Tab />
         </React.Fragment>
     )
 }

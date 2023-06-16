@@ -3,7 +3,7 @@ import {
     GetTodayPhoneUrgeListQueryString,
     GetTodayPhoneUrgeListResponse,
 } from "./types/getTodayPhoneUrgeList";
-import {PostTodayPhoneUrgeRecordRequest} from "./types/postTodayPhoneUrgeRecord";
+import {PostTodayPhoneUrgeRecordRequest, PostTodayPhoneUrgeRecordResponse} from "./types/postTodayPhoneUrgeRecord";
 
 
 const TodayPhoneUrgeApi = API.injectEndpoints({
@@ -18,9 +18,9 @@ const TodayPhoneUrgeApi = API.injectEndpoints({
             })
         }),
         // [POST] 新增當日催收紀錄
-        postTodayPhoneUrgeRecord: builder.mutation<{}, PostTodayPhoneUrgeRecordRequest>({
+        postTodayPhoneUrgeRecord: builder.mutation<PostTodayPhoneUrgeRecordResponse, PostTodayPhoneUrgeRecordRequest>({
             query: (requestBody: PostTodayPhoneUrgeRecordRequest) => ({
-                url: '',
+                url: '/collect-today/collect-records',
                 method: 'post',
                 data: requestBody
             })

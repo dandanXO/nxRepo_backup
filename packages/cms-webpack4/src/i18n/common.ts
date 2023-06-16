@@ -69,10 +69,10 @@ export const i18nCommon: i18nComponent = {
                 select: '选择'
             },
             none: '无',
-            partialRepay: '发起部分还款',
-            repayLink: '生成还款链接',
-            extensionLink: '生成展期链接',
             keyIn: '请输入',
+            linkCopied: '链接已复制',
+            saved: '已储存',
+            clickToCopy: '点击复制',
         },
         "en-US": {
             noRestriction: 'No Restriction',
@@ -140,10 +140,10 @@ export const i18nCommon: i18nComponent = {
                 select: 'Select'
             },
             none: 'None',
-            partialRepay: 'Partial Repayment',
-            repayLink: 'Repayment Link',
-            extensionLink: 'Extension Link',
             keyIn: 'Must enter ',
+            linkCopied: 'Copied',
+            saved: 'Saved',
+            clickToCopy: 'Click to copy',
         }
     }
 }

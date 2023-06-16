@@ -29,6 +29,7 @@ export const i18nUrgeCollection: i18nComponent = {
             ptpTime: 'PTP时间',
             ptpTimeTooltip: 'PTP = Promise To Pay\n承诺还款',
             trackingRecord: '跟进纪录',
+            addTrackingRecordHelp: '提醒您，纪录提交后即不可再修改',
             recentTrackingTime: '上次跟进时间',
             collectorName: '跟进人',
             trackingTime: '跟进时间',
@@ -39,6 +40,18 @@ export const i18nUrgeCollection: i18nComponent = {
                 repayLink: '若用户删除App时，可生成还款或展期链结，提供给用户'
             },
             addUrge: '添加催收纪录',
+            partialRepay: {
+                button: '发起部分还款',
+                copyLabel: '部分还款链接'
+            },
+            repayLink: {
+                button: '生成还款链接',
+                copyLabel: '生成还款链接'
+            },
+            extensionLink: {
+                button: '生成展期链接',
+                copyLabel: '生成展期链接'
+            },
             generateLink: '生成链结',
             repayAmount: '还款金额',
         },
@@ -67,6 +80,7 @@ export const i18nUrgeCollection: i18nComponent = {
             ptpTime: 'PTP Time',
             ptpTimeTooltip: 'PTP = Promise To Pay',
             trackingRecord: 'Tracking Record',
+            addTrackingRecordHelp: 'Please be reminded that the record cannot be modified after submission.',
             recentTrackingTime: 'Recent Tracking Time',
             collectorName: 'Collector',
             trackingTime: 'Tracking Time',
@@ -77,6 +91,18 @@ export const i18nUrgeCollection: i18nComponent = {
                 repayLink: 'If users delete the app, the repayment or extension link can be generated and provided to them.'
             },
             addUrge: 'Add Collection Record',
+            partialRepay: {
+                button: 'Partial Repayment',
+                copyLabel: 'Partial Repayment Link'
+            },
+            repayLink: {
+                button: 'Repayment Link',
+                copyLabel: 'Repayment Link'
+            },
+            extensionLink: {
+                button: 'Extension Link',
+                copyLabel: 'Extension Link'
+            },
             generateLink: 'Generate Link',
             repayAmount: 'Repayment amount'
         }

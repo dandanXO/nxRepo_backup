@@ -166,7 +166,7 @@ export const TodayPhoneUrgeListTable = () => {
         loading={todayPhoneUrgeListFetching}
         dataSource={currentTodayPhoneUrgeListResponse?.records || []}
         columns={columns}
-        rowKey='overDueId'
+        rowKey='collectId'
         search={{
             span: searchSpan,
             labelWidth: 'auto',
