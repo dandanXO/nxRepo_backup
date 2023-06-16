@@ -99,8 +99,8 @@ export const OverDuePhoneUrgeListTable = () => {
         },
         { title: t('overdueDays'), dataIndex: 'overdueDays', key: 'overdueDays', initialValue: searchParams.overdueDays || '' },
         { title: t('outstandingBalance'), dataIndex: 'outstandingBalance', key: 'outstandingBalance', hideInSearch: true,  render: (_, { outstandingBalance }) => <Typography>{formatPrice(Number(outstandingBalance) || 0)}</Typography>},
-        { title: t('lastOpenAppTime'), dataIndex: 'lastOpenAppTime', key: 'lastOpenAppTime', hideInSearch: true, render: (_, { lastOpenAppTime }) => <Typography>{moment(lastOpenAppTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
-        { title: t('latestRepaymentCodeAcquisitionTime'), dataIndex: 'latestRepaymentCodeAcquisitionTime', key: 'latestRepaymentCodeAcquisitionTime', hideInSearch: true, render: (_, { latestRepaymentCodeAcquisitionTime }) => <Typography>{moment(latestRepaymentCodeAcquisitionTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
+        { title: t('lastOpenAppTime'), dataIndex: 'lastOpenAppTime', key: 'lastOpenAppTime', hideInSearch: true, render: (_, { lastOpenAppTime }) => <Typography>{(lastOpenAppTime && moment(lastOpenAppTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
+        { title: t('latestRepaymentCodeAcquisitionTime'), dataIndex: 'latestRepaymentCodeAcquisitionTime', key: 'latestRepaymentCodeAcquisitionTime', hideInSearch: true, render: (_, { latestRepaymentCodeAcquisitionTime }) => <Typography>{(latestRepaymentCodeAcquisitionTime && moment(latestRepaymentCodeAcquisitionTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
         { title: t('followUpCount'), dataIndex: 'followUpCount', key: 'followUpCount', hideInSearch: true },
         { title: t('contactable'), dataIndex: 'contactable', key: 'contactable', hideInSearch: true, render: (_, { contactable }) => contactable? <div style={{ textAlign: 'center'}}><CheckCircleTwoTone twoToneColor="#52c41a" /></div>: null},
         {
@@ -125,7 +125,7 @@ export const OverDuePhoneUrgeListTable = () => {
             hideInSearch: true,
         },
         { title: t('trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true },
-        { title: t('recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')}</Typography> },
+        { title: t('recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{(recentTrackingTime && moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
         { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName', initialValue: searchParams.collectorName || '', hideInSearch: true },
         { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
     ]
