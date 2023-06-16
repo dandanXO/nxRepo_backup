@@ -52,8 +52,8 @@ const CancelButton = styled(ConfirmButton)<ButtonProps>`
 `;
 CancelButton.displayName = 'CancelButton';
 
-const CustomColorButton = styled(ConfirmButton)<ButtonProps>`
-
+const CustomColorButton = styled(ConfirmButton) <ButtonProps>`
+  background: ${(props) => props.theme.primary.main};
 `;
 
 export { ConfirmButton, NotificationButton, CancelButton, CustomColorButton };

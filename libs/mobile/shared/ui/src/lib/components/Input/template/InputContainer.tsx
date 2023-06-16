@@ -40,8 +40,8 @@ export const InputContainer = styled.label<InputContainerProps>`
   display: flex;
 
   // Border
-  border:${(props) => props.outlineType === 'standard' ? 'none' : 'solid 1px #aaaaaa'};
-  border-bottom: 1px solid #aaaaaa;
+  border:${(props) => props.outlineType === 'standard' ? 'none' : `solid 1px ${props.theme.input?.outline ?? '#aaaaaa'}`};
+  border-bottom:  ${(props) => `solid 1px ${props.theme.input?.outline || '#aaaaaa'}`};
   border-radius: ${(props) => props.outlineType === 'standard' ? '0' : '9px'};
 
   // Padding

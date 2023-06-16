@@ -75,8 +75,8 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
 
   if (props.bindCardDropListData && props.bindCardDropListData.availableBanks) {
     // NOTICE: bankAccountValue 可能為 0
-    if (typeof props.bankAccountValue?.value === 'number') {
-      targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue.value];
+    if (typeof props.bankAccountValue?.data.value === 'number') {
+      targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue.data.value];
     }
   }
 

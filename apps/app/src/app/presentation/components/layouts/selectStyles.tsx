@@ -8,7 +8,7 @@ export const selectStyles: StylesConfig = {
     padding: '0px 10px',
     border: 0,
     borderRadius: 0,
-    borderBottom: '1px solid #aaaaaa',
+    borderBottom: `1px solid ${window.theme?.input?.outline ?? '#aaaaaa'}`,
     span: {
       width: 0,
     },
