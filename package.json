@@ -35,7 +35,7 @@
     "serve:abd:d": "webpack-dashboard -- cross-env NODE_DASHBOARD=trueNODE_ENV=development NODE_COUNTRY=bd pnpm nx serve-bd app -c=development --verbose",
     "build:ain": "cross-env NODE_ENV=production NODE_COUNTRY=in pnpm nx run-many --target=build --projects=app  --configuration=production-in --verbose && rm -rf ./dist/apps/app/*.map ",
     "build:apk": "cross-env NODE_ENV=production NODE_COUNTRY=pk pnpm nx run-many --target=build --projects=app  --configuration=production-pk --verbose && rm -rf ./dist/apps/app/*.map ",
-    "build:abd": "rm ./node_modules/react-apexcharts/.babelrc && cross-env NODE_ENV=production NODE_COUNTRY=bd pnpm nx run-many --target=build --projects=app  --configuration=production-bd --verbose && rm -rf ./dist/apps/app/*.map ",
+    "build:abd": "cross-env NODE_ENV=production NODE_COUNTRY=bd pnpm nx run-many --target=build --projects=app  --configuration=production-bd --verbose && rm -rf ./dist/apps/app/*.map ",
     "build:ain:a": "cross-env NODE_ANALYZER=true NODE_ENV=production NODE_COUNTRY=in pnpm nx run-many --target=build --projects=app  --configuration=production-in --verbose",
     "build:apk:a": "cross-env NODE_ANALYZER=true NODE_ENV=production NODE_COUNTRY=pk pnpm nx run-many --target=build --projects=app  --configuration=production-pk --verbose",
     "build:abd:a": "cross-env NODE_ANALYZER=true NODE_ENV=production NODE_COUNTRY=bd pnpm nx run-many --target=build --projects=app  --configuration=production-bd --verbose",

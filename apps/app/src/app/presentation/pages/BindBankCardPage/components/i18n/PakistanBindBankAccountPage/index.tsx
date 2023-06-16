@@ -60,9 +60,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     confirmMobileData,
     onConfirmMobileDataChange,
     onConfirmMobileDataBlur,
-    iBanData: iBanDataMobileWallet,
-    onIBanChange: onMobileWalletIBanChange,
-    onIbanBlur: onMobileWalletIbanBlur,
+    // iBanData: iBanDataMobileWallet,
+    // onIBanChange: onMobileWalletIBanChange,
+    // onIbanBlur: onMobileWalletIbanBlur,
     confirm: confirmMobileWallet,
   } = usePakistanMobileWalletForm({
     isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
@@ -74,9 +74,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bankDropList,
     bankAccountValue,
     onIFSCDropSelect,
-    iBanData,
-    onIBanChange,
-    onIbanBlur,
+    // iBanData,
+    // onIBanChange,
+    // onIbanBlur,
     confirm: confirmBankAccount,
   } = usePakistanBankAccountForm({
     bindCardDropListData: props.bindCardDropListData,
@@ -99,7 +99,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bindCardDropListData: props.bindCardDropListData,
     // NOTE: 設定電子錢包列表
     bankAccountValue,
-    iBanData,
+    // iBanData,
   });
 
   return (
@@ -127,9 +127,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           confirmMobileData={confirmMobileData}
           onConfirmMobileDataChange={onConfirmMobileDataChange}
           onConfirmMobileDataBlur={onConfirmMobileDataBlur}
-          iBanData={iBanDataMobileWallet}
-          onIBanChange={onMobileWalletIBanChange}
-          onIbanBlur={onMobileWalletIbanBlur}
+          // iBanData={iBanDataMobileWallet}
+          // onIBanChange={onMobileWalletIBanChange}
+          // onIbanBlur={onMobileWalletIbanBlur}
           isFormPending={isFormPending || false}
           confirm={() => {
             // country
@@ -156,9 +156,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             // common
             if (validation && validation2) confirm();
           }}
-          iBanData={iBanData}
-          onIBanChange={onIBanChange}
-          onIbanBlur={onIbanBlur}
+          // iBanData={iBanData}
+          // onIBanChange={onIBanChange}
+          // onIbanBlur={onIbanBlur}
         />
       )}
     </>

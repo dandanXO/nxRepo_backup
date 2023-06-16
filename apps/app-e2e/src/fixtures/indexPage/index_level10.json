@@ -1,0 +1,182 @@
+{
+  "totalAmount": 280000,
+  "usedAmount": 26000,
+  "availableAmount": 254000,
+  "quotaBar": {
+    "min": 1000,
+    "max": 58000,
+    "current": 58000,
+    "serial": 1000
+  },
+  "chargeFeeDetails": [
+    {
+      "title": "Service Charge",
+      "counting": 0.15,
+      "key": "SERVICE_FEE",
+      "chargeStage": "PRE_INTEREST"
+    },
+    {
+      "title": "Processing Fee",
+      "counting": 0.75,
+      "key": "PROCESSING_FEE",
+      "chargeStage": "PRE_INTEREST"
+    },
+    {
+      "title": "Interest",
+      "counting": 0.1,
+      "key": "LOAN_INTEREST",
+      "chargeStage": "PRE_INTEREST"
+    }
+  ],
+  "products": [
+    {
+      "productId": 3,
+      "productName": "AA LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 2000,
+      "max": 3000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.400,
+      "postPlatformChargeFeeRate": 0.000
+    },
+    {
+      "productId": 4,
+      "productName": "BB LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+      "min": 2000,
+      "max": 5000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.400,
+      "postPlatformChargeFeeRate": 0.000
+    },
+    {
+      "productId": 48,
+      "productName": "t01",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-4424980256908184.png",
+      "min": 2000,
+      "max": 10000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.400
+    },
+    {
+      "productId": 1,
+      "productName": "ZZZ LOAN",
+      "logoUrl": "https://site.india-api-dev.com/resources/product-icon-20848012365246925.png?expires=1711705623&signature=bcdda30dd8affd5da88d52af0591caaf",
+      "min": 2000,
+      "max": 5000,
+      "terms": 20,
+      "platformChargeFeeRate": 0.400,
+      "postPlatformChargeFeeRate": 0.000
+    },
+    {
+      "productId": 2,
+      "productName": "DD LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14012128521689622.png",
+      "min": 2000,
+      "max": 5000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.400,
+      "postPlatformChargeFeeRate": 0.000
+    },
+    {
+      "productId": 49,
+      "productName": "t02",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-4424980256908184.png",
+      "min": 2000,
+      "max": 10000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.400
+    },
+    {
+      "productId": 17,
+      "productName": "YY LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14012195843501019.png",
+      "min": 2000,
+      "max": 5000,
+      "terms": 13,
+      "platformChargeFeeRate": 0.400,
+      "postPlatformChargeFeeRate": 0.000
+    },
+    {
+      "productId": 16,
+      "productName": "platformABCDE",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-4417300771903399.png",
+      "min": 2000,
+      "max": 5000,
+      "terms": 13,
+      "platformChargeFeeRate": 0.400,
+      "postPlatformChargeFeeRate": 0.000
+    },
+    {
+      "productId": 5,
+      "productName": "CC LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285116.png",
+      "min": 2000,
+      "max": 5000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.400,
+      "postPlatformChargeFeeRate": 0.000
+    },
+    {
+      "productId": 19,
+      "productName": "LONG LOEAN",
+      "logoUrl": "https://site.india-api-dev.com/resources/product-icon-20926048279465929.png?expires=1711783658&signature=6a8a52aa1c402f95da4af089f35bc54e",
+      "min": 2000,
+      "max": 5000,
+      "terms": 13,
+      "platformChargeFeeRate": 0.400,
+      "postPlatformChargeFeeRate": 0.000
+    }
+  ],
+  "productDetailItems": [
+    "LOAN_INTEREST",
+    "DISBURSAL_AMOUNT",
+    "TERMS",
+    "DUE_DATE"
+  ],
+  "riskReject": false,
+  "refreshable": false,
+  "noQuotaBalance": false,
+  "noQuotaByRetryFewTimes": false,
+  "orderUnderReview": false,
+  "refreshableUntil": "2023-06-15T23:59:59",
+  "offerExpireTime": "2023-06-15T23:59:59",
+  "hiddenLoanDetail": true,
+  "oldUserForceApply": false,
+  "payableRecords": [
+    {
+      "orderNo": "no-26630024086300153",
+      "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-9173524915494780.png",
+      "productName": "m1 loan",
+      "payableAmount": 3010,
+      "dueDate": "2023/06/16",
+      "overdue": false,
+      "repayUrl": "https://frontend.india-api-dev.com/v2/repayment-detail?token=a3ac4955c422442c947fe80418d17470&orderNo=no-26630024086300153"
+    },
+    {
+      "orderNo": "no-26632739171698959-2",
+      "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-5620348987342192.png",
+      "productName": "tweak",
+      "payableAmount": 3011,
+      "dueDate": "2023/06/20",
+      "overdue": false,
+      "repayUrl": "https://frontend.india-api-dev.com/v2/repayment-detail?token=a3ac4955c422442c947fe80418d17470&orderNo=no-26632739171698959-2"
+    },
+    {
+      "orderNo": "no-26632804389368218",
+      "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "productName": "QOO",
+      "payableAmount": 5008,
+      "dueDate": "2023/06/21",
+      "overdue": false,
+      "repayUrl": "https://frontend.india-api-dev.com/v2/repayment-detail?token=a3ac4955c422442c947fe80418d17470&orderNo=no-26632804389368218"
+    }
+  ],
+  "marquee": "Please note that any request for prepayment is a scam.",
+  "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/P001/upload/ATLAS%20CREDIT_LOGO.png",
+  "customerServiceUrl": "https://cs01.ha-c-tech.com/index/index/mobile?token=7b92777ef302c5d0104d777a7561bd07&id=1000539&name=(longingloan)_Dfg",
+  "bankBindH5url": "https://frontend.india-api-dev.com/v2/bind-bankcard?token=a3ac4955c422442c947fe80418d17470&cardholderName=Dfg",
+  "loanAgreementUrl": "https://site.india-api-dev.com/api/v2/html/loan-agreement"
+}

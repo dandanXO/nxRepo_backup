@@ -55,18 +55,19 @@ export const usePakistanBankAccountForm = (props: IUsePakistanBankAccountForm) =
   },[bankAccountValue.data])
 
   const confirm = () => {
-    validateIban();
+    // validateIban();
     validateBankAccount();
-    return validateIban() && validateBankAccount();
+    // return validateIban() && validateBankAccount();
+    return validateBankAccount();
   };
 
   return {
     bankDropList,
     bankAccountValue,
     onIFSCDropSelect,
-    iBanData,
-    onIBanChange,
-    onIbanBlur,
+    // iBanData,
+    // onIBanChange,
+    // onIbanBlur,
     confirm,
   };
 };

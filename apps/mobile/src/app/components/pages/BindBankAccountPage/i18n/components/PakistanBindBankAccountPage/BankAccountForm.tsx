@@ -7,7 +7,7 @@ import { i18nBankBindAccountPage } from "../../translations";
 import { Button, Input } from "@frontend/mobile/shared/ui";
 import { IPakistanBankAccountForm } from "../../types/IBankAccountForm";
 import Select from "react-select";
-import { FindIBANLinkText } from "../../../../../../../../../../libs/shared/component/src/atoms/FindIBANLinkText";
+// import { FindIBANLinkText } from "../../../../../../../../../../libs/shared/component/src/atoms/FindIBANLinkText";
 
 const Warning = styled.div`
     margin: 0 auto;
@@ -59,22 +59,22 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                     disabled
                 />
 
-                <Label>{t("Your IBAN Number (24 digits)")}</Label>
-                <Input
-                    className="mb"
-                    labelType={"none"}
-                    placeholder={"Ex. PK36FTBK0000111123456702"}
-                    value={props.iBanData.data}
-                    onChange={props.onIBanChange}
-                    onBlur={props.onIbanBlur}
-                    errorMessage={props.iBanData.errorMessage}
-                />
-                <div
-                    style={{ marginBottom: 16 }}
-                    onClick={() => props.openWebView && props.openWebView()}
-                >
-                    <FindIBANLinkText type={"bankcard"} />
-                </div>
+                {/*<Label>{t("Your IBAN Number (24 digits)")}</Label>*/}
+                {/*<Input*/}
+                {/*    className="mb"*/}
+                {/*    labelType={"none"}*/}
+                {/*    placeholder={"Ex. PK36FTBK0000111123456702"}*/}
+                {/*    value={props.iBanData.data}*/}
+                {/*    onChange={props.onIBanChange}*/}
+                {/*    onBlur={props.onIbanBlur}*/}
+                {/*    errorMessage={props.iBanData.errorMessage}*/}
+                {/*/>*/}
+                {/*<div*/}
+                {/*    style={{ marginBottom: 16 }}*/}
+                {/*    onClick={() => props.openWebView && props.openWebView()}*/}
+                {/*>*/}
+                {/*    <FindIBANLinkText type={"bankcard"} />*/}
+                {/*</div>*/}
 
                 <Label>{t("Please select your bank name")}</Label>
                 <Select
@@ -86,7 +86,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         props.onIFSCDropSelect(item.index);
                     }}
                     options={options}
-                    isSearchable={false}
+                    isSearchable={true}
                 />
 
                 {/*<Select*/}
