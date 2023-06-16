@@ -1,6 +1,6 @@
 import { push } from '@lagunovsky/redux-react-router';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { put, take } from 'redux-saga/effects';
+import { put, take, race } from 'redux-saga/effects';
 
 import { APIV3, LoginResponse } from '../../../../api/rtk';
 import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
@@ -17,14 +17,18 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
         msgCode: action.payload.otp,
       }) as any
     );
-
-    const data: { meta: any; payload: LoginResponse; type: string } = yield take(APIV3.endpoints.login.matchFulfilled);
-    if (data.payload.token) {
-      const token = data.payload.token;
-      // console.log("data.payload.token", data.payload.token)
-      yield put(appSlice.actions.updateMode(AppRunningModeEnum.WEB));
-      yield put(appSlice.actions.updateToken(token));
-      yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));
+    const {success, failure} = yield race({
+      success: take(APIV3.endpoints.login.matchFulfilled),
+      failure: take(APIV3.endpoints.login.matchRejected),
+    })
+    if(success) {
+      if (success.payload && success.payload && success.payload.token) {
+        const token = success.data.payload.token;
+        // console.log("data.payload.token", data.payload.token)
+        yield put(appSlice.actions.updateMode(AppRunningModeEnum.WEB));
+        yield put(appSlice.actions.updateToken(token));
+        yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));
+      }
     }
   } catch (error) {
     yield catchSagaError(error);

@@ -1332,6 +1332,277 @@ describe('IndexPage', () => {
 
   })
 
+  // NOTICE: Level 8 -> Level 1
+  it.only("Level 8 -> Level 1", () => {
+
+    // NOTE: Given
+    const userServiceResponse: GetUserInfoServiceResponse = {
+      "userName": "9013452123",
+      // NOTICE: GIVEN: 用戶已認證
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+
+    // NOTE: Given
+    const level1UserServiceResponse: GetUserInfoServiceResponse = {
+      "userName": "9013452123",
+      "status": USER_AUTH_STATE.reject,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+
+    let userCount = 0;
+    cy.intercept("get", "/api/v2/login/info", (res) => {
+      res.continue((req) => {
+        if(userCount === 0 || userCount === 1) {
+          req.send({
+            statusCode: 200,
+            body: userServiceResponse,
+          })
+        } else {
+          req.send({
+            statusCode: 200,
+            body: level1UserServiceResponse,
+          })
+        }
+        userCount++;
+      })
+    })
+
+    const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": FeeRateKeyEnum.PROCESSING_FEE
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": FeeRateKeyEnum.SERVICE_FEE
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": FeeRateKeyEnum.LOAN_INTEREST
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 1000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "loanAgreementUrl": "",
+      "needRiskKycUpdate": false,
+      // NOTE: 優先權最高
+      "riskReject": false,
+      "refreshable": true,
+      "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      // NOTICE: GIVEN: 風控額度時間無效
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "seconds"),
+      "oldUserForceApply": false,
+      // NOTICE: GIVEN: 沒有應還訂單
+      "payableRecords": [],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+
+    // NOTE: Given
+    const level1IndexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
+      "loanAgreementUrl": "",
+      "noQuotaBalance":false,
+      "refreshable": false,
+      "noQuotaByRetryFewTimes": false,
+
+      "riskReject": false,
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": FeeRateKeyEnum.PROCESSING_FEE
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": FeeRateKeyEnum.SERVICE_FEE
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": FeeRateKeyEnum.LOAN_INTEREST
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "orderUnderReview": false,
+      "oldUserForceApply": false,
+
+
+      "payableRecords": [
+        {
+          "orderNo":"",
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": "2023-03-29",
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+
+
+    let indexCount = 0;
+    cy.intercept("get", "/api/v3/index", (res) => {
+      res.continue((req) => {
+        if(indexCount === 0) {
+          console.log("[首頁]1")
+          req.send({
+            statusCode: 200,
+            body: indexServiceResponse,
+          })
+        } else {
+          console.log("[首頁]2")
+          req.send({
+            statusCode: 200,
+            // body: level1IndexServiceResponse,
+            body: indexServiceResponse,
+          })
+        }
+        indexCount++;
+      })
+    }).as("getIndex").then(() => {
+      console.log("index");
+    })
+
+
+    const getPendingQuotaModelStatus: GetQuotaModelStatusResponse = {
+      calculating: true,
+      effective: false,
+      offerExpireTime: ""
+    }
+    const getSuccessQuotaModelStatus: GetQuotaModelStatusResponse = {
+      calculating: false,
+      effective: true,
+      offerExpireTime: moment().tz(INDIA_TIME_ZONE).add("1", "days"),
+    }
+
+    let count = 1
+    cy.intercept("get", "/api/v3/loan/quota-model-status", (req) => {
+      req.continue(res => {
+        if(count < 2) {
+          res.send({
+            statusCode: 200,
+            body: getPendingQuotaModelStatus,
+          })
+        } else {
+          res.send({
+            statusCode: 200,
+            body: getSuccessQuotaModelStatus,
+          })
+        }
+      })
+      count++;
+    })
+
+    visitIndexPage();
+
+
+
+  })
+
+
+
   // NOTICE: 有應還訂單
   // FIGMA: 首頁-認證完成-額度時間到期-需重新取得信用額度 (Android: Level 8)
   it("status: 用戶已認證、風控額度時間無效，需要重新獲取信用額度。有應還訂單。這時需要取得權限授權，沒有授權會回到首頁，不能重新獲取額度。需要有授權才能重新獲取額度", () => {

@@ -109,12 +109,12 @@ const IndexPage = () => {
   }
 
   // NOTE: User Event
-  const isShowReacquireButton = indexPageState.user.state !== USER_AUTH_STATE.authing &&
+  const isShowReacquireButton = indexPageState.user.state !== USER_AUTH_STATE.reject && indexPageState.user.state !== USER_AUTH_STATE.authing &&
     (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
       || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
     ( indexPageState.order.state === ORDER_STATE.empty
       || indexPageState.order.state === ORDER_STATE.normal
-      || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder 
+      || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder
       || indexPageState.order.state === ORDER_STATE.hasOverdueOrder
     );
 
