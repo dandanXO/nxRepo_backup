@@ -58,18 +58,23 @@ const PersonalInfoPage = () => {
           <div className={`font-bold`}>{user.maskUserName}</div>
           <div
             className={cx('mt-1 grow rounded-2xl py-1 px-4 text-center text-sm leading-none', {
-              'border border-orange-500 text-orange-500': user.state !== USER_AUTH_STATE.success,
-              'border border-emerald-500 text-emerald-500': user.state === USER_AUTH_STATE.success,
+              'border border-cstate-error-main text-cstate-error-main': user.state === USER_AUTH_STATE.ready,
+              'border border-cstate-success-main text-cstate-success-main': user.state === USER_AUTH_STATE.success,
+              'border border-cstate-info-main text-cstate-info-main': user.state === USER_AUTH_STATE.authing,
+              'border border-cstate-disable-main text-cstate-disable-main': user.state === USER_AUTH_STATE.reject,
             })}
           >
-            {user.state !== USER_AUTH_STATE.success ? 'Not Verified' : 'Verified'}
+            {user.state === USER_AUTH_STATE.ready && 'Not Verified'}
+            {user.state === USER_AUTH_STATE.success && 'Verified'}
+            {user.state === USER_AUTH_STATE.authing && 'Under Review'}
+            {user.state === USER_AUTH_STATE.reject && 'Reject'}
           </div>
         </div>
       </div>
 
       {/*NOTE: 使用者尚未認證*/}
-      {user.state === USER_AUTH_STATE.ready &&(
-        <div className={`flex flex-row items-center justify-around bg-orange-100 py-2 px-4`}>
+      {user.state === USER_AUTH_STATE.ready && (
+        <div className={`flex flex-row items-center justify-around bg-primary-assistant py-2 px-4`}>
           <div>Verify now for highest amount</div>
           <Button
             onClick={onUserClickToVerify}
@@ -81,8 +86,8 @@ const PersonalInfoPage = () => {
 
       <div className="m-2">
         {/*NOTE: 是否顯示可用度雷達圓餅圖*/}
-        {user.state === USER_AUTH_STATE.success &&   
-         riskControl.state!==RISK_CONTROL_STATE.order_reject && 
+        {user.state === USER_AUTH_STATE.success &&
+         riskControl.state!==RISK_CONTROL_STATE.order_reject &&
          riskControl.state!==RISK_CONTROL_STATE.empty_quota && (
           <div className={`m-2 justify-end rounded-md p-4 shadow-[0_0px_8px_rgba(0,0,0,0.1)]`}>
             <LoanOverViewSection state={indexPage} />

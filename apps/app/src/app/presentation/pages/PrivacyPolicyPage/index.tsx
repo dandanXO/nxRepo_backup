@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../components/layouts/Navigation';
+import { Page } from '../../components/layouts/Page';
 
 const PrivacyPolicyPage = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const PrivacyPolicyPage = () => {
   const url = domain + '/privacy.html';
 
   return (
-    <div>
+    <Page className={`flex flex-col`}>
       <Navigation
         title={'Privacy Policy'}
         back={() => {
@@ -18,7 +19,7 @@ const PrivacyPolicyPage = () => {
         }}
       />
       <iframe className={`w-full grow`} src={url} title="" />
-    </div>
+    </Page>
   );
 };
 
