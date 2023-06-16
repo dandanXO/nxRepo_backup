@@ -42,7 +42,7 @@ export const UrgeModal = ({
         let requestBody = {
             userId: Number(userId),
             collectId: Number(collectId),
-            ptpTime: ptpTime.format('HH:mm') || '',
+            ptpTime: (ptpTime && ptpTime.format('HH:mm')) || '',
             generateLink: generateLink || 'NONE',
             repayAmount: Number(repayAmount),
             ...rest
