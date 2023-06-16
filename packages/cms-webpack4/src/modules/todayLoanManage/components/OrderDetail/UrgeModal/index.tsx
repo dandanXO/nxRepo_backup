@@ -1,13 +1,12 @@
 import React from "react";
-import {Form, Input, Modal, Radio, Space, TimePicker} from "antd";
+import {Form, InputNumber, Modal, Radio, Space, TimePicker} from "antd";
 import {useTranslation} from "react-i18next";
 import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
 import {useEnum} from "../../../../shared/constants/useEnum";
 import TextArea from "antd/es/input/TextArea";
 import {usePostTodayPhoneUrgeRecordMutation} from "../../../api/TodayPhoneUrgeApi";
-import {reject} from "ramda";
 import {HelperFormItem} from "../../../../shared/components/FormItem";
-import moment from "moment-timezone";
+import {formatPrice} from "../../../../shared/utils/format/formatPrice";
 
 
 const { Item } = Form
@@ -39,12 +38,13 @@ export const UrgeModal = ({
     }
 
     const onFinish = () => {
-        const { ptpTime, generateLink, ...rest } = form.getFieldsValue()
+        const { ptpTime, generateLink, repayAmount, ...rest } = form.getFieldsValue()
         let requestBody = {
             userId: Number(userId),
             collectId: Number(collectId),
             ptpTime: ptpTime.format('HH:mm') || '',
             generateLink: generateLink || 'NONE',
+            repayAmount: Number(repayAmount),
             ...rest
         }
 
@@ -94,11 +94,15 @@ export const UrgeModal = ({
                                 name='partialMoney'
                                 required
                                 rules={[
-                                    { required: true }
+                                    { required: true, type: 'number', min:1 }
                                 ]}
                                 style={{ marginTop: '-10px' }}
                             >
-                                <Input style={{ width: '200px'}} />
+                                <InputNumber
+                                    style={{ width: '200px'}}
+                                    formatter={(value) => value && formatPrice(Number(value.toString()))}
+                                    controls={false}
+                                />
                             </Item>
                         )
                     }
