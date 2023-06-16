@@ -17,6 +17,7 @@ import { PagePathEnum } from '../PagePathEnum';
 import Card from './Card';
 import LinkItem from './LinkItem';
 import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
+import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
 
 const PersonalInfoPage = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const PersonalInfoPage = () => {
   }, [isInitialized]);
 
   const { indexPage, app } = useSelector((state: RootState) => state);
-  const { user } = indexPage;
+  const { user, riskControl } = indexPage;
 
   // NOTE: User Event
   const onUserClickToVerify = () => {
@@ -67,7 +68,7 @@ const PersonalInfoPage = () => {
       </div>
 
       {/*NOTE: 使用者尚未認證*/}
-      {user.state === USER_AUTH_STATE.ready && (
+      {user.state === USER_AUTH_STATE.ready &&(
         <div className={`flex flex-row items-center justify-around bg-orange-100 py-2 px-4`}>
           <div>Verify now for highest amount</div>
           <Button
@@ -80,7 +81,9 @@ const PersonalInfoPage = () => {
 
       <div className="m-2">
         {/*NOTE: 是否顯示可用度雷達圓餅圖*/}
-        {user.state === USER_AUTH_STATE.success && (
+        {user.state === USER_AUTH_STATE.success &&   
+         riskControl.state!==RISK_CONTROL_STATE.order_reject && 
+         riskControl.state!==RISK_CONTROL_STATE.empty_quota && (
           <div className={`m-2 justify-end rounded-md p-4 shadow-[0_0px_8px_rgba(0,0,0,0.1)]`}>
             <LoanOverViewSection state={indexPage} />
           </div>
