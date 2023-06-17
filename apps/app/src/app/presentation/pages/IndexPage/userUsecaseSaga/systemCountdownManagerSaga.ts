@@ -36,7 +36,6 @@ export function* systemCountdownManagerSaga() {
         order.state !== ORDER_STATE.hasOverdueOrder &&
         indexResponse.noQuotaBalance !== true &&
         riskControl.state !== RISK_CONTROL_STATE.order_reject) {
-        console.log("fjidosa9rjk")
         yield put(SystemCaseActions.SystemCountdownSaga(indexResponse?.offerExpireTime));
       }
     }

@@ -112,7 +112,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -135,7 +135,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: openIndexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
@@ -175,7 +175,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -270,7 +270,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
       visitIndexPage();
@@ -331,7 +331,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -428,7 +428,7 @@ describe('IndexPage', () => {
         statusCode: 200,
         body: indexServiceResponse,
       }).as("getIndex").then(() => {
-        console.log("index");
+
       })
 
 
@@ -526,7 +526,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -617,7 +617,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
       visitIndexPage();
@@ -692,7 +692,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -783,7 +783,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
@@ -863,7 +863,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
 
@@ -1055,7 +1055,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     const indexServiceResponse: IndexServiceResponse = {
@@ -1230,7 +1230,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -1562,7 +1562,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -1792,7 +1792,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -1886,7 +1886,7 @@ describe('IndexPage', () => {
       statusCode: 200,
         body: indexServiceResponse,
     }).as("getIndex").then(() => {
-        console.log("index");
+
     })
 
 
@@ -1960,7 +1960,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2054,7 +2054,7 @@ describe('IndexPage', () => {
       statusCode: 200,
         body: indexServiceResponse,
     }).as("getIndex").then(() => {
-        console.log("index");
+
     })
 
 
@@ -2124,7 +2124,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2218,7 +2218,7 @@ describe('IndexPage', () => {
       statusCode: 200,
         body: indexServiceResponse,
     }).as("getIndex").then(() => {
-        console.log("index");
+
     })
 
 
@@ -2285,7 +2285,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2380,7 +2380,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
@@ -2414,7 +2414,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2524,7 +2524,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
@@ -2558,7 +2558,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2662,7 +2662,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -2694,7 +2694,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -3101,7 +3101,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -3192,7 +3192,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -3257,7 +3257,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // // NOTE: Given
@@ -3618,7 +3618,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
 
@@ -3794,7 +3794,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -3883,7 +3883,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
 
@@ -4031,7 +4031,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -4123,7 +4123,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
 
@@ -4299,7 +4299,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -4617,7 +4617,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: 攔截 /api/v3/index
@@ -4678,7 +4678,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -4707,7 +4707,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
