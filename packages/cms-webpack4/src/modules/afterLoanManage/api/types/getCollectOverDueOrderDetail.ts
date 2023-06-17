@@ -3,5 +3,6 @@ export type GetCollectOverDueOrderDetailQueryString = {
 }
 
 export type GetCollectOverDueOrderDetailResponse = {
-    expireTime: string
+    expireTime: string;
+    amountDue: number
 };
