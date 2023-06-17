@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, InputNumber, Modal, Radio, Space, TimePicker} from "antd";
+import {Form, Input, InputNumber, Modal, Radio, Space, TimePicker} from "antd";
 import {useTranslation} from "react-i18next";
 import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
 import {useEnum} from "../../../../shared/constants/useEnum";
@@ -21,12 +21,13 @@ interface IUrgeModalProps {
     collectId: string;
     userId: string;
     open: boolean;
+    amountDue: number;
     handleCloseModal: () => void,
     onAdded: (generateLinkType, link:string) => void
 }
 
 export const UrgeModal = ({
-    open, handleCloseModal, collectId, userId, onAdded
+    open, handleCloseModal, collectId, userId, onAdded, amountDue
 }: IUrgeModalProps) => {
     const { t } = useTranslation(i18nUrgeCollection.namespace)
     const [ postTodayPhoneUrgeRecord, { isLoading }] = usePostCollectTodayPhoneUrgeRecordMutation();
@@ -54,7 +55,7 @@ export const UrgeModal = ({
         })
     }
 
-    const RePayLink = (generateLinkLabel, generateLinkTooltip, partialMoneyLabel ) => (
+    const RePayLink = () => (
         <>
             <Item
                 {...layout}
@@ -88,22 +89,24 @@ export const UrgeModal = ({
                         if(generateLink !== 'PARTIAL_REPAYMENT') return null
 
                         return (
-                            <Item
-                                {...layout}
+                            <HelperFormItem
+                                layout={layout}
                                 label={t('repayAmount')}
+                                help={`${t('amountDue')} : ${formatPrice(amountDue)}`}
                                 name='partialMoney'
                                 required
                                 rules={[
-                                    { required: true, type: 'number', min:1 }
+                                    { required: true, type: 'number', min:1 },
+                                    { validator: (_,value) => value > amountDue ? Promise.reject(t('helper.overAmountDue')): Promise.resolve()}
                                 ]}
-                                style={{ marginTop: '-10px' }}
+                                style={{ marginTop: '-10px', marginBottom: '-10px' }}
                             >
                                 <InputNumber
                                     style={{ width: '200px'}}
                                     formatter={(value) => value && formatPrice(Number(value.toString()))}
                                     controls={false}
                                 />
-                            </Item>
+                            </HelperFormItem>
                         )
                     }
                 }
@@ -220,13 +223,13 @@ export const UrgeModal = ({
                 <HelperFormItem
                     layout={layout}
                     name='trackingRecord'
-                    form={form}
                     label={t('trackingRecord')}
                     help={t('addTrackingRecordHelp')}
                     required
                     rules={[
                         { required: true, message: `${t('keyIn')}${t('trackingRecord')}` },
                     ]}
+                    style={{ marginTop: '-10px'}}
                 >
                     <TextArea autoSize={{ minRows:6 }} />
                 </HelperFormItem>

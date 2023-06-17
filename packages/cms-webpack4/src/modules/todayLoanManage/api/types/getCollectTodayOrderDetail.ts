@@ -3,5 +3,6 @@ export type GetCollectTodayOrderDetailQueryString = {
 }
 
 export type GetCollectTodayOrderDetailResponse = {
-    expireTime: string
+    expireTime: string;
+    amountDue: number
 };

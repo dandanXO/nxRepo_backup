@@ -5,7 +5,6 @@ import { Rule } from 'rc-field-form/lib/interface'
 const { Item } = Form
 
 interface IHelperFormItemProps {
-    form: FormInstance
     children: React.ReactNode;
     label: string
     name: string
@@ -17,7 +16,7 @@ interface IHelperFormItemProps {
 }
 
 export const HelperFormItem = ({
-    layout, label, style, required, children, name, rules, form, help
+    layout, label, style, required, children, name, rules, help
 }: IHelperFormItemProps) => {
 
     return (
@@ -26,25 +25,28 @@ export const HelperFormItem = ({
             label={label}
             required={required}
             style={style}
+            help={false}
         >
             <Item
                 name={name}
+                label={label}
                 rules={rules}
                 help=''
+                noStyle
             >
                 {children}
             </Item>
             <Item
-                shouldUpdate={(prevValues, nextValues) => true}
-                style={{ marginTop: '-50px', fontSize: '14px' }}
+                dependencies={[name]}
+                noStyle
             >
                 {
                     ({ getFieldError }) => {
                         const filedErrors = getFieldError(name)
                         if(filedErrors.length > 0) {
-                            return filedErrors.map((part) => <div key={part} style={{ color: 'red'}}>{part}</div>)
+                            return <div style={{ color: 'red', marginBottom: '3px'}}>{filedErrors.map((part) => <div key={part}>{part}</div>)}</div>
                         } else {
-                            return <div style={{ color: 'gray' }}>{help}</div>
+                            return <div style={{ color: 'gray', marginBottom: '3px' }}>{help}</div>
                         }
                     }
                 }

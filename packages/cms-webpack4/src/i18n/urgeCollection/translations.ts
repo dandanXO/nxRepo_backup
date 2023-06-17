@@ -54,6 +54,10 @@ export const i18nUrgeCollection: i18nComponent = {
             },
             generateLink: '生成链结',
             repayAmount: '还款金额',
+            amountDue: '应还金额',
+            helper: {
+                overAmountDue: '输入金额不得大于应还金额'
+            }
         },
         "en-US": {
             function: 'Function',
@@ -104,7 +108,11 @@ export const i18nUrgeCollection: i18nComponent = {
                 copyLabel: 'Extension Link'
             },
             generateLink: 'Generate Link',
-            repayAmount: 'Repayment amount'
+            repayAmount: 'Repayment amount',
+            amountDue: 'Amount Due',
+            helper: {
+                overAmountDue: 'The entered amount must not exceed the amount due.'
+            }
         }
     }
 }

@@ -78,7 +78,6 @@ export const OrderDetailContent = ({
     }, [showCopied])
 
     const tabsItems = useMemo(() => {
-        console.log('get Tabs Items')
 
         if(!fetched) return null
 
@@ -268,6 +267,7 @@ export const OrderDetailContent = ({
                 collectId={collectId}
                 userId={userId}
                 open={showModal}
+                amountDue={orderInfo?.amountDue}
                 handleCloseModal={()=>setShowModal(false)}
                 onAdded={onUrgeRecordAdded}
             />
