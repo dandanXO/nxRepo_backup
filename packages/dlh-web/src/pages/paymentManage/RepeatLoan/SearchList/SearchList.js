@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Row, Col, Input, Button, Select} from 'antd';
+import { Form, Row, Col, Input, Button, Select, Tooltip, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import {injectIntl, FormattedMessage} from "react-intl";
 import {MerchantSelect} from "../../../../components/MerchantSelect";
@@ -79,6 +79,28 @@ class SearchList extends Component {
                                         initialValue: ''
                                     })(
                                         <Input placeholder={intl.formatMessage({id : "page.search.list.order.no.enter"})}/>
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                        <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={
+                                <span>{intl.formatMessage({ id: "page.search.list.suspend" })}&nbsp;
+                                    <Tooltip placement="topLeft" title={intl.formatMessage({id:"page.search.list.suspend.tips"})}>
+                                        <Icon type="info-circle" />
+                                    </Tooltip>
+                                </span>
+                            }>
+                             
+                                {
+                                    getFieldDecorator('suspend', {
+                                        initialValue: 'false'
+                                    })(
+                                        <Select >
+                                            <Option key={'suspendOption'} value=""><FormattedMessage id="page.search.list.no.restrict" /></Option>
+                                            <Option key={'suspendTrue'} value="true"><FormattedMessage id="page.table.yes" /></Option>
+                                            <Option key={'suspendFalse'} value="false"><FormattedMessage id="page.table.no" /></Option>
+                                        </Select>
                                     )
                                 }
                             </Form.Item>

@@ -1,4 +1,4 @@
-import { MdAccountBox } from '@react-icons/all-files/md/MdAccountBox';
+import { RiUser3Line } from '@react-icons/all-files/ri/RiUser3Line';
 import { MdPayment } from '@react-icons/all-files/md/MdPayment';
 import { RiMoneyDollarCircleFill } from '@react-icons/all-files/ri/RiMoneyDollarCircleFill';
 import cx from 'classnames';
@@ -10,6 +10,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { RootState } from '../../../reduxStore';
 import { IndexPageSagaAction } from '../../pages/IndexPage/userUsecaseSaga/indexPageActions';
 import { PagePathEnum } from '../../pages/PagePathEnum';
+import { SystemCaseActions } from '../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 
 type Props = {
   hasOrder: boolean;
@@ -27,18 +28,19 @@ export const TabBar = (props: Props) => {
   };
   const userStatus: USER_AUTH_STATE = useSelector((state: RootState) => state.indexPage.user.state);
   return (
-    <div className={'absolute left-0 right-0 bottom-0 flex h-16 flex-row border-t bg-white'}>
+    <div className={'fixed left-0 right-0 bottom-0 flex h-16 flex-row border-t bg-white'}>
       <div
         className={'flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
+          dispatch(SystemCaseActions.SystemFetchCouponSaga());
           navigate(`${PagePathEnum.IndexPage}?token=${getToken()}`);
         }}
       >
-        <RiMoneyDollarCircleFill color={isInPage(PagePathEnum.IndexPage) ? '#F58B10' : '#D7D7D7'} size={20} />
+        <RiMoneyDollarCircleFill className={isInPage(PagePathEnum.IndexPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
         <div
-          className={cx({
-            'text-orange-300': isInPage(PagePathEnum.IndexPage),
-            'text-gray-300': !isInPage(PagePathEnum.IndexPage),
+          className={cx('text-xs mt-1.5',{
+            'text-primary-main': isInPage(PagePathEnum.IndexPage),
+            'text-cstate-disable-main': !isInPage(PagePathEnum.IndexPage),
           })}
         >
           Loan
@@ -46,6 +48,7 @@ export const TabBar = (props: Props) => {
       </div>
 
       <div
+        data-testing-id={'tab-payment'}
         className={'relative flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
           if (userStatus === USER_AUTH_STATE.ready) {
@@ -55,16 +58,16 @@ export const TabBar = (props: Props) => {
           }
         }}
       >
-        <MdPayment color={isInPage(PagePathEnum.RepaymentPage) ? '#F58B10' : '#D7D7D7'} size={20} />
+        <MdPayment className={isInPage(PagePathEnum.RepaymentPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
         <div
-          className={cx({
-            'text-orange-300': isInPage(PagePathEnum.RepaymentPage),
-            'text-gray-300': !isInPage(PagePathEnum.RepaymentPage),
+          className={cx('text-xs mt-1.5',{
+            'text-primary-main': isInPage(PagePathEnum.RepaymentPage),
+            'text-cstate-disable-main': !isInPage(PagePathEnum.RepaymentPage),
           })}
         >
           Payment
         </div>
-        {props.hasOrder && <div className={'absolute right-1/3 top-2 h-2 w-2 rounded-full bg-[#F24822]'}></div>}
+        {props.hasOrder && <div data-testing-id={'tab-payment-notice'} className={'absolute right-1/3 top-2 h-2 w-2 rounded-full bg-cstate-error-main'}></div>}
       </div>
 
       <div
@@ -73,11 +76,11 @@ export const TabBar = (props: Props) => {
           navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
         }}
       >
-        <MdAccountBox color={isInPage(PagePathEnum.PersonalInfoPage) ? '#F58B10' : '#D7D7D7'} size={20} />
+        <RiUser3Line className={isInPage(PagePathEnum.PersonalInfoPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
         <div
-          className={cx({
-            'text-orange-300': isInPage(PagePathEnum.PersonalInfoPage),
-            'text-gray-300': !isInPage(PagePathEnum.PersonalInfoPage),
+          className={cx('text-xs mt-1.5',{
+            'text-primary-main': isInPage(PagePathEnum.PersonalInfoPage),
+            'text-cstate-disable-main': !isInPage(PagePathEnum.PersonalInfoPage),
           })}
         >
           Account

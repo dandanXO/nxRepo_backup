@@ -16,7 +16,7 @@ import styled from 'styled-components';
 
 const InputAndMessageContainer = styled.div``;
 const ErrorMessageSection = styled.div`
-  color: #f82626;
+  color: ${(props) => props.theme.input?.error || '#f82626'};
   margin-left: 20px;
   padding-top: 5px;
   text-align: left;

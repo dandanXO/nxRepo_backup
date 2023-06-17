@@ -13,6 +13,7 @@ import Divider from '../../components/Divider';
 import Money from '../../components/Money.tsx';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { i18nAmountRepaidModal } from './i18n/translations';
+import {formatDate} from "../../../modules/format/formatDate";
 
 const ModalContentStyled = styled.div`
   padding: 0 12px;
@@ -60,11 +61,11 @@ const Record = (props: { repayDate: string; repayAmount: React.ReactElement; rep
   );
 };
 const renderRecordList = (props: AmountRepaidRecordsProps) => {
-  console.log('props', props);
+  // console.log('props', props);
   const { repayRecords = [] } = props;
   return repayRecords?.map((i) => (
     <Record
-      repayDate={i.repayDate ? moment(i.repayDate).format('DD-MM-YYYY') : ''}
+      repayDate={i.repayDate ? formatDate(moment(i.repayDate)) : ''}
       repayAmount={<Money money={i.repayAmount ? i.repayAmount : 0} />}
       repayType={i.repayType ? i.repayType : ''}
     />
@@ -75,8 +76,8 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
   const { repayRecords, t } = props;
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log('AmountRepaidModal.state', state);
-  console.log('AmountRepaidModal.props', props);
+  // console.log('AmountRepaidModal.state', state);
+  // console.log('AmountRepaidModal.props', props);
 
   return (
     <div>

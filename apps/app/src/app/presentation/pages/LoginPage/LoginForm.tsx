@@ -8,6 +8,7 @@ import { Input, InputValue } from '@frontend/mobile/shared/ui';
 import { Button } from '../../components/layouts/Button';
 import { PagePathEnum } from '../PagePathEnum';
 import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
+import {NativeAppInfo} from "../../../persistant/nativeAppInfo";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -31,8 +32,8 @@ export const LoginForm = () => {
   });
 
   const onClickGetOTP = () => {
-    // setDoingCountdownSendOTP(true);
-    // setHasSendOTP(true);
+    setDoingCountdownSendOTP(true);
+    setHasSendOTP(true);
 
     dispatch(
       LoginPageUseCaseActionsInstance.user.getOTP({
@@ -83,19 +84,14 @@ export const LoginForm = () => {
   return (
     <>
       <div className={`grow`}>
-        <div className={`text-slate-400`}>Phone Number</div>
+        <div className={`text-cTextFields-placeholder-main`}>Phone Number</div>
         <Input
           suffix={
             <Button
               dataTestingID={'getOTP'}
               text={!doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
-              className={cx(
-                {
-                  'bg-[#F58B10] text-white': enableGetOTP && !hasSendOTP && !doingCountdownSendOTP,
-                  'bg-[#D7D7D7]': !(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP),
-                },
-                'ml-2 py-1 px-2.5'
-              )}
+              disable={!(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP)}
+              className={cx('ml-2 py-1 px-2.5 w-auto')}
               onClick={() => {
                 enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
               }}
@@ -145,7 +141,7 @@ export const LoginForm = () => {
             }
           }}
         />
-        <div className={`mt-4 text-slate-400`}>OTP Verification Code</div>
+        <div className={`mt-4 text-cTextFields-placeholder-main`}>OTP Verification Code</div>
         <Input
           labelType="none"
           value={otpData.data}
@@ -174,26 +170,20 @@ export const LoginForm = () => {
       </div>
       <div className={`py-2`}>
         <Button
-          dataTestingID={'apply'}
+          dataTestingID={'Confirm'}
           text={'Confirm'}
-          className={cx('text-white', {
-            'bg-[#F58B10]': true,
-          })}
-          onClick={() => {
-            handleLogin();
-          }}
+          onClick={() => { handleLogin();}}
         />
-        <div className="py-4 text-xs text-[#7B7B7B]">
-          {' '}
-          By continuing, you agree and acknowledge you have read the
+
+        <div className="py-4 text-xs text-ctext-secondary">
+          By continuing, you agree to our
           <span
-            className="mx-1 text-blue-500 underline decoration-blue-500"
+            className="mx-1 text-cstate-info-main underline decoration-cstate-info-main"
             onClick={() => navigate(PagePathEnum.PrivacyPolicyModal)}
           >
             Privacy Policy
           </span>
-          You also consent to receive SMS messages.Please carefully read the above agreement, agreed to check and enter
-          the next step.
+          . “{NativeAppInfo.appName}” will send an SMS message to verify your phone number and account.
         </div>
       </div>
     </>

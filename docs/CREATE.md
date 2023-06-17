@@ -10,12 +10,19 @@ npx create-nx-workspace@latest
 nx g @nrwl/react:app my-new-app
 nx g @nrwl/react:app app --bundler=webpack
 
+
+ 
+
+
 # [Creating a new JS library](https://nx.dev/packages/esbuild/documents/overview#creating-a-new-js-library)
 #bundler should be one of swc,tsc,rollup,vite,esbuild,none
 nx g @nrwl/js:lib shared/domain --bundler=tsc
 nx g @nrwl/js:lib shared/domain --bundler=swc
 nx g @nrwl/js:lib shared/domain --bundler=esbuild
 
+# Dry Run
+-d, --dryRun
+nx g @nrwl/js:lib shared/date --bundler=tsc
 
 
 # And add a new react library as follows:

@@ -6,7 +6,7 @@ import { z } from 'zod';
 
 import { InputValue, Modal } from '@frontend/mobile/shared/ui';
 
-import { usePakistanIBanValidate } from '../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate';
+// import { usePakistanIBanValidate } from '../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate';
 import { CustomAxiosError } from '../../../../../../api/rtk/axiosBaseQuery';
 import { GetBindCardDropListResponse, WalletVendor } from '../../../../../../api/rtk/old/GetBindCardDropList';
 import { SentryModule } from '../../../../../../modules/sentry';
@@ -25,7 +25,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   // NOTE: Wallet List
   // Wallet List - 電子錢包列表 Data
   const [walletDropList, setWalletDropList] = useState<(string | React.ReactNode)[]>([]);
-  const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate();
+  // const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate();
 
   // Wallet Selected - 選擇的電子錢包
   const [walletValue, setWalletValue] = useState<{
@@ -142,7 +142,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   const confirm = useCallback(() => {
     validateMobileWalletAccount();
     validateConfirmMobileData();
-    validateIban();
+    // validateIban();
 
     if (!mobileData.isValidation || !confirmMobileData.isValidation) return;
 
@@ -163,10 +163,10 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         mobileWallet: true,
         mobileWalletAccount: mobileDataValue,
         walletVendor: (mobileWalletAccount && mobileWalletAccount.code) || '',
-        iban: iBanData.data,
+        // iban: iBanData.data,
       })
       .then((data: any) => {
-        console.log('data:', data);
+        // console.log('data:', data);
         // TODO: refactor me
         if (data && data.error) {
           SentryModule.captureException(data.error);
@@ -188,7 +188,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
         }
       })
       .catch((error: CustomAxiosError) => {
-        console.log('error:', error);
+        // console.log('error:', error);
         // const error = new Error();
         // error.name = "triggerPostBankBindSaveToPKMutation"
         // if(err) error.message = JSON.stringify(err)
@@ -204,7 +204,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     props.bindCardDropListData,
     props.triggerPostBankBindSaveToPKMutation,
     props.isPostBankBindSaveToPKMutationLoading,
-    iBanData.data,
+    // iBanData.data,
   ]);
 
   return {
@@ -221,9 +221,9 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     onConfirmMobileDataChange,
     onConfirmMobileDataBlur,
     //IBAN
-    iBanData,
-    onIBanChange,
-    onIbanBlur,
+    // iBanData,
+    // onIBanChange,
+    // onIbanBlur,
     // Form
     confirm,
   };

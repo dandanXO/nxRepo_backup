@@ -20,20 +20,20 @@ export const UserInfoSupportSection = (props: Props) => {
   };
 
   return (
-    <div className={'flex w-full flex-row justify-between '}>
+    <div data-testing-id="welcome" className={'flex w-full flex-row justify-between'}>
       <div className={'left-section flex flex-row items-center'}>
         {/*NOTE: 顯示用戶名 */}
-        <div data-testing-id="welcome" className={'welcome pr-2 font-medium'}>
+        <div className={'welcome pr-2 font-bold'}>
           Welcome {isHideUserName ? userName : props.state.user.userName}
         </div>
         {/*NOTE: 是否隱藏用戶名稱 Button*/}
-        <a data-test-id={'hide-icon'} onClick={onClickHideUserName}>
+        <a data-testing-id={'hide-icon'} onClick={onClickHideUserName}>
           {isHideUserName ? <FiEyeOff /> : <FiEye />}
         </a>
       </div>
       <div className={'right-section'}>
         {/*NOTE: 客服 Button*/}
-        <div data-test-id={'contact-icon'} onClick={props.onClickToCustomerService}>
+        <div data-testing-id={'contact-icon'} onClick={props.onClickToCustomerService}>
           <RiCustomerServiceLine />
         </div>
       </div>

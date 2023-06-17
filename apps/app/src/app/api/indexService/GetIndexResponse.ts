@@ -16,6 +16,9 @@ export type GetIndexResponse = {
   customerServiceUrl: string;
   // 線上客服連結
 
+  hiddenLoanDetail:	boolean;
+  // 是否隐藏借款详情
+
   loanAgreementUrl: string;
   // 借款同意申明URL
 
@@ -27,6 +30,8 @@ export type GetIndexResponse = {
 
   noQuotaBalance: boolean;
   // 当次刷新没有额度(新客、老客重刷沒額度)
+  // true  完全沒錢 (只有levle 4會用到)
+  // false 有錢但借光了
 
   noQuotaByRetryFewTimes: boolean;
   // 刷新超過N次都没有额度

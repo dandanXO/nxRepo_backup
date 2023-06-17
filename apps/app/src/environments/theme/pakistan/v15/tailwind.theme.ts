@@ -16,20 +16,20 @@ const theme: ICustomTailwindTheme = {
   tertiary_variant: '#51C472',
 
   // NOTE: State
-  custom_state_disable_main: '#E1E1E1',
-  custom_state_disable_variant: '#57B8FF',
-  custom_state_disable_assistant: '#ECECEC',
+  custom_state_disable_main:'#E1E1E1',
+  custom_state_disable_variant:'#868686',
+  custom_state_disable_assistant:'#ECECEC',
 
-  custom_state_success_main: '#4FC425',
-
-  custom_state_warning_main: '#FFD100',
-  custom_state_warning_variant: '#DBAF00',
-
-  custom_state_error_main: '#DB2C23',
-  custom_state_error_variant: '#F9DDDC',
-
-  custom_state_info_main: '#1376EF',
-  custom_state_info_variant: '#E7F1FD',
+  custom_state_success_main:'#4FC425',
+  
+  custom_state_warning_main:'#FFD100',
+  custom_state_warning_variant:'#DBAF00',
+  
+  custom_state_error_main:'#DB2C23',
+  custom_state_error_variant:'#F9DDDC',
+  
+  custom_state_info_main:'#1376EF',
+  custom_state_info_variant:'#E7F1FD',
 
   // NOTE: background
   custom_bg_primary: '#FDFFFE',
@@ -38,16 +38,16 @@ const theme: ICustomTailwindTheme = {
   custom_bg_homepage_button: 'linear-gradient(178.76deg, #18A851 1.58%, #138641 99.46%)', // 首頁按鈕 Get my limit
 
   // NOTE: text
-  custom_text_primary: '#282A30',
-  custom_text_secondary: '#6B738A',
-  custom_text_tertiary: '#ADB3C0',
-  custom_text_divider: '#CED1D9',
+  custom_text_primary:'#282A30',
+  custom_text_secondary:'#AFB5C6',
+  custom_text_tertiary:'#C0C8D8',
+  custom_text_divider:'#E8E8E8',
 
   // NOTE: Text Fields
   custom_text_fields_background_main: '#FFFFFF',
   custom_text_fields_background_variant: '#EEEEEE',
   custom_text_fields_placeholder_main: '#CED1D9',
-  custom_text_fields_outline_main: '#AAAAAA',
+  custom_text_fields_outline_main: '#CBCFD4',
 };
 
 export default theme;

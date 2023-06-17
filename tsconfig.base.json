@@ -11,9 +11,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@frontend/hooks": ["libs/hooks/src/index.ts"],
       "@frontend/mobile/shared/ui": ["libs/mobile/shared/ui/src/index.ts"],
       "@frontend/shared/component": ["libs/shared/component/src/index.ts"],
+      "@frontend/shared/date": ["libs/shared/date/src/index.ts"],
       "@frontend/shared/domain": ["libs/shared/domain/src/index.ts"]
     }
   },

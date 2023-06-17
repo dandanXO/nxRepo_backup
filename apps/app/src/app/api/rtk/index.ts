@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { GetIndexRequest } from '../indexService/GetIndexRequest';
 import { GetIndexResponse } from '../indexService/GetIndexResponse';
+import { GetNotificationResponse } from '../indexService/GetNotificationResponse';
 import { GetLoanDetailRequest } from '../loanService/GetLoanDetailRequest';
 import { GetLoanDetailResponse } from '../loanService/GetLoanDetailResponse';
 import { GetLoanRecordListReponse } from '../loanService/GetLoanRecordListReponse';
@@ -71,7 +72,7 @@ export const APIV3 = createApi({
         arg,
         { dispatch, getState, extra, requestId, cacheEntryRemoved, cacheDataLoaded, getCacheEntry }
       ) {
-        console.log('onCacheEntryAdded.arg', arg);
+        // console.log('onCacheEntryAdded.arg', arg);
       },
     }),
 
@@ -109,6 +110,15 @@ export const APIV3 = createApi({
         params: query,
       }),
     }),
+
+    // NOTE: /api/v3/notification 取得推送用户讯息
+    getNotificationList: builder.query<GetNotificationResponse, null>({
+      query: (query: null) => ({
+        method: 'get',
+        url: `/notification`,
+        params: query,
+      }),
+    }),
   }),
 });
 
@@ -117,6 +127,7 @@ export const {
   useLazyGetCouponApplicableListQuery,
   usePostTraceBehaviorMutation,
   useLazyGetCouponListQuery,
+  useLazyGetNotificationListQuery,
 } = APIV3;
 
 export const API = createApi({
@@ -247,7 +258,7 @@ export const API = createApi({
     getUserProcess: builder.query<GetUserProcessResponse, {}>({
       query: () => ({
         method: 'get',
-        url: `/bank-user/process`,
+        url: `/user/process`,
       }),
     }),
   }),

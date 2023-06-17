@@ -36,11 +36,11 @@ window.addEventListener('rejectionhandled', (event) => {
 });
 
 window.onunhandledrejection = (event) => {
-  console.log('debug.window.onunhandledrejection');
   event.preventDefault();
-
+  console.error('[app] debug.window.onunhandledrejection');
   console.log(event);
   console.log(event.reason);
+
 };
 
 // NOTE: refactor me

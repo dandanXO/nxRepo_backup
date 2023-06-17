@@ -1,8 +1,11 @@
 import { ReactNode } from 'react';
+import { TestingProps } from '../../../../modules/TestingProps';
+type Props = {
+    children?: ReactNode;
+} & TestingProps;
 
-interface Props {
-  children?: ReactNode;
-}
 export const NoticeSectionContainer = (props: Props) => {
-  return <div className={'mt-3 flex flex-col justify-center px-3 text-center align-middle'}>{props.children}</div>;
+    return <div data-testing-id={props.dataTestingID} className={'mt-8 flex flex-col justify-center px-3 text-center align-middle'}>
+        {props.children}
+    </div>;
 };

@@ -23,9 +23,9 @@ type IMobileWalletForm = {
   // Form
   isFormPending: boolean;
   confirm: () => void;
-  iBanData: InputValue<string>;
-  onIBanChange: (event: any) => void;
-  onIbanBlur: (event: any) => void;
+  // iBanData: InputValue<string>;
+  // onIBanChange: (event: any) => void;
+  // onIbanBlur: (event: any) => void;
 };
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
@@ -47,32 +47,33 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           // defaultValue={props.bankDropList[0].value}
           value={props.walletValue}
           onChange={(item: any) => {
-            console.log(item);
+            // console.log(item);
             props.setWalletValue(item);
           }}
           isSearchable={false}
           placeholder={'Mobile Wallet'}
         />
       </div>
-      <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>
-      <Input
-        name={'iban'}
-        labelType={'none'}
-        outlineType={'standard'}
-        placeholder={'Ex. PK36FTBK0000111123456702'}
-        value={props.iBanData.data}
-        onChange={props.onIBanChange}
-        onBlur={props.onIbanBlur}
-        errorMessage={props.iBanData.errorMessage}
-        onCopy={(e) => preventCopyPaste(e)}
-        onCut={(e) => preventCopyPaste(e)}
-      />
-      <div
-        className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"
-        onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}
-      >
-        {'Click me to learn where can I find my IBAN number?'}
-      </div>
+
+      {/*<div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>*/}
+      {/*<Input*/}
+      {/*  name={'iban'}*/}
+      {/*  labelType={'none'}*/}
+      {/*  outlineType={'standard'}*/}
+      {/*  placeholder={'Ex. PK36FTBK0000111123456702'}*/}
+      {/*  value={props.iBanData.data}*/}
+      {/*  onChange={props.onIBanChange}*/}
+      {/*  onBlur={props.onIbanBlur}*/}
+      {/*  errorMessage={props.iBanData.errorMessage}*/}
+      {/*  onCopy={(e) => preventCopyPaste(e)}*/}
+      {/*  onCut={(e) => preventCopyPaste(e)}*/}
+      {/*/>*/}
+      {/*<div*/}
+      {/*  className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"*/}
+      {/*  onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}*/}
+      {/*>*/}
+      {/*  {'Click me to learn where can I find my IBAN number?'}*/}
+      {/*</div>*/}
 
       <div>
         <div className={'mb-0 text-sm'}>{'Mobile Wallet Account'}</div>

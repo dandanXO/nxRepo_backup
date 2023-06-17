@@ -34,27 +34,27 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         />
       </div>
 
-      <div>
-        <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>
-        <Input
-          name={'iban'}
-          labelType={'none'}
-          outlineType={'standard'}
-          placeholder={'Ex. PK36FTBK0000111123456702'}
-          value={props.iBanData.data}
-          onChange={props.onIBanChange}
-          onBlur={props.onIbanBlur}
-          errorMessage={props.iBanData.errorMessage}
-          onCopy={(e) => preventCopyPaste(e)}
-          onCut={(e) => preventCopyPaste(e)}
-        />
-        <div
-          className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"
-          onClick={() => navigate('iban-finder-modal', { state: 'Bank' })}
-        >
-          {'Click me to learn where can I find my IBAN number?'}
-        </div>
-      </div>
+      {/*<div>*/}
+      {/*  <div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>*/}
+      {/*  <Input*/}
+      {/*    name={'iban'}*/}
+      {/*    labelType={'none'}*/}
+      {/*    outlineType={'standard'}*/}
+      {/*    placeholder={'Ex. PK36FTBK0000111123456702'}*/}
+      {/*    value={props.iBanData.data}*/}
+      {/*    onChange={props.onIBanChange}*/}
+      {/*    onBlur={props.onIbanBlur}*/}
+      {/*    errorMessage={props.iBanData.errorMessage}*/}
+      {/*    onCopy={(e) => preventCopyPaste(e)}*/}
+      {/*    onCut={(e) => preventCopyPaste(e)}*/}
+      {/*  />*/}
+      {/*  <div*/}
+      {/*    className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"*/}
+      {/*    onClick={() => navigate('iban-finder-modal', { state: 'Bank' })}*/}
+      {/*  >*/}
+      {/*    {'Click me to learn where can I find my IBAN number?'}*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
       <div>
         <div className={'text-sm'}>{'Bank Name'}</div>
@@ -63,15 +63,16 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           className="mb-2"
           // defaultValue={props.bankDropList[0].value}
           // value={props?.bankDropList[props.bankAccountValue]?.value}
-          value={props.bankAccountValue}
           onChange={(item: any) => {
-            // console.log(item)
             props.onIFSCDropSelect(item);
           }}
           options={options}
-          isSearchable={false}
+          isSearchable={true}
           placeholder={'Select'}
         />
+        {props.bankAccountValue.isValidation &&
+            <div className='ml-5 text-cstate-error-main'>{props.bankAccountValue.errorMessage}</div>
+        }
       </div>
 
       <div>

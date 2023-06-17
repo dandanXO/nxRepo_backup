@@ -20,6 +20,7 @@ import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {
@@ -122,7 +123,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                   {<Money money={coupon.discountAmount} isNagetive={true} />}
                 </div>
                 <div className="text-ctext-tertiary text-xs">
-                  <div>expiration date: {coupon.expireTime ? moment(coupon.expireTime).format('DD-MM-YYYY') : ''}</div>
+                  <div>expiration date: {coupon.expireTime ? formatDate(moment(coupon.expireTime)) : ''}</div>
                 </div>
               </div>
             ) : (
@@ -132,7 +133,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           <RiArrowRightSLine className="fill-ctext-primary mx-1 text-xl" />
         </a>
       )}
-      <div className="mt-3 font-bold">
+      <div className="mt-4 font-bold">
         <ListItem
           title={'Repayment Amount'}
           text={
@@ -167,7 +168,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         </div>
       </div>
 
-      <div className={`text-left text-xs text-gray-400`}>
+      <div className={`text-left text-xs text-ctext-secondary`}>
         <div>Attention：</div>
         <ul className="list-outside list-decimal pl-3 pt-1">
           <li>Before repayment, please make sure that you have enough balance on your bank account.</li>

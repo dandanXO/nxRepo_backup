@@ -242,7 +242,10 @@ const PureLoanDetails = (props: PureLoanDetailsPageProps) => {
 
                 <LoanDetail {...props.currentData} />
 
-                <Attention />
+                {props.currentData?.status !== "PAY_OFF" && (
+                  <Attention />
+                )}
+
 
                 {(props.currentData?.status === "UNPAID" ||
                     props.currentData?.status === "OVERDUE") && (

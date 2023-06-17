@@ -1,3 +1,5 @@
+
+
 import { environment } from '../../../environments/environment';
 import { AppFlag } from '../../../environments/flag';
 import { AppEnvironment } from '../../modules/appEnvironment';
@@ -20,6 +22,22 @@ export const isInApp = (): boolean => {
   const useragent = navigator.userAgent || navigator.vendor;
   return Boolean(useragent.match(regex));
 };
+
+if (window.Cypress) {
+    // window.appReady = true
+    window.AppInfoTask = {
+      getAppInfo: () => JSON.stringify({
+        domain: 'https://www.oasis-gold.com',
+        environment: 'india',
+        packageId: 'com.ind.kyc.application',
+        appName: 'Local APP',
+        uiVersion: "56",
+        token: null,
+        mode: 'H5',
+        phoneNo: '1234567890',
+      })
+    }
+}
 
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());
@@ -55,11 +73,11 @@ export const getAppInfo = (): IAndroidAppInfo => {
           domain: 'https://www.oasis-gold.com',
           environment: 'india',
           packageId: 'com.ind.kyc.application',
-          appName: 'dev_in',
+          appName: 'Local APP',
           uiVersion: uiVersion,
           token: null,
           mode: 'H5',
-          phoneNo: '後端API沒給三二一',
+          phoneNo: '',
         };
 
         // NOTE: 不需要模擬
@@ -76,26 +94,26 @@ export const getAppInfo = (): IAndroidAppInfo => {
             // NOTE: 這邊後續要判斷是 SimpleWebview or Webview
             appInfo = {
               packageId: 'com.ind.kyc.application',
-              appName: 'dev_in',
+              appName: 'DevIn APP',
               environment: 'india',
               uiVersion: '55',
               domain: 'https://www.oasis-gold.com',
               token: null,
               // NOTICE: mode 的用途？
               mode: 'Webview',
-              phoneNo: '後端API沒給三二一',
+              phoneNo: '',
             };
           } else {
             appInfo = {
               packageId: 'com.ind.kyc.application',
-              appName: 'dev_in',
+              appName: 'DevIn APP',
               environment: 'india',
               uiVersion: '55',
               domain: 'https://www.oasis-gold.com',
               token: null,
               // NOTICE: mode 的用途？
               mode: 'H5',
-              phoneNo: '後端API沒給三二一',
+              phoneNo: '',
             };
           }
         } else {
@@ -108,14 +126,14 @@ export const getAppInfo = (): IAndroidAppInfo => {
               // webview 不必要
               packageId: 'unknown',
               // webview 不必要
-              appName: 'unknown',
+              appName: 'APP',
               // NOTE: 換主題需要，但缺失
               uiVersion: '55',
               // webview 不必要
               token: null,
               // NOTE: required
               mode: 'Webview',
-              phoneNo: '後端API沒給三二一',
+              phoneNo: '',
             };
           } else {
             // NOTE: 線上環境直接用瀏覽器開
@@ -127,14 +145,14 @@ export const getAppInfo = (): IAndroidAppInfo => {
               // webview 不必要
               packageId: 'unknown',
               // webview 不必要
-              appName: 'unknown',
+              appName: 'APP',
               // NOTE: 換主題需要，但缺失
               uiVersion: '55',
               // webview 不必要
               token: null,
               // NOTE: required
               mode: 'Webview',
-              phoneNo: '後端API沒給三二一',
+              phoneNo: '',
             };
           }
         }
@@ -149,11 +167,11 @@ export const getAppInfo = (): IAndroidAppInfo => {
         domain: 'https://www.oasis-gold.com',
         environment: 'pakistan',
         packageId: 'com.pak.app.yesloan.android',
-        appName: 'dev_pk',
+        appName: 'PK APP',
         uiVersion: '15',
         token: null,
         mode: 'Webview',
-        phoneNo: '後端API沒給三二一',
+        phoneNo: '',
       };
     } else {
       throw new Error('前端請新增國家配置');

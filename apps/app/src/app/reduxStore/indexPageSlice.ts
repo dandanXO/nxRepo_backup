@@ -12,7 +12,7 @@ import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
 import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
 import { NativeAppInfo } from '../persistant/nativeAppInfo';
 import { getQuotaModelStatusAction } from '../presentation/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
-
+import { GetNotificationResponse } from '../api/indexService/GetNotificationResponse';
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;
   indexAPI: GetIndexResponse | null;
@@ -49,6 +49,7 @@ export interface InitialState {
       seconds: string;
     };
   };
+  notification: GetNotificationResponse;
 }
 
 export type TimePartition = {
@@ -98,6 +99,7 @@ const initialState: InitialState = {
       seconds: '',
     },
   },
+  notification:[]
 };
 
 export const indexPageSlice = createSlice({
@@ -123,7 +125,7 @@ export const indexPageSlice = createSlice({
       }
     },
     updateIndexAPI: (state, action: PayloadAction<GetIndexResponse>) => {
-      console.log('updateIndexAPI', state, action);
+      // console.log('updateIndexAPI', state, action);
 
       state.indexAPI = action.payload;
       state.sharedIndex.marquee = action.payload.marquee;
@@ -137,13 +139,8 @@ export const indexPageSlice = createSlice({
       // console.log("expireTime", expireTime.format());
       // console.log("isRiskControlOverdue", isRiskControlOverdue);
 
-      // NOTE: 會有其他條件同時相符，所以這邊用if優先權最高-直接第一
-      if (action.payload.riskReject === true) {
-        // NOTICE: 新客直接被擋或是老客額度被擋，但前端直接視為 ORDER_STATE.reject，
-        // NOTICE: order
-        state.order.state = ORDER_STATE.reject;
-        state.order.overdueOrComingOverdueOrder = null;
-      } else if (action.payload.payableRecords.length === 0) {
+
+      if (action.payload.payableRecords.length === 0) {
         // NOTICE: order
         state.order.state = ORDER_STATE.empty;
         state.order.overdueOrComingOverdueOrder = null;
@@ -187,44 +184,42 @@ export const indexPageSlice = createSlice({
         }
       }
 
-      // NOTE: 與後端對規則
-      // NOTE: 1.風控到期後的重刷
-      // NOTE: 2.風控沒過，沒額度的重刷
-
       // NOTICE: 風控判斷
-      if (typeof action.payload.offerExpireTime !== 'undefined' && isRiskControlOverdue) {
-        // NOTE: 可重刷
+      if (action.payload.riskReject === true) {
+        state.riskControl.state = RISK_CONTROL_STATE.order_reject;
+
+      } else if (action.payload.noQuotaBalance === true) {
+        state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+
+      } else if(isRiskControlOverdue) {
         if (action.payload.refreshable === true) {
           if (action.payload.noQuotaByRetryFewTimes === false) {
             state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+
           } else {
-            // state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+            console.log("防禦型設計-理論上不會遇到.1")
           }
-          // NOTE: 不可重刷
         } else {
-          // NOTE: 可能是尚有額度
-          // NOTE: 下方 code 不需要
-          // if (action.payload.noQuotaByRetryFewTimes === true) {
-          //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-          // } else {
-          //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_one_time
-          // }
+          if (action.payload.noQuotaByRetryFewTimes === true) {
+            state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+
+          } else {
+            if (action.payload.availableAmount >= 0) {
+              state.riskControl.state = RISK_CONTROL_STATE.valid;
+
+            } else {
+              console.log("防禦型設計-理論上不會遇到.2")
+            }
+          }
+        }
+      } else {
+        if (action.payload.availableAmount >= 0) {
+          state.riskControl.state = RISK_CONTROL_STATE.valid;
+        } else {
+          state.riskControl.state = RISK_CONTROL_STATE.valid;
         }
       }
 
-      // NOTICE: 會有過期, 但是 noQuotaBalance 為 true 嗎?
-      if (action.payload.noQuotaBalance === true) {
-        // NOTE: 優先度最後
-        state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
-      } else if (!isRiskControlOverdue && action.payload.availableAmount > 0) {
-        state.riskControl.state = RISK_CONTROL_STATE.valid;
-      }
-
-      // REFACTOR ME: 額度不足
-      // else if(!isRiskControlOverdue && action.payload.availableAmount === 0) {
-      //
-      // }
     },
     updateOpenAPI: (state, action: PayloadAction<GetOpenIndexResponse>) => {
       state.openIndexAPI = action.payload;
@@ -239,6 +234,7 @@ export const indexPageSlice = createSlice({
     },
     expiredRiskCountdown: (state, action) => {
       // state.riskControl.state = RISK_CONTROL_STATE.expired;
+    //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
     },
     // NOTICE: 可重刷取得逾期的計時器
     updateRefreshableCountdown: (state, action) => {
@@ -247,7 +243,11 @@ export const indexPageSlice = createSlice({
     // NOTICE: 取消可重刷取得逾期的計時器
     expiredRefreshableCountdown: (state, action) => {
       // 根據後端條件決定是否能不能重刷下方倒數
-      state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+    //   state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_able;
+    },
+    // NOTICE: 取得推送用戶數訊息
+    updateNotification:(state, action) => {
+        state.notification = action.payload;
     },
   },
   extraReducers: (builder) => {

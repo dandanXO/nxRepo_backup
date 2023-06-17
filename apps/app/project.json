@@ -95,6 +95,7 @@
         "outputPath": "dist/apps/app",
         "baseHref": "/",
         "index": "apps/app/src/index.html",
+        "generateIndexHtml": false,
         "main": "apps/app/src/main.tsx",
         "tsConfig": "apps/app/tsconfig.app.json",
         "assets": ["apps/app/src/favicon.ico", "apps/app/src/assets"],

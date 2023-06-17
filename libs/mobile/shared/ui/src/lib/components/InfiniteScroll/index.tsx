@@ -7,7 +7,7 @@ import ScrollTrack from "./ScrollTrack";
 import {ThemeModuleSkinType} from "../type/module";
 import {withTheme} from "styled-components";
 import {omit} from "ramda";
-export {InfiniteScrollInstanceInterface} from "./infiniteScroll.type";
+import {InfiniteScrollInstanceInterface} from "./infiniteScroll.type";
 
 const MIN_BAR_HEIGHT = 20;
 // 禁止 window 滾動

@@ -15,6 +15,7 @@ import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanD
 import {useMemo} from "react";
 import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -73,19 +74,19 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         />
         <ListItem
           title={'Apply Date'}
-          text={applyDate ? moment(applyDate).format('DD-MM-YYYY') : ''}
+          text={applyDate ? formatDate(moment(applyDate)) : ''}
           titleColor="text-ctext-primary"
         />
         <ListItem
           title={'Due Date'}
-          text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
+          text={dueDate ? formatDate(moment(dueDate)): ''}
           titleColor="text-ctext-primary"
         />
 
         {status === 'PAY_OFF' && (
           <ListItem
             title={'Repayment Date'}
-            text={repaymentDate ? moment(repaymentDate).format('DD-MM-YYYY') : ''}
+            text={repaymentDate ? formatDate(moment(repaymentDate)) : ''}
             titleColor="text-ctext-primary"
           />
         )}
@@ -93,7 +94,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         {status === 'EXTEND' && (
           <ListItem
             title={'Extension Date'}
-            text={extendDate ? moment(extendDate).format('DD-MM-YYYY') : ''}
+            text={extendDate ? formatDate(moment(extendDate)) : ''}
             titleColor="text-ctext-primary"
           />
         )}

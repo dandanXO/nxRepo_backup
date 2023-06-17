@@ -3,7 +3,7 @@ import {
     BankVendor,
     GetBindCardDropListResponse,
 } from "../../../../../../api/GetBindCardDropList";
-import { usePakistanIBanValidate } from "../../../../../../../../../../libs/hooks/src/usePakistanIBanValidate";
+// import { usePakistanIBanValidate } from "../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate";
 
 interface IUsePakistanBankAccountForm {
     // NOTE: 取得電子錢包列表
@@ -14,8 +14,8 @@ interface IUsePakistanBankAccountForm {
 export const usePakistanBankAccountForm = (
     props: IUsePakistanBankAccountForm
 ) => {
-    const { iBanData, onIBanChange, onIbanBlur, validateIban } =
-        usePakistanIBanValidate();
+    // const { iBanData, onIBanChange, onIbanBlur, validateIban } =
+    //     usePakistanIBanValidate();
 
     // NOTE: 帳號列表 Data
     const [bankDropList, setBankDropList] = useState<string[]>([]);
@@ -41,16 +41,16 @@ export const usePakistanBankAccountForm = (
     }, []);
 
     const confirm = () => {
-        validateIban();
+        // validateIban();
     };
 
     return {
         bankDropList,
         bankAccountValue,
         onIFSCDropSelect,
-        iBanData,
-        onIBanChange,
-        onIbanBlur,
+        // iBanData,
+        // onIBanChange,
+        // onIbanBlur,
         confirm,
     };
 };

@@ -7,4 +7,5 @@ export const BangladeshCountry: ICountry = {
   countryName: "Bangladesh",
   currency: "৳",
   language: "bn_BD",
+  timezone: "Asia/Dhaka"
 }

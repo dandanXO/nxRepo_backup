@@ -14,16 +14,18 @@ export const LoanAgreementModal = (props: Props) => {
   }, []);
   const url = useSelector((state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl);
   return (
-    <div className={'loan-agreement-modal absolute top-0 z-10 flex h-screen w-screen flex-col bg-white pt-5'}>
-      <div className={'z-10'} onClick={onClickClose}>
+    <div className={'loan-agreement-modal  fixed top-0 z-10 flex h-screen w-screen flex-col bg-white pt-5'}>
+      <div className={'z-20'} onClick={onClickClose}>
         <CloseButton />
       </div>
       <div className={'mb-2'}>
         <Navigation title={'Loan Agreement'} />
       </div>
-      <div className={'content'}>
-        <iframe className="min-h-screen w-full" src={url} />
+      <div className={'content flex-1'}>
+        <iframe className="w-full h-full" src={url}/>
       </div>
     </div>
+
+
   );
 };

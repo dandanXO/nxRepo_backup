@@ -29,18 +29,18 @@ class SearchList extends Component{
             <div>
                 <Form onSubmit={this.submit}>
                     <Row gutter={40}>
-                        <Col lg={12} xl={6}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.loan.time"})}>
-                                {
-                                    getFieldDecorator('loanTime', {
-                                        initialValue: time
-                                    })(
-                                        <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]}/>
-                                    )
-                                }
-                            </Form.Item>
-                        </Col>
-                        <Col lg={12} xl={6}>
+                      <Col lg={12} xl={6}>
+                        <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.loan.time"})}>
+                          {
+                            getFieldDecorator('loanTime', {
+                              initialValue: []
+                            })(
+                              <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]}/>
+                            )
+                          }
+                        </Form.Item>
+                      </Col>
+                      <Col lg={12} xl={6}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.distribute.time"})}>
                                 {
                                     getFieldDecorator('assignedTime', {
@@ -51,33 +51,33 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                        <Col lg={12} xl={6}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.reg.time"})}>
-                                {
-                                    getFieldDecorator('registerTime', {
-                                        initialValue: time
-                                    })(
-                                        <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]}/>
-                                    )
-                                }
-                            </Form.Item>
-                        </Col>
-                        <Col lg={10} xl={4}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.tel.sale.collector.name" })}>
-                                {
-                                    getFieldDecorator('collectorId', { initialValue: ''})
-                                    (<Select>
-                                            <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
-                                            {collectors.map(i => <Option value={i.collectorId}>{i.trueName}</Option>)}
-                                    </Select>)
-                                }
-                            </Form.Item>
-                        </Col>
-                        <Col lg={8} xl={2}>
-                            <Form.Item style={{textAlign:'right'}}>
-                                <Button type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /></Button>
-                            </Form.Item>
-                        </Col>
+                      <Col lg={12} xl={6}>
+                        <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.reg.time"})}>
+                          {
+                            getFieldDecorator('registerTime', {
+                              initialValue: []
+                            })(
+                              <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]}/>
+                            )
+                          }
+                        </Form.Item>
+                      </Col>
+                      <Col lg={10} xl={4}>
+                        <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.tel.sale.collector.name" })}>
+                            {
+                                getFieldDecorator('collectorId', { initialValue: ''})
+                                (<Select>
+                                        <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
+                                        {collectors.map(i => <Option value={i.collectorId}>{i.trueName}</Option>)}
+                                </Select>)
+                            }
+                        </Form.Item>
+                      </Col>
+                      <Col lg={8} xl={2}>
+                        <Form.Item style={{textAlign:'right'}}>
+                            <Button type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /></Button>
+                        </Form.Item>
+                      </Col>
                     </Row>
                 </Form>
             </div>

@@ -77,7 +77,7 @@ const RepaymentModal = (props: any) => {
       content={() => {
         return (
           <>
-            <div className="text-lg font-bold text-black">{props.t('Repay')}</div>
+            <div className="text-lg font-bold text-ctext-primary my-2">{props.t('Repay')}</div>
             {renderByCountry(
               {
                 [IndiaCountry.country]: (

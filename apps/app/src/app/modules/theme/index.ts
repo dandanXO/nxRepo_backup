@@ -1,13 +1,10 @@
 import { IAndroidAppInfo } from '../../persistant/nativeAppInfo/types/IAndroidAppInfo';
 import { applyTheme } from './utils';
+import { themeConfig } from '../../../environments/theme/styledComponentTheme';
+
 
 const applyCustomSharedLibTheme = (androidAPPInfo: IAndroidAppInfo) => {
-  import(`../../../environments/theme/${androidAPPInfo.environment}/v${androidAPPInfo.uiVersion}/theme`).then(
-    (content) => {
-      const themeConfig = content.themeConfig;
-      window.theme = themeConfig;
-    }
-  );
+    window.theme = themeConfig
 };
 
 const applyDefaultCustomTailwindTheme = (androidAPPInfo: IAndroidAppInfo) => {
@@ -16,7 +13,7 @@ const applyDefaultCustomTailwindTheme = (androidAPPInfo: IAndroidAppInfo) => {
 };
 
 export const applyCustomTheme = (androidAppInfo: IAndroidAppInfo) => {
-  // console.log('[app] androidAPPInfo', androidAppInfo);
+  console.log('[app] androidAPPInfo', androidAppInfo);
 
   if (androidAppInfo) {
     // NOTE: Apply default Custom Tailwind Theme

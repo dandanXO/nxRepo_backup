@@ -18,6 +18,7 @@ import { PagePathEnum } from '../PagePathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
+import {formatDate} from "../../../modules/format/formatDate";
 
 const OverduePaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();
@@ -63,25 +64,27 @@ const OverduePaymentItem = (props: GetLoanRecord) => {
           })
         }
         statusColor={statusColor}
+        dueDate={dueDate}
       />
 
       <div className="px-3">
         {' '}
         <Divider />
       </div>
+
       {collapse && (
         <div className={cx('px-3')}>
           <ListItem key={'OrderNo.'} title={'Order No.'} text={orderNo ?? ''} titleColor={'text-ctext-secondary'} />
           <ListItem
             key={'LoanDate'}
             title={'Loan Date'}
-            text={loanDate ? moment(loanDate).format('DD-MM-YYYY') : ''}
+            text={loanDate ? formatDate(moment(loanDate)): ''}
             titleColor="text-ctext-secondary"
           />
           <ListItem
             key={'DueDate'}
             title={'Due Date'}
-            text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
+            text={dueDate ? formatDate(moment(dueDate)) : ''}
             titleColor="text-ctext-secondary"
           />
           <ListItem

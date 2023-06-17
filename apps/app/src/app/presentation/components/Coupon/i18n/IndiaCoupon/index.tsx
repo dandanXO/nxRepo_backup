@@ -3,6 +3,7 @@ import moment from 'moment';
 
 import { ICouponProps } from '../..';
 import Money from '../../../Money.tsx';
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 const isOverdueEqual3Days = (expiredTime: string) => {
   const currentTime = moment();
@@ -39,7 +40,7 @@ const IndiaCoupon = (props: ICouponProps) => {
   const typeStyle = status !== 'disabled' ? layoutTypeStyle['normal'] : layoutTypeStyle['disabled'];
 
   return (
-    <div className={cx(`m-2 flex grow  `, { 'opacity-50': status === 'unUsable' })}>
+    <div className={cx(`mb-3 flex grow w-full`, { 'opacity-50': status === 'unUsable' })}>
       <div
         className={cx(`relative flex grow flex-col  rounded-l-lg  border border-r-0 p-2 text-left `, [
           typeStyle.lightContent,
@@ -81,7 +82,7 @@ const IndiaCoupon = (props: ICouponProps) => {
             'text-cstate-disable-main': status === 'disabled',
           })}
         >
-          Expired time {moment(expireTime).format('DD-MM-YYYY')}
+          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${formatDate(moment(expireTime))}`}
         </div>
       </div>
       <div
@@ -96,19 +97,19 @@ const IndiaCoupon = (props: ICouponProps) => {
         ])}
       >
         <div
-          className={cx(`mb-1.5 text-base font-bold `, {
+          className={cx(`mb-1.5 text-base font-bold mr-2`, {
             'text-primary-main': status !== 'disabled',
             'text-cstate-disable-main': status === 'disabled',
           })}
         >
-          <Money money={discountAmount} isNagetive={true} moneyStyle={`text-lg`} currencyStyle={`text-xs`} />
+          <Money money={discountAmount} isNagetive={true} moneyStyle={`text-base`} currencyStyle={`text-base`} />
         </div>
         <button
           // NOTE:優惠券不需點擊 (點擊功能先做保留)
           //   onClick={props.onClick}
           //   disabled={status !== 'normal'} //只有normal才能點擊
           disabled={true}
-          className={cx(`whitespace-nowrap rounded px-2 py-1 text-xs text-white `, [typeStyle.buttonBG])}
+          className={cx(`whitespace-nowrap px-3 py-1 text-xs text-white rounded-xl`, [typeStyle.buttonBG])}
         >
           {buttonText}
         </button>

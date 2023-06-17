@@ -9,7 +9,7 @@ import {
 } from "react-i18next";
 import { i18nBankBindAccountPage } from "../../translations";
 import styled from "styled-components";
-import { FindIBANLinkText } from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
+// import { FindIBANLinkText } from "../../../../../../../../../../libs/shared/component/src/atoms/FindIBANLinkText";
 
 const WalletDiscountHint = styled.div`
     line-height: 23px;
@@ -32,10 +32,10 @@ type IMobileWalletForm = {
     // Form
     isFormPending: boolean;
     confirm: () => void;
-    iBanData: InputValue<string>;
-    onIBanChange: (event: any) => void;
-    onIbanBlur: (event: any) => void;
-    openWebView: () => void;
+    // iBanData: InputValue<string>;
+    // onIBanChange: (event: any) => void;
+    // onIbanBlur: (event: any) => void;
+    // openWebView: () => void;
 };
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
@@ -54,22 +54,22 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                 }}
             />
             {/*<WalletDiscountHint>NEWS : Faster arrival & better discount by using Jazzcash!</WalletDiscountHint>*/}
-            <Label>{t("Your IBAN Number (24 digits)")}</Label>
-            <Input
-                className="mb"
-                labelType={"none"}
-                placeholder={"Ex. PK36FTBK0000111123456702"}
-                value={props.iBanData.data}
-                onChange={props.onIBanChange}
-                onBlur={props.onIbanBlur}
-                errorMessage={props.iBanData.errorMessage}
-            />
-            <div
-                style={{ marginBottom: 16 }}
-                onClick={() => props.openWebView()}
-            >
-                <FindIBANLinkText type={"wallet"} />
-            </div>
+            {/*<Label>{t("Your IBAN Number (24 digits)")}</Label>*/}
+            {/*<Input*/}
+            {/*    className="mb"*/}
+            {/*    labelType={"none"}*/}
+            {/*    placeholder={"Ex. PK36FTBK0000111123456702"}*/}
+            {/*    value={props.iBanData.data}*/}
+            {/*    onChange={props.onIBanChange}*/}
+            {/*    onBlur={props.onIbanBlur}*/}
+            {/*    errorMessage={props.iBanData.errorMessage}*/}
+            {/*/>*/}
+            {/*<div*/}
+            {/*    style={{ marginBottom: 16 }}*/}
+            {/*    onClick={() => props.openWebView()}*/}
+            {/*>*/}
+            {/*    <FindIBANLinkText type={"wallet"} />*/}
+            {/*</div>*/}
 
             <Label>{t("Mobile Wallet Account")}</Label>
             <Input

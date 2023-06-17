@@ -7,6 +7,7 @@ import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 const IndiaExtendModal = (props: any) => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const IndiaExtendModal = (props: any) => {
       <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-ctext-primary" />
       <ListItem
         title={'Due Date'}
-        text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
+        text={dueDate ? formatDate(moment(dueDate)) : ''}
         titleColor="text-ctext-primary"
       />
       {/*NOTE: 展期費用*/}
@@ -66,7 +67,7 @@ const IndiaExtendModal = (props: any) => {
 
       <ListItem
         title={'Extension Due Date'}
-        text={extendDate ? moment(extendDate).format('DD-MM-YYYY') : ''}
+        text={extendDate ? formatDate(moment(extendDate)) : ''}
         textColor={'text-primary-main'}
       />
 

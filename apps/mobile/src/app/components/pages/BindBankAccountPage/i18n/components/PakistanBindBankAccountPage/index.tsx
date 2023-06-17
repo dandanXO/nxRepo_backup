@@ -9,7 +9,7 @@ import { usePakistanBankAccountForm } from "../../hooks/pakistan/usePakistanBank
 import { useFinishedBindBankAccountForm } from "../../hooks/common/useFinishedBindBankAccountForm";
 import { usePakistanMobileWalletForm } from "../../hooks/pakistan/usePakistanMobileWalletForm";
 import { WebViewModal } from "./WebViewModal";
-import { FindIBANLinkTextConstant } from "../../../../../../../../../../libs/shared/component/src/atom/FindIBANLinkText";
+// import { FindIBANLinkTextConstant } from "../../../../../../../../../../libs/shared/component/src/atoms/FindIBANLinkText";
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // NOTE: 選擇支付方式
@@ -46,9 +46,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         mobileData,
         onMobileDataChange,
         validateMobileWalletAccount,
-        iBanData: iBanDataMobileWallet,
-        onIBanChange: onMobileWalletIBanChange,
-        onIbanBlur: onMobileWalletIbanBlur,
+        // iBanData: iBanDataMobileWallet,
+        // onIBanChange: onMobileWalletIBanChange,
+        // onIbanBlur: onMobileWalletIbanBlur,
         confirm: confirmMobileWallet,
     } = usePakistanMobileWalletForm({
         isPostBankBindSaveToPKMutationLoading:
@@ -62,9 +62,9 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         bankDropList,
         bankAccountValue,
         onIFSCDropSelect,
-        iBanData,
-        onIBanChange,
-        onIbanBlur,
+        // iBanData,
+        // onIBanChange,
+        // onIbanBlur,
         confirm: confirmBankAccount,
     } = usePakistanBankAccountForm({
         bindCardDropListData: props.bindCardDropListData,
@@ -88,7 +88,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         bindCardDropListData: props.bindCardDropListData,
         // NOTE: 設定電子錢包列表
         bankAccountValue,
-        iBanData,
+        // iBanData,
     });
 
     return (
@@ -107,15 +107,15 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                     onMobileDataChange={onMobileDataChange}
                     validateMobileWalletAccount={validateMobileWalletAccount}
                     isFormPending={isFormPending || false}
-                    iBanData={iBanDataMobileWallet}
-                    onIBanChange={onMobileWalletIBanChange}
-                    onIbanBlur={onMobileWalletIbanBlur}
+                    // iBanData={iBanDataMobileWallet}
+                    // onIBanChange={onMobileWalletIBanChange}
+                    // onIbanBlur={onMobileWalletIbanBlur}
                     confirm={() => {
                         confirmMobileWallet();
                     }}
-                    openWebView={() => {
-                        setWebURL(FindIBANLinkTextConstant.wallet);
-                    }}
+                    // openWebView={() => {
+                    //     setWebURL(FindIBANLinkTextConstant.wallet);
+                    // }}
                 />
             ) : (
                 <BankAccountForm
@@ -136,12 +136,12 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                         confirmBankAccount();
                         confirm();
                     }}
-                    iBanData={iBanData}
-                    onIBanChange={onIBanChange}
-                    onIbanBlur={onIbanBlur}
-                    openWebView={() => {
-                        setWebURL(FindIBANLinkTextConstant.bankcardURL);
-                    }}
+                    // iBanData={iBanData}
+                    // onIBanChange={onIBanChange}
+                    // onIbanBlur={onIbanBlur}
+                    // openWebView={() => {
+                    //     setWebURL(FindIBANLinkTextConstant.bankcardURL);
+                    // }}
                 />
             )}
 

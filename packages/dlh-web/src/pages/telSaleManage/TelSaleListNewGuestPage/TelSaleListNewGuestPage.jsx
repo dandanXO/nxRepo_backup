@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Cookies from "js-cookie";
 import styles from './TelSaleListNewGuestPage.less';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,6 +27,10 @@ function TelSaleListNewGuestPage ({
 
     const [searchParams, setSearchParams] = useState({ assignedStartTime: "", assignedEndTime: "", status: "", userPhone: "", collectorId: "" })
     const [selectedRow, setSelectedRow] = useState([]);
+
+    const loginInfo = JSON.parse(Cookies.get('adminUser'))
+    const { roleId } = loginInfo['data']
+
     useEffect(() => {
         getPersonOrGroupList();
         getCollectorList();
@@ -129,9 +134,10 @@ function TelSaleListNewGuestPage ({
                 firstColumns={firstColumns}
                 lastColumns={[]}
                 expandColumns={expandColumns}
-                extraButtons={[
-                    <Button type={'primary'} onClick={handleModalVisible}><FormattedMessage id="page.table.redistribute.order"/></Button>
-                ]}
+                // 一般電銷人員不顯示重新分配訂單按紐
+                extraButtons={![26].includes(roleId)?[
+                  <Button type={'primary'} onClick={handleModalVisible}><FormattedMessage id="page.table.redistribute.order"/></Button>
+                ]: []}
             />
             <UrgePersonModal
                 onModalCancel={() => changeUrgePersonModalVisible(false)}
@@ -160,7 +166,7 @@ const mapDispatchToProps = (dispatch) => {
         changeUrgePersonModalVisible: telSaleAction.changeUrgePersonModalVisible,
         distributeTelSale: telSaleAction.distributeTelSaleData,
         getPersonOrGroupList: telSaleAction.personOrGroupList.get,
-       
+
     }, dispatch)
 }
 

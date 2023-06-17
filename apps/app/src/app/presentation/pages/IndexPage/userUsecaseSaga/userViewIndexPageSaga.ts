@@ -12,12 +12,12 @@ import { InitialState, indexPageSlice } from '../../../../reduxStore/indexPageSl
 import { SystemCaseActions } from '../../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 import { systemCallGetUserInfoSaga } from '../../../../usecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { systemMainCountdownSaga } from './systemMainCountdownSaga';
+import { systemCountdownManagerSaga } from './systemCountdownManagerSaga';
 
 export function* userViewIndexPageSaga(action: any) {
   // NOTICE: 防止錯誤後無法重新 watch
   try {
-    console.log('[app][saga] userViewIndexPageSaga');
+    // console.log('[app][saga] userViewIndexPageSaga');
 
     // const token: string = yield select((state: RootState) => state.app.token);
     // const token = getToken();
@@ -49,7 +49,7 @@ export function* userViewIndexPageSaga(action: any) {
       yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
 
       // NOTE: 是否系統執行非同步 - 倒數計時
-      yield call(systemMainCountdownSaga);
+      yield call(systemCountdownManagerSaga);
     }
   } catch (error) {
     yield catchSagaError(error);
