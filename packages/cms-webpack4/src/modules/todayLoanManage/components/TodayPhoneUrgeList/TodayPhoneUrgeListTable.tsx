@@ -14,6 +14,7 @@ import {useEnum} from "../../../shared/constants/useEnum";
 import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
 import {CollectTodayPhoneUrgeListItem} from "../../api/types/getCollectTodayPhoneUrgeList";
 import {useLazyGetCollectTodayPhoneUrgeListQuery} from "../../api/CollectTodayPhoneUrgeApi";
+import Cookies from "js-cookie";
 
 const { Text } = Typography
 
@@ -44,7 +45,18 @@ export const TodayPhoneUrgeListTable = () => {
         refetchOnReconnect: false
     });
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum()
-    const { data: collectorData } = useGetTodayCollectorListQuery(null);
+
+    // 一般催收人員不取得催收員列表
+    const loginInfo = JSON.parse(Cookies.get('adminUser'))
+    const { roleId } = loginInfo['data']
+    const ableToGetCollectorList = ![15].includes(roleId)
+
+    let collectorData = undefined
+
+    if (ableToGetCollectorList){
+        const { data } = useGetTodayCollectorListQuery(null);
+        collectorData = data
+    }
 
     const { t }= useTranslation(i18nUrgeCollection.namespace)
     const { OrderLabelEnum, CurrentDayOverDueStageEnum, FollowUpResultEnum } = useEnum();
@@ -128,7 +140,7 @@ export const TodayPhoneUrgeListTable = () => {
         { title: t('trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true },
         { title: t('recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{(recentTrackingTime && moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
         { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName', initialValue: searchParams.collectorName || '', hideInSearch: true },
-        { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
+        { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInSearch: !ableToGetCollectorList, hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
     ]
     if(isSuperAdmin) {
         columns.splice(1,0,{
@@ -206,7 +218,7 @@ export const TodayPhoneUrgeListTable = () => {
             defaultPageSize: 10,
             onChange: pageOnChange,
             total: currentTodayPhoneUrgeListResponse?.totalRecords,
-            current: currentTodayPhoneUrgeListResponse?.records?.length === 0 ? 0 : currentTodayPhoneUrgeListResponse?.currentPage,
+            current: currentTodayPhoneUrgeListResponse?.records?.length === 0 ? 1 : currentTodayPhoneUrgeListResponse?.currentPage,
         }}
     />
 }

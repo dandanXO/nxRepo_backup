@@ -14,6 +14,7 @@ import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
 import {useGetCollectOverDueCollectorListQuery} from "../../api/CollectOverDueApi";
 import {useLazyGetCollectOverDuePhoneUrgeListQuery} from "../../api/OverDuePhoneUrgeApi";
 import {CollectOverDuePhoneUrgeListItem} from "../../api/types/getCollectOverDuePhoneUrgeList";
+import Cookies from "js-cookie";
 
 const { Text } = Typography
 
@@ -43,7 +44,18 @@ export const OverDuePhoneUrgeListTable = () => {
         refetchOnReconnect: false
     })
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum()
-    const { data: collectorData } = useGetCollectOverDueCollectorListQuery(null);
+
+    // 一般催收人員不取得催收員列表
+    const loginInfo = JSON.parse(Cookies.get('adminUser'))
+    const { roleId } = loginInfo['data']
+    const ableToGetCollectorList = ![15].includes(roleId)
+
+    let collectorData = undefined
+
+    if (ableToGetCollectorList){
+        const { data } = useGetCollectOverDueCollectorListQuery(null);
+        collectorData = data
+    }
 
     const { t } = useTranslation(i18nUrgeCollection.namespace)
     const { OrderLabelEnum, OverDueStageEnum, FollowUpResultEnum } = useEnum();
@@ -127,7 +139,7 @@ export const OverDuePhoneUrgeListTable = () => {
         { title: t('trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true },
         { title: t('recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{(recentTrackingTime && moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
         { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName', initialValue: searchParams.collectorName || '', hideInSearch: true },
-        { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
+        { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInSearch: !ableToGetCollectorList, hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
     ]
     if(isSuperAdmin) {
         columns.splice(1,0,{
@@ -205,7 +217,7 @@ export const OverDuePhoneUrgeListTable = () => {
             defaultPageSize: 10,
             onChange: pageOnChange,
             total: overDuePhoneUrgeListResponse?.totalRecords,
-            current: overDuePhoneUrgeListResponse?.records?.length === 0 ? 0 : overDuePhoneUrgeListResponse?.currentPage,
+            current: overDuePhoneUrgeListResponse?.records?.length === 0 ? 1 : overDuePhoneUrgeListResponse?.currentPage,
         }}
     />
 }
