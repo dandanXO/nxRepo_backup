@@ -1,6 +1,8 @@
 import { validatePreOrPostInterestGroups } from '../../../../../shared/components/other/validatePreOrPostInterestGroups';
 import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
 import {
+    GetProductListResponse,
+    Product,
     useGetAvailableMerchantListQuery,
     useGetProductRiskDropdownQuery,
     useLazyGetProductManageListQuery,
@@ -15,9 +17,12 @@ import {
     productInterestRatesContentKey,
 } from '../../../../service/product/domain/productInterestRatePair';
 import { ProductTypes } from '../../../../service/product/domain/productTypes';
-import { Form, Modal, UploadFile } from 'antd';
+import { GetAvailableMerchantResponse } from '../../../../service/product/response/getAvailableMerchantResponse';
+import { LazyQueryTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { Form, FormInstance, Modal, UploadFile } from 'antd';
+import { ModalStaticFunctions } from 'antd/es/modal/confirm';
 import moment from 'moment/moment';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 export interface ProductFormModal {
     show: boolean;
@@ -77,7 +82,27 @@ const productInterestRatesConvertToFrontendMap: { [key in BaseRiskRank]?: { labe
     }
  */
 
-export const useProductFormModal = (props: ProductFormModal) => {
+export const useProductFormModal = (
+    props: ProductFormModal,
+): {
+    modal: Omit<ModalStaticFunctions, 'warn'>;
+    productModalData: ProductFormModal;
+    productFormData: Product;
+    setProductModalData: React.Dispatch<ProductFormModal>;
+    handleCloseModal: (e: any) => void;
+    onFinish: (value: any) => void;
+    form: FormInstance;
+    merchantList: GetAvailableMerchantResponse[];
+    productRiskList: string[];
+    customAntFormFieldError: CustomAntFormFieldError;
+    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
+    triggerGetList: LazyQueryTrigger<any>;
+    productListData: GetProductListResponse;
+    isPostProductCreateSuccess: boolean;
+    isPutProductSuccess: boolean;
+    onFormSubmit: () => void;
+    contextHolder: React.ReactElement;
+} => {
     const [modal, contextHolder] = Modal.useModal();
 
     const [productModalData, setProductModalData] = useState<ProductFormModal>({
@@ -104,9 +129,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     const [customAntFormFieldError, setCustomAntFormFieldError] =
         useState<CustomAntFormFieldError>(initCustomAntFormFieldError);
-    const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
+    const { currentData: merchantList } = useGetAvailableMerchantListQuery(null);
     const { currentData: productRiskList } = useGetProductRiskDropdownQuery(null);
-    const [postProductCreate, { isLoading, isSuccess: isPostProductCreateSuccess }] = usePostProductCreateMutation();
+    const [postProductCreate, { isSuccess: isPostProductCreateSuccess }] = usePostProductCreateMutation();
     const [putProduct, { isSuccess: isPutProductSuccess }] = usePutProductEditMutation();
 
     useEffect(() => {
@@ -406,11 +431,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
             (acc, current) => [...acc, { isOldUser: true, provider: current }],
             [],
         );
-
-        const riskRankLoanAmount = values?.riskRankLoanAmount?.map((i) => ({
-            ...i,
-            loanAmount: Number(i.loanAmount),
-        }));
 
         let creatProductData: ProductTypes = {
             merchantId: Number(values.merchantId),
