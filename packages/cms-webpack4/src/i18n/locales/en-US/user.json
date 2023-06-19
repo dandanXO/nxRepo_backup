@@ -1,42 +1,42 @@
 {
-    "userId": "User ID",
-    "userName": "User Name",
-    "gender": "Gender",
-    "idCardNo": "ID Number",
-    "fatherName": "Father\"s Name",
-    "birthDay": "Date of birth",
-    "panId": "PAN Number",
-    "education": "Education",
-    "maritalStatus": "Marital Status",
-    "email": "Email",
-    "occupation": "Occupation",
-    "salaryRange": "Salary Range",
     "address": "Address",
+    "birthDay": "Date of birth",
+    "education": "Education",
+    "email": "Email",
     "emergencyContact": "Emergency Contact",
-    "identityInfo": "Identity Information",
-    "idCardFrontPhoto": {
-        "India": "Front side of Aadheaar card",
-        "Pakistan": "Front side of CNIC",
-        "Bangladesh": "Front side of NID"
-    },
+    "fatherName": "Father\"s Name",
+    "gender": "Gender",
     "idCardBackPhoto": {
         "India": "Back side of Aadheaar card",
         "Pakistan": "Back side of CNIC",
         "Bangladesh": "Back side of NID"
     },
+    "idCardFrontPhoto": {
+        "India": "Front side of Aadheaar card",
+        "Pakistan": "Front side of CNIC",
+        "Bangladesh": "Front side of NID"
+    },
+    "idCardNo": "ID Number",
     "idCardPortraitPhoto": {
         "India": "Portrait",
         "Pakistan": "Portrait",
         "Bangladesh": "Portrait"
     },
+    "identityInfo": "Identity Information",
+    "maritalStatus": "Marital Status",
+    "mobileNumber": "Mobile Number",
+    "occupation": "Occupation",
+    "panId": "PAN Number",
     "panPhoto": {
         "India": "PAN card"
     },
-    "userSource": "User Source",
     "personalInfo": "Personal information",
-    "registerInfo": "Registration information",
-    "registerTime": "Registration Time",
     "registerChannel": "Channel",
+    "registerInfo": "Registration information",
     "registerPackageName": "Package Name",
-    "mobileNumber": "Mobile Number"
+    "registerTime": "Registration Time",
+    "salaryRange": "Salary Range",
+    "userId": "User ID",
+    "userName": "User Name",
+    "userSource": "User Source"
 }

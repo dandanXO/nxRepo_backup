@@ -204,7 +204,7 @@ export const TodayPhoneUrgeListTable = () => {
                             })
                         }}
                     >
-                        {searchText}
+                        查询
                     </Button>
                 </Space>]
         }}

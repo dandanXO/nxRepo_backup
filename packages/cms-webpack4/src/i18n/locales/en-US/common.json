@@ -1,72 +1,72 @@
 {
-    "noRestriction": "No Restriction",
-    "function": "Function",
-    "menu": {
-    "homePage": "Home",
-        "currentDayOverdueCall": "CurrentDay Collection",
-        "currentDayOverdueCallList": "CurrentDay Overdue Call List",
-        "overdueCollection": "Overdue Collection",
-        "overdueCallList": "Overdue Call List"
-    },
     "breadcrumb": {
         "orderDetails": "Order Details",
-            "overDueDetails": "Overdue Details"
+        "overDueDetails": "Overdue Details"
     },
-    "tab": {
-        "orderInfo": "Order Information",
-            "userInfo": "User Info",
-            "contractList": "Contact List",
-            "smsMessage": "SMS Message"
+    "clickToCopy": "Click to copy",
+    "contact": {
+        "borrower": "Borrower",
+        "emergency": "Emergency Contact{{count}}",
+        "list": "Contact List"
+    },
+    "followUpResultStatus": {
+        "BadAttitude": "Bad Attitude",
+        "FinancialDifficulties": "Financial Difficulties",
+        "InvalidPhoneNumber": "Invalid Phone Number",
+        "Missed": "Missed",
+        "Other": "Other",
+        "Promise": "PTP",
+        "TurnedOff": "Turned Off"
+    },
+    "function": "Function",
+    "keyIn": "Must enter ",
+    "linkCopied": "Copied",
+    "menu": {
+        "currentDayOverdueCall": "CurrentDay Collection",
+        "currentDayOverdueCallList": "CurrentDay Overdue Call List",
+        "homePage": "Home",
+        "overdueCallList": "Overdue Call List",
+        "overdueCollection": "Overdue Collection"
     },
     "message": {
         "copySuccess": "Link Copied"
     },
-    "orderStatus": {
-        "overDue": "Overdue",
-            "completed": "Complete"
-    },
+    "noRestriction": "No Restriction",
+    "none": "None",
     "orderLabelStatus": {
+        "extension": "Extension",
         "newLoan": "New Loan",
-            "reLoan": "Re-Loan",
-            "extension": "Extension"
+        "reLoan": "Re-Loan"
     },
-    "followUpResultStatus": {
-        "Promise": "PTP",
-            "FinancialDifficulties": "Financial Difficulties",
-            "Missed": "Missed",
-            "TurnedOff": "Turned Off",
-            "InvalidPhoneNumber": "Invalid Phone Number",
-            "BadAttitude": "Bad Attitude",
-            "Other": "Other"
+    "orderStatus": {
+        "completed": "Complete",
+        "overDue": "Overdue"
     },
-    "contact": {
-        "borrower": "Borrower",
-            "list": "Contact List",
-            "emergency": "Emergency Contact{{count}}"
-    },
-    "pagination" : {
-        "showingRange" : "Total {{total}} Record(s)",
-            "itemPerPage": " / Page"
-    },
-    "table": {
-        "sendPhoneNumber": "Phone Number",
-            "contactName": "Contact Name",
-            "contactPhone": "Contact Number",
-            "lastAddedTime": "Last Added Time",
-            "phone": "Mobile Number",
-            "uploadTime": "Upload Time",
-            "relationShip": "Relationship",
-            "contactType": "Contact",
-            "smsContent": "SMS Content",
-            "smsSendType": "Sending Type",
-            "sendTime": "Sending Time"
+    "pagination": {
+        "itemPerPage": " / Page",
+        "showingRange": "Total {{total}} Record(s)"
     },
     "placeholder": {
         "select": "Select"
     },
-    "none": "None",
-        "keyIn": "Must enter ",
-        "linkCopied": "Copied",
-        "saved": "Saved",
-        "clickToCopy": "Click to copy"
+    "saved": "Saved",
+    "tab": {
+        "contractList": "Contact List",
+        "orderInfo": "Order Information",
+        "smsMessage": "SMS Message",
+        "userInfo": "User Info"
+    },
+    "table": {
+        "contactName": "Contact Name",
+        "contactPhone": "Contact Number",
+        "contactType": "Contact",
+        "lastAddedTime": "Last Added Time",
+        "phone": "Mobile Number",
+        "relationShip": "Relationship",
+        "sendPhoneNumber": "Phone Number",
+        "sendTime": "Sending Time",
+        "smsContent": "SMS Content",
+        "smsSendType": "Sending Type",
+        "uploadTime": "Upload Time"
+    }
 }
