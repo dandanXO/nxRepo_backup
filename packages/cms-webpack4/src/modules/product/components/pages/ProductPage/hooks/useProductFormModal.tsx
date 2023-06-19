@@ -1,3 +1,9 @@
+import { LazyQueryTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { Form, FormInstance, Modal, UploadFile } from 'antd';
+import { ModalStaticFunctions } from 'antd/es/modal/confirm';
+import moment from 'moment/moment';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { validatePreOrPostInterestGroups } from '../../../../../shared/components/other/validatePreOrPostInterestGroups';
 import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
 import {
@@ -18,11 +24,6 @@ import {
 } from '../../../../service/product/domain/productInterestRatePair';
 import { ProductTypes } from '../../../../service/product/domain/productTypes';
 import { GetAvailableMerchantResponse } from '../../../../service/product/response/getAvailableMerchantResponse';
-import { LazyQueryTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { Form, FormInstance, Modal, UploadFile } from 'antd';
-import { ModalStaticFunctions } from 'antd/es/modal/confirm';
-import moment from 'moment/moment';
-import React, { useCallback, useEffect, useState } from 'react';
 
 export interface ProductFormModal {
     show: boolean;

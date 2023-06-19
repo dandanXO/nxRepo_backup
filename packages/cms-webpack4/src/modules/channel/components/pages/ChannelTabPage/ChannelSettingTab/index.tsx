@@ -1,3 +1,8 @@
+import { ProColumns } from '@ant-design/pro-components';
+import { FormInstance } from 'antd';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
 import { AdminFormCustomModal } from '../../../../../shared/components/common/AdminFormCustomModal';
 import { AdminTable, ModalContent } from '../../../../../shared/components/common/AdminTable';
 import { ProColumnsOperationConstant } from '../../../../../shared/components/common/ProColumnsOperationConstant';
@@ -17,10 +22,6 @@ import { UpdateChannelRequest } from '../../../../service/request/UpdateChannelR
 import { ChannelSettingTagFormModal } from '../ChannelSettingTagTab/ChannelSettingTagFormModal';
 import { useFormModal } from '../ChannelSettingTagTab/useFormModal';
 import { ChannelSettingForm } from './ChannelSettingForm';
-import { ProColumns } from '@ant-design/pro-components';
-import { FormInstance } from 'antd';
-import { useForm } from 'antd/es/form/Form';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;

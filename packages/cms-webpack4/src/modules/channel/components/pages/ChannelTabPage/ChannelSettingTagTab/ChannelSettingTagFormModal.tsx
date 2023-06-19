@@ -1,7 +1,8 @@
-import { AdminFormCustomModal } from '../../../../../shared/components/common/AdminFormCustomModal';
-import { ChannelSettingTagForm } from './ChannelSettingTagForm';
 import { FormInstance } from 'antd';
 import React from 'react';
+
+import { AdminFormCustomModal } from '../../../../../shared/components/common/AdminFormCustomModal';
+import { ChannelSettingTagForm } from './ChannelSettingTagForm';
 
 export interface ChannelSettingTagFormModalProps {
     // modal

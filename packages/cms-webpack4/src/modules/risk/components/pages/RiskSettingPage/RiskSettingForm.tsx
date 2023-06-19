@@ -1,12 +1,13 @@
+import { Form, FormInstance, Input, Select, Switch } from 'antd';
+import { Store } from 'antd/es/form/interface';
+import TextArea from 'antd/es/input/TextArea';
+import React from 'react';
+
 import { AdminForm } from '../../../../shared/components/common/AdminForm';
 import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
 import { RiskModelMenu } from '../../../domain/vo/RiskModelMenu';
 import FirstLoanSection from './FirstLoanSection';
 import RepeatLoanSection from './RepeatLoanSection';
-import { Form, FormInstance, Input, Select, Switch } from 'antd';
-import { Store } from 'antd/es/form/interface';
-import TextArea from 'antd/es/input/TextArea';
-import React from 'react';
 
 interface RiskSettingFormProps {
     isEdit: boolean;

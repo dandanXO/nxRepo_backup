@@ -1,10 +1,11 @@
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Divider, Form, FormInstance, Modal, Radio, Space, Tooltip } from 'antd';
+import React from 'react';
+
 import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
 import FirstAndRepeatLoanFormByCount from './FirstAndRepeatLoanFormByCount';
 import FirstAndRepeatLoanFormByScore from './FirstAndRepeatLoanFormByScore';
 import FirstAndRepeatLoanFormByValue from './FirstAndRepeatLoanFormByValue';
-import { InfoCircleOutlined } from '@ant-design/icons';
-import { Divider, Form, FormInstance, Modal, Radio, Space, Tooltip } from 'antd';
-import React from 'react';
 
 interface RepeatLoanSectionProps {
     isEdit: boolean;

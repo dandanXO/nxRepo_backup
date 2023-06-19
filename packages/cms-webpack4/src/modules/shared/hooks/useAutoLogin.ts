@@ -1,5 +1,6 @@
-import { useLoginMutation } from '../api/SessionApi';
 import { useEffect } from 'react';
+
+import { useLoginMutation } from '../api/SessionApi';
 
 const useAutoLogin = () => {
     const [triggerLogin, { isSuccess: isLoginSuccess }] = useLoginMutation();

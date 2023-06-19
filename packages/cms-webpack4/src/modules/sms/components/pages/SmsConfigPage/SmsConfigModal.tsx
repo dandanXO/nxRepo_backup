@@ -1,6 +1,7 @@
-import { FormModalProps } from '../../../../shared/domain/FormModal';
 import { Form, Input, Modal, Radio, Spin } from 'antd';
 import React from 'react';
+
+import { FormModalProps } from '../../../../shared/domain/FormModal';
 
 const SmsConfigModal = (props: FormModalProps): JSX.Element => {
     const { isEdit, showModal, isSuccess, onFinish, form, setShowModal } = props;

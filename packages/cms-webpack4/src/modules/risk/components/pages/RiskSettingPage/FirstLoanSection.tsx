@@ -1,8 +1,9 @@
+import { Divider, Form, FormInstance, Modal, Radio } from 'antd';
+import React from 'react';
+
 import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
 import FirstAndRepeatLoanFormByScore from './FirstAndRepeatLoanFormByScore';
 import FirstAndRepeatLoanFormByValue from './FirstAndRepeatLoanFormByValue';
-import { Divider, Form, FormInstance, Modal, Radio } from 'antd';
-import React from 'react';
 
 interface FirstLoanSectionProps {
     isEdit: boolean;

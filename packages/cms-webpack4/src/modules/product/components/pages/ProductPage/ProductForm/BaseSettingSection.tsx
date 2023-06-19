@@ -1,7 +1,8 @@
-import { GetAvailableMerchantResponse } from '../../../../service/product/response/getAvailableMerchantResponse';
 import { Form, Input } from 'antd';
 import { Select } from 'antd';
 import React from 'react';
+
+import { GetAvailableMerchantResponse } from '../../../../service/product/response/getAvailableMerchantResponse';
 
 const { Option } = Select;
 

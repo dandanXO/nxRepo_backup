@@ -1,3 +1,8 @@
+import { ProColumns } from '@ant-design/pro-components';
+import { EditableProTable } from '@ant-design/pro-components';
+import { Button, Popconfirm, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
+
 import useGetUserQuotaLabelEnum from '../../../../shared/hooks/useGetUserQuotaLabelEnum';
 import { NumberValidator } from '../../../../shared/utils/validation/validator';
 import {
@@ -10,10 +15,6 @@ import {
     GetUserQuotaLabelListRequestQuerystring,
     UserQuotaLabel,
 } from '../../../api/types/userQuotaLabelTypes/getUserQuotaLabelList';
-import { ProColumns } from '@ant-design/pro-components';
-import { EditableProTable } from '@ant-design/pro-components';
-import { Button, Popconfirm, Space } from 'antd';
-import React, { useEffect, useState } from 'react';
 
 export default (): JSX.Element => {
     const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);

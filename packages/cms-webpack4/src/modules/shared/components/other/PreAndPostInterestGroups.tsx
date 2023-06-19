@@ -1,10 +1,11 @@
-import { maxOneUnitFloatReplacer } from '../../utils/format/maxOneUnitFloatReplacer';
-import { CustomAntFormFieldError } from '../../utils/validation/CustomAntFormFieldError';
-import { validateNum, validateValue, validateplusAmount } from './validatePreOrPostInterestGroups';
 import { InfoCircleOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Space, Tooltip } from 'antd';
 import { FormInstance } from 'antd/lib/form/Form';
 import React, { CSSProperties, ReactElement, useEffect } from 'react';
+
+import { maxOneUnitFloatReplacer } from '../../utils/format/maxOneUnitFloatReplacer';
+import { CustomAntFormFieldError } from '../../utils/validation/CustomAntFormFieldError';
+import { validateNum, validateValue, validateplusAmount } from './validatePreOrPostInterestGroups';
 
 export const CustomLabel = (props: {
     style?: CSSProperties;

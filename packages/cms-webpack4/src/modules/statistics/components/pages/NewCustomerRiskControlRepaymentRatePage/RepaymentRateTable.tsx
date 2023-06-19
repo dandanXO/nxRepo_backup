@@ -1,3 +1,9 @@
+import { ProColumns, ProFormInstance } from '@ant-design/pro-components';
+import { FormInstance } from 'antd';
+import { Button } from 'antd/es';
+import queryString from 'query-string';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import { AdminTable } from '../../../../shared/components/common/AdminTable';
 import { ConstantRiskRankEnum } from '../../../../shared/constants/constantRiskRankEnum';
 import useGetProviderEnum from '../../../../shared/hooks/common/useGetProviderEnum';
@@ -6,11 +12,6 @@ import {
     RiskPaymentRateResponseRiskPaymentRateResponse,
     useLazyGetNewCustomerRiskPaymentRateListQuery,
 } from '../../../api/NewCustomerRepaymentRateApi';
-import { ProColumns, ProFormInstance } from '@ant-design/pro-components';
-import { FormInstance } from 'antd';
-import { Button } from 'antd/es';
-import queryString from 'query-string';
-import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const RepaymentRateTable = (): JSX.Element => {
     const [triggerGetNewCustomerRiskPaymentRateList, { currentData, isFetching }] =

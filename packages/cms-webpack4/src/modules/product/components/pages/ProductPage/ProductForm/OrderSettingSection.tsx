@@ -1,6 +1,7 @@
-import { NumberValidator } from '../../../../../shared/utils/validation/validator';
 import { Collapse, Form, Input, Switch } from 'antd';
 import React from 'react';
+
+import { NumberValidator } from '../../../../../shared/utils/validation/validator';
 
 const { Panel } = Collapse;
 

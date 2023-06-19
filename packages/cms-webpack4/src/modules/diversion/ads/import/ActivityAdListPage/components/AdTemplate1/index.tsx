@@ -1,9 +1,10 @@
 // NOTICE: 以下會儲存在資料庫，異動得請後端 執行 migrating，盡量固定
+import styled from 'styled-components';
+
 import { AdTemplateCard } from '../../index';
 import { onClickToAction } from '../AdClick';
 import { AdContainer } from '../AdContainer';
 import MainCardImg from './promotions_bg@2x.png';
-import styled from 'styled-components';
 
 // NOTE: Data
 export interface IAdTemplate1Data {

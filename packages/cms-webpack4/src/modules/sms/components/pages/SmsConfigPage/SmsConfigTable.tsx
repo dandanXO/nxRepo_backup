@@ -1,12 +1,13 @@
-import { useLazyGetUserContactsListQuery } from '../../../../shared/api/UserInfoApi';
-import { GetUserContacts } from '../../../../shared/api/userInfoTypes/getUserContacts';
-import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
-import { FormModalProps } from '../../../../shared/domain/FormModal';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetUserContactsListQuery } from '../../../../shared/api/UserInfoApi';
+import { GetUserContacts } from '../../../../shared/api/userInfoTypes/getUserContacts';
+import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
+import { FormModalProps } from '../../../../shared/domain/FormModal';
 
 const SmsConfigTable = (props: FormModalProps & { isAddOrEditSuccess?: boolean }): JSX.Element => {
     const [triggerGetList, { currentData, isLoading, isFetching }] = useLazyGetUserContactsListQuery({

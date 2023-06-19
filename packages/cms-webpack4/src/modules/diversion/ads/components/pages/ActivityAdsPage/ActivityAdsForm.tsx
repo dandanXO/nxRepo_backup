@@ -1,3 +1,7 @@
+import { Form, FormInstance, Input, Select, Switch, Typography } from 'antd';
+import React from 'react';
+import styled from 'styled-components';
+
 import { AdminForm } from '../../../../../shared/components/common/AdminForm';
 import { DeepPartial } from '../../../../../shared/types/custom';
 import { AdsScenarioData } from '../../../data/AdsScenarioData';
@@ -8,9 +12,6 @@ import { getTemplate3AdTemplate1Data } from '../../../export/mapper/getTemplate3
 import { IActivityAdsPageFormStore } from '../../../export/types/IAdsFormStore';
 import { DemoActivityAdListPage } from '../../../import/ActivityAdListPage';
 import { getFormItemForTemplateType } from './getFormItemForTemplateType';
-import { Form, FormInstance, Input, Select, Switch, Typography } from 'antd';
-import React from 'react';
-import styled from 'styled-components';
 
 const { Title, Text } = Typography;
 

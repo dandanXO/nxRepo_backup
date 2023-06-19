@@ -1,8 +1,9 @@
-import { useGetOrderDetailQuery } from '../../api/UserInfoApi';
-import { GetOrderDetailResponse } from '../../api/userInfoTypes/getOrderDetail';
 import { Card, Descriptions, Empty, Image, Tag } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+
+import { useGetOrderDetailQuery } from '../../api/UserInfoApi';
+import { GetOrderDetailResponse } from '../../api/userInfoTypes/getOrderDetail';
 
 const { Item } = Descriptions;
 

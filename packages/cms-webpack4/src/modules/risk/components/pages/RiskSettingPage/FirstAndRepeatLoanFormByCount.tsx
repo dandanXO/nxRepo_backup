@@ -1,7 +1,8 @@
-import CustomLabel from '../../../../shared/components/other/CustomLabel';
-import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Checkbox, Form, Input, Space, Tooltip } from 'antd';
+
+import CustomLabel from '../../../../shared/components/other/CustomLabel';
+import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
 
 interface FormProps {
     isEdit: boolean;

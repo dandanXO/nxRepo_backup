@@ -1,6 +1,7 @@
-import { useLazyGetUserQuotaLabelSelectQuery } from '../api/userQuotaLabelApi';
 import { DefaultOptionType } from 'rc-select/lib/Select';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetUserQuotaLabelSelectQuery } from '../api/userQuotaLabelApi';
 
 const useGetUserQuotaLabelEnum = (): {
     triggerGetUserQuotaLable: any;

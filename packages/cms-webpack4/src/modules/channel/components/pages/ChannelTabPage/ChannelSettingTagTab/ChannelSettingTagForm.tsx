@@ -1,8 +1,9 @@
-import { AdminForm, AdminFormProps } from '../../../../../shared/components/common/AdminForm';
 import { Divider } from 'antd';
 import { Input } from 'antd/es';
 import Form from 'antd/es/form';
 import React from 'react';
+
+import { AdminForm, AdminFormProps } from '../../../../../shared/components/common/AdminForm';
 
 type ChannelSettingTagFormProps = {
     isEdit: boolean;

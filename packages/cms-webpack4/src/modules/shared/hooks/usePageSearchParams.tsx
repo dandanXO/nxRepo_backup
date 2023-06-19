@@ -1,7 +1,8 @@
-import { selectSearchParams, setPathname, setSearchParams, setSelectedRow } from '../utils/searchParamsSlice';
 import { Key } from 'antd/es/table/interface';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { selectSearchParams, setPathname, setSearchParams, setSelectedRow } from '../utils/searchParamsSlice';
 
 interface usePageSearchParamsProps {
     searchListParams?: unknown;

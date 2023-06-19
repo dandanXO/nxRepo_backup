@@ -1,9 +1,10 @@
+import { Form } from 'antd';
+import { useState } from 'react';
+
 import AdminPage from '../../../../shared/components/common/AdminPage';
 import { usePostWhiteListMutation } from '../../../api/WhiteListApi';
 import AddWhiteListModal from './AddWhiteListModal';
 import WhiteListTable from './WhiteListTable';
-import { Form } from 'antd';
-import { useState } from 'react';
 
 const WhiteListPage = (): JSX.Element => {
     const [showModal, setShowModal] = useState(false);

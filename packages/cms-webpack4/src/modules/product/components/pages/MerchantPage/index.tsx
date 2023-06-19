@@ -1,10 +1,11 @@
+import { PageContainer } from '@ant-design/pro-components';
+import { Form } from 'antd';
+import { useEffect, useState } from 'react';
+
 import { itemRender } from '../../../../shared/components/common/itemRender';
 import { usePostMerchantCreateMutation, usePutMerchantEditMutation } from '../../../service/merchant/MerchantApi';
 import MerchantModal from './MerchantModal';
 import MerchantTable from './MerchantTable';
-import { PageContainer } from '@ant-design/pro-components';
-import { Form } from 'antd';
-import { useEffect, useState } from 'react';
 
 export const MerchantPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);

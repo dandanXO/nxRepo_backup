@@ -1,6 +1,7 @@
+import React from 'react';
+
 import AdminFormModal from './AdminFormModal';
 import { ModalContent } from './AdminTable';
-import React from 'react';
 
 interface AdminFormCustomModalProps {
     // NOTE: Modal

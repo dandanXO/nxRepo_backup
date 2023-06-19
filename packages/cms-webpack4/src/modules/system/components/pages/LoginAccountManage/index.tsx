@@ -1,7 +1,8 @@
-import LoginAccountManageTable from './LoginAccountManageTable';
 import { PageContainer } from '@ant-design/pro-components';
 import { Route } from 'antd/es/breadcrumb/Breadcrumb';
 import React from 'react';
+
+import LoginAccountManageTable from './LoginAccountManageTable';
 
 const LoginAccountManagePage = (): JSX.Element => {
     // NOTE: breadcrumb

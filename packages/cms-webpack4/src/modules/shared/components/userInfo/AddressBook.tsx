@@ -1,9 +1,10 @@
-import { useLazyGetUserContactsListQuery } from '../../api/UserInfoApi';
-import { GetUserContacts } from '../../api/userInfoTypes/getUserContacts';
-import { UserId } from '../../domain/UserId';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetUserContactsListQuery } from '../../api/UserInfoApi';
+import { GetUserContacts } from '../../api/userInfoTypes/getUserContacts';
+import { UserId } from '../../domain/UserId';
 
 const AddressBook = ({ userId }: UserId): JSX.Element => {
     const [triggerGetList, { currentData, isLoading, isFetching }] = useLazyGetUserContactsListQuery({

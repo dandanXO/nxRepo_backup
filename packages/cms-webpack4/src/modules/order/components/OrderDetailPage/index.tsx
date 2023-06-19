@@ -1,13 +1,14 @@
+import { PageContainer } from '@ant-design/pro-components';
+import { Tabs } from 'antd';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { itemRender } from '../../../shared/components/common/itemRender';
 import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import LoanInfo from '../../../shared/components/userInfo/LoanInfo';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
 import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import UserInfo from '../../../shared/components/userInfo/UserInfo';
-import { PageContainer } from '@ant-design/pro-components';
-import { Tabs } from 'antd';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 const OrderDetailPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);

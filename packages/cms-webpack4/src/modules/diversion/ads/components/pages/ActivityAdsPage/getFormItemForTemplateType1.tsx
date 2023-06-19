@@ -1,9 +1,10 @@
-import { ActivityBanner } from '../../../export/service/types';
-import { AdTemplate1BrandCard, AdTemplate1Card } from '../../../import/ActivityAdListPage/components/AdTemplate1';
-import { getDefaultActivity1BannerContent } from './getDefaultActivity1BannerContent';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Divider, Form, Input, Row, Select } from 'antd';
 import React from 'react';
+
+import { ActivityBanner } from '../../../export/service/types';
+import { AdTemplate1BrandCard, AdTemplate1Card } from '../../../import/ActivityAdListPage/components/AdTemplate1';
+import { getDefaultActivity1BannerContent } from './getDefaultActivity1BannerContent';
 
 export const getFormItemForTemplateType1 = (
     templateType: number,

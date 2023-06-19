@@ -1,11 +1,12 @@
-import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
-import { useLazyGetMerchantManageListQuery } from '../../../service/merchant/MerchantApi';
-import { GetMerchantListResponse } from '../../../service/merchant/getMerchantList';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
+
+import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
+import { useLazyGetMerchantManageListQuery } from '../../../service/merchant/MerchantApi';
+import { GetMerchantListResponse } from '../../../service/merchant/getMerchantList';
 
 interface MerchantTableProps {
     postMerchantSuccess?: boolean;

@@ -1,5 +1,6 @@
-import { useLazyGetChannelListQuery } from '../api/channelListApi';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetChannelListQuery } from '../api/channelListApi';
 
 const useGetChannelEnum = (): {
     triggerGetChannelList: any;

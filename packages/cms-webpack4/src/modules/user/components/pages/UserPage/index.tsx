@@ -1,10 +1,11 @@
+import { Form, Tabs } from 'antd';
+import { useState } from 'react';
+
 import AdminPage from '../../../../shared/components/common/AdminPage';
 import { usePostBlackListAddMutation } from '../../../api/UserApi';
 import AddBlackListModal from './AddBlackListModal';
 import UserQuotaLabelTable from './UserQuotaLabelTable';
 import UserTable from './UserTable';
-import { Form, Tabs } from 'antd';
-import { useState } from 'react';
 
 const UserManage = (): JSX.Element => {
     const [showModal, setShowModal] = useState({ show: false, userId: '' });

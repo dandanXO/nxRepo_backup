@@ -1,6 +1,7 @@
-import { useLazyGetUserReveiwRecordOperatorListQuery } from '../api/operatorListApi';
 import { ProSchemaValueEnumMap } from '@ant-design/pro-components';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetUserReveiwRecordOperatorListQuery } from '../api/operatorListApi';
 
 const useGetUserReviewRecordOperatorEnum = (): {
     triggerGetOperatorList: any;

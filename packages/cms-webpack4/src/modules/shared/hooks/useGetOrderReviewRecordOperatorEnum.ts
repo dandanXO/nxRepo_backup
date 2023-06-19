@@ -1,5 +1,6 @@
-import { useLazyGetOrderReveiwRecordOperatorListQuery } from '../api/operatorListApi';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetOrderReveiwRecordOperatorListQuery } from '../api/operatorListApi';
 
 const useGetOrderReviewRecordOperatorEnum = (): {
     triggerGetOperatorList: any;

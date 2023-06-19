@@ -1,3 +1,9 @@
+import { PlusOutlined } from '@ant-design/icons';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
+
 import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
 import { useLazyGetBlackListQuery } from '../../../api/BlackListApi';
 import {
@@ -5,11 +11,6 @@ import {
     GetBlackListProps,
     GetBlackListRequestQuerystring,
 } from '../../../api/types/blackListTypes/getBlackList';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Space } from 'antd';
-import React, { useEffect, useState } from 'react';
 
 interface BlackLisTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,10 +1,11 @@
-import { ModalContent } from '../../../../../shared/components/common/AdminTable';
-import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
-import { ActivityModel } from '../../../service/AdsApi';
 import { FormInstance } from 'antd';
 import { Modal } from 'antd/es';
 import { useForm } from 'antd/es/form/Form';
 import React, { useCallback, useState } from 'react';
+
+import { ModalContent } from '../../../../../shared/components/common/AdminTable';
+import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
+import { ActivityModel } from '../../../service/AdsApi';
 
 type IUseAdminTable = {
     triggerGetList: any;

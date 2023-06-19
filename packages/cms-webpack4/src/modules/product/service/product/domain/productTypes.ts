@@ -31,10 +31,11 @@ export interface ProductTypes {
     maxAmount?: number; // 最高可借金额
     merchantId?: number; // 商户流水号
 
-    prodRiskProvider: {             // 混和風控额度
-        isOldUser: boolean,         // 初貸(新客) : false , 複貸(次新客) :true
-        provider: string            // 風控選項
-    } [];
+    prodRiskProvider: {
+        // 混和風控额度
+        isOldUser: boolean; // 初貸(新客) : false , 複貸(次新客) :true
+        provider: string; // 風控選項
+    }[];
 
     newGuestLoanAmount?: number;
     // 初始贷款额度
@@ -48,11 +49,11 @@ export interface ProductTypes {
     oldGuestLoanAmount?: number;
     // 复贷初始额度
 
-    overdueRate?: number;            // 逾期费率(天)
-    postInterestRate?: number;       // 后置利率
-    preInterestRate?: number;        // 前置利率
-    productInterestRatePairs?: ProductInterestRatePair[] //服务利率提额配置
-    productName?: string;            // 产品名称
+    overdueRate?: number; // 逾期费率(天)
+    postInterestRate?: number; // 后置利率
+    preInterestRate?: number; // 前置利率
+    productInterestRatePairs?: ProductInterestRatePair[]; //服务利率提额配置
+    productName?: string; // 产品名称
 
     // reLoanAmount?: number;           // 老客贷款额度
     // NOTICE: Deprecated 复贷初始额度 ; replace by oldGuestLoanAmount

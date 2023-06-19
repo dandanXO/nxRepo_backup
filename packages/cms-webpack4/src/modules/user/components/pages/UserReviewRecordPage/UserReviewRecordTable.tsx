@@ -1,3 +1,9 @@
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Space } from 'antd';
+import queryString from 'query-string';
+import { useEffect, useState } from 'react';
+
 import CopyText from '../../../../shared/components/other/CopyText';
 import useGetUserReviewRecordOperatorEnum from '../../../../shared/hooks/useGetUserReviewRecordOperatorEnum';
 import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
@@ -7,11 +13,6 @@ import {
     GetUserReviewRecordListRequestQuerystring,
     UserReviewRecordList,
 } from '../../../api/types/userReviewRecordTypes/getUserReviewRecordList';
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Space } from 'antd';
-import queryString from 'query-string';
-import { useEffect, useState } from 'react';
 
 const UserReviewRecordTable = (): JSX.Element => {
     const { triggerGetOperatorList, userReviewRecordOperatorEnum } = useGetUserReviewRecordOperatorEnum();

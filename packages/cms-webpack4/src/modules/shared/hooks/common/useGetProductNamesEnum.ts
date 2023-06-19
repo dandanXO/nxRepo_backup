@@ -1,5 +1,6 @@
-import { useLazyGetProductNamesQuery } from '../../api/productNameApi';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetProductNamesQuery } from '../../api/productNameApi';
 
 const useGetProductNamesEnum = (): {
     triggerGetProductNames: any;

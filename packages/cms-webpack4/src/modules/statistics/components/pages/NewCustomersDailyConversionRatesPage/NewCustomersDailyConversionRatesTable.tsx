@@ -1,11 +1,3 @@
-import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
-import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
-import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
-import { useLazyGetNewCustomersDailyConversionRatesQuery } from '../../../api/NewCustomersDailyConversionRatesApi';
-import {
-    GetNewCustomersDailyConversionRatesRequestQuerystring,
-    NewCustomersDailyConversionRates,
-} from '../../../api/types/NewCustomersDailyConversionRatesTypes/getNewCustomersDailyConversionRates';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
@@ -14,6 +6,15 @@ import { Key } from 'antd/es/table/interface';
 import moment from 'moment';
 import queryString from 'query-string';
 import { useEffect, useRef, useState } from 'react';
+
+import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
+import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
+import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
+import { useLazyGetNewCustomersDailyConversionRatesQuery } from '../../../api/NewCustomersDailyConversionRatesApi';
+import {
+    GetNewCustomersDailyConversionRatesRequestQuerystring,
+    NewCustomersDailyConversionRates,
+} from '../../../api/types/NewCustomersDailyConversionRatesTypes/getNewCustomersDailyConversionRates';
 
 const { CheckableTag } = Tag;
 const NewCustomersDailyConversionRatesTable = (): JSX.Element => {

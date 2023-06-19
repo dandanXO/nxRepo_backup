@@ -1,5 +1,6 @@
-import { useLazyGetAppNamesQuery } from '../api/appNamesApi';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetAppNamesQuery } from '../api/appNamesApi';
 
 const useGetAppNamesEnum = (): {
     triggerGetAppNames: any;

@@ -1,7 +1,8 @@
-import NewCustomersDailyConversionRatesTable from './NewCustomersDailyConversionRatesTable';
 import { PageContainer } from '@ant-design/pro-components';
 import { Route } from 'antd/es/breadcrumb/Breadcrumb';
 import React from 'react';
+
+import NewCustomersDailyConversionRatesTable from './NewCustomersDailyConversionRatesTable';
 
 const NewCustomersDailyConversionRatesPage = (): JSX.Element => {
     // NOTE: breadcrumb

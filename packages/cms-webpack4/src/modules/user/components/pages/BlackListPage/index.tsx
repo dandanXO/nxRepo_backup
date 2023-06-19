@@ -1,9 +1,10 @@
+import { Form } from 'antd';
+import { useState } from 'react';
+
 import AdminPage from '../../../../shared/components/common/AdminPage';
 import { usePostBlackListMutation } from '../../../api/BlackListApi';
 import AddBlackListModal from './AddBlackListModal';
 import BlackListTable from './BlackListTable';
-import { Form } from 'antd';
-import { useState } from 'react';
 
 const BlackListPage = (): JSX.Element => {
     const [showModal, setShowModal] = useState(false);

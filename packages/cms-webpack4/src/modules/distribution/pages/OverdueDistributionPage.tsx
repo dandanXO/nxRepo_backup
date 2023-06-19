@@ -1,3 +1,7 @@
+import { ProColumns } from '@ant-design/pro-components';
+import { Button, FormInstance, Space, Table, message } from 'antd';
+import React, { useEffect, useState } from 'react';
+
 import AdminPage from '../../shared/components/common/AdminPage';
 import { AdminTable } from '../../shared/components/common/AdminTable';
 import CopyText from '../../shared/components/other/CopyText';
@@ -16,9 +20,6 @@ import {
     DistributionSummary,
     Stage,
 } from '../types';
-import { ProColumns } from '@ant-design/pro-components';
-import { Button, FormInstance, Space, Table, message } from 'antd';
-import React, { useEffect, useState } from 'react';
 
 type StageData = {
     [stage: string]: Omit<DistributionSummary, 'stage'>;

@@ -1,5 +1,6 @@
-import { useGetChannelListQuery } from '../api/channelListApi';
 import { useEffect, useState } from 'react';
+
+import { useGetChannelListQuery } from '../api/channelListApi';
 
 const usePageable = (data, onChangeFunction, params) => {
     console.log(data, onChangeFunction, params);

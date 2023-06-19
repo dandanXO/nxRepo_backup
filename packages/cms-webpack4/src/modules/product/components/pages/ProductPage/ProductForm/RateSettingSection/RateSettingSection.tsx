@@ -1,3 +1,8 @@
+import { CheckCircleFilled, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Collapse, Form, Input, Typography, message } from 'antd';
+import { FormInstance } from 'antd/es';
+import React, { CSSProperties, useEffect, useState } from 'react';
+
 import { validatePreOrPostInterestGroups } from '../../../../../../shared/components/other/validatePreOrPostInterestGroups';
 import { maxOneUnitFloatReplacer } from '../../../../../../shared/utils/format/maxOneUnitFloatReplacer';
 import { CustomAntFormFieldError } from '../../../../../../shared/utils/validation/CustomAntFormFieldError';
@@ -7,10 +12,6 @@ import {
     productInterestRatesContentKey,
 } from '../../../../../service/product/domain/productInterestRatePair';
 import { ProductInterestRatePairsModal } from './ProductInterestRatePairsModal';
-import { CheckCircleFilled, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Collapse, Form, Input, Typography, message } from 'antd';
-import { FormInstance } from 'antd/es';
-import React, { CSSProperties, useEffect, useState } from 'react';
 
 const { Paragraph, Text } = Typography;
 const { Panel } = Collapse;

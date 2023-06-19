@@ -1,3 +1,6 @@
+import { Form } from 'antd';
+import React, { useCallback, useState } from 'react';
+
 import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
 import {
     ProductInterestRate,
@@ -11,8 +14,6 @@ import OrderSettingSection from './OrderSettingSection';
 import ProductSettingSection from './ProductSettingSection';
 import RateSettingSection from './RateSettingSection/RateSettingSection';
 import { UploadSettingSection } from './UploadSettingSection';
-import { Form } from 'antd';
-import React, { useCallback, useState } from 'react';
 
 interface ProductFormProps {
     modal: any;

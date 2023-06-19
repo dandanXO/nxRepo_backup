@@ -85,10 +85,10 @@ const ProductApi = API.injectEndpoints({
         getProductRiskDropdown: builder.query<string[], null>({
             query: () => ({
                 url: '/product-manage/risk/dropdown',
-                method: 'get'
-            })
-        })
-    })
+                method: 'get',
+            }),
+        }),
+    }),
 });
 
 export const {

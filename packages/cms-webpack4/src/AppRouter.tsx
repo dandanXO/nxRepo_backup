@@ -1,3 +1,9 @@
+import { ConfigProvider } from 'antd';
+import { createHashHistory } from 'history';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, HashRouter as Router, Switch } from 'react-router-dom';
+
 import { AppManagePage } from './modules/app/components/pages/AppManagePage';
 import { ChannelTabPage } from './modules/channel/components/pages/ChannelTabPage';
 import { OverdueDistributionPage } from './modules/distribution/pages/OverdueDistributionPage';
@@ -30,11 +36,6 @@ import UserReviewInfoPage from './modules/user/components/pages/UserReviewInfoPa
 import UserReviewPage from './modules/user/components/pages/UserReviewPage';
 import UserReviewRecordPage from './modules/user/components/pages/UserReviewRecordPage';
 import WhiteListPage from './modules/user/components/pages/WhiteListPage';
-import { ConfigProvider } from 'antd';
-import { createHashHistory } from 'history';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Route, HashRouter as Router, Switch } from 'react-router-dom';
 
 const Basename = window['__POWERED_BY_QIANKUN__'] ? '/cms' : '/';
 

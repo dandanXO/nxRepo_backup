@@ -1,3 +1,11 @@
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Space, Tag } from 'antd';
+import moment from 'moment';
+import queryString from 'query-string';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { ProColumnsOperationConstant } from '../../../shared/components/common/ProColumnsOperationConstant';
 import CopyText from '../../../shared/components/other/CopyText';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
@@ -7,13 +15,6 @@ import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
 import { GetOrderListProps, OrderListResponse } from '../../api/types/getOrderList';
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Space, Tag } from 'antd';
-import moment from 'moment';
-import queryString from 'query-string';
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 const OrderTable = (): JSX.Element => {
     const isSuperAdmin = getIsSuperAdmin();

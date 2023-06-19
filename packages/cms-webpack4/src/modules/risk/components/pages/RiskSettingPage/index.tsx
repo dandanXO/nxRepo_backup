@@ -1,3 +1,7 @@
+import { ProColumns } from '@ant-design/pro-components';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
 import { GetProductListResponseProduct } from '../../../../product/service/product/domain/getProductList';
 import AdminPage from '../../../../shared/components/common/AdminPage';
 import { AdminTable, ModalContent } from '../../../../shared/components/common/AdminTable';
@@ -16,9 +20,6 @@ import {
 import { GetRiskManageResponse } from '../../../service/response/GetRiskManageResponse';
 import RiskSettingForm from './RiskSettingForm';
 import RiskSettingModal from './RiskSettingModal';
-import { ProColumns } from '@ant-design/pro-components';
-import { useForm } from 'antd/es/form/Form';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 export type FormResponseData = GetRiskManageResponse;
 

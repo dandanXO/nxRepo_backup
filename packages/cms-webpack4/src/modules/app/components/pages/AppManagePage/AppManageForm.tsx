@@ -1,9 +1,10 @@
-import { AdminForm, AdminFormProps } from '../../../../shared/components/common/AdminForm';
-import './style.less';
 import { Switch } from 'antd';
 import { Collapse, Input, Select } from 'antd/es';
 import Form from 'antd/es/form';
 import React from 'react';
+
+import { AdminForm, AdminFormProps } from '../../../../shared/components/common/AdminForm';
+import './style.less';
 
 const { Panel } = Collapse;
 const { Option } = Select;

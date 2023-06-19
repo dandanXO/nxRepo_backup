@@ -1,5 +1,6 @@
-import { CustomAntFormFieldError } from './CustomAntFormFieldError';
 import { z } from 'zod';
+
+import { CustomAntFormFieldError } from './CustomAntFormFieldError';
 
 abstract class Validation {
     private isEntityValid?: boolean;

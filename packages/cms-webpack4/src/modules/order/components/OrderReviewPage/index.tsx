@@ -1,6 +1,7 @@
+import { PageContainer } from '@ant-design/pro-components';
+
 import { itemRender } from '../../../shared/components/common/itemRender';
 import OrderReviewTable from './OrderReviewTable';
-import { PageContainer } from '@ant-design/pro-components';
 
 const OrderReviewPage = (): JSX.Element => {
     // NOTE: breadcrumb

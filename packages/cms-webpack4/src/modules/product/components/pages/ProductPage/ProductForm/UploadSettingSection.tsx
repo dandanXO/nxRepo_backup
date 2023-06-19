@@ -1,6 +1,7 @@
-import { TagValidator } from '../../../../../shared/utils/validation/validator';
 import { Collapse, Form, Input, Radio, Select, Switch } from 'antd';
 import React from 'react';
+
+import { TagValidator } from '../../../../../shared/utils/validation/validator';
 
 const { Panel } = Collapse;
 export function UploadSettingSection(): JSX.Element {

@@ -1,3 +1,11 @@
+import { InfoCircleOutlined } from '@ant-design/icons';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Input, Modal, Space, Tooltip } from 'antd';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { ProColumnsOperationConstant } from '../../../shared/components/common/ProColumnsOperationConstant';
 import CopyText from '../../../shared/components/other/CopyText';
 import { ConstantRiskRankEnum } from '../../../shared/constants/constantRiskRankEnum';
@@ -10,13 +18,6 @@ import { useLazyGetOrderFinalReviewListQuery, usePostOrderFinalReviewMutation } 
 import { OrderReviewTypes } from '../../api/types/domain/OrderReviewTypes';
 import { GetOrderReviewListProps, GetOrderReviewListRequestQuerystring } from '../../api/types/getOrderReviewList';
 import { selectRandomRows } from '../../utils/selectRandomRows';
-import { InfoCircleOutlined } from '@ant-design/icons';
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Input, Modal, Space, Tooltip } from 'antd';
-import moment from 'moment';
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 const OrderFinalReviewTable = (): JSX.Element => {
     const isSuperAdmin = getIsSuperAdmin();

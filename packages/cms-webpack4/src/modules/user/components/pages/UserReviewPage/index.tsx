@@ -1,7 +1,8 @@
-import UserReviewTable from './UserReviewTable';
 import { PageContainer } from '@ant-design/pro-components';
 import { Route } from 'antd/es/breadcrumb/Breadcrumb';
 import React from 'react';
+
+import UserReviewTable from './UserReviewTable';
 
 const UserReviewPage = (): JSX.Element => {
     // NOTE: breadcrumb

@@ -1,9 +1,10 @@
-import { useLazyGetUserOrdersListQuery } from '../../api/UserInfoApi';
-import { GetUserOrders } from '../../api/userInfoTypes/getUserOrders';
-import { UserId } from '../../domain/UserId';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetUserOrdersListQuery } from '../../api/UserInfoApi';
+import { GetUserOrders } from '../../api/userInfoTypes/getUserOrders';
+import { UserId } from '../../domain/UserId';
 
 const LoanInfo = ({ userId }: UserId): JSX.Element => {
     const [triggerGetList, { currentData, isLoading }] = useLazyGetUserOrdersListQuery({

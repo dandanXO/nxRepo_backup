@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react';
+
 import { useGetChannelListQuery } from '../../api/channelListApi';
 import { useLazyGetMerchantListQuery } from '../../api/merchantListApi';
 import { useLazyGetOperatorListQuery } from '../../api/operatorListApi';
 import { useGetProviderListQuery } from '../../api/providerApi';
 import { ConstantRiskRankEnum } from '../../constants/constantRiskRankEnum';
 import { getIsSuperAdmin } from '../../storage/getUserInfo';
-import { useEffect, useState } from 'react';
 
 const useValuesEnums = (): {
     channelListEnum: Record<any, any>;

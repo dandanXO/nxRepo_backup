@@ -1,5 +1,6 @@
-import { useLazyGetProviderListQuery } from '../../api/providerApi';
 import { useEffect, useState } from 'react';
+
+import { useLazyGetProviderListQuery } from '../../api/providerApi';
 
 const useGetProviderEnum = (): {
     triggerGetProviderList: any;

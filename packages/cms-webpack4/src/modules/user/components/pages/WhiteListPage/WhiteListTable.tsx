@@ -1,3 +1,9 @@
+import { PlusOutlined } from '@ant-design/icons';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Modal, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
+
 import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
 import {
     useDeleteWhiteListAllMutation,
@@ -9,11 +15,6 @@ import {
     GetWhiteListRequestQuerystring,
     WhiteListReponse,
 } from '../../../api/types/whiteListTypes/getWhtieList';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Modal, Space } from 'antd';
-import React, { useEffect, useState } from 'react';
 
 interface WhiteLisTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;

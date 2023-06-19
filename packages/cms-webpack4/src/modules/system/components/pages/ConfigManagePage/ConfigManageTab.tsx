@@ -1,8 +1,9 @@
+import { Collapse, List, Tabs } from 'antd';
+import { useEffect, useState } from 'react';
+
 import { useLazyGetConfigListQuery } from '../../../api/configManageApi';
 import { ConfigList } from '../../../api/types/configManageTypes/getConfigList';
 import ConfigInput from './components/ConfigInput';
-import { Collapse, List, Tabs } from 'antd';
-import { useEffect, useState } from 'react';
 
 // const { ConfigInput, ConfigSwitch, ConfigTag, ConfigRadio } = ConfigTypes;
 const ConfigManageTab = (): JSX.Element => {

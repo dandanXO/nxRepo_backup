@@ -1,3 +1,9 @@
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Space } from 'antd';
+import queryString from 'query-string';
+import { useEffect, useState } from 'react';
+
 import { ProColumnsOperationConstant } from '../../../shared/components/common/ProColumnsOperationConstant';
 import CopyText from '../../../shared/components/other/CopyText';
 import useValuesEnums from '../../../shared/hooks/common/useValuesEnums';
@@ -10,11 +16,6 @@ import {
     GetOrderReviewRecordListRequestQuerystring,
     OrderReviewRecordListResponse,
 } from '../../api/types/getOrderReviewRecordList';
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Space } from 'antd';
-import queryString from 'query-string';
-import { useEffect, useState } from 'react';
 
 const OrderReviewRecordTable = (): JSX.Element => {
     const isSuperAdmin = getIsSuperAdmin();

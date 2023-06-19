@@ -1,8 +1,9 @@
+import { Tabs } from 'antd';
+import { useState } from 'react';
+
 import AdminPage from '../../../../shared/components/common/AdminPage';
 import { ChannelSettingTabPage } from './ChannelSettingTab';
 import { ChannelSettingTagTabPage } from './ChannelSettingTagTab';
-import { Tabs } from 'antd';
-import { useState } from 'react';
 
 export const ChannelTabPage = (): JSX.Element => {
     const [activeKey, setActiveKey] = useState('channel');

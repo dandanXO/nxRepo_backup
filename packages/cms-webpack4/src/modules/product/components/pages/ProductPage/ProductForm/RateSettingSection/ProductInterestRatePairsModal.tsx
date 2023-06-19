@@ -1,10 +1,11 @@
+import { Button, Card, Form, Modal } from 'antd';
+import { FormInstance } from 'antd/lib/form/Form';
+import React from 'react';
+
 import PreAndPostInterestGroups from '../../../../../../shared/components/other/PreAndPostInterestGroups';
 import { CustomAntFormFieldError } from '../../../../../../shared/utils/validation/CustomAntFormFieldError';
 import { productInterestRatesContentKey } from '../../../../../service/product/domain/productInterestRatePair';
 import { productInterestRatesConvertToBackendMap } from '../../hooks/useProductFormModal';
-import { Button, Card, Form, Modal } from 'antd';
-import { FormInstance } from 'antd/lib/form/Form';
-import React from 'react';
 
 interface ProductInterestRatePairsModalProps {
     form: FormInstance;

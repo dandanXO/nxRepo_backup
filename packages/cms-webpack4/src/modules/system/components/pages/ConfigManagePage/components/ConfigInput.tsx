@@ -1,7 +1,8 @@
-import { ConfigList } from '../../../../api/types/configManageTypes/getConfigList';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Space } from 'antd';
 import React, { useState } from 'react';
+
+import { ConfigList } from '../../../../api/types/configManageTypes/getConfigList';
 
 const { TextArea } = Input;
 type ConfigInputProps = ConfigList & {

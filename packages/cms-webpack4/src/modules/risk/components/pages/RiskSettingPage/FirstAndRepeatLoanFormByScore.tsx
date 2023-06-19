@@ -1,6 +1,7 @@
+import { Checkbox, Form, Input } from 'antd';
+
 import CustomLabel from '../../../../shared/components/other/CustomLabel';
 import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
-import { Checkbox, Form, Input } from 'antd';
 
 interface FormProps {
     isEdit: boolean;

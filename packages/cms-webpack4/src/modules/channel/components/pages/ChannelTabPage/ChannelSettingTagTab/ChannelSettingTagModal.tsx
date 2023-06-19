@@ -1,7 +1,8 @@
-import AdminFormModal from '../../../../../shared/components/common/AdminFormModal';
-import { ModalContent } from '../../../../../shared/components/common/AdminTable';
 import { FormInstance } from 'antd';
 import React from 'react';
+
+import AdminFormModal from '../../../../../shared/components/common/AdminFormModal';
+import { ModalContent } from '../../../../../shared/components/common/AdminTable';
 
 interface ChannelSettingTagModalProps {
     // NOTE: Modal

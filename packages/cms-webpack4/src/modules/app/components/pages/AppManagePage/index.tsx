@@ -1,3 +1,9 @@
+import { ProColumns } from '@ant-design/pro-components';
+import { FormInstance } from 'antd';
+import { Modal } from 'antd/es';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
 import { AdminFormCustomModal } from '../../../../shared/components/common/AdminFormCustomModal';
 import AdminPage from '../../../../shared/components/common/AdminPage';
 import { AdminTable, ModalContent } from '../../../../shared/components/common/AdminTable';
@@ -11,11 +17,6 @@ import {
 } from '../../../services/appManage/AppManageApi';
 import { AppConfigurationListItem } from '../../../services/appManage/domain/AppConfigurationListItem';
 import { AppManageForm } from './AppManageForm';
-import { ProColumns } from '@ant-design/pro-components';
-import { FormInstance } from 'antd';
-import { Modal } from 'antd/es';
-import { useForm } from 'antd/es/form/Form';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 const i18n = {
     AppManagePage: {

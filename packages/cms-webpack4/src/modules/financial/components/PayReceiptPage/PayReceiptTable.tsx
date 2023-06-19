@@ -1,3 +1,8 @@
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Modal, Space, Tag } from 'antd';
+import { useEffect, useState } from 'react';
+
 import { ProColumnsOperationConstant } from '../../../shared/components/common/ProColumnsOperationConstant';
 import CopyText from '../../../shared/components/other/CopyText';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
@@ -5,10 +10,6 @@ import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import { enumObjectToMap } from '../../../shared/utils/format/enumObjectToMap';
 import { useLazyGetPayReceiptListQuery, usePostPayReceiptConfirmMutation } from '../../api/PayReceiptApi';
 import { GetPayReceiptListRequestQuerystring, PayReceiptList } from '../../api/types/PayReceiptTypes/getPayReceiptList';
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Modal, Space, Tag } from 'antd';
-import { useEffect, useState } from 'react';
 
 const PayReceiptTable = (): JSX.Element => {
     const isSuperAdmin = getIsSuperAdmin();

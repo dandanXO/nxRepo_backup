@@ -1,11 +1,12 @@
-import { AdminForm, AdminFormProps } from '../../../../../shared/components/common/AdminForm';
-import { ChannelTagDropMenu } from '../../../../domain/vo/ChannelTagDropMenu';
-import { RiskDropMenu } from '../../../../domain/vo/RiskDropMenu';
 import { PlusOutlined } from '@ant-design/icons';
 import { Alert, Button, Divider, Select, Space, Switch, Typography } from 'antd';
 import { Input } from 'antd/es';
 import Form from 'antd/es/form';
 import React, { useRef } from 'react';
+
+import { AdminForm, AdminFormProps } from '../../../../../shared/components/common/AdminForm';
+import { ChannelTagDropMenu } from '../../../../domain/vo/ChannelTagDropMenu';
+import { RiskDropMenu } from '../../../../domain/vo/RiskDropMenu';
 
 const { Text } = Typography;
 const { Option } = Select;

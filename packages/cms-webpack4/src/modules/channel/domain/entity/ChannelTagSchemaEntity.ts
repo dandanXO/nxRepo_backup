@@ -1,5 +1,6 @@
-import { SchemaEntity } from '../../../shared/utils/validation/SchemaEntity';
 import { z } from 'zod';
+
+import { SchemaEntity } from '../../../shared/utils/validation/SchemaEntity';
 
 // NOTICE: VO Input Schema
 

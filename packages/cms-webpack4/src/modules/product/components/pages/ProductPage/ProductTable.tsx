@@ -1,4 +1,10 @@
 // eslint-disable max-classes-per-file
+import { PlusOutlined } from '@ant-design/icons';
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Space, Switch } from 'antd';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+
 import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
 import CopyText from '../../../../shared/components/other/CopyText';
 import useGetMerchantEnum from '../../../../shared/hooks/common/useGetMerchantEnum';
@@ -9,11 +15,6 @@ import { usePatchProductEditMutation } from '../../../service/product/ProductApi
 import { GetProductListRequestQuery } from '../../../service/product/request/getProductListRequestQuery';
 import { EditableInput } from './EditableInput';
 import { ProductFormModal } from './hooks/useProductFormModal';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Space, Switch } from 'antd';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 interface ProductTableProps {
     setProductModalData: React.Dispatch<React.SetStateAction<ProductFormModal>>;

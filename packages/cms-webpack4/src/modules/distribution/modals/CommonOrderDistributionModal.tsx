@@ -1,13 +1,14 @@
+import { Button, Form, Modal, Select } from 'antd';
+import { Typography } from 'antd/es';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
 import { TreeCheckbox } from '../components/TreeCheckbox';
 import { normalizeCollector } from '../components/TreeCheckbox/normalizeCollector';
 import { StageData } from '../pages/TodayDistributionPage';
 import { useLazyGetOverdueCollectorQuery } from '../services/OverdueDistributionAPI';
 import { useLazyGetCollectorQuery } from '../services/TodayDistributionAPI';
 import { Stage } from '../types';
-import { Button, Form, Modal, Select } from 'antd';
-import { Typography } from 'antd/es';
-import { useForm } from 'antd/es/form/Form';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 interface OrderDistributionModalProps {
     show: boolean;

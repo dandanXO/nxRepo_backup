@@ -1,3 +1,12 @@
+import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Button, Checkbox, Form, InputNumber, Modal, Radio, Select, Space, Tag, Tooltip, notification } from 'antd';
+import moment from 'moment';
+import queryString from 'query-string';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
 import CopyText from '../../../../shared/components/other/CopyText';
 import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
@@ -16,14 +25,6 @@ import {
     usePostUserManageQuotaLabelMutation,
 } from '../../../api/UserApi';
 import { GetUserListRequestQuerystring, UserListContent } from '../../../api/types/userTypes/getUserList';
-import type { ProColumns, ProFormInstance } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
-import { Button, Checkbox, Form, InputNumber, Modal, Radio, Select, Space, Tag, Tooltip, notification } from 'antd';
-import moment from 'moment';
-import queryString from 'query-string';
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 interface UserTableProps {
     setShowModal?: React.Dispatch<React.SetStateAction<{ show: boolean; userId: string }>>;

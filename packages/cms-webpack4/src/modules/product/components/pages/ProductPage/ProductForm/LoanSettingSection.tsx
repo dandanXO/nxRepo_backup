@@ -1,9 +1,10 @@
-import CustomLabel from '../../../../../shared/components/other/CustomLabel';
-import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
-import { NumberValidator } from '../../../../../shared/utils/validation/validator';
 import { Collapse, Form, Input, Select, Switch } from 'antd';
 import { FormInstance } from 'antd/es';
 import React from 'react';
+
+import CustomLabel from '../../../../../shared/components/other/CustomLabel';
+import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
+import { NumberValidator } from '../../../../../shared/utils/validation/validator';
 
 const { Panel } = Collapse;
 interface LoanSettingSectionProps {

@@ -1,7 +1,8 @@
+import styled from 'styled-components';
+
 import { AdTemplateCard } from '../index';
 import { onClickToAction } from './AdClick';
 import { AdContainer } from './AdContainer';
-import styled from 'styled-components';
 
 export interface IAdTemplate3Data {
     brandCard: AdTemplate3Card;

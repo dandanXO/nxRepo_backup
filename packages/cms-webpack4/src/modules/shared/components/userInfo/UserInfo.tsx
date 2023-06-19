@@ -1,12 +1,13 @@
-import { useGetUserDetailQuery } from '../../api/UserInfoApi';
-import { GetUserDetailResponse } from '../../api/userInfoTypes/getUserDetail';
-import { UserId } from '../../domain/UserId';
-import { getAdminUser } from '../../storage/getUserInfo';
 import { WaterMark } from '@ant-design/pro-components';
 import { Card, Descriptions, Image, Modal, Table, Tooltip } from 'antd';
 import { Typography } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+
+import { useGetUserDetailQuery } from '../../api/UserInfoApi';
+import { GetUserDetailResponse } from '../../api/userInfoTypes/getUserDetail';
+import { UserId } from '../../domain/UserId';
+import { getAdminUser } from '../../storage/getUserInfo';
 
 const { Item } = Descriptions;
 

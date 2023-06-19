@@ -1,3 +1,8 @@
+import { ProColumns } from '@ant-design/pro-components';
+import { Modal } from 'antd/es';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { AdminTable, ModalContent } from '../../../../../shared/components/common/AdminTable';
 import { ProColumnsOperationConstant } from '../../../../../shared/components/common/ProColumnsOperationConstant';
 import { ChannelTagVO } from '../../../../domain/vo/ChannelTagVO';
@@ -10,10 +15,6 @@ import {
 } from '../../../../service/ChannelApi';
 import { ChannelSettingTagFormModal } from './ChannelSettingTagFormModal';
 import { useFormModal } from './useFormModal';
-import { ProColumns } from '@ant-design/pro-components';
-import { Modal } from 'antd/es';
-import { useForm } from 'antd/es/form/Form';
-import React, { useCallback, useEffect, useState } from 'react';
 
 interface ChannelSettingTagTabPageProps {
     active: boolean;

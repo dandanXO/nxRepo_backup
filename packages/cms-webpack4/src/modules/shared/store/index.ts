@@ -1,6 +1,7 @@
+import { configureStore } from '@reduxjs/toolkit';
+
 import { API } from '../api';
 import searchParamsSlice from '../utils/searchParamsSlice';
-import { configureStore } from '@reduxjs/toolkit';
 
 // import {GetChannelListResponse} from "../api/types/getChannelList";
 // import {FallbackAddListenerOptions} from "@reduxjs/toolkit/dist/listenerMiddleware/types";

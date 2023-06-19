@@ -1,3 +1,8 @@
+import { PageContainer } from '@ant-design/pro-components';
+import { Button, Form, Modal, Tabs } from 'antd';
+import { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+
 import { itemRender } from '../../../shared/components/common/itemRender';
 import AddressBook from '../../../shared/components/userInfo/AddressBook';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
@@ -5,10 +10,6 @@ import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import UserInfo from '../../../shared/components/userInfo/UserInfo';
 import { usePostOrderReviewMutation } from '../../api/OrderReviewApi';
 import OrderReviewModal from './OrderReviewModal';
-import { PageContainer } from '@ant-design/pro-components';
-import { Button, Form, Modal, Tabs } from 'antd';
-import { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
 
 const OrderFinalReviewDetailPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);

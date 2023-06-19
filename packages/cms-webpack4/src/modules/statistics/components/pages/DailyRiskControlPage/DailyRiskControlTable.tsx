@@ -1,15 +1,16 @@
-import useGetProviderEnum from '../../../../shared/hooks/common/useGetProviderEnum';
-import { useLazyGetDailyRiskControlListQuery } from '../../../api/DailyRiskControlApi';
-import {
-    GetDailyRiskControlList,
-    GetDailyRiskControlListRequestQuery,
-} from '../../../api/types/DailyRiskControlTypes/getDailyRiskControlList';
 import type { ColumnsState, ProColumns, ProFormInstance } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Space, Table } from 'antd';
 import moment from 'moment';
 import queryString from 'query-string';
 import { useEffect, useRef, useState } from 'react';
+
+import useGetProviderEnum from '../../../../shared/hooks/common/useGetProviderEnum';
+import { useLazyGetDailyRiskControlListQuery } from '../../../api/DailyRiskControlApi';
+import {
+    GetDailyRiskControlList,
+    GetDailyRiskControlListRequestQuery,
+} from '../../../api/types/DailyRiskControlTypes/getDailyRiskControlList';
 
 const DailyRiskControlTable = (): JSX.Element => {
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();

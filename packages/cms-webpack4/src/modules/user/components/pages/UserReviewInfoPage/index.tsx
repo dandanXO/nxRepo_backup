@@ -1,14 +1,15 @@
+import { PageContainer } from '@ant-design/pro-components';
+import { Button, Form, List, Modal, Tabs } from 'antd';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 import { itemRender } from '../../../../shared/components/common/itemRender';
 import AddressBook from '../../../../shared/components/userInfo/AddressBook';
 import SmsMessage from '../../../../shared/components/userInfo/SmsMessage';
 import UserInfo from '../../../../shared/components/userInfo/UserInfo';
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
 import UserReviewModal from './UserReviewModal';
-import { PageContainer } from '@ant-design/pro-components';
-import { Button, Form, List, Modal, Tabs } from 'antd';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 
 const UserReviewInfoPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);

@@ -1,9 +1,10 @@
+import queryString from 'query-string';
+import styled from 'styled-components';
+
 import Android260x720 from './720.svg';
 import { AdTemplate1, IAdTemplate1Data } from './components/AdTemplate1';
 import { AdTemplate2 } from './components/AdTemplate2';
 import { AdTemplate3 } from './components/AdTemplate3';
-import queryString from 'query-string';
-import styled from 'styled-components';
 
 // import {MockAdTemplate1Data} from "./mock/MockAdTemplate1Data";
 // import {MockAdTemplate2Data} from "./mock/MockAdTemplate2Data";

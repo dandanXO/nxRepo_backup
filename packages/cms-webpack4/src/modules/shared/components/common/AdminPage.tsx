@@ -1,6 +1,7 @@
-import { itemRender } from './itemRender';
 import { PageContainer } from '@ant-design/pro-components';
 import React from 'react';
+
+import { itemRender } from './itemRender';
 
 export interface AdminTableTemplateProps {
     navigator: {

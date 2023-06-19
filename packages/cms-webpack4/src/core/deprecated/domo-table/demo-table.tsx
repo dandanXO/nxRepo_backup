@@ -1,10 +1,11 @@
-import { ProColumnsOperationConstant } from '../../../modules/shared/components/common/ProColumnsOperationConstant';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Menu, Space, Tag } from 'antd';
 import { useRef } from 'react';
 import request from 'umi-request';
+
+import { ProColumnsOperationConstant } from '../../../modules/shared/components/common/ProColumnsOperationConstant';
 
 type GithubIssueItem = {
     url: string;

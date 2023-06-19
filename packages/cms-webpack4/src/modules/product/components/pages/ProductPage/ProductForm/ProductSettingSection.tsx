@@ -1,8 +1,9 @@
-import { cannotTypeFloat } from '../../../../../shared/utils/format/cannotTypeFloat';
-import { EmailValidator, NumberValidator } from '../../../../../shared/utils/validation/validator';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Collapse, Form, Input, Select, TimePicker, Upload, UploadProps, message } from 'antd';
 import React from 'react';
+
+import { cannotTypeFloat } from '../../../../../shared/utils/format/cannotTypeFloat';
+import { EmailValidator, NumberValidator } from '../../../../../shared/utils/validation/validator';
 
 const { Panel } = Collapse;
 interface ProductSettingSectionProps {
