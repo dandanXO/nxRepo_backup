@@ -21,6 +21,14 @@ import {
 } from "../../../shared/components/withQueryHook/Cards";
 import {UrgeModal} from "./UrgeModal";
 
+const amountUnitMap = {
+    India: '₹',
+    Pakistan: 'PKR',
+    Bangladesh: '৳'
+}
+
+const amountUnit = amountUnitMap[appInfo.COUNTRY]
+
 interface IOrderDetailContentProps {
     userId: string;
     collectId: string
@@ -93,34 +101,34 @@ export const OrderDetailContent = ({
         const showSMSTab = !smsSwitch || isOverDue
 
         const orderInfoDescriptions = [
-            { key: 'orderNumber', dataIndex: 'orderNumber' },
-            { key: 'mobileNumber', dataIndex: 'mobileNumber' },
-            { key: 'channel', dataIndex: 'channel' },
-            { key: 'appName', dataIndex: 'appName', render: (value, { channelUrl }) => <div>{value}<CopyTextIcon text={channelUrl}/></div> },
-            { key: 'productName', dataIndex: 'productName' },
-            { key: 'orderStatus', dataIndex: 'orderStatus', render: (value) => <Tag color={OrderStatusEnum[value].color}>{t(OrderStatusEnum[value].text)}</Tag> },
-            { key: 'orderLabel', dataIndex: 'orderLabel', render:(value) => <Tag color={OrderLabelEnum[value].color}>{t(OrderLabelEnum[value].text)}</Tag> },
-            { key: 'loanAmount', dataIndex: 'loanAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
-            { key: 'disburseAmount', dataIndex: 'disburseAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
+            { title: t('order:orderNumber'), dataIndex: 'orderNumber' },
+            { title: t('order:orderNumber'), dataIndex: 'mobileNumber' },
+            { title: t('order:channel'), dataIndex: 'channel' },
+            { title: t('order:appName'), dataIndex: 'appName', render: (value, { channelUrl }) => <div>{value}<CopyTextIcon text={channelUrl}/></div> },
+            { title: t('order:productName'), dataIndex: 'productName' },
+            { title: t('order:orderStatus'), dataIndex: 'orderStatus', render: (value) => <Tag color={OrderStatusEnum[value].color}>{t(OrderStatusEnum[value].text)}</Tag> },
+            { title: t('order:orderLabel'), dataIndex: 'orderLabel', render:(value) => <Tag color={OrderLabelEnum[value].color}>{t(OrderLabelEnum[value].text)}</Tag> },
+            { title: t('order:loanAmount', { unit: amountUnit}), dataIndex: 'loanAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
+            { title: t('order:disburseAmount', { unit: amountUnit }), dataIndex: 'disburseAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
             {
                 titleTooltip: <Tooltip title={t('urgeCollection:tooltip.amountDue')}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf', margin: '0 5px' }} /></Tooltip>,
-                key: 'amountDue',
+                title: t('order:amountDue', { unit: amountUnit }),
                 dataIndex: 'amountDue',
                 render: (value) => <div>{formatPrice(value) || 0 }</div>
             },
-            { key: 'reductionAmount', dataIndex: 'reductionAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
-            { key: 'amountPaid', dataIndex: 'amountPaid', render: (value) => <div>{formatPrice(value) || 0 }</div> },
-            { key: 'outstandingBalance', dataIndex: 'outstandingBalance', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
-            { key: 'extensionAmount', dataIndex: 'extensionAmount', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
-            { key: 'daysOverdue', dataIndex: 'daysOverdue', render: (value) => <div style={{color: '#FF4D4F'}}>{value}</div> },
-            { key: 'overDueFee', dataIndex: 'overdueFee', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
-            { key: 'applicationTime', dataIndex: 'applicationTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
-            { key: 'reviewTime', dataIndex: 'reviewTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
-            { key: 'expirationTime', dataIndex: 'expireTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('order:reductionAmount', { unit: amountUnit }), dataIndex: 'reductionAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
+            { title: t('order:amountPaid', { unit: amountUnit }), dataIndex: 'amountPaid', render: (value) => <div>{formatPrice(value) || 0 }</div> },
+            { title: t('order:outstandingBalance', { unit: amountUnit }), dataIndex: 'outstandingBalance', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
+            { title: t('order:extensionAmount', { unit: amountUnit }), dataIndex: 'extensionAmount', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
+            { title: t('order:daysOverdue'), dataIndex: 'daysOverdue', render: (value) => <div style={{color: '#FF4D4F'}}>{value}</div> },
+            { title: t('order:overDueFee', { unit: amountUnit }), dataIndex: 'overdueFee', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
+            { title: t('order:applicationTime'), dataIndex: 'applicationTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('order:reviewTime'), dataIndex: 'reviewTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('order:expirationTime'), dataIndex: 'expireTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
         ]
         if(isSuperAdmin) {
             orderInfoDescriptions.splice(0, 0, {
-                key: 'merchantName', dataIndex: 'merchantName'
+                title: t('order:merchantName'), dataIndex: 'merchantName'
             })
         }
 
@@ -148,27 +156,27 @@ export const OrderDetailContent = ({
         ]
 
         const registerDescriptions = [
-            { key: 'userId', dataIndex: 'personaInfo.userId' },
-            { key: 'registerChannel', dataIndex: 'personaInfo.channelName' },
-            { key: 'packageName', dataIndex: 'personaInfo.appName' },
-            { key: 'mobileNumber', dataIndex: 'personaInfo.phoneNo' },
-            { key: 'registerTime', dataIndex: 'personaInfo.addTime', render: (_, { personaInfo }) => <div>{moment(personaInfo.addTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-            { key: 'userSource', dataIndex: 'personaInfo.userSource' },
+            { title: t('user:userId'), dataIndex: 'personaInfo.userId' },
+            { title: t('user:registerChannel'), dataIndex: 'personaInfo.channelName' },
+            { title: t('user:registerPackageName'), dataIndex: 'personaInfo.appName' },
+            { title: t('user:mobileNumber'), dataIndex: 'personaInfo.phoneNo' },
+            { title: t('user:registerTime'), dataIndex: 'personaInfo.addTime', render: (_, { personaInfo }) => <div>{moment(personaInfo.addTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('user:userSource'), dataIndex: 'personaInfo.userSource' },
         ]
 
         const personalDescriptions = [
-            { key: 'userName', dataIndex: 'personaInfo.nameTrue' },
-            { key: 'gender', dataIndex: 'personaInfo.gender' },
-            { key: 'idCardNo', dataIndex: 'personaInfo.idcardNo' },
-            { key: 'fatherName', dataIndex: 'personaInfo.fatherName' },
-            { key: 'birthDay', dataIndex: 'personaInfo.birth' },
-            { key: 'panId', dataIndex: 'personaInfo.panId' },
-            { key: 'education', dataIndex: 'personaInfo.education' },
-            { key: 'maritalStatus', dataIndex: 'personaInfo.marriageStatus' },
-            { key: 'email', dataIndex: 'personaInfo.email' },
-            { key: 'occupation', dataIndex: 'personaInfo.position' },
-            { key: 'salaryRange', dataIndex: 'personaInfo.salaryRange' },
-            { key: 'address', dataIndex: 'personaInfo.address' },
+            { title: t('user:userName'), dataIndex: 'personaInfo.nameTrue' },
+            { title: t('user:gender'), dataIndex: 'personaInfo.gender' },
+            { title: t('user:idCardNo'), dataIndex: 'personaInfo.idcardNo' },
+            { title: t('user:fatherName'), dataIndex: 'personaInfo.fatherName' },
+            { title: t('user:birthDay'), dataIndex: 'personaInfo.birth' },
+            { title: t('user:panId'), dataIndex: 'personaInfo.panId' },
+            { title: t('user:education'), dataIndex: 'personaInfo.education' },
+            { title: t('user:maritalStatus'), dataIndex: 'personaInfo.marriageStatus' },
+            { title: t('user:email'), dataIndex: 'personaInfo.email' },
+            { title: t('user:occupation'), dataIndex: 'personaInfo.position' },
+            { title: t('user:salaryRange'), dataIndex: 'personaInfo.salaryRange' },
+            { title: t('user:address'), dataIndex: 'personaInfo.address' },
         ]
 
         const emergencyContactColumns = [
@@ -179,7 +187,7 @@ export const OrderDetailContent = ({
             { title: t('common:table.uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
         ]
 
-        let identityPhotoRows = ['idcardFrontPhoto', 'idcardBackPhoto', 'idcardPortraitPhoto']
+        let identityPhotoRows = ['idCardFrontPhoto', 'idCardBackPhoto', 'idCardPortraitPhoto']
         if(appInfo.COUNTRY === 'India') {
             identityPhotoRows = ['panPhoto', ...identityPhotoRows]
         }
@@ -199,17 +207,17 @@ export const OrderDetailContent = ({
 
         const OrderInfoTab = () => (
             <div style={{ margin: '16px' }}>
-                <DescriptionsCard titleKey={'orderInfo'} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{collectId}} />
-                <TableCard titleKey='urgeRecord' columns={collectRecordColumns} hook={useLazyGetCollectTodayCollectRecordQuery} queryBody={{collectId}} rowKey='id' />
+                <DescriptionsCard title={t('order:orderInfo')} descriptions={orderInfoDescriptions} hook={useGetCollectTodayOrderDetailQuery} params={{collectId}} />
+                <TableCard title={t('urgeCollection:urgeRecord')} columns={collectRecordColumns} hook={useLazyGetCollectTodayCollectRecordQuery} queryBody={{collectId}} rowKey='id' />
             </div>
         )
 
         const UserInfoTab = () => (
             <div style={{ margin: '16px' }}>
-                <DescriptionsCard titleKey={'registerInfo'} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
-                <PhotoCard titleKey={'identityInfo'} rows={identityPhotoRows} hook={useGetCollectTodayUserDetailQuery} params={{userId}} dataSourceKey='userImage'/>
-                <DescriptionsCard titleKey={'personalInfo'} descriptions={personalDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
-                <SinglePageTableCard titleKey={'emergencyContact'} columns={emergencyContactColumns} hook={useGetCollectTodayUserDetailQuery} params={{userId}} rowKey='contact' dataSourceKey='emergencyContacts' />
+                <DescriptionsCard title={t('user:registerInfo')} descriptions={registerDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+                <PhotoCard title={t('user:identityInfo')} rows={identityPhotoRows} hook={useGetCollectTodayUserDetailQuery} params={{userId}} dataSourceKey='userImage'/>
+                <DescriptionsCard title={t('user:personalInfo')} descriptions={personalDescriptions} hook={useGetCollectTodayUserDetailQuery} params={{userId}} />
+                <SinglePageTableCard title={t('user:emergencyContact')} columns={emergencyContactColumns} hook={useGetCollectTodayUserDetailQuery} params={{userId}} rowKey='contact' dataSourceKey='emergencyContacts' />
             </div>
         )
 

@@ -1,17 +1,15 @@
 import React from "react";
 import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
-import {useTranslation} from "react-i18next";
 import {InformationCard} from "../../../Cards";
 import {Descriptions as AntDescriptions } from "antd";
-import {i18nCards} from "../../../i18n/cards/translations";
 
 const { Item } = AntDescriptions;
 
 interface IDescriptionsCardProps {
-    titleKey: string,
+    title: string,
     descriptions: {
+        title: string,
         titleTooltip?: React.ReactNode,
-        key: string,
         dataIndex: string; // [useQuery 返回的object的key，多層用.區隔]
         render?: (value:any, data: any) => React.ReactElement
     }[],
@@ -20,21 +18,21 @@ interface IDescriptionsCardProps {
 }
 
 export const DescriptionsCard = ({
-   titleKey, descriptions, hook, params = {}
+  title, descriptions, hook, params = {}
 }:IDescriptionsCardProps) => {
 
-    const { t } = useTranslation(i18nCards.namespace)
     const { data, isFetching } = hook(params)
 
     if(isFetching) return null;
 
     return (
-        <InformationCard title={t(titleKey)}>
+        <InformationCard title={title}>
             <AntDescriptions size="small" bordered>
                 {descriptions.map((part) => {
                     const value = part.dataIndex.split('.').reduce((acc, current) => acc[current], data)
+
                     return (
-                        <Item key={part.key} label={(part.titleTooltip && <div>{t(part.key)}{part.titleTooltip}</div>) || t(part.key)}>{
+                        <Item key={part.dataIndex} label={(part.titleTooltip && <div>{part.title}{part.titleTooltip}</div>) || part.title}>{
                             (part.render && part.render(value, data)) ||
                             value ||
                             '-'}

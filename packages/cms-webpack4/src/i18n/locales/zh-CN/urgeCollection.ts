@@ -50,5 +50,6 @@ export default {
     amountDue: '应还金额',
     helper: {
         overAmountDue: '输入金额不得大于应还金额'
-    }
+    },
+    urgeRecord: '催收纪录'
 }

@@ -50,5 +50,6 @@ export default {
     amountDue: 'Amount Due',
     helper: {
         overAmountDue: 'The entered amount must not exceed the amount due.'
-    }
+    },
+    urgeRecord: 'Collections Record'
 }

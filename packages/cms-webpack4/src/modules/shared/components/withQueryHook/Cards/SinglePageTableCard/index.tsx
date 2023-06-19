@@ -1,13 +1,11 @@
 import React from "react";
-import {useTranslation} from "react-i18next";
-import {i18nCards} from "../../../i18n/cards/translations";
 import {InformationCard} from "../../../Cards";
 import {ProTable} from "@ant-design/pro-components";
 import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {QueryDefinition} from "@reduxjs/toolkit/query";
 
 interface ISinglePageTableCardProps {
-    titleKey: string,
+    title: string,
     columns: {
         title: string | (() => React.ReactElement),
         key: string,
@@ -21,14 +19,13 @@ interface ISinglePageTableCardProps {
 }
 
 export const SinglePageTableCard = ({
-    titleKey, hook, params, rowKey, columns, dataSourceKey
+   title, hook, params, rowKey, columns, dataSourceKey
 }: ISinglePageTableCardProps) => {
-    const { t } = useTranslation((i18nCards.namespace))
 
     const { data, isFetching } = hook(params);
 
     return (
-        <InformationCard title={t(titleKey)}>
+        <InformationCard title={title}>
             <ProTable
                 bordered
                 dataSource={(dataSourceKey?data && data[dataSourceKey]:data)}

@@ -1,17 +1,15 @@
 import React from "react";
 import {InformationCard} from "../../../Cards";
-import {useTranslation} from "react-i18next";
-import {i18nCards} from "../../../i18n/cards/translations";
 import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {QueryDefinition} from "@reduxjs/toolkit/query";
 import {Descriptions} from "antd";
-import {WaterMark} from "@ant-design/pro-components";
 import {ZoomInImage} from "../../../Images";
+import {useTranslation} from "react-i18next";
 
 const { Item } = Descriptions
 
 interface IPhotoCardProps {
-    titleKey: string,
+    title: string,
     rows: string[],
     hook: UseQuery<QueryDefinition<any, any, any, any>>,
     params: any,
@@ -19,21 +17,21 @@ interface IPhotoCardProps {
 }
 
 export const PhotoCard = ({
-    titleKey, hook, params, dataSourceKey, rows
+                              title, hook, params, dataSourceKey, rows
 }: IPhotoCardProps) => {
-    const { t } = useTranslation(i18nCards.namespace);
     const { data, isFetching } = hook(params);
+    const { t } = useTranslation();
 
     if(isFetching) return null;
 
     const dataSource = dataSourceKey ? data[dataSourceKey]: data
 
     return(
-        <InformationCard title={t(titleKey)}>
+        <InformationCard title={title}>
             <Descriptions size="small" bordered layout="vertical" column={{ xs: 1, sm: 2, md: 2, lg: 4 }}>
                 {
                     rows.map((part) => (
-                        <Item key={part} label={t(`${part}.${appInfo.COUNTRY}`)}>
+                        <Item key={part} label={t(`user:${part}.${appInfo.COUNTRY}`)}>
                             <ZoomInImage image={dataSource[part]} />
                         </Item>
                     ))

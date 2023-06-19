@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {i18nCards} from "../../../i18n/cards/translations";
 import {InformationCard} from "../../../Cards";
 import {ProTable} from "@ant-design/pro-components";
 import {UseLazyQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {QueryDefinition} from "@reduxjs/toolkit/query";
 
 interface ITableCardProps {
-    titleKey?: string,
+    title?: string,
     columns: {
         title: string | (() => React.ReactElement),
         key: string,
@@ -20,10 +19,10 @@ interface ITableCardProps {
 }
 
 export const TableCard = ({
-    titleKey, hook, queryBody, rowKey, columns
+   title, hook, queryBody, rowKey, columns
 }: ITableCardProps) => {
     const [searchParams, setSearchParams] = useState({pageNum: 1, pageSize: 10})
-    const { t } = useTranslation(i18nCards.namespace)
+    const { t } = useTranslation()
 
     const [triggerGetList, { currentData, isFetching }] = hook({
         pollingInterval: 0,
@@ -49,7 +48,7 @@ export const TableCard = ({
     }, [searchParams])
 
     return (
-        <InformationCard title={t(titleKey)}>
+        <InformationCard title={title}>
             <ProTable
                 bordered
                 loading={isFetching}
