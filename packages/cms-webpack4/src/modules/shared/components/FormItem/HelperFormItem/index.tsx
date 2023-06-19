@@ -8,7 +8,7 @@ interface IHelperFormItemProps {
     children: React.ReactNode;
     label: string
     name: string
-    help: string
+    help: string | React.ReactElement
     required?: boolean
     layout?: any
     style?: React.CSSProperties;
