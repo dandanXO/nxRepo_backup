@@ -1,7 +1,6 @@
 import React from "react";
-import {Form, InputNumber, Modal, Radio, Space, TimePicker} from "antd";
+import {Form, InputNumber, Modal, Radio, TimePicker} from "antd";
 import {useTranslation} from "react-i18next";
-import {i18nUrgeCollection} from "../../../../../i18n/urgeCollection/translations";
 import {useEnum} from "../../../../shared/constants/useEnum";
 import TextArea from "antd/es/input/TextArea";
 import {HelperFormItem} from "../../../../shared/components/FormItem";
@@ -29,9 +28,9 @@ interface IUrgeModalProps {
 export const UrgeModal = ({
    open, handleCloseModal, collectId, userId, onAdded, amountDue
 }: IUrgeModalProps) => {
-    const { t } = useTranslation(i18nUrgeCollection.namespace)
+    const { t } = useTranslation()
     const [ postTodayPhoneUrgeRecord, { isLoading }] = usePostCollectOverDuePhoneUrgeRecordMutation();
-    const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum(i18nUrgeCollection.namespace)
+    const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum('urgeCollection')
     const [ form] = Form.useForm();
 
     const onOk = () => {
@@ -60,8 +59,8 @@ export const UrgeModal = ({
             <Item
                 {...layout}
                 name='generateLink'
-                label={t('generateLink')}
-                tooltip={t('tooltip.repayLink')}
+                label={t('urgeCollection:generateLink')}
+                tooltip={t('urgeCollection:tooltip.repayLink')}
                 required
             >
                 <Group buttonStyle='solid'>
@@ -91,13 +90,13 @@ export const UrgeModal = ({
                         return (
                             <HelperFormItem
                                 layout={layout}
-                                label={t('repayAmount')}
-                                help={`${t('amountDue')} : ${formatPrice(amountDue)}`}
+                                label={t('urgeCollection:repayAmount')}
+                                help={`${t('urgeCollection:amountDue')} : ${formatPrice(amountDue)}`}
                                 name='partialMoney'
                                 required
                                 rules={[
                                     { required: true, type: 'number', min:1 },
-                                    { validator: (_,value) => value > amountDue ? Promise.reject(t('helper.overAmountDue')): Promise.resolve()}
+                                    { validator: (_,value) => value > amountDue ? Promise.reject(t('urgeCollection:helper.overAmountDue')): Promise.resolve()}
                                 ]}
                                 style={{ marginTop: '-10px', marginBottom: '-10px' }}
                             >
@@ -118,15 +117,15 @@ export const UrgeModal = ({
         <Item
             {...layout}
             name='ptpTime'
-            label={t('ptpTime')}
+            label={t('urgeCollection:ptpTime')}
             required
             rules={[
-                { required: true,  message: `${t('keyIn')}${t('ptpTime')}` },
+                { required: true,  message: `${t('common:keyIn')}${t('urgeCollection:ptpTime')}` },
             ]}
             style={{ marginTop: '-10px' }}
         >
             <TimePicker
-                placeholder={t('placeholder.select')}
+                placeholder={t('common:placeholder.select')}
                 format={'HH:mm'}
                 minuteStep={15}
             />
@@ -135,7 +134,7 @@ export const UrgeModal = ({
 
     return open && (
         <Modal
-            title={t('addUrge')}
+            title={t('urgeCollection:addUrge')}
             open={open}
             onCancel={() => {
                 handleCloseModal()
@@ -161,7 +160,7 @@ export const UrgeModal = ({
                 <Item
                     {...layout}
                     name='contactPerson'
-                    label={t('contactPerson')}
+                    label={t('urgeCollection:contactPerson')}
                     required
                 >
                     <Group buttonStyle='solid'>
@@ -182,7 +181,7 @@ export const UrgeModal = ({
                 <Item
                     {...layout}
                     name='followUpResult'
-                    label={t('followUpResult')}
+                    label={t('urgeCollection:followUpResult')}
                     required
                     style={{ marginTop: '-10px' }}
                 >
@@ -223,11 +222,11 @@ export const UrgeModal = ({
                 <HelperFormItem
                     layout={layout}
                     name='trackingRecord'
-                    label={t('trackingRecord')}
-                    help={t('addTrackingRecordHelp')}
+                    label={t('urgeCollection:trackingRecord')}
+                    help={t('urgeCollection:addTrackingRecordHelp')}
                     required
                     rules={[
-                        { required: true, message: `${t('keyIn')}${t('trackingRecord')}` },
+                        { required: true, message: `${t('common:keyIn')}${t('urgeCollection:trackingRecord')}` },
                     ]}
                     style={{ marginTop: '-10px'}}
                 >

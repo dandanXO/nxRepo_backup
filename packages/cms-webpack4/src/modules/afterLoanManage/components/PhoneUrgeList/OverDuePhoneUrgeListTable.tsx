@@ -10,7 +10,6 @@ import { formatPrice } from "../../../shared/utils/format/formatPrice";
 import moment from "moment";
 import { CheckCircleTwoTone, InfoCircleOutlined } from "@ant-design/icons";
 import {useEnum} from "../../../shared/constants/useEnum";
-import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
 import {useGetCollectOverDueCollectorListQuery} from "../../api/CollectOverDueApi";
 import {useLazyGetCollectOverDuePhoneUrgeListQuery} from "../../api/OverDuePhoneUrgeApi";
 import {CollectOverDuePhoneUrgeListItem} from "../../api/types/getCollectOverDuePhoneUrgeList";
@@ -57,7 +56,7 @@ export const OverDuePhoneUrgeListTable = () => {
         collectorData = data
     }
 
-    const { t } = useTranslation(i18nUrgeCollection.namespace)
+    const { t } = useTranslation()
     const { OrderLabelEnum, OverDueStageEnum, FollowUpResultEnum } = useEnum();
     const history = useHistory();
     const location = useLocation();
@@ -69,7 +68,7 @@ export const OverDuePhoneUrgeListTable = () => {
     const collectorListEnum = collectorData?.reduce((acc, current)=> {
         acc.set(current.collectorId, { text: current.collectorName})
         return acc
-    }, new Map().set('', { text: t('noRestriction') }))
+    }, new Map().set('', { text: t('common:noRestriction') }))
 
     const columns: ProColumns[] = [
         {
@@ -77,13 +76,13 @@ export const OverDuePhoneUrgeListTable = () => {
             key: 'operate',
             valueType: "option",
             render: (_, record,) => {
-                return <a key="editable" onClick={() => handleClickPromote(record.userId, record.collectId)} >{t('followUp')}</a>
+                return <a key="editable" onClick={() => handleClickPromote(record.userId, record.collectId)} >{t('urgeCollection:followUp')}</a>
             },
         },
-        { title: t('orderNo'), dataIndex: 'orderNo', key: 'orderNo', hideInSearch: true },
-        { title: t('appName'), dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || '' },
+        { title: t('urgeCollection:orderNo'), dataIndex: 'orderNo', key: 'orderNo', hideInSearch: true },
+        { title: t('urgeCollection:appName'), dataIndex: 'appName', key: 'appName', initialValue: searchParams.appName || '' },
         {
-            title: t('orderLabel'),
+            title: t('urgeCollection:orderLabel'),
             dataIndex: 'orderLabel',
             key: 'orderLabel',
             initialValue: searchParams.orderLabel || '',
@@ -95,10 +94,10 @@ export const OverDuePhoneUrgeListTable = () => {
                 return <div style={{ textAlign: 'center'}}>{orderLabelStatus? <Tag color={orderLabelStatus?.color}>{orderLabelStatus?.text}</Tag>: '-'}</div>
             },
         },
-        { title: t('userName'), dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || '' },
-        { title: t('phone'), dataIndex: 'phone', key: 'phone', initialValue: searchParams.phone || '', render: (_, { phone }) => <Typography>{phone.substring(0, 3) + "*".repeat(phone.length - 6) + phone.substring(phone.length - 3)}</Typography>},
+        { title: t('urgeCollection:userName'), dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || '' },
+        { title: t('urgeCollection:phone'), dataIndex: 'phone', key: 'phone', initialValue: searchParams.phone || '', render: (_, { phone }) => <Typography>{phone.substring(0, 3) + "*".repeat(phone.length - 6) + phone.substring(phone.length - 3)}</Typography>},
         {
-            title: t('stage'),
+            title: t('urgeCollection:stage'),
             dataIndex: 'stage',
             key: 'stage',
             initialValue: searchParams.stage || '',
@@ -109,14 +108,14 @@ export const OverDuePhoneUrgeListTable = () => {
                 allowClear: false
             }
         },
-        { title: t('overdueDays'), dataIndex: 'overdueDays', key: 'overdueDays', initialValue: searchParams.overdueDays || '' },
-        { title: t('outstandingBalance'), dataIndex: 'outstandingBalance', key: 'outstandingBalance', hideInSearch: true,  render: (_, { outstandingBalance }) => <Typography>{formatPrice(Number(outstandingBalance) || 0)}</Typography>},
-        { title: t('lastOpenAppTime'), dataIndex: 'lastOpenAppTime', key: 'lastOpenAppTime', hideInSearch: true, render: (_, { lastOpenAppTime }) => <Typography>{(lastOpenAppTime && moment(lastOpenAppTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
-        { title: t('latestRepaymentCodeAcquisitionTime'), dataIndex: 'latestRepaymentCodeAcquisitionTime', key: 'latestRepaymentCodeAcquisitionTime', hideInSearch: true, render: (_, { latestRepaymentCodeAcquisitionTime }) => <Typography>{(latestRepaymentCodeAcquisitionTime && moment(latestRepaymentCodeAcquisitionTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
-        { title: t('followUpCount'), dataIndex: 'followUpCount', key: 'followUpCount', hideInSearch: true },
-        { title: t('contactable'), dataIndex: 'contactable', key: 'contactable', hideInSearch: true, render: (_, { contactable }) => contactable? <div style={{ textAlign: 'center'}}><CheckCircleTwoTone twoToneColor="#52c41a" /></div>: null},
+        { title: t('urgeCollection:overdueDays'), dataIndex: 'overdueDays', key: 'overdueDays', initialValue: searchParams.overdueDays || '' },
+        { title: t('urgeCollection:outstandingBalance'), dataIndex: 'outstandingBalance', key: 'outstandingBalance', hideInSearch: true,  render: (_, { outstandingBalance }) => <Typography>{formatPrice(Number(outstandingBalance) || 0)}</Typography>},
+        { title: t('urgeCollection:lastOpenAppTime'), dataIndex: 'lastOpenAppTime', key: 'lastOpenAppTime', hideInSearch: true, render: (_, { lastOpenAppTime }) => <Typography>{(lastOpenAppTime && moment(lastOpenAppTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
+        { title: t('urgeCollection:latestRepaymentCodeAcquisitionTime'), dataIndex: 'latestRepaymentCodeAcquisitionTime', key: 'latestRepaymentCodeAcquisitionTime', hideInSearch: true, render: (_, { latestRepaymentCodeAcquisitionTime }) => <Typography>{(latestRepaymentCodeAcquisitionTime && moment(latestRepaymentCodeAcquisitionTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
+        { title: t('urgeCollection:followUpCount'), dataIndex: 'followUpCount', key: 'followUpCount', hideInSearch: true },
+        { title: t('urgeCollection:contactable'), dataIndex: 'contactable', key: 'contactable', hideInSearch: true, render: (_, { contactable }) => contactable? <div style={{ textAlign: 'center'}}><CheckCircleTwoTone twoToneColor="#52c41a" /></div>: null},
         {
-            title: t('followUpResult'),
+            title: t('urgeCollection:followUpResult'),
             dataIndex: 'followUpResult',
             key: 'followUpResult',
             initialValue: searchParams.followUpResult || '',
@@ -131,22 +130,22 @@ export const OverDuePhoneUrgeListTable = () => {
             }
         },
         {
-            title: ()=><div>{t('ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
+            title: ()=><div>{t('urgeCollection:ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('urgeCollection:ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
             dataIndex: 'ptpTime',
             key: 'ptpTime',
             hideInSearch: true,
         },
-        { title: t('trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true },
-        { title: t('recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{(recentTrackingTime && moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
-        { title: t('collectorName'), dataIndex: 'collectorName', key: 'collectorName', initialValue: searchParams.collectorName || '', hideInSearch: true },
-        { title: t('collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInSearch: !ableToGetCollectorList, hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
+        { title: t('urgeCollection:trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true },
+        { title: t('urgeCollection:recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{(recentTrackingTime && moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
+        { title: t('urgeCollection:collectorName'), dataIndex: 'collectorName', key: 'collectorName', initialValue: searchParams.collectorName || '', hideInSearch: true },
+        { title: t('urgeCollection:collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInSearch: !ableToGetCollectorList, hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
     ]
     if(isSuperAdmin) {
         columns.splice(1,0,{
-            title: t('merchantName'), dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true
+            title: t('urgeCollection:merchantName'), dataIndex: 'merchantName', key: 'merchantName', hideInSearch: true
         })
         columns.splice(2,0,{
-            title: t('merchantName'), dataIndex: 'merchantId', key: 'merchantId', initialValue: searchParams.merchantId || '', hideInTable: true, valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true, allowClear: false}
+            title: t('urgeCollection:merchantName'), dataIndex: 'merchantId', key: 'merchantId', initialValue: searchParams.merchantId || '', hideInTable: true, valueType: 'select', valueEnum: merchantListEnum, fieldProps: { showSearch: true, allowClear: false}
         })
     }
 

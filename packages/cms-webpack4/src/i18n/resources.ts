@@ -1,16 +1,15 @@
-import { i18nCommon } from "./common";
-import {i18nUrgeCollection} from "./urgeCollection/translations";
-import {i18nCards} from "../modules/shared/components/i18n/cards/translations";
+import commonZHCN from './locales/zh-CN/common'
+import urgeCollectionZHCN from "./locales/zh-CN/urgeCollection";
+import commonENUS from './locales/en-US/common'
+import urgeCollectionENUS from "./locales/en-US/urgeCollection";
 
 export default {
     "zh-CN": {
-        [i18nCommon.namespace]: i18nCommon.translation["zh-CN"],
-        [i18nCards.namespace]: i18nCards.translation["zh-CN"],
-        [i18nUrgeCollection.namespace]: i18nUrgeCollection.translation["zh-CN"]
+        common: commonZHCN,
+        urgeCollection: urgeCollectionZHCN
     },
     "en-US": {
-        [i18nCommon.namespace]: i18nCommon.translation["en-US"],
-        [i18nCards.namespace]: i18nCards.translation["en-US"],
-        [i18nUrgeCollection.namespace]: i18nUrgeCollection.translation["en-US"]
+        common: commonENUS,
+        urgeCollection: urgeCollectionENUS
     }
 }

@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {i18nUrgeCollection} from "../../../../i18n/urgeCollection/translations";
 import {useEnum} from "../../../shared/constants/useEnum";
 import {useGetAdminSwitchQuery} from "../../../shared/api/commonApi";
 import {
@@ -40,26 +39,26 @@ export const OrderDetailContent = ({
     const { data: adminSwitch, isFetching: adminSwitchFetching } = useGetAdminSwitchQuery(null);
     const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectTodayOrderDetailQuery({collectId});
 
-    const { t } = useTranslation(i18nUrgeCollection.namespace)
+    const { t } = useTranslation()
     const {
         OrderStatusEnum,
         OrderLabelEnum,
         FollowUpResultEnum,
         EmergencyContactEnum,
         GenerateRePayLinkEnum
-    } = useEnum(i18nUrgeCollection.namespace);
+    } = useEnum('urgeCollection');
 
     const fetched = !orderInfoFetching && !adminSwitchFetching
 
     const onUrgeRecordAdded = (generateLinkType, link) => {
         setShowModal(false)
-        messageApi.success(t('saved'))
+        messageApi.success(t('common:saved'))
         if(generateLinkType !== 'NONE') {
             modalApi.confirm({
                 title: GenerateRePayLinkEnum[generateLinkType].copyLabel,
                 icon: null,
                 content: link,
-                okText: t('clickToCopy'),
+                okText: t('common:clickToCopy'),
                 onOk: () => {
                     navigator.clipboard.writeText(link)
                     setShowCopied(true)
@@ -71,7 +70,7 @@ export const OrderDetailContent = ({
 
     useEffect(() => {
         if(showCopied) {
-            messageApi.success(t('linkCopied')).then(() => setShowCopied(false))
+            messageApi.success(t('common:linkCopied')).then(() => setShowCopied(false))
         }
     }, [showCopied])
 
@@ -104,7 +103,7 @@ export const OrderDetailContent = ({
             { key: 'loanAmount', dataIndex: 'loanAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
             { key: 'disburseAmount', dataIndex: 'disburseAmount', render: (value) => <div>{formatPrice(value) || 0 }</div> },
             {
-                titleTooltip: <Tooltip title={t('tooltip.amountDue')}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf', margin: '0 5px' }} /></Tooltip>,
+                titleTooltip: <Tooltip title={t('urgeCollection:tooltip.amountDue')}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf', margin: '0 5px' }} /></Tooltip>,
                 key: 'amountDue',
                 dataIndex: 'amountDue',
                 render: (value) => <div>{formatPrice(value) || 0 }</div>
@@ -126,12 +125,12 @@ export const OrderDetailContent = ({
         }
 
         const collectRecordColumns = [
-            { title: t('trackingTime'), key: 'trackingTime', dataIndex: 'trackingTime', render: (_, { trackingTime }) =><div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-            { title: t('stage'), key: 'overdueStage', dataIndex: 'overdueStage' },
-            { title: t('contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson' },
-            { title: t('phone'), key: 'mobileNumber', dataIndex: 'mobileNumber' },
+            { title: t('urgeCollection:trackingTime'), key: 'trackingTime', dataIndex: 'trackingTime', render: (_, { trackingTime }) =><div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('urgeCollection:stage'), key: 'overdueStage', dataIndex: 'overdueStage' },
+            { title: t('urgeCollection:contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson' },
+            { title: t('urgeCollection:phone'), key: 'mobileNumber', dataIndex: 'mobileNumber' },
             {
-                title: t('followUpResult'),
+                title: t('urgeCollection:followUpResult'),
                 key: 'followUpResult',
                 dataIndex: 'followUpResult',
                 render: (_, { followUpResult }) => {
@@ -140,12 +139,12 @@ export const OrderDetailContent = ({
                 }
             },
             {
-                title: ()=><div>{t('ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
+                title: ()=><div>{t('urgeCollection:ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
                 key: 'ptpTime',
                 dataIndex: 'ptpTime'
             },
-            { title: t('trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord' },
-            { title: t('collectorName'), key: 'collector', dataIndex: 'collector' },
+            { title: t('urgeCollection:trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord' },
+            { title: t('urgeCollection:collectorName'), key: 'collector', dataIndex: 'collector' },
         ]
 
         const registerDescriptions = [
@@ -173,11 +172,11 @@ export const OrderDetailContent = ({
         ]
 
         const emergencyContactColumns = [
-            { title: t('table.contactType'), key: 'contact', dataIndex: 'contact', render: (_, { contact }) => <div>{EmergencyContactEnum[contact] && EmergencyContactEnum[contact].text}</div>  },
-            { title: t('table.relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
-            { title: t('table.contactName'), key: 'contactName', dataIndex: 'contactName' },
-            { title: t('table.contactPhone'), key: 'contactPhone', dataIndex: 'contactPhone' },
-            { title: t('table.uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('common:table.contactType'), key: 'contact', dataIndex: 'contact', render: (_, { contact }) => <div>{EmergencyContactEnum[contact] && EmergencyContactEnum[contact].text}</div>  },
+            { title: t('common:table.relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
+            { title: t('common:table.contactName'), key: 'contactName', dataIndex: 'contactName' },
+            { title: t('common:table.contactPhone'), key: 'contactPhone', dataIndex: 'contactPhone' },
+            { title: t('common:table.uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
         ]
 
         let identityPhotoRows = ['idcardFrontPhoto', 'idcardBackPhoto', 'idcardPortraitPhoto']
@@ -186,16 +185,16 @@ export const OrderDetailContent = ({
         }
 
         const contactListColumns = [
-            { title: t('table.contactName'), key: 'name', dataIndex: 'name' },
-            { title: t('table.phone'), key: 'phone', dataIndex: 'phone' },
-            { title: t('table.lastAddedTime'), key: 'lastUpdateTime', dataIndex: 'lastUpdateTime', render: (_, { lastUpdateTime }) => <div>{moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('common:table.contactName'), key: 'name', dataIndex: 'name' },
+            { title: t('common:table.phone'), key: 'phone', dataIndex: 'phone' },
+            { title: t('common:table.lastAddedTime'), key: 'lastUpdateTime', dataIndex: 'lastUpdateTime', render: (_, { lastUpdateTime }) => <div>{moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
         ]
 
         const smsLogsColumns = [
-            { title: t('table.sendPhoneNumber'), key: 'phone', dataIndex: 'phone' },
-            { title: t('table.smsContent'), key: 'content', dataIndex: 'content' },
-            { title: t('table.smsSendType'), key: 'content', dataIndex: 'direction' },
-            { title: t('table.sendTime'), key: 'time', dataIndex: 'time', render: (_, { time }) => <div>{moment(time).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('common:table.sendPhoneNumber'), key: 'phone', dataIndex: 'phone' },
+            { title: t('common:table.smsContent'), key: 'content', dataIndex: 'content' },
+            { title: t('common:table.smsSendType'), key: 'content', dataIndex: 'direction' },
+            { title: t('common:table.sendTime'), key: 'time', dataIndex: 'time', render: (_, { time }) => <div>{moment(time).format('YYYY-MM-DD HH:mm:ss')}</div> },
         ]
 
         const OrderInfoTab = () => (
@@ -227,15 +226,15 @@ export const OrderDetailContent = ({
         )
 
         let tabsItems = [
-            { label: t('tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
-            { label: t('tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
+            { label: t('common:tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
+            { label: t('common:tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
         ]
 
         if (showContactListTab) {
-            tabsItems = [...tabsItems, { label: t('tab.contractList'), key: 'contactList', children: <ContactListTab /> }]
+            tabsItems = [...tabsItems, { label: t('common:tab.contractList'), key: 'contactList', children: <ContactListTab /> }]
         }
         if (showSMSTab) {
-            tabsItems = [...tabsItems, { label: t('tab.smsMessage'), key: 'smsMessage', children: <SMSMessageTab /> }]
+            tabsItems = [...tabsItems, { label: t('common:tab.smsMessage'), key: 'smsMessage', children: <SMSMessageTab /> }]
         }
 
         return tabsItems
@@ -251,7 +250,7 @@ export const OrderDetailContent = ({
                         type='primary'
                         onClick={()=>setShowModal(true)}
                     >
-                        {t('addUrge')}
+                        {t('urgeCollection:addUrge')}
                     </Button>}
             />
         )
