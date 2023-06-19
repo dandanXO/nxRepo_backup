@@ -7,20 +7,20 @@
     "fatherName": "Father\"s Name",
     "gender": "Gender",
     "idCardBackPhoto": {
+        "Bangladesh": "Back side of NID",
         "India": "Back side of Aadheaar card",
-        "Pakistan": "Back side of CNIC",
-        "Bangladesh": "Back side of NID"
+        "Pakistan": "Back side of CNIC"
     },
     "idCardFrontPhoto": {
+        "Bangladesh": "Front side of NID",
         "India": "Front side of Aadheaar card",
-        "Pakistan": "Front side of CNIC",
-        "Bangladesh": "Front side of NID"
+        "Pakistan": "Front side of CNIC"
     },
     "idCardNo": "ID Number",
     "idCardPortraitPhoto": {
+        "Bangladesh": "Portrait",
         "India": "Portrait",
-        "Pakistan": "Portrait",
-        "Bangladesh": "Portrait"
+        "Pakistan": "Portrait"
     },
     "identityInfo": "Identity Information",
     "maritalStatus": "Marital Status",

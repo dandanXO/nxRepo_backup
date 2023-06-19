@@ -23,9 +23,9 @@
     "merchantName": "商户名",
     "orderLabel": "订单标签",
     "orderLabelStatus": {
+        "extension": "展期",
         "newLoan": "首贷",
-        "reLoan": "复贷",
-        "extension": "展期"
+        "reLoan": "复贷"
     },
     "orderNo": "订单编号",
     "outstandingBalance": "当前帐单金额",

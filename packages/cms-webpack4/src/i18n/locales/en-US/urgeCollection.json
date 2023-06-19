@@ -23,9 +23,9 @@
     "merchantName": "Merchant Name",
     "orderLabel": "Order Label",
     "orderLabelStatus": {
+        "extension": "Extension",
         "newLoan": "New Loan",
-        "reLoan": "Re-Loan",
-        "extension": "Extension"
+        "reLoan": "Re-Loan"
     },
     "orderNo": "Order No.",
     "outstandingBalance": "Outstanding Balance",

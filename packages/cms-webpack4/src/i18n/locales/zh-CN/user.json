@@ -7,20 +7,20 @@
     "fatherName": "父亲姓名",
     "gender": "性别",
     "idCardBackPhoto": {
+        "Bangladesh": "NID卡反面",
         "India": "Aadhaar card 反面",
-        "Pakistan": "CNIC卡反面",
-        "Bangladesh": "NID卡反面"
+        "Pakistan": "CNIC卡反面"
     },
     "idCardFrontPhoto": {
+        "Bangladesh": "NID卡正面",
         "India": "Aadhaar card 正面",
-        "Pakistan": "CNIC卡正面",
-        "Bangladesh": "NID卡正面"
+        "Pakistan": "CNIC卡正面"
     },
     "idCardNo": "身份证号",
     "idCardPortraitPhoto": {
+        "Bangladesh": "人像",
         "India": "人像",
-        "Pakistan": "人像",
-        "Bangladesh": "人像"
+        "Pakistan": "人像"
     },
     "identityInfo": "身份信息",
     "maritalStatus": "婚姻状况",
