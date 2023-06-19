@@ -12,11 +12,18 @@ export function* bindBankcardSaga(action: PayloadAction<InitialStateType['bindBa
 
     try {
         if (action.payload.confirm) {
+            let mobileDataValue = action.payload.mobileWalletAccount;
+            if (action.payload.mobileWallet) {
+                // NOTE: 用戶沒填0時，給後端自動補0
+                if (String(action.payload.mobileWalletAccount).charAt(0) !== '0' || String(action.payload.mobileWalletAccount).length === 10) {
+                    mobileDataValue = '0' + action.payload.mobileWalletAccount;
+                }
+            }
             yield put(
                 API.endpoints.postBankBindSaveToPK.initiate({
                     bankAccNr: action.payload.bankAccNr,
                     mobileWallet: action.payload.mobileWallet,
-                    mobileWalletAccount: action.payload.mobileWalletAccount,
+                    mobileWalletAccount: mobileDataValue,
                     walletVendor: action.payload.walletVendor.toString(),
                     bankCode: action.payload.bankCode.toString(),
                     bankName: action.payload.walletName,
