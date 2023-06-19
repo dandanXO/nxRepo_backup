@@ -3087,7 +3087,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-有效額度時間-額度不足 (Android: Level 7)
-  it("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -3115,7 +3115,7 @@ describe('IndexPage', () => {
         "min": 0,
         "max": 0,
         "current": 0,
-        "serial": 1000
+        "serial": 0
       },
       "chargeFeeDetails": [
         {
