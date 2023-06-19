@@ -118,6 +118,11 @@ module.exports = {
                   height: '5px',
                   borderRadius: '8px',
               },
+              '.quota-slider-track-disable-0': {
+                background: 'var(--custom_bg_secondary)',
+                height: '5px',
+                borderRadius: '8px',
+              },
               '.quota-slider-track-disable-1': {
                   background: 'var(--custom_bg_secondary)',
                   height: '5px',
