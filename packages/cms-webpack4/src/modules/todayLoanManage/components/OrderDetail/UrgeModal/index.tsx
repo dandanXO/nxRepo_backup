@@ -6,6 +6,9 @@ import TextArea from "antd/es/input/TextArea";
 import {HelperFormItem} from "../../../../shared/components/FormItem";
 import {formatPrice} from "../../../../shared/utils/format/formatPrice";
 import {usePostCollectTodayPhoneUrgeRecordMutation} from "../../../api/CollectTodayPhoneUrgeApi";
+import {fieldValidator} from "../../../../shared/validate/fieldValidator";
+import {urgeCollectRecordSchema} from "./urgeCollectRecordSchema";
+import {AmountInput} from "../../../../shared/components/Inputs";
 
 
 const { Item } = Form
@@ -29,6 +32,7 @@ export const UrgeModal = ({
     open, handleCloseModal, collectId, userId, onAdded, amountDue
 }: IUrgeModalProps) => {
     const { t } = useTranslation()
+    const formSchema= urgeCollectRecordSchema({ partialMoneyMax: amountDue })
     const [ postTodayPhoneUrgeRecord, { isLoading }] = usePostCollectTodayPhoneUrgeRecordMutation();
     const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum('urgeCollection')
     const [ form] = Form.useForm();
@@ -95,16 +99,11 @@ export const UrgeModal = ({
                                 name='partialMoney'
                                 required
                                 rules={[
-                                    { required: true, type: 'number', min:1 },
-                                    { validator: (_,value) => value > amountDue ? Promise.reject(t('urgeCollection:helper.overAmountDue')): Promise.resolve()}
+                                    { validator: (rule, value) => fieldValidator(rule['field'], value, formSchema)}
                                 ]}
                                 style={{ marginTop: '-10px', marginBottom: '-10px' }}
                             >
-                                <InputNumber
-                                    style={{ width: '200px'}}
-                                    formatter={(value) => value && formatPrice(Number(value.toString()))}
-                                    controls={false}
-                                />
+                                <AmountInput />
                             </HelperFormItem>
                         )
                     }
@@ -120,7 +119,7 @@ export const UrgeModal = ({
             label={t('urgeCollection:ptpTime')}
             required
             rules={[
-                { required: true,  message: `${t('common:keyIn')}${t('urgeCollection:ptpTime')}` },
+                { required: true,  message: `${t('zod:required')}${t('urgeCollection:ptpTime')}` },
             ]}
             style={{ marginTop: '-10px' }}
         >
@@ -226,7 +225,7 @@ export const UrgeModal = ({
                     help={t('urgeCollection:addTrackingRecordHelp')}
                     required
                     rules={[
-                        { required: true, message: `${t('common:keyIn')}${t('urgeCollection:trackingRecord')}` },
+                        { required: true, message: `${t('zod:required')}${t('urgeCollection:trackingRecord')}` },
                     ]}
                     style={{ marginTop: '-10px'}}
                 >
