@@ -50,6 +50,7 @@ export const OrderDetailContent = ({
     const { t } = useTranslation()
     const {
         OrderStatusEnum,
+        CurrentDayOverDueStageEnum,
         OrderLabelEnum,
         FollowUpResultEnum,
         EmergencyContactEnum,
@@ -134,8 +135,8 @@ export const OrderDetailContent = ({
 
         const collectRecordColumns = [
             { title: t('urgeCollection:trackingTime'), key: 'trackingTime', dataIndex: 'trackingTime', render: (_, { trackingTime }) =><div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-            { title: t('urgeCollection:stage'), key: 'overdueStage', dataIndex: 'overdueStage' },
-            { title: t('urgeCollection:contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson' },
+            { title: t('urgeCollection:stage'), key: 'overdueStage', dataIndex: 'overdueStage', render: (_, { overdueStage }) => CurrentDayOverDueStageEnum[overdueStage]?.text || overdueStage },
+            { title: t('urgeCollection:contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson', render: (_, { contactPerson }) => EmergencyContactEnum[contactPerson]?.text || contactPerson },
             { title: t('urgeCollection:phone'), key: 'mobileNumber', dataIndex: 'mobileNumber' },
             {
                 title: t('urgeCollection:followUpResult'),
