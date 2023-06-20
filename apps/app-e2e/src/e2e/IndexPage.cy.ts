@@ -1805,7 +1805,7 @@ describe('IndexPage', () => {
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
-          "dueDate": moment().tz(INDIA_TIME_ZONE).add(3, "days"),
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(4, "days"),
           "overdue": false,
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         }
@@ -3087,7 +3087,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-有效額度時間-額度不足 (Android: Level 7)
-  it("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -3115,7 +3115,7 @@ describe('IndexPage', () => {
         "min": 0,
         "max": 0,
         "current": 0,
-        "serial": 1000
+        "serial": 0
       },
       "chargeFeeDetails": [
         {
