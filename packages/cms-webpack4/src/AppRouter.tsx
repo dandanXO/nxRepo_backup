@@ -42,6 +42,7 @@ import { AfterLoanManageRoutes } from "./modules/afterLoanManage/routes";
 import en_US from 'antd/es/locale/en_US'
 import zh_CN from 'antd/es/locale/zh_CN'
 import i18next from "i18next";
+import {useTranslation} from "react-i18next";
 
 const langMap = {
     "zh-CN": zh_CN,
@@ -56,6 +57,7 @@ const history = createHashHistory({
 
 export const AppRouter = () => {
     const {pathname,previousPathname} = useSelector(selectSearchParams);
+    const {} = useTranslation();
     const dispatch = useDispatch();
     useEffect(() => {
         // Listen for changes to the current location.

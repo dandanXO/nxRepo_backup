@@ -176,7 +176,7 @@ export const OverDuePhoneUrgeListTable = () => {
         loading={overDuePhoneUrgeListFetching}
         dataSource={overDuePhoneUrgeListResponse?.records || [] }
         columns={columns}
-        rowKey='overDueId'
+        rowKey='collectId'
         search={{
             span: searchSpan,
             labelWidth: 'auto',
