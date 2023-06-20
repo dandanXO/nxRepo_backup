@@ -143,6 +143,7 @@ export const UrgeModal = ({
             width='752px'
             confirmLoading={isLoading}
             cancelButtonProps={{ disabled : isLoading }}
+            okText={t('common:confirm')}
         >
             <Form
                 disabled={isLoading}

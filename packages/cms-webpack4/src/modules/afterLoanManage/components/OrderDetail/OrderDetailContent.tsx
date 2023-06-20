@@ -22,6 +22,7 @@ import {
     useLazyGetCollectOverDueSMSLogQuery,
     useLazyGetCollectOverDueCollectRecordQuery
 } from "../../api/CollectOverDueApi";
+import i18next from "i18next";
 
 const amountUnitMap = {
     India: '₹',
@@ -248,7 +249,7 @@ export const OrderDetailContent = ({
         }
 
         return tabsItems
-    }, [fetched])
+    }, [fetched, i18next.language])
 
     const Tab = useCallback(() => {
         if (!tabsItems) return null

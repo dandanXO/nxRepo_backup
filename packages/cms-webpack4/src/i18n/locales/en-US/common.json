@@ -4,6 +4,7 @@
         "overDueDetails": "Overdue Details"
     },
     "clickToCopy": "Click to copy",
+    "confirm": "Confirm",
     "contact": {
         "borrower": "Borrower",
         "emergency": "Emergency Contact{{count}}",

@@ -8,12 +8,12 @@
     "gender": "Gender",
     "idCardBackPhoto": {
         "Bangladesh": "Back side of NID",
-        "India": "Back side of Aadheaar card",
+        "India": "Back side of Aadhaar card",
         "Pakistan": "Back side of CNIC"
     },
     "idCardFrontPhoto": {
         "Bangladesh": "Front side of NID",
-        "India": "Front side of Aadheaar card",
+        "India": "Front side of Aadhaar card",
         "Pakistan": "Front side of CNIC"
     },
     "idCardNo": "ID Number",
@@ -32,7 +32,7 @@
     },
     "personalInfo": "Personal information",
     "registerChannel": "Channel",
-    "registerInfo": "Registration information",
+    "registerInfo": "Registration Information",
     "registerPackageName": "Package Name",
     "registerTime": "Registration Time",
     "salaryRange": "Salary Range",

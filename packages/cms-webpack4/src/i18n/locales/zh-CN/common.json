@@ -4,6 +4,7 @@
         "overDueDetails": "订单详情"
     },
     "clickToCopy": "点击复制",
+    "confirm": "确定",
     "contact": {
         "borrower": "本人",
         "emergency": "紧急联络人{{count}}",
