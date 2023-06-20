@@ -2,9 +2,9 @@ import { useLazyGetMerchantListQuery } from "../../api/merchantListApi";
 import { useEffect, useState } from "react";
 import { getIsSuperAdmin } from "../../storage/getUserInfo";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const useGetMerchantEnum = () => {
-
     const isSuperAdmin = getIsSuperAdmin();
     const { t } = useTranslation();
 
@@ -24,7 +24,7 @@ const useGetMerchantEnum = () => {
             });
             setMerchantListEnum(merchantList)
         }
-    }, [isMerchantListDataSuccess])
+    }, [isMerchantListDataSuccess, i18next.language])
 
     return { triggerGetMerchantList, merchantListEnum }
 }
