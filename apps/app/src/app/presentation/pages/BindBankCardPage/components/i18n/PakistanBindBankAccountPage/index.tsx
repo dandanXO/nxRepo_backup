@@ -152,7 +152,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                     mobileWalletAccount: mobileData.data,
                     walletVendor: walletValue?.value ?? '',
                     walletName: walletValue?.label ?? '',
-                    bankCode: bankAccountValue.value,
+                    bankCode: bankAccountValue.data.value,
                 })
               );
             }
@@ -183,13 +183,13 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                    confirm: false,
                    paymentMethod: chooseBindMethodValue,
                    cardholderName: props.cardholderName,
-                   bankName: bankDropList[bankAccountValue.value],
+                   bankName: bankAccountValue.data.label,
+                    bankCode: bankAccountValue.data.value,
                    bankAccNr: bankcardNoData.data,
                    mobileWallet: false,
                    mobileWalletAccount: '',
                    walletVendor: '',
                    walletName: '',
-                   bankCode: bankAccountValue.value,
                 })
               );
             }
