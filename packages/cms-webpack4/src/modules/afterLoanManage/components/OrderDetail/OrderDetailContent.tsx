@@ -91,17 +91,8 @@ export const OrderDetailContent = ({
 
         const isSuperAdmin = getIsSuperAdmin();
 
-        // 取得後台使用者開關 (是否可查看 tab -通訊錄 & 手機短信)
-        // 在參數配置配有 "是否屏蔽當日到期前訂單通訊錄" 開關。
-        // 開關沒開 = 顯示   (不用管到不到期） (開關有開 todayCollect.contactSwitch = true  , 開關沒開 todayCollect.contactSwitch = false)
-        // 開關打開 + 有到期 = 顯示   (detailTabControl.contactSwitch = true , isNotOverdue = false -> addTab = true)
-        // 開關打開 + 沒到期 = 不顯示 (detailTabControl.contactSwitch = true , isNotOverdue = true -> addTab = false)
-        const contactSwitch = adminSwitch.todayCollect.contactSwitch;
-        const smsSwitch = adminSwitch.todayCollect.smsSwitch;
-        const overDueDate = moment(orderInfo.expireTime).startOf('day')
-        const isOverDue = !moment().startOf('day').isBefore(overDueDate)
-        const showContactListTab = !contactSwitch || isOverDue
-        const showSMSTab = !smsSwitch || isOverDue
+        // 取得後台使用者開關 (是否可查看 tab - 手機短信)
+        const showSMSTab = !adminSwitch.todayCollect.smsSwitch;
 
         const orderInfoDescriptions = [
             { title: t('order:orderNumber'), dataIndex: 'orderNumber' },
@@ -239,11 +230,9 @@ export const OrderDetailContent = ({
         let tabsItems = [
             { label: t('common:tab.orderInfo'), key: 'orderInfo', children: <OrderInfoTab /> },
             { label: t('common:tab.userInfo'), key: 'userInfo', children: <UserInfoTab /> },
+            { label: t('common:tab.contractList'), key: 'contactList', children: <ContactListTab /> }
         ]
 
-        if (showContactListTab) {
-            tabsItems = [...tabsItems, { label: t('common:tab.contractList'), key: 'contactList', children: <ContactListTab /> }]
-        }
         if (showSMSTab) {
             tabsItems = [...tabsItems, { label: t('common:tab.smsMessage'), key: 'smsMessage', children: <SMSMessageTab /> }]
         }
