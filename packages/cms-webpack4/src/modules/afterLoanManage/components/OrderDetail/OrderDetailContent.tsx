@@ -181,7 +181,7 @@ export const OrderDetailContent = ({
             { title: t('common:table.uploadTime'), key: 'uploadTime', dataIndex: 'uploadTime', render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
         ]
 
-        let identityPhotoRows = ['idCardFrontPhoto', 'idCardBackPhoto', 'idCardPortraitPhoto']
+        let identityPhotoRows = ['idcardFrontPhoto', 'idcardBackPhoto', 'idcardPortraitPhoto']
         if(appInfo.COUNTRY === 'India') {
             identityPhotoRows = ['panPhoto', ...identityPhotoRows]
         }

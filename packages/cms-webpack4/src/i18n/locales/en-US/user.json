@@ -6,18 +6,18 @@
     "emergencyContact": "Emergency Contact",
     "fatherName": "Father\"s Name",
     "gender": "Gender",
-    "idCardBackPhoto": {
+    "idCardNo": "ID Number",
+    "idcardBackPhoto": {
         "Bangladesh": "Back side of NID",
         "India": "Back side of Aadhaar card",
         "Pakistan": "Back side of CNIC"
     },
-    "idCardFrontPhoto": {
+    "idcardFrontPhoto": {
         "Bangladesh": "Front side of NID",
         "India": "Front side of Aadhaar card",
         "Pakistan": "Front side of CNIC"
     },
-    "idCardNo": "ID Number",
-    "idCardPortraitPhoto": {
+    "idcardPortraitPhoto": {
         "Bangladesh": "Portrait",
         "India": "Portrait",
         "Pakistan": "Portrait"
