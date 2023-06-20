@@ -144,58 +144,8 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     validateConfirmMobileData();
     // validateIban();
 
-    if (!mobileData.isValidation || !confirmMobileData.isValidation) return;
+    return mobileData.isValidation && confirmMobileData.isValidation
 
-    const mobileWalletAccount =
-      props.bindCardDropListData && props.bindCardDropListData.availableWalletVendors[walletValue.value];
-
-    if (props.isPostBankBindSaveToPKMutationLoading) return;
-
-    let mobileDataValue = mobileData.data;
-    // NOTE: 用戶沒填0時，給後端自動補0
-    if (String(mobileData.data).charAt(0) !== '0' || String(mobileData.data).length === 10) {
-      mobileDataValue = '0' + mobileData.data;
-    }
-
-    props
-      .triggerPostBankBindSaveToPKMutation({
-        bankAccNr: '',
-        mobileWallet: true,
-        mobileWalletAccount: mobileDataValue,
-        walletVendor: (mobileWalletAccount && mobileWalletAccount.code) || '',
-        // iban: iBanData.data,
-      })
-      .then((data: any) => {
-        // console.log('data:', data);
-        // TODO: refactor me
-        if (data && data.error) {
-          SentryModule.captureException(data.error);
-        } else {
-          // Notice: bind account successfully
-          Modal.alert({
-            show: true,
-            mask: true,
-            title: i18next.t('modal.Notice', { ns: 'common' }) as string,
-            content: i18next.t('modal.Success', { ns: 'common' }) as string,
-            confirmText: i18next.t('modal.Confirm', { ns: 'common' }) as string,
-            maskClosable: true,
-            enableClose: false,
-            enableIcon: false,
-            onConfirm: () => {
-              window.location.href = 'innerh5://127.0.0.1';
-            },
-          });
-        }
-      })
-      .catch((error: CustomAxiosError) => {
-        // console.log('error:', error);
-        // const error = new Error();
-        // error.name = "triggerPostBankBindSaveToPKMutation"
-        // if(err) error.message = JSON.stringify(err)
-        // console.log("error", error);
-        //   SentryModule.captureException(error);
-        SentryModule.captureException(error);
-      });
   }, [
     mobileData.isValidation,
     mobileData.data,
@@ -226,5 +176,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     // onIbanBlur,
     // Form
     confirm,
+    validateMobileWalletAccount,
+    validateConfirmMobileData
   };
 };
