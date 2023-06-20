@@ -70,6 +70,7 @@ const MyCouponListPage = () => {
                 couponContent={coupon.couponContent || ''}
                 status={listStatus === 'Usable' ? 'normal' : 'disabled'}
                 buttonText={listStatus === 'Usable' ? 'USE NOW' : coupon.redeemed ? 'USED' : 'EXPIRED'}
+                onClick={()=> navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`)}
               />
             );
           })
