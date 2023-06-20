@@ -100,6 +100,12 @@ module.exports = {
           '.open-index-button': {
               background: 'var(--custom_bg_homepage_button) !important',
           },
+          // LoadingMask
+          '.pulseLoader':{
+            '> span ':{
+                backgroundColor:'var(--primary_main) !important',
+            }
+          },
           // 拉霸
           '.slider': {
               width: '100%',

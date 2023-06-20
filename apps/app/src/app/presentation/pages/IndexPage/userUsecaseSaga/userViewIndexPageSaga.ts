@@ -13,10 +13,13 @@ import { SystemCaseActions } from '../../../../usecaseFlow/type/systemUsecaseSag
 import { systemCallGetUserInfoSaga } from '../../../../usecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { systemCountdownManagerSaga } from './systemCountdownManagerSaga';
+import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
 
 export function* userViewIndexPageSaga(action: any) {
   // NOTICE: 防止錯誤後無法重新 watch
   try {
+    yield put(loadingSlice.actions.updatePageLoading(true));
+   
     // console.log('[app][saga] userViewIndexPageSaga');
 
     // const token: string = yield select((state: RootState) => state.app.token);
@@ -53,5 +56,7 @@ export function* userViewIndexPageSaga(action: any) {
     }
   } catch (error) {
     yield catchSagaError(error);
+  } finally {
+      yield put(loadingSlice.actions.updatePageLoading(false));
   }
 }

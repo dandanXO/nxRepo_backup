@@ -15,9 +15,12 @@ import RejectPaymentItem from './RejectPaymentItem';
 import UnpaidPaymentItem from './UnpaidPaymentItem';
 // @ts-ignore
 import { default as data } from './data.json';
+import { useDispatch } from 'react-redux';
+import { loadingSlice } from '../../../reduxStore/loadingSlice';
 
 const RepaymentPage = () => {
   // console.log('config', data)
+  const dispatch = useDispatch();
   const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
     useLazyGetLoanRecordListQuery({
       pollingInterval: 0,
@@ -35,12 +38,19 @@ const RepaymentPage = () => {
 
   const [listStatus, setListStatus] = useState('Unpaid');
   useEffect(() => {
+    dispatch(loadingSlice.actions.updatePageLoading(true))
     triggerGetList({
       pageNumber: 0,
       pageSize: 500,
       status: statusEnum[listStatus] as GetLoanRecordListRequest['status'],
     });
   }, [listStatus]);
+
+    useEffect(() => {
+        dispatch(loadingSlice.actions.updatePageLoading(isFetching))
+    }, [isFetching]);
+
+
 
   return (
     <Page className="flex flex-col">

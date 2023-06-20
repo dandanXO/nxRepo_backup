@@ -85,6 +85,7 @@ const RepamentCouponModal = loadable(
 );
 const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
 
+const LoadingMask= loadable(() => import(/* webpackChunkName: "LoadingMask" */ '../components/LoadingMask'));
 
 // NOTICE: prefetch chrome, firefox cannot work
 // https://stackoverflow.com/questions/59074046/why-are-my-prefetched-scripts-not-being-used-webpack
@@ -117,7 +118,7 @@ export const AppRouter = () => {
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
   const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
   const isOrderOverdue = payableRecords && payableRecords?.some((order) => order.overdue === true);
-
+  const pageLoading = useSelector((state:any) => state.pageLoading);
   // NOTICE: 純 H5 在用畫面阻擋
   // if(NativeAppInfo.mode === 'H5' && !isInit) {
   // if(!isInit) {
@@ -130,6 +131,7 @@ export const AppRouter = () => {
     // new
     posthog.capture('$pageview');
   }, [location]);
+
 
   return (
     <AppDataCollector>
@@ -193,6 +195,7 @@ export const AppRouter = () => {
        ].indexOf(location.pathname) > -1 && <TabBar hasOrder={isOrderOverdue ?? false} />}
 
       {apiBoundary.show && <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message} />}
+      {pageLoading.show && <LoadingMask/>}
       {/*</Suspense>*/}
     </AppDataCollector>
   );

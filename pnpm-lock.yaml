@@ -134,6 +134,7 @@ specifiers:
   react-router-dom: 6.4.3
   react-select: ^5.6.1
   react-slider: ^2.0.4
+  react-spinners: ^0.13.8
   react-test-renderer: 18.2.0
   redux-saga: ^1.2.2
   regenerator-runtime: 0.13.7
@@ -215,6 +216,7 @@ dependencies:
   react-router-dom: 6.4.3_biqbaboplfbrettd7655fr4n2y
   react-select: 5.6.1_76xb3yweo7na2qx66xuhq3p4rm
   react-slider: 2.0.4_react@18.2.0
+  react-spinners: 0.13.8_biqbaboplfbrettd7655fr4n2y
   redux-saga: 1.2.2
   regenerator-runtime: 0.13.7
   rxjs: 7.8.0
@@ -18461,6 +18463,16 @@ packages:
       '@babel/runtime': 7.21.5
       invariant: 2.2.4
       prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-spinners/0.13.8_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-3e+k56lUkPj0vb5NDXPVFAOkPC//XyhKPJjvcGjyMNPWsBKpplfeyialP74G7H7+It7KzhtET+MvGqbKgAqpZA==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
