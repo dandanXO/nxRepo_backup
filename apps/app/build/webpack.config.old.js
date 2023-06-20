@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
@@ -12,6 +13,17 @@ const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+// NOTICE: react-apexcharts 裡面有舊版本的 .bablerc，跟目前專案的不符合，include node_modules 會導致專案與node_modules 下 .babelrc 不一致
+const filePath = path.resolve(__dirname, '../../../node_modules/react-apexcharts/.babelrc')
+fs.exists(filePath, function(exists) {
+  if(exists) {
+    console.log('[react-apexcharts/.babelrc] File exists. Deleting now ...');
+    fs.unlinkSync(filePath);
+  } else {
+    console.log('[react-apexcharts/.babelrc] File not found, so not deleting.');
+  }
+});
 
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
@@ -113,7 +125,7 @@ module.exports = (config, context) => {
             {
               loader: path.join(__dirname, './custom/my-loader.js'),
               options: {
-                cacheDirectory: false
+                cacheDirectory: false,
               }
             }
           ]

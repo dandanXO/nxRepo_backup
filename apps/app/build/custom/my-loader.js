@@ -4,6 +4,9 @@ module.exports = require("babel-loader").custom(babel => {
 
   // Extract the custom options in the custom plugin
   function myPlugin(api, { opt1, opt2 }) {
+    // console.log("my-loader-babel.api", api);
+    // console.log("my-loader-babel.opt1", opt1);
+    // console.log("my-loader-babel.opt2", opt2);
 
     return {
       visitor: {},
@@ -26,8 +29,11 @@ module.exports = require("babel-loader").custom(babel => {
     config(cfg, { customOptions }) {
       if (cfg.hasFilesystemConfig()) {
         // Use the normal config
+        // console.log("Use the normal config.cfg.options", cfg.options)
         return cfg.options;
       }
+      // console.log("cfg.options", cfg.options)
+      // console.log("cfg.options.plugins", cfg.options.plugins)
 
       return {
         ...cfg.options,
