@@ -203,7 +203,7 @@ export const OverDuePhoneUrgeListTable = () => {
                             })
                         }}
                     >
-                        {searchText}
+                        {t('common:search')}
                     </Button>
                 </Space>]
         }}
