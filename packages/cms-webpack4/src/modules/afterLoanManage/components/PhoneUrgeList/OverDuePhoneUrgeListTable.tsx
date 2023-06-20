@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
 import { Button, Space, Tag, Tooltip, Typography } from "antd";
 import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
@@ -37,6 +37,7 @@ const searchFormLayout = {
 
 export const OverDuePhoneUrgeListTable = () => {
     const { searchList, searchParams, setSearchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
+    const [initialSearchParams, setInitialSearchParams] = useState(searchParams)
     const [ triggerGetList, { currentData: overDuePhoneUrgeListResponse, isFetching: overDuePhoneUrgeListFetching }] = useLazyGetCollectOverDuePhoneUrgeListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -159,10 +160,11 @@ export const OverDuePhoneUrgeListTable = () => {
     }
 
     useEffect(() => {
-        if(Object.keys(searchParams).length === 0) {
+        if(Object.keys(initialSearchParams).length === 0) {
             triggerGetList(searchList);
-        } else if (JSON.stringify(searchParams) === JSON.stringify(searchList)) {
+        } else if (JSON.stringify(initialSearchParams) === JSON.stringify(searchList)) {
             triggerGetList(searchList);
+            setInitialSearchParams({})
         }
     }, [searchList])
 

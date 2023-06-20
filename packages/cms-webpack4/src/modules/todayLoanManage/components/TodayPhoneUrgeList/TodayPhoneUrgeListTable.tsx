@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
 import usePageSearchParams from "../../../shared/hooks/usePageSearchParams";
 import { useTranslation } from "react-i18next";
@@ -38,6 +38,7 @@ const searchSpan  = {
 export const TodayPhoneUrgeListTable = () => {
 
     const { searchList, searchParams, setSearchList, handleToDetailPage } = usePageSearchParams({searchListParams: initSearchList})
+    const [initialSearchParams, setInitialSearchParams] = useState(searchParams)
     const [ triggerGetList, { currentData: currentTodayPhoneUrgeListResponse, isFetching: todayPhoneUrgeListFetching}] = useLazyGetCollectTodayPhoneUrgeListQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
@@ -160,10 +161,11 @@ export const TodayPhoneUrgeListTable = () => {
     }
 
     useEffect(() => {
-        if(Object.keys(searchParams).length === 0) {
+        if(Object.keys(initialSearchParams).length === 0) {
             triggerGetList(searchList);
-        } else if (JSON.stringify(searchParams) === JSON.stringify(searchList)) {
+        } else if (JSON.stringify(initialSearchParams) === JSON.stringify(searchList)) {
             triggerGetList(searchList);
+            setInitialSearchParams({})
         }
     }, [searchList])
 
