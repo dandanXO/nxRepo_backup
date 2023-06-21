@@ -24,7 +24,7 @@ export const HelperFormItem = ({
             {...layout}
             label={label}
             required={required}
-            style={{ lineHeight: 1.5715, marginBottom: '1px', ...style}}
+            style={{ lineHeight: 1.5715, marginBottom: '2px', ...style}}
             help={false}
         >
             <Item
