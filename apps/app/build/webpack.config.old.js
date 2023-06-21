@@ -14,6 +14,7 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+
 // NOTICE: react-apexcharts 裡面有舊版本的 .bablerc，跟目前專案的不符合，include node_modules 會導致專案與node_modules 下 .babelrc 不一致
 const filePath = path.resolve(__dirname, '../../../node_modules/react-apexcharts/.babelrc')
 fs.exists(filePath, function(exists) {
@@ -70,7 +71,8 @@ if (process.env.NODE_COUNTRY === 'in') {
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
-    devtool: "inline-source-map",
+    // NOTE: [Webpack-Devtool](https://webpack.js.org/configuration/devtool/)
+    devtool: !isProduction ? "inline-source-map" : "source-map",
     // NOTICE: 被 NX project 控制住
     // entry: {
       // main: path.resolve(__dirname, '../src/main.tsx'),
@@ -109,10 +111,6 @@ module.exports = (config, context) => {
             // \\ for Windows, / for macOS and Linux
             /node_modules[\\/]core-js/,
             /node_modules[\\/]webpack[\\/]buildin/,
-            // /node_modules[\\/]react-apexcharts/
-            // /node_modules/,
-            // node_modules/.pnpm/@floating-ui+core@1.0.2/node_modules/@floating-ui/core/dist/floating-ui.core.browser.min.mjs
-            // /node_modules[\\/].pnpm\/@floating-ui+core@1.0.2[\\/]node_modules[\\/]@floating-ui[\\/]core[\\/]dist[\\/]floating-ui.core.browser.min.mjs/,
           ],
           use: [
             // {
@@ -200,7 +198,7 @@ module.exports = (config, context) => {
 
   finalConfig = merge(finalConfig, {
     optimization: {
-      minimize: true,
+      minimize: isProduction,
       minimizer: [
         new UglifyJsPlugin({
           parallel: true,
