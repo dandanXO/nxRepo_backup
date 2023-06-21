@@ -24,7 +24,7 @@ export const HelperFormItem = ({
             {...layout}
             label={label}
             required={required}
-            style={style}
+            style={{ lineHeight: 1.5715, marginBottom: '1px', ...style}}
             help={false}
         >
             <Item
@@ -44,9 +44,9 @@ export const HelperFormItem = ({
                     ({ getFieldError }) => {
                         const filedErrors = getFieldError(name)
                         if(filedErrors.length > 0) {
-                            return <div style={{ color: 'red', marginBottom: '3px'}}>{filedErrors.map((part) => <div key={part}>{part}</div>)}</div>
+                            return <div style={{ color: 'red', lineHeight: 1.5715 }}>{filedErrors.map((part) => <div key={part}>{part}</div>)}</div>
                         } else {
-                            return <div style={{ color: 'gray', marginBottom: '3px' }}>{help}</div>
+                            return <div style={{ color: 'gray', lineHeight: 1.5715 }}>{help}</div>
                         }
                     }
                 }
