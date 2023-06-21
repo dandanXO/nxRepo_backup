@@ -20,7 +20,7 @@ class LayoutMenu extends Component {
         let truePath = '/' + pathArr[1];
 
         if(truePath === "/cms") {
-            truePath = '/' + pathArr[1] +'/' + pathArr[2]
+            truePath = '/' + pathArr[1] + '/' + pathArr[2] + (pathArr[3] ? ('/' + pathArr[3]) : '')
         }
 
         this.state = {
@@ -133,7 +133,7 @@ class LayoutMenu extends Component {
             }
 
             if(truePath === "/cms") {
-                truePath = '/' + pathArr[1] +'/' + pathArr[2]
+                truePath = '/' + pathArr[1] +'/' + pathArr[2] + (pathArr[3] ? ('/' + pathArr[3]) : '')
             }
 
             this.setState({
