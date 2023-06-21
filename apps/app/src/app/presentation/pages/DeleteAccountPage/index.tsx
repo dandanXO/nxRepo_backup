@@ -10,8 +10,6 @@ import { Button } from '../../components/layouts/Button';
 
 const DeleteAccountPage = () => {
     const navigate = useNavigate();
-    const domain: string = useSelector((state: RootState) => state.app.androidAppInfo?.domain) || '';
-
     return (
         <Page className={`flex flex-col`}>
             <Navigation
@@ -20,13 +18,25 @@ const DeleteAccountPage = () => {
                     navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
                 }}
             />
-            <div className={`p-4`}>
-                <div></div>
+            <div className={`p-4 pt-0 grow flex flex-col`}>
+                <div className='grow'>
+                    <div className='font-bold text-base text-ctext-primary mb-4'>Before deleting your account, please read the following carefully:</div>
+                    <div className={`text-ctext-secondary text-xs`}>
+                        <ul className="list-outside list-decimal pl-3">
+                            <li>Deleting your account is a permanent action and cannot be undone. All of your data, including loan history, repayment schedules, and personal information, will be lost.</li>
+                            <li>Deleting your account will not cancel any outstanding loans or affect your repayment obligations. You will still be responsible for repaying any outstanding balances.</li>
+                            <li>If you have any outstanding loans, please ensure that they are fully repaid before deleting your account.</li>
+                            <li>After successfully deleting the account, the APP will continue to retain transaction data for financial auditing purposes.</li>
+                            <li>After the account is deleted, the personal identification information associated with the account will take 7 business days to be fully removed.</li>
+                            <li>By continuing, you acknowledge that you have read and understand the above information, and that you are fully responsible for any consequences that may result from deleting your account, including the continued repayment of any outstanding loans.</li>
+                            <li>If you have any concerns or issues with your account or loans, please contact our customer support team before deleting your account.</li>
+                        </ul>
+                    </div>
+                </div>
                 <div className={`flex`}>
                     <div className={`mr-1.5 w-full`}>
                         <Button
                             onClick={() => {
-                                //   if (isRepayTypesFetching) return;
                                 navigate(`${PagePathEnum.AccountVerificationPage}?token=${getToken()}`);
                             }}
                             text={'Continue'}
