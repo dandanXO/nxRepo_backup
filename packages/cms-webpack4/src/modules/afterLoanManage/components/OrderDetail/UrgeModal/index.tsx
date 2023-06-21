@@ -34,7 +34,7 @@ export const UrgeModal = ({
     const { t } = useTranslation()
     const formSchema = urgeCollectRecordSchema({ partialMoneyMax: amountDue });
     const [ postTodayPhoneUrgeRecord, { isLoading }] = usePostCollectOverDuePhoneUrgeRecordMutation();
-    const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum('urgeCollection')
+    const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum()
     const [ form] = Form.useForm();
 
     const onOk = () => {

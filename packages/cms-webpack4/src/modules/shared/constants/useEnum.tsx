@@ -9,9 +9,9 @@ export const useEnum = (translationNameSpase?:string) => {
 
     const OrderLabelEnum = {
         '': { text: t('noRestriction')  },
-        'NewLoan': { text: t('orderLabelStatus.newLoan'), color:'orange'},
-        'ReLoan': { text: t('orderLabelStatus.reLoan'), color: 'blue'},
-        'Extension': { text: t('orderLabelStatus.extension'), color: 'green'}
+        'NewLoan': { text: t('common:orderLabelStatus.newLoan'), color:'orange'},
+        'ReLoan': { text: t('common:orderLabelStatus.reLoan'), color: 'blue'},
+        'Extension': { text: t('common:orderLabelStatus.extension'), color: 'green'}
     }
 
     const OrderStatusEnum = appInfo.COUNTRY !== 'Bangladesh' ? {
@@ -21,9 +21,9 @@ export const useEnum = (translationNameSpase?:string) => {
         '7': { text: '订单拒绝', color: 'red' },
         '8': { text: '放款中', color: 'purple' },
         '9': { text: '还款中', color: 'blue' },
-        '10': { text: t('orderStatus.completed'), color: 'green' },
+        '10': { text: t('common:orderStatus.completed'), color: 'green' },
         '11': { text: '放款失败', color: 'red' },
-        '12': { text: t('orderStatus.overDue'), color: 'orange' },
+        '12': { text: t('common:orderStatus.overDue'), color: 'orange' },
     } : {
         '': { text: t('noRestriction') },
         '1': { text: '机审中', color: 'default' },
@@ -32,9 +32,9 @@ export const useEnum = (translationNameSpase?:string) => {
         '7': { text: '订单拒绝', color: 'red' },
         '8': { text: '放款中', color: 'purple' },
         '9': { text: '还款中', color: 'blue' },
-        '10': { text: t('orderStatus.completed'), color: 'green' },
+        '10': { text: t('common:orderStatus.completed'), color: 'green' },
         '11': { text: '放款失败', color: 'red' },
-        '12': { text: t('orderStatus.overDue'), color: 'orange' },
+        '12': { text: t('common:orderStatus.overDue'), color: 'orange' },
     }
 
     const OverDueStageEnum = {
@@ -52,27 +52,27 @@ export const useEnum = (translationNameSpase?:string) => {
 
     const FollowUpResultEnum : Record<TFollowUpResult & '', { text: string, color?: string }> = {
         '': { text: t('noRestriction') },
-        Promise: { text: t('followUpResultStatus.Promise'), color: '#1890FF'},
-        FinancialDifficulties: { text: t('followUpResultStatus.FinancialDifficulties'), color: '#13C2C2'},
-        Missed: { text: t('followUpResultStatus.Missed'), color: 'orange'},
-        TurnedOff: { text: t('followUpResultStatus.TurnedOff'), color: 'orange'},
-        InvalidPhoneNumber: { text: t('followUpResultStatus.InvalidPhoneNumber'), color: 'black'},
-        BadAttitude: { text: t('followUpResultStatus.BadAttitude'), color: 'black'},
-        Other: { text: t('followUpResultStatus.Other'), color: 'black'},
+        Promise: { text: t('common:followUpResultStatus.Promise'), color: '#1890FF'},
+        FinancialDifficulties: { text: t('common:followUpResultStatus.FinancialDifficulties'), color: '#13C2C2'},
+        Missed: { text: t('common:followUpResultStatus.Missed'), color: 'orange'},
+        TurnedOff: { text: t('common:followUpResultStatus.TurnedOff'), color: 'orange'},
+        InvalidPhoneNumber: { text: t('common:followUpResultStatus.InvalidPhoneNumber'), color: 'black'},
+        BadAttitude: { text: t('common:followUpResultStatus.BadAttitude'), color: 'black'},
+        Other: { text: t('common:followUpResultStatus.Other'), color: 'black'},
     }
 
     const EmergencyContactEnum: Record<TContactPerson, { text: string }> = {
-        BORROWER: { text : t('contact.borrower') },
-        EMERGENCY_CONTACT1: { text: t('contact.emergency', { count: 1 }) },
-        EMERGENCY_CONTACT2: { text: t('contact.emergency', { count: 2 }) },
-        CONTACT_LIST: { text: t('contact.list') },
+        BORROWER: { text : t('common:contact.borrower') },
+        EMERGENCY_CONTACT1: { text: t('common:contact.emergency', { count: 1 }) },
+        EMERGENCY_CONTACT2: { text: t('common:contact.emergency', { count: 2 }) },
+        CONTACT_LIST: { text: t('common:contact.list') },
     }
 
     const GenerateRePayLinkEnum: Record<TGenerateRePayLink, { text: string, copyLabel?: 'string' }> = {
         NONE: { text : t('none') },
-        PARTIAL_REPAYMENT: { text : t('partialRepay.button'), copyLabel: t('partialRepay.copyLabel') },
-        REPAYMENT_LINK: { text : t('repayLink.button'), copyLabel: t('repayLink.copyLabel') },
-        EXTENSION_LINK: { text : t('extensionLink.button'), copyLabel: t('extensionLink.copyLabel') },
+        PARTIAL_REPAYMENT: { text : t('urgeCollection:partialRepay.button'), copyLabel: t('urgeCollection:partialRepay.copyLabel') },
+        REPAYMENT_LINK: { text : t('urgeCollection:repayLink.button'), copyLabel: t('urgeCollection:repayLink.copyLabel') },
+        EXTENSION_LINK: { text : t('urgeCollection:extensionLink.button'), copyLabel: t('urgeCollection:extensionLink.copyLabel') },
     }
 
     return {
