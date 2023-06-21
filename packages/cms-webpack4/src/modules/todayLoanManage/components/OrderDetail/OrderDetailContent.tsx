@@ -149,7 +149,7 @@ export const OrderDetailContent = ({
                 }
             },
             {
-                title: ()=><div>{t('urgeCollection:ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
+                title: ()=><div>{t('urgeCollection:ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('urgeCollection:ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
                 key: 'ptpTime',
                 dataIndex: 'ptpTime'
             },
