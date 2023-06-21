@@ -1,6 +1,6 @@
 // NOTE: Dynamic imports are only supported when the '--module' flag is
 //  set to 'es2020', 'es2022', 'esnext', 'commonjs', 'amd', 'system', 'umd', 'node16', or 'nodenext'.
-import loadable from '@loadable/component';
+// import loadableComponent from '@loadable/component';
 import posthog from 'posthog-js';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -17,73 +17,77 @@ import { PagePathEnum } from '../pages/PagePathEnum';
 import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
 
-const AuthPage = loadable(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
-const BankCardListPage = loadable(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));
-const BindBankCardPage = loadable(() => import(/* webpackChunkName: "BindBankCardPage" */ /* webpackPrefetch: true */'../pages/BindBankCardPage'));
-const CustomerServicePage = loadable(
+// NOTICE: 無法以下寫法
+// [ctor is not a function when using React.lazy](https://github.com/facebook/react/issues/15639)
+// const loadable = React.lazy ||loadableComponent;
+
+const AuthPage = React.lazy(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
+const BankCardListPage = React.lazy(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));
+const BindBankCardPage = React.lazy(() => import(/* webpackChunkName: "BindBankCardPage" */ /* webpackPrefetch: true */'../pages/BindBankCardPage'));
+const CustomerServicePage = React.lazy(
   () => import(/* webpackChunkName: "CustomerServicePage" */ '../pages/CustomerServicePage')
 );
-const DisclosureStatementPage = loadable(
+const DisclosureStatementPage = React.lazy(
   () => import(/* webpackChunkName: "DisclosureStatementPage" */ '../pages/DisclosureStatementPage')
 );
-const FinishedRepaymentPage = loadable(
+const FinishedRepaymentPage = React.lazy(
   () => import(/* webpackChunkName: "FinishedRepaymentPage" */ '../pages/FinishedRepaymentPage')
 );
-const RepaymentDetailPage = loadable(
+const RepaymentDetailPage = React.lazy(
   () => import(/* webpackChunkName: "RepaymentDetailPage" */ /* webpackPrefetch: true */ '../pages/RepaymentDetailPage')
 );
-const LoanRecordPage = loadable(() => import(/* webpackChunkName: "RepaymentPage" */ '../pages/RepaymentPage'));
-const OrderStatusPage = loadable(() => import(/* webpackChunkName: "OrderStatusPage" */ '../pages/OrderStatusPage'));
-const MyCouponListPage = loadable(() => import(/* webpackChunkName: "MyCouponListPage" */ '../pages/MyCouponListPage'));
-const OnlineCustomerServicePage = loadable(
+const LoanRecordPage = React.lazy(() => import(/* webpackChunkName: "RepaymentPage" */ '../pages/RepaymentPage'));
+const OrderStatusPage = React.lazy(() => import(/* webpackChunkName: "OrderStatusPage" */ '../pages/OrderStatusPage'));
+const MyCouponListPage = React.lazy(() => import(/* webpackChunkName: "MyCouponListPage" */ '../pages/MyCouponListPage'));
+const OnlineCustomerServicePage = React.lazy(
   () => import(/* webpackChunkName: "OnlineCustomerServicePage" */ '../pages/OnlineCustomerServicePage')
 );
-const IBANFinderPage = loadable(() => import(/* webpackChunkName: "IBANFinderPage" */ '../pages/IBANFinderPage'));
+const IBANFinderPage = React.lazy(() => import(/* webpackChunkName: "IBANFinderPage" */ '../pages/IBANFinderPage'));
 
-const PartnerPage = loadable(() => import(/* webpackChunkName: "PartnerPage" */ '../pages/PartnerPage'));
-const PersonalInfoPage = loadable(() => import(/* webpackChunkName: "PersonalInfoPage" */ '../pages/PersonalInfoPage'));
-const PrivacyPolicyPage = loadable(
+const PartnerPage = React.lazy(() => import(/* webpackChunkName: "PartnerPage" */ '../pages/PartnerPage'));
+const PersonalInfoPage = React.lazy(() => import(/* webpackChunkName: "PersonalInfoPage" */ '../pages/PersonalInfoPage'));
+const PrivacyPolicyPage = React.lazy(
   () => import(/* webpackChunkName: "PrivacyPolicyPage" */ '../pages/PrivacyPolicyPage')
 );
-const QuotaModelPage = loadable(() => import(/* webpackChunkName: "QuotaModelPage" */ '../pages/QuotaModelPage'));
-const UploadedPaymentReceiptPage = loadable(
+const QuotaModelPage = React.lazy(() => import(/* webpackChunkName: "QuotaModelPage" */ '../pages/QuotaModelPage'));
+const UploadedPaymentReceiptPage = React.lazy(
   () => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadedPaymentReceiptPage')
 );
-const UploadPaymentReceiptPage = loadable(
+const UploadPaymentReceiptPage = React.lazy(
   () => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadPaymentReceiptPage')
 );
-const CouponModalContentAndroidWebviewPage = loadable(
+const CouponModalContentAndroidWebviewPage = React.lazy(
   () =>
     import(
       /* webpackChunkName: "CouponModalContentAndroidWebviewPage" */ /* webpackPrefetch: true */ '../pages/CouponModalContentAndroidWebviewPage'
     )
 );
 
-const ApplicationProgressPage = loadable(
+const ApplicationProgressPage = React.lazy(
   () => import(/* webpackChunkName: "ApplicationProgressPage" */ '../pages/ApplicationProgressPage')
 );
-const LoginPage = loadable(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
+const LoginPage = React.lazy(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
 
 // // NOTE: Modal
-const RepaymentModal = loadable(() => import(/* webpackChunkName: "RepaymentModal" */ /* webpackPrefetch: true */ '../modals/RepaymentModal'));
-const AmountRepaidModal = loadable(
+const RepaymentModal = React.lazy(() => import(/* webpackChunkName: "RepaymentModal" */ /* webpackPrefetch: true */ '../modals/RepaymentModal'));
+const AmountRepaidModal = React.lazy(
   () => import(/* webpackChunkName: "AmountRepaidModal" */ /* webpackPrefetch: true */ '../modals/AmountRepaidModal/AmountRepaidModal')
 );
-const ExtendConfirmModal = loadable(
+const ExtendConfirmModal = React.lazy(
   () => import(/* webpackChunkName: "ExtendConfirmModal" */ /* webpackPrefetch: true */ '../modals/ExtendConfirmModal')
 );
-const ExtendModal = loadable(() => import(/* webpackChunkName: "ExtendModal" */ /* webpackPrefetch: true */ '../modals/ExtendModal'));
-const LogoutModal = loadable(() => import(/* webpackChunkName: "LogoutModal" */ '../modals/LogoutModal'));
-const APIBoundaryModal = loadable(
+const ExtendModal = React.lazy(() => import(/* webpackChunkName: "ExtendModal" */ /* webpackPrefetch: true */ '../modals/ExtendModal'));
+const LogoutModal = React.lazy(() => import(/* webpackChunkName: "LogoutModal" */ '../modals/LogoutModal'));
+const APIBoundaryModal = React.lazy(
   () => import(/* webpackChunkName: "APIBoundaryModal" */ '../modals/APIBoundaryModal')
 );
-const PrivacyPolicyModal = loadable(
+const PrivacyPolicyModal = React.lazy(
   () => import(/* webpackChunkName: "PrivacyPolicyModal" */ '../modals/PrivacyPolicyModal')
 );
-const RepamentCouponModal = loadable(
+const RepamentCouponModal = React.lazy(
   () => import(/* webpackChunkName: "RepamentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepamentCouponModal')
 );
-const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
+const IBANFinderModal = React.lazy(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
 
 
 // NOTICE: prefetch chrome, firefox cannot work
@@ -95,8 +99,11 @@ const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderMo
 
 
 // NOTE: preload
-BindBankCardPage.preload();
-RepaymentDetailPage.preload();
+// BindBankCardPage.preload();
+// RepaymentDetailPage.preload();
+// IBANFinderModal.preload();
+
+// NOTE: 不需要預先加載
 // UploadedPaymentReceiptPage.preload();
 // UploadPaymentReceiptPage.preload();
 // CouponModalContentAndroidWebviewPage.preload();
@@ -105,7 +112,6 @@ RepaymentDetailPage.preload();
 // ExtendConfirmModal.preload();
 // ExtendModal.preload();
 // RepamentCouponModal.preload();
-IBANFinderModal.preload();
 
 
 

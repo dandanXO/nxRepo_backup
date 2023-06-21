@@ -14,6 +14,7 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+
 // NOTICE: react-apexcharts 裡面有舊版本的 .bablerc，跟目前專案的不符合，include node_modules 會導致專案與node_modules 下 .babelrc 不一致
 const filePath = path.resolve(__dirname, '../../../node_modules/react-apexcharts/.babelrc')
 fs.exists(filePath, function(exists) {
@@ -70,7 +71,7 @@ if (process.env.NODE_COUNTRY === 'in') {
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
-    devtool: "inline-source-map",
+    devtool: !isProduction ? "inline-source-map" : "source-map",
     // NOTICE: 被 NX project 控制住
     // entry: {
       // main: path.resolve(__dirname, '../src/main.tsx'),
@@ -200,7 +201,7 @@ module.exports = (config, context) => {
 
   finalConfig = merge(finalConfig, {
     optimization: {
-      minimize: true,
+      minimize: isProduction,
       minimizer: [
         new UglifyJsPlugin({
           parallel: true,
