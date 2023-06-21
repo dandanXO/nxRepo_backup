@@ -70,8 +70,7 @@ if (process.env.NODE_COUNTRY === 'in') {
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
-    // devtool: "source-map",
-    devtool: false,
+    devtool: "inline-source-map",
     // NOTICE: 被 NX project 控制住
     // entry: {
       // main: path.resolve(__dirname, '../src/main.tsx'),
@@ -364,6 +363,7 @@ module.exports = (config, context) => {
     }));
   }
 
+  // isProduction
   if (false) {
       // finalConfig.plugins.push(
       //   new CleanWebpackPlugin({
