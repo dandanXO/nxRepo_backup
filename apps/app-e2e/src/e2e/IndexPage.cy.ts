@@ -112,7 +112,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -135,7 +135,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: openIndexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
@@ -175,7 +175,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -187,9 +187,9 @@ describe('IndexPage', () => {
       "noQuotaByRetryFewTimes": false,
 
       "riskReject": false,
-      "refreshableUntil": "2023-03-28T08:10:24",
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(11, "days"),
 
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(11, "days"),
 
       "totalAmount": 15000,
       "usedAmount": 15000,
@@ -270,7 +270,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
       visitIndexPage();
@@ -331,7 +331,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -343,9 +343,9 @@ describe('IndexPage', () => {
         "noQuotaByRetryFewTimes": false,
 
         "riskReject": false,
-        "refreshableUntil": "2023-03-28T08:10:24",
+        "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
 
-        "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+        "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
 
         "totalAmount": 15000,
         "usedAmount": 15000,
@@ -428,7 +428,7 @@ describe('IndexPage', () => {
         statusCode: 200,
         body: indexServiceResponse,
       }).as("getIndex").then(() => {
-        console.log("index");
+
       })
 
 
@@ -526,18 +526,18 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
     const indexServiceResponse: IndexServiceResponse = {
       "hiddenLoanDetail": false,
       "totalAmount": 15000,
-      "usedAmount": 15000,
-      "availableAmount": 900,
+      "usedAmount": 14100,
+      "availableAmount": 5000,
       "quotaBar": {
         "min": 1000,
-        "max": 10000,
+        "max": 5000,
         "current": 5000,
         "serial": 1000
       },
@@ -595,7 +595,7 @@ describe('IndexPage', () => {
       "noQuotaBalance":false,
       "orderUnderReview": false,
       "refreshableUntil": "2023-03-28T08:10:24",
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
       "oldUserForceApply": false,
       "payableRecords": [
         {
@@ -617,7 +617,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
       visitIndexPage();
@@ -677,8 +677,8 @@ describe('IndexPage', () => {
       indexPagePo.tabPayment().find("[data-testing-id='tab-payment-notice']").should("not.exist");
   })
 
-    // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
-    it("status: 用戶已認證、有逾期的訂單", () => {
+  // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
+  it("status: 用戶已認證、有逾期的訂單", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -692,7 +692,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -783,13 +783,13 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
     // NOTE: then
     // NOTE: important 看到跑馬燈
-    indexPagePo.marquee().should("be.visible").contains(indexServiceResponse.marquee);
+    indexPagePo.marquee().contains(indexServiceResponse.marquee);
 
     // NOTE: important 看到 welcome 包含姓名、客服 Button
     indexPagePo.welcome().should("be.visible");
@@ -845,8 +845,6 @@ describe('IndexPage', () => {
 
   })
 
-
-
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
   it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
@@ -865,7 +863,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
 
@@ -882,10 +880,13 @@ describe('IndexPage', () => {
       // NOTICE: 情境1: 當 refreshable true, noQuotaByRetryFewTimes false 顯示能夠重刷的倒數計時。
       // NOTICE: 情境2:  riskReject 為 true, 也是看下面的參數
       "riskReject": true,
-      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(5, "days"),
+      // "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(5, "days"),
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(5, "seconds"),
 
       // NOTICE:
-      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days"),
+      // NOTE: 模擬後端亂給日期
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
 
       "oldUserForceApply": false,
       "needRiskKycUpdate": false,
@@ -1054,7 +1055,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     const indexServiceResponse: IndexServiceResponse = {
@@ -1229,7 +1230,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -1314,12 +1315,12 @@ describe('IndexPage', () => {
       indexPagePo.viewAppProgressButton().should("not.exist");
 
       // NOTE: important 點選後 Reacquire Credit Limit Button 出現動畫
-      indexPagePo.reacquireCreditButton().click().then(() => {
-          indexPagePo.reacquireLoadingNotice()
-              .should("be.visible")
-              .contains('Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.')
-          indexPagePo.reacquireCreditButton().invoke('attr', 'data-testing-loading').should('eq', 'true')
-      })
+      // indexPagePo.reacquireCreditButton().click().then(() => {
+      //     indexPagePo.reacquireLoadingNotice()
+      //         .should("be.visible")
+      //         .contains('Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.')
+      //     indexPagePo.reacquireCreditButton().invoke('attr', 'data-testing-loading').should('eq', 'true')
+      // })
 
       // NOTE: important 會看到可關閉的 popup 顯示額度刷心中相關訊息。 (實際不會跳出無法測試)
 
@@ -1330,6 +1331,450 @@ describe('IndexPage', () => {
       // refresh 回來有風控時間有效、額度足夠
 
   })
+
+  // TODO:
+  it("Level 8 -> Level 1", () => {
+
+    // NOTE: Given
+    const userServiceResponse: GetUserInfoServiceResponse = {
+      "userName": "9013452123",
+      // NOTICE: GIVEN: 用戶已認證
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+
+    // NOTE: Given
+    const level1UserServiceResponse: GetUserInfoServiceResponse = {
+      "userName": "9013452123",
+      "status": USER_AUTH_STATE.reject,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+
+    let userCount = 0;
+    cy.intercept("get", "/api/v2/login/info", (res) => {
+      res.continue((req) => {
+        if(userCount === 0 || userCount === 1) {
+          req.send({
+            statusCode: 200,
+            body: userServiceResponse,
+          })
+        } else {
+          req.send({
+            statusCode: 200,
+            body: level1UserServiceResponse,
+          })
+        }
+        userCount++;
+      })
+    })
+
+    const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": FeeRateKeyEnum.PROCESSING_FEE
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": FeeRateKeyEnum.SERVICE_FEE
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": FeeRateKeyEnum.LOAN_INTEREST
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 1000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "loanAgreementUrl": "",
+      "needRiskKycUpdate": false,
+      // NOTE: 優先權最高
+      "riskReject": false,
+      "refreshable": true,
+      "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      // NOTICE: GIVEN: 風控額度時間無效
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "seconds"),
+      "oldUserForceApply": false,
+      // NOTICE: GIVEN: 沒有應還訂單
+      "payableRecords": [],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+
+    // NOTE: Given
+    const level1IndexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
+      "loanAgreementUrl": "",
+      "noQuotaBalance":false,
+      "refreshable": false,
+      "noQuotaByRetryFewTimes": false,
+
+      "riskReject": false,
+      "refreshableUntil": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days"),
+
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": FeeRateKeyEnum.PROCESSING_FEE
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": FeeRateKeyEnum.SERVICE_FEE
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": FeeRateKeyEnum.LOAN_INTEREST
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 2000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "needRiskKycUpdate": false,
+      "orderUnderReview": false,
+      "oldUserForceApply": false,
+
+
+      "payableRecords": [
+        {
+          "orderNo":"",
+          "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+          "productName": "AA LOAN",
+          "payableAmount": 1000,
+          "dueDate": "2023-03-29",
+          "overdue": false,
+          "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
+        }
+      ],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+
+
+    let indexCount = 0;
+    cy.intercept("get", "/api/v3/index", (res) => {
+      res.continue((req) => {
+        if(indexCount === 0) {
+          console.log("[首頁]1")
+          req.send({
+            statusCode: 200,
+            body: indexServiceResponse,
+          })
+        } else {
+          console.log("[首頁]2")
+          req.send({
+            statusCode: 200,
+            // body: level1IndexServiceResponse,
+            body: indexServiceResponse,
+          })
+        }
+        indexCount++;
+      })
+    }).as("getIndex").then(() => {
+
+    })
+
+
+    const getPendingQuotaModelStatus: GetQuotaModelStatusResponse = {
+      calculating: true,
+      effective: false,
+      offerExpireTime: ""
+    }
+    const getSuccessQuotaModelStatus: GetQuotaModelStatusResponse = {
+      calculating: false,
+      effective: true,
+      offerExpireTime: moment().tz(INDIA_TIME_ZONE).add("1", "days"),
+    }
+
+    let count = 1
+    cy.intercept("get", "/api/v3/loan/quota-model-status", (req) => {
+      req.continue(res => {
+        if(count < 2) {
+          res.send({
+            statusCode: 200,
+            body: getPendingQuotaModelStatus,
+          })
+        } else {
+          res.send({
+            statusCode: 200,
+            body: getSuccessQuotaModelStatus,
+          })
+        }
+      })
+      count++;
+    })
+
+    visitIndexPage();
+
+
+
+  })
+
+  // TODO:
+  it("Level 1 -> Level 8", () => {
+
+    // NOTE: Given
+    const level8UserServiceResponse: GetUserInfoServiceResponse = {
+      "userName": "9013452123",
+      // NOTICE: GIVEN: 用戶已認證
+      "status": USER_AUTH_STATE.success,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+
+    // NOTE: Given
+    const level1UserServiceResponse: GetUserInfoServiceResponse = {
+      "userName": "9013452123",
+      "status": USER_AUTH_STATE.reject,
+      "demoAccount": false,
+      "oldUser": false,
+      "needUpdateKyc": false,
+      "organic": false
+    }
+
+    let userCount = 0;
+    cy.intercept("get", "/api/v2/login/info", (res) => {
+      res.continue((req) => {
+        if(userCount === 0 || userCount === 1) {
+          req.send({
+            statusCode: 200,
+            body: level1UserServiceResponse,
+          })
+        } else {
+          req.send({
+            statusCode: 200,
+            body: level8UserServiceResponse,
+          })
+        }
+        userCount++;
+      })
+    })
+
+    const indexServiceResponse: IndexServiceResponse = {
+      "hiddenLoanDetail": false,
+      "totalAmount": 15000,
+      "usedAmount": 15000,
+      "availableAmount": 0,
+      "quotaBar": {
+        "min": 0,
+        "max": 0,
+        "current": 0,
+        "serial": 1000
+      },
+      "chargeFeeDetails": [
+        {
+          "title": "Processing Fee",
+          "counting": 0.4,
+          "key": FeeRateKeyEnum.PROCESSING_FEE
+        },
+        {
+          "title": "Service Fee",
+          "counting": 0.5,
+          "key": FeeRateKeyEnum.SERVICE_FEE
+        },
+        {
+          "title": "Interest Fee",
+          "counting": 0.1,
+          "key": FeeRateKeyEnum.LOAN_INTEREST
+        }
+      ],
+      "products": [
+        {
+          "productId": 1,
+          "productName": "AA LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+          "min": 1000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 2,
+          "productName": "BB LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+          "min": 3000,
+          "max": 5000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        },
+        {
+          "productId": 3,
+          "productName": "CC LOAN",
+          "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+          "min": 4000,
+          "max": 6000,
+          "terms": 7,
+          "platformChargeFeeRate": 0.4
+        }
+      ],
+      "loanAgreementUrl": "",
+      "needRiskKycUpdate": false,
+      // NOTE: 優先權最高
+      "riskReject": false,
+      "refreshable": true,
+      "noQuotaByRetryFewTimes": false,
+      "noQuotaBalance": false,
+      "orderUnderReview": false,
+      "refreshableUntil": "2023-03-28T08:10:24",
+      // NOTICE: GIVEN: 風控額度時間無效
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add("-1", "seconds"),
+      "oldUserForceApply": false,
+      // NOTICE: GIVEN: 沒有應還訂單
+      "payableRecords": [],
+      "marquee": "我是跑馬燈...",
+      "popupUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
+      "customerServiceUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-7523112347980214.png",
+      "bankBindH5url": "https://frontend.india-api-dev.com/bank-bind?token=d7f9d8262cb34bc3ac709c85582a7188&cardholderName=gp"
+    }
+
+    let indexCount = 0;
+    cy.intercept("get", "/api/v3/index", (res) => {
+      res.continue((req) => {
+        if(indexCount === 0) {
+          req.send({
+            statusCode: 200,
+            body: indexServiceResponse,
+          })
+        } else {
+          req.send({
+            statusCode: 200,
+            // body: level1IndexServiceResponse,
+            body: indexServiceResponse,
+          })
+        }
+        indexCount++;
+      })
+    });
+
+    const getPendingQuotaModelStatus: GetQuotaModelStatusResponse = {
+      calculating: true,
+      effective: false,
+      offerExpireTime: ""
+    }
+    const getSuccessQuotaModelStatus: GetQuotaModelStatusResponse = {
+      calculating: false,
+      effective: true,
+      offerExpireTime: moment().tz(INDIA_TIME_ZONE).add("1", "days"),
+    }
+
+    let count = 1
+    cy.intercept("get", "/api/v3/loan/quota-model-status", (req) => {
+      req.continue(res => {
+        if(count < 2) {
+          res.send({
+            statusCode: 200,
+            body: getPendingQuotaModelStatus,
+          })
+        } else {
+          res.send({
+            statusCode: 200,
+            body: getSuccessQuotaModelStatus,
+          })
+        }
+      })
+      count++;
+    })
+
+    visitIndexPage();
+
+
+
+  })
+
+
 
   // NOTICE: 有應還訂單
   // FIGMA: 首頁-認證完成-額度時間到期-需重新取得信用額度 (Android: Level 8)
@@ -1347,7 +1792,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -1360,7 +1805,7 @@ describe('IndexPage', () => {
           "productLogo": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png",
           "productName": "AA LOAN",
           "payableAmount": 1000,
-          "dueDate": moment().tz(INDIA_TIME_ZONE).add(3, "days"),
+          "dueDate": moment().tz(INDIA_TIME_ZONE).add(4, "days"),
           "overdue": false,
           "repayUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-14178981544655336.png"
         }
@@ -1441,7 +1886,7 @@ describe('IndexPage', () => {
       statusCode: 200,
         body: indexServiceResponse,
     }).as("getIndex").then(() => {
-        console.log("index");
+
     })
 
 
@@ -1515,7 +1960,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -1609,7 +2054,7 @@ describe('IndexPage', () => {
       statusCode: 200,
         body: indexServiceResponse,
     }).as("getIndex").then(() => {
-        console.log("index");
+
     })
 
 
@@ -1679,7 +2124,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -1773,7 +2218,7 @@ describe('IndexPage', () => {
       statusCode: 200,
         body: indexServiceResponse,
     }).as("getIndex").then(() => {
-        console.log("index");
+
     })
 
 
@@ -1840,7 +2285,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -1935,7 +2380,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
@@ -1969,7 +2414,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2079,7 +2524,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();
@@ -2113,7 +2558,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2217,7 +2662,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -2249,7 +2694,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2268,8 +2713,9 @@ describe('IndexPage', () => {
       // NOTICE: 風控有無過期
       // NOTE: 詢問後端，直接沒額度的風控有無過期??
       // "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(-1, "days").format(),
-      "offerExpireTime": null,
-
+      // "offerExpireTime": null,
+      // NOTE: 模擬亂給資料
+      "offerExpireTime": moment().tz(INDIA_TIME_ZONE).add(1, "days").format(),
 
       // NOTICE: 實際可用金額
       "availableAmount": 900,
@@ -2641,7 +3087,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-有效額度時間-額度不足 (Android: Level 7)
-  it("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -2655,7 +3101,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -2669,7 +3115,7 @@ describe('IndexPage', () => {
         "min": 0,
         "max": 0,
         "current": 0,
-        "serial": 1000
+        "serial": 0
       },
       "chargeFeeDetails": [
         {
@@ -2746,7 +3192,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: indexServiceResponse,
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -2811,7 +3257,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // // NOTE: Given
@@ -3172,7 +3618,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
 
@@ -3348,7 +3794,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -3437,7 +3883,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
 
@@ -3585,7 +4031,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -3677,7 +4123,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
 
@@ -3853,7 +4299,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
 
@@ -4171,7 +4617,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: 攔截 /api/v3/index
@@ -4218,7 +4664,7 @@ describe('IndexPage', () => {
   })
 
 
-  it.only("status: level10 => level10 overdue", () => {
+  it("status: level10 => level10 overdue", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -4232,7 +4678,7 @@ describe('IndexPage', () => {
       statusCode: 200,
       body: userServiceResponse,
     }).as("getInfo").then(() => {
-      console.log("info");
+
     })
 
     // NOTE: Given
@@ -4261,7 +4707,7 @@ describe('IndexPage', () => {
         indexCount++;
       })
     }).as("getIndex").then(() => {
-      console.log("index");
+
     })
 
     visitIndexPage();

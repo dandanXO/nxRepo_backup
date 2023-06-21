@@ -1,18 +1,10 @@
 import { IAndroidAppInfo } from '../../persistant/nativeAppInfo/types/IAndroidAppInfo';
 import { applyTheme } from './utils';
+import { themeConfig } from '../../../environments/theme/styledComponentTheme';
+
 
 const applyCustomSharedLibTheme = (androidAPPInfo: IAndroidAppInfo) => {
-  import(
-    /* webpackMode: "lazy" */
-    /* webpackChunkName: "theme" */
-    `../../../environments/theme/styledComponentTheme`).then(
-    (content) => {
-      window.theme = content.themeConfig;
-    }
-  ).catch((error) => {
-    throw error;
-    console.log("[app][theme] applyCustomSharedLibTheme.error", error);
-  })
+    window.theme = themeConfig
 };
 
 const applyDefaultCustomTailwindTheme = (androidAPPInfo: IAndroidAppInfo) => {

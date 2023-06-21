@@ -98,7 +98,7 @@ module.exports = {
 
       addComponents({
           '.open-index-button': {
-              backgroundColor: 'var(--custom_bg_homepage_button)',
+              background: 'var(--custom_bg_homepage_button) !important',
           },
           // 拉霸
           '.slider': {
@@ -117,6 +117,11 @@ module.exports = {
                   background: 'var(--custom_bg_secondary)',
                   height: '5px',
                   borderRadius: '8px',
+              },
+              '.quota-slider-track-disable-0': {
+                background: 'var(--custom_bg_secondary)',
+                height: '5px',
+                borderRadius: '8px',
               },
               '.quota-slider-track-disable-1': {
                   background: 'var(--custom_bg_secondary)',

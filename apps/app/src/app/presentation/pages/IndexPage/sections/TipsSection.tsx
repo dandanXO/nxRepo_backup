@@ -56,7 +56,7 @@ export const TipsSection = (props: Props) => {
          return messageComponent;
     }
     messageComponent = (
-        <div className={'rounded-b-xl bg-secondary-varient px-4 py-3 text-center text-sm font-light leading-4 text-secondary-variant'}>
+        <div className={'rounded-b-xl bg-secondary-assistant px-4 py-3 text-center text-sm font-light leading-4 text-secondary-variant'}>
         {/*TODO: 有 & 沒有應還訂單時的文案*/}
         <div className={'mb-2'}>The available credit limit has expired, please reacquire credit amount.</div>
         {/*TODO: 有應還訂單時的文案*/}
@@ -68,18 +68,24 @@ export const TipsSection = (props: Props) => {
         )}
       </div>
     );
-  } else if (props.state.indexAPI?.products !== undefined && props.state.indexAPI?.products?.length === 0) {
+  } else if (
+      props.state.user.state === USER_AUTH_STATE.success &&
+      props.state.riskControl.state === RISK_CONTROL_STATE.valid &&
+      props.state.order.state !== ORDER_STATE.hasOverdueOrder &&
+      props.state.order.state !== ORDER_STATE.reject &&
+      props.state.indexAPI?.products !== undefined &&
+      props.state.indexAPI?.products?.length === 0
+  ) {
       messageComponent = (
           <div className={'rounded-b-xl bg-secondary-assistant px-4 py-3 text-center text-sm font-light leading-4 text-secondary-variant'}>
               There are currently no products available for borrowing. Please return after countdown ends.
           </div>
       );
   }
-
   if(!messageComponent) return null;
 
   return (
-    <div className={''} data-testing-id={'tips'}>
+    <div className={'my-6 '} data-testing-id={'tips'}>
       {messageComponent && (
         <div className={'inline-block rounded-t-xl bg-secondary-variant px-3 py-1 text-xs text-white font-bold'}>Tips</div>
       )}

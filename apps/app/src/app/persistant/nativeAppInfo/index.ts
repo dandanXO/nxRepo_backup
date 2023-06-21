@@ -39,6 +39,22 @@ if (window.Cypress) {
     }
 }
 
+// NOTICE: for testing
+// window.AppInfoTask = {
+//   getAppInfo: () => JSON.stringify({
+//     "packageId": "com.ind.kyc.application",
+//     "appName": "pkapidev",
+//     "domain": "pk-api-dev.com",
+//     "token": "b7faecdf8f5b4c6fb368fe5d3dcf7df2",
+//     "uiVersion": "24",
+//     "environment": "pakistan",
+//     "isPinCodeEnabled": false,
+//     "phoneNo": "6666666667",
+//     "deviceCode": "1d566731-ba41-4554-b1fc-3774be7a17c0",
+//     "envLanguage": "en"
+//   })
+// }
+
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());
 
