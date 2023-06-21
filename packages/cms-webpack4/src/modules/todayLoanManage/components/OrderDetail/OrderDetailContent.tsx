@@ -153,7 +153,7 @@ export const OrderDetailContent = ({
                 key: 'ptpTime',
                 dataIndex: 'ptpTime'
             },
-            { title: t('urgeCollection:trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord' },
+            { title: t('urgeCollection:trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord', className: 'textBreak' },
             { title: t('urgeCollection:collectorName'), key: 'collector', dataIndex: 'collector' },
         ]
 

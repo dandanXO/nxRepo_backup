@@ -136,7 +136,7 @@ export const OverDuePhoneUrgeListTable = () => {
             key: 'ptpTime',
             hideInSearch: true,
         },
-        { title: t('urgeCollection:trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true },
+        { title: t('urgeCollection:trackingRecord'), dataIndex: 'trackingRecord', key: 'trackingRecord', hideInSearch: true, className: 'textBreak' },
         { title: t('urgeCollection:recentTrackingTime'), dataIndex: 'recentTrackingTime', key: 'recentTrackingTime', hideInSearch: true, render: (_, { recentTrackingTime }) => <Typography>{(recentTrackingTime && moment(recentTrackingTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}</Typography> },
         { title: t('urgeCollection:collectorName'), dataIndex: 'collectorName', key: 'collectorName', initialValue: searchParams.collectorName || '', hideInSearch: true },
         { title: t('urgeCollection:collectorName'), dataIndex: 'collectorId', key: 'collectorId', initialValue: searchParams.collectorId || '', hideInSearch: !ableToGetCollectorList, hideInTable: true, valueType: 'select', valueEnum: collectorListEnum, fieldProps: { showSearch: true, allowClear: false } },
