@@ -98,7 +98,7 @@ export const OrderDetailContent = ({
             { title: t('order:orderNumber'), dataIndex: 'orderNumber' },
             { title: t('order:orderNumber'), dataIndex: 'mobileNumber' },
             { title: t('order:channel'), dataIndex: 'channel' },
-            { title: t('order:appName'), dataIndex: 'appName', render: (value, { channelUrl }) => <div>{value}<CopyTextIcon text={channelUrl}/></div> },
+            { title: t('order:appName'), dataIndex: 'appName', render: (value, { channelUrl }) => <div>{value}<CopyTextIcon text={channelUrl} tooltip /></div> },
             { title: t('order:productName'), dataIndex: 'productName' },
             { title: t('order:orderStatus'), dataIndex: 'orderStatus', render: (value) => <Tag color={OrderStatusEnum[value].color}>{t(OrderStatusEnum[value].text)}</Tag> },
             { title: t('order:orderLabel'), dataIndex: 'orderLabel', render:(value) => <Tag color={OrderLabelEnum[value].color}>{t(OrderLabelEnum[value].text)}</Tag> },
@@ -117,7 +117,7 @@ export const OrderDetailContent = ({
             { title: t('order:daysOverdue'), dataIndex: 'daysOverdue', render: (value) => <div style={{color: '#FF4D4F'}}>{value}</div> },
             { title: t('order:overDueFee', { unit: amountUnit }), dataIndex: 'overdueFee', render: (value) => <div style={{color: '#FF4D4F'}}>{formatPrice(value) || 0 }</div> },
             { title: t('order:applicationTime'), dataIndex: 'applicationTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
-            { title: t('order:reviewTime'), dataIndex: 'reviewTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('order:reviewTime'), dataIndex: 'reviewTime', render: (value) => <div>{value?moment(value).format('YYYY-MM-DD HH:mm:ss'):'-'}</div> },
             { title: t('order:expirationTime'), dataIndex: 'expireTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
         ]
         if(isSuperAdmin) {
@@ -154,8 +154,8 @@ export const OrderDetailContent = ({
             { title: t('user:registerChannel'), dataIndex: 'personaInfo.channelName' },
             { title: t('user:registerPackageName'), dataIndex: 'personaInfo.appName' },
             { title: t('user:mobileNumber'), dataIndex: 'personaInfo.phoneNo' },
-            { title: t('user:registerTime'), dataIndex: 'personaInfo.addTime', render: (_, { personaInfo }) => <div>{moment(personaInfo.addTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-            { title: t('user:userSource'), dataIndex: 'personaInfo.userSource' },
+            { title: t('user:registerTime'), dataIndex: 'personaInfo.addTime', render: (value) => <div>{moment(value).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('user:userSource'), dataIndex: 'personaInfo.userSource', render: (value) => value?<div style={{ display: 'flex' }}><div style={{ width: '200px', textOverflow:'ellipsis', overflow:'hidden', whiteSpace: 'nowrap'}}>{value}</div><CopyTextIcon text={value} tooltip/></div>: '-' },
         ]
 
         const personalDescriptions = [

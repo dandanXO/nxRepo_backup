@@ -11,7 +11,7 @@ interface IDescriptionsCardProps {
         title: string,
         titleTooltip?: React.ReactNode,
         dataIndex: string; // [useQuery 返回的object的key，多層用.區隔]
-        render?: (value:any, data: any) => React.ReactElement
+        render?: (value:any, data: any) => React.ReactElement | string
     }[],
     hook: UseQuery<any>,
     params: any,
