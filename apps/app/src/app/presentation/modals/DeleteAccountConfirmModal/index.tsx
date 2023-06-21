@@ -20,7 +20,7 @@ const DeleteAccountConfirmModal = () => {
 
         if (orderState === ORDER_STATE.normal || orderState === ORDER_STATE.hasInComingOverdueOrder || orderState === ORDER_STATE.hasOverdueOrder) {
             return (<div className='py-5 px-4'>
-                <div className='font-bold text-xl text-ctext-primary mt-5'>Delete Account</div>
+                <div className='font-bold text-xl text-ctext-primary mb-5'>Delete Account</div>
                 <div className='text-sm text-ctext-secondary mb-5'>Sorry, you cannot delete your account directly as there are unpaid orders associated with it.</div>
                 <div className='text-sm text-ctext-secondary mb-5'>If you have any questions or concerns, please contact our customer service for assistance.</div>
                 <Button
@@ -48,7 +48,7 @@ const DeleteAccountConfirmModal = () => {
                                 }
                             }
                         }).catch((err) => {
-                            //
+                            navigate(`${PagePathEnum.AccountVerificationPage}?token=${getToken()}`);
                         })
                     }}
                     text={'Confirm'}

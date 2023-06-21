@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 const AccountVerificationPage = () => {
     const navigate = useNavigate();
-    const userPhoneNumber = useSelector((state: RootState) => state.app.androidAppInfo?.phoneNo) ||'1234567890';
+    const userPhoneNumber = useSelector((state: RootState) => state.app.androidAppInfo?.phoneNo) || '';
     const [isInputChange,setIsInputChange]=useState(false)
     const [phoneNumber, setPhoneNumber] = useState<InputValue<string>>({
         data: '',
@@ -52,7 +52,7 @@ const AccountVerificationPage = () => {
             <Navigation
                 title={'Account Verification'}
                 back={() => {
-                    navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+                    navigate(`${PagePathEnum.DeleteAccountPage}?token=${getToken()}`);
                 }}
             />
             <div className={`p-4 pt-0`}>
