@@ -201,7 +201,7 @@ module.exports = (config, context) => {
 
   finalConfig = merge(finalConfig, {
     optimization: {
-      minimize: true,
+      minimize: false,
       minimizer: [
         new UglifyJsPlugin({
           parallel: true,
