@@ -17,77 +17,116 @@ import { PagePathEnum } from '../pages/PagePathEnum';
 import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
 
+
+// NOTICE: Static Loading : Page
+import AuthPage from '../pages/AuthPage';
+import BankCardListPage from '../pages/BankCardListPage';
+import BindBankCardPage from '../pages/BindBankCardPage';
+import CustomerServicePage from '../pages/CustomerServicePage';
+import DisclosureStatementPage from '../pages/DisclosureStatementPage';
+import FinishedRepaymentPage from '../pages/FinishedRepaymentPage'
+import RepaymentDetailPage from '../pages/RepaymentDetailPage'
+import LoanRecordPage from '../pages/RepaymentPage'
+import OrderStatusPage from '../pages/OrderStatusPage'
+import MyCouponListPage from '../pages/MyCouponListPage'
+import OnlineCustomerServicePage from '../pages/OnlineCustomerServicePage';
+import IBANFinderPage from '../pages/IBANFinderPage'
+import PartnerPage from '../pages/PartnerPage'
+import PersonalInfoPage  from '../pages/PersonalInfoPage';
+import PrivacyPolicyPage from '../pages/PrivacyPolicyPage';
+import QuotaModelPage from '../pages/QuotaModelPage';
+import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage';
+import UploadPaymentReceiptPage from '../pages/UploadPaymentReceiptPage';
+import CouponModalContentAndroidWebviewPage from  '../pages/CouponModalContentAndroidWebviewPage';
+import ApplicationProgressPage from '../pages/ApplicationProgressPage';
+import LoginPage from  '../pages/LoginPage';
+
+// NOTICE: Static Loading : Modal
+import RepaymentModal from  '../modals/RepaymentModal';
+import AmountRepaidModal from  '../modals/AmountRepaidModal/AmountRepaidModal';
+import ExtendConfirmModal from  '../modals/ExtendConfirmModal';
+import ExtendModal from  '../modals/ExtendModal';
+import LogoutModal from  '../modals/LogoutModal';
+import APIBoundaryModal from  '../modals/APIBoundaryModal';
+import PrivacyPolicyModal from  '../modals/PrivacyPolicyModal';
+import RepamentCouponModal from  '../modals/RepamentCouponModal';
+import IBANFinderModal from  '../modals/IBANFinderModal';
+
+
+
+
 // NOTICE: 無法以下寫法
 // [ctor is not a function when using React.lazy](https://github.com/facebook/react/issues/15639)
 // const loadable = React.lazy ||loadableComponent;
 
-const AuthPage = React.lazy(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
-const BankCardListPage = React.lazy(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));
-const BindBankCardPage = React.lazy(() => import(/* webpackChunkName: "BindBankCardPage" */ /* webpackPrefetch: true */'../pages/BindBankCardPage'));
-const CustomerServicePage = React.lazy(
-  () => import(/* webpackChunkName: "CustomerServicePage" */ '../pages/CustomerServicePage')
-);
-const DisclosureStatementPage = React.lazy(
-  () => import(/* webpackChunkName: "DisclosureStatementPage" */ '../pages/DisclosureStatementPage')
-);
-const FinishedRepaymentPage = React.lazy(
-  () => import(/* webpackChunkName: "FinishedRepaymentPage" */ '../pages/FinishedRepaymentPage')
-);
-const RepaymentDetailPage = React.lazy(
-  () => import(/* webpackChunkName: "RepaymentDetailPage" */ /* webpackPrefetch: true */ '../pages/RepaymentDetailPage')
-);
-const LoanRecordPage = React.lazy(() => import(/* webpackChunkName: "RepaymentPage" */ '../pages/RepaymentPage'));
-const OrderStatusPage = React.lazy(() => import(/* webpackChunkName: "OrderStatusPage" */ '../pages/OrderStatusPage'));
-const MyCouponListPage = React.lazy(() => import(/* webpackChunkName: "MyCouponListPage" */ '../pages/MyCouponListPage'));
-const OnlineCustomerServicePage = React.lazy(
-  () => import(/* webpackChunkName: "OnlineCustomerServicePage" */ '../pages/OnlineCustomerServicePage')
-);
-const IBANFinderPage = React.lazy(() => import(/* webpackChunkName: "IBANFinderPage" */ '../pages/IBANFinderPage'));
-
-const PartnerPage = React.lazy(() => import(/* webpackChunkName: "PartnerPage" */ '../pages/PartnerPage'));
-const PersonalInfoPage = React.lazy(() => import(/* webpackChunkName: "PersonalInfoPage" */ '../pages/PersonalInfoPage'));
-const PrivacyPolicyPage = React.lazy(
-  () => import(/* webpackChunkName: "PrivacyPolicyPage" */ '../pages/PrivacyPolicyPage')
-);
-const QuotaModelPage = React.lazy(() => import(/* webpackChunkName: "QuotaModelPage" */ '../pages/QuotaModelPage'));
-const UploadedPaymentReceiptPage = React.lazy(
-  () => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadedPaymentReceiptPage')
-);
-const UploadPaymentReceiptPage = React.lazy(
-  () => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadPaymentReceiptPage')
-);
-const CouponModalContentAndroidWebviewPage = React.lazy(
-  () =>
-    import(
-      /* webpackChunkName: "CouponModalContentAndroidWebviewPage" */ /* webpackPrefetch: true */ '../pages/CouponModalContentAndroidWebviewPage'
-    )
-);
-
-const ApplicationProgressPage = React.lazy(
-  () => import(/* webpackChunkName: "ApplicationProgressPage" */ '../pages/ApplicationProgressPage')
-);
-const LoginPage = React.lazy(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
-
-// // NOTE: Modal
-const RepaymentModal = React.lazy(() => import(/* webpackChunkName: "RepaymentModal" */ /* webpackPrefetch: true */ '../modals/RepaymentModal'));
-const AmountRepaidModal = React.lazy(
-  () => import(/* webpackChunkName: "AmountRepaidModal" */ /* webpackPrefetch: true */ '../modals/AmountRepaidModal/AmountRepaidModal')
-);
-const ExtendConfirmModal = React.lazy(
-  () => import(/* webpackChunkName: "ExtendConfirmModal" */ /* webpackPrefetch: true */ '../modals/ExtendConfirmModal')
-);
-const ExtendModal = React.lazy(() => import(/* webpackChunkName: "ExtendModal" */ /* webpackPrefetch: true */ '../modals/ExtendModal'));
-const LogoutModal = React.lazy(() => import(/* webpackChunkName: "LogoutModal" */ '../modals/LogoutModal'));
-const APIBoundaryModal = React.lazy(
-  () => import(/* webpackChunkName: "APIBoundaryModal" */ '../modals/APIBoundaryModal')
-);
-const PrivacyPolicyModal = React.lazy(
-  () => import(/* webpackChunkName: "PrivacyPolicyModal" */ '../modals/PrivacyPolicyModal')
-);
-const RepamentCouponModal = React.lazy(
-  () => import(/* webpackChunkName: "RepamentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepamentCouponModal')
-);
-const IBANFinderModal = React.lazy(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
+// NOTICE: 註解動態載入
+// const AuthPage = React.lazy(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
+// const BankCardListPage = React.lazy(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));
+// const BindBankCardPage = React.lazy(() => import(/* webpackChunkName: "BindBankCardPage" */ /* webpackPrefetch: true */'../pages/BindBankCardPage'));
+// const CustomerServicePage = React.lazy(
+//   () => import(/* webpackChunkName: "CustomerServicePage" */ '../pages/CustomerServicePage')
+// );
+// const DisclosureStatementPage = React.lazy(
+//   () => import(/* webpackChunkName: "DisclosureStatementPage" */ '../pages/DisclosureStatementPage')
+// );
+// const FinishedRepaymentPage = React.lazy(
+//   () => import(/* webpackChunkName: "FinishedRepaymentPage" */ '../pages/FinishedRepaymentPage')
+// );
+// const RepaymentDetailPage = React.lazy(
+//   () => import(/* webpackChunkName: "RepaymentDetailPage" */ /* webpackPrefetch: true */ '../pages/RepaymentDetailPage')
+// );
+// const LoanRecordPage = React.lazy(() => import(/* webpackChunkName: "RepaymentPage" */ '../pages/RepaymentPage'));
+// const OrderStatusPage = React.lazy(() => import(/* webpackChunkName: "OrderStatusPage" */ '../pages/OrderStatusPage'));
+// const MyCouponListPage = React.lazy(() => import(/* webpackChunkName: "MyCouponListPage" */ '../pages/MyCouponListPage'));
+// const OnlineCustomerServicePage = React.lazy(
+//   () => import(/* webpackChunkName: "OnlineCustomerServicePage" */ '../pages/OnlineCustomerServicePage')
+// );
+// const IBANFinderPage = React.lazy(() => import(/* webpackChunkName: "IBANFinderPage" */ '../pages/IBANFinderPage'));
+//
+// const PartnerPage = React.lazy(() => import(/* webpackChunkName: "PartnerPage" */ '../pages/PartnerPage'));
+// const PersonalInfoPage = React.lazy(() => import(/* webpackChunkName: "PersonalInfoPage" */ '../pages/PersonalInfoPage'));
+// const PrivacyPolicyPage = React.lazy(
+//   () => import(/* webpackChunkName: "PrivacyPolicyPage" */ '../pages/PrivacyPolicyPage')
+// );
+// const QuotaModelPage = React.lazy(() => import(/* webpackChunkName: "QuotaModelPage" */ '../pages/QuotaModelPage'));
+// const UploadedPaymentReceiptPage = React.lazy(
+//   () => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadedPaymentReceiptPage')
+// );
+// const UploadPaymentReceiptPage = React.lazy(
+//   () => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadPaymentReceiptPage')
+// );
+// const CouponModalContentAndroidWebviewPage = React.lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "CouponModalContentAndroidWebviewPage" */ /* webpackPrefetch: true */ '../pages/CouponModalContentAndroidWebviewPage'
+//     )
+// );
+//
+// const ApplicationProgressPage = React.lazy(
+//   () => import(/* webpackChunkName: "ApplicationProgressPage" */ '../pages/ApplicationProgressPage')
+// );
+// const LoginPage = React.lazy(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
+//
+// // // NOTE: Modal
+// const RepaymentModal = React.lazy(() => import(/* webpackChunkName: "RepaymentModal" */ /* webpackPrefetch: true */ '../modals/RepaymentModal'));
+// const AmountRepaidModal = React.lazy(
+//   () => import(/* webpackChunkName: "AmountRepaidModal" */ /* webpackPrefetch: true */ '../modals/AmountRepaidModal/AmountRepaidModal')
+// );
+// const ExtendConfirmModal = React.lazy(
+//   () => import(/* webpackChunkName: "ExtendConfirmModal" */ /* webpackPrefetch: true */ '../modals/ExtendConfirmModal')
+// );
+// const ExtendModal = React.lazy(() => import(/* webpackChunkName: "ExtendModal" */ /* webpackPrefetch: true */ '../modals/ExtendModal'));
+// const LogoutModal = React.lazy(() => import(/* webpackChunkName: "LogoutModal" */ '../modals/LogoutModal'));
+// const APIBoundaryModal = React.lazy(
+//   () => import(/* webpackChunkName: "APIBoundaryModal" */ '../modals/APIBoundaryModal')
+// );
+// const PrivacyPolicyModal = React.lazy(
+//   () => import(/* webpackChunkName: "PrivacyPolicyModal" */ '../modals/PrivacyPolicyModal')
+// );
+// const RepamentCouponModal = React.lazy(
+//   () => import(/* webpackChunkName: "RepamentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepamentCouponModal')
+// );
+// const IBANFinderModal = React.lazy(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
 
 
 // NOTICE: prefetch chrome, firefox cannot work
