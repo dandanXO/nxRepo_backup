@@ -116,8 +116,10 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         changeOptionValueCallback={changeOptionValue}
         disable={props.bindCardDropListData?.showBankOption || false}
       />
-
-      <div className={'bg-cstate-info-variant text-cstate-info-main mb-4 rounded-md px-3 py-2 text-xs font-bold '}>
+      <div className={'bg-secondary-assistant text-secondary-main mb-2 rounded-md px-3 py-2 text-xs'}>
+        <span>If you wish to borrow an amount greater than 20,000 Rupees, please select “Bank Card” as your preferred payment method.</span>
+      </div>
+      <div className={'bg-cstate-info-variant text-cstate-info-main mb-4 rounded-md px-3 py-2 text-xs'}>
         <span className={'font-bold underline'}>Once added, it cannot be edited anymore. </span>
         <span>Please ensure that the account belongs to you, and that all information is correct and accurate.</span>
       </div>
