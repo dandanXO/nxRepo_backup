@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Input, InputNumber, Modal, Radio, Space, TimePicker} from "antd";
+import {Form, Modal, Radio, TimePicker} from "antd";
 import {useTranslation} from "react-i18next";
 import {useEnum} from "../../../../shared/constants/useEnum";
 import TextArea from "antd/es/input/TextArea";
@@ -67,14 +67,13 @@ export const UrgeModal = ({
                 tooltip={t('urgeCollection:tooltip.repayLink')}
                 required
             >
-                <Group buttonStyle='solid'>
+                <Group buttonStyle='solid' style={{ display: 'flex', flexFlow: 'row wrap', rowGap: '5px' }}>
                     {Object.keys(GenerateRePayLinkEnum).map((part) => {
                         if (part == '') return null
                         return (
                             <Button
                                 key={part}
                                 value={part}
-                                style={{ marginBottom: '10px'}}
                             >
                                 {GenerateRePayLinkEnum[part].text}
                             </Button>
@@ -101,7 +100,6 @@ export const UrgeModal = ({
                                 rules={[
                                     { validator: (rule, value) => fieldValidator(rule['field'], value, formSchema)}
                                 ]}
-                                style={{ marginTop: '-10px', marginBottom: '-10px' }}
                             >
                                 <AmountInput />
                             </HelperFormItem>
@@ -121,7 +119,6 @@ export const UrgeModal = ({
             rules={[
                 { required: true,  message: `${t('zod:required')}${t('urgeCollection:ptpTime')}` },
             ]}
-            style={{ marginTop: '-10px' }}
         >
             <TimePicker
                 placeholder={t('common:placeholder.select')}
@@ -163,13 +160,12 @@ export const UrgeModal = ({
                     label={t('urgeCollection:contactPerson')}
                     required
                 >
-                    <Group buttonStyle='solid'>
+                    <Group buttonStyle='solid' style={{ display: 'flex', flexFlow: 'row wrap', rowGap: '5px' }}>
                         {Object.keys(EmergencyContactEnum).map((part) => {
                             return (
                                 <Button
                                     key={part}
                                     value={part}
-                                    style={{ marginBottom: '10px' }}
                                 >
                                     {EmergencyContactEnum[part].text}
                                 </Button>
@@ -183,16 +179,14 @@ export const UrgeModal = ({
                     name='followUpResult'
                     label={t('urgeCollection:followUpResult')}
                     required
-                    style={{ marginTop: '-10px' }}
                 >
-                    <Group buttonStyle='solid'>
+                    <Group buttonStyle='solid' style={{ display: 'flex', flexFlow: 'row wrap', rowGap: '5px' }}>
                         {Object.keys(FollowUpResultEnum).map((part) => {
                             if (part == '') return
                             return (
                                 <Button
                                     key={part}
                                     value={part}
-                                    style={{ marginBottom: '10px'}}
                                 >
                                     {FollowUpResultEnum[part].text}
                                 </Button>
@@ -228,7 +222,6 @@ export const UrgeModal = ({
                     rules={[
                         { required: true, message: `${t('zod:required')}${t('urgeCollection:trackingRecord')}` },
                     ]}
-                    style={{ marginTop: '-10px'}}
                 >
                     <TextArea autoSize={{ minRows:6 }} />
                 </HelperFormItem>
