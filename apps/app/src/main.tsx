@@ -56,7 +56,7 @@ const renderApp = () => {
 
   // NOTICE: Theme
   applyCustomTheme(NativeAppInfo);
-  alertModal(JSON.stringify(NativeAppInfo));
+  // alertModal(JSON.stringify(NativeAppInfo));
 
   // NOTE: Starting to render
   const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
