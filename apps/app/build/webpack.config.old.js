@@ -102,7 +102,7 @@ module.exports = (config, context) => {
           include(resourcePath, issuer) {
             // NOTE: 測試用
             if(resourcePath.indexOf("sentry") > -1) {
-              console.log("resourcePath", resourcePath);
+              // console.log("resourcePath", resourcePath);
             }
             // console.log(`  included: ${path.relative(context, resourcePath)} (from ${issuer})`);
             return true; // include all

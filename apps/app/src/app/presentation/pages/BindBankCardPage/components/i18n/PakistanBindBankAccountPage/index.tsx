@@ -83,6 +83,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // iBanData,
     // onIBanChange,
     // onIbanBlur,
+    bankCodeList,
     confirm: confirmBankAccount,
   } = usePakistanBankAccountForm({
     bindCardDropListData: props.bindCardDropListData,
@@ -108,6 +109,8 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // iBanData,
   });
 
+  // console.log("bankAccountValue", bankAccountValue);
+  // console.log("bankCodeList", bankCodeList);
   return (
     <>
       <Outlet />
@@ -144,17 +147,17 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             if (validation) {
               dispatch(
                 modalSlice.actions.updatebindBankcardModal({
-                    show: true,
-                    confirm: false,
-                    paymentMethod: chooseBindMethodValue,
-                    cardholderName: '',
-                    bankName: '',
-                    bankAccNr: '',
-                    mobileWallet: true,
-                    mobileWalletAccount: mobileData.data,
-                    walletVendor: walletValue?.value ?? '',
-                    walletName: walletValue?.label ?? '',
-                    bankCode: bankAccountValue.data.value,
+                  show: true,
+                  confirm: false,
+                  paymentMethod: chooseBindMethodValue,
+                  cardholderName: '',
+                  bankName: '',
+                  bankAccNr: '',
+                  mobileWallet: true,
+                  mobileWalletAccount: mobileData.data,
+                  walletVendor: walletValue?.label ?? '',
+                  walletName: walletValue?.label ?? '',
+                  bankCode: '',
                 })
               );
             }
@@ -181,18 +184,18 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             if (validation && validation2) {
               dispatch(
                 modalSlice.actions.updatebindBankcardModal({
-                   show: true,
-                   confirm: false,
-                   paymentMethod: chooseBindMethodValue,
-                   cardholderName: props.cardholderName,
-                   bankName: bankAccountValue.data.label,
-                    bankCode: bankAccountValue.data.value,
-                   bankAccNr: bankcardNoData.data,
-                   mobileWallet: false,
-                   mobileWalletAccount: '',
-                   walletVendor: '',
-                   walletName: '',
-                })
+                  show: true,
+                  confirm: false,
+                  paymentMethod: chooseBindMethodValue,
+                  cardholderName: props.cardholderName,
+                  bankCode: bankCodeList && bankAccountValue.data?.value !== "" && bankCodeList[bankAccountValue.data?.value],
+                  bankName: bankAccountValue.data?.label,
+                  bankAccNr: bankcardNoData.data,
+                  mobileWallet: false,
+                  mobileWalletAccount: '',
+                  walletVendor: '',
+                  walletName: '',
+                } as any)
               );
             }
           }}

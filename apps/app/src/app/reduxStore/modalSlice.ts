@@ -35,9 +35,9 @@ export type InitialStateType = {
     bankAccNr:string;
     mobileWallet:boolean;
     mobileWalletAccount:string;
-    walletVendor:number|'';
+    walletVendor:string;
     walletName:string;
-    bankCode:number|'';
+    bankCode:string;
   };
 };
 
