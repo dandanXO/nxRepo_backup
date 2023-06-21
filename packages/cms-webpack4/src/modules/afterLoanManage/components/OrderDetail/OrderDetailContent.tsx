@@ -127,14 +127,15 @@ export const OrderDetailContent = ({
         }
 
         const collectRecordColumns = [
-            { title: t('urgeCollection:trackingTime'), key: 'trackingTime', dataIndex: 'trackingTime', render: (_, { trackingTime }) =><div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
-            { title: t('urgeCollection:stage'), key: 'overdueStage', dataIndex: 'overdueStage' },
-            { title: t('urgeCollection:contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson', render: (_, { contactPerson }) => EmergencyContactEnum[contactPerson]?.text || contactPerson },
-            { title: t('urgeCollection:phone'), key: 'mobileNumber', dataIndex: 'mobileNumber' },
+            { title: t('urgeCollection:trackingTime'), key: 'trackingTime', dataIndex: 'trackingTime', width: '8%', render: (_, { trackingTime }) =><div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div> },
+            { title: t('urgeCollection:stage'), key: 'overdueStage', dataIndex: 'overdueStage', width: '8%', ellipsis: true },
+            { title: t('urgeCollection:contactPerson'), key: 'contactPerson', dataIndex: 'contactPerson', width: '8%', render: (_, { contactPerson }) => EmergencyContactEnum[contactPerson]?.text || contactPerson },
+            { title: t('urgeCollection:phone'), key: 'mobileNumber', dataIndex: 'mobileNumber', width: '10%' },
             {
                 title: t('urgeCollection:followUpResult'),
                 key: 'followUpResult',
                 dataIndex: 'followUpResult',
+                width: '10%',
                 render: (_, { followUpResult }) => {
                     const followUpResultStatus = FollowUpResultEnum[followUpResult]
                     return <div>{followUpResultStatus.text}</div>
@@ -143,10 +144,11 @@ export const OrderDetailContent = ({
             {
                 title: ()=><div>{t('urgeCollection:ptpTime')} <Tooltip title={<div style={{ whiteSpace: "pre-line"}}>{t('urgeCollection:ptpTimeTooltip')}</div>}><InfoCircleOutlined style={{ fontSize: '12px', color: '#c0bfbf' }} /></Tooltip></div>,
                 key: 'ptpTime',
-                dataIndex: 'ptpTime'
+                dataIndex: 'ptpTime',
+                width: '6%'
             },
-            { title: t('urgeCollection:trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord', className: 'custom-pro-table-td' },
-            { title: t('urgeCollection:collectorName'), key: 'collector', dataIndex: 'collector' },
+            { title: t('urgeCollection:trackingRecord'), key: 'trackingRecord', dataIndex: 'trackingRecord', width: '30%' },
+            { title: t('urgeCollection:collectorName'), key: 'collector', dataIndex: 'collector', width: '10%' },
         ]
 
         const registerDescriptions = [
