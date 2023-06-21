@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../components/layouts/Navigation';
@@ -79,8 +79,7 @@ const AccountVerificationPage = () => {
                     <div className={`mr-1.5 w-full`}>
                         <Button
                             onClick={() => {
-                                //   if (isRepayTypesFetching) return;
-                                navigate(`/v2/delete-confirm-modal?token=${getToken()}`);
+                                navigate(`delete-confirm-modal?token=${getToken()}`);
                             }}
                             text={'Confirm'}
                             type={'ghost'}
@@ -97,7 +96,9 @@ const AccountVerificationPage = () => {
                     </div>
                 </div>
             </div>
+            <Outlet />
         </Page>
+  
     );
 };
 

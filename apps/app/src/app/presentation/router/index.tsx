@@ -142,9 +142,10 @@ export const AppRouter = () => {
         <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
         <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
         <Route path={PagePathEnum.DeleteAccountPage} element={<DeleteAccountPage />} />
-        <Route path={PagePathEnum.AccountVerificationPage} element={<AccountVerificationPage />} />
-        <Route path={"/v2/delete-confirm-modal"} element={<DeleteAccountConfirmModal />} />
-        <Route path="/v2/quota-model" element={<QuotaModelPage />} />
+        <Route path={PagePathEnum.AccountVerificationPage} element={<AccountVerificationPage />} >
+            <Route path={"delete-confirm-modal"} element={<DeleteAccountConfirmModal />} />
+            <Route path="quota-model" element={<QuotaModelPage />} />
+        </Route>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
