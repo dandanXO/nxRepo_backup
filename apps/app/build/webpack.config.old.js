@@ -1,7 +1,36 @@
 const path = require('path');
+const fs = require('fs');
+const webpack = require('webpack');
+const { merge } = require('webpack-merge');
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
+const SentryCliPlugin = require('@sentry/webpack-plugin');
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConfig.json');
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const DashboardPlugin = require("webpack-dashboard/plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+// NOTICE: react-apexcharts 裡面有舊版本的 .bablerc，跟目前專案的不符合，include node_modules 會導致專案與node_modules 下 .babelrc 不一致
+const filePath = path.resolve(__dirname, '../../../node_modules/react-apexcharts/.babelrc')
+fs.exists(filePath, function(exists) {
+  if(exists) {
+    console.log('[react-apexcharts/.babelrc] File exists. Deleting now ...');
+    fs.unlinkSync(filePath);
+  } else {
+    console.log('[react-apexcharts/.babelrc] File not found, so not deleting.');
+  }
+});
+
+// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+// const smp = new SpeedMeasurePlugin();
 
 // NOTICE: refactor me
 const APP_IDENTIFICATION = '[apps/app]';
+
 const infoLog = (message, rest) => {
   if (!rest) {
     console.info(`${APP_IDENTIFICATION} ${message}`);
@@ -10,10 +39,9 @@ const infoLog = (message, rest) => {
   }
 };
 
+
 infoLog('build');
 
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
 const isProduction = process.env.NODE_ENV == 'production';
 const isDashboard = process.env.NODE_DASHBOARD;
 
@@ -23,16 +51,8 @@ console.log('process.env.NODE_ANALYZER:', process.env.NODE_ANALYZER);
 console.log('process.env.NODE_UI_VERSION:', process.env.NODE_UI_VERSION);
 console.log('isProduction: ', isProduction);
 
-const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
 console.log('gitRevisionPlugin.commithash()', gitRevisionPlugin.commithash());
-
-const SentryCliPlugin = require('@sentry/webpack-plugin');
-
-const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
-
-const TerserPlugin = require('terser-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PUBLIC_PATH = !isProduction ? '/' : '/v2/';
 console.log('PUBLIC_PATH', PUBLIC_PATH);
@@ -48,23 +68,14 @@ if (process.env.NODE_COUNTRY === 'in') {
   proxyURL = 'https://app.bd-api-dev.com';
 }
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConfig.json');
-
-const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const DashboardPlugin = require("webpack-dashboard/plugin");
-
-// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-// const smp = new SpeedMeasurePlugin();
-
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
-    devtool: "source-map",
-    entry: {
-      main: path.resolve(__dirname, '../src/main.tsx'),
-    },
+    devtool: "inline-source-map",
+    // NOTICE: 被 NX project 控制住
+    // entry: {
+      // main: path.resolve(__dirname, '../src/main.tsx'),
+      // test: path.resolve(__dirname, '../src/test.ts'),
+    // },
     // resolve: {
     //   // NOTICE: important
     //   modules: [
@@ -84,12 +95,21 @@ module.exports = (config, context) => {
           test: /\.(ts|js|mjs)x?$/,
           // include: [
           //   path.resolve(__dirname, '../src/test.ts'),
+            // path.resolve(__dirname, '../src'),
           // ],
+          include(resourcePath, issuer) {
+            // NOTE: 測試用
+            if(resourcePath.indexOf("sentry") > -1) {
+              console.log("resourcePath", resourcePath);
+            }
+            // console.log(`  included: ${path.relative(context, resourcePath)} (from ${issuer})`);
+            return true; // include all
+          },
           "exclude": [
             // \\ for Windows, / for macOS and Linux
             /node_modules[\\/]core-js/,
             /node_modules[\\/]webpack[\\/]buildin/,
-            /node_modules[\\/]react-apexcharts/
+            // /node_modules[\\/]react-apexcharts/
             // /node_modules/,
             // node_modules/.pnpm/@floating-ui+core@1.0.2/node_modules/@floating-ui/core/dist/floating-ui.core.browser.min.mjs
             // /node_modules[\\/].pnpm\/@floating-ui+core@1.0.2[\\/]node_modules[\\/]@floating-ui[\\/]core[\\/]dist[\\/]floating-ui.core.browser.min.mjs/,
@@ -104,7 +124,7 @@ module.exports = (config, context) => {
             {
               loader: path.join(__dirname, './custom/my-loader.js'),
               options: {
-                cacheDirectory: false
+                cacheDirectory: false,
               }
             }
           ]
@@ -131,7 +151,7 @@ module.exports = (config, context) => {
         // 配置 HTML 模板路徑與生成名稱 (第三步)
         template: path.resolve(__dirname, '../src/index.html'),
         // publicPath: "/v2",
-        chunks: ['runtime', 'vendors', 'common', 'sentry', 'main'],
+        // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main'],
         // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main', 'errorhandler'],
       }),
       // new PreloadWebpackPlugin({
@@ -144,7 +164,7 @@ module.exports = (config, context) => {
       //   verbose: true,
       // }),
     ],
-    // target: ["web", "es5"],
+    target: "browserslist",
     output: {
       publicPath: PUBLIC_PATH,
       filename: '[name].[contenthash].js',
@@ -180,21 +200,44 @@ module.exports = (config, context) => {
 
   finalConfig = merge(finalConfig, {
     optimization: {
+      minimize: true,
       minimizer: [
-        new TerserPlugin({
+        new UglifyJsPlugin({
           parallel: true,
-          minify: TerserPlugin.terserMinify,
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-            format: {
-              comments: false,
-            },
-          },
-          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+          cache: path.resolve(__dirname, '../../../tmp_uglify'),
+          // uglifyOptions: {
+            // warnings: false,
+            // parse: {},
+            // compress: {},
+            // mangle: true, // 注意 `mangle.properties` 的默认值是 `false`。
+            // output: {
+            //   comments: /@license/i,
+            //   comments: false
+            // },
+            // toplevel: false,
+            // nameCache: null,
+            // ie8: true,
+            // keep_fnames: false,
+          // },
           extractComments: false,
         }),
+        // NOTICE: minimizer.TerserPlugin 混肴壓縮後 不支援 double question mark
+        // NOTICE : [Nullish coalescing / optional chaining support #567](https://github.com/terser/terser/issues/567)
+        // new TerserPlugin({
+        //   parallel: true,
+        //   minify: TerserPlugin.terserMinify,
+        //   // minify: TerserPlugin.uglifyJsMinify,
+        //   terserOptions: {
+        //     compress: {
+        //       drop_console: true,
+        //     },
+        //     format: {
+        //       comments: false,
+        //     },
+        //   },
+        //   // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+        //   extractComments: true,
+        // }),
         new ImageMinimizerPlugin({
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
@@ -243,28 +286,51 @@ module.exports = (config, context) => {
 
         }),
       ],
+      runtimeChunk: true,
       splitChunks: {
         cacheGroups: {
           // NOTE: default
           common: {
             name: 'common',
-            chunks: 'async',
-            minChunks: 2,
+            chunks: 'initial',
             enforce: true,
-            priority: 5
+            // minChunks: 2,
+            priority: 3
+          },
+          async_common: {
+            name: 'common_async',
+            chunks: 'async',
+            enforce: true,
+            // minChunks: 2,
+            priority: 3
           },
           // NOTE: custom
           sentry: {
             test: /[\\/]node_modules[\\/]@sentry*[\\/]/,
             name: 'sentry',
             minChunks: 1,
+            priority: 4,
+            chunks: 'all',
+          },
+          rapex: {
+            test: /[\\/]node_modules[\\/]react-apexcharts/,
+            name: "react-apex",
+            minChunks: 1,
             priority: 2,
             chunks: 'all',
+            enforce: true,
+          },
+          apex: {
+            test: /[\\/]node_modules[\\/]apexcharts/,
+            name: "apex",
+            minChunks: 1,
+            priority: 2,
+            chunks: 'all',
+            enforce: true,
           },
           vendors: {
             // test: /[\\/]node_modules[\\/](?!@floating-ui+core@1.0.2)/,
             test: /[\\/]node_modules[\\/]/,
-
             name: 'vendors',
             minChunks: 1,
             priority: 1,
@@ -297,7 +363,8 @@ module.exports = (config, context) => {
     }));
   }
 
-  if (isProduction) {
+  // isProduction
+  if (false) {
       // finalConfig.plugins.push(
       //   new CleanWebpackPlugin({
       //     verbose: true,
@@ -331,11 +398,26 @@ module.exports = (config, context) => {
   }
 
   // console.log('finalConfig', finalConfig);
-  console.log('finalConfig.optimization.splitChunks.cacheGroups', finalConfig.optimization.splitChunks.cacheGroups);
+  // console.log('finalConfig.optimization.splitChunks.cacheGroups', finalConfig.optimization.splitChunks.cacheGroups);
   // console.log('finalConfig.module.rules', finalConfig.module.rules);
 
-  finalConfig.module.rules.map((rule) => {
-    console.log('finalConfig.module.rule', rule);
+  finalConfig.module.rules.map((rule, index) => {
+    // console.log('before-filter-finalConfig.module.rule', rule);
+    if(rule.oneOf) {
+      rule.oneOf.map((one) => {
+        // console.log('finalConfig.module.rule.one', one);
+      })
+    }
+  })
+
+  const rules = finalConfig.module.rules.filter((rule, index) => {
+    return !(index === 0 || index === 1|| index === 2);
+  })
+
+  finalConfig.module.rules = rules;
+
+  finalConfig.module.rules.map((rule, index) => {
+    console.log('after-filter-finalConfig.module.rule', rule);
     if(rule.oneOf) {
       rule.oneOf.map((one) => {
         console.log('finalConfig.module.rule.one', one);
@@ -350,6 +432,15 @@ module.exports = (config, context) => {
     return finalConfig
   } else {
     console.log('finalConfig.plugins', finalConfig.plugins);
+    // console.log('before finalConfig.optimization.minimizer', finalConfig.optimization.minimizer);
+    // NOTICE: 後續要會被加上 TerserPlugin, HashedModuleIdsPlugin, CssMinimizerPlugin
+    // NOTICE: 移除 TerserPlugin,
+    const minimizers = finalConfig.optimization.minimizer.filter((rule, index) => {
+      return !(index === 0 );
+    })
+    finalConfig.optimization.minimizer = minimizers;
+    console.log('after finalConfig.optimization.minimizer', finalConfig.optimization.minimizer);
+
     console.log('finalConfig', finalConfig);
     return finalConfig;
   }
