@@ -60,9 +60,15 @@ import IBANFinderModal from  '../modals/IBANFinderModal';
 // const loadable = React.lazy ||loadableComponent;
 
 // NOTE: React.lazy 與 Loadable/Component 不支援 Android 7, 8.0, 8.1 版本，所以暫時使用 static loading
-// NOTICE: 註解動態載入
-// const AuthPage = React.lazy(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
-// const BankCardListPage = React.lazy(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));
+// [No error handling for dynamically loaded components that don't exist #704](https://github.com/gregberge/loadable-components/issues/704)
+// [Loadable Components Does not seem to work on ios versions < 14.0](https://github.com/gregberge/loadable-components/issues/742)
+// [getting Uncaught TypeError: Failed to resolve module specifier #962](https://github.com/gregberge/loadable-components/issues/962)
+// [What is the best way to prevent failure to load component or catch properly? #961](https://github.com/gregberge/loadable-components/issues/961)
+// http://%5B@loadable/component%20failed%20to%20asynchronously%20load%20component%20#684](https://github.com/gregberge/loadable-components/issues/684)
+
+// // NOTICE: 註解動態載入
+// const AuthPage = React.lazy(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'))
+// const BankCardListPage = React.lazy(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'))
 // const BindBankCardPage = React.lazy(() => import(/* webpackChunkName: "BindBankCardPage" */ /* webpackPrefetch: true */'../pages/BindBankCardPage'));
 // const CustomerServicePage = React.lazy(
 //   () => import(/* webpackChunkName: "CustomerServicePage" */ '../pages/CustomerServicePage')
@@ -108,7 +114,7 @@ import IBANFinderModal from  '../modals/IBANFinderModal';
 // );
 // const LoginPage = React.lazy(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
 //
-// // // NOTE: Modal
+// // NOTE: Modal
 // const RepaymentModal = React.lazy(() => import(/* webpackChunkName: "RepaymentModal" */ /* webpackPrefetch: true */ '../modals/RepaymentModal'));
 // const AmountRepaidModal = React.lazy(
 //   () => import(/* webpackChunkName: "AmountRepaidModal" */ /* webpackPrefetch: true */ '../modals/AmountRepaidModal/AmountRepaidModal')

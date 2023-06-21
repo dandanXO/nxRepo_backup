@@ -71,6 +71,7 @@ if (process.env.NODE_COUNTRY === 'in') {
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
+    // NOTE: [Webpack-Devtool](https://webpack.js.org/configuration/devtool/)
     devtool: !isProduction ? "inline-source-map" : "source-map",
     // NOTICE: 被 NX project 控制住
     // entry: {
@@ -110,10 +111,6 @@ module.exports = (config, context) => {
             // \\ for Windows, / for macOS and Linux
             /node_modules[\\/]core-js/,
             /node_modules[\\/]webpack[\\/]buildin/,
-            // /node_modules[\\/]react-apexcharts/
-            // /node_modules/,
-            // node_modules/.pnpm/@floating-ui+core@1.0.2/node_modules/@floating-ui/core/dist/floating-ui.core.browser.min.mjs
-            // /node_modules[\\/].pnpm\/@floating-ui+core@1.0.2[\\/]node_modules[\\/]@floating-ui[\\/]core[\\/]dist[\\/]floating-ui.core.browser.min.mjs/,
           ],
           use: [
             // {
