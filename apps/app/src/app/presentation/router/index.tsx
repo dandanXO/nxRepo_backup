@@ -20,70 +20,40 @@ import { ErrorPage } from '../pages/__test__/ErrorPage';
 const AuthPage = loadable(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
 const BankCardListPage = loadable(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));
 const BindBankCardPage = loadable(() => import(/* webpackChunkName: "BindBankCardPage" */ /* webpackPrefetch: true */'../pages/BindBankCardPage'));
-const CustomerServicePage = loadable(
-  () => import(/* webpackChunkName: "CustomerServicePage" */ '../pages/CustomerServicePage')
-);
-const DisclosureStatementPage = loadable(
-  () => import(/* webpackChunkName: "DisclosureStatementPage" */ '../pages/DisclosureStatementPage')
-);
-const FinishedRepaymentPage = loadable(
-  () => import(/* webpackChunkName: "FinishedRepaymentPage" */ '../pages/FinishedRepaymentPage')
-);
-const RepaymentDetailPage = loadable(
-  () => import(/* webpackChunkName: "RepaymentDetailPage" */ /* webpackPrefetch: true */ '../pages/RepaymentDetailPage')
-);
+const CustomerServicePage = loadable(() => import(/* webpackChunkName: "CustomerServicePage" */ '../pages/CustomerServicePage'));
+const DisclosureStatementPage = loadable(() => import(/* webpackChunkName: "DisclosureStatementPage" */ '../pages/DisclosureStatementPage'));
+const FinishedRepaymentPage = loadable(() => import(/* webpackChunkName: "FinishedRepaymentPage" */ '../pages/FinishedRepaymentPage'));
+const RepaymentDetailPage = loadable(() => import(/* webpackChunkName: "RepaymentDetailPage" */ /* webpackPrefetch: true */ '../pages/RepaymentDetailPage'));
 const LoanRecordPage = loadable(() => import(/* webpackChunkName: "RepaymentPage" */ '../pages/RepaymentPage'));
 const OrderStatusPage = loadable(() => import(/* webpackChunkName: "OrderStatusPage" */ '../pages/OrderStatusPage'));
 const MyCouponListPage = loadable(() => import(/* webpackChunkName: "MyCouponListPage" */ '../pages/MyCouponListPage'));
-const OnlineCustomerServicePage = loadable(
-  () => import(/* webpackChunkName: "OnlineCustomerServicePage" */ '../pages/OnlineCustomerServicePage')
-);
+const OnlineCustomerServicePage = loadable(() => import(/* webpackChunkName: "OnlineCustomerServicePage" */ '../pages/OnlineCustomerServicePage'));
 const IBANFinderPage = loadable(() => import(/* webpackChunkName: "IBANFinderPage" */ '../pages/IBANFinderPage'));
 
 const PartnerPage = loadable(() => import(/* webpackChunkName: "PartnerPage" */ '../pages/PartnerPage'));
 const PersonalInfoPage = loadable(() => import(/* webpackChunkName: "PersonalInfoPage" */ '../pages/PersonalInfoPage'));
-const PrivacyPolicyPage = loadable(
-  () => import(/* webpackChunkName: "PrivacyPolicyPage" */ '../pages/PrivacyPolicyPage')
-);
+const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ '../pages/PrivacyPolicyPage'));
+const DeleteAccountPage = loadable(() => import(/* webpackChunkName: "DeleteAccountPage" */ '../pages/DeleteAccountPage'));
+const AccountVerificationPage = loadable(() => import(/* webpackChunkName: "AccountVerificationPage" */ '../pages/AccountVerificationPage'));
 const QuotaModelPage = loadable(() => import(/* webpackChunkName: "QuotaModelPage" */ '../pages/QuotaModelPage'));
-const UploadedPaymentReceiptPage = loadable(
-  () => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadedPaymentReceiptPage')
-);
-const UploadPaymentReceiptPage = loadable(
-  () => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadPaymentReceiptPage')
-);
-const CouponModalContentAndroidWebviewPage = loadable(
-  () =>
-    import(
-      /* webpackChunkName: "CouponModalContentAndroidWebviewPage" */ /* webpackPrefetch: true */ '../pages/CouponModalContentAndroidWebviewPage'
-    )
-);
+const UploadedPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "UploadedPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadedPaymentReceiptPage'));
+const UploadPaymentReceiptPage = loadable(() => import(/* webpackChunkName: "UploadPaymentReceiptPage" */ /* webpackPrefetch: true */ '../pages/UploadPaymentReceiptPage'));
+const CouponModalContentAndroidWebviewPage = loadable(() =>import(/* webpackChunkName: "CouponModalContentAndroidWebviewPage" */ /* webpackPrefetch: true */ '../pages/CouponModalContentAndroidWebviewPage'));
 
-const ApplicationProgressPage = loadable(
-  () => import(/* webpackChunkName: "ApplicationProgressPage" */ '../pages/ApplicationProgressPage')
-);
+const ApplicationProgressPage = loadable(() => import(/* webpackChunkName: "ApplicationProgressPage" */ '../pages/ApplicationProgressPage'));
 const LoginPage = loadable(() => import(/* webpackChunkName: "LoginPage" */ '../pages/LoginPage'));
 
 // // NOTE: Modal
 const RepaymentModal = loadable(() => import(/* webpackChunkName: "RepaymentModal" */ /* webpackPrefetch: true */ '../modals/RepaymentModal'));
-const AmountRepaidModal = loadable(
-  () => import(/* webpackChunkName: "AmountRepaidModal" */ /* webpackPrefetch: true */ '../modals/AmountRepaidModal/AmountRepaidModal')
-);
-const ExtendConfirmModal = loadable(
-  () => import(/* webpackChunkName: "ExtendConfirmModal" */ /* webpackPrefetch: true */ '../modals/ExtendConfirmModal')
-);
+const AmountRepaidModal = loadable(() => import(/* webpackChunkName: "AmountRepaidModal" */ /* webpackPrefetch: true */ '../modals/AmountRepaidModal/AmountRepaidModal'));
+const ExtendConfirmModal = loadable(() => import(/* webpackChunkName: "ExtendConfirmModal" */ /* webpackPrefetch: true */ '../modals/ExtendConfirmModal'));
 const ExtendModal = loadable(() => import(/* webpackChunkName: "ExtendModal" */ /* webpackPrefetch: true */ '../modals/ExtendModal'));
 const LogoutModal = loadable(() => import(/* webpackChunkName: "LogoutModal" */ '../modals/LogoutModal'));
-const APIBoundaryModal = loadable(
-  () => import(/* webpackChunkName: "APIBoundaryModal" */ '../modals/APIBoundaryModal')
-);
-const PrivacyPolicyModal = loadable(
-  () => import(/* webpackChunkName: "PrivacyPolicyModal" */ '../modals/PrivacyPolicyModal')
-);
-const RepamentCouponModal = loadable(
-  () => import(/* webpackChunkName: "RepamentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepamentCouponModal')
-);
+const APIBoundaryModal = loadable(() => import(/* webpackChunkName: "APIBoundaryModal" */ '../modals/APIBoundaryModal'));
+const PrivacyPolicyModal = loadable(() => import(/* webpackChunkName: "PrivacyPolicyModal" */ '../modals/PrivacyPolicyModal'));
+const RepamentCouponModal = loadable(() => import(/* webpackChunkName: "RepamentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepamentCouponModal'));
 const IBANFinderModal = loadable(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
+const DeleteAccountConfirmModal = loadable(() => import(/* webpackChunkName: "DeleteAccountConfirmModal" */ /* webpackPrefetch: true */ '../modals/DeleteAccountConfirmModal'));
 
 
 // NOTICE: prefetch chrome, firefox cannot work
@@ -171,6 +141,9 @@ export const AppRouter = () => {
         </Route>
         <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
         <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
+        <Route path={PagePathEnum.DeleteAccountPage} element={<DeleteAccountPage />} />
+        <Route path={PagePathEnum.AccountVerificationPage} element={<AccountVerificationPage />} />
+        <Route path={"/v2/delete-confirm-modal"} element={<DeleteAccountConfirmModal />} />
         <Route path="/v2/quota-model" element={<QuotaModelPage />} />
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
