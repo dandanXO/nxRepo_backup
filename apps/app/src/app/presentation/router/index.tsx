@@ -59,6 +59,7 @@ import IBANFinderModal from  '../modals/IBANFinderModal';
 // [ctor is not a function when using React.lazy](https://github.com/facebook/react/issues/15639)
 // const loadable = React.lazy ||loadableComponent;
 
+// NOTE: React.lazy 與 Loadable/Component 不支援 Android 7, 8.0, 8.1 版本，所以暫時使用 static loading
 // NOTICE: 註解動態載入
 // const AuthPage = React.lazy(() => import(/* webpackChunkName: "AuthPage" */ '../pages/AuthPage'));
 // const BankCardListPage = React.lazy(() => import(/* webpackChunkName: "BankCardListPage" */ '../pages/BankCardListPage'));

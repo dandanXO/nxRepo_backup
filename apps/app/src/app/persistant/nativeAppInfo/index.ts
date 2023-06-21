@@ -39,7 +39,7 @@ if (window.Cypress) {
     }
 }
 
-// NOTICE: for testing
+// NOTICE: for testing dev pk
 // window.AppInfoTask = {
 //   getAppInfo: () => JSON.stringify({
 //     "packageId": "com.ind.kyc.application",
@@ -52,6 +52,22 @@ if (window.Cypress) {
 //     "phoneNo": "6666666667",
 //     "deviceCode": "1d566731-ba41-4554-b1fc-3774be7a17c0",
 //     "envLanguage": "en"
+//   })
+// }
+
+// NOTICE: for testing dev in
+// window.AppInfoTask = {
+//   getAppInfo: () => JSON.stringify({
+//     appName: "longingloan",
+//     deviceCode: "e8561b5b-36f1-4dd7-bc2d-67466c7a1f47",
+//     domain: "india-api-dev.com",
+//     environment: "india",
+//     isPinCodeEnabled: false,
+//     mode: "Webview",
+//     packageId:"com.ind.kyc.application",
+//     phoneNo: "8888888888",
+//     token: "e1ab7e18244e4bfb9f8c48f3d4c317cd",
+//     uiVersion: "58",
 //   })
 // }
 
