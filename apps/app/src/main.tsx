@@ -22,6 +22,7 @@ import './app/modules/window/IWindow';
 // NOTE: Other
 import './style.css';
 import App from './app/app';
+import {alertModal} from "./app/api/base/alertModal";
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -55,6 +56,7 @@ const renderApp = () => {
 
   // NOTICE: Theme
   applyCustomTheme(NativeAppInfo);
+  alertModal(JSON.stringify(NativeAppInfo));
 
   // NOTE: Starting to render
   const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
