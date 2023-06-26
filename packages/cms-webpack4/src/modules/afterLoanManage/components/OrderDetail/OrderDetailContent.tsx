@@ -89,7 +89,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
 
         const orderInfoDescriptions = [
             { title: t('order:orderNumber'), dataIndex: 'orderNumber' },
-            { title: t('order:orderNumber'), dataIndex: 'mobileNumber' },
+            { title: t('order:mobileNumber'), dataIndex: 'mobileNumber' },
             { title: t('order:channel'), dataIndex: 'channel' },
             {
                 title: t('order:appName'),
