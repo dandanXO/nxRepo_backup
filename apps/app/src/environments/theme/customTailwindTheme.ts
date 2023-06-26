@@ -18,7 +18,8 @@ import v68 from './india/v68/tailwind.theme';
 // NOTE: Pakistan
 import v15 from './pakistan/v15/tailwind.theme';
 
-export const DEFAULT_THEME: string = 'v55';
+export const DEFAULT_INDIA_THEME: string = 'v55';
+export const DEFAULT_PAKISTAN_THEME: string = 'v15';
 
 export const themes: IThemes = {
   india: {
@@ -37,7 +38,7 @@ export const themes: IThemes = {
     v66,
     v67,
     v68
-    
+
   },
   pakistan: {
     v15,

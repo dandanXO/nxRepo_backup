@@ -9,7 +9,7 @@ import i18next from 'i18next';
 import { Modal } from '@frontend/mobile/shared/ui';
 
 export function* bindBankcardSaga(action: PayloadAction<InitialStateType['bindBankcardModal']>) {
-
+    // console.log("action.payload", action.payload);
     try {
         if (action.payload.confirm) {
             let mobileDataValue = action.payload.mobileWalletAccount;
@@ -19,17 +19,20 @@ export function* bindBankcardSaga(action: PayloadAction<InitialStateType['bindBa
                     mobileDataValue = '0' + action.payload.mobileWalletAccount;
                 }
             }
-            yield put(
-                API.endpoints.postBankBindSaveToPK.initiate({
-                    bankAccNr: action.payload.bankAccNr,
-                    mobileWallet: action.payload.mobileWallet,
-                    mobileWalletAccount: mobileDataValue,
-                    walletVendor: action.payload.walletVendor.toString(),
-                    bankCode: action.payload.bankCode.toString(),
-                    bankName: action.payload.walletName,
-                }) as any
 
+            yield put(
+              API.endpoints.postBankBindSaveToPK.initiate({
+                bankAccNr: action.payload.bankAccNr,
+                mobileWallet: action.payload.mobileWallet,
+                mobileWalletAccount: mobileDataValue,
+                walletVendor: action.payload.walletVendor,
+                bankCode: action.payload.bankCode,
+                bankName: action.payload.bankName,
+              }) as any
             );
+
+
+
             const { success, failure } = yield race({
                 success: take(API.endpoints.postBankBindSaveToPK.matchFulfilled),
                 failure: take(API.endpoints.postBankBindSaveToPK.matchRejected),

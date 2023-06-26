@@ -1,8 +1,18 @@
 import { Colors, IThemeConfig, fontSizeListToRem } from '@frontend/mobile/shared/ui';
-import {themes} from './customTailwindTheme';
+import {DEFAULT_INDIA_THEME, DEFAULT_PAKISTAN_THEME, themes} from './customTailwindTheme';
 import { NativeAppInfo } from '../../app/persistant/nativeAppInfo';
+import {environment} from "../environment";
+import {IndiaCountry} from "../../../../../libs/shared/domain/src/country/IndiaCountry";
 
-const theme = themes[ NativeAppInfo.environment][`v${NativeAppInfo.uiVersion}`]
+// NOTE: 預設樣式
+let theme = themes[NativeAppInfo.environment][`v${NativeAppInfo.uiVersion}`]
+if(!theme) {
+  if(environment.country === IndiaCountry.country) {
+    theme = themes[NativeAppInfo.environment][DEFAULT_INDIA_THEME]
+  } else {
+    theme = themes[NativeAppInfo.environment][DEFAULT_PAKISTAN_THEME]
+  }
+}
 
 export const themeConfig: IThemeConfig = {
   // NOTE: Commons

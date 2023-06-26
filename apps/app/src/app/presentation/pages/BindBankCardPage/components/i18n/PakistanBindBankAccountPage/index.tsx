@@ -83,6 +83,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // iBanData,
     // onIBanChange,
     // onIbanBlur,
+    bankCodeList,
     confirm: confirmBankAccount,
   } = usePakistanBankAccountForm({
     bindCardDropListData: props.bindCardDropListData,
@@ -108,6 +109,8 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // iBanData,
   });
 
+  // console.log("bankAccountValue", bankAccountValue);
+  // console.log("bankCodeList", bankCodeList);
   return (
     <>
       <Outlet />
@@ -116,8 +119,10 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         changeOptionValueCallback={changeOptionValue}
         disable={props.bindCardDropListData?.showBankOption || false}
       />
-
-      <div className={'bg-cstate-info-variant text-cstate-info-main mb-4 rounded-md px-3 py-2 text-xs font-bold '}>
+      <div className={'bg-secondary-assistant text-secondary-main mb-2 rounded-md px-3 py-2 text-xs'}>
+        <span>If you wish to borrow an amount greater than 20,000 Rupees, please select “Bank Card” as your preferred payment method.</span>
+      </div>
+      <div className={'bg-cstate-info-variant text-cstate-info-main mb-4 rounded-md px-3 py-2 text-xs'}>
         <span className={'font-bold underline'}>Once added, it cannot be edited anymore. </span>
         <span>Please ensure that the account belongs to you, and that all information is correct and accurate.</span>
       </div>
@@ -142,17 +147,17 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             if (validation) {
               dispatch(
                 modalSlice.actions.updatebindBankcardModal({
-                    show: true,
-                    confirm: false,
-                    paymentMethod: chooseBindMethodValue,
-                    cardholderName: '',
-                    bankName: '',
-                    bankAccNr: '',
-                    mobileWallet: true,
-                    mobileWalletAccount: mobileData.data,
-                    walletVendor: walletValue?.value ?? '',
-                    walletName: walletValue?.label ?? '',
-                    bankCode: bankAccountValue.data.value,
+                  show: true,
+                  confirm: false,
+                  paymentMethod: chooseBindMethodValue,
+                  cardholderName: '',
+                  bankName: '',
+                  bankAccNr: '',
+                  mobileWallet: true,
+                  mobileWalletAccount: mobileData.data,
+                  walletVendor: walletValue?.label ?? '',
+                  walletName: walletValue?.label ?? '',
+                  bankCode: '',
                 })
               );
             }
@@ -179,18 +184,18 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             if (validation && validation2) {
               dispatch(
                 modalSlice.actions.updatebindBankcardModal({
-                   show: true,
-                   confirm: false,
-                   paymentMethod: chooseBindMethodValue,
-                   cardholderName: props.cardholderName,
-                   bankName: bankAccountValue.data.label,
-                    bankCode: bankAccountValue.data.value,
-                   bankAccNr: bankcardNoData.data,
-                   mobileWallet: false,
-                   mobileWalletAccount: '',
-                   walletVendor: '',
-                   walletName: '',
-                })
+                  show: true,
+                  confirm: false,
+                  paymentMethod: chooseBindMethodValue,
+                  cardholderName: props.cardholderName,
+                  bankCode: bankCodeList && bankAccountValue.data?.value !== "" && bankCodeList[bankAccountValue.data?.value],
+                  bankName: bankAccountValue.data?.label,
+                  bankAccNr: bankcardNoData.data,
+                  mobileWallet: false,
+                  mobileWalletAccount: '',
+                  walletVendor: '',
+                  walletName: '',
+                } as any)
               );
             }
           }}

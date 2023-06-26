@@ -35,9 +35,9 @@ export type InitialStateType = {
     bankAccNr:string;
     mobileWallet:boolean;
     mobileWalletAccount:string;
-    walletVendor:number|'';
+    walletVendor:string;
     walletName:string;
-    bankCode:number|'';
+    bankCode:string;
   };
 };
 
@@ -129,6 +129,7 @@ export const modalSlice = createSlice({
         state.bindBankcardModal.show = action.payload.show;
         state.bindBankcardModal.confirm = action.payload.confirm;
         state.bindBankcardModal.paymentMethod = action.payload.paymentMethod;
+        state.bindBankcardModal.cardholderName = action.payload.cardholderName;
         state.bindBankcardModal.bankName = action.payload.bankName;
         state.bindBankcardModal.bankAccNr = action.payload.bankAccNr;
         state.bindBankcardModal.mobileWallet = action.payload.mobileWallet;
